@@ -28,3 +28,44 @@ export function wheelSteps({ distance = 50, pause = 180, gap = 150 } = {}) {
     return Math.sign(delta);
   };
 }
+
+// Says when the threshold slider is being dragged, which is when the wall draws drafts (see
+// Tile.svelte). No DOM.
+//
+// A drag is moves made with a pointer pressed on the slider. It pauses once the slider has
+// rested for `rest` milliseconds, so the image sharpens under a finger that has stopped, and
+// goes on with the next move. It ends when the pointer lifts. Moves with no pointer pressed,
+// as the arrow keys make, are single steps and never a drag.
+//
+// `report` is called with true or false each time that changes. `redrawn` returns a promise
+// that settles once the wall has redrawn for a move. The rest is timed from then, not from
+// the move: a device that takes longer than `rest` to redraw would otherwise be told the
+// slider had rested while the finger was still moving, and redraw at full detail every time.
+//
+// There is one timer at most. Every move and `end` stop it before anything else, so none is
+// left running once a drag has ended.
+export function sliderDrag(report, redrawn, rest = 150) {
+  let pressed = false, dragging = false, timer;
+  const say = now => {
+    if (now !== dragging) report((dragging = now));
+  };
+  return {
+    press() {
+      pressed = true;
+    },
+    async move() {
+      clearTimeout(timer);
+      say(pressed);
+      if (!pressed) return;
+      await redrawn();
+      if (!pressed) return; // the drag ended while the wall was redrawing
+      clearTimeout(timer); // a later move may have got here first
+      timer = setTimeout(() => say(false), rest);
+    },
+    end() {
+      pressed = false;
+      clearTimeout(timer);
+      say(false);
+    },
+  };
+}

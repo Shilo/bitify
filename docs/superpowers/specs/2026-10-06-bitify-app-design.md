@@ -419,7 +419,8 @@ the pixels it can show:
 
 On a slow phone a photo's tile can still take a fifth of a second to convert, which is too
 long to follow a finger on the slider. So while the slider is being dragged, an image that
-is too slow is drawn as a rougher draft, and sharpened when the slider is let go:
+is too slow is drawn as a rougher draft, and sharpened when the slider comes to rest or is
+let go:
 
 - Each tile times its conversions: milliseconds per pixel converted, for this image, in
   this style, on this device.
@@ -439,6 +440,18 @@ is too slow is drawn as a rougher draft, and sharpened when the slider is let go
   when the slider reports its final value, the pointer is lifted, the slider loses focus,
   or the Style panel closes (which takes the slider away mid-drag). The arrow keys and the
   number box set the threshold in single steps with no pointer pressed, and never draft.
+- A drag pauses when the slider has rested for 150 milliseconds with the pointer still
+  pressed: the images sharpen under the resting finger, and the next move makes it a drag
+  again. If the finger moves on while an image is sharpening, that move waits for it.
+- The rest is counted from when the wall has finished redrawing for the last move, not from
+  the move itself. A device that needs longer than the rest to redraw would otherwise be
+  taken for a resting finger at every move, and redraw at full detail each time.
+- There is one timer for this at most. Every move and every end of a drag stops it first,
+  so none is left running after a drag.
+- Saving and copying are never drafts. They convert every pixel whatever is on screen, also
+  in the middle of a drag.
+- The rules for when it is a drag live in `src/lib/gesture.js` (`sliderDrag`) and are unit
+  tested.
 
 ### Styles
 
@@ -624,7 +637,7 @@ Vite with the `svelte` template (Svelte 5, runes, mounted with `mount()`), JavaS
 | `src/lib/save.js` | Output file naming, zip, PNG encoding from a mask and the two colors, single save, save all, copy to the clipboard. |
 | `src/lib/settings.js` | The default settings, and `restore(text, styles)`, which reads stored settings back and checks each value. No DOM. |
 | `src/lib/presets.js` | The list of palettes and the list of styles, whether two colors are a palette's, and stepping to the next or previous style or palette. No DOM. |
-| `src/lib/gesture.js` | `wheelSteps()`, which turns the stream of wheel moves from a mouse or trackpad into single steps. No DOM. |
+| `src/lib/gesture.js` | `wheelSteps()`, which turns the stream of wheel moves from a mouse or trackpad into single steps, and `sliderDrag()`, which says when the threshold slider is being dragged and when it has come to rest. No DOM. |
 | `src/App.svelte` | All state; top bar, wall, empty state, drop overlay, the Share sheet, messages; window-level drop, paste, key, wheel and swipe handling. |
 | `src/Tile.svelte` | One image: canvas, caption, Copy, Download and Remove (Share and Remove on touch screens), hold to compare. Measures itself to pick k (see "Images larger than their tile"). |
 | `src/Dock.svelte` | The dock and its two panels. |
@@ -709,11 +722,16 @@ Dependencies beyond Vite and Svelte:
 - `src/lib/gesture.js`: one step per notch of a mouse wheel; a trackpad's small moves add
   up; a turn round or a silence starts again; never more than one step per pause; one
   step for a flick with its fading tail.
+  For the slider: a drag only with a pointer pressed; a pause after a rest and a drag again
+  at the next move; one timer at most, started again at every move and gone when the drag
+  ends; the rest counted from the end of a redraw; no timer started if the drag ended
+  during one.
 - The interface is checked by hand in a desktop browser and at phone width: add by drop,
   picker and paste; remove one and all; change colors, palette, style and threshold;
   compare by switch, hold and Space; with a large photo and the processor slowed down in the
   browser's developer tools, drag the threshold slider and see the image follow as a rougher
-  draft and sharpen on release; save one and all; copy by button and by Ctrl+C, then
+  draft, sharpen when the finger rests and again on release; add, save and copy a large
+  photo and see the message with its turning square; save one and all; copy by button and by Ctrl+C, then
   paste into another program; at phone width, copy and save from a tile's Share sheet, and
   close it by Cancel and by a tap outside; and quick switch by wheel, Shift
   or Ctrl with wheel, arrow keys and swipes, on the empty screen, on a wall that fits and on one

@@ -24,7 +24,7 @@ Every push to main deploys to GitHub Pages (.github/workflows/deploy.yml).
 
 Svelte 5 with runes, plain JavaScript, no SvelteKit.
 
-src/lib holds the logic as DOM-free modules, each with unit tests: bitify.js turns pixels into a one-byte-per-pixel mask and the mask into two-color pixels, layout.js sizes the tiles and picks how many of an image's pixels a tile converts, presets.js lists the palettes and styles and steps through them, gesture.js turns wheel moves into single steps, gif.js reads and writes GIFs (loaded on demand), save.js encodes PNGs, names files and builds the zip.
+src/lib holds the logic as DOM-free modules, each with unit tests: bitify.js turns pixels into a one-byte-per-pixel mask and the mask into two-color pixels, layout.js sizes the tiles and picks how many of an image's pixels a tile converts, presets.js lists the palettes and styles and steps through them, gesture.js turns wheel moves into single steps and says when the threshold slider is being dragged, gif.js reads and writes GIFs (loaded on demand), save.js encodes PNGs, names files and builds the zip.
 
 App.svelte owns all state and passes it down. Dock.svelte edits settings through bindable props. Tile.svelte derives masks from an image and repaints when they or a color change. A tile converts only the pixels it can show: for an image larger than the tile, every k-th pixel of every k-th row (the fourth argument of mask). Saving and copying convert every pixel.
 

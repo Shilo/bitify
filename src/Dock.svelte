@@ -9,6 +9,8 @@
   import Pixels from './Pixels.svelte';
   import PixelIcon from './PixelIcon.svelte';
   import { on } from 'svelte/events';
+  import { tick } from 'svelte';
+  import { sliderDrag } from './lib/gesture.js';
 
   let {
     first = $bindable(),
@@ -23,16 +25,14 @@
   } = $props();
 
   let panel = $state(null); // null, 'palettes' or 'style'
-  // A drag of the threshold slider: `dragging` from its first move with a pointer down until it
-  // ends. The arrow keys move the slider with no pointer down, and are single steps, not a drag.
-  let pressed = false;
-  function settle() {
-    pressed = false;
-    dragging = false;
-  }
-  // Closing the panel takes the slider away, and with it the events that end a drag.
+  // `dragging` while the threshold slider is being dragged and has not come to rest (see
+  // sliderDrag). `tick` settles once the wall has redrawn for a move.
+  const drag = sliderDrag(now => (dragging = now), tick);
+  // Closing the panel takes the slider away, and with it the events that end a drag. The drag is
+  // ended here too when the dock itself goes, so its timer never outlives it.
   $effect(() => {
-    if (panel !== 'style') settle();
+    if (panel !== 'style') drag.end();
+    return drag.end;
   });
   let pop = $state(null); // what is open above the style panel: null or 'styles'
   let dock;
@@ -173,11 +173,11 @@
           max="254"
           aria-label="Threshold"
           value={threshold ?? Math.round((autoRange[0] + autoRange[1]) / 2)}
-          onpointerdown={() => (pressed = true)}
-          oninput={e => { threshold = +e.currentTarget.value; dragging = pressed; }}
-          onchange={settle}
-          onpointerup={settle}
-          onblur={settle}
+          onpointerdown={drag.press}
+          oninput={e => { threshold = +e.currentTarget.value; drag.move(); }}
+          onchange={drag.end}
+          onpointerup={drag.end}
+          onblur={drag.end}
         />
         <div class="field">
           <input
