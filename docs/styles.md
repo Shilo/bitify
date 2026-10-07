@@ -1,6 +1,6 @@
 # Conversion styles
 
-How each of Bitify's seven styles decides which of the two colors a pixel gets. The code is in
+How each of Bitify's eight styles decides which of the two colors a pixel gets. The code is in
 [src/lib/bitify.js](../src/lib/bitify.js); the tests beside it pin every rule described here.
 
 ## What all styles share
@@ -32,7 +32,7 @@ Two measurements are used throughout:
 Every style except Silhouette depends on one number from 1 to 254, the threshold.
 
 - In **Lines** it is how different two neighbouring pixels must be to count as an edge.
-- In **Cutout, Solid, Checker, Bayer and Atkinson** it is the brightness cut-off between dark
+- In **Cutout, Solid, Checker, Hatch, Bayer and Atkinson** it is the brightness cut-off between dark
   and light.
 
 **Auto** picks the threshold for each image with Otsu's method. Otsu's method takes a
@@ -41,12 +41,13 @@ possible, and as far apart as possible.
 
 - For Cutout and Solid the histogram is of pixel brightness, so Auto lands between the
   image's dark tones and its light tones. If there is nothing to split, it uses 127.
-- For Checker, Bayer and Atkinson, Auto starts from that same split and takes the point
+- For Checker, Hatch, Bayer and Atkinson, Auto starts from that same split and takes the point
   halfway between the average brightness of the dark group and that of the light group.
   Otsu's own value is the lightest brightness of the dark group, and a pattern style gives
   the color at its threshold a half-and-half pattern, so with Otsu's value the lighter shade
   of a two-shade outline would come out patterned. Halfway between the groups, dark colors
-  stay dark, light colors stay light, and what lies between them is patterned.
+  stay dark or nearly so, light colors stay light or nearly so, and what lies between them
+  is patterned.
 - For Lines the histogram is of the differences between every pair of horizontally or
   vertically adjacent solid pixels (identical neighbours are left out). Soft shading steps
   form one group and real part boundaries form the other, so Auto lands between them. It
@@ -66,7 +67,7 @@ would let a pixel flip between the two colors as the animation plays.
 
 ### Tone
 
-Checker, Bayer and Atkinson do not compare brightness with the threshold directly. They
+Checker, Hatch, Bayer and Atkinson do not compare brightness with the threshold directly. They
 first turn brightness into a **tone** from 0 to 1 that runs through the image's own range:
 the darkest brightness in the image is 0, the threshold is 0.5 and the lightest brightness
 is 1.
@@ -296,6 +297,46 @@ outline, which is the image's darkest color, tone 0.
 The pattern is tied to pixel position, not to the image, so it does not shimmer between the
 frames of an animation.
 
+## Hatch
+
+Mid-tones drawn as diagonal lines, like pen shading. It gives four apparent tones: dark,
+wide dark lines, thin dark lines, and light.
+
+A pixel becomes the second color if its tone is above a cut-off that depends on which
+diagonal it lies on. With `d = (x + y) mod 3`, the cut-off is 0.75 where `d` is 0, 0.5 where
+it is 1 and 0.25 where it is 2. The effect:
+
+- tone above 0.75: always the second color;
+- tone from 0.5 to 0.75: one diagonal in three is first color, which draws thin dark lines;
+- tone from 0.25 to 0.5: two diagonals in three are first color, which leaves thin light
+  lines;
+- tone 0.25 or below: always the first color.
+
+```
+    ######
+   ##....##
+  #........#
+ #..........#
+##.........###
+#............#
+#...........##
+#.##.##.######
+###.##.#######
+#####.########
+ ##..#..#..##
+  #.#..#..##
+   ##.#..##
+    ######
+```
+
+The lighter left end of the stripe has a tone between 0.25 and 0.5 and gets wide dark lines;
+its darker right end stays solid. The dimmer lower part of the body has a tone between 0.5
+and 0.75 and gets thin dark lines. The outline, tone 0, stays solid.
+
+The lines run from the lower left to the upper right. They are tied to pixel position, not
+to the image, so they do not shimmer between the frames of an animation. They need room: on
+a part only a few pixels wide there is no line to see, and Checker reads better.
+
 ## Bayer
 
 Ordered dithering. Shading becomes a regular crosshatch whose density follows brightness,
@@ -424,6 +465,7 @@ rectangle.
 | Line art that shows a sprite's parts | Lines |
 | Clean two-tone shapes | Solid |
 | A hint of shading that stays crisp | Checker |
+| Shading that looks drawn with a pen | Hatch |
 | Smooth gradients, regular texture | Bayer |
 | Smooth gradients, organic texture | Atkinson |
 | Just the shape | Silhouette |

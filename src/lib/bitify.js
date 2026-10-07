@@ -113,7 +113,7 @@ export function unify(frames) {
 }
 
 // The styles that turn brightness into a pattern.
-const PATTERNS = ['checker', 'bayer', 'atkinson'];
+const PATTERNS = ['checker', 'hatch', 'bayer', 'atkinson'];
 
 // The threshold Auto uses for this image in this style.
 export const autoThreshold = (img, style) => (style === 'lines' ? img.autoLine : PATTERNS.includes(style) ? img.autoTone : img.auto);
@@ -195,6 +195,7 @@ export function mask(img, style, threshold = null) {
     if (!solid(p)) continue;
     if (style === 'silhouette') m[p] = 1;
     else if (style === 'checker') m[p] = tone(p) > ((x + y) % 2 ? 0.75 : 0.25) ? 2 : 1;
+    else if (style === 'hatch') m[p] = tone(p) > 0.75 - 0.25 * ((x + y) % 3) ? 2 : 1; // diagonal lines, three pixels apart
     else if (style === 'bayer') m[p] = tone(p) > (BAYER[(y & 3) * 4 + (x & 3)] + 0.5) / 16 ? 2 : 1;
     else m[p] = lum[p] > t ? 2 : 1;
   }
