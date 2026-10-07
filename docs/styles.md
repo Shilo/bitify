@@ -176,6 +176,34 @@ Limits:
 - A dark part two pixels wide or less becomes all rim.
 - Art that is already dithered becomes busy.
 
+## Solid
+
+A plain brightness cut. A pixel brighter than the threshold becomes the second color; every
+other solid pixel becomes the first.
+
+```
+    ######
+   ##....##
+  #........#
+ #..........#
+##..........##
+#............#
+#............#
+##############
+##############
+##############
+ #..........#
+  #........#
+   ##....##
+    ######
+```
+
+The outline and the stripe are darker than 81, so they are the first color. The body is
+brighter, so it is the second. All shading inside each group is lost.
+
+This is the classic 1-bit conversion. It suits art that already reads as two tones, and it
+is the most predictable style to tune by hand.
+
 ## Lines
 
 It draws an outline around every part of a sprite, not only around its
@@ -231,34 +259,6 @@ Limits:
   There is no edge to find.
 - A line is always on the darker side, so a thin dark shape (one or two pixels wide) becomes
   solid line, and a wide dark shape becomes an outline with fill inside.
-
-## Solid
-
-A plain brightness cut. A pixel brighter than the threshold becomes the second color; every
-other solid pixel becomes the first.
-
-```
-    ######
-   ##....##
-  #........#
- #..........#
-##..........##
-#............#
-#............#
-##############
-##############
-##############
- #..........#
-  #........#
-   ##....##
-    ######
-```
-
-The outline and the stripe are darker than 81, so they are the first color. The body is
-brighter, so it is the second. All shading inside each group is lost.
-
-This is the classic 1-bit conversion. It suits art that already reads as two tones, and it
-is the most predictable style to tune by hand.
 
 ## Checker
 
@@ -498,8 +498,8 @@ rectangle.
 | You want | Style |
 |---|---|
 | Filled shapes with their parts cut apart, the End of End look | Cutout |
-| Line art that shows a sprite's parts | Lines |
 | Clean two-tone shapes | Solid |
+| Line art that shows a sprite's parts | Lines |
 | A hint of shading that stays crisp | Checker |
 | Shading that looks drawn with a pen | Hatch |
 | Smooth gradients, regular texture | Bayer |

@@ -5,8 +5,8 @@ const [glow, mono] = PRESETS, rose = PRESETS.at(-1);
 
 describe('stepStyle', () => {
   it('goes to the next and the previous style', () => {
-    expect(stepStyle('lines', 1)).toBe(2);
-    expect(stepStyle('lines', -1)).toBe(0);
+    expect(stepStyle('solid', 1)).toBe(2);
+    expect(stepStyle('solid', -1)).toBe(0);
   });
   it('wraps at both ends', () => {
     expect(stepStyle('cutout', -1)).toBe(STYLES.length - 1);

@@ -19,8 +19,8 @@ export const PRESETS = [
 ];
 export const STYLES = [
   ['cutout', 'Cutout'],
-  ['lines', 'Lines'],
   ['solid', 'Solid'],
+  ['lines', 'Lines'],
   ['checker', 'Checker'],
   ['hatch', 'Hatch'],
   ['bayer', 'Bayer'],
