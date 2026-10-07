@@ -24,8 +24,8 @@ Stated by the user:
 - Download each image on its own, and download all images.
 - A toggle between the original and the bitified image.
 - Swap, a palette selector, and a threshold. Threshold and an Auto button live in an
-  "advanced" popup.
-- The advanced popup offers several conversion algorithms. The default outlines the
+  "advanced" strip above the dock, which never covers the images.
+- The advanced strip offers several conversion algorithms. The default outlines the
   individual parts of a sprite (body parts, clothing, equipment), in the style of the game
   End of End, and not only the silhouette.
 - Must work on iOS and Android.
@@ -73,6 +73,10 @@ The tiles always use the space between the top bar and the dock, and are centere
   size a single tile can reach becomes the limit instead (never under 96px). A wall that
   fits is not made to scroll, and when it does scroll a whole row still fits the height.
   Short, wide screens also leave less room for the dock, since it is a single row there.
+- While the advanced strip is open, the space the tiles use ends above the strip and not
+  above the dock, and the tiles are resized to fit it, so no image is hidden while its style
+  or threshold is changed. Closing the strip gives the space back. The example on the empty
+  screen shrinks the same way.
 - On touch screens a long file name is cut off with an ellipsis before the Download and
   Remove buttons. Tiles narrower than 150px still show the pixel size under the name, set
   slightly smaller and tighter, with the two buttons 36px wide instead of 40px so sizes up to
@@ -104,7 +108,8 @@ The rule lives in `src/lib/layout.js` (`fitGrid`) and is unit tested.
 
 Panels open directly above the dock. Only one is open at a time. A panel closes on Escape,
 on a second press of its button, or on a press outside the dock. Presses on other dock
-controls leave it open, so colors can be changed while a panel is showing.
+controls leave it open, so colors can be changed while a panel is showing. The palettes
+panel floats over the wall. The advanced panel does not: the wall makes room for it.
 
 **Palettes panel.** Twelve presets in a 4×3 grid, each a diagonally split chip with a
 name. The rows are classics, handheld screens, then monitors. Where each pair comes from
@@ -137,14 +142,28 @@ or a way round, and no style favors any colors.
 | Commodore | `#40318e` | `#88d7de` |
 | Rose | `#4a0d2b` | `#ffd1dc` |
 
-**Advanced panel.**
+**Advanced panel.** A strip one row high, so that the wall can sit above it. Left to
+right:
 
-- Style: six buttons in a 3×2 grid. Each shows a live preview, a small shaded ball with a
-  stripe, drawn in that style with the current two colors.
-- Threshold: a slider from 1 to 254 and an Auto button. Auto is the default. Moving the
-  slider switches to manual; pressing Auto switches back.
-- One line of help text describing what the threshold currently does, and one line
-  explaining hold-to-compare.
+- Style button: a live preview of the current style (a small shaded ball with a stripe,
+  drawn with the current two colors), the word "Style" and the style's name. Pressing it
+  opens the list of the six styles above the strip, each with the same live preview and its
+  name, in one row of six. Choosing a style closes the list. So does a press outside it, or
+  Escape, which then leaves the strip open.
+- Threshold: a slider from 1 to 254, a number box and an Auto button, in that order. The
+  Auto button is square and shows a wand icon. Auto is the default. Moving the slider or
+  typing a number switches to manual; pressing Auto or clearing the box switches back.
+  While Auto is on, the box shows the value Auto picked, or the range when images differ.
+  The box is just wide enough for three digits, has no spinner arrows, and widens only to
+  fit a range.
+- Help button ("?"): opens a tooltip above the strip, with its arrow over the button. It
+  has two lines in the body text size: what the threshold currently does, then how to hold
+  an image to compare. The threshold value and the word "Hold" are bold, Space is drawn as
+  a key, and the Auto line starts with the wand icon. It closes
+  the same ways the list of styles does, and only one of the two is open at a time.
+
+While the strip is a single row, a divider separates the style button from the threshold,
+and another separates the threshold from Help. They match the dock's dividers.
 
 ### Responsive behavior
 
@@ -152,7 +171,7 @@ or a way round, and no style favors any colors.
 |---|---|
 | Above 800px | Icon and text labels, dividers between groups. |
 | 521 to 800px | Icon-only buttons, one row. |
-| 520px and below | Dock spans the screen width with 12px margins. Tools on the first row, the Original / Bitified switch on its own full-width second row. Panels become full-width sheets above it. The image count and the word "images" in the Add button are hidden. |
+| 520px and below | Dock spans the screen width with 12px margins. Tools on the first row, the Original / Bitified switch on its own full-width second row. Panels become full-width sheets above it. The advanced strip takes two rows, without dividers: the style button and Help, then the threshold. Its list of styles is a 3×2 grid as wide as the strip. The image count and the word "images" in the Add button are hidden. |
 
 On coarse pointers every dock control is 40 to 44px square. The app uses
 `viewport-fit=cover`, pads for the safe-area insets, and sizes itself with dynamic
@@ -193,7 +212,7 @@ scaffolding and are not part of the app.
 - Hold Space: flip the whole wall to the other version until release. A button clicked
   with a mouse or finger does not keep focus, so Space still compares afterwards; a button
   reached with Tab keeps the normal behavior, where Space presses it.
-- Escape: close the open panel.
+- Escape: close the open panel. If the list of styles or the help tooltip is open, close that first.
 - All controls are reachable by Tab with a visible focus ring.
 
 ## Conversion

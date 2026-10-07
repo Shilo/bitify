@@ -57,14 +57,17 @@
 
   const touch = matchMedia('(pointer:coarse)').matches;
   let panel = $state(null); // null, 'palettes' or 'advanced'
+  let pop = $state(null); // what is open above the advanced strip: null, 'styles' or 'help'
   let dock;
 
-  const hint = $derived(
-    style === 'silhouette' ? 'Silhouette ignores the threshold.'
-    : threshold === null ? 'Auto picks the best value for each image.'
-    : style === 'lines' ? `Color changes stronger than ${threshold} become lines.`
-    : `Pixels brighter than ${threshold} turn light.`,
-  );
+  // The advanced strip does not cover the wall: while it is open the wall gives up that much
+  // room and refits above it (see --panel-space in app.css).
+  let stripHeight = $state(0);
+  $effect(() => {
+    document.documentElement.style.setProperty('--panel-space', panel === 'advanced' ? `${stripHeight + 10}px` : '0px');
+  });
+
+  const demo = key => new ImageData(colorize(mask(BALL, key), first, second), BALL.w, BALL.h);
 
   // What Auto picked, shown in the number box while it is empty: a range when images differ.
   const autoShown = $derived(autoRange[0] === autoRange[1] ? `${autoRange[0]}` : `${autoRange[0]}–${autoRange[1]}`);
@@ -94,8 +97,15 @@
 </script>
 
 <svelte:window
-  onpointerdown={e => { if (panel && !dock.contains(e.target)) panel = null; }}
-  onkeydown={e => { if (e.key === 'Escape') panel = null; }}
+  onpointerdown={e => {
+    if (pop && !e.target.closest?.('.anchor')) pop = null;
+    if (panel && !dock.contains(e.target)) panel = null;
+  }}
+  onkeydown={e => {
+    if (e.key !== 'Escape') return;
+    if (pop) pop = null;
+    else panel = null;
+  }}
 />
 
 <div class="dock" bind:this={dock}>
@@ -115,18 +125,32 @@
       </div>
     </div>
   {:else if panel === 'advanced'}
-    <div class="panel">
-      <p class="ptitle">Style</p>
-      <div class="presets styles">
-        {#each STYLES as [key, name]}
-          <button class="preset" aria-pressed={style === key} onclick={() => (style = key)}>
-            <Pixels class="demo" pixels={new ImageData(colorize(mask(BALL, key), first, second), BALL.w, BALL.h)} />{name}
-          </button>
-        {/each}
+    <div class="panel strip" bind:offsetHeight={stripHeight}>
+      <div class="pick anchor">
+        {#if pop === 'styles'}
+          <div class="menu presets styles" role="group" aria-label="Style">
+            {#each STYLES as [key, name]}
+              <button class="preset" aria-pressed={style === key} onclick={() => { style = key; pop = null; }}>
+                <Pixels class="demo" pixels={demo(key)} />{name}
+              </button>
+            {/each}
+          </div>
+        {/if}
+        <button class="btn" aria-expanded={pop === 'styles'} aria-haspopup="true" onclick={() => (pop = pop === 'styles' ? null : 'styles')}>
+          <Pixels class="demo" pixels={demo(style)} /><span class="key">Style</span> {STYLES.find(s => s[0] === style)[1]}<PixelIcon name="caret" />
+        </button>
       </div>
-      <div class="thead">
-        <label class="ptitle" for="threshold">Threshold</label>
-        <button class="btn sm" aria-pressed={threshold === null} onclick={() => (threshold = null)}>Auto</button>
+      <span class="sep"></span>
+      <div class="thr">
+        <input
+          id="threshold"
+          type="range"
+          min="1"
+          max="254"
+          aria-label="Threshold"
+          value={threshold ?? Math.round((autoRange[0] + autoRange[1]) / 2)}
+          oninput={e => (threshold = +e.currentTarget.value)}
+        />
         <input
           class="tnum"
           type="number"
@@ -135,21 +159,39 @@
           aria-label="Threshold value"
           value={threshold ?? ''}
           placeholder={autoShown}
+          style:--chars={threshold === null ? Math.max(3, autoShown.length) : 3}
           oninput={typed}
         />
+        <button class="btn sm" aria-pressed={threshold === null} aria-label="Auto threshold" title="Auto threshold" onclick={() => (threshold = null)}>
+          <PixelIcon name="wand" />
+        </button>
       </div>
-      <input
-        id="threshold"
-        type="range"
-        min="1"
-        max="254"
-        value={threshold ?? Math.round((autoRange[0] + autoRange[1]) / 2)}
-        oninput={e => (threshold = +e.currentTarget.value)}
-      />
-      <p class="hint">{hint}</p>
-      <p class="hint">
-        {touch ? 'Hold an image to see its other version.' : 'Hold an image, or hold Space, to see the other version.'}
-      </p>
+      <span class="sep"></span>
+      <div class="anchor">
+        {#if pop === 'help'}
+          <div class="tip" id="help" role="tooltip">
+            <p>
+              {#if style === 'silhouette'}
+                Silhouette ignores the threshold.
+              {:else if threshold === null}
+                <PixelIcon name="wand" /> Auto picks the best value for each image.
+              {:else if style === 'lines'}
+                Color changes stronger than <b>{threshold}</b> become lines.
+              {:else}
+                Pixels brighter than <b>{threshold}</b> turn light.
+              {/if}
+            </p>
+            <p>
+              {#if touch}
+                <b>Hold</b> an image to see its other version.
+              {:else}
+                <b>Hold</b> an image, or hold <kbd>Space</kbd>, to see the other version.
+              {/if}
+            </p>
+          </div>
+        {/if}
+        <button class="btn sm" aria-expanded={pop === 'help'} aria-describedby="help" aria-label="Help" title="Help" onclick={() => (pop = pop === 'help' ? null : 'help')}>?</button>
+      </div>
     </div>
   {/if}
 

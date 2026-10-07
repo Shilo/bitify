@@ -11,7 +11,9 @@
   --tile2: #d9dbe3;
   --shadow: rgba(27, 28, 36, 0.16);
   --hit: 36px; /* height of dock controls; grows on touch screens */
-  --dock-space: 132px; /* room left at the bottom of the screen for the dock */
+  --dock-base: 132px; /* room left at the bottom of the screen for the dock */
+  --panel-space: 0px; /* extra room for the open advanced strip; Dock.svelte sets it */
+  --dock-space: calc(var(--dock-base) + var(--panel-space));
   --display: "Pixelify Sans", ui-monospace, "Courier New", monospace;
   --body: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
   color-scheme: light;
@@ -129,8 +131,8 @@ button { font: inherit; color: inherit; }
 .empty-in { margin: auto; display: grid; justify-items: center; gap: 26px; text-align: center; }
 .empty-text { display: grid; justify-items: center; gap: 14px; min-width: 0; }
 /* The example is as large as the screen allows, up to 320px. The amount subtracted from the
-   screen height is everything else on the empty screen: top bar, text, button and dock. */
-.empty .tile { --rest: 430px; max-width: 100%; width: clamp(96px, calc(100vh - var(--rest)), 320px); width: clamp(96px, calc(100dvh - var(--rest)), 320px); }
+   screen height is everything else on the empty screen: top bar, text, button, dock and open strip. */
+.empty .tile { --rest: 430px; max-width: 100%; width: clamp(96px, calc(100vh - var(--rest) - var(--panel-space)), 320px); width: clamp(96px, calc(100dvh - var(--rest) - var(--panel-space)), 320px); }
 .empty .cap { grid-column: 1 / -1; flex-direction: row; align-items: baseline; justify-content: center; gap: 8px; }
 .empty .dim { margin-left: 0; }
 .empty h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: clamp(26px, 5vw, 44px); line-height: 1.1; text-wrap: balance; }
@@ -156,7 +158,7 @@ button { font: inherit; color: inherit; }
 }
 /* Short, wide screens (a phone on its side): the example sits beside the text, not above it. */
 @media (max-height: 520px) and (orientation: landscape) {
-  :root { --dock-space: 96px; } /* the dock is a single row here, so it needs less room */
+  :root { --dock-base: 96px; } /* the dock is a single row here, so it needs less room */
   .empty { padding-top: 8px; }
   .empty-in { grid-template-columns: auto minmax(0, 300px); align-items: center; gap: 28px; }
   .empty-text { justify-items: start; text-align: left; }
@@ -176,7 +178,7 @@ button { font: inherit; color: inherit; }
 }
 .sep { width: 1px; height: 24px; background: var(--line); }
 .btn[aria-expanded="true"], .btn.sm[aria-pressed="true"] { background: var(--tile); border-color: var(--fg); }
-.btn.sm { font-size: 13px; padding: 0 12px; }
+.btn.sm { font-size: 13px; padding: 0; } /* the square buttons in the advanced strip */
 .pair { display: flex; align-items: center; gap: 4px; }
 .pair .ib { width: var(--hit); height: var(--hit); border-color: transparent; background: transparent; }
 .sw {
@@ -198,7 +200,6 @@ button { font: inherit; color: inherit; }
 }
 .ptitle { margin: 0; font-size: 13px; font-weight: 600; }
 .presets { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
-.styles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .preset {
   display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px 2px;
   border: 1px solid transparent; border-radius: 10px; background: transparent;
@@ -210,28 +211,59 @@ button { font: inherit; color: inherit; }
   width: 42px; height: 42px; border-radius: 6px; image-rendering: pixelated;
   background: conic-gradient(var(--tile2) 25%, var(--tile) 0 50%, var(--tile2) 0 75%, var(--tile) 0) 0 0 / 12px 12px;
 }
-.thead { display: flex; align-items: center; gap: 8px; }
-.thead .ptitle { margin-right: auto; }
+/* Just wide enough for three digits. Dock.svelte raises --chars while Auto is showing a range. */
 .tnum {
-  flex: none; box-sizing: border-box; width: 76px; height: var(--hit); padding: 0 8px;
+  flex: none; box-sizing: border-box; width: calc(var(--chars, 3) * 1ch + 20px); height: var(--hit); padding: 0 8px;
+  appearance: textfield; -moz-appearance: textfield; /* no spinner arrows: they would cover the digits */
   border: 1px solid var(--line); border-radius: 10px; background: transparent; color: var(--fg);
   font: inherit; font-size: 13px; text-align: center; font-variant-numeric: tabular-nums;
 }
 .tnum::placeholder { color: var(--muted); }
-/* the negative margin cancels the panel's gap, so the slider reads as one control with the row above */
-#threshold { flex: none; height: var(--hit); margin: -12px 0 0; accent-color: var(--fg); }
-.hint { margin: 0; font-size: 12px; color: var(--muted); }
+.tnum::-webkit-inner-spin-button, .tnum::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+#threshold { flex: 1; min-width: 0; height: var(--hit); margin: 0; accent-color: var(--fg); }
+
+/* The advanced panel is a strip: one row of controls. It is kept short because the wall is
+   resized to sit above it (--panel-space), so the images stay in view while they are tuned. */
+.strip { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 8px; padding: 10px 12px; width: min(560px, calc(100vw - 64px)); max-height: none; overflow: visible; }
+.pick .btn { padding: 0 14px 0 8px; }
+.pick .btn .demo { width: 28px; height: 28px; background-size: 8px 8px; }
+.key { color: var(--muted); font-weight: 400; }
+.thr { flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; }
+/* the list of styles, opened by the style button; it sits above the strip, lined up with its left edge */
+.menu {
+  position: absolute; bottom: calc(100% + 10px); left: 0; box-sizing: border-box; max-width: 100%; padding: 8px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 10px 32px var(--shadow);
+}
+.menu .preset { padding: 8px 6px; }
+/* Help opens as a tooltip above the strip, with its arrow over the Help button */
+.tip {
+  position: absolute; bottom: calc(100% + 12px); right: 0; box-sizing: border-box; width: max-content; max-width: 100%;
+  display: grid; gap: 4px; padding: 10px 14px; border-radius: 10px; background: var(--fg); color: var(--bg); box-shadow: 0 10px 32px var(--shadow);
+}
+.tip p { margin: 0; }
+.tip .ico { vertical-align: -1px; margin-right: 2px; }
+.tip kbd { padding: 0 5px; border: 1px solid; border-radius: 5px; font: inherit; font-size: 12px; font-weight: 600; }
+.tip::after {
+  content: ""; position: absolute; top: 100%; right: calc(12px + var(--hit) / 2 - 6px);
+  border: 6px solid transparent; border-bottom: 0; border-top-color: var(--fg);
+}
 
 /* narrower screens: icon-only dock buttons */
 @media (max-width: 800px) {
-  .dock .lbl, .sep { display: none; }
-  .dock .btn { padding: 0; }
+  .dock .lbl, .dock > .sep { display: none; }
+  .dock > .btn { padding: 0; }
 }
 /* phones: the dock spans the screen and the view switch gets its own row */
 @media (max-width: 520px) {
-  :root { --dock-space: 172px; }
+  :root { --dock-base: 172px; }
   .dock { left: 12px; right: 12px; bottom: 12px; transform: none; width: auto; max-width: none; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 10px; }
   .seg { order: 5; flex: 1 0 100%; box-sizing: border-box; }
   .seg button { flex: 1; }
   .panel { left: 0; right: 0; width: auto; transform: none; }
+  /* the style button and Help on the first row, the threshold on its own row below */
+  .pick { flex: 1; }
+  .thr { flex-basis: 100%; order: 1; }
+  .strip .sep { display: none; } /* dividers only make sense while the strip is a single row */
+  .menu { right: 0; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
