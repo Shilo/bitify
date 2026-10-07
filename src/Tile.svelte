@@ -6,6 +6,17 @@
   // `flipped` true means the wall is showing originals. Holding the tile shows the other version.
   let { item, first, second, style, threshold, flipped, onsave, onremove } = $props();
   let held = $state(false);
+  let holdTimer;
+
+  // A touch may be the start of a scroll, so it only counts as a hold after a short wait.
+  function press(e) {
+    if (e.pointerType === 'mouse') held = true;
+    else holdTimer = setTimeout(() => (held = true), 150);
+  }
+  function release() {
+    clearTimeout(holdTimer);
+    held = false;
+  }
 
   // The mask depends only on the image, style and threshold, so a color change reuses it.
   const m = $derived(mask(item.img, style, threshold));
@@ -18,10 +29,10 @@
   <div
     class="art"
     role="presentation"
-    onpointerdown={() => (held = true)}
-    onpointerup={() => (held = false)}
-    onpointerleave={() => (held = false)}
-    onpointercancel={() => (held = false)}
+    onpointerdown={press}
+    onpointerup={release}
+    onpointerleave={release}
+    onpointercancel={release}
     oncontextmenu={e => e.preventDefault()}
   >
     <Pixels {pixels} />
