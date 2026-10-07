@@ -234,12 +234,27 @@ Output pixels are fully opaque or fully transparent. Brightness of a pixel is
 
 | Style | Rule |
 |---|---|
+| **Cutout** | A pixel brighter than the threshold is light, every other pixel dark. Then, using those tones: a pixel on the darker side of a change stronger than the seam strength, between two pixels of the same tone, takes the opposite tone; and a dark pixel that touches empty space, with no light pixel among its eight neighbours, becomes light. Dark is first color, light is second. |
 | **Lines** (default) | A pixel is first color if any of its four neighbours is empty, or if a neighbour differs from it by more than the threshold and this pixel is the darker of the two. Everything else is second color. |
 | **Solid** | Brighter than the threshold: second color. Otherwise first color. |
 | **Checker** | Second color if the tone (see below) is above 0.25 on even `x + y` cells and above 0.75 on odd ones, so mid-tones become a checkerboard. |
 | **Bayer** | Second color if the tone is above `(b + 0.5) / 16`, where `b` is the value of a 4×4 ordered-dither matrix at the pixel. |
 | **Atkinson** | Error diffusion on `tone × 255`. Each pixel is cut at 127.5, and one eighth of the error goes to each of six neighbours (right, two right, the three below, two below). |
 | **Silhouette** | Every non-empty pixel is first color. |
+
+Details of Cutout:
+
+- It fills bright parts, leaves dark parts dark and cuts parts apart, in the style of the
+  game End of End. It draws no outline around a light part.
+- A light pixel that touches empty space, diagonals included, is never cut, so seams do not
+  eat into the silhouette.
+- The difference between two pixels, the tie on equal brightness and the rule for the
+  canvas edge are the ones Lines uses.
+- The seam strength is always automatic. The threshold only moves the brightness cut.
+
+Known limits of Cutout: a flat shading step, such as a shadow drawn in one darker color, is
+cut like a part boundary; a dark part two pixels wide or less becomes all rim; art that is
+already dithered becomes busy.
 
 Details of Lines:
 
@@ -267,7 +282,7 @@ light or its lightest color dark, and outlines and highlights stay whole.
 ### Threshold
 
 - In Lines it is the minimum color difference that counts as an edge.
-- In Solid, Checker, Bayer and Atkinson it is the brightness cut-off.
+- In Cutout, Solid, Checker, Bayer and Atkinson it is the brightness cut-off.
 - Silhouette ignores it.
 
 Auto picks a value per image with Otsu's method, which splits a histogram into two groups
@@ -279,6 +294,11 @@ at the point that separates them best:
   The value is never below 24: an image with only soft shading has nothing to separate,
   and without the floor its shading steps would be taken for boundaries.
 
+- For Cutout's seam strength, on the histogram of non-zero differences between adjacent
+  non-empty pixels of the same tone, with tones split at the image's Auto brightness
+  cut-off. Never below 24. It is taken at the Auto cut-off also when the threshold is set
+  by hand, so seams do not jump while the slider is dragged.
+
 A manual value applies to every image.
 
 ## Animated GIFs
@@ -288,7 +308,7 @@ at the speed stored in the file. Frames marked with almost no delay play at 100m
 in browsers.
 
 - Every frame goes through the same conversion as a still image, and the whole animation uses
-  one Auto threshold and one brightness range, taken from all its frames together. Taking
+  one Auto threshold, one seam strength and one brightness range, taken from all its frames together. Taking
   them frame by frame would make pixels flicker between the two colors as the animation
   plays.
 - The Original / Bitified switch, hold and Space show the original animation, still playing.
@@ -367,6 +387,10 @@ Dependencies beyond Vite and Svelte:
   - Lines outlines an inner part as well as the silhouette, draws a one-pixel boundary,
     ignores a shading step below the threshold, frames only images that have empty
     pixels, and at Auto draws no lines along soft shading;
+  - Cutout fills a bright part and leaves a dark one dark, cuts a one-pixel seam between
+    two parts of the same tone, rims a dark part on the silhouette, keeps a dark outline
+    around a light part, never cuts a light pixel on the silhouette, and rims only images
+    that have empty pixels;
   - Silhouette fills everything;
   - Auto returns a value between two clearly separated groups.
 - `src/lib/save.js`: output naming, including duplicates.

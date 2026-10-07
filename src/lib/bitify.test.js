@@ -44,7 +44,7 @@ describe('analyze', () => {
   it('survives an image with no solid pixels', () => {
     const img = image(['  ', '  '], {});
     expect(img.auto).toBe(127);
-    for (const style of ['solid', 'checker', 'bayer', 'atkinson', 'silhouette']) {
+    for (const style of ['cutout', 'solid', 'checker', 'bayer', 'atkinson', 'silhouette']) {
       expect(show(mask(img, style), 2)).toEqual(['  ', '  ']);
     }
   });
@@ -124,8 +124,8 @@ describe('mask', () => {
     const w = 300, h = 200, data = new Uint8ClampedArray(w * h * 4);
     for (let i = 0; i < data.length; i++) data[i] = (i * 2654435761) >>> 24;
     const img = analyze({ width: w, height: h, data });
-    for (const style of ['solid', 'checker', 'bayer', 'atkinson', 'silhouette']) {
-      const m = mask(img, style);
+    for (const style of ['cutout', 'solid', 'checker', 'bayer', 'atkinson', 'silhouette']) for (const t of [null, 1, 254]) {
+      const m = mask(img, style, t);
       expect(m.length).toBe(w * h);
       expect(m.every((v, p) => (v === 0) === (data[p * 4 + 3] < 128))).toBe(true);
     }
@@ -246,6 +246,135 @@ describe('lines', () => {
   });
 });
 
+describe('cutout', () => {
+  // A 7x7 body on a transparent canvas, with a 3x3 part in its middle.
+  const sprite = (body, part) => image([
+    '         ',
+    ' aaaaaaa ',
+    ' aaaaaaa ',
+    ' aabbbaa ',
+    ' aabbbaa ',
+    ' aabbbaa ',
+    ' aaaaaaa ',
+    ' aaaaaaa ',
+    '         ',
+  ], { a: grey(body), b: grey(part) });
+
+  it('fills bright parts and leaves dark parts dark, with no outline', () => {
+    expect(show(mask(sprite(200, 120), 'cutout'), 9)).toEqual([
+      '         ',
+      ' ....... ',
+      ' ....... ',
+      ' ..###.. ',
+      ' ..###.. ',
+      ' ..###.. ',
+      ' ....... ',
+      ' ....... ',
+      '         ',
+    ]);
+  });
+
+  it('cuts a dark seam, one pixel wide, between two light parts', () => {
+    expect(show(mask(sprite(200, 120), 'cutout', 100), 9)).toEqual([
+      '         ',
+      ' ....... ',
+      ' ....... ',
+      ' ..###.. ',
+      ' ..#.#.. ',
+      ' ..###.. ',
+      ' ....... ',
+      ' ....... ',
+      '         ',
+    ]);
+  });
+
+  it('gives a dark part a light rim, and a light seam between two dark parts', () => {
+    expect(show(mask(sprite(60, 10), 'cutout', 100), 9)).toEqual([
+      '         ',
+      ' ....... ',
+      ' .#####. ',
+      ' .#...#. ',
+      ' .#.#.#. ',
+      ' .#...#. ',
+      ' .#####. ',
+      ' ....... ',
+      '         ',
+    ]);
+  });
+
+  it('ignores a shading step that is not stronger than the seam strength', () => {
+    const img = sprite(200, 185);
+    expect(img.autoSeam).toBe(24);
+    expect(count(mask(img, 'cutout', 100), 1)).toBe(0);
+  });
+
+  it('keeps a dark outline around a light part', () => {
+    const img = image([
+      '       ',
+      ' kkkkk ',
+      ' kaaak ',
+      ' kaaak ',
+      ' kaaak ',
+      ' kkkkk ',
+      '       ',
+    ], { k: grey(20), a: grey(220) });
+    expect(show(mask(img, 'cutout'), 7)).toEqual([
+      '       ',
+      ' ##### ',
+      ' #...# ',
+      ' #...# ',
+      ' #...# ',
+      ' ##### ',
+      '       ',
+    ]);
+  });
+
+  it('never cuts a light pixel on the silhouette', () => {
+    const ring = (edge, inside) => image([
+      '       ',
+      ' eeeee ',
+      ' eiiie ',
+      ' eiiie ',
+      ' eiiie ',
+      ' eeeee ',
+      '       ',
+    ], { e: grey(edge), i: grey(inside) });
+    // the darker light color is on the outside: it would be a seam, but it is the silhouette
+    expect(count(mask(ring(180, 250), 'cutout', 100), 1)).toBe(0);
+    // the same two colors the other way round: the darker one is inside, so it is cut
+    expect(show(mask(ring(250, 180), 'cutout', 100), 7)).toEqual([
+      '       ',
+      ' ..... ',
+      ' .###. ',
+      ' .#.#. ',
+      ' .###. ',
+      ' ..... ',
+      '       ',
+    ]);
+  });
+
+  it('rims an image only when it has empty pixels', () => {
+    const flat = image(['aaa', 'aaa', 'aaa'], { a: grey(30) });
+    expect(show(mask(flat, 'cutout', 100), 3)).toEqual(['###', '###', '###']);
+    const cut = image([' aa', 'aaa', 'aaa'], { a: grey(30) });
+    expect(show(mask(cut, 'cutout', 100), 3)).toEqual([' ..', '.#.', '...']);
+  });
+
+  it('auto seam strength separates part boundaries from shading inside one tone', () => {
+    // light side: a step of 30 (shading) and a step of 70 (a part); the jump down to 10 is the tone split
+    const img = image(['aabbccdd'], { a: grey(250), b: grey(220), c: grey(150), d: grey(10) });
+    expect([img.auto, img.autoSeam]).toEqual([10, 30]);
+    expect(show(mask(img, 'cutout'), 8)).toEqual(['....#.##']);
+  });
+
+  it('keeps its seam strength when the threshold is set by hand', () => {
+    const img = image(['aabbccdd'], { a: grey(250), b: grey(220), c: grey(150), d: grey(10) });
+    // cut at 230 the dark side holds steps of 70 and 140; picked again from those, the strength
+    // would be 70 and the step of 70 would no longer be a seam
+    expect(show(mask(img, 'cutout', 230), 8)).toEqual(['..##.#.#']);
+  });
+});
+
 describe('unify', () => {
   it('gives every frame of an animation the same thresholds, picked from all frames together', () => {
     // on their own these two frames would be cut at 10 and at 150
@@ -281,5 +410,13 @@ describe('unify', () => {
     // 60 is the shared cut and 10 the shared darkest: the first frame is not stretched to its own range
     expect(show(mask(dark, 'bayer'), 4)).toEqual(['##.#']);
     expect(show(mask(light, 'bayer'), 4)).toEqual(['....']);
+  });
+
+  it('shares the seam strength, picked after the shared brightness cut', () => {
+    const a = image(['aabb'], { a: grey(250), b: grey(200) }), b = image(['aabb'], { a: grey(250), b: grey(150) }), c = image(['ab  '], { a: grey(5), b: grey(5) });
+    expect([a.autoSeam, b.autoSeam, c.autoSeam]).toEqual([24, 24, 24]); // alone, each splits its own two colors
+    unify([a, b, c]);
+    // together the cut falls under all four light colors, so their steps of 50 and 100 are seams to rank
+    expect([a.autoSeam, b.autoSeam, c.autoSeam]).toEqual([50, 50, 50]);
   });
 });

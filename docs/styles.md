@@ -1,6 +1,6 @@
 # Conversion styles
 
-How each of Bitify's six styles decides which of the two colors a pixel gets. The code is in
+How each of Bitify's seven styles decides which of the two colors a pixel gets. The code is in
 [src/lib/bitify.js](../src/lib/bitify.js); the tests beside it pin every rule described here.
 
 ## What all styles share
@@ -25,14 +25,15 @@ Two measurements are used throughout:
 
 - **Brightness** of a pixel is `0.2126 R + 0.7152 G + 0.0722 B`, rounded, from 0 to 255.
 - **Difference** between two pixels is the largest of their red, green and blue differences,
-  from 0 to 255. It is used only by Lines.
+  from 0 to 255. It is used by Lines and Cutout.
 
 ### The threshold
 
 Every style except Silhouette depends on one number from 1 to 254, the threshold.
 
 - In **Lines** it is how different two neighbouring pixels must be to count as an edge.
-- In **Solid, Checker, Bayer and Atkinson** it is the brightness cut-off between dark and light.
+- In **Cutout, Solid, Checker, Bayer and Atkinson** it is the brightness cut-off between dark
+  and light.
 
 **Auto** picks the threshold for each image with Otsu's method. Otsu's method takes a
 histogram and finds the value that splits it into two groups that are each as tight as
@@ -45,6 +46,12 @@ possible, and as far apart as possible.
   form one group and real part boundaries form the other, so Auto lands between them. It
   never goes below 24, so an image with only soft shading gets an outline and a flat fill
   instead of lines along its shading.
+
+- Cutout also needs a **seam strength**, which is always automatic: Otsu on the differences
+  between adjacent solid pixels of the same tone, with tones split at the image's Auto
+  brightness cut-off, and never below 24. The large jumps from light to dark are left out
+  because the tone split already shows them; with them in, the value comes out too high to
+  find the boundaries inside a dark or a light area.
 
 A manual threshold applies the same number to every image.
 
@@ -94,7 +101,68 @@ darker stripe across the middle. Here is its brightness, one hex digit per pixel
 ```
 
 In the results, `#` is the first color, `.` is the second color and blank is empty. All use
-Auto, which for this image is 81 for brightness and 52 for Lines.
+Auto, which for this image is 81 for brightness, 52 for Lines and 24 for Cutout's seams.
+
+## Cutout
+
+Filled shapes with their parts cut apart, after the game End of End. Bright parts are
+filled, dark parts are left dark, and what separates two parts of the same tone is a thin
+cut in the other tone. No outline is drawn around a light part.
+
+It works in three steps. Every test uses the tones from step 1, not the results of the
+later steps.
+
+1. **Tone.** A solid pixel brighter than the threshold is light; every other solid pixel is
+   dark. This is Solid.
+2. **Seams.** A pixel is a seam if one of its four neighbours has the same tone, differs
+   from it by more than the seam strength, and this pixel is the darker of the two. A seam
+   takes the opposite tone: a dark cut inside a light area, a light one inside a dark area.
+3. **Rim.** A dark pixel that touches empty space in one of the four directions, and has no
+   light pixel among its eight neighbours, becomes light. That gives a dark part an edge
+   where it would otherwise have none.
+
+Dark pixels get the first color and light pixels the second.
+
+```
+    ######
+   ##....##
+  #........#
+ #..........#
+##..........##
+#............#
+#............#
+.############.
+.############.
+..##########..
+ #..........#
+  #........#
+   ##....##
+    ######
+```
+
+The body is brighter than 81, so it is filled. The stripe is darker, so it is left dark.
+The original's own dark outline stays dark around the body: it has light pixels beside it,
+so it is not a rim. At the two ends of the stripe the outline and the stripe are both dark
+and differ by more than 24, so the outline pixels there are seams and turn light. They
+close the shape where the dark stripe would otherwise run into empty space.
+
+Details:
+
+- **The silhouette is never cut.** A light pixel that touches empty space, diagonals
+  included, is never a seam. Without this, a sprite whose edge is a slightly darker shade
+  would lose its outer ring of pixels.
+- **Equal brightness, and the canvas edge,** work as in Lines: on a tie the pixel earlier in
+  reading order is the darker one, and the canvas edge counts as empty only if the image
+  has at least one empty pixel.
+- **Threshold.** It moves the brightness cut of step 1: lower values fill more of the
+  sprite, higher values leave more of it dark. It does not change the seam strength.
+
+Limits:
+
+- A flat shading step, such as a shadow drawn in one darker color, is cut like a part
+  boundary.
+- A dark part two pixels wide or less becomes all rim.
+- Art that is already dithered becomes busy.
 
 ## Lines
 
@@ -341,6 +409,7 @@ rectangle.
 
 | You want | Style |
 |---|---|
+| Filled shapes with their parts cut apart, the End of End look | Cutout |
 | Line art that shows a sprite's parts | Lines |
 | Clean two-tone shapes | Solid |
 | A hint of shading that stays crisp | Checker |
