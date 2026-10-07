@@ -368,7 +368,7 @@
       {/if}
       <div class="empty-text">
         <h2>Pixel art in two colors</h2>
-        <p>Instantly convert sprites and animated GIFs to <span>1-bit</span> colors and styles.</p>
+        <p>Instantly convert sprites and animated GIFs<br />to <span>1-bit</span> colors and styles.</p>
         <button class="btn primary" onclick={() => picker.click()}>{touch ? 'Choose images' : 'Drop or choose images'}</button>
       </div>
     </div>
