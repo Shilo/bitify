@@ -61,7 +61,8 @@ Schibsted Grotesk. Both load from Google Fonts with system fallbacks.
 - Touch devices (no hover): the two buttons sit beside the file name and are always
   visible, 40px square.
 - Holding a tile shows its other version (original if the wall shows bitified, and the
-  reverse) until release.
+  reverse) until release. With a mouse this is instant. On touch a press counts as a hold
+  after 150 ms, so scrolling the wall does not flash tiles.
 
 ### Dock, left to right
 
@@ -76,7 +77,7 @@ Schibsted Grotesk. Both load from Google Fonts with system fallbacks.
 | Download all | Saves every bitified image in one zip. Disabled when the wall is empty. |
 
 Panels open directly above the dock. Only one is open at a time. A panel closes on Escape,
-on a second press of its button, or on a click outside the dock. Clicks on other dock
+on a second press of its button, or on a press outside the dock. Presses on other dock
 controls leave it open, so colors can be changed while a panel is showing.
 
 **Palettes panel.** Eight presets in a 4×2 grid, each a diagonally split chip with a
@@ -134,7 +135,9 @@ scaffolding and are not part of the app.
 
 ### Keyboard
 
-- Hold Space: flip the whole wall to the other version until release.
+- Hold Space: flip the whole wall to the other version until release. A button clicked
+  with a mouse or finger does not keep focus, so Space still compares afterwards; a button
+  reached with Tab keeps the normal behavior, where Space presses it.
 - Escape: close the open panel.
 - All controls are reachable by Tab with a visible focus ring.
 
@@ -199,6 +202,9 @@ A manual value applies to every image.
 - Download all saves `bitify.zip` containing one such PNG per image. Duplicate names get
   `-2`, `-3` and so on.
 - Saving always uses the bitified version, whatever the wall is showing.
+- PNG files are encoded directly from the pixels, not through a canvas. Some browsers
+  (Brave, Safari private browsing, Firefox strict mode) add noise when a page reads a
+  canvas back, which would put stray colors in a saved file.
 - Files are offered through a temporary link with the `download` attribute, which works in
   current iOS Safari and Android Chrome.
 

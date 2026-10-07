@@ -1242,9 +1242,9 @@ out.fill = px(5, 5);
 out.innerLine = px(5, 6);
 out.empty = px(0, 0);
 const art = document.querySelector('.art');
-art.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true })); await wait(100);
+art.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, pointerType: 'mouse' })); await wait(100);
 out.whileHeld = px(3, 3);
-art.dispatchEvent(new PointerEvent('pointerup', { bubbles: true })); await wait(100);
+art.dispatchEvent(new PointerEvent('pointerup', { bubbles: true, pointerType: 'mouse' })); await wait(100);
 out.afterRelease = px(3, 3);
 document.querySelector('.tile .ib[title="Download"]').click(); await until(() => saved.length);
 out.savedName = saved[0]?.name;
@@ -1769,7 +1769,7 @@ await press(choice('Lines'));
 window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })); await wait(100);
 out.panelAfterEscape = !!document.querySelector('.panel');
 await press(dockButton('Palettes'));
-await press(document.querySelector('.mark'));
+document.querySelector('.mark').dispatchEvent(new PointerEvent('pointerdown', { bubbles: true })); await wait(100);
 out.panelAfterOutsideClick = !!document.querySelector('.panel');
 
 await press(document.querySelectorAll('.seg button')[0]);
@@ -1846,3 +1846,14 @@ git commit -m "feat: add the dock with colors, palettes, styles and download all
 ## After the last task
 
 Run `npm test` and `npm run build` once more on the finished branch, then use superpowers:finishing-a-development-branch to decide how the branch is integrated. Do not push without being asked.
+
+## Changes after the final review
+
+The whole-branch review led to four fixes, each in its own commit after Task 6. The code blocks above show the files as they were at the end of each task; the repository is the source of truth for their current contents.
+
+- **Exact PNG export** (`src/lib/save.js`, `src/lib/save.test.js`): files are encoded by `pngBytes` straight from the pixels (fflate `zlibSync` plus a CRC32) instead of through a canvas, because Brave, Safari private browsing and Firefox's strict mode add noise to canvas readback. Adds one unit test (26 in total).
+- **Space after a click** (`src/App.svelte`): a mouse or touch click no longer leaves focus on the button, and the threshold slider no longer swallows Space, so holding Space compares instead of pressing the last button again.
+- **Touch hold delay** (`src/Tile.svelte`): a touch press counts as a hold only after 150 ms, so scrolling the wall does not flash tiles. Mouse presses are still instant.
+- **Panel dismissal** (`src/Dock.svelte`): panels close on `pointerdown` outside the dock instead of `click`, which iOS does not always deliver for taps on plain page areas.
+
+The two browser check scripts above were updated to match (a mouse pointer type for the hold check, a pointer press for the outside-dismiss check) and still return the listed results.
