@@ -109,7 +109,7 @@ The rule lives in `src/lib/layout.js` (`fitGrid`) and is unit tested.
 | Palette | Opens the palettes panel. |
 | View switch | Two-way switch for the whole wall: "Original", and the bitified image under the name of the current style, such as "Cutout". |
 | Style | Opens the style panel. |
-| Download all | Saves every bitified image in one zip. With exactly one image on the wall it reads "Download" and saves that image as its own file, not a zip. Disabled when the wall is empty. |
+| Download all | Saves every bitified image in one zip. With exactly one image on the wall it reads "Download" and saves that image as its own file, not a zip. Disabled when the wall is empty, where it also reads "Download". |
 
 The dock is three groups, with a divider between them where there is room (see "Responsive
 behavior"): the colors with the Palette button that picks them, the view switch with the
