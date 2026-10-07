@@ -1,11 +1,10 @@
 // 1-bit conversion. No DOM: everything works on plain typed arrays, so it runs in tests.
 
-const ALPHA_CUT = 128; // alpha below this is an empty pixel
+const ALPHA_CUT = 128; // alpha below this is an empty pixel, unless `analyze` is given another cut
 const MIN_EDGE = 24; // Auto never takes a color change weaker than this for a boundary
-const BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
 // Blue noise: the order in which the cells of a 16x16 tile turn light as the tone rises. Each
 // number from 0 to 255 once, placed by the void-and-cluster method so that the lit cells are
-// spread evenly at every tone and, unlike BAYER's, form no regular pattern.
+// spread evenly at every tone and, unlike Bayer's, form no regular pattern.
 const NOISE = (
   'ed75dbbf791b4f80ec4717e5ae8b43bc1aa11354d5acf82bb564c37d0ffb5aa98462fc2e913f679415d639a52a6fd132bb40ca73e909c6e3598af353c99904e4' +
   '920ea41db3832546af02761ede3e7b4eeb68d84a5bdc6b98fe33ba9063b4f721c4812ff58c38bd167ed348ef14309f5e3b9b12a7cd06eea25c226d9eda86d008' +
@@ -15,19 +14,42 @@ const NOISE = (
 // The patterns: a pixel turns light when its tone is above the cut for its place in a small
 // square tile that repeats across the image. `n` is the side of the tile.
 const tile = (n, cut) => ({ n, cuts: Float64Array.from({ length: n * n }, (_, i) => cut(i % n, Math.floor(i / n), i)) });
+// The Bayer grid of side n (2, 4 or 8). Each quarter of a grid is the grid of half its side with
+// every number times four, plus 0, 2, 3 and 1 by quarter. Side 4 is the classic one.
+function bayer(n) {
+  let m = [[0]];
+  for (let s = 1; s < n; s *= 2) m = [...m.map(r => [...r.map(v => 4 * v), ...r.map(v => 4 * v + 2)]), ...m.map(r => [...r.map(v => 4 * v + 3), ...r.map(v => 4 * v + 1)])];
+  return m.flat();
+}
+// Which of Hatch's lines a pixel is on, counted across the lines, for each way they can run.
+const ACROSS = { '/': (x, y) => x + y, '\\': (x, y) => x - y, '-': (x, y) => y, '|': x => x };
+// Each takes the style's settings; a setting left out has the value it had before there were settings.
 const TILES = {
-  checker: tile(2, (x, y) => ((x + y) % 2 ? 0.75 : 0.25)),
-  hatch: tile(3, (x, y) => 0.75 - 0.25 * ((x + y) % 3)), // diagonal lines, three pixels apart
-  bayer: tile(4, (x, y, i) => (BAYER[i] + 0.5) / 16),
-  noise: tile(16, (x, y, i) => (NOISE[i] + 0.5) / 256),
+  checker: () => tile(2, (x, y) => ((x + y) % 2 ? 0.75 : 0.25)),
+  // lines `spacing` pixels apart, widening one pixel at a time as the tone darkens
+  hatch: ({ direction = '/', spacing: n = 3 }) => tile(n, (x, y) => (n - ((ACROSS[direction](x, y) + n) % n)) / (n + 1)),
+  bayer: ({ matrix: n = 4 }) => { const grid = bayer(n); return tile(n, (x, y, i) => (grid[i] + 0.5) / (n * n)); },
+  noise: () => tile(16, (x, y, i) => (NOISE[i] + 0.5) / 256),
 };
+// Error diffusion: where the error made at a pixel goes, as [columns right, rows down, parts] for
+// each pixel that is handed some, out of `of` parts. Both hand on all of the error, and neither
+// reaches further than two rows down. Atkinson's kernel, which hands on six eighths and drops
+// the rest, is written out in `mask`.
+const kernel = (of, ...to) => ({ dx: Int8Array.from(to, t => t[0]), dy: Int8Array.from(to, t => t[1]), part: Float64Array.from(to, t => t[2] / of) });
+const KERNELS = {
+  floyd: kernel(16, [1, 0, 7], [-1, 1, 3], [0, 1, 5], [1, 1, 1]),
+  stucki: kernel(42, [1, 0, 8], [2, 0, 4], [-2, 1, 2], [-1, 1, 4], [0, 1, 8], [1, 1, 4], [2, 1, 2], [-2, 2, 1], [-1, 2, 2], [0, 2, 4], [1, 2, 2], [2, 2, 1]),
+};
+// What brightness is read from: how much of red, green and blue. 'value', the lightest of the
+// three, is not a mix and is not listed.
+const SOURCES = { luma: [0.2126, 0.7152, 0.0722], red: [1, 0, 0], green: [0, 1, 0], blue: [0, 0, 1] };
 
 export function hexToRgb(hex) {
   const n = parseInt(hex.slice(1), 16);
   return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
 }
 
-// Brightness of a '#rrggbb' color, 0 to 255, by the same weights `analyze` uses for pixels.
+// Brightness of a '#rrggbb' color, 0 to 255, by the weights `analyze` uses for pixels unless told otherwise.
 export function brightness(hex) {
   const [r, g, b] = hexToRgb(hex);
   return 0.2126 * r + 0.7152 * g + 0.0722 * b;
@@ -88,23 +110,41 @@ function seamStrength(frames, t) {
 // `right` and `down` hold, for each pixel, how much its color differs from the pixel to its right
 // and from the one below it (0 when either is empty). They are worked out here once, because
 // Lines and Cutout ask for them at every pixel each time the threshold moves.
+// `source` is what brightness is read from ('luma', 'value', 'red', 'green' or 'blue') and `cut`
+// the alpha below which a pixel is empty. Both are settings of a style, so an image is analysed
+// again when the style in use has other values for them.
 // The loops here and in `mask` are written flat, with nothing made per pixel: a photo has
 // millions of pixels, and a phone goes through them several times slower than a desktop.
-export function analyze({ width: w, height: h, data }) {
+export function analyze({ width: w, height: h, data }, source = 'luma', cut = ALPHA_CUT) {
   const lum = new Uint8Array(w * h), right = new Uint8Array(w * h), down = new Uint8Array(w * h);
   const hist = new Array(256).fill(0), edges = new Array(256).fill(0), below = w * 4;
   let hasAlpha = false, lo = 255, hi = 0;
   for (let y = 0, p = 0, i = 0; y < h; y++) for (let x = 0; x < w; x++, p++, i += 4) {
-    if (data[i + 3] < ALPHA_CUT) { hasAlpha = true; continue; }
+    if (data[i + 3] < cut) { hasAlpha = true; continue; }
     const l = (lum[p] = Math.round(0.2126 * data[i] + 0.7152 * data[i + 1] + 0.0722 * data[i + 2]));
     hist[l]++;
     if (l < lo) lo = l;
     if (l > hi) hi = l;
-    if (x + 1 < w && data[i + 7] >= ALPHA_CUT) edges[(right[p] = diff(data, i, i + 4))]++;
-    if (y + 1 < h && data[i + below + 3] >= ALPHA_CUT) edges[(down[p] = diff(data, i, i + below))]++;
+    if (x + 1 < w && data[i + 7] >= cut) edges[(right[p] = diff(data, i, i + 4))]++;
+    if (y + 1 < h && data[i + below + 3] >= cut) edges[(down[p] = diff(data, i, i + below))]++;
   }
   edges[0] = 0; // identical neighbours are not edges
-  const img = { w, h, data, lum, right, down, hasAlpha, lo, hi, hist, edges, auto: otsu(hist, 127), autoLine: Math.max(MIN_EDGE, otsu(edges, 0)) };
+  if (source !== 'luma') {
+    // Brightness read from anything else is worked out in a pass of its own, over what the loop
+    // above found. Choosing between them inside that loop made every image take an eighth longer.
+    const [wr, wg, wb] = SOURCES[source] ?? SOURCES.luma, value = source === 'value';
+    hist.fill(0);
+    lo = 255;
+    hi = 0;
+    for (let p = 0, i = 0; p < w * h; p++, i += 4) {
+      if (data[i + 3] < cut) continue;
+      const l = (lum[p] = value ? Math.max(data[i], data[i + 1], data[i + 2]) : Math.round(wr * data[i] + wg * data[i + 1] + wb * data[i + 2]));
+      hist[l]++;
+      if (l < lo) lo = l;
+      if (l > hi) hi = l;
+    }
+  }
+  const img = { w, h, data, lum, right, down, cut, hasAlpha, lo, hi, hist, edges, auto: otsu(hist, 127), autoLine: Math.max(MIN_EDGE, otsu(edges, 0)) };
   img.autoTone = toneCenter(hist, img.auto);
   img.autoSeam = seamStrength([img], img.auto);
   return img;
@@ -143,7 +183,8 @@ export const autoThreshold = (img, style) => (style === 'lines' ? img.autoLine :
 const spread = (n, m) => Int32Array.from({ length: m }, (_, i) => Math.floor(((i + 0.5) * n) / m));
 
 // One byte per pixel: 0 empty, 1 first color (lines, dark pixels), 2 second color (fill, light pixels).
-// `threshold` null means Auto.
+// `set` is the style's settings (see lib/settings.js). Any left out has its default, a threshold
+// of null means Auto, and a number alone is a threshold with every other setting at its default.
 //
 // `mw` and `mh` ask for a smaller picture of the image, for a tile that shows it smaller than it
 // is: mw by mh pixels, taking that many pixels' work instead of w * h. Each of its pixels stands
@@ -157,12 +198,13 @@ const spread = (n, m) => Int32Array.from({ length: m }, (_, i) => Math.floor(((i
 // pixel it stands for is in the full mask. The pattern styles and Atkinson are instead drawn
 // afresh on the picture's own pixels, because their look comes from how neighbouring pixels
 // alternate, and pixels picked from a pattern do not alternate as the pattern does.
-export function mask(img, style, threshold = null, mw = img.w, mh = img.h) {
-  const { w, h, lum, data, right, down, lo, hi } = img, m = new Uint8Array(mw * mh);
+export function mask(img, style, set = null, mw = img.w, mh = img.h) {
+  const { w, h, lum, data, right, down, lo, hi, cut: alphaCut = ALPHA_CUT } = img, m = new Uint8Array(mw * mh);
   const xs = spread(w, mw), ys = spread(h, mh); // the image column and row of each of the picture's
-  const t = threshold ?? autoThreshold(img, style);
+  const opt = typeof set === 'number' ? { threshold: set } : set ?? {};
+  const t = opt.threshold ?? autoThreshold(img, style);
   const opaque = !img.hasAlpha; // then every pixel is solid, and the large RGBA array is never read
-  const solid = p => opaque || data[p * 4 + 3] >= ALPHA_CUT;
+  const solid = p => opaque || data[p * 4 + 3] >= alphaCut;
   // Whether p is the darker of two pixels. On a tie the earlier one is, so a boundary is one pixel wide.
   const darker = (p, q) => lum[p] < lum[q] || (lum[p] === lum[q] && p < q);
   // In the loops below `i` and `j` count the picture's pixels, `x` and `y` are the image pixel
@@ -174,12 +216,38 @@ export function mask(img, style, threshold = null, mw = img.w, mh = img.h) {
     // The canvas edge counts as empty only for sprites, so opaque scenes get no frame.
     // `d` is the difference between p and its neighbour q
     const edge = img.hasAlpha, line = (p, q, d) => !solid(q) || (d > t && darker(p, q));
+    const thin = (x, y, p) =>
+      (x ? line(p, p - 1, right[p - 1]) : edge) || (x + 1 < w ? line(p, p + 1, right[p]) : edge) || (y ? line(p, p - w, down[p - w]) : edge) || (y + 1 < h ? line(p, p + w, down[p]) : edge);
+    // `thickness` widens the lines: a solid pixel fewer than that many steps (left, right, up or
+    // down) from a line is a line too. `darks` also makes every pixel that dark or darker first
+    // color, without widening it; 0 leaves that off.
+    const reach = (opt.thickness ?? 1) - 1, darks = opt.darks ?? 0;
+    const dark = p => darks > 0 && lum[p] <= darks;
+    if (reach && mw === w && mh === h) {
+      // Every pixel is asked for, so the lines are found once and then grown a step at a time,
+      // which costs far less than asking each pixel about all the pixels within reach of it.
+      let from = new Uint8Array(w * h), to = new Uint8Array(w * h);
+      for (let y = 0, p = 0; y < h; y++) for (let x = 0; x < w; x++, p++) from[p] = solid(p) && thin(x, y, p) ? 1 : 0;
+      for (let step = 0; step < reach; step++, [from, to] = [to, from]) {
+        for (let y = 0, p = 0; y < h; y++) for (let x = 0; x < w; x++, p++) {
+          to[p] = from[p] | (x ? from[p - 1] : 0) | (x + 1 < w ? from[p + 1] : 0) | (y ? from[p - w] : 0) | (y + 1 < h ? from[p + w] : 0);
+        }
+      }
+      for (let p = 0; p < w * h; p++) if (solid(p)) m[p] = from[p] || dark(p) ? 1 : 2;
+      return m;
+    }
+    // whether a line lies within reach of the pixel at x, y, which is not one itself
+    const near = (x, y) => {
+      for (let dy = -reach; dy <= reach; dy++) {
+        const Y = y + dy, across = reach - Math.abs(dy);
+        if (Y < 0 || Y >= h) continue;
+        for (let X = Math.max(0, x - across), end = Math.min(w - 1, x + across), q = Y * w + X; X <= end; X++, q++) if (solid(q) && thin(X, Y, q)) return true;
+      }
+      return false;
+    };
     for (let j = 0, o = 0; j < mh; j++) for (let i = 0, y = ys[j]; i < mw; i++, o++) {
       const x = xs[i], p = y * w + x;
-      if (!solid(p)) continue;
-      const on =
-        (x ? line(p, p - 1, right[p - 1]) : edge) || (x + 1 < w ? line(p, p + 1, right[p]) : edge) || (y ? line(p, p - w, down[p - w]) : edge) || (y + 1 < h ? line(p, p + w, down[p]) : edge);
-      m[o] = on ? 1 : 2;
+      if (solid(p)) m[o] = dark(p) || thin(x, y, p) || (reach && near(x, y)) ? 1 : 2;
     }
     return m;
   }
@@ -188,7 +256,7 @@ export function mask(img, style, threshold = null, mw = img.w, mh = img.h) {
     // Bright parts are filled, dark parts are left dark, and the boundaries between parts of the
     // same tone are cut in the other tone. 0 empty, 1 dark, 2 light; outside the canvas is
     // empty only for sprites, as in Lines.
-    const out = img.hasAlpha ? 0 : -1, strength = img.autoSeam;
+    const out = img.hasAlpha ? 0 : -1, strength = opt.seams ?? img.autoSeam, rim = opt.rim ?? true;
     const tone = q => (!solid(q) ? 0 : lum[q] > t ? 2 : 1);
     // a seam: the darker side of a strong change between two pixels of the same tone
     const cut = (p, q, d) => d > strength && darker(p, q);
@@ -205,8 +273,8 @@ export function mask(img, style, threshold = null, mw = img.w, mh = img.h) {
       const beside = l === 0 || r === 0 || u === 0 || d === 0; // empty space on one of the four sides
       // a light pixel on the silhouette is never cut, so seams do not eat into the shape
       if (own === 2) m[o] = seam && !beside && !corner(p, L, R, U, D, 0) ? 1 : 2;
-      // a dark pixel on the silhouette with no light pixel around it becomes a light rim
-      else m[o] = seam || (beside && l !== 2 && r !== 2 && u !== 2 && d !== 2 && !corner(p, L, R, U, D, 2)) ? 2 : 1;
+      // a dark pixel on the silhouette with no light pixel around it becomes a light rim, unless rims are off
+      else m[o] = seam || (rim && beside && l !== 2 && r !== 2 && u !== 2 && d !== 2 && !corner(p, L, R, U, D, 2)) ? 2 : 1;
     }
     return m;
   }
@@ -222,45 +290,65 @@ export function mask(img, style, threshold = null, mw = img.w, mh = img.h) {
 
   // Brightness as a tone from 0 to 1 through the image's own range: its darkest brightness is 0,
   // the threshold 0.5 and its lightest 1. So a pattern never reaches the darkest or lightest color.
+  // `shading` then says how far from the threshold a tone is still patterned: at 100 as far as
+  // the darkest and lightest, at 50 half as far, with every tone beyond that fully dark or
+  // light, and at 0 not at all, which is Solid.
   // Worked out once for each of the 256 brightnesses, not once for each pixel.
-  const tones = Float64Array.from({ length: 256 }, (_, l) => (l <= t ? (t > lo ? (0.5 * (l - lo)) / (t - lo) : 0) : 0.5 + (0.5 * (l - t)) / (hi - t)));
+  const shading = (opt.shading ?? 100) / 100;
+  const tones = Float64Array.from({ length: 256 }, (_, l) => {
+    const tone = l <= t ? (t > lo ? (0.5 * (l - lo)) / (t - lo) : 0) : 0.5 + (0.5 * (l - t)) / (hi - t);
+    return shading ? Math.min(1, Math.max(0, 0.5 + (tone - 0.5) / shading)) : tone > 0.5 ? 1 : 0;
+  });
 
   if (style === 'atkinson') {
-    // Each of the picture's pixels passes its error on to the ones after it.
+    // Each of the picture's pixels passes its error on to the ones after it, by the kernel chosen.
     // Error only ever reaches two rows down, so the running values are held for three rows at
     // a time (the one being converted and the two below it) instead of for the whole picture.
     const fill = (row, j) => {
       if (j < mh) for (let i = 0, from = ys[j] * w; i < mw; i++) { const p = from + xs[i]; row[i] = solid(p) ? tones[lum[p]] * 255 : 0; }
       return row;
     };
+    // Atkinson's own kernel, the default, is written out, which runs in well under half the time
+    // of the loop the other kernels go through.
+    const other = KERNELS[opt.diffusion], { dx, dy, part } = other ?? KERNELS.floyd, parts = part.length;
     let v = fill(new Float32Array(mw), 0), next = fill(new Float32Array(mw), 1), after = fill(new Float32Array(mw), 2);
     for (let j = 0, o = 0; j < mh; j++) {
       for (let i = 0, row = ys[j] * w; i < mw; i++, o++) {
         if (!solid(row + xs[i])) continue;
-        const on = v[i] > 127.5, e = (v[i] - (on ? 255 : 0)) / 8;
+        const on = v[i] > 127.5, error = v[i] - (on ? 255 : 0);
         m[o] = on ? 2 : 1;
+        // a row past the last one is never read, so error handed to it is simply lost
+        if (other) {
+          for (let n = 0; n < parts; n++) {
+            const x = i + dx[n];
+            if (x >= 0 && x < mw) (dy[n] === 0 ? v : dy[n] === 1 ? next : after)[x] += error * part[n];
+          }
+          continue;
+        }
+        const e = error / 8;
         if (i + 1 < mw) v[i + 1] += e;
         if (i + 2 < mw) v[i + 2] += e;
-        if (j + 1 < mh) {
-          if (i > 0) next[i - 1] += e;
-          next[i] += e;
-          if (i + 1 < mw) next[i + 1] += e;
-        }
-        if (j + 2 < mh) after[i] += e;
+        if (i > 0) next[i - 1] += e;
+        next[i] += e;
+        if (i + 1 < mw) next[i + 1] += e;
+        after[i] += e;
       }
       [v, next, after] = [next, after, fill(v, j + 3)];
     }
     return m;
   }
 
-  // Checker, Hatch, Bayer and Noise. The pattern is laid over the picture's own pixels: `cy` and
-  // `cx` are a pixel's row and column within the pattern's tile. They are kept by counting,
-  // because a division for every pixel would cost more than the rest of the loop.
-  const { n, cuts } = TILES[style];
-  for (let j = 0, o = 0, cy = 0; j < mh; j++, cy = cy + 1 < n ? cy + 1 : 0) {
-    for (let i = 0, row = ys[j] * w, cx = 0; i < mw; i++, o++, cx = cx + 1 < n ? cx + 1 : 0) {
+  // Checker, Hatch, Bayer and Noise. The pattern is laid over the picture's own pixels.
+  // `scale` draws each cell of the pattern that many pixels wide and high. A smaller picture has
+  // fewer pixels for the same cell, so there the scale shrinks with it, and a pattern too fine
+  // for the picture is drawn at 1.
+  const { n, cuts } = TILES[style](opt), scale = Math.max(1, Math.round(((opt.scale ?? 1) * mw) / w));
+  // the column of the tile each column of the picture is in, worked out once, not for every row
+  const cxs = Int32Array.from({ length: mw }, (_, i) => Math.floor(i / scale) % n);
+  for (let j = 0, o = 0; j < mh; j++) {
+    for (let i = 0, row = ys[j] * w, cy = (Math.floor(j / scale) % n) * n; i < mw; i++, o++) {
       const p = row + xs[i];
-      if (solid(p)) m[o] = tones[lum[p]] > cuts[cy * n + cx] ? 2 : 1;
+      if (solid(p)) m[o] = tones[lum[p]] > cuts[cy + cxs[i]] ? 2 : 1;
     }
   }
   return m;

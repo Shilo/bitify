@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { analyze, unify, mask, shrink, colorize, otsu, hexToRgb, brightness, autoThreshold, previewBall } from './bitify.js';
+import { STYLE_SETTINGS, defaults } from './settings.js';
 
 // Builds an analysed image from rows of characters. Each character maps to [r, g, b] or
 // [r, g, b, a] in `pal`; a character that is not in `pal` is an empty (transparent) pixel.
@@ -556,6 +557,177 @@ describe('an image shown smaller than it is', () => {
 
   it('shrinks the original onto the same pixels', () => {
     for (const [mw, mh] of SIZES) expect([...shrink(src, mw, mh)], `${mw}x${mh}`).toEqual(picked(data, mw, mh, 4));
+  });
+});
+
+describe('the settings of a style', () => {
+  // A column of the darkest color, four of a middle color, a column of the lightest.
+  const three = (b = 120) => image(Array(4).fill('abbbbc'), { a: grey(20), b: grey(b), c: grey(240) });
+  // 23 by 17 pixels of shaded shapes with grain, and a see-through corner
+  const w = 23, h = 17, data = new Uint8ClampedArray(w * h * 4);
+  for (let y = 0, i = 0, seed = 7; y < h; y++) for (let x = 0; x < w; x++, i += 4) {
+    seed = (seed * 1103515245 + 12345) % 2147483648;
+    const v = ((x >> 2) + (y >> 2)) % 3 * 90 + (seed >> 8) % 40;
+    data.set([v, v * 0.8 + y, x * 9, x + y < 6 ? 0 : 255], i);
+  }
+  const grainy = analyze({ width: w, height: h, data });
+  const picked = (all, mw, mh) => Array.from({ length: mw * mh }, (_, o) => all[Math.floor(((Math.floor(o / mw) + 0.5) * h) / mh) * w + Math.floor((((o % mw) + 0.5) * w) / mw)]);
+
+  it('converts as before when every setting is at its default, given or left out', () => {
+    for (const style of Object.keys(STYLE_SETTINGS)) {
+      expect([...mask(grainy, style, defaults(style))], style).toEqual([...mask(grainy, style)]);
+      expect([...mask(grainy, style, {})], style).toEqual([...mask(grainy, style)]);
+      expect([...mask(grainy, style, { ...defaults(style), threshold: 90 })], style).toEqual([...mask(grainy, style, 90)]);
+    }
+  });
+
+  it('cutout: seams are cut at the strength given, and not at all at 255', () => {
+    const ball = previewBall();
+    expect([...mask(ball, 'cutout', { seams: ball.autoSeam })]).toEqual([...mask(ball, 'cutout')]);
+    expect(count(mask(ball, 'cutout', { seams: 8 }), 1)).toBeGreaterThan(count(mask(ball, 'cutout'), 1)); // soft shading is cut too
+    expect(show(mask(ball, 'cutout', { seams: 255 }), 14).slice(6, 10)).toEqual(['#............#', '##############', '.############.', '.############.']);
+  });
+
+  it('cutout: without rims and without seams it is Solid', () => {
+    const ball = previewBall();
+    expect([...mask(ball, 'cutout', { seams: 255, rim: false })]).toEqual([...mask(ball, 'solid')]);
+    expect([...mask(grainy, 'cutout', { threshold: 90, seams: 255, rim: false })]).toEqual([...mask(grainy, 'solid', 90)]);
+  });
+
+  // A 9x9 body on a transparent canvas; `mid` is the color of the pixel in its middle.
+  const body = mid => image([' '.repeat(11), ...Array.from({ length: 9 }, (_, y) => ' ' + (y === 4 ? 'aaaabaaaa' : 'aaaaaaaaa') + ' '), ' '.repeat(11)], { a: grey(200), b: grey(mid) });
+  const ring = n => [' '.repeat(11), ...Array.from({ length: 9 }, (_, y) => ' ' + (Math.min(y, 8 - y) < n ? '#########' : '#'.repeat(n) + '.'.repeat(9 - 2 * n) + '#'.repeat(n)) + ' '), ' '.repeat(11)];
+
+  it('lines: thickness grows the lines into the fill, a pixel at a time', () => {
+    for (const thickness of [1, 2, 3]) expect(show(mask(body(200), 'lines', { thickness }), 11), `thickness ${thickness}`).toEqual(ring(thickness));
+  });
+
+  it('lines: fill darks makes dark pixels first color, and thickness does not widen them', () => {
+    const dot = rows => rows.map((row, y) => (y === 5 ? row.slice(0, 5) + '#' + row.slice(6) : row));
+    expect(show(mask(body(60), 'lines', { threshold: 254 }), 11)).toEqual(ring(1)); // too strong a threshold for the dark pixel to be an edge
+    expect(show(mask(body(60), 'lines', { threshold: 254, darks: 60 }), 11)).toEqual(dot(ring(1)));
+    expect(show(mask(body(60), 'lines', { threshold: 254, darks: 59 }), 11)).toEqual(ring(1));
+    expect(show(mask(body(60), 'lines', { threshold: 254, darks: 100, thickness: 2 }), 11)).toEqual(dot(ring(2)));
+    expect(show(mask(body(0), 'lines', { threshold: 254, darks: 0 }), 11)).toEqual(ring(1)); // 0 is off, even for black
+  });
+
+  it('gives each pixel of a smaller picture what its image pixel is in the full conversion, whatever the settings', () => {
+    const cases = [['lines', { threshold: 60, thickness: 2 }], ['lines', { thickness: 3, darks: 70 }], ['lines', { threshold: 90, darks: 120 }], ['cutout', { seams: 30, rim: false }], ['cutout', { threshold: 90, seams: 255 }]];
+    for (const [style, set] of cases) {
+      const full = mask(grainy, style, set);
+      for (const [mw, mh] of [[22, 16], [12, 9], [8, 6], [5, 17], [23, 3], [1, 1]]) expect([...mask(grainy, style, set, mw, mh)], `${style} ${JSON.stringify(set)} ${mw}x${mh}`).toEqual(picked(full, mw, mh));
+    }
+  });
+
+  it('shading: narrows the tones that are patterned, down to none, which is Solid', () => {
+    // tone about 0.7: a checkerboard at 100, but at 50 it is twice as far from the threshold and so fully light
+    expect(show(mask(three(170), 'checker', { threshold: 120 }), 6)).toEqual(['##.#..', '#.#.#.', '##.#..', '#.#.#.']);
+    expect(show(mask(three(170), 'checker', { threshold: 120, shading: 50 }), 6)).toEqual(Array(4).fill('#.....'));
+    // the tone at the threshold stays half and half until shading is 0
+    expect(show(mask(three(), 'checker', { threshold: 120, shading: 1 }), 6)).toEqual(show(mask(three(), 'checker', 120), 6));
+    for (const style of ['checker', 'hatch', 'bayer', 'noise', 'atkinson']) {
+      for (const threshold of [90, 150]) expect([...mask(grainy, style, { threshold, shading: 0 })], `${style} ${threshold}`).toEqual([...mask(grainy, 'solid', threshold)]);
+    }
+  });
+
+  it('scale: draws each cell of the pattern that many pixels wide and high', () => {
+    expect(show(mask(three(), 'checker', { threshold: 120, scale: 2 }), 6)).toEqual(['#.##..', '#.##..', '##..#.', '##..#.']);
+    // twelve rows of a middle color, over a row holding the darkest and the lightest
+    const wide = image([...Array(12).fill('b'.repeat(12)), 'aaaaaacccccc'], { a: grey(20), b: grey(140), c: grey(240) });
+    for (const style of ['checker', 'hatch', 'bayer', 'noise']) {
+      const one = mask(wide, style, { threshold: 120 }), three = mask(wide, style, { threshold: 120, scale: 3 });
+      // every pixel of the larger pattern is the pixel of the plain one that its cell stands for
+      expect([...three.slice(0, 144)], style).toEqual(Array.from({ length: 144 }, (_, p) => one[Math.floor(Math.floor(p / 12) / 3) * 12 + Math.floor((p % 12) / 3)]));
+      expect([...three.slice(0, 144)], style).not.toEqual([...one.slice(0, 144)]);
+    }
+  });
+
+  it('scale: shrinks with a smaller picture, so the picture shows the pattern the size it is in the file', () => {
+    for (const style of ['checker', 'hatch', 'bayer', 'noise']) {
+      expect([...mask(grainy, style, { scale: 2 }, 12, 9)], style).toEqual([...mask(grainy, style, {}, 12, 9)]); // half the size: 2 becomes 1
+      expect([...mask(grainy, style, { scale: 4 }, 12, 9)], style).not.toEqual([...mask(grainy, style, {}, 12, 9)]); // 4 becomes 2
+      expect([...mask(grainy, style, { scale: 4 }, 3, 2)], style).toEqual([...mask(grainy, style, {}, 3, 2)]); // never below 1
+    }
+  });
+
+  it('hatch: the lines run the way asked', () => {
+    const rows = direction => show(mask(three(), 'hatch', { threshold: 120, direction }), 6);
+    expect(rows('/')).toEqual(['##.##.', '#.##..', '###.#.', '##.##.']);
+    expect(rows('\\')).toEqual(['##.##.', '###.#.', '#.##..', '##.##.']);
+    expect(rows('-')).toEqual(['#####.', '#####.', '#.....', '#####.']);
+    expect(rows('|')).toEqual(Array(4).fill('##.##.'));
+  });
+
+  it('hatch: spacing sets how far apart the lines are', () => {
+    // four apart, tone 0.5: two diagonals in four are dark
+    expect(show(mask(three(), 'hatch', { threshold: 120, spacing: 4 }), 6)).toEqual(['##..#.', '#..##.', '#.##..', '###...']);
+    const block = (n, b) => image(Array(n * 2).fill('a' + 'b'.repeat(n * 2) + 'c'), { a: grey(20), b: grey(b), c: grey(240) });
+    // tone about 0.73, light enough at every spacing to leave one dark line in n: the darkest column, and a line's share of the block
+    for (const n of [3, 4, 5, 6]) expect(count(mask(block(n, 175), 'hatch', { threshold: 120, spacing: n }), 1), `spacing ${n}`).toBe(2 * n + (2 * n * 2 * n) / n);
+  });
+
+  it('bayer: the matrix sets how many tones there are', () => {
+    // 2: five tones. About 0.7 lights three cells in four.
+    expect(show(mask(three(170), 'bayer', { threshold: 120, matrix: 2 }), 6)).toEqual(['#.....', '#.#.#.', '#.....', '#.#.#.']);
+    expect([...mask(grainy, 'bayer', { matrix: 4 })]).toEqual([...mask(grainy, 'bayer')]);
+    // 8: the tone at the threshold lights exactly half of an 8x8 cell, and a slightly lighter one a few more
+    const block = b => image(Array(8).fill('a' + 'b'.repeat(8) + 'c'), { a: grey(20), b: grey(b), c: grey(240) });
+    expect(count(mask(block(120), 'bayer', { threshold: 120, matrix: 8 }), 2)).toBe(8 + 32);
+    expect(count(mask(block(124), 'bayer', { threshold: 120, matrix: 8 }), 2)).toBe(8 + 33);
+    expect(count(mask(block(124), 'bayer', { threshold: 120, matrix: 4 }), 2)).toBe(8 + 32); // too small a step for 17 tones
+  });
+
+  it('diffusion: each kernel scatters in its own way, as light as the tone asks, and leaves flat extremes clean', () => {
+    const block = image(Array(24).fill('a' + 'b'.repeat(24) + 'c'), { a: grey(20), b: grey(150), c: grey(240) }); // tone 0.625
+    const of = diffusion => mask(block, 'atkinson', { threshold: 120, diffusion });
+    expect([...of('atkinson')]).toEqual([...mask(block, 'atkinson', 120)]);
+    for (const diffusion of ['floyd', 'stucki']) {
+      const m = of(diffusion), light = (count(m, 2) - 24) / (24 * 24); // without the lightest column
+      expect(Math.abs(light - 0.625), diffusion).toBeLessThan(0.05);
+      expect([...m], diffusion).not.toEqual([...of('atkinson')]);
+      const flat = Array(8).fill('aaaaaaaa');
+      expect(count(mask(image(flat, { a: grey(255) }), 'atkinson', { threshold: 128, diffusion }), 2)).toBe(64);
+      expect(count(mask(image(flat, { a: grey(0) }), 'atkinson', { threshold: 128, diffusion }), 1)).toBe(64);
+    }
+    expect([...of('floyd')]).not.toEqual([...of('stucki')]);
+  });
+
+  it('diffusion: hands on the whole error, so a block of one tone comes out that light all through', () => {
+    // a quarter tone: Atkinson, which drops a quarter of the error, darkens it; the others keep it
+    const block = image(Array(32).fill('a' + 'b'.repeat(32) + 'c'), { a: grey(20), b: grey(180), c: grey(240) }); // tone 0.75
+    const light = diffusion => (count(mask(block, 'atkinson', { threshold: 120, diffusion }), 2) - 32) / (32 * 32);
+    expect(Math.abs(light('floyd') - 0.75)).toBeLessThan(0.03);
+    expect(Math.abs(light('stucki') - 0.75)).toBeLessThan(0.03);
+    expect(light('atkinson')).toBeGreaterThan(0.8); // lost error pushes a light tone lighter
+  });
+
+  it('brightness: is read from what the style asks for', () => {
+    const src = { width: 4, height: 1, data: Uint8ClampedArray.of(255, 0, 0, 255, 0, 255, 0, 255, 0, 0, 255, 255, 40, 80, 120, 255) };
+    expect([...analyze(src).lum]).toEqual([54, 182, 18, 74]);
+    expect([...analyze(src, 'luma').lum]).toEqual([54, 182, 18, 74]);
+    expect([...analyze(src, 'value').lum]).toEqual([255, 255, 255, 120]);
+    expect([...analyze(src, 'red').lum]).toEqual([255, 0, 0, 40]);
+    expect([...analyze(src, 'green').lum]).toEqual([0, 255, 0, 80]);
+    expect([...analyze(src, 'blue').lum]).toEqual([0, 0, 255, 120]);
+    expect([...analyze(src, 'nonsense').lum]).toEqual([54, 182, 18, 74]);
+    const blue = analyze(src, 'blue');
+    expect([blue.lo, blue.hi, blue.auto]).toEqual([0, 255, 0]); // the range and Auto follow
+    expect(show(mask(blue, 'solid'), 4)).toEqual(['##..']);
+    expect(show(mask(analyze(src), 'solid'), 4)).toEqual(['#.##']);
+    // the differences between neighbours, which Lines and seams go by, are of the colors and do not change
+    expect([...blue.right]).toEqual([...analyze(src).right]);
+  });
+
+  it('opacity cut: sets how see-through a pixel may be before it is empty', () => {
+    const src = { width: 3, height: 1, data: Uint8ClampedArray.of(9, 9, 9, 40, 9, 9, 9, 127, 9, 9, 9, 200) };
+    const shape = cut => show(mask(analyze(src, 'luma', cut), 'silhouette'), 3)[0];
+    expect(shape(128)).toBe('  #');
+    expect(shape(127)).toBe(' ##');
+    expect(shape(40)).toBe('###');
+    expect(shape(201)).toBe('   ');
+    expect(analyze(src, 'luma', 40).hasAlpha).toBe(false);
+    // a pixel that is empty at this cut is no neighbour: nothing is on record between it and the next
+    expect([...analyze({ ...src, data: Uint8ClampedArray.of(9, 9, 9, 40, 99, 9, 9, 127, 9, 9, 9, 200) }, 'luma', 100).right]).toEqual([0, 90, 0]);
   });
 });
 
