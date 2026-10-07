@@ -1,0 +1,28 @@
+# Bitify
+
+Convert pixel art to 1-bit: every image is redrawn in two colors you pick. Runs entirely in the browser; nothing is uploaded.
+
+**[shilo.github.io/bitify](https://shilo.github.io/bitify/)**
+
+## Features
+
+- Add any number of images by drag and drop, file picker or paste.
+- Two colors, swap, and eight preset palettes. Changes redraw every image at once.
+- Six styles: Lines (outlines each part of a sprite, not only its silhouette), Solid, Checker, Bayer, Atkinson and Silhouette.
+- Threshold slider, with a per-image Auto setting.
+- Compare with the original: switch the whole wall, hold a tile, or hold Space.
+- Save one PNG at original size, or all of them as a zip.
+- Works on desktop, iOS and Android.
+
+## Development
+
+```bash
+npm install
+npm run dev
+```
+
+`npm test` runs the unit tests, `npm run build` writes the site to `dist/`.
+
+Built with Svelte 5 and Vite. Every push to `main` is deployed to GitHub Pages by [deploy.yml](.github/workflows/deploy.yml).
+
+The full design is in [docs/superpowers/specs/2026-10-06-bitify-app-design.md](docs/superpowers/specs/2026-10-06-bitify-app-design.md).
