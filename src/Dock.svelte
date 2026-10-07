@@ -17,6 +17,7 @@
     { name: 'Rose', dark: '#4a0d2b', light: '#ffd1dc' },
   ];
   const STYLES = [
+    ['cutout', 'Cutout'],
     ['lines', 'Lines'],
     ['solid', 'Solid'],
     ['checker', 'Checker'],
@@ -207,6 +208,8 @@
                 Auto picks the best value for each image.
               {:else if style === 'lines'}
                 Color changes stronger than <b>{threshold}</b> become lines.
+              {:else if style === 'cutout'}
+                Parts brighter than <b>{threshold}</b> are filled.
               {:else}
                 Pixels brighter than <b>{threshold}</b> turn light.
               {/if}

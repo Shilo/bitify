@@ -25,9 +25,10 @@ Stated by the user:
 - A toggle between the original and the bitified image.
 - Swap, a palette selector, and a threshold. Threshold and an Auto button live in an
   "advanced" strip above the dock, which never covers the images.
-- The advanced strip offers several conversion algorithms. The default outlines the
+- The advanced strip offers several conversion algorithms. The default shows the
   individual parts of a sprite (body parts, clothing, equipment), in the style of the game
-  End of End, and not only the silhouette.
+  End of End, and not only the silhouette. Since 2026-10-07 that default is Cutout, which
+  fills the parts and cuts them apart; Lines, which outlines them, was the default before.
 - Must work on iOS and Android.
 - Vite + Svelte, pure Svelte, no SvelteKit.
 
@@ -164,8 +165,8 @@ right:
 - The word "Style", set like "Palette" in the palettes panel, then the style button: a
   live preview of the current style (a small shaded ball with a stripe, drawn with the
   current two colors) and the style's name. Pressing it
-  opens the list of the six styles above the strip, each with the same live preview and its
-  name, in one row of six. Choosing a style closes the list. So does a press outside it, or
+  opens the list of the seven styles above the strip, each with the same live preview and its
+  name, in one row of seven. Choosing a style closes the list. So does a press outside it, or
   Escape, which then leaves the strip open.
 - Threshold: a slider from 1 to 254, then a number box and an Auto button joined into one
   outlined control, so it is clear that Auto fills in the number. The Auto half is filled
@@ -189,7 +190,7 @@ and another separates the threshold from Help. They match the dock's dividers.
 |---|---|
 | Above 800px | Icon and text labels, dividers between groups. |
 | 521 to 800px | Icon-only buttons, one row. |
-| 520px and below | Tools on the first row, the Original / Bitified switch on a second row as wide as the tools. The dock is only as wide as its tools, centered, and is never stretched to fill the screen; it keeps at least 12px from each edge. The advanced panel is as wide as the dock. The palettes panel stays as wide as its chips, centered and never wider than the screen less those margins, with the name on a row of its own above the chips. The advanced strip takes two rows, without dividers: the style button and Help, then the threshold. Its list of styles is a 3×2 grid as wide as the strip. The image count and the word "images" in the Add button are hidden. |
+| 520px and below | Tools on the first row, the Original / Bitified switch on a second row as wide as the tools. The dock is only as wide as its tools, centered, and is never stretched to fill the screen; it keeps at least 12px from each edge. The advanced panel is as wide as the dock. The palettes panel stays as wide as its chips, centered and never wider than the screen less those margins, with the name on a row of its own above the chips. The advanced strip takes two rows, without dividers: the style button and Help, then the threshold. Its list of styles is a grid four wide, as wide as the strip. The image count and the word "images" in the Add button are hidden. |
 
 On coarse pointers every dock control is 40 to 44px square. The app uses
 `viewport-fit=cover`, pads for the safe-area insets, and sizes itself with dynamic
@@ -251,12 +252,27 @@ Output pixels are fully opaque or fully transparent. Brightness of a pixel is
 
 | Style | Rule |
 |---|---|
-| **Lines** (default) | A pixel is first color if any of its four neighbours is empty, or if a neighbour differs from it by more than the threshold and this pixel is the darker of the two. Everything else is second color. |
+| **Cutout** (default) | A pixel brighter than the threshold is light, every other pixel dark. Then, using those tones: a pixel on the darker side of a change stronger than the seam strength, between two pixels of the same tone, takes the opposite tone; and a dark pixel that touches empty space, with no light pixel among its eight neighbours, becomes light. Dark is first color, light is second. |
+| **Lines** | A pixel is first color if any of its four neighbours is empty, or if a neighbour differs from it by more than the threshold and this pixel is the darker of the two. Everything else is second color. |
 | **Solid** | Brighter than the threshold: second color. Otherwise first color. |
-| **Checker** | As Solid, but the cut-off is raised by 40 on odd `x + y` cells and lowered by 40 on even ones, so mid-tones become a checkerboard. |
-| **Bayer** | As Solid, with the cut-off shifted per pixel by a 4×4 ordered-dither matrix, spread 192. |
-| **Atkinson** | Error diffusion. Each pixel is cut at the threshold, and one eighth of the error goes to each of six neighbours (right, two right, the three below, two below). |
+| **Checker** | Second color if the tone (see below) is above 0.25 on even `x + y` cells and above 0.75 on odd ones, so mid-tones become a checkerboard. |
+| **Bayer** | Second color if the tone is above `(b + 0.5) / 16`, where `b` is the value of a 4×4 ordered-dither matrix at the pixel. |
+| **Atkinson** | Error diffusion on `tone × 255`. Each pixel is cut at 127.5, and one eighth of the error goes to each of six neighbours (right, two right, the three below, two below). |
 | **Silhouette** | Every non-empty pixel is first color. |
+
+Details of Cutout:
+
+- It fills bright parts, leaves dark parts dark and cuts parts apart, in the style of the
+  game End of End. It draws no outline around a light part.
+- A light pixel that touches empty space, diagonals included, is never cut, so seams do not
+  eat into the silhouette.
+- The difference between two pixels, the tie on equal brightness and the rule for the
+  canvas edge are the ones Lines uses.
+- The seam strength is always automatic. The threshold only moves the brightness cut.
+
+Known limits of Cutout: a flat shading step, such as a shadow drawn in one darker color, is
+cut like a part boundary; a dark part two pixels wide or less becomes all rim; art that is
+already dithered becomes busy.
 
 Details of Lines:
 
@@ -271,10 +287,20 @@ Details of Lines:
 Known limit of Lines: two adjacent parts in nearly the same color, with no outline between
 them, merge. Lowering the threshold recovers some at the cost of picking up shading.
 
+Checker, Bayer and Atkinson work on a **tone** from 0 to 1 that runs through the image's own
+range: its darkest brightness is 0, the threshold is 0.5 and its lightest brightness is 1.
+
+- At or below the threshold: `0.5 × (brightness − darkest) / (threshold − darkest)`, or 0
+  when the threshold is not above the darkest.
+- Above the threshold: `0.5 + 0.5 × (brightness − threshold) / (lightest − threshold)`.
+
+So with a threshold inside the image's range, Checker and Bayer never turn its darkest color
+light or its lightest color dark, and outlines and highlights stay whole.
+
 ### Threshold
 
 - In Lines it is the minimum color difference that counts as an edge.
-- In Solid, Checker, Bayer and Atkinson it is the brightness cut-off.
+- In Cutout, Solid, Checker, Bayer and Atkinson it is the brightness cut-off.
 - Silhouette ignores it.
 
 Auto picks a value per image with Otsu's method, which splits a histogram into two groups
@@ -283,7 +309,13 @@ at the point that separates them best:
 - For the brightness styles, on the histogram of pixel brightness. Fallback 127.
 - For Lines, on the histogram of non-zero differences between horizontally and vertically
   adjacent non-empty pixels. This separates soft shading steps from real part boundaries.
-  Fallback 0.
+  The value is never below 24: an image with only soft shading has nothing to separate,
+  and without the floor its shading steps would be taken for boundaries.
+
+- For Cutout's seam strength, on the histogram of non-zero differences between adjacent
+  non-empty pixels of the same tone, with tones split at the image's Auto brightness
+  cut-off. Never below 24. It is taken at the Auto cut-off also when the threshold is set
+  by hand, so seams do not jump while the slider is dragged.
 
 A manual value applies to every image.
 
@@ -294,8 +326,9 @@ at the speed stored in the file. Frames marked with almost no delay play at 100m
 in browsers.
 
 - Every frame goes through the same conversion as a still image, and the whole animation uses
-  one Auto threshold picked from all its frames together. Picking it frame by frame would make
-  pixels flicker between the two colors as the animation plays.
+  one Auto threshold, one seam strength and one brightness range, taken from all its frames together. Taking
+  them frame by frame would make pixels flicker between the two colors as the animation
+  plays.
 - The Original / Bitified switch, hold and Space show the original animation, still playing.
 - GIF frames are often partial patches drawn over earlier frames. They are composited when
   the file is read, so each frame is held as the full picture it shows.
@@ -328,7 +361,7 @@ Vite with the `svelte` template (Svelte 5, runes, mounted with `mount()`), JavaS
 
 | File | Purpose |
 |---|---|
-| `src/lib/bitify.js` | Pure conversion, no DOM. `analyze(imageData)` returns size, pixels, brightness, whether any pixel is empty, and the two auto thresholds. `mask(analysis, style, threshold)` returns one byte per pixel (0 empty, 1 first color, 2 second color). `colorize(mask, first, second)` returns RGBA pixels. |
+| `src/lib/bitify.js` | Pure conversion, no DOM. `analyze(imageData)` returns size, pixels, brightness, whether any pixel is empty, the darkest and lightest brightness, and the auto thresholds. `mask(analysis, style, threshold)` returns one byte per pixel (0 empty, 1 first color, 2 second color). `colorize(mask, first, second)` returns RGBA pixels. |
 | `src/lib/gif.js` | Reading an animated GIF into full frames (`decodeGif`) and writing a two-color one (`encodeGif`). No DOM. |
 | `src/lib/save.js` | Output file naming, zip, PNG encoding from pixels, single save, save all. |
 | `src/App.svelte` | All state; top bar, wall, empty state, drop overlay, messages; window-level drop, paste and key handling. |
@@ -367,10 +400,15 @@ Dependencies beyond Vite and Svelte:
 - `src/lib/bitify.js` is covered by unit tests on small hand-made pixel grids:
   - empty pixels stay empty in every style;
   - Solid splits at the threshold;
-  - Checker produces a checkerboard for a mid-tone block;
+  - Checker, Bayer and Atkinson pattern a middle color, keep an image's darkest color dark
+    and its lightest light, and leave an image of one color flat;
   - Lines outlines an inner part as well as the silhouette, draws a one-pixel boundary,
-    ignores a shading step below the threshold, and frames only images that have empty
-    pixels;
+    ignores a shading step below the threshold, frames only images that have empty
+    pixels, and at Auto draws no lines along soft shading;
+  - Cutout fills a bright part and leaves a dark one dark, cuts a one-pixel seam between
+    two parts of the same tone, rims a dark part on the silhouette, keeps a dark outline
+    around a light part, never cuts a light pixel on the silhouette, and rims only images
+    that have empty pixels;
   - Silhouette fills everything;
   - Auto returns a value between two clearly separated groups.
 - `src/lib/save.js`: output naming, including duplicates.
