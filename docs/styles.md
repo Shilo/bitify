@@ -1,13 +1,16 @@
 # Conversion styles
 
-How each of Bitify's nine styles decides which of the two colors a pixel gets. The code is in
-[src/lib/bitify.js](../src/lib/bitify.js); the tests beside it pin every rule described here.
+How each of Bitify's nine styles decides which of the two colors a pixel gets, and what each
+style's own settings change. The code is in [src/lib/bitify.js](../src/lib/bitify.js); the
+tests beside it pin every rule described here. The settings are listed in
+[src/lib/settings.js](../src/lib/settings.js).
 
 ## What all styles share
 
 Every pixel ends up in one of three states:
 
-- **Empty.** The source pixel's alpha is below 128. It stays fully transparent in every style.
+- **Empty.** The source pixel's alpha is below 128, or below the style's Opacity cut where
+  that has been changed. It stays fully transparent in every style.
 - **First color.** Lines and dark pixels. This is the left swatch in the dock.
 - **Second color.** Fill and light pixels. This is the right swatch.
 
@@ -23,13 +26,15 @@ See [palettes.md](palettes.md).
 
 Two measurements are used throughout:
 
-- **Brightness** of a pixel is `0.2126 R + 0.7152 G + 0.0722 B`, rounded, from 0 to 255.
+- **Brightness** of a pixel is `0.2126 R + 0.7152 G + 0.0722 B`, rounded, from 0 to 255,
+  unless the style's Brightness setting reads it from something else.
 - **Difference** between two pixels is the largest of their red, green and blue differences,
   from 0 to 255. It is used by Lines and Cutout.
 
 ### The threshold
 
-Every style except Silhouette depends on one number from 1 to 254, the threshold.
+Every style except Silhouette depends on one number from 1 to 254, the threshold. Each
+style keeps its own.
 
 - In **Lines** it is how different two neighbouring pixels must be to count as an edge.
 - In **Cutout, Solid, Checker, Hatch, Bayer, Noise and Atkinson** it is the brightness cut-off between dark
@@ -54,7 +59,8 @@ possible, and as far apart as possible.
   never goes below 24, so an image with only soft shading gets an outline and a flat fill
   instead of lines along its shading.
 
-- Cutout also needs a **seam strength**, which is always automatic: Otsu on the differences
+- Cutout also needs a **seam strength**, which is automatic unless its Seams setting gives
+  one: Otsu on the differences
   between adjacent solid pixels of the same tone, with tones split at the image's Auto
   brightness cut-off, and never below 24. The large jumps from light to dark are left out
   because the tone split already shows them; with them in, the value comes out too high to
@@ -84,6 +90,38 @@ because it applies to all of them. For an animated GIF the darkest and lightest 
 are taken from all frames together.
 
 For the example below the darkest brightness is 25 and the lightest 240.
+
+### Settings
+
+Every style has settings of its own beyond the threshold. They are described under each
+style below. Each is remembered for each style separately, the threshold included, and at
+its default a style converts exactly as described here. Two settings are the same wherever
+they appear:
+
+- **Brightness** (every style but Lines and Silhouette): what brightness is read from.
+  **Luma** is the weighted mix above. **Value** is the largest of red, green and blue, which
+  keeps strongly colored parts light: pure blue has a luma of 18 and a value of 255. **R**,
+  **G** and **B** read one channel alone, like a colored filter over the lens: with R, red
+  parts are light and blue and green ones dark. G is close to Luma, which is mostly green.
+  The image's brightness range and its Auto values follow the choice. The difference
+  between two pixels, which Lines and Cutout's seams go by, is always of the colors.
+- **Opacity cut** (every style), 1 to 255, default 128: alpha below it is an empty pixel.
+  Lower it to keep soft edges, glows and shadows as part of the shape; raise it to trim
+  them off.
+
+Two more are shared by the styles that turn brightness into a pattern:
+
+- **Shading** (Checker, Hatch, Bayer, Noise, Atkinson), 0 to 100%, default 100%: how far
+  from the threshold a tone is still patterned. The tone becomes
+  `0.5 + (tone − 0.5) / shading`, held between 0 and 1. At 100% tones are patterned all the
+  way to the image's darkest and lightest. At 50% a tone half way there is already solid
+  dark or light, and only the tones near the threshold are patterned. At 0 nothing is,
+  which is Solid.
+- **Scale** (Checker, Hatch, Bayer, Noise), 1× to 4×: each cell of the pattern is drawn
+  that many pixels wide and high. One-pixel patterns vanish into grey on a large image;
+  a larger scale keeps them readable. On the wall, a large image is drawn smaller than it
+  is, and its pattern is drawn as coarse as it will be in the saved file, down to the
+  finest the screen can show.
 
 ### The example used below
 
@@ -169,6 +207,37 @@ Details:
 - **Threshold.** It moves the brightness cut of step 1: lower values fill more of the
   sprite, higher values leave more of it dark. It does not change the seam strength.
 
+Settings:
+
+- **Seams**, Auto or 1 to 255: the seam strength of step 2. Lower values cut along softer
+  changes, down to the steps of the shading. Higher values keep only the strongest
+  boundaries. No difference is above 255, so 255 cuts no seams at all.
+- **Rim**, On or Off: step 3. Off leaves dark parts on the silhouette without their light
+  edge. With Seams at 255 as well, Cutout is exactly Solid.
+
+Seams at 8, seams at 255, and rim off:
+
+```
+    ######           ######           ######
+   ##....##         ##....##         ##....##
+  #.#...##.#       #........#       #........#
+ #.#.######.#     #..........#     #..........#
+##..#...######   ##..........##   ##..........##
+#...#.....##.#   #............#   #............#
+#...#......#.#   #............#   #............#
+.############.   ##############   .############.
+.############.   .############.   .############.
+..##########..   .############.   #.##########.#
+ #..........#     #..........#     #..........#
+  #.##.....#       #........#       #........#
+   ##.#.###         ##....##         ##....##
+    ######           ######           ######
+```
+
+At 8 the steps of the body's shading are cut as seams. At 255 the seams at the ends of the
+stripe are gone and only the rims are left. With the rim off, the two corner pixels stay
+dark and the seams beside the stripe remain.
+
 Limits:
 
 - A flat shading step, such as a shadow drawn in one darker color, is cut like a part
@@ -253,6 +322,38 @@ Details:
 - **Threshold.** Lower values turn softer changes into lines, which brings out more detail
   and eventually picks up shading. Higher values keep only the strongest boundaries.
 
+Settings:
+
+- **Thickness**, 1 to 3: a solid pixel fewer than that many steps (left, right, up or down)
+  from a line becomes a line too. On a large image a one-pixel line is hair-thin, and this
+  gives it weight. On a small sprite it soon fills everything.
+- **Fill darks**, Off or 1 to 254: a pixel this dark or darker is first color as well, so
+  dark areas such as hair or shadow stay filled instead of becoming an outline around
+  empty fill. Thickness does not widen them.
+
+Thickness 2, and fill darks at 100:
+
+```
+    ######           ######
+   ########         ##....##
+  ###....###       #........#
+ ##........##     #..........#
+###........###   ##..........##
+##..........##   #............#
+##############   #............#
+##############   ##############
+##############   ##############
+##############   ##############
+ ############     #..........#
+  ###....###       #........#
+   ########         ##....##
+    ######           ######
+```
+
+At thickness 2 the outline is two pixels wide and the two lines of the stripe have grown
+into each other. With fill darks at 100 the stripe, which is darker than that, is filled,
+and the outline is as before.
+
 Limits:
 
 - Two neighbouring parts in nearly the same color, with no outline between them, merge.
@@ -297,6 +398,29 @@ outline, which is the image's darkest color, tone 0.
 The pattern is tied to pixel position, not to the image, so it does not shimmer between the
 frames of an animation.
 
+Settings: Shading and Scale (see "Settings" above). Shading at 50%, and scale 2×:
+
+```
+    ######           ######
+   ##....##         ##....##
+  #........#       #........#
+ #..........#     #..........#
+##..........##   ##.........###
+#............#   #..........#.#
+#............#   #...........##
+##############   ##..##..######
+##############   #.##..########
+##############   ####..########
+ #..........#     #..##..##..#
+  #.......##       #.##..##.#
+   ##....##         ##.##.##
+    ######           ######
+```
+
+At 50% the stripe and the dim part of the body are far enough from the threshold to be
+solid, and almost no checkerboard is left. At 2× the squares of the board are two pixels
+wide.
+
 ## Hatch
 
 Mid-tones drawn as diagonal lines, like pen shading. It gives four apparent tones: dark,
@@ -336,6 +460,33 @@ and 0.75 and gets thin dark lines. The outline, tone 0, stays solid.
 The lines run from the lower left to the upper right. They are tied to pixel position, not
 to the image, so they do not shimmer between the frames of an animation. They need room: on
 a part only a few pixels wide there is no line to see, and Checker reads better.
+
+Settings: Shading and Scale (see "Settings" above), and:
+
+- **Direction**, `/`, `\`, `—` or `|`: which way the lines run. `d` is then `x + y`,
+  `x − y`, `y` or `x`, each mod the spacing. `—` gives the look of scanlines.
+- **Spacing**, 3 to 6: how many pixels apart the lines are. With spacing `n` the cut-off is
+  `(n − d) / (n + 1)` for `d` from 0 to `n − 1`: a line one pixel wide at the lightest
+  patterned tone, one pixel wider at each darker one, and `n + 1` apparent tones in all.
+
+Direction `\`, direction `—`, and spacing 5:
+
+```
+    ######           ######           ######
+   ##....##         ##....##         ##....##
+  #........#       #........#       #........#
+ #..........#     #.........##     #..........#
+##..........##   ##..........##   ##.........###
+#..........#.#   #............#   #.........#..#
+#...........##   #.........####   #........#...#
+###.##.#######   ##############   ##.####.####.#
+#.##.##.######   #.......######   #.####.####.##
+#####.########   ##############   #####.####.###
+ #..#..#..#.#     #..........#     #...#....###
+  #..#..#..#       #........#       #.#....###
+   ##.#..##         ########         ##...###
+    ######           ######           ######
+```
 
 ## Bayer
 
@@ -380,6 +531,34 @@ The grid's values are arranged so that any brightness lights an evenly spread se
 positions. Like Checker, the pattern is tied to pixel position and is stable across frames.
 On very small sprites it can read as noise; it works best on larger images with gradients.
 
+Settings: Shading and Scale (see "Settings" above), and:
+
+- **Matrix**, 2, 4 or 8: the side of the grid. For side `n` the cut-off is
+  `(b + 0.5) / n²`, which gives 5, 17 or 65 apparent tones. Each quarter of a grid is the
+  grid of half its side with every number times four, plus 0, 2, 3 and 1 by quarter. The
+  2×2 grid is the coarsest and cleanest, close to Checker with two more tones. The 8×8
+  grid only shows on smooth gradients, where 17 tones would band; on a small sprite it
+  looks like the 4×4.
+
+Matrix 2 and matrix 8:
+
+```
+    ######           ######
+   ##...###         ##.#..##
+  #........#       #........#
+ #......#.#.#     #......#.#.#
+##..........##   ##..........##
+#.......#.#.##   #.#...#...#.##
+#............#   #............#
+##############   ##############
+##.#.#.#.#.#.#   ##.#.#.#.#.#.#
+##############   ##############
+ #..........#     #.......#..#
+  #.#.#.#.##       #.#.#.#.##
+   ##....##         ##..#.##
+    ######           ######
+```
+
 ## Noise
 
 Blue-noise dithering. Shading becomes an irregular scatter of pixels, like Atkinson's, but
@@ -415,6 +594,9 @@ outline, tone 0, stays solid.
 On small sprites drawn in flat colors the scatter can read as dirt, and on a still image
 Atkinson, which keeps flat areas clean, usually looks better. Noise suits larger images with
 gradients, and animations.
+
+Settings: Shading and Scale (see "Settings" above). Lower shading is what cleans the dirt
+off flat colors: at 50% only the tones near the threshold are still scattered.
 
 ## Atkinson
 
@@ -461,6 +643,36 @@ character: very dark and very light areas stay clean instead of filling with str
 The stripe is well below the threshold, so it stays almost solid, with a light pixel here
 and there. The body is above it and stays almost flat.
 
+Settings: Shading (see "Settings" above), and:
+
+- **Diffusion**, Atkinson, Floyd or Stucki: where the error goes.
+  - **Floyd** is Floyd–Steinberg. It hands on all of the error, to four neighbours: 7/16
+    to the right, then 3/16, 5/16 and 1/16 to the pixels below left, below and below
+    right. Nothing is lost, so a tone comes out exactly as light as it is, and flat areas
+    that Atkinson leaves clean pick up a fine, busy scatter.
+  - **Stucki** hands on all of the error too, over twelve neighbours in the two rows
+    below, in parts of 42: 8 and 4 to the right; 2, 4, 8, 4, 2 below; 1, 2, 4, 2, 1 below
+    that. The wider spread gives a smoother, coarser grain.
+
+Floyd and Stucki:
+
+```
+    ######           ######
+   ##....##         ##....##
+  #........#       #........#
+ #......#.#.#     #..........#
+##..........##   ##.......#.###
+#......#..#.##   #.......#....#
+#...#........#   #.........#..#
+####.#########   ##############
+######.#######   ##############
+##.#.###.#.###   ###.##.##.####
+ #..#....#..#     #..........#
+  #...#.#..#       #...#..#.#
+   ###...##         ###.#.##
+    ######           ######
+```
+
 Limits:
 
 - Each pixel depends on the ones before it, so a small change in the image or the threshold
@@ -492,6 +704,9 @@ ignored.
 
 Useful for shadows, masks and collision shapes. A fully opaque image becomes one solid
 rectangle.
+
+Its one setting is Opacity cut (see "Settings" above), which decides where a soft edge
+ends and so how large the shape is.
 
 ## Choosing between them
 

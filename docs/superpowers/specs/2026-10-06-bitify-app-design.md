@@ -29,6 +29,9 @@ Stated by the user:
 - A toggle between the original and the bitified image.
 - Swap, a palette selector, and a threshold. Threshold and an Auto button live in an
   style strip above the dock, which never covers the images.
+- Settings of its own for every style, beyond the threshold, shown where they do not cover
+  the images either, so a change can be watched while it is made (see "Each style's
+  settings").
 - The style strip offers several conversion algorithms. The default shows the
   individual parts of a sprite (body parts, clothing, equipment), in the style of the game
   End of End, and not only the silhouette. Since 2026-10-07 that default is Cutout, which
@@ -39,7 +42,7 @@ Stated by the user:
 Assumptions made here, open to correction:
 
 - Plain JavaScript, not TypeScript.
-- The two colors, the style and the threshold are remembered between visits (see
+- The two colors, the style and every style's settings are remembered between visits (see
   "Remembered settings"). Nothing else is.
 - Exports are PNG at the original pixel size, with no upscaling option.
 - Animated WebP and APNG files are converted as their first frame only. (Animated GIFs are fully supported; see "Animated GIFs".)
@@ -83,7 +86,7 @@ The tiles always use the space between the top bar and the dock, and are centere
   Short, wide screens also leave less room for the dock, since it is a single row there.
 - While a panel is open, the space the tiles use ends above the panel and not above the
   dock, and the tiles are resized to fit it, so no image is hidden while its palette, style
-  or threshold is changed. Closing the panel gives the space back. The example on the empty
+  or a setting of its style is changed. Closing the panel gives the space back. The example on the empty
   screen shrinks the same way.
 - On touch screens a long file name is cut off with an ellipsis before the Share and
   Remove buttons. Tiles narrower than 150px still show the pixel size under the name, set
@@ -132,10 +135,10 @@ as the styles are stepped through. Its tooltip and its name for screen readers s
 dock does not move when the style changes; on phones the two halves are equal. Pressing it
 shows the bitified images. It does not open the list of styles; the Style button does.
 
-Changing the style or the threshold while the original is showing switches the view back
+Changing the style or any of its settings while the original is showing switches the view back
 to bitified, so the change is seen. That holds for every route: the list of styles (also
-when the style chosen there is the current one), the threshold slider, its number box and
-Auto, and stepping the styles by wheel, swipe or arrow key. Changing a color or the palette
+when the style chosen there is the current one), a setting's slider, number box, Auto or
+buttons, Reset, and stepping the styles by wheel, swipe or arrow key. Changing a color or the palette
 leaves the view as it is.
 
 Panels open directly above the dock. Only one is open at a time. A panel closes on Escape,
@@ -195,8 +198,8 @@ or a way round, and no style favors any colors.
 | Commodore | `#40318e` | `#88d7de` |
 | Rose | `#4a0d2b` | `#ffd1dc` |
 
-**Style panel.** A strip one row high, so that the wall can sit above it. Left to
-right:
+**Style panel.** A strip one row high, so that the wall can sit above it, with the
+current style's other settings a press away. Left to right:
 
 - The word "Style", set like "Palette" in the palettes panel, then the style button: a
   live preview of the current style (a small shaded ball with a stripe, drawn with the
@@ -210,10 +213,54 @@ right:
   typing a number switches to manual; pressing Auto or clearing the box switches back.
   While Auto is on, the box shows the value Auto picked, or the range when images differ.
   The box is just wide enough for three digits, has no spinner arrows, and widens only to
-  fit a range.
+  fit a range. Silhouette has no threshold, and the strip leaves its place empty.
+- More: a button with the word "More" and a caret. It opens the tray (below). It shows a
+  small square beside the word while any of the style's settings other than the threshold
+  is away from its default, so settings that are out of sight are not out of mind.
 
 While the strip is a single row, a divider separates the style button from the threshold.
 It matches the dock's dividers.
+
+**The tray.** More opens the current style's other settings under the strip, inside the
+same panel, all at once. The panel grows upward and the wall makes room for it, as for any
+panel, so the images stay in view while a setting is changed. Pressing More again closes
+it. It stays open or closed as styles are changed, and shows the settings of whichever
+style is current. It starts closed, and whether it is open is not remembered between
+visits.
+
+- Each setting is a row: its name, then its control. A setting with a few values to choose
+  from is a row of buttons, one pressed, like the view switch. A number is a slider and a
+  number box, with an Auto button joined to the box where the setting has an Auto. They
+  work as the threshold's do: the box clamps what is typed to the setting's range, and
+  clearing it goes back to Auto. Fill darks has no Auto; its box is empty and reads "Off"
+  at 0, and clearing it turns it off. A box of a setting with neither waits for a number
+  when it is cleared, and shows the setting's value again when it loses focus.
+- The rows are two side by side. At 700px wide and below there is one to a row.
+- Under the rows, a line saying that the style keeps these settings for itself, and a Reset
+  button that puts all of the current style's settings, the threshold included, back to
+  their defaults. Reset is disabled while they are all at their defaults.
+- The tray is never taller than the window less 440px, and never shorter than one control.
+  When its rows need more than that (a short window, a phone on its side) it scrolls
+  inside itself, so the wall always keeps some room.
+
+**On a phone** (520px wide and below) there is no room for a tray with the images still in
+view: with six settings open it would leave them a strip a few dozen pixels high. So a
+phone shows one setting at a time, and the panel is two rows high for every style, the
+height it has always had there:
+
+- First row: the style button, here only its preview and caret (the view switch below
+  already names the style), then every setting of the style as a chip, the threshold
+  first. A chip shows the setting's name over its value ("Auto", "Off", "70%", "2×"), and
+  a dot after the value while that is not the default. The chips scroll sideways by swipe
+  or wheel, as the palettes do.
+- Second row: the control of the pressed chip, as wide as the row, then a Reset button (an
+  icon) that works as the tray's does.
+- The threshold's chip is pressed to begin with, so the panel opens as the strip it was.
+  Pressing a chip scrolls it into view. The pressed chip is remembered while the app is
+  open; a style that does not have that setting shows its first.
+- There is no More button and no tray.
+
+Which of the two a screen gets follows its width as the window is resized.
 
 ### The More menu
 
@@ -254,7 +301,7 @@ under reduced motion. Top to bottom:
   |---|---|---|
   | Add | Drop, paste or choose images. | Choose images. |
   | Palette | Pick two colors, or a preset. | The same. |
-  | Style | Pick effect, tune threshold. | The same. |
+  | Style | Pick effect, tune its settings. | The same. |
   | Save | Download or copy images. | The same. |
 
 - Under a divider, a table headed "Controls", with a thin line between its rows. Each row
@@ -288,7 +335,7 @@ under reduced motion. Top to bottom:
   the focus when the dialog opens.
 
 Touch means a coarse main pointer, the same test the rest of the app uses. The steps give no
-counts of styles or palettes, which change, and the help does not explain the threshold.
+counts of styles or palettes, which change, and the help does not explain the threshold or the other settings.
 
 Got it, Close, Escape and a click or tap on the dimmed app close it. A click inside it
 does not. While it is open nothing behind it reacts: presses, swipes, the wheel and the keys
@@ -300,7 +347,7 @@ all change nothing.
 |---|---|
 | Above 800px | Icon and text labels, dividers between groups. |
 | 521 to 800px | Icon-only buttons, one row. |
-| 520px and below | Tools on the first row, the view switch on a second row as wide as the tools. The dock is only as wide as its tools, centered, and is never stretched to fill the screen; it keeps at least 12px from each edge. The style panel is as wide as the dock. The palettes panel stays as wide as its chips, centered and never wider than the screen less those margins, with the name on a row of its own above the chips. The style strip takes two rows, without dividers: the style button, filling the row with its caret at the right end, then the threshold. Its list of styles is a grid three wide, three rows of three, as wide as the strip. The image count and the word "images" in the Add button are hidden. |
+| 520px and below | Tools on the first row, the view switch on a second row as wide as the tools. The dock is only as wide as its tools, centered, and is never stretched to fill the screen; it keeps at least 12px from each edge. The style panel is as wide as the dock. The palettes panel stays as wide as its chips, centered and never wider than the screen less those margins, with the name on a row of its own above the chips. The style panel takes two rows, without dividers: the style button and the chips of the style's settings, then the control of the pressed chip (see "On a phone" under "Style panel"). Its list of styles is a grid three wide, three rows of three, as wide as the strip. The image count and the word "images" in the Add button are hidden. |
 
 On coarse pointers every dock control is 40 to 44px square. The app uses
 `viewport-fit=cover`, pads for the safe-area insets, and sizes itself with dynamic
@@ -329,7 +376,7 @@ nothing to drop). The text describes the app, not the steps. The dock stays visi
 Above the heading sits the Bitify logo, a 28×28 spinning gold coin with a B
 (`src/assets/logo.gif`, an eight-frame animation), labelled "Example". It plays like any
 animated GIF on the wall. It is a live preview: it goes through the same conversion as real
-images, so the colors, Swap, palettes, style, threshold, the view switch and
+images, so the colors, Swap, palettes, style, every setting of the style, the view switch and
 hold or Space all apply to it. It is for previewing only. It has no Copy, Download or Remove, is
 not counted, and is never included in Download all. It disappears when the first image is
 added and returns when the wall is empty again.
@@ -350,7 +397,7 @@ scaffolding and are not part of the app.
 - Escape: close the open panel. If the list of styles is open, close that first. Escape also closes the Share sheet, the More menu and the help. While one of those is open, Space, the arrow keys and Ctrl+C do nothing.
 - Arrow keys: step through the styles and palettes (see "Quick switch").
 - Ctrl+C (Cmd+C on a Mac): copy the first image on the wall (see "Copying"). While text is
-  selected, or the threshold number box has focus, the keys copy that text as usual. On the
+  selected, or a number box has focus, the keys copy that text as usual. On the
   empty screen they do nothing.
 - All controls are reachable by Tab with a visible focus ring.
 
@@ -429,8 +476,9 @@ Known limits:
 
 ## Conversion
 
-Each image is analysed once when added, then converted whenever the style, threshold or
-colors change.
+Each image is analysed when added, then converted whenever the style, one of its settings
+or a color changes. It is analysed again only when the style in use reads brightness or
+opacity another way (see "Each style's settings").
 
 Every pixel ends up in one of three states:
 
@@ -481,7 +529,10 @@ draws a smaller picture of the image, at its own size:
 - The rule for the picture's size lives in `src/lib/layout.js` (`shown`) and is unit tested.
 - An animation converts a frame when it is first shown, not all frames on every change.
 
-### Drafts while the threshold slider is dragged
+### Drafts while a slider is dragged
+
+This holds for every slider of the Style panel: the threshold's and those of the other
+settings.
 
 On a slow phone a photo's tile can still take a fifth of a second to convert, which is too
 long to follow a finger on the slider. So while the slider is being dragged, an image that
@@ -505,7 +556,9 @@ let go:
 - The drag begins with the slider's first move while a pointer is pressed on it. It ends
   when the slider reports its final value, the pointer is lifted or cancelled, the slider
   loses focus, or the Style panel closes (which takes the slider away mid-drag). The arrow keys and the
-  number box set the threshold in single steps with no pointer pressed, and never draft.
+  number box set a value in single steps with no pointer pressed, and never draft. A drag
+  also ends when its slider is taken away by a change of style, by the tray closing or by
+  another chip being pressed.
 - A drag pauses when the slider has rested for 150 milliseconds with the pointer still
   pressed: the images sharpen under the resting finger, and the next move makes it a drag
   again. If the finger moves on while an image is sharpening, that move waits for it.
@@ -541,7 +594,7 @@ Details of Cutout:
   eat into the silhouette.
 - The difference between two pixels, the tie on equal brightness and the rule for the
   canvas edge are the ones Lines uses.
-- The seam strength is always automatic. The threshold only moves the brightness cut.
+- The seam strength is automatic unless the Seams setting gives one. The threshold only moves the brightness cut.
 
 Known limits of Cutout: a flat shading step, such as a shadow drawn in one darker color, is
 cut like a part boundary; a dark part two pixels wide or less becomes all rim; art that is
@@ -597,19 +650,63 @@ at the point that separates them best:
 
 A manual value applies to every image.
 
+### Each style's settings
+
+Every style has settings of its own beyond the threshold. Each is kept for each style
+separately, the threshold included: changing Hatch's threshold leaves Bayer's alone, and
+coming back to a style finds it as it was left. Every default converts exactly as the
+style did before it had settings.
+
+| Setting | Styles | Values | Default | What it does |
+|---|---|---|---|---|
+| Threshold | all but Silhouette | Auto, or 1 to 254 | Auto | See "Threshold". |
+| Seams | Cutout | Auto, or 1 to 255 | Auto | The seam strength. Lower values cut along softer changes. No difference is above 255, so 255 cuts no seams. |
+| Rim | Cutout | On, Off | On | Off leaves out the light rim on dark pixels at the silhouette. With Seams at 255 as well, Cutout is Solid. |
+| Thickness | Lines | 1, 2, 3 | 1 | A solid pixel fewer than this many steps (left, right, up or down) from a line is a line too. A step may cross an empty pixel. |
+| Fill darks | Lines | Off, or 1 to 254 | Off | A pixel this dark or darker is first color as well, so dark areas stay filled. Thickness does not widen them. |
+| Shading | Checker, Hatch, Bayer, Noise, Atkinson | 0 to 100% | 100% | How far from the threshold a tone is still patterned. The tone becomes `0.5 + (tone − 0.5) / shading`, held between 0 and 1: at 50% a tone half way to the darkest or lightest is already solid. At 0 every tone is solid, which is Solid at the same threshold. |
+| Scale | Checker, Hatch, Bayer, Noise | 1×, 2×, 3×, 4× | 1× | Each cell of the pattern is this many pixels wide and high. |
+| Direction | Hatch | `/`, `\`, `—`, `\|` | `/` | Which way the lines run. `d` in Hatch's rule is `x + y`, `x − y`, `y` or `x`, each mod the spacing. |
+| Spacing | Hatch | 3, 4, 5, 6 | 3 | How many pixels apart the lines are. With spacing `n` the cut-offs are `(n − d) / (n + 1)` for `d` from 0 to `n − 1`, which gives `n + 1` apparent tones. |
+| Matrix | Bayer | 2, 4, 8 | 4 | The side of the ordered-dither matrix. The cut-offs are `(b + 0.5) / n²`, giving 5, 17 or 65 apparent tones. Each quarter of a matrix is the matrix of half its side times four, plus 0, 2, 3 and 1. |
+| Diffusion | Atkinson | Atkinson, Floyd, Stucki | Atkinson | Where the error goes. Floyd is Floyd–Steinberg: 7/16 right, then 3/16, 5/16 and 1/16 below left, below and below right. Stucki spreads over twelve pixels in the two rows below, in parts of 42: 8 and 4 to the right; 2, 4, 8, 4, 2 below; 1, 2, 4, 2, 1 below that. Both hand on all of the error, where Atkinson drops a quarter. |
+| Brightness | all but Lines and Silhouette | Luma, Value, R, G, B | Luma | What brightness is read from: the weighted mix given under "Conversion", the largest of red, green and blue, or one channel alone. The brightness range and the Auto values follow it. Differences between neighbouring pixels, which seams go by, are of the colors and do not change. |
+| Opacity cut | all | 1 to 255 | 128 | Alpha below this is an empty pixel. |
+
+- Brightness and Opacity cut change what the analysis finds, so every image is analysed
+  again when they change, by the setting itself or by a change to a style that has other
+  values for them. That reads every pixel of every image. While a slider is being dragged
+  over a wall holding more than a million pixels in all, it waits until the slider rests
+  or is let go, and the images follow then.
+- In a picture smaller than its image (see "Images larger than their tile"), Scale
+  shrinks with the picture: it is the setting times the picture's width over the image's,
+  rounded, and at least 1. So the tile shows the pattern as coarse as the saved file has
+  it, down to the finest the screen can show. A pattern finer than that looks the same
+  on the tile at every scale, though the saved files differ.
+- Thickness, Fill darks, Seams and Rim give each pixel of a smaller picture exactly what
+  its image pixel is in the full conversion, as Lines and Cutout always do.
+- The style previews on the style button and in the list of styles use each style's own
+  settings.
+- Settings are defined in `src/lib/settings.js`: `SETTINGS` describes each, and
+  `STYLE_SETTINGS` lists each style's in the order they are shown.
+
 ## Remembered settings
 
-The two colors, the style and the threshold are saved in the browser on every change and
+The two colors, the style and every style's settings are saved in the browser on every change and
 restored when the app opens. Nothing leaves the device.
 
 - The colors are saved as they are, so a chosen palette, a swap and a custom color all come
   back. A palette is not saved by name; it shows as chosen because its colors match.
-- The threshold is saved as a number, or as Auto.
-- The view switch, the open panel and the images are not saved.
+- Each style's settings are saved under the style's name, the threshold among them, as a
+  number or as Auto.
+- The view switch, the open panel, whether the tray is open and the images are not saved.
 - They are stored as one JSON value under the `localStorage` key `bitify`. On the way back
   each value is checked on its own: a color must be `#rrggbb`, the style one of the nine,
-  the threshold a whole number from 1 to 254. Anything else falls back to its default
-  (Glow dark first, Cutout, Auto), so a damaged or outdated value cannot break the app.
+  and each setting of each style one of its options or a whole number in its range (see
+  "Each style's settings"). Anything else falls back to its default (Glow dark first,
+  Cutout, and the defaults in that table), so a damaged or outdated value cannot break the
+  app. What was stored before styles had settings held one threshold for all styles; it is
+  not carried over, and every style starts at Auto.
 - If the browser refuses storage, the app works as before and starts from the defaults.
 - A visit that finds nothing stored is a first visit, and opens the welcome (see "Help and
   welcome"). No separate record of having seen it is kept.
@@ -621,7 +718,7 @@ at the speed stored in the file. Frames marked with almost no delay play at 100m
 in browsers.
 
 - Every frame goes through the same conversion as a still image, and the whole animation uses
-  one Auto threshold, one seam strength and one brightness range, taken from all its frames together. Taking
+  one Auto threshold, one Auto seam strength and one brightness range, taken from all its frames together. Taking
   them frame by frame would make pixels flicker between the two colors as the animation
   plays.
 - The view switch, hold and Space show the original animation, still playing.
@@ -646,7 +743,7 @@ in browsers.
   Download all puts GIFs and PNGs in the same zip.
 - Saving always uses the bitified version, whatever the wall is showing.
 - What is saved or copied is what was asked for: the images that were on the wall and the
-  colors, style and threshold that were set at the click or key press. A long job starts a
+  colors, style and settings that were set at the click or key press. A long job starts a
   moment later (see "Long jobs"), and a change made in that moment does not reach it.
 - PNG files are encoded directly from the conversion, not through a canvas. Some browsers
   (Brave, Safari private browsing, Firefox strict mode) add noise when a page reads a
@@ -707,23 +804,23 @@ Vite with the `svelte` template (Svelte 5, runes, mounted with `mount()`), JavaS
 
 | File | Purpose |
 |---|---|
-| `src/lib/bitify.js` | Pure conversion, no DOM. `analyze(imageData)` returns size, pixels, brightness, each pixel's difference from the pixel to its right and from the one below, whether any pixel is empty, the darkest and lightest brightness, and the auto thresholds. `mask(analysis, style, threshold, width, height)` returns one byte per pixel (0 empty, 1 first color, 2 second color), for the whole image or, given a smaller width and height, for a picture of it that size. `shrink(imageData, width, height)` returns the pixels of the original that such a picture stands on. `colorize(mask, first, second)` returns RGBA pixels. |
+| `src/lib/bitify.js` | Pure conversion, no DOM. `analyze(imageData)` returns size, pixels, brightness, each pixel's difference from the pixel to its right and from the one below, whether any pixel is empty, the darkest and lightest brightness, and the auto thresholds; it takes what brightness is read from and the opacity cut. `mask(analysis, style, settings, width, height)` returns one byte per pixel (0 empty, 1 first color, 2 second color), for the whole image or, given a smaller width and height, for a picture of it that size. `shrink(imageData, width, height)` returns the pixels of the original that such a picture stands on. `colorize(mask, first, second)` returns RGBA pixels. |
 | `src/lib/gif.js` | Reading an animated GIF into full frames (`decodeGif`) and writing a two-color one (`encodeGif`). No DOM. |
 | `src/lib/save.js` | Output file naming, zip, PNG encoding from a mask and the two colors, single save, save all, copy to the clipboard. |
-| `src/lib/settings.js` | The default settings, and `restore(text, styles)`, which reads stored settings back and checks each value. No DOM. |
+| `src/lib/settings.js` | Every setting a style can have and which each style has, their defaults, and `restore(text, styles)`, which reads what was stored back and checks each value. No DOM. |
 | `src/lib/presets.js` | The list of palettes and the list of styles, whether two colors are a palette's, and stepping to the next or previous style or palette. No DOM. |
-| `src/lib/gesture.js` | `wheelSteps()`, which turns the stream of wheel moves from a mouse or trackpad into single steps, and `sliderDrag()`, which says when the threshold slider is being dragged and when it has come to rest. No DOM. |
+| `src/lib/gesture.js` | `wheelSteps()`, which turns the stream of wheel moves from a mouse or trackpad into single steps, and `sliderDrag()`, which says when a slider of the Style panel is being dragged and when it has come to rest. No DOM. |
 | `src/App.svelte` | All state; top bar, wall, empty state, drop overlay, the Share sheet, messages; window-level drop, paste, key, wheel and swipe handling. |
 | `src/Tile.svelte` | One image: canvas, caption, Copy, Download and Remove (Share and Remove on touch screens), hold to compare. Measures itself to pick the size of the picture it draws (see "Images larger than their tile"). |
-| `src/Dock.svelte` | The dock and its two panels. |
+| `src/Dock.svelte` | The dock and its two panels, with the tray and the chips of the style's settings. |
 | `src/Pixels.svelte` | A canvas that shows a block of pixels; used by tiles and by the style previews. |
 | `src/PixelIcon.svelte` | Renders a 7×7 glyph from a row-string map. |
 | `src/app.css` | Every style rule, carried over from the prototype: color and type tokens for light and dark, and all component styles. Components have no style blocks of their own. |
 
-State is a handful of `$state` values in `App.svelte`: the two colors, style, threshold
-(`null` means Auto), which version the wall shows, the open panel, and the list of images.
+State is a handful of `$state` values in `App.svelte`: the two colors, style, each style's
+settings (a threshold of `null` means Auto), which version the wall shows, the open panel, and the list of images.
 Each image holds an id, its name, its original pixels and its analysis. A tile derives its
-mask from the image, style, threshold and the size of its picture, and repaints its canvas when the mask or either
+mask from the image, style, the style's settings and the size of its picture, and repaints its canvas when the mask or either
 color changes. That keeps a color drag cheap: the mask is reused and only the two-color
 fill is redone. Masks and colored pixels are made for a frame when it is first shown and
 kept until what they depend on changes.
@@ -761,9 +858,10 @@ it is doing:
 - If saving or copying fails, a message says so. Nothing else is lost.
 - Conversion runs on the main thread. A change costs about as many pixels as the screen
   shows, however large the images are (see "Images larger than their tile"), so it stays
-  quick on a phone, and a drag of the threshold slider is kept quick by drafts (see "Drafts
-  while the threshold slider is dragged"). What still reads every pixel of a photo, and so
-  pauses the page for a moment on a slow phone, is adding it and saving or copying it. A
+  quick on a phone, and a drag of a slider is kept quick by drafts (see "Drafts
+  while a slider is dragged"). What still reads every pixel of a photo, and so
+  pauses the page for a moment on a slow phone, is adding it, saving or copying it, and
+  changing Brightness or Opacity cut, which analyses it again with no message. A
   message says so meanwhile (see "Long jobs"). Moving those to a worker is the upgrade path
   if that ever matters.
 - A tile's picture is a sample of a larger image, not an average of it. An image with a
@@ -784,6 +882,10 @@ it is doing:
 - `src/lib/bitify.js` is covered by unit tests on small hand-made pixel grids:
   - empty pixels stay empty in every style;
   - Solid splits at the threshold;
+  - every setting at its default, given or left out, converts as before; each setting does
+    what "Each style's settings" says, on grids small enough to write out; Lines and Cutout
+    with settings give a smaller picture what the full conversion has; Scale shrinks with
+    a smaller picture;
   - Checker, Hatch, Bayer, Noise and Atkinson pattern a middle color, keep an image's darkest color dark
     and its lightest light, leave an image of one color flat, and at Auto keep both shades
     of a two-shade outline dark;
@@ -826,7 +928,9 @@ it is doing:
   ends; the rest counted from the end of a redraw; no timer started if the drag ended
   during one.
 - The interface is checked by hand in a desktop browser and at phone width: add by drop,
-  picker and paste; remove one and all; change colors, palette, style and threshold;
+  picker and paste; remove one and all; change colors, palette, style and threshold; open
+  the tray and change every setting of every style, and Reset; at phone width press every
+  chip and use its control; see that a style comes back as it was left, and after a reload;
   compare by switch, hold and Space; with a large photo and the processor slowed down in the
   browser's developer tools, drag the threshold slider and see the image follow as a rougher
   draft, sharpen when the finger rests and again on release; add, save and copy a large
@@ -844,7 +948,9 @@ it is doing:
 
 - Remembering the view switch or the images between visits.
 - Export upscaling, or formats other than PNG.
-- Per-image settings; style, threshold and colors apply to the whole wall.
+- Per-image settings; the style, its settings and the colors apply to the whole wall.
+- Settings shared between styles: each style keeps its own, so a threshold set in one is
+  not carried to the next.
 - Custom user palettes.
 - Animation in formats other than GIF (animated WebP, APNG): only the first frame is used.
 - Pausing or scrubbing an animation, and changing its speed.
