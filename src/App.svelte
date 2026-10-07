@@ -77,6 +77,10 @@
   // On touch screens a tile's Share button opens a sheet with Copy and Download for that image.
   let sheet, more, help; // the dialogs: the Share sheet, the More menu and the help
   let shared = $state.raw(null); // the image the sheet is for; it stays set after the sheet closes, until the next one
+  // But not once that image is removed, or the sheet would go on holding all of a photo's pixels.
+  $effect(() => {
+    if (shared && !items.includes(shared)) shared = null;
+  });
   // The browser's offer to install Bitify as an app. It comes only where that can be done and is
   // not done yet, and can be taken up once; the More menu shows Install while one is held.
   let installOffer = $state.raw(null);
