@@ -1,3 +1,5 @@
+<img src=".github/logo.png" width="128" alt="Bitify logo">
+
 # Bitify
 
 Convert pixel art to 1-bit: every image is redrawn in two colors you pick. Runs entirely in the browser; nothing is uploaded.
