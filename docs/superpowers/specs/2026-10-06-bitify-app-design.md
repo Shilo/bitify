@@ -147,8 +147,9 @@ right:
 
 - Style button: a live preview of the current style (a small shaded ball with a stripe,
   drawn with the current two colors), the word "Style" and the style's name. Pressing it
-  opens the list of the six styles above the strip, each with the same live preview and its
-  name, in one row of six. Choosing a style closes the list. So does a press outside it, or
+  opens the list of the seven styles above the strip, each with the same live preview and
+  its name, in one row of seven. Choosing a style closes the list. So does a press outside
+  it, or
   Escape, which then leaves the strip open.
 - Threshold: a slider from 1 to 254, then a number box and an Auto button joined into one
   outlined control, so it is clear that Auto fills in the number. The Auto half is filled
@@ -172,7 +173,7 @@ and another separates the threshold from Help. They match the dock's dividers.
 |---|---|
 | Above 800px | Icon and text labels, dividers between groups. |
 | 521 to 800px | Icon-only buttons, one row. |
-| 520px and below | Dock spans the screen width with 12px margins. Tools on the first row, the Original / Bitified switch on its own full-width second row. Panels become full-width sheets above it. The advanced strip takes two rows, without dividers: the style button and Help, then the threshold. Its list of styles is a 3×2 grid as wide as the strip. The image count and the word "images" in the Add button are hidden. |
+| 520px and below | Dock spans the screen width with 12px margins. Tools on the first row, the Original / Bitified switch on its own full-width second row. Panels become full-width sheets above it. The advanced strip takes two rows, without dividers: the style button and Help, then the threshold. Its list of styles is a grid four wide, as wide as the strip. The image count and the word "images" in the Add button are hidden. |
 
 On coarse pointers every dock control is 40 to 44px square. The app uses
 `viewport-fit=cover`, pads for the safe-area insets, and sizes itself with dynamic
@@ -234,8 +235,8 @@ Output pixels are fully opaque or fully transparent. Brightness of a pixel is
 
 | Style | Rule |
 |---|---|
-| **Cutout** | A pixel brighter than the threshold is light, every other pixel dark. Then, using those tones: a pixel on the darker side of a change stronger than the seam strength, between two pixels of the same tone, takes the opposite tone; and a dark pixel that touches empty space, with no light pixel among its eight neighbours, becomes light. Dark is first color, light is second. |
-| **Lines** (default) | A pixel is first color if any of its four neighbours is empty, or if a neighbour differs from it by more than the threshold and this pixel is the darker of the two. Everything else is second color. |
+| **Cutout** (default) | A pixel brighter than the threshold is light, every other pixel dark. Then, using those tones: a pixel on the darker side of a change stronger than the seam strength, between two pixels of the same tone, takes the opposite tone; and a dark pixel that touches empty space, with no light pixel among its eight neighbours, becomes light. Dark is first color, light is second. |
+| **Lines** | A pixel is first color if any of its four neighbours is empty, or if a neighbour differs from it by more than the threshold and this pixel is the darker of the two. Everything else is second color. |
 | **Solid** | Brighter than the threshold: second color. Otherwise first color. |
 | **Checker** | Second color if the tone (see below) is above 0.25 on even `x + y` cells and above 0.75 on odd ones, so mid-tones become a checkerboard. |
 | **Bayer** | Second color if the tone is above `(b + 0.5) / 16`, where `b` is the value of a 4×4 ordered-dither matrix at the pixel. |

@@ -12,7 +12,7 @@
 
   let first = $state('#222323'); // lines and dark pixels
   let second = $state('#f0f6f0'); // fill and light pixels
-  let style = $state('lines');
+  let style = $state('cutout');
   let threshold = $state(null); // null means Auto
   let showOriginal = $state(false);
   let spaceHeld = $state(false);

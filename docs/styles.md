@@ -105,7 +105,7 @@ Auto, which for this image is 81 for brightness, 52 for Lines and 24 for Cutout'
 
 ## Cutout
 
-Filled shapes with their parts cut apart, after the game End of End. Bright parts are
+The default. Filled shapes with their parts cut apart, after the game End of End. Bright parts are
 filled, dark parts are left dark, and what separates two parts of the same tone is a thin
 cut in the other tone. No outline is drawn around a light part.
 
@@ -166,7 +166,7 @@ Limits:
 
 ## Lines
 
-The default. It draws an outline around every part of a sprite, not only around its
+It draws an outline around every part of a sprite, not only around its
 silhouette, and fills everything else flat.
 
 A solid pixel becomes the first color (a line) if either of these is true for any of its
