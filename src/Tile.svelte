@@ -7,12 +7,20 @@
   // Without `onremove` the tile is a preview only and has no Download or Remove buttons.
   let { item, first, second, style, threshold, flipped, onsave, onremove } = $props();
   let held = $state(false);
-  let holdTimer;
+  let holdTimer, downX = 0, downY = 0;
 
-  // A touch may be the start of a scroll, so it only counts as a hold after a short wait.
+  // A touch may be the start of a scroll or a swipe, so it only counts as a hold after a short
+  // wait, and not at all if the finger has moved by then.
   function press(e) {
     if (e.pointerType === 'mouse') held = true;
-    else holdTimer = setTimeout(() => (held = true), 150);
+    else {
+      downX = e.clientX;
+      downY = e.clientY;
+      holdTimer = setTimeout(() => (held = true), 150);
+    }
+  }
+  function move(e) {
+    if (!held && Math.hypot(e.clientX - downX, e.clientY - downY) > 8) clearTimeout(holdTimer);
   }
   function release() {
     clearTimeout(holdTimer);
@@ -39,8 +47,10 @@
 <figure class="tile">
   <div
     class="art"
+    class:held
     role="presentation"
     onpointerdown={press}
+    onpointermove={move}
     onpointerup={release}
     onpointerleave={release}
     onpointercancel={release}

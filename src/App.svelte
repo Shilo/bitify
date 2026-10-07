@@ -4,7 +4,10 @@
   import { saveOne, saveAll } from './lib/save.js';
   import { fitGrid } from './lib/layout.js';
   import { restore } from './lib/settings.js';
-  import Dock, { STYLES } from './Dock.svelte';
+  import { STYLES, inOrder, stepStyle, stepPalette } from './lib/presets.js';
+  import { wheelSteps } from './lib/gesture.js';
+  import { on } from 'svelte/events';
+  import Dock from './Dock.svelte';
   import Tile from './Tile.svelte';
   import PixelIcon from './PixelIcon.svelte';
   import logoUrl from './assets/logo.png';
@@ -73,11 +76,88 @@
     return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05) >= 2.5 ? first : b > 0.4 ? '#000000' : '#ffffff';
   });
 
-  function say(text) {
+  function say(text, time = 3200) {
     message = text;
     clearTimeout(messageTimer);
-    messageTimer = setTimeout(() => (message = ''), 3200);
+    messageTimer = setTimeout(() => (message = ''), time);
   }
+
+  // Quick switch: scrolling, swiping or an arrow key steps to the next style, or the next
+  // palette, and a message names it. `dir` is 1 for the next and -1 for the one before.
+  let custom; // the user's own two colors, kept as a stop among the palettes (see stepPalette)
+  function step(palettes, dir) {
+    let name, at, of;
+    if (palettes) {
+      let palette;
+      ({ palette, at, of, custom } = stepPalette(first, second, dir, custom));
+      [first, second] = inOrder(palette, first, second);
+      name = palette.name;
+    } else {
+      at = stepStyle(style, dir);
+      of = STYLES.length;
+      [style, name] = STYLES[at];
+    }
+    say(`${palettes ? 'Palette' : 'Style'}: ${name} · ${at + 1}/${of}`, 1400);
+  }
+
+  // Whether `el`, or something it is inside, has more content than it shows, so that a wheel
+  // or a finger there scrolls it. `axis` is 'x' or 'y'; without one, either counts.
+  function scrolls(el, axis) {
+    for (; el instanceof Element; el = el.parentElement) {
+      const { overflowX, overflowY } = getComputedStyle(el);
+      if (axis !== 'x' && el.scrollHeight > el.clientHeight + 1 && /auto|scroll/.test(overflowY)) return true;
+      if (axis !== 'y' && el.scrollWidth > el.clientWidth + 1 && /auto|scroll/.test(overflowX)) return true;
+    }
+    return false;
+  }
+
+  // The wheel steps the styles wherever it has nothing to scroll. Sideways, with Shift or with
+  // Ctrl it steps the palettes; Ctrl does so everywhere, since Ctrl and the wheel never scroll.
+  // A trackpad pinch also arrives as a wheel event marked Ctrl, with no key pressed. That one is
+  // left to the browser, which zooms the page, so Ctrl only counts once the keyboard has said so.
+  let ctrlHeld = false;
+  const wheelStep = wheelSteps();
+  function wheel(e) {
+    // If the browser will not let a Ctrl move be stopped it is about to zoom, and one effect is enough.
+    if (e.ctrlKey ? !ctrlHeld || !e.cancelable : scrolls(e.target)) return;
+    e.preventDefault(); // or Ctrl and the wheel would zoom the page
+    const sideways = Math.abs(e.deltaX) > Math.abs(e.deltaY);
+    const dir = wheelStep((sideways ? e.deltaX : e.deltaY) * (e.deltaMode ? 40 : 1), e.timeStamp);
+    if (dir) step(e.ctrlKey || e.shiftKey || sideways, dir);
+  }
+
+  // One finger steps the styles by moving up or down and the palettes by moving sideways,
+  // wherever the page does not scroll that way: first after 32px, then every 72px.
+  let swipe = null; // where the finger was at its last step, and its axis once it has one
+  function touchstart(e) {
+    const { clientX: x, clientY: y } = e.touches[0];
+    // Two fingers are a pinch, a slider or a color picker keeps its own drag, and a press that
+    // has just closed a panel (the Dock stops that one) does nothing else.
+    swipe = e.touches.length === 1 && !e.defaultPrevented && !e.target.closest('input') ? { x, y } : null;
+  }
+  function touchmove(e) {
+    if (!swipe) return;
+    const { clientX: x, clientY: y } = e.touches[0], dx = x - swipe.x, dy = y - swipe.y;
+    if (!swipe.axis) {
+      // The first move settles whose gesture this is: the page's if it scrolls that way here,
+      // the tile's if it is already held to compare, and ours otherwise.
+      const axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+      if (!e.cancelable || scrolls(e.target, axis) || e.target.closest('.held')) return (swipe = null);
+      swipe.axis = axis;
+    }
+    e.preventDefault(); // ours, so the browser neither scrolls nor pulls to refresh
+    const moved = swipe.axis === 'x' ? dx : dy;
+    if (Math.abs(moved) < (swipe.went ? 72 : 32)) return;
+    step(swipe.axis === 'x', moved < 0 ? 1 : -1);
+    Object.assign(swipe, { x, y, went: true });
+  }
+
+  // These two have to stop the browser's own scroll and zoom, which listeners set on
+  // <svelte:window> cannot: the browser treats those as passive.
+  $effect(() => {
+    const off = [on(window, 'wheel', wheel, { passive: false }), on(window, 'touchmove', touchmove, { passive: false })];
+    return () => off.forEach(stop => stop());
+  });
 
   // Reads a file into frames: one for a still image, several for an animated GIF.
   async function decode(file) {
@@ -185,10 +265,20 @@
   function unfocus(e) {
     if (e.detail > 0) e.target.closest?.('button')?.blur();
   }
+  // The arrow keys step like the wheel and a finger: up and down the styles, sideways the palettes.
+  const ARROWS = { ArrowDown: ['y', 1], ArrowUp: ['y', -1], ArrowRight: ['x', 1], ArrowLeft: ['x', -1] };
   function keydown(e) {
+    if (e.key === 'Control') ctrlHeld = true;
     if (e.code === 'Space' && !onControl(e)) { e.preventDefault(); spaceHeld = true; }
+    const [axis, dir] = (!e.ctrlKey && !e.metaKey && !e.altKey && !e.shiftKey && ARROWS[e.key]) || [];
+    // an arrow keeps its own job in a text box, on a slider, and where it scrolls
+    if (axis && !e.target.matches?.('input, select, textarea') && !scrolls(e.target, axis)) {
+      e.preventDefault();
+      step(axis === 'x', dir);
+    }
   }
   function keyup(e) {
+    if (e.key === 'Control') ctrlHeld = false;
     if (e.code === 'Space') spaceHeld = false;
   }
 </script>
@@ -201,8 +291,9 @@
   onpaste={paste}
   onkeydown={keydown}
   onkeyup={keyup}
+  ontouchstart={touchstart}
   onclick={unfocus}
-  onblur={() => { dragDepth = 0; spaceHeld = false; }}
+  onblur={() => { dragDepth = 0; spaceHeld = false; ctrlHeld = false; }}
 />
 
 <header class="bar">

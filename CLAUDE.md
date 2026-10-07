@@ -4,7 +4,7 @@ Bitify is a browser-only tool that redraws pixel art in exactly two colors the u
 
 ## What it does
 
-The screen is a wall of image tiles with one floating dock of controls. Images are added by drop, file picker or paste. Changing a color, palette, style or threshold redraws every image at once. There are nine styles; the default, Cutout, fills the bright parts of a sprite and cuts its parts apart, in the style of the game End of End. The threshold is Auto (picked per image) or manual. The original can be compared by a switch, by holding a tile, or by holding Space. Stills save as PNG; animated GIFs play on the wall and save as GIF; Download all makes a zip. Tiles resize to fill the space between the top bar and the dock. The empty screen shows the logo as a live example of the current settings. It has to work on desktop, iOS and Android.
+The screen is a wall of image tiles with one floating dock of controls. Images are added by drop, file picker or paste. Changing a color, palette, style or threshold redraws every image at once. There are nine styles; the default, Cutout, fills the bright parts of a sprite and cuts its parts apart, in the style of the game End of End. The threshold is Auto (picked per image) or manual. The original can be compared by a switch, by holding a tile, or by holding Space. Scrolling, swiping up or down, or the up and down arrow keys step through the styles from anywhere that does not itself scroll; Ctrl with the wheel, a sideways swipe, or the left and right arrow keys step through the palettes. Stills save as PNG; animated GIFs play on the wall and save as GIF; Download all makes a zip. Tiles resize to fill the space between the top bar and the dock. The empty screen shows the logo as a live example of the current settings. It has to work on desktop, iOS and Android.
 
 Read docs/superpowers/specs/2026-10-06-bitify-app-design.md before changing behavior. It is the source of truth for the rules above, including the exact conversion and layout rules. Update it in the same change as the code.
 
@@ -24,7 +24,7 @@ Every push to main deploys to GitHub Pages (.github/workflows/deploy.yml).
 
 Svelte 5 with runes, plain JavaScript, no SvelteKit.
 
-src/lib holds the logic as DOM-free modules, each with unit tests: bitify.js turns pixels into a one-byte-per-pixel mask and the mask into two-color pixels, layout.js sizes the tiles, gif.js reads and writes GIFs (loaded on demand), save.js encodes PNGs, names files and builds the zip.
+src/lib holds the logic as DOM-free modules, each with unit tests: bitify.js turns pixels into a one-byte-per-pixel mask and the mask into two-color pixels, layout.js sizes the tiles, presets.js lists the palettes and styles and steps through them, gesture.js turns wheel moves into single steps, gif.js reads and writes GIFs (loaded on demand), save.js encodes PNGs, names files and builds the zip.
 
 App.svelte owns all state and passes it down. Dock.svelte edits settings through bindable props. Tile.svelte derives masks from an image and repaints when they or a color change.
 

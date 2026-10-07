@@ -1,7 +1,7 @@
 # Palettes
 
 The twelve preset palettes in Bitify's Palettes panel. Each is a pair of colors. They are
-defined in the `PRESETS` list at the top of [src/Dock.svelte](../src/Dock.svelte).
+defined in the `PRESETS` list at the top of [src/lib/presets.js](../src/lib/presets.js).
 
 ## What a palette is
 
@@ -116,11 +116,13 @@ the eye.
   on Escape, on a second press of its button, or on a press outside the dock.
 - The two colors are remembered between visits, so the app opens on the palette you last
   used, the way round you left it. The first time, it opens on Glow, dark first.
-- There are no custom palettes; the list is fixed.
+- There are no custom palettes; the list is fixed. Two colors of your own are kept as one more stop, named
+  "Custom", while you step through the palettes by wheel, swipe or arrow key, until the page
+  is closed.
 
 ## Adding or changing one
 
-Edit the `PRESETS` list in `src/Dock.svelte`. Each entry is a name, a dark color and a
+Edit the `PRESETS` list in `src/lib/presets.js`. Each entry is a name, a dark color and a
 light color, as lowercase `#rrggbb`:
 
 ```js

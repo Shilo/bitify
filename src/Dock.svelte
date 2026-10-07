@@ -1,32 +1,6 @@
 <script module>
-  import { mask, colorize, brightness, previewBall } from './lib/bitify.js';
-
-  // A palette is two colors and nothing else. Which one is the first color is up to Swap.
-  const PRESETS = [
-    { name: 'Glow', dark: '#222323', light: '#f0f6f0' },
-    { name: 'Mono', dark: '#000000', light: '#ffffff' },
-    { name: 'Paper', dark: '#382b26', light: '#b8c2b9' },
-    { name: 'Torch', dark: '#0b0a0c', light: '#f6dfa4' },
-    { name: 'Game Boy', dark: '#0f380f', light: '#9bbc0f' },
-    { name: 'Pocket', dark: '#1f1f1f', light: '#c4cfa1' },
-    { name: 'Nokia', dark: '#43523d', light: '#c7f0d8' },
-    { name: 'Playdate', dark: '#322f29', light: '#d7d4cc' },
-    { name: 'Phosphor', dark: '#25342f', light: '#01eb5f' },
-    { name: 'Amber', dark: '#3f291e', light: '#fdca55' },
-    { name: 'Commodore', dark: '#40318e', light: '#88d7de' },
-    { name: 'Rose', dark: '#4a0d2b', light: '#ffd1dc' },
-  ];
-  export const STYLES = [
-    ['cutout', 'Cutout'],
-    ['lines', 'Lines'],
-    ['solid', 'Solid'],
-    ['checker', 'Checker'],
-    ['hatch', 'Hatch'],
-    ['bayer', 'Bayer'],
-    ['noise', 'Noise'],
-    ['atkinson', 'Atkinson'],
-    ['silhouette', 'Silhouette'],
-  ];
+  import { mask, colorize, previewBall } from './lib/bitify.js';
+  import { PRESETS, STYLES, isPalette, inOrder } from './lib/presets.js';
 
   const BALL = previewBall(); // previews each style
 </script>
@@ -84,11 +58,9 @@
 
   // A palette matches the current colors either way round, and choosing one keeps them the
   // way round they are: dark first, unless Swap has put the lighter color first.
-  const chosen = p => (first === p.dark && second === p.light) || (first === p.light && second === p.dark);
+  const chosen = p => isPalette(p, first, second);
   function choose(p) {
-    const swapped = brightness(first) > brightness(second);
-    first = swapped ? p.light : p.dark;
-    second = swapped ? p.dark : p.light;
+    [first, second] = inOrder(p, first, second);
   }
   // The palettes scroll sideways. They open scrolled to the chosen one, and the panel is marked
   // with the sides that have more to scroll to, which app.css shows as a fade with an arrow.
@@ -229,6 +201,13 @@
                 <b>Hold</b> an image, or hold <kbd>Space</kbd>, to see the other version.
               {/if}
             </p>
+            {#if touch}
+              <p><b>Swipe up or down</b> to change the style.</p>
+              <p><b>Swipe left or right</b> to change the palette.</p>
+            {:else}
+              <p><b>Scroll</b> to change the style.</p>
+              <p><b>Hold <kbd>Ctrl</kbd> and scroll</b> to change the palette.</p>
+            {/if}
           </div>
         {/if}
         <button class="btn sm" aria-expanded={pop === 'help'} aria-describedby="help" aria-label="Help" title="Help" onclick={() => (pop = pop === 'help' ? null : 'help')}>?</button>

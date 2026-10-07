@@ -96,7 +96,8 @@ The rule lives in `src/lib/layout.js` (`fitGrid`) and is unit tested.
   visible, 40px square.
 - Holding a tile shows its other version (original if the wall shows bitified, and the
   reverse) until release. With a mouse this is instant. On touch a press counts as a hold
-  after 150 ms, so scrolling the wall does not flash tiles.
+  after 150 ms, and only if the finger has moved less than 8px by then, so scrolling the
+  wall or swiping (see "Quick switch") does not flash tiles.
 
 ### Dock, left to right
 
@@ -184,9 +185,13 @@ right:
   The box is just wide enough for three digits, has no spinner arrows, and widens only to
   fit a range.
 - Help button ("?"): opens a tooltip above the strip, with its arrow over the button. It
-  has two lines in the body text size: what the threshold currently does, then how to hold
-  an image to compare. The threshold value and the word "Hold" are bold, and Space is drawn
-  as a key. It closes
+  has four lines in the body text size: what the threshold currently does, how to hold
+  an image to compare, how to change the style without the panels ("Scroll to change the
+  style."; on touch devices "Swipe up or down to change the style."), and the same for the
+  palette ("Hold Ctrl and scroll to change the palette."; on touch devices "Swipe left or
+  right to change the palette."). The threshold value and the word "Hold" are bold. In the
+  last two lines the whole gesture is bold: "Scroll", "Hold Ctrl and scroll", "Swipe up or
+  down", "Swipe left or right". Space and Ctrl are drawn as keys. It closes
   the same ways the list of styles does, and only one of the two is open at a time.
 
 While the strip is a single row, a divider separates the style button from the threshold,
@@ -240,7 +245,76 @@ scaffolding and are not part of the app.
   with a mouse or finger does not keep focus, so Space still compares afterwards; a button
   reached with Tab keeps the normal behavior, where Space presses it.
 - Escape: close the open panel. If the list of styles or the help tooltip is open, close that first.
+- Arrow keys: step through the styles and palettes (see "Quick switch").
 - All controls are reachable by Tab with a visible focus ring.
+
+### Quick switch
+
+The style and the palette can be changed from anywhere, without opening a panel. The style
+is the main one, on the up-and-down axis; the palette is on the sideways axis.
+
+| | Next or previous style | Next or previous palette |
+|---|---|---|
+| Mouse wheel or trackpad | Scroll down or up | Hold Ctrl and scroll. Scrolling sideways, or with Shift, does the same. |
+| Touch | Swipe up or down | Swipe left or right |
+| Keyboard | ↓ or ↑ | → or ← |
+
+Scrolling down, swiping up or left, and ↓ or → go to the next one; the opposite goes to the
+one before. Both lists wrap round at their ends. The styles go in the order of the list of
+styles, the palettes in the order of the palettes panel.
+
+Each step shows a short message under the top bar for 1.4 seconds, with what changed, its
+name and its place: "Style: Bayer · 6/9", "Palette: Game Boy · 5/12".
+
+**Nothing that scrolls is taken over.** Before acting, the app looks at what is under the
+pointer or finger, and at everything that contains it:
+
+- If any of it has more content than it shows, the wheel belongs to it and no step is
+  taken. That covers the wall once it has too many images to fit, the empty screen on a
+  very short window, and the palettes panel while its chips scroll. The wheel never goes
+  on to change the style when such an element reaches its end.
+- A finger is judged on the axis it first moves along. Moving up or down over a wall that
+  scrolls is the wall's own scroll; moving sideways there still steps the palettes, since
+  the wall does not scroll that way. Over the palettes panel while its chips scroll it is
+  the other way round.
+- An arrow key keeps its own job in a number box, on a slider, and while focus is inside
+  something that scrolls on that key's axis.
+- Ctrl with the wheel steps the palettes everywhere, the wall included. Ctrl with the
+  wheel never scrolls anything, so there is nothing to take over. It would zoom the page;
+  the app stops that. Ctrl with + and − still zooms.
+- So with a wall that scrolls, the wheel changes the style over the top bar and the dock
+  but not over the images. The arrow keys change it from anywhere.
+
+Details:
+
+- A trackpad pinch reaches the page as a wheel event marked Ctrl, without the key. Ctrl
+  counts only after the keyboard has reported the key going down, so a pinch still zooms
+  the page and never changes the palette.
+- One notch of a mouse wheel is one step. A trackpad's small moves are added up until they
+  make 50px. There is at most one step every 180 ms. A trackpad keeps sending moves, fading
+  out, after the fingers lift; once a gesture has taken a step, moves under half the size
+  of its largest are ignored, so one flick is one step. A gesture ends after 150 ms of
+  silence. These numbers live in `wheelSteps` in `src/lib/gesture.js`.
+- A swipe is one finger. It steps after 32px, and again every further 72px, so a flick is
+  one step and a long drag goes through several. It keeps to the axis it started on. Two
+  fingers are left to the browser's pinch zoom. A swipe that starts on a slider or a color
+  swatch is that control's own drag.
+- A tile that is already being held to compare keeps the gesture: moving the finger then
+  does not step.
+- While a swipe is the app's, the browser does not scroll, bounce the page or pull to
+  refresh.
+- Stepping keeps the two colors the way round they are, as choosing a palette in the panel
+  does.
+- Two colors that match no preset are the user's own. Stepping away from them keeps them
+  as one more stop after the last preset, named "Custom", for as long as the page is open,
+  so stepping through the palettes cannot lose them. The message then counts 13 palettes.
+
+Known limits:
+
+- A swipe that starts at the very edge of a phone screen may be taken by the system's back
+  gesture. A page cannot prevent that.
+- If a browser sends a Ctrl wheel move that it does not allow the page to stop, the app
+  leaves it alone, so the page zooms and the palette stays.
 
 ## Conversion
 
@@ -395,7 +469,9 @@ Vite with the `svelte` template (Svelte 5, runes, mounted with `mount()`), JavaS
 | `src/lib/gif.js` | Reading an animated GIF into full frames (`decodeGif`) and writing a two-color one (`encodeGif`). No DOM. |
 | `src/lib/save.js` | Output file naming, zip, PNG encoding from pixels, single save, save all. |
 | `src/lib/settings.js` | The default settings, and `restore(text, styles)`, which reads stored settings back and checks each value. No DOM. |
-| `src/App.svelte` | All state; top bar, wall, empty state, drop overlay, messages; window-level drop, paste and key handling. |
+| `src/lib/presets.js` | The list of palettes and the list of styles, whether two colors are a palette's, and stepping to the next or previous style or palette. No DOM. |
+| `src/lib/gesture.js` | `wheelSteps()`, which turns the stream of wheel moves from a mouse or trackpad into single steps. No DOM. |
+| `src/App.svelte` | All state; top bar, wall, empty state, drop overlay, messages; window-level drop, paste, key, wheel and swipe handling. |
 | `src/Tile.svelte` | One image: canvas, caption, Download and Remove, hold to compare. |
 | `src/Dock.svelte` | The dock and its two panels. |
 | `src/Pixels.svelte` | A canvas that shows a block of pixels; used by tiles and by the style previews. |
@@ -450,9 +526,17 @@ Dependencies beyond Vite and Svelte:
 - `src/lib/save.js`: output naming, including duplicates.
 - `src/lib/settings.js`: stored settings come back unchanged; missing or damaged text gives
   the defaults; a single unusable value is replaced on its own.
+- `src/lib/presets.js`: styles and palettes step forward and back and wrap at both ends; a
+  palette is found either way round; the user's own colors stay as a stop after the presets.
+- `src/lib/gesture.js`: one step per notch of a mouse wheel; a trackpad's small moves add
+  up; a turn round or a silence starts again; never more than one step per pause; one
+  step for a flick with its fading tail.
 - The interface is checked by hand in a desktop browser and at phone width: add by drop,
   picker and paste; remove one and all; change colors, palette, style and threshold;
-  compare by switch, hold and Space; save one and all.
+  compare by switch, hold and Space; save one and all; and quick switch by wheel, Ctrl
+  with wheel, arrow keys and swipes, on the empty screen, on a wall that fits and on one
+  that scrolls, where the wheel and an up-or-down swipe over the images must scroll them
+  and change nothing.
 
 ## Not included
 
