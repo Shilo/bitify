@@ -35,7 +35,8 @@ Stated by the user:
 Assumptions made here, open to correction:
 
 - Plain JavaScript, not TypeScript.
-- Settings are not remembered between visits.
+- The two colors, the style and the threshold are remembered between visits (see
+  "Remembered settings"). Nothing else is.
 - Exports are PNG at the original pixel size, with no upscaling option.
 - Animated WebP and APNG files are converted as their first frame only. (Animated GIFs are fully supported; see "Animated GIFs".)
 
@@ -319,6 +320,21 @@ at the point that separates them best:
 
 A manual value applies to every image.
 
+## Remembered settings
+
+The two colors, the style and the threshold are saved in the browser on every change and
+restored when the app opens. Nothing leaves the device.
+
+- The colors are saved as they are, so a chosen palette, a swap and a custom color all come
+  back. A palette is not saved by name; it shows as chosen because its colors match.
+- The threshold is saved as a number, or as Auto.
+- The Original/Bitified switch, the open panel and the images are not saved.
+- They are stored as one JSON value under the `localStorage` key `bitify`. On the way back
+  each value is checked on its own: a color must be `#rrggbb`, the style one of the seven,
+  the threshold a whole number from 1 to 254. Anything else falls back to its default
+  (Glow dark first, Cutout, Auto), so a damaged or outdated value cannot break the app.
+- If the browser refuses storage, the app works as before and starts from the defaults.
+
 ## Animated GIFs
 
 An animated GIF is imported with all its frames and plays on the wall straight away, looping,
@@ -364,6 +380,7 @@ Vite with the `svelte` template (Svelte 5, runes, mounted with `mount()`), JavaS
 | `src/lib/bitify.js` | Pure conversion, no DOM. `analyze(imageData)` returns size, pixels, brightness, whether any pixel is empty, the darkest and lightest brightness, and the auto thresholds. `mask(analysis, style, threshold)` returns one byte per pixel (0 empty, 1 first color, 2 second color). `colorize(mask, first, second)` returns RGBA pixels. |
 | `src/lib/gif.js` | Reading an animated GIF into full frames (`decodeGif`) and writing a two-color one (`encodeGif`). No DOM. |
 | `src/lib/save.js` | Output file naming, zip, PNG encoding from pixels, single save, save all. |
+| `src/lib/settings.js` | The default settings, and `restore(text, styles)`, which reads stored settings back and checks each value. No DOM. |
 | `src/App.svelte` | All state; top bar, wall, empty state, drop overlay, messages; window-level drop, paste and key handling. |
 | `src/Tile.svelte` | One image: canvas, caption, Download and Remove, hold to compare. |
 | `src/Dock.svelte` | The dock and its two panels. |
@@ -412,13 +429,15 @@ Dependencies beyond Vite and Svelte:
   - Silhouette fills everything;
   - Auto returns a value between two clearly separated groups.
 - `src/lib/save.js`: output naming, including duplicates.
+- `src/lib/settings.js`: stored settings come back unchanged; missing or damaged text gives
+  the defaults; a single unusable value is replaced on its own.
 - The interface is checked by hand in a desktop browser and at phone width: add by drop,
   picker and paste; remove one and all; change colors, palette, style and threshold;
   compare by switch, hold and Space; save one and all.
 
 ## Not included
 
-- Remembering settings between visits.
+- Remembering the Original/Bitified switch or the images between visits.
 - Export upscaling, or formats other than PNG.
 - Per-image settings; style, threshold and colors apply to the whole wall.
 - Custom user palettes.

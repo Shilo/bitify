@@ -16,7 +16,7 @@
     { name: 'Commodore', dark: '#40318e', light: '#88d7de' },
     { name: 'Rose', dark: '#4a0d2b', light: '#ffd1dc' },
   ];
-  const STYLES = [
+  export const STYLES = [
     ['cutout', 'Cutout'],
     ['lines', 'Lines'],
     ['solid', 'Solid'],
