@@ -1,4 +1,4 @@
-<img src=".github/logo.png" width="128" alt="Bitify logo">
+<img src="src/assets/logo2.gif" width="240" alt="Bitify logo: a spinning gold coin, and the same coin converted to two colors">
 
 # Bitify
 
