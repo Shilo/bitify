@@ -69,7 +69,7 @@
 </script>
 
 <svelte:window
-  onclick={e => { if (panel && !dock.contains(e.target)) panel = null; }}
+  onpointerdown={e => { if (panel && !dock.contains(e.target)) panel = null; }}
   onkeydown={e => { if (e.key === 'Escape') panel = null; }}
 />
 
