@@ -8,7 +8,7 @@ The screen is a wall of image tiles with one floating dock of controls. Images a
 
 Read docs/superpowers/specs/2026-10-06-bitify-app-design.md before changing behavior. It is the source of truth for the rules above, including the exact conversion and layout rules. Update it in the same change as the code.
 
-docs/styles.md explains how each of the six styles works, with a worked example of each.
+docs/styles.md explains how each of the six styles works, with a worked example of each. docs/palettes.md lists the eight preset palettes and how to change them.
 
 ## Commands
 
