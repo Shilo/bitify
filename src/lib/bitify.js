@@ -59,11 +59,14 @@ export function unify(frames) {
   return frames;
 }
 
+// The threshold Auto uses for this image in this style.
+export const autoThreshold = (img, style) => (style === 'lines' ? img.autoLine : img.auto);
+
 // One byte per pixel: 0 empty, 1 first color (lines, dark pixels), 2 second color (fill, light pixels).
 // `threshold` null means Auto.
 export function mask(img, style, threshold = null) {
   const { w, h, lum, data } = img, m = new Uint8Array(w * h);
-  const t = threshold ?? (style === 'lines' ? img.autoLine : img.auto);
+  const t = threshold ?? autoThreshold(img, style);
   const solid = p => data[p * 4 + 3] >= ALPHA_CUT;
 
   if (style === 'lines') {

@@ -45,6 +45,7 @@
     style = $bindable(),
     threshold = $bindable(), // null means Auto
     showOriginal = $bindable(),
+    autoRange, // [lowest, highest] threshold Auto is using
     count,
     onsaveall,
   } = $props();
@@ -59,6 +60,16 @@
     : style === 'lines' ? `Color changes stronger than ${threshold} become lines.`
     : `Pixels brighter than ${threshold} turn light.`,
   );
+
+  // What Auto picked, shown in the number box while it is empty: a range when images differ.
+  const autoShown = $derived(autoRange[0] === autoRange[1] ? `${autoRange[0]}` : `${autoRange[0]}–${autoRange[1]}`);
+
+  // Typing a number sets the threshold; clearing the box goes back to Auto.
+  function typed(e) {
+    const box = e.currentTarget;
+    if (box.value === '') threshold = null;
+    else box.value = threshold = Math.min(254, Math.max(1, Math.round(+box.value)));
+  }
 
   const toggle = name => (panel = panel === name ? null : name);
   function swap() {
@@ -99,18 +110,28 @@
           </button>
         {/each}
       </div>
-      <label class="ptitle" for="threshold">Threshold</label>
-      <div class="trow">
+      <div class="thead">
+        <label class="ptitle" for="threshold">Threshold</label>
+        <button class="btn sm" aria-pressed={threshold === null} onclick={() => (threshold = null)}>Auto</button>
         <input
-          id="threshold"
-          type="range"
+          class="tnum"
+          type="number"
           min="1"
           max="254"
-          value={threshold ?? 128}
-          oninput={e => (threshold = +e.currentTarget.value)}
+          aria-label="Threshold value"
+          value={threshold ?? ''}
+          placeholder={autoShown}
+          oninput={typed}
         />
-        <button class="btn sm" aria-pressed={threshold === null} onclick={() => (threshold = null)}>Auto</button>
       </div>
+      <input
+        id="threshold"
+        type="range"
+        min="1"
+        max="254"
+        value={threshold ?? Math.round((autoRange[0] + autoRange[1]) / 2)}
+        oninput={e => (threshold = +e.currentTarget.value)}
+      />
       <p class="hint">{hint}</p>
       <p class="hint">
         {touch ? 'Hold an image to see its other version.' : 'Hold an image, or hold Space, to see the other version.'}

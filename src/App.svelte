@@ -1,5 +1,5 @@
 <script>
-  import { analyze, mask, colorize, hexToRgb } from './lib/bitify.js';
+  import { analyze, mask, colorize, hexToRgb, autoThreshold } from './lib/bitify.js';
   import { unify } from './lib/bitify.js';
   import { saveOne, saveAll } from './lib/save.js';
   import { fitGrid } from './lib/layout.js';
@@ -20,6 +20,11 @@
   let items = $state.raw([]);
   // The logo, shown on the empty screen as a live preview of the settings. Never saved or counted.
   let example = $state.raw(null);
+  // The lowest and highest threshold Auto is using for the images on screen, for the Dock to show.
+  const autoRange = $derived.by(() => {
+    const autos = (items.length ? items : example ? [example] : []).map(i => autoThreshold(i.img, style));
+    return autos.length ? [Math.min(...autos), Math.max(...autos)] : [128, 128];
+  });
   // Size of the area the wall can use, measured from the page (see .probe in app.css).
   let wallWidth = $state(0);
   let wallHeight = $state(0);
@@ -228,7 +233,7 @@
   </div>
 {/if}
 
-<Dock bind:first bind:second bind:style bind:threshold bind:showOriginal count={items.length} onsaveall={saveEverything} />
+<Dock bind:first bind:second bind:style bind:threshold bind:showOriginal {autoRange} count={items.length} onsaveall={saveEverything} />
 
 {#if dragDepth > 0}
   <div class="drop" style:background={second} style:color={overlayInk}>Drop to bitify</div>
