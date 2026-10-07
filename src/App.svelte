@@ -1,6 +1,7 @@
 <script>
   import { analyze, mask, colorize, hexToRgb } from './lib/bitify.js';
-  import { saveOne } from './lib/save.js';
+  import { saveOne, saveAll } from './lib/save.js';
+  import Dock from './Dock.svelte';
   import Tile from './Tile.svelte';
   import PixelIcon from './PixelIcon.svelte';
 
@@ -11,6 +12,7 @@
   let style = $state('lines');
   let threshold = $state(null); // null means Auto
   let showOriginal = $state(false);
+  let spaceHeld = $state(false);
   // raw: items hold large typed arrays, and the list is only ever replaced, never mutated
   let items = $state.raw([]);
   let dragDepth = $state(0);
@@ -73,6 +75,14 @@
     }
   }
 
+  async function saveEverything() {
+    try {
+      await saveAll(items.map(bitified));
+    } catch {
+      say('The images could not be saved.');
+    }
+  }
+
   function picked(e) {
     addFiles([...e.currentTarget.files]);
     e.currentTarget.value = ''; // so picking the same file again still fires a change
@@ -96,6 +106,15 @@
   function paste(e) {
     if (e.clipboardData?.files.length) addFiles([...e.clipboardData.files]);
   }
+
+  // Holding Space flips the whole wall, except while a control has focus (Space presses it).
+  const onControl = e => /^(INPUT|BUTTON|TEXTAREA|SELECT)$/.test(e.target.tagName);
+  function keydown(e) {
+    if (e.code === 'Space' && !onControl(e)) { e.preventDefault(); spaceHeld = true; }
+  }
+  function keyup(e) {
+    if (e.code === 'Space') spaceHeld = false;
+  }
 </script>
 
 <svelte:window
@@ -104,7 +123,9 @@
   ondragleave={dragleave}
   ondrop={drop}
   onpaste={paste}
-  onblur={() => (dragDepth = 0)}
+  onkeydown={keydown}
+  onkeyup={keyup}
+  onblur={() => { dragDepth = 0; spaceHeld = false; }}
 />
 
 <header class="bar">
@@ -126,7 +147,7 @@
         {second}
         {style}
         {threshold}
-        flipped={showOriginal}
+        flipped={showOriginal !== spaceHeld}
         onsave={() => save(item)}
         onremove={() => (items = items.filter(i => i !== item))}
       />
@@ -139,6 +160,8 @@
     <button class="btn primary" onclick={() => picker.click()}>Choose images</button>
   </div>
 {/if}
+
+<Dock bind:first bind:second bind:style bind:threshold bind:showOriginal count={items.length} onsaveall={saveEverything} />
 
 {#if dragDepth > 0}
   <div class="drop" style:background={second} style:color={overlayInk}>Drop to bitify</div>
