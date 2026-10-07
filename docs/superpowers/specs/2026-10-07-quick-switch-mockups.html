@@ -1,0 +1,599 @@
+<!doctype html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bitify Quick Switch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Schibsted+Grotesk:wght@400..700&display=swap">
+<style>
+/* Layout: a short study header (pick a design, see how to try it), then a framed working copy of the Bitify screen. */
+:root {
+  --page: #dcdee6; --bg: #ecedf1; --surface: #ffffff; --fg: #1b1c24; --muted: #666979;
+  --line: #d5d7e0; --tile: #e3e5eb; --tile2: #d9dbe3; --shadow: rgba(27, 28, 36, 0.16);
+  --hit: 36px; --dock-base: 100px; --extra: 0px;
+  --display: "Pixelify Sans", ui-monospace, "Courier New", monospace;
+  --body: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --page: #0f1014; --bg: #17181d; --surface: #22242c; --fg: #ecedf2; --muted: #9a9dae;
+    --line: #343744; --tile: #1f2128; --tile2: #272a33; --shadow: rgba(0, 0, 0, 0.5); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --page: #0f1014; --bg: #17181d; --surface: #22242c; --fg: #ecedf2; --muted: #9a9dae;
+  --line: #343744; --tile: #1f2128; --tile2: #272a33; --shadow: rgba(0, 0, 0, 0.5); color-scheme: dark;
+}
+@media (pointer: coarse) { :root { --hit: clamp(40px, 12vw, 44px); } }
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+body {
+  margin: 0; padding-inline: 16px; padding-block: 12px; display: flex; flex-direction: column; gap: 10px; overflow: hidden;
+  background: var(--page); color: var(--fg); font: 14px/1.4 var(--body); -webkit-tap-highlight-color: transparent;
+}
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+
+/* study header */
+.study { display: grid; gap: 6px; }
+.top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+.study h1 { margin: 0; font: 600 22px/1 var(--display); }
+.study p { margin: 0; max-width: 70ch; }
+.how { margin: 0; display: flex; flex-wrap: wrap; gap: 3px 18px; font-size: 13px; }
+.how div { display: flex; gap: 6px; min-width: 0; }
+.how dt { color: var(--muted); }
+.how dd { margin: 0; }
+kbd { padding: 0 5px; border: 1px solid var(--muted); border-radius: 5px; font: inherit; font-size: 12px; font-weight: 600; }
+.seg { display: inline-flex; height: var(--hit); padding: 3px; background: var(--tile); border-radius: 10px; }
+.seg button { padding: 0 12px; border: 0; border-radius: 8px; background: transparent; color: var(--muted); font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--fg); box-shadow: 0 1px 2px var(--shadow); }
+
+/* the Bitify screen */
+#app {
+  flex: 1; min-height: 0; position: relative; display: flex; flex-direction: column; overflow: hidden;
+  background: var(--bg); border: 1px solid var(--line); border-radius: 14px;
+}
+.bar { display: flex; align-items: center; gap: 8px 12px; padding: 14px 16px; }
+.mark { font-family: var(--display); font-size: 28px; font-weight: 600; line-height: 1; }
+.count { color: var(--muted); font-size: 13px; white-space: nowrap; }
+.grow { flex: 1; }
+.ico { fill: currentColor; shape-rendering: crispEdges; flex: none; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: var(--hit); min-width: var(--hit); padding: 0 14px;
+  border: 1px solid var(--line); border-radius: 10px; background: transparent; font-weight: 600; white-space: nowrap; cursor: pointer;
+}
+.btn.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.wall { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; display: flex; padding: 8px 16px calc(var(--dock-base) + var(--extra)); touch-action: pan-y; }
+.tiles { margin: auto; width: 100%; display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 220px)); justify-content: center; gap: 16px; }
+.tile { margin: 0; display: grid; gap: 8px; min-width: 0; }
+.art {
+  position: relative; aspect-ratio: 1; border-radius: 10px; overflow: hidden; cursor: pointer;
+  touch-action: pan-y; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
+  background: conic-gradient(var(--tile2) 25%, var(--tile) 0 50%, var(--tile2) 0 75%, var(--tile) 0) 0 0 / 16px 16px;
+}
+.art canvas { position: absolute; inset: 14%; width: 72%; height: 72%; object-fit: contain; image-rendering: pixelated; }
+.cap { display: flex; gap: 8px; font-size: 13px; }
+.name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dim { margin-left: auto; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+.dock {
+  position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%); width: max-content; max-width: calc(100% - 32px);
+  display: flex; align-items: center; justify-content: center; gap: 10px 12px; padding: 10px 12px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 10px 32px var(--shadow);
+}
+.sep { width: 1px; height: 24px; background: var(--line); flex: none; }
+.pair { display: flex; align-items: center; gap: 4px; }
+.sw { display: block; flex: none; width: var(--hit); height: var(--hit); border: 1px solid var(--line); border-radius: 9px; box-shadow: inset 0 0 0 2px var(--surface); }
+.ib { display: grid; place-items: center; flex: none; width: var(--hit); height: var(--hit); padding: 0; border: 1px solid transparent; border-radius: 8px; background: transparent; cursor: pointer; }
+[data-handle], .reel { touch-action: none; }
+body[data-design="B"] [data-handle] { cursor: ew-resize; }
+
+/* shared bits of the feedback */
+.chip { flex: none; width: 18px; height: 18px; border-radius: 5px; border: 1px solid var(--line); }
+.ball { flex: none; width: 28px; height: 28px; border-radius: 6px; image-rendering: pixelated; background: var(--tile); }
+.k { font-weight: 400; opacity: 0.7; }
+.n { opacity: 0.7; font-variant-numeric: tabular-nums; }
+
+/* A: toast under the top bar */
+.toast {
+  position: absolute; top: 62px; left: 50%; transform: translateX(-50%); z-index: 5; pointer-events: none;
+  display: flex; align-items: center; gap: 8px; width: max-content; max-width: calc(100% - 32px); padding: 7px 12px 7px 8px; border-radius: 10px;
+  background: var(--fg); color: var(--bg); font-size: 13px; font-weight: 600;
+}
+.toast.plain { padding-left: 12px; }
+.toast .ball { width: 22px; height: 22px; }
+
+/* B: tooltip above the dock button that owns the setting */
+.tip {
+  position: absolute; z-index: 5; pointer-events: none; display: grid; gap: 8px; width: max-content; padding: 9px 12px 12px; border-radius: 10px;
+  background: var(--fg); color: var(--bg); box-shadow: 0 10px 32px var(--shadow); font-size: 13px; font-weight: 600;
+}
+.tip::after { content: ""; position: absolute; top: 100%; left: calc(var(--ax, 50%) - 6px); border: 6px solid transparent; border-bottom: 0; border-top-color: var(--fg); }
+.thead { display: flex; align-items: baseline; gap: 6px; }
+.thead .n { margin-left: auto; padding-left: 12px; }
+.strip { display: flex; align-items: center; gap: 5px; }
+.strip .chip { width: 16px; height: 16px; border-radius: 4px; border: 0; }
+.strip .ball { width: 26px; height: 26px; }
+.strip .on { outline: 2px solid var(--bg); outline-offset: 2px; }
+
+/* C: two reels above the dock */
+.reels {
+  position: absolute; bottom: calc(100% + 10px); left: 50%; transform: translateX(-50%); width: max-content; max-width: calc(100vw - 50px);
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 2px 8px; padding: 6px 8px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 10px 32px var(--shadow);
+}
+.reel { display: flex; align-items: center; }
+.reel .ib { font-size: 20px; font-weight: 600; line-height: 1; padding-bottom: 3px; }
+.rl { display: flex; align-items: center; justify-content: center; gap: 8px; min-width: 118px; font-weight: 600; white-space: nowrap; }
+.rl .ball { width: 22px; height: 22px; }
+
+@media (max-width: 800px) {
+  .dock .lbl, .dock > .sep { display: none; }
+  .dock > .btn { padding: 0; }
+}
+@media (max-width: 520px) {
+  :root { --dock-base: 150px; }
+  .count, .wide { display: none; }
+  .dock { bottom: 12px; display: grid; grid-template-columns: repeat(4, auto); gap: 8px; padding: 10px; }
+  .dock > .seg { order: 5; grid-column: 1 / -1; display: flex; }
+  .dock > .seg button { flex: 1; }
+  .reels .sep { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+<header class="study">
+  <div class="top">
+    <h1>Quick switch</h1>
+    <div class="seg" id="tabs" role="group" aria-label="Design">
+      <button data-d="A" aria-pressed="false">A Ghost</button>
+      <button data-d="B" aria-pressed="true">B Handles</button>
+      <button data-d="C" aria-pressed="false">C Reels</button>
+    </div>
+  </div>
+  <p id="pitch"></p>
+  <dl class="how" id="how"></dl>
+</header>
+
+<div id="app">
+  <div class="bar">
+    <span class="mark">Bitify</span><span class="count">3 images</span><span class="grow"></span>
+    <button class="btn" id="add" data-ico="plus">Add<span class="wide">images</span></button>
+  </div>
+  <div class="wall" id="wall"><div class="tiles" id="tiles"></div></div>
+  <div class="dock" id="dock">
+    <div class="reels" id="reels" hidden>
+      <div class="reel" data-kind="palette">
+        <button class="ib" aria-label="Previous palette">&lsaquo;</button>
+        <span class="rl" id="rPal" aria-live="polite"></span>
+        <button class="ib" aria-label="Next palette">&rsaquo;</button>
+      </div>
+      <span class="sep"></span>
+      <div class="reel" data-kind="style">
+        <button class="ib" aria-label="Previous style">&lsaquo;</button>
+        <span class="rl" id="rSty" aria-live="polite"></span>
+        <button class="ib" aria-label="Next style">&rsaquo;</button>
+      </div>
+    </div>
+    <div class="pair" data-handle="palette">
+      <span class="sw" id="sw1"></span>
+      <button class="ib" id="swap" data-ico="swap" aria-label="Swap colors" title="Swap colors"></button>
+      <span class="sw" id="sw2"></span>
+    </div>
+    <button class="btn" id="bPal" data-handle="palette" data-ico="grid" aria-label="Palettes"><span class="lbl">Palettes</span></button>
+    <span class="sep"></span>
+    <div class="seg" id="view" role="group" aria-label="View">
+      <button data-v="1" aria-pressed="false">Original</button>
+      <button data-v="" aria-pressed="true">Bitified</button>
+    </div>
+    <span class="sep"></span>
+    <button class="btn" id="bAdv" data-handle="style" data-ico="sliders" aria-label="Advanced"><span class="lbl">Advanced</span></button>
+    <button class="btn primary" id="bSave" data-ico="save" aria-label="Download all"><span class="lbl">Download all</span></button>
+  </div>
+  <div class="toast" id="toast" role="status" hidden></div>
+  <div class="tip" id="tip" role="status" hidden></div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const PRESETS = [
+  { name: 'Glow', dark: '#222323', light: '#f0f6f0' }, { name: 'Mono', dark: '#000000', light: '#ffffff' },
+  { name: 'Paper', dark: '#382b26', light: '#b8c2b9' }, { name: 'Torch', dark: '#0b0a0c', light: '#f6dfa4' },
+  { name: 'Game Boy', dark: '#0f380f', light: '#9bbc0f' }, { name: 'Pocket', dark: '#1f1f1f', light: '#c4cfa1' },
+  { name: 'Nokia', dark: '#43523d', light: '#c7f0d8' }, { name: 'Playdate', dark: '#322f29', light: '#d7d4cc' },
+  { name: 'Phosphor', dark: '#25342f', light: '#01eb5f' }, { name: 'Amber', dark: '#3f291e', light: '#fdca55' },
+  { name: 'Commodore', dark: '#40318e', light: '#88d7de' }, { name: 'Rose', dark: '#4a0d2b', light: '#ffd1dc' },
+];
+const STYLES = [['cutout', 'Cutout'], ['lines', 'Lines'], ['solid', 'Solid'], ['checker', 'Checker'], ['bayer', 'Bayer'], ['atkinson', 'Atkinson'], ['silhouette', 'Silhouette']];
+
+/* ---- conversion, copied from src/lib/bitify.js so the styles here are the real ones ---- */
+const ALPHA_CUT = 128, MIN_EDGE = 24;
+const BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
+const NEIGHBOURS = [[1, 0], [-1, 0], [0, 1], [0, -1]];
+const AROUND = [...NEIGHBOURS, [1, 1], [1, -1], [-1, 1], [-1, -1]];
+function hexToRgb(hex) { const n = parseInt(hex.slice(1), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; }
+const diff = (d, i, j) => Math.max(Math.abs(d[i] - d[j]), Math.abs(d[i + 1] - d[j + 1]), Math.abs(d[i + 2] - d[j + 2]));
+function otsu(hist, fallback) {
+  let n = 0, sum = 0;
+  for (let i = 0; i < 256; i++) { n += hist[i]; sum += i * hist[i]; }
+  let sumB = 0, wB = 0, best = 0, t = fallback;
+  for (let i = 0; i < 256; i++) {
+    wB += hist[i];
+    if (!wB) continue;
+    const wF = n - wB;
+    if (!wF) break;
+    sumB += i * hist[i];
+    const v = wB * wF * (sumB / wB - (sum - sumB) / wF) ** 2;
+    if (v > best) { best = v; t = i; }
+  }
+  return t;
+}
+function seamStrength(frames, t) {
+  const hist = new Array(256).fill(0);
+  for (const { w, h, data, lum } of frames) {
+    const solid = p => data[p * 4 + 3] >= ALPHA_CUT, same = (p, q) => solid(q) && (lum[p] > t) === (lum[q] > t);
+    for (let p = 0, i = 0; p < w * h; p++, i += 4) {
+      if (!solid(p)) continue;
+      if ((p % w) + 1 < w && same(p, p + 1)) hist[diff(data, i, i + 4)]++;
+      if (p + w < w * h && same(p, p + w)) hist[diff(data, i, i + w * 4)]++;
+    }
+  }
+  hist[0] = 0;
+  return Math.max(MIN_EDGE, otsu(hist, 0));
+}
+function analyze({ width: w, height: h, data }) {
+  const lum = new Uint8Array(w * h), hist = new Array(256).fill(0), edges = new Array(256).fill(0);
+  const solid = p => data[p * 4 + 3] >= ALPHA_CUT;
+  let hasAlpha = false, lo = 255, hi = 0;
+  for (let p = 0, i = 0; p < w * h; p++, i += 4) {
+    if (!solid(p)) { hasAlpha = true; continue; }
+    lum[p] = Math.round(0.2126 * data[i] + 0.7152 * data[i + 1] + 0.0722 * data[i + 2]);
+    hist[lum[p]]++;
+    lo = Math.min(lo, lum[p]);
+    hi = Math.max(hi, lum[p]);
+    if ((p % w) + 1 < w && solid(p + 1)) edges[diff(data, i, i + 4)]++;
+    if (p + w < w * h && solid(p + w)) edges[diff(data, i, i + w * 4)]++;
+  }
+  edges[0] = 0;
+  const img = { w, h, data, lum, hasAlpha, lo, hi, hist, edges, auto: otsu(hist, 127), autoLine: Math.max(MIN_EDGE, otsu(edges, 0)) };
+  img.autoSeam = seamStrength([img], img.auto);
+  return img;
+}
+function mask(img, style) {
+  const { w, h, lum, data, lo, hi } = img, m = new Uint8Array(w * h);
+  const t = style === 'lines' ? img.autoLine : img.auto;
+  const solid = p => data[p * 4 + 3] >= ALPHA_CUT;
+  if (style === 'lines') {
+    for (let y = 0, p = 0; y < h; y++) for (let x = 0; x < w; x++, p++) {
+      if (!solid(p)) continue;
+      m[p] = 2;
+      for (const [dx, dy] of NEIGHBOURS) {
+        const nx = x + dx, ny = y + dy, q = ny * w + nx;
+        if (nx < 0 || ny < 0 || nx >= w || ny >= h) { if (img.hasAlpha) m[p] = 1; }
+        else if (!solid(q)) m[p] = 1;
+        else if (diff(data, p * 4, q * 4) > t && (lum[p] < lum[q] || (lum[p] === lum[q] && p < q))) m[p] = 1;
+      }
+    }
+    return m;
+  }
+  if (style === 'cutout') {
+    const tone = (x, y) => (x < 0 || y < 0 || x >= w || y >= h ? (img.hasAlpha ? 0 : -1) : !solid(y * w + x) ? 0 : lum[y * w + x] > t ? 2 : 1);
+    for (let y = 0, p = 0; y < h; y++) for (let x = 0; x < w; x++, p++) {
+      const own = tone(x, y);
+      if (!own) continue;
+      const around = AROUND.map(([dx, dy]) => tone(x + dx, y + dy));
+      const seam = NEIGHBOURS.some(([dx, dy], k) => {
+        const q = p + dy * w + dx;
+        return around[k] === own && diff(data, p * 4, q * 4) > img.autoSeam && (lum[p] < lum[q] || (lum[p] === lum[q] && p < q));
+      });
+      if (own === 2) m[p] = seam && !around.includes(0) ? 1 : 2;
+      else m[p] = seam || (around.slice(0, 4).includes(0) && !around.includes(2)) ? 2 : 1;
+    }
+    return m;
+  }
+  const tone = p => (lum[p] <= t ? (t > lo ? (0.5 * (lum[p] - lo)) / (t - lo) : 0) : 0.5 + (0.5 * (lum[p] - t)) / (hi - t));
+  if (style === 'atkinson') {
+    const v = Float32Array.from(lum, (_, p) => (solid(p) ? tone(p) * 255 : 0));
+    for (let y = 0, p = 0; y < h; y++) for (let x = 0; x < w; x++, p++) {
+      if (!solid(p)) continue;
+      const on = v[p] > 127.5, e = (v[p] - (on ? 255 : 0)) / 8;
+      m[p] = on ? 2 : 1;
+      if (x + 1 < w) v[p + 1] += e;
+      if (x + 2 < w) v[p + 2] += e;
+      if (y + 1 < h) { if (x > 0) v[p + w - 1] += e; v[p + w] += e; if (x + 1 < w) v[p + w + 1] += e; }
+      if (y + 2 < h) v[p + 2 * w] += e;
+    }
+    return m;
+  }
+  for (let y = 0, p = 0; y < h; y++) for (let x = 0; x < w; x++, p++) {
+    if (!solid(p)) continue;
+    if (style === 'silhouette') m[p] = 1;
+    else if (style === 'checker') m[p] = tone(p) > ((x + y) % 2 ? 0.75 : 0.25) ? 2 : 1;
+    else if (style === 'bayer') m[p] = tone(p) > (BAYER[(y & 3) * 4 + (x & 3)] + 0.5) / 16 ? 2 : 1;
+    else m[p] = lum[p] > t ? 2 : 1;
+  }
+  return m;
+}
+function colorize(m, first, second) {
+  const c = [null, hexToRgb(first), hexToRgb(second)], out = new Uint8ClampedArray(m.length * 4);
+  for (let p = 0, i = 0; p < m.length; p++, i += 4) {
+    if (!m[p]) continue;
+    const k = c[m[p]];
+    out[i] = k[0]; out[i + 1] = k[1]; out[i + 2] = k[2]; out[i + 3] = 255;
+  }
+  return out;
+}
+
+/* ---- example sprites ---- */
+function ballData() {
+  const s = 14, data = new Uint8ClampedArray(s * s * 4);
+  for (let y = 0; y < s; y++) for (let x = 0; x < s; x++) {
+    const r = Math.hypot(x - 6.5, y - 6.5);
+    if (r > 7) continue;
+    const shade = Math.hypot(x - 4, y - 3) * 9;
+    const l = Math.round(r > 6 ? 25 : y >= 7 && y <= 9 ? 95 - shade * 0.4 : 240 - shade);
+    data.set([l, l, l, 255], (y * s + x) * 4);
+  }
+  return { width: s, height: s, data };
+}
+function potionData() {
+  const K = { k: [42, 31, 61], g: [207, 232, 255], w: [255, 255, 255], r: [216, 64, 79], R: [156, 42, 68], c: [185, 130, 74], C: [122, 82, 48] };
+  const rows = [
+    '......kkkk......', '.....kccCCk.....', '.....kccCCk.....', '......kggk......',
+    '......kggk......', '.....kgggwk.....', '....kggggggk....', '...kgwggggggk...',
+    '..kgwrrrrrrrgk..', '..krwrrrrrrrRk..', '..krrrrrrrrRRk..', '..krrrrrrrRRRk..',
+    '..kRrrrrrRRRRk..', '...kRRRRRRRRk...', '....kkkkkkkk....', '................',
+  ];
+  const data = new Uint8ClampedArray(16 * 16 * 4);
+  rows.forEach((row, y) => [...row].forEach((ch, x) => K[ch] && data.set([...K[ch], 255], (y * 16 + x) * 4)));
+  return { width: 16, height: 16, data };
+}
+const BALL = analyze(ballData());
+
+/* ---- state ---- */
+const S = { design: 'B', pi: 0, si: 0, swapped: false, original: false };
+const app = $('app'), wall = $('wall'), toast = $('toast'), tip = $('tip');
+const coarse = matchMedia('(pointer: coarse)').matches;
+const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const items = [];
+const colors = () => { const p = PRESETS[S.pi]; return S.swapped ? [p.light, p.dark] : [p.dark, p.light]; };
+const chip = (p, on) => `<span class="chip${on ? ' on' : ''}" style="background:linear-gradient(135deg,${p.dark} 50%,${p.light} 50%)"></span>`;
+function ball(key, on) {
+  const c = Object.assign(document.createElement('canvas'), { width: 14, height: 14, className: on ? 'ball on' : 'ball' });
+  c.getContext('2d').putImageData(new ImageData(colorize(mask(BALL, key), ...colors()), 14, 14), 0, 0);
+  return c;
+}
+
+function add(name, d) {
+  const fig = document.createElement('figure');
+  fig.className = 'tile';
+  fig.innerHTML = `<div class="art"><canvas width="${d.width}" height="${d.height}"></canvas></div><figcaption class="cap"><span class="name">${name}</span><span class="dim">${d.width}×${d.height}</span></figcaption>`;
+  $('tiles').append(fig);
+  const it = { img: analyze(d), orig: new ImageData(d.data, d.width, d.height), ctx: fig.querySelector('canvas').getContext('2d'), held: false, timer: 0, x: 0, y: 0 };
+  items.push(it);
+  // Hold to compare, as in the app. New rule the swipes need: a touch that moves before the hold starts is not a hold.
+  const art = fig.firstChild;
+  it.release = () => { clearTimeout(it.timer); if (it.held) { it.held = false; paint(); } };
+  art.addEventListener('pointerdown', e => {
+    if (e.pointerType === 'mouse') { it.held = true; paint(); }
+    else { it.x = e.clientX; it.y = e.clientY; it.timer = setTimeout(() => { it.held = true; paint(); }, 150); }
+  });
+  art.addEventListener('pointermove', e => {
+    if (e.pointerType !== 'mouse' && !it.held && Math.abs(e.clientX - it.x) + Math.abs(e.clientY - it.y) > 8) clearTimeout(it.timer);
+  });
+  for (const ev of ['pointerup', 'pointerleave', 'pointercancel']) art.addEventListener(ev, it.release);
+  art.addEventListener('contextmenu', e => e.preventDefault());
+}
+
+function paint() {
+  const [a, b] = colors(), key = STYLES[S.si][0];
+  for (const it of items)
+    it.ctx.putImageData(S.original !== it.held ? it.orig : new ImageData(colorize(mask(it.img, key), a, b), it.img.w, it.img.h), 0, 0);
+  $('sw1').style.background = a;
+  $('sw2').style.background = b;
+  $('rPal').innerHTML = chip(PRESETS[S.pi]) + `<span>${PRESETS[S.pi].name}</span>`;
+  $('rSty').innerHTML = `<span>${STYLES[S.si][1]}</span>`;
+  $('rSty').prepend(ball(key));
+}
+
+/* ---- feedback ---- */
+let hideTimer;
+function show(el, ms) {
+  toast.hidden = tip.hidden = true;
+  el.hidden = false;
+  clearTimeout(hideTimer);
+  hideTimer = setTimeout(() => (toast.hidden = tip.hidden = true), ms);
+}
+function say(text) { toast.className = 'toast plain'; toast.textContent = text; show(toast, 2200); }
+function head(pal) {
+  const i = pal ? S.pi : S.si;
+  return `<span class="k">${pal ? 'Palette' : 'Style'}</span><span>${pal ? PRESETS[i].name : STYLES[i][1]}</span><span class="n">${i + 1}/${pal ? PRESETS.length : STYLES.length}</span>`;
+}
+function feedback(kind, dir) {
+  const pal = kind === 'palette';
+  if (S.design === 'A') {
+    toast.className = 'toast';
+    toast.innerHTML = (pal ? chip(PRESETS[S.pi]) : '') + head(pal);
+    if (!pal) toast.prepend(ball(STYLES[S.si][0]));
+    show(toast, 1400);
+  } else if (S.design === 'B') {
+    tip.innerHTML = `<div class="thead">${head(pal)}</div><div class="strip">${pal ? PRESETS.map((p, i) => chip(p, i === S.pi)).join('') : ''}</div>`;
+    if (!pal) STYLES.forEach(([key], i) => tip.lastChild.append(ball(key, i === S.si)));
+    show(tip, 1700);
+    // above the button that owns the setting, kept inside the screen, with the arrow over the button
+    const A = app.getBoundingClientRect(), r = $(pal ? 'bPal' : 'bAdv').getBoundingClientRect(), w = tip.offsetWidth;
+    const cx = r.left + r.width / 2 - A.left, left = Math.max(8, Math.min(A.width - w - 8, cx - w / 2));
+    tip.style.left = `${left}px`;
+    tip.style.bottom = `${A.bottom - r.top + 12}px`;
+    tip.style.setProperty('--ax', `${cx - left}px`);
+  } else if (!calm) {
+    $(pal ? 'rPal' : 'rSty').animate([{ transform: `translateX(${dir * 12}px)`, opacity: 0.2 }, { transform: 'none', opacity: 1 }], { duration: 140, easing: 'ease-out' });
+  }
+}
+function step(kind, dir) {
+  if (kind === 'palette') S.pi = (S.pi + dir + PRESETS.length) % PRESETS.length;
+  else S.si = (S.si + dir + STYLES.length) % STYLES.length;
+  paint();
+  feedback(kind, dir);
+}
+
+/* ---- the three designs ---- */
+const KEYS = '<kbd>←</kbd> <kbd>→</kbd> palette, <kbd>↑</kbd> <kbd>↓</kbd> style (click the screen first)';
+const INFO = {
+  A: {
+    pitch: 'Nothing new on screen. Gestures work anywhere and a toast names the change.',
+    mouse: '<kbd>Shift</kbd> + wheel for palette, <kbd>Alt</kbd> + wheel for style',
+    touch: 'swipe the wall sideways with one finger for palette, with two fingers for style',
+  },
+  B: {
+    pitch: 'Recommended. The dock buttons double as handles, and the feedback points at the button that owns the setting.',
+    mouse: 'wheel over the swatches or Palettes, and over Advanced for style',
+    touch: 'swipe the wall sideways for palette. Drag sideways on Palettes or on Advanced (sliders) to scrub',
+  },
+  C: {
+    pitch: 'Two steppers that are always visible above the dock. Nothing to learn, but the wall gives up their height.',
+    mouse: 'click the arrows, or wheel over a reel',
+    touch: 'tap the arrows, or swipe a reel sideways',
+  },
+};
+function fit() {
+  tip.hidden = true;
+  app.style.setProperty('--extra', S.design === 'C' ? `${$('reels').offsetHeight + 10}px` : '0px');
+}
+function setDesign(d) {
+  S.design = d;
+  document.body.dataset.design = d;
+  for (const b of $('tabs').children) b.setAttribute('aria-pressed', b.dataset.d === d);
+  toast.hidden = true;
+  $('reels').hidden = d !== 'C';
+  $('pitch').textContent = INFO[d].pitch;
+  const rows = coarse ? [['Touch', INFO[d].touch]] : [['Keys', KEYS], ['Mouse', INFO[d].mouse], ['Touch', INFO[d].touch + ' (try it on a phone)']];
+  $('how').innerHTML = rows.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('');
+  fit();
+}
+$('tabs').addEventListener('click', e => e.target.dataset.d && setDesign(e.target.dataset.d));
+addEventListener('resize', fit);
+
+// keyboard: the same in every design
+addEventListener('keydown', e => {
+  if (e.ctrlKey || e.metaKey || e.altKey || e.target.matches?.('input, select, textarea')) return;
+  const k = { ArrowRight: ['palette', 1], ArrowLeft: ['palette', -1], ArrowDown: ['style', 1], ArrowUp: ['style', -1] }[e.key];
+  if (!k) return;
+  e.preventDefault();
+  step(...k);
+});
+
+// wheel: one notch is one step; a trackpad's stream of small moves is added up, with a short pause after each step
+let acc = 0, lastWheel = 0, lock = 0;
+app.addEventListener('wheel', e => {
+  const kind = S.design === 'A' ? (e.shiftKey ? 'palette' : e.altKey ? 'style' : null)
+    : S.design === 'B' ? e.target.closest('[data-handle]')?.dataset.handle
+    : e.target.closest('.reel')?.dataset.kind;
+  if (!kind) return;
+  e.preventDefault();
+  const now = performance.now();
+  if (now < lock) return;
+  if (now - lastWheel > 200) acc = 0;
+  lastWheel = now;
+  acc += (e.deltaY || e.deltaX) * (e.deltaMode ? 33 : 1);
+  if (Math.abs(acc) < 50) return;
+  step(kind, acc > 0 ? 1 : -1);
+  acc = 0;
+  lock = now + 110;
+}, { passive: false });
+
+// touch on the wall (A and B): a sideways swipe steps, and keeps stepping every 44px. Up and down still scrolls.
+const pts = new Map();
+let multi = false;
+wall.addEventListener('pointerdown', e => {
+  if (e.pointerType === 'mouse' || S.design === 'C') return;
+  if (e.clientX < 24 || e.clientX > innerWidth - 24) return; // the screen edges belong to the system's back gesture
+  if (!pts.size) multi = false;
+  pts.set(e.pointerId, { x0: e.clientX, y0: e.clientY, x: e.clientX, y: e.clientY });
+  if (pts.size > 1) { multi = true; items.forEach(i => i.release()); }
+});
+wall.addEventListener('pointermove', e => {
+  const p = pts.get(e.pointerId);
+  if (!p) return;
+  p.x = e.clientX; p.y = e.clientY;
+  if (items.some(i => i.held)) return; // a hold that has started wins over a swipe
+  if (multi && (pts.size < 2 || S.design !== 'A')) return;
+  let dx = 0, dy = 0;
+  for (const q of pts.values()) { dx += q.x - q.x0; dy += q.y - q.y0; }
+  dx /= pts.size; dy /= pts.size;
+  if (Math.abs(dx) < 44 || Math.abs(dx) < 1.5 * Math.abs(dy)) return;
+  step(multi ? 'style' : 'palette', dx < 0 ? 1 : -1);
+  for (const q of pts.values()) { q.x0 = q.x; q.y0 = q.y; }
+});
+for (const ev of ['pointerup', 'pointercancel']) wall.addEventListener(ev, e => pts.delete(e.pointerId));
+
+// dragging on a dock handle (B) or a reel (C)
+let drag = null, dragged = false;
+function grab(el, design, kind, sign) {
+  el.addEventListener('pointerdown', e => {
+    dragged = false;
+    if (S.design === design) drag = { id: e.pointerId, x: e.clientX, kind, sign };
+  });
+}
+document.querySelectorAll('[data-handle]').forEach(el => grab(el, 'B', el.dataset.handle, 1));
+document.querySelectorAll('.reel').forEach(el => {
+  grab(el, 'C', el.dataset.kind, -1);
+  el.querySelectorAll('.ib').forEach((b, i) => b.addEventListener('click', () => step(el.dataset.kind, i ? 1 : -1)));
+});
+addEventListener('pointermove', e => {
+  if (!drag || drag.id !== e.pointerId) return;
+  const dx = e.clientX - drag.x;
+  if (Math.abs(dx) < 26) return;
+  dragged = true;
+  drag.x = e.clientX;
+  step(drag.kind, (dx > 0 ? 1 : -1) * drag.sign);
+});
+for (const ev of ['pointerup', 'pointercancel']) addEventListener(ev, () => (drag = null));
+$('dock').addEventListener('click', e => { if (dragged) { dragged = false; e.stopPropagation(); e.preventDefault(); } }, true);
+
+// the rest of the dock
+$('swap').addEventListener('click', () => { S.swapped = !S.swapped; paint(); });
+$('view').addEventListener('click', e => {
+  const pressed = e.target.closest('button');
+  if (!pressed) return;
+  S.original = !!pressed.dataset.v;
+  for (const b of $('view').children) b.setAttribute('aria-pressed', !!b.dataset.v === S.original);
+  paint();
+});
+$('bPal').addEventListener('click', () => say('The Palettes panel opens here, as it does today.'));
+$('bAdv').addEventListener('click', () => say('The Advanced panel opens here, as it does today.'));
+$('bSave').addEventListener('click', () => say('Saving is not part of this mockup.'));
+$('add').addEventListener('click', () => say('Adding images is not part of this mockup.'));
+
+// icons, as in PixelIcon.svelte
+const ICONS = {
+  save: ['...#...', '...#...', '.#.#.#.', '..###..', '...#...', '.......', '#######'],
+  swap: ['....#..', '.....#.', '#######', '.......', '#######', '.#.....', '..#....'],
+  plus: ['...#...', '...#...', '...#...', '#######', '...#...', '...#...', '...#...'],
+  grid: ['###.###', '###.###', '###.###', '.......', '###.###', '###.###', '###.###'],
+  sliders: ['..##...', '#######', '..##...', '.......', '....##.', '#######', '....##.'],
+};
+document.querySelectorAll('[data-ico]').forEach(el => {
+  const cells = ICONS[el.dataset.ico].map((row, y) => [...row].map((c, x) => (c === '#' ? `<rect x="${x}" y="${y}" width="1" height="1"/>` : '')).join('')).join('');
+  el.insertAdjacentHTML('afterbegin', `<svg class="ico" width="14" height="14" viewBox="0 0 7 7" aria-hidden="true">${cells}</svg>`);
+});
+
+// start: the Bitify logo, then two drawn sprites
+function start() {
+  add('potion.png', potionData());
+  add('ball.png', ballData());
+  setDesign('B');
+  paint();
+}
+const logo = new Image();
+logo.onload = () => {
+  const c = Object.assign(document.createElement('canvas'), { width: logo.width, height: logo.height }), ctx = c.getContext('2d');
+  ctx.drawImage(logo, 0, 0);
+  const d = ctx.getImageData(0, 0, c.width, c.height);
+  add('coin.png', { width: d.width, height: d.height, data: d.data });
+  start();
+};
+logo.onerror = start;
+logo.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABF0lEQVR4nO2XsQ3CMBBF2QCJESgQZWrEDmzBMBGTsAILUDAAEyDRUNJQBKUwco6787+zTSQUS79JivfuLnHi2bQsa7NcdEiqgrt7q6a4CAqO8zxt8yU84ACP4xIZwF+3AWDXzNVQAZcEBw+A7rr/yuPYfCKJwAI58GwJbu4SWIJTEdMoODgV0OaPdEIUQKtPwbQunNu13AW09RIoJdHDQ9wCGqS6AALRxLIEOBDyEBYRsLSZu345rPwCljlz93r4aAIBPopADDcJBImwcVg3HBSu7obxtsnBtLeAg0PV0y5QidRHh87cVb3UBakTGpyrPFm9V6I4XBoFFZFCwXDrUQkOoKXY37EVXuVs0AcFVz8h/fRo9tfrDTQSA4eoK8/CAAAAAElFTkSuQmCC';
+</script>
