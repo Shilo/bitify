@@ -77,7 +77,8 @@ button { font: inherit; color: inherit; }
 /* the wall */
 .grid {
   flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain;
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; align-content: start;
+  /* tiles are at least 140px on phones (two columns), growing to 280px on wide screens */
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(clamp(140px, 30vw, 280px), 1fr)); gap: 16px; align-content: start;
   padding: 8px 16px 132px; /* bottom padding clears the dock */
 }
 .tile { position: relative; margin: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; min-width: 0; }
