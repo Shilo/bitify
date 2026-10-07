@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { analyze, unify, mask, colorize, otsu, hexToRgb, brightness } from './bitify.js';
+import { readFileSync } from 'node:fs';
+import { analyze, unify, mask, colorize, otsu, hexToRgb, brightness, autoThreshold, previewBall } from './bitify.js';
 
 // Builds an analysed image from rows of characters. Each character maps to [r, g, b] or
 // [r, g, b, a] in `pal`; a character that is not in `pal` is an empty (transparent) pixel.
@@ -28,6 +29,20 @@ describe('analyze', () => {
   it('records the darkest and lightest brightness of the solid pixels', () => {
     const img = image(['a bc'], { a: grey(240), b: grey(20), c: grey(120) });
     expect([img.lo, img.hi]).toEqual([20, 240]);
+  });
+
+  it('centers the pattern styles between the dark group and the light group', () => {
+    // dark group 20 and 34 (mean 27), light group 200: Otsu cuts at 34, the center is halfway between the means
+    const img = image(['aabbcccc'], { a: grey(20), b: grey(34), c: grey(200) });
+    expect([img.auto, img.autoTone]).toEqual([34, 114]);
+    expect(image(['  ', '  '], {}).autoTone).toBe(127);
+  });
+
+  it('gives each style the Auto value it uses', () => {
+    const img = image(['aabbcccc'], { a: grey(20), b: grey(34), c: grey(200) });
+    expect(autoThreshold(img, 'lines')).toBe(img.autoLine);
+    for (const style of ['cutout', 'solid']) expect(autoThreshold(img, style)).toBe(img.auto);
+    for (const style of ['checker', 'bayer', 'atkinson']) expect(autoThreshold(img, style)).toBe(img.autoTone);
   });
 
   it('treats alpha below 128 as empty and 128 or more as solid', () => {
@@ -91,6 +106,12 @@ describe('mask', () => {
     // the darkest color sits exactly on the cut, as it does for an outline under a low Auto
     const img = image(['aabb', 'aabb'], { a: grey(35), b: grey(245) });
     for (const style of ['checker', 'bayer']) expect(show(mask(img, style, 35), 4)).toEqual(['##..', '##..']);
+  });
+
+  it('checker, bayer and atkinson: at Auto both shades of a two-shade outline stay dark', () => {
+    // Otsu's cut lands on the lighter outline shade; centered there, that shade would be half patterned
+    const img = image(Array(4).fill('abccccba'), { a: grey(20), b: grey(34), c: grey(200) });
+    for (const style of ['checker', 'bayer', 'atkinson']) expect(show(mask(img, style), 8)).toEqual(Array(4).fill('##....##'));
   });
 
   it('checker, bayer and atkinson: an image of one color has no range and stays flat', () => {
@@ -412,11 +433,32 @@ describe('unify', () => {
     expect(show(mask(light, 'bayer'), 4)).toEqual(['....']);
   });
 
+  it('shares the center for the pattern styles', () => {
+    const dark = image(['aabb'], { a: grey(10), b: grey(60) }), light = image(['aabb'], { a: grey(150), b: grey(240) });
+    unify([dark, light]);
+    // the shared cut is 60: the dark group is 10 and 60 (mean 35), the light group 150 and 240 (mean 195)
+    expect([dark.autoTone, light.autoTone]).toEqual([115, 115]);
+  });
+
   it('shares the seam strength, picked after the shared brightness cut', () => {
     const a = image(['aabb'], { a: grey(250), b: grey(200) }), b = image(['aabb'], { a: grey(250), b: grey(150) }), c = image(['ab  '], { a: grey(5), b: grey(5) });
     expect([a.autoSeam, b.autoSeam, c.autoSeam]).toEqual([24, 24, 24]); // alone, each splits its own two colors
     unify([a, b, c]);
     // together the cut falls under all four light colors, so their steps of 50 and 100 are seams to rank
     expect([a.autoSeam, b.autoSeam, c.autoSeam]).toEqual([50, 50, 50]);
+  });
+});
+
+describe('docs/styles.md', () => {
+  it('shows, for every style, exactly what the code draws for the preview ball', () => {
+    const doc = readFileSync(new URL('../../docs/styles.md', import.meta.url), 'utf8').replace(/\r\n/g, '\n');
+    const ball = previewBall();
+    for (const style of ['cutout', 'lines', 'solid', 'checker', 'bayer', 'atkinson', 'silhouette']) {
+      const title = `## ${style[0].toUpperCase()}${style.slice(1)}\n`, from = doc.indexOf(title);
+      expect(from, title).toBeGreaterThan(-1);
+      const section = doc.slice(from, doc.indexOf('\n## ', from + 1));
+      const drawn = show(mask(ball, style), ball.w).map(row => row.trimEnd()).join('\n');
+      expect(section, title).toContain('```\n' + drawn + '\n```');
+    }
   });
 });

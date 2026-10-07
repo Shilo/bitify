@@ -306,7 +306,12 @@ light or its lightest color dark, and outlines and highlights stay whole.
 Auto picks a value per image with Otsu's method, which splits a histogram into two groups
 at the point that separates them best:
 
-- For the brightness styles, on the histogram of pixel brightness. Fallback 127.
+- For Cutout and Solid, on the histogram of pixel brightness. Fallback 127.
+- For Checker, Bayer and Atkinson, the point halfway between the mean brightness of the dark
+  group and of the light group that this split separates (the split itself when one group
+  is empty). Otsu's value is the lightest brightness of the dark group, and a pattern style
+  renders the color at its threshold half and half, so with Otsu's value the lighter shade
+  of a two-shade outline came out patterned.
 - For Lines, on the histogram of non-zero differences between horizontally and vertically
   adjacent non-empty pixels. This separates soft shading steps from real part boundaries.
   The value is never below 24: an image with only soft shading has nothing to separate,
@@ -401,7 +406,9 @@ Dependencies beyond Vite and Svelte:
   - empty pixels stay empty in every style;
   - Solid splits at the threshold;
   - Checker, Bayer and Atkinson pattern a middle color, keep an image's darkest color dark
-    and its lightest light, and leave an image of one color flat;
+    and its lightest light, leave an image of one color flat, and at Auto keep both shades
+    of a two-shade outline dark;
+  - every worked example in `docs/styles.md` is exactly what the code draws;
   - Lines outlines an inner part as well as the silhouette, draws a one-pixel boundary,
     ignores a shading step below the threshold, frames only images that have empty
     pixels, and at Auto draws no lines along soft shading;

@@ -39,8 +39,14 @@ Every style except Silhouette depends on one number from 1 to 254, the threshold
 histogram and finds the value that splits it into two groups that are each as tight as
 possible, and as far apart as possible.
 
-- For the brightness styles the histogram is of pixel brightness, so Auto lands between the
+- For Cutout and Solid the histogram is of pixel brightness, so Auto lands between the
   image's dark tones and its light tones. If there is nothing to split, it uses 127.
+- For Checker, Bayer and Atkinson, Auto starts from that same split and takes the point
+  halfway between the average brightness of the dark group and that of the light group.
+  Otsu's own value is the lightest brightness of the dark group, and a pattern style gives
+  the color at its threshold a half-and-half pattern, so with Otsu's value the lighter shade
+  of a two-shade outline would come out patterned. Halfway between the groups, dark colors
+  stay dark, light colors stay light, and what lies between them is patterned.
 - For Lines the histogram is of the differences between every pair of horizontally or
   vertically adjacent solid pixels (identical neighbours are left out). Soft shading steps
   form one group and real part boundaries form the other, so Auto lands between them. It
@@ -103,7 +109,8 @@ darker stripe across the middle. Here is its brightness, one hex digit per pixel
 ```
 
 In the results, `#` is the first color, `.` is the second color and blank is empty. All use
-Auto, which for this image is 81 for brightness, 52 for Lines and 24 for Cutout's seams.
+Auto, which for this image is 81 for Cutout and Solid, 120 for the pattern styles, 52 for
+Lines and 24 for Cutout's seams.
 
 ## Cutout
 
@@ -270,21 +277,21 @@ A pixel becomes the second color if its tone is above 0.25 where `x + y` is even
    ##....##
   #........#
  #..........#
-##..........##
-#............#
-#............#
-#.#.#.#.#.#.##
-##.#.#.#.#.#.#
-###.#.#.#.#.##
- #.........##
-  #.....#.##
+##.........###
+#...........##
+#..........#.#
+#.#.#.#.######
+##.#.#.#######
+###.#.########
+ #.#.#.#.#.##
+  #.#.#.#.##
    ###.#.##
     ######
 ```
 
-The stripe sits in the middle band, so it becomes the pattern. So does the dimmest shading
-at the lower right of the body. The outline is the image's darkest color, tone 0, and stays
-solid.
+The lighter left end of the stripe and the dimmer lower part of the body fall in the middle
+band and become the pattern. The darker right end of the stripe stays solid, and so does the
+outline, which is the image's darkest color, tone 0.
 
 The pattern is tied to pixel position, not to the image, so it does not shimmer between the
 frames of an animation.
@@ -309,24 +316,24 @@ from 1/32 to 31/32.
 
 ```
     ######
-   ##....##
+   ##.#..##
   #........#
  #......#.#.#
 ##..........##
-#.........#.##
+#.#...#...#.##
 #............#
-###.#.#.###.##
+##############
 ##.#.#.#.#.#.#
-###.#.#.#.####
- #..........#
+##############
+ #.......#..#
   #.#.#.#.##
-   ##....##
+   ##..#.##
     ######
 ```
 
-More of the image is touched than in Checker: the stripe is patterned, and the dimmer parts
-of the body pick up a few dark pixels. The outline stays solid, because the image's darkest
-color has tone 0 and no cut-off is that low.
+More of the image is touched than in Checker: the stripe is dark with a row of light pixels
+through it, and the dimmer parts of the body pick up a few dark ones. The outline stays
+solid, because the image's darkest color has tone 0 and no cut-off is that low.
 
 The grid's values are arranged so that any brightness lights an evenly spread set of
 positions. Like Checker, the pattern is tied to pixel position and is stable across frames.
@@ -362,20 +369,20 @@ character: very dark and very light areas stay clean instead of filling with str
    ##....##
   #........#
  #..........#
-##..........##
+##........#.##
 #............#
-#..........#.#
-###.##########
-#.##..#..##.##
-##.##.###.####
+#........#..##
+##############
+##############
+####.##.######
  #..........#
-  #........#
-   ##.#..##
+  #....#...#
+   ###..###
     ######
 ```
 
-The stripe is close to the threshold, so it breaks into a scatter. The body is far from it
-and stays almost flat.
+The stripe is well below the threshold, so it stays almost solid, with a light pixel here
+and there. The body is above it and stays almost flat.
 
 Limits:
 

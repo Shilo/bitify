@@ -1,5 +1,5 @@
 <script module>
-  import { analyze, mask, colorize, brightness } from './lib/bitify.js';
+  import { mask, colorize, brightness, previewBall } from './lib/bitify.js';
 
   // A palette is two colors and nothing else. Which one is the first color is up to Swap.
   const PRESETS = [
@@ -26,19 +26,7 @@
     ['silhouette', 'Silhouette'],
   ];
 
-  // A small shaded ball with a stripe, used to preview each style.
-  function ball() {
-    const s = 14, data = new Uint8ClampedArray(s * s * 4);
-    for (let y = 0; y < s; y++) for (let x = 0; x < s; x++) {
-      const r = Math.hypot(x - 6.5, y - 6.5);
-      if (r > 7) continue;
-      const shade = Math.hypot(x - 4, y - 3) * 9;
-      const l = Math.round(r > 6 ? 25 : y >= 7 && y <= 9 ? 95 - shade * 0.4 : 240 - shade);
-      data.set([l, l, l, 255], (y * s + x) * 4);
-    }
-    return analyze({ width: s, height: s, data });
-  }
-  const BALL = ball();
+  const BALL = previewBall(); // previews each style
 </script>
 
 <script>

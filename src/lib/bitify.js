@@ -38,6 +38,17 @@ export function otsu(hist, fallback) {
   return t;
 }
 
+// Auto's center for the pattern styles: halfway between the mean brightness of the dark group
+// and of the light group that `cut` separates. Otsu's cut itself is the lightest brightness of
+// the dark group; centered there, that color would always come out half patterned.
+function toneCenter(hist, cut) {
+  let darkN = 0, darkSum = 0, lightN = 0, lightSum = 0;
+  for (let i = 0; i < 256; i++) {
+    if (i <= cut) { darkN += hist[i]; darkSum += i * hist[i]; } else { lightN += hist[i]; lightSum += i * hist[i]; }
+  }
+  return darkN && lightN ? Math.round((darkSum / darkN + lightSum / lightN) / 2) : cut;
+}
+
 // Cutout's Auto seam strength for one image or all the frames of an animation: Otsu on the
 // differences between adjacent solid pixels that are on the same side of brightness `t`. The
 // jumps from one side to the other are left out; the tone split already shows those.
@@ -56,8 +67,8 @@ function seamStrength(frames, t) {
 }
 
 // Takes an ImageData-shaped object. Done once per image; `mask` reuses the result.
-// `auto` is the Auto threshold for the brightness styles, `autoLine` the one for Lines and
-// `autoSeam` the seam strength for Cutout.
+// `auto` is the Auto threshold for Cutout and Solid, `autoTone` the one for the pattern styles,
+// `autoLine` the one for Lines and `autoSeam` the seam strength for Cutout.
 // `lo` and `hi` are the darkest and lightest brightness among the solid pixels.
 export function analyze({ width: w, height: h, data }) {
   const lum = new Uint8Array(w * h), hist = new Array(256).fill(0), edges = new Array(256).fill(0);
@@ -74,6 +85,7 @@ export function analyze({ width: w, height: h, data }) {
   }
   edges[0] = 0; // identical neighbours are not edges
   const img = { w, h, data, lum, hasAlpha, lo, hi, hist, edges, auto: otsu(hist, 127), autoLine: Math.max(MIN_EDGE, otsu(edges, 0)) };
+  img.autoTone = toneCenter(hist, img.auto);
   img.autoSeam = seamStrength([img], img.auto);
   return img;
 }
@@ -89,6 +101,7 @@ export function unify(frames) {
   const auto = otsu(hist, 127);
   const shared = {
     auto,
+    autoTone: toneCenter(hist, auto),
     autoLine: Math.max(MIN_EDGE, otsu(edges, 0)),
     autoSeam: seamStrength(frames, auto), // picked after the shared cut, which decides the tones
     hasAlpha: frames.some(f => f.hasAlpha),
@@ -99,8 +112,11 @@ export function unify(frames) {
   return frames;
 }
 
+// The styles that turn brightness into a pattern.
+const PATTERNS = ['checker', 'bayer', 'atkinson'];
+
 // The threshold Auto uses for this image in this style.
-export const autoThreshold = (img, style) => (style === 'lines' ? img.autoLine : img.auto);
+export const autoThreshold = (img, style) => (style === 'lines' ? img.autoLine : PATTERNS.includes(style) ? img.autoTone : img.auto);
 
 // One byte per pixel: 0 empty, 1 first color (lines, dark pixels), 2 second color (fill, light pixels).
 // `threshold` null means Auto.
@@ -194,4 +210,18 @@ export function colorize(m, first, second) {
     out[i] = k[0]; out[i + 1] = k[1]; out[i + 2] = k[2]; out[i + 3] = 255;
   }
   return out;
+}
+
+// A small shaded ball with a stripe: the image the style buttons preview, and the worked example
+// in docs/styles.md.
+export function previewBall() {
+  const s = 14, data = new Uint8ClampedArray(s * s * 4);
+  for (let y = 0; y < s; y++) for (let x = 0; x < s; x++) {
+    const r = Math.hypot(x - 6.5, y - 6.5);
+    if (r > 7) continue;
+    const shade = Math.hypot(x - 4, y - 3) * 9;
+    const l = Math.round(r > 6 ? 25 : y >= 7 && y <= 9 ? 95 - shade * 0.4 : 240 - shade);
+    data.set([l, l, l, 255], (y * s + x) * 4);
+  }
+  return analyze({ width: s, height: s, data });
 }
