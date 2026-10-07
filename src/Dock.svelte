@@ -141,7 +141,7 @@
         {#if pop === 'styles'}
           <div class="menu" role="group" aria-label="Style">
             {#each STYLES as [key, name]}
-              <button class="preset" aria-pressed={style === key} onclick={() => { style = key; pop = null; }}>
+              <button class="preset" aria-pressed={style === key} onclick={() => { style = key; showOriginal = false; pop = null; }}>
                 <Pixels class="demo" pixels={demo(key)} />{name}
               </button>
             {/each}

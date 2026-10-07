@@ -36,6 +36,11 @@
     }
   });
   let showOriginal = $state(false);
+  // Changing the style or the threshold, by any route, shows the result: the view goes back to bitified.
+  $effect(() => {
+    style, threshold; // read, so this runs when either changes
+    showOriginal = false;
+  });
   let spaceHeld = $state(false);
   // raw: items hold large typed arrays, and the list is only ever replaced, never mutated
   let items = $state.raw([]);

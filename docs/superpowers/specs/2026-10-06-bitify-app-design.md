@@ -122,6 +122,12 @@ as the styles are stepped through. Its tooltip and its name for screen readers s
 dock does not move when the style changes; on phones the two halves are equal. Pressing it
 shows the bitified images. It does not open the list of styles; the Style button does.
 
+Changing the style or the threshold while the original is showing switches the view back
+to bitified, so the change is seen. That holds for every route: the list of styles (also
+when the style chosen there is the current one), the threshold slider, its number box and
+Auto, and stepping the styles by wheel, swipe or arrow key. Changing a color or the palette
+leaves the view as it is.
+
 Panels open directly above the dock. Only one is open at a time. A panel closes on Escape,
 on a second press of its button, or on a press outside the dock. Presses on other dock
 controls leave it open, so colors can be changed while a panel is showing. A panel never
