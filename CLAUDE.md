@@ -24,16 +24,18 @@ Every push to main deploys to GitHub Pages (.github/workflows/deploy.yml).
 
 Svelte 5 with runes, plain JavaScript, no SvelteKit.
 
-src/lib holds the logic as DOM-free modules, each with unit tests: bitify.js turns pixels into a one-byte-per-pixel mask and the mask into two-color pixels, layout.js sizes the tiles, presets.js lists the palettes and styles and steps through them, gesture.js turns wheel moves into single steps, gif.js reads and writes GIFs (loaded on demand), save.js encodes PNGs, names files and builds the zip.
+src/lib holds the logic as DOM-free modules, each with unit tests: bitify.js turns pixels into a one-byte-per-pixel mask and the mask into two-color pixels, layout.js sizes the tiles and picks how many of an image's pixels a tile converts, presets.js lists the palettes and styles and steps through them, gesture.js turns wheel moves into single steps, gif.js reads and writes GIFs (loaded on demand), save.js encodes PNGs, names files and builds the zip.
 
-App.svelte owns all state and passes it down. Dock.svelte edits settings through bindable props. Tile.svelte derives masks from an image and repaints when they or a color change.
+App.svelte owns all state and passes it down. Dock.svelte edits settings through bindable props. Tile.svelte derives masks from an image and repaints when they or a color change. A tile converts only the pixels it can show: for an image larger than the tile, every k-th pixel of every k-th row (the fourth argument of mask). Saving and copying convert every pixel.
 
 All CSS is global in src/app.css. Components have no style blocks, and there is no border-box reset; sizes depend on that.
 
-PNGs and GIFs are encoded by hand, not through a canvas, because some browsers add noise when a canvas is read back.
+PNGs and GIFs are encoded by hand, not through a canvas, because some browsers add noise when a canvas is read back. A PNG is written with a palette and two bits per pixel, straight from the mask.
 
 ## Things that bite
 
 After a git checkout or merge the dev server can keep serving old CSS. Restart it, or touch the files in src, before trusting the preview.
+
+The loops in bitify.js run once for every pixel of a photo, on phones. Keep them flat, with no array, object or function made per pixel, and time them before and after any change there.
 
 Interface behavior has no automated tests. Check it in a browser at desktop width and at phone width with touch emulation.

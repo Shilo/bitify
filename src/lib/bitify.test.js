@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
-import { analyze, unify, mask, colorize, otsu, hexToRgb, brightness, autoThreshold, previewBall } from './bitify.js';
+import { analyze, unify, mask, shrink, colorize, otsu, hexToRgb, brightness, autoThreshold, previewBall } from './bitify.js';
 
 // Builds an analysed image from rows of characters. Each character maps to [r, g, b] or
 // [r, g, b, a] in `pal`; a character that is not in `pal` is an empty (transparent) pixel.
@@ -466,6 +466,64 @@ describe('unify', () => {
     unify([a, b, c]);
     // together the cut falls under all four light colors, so their steps of 50 and 100 are seams to rank
     expect([a.autoSeam, b.autoSeam, c.autoSeam]).toEqual([50, 50, 50]);
+  });
+});
+
+describe('an image shown smaller than it is', () => {
+  // 23 by 17 pixels of shaded shapes with grain, and a see-through corner
+  const w = 23, h = 17, data = new Uint8ClampedArray(w * h * 4);
+  for (let y = 0, i = 0, seed = 7; y < h; y++) for (let x = 0; x < w; x++, i += 4) {
+    seed = (seed * 1103515245 + 12345) % 2147483648;
+    const v = ((x >> 2) + (y >> 2)) % 3 * 90 + (seed >> 8) % 40;
+    data.set([v, v * 0.8 + y, x * 9, x + y < 6 ? 0 : 255], i);
+  }
+  const src = { width: w, height: h, data }, img = analyze(src);
+  // every k-th value of every k-th row of a full-size array that holds `per` values for each pixel
+  const every = (all, k, per = 1) => {
+    const out = [];
+    for (let y = 0; y < h; y += k) for (let x = 0; x < w; x += k) out.push(...all.slice((y * w + x) * per, (y * w + x + 1) * per));
+    return out;
+  };
+
+  it('converts every k-th pixel of every k-th row to what it is in the full conversion', () => {
+    for (const style of ['cutout', 'lines', 'solid', 'silhouette']) {
+      for (const threshold of [null, 90]) {
+        const full = mask(img, style, threshold);
+        for (const k of [1, 2, 3, 5, 16, 40]) expect([...mask(img, style, threshold, k)], `${style} ${threshold} k=${k}`).toEqual(every(full, k));
+      }
+    }
+  });
+
+  // Every k-th pixel of a pattern is not the pattern: of a checkerboard it is one color only.
+  it('draws the patterns and Atkinson afresh on the pixels it keeps, as light as the full conversion', () => {
+    // a smooth 240 by 180 picture, light in the middle and dark at the corners
+    const sw = 240, sh = 180, smooth = new Uint8ClampedArray(sw * sh * 4);
+    for (let y = 0, i = 0; y < sh; y++) for (let x = 0; x < sw; x++, i += 4) {
+      const v = 128 + 110 * Math.cos((x - 120) / 60) * Math.cos((y - 90) / 45);
+      smooth.set([v, v, v, 255], i);
+    }
+    const picture = analyze({ width: sw, height: sh, data: smooth });
+    const light = m => count(m, 2) / m.length;
+    for (const style of ['checker', 'hatch', 'bayer', 'noise', 'atkinson']) {
+      const full = light(mask(picture, style));
+      expect(full, style).toBeGreaterThan(0.3);
+      expect(full, style).toBeLessThan(0.7);
+      for (const k of [2, 3, 4, 6]) {
+        const m = mask(picture, style, null, k);
+        expect(m.length, `${style} k=${k}`).toBe(Math.ceil(sw / k) * Math.ceil(sh / k));
+        expect(Math.abs(light(m) - full), `${style} k=${k}`).toBeLessThan(0.03);
+      }
+    }
+  });
+
+  it('keeps empty pixels empty when it draws a pattern afresh', () => {
+    for (const style of ['checker', 'hatch', 'bayer', 'noise', 'atkinson']) {
+      for (const k of [2, 3, 5]) expect([...mask(img, style, null, k)].map(v => +!!v), `${style} k=${k}`).toEqual(every(mask(img, 'silhouette'), k));
+    }
+  });
+
+  it('shrinks the original the same way', () => {
+    for (const k of [1, 2, 3, 5, 40]) expect([...shrink(src, k)], `k=${k}`).toEqual(every(data, k, 4));
   });
 });
 

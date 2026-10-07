@@ -258,7 +258,8 @@ viewport height so mobile browser bars do not cut the dock off.
 - "Add images" opens the system picker (`accept="image/*"`, multiple). This is the only
   route on phones.
 - Pasting an image from the clipboard also adds it.
-- New images are appended; existing ones stay.
+- New images are appended; existing ones stay. The images of a batch are read one after
+  another, and each appears as soon as it has been read, without waiting for the rest.
 - Files the browser cannot decode are skipped, and a short message says how many.
 
 ### Empty state
@@ -380,6 +381,64 @@ Every pixel ends up in one of three states:
 
 Output pixels are fully opaque or fully transparent. Brightness of a pixel is
 `0.2126 R + 0.7152 G + 0.0722 B`, rounded, 0 to 255.
+
+### Images larger than their tile
+
+A photo has many more pixels than its tile has screen pixels to show them with, and
+converting all of them on every change is what makes a phone stall. So a tile converts only
+the pixels it can show:
+
+- A tile converts every k-th pixel of every k-th row, starting from the top left pixel. k is
+  the longer side of the image divided by the number of screen pixels along the tile's
+  image area (its width in CSS pixels, less the 8px left clear on each side, times the
+  device pixel ratio), rounded down, and at least 1. So the tile still has at least one
+  image pixel for each screen pixel. The canvas is `ceil(width / k)` by `ceil(height / k)`
+  pixels.
+- k never leaves the shorter side of the image fewer than 32 pixels. A long thin image
+  would otherwise be drawn in the wrong shape once its few rows were rounded up.
+- In Cutout, Lines, Solid and Silhouette each kept pixel gets exactly the value it has in
+  the full conversion, worked out from its real neighbours in the full image. The tile
+  shows the full result with the pixels between left out.
+- Checker, Hatch, Bayer, Noise and Atkinson are instead drawn afresh on the kept pixels:
+  the pattern's tile is counted in kept pixels, and Atkinson passes its error from one kept
+  pixel to the next. Their look comes from how neighbouring pixels alternate, and every
+  k-th pixel of a pattern that repeats every 2, 3, 4 or 16 pixels is the same few cells of
+  it each time, which would turn the picture far too light or too dark. Drawn afresh, the
+  tile is as light and as dark as the saved file in every part, with a pattern as fine as
+  the screen can show; the saved file's own pattern is finer still.
+- The original is shown through the same k, so comparing does not change the picture.
+- Anything no larger than its tile, which includes every sprite, has k = 1 and is converted
+  whole, exactly as it is saved.
+- k follows the tile: when tiles resize, an image is converted again only if its k changed.
+- Saving and copying always convert every pixel. The analysis on adding, which picks the
+  Auto thresholds, also reads every pixel.
+- The rule for k lives in `src/lib/layout.js` (`sampling`) and is unit tested.
+- An animation converts a frame when it is first shown, not all frames on every change.
+
+### Drafts while the threshold slider is dragged
+
+On a slow phone a photo's tile can still take a fifth of a second to convert, which is too
+long to follow a finger on the slider. So while the slider is being dragged, an image that
+is too slow is drawn as a rougher draft, and sharpened when the slider is let go:
+
+- Each tile times its conversions: milliseconds per pixel converted, for this image, in
+  this style, on this device.
+- During a drag the wall has 24 milliseconds for each move, shared equally between the
+  tiles. A tile whose image would take longer than its share at its usual k uses a larger k
+  instead: the smallest whole number at which the conversion is expected to fit, which is
+  `ceil(sqrt(width * height * milliseconds per pixel / share))`.
+- A draft is the same conversion with more pixels left out, so its tones and shapes are
+  the final ones and only its detail is rougher.
+- An image that converts within its share is never drafted, which covers photos on a fast
+  computer.
+- An image whose usual k is 1 is never drafted either, however slow. The screen is showing
+  every one of its pixels, and a draft would drop some of them: for pixel art that is not
+  rougher, it is wrong. So sprites are never drafted.
+- A draft, like any tile, keeps at least 32 pixels on the image's shorter side.
+- The drag begins with the slider's first move while a pointer is pressed on it. It ends
+  when the slider reports its final value, the pointer is lifted, the slider loses focus,
+  or the Style panel closes (which takes the slider away mid-drag). The arrow keys and the
+  number box set the threshold in single steps with no pointer pressed, and never draft.
 
 ### Styles
 
@@ -505,9 +564,16 @@ in browsers.
   chosen colors, empty pixels transparent, with the original frame delays and loop count.
   Download all puts GIFs and PNGs in the same zip.
 - Saving always uses the bitified version, whatever the wall is showing.
-- PNG files are encoded directly from the pixels, not through a canvas. Some browsers
+- PNG files are encoded directly from the conversion, not through a canvas. Some browsers
   (Brave, Safari private browsing, Firefox strict mode) add noise when a page reads a
   canvas back, which would put stray colors in a saved file.
+- A PNG lists its colors once, as a palette of three (empty, first color, second color, with
+  the empty one transparent), and holds two bits for each pixel. The picture is exactly the
+  same as a file with four bytes per pixel would give, but there is a sixteenth of the data
+  to compress, so a photo saves several times faster and into a smaller file. An image
+  editor opens such a file as an indexed-color image.
+- Download all converts and encodes one image at a time, so that only one image's full
+  conversion is in memory at once.
 - Files are offered through a temporary link with the `download` attribute, which works in
   current iOS Safari and Android Chrome.
 
@@ -517,7 +583,7 @@ in browsers.
   clipboard as a PNG at its original pixel size, ready to paste into another program. Ctrl+C
   does the same for the first image.
 - Like saving, copying always uses the bitified version, whatever the wall is showing, and
-  the PNG is encoded directly from the pixels.
+  the PNG is encoded directly from the conversion, in the same form as a saved one.
 - Browsers accept PNG on the clipboard but not GIF, so an animation is copied as its first
   frame, and the message says so.
 - A short message confirms the copy ("name copied."), or says that it failed. It fails where
@@ -553,14 +619,14 @@ Vite with the `svelte` template (Svelte 5, runes, mounted with `mount()`), JavaS
 
 | File | Purpose |
 |---|---|
-| `src/lib/bitify.js` | Pure conversion, no DOM. `analyze(imageData)` returns size, pixels, brightness, whether any pixel is empty, the darkest and lightest brightness, and the auto thresholds. `mask(analysis, style, threshold)` returns one byte per pixel (0 empty, 1 first color, 2 second color). `colorize(mask, first, second)` returns RGBA pixels. |
+| `src/lib/bitify.js` | Pure conversion, no DOM. `analyze(imageData)` returns size, pixels, brightness, each pixel's difference from the pixel to its right and from the one below, whether any pixel is empty, the darkest and lightest brightness, and the auto thresholds. `mask(analysis, style, threshold, k)` returns one byte per pixel (0 empty, 1 first color, 2 second color), for every pixel or, with k above 1, for every k-th pixel of every k-th row. `shrink(imageData, k)` returns those same pixels of the original. `colorize(mask, first, second)` returns RGBA pixels. |
 | `src/lib/gif.js` | Reading an animated GIF into full frames (`decodeGif`) and writing a two-color one (`encodeGif`). No DOM. |
-| `src/lib/save.js` | Output file naming, zip, PNG encoding from pixels, single save, save all, copy to the clipboard. |
+| `src/lib/save.js` | Output file naming, zip, PNG encoding from a mask and the two colors, single save, save all, copy to the clipboard. |
 | `src/lib/settings.js` | The default settings, and `restore(text, styles)`, which reads stored settings back and checks each value. No DOM. |
 | `src/lib/presets.js` | The list of palettes and the list of styles, whether two colors are a palette's, and stepping to the next or previous style or palette. No DOM. |
 | `src/lib/gesture.js` | `wheelSteps()`, which turns the stream of wheel moves from a mouse or trackpad into single steps. No DOM. |
 | `src/App.svelte` | All state; top bar, wall, empty state, drop overlay, the Share sheet, messages; window-level drop, paste, key, wheel and swipe handling. |
-| `src/Tile.svelte` | One image: canvas, caption, Copy, Download and Remove (Share and Remove on touch screens), hold to compare. |
+| `src/Tile.svelte` | One image: canvas, caption, Copy, Download and Remove (Share and Remove on touch screens), hold to compare. Measures itself to pick k (see "Images larger than their tile"). |
 | `src/Dock.svelte` | The dock and its two panels. |
 | `src/Pixels.svelte` | A canvas that shows a block of pixels; used by tiles and by the style previews. |
 | `src/PixelIcon.svelte` | Renders a 7×7 glyph from a row-string map. |
@@ -569,9 +635,10 @@ Vite with the `svelte` template (Svelte 5, runes, mounted with `mount()`), JavaS
 State is a handful of `$state` values in `App.svelte`: the two colors, style, threshold
 (`null` means Auto), which version the wall shows, the open panel, and the list of images.
 Each image holds an id, its name, its original pixels and its analysis. A tile derives its
-mask from the image, style and threshold, and repaints its canvas when the mask or either
+mask from the image, style, threshold and k, and repaints its canvas when the mask or either
 color changes. That keeps a color drag cheap: the mask is reused and only the two-color
-fill is redone.
+fill is redone. Masks and colored pixels are made for a frame when it is first shown and
+kept until what they depend on changes.
 
 Dependencies beyond Vite and Svelte:
 
@@ -584,9 +651,22 @@ Dependencies beyond Vite and Svelte:
 
 - Undecodable files are skipped with a message; the rest of the batch still loads.
 - If saving or copying fails, a message says so. Nothing else is lost.
-- Conversion runs on the main thread. That is instant for pixel art. A multi-megapixel
-  photo will cause a visible pause on every change; moving conversion to a worker is the
-  upgrade path if that ever matters.
+- Conversion runs on the main thread. A change costs about as many pixels as the screen
+  shows, however large the images are (see "Images larger than their tile"), so it stays
+  quick on a phone, and a drag of the threshold slider is kept quick by drafts (see "Drafts
+  while the threshold slider is dragged"). What still reads every pixel of a photo, and so
+  pauses the page for a moment on a slow phone, is adding it and saving or copying it.
+  Moving those to a worker is the upgrade path if that ever matters.
+- A large image's canvas is rarely a whole number of screen pixels per pixel, so in the
+  pattern styles a tile can show faint evenly spaced lines where the browser fits one to
+  the other. The saved file has none.
+- Reading an image uses a canvas of its full size for a moment, which is given back as
+  soon as the pixels are read.
+- The settings are applied as they change, not held back to one per screen frame. Browsers
+  already report a slider's moves once per frame, and holding changes back was measured to
+  add a frame or two of delay to every one of them.
+- Zooming the page in with two fingers shows a large image's tile at the detail it was
+  converted for, not more.
 - Tiles scale images to fit, which is not always a whole-number multiple, so displayed
   pixels can be slightly uneven. Exports are exact.
 
@@ -610,10 +690,20 @@ Dependencies beyond Vite and Svelte:
     around a light part, never cuts a light pixel on the silhouette, and rims only images
     that have empty pixels;
   - Silhouette fills everything;
+  - converting every k-th pixel of every k-th row gives, in Cutout, Lines, Solid and
+    Silhouette, exactly those pixels of the full conversion, and shrinking the original
+    gives the same pixels of it;
+  - at every k the patterns and Atkinson come out as light as the full conversion, and
+    keep empty pixels empty;
   - Auto returns a value between two clearly separated groups.
-- `src/lib/save.js`: output naming, including duplicates.
+- `src/lib/save.js`: output naming, including duplicates; a PNG holds the palette and
+  exactly the given pixels, packed two bits each.
 - `src/lib/settings.js`: stored settings come back unchanged; missing or damaged text gives
   the defaults; a single unusable value is replaced on its own.
+- `src/lib/layout.js`: besides the wall's fit, the k a tile converts at: 1 for an image the
+  tile shows whole, larger for a larger image, larger still for a draft that would
+  otherwise run over its budget, never a draft for an image shown whole, and never fewer
+  than 32 pixels on the shorter side.
 - `src/lib/presets.js`: styles and palettes step forward and back and wrap at both ends; a
   palette is found either way round; the user's own colors stay as a stop after the presets.
 - `src/lib/gesture.js`: one step per notch of a mouse wheel; a trackpad's small moves add
@@ -621,7 +711,9 @@ Dependencies beyond Vite and Svelte:
   step for a flick with its fading tail.
 - The interface is checked by hand in a desktop browser and at phone width: add by drop,
   picker and paste; remove one and all; change colors, palette, style and threshold;
-  compare by switch, hold and Space; save one and all; copy by button and by Ctrl+C, then
+  compare by switch, hold and Space; with a large photo and the processor slowed down in the
+  browser's developer tools, drag the threshold slider and see the image follow as a rougher
+  draft and sharpen on release; save one and all; copy by button and by Ctrl+C, then
   paste into another program; at phone width, copy and save from a tile's Share sheet, and
   close it by Cancel and by a tap outside; and quick switch by wheel, Shift
   or Ctrl with wheel, arrow keys and swipes, on the empty screen, on a wall that fits and on one

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { fitGrid } from './layout.js';
+import { fitGrid, sampling } from './layout.js';
 
 // A tile is `size` wide and `size + extra` tall (the image plus its caption).
 const opts = { gap: 16, extra: 27, min: 200 };
@@ -57,5 +57,41 @@ describe('fitGrid', () => {
   it('never returns zero columns or a tile under 96px', () => {
     expect(fitGrid(3, 100, 400, opts)).toEqual({ cols: 1, size: 100, scroll: true });
     expect(fitGrid(1, 700, 40, { gap: 16, extra: 48, min: 140 })).toEqual({ cols: 6, size: 96, scroll: true });
+  });
+});
+
+describe('sampling', () => {
+  it('converts an image whole when the tile has a screen pixel for each of its pixels', () => {
+    expect(sampling(64, 64, 955)).toBe(1);
+    expect(sampling(955, 700, 955)).toBe(1);
+    expect(sampling(1900, 1000, 955)).toBe(1); // not yet two image pixels per screen pixel
+  });
+
+  it('leaves out pixels of a larger image, but keeps one for each screen pixel', () => {
+    expect(sampling(4000, 3000, 955)).toBe(4);
+    expect(sampling(3000, 4000, 955)).toBe(4);
+    expect(sampling(2048, 2048, 955)).toBe(2);
+  });
+
+  it('drafts an image that would take longer than the budget', () => {
+    // 12 million pixels at 0.0001 ms each is 1200 ms; a fiftieth of the pixels fits 24 ms, and 8 x 8 is the first step past 50
+    expect(sampling(4000, 3000, 955, 24, 0.0001)).toBe(8);
+    expect(sampling(4000, 3000, 955, 6, 0.0001)).toBe(15); // a quarter of the budget, as with four tiles
+  });
+
+  it('does not draft an image that is quick enough already', () => {
+    expect(sampling(4000, 3000, 955, 24, 0.000001)).toBe(4);
+    expect(sampling(4000, 3000, 955, 24, 0)).toBe(4); // nothing timed yet
+  });
+
+  it('never drafts an image that is shown whole, however slow', () => {
+    expect(sampling(256, 256, 955, 2, 1)).toBe(1);
+    expect(sampling(1024, 1024, 955, 2, 1)).toBe(1);
+  });
+
+  it('keeps 32 pixels on the shorter side of a long thin image', () => {
+    expect(sampling(4000, 30, 955)).toBe(1);
+    expect(sampling(4000, 320, 400)).toBe(10);
+    expect(sampling(4000, 320, 400, 24, 1)).toBe(10); // a draft stops there too
   });
 });

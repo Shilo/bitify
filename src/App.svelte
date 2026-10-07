@@ -1,5 +1,5 @@
 <script>
-  import { analyze, mask, colorize, hexToRgb, autoThreshold } from './lib/bitify.js';
+  import { analyze, mask, hexToRgb, autoThreshold } from './lib/bitify.js';
   import { unify } from './lib/bitify.js';
   import { saveOne, saveAll, copyOne } from './lib/save.js';
   import { fitGrid } from './lib/layout.js';
@@ -42,6 +42,10 @@
     showOriginal = false;
   });
   let spaceHeld = $state(false);
+  // While the threshold slider is being dragged, the wall as a whole gets this many milliseconds
+  // to redraw after each move, shared out between the tiles (see `budget` in Tile.svelte).
+  const DRAG_MS = 24;
+  let dragging = $state(false);
   // raw: items hold large typed arrays, and the list is only ever replaced, never mutated
   let items = $state.raw([]);
   // The logo, shown on the empty screen as a live preview of the settings. Never saved or counted.
@@ -197,7 +201,9 @@
     const ctx = canvas.getContext('2d', { willReadFrequently: true });
     ctx.drawImage(bitmap, 0, 0);
     bitmap.close();
-    return { frames: [{ original: ctx.getImageData(0, 0, canvas.width, canvas.height) }] };
+    const original = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    canvas.width = 0; // gives the canvas's memory back now; iOS limits how much all canvases may hold
+    return { frames: [{ original }] };
   }
 
   // Turns decoded frames into an item for the wall. `original` and `img` are the first frame;
@@ -214,27 +220,27 @@
     .then(decoded => (example = toItem(0, 'Example', decoded)))
     .catch(() => {}); // without it the empty screen simply has no preview
 
+  // Each image goes on the wall as soon as it is read, so the first of a batch of photos shows
+  // without waiting for the rest.
   async function addFiles(files) {
-    const added = [];
     let skipped = 0;
     for (const file of files) {
       try {
-        added.push(toItem(++nextId, file.name || 'image.png', await decode(file)));
+        const item = toItem(++nextId, file.name || 'image.png', await decode(file));
+        items = [...items, item];
       } catch {
         skipped++;
       }
     }
-    if (added.length) items = [...items, ...added];
     if (skipped) say(`${skipped} file${skipped === 1 ? '' : 's'} skipped. Bitify reads PNG, GIF, WebP, JPEG and BMP images.`);
   }
 
-  // What gets saved: a still image as its two-color pixels, an animation as one mask per frame.
-  const bitified = item => {
-    const base = { name: item.name, w: item.img.w, h: item.img.h };
-    return item.frames
-      ? { ...base, first, second, loop: item.loop, frames: item.frames.map(f => ({ mask: mask(f.img, style, threshold), delay: f.delay })) }
-      : { ...base, pixels: colorize(mask(item.img, style, threshold), first, second) };
-  };
+  // What gets saved: the two colors with a still image's mask, or with one mask per frame of an
+  // animation. These masks are of every pixel, unlike the ones a tile draws (see k in Tile.svelte).
+  const about = item => ({ name: item.name, w: item.img.w, h: item.img.h, first, second });
+  const still = item => ({ ...about(item), mask: mask(item.img, style, threshold) });
+  const bitified = item =>
+    item.frames ? { ...about(item), loop: item.loop, frames: item.frames.map(f => ({ mask: mask(f.img, style, threshold), delay: f.delay })) } : still(item);
 
   async function save(item) {
     try {
@@ -247,7 +253,7 @@
   // The clipboard takes a PNG but not a GIF, so an animation is copied as its first frame.
   async function copy(item) {
     try {
-      await copyOne({ pixels: colorize(mask(item.img, style, threshold), first, second), w: item.img.w, h: item.img.h });
+      await copyOne(still(item));
       say(`${item.name} copied${item.frames ? ' as a still image' : ''}.`);
     } catch {
       say(`${item.name} could not be copied.`);
@@ -256,7 +262,7 @@
 
   async function saveEverything() {
     try {
-      await saveAll(items.map(bitified));
+      await saveAll(items, bitified);
     } catch {
       say('The images could not be saved.');
     }
@@ -356,6 +362,7 @@
           {style}
           {threshold}
           flipped={showOriginal !== spaceHeld}
+          budget={dragging ? DRAG_MS / items.length : 0}
           onshare={() => share(item)}
           oncopy={() => copy(item)}
           onsave={() => save(item)}
@@ -379,7 +386,7 @@
   </div>
 {/if}
 
-<Dock bind:first bind:second bind:style bind:threshold bind:showOriginal {autoRange} count={items.length} onsaveall={saveEverything} />
+<Dock bind:first bind:second bind:style bind:threshold bind:showOriginal bind:dragging {autoRange} count={items.length} onsaveall={saveEverything} />
 
 {#if dragDepth > 0}
   <div class="drop" style:background={second} style:color={overlayInk}>Drop to bitify</div>

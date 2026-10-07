@@ -16,12 +16,24 @@
     style = $bindable(),
     threshold = $bindable(), // null means Auto
     showOriginal = $bindable(),
+    dragging = $bindable(), // whether the threshold slider is being dragged
     autoRange, // [lowest, highest] threshold Auto is using
     count,
     onsaveall,
   } = $props();
 
   let panel = $state(null); // null, 'palettes' or 'style'
+  // A drag of the threshold slider: `dragging` from its first move with a pointer down until it
+  // ends. The arrow keys move the slider with no pointer down, and are single steps, not a drag.
+  let pressed = false;
+  function settle() {
+    pressed = false;
+    dragging = false;
+  }
+  // Closing the panel takes the slider away, and with it the events that end a drag.
+  $effect(() => {
+    if (panel !== 'style') settle();
+  });
   let pop = $state(null); // what is open above the style panel: null or 'styles'
   let dock;
   let eaten = false; // the last press closed something, so its click is dropped too
@@ -161,7 +173,11 @@
           max="254"
           aria-label="Threshold"
           value={threshold ?? Math.round((autoRange[0] + autoRange[1]) / 2)}
-          oninput={e => (threshold = +e.currentTarget.value)}
+          onpointerdown={() => (pressed = true)}
+          oninput={e => { threshold = +e.currentTarget.value; dragging = pressed; }}
+          onchange={settle}
+          onpointerup={settle}
+          onblur={settle}
         />
         <div class="field">
           <input

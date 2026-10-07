@@ -46,18 +46,21 @@ describe('pngBytes', () => {
   }
 
   it('writes a valid PNG holding exactly the given pixels', () => {
-    // 3 wide, 2 high: first color, empty, second color on each row
-    const row = [246, 223, 164, 255, 0, 0, 0, 0, 11, 10, 12, 255];
-    const png = pngBytes({ pixels: Uint8ClampedArray.from([...row, ...row]), w: 3, h: 2 });
+    // 5 wide, 2 high, so a row does not end on a whole byte: first color, empty, second, second, first
+    const row = [1, 0, 2, 2, 1];
+    const png = pngBytes({ mask: Uint8Array.from([...row, ...row]), w: 5, h: 2, first: '#f6dfa4', second: '#0b0a0c' });
 
     expect([...png.subarray(0, 8)]).toEqual([137, 80, 78, 71, 13, 10, 26, 10]);
-    const [head, data, end] = chunks(png);
-    expect([head.type, data.type, end.type]).toEqual(['IHDR', 'IDAT', 'IEND']);
-    expect([head.crcOk, data.crcOk, end.crcOk]).toEqual([true, true, true]);
-    // width 3, height 2, 8 bits per channel, RGBA, no interlace
-    expect([...head.data]).toEqual([0, 0, 0, 3, 0, 0, 0, 2, 8, 6, 0, 0, 0]);
-    // each row is a filter byte of 0 followed by the row's pixels, untouched
-    expect([...inflateSync(data.data)]).toEqual([0, ...row, 0, ...row]);
+    const all = chunks(png), [head, colors, clear, data] = all;
+    expect(all.map(c => c.type)).toEqual(['IHDR', 'PLTE', 'tRNS', 'IDAT', 'IEND']);
+    expect(all.every(c => c.crcOk)).toBe(true);
+    // width 5, height 2, 2 bits per pixel, colors from a palette, no interlace
+    expect([...head.data]).toEqual([0, 0, 0, 5, 0, 0, 0, 2, 2, 3, 0, 0, 0]);
+    // the palette is empty, first color, second color, and only the empty one is see-through
+    expect([...colors.data]).toEqual([0, 0, 0, 246, 223, 164, 11, 10, 12]);
+    expect([...clear.data]).toEqual([0]);
+    // each row is a filter byte of 0, then its pixels four to a byte, the first in the top two bits
+    expect([...inflateSync(data.data)]).toEqual([0, 0b01001010, 0b01000000, 0, 0b01001010, 0b01000000]);
   });
 });
 
@@ -71,7 +74,7 @@ describe('animations', () => {
   });
 
   it('encodes an image with frames as a GIF and one without as a PNG', async () => {
-    const still = await fileBytes({ name: 'a.png', pixels: Uint8ClampedArray.of(246, 223, 164, 255), w: 1, h: 1 });
+    const still = await fileBytes({ name: 'a.png', mask: Uint8Array.of(1), w: 1, h: 1, first: '#f6dfa4', second: '#0b0a0c' });
     expect([...still.subarray(0, 4)]).toEqual([137, 80, 78, 71]);
 
     const moving = await fileBytes({ name: 'a.gif', w: 1, h: 1, first: '#f6dfa4', second: '#0b0a0c', loop: 0,
