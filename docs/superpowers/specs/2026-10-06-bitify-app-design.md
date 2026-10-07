@@ -207,12 +207,13 @@ right:
   fit a range.
 - Help button ("?"): opens a tooltip above the strip, with its arrow over the button. It
   has four lines in the body text size: what the threshold currently does, how to hold
-  an image to compare, how to change the style without the panels ("Scroll to change the
-  style."; on touch devices "Swipe up or down to change the style."), and the same for the
-  palette ("Hold Shift and scroll to change the palette."; on touch devices "Swipe left or
-  right to change the palette."). The threshold value and the word "Hold" are bold. In the
-  last two lines the whole gesture is bold: "Scroll", "Hold Shift and scroll", "Swipe up or
-  down", "Swipe left or right". Space and Shift are drawn as keys. It closes
+  an image to compare, how to change the style without the panels ("Scroll, or press ↑ ↓,
+  to change the style."; on touch devices "Swipe up or down to change the style."), and the
+  same for the palette ("Hold Shift and scroll, or press ← →, to change the palette."; on
+  touch devices "Swipe left or right to change the palette."). The threshold value and the
+  word "Hold" are bold. In the last two lines the whole gesture is bold: "Scroll", "Hold
+  Shift and scroll", "Swipe up or down", "Swipe left or right". Space, Shift and the four
+  arrows are drawn as keys. A wider gap sets the first line apart from the other three. It closes
   the same ways the list of styles does, and only one of the two is open at a time.
 
 While the strip is a single row, a divider separates the style button from the threshold,

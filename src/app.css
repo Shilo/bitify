@@ -281,6 +281,7 @@ button { font: inherit; color: inherit; }
   display: grid; gap: 4px; padding: 10px 14px; border-radius: 10px; background: var(--fg); color: var(--bg); box-shadow: 0 10px 32px var(--shadow);
 }
 .tip p { margin: 0; }
+.tip p:first-child { margin-bottom: 8px; } /* sets the threshold line apart from the gestures */
 .tip kbd { padding: 0 5px; border: 1px solid; border-radius: 5px; font: inherit; font-size: 12px; font-weight: 600; }
 .tip::after {
   content: ""; position: absolute; top: 100%; right: calc(12px + var(--hit) / 2 - 6px);
