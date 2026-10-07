@@ -1,4 +1,4 @@
-import { zipSync } from 'fflate';
+import { zipSync, zlibSync } from 'fflate';
 
 // Output file names for a list of original names: extension replaced by "-1bit.png",
 // with -2, -3... added so no two outputs collide (case-insensitively, for Windows).
@@ -18,11 +18,43 @@ export function zipBytes(names, files) {
   return zipSync(Object.fromEntries(names.map((name, i) => [name, files[i]])), { level: 0 });
 }
 
-function pngBlob({ pixels, w, h }) {
-  const canvas = Object.assign(document.createElement('canvas'), { width: w, height: h });
-  canvas.getContext('2d').putImageData(new ImageData(pixels, w, h), 0, 0);
-  return new Promise((resolve, reject) =>
-    canvas.toBlob(blob => (blob ? resolve(blob) : reject(new Error('PNG encoding failed'))), 'image/png'));
+const CRC_TABLE = Uint32Array.from({ length: 256 }, (_, n) => {
+  for (let k = 0; k < 8; k++) n = n & 1 ? 0xedb88320 ^ (n >>> 1) : n >>> 1;
+  return n;
+});
+function crc32(bytes) {
+  let c = ~0;
+  for (const b of bytes) c = CRC_TABLE[(c ^ b) & 255] ^ (c >>> 8);
+  return ~c >>> 0;
+}
+function chunk(type, data) {
+  const out = new Uint8Array(12 + data.length), view = new DataView(out.buffer);
+  view.setUint32(0, data.length);
+  out.set([...type].map(ch => ch.charCodeAt(0)), 4);
+  out.set(data, 8);
+  view.setUint32(8 + data.length, crc32(out.subarray(4, 8 + data.length)));
+  return out;
+}
+
+// Encodes RGBA pixels as a PNG by hand instead of through a canvas. Some browsers add noise to
+// canvas readback as fingerprinting protection, which would put stray colors in a 1-bit image.
+export function pngBytes({ pixels, w, h }) {
+  const head = new Uint8Array(13);
+  new DataView(head.buffer).setUint32(0, w);
+  new DataView(head.buffer).setUint32(4, h);
+  head.set([8, 6, 0, 0, 0], 8); // 8 bits per channel, RGBA, no interlace
+  const stride = w * 4 + 1, rows = new Uint8Array(stride * h); // each row: filter byte 0, then its pixels
+  for (let y = 0; y < h; y++) rows.set(pixels.subarray(y * w * 4, (y + 1) * w * 4), y * stride + 1);
+  const parts = [
+    Uint8Array.of(137, 80, 78, 71, 13, 10, 26, 10),
+    chunk('IHDR', head),
+    chunk('IDAT', zlibSync(rows)),
+    chunk('IEND', new Uint8Array(0)),
+  ];
+  const png = new Uint8Array(parts.reduce((n, p) => n + p.length, 0));
+  let at = 0;
+  for (const p of parts) { png.set(p, at); at += p.length; }
+  return png;
 }
 
 function download(blob, filename) {
@@ -35,11 +67,10 @@ function download(blob, filename) {
 
 // An image here is { name, pixels, w, h }: the original file name and its bitified RGBA pixels.
 export async function saveOne(image) {
-  download(await pngBlob(image), outNames([image.name])[0]);
+  download(new Blob([pngBytes(image)], { type: 'image/png' }), outNames([image.name])[0]);
 }
 
 export async function saveAll(images) {
-  const files = [];
-  for (const image of images) files.push(new Uint8Array(await (await pngBlob(image)).arrayBuffer()));
-  download(new Blob([zipBytes(outNames(images.map(i => i.name)), files)], { type: 'application/zip' }), 'bitify.zip');
+  const zip = zipBytes(outNames(images.map(i => i.name)), images.map(pngBytes));
+  download(new Blob([zip], { type: 'application/zip' }), 'bitify.zip');
 }
