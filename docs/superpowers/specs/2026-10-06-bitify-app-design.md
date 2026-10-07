@@ -43,8 +43,8 @@ Assumptions made here, open to correction:
 One screen, no page scroll. Three layers:
 
 1. **Top bar.** The "Bitify" wordmark, an image count, "Remove all" (only when there are
-   images), a GitHub icon linking to `https://github.com/Shilo/bitify` in a new tab, and
-   "Add images" at the far right.
+   images), "Add images", and at the far right a GitHub icon linking to
+   `https://github.com/Shilo/bitify` in a new tab.
 2. **The wall.** A grid of square tiles that fills the screen and scrolls on its own. Each
    tile shows one image, scaled up with hard pixel edges on a faint checkerboard so
    transparency is visible. Below it: file name and pixel size.
@@ -54,6 +54,23 @@ Chrome is neutral grey in both light and dark themes (following the system setti
 the two chosen colors are the only strong colors on screen. Icons are 7×7 one-bit pixel
 glyphs. The wordmark and empty-state heading use Pixelify Sans; everything else uses
 Schibsted Grotesk. Both load from Google Fonts with system fallbacks.
+
+### Fitting the wall to the screen
+
+The tiles always use the space between the top bar and the dock, and are centered in it.
+
+- With one image, its tile is as large as that space allows. Each time an image is added or
+  removed, or the window changes size, the tiles are resized so that all of them still fit
+  without scrolling. The column count is whichever gives the largest tiles, so two images sit
+  side by side on a wide screen and stacked on a tall one. A partly filled last row is
+  centered.
+- A tile's size counts its caption, and on touch screens its Download and Remove buttons, so
+  nothing is pushed under the dock.
+- Tiles are never shrunk below a usable size: 140px on phones, rising to 200px on wide
+  screens. Once that many images no longer fit, the wall scrolls instead, with as many
+  columns of at least that size as fit, stretched to fill the width.
+
+The rule lives in `src/lib/layout.js` (`fitGrid`) and is unit tested.
 
 ### Tiles
 

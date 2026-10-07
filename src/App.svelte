@@ -1,6 +1,7 @@
 <script>
   import { analyze, mask, colorize, hexToRgb } from './lib/bitify.js';
   import { saveOne, saveAll } from './lib/save.js';
+  import { fitGrid } from './lib/layout.js';
   import Dock from './Dock.svelte';
   import Tile from './Tile.svelte';
   import PixelIcon from './PixelIcon.svelte';
@@ -18,6 +19,19 @@
   let items = $state.raw([]);
   // The logo, shown on the empty screen as a live preview of the settings. Never saved or counted.
   let example = $state.raw(null);
+  // Size of the area the wall can use, measured from the page (see .probe in app.css).
+  let wallWidth = $state(0);
+  let wallHeight = $state(0);
+  // A tile is its square image plus a caption underneath. On touch screens the caption row also
+  // holds the Download and Remove buttons, so it is taller. These mirror the sizes in app.css.
+  const captionHeight = matchMedia('(hover: none)').matches ? 48 : 27;
+  const layout = $derived(
+    fitGrid(items.length, wallWidth, wallHeight, {
+      gap: 16,
+      extra: captionHeight,
+      min: Math.max(140, Math.min(200, wallWidth * 0.16)), // smallest useful tile; below it the wall scrolls
+    }),
+  );
   let dragDepth = $state(0);
   let message = $state('');
   let picker;
@@ -157,19 +171,22 @@
 </header>
 
 {#if items.length}
-  <div class="grid">
-    {#each items as item (item.id)}
-      <Tile
-        {item}
-        {first}
-        {second}
-        {style}
-        {threshold}
-        flipped={showOriginal !== spaceHeld}
-        onsave={() => save(item)}
-        onremove={() => (items = items.filter(i => i !== item))}
-      />
-    {/each}
+  <div class="grid" style:--cols={layout.cols} style:--tile-size="{layout.size}px">
+    <div class="probe" bind:clientWidth={wallWidth} bind:clientHeight={wallHeight}></div>
+    <div class="tiles">
+      {#each items as item (item.id)}
+        <Tile
+          {item}
+          {first}
+          {second}
+          {style}
+          {threshold}
+          flipped={showOriginal !== spaceHeld}
+          onsave={() => save(item)}
+          onremove={() => (items = items.filter(i => i !== item))}
+        />
+      {/each}
+    </div>
   </div>
 {:else}
   <div class="empty">

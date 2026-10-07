@@ -11,6 +11,7 @@
   --tile2: #d9dbe3;
   --shadow: rgba(27, 28, 36, 0.16);
   --hit: 36px; /* height of dock controls; grows on touch screens */
+  --dock-space: 132px; /* room left at the bottom of the screen for the dock */
   --display: "Pixelify Sans", ui-monospace, "Courier New", monospace;
   --body: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
   color-scheme: light;
@@ -78,12 +79,21 @@ button { font: inherit; color: inherit; }
 }
 
 /* the wall */
+/* App.svelte sets --cols and --tile-size so the tiles fill the space between the top bar and the dock
+   (see lib/layout.js). When there are too many to fit at a usable size, the wall scrolls. */
 .grid {
   flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain;
-  /* tiles are at least 140px on phones (two columns), growing to 280px on wide screens */
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(clamp(140px, 30vw, 280px), 1fr)); gap: 16px; align-content: start;
-  padding: 8px 16px 132px; /* bottom padding clears the dock */
+  position: relative; display: flex;
+  padding: 8px 16px var(--dock-space); /* bottom padding clears the dock */
 }
+/* an invisible box covering the usable area, measured to work out the layout */
+.probe { position: absolute; inset: 8px 16px var(--dock-space); visibility: hidden; pointer-events: none; }
+/* the auto margin centers the tiles when they fit and keeps them at the top when they scroll */
+.tiles {
+  margin: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 16px;
+  width: calc(var(--cols) * var(--tile-size) + (var(--cols) - 1) * 16px);
+}
+.tiles .tile { width: var(--tile-size); }
 .tile { position: relative; margin: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; min-width: 0; }
 .art {
   grid-column: 1 / -1; position: relative; aspect-ratio: 1; max-width: 100%;
@@ -106,7 +116,7 @@ button { font: inherit; color: inherit; }
 }
 
 /* .empty scrolls when the screen is short; the auto margin centers its content when there is room */
-.empty { flex: 1; min-height: 0; overflow-y: auto; display: flex; padding: 24px 16px 132px; }
+.empty { flex: 1; min-height: 0; overflow-y: auto; display: flex; padding: 24px 16px var(--dock-space); }
 .empty-in { margin: auto; display: grid; justify-items: center; gap: 26px; text-align: center; }
 .empty-text { display: grid; justify-items: center; gap: 14px; min-width: 0; }
 /* The example is as large as the screen allows, up to 320px. The amount subtracted from the
@@ -201,7 +211,7 @@ button { font: inherit; color: inherit; }
 }
 /* phones: the dock spans the screen and the view switch gets its own row */
 @media (max-width: 520px) {
-  .grid, .empty { padding-bottom: 172px; }
+  :root { --dock-space: 172px; }
   .dock { left: 12px; right: 12px; bottom: 12px; transform: none; width: auto; max-width: none; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 10px; }
   .seg { order: 5; flex: 1 0 100%; box-sizing: border-box; }
   .seg button { flex: 1; }
