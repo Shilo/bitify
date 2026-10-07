@@ -38,6 +38,7 @@
   });
 
   const styleName = $derived(STYLES.find(s => s[0] === style)[1]);
+  const saveLabel = $derived(count === 1 ? 'Download' : 'Download all');
   const demo = key => new ImageData(colorize(mask(BALL, key), first, second), BALL.w, BALL.h);
 
   // What Auto picked, shown in the number box while it is empty: a range when images differ.
@@ -238,7 +239,8 @@
     <PixelIcon name="sliders" /><span class="lbl">Style</span>
   </button>
   <span class="sep"></span>
-  <button class="btn primary" disabled={!count} aria-label="Download all" title="Download all" onclick={onsaveall}>
-    <PixelIcon name="save" /><span class="lbl">Download all</span>
+  <!-- With one image there is no "all": it saves as the file itself, not a zip. -->
+  <button class="btn primary" disabled={!count} aria-label={saveLabel} title={saveLabel} onclick={onsaveall}>
+    <PixelIcon name="save" /><span class="lbl">{saveLabel}</span>
   </button>
 </div>

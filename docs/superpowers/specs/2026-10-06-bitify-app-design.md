@@ -109,7 +109,7 @@ The rule lives in `src/lib/layout.js` (`fitGrid`) and is unit tested.
 | Palette | Opens the palettes panel. |
 | View switch | Two-way switch for the whole wall: "Original", and the bitified image under the name of the current style, such as "Cutout". |
 | Style | Opens the style panel. |
-| Download all | Saves every bitified image in one zip. Disabled when the wall is empty. |
+| Download all | Saves every bitified image in one zip. With exactly one image on the wall it reads "Download" and saves that image as its own file, not a zip. Disabled when the wall is empty. |
 
 The dock is three groups, with a divider between them where there is room (see "Responsive
 behavior"): the colors with the Palette button that picks them, the view switch with the
@@ -471,7 +471,8 @@ in browsers.
 - A single image saves as `<original name without extension>-1bit.png` at its original
   pixel size.
 - Download all saves `bitify.zip` containing one such PNG per image. Duplicate names get
-  `-2`, `-3` and so on.
+  `-2`, `-3` and so on. With exactly one image on the wall there is no zip: the button reads
+  "Download" and saves that one file, the same as the image's own Download.
 - An animation saves as `<original name without extension>-1bit.gif`: every frame in the two
   chosen colors, empty pixels transparent, with the original frame delays and loop count.
   Download all puts GIFs and PNGs in the same zip.

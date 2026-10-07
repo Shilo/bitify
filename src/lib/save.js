@@ -77,7 +77,9 @@ export async function saveOne(image) {
   download(new Blob([await fileBytes(image)], { type: 'image/' + kind(image) }), outNames([image.name], [kind(image)])[0]);
 }
 
+// One image saves as itself; a zip of one file would only be an extra step to open.
 export async function saveAll(images) {
+  if (images.length === 1) return saveOne(images[0]);
   const zip = zipBytes(outNames(images.map(i => i.name), images.map(kind)), await Promise.all(images.map(fileBytes)));
   download(new Blob([zip], { type: 'application/zip' }), 'bitify.zip');
 }
