@@ -9,6 +9,12 @@ export function hexToRgb(hex) {
   return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
 }
 
+// Brightness of a '#rrggbb' color, 0 to 255, by the same weights `analyze` uses for pixels.
+export function brightness(hex) {
+  const [r, g, b] = hexToRgb(hex);
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
 // Largest of the red, green and blue differences between the pixels at byte offsets i and j.
 const diff = (d, i, j) => Math.max(Math.abs(d[i] - d[j]), Math.abs(d[i + 1] - d[j + 1]), Math.abs(d[i + 2] - d[j + 2]));
 

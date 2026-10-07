@@ -1,15 +1,20 @@
 <script module>
-  import { analyze, mask, colorize } from './lib/bitify.js';
+  import { analyze, mask, colorize, brightness } from './lib/bitify.js';
 
+  // A palette is two colors and nothing else. Which one is the first color is up to Swap.
   const PRESETS = [
-    { name: 'Torch', first: '#f6dfa4', second: '#0b0a0c' },
-    { name: 'Citron', first: '#262262', second: '#e6f0b4' },
-    { name: 'Moss', first: '#1e3a2b', second: '#d7e8a0' },
-    { name: 'Plum', first: '#3b1f3f', second: '#f6c7b6' },
-    { name: 'Ember', first: '#2a1414', second: '#ff9f45' },
-    { name: 'Tide', first: '#0e3b5c', second: '#bfe9e0' },
-    { name: 'Rose', first: '#4a0d2b', second: '#ffd1dc' },
-    { name: 'Mono', first: '#000000', second: '#ffffff' },
+    { name: 'Glow', dark: '#222323', light: '#f0f6f0' },
+    { name: 'Mono', dark: '#000000', light: '#ffffff' },
+    { name: 'Paper', dark: '#382b26', light: '#b8c2b9' },
+    { name: 'Torch', dark: '#0b0a0c', light: '#f6dfa4' },
+    { name: 'Game Boy', dark: '#0f380f', light: '#9bbc0f' },
+    { name: 'Pocket', dark: '#1f1f1f', light: '#c4cfa1' },
+    { name: 'Nokia', dark: '#43523d', light: '#c7f0d8' },
+    { name: 'Playdate', dark: '#322f29', light: '#d7d4cc' },
+    { name: 'Phosphor', dark: '#25342f', light: '#01eb5f' },
+    { name: 'Amber', dark: '#3f291e', light: '#fdca55' },
+    { name: 'Commodore', dark: '#40318e', light: '#88d7de' },
+    { name: 'Rose', dark: '#4a0d2b', light: '#ffd1dc' },
   ];
   const STYLES = [
     ['lines', 'Lines'],
@@ -77,6 +82,15 @@
     first = second;
     second = was;
   }
+
+  // A palette matches the current colors either way round, and choosing one keeps them the
+  // way round they are: dark first, unless Swap has put the lighter color first.
+  const chosen = p => (first === p.dark && second === p.light) || (first === p.light && second === p.dark);
+  function choose(p) {
+    const swapped = brightness(first) > brightness(second);
+    first = swapped ? p.light : p.dark;
+    second = swapped ? p.dark : p.light;
+  }
 </script>
 
 <svelte:window
@@ -92,10 +106,10 @@
         {#each PRESETS as p}
           <button
             class="preset"
-            aria-pressed={first === p.first && second === p.second}
-            onclick={() => { first = p.first; second = p.second; }}
+            aria-pressed={chosen(p)}
+            onclick={() => choose(p)}
           >
-            <span class="chip" style:background="linear-gradient(135deg, {p.first} 50%, {p.second} 50%)"></span>{p.name}
+            <span class="chip" style:background="linear-gradient(135deg, {p.dark} 50%, {p.light} 50%)"></span>{p.name}
           </button>
         {/each}
       </div>

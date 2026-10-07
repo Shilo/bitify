@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { analyze, unify, mask, colorize, otsu, hexToRgb } from './bitify.js';
+import { analyze, unify, mask, colorize, otsu, hexToRgb, brightness } from './bitify.js';
 
 // Builds an analysed image from rows of characters. Each character maps to [r, g, b] or
 // [r, g, b, a] in `pal`; a character that is not in `pal` is an empty (transparent) pixel.
@@ -105,6 +105,12 @@ describe('mask', () => {
 describe('colorize', () => {
   it('reads #rrggbb', () => {
     expect(hexToRgb('#f6dfa4')).toEqual([246, 223, 164]);
+  });
+
+  it('ranks colors by brightness, green counting most', () => {
+    expect(brightness('#000000')).toBe(0);
+    expect(brightness('#ffffff')).toBeCloseTo(255);
+    expect(brightness('#00ff00')).toBeGreaterThan(brightness('#ff00ff'));
   });
 
   it('paints first and second color opaque and leaves empty pixels transparent', () => {

@@ -12,8 +12,14 @@ Every pixel ends up in one of three states:
 - **Second color.** Fill and light pixels. This is the right swatch.
 
 There is nothing in between: output pixels are fully opaque or fully transparent, and only
-ever one of the two chosen colors. Swap exchanges the two colors without changing which
-pixels are which.
+ever one of the two chosen colors.
+
+A style decides only which pixels are first color and which are second. It knows nothing
+about what the two colors are, and no style prefers a palette or expects the first color
+to be the darker one. Swap exchanges the two colors without changing which pixels are
+which, and works the same in every style: with the dark color first the result keeps the
+tones of the original, and with the light color first it is the same picture inverted.
+See [palettes.md](palettes.md).
 
 Two measurements are used throughout:
 

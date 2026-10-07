@@ -95,7 +95,7 @@ The rule lives in `src/lib/layout.js` (`fitGrid`) and is unit tested.
 | Control | Behavior |
 |---|---|
 | First color swatch | Native color picker. Color for lines and dark pixels. |
-| Swap | Exchanges the two colors. |
+| Swap | Exchanges the two colors. Works the same in every style and with every palette. |
 | Second color swatch | Native color picker. Color for fill and light pixels. |
 | Palettes | Opens the palettes panel. |
 | Original / Bitified | Two-way switch for the whole wall. |
@@ -106,19 +106,36 @@ Panels open directly above the dock. Only one is open at a time. A panel closes 
 on a second press of its button, or on a press outside the dock. Presses on other dock
 controls leave it open, so colors can be changed while a panel is showing.
 
-**Palettes panel.** Eight presets in a 4×2 grid, each a diagonally split chip with a
-name. The preset matching the current colors is marked. Choosing one sets both colors.
+**Palettes panel.** Twelve presets in a 4×3 grid, each a diagonally split chip with a
+name. The rows are classics, handheld screens, then monitors. Where each pair comes from
+is in [docs/palettes.md](../../palettes.md).
 
-| Name | First color | Second color |
+A palette is two colors, a dark one and a light one, and nothing else. Palette, Swap and
+style are independent: the palette decides which two colors, Swap decides which of them is
+the first color, and the style decides which pixels get which. No palette favors a style
+or a way round, and no style favors any colors.
+
+- The chip always shows the dark color on the left.
+- A preset is marked while the two current colors are its two colors, either way round.
+  Swap never unmarks it; changing a color with a swatch does.
+- Choosing a preset sets both colors and keeps the way round they are: dark color first,
+  or light color first if the first color is currently the brighter of the two.
+- The app opens on Glow with the dark color first.
+
+| Name | Dark color | Light color |
 |---|---|---|
-| Torch (default) | `#f6dfa4` | `#0b0a0c` |
-| Citron | `#262262` | `#e6f0b4` |
-| Moss | `#1e3a2b` | `#d7e8a0` |
-| Plum | `#3b1f3f` | `#f6c7b6` |
-| Ember | `#2a1414` | `#ff9f45` |
-| Tide | `#0e3b5c` | `#bfe9e0` |
-| Rose | `#4a0d2b` | `#ffd1dc` |
+| Glow (default) | `#222323` | `#f0f6f0` |
 | Mono | `#000000` | `#ffffff` |
+| Paper | `#382b26` | `#b8c2b9` |
+| Torch | `#0b0a0c` | `#f6dfa4` |
+| Game Boy | `#0f380f` | `#9bbc0f` |
+| Pocket | `#1f1f1f` | `#c4cfa1` |
+| Nokia | `#43523d` | `#c7f0d8` |
+| Playdate | `#322f29` | `#d7d4cc` |
+| Phosphor | `#25342f` | `#01eb5f` |
+| Amber | `#3f291e` | `#fdca55` |
+| Commodore | `#40318e` | `#88d7de` |
+| Rose | `#4a0d2b` | `#ffd1dc` |
 
 **Advanced panel.**
 

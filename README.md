@@ -9,7 +9,7 @@ Convert pixel art to 1-bit: every image is redrawn in two colors you pick. Runs 
 ## Features
 
 - Add any number of images by drag and drop, file picker or paste.
-- Two colors, swap, and eight preset palettes. Changes redraw every image at once.
+- Two colors, swap, and twelve preset palettes. Changes redraw every image at once.
 - Six styles: Lines (outlines each part of a sprite, not only its silhouette), Solid, Checker, Bayer, Atkinson and Silhouette.
 - Threshold slider, with a per-image Auto setting.
 - Compare with the original: switch the whole wall, hold a tile, or hold Space.

@@ -10,8 +10,8 @@
 
   const touch = matchMedia('(pointer:coarse)').matches;
 
-  let first = $state('#f6dfa4'); // lines and dark pixels
-  let second = $state('#0b0a0c'); // fill and light pixels
+  let first = $state('#222323'); // lines and dark pixels
+  let second = $state('#f0f6f0'); // fill and light pixels
   let style = $state('lines');
   let threshold = $state(null); // null means Auto
   let showOriginal = $state(false);
