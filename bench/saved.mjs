@@ -8,7 +8,7 @@ import { mkdtempSync, readFileSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, extname } from 'node:path';
 
-const STYLES = ['cutout', 'solid', 'lines', 'checker', 'hatch', 'bayer', 'noise', 'atkinson', 'silhouette'];
+const STYLES = (process.env.STYLES ?? 'cutout,solid,lines,checker,hatch,bayer,noise,atkinson,silhouette').split(',');
 const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.png': 'image/png', '.gif': 'image/gif' };
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 // Opens the connection to the page, trying again if the browser, still starting, does not answer.
@@ -23,7 +23,8 @@ async function opened(url) {
   throw new Error('could not connect to the browser');
 }
 
-async function measure(dist) {
+// One style in one build, in a browser of its own: a headless browser that has stopped answering stays stopped.
+async function session(dist, style) {
   const server = createServer((req, res) => {
     const path = join(dist, decodeURIComponent(new URL(req.url, 'http://x').pathname).replace(/\/$/, '/index.html'));
     if (!existsSync(path)) return res.writeHead(404).end();
@@ -40,7 +41,7 @@ async function measure(dist) {
   let seq = 0;
   const waiting = new Map();
   ws.onmessage = e => { const m = JSON.parse(e.data); if (m.id && waiting.has(m.id)) { waiting.get(m.id)(m); waiting.delete(m.id); } };
-  const send = (method, params = {}) => new Promise((r, fail) => { const id = ++seq; waiting.set(id, r); ws.send(JSON.stringify({ id, method, params })); if (process.env.TRACE) console.error('>', method); setTimeout(() => waiting.has(id) && fail(new Error('no answer to ' + method)), 240000); });
+  const send = (method, params = {}) => new Promise((r, fail) => { const id = ++seq; waiting.set(id, r); ws.send(JSON.stringify({ id, method, params })); if (process.env.TRACE) console.error('>', method); setTimeout(() => waiting.has(id) && fail(new Error('no answer to ' + method)), 100000); });
   const run = async fn => {
     const m = await send('Runtime.evaluate', { expression: `(${fn})()`, awaitPromise: true, returnByValue: true });
     if (m.result?.exceptionDetails) throw new Error(JSON.stringify(m.result.exceptionDetails.exception ?? m.result.exceptionDetails));
@@ -58,9 +59,9 @@ async function measure(dist) {
   };
   await send('Page.enable');
   await send('Emulation.setDeviceMetricsOverride', { width: 412, height: 915, deviceScaleFactor: 2.625, mobile: true });
-  const results = {};
   let hook;
-  for (const style of STYLES) {
+  const quit = () => { try { ws.close(); } catch {} edge.kill(); server.close(); };
+  try {
     await send('Emulation.setCPUThrottlingRate', { rate: 1 });
     // one script at a time: a second one declaring the same names would fail and leave the first style in place
     if (hook) await send('Page.removeScriptToEvaluateOnNewDocument', { identifier: hook });
@@ -100,7 +101,7 @@ async function measure(dist) {
       window.__save = () => __get(() => document.querySelector('.dock .btn.primary').click());
       window.__copy = () => __get(() => window.dispatchEvent(new KeyboardEvent('keydown', { key: 'c', ctrlKey: true, bubbles: true })));
     }`);
-    const r = (results[style] = { style: await run(`() => JSON.parse(localStorage.getItem('bitify')).style`) });
+    const r = { style: await run(`() => JSON.parse(localStorage.getItem('bitify')).style`) };
     r.savedAtAuto = await run(`() => __save()`);
     r.copiedAtAuto = await run(`() => __copy()`);
     // now with the processor slowed and a finger moving the slider and not letting go, which is when the new build draws drafts
@@ -109,7 +110,7 @@ async function measure(dist) {
       document.querySelector('.dock button[aria-label="Style"]').click(); await new Promise(r => setTimeout(r, 200));
       const slider = document.querySelector('#threshold');
       slider.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }));
-      for (const v of [70, 80, 90, 97]) { slider.value = v; slider.dispatchEvent(new Event('input', { bubbles: true })); await new Promise(r => requestAnimationFrame(r)); }
+      for (const v of [70, 80, 90, 97]) { slider.value = v; slider.dispatchEvent(new Event('input', { bubbles: true })); await new Promise(r => setTimeout(r, 40)); }
       const c = document.querySelector('.tiles .tile canvas'); return c.width + 'x' + c.height;
     }`);
     // the drag is kept alive with a move just before each, so the draft is on screen when the file is made
@@ -117,8 +118,19 @@ async function measure(dist) {
     r.savedInDrag = await run(`() => { ${nudge}; return __save(); }`);
     r.copiedInDrag = await run(`() => { ${nudge}; return __copy(); }`);
     console.error(dist, style, JSON.stringify(r));
+    return r;
+  } finally {
+    quit();
   }
-  ws.close(); edge.kill(); server.close();
+}
+
+async function measure(dist) {
+  const results = {};
+  for (const style of STYLES) {
+    for (let attempt = 1; ; attempt++) {
+      try { results[style] = await session(dist, style); break; } catch (e) { if (attempt === 4) throw e; console.error(dist, style, 'did not finish, trying again:', String(e).slice(0, 80)); }
+    }
+  }
   return results;
 }
 
