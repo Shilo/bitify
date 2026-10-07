@@ -4,8 +4,8 @@
   import PixelIcon from './PixelIcon.svelte';
 
   // `flipped` true means the wall is showing originals. Holding the tile shows the other version.
-  // Without `onremove` the tile is a preview only and has no Copy, Download or Remove buttons.
-  let { item, first, second, style, threshold, flipped, oncopy, onsave, onremove } = $props();
+  // Without `onremove` the tile is a preview only and has no buttons.
+  let { item, first, second, style, threshold, flipped, onshare, oncopy, onsave, onremove } = $props();
   let held = $state(false);
   let holdTimer, downX = 0, downY = 0;
 
@@ -60,8 +60,10 @@
   </div>
   {#if onremove}
     <div class="acts">
-      <button class="ib" onclick={oncopy} aria-label="Copy {item.name}" title="Copy"><PixelIcon name="copy" /></button>
-      <button class="ib" onclick={onsave} aria-label="Download {item.name}" title="Download"><PixelIcon name="save" /></button>
+      <!-- app.css shows Share on touch screens and Copy and Download everywhere else -->
+      <button class="ib touch" onclick={onshare} aria-label="Share {item.name}" title="Share"><PixelIcon name="share" /></button>
+      <button class="ib mouse" onclick={oncopy} aria-label="Copy {item.name}" title="Copy"><PixelIcon name="copy" /></button>
+      <button class="ib mouse" onclick={onsave} aria-label="Download {item.name}" title="Download"><PixelIcon name="save" /></button>
       <button class="ib" onclick={onremove} aria-label="Remove {item.name}" title="Remove"><PixelIcon name="x" /></button>
     </div>
   {/if}

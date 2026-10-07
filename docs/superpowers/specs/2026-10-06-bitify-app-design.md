@@ -24,7 +24,8 @@ Stated by the user:
 - Download each image on its own, and download all images.
 - Copy each image to the clipboard with a button to the left of its Download button, on
   desktop and on phones, and with Ctrl+C for the first image (added 2026-10-07; see
-  "Copying").
+  "Copying"). On phones the two sit behind one Share button, so that only two buttons are
+  beside the name (see "Tiles").
 - A toggle between the original and the bitified image.
 - Swap, a palette selector, and a threshold. Threshold and an Auto button live in an
   style strip above the dock, which never covers the images.
@@ -71,7 +72,7 @@ The tiles always use the space between the top bar and the dock, and are centere
   without scrolling. The column count is whichever gives the largest tiles, so two images sit
   side by side on a wide screen and stacked on a tall one. A partly filled last row is
   centered.
-- A tile's size counts its caption, and on touch screens the row of buttons under it, so
+- A tile's size counts its caption, and on touch screens its Share and Remove buttons, so
   nothing is pushed under the dock.
 - Tiles are never shrunk below a usable size: 140px on phones, rising to 200px on wide
   screens. Once that many images no longer fit, the wall scrolls instead, with as many
@@ -84,20 +85,25 @@ The tiles always use the space between the top bar and the dock, and are centere
   dock, and the tiles are resized to fit it, so no image is hidden while its palette, style
   or threshold is changed. Closing the panel gives the space back. The example on the empty
   screen shrinks the same way.
-- The caption is one line at every size and on every device: the file name at the left, cut
-  off with an ellipsis when it is long, and the pixel size at the right. Three buttons do not
-  fit beside a name on a 140px tile, so on touch screens they have a row of their own (see
-  "Tiles").
+- On touch screens a long file name is cut off with an ellipsis before the Share and
+  Remove buttons. Tiles narrower than 150px still show the pixel size under the name, set
+  slightly smaller and tighter, with the two buttons 36px wide instead of 40px so sizes up to
+  seven characters (such as 128×128) fit whole.
 
 The rule lives in `src/lib/layout.js` (`fitGrid`) and is unit tested.
 
 ### Tiles
 
-- Every tile has three buttons, in this order: Copy, Download, Remove.
-- Pointer devices: the buttons appear in the tile's top-right corner on hover or keyboard
-  focus.
-- Touch devices (no hover): the buttons sit in a row of their own under the caption, at the
-  right, and are always visible, 40px square.
+- Pointer devices: three buttons, Copy, Download and Remove in that order, appear in the
+  tile's top-right corner on hover or keyboard focus.
+- Touch devices (no hover): two buttons, Share and Remove, sit beside the file name and are
+  always visible, 40px square. Three do not fit beside a name on a 140px tile, so Share
+  stands in for Copy and Download.
+- Share opens a sheet at the bottom of the screen, over a dimmed wall: the image's file
+  name, then Copy, Download and Cancel, one under the other. Copy and Download do what the
+  buttons on a pointer device do, and close the sheet. Cancel, a tap on the dimmed wall and
+  Escape close it and do nothing else. While it is open nothing behind it reacts, swipes
+  included. It is the app's own sheet, not the system's share sheet.
 - Holding a tile shows its other version (original if the wall shows bitified, and the
   reverse) until release. With a mouse this is instant. On touch a press counts as a hold
   after 150 ms, and only if the finger has moved less than 8px by then, so scrolling the
@@ -493,8 +499,9 @@ in browsers.
 
 ## Copying
 
-- A tile's Copy button puts that image on the clipboard as a PNG at its original pixel
-  size, ready to paste into another program. Ctrl+C does the same for the first image.
+- A tile's Copy button (on touch screens, Copy in its Share sheet) puts that image on the
+  clipboard as a PNG at its original pixel size, ready to paste into another program. Ctrl+C
+  does the same for the first image.
 - Like saving, copying always uses the bitified version, whatever the wall is showing, and
   the PNG is encoded directly from the pixels.
 - Browsers accept PNG on the clipboard but not GIF, so an animation is copied as its first
@@ -518,8 +525,8 @@ Vite with the `svelte` template (Svelte 5, runes, mounted with `mount()`), JavaS
 | `src/lib/settings.js` | The default settings, and `restore(text, styles)`, which reads stored settings back and checks each value. No DOM. |
 | `src/lib/presets.js` | The list of palettes and the list of styles, whether two colors are a palette's, and stepping to the next or previous style or palette. No DOM. |
 | `src/lib/gesture.js` | `wheelSteps()`, which turns the stream of wheel moves from a mouse or trackpad into single steps. No DOM. |
-| `src/App.svelte` | All state; top bar, wall, empty state, drop overlay, messages; window-level drop, paste, key, wheel and swipe handling. |
-| `src/Tile.svelte` | One image: canvas, caption, Copy, Download and Remove, hold to compare. |
+| `src/App.svelte` | All state; top bar, wall, empty state, drop overlay, the Share sheet, messages; window-level drop, paste, key, wheel and swipe handling. |
+| `src/Tile.svelte` | One image: canvas, caption, Copy, Download and Remove (Share and Remove on touch screens), hold to compare. |
 | `src/Dock.svelte` | The dock and its two panels. |
 | `src/Pixels.svelte` | A canvas that shows a block of pixels; used by tiles and by the style previews. |
 | `src/PixelIcon.svelte` | Renders a 7×7 glyph from a row-string map. |
@@ -581,7 +588,8 @@ Dependencies beyond Vite and Svelte:
 - The interface is checked by hand in a desktop browser and at phone width: add by drop,
   picker and paste; remove one and all; change colors, palette, style and threshold;
   compare by switch, hold and Space; save one and all; copy by button and by Ctrl+C, then
-  paste into another program; and quick switch by wheel, Shift
+  paste into another program; at phone width, copy and save from a tile's Share sheet, and
+  close it by Cancel and by a tap outside; and quick switch by wheel, Shift
   or Ctrl with wheel, arrow keys and swipes, on the empty screen, on a wall that fits and on one
   that scrolls, where the wheel and an up-or-down swipe over the images must scroll them
   and change nothing.

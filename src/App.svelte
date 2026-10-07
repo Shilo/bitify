@@ -54,11 +54,11 @@
   // Size of the area the wall can use, measured from the page (see .probe in app.css).
   let wallWidth = $state(0);
   let wallHeight = $state(0);
-  // A tile is its square image plus a caption underneath. On touch screens the Copy, Download and
-  // Remove buttons sit in a row under the caption, so it is taller. These mirror the sizes in app.css.
+  // A tile is its square image plus a caption underneath. On touch screens the caption row also
+  // holds the Share and Remove buttons, so it is taller. These mirror the sizes in app.css.
   const noHover = matchMedia('(hover: none)');
-  let captionHeight = $state(noHover.matches ? 75 : 27);
-  noHover.addEventListener('change', e => (captionHeight = e.matches ? 75 : 27));
+  let captionHeight = $state(noHover.matches ? 48 : 27);
+  noHover.addEventListener('change', e => (captionHeight = e.matches ? 48 : 27));
   const layout = $derived(
     fitGrid(items.length, wallWidth, wallHeight, {
       gap: 16,
@@ -70,6 +70,13 @@
   let message = $state('');
   let picker;
   let nextId = 0, messageTimer;
+  // On touch screens a tile's Share button opens a sheet with Copy and Download for that image.
+  let sheet;
+  let shared = $state.raw(null); // the image the sheet is for; it stays set after the sheet closes, until the next one
+  function share(item) {
+    shared = item;
+    sheet.showModal();
+  }
 
   // Text color for the drop screen: the first color, unless it is too close to the second to read.
   const brightness = hex => {
@@ -138,9 +145,10 @@
   let swipe = null; // where the finger was at its last step, and its axis once it has one
   function touchstart(e) {
     const { clientX: x, clientY: y } = e.touches[0];
-    // Two fingers are a pinch, a slider or a color picker keeps its own drag, and a press that
-    // has just closed a panel (the Dock stops that one) does nothing else.
-    swipe = e.touches.length === 1 && !e.defaultPrevented && !e.target.closest('input') ? { x, y } : null;
+    // Two fingers are a pinch, a slider or a color picker keeps its own drag, a press that has
+    // just closed a panel (the Dock stops that one) does nothing else, and nothing behind the
+    // open sheet changes.
+    swipe = e.touches.length === 1 && !e.defaultPrevented && !e.target.closest('input, dialog') ? { x, y } : null;
   }
   function touchmove(e) {
     if (!swipe) return;
@@ -344,6 +352,7 @@
           {style}
           {threshold}
           flipped={showOriginal !== spaceHeld}
+          onshare={() => share(item)}
           oncopy={() => copy(item)}
           onsave={() => save(item)}
           onremove={() => (items = items.filter(i => i !== item))}
@@ -371,5 +380,14 @@
 {#if dragDepth > 0}
   <div class="drop" style:background={second} style:color={overlayInk}>Drop to bitify</div>
 {/if}
+<!-- Any click closes the sheet: one of its buttons, or the dimmed screen around it, which counts as the dialog. -->
+<dialog class="sheet" bind:this={sheet} aria-label="Share" onclick={() => sheet.close()}>
+  {#if shared}
+    <p class="name" title={shared.name}>{shared.name}</p>
+    <button class="btn" onclick={() => copy(shared)}><PixelIcon name="copy" />Copy</button>
+    <button class="btn" onclick={() => save(shared)}><PixelIcon name="save" />Download</button>
+    <button class="btn">Cancel</button>
+  {/if}
+</dialog>
 <div class="toast" role="status" hidden={!message}>{message}</div>
 <input bind:this={picker} type="file" accept="image/*" multiple hidden onchange={picked} />
