@@ -57,7 +57,8 @@ button { font: inherit; color: inherit; }
 
 /* top bar and shared controls */
 .bar { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; padding: 14px 16px; }
-.bar .gh { width: var(--hit); height: var(--hit); border-color: transparent; background: transparent; color: inherit; }
+/* same outline, radius and text color as the Add button beside it */
+.bar .gh { width: var(--hit); height: var(--hit); box-sizing: border-box; border-radius: 10px; background: transparent; color: inherit; }
 .gh svg { fill: currentColor; }
 .mark { font-family: var(--display); font-size: 28px; font-weight: 600; line-height: 1; }
 .count { color: var(--muted); font-size: 13px; white-space: nowrap; }
