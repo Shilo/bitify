@@ -43,7 +43,8 @@ Assumptions made here, open to correction:
 One screen, no page scroll. Three layers:
 
 1. **Top bar.** The "Bitify" wordmark, an image count, "Remove all" (only when there are
-   images) and "Add images".
+   images), "Add images", and at the far right a GitHub icon linking to
+   `https://github.com/Shilo/bitify` in a new tab.
 2. **The wall.** A grid of square tiles that fills the screen and scrolls on its own. Each
    tile shows one image, scaled up with hard pixel edges on a faint checkerboard so
    transparency is visible. Below it: file name and pixel size.
@@ -129,6 +130,13 @@ viewport height so mobile browser bars do not cut the dock off.
 
 A centered heading ("Drop pixel art anywhere", or "Add pixel art" on touch devices), one
 line of explanation, and a "Choose images" button. The dock stays visible.
+
+Above the heading sits the Bitify logo, a 32×32 gold coin with a B (`src/assets/logo.png`),
+labelled "Example". It is a live preview: it goes through the same conversion as real
+images, so the colors, Swap, palettes, style, threshold, the Original / Bitified switch and
+hold or Space all apply to it. It is for previewing only. It has no Download or Remove, is
+not counted, and is never included in Download all. It disappears when the first image is
+added and returns when the wall is empty again.
 
 The prototype's "Load examples" button and bundled sample sprites are prototype
 scaffolding and are not part of the app.
