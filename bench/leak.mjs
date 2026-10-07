@@ -21,18 +21,38 @@ const edge = spawn(process.env.BROWSER ?? 'C:/Program Files (x86)/Microsoft/Edge
   '--headless=new', `--remote-debugging-port=${PORT}`, `--user-data-dir=${mkdtempSync(join(tmpdir(), 'bitify-bench-'))}`, '--no-first-run', '--window-size=412,915', 'about:blank',
 ], { stdio: 'ignore' });
 const sleep = ms => new Promise(r => setTimeout(r, ms));
+// Opens the connection to the page, trying again if the browser, still starting, does not answer.
+async function opened(url) {
+  for (let attempt = 0; attempt < 8; attempt++) {
+    const socket = new WebSocket(url);
+    const ok = await new Promise(done => { socket.onopen = () => done(true); socket.onerror = () => done(false); setTimeout(() => done(false), 4000); });
+    if (ok) return socket;
+    try { socket.close(); } catch {}
+    if (process.env.TRACE) console.error('the browser did not answer, trying again');
+  }
+  throw new Error('could not connect to the browser');
+}
 let target;
 for (let i = 0; i < 75 && !target; i++) { await sleep(200); try { target = (await (await fetch(`http://127.0.0.1:${PORT}/json`)).json()).find(t => t.type === 'page'); } catch {} }
-const ws = new WebSocket(target.webSocketDebuggerUrl);
-await new Promise(r => (ws.onopen = r));
+const ws = await opened(target.webSocketDebuggerUrl);
 let seq = 0;
 const waiting = new Map();
 ws.onmessage = e => { const m = JSON.parse(e.data); if (m.id && waiting.has(m.id)) { waiting.get(m.id)(m); waiting.delete(m.id); } };
-const send = (method, params = {}) => new Promise(r => { waiting.set(++seq, r); ws.send(JSON.stringify({ id: seq, method, params })); });
+const send = (method, params = {}) => new Promise((r, fail) => { const id = ++seq; waiting.set(id, r); ws.send(JSON.stringify({ id, method, params })); if (process.env.TRACE) console.error('>', method); setTimeout(() => waiting.has(id) && fail(new Error('no answer to ' + method)), 240000); });
 const run = async fn => {
   const m = await send('Runtime.evaluate', { expression: `(${fn})()`, awaitPromise: true, returnByValue: true });
   if (m.result?.exceptionDetails) throw new Error(JSON.stringify(m.result.exceptionDetails.exception ?? m.result.exceptionDetails));
   return m.result.result.value;
+};
+// Waits until the app itself is on the page. A fixed wait is not enough when the browser is slow
+// to start: a script begun in the blank page is dropped when the app arrives, and never answers.
+const appReady = async () => {
+  for (let i = 0; i < 300; i++) {
+    const m = await send('Runtime.evaluate', { expression: "location.protocol === 'http:' && document.readyState === 'complete' && !!document.querySelector('input[type=file]')", returnByValue: true });
+    if (m.result?.result?.value === true) return sleep(300);
+    await sleep(100);
+  }
+  throw new Error('the app did not load');
 };
 await send('Page.enable');
 await send('Emulation.setDeviceMetricsOverride', { width: 412, height: 915, deviceScaleFactor: 2.625, mobile: true });
@@ -43,7 +63,7 @@ await send('Page.addScriptToEvaluateOnNewDocument', { source: `
   const click = HTMLAnchorElement.prototype.click; HTMLAnchorElement.prototype.click = function () { if (!this.download) click.call(this); };
 ` });
 await send('Page.navigate', { url: `http://localhost:${server.address().port}/` });
-await sleep(2000);
+await appReady();
 await run(`async () => {
   const w = 2048, h = 1536, c = new OffscreenCanvas(w, h), ctx = c.getContext('2d'), id = ctx.createImageData(w, h), data = id.data;
   let s = 12345; const rnd = () => ((s = (s * 1664525 + 1013904223) >>> 0) / 2 ** 32);

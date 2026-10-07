@@ -11,6 +11,17 @@ import { join, extname } from 'node:path';
 const STYLES = ['cutout', 'solid', 'lines', 'checker', 'hatch', 'bayer', 'noise', 'atkinson', 'silhouette'];
 const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.png': 'image/png', '.gif': 'image/gif' };
 const sleep = ms => new Promise(r => setTimeout(r, ms));
+// Opens the connection to the page, trying again if the browser, still starting, does not answer.
+async function opened(url) {
+  for (let attempt = 0; attempt < 8; attempt++) {
+    const socket = new WebSocket(url);
+    const ok = await new Promise(done => { socket.onopen = () => done(true); socket.onerror = () => done(false); setTimeout(() => done(false), 4000); });
+    if (ok) return socket;
+    try { socket.close(); } catch {}
+    if (process.env.TRACE) console.error('the browser did not answer, trying again');
+  }
+  throw new Error('could not connect to the browser');
+}
 
 async function measure(dist) {
   const server = createServer((req, res) => {
@@ -25,16 +36,25 @@ async function measure(dist) {
   ], { stdio: 'ignore' });
   let target;
   for (let i = 0; i < 100 && !target; i++) { await sleep(200); try { target = (await (await fetch(`http://127.0.0.1:${PORT}/json`)).json()).find(t => t.type === 'page'); } catch {} }
-  const ws = new WebSocket(target.webSocketDebuggerUrl);
-  await new Promise(r => (ws.onopen = r));
+  const ws = await opened(target.webSocketDebuggerUrl);
   let seq = 0;
   const waiting = new Map();
   ws.onmessage = e => { const m = JSON.parse(e.data); if (m.id && waiting.has(m.id)) { waiting.get(m.id)(m); waiting.delete(m.id); } };
-  const send = (method, params = {}) => new Promise(r => { waiting.set(++seq, r); ws.send(JSON.stringify({ id: seq, method, params })); });
+  const send = (method, params = {}) => new Promise((r, fail) => { const id = ++seq; waiting.set(id, r); ws.send(JSON.stringify({ id, method, params })); if (process.env.TRACE) console.error('>', method); setTimeout(() => waiting.has(id) && fail(new Error('no answer to ' + method)), 240000); });
   const run = async fn => {
     const m = await send('Runtime.evaluate', { expression: `(${fn})()`, awaitPromise: true, returnByValue: true });
     if (m.result?.exceptionDetails) throw new Error(JSON.stringify(m.result.exceptionDetails.exception ?? m.result.exceptionDetails));
     return m.result.result.value;
+  };
+  // Waits until the app itself is on the page. A fixed wait is not enough when the browser is slow
+  // to start: a script begun in the blank page is dropped when the app arrives, and never answers.
+  const appReady = async () => {
+    for (let i = 0; i < 300; i++) {
+      const m = await send('Runtime.evaluate', { expression: "location.protocol === 'http:' && document.readyState === 'complete' && !!document.querySelector('input[type=file]')", returnByValue: true });
+      if (m.result?.result?.value === true) return sleep(300);
+      await sleep(100);
+    }
+    throw new Error('the app did not load');
   };
   await send('Page.enable');
   await send('Emulation.setDeviceMetricsOverride', { width: 412, height: 915, deviceScaleFactor: 2.625, mobile: true });
@@ -53,7 +73,7 @@ async function measure(dist) {
       Object.defineProperty(navigator, 'clipboard', { value: { write: async items => { __copied = await items[0].getType('image/png'); } } });
     ` })).result.identifier;
     await send('Page.navigate', { url: `http://localhost:${server.address().port}/` });
-    await sleep(1500);
+    await appReady();
     // a 2000 by 1500 picture with shaded shapes, grain and a see-through corner, kept exact as a PNG
     await run(`async () => {
       const w = 2000, h = 1500, c = new OffscreenCanvas(w, h), ctx = c.getContext('2d'), id = ctx.createImageData(w, h), data = id.data;

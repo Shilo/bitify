@@ -1,7 +1,8 @@
-# Performance work: handoff for review
+# Performance work: record and handoff
 
-Written 2026-10-07, after one review round. This is for a reviewer who has not seen the
-work. Your job is to challenge it, not to confirm it.
+Written 2026-10-07, after three reviews. It says what was asked, what changed, what was
+measured, what each review found, and what is still open. A new reviewer should challenge
+it, not confirm it.
 
 ## What was asked
 
@@ -13,61 +14,31 @@ put first but **without unwanted downsides**. Two rules the owner has stated out
 - The slider's draft must have no race, its timer must always be stopped or started again
   properly, and nothing may leak.
 
-## What you are reviewing
+## The commits
 
-Four commits on `main`, on top of `ce7bffa` (a fifth, `ef76dec`, adds only this file and `bench/`):
+On `main`, on top of `ce7bffa`:
 
 | Commit | What |
 |---|---|
 | `e1eccfd` | The performance work: flat loops, tiles convert only what they show, drafts, palette PNG |
 | `27eda94` | A removed image is no longer kept in memory by the Share sheet |
 | `6aad1e7` | A draft sharpens when the slider comes to rest |
-| `d592b64` | A message with a turning square while a photo is read, saved or copied |
+| `d592b64` | A message with a spinner while a photo is read, saved or copied |
+| `5278398` | A tile draws a picture at its own size, its pixels spread evenly (second review) |
+| `e95d32f` | What is saved is what was asked for; Remove all stops a batch; a cancelled drag ends (second review) |
+| `6d6e37f` | Many sprites are added as quickly as before; a batch keeps its message (second review) |
 
 ```bash
-git diff ce7bffa d592b64 -- src docs/superpowers CLAUDE.md
+git diff ce7bffa 6d6e37f -- src docs/superpowers CLAUDE.md
 ```
 
-**Another session is editing this same working tree.** Uncommitted changes in
-`src/App.svelte`, `src/app.css`, `src/PixelIcon.svelte`, `CLAUDE.md` and the spec belong to
-it (a new help and welcome dialog). Leave them alone and review the commits, not the
-working files.
-
-### This is the second review. Look here first.
-
-The first review saw only an early form of `e1eccfd`. None of the following has been
-reviewed by anyone but its author:
-
-- **The patterns and Atkinson drawn afresh on the kept pixels** (`mask` in
-  `src/lib/bitify.js`, the last two blocks). Is the tile a fair picture of the saved file
-  at every `k`, including with transparent pixels, tiny images and `k` larger than the image?
-- **`sampling` in `src/lib/layout.js`**: the step a tile converts at, the rule that an image
-  shown whole is never drafted, and the 32-pixel floor on the shorter side.
-- **`sliderDrag` in `src/lib/gesture.js` and its wiring in `src/Dock.svelte`**: the rest
-  timer. Hunt for a race, a timer that survives a drag, a drag that never ends, and a
-  redraw at full detail in the middle of a fast drag. Remember that `tick` is what tells it
-  the wall has redrawn.
-- **`during` in `src/App.svelte`** and the copy path in `src/lib/save.js`: the busy message,
-  its 50 ms wait, its count of running jobs, and the clipboard being handed a promise. What
-  happens when a job throws, when two overlap, when the list of images changes during the
-  wait, or when Remove all is pressed while a batch is still being read?
-- **The effect that lets go of a removed image** held by the Share sheet (`src/App.svelte`).
-- **Whether saving, downloading and copying can ever produce less than the full image.**
-  Trace every path from a button or key to `pngBytes` and `encodeGif`.
-- **Memory**: anything that keeps an image, a mask, a canvas, a timer or a listener alive
-  after its tile is removed or the drag has ended.
-
-To run exactly what was committed, without the other session's uncommitted changes, build
-from the commit (the `bench/dist-new` already on disk may be older):
-
-```bash
-rm -rf bench/committed && mkdir bench/committed && git archive ef76dec | tar -x -C bench/committed && cmd //c mklink //J "bench\\committed\\node_modules" "node_modules" && (cd bench/committed && npx vitest run && npx vite build --outDir ../dist-new --emptyOutDir)
-```
-
-Read `CLAUDE.md` first. The spec at `docs/superpowers/specs/2026-10-06-bitify-app-design.md`
-is the source of truth and changes in the same commit as the code. The sections this work
-added are "Images larger than their tile", "Drafts while the threshold slider is dragged",
-"Long jobs", and parts of "Saving", "Copying" and "Errors and limits".
+**Other sessions edit this same working tree.** Uncommitted changes in `src/App.svelte`,
+`src/app.css`, `src/PixelIcon.svelte` and the spec may belong to them. Review commits, not
+working files. Read `CLAUDE.md` first. The spec at
+`docs/superpowers/specs/2026-10-06-bitify-app-design.md` is the source of truth; the
+sections this work added are "Images larger than their tile", "Drafts while the threshold
+slider is dragged", "Long jobs", and parts of "Adding images", "Saving", "Copying" and
+"Errors and limits".
 
 ## What was wrong (measured before any change)
 
@@ -85,12 +56,12 @@ added are "Images larger than their tile", "Drafts while the threshold slider is
 |---|---|
 | Loops written flat, pattern thresholds and tones from small tables. Output unchanged. | `src/lib/bitify.js` |
 | `analyze` keeps each pixel's color difference from its right and lower neighbour (2 more bytes per pixel), which Lines and Cutout asked for on every threshold change. | `src/lib/bitify.js` |
-| `mask(img, style, threshold, k)` converts every k-th pixel of every k-th row. Cutout, Lines, Solid and Silhouette give the full mask with pixels left out. The patterns and Atkinson are drawn afresh on the kept pixels. | `src/lib/bitify.js` |
-| A tile picks `k` so that it still has an image pixel for each screen pixel, never drafts an image it shows whole, and keeps 32 pixels on the shorter side. | `src/lib/layout.js` `sampling`, `src/Tile.svelte` |
-| While the threshold slider is dragged, an image too slow for the device is drawn with a larger `k`, sized from its own measured speed to fit 24 ms shared by all tiles. It sharpens when the slider rests for 150 ms or is let go. | `src/lib/gesture.js` `sliderDrag`, `src/Dock.svelte`, `src/Tile.svelte`, `src/App.svelte` |
+| `mask(img, style, threshold, width, height)` converts a smaller picture of the image: each of its pixels stands for the image pixel under its middle, at whatever spacing that comes to. Cutout, Lines, Solid and Silhouette give the full mask's value there. The patterns and Atkinson are drawn afresh on the picture's pixels. | `src/lib/bitify.js` |
+| A tile draws a picture at its own size in screen pixels. It is made 6% smaller where it would be a whole number of times smaller than the image, never drafts an image it draws whole, and keeps 32 pixels on the shorter side. | `src/lib/layout.js` `shown`, `src/Tile.svelte` |
+| While the threshold slider is dragged, an image too slow for the device is drawn as a smaller picture, sized from its own measured speed to fit 24 ms shared by all tiles. It sharpens when the slider rests for 150 ms or is let go. | `src/lib/gesture.js` `sliderDrag`, `src/Dock.svelte`, `src/Tile.svelte`, `src/App.svelte` |
 | PNG written with a 3-entry palette and 2 bits per pixel, straight from the mask. | `src/lib/save.js` `pngBytes` |
-| Download all handles one image at a time. Images of a batch appear as each is read. The canvas used to read an image is given back at once. | `src/lib/save.js`, `src/App.svelte` |
-| A job of 2 million pixels or more shows a message with a spinner first. | `src/App.svelte` `during`, `src/app.css` `.spin` |
+| Download all handles one image at a time. A photo of a batch appears as it is read; sprites read within a quarter second go on the wall together. The canvas used to read an image is given back at once. | `src/lib/save.js`, `src/App.svelte` |
+| A job of 2 million pixels or more shows a message with a spinner first. What it saves is what was on screen at the click. | `src/App.svelte` `during`, `working`, `asking`, `src/app.css` `.spin` |
 
 Tried and removed: holding setting changes back to one per screen frame. It added one or two
 frames of delay to every change (76 ms to 126 ms per slider move at 4 times slowdown).
@@ -98,34 +69,35 @@ frames of delay to every change (76 ms to 126 ms per slider move at 4 times slow
 ## Results on a real phone
 
 Pixel 8 Pro, Chrome 154, driven over USB with real touch input, at the phone's own speed.
-Old build (`ce7bffa`) to new build. Best of 2 or 3 runs. Milliseconds.
+Old build (`ce7bffa`) to the committed build (`6d6e37f`). Best of 2 or 3 runs. Milliseconds.
 
 | Scenario | Add image | Change style | One slider move | Save | Memory in use (MB) |
 |---|---|---|---|---|---|
-| Sprite 256 by 256 | 79 to 58 | 55 to 19 | 14 to 4 | 65 to 39 | 14 to 12 |
-| 12 sprites 256 by 256 | 357 to 201 | 133 to 67 | 80 to 32 | 178 to 72 | 30 to 38 |
-| Photo 4 MP, Cutout | 1727 to 342 | 943 to 80 | 1273 to 17 | 1383 to 261 | 98 to 51 |
-| Photo 12 MP, Cutout | 4698 to 853 | 2459 to 70 | 3657 to 18 | 3787 to 585 | 273 to 117 |
-| Photo 12 MP, Solid | 952 to 811 | 193 to 24 | 138 to 10 | 1524 to 233 | 273 to 111 |
-| Photo 12 MP, Lines | 2585 to 844 | 708 to 53 | 1668 to 8 | 1080 to 298 | 273 to 117 |
-| Photo 12 MP, Bayer | 1189 to 831 | 274 to 33 | 203 to 9 | 1160 to 273 | 273 to 117 |
-| Photo 12 MP, Atkinson | 2227 to 838 | 1350 to 48 | 1200 to 13 | 4164 to 443 | 290 to 117 |
-| 6 photos of 4 MP, Cutout | 7822 to 1472 | 3522 to 55 | 3136 to 28 | 7851 to 1169 | 441 to 202 |
-| Photo 12 MP, Cutout, phone slowed 4 times more | 19260 to 2558 | 6974 to 123 | 15066 to 25 | 17286 to 2131 | 228 to 111 |
+| Sprite 256 by 256 | 79 to 60 | 55 to 19 | 14 to 5 | 65 to 30 | 14 to 13 |
+| 12 sprites 256 by 256 | 357 to 169 | 133 to 71 | 80 to 33 | 178 to 74 | 30 to 45 |
+| Photo 4 MP, Cutout | 1727 to 384 | 943 to 79 | 1273 to 20 | 1383 to 248 | 98 to 61 |
+| Photo 12 MP, Cutout | 4698 to 1112 | 2459 to 60 | 3657 to 19 | 3787 to 592 | 273 to 117 |
+| Photo 12 MP, Solid | 952 to 847 | 193 to 27 | 138 to 10 | 1524 to 239 | 273 to 111 |
+| Photo 12 MP, Lines | 2585 to 855 | 708 to 44 | 1668 to 7 | 1080 to 309 | 273 to 141 |
+| Photo 12 MP, Bayer | 1189 to 843 | 274 to 30 | 203 to 12 | 1160 to 241 | 273 to 111 |
+| Photo 12 MP, Atkinson | 2227 to 890 | 1350 to 49 | 1200 to 14 | 4164 to 427 | 290 to 117 |
+| 6 photos of 4 MP, Cutout | 7822 to 1308 | 3522 to 55 | 3136 to 30 | 7851 to 1100 | 441 to 190 |
+| Photo 12 MP, Cutout, phone slowed 4 times more | 19260 to 3080 | 6974 to 103 | 15066 to 24 | 17286 to 2106 | 228 to 111 |
 
 "One slider move" is the time from a move reaching the page to the last tile being redrawn.
-The raw numbers are in `bench/matrix-device.txt` (its 12-sprite slider figure was measured
-to the first tile's redraw and is wrong; the row above is from a rerun). Earlier desktop
-runs with a slowed processor are in `bench/matrix-before-review.txt`; they predate the
-review fixes and were disturbed by other work on the machine.
+"Memory in use" is before garbage collection; a reviewer measured the sprite rows after a
+forced collection and found them level with the old build. The old-build figures are in
+`bench/matrix-device.txt`, the new in `bench/final-device.txt`.
 
 ## How it was checked
 
-- `npm test`: 110 tests.
+- `npm test`: 115 tests.
 - `node bench/equiv.mjs`: the new `analyze`, `mask` and `colorize` give byte-identical
-  results to the old ones on 400 random images, 9 styles, 6 thresholds.
-- `node bench/tone.mjs`: at every `k` each style is as light, and has the same texture, as
-  at `k` of 1.
+  results to the old ones on 400 random images, 9 styles, 6 thresholds, and a smaller
+  picture is the full mask at the image pixels its pixels stand for.
+- `node bench/tone.mjs` and `node bench/alias.mjs`: at every picture size each style is as
+  light as the full conversion, including for dithered art, stripes and a stippled
+  transparency, and including tiles exactly a half, third or quarter of the image.
 - `node bench/saved.mjs bench/dist-base bench/dist-new`: a photo is saved and copied in the
   old build and the new, at Auto and in the middle of a slider drag, in all nine styles.
   Every file is full size and identical to the old build's, pixel for pixel.
@@ -135,88 +107,102 @@ review fixes and were disturbed by other work on the machine.
 - On the phone: a real touch drag gives one press, the moves, one release and one change,
   with no cancel. The image is a draft while moving, full while the finger rests, a draft
   again on moving, and a file saved in the middle of that is the full 4000 by 3000. Two
-  captures of the phone's screen during a long read show the message with its square at
+  captures of the phone's screen during a long read show the message with its spinner at
   two different angles.
 
-## The first review, and what was done
+## The reviews
 
-An independent review found one blocking bug and several smaller ones. All of these are
-fixed in `e1eccfd`:
+**First (a Claude subagent), on an early `e1eccfd`.** One blocking bug: taking every k-th
+pixel of a pattern style landed on the same few cells of the pattern, so a photo's tile
+came out far too light or dark. Also: Atkinson walked every pixel on each change, sprites
+could be drafted, `dragging` could stick, the step formula was untested, thin images were
+drawn too tall, the read canvas was never freed. All fixed in `e1eccfd`.
 
-1. **Blocking.** Taking every k-th pixel of Checker, Hatch, Bayer or Noise landed on the
-   same few cells of the pattern, so a photo's tile came out far too light or dark (Bayer
-   98% light where the file is 51%). The patterns are now drawn on the kept pixels.
-2. Atkinson walked every pixel of the file on each change. It now diffuses over the kept
-   pixels.
-3. Sprites could be drafted. An image shown whole is now never drafted.
-4. `dragging` could stick if the Style panel closed mid-drag. Closing the panel ends it.
-5. The step formula was untested and in the component. It is `sampling` in `layout.js`.
-6. Thin images were drawn too tall. The shorter side now keeps 32 pixels.
-7. The canvas used to read an image was never freed.
+**Second (Codex), on `d592b64`.** One blocking bug and five smaller ones, all confirmed and
+fixed in `5278398` and `e95d32f`:
 
-The reviewer checked and found correct: 12,600 edge-case masks against the old code, the
-PNG packing through an independent reader and Pillow, and the save, copy and add paths.
+1. A stippled transparency lost its midtones in the tile. The cause was wider: a
+   whole-number step locks onto any fine regular texture, so dithered art came out 97%
+   light where the file is 50%, in every style. Tiles now draw at their own size with
+   pixels spread evenly.
+2. A long save or copy read its settings and images after its 50 ms wait, not at the click.
+3. Remove all did not stop a batch still being read.
+4. The slider's drag did not end on `pointercancel`.
+5. A copy's message was withdrawn before the PNG was made.
+6. With two long jobs, the message could be that of a finished one.
 
-## Known downsides and limits. Challenge these first.
+**Second (a Claude subagent), on the same commit.** Found the same six, and five more:
+
+1. An image between one and two times its tile was converted whole on every move and never
+   drafted (507 ms per move on a slowed phone). Fixed by `5278398`: now 30 ms.
+2. Adding 120 sprites took two to four times as long, because the wall was refitted for
+   each. Fixed in `6d6e37f`: about level with the old build, first sprite five times sooner.
+3. The spinner turned in steps, which WebKit may not run without the page. Changed to an
+   even turn in `6d6e37f`. Not verified on Safari.
+4. Lines and seams in enlarged pixel art were kept on the left and top only. Fixed by
+   `5278398`: all four sides now match the file.
+5. The "Reading" message blinked between the photos of a batch. Fixed in `6d6e37f`.
+
+It also checked and found correct: every save and copy path ends in a full-size
+conversion; a real clipboard write in Edge is pixel-identical to the saved file; an
+animation plays, drafts and saves at full size; `sliderDrag` under 1,500 random orderings
+never has more than one timer or one left over; no leak; and in Firefox 157 the palette
+PNG decodes to the old pixels and the clipboard accepts the promised image.
+
+Left as they are, by the owner's choice of drafts with sharpening at rest: a touch that
+lands off the slider's thumb starts with one full-detail redraw; a slow, careful drag shows
+rough then sharp at each step; the original is drafted too when compared in mid-drag.
+
+## Known downsides and limits
 
 1. **For the patterns and Atkinson, a large image's tile is not a sample of the saved
    file.** It is as light and dark in every part, but its pattern is at screen scale and
-   the file's is finer. Anything shown whole (every sprite) is exactly what is saved.
-2. **A draft is rougher than the final image**, and sharpening is one pause: 40 to 75 ms on
-   the Pixel, more on a slower phone. If the finger moves on during that pause, the move
-   waits for it.
-3. **The draft's speed estimate is one earlier conversion**, fixed for the drag. A tile
+   the file's is finer. Anything drawn whole (every sprite) is exactly what is saved.
+2. **A tile's picture is a sample, not an average.** An image with a fine regular texture
+   shows bands when drawn smaller, as it did before this work.
+3. **A draft is rougher than the final image**, and sharpening is one pause. If the finger
+   moves on during that pause, the move waits for it.
+4. **The draft's speed estimate is one earlier conversion**, fixed for the drag. A tile
    that has never converted is not drafted on its first drag.
-4. **Many sprites on a slow phone are not drafted**, by design, so 12 sprites take 32 ms
-   per slider move on the Pixel.
-5. **Saved PNGs are palette images.** Identical pixels, but image editors open them in
+5. **Many sprites on a slow phone are not drafted**, by design: 12 sprites take 33 ms per
+   slider move on the Pixel.
+6. **Saved PNGs are palette images.** Identical pixels, but image editors open them in
    indexed-color mode. Level 3 compression makes them about 4% larger than level 6 would
    (still 35 to 45% smaller than before).
-6. **Adding and saving a photo still stall the page**: 0.85 s and 0.59 s for 12 MP on the
-   Pixel. A message shows meanwhile, but nothing else responds.
-7. **A long job starts 50 ms later** than it used to, so that its message is drawn first.
-8. **Memory is 7 bytes per pixel per image**: 84 MB for a 12 MP photo. Several photos can
+7. **Adding and saving a photo still stall the page**: about 1.1 s and 0.6 s for 12 MP on
+   the Pixel. A message shows meanwhile, but nothing else responds.
+8. **A long job starts 50 ms later** than it used to, so that its message is drawn first.
+9. **Memory is 7 bytes per pixel per image**: 84 MB for a 12 MP photo. Several photos can
    still exhaust a phone. Images above about 16.7 MP still cannot be read on iOS.
-9. **Zooming in with two fingers does not reveal more detail** in a large image's tile.
-10. **In the pattern styles a large image's tile can show faint evenly spaced lines**, where
-    the browser fits the canvas to the screen. The saved file has none.
+10. **Zooming in with two fingers does not reveal more detail** in a large image's tile.
 11. **`Tile.svelte` times conversions inside a `$derived`** and keeps the result in a plain
-    variable (`pace`).
-12. **Only Chrome was measured.** Nothing was run on Safari, iOS or Firefox. The copy now
-    hands the clipboard a promise of the image, which those browsers document as supported
-    but which was not tried there. The spinner turning while the page is busy was seen on
-    Chrome for Android only.
-13. **The benchmark image is synthetic** (smooth shapes with grain, saved as a JPEG).
+    variable (`pace`). `devicePixelRatio` is read without being watched.
+12. **Safari and iOS have not been run at all.** Chrome on Android and desktop, Edge, and
+    headless Firefox have. On Safari the unverified parts are the clipboard being handed a
+    promise, the spinner turning while the page is busy, and real touch on the slider.
+13. **The benchmark image is synthetic** (smooth shapes with grain, saved as a JPEG), and
+    the benchmark scripts sometimes fail to start their browser; a rerun passes.
 
 ## Open questions
 
-- Is the draft the right answer for the slider, or should conversion move to a worker
-  (full quality always, smooth thumb, image trailing by the conversion time)? The owner
-  chose drafts with sharpening at rest for now.
-- Should analysis and saving move to a worker, so the page stays alive during them?
+- Should conversion, analysis and saving move to a worker? That is the only way to full
+  quality on every slider move with a smooth thumb, and to a page that stays alive while a
+  photo is read or saved. The owner chose drafts for now.
 - Is there a faster way to analyse a photo that still gives exactly the same Auto
   thresholds?
-- Is anything in `during` or `sliderDrag` wrong when two jobs or two gestures overlap?
-
-## What to deliver
-
-A list of findings, most serious first. For each: the file and line, what goes wrong and
-for whom, how you know (a failing input, a measurement, or reasoning you can show), and
-what you would do instead. Say plainly which downsides should block, which are fine, and
-what is missing from the list. If you claim something is slower or faster, measure it. Do
-not rewrite the code; this is a review.
 
 ## How to rerun the measurements
 
 `bench/live.mjs` needs Node 22 or later and Microsoft Edge or Chrome; set `BROWSER` to the
 browser's path if it is not at the default Edge location. It opens real browser windows.
+If a script prints nothing, its browser did not start: run it again.
 
 ```bash
 npm test
 ```
 
 ```bash
-git show ce7bffa:src/lib/bitify.js > bench/bitify.old.js && node bench/equiv.mjs && node bench/tone.mjs && node bench/bench.mjs
+git show ce7bffa:src/lib/bitify.js > bench/bitify.old.js && node bench/equiv.mjs && node bench/tone.mjs && node bench/alias.mjs && node bench/bench.mjs
 ```
 
 Build the old and the new code next to the scripts:
@@ -252,11 +238,11 @@ adb forward tcp:9555 localabstract:chrome_devtools_remote
 ```
 
 ```bash
-DEVICE=9555 node matrix.mjs
+DEVICE=9555 node final-device.mjs dist-new
 ```
 
 `live.mjs` options: `w`, `h`, `cpu` (slowdown), `style`, `steps` (slider moves), `count`
 (copies of the image to add), `profile` (`phone`, `tablet`, `desktop`), `kind` (`photo`,
 `sprite`). `HEADLESS=1` hides the window; `PROFILE=1` adds a processor profile of the drag;
 `SHOTS=name` saves screenshots during the drag and after release; `BUSY=name` saves two
-during the read.
+during the read; `TRACE=1` prints each stage as it is reached.
