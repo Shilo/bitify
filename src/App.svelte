@@ -3,17 +3,35 @@
   import { unify } from './lib/bitify.js';
   import { saveOne, saveAll } from './lib/save.js';
   import { fitGrid } from './lib/layout.js';
-  import Dock from './Dock.svelte';
+  import { restore } from './lib/settings.js';
+  import Dock, { STYLES } from './Dock.svelte';
   import Tile from './Tile.svelte';
   import PixelIcon from './PixelIcon.svelte';
   import logoUrl from './assets/logo.png';
 
   const touch = matchMedia('(pointer:coarse)').matches;
 
-  let first = $state('#222323'); // lines and dark pixels
-  let second = $state('#f0f6f0'); // fill and light pixels
-  let style = $state('cutout');
-  let threshold = $state(null); // null means Auto
+  // The colors, style and threshold are kept between visits. A browser can refuse storage
+  // (private windows, blocked site data), and then the app simply starts from the defaults.
+  let stored = null;
+  try {
+    stored = localStorage.getItem('bitify');
+  } catch {
+    // no storage
+  }
+  const saved = restore(stored, STYLES.map(s => s[0]));
+
+  let first = $state(saved.first); // lines and dark pixels
+  let second = $state(saved.second); // fill and light pixels
+  let style = $state(saved.style);
+  let threshold = $state(saved.threshold); // null means Auto
+  $effect(() => {
+    try {
+      localStorage.setItem('bitify', JSON.stringify({ first, second, style, threshold }));
+    } catch {
+      // no storage; the settings last until the page is closed
+    }
+  });
   let showOriginal = $state(false);
   let spaceHeld = $state(false);
   // raw: items hold large typed arrays, and the list is only ever replaced, never mutated

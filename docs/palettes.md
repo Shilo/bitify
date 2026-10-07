@@ -114,7 +114,8 @@ the eye.
 - Palettes are a starting point. Either color can be changed to anything with the swatches.
 - The Palettes panel stays open while you pick, so you can try several in a row. It closes
   on Escape, on a second press of its button, or on a press outside the dock.
-- Colors are not remembered between visits. The app always opens on Glow, dark first.
+- The two colors are remembered between visits, so the app opens on the palette you last
+  used, the way round you left it. The first time, it opens on Glow, dark first.
 - There are no custom palettes; the list is fixed.
 
 ## Adding or changing one
