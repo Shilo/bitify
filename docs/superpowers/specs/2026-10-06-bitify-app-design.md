@@ -115,6 +115,11 @@ on a second press of its button, or on a press outside the dock. Presses on othe
 controls leave it open, so colors can be changed while a panel is showing. A panel never
 covers the wall: it is a strip one row high, and the wall makes room for it.
 
+A press that closes something does nothing else. It closes one thing only, the innermost:
+with the list of styles or the help open above the advanced panel, a press outside it closes
+that and leaves the panel open, and the next press outside the dock closes the panel. What
+was pressed, such as a button, a slider or an image, does not react to that press.
+
 **Palettes panel.** Left to right: the word "Palette" with the name of the chosen
 palette ("Custom" when the two colors match none), a divider, then every preset as a
 diagonally split chip in a single row. There are twelve, in groups of four with a divider
@@ -170,7 +175,7 @@ right:
   current two colors) and the style's name. Pressing it
   opens the list of the nine styles above the strip, each with the same live preview and its
   name, in two rows of five and four. Choosing a style closes the list. So does a press outside it, or
-  Escape, which then leaves the strip open.
+  Escape; either leaves the strip open.
 - Threshold: a slider from 1 to 254, then a number box and an Auto button joined into one
   outlined control, so it is clear that Auto fills in the number. The Auto half is filled
   solid while Auto is on and muted while it is off. Auto is the default. Moving the slider or

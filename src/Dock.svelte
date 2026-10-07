@@ -34,6 +34,7 @@
 <script>
   import Pixels from './Pixels.svelte';
   import PixelIcon from './PixelIcon.svelte';
+  import { on } from 'svelte/events';
 
   let {
     first = $bindable(),
@@ -50,6 +51,10 @@
   let panel = $state(null); // null, 'palettes' or 'advanced'
   let pop = $state(null); // what is open above the advanced panel: null, 'styles' or 'help'
   let dock;
+  let eaten = false; // the last press closed something, so its click is dropped too
+  // A finger moves a slider through its touch, which stopping the press does not stop.
+  // Svelte's own touch listeners are passive and could not stop it either.
+  $effect(() => on(window, 'touchstart', e => eaten && e.cancelable && e.preventDefault(), { capture: true, passive: false }));
 
   // A panel does not cover the wall: while one is open the wall gives up that much room and
   // refits above it (see --panel-space in app.css).
@@ -110,10 +115,23 @@
   }
 </script>
 
+<!-- A press outside what is open closes it and does nothing else: only the list of styles or
+     the help if one is open, and the panel otherwise. These listen on the way down, so the
+     press and the click that follows it never reach what was pressed. -->
 <svelte:window
-  onpointerdown={e => {
-    if (pop && !e.target.closest?.('.anchor')) pop = null;
-    if (panel && !dock.contains(e.target)) panel = null;
+  onpointerdowncapture={e => {
+    eaten = pop ? !e.target.closest?.('.anchor') : !!panel && !dock.contains(e.target);
+    if (!eaten) return;
+    if (pop) pop = null;
+    else panel = null;
+    e.stopPropagation();
+    e.preventDefault();
+  }}
+  onclickcapture={e => {
+    if (!eaten || !e.detail) return; // a click from the keyboard has no press to belong to
+    eaten = false;
+    e.stopPropagation();
+    e.preventDefault();
   }}
   onkeydown={e => {
     if (e.key !== 'Escape') return;
