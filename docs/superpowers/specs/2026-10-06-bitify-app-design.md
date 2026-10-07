@@ -208,13 +208,14 @@ Vite with the `svelte` template (Svelte 5, runes, mounted with `mount()`), JavaS
 
 | File | Purpose |
 |---|---|
-| `src/lib/bitify.js` | Pure conversion, no DOM. `analyze(imageData)` returns size, pixels, brightness, whether any pixel is empty, and the two auto thresholds. `mask(analysis, style, threshold)` returns one byte per pixel (0 empty, 1 first color, 2 second color). `colorize(mask, width, height, first, second)` returns RGBA pixels. |
-| `src/lib/save.js` | Output file naming, PNG encoding from pixels, single save, zip of all. |
+| `src/lib/bitify.js` | Pure conversion, no DOM. `analyze(imageData)` returns size, pixels, brightness, whether any pixel is empty, and the two auto thresholds. `mask(analysis, style, threshold)` returns one byte per pixel (0 empty, 1 first color, 2 second color). `colorize(mask, first, second)` returns RGBA pixels. |
+| `src/lib/save.js` | Output file naming, zip, PNG encoding from pixels, single save, save all. |
 | `src/App.svelte` | All state; top bar, wall, empty state, drop overlay, messages; window-level drop, paste and key handling. |
 | `src/Tile.svelte` | One image: canvas, caption, Download and Remove, hold to compare. |
 | `src/Dock.svelte` | The dock and its two panels. |
+| `src/Pixels.svelte` | A canvas that shows a block of pixels; used by tiles and by the style previews. |
 | `src/PixelIcon.svelte` | Renders a 7×7 glyph from a row-string map. |
-| `src/app.css` | Color and type tokens, light and dark. |
+| `src/app.css` | Every style rule, carried over from the prototype: color and type tokens for light and dark, and all component styles. Components have no style blocks of their own. |
 
 State is a handful of `$state` values in `App.svelte`: the two colors, style, threshold
 (`null` means Auto), which version the wall shows, the open panel, and the list of images.
