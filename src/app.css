@@ -60,7 +60,7 @@ button { font: inherit; color: inherit; }
 
 /* top bar and shared controls */
 .bar { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; padding: 14px 16px; }
-/* same outline, radius and text color as the Add button beside it */
+/* same outline, radius and text color as the buttons beside it */
 .bar .gh { width: var(--hit); height: var(--hit); box-sizing: border-box; border-radius: 10px; background: transparent; color: inherit; }
 .gh svg { fill: currentColor; }
 .mark { font-family: var(--display); font-size: 28px; font-weight: 600; line-height: 1; }
@@ -73,7 +73,6 @@ button { font: inherit; color: inherit; }
   font-weight: 600; white-space: nowrap; cursor: pointer;
 }
 .btn.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
-.btn.quiet { border-color: transparent; color: var(--muted); }
 .btn:disabled { opacity: 0.4; cursor: default; }
 .ib {
   display: grid; place-items: center; flex: none; width: 30px; height: 30px; padding: 0;
@@ -178,7 +177,7 @@ button { font: inherit; color: inherit; }
 }
 .sep { width: 1px; height: 24px; background: var(--line); }
 .btn[aria-expanded="true"], .btn.sm[aria-pressed="true"] { background: var(--tile); border-color: var(--fg); }
-.btn.sm { font-size: 13px; padding: 0; } /* the square buttons in the advanced strip */
+.btn.sm { font-size: 13px; padding: 0; } /* the square buttons: the advanced strip and Remove all */
 .pair { display: flex; align-items: center; gap: 4px; }
 .pair .ib { width: var(--hit); height: var(--hit); border-color: transparent; background: transparent; }
 .sw {

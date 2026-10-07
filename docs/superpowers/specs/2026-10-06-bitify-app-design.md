@@ -42,9 +42,9 @@ Assumptions made here, open to correction:
 
 One screen, no page scroll. Three layers:
 
-1. **Top bar.** The "Bitify" wordmark, an image count, "Remove all" (only when there are
-   images), "Add images", and at the far right a GitHub icon linking to
-   `https://github.com/Shilo/bitify` in a new tab.
+1. **Top bar.** The "Bitify" wordmark, an image count, and at the right a trash icon button
+   that removes all images (only when there are images), a GitHub icon linking to
+   `https://github.com/Shilo/bitify` in a new tab, and "Add images".
 2. **The wall.** A grid of square tiles that fills the screen and scrolls on its own. Each
    tile shows one image, scaled up with hard pixel edges on a faint checkerboard so
    transparency is visible. Below it: file name and pixel size.
