@@ -314,7 +314,9 @@ viewport height so mobile browser bars do not cut the dock off.
   route on phones.
 - Pasting an image from the clipboard also adds it.
 - New images are appended; existing ones stay. The images of a batch are read one after
-  another, and each appears as soon as it has been read, without waiting for the rest.
+  another, and a photo appears as soon as it has been read, without waiting for the rest.
+  Sprites are read far quicker than the wall can be fitted again around each one, so
+  images read within a quarter of a second of each other go on the wall together.
 - Remove all also stops any batch that is still being read. Its remaining images are not
   read and do not appear on the wall that was just emptied.
 - Files the browser cannot decode are skipped, and a short message says how many.
@@ -754,6 +756,10 @@ it is doing:
 - The message replaces any other message while a job runs. If jobs overlap it is that of
   the newest one still running, and it goes when the last has ended.
 - The message of a copy stays until the PNG has been made, not only its conversion.
+- A batch that is being read keeps its message from its first large image until it ends,
+  changing the count as it goes. The message does not come and go between files.
+- The square turns at an even speed, not in steps. Some browsers only run an even turn
+  without the page's help.
 
 ## Errors and limits
 

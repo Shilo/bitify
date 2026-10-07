@@ -131,14 +131,24 @@
   let busy = $state(''); // what the page is busy with; shown in place of any other message
   const running = []; // what each job that has not finished says, as one can start while another waits
   const pixelsOf = item => item.img.w * item.img.h * (item.frames?.length ?? 1);
+  // Puts `text` on screen as what the page is busy with, and returns what to call when that is over.
+  function working(text) {
+    running.push(text);
+    busy = text;
+    return () => {
+      running.splice(running.indexOf(text), 1);
+      busy = running.at(-1) ?? ''; // the newest job still running, or nothing
+    };
+  }
+  // A message has to be drawn before a job takes over the page, and this is long enough for
+  // that. A timer, not a screen frame: a hidden tab has no frames, and the job would wait until
+  // the tab was shown again.
+  const drawn = () => new Promise(done => setTimeout(done, 50));
   // Runs `job` and gives back what it returns, with `text` on screen meanwhile if `pixels` is large.
   async function during(text, pixels, job) {
     if (pixels < BUSY_PIXELS) return job();
-    running.push(text);
-    busy = text;
-    // The message has to be drawn before the job takes over the page. A timer, not a screen
-    // frame: a hidden tab has no frames, and the job would wait until the tab was shown again.
-    await new Promise(drawn => setTimeout(drawn, 50));
+    const done = working(text);
+    await drawn();
     try {
       return await job();
     } finally {
@@ -277,19 +287,40 @@
     items = [];
   }
   async function addFiles(files) {
-    let skipped = 0;
+    let skipped = 0, fresh = [], shownAt = 0, done;
     const began = emptied;
-    for (const [n, file] of files.entries()) {
-      try {
-        const decoded = await decode(file), { width, height } = decoded.frames[0].original, name = file.name || 'image.png';
-        if (began !== emptied) return; // checked after each wait, before the next piece of work
-        const reading = files.length > 1 ? `Reading ${n + 1} of ${files.length}…` : `Reading ${name}…`;
-        const item = await during(reading, width * height * decoded.frames.length, () => began === emptied && toItem(++nextId, name, decoded));
-        if (began !== emptied) return;
-        items = [...items, item];
-      } catch {
-        skipped++;
+    // A photo goes on the wall as soon as it is read. Sprites are read far quicker than the wall
+    // can be fitted again around each one, so those read within a quarter of a second go on together.
+    const show = () => {
+      if (fresh.length) items = [...items, ...fresh];
+      fresh = [];
+      shownAt = performance.now();
+    };
+    try {
+      for (const [n, file] of files.entries()) {
+        try {
+          const decoded = await decode(file), { width, height } = decoded.frames[0].original, name = file.name || 'image.png';
+          if (began !== emptied) return; // checked after each wait, before the next piece of work
+          // From its first large image on, the batch says which file it is reading, and goes on
+          // saying so until it ends: the message does not come and go between files.
+          const large = width * height * decoded.frames.length >= BUSY_PIXELS;
+          if (large || done) {
+            done?.();
+            done = working(files.length > 1 ? `Reading ${n + 1} of ${files.length}…` : `Reading ${name}…`);
+          }
+          if (large) {
+            await drawn();
+            if (began !== emptied) return;
+          }
+          fresh.push(toItem(++nextId, name, decoded));
+          if (performance.now() - shownAt > 250) show();
+        } catch {
+          skipped++;
+        }
       }
+      show();
+    } finally {
+      done?.();
     }
     if (skipped) say(`${skipped} file${skipped === 1 ? '' : 's'} skipped. Bitify reads PNG, GIF, WebP, JPEG and BMP images.`);
   }

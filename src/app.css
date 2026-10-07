@@ -156,7 +156,7 @@ button { font: inherit; color: inherit; }
 .spin {
   display: inline-block; width: 8px; height: 8px; margin-right: 8px; vertical-align: -1px;
   border: 2px solid; border-top-color: transparent; will-change: transform;
-  animation: spin 0.8s steps(8) infinite;
+  animation: spin 0.8s linear infinite;
 }
 @keyframes spin { to { transform: rotate(1turn); } }
 /* the sheet a tile's Share button opens: the image's name, then Copy, Download and Cancel */

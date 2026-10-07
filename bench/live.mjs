@@ -98,7 +98,9 @@ await send('Page.addScriptToEvaluateOnNewDocument', { source: `
   const make = URL.createObjectURL; URL.createObjectURL = blob => { __saved = { at: performance.now(), bytes: blob.size, type: blob.type, blob }; return make.call(URL, blob); };
   const click = HTMLAnchorElement.prototype.click; HTMLAnchorElement.prototype.click = function () { if (!this.download) click.call(this); };
 ` });
+const trace = step => process.env.TRACE && console.error(step);
 await send('Page.navigate', { url });
+trace('page opened');
 await sleep(2500);
 
 // The test image, made before the CPU is slowed. A photo is smooth shapes with grain; a sprite
@@ -139,6 +141,7 @@ Object.assign(out, { firstImage: r1(loaded.first), loaded: r1(loaded.all), loadF
 // 2. change the style and back, the palette, and hold Space to compare
 const key = (k, type = 'keydown') => `window.dispatchEvent(new KeyboardEvent('${type}', { key: '${k}', code: '${k === ' ' ? 'Space' : k}', bubbles: true }))`;
 const press = async (k, type) => r1(await run(`async () => { const t = performance.now(); ${key(k, type)}; return __settle(t); }`));
+trace('image added');
 out.nextStyle = await press('ArrowDown');
 out.backStyle = await press('ArrowUp');
 out.palette = await press('ArrowRight');
@@ -150,6 +153,7 @@ await run(`async () => { document.querySelector('.dock button[aria-label="Style"
 if (process.env.PROFILE) { await send('Profiler.enable'); await send('Profiler.setSamplingInterval', { interval: 200 }); await send('Profiler.start'); }
 // The drag is made with real input, a finger on the phone and tablet screens and the mouse on the
 // desktop one, so the browser itself produces the pointer, input and change events in their true order.
+trace('styles, palette and compare done');
 const bar = await run(`() => { const r = document.querySelector('#threshold').getBoundingClientRect(); return { x: r.left, y: r.top + r.height / 2, w: r.width }; }`);
 const at = i => ({ x: Math.round(bar.x + bar.w * (0.2 + (0.5 * i) / o.steps)), y: Math.round(bar.y) });
 const point = (type, p) => mobile
@@ -165,6 +169,7 @@ const began = await run(`() => {
 }`);
 await point('down', at(0));
 for (let i = 1; i <= o.steps; i++) { await point('move', at(i)); await run(`() => new Promise(r => requestAnimationFrame(r))`); }
+trace('moves sent');
 const drag = await run(`async () => {
   const t = ${began}, dragged = performance.now() - t, smooth = __smooth(t), c = document.querySelector('.tile canvas');
   // how long after each move the image was redrawn
@@ -190,6 +195,7 @@ out.savedDuringDrag = await run(`async () => {
   return v.getUint32(16) + 'x' + v.getUint32(20); // the PNG's own width and height
 }`);
 // letting go
+trace('rest and save during drag done');
 const lifted = await run(`() => { __paints.length = 0; return performance.now(); }`);
 await point('up', at(o.steps));
 const released = await run(`async () => {
@@ -215,6 +221,7 @@ Object.assign(out, { whileDragging: drag.during, release: r1(released.ms), after
 // perMove: the usual time from a move reaching the page to the image being redrawn; slowestMove: the longest
 Object.assign(out, { moves: drag.waits.length, perMove: +(drag.waits[drag.waits.length >> 1] ?? -1).toFixed(1), slowestMove: r1(drag.waits.at(-1) ?? -1), dragFreeze: r1(drag.worst) });
 
+trace('released');
 // 4. download (the file is noted, not written)
 const saved = await run(`async () => {
   __saved = null; const t = performance.now();
