@@ -266,7 +266,8 @@ at the point that separates them best:
 - For the brightness styles, on the histogram of pixel brightness. Fallback 127.
 - For Lines, on the histogram of non-zero differences between horizontally and vertically
   adjacent non-empty pixels. This separates soft shading steps from real part boundaries.
-  Fallback 0.
+  The value is never below 24: an image with only soft shading has nothing to separate,
+  and without the floor its shading steps would be taken for boundaries.
 
 A manual value applies to every image.
 
@@ -352,8 +353,8 @@ Dependencies beyond Vite and Svelte:
   - Solid splits at the threshold;
   - Checker produces a checkerboard for a mid-tone block;
   - Lines outlines an inner part as well as the silhouette, draws a one-pixel boundary,
-    ignores a shading step below the threshold, and frames only images that have empty
-    pixels;
+    ignores a shading step below the threshold, frames only images that have empty
+    pixels, and at Auto draws no lines along soft shading;
   - Silhouette fills everything;
   - Auto returns a value between two clearly separated groups.
 - `src/lib/save.js`: output naming, including duplicates.

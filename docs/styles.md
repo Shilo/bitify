@@ -42,8 +42,9 @@ possible, and as far apart as possible.
   image's dark tones and its light tones. If there is nothing to split, it uses 127.
 - For Lines the histogram is of the differences between every pair of horizontally or
   vertically adjacent solid pixels (identical neighbours are left out). Soft shading steps
-  form one group and real part boundaries form the other, so Auto lands between them. If
-  there is nothing to split, it uses 0.
+  form one group and real part boundaries form the other, so Auto lands between them. It
+  never goes below 24, so an image with only soft shading gets an outline and a flat fill
+  instead of lines along its shading.
 
 A manual threshold applies the same number to every image.
 

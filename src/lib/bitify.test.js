@@ -180,9 +180,32 @@ describe('lines', () => {
     expect(show(mask(img, 'lines'), 4)).toEqual(['...#']);
   });
 
+  it('auto does not take soft shading for boundaries', () => {
+    // every neighbour differs by 4: a gradient with no parts
+    const img = image([
+      '       ',
+      ' abcde ',
+      ' bcdef ',
+      ' cdefg ',
+      ' defgh ',
+      ' efghi ',
+      '       ',
+    ], Object.fromEntries([...'abcdefghi'].map((ch, i) => [ch, grey(100 + 4 * i)])));
+    expect(img.autoLine).toBe(24);
+    expect(show(mask(img, 'lines'), 7)).toEqual([
+      '       ',
+      ' ##### ',
+      ' #...# ',
+      ' #...# ',
+      ' #...# ',
+      ' ##### ',
+      '       ',
+    ]);
+  });
+
   it('survives an image with no solid pixels, and a large non-square one', () => {
     const none = image(['  ', '  '], {});
-    expect(none.autoLine).toBe(0);
+    expect(none.autoLine).toBe(24);
     expect(show(mask(none, 'lines'), 2)).toEqual(['  ', '  ']);
 
     const w = 300, h = 200, data = new Uint8ClampedArray(w * h * 4);

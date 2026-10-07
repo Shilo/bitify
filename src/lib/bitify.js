@@ -1,6 +1,7 @@
 // 1-bit conversion. No DOM: everything works on plain typed arrays, so it runs in tests.
 
 const ALPHA_CUT = 128; // alpha below this is an empty pixel
+const MIN_EDGE = 24; // Auto never takes a color change weaker than this for a boundary
 const BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
 const NEIGHBOURS = [[1, 0], [-1, 0], [0, 1], [0, -1]];
 
@@ -50,7 +51,7 @@ export function analyze({ width: w, height: h, data }) {
     if (p + w < w * h && solid(p + w)) edges[diff(data, i, i + w * 4)]++;
   }
   edges[0] = 0; // identical neighbours are not edges
-  return { w, h, data, lum, hasAlpha, hist, edges, auto: otsu(hist, 127), autoLine: otsu(edges, 0) };
+  return { w, h, data, lum, hasAlpha, hist, edges, auto: otsu(hist, 127), autoLine: Math.max(MIN_EDGE, otsu(edges, 0)) };
 }
 
 // Makes every frame of an animation convert the same way: the Auto thresholds are picked from
@@ -60,7 +61,7 @@ export function unify(frames) {
   if (frames.length < 2) return frames;
   const hist = new Array(256).fill(0), edges = new Array(256).fill(0);
   for (const f of frames) for (let i = 0; i < 256; i++) { hist[i] += f.hist[i]; edges[i] += f.edges[i]; }
-  const shared = { auto: otsu(hist, 127), autoLine: otsu(edges, 0), hasAlpha: frames.some(f => f.hasAlpha) };
+  const shared = { auto: otsu(hist, 127), autoLine: Math.max(MIN_EDGE, otsu(edges, 0)), hasAlpha: frames.some(f => f.hasAlpha) };
   for (const f of frames) Object.assign(f, shared);
   return frames;
 }
