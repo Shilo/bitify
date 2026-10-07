@@ -41,8 +41,21 @@ describe('fitGrid', () => {
     expect(fitGrid(5, 343, 558, { gap: 16, extra: 48, min: 140 })).toEqual({ cols: 2, size: 163, scroll: true });
   });
 
-  it('scrolls on a screen too short for even one tile, and never returns zero columns', () => {
-    expect(fitGrid(1, 708, 146, { gap: 16, extra: 48, min: 140 })).toEqual({ cols: 4, size: 165, scroll: true });
+  it('on a short screen, shrinks below the minimum rather than scroll a wall that would fit', () => {
+    const touch = { gap: 16, extra: 48, min: 140 };
+    // one tile can only be 134px here, so that becomes the size to hold
+    expect(fitGrid(1, 788, 182, touch)).toEqual({ cols: 1, size: 134, scroll: false });
+    expect(fitGrid(2, 788, 182, touch)).toEqual({ cols: 2, size: 134, scroll: false });
+    expect(fitGrid(5, 788, 182, touch)).toEqual({ cols: 5, size: 134, scroll: false });
+    expect(fitGrid(1, 708, 146, touch)).toEqual({ cols: 1, size: 98, scroll: false });
+  });
+
+  it('when a short screen has to scroll, a whole row still fits its height', () => {
+    expect(fitGrid(6, 788, 182, { gap: 16, extra: 48, min: 140 })).toEqual({ cols: 5, size: 134, scroll: true });
+  });
+
+  it('never returns zero columns or a tile under 96px', () => {
     expect(fitGrid(3, 100, 400, opts)).toEqual({ cols: 1, size: 100, scroll: true });
+    expect(fitGrid(1, 700, 40, { gap: 16, extra: 48, min: 140 })).toEqual({ cols: 6, size: 96, scroll: true });
   });
 });

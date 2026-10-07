@@ -93,7 +93,7 @@ button { font: inherit; color: inherit; }
   margin: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 16px;
   width: calc(var(--cols) * var(--tile-size) + (var(--cols) - 1) * 16px);
 }
-.tiles .tile { width: var(--tile-size); }
+.tiles .tile { width: var(--tile-size); container-type: inline-size; }
 .tile { position: relative; margin: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; min-width: 0; }
 .art {
   grid-column: 1 / -1; position: relative; aspect-ratio: 1; max-width: 100%;
@@ -111,8 +111,11 @@ button { font: inherit; color: inherit; }
 @media (hover: none) {
   .acts { position: static; opacity: 1; grid-column: 2; grid-row: 2; align-self: center; }
   .acts .ib { width: 40px; height: 40px; }
-  .cap { grid-column: 1; grid-row: 2; flex-direction: column; align-items: flex-start; gap: 0; align-self: center; }
-  .dim { margin-left: 0; }
+  /* stretch, so a long name is cut off with an ellipsis instead of running under the buttons */
+  .cap { grid-column: 1; grid-row: 2; flex-direction: column; align-items: stretch; gap: 0; align-self: center; }
+  .dim { margin-left: 0; overflow: hidden; text-overflow: ellipsis; }
+  /* a small tile has no room for the pixel size beside the buttons, so the name gets the line */
+  @container (max-width: 150px) { .dim { display: none; } }
 }
 
 /* .empty scrolls when the screen is short; the auto margin centers its content when there is room */
@@ -147,7 +150,8 @@ button { font: inherit; color: inherit; }
 }
 /* Short, wide screens (a phone on its side): the example sits beside the text, not above it. */
 @media (max-height: 520px) and (orientation: landscape) {
-  .empty { padding: 8px 16px 96px; }
+  :root { --dock-space: 96px; } /* the dock is a single row here, so it needs less room */
+  .empty { padding-top: 8px; }
   .empty-in { grid-template-columns: auto minmax(0, 300px); align-items: center; gap: 28px; }
   .empty-text { justify-items: start; text-align: left; }
   .empty .tile { --rest: 215px; }

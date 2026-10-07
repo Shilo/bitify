@@ -69,6 +69,13 @@ The tiles always use the space between the top bar and the dock, and are centere
 - Tiles are never shrunk below a usable size: 140px on phones, rising to 200px on wide
   screens. Once that many images no longer fit, the wall scrolls instead, with as many
   columns of at least that size as fit, stretched to fill the width.
+- On a screen too short for even one tile of that size, such as a phone on its side, the
+  size a single tile can reach becomes the limit instead (never under 96px). A wall that
+  fits is not made to scroll, and when it does scroll a whole row still fits the height.
+  Short, wide screens also leave less room for the dock, since it is a single row there.
+- On touch screens a long file name is cut off with an ellipsis before the Download and
+  Remove buttons, and tiles narrower than 150px drop the pixel-size text to leave the name
+  room.
 
 The rule lives in `src/lib/layout.js` (`fitGrid`) and is unit tested.
 

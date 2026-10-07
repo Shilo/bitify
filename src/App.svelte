@@ -24,7 +24,9 @@
   let wallHeight = $state(0);
   // A tile is its square image plus a caption underneath. On touch screens the caption row also
   // holds the Download and Remove buttons, so it is taller. These mirror the sizes in app.css.
-  const captionHeight = matchMedia('(hover: none)').matches ? 48 : 27;
+  const noHover = matchMedia('(hover: none)');
+  let captionHeight = $state(noHover.matches ? 48 : 27);
+  noHover.addEventListener('change', e => (captionHeight = e.matches ? 48 : 27));
   const layout = $derived(
     fitGrid(items.length, wallWidth, wallHeight, {
       gap: 16,
