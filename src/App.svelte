@@ -11,8 +11,10 @@
   import Tile from './Tile.svelte';
   import PixelIcon from './PixelIcon.svelte';
   import logoUrl from './assets/logo.gif';
+  import logoStill from './assets/logo.png';
 
   const touch = matchMedia('(pointer:coarse)').matches;
+  const mod = /Mac/.test(navigator.platform) ? '⌘' : 'Ctrl'; // the key the help names for pasting and copying
 
   // The colors, style and threshold are kept between visits. A browser can refuse storage
   // (private windows, blocked site data), and then the app simply starts from the defaults.
@@ -34,6 +36,11 @@
     } catch {
       // no storage; the settings last until the page is closed
     }
+  });
+  // Nothing stored means a first visit, and the help opens by itself as a welcome. Where storage
+  // is refused every visit looks like the first.
+  $effect(() => {
+    if (stored === null) help.showModal();
   });
   let showOriginal = $state(false);
   // Changing the style or the threshold, by any route, shows the result: the view goes back to bitified.
@@ -166,6 +173,7 @@
   let ctrlHeld = false;
   const wheelStep = wheelSteps();
   function wheel(e) {
+    if (document.querySelector('dialog[open]')) return; // nothing behind an open dialog changes
     // If the browser will not let a Ctrl move be stopped it is about to zoom, and one effect is enough.
     if (e.ctrlKey ? !ctrlHeld || !e.cancelable : scrolls(e.target, e.shiftKey ? 'x' : undefined)) return;
     e.preventDefault(); // or Ctrl and the wheel would zoom the page
@@ -334,6 +342,7 @@
   const ARROWS = { ArrowDown: ['y', 1], ArrowUp: ['y', -1], ArrowRight: ['x', 1], ArrowLeft: ['x', -1] };
   function keydown(e) {
     if (e.key === 'Control') ctrlHeld = true;
+    if (document.querySelector('dialog[open]')) return; // the keys below act on the wall, which a dialog covers
     if (e.code === 'Space' && !onControl(e)) { e.preventDefault(); spaceHeld = true; }
     // Ctrl and C (Cmd and C on a Mac) copy the first image, unless there is text to copy instead.
     const copies = (e.ctrlKey || e.metaKey) && !e.shiftKey && !e.altKey && !e.repeat && e.key.toLowerCase() === 'c';
@@ -411,7 +420,7 @@
       <div class="empty-text">
         <h2>Pixel art in two colors</h2>
         <p>Instantly convert sprites and animated GIFs<br />to <span>1-bit</span> colors and styles.</p>
-        <button class="btn primary" onclick={() => picker.click()}>{touch ? 'Choose images' : 'Drop or choose images'}</button>
+        <button class="btn primary" onclick={() => picker.click()}>{touch ? 'Choose images' : 'Drop, paste or choose images'}</button>
       </div>
     </div>
   </div>
@@ -431,44 +440,64 @@
     <button class="btn">Cancel</button>
   {/if}
 </dialog>
-<!-- The More menu, and the help it opens, drop down from the More button. Any click closes them too. -->
+<!-- The More menu drops down from the More button. Any click closes it too. -->
 <dialog class="more" bind:this={more} aria-label="More" onclick={() => more.close()}>
-  {#if installOffer}
-    <button class="btn" onclick={() => { installOffer.prompt(); installOffer = null; }}><PixelIcon name="save" />Install</button>
-  {/if}
-  <button class="btn" onclick={() => help.showModal()}><PixelIcon name="help" />Help</button>
+  <button class="btn" onclick={() => { more.close(); help.showModal(); }}><PixelIcon name="help" />Help</button>
   <a class="btn" href="https://github.com/Shilo/bitify" target="_blank" rel="noopener">
     <svg class="ico" width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" /></svg>GitHub
   </a>
-</dialog>
-<dialog class="more tip" bind:this={help} aria-label="Help" onclick={() => help.close()}>
-  <p>
-    {#if style === 'silhouette'}
-      Silhouette ignores the threshold.
-    {:else if threshold === null}
-      Auto picks the best threshold for each image.
-    {:else if style === 'lines'}
-      Color changes stronger than <b>{threshold}</b> become lines.
-    {:else if style === 'cutout'}
-      Parts brighter than <b>{threshold}</b> are filled.
-    {:else}
-      Pixels brighter than <b>{threshold}</b> turn light.
-    {/if}
-  </p>
-  <p>
-    {#if touch}
-      <b>Hold</b> an image to see its other version.
-    {:else}
-      <b>Hold</b> an image, or hold <kbd>Space</kbd>, to see the other version.
-    {/if}
-  </p>
-  {#if touch}
-    <p><b>Swipe up or down</b> to change the style.</p>
-    <p><b>Swipe left or right</b> to change the palette.</p>
-  {:else}
-    <p><b>Scroll</b>, or press <kbd>↑</kbd> <kbd>↓</kbd>, to change the style.</p>
-    <p><b>Hold <kbd>Shift</kbd> and scroll</b>, or press <kbd>←</kbd> <kbd>→</kbd>, to change the palette.</p>
+  {#if installOffer}
+    <button class="btn" onclick={() => { installOffer.prompt(); installOffer = null; }}><PixelIcon name="save" />Install</button>
   {/if}
+</dialog>
+<!-- The help, which is also the welcome on a first visit: what Bitify is, four steps, and the
+     controls of the device in use. A click on the dimmed screen around it counts as the dialog itself. -->
+<dialog class="help" bind:this={help} aria-labelledby="help-title" onclick={e => e.target === help && help.close()}>
+  <div class="help-in">
+    <button class="ib" onclick={() => help.close()} aria-label="Close" title="Close"><PixelIcon name="x" /></button>
+    <header>
+      <img src={logoStill} alt="" />
+      <div>
+        <h2 id="help-title">Bitify</h2>
+        <p>Instantly convert sprites and animated GIFs to <span>1-bit</span> colors and styles.</p>
+      </div>
+    </header>
+    <ol>
+      <li><PixelIcon name="plus" /><b>Add</b>{touch ? 'Choose images.' : 'Drop, paste or choose images.'}</li>
+      <li><PixelIcon name="grid" /><b>Palette</b>Pick two colors, or a preset.</li>
+      <li><PixelIcon name="sliders" /><b>Style</b>Pick effect, tune threshold.</li>
+      <li><PixelIcon name="save" /><b>Save</b>Download or copy images.</li>
+    </ol>
+    <table>
+      <thead>
+        <tr>
+          <th>Controls</th>
+          {#if touch}<th>Touch</th>{:else}<th>Mouse</th><th>Keyboard</th>{/if}
+        </tr>
+      </thead>
+      <tbody>
+        {#if touch}
+          <tr><th>Add image</th><td><kbd>Touch</kbd> <kbd><PixelIcon name="plus" /></kbd></td></tr>
+          <tr><th>Next palette</th><td><kbd>Swipe</kbd> <kbd>←</kbd> <kbd>→</kbd></td></tr>
+          <tr><th>Next style</th><td><kbd>Swipe</kbd> <kbd>↑</kbd> <kbd>↓</kbd></td></tr>
+          <tr><th>See original image</th><td><kbd>Hold</kbd> <kbd>Image</kbd></td></tr>
+          <!-- on touch screens a tile's Download and Copy are behind its Share button -->
+          <tr><th>Save image</th><td><kbd>Touch</kbd> <kbd><PixelIcon name="share" /></kbd></td></tr>
+        {:else}
+          <tr><th>Add image</th><td><kbd>Drag</kbd> <kbd>Drop</kbd></td><td><kbd>{mod}</kbd> <kbd>V</kbd></td></tr>
+          <tr><th>Next palette</th><td><kbd>Shift</kbd> <kbd>Scroll</kbd></td><td><kbd>←</kbd> <kbd>→</kbd></td></tr>
+          <tr><th>Next style</th><td><kbd>Scroll</kbd></td><td><kbd>↑</kbd> <kbd>↓</kbd></td></tr>
+          <tr><th>See original image</th><td><kbd>Press</kbd> <kbd>Image</kbd></td><td><kbd>Space</kbd></td></tr>
+          <tr><th>Save image</th><td><kbd>Click</kbd> <kbd><PixelIcon name="save" /></kbd> <kbd><PixelIcon name="copy" /></kbd></td><td><kbd>{mod}</kbd> <kbd>C</kbd></td></tr>
+        {/if}
+      </tbody>
+    </table>
+    <footer>
+      <span>Images never leave your device.</span>
+      <!-- svelte-ignore a11y_autofocus -->
+      <button class="btn primary" autofocus onclick={() => help.close()}>Got it</button>
+    </footer>
+  </div>
 </dialog>
 <div class="toast" role="status" hidden={!busy && !message}>{#if busy}<span class="spin" aria-hidden="true"></span>{/if}{busy || message}</div>
 <input bind:this={picker} type="file" accept="image/*" multiple hidden onchange={picked} />

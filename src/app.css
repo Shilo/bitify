@@ -138,7 +138,7 @@ button { font: inherit; color: inherit; }
 .empty .dim { margin-left: 0; }
 .empty h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: clamp(26px, 5vw, 44px); line-height: 1.1; text-wrap: balance; }
 .empty p { margin: 0; color: var(--muted); max-width: 38ch; text-wrap: balance; }
-.empty p span { white-space: nowrap; } /* keeps "1-bit" from breaking at its hyphen */
+.empty p span, .help p span { white-space: nowrap; } /* keeps "1-bit" from breaking at its hyphen */
 
 /* overlays */
 .drop {
@@ -167,7 +167,7 @@ button { font: inherit; color: inherit; }
 .sheet[open] { display: grid; gap: 8px; }
 .sheet::backdrop { background: rgba(0, 0, 0, 0.45); }
 .sheet .name { margin: 0 2px 4px; font-size: 13px; text-align: center; }
-/* the More menu: Help and GitHub, dropped down from the More button at the right end of the top bar */
+/* the More menu: Help, GitHub and Install, dropped down from the More button at the right end of the top bar */
 .more {
   inset: calc(env(safe-area-inset-top, 0px) + var(--hit) + 20px) calc(env(safe-area-inset-right, 0px) + 16px) auto auto;
   box-sizing: border-box; max-width: calc(100% - 32px); margin: 0; padding: 6px;
@@ -176,12 +176,45 @@ button { font: inherit; color: inherit; }
 .more[open] { display: grid; gap: 2px; }
 .more::backdrop { background: transparent; }
 .more .btn { box-sizing: border-box; justify-content: flex-start; border-color: transparent; text-decoration: none; color: inherit; }
-/* Help opens in the menu's place, as a dark note */
-.tip { width: max-content; padding: 10px 14px; border: 0; border-radius: 10px; background: var(--fg); color: var(--bg); }
-.tip[open] { gap: 4px; }
-.tip p { margin: 0; }
-.tip p:first-child { margin-bottom: 8px; } /* sets the threshold line apart from the gestures */
-.tip kbd { padding: 0 5px; border: 1px solid; border-radius: 5px; font: inherit; font-size: 12px; font-weight: 600; }
+/* The help, which is also the welcome on a first visit: a card in the middle of a dimmed screen.
+   On a screen too short for it, it scrolls. */
+.help {
+  box-sizing: border-box; width: min(420px, calc(100% - 32px)); max-width: none; max-height: calc(100% - 32px); padding: 0;
+  overflow-y: auto; overscroll-behavior: contain;
+  border: 1px solid var(--line); border-radius: 16px; background: var(--surface); color: var(--fg); box-shadow: 0 10px 32px var(--shadow);
+  transition: opacity 0.15s, translate 0.15s;
+}
+@starting-style {
+  .help[open] { opacity: 0; translate: 0 8px; }
+}
+.help::backdrop { background: rgba(0, 0, 0, 0.45); }
+.help-in { position: relative; display: grid; gap: 16px; padding: 20px; }
+.help-in > .ib { position: absolute; top: 10px; right: 10px; width: var(--hit); height: var(--hit); border-color: transparent; background: transparent; }
+/* one row: the logo, then the name and what it is */
+.help header { display: flex; align-items: center; gap: 14px; padding-right: var(--hit); } /* the padding keeps the text clear of Close */
+.help img { flex: none; width: 56px; height: 56px; image-rendering: pixelated; } /* the logo is 28 pixels square: twice its size */
+.help h2 { margin: 0; font-family: var(--display); font-size: 24px; font-weight: 600; line-height: 1; }
+.help p { margin: 4px 0 0; color: var(--muted); text-wrap: balance; }
+/* the steps: an icon, a word and a line each */
+.help ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.help li { display: grid; grid-template-columns: auto 4em minmax(0, 1fr); gap: 10px; align-items: center; color: var(--muted); }
+.help li .ico { padding: 5px; border-radius: 7px; background: var(--fg); color: var(--bg); }
+.help li b { color: var(--fg); }
+/* the controls: a table of what each does, and how by mouse and by keyboard, or by touch */
+.help table { width: 100%; border-collapse: collapse; border-top: 1px solid var(--line); }
+.help th, .help td { padding: 7px 0 7px 16px; text-align: left; font-weight: 600; }
+.help th:first-child { width: 100%; padding-left: 0; } /* the first column takes the room the others leave */
+.help thead th { padding-top: 16px; color: var(--muted); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+.help tbody tr { border-top: 1px solid var(--line); }
+.help td { color: var(--muted); white-space: nowrap; }
+/* a key, or what a mouse or a finger does, drawn as a key */
+.help kbd {
+  display: inline-block; min-width: 10px; padding: 1px 6px; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 6px;
+  background: var(--bg); color: var(--fg); font: inherit; font-size: 12px; font-weight: 600; text-align: center;
+}
+.help kbd .ico { width: 10px; height: 10px; vertical-align: -1px; }
+.help footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 13px; }
+.help footer .btn { padding: 0 20px; font-size: 14px; }
 
 @media (max-width: 520px) {
   .count, .bar .wide { display: none; }

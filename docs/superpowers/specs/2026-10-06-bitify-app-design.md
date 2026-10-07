@@ -221,23 +221,78 @@ The More button is the last button in the top bar, at every width. It opens a sm
 that drops down below it, lined up with its right edge, with two or three rows, each an
 icon and a word:
 
-- Install: asks the browser to install Bitify as an app (see "Installing"). The row is
-  there only while the browser offers that.
-- Help: closes the menu and opens the help in its place.
+- Help: closes the menu and opens the help (see "Help and welcome").
 - GitHub: opens `https://github.com/Shilo/bitify` in a new tab.
+- Install, last: asks the browser to install Bitify as an app (see "Installing"). The row
+  is there only while the browser offers that.
 
-The help is a dark note with four lines in the body text size: what the threshold
-currently does, how to hold an image to compare, how to change the style without the
-panels ("Scroll, or press ↑ ↓, to change the style."; on touch devices "Swipe up or down
-to change the style."), and the same for the palette ("Hold Shift and scroll, or press
-← →, to change the palette."; on touch devices "Swipe left or right to change the
-palette."). The threshold value and the word "Hold" are bold. In the last two lines the
-whole gesture is bold: "Scroll", "Hold Shift and scroll", "Swipe up or down", "Swipe left
-or right". Space, Shift and the four arrows are drawn as keys. A wider gap sets the first
-line apart from the other three. It is never wider than the screen less 16px on each side.
+The menu closes on any click or tap, inside or outside it, and on Escape. While it is open
+nothing else on the screen reacts to a press, and the wheel and the keys change nothing
+(see "Quick switch").
 
-The menu and the help close on any click or tap, inside or outside them, and on Escape.
-While one is open nothing else on the screen reacts to a press.
+### Help and welcome
+
+The help is one dialog in the middle of the screen, over a dimmed app. It opens from Help
+in the More menu, and by itself on a first visit, as the welcome. A first visit is one with
+no remembered settings (see "Remembered settings"); the app saves its settings as it opens,
+so the welcome shows once. Where the browser refuses storage it shows on every visit.
+
+It is 420px wide, never wider or taller than the screen less 16px on each side, and scrolls
+inside when the screen is too short for it. It fades and rises into place in 150 ms, except
+under reduced motion. Top to bottom:
+
+- A header in one row, so that it takes little height: the logo, then "Bitify" in Pixelify
+  Sans with the empty screen's one line under it ("Instantly convert sprites and animated
+  GIFs to 1-bit colors and styles."). The logo is the still gold coin itself
+  (`src/assets/logo.png`), not bitified, drawn at exactly twice its size (56px) with hard
+  pixel edges and nothing behind it. A Close button (an X) sits in the top-right corner.
+- Four steps, each an icon, a word and a line. The icons are the app's own: the plus of
+  Add and the icons of the dock's Palette, Style and Download buttons. The first is worded
+  for the device in use:
+
+  | | Mouse and keyboard | Touch |
+  |---|---|---|
+  | Add | Drop, paste or choose images. | Choose images. |
+  | Palette | Pick two colors, or a preset. | The same. |
+  | Style | Pick effect, tune threshold. | The same. |
+  | Save | Download or copy images. | The same. |
+
+- Under a divider, a table headed "Controls", with a thin line between its rows. Each row
+  names a control and gives every way to do it, one way to a column. The rows are in the
+  order of the steps. With a mouse and keyboard the columns are "Mouse" and "Keyboard":
+
+  | Controls | Mouse | Keyboard |
+  |---|---|---|
+  | Add image | Drag, Drop | Ctrl, V |
+  | Next palette | Shift, Scroll | ←, → |
+  | Next style | Scroll | ↑, ↓ |
+  | See original image | Press, Image | Space |
+  | Save image | Click, the Download icon, the Copy icon | Ctrl, C |
+
+  On touch there is one column, "Touch":
+
+  | Controls | Touch |
+  |---|---|
+  | Add image | Touch, the plus icon |
+  | Next palette | Swipe, ←, → |
+  | Next style | Swipe, ↑, ↓ |
+  | See original image | Hold, Image |
+  | Save image | Touch, the Share icon |
+
+  Everything in those columns is drawn as a key, so that it stands out from the text: the
+  keys themselves, what a mouse or a finger does, such as "Scroll" and "Hold", what it is done to, and
+  the icons of the buttons to press. Each comma above separates two keys; they sit side by
+  side with no "+" between them. On a Mac, Ctrl reads ⌘. Save image names the buttons a tile
+  has on that device: Download and Copy with a mouse, Share on touch (see "Tiles").
+- A last row: "Images never leave your device." and a filled "Got it" button, which has
+  the focus when the dialog opens.
+
+Touch means a coarse main pointer, the same test the rest of the app uses. The steps give no
+counts of styles or palettes, which change, and the help does not explain the threshold.
+
+Got it, Close, Escape and a click or tap on the dimmed app close it. A click inside it
+does not. While it is open nothing behind it reacts: presses, swipes, the wheel and the keys
+all change nothing.
 
 ### Responsive behavior
 
@@ -266,7 +321,7 @@ viewport height so mobile browser bars do not cut the dock off.
 
 A centered slogan ("Pixel art in two colors"), one line saying what the app is ("Instantly convert sprites and animated GIFs to 1-bit colors and styles."; no
 counts of styles or palettes, which change), and a
-button labelled "Drop or choose images" ("Choose images" on touch devices, where there is
+button labelled "Drop, paste or choose images" ("Choose images" on touch devices, where there is
 nothing to drop). The text describes the app, not the steps. The dock stays visible.
 
 Above the heading sits the Bitify logo, a 28×28 spinning gold coin with a B
@@ -290,7 +345,7 @@ scaffolding and are not part of the app.
 - Hold Space: flip the whole wall to the other version until release. A button clicked
   with a mouse or finger does not keep focus, so Space still compares afterwards; a button
   reached with Tab keeps the normal behavior, where Space presses it.
-- Escape: close the open panel. If the list of styles is open, close that first. Escape also closes the More menu and the help.
+- Escape: close the open panel. If the list of styles is open, close that first. Escape also closes the Share sheet, the More menu and the help. While one of those is open, Space, the arrow keys and Ctrl+C do nothing.
 - Arrow keys: step through the styles and palettes (see "Quick switch").
 - Ctrl+C (Cmd+C on a Mac): copy the first image on the wall (see "Copying"). While text is
   selected, or the threshold number box has focus, the keys copy that text as usual. On the
@@ -336,6 +391,8 @@ pointer or finger, and at everything that contains it:
   Ctrl with + and − still zooms.
 - So with a wall that scrolls, the wheel changes the style over the top bar and the dock
   but not over the images. The arrow keys change it from anywhere.
+- While the Share sheet, the More menu or the help is open, no step is taken by wheel,
+  swipe or key.
 
 Details:
 
@@ -545,6 +602,8 @@ restored when the app opens. Nothing leaves the device.
   the threshold a whole number from 1 to 254. Anything else falls back to its default
   (Glow dark first, Cutout, Auto), so a damaged or outdated value cannot break the app.
 - If the browser refuses storage, the app works as before and starts from the defaults.
+- A visit that finds nothing stored is a first visit, and opens the welcome (see "Help and
+  welcome"). No separate record of having seen it is kept.
 
 ## Animated GIFs
 
