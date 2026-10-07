@@ -249,6 +249,8 @@ in browsers.
   falls back to the browser's own decoding, as a still.
 - GIFs are read and written by the app itself (with the `omggif` library), not through a
   canvas, so their pixels are exact in every browser.
+- The GIF code is a separate file of about 8 kB (3 kB compressed) that is only downloaded
+  the first time a GIF is added. Someone who only uses still images never loads it.
 
 ## Saving
 

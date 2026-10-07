@@ -70,11 +70,11 @@ describe('animations', () => {
     expect(outNames(['walk.gif', 'walk.gif'], ['gif', 'gif'])).toEqual(['walk-1bit.gif', 'walk-2-1bit.gif']);
   });
 
-  it('encodes an image with frames as a GIF and one without as a PNG', () => {
-    const still = fileBytes({ name: 'a.png', pixels: Uint8ClampedArray.of(246, 223, 164, 255), w: 1, h: 1 });
+  it('encodes an image with frames as a GIF and one without as a PNG', async () => {
+    const still = await fileBytes({ name: 'a.png', pixels: Uint8ClampedArray.of(246, 223, 164, 255), w: 1, h: 1 });
     expect([...still.subarray(0, 4)]).toEqual([137, 80, 78, 71]);
 
-    const moving = fileBytes({ name: 'a.gif', w: 1, h: 1, first: '#f6dfa4', second: '#0b0a0c', loop: 0,
+    const moving = await fileBytes({ name: 'a.gif', w: 1, h: 1, first: '#f6dfa4', second: '#0b0a0c', loop: 0,
       frames: [{ mask: Uint8Array.of(1), delay: 200 }, { mask: Uint8Array.of(2), delay: 200 }] });
     expect(String.fromCharCode(...moving.subarray(0, 6))).toBe('GIF89a');
     expect(decodeGif(moving).frames.map(f => [...f.data])).toEqual([[246, 223, 164, 255], [11, 10, 12, 255]]);

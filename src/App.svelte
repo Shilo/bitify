@@ -1,7 +1,6 @@
 <script>
   import { analyze, mask, colorize, hexToRgb } from './lib/bitify.js';
   import { unify } from './lib/bitify.js';
-  import { decodeGif } from './lib/gif.js';
   import { saveOne, saveAll } from './lib/save.js';
   import { fitGrid } from './lib/layout.js';
   import Dock from './Dock.svelte';
@@ -61,6 +60,8 @@
   async function decode(file) {
     if (file.type === 'image/gif') {
       try {
+        // the GIF code is only downloaded the first time a GIF is added
+        const { decodeGif } = await import('./lib/gif.js');
         const gif = decodeGif(new Uint8Array(await file.arrayBuffer()));
         if (gif.frames.length > 1) {
           const frames = gif.frames.map(f => ({ original: new ImageData(f.data, gif.width, gif.height), delay: f.delay }));

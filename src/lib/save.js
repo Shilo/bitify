@@ -1,5 +1,4 @@
 import { zipSync, zlibSync } from 'fflate';
-import { encodeGif } from './gif.js';
 
 // Output file names for a list of original names: extension replaced by "-1bit.png", or
 // "-1bit.gif" where `kinds` says 'gif', with -2, -3... added so no two outputs collide
@@ -71,13 +70,14 @@ function download(blob, filename) {
 // A still image here is { name, pixels, w, h }: the original file name and its bitified RGBA
 // pixels. An animation is { name, w, h, first, second, loop, frames: [{ mask, delay }] }.
 const kind = image => (image.frames ? 'gif' : 'png');
-export const fileBytes = image => (image.frames ? encodeGif(image) : pngBytes(image));
+// The GIF code is loaded only when an animation is saved, which keeps it out of the first download.
+export const fileBytes = async image => (image.frames ? (await import('./gif.js')).encodeGif(image) : pngBytes(image));
 
 export async function saveOne(image) {
-  download(new Blob([fileBytes(image)], { type: 'image/' + kind(image) }), outNames([image.name], [kind(image)])[0]);
+  download(new Blob([await fileBytes(image)], { type: 'image/' + kind(image) }), outNames([image.name], [kind(image)])[0]);
 }
 
 export async function saveAll(images) {
-  const zip = zipBytes(outNames(images.map(i => i.name), images.map(kind)), images.map(fileBytes));
+  const zip = zipBytes(outNames(images.map(i => i.name), images.map(kind)), await Promise.all(images.map(fileBytes)));
   download(new Blob([zip], { type: 'application/zip' }), 'bitify.zip');
 }
