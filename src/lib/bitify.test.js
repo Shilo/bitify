@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { analyze, mask, colorize, otsu, hexToRgb } from './bitify.js';
+import { analyze, unify, mask, colorize, otsu, hexToRgb } from './bitify.js';
 
 // Builds an analysed image from rows of characters. Each character maps to [r, g, b] or
 // [r, g, b, a] in `pal`; a character that is not in `pal` is an empty (transparent) pixel.
@@ -184,5 +184,34 @@ describe('lines', () => {
     const m = mask(analyze({ width: w, height: h, data }), 'lines');
     expect(m.length).toBe(w * h);
     expect(m.every((v, p) => (v === 0) === (data[p * 4 + 3] < 128))).toBe(true);
+  });
+});
+
+describe('unify', () => {
+  it('gives every frame of an animation the same thresholds, picked from all frames together', () => {
+    // on their own these two frames would be cut at 10 and at 150
+    const dark = image(['aabb'], { a: grey(10), b: grey(60) }), light = image(['aabb'], { a: grey(150), b: grey(240) });
+    expect([dark.auto, light.auto]).toEqual([10, 150]);
+    unify([dark, light]);
+    expect([dark.auto, light.auto]).toEqual([60, 60]);
+    // so a pixel keeps its color from one frame to the next
+    expect(show(mask(dark, 'solid'), 4)).toEqual(['####']);
+    expect(show(mask(light, 'solid'), 4)).toEqual(['....']);
+  });
+
+  it('shares the Lines threshold and whether the canvas edge counts as empty', () => {
+    const soft = image(['abab', 'baba'], { a: grey(200), b: grey(180) }), hard = image(['ab  ', 'ba  '], { a: grey(200), b: grey(20) });
+    expect([soft.hasAlpha, hard.hasAlpha]).toEqual([false, true]);
+    unify([soft, hard]);
+    expect(soft.autoLine).toBe(hard.autoLine);
+    expect(soft.autoLine).toBeGreaterThanOrEqual(20);
+    expect(soft.autoLine).toBeLessThan(180);
+    expect([soft.hasAlpha, hard.hasAlpha]).toEqual([true, true]);
+  });
+
+  it('leaves a single image as it was', () => {
+    const one = image(['aabb'], { a: grey(50), b: grey(200) }), before = [one.auto, one.autoLine, one.hasAlpha];
+    unify([one]);
+    expect([one.auto, one.autoLine, one.hasAlpha]).toEqual(before);
   });
 });

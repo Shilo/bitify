@@ -1,5 +1,7 @@
 <script>
   import { analyze, mask, colorize, hexToRgb } from './lib/bitify.js';
+  import { unify } from './lib/bitify.js';
+  import { decodeGif } from './lib/gif.js';
   import { saveOne, saveAll } from './lib/save.js';
   import { fitGrid } from './lib/layout.js';
   import Dock from './Dock.svelte';
@@ -55,19 +57,39 @@
     messageTimer = setTimeout(() => (message = ''), 3200);
   }
 
+  // Reads a file into frames: one for a still image, several for an animated GIF.
   async function decode(file) {
+    if (file.type === 'image/gif') {
+      try {
+        const gif = decodeGif(new Uint8Array(await file.arrayBuffer()));
+        if (gif.frames.length > 1) {
+          const frames = gif.frames.map(f => ({ original: new ImageData(f.data, gif.width, gif.height), delay: f.delay }));
+          return { frames, loop: gif.loop };
+        }
+      } catch {
+        // not a GIF we can read ourselves; let the browser try below
+      }
+    }
     const bitmap = await createImageBitmap(file);
     const canvas = Object.assign(document.createElement('canvas'), { width: bitmap.width, height: bitmap.height });
     const ctx = canvas.getContext('2d', { willReadFrequently: true });
     ctx.drawImage(bitmap, 0, 0);
     bitmap.close();
-    return ctx.getImageData(0, 0, canvas.width, canvas.height);
+    return { frames: [{ original: ctx.getImageData(0, 0, canvas.width, canvas.height) }] };
+  }
+
+  // Turns decoded frames into an item for the wall. `original` and `img` are the first frame;
+  // an animation also has `frames` (each with its own original, img and delay) and `loop`.
+  function toItem(id, name, { frames, loop }) {
+    for (const frame of frames) frame.img = analyze(frame.original);
+    unify(frames.map(frame => frame.img)); // one conversion for the whole animation, so it does not flicker
+    return frames.length > 1 ? { id, name, ...frames[0], frames, loop } : { id, name, ...frames[0] };
   }
 
   fetch(logoUrl)
     .then(response => response.blob())
     .then(decode)
-    .then(original => (example = { id: 0, name: 'Example', original, img: analyze(original) }))
+    .then(decoded => (example = toItem(0, 'Example', decoded)))
     .catch(() => {}); // without it the empty screen simply has no preview
 
   async function addFiles(files) {
@@ -75,8 +97,7 @@
     let skipped = 0;
     for (const file of files) {
       try {
-        const original = await decode(file);
-        added.push({ id: ++nextId, name: file.name || 'image.png', original, img: analyze(original) });
+        added.push(toItem(++nextId, file.name || 'image.png', await decode(file)));
       } catch {
         skipped++;
       }
@@ -85,12 +106,13 @@
     if (skipped) say(`${skipped} file${skipped === 1 ? '' : 's'} skipped. Bitify reads PNG, GIF, WebP, JPEG and BMP images.`);
   }
 
-  const bitified = item => ({
-    name: item.name,
-    pixels: colorize(mask(item.img, style, threshold), first, second),
-    w: item.img.w,
-    h: item.img.h,
-  });
+  // What gets saved: a still image as its two-color pixels, an animation as one mask per frame.
+  const bitified = item => {
+    const base = { name: item.name, w: item.img.w, h: item.img.h };
+    return item.frames
+      ? { ...base, first, second, loop: item.loop, frames: item.frames.map(f => ({ mask: mask(f.img, style, threshold), delay: f.delay })) }
+      : { ...base, pixels: colorize(mask(item.img, style, threshold), first, second) };
+  };
 
   async function save(item) {
     try {

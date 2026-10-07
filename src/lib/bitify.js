@@ -44,7 +44,19 @@ export function analyze({ width: w, height: h, data }) {
     if (p + w < w * h && solid(p + w)) edges[diff(data, i, i + w * 4)]++;
   }
   edges[0] = 0; // identical neighbours are not edges
-  return { w, h, data, lum, hasAlpha, auto: otsu(hist, 127), autoLine: otsu(edges, 0) };
+  return { w, h, data, lum, hasAlpha, hist, edges, auto: otsu(hist, 127), autoLine: otsu(edges, 0) };
+}
+
+// Makes every frame of an animation convert the same way: the Auto thresholds are picked from
+// all the frames together instead of frame by frame, so a pixel does not flicker between the
+// two colors as the animation plays. Takes the results of `analyze` and updates them in place.
+export function unify(frames) {
+  if (frames.length < 2) return frames;
+  const hist = new Array(256).fill(0), edges = new Array(256).fill(0);
+  for (const f of frames) for (let i = 0; i < 256; i++) { hist[i] += f.hist[i]; edges[i] += f.edges[i]; }
+  const shared = { auto: otsu(hist, 127), autoLine: otsu(edges, 0), hasAlpha: frames.some(f => f.hasAlpha) };
+  for (const f of frames) Object.assign(f, shared);
+  return frames;
 }
 
 // One byte per pixel: 0 empty, 1 first color (lines, dark pixels), 2 second color (fill, light pixels).

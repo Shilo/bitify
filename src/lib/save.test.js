@@ -1,7 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { inflateSync, crc32 } from 'node:zlib';
 import { unzipSync } from 'fflate';
-import { outNames, zipBytes, pngBytes } from './save.js';
+import { outNames, zipBytes, pngBytes, fileBytes } from './save.js';
+import { decodeGif } from './gif.js';
 
 describe('outNames', () => {
   it('replaces the extension with -1bit.png', () => {
@@ -57,5 +58,25 @@ describe('pngBytes', () => {
     expect([...head.data]).toEqual([0, 0, 0, 3, 0, 0, 0, 2, 8, 6, 0, 0, 0]);
     // each row is a filter byte of 0 followed by the row's pixels, untouched
     expect([...inflateSync(data.data)]).toEqual([0, ...row, 0, ...row]);
+  });
+});
+
+describe('animations', () => {
+  it('names an animated image .gif and a still one .png', () => {
+    expect(outNames(['walk.gif', 'hero.png', 'walk.png'], ['gif', 'png', 'png'])).toEqual(['walk-1bit.gif', 'hero-1bit.png', 'walk-1bit.png']);
+  });
+
+  it('keeps two animations with the same name apart', () => {
+    expect(outNames(['walk.gif', 'walk.gif'], ['gif', 'gif'])).toEqual(['walk-1bit.gif', 'walk-2-1bit.gif']);
+  });
+
+  it('encodes an image with frames as a GIF and one without as a PNG', () => {
+    const still = fileBytes({ name: 'a.png', pixels: Uint8ClampedArray.of(246, 223, 164, 255), w: 1, h: 1 });
+    expect([...still.subarray(0, 4)]).toEqual([137, 80, 78, 71]);
+
+    const moving = fileBytes({ name: 'a.gif', w: 1, h: 1, first: '#f6dfa4', second: '#0b0a0c', loop: 0,
+      frames: [{ mask: Uint8Array.of(1), delay: 200 }, { mask: Uint8Array.of(2), delay: 200 }] });
+    expect(String.fromCharCode(...moving.subarray(0, 6))).toBe('GIF89a');
+    expect(decodeGif(moving).frames.map(f => [...f.data])).toEqual([[246, 223, 164, 255], [11, 10, 12, 255]]);
   });
 });

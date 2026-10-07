@@ -36,7 +36,7 @@ Assumptions made here, open to correction:
 - Plain JavaScript, not TypeScript.
 - Settings are not remembered between visits.
 - Exports are PNG at the original pixel size, with no upscaling option.
-- An animated GIF is converted as its first frame only.
+- Animated WebP and APNG files are converted as their first frame only. (Animated GIFs are fully supported; see "Animated GIFs".)
 
 ## Layout: the Wall
 
@@ -233,12 +233,32 @@ at the point that separates them best:
 
 A manual value applies to every image.
 
+## Animated GIFs
+
+An animated GIF is imported with all its frames and plays on the wall straight away, looping,
+at the speed stored in the file. Frames marked with almost no delay play at 100ms, as they do
+in browsers.
+
+- Every frame goes through the same conversion as a still image, and the whole animation uses
+  one Auto threshold picked from all its frames together. Picking it frame by frame would make
+  pixels flicker between the two colors as the animation plays.
+- The Original / Bitified switch, hold and Space show the original animation, still playing.
+- GIF frames are often partial patches drawn over earlier frames. They are composited when
+  the file is read, so each frame is held as the full picture it shows.
+- A GIF with a single frame is treated as a still image. A file that cannot be read as a GIF
+  falls back to the browser's own decoding, as a still.
+- GIFs are read and written by the app itself (with the `omggif` library), not through a
+  canvas, so their pixels are exact in every browser.
+
 ## Saving
 
 - A single image saves as `<original name without extension>-1bit.png` at its original
   pixel size.
 - Download all saves `bitify.zip` containing one such PNG per image. Duplicate names get
   `-2`, `-3` and so on.
+- An animation saves as `<original name without extension>-1bit.gif`: every frame in the two
+  chosen colors, empty pixels transparent, with the original frame delays and loop count.
+  Download all puts GIFs and PNGs in the same zip.
 - Saving always uses the bitified version, whatever the wall is showing.
 - PNG files are encoded directly from the pixels, not through a canvas. Some browsers
   (Brave, Safari private browsing, Firefox strict mode) add noise when a page reads a
@@ -253,6 +273,7 @@ Vite with the `svelte` template (Svelte 5, runes, mounted with `mount()`), JavaS
 | File | Purpose |
 |---|---|
 | `src/lib/bitify.js` | Pure conversion, no DOM. `analyze(imageData)` returns size, pixels, brightness, whether any pixel is empty, and the two auto thresholds. `mask(analysis, style, threshold)` returns one byte per pixel (0 empty, 1 first color, 2 second color). `colorize(mask, first, second)` returns RGBA pixels. |
+| `src/lib/gif.js` | Reading an animated GIF into full frames (`decodeGif`) and writing a two-color one (`encodeGif`). No DOM. |
 | `src/lib/save.js` | Output file naming, zip, PNG encoding from pixels, single save, save all. |
 | `src/App.svelte` | All state; top bar, wall, empty state, drop overlay, messages; window-level drop, paste and key handling. |
 | `src/Tile.svelte` | One image: canvas, caption, Download and Remove, hold to compare. |
@@ -270,6 +291,7 @@ fill is redone.
 
 Dependencies beyond Vite and Svelte:
 
+- `omggif`, for reading and writing animated GIFs.
 - `fflate`, for the zip. PNGs are already compressed, so entries are stored without
   compression.
 - `vitest`, development only.
@@ -306,6 +328,7 @@ Dependencies beyond Vite and Svelte:
 - Export upscaling, or formats other than PNG.
 - Per-image settings; style, threshold and colors apply to the whole wall.
 - Custom user palettes.
-- Animated GIF frames beyond the first.
+- Animation in formats other than GIF (animated WebP, APNG): only the first frame is used.
+- Pausing or scrubbing an animation, and changing its speed.
 - Installable or offline (PWA) behavior.
 - Hosting and deployment.

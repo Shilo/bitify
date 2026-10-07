@@ -1,13 +1,16 @@
 import { zipSync, zlibSync } from 'fflate';
+import { encodeGif } from './gif.js';
 
-// Output file names for a list of original names: extension replaced by "-1bit.png",
-// with -2, -3... added so no two outputs collide (case-insensitively, for Windows).
-export function outNames(names) {
+// Output file names for a list of original names: extension replaced by "-1bit.png", or
+// "-1bit.gif" where `kinds` says 'gif', with -2, -3... added so no two outputs collide
+// (case-insensitively, for Windows).
+export function outNames(names, kinds = []) {
   const taken = new Set();
-  return names.map(name => {
+  return names.map((name, n) => {
+    const ext = kinds[n] === 'gif' ? 'gif' : 'png';
     const base = name.replace(/\.[^.]+$/, '').replace(/[\\/]/g, '-') || 'image';
-    let out = `${base}-1bit.png`;
-    for (let i = 2; taken.has(out.toLowerCase()); i++) out = `${base}-${i}-1bit.png`;
+    let out = `${base}-1bit.${ext}`;
+    for (let i = 2; taken.has(out.toLowerCase()); i++) out = `${base}-${i}-1bit.${ext}`;
     taken.add(out.toLowerCase());
     return out;
   });
@@ -65,12 +68,16 @@ function download(blob, filename) {
   setTimeout(() => URL.revokeObjectURL(a.href), 10000);
 }
 
-// An image here is { name, pixels, w, h }: the original file name and its bitified RGBA pixels.
+// A still image here is { name, pixels, w, h }: the original file name and its bitified RGBA
+// pixels. An animation is { name, w, h, first, second, loop, frames: [{ mask, delay }] }.
+const kind = image => (image.frames ? 'gif' : 'png');
+export const fileBytes = image => (image.frames ? encodeGif(image) : pngBytes(image));
+
 export async function saveOne(image) {
-  download(new Blob([pngBytes(image)], { type: 'image/png' }), outNames([image.name])[0]);
+  download(new Blob([fileBytes(image)], { type: 'image/' + kind(image) }), outNames([image.name], [kind(image)])[0]);
 }
 
 export async function saveAll(images) {
-  const zip = zipBytes(outNames(images.map(i => i.name)), images.map(pngBytes));
+  const zip = zipBytes(outNames(images.map(i => i.name), images.map(kind)), images.map(fileBytes));
   download(new Blob([zip], { type: 'application/zip' }), 'bitify.zip');
 }

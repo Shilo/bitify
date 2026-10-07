@@ -19,11 +19,21 @@
     held = false;
   }
 
-  // The mask depends only on the image, style and threshold, so a color change reuses it.
-  const m = $derived(mask(item.img, style, threshold));
-  const pixels = $derived(
-    flipped !== held ? item.original : new ImageData(colorize(m, first, second), item.img.w, item.img.h),
-  );
+  // An animation has `frames`; a still image is treated as a single frame.
+  const frames = $derived(item.frames ?? [item]);
+  let at = $state(0); // which frame is on screen
+
+  // The masks depend only on the image, style and threshold, so a color change reuses them.
+  const masks = $derived(frames.map(frame => mask(frame.img, style, threshold)));
+  const bitified = $derived(masks.map(m => new ImageData(colorize(m, first, second), item.img.w, item.img.h)));
+  const pixels = $derived(flipped !== held ? frames[at].original : bitified[at]);
+
+  // Plays an animation: after the current frame's delay, step to the next and start again.
+  $effect(() => {
+    if (frames.length < 2) return;
+    const timer = setTimeout(() => (at = (at + 1) % frames.length), frames[at].delay);
+    return () => clearTimeout(timer);
+  });
 </script>
 
 <figure class="tile">
