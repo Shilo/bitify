@@ -22,6 +22,9 @@ Stated by the user:
   Images can be removed again.
 - Changing a color redraws everything immediately.
 - Download each image on its own, and download all images.
+- Copy each image to the clipboard with a button to the left of its Download button, on
+  desktop and on phones, and with Ctrl+C for the first image (added 2026-10-07; see
+  "Copying").
 - A toggle between the original and the bitified image.
 - Swap, a palette selector, and a threshold. Threshold and an Auto button live in an
   style strip above the dock, which never covers the images.
@@ -68,7 +71,7 @@ The tiles always use the space between the top bar and the dock, and are centere
   without scrolling. The column count is whichever gives the largest tiles, so two images sit
   side by side on a wide screen and stacked on a tall one. A partly filled last row is
   centered.
-- A tile's size counts its caption, and on touch screens its Download and Remove buttons, so
+- A tile's size counts its caption, and on touch screens the row of buttons under it, so
   nothing is pushed under the dock.
 - Tiles are never shrunk below a usable size: 140px on phones, rising to 200px on wide
   screens. Once that many images no longer fit, the wall scrolls instead, with as many
@@ -81,19 +84,20 @@ The tiles always use the space between the top bar and the dock, and are centere
   dock, and the tiles are resized to fit it, so no image is hidden while its palette, style
   or threshold is changed. Closing the panel gives the space back. The example on the empty
   screen shrinks the same way.
-- On touch screens a long file name is cut off with an ellipsis before the Download and
-  Remove buttons. Tiles narrower than 150px still show the pixel size under the name, set
-  slightly smaller and tighter, with the two buttons 36px wide instead of 40px so sizes up to
-  seven characters (such as 128×128) fit whole.
+- The caption is one line at every size and on every device: the file name at the left, cut
+  off with an ellipsis when it is long, and the pixel size at the right. Three buttons do not
+  fit beside a name on a 140px tile, so on touch screens they have a row of their own (see
+  "Tiles").
 
 The rule lives in `src/lib/layout.js` (`fitGrid`) and is unit tested.
 
 ### Tiles
 
-- Pointer devices: Download and Remove buttons appear in the tile's top-right corner on
-  hover or keyboard focus.
-- Touch devices (no hover): the two buttons sit beside the file name and are always
-  visible, 40px square.
+- Every tile has three buttons, in this order: Copy, Download, Remove.
+- Pointer devices: the buttons appear in the tile's top-right corner on hover or keyboard
+  focus.
+- Touch devices (no hover): the buttons sit in a row of their own under the caption, at the
+  right, and are always visible, 40px square.
 - Holding a tile shows its other version (original if the wall shows bitified, and the
   reverse) until release. With a mouse this is instant. On touch a press counts as a hold
   after 150 ms, and only if the finger has moved less than 8px by then, so scrolling the
@@ -247,7 +251,7 @@ Above the heading sits the Bitify logo, a 28×28 spinning gold coin with a B
 (`src/assets/logo.gif`, an eight-frame animation), labelled "Example". It plays like any
 animated GIF on the wall. It is a live preview: it goes through the same conversion as real
 images, so the colors, Swap, palettes, style, threshold, the view switch and
-hold or Space all apply to it. It is for previewing only. It has no Download or Remove, is
+hold or Space all apply to it. It is for previewing only. It has no Copy, Download or Remove, is
 not counted, and is never included in Download all. It disappears when the first image is
 added and returns when the wall is empty again.
 
@@ -266,6 +270,9 @@ scaffolding and are not part of the app.
   reached with Tab keeps the normal behavior, where Space presses it.
 - Escape: close the open panel. If the list of styles or the help tooltip is open, close that first.
 - Arrow keys: step through the styles and palettes (see "Quick switch").
+- Ctrl+C (Cmd+C on a Mac): copy the first image on the wall (see "Copying"). While text is
+  selected, or the threshold number box has focus, the keys copy that text as usual. On the
+  empty screen they do nothing.
 - All controls are reachable by Tab with a visible focus ring.
 
 ### Quick switch
@@ -483,6 +490,21 @@ in browsers.
 - Files are offered through a temporary link with the `download` attribute, which works in
   current iOS Safari and Android Chrome.
 
+## Copying
+
+- A tile's Copy button puts that image on the clipboard as a PNG at its original pixel
+  size, ready to paste into another program. Ctrl+C does the same for the first image.
+- Like saving, copying always uses the bitified version, whatever the wall is showing, and
+  the PNG is encoded directly from the pixels.
+- Browsers accept PNG on the clipboard but not GIF, so an animation is copied as its first
+  frame, and the message says so.
+- A short message confirms the copy ("name copied."), or says that it failed. It fails where
+  the browser has no image clipboard or the page is refused the use of it.
+- The copy is made with the asynchronous Clipboard API (`navigator.clipboard.write`), which
+  works in current desktop browsers, iOS Safari and Android Chrome on a secure page. It is
+  started directly in the click or key press, with nothing awaited first, because Safari
+  refuses it otherwise.
+
 ## Structure
 
 Vite with the `svelte` template (Svelte 5, runes, mounted with `mount()`), JavaScript.
@@ -491,12 +513,12 @@ Vite with the `svelte` template (Svelte 5, runes, mounted with `mount()`), JavaS
 |---|---|
 | `src/lib/bitify.js` | Pure conversion, no DOM. `analyze(imageData)` returns size, pixels, brightness, whether any pixel is empty, the darkest and lightest brightness, and the auto thresholds. `mask(analysis, style, threshold)` returns one byte per pixel (0 empty, 1 first color, 2 second color). `colorize(mask, first, second)` returns RGBA pixels. |
 | `src/lib/gif.js` | Reading an animated GIF into full frames (`decodeGif`) and writing a two-color one (`encodeGif`). No DOM. |
-| `src/lib/save.js` | Output file naming, zip, PNG encoding from pixels, single save, save all. |
+| `src/lib/save.js` | Output file naming, zip, PNG encoding from pixels, single save, save all, copy to the clipboard. |
 | `src/lib/settings.js` | The default settings, and `restore(text, styles)`, which reads stored settings back and checks each value. No DOM. |
 | `src/lib/presets.js` | The list of palettes and the list of styles, whether two colors are a palette's, and stepping to the next or previous style or palette. No DOM. |
 | `src/lib/gesture.js` | `wheelSteps()`, which turns the stream of wheel moves from a mouse or trackpad into single steps. No DOM. |
 | `src/App.svelte` | All state; top bar, wall, empty state, drop overlay, messages; window-level drop, paste, key, wheel and swipe handling. |
-| `src/Tile.svelte` | One image: canvas, caption, Download and Remove, hold to compare. |
+| `src/Tile.svelte` | One image: canvas, caption, Copy, Download and Remove, hold to compare. |
 | `src/Dock.svelte` | The dock and its two panels. |
 | `src/Pixels.svelte` | A canvas that shows a block of pixels; used by tiles and by the style previews. |
 | `src/PixelIcon.svelte` | Renders a 7×7 glyph from a row-string map. |
@@ -519,7 +541,7 @@ Dependencies beyond Vite and Svelte:
 ## Errors and limits
 
 - Undecodable files are skipped with a message; the rest of the batch still loads.
-- If saving fails, a message says so. Nothing else is lost.
+- If saving or copying fails, a message says so. Nothing else is lost.
 - Conversion runs on the main thread. That is instant for pixel art. A multi-megapixel
   photo will cause a visible pause on every change; moving conversion to a worker is the
   upgrade path if that ever matters.
@@ -557,7 +579,8 @@ Dependencies beyond Vite and Svelte:
   step for a flick with its fading tail.
 - The interface is checked by hand in a desktop browser and at phone width: add by drop,
   picker and paste; remove one and all; change colors, palette, style and threshold;
-  compare by switch, hold and Space; save one and all; and quick switch by wheel, Shift
+  compare by switch, hold and Space; save one and all; copy by button and by Ctrl+C, then
+  paste into another program; and quick switch by wheel, Shift
   or Ctrl with wheel, arrow keys and swipes, on the empty screen, on a wall that fits and on one
   that scrolls, where the wheel and an up-or-down swipe over the images must scroll them
   and change nothing.

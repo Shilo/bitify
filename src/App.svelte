@@ -1,7 +1,7 @@
 <script>
   import { analyze, mask, colorize, hexToRgb, autoThreshold } from './lib/bitify.js';
   import { unify } from './lib/bitify.js';
-  import { saveOne, saveAll } from './lib/save.js';
+  import { saveOne, saveAll, copyOne } from './lib/save.js';
   import { fitGrid } from './lib/layout.js';
   import { restore } from './lib/settings.js';
   import { STYLES, inOrder, stepStyle, stepPalette } from './lib/presets.js';
@@ -54,11 +54,11 @@
   // Size of the area the wall can use, measured from the page (see .probe in app.css).
   let wallWidth = $state(0);
   let wallHeight = $state(0);
-  // A tile is its square image plus a caption underneath. On touch screens the caption row also
-  // holds the Download and Remove buttons, so it is taller. These mirror the sizes in app.css.
+  // A tile is its square image plus a caption underneath. On touch screens the Copy, Download and
+  // Remove buttons sit in a row under the caption, so it is taller. These mirror the sizes in app.css.
   const noHover = matchMedia('(hover: none)');
-  let captionHeight = $state(noHover.matches ? 48 : 27);
-  noHover.addEventListener('change', e => (captionHeight = e.matches ? 48 : 27));
+  let captionHeight = $state(noHover.matches ? 75 : 27);
+  noHover.addEventListener('change', e => (captionHeight = e.matches ? 75 : 27));
   const layout = $derived(
     fitGrid(items.length, wallWidth, wallHeight, {
       gap: 16,
@@ -233,6 +233,16 @@
     }
   }
 
+  // The clipboard takes a PNG but not a GIF, so an animation is copied as its first frame.
+  async function copy(item) {
+    try {
+      await copyOne({ pixels: colorize(mask(item.img, style, threshold), first, second), w: item.img.w, h: item.img.h });
+      say(`${item.name} copied${item.frames ? ' as a still image' : ''}.`);
+    } catch {
+      say(`${item.name} could not be copied.`);
+    }
+  }
+
   async function saveEverything() {
     try {
       await saveAll(items.map(bitified));
@@ -277,6 +287,12 @@
   function keydown(e) {
     if (e.key === 'Control') ctrlHeld = true;
     if (e.code === 'Space' && !onControl(e)) { e.preventDefault(); spaceHeld = true; }
+    // Ctrl and C (Cmd and C on a Mac) copy the first image, unless there is text to copy instead.
+    const copies = (e.ctrlKey || e.metaKey) && !e.shiftKey && !e.altKey && !e.repeat && e.key.toLowerCase() === 'c';
+    if (copies && items.length && !String(getSelection()) && !e.target.matches?.('textarea, input:not([type=range], [type=color])')) {
+      e.preventDefault();
+      copy(items[0]);
+    }
     const [axis, dir] = (!e.ctrlKey && !e.metaKey && !e.altKey && !e.shiftKey && ARROWS[e.key]) || [];
     // an arrow keeps its own job in a text box, on a slider, and where it scrolls
     if (axis && !e.target.matches?.('input, select, textarea') && !scrolls(e.target, axis)) {
@@ -328,6 +344,7 @@
           {style}
           {threshold}
           flipped={showOriginal !== spaceHeld}
+          oncopy={() => copy(item)}
           onsave={() => save(item)}
           onremove={() => (items = items.filter(i => i !== item))}
         />

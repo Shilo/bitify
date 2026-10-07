@@ -77,6 +77,11 @@ export async function saveOne(image) {
   download(new Blob([await fileBytes(image)], { type: 'image/' + kind(image) }), outNames([image.name], [kind(image)])[0]);
 }
 
+// Puts a still image, { pixels, w, h }, on the clipboard as a PNG. Browsers accept no GIFs there.
+// The write starts at once, with nothing awaited first, as Safari only allows it during a click or a key press.
+export const copyOne = image =>
+  navigator.clipboard.write([new ClipboardItem({ 'image/png': new Blob([pngBytes(image)], { type: 'image/png' }) })]);
+
 // One image saves as itself; a zip of one file would only be an extra step to open.
 export async function saveAll(images) {
   if (images.length === 1) return saveOne(images[0]);
