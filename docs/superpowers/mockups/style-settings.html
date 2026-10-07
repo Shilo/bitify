@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Style settings mockups</title>
+<!-- A mockup, not app code: three ways to show each style's own settings, each drawn at desktop
+     and phone size in a frame of its own so the app's width rules apply. Open it in a browser. -->
+<style>
+  :root { --bg: #ecedf1; --surface: #fff; --fg: #1b1c24; --muted: #666979; --line: #d5d7e0; --s: 0.7; color-scheme: light; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #17181d; --surface: #22242c; --fg: #ecedf2; --muted: #9a9dae; --line: #343744; color-scheme: dark; } }
+  body { margin: 0; padding: 24px 16px 64px; background: var(--bg); color: var(--fg); font: 14px/1.45 "Schibsted Grotesk", system-ui, "Segoe UI", sans-serif; }
+  header, section { max-width: 1180px; margin: 0 auto; }
+  h1 { margin: 0 0 4px; font-size: 22px; }
+  h2 { margin: 0; font-size: 18px; }
+  p { margin: 4px 0 0; color: var(--muted); max-width: 78ch; }
+  .tools { position: sticky; top: 0; z-index: 5; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin: 16px auto 0; padding: 10px 0; background: var(--bg); border-bottom: 1px solid var(--line); }
+  .tools b { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+  .pills { display: flex; flex-wrap: wrap; gap: 4px; }
+  .pills button { padding: 5px 10px; border: 1px solid var(--line); border-radius: 8px; background: transparent; color: inherit; font: inherit; font-size: 13px; cursor: pointer; }
+  .pills button[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+  .pills small { opacity: 0.6; margin-left: 4px; }
+  section { margin-top: 36px; }
+  .tag { display: inline-block; margin-left: 8px; padding: 1px 8px; border-radius: 99px; background: var(--fg); color: var(--bg); font-size: 11px; font-weight: 600; vertical-align: 2px; }
+  .pc { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 4px 24px; margin: 10px 0 0; padding: 0; list-style: none; font-size: 13px; }
+  .pc li::before { content: "+ "; font-weight: 700; }
+  .pc li.no::before { content: "– "; }
+  .pc li.no { color: var(--muted); }
+  .shots { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 20px; margin-top: 14px; }
+  figure { margin: 0; }
+  .vp { width: calc(var(--w) * var(--s) * 1px); height: calc(var(--h) * var(--s) * 1px); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12); }
+  .vp iframe { width: calc(var(--w) * 1px); height: calc(var(--h) * 1px); border: 0; transform: scale(var(--s)); transform-origin: 0 0; }
+  figcaption { margin-top: 6px; font-size: 12px; color: var(--muted); max-width: calc(var(--w) * var(--s) * 1px); }
+  figcaption b { color: var(--fg); }
+  figcaption a { color: inherit; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Style settings: where they go</h1>
+  <p>Three ways to show a style's own settings. Every frame is live: press the buttons, drag the sliders. The art reacts to Threshold, Shading, Scale, Direction, Spacing and Matrix; the other settings only move their controls here. Under each frame is how much of the wall stays in view, which is what decides whether a change can be watched while it is made.</p>
+  <div class="tools">
+    <b>Style</b><div class="pills" id="styles"></div>
+    <b>Size</b><input id="zoom" type="range" min="0.45" max="1" step="0.05" value="0.7" aria-label="Frame size">
+  </div>
+</header>
+<main id="gallery"></main>
+
+<script>
+// The settings from the research spike. `def` null means Auto; `auto` is what Auto shows here.
+const SET = {
+  thr: { label: 'Threshold', min: 1, max: 254, def: null, auto: 120 },
+  seams: { label: 'Seams', min: 1, max: 255, def: null, auto: 24 },
+  rim: { label: 'Rim', opts: ['On', 'Off'], def: 'On' },
+  thick: { label: 'Thickness', opts: ['1', '2', '3'], def: '1' },
+  darks: { label: 'Fill darks', min: 0, max: 254, def: 0, zero: 'Off' },
+  shading: { label: 'Shading', min: 0, max: 100, def: 100, unit: '%' },
+  scale: { label: 'Scale', opts: ['1×', '2×', '3×', '4×'], def: '1×' },
+  dir: { label: 'Direction', opts: ['/', '\\', '—', '|'], def: '/' },
+  spacing: { label: 'Spacing', opts: ['3', '4', '5', '6'], def: '3' },
+  matrix: { label: 'Matrix', opts: ['2', '4', '8'], def: '4' },
+  kernel: { label: 'Diffusion', opts: ['Atkinson', 'Floyd', 'Stucki'], def: 'Atkinson' },
+  source: { label: 'Brightness', opts: ['Luma', 'Value', 'R', 'G', 'B'], def: 'Luma' },
+  alpha: { label: 'Opacity cut', min: 1, max: 255, def: 128 },
+};
+const STYLES = {
+  Cutout: ['thr', 'seams', 'rim', 'source', 'alpha'],
+  Solid: ['thr', 'source', 'alpha'],
+  Lines: ['thr', 'thick', 'darks', 'alpha'],
+  Checker: ['thr', 'shading', 'scale', 'source', 'alpha'],
+  Hatch: ['thr', 'shading', 'scale', 'dir', 'spacing', 'source', 'alpha'],
+  Bayer: ['thr', 'shading', 'scale', 'matrix', 'source', 'alpha'],
+  Noise: ['thr', 'shading', 'scale', 'source', 'alpha'],
+  Atkinson: ['thr', 'shading', 'kernel', 'source', 'alpha'],
+  Silhouette: ['alpha'],
+};
+const OPTIONS = [
+  { id: 'A', name: 'Tray', tag: 'my pick for desktop', line: 'A More button at the end of the strip opens every setting of the current style at once, inside the same panel. The panel grows upward and the wall makes room, as it already does for panels.',
+    good: ['Every setting and its value in view together', 'Nothing ever covers the images', 'Closed, the strip is exactly today\'s'],
+    bad: ['On a phone a style with six settings leaves the wall very little room, so the tray has to scroll inside itself', 'Its height changes from style to style'] },
+  { id: 'B', name: 'One at a time', tag: 'my pick for phones', line: 'The strip names every setting as a chip showing its value. Pressing a chip puts that one setting\'s control on the row below. Threshold is the first chip and is chosen by default, so the strip starts out as today\'s.',
+    good: ['Always two rows, on any screen and for any style: the wall keeps the room it has today', 'One wide control at a time is easy to hit with a thumb', 'No "advanced" mode to find or to close; grows to any number of settings'],
+    bad: ['One extra press to reach a setting', 'On desktop the strip is two rows where it is one today'] },
+  { id: 'C', name: 'Popover', line: 'A More button opens a floating list of the settings above the strip, the way the list of styles opens.',
+    good: ['The least new layout: it reuses the list of styles\' popup', 'The strip stays one row'],
+    bad: ['It covers the images it is changing; on a phone it covers nearly all of them', 'It closes on a press outside, so comparing means opening it again'] },
+];
+
+// The app's own CSS for the parts drawn here (from src/app.css), then the rules the mockups add.
+const CSS = `
+:root { --bg:#ecedf1; --surface:#fff; --fg:#1b1c24; --muted:#666979; --line:#d5d7e0; --tile:#e3e5eb; --tile2:#d9dbe3; --shadow:rgba(27,28,36,.16);
+  --hit:36px; --dock-base:132px; --panel-space:0px; --dock-space:calc(var(--dock-base) + var(--panel-space));
+  --display:"Pixelify Sans",ui-monospace,"Courier New",monospace; --body:"Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif; color-scheme:light; height:100vh; }
+@media (prefers-color-scheme: dark) { :root { --bg:#17181d; --surface:#22242c; --fg:#ecedf2; --muted:#9a9dae; --line:#343744; --tile:#1f2128; --tile2:#272a33; --shadow:rgba(0,0,0,.5); color-scheme:dark; } }
+:root.touch { --hit:44px; }
+body { height:100%; margin:0; display:flex; flex-direction:column; overflow:hidden; background:var(--bg); color:var(--fg); font-family:var(--body); font-size:14px; line-height:1.4; }
+button { font:inherit; color:inherit; }
+.grow { flex:1; }
+#app { flex:1; min-height:0; min-width:0; position:relative; display:flex; flex-direction:column; }
+.bar { display:flex; align-items:center; flex-wrap:wrap; gap:8px 12px; padding:14px 16px; }
+.mark { font-family:var(--display); font-size:28px; font-weight:600; line-height:1; }
+.count { color:var(--muted); font-size:13px; white-space:nowrap; }
+.ico { fill:currentColor; flex:none; width:16px; height:16px; }
+.btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; height:var(--hit); min-width:var(--hit); padding:0 14px; border:1px solid var(--line); border-radius:10px; background:transparent; font-weight:600; white-space:nowrap; cursor:pointer; box-sizing:border-box; }
+.btn.primary { background:var(--fg); color:var(--bg); border-color:var(--fg); }
+.btn.sm { padding:0; }
+.ib { display:grid; place-items:center; flex:none; width:30px; height:30px; padding:0; border:1px solid var(--line); border-radius:8px; background:var(--surface); cursor:pointer; }
+.grid { flex:1; min-height:0; overflow-y:auto; position:relative; display:flex; padding:8px 16px var(--dock-space); }
+.probe { position:absolute; inset:8px 16px var(--dock-space); visibility:hidden; pointer-events:none; }
+.tiles { margin:auto; display:flex; flex-wrap:wrap; justify-content:center; gap:16px; width:calc(var(--cols) * var(--tile-size) + (var(--cols) - 1) * 16px); }
+.tile { position:relative; margin:0; display:grid; gap:8px; min-width:0; width:var(--tile-size); }
+.art { position:relative; aspect-ratio:1; border-radius:10px; overflow:hidden; background:conic-gradient(var(--tile2) 25%,var(--tile) 0 50%,var(--tile2) 0 75%,var(--tile) 0) 0 0 / 16px 16px; }
+.art canvas { position:absolute; inset:8px; width:calc(100% - 16px); height:calc(100% - 16px); object-fit:contain; image-rendering:pixelated; }
+.cap { display:flex; align-items:baseline; gap:8px; font-size:13px; min-width:0; }
+.name { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.dim { margin-left:auto; color:var(--muted); white-space:nowrap; }
+.dock { position:absolute; left:50%; bottom:20px; transform:translateX(-50%); width:max-content; max-width:calc(100% - 32px); display:flex; align-items:center; justify-content:center; gap:10px 12px; padding:10px 12px; background:var(--surface); border:1px solid var(--line); border-radius:16px; box-shadow:0 10px 32px var(--shadow); }
+.sep { width:1px; height:24px; background:var(--line); }
+.btn[aria-expanded="true"] { background:var(--tile); border-color:var(--fg); }
+.pair { display:flex; align-items:center; gap:4px; }
+.pair .ib { width:var(--hit); height:var(--hit); border-color:transparent; background:transparent; }
+.sw { display:block; flex:none; width:var(--hit); height:var(--hit); border:1px solid var(--line); border-radius:9px; box-shadow:inset 0 0 0 2px var(--surface); box-sizing:border-box; }
+.seg { display:inline-flex; height:var(--hit); padding:3px; background:var(--tile); border-radius:10px; box-sizing:border-box; }
+.seg button { padding:0 12px; border:0; border-radius:8px; background:transparent; color:var(--muted); font-size:13px; font-weight:600; cursor:pointer; }
+.seg button[aria-pressed="true"] { background:var(--surface); color:var(--fg); box-shadow:0 1px 2px var(--shadow); }
+.dock > .seg button:last-child { min-width:7em; }
+.panel { position:absolute; bottom:calc(100% + 10px); left:50%; transform:translateX(-50%); width:min(560px, calc(100vw - 64px)); display:flex; flex-wrap:wrap; align-items:center; gap:8px; padding:10px 12px; background:var(--surface); border:1px solid var(--line); border-radius:16px; box-shadow:0 10px 32px var(--shadow); }
+.key { color:var(--muted); font-weight:400; }
+.demo { width:28px; height:28px; border-radius:6px; image-rendering:pixelated; background:conic-gradient(var(--tile2) 25%,var(--tile) 0 50%,var(--tile2) 0 75%,var(--tile) 0) 0 0 / 8px 8px; }
+.field { flex:none; display:flex; box-sizing:border-box; height:var(--hit); border:1px solid var(--line); border-radius:10px; }
+.field button { padding:0 10px; border:0; border-left:1px solid var(--line); border-radius:0 9px 9px 0; background:transparent; color:var(--muted); font-size:12px; font-weight:600; cursor:pointer; }
+.field button[aria-pressed="true"] { background:var(--fg); color:var(--bg); }
+.tnum { box-sizing:border-box; width:calc(3ch + 20px); padding:0 8px; appearance:textfield; -moz-appearance:textfield; border:0; background:transparent; color:var(--fg); font:inherit; font-size:13px; text-align:center; font-variant-numeric:tabular-nums; outline:none; }
+.tnum::placeholder { color:var(--muted); }
+.tnum::-webkit-inner-spin-button { -webkit-appearance:none; margin:0; }
+input[type=range] { flex:1; min-width:0; height:var(--hit); margin:0; accent-color:var(--fg); }
+.pick { display:flex; align-items:center; gap:8px; }
+.pick .btn { padding:0 14px 0 8px; }
+.thr { flex:1; min-width:0; display:flex; align-items:center; gap:8px; }
+@media (max-width:800px) { .dock .lbl, .dock > .sep { display:none; } .dock > .btn { padding:0; } }
+@media (max-width:520px) {
+  :root { --dock-base:172px; }
+  .count, .bar .wide { display:none; }
+  .bar .btn { padding:0 10px; }
+  .dock { bottom:12px; max-width:calc(100% - 46px); display:grid; grid-template-columns:repeat(4,auto); gap:8px; padding:10px; }
+  .dock > .seg { order:5; grid-column:1 / -1; }
+  .dock > .seg button { flex:1; }
+  .panel { left:0; right:0; width:auto; transform:none; }
+  .pick { flex:1; }
+  .pick .btn { flex:1; justify-content:flex-start; }
+  .pick .ico { margin-left:auto; }
+  .thr { flex-basis:100%; order:1; }
+  .panel > .sep { display:none; }
+}
+
+/* ---- added by the mockups ---- */
+.more { gap:6px; padding:0 10px 0 12px; }
+.dot { width:7px; height:7px; border-radius:50%; background:var(--fg); }
+.row { display:flex; align-items:center; gap:8px; min-width:0; }
+.row > .key { flex:none; width:80px; font-size:13px; }
+.row .seg, .one .seg { flex:1; min-width:0; }
+.row .seg button, .one .seg button { flex:1; min-width:0; padding:0 4px; }
+.foot { display:flex; align-items:center; justify-content:space-between; gap:8px; color:var(--muted); font-size:12px; }
+.foot .btn { height:28px; min-width:0; padding:0 10px; font-size:12px; }
+/* A: the tray */
+@media (min-width:521px) { .optA, .optB { width:min(700px, calc(100vw - 64px)); } }
+.adv { flex-basis:100%; display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:8px 24px; padding-top:10px; border-top:1px solid var(--line); }
+.adv .foot { grid-column:1 / -1; }
+/* B: one at a time */
+.sets { flex:1; min-width:0; display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; }
+.sets::-webkit-scrollbar { display:none; }
+.chip { flex:none; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; box-sizing:border-box; height:var(--hit); padding:0 10px; border:1px solid var(--line); border-radius:10px; background:transparent; cursor:pointer; line-height:1.15; white-space:nowrap; }
+.chip span { font-size:11px; color:var(--muted); }
+.chip b { font-size:12px; }
+.chip[aria-pressed="true"] { border-color:var(--fg); background:var(--tile); }
+.chip.changed b::after { content:" \\2022"; }
+.one { flex-basis:100%; display:flex; align-items:center; gap:8px; min-width:0; }
+.one > .key { flex:none; width:80px; font-size:13px; }
+.one .ib { width:var(--hit); height:var(--hit); background:transparent; }
+/* C: the popover */
+.anchor { position:relative; }
+.pop { position:absolute; bottom:calc(100% + 20px); right:-12px; width:340px; box-sizing:border-box; padding:12px; display:grid; gap:8px; background:var(--surface); border:1px solid var(--line); border-radius:16px; box-shadow:0 10px 32px var(--shadow); }
+@media (max-width:520px) {
+  .more .lbl { display:none; }
+  .more { padding:0; }
+  .adv { order:2; grid-template-columns:minmax(0,1fr); max-height:34vh; overflow-y:auto; }
+  .optB .pick { flex:none; }
+  .optB .pick .key, .optB .pick .nm { display:none; }
+  .optB .pick .btn { padding:0 8px; }
+  .one { order:1; }
+  .one > .key { display:none; }
+  .anchor { position:static; }
+  .pop { left:0; right:0; width:auto; bottom:calc(100% + 10px); }
+}
+`;
+
+// Runs inside each frame.
+function frameMain({ id, opt, style, touch, SET, STYLES }) {
+  const ICON = { caret: 'M3 6h10v2h-2v2H9v2H7v-2H5V8H3z', sliders: 'M2 3h8v2H2zM12 2h2v4h-2zM2 11h3v2H2zM7 10h2v4H7zM11 11h3v2h-3z', grid: 'M2 2h5v5H2zM9 2h5v5H9zM2 9h5v5H2zM9 9h5v5H9z', swap: 'M2 5h9V3l3 3-3 3V7H2zM14 11H5v2l-3-3 3-3v2h9z', save: 'M7 2h2v6h2l-3 3-3-3h2zM2 12h12v2H2z', plus: 'M7 2h2v5h5v2H9v5H7V9H2V7h5z', dots: 'M2 7h2v2H2zM7 7h2v2H7zM12 7h2v2h-2z', reset: 'M8 3a5 5 0 1 0 5 5h-2a3 3 0 1 1-3-3v2l3-3-3-3z' };
+  const ico = n => `<svg class="ico" viewBox="0 0 16 16"><path d="${ICON[n]}"/></svg>`;
+  const keys = STYLES[style], adv = keys.filter(k => k !== 'thr');
+  const state = keys.includes('scale') ? { scale: '2×' } : {}; // one setting already changed, to show how that is marked
+  let open = true, active = keys[0];
+  const val = k => (k in state ? state[k] : SET[k].def);
+  const shown = k => { const s = SET[k], v = val(k); return v === null ? 'Auto' : s.zero && v === 0 ? s.zero : s.opts ? v : v + (s.unit || ''); };
+  const changed = k => val(k) !== SET[k].def;
+  const nChanged = () => adv.filter(changed).length;
+
+  function control(k) {
+    const s = SET[k], v = val(k);
+    if (s.opts) return `<div class="seg" data-k="${k}">${s.opts.map(o => `<button aria-pressed="${o === v}">${o}</button>`).join('')}</div>`;
+    return `<input type="range" data-k="${k}" min="${s.min}" max="${s.max}" value="${v ?? s.auto}" aria-label="${s.label}">
+      <div class="field"><input class="tnum" type="number" data-k="${k}" value="${v ?? ''}" placeholder="${s.auto ?? ''}">${s.def === null ? `<button data-auto="${k}" aria-pressed="${v === null}">Auto</button>` : ''}</div>`;
+  }
+  const row = k => `<div class="row"><span class="key">${SET[k].label}</span>${control(k)}</div>`;
+  const foot = () => `<div class="foot"><span>${style}'s own settings, kept when you switch style</span><button class="btn reset">Reset</button></div>`;
+  const pick = () => `<div class="pick"><span class="key">Style</span><button class="btn"><canvas class="demo"></canvas><span class="nm">${style}</span>${ico('caret')}</button></div>`;
+  const thr = () => (keys.includes('thr') ? `<span class="sep"></span><div class="thr">${control('thr')}</div>` : '<span class="grow"></span>');
+  const more = () => `<button class="btn more" aria-expanded="${open}" title="More settings">${ico('sliders')}<span class="lbl">More</span>${nChanged() ? '<span class="dot"></span>' : ''}</button>`;
+
+  function panel() {
+    if (opt === 'A') return `<div class="panel optA">${pick()}${thr()}${more()}${open ? `<div class="adv">${adv.map(row).join('')}${foot()}</div>` : ''}</div>`;
+    if (opt === 'B') return `<div class="panel optB">${pick()}<span class="sep"></span>
+      <div class="sets">${keys.map(k => `<button class="chip${changed(k) ? ' changed' : ''}" data-chip="${k}" aria-pressed="${k === active}"><span>${SET[k].label}</span><b>${shown(k)}</b></button>`).join('')}</div>
+      <div class="one"><span class="key">${SET[active].label}</span>${control(active)}<button class="ib reset" title="Reset ${style}">${ico('reset')}</button></div></div>`;
+    return `<div class="panel optC">${pick()}${thr()}<div class="anchor">${more()}${open ? `<div class="pop">${adv.map(row).join('')}${foot()}</div>` : ''}</div></div>`;
+  }
+
+  // A stand-in for the conversion, enough to show the art answering the controls.
+  function bayer(n) { let m = [[0]]; for (let s = 1; s < n; s *= 2) m = [...m.map(r => [...r.map(v => 4 * v), ...r.map(v => 4 * v + 2)]), ...m.map(r => [...r.map(v => 4 * v + 3), ...r.map(v => 4 * v + 1)])]; return m.flat(); }
+  function draw(cv, size, shape) {
+    cv.width = cv.height = size;
+    const c = cv.getContext('2d'), im = c.createImageData(size, size), h = size / 2, has = k => keys.includes(k);
+    const t = has('thr') ? val('thr') ?? 120 : 120, amt = Math.max(0.01, (has('shading') ? val('shading') : 100) / 100), sc = has('scale') ? parseInt(val('scale')) : 1;
+    const N = +val('spacing'), dir = val('dir'), bn = +val('matrix'), B = has('matrix') ? bayer(bn) : null;
+    for (let y = 0, i = 0; y < size; y++) for (let x = 0; x < size; x++, i += 4) {
+      const dx = (x + 0.5 - h) / h, dy = (y + 0.5 - h) / h, r = shape === 1 ? Math.abs(dx) + Math.abs(dy) : shape === 2 ? Math.max(Math.abs(dx), Math.abs(dy)) * 1.12 : Math.hypot(dx, dy);
+      if (r > 1) continue;
+      const shade = Math.hypot(dx + 0.45, dy + 0.55) * 75, l = r > 1 - 2.4 / size * (shape === 1 ? 1.6 : 1) - 0.06 ? 25 : Math.abs(dy - 0.18) < 0.2 ? 100 - shade * 0.35 : 240 - shade;
+      let tone = l <= t ? (t > 25 ? 0.5 * (l - 25) / (t - 25) : 0) : 0.5 + 0.5 * (l - t) / (240 - t);
+      tone = Math.min(1, Math.max(0, 0.5 + (tone - 0.5) / amt));
+      const X = Math.floor(x / sc), Y = Math.floor(y / sc);
+      const cut = style === 'Checker' ? ((X + Y) % 2 ? 0.75 : 0.25)
+        : style === 'Hatch' ? (N - (dir === '/' ? (X + Y) % N : dir === '\\' ? ((X - Y) % N + N) % N : dir === '—' ? Y % N : X % N)) / (N + 1)
+        : style === 'Bayer' ? (B[(Y % bn) * bn + (X % bn)] + 0.5) / (bn * bn)
+        : style === 'Noise' || style === 'Atkinson' ? (Math.abs(Math.sin(X * 12.9898 + Y * 78.233) * 43758.5453) % 1) * 0.9 + 0.05
+        : style === 'Silhouette' ? 2 : 0.5;
+      im.data.set(tone > cut ? [240, 246, 240, 255] : [34, 35, 35, 255], i);
+    }
+    c.putImageData(im, 0, 0);
+  }
+  const paint = () => {
+    document.querySelectorAll('.art canvas').forEach((cv, i) => draw(cv, [48, 32, 64][i % 3], i % 3));
+    document.querySelectorAll('.demo').forEach(cv => draw(cv, 14, 0));
+  };
+
+  const n = touch ? 4 : 6, names = ['ball', 'gem', 'crate'];
+  document.getElementById('app').innerHTML = `
+    <header class="bar"><span class="mark">Bitify</span><span class="count">${n} images</span><span class="grow"></span><button class="btn">${ico('plus')}<span class="wide">Add images</span></button><button class="btn sm">${ico('dots')}</button></header>
+    <div class="grid"><div class="probe"></div><div class="tiles">${Array.from({ length: n }, (_, i) => `<figure class="tile"><div class="art"><canvas></canvas></div><figcaption class="cap"><span class="name">${names[i % 3]}.png</span><span class="dim">${[48, 32, 64][i % 3]}×${[48, 32, 64][i % 3]}</span></figcaption></figure>`).join('')}</div></div>
+    <div class="dock"><div class="pair"><span class="sw" style="background:#222323"></span><button class="ib">${ico('swap')}</button><span class="sw" style="background:#f0f6f0"></span></div>
+      <button class="btn">${ico('grid')}<span class="lbl">Palette</span></button><span class="sep"></span>
+      <div class="seg"><button aria-pressed="false">Original</button><button aria-pressed="true">${style}</button></div>
+      <button class="btn" aria-expanded="true">${ico('sliders')}<span class="lbl">Style</span></button><span class="sep"></span>
+      <button class="btn primary">${ico('save')}<span class="lbl">Download all</span></button></div>`;
+  const dock = document.querySelector('.dock'), root = document.documentElement, tiles = document.querySelector('.tiles');
+
+  // Sizes the tiles to fill the room above the panel, as the app does, and reports what is left.
+  function layout() {
+    const p = document.querySelector('.panel');
+    root.style.setProperty('--panel-space', p.offsetHeight + 10 + 'px');
+    const r = document.querySelector('.probe').getBoundingClientRect(), cap = 27;
+    let best = { size: 0, cols: 1 };
+    for (let cols = 1; cols <= n; cols++) {
+      const rows = Math.ceil(n / cols), size = Math.floor(Math.min((r.width - (cols - 1) * 16) / cols, (r.height - (rows - 1) * 16) / rows - cap));
+      if (size > best.size) best = { size, cols };
+    }
+    tiles.style.setProperty('--cols', best.cols);
+    tiles.style.setProperty('--tile-size', Math.max(best.size, 56) + 'px');
+    const pop = document.querySelector('.pop')?.getBoundingClientRect();
+    const hidden = pop ? Math.max(0, Math.min(pop.right, r.right) - Math.max(pop.left, r.left)) * Math.max(0, Math.min(pop.bottom, r.bottom) - Math.max(pop.top, r.top)) / (r.width * r.height) : 0;
+    parent.report?.(id, `wall <b>${Math.round(r.height)}px</b> high, tiles <b>${Math.max(best.size, 0)}px</b>${best.size < 56 ? ' (too small: the wall scrolls)' : ''}${pop ? `, popover covers <b>${Math.round(hidden * 100)}%</b> of the wall` : ''}`);
+  }
+  function render() {
+    dock.querySelector('.panel')?.remove();
+    dock.insertAdjacentHTML('afterbegin', panel());
+    paint();
+    layout();
+  }
+  document.addEventListener('click', e => {
+    const b = e.target.closest('button');
+    if (!b) return;
+    const seg = b.closest('.seg[data-k]');
+    if (b.matches('.more')) open = !open;
+    else if (b.dataset.chip) active = b.dataset.chip;
+    else if (seg) state[seg.dataset.k] = b.textContent;
+    else if (b.dataset.auto) delete state[b.dataset.auto];
+    else if (b.matches('.reset')) for (const k of keys) delete state[k];
+    else return;
+    render();
+  });
+  // A slider or number box updates in place, so a drag is not cut short by a redraw of the panel.
+  document.addEventListener('input', e => {
+    const k = e.target.dataset.k;
+    if (!k) return;
+    state[k] = e.target.value === '' ? SET[k].def : +e.target.value;
+    const box = e.target.parentElement.closest('.row, .thr, .one');
+    if (e.target.type === 'range') box.querySelector('.tnum').value = e.target.value;
+    else if (state[k] !== null) box.querySelector('[type=range]').value = state[k];
+    box.querySelector('[data-auto]')?.setAttribute('aria-pressed', state[k] === null);
+    const chip = document.querySelector(`[data-chip="${k}"]`);
+    if (chip) { chip.querySelector('b').textContent = shown(k); chip.classList.toggle('changed', changed(k)); }
+    paint();
+  });
+  render();
+  document.fonts?.ready.then(layout);
+}
+
+let style = 'Hatch';
+const gallery = document.getElementById('gallery'), pills = document.getElementById('styles');
+window.report = (id, html) => { const el = document.getElementById('rep-' + id); if (el) el.innerHTML = html; };
+const frameDoc = (id, opt, touch) => `<!doctype html><html class="${touch ? 'touch' : ''}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${opt} · ${style}</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;600&family=Schibsted+Grotesk:wght@400;600&display=swap"><style>${CSS}</style></head><body><div id="app"></div><script>(${frameMain})(${JSON.stringify({ id, opt, style, touch, SET, STYLES })})<\/script></body></html>`;
+function shot(opt, w, h, touch) {
+  const id = opt + (touch ? 'p' : 'd'), fig = document.createElement('figure'), frame = document.createElement('iframe');
+  fig.innerHTML = `<div class="vp" style="--w:${w};--h:${h}"></div><figcaption>${touch ? 'Phone' : 'Desktop'} ${w}×${h}: <span id="rep-${id}"></span>. <a href="?frame=${opt}&style=${style}${touch ? '&touch=1' : ''}" target="_blank">Open full size</a></figcaption>`;
+  frame.title = `${opt} ${touch ? 'phone' : 'desktop'}`;
+  frame.srcdoc = frameDoc(id, opt, touch);
+  fig.firstChild.append(frame);
+  return fig;
+}
+function build() {
+  pills.innerHTML = Object.keys(STYLES).map(s => `<button aria-pressed="${s === style}" data-style="${s}">${s}<small>${STYLES[s].length}</small></button>`).join('');
+  gallery.innerHTML = '';
+  for (const o of OPTIONS) {
+    const sec = document.createElement('section');
+    sec.innerHTML = `<h2>${o.id}. ${o.name}${o.tag ? `<span class="tag">${o.tag}</span>` : ''}</h2><p>${o.line}</p>
+      <ul class="pc">${o.good.map(t => `<li>${t}</li>`).join('')}${o.bad.map(t => `<li class="no">${t}</li>`).join('')}</ul><div class="shots"></div>`;
+    sec.lastChild.append(shot(o.id, 1200, 700, false), shot(o.id, 375, 740, true));
+    gallery.append(sec);
+  }
+}
+document.getElementById('zoom').addEventListener('input', e => document.documentElement.style.setProperty('--s', e.target.value));
+const q = new URLSearchParams(location.search);
+if (STYLES[q.get('style')]) style = q.get('style');
+if (q.has('frame')) { // one option alone, at the window's own size
+  const frame = document.createElement('iframe');
+  frame.srcdoc = frameDoc('full', q.get('frame'), q.has('touch') || matchMedia('(pointer: coarse)').matches);
+  frame.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;border:0';
+  document.body.replaceChildren(frame);
+  document.body.style.padding = 0;
+} else build();
+pills.addEventListener('click', e => { const s = e.target.closest('button')?.dataset.style; if (s) { style = s; build(); } });
+</script>
+</body>
+</html>
