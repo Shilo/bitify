@@ -11,8 +11,9 @@ const img = B.analyze({ width: w, height: h, data });
 const light = m => (100 * m.reduce((n, v) => n + (v === 2), 0) / m.length).toFixed(1).padStart(5);
 // how often a pixel has the same value as the one to its right: the texture, not just the tone
 const runs = (m, pw) => { let same = 0, n = 0; for (let p = 0; p + 1 < m.length; p++) if ((p + 1) % pw) { n++; same += m[p] === m[p + 1]; } return (100 * same / n).toFixed(1).padStart(5); };
-console.log('style      ' + [1, 2, 3, 4, 5, 8, 11, 16].map(k => `k=${k}`.padStart(13)).join(''));
+const SIZES = [1200, 955, 600, 400, 300, 240, 150, 109];
+console.log('style      ' + SIZES.map(s => `${s} wide`.padStart(12)).join(''));
 for (const style of ['solid', 'cutout', 'lines', 'checker', 'hatch', 'bayer', 'noise', 'atkinson']) {
-  console.log(style.padEnd(10), [1, 2, 3, 4, 5, 8, 11, 16].map(k => { const m = B.mask(img, style, null, k); return `${light(m)}/${runs(m, Math.ceil(w / k))}`; }).join(' '));
+  console.log(style.padEnd(10), SIZES.map(mw => { const mh = Math.round(h * mw / w), m = B.mask(img, style, null, mw, mh); return `${light(m)}/${runs(m, mw)}`; }).join(' '));
 }
 console.log('(each cell: % light / % of pixels equal to their right neighbour)');

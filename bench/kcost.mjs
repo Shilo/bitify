@@ -1,4 +1,4 @@
-// Cost per converted pixel at different k, in nanoseconds.
+// Cost per converted pixel for the whole image and for smaller pictures of it, in nanoseconds.
 import { pathToFileURL } from 'node:url';
 const B = await import(pathToFileURL(import.meta.dirname + '/../src/lib/bitify.js'));
 function photo(w, h) {
@@ -14,10 +14,10 @@ for (const [w, h] of [[2048, 2048], [4000, 3000]]) {
   const img = B.analyze(photo(w, h));
   for (const style of (process.argv[2] ?? 'cutout,lines,solid,bayer').split(',')) {
     const line = [`${w}x${h} ${style}`.padEnd(20)];
-    for (const k of [1, 2, 3, 4, 8]) {
+    for (const k of [1, 1.07, 2, 2.14, 4.19, 8]) {
       let best = Infinity, n;
-      for (let i = 0; i < 12; i++) { const t = performance.now(); n = B.mask(img, style, 60 + i * 9, k).length; best = Math.min(best, performance.now() - t); }
-      line.push(`k${k}: ${(best * 1e6 / n).toFixed(1)}ns (${best.toFixed(1)}ms)`);
+      for (let i = 0; i < 12; i++) { const t = performance.now(); n = B.mask(img, style, 60 + i * 9, Math.round(w / k), Math.round(h / k)).length; best = Math.min(best, performance.now() - t); }
+      line.push(`1 in ${k}: ${(best * 1e6 / n).toFixed(1)}ns (${best.toFixed(1)}ms)`);
     }
     console.log(line.join('  '));
   }

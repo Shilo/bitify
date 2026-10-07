@@ -22,22 +22,23 @@ for (let n = 0; n < 400; n++) {
   for (const st of STYLES) for (const t of [null, 1, 60, 128, 200, 254]) {
     const ma = O.mask(a, st, t), mb = N.mask(b, st, t);
     assert.deepEqual([...mb], [...ma], `${st} t=${t} ${w}x${h} n=${n}`);
-    // the patterns and Atkinson are drawn afresh on the kept pixels, so only the others are the full mask sampled
-    for (const k of ['cutout', 'lines', 'solid', 'silhouette'].includes(st) ? [2, 3, 5, 16, 50] : []) {
+    // A smaller picture: in these four styles each of its pixels is the full mask's at the image pixel under its middle.
+    // (The patterns and Atkinson are drawn afresh on the picture's pixels, so they are not.)
+    for (const [mw, mh] of ['cutout', 'lines', 'solid', 'silhouette'].includes(st) ? [[w, h], [Math.ceil(w / 2), Math.ceil(h / 2)], [Math.ceil(w / 3), Math.ceil(h / 1.7)], [1, 1], [Math.max(1, w - 1), Math.max(1, h - 1)]] : []) {
       const want = [];
-      for (let y = 0; y < h; y += k) for (let x = 0; x < w; x += k) want.push(ma[y * w + x]);
-      assert.deepEqual([...N.mask(b, st, t, k)], want, `${st} t=${t} k=${k}`);
+      for (let j = 0; j < mh; j++) for (let i = 0; i < mw; i++) want.push(ma[Math.floor((j + 0.5) * h / mh) * w + Math.floor((i + 0.5) * w / mw)]);
+      assert.deepEqual([...N.mask(b, st, t, mw, mh)], want, `${st} t=${t} ${mw}x${mh}`);
     }
     checks++;
   }
   const m = O.mask(a, 'cutout');
   assert.deepEqual([...N.colorize(m, '#12ab9f', '#fe0180')], [...O.colorize(m, '#12ab9f', '#fe0180')]);
-  const sh = N.shrink(src, 3), want = [];
-  for (let y = 0; y < h; y += 3) for (let x = 0; x < w; x += 3) want.push(...data.subarray((y * w + x) * 4, (y * w + x) * 4 + 4));
+  const sw = Math.ceil(w / 3), shh = Math.ceil(h / 2), sh = N.shrink(src, sw, shh), want = [];
+  for (let j = 0; j < shh; j++) for (let i = 0; i < sw; i++) { const at = (Math.floor((j + 0.5) * h / shh) * w + Math.floor((i + 0.5) * w / sw)) * 4; want.push(...data.subarray(at, at + 4)); }
   assert.deepEqual([...sh], want);
 }
 // animations: unify
 const fr = [0, 1, 2].map(j => ({ width: 9, height: 7, data: Uint8ClampedArray.from({ length: 9 * 7 * 4 }, (_, i) => (i % 4 === 3 ? 255 : (i * (j + 3) * 37) % 256)) }));
 const ua = O.unify(fr.map(O.analyze)), ub = N.unify(fr.map(N.analyze));
 for (const f of ['auto', 'autoLine', 'autoTone', 'autoSeam', 'lo', 'hi']) assert.equal(ub[0][f], ua[0][f]);
-console.log(`identical: ${checks} image/style/threshold combinations, each also at 5 values of k`);
+console.log(`identical: ${checks} image/style/threshold combinations, each also as 5 smaller pictures`);
