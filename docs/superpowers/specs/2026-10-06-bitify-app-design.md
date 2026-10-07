@@ -337,7 +337,7 @@ restored when the app opens. Nothing leaves the device.
 - The threshold is saved as a number, or as Auto.
 - The Original/Bitified switch, the open panel and the images are not saved.
 - They are stored as one JSON value under the `localStorage` key `bitify`. On the way back
-  each value is checked on its own: a color must be `#rrggbb`, the style one of the seven,
+  each value is checked on its own: a color must be `#rrggbb`, the style one of the nine,
   the threshold a whole number from 1 to 254. Anything else falls back to its default
   (Glow dark first, Cutout, Auto), so a damaged or outdated value cannot break the app.
 - If the browser refuses storage, the app works as before and starts from the defaults.
