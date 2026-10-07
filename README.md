@@ -10,7 +10,7 @@ Convert pixel art to 1-bit: every image is redrawn in two colors you pick. Runs 
 
 - Add any number of images by drag and drop, file picker or paste.
 - Two colors, swap, and twelve preset palettes. Changes redraw every image at once.
-- Seven styles: Cutout (filled shapes with their parts cut apart, after the game End of End), Lines (outlines each part of a sprite), Solid, Checker, Bayer, Atkinson and Silhouette.
+- Nine styles: Cutout (filled shapes with their parts cut apart, after the game End of End), Lines (outlines each part of a sprite), Solid, Checker, Hatch, Bayer, Noise, Atkinson and Silhouette.
 - Threshold slider, with a per-image Auto setting.
 - Compare with the original: switch the whole wall, hold a tile, or hold Space.
 - Save one PNG at original size, or all of them as a zip.

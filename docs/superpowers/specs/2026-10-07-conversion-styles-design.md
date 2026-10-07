@@ -264,3 +264,42 @@ tutorials (saint11.art), Lucas Pope on Return of the Obra Dinn (PlayStation Blog
 Pixel Parmesan's "Dithering for pixel artists", and Panic's "Designing for Playdate". No
 description of how End of End's sprites are made was found; the Cutout rules come from
 looking at its Steam screenshots.
+
+## Addendum, 2026-10-07: Hatch, Noise and the Auto review
+
+Asked for after the first round was merged: every further style that is reasonably distinct
+from the others, one hatch style at most, and a review of the Auto value of every style.
+[2026-10-06-bitify-app-design.md](2026-10-06-bitify-app-design.md) and
+[docs/styles.md](../../styles.md) hold the resulting rules; this section records why.
+
+### Styles added
+
+- **Hatch.** Diagonal lines three pixels apart. A version with lines four pixels apart gave
+  one more shade but was coarse on 16-pixel sprites and broke up the letter on the logo, so
+  the finer one was taken.
+- **Noise.** Blue-noise dithering from a 16×16 grid made once with the void-and-cluster
+  method and stored in the code. Its look is close to Atkinson's; it was added because its
+  pattern is fixed in place, so animations do not shimmer. On small flat sprites it reads
+  as dirt, which `docs/styles.md` says.
+
+Not added: **Crosshatch** (two crossing sets of lines). At sprite sizes it was hard to tell
+from Checker, and it turned a dark sky light.
+
+That makes nine styles: Cutout, Lines, Solid, Checker, Hatch, Bayer, Noise, Atkinson,
+Silhouette.
+
+### Auto, style by style
+
+Compared on twelve images: the ten from the first round, a sprite with a two-shade outline,
+and two shaded sprites with a single outlier pixel (one white glint, one black speck).
+
+| Auto value | Verdict | What it was compared with |
+|---|---|---|
+| Brightness cut for Cutout and Solid | Otsu stays. | Otsu over the distinct colors (each color once, whatever its area): turned the heart into a blob. The mean brightness: lost the potion's body. The middle of the brightness range: also lost the heart's outline. |
+| Center for Checker, Hatch, Bayer, Noise and Atkinson | **Changed** to the point halfway between the mean brightness of Otsu's dark group and of its light group. | Otsu's value (before): the lighter shade of a two-shade outline came out half patterned, and the logo's letter washed out. The middle of the empty gap above Otsu's value: fixed both, but turned the potion's mid-tone body solid. The middle of the brightness range: the best tone on most sprites, but one outlier pixel flattened a whole sprite. |
+| Edge strength for Lines | Otsu with the floor of 24 stays. | Otsu over the distinct differences: the same or worse. A fixed 40: more detail on the skeleton, but a shading line across the logo and a checkered sword blade. A fixed 64: close to Otsu. |
+| Seam strength for Cutout | Unchanged. | Reviewed in the first round. |
+
+With the new center, Checker and Hatch keep both shades of a two-shade outline dark. Bayer
+and Noise can still light an occasional pixel of the lighter shade, because their lowest
+cut-offs are close to 0.

@@ -21,7 +21,9 @@
     ['lines', 'Lines'],
     ['solid', 'Solid'],
     ['checker', 'Checker'],
+    ['hatch', 'Hatch'],
     ['bayer', 'Bayer'],
+    ['noise', 'Noise'],
     ['atkinson', 'Atkinson'],
     ['silhouette', 'Silhouette'],
   ];

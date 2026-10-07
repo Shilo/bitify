@@ -165,8 +165,8 @@ right:
 - The word "Style", set like "Palette" in the palettes panel, then the style button: a
   live preview of the current style (a small shaded ball with a stripe, drawn with the
   current two colors) and the style's name. Pressing it
-  opens the list of the seven styles above the strip, each with the same live preview and its
-  name, in one row of seven. Choosing a style closes the list. So does a press outside it, or
+  opens the list of the nine styles above the strip, each with the same live preview and its
+  name, in two rows of five and four. Choosing a style closes the list. So does a press outside it, or
   Escape, which then leaves the strip open.
 - Threshold: a slider from 1 to 254, then a number box and an Auto button joined into one
   outlined control, so it is clear that Auto fills in the number. The Auto half is filled
@@ -190,7 +190,7 @@ and another separates the threshold from Help. They match the dock's dividers.
 |---|---|
 | Above 800px | Icon and text labels, dividers between groups. |
 | 521 to 800px | Icon-only buttons, one row. |
-| 520px and below | Tools on the first row, the Original / Bitified switch on a second row as wide as the tools. The dock is only as wide as its tools, centered, and is never stretched to fill the screen; it keeps at least 12px from each edge. The advanced panel is as wide as the dock. The palettes panel stays as wide as its chips, centered and never wider than the screen less those margins, with the name on a row of its own above the chips. The advanced strip takes two rows, without dividers: the style button and Help, then the threshold. Its list of styles is a grid four wide, as wide as the strip. The image count and the word "images" in the Add button are hidden. |
+| 520px and below | Tools on the first row, the Original / Bitified switch on a second row as wide as the tools. The dock is only as wide as its tools, centered, and is never stretched to fill the screen; it keeps at least 12px from each edge. The advanced panel is as wide as the dock. The palettes panel stays as wide as its chips, centered and never wider than the screen less those margins, with the name on a row of its own above the chips. The advanced strip takes two rows, without dividers: the style button and Help, then the threshold. Its list of styles is a grid three wide, three rows of three, as wide as the strip. The image count and the word "images" in the Add button are hidden. |
 
 On coarse pointers every dock control is 40 to 44px square. The app uses
 `viewport-fit=cover`, pads for the safe-area insets, and sizes itself with dynamic

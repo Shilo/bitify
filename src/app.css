@@ -276,7 +276,7 @@ button { font: inherit; color: inherit; }
 /* the list of styles, opened by the style button; it sits above the panel, lined up with its left edge */
 .menu {
   position: absolute; bottom: calc(100% + 10px); left: 0; box-sizing: border-box; max-width: 100%; padding: 8px;
-  display: grid; gap: 6px; grid-template-columns: repeat(7, minmax(0, 1fr));
+  display: grid; gap: 6px; grid-template-columns: repeat(5, minmax(0, 1fr));
   background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 10px 32px var(--shadow);
 }
 .menu .preset { padding: 8px 6px; }
@@ -318,5 +318,5 @@ button { font: inherit; color: inherit; }
   .pick { flex: 1; }
   .thr { flex-basis: 100%; order: 1; }
   .panel > .sep { display: none; } /* dividers only make sense while the panel is a single row */
-  .menu { right: 0; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .menu { right: 0; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
