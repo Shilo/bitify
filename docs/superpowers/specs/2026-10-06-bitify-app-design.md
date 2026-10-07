@@ -49,7 +49,9 @@ One screen, no page scroll. Three layers:
    `https://github.com/Shilo/bitify` in a new tab, and "Add images".
 2. **The wall.** A grid of square tiles that fills the screen and scrolls on its own. Each
    tile shows one image, scaled up with hard pixel edges on a faint checkerboard so
-   transparency is visible. Below it: file name and pixel size.
+   transparency is visible. The image is as large as fits the tile with 8px left clear on
+   every side, keeping its proportions, so a wide or tall image leaves the rest of the square
+   empty. Below it: file name and pixel size.
 3. **The dock.** A floating bar at the bottom center holding every setting.
 
 Chrome is neutral grey in both light and dark themes (following the system setting), so

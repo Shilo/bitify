@@ -102,7 +102,8 @@ button { font: inherit; color: inherit; }
   touch-action: pan-y; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
   background: conic-gradient(var(--tile2) 25%, var(--tile) 0 50%, var(--tile2) 0 75%, var(--tile) 0) 0 0 / 16px 16px;
 }
-.art canvas { position: absolute; inset: 14%; width: 72%; height: 72%; object-fit: contain; image-rendering: pixelated; }
+/* 8px clear on every side, the same as the buttons in the corner and the gap to the caption */
+.art canvas { position: absolute; inset: 8px; width: calc(100% - 16px); height: calc(100% - 16px); object-fit: contain; image-rendering: pixelated; }
 .cap { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 8px; font-size: 13px; min-width: 0; }
 .name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .dim { margin-left: auto; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
