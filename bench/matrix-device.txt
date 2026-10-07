@@ -1,0 +1,141 @@
+
+## sprite 256 cutout   (canvas 256x256 -> 256x256)
+loaded            79 ->       58   1.4x
+nextStyle          7 ->        7   1.0x
+backStyle         55 ->       19   2.9x
+palette           11 ->        6   1.8x
+compare            4 ->        2   2.0x
+perMove         14.3 ->      4.1   3.5x
+slowestMove       32 ->        6   5.3x
+dragFreeze        51 ->       23   2.2x
+release            0 ->        0   
+save              65 ->       39   1.7x
+saveKB             3 ->        2   1.5x
+heapMB            14 ->       12   1.2x
+
+## 12 sprites 256   (canvas 256x256 -> 256x256)
+loaded           288 ->      198   1.5x
+nextStyle         42 ->       21   2.0x
+backStyle        161 ->       62   2.6x
+palette           26 ->       19   1.4x
+compare           11 ->       11   1.0x
+perMove           12 ->     30.6   0.4x
+slowestMove       18 ->       35   0.5x
+dragFreeze       121 ->       48   2.5x
+release            0 ->        0   
+save             221 ->       83   2.7x
+saveKB            39 ->       24   1.6x
+heapMB            30 ->       38   0.8x
+
+## photo 4MP cutout   (canvas 2048x2048 -> 1024x1024, 512x512 while dragging)
+loaded          1727 ->      342   5.0x
+nextStyle        104 ->       36   2.9x
+backStyle        943 ->       80   11.8x
+palette           72 ->       18   4.0x
+compare           13 ->       25   0.5x
+perMove         1273 ->     17.4   73.2x
+slowestMove     1273 ->       22   57.9x
+dragFreeze      1277 ->       34   37.6x
+release            0 ->       49   
+save            1383 ->      261   5.3x
+saveKB           684 ->      467   1.5x
+heapMB            98 ->       51   1.9x
+
+## photo 12MP cutout   (canvas 4000x3000 -> 1000x750, 572x429 while dragging)
+loaded          4698 ->      853   5.5x
+nextStyle        231 ->       34   6.8x
+backStyle       2459 ->       70   35.1x
+palette          127 ->       15   8.5x
+compare           18 ->       27   0.7x
+perMove       3657.2 ->     18.2   200.9x
+slowestMove     3657 ->       22   166.2x
+dragFreeze      3663 ->       36   101.8x
+release            0 ->       41   
+save            3787 ->      585   6.5x
+saveKB          1914 ->     1325   1.4x
+heapMB           273 ->      117   2.3x
+
+## photo 12MP solid   (canvas 4000x3000 -> 1000x750)
+loaded           952 ->      811   1.2x
+nextStyle        674 ->       73   9.2x
+backStyle        193 ->       24   8.0x
+palette          124 ->       18   6.9x
+compare           19 ->       26   0.7x
+perMove        138.2 ->       10   13.8x
+slowestMove      152 ->       14   10.9x
+dragFreeze       182 ->       30   6.1x
+release            0 ->        0   
+save            1524 ->      233   6.5x
+saveKB          1085 ->      712   1.5x
+heapMB           273 ->      111   2.5x
+
+## photo 12MP lines   (canvas 4000x3000 -> 1000x750, 572x429 while dragging)
+loaded          2585 ->      844   3.1x
+nextStyle        232 ->       40   5.8x
+backStyle        708 ->       53   13.4x
+palette          126 ->       16   7.9x
+compare           25 ->       29   0.9x
+perMove       1667.8 ->      8.3   200.9x
+slowestMove     1668 ->       14   119.1x
+dragFreeze      1687 ->       32   52.7x
+release            0 ->       25   
+save            1080 ->      298   3.6x
+saveKB            51 ->        8   6.4x
+heapMB           273 ->      117   2.3x
+
+## photo 12MP bayer   (canvas 4000x3000 -> 1000x750)
+loaded          1189 ->      831   1.4x
+nextStyle        239 ->       38   6.3x
+backStyle        274 ->       33   8.3x
+palette          128 ->       17   7.5x
+compare           23 ->       27   0.9x
+perMove        202.7 ->        9   22.5x
+slowestMove      280 ->       13   21.5x
+dragFreeze       302 ->       30   10.1x
+release            0 ->        0   
+save            1160 ->      273   4.2x
+saveKB           675 ->      377   1.8x
+heapMB           273 ->      117   2.3x
+
+## photo 12MP atkinson   (canvas 4000x3000 -> 1000x750, 667x500 while dragging)
+loaded          2227 ->      838   2.7x
+nextStyle        196 ->       28   7.0x
+backStyle       1350 ->       48   28.1x
+palette          125 ->       18   6.9x
+compare           22 ->       25   0.9x
+perMove       1199.5 ->     13.2   90.9x
+slowestMove     1200 ->       19   63.2x
+dragFreeze      1221 ->       30   40.7x
+release            0 ->       32   
+save            4164 ->      443   9.4x
+saveKB          2163 ->     1496   1.4x
+heapMB           290 ->      117   2.5x
+
+## 6 photos 4MP cutout   (canvas 2048x2048 -> 293x293, 228x228 while dragging)
+loaded          7822 ->     1472   5.3x
+nextStyle        364 ->       37   9.8x
+backStyle       3522 ->       55   64.0x
+palette          213 ->       16   13.3x
+compare           34 ->       24   1.4x
+perMove       3136.4 ->     27.5   114.1x
+slowestMove     3136 ->       31   101.2x
+dragFreeze      3157 ->       44   71.8x
+release            0 ->       74   
+save            7851 ->     1169   6.7x
+saveKB          4108 ->     2803   1.5x
+heapMB           441 ->      202   2.2x
+
+## photo 12MP cutout, phone slowed 4x more   (canvas 4000x3000 -> 1000x750, 400x300 while dragging)
+loaded         19260 ->     2558   7.5x
+nextStyle        668 ->       35   19.1x
+backStyle       6974 ->      123   56.7x
+palette          339 ->       17   19.9x
+compare           29 ->       24   1.2x
+perMove      15065.8 ->     24.9   605.1x
+slowestMove    15066 ->       31   486.0x
+dragFreeze     15085 ->       46   327.9x
+release            0 ->      126   
+save           17286 ->     2131   8.1x
+saveKB          1914 ->     1325   1.4x
+heapMB           228 ->      111   2.1x
+done
