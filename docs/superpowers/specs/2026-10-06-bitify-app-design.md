@@ -24,8 +24,8 @@ Stated by the user:
 - Download each image on its own, and download all images.
 - A toggle between the original and the bitified image.
 - Swap, a palette selector, and a threshold. Threshold and an Auto button live in an
-  "advanced" strip above the dock, which never covers the images.
-- The advanced strip offers several conversion algorithms. The default shows the
+  style strip above the dock, which never covers the images.
+- The style strip offers several conversion algorithms. The default shows the
   individual parts of a sprite (body parts, clothing, equipment), in the style of the game
   End of End, and not only the silhouette. Since 2026-10-07 that default is Cutout, which
   fills the parts and cuts them apart; Lines, which outlines them, was the default before.
@@ -106,10 +106,21 @@ The rule lives in `src/lib/layout.js` (`fitGrid`) and is unit tested.
 | First color swatch | Native color picker. Color for lines and dark pixels. |
 | Swap | Exchanges the two colors. Works the same in every style and with every palette. |
 | Second color swatch | Native color picker. Color for fill and light pixels. |
-| Palettes | Opens the palettes panel. |
-| Original / Bitified | Two-way switch for the whole wall. |
-| Advanced | Opens the advanced panel. |
+| Palette | Opens the palettes panel. |
+| View switch | Two-way switch for the whole wall: "Original", and the bitified image under the name of the current style, such as "Cutout". |
+| Style | Opens the style panel. |
 | Download all | Saves every bitified image in one zip. Disabled when the wall is empty. |
+
+The dock is three groups, with a divider between them where there is room (see "Responsive
+behavior"): the colors with the Palette button that picks them, the view switch with the
+Style button that picks what it shows, and Download all.
+
+The two colors show which palette is in use, and the view switch shows which style: its
+bitified half reads the style's name, so the name is on screen at every width, and changes
+as the styles are stepped through. Its tooltip and its name for screen readers say
+"Bitified:" and the style. That half is as wide as the longest name, "Silhouette", so the
+dock does not move when the style changes; on phones the two halves are equal. Pressing it
+shows the bitified images. It does not open the list of styles; the Style button does.
 
 Panels open directly above the dock. Only one is open at a time. A panel closes on Escape,
 on a second press of its button, or on a press outside the dock. Presses on other dock
@@ -117,7 +128,7 @@ controls leave it open, so colors can be changed while a panel is showing. A pan
 covers the wall: it is a strip one row high, and the wall makes room for it.
 
 A press that closes something does nothing else. It closes one thing only, the innermost:
-with the list of styles or the help open above the advanced panel, a press outside it closes
+with the list of styles or the help open above the style panel, a press outside it closes
 that and leaves the panel open, and the next press outside the dock closes the panel. What
 was pressed, such as a button, a slider or an image, does not react to that press.
 
@@ -168,7 +179,7 @@ or a way round, and no style favors any colors.
 | Commodore | `#40318e` | `#88d7de` |
 | Rose | `#4a0d2b` | `#ffd1dc` |
 
-**Advanced panel.** A strip one row high, so that the wall can sit above it. Left to
+**Style panel.** A strip one row high, so that the wall can sit above it. Left to
 right:
 
 - The word "Style", set like "Palette" in the palettes panel, then the style button: a
@@ -203,7 +214,7 @@ and another separates the threshold from Help. They match the dock's dividers.
 |---|---|
 | Above 800px | Icon and text labels, dividers between groups. |
 | 521 to 800px | Icon-only buttons, one row. |
-| 520px and below | Tools on the first row, the Original / Bitified switch on a second row as wide as the tools. The dock is only as wide as its tools, centered, and is never stretched to fill the screen; it keeps at least 12px from each edge. The advanced panel is as wide as the dock. The palettes panel stays as wide as its chips, centered and never wider than the screen less those margins, with the name on a row of its own above the chips. The advanced strip takes two rows, without dividers: the style button and Help, then the threshold. Its list of styles is a grid three wide, three rows of three, as wide as the strip. The image count and the word "images" in the Add button are hidden. |
+| 520px and below | Tools on the first row, the view switch on a second row as wide as the tools. The dock is only as wide as its tools, centered, and is never stretched to fill the screen; it keeps at least 12px from each edge. The style panel is as wide as the dock. The palettes panel stays as wide as its chips, centered and never wider than the screen less those margins, with the name on a row of its own above the chips. The style strip takes two rows, without dividers: the style button and Help, then the threshold. Its list of styles is a grid three wide, three rows of three, as wide as the strip. The image count and the word "images" in the Add button are hidden. |
 
 On coarse pointers every dock control is 40 to 44px square. The app uses
 `viewport-fit=cover`, pads for the safe-area insets, and sizes itself with dynamic
@@ -226,7 +237,7 @@ line of explanation, and a "Choose images" button. The dock stays visible.
 
 Above the heading sits the Bitify logo, a 32×32 gold coin with a B (`src/assets/logo.png`),
 labelled "Example". It is a live preview: it goes through the same conversion as real
-images, so the colors, Swap, palettes, style, threshold, the Original / Bitified switch and
+images, so the colors, Swap, palettes, style, threshold, the view switch and
 hold or Space all apply to it. It is for previewing only. It has no Download or Remove, is
 not counted, and is never included in Download all. It disappears when the first image is
 added and returns when the wall is empty again.
@@ -419,7 +430,7 @@ restored when the app opens. Nothing leaves the device.
 - The colors are saved as they are, so a chosen palette, a swap and a custom color all come
   back. A palette is not saved by name; it shows as chosen because its colors match.
 - The threshold is saved as a number, or as Auto.
-- The Original/Bitified switch, the open panel and the images are not saved.
+- The view switch, the open panel and the images are not saved.
 - They are stored as one JSON value under the `localStorage` key `bitify`. On the way back
   each value is checked on its own: a color must be `#rrggbb`, the style one of the nine,
   the threshold a whole number from 1 to 254. Anything else falls back to its default
@@ -436,7 +447,7 @@ in browsers.
   one Auto threshold, one seam strength and one brightness range, taken from all its frames together. Taking
   them frame by frame would make pixels flicker between the two colors as the animation
   plays.
-- The Original / Bitified switch, hold and Space show the original animation, still playing.
+- The view switch, hold and Space show the original animation, still playing.
 - GIF frames are often partial patches drawn over earlier frames. They are composited when
   the file is read, so each frame is held as the full picture it shows.
 - A GIF with a single frame is treated as a still image. A file that cannot be read as a GIF
@@ -543,7 +554,7 @@ Dependencies beyond Vite and Svelte:
 
 ## Not included
 
-- Remembering the Original/Bitified switch or the images between visits.
+- Remembering the view switch or the images between visits.
 - Export upscaling, or formats other than PNG.
 - Per-image settings; style, threshold and colors apply to the whole wall.
 - Custom user palettes.

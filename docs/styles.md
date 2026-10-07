@@ -87,7 +87,7 @@ For the example below the darkest brightness is 25 and the lightest 240.
 
 ### The example used below
 
-Each style is shown on the small ball used for the style buttons in the Advanced panel: a
+Each style is shown on the small ball used for the style buttons in the Style panel: a
 14×14 circle with a dark outline, a body shaded from a highlight at the top left, and a
 darker stripe across the middle. Here is its brightness, one hex digit per pixel (`0` black,
 `f` white, blank for empty):

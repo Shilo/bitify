@@ -22,8 +22,8 @@
   } = $props();
 
   const touch = matchMedia('(pointer:coarse)').matches;
-  let panel = $state(null); // null, 'palettes' or 'advanced'
-  let pop = $state(null); // what is open above the advanced panel: null, 'styles' or 'help'
+  let panel = $state(null); // null, 'palettes' or 'style'
+  let pop = $state(null); // what is open above the style panel: null, 'styles' or 'help'
   let dock;
   let eaten = false; // the last press closed something, so its click is dropped too
   // A finger moves a slider through its touch, which stopping the press does not stop.
@@ -37,6 +37,7 @@
     document.documentElement.style.setProperty('--panel-space', panel ? `${panelHeight + 10}px` : '0px');
   });
 
+  const styleName = $derived(STYLES.find(s => s[0] === style)[1]);
   const demo = key => new ImageData(colorize(mask(BALL, key), first, second), BALL.w, BALL.h);
 
   // What Auto picked, shown in the number box while it is empty: a range when images differ.
@@ -134,7 +135,7 @@
         </div>
       </div>
     </div>
-  {:else if panel === 'advanced'}
+  {:else if panel === 'style'}
     <div class="panel" bind:offsetHeight={panelHeight}>
       <div class="pick anchor">
         {#if pop === 'styles'}
@@ -148,7 +149,7 @@
         {/if}
         <span class="key" id="style-label">Style</span>
         <button class="btn" aria-labelledby="style-label style-name" aria-expanded={pop === 'styles'} aria-haspopup="true" onclick={() => (pop = pop === 'styles' ? null : 'styles')}>
-          <Pixels class="demo" pixels={demo(style)} /><span id="style-name">{STYLES.find(s => s[0] === style)[1]}</span><PixelIcon name="caret" />
+          <Pixels class="demo" pixels={demo(style)} /><span id="style-name">{styleName}</span><PixelIcon name="caret" />
         </button>
       </div>
       <span class="sep"></span>
@@ -224,18 +225,19 @@
       <input type="color" bind:value={second} aria-label="Color for fill and light pixels" />
     </label>
   </div>
-  <button class="btn" aria-expanded={panel === 'palettes'} aria-label="Palettes" title="Palettes" onclick={() => toggle('palettes')}>
-    <PixelIcon name="grid" /><span class="lbl">Palettes</span>
+  <button class="btn" aria-expanded={panel === 'palettes'} aria-label="Palette" title="Palette" onclick={() => toggle('palettes')}>
+    <PixelIcon name="grid" /><span class="lbl">Palette</span>
   </button>
   <span class="sep"></span>
+  <!-- The bitified half is named after the style, so the style in use always shows. -->
   <div class="seg" role="group" aria-label="View">
     <button aria-pressed={showOriginal} onclick={() => (showOriginal = true)}>Original</button>
-    <button aria-pressed={!showOriginal} onclick={() => (showOriginal = false)}>Bitified</button>
+    <button aria-pressed={!showOriginal} aria-label="Bitified: {styleName}" title="Bitified: {styleName}" onclick={() => (showOriginal = false)}>{styleName}</button>
   </div>
-  <span class="sep"></span>
-  <button class="btn" aria-expanded={panel === 'advanced'} aria-label="Advanced" title="Advanced" onclick={() => toggle('advanced')}>
-    <PixelIcon name="sliders" /><span class="lbl">Advanced</span>
+  <button class="btn" aria-expanded={panel === 'style'} aria-label="Style" title="Style" onclick={() => toggle('style')}>
+    <PixelIcon name="sliders" /><span class="lbl">Style</span>
   </button>
+  <span class="sep"></span>
   <button class="btn primary" disabled={!count} aria-label="Download all" title="Download all" onclick={onsaveall}>
     <PixelIcon name="save" /><span class="lbl">Download all</span>
   </button>

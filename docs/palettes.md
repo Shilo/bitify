@@ -1,6 +1,6 @@
 # Palettes
 
-The twelve preset palettes in Bitify's Palettes panel. Each is a pair of colors. They are
+The twelve preset palettes in Bitify's Palette panel. Each is a pair of colors. They are
 defined in the `PRESETS` list at the top of [src/lib/presets.js](../src/lib/presets.js).
 
 ## What a palette is
@@ -59,7 +59,7 @@ press for every palette, and no palette does it for you.
 
 ### Why Glow is the default
 
-The default decides what someone gets who never opens the Palettes panel, so it should be
+The default decides what someone gets who never opens the Palette panel, so it should be
 the pair the most people would pick.
 
 - **It is the most used.** Glow is the most downloaded two-color palette on Lospec, about
@@ -112,7 +112,7 @@ the eye.
   which way there are more. The name of the chosen palette is shown beside the chips, or
   "Custom" when the two colors match no palette.
 - Palettes are a starting point. Either color can be changed to anything with the swatches.
-- The Palettes panel stays open while you pick, so you can try several in a row. It closes
+- The Palette panel stays open while you pick, so you can try several in a row. It closes
   on Escape, on a second press of its button, or on a press outside the dock.
 - The two colors are remembered between visits, so the app opens on the palette you last
   used, the way round you left it. The first time, it opens on Glow, dark first.

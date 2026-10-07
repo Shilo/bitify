@@ -178,7 +178,7 @@ button { font: inherit; color: inherit; }
 }
 .sep { width: 1px; height: 24px; background: var(--line); }
 .btn[aria-expanded="true"] { background: var(--tile); border-color: var(--fg); }
-.btn.sm { font-size: 13px; padding: 0; } /* the square buttons: Help in the advanced panel, and Remove all */
+.btn.sm { font-size: 13px; padding: 0; } /* the square buttons: Help in the style panel, and Remove all */
 .pair { display: flex; align-items: center; gap: 4px; }
 .pair .ib { width: var(--hit); height: var(--hit); border-color: transparent; background: transparent; }
 .sw {
@@ -190,6 +190,9 @@ button { font: inherit; color: inherit; }
 .seg { display: inline-flex; height: var(--hit); padding: 3px; background: var(--tile); border-radius: 10px; }
 .seg button { padding: 0 12px; border: 0; border-radius: 8px; background: transparent; color: var(--muted); font-size: 13px; font-weight: 600; cursor: pointer; }
 .seg button[aria-pressed="true"] { background: var(--surface); color: var(--fg); box-shadow: 0 1px 2px var(--shadow); }
+/* The bitified half shows the style's name. It is wide enough for the longest, "Silhouette", so
+   the dock does not move as styles are stepped through. */
+.seg button:last-child { min-width: 7em; }
 
 /* Panels open above the dock as a strip: one row of controls. A panel is kept short because the
    wall is resized to sit above it (--panel-space), so the images stay in view while they change. */
@@ -269,7 +272,7 @@ button { font: inherit; color: inherit; }
 .tnum::-webkit-inner-spin-button, .tnum::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 #threshold { flex: 1; min-width: 0; height: var(--hit); margin: 0; accent-color: var(--fg); }
 
-/* the advanced panel */
+/* the style panel */
 .pick { display: flex; align-items: center; gap: 8px; } /* the word "Style", then the button that shows the style */
 .pick .btn { padding: 0 14px 0 8px; }
 .pick .btn .demo { width: 28px; height: 28px; background-size: 8px 8px; }
