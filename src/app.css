@@ -303,10 +303,12 @@ button { font: inherit; color: inherit; }
   .dock { left: 12px; right: 12px; bottom: 12px; transform: none; width: auto; max-width: none; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 10px; }
   .seg { order: 5; flex: 1 0 100%; box-sizing: border-box; }
   .seg button { flex: 1; }
-  .panel, .panel.fit { left: 0; right: 0; width: auto; max-width: none; transform: none; }
-  /* palettes: the name on the first row, the chips below; the fades cover the chips only */
-  .pals { flex: 1; flex-wrap: wrap; }
-  .pname { flex-basis: 100%; box-sizing: border-box; padding: 10px 12px 0; }
+  .panel { left: 0; right: 0; width: auto; transform: none; }
+  /* The palettes panel stays as wide as its chips, centered, and no wider than the dock. The
+     name goes on a row of its own above the chips; the fades cover the chips only. */
+  .panel.fit { left: 50%; right: auto; max-width: calc(100% - 2px); transform: translateX(-50%); }
+  .pals { display: grid; grid-template-columns: max-content; }
+  .pname { justify-self: start; padding: 10px 12px 0; }
   .pname::after { display: none; }
   .chips { padding: 8px 12px 10px; }
   .fit::before, .fit::after { top: 30px; }
