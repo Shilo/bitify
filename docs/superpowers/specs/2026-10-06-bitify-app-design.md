@@ -681,10 +681,13 @@ tab does, so every deploy reaches it the same way.
 - `index.html` links the manifest and the iOS icon, and sets the browser's bar color to the
   page background, light or dark.
 - Chrome, Edge and other Chromium browsers, on desktop and Android, tell the page when the
-  app can be installed and is not yet. The page keeps that offer and shows Install in the More menu; pressing it opens
-  the browser's own install prompt. The offer works once, so the row then goes until the
-  browser offers again. Safari, Firefox and every browser on iOS make no such offer and never
-  show the row; there the app is installed from the browser's own menu (on iOS, Share, then Add to Home Screen).
+  app can be installed and is not yet. The page keeps that offer and shows Install in the More
+  menu; pressing it opens the browser's own install prompt. The offer works once, so the row
+  then goes until the browser offers again. Since the page defers the browser's automatic
+  install UI, Chromium may log that the banner was not shown after `preventDefault()`; this is
+  expected, and the Install row calls `prompt()` from the user's click. Safari, Firefox and
+  every browser on iOS make no such offer and never show the row; there the app is installed
+  from the browser's own menu (on iOS, Share, then Add to Home Screen).
 
 ## Structure
 
