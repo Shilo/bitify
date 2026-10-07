@@ -136,7 +136,8 @@ button { font: inherit; color: inherit; }
 .empty .cap { grid-column: 1 / -1; flex-direction: row; align-items: baseline; justify-content: center; gap: 8px; }
 .empty .dim { margin-left: 0; }
 .empty h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: clamp(26px, 5vw, 44px); line-height: 1.1; text-wrap: balance; }
-.empty p { margin: 0; color: var(--muted); max-width: 38ch; }
+.empty p { margin: 0; color: var(--muted); max-width: 38ch; text-wrap: balance; }
+.empty p span { white-space: nowrap; } /* keeps "1-bit" from breaking at its hyphen */
 
 /* overlays */
 .drop {

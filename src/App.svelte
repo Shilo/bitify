@@ -341,9 +341,9 @@
         <Tile item={example} {first} {second} {style} {threshold} flipped={showOriginal !== spaceHeld} />
       {/if}
       <div class="empty-text">
-        <h2>{touch ? 'Add pixel art' : 'Drop pixel art anywhere'}</h2>
-        <p>Each image is redrawn in your two colors. Add as many as you like.</p>
-        <button class="btn primary" onclick={() => picker.click()}>Choose images</button>
+        <h2>Pixel art in two colors</h2>
+        <p>Instantly convert sprites and animated GIFs to <span>1-bit</span> colors and styles.</p>
+        <button class="btn primary" onclick={() => picker.click()}>{touch ? 'Choose images' : 'Drop or choose images'}</button>
       </div>
     </div>
   </div>

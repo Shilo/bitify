@@ -2,7 +2,7 @@
 
 # Bitify
 
-Convert pixel art to 1-bit: every image is redrawn in two colors you pick. Runs entirely in the browser; nothing is uploaded.
+Instantly convert sprites and animated GIFs to 1-bit colors and styles. Runs entirely in the browser; nothing is uploaded.
 
 **[shilo.github.io/bitify](https://shilo.github.io/bitify/)**
 

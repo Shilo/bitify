@@ -1,6 +1,6 @@
 # Bitify
 
-Bitify is a browser-only tool that redraws pixel art in exactly two colors the user picks (1-bit). There is no backend and nothing is uploaded.
+Bitify is a browser-only tool that instantly converts sprites and animated GIFs to 1-bit colors and styles: each image is redrawn in exactly two colors the user picks. There is no backend and nothing is uploaded.
 
 ## What it does
 

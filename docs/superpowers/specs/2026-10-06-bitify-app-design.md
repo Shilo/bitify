@@ -238,8 +238,10 @@ viewport height so mobile browser bars do not cut the dock off.
 
 ### Empty state
 
-A centered heading ("Drop pixel art anywhere", or "Add pixel art" on touch devices), one
-line of explanation, and a "Choose images" button. The dock stays visible.
+A centered slogan ("Pixel art in two colors"), one line saying what the app is ("Instantly convert sprites and animated GIFs to 1-bit colors and styles."; no
+counts of styles or palettes, which change), and a
+button labelled "Drop or choose images" ("Choose images" on touch devices, where there is
+nothing to drop). The text describes the app, not the steps. The dock stays visible.
 
 Above the heading sits the Bitify logo, a 28×28 spinning gold coin with a B
 (`src/assets/logo.gif`, an eight-frame animation), labelled "Example". It plays like any
