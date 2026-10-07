@@ -15,7 +15,7 @@ put first but **without unwanted downsides**. Two rules the owner has stated out
 
 ## What you are reviewing
 
-Four commits on `main`, on top of `ce7bffa`:
+Four commits on `main`, on top of `ce7bffa` (a fifth, `ef76dec`, adds only this file and `bench/`):
 
 | Commit | What |
 |---|---|
@@ -32,6 +32,37 @@ git diff ce7bffa d592b64 -- src docs/superpowers CLAUDE.md
 `src/App.svelte`, `src/app.css`, `src/PixelIcon.svelte`, `CLAUDE.md` and the spec belong to
 it (a new help and welcome dialog). Leave them alone and review the commits, not the
 working files.
+
+### This is the second review. Look here first.
+
+The first review saw only an early form of `e1eccfd`. None of the following has been
+reviewed by anyone but its author:
+
+- **The patterns and Atkinson drawn afresh on the kept pixels** (`mask` in
+  `src/lib/bitify.js`, the last two blocks). Is the tile a fair picture of the saved file
+  at every `k`, including with transparent pixels, tiny images and `k` larger than the image?
+- **`sampling` in `src/lib/layout.js`**: the step a tile converts at, the rule that an image
+  shown whole is never drafted, and the 32-pixel floor on the shorter side.
+- **`sliderDrag` in `src/lib/gesture.js` and its wiring in `src/Dock.svelte`**: the rest
+  timer. Hunt for a race, a timer that survives a drag, a drag that never ends, and a
+  redraw at full detail in the middle of a fast drag. Remember that `tick` is what tells it
+  the wall has redrawn.
+- **`during` in `src/App.svelte`** and the copy path in `src/lib/save.js`: the busy message,
+  its 50 ms wait, its count of running jobs, and the clipboard being handed a promise. What
+  happens when a job throws, when two overlap, when the list of images changes during the
+  wait, or when Remove all is pressed while a batch is still being read?
+- **The effect that lets go of a removed image** held by the Share sheet (`src/App.svelte`).
+- **Whether saving, downloading and copying can ever produce less than the full image.**
+  Trace every path from a button or key to `pngBytes` and `encodeGif`.
+- **Memory**: anything that keeps an image, a mask, a canvas, a timer or a listener alive
+  after its tile is removed or the drag has ended.
+
+To run exactly what was committed, without the other session's uncommitted changes, build
+from the commit (the `bench/dist-new` already on disk may be older):
+
+```bash
+rm -rf bench/committed && mkdir bench/committed && git archive ef76dec | tar -x -C bench/committed && cmd //c mklink //J "bench\\committed\\node_modules" "node_modules" && (cd bench/committed && npx vitest run && npx vite build --outDir ../dist-new --emptyOutDir)
+```
 
 Read `CLAUDE.md` first. The spec at `docs/superpowers/specs/2026-10-06-bitify-app-design.md`
 is the source of truth and changes in the same commit as the code. The sections this work
