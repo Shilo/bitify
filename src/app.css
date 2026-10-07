@@ -151,6 +151,14 @@ button { font: inherit; color: inherit; }
   width: max-content; max-width: calc(100% - 32px); padding: 8px 14px; border-radius: 10px;
   background: var(--fg); color: var(--bg); font-size: 13px; font-weight: 600;
 }
+/* Turns in the message while a long job runs. The browser moves it without the page's help,
+   so it keeps turning while the job has the page itself stuck. */
+.spin {
+  display: inline-block; width: 8px; height: 8px; margin-right: 8px; vertical-align: -1px;
+  border: 2px solid; border-top-color: transparent; will-change: transform;
+  animation: spin 0.8s steps(8) infinite;
+}
+@keyframes spin { to { transform: rotate(1turn); } }
 /* the sheet a tile's Share button opens: the image's name, then Copy, Download and Cancel */
 .sheet {
   box-sizing: border-box; width: min(300px, calc(100% - 32px)); margin: auto auto calc(env(safe-area-inset-bottom, 0px) + 20px); padding: 12px;

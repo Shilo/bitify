@@ -604,7 +604,8 @@ in browsers.
 - The copy is made with the asynchronous Clipboard API (`navigator.clipboard.write`), which
   works in current desktop browsers, iOS Safari and Android Chrome on a secure page. It is
   started directly in the click or key press, with nothing awaited first, because Safari
-  refuses it otherwise.
+  refuses it otherwise. The clipboard is promised the image at that moment and given it
+  when it has been made, which lets a long copy show its message first (see "Long jobs").
 
 ## Installing
 
@@ -660,6 +661,25 @@ Dependencies beyond Vite and Svelte:
   compression.
 - `vitest`, development only.
 
+## Long jobs
+
+Reading an image, saving and copying go through every pixel, and the page can do nothing
+else meanwhile. For a photo on a phone that can be a second or more, so the page says what
+it is doing:
+
+- A job of 2 million pixels or more first shows a message under the top bar, where the
+  other messages show, with a small square that turns: "Reading name…" ("Reading 2 of 5…"
+  within a batch), "Saving name…", "Saving 5 images…" for Download all, or "Copying name…".
+  An animation counts all its frames, and Download all counts all the images together.
+- A smaller job shows nothing. It is over before a message could be read.
+- The job starts 50 milliseconds after the message, so that the message is drawn first.
+  That wait is a timer, not a screen frame, because a hidden tab has no frames and the job
+  would wait for the tab to be shown.
+- The square is turned by a CSS animation of its rotation alone, which the browser runs
+  without the page's help. It keeps turning while the job has the page stuck.
+- The message replaces any other message while a job runs, and goes when the last job that
+  showed one has ended.
+
 ## Errors and limits
 
 - Undecodable files are skipped with a message; the rest of the batch still loads.
@@ -668,8 +688,9 @@ Dependencies beyond Vite and Svelte:
   shows, however large the images are (see "Images larger than their tile"), so it stays
   quick on a phone, and a drag of the threshold slider is kept quick by drafts (see "Drafts
   while the threshold slider is dragged"). What still reads every pixel of a photo, and so
-  pauses the page for a moment on a slow phone, is adding it and saving or copying it.
-  Moving those to a worker is the upgrade path if that ever matters.
+  pauses the page for a moment on a slow phone, is adding it and saving or copying it. A
+  message says so meanwhile (see "Long jobs"). Moving those to a worker is the upgrade path
+  if that ever matters.
 - A large image's canvas is rarely a whole number of screen pixels per pixel, so in the
   pattern styles a tile can show faint evenly spaced lines where the browser fits one to
   the other. The saved file has none.

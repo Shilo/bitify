@@ -105,6 +105,29 @@
     messageTimer = setTimeout(() => (message = ''), time);
   }
 
+  // Reading, saving or copying a photo goes through every one of its pixels. On a phone that can
+  // take a second or more, and the page can do nothing else meanwhile. So a job over this many
+  // pixels first shows a message with a spinner. A smaller job is over before a message could
+  // be read, and shows nothing.
+  const BUSY_PIXELS = 2_000_000;
+  let busy = $state(''); // what the page is busy with; shown in place of any other message
+  let jobs = 0; // the jobs that have said so and not finished, as one can start while another waits
+  const pixelsOf = item => item.img.w * item.img.h * (item.frames?.length ?? 1);
+  // Runs `job` and gives back what it returns, with `text` on screen meanwhile if `pixels` is large.
+  async function during(text, pixels, job) {
+    if (pixels < BUSY_PIXELS) return job();
+    jobs++;
+    busy = text;
+    // The message has to be drawn before the job takes over the page. A timer, not a screen
+    // frame: a hidden tab has no frames, and the job would wait until the tab was shown again.
+    await new Promise(drawn => setTimeout(drawn, 50));
+    try {
+      return await job();
+    } finally {
+      if (!--jobs) busy = '';
+    }
+  }
+
   // Quick switch: scrolling, swiping or an arrow key steps to the next style, or the next
   // palette, and a message names it. `dir` is 1 for the next and -1 for the one before.
   let custom; // the user's own two colors, kept as a stop among the palettes (see stepPalette)
@@ -228,9 +251,11 @@
   // without waiting for the rest.
   async function addFiles(files) {
     let skipped = 0;
-    for (const file of files) {
+    for (const [n, file] of files.entries()) {
       try {
-        const item = toItem(++nextId, file.name || 'image.png', await decode(file));
+        const decoded = await decode(file), { width, height } = decoded.frames[0].original, name = file.name || 'image.png';
+        const reading = files.length > 1 ? `Reading ${n + 1} of ${files.length}…` : `Reading ${name}…`;
+        const item = await during(reading, width * height * decoded.frames.length, () => toItem(++nextId, name, decoded));
         items = [...items, item];
       } catch {
         skipped++;
@@ -248,7 +273,7 @@
 
   async function save(item) {
     try {
-      await saveOne(bitified(item));
+      await during(`Saving ${item.name}…`, pixelsOf(item), () => saveOne(bitified(item)));
     } catch {
       say(`${item.name} could not be saved.`);
     }
@@ -257,7 +282,8 @@
   // The clipboard takes a PNG but not a GIF, so an animation is copied as its first frame.
   async function copy(item) {
     try {
-      await copyOne(still(item));
+      // the clipboard is asked at once, as Safari demands, and handed the image when it is ready
+      await copyOne(during(`Copying ${item.name}…`, item.img.w * item.img.h, () => still(item)));
       say(`${item.name} copied${item.frames ? ' as a still image' : ''}.`);
     } catch {
       say(`${item.name} could not be copied.`);
@@ -266,7 +292,8 @@
 
   async function saveEverything() {
     try {
-      await saveAll(items, bitified);
+      const saving = items.length > 1 ? `Saving ${items.length} images…` : `Saving ${items[0].name}…`;
+      await during(saving, items.reduce((sum, item) => sum + pixelsOf(item), 0), () => saveAll(items, bitified));
     } catch {
       say('The images could not be saved.');
     }
@@ -443,5 +470,5 @@
     <p><b>Hold <kbd>Shift</kbd> and scroll</b>, or press <kbd>←</kbd> <kbd>→</kbd>, to change the palette.</p>
   {/if}
 </dialog>
-<div class="toast" role="status" hidden={!message}>{message}</div>
+<div class="toast" role="status" hidden={!busy && !message}>{#if busy}<span class="spin" aria-hidden="true"></span>{/if}{busy || message}</div>
 <input bind:this={picker} type="file" accept="image/*" multiple hidden onchange={picked} />
