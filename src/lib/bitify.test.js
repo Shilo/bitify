@@ -25,6 +25,11 @@ describe('analyze', () => {
     expect(image(['ab'], { a: grey(255), b: grey(0) }).hasAlpha).toBe(false);
   });
 
+  it('records the darkest and lightest brightness of the solid pixels', () => {
+    const img = image(['a bc'], { a: grey(240), b: grey(20), c: grey(120) });
+    expect([img.lo, img.hi]).toEqual([20, 240]);
+  });
+
   it('treats alpha below 128 as empty and 128 or more as solid', () => {
     const img = image(['ab'], { a: [200, 200, 200, 127], b: [200, 200, 200, 128] });
     expect(show(mask(img, 'silhouette'), 2)).toEqual([' #']);
@@ -62,27 +67,52 @@ describe('mask', () => {
     expect(show(mask(img, 'solid'), 4)).toEqual(['##..']);
   });
 
-  it('checker: a mid-tone becomes a checkerboard, extremes stay flat', () => {
-    const mid = image(['aaaa', 'aaaa'], { a: grey(128) });
-    expect(show(mask(mid, 'checker', 128), 4)).toEqual(['.#.#', '#.#.']);
-    const light = image(['aaaa', 'aaaa'], { a: grey(250) });
-    expect(show(mask(light, 'checker', 128), 4)).toEqual(['....', '....']);
-    const dark = image(['aaaa', 'aaaa'], { a: grey(5) });
-    expect(show(mask(dark, 'checker', 128), 4)).toEqual(['####', '####']);
+  // A column of the darkest color, four of a middle color, a column of the lightest.
+  const three = () => image(Array(4).fill('abbbbc'), { a: grey(20), b: grey(120), c: grey(240) });
+
+  it('checker: the middle color becomes a checkerboard', () => {
+    expect(show(mask(three(), 'checker', 120), 6)).toEqual(['##.#..', '#.#.#.', '##.#..', '#.#.#.']);
   });
 
-  it('bayer: a mid-tone lights exactly half of each 4x4 cell', () => {
-    const img = image(['aaaa', 'aaaa', 'aaaa', 'aaaa'], { a: grey(128) });
-    expect(count(mask(img, 'bayer', 128), 2)).toBe(8);
+  it('bayer: the middle color lights exactly half of a 4x4 cell', () => {
+    const m = mask(three(), 'bayer', 120);
+    expect(count(m, 2)).toBe(4 + 8); // the lightest column, and half of the middle block
+    expect(show(m, 6)).toEqual(['##.#..', '#.#.#.', '##.#..', '#.#.#.']);
   });
 
-  it('atkinson: flat white and black stay flat, a mid-tone mixes both colors', () => {
-    const rows = Array(8).fill('aaaaaaaa');
-    expect(count(mask(image(rows, { a: grey(255) }), 'atkinson', 128), 2)).toBe(64);
-    expect(count(mask(image(rows, { a: grey(0) }), 'atkinson', 128), 1)).toBe(64);
-    const light = count(mask(image(rows, { a: grey(128) }), 'atkinson', 128), 2);
+  it('checker and bayer: the darkest color stays dark and the lightest stays light', () => {
+    for (const style of ['checker', 'bayer']) for (const t of [null, 30, 120, 230]) {
+      const rows = show(mask(three(), style, t), 6);
+      expect(rows.map(r => r[0] + r[5])).toEqual(['#.', '#.', '#.', '#.']);
+    }
+  });
+
+  it('checker and bayer: a color at the threshold is dark when nothing is darker', () => {
+    // the darkest color sits exactly on the cut, as it does for an outline under a low Auto
+    const img = image(['aabb', 'aabb'], { a: grey(35), b: grey(245) });
+    for (const style of ['checker', 'bayer']) expect(show(mask(img, style, 35), 4)).toEqual(['##..', '##..']);
+  });
+
+  it('checker, bayer and atkinson: an image of one color has no range and stays flat', () => {
+    const flat = () => image(['aaaa', 'aaaa', 'aaaa', 'aaaa'], { a: grey(128) });
+    for (const style of ['checker', 'bayer', 'atkinson']) {
+      expect(count(mask(flat(), style, 50), 2)).toBe(16); // above the threshold: light
+      expect(count(mask(flat(), style, 128), 1)).toBe(16); // at or below it: dark
+      expect(count(mask(flat(), style, 200), 1)).toBe(16);
+      expect(count(mask(flat(), style), 2)).toBe(16); // Auto falls back to 127
+    }
+  });
+
+  it('atkinson: flat white and black stay flat, a middle color mixes both colors', () => {
+    const flat = Array(8).fill('aaaaaaaa');
+    expect(count(mask(image(flat, { a: grey(255) }), 'atkinson', 128), 2)).toBe(64);
+    expect(count(mask(image(flat, { a: grey(0) }), 'atkinson', 128), 1)).toBe(64);
+    // a darkest column, an 8x8 block of a middle color, a lightest column
+    const rows = show(mask(image(Array(8).fill('abbbbbbbbc'), { a: grey(20), b: grey(120), c: grey(240) }), 'atkinson', 120), 10);
+    const light = rows.map(r => r.slice(1, 9)).join('').split('.').length - 1;
     expect(light).toBeGreaterThan(16);
     expect(light).toBeLessThan(48);
+    expect(rows.map(r => r[0] + r[9])).toEqual(Array(8).fill('#.'));
   });
 
   it('silhouette: every solid pixel is first color', () => {
@@ -242,5 +272,14 @@ describe('unify', () => {
     const one = image(['aabb'], { a: grey(50), b: grey(200) }), before = [one.auto, one.autoLine, one.hasAlpha];
     unify([one]);
     expect([one.auto, one.autoLine, one.hasAlpha]).toEqual(before);
+  });
+
+  it('shares the darkest and lightest brightness, so patterns match from frame to frame', () => {
+    const dark = image(['aabb'], { a: grey(10), b: grey(60) }), light = image(['aabb'], { a: grey(150), b: grey(240) });
+    unify([dark, light]);
+    expect([dark.lo, dark.hi, light.lo, light.hi]).toEqual([10, 240, 10, 240]);
+    // 60 is the shared cut and 10 the shared darkest: the first frame is not stretched to its own range
+    expect(show(mask(dark, 'bayer'), 4)).toEqual(['##.#']);
+    expect(show(mask(light, 'bayer'), 4)).toEqual(['....']);
   });
 });

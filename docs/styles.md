@@ -51,6 +51,24 @@ A manual threshold applies the same number to every image.
 For an animated GIF, Auto is picked once from all frames together. Picking it frame by frame
 would let a pixel flip between the two colors as the animation plays.
 
+### Tone
+
+Checker, Bayer and Atkinson do not compare brightness with the threshold directly. They
+first turn brightness into a **tone** from 0 to 1 that runs through the image's own range:
+the darkest brightness in the image is 0, the threshold is 0.5 and the lightest brightness
+is 1.
+
+- At or below the threshold: `0.5 × (brightness − darkest) / (threshold − darkest)`, or 0
+  when the threshold is not above the darkest.
+- Above the threshold: `0.5 + 0.5 × (brightness − threshold) / (lightest − threshold)`.
+
+An image's darkest color is therefore always tone 0 and its lightest always tone 1, as long
+as the threshold lies between them. Outlines and highlights stay whole, whatever the
+threshold is. For an animated GIF the darkest and lightest brightness are taken from all
+frames together.
+
+For the example below the darkest brightness is 25 and the lightest 240.
+
 ### The example used below
 
 Each style is shown on the small ball used for the style buttons in the Advanced panel: a
@@ -167,11 +185,11 @@ is the most predictable style to tune by hand.
 Solid, with mid-tones turned into a checkerboard. It gives three apparent tones: dark, a
 50% pattern, and light.
 
-The cut-off is moved by 40 depending on where the pixel sits. On pixels where `x + y` is
-odd it is raised by 40; where it is even it is lowered by 40. The effect:
+A pixel becomes the second color if its tone is above 0.25 where `x + y` is even, and above
+0.75 where it is odd. The effect:
 
-- brightness more than 40 above the threshold: always the second color;
-- brightness more than 40 below it: always the first color;
+- tone above 0.75: always the second color;
+- tone 0.25 or below: always the first color;
 - anything in between: second color on even pixels and first on odd ones, which is a
   checkerboard.
 
@@ -186,14 +204,15 @@ odd it is raised by 40; where it is even it is lowered by 40. The effect:
 #.#.#.#.#.#.##
 ##.#.#.#.#.#.#
 ###.#.#.#.#.##
- #..........#
-  #........#
-   ##....##
+ #.........##
+  #.....#.##
+   ###.#.##
     ######
 ```
 
-The stripe's brightness is within 40 of the threshold, so it becomes the pattern. The body
-and the outline are far enough from it to stay flat.
+The stripe sits in the middle band, so it becomes the pattern. So does the dimmest shading
+at the lower right of the body. The outline is the image's darkest color, tone 0, and stays
+solid.
 
 The pattern is tied to pixel position, not to the image, so it does not shimmer between the
 frames of an animation.
@@ -203,7 +222,7 @@ frames of an animation.
 Ordered dithering. Shading becomes a regular crosshatch whose density follows brightness,
 giving 17 apparent tones.
 
-Each pixel's cut-off is shifted by an amount taken from a repeating 4×4 grid:
+Each pixel's tone is compared with a cut-off taken from a repeating 4×4 grid:
 
 ```
  0  8  2 10
@@ -212,30 +231,30 @@ Each pixel's cut-off is shifted by an amount taken from a repeating 4×4 grid:
 15  7 13  5
 ```
 
-For the value `b` at the pixel's position in the grid (`x mod 4`, `y mod 4`), the cut-off
-becomes `threshold + ((b + 0.5) / 16 - 0.5) × 192`. That moves it by up to 90 either way,
-in 16 even steps. The pixel is the second color if it is brighter than its shifted cut-off.
+For the value `b` at the pixel's position in the grid (`x mod 4`, `y mod 4`), the pixel is
+the second color if its tone is above `(b + 0.5) / 16`. That gives 16 evenly spaced cut-offs,
+from 1/32 to 31/32.
 
 ```
-    .#.#.#
+    ######
    ##....##
-  .........#
- #..........#
-.#...........#
+  #........#
+ #......#.#.#
+##..........##
+#.........#.##
 #............#
-#............#
-#.#.#.#.###.##
-.#.#.#.#.#.#.#
+###.#.#.###.##
+##.#.#.#.#.#.#
 ###.#.#.#.####
  #..........#
-  #.#...#..#
-   #.....#.
+  #.#.#.#.##
+   ##....##
     ######
 ```
 
-Because the shift reaches further than Checker's, more of the image is touched: the stripe
-is patterned, the outline is broken up where its cut-off drops very low, and the dimmer
-lower part of the body picks up a few dark pixels.
+More of the image is touched than in Checker: the stripe is patterned, and the dimmer parts
+of the body pick up a few dark pixels. The outline stays solid, because the image's darkest
+color has tone 0 and no cut-off is that low.
 
 The grid's values are arranged so that any brightness lights an evenly spread set of
 positions. Like Checker, the pattern is tied to pixel position and is stable across frames.
@@ -250,9 +269,9 @@ Pixels are visited in reading order. Each one is cut at the threshold, and then 
 made by forcing it to pure dark or pure light is handed on to pixels that have not been
 visited yet, so the mistakes average out across an area.
 
-1. Every pixel starts with a working value of `brightness + 128 - threshold`. This moves the
-   threshold to the middle of the range.
-2. If the pixel's working value is above 128 it becomes the second color (treated as 255);
+1. Every pixel starts with a working value of `tone × 255`. The threshold is then at 127.5,
+   the middle of the range.
+2. If the pixel's working value is above 127.5 it becomes the second color (treated as 255);
    otherwise the first (treated as 0).
 3. The error is the working value minus 255 or 0. One eighth of it is added to each of six
    neighbours, marked `1` below, where `*` is the current pixel:
@@ -273,18 +292,18 @@ character: very dark and very light areas stay clean instead of filling with str
  #..........#
 ##..........##
 #............#
-#............#
-#...#..##.##.#
-###.##..#.##.#
-##.#.##.##..##
+#..........#.#
+###.##########
+#.##..#..##.##
+##.##.###.####
  #..........#
   #........#
-   ##....##
+   ##.#..##
     ######
 ```
 
 The stripe is close to the threshold, so it breaks into a scatter. The body is far from it
-and stays flat.
+and stays almost flat.
 
 Limits:
 

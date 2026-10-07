@@ -236,9 +236,9 @@ Output pixels are fully opaque or fully transparent. Brightness of a pixel is
 |---|---|
 | **Lines** (default) | A pixel is first color if any of its four neighbours is empty, or if a neighbour differs from it by more than the threshold and this pixel is the darker of the two. Everything else is second color. |
 | **Solid** | Brighter than the threshold: second color. Otherwise first color. |
-| **Checker** | As Solid, but the cut-off is raised by 40 on odd `x + y` cells and lowered by 40 on even ones, so mid-tones become a checkerboard. |
-| **Bayer** | As Solid, with the cut-off shifted per pixel by a 4×4 ordered-dither matrix, spread 192. |
-| **Atkinson** | Error diffusion. Each pixel is cut at the threshold, and one eighth of the error goes to each of six neighbours (right, two right, the three below, two below). |
+| **Checker** | Second color if the tone (see below) is above 0.25 on even `x + y` cells and above 0.75 on odd ones, so mid-tones become a checkerboard. |
+| **Bayer** | Second color if the tone is above `(b + 0.5) / 16`, where `b` is the value of a 4×4 ordered-dither matrix at the pixel. |
+| **Atkinson** | Error diffusion on `tone × 255`. Each pixel is cut at 127.5, and one eighth of the error goes to each of six neighbours (right, two right, the three below, two below). |
 | **Silhouette** | Every non-empty pixel is first color. |
 
 Details of Lines:
@@ -253,6 +253,16 @@ Details of Lines:
 
 Known limit of Lines: two adjacent parts in nearly the same color, with no outline between
 them, merge. Lowering the threshold recovers some at the cost of picking up shading.
+
+Checker, Bayer and Atkinson work on a **tone** from 0 to 1 that runs through the image's own
+range: its darkest brightness is 0, the threshold is 0.5 and its lightest brightness is 1.
+
+- At or below the threshold: `0.5 × (brightness − darkest) / (threshold − darkest)`, or 0
+  when the threshold is not above the darkest.
+- Above the threshold: `0.5 + 0.5 × (brightness − threshold) / (lightest − threshold)`.
+
+So with a threshold inside the image's range, Checker and Bayer never turn its darkest color
+light or its lightest color dark, and outlines and highlights stay whole.
 
 ### Threshold
 
@@ -278,8 +288,9 @@ at the speed stored in the file. Frames marked with almost no delay play at 100m
 in browsers.
 
 - Every frame goes through the same conversion as a still image, and the whole animation uses
-  one Auto threshold picked from all its frames together. Picking it frame by frame would make
-  pixels flicker between the two colors as the animation plays.
+  one Auto threshold and one brightness range, taken from all its frames together. Taking
+  them frame by frame would make pixels flicker between the two colors as the animation
+  plays.
 - The Original / Bitified switch, hold and Space show the original animation, still playing.
 - GIF frames are often partial patches drawn over earlier frames. They are composited when
   the file is read, so each frame is held as the full picture it shows.
@@ -312,7 +323,7 @@ Vite with the `svelte` template (Svelte 5, runes, mounted with `mount()`), JavaS
 
 | File | Purpose |
 |---|---|
-| `src/lib/bitify.js` | Pure conversion, no DOM. `analyze(imageData)` returns size, pixels, brightness, whether any pixel is empty, and the two auto thresholds. `mask(analysis, style, threshold)` returns one byte per pixel (0 empty, 1 first color, 2 second color). `colorize(mask, first, second)` returns RGBA pixels. |
+| `src/lib/bitify.js` | Pure conversion, no DOM. `analyze(imageData)` returns size, pixels, brightness, whether any pixel is empty, the darkest and lightest brightness, and the auto thresholds. `mask(analysis, style, threshold)` returns one byte per pixel (0 empty, 1 first color, 2 second color). `colorize(mask, first, second)` returns RGBA pixels. |
 | `src/lib/gif.js` | Reading an animated GIF into full frames (`decodeGif`) and writing a two-color one (`encodeGif`). No DOM. |
 | `src/lib/save.js` | Output file naming, zip, PNG encoding from pixels, single save, save all. |
 | `src/App.svelte` | All state; top bar, wall, empty state, drop overlay, messages; window-level drop, paste and key handling. |
@@ -351,7 +362,8 @@ Dependencies beyond Vite and Svelte:
 - `src/lib/bitify.js` is covered by unit tests on small hand-made pixel grids:
   - empty pixels stay empty in every style;
   - Solid splits at the threshold;
-  - Checker produces a checkerboard for a mid-tone block;
+  - Checker, Bayer and Atkinson pattern a middle color, keep an image's darkest color dark
+    and its lightest light, and leave an image of one color flat;
   - Lines outlines an inner part as well as the silhouette, draws a one-pixel boundary,
     ignores a shading step below the threshold, frames only images that have empty
     pixels, and at Auto draws no lines along soft shading;
