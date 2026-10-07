@@ -70,9 +70,11 @@ is 1.
 - Above the threshold: `0.5 + 0.5 × (brightness − threshold) / (lightest − threshold)`.
 
 An image's darkest color is therefore always tone 0 and its lightest always tone 1, as long
-as the threshold lies between them. Outlines and highlights stay whole, whatever the
-threshold is. For an animated GIF the darkest and lightest brightness are taken from all
-frames together.
+as the threshold lies between them, and outlines and highlights stay whole. A threshold
+outside the image's range puts every pixel on one side of it, and then the darkest or the
+lightest color can be patterned. A manual threshold can be outside the range of some images,
+because it applies to all of them. For an animated GIF the darkest and lightest brightness
+are taken from all frames together.
 
 For the example below the darkest brightness is 25 and the lightest 240.
 
@@ -143,8 +145,10 @@ Dark pixels get the first color and light pixels the second.
 The body is brighter than 81, so it is filled. The stripe is darker, so it is left dark.
 The original's own dark outline stays dark around the body: it has light pixels beside it,
 so it is not a rim. At the two ends of the stripe the outline and the stripe are both dark
-and differ by more than 24, so the outline pixels there are seams and turn light. They
-close the shape where the dark stripe would otherwise run into empty space.
+and differ by more than 24, so the outline pixels beside the stripe are seams and turn
+light. The two outline pixels at the lower corners of the stripe have no stripe beside them
+and no light pixel around them, so they are rims and turn light too. Together they close the
+shape where the dark stripe would otherwise run into empty space.
 
 Details:
 

@@ -25,9 +25,10 @@ Stated by the user:
 - A toggle between the original and the bitified image.
 - Swap, a palette selector, and a threshold. Threshold and an Auto button live in an
   "advanced" strip above the dock, which never covers the images.
-- The advanced strip offers several conversion algorithms. The default outlines the
+- The advanced strip offers several conversion algorithms. The default shows the
   individual parts of a sprite (body parts, clothing, equipment), in the style of the game
-  End of End, and not only the silhouette.
+  End of End, and not only the silhouette. Since 2026-10-07 that default is Cutout, which
+  fills the parts and cuts them apart; Lines, which outlines them, was the default before.
 - Must work on iOS and Android.
 - Vite + Svelte, pure Svelte, no SvelteKit.
 
