@@ -218,9 +218,11 @@ It matches the dock's dividers.
 ### The More menu
 
 The More button is the last button in the top bar, at every width. It opens a small menu
-that drops down below it, lined up with its right edge, with two rows, each an icon and a
-word:
+that drops down below it, lined up with its right edge, with two or three rows, each an
+icon and a word:
 
+- Install: asks the browser to install Bitify as an app (see "Installing"). The row is
+  there only while the browser offers that.
 - Help: closes the menu and opens the help in its place.
 - GitHub: opens `https://github.com/Shilo/bitify` in a new tab.
 
@@ -525,6 +527,26 @@ in browsers.
   started directly in the click or key press, with nothing awaited first, because Safari
   refuses it otherwise.
 
+## Installing
+
+Bitify can be installed as an app, and that is all: there is no service worker, nothing is
+cached, and it does not open offline. An installed copy loads from the site like a browser
+tab does, so every deploy reaches it the same way.
+
+- `public/manifest.webmanifest` gives the name, the standalone display, the dark background
+  color for the title bar and the splash screen, and three icons. Its start address and scope
+  are relative, so it works under `/bitify/`.
+- The icons in `public/` are made from the favicon, `public/favicon.svg`, by `npx @vite-pwa/assets-generator`
+  (settings in `pwa-assets.config.js`): 192px and 512px, a 512px one with room for a mask,
+  and a 180px one for iOS. The last two have the logo's orange behind them.
+- `index.html` links the manifest and the iOS icon, and sets the browser's bar color to the
+  page background, light or dark.
+- Chrome, Edge and other Chromium browsers tell the page when the app can be installed and
+  is not yet. The page keeps that offer and shows Install in the More menu; pressing it opens
+  the browser's own install prompt. The offer works once, so the row then goes until the
+  browser offers again. Safari and Firefox make no such offer and never show the row; there
+  the app is installed from the browser's own menu (on iOS, Share, then Add to Home Screen).
+
 ## Structure
 
 Vite with the `svelte` template (Svelte 5, runes, mounted with `mount()`), JavaScript.
@@ -605,6 +627,8 @@ Dependencies beyond Vite and Svelte:
   or Ctrl with wheel, arrow keys and swipes, on the empty screen, on a wall that fits and on one
   that scrolls, where the wheel and an up-or-down swipe over the images must scroll them
   and change nothing.
+- Installing is checked by hand in Chrome on the deployed site: Install appears in the More
+  menu, opens the browser's prompt, and is gone once the app is installed.
 
 ## Not included
 
@@ -614,5 +638,6 @@ Dependencies beyond Vite and Svelte:
 - Custom user palettes.
 - Animation in formats other than GIF (animated WebP, APNG): only the first frame is used.
 - Pausing or scrubbing an animation, and changing its speed.
-- Installable or offline (PWA) behavior.
+- Working offline. That needs a service worker, which would cache the app and stand between
+  a deploy and the people using it.
 - Hosting and deployment.

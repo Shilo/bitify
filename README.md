@@ -15,7 +15,7 @@ Instantly convert sprites and animated GIFs to 1-bit colors and styles. Runs ent
 - Compare with the original: switch the whole wall, hold a tile, or hold Space.
 - Save one PNG at original size, or all of them as a zip.
 - Copy an image to the clipboard with its Copy button (on phones, from its Share button), or the first one with Ctrl+C.
-- Works on desktop, iOS and Android.
+- Works on desktop, iOS and Android, and can be installed as an app.
 
 ## Development
 
