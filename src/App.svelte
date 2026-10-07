@@ -111,15 +111,17 @@
     return false;
   }
 
-  // The wheel steps the styles wherever it has nothing to scroll. Sideways, with Shift or with
-  // Ctrl it steps the palettes; Ctrl does so everywhere, since Ctrl and the wheel never scroll.
-  // A trackpad pinch also arrives as a wheel event marked Ctrl, with no key pressed. That one is
-  // left to the browser, which zooms the page, so Ctrl only counts once the keyboard has said so.
+  // The wheel steps the styles wherever it has nothing to scroll. With Shift, with Ctrl or
+  // sideways it steps the palettes. Shift and the wheel scroll sideways, so Shift steps wherever
+  // nothing scrolls that way, the wall included; Ctrl and the wheel never scroll, so Ctrl steps
+  // everywhere. A trackpad pinch also arrives as a wheel event marked Ctrl, with no key pressed.
+  // That one is left to the browser, which zooms the page, so Ctrl only counts once the keyboard
+  // has said so.
   let ctrlHeld = false;
   const wheelStep = wheelSteps();
   function wheel(e) {
     // If the browser will not let a Ctrl move be stopped it is about to zoom, and one effect is enough.
-    if (e.ctrlKey ? !ctrlHeld || !e.cancelable : scrolls(e.target)) return;
+    if (e.ctrlKey ? !ctrlHeld || !e.cancelable : scrolls(e.target, e.shiftKey ? 'x' : undefined)) return;
     e.preventDefault(); // or Ctrl and the wheel would zoom the page
     const sideways = Math.abs(e.deltaX) > Math.abs(e.deltaY);
     const dir = wheelStep((sideways ? e.deltaX : e.deltaY) * (e.deltaMode ? 40 : 1), e.timeStamp);

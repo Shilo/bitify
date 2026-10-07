@@ -206,7 +206,7 @@
               <p><b>Swipe left or right</b> to change the palette.</p>
             {:else}
               <p><b>Scroll</b> to change the style.</p>
-              <p><b>Hold <kbd>Ctrl</kbd> and scroll</b> to change the palette.</p>
+              <p><b>Hold <kbd>Shift</kbd> and scroll</b> to change the palette.</p>
             {/if}
           </div>
         {/if}

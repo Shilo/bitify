@@ -188,10 +188,10 @@ right:
   has four lines in the body text size: what the threshold currently does, how to hold
   an image to compare, how to change the style without the panels ("Scroll to change the
   style."; on touch devices "Swipe up or down to change the style."), and the same for the
-  palette ("Hold Ctrl and scroll to change the palette."; on touch devices "Swipe left or
+  palette ("Hold Shift and scroll to change the palette."; on touch devices "Swipe left or
   right to change the palette."). The threshold value and the word "Hold" are bold. In the
-  last two lines the whole gesture is bold: "Scroll", "Hold Ctrl and scroll", "Swipe up or
-  down", "Swipe left or right". Space and Ctrl are drawn as keys. It closes
+  last two lines the whole gesture is bold: "Scroll", "Hold Shift and scroll", "Swipe up or
+  down", "Swipe left or right". Space and Shift are drawn as keys. It closes
   the same ways the list of styles does, and only one of the two is open at a time.
 
 While the strip is a single row, a divider separates the style button from the threshold,
@@ -255,7 +255,7 @@ is the main one, on the up-and-down axis; the palette is on the sideways axis.
 
 | | Next or previous style | Next or previous palette |
 |---|---|---|
-| Mouse wheel or trackpad | Scroll down or up | Hold Ctrl and scroll. Scrolling sideways, or with Shift, does the same. |
+| Mouse wheel or trackpad | Scroll down or up | Hold Shift and scroll. Ctrl and scroll, and scrolling sideways, do the same. |
 | Touch | Swipe up or down | Swipe left or right |
 | Keyboard | ↓ or ↑ | → or ← |
 
@@ -279,9 +279,12 @@ pointer or finger, and at everything that contains it:
   the other way round.
 - An arrow key keeps its own job in a number box, on a slider, and while focus is inside
   something that scrolls on that key's axis.
-- Ctrl with the wheel steps the palettes everywhere, the wall included. Ctrl with the
-  wheel never scrolls anything, so there is nothing to take over. It would zoom the page;
-  the app stops that. Ctrl with + and − still zooms.
+- Shift with the wheel is the usual way to scroll sideways, so it is judged on that axis
+  alone: it steps the palettes over a wall that scrolls up and down, and is left to the
+  palettes panel while its chips scroll. The help tooltip names Shift.
+- Ctrl with the wheel steps the palettes everywhere. Ctrl with the wheel never scrolls
+  anything, so there is nothing to take over. It would zoom the page; the app stops that.
+  Ctrl with + and − still zooms.
 - So with a wall that scrolls, the wheel changes the style over the top bar and the dock
   but not over the images. The arrow keys change it from anywhere.
 
@@ -533,8 +536,8 @@ Dependencies beyond Vite and Svelte:
   step for a flick with its fading tail.
 - The interface is checked by hand in a desktop browser and at phone width: add by drop,
   picker and paste; remove one and all; change colors, palette, style and threshold;
-  compare by switch, hold and Space; save one and all; and quick switch by wheel, Ctrl
-  with wheel, arrow keys and swipes, on the empty screen, on a wall that fits and on one
+  compare by switch, hold and Space; save one and all; and quick switch by wheel, Shift
+  or Ctrl with wheel, arrow keys and swipes, on the empty screen, on a wall that fits and on one
   that scrolls, where the wheel and an up-or-down swipe over the images must scroll them
   and change nothing.
 
