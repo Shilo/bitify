@@ -176,7 +176,7 @@ button { font: inherit; color: inherit; }
   background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 10px 32px var(--shadow);
 }
 .sep { width: 1px; height: 24px; background: var(--line); }
-.btn[aria-expanded="true"], .btn.sm[aria-pressed="true"] { background: var(--tile); border-color: var(--fg); }
+.btn[aria-expanded="true"] { background: var(--tile); border-color: var(--fg); }
 .btn.sm { font-size: 13px; padding: 0; } /* the square buttons: the advanced strip and Remove all */
 .pair { display: flex; align-items: center; gap: 4px; }
 .pair .ib { width: var(--hit); height: var(--hit); border-color: transparent; background: transparent; }
@@ -210,11 +210,20 @@ button { font: inherit; color: inherit; }
   width: 42px; height: 42px; border-radius: 6px; image-rendering: pixelated;
   background: conic-gradient(var(--tile2) 25%, var(--tile) 0 50%, var(--tile2) 0 75%, var(--tile) 0) 0 0 / 12px 12px;
 }
+/* The threshold's number box and its Auto button, joined into one control: Auto is what fills in the number. */
+.field { flex: none; display: flex; box-sizing: border-box; height: var(--hit); border: 1px solid var(--line); border-radius: 10px; }
+.field:focus-within { outline: 2px solid var(--fg); outline-offset: 2px; }
+.field > * { outline: none; }
+.field button {
+  padding: 0 10px; border: 0; border-left: 1px solid var(--line); border-radius: 0 9px 9px 0; background: transparent;
+  color: var(--muted); font-size: 12px; font-weight: 600; cursor: pointer;
+}
+.field button[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
 /* Just wide enough for three digits. Dock.svelte raises --chars while Auto is showing a range. */
 .tnum {
-  flex: none; box-sizing: border-box; width: calc(var(--chars, 3) * 1ch + 20px); height: var(--hit); padding: 0 8px;
+  box-sizing: border-box; width: calc(var(--chars, 3) * 1ch + 20px); padding: 0 8px;
   appearance: textfield; -moz-appearance: textfield; /* no spinner arrows: they would cover the digits */
-  border: 1px solid var(--line); border-radius: 10px; background: transparent; color: var(--fg);
+  border: 0; background: transparent; color: var(--fg);
   font: inherit; font-size: 13px; text-align: center; font-variant-numeric: tabular-nums;
 }
 .tnum::placeholder { color: var(--muted); }
@@ -241,7 +250,6 @@ button { font: inherit; color: inherit; }
   display: grid; gap: 4px; padding: 10px 14px; border-radius: 10px; background: var(--fg); color: var(--bg); box-shadow: 0 10px 32px var(--shadow);
 }
 .tip p { margin: 0; }
-.tip .ico { vertical-align: -1px; margin-right: 2px; }
 .tip kbd { padding: 0 5px; border: 1px solid; border-radius: 5px; font: inherit; font-size: 12px; font-weight: 600; }
 .tip::after {
   content: ""; position: absolute; top: 100%; right: calc(12px + var(--hit) / 2 - 6px);

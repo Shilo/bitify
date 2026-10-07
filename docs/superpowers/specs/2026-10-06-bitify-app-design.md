@@ -150,16 +150,17 @@ right:
   opens the list of the six styles above the strip, each with the same live preview and its
   name, in one row of six. Choosing a style closes the list. So does a press outside it, or
   Escape, which then leaves the strip open.
-- Threshold: a slider from 1 to 254, a number box and an Auto button, in that order. The
-  Auto button is square and shows a wand icon. Auto is the default. Moving the slider or
+- Threshold: a slider from 1 to 254, then a number box and an Auto button joined into one
+  outlined control, so it is clear that Auto fills in the number. The Auto half is filled
+  solid while Auto is on and muted while it is off. Auto is the default. Moving the slider or
   typing a number switches to manual; pressing Auto or clearing the box switches back.
   While Auto is on, the box shows the value Auto picked, or the range when images differ.
   The box is just wide enough for three digits, has no spinner arrows, and widens only to
   fit a range.
 - Help button ("?"): opens a tooltip above the strip, with its arrow over the button. It
   has two lines in the body text size: what the threshold currently does, then how to hold
-  an image to compare. The threshold value and the word "Hold" are bold, Space is drawn as
-  a key, and the Auto line starts with the wand icon. It closes
+  an image to compare. The threshold value and the word "Hold" are bold, and Space is drawn
+  as a key. It closes
   the same ways the list of styles does, and only one of the two is open at a time.
 
 While the strip is a single row, a divider separates the style button from the threshold,

@@ -151,20 +151,20 @@
           value={threshold ?? Math.round((autoRange[0] + autoRange[1]) / 2)}
           oninput={e => (threshold = +e.currentTarget.value)}
         />
-        <input
-          class="tnum"
-          type="number"
-          min="1"
-          max="254"
-          aria-label="Threshold value"
-          value={threshold ?? ''}
-          placeholder={autoShown}
-          style:--chars={threshold === null ? Math.max(3, autoShown.length) : 3}
-          oninput={typed}
-        />
-        <button class="btn sm" aria-pressed={threshold === null} aria-label="Auto threshold" title="Auto threshold" onclick={() => (threshold = null)}>
-          <PixelIcon name="wand" />
-        </button>
+        <div class="field">
+          <input
+            class="tnum"
+            type="number"
+            min="1"
+            max="254"
+            aria-label="Threshold value"
+            value={threshold ?? ''}
+            placeholder={autoShown}
+            style:--chars={threshold === null ? Math.max(3, autoShown.length) : 3}
+            oninput={typed}
+          />
+          <button aria-pressed={threshold === null} title="Auto threshold" onclick={() => (threshold = null)}>Auto</button>
+        </div>
       </div>
       <span class="sep"></span>
       <div class="anchor">
@@ -174,7 +174,7 @@
               {#if style === 'silhouette'}
                 Silhouette ignores the threshold.
               {:else if threshold === null}
-                <PixelIcon name="wand" /> Auto picks the best value for each image.
+                Auto picks the best value for each image.
               {:else if style === 'lines'}
                 Color changes stronger than <b>{threshold}</b> become lines.
               {:else}
