@@ -85,12 +85,14 @@ export async function saveOne(image) {
   download(new Blob([await fileBytes(image)], { type: 'image/' + kind(image) }), outNames([image.name], [kind(image)])[0]);
 }
 
-// Puts a still image, { mask, w, h, first, second }, on the clipboard as a PNG. Browsers accept no GIFs there.
+// A still image, { mask, w, h, first, second }, as a PNG file in memory.
+export const pngBlob = image => new Blob([pngBytes(image)], { type: 'image/png' });
+
+// Puts a PNG, as `pngBlob` makes it, on the clipboard. Browsers accept no GIFs there.
 // The write starts at once, with nothing awaited first, as Safari only allows it during a click or a key press.
-// `image` may be a promise of the image, for a caller that needs a moment before making it: the
-// clipboard is promised the PNG now and given it when it is ready.
-export const copyOne = image =>
-  navigator.clipboard.write([new ClipboardItem({ 'image/png': Promise.resolve(image).then(ready => new Blob([pngBytes(ready)], { type: 'image/png' })) })]);
+// `png` may be a promise of the PNG, for a caller that needs a moment before making it: the
+// clipboard is promised it now and given it when it is ready.
+export const copyOne = png => navigator.clipboard.write([new ClipboardItem({ 'image/png': Promise.resolve(png) })]);
 
 // One image saves as itself; a zip of one file would only be an extra step to open.
 // `image` turns an item into what `fileBytes` takes. It is called for one item at a time, so

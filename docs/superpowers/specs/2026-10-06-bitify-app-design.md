@@ -315,6 +315,8 @@ viewport height so mobile browser bars do not cut the dock off.
 - Pasting an image from the clipboard also adds it.
 - New images are appended; existing ones stay. The images of a batch are read one after
   another, and each appears as soon as it has been read, without waiting for the rest.
+- Remove all also stops any batch that is still being read. Its remaining images are not
+  read and do not appear on the wall that was just emptied.
 - Files the browser cannot decode are skipped, and a short message says how many.
 
 ### Empty state
@@ -501,8 +503,8 @@ let go:
   rougher, it is wrong. So sprites are never drafted.
 - A draft, like any tile, keeps at least 32 pixels on the image's shorter side.
 - The drag begins with the slider's first move while a pointer is pressed on it. It ends
-  when the slider reports its final value, the pointer is lifted, the slider loses focus,
-  or the Style panel closes (which takes the slider away mid-drag). The arrow keys and the
+  when the slider reports its final value, the pointer is lifted or cancelled, the slider
+  loses focus, or the Style panel closes (which takes the slider away mid-drag). The arrow keys and the
   number box set the threshold in single steps with no pointer pressed, and never draft.
 - A drag pauses when the slider has rested for 150 milliseconds with the pointer still
   pressed: the images sharpen under the resting finger, and the next move makes it a drag
@@ -643,6 +645,9 @@ in browsers.
   chosen colors, empty pixels transparent, with the original frame delays and loop count.
   Download all puts GIFs and PNGs in the same zip.
 - Saving always uses the bitified version, whatever the wall is showing.
+- What is saved or copied is what was asked for: the images that were on the wall and the
+  colors, style and threshold that were set at the click or key press. A long job starts a
+  moment later (see "Long jobs"), and a change made in that moment does not reach it.
 - PNG files are encoded directly from the conversion, not through a canvas. Some browsers
   (Brave, Safari private browsing, Firefox strict mode) add noise when a page reads a
   canvas back, which would put stray colors in a saved file.
@@ -746,8 +751,9 @@ it is doing:
   would wait for the tab to be shown.
 - The square is turned by a CSS animation of its rotation alone, which the browser runs
   without the page's help. It keeps turning while the job has the page stuck.
-- The message replaces any other message while a job runs, and goes when the last job that
-  showed one has ended.
+- The message replaces any other message while a job runs. If jobs overlap it is that of
+  the newest one still running, and it goes when the last has ended.
+- The message of a copy stays until the PNG has been made, not only its conversion.
 
 ## Errors and limits
 

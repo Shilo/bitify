@@ -177,6 +177,7 @@
           oninput={e => { threshold = +e.currentTarget.value; drag.move(); }}
           onchange={drag.end}
           onpointerup={drag.end}
+          onpointercancel={drag.end}
           onblur={drag.end}
         />
         <div class="field">

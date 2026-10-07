@@ -1,7 +1,7 @@
 <script>
   import { analyze, mask, hexToRgb, autoThreshold } from './lib/bitify.js';
   import { unify } from './lib/bitify.js';
-  import { saveOne, saveAll, copyOne } from './lib/save.js';
+  import { saveOne, saveAll, copyOne, pngBlob } from './lib/save.js';
   import { fitGrid } from './lib/layout.js';
   import { restore } from './lib/settings.js';
   import { STYLES, inOrder, stepStyle, stepPalette } from './lib/presets.js';
@@ -129,12 +129,12 @@
   // be read, and shows nothing.
   const BUSY_PIXELS = 2_000_000;
   let busy = $state(''); // what the page is busy with; shown in place of any other message
-  let jobs = 0; // the jobs that have said so and not finished, as one can start while another waits
+  const running = []; // what each job that has not finished says, as one can start while another waits
   const pixelsOf = item => item.img.w * item.img.h * (item.frames?.length ?? 1);
   // Runs `job` and gives back what it returns, with `text` on screen meanwhile if `pixels` is large.
   async function during(text, pixels, job) {
     if (pixels < BUSY_PIXELS) return job();
-    jobs++;
+    running.push(text);
     busy = text;
     // The message has to be drawn before the job takes over the page. A timer, not a screen
     // frame: a hidden tab has no frames, and the job would wait until the tab was shown again.
@@ -142,7 +142,8 @@
     try {
       return await job();
     } finally {
-      if (!--jobs) busy = '';
+      running.splice(running.indexOf(text), 1);
+      busy = running.at(-1) ?? ''; // the newest job still running, or nothing
     }
   }
 
@@ -268,13 +269,23 @@
 
   // Each image goes on the wall as soon as it is read, so the first of a batch of photos shows
   // without waiting for the rest.
+  // Remove all also stops the batches still being read, or their images would turn up on the
+  // wall that was just emptied. `emptied` counts the times, for a batch to see that it has been.
+  let emptied = 0;
+  function removeAll() {
+    emptied++;
+    items = [];
+  }
   async function addFiles(files) {
     let skipped = 0;
+    const began = emptied;
     for (const [n, file] of files.entries()) {
       try {
         const decoded = await decode(file), { width, height } = decoded.frames[0].original, name = file.name || 'image.png';
+        if (began !== emptied) return; // checked after each wait, before the next piece of work
         const reading = files.length > 1 ? `Reading ${n + 1} of ${files.length}…` : `Reading ${name}…`;
-        const item = await during(reading, width * height * decoded.frames.length, () => toItem(++nextId, name, decoded));
+        const item = await during(reading, width * height * decoded.frames.length, () => began === emptied && toItem(++nextId, name, decoded));
+        if (began !== emptied) return;
         items = [...items, item];
       } catch {
         skipped++;
@@ -284,15 +295,21 @@
   }
 
   // What gets saved: the two colors with a still image's mask, or with one mask per frame of an
-  // animation. These masks are of every pixel, unlike the ones a tile draws (see k in Tile.svelte).
-  const about = item => ({ name: item.name, w: item.img.w, h: item.img.h, first, second });
-  const still = item => ({ ...about(item), mask: mask(item.img, style, threshold) });
-  const bitified = item =>
-    item.frames ? { ...about(item), loop: item.loop, frames: item.frames.map(f => ({ mask: mask(f.img, style, threshold), delay: f.delay })) } : still(item);
+  // animation. These masks are of every pixel, always: never the smaller picture a tile draws.
+  // `asked` is the settings at the moment of asking (see `asking`). A long job starts a moment
+  // after it is asked for, and what it saves is what was on screen then, whatever is changed since.
+  const asking = () => ({ first, second, style, threshold });
+  const about = (item, asked) => ({ name: item.name, w: item.img.w, h: item.img.h, first: asked.first, second: asked.second });
+  const still = (item, asked) => ({ ...about(item, asked), mask: mask(item.img, asked.style, asked.threshold) });
+  const bitified = (item, asked) =>
+    item.frames
+      ? { ...about(item, asked), loop: item.loop, frames: item.frames.map(f => ({ mask: mask(f.img, asked.style, asked.threshold), delay: f.delay })) }
+      : still(item, asked);
 
   async function save(item) {
     try {
-      await during(`Saving ${item.name}…`, pixelsOf(item), () => saveOne(bitified(item)));
+      const asked = asking();
+      await during(`Saving ${item.name}…`, pixelsOf(item), () => saveOne(bitified(item, asked)));
     } catch {
       say(`${item.name} could not be saved.`);
     }
@@ -301,8 +318,9 @@
   // The clipboard takes a PNG but not a GIF, so an animation is copied as its first frame.
   async function copy(item) {
     try {
-      // the clipboard is asked at once, as Safari demands, and handed the image when it is ready
-      await copyOne(during(`Copying ${item.name}…`, item.img.w * item.img.h, () => still(item)));
+      const asked = asking();
+      // the clipboard is asked at once, as Safari demands, and handed the PNG when it has been made
+      await copyOne(during(`Copying ${item.name}…`, item.img.w * item.img.h, () => pngBlob(still(item, asked))));
       say(`${item.name} copied${item.frames ? ' as a still image' : ''}.`);
     } catch {
       say(`${item.name} could not be copied.`);
@@ -311,8 +329,9 @@
 
   async function saveEverything() {
     try {
-      const saving = items.length > 1 ? `Saving ${items.length} images…` : `Saving ${items[0].name}…`;
-      await during(saving, items.reduce((sum, item) => sum + pixelsOf(item), 0), () => saveAll(items, bitified));
+      const asked = asking(), all = items; // the images on the wall now, even if some are removed before the job starts
+      const saving = all.length > 1 ? `Saving ${all.length} images…` : `Saving ${all[0].name}…`;
+      await during(saving, all.reduce((sum, item) => sum + pixelsOf(item), 0), () => saveAll(all, item => bitified(item, asked)));
     } catch {
       say('The images could not be saved.');
     }
@@ -394,7 +413,7 @@
   <span class="count">{items.length} image{items.length === 1 ? '' : 's'}</span>
   <span class="grow"></span>
   {#if items.length}
-    <button class="btn sm" onclick={() => (items = [])} aria-label="Remove all" title="Remove all"><PixelIcon name="trash" /></button>
+    <button class="btn sm" onclick={removeAll} aria-label="Remove all" title="Remove all"><PixelIcon name="trash" /></button>
   {/if}
   <button class="btn" onclick={() => picker.click()}><PixelIcon name="plus" />Add<span class="wide">images</span></button>
   <!-- A mouse click gives up focus before the menu opens, or closing the menu would hand it back (see unfocus). -->
