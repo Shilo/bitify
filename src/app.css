@@ -107,8 +107,13 @@ button { font: inherit; color: inherit; }
 
 /* .empty scrolls when the screen is short; the auto margin centers its content when there is room */
 .empty { flex: 1; min-height: 0; overflow-y: auto; display: flex; padding: 24px 16px 132px; }
-.empty-in { margin: auto; display: grid; justify-items: center; gap: 14px; text-align: center; }
-.empty .tile { width: min(100%, 260px, 34vh); }
+.empty-in { margin: auto; display: grid; justify-items: center; gap: 26px; text-align: center; }
+.empty-text { display: grid; justify-items: center; gap: 14px; min-width: 0; }
+/* The example is as large as the screen allows, up to 320px. The amount subtracted from the
+   screen height is everything else on the empty screen: top bar, text, button and dock. */
+.empty .tile { --rest: 430px; max-width: 100%; width: clamp(96px, calc(100vh - var(--rest)), 320px); width: clamp(96px, calc(100dvh - var(--rest)), 320px); }
+.empty .cap { grid-column: 1 / -1; flex-direction: row; align-items: baseline; justify-content: center; gap: 8px; }
+.empty .dim { margin-left: 0; }
 .empty h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: clamp(26px, 5vw, 44px); line-height: 1.1; text-wrap: balance; }
 .empty p { margin: 0; color: var(--muted); max-width: 38ch; }
 
@@ -128,6 +133,15 @@ button { font: inherit; color: inherit; }
   .count, .bar .wide { display: none; }
   .bar { gap: 8px; }
   .bar .btn { padding: 0 10px; }
+  .empty .tile { --rest: 475px; } /* taller top bar and dock on phones */
+}
+/* Short, wide screens (a phone on its side): the example sits beside the text, not above it. */
+@media (max-height: 520px) and (orientation: landscape) {
+  .empty { padding: 8px 16px 96px; }
+  .empty-in { grid-template-columns: auto minmax(0, 300px); align-items: center; gap: 28px; }
+  .empty-text { justify-items: start; text-align: left; }
+  .empty .tile { --rest: 215px; }
+  .empty h2 { font-size: clamp(22px, 3.2vw, 32px); }
 }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }

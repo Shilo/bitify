@@ -138,6 +138,11 @@ hold or Space all apply to it. It is for previewing only. It has no Download or 
 not counted, and is never included in Download all. It disappears when the first image is
 added and returns when the wall is empty again.
 
+The example scales with the screen: as large as fits above the text and the dock without
+scrolling, between 96px and 320px. Its caption ("Example", then the pixel size) is centered
+on one line. On a short, wide screen, such as a phone on its side, the example sits beside
+the text instead of above it.
+
 The prototype's "Load examples" button and bundled sample sprites are prototype
 scaffolding and are not part of the app.
 

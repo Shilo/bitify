@@ -177,9 +177,11 @@
       {#if example}
         <Tile item={example} {first} {second} {style} {threshold} flipped={showOriginal !== spaceHeld} />
       {/if}
-      <h2>{touch ? 'Add pixel art' : 'Drop pixel art anywhere'}</h2>
-      <p>Each image is redrawn in your two colors. Add as many as you like.</p>
-      <button class="btn primary" onclick={() => picker.click()}>Choose images</button>
+      <div class="empty-text">
+        <h2>{touch ? 'Add pixel art' : 'Drop pixel art anywhere'}</h2>
+        <p>Each image is redrawn in your two colors. Add as many as you like.</p>
+        <button class="btn primary" onclick={() => picker.click()}>Choose images</button>
+      </div>
     </div>
   </div>
 {/if}
