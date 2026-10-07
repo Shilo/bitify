@@ -111,3 +111,78 @@ describe('colorize', () => {
     expect([...colorize(Uint8Array.of(0, 1, 2), '#ff0000', '#0000ff')]).toEqual([0, 0, 0, 0, 255, 0, 0, 255, 0, 0, 255, 255]);
   });
 });
+
+describe('lines', () => {
+  // A 7x7 body on a transparent canvas, with a 3x3 part in its middle.
+  const sprite = part => image([
+    '         ',
+    ' aaaaaaa ',
+    ' aaaaaaa ',
+    ' aabbbaa ',
+    ' aabbbaa ',
+    ' aabbbaa ',
+    ' aaaaaaa ',
+    ' aaaaaaa ',
+    '         ',
+  ], { a: grey(200), b: grey(part) });
+
+  it('outlines an inner part as well as the silhouette', () => {
+    expect(show(mask(sprite(60), 'lines', 50), 9)).toEqual([
+      '         ',
+      ' ####### ',
+      ' #.....# ',
+      ' #.###.# ',
+      ' #.#.#.# ',
+      ' #.###.# ',
+      ' #.....# ',
+      ' ####### ',
+      '         ',
+    ]);
+  });
+
+  it('ignores a shading step that is not stronger than the threshold', () => {
+    expect(show(mask(sprite(180), 'lines', 50), 9)).toEqual([
+      '         ',
+      ' ####### ',
+      ' #.....# ',
+      ' #.....# ',
+      ' #.....# ',
+      ' #.....# ',
+      ' #.....# ',
+      ' ####### ',
+      '         ',
+    ]);
+  });
+
+  it('draws a one-pixel boundary between two colors of equal brightness', () => {
+    const img = image(['rrgg'], { r: [255, 0, 0], g: grey(54) });
+    expect([...img.lum]).toEqual([54, 54, 54, 54]);
+    expect(show(mask(img, 'lines', 50), 4)).toEqual(['.#..']);
+  });
+
+  it('frames an image only when it has empty pixels', () => {
+    const flat = image(['aaa', 'aaa', 'aaa'], { a: grey(200) });
+    expect(show(mask(flat, 'lines', 50), 3)).toEqual(['...', '...', '...']);
+    const cut = image([' aa', 'aaa', 'aaa'], { a: grey(200) });
+    expect(show(mask(cut, 'lines', 50), 3)).toEqual([' ##', '#.#', '###']);
+  });
+
+  it('auto separates part boundaries from soft shading', () => {
+    const img = image(['abcd'], { a: grey(200), b: grey(180), c: grey(160), d: grey(10) });
+    expect(img.autoLine).toBeGreaterThanOrEqual(20);
+    expect(img.autoLine).toBeLessThan(150);
+    expect(show(mask(img, 'lines'), 4)).toEqual(['...#']);
+  });
+
+  it('survives an image with no solid pixels, and a large non-square one', () => {
+    const none = image(['  ', '  '], {});
+    expect(none.autoLine).toBe(0);
+    expect(show(mask(none, 'lines'), 2)).toEqual(['  ', '  ']);
+
+    const w = 300, h = 200, data = new Uint8ClampedArray(w * h * 4);
+    for (let i = 0; i < data.length; i++) data[i] = (i * 2654435761) >>> 24;
+    const m = mask(analyze({ width: w, height: h, data }), 'lines');
+    expect(m.length).toBe(w * h);
+    expect(m.every((v, p) => (v === 0) === (data[p * 4 + 3] < 128))).toBe(true);
+  });
+});

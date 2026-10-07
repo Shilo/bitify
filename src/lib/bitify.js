@@ -2,11 +2,15 @@
 
 const ALPHA_CUT = 128; // alpha below this is an empty pixel
 const BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
+const NEIGHBOURS = [[1, 0], [-1, 0], [0, 1], [0, -1]];
 
 export function hexToRgb(hex) {
   const n = parseInt(hex.slice(1), 16);
   return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
 }
+
+// Largest of the red, green and blue differences between the pixels at byte offsets i and j.
+const diff = (d, i, j) => Math.max(Math.abs(d[i] - d[j]), Math.abs(d[i + 1] - d[j + 1]), Math.abs(d[i + 2] - d[j + 2]));
 
 // Otsu's method: the value that best splits a 256-bin histogram into two groups.
 // Returns `fallback` when there is nothing to split.
@@ -27,23 +31,49 @@ export function otsu(hist, fallback) {
 }
 
 // Takes an ImageData-shaped object. Done once per image; `mask` reuses the result.
+// `auto` is the Auto threshold for the brightness styles, `autoLine` the one for Lines.
 export function analyze({ width: w, height: h, data }) {
-  const lum = new Uint8Array(w * h), hist = new Array(256).fill(0);
+  const lum = new Uint8Array(w * h), hist = new Array(256).fill(0), edges = new Array(256).fill(0);
+  const solid = p => data[p * 4 + 3] >= ALPHA_CUT;
   let hasAlpha = false;
   for (let p = 0, i = 0; p < w * h; p++, i += 4) {
-    if (data[i + 3] < ALPHA_CUT) { hasAlpha = true; continue; }
+    if (!solid(p)) { hasAlpha = true; continue; }
     lum[p] = Math.round(0.2126 * data[i] + 0.7152 * data[i + 1] + 0.0722 * data[i + 2]);
     hist[lum[p]]++;
+    if ((p % w) + 1 < w && solid(p + 1)) edges[diff(data, i, i + 4)]++;
+    if (p + w < w * h && solid(p + w)) edges[diff(data, i, i + w * 4)]++;
   }
-  return { w, h, data, lum, hasAlpha, auto: otsu(hist, 127) };
+  edges[0] = 0; // identical neighbours are not edges
+  return { w, h, data, lum, hasAlpha, auto: otsu(hist, 127), autoLine: otsu(edges, 0) };
 }
 
-// One byte per pixel: 0 empty, 1 first color (dark pixels), 2 second color (light pixels).
+// One byte per pixel: 0 empty, 1 first color (lines, dark pixels), 2 second color (fill, light pixels).
 // `threshold` null means Auto.
 export function mask(img, style, threshold = null) {
   const { w, h, lum, data } = img, m = new Uint8Array(w * h);
-  const t = threshold ?? img.auto;
+  const t = threshold ?? (style === 'lines' ? img.autoLine : img.auto);
   const solid = p => data[p * 4 + 3] >= ALPHA_CUT;
+
+  if (style === 'lines') {
+    // A pixel is a line when it touches empty space, or sits on the darker side of a color
+    // change stronger than t. That outlines every part of a sprite, not only its silhouette.
+    for (let y = 0, p = 0; y < h; y++) for (let x = 0; x < w; x++, p++) {
+      if (!solid(p)) continue;
+      m[p] = 2;
+      for (const [dx, dy] of NEIGHBOURS) {
+        const nx = x + dx, ny = y + dy, q = ny * w + nx;
+        if (nx < 0 || ny < 0 || nx >= w || ny >= h) {
+          // The canvas edge counts as empty only for sprites, so opaque scenes get no frame.
+          if (img.hasAlpha) m[p] = 1;
+        } else if (!solid(q)) {
+          m[p] = 1;
+        } else if (diff(data, p * 4, q * 4) > t && (lum[p] < lum[q] || (lum[p] === lum[q] && p < q))) {
+          m[p] = 1; // on a tie the earlier pixel takes the line, so a boundary is one pixel wide
+        }
+      }
+    }
+    return m;
+  }
 
   if (style === 'atkinson') {
     const v = Float32Array.from(lum, x => x + 128 - t);
