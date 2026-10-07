@@ -57,14 +57,14 @@
 
   const touch = matchMedia('(pointer:coarse)').matches;
   let panel = $state(null); // null, 'palettes' or 'advanced'
-  let pop = $state(null); // what is open above the advanced strip: null, 'styles' or 'help'
+  let pop = $state(null); // what is open above the advanced panel: null, 'styles' or 'help'
   let dock;
 
-  // The advanced strip does not cover the wall: while it is open the wall gives up that much
-  // room and refits above it (see --panel-space in app.css).
-  let stripHeight = $state(0);
+  // A panel does not cover the wall: while one is open the wall gives up that much room and
+  // refits above it (see --panel-space in app.css).
+  let panelHeight = $state(0);
   $effect(() => {
-    document.documentElement.style.setProperty('--panel-space', panel === 'advanced' ? `${stripHeight + 10}px` : '0px');
+    document.documentElement.style.setProperty('--panel-space', panel ? `${panelHeight + 10}px` : '0px');
   });
 
   const demo = key => new ImageData(colorize(mask(BALL, key), first, second), BALL.w, BALL.h);
@@ -94,6 +94,29 @@
     first = swapped ? p.light : p.dark;
     second = swapped ? p.dark : p.light;
   }
+  // The palettes scroll sideways. They open scrolled to the chosen one, and the panel is marked
+  // with the sides that have more to scroll to, which app.css shows as a fade with an arrow.
+  function scroller(row) {
+    const chips = row.querySelector('.chips');
+    const mark = () => {
+      row.parentNode.classList.toggle('more-left', row.scrollLeft > 1);
+      row.parentNode.classList.toggle('more-right', row.scrollLeft + row.clientWidth < row.scrollWidth - 1);
+    };
+    // The chips go in two rows when one row does not fit, so more of them show at once. app.css
+    // keeps them in one row on a screen too short to spare the height.
+    const fit = () => {
+      chips.classList.remove('two');
+      chips.classList.toggle('two', row.scrollWidth > row.clientWidth + 1);
+      mark();
+    };
+    fit();
+    const chip = row.querySelector('[aria-pressed="true"]');
+    if (chip) row.scrollLeft = chip.offsetLeft - (row.clientWidth - chip.offsetWidth) / 2;
+    row.addEventListener('scroll', mark, { passive: true });
+    // the window, not the row: once in two rows the row no longer changes size as the window widens
+    addEventListener('resize', fit);
+    return { destroy: () => removeEventListener('resize', fit) };
+  }
 </script>
 
 <svelte:window
@@ -110,25 +133,31 @@
 
 <div class="dock" bind:this={dock}>
   {#if panel === 'palettes'}
-    <div class="panel">
-      <p class="ptitle">Palettes</p>
-      <div class="presets">
-        {#each PRESETS as p}
-          <button
-            class="preset"
-            aria-pressed={chosen(p)}
-            onclick={() => choose(p)}
-          >
-            <span class="chip" style:background="linear-gradient(135deg, {p.dark} 50%, {p.light} 50%)"></span>{p.name}
-          </button>
-        {/each}
+    <div class="panel fit" bind:offsetHeight={panelHeight}>
+      <!-- The scrolling box fills the panel, so a swipe anywhere on the panel moves the palettes.
+           A mouse wheel moves them too, since there is no scrollbar to drag. -->
+      <div class="pals" use:scroller onwheel={e => (e.currentTarget.scrollLeft += e.deltaY)}>
+        <span class="pname"><span class="key">Palette</span> {PRESETS.find(chosen)?.name ?? 'Custom'}</span>
+        <div class="chips" role="group" aria-label="Palettes" style:--cols={Math.ceil(PRESETS.length / 2)}>
+          {#each PRESETS as p, i}
+            {#if i && i % 4 === 0}<span class="sep"></span>{/if}
+            <button
+              class="pal"
+              aria-pressed={chosen(p)}
+              aria-label={p.name}
+              title={p.name}
+              style:background="linear-gradient(135deg, {p.dark} 50%, {p.light} 50%)"
+              onclick={() => choose(p)}
+            ></button>
+          {/each}
+        </div>
       </div>
     </div>
   {:else if panel === 'advanced'}
-    <div class="panel strip" bind:offsetHeight={stripHeight}>
+    <div class="panel" bind:offsetHeight={panelHeight}>
       <div class="pick anchor">
         {#if pop === 'styles'}
-          <div class="menu presets styles" role="group" aria-label="Style">
+          <div class="menu" role="group" aria-label="Style">
             {#each STYLES as [key, name]}
               <button class="preset" aria-pressed={style === key} onclick={() => { style = key; pop = null; }}>
                 <Pixels class="demo" pixels={demo(key)} />{name}
@@ -136,8 +165,9 @@
             {/each}
           </div>
         {/if}
-        <button class="btn" aria-expanded={pop === 'styles'} aria-haspopup="true" onclick={() => (pop = pop === 'styles' ? null : 'styles')}>
-          <Pixels class="demo" pixels={demo(style)} /><span class="key">Style</span> {STYLES.find(s => s[0] === style)[1]}<PixelIcon name="caret" />
+        <span class="key" id="style-label">Style</span>
+        <button class="btn" aria-labelledby="style-label style-name" aria-expanded={pop === 'styles'} aria-haspopup="true" onclick={() => (pop = pop === 'styles' ? null : 'styles')}>
+          <Pixels class="demo" pixels={demo(style)} /><span id="style-name">{STYLES.find(s => s[0] === style)[1]}</span><PixelIcon name="caret" />
         </button>
       </div>
       <span class="sep"></span>

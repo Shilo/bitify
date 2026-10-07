@@ -25,8 +25,8 @@ not favor any colors. Every palette works with every style, either way round.
 
 ## The twelve palettes
 
-The panel shows them four to a row, in this order: a row of classics, a row of handheld
-screens, a row of monitors.
+The panel shows them in one row, in groups of four with a divider between groups, in this
+order: classics, handheld screens, monitors.
 
 Contrast is the WCAG contrast ratio between the two colors, from 1 (identical) to 21 (black
 on white). Higher means the two colors are easier to tell apart.
@@ -106,6 +106,11 @@ the eye.
   way round. Swap never deselects it. Changing either color with a swatch does.
 - The chip in the panel always shows the dark color on the left, whichever way round the
   colors are in use.
+- The panel is one row of chips above the dock, and the images move up to make room for
+  it, so none is covered while you choose. When the chips do not fit in one row they go in
+  two, and any that still do not fit scroll sideways, with an arrow on a faded edge showing
+  which way there are more. The name of the chosen palette is shown beside the chips, or
+  "Custom" when the two colors match no palette.
 - Palettes are a starting point. Either color can be changed to anything with the swatches.
 - The Palettes panel stays open while you pick, so you can try several in a row. It closes
   on Escape, on a second press of its button, or on a press outside the dock.
@@ -129,10 +134,11 @@ light color, as lowercase `#rrggbb`:
   the panel harder to choose from, not richer.
 - Use lowercase six-digit hex. The browser's color picker reports colors that way, and a
   palette is matched against the current colors by exact text.
-- Keep the list at a multiple of four. The panel lays palettes out four to a row, and a
-  thirteenth would sit alone on a fourth row.
-- Keep names short. Each sits under a 36px chip in a narrow column. "Commodore" is about
-  as long as fits.
+- Keep the list at a multiple of four. The panel shows palettes in groups of four, each
+  group a kind, and a thirteenth would sit alone in a group of its own. The chips scroll, so
+  more groups never make the panel taller than two rows.
+- Keep names short. The chosen name is shown beside the chips in a space sized for
+  "Commodore"; a longer name would push the chips along as palettes are tried.
 - Keep contrast at 6 or higher. Game Boy is the lowest at 6.0; below that the two colors
   are hard to tell apart in the result.
 - To change the default, also change the starting values of `first` and `second` in

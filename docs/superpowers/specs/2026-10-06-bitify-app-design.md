@@ -73,9 +73,9 @@ The tiles always use the space between the top bar and the dock, and are centere
   size a single tile can reach becomes the limit instead (never under 96px). A wall that
   fits is not made to scroll, and when it does scroll a whole row still fits the height.
   Short, wide screens also leave less room for the dock, since it is a single row there.
-- While the advanced strip is open, the space the tiles use ends above the strip and not
-  above the dock, and the tiles are resized to fit it, so no image is hidden while its style
-  or threshold is changed. Closing the strip gives the space back. The example on the empty
+- While a panel is open, the space the tiles use ends above the panel and not above the
+  dock, and the tiles are resized to fit it, so no image is hidden while its palette, style
+  or threshold is changed. Closing the panel gives the space back. The example on the empty
   screen shrinks the same way.
 - On touch screens a long file name is cut off with an ellipsis before the Download and
   Remove buttons. Tiles narrower than 150px still show the pixel size under the name, set
@@ -108,12 +108,28 @@ The rule lives in `src/lib/layout.js` (`fitGrid`) and is unit tested.
 
 Panels open directly above the dock. Only one is open at a time. A panel closes on Escape,
 on a second press of its button, or on a press outside the dock. Presses on other dock
-controls leave it open, so colors can be changed while a panel is showing. The palettes
-panel floats over the wall. The advanced panel does not: the wall makes room for it.
+controls leave it open, so colors can be changed while a panel is showing. A panel never
+covers the wall: it is a strip one row high, and the wall makes room for it.
 
-**Palettes panel.** Twelve presets in a 4×3 grid, each a diagonally split chip with a
-name. The rows are classics, handheld screens, then monitors. Where each pair comes from
-is in [docs/palettes.md](../../palettes.md).
+**Palettes panel.** Left to right: the word "Palette" with the name of the chosen
+palette ("Custom" when the two colors match none), a divider, then every preset as a
+diagonally split chip in a single row. There are twelve, in groups of four with a divider
+between groups: classics, handheld screens, then monitors. The chosen chip has a ring, and
+each chip's name is its tooltip. Where each pair comes from is in
+[docs/palettes.md](../../palettes.md).
+
+The panel is as wide as its chips when the screen has room for them in one row. When it
+does not, the chips go in two rows, half the palettes in each, in the same order and
+without the dividers. The panel is then taller, and the wall makes room for it as for any
+panel. A screen too short to spare the height, such as a phone on its side, keeps one row.
+
+Chips that still do not fit scroll sideways, by touch, by keyboard focus or with a mouse
+wheel. That is what lets the list grow: the panel is never more than two rows of chips
+high however many palettes there are. The whole panel is the area that scrolls them, so a
+swipe that starts on the name or on the panel's edge works as well as one on the chips.
+The name stays in place while the chips move. There is no scrollbar. Instead, a side that
+has more palettes to scroll to fades out under an arrow, and the fade and arrow go when
+that end is reached. The panel opens scrolled to the chosen chip.
 
 A palette is two colors, a dark one and a light one, and nothing else. Palette, Swap and
 style are independent: the palette decides which two colors, Swap decides which of them is
@@ -145,8 +161,9 @@ or a way round, and no style favors any colors.
 **Advanced panel.** A strip one row high, so that the wall can sit above it. Left to
 right:
 
-- Style button: a live preview of the current style (a small shaded ball with a stripe,
-  drawn with the current two colors), the word "Style" and the style's name. Pressing it
+- The word "Style", set like "Palette" in the palettes panel, then the style button: a
+  live preview of the current style (a small shaded ball with a stripe, drawn with the
+  current two colors) and the style's name. Pressing it
   opens the list of the six styles above the strip, each with the same live preview and its
   name, in one row of six. Choosing a style closes the list. So does a press outside it, or
   Escape, which then leaves the strip open.
@@ -172,7 +189,7 @@ and another separates the threshold from Help. They match the dock's dividers.
 |---|---|
 | Above 800px | Icon and text labels, dividers between groups. |
 | 521 to 800px | Icon-only buttons, one row. |
-| 520px and below | Dock spans the screen width with 12px margins. Tools on the first row, the Original / Bitified switch on its own full-width second row. Panels become full-width sheets above it. The advanced strip takes two rows, without dividers: the style button and Help, then the threshold. Its list of styles is a 3×2 grid as wide as the strip. The image count and the word "images" in the Add button are hidden. |
+| 520px and below | Dock spans the screen width with 12px margins. Tools on the first row, the Original / Bitified switch on its own full-width second row. Panels become full-width sheets above it. The palettes panel puts the name on a row of its own above the chips. The advanced strip takes two rows, without dividers: the style button and Help, then the threshold. Its list of styles is a 3×2 grid as wide as the strip. The image count and the word "images" in the Add button are hidden. |
 
 On coarse pointers every dock control is 40 to 44px square. The app uses
 `viewport-fit=cover`, pads for the safe-area insets, and sizes itself with dynamic

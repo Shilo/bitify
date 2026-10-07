@@ -12,7 +12,7 @@
   --shadow: rgba(27, 28, 36, 0.16);
   --hit: 36px; /* height of dock controls; grows on touch screens */
   --dock-base: 132px; /* room left at the bottom of the screen for the dock */
-  --panel-space: 0px; /* extra room for the open advanced strip; Dock.svelte sets it */
+  --panel-space: 0px; /* extra room for the open panel; Dock.svelte sets it */
   --dock-space: calc(var(--dock-base) + var(--panel-space));
   --display: "Pixelify Sans", ui-monospace, "Courier New", monospace;
   --body: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -130,7 +130,7 @@ button { font: inherit; color: inherit; }
 .empty-in { margin: auto; display: grid; justify-items: center; gap: 26px; text-align: center; }
 .empty-text { display: grid; justify-items: center; gap: 14px; min-width: 0; }
 /* The example is as large as the screen allows, up to 320px. The amount subtracted from the
-   screen height is everything else on the empty screen: top bar, text, button, dock and open strip. */
+   screen height is everything else on the empty screen: top bar, text, button, dock and open panel. */
 .empty .tile { --rest: 430px; max-width: 100%; width: clamp(96px, calc(100vh - var(--rest) - var(--panel-space)), 320px); width: clamp(96px, calc(100dvh - var(--rest) - var(--panel-space)), 320px); }
 .empty .cap { grid-column: 1 / -1; flex-direction: row; align-items: baseline; justify-content: center; gap: 8px; }
 .empty .dim { margin-left: 0; }
@@ -177,7 +177,7 @@ button { font: inherit; color: inherit; }
 }
 .sep { width: 1px; height: 24px; background: var(--line); }
 .btn[aria-expanded="true"] { background: var(--tile); border-color: var(--fg); }
-.btn.sm { font-size: 13px; padding: 0; } /* the square buttons: the advanced strip and Remove all */
+.btn.sm { font-size: 13px; padding: 0; } /* the square buttons: Help in the advanced panel, and Remove all */
 .pair { display: flex; align-items: center; gap: 4px; }
 .pair .ib { width: var(--hit); height: var(--hit); border-color: transparent; background: transparent; }
 .sw {
@@ -190,22 +190,60 @@ button { font: inherit; color: inherit; }
 .seg button { padding: 0 12px; border: 0; border-radius: 8px; background: transparent; color: var(--muted); font-size: 13px; font-weight: 600; cursor: pointer; }
 .seg button[aria-pressed="true"] { background: var(--surface); color: var(--fg); box-shadow: 0 1px 2px var(--shadow); }
 
-/* panels that open above the dock */
+/* Panels open above the dock as a strip: one row of controls. A panel is kept short because the
+   wall is resized to sit above it (--panel-space), so the images stay in view while they change. */
 .panel {
   position: absolute; bottom: calc(100% + 10px); left: 50%; transform: translateX(-50%);
-  width: min(340px, calc(100vw - 32px)); max-height: calc(100vh - 230px); overflow-y: auto;
-  display: flex; flex-direction: column; gap: 12px; padding: 14px;
+  width: min(560px, calc(100vw - 64px));
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 10px 12px;
   background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 10px 32px var(--shadow);
 }
-.ptitle { margin: 0; font-size: 13px; font-weight: 600; }
-.presets { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.key { color: var(--muted); font-weight: 400; }
+
+/* The palettes panel: the chosen palette's name, then every palette as a chip in one row that
+   scrolls sideways. The panel is as wide as its chips when there is room, and stays one row
+   high however many palettes there are. */
+.panel.fit { width: max-content; max-width: calc(100vw - 40px); padding: 0; overflow: hidden; }
+/* the scrolling box fills the panel, so a swipe anywhere on the panel moves the chips */
+.pals { flex: 0 1 auto; min-width: 0; position: relative; display: flex; overflow-x: auto; overscroll-behavior: contain; scrollbar-width: none; }
+.pals::-webkit-scrollbar { display: none; }
+/* The name stays put while the chips scroll under it. It is wide enough for the longest name,
+   so the chips do not move as palettes are tried. */
+.pname {
+  position: sticky; left: 0; z-index: 3; flex: none; display: flex; align-items: center; gap: 0.3em;
+  min-width: 126px; padding: 0 9px 0 12px; background: var(--surface); font-weight: 600; white-space: nowrap;
+}
+.pname::after { content: ""; position: absolute; right: 0; top: calc(50% - 12px); width: 1px; height: 24px; background: var(--line); } /* a divider, as in the dock */
+.chips { flex: none; display: flex; align-items: center; gap: 8px; padding: 10px 12px 10px 8px; }
+.chips .sep { flex: none; } /* between the groups of four */
+/* Two rows of chips, when Dock.svelte finds that one row does not fit: half the palettes in each,
+   without the dividers. A screen too short to spare the height (a phone on its side) keeps one row. */
+@media not all and (max-height: 520px) and (orientation: landscape) {
+  .chips.two { display: grid; grid-template-columns: repeat(var(--cols), var(--hit)); }
+  .chips.two .sep { display: none; }
+}
+/* A side with more palettes to scroll to fades out under an arrow. Dock.svelte sets more-left and
+   more-right. Each fade is solid for well over the width of its arrow, so a chip has dissolved
+   before it reaches the arrow, and each starts past the edge it sits on, so no sliver shows there. */
+.fit::before, .fit::after {
+  content: "\2039"; position: absolute; top: 0; bottom: 0; z-index: 2; box-sizing: border-box; width: 64px; padding: 0 7px 2px;
+  display: flex; align-items: center; font-size: 22px; font-weight: 600; pointer-events: none; opacity: 0; transition: opacity 0.15s;
+}
+/* the left fade starts 8px under the name, which is 147px wide */
+.fit::before { left: 139px; padding-left: 14px; background: linear-gradient(to right, var(--surface) 45%, transparent); }
+.fit::after { content: "\203A"; right: -1px; justify-content: flex-end; background: linear-gradient(to left, var(--surface) 40%, transparent); }
+.fit.more-left::before, .fit.more-right::after { opacity: 1; }
+.pal { flex: none; box-sizing: border-box; width: var(--hit); height: var(--hit); padding: 0; border: 1px solid var(--line); border-radius: 9px; cursor: pointer; }
+.pal[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--fg); }
+.pal:focus-visible { outline-offset: 5px; }
+
+/* a style in the list of styles: a preview with its name underneath */
 .preset {
   display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px 2px;
   border: 1px solid transparent; border-radius: 10px; background: transparent;
   color: var(--muted); font-size: 12px; cursor: pointer;
 }
 .preset[aria-pressed="true"] { border-color: var(--fg); color: var(--fg); }
-.chip { width: 36px; height: 36px; border: 1px solid var(--line); border-radius: 9px; }
 .demo {
   width: 42px; height: 42px; border-radius: 6px; image-rendering: pixelated;
   background: conic-gradient(var(--tile2) 25%, var(--tile) 0 50%, var(--tile2) 0 75%, var(--tile) 0) 0 0 / 12px 12px;
@@ -230,21 +268,19 @@ button { font: inherit; color: inherit; }
 .tnum::-webkit-inner-spin-button, .tnum::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 #threshold { flex: 1; min-width: 0; height: var(--hit); margin: 0; accent-color: var(--fg); }
 
-/* The advanced panel is a strip: one row of controls. It is kept short because the wall is
-   resized to sit above it (--panel-space), so the images stay in view while they are tuned. */
-.strip { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 8px; padding: 10px 12px; width: min(560px, calc(100vw - 64px)); max-height: none; overflow: visible; }
+/* the advanced panel */
+.pick { display: flex; align-items: center; gap: 8px; } /* the word "Style", then the button that shows the style */
 .pick .btn { padding: 0 14px 0 8px; }
 .pick .btn .demo { width: 28px; height: 28px; background-size: 8px 8px; }
-.key { color: var(--muted); font-weight: 400; }
 .thr { flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; }
-/* the list of styles, opened by the style button; it sits above the strip, lined up with its left edge */
+/* the list of styles, opened by the style button; it sits above the panel, lined up with its left edge */
 .menu {
   position: absolute; bottom: calc(100% + 10px); left: 0; box-sizing: border-box; max-width: 100%; padding: 8px;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  display: grid; gap: 6px; grid-template-columns: repeat(6, minmax(0, 1fr));
   background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 10px 32px var(--shadow);
 }
 .menu .preset { padding: 8px 6px; }
-/* Help opens as a tooltip above the strip, with its arrow over the Help button */
+/* Help opens as a tooltip above the panel, with its arrow over the Help button */
 .tip {
   position: absolute; bottom: calc(100% + 12px); right: 0; box-sizing: border-box; width: max-content; max-width: 100%;
   display: grid; gap: 4px; padding: 10px 14px; border-radius: 10px; background: var(--fg); color: var(--bg); box-shadow: 0 10px 32px var(--shadow);
@@ -267,10 +303,17 @@ button { font: inherit; color: inherit; }
   .dock { left: 12px; right: 12px; bottom: 12px; transform: none; width: auto; max-width: none; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 10px; }
   .seg { order: 5; flex: 1 0 100%; box-sizing: border-box; }
   .seg button { flex: 1; }
-  .panel { left: 0; right: 0; width: auto; transform: none; }
+  .panel, .panel.fit { left: 0; right: 0; width: auto; max-width: none; transform: none; }
+  /* palettes: the name on the first row, the chips below; the fades cover the chips only */
+  .pals { flex: 1; flex-wrap: wrap; }
+  .pname { flex-basis: 100%; box-sizing: border-box; padding: 10px 12px 0; }
+  .pname::after { display: none; }
+  .chips { padding: 8px 12px 10px; }
+  .fit::before, .fit::after { top: 30px; }
+  .fit::before { left: -1px; padding-left: 7px; background: linear-gradient(to right, var(--surface) 40%, transparent); }
   /* the style button and Help on the first row, the threshold on its own row below */
   .pick { flex: 1; }
   .thr { flex-basis: 100%; order: 1; }
-  .strip .sep { display: none; } /* dividers only make sense while the strip is a single row */
+  .panel > .sep { display: none; } /* dividers only make sense while the panel is a single row */
   .menu { right: 0; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
