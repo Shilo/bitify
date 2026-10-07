@@ -46,6 +46,6 @@
   {/if}
   <figcaption class="cap">
     <span class="name" title={item.name}>{item.name}</span>
-    <span class="dim">{item.img.w} × {item.img.h}</span>
+    <span class="dim">{item.img.w}<span class="by">×</span>{item.img.h}</span>
   </figcaption>
 </figure>

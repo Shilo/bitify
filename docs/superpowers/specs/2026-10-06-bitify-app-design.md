@@ -74,8 +74,9 @@ The tiles always use the space between the top bar and the dock, and are centere
   fits is not made to scroll, and when it does scroll a whole row still fits the height.
   Short, wide screens also leave less room for the dock, since it is a single row there.
 - On touch screens a long file name is cut off with an ellipsis before the Download and
-  Remove buttons, and tiles narrower than 150px drop the pixel-size text to leave the name
-  room.
+  Remove buttons. Tiles narrower than 150px still show the pixel size under the name, set
+  slightly smaller and tighter, with the two buttons 36px wide instead of 40px so sizes up to
+  seven characters (such as 128×128) fit whole.
 
 The rule lives in `src/lib/layout.js` (`fitGrid`) and is unit tested.
 
