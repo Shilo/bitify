@@ -355,7 +355,7 @@ button { font: inherit; color: inherit; }
 }
 .row { display: flex; align-items: center; gap: 8px; min-width: 0; }
 .row .key { flex: none; width: 80px; font-size: 13px; }
-.panel .seg { flex: 1; min-width: 0; }
+.panel .seg { flex: 1; min-width: 0; box-sizing: border-box; } /* as high as the sliders and boxes beside it */
 .panel .seg button { flex: 1; min-width: 0; padding: 0 4px; }
 .foot { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 8px; color: var(--muted); font-size: 12px; }
 .foot .btn { height: 28px; min-width: 0; padding: 0 10px; font-size: 12px; }
@@ -397,8 +397,8 @@ button { font: inherit; color: inherit; }
   :root { --dock-base: 172px; }
   /* a grid, so the dock is only as wide as its four tools and they are not spread out to fill the screen */
   .dock { bottom: 12px; max-width: calc(100% - 46px); display: grid; grid-template-columns: repeat(4, auto); gap: 8px; padding: 10px; }
-  .seg { order: 5; grid-column: 1 / -1; box-sizing: border-box; }
-  .seg button { flex: 1; }
+  .dock > .seg { order: 5; grid-column: 1 / -1; box-sizing: border-box; }
+  .dock > .seg button { flex: 1; }
   .panel { left: 0; right: 0; width: auto; transform: none; }
   /* The palettes panel stays as wide as its chips, centered, and no wider than the screen less
      the dock's margins. The name goes on a row of its own above the chips; the fades cover the chips only. */
