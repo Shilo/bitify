@@ -189,7 +189,7 @@ and another separates the threshold from Help. They match the dock's dividers.
 |---|---|
 | Above 800px | Icon and text labels, dividers between groups. |
 | 521 to 800px | Icon-only buttons, one row. |
-| 520px and below | Dock spans the screen width with 12px margins. Tools on the first row, the Original / Bitified switch on its own full-width second row. The advanced panel becomes a full-width sheet above it. The palettes panel stays as wide as its chips, centered and never wider than the dock, with the name on a row of its own above the chips. The advanced strip takes two rows, without dividers: the style button and Help, then the threshold. Its list of styles is a 3×2 grid as wide as the strip. The image count and the word "images" in the Add button are hidden. |
+| 520px and below | Tools on the first row, the Original / Bitified switch on a second row as wide as the tools. The dock is only as wide as its tools, centered, and is never stretched to fill the screen; it keeps at least 12px from each edge. The advanced panel is as wide as the dock. The palettes panel stays as wide as its chips, centered and never wider than the screen less those margins, with the name on a row of its own above the chips. The advanced strip takes two rows, without dividers: the style button and Help, then the threshold. Its list of styles is a 3×2 grid as wide as the strip. The image count and the word "images" in the Add button are hidden. |
 
 On coarse pointers every dock control is 40 to 44px square. The app uses
 `viewport-fit=cover`, pads for the safe-area insets, and sizes itself with dynamic

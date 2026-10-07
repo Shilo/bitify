@@ -297,16 +297,17 @@ button { font: inherit; color: inherit; }
   .dock .lbl, .dock > .sep { display: none; }
   .dock > .btn { padding: 0; }
 }
-/* phones: the dock spans the screen and the view switch gets its own row */
+/* phones: the view switch gets a row of its own under the tools, as wide as they are */
 @media (max-width: 520px) {
   :root { --dock-base: 172px; }
-  .dock { left: 12px; right: 12px; bottom: 12px; transform: none; width: auto; max-width: none; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 10px; }
-  .seg { order: 5; flex: 1 0 100%; box-sizing: border-box; }
+  /* a grid, so the dock is only as wide as its four tools and they are not spread out to fill the screen */
+  .dock { bottom: 12px; max-width: calc(100% - 46px); display: grid; grid-template-columns: repeat(4, auto); gap: 8px; padding: 10px; }
+  .seg { order: 5; grid-column: 1 / -1; box-sizing: border-box; }
   .seg button { flex: 1; }
   .panel { left: 0; right: 0; width: auto; transform: none; }
-  /* The palettes panel stays as wide as its chips, centered, and no wider than the dock. The
-     name goes on a row of its own above the chips; the fades cover the chips only. */
-  .panel.fit { left: 50%; right: auto; max-width: calc(100% - 2px); transform: translateX(-50%); }
+  /* The palettes panel stays as wide as its chips, centered, and no wider than the screen less
+     the dock's margins. The name goes on a row of its own above the chips; the fades cover the chips only. */
+  .panel.fit { left: 50%; right: auto; max-width: calc(100vw - 26px); transform: translateX(-50%); }
   .pals { display: grid; grid-template-columns: max-content; }
   .pname { justify-self: start; padding: 10px 12px 0; }
   .pname::after { display: none; }
