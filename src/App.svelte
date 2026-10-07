@@ -4,6 +4,7 @@
   import Dock from './Dock.svelte';
   import Tile from './Tile.svelte';
   import PixelIcon from './PixelIcon.svelte';
+  import logoUrl from './assets/logo.png';
 
   const touch = matchMedia('(pointer:coarse)').matches;
 
@@ -15,6 +16,8 @@
   let spaceHeld = $state(false);
   // raw: items hold large typed arrays, and the list is only ever replaced, never mutated
   let items = $state.raw([]);
+  // The logo, shown on the empty screen as a live preview of the settings. Never saved or counted.
+  let example = $state.raw(null);
   let dragDepth = $state(0);
   let message = $state('');
   let picker;
@@ -44,6 +47,12 @@
     bitmap.close();
     return ctx.getImageData(0, 0, canvas.width, canvas.height);
   }
+
+  fetch(logoUrl)
+    .then(response => response.blob())
+    .then(decode)
+    .then(original => (example = { id: 0, name: 'Example', original, img: analyze(original) }))
+    .catch(() => {}); // without it the empty screen simply has no preview
 
   async function addFiles(files) {
     const added = [];
@@ -161,9 +170,14 @@
   </div>
 {:else}
   <div class="empty">
-    <h2>{touch ? 'Add pixel art' : 'Drop pixel art anywhere'}</h2>
-    <p>Each image is redrawn in your two colors. Add as many as you like.</p>
-    <button class="btn primary" onclick={() => picker.click()}>Choose images</button>
+    <div class="empty-in">
+      {#if example}
+        <Tile item={example} {first} {second} {style} {threshold} flipped={showOriginal !== spaceHeld} />
+      {/if}
+      <h2>{touch ? 'Add pixel art' : 'Drop pixel art anywhere'}</h2>
+      <p>Each image is redrawn in your two colors. Add as many as you like.</p>
+      <button class="btn primary" onclick={() => picker.click()}>Choose images</button>
+    </div>
   </div>
 {/if}
 

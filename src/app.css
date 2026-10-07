@@ -102,7 +102,10 @@ button { font: inherit; color: inherit; }
   .dim { margin-left: 0; }
 }
 
-.empty { flex: 1; display: grid; place-content: center; justify-items: center; gap: 14px; padding: 24px 16px 132px; text-align: center; }
+/* .empty scrolls when the screen is short; the auto margin centers its content when there is room */
+.empty { flex: 1; min-height: 0; overflow-y: auto; display: flex; padding: 24px 16px 132px; }
+.empty-in { margin: auto; display: grid; justify-items: center; gap: 14px; text-align: center; }
+.empty .tile { width: min(100%, 260px, 34vh); }
 .empty h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: clamp(26px, 5vw, 44px); line-height: 1.1; text-wrap: balance; }
 .empty p { margin: 0; color: var(--muted); max-width: 38ch; }
 

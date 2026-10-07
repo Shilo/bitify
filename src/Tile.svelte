@@ -4,6 +4,7 @@
   import PixelIcon from './PixelIcon.svelte';
 
   // `flipped` true means the wall is showing originals. Holding the tile shows the other version.
+  // Without `onremove` the tile is a preview only and has no Download or Remove buttons.
   let { item, first, second, style, threshold, flipped, onsave, onremove } = $props();
   let held = $state(false);
   let holdTimer;
@@ -37,10 +38,12 @@
   >
     <Pixels {pixels} />
   </div>
-  <div class="acts">
-    <button class="ib" onclick={onsave} aria-label="Download {item.name}" title="Download"><PixelIcon name="save" /></button>
-    <button class="ib" onclick={onremove} aria-label="Remove {item.name}" title="Remove"><PixelIcon name="x" /></button>
-  </div>
+  {#if onremove}
+    <div class="acts">
+      <button class="ib" onclick={onsave} aria-label="Download {item.name}" title="Download"><PixelIcon name="save" /></button>
+      <button class="ib" onclick={onremove} aria-label="Remove {item.name}" title="Remove"><PixelIcon name="x" /></button>
+    </div>
+  {/if}
   <figcaption class="cap">
     <span class="name" title={item.name}>{item.name}</span>
     <span class="dim">{item.img.w} × {item.img.h}</span>
