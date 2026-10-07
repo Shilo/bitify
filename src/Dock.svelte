@@ -21,9 +21,8 @@
     onsaveall,
   } = $props();
 
-  const touch = matchMedia('(pointer:coarse)').matches;
   let panel = $state(null); // null, 'palettes' or 'style'
-  let pop = $state(null); // what is open above the style panel: null, 'styles' or 'help'
+  let pop = $state(null); // what is open above the style panel: null or 'styles'
   let dock;
   let eaten = false; // the last press closed something, so its click is dropped too
   // A finger moves a slider through its touch, which stopping the press does not stop.
@@ -89,8 +88,8 @@
   }
 </script>
 
-<!-- A press outside what is open closes it and does nothing else: only the list of styles or
-     the help if one is open, and the panel otherwise. These listen on the way down, so the
+<!-- A press outside what is open closes it and does nothing else: only the list of styles
+     if it is open, and the panel otherwise. These listen on the way down, so the
      press and the click that follows it never reach what was pressed. -->
 <svelte:window
   onpointerdowncapture={e => {
@@ -178,41 +177,6 @@
           />
           <button aria-pressed={threshold === null} title="Auto threshold" onclick={() => (threshold = null)}>Auto</button>
         </div>
-      </div>
-      <span class="sep"></span>
-      <div class="anchor">
-        {#if pop === 'help'}
-          <div class="tip" id="help" role="tooltip">
-            <p>
-              {#if style === 'silhouette'}
-                Silhouette ignores the threshold.
-              {:else if threshold === null}
-                Auto picks the best value for each image.
-              {:else if style === 'lines'}
-                Color changes stronger than <b>{threshold}</b> become lines.
-              {:else if style === 'cutout'}
-                Parts brighter than <b>{threshold}</b> are filled.
-              {:else}
-                Pixels brighter than <b>{threshold}</b> turn light.
-              {/if}
-            </p>
-            <p>
-              {#if touch}
-                <b>Hold</b> an image to see its other version.
-              {:else}
-                <b>Hold</b> an image, or hold <kbd>Space</kbd>, to see the other version.
-              {/if}
-            </p>
-            {#if touch}
-              <p><b>Swipe up or down</b> to change the style.</p>
-              <p><b>Swipe left or right</b> to change the palette.</p>
-            {:else}
-              <p><b>Scroll</b>, or press <kbd>↑</kbd> <kbd>↓</kbd>, to change the style.</p>
-              <p><b>Hold <kbd>Shift</kbd> and scroll</b>, or press <kbd>←</kbd> <kbd>→</kbd>, to change the palette.</p>
-            {/if}
-          </div>
-        {/if}
-        <button class="btn sm" aria-expanded={pop === 'help'} aria-describedby="help" aria-label="Help" title="Help" onclick={() => (pop = pop === 'help' ? null : 'help')}>?</button>
       </div>
     </div>
   {/if}

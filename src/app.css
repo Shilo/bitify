@@ -60,9 +60,6 @@ button { font: inherit; color: inherit; }
 
 /* top bar and shared controls */
 .bar { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; padding: 14px 16px; }
-/* same outline, radius and text color as the buttons beside it */
-.bar .gh { width: var(--hit); height: var(--hit); box-sizing: border-box; border-radius: 10px; background: transparent; color: inherit; }
-.gh svg { fill: currentColor; }
 .mark { font-family: var(--display); font-size: 28px; font-weight: 600; line-height: 1; }
 .count { color: var(--muted); font-size: 13px; white-space: nowrap; }
 .ico { fill: currentColor; shape-rendering: crispEdges; flex: none; }
@@ -162,6 +159,21 @@ button { font: inherit; color: inherit; }
 .sheet[open] { display: grid; gap: 8px; }
 .sheet::backdrop { background: rgba(0, 0, 0, 0.45); }
 .sheet .name { margin: 0 2px 4px; font-size: 13px; text-align: center; }
+/* the More menu: Help and GitHub, dropped down from the More button at the right end of the top bar */
+.more {
+  inset: calc(env(safe-area-inset-top, 0px) + var(--hit) + 20px) calc(env(safe-area-inset-right, 0px) + 16px) auto auto;
+  box-sizing: border-box; max-width: calc(100% - 32px); margin: 0; padding: 6px;
+  border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--fg); box-shadow: 0 10px 32px var(--shadow);
+}
+.more[open] { display: grid; gap: 2px; }
+.more::backdrop { background: transparent; }
+.more .btn { box-sizing: border-box; justify-content: flex-start; border-color: transparent; text-decoration: none; color: inherit; }
+/* Help opens in the menu's place, as a dark note */
+.tip { width: max-content; padding: 10px 14px; border: 0; border-radius: 10px; background: var(--fg); color: var(--bg); }
+.tip[open] { gap: 4px; }
+.tip p { margin: 0; }
+.tip p:first-child { margin-bottom: 8px; } /* sets the threshold line apart from the gestures */
+.tip kbd { padding: 0 5px; border: 1px solid; border-radius: 5px; font: inherit; font-size: 12px; font-weight: 600; }
 
 @media (max-width: 520px) {
   .count, .bar .wide { display: none; }
@@ -191,7 +203,7 @@ button { font: inherit; color: inherit; }
 }
 .sep { width: 1px; height: 24px; background: var(--line); }
 .btn[aria-expanded="true"] { background: var(--tile); border-color: var(--fg); }
-.btn.sm { font-size: 13px; padding: 0; } /* the square buttons: Help in the style panel, and Remove all */
+.btn.sm { font-size: 13px; padding: 0; } /* the square buttons in the top bar: Remove all and More */
 .pair { display: flex; align-items: center; gap: 4px; }
 .pair .ib { width: var(--hit); height: var(--hit); border-color: transparent; background: transparent; }
 .sw {
@@ -297,18 +309,6 @@ button { font: inherit; color: inherit; }
   background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 10px 32px var(--shadow);
 }
 .menu .preset { padding: 8px 6px; }
-/* Help opens as a tooltip above the panel, with its arrow over the Help button */
-.tip {
-  position: absolute; bottom: calc(100% + 12px); right: 0; box-sizing: border-box; width: max-content; max-width: 100%;
-  display: grid; gap: 4px; padding: 10px 14px; border-radius: 10px; background: var(--fg); color: var(--bg); box-shadow: 0 10px 32px var(--shadow);
-}
-.tip p { margin: 0; }
-.tip p:first-child { margin-bottom: 8px; } /* sets the threshold line apart from the gestures */
-.tip kbd { padding: 0 5px; border: 1px solid; border-radius: 5px; font: inherit; font-size: 12px; font-weight: 600; }
-.tip::after {
-  content: ""; position: absolute; top: 100%; right: calc(12px + var(--hit) / 2 - 6px);
-  border: 6px solid transparent; border-bottom: 0; border-top-color: var(--fg);
-}
 
 /* narrower screens: icon-only dock buttons */
 @media (max-width: 800px) {
@@ -332,8 +332,10 @@ button { font: inherit; color: inherit; }
   .chips { padding: 8px 12px 10px; }
   .fit::before, .fit::after { top: 30px; }
   .fit::before { left: -1px; padding-left: 7px; background: linear-gradient(to right, var(--surface) 40%, transparent); }
-  /* the style button and Help on the first row, the threshold on its own row below */
+  /* the style button fills the first row, with its caret at the right end; the threshold has its own row below */
   .pick { flex: 1; }
+  .pick .btn { flex: 1; justify-content: flex-start; }
+  .pick .ico { margin-left: auto; }
   .thr { flex-basis: 100%; order: 1; }
   .panel > .sep { display: none; } /* dividers only make sense while the panel is a single row */
   .menu { right: 0; grid-template-columns: repeat(3, minmax(0, 1fr)); }

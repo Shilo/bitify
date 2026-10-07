@@ -49,8 +49,8 @@ Assumptions made here, open to correction:
 One screen, no page scroll. Three layers:
 
 1. **Top bar.** The "Bitify" wordmark, an image count, and at the right a trash icon button
-   that removes all images (only when there are images), a GitHub icon linking to
-   `https://github.com/Shilo/bitify` in a new tab, and "Add images".
+   that removes all images (only when there are images), "Add images", and last a More
+   button (three dots) that opens a menu (see "The More menu").
 2. **The wall.** A grid of square tiles that fills the screen and scrolls on its own. Each
    tile shows one image, scaled up with hard pixel edges on a faint checkerboard so
    transparency is visible. The image is as large as fits the tile with 8px left clear on
@@ -144,7 +144,7 @@ controls leave it open, so colors can be changed while a panel is showing. A pan
 covers the wall: it is a strip one row high, and the wall makes room for it.
 
 A press that closes something does nothing else. It closes one thing only, the innermost:
-with the list of styles or the help open above the style panel, a press outside it closes
+with the list of styles open above the style panel, a press outside it closes
 that and leaves the panel open, and the next press outside the dock closes the panel. What
 was pressed, such as a button, a slider or an image, does not react to that press.
 
@@ -211,19 +211,31 @@ right:
   While Auto is on, the box shows the value Auto picked, or the range when images differ.
   The box is just wide enough for three digits, has no spinner arrows, and widens only to
   fit a range.
-- Help button ("?"): opens a tooltip above the strip, with its arrow over the button. It
-  has four lines in the body text size: what the threshold currently does, how to hold
-  an image to compare, how to change the style without the panels ("Scroll, or press ↑ ↓,
-  to change the style."; on touch devices "Swipe up or down to change the style."), and the
-  same for the palette ("Hold Shift and scroll, or press ← →, to change the palette."; on
-  touch devices "Swipe left or right to change the palette."). The threshold value and the
-  word "Hold" are bold. In the last two lines the whole gesture is bold: "Scroll", "Hold
-  Shift and scroll", "Swipe up or down", "Swipe left or right". Space, Shift and the four
-  arrows are drawn as keys. A wider gap sets the first line apart from the other three. It closes
-  the same ways the list of styles does, and only one of the two is open at a time.
 
-While the strip is a single row, a divider separates the style button from the threshold,
-and another separates the threshold from Help. They match the dock's dividers.
+While the strip is a single row, a divider separates the style button from the threshold.
+It matches the dock's dividers.
+
+### The More menu
+
+The More button is the last button in the top bar, at every width. It opens a small menu
+that drops down below it, lined up with its right edge, with two rows, each an icon and a
+word:
+
+- Help: closes the menu and opens the help in its place.
+- GitHub: opens `https://github.com/Shilo/bitify` in a new tab.
+
+The help is a dark note with four lines in the body text size: what the threshold
+currently does, how to hold an image to compare, how to change the style without the
+panels ("Scroll, or press ↑ ↓, to change the style."; on touch devices "Swipe up or down
+to change the style."), and the same for the palette ("Hold Shift and scroll, or press
+← →, to change the palette."; on touch devices "Swipe left or right to change the
+palette."). The threshold value and the word "Hold" are bold. In the last two lines the
+whole gesture is bold: "Scroll", "Hold Shift and scroll", "Swipe up or down", "Swipe left
+or right". Space, Shift and the four arrows are drawn as keys. A wider gap sets the first
+line apart from the other three. It is never wider than the screen less 16px on each side.
+
+The menu and the help close on any click or tap, inside or outside them, and on Escape.
+While one is open nothing else on the screen reacts to a press.
 
 ### Responsive behavior
 
@@ -231,7 +243,7 @@ and another separates the threshold from Help. They match the dock's dividers.
 |---|---|
 | Above 800px | Icon and text labels, dividers between groups. |
 | 521 to 800px | Icon-only buttons, one row. |
-| 520px and below | Tools on the first row, the view switch on a second row as wide as the tools. The dock is only as wide as its tools, centered, and is never stretched to fill the screen; it keeps at least 12px from each edge. The style panel is as wide as the dock. The palettes panel stays as wide as its chips, centered and never wider than the screen less those margins, with the name on a row of its own above the chips. The style strip takes two rows, without dividers: the style button and Help, then the threshold. Its list of styles is a grid three wide, three rows of three, as wide as the strip. The image count and the word "images" in the Add button are hidden. |
+| 520px and below | Tools on the first row, the view switch on a second row as wide as the tools. The dock is only as wide as its tools, centered, and is never stretched to fill the screen; it keeps at least 12px from each edge. The style panel is as wide as the dock. The palettes panel stays as wide as its chips, centered and never wider than the screen less those margins, with the name on a row of its own above the chips. The style strip takes two rows, without dividers: the style button, filling the row with its caret at the right end, then the threshold. Its list of styles is a grid three wide, three rows of three, as wide as the strip. The image count and the word "images" in the Add button are hidden. |
 
 On coarse pointers every dock control is 40 to 44px square. The app uses
 `viewport-fit=cover`, pads for the safe-area insets, and sizes itself with dynamic
@@ -275,7 +287,7 @@ scaffolding and are not part of the app.
 - Hold Space: flip the whole wall to the other version until release. A button clicked
   with a mouse or finger does not keep focus, so Space still compares afterwards; a button
   reached with Tab keeps the normal behavior, where Space presses it.
-- Escape: close the open panel. If the list of styles or the help tooltip is open, close that first.
+- Escape: close the open panel. If the list of styles is open, close that first. Escape also closes the More menu and the help.
 - Arrow keys: step through the styles and palettes (see "Quick switch").
 - Ctrl+C (Cmd+C on a Mac): copy the first image on the wall (see "Copying"). While text is
   selected, or the threshold number box has focus, the keys copy that text as usual. On the
@@ -315,7 +327,7 @@ pointer or finger, and at everything that contains it:
   something that scrolls on that key's axis.
 - Shift with the wheel is the usual way to scroll sideways, so it is judged on that axis
   alone: it steps the palettes over a wall that scrolls up and down, and is left to the
-  palettes panel while its chips scroll. The help tooltip names Shift.
+  palettes panel while its chips scroll. The help names Shift.
 - Ctrl with the wheel steps the palettes everywhere. Ctrl with the wheel never scrolls
   anything, so there is nothing to take over. It would zoom the page; the app stops that.
   Ctrl with + and − still zooms.
