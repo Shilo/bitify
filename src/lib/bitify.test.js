@@ -42,7 +42,7 @@ describe('analyze', () => {
     const img = image(['aabbcccc'], { a: grey(20), b: grey(34), c: grey(200) });
     expect(autoThreshold(img, 'lines')).toBe(img.autoLine);
     for (const style of ['cutout', 'solid']) expect(autoThreshold(img, style)).toBe(img.auto);
-    for (const style of ['checker', 'hatch', 'bayer', 'atkinson']) expect(autoThreshold(img, style)).toBe(img.autoTone);
+    for (const style of ['checker', 'hatch', 'bayer', 'noise', 'atkinson']) expect(autoThreshold(img, style)).toBe(img.autoTone);
   });
 
   it('treats alpha below 128 as empty and 128 or more as solid', () => {
@@ -59,7 +59,7 @@ describe('analyze', () => {
   it('survives an image with no solid pixels', () => {
     const img = image(['  ', '  '], {});
     expect(img.auto).toBe(127);
-    for (const style of ['cutout', 'solid', 'checker', 'hatch', 'bayer', 'atkinson', 'silhouette']) {
+    for (const style of ['cutout', 'solid', 'checker', 'hatch', 'bayer', 'noise', 'atkinson', 'silhouette']) {
       expect(show(mask(img, style), 2)).toEqual(['  ', '  ']);
     }
   });
@@ -103,8 +103,20 @@ describe('mask', () => {
     expect(show(mask(lighter, 'hatch', 120), 6)).toEqual(['#..#..', '#.#...', '##..#.', '#..#..']);
   });
 
+  it('noise: a middle color lights exactly half of a 16x16 cell, and a lighter one lights those and more', () => {
+    // a darkest column, a 16x16 block of one color, a lightest column
+    const block = b => image(Array(16).fill('a' + 'b'.repeat(16) + 'c'), { a: grey(20), b: grey(b), c: grey(240) });
+    const half = mask(block(120), 'noise', 120), more = mask(block(170), 'noise', 120);
+    expect(count(half, 2)).toBe(16 + 128);
+    expect(count(more, 2)).toBeGreaterThan(16 + 128);
+    expect(half.every((v, p) => v !== 2 || more[p] === 2)).toBe(true);
+    // no regular order: the lit cells of a row are not the same in every row, as they would be in stripes
+    const rows = show(half, 18);
+    expect(new Set(rows).size).toBe(16);
+  });
+
   it('checker and bayer: the darkest color stays dark and the lightest stays light', () => {
-    for (const style of ['checker', 'hatch', 'bayer']) for (const t of [null, 30, 120, 230]) {
+    for (const style of ['checker', 'hatch', 'bayer', 'noise']) for (const t of [null, 30, 120, 230]) {
       const rows = show(mask(three(), style, t), 6);
       expect(rows.map(r => r[0] + r[5])).toEqual(['#.', '#.', '#.', '#.']);
     }
@@ -113,18 +125,18 @@ describe('mask', () => {
   it('checker and bayer: a color at the threshold is dark when nothing is darker', () => {
     // the darkest color sits exactly on the cut, as it does for an outline under a low Auto
     const img = image(['aabb', 'aabb'], { a: grey(35), b: grey(245) });
-    for (const style of ['checker', 'hatch', 'bayer']) expect(show(mask(img, style, 35), 4)).toEqual(['##..', '##..']);
+    for (const style of ['checker', 'hatch', 'bayer', 'noise']) expect(show(mask(img, style, 35), 4)).toEqual(['##..', '##..']);
   });
 
   it('checker, bayer and atkinson: at Auto the lighter shade of a two-shade outline is not half patterned', () => {
     // Otsu's cut lands on the lighter outline shade; centered there, that shade would be half patterned
     const img = image(Array(4).fill('abccccba'), { a: grey(20), b: grey(34), c: grey(200) });
-    for (const style of ['checker', 'hatch', 'bayer', 'atkinson']) expect(show(mask(img, style), 8)).toEqual(Array(4).fill('##....##'));
+    for (const style of ['checker', 'hatch', 'bayer', 'noise', 'atkinson']) expect(show(mask(img, style), 8)).toEqual(Array(4).fill('##....##'));
   });
 
   it('checker, bayer and atkinson: an image of one color has no range and stays flat', () => {
     const flat = () => image(['aaaa', 'aaaa', 'aaaa', 'aaaa'], { a: grey(128) });
-    for (const style of ['checker', 'hatch', 'bayer', 'atkinson']) {
+    for (const style of ['checker', 'hatch', 'bayer', 'noise', 'atkinson']) {
       expect(count(mask(flat(), style, 50), 2)).toBe(16); // above the threshold: light
       expect(count(mask(flat(), style, 128), 1)).toBe(16); // at or below it: dark
       expect(count(mask(flat(), style, 200), 1)).toBe(16);
@@ -153,7 +165,7 @@ describe('mask', () => {
     const w = 300, h = 200, data = new Uint8ClampedArray(w * h * 4);
     for (let i = 0; i < data.length; i++) data[i] = (i * 2654435761) >>> 24;
     const img = analyze({ width: w, height: h, data });
-    for (const style of ['cutout', 'solid', 'checker', 'hatch', 'bayer', 'atkinson', 'silhouette']) for (const t of [null, 1, 254]) {
+    for (const style of ['cutout', 'solid', 'checker', 'hatch', 'bayer', 'noise', 'atkinson', 'silhouette']) for (const t of [null, 1, 254]) {
       const m = mask(img, style, t);
       expect(m.length).toBe(w * h);
       expect(m.every((v, p) => (v === 0) === (data[p * 4 + 3] < 128))).toBe(true);
@@ -461,7 +473,7 @@ describe('docs/styles.md', () => {
   it('shows, for every style, exactly what the code draws for the preview ball', () => {
     const doc = readFileSync(new URL('../../docs/styles.md', import.meta.url), 'utf8').replace(/\r\n/g, '\n');
     const ball = previewBall();
-    for (const style of ['cutout', 'lines', 'solid', 'checker', 'hatch', 'bayer', 'atkinson', 'silhouette']) {
+    for (const style of ['cutout', 'lines', 'solid', 'checker', 'hatch', 'bayer', 'noise', 'atkinson', 'silhouette']) {
       const title = `## ${style[0].toUpperCase()}${style.slice(1)}\n`, from = doc.indexOf(title);
       expect(from, title).toBeGreaterThan(-1);
       const section = doc.slice(from, doc.indexOf('\n## ', from + 1));

@@ -3,6 +3,15 @@
 const ALPHA_CUT = 128; // alpha below this is an empty pixel
 const MIN_EDGE = 24; // Auto never takes a color change weaker than this for a boundary
 const BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
+// Blue noise: the order in which the cells of a 16x16 tile turn light as the tone rises. Each
+// number from 0 to 255 once, placed by the void-and-cluster method so that the lit cells are
+// spread evenly at every tone and, unlike BAYER's, form no regular pattern.
+const NOISE = (
+  'ed75dbbf791b4f80ec4717e5ae8b43bc1aa11354d5acf82bb564c37d0ffb5aa98462fc2e913f679415d639a52a6fd132bb40ca73e909c6e3598af353c99904e4' +
+  '920ea41db3832546af02761ede3e7b4eeb68d84a5bdc6b98fe33ba9063b4f721c4812ff58c38bd167ed348ef14309f5e3b9b12a7cd06eea25c226d9eda86d008' +
+  'dd55c06a2678523ce6b1cb05584271ab1c7ae744f9b28dc50d89357cfabe28f24db603935d19df2c66f150aa189761889d2dcc36d4a049779ccf20d96ee80bd2' +
+  'ff6985ea720cc2fd1141b88f4b31b93d10ad1f4cb7278756b0825f01e0a67f57c7e260a8f465e137d724f6c17423f09529458e003a9ac807a370963451ce0a6c'
+).match(/../g).map(pair => parseInt(pair, 16));
 const NEIGHBOURS = [[1, 0], [-1, 0], [0, 1], [0, -1]];
 const AROUND = [...NEIGHBOURS, [1, 1], [1, -1], [-1, 1], [-1, -1]]; // the four neighbours first
 
@@ -113,7 +122,7 @@ export function unify(frames) {
 }
 
 // The styles that turn brightness into a pattern.
-const PATTERNS = ['checker', 'hatch', 'bayer', 'atkinson'];
+const PATTERNS = ['checker', 'hatch', 'bayer', 'noise', 'atkinson'];
 
 // The threshold Auto uses for this image in this style.
 export const autoThreshold = (img, style) => (style === 'lines' ? img.autoLine : PATTERNS.includes(style) ? img.autoTone : img.auto);
@@ -197,6 +206,7 @@ export function mask(img, style, threshold = null) {
     else if (style === 'checker') m[p] = tone(p) > ((x + y) % 2 ? 0.75 : 0.25) ? 2 : 1;
     else if (style === 'hatch') m[p] = tone(p) > 0.75 - 0.25 * ((x + y) % 3) ? 2 : 1; // diagonal lines, three pixels apart
     else if (style === 'bayer') m[p] = tone(p) > (BAYER[(y & 3) * 4 + (x & 3)] + 0.5) / 16 ? 2 : 1;
+    else if (style === 'noise') m[p] = tone(p) > (NOISE[(y & 15) * 16 + (x & 15)] + 0.5) / 256 ? 2 : 1;
     else m[p] = lum[p] > t ? 2 : 1;
   }
   return m;

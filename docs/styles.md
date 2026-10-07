@@ -1,6 +1,6 @@
 # Conversion styles
 
-How each of Bitify's eight styles decides which of the two colors a pixel gets. The code is in
+How each of Bitify's nine styles decides which of the two colors a pixel gets. The code is in
 [src/lib/bitify.js](../src/lib/bitify.js); the tests beside it pin every rule described here.
 
 ## What all styles share
@@ -32,7 +32,7 @@ Two measurements are used throughout:
 Every style except Silhouette depends on one number from 1 to 254, the threshold.
 
 - In **Lines** it is how different two neighbouring pixels must be to count as an edge.
-- In **Cutout, Solid, Checker, Hatch, Bayer and Atkinson** it is the brightness cut-off between dark
+- In **Cutout, Solid, Checker, Hatch, Bayer, Noise and Atkinson** it is the brightness cut-off between dark
   and light.
 
 **Auto** picks the threshold for each image with Otsu's method. Otsu's method takes a
@@ -41,7 +41,7 @@ possible, and as far apart as possible.
 
 - For Cutout and Solid the histogram is of pixel brightness, so Auto lands between the
   image's dark tones and its light tones. If there is nothing to split, it uses 127.
-- For Checker, Hatch, Bayer and Atkinson, Auto starts from that same split and takes the point
+- For Checker, Hatch, Bayer, Noise and Atkinson, Auto starts from that same split and takes the point
   halfway between the average brightness of the dark group and that of the light group.
   Otsu's own value is the lightest brightness of the dark group, and a pattern style gives
   the color at its threshold a half-and-half pattern, so with Otsu's value the lighter shade
@@ -67,7 +67,7 @@ would let a pixel flip between the two colors as the animation plays.
 
 ### Tone
 
-Checker, Hatch, Bayer and Atkinson do not compare brightness with the threshold directly. They
+Checker, Hatch, Bayer, Noise and Atkinson do not compare brightness with the threshold directly. They
 first turn brightness into a **tone** from 0 to 1 that runs through the image's own range:
 the darkest brightness in the image is 0, the threshold is 0.5 and the lightest brightness
 is 1.
@@ -380,6 +380,42 @@ The grid's values are arranged so that any brightness lights an evenly spread se
 positions. Like Checker, the pattern is tied to pixel position and is stable across frames.
 On very small sprites it can read as noise; it works best on larger images with gradients.
 
+## Noise
+
+Blue-noise dithering. Shading becomes an irregular scatter of pixels, like Atkinson's, but
+the scatter is fixed in place, so it does not shimmer between the frames of an animation.
+
+It works like Bayer with a different grid. A repeating 16×16 grid holds each number from 0
+to 255 once. The numbers were placed with the void-and-cluster method, so that at every tone
+the cells that are lit are spread evenly and form no regular pattern. For the value `n` at
+the pixel's position in the grid (`x mod 16`, `y mod 16`), the pixel is the second color if
+its tone is above `(n + 0.5) / 256`.
+
+```
+    ######
+   ##.#..##
+  #......#.#
+ #.....#..#.#
+##..........##
+#.......#....#
+#..#.....#.#.#
+##.##.###.####
+####.##.###.##
+########.#####
+ #....#..#.##
+  #.#....#.#
+   ##.##.##
+    ######
+```
+
+The stripe is dark with a scatter of light pixels, more of them towards its lighter left
+end. The body picks up a scatter of dark pixels, more of them where it is dimmer. The
+outline, tone 0, stays solid.
+
+On small sprites drawn in flat colors the scatter can read as dirt, and on a still image
+Atkinson, which keeps flat areas clean, usually looks better. Noise suits larger images with
+gradients, and animations.
+
 ## Atkinson
 
 Error diffusion, the look of early Macintosh graphics. Shading becomes an irregular,
@@ -468,4 +504,5 @@ rectangle.
 | Shading that looks drawn with a pen | Hatch |
 | Smooth gradients, regular texture | Bayer |
 | Smooth gradients, organic texture | Atkinson |
+| Organic texture that holds still in an animation | Noise |
 | Just the shape | Silhouette |

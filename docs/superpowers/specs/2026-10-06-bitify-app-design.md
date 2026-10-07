@@ -258,6 +258,7 @@ Output pixels are fully opaque or fully transparent. Brightness of a pixel is
 | **Checker** | Second color if the tone (see below) is above 0.25 on even `x + y` cells and above 0.75 on odd ones, so mid-tones become a checkerboard. |
 | **Hatch** | Second color if the tone is above 0.75, 0.5 or 0.25 where `(x + y) mod 3` is 0, 1 or 2, so mid-tones become diagonal lines three pixels apart. |
 | **Bayer** | Second color if the tone is above `(b + 0.5) / 16`, where `b` is the value of a 4×4 ordered-dither matrix at the pixel. |
+| **Noise** | Second color if the tone is above `(n + 0.5) / 256`, where `n` is the value at the pixel of a 16×16 blue-noise grid: each number from 0 to 255 once, placed by the void-and-cluster method so that it has no regular pattern. |
 | **Atkinson** | Error diffusion on `tone × 255`. Each pixel is cut at 127.5, and one eighth of the error goes to each of six neighbours (right, two right, the three below, two below). |
 | **Silhouette** | Every non-empty pixel is first color. |
 
@@ -288,7 +289,7 @@ Details of Lines:
 Known limit of Lines: two adjacent parts in nearly the same color, with no outline between
 them, merge. Lowering the threshold recovers some at the cost of picking up shading.
 
-Checker, Hatch, Bayer and Atkinson work on a **tone** from 0 to 1 that runs through the image's own
+Checker, Hatch, Bayer, Noise and Atkinson work on a **tone** from 0 to 1 that runs through the image's own
 range: its darkest brightness is 0, the threshold is 0.5 and its lightest brightness is 1.
 
 - At or below the threshold: `0.5 × (brightness − darkest) / (threshold − darkest)`, or 0
@@ -301,14 +302,14 @@ light or its lightest color dark, and outlines and highlights stay whole.
 ### Threshold
 
 - In Lines it is the minimum color difference that counts as an edge.
-- In Cutout, Solid, Checker, Hatch, Bayer and Atkinson it is the brightness cut-off.
+- In Cutout, Solid, Checker, Hatch, Bayer, Noise and Atkinson it is the brightness cut-off.
 - Silhouette ignores it.
 
 Auto picks a value per image with Otsu's method, which splits a histogram into two groups
 at the point that separates them best:
 
 - For Cutout and Solid, on the histogram of pixel brightness. Fallback 127.
-- For Checker, Hatch, Bayer and Atkinson, the point halfway between the mean brightness of the dark
+- For Checker, Hatch, Bayer, Noise and Atkinson, the point halfway between the mean brightness of the dark
   group and of the light group that this split separates (the split itself when one group
   is empty). Otsu's value is the lightest brightness of the dark group, and a pattern style
   renders the color at its threshold half and half, so with Otsu's value the lighter shade
@@ -406,10 +407,12 @@ Dependencies beyond Vite and Svelte:
 - `src/lib/bitify.js` is covered by unit tests on small hand-made pixel grids:
   - empty pixels stay empty in every style;
   - Solid splits at the threshold;
-  - Checker, Hatch, Bayer and Atkinson pattern a middle color, keep an image's darkest color dark
+  - Checker, Hatch, Bayer, Noise and Atkinson pattern a middle color, keep an image's darkest color dark
     and its lightest light, leave an image of one color flat, and at Auto keep both shades
     of a two-shade outline dark;
   - Hatch draws a darker middle color as wide diagonal lines and a lighter one as thin lines;
+  - Noise lights exactly half of its 16×16 grid for a middle color, and a lighter color
+    lights those cells and more;
   - every worked example in `docs/styles.md` is exactly what the code draws;
   - Lines outlines an inner part as well as the silhouette, draws a one-pixel boundary,
     ignores a shading step below the threshold, frames only images that have empty
