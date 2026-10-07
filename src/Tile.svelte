@@ -1,6 +1,6 @@
 <script>
   import { mask, colorize, shrink } from './lib/bitify.js';
-  import { sampling } from './lib/layout.js';
+  import { shown } from './lib/layout.js';
   import Pixels from './Pixels.svelte';
   import PixelIcon from './PixelIcon.svelte';
 
@@ -35,23 +35,26 @@
   let at = $state(0); // which frame is on screen
 
   // A photo has far more pixels than its tile can show, and converting them all on every change
-  // is what makes a phone stall. So only every k-th pixel of every k-th row is converted and
-  // drawn: the most that still gives the screen a pixel of the image for each of its own.
-  // k is 1 for anything that fits the tile, sprites included, and 0 until the tile has been laid out.
+  // is what makes a phone stall. So a tile converts and draws a picture of the image at its own
+  // size, a pixel for each pixel of the screen. Anything that fits the tile, sprites included,
+  // is drawn whole.
   let box = $state(0); // the width of the square the image sits in, in CSS pixels
   let pace = 0; // how long this tile's last conversion took, in milliseconds per pixel converted
   // On a slow phone even that many pixels take too long to keep up with a finger on the slider.
-  // So during a drag a large image is drawn as a rougher draft, with a larger k: the one that,
-  // at the pace this device last converted this image, fits the budget. It sharpens when the
-  // slider is let go. `sampling` in layout.js has the rules. The image sits 8px in from each side
+  // So during a drag a large image is drawn as a rougher draft, a smaller picture: one that, at
+  // the pace this device last converted this image, fits the budget. It sharpens when the slider
+  // rests or is let go. `shown` in layout.js has the rules. The image sits 8px in from each side
   // of the square, and a square with no room for it has not been laid out yet.
-  const k = $derived(box > 16 ? sampling(item.img.w, item.img.h, (box - 16) * devicePixelRatio, budget, pace) : 0);
+  const size = $derived(box > 16 ? shown(item.img.w, item.img.h, (box - 16) * devicePixelRatio, budget, pace) : null);
+  // the picture's width and height, each on its own so that nothing is redrawn when `size` is worked out again to the same numbers
+  const mw = $derived(size ? size[0] : 0);
+  const mh = $derived(size ? size[1] : 0);
 
   // A frame is converted when it is first shown and then kept: its mask until the style, the
-  // threshold or k changes, its colored pixels until a color changes too. So a color change
-  // reuses the masks, and an animation converts one frame at a time as it plays.
+  // threshold or the picture's size changes, its colored pixels until a color changes too. So a
+  // color change reuses the masks, and an animation converts one frame at a time as it plays.
   const masks = $derived.by(() => {
-    style, threshold, k; // read, so the masks are dropped when any of these changes
+    style, threshold, mw, mh; // read, so the masks are dropped when any of these changes
     return frames.map(() => null);
   });
   const colored = $derived.by(() => {
@@ -59,19 +62,19 @@
     return masks.map(() => null);
   });
   const originals = $derived.by(() => {
-    k;
+    mw, mh;
     return frames.map(() => null);
   });
   const pixels = $derived.by(() => {
-    if (!k) return null;
-    const frame = frames[at], width = Math.ceil(item.img.w / k);
-    if (flipped !== held) return (originals[at] ??= k > 1 ? new ImageData(shrink(frame.original, k), width) : frame.original);
+    if (!mw) return null;
+    const frame = frames[at];
+    if (flipped !== held) return (originals[at] ??= mw < item.img.w ? new ImageData(shrink(frame.original, mw, mh), mw) : frame.original);
     if (!masks[at]) {
       const start = performance.now();
-      masks[at] = mask(frame.img, style, threshold, k);
+      masks[at] = mask(frame.img, style, threshold, mw, mh);
       pace = (performance.now() - start) / masks[at].length;
     }
-    return (colored[at] ??= new ImageData(colorize(masks[at], first, second), width));
+    return (colored[at] ??= new ImageData(colorize(masks[at], first, second), mw));
   });
 
   // Plays an animation: after the current frame's delay, step to the next and start again.

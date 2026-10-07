@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { fitGrid, sampling } from './layout.js';
+import { fitGrid, shown } from './layout.js';
 
 // A tile is `size` wide and `size + extra` tall (the image plus its caption).
 const opts = { gap: 16, extra: 27, min: 200 };
@@ -60,38 +60,61 @@ describe('fitGrid', () => {
   });
 });
 
-describe('sampling', () => {
-  it('converts an image whole when the tile has a screen pixel for each of its pixels', () => {
-    expect(sampling(64, 64, 955)).toBe(1);
-    expect(sampling(955, 700, 955)).toBe(1);
-    expect(sampling(1900, 1000, 955)).toBe(1); // not yet two image pixels per screen pixel
+describe('shown', () => {
+  it('draws an image whole when the tile has a screen pixel for each of its pixels', () => {
+    expect(shown(64, 64, 955)).toEqual([64, 64]);
+    expect(shown(955, 700, 955)).toEqual([955, 700]);
+    expect(shown(700, 955, 955)).toEqual([700, 955]);
   });
 
-  it('leaves out pixels of a larger image, but keeps one for each screen pixel', () => {
-    expect(sampling(4000, 3000, 955)).toBe(4);
-    expect(sampling(3000, 4000, 955)).toBe(4);
-    expect(sampling(2048, 2048, 955)).toBe(2);
+  it('draws a larger image at the size of the tile, keeping its shape', () => {
+    expect(shown(4000, 3000, 955)).toEqual([955, 716]);
+    expect(shown(3000, 4000, 955)).toEqual([716, 955]);
+    expect(shown(2048, 2048, 955)).toEqual([955, 955]);
+    expect(shown(1000, 800, 955)).toEqual([955, 764]); // only a little larger than the tile
   });
 
   it('drafts an image that would take longer than the budget', () => {
-    // 12 million pixels at 0.0001 ms each is 1200 ms; a fiftieth of the pixels fits 24 ms, and 8 x 8 is the first step past 50
-    expect(sampling(4000, 3000, 955, 24, 0.0001)).toBe(8);
-    expect(sampling(4000, 3000, 955, 6, 0.0001)).toBe(15); // a quarter of the budget, as with four tiles
+    // 12 million pixels at 0.0001 ms each is 1200 ms; a fiftieth of the pixels fits 24 ms
+    const [mw, mh] = shown(4000, 3000, 955, 24, 0.0001);
+    expect([mw, mh]).toEqual([566, 424]);
+    expect(mw * mh * 0.0001).toBeCloseTo(24, 0);
+    expect(shown(4000, 3000, 955, 6, 0.0001)).toEqual([283, 212]); // a quarter of the budget, as with four tiles
   });
 
   it('does not draft an image that is quick enough already', () => {
-    expect(sampling(4000, 3000, 955, 24, 0.000001)).toBe(4);
-    expect(sampling(4000, 3000, 955, 24, 0)).toBe(4); // nothing timed yet
+    expect(shown(4000, 3000, 955, 24, 0.000001)).toEqual([955, 716]);
+    expect(shown(4000, 3000, 955, 24, 0)).toEqual([955, 716]); // nothing timed yet
   });
 
-  it('never drafts an image that is shown whole, however slow', () => {
-    expect(sampling(256, 256, 955, 2, 1)).toBe(1);
-    expect(sampling(1024, 1024, 955, 2, 1)).toBe(1);
+  it('never drafts an image that is drawn whole, however slow', () => {
+    expect(shown(256, 256, 955, 2, 1)).toEqual([256, 256]);
+    expect(shown(900, 900, 955, 2, 1)).toEqual([900, 900]);
   });
 
-  it('keeps 32 pixels on the shorter side of a long thin image', () => {
-    expect(sampling(4000, 30, 955)).toBe(1);
-    expect(sampling(4000, 320, 400)).toBe(10);
-    expect(sampling(4000, 320, 400, 24, 1)).toBe(10); // a draft stops there too
+  it('keeps 32 pixels on the shorter side of a long thin image, or all it has', () => {
+    expect(shown(4000, 30, 955)).toEqual([4000, 30]);
+    expect(shown(4000, 320, 200)).toEqual([400, 32]);
+    expect(shown(4000, 320, 400, 24, 1)).toEqual([400, 32]); // a draft stops there too
+  });
+
+  it('never asks for a picture with no pixels', () => {
+    expect(shown(1, 1, 955)).toEqual([1, 1]);
+    expect(shown(5000, 1, 955)).toEqual([5000, 1]);
+    expect(shown(3, 9000, 955, 24, 1)).toEqual([3, 9000]);
+  });
+});
+
+describe('shown, for a picture a whole number of times smaller', () => {
+  it('makes it a little smaller, so that it does not fall in step with a fine texture', () => {
+    expect(shown(1024, 1024, 512)).toEqual([483, 483]); // would have been exactly half
+    expect(shown(3000, 3000, 1000)).toEqual([943, 943]); // exactly a third
+    expect(shown(2048, 2048, 1020)).toEqual([962, 962]); // within a hair of a half
+  });
+
+  it('leaves other sizes, and an image drawn whole, as they are', () => {
+    expect(shown(1024, 1024, 478)).toEqual([478, 478]);
+    expect(shown(1024, 1024, 700)).toEqual([700, 700]); // 1.46 times: nearer one than two
+    expect(shown(512, 512, 512)).toEqual([512, 512]);
   });
 });

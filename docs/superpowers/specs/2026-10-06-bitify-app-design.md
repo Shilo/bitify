@@ -442,34 +442,41 @@ Output pixels are fully opaque or fully transparent. Brightness of a pixel is
 ### Images larger than their tile
 
 A photo has many more pixels than its tile has screen pixels to show them with, and
-converting all of them on every change is what makes a phone stall. So a tile converts only
-the pixels it can show:
+converting all of them on every change is what makes a phone stall. So a tile converts and
+draws a smaller picture of the image, at its own size:
 
-- A tile converts every k-th pixel of every k-th row, starting from the top left pixel. k is
-  the longer side of the image divided by the number of screen pixels along the tile's
-  image area (its width in CSS pixels, less the 8px left clear on each side, times the
-  device pixel ratio), rounded down, and at least 1. So the tile still has at least one
-  image pixel for each screen pixel. The canvas is `ceil(width / k)` by `ceil(height / k)`
-  pixels.
-- k never leaves the shorter side of the image fewer than 32 pixels. A long thin image
-  would otherwise be drawn in the wrong shape once its few rows were rounded up.
-- In Cutout, Lines, Solid and Silhouette each kept pixel gets exactly the value it has in
-  the full conversion, worked out from its real neighbours in the full image. The tile
-  shows the full result with the pixels between left out.
-- Checker, Hatch, Bayer, Noise and Atkinson are instead drawn afresh on the kept pixels:
-  the pattern's tile is counted in kept pixels, and Atkinson passes its error from one kept
-  pixel to the next. Their look comes from how neighbouring pixels alternate, and every
-  k-th pixel of a pattern that repeats every 2, 3, 4 or 16 pixels is the same few cells of
-  it each time, which would turn the picture far too light or too dark. Drawn afresh, the
-  tile is as light and as dark as the saved file in every part, with a pattern as fine as
-  the screen can show; the saved file's own pattern is finer still.
-- The original is shown through the same k, so comparing does not change the picture.
-- Anything no larger than its tile, which includes every sprite, has k = 1 and is converted
-  whole, exactly as it is saved.
-- k follows the tile: when tiles resize, an image is converted again only if its k changed.
+- The picture has one pixel for each screen pixel of the tile's image area: the area's
+  width in CSS pixels (the tile's, less the 8px left clear on each side) times the device
+  pixel ratio, along the image's longer side, and the other side in proportion. An image no
+  larger than that, which includes every sprite, is converted whole, exactly as it is saved.
+- Each pixel of the picture stands for the image pixel under its middle: pixel `i` of `m`
+  across an image `n` pixels wide stands for image pixel `floor((i + 0.5) * n / m)`. The
+  picture's pixels are so spread evenly over the image, at whatever spacing that comes to.
+- The spacing is not rounded to a whole number of pixels, and where it happens to fall
+  within 0.04 of one (the picture exactly a half, a third, a quarter of the image, or
+  nearly), the picture is made 6% smaller. At a whole-number spacing every pixel of the
+  picture would fall at the same place in each repeat of a fine regular texture, and an
+  image that has one (art already dithered to black and white, one-pixel stripes, a
+  stippled transparency) would come out all light or all dark. Off the whole number such an
+  image is as light as it should be on average, with the bands that a shrunken texture has.
+- The shorter side of the picture is never given fewer than 32 pixels, unless the image has
+  fewer. A long thin image would otherwise be drawn in the wrong shape once its few rows
+  were rounded.
+- In Cutout, Lines, Solid and Silhouette each pixel of the picture is exactly what the
+  image pixel it stands for is in the full conversion, worked out from that pixel's real
+  neighbours in the full image.
+- Checker, Hatch, Bayer, Noise and Atkinson are instead drawn afresh on the picture's own
+  pixels: the pattern's tile is counted in the picture's pixels, and Atkinson passes its
+  error from one of them to the next. Their look comes from how neighbouring pixels
+  alternate, and pixels picked out of a pattern do not alternate as the pattern does. Drawn
+  afresh, the tile is as light and as dark as the saved file in every part, with a pattern
+  as fine as the screen can show; the saved file's own pattern is finer still.
+- The original is shown as the same picture, so comparing does not move anything.
+- The picture follows the tile: when tiles resize, an image is converted again only if the
+  size of its picture changed.
 - Saving and copying always convert every pixel. The analysis on adding, which picks the
   Auto thresholds, also reads every pixel.
-- The rule for k lives in `src/lib/layout.js` (`sampling`) and is unit tested.
+- The rule for the picture's size lives in `src/lib/layout.js` (`shown`) and is unit tested.
 - An animation converts a frame when it is first shown, not all frames on every change.
 
 ### Drafts while the threshold slider is dragged
@@ -482,14 +489,14 @@ let go:
 - Each tile times its conversions: milliseconds per pixel converted, for this image, in
   this style, on this device.
 - During a drag the wall has 24 milliseconds for each move, shared equally between the
-  tiles. A tile whose image would take longer than its share at its usual k uses a larger k
-  instead: the smallest whole number at which the conversion is expected to fit, which is
-  `ceil(sqrt(width * height * milliseconds per pixel / share))`.
-- A draft is the same conversion with more pixels left out, so its tones and shapes are
-  the final ones and only its detail is rougher.
+  tiles. A tile whose picture would take longer than its share draws a smaller picture
+  instead: the largest that is expected to fit, which is the image scaled by
+  `sqrt(share / (width * height * milliseconds per pixel))`.
+- A draft is the same conversion as a smaller picture, so its tones and shapes are the
+  final ones and only its detail is rougher.
 - An image that converts within its share is never drafted, which covers photos on a fast
   computer.
-- An image whose usual k is 1 is never drafted either, however slow. The screen is showing
+- An image that is drawn whole is never drafted either, however slow. The screen is showing
   every one of its pixels, and a draft would drop some of them: for pixel art that is not
   rougher, it is wrong. So sprites are never drafted.
 - A draft, like any tile, keeps at least 32 pixels on the image's shorter side.
@@ -695,14 +702,14 @@ Vite with the `svelte` template (Svelte 5, runes, mounted with `mount()`), JavaS
 
 | File | Purpose |
 |---|---|
-| `src/lib/bitify.js` | Pure conversion, no DOM. `analyze(imageData)` returns size, pixels, brightness, each pixel's difference from the pixel to its right and from the one below, whether any pixel is empty, the darkest and lightest brightness, and the auto thresholds. `mask(analysis, style, threshold, k)` returns one byte per pixel (0 empty, 1 first color, 2 second color), for every pixel or, with k above 1, for every k-th pixel of every k-th row. `shrink(imageData, k)` returns those same pixels of the original. `colorize(mask, first, second)` returns RGBA pixels. |
+| `src/lib/bitify.js` | Pure conversion, no DOM. `analyze(imageData)` returns size, pixels, brightness, each pixel's difference from the pixel to its right and from the one below, whether any pixel is empty, the darkest and lightest brightness, and the auto thresholds. `mask(analysis, style, threshold, width, height)` returns one byte per pixel (0 empty, 1 first color, 2 second color), for the whole image or, given a smaller width and height, for a picture of it that size. `shrink(imageData, width, height)` returns the pixels of the original that such a picture stands on. `colorize(mask, first, second)` returns RGBA pixels. |
 | `src/lib/gif.js` | Reading an animated GIF into full frames (`decodeGif`) and writing a two-color one (`encodeGif`). No DOM. |
 | `src/lib/save.js` | Output file naming, zip, PNG encoding from a mask and the two colors, single save, save all, copy to the clipboard. |
 | `src/lib/settings.js` | The default settings, and `restore(text, styles)`, which reads stored settings back and checks each value. No DOM. |
 | `src/lib/presets.js` | The list of palettes and the list of styles, whether two colors are a palette's, and stepping to the next or previous style or palette. No DOM. |
 | `src/lib/gesture.js` | `wheelSteps()`, which turns the stream of wheel moves from a mouse or trackpad into single steps, and `sliderDrag()`, which says when the threshold slider is being dragged and when it has come to rest. No DOM. |
 | `src/App.svelte` | All state; top bar, wall, empty state, drop overlay, the Share sheet, messages; window-level drop, paste, key, wheel and swipe handling. |
-| `src/Tile.svelte` | One image: canvas, caption, Copy, Download and Remove (Share and Remove on touch screens), hold to compare. Measures itself to pick k (see "Images larger than their tile"). |
+| `src/Tile.svelte` | One image: canvas, caption, Copy, Download and Remove (Share and Remove on touch screens), hold to compare. Measures itself to pick the size of the picture it draws (see "Images larger than their tile"). |
 | `src/Dock.svelte` | The dock and its two panels. |
 | `src/Pixels.svelte` | A canvas that shows a block of pixels; used by tiles and by the style previews. |
 | `src/PixelIcon.svelte` | Renders a 7×7 glyph from a row-string map. |
@@ -711,7 +718,7 @@ Vite with the `svelte` template (Svelte 5, runes, mounted with `mount()`), JavaS
 State is a handful of `$state` values in `App.svelte`: the two colors, style, threshold
 (`null` means Auto), which version the wall shows, the open panel, and the list of images.
 Each image holds an id, its name, its original pixels and its analysis. A tile derives its
-mask from the image, style, threshold and k, and repaints its canvas when the mask or either
+mask from the image, style, threshold and the size of its picture, and repaints its canvas when the mask or either
 color changes. That keeps a color drag cheap: the mask is reused and only the two-color
 fill is redone. Masks and colored pixels are made for a frame when it is first shown and
 kept until what they depend on changes.
@@ -753,9 +760,9 @@ it is doing:
   pauses the page for a moment on a slow phone, is adding it and saving or copying it. A
   message says so meanwhile (see "Long jobs"). Moving those to a worker is the upgrade path
   if that ever matters.
-- A large image's canvas is rarely a whole number of screen pixels per pixel, so in the
-  pattern styles a tile can show faint evenly spaced lines where the browser fits one to
-  the other. The saved file has none.
+- A tile's picture is a sample of a larger image, not an average of it. An image with a
+  fine regular texture shows bands when shown smaller, as it did when the browser shrank
+  the whole conversion. The saved file has none.
 - Reading an image uses a canvas of its full size for a moment, which is given back as
   soon as the pixels are read.
 - The settings are applied as they change, not held back to one per screen frame. Browsers
@@ -786,20 +793,23 @@ it is doing:
     around a light part, never cuts a light pixel on the silhouette, and rims only images
     that have empty pixels;
   - Silhouette fills everything;
-  - converting every k-th pixel of every k-th row gives, in Cutout, Lines, Solid and
-    Silhouette, exactly those pixels of the full conversion, and shrinking the original
-    gives the same pixels of it;
-  - at every k the patterns and Atkinson come out as light as the full conversion, and
+  - a smaller picture has, in Cutout, Lines, Solid and Silhouette, exactly the full
+    conversion's value at the image pixel under the middle of each of its pixels, and
+    shrinking the original gives the same pixels of it;
+  - at every size the patterns and Atkinson come out as light as the full conversion, and
     keep empty pixels empty;
+  - an image with a fine regular texture (dithered art, one-pixel stripes, a stippled
+    transparency) comes out as light as it is at the sizes a tile could have;
   - Auto returns a value between two clearly separated groups.
 - `src/lib/save.js`: output naming, including duplicates; a PNG holds the palette and
   exactly the given pixels, packed two bits each.
 - `src/lib/settings.js`: stored settings come back unchanged; missing or damaged text gives
   the defaults; a single unusable value is replaced on its own.
-- `src/lib/layout.js`: besides the wall's fit, the k a tile converts at: 1 for an image the
-  tile shows whole, larger for a larger image, larger still for a draft that would
-  otherwise run over its budget, never a draft for an image shown whole, and never fewer
-  than 32 pixels on the shorter side.
+- `src/lib/layout.js`: besides the wall's fit, the size of the picture a tile draws: the
+  whole image when the tile has room, the tile's own size for a larger image, smaller for
+  a draft that would otherwise run over its budget, never a draft for an image drawn whole,
+  a little smaller where it would be a whole number of times smaller than the image, and
+  never fewer than 32 pixels on the shorter side.
 - `src/lib/presets.js`: styles and palettes step forward and back and wrap at both ends; a
   palette is found either way round; the user's own colors stay as a stop after the presets.
 - `src/lib/gesture.js`: one step per notch of a mouse wheel; a trackpad's small moves add

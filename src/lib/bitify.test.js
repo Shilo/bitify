@@ -478,52 +478,84 @@ describe('an image shown smaller than it is', () => {
     data.set([v, v * 0.8 + y, x * 9, x + y < 6 ? 0 : 255], i);
   }
   const src = { width: w, height: h, data }, img = analyze(src);
-  // every k-th value of every k-th row of a full-size array that holds `per` values for each pixel
-  const every = (all, k, per = 1) => {
+  const SIZES = [[23, 17], [22, 16], [12, 9], [8, 6], [5, 17], [23, 3], [1, 1]];
+  // What a picture of mw by mh shows of a full-size array holding `per` values for each pixel:
+  // for each of its pixels, the values at the image pixel under its middle.
+  const picked = (all, mw, mh, per = 1) => {
     const out = [];
-    for (let y = 0; y < h; y += k) for (let x = 0; x < w; x += k) out.push(...all.slice((y * w + x) * per, (y * w + x + 1) * per));
+    for (let j = 0; j < mh; j++) for (let i = 0; i < mw; i++) {
+      const at = (Math.floor(((j + 0.5) * h) / mh) * w + Math.floor(((i + 0.5) * w) / mw)) * per;
+      out.push(...all.slice(at, at + per));
+    }
     return out;
   };
 
-  it('converts every k-th pixel of every k-th row to what it is in the full conversion', () => {
+  it('gives each pixel of a smaller picture what its image pixel is in the full conversion', () => {
     for (const style of ['cutout', 'lines', 'solid', 'silhouette']) {
       for (const threshold of [null, 90]) {
         const full = mask(img, style, threshold);
-        for (const k of [1, 2, 3, 5, 16, 40]) expect([...mask(img, style, threshold, k)], `${style} ${threshold} k=${k}`).toEqual(every(full, k));
+        for (const [mw, mh] of SIZES) expect([...mask(img, style, threshold, mw, mh)], `${style} ${threshold} ${mw}x${mh}`).toEqual(picked(full, mw, mh));
       }
     }
   });
 
-  // Every k-th pixel of a pattern is not the pattern: of a checkerboard it is one color only.
-  it('draws the patterns and Atkinson afresh on the pixels it keeps, as light as the full conversion', () => {
-    // a smooth 240 by 180 picture, light in the middle and dark at the corners
+  it('converts the whole image when no size is asked for, or its own', () => {
+    for (const style of ['cutout', 'lines', 'solid', 'checker', 'hatch', 'bayer', 'noise', 'atkinson', 'silhouette']) {
+      expect([...mask(img, style, null, w, h)], style).toEqual([...mask(img, style)]);
+    }
+  });
+
+  // Pixels picked from a pattern are not the pattern: every second pixel of a checkerboard is one color.
+  it('draws the patterns and Atkinson afresh on a smaller picture, as light as the full conversion', () => {
+    // a smooth 240 by 180 image, light in the middle and dark at the corners
     const sw = 240, sh = 180, smooth = new Uint8ClampedArray(sw * sh * 4);
     for (let y = 0, i = 0; y < sh; y++) for (let x = 0; x < sw; x++, i += 4) {
       const v = 128 + 110 * Math.cos((x - 120) / 60) * Math.cos((y - 90) / 45);
       smooth.set([v, v, v, 255], i);
     }
-    const picture = analyze({ width: sw, height: sh, data: smooth });
+    const image = analyze({ width: sw, height: sh, data: smooth });
     const light = m => count(m, 2) / m.length;
     for (const style of ['checker', 'hatch', 'bayer', 'noise', 'atkinson']) {
-      const full = light(mask(picture, style));
+      const full = light(mask(image, style));
       expect(full, style).toBeGreaterThan(0.3);
       expect(full, style).toBeLessThan(0.7);
-      for (const k of [2, 3, 4, 6]) {
-        const m = mask(picture, style, null, k);
-        expect(m.length, `${style} k=${k}`).toBe(Math.ceil(sw / k) * Math.ceil(sh / k));
-        expect(Math.abs(light(m) - full), `${style} k=${k}`).toBeLessThan(0.03);
+      for (const [mw, mh] of [[120, 90], [80, 60], [60, 45], [111, 83], [40, 30]]) {
+        const m = mask(image, style, null, mw, mh);
+        expect(m.length, `${style} ${mw}x${mh}`).toBe(mw * mh);
+        expect(Math.abs(light(m) - full), `${style} ${mw}x${mh}`).toBeLessThan(0.03);
       }
+    }
+  });
+
+  // A whole-number spacing would pick the same part of a fine regular texture every time.
+  it('keeps an image with a fine regular texture as light as it is', () => {
+    const tw = 300, th = 300, BAYER4 = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
+    const textured = pixel => {
+      const d = new Uint8ClampedArray(tw * th * 4);
+      for (let y = 0, i = 0; y < th; y++) for (let x = 0; x < tw; x++, i += 4) d.set(pixel(x, y), i);
+      return analyze({ width: tw, height: th, data: d });
+    };
+    const light = m => count(m, 2) / (m.length - count(m, 0));
+    const images = {
+      'art dithered to black and white': textured((x, y) => { const v = 0.5 > (BAYER4[(y & 3) * 4 + (x & 3)] + 0.5) / 16 ? 255 : 0; return [v, v, v, 255]; }),
+      'one-pixel stripes': textured((x, y) => { const v = y % 2 ? 230 : 40; return [v, v, v, 255]; }),
+      'a stippled transparency': textured((x, y) => { const v = x < 150 ? 60 : 200; return [v, v, v, ((x >> 1) + (y >> 1)) % 2 ? 0 : 255]; }),
+    };
+    for (const [name, image] of Object.entries(images)) {
+      const full = light(mask(image, 'solid', 128));
+      // sizes a tile could have, none of them a whole fraction of 300
+      for (const mw of [281, 233, 140, 131, 97]) expect(Math.abs(light(mask(image, 'solid', 128, mw, mw)) - full), `${name} at ${mw}`).toBeLessThan(0.08);
     }
   });
 
   it('keeps empty pixels empty when it draws a pattern afresh', () => {
     for (const style of ['checker', 'hatch', 'bayer', 'noise', 'atkinson']) {
-      for (const k of [2, 3, 5]) expect([...mask(img, style, null, k)].map(v => +!!v), `${style} k=${k}`).toEqual(every(mask(img, 'silhouette'), k));
+      for (const [mw, mh] of SIZES) expect([...mask(img, style, null, mw, mh)].map(v => +!!v), `${style} ${mw}x${mh}`).toEqual(picked(mask(img, 'silhouette'), mw, mh));
     }
   });
 
-  it('shrinks the original the same way', () => {
-    for (const k of [1, 2, 3, 5, 40]) expect([...shrink(src, k)], `k=${k}`).toEqual(every(data, k, 4));
+  it('shrinks the original onto the same pixels', () => {
+    for (const [mw, mh] of SIZES) expect([...shrink(src, mw, mh)], `${mw}x${mh}`).toEqual(picked(data, mw, mh, 4));
   });
 });
 

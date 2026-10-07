@@ -138,22 +138,35 @@ const PATTERNS = [...Object.keys(TILES), 'atkinson'];
 // The threshold Auto uses for this image in this style.
 export const autoThreshold = (img, style) => (style === 'lines' ? img.autoLine : PATTERNS.includes(style) ? img.autoTone : img.auto);
 
+// Where a smaller picture's pixels fall along `n` image pixels when it is `m` pixels long: the
+// image pixel under the middle of each. With m equal to n, that is every pixel in turn.
+const spread = (n, m) => Int32Array.from({ length: m }, (_, i) => Math.floor(((i + 0.5) * n) / m));
+
 // One byte per pixel: 0 empty, 1 first color (lines, dark pixels), 2 second color (fill, light pixels).
 // `threshold` null means Auto.
-// `k` above 1 converts only every k-th pixel of every k-th row, for an image that is shown
-// smaller than it is. The result is ceil(w / k) wide and ceil(h / k) high, and takes that many
-// pixels' work instead of w * h. In Cutout, Lines, Solid and Silhouette it is the full mask with
-// the pixels between left out. The pattern styles and Atkinson are instead drawn afresh on the
-// pixels that are kept, because their look comes from how neighbouring pixels alternate: taking
-// every k-th pixel of a pattern that repeats every 2, 3, 4 or 16 keeps the same few cells of it
-// each time, and the picture comes out far too light or too dark.
-export function mask(img, style, threshold = null, k = 1) {
-  const { w, h, lum, data, right, down, lo, hi } = img, m = new Uint8Array(Math.ceil(w / k) * Math.ceil(h / k));
+//
+// `mw` and `mh` ask for a smaller picture of the image, for a tile that shows it smaller than it
+// is: mw by mh pixels, taking that many pixels' work instead of w * h. Each of its pixels stands
+// for the image pixel under its middle (see `spread`), so the picture's pixels are spread evenly
+// over the image at whatever spacing that comes to. The spacing is deliberately not rounded to
+// a whole number of pixels: an image with a fine regular texture (dithered art, stripes, a
+// stippled transparency) would have the same part of its texture picked every time, and come
+// out all light or all dark.
+//
+// In Cutout, Lines, Solid and Silhouette each pixel of the picture is exactly what the image
+// pixel it stands for is in the full mask. The pattern styles and Atkinson are instead drawn
+// afresh on the picture's own pixels, because their look comes from how neighbouring pixels
+// alternate, and pixels picked from a pattern do not alternate as the pattern does.
+export function mask(img, style, threshold = null, mw = img.w, mh = img.h) {
+  const { w, h, lum, data, right, down, lo, hi } = img, m = new Uint8Array(mw * mh);
+  const xs = spread(w, mw), ys = spread(h, mh); // the image column and row of each of the picture's
   const t = threshold ?? autoThreshold(img, style);
   const opaque = !img.hasAlpha; // then every pixel is solid, and the large RGBA array is never read
   const solid = p => opaque || data[p * 4 + 3] >= ALPHA_CUT;
   // Whether p is the darker of two pixels. On a tie the earlier one is, so a boundary is one pixel wide.
   const darker = (p, q) => lum[p] < lum[q] || (lum[p] === lum[q] && p < q);
+  // In the loops below `i` and `j` count the picture's pixels, `x` and `y` are the image pixel
+  // that one stands for, `p` is that pixel's place in the image and `o` its place in the mask.
 
   if (style === 'lines') {
     // A pixel is a line when it touches empty space, or sits on the darker side of a color
@@ -161,7 +174,8 @@ export function mask(img, style, threshold = null, k = 1) {
     // The canvas edge counts as empty only for sprites, so opaque scenes get no frame.
     // `d` is the difference between p and its neighbour q
     const edge = img.hasAlpha, line = (p, q, d) => !solid(q) || (d > t && darker(p, q));
-    for (let y = 0, o = 0; y < h; y += k) for (let x = 0, p = y * w; x < w; x += k, p += k, o++) {
+    for (let j = 0, o = 0; j < mh; j++) for (let i = 0, y = ys[j]; i < mw; i++, o++) {
+      const x = xs[i], p = y * w + x;
       if (!solid(p)) continue;
       const on =
         (x ? line(p, p - 1, right[p - 1]) : edge) || (x + 1 < w ? line(p, p + 1, right[p]) : edge) || (y ? line(p, p - w, down[p - w]) : edge) || (y + 1 < h ? line(p, p + w, down[p]) : edge);
@@ -181,8 +195,8 @@ export function mask(img, style, threshold = null, k = 1) {
     // Whether one of the four pixels diagonally next to p has tone v. Few pixels need to ask.
     const corner = (p, L, R, U, D, v) =>
       (U && L ? tone(p - w - 1) : out) === v || (U && R ? tone(p - w + 1) : out) === v || (D && L ? tone(p + w - 1) : out) === v || (D && R ? tone(p + w + 1) : out) === v;
-    for (let y = 0, o = 0; y < h; y += k) for (let x = 0, p = y * w; x < w; x += k, p += k, o++) {
-      const own = tone(p);
+    for (let j = 0, o = 0; j < mh; j++) for (let i = 0, y = ys[j]; i < mw; i++, o++) {
+      const x = xs[i], p = y * w + x, own = tone(p);
       if (!own) continue;
       const L = x > 0, R = x + 1 < w, U = y > 0, D = y + 1 < h;
       const l = L ? tone(p - 1) : out, r = R ? tone(p + 1) : out, u = U ? tone(p - w) : out, d = D ? tone(p + w) : out;
@@ -199,7 +213,8 @@ export function mask(img, style, threshold = null, k = 1) {
 
   if (style === 'solid' || style === 'silhouette') {
     const cutAt = style === 'solid' ? t : 255; // nothing is brighter than 255, so a silhouette is all dark
-    for (let y = 0, o = 0; y < h; y += k) for (let x = 0, p = y * w; x < w; x += k, p += k, o++) {
+    for (let j = 0, o = 0; j < mh; j++) for (let i = 0, row = ys[j] * w; i < mw; i++, o++) {
+      const p = row + xs[i];
       if (solid(p)) m[o] = lum[p] > cutAt ? 2 : 1;
     }
     return m;
@@ -211,52 +226,51 @@ export function mask(img, style, threshold = null, k = 1) {
   const tones = Float64Array.from({ length: 256 }, (_, l) => (l <= t ? (t > lo ? (0.5 * (l - lo)) / (t - lo) : 0) : 0.5 + (0.5 * (l - t)) / (hi - t)));
 
   if (style === 'atkinson') {
-    // Each kept pixel passes its error on to the kept pixels after it. `x` and `y` here count
-    // kept pixels, and `p` is the image pixel that the one at x, y stands for.
+    // Each of the picture's pixels passes its error on to the ones after it.
     // Error only ever reaches two rows down, so the running values are held for three rows at
-    // a time (the one being converted and the two below it) instead of for the whole image.
-    const mw = Math.ceil(w / k), mh = Math.ceil(h / k);
-    const fill = (row, y) => {
-      if (y < mh) for (let x = 0, p = y * k * w; x < mw; x++, p += k) row[x] = solid(p) ? tones[lum[p]] * 255 : 0;
+    // a time (the one being converted and the two below it) instead of for the whole picture.
+    const fill = (row, j) => {
+      if (j < mh) for (let i = 0, from = ys[j] * w; i < mw; i++) { const p = from + xs[i]; row[i] = solid(p) ? tones[lum[p]] * 255 : 0; }
       return row;
     };
     let v = fill(new Float32Array(mw), 0), next = fill(new Float32Array(mw), 1), after = fill(new Float32Array(mw), 2);
-    for (let y = 0, o = 0; y < mh; y++) {
-      for (let x = 0, p = y * k * w; x < mw; x++, p += k, o++) {
-        if (!solid(p)) continue;
-        const on = v[x] > 127.5, e = (v[x] - (on ? 255 : 0)) / 8;
+    for (let j = 0, o = 0; j < mh; j++) {
+      for (let i = 0, row = ys[j] * w; i < mw; i++, o++) {
+        if (!solid(row + xs[i])) continue;
+        const on = v[i] > 127.5, e = (v[i] - (on ? 255 : 0)) / 8;
         m[o] = on ? 2 : 1;
-        if (x + 1 < mw) v[x + 1] += e;
-        if (x + 2 < mw) v[x + 2] += e;
-        if (y + 1 < mh) {
-          if (x > 0) next[x - 1] += e;
-          next[x] += e;
-          if (x + 1 < mw) next[x + 1] += e;
+        if (i + 1 < mw) v[i + 1] += e;
+        if (i + 2 < mw) v[i + 2] += e;
+        if (j + 1 < mh) {
+          if (i > 0) next[i - 1] += e;
+          next[i] += e;
+          if (i + 1 < mw) next[i + 1] += e;
         }
-        if (y + 2 < mh) after[x] += e;
+        if (j + 2 < mh) after[i] += e;
       }
-      [v, next, after] = [next, after, fill(v, y + 3)];
+      [v, next, after] = [next, after, fill(v, j + 3)];
     }
     return m;
   }
 
-  // Checker, Hatch, Bayer and Noise. The pattern is laid over the kept pixels: `cy` and `cx` are
-  // a kept pixel's row and column within the pattern's tile. They are kept by counting, because
-  // a division for every pixel would cost more than the rest of the loop.
+  // Checker, Hatch, Bayer and Noise. The pattern is laid over the picture's own pixels: `cy` and
+  // `cx` are a pixel's row and column within the pattern's tile. They are kept by counting,
+  // because a division for every pixel would cost more than the rest of the loop.
   const { n, cuts } = TILES[style];
-  for (let y = 0, o = 0, cy = 0; y < h; y += k, cy = cy + 1 < n ? cy + 1 : 0) {
-    for (let x = 0, p = y * w, cx = 0; x < w; x += k, p += k, o++, cx = cx + 1 < n ? cx + 1 : 0) {
+  for (let j = 0, o = 0, cy = 0; j < mh; j++, cy = cy + 1 < n ? cy + 1 : 0) {
+    for (let i = 0, row = ys[j] * w, cx = 0; i < mw; i++, o++, cx = cx + 1 < n ? cx + 1 : 0) {
+      const p = row + xs[i];
       if (solid(p)) m[o] = tones[lum[p]] > cuts[cy * n + cx] ? 2 : 1;
     }
   }
   return m;
 }
 
-// Every k-th pixel of every k-th row of an ImageData-shaped object, as RGBA pixels: the image
-// with the same pixels left out as `mask` leaves out for the same k.
-export function shrink({ width: w, height: h, data }, k) {
-  const from = new Uint32Array(data.buffer, data.byteOffset, w * h), to = new Uint32Array(Math.ceil(w / k) * Math.ceil(h / k));
-  for (let y = 0, o = 0; y < h; y += k) for (let x = 0, p = y * w; x < w; x += k, p += k, o++) to[o] = from[p];
+// A smaller picture of an ImageData-shaped object, mw by mh, as RGBA pixels: the same pixels of
+// the original that `mask` stands a picture of that size on.
+export function shrink({ width: w, height: h, data }, mw, mh) {
+  const from = new Uint32Array(data.buffer, data.byteOffset, w * h), to = new Uint32Array(mw * mh), xs = spread(w, mw), ys = spread(h, mh);
+  for (let j = 0, o = 0; j < mh; j++) for (let i = 0, row = ys[j] * w; i < mw; i++, o++) to[o] = from[row + xs[i]];
   return new Uint8ClampedArray(to.buffer);
 }
 

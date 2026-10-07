@@ -22,18 +22,30 @@ export function fitGrid(count, width, height, { gap, extra, min }) {
   return { cols, size: Math.min(Math.floor((width - (cols - 1) * gap) / cols), one), scroll: true };
 }
 
-// The k a tile gives `mask` for an image of w by h pixels: it converts every k-th pixel of every
-// k-th row. `across` is how many screen pixels the tile has for the image's longer side.
+// The size of the picture a tile draws of an image of w by h pixels: the [width, height] it
+// asks `mask` for. `across` is how many screen pixels the tile has for the image's longer side.
 //
-// Normally k is the largest that still leaves an image pixel for each screen pixel. While the
-// threshold slider is dragged there is a `budget`, the milliseconds this tile may take for each
-// move, and `pace`, the milliseconds per pixel its last conversion took. If the image would take
-// longer than the budget, k is the smallest at which it is expected to fit: a rougher draft.
-// An image that is shown whole (k of 1) is never drafted, as that would drop pixels of a sprite
-// that the screen was showing. And k never leaves the shorter side fewer than 32 pixels, or a
-// long thin image would be drawn in the wrong shape once its few rows were rounded up.
-export function sampling(w, h, across, budget = 0, pace = 0) {
-  const most = Math.max(1, Math.floor(Math.min(w, h) / 32));
-  const fit = Math.min(most, Math.max(1, Math.floor(Math.max(w, h) / across)));
-  return budget && fit > 1 ? Math.min(most, Math.max(fit, Math.ceil(Math.sqrt((w * h * pace) / budget)))) : fit;
+// An image no larger than that is drawn whole. A larger one is drawn at the tile's own size,
+// a pixel of the picture for each pixel of the screen, as more could not be seen.
+//
+// While the threshold slider is dragged there is a `budget`, the milliseconds this tile may
+// take for each move, and `pace`, the milliseconds per pixel its last conversion took. If a
+// picture of the tile's size would take longer than the budget, a smaller one that is expected
+// to fit is drawn instead: a rougher draft. An image that is drawn whole is never drafted, as
+// that would drop pixels of a sprite that the screen was showing.
+//
+// A picture that is a whole number of times smaller than the image, or nearly so, is made a
+// little smaller still. Its pixels would fall at the same place in every repeat of a fine
+// regular texture (dithered art, stripes, a stippled transparency), and the whole image would
+// come out all light or all dark. Off the whole number, the picture is right on average.
+//
+// The shorter side is never given fewer than 32 pixels, unless the image has fewer: a long thin
+// image would be drawn in the wrong shape once its few rows were rounded.
+export function shown(w, h, across, budget = 0, pace = 0) {
+  let scale = Math.min(1, across / Math.max(w, h));
+  if (budget && pace && scale < 1) scale = Math.min(scale, Math.sqrt(budget / (w * h * pace)));
+  const times = 1 / scale;
+  if (times > 1.5 && Math.abs(times - Math.round(times)) < 0.04) scale /= 1.06;
+  scale = Math.min(1, Math.max(scale, 32 / Math.min(w, h)));
+  return [Math.max(1, Math.round(w * scale)), Math.max(1, Math.round(h * scale))];
 }
