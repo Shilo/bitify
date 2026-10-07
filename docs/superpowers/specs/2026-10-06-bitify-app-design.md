@@ -529,23 +529,23 @@ in browsers.
 
 ## Installing
 
-Bitify can be installed as an app, and that is all: there is no service worker, nothing is
-cached, and it does not open offline. An installed copy loads from the site like a browser
+Bitify can be installed as an app, and that is all: there is no service worker, the app
+caches nothing itself, and it does not open offline. An installed copy loads from the site like a browser
 tab does, so every deploy reaches it the same way.
 
 - `public/manifest.webmanifest` gives the name, the standalone display, the dark background
-  color for the title bar and the splash screen, and three icons. Its start address and scope
-  are relative, so it works under `/bitify/`.
+  color for the title bar and the splash screen, and three icons. Its start address is
+  relative, so it works under `/bitify/`.
 - The icons in `public/` are made from the favicon, `public/favicon.svg`, by `npx @vite-pwa/assets-generator`
   (settings in `pwa-assets.config.js`): 192px and 512px, a 512px one with room for a mask,
   and a 180px one for iOS. The last two have the logo's orange behind them.
 - `index.html` links the manifest and the iOS icon, and sets the browser's bar color to the
   page background, light or dark.
-- Chrome, Edge and other Chromium browsers tell the page when the app can be installed and
-  is not yet. The page keeps that offer and shows Install in the More menu; pressing it opens
+- Chrome, Edge and other Chromium browsers, on desktop and Android, tell the page when the
+  app can be installed and is not yet. The page keeps that offer and shows Install in the More menu; pressing it opens
   the browser's own install prompt. The offer works once, so the row then goes until the
-  browser offers again. Safari and Firefox make no such offer and never show the row; there
-  the app is installed from the browser's own menu (on iOS, Share, then Add to Home Screen).
+  browser offers again. Safari, Firefox and every browser on iOS make no such offer and never
+  show the row; there the app is installed from the browser's own menu (on iOS, Share, then Add to Home Screen).
 
 ## Structure
 
@@ -627,8 +627,9 @@ Dependencies beyond Vite and Svelte:
   or Ctrl with wheel, arrow keys and swipes, on the empty screen, on a wall that fits and on one
   that scrolls, where the wheel and an up-or-down swipe over the images must scroll them
   and change nothing.
-- Installing is checked by hand in Chrome on the deployed site: Install appears in the More
-  menu, opens the browser's prompt, and is gone once the app is installed.
+- Installing is checked by hand in Chrome, on the deployed site or on `npm run preview`:
+  Install appears in the More menu, opens the browser's prompt, and is gone once the app is
+  installed. Chrome can hold its offer back until the page has been used for a while.
 
 ## Not included
 

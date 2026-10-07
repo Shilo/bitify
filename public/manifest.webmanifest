@@ -1,9 +1,6 @@
 {
   "name": "Bitify",
-  "short_name": "Bitify",
-  "description": "Convert sprites and animated GIFs to 1-bit colors and styles.",
   "start_url": "./",
-  "scope": "./",
   "display": "standalone",
   "theme_color": "#17181d",
   "background_color": "#17181d",
