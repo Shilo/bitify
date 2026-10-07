@@ -10,7 +10,7 @@
   import Dock from './Dock.svelte';
   import Tile from './Tile.svelte';
   import PixelIcon from './PixelIcon.svelte';
-  import logoUrl from './assets/logo.png';
+  import logoUrl from './assets/logo.gif';
 
   const touch = matchMedia('(pointer:coarse)').matches;
 

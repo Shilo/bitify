@@ -241,8 +241,9 @@ viewport height so mobile browser bars do not cut the dock off.
 A centered heading ("Drop pixel art anywhere", or "Add pixel art" on touch devices), one
 line of explanation, and a "Choose images" button. The dock stays visible.
 
-Above the heading sits the Bitify logo, a 32×32 gold coin with a B (`src/assets/logo.png`),
-labelled "Example". It is a live preview: it goes through the same conversion as real
+Above the heading sits the Bitify logo, a 28×28 spinning gold coin with a B
+(`src/assets/logo.gif`, an eight-frame animation), labelled "Example". It plays like any
+animated GIF on the wall. It is a live preview: it goes through the same conversion as real
 images, so the colors, Swap, palettes, style, threshold, the view switch and
 hold or Space all apply to it. It is for previewing only. It has no Download or Remove, is
 not counted, and is never included in Download all. It disappears when the first image is
