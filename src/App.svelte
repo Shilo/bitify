@@ -107,8 +107,13 @@
     if (e.clipboardData?.files.length) addFiles([...e.clipboardData.files]);
   }
 
-  // Holding Space flips the whole wall, except while a control has focus (Space presses it).
-  const onControl = e => /^(INPUT|BUTTON|TEXTAREA|SELECT)$/.test(e.target.tagName);
+  // Holding Space flips the whole wall, except while a control that uses Space has focus.
+  const onControl = e => e.target.matches?.('button, select, textarea, input:not([type=range])');
+  // A mouse or touch click leaves focus on the button, where Space would press it again instead
+  // of comparing. Keyboard presses (detail 0) keep their focus.
+  function unfocus(e) {
+    if (e.detail > 0) e.target.closest?.('button')?.blur();
+  }
   function keydown(e) {
     if (e.code === 'Space' && !onControl(e)) { e.preventDefault(); spaceHeld = true; }
   }
@@ -125,6 +130,7 @@
   onpaste={paste}
   onkeydown={keydown}
   onkeyup={keyup}
+  onclick={unfocus}
   onblur={() => { dragDepth = 0; spaceHeld = false; }}
 />
 
