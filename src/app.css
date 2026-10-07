@@ -258,13 +258,13 @@ button { font: inherit; color: inherit; }
 .seg button[aria-pressed="true"] { background: var(--surface); color: var(--fg); box-shadow: 0 1px 2px var(--shadow); }
 /* The bitified half shows the style's name. It is wide enough for the longest, "Silhouette", so
    the dock does not move as styles are stepped through. */
-.seg button:last-child { min-width: 7em; }
+.dock > .seg button:last-child { min-width: 7em; }
 
 /* Panels open above the dock as a strip: one row of controls. A panel is kept short because the
    wall is resized to sit above it (--panel-space), so the images stay in view while they change. */
 .panel {
   position: absolute; bottom: calc(100% + 10px); left: 50%; transform: translateX(-50%);
-  width: min(560px, calc(100vw - 64px));
+  width: min(700px, calc(100vw - 64px));
   display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 10px 12px;
   background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 10px 32px var(--shadow);
 }
@@ -318,7 +318,7 @@ button { font: inherit; color: inherit; }
   width: 42px; height: 42px; border-radius: 6px; image-rendering: pixelated;
   background: conic-gradient(var(--tile2) 25%, var(--tile) 0 50%, var(--tile2) 0 75%, var(--tile) 0) 0 0 / 12px 12px;
 }
-/* The threshold's number box and its Auto button, joined into one control: Auto is what fills in the number. */
+/* A setting's number box and its Auto button, joined into one control: Auto is what fills in the number. */
 .field { flex: none; display: flex; box-sizing: border-box; height: var(--hit); border: 1px solid var(--line); border-radius: 10px; }
 .field:focus-within { outline: 2px solid var(--fg); outline-offset: 2px; }
 .field > * { outline: none; }
@@ -336,13 +336,45 @@ button { font: inherit; color: inherit; }
 }
 .tnum::placeholder { color: var(--muted); }
 .tnum::-webkit-inner-spin-button, .tnum::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-#threshold { flex: 1; min-width: 0; height: var(--hit); margin: 0; accent-color: var(--fg); }
+.panel input[type="range"] { flex: 1; min-width: 0; height: var(--hit); margin: 0; accent-color: var(--fg); }
 
 /* the style panel */
 .pick { display: flex; align-items: center; gap: 8px; } /* the word "Style", then the button that shows the style */
 .pick .btn { padding: 0 14px 0 8px; }
 .pick .btn .demo { width: 28px; height: 28px; background-size: 8px 8px; }
 .thr { flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; }
+/* A style's other settings. On a wide screen More opens them all at once, in a tray under the
+   strip: the panel grows upward and the wall makes room for it, as for any panel. A screen too
+   short to spare the height scrolls the tray inside itself, so the wall always keeps some room. */
+.extra { gap: 6px; padding: 0 10px 0 12px; } /* the More button */
+.dot { width: 6px; height: 6px; background: var(--fg); } /* one of the hidden settings is not at its default */
+.adv {
+  flex-basis: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 24px;
+  max-height: max(var(--hit), calc(100vh - 440px)); max-height: max(var(--hit), calc(100dvh - 440px)); overflow-y: auto; overscroll-behavior: contain;
+  padding-top: 10px; border-top: 1px solid var(--line);
+}
+.row { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.row .key { flex: none; width: 80px; font-size: 13px; }
+.panel .seg { flex: 1; min-width: 0; }
+.panel .seg button { flex: 1; min-width: 0; padding: 0 4px; }
+.foot { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 8px; color: var(--muted); font-size: 12px; }
+.foot .btn { height: 28px; min-width: 0; padding: 0 10px; font-size: 12px; }
+.ib:disabled { opacity: 0.4; cursor: default; }
+/* On a phone every setting is a chip showing its value, in a row that scrolls sideways, and the
+   chip that is pressed has its control on the row below. So the panel is two rows high for
+   every style, and the wall keeps its room. */
+.sets { flex: 1; min-width: 0; display: flex; gap: 6px; overflow-x: auto; overscroll-behavior: contain; scrollbar-width: none; }
+.sets::-webkit-scrollbar { display: none; }
+.chip {
+  flex: none; display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
+  box-sizing: border-box; height: var(--hit); padding: 0 10px; border: 1px solid var(--line); border-radius: 10px; background: transparent;
+  line-height: 1.15; white-space: nowrap; cursor: pointer;
+}
+.chip span { color: var(--muted); font-size: 11px; }
+.chip b { font-size: 12px; }
+.chip[aria-pressed="true"] { border-color: var(--fg); background: var(--tile); }
+.chip.changed b::after { content: " \2022"; } /* not at its default */
+.thr .ib { width: var(--hit); height: var(--hit); background: transparent; }
 /* the list of styles, opened by the style button; it sits above the panel, lined up with its left edge */
 .menu {
   position: absolute; bottom: calc(100% + 10px); left: 0; box-sizing: border-box; max-width: 100%; padding: 8px;
@@ -351,6 +383,10 @@ button { font: inherit; color: inherit; }
 }
 .menu .preset { padding: 8px 6px; }
 
+/* too narrow for two settings side by side in the tray */
+@media (max-width: 700px) {
+  .adv { grid-template-columns: minmax(0, 1fr); }
+}
 /* narrower screens: icon-only dock buttons */
 @media (max-width: 800px) {
   .dock .lbl, .dock > .sep { display: none; }
@@ -373,11 +409,12 @@ button { font: inherit; color: inherit; }
   .chips { padding: 8px 12px 10px; }
   .fit::before, .fit::after { top: 30px; }
   .fit::before { left: -1px; padding-left: 7px; background: linear-gradient(to right, var(--surface) 40%, transparent); }
-  /* the style button fills the first row, with its caret at the right end; the threshold has its own row below */
-  .pick { flex: 1; }
-  .pick .btn { flex: 1; justify-content: flex-start; }
-  .pick .ico { margin-left: auto; }
-  .thr { flex-basis: 100%; order: 1; }
+  /* The style button is only its preview and caret here, and leaves the rest of the first row to
+     the chips. The view switch in the dock already names the style. The control of the chosen
+     chip has its own row below. */
+  .pick .key, #style-name { display: none; }
+  .pick .btn { padding: 0 8px; }
+  .thr { flex-basis: 100%; }
   .panel > .sep { display: none; } /* dividers only make sense while the panel is a single row */
   .menu { right: 0; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }

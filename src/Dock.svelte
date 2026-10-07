@@ -1,6 +1,7 @@
 <script module>
   import { mask, colorize, previewBall } from './lib/bitify.js';
   import { PRESETS, STYLES, isPalette, inOrder } from './lib/presets.js';
+  import { SETTINGS, STYLE_SETTINGS, defaults, changed, shown } from './lib/settings.js';
 
   const BALL = previewBall(); // previews each style
 </script>
@@ -16,22 +17,24 @@
     first = $bindable(),
     second = $bindable(),
     style = $bindable(),
-    threshold = $bindable(), // null means Auto
+    settings = $bindable(), // each style's own settings, by style
     showOriginal = $bindable(),
-    dragging = $bindable(), // whether the threshold slider is being dragged
-    autoRange, // [lowest, highest] threshold Auto is using
+    dragging = $bindable(), // whether a slider of the style panel is being dragged
+    autos, // [lowest, highest] value Auto is using, for each setting that has an Auto
     count,
     onsaveall,
   } = $props();
 
   let panel = $state(null); // null, 'palettes' or 'style'
-  // `dragging` while the threshold slider is being dragged and has not come to rest (see
+  // `dragging` while a slider of the style panel is being dragged and has not come to rest (see
   // sliderDrag). `tick` settles once the wall has redrawn for a move.
   const drag = sliderDrag(now => (dragging = now), tick);
-  // Closing the panel takes the slider away, and with it the events that end a drag. The drag is
-  // ended here too when the dock itself goes, so its timer never outlives it.
+  // Closing the panel takes the slider away, and with it the events that end a drag. So does
+  // anything else that changes which sliders show. The drag is ended here too when the dock
+  // itself goes, so its timer never outlives it.
   $effect(() => {
-    if (panel !== 'style') drag.end();
+    panel, style, more, active, chips; // read, so this runs when any of them changes
+    drag.end();
     return drag.end;
   });
   let pop = $state(null); // what is open above the style panel: null or 'styles'
@@ -50,16 +53,45 @@
 
   const styleName = $derived(STYLES.find(s => s[0] === style)[1]);
   const saveLabel = $derived(count > 1 ? 'Download all' : 'Download');
-  const demo = key => new ImageData(colorize(mask(BALL, key), first, second), BALL.w, BALL.h);
+  const demo = key => new ImageData(colorize(mask(BALL, key, settings[key]), first, second), BALL.w, BALL.h);
 
-  // What Auto picked, shown in the number box while it is empty: a range when images differ.
-  const autoShown = $derived(autoRange[0] === autoRange[1] ? `${autoRange[0]}` : `${autoRange[0]}–${autoRange[1]}`);
+  // The current style's settings: the values, and which settings they are. The threshold has its
+  // place on the strip; `rest` is the others.
+  const own = $derived(settings[style]);
+  const keys = $derived(STYLE_SETTINGS[style]);
+  const rest = $derived(keys.filter(key => key !== 'threshold'));
+  // A wide screen shows the others all at once, in a tray that More opens under the strip.
+  let more = $state(false);
+  // A phone has no room for that with the images still in view. It shows every setting as a chip
+  // and one setting's control at a time: `active`, the chip last pressed, or the first while
+  // the style has no such setting.
+  // 520px is where app.css lays the dock out for a phone.
+  let width = $state(innerWidth);
+  const chips = $derived(width <= 520);
+  let pressed = $state('threshold');
+  const active = $derived(keys.includes(pressed) ? pressed : keys[0]);
+  function reset() {
+    settings[style] = defaults(style);
+  }
 
-  // Typing a number sets the threshold; clearing the box goes back to Auto.
-  function typed(e) {
-    const box = e.currentTarget;
-    if (box.value === '') threshold = null;
-    else box.value = threshold = Math.min(254, Math.max(1, Math.round(+box.value)));
+  // A number box is empty while its setting is on Auto or off, and then shows this instead: what
+  // Auto picked (a range when images differ), or the word for off.
+  const hint = key => {
+    const [low, high] = SETTINGS[key].auto ? autos[key] : [];
+    return SETTINGS[key].auto ? (low === high ? `${low}` : `${low}–${high}`) : (SETTINGS[key].zero ?? '');
+  };
+  const boxed = key => (own[key] === null || (own[key] === 0 && SETTINGS[key].zero) ? '' : own[key]);
+  // Typing a number sets the setting. Clearing the box goes back to Auto, or turns off a setting
+  // that 0 turns off; for any other setting an empty box changes nothing, and waits for a number.
+  function typed(e, key) {
+    const box = e.currentTarget, { min, max, auto, zero } = SETTINGS[key];
+    if (box.value === '') {
+      if (auto) own[key] = null;
+      else if (zero) own[key] = 0;
+      return;
+    }
+    own[key] = Math.min(max, Math.max(min, Math.round(+box.value)));
+    box.value = boxed(key);
   }
 
   const toggle = name => (panel = panel === name ? null : name);
@@ -104,6 +136,7 @@
      if it is open, and the panel otherwise. These listen on the way down, so the
      press and the click that follows it never reach what was pressed. -->
 <svelte:window
+  bind:innerWidth={width}
   onpointerdowncapture={e => {
     eaten = pop ? !e.target.closest?.('.anchor') : !!panel && !dock.contains(e.target);
     if (!eaten) return;
@@ -124,6 +157,50 @@
     else panel = null;
   }}
 />
+
+<!-- One setting's control: a few buttons to choose between, or a slider with a number box, joined
+     to an Auto button where the setting has an Auto. -->
+{#snippet control(key)}
+  {@const { label, options, min, max, auto } = SETTINGS[key]}
+  {#if options}
+    <div class="seg" role="group" aria-label={label}>
+      {#each options as [value, name]}
+        <button aria-pressed={own[key] === value} onclick={() => (own[key] = value)}>{name}</button>
+      {/each}
+    </div>
+  {:else}
+    <input
+      type="range"
+      {min}
+      {max}
+      aria-label={label}
+      value={own[key] ?? Math.round((autos[key][0] + autos[key][1]) / 2)}
+      onpointerdown={drag.press}
+      oninput={e => { own[key] = +e.currentTarget.value; drag.move(); }}
+      onchange={drag.end}
+      onpointerup={drag.end}
+      onpointercancel={drag.end}
+      onblur={drag.end}
+    />
+    <div class="field">
+      <input
+        class="tnum"
+        type="number"
+        {min}
+        {max}
+        aria-label="{label} value"
+        value={boxed(key)}
+        placeholder={hint(key)}
+        style:--chars={boxed(key) === '' ? Math.max(3, hint(key).length) : 3}
+        oninput={e => typed(e, key)}
+        onblur={e => (e.currentTarget.value = boxed(key))}
+      />
+      {#if auto}
+        <button aria-pressed={own[key] === null} title="Auto {label.toLowerCase()}" onclick={() => (own[key] = null)}>Auto</button>
+      {/if}
+    </div>
+  {/if}
+{/snippet}
 
 <div class="dock" bind:this={dock}>
   {#if panel === 'palettes'}
@@ -164,37 +241,45 @@
           <Pixels class="demo" pixels={demo(style)} /><span id="style-name">{styleName}</span><PixelIcon name="caret" />
         </button>
       </div>
-      <span class="sep"></span>
-      <div class="thr">
-        <input
-          id="threshold"
-          type="range"
-          min="1"
-          max="254"
-          aria-label="Threshold"
-          value={threshold ?? Math.round((autoRange[0] + autoRange[1]) / 2)}
-          onpointerdown={drag.press}
-          oninput={e => { threshold = +e.currentTarget.value; drag.move(); }}
-          onchange={drag.end}
-          onpointerup={drag.end}
-          onpointercancel={drag.end}
-          onblur={drag.end}
-        />
-        <div class="field">
-          <input
-            class="tnum"
-            type="number"
-            min="1"
-            max="254"
-            aria-label="Threshold value"
-            value={threshold ?? ''}
-            placeholder={autoShown}
-            style:--chars={threshold === null ? Math.max(3, autoShown.length) : 3}
-            oninput={typed}
-          />
-          <button aria-pressed={threshold === null} title="Auto threshold" onclick={() => (threshold = null)}>Auto</button>
+      {#if chips}
+        <div class="sets" role="group" aria-label="Settings" onwheel={e => (e.currentTarget.scrollLeft += e.deltaY)}>
+          {#each keys as key}
+            <button
+              class="chip"
+              class:changed={changed(style, own, [key])}
+              aria-pressed={key === active}
+              onclick={e => { pressed = key; e.currentTarget.scrollIntoView({ block: 'nearest', inline: 'nearest' }); }}
+            >
+              <span>{SETTINGS[key].label}</span><b>{shown(key, own[key])}</b>
+            </button>
+          {/each}
         </div>
-      </div>
+        <div class="thr">
+          {@render control(active)}
+          <button class="ib" disabled={!changed(style, own)} aria-label="Reset {styleName}" title="Reset {styleName}" onclick={reset}><PixelIcon name="reset" /></button>
+        </div>
+      {:else}
+        <span class="sep"></span>
+        {#if keys[0] === 'threshold'}
+          <div class="thr">{@render control('threshold')}</div>
+        {:else}
+          <span class="grow"></span>
+        {/if}
+        <button class="btn extra" aria-expanded={more} aria-label="More settings" title="More settings" onclick={() => (more = !more)}>
+          More{#if changed(style, own, rest)}<span class="dot"></span>{/if}<PixelIcon name="caret" />
+        </button>
+        {#if more}
+          <div class="adv">
+            {#each rest as key}
+              <div class="row"><span class="key">{SETTINGS[key].label}</span>{@render control(key)}</div>
+            {/each}
+            <div class="foot">
+              <span>{styleName} keeps these for itself.</span>
+              <button class="btn" disabled={!changed(style, own)} onclick={reset}>Reset</button>
+            </div>
+          </div>
+        {/if}
+      {/if}
     </div>
   {/if}
 

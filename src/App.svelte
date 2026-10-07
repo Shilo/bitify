@@ -16,7 +16,7 @@
   const touch = matchMedia('(pointer:coarse)').matches;
   const mod = /Mac/.test(navigator.platform) ? '⌘' : 'Ctrl'; // the key the help names for pasting and copying
 
-  // The colors, style and threshold are kept between visits. A browser can refuse storage
+  // The colors, the style and every style's settings are kept between visits. A browser can refuse storage
   // (private windows, blocked site data), and then the app simply starts from the defaults.
   let stored = null;
   try {
@@ -29,10 +29,13 @@
   let first = $state(saved.first); // lines and dark pixels
   let second = $state(saved.second); // fill and light pixels
   let style = $state(saved.style);
-  let threshold = $state(saved.threshold); // null means Auto
+  // Each style's own settings, by style (see lib/settings.js). `set` is the current style's, as
+  // a plain object that is a new one whenever any of them changes.
+  let settings = $state(saved.settings);
+  const set = $derived({ ...settings[style] });
   $effect(() => {
     try {
-      localStorage.setItem('bitify', JSON.stringify({ first, second, style, threshold }));
+      localStorage.setItem('bitify', JSON.stringify({ first, second, style, settings }));
     } catch {
       // no storage; the settings last until the page is closed
     }
@@ -43,13 +46,13 @@
     if (stored === null) help.showModal();
   });
   let showOriginal = $state(false);
-  // Changing the style or the threshold, by any route, shows the result: the view goes back to bitified.
+  // Changing the style or one of its settings, by any route, shows the result: the view goes back to bitified.
   $effect(() => {
-    style, threshold; // read, so this runs when either changes
+    style, set; // read, so this runs when either changes
     showOriginal = false;
   });
   let spaceHeld = $state(false);
-  // While the threshold slider is being dragged, the wall as a whole gets this many milliseconds
+  // While a slider of the style panel is being dragged, the wall as a whole gets this many milliseconds
   // to redraw after each move, shared out between the tiles (see `budget` in Tile.svelte).
   const DRAG_MS = 24;
   let dragging = $state(false);
@@ -57,10 +60,12 @@
   let items = $state.raw([]);
   // The logo, shown on the empty screen as a live preview of the settings. Never saved or counted.
   let example = $state.raw(null);
-  // The lowest and highest threshold Auto is using for the images on screen, for the Dock to show.
-  const autoRange = $derived.by(() => {
-    const autos = (items.length ? items : example ? [example] : []).map(i => autoThreshold(i.img, style));
-    return autos.length ? [Math.min(...autos), Math.max(...autos)] : [128, 128];
+  // The lowest and highest value Auto is using for the images on screen, for the Dock to show:
+  // of the threshold, and of Cutout's seam strength.
+  const autos = $derived.by(() => {
+    const imgs = (items.length ? items : example ? [example] : []).map(i => i.img);
+    const range = of => (imgs.length ? [Math.min(...imgs.map(of)), Math.max(...imgs.map(of))] : [128, 128]);
+    return { threshold: range(img => autoThreshold(img, style)), seams: range(img => img.autoSeam) };
   });
   // Size of the area the wall can use, measured from the page (see .probe in app.css).
   let wallWidth = $state(0);
@@ -253,13 +258,31 @@
     return { frames: [{ original }] };
   }
 
+  // What the current style reads an image by: what brightness is taken from, and how see-through
+  // a pixel may be before it is empty. An image is analysed by these, and `by` on an item says
+  // which it was analysed by.
+  const reading = $derived(`${set.source ?? 'luma'} ${set.alpha}`);
+
   // Turns decoded frames into an item for the wall. `original` and `img` are the first frame;
   // an animation also has `frames` (each with its own original, img and delay) and `loop`.
   function toItem(id, name, { frames, loop }) {
-    for (const frame of frames) frame.img = analyze(frame.original);
+    const by = reading;
+    for (const frame of frames) frame.img = analyze(frame.original, set.source, set.alpha);
     unify(frames.map(frame => frame.img)); // one conversion for the whole animation, so it does not flicker
-    return frames.length > 1 ? { id, name, ...frames[0], frames, loop } : { id, name, ...frames[0] };
+    return frames.length > 1 ? { id, name, by, ...frames[0], frames, loop } : { id, name, by, ...frames[0] };
   }
+  // The item analysed the way the current style reads images: itself, if it already is.
+  const reread = item =>
+    item.by === reading ? item : toItem(item.id, item.name, { frames: (item.frames ?? [item]).map(f => ({ original: f.original, delay: f.delay })), loop: item.loop });
+  // When a setting or a change of style changes how images are read, every image is analysed
+  // again. That reads every pixel, so while a slider is being dragged over a wall with a lot of
+  // pixels on it, it waits for the slider to rest or be let go.
+  $effect(() => {
+    if (dragging && items.reduce((n, item) => n + pixelsOf(item), 0) > 1e6) return;
+    const next = items.map(reread);
+    if (next.some((item, i) => item !== items[i])) items = next;
+    if (example) example = reread(example);
+  });
 
   fetch(logoUrl)
     .then(response => response.blob())
@@ -298,12 +321,12 @@
   // animation. These masks are of every pixel, always: never the smaller picture a tile draws.
   // `asked` is the settings at the moment of asking (see `asking`). A long job starts a moment
   // after it is asked for, and what it saves is what was on screen then, whatever is changed since.
-  const asking = () => ({ first, second, style, threshold });
+  const asking = () => ({ first, second, style, set });
   const about = (item, asked) => ({ name: item.name, w: item.img.w, h: item.img.h, first: asked.first, second: asked.second });
-  const still = (item, asked) => ({ ...about(item, asked), mask: mask(item.img, asked.style, asked.threshold) });
+  const still = (item, asked) => ({ ...about(item, asked), mask: mask(item.img, asked.style, asked.set) });
   const bitified = (item, asked) =>
     item.frames
-      ? { ...about(item, asked), loop: item.loop, frames: item.frames.map(f => ({ mask: mask(f.img, asked.style, asked.threshold), delay: f.delay })) }
+      ? { ...about(item, asked), loop: item.loop, frames: item.frames.map(f => ({ mask: mask(f.img, asked.style, asked.set), delay: f.delay })) }
       : still(item, asked);
 
   async function save(item) {
@@ -430,7 +453,7 @@
           {first}
           {second}
           {style}
-          {threshold}
+          {set}
           flipped={showOriginal !== spaceHeld}
           budget={dragging ? DRAG_MS / items.length : 0}
           onshare={() => share(item)}
@@ -445,7 +468,7 @@
   <div class="empty">
     <div class="empty-in">
       {#if example}
-        <Tile item={example} {first} {second} {style} {threshold} flipped={showOriginal !== spaceHeld} />
+        <Tile item={example} {first} {second} {style} {set} flipped={showOriginal !== spaceHeld} />
       {/if}
       <div class="empty-text">
         <h2>Pixel art in two colors</h2>
@@ -456,7 +479,7 @@
   </div>
 {/if}
 
-<Dock bind:first bind:second bind:style bind:threshold bind:showOriginal bind:dragging {autoRange} count={items.length} onsaveall={saveEverything} />
+<Dock bind:first bind:second bind:style bind:settings bind:showOriginal bind:dragging {autos} count={items.length} onsaveall={saveEverything} />
 
 {#if dragDepth > 0}
   <div class="drop" style:background={second} style:color={overlayInk}>Drop to bitify</div>
@@ -495,7 +518,7 @@
     <ol>
       <li><PixelIcon name="plus" /><b>Add</b>{touch ? 'Choose images.' : 'Drop, paste or choose images.'}</li>
       <li><PixelIcon name="grid" /><b>Palette</b>Pick two colors, or a preset.</li>
-      <li><PixelIcon name="sliders" /><b>Style</b>Pick effect, tune threshold.</li>
+      <li><PixelIcon name="sliders" /><b>Style</b>Pick effect, tune its settings.</li>
       <li><PixelIcon name="save" /><b>Save</b>Download or copy images.</li>
     </ol>
     <table>

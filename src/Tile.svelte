@@ -6,9 +6,9 @@
 
   // `flipped` true means the wall is showing originals. Holding the tile shows the other version.
   // Without `onremove` the tile is a preview only and has no buttons.
-  // `budget` is set while the threshold slider is being dragged: the milliseconds this tile may
-  // take to convert its image after each move.
-  let { item, first, second, style, threshold, flipped, budget = 0, onshare, oncopy, onsave, onremove } = $props();
+  // `set` is the style's settings. `budget` is set while one of their sliders is being dragged:
+  // the milliseconds this tile may take to convert its image after each move.
+  let { item, first, second, style, set, flipped, budget = 0, onshare, oncopy, onsave, onremove } = $props();
   let held = $state(false);
   let holdTimer, downX = 0, downY = 0;
 
@@ -50,11 +50,11 @@
   const mw = $derived(size ? size[0] : 0);
   const mh = $derived(size ? size[1] : 0);
 
-  // A frame is converted when it is first shown and then kept: its mask until the style, the
-  // threshold or the picture's size changes, its colored pixels until a color changes too. So a
+  // A frame is converted when it is first shown and then kept: its mask until the style, one of
+  // its settings or the picture's size changes, its colored pixels until a color changes too. So a
   // color change reuses the masks, and an animation converts one frame at a time as it plays.
   const masks = $derived.by(() => {
-    style, threshold, mw, mh; // read, so the masks are dropped when any of these changes
+    style, set, mw, mh; // read, so the masks are dropped when any of these changes
     return frames.map(() => null);
   });
   const colored = $derived.by(() => {
@@ -71,7 +71,7 @@
     if (flipped !== held) return (originals[at] ??= mw < item.img.w ? new ImageData(shrink(frame.original, mw, mh), mw) : frame.original);
     if (!masks[at]) {
       const start = performance.now();
-      masks[at] = mask(frame.img, style, threshold, mw, mh);
+      masks[at] = mask(frame.img, style, set, mw, mh);
       pace = (performance.now() - start) / masks[at].length;
     }
     return (colored[at] ??= new ImageData(colorize(masks[at], first, second), mw));
