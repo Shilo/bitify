@@ -65,9 +65,15 @@
   // A phone has no room for that with the images still in view. It shows every setting as a chip
   // and one setting's control at a time: `active`, the chip last pressed, or the first while
   // the style has no such setting.
-  // 520px is where app.css lays the dock out for a phone.
+  // A phone on its side has the width but not the height, and gets the chips too, in one row.
+  // These are the screens app.css lays out for a phone: 520px wide or less, or 520px high or
+  // less and wider than high.
   let width = $state(innerWidth);
-  const chips = $derived(width <= 520);
+  let height = $state(innerHeight);
+  const chips = $derived(width <= 520 || (height <= 520 && width > height));
+  // The list of styles is one row that scrolls sideways on a phone on its side. It opens with
+  // the current style in view.
+  const reveal = list => list.querySelector('[aria-pressed="true"]')?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
   let pressed = $state('threshold');
   const active = $derived(keys.includes(pressed) ? pressed : keys[0]);
   function reset() {
@@ -137,6 +143,7 @@
      press and the click that follows it never reach what was pressed. -->
 <svelte:window
   bind:innerWidth={width}
+  bind:innerHeight={height}
   onpointerdowncapture={e => {
     eaten = pop ? !e.target.closest?.('.anchor') : !!panel && !dock.contains(e.target);
     if (!eaten) return;
@@ -228,7 +235,7 @@
     <div class="panel" bind:offsetHeight={panelHeight}>
       <div class="pick anchor">
         {#if pop === 'styles'}
-          <div class="menu" role="group" aria-label="Style">
+          <div class="menu" role="group" aria-label="Style" use:reveal onwheel={e => (e.currentTarget.scrollLeft += e.deltaY)}>
             {#each STYLES as [key, name]}
               <button class="preset" aria-pressed={style === key} onclick={() => { style = key; showOriginal = false; pop = null; }}>
                 <Pixels class="demo" pixels={demo(key)} />{name}

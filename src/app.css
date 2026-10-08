@@ -356,7 +356,7 @@ button { font: inherit; color: inherit; }
 .row { display: flex; align-items: center; gap: 8px; min-width: 0; }
 .row .key { flex: none; width: 80px; font-size: 13px; }
 .panel .seg { flex: 1; min-width: 0; box-sizing: border-box; } /* as high as the sliders and boxes beside it */
-.panel .seg button { flex: 1; min-width: 0; padding: 0 4px; }
+.panel .seg button { flex: 1 1 auto; min-width: 0; padding: 0 4px; } /* auto: a longer word gets the room it needs before the rest is shared out */
 .foot { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 8px; color: var(--muted); font-size: 12px; }
 .foot .btn { height: 28px; min-width: 0; padding: 0 10px; font-size: 12px; }
 .ib:disabled { opacity: 0.4; cursor: default; }
@@ -383,6 +383,19 @@ button { font: inherit; color: inherit; }
 }
 .menu .preset { padding: 8px 6px; }
 
+/* A phone on its side has no height to spare: with the tray open the wall would have none left.
+   So it has the chips, as an upright phone does, with the pressed chip's control beside them
+   and not below, and the panel stays one row high. The list of styles is one row there too,
+   scrolling sideways; two rows would not fit above the strip. */
+@media (max-height: 520px) and (orientation: landscape) {
+  .pick .key, #style-name { display: none; }
+  .pick .btn { padding: 0 8px; }
+  .sets { flex: 1 1 0; }
+  .thr { flex: 1.4 1 0; }
+  .menu { display: flex; overflow-x: auto; overscroll-behavior: contain; scrollbar-width: none; }
+  .menu::-webkit-scrollbar { display: none; }
+  .menu .preset { flex: none; }
+}
 /* too narrow for two settings side by side in the tray */
 @media (max-width: 700px) {
   .adv { grid-template-columns: minmax(0, 1fr); }

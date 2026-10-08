@@ -240,8 +240,8 @@ visits.
   button that puts all of the current style's settings, the threshold included, back to
   their defaults. Reset is disabled while they are all at their defaults.
 - The tray is never taller than the window less 440px, and never shorter than one control.
-  When its rows need more than that (a short window, a phone on its side) it scrolls
-  inside itself, so the wall always keeps some room.
+  When its rows need more than that (a short window) it scrolls inside itself, so the wall
+  always keeps some room.
 
 **On a phone** (520px wide and below) there is no room for a tray with the images still in
 view: with six settings open it would leave them a strip a few dozen pixels high. So a
@@ -260,7 +260,19 @@ height it has always had there:
   open; a style that does not have that setting shows its first.
 - There is no More button and no tray.
 
-Which of the two a screen gets follows its width as the window is resized.
+**On a phone on its side** (520px high or less, and wider than high) there is the width for
+a tray but not the height: open, it would leave the wall no room at all. So it has the chips
+too, in one row: the style button (preview and caret), the chips, then the pressed chip's
+control and Reset beside them. The panel is one row high, as the strip always was there.
+The list of styles is one row there as well, scrolling sideways by swipe or wheel, because
+two rows do not fit above the strip; it opens with the current style in view. On a screen
+280px high it still fits, over the top bar while it is open.
+
+Which of these a screen gets follows its size as the window is resized or the phone turned.
+
+In every one of them a row of buttons to choose from gives a longer word the room it needs
+before sharing the rest out equally, so "Value" is whole beside "R", "G" and "B" on the
+narrowest phone.
 
 ### The More menu
 
