@@ -36,6 +36,6 @@ PNGs and GIFs are encoded by hand, not through a canvas, because some browsers a
 
 After a git checkout or merge the dev server can keep serving old CSS. Restart it, or touch the files in src, before trusting the preview.
 
-The loops in bitify.js run once for every pixel of a photo, on phones. Keep them flat, with no array, object or function made per pixel, and time them before and after any change there.
+The loops in bitify.js run once for every pixel of a photo, on phones. Keep them flat, with no array, object or function made per pixel, and time them before and after any change there: node bench/bench.mjs. To check that a change leaves every mask as it was, copy the file to bench/bitify.old.js before the change and run node bench/equiv.mjs after it. docs/performance-handoff.md has the rest, including how to measure the app in a browser and on a phone.
 
 Interface behavior has no automated tests. Check it in a browser at desktop width and at phone width with touch emulation.
