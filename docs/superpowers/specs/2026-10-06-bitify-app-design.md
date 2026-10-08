@@ -61,7 +61,8 @@ One screen, no page scroll. Three layers:
    empty. Below it: file name and pixel size.
 3. **The dock.** A floating bar at the bottom center holding every setting.
 
-Chrome is neutral grey in both light and dark themes (following the system setting), so
+Chrome is neutral grey in both light and dark themes (following the system setting, unless the other theme is
+picked in the More menu), so
 the two chosen colors are the only strong colors on screen. The one exception is Reset in
 the Style panel, which throws settings away and is tinted to say so (see "Style panel"). Icons are 7×7 one-bit pixel
 glyphs. The wordmark and empty-state heading use Pixelify Sans; everything else uses
@@ -301,9 +302,13 @@ narrowest phone.
 ### The More menu
 
 The More button is the last button in the top bar, at every width. It opens a small menu
-that drops down below it, lined up with its right edge, with two or three rows, each an
+that drops down below it, lined up with its right edge, with three or four rows, each an
 icon and a word:
 
+- Dark mode or Light mode, first: switches to the theme it names, which is always the one
+  not showing. The icon is a moon or a sun. A pick that differs from the system setting is
+  kept between visits (see "Remembered settings"); picking the system's own theme goes
+  back to following the system. The browser's bar color follows the theme showing.
 - Help: closes the menu and opens the help (see "Help and welcome").
 - GitHub: opens `https://github.com/Shilo/bitify` in a new tab.
 - Install, last: asks the browser to install Bitify as an app (see "Installing"). The row
@@ -403,7 +408,9 @@ viewport height so mobile browser bars do not cut the dock off.
   route on phones.
 - Pasting an image from the clipboard also adds it.
 - New images are appended; existing ones stay. The images of a batch are read one after
-  another, and each appears as soon as it has been read, without waiting for the rest.
+  another, and a photo appears as soon as it has been read, without waiting for the rest.
+  Sprites are read far quicker than the wall can be fitted again around each one, so
+  images read within a quarter of a second of each other go on the wall together.
 - Remove all also stops any batch that is still being read. Its remaining images are not
   read and do not appear on the wall that was just emptied.
 - Files the browser cannot decode are skipped, and a short message says how many.
@@ -741,18 +748,22 @@ style did before it had settings.
 
 ## Remembered settings
 
-The two colors, the style and every style's settings are saved in the browser on every change and
+The two colors, the style, every style's settings and a picked theme are saved in the browser on every change and
 restored when the app opens. Nothing leaves the device.
 
 - The colors are saved as they are, so a chosen palette, a swap and a custom color all come
   back. A palette is not saved by name; it shows as chosen because its colors match.
 - Each style's settings are saved under the style's name, the threshold among them, as a
   number or as Auto.
+- The theme is saved as `light` or `dark` only while it was picked against the system
+  setting; otherwise nothing is saved for it and the system setting is followed.
+  A short script in `index.html` puts a saved theme in place before the page is first drawn,
+  so the system's theme does not flash.
 - The view switch, the open panel, whether the tray is open and the images are not saved.
 - They are stored as one JSON value under the `localStorage` key `bitify`. On the way back
   each value is checked on its own: a color must be `#rrggbb`, the style one of the nine,
-  and each setting of each style one of its options or a whole number in its range (see
-  "Each style's settings"). Anything else falls back to its default (Glow dark first,
+  each setting of each style one of its options or a whole number in its range (see
+  "Each style's settings"), and the theme `light` or `dark`. Anything else falls back to its default (Glow dark first,
   Cutout, and the defaults in that table), so a damaged or outdated value cannot break the
   app. What was stored before styles had settings held one threshold for all styles; it is
   not carried over, and every style starts at Auto.
@@ -900,6 +911,10 @@ it is doing:
 - The message replaces any other message while a job runs. If jobs overlap it is that of
   the newest one still running, and it goes when the last has ended.
 - The message of a copy stays until the PNG has been made, not only its conversion.
+- A batch that is being read keeps its message from its first large image until it ends,
+  changing the count as it goes. The message does not come and go between files.
+- The square turns at an even speed, not in steps. Some browsers only run an even turn
+  without the page's help.
 
 ## Errors and limits
 

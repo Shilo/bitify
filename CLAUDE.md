@@ -8,7 +8,7 @@ The screen is a wall of image tiles with one floating dock of controls. Images a
 
 Read docs/superpowers/specs/2026-10-06-bitify-app-design.md before changing behavior. It is the source of truth for the rules above, including the exact conversion and layout rules. Update it in the same change as the code.
 
-docs/styles.md explains how each of the nine styles works, with a worked example of each, and what each style's settings do. docs/palettes.md lists the twelve preset palettes, where each comes from, and how to change them.
+docs/styles.md explains how each of the nine styles works, with a worked example of each, and what each style's settings do. docs/palettes.md lists the twelve preset palettes, where each comes from, and how to change them. docs/performance.md explains how the app stays fast with big images on phones: what a tile converts and why, the drafts while a slider is dragged, what was measured, and what was tried and thrown away. Read it before changing bitify.js, layout.js, gesture.js, Tile.svelte or the saving and adding code in App.svelte.
 
 ## Commands
 
@@ -36,6 +36,6 @@ PNGs and GIFs are encoded by hand, not through a canvas, because some browsers a
 
 After a git checkout or merge the dev server can keep serving old CSS. Restart it, or touch the files in src, before trusting the preview.
 
-The loops in bitify.js run once for every pixel of a photo, on phones. Keep them flat, with no array, object or function made per pixel, and time them before and after any change there.
+The loops in bitify.js run once for every pixel of a photo, on phones. Keep them flat, with no array, object or function made per pixel, and time them before and after any change there: node bench/bench.mjs. To check that a change leaves every mask as it was, copy the file to bench/bitify.old.js before the change and run node bench/equiv.mjs after it. docs/performance.md has the rest, including how to measure the app in a browser and on a phone.
 
 Interface behavior has no automated tests. Check it in a browser at desktop width and at phone width with touch emulation.

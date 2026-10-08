@@ -63,6 +63,7 @@ describe('restore', () => {
     const settings = { ...DEFAULTS.settings, lines: { threshold: 90, thickness: 2, darks: 40, alpha: 200 }, hatch: { ...defaults('hatch'), direction: '\\', spacing: 5, scale: 3, shading: 60, source: 'value' } };
     const saved = { first: '#f0f6f0', second: '#222323', style: 'lines', settings };
     expect(restore(JSON.stringify(saved), styles)).toEqual(saved);
+    expect(restore(JSON.stringify({ ...saved, theme: 'light' }), styles)).toEqual({ ...saved, theme: 'light' });
   });
 
   it('falls back to the defaults when nothing usable is stored', () => {
@@ -72,6 +73,8 @@ describe('restore', () => {
   it('replaces only the values it cannot use', () => {
     const text = JSON.stringify({ first: 'red', second: '#ABCDEF', style: 'gone', settings: { cutout: { threshold: 255, seams: 40, rim: 'yes' }, lines: 7, nosuch: { threshold: 3 } } });
     expect(restore(text, styles)).toEqual({ ...DEFAULTS, second: '#ABCDEF', settings: { ...DEFAULTS.settings, cutout: { ...defaults('cutout'), seams: 40 } } });
+    expect(restore(JSON.stringify({ theme: 'dark' }), styles).theme).toBe('dark');
+    expect(restore(JSON.stringify({ theme: 'blue' }), styles).theme).toBe(undefined);
   });
 
   it('starts each style from its defaults when what was stored is from before styles had settings', () => {

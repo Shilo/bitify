@@ -39,6 +39,17 @@ const edge = DEVICE ? { kill() {} } : spawn(process.env.BROWSER ?? 'C:/Program F
   `--window-size=${Math.min(vw + 40, 1500)},${Math.min(vh + 140, 1000)}`, 'about:blank',
 ], { stdio: 'ignore' });
 const sleep = ms => new Promise(r => setTimeout(r, ms));
+// Opens the connection to the page, trying again if the browser, still starting, does not answer.
+async function opened(url) {
+  for (let attempt = 0; attempt < 8; attempt++) {
+    const socket = new WebSocket(url);
+    const ok = await new Promise(done => { socket.onopen = () => done(true); socket.onerror = () => done(false); setTimeout(() => done(false), 4000); });
+    if (ok) return socket;
+    try { socket.close(); } catch {}
+    if (process.env.TRACE) console.error('the browser did not answer, trying again');
+  }
+  throw new Error('could not connect to the browser');
+}
 const quit = async code => { try { ws?.close(); } catch {} edge.kill(); if (DEVICE && target) await fetch(`http://127.0.0.1:${PORT}/json/close/${target.id}`).catch(() => {}); server.close(); process.exit(code); };
 setTimeout(() => { console.log(JSON.stringify({ ...o, error: 'timed out' })); quit(1); }, +(process.env.LIMIT ?? 240) * 1000);
 
@@ -57,16 +68,25 @@ for (let i = 0; i < 75 && !target; i++) {
   await sleep(200);
   try { target = (await (await fetch(`http://127.0.0.1:${PORT}/json`)).json()).find(t => t.type === 'page'); } catch {}
 }
-ws = new WebSocket(target.webSocketDebuggerUrl);
-await new Promise(r => (ws.onopen = r));
+ws = await opened(target.webSocketDebuggerUrl);
 let seq = 0;
 const waiting = new Map();
 ws.onmessage = e => { const m = JSON.parse(e.data); if (m.id && waiting.has(m.id)) { waiting.get(m.id)(m); waiting.delete(m.id); } };
-const send = (method, params = {}) => new Promise(r => { waiting.set(++seq, r); ws.send(JSON.stringify({ id: seq, method, params })); });
+const send = (method, params = {}) => new Promise((r, fail) => { const id = ++seq; waiting.set(id, r); ws.send(JSON.stringify({ id, method, params })); if (process.env.TRACE) console.error('>', method); setTimeout(() => waiting.has(id) && fail(new Error('no answer to ' + method)), 240000); });
 const run = async fn => {
   const m = await send('Runtime.evaluate', { expression: `(${fn})()`, awaitPromise: true, returnByValue: true });
   if (m.result?.exceptionDetails) throw new Error(JSON.stringify(m.result.exceptionDetails.exception ?? m.result.exceptionDetails));
   return m.result.result.value;
+};
+// Waits until the app itself is on the page. A fixed wait is not enough when the browser is slow
+// to start: a script begun in the blank page is dropped when the app arrives, and never answers.
+const appReady = async () => {
+  for (let i = 0; i < 300; i++) {
+    const m = await send('Runtime.evaluate', { expression: "location.protocol === 'http:' && document.readyState === 'complete' && !!document.querySelector('input[type=file]')", returnByValue: true });
+    if (m.result?.result?.value === true) return sleep(300);
+    await sleep(100);
+  }
+  throw new Error('the app did not load');
 };
 
 await send('Page.enable');
@@ -98,8 +118,10 @@ await send('Page.addScriptToEvaluateOnNewDocument', { source: `
   const make = URL.createObjectURL; URL.createObjectURL = blob => { __saved = { at: performance.now(), bytes: blob.size, type: blob.type, blob }; return make.call(URL, blob); };
   const click = HTMLAnchorElement.prototype.click; HTMLAnchorElement.prototype.click = function () { if (!this.download) click.call(this); };
 ` });
+const trace = step => process.env.TRACE && console.error(step);
 await send('Page.navigate', { url });
-await sleep(2500);
+trace('page opened');
+await appReady();
 
 // The test image, made before the CPU is slowed. A photo is smooth shapes with grain; a sprite
 // is a small flat-colored figure on an empty background; a gif is 24 frames of the photo moving.
@@ -139,6 +161,7 @@ Object.assign(out, { firstImage: r1(loaded.first), loaded: r1(loaded.all), loadF
 // 2. change the style and back, the palette, and hold Space to compare
 const key = (k, type = 'keydown') => `window.dispatchEvent(new KeyboardEvent('${type}', { key: '${k}', code: '${k === ' ' ? 'Space' : k}', bubbles: true }))`;
 const press = async (k, type) => r1(await run(`async () => { const t = performance.now(); ${key(k, type)}; return __settle(t); }`));
+trace('image added');
 out.nextStyle = await press('ArrowDown');
 out.backStyle = await press('ArrowUp');
 out.palette = await press('ArrowRight');
@@ -150,6 +173,7 @@ await run(`async () => { document.querySelector('.dock button[aria-label="Style"
 if (process.env.PROFILE) { await send('Profiler.enable'); await send('Profiler.setSamplingInterval', { interval: 200 }); await send('Profiler.start'); }
 // The drag is made with real input, a finger on the phone and tablet screens and the mouse on the
 // desktop one, so the browser itself produces the pointer, input and change events in their true order.
+trace('styles, palette and compare done');
 const bar = await run(`() => { const r = document.querySelector('#threshold').getBoundingClientRect(); return { x: r.left, y: r.top + r.height / 2, w: r.width }; }`);
 const at = i => ({ x: Math.round(bar.x + bar.w * (0.2 + (0.5 * i) / o.steps)), y: Math.round(bar.y) });
 const point = (type, p) => mobile
@@ -165,6 +189,7 @@ const began = await run(`() => {
 }`);
 await point('down', at(0));
 for (let i = 1; i <= o.steps; i++) { await point('move', at(i)); await run(`() => new Promise(r => requestAnimationFrame(r))`); }
+trace('moves sent');
 const drag = await run(`async () => {
   const t = ${began}, dragged = performance.now() - t, smooth = __smooth(t), c = document.querySelector('.tile canvas');
   // how long after each move the image was redrawn
@@ -190,6 +215,7 @@ out.savedDuringDrag = await run(`async () => {
   return v.getUint32(16) + 'x' + v.getUint32(20); // the PNG's own width and height
 }`);
 // letting go
+trace('rest and save during drag done');
 const lifted = await run(`() => { __paints.length = 0; return performance.now(); }`);
 await point('up', at(o.steps));
 const released = await run(`async () => {
@@ -215,6 +241,7 @@ Object.assign(out, { whileDragging: drag.during, release: r1(released.ms), after
 // perMove: the usual time from a move reaching the page to the image being redrawn; slowestMove: the longest
 Object.assign(out, { moves: drag.waits.length, perMove: +(drag.waits[drag.waits.length >> 1] ?? -1).toFixed(1), slowestMove: r1(drag.waits.at(-1) ?? -1), dragFreeze: r1(drag.worst) });
 
+trace('released');
 // 4. download (the file is noted, not written)
 const saved = await run(`async () => {
   __saved = null; const t = performance.now();

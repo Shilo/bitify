@@ -1,0 +1,11 @@
+scenario | loaded | backStyle | perMove | slowestMove | release | save | heapMB | picture | draft | saved
+Sprite 256 by 256 | 60 | 19 | 5 | 6 | 0 | 30 | 13 | 256x256 | 256x256 | 256x256
+12 sprites 256 by 256 | 169 | 71 | 33 | 40 | 0 | 74 | 45 | 256x256 | 256x256 | application/zip
+Photo 4 MP, Cutout | 384 | 79 | 20 | 24 | 0 | 248 | 61 | 900x900 | 537x537 | 2048x2048
+Photo 12 MP, Cutout | 1112 | 60 | 19 | 25 | 0 | 592 | 117 | 900x675 | 602x451 | 4000x3000
+Photo 12 MP, Solid | 847 | 27 | 10 | 15 | 0 | 239 | 111 | 900x675 | 900x675 | 4000x3000
+Photo 12 MP, Lines | 855 | 44 | 7 | 11 | 0 | 309 | 141 | 900x675 | 734x550 | 4000x3000
+Photo 12 MP, Bayer | 843 | 30 | 12 | 16 | 0 | 241 | 111 | 900x675 | 900x675 | 4000x3000
+Photo 12 MP, Atkinson | 890 | 49 | 14 | 30 | 0 | 427 | 117 | 900x675 | 672x504 | 4000x3000
+6 photos of 4 MP, Cutout | 1308 | 55 | 30 | 35 | 0 | 1100 | 190 | 276x276 | 160x160 | application/zip
+Photo 12 MP, Cutout, slowed 4 times more | 3080 | 103 | 24 | 39 | 0 | 2106 | 117 | 900x675 | 461x346 | 4000x3000
