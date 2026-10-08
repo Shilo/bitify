@@ -4,7 +4,7 @@
   import { saveOne, saveAll, copyOne, pngBlob } from './lib/save.js';
   import { fitGrid } from './lib/layout.js';
   import { restore } from './lib/settings.js';
-  import { STYLES, inOrder, stepStyle, stepPalette } from './lib/presets.js';
+  import { STYLES, inOrder, inks, stepStyle, stepPalette } from './lib/presets.js';
   import { wheelSteps } from './lib/gesture.js';
   import { on } from 'svelte/events';
   import Dock from './Dock.svelte';
@@ -28,11 +28,14 @@
 
   let first = $state(saved.first); // lines and dark pixels
   let second = $state(saved.second); // fill and light pixels
+  let none = $state(saved.none); // which of the two is None, and left out of the picture: 0 neither, 1 the first, 2 the second
   let style = $state(saved.style);
   // Each style's own settings, by style (see lib/settings.js). `set` is the current style's, as
   // a plain object that is a new one whenever any of them changes.
   let settings = $state(saved.settings);
   const set = $derived({ ...settings[style] });
+  // The two colors as they are drawn: a None one is null (see `inks`).
+  const ink = $derived(inks(first, second, none, style));
   // The theme follows the system until the other one is picked in the More menu. A pick is kept
   // only while it differs from the system's, so picking the system's own goes back to following it.
   const systemDark = matchMedia('(prefers-color-scheme: dark)');
@@ -49,7 +52,7 @@
   });
   $effect(() => {
     try {
-      localStorage.setItem('bitify', JSON.stringify({ first, second, style, settings, theme: themePick }));
+      localStorage.setItem('bitify', JSON.stringify({ first, second, none, style, settings, theme: themePick }));
     } catch {
       // no storage; the settings last until the page is closed
     }
@@ -106,7 +109,7 @@
   // and the theme. The images stay. The effect above then stores the defaults over what was kept.
   function resetAll() {
     const fresh = restore(null, STYLES.map(s => s[0]));
-    ({ first, second, style, settings } = fresh);
+    ({ first, second, none, style, settings } = fresh);
     themePick = fresh.theme;
     say('Settings reset.');
   }
@@ -379,11 +382,11 @@
     if (skipped) say(`${skipped} file${skipped === 1 ? '' : 's'} skipped. Bitify reads PNG, GIF, WebP, JPEG and BMP images.`);
   }
 
-  // What gets saved: the two colors with a still image's mask, or with one mask per frame of an
+  // What gets saved: the two colors as they are drawn, with a still image's mask, or with one mask per frame of an
   // animation. These masks are of every pixel, always: never the smaller picture a tile draws.
   // `asked` is the settings at the moment of asking (see `asking`). A long job starts a moment
   // after it is asked for, and what it saves is what was on screen then, whatever is changed since.
-  const asking = () => ({ first, second, style, set });
+  const asking = () => ({ first: ink[0], second: ink[1], style, set });
   const about = (item, asked) => ({ name: item.name, w: item.img.w, h: item.img.h, first: asked.first, second: asked.second });
   const still = (item, asked) => ({ ...about(item, asked), mask: mask(item.img, asked.style, asked.set) });
   const bitified = (item, asked) =>
@@ -512,8 +515,8 @@
       {#each items as item (item.id)}
         <Tile
           {item}
-          {first}
-          {second}
+          first={ink[0]}
+          second={ink[1]}
           {style}
           {set}
           flipped={showOriginal !== spaceHeld}
@@ -530,7 +533,7 @@
   <div class="empty">
     <div class="empty-in">
       {#if example}
-        <Tile item={example} {first} {second} {style} {set} flipped={showOriginal !== spaceHeld} />
+        <Tile item={example} first={ink[0]} second={ink[1]} {style} {set} flipped={showOriginal !== spaceHeld} />
       {/if}
       <div class="empty-text">
         <h2>Pixel art in two colors</h2>
@@ -544,7 +547,7 @@
   </div>
 {/if}
 
-<Dock bind:first bind:second bind:style bind:settings bind:showOriginal bind:dragging {autos} {soft} count={items.length} onsaveall={saveEverything} />
+<Dock bind:first bind:second bind:none bind:style bind:settings bind:showOriginal bind:dragging {autos} {soft} count={items.length} onsaveall={saveEverything} />
 
 {#if dragDepth > 0}
   <div class="drop" style:background={second} style:color={overlayInk}>Drop to bitify</div>
@@ -597,7 +600,7 @@
     </header>
     <ol>
       <li><PixelIcon name="plus" /><b>Add</b>{touch ? 'Choose images.' : 'Drop, paste or choose images.'}</li>
-      <li><PixelIcon name="grid" /><b>Palette</b>Pick two colors, or a preset.</li>
+      <li><PixelIcon name="grid" /><b>Palette</b>Pick two colors, or a preset. One of them can be None, for a see-through image.</li>
       <li><PixelIcon name="sliders" /><b>Style</b>Pick effect, tune its settings.</li>
       <li><PixelIcon name="save" /><b>Save</b>Download or copy images.</li>
     </ol>

@@ -208,7 +208,7 @@ can do nothing else meanwhile.
 
 - **A PNG is written straight from the mask** as a palette image: color type 3, 2 bits per
   pixel, a palette of three entries (empty, first color, second color) and a `tRNS` chunk
-  that makes the first one transparent. That is a sixteenth of the data to compress, and
+  that makes the first one transparent, and a color that is None with it. That is a sixteenth of the data to compress, and
   the image is never held as RGBA.
 - zlib level 3. Level 6 is twice as slow for a file 4% smaller.
 - Download all converts and encodes one image at a time, so only one full mask is in

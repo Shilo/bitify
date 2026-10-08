@@ -9,7 +9,7 @@ Instantly convert sprites and animated GIFs to 1-bit colors and styles. Runs ent
 ## Features
 
 - Add any number of images by drag and drop, file picker or paste.
-- Two colors, swap, and twelve preset palettes. Changes redraw every image at once.
+- Two colors, swap, and twelve preset palettes. Either color can be None, for a transparent result. Changes redraw every image at once.
 - Nine styles: Cutout (filled shapes with their parts cut apart, after the game End of End), Solid, Lines (outlines each part of a sprite), Checker, Hatch, Bayer, Noise, Atkinson and Silhouette.
 - Threshold slider, with a per-image Auto setting.
 - Compare with the original: switch the whole wall, hold a tile, or hold Space.

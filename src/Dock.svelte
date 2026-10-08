@@ -1,6 +1,6 @@
 <script module>
   import { mask, colorize, previewBall } from './lib/bitify.js';
-  import { PRESETS, STYLES, isPalette, inOrder } from './lib/presets.js';
+  import { PRESETS, STYLES, isPalette, inOrder, inks } from './lib/presets.js';
   import { SETTINGS, STYLE_SETTINGS, defaults, changed, shown } from './lib/settings.js';
 
   const BALL = previewBall(); // previews each style
@@ -16,6 +16,7 @@
   let {
     first = $bindable(),
     second = $bindable(),
+    none = $bindable(), // which color is None: 0 neither, 1 the first, 2 the second
     style = $bindable(),
     settings = $bindable(), // each style's own settings, by style
     showOriginal = $bindable(),
@@ -54,7 +55,7 @@
 
   const styleName = $derived(STYLES.find(s => s[0] === style)[1]);
   const saveLabel = $derived(count > 1 ? 'Download all' : 'Download');
-  const demo = key => new ImageData(colorize(mask(BALL, key, settings[key]), first, second), BALL.w, BALL.h);
+  const demo = key => new ImageData(colorize(mask(BALL, key, settings[key]), ...inks(first, second, none, key)), BALL.w, BALL.h);
 
   // The current style's settings: the values, and which settings they are. The threshold has its
   // place on the strip; `rest` is the others.
@@ -129,6 +130,7 @@
     const was = first;
     first = second;
     second = was;
+    none = none && 3 - none; // None goes with its color
   }
 
   // A palette matches the current colors either way round, and choosing one keeps them the
@@ -240,7 +242,7 @@
            A mouse wheel moves them too, since there is no scrollbar to drag. -->
       <div class="pals" use:scroller onwheel={e => (e.currentTarget.scrollLeft += e.deltaY)}>
         <span class="pname"><span class="key">Palette</span> {PRESETS.find(chosen)?.name ?? 'Custom'}</span>
-        <div class="chips" role="group" aria-label="Palettes" style:--cols={Math.ceil(PRESETS.length / 2)}>
+        <div class="chips" role="group" aria-label="Palettes" style:--cols={Math.ceil((PRESETS.length + 2) / 2)}>
           {#each PRESETS as p, i}
             {#if i && i % 4 === 0}<span class="sep"></span>{/if}
             <button
@@ -252,6 +254,25 @@
               onclick={() => choose(p)}
             ></button>
           {/each}
+          <!-- The None chips end the row: each leaves one color out. A chip shows the pair it gives, with
+               the wall's checkerboard for the color that is gone (.pal.none in app.css). -->
+          <span class="sep"></span>
+          <button
+            class="pal none"
+            aria-pressed={none === 1}
+            aria-label="No color for lines and dark pixels"
+            title="No color for lines and dark pixels"
+            style:--pair="linear-gradient(135deg, transparent 50%, {second} 50%)"
+            onclick={() => (none = none === 1 ? 0 : 1)}
+          ></button>
+          <button
+            class="pal none"
+            aria-pressed={none === 2}
+            aria-label="No color for fill and light pixels"
+            title="No color for fill and light pixels"
+            style:--pair="linear-gradient(135deg, {first} 50%, transparent 50%)"
+            onclick={() => (none = none === 2 ? 0 : 2)}
+          ></button>
         </div>
       </div>
     </div>
@@ -322,12 +343,14 @@
   {/if}
 
   <div class="pair">
-    <label class="sw" style:background={first} title="Color for lines and dark pixels">
-      <input type="color" bind:value={first} aria-label="Color for lines and dark pixels" />
+    <!-- A color that is None shows no color (.sw.none in app.css). Its picker still opens, on the
+         color it had, and choosing one there brings the color back. -->
+    <label class="sw" class:none={none === 1} style:background={none === 1 ? null : first} title="Color for lines and dark pixels{none === 1 ? ': None' : ''}">
+      <input type="color" bind:value={first} oninput={() => none === 1 && (none = 0)} aria-label="Color for lines and dark pixels{none === 1 ? ': None' : ''}" />
     </label>
     <button class="ib" onclick={swap} aria-label="Swap colors" title="Swap colors"><PixelIcon name="swap" /></button>
-    <label class="sw" style:background={second} title="Color for fill and light pixels">
-      <input type="color" bind:value={second} aria-label="Color for fill and light pixels" />
+    <label class="sw" class:none={none === 2} style:background={none === 2 ? null : second} title="Color for fill and light pixels{none === 2 ? ': None' : ''}">
+      <input type="color" bind:value={second} oninput={() => none === 2 && (none = 0)} aria-label="Color for fill and light pixels{none === 2 ? ': None' : ''}" />
     </label>
   </div>
   <button class="btn" aria-expanded={panel === 'palettes'} aria-label="Palette" title="Palette" onclick={() => toggle('palettes')}>

@@ -23,6 +23,11 @@ Three controls decide the result, and each does one job:
 They are independent. A palette does not favor a style or a way round, and a style does
 not favor any colors. Every palette works with every style, either way round.
 
+Either color can also be **None**: the two chips at the end of the Palette panel leave the
+first or the second color out, and its pixels are transparent on the wall and in the saved
+files. None is not part of a palette. Choosing a palette changes the two colors and leaves
+None where it is, and Swap takes None along with its color.
+
 ## The twelve palettes
 
 The panel shows them in one row, in groups of four with a divider between groups, in this

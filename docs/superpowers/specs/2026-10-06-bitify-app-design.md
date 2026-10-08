@@ -4,7 +4,8 @@ Date: 2026-10-06
 Status: design approved in prototype form; this document awaits review.
 
 Bitify converts pixel art images to 1-bit: every image is redrawn using two colors the
-user picks. It runs entirely in the browser. Nothing is uploaded.
+user picks. One of the two may be None, which leaves its pixels transparent. It runs
+entirely in the browser. Nothing is uploaded.
 
 The approved interactive prototype is saved next to this file as
 [2026-10-06-bitify-prototype.html](2026-10-06-bitify-prototype.html). It is the visual and
@@ -42,7 +43,7 @@ Stated by the user:
 Assumptions made here, open to correction:
 
 - Plain JavaScript, not TypeScript.
-- The two colors, the style and every style's settings are remembered between visits (see
+- The two colors, which of them is None, the style and every style's settings are remembered between visits (see
   "Remembered settings"). Nothing else is.
 - Exports are PNG at the original pixel size, with no upscaling option.
 - Animated WebP and APNG files are converted as their first frame only. (Animated GIFs are fully supported; see "Animated GIFs".)
@@ -118,9 +119,9 @@ The rule lives in `src/lib/layout.js` (`fitGrid`) and is unit tested.
 
 | Control | Behavior |
 |---|---|
-| First color swatch | Native color picker. Color for lines and dark pixels. |
-| Swap | Exchanges the two colors. Works the same in every style and with every palette. |
-| Second color swatch | Native color picker. Color for fill and light pixels. |
+| First color swatch | Native color picker. Color for lines and dark pixels. Shows a slash on a checkerboard while the color is None; the picker still opens, and choosing a color there turns None off. |
+| Swap | Exchanges the two colors, and takes None along with its color. Works the same in every style and with every palette. |
+| Second color swatch | Native color picker. Color for fill and light pixels. Shows None as the first swatch does. |
 | Palette | Opens the palettes panel. |
 | View switch | Two-way switch for the whole wall: "Original", and the bitified image under the name of the current style, such as "Cutout". |
 | Style | Opens the style panel. |
@@ -156,13 +157,14 @@ was pressed, such as a button, a slider or an image, does not react to that pres
 **Palettes panel.** Left to right: the word "Palette" with the name of the chosen
 palette ("Custom" when the two colors match none), a divider, then every preset as a
 diagonally split chip in a single row. There are twelve, in groups of four with a divider
-between groups: classics, handheld screens, then monitors. The chosen chip has a ring, and
+between groups: classics, handheld screens, then monitors. After the last group and a
+divider come the two None chips (see "A color that is None"). The chosen chip has a ring, and
 each chip's name is its tooltip. Where each pair comes from is in
 [docs/palettes.md](../../palettes.md).
 
 The panel is as wide as its chips when the screen has room for them in one row. When it
-does not, the chips go in two rows, half the palettes in each, in the same order and
-without the dividers. The panel is then taller, and the wall makes room for it as for any
+does not, the chips go in two rows, seven in each with the None chips last, in the same
+order and without the dividers. The panel is then taller, and the wall makes room for it as for any
 panel. A screen too short to spare the height, such as a phone on its side, keeps one row.
 
 Chips that still do not fit scroll sideways, by touch, by keyboard focus or with a mouse
@@ -199,6 +201,35 @@ or a way round, and no style favors any colors.
 | Amber | `#3f291e` | `#fdca55` |
 | Commodore | `#40318e` | `#88d7de` |
 | Rose | `#4a0d2b` | `#ffd1dc` |
+
+**A color that is None.** One of the two colors may be None, never both. A pixel that would
+get a None color is empty instead, exactly like a pixel outside the sprite: clear on the
+wall, transparent in the PNG and the GIF, transparent on the clipboard. Nothing else about
+the conversion changes: a style still decides which pixels are first color and which are
+second, and still never looks at the colors. The color under a None is remembered, and
+turning None off brings it back.
+
+- Two **None chips** end the row of palettes, with no label. The first makes the first
+  color None, the second the second color. A chip looks like a palette chip of the current
+  two colors, with the missing color's half shown as the checkerboard of the wall.
+- A None chip is pressed, with the ring a chosen palette has, while its color is None.
+  Pressing it again turns None off. Pressing the other moves None to the other color.
+- Their tooltips and names for screen readers are "No color for lines and dark pixels" and
+  "No color for fill and light pixels".
+- A preset stays marked by its two colors as before, whether or not one of them is None.
+  Choosing a preset or stepping through the palettes changes the colors and leaves None
+  where it is.
+- A swatch whose color is None shows the checkerboard with a diagonal slash. Pressing it
+  opens the color picker on the remembered color; choosing a color there turns None off
+  for that swatch, and closing the picker without choosing leaves it on.
+- Swap takes None along: a None first color becomes a None second color, so the picture
+  turns into its inverse as it does with two colors.
+- The wall, the style previews, the saved PNG and GIF, the copied PNG and every file in the
+  zip leave the None color out.
+- Silhouette draws every solid pixel in the first color. With the first color None it
+  would draw nothing, so there it is drawn in the second color. This is the one place
+  where a style's name matters to the coloring; the conversion is unchanged.
+- The drop screen keeps using the two remembered colors.
 
 **Style panel.** A strip one row high, so that the wall can sit above it, with the
 current style's other settings a press away. Left to right:
@@ -352,7 +383,7 @@ under reduced motion. Top to bottom:
   | | Mouse and keyboard | Touch |
   |---|---|---|
   | Add | Drop, paste or choose images. | Choose images. |
-  | Palette | Pick two colors, or a preset. | The same. |
+  | Palette | Pick two colors, or a preset. One of them can be None, for a see-through image. | The same. |
   | Style | Pick effect, tune its settings. | The same. |
   | Save | Download or copy images. | The same. |
 
@@ -557,7 +588,9 @@ Every pixel ends up in one of three states:
 - **First color**: lines and dark pixels.
 - **Second color**: fill and light pixels.
 
-Output pixels are fully opaque or fully transparent. Brightness of a pixel is
+Output pixels are fully opaque or fully transparent. A color that is None is not drawn:
+its pixels are left empty, on the wall and in every file (see "A color that is None"). The
+conversion is the same; only the coloring differs. Brightness of a pixel is
 `0.2126 R + 0.7152 G + 0.0722 B`, rounded, 0 to 255.
 
 ### Images larger than their tile
@@ -785,11 +818,13 @@ style did before it had settings.
 
 ## Remembered settings
 
-The two colors, the style, every style's settings and a picked theme are saved in the browser on every change and
+The two colors, which of them is None, the style, every style's settings and a picked theme are saved in the browser on every change and
 restored when the app opens. Nothing leaves the device.
 
 - The colors are saved as they are, so a chosen palette, a swap and a custom color all come
   back. A palette is not saved by name; it shows as chosen because its colors match.
+- Which color is None is saved as `none`: 0 for neither, 1 for the first, 2 for the second.
+  Anything else stored there reads as 0.
 - Each style's settings are saved under the style's name, the threshold among them, as a
   number or as Auto.
 - The theme is saved as `light` or `dark` only while it was picked against the system
@@ -836,7 +871,7 @@ in browsers.
   `-2`, `-3` and so on. With exactly one image on the wall there is no zip: the button reads
   "Download" and saves that one file, the same as the image's own Download.
 - An animation saves as `<original name without extension>-1bit.gif`: every frame in the two
-  chosen colors, empty pixels transparent, with the original frame delays and loop count.
+  chosen colors, empty pixels transparent and a None color's pixels with them, with the original frame delays and loop count.
   Download all puts GIFs and PNGs in the same zip.
 - Saving always uses the bitified version, whatever the wall is showing.
 - What is saved or copied is what was asked for: the images that were on the wall and the
@@ -846,7 +881,9 @@ in browsers.
   (Brave, Safari private browsing, Firefox strict mode) add noise when a page reads a
   canvas back, which would put stray colors in a saved file.
 - A PNG lists its colors once, as a palette of three (empty, first color, second color, with
-  the empty one transparent), and holds two bits for each pixel. The picture is exactly the
+  the empty one transparent), and holds two bits for each pixel. A color that is None is
+  transparent too, and its palette entry holds the other color, so a program that blends
+  the picture's edges has no third color to pull in. The picture is exactly the
   same as a file with four bytes per pixel would give, but there is a sixteenth of the data
   to compress, so a photo saves several times faster and into a smaller file. An image
   editor opens such a file as an indexed-color image.
@@ -907,9 +944,9 @@ Vite with the `svelte` template (Svelte 5, runes, mounted with `mount()`), JavaS
 |---|---|
 | `src/lib/bitify.js` | Pure conversion, no DOM. `analyze(imageData)` returns size, pixels, brightness, each pixel's difference from the pixel to its right and from the one below, whether any pixel is empty, the darkest and lightest brightness, and the auto thresholds; it takes what brightness is read from and the opacity cut. `mask(analysis, style, settings, width, height)` returns one byte per pixel (0 empty, 1 first color, 2 second color), for the whole image or, given a smaller width and height, for a picture of it that size. `shrink(imageData, width, height)` returns the pixels of the original that such a picture stands on. `colorize(mask, first, second)` returns RGBA pixels. |
 | `src/lib/gif.js` | Reading an animated GIF into full frames (`decodeGif`) and writing a two-color one (`encodeGif`). No DOM. |
-| `src/lib/save.js` | Output file naming, zip, PNG encoding from a mask and the two colors, single save, save all, copy to the clipboard. |
+| `src/lib/save.js` | Output file naming, zip, PNG encoding from a mask and the two colors (either may be None), single save, save all, copy to the clipboard. |
 | `src/lib/settings.js` | Every setting a style can have and which each style has, their defaults, and `restore(text, styles)`, which reads what was stored back and checks each value. No DOM. |
-| `src/lib/presets.js` | The list of palettes and the list of styles, whether two colors are a palette's, and stepping to the next or previous style or palette. No DOM. |
+| `src/lib/presets.js` | The list of palettes and the list of styles, whether two colors are a palette's, the two colors as they are drawn when one is None (`inks`), and stepping to the next or previous style or palette. No DOM. |
 | `src/lib/gesture.js` | `wheelSteps()`, which turns the stream of wheel moves from a mouse or trackpad into single steps, and `sliderDrag()`, which says when a slider of the Style panel is being dragged and when it has come to rest. No DOM. |
 | `src/App.svelte` | All state; top bar, wall, empty state, drop overlay, the Share sheet, messages; window-level drop, paste, key, wheel and swipe handling. |
 | `src/Tile.svelte` | One image: canvas, caption, Copy, Download and Remove (Share and Remove on touch screens), hold to compare. Measures itself to pick the size of the picture it draws (see "Images larger than their tile"). |
@@ -918,7 +955,7 @@ Vite with the `svelte` template (Svelte 5, runes, mounted with `mount()`), JavaS
 | `src/PixelIcon.svelte` | Renders a 7×7 glyph from a row-string map. |
 | `src/app.css` | Every style rule, carried over from the prototype: color and type tokens for light and dark, and all component styles. Components have no style blocks of their own. |
 
-State is a handful of `$state` values in `App.svelte`: the two colors, style, each style's
+State is a handful of `$state` values in `App.svelte`: the two colors, which of them is None, style, each style's
 settings (a threshold of `null` means Auto), which version the wall shows, the open panel, and the list of images.
 Each image holds an id, its name, its original pixels and its analysis. A tile derives its
 mask from the image, style, the style's settings and the size of its picture, and repaints its canvas when the mask or either
