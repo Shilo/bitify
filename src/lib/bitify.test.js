@@ -188,6 +188,11 @@ describe('colorize', () => {
   it('paints first and second color opaque and leaves empty pixels transparent', () => {
     expect([...colorize(Uint8Array.of(0, 1, 2), '#ff0000', '#0000ff')]).toEqual([0, 0, 0, 0, 255, 0, 0, 255, 0, 0, 255, 255]);
   });
+
+  it('leaves the pixels of a color that is None clear, like the empty ones', () => {
+    expect([...colorize(Uint8Array.of(0, 1, 2), null, '#0000ff')]).toEqual([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255]);
+    expect([...colorize(Uint8Array.of(0, 1, 2), '#ff0000', null)]).toEqual([0, 0, 0, 0, 255, 0, 0, 255, 0, 0, 0, 0]);
+  });
 });
 
 describe('lines', () => {

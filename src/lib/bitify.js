@@ -375,11 +375,13 @@ export function shrink({ width: w, height: h, data }, mw, mh) {
   return new Uint8ClampedArray(to.buffer);
 }
 
-// Turns a mask into RGBA pixels. Colors are '#rrggbb'.
+// Turns a mask into RGBA pixels. Colors are '#rrggbb', or null for a color that is None, whose
+// pixels are left clear like the empty ones.
 export function colorize(m, first, second) {
   // Each pixel is written whole, as one 32-bit number. `c` holds the empty pixel and the two
   // colors as such numbers, built from their bytes so the byte order is the machine's own.
-  const c = new Uint32Array(Uint8Array.of(0, 0, 0, 0, ...hexToRgb(first), 255, ...hexToRgb(second), 255).buffer);
+  const rgba = hex => (hex ? [...hexToRgb(hex), 255] : [0, 0, 0, 0]);
+  const c = new Uint32Array(Uint8Array.of(0, 0, 0, 0, ...rgba(first), ...rgba(second)).buffer);
   const out = new Uint32Array(m.length);
   for (let p = 0; p < m.length; p++) out[p] = c[m[p]];
   return new Uint8ClampedArray(out.buffer);

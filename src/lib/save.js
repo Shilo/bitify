@@ -45,6 +45,9 @@ function chunk(type, data) {
 // The PNG lists the colors once, as a palette, and holds two bits for each pixel instead of
 // four bytes. That is a sixteenth of the data to compress, so a photo saves several times
 // faster, into a smaller file, and without ever being held in memory as full RGBA.
+// A color that is None (null) is made see-through like the empty pixel. Its place in the palette
+// holds the other color, so that a program which blends the edges of the picture has no third
+// color to pull in.
 export function pngBytes({ mask, w, h, first, second }) {
   const head = new Uint8Array(13);
   new DataView(head.buffer).setUint32(0, w);
@@ -56,8 +59,8 @@ export function pngBytes({ mask, w, h, first, second }) {
   const parts = [
     Uint8Array.of(137, 80, 78, 71, 13, 10, 26, 10),
     chunk('IHDR', head),
-    chunk('PLTE', Uint8Array.of(0, 0, 0, ...hexToRgb(first), ...hexToRgb(second))), // what 0, 1 and 2 stand for
-    chunk('tRNS', Uint8Array.of(0)), // the first of them, the empty pixel, is see-through
+    chunk('PLTE', Uint8Array.of(0, 0, 0, ...hexToRgb(first ?? second), ...hexToRgb(second ?? first))), // what 0, 1 and 2 stand for
+    chunk('tRNS', Uint8Array.from(first ? (second ? [0] : [0, 255, 0]) : [0, 0])), // how solid each is: the empty pixel is see-through, and so is a color that is None
     chunk('IDAT', zlibSync(rows, { level: 3 })), // twice as quick as the usual level 6, for a file about 4% larger
     chunk('IEND', new Uint8Array(0)),
   ];

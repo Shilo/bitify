@@ -62,6 +62,18 @@ describe('pngBytes', () => {
     // each row is a filter byte of 0, then its pixels four to a byte, the first in the top two bits
     expect([...inflateSync(data.data)]).toEqual([0, 0b01001010, 0b01000000, 0, 0b01001010, 0b01000000]);
   });
+
+  it('makes a color that is None see-through, with the other color in its place in the palette', () => {
+    const row = [1, 0, 2, 2, 1], image = { mask: Uint8Array.from([...row, ...row]), w: 5, h: 2 };
+    const [, colors1, clear1, data1] = chunks(pngBytes({ ...image, first: null, second: '#0b0a0c' }));
+    expect([...colors1.data]).toEqual([0, 0, 0, 11, 10, 12, 11, 10, 12]);
+    expect([...clear1.data]).toEqual([0, 0]);
+    const [, colors2, clear2] = chunks(pngBytes({ ...image, first: '#f6dfa4', second: null }));
+    expect([...colors2.data]).toEqual([0, 0, 0, 246, 223, 164, 246, 223, 164]);
+    expect([...clear2.data]).toEqual([0, 255, 0]);
+    // the pixels themselves are written as ever
+    expect([...inflateSync(data1.data)]).toEqual([0, 0b01001010, 0b01000000, 0, 0b01001010, 0b01000000]);
+  });
 });
 
 describe('animations', () => {

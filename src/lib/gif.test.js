@@ -78,6 +78,14 @@ describe('encodeGif', () => {
     expect(pixels(out.frames[1].data)).toEqual([NONE, A, NONE, NONE, B, NONE]);
   });
 
+  it('writes the pixels of a color that is None as empty ones, and leaves the masks it was given alone', () => {
+    const out = decodeGif(encodeGif({ ...image, first: null }));
+    expect(pixels(out.frames[0].data)).toEqual([NONE, NONE, B, B, NONE, NONE]);
+    expect(pixels(out.frames[1].data)).toEqual([NONE, NONE, NONE, NONE, B, NONE]);
+    expect(pixels(decodeGif(encodeGif({ ...image, second: null })).frames[0].data)).toEqual([A, NONE, NONE, NONE, NONE, A]);
+    expect([...image.frames[0].mask]).toEqual([1, 0, 2, 2, 0, 1]);
+  });
+
   it('keeps a GIF that plays once playing once', () => {
     expect(decodeGif(encodeGif({ ...image, loop: null })).loop).toBe(null);
     expect(decodeGif(encodeGif({ ...image, loop: 3 })).loop).toBe(3);

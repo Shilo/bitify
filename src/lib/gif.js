@@ -31,9 +31,11 @@ export function decodeGif(bytes) {
 
 // Encodes a two-color animation as a GIF with a transparent background. Each frame's `mask` has
 // one byte per pixel: 0 empty, 1 first color, 2 second color (the output of bitify's `mask`),
-// which are used directly as palette indexes. Colors are '#rrggbb'.
+// which are used directly as palette indexes. Colors are '#rrggbb', or null for a color that is
+// None. A GIF frame has one see-through index, 0, so that color's pixels are written as 0 too.
 export function encodeGif({ w, h, frames, first, second, loop }) {
-  const color = hex => parseInt(hex.slice(1), 16);
+  const color = hex => (hex ? parseInt(hex.slice(1), 16) : 0);
+  const gone = first ? (second ? 0 : 2) : 1; // the index of the color that is None, or 0
   // room for frames that do not compress at all
   const buffer = new Uint8Array(1024 + frames.length * (w * h * 2 + 1024));
   const writer = new omggif.GifWriter(buffer, w, h, {
@@ -42,7 +44,7 @@ export function encodeGif({ w, h, frames, first, second, loop }) {
   });
   for (const { mask, delay } of frames) {
     // disposal 2 clears each frame before the next, so empty pixels never show an older frame
-    writer.addFrame(0, 0, w, h, mask, { delay: Math.round(delay / 10), disposal: 2, transparent: 0 });
+    writer.addFrame(0, 0, w, h, gone ? mask.map(v => (v === gone ? 0 : v)) : mask, { delay: Math.round(delay / 10), disposal: 2, transparent: 0 });
   }
   return buffer.subarray(0, writer.end());
 }
