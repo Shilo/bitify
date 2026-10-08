@@ -753,6 +753,23 @@ describe('the settings of a style', () => {
     expect(show(mask(frames[0], 'silhouette'), 4)).toEqual(['####']);
   });
 
+  it('says whether any pixel is partly see-through, which is when the opacity cut matters', () => {
+    const one = alphas => analyze({ width: alphas.length, height: 1, data: Uint8ClampedArray.from(alphas.flatMap(a => [9, 9, 9, a])) });
+    expect(one([0, 255, 255, 0]).soft).toBe(false);
+    expect(one([255]).soft).toBe(false);
+    expect(one([0]).soft).toBe(false);
+    for (const a of [1, 2, 127, 128, 253, 254]) expect(one([0, a, 255]).soft, `alpha ${a}`).toBe(true);
+    // whatever the cut and whatever brightness is read from
+    const src = { width: 2, height: 1, data: Uint8ClampedArray.of(9, 9, 9, 255, 9, 9, 9, 100) };
+    expect([analyze(src, 'luma', 1).soft, analyze(src, 'value', 255).soft]).toEqual([true, true]);
+    // an image with none is the same at every cut
+    const hard = { width: 3, height: 1, data: Uint8ClampedArray.of(200, 9, 9, 0, 9, 200, 9, 255, 9, 9, 200, 255) };
+    for (const style of Object.keys(STYLE_SETTINGS)) expect([...mask(analyze(hard, 'luma', 1), style)], style).toEqual([...mask(analyze(hard, 'luma', 255), style)]);
+    // an animation is soft if any frame is
+    const frames = unify([one([0, 255]), one([0, 90])]);
+    expect(frames.map(f => f.soft)).toEqual([true, true]);
+  });
+
   it('opacity cut: sets how see-through a pixel may be before it is empty', () => {
     const src = { width: 3, height: 1, data: Uint8ClampedArray.of(9, 9, 9, 40, 9, 9, 9, 127, 9, 9, 9, 200) };
     const shape = cut => show(mask(analyze(src, 'luma', cut), 'silhouette'), 3)[0];

@@ -110,6 +110,8 @@ function seamStrength(frames, t) {
 // `right` and `down` hold, for each pixel, how much its color differs from the pixel to its right
 // and from the one below it (0 when either is empty). They are worked out here once, because
 // Lines and Cutout ask for them at every pixel each time the threshold moves.
+// `soft` says whether any pixel is partly see-through, neither clear nor solid: only then does the
+// opacity cut change anything, and only then is it offered.
 // `source` is what brightness is read from ('luma', 'value', 'red', 'green' or 'blue') and `cut`
 // the alpha below which a pixel is empty. Both are settings of a style, so an image is analysed
 // again when the style in use has other values for them.
@@ -117,9 +119,13 @@ function seamStrength(frames, t) {
 // millions of pixels, and a phone goes through them several times slower than a desktop.
 export function analyze({ width: w, height: h, data }, source = 'luma', cut = ALPHA_CUT) {
   const lum = new Uint8Array(w * h), right = new Uint8Array(w * h), down = new Uint8Array(w * h);
-  const hist = new Array(256).fill(0), edges = new Array(256).fill(0), below = w * 4;
-  let hasAlpha = false, lo = 255, hi = 0;
+  const hist = new Uint32Array(256), edges = new Uint32Array(256), below = w * 4; // counts, in arrays of numbers only: a plain array made the loop a little slower
+  let hasAlpha = false, lo = 255, hi = 0, part = 0;
   for (let y = 0, p = 0, i = 0; y < h; y++) for (let x = 0; x < w; x++, p++, i += 4) {
+    // `part` gathers the bits of every alpha plus one. An alpha of 0 gives 1 and one of 255 gives
+    // 256; any alpha between gives a number with one of the bits of 254 in it. So those bits say
+    // whether a pixel is partly see-through, for one sum and one `or` and no choice to make.
+    part |= data[i + 3] + 1;
     if (data[i + 3] < cut) { hasAlpha = true; continue; }
     const l = (lum[p] = Math.round(0.2126 * data[i] + 0.7152 * data[i + 1] + 0.0722 * data[i + 2]));
     hist[l]++;
@@ -144,7 +150,7 @@ export function analyze({ width: w, height: h, data }, source = 'luma', cut = AL
       if (l > hi) hi = l;
     }
   }
-  const img = { w, h, data, lum, right, down, cut, hasAlpha, lo, hi, hist, edges, auto: otsu(hist, 127), autoLine: Math.max(MIN_EDGE, otsu(edges, 0)) };
+  const img = { w, h, data, lum, right, down, cut, hasAlpha, soft: (part & 254) !== 0, lo, hi, hist, edges, auto: otsu(hist, 127), autoLine: Math.max(MIN_EDGE, otsu(edges, 0)) };
   img.autoTone = toneCenter(hist, img.auto);
   img.autoSeam = seamStrength([img], img.auto);
   return img;
@@ -165,6 +171,7 @@ export function unify(frames) {
     autoLine: Math.max(MIN_EDGE, otsu(edges, 0)),
     autoSeam: seamStrength(frames, auto), // picked after the shared cut, which decides the tones
     hasAlpha: frames.some(f => f.hasAlpha),
+    soft: frames.some(f => f.soft),
     lo: Math.min(...frames.map(f => f.lo)),
     hi: Math.max(...frames.map(f => f.hi)),
   };

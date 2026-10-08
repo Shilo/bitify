@@ -71,6 +71,9 @@ rejected because it covers the images).
   More button, reused, which the owner chose over the candidates in
   [superpowers/mockups/more-icons.html](superpowers/mockups/more-icons.html).
 - **Reset** is tinted red (`--undo` in `app.css`), the one color in the chrome.
+- **Opacity cut** is shown only while an image on the wall has a partly see-through pixel
+  (`img.soft`, found in the analysis's own pass at no measurable cost). It did nothing for
+  any other image, and those are no longer analysed again when it changes.
 - **The chip row** fades out under a small arrow on a side that has more to scroll to.
 
 ## What has been checked

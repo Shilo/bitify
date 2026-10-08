@@ -724,12 +724,26 @@ style did before it had settings.
 | Matrix | Bayer | 2, 4, 8 | 4 | The side of the ordered-dither matrix. The cut-offs are `(b + 0.5) / n²`, giving 5, 17 or 65 apparent tones. Each quarter of a matrix is the matrix of half its side times four, plus 0, 2, 3 and 1. |
 | Diffusion | Atkinson | Atkinson, Floyd, Stucki | Atkinson | Where the error goes. Floyd is Floyd–Steinberg: 7/16 right, then 3/16, 5/16 and 1/16 below left, below and below right. Stucki spreads over twelve pixels in the two rows below, in parts of 42: 8 and 4 to the right; 2, 4, 8, 4, 2 below; 1, 2, 4, 2, 1 below that. Both hand on all of the error, where Atkinson drops a quarter. |
 | Brightness | all but Lines and Silhouette | Luma, Value, R, G, B | Luma | What brightness is read from: the weighted mix given under "Conversion", the largest of red, green and blue, or one channel alone. The brightness range and the Auto values follow it. Differences between neighbouring pixels, which seams go by, are of the colors and do not change. |
-| Opacity cut | all | 1 to 255 | 128 | Alpha below this is an empty pixel. |
+| Opacity cut | all | 1 to 255 | 128 | Alpha below this is an empty pixel. Offered only while an image on the wall has a partly see-through pixel (see below). |
 
+- **Opacity cut is offered only where it can do something.** It changes an image only if
+  the image has a pixel that is partly see-through, with an alpha from 1 to 254; an image
+  whose pixels are all clear or all solid (most pixel art, and every photo) is the same at
+  every cut. So its row in the tray and its chip are shown only while an image on the wall
+  has such a pixel, and on the empty screen only if the example has one, which the logo does
+  not. Without it Silhouette has no settings at all: its strip has the style button and
+  nothing else, with no More button, and on a phone its panel is one row. A value set while
+  it showed stays stored and is not counted as a change while it is hidden: it lights
+  neither a dot nor Reset, and comes back with the control when such an image is added.
+  Whether an image has such a pixel is found in the pass over its pixels that the analysis
+  already makes when it is added, at no cost that can be measured: ten runs each way on a
+  12-megapixel image gave a median of 209 ms with it and 212 ms without.
 - Brightness and Opacity cut change what the analysis finds, so every image is analysed
   again when they change, by the setting itself or by a change to a style that has other
   values for them. That reads every pixel of every image. It is done before the tiles
-  redraw, so no tile converts an image as it was analysed before. While a slider is being dragged
+  redraw, so no tile converts an image as it was analysed before. An image with no partly
+  see-through pixel is not analysed again for a change of Opacity cut, by the setting or
+  by a change of style: only Brightness counts for it. While a slider is being dragged
   over a wall holding more than a million pixels in all, it waits until the slider rests
   or is let go, and the images follow then. Saving or copying in that moment does not wait:
   what is saved is analysed as the settings then are.

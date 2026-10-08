@@ -21,6 +21,7 @@
     showOriginal = $bindable(),
     dragging = $bindable(), // whether a slider of the style panel is being dragged
     autos, // [lowest, highest] value Auto is using, for each setting that has an Auto
+    soft, // whether an image on the wall has a partly see-through pixel
     count,
     onsaveall,
   } = $props();
@@ -58,7 +59,9 @@
   // The current style's settings: the values, and which settings they are. The threshold has its
   // place on the strip; `rest` is the others.
   const own = $derived(settings[style]);
-  const keys = $derived(STYLE_SETTINGS[style]);
+  // The opacity cut is left out unless an image on the wall has a partly see-through pixel: it
+  // changes nothing for any other image. Silhouette then has no settings at all.
+  const keys = $derived(STYLE_SETTINGS[style].filter(key => key !== 'alpha' || soft));
   const rest = $derived(keys.filter(key => key !== 'threshold'));
   // A wide screen shows the others all at once, in a tray that More opens under the strip.
   let more = $state(false);
@@ -269,7 +272,9 @@
           <Pixels class="demo" pixels={demo(style)} /><span id="style-name">{styleName}</span><PixelIcon name="caret" />
         </button>
       </div>
-      {#if chips}
+      {#if chips && !keys.length}
+        <!-- a style with no settings to show: the style button alone -->
+      {:else if chips}
         <div class="setbox">
         <div class="sets" role="group" aria-label="Settings" bind:this={chipRow} onscroll={fades} onwheel={e => (e.currentTarget.scrollLeft += e.deltaY)}>
           {#each keys as key}
@@ -284,7 +289,7 @@
             </button>
           {/each}
           <!-- Reset ends the row, and not the control's, which needs its whole width on a narrow phone. -->
-          <button class="chip reset" disabled={!changed(style, own)} aria-label="Reset {styleName}" title="Reset {styleName}" onclick={reset}>
+          <button class="chip reset" disabled={!changed(style, own, keys)} aria-label="Reset {styleName}" title="Reset {styleName}" onclick={reset}>
             <PixelIcon name="reset" />Reset
           </button>
         </div>
@@ -297,16 +302,18 @@
         {:else}
           <span class="grow"></span>
         {/if}
-        <button class="btn extra" aria-expanded={more} aria-label="More settings" title="More settings" onclick={() => (more = !more)}>
-          <PixelIcon name="more" />
-        </button>
-        {#if more}
+        {#if rest.length}
+          <button class="btn extra" aria-expanded={more} aria-label="More settings" title="More settings" onclick={() => (more = !more)}>
+            <PixelIcon name="more" />
+          </button>
+        {/if}
+        {#if more && rest.length}
           <div class="adv">
             {#each rest as key}
               <div class="row"><span class="key" class:changed={changed(style, own, [key])}>{SETTINGS[key].label}</span>{@render control(key)}</div>
             {/each}
             <div class="foot">
-              <button class="btn" disabled={!changed(style, own)} aria-label="Reset {styleName}" title="Reset {styleName}" onclick={reset}><PixelIcon name="reset" />Reset</button>
+              <button class="btn" disabled={!changed(style, own, keys)} aria-label="Reset {styleName}" title="Reset {styleName}" onclick={reset}><PixelIcon name="reset" />Reset</button>
             </div>
           </div>
         {/if}

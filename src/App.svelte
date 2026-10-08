@@ -284,19 +284,23 @@
   // What the current style reads an image by: what brightness is taken from, and how see-through
   // a pixel may be before it is empty. An image is analysed by these, and `by` on an item says
   // which it was analysed by.
-  const reading = $derived(`${set.source ?? 'luma'} ${set.alpha}`);
+  // The opacity cut only counts for an image with a pixel that is partly see-through (`soft`): any
+  // other image is the same at every cut, and is not analysed again when the cut changes.
+  const readBy = soft => `${set.source ?? 'luma'} ${soft ? set.alpha : ''}`;
+  // Whether an image on the wall has such a pixel. Only then does the Dock offer the opacity cut.
+  const soft = $derived((items.length ? items : example ? [example] : []).some(item => item.img.soft));
 
   // Turns decoded frames into an item for the wall. `original` and `img` are the first frame;
   // an animation also has `frames` (each with its own original, img and delay) and `loop`.
   function toItem(id, name, { frames, loop }) {
-    const by = reading;
     for (const frame of frames) frame.img = analyze(frame.original, set.source, set.alpha);
     unify(frames.map(frame => frame.img)); // one conversion for the whole animation, so it does not flicker
+    const by = readBy(frames[0].img.soft);
     return frames.length > 1 ? { id, name, by, ...frames[0], frames, loop } : { id, name, by, ...frames[0] };
   }
   // The item analysed the way the current style reads images: itself, if it already is.
   const reread = item =>
-    item.by === reading ? item : toItem(item.id, item.name, { frames: (item.frames ?? [item]).map(f => ({ original: f.original, delay: f.delay })), loop: item.loop });
+    item.by === readBy(item.img.soft) ? item : toItem(item.id, item.name, { frames: (item.frames ?? [item]).map(f => ({ original: f.original, delay: f.delay })), loop: item.loop });
   // When a setting or a change of style changes how images are read, every image is analysed
   // again. That reads every pixel, so while a slider is being dragged over a wall with a lot of
   // pixels on it, it waits for the slider to rest or be let go.
@@ -528,7 +532,7 @@
   </div>
 {/if}
 
-<Dock bind:first bind:second bind:style bind:settings bind:showOriginal bind:dragging {autos} count={items.length} onsaveall={saveEverything} />
+<Dock bind:first bind:second bind:style bind:settings bind:showOriginal bind:dragging {autos} {soft} count={items.length} onsaveall={saveEverything} />
 
 {#if dragDepth > 0}
   <div class="drop" style:background={second} style:color={overlayInk}>Drop to bitify</div>

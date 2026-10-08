@@ -107,7 +107,9 @@ they appear:
   between two pixels, which Lines and Cutout's seams go by, is always of the colors.
 - **Opacity cut** (every style), 1 to 255, default 128: alpha below it is an empty pixel.
   Lower it to keep soft edges, glows and shadows as part of the shape; raise it to trim
-  them off.
+  them off. It only changes an image that has a partly see-through pixel. Pixel art with
+  hard edges and photos have none and look the same at every cut, so the app shows this
+  setting only while an image on the wall has one.
 
 Two more are shared by the styles that turn brightness into a pattern:
 
@@ -706,7 +708,8 @@ Useful for shadows, masks and collision shapes. A fully opaque image becomes one
 rectangle.
 
 Its one setting is Opacity cut (see "Settings" above), which decides where a soft edge
-ends and so how large the shape is.
+ends and so how large the shape is. With no soft-edged image on the wall it has no settings
+to show.
 
 ## Choosing between them
 
