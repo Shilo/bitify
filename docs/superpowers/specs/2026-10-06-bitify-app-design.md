@@ -302,17 +302,28 @@ narrowest phone.
 ### The More menu
 
 The More button is the last button in the top bar, at every width. It opens a small menu
-that drops down below it, lined up with its right edge, with three or four rows, each an
-icon and a word:
+that drops down below it, lined up with its right edge, with four or five rows, each an
+icon and a word or two. The rows are in three groups with a thin line between them: what
+the app is set to (the theme, Install), what tells about it (Help, GitHub), and what
+throws things away (Reset settings).
 
 - Dark mode or Light mode, first: switches to the theme it names, which is always the one
   not showing. The icon is a moon or a sun. A pick that differs from the system setting is
   kept between visits (see "Remembered settings"); picking the system's own theme goes
   back to following the system. The browser's bar color follows the theme showing.
-- Help: closes the menu and opens the help (see "Help and welcome").
-- GitHub: opens `https://github.com/Shilo/bitify` in a new tab.
-- Install, last: asks the browser to install Bitify as an app (see "Installing"). The row
+- Install: asks the browser to install Bitify as an app (see "Installing"). The row
   is there only while the browser offers that.
+- Help: closes the menu and opens the help (see "Help and welcome").
+- GitHub: opens `https://github.com/Shilo/bitify` in a new tab. A second, muted icon at the
+  right end of the row, an arrow leaving a box, shows that the link leaves the app.
+- Reset settings, last, in the Reset color: closes the menu and asks "Reset all settings?" in a
+  small dialog in the middle of a dimmed screen, with one line saying that colors, styles
+  and theme return to their defaults and, after an empty line, that the images stay, then Cancel and Reset side by
+  side. The dialog opens on Cancel. Reset puts everything in "Remembered settings" back to
+  its default, which is then what is stored, and a toast says "Settings reset."; the
+  images, the view switch and the open panel are left as they are. Cancel, Escape and any
+  other click or tap close the dialog and change nothing. While it is open the wheel and
+  the keys change nothing, as with the menu.
 
 The menu closes on any click or tap, inside or outside it, and on Escape. While it is open
 nothing else on the screen reacts to a press, and the wheel and the keys change nothing
