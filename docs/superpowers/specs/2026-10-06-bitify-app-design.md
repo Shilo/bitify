@@ -230,7 +230,9 @@ it. It stays open or closed as styles are changed, and shows the settings of whi
 style is current. It starts closed, and whether it is open is not remembered between
 visits.
 
-- Each setting is a row: its name, then its control. A setting with a few values to choose
+- Each setting is a row: its name, then its control. A dot follows the name while the
+  setting is not at its default, as on a phone's chips. The threshold has no name on the
+  strip and so no dot there; its Auto button, off, says the same. A setting with a few values to choose
   from is a row of buttons, one pressed, like the view switch. A number is a slider and a
   number box, with an Auto button joined to the box where the setting has an Auto. They
   work as the threshold's do: the box clamps what is typed to the setting's range, and
@@ -260,8 +262,9 @@ height it has always had there:
 
 - First row: the style button, here only its preview and caret (the view switch below
   already names the style), then every setting of the style as a chip, the threshold
-  first. A chip shows the setting's name over its value ("Auto", "Off", "70%", "2×") and
-  nothing else: no mark says that a value has been changed. The chips scroll sideways by swipe
+  first. A chip shows the setting's name over its value ("Auto", "Off", "70%", "2×"), and
+  a dot after the value while that is not the default, the threshold's chip included. The
+  chips scroll sideways by swipe
   or wheel, as the palettes do. A side with more chips to scroll to fades out under a small
   arrow, 30px wide; nothing shows on a side that has no more, or when every chip fits.
   After the last chip the row ends in a Reset chip (an icon and the word), which works as

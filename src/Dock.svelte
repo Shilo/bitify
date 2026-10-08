@@ -275,6 +275,7 @@
           {#each keys as key}
             <button
               class="chip"
+              class:changed={changed(style, own, [key])}
               aria-label="{SETTINGS[key].label}: {shown(key, own[key], true)}"
               aria-pressed={key === active}
               onclick={() => (pressed = key)}
@@ -302,7 +303,7 @@
         {#if more}
           <div class="adv">
             {#each rest as key}
-              <div class="row"><span class="key">{SETTINGS[key].label}</span>{@render control(key)}</div>
+              <div class="row"><span class="key" class:changed={changed(style, own, [key])}>{SETTINGS[key].label}</span>{@render control(key)}</div>
             {/each}
             <div class="foot">
               <button class="btn" disabled={!changed(style, own)} aria-label="Reset {styleName}" title="Reset {styleName}" onclick={reset}><PixelIcon name="reset" />Reset</button>

@@ -359,7 +359,7 @@ button { font: inherit; color: inherit; }
 .adv :focus-visible, .adv .field:focus-within, .sets :focus-visible { outline-offset: -2px; }
 .adv .field > :focus-visible { outline: none; }
 .row { display: flex; align-items: center; gap: 8px; min-width: 0; }
-.row .key { flex: none; width: 80px; font-size: 13px; }
+.row .key { flex: none; width: 90px; font-size: 13px; white-space: nowrap; } /* room for the longest name, "Opacity cut", and its dot on one line */
 .panel .seg { flex: 1; min-width: 0; box-sizing: border-box; } /* as high as the sliders and boxes beside it */
 .panel .seg button { flex: 1 1 auto; min-width: 0; padding: 0 4px; } /* auto: a longer word gets the room it needs before the rest is shared out */
 .foot { grid-column: 1 / -1; display: flex; justify-content: flex-end; }
@@ -390,6 +390,9 @@ button { font: inherit; color: inherit; }
 .chip span { color: var(--muted); font-size: 11px; }
 .chip b { font-size: 12px; }
 .chip[aria-pressed="true"] { border-color: var(--fg); background: var(--tile); }
+/* A dot marks a setting that is not at its default: after its value on a chip, after its name in the tray. */
+.chip.changed b::after, .row .key.changed::after { content: " \2022"; }
+.row .key.changed::after { color: var(--fg); font-weight: 600; }
 .chip.reset { flex-direction: row; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; } /* the last in the row: all the style's settings back to their defaults */
 .chip:disabled { opacity: 0.4; cursor: default; }
 /* the list of styles, opened by the style button; it sits above the panel, lined up with its left edge */
