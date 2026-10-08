@@ -19,5 +19,7 @@ describe('restore', () => {
     expect(restore(text, styles)).toEqual({ ...DEFAULTS, second: '#ABCDEF' });
     expect(restore(JSON.stringify({ threshold: 12.5 }), styles).threshold).toBe(null);
     expect(restore(JSON.stringify({ threshold: '90' }), styles).threshold).toBe(null);
+    expect(restore(JSON.stringify({ theme: 'dark' }), styles).theme).toBe('dark');
+    expect(restore(JSON.stringify({ theme: 'blue' }), styles).theme).toBe(undefined);
   });
 });

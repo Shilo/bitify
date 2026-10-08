@@ -22,8 +22,10 @@
   height: 100dvh;
   padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
 }
+/* App.svelte sets data-theme, to the system's theme or the one picked in the More menu. The media
+   query covers the moment before it has. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme]) {
     --bg: #17181d;
     --surface: #22242c;
     --fg: #ecedf2;
@@ -34,6 +36,17 @@
     --shadow: rgba(0, 0, 0, 0.5);
     color-scheme: dark;
   }
+}
+:root[data-theme="dark"] {
+  --bg: #17181d;
+  --surface: #22242c;
+  --fg: #ecedf2;
+  --muted: #9a9dae;
+  --line: #343744;
+  --tile: #1f2128;
+  --tile2: #272a33;
+  --shadow: rgba(0, 0, 0, 0.5);
+  color-scheme: dark;
 }
 @media (pointer: coarse) {
   :root { --hit: clamp(40px, 12vw, 44px); }
@@ -167,7 +180,7 @@ button { font: inherit; color: inherit; }
 .sheet[open] { display: grid; gap: 8px; }
 .sheet::backdrop { background: rgba(0, 0, 0, 0.45); }
 .sheet .name { margin: 0 2px 4px; font-size: 13px; text-align: center; }
-/* the More menu: Help, GitHub and Install, dropped down from the More button at the right end of the top bar */
+/* the More menu: the theme, Help, GitHub and Install, dropped down from the More button at the right end of the top bar */
 .more {
   inset: calc(env(safe-area-inset-top, 0px) + var(--hit) + 20px) calc(env(safe-area-inset-right, 0px) + 16px) auto auto;
   box-sizing: border-box; max-width: calc(100% - 32px); margin: 0; padding: 6px;

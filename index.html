@@ -9,6 +9,15 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" />
     <meta name="theme-color" content="#ecedf1" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#17181d" media="(prefers-color-scheme: dark)" />
+    <!-- A theme picked in the More menu is put in place before the first paint, so the system's does not flash (see App.svelte). -->
+    <script>
+      try {
+        const { theme } = JSON.parse(localStorage.getItem('bitify'));
+        if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
+      } catch {
+        // nothing stored, or no storage: the system's theme
+      }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Schibsted+Grotesk:wght@400..700&display=swap" />
