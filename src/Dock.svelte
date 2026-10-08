@@ -76,6 +76,14 @@
   const reveal = list => list.querySelector('[aria-pressed="true"]')?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
   let pressed = $state('threshold');
   const active = $derived(keys.includes(pressed) ? pressed : keys[0]);
+  // The pressed chip is the only thing that says which setting the control below belongs to, so
+  // it is kept in view: when the panel opens, when another style brings other chips, and when
+  // it is pressed while half out of sight.
+  let chipRow = $state();
+  $effect(() => {
+    active, style; // read, so this runs when either changes
+    chipRow?.querySelector('[aria-pressed="true"]')?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  });
   function reset() {
     settings[style] = defaults(style);
   }
@@ -249,13 +257,13 @@
         </button>
       </div>
       {#if chips}
-        <div class="sets" role="group" aria-label="Settings" onwheel={e => (e.currentTarget.scrollLeft += e.deltaY)}>
+        <div class="sets" role="group" aria-label="Settings" bind:this={chipRow} onwheel={e => (e.currentTarget.scrollLeft += e.deltaY)}>
           {#each keys as key}
             <button
               class="chip"
               class:changed={changed(style, own, [key])}
               aria-pressed={key === active}
-              onclick={e => { pressed = key; e.currentTarget.scrollIntoView({ block: 'nearest', inline: 'nearest' }); }}
+              onclick={() => (pressed = key)}
             >
               <span>{SETTINGS[key].label}</span><b>{shown(key, own[key])}</b>
             </button>

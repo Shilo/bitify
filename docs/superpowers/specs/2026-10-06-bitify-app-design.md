@@ -256,8 +256,10 @@ height it has always had there:
 - Second row: the control of the pressed chip, as wide as the row, then a Reset button (an
   icon) that works as the tray's does.
 - The threshold's chip is pressed to begin with, so the panel opens as the strip it was.
-  Pressing a chip scrolls it into view. The pressed chip is remembered while the app is
-  open; a style that does not have that setting shows its first.
+  The pressed chip is remembered while the app is open; a style that does not have that
+  setting shows its first. The pressed chip is the only thing that says which setting the
+  control belongs to, so it is always scrolled into view: when it is pressed, when the
+  panel opens, and when a change of style brings other chips.
 - There is no More button and no tray.
 
 **On a phone on its side** (520px high or less, and wider than high) there is the width for
