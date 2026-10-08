@@ -216,7 +216,7 @@ current style's other settings a press away. Left to right:
   While Auto is on, the box shows the value Auto picked, or the range when images differ.
   The box is just wide enough for three digits, has no spinner arrows, and widens only to
   fit a range. Silhouette has no threshold, and the strip leaves its place empty.
-- More: a square button with three dots and no word, the same icon as the More button at
+- More: a square button with three dots, one above the other, and no word: the same icon as the More button at
   the right end of the top bar, so "more" looks the same wherever it is. It is named "More
   settings" for a screen reader and on hover. It opens the tray (below), and is drawn
   pressed while the tray is open. It carries no mark for settings that have been changed.
