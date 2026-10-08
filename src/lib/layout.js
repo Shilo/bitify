@@ -28,7 +28,7 @@ export function fitGrid(count, width, height, { gap, extra, min }) {
 // An image no larger than that is drawn whole. A larger one is drawn at the tile's own size,
 // a pixel of the picture for each pixel of the screen, as more could not be seen.
 //
-// While the threshold slider is dragged there is a `budget`, the milliseconds this tile may
+// While a slider of the Style panel is dragged there is a `budget`, the milliseconds this tile may
 // take for each move, and `pace`, the milliseconds per pixel its last conversion took. If a
 // picture of the tile's size would take longer than the budget, a smaller one that is expected
 // to fit is drawn instead: a rougher draft. An image that is drawn whole is never drafted, as

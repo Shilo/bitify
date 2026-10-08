@@ -50,6 +50,11 @@ describe('the settings of a style', () => {
     expect(shown('rim', false)).toBe('Off');
     expect(shown('direction', '-')).toBe('—');
     expect(shown('source', 'red')).toBe('R');
+    // a sign is read out as a word; anything else as it is shown
+    expect(['/', '\\', '-', '|'].map(v => shown('direction', v, true))).toEqual(['Rising', 'Falling', 'Level', 'Upright']);
+    expect(shown('source', 'red', true)).toBe('R');
+    expect(shown('threshold', null, true)).toBe('Auto');
+    expect(shown('shading', 60, true)).toBe('60%');
   });
 });
 

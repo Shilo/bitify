@@ -353,6 +353,10 @@ button { font: inherit; color: inherit; }
   max-height: max(var(--hit), calc(100vh - 440px)); max-height: max(var(--hit), calc(100dvh - 440px)); overflow-y: auto; overscroll-behavior: contain;
   padding-top: 10px; border-top: 1px solid var(--line);
 }
+/* A box that scrolls cuts off what reaches past its edge, and a focus ring reaches 4px past its
+   control. Inside the tray and the chip row the ring is drawn within the control instead. */
+.adv :focus-visible, .adv .field:focus-within, .sets :focus-visible { outline-offset: -2px; }
+.adv .field > :focus-visible { outline: none; }
 .row { display: flex; align-items: center; gap: 8px; min-width: 0; }
 .row .key { flex: none; width: 80px; font-size: 13px; }
 .panel .seg { flex: 1; min-width: 0; box-sizing: border-box; } /* as high as the sliders and boxes beside it */
@@ -396,9 +400,12 @@ button { font: inherit; color: inherit; }
   .menu::-webkit-scrollbar { display: none; }
   .menu .preset { flex: none; }
 }
-/* too narrow for two settings side by side in the tray */
+/* Too narrow for two settings side by side in the tray. The strip drops the word "Style" there,
+   which the style button says anyway: with More beside it, the threshold's slider was left
+   45px at 521px wide. */
 @media (max-width: 700px) {
   .adv { grid-template-columns: minmax(0, 1fr); }
+  .pick .key { display: none; }
 }
 /* narrower screens: icon-only dock buttons */
 @media (max-width: 800px) {

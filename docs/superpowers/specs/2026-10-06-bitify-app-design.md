@@ -232,13 +232,20 @@ visits.
   from is a row of buttons, one pressed, like the view switch. A number is a slider and a
   number box, with an Auto button joined to the box where the setting has an Auto. They
   work as the threshold's do: the box clamps what is typed to the setting's range, and
-  clearing it goes back to Auto. Fill darks has no Auto; its box is empty and reads "Off"
+  clearing it goes back to Auto. A number half typed, such as a minus sign alone, changes
+  nothing. Fill darks has no Auto; its box is empty and reads "Off"
   at 0, and clearing it turns it off. A box of a setting with neither waits for a number
   when it is cleared, and shows the setting's value again when it loses focus.
-- The rows are two side by side. At 700px wide and below there is one to a row.
+- The rows are two side by side. At 700px wide and below there is one to a row, and the
+  strip drops the word "Style" to leave the threshold's slider room beside More.
 - Under the rows, a line saying that the style keeps these settings for itself, and a Reset
   button that puts all of the current style's settings, the threshold included, back to
-  their defaults. Reset is disabled while they are all at their defaults.
+  their defaults. Reset is disabled while they are all at their defaults. Pressed from the
+  keyboard it hands the focus to More (to the pressed chip on a phone), because a disabled
+  button would keep the keys to itself.
+- Direction's four buttons show a sign each and are read out as Rising, Falling, Level and
+  Upright. A focus ring inside the tray or the chip row is drawn within its control, since a
+  box that scrolls would cut one drawn outside.
 - The tray is never taller than the window less 440px, and never shorter than one control.
   When its rows need more than that (a short window) it scrolls inside itself, so the wall
   always keeps some room.
@@ -501,7 +508,8 @@ opacity another way (see "Each style's settings").
 
 Every pixel ends up in one of three states:
 
-- **Empty**: alpha below 128. Stays fully transparent.
+- **Empty**: alpha below 128, or below the style's Opacity cut where that has been changed
+  (see "Each style's settings"). Stays fully transparent.
 - **First color**: lines and dark pixels.
 - **Second color**: fill and light pixels.
 
@@ -681,7 +689,7 @@ style did before it had settings.
 | Threshold | all but Silhouette | Auto, or 1 to 254 | Auto | See "Threshold". |
 | Seams | Cutout | Auto, or 1 to 255 | Auto | The seam strength. Lower values cut along softer changes. No difference is above 255, so 255 cuts no seams. |
 | Rim | Cutout | On, Off | On | Off leaves out the light rim on dark pixels at the silhouette. With Seams at 255 as well, Cutout is Solid. |
-| Thickness | Lines | 1, 2, 3 | 1 | A solid pixel fewer than this many steps (left, right, up or down) from a line is a line too. A step may cross an empty pixel. |
+| Thickness | Lines | 1, 2, 3 | 1 | A solid pixel fewer than this many steps (left, right, up or down) from a line is a line too. |
 | Fill darks | Lines | Off, or 1 to 254 | Off | A pixel this dark or darker is first color as well, so dark areas stay filled. Thickness does not widen them. |
 | Shading | Checker, Hatch, Bayer, Noise, Atkinson | 0 to 100% | 100% | How far from the threshold a tone is still patterned. The tone becomes `0.5 + (tone − 0.5) / shading`, held between 0 and 1: at 50% a tone half way to the darkest or lightest is already solid. At 0 every tone is solid, which is Solid at the same threshold. |
 | Scale | Checker, Hatch, Bayer, Noise | 1×, 2×, 3×, 4× | 1× | Each cell of the pattern is this many pixels wide and high. |
@@ -694,16 +702,22 @@ style did before it had settings.
 
 - Brightness and Opacity cut change what the analysis finds, so every image is analysed
   again when they change, by the setting itself or by a change to a style that has other
-  values for them. That reads every pixel of every image. While a slider is being dragged
+  values for them. That reads every pixel of every image. It is done before the tiles
+  redraw, so no tile converts an image as it was analysed before. While a slider is being dragged
   over a wall holding more than a million pixels in all, it waits until the slider rests
-  or is let go, and the images follow then.
+  or is let go, and the images follow then. Saving or copying in that moment does not wait:
+  what is saved is analysed as the settings then are.
 - In a picture smaller than its image (see "Images larger than their tile"), Scale
   shrinks with the picture: it is the setting times the picture's width over the image's,
   rounded, and at least 1. So the tile shows the pattern as coarse as the saved file has
   it, down to the finest the screen can show. A pattern finer than that looks the same
   on the tile at every scale, though the saved files differ.
 - Thickness, Fill darks, Seams and Rim give each pixel of a smaller picture exactly what
-  its image pixel is in the full conversion, as Lines and Cutout always do.
+  its image pixel is in the full conversion, as Lines and Cutout always do. For Thickness
+  above 1 the lines are found for the whole image and grown when the picture has at least
+  half the image's pixels; a smaller picture has each of its pixels ask the few within
+  reach, which is then the cheaper way. Either way a tile of a large photo takes about
+  three to five times as long to convert with Thickness above 1 as with 1.
 - The style previews on the style button and in the list of styles use each style's own
   settings.
 - Settings are defined in `src/lib/settings.js`: `SETTINGS` describes each, and
@@ -880,9 +894,9 @@ it is doing:
   quick on a phone, and a drag of a slider is kept quick by drafts (see "Drafts
   while a slider is dragged"). What still reads every pixel of a photo, and so
   pauses the page for a moment on a slow phone, is adding it, saving or copying it, and
-  changing Brightness or Opacity cut, which analyses it again with no message. A
-  message says so meanwhile (see "Long jobs"). Moving those to a worker is the upgrade path
-  if that ever matters.
+  changing Brightness or Opacity cut, which analyses it again. Adding, saving and copying
+  show a message meanwhile (see "Long jobs"); the analysis after a change of setting or of
+  style does not. Moving those to a worker is the upgrade path if that ever matters.
 - A tile's picture is a sample of a larger image, not an average of it. An image with a
   fine regular texture shows bands when shown smaller, as it did when the browser shrank
   the whole conversion. The saved file has none.
@@ -911,7 +925,11 @@ it is doing:
   - Hatch draws a darker middle color as wide diagonal lines and a lighter one as thin lines;
   - Noise lights exactly half of its 16×16 grid for a middle color, and a lighter color
     lights those cells and more;
-  - every worked example in `docs/styles.md` is exactly what the code draws;
+  - every worked example in `docs/styles.md` is exactly what the code draws, the examples
+    of the settings included;
+  - Floyd and Stucki are, pixel for pixel, a plain error diffusion written out from their
+    weights; an animation analysed with another Brightness or Opacity cut still shares one
+    set of Auto values;
   - Lines outlines an inner part as well as the silhouette, draws a one-pixel boundary,
     ignores a shading step below the threshold, frames only images that have empty
     pixels, and at Auto draws no lines along soft shading;

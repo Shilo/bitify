@@ -277,7 +277,9 @@
   // When a setting or a change of style changes how images are read, every image is analysed
   // again. That reads every pixel, so while a slider is being dragged over a wall with a lot of
   // pixels on it, it waits for the slider to rest or be let go.
-  $effect(() => {
+  // It runs before the tiles redraw (`pre`): after them, each tile would first convert its image
+  // as it was analysed before, and then again.
+  $effect.pre(() => {
     if (dragging && items.reduce((n, item) => n + pixelsOf(item), 0) > 1e6) return;
     const next = items.map(reread);
     if (next.some((item, i) => item !== items[i])) items = next;
@@ -331,8 +333,8 @@
 
   async function save(item) {
     try {
-      const asked = asking();
-      await during(`Saving ${item.name}…`, pixelsOf(item), () => saveOne(bitified(item, asked)));
+      const asked = asking(), read = reread(item); // analysed as asked, also while a drag has put that off for the wall
+      await during(`Saving ${item.name}…`, pixelsOf(item), () => saveOne(bitified(read, asked)));
     } catch {
       say(`${item.name} could not be saved.`);
     }
@@ -341,9 +343,9 @@
   // The clipboard takes a PNG but not a GIF, so an animation is copied as its first frame.
   async function copy(item) {
     try {
-      const asked = asking();
+      const asked = asking(), read = reread(item);
       // the clipboard is asked at once, as Safari demands, and handed the PNG when it has been made
-      await copyOne(during(`Copying ${item.name}…`, item.img.w * item.img.h, () => pngBlob(still(item, asked))));
+      await copyOne(during(`Copying ${item.name}…`, item.img.w * item.img.h, () => pngBlob(still(read, asked))));
       say(`${item.name} copied${item.frames ? ' as a still image' : ''}.`);
     } catch {
       say(`${item.name} could not be copied.`);
@@ -352,7 +354,7 @@
 
   async function saveEverything() {
     try {
-      const asked = asking(), all = items; // the images on the wall now, even if some are removed before the job starts
+      const asked = asking(), all = items.map(reread); // the images on the wall now, even if some are removed before the job starts
       const saving = all.length > 1 ? `Saving ${all.length} images…` : `Saving ${all[0].name}…`;
       await during(saving, all.reduce((sum, item) => sum + pixelsOf(item), 0), () => saveAll(all, item => bitified(item, asked)));
     } catch {

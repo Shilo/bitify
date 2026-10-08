@@ -223,9 +223,12 @@ export function mask(img, style, set = null, mw = img.w, mh = img.h) {
     // color, without widening it; 0 leaves that off.
     const reach = (opt.thickness ?? 1) - 1, darks = opt.darks ?? 0;
     const dark = p => darks > 0 && lum[p] <= darks;
-    if (reach && mw === w && mh === h) {
-      // Every pixel is asked for, so the lines are found once and then grown a step at a time,
-      // which costs far less than asking each pixel about all the pixels within reach of it.
+    if (reach && w * h <= 2 * mw * mh) {
+      // The picture has at least half the image's pixels, so the lines are found once for the
+      // whole image and then grown a step at a time. Asking each pixel of the picture about all
+      // the pixels within reach of it costs more than that from about there up, and less for a
+      // smaller picture (timed on a smooth 1600x1200 image, where few pixels find a line early:
+      // the two cost the same at 0.4 of its pixels for thickness 3 and at 0.65 for thickness 2).
       let from = new Uint8Array(w * h), to = new Uint8Array(w * h);
       for (let y = 0, p = 0; y < h; y++) for (let x = 0; x < w; x++, p++) from[p] = solid(p) && thin(x, y, p) ? 1 : 0;
       for (let step = 0; step < reach; step++, [from, to] = [to, from]) {
@@ -233,7 +236,10 @@ export function mask(img, style, set = null, mw = img.w, mh = img.h) {
           to[p] = from[p] | (x ? from[p - 1] : 0) | (x + 1 < w ? from[p + 1] : 0) | (y ? from[p - w] : 0) | (y + 1 < h ? from[p + w] : 0);
         }
       }
-      for (let p = 0; p < w * h; p++) if (solid(p)) m[p] = from[p] || dark(p) ? 1 : 2;
+      for (let j = 0, o = 0; j < mh; j++) for (let i = 0, row = ys[j] * w; i < mw; i++, o++) {
+        const p = row + xs[i];
+        if (solid(p)) m[o] = from[p] || dark(p) ? 1 : 2;
+      }
       return m;
     }
     // whether a line lies within reach of the pixel at x, y, which is not one itself

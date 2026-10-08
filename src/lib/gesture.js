@@ -29,7 +29,7 @@ export function wheelSteps({ distance = 50, pause = 180, gap = 150 } = {}) {
   };
 }
 
-// Says when the threshold slider is being dragged, which is when the wall draws drafts (see
+// Says when a slider of the Style panel is being dragged, which is when the wall draws drafts (see
 // Tile.svelte). No DOM.
 //
 // A drag is moves made with a pointer pressed on the slider. It pauses once the slider has

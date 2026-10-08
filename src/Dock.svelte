@@ -84,8 +84,12 @@
     active, style; // read, so this runs when either changes
     chipRow?.querySelector('[aria-pressed="true"]')?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
   });
-  function reset() {
+  // Reset then has nothing to reset and is disabled. Pressed from the keyboard (a click with no
+  // press behind it) it would keep the focus, and a disabled button passes no keys on: Space
+  // and the arrow keys would go dead. So the focus moves to More, or to the pressed chip.
+  function reset(e) {
     settings[style] = defaults(style);
+    if (!e.detail) (dock.querySelector('.extra') ?? dock.querySelector('.chip[aria-pressed="true"]'))?.focus();
   }
 
   // A number box is empty while its setting is on Auto or off, and then shows this instead: what
@@ -99,6 +103,7 @@
   // that 0 turns off; for any other setting an empty box changes nothing, and waits for a number.
   function typed(e, key) {
     const box = e.currentTarget, { min, max, auto, zero } = SETTINGS[key];
+    if (box.validity.badInput) return; // a number half typed, such as a lone minus sign, also reads as empty
     if (box.value === '') {
       if (auto) own[key] = null;
       else if (zero) own[key] = 0;
@@ -179,8 +184,8 @@
   {@const { label, options, min, max, auto } = SETTINGS[key]}
   {#if options}
     <div class="seg" role="group" aria-label={label}>
-      {#each options as [value, name]}
-        <button aria-pressed={own[key] === value} onclick={() => (own[key] = value)}>{name}</button>
+      {#each options as [value, name, spoken]}
+        <button aria-pressed={own[key] === value} aria-label={spoken} onclick={() => (own[key] = value)}>{name}</button>
       {/each}
     </div>
   {:else}
@@ -262,6 +267,7 @@
             <button
               class="chip"
               class:changed={changed(style, own, [key])}
+              aria-label="{SETTINGS[key].label}: {shown(key, own[key], true)}"
               aria-pressed={key === active}
               onclick={() => (pressed = key)}
             >

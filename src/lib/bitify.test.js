@@ -573,7 +573,7 @@ describe('the settings of a style', () => {
   const grainy = analyze({ width: w, height: h, data });
   const picked = (all, mw, mh) => Array.from({ length: mw * mh }, (_, o) => all[Math.floor(((Math.floor(o / mw) + 0.5) * h) / mh) * w + Math.floor((((o % mw) + 0.5) * w) / mw)]);
 
-  it('converts as before when every setting is at its default, given or left out', () => {
+  it('converts alike with every setting at its default, whether given, left out or only a threshold', () => {
     for (const style of Object.keys(STYLE_SETTINGS)) {
       expect([...mask(grainy, style, defaults(style))], style).toEqual([...mask(grainy, style)]);
       expect([...mask(grainy, style, {})], style).toEqual([...mask(grainy, style)]);
@@ -692,6 +692,29 @@ describe('the settings of a style', () => {
     expect([...of('floyd')]).not.toEqual([...of('stucki')]);
   });
 
+  it('diffusion: Floyd and Stucki are a plain error diffusion by their weights', () => {
+    // the same thing written the slow, obvious way: every running value kept, each pixel cut at the middle
+    const WEIGHTS = {
+      floyd: [16, [1, 0, 7], [-1, 1, 3], [0, 1, 5], [1, 1, 1]],
+      stucki: [42, [1, 0, 8], [2, 0, 4], [-2, 1, 2], [-1, 1, 4], [0, 1, 8], [1, 1, 4], [2, 1, 2], [-2, 2, 1], [-1, 2, 2], [0, 2, 4], [1, 2, 2], [2, 2, 1]],
+    };
+    const plain = (img, t, [of, ...to]) => {
+      const { lum, lo, hi, data } = img, solid = p => data[p * 4 + 3] >= 128;
+      const tone = l => (l <= t ? (t > lo ? (0.5 * (l - lo)) / (t - lo) : 0) : 0.5 + (0.5 * (l - t)) / (hi - t));
+      const v = Float32Array.from(lum, (l, p) => (solid(p) ? tone(l) * 255 : 0)), m = new Uint8Array(w * h);
+      for (let y = 0, p = 0; y < h; y++) for (let x = 0; x < w; x++, p++) {
+        if (!solid(p)) continue;
+        const on = v[p] > 127.5, error = v[p] - (on ? 255 : 0);
+        m[p] = on ? 2 : 1;
+        for (const [dx, dy, parts] of to) if (x + dx >= 0 && x + dx < w && y + dy < h) v[(y + dy) * w + x + dx] += (error * parts) / of;
+      }
+      return m;
+    };
+    for (const diffusion of ['floyd', 'stucki']) {
+      for (const threshold of [70, 120]) expect([...mask(grainy, 'atkinson', { threshold, diffusion })], `${diffusion} ${threshold}`).toEqual([...plain(grainy, threshold, WEIGHTS[diffusion])]);
+    }
+  });
+
   it('diffusion: hands on the whole error, so a block of one tone comes out that light all through', () => {
     // a quarter tone: Atkinson, which drops a quarter of the error, darkens it; the others keep it
     const block = image(Array(32).fill('a' + 'b'.repeat(32) + 'c'), { a: grey(20), b: grey(180), c: grey(240) }); // tone 0.75
@@ -718,6 +741,18 @@ describe('the settings of a style', () => {
     expect([...blue.right]).toEqual([...analyze(src).right]);
   });
 
+  it('an animation analysed with another brightness or opacity cut still shares one set of Auto values', () => {
+    const frame = (r, b, a) => ({ width: 4, height: 1, data: Uint8ClampedArray.of(r, 0, 0, 255, 0, 0, b, 255, 90, 90, 90, a, 200, 200, 200, 255) });
+    const frames = unify([analyze(frame(250, 10, 100), 'blue', 60), analyze(frame(30, 240, 30), 'blue', 60)]);
+    const all = analyze({ width: 4, height: 2, data: Uint8ClampedArray.of(...frame(250, 10, 100).data, ...frame(30, 240, 30).data) }, 'blue', 60);
+    for (const f of frames) {
+      expect([f.auto, f.autoTone, f.lo, f.hi, f.hasAlpha, f.cut]).toEqual([all.auto, all.autoTone, all.lo, all.hi, true, 60]);
+    }
+    expect(frames[0].lum[1]).toBe(10); // read from blue
+    expect(show(mask(frames[1], 'silhouette'), 4)).toEqual(['## #']); // alpha 30 is under the cut of 60, alpha 100 in the other frame is not
+    expect(show(mask(frames[0], 'silhouette'), 4)).toEqual(['####']);
+  });
+
   it('opacity cut: sets how see-through a pixel may be before it is empty', () => {
     const src = { width: 3, height: 1, data: Uint8ClampedArray.of(9, 9, 9, 40, 9, 9, 9, 127, 9, 9, 9, 200) };
     const shape = cut => show(mask(analyze(src, 'luma', cut), 'silhouette'), 3)[0];
@@ -742,5 +777,24 @@ describe('docs/styles.md', () => {
       const drawn = show(mask(ball, style), ball.w).map(row => row.trimEnd()).join('\n');
       expect(section, title).toContain('```\n' + drawn + '\n```');
     }
+  });
+
+  it('shows, for the settings, exactly what the code draws for the preview ball', () => {
+    const doc = readFileSync(new URL('../../docs/styles.md', import.meta.url), 'utf8').replace(/\r\n/g, '\n');
+    const ball = previewBall();
+    // each example is two or three drawings side by side, three spaces apart
+    const side = (...cases) => {
+      const all = cases.map(([style, set]) => show(mask(ball, style, set), ball.w));
+      return all[0].map((_, y) => all.map(rows => rows[y]).join('   ').trimEnd()).join('\n');
+    };
+    const examples = [
+      side(['cutout', { seams: 8 }], ['cutout', { seams: 255 }], ['cutout', { rim: false }]),
+      side(['lines', { thickness: 2 }], ['lines', { darks: 100 }]),
+      side(['checker', { shading: 50 }], ['checker', { scale: 2 }]),
+      side(['hatch', { direction: '\\' }], ['hatch', { direction: '-' }], ['hatch', { spacing: 5 }]),
+      side(['bayer', { matrix: 2 }], ['bayer', { matrix: 8 }]),
+      side(['atkinson', { diffusion: 'floyd' }], ['atkinson', { diffusion: 'stucki' }]),
+    ];
+    for (const [n, drawn] of examples.entries()) expect(doc, `example ${n + 1}`).toContain('```\n' + drawn + '\n```');
   });
 });

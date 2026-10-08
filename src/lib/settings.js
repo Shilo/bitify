@@ -1,7 +1,8 @@
 // Each style's own settings, and what is kept between visits. No DOM.
 
 // Every setting a style can have. One with `options` is a choice between a few values, each
-// [value, name]; the others are whole numbers from `min` to `max`. `auto` means the app can
+// [value, name], with a third word to be read out where the name is only a sign; the others are
+// whole numbers from `min` to `max`. `auto` means the app can
 // pick the number itself, which is the value null. `zero` names the value 0, which turns the
 // setting off. `unit` follows the number where it is shown.
 export const SETTINGS = {
@@ -12,7 +13,7 @@ export const SETTINGS = {
   darks: { label: 'Fill darks', min: 0, max: 254, zero: 'Off', default: 0 },
   shading: { label: 'Shading', min: 0, max: 100, unit: '%', default: 100 },
   scale: { label: 'Scale', options: [[1, '1×'], [2, '2×'], [3, '3×'], [4, '4×']], default: 1 },
-  direction: { label: 'Direction', options: [['/', '/'], ['\\', '\\'], ['-', '—'], ['|', '|']], default: '/' },
+  direction: { label: 'Direction', options: [['/', '/', 'Rising'], ['\\', '\\', 'Falling'], ['-', '—', 'Level'], ['|', '|', 'Upright']], default: '/' },
   spacing: { label: 'Spacing', options: [[3, '3'], [4, '4'], [5, '5'], [6, '6']], default: 3 },
   matrix: { label: 'Matrix', options: [[2, '2'], [4, '4'], [8, '8']], default: 4 },
   diffusion: { label: 'Diffusion', options: [['atkinson', 'Atkinson'], ['floyd', 'Floyd'], ['stucki', 'Stucki']], default: 'atkinson' },
@@ -45,10 +46,11 @@ export function allowed(key, v) {
   return options ? options.some(o => o[0] === v) : (v === null && !!auto) || (Number.isInteger(v) && v >= min && v <= max);
 }
 
-// A setting's value as text: what a chip shows.
-export function shown(key, v) {
-  const { options, zero, unit = '' } = SETTINGS[key];
-  return v === null ? 'Auto' : options ? options.find(o => o[0] === v)[1] : zero && v === 0 ? zero : `${v}${unit}`;
+// A setting's value as text: what a chip shows. `spoken` gives the word to read out instead,
+// where there is one.
+export function shown(key, v, spoken = false) {
+  const { options, zero, unit = '' } = SETTINGS[key], option = options?.find(o => o[0] === v);
+  return v === null ? 'Auto' : options ? (spoken && option[2]) || option[1] : zero && v === 0 ? zero : `${v}${unit}`;
 }
 
 // What is kept between visits: the two colors, the style, and every style's settings.
