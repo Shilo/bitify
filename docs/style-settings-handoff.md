@@ -66,7 +66,12 @@ rejected because it covers the images).
 - **A phone on its side** has the chips, not the tray. With the tray open at 568×320 the
   wall was left 5px.
 - **The style panel** is 700px wide on wide screens, up from 560px, for two settings side
-  by side.
+  by side. On phones it is as wide as the screen less 12px a side, not as wide as the dock.
+- **More** is a square button with an icon and no word: the three dots of the top bar's
+  More button, reused, which the owner chose over the candidates in
+  [superpowers/mockups/more-icons.html](superpowers/mockups/more-icons.html).
+- **Reset** is tinted red (`--undo` in `app.css`), the one color in the chrome.
+- **The chip row** fades out under a small arrow on a side that has more to scroll to.
 
 ## What has been checked
 

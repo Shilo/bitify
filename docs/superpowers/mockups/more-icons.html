@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>More button icons</title>
+<!-- A mockup, not app code: candidates for the icon of the More button on the style strip, drawn
+     as the app draws its icons (7x7 pixels, shown at 14px) and in the strip they would sit in. -->
+<style>
+  body { margin: 0; padding: 24px 16px 48px; background: #ecedf1; color: #1b1c24; font: 14px/1.45 "Schibsted Grotesk", system-ui, "Segoe UI", sans-serif; }
+  h1 { margin: 0 0 4px; font-size: 20px; }
+  p { margin: 0 0 20px; color: #666979; max-width: 70ch; }
+  main { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; max-width: 1100px; }
+  section { border-radius: 14px; overflow: hidden; border: 1px solid #d5d7e0; background: #fff; }
+  h2 { margin: 0; padding: 10px 14px 0; font-size: 15px; }
+  h2 small { font-weight: 400; color: #666979; margin-left: 6px; }
+  .note { margin: 2px 14px 10px; font-size: 13px; color: #666979; }
+  .big { display: flex; align-items: center; gap: 14px; padding: 0 14px 10px; }
+  .big svg { width: 56px; height: 56px; fill: currentColor; shape-rendering: crispEdges; }
+  .theme { --surface: #fff; --fg: #1b1c24; --muted: #666979; --line: #d5d7e0; --tile: #e3e5eb; padding: 12px 14px; background: #ecedf1; }
+  .theme.dark { --surface: #22242c; --fg: #ecedf2; --muted: #9a9dae; --line: #343744; --tile: #1f2128; background: #17181d; }
+  .strip { display: flex; align-items: center; gap: 8px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); color: var(--fg); }
+  .strip + .strip { margin-top: 8px; }
+  .key { color: var(--muted); font-size: 13px; }
+  .track { flex: 1; height: 4px; border-radius: 2px; background: var(--line); position: relative; }
+  .track::after { content: ""; position: absolute; left: 38%; top: -5px; width: 14px; height: 14px; border-radius: 50%; background: var(--fg); }
+  .box { height: 36px; padding: 0 10px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 10px; color: var(--muted); font-size: 12px; font-weight: 600; }
+  .btn { position: relative; display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid var(--line); border-radius: 10px; }
+  .btn.on { background: var(--tile); border-color: var(--fg); }
+  .btn svg { width: 14px; height: 14px; fill: currentColor; shape-rendering: crispEdges; }
+  .dot { position: absolute; top: 5px; right: 5px; width: 6px; height: 6px; background: var(--fg); }
+  .cap { margin: 0 0 6px; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+</style>
+</head>
+<body>
+<h1>More button: which icon?</h1>
+<p>Candidates, none of them an arrow. Each is shown large, then in the style strip in both themes: closed, and open. Chosen: the first, the three dots the top bar's More button already has, so the icon is reused and "more" looks the same in both places.</p>
+<main id="out"></main>
+<script>
+const ICONS = [
+  ['Dots, in a row', 'chosen', 'The top bar\'s More icon, reused. Nothing new to learn, and no new icon.', ['.......', '.......', '.......', '#..#..#', '.......', '.......', '.......']],
+  ['Gear', '', 'The usual sign for settings. Unlike anything else in the app.', ['...#...', '.#.#.#.', '..###..', '###.###', '..###..', '.#.#.#.', '...#...']],
+  ['Dial', '', 'A knob with its pointer: "adjust". Reads well at this size, less widely known than a gear.', ['..###..', '.#...#.', '#..#..#', '#..#..#', '#.....#', '.#...#.', '..###..']],
+  ['List', '', 'Rows of settings. Says plainly what opens, but is also the usual sign for a menu.', ['.......', '#.#####', '.......', '#.#####', '.......', '#.#####', '.......']],
+  ['Dots, upright', '', '"More", turned on end so it differs from the top bar\'s menu. Light at this size; the changed-setting square sits close to it.', ['...#...', '.......', '.......', '...#...', '.......', '.......', '...#...']],
+  ['Nine dots', '', 'A grid of options. Close to the Palette button\'s four squares.', ['#..#..#', '.......', '.......', '#..#..#', '.......', '.......', '#..#..#']],
+  ['Corners', '', '"Open out". Says the panel grows, not what is in it.', ['###....', '#......', '#......', '.......', '......#', '......#', '....###']],
+];
+const svg = rows => `<svg viewBox="0 0 7 7">${rows.flatMap((r, y) => [...r].map((c, x) => (c === '#' ? `<rect x="${x}" y="${y}" width="1" height="1"/>` : ''))).join('')}</svg>`;
+const strip = (rows, open) => `<div class="strip"><span class="key">Style</span><span class="box">Hatch</span><span class="track"></span><span class="box">Auto</span><span class="btn${open ? ' on' : ''}">${svg(rows)}</span></div>`;
+document.getElementById('out').innerHTML = ICONS.map(([name, tag, note, rows]) => `<section>
+  <h2>${name}${tag ? `<small>${tag}</small>` : ''}</h2><p class="note">${note}</p>
+  <div class="big">${svg(rows)}</div>
+  <div class="theme dark"><p class="cap">Dark</p>${strip(rows, false)}${strip(rows, true)}</div>
+  <div class="theme"><p class="cap">Light</p>${strip(rows, false)}${strip(rows, true)}</div>
+</section>`).join('');
+</script>
+</body>
+</html>

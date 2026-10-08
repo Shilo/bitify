@@ -80,9 +80,17 @@
   // it is kept in view: when the panel opens, when another style brings other chips, and when
   // it is pressed while half out of sight.
   let chipRow = $state();
+  // The box around the row is marked with the sides that have more chips to scroll to, which
+  // app.css shows as a short fade with an arrow, as it does for the palettes.
+  function fades() {
+    if (!chipRow) return;
+    chipRow.parentNode.classList.toggle('more-left', chipRow.scrollLeft > 1);
+    chipRow.parentNode.classList.toggle('more-right', chipRow.scrollLeft + chipRow.clientWidth < chipRow.scrollWidth - 1);
+  }
   $effect(() => {
-    active, style; // read, so this runs when either changes
+    active, style, width, height; // read, so this runs when any of them changes
     chipRow?.querySelector('[aria-pressed="true"]')?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    fades();
   });
   // Reset then has nothing to reset and is disabled. Pressed from the keyboard (a click with no
   // press behind it) it would keep the focus, and a disabled button passes no keys on: Space
@@ -262,7 +270,8 @@
         </button>
       </div>
       {#if chips}
-        <div class="sets" role="group" aria-label="Settings" bind:this={chipRow} onwheel={e => (e.currentTarget.scrollLeft += e.deltaY)}>
+        <div class="setbox">
+        <div class="sets" role="group" aria-label="Settings" bind:this={chipRow} onscroll={fades} onwheel={e => (e.currentTarget.scrollLeft += e.deltaY)}>
           {#each keys as key}
             <button
               class="chip"
@@ -279,6 +288,7 @@
             <PixelIcon name="reset" />Reset
           </button>
         </div>
+        </div>
         <div class="thr">{@render control(active)}</div>
       {:else}
         <span class="sep"></span>
@@ -288,7 +298,7 @@
           <span class="grow"></span>
         {/if}
         <button class="btn extra" aria-expanded={more} aria-label="More settings" title="More settings" onclick={() => (more = !more)}>
-          More{#if changed(style, own, rest)}<span class="dot"></span>{/if}<PixelIcon name="caret" />
+          <PixelIcon name="more" />
         </button>
         {#if more}
           <div class="adv">
@@ -296,8 +306,7 @@
               <div class="row"><span class="key">{SETTINGS[key].label}</span>{@render control(key)}</div>
             {/each}
             <div class="foot">
-              <span>{styleName} keeps these for itself.</span>
-              <button class="btn" disabled={!changed(style, own)} onclick={reset}>Reset</button>
+              <button class="btn" disabled={!changed(style, own)} aria-label="Reset {styleName}" title="Reset {styleName}" onclick={reset}><PixelIcon name="reset" />Reset</button>
             </div>
           </div>
         {/if}

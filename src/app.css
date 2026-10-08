@@ -10,6 +10,7 @@
   --tile: #e3e5eb;
   --tile2: #d9dbe3;
   --shadow: rgba(27, 28, 36, 0.16);
+  --undo: #b3261e; /* the one color in the chrome: Reset, which throws settings away */
   --hit: 36px; /* height of dock controls; grows on touch screens */
   --dock-base: 132px; /* room left at the bottom of the screen for the dock */
   --panel-space: 0px; /* extra room for the open panel; Dock.svelte sets it */
@@ -32,6 +33,7 @@
     --tile: #1f2128;
     --tile2: #272a33;
     --shadow: rgba(0, 0, 0, 0.5);
+    --undo: #f2928a;
     color-scheme: dark;
   }
 }
@@ -346,8 +348,7 @@ button { font: inherit; color: inherit; }
 /* A style's other settings. On a wide screen More opens them all at once, in a tray under the
    strip: the panel grows upward and the wall makes room for it, as for any panel. A screen too
    short to spare the height scrolls the tray inside itself, so the wall always keeps some room. */
-.extra { gap: 6px; padding: 0 10px 0 12px; } /* the More button */
-.dot { width: 6px; height: 6px; background: var(--fg); } /* one of the hidden settings is not at its default */
+.extra { padding: 0; } /* the More button: the three dots of the top bar's More, as square as the dock's buttons */
 .adv {
   flex-basis: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 24px;
   max-height: max(var(--hit), calc(100vh - 440px)); max-height: max(var(--hit), calc(100dvh - 440px)); overflow-y: auto; overscroll-behavior: contain;
@@ -361,13 +362,26 @@ button { font: inherit; color: inherit; }
 .row .key { flex: none; width: 80px; font-size: 13px; }
 .panel .seg { flex: 1; min-width: 0; box-sizing: border-box; } /* as high as the sliders and boxes beside it */
 .panel .seg button { flex: 1 1 auto; min-width: 0; padding: 0 4px; } /* auto: a longer word gets the room it needs before the rest is shared out */
-.foot { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 8px; color: var(--muted); font-size: 12px; }
-.foot .btn { height: 28px; min-width: 0; padding: 0 10px; font-size: 12px; }
+.foot { grid-column: 1 / -1; display: flex; justify-content: flex-end; }
+.foot .btn { height: 28px; min-width: 0; gap: 6px; padding: 0 10px; font-size: 12px; }
+/* Reset throws the style's settings away, and says so quietly: its word, icon and edge are
+   tinted, and nothing is filled. The edge is the line's color part of the way to the tint. */
+.foot .btn, .chip.reset { color: var(--undo); border-color: color-mix(in srgb, var(--undo) 40%, var(--line)); }
 /* On a phone every setting is a chip showing its value, in a row that scrolls sideways, and the
    chip that is pressed has its control on the row below. So the panel is two rows high for
    every style, and the wall keeps its room. */
+.setbox { flex: 1; min-width: 0; position: relative; display: flex; }
 .sets { flex: 1; min-width: 0; display: flex; gap: 6px; overflow-x: auto; overscroll-behavior: contain; scrollbar-width: none; }
 .sets::-webkit-scrollbar { display: none; }
+/* A side with more chips to scroll to fades out under a small arrow. Dock.svelte sets more-left
+   and more-right. Nothing shows when every chip fits. */
+.setbox::before, .setbox::after {
+  content: "\2039"; position: absolute; top: 0; bottom: 0; z-index: 1; width: 30px; padding-bottom: 2px;
+  display: flex; align-items: center; font-size: 18px; font-weight: 600; pointer-events: none; opacity: 0; transition: opacity 0.15s;
+}
+.setbox::before { left: -1px; background: linear-gradient(to right, var(--surface) 35%, transparent); }
+.setbox::after { content: "\203A"; right: -1px; justify-content: flex-end; background: linear-gradient(to left, var(--surface) 35%, transparent); }
+.setbox.more-left::before, .setbox.more-right::after { opacity: 1; }
 .chip {
   flex: none; display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
   box-sizing: border-box; height: var(--hit); padding: 0 10px; border: 1px solid var(--line); border-radius: 10px; background: transparent;
@@ -394,8 +408,10 @@ button { font: inherit; color: inherit; }
 @media (max-height: 520px) and (orientation: landscape) {
   .pick .key, #style-name { display: none; }
   .pick .btn { padding: 0 8px; }
-  .sets { flex: 1 1 0; }
+  .setbox { flex: 1 1 0; }
   .thr { flex: 1.4 1 0; }
+  /* as wide as the screen allows, like an upright phone's */
+  .panel:not(.fit) { box-sizing: border-box; width: min(700px, calc(100vw - 24px)); }
   .menu { display: flex; overflow-x: auto; overscroll-behavior: contain; scrollbar-width: none; }
   .menu::-webkit-scrollbar { display: none; }
   .menu .preset { flex: none; }
@@ -435,13 +451,15 @@ button { font: inherit; color: inherit; }
   .pick .key, #style-name { display: none; }
   .pick .btn { padding: 0 8px; }
   .thr { flex-basis: 100%; }
+  /* The style panel is as wide as the screen allows, not only as wide as the dock under it: the
+     chips and the slider have use for every pixel, and the dock for no more than its tools take. */
+  .panel:not(.fit) { box-sizing: border-box; left: 50%; right: auto; width: calc(100vw - 24px); transform: translateX(-50%); }
   .panel > .sep { display: none; } /* dividers only make sense while the panel is a single row */
-  .menu { right: 0; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .menu { right: 0; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); } /* as many to a row as fit: three on the narrowest phone, 280px wide */
 }
 /* Narrow and short at once: a very small phone on its side. The dock keeps its two rows, which
    leaves no height for two more, so the panel is the one row of a phone on its side, and as
    wide as the screen allows instead of only as wide as the dock. */
 @media (max-width: 520px) and (max-height: 520px) and (orientation: landscape) {
-  .panel:not(.fit) { left: 50%; right: auto; width: calc(100vw - 56px); transform: translateX(-50%); }
   .thr { flex: 1.4 1 0; }
 }

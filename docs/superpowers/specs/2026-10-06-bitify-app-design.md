@@ -62,7 +62,8 @@ One screen, no page scroll. Three layers:
 3. **The dock.** A floating bar at the bottom center holding every setting.
 
 Chrome is neutral grey in both light and dark themes (following the system setting), so
-the two chosen colors are the only strong colors on screen. Icons are 7×7 one-bit pixel
+the two chosen colors are the only strong colors on screen. The one exception is Reset in
+the Style panel, which throws settings away and is tinted to say so (see "Style panel"). Icons are 7×7 one-bit pixel
 glyphs. The wordmark and empty-state heading use Pixelify Sans; everything else uses
 Schibsted Grotesk. Both load from Google Fonts with system fallbacks.
 
@@ -214,9 +215,10 @@ current style's other settings a press away. Left to right:
   While Auto is on, the box shows the value Auto picked, or the range when images differ.
   The box is just wide enough for three digits, has no spinner arrows, and widens only to
   fit a range. Silhouette has no threshold, and the strip leaves its place empty.
-- More: a button with the word "More" and a caret. It opens the tray (below). It shows a
-  small square beside the word while any of the style's settings other than the threshold
-  is away from its default, so settings that are out of sight are not out of mind.
+- More: a square button with three dots and no word, the same icon as the More button at
+  the right end of the top bar, so "more" looks the same wherever it is. It is named "More
+  settings" for a screen reader and on hover. It opens the tray (below), and is drawn
+  pressed while the tray is open. It carries no mark for settings that have been changed.
 
 While the strip is a single row, a divider separates the style button from the threshold.
 It matches the dock's dividers.
@@ -238,9 +240,10 @@ visits.
   when it is cleared, and shows the setting's value again when it loses focus.
 - The rows are two side by side. At 700px wide and below there is one to a row, and the
   strip drops the word "Style" to leave the threshold's slider room beside More.
-- Under the rows, a line saying that the style keeps these settings for itself, and a Reset
-  button that puts all of the current style's settings, the threshold included, back to
-  their defaults. Reset is disabled while they are all at their defaults. Pressed from the
+- Under the rows, at the right, a Reset button (an icon and the word) that puts all of the
+  current style's settings, the threshold included, back to their defaults. Its word, icon
+  and edge are tinted red, quietly: `#b3261e` on light, `#f2928a` on dark, the edge only
+  part of the way there, and nothing filled. There is no other text under the rows. Reset is disabled while they are all at their defaults. Pressed from the
   keyboard it hands the focus to More (to the pressed chip on a phone), because a disabled
   button would keep the keys to itself.
 - Direction's four buttons show a sign each and are read out as Rising, Falling, Level and
@@ -259,9 +262,13 @@ height it has always had there:
   already names the style), then every setting of the style as a chip, the threshold
   first. A chip shows the setting's name over its value ("Auto", "Off", "70%", "2×"), and
   a dot after the value while that is not the default. The chips scroll sideways by swipe
-  or wheel, as the palettes do.
+  or wheel, as the palettes do. A side with more chips to scroll to fades out under a small
+  arrow, 30px wide; nothing shows on a side that has no more, or when every chip fits.
   After the last chip the row ends in a Reset chip (an icon and the word), which works as
-  the tray's Reset does and is disabled while there is nothing to reset.
+  the tray's Reset does, is tinted as it is, and is disabled while there is nothing to reset.
+- The panel is as wide as the screen less 12px on each side, not only as wide as the dock
+  under it: the chips and the slider have use for every pixel. At 375px wide the
+  slider is 220px or more; at the dock's width it was 110 to 190px.
 - Second row: the control of the pressed chip, as wide as the row. Reset is not on this row
   because the control needs all of it: on a phone 280px wide, with Auto showing a range,
   a button beside it left the slider under 50px.
@@ -275,9 +282,9 @@ height it has always had there:
 **On a phone on its side** (520px high or less, and wider than high) there is the width for
 a tray but not the height: open, it would leave the wall no room at all. So it has the chips
 too, in one row: the style button (preview and caret), the chips with Reset at their end,
-then the pressed chip's control beside them. A screen that is also 520px wide or less (a
-very small phone on its side) keeps the dock's two rows, and its panel is as wide as the
-screen allows, not only as wide as the dock. The panel is one row high, as the strip always was there.
+then the pressed chip's control beside them. The panel is as wide as the screen less 12px on each side, up to 700px. A screen that
+is also 520px wide or less (a very small phone on its side) keeps the dock's two rows.
+The panel is one row high, as the strip always was there.
 The list of styles is one row there as well, scrolling sideways by swipe or wheel, because
 two rows do not fit above the strip; it opens with the current style in view. On a screen
 280px high it still fits, over the top bar while it is open.
@@ -373,7 +380,7 @@ all change nothing.
 |---|---|
 | Above 800px | Icon and text labels, dividers between groups. |
 | 521 to 800px | Icon-only buttons, one row. |
-| 520px and below | Tools on the first row, the view switch on a second row as wide as the tools. The dock is only as wide as its tools, centered, and is never stretched to fill the screen; it keeps at least 12px from each edge. The style panel is as wide as the dock. The palettes panel stays as wide as its chips, centered and never wider than the screen less those margins, with the name on a row of its own above the chips. The style panel takes two rows, without dividers: the style button and the chips of the style's settings, then the control of the pressed chip (see "On a phone" under "Style panel"). Its list of styles is a grid three wide, three rows of three, as wide as the strip. The image count and the word "images" in the Add button are hidden. |
+| 520px and below | Tools on the first row, the view switch on a second row as wide as the tools. The dock is only as wide as its tools, centered, and is never stretched to fill the screen; it keeps at least 12px from each edge. The style panel is as wide as the screen less 12px on each side. The palettes panel stays as wide as its chips, centered and never wider than the screen less those margins, with the name on a row of its own above the chips. The style panel takes two rows, without dividers: the style button and the chips of the style's settings, then the control of the pressed chip (see "On a phone" under "Style panel"). Its list of styles is a grid as wide as the panel, with as many styles to a row as fit at 72px or more each: three on a phone 280 to 320px wide, four at 375px. The image count and the word "images" in the Add button are hidden. |
 
 On coarse pointers every dock control is 40 to 44px square. The app uses
 `viewport-fit=cover`, pads for the safe-area insets, and sizes itself with dynamic
