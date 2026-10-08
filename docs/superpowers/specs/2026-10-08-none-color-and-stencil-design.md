@@ -1,6 +1,6 @@
 # A None color and a Stencil style
 
-Date: 2026-10-08. Status: approved in conversation, not yet built.
+Date: 2026-10-08. Status: built.
 
 This adds two things to Bitify, which can be built one after the other:
 

@@ -237,8 +237,8 @@ current style's other settings a press away. Left to right:
 - The word "Style", set like "Palette" in the palettes panel, then the style button: a
   live preview of the current style (a small shaded ball with a stripe, drawn with the
   current two colors) and the style's name. Pressing it
-  opens the list of the nine styles above the strip, each with the same live preview and its
-  name, in two rows of five and four. Choosing a style closes the list. So does a press outside it, or
+  opens the list of the ten styles above the strip, each with the same live preview and its
+  name, in two rows of five. Choosing a style closes the list. So does a press outside it, or
   Escape; either leaves the strip open.
 - Threshold: a slider from 1 to 254, then a number box and an Auto button joined into one
   outlined control, so it is clear that Auto fills in the number. The Auto half is filled
@@ -246,7 +246,9 @@ current style's other settings a press away. Left to right:
   typing a number switches to manual; pressing Auto or clearing the box switches back.
   While Auto is on, the box shows the value Auto picked, or the range when images differ.
   The box is just wide enough for three digits, has no spinner arrows, and widens only to
-  fit a range. Silhouette has no threshold, and the strip leaves its place empty.
+  fit a range. Silhouette has no threshold, and the strip leaves its place empty. Stencil
+  has none either: the slider and number box of its Cuts setting stand there instead, with
+  no Auto half.
 - More: a square button with three dots, one above the other, and no word: the same icon as the More button at
   the right end of the top bar, so "more" looks the same wherever it is. It is named "More
   settings" for a screen reader and on hover. It opens the tray (below), and is drawn
@@ -682,6 +684,7 @@ let go:
 |---|---|
 | **Cutout** (default) | A pixel brighter than the threshold is light, every other pixel dark. Then, using those tones: a pixel on the darker side of a change stronger than the seam strength, between two pixels of the same tone, takes the opposite tone; and a dark pixel that touches empty space, with no light pixel among its eight neighbours, becomes light. Dark is first color, light is second. |
 | **Solid** | Brighter than the threshold: second color. Otherwise first color. |
+| **Stencil** | Every non-empty pixel is second color, except the cuts, which are first color. A pixel on its sprite's outline is never a cut unless Outline is Trim, which makes all of them cuts. A pixel inside is a cut when its brightness is no more than its sprite's outline level plus Cuts, unless the sprite's inside is on the whole that dark; or when Edges is on and it is on the darker side of a change stronger than the edge strength. A pixel inside that touches empty space at a corner is never a cut. |
 | **Lines** | A pixel is first color if any of its four neighbours is empty, or if a neighbour differs from it by more than the threshold and this pixel is the darker of the two. Everything else is second color. |
 | **Checker** | Second color if the tone (see below) is above 0.25 on even `x + y` cells and above 0.75 on odd ones, so mid-tones become a checkerboard. |
 | **Hatch** | Second color if the tone is above 0.75, 0.5 or 0.25 where `(x + y) mod 3` is 0, 1 or 2, so mid-tones become diagonal lines three pixels apart. |
@@ -703,6 +706,29 @@ Details of Cutout:
 Known limits of Cutout: a flat shading step, such as a shadow drawn in one darker color, is
 cut like a part boundary; a dark part two pixels wide or less becomes all rim; art that is
 already dithered becomes busy.
+
+Details of Stencil:
+
+- It fills the whole sprite and cuts only its darkest inner lines, taking no notice of
+  shading. With the first color None the cuts are holes, which gives an icon in one color.
+- A sprite is a group of non-empty pixels that touch, diagonals included. A pixel is on its
+  outline when one of its four neighbours is empty; the canvas edge counts as empty by the
+  rule Lines uses. The rest of its pixels are inside.
+- A sprite's outline level is the brightness of the darkest pixel on its outline. Each
+  sprite is judged by its own, so a sheet of differently colored icons converts as well as
+  the same icons one file each.
+- When the mean brightness of a sprite's inside pixels is no more than its outline level
+  plus Cuts, none of them is cut for being dark. Such a sprite has no line art, only its
+  own color: a flat shape with no outline drawn, or a dark sprite at a high Cuts. It is
+  left whole instead of hollowed out.
+- An image with no empty pixel is one sprite with no outline. Its outline level is its
+  darkest brightness, and all its pixels are inside.
+- The edge strength is `255 − 2 × Edges`. The difference between two pixels and the tie on
+  equal brightness are the ones Lines uses.
+
+Known limits of Stencil: its cuts are sparser than a hand-drawn icon's; a sprite whose
+outline is no darker than its inside gets none; a part in the outline's own color more
+than a pixel or two wide becomes a hole.
 
 Details of Lines:
 
@@ -731,7 +757,7 @@ light or its lightest color dark, and outlines and highlights stay whole.
 
 - In Lines it is the minimum color difference that counts as an edge.
 - In Cutout, Solid, Checker, Hatch, Bayer, Noise and Atkinson it is the brightness cut-off.
-- Silhouette ignores it.
+- Stencil and Silhouette have none.
 
 Auto picks a value per image with Otsu's method, which splits a histogram into two groups
 at the point that separates them best:
@@ -763,9 +789,12 @@ style did before it had settings.
 
 | Setting | Styles | Values | Default | What it does |
 |---|---|---|---|---|
-| Threshold | all but Silhouette | Auto, or 1 to 254 | Auto | See "Threshold". |
+| Threshold | all but Stencil and Silhouette | Auto, or 1 to 254 | Auto | See "Threshold". |
 | Seams | Cutout | Auto, or 1 to 255 | Auto | The seam strength. Lower values cut along softer changes. No difference is above 255, so 255 cuts no seams. |
 | Rim | Cutout | On, Off | On | Off leaves out the light rim on dark pixels at the silhouette. With Seams at 255 as well, Cutout is Solid. |
+| Cuts | Stencil | 0 to 100 | 20 | How much lighter than its sprite's outline an inside pixel may be and still be cut. At 0 only pixels as dark as the outline are. Once it reaches the mean brightness of a sprite's inside, that sprite is left whole. |
+| Outline | Stencil | Keep, Trim | Keep | Keep leaves the outline second color, so the shape is full size and thin parts survive. Trim makes it first color: in two colors that draws the sprite's own outline, and with the first color None it takes one pixel off all round. |
+| Edges | Stencil | Off, or 1 to 100% | Off | Also cuts the darker side of a color change stronger than `255 − 2 × Edges` between pixels inside a sprite, which finds parts that no dark line separates. |
 | Thickness | Lines | 1, 2, 3 | 1 | A solid pixel fewer than this many steps (left, right, up or down) from a line is a line too. |
 | Fill darks | Lines | Off, or 1 to 254 | Off | A pixel this dark or darker is first color as well, so dark areas stay filled. Thickness does not widen them. |
 | Shading | Checker, Hatch, Bayer, Noise, Atkinson | 0 to 100% | 100% | How far from the threshold a tone is still patterned. The tone becomes `0.5 + (tone − 0.5) / shading`, held between 0 and 1: at 50% a tone half way to the darkest or lightest is already solid. At 0 every tone is solid, which is Solid at the same threshold. |
@@ -813,6 +842,11 @@ style did before it had settings.
   three to five times as long to convert with Thickness above 1 as with 1.
 - The style previews on the style button and in the list of styles use each style's own
   settings.
+- Stencil has no threshold. Cuts takes its place: on a wide screen its slider is on the
+  strip and the others are in the tray, and on a phone its chip is first.
+- Stencil gives each pixel of a smaller picture exactly what its image pixel is in the
+  full conversion. What it needs to know of each sprite is found once for an analysed
+  image, the first time Stencil converts it (see [docs/performance.md](../../performance.md)).
 - Settings are defined in `src/lib/settings.js`: `SETTINGS` describes each, and
   `STYLE_SETTINGS` lists each style's in the order they are shown.
 
@@ -833,7 +867,7 @@ restored when the app opens. Nothing leaves the device.
   so the system's theme does not flash.
 - The view switch, the open panel, whether the tray is open and the images are not saved.
 - They are stored as one JSON value under the `localStorage` key `bitify`. On the way back
-  each value is checked on its own: a color must be `#rrggbb`, the style one of the nine,
+  each value is checked on its own: a color must be `#rrggbb`, the style one of the ten,
   each setting of each style one of its options or a whole number in its range (see
   "Each style's settings"), and the theme `light` or `dark`. Anything else falls back to its default (Glow dark first,
   Cutout, and the defaults in that table), so a damaged or outdated value cannot break the
@@ -852,7 +886,8 @@ in browsers.
 - Every frame goes through the same conversion as a still image, and the whole animation uses
   one Auto threshold, one Auto seam strength and one brightness range, taken from all its frames together. Taking
   them frame by frame would make pixels flicker between the two colors as the animation
-  plays.
+  plays. Stencil's outline levels are the exception: each frame's sprites are judged by
+  their own.
 - The view switch, hold and Space show the original animation, still playing.
 - GIF frames are often partial patches drawn over earlier frames. They are composited when
   the file is read, so each frame is held as the full picture it shows.
@@ -942,7 +977,7 @@ Vite with the `svelte` template (Svelte 5, runes, mounted with `mount()`), JavaS
 
 | File | Purpose |
 |---|---|
-| `src/lib/bitify.js` | Pure conversion, no DOM. `analyze(imageData)` returns size, pixels, brightness, each pixel's difference from the pixel to its right and from the one below, whether any pixel is empty, the darkest and lightest brightness, and the auto thresholds; it takes what brightness is read from and the opacity cut. `mask(analysis, style, settings, width, height)` returns one byte per pixel (0 empty, 1 first color, 2 second color), for the whole image or, given a smaller width and height, for a picture of it that size. `shrink(imageData, width, height)` returns the pixels of the original that such a picture stands on. `colorize(mask, first, second)` returns RGBA pixels. |
+| `src/lib/bitify.js` | Pure conversion, no DOM. `analyze(imageData)` returns size, pixels, brightness, each pixel's difference from the pixel to its right and from the one below, whether any pixel is empty, the darkest and lightest brightness, and the auto thresholds; it takes what brightness is read from and the opacity cut. What Stencil needs to know of each sprite is added to that the first time Stencil converts the image. `mask(analysis, style, settings, width, height)` returns one byte per pixel (0 empty, 1 first color, 2 second color), for the whole image or, given a smaller width and height, for a picture of it that size. `shrink(imageData, width, height)` returns the pixels of the original that such a picture stands on. `colorize(mask, first, second)` returns RGBA pixels. |
 | `src/lib/gif.js` | Reading an animated GIF into full frames (`decodeGif`) and writing a two-color one (`encodeGif`). No DOM. |
 | `src/lib/save.js` | Output file naming, zip, PNG encoding from a mask and the two colors (either may be None), single save, save all, copy to the clipboard. |
 | `src/lib/settings.js` | Every setting a style can have and which each style has, their defaults, and `restore(text, styles)`, which reads what was stored back and checks each value. No DOM. |

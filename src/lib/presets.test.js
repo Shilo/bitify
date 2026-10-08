@@ -8,6 +8,11 @@ describe('stepStyle', () => {
     expect(stepStyle('solid', 1)).toBe(2);
     expect(stepStyle('solid', -1)).toBe(0);
   });
+  it('has Stencil third, after Cutout and Solid', () => {
+    expect(STYLES.map(s => s[0])).toEqual(['cutout', 'solid', 'stencil', 'lines', 'checker', 'hatch', 'bayer', 'noise', 'atkinson', 'silhouette']);
+    expect(STYLES[2]).toEqual(['stencil', 'Stencil']);
+  });
+
   it('wraps at both ends', () => {
     expect(stepStyle('cutout', -1)).toBe(STYLES.length - 1);
     expect(stepStyle('silhouette', 1)).toBe(0);

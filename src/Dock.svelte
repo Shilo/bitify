@@ -58,12 +58,13 @@
   const demo = key => new ImageData(colorize(mask(BALL, key, settings[key]), ...inks(first, second, none, key)), BALL.w, BALL.h);
 
   // The current style's settings: the values, and which settings they are. The threshold has its
-  // place on the strip; `rest` is the others.
+  // place on the strip, or Cuts in Stencil, which has no threshold; `rest` is the others.
   const own = $derived(settings[style]);
   // The opacity cut is left out unless an image on the wall has a partly see-through pixel: it
   // changes nothing for any other image. Silhouette then has no settings at all.
   const keys = $derived(STYLE_SETTINGS[style].filter(key => key !== 'alpha' || soft));
-  const rest = $derived(keys.filter(key => key !== 'threshold'));
+  const lead = $derived(['threshold', 'cuts'].includes(keys[0]) ? keys[0] : null);
+  const rest = $derived(keys.filter(key => key !== lead));
   // A wide screen shows the others all at once, in a tray that More opens under the strip.
   let more = $state(false);
   // A phone has no room for that with the images still in view. It shows every setting as a chip
@@ -318,8 +319,8 @@
         <div class="thr">{@render control(active)}</div>
       {:else}
         <span class="sep"></span>
-        {#if keys[0] === 'threshold'}
-          <div class="thr">{@render control('threshold')}</div>
+        {#if lead}
+          <div class="thr">{@render control(lead)}</div>
         {:else}
           <span class="grow"></span>
         {/if}

@@ -20,6 +20,7 @@ export const PRESETS = [
 export const STYLES = [
   ['cutout', 'Cutout'],
   ['solid', 'Solid'],
+  ['stencil', 'Stencil'],
   ['lines', 'Lines'],
   ['checker', 'Checker'],
   ['hatch', 'Hatch'],
