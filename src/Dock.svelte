@@ -275,7 +275,6 @@
           {#each keys as key}
             <button
               class="chip"
-              class:changed={changed(style, own, [key])}
               aria-label="{SETTINGS[key].label}: {shown(key, own[key], true)}"
               aria-pressed={key === active}
               onclick={() => (pressed = key)}

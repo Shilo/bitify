@@ -260,8 +260,8 @@ height it has always had there:
 
 - First row: the style button, here only its preview and caret (the view switch below
   already names the style), then every setting of the style as a chip, the threshold
-  first. A chip shows the setting's name over its value ("Auto", "Off", "70%", "2×"), and
-  a dot after the value while that is not the default. The chips scroll sideways by swipe
+  first. A chip shows the setting's name over its value ("Auto", "Off", "70%", "2×") and
+  nothing else: no mark says that a value has been changed. The chips scroll sideways by swipe
   or wheel, as the palettes do. A side with more chips to scroll to fades out under a small
   arrow, 30px wide; nothing shows on a side that has no more, or when every chip fits.
   After the last chip the row ends in a Reset chip (an icon and the word), which works as

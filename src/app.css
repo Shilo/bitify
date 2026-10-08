@@ -390,7 +390,6 @@ button { font: inherit; color: inherit; }
 .chip span { color: var(--muted); font-size: 11px; }
 .chip b { font-size: 12px; }
 .chip[aria-pressed="true"] { border-color: var(--fg); background: var(--tile); }
-.chip.changed b::after { content: " \2022"; } /* not at its default */
 .chip.reset { flex-direction: row; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; } /* the last in the row: all the style's settings back to their defaults */
 .chip:disabled { opacity: 0.4; cursor: default; }
 /* the list of styles, opened by the style button; it sits above the panel, lined up with its left edge */
