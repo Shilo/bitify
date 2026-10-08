@@ -61,7 +61,7 @@ describe('the settings of a style', () => {
 describe('restore', () => {
   it('gives back what was stored', () => {
     const settings = { ...DEFAULTS.settings, lines: { threshold: 90, thickness: 2, darks: 40, alpha: 200 }, hatch: { ...defaults('hatch'), direction: '\\', spacing: 5, scale: 3, shading: 60, source: 'value' } };
-    const saved = { first: '#f0f6f0', second: '#222323', style: 'lines', settings };
+    const saved = { first: '#f0f6f0', second: '#222323', none: 2, style: 'lines', settings };
     expect(restore(JSON.stringify(saved), styles)).toEqual(saved);
     expect(restore(JSON.stringify({ ...saved, theme: 'light' }), styles)).toEqual({ ...saved, theme: 'light' });
   });
@@ -79,6 +79,11 @@ describe('restore', () => {
 
   it('starts each style from its defaults when what was stored is from before styles had settings', () => {
     expect(restore(JSON.stringify({ first: '#000000', second: '#ffffff', style: 'bayer', threshold: 90 }), styles)).toEqual({ ...DEFAULTS, first: '#000000', second: '#ffffff', style: 'bayer' });
+  });
+
+  it('keeps which color is None only when it is 0, 1 or 2', () => {
+    for (const none of [0, 1, 2]) expect(restore(JSON.stringify({ none }), styles).none).toBe(none);
+    for (const none of [3, -1, '1', null, true, 1.5]) expect(restore(JSON.stringify({ none }), styles).none, JSON.stringify(none)).toBe(0);
   });
 
   it('never hands out the defaults themselves, which the app goes on to change', () => {

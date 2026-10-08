@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { PRESETS, STYLES, isPalette, inOrder, stepStyle, stepPalette } from './presets.js';
+import { PRESETS, STYLES, isPalette, inOrder, inks, stepStyle, stepPalette } from './presets.js';
 
 const [glow, mono] = PRESETS, rose = PRESETS.at(-1);
 
@@ -49,5 +49,21 @@ describe('stepPalette', () => {
     expect(back.palette).toBe(away.custom);
     expect(back.at).toBe(PRESETS.length);
     expect(stepPalette('#ff0000', '#00ff00', -1, away.custom).palette).toBe(rose);
+  });
+});
+
+describe('inks', () => {
+  it('gives the two colors as they are while neither is None', () => {
+    expect(inks('#111111', '#eeeeee', 0, 'cutout')).toEqual(['#111111', '#eeeeee']);
+  });
+
+  it('gives null for the color that is None', () => {
+    expect(inks('#111111', '#eeeeee', 1, 'cutout')).toEqual([null, '#eeeeee']);
+    expect(inks('#111111', '#eeeeee', 2, 'cutout')).toEqual(['#111111', null]);
+  });
+
+  it('draws Silhouette, which has only first-color pixels, in the second color when the first is None', () => {
+    expect(inks('#111111', '#eeeeee', 1, 'silhouette')).toEqual(['#eeeeee', '#eeeeee']);
+    expect(inks('#111111', '#eeeeee', 2, 'silhouette')).toEqual(['#111111', null]);
   });
 });

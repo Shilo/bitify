@@ -36,6 +36,11 @@ export const isPalette = (p, first, second) => (first === p.dark && second === p
 // unless Swap has put the lighter color first.
 export const inOrder = (p, first, second) => (brightness(first) > brightness(second) ? [p.light, p.dark] : [p.dark, p.light]);
 
+// The two colors as they are drawn, [first, second], when `none` says one of them is None: 1 the
+// first, 2 the second, 0 neither. A None color is null, and its pixels are left empty.
+// Silhouette has only first-color pixels, so with the first color None it is drawn in the second.
+export const inks = (first, second, none, style) => (none === 1 ? [style === 'silhouette' ? second : null, second] : none === 2 ? [first, null] : [first, second]);
+
 // The style `dir` places on from `style` (1 is the next, -1 the one before), wrapping at both
 // ends. Returns its place in STYLES.
 export const stepStyle = (style, dir) => (STYLES.findIndex(s => s[0] === style) + dir + STYLES.length) % STYLES.length;

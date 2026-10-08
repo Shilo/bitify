@@ -53,10 +53,11 @@ export function shown(key, v, spoken = false) {
   return v === null ? 'Auto' : options ? (spoken && option[2]) || option[1] : zero && v === 0 ? zero : `${v}${unit}`;
 }
 
-// What is kept between visits: the two colors, the style, and every style's settings, and the
-// theme where one was chosen (missing means the system's).
+// What is kept between visits: the two colors and which of them is None (0 neither, 1 the first,
+// 2 the second), the style, and every style's settings, and the theme where one was chosen
+// (missing means the system's).
 const THEMES = ['light', 'dark'];
-export const DEFAULTS = { first: '#222323', second: '#f0f6f0', style: 'cutout', settings: Object.fromEntries(Object.keys(STYLE_SETTINGS).map(style => [style, defaults(style)])) };
+export const DEFAULTS = { first: '#222323', second: '#f0f6f0', none: 0, style: 'cutout', settings: Object.fromEntries(Object.keys(STYLE_SETTINGS).map(style => [style, defaults(style)])) };
 
 const isColor = v => typeof v === 'string' && /^#[0-9a-f]{6}$/i.test(v);
 
@@ -70,10 +71,11 @@ export function restore(text, styles) {
   } catch {
     // not JSON; use the defaults
   }
-  const { first, second, style, settings, theme } = saved && typeof saved === 'object' ? saved : {};
+  const { first, second, none, style, settings, theme } = saved && typeof saved === 'object' ? saved : {};
   return {
     first: isColor(first) ? first : DEFAULTS.first,
     second: isColor(second) ? second : DEFAULTS.second,
+    none: none === 1 || none === 2 ? none : 0,
     style: styles.includes(style) ? style : DEFAULTS.style,
     settings: Object.fromEntries(
       Object.entries(STYLE_SETTINGS).map(([name, keys]) => [name, Object.fromEntries(keys.map(key => [key, allowed(key, settings?.[name]?.[key]) ? settings[name][key] : SETTINGS[key].default]))]),
