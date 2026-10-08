@@ -485,8 +485,9 @@ name and its place: "Style: Bayer · 6/9", "Palette: Game Boy · 5/12".
 
 **Only the background steps.** The wheel and a swipe step only while the pointer or finger
 is over the top bar, the wall (the tiles and the space around them) or the empty screen,
-and not over a button or link there: the top bar's buttons, a tile's buttons, the empty
-screen's button. Over the dock, a panel, a menu, a sheet or the help they never step, so a
+and not over one of the top bar's buttons. The buttons of the wall and the empty screen
+count as background: a tile's Share, Copy, Download and Remove, and the empty screen's
+button. Over the dock, a panel, a menu, a sheet or the help they never step, so a
 move that just misses a row that scrolls, or lands on a panel with nothing to scroll,
 changes nothing. A swipe is judged by where it starts.
 

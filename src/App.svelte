@@ -213,9 +213,9 @@
   }
 
   // A wheel or a finger steps only over the background: the top bar, the wall or the empty screen,
-  // and no button of theirs. Never over the dock, a panel or a dialog, where a move that just
-  // misses what scrolls would step by mistake.
-  const onWall = e => e.target.closest?.('.bar, .grid, .empty') && !e.target.closest('button, a');
+  // buttons included, except the top bar's. Never over the dock, a panel or a dialog, where a move
+  // that just misses what scrolls would step by mistake.
+  const onWall = e => e.target.closest?.('.bar, .grid, .empty') && !e.target.closest('.bar button');
 
   // The wheel steps the styles over the wall wherever it has nothing to scroll. With Shift, with
   // Ctrl or sideways it steps the palettes. Shift and the wheel scroll sideways, so Shift steps
@@ -241,7 +241,7 @@
   function touchstart(e) {
     const { clientX: x, clientY: y } = e.touches[0];
     // Two fingers are a pinch, a press that has just closed a panel (the Dock stops that one)
-    // does nothing else, and only the background is swiped: not a button, the dock or a dialog.
+    // does nothing else, and only the background is swiped: not a top bar button, the dock or a dialog.
     swipe = e.touches.length === 1 && !e.defaultPrevented && onWall(e) ? { x, y } : null;
   }
   function touchmove(e) {
