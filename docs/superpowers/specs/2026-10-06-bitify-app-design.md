@@ -886,6 +886,10 @@ tab does, so every deploy reaches it the same way.
   and a 180px one for iOS. The last two have the logo's orange behind them.
 - `index.html` links the manifest and the iOS icon, and sets the browser's bar color to the
   page background, light or dark.
+- `index.html` also has a description and Open Graph tags, so a link to
+  `https://shilo.github.io/bitify/` shows a preview in chat and social apps: the name, one
+  sentence, and the 512px icon with the orange behind it as a small square image. The
+  addresses in those tags are whole ones, because the apps do not resolve relative ones.
 - Chrome, Edge and other Chromium browsers, on desktop and Android, tell the page when the
   app can be installed and is not yet. The page keeps that offer and shows Install in the More
   menu; pressing it opens the browser's own install prompt. The offer works once, so the row
