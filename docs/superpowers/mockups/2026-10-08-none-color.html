@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bitify mockup: a None color and a Stencil style</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Schibsted+Grotesk:wght@400..700&display=swap" />
+<style>
+/* Bitify. One screen: a wall of image tiles, with every control in a floating dock.
+   Chrome is neutral so the two chosen colors are the only strong colors on screen.
+   No global border-box reset: sizes match the approved prototype, which had none. */
+:root {
+  --bg: #ecedf1;
+  --surface: #ffffff;
+  --fg: #1b1c24;
+  --muted: #666979;
+  --line: #d5d7e0;
+  --tile: #e3e5eb;
+  --tile2: #d9dbe3;
+  --shadow: rgba(27, 28, 36, 0.16);
+  --undo: #b3261e; /* the one color in the chrome: Reset, which throws settings away */
+  --hit: 36px; /* height of dock controls; grows on touch screens */
+  --dock-base: 132px; /* room left at the bottom of the screen for the dock */
+  --panel-space: 0px; /* extra room for the open panel; Dock.svelte sets it */
+  --dock-space: calc(var(--dock-base) + var(--panel-space));
+  --display: "Pixelify Sans", ui-monospace, "Courier New", monospace;
+  --body: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+  box-sizing: border-box;
+  height: 100vh;
+  height: 100dvh;
+  padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+}
+/* App.svelte sets data-theme, to the system's theme or the one picked in the More menu. The media
+   query covers the moment before it has. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --bg: #17181d;
+    --surface: #22242c;
+    --fg: #ecedf2;
+    --muted: #9a9dae;
+    --line: #343744;
+    --tile: #1f2128;
+    --tile2: #272a33;
+    --shadow: rgba(0, 0, 0, 0.5);
+    --undo: #f2928a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #17181d;
+  --surface: #22242c;
+  --fg: #ecedf2;
+  --muted: #9a9dae;
+  --line: #343744;
+  --tile: #1f2128;
+  --tile2: #272a33;
+  --shadow: rgba(0, 0, 0, 0.5);
+  --undo: #f2928a;
+  color-scheme: dark;
+}
+@media (pointer: coarse) {
+  :root { --hit: clamp(40px, 12vw, 44px); }
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.4;
+  -webkit-tap-highlight-color: transparent;
+}
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+.grow { flex: 1; }
+
+#app { flex: 1; min-height: 0; min-width: 0; position: relative; display: flex; flex-direction: column; }
+
+/* top bar and shared controls */
+.bar { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; padding: 14px 16px; }
+.mark { font-family: var(--display); font-size: 28px; font-weight: 600; line-height: 1; }
+.count { color: var(--muted); font-size: 13px; white-space: nowrap; }
+.ico { fill: currentColor; shape-rendering: crispEdges; flex: none; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: var(--hit); min-width: var(--hit); padding: 0 14px;
+  border: 1px solid var(--line); border-radius: 10px; background: transparent;
+  font-weight: 600; white-space: nowrap; cursor: pointer;
+}
+.btn.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.plus-icon { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-linecap: round; stroke-width: 2; }
+.btn:disabled { opacity: 0.4; cursor: default; }
+.ib {
+  display: grid; place-items: center; flex: none; width: 30px; height: 30px; padding: 0;
+  border: 1px solid var(--line); border-radius: 8px; background: var(--surface); cursor: pointer;
+}
+
+/* the wall */
+/* App.svelte sets --cols and --tile-size so the tiles fill the space between the top bar and the dock
+   (see lib/layout.js). When there are too many to fit at a usable size, the wall scrolls. */
+.grid {
+  flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain;
+  position: relative; display: flex;
+  padding: 8px 16px var(--dock-space); /* bottom padding clears the dock */
+}
+/* an invisible box covering the usable area, measured to work out the layout */
+.probe { position: absolute; inset: 8px 16px var(--dock-space); visibility: hidden; pointer-events: none; }
+/* the auto margin centers the tiles when they fit and keeps them at the top when they scroll */
+.tiles {
+  margin: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 16px;
+  width: calc(var(--cols) * var(--tile-size) + (var(--cols) - 1) * 16px);
+}
+.tiles .tile { width: var(--tile-size); container-type: inline-size; }
+.tile { position: relative; margin: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; min-width: 0; }
+.art {
+  grid-column: 1 / -1; position: relative; aspect-ratio: 1; max-width: 100%;
+  border-radius: 10px; overflow: hidden; cursor: pointer;
+  touch-action: pan-y; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
+  background: conic-gradient(var(--tile2) 25%, var(--tile) 0 50%, var(--tile2) 0 75%, var(--tile) 0) 0 0 / 16px 16px;
+}
+/* 8px clear on every side, the same as the buttons in the corner and the gap to the caption */
+.art canvas { position: absolute; inset: 8px; width: calc(100% - 16px); height: calc(100% - 16px); object-fit: contain; image-rendering: pixelated; }
+.cap { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 8px; font-size: 13px; min-width: 0; }
+.name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dim { margin-left: auto; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.by { margin: 0 0.3em; } /* the × between width and height */
+.acts { position: absolute; top: 8px; right: 8px; display: flex; gap: 4px; opacity: 0; transition: opacity 0.12s; }
+.tile:hover .acts, .tile:focus-within .acts { opacity: 1; }
+.acts .touch { display: none; }
+/* touch screens have no hover: two actions sit beside the name, always visible. There is no room
+   for three, so Share stands in for Copy and Download and opens a sheet that holds them. */
+@media (hover: none) {
+  .acts { position: static; opacity: 1; grid-column: 2; grid-row: 2; align-self: center; }
+  .acts .ib { width: 40px; height: 40px; }
+  .acts .touch { display: grid; }
+  .acts .mouse { display: none; }
+  /* stretch, so a long name is cut off with an ellipsis instead of running under the buttons */
+  .cap { grid-column: 1; grid-row: 2; flex-direction: column; align-items: stretch; gap: 0; align-self: center; }
+  .dim { margin-left: 0; overflow: hidden; text-overflow: ellipsis; }
+  /* a small tile has little room beside the buttons, so the pixel size is set smaller and tighter */
+  @container (max-width: 150px) {
+    .dim { font-size: 11px; }
+    .by { margin: 0 1px; }
+    .acts { gap: 2px; margin-left: -2px; }
+    .acts .ib { width: 36px; } /* slightly narrower buttons leave room for sizes like 128×128 */
+  }
+}
+
+/* .empty scrolls when the screen is short; the auto margin centers its content when there is room */
+.empty { flex: 1; min-height: 0; overflow-y: auto; display: flex; padding: 24px 16px var(--dock-space); }
+/* One column that is never wider than the screen. Left to size itself, the column took the
+   example's wish of 320px also where the screen had less, and the empty screen scrolled sideways. */
+.empty-in { margin: auto; max-width: 100%; display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 26px; text-align: center; }
+.empty-text { display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 14px; min-width: 0; max-width: 100%; }
+/* on a screen narrower than its words the button's label wraps instead of pushing the screen wider */
+.empty .btn { max-width: 100%; height: auto; min-height: var(--hit); white-space: normal; }
+/* The example is as large as the screen allows, up to 320px. The amount subtracted from the
+   screen height is everything else on the empty screen: top bar, text, button, dock and open panel. */
+.empty .tile { --rest: 430px; max-width: 100%; width: clamp(96px, calc(100vh - var(--rest) - var(--panel-space)), 320px); width: clamp(96px, calc(100dvh - var(--rest) - var(--panel-space)), 320px); }
+.empty .cap { grid-column: 1 / -1; flex-direction: row; align-items: baseline; justify-content: center; gap: 8px; }
+.empty .dim { margin-left: 0; }
+.empty h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: clamp(26px, 5vw, 44px); line-height: 1.1; text-wrap: balance; }
+.empty p { margin: 0; color: var(--muted); max-width: 38ch; text-wrap: balance; }
+.empty p span, .help p span { white-space: nowrap; } /* keeps "1-bit" from breaking at its hyphen */
+
+/* overlays */
+.drop {
+  position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; pointer-events: none;
+  font-family: var(--display); font-size: clamp(28px, 7vw, 72px);
+}
+.drop::before { content: ""; position: absolute; inset: 16px; border: 4px dashed currentColor; }
+.toast {
+  position: fixed; top: calc(env(safe-area-inset-top, 0px) + 64px); left: 50%; transform: translateX(-50%); z-index: 60;
+  width: max-content; max-width: calc(100% - 32px); padding: 8px 14px; border-radius: 10px;
+  background: var(--fg); color: var(--bg); font-size: 13px; font-weight: 600;
+}
+/* Turns in the message while a long job runs. The browser moves it without the page's help,
+   so it keeps turning while the job has the page itself stuck. */
+.spin {
+  display: inline-block; width: 8px; height: 8px; margin-right: 8px; vertical-align: -1px;
+  border: 2px solid; border-top-color: transparent; will-change: transform;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(1turn); } }
+/* the sheet a tile's Share button opens: the image's name, then Copy, Download and Cancel */
+.sheet {
+  box-sizing: border-box; width: min(300px, calc(100% - 32px)); margin: auto auto calc(env(safe-area-inset-bottom, 0px) + 20px); padding: 12px;
+  border: 1px solid var(--line); border-radius: 16px; background: var(--surface); color: var(--fg); box-shadow: 0 10px 32px var(--shadow);
+}
+.sheet[open] { display: grid; gap: 8px; }
+.sheet::backdrop { background: rgba(0, 0, 0, 0.45); }
+.sheet .name { margin: 0 2px 4px; font-size: 13px; text-align: center; }
+/* the More menu: the theme and Install, Help and GitHub, then Reset settings, dropped down from the More button at the right end of the top bar */
+.more {
+  inset: calc(env(safe-area-inset-top, 0px) + var(--hit) + 20px) calc(env(safe-area-inset-right, 0px) + 16px) auto auto;
+  box-sizing: border-box; max-width: calc(100% - 32px); margin: 0; padding: 6px;
+  border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--fg); box-shadow: 0 10px 32px var(--shadow);
+}
+.more[open] { display: grid; gap: 2px; }
+.more::backdrop { background: transparent; }
+.more .btn { box-sizing: border-box; justify-content: flex-start; border-color: transparent; text-decoration: none; color: inherit; }
+.more a .ico:last-child { margin-left: auto; color: var(--muted); } /* at the row's right end: the link opens outside the app */
+.more hr { margin: 4px 6px; border: 0; border-top: 1px solid var(--line); } /* between the menu's three groups */
+.btn.undo { color: var(--undo); } /* Reset settings, in the menu and in its question */
+/* Reset settings's question: the sheet's card in the middle of the screen, Cancel and Reset side by side under the words */
+.confirm { margin: auto; padding: 16px; }
+.confirm[open] { grid-template-columns: 1fr 1fr; }
+.confirm h2, .confirm p { grid-column: 1 / -1; margin: 0; }
+.confirm h2 { font-size: 16px; font-weight: 600; }
+.confirm p { margin-bottom: 8px; color: var(--muted); font-size: 13px; text-wrap: pretty; }
+.confirm .undo { border-color: color-mix(in srgb, var(--undo) 40%, var(--line)); }
+/* The help, which is also the welcome on a first visit: a card in the middle of a dimmed screen.
+   On a screen too short for it, it scrolls. */
+.help {
+  box-sizing: border-box; width: min(420px, calc(100% - 32px)); max-width: none; max-height: calc(100% - 32px); padding: 0;
+  overflow-y: auto; overscroll-behavior: contain;
+  border: 1px solid var(--line); border-radius: 16px; background: var(--surface); color: var(--fg); box-shadow: 0 10px 32px var(--shadow);
+  transition: opacity 0.15s, translate 0.15s;
+}
+@starting-style {
+  .help[open] { opacity: 0; translate: 0 8px; }
+}
+.help::backdrop { background: rgba(0, 0, 0, 0.45); }
+.help-in { position: relative; display: grid; gap: 16px; padding: 20px; }
+.help-in > .ib { position: absolute; top: 10px; right: 10px; width: var(--hit); height: var(--hit); border-color: transparent; background: transparent; }
+/* one row: the logo, then the name and what it is */
+.help header { display: flex; align-items: center; gap: 14px; padding-right: var(--hit); } /* the padding keeps the text clear of Close */
+.help img { flex: none; width: 56px; height: 56px; image-rendering: pixelated; } /* the logo is 28 pixels square: twice its size */
+.help h2 { margin: 0; font-family: var(--display); font-size: 24px; font-weight: 600; line-height: 1; }
+.help p { margin: 4px 0 0; color: var(--muted); text-wrap: balance; }
+/* the steps: an icon, a word and a line each */
+.help ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.help li { display: grid; grid-template-columns: auto 4em minmax(0, 1fr); gap: 10px; align-items: center; color: var(--muted); }
+.help li .ico { padding: 5px; border-radius: 7px; background: var(--fg); color: var(--bg); }
+.help li b { color: var(--fg); }
+/* the controls: a table of what each does, and how by mouse and by keyboard, or by touch */
+.help table { width: 100%; border-collapse: collapse; border-top: 1px solid var(--line); }
+.help th, .help td { padding: 7px 0 7px 16px; text-align: left; font-weight: 600; }
+.help th:first-child { width: 100%; padding-left: 0; } /* the first column takes the room the others leave */
+.help thead th { padding-top: 16px; color: var(--muted); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+.help tbody tr { border-top: 1px solid var(--line); }
+.help td { color: var(--muted); white-space: nowrap; }
+/* a key, or what a mouse or a finger does, drawn as a key */
+.help kbd {
+  display: inline-block; min-width: 10px; padding: 1px 6px; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 6px;
+  background: var(--bg); color: var(--fg); font: inherit; font-size: 12px; font-weight: 600; text-align: center;
+}
+.help kbd .ico { width: 10px; height: 10px; vertical-align: -1px; }
+.help footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 13px; }
+.help footer .btn { padding: 0 20px; font-size: 14px; }
+
+@media (max-width: 520px) {
+  .count, .bar .wide { display: none; }
+  .bar { gap: 8px; }
+  .bar .btn { padding: 0 10px; }
+  .empty .tile { --rest: 475px; } /* taller top bar and dock on phones */
+}
+/* Short, wide screens (a phone on its side): the example sits beside the text, not above it. */
+@media (max-height: 520px) and (orientation: landscape) {
+  :root { --dock-base: 96px; } /* the dock is a single row here, so it needs less room */
+  .empty { padding-top: 8px; }
+  .empty-in { grid-template-columns: auto minmax(0, 300px); align-items: center; gap: 28px; }
+  .empty-text { justify-items: start; text-align: left; }
+  .empty .tile { --rest: 215px; }
+  .empty h2 { font-size: clamp(22px, 3.2vw, 32px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+
+/* the dock */
+.dock {
+  position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%);
+  width: max-content; max-width: calc(100% - 32px);
+  display: flex; align-items: center; justify-content: center; gap: 10px 12px; padding: 10px 12px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 10px 32px var(--shadow);
+}
+.sep { width: 1px; height: 24px; background: var(--line); }
+.btn[aria-expanded="true"] { background: var(--tile); border-color: var(--fg); }
+.btn.sm { font-size: 13px; padding: 0; } /* the square buttons in the top bar: Remove all and More */
+.pair { display: flex; align-items: center; gap: 4px; }
+.pair .ib { width: var(--hit); height: var(--hit); border-color: transparent; background: transparent; }
+.sw {
+  position: relative; display: block; flex: none; width: var(--hit); height: var(--hit);
+  border: 1px solid var(--line); border-radius: 9px; box-shadow: inset 0 0 0 2px var(--surface);
+}
+.sw input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; padding: 0; border: 0; opacity: 0; cursor: pointer; }
+.sw:focus-within { outline: 2px solid var(--fg); outline-offset: 2px; }
+.seg { display: inline-flex; height: var(--hit); padding: 3px; background: var(--tile); border-radius: 10px; }
+.seg button { padding: 0 12px; border: 0; border-radius: 8px; background: transparent; color: var(--muted); font-size: 13px; font-weight: 600; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--fg); box-shadow: 0 1px 2px var(--shadow); }
+/* The bitified half shows the style's name. It is wide enough for the longest, "Silhouette", so
+   the dock does not move as styles are stepped through. */
+.dock > .seg button:last-child { min-width: 7em; }
+
+/* Panels open above the dock as a strip: one row of controls. A panel is kept short because the
+   wall is resized to sit above it (--panel-space), so the images stay in view while they change. */
+.panel {
+  position: absolute; bottom: calc(100% + 10px); left: 50%; transform: translateX(-50%);
+  width: min(700px, calc(100vw - 64px));
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 10px 12px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 10px 32px var(--shadow);
+}
+.key { color: var(--muted); font-weight: 400; }
+
+/* The palettes panel: the chosen palette's name, then every palette as a chip in one row that
+   scrolls sideways. The panel is as wide as its chips when there is room, and stays one row
+   high however many palettes there are. */
+.panel.fit { width: max-content; max-width: calc(100vw - 40px); padding: 0; overflow: hidden; }
+/* the scrolling box fills the panel, so a swipe anywhere on the panel moves the chips */
+.pals { flex: 0 1 auto; min-width: 0; position: relative; display: flex; overflow-x: auto; overscroll-behavior: contain; scrollbar-width: none; }
+.pals::-webkit-scrollbar { display: none; }
+/* The name stays put while the chips scroll under it. It is wide enough for the longest name,
+   so the chips do not move as palettes are tried. */
+.pname {
+  position: sticky; left: 0; z-index: 3; flex: none; display: flex; align-items: center; gap: 0.3em;
+  min-width: 126px; padding: 0 9px 0 12px; background: var(--surface); font-weight: 600; white-space: nowrap;
+}
+.pname::after { content: ""; position: absolute; right: 0; top: calc(50% - 12px); width: 1px; height: 24px; background: var(--line); } /* a divider, as in the dock */
+.chips { flex: none; display: flex; align-items: center; gap: 8px; padding: 10px 12px 10px 8px; }
+.chips .sep { flex: none; } /* between the groups of four */
+/* Two rows of chips, when Dock.svelte finds that one row does not fit: half the palettes in each,
+   without the dividers. A screen too short to spare the height (a phone on its side) keeps one row. */
+@media not all and (max-height: 520px) and (orientation: landscape) {
+  .chips.two { display: grid; grid-template-columns: repeat(var(--cols), var(--hit)); }
+  .chips.two .sep { display: none; }
+}
+/* A side with more palettes to scroll to fades out under an arrow. Dock.svelte sets more-left and
+   more-right. Each fade is solid for well over the width of its arrow, so a chip has dissolved
+   before it reaches the arrow, and each starts past the edge it sits on, so no sliver shows there. */
+.fit::before, .fit::after {
+  content: "\2039"; position: absolute; top: 0; bottom: 0; z-index: 2; box-sizing: border-box; width: 64px; padding: 0 7px 2px;
+  display: flex; align-items: center; font-size: 22px; font-weight: 600; pointer-events: none; opacity: 0; transition: opacity 0.15s;
+}
+/* the left fade starts 8px under the name, which is 147px wide */
+.fit::before { left: 139px; padding-left: 14px; background: linear-gradient(to right, var(--surface) 45%, transparent); }
+.fit::after { content: "\203A"; right: -1px; justify-content: flex-end; background: linear-gradient(to left, var(--surface) 40%, transparent); }
+.fit.more-left::before, .fit.more-right::after { opacity: 1; }
+.pal { flex: none; box-sizing: border-box; width: var(--hit); height: var(--hit); padding: 0; border: 1px solid var(--line); border-radius: 9px; cursor: pointer; }
+.pal[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--fg); }
+.pal:focus-visible { outline-offset: 5px; }
+
+/* a style in the list of styles: a preview with its name underneath */
+.preset {
+  display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px 2px;
+  border: 1px solid transparent; border-radius: 10px; background: transparent;
+  color: var(--muted); font-size: 12px; cursor: pointer;
+}
+.preset[aria-pressed="true"] { border-color: var(--fg); color: var(--fg); }
+.demo {
+  width: 42px; height: 42px; border-radius: 6px; image-rendering: pixelated;
+  background: conic-gradient(var(--tile2) 25%, var(--tile) 0 50%, var(--tile2) 0 75%, var(--tile) 0) 0 0 / 12px 12px;
+}
+/* A setting's number box and its Auto button, joined into one control: Auto is what fills in the number. */
+.field { flex: none; display: flex; box-sizing: border-box; height: var(--hit); border: 1px solid var(--line); border-radius: 10px; }
+.field:focus-within { outline: 2px solid var(--fg); outline-offset: 2px; }
+.field > * { outline: none; }
+.field button {
+  padding: 0 10px; border: 0; border-left: 1px solid var(--line); border-radius: 0 9px 9px 0; background: transparent;
+  color: var(--muted); font-size: 12px; font-weight: 600; cursor: pointer;
+}
+.field button[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
+/* Just wide enough for three digits. Dock.svelte raises --chars while Auto is showing a range. */
+.tnum {
+  box-sizing: border-box; width: calc(var(--chars, 3) * 1ch + 20px); padding: 0 8px;
+  appearance: textfield; -moz-appearance: textfield; /* no spinner arrows: they would cover the digits */
+  border: 0; background: transparent; color: var(--fg);
+  font: inherit; font-size: 13px; text-align: center; font-variant-numeric: tabular-nums;
+}
+.tnum::placeholder { color: var(--muted); }
+.tnum::-webkit-inner-spin-button, .tnum::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.panel input[type="range"] { flex: 1; min-width: 0; height: var(--hit); margin: 0; accent-color: var(--fg); }
+
+/* the style panel */
+.pick { display: flex; align-items: center; gap: 8px; } /* the word "Style", then the button that shows the style */
+.pick .btn { padding: 0 14px 0 8px; }
+.pick .btn .demo { width: 28px; height: 28px; background-size: 8px 8px; }
+.thr { flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; }
+/* A style's other settings. On a wide screen More opens them all at once, in a tray under the
+   strip: the panel grows upward and the wall makes room for it, as for any panel. A screen too
+   short to spare the height scrolls the tray inside itself, so the wall always keeps some room. */
+.extra { padding: 0; } /* the More button: the three dots of the top bar's More, as square as the dock's buttons */
+.adv {
+  flex-basis: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 24px;
+  max-height: max(var(--hit), calc(100vh - 440px)); max-height: max(var(--hit), calc(100dvh - 440px)); overflow-y: auto; overscroll-behavior: contain;
+  padding-top: 10px; border-top: 1px solid var(--line);
+}
+/* A box that scrolls cuts off what reaches past its edge, and a focus ring reaches 4px past its
+   control. Inside the tray and the chip row the ring is drawn within the control instead. */
+.adv :focus-visible, .adv .field:focus-within, .sets :focus-visible { outline-offset: -2px; }
+.adv .field > :focus-visible { outline: none; }
+.row { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.row .key { flex: none; width: 90px; font-size: 13px; white-space: nowrap; } /* room for the longest name, "Opacity cut", and its dot on one line */
+.panel .seg { flex: 1; min-width: 0; box-sizing: border-box; } /* as high as the sliders and boxes beside it */
+.panel .seg button { flex: 1 1 auto; min-width: 0; padding: 0 4px; } /* auto: a longer word gets the room it needs before the rest is shared out */
+.foot { grid-column: 1 / -1; display: flex; justify-content: flex-end; }
+.foot .btn { height: 28px; min-width: 0; gap: 6px; padding: 0 10px; font-size: 12px; }
+/* Reset throws the style's settings away, and says so quietly: its word, icon and edge are
+   tinted, and nothing is filled. The edge is the line's color part of the way to the tint. */
+.foot .btn, .chip.reset { color: var(--undo); border-color: color-mix(in srgb, var(--undo) 40%, var(--line)); }
+/* On a phone every setting is a chip showing its value, in a row that scrolls sideways, and the
+   chip that is pressed has its control on the row below. So the panel is two rows high for
+   every style, and the wall keeps its room. */
+.setbox { flex: 1; min-width: 0; position: relative; display: flex; }
+.sets { flex: 1; min-width: 0; display: flex; gap: 6px; overflow-x: auto; overscroll-behavior: contain; scrollbar-width: none; }
+.sets::-webkit-scrollbar { display: none; }
+/* A side with more chips to scroll to fades out under a small arrow. Dock.svelte sets more-left
+   and more-right. Nothing shows when every chip fits. */
+.setbox::before, .setbox::after {
+  content: "\2039"; position: absolute; top: 0; bottom: 0; z-index: 1; width: 30px; padding-bottom: 2px;
+  display: flex; align-items: center; font-size: 18px; font-weight: 600; pointer-events: none; opacity: 0; transition: opacity 0.15s;
+}
+.setbox::before { left: -1px; background: linear-gradient(to right, var(--surface) 35%, transparent); }
+.setbox::after { content: "\203A"; right: -1px; justify-content: flex-end; background: linear-gradient(to left, var(--surface) 35%, transparent); }
+.setbox.more-left::before, .setbox.more-right::after { opacity: 1; }
+.chip {
+  flex: none; display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
+  box-sizing: border-box; height: var(--hit); padding: 0 10px; border: 1px solid var(--line); border-radius: 10px; background: transparent;
+  line-height: 1.15; white-space: nowrap; cursor: pointer;
+}
+.chip span { color: var(--muted); font-size: 11px; }
+.chip b { font-size: 12px; }
+.chip[aria-pressed="true"] { border-color: var(--fg); background: var(--tile); }
+/* A dot marks a setting that is not at its default: after its value on a chip, after its name in the tray. */
+.chip.changed b::after, .row .key.changed::after { content: " \2022"; }
+.row .key.changed::after { color: var(--fg); font-weight: 600; }
+/* A style with no settings to show (Silhouette, with no soft-edged image on the wall) has no
+   chips for its button to make room for. The button then fills the row and has its words back:
+   "Style", the style's name, and the caret at the far end. */
+.bare .pick { flex: 1; }
+.bare .pick .key, .bare #style-name { display: inline; }
+.bare .pick .btn { flex: 1; justify-content: flex-start; padding: 0 14px 0 8px; }
+.bare .pick .ico { margin-left: auto; }
+.chip.reset { flex-direction: row; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; } /* the last in the row: all the style's settings back to their defaults */
+.chip:disabled { opacity: 0.4; cursor: default; }
+/* the list of styles, opened by the style button; it sits above the panel, lined up with its left edge */
+.menu {
+  position: absolute; bottom: calc(100% + 10px); left: 0; box-sizing: border-box; max-width: 100%; padding: 8px;
+  display: grid; gap: 6px; grid-template-columns: repeat(5, minmax(0, 1fr));
+  background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 10px 32px var(--shadow);
+}
+.menu .preset { padding: 8px 6px; }
+
+/* A phone on its side has no height to spare: with the tray open the wall would have none left.
+   So it has the chips, as an upright phone does, with the pressed chip's control beside them
+   and not below, and the panel stays one row high. The list of styles is one row there too,
+   scrolling sideways; two rows would not fit above the strip. */
+@media (max-height: 520px) and (orientation: landscape) {
+  .pick .key, #style-name { display: none; }
+  .pick .btn { padding: 0 8px; }
+  .setbox { flex: 1 1 0; }
+  .thr { flex: 1.4 1 0; }
+  /* as wide as the screen allows, like an upright phone's */
+  .panel:not(.fit) { box-sizing: border-box; width: min(700px, calc(100vw - 24px)); }
+  .menu { display: flex; overflow-x: auto; overscroll-behavior: contain; scrollbar-width: none; }
+  .menu::-webkit-scrollbar { display: none; }
+  .menu .preset { flex: none; }
+}
+/* Too narrow for two settings side by side in the tray. The strip drops the word "Style" there,
+   which the style button says anyway: with More beside it, the threshold's slider was left
+   45px at 521px wide. */
+@media (max-width: 700px) {
+  .adv { grid-template-columns: minmax(0, 1fr); }
+  .pick .key { display: none; }
+}
+/* narrower screens: icon-only dock buttons */
+@media (max-width: 800px) {
+  .dock .lbl, .dock > .sep { display: none; }
+  .dock > .btn { padding: 0; }
+}
+/* phones: the view switch gets a row of its own under the tools, as wide as they are */
+@media (max-width: 520px) {
+  :root { --dock-base: 172px; }
+  /* a grid, so the dock is only as wide as its four tools and they are not spread out to fill the screen */
+  .dock { bottom: 12px; max-width: calc(100% - 46px); display: grid; grid-template-columns: repeat(4, auto); gap: 8px; padding: 10px; }
+  .dock > .seg { order: 5; grid-column: 1 / -1; box-sizing: border-box; }
+  .dock > .seg button { flex: 1; }
+  .panel { left: 0; right: 0; width: auto; transform: none; }
+  /* The palettes panel stays as wide as its chips, centered, and no wider than the screen less
+     the dock's margins. The name goes on a row of its own above the chips; the fades cover the chips only. */
+  .panel.fit { left: 50%; right: auto; max-width: calc(100vw - 26px); transform: translateX(-50%); }
+  .pals { display: grid; grid-template-columns: max-content; }
+  .pname { justify-self: start; padding: 10px 12px 0; }
+  .pname::after { display: none; }
+  .chips { padding: 8px 12px 10px; }
+  .fit::before, .fit::after { top: 30px; }
+  .fit::before { left: -1px; padding-left: 7px; background: linear-gradient(to right, var(--surface) 40%, transparent); }
+  /* The style button is only its preview and caret here, and leaves the rest of the first row to
+     the chips. The view switch in the dock already names the style. The control of the chosen
+     chip has its own row below. */
+  .pick .key, #style-name { display: none; }
+  .pick .btn { padding: 0 8px; }
+  .thr { flex-basis: 100%; }
+  /* The style panel is as wide as the screen allows, not only as wide as the dock under it: the
+     chips and the slider have use for every pixel, and the dock for no more than its tools take. */
+  .panel:not(.fit) { box-sizing: border-box; left: 50%; right: auto; width: calc(100vw - 24px); transform: translateX(-50%); }
+  .panel > .sep { display: none; } /* dividers only make sense while the panel is a single row */
+  .menu { right: 0; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); } /* as many to a row as fit: three on the narrowest phone, 280px wide */
+}
+/* Narrow and short at once: a very small phone on its side. The dock keeps its two rows, which
+   leaves no height for two more, so the panel is the one row of a phone on its side, and as
+   wide as the screen allows instead of only as wide as the dock. */
+@media (max-width: 520px) and (max-height: 520px) and (orientation: landscape) {
+  .thr { flex: 1.4 1 0; }
+}
+
+/* the mockup's own page, over the app's rules */
+:root { height: auto; }
+body { display: block; height: auto; overflow: auto; padding: 24px 16px 48px; }
+main { max-width: 900px; margin: 0 auto; }
+h1 { font-family: var(--display); font-size: 28px; margin: 0 0 4px; }
+h2 { font-size: 16px; margin: 36px 0 4px; }
+p { margin: 0 0 12px; color: var(--muted); max-width: 70ch; }
+.scroll { overflow-x: auto; }
+.frame { position: relative; min-width: 860px; height: 372px; margin: 0 0 8px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg); overflow: hidden; }
+.frame .tiles { position: absolute; top: 14px; left: 0; right: 0; margin: 0 auto; }
+.frame .art { cursor: default; }
+.art img { position: absolute; inset: 8px; width: calc(100% - 16px); height: calc(100% - 16px); object-fit: contain; image-rendering: pixelated; }
+/* NEW: a color that is None. The swatch shows the wall's checkerboard and a slash. */
+.sw.none { background-color: var(--tile); background-image: linear-gradient(to top right, transparent calc(50% - 1px), var(--fg) calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)), conic-gradient(var(--tile2) 25%, var(--tile) 0 50%, var(--tile2) 0 75%, var(--tile) 0); background-size: auto, 12px 12px; }
+.new { outline: 1px dashed var(--undo); outline-offset: 5px; border-radius: 9px; }
+.sheet { min-width: 700px; }
+.sheet img { display: block; width: 100%; border-radius: 10px; }
+.heads { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; padding: 0 0.6%; font-size: 12px; font-weight: 600; color: var(--muted); text-align: center; margin-bottom: 4px; }
+</style>
+<main>
+  <h1>A color that is None</h1>
+  <p>Mockup, not the app. The dock and panel use the app's real stylesheet. The pictures are your four sprite sheets, converted by the app's real code and by a prototype of the Stencil style. The red dashed boxes mark what is new.</p>
+
+  <h2>1. Off: as today</h2>
+  <p>The two None chips end the palette row, after the twelve palettes. Each shows the pair it gives: the missing color's half is the checkerboard.</p>
+  <div class="scroll"><div class="frame" data-none="0" data-state="off" data-first="#000000" data-second="#ffffff"></div></div>
+
+  <h2>2. First color is None: lines and dark pixels become holes</h2>
+  <p>One ink on a transparent background. The first swatch shows the None mark; tapping it still opens the color picker, and choosing a color turns None off.</p>
+  <div class="scroll"><div class="frame" data-none="1" data-state="first" data-first="#000000" data-second="#ffffff"></div></div>
+
+  <h2>3. Second color is None: the inverse</h2>
+  <p>Only the lines and dark pixels are drawn, here in a palette color. Swap moves None to the other side with its color.</p>
+  <div class="scroll"><div class="frame" data-none="2" data-state="second" data-first="#f6dfa4" data-second="#0b0a0c"></div></div>
+
+  <h2>4. Stencil compared with today's styles, first color None</h2>
+  <p>Each sheet is converted as one image. Cutout, Solid and Lines are today's styles on Auto. Stencil is the prototype of the new style, with Outline Keep and Cuts 15.</p>
+  <div class="scroll"><div class="sheet"><div class="heads"><span>Original</span><span>Cutout (today)</span><span>Solid (today)</span><span>Lines (today)</span><span>Stencil (new)</span></div><img src="none-color-compare.png" alt="" /></div></div>
+
+  <h2>5. Stencil at different settings, first color None</h2>
+  <p>Every column after Original is Stencil. The whole sprite is ink. Only pixels inside it that are about as dark as its own outline are cut. Cuts is how much lighter than the outline a pixel may be and still be cut.</p>
+  <div class="scroll"><div class="sheet"><div class="heads"><span>Original</span><span>Stencil: Outline Keep, Cuts 0</span><span>Stencil: Outline Keep, Cuts 15</span><span>Stencil: Outline Keep, Cuts 30</span><span>Stencil: Outline Trim, Cuts 15</span></div><img src="none-color-stencil.png" alt="" /></div></div>
+
+  <h2>6. Stencil compared with today's styles, in two colors</h2>
+  <p>White is the second color, orange the first. Beside it, today's Cutout and Lines in the same two colors.</p>
+  <div class="scroll"><div class="sheet"><div class="heads"><span>Original</span><span>Stencil (new): Outline Keep</span><span>Stencil (new): Outline Trim</span><span>Cutout (today)</span><span>Lines (today)</span></div><img src="none-color-stencil-two.png" alt="" /></div></div>
+</main>
+<script>
+const ICONS = {
+  swap: '40 51 02 12 22 32 42 52 62 04 14 24 34 44 54 64 15 26',
+  grid: [0, 1, 2, 4, 5, 6].flatMap(y => [0, 1, 2, 4, 5, 6].map(x => '' + x + y)).join(' '),
+  sliders: '20 30 01 11 21 31 41 51 61 22 32 44 54 05 15 25 35 45 55 65 46 56',
+  save: '30 31 12 32 52 23 33 43 34 06 16 26 36 46 56 66',
+};
+const icon = name => '<svg class="ico" width="14" height="14" viewBox="0 0 7 7">' + ICONS[name].split(' ').map(p => '<rect width="1" height="1" x="' + p[0] + '" y="' + p[1] + '"></rect>').join('') + '</svg>';
+const PRESETS = [['Glow', '#222323', '#f0f6f0'], ['Mono', '#000000', '#ffffff'], ['Paper', '#382b26', '#b8c2b9'], ['Torch', '#0b0a0c', '#f6dfa4'], 0,
+  ['Game Boy', '#0f380f', '#9bbc0f'], ['Pocket', '#1f1f1f', '#c4cfa1'], ['Nokia', '#43523d', '#c7f0d8'], ['Playdate', '#322f29', '#d7d4cc'], 0,
+  ['Phosphor', '#25342f', '#01eb5f'], ['Amber', '#3f291e', '#fdca55'], ['Commodore', '#40318e', '#88d7de'], ['Rose', '#4a0d2b', '#ffd1dc']];
+const CHECK = 'conic-gradient(var(--tile2) 25%, var(--tile) 0 50%, var(--tile2) 0 75%, var(--tile) 0) 0 0 / 12px 12px';
+const NAMES = { 1: 'items', 2: 'weapons', 4: 'armor' };
+
+for (const frame of document.querySelectorAll('.frame')) {
+  const none = +frame.dataset.none, { first, second, state } = frame.dataset;
+  const pal = PRESETS.find(p => p && ((p[1] === first && p[2] === second) || (p[1] === second && p[2] === first)));
+  // a None chip previews the pair it gives: the missing color's half is the checkerboard
+  const noneChip = (n, label) => '<button class="pal" aria-pressed="' + (none === n) + '" title="' + label + '" style="background: linear-gradient(135deg, ' +
+    (n === 1 ? 'transparent 50%, ' + second + ' 50%' : first + ' 50%, transparent 50%') + '), ' + CHECK + '"></button>';
+  frame.innerHTML =
+    '<div class="tiles" style="--cols: 3; --tile-size: 150px">' + [1, 2, 4].map(n => '<figure class="tile"><div class="art"><img src="tile-' + n + '-' + state + '.png" alt="" /></div><figcaption class="cap"><span class="name">' + NAMES[n] + '.png</span><span class="dim">64<span class="by">×</span>64</span></figcaption></figure>').join('') + '</div>' +
+    '<div class="dock"><div class="panel fit"><div class="pals"><span class="pname"><span class="key">Palette</span> ' + pal[0] + '</span><div class="chips">' +
+    PRESETS.map(p => p ? '<button class="pal" aria-pressed="' + (p === pal) + '" title="' + p[0] + '" style="background: linear-gradient(135deg, ' + p[1] + ' 50%, ' + p[2] + ' 50%)"></button>' : '<span class="sep"></span>').join('') +
+    '<span class="sep"></span><span class="new" style="display: flex; gap: 8px">' + noneChip(1, 'No color for lines and dark pixels') + noneChip(2, 'No color for fill and light pixels') + '</span>' +
+    '</div></div></div>' +
+    '<div class="pair"><label class="sw' + (none === 1 ? ' none new' : '') + '" style="' + (none === 1 ? '' : 'background: ' + first) + '"></label>' +
+    '<button class="ib">' + icon('swap') + '</button>' +
+    '<label class="sw' + (none === 2 ? ' none new' : '') + '" style="' + (none === 2 ? '' : 'background: ' + second) + '"></label></div>' +
+    '<button class="btn" aria-expanded="true">' + icon('grid') + '<span class="lbl">Palette</span></button><span class="sep"></span>' +
+    '<div class="seg"><button aria-pressed="false">Original</button><button aria-pressed="true">Stencil</button></div>' +
+    '<button class="btn">' + icon('sliders') + '<span class="lbl">Style</span></button><span class="sep"></span>' +
+    '<button class="btn primary">' + icon('save') + '<span class="lbl">Download all</span></button></div>';
+}
+</script>
+</html>
