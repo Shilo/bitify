@@ -421,6 +421,9 @@ A centered slogan ("Pixel art in two colors"), one line saying what the app is (
 counts of styles or palettes, which change), and a
 button labelled "Drop, paste or choose images" ("Choose images" on touch devices, where there is
 nothing to drop), with a plus sign before the words. The text describes the app, not the steps. The dock stays visible.
+The empty screen never scrolls sideways: its one column is no wider than the screen, so the
+example is at most as wide as the screen less 16px a side however much height there is, and
+on a screen narrower than the button's words they wrap onto a second line.
 
 Above the heading sits the Bitify logo, a 28×28 spinning gold coin with a B
 (`src/assets/logo.gif`, an eight-frame animation), labelled "Example". It plays like any

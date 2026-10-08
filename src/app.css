@@ -146,8 +146,12 @@ button { font: inherit; color: inherit; }
 
 /* .empty scrolls when the screen is short; the auto margin centers its content when there is room */
 .empty { flex: 1; min-height: 0; overflow-y: auto; display: flex; padding: 24px 16px var(--dock-space); }
-.empty-in { margin: auto; display: grid; justify-items: center; gap: 26px; text-align: center; }
-.empty-text { display: grid; justify-items: center; gap: 14px; min-width: 0; }
+/* One column that is never wider than the screen. Left to size itself, the column took the
+   example's wish of 320px also where the screen had less, and the empty screen scrolled sideways. */
+.empty-in { margin: auto; max-width: 100%; display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 26px; text-align: center; }
+.empty-text { display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 14px; min-width: 0; max-width: 100%; }
+/* on a screen narrower than its words the button's label wraps instead of pushing the screen wider */
+.empty .btn { max-width: 100%; height: auto; min-height: var(--hit); white-space: normal; }
 /* The example is as large as the screen allows, up to 320px. The amount subtracted from the
    screen height is everything else on the empty screen: top bar, text, button, dock and open panel. */
 .empty .tile { --rest: 430px; max-width: 100%; width: clamp(96px, calc(100vh - var(--rest) - var(--panel-space)), 320px); width: clamp(96px, calc(100dvh - var(--rest) - var(--panel-space)), 320px); }
