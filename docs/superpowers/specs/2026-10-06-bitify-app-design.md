@@ -346,6 +346,7 @@ under reduced motion. Top to bottom:
   | Add image | Drag, Drop | Ctrl, V |
   | Next palette | Shift, Scroll | ←, → |
   | Next style | Scroll | ↑, ↓ |
+  | Style settings | Click, the Style icon, the More icon | (nothing) |
   | See original image | Press, Image | Space |
   | Save image | Click, the Download icon, the Copy icon | Ctrl, C |
 
@@ -356,6 +357,7 @@ under reduced motion. Top to bottom:
   | Add image | Touch, the plus icon |
   | Next palette | Swipe, ←, → |
   | Next style | Swipe, ↑, ↓ |
+  | Style settings | Touch, the Style icon |
   | See original image | Hold, Image |
   | Save image | Touch, the Share icon |
 
@@ -364,11 +366,15 @@ under reduced motion. Top to bottom:
   the icons of the buttons to press. Each comma above separates two keys; they sit side by
   side with no "+" between them. On a Mac, Ctrl reads ⌘. Save image names the buttons a tile
   has on that device: Download and Copy with a mouse, Share on touch (see "Tiles").
+  Style settings names the way to every setting of a style: with a mouse the Style button
+  and then More on its strip, which opens the tray; on touch the Style button alone, since
+  its panel shows them all as chips there. It has no key, and its Keyboard cell is empty.
 - A last row: "Images never leave your device." and a filled "Got it" button, which has
   the focus when the dialog opens.
 
 Touch means a coarse main pointer, the same test the rest of the app uses. The steps give no
-counts of styles or palettes, which change, and the help does not explain the threshold or the other settings.
+counts of styles or palettes, which change, and the help says where a style's settings are
+but does not explain the threshold or any of them.
 
 Got it, Close, Escape and a click or tap on the dimmed app close it. A click inside it
 does not. While it is open nothing behind it reacts: presses, swipes, the wheel and the keys

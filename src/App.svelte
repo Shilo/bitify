@@ -535,6 +535,8 @@
           <tr><th>Add image</th><td><kbd>Touch</kbd> <kbd><PixelIcon name="plus" /></kbd></td></tr>
           <tr><th>Next palette</th><td><kbd>Swipe</kbd> <kbd>←</kbd> <kbd>→</kbd></td></tr>
           <tr><th>Next style</th><td><kbd>Swipe</kbd> <kbd>↑</kbd> <kbd>↓</kbd></td></tr>
+          <!-- on a phone the Style panel shows every setting of the style, as chips -->
+          <tr><th>Style settings</th><td><kbd>Touch</kbd> <kbd><PixelIcon name="sliders" /></kbd></td></tr>
           <tr><th>See original image</th><td><kbd>Hold</kbd> <kbd>Image</kbd></td></tr>
           <!-- on touch screens a tile's Download and Copy are behind its Share button -->
           <tr><th>Save image</th><td><kbd>Touch</kbd> <kbd><PixelIcon name="share" /></kbd></td></tr>
@@ -542,6 +544,8 @@
           <tr><th>Add image</th><td><kbd>Drag</kbd> <kbd>Drop</kbd></td><td><kbd>{mod}</kbd> <kbd>V</kbd></td></tr>
           <tr><th>Next palette</th><td><kbd>Shift</kbd> <kbd>Scroll</kbd></td><td><kbd>←</kbd> <kbd>→</kbd></td></tr>
           <tr><th>Next style</th><td><kbd>Scroll</kbd></td><td><kbd>↑</kbd> <kbd>↓</kbd></td></tr>
+          <!-- Style, then More on its strip, which opens the rest of the style's settings; no key does this -->
+          <tr><th>Style settings</th><td><kbd>Click</kbd> <kbd><PixelIcon name="sliders" /></kbd> <kbd><PixelIcon name="more" /></kbd></td><td></td></tr>
           <tr><th>See original image</th><td><kbd>Press</kbd> <kbd>Image</kbd></td><td><kbd>Space</kbd></td></tr>
           <tr><th>Save image</th><td><kbd>Click</kbd> <kbd><PixelIcon name="save" /></kbd> <kbd><PixelIcon name="copy" /></kbd></td><td><kbd>{mod}</kbd> <kbd>C</kbd></td></tr>
         {/if}
