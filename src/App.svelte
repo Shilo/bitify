@@ -166,8 +166,7 @@
     try {
       return await job();
     } finally {
-      running.splice(running.indexOf(text), 1);
-      busy = running.at(-1) ?? ''; // the newest job still running, or nothing
+      done();
     }
   }
 
@@ -495,7 +494,10 @@
       <div class="empty-text">
         <h2>Pixel art in two colors</h2>
         <p>Instantly convert sprites and animated GIFs<br />to <span>1-bit</span> colors and styles.</p>
-        <button class="btn primary" onclick={() => picker.click()}>{touch ? 'Choose images' : 'Drop, paste or choose images'}</button>
+        <button class="btn primary" onclick={() => picker.click()}>
+          <svg class="plus-icon" aria-hidden="true" viewBox="0 0 16 16"><path d="M8 3v10M3 8h10" /></svg>
+          {touch ? 'Choose images' : 'Drop, paste or choose images'}
+        </button>
       </div>
     </div>
   </div>

@@ -83,6 +83,7 @@ button { font: inherit; color: inherit; }
   font-weight: 600; white-space: nowrap; cursor: pointer;
 }
 .btn.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.plus-icon { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-linecap: round; stroke-width: 2; }
 .btn:disabled { opacity: 0.4; cursor: default; }
 .ib {
   display: grid; place-items: center; flex: none; width: 30px; height: 30px; padding: 0;

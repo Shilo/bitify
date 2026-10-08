@@ -50,7 +50,7 @@ One screen, no page scroll. Three layers:
 
 1. **Top bar.** The "Bitify" wordmark, an image count, and at the right a trash icon button
    that removes all images (only when there are images), "Add images", and last a More
-   button (three dots) that opens a menu (see "The More menu").
+   button (three dots, one above the other) that opens a menu (see "The More menu").
 2. **The wall.** A grid of square tiles that fills the screen and scrolls on its own. Each
    tile shows one image, scaled up with hard pixel edges on a faint checkerboard so
    transparency is visible. The image is as large as fits the tile with 8px left clear on
@@ -331,7 +331,7 @@ viewport height so mobile browser bars do not cut the dock off.
 A centered slogan ("Pixel art in two colors"), one line saying what the app is ("Instantly convert sprites and animated GIFs to 1-bit colors and styles."; no
 counts of styles or palettes, which change), and a
 button labelled "Drop, paste or choose images" ("Choose images" on touch devices, where there is
-nothing to drop). The text describes the app, not the steps. The dock stays visible.
+nothing to drop), with a plus sign before the words. The text describes the app, not the steps. The dock stays visible.
 
 Above the heading sits the Bitify logo, a 28×28 spinning gold coin with a B
 (`src/assets/logo.gif`, an eight-frame animation), labelled "Example". It plays like any
