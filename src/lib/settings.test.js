@@ -5,7 +5,7 @@ const styles = Object.keys(STYLE_SETTINGS);
 
 describe('the settings of a style', () => {
   it('gives every style a known list of settings, with the threshold first where there is one', () => {
-    expect(styles).toEqual(['cutout', 'solid', 'lines', 'checker', 'hatch', 'bayer', 'noise', 'atkinson', 'silhouette']);
+    expect(styles).toEqual(['cutout', 'solid', 'stencil', 'lines', 'checker', 'hatch', 'bayer', 'noise', 'atkinson', 'silhouette']);
     for (const [style, keys] of Object.entries(STYLE_SETTINGS)) {
       for (const key of keys) expect(SETTINGS[key], `${style} ${key}`).toBeDefined();
       if (keys.includes('threshold')) expect(keys[0]).toBe('threshold');
@@ -16,6 +16,16 @@ describe('the settings of a style', () => {
   it('starts every setting at a value it allows', () => {
     for (const key of Object.keys(SETTINGS)) expect(allowed(key, SETTINGS[key].default), key).toBe(true);
     expect(defaults('cutout')).toEqual({ threshold: null, seams: null, rim: true, source: 'luma', alpha: 128 });
+  });
+
+  it('gives Stencil its own settings, with Cuts first', () => {
+    expect(defaults('stencil')).toEqual({ cuts: 20, outline: 'keep', edges: 0, source: 'luma', alpha: 128 });
+    expect(allowed('cuts', 0)).toBe(true);
+    expect(allowed('cuts', 101)).toBe(false);
+    expect(allowed('outline', 'trim')).toBe(true);
+    expect(allowed('outline', 'none')).toBe(false);
+    expect(shown('edges', 0)).toBe('Off');
+    expect(shown('edges', 60)).toBe('60%');
   });
 
   it('allows a choice only from its options, and a number only whole and in range', () => {
@@ -84,6 +94,12 @@ describe('restore', () => {
   it('keeps which color is None only when it is 0, 1 or 2', () => {
     for (const none of [0, 1, 2]) expect(restore(JSON.stringify({ none }), styles).none).toBe(none);
     for (const none of [3, -1, '1', null, true, 1.5]) expect(restore(JSON.stringify({ none }), styles).none, JSON.stringify(none)).toBe(0);
+  });
+
+  it('gives a style its defaults when what was stored is from before the style existed', () => {
+    const text = JSON.stringify({ settings: { cutout: { ...defaults('cutout'), seams: 40 } } });
+    expect(restore(text, styles).settings.stencil).toEqual(defaults('stencil'));
+    expect(restore(text, styles).settings.cutout.seams).toBe(40);
   });
 
   it('never hands out the defaults themselves, which the app goes on to change', () => {

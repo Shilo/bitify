@@ -60,7 +60,7 @@ describe('analyze', () => {
   it('survives an image with no solid pixels', () => {
     const img = image(['  ', '  '], {});
     expect(img.auto).toBe(127);
-    for (const style of ['cutout', 'solid', 'checker', 'hatch', 'bayer', 'noise', 'atkinson', 'silhouette']) {
+    for (const style of ['cutout', 'solid', 'stencil', 'checker', 'hatch', 'bayer', 'noise', 'atkinson', 'silhouette']) {
       expect(show(mask(img, style), 2)).toEqual(['  ', '  ']);
     }
   });
@@ -166,7 +166,7 @@ describe('mask', () => {
     const w = 300, h = 200, data = new Uint8ClampedArray(w * h * 4);
     for (let i = 0; i < data.length; i++) data[i] = (i * 2654435761) >>> 24;
     const img = analyze({ width: w, height: h, data });
-    for (const style of ['cutout', 'solid', 'checker', 'hatch', 'bayer', 'noise', 'atkinson', 'silhouette']) for (const t of [null, 1, 254]) {
+    for (const style of ['cutout', 'solid', 'stencil', 'checker', 'hatch', 'bayer', 'noise', 'atkinson', 'silhouette']) for (const t of [null, 1, 254]) {
       const m = mask(img, style, t);
       expect(m.length).toBe(w * h);
       expect(m.every((v, p) => (v === 0) === (data[p * 4 + 3] < 128))).toBe(true);
@@ -422,6 +422,98 @@ describe('cutout', () => {
   });
 });
 
+describe('stencil', () => {
+  // a dark outline k and a light body b; d is as dark as the outline, e 20 lighter, f 21 lighter; m is a middle grey
+  const pal = { k: grey(30), b: grey(200), d: grey(30), e: grey(50), f: grey(51), m: grey(120) };
+  const box = image(['       ', ' kkkkk ', ' kbdbk ', ' kbbek ', ' kfbbk ', ' kkkkk ', '       '], pal);
+
+  it('fills the sprite and cuts the inside pixels about as dark as its outline', () => {
+    expect(show(mask(box, 'stencil'), 7)).toEqual(['       ', ' ..... ', ' ..#.. ', ' ...#. ', ' ..... ', ' ..... ', '       ']);
+  });
+
+  it('cuts up to Cuts above the outline level and no further', () => {
+    expect(show(mask(box, 'stencil', { cuts: 0 }), 7)).toEqual(['       ', ' ..... ', ' ..#.. ', ' ..... ', ' ..... ', ' ..... ', '       ']);
+    expect(show(mask(box, 'stencil', { cuts: 21 }), 7)).toEqual(['       ', ' ..... ', ' ..#.. ', ' ...#. ', ' .#... ', ' ..... ', '       ']);
+  });
+
+  it('cuts the outline too when it is trimmed', () => {
+    expect(show(mask(box, 'stencil', { outline: 'trim' }), 7)).toEqual(['       ', ' ##### ', ' #.#.# ', ' #..## ', ' #...# ', ' ##### ', '       ']);
+  });
+
+  it('judges each sprite in an image by its own outline', () => {
+    // grey 120 is an inside pixel of the first sprite and the outline of the second
+    const two = image(['             ', ' kkkkk mmmmm ', ' kbmbk mbmbm ', ' kkkkk mmmmm ', '             '], pal);
+    expect(show(mask(two, 'stencil'), 13)).toEqual(['             ', ' ..... ..... ', ' ..... ..#.. ', ' ..... ..... ', '             ']);
+  });
+
+  it('with Edges, also cuts the darker side of a strong color change', () => {
+    const parts = image(['        ', ' kkkkkk ', ' kbbmmk ', ' kbbmmk ', ' kkkkkk ', '        '], pal);
+    const plain = ['        ', ' ...... ', ' ...... ', ' ...... ', ' ...... ', '        '];
+    expect(show(mask(parts, 'stencil'), 8)).toEqual(plain);
+    // b and m differ by 80: at 90% a change above 75 counts, at 87% only one above 81
+    expect(show(mask(parts, 'stencil', { edges: 90 }), 8)).toEqual(['        ', ' ...... ', ' ...#.. ', ' ...#.. ', ' ...... ', '        ']);
+    expect(show(mask(parts, 'stencil', { edges: 87 }), 8)).toEqual(plain);
+  });
+
+  it('never cuts an inside pixel that touches empty space at a corner', () => {
+    // an outline two pixels thick where it turns: the inner pixels are as dark as it, and stay
+    const round = image(['  kk  ', ' kkkk ', 'kkbbkk', 'kkbbkk', ' kkkk ', '  kk  '], pal);
+    expect(show(mask(round, 'stencil'), 6)).toEqual(['  ..  ', ' .... ', '......', '......', ' .... ', '  ..  ']);
+  });
+
+  it('leaves a sprite whole when its inside is no lighter than its outline', () => {
+    // one flat color, with no outline drawn: every inside pixel is as dark as the outline
+    const flat = image(['       ', ' bbbbb ', ' bbbbb ', ' bbbbb ', ' bbbbb ', ' bbbbb ', '       '], pal);
+    const whole = ['       ', ' ..... ', ' ..... ', ' ..... ', ' ..... ', ' ..... ', '       '];
+    expect(show(mask(flat, 'stencil'), 7)).toEqual(whole);
+    // a highlight does not make the rest of the inside dark line art
+    const lit = image(['       ', ' bbbbb ', ' bbwbb ', ' bbbbb ', ' bbbbb ', ' bbbbb ', '       '], { ...pal, w: grey(255) });
+    expect(show(mask(lit, 'stencil'), 7)).toEqual(whole);
+    // a sprite with lighter parts has its dark pixels cut however high Cuts goes
+    expect(show(mask(box, 'stencil', { cuts: 100 }), 7)).toEqual(['       ', ' ..... ', ' ..#.. ', ' ...#. ', ' .#... ', ' ..... ', '       ']);
+    // one whose whole inside is within Cuts of its outline is left whole, not hollowed out
+    const dim = image(['       ', ' kkkkk ', ' keeek ', ' keeek ', ' keeek ', ' kkkkk ', '       '], pal);
+    expect(show(mask(dim, 'stencil', { cuts: 19 }), 7)).toEqual(whole);
+    expect(show(mask(dim, 'stencil', { cuts: 20 }), 7)).toEqual(whole);
+  });
+
+  it('takes the darkest brightness for the level of an image with no empty pixel, which has no outline', () => {
+    const opaque = image(['kbbb', 'bebb', 'bbfb'], pal);
+    for (const outline of ['keep', 'trim']) expect(show(mask(opaque, 'stencil', { outline }), 4), outline).toEqual(['#...', '.#..', '....']);
+  });
+
+  it('counts the canvas edge as empty for a sprite cropped tight to a canvas that has an empty pixel', () => {
+    expect(show(mask(image(['kkk ', 'kbk ', 'kkk '], pal), 'stencil', { outline: 'trim' }), 4)).toEqual(['### ', '#.# ', '### ']);
+  });
+
+  it('copes with sprites that are all outline', () => {
+    const thin = image(['     ', ' k b ', ' k   ', '     '], pal);
+    expect(show(mask(thin, 'stencil'), 5)).toEqual(['     ', ' . . ', ' .   ', '     ']);
+    expect(show(mask(thin, 'stencil', { outline: 'trim' }), 5)).toEqual(['     ', ' # # ', ' #   ', '     ']);
+  });
+
+  it('finds the outline levels afresh for an image analysed with another opacity cut', () => {
+    // a dark halo of alpha 100 round a light middle with one dark pixel in it
+    const rows = ['hhhhh', 'hbbbh', 'hbdbh', 'hbbbh', 'hhhhh'], colors = { ...pal, h: [30, 30, 30, 100] }, data = new Uint8ClampedArray(100);
+    rows.forEach((row, y) => [...row].forEach((ch, x) => data.set([...colors[ch].slice(0, 3), colors[ch][3] ?? 255], (y * 5 + x) * 4)));
+    const src = { width: 5, height: 5, data };
+    // at a cut of 60 the halo is solid and the image has no empty pixel, so the halo is inside it and as dark as its darkest
+    expect(show(mask(analyze(src, 'luma', 60), 'stencil'), 5)).toEqual(['#####', '#...#', '#.#.#', '#...#', '#####']);
+    // at 128 the middle is the sprite, its light pixels are its outline, and nothing inside is lighter than that
+    expect(show(mask(analyze(src, 'luma', 128), 'stencil'), 5)).toEqual(['     ', ' ... ', ' ... ', ' ... ', '     ']);
+  });
+
+  it('walks a sprite that fills a large image', () => {
+    const w = 300, h = 300, data = new Uint8ClampedArray(w * h * 4).fill(200);
+    // a dark outline all round the canvas
+    for (let p = 0; p < w * h; p++) data.set(p % w === 0 || p % w === w - 1 || p < w || p >= w * (h - 1) ? [30, 30, 30, 255] : [200, 200, 200, 255], p * 4);
+    data[3] = 0; // one empty pixel, so the image is a sprite and the canvas edge is its outline
+    data.fill(10, (150 * w + 150) * 4, (150 * w + 150) * 4 + 3); // one dark pixel in the middle
+    const m = mask(analyze({ width: w, height: h, data }), 'stencil');
+    expect([count(m, 0), count(m, 1), count(m, 2)]).toEqual([1, 1, w * h - 2]);
+  });
+});
+
 describe('unify', () => {
   it('gives every frame of an animation the same thresholds, picked from all frames together', () => {
     // on their own these two frames would be cut at 10 and at 150
@@ -497,7 +589,7 @@ describe('an image shown smaller than it is', () => {
   };
 
   it('gives each pixel of a smaller picture what its image pixel is in the full conversion', () => {
-    for (const style of ['cutout', 'lines', 'solid', 'silhouette']) {
+    for (const style of ['cutout', 'lines', 'solid', 'stencil', 'silhouette']) {
       for (const threshold of [null, 90]) {
         const full = mask(img, style, threshold);
         for (const [mw, mh] of SIZES) expect([...mask(img, style, threshold, mw, mh)], `${style} ${threshold} ${mw}x${mh}`).toEqual(picked(full, mw, mh));
@@ -506,7 +598,7 @@ describe('an image shown smaller than it is', () => {
   });
 
   it('converts the whole image when no size is asked for, or its own', () => {
-    for (const style of ['cutout', 'lines', 'solid', 'checker', 'hatch', 'bayer', 'noise', 'atkinson', 'silhouette']) {
+    for (const style of ['cutout', 'lines', 'solid', 'stencil', 'checker', 'hatch', 'bayer', 'noise', 'atkinson', 'silhouette']) {
       expect([...mask(img, style, null, w, h)], style).toEqual([...mask(img, style)]);
     }
   });
@@ -792,7 +884,7 @@ describe('docs/styles.md', () => {
   it('shows, for every style, exactly what the code draws for the preview ball', () => {
     const doc = readFileSync(new URL('../../docs/styles.md', import.meta.url), 'utf8').replace(/\r\n/g, '\n');
     const ball = previewBall();
-    for (const style of ['cutout', 'lines', 'solid', 'checker', 'hatch', 'bayer', 'noise', 'atkinson', 'silhouette']) {
+    for (const style of ['cutout', 'lines', 'solid', 'stencil', 'checker', 'hatch', 'bayer', 'noise', 'atkinson', 'silhouette']) {
       const title = `## ${style[0].toUpperCase()}${style.slice(1)}\n`, from = doc.indexOf(title);
       expect(from, title).toBeGreaterThan(-1);
       const section = doc.slice(from, doc.indexOf('\n## ', from + 1));
@@ -816,6 +908,7 @@ describe('docs/styles.md', () => {
       side(['hatch', { direction: '\\' }], ['hatch', { direction: '-' }], ['hatch', { spacing: 5 }]),
       side(['bayer', { matrix: 2 }], ['bayer', { matrix: 8 }]),
       side(['atkinson', { diffusion: 'floyd' }], ['atkinson', { diffusion: 'stucki' }]),
+      side(['stencil', { outline: 'trim' }], ['stencil', { cuts: 70 }], ['stencil', { edges: 70 }]),
     ];
     for (const [n, drawn] of examples.entries()) expect(doc, `example ${n + 1}`).toContain('```\n' + drawn + '\n```');
   });

@@ -98,6 +98,18 @@ smaller `mw` by `mh` it converts a smaller picture of the image, which is what a
 Cost per pixel converted, desktop, Node: Solid 1.3 to 2.5 ns, the patterns 3 to 6, Lines 8
 to 12, Cutout 14 to 20. It is about the same at every picture size.
 
+- **Stencil judges each sprite by its own outline**, so it first needs to know every
+  sprite: `sprites` walks each one once and keeps two bytes per pixel with the analysed
+  image (its outline level and the mean brightness of its inside), so the walk is done once
+  however often the settings change. It is done on the first Stencil conversion, not in
+  `analyze`, so an image never shown in Stencil never pays for it, and a tile's smaller
+  picture reads the same two arrays. A photo has no empty pixel and skips the walk. The
+  walk briefly holds four more bytes for every pixel. In Node on a desktop, the first
+  Stencil mask of a 2048 by 2048 image with see-through parts took 156 ms and the ones
+  after it 67 ms, where Lines took 50 ms; at 4000 by 3000 the first took about 0.7 s
+  longer than the ones after it. A very large see-through image will stall a phone for
+  some seconds the first time it is shown in Stencil. That is not solved.
+
 ### What a tile draws (`shown` in `src/lib/layout.js`, used by `src/Tile.svelte`)
 
 A tile measures the square its image sits in and asks `shown` for the size of the picture

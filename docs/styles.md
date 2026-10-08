@@ -1,6 +1,6 @@
 # Conversion styles
 
-How each of Bitify's nine styles decides which of the two colors a pixel gets, and what each
+How each of Bitify's ten styles decides which of the two colors a pixel gets, and what each
 style's own settings change. The code is in [src/lib/bitify.js](../src/lib/bitify.js); the
 tests beside it pin every rule described here. The settings are listed in
 [src/lib/settings.js](../src/lib/settings.js).
@@ -274,6 +274,84 @@ brighter, so it is the second. All shading inside each group is lost.
 
 This is the classic 1-bit conversion. It suits art that already reads as two tones, and it
 is the most predictable style to tune by hand.
+
+## Stencil
+
+The whole sprite is the second color, and only its darkest inner lines are cut out of it
+in the first. It takes no notice of shading. It is made for icons in one color: set the
+first color to None (see [palettes.md](palettes.md)) and the cuts are holes.
+
+- A **sprite** is a group of solid pixels that touch, diagonals included. An image of
+  sixteen separate icons has sixteen sprites.
+- A pixel is on a sprite's **outline** when one of the four pixels beside it is empty. Its
+  **outline level** is the brightness of the darkest pixel on its outline.
+- A pixel on the outline is the second color.
+- A pixel inside is cut, the first color, when its brightness is no more than its sprite's
+  outline level plus Cuts. One that touches empty space at a corner is never cut.
+- A sprite whose inside is on the whole that dark (the mean brightness of its inside pixels
+  is no more than its outline level plus Cuts) has no line art to cut, only its own color.
+  It is left whole. So a flat shape with no outline drawn stays a shape, and a dark sprite
+  is not hollowed out.
+
+```
+    ......
+   ........
+  ..........
+ ............
+..............
+..............
+..............
+..............
+..............
+..............
+ ............
+  ..........
+   ........
+    ......
+```
+
+The ball's outline has a brightness of 25 and its stripe is far lighter than 45, so nothing
+is cut and the ball is one shape. Each sprite is judged by its own outline, so a sheet of
+differently colored icons converts as well as the same icons one file each.
+
+An image with no empty pixel is one sprite with no outline; its level is its darkest
+brightness.
+
+Its settings:
+
+- **Cuts**, 0 to 100, default 20: how much lighter than the outline an inside pixel may be
+  and still be cut. Higher values cut dark shading as well. Once Cuts reaches the brightness
+  of a sprite's inside as a whole, that sprite is left whole instead.
+- **Outline**, Keep or Trim: Keep leaves the outline the second color, so the shape is full
+  size and thin parts survive. Trim makes it a cut: in two colors that draws the sprite's
+  own outline, in one color it takes a pixel off all round.
+- **Edges**, Off or 1 to 100%: also cuts the darker side of a color change stronger than
+  `255 − 2 × Edges`, between pixels inside the sprite. It finds parts that no dark line
+  separates.
+- Brightness and Opacity cut (see "Settings" above). Stencil has no threshold.
+
+Outline Trim, Cuts 70 and Edges 70%:
+
+```
+    ######           ......           ......
+   #......#         ........         ........
+  #........#       ..........       ..........
+ #..........#     ............     ............
+#............#   ..............   ..............
+#............#   ..............   ..............
+#............#   ..............   ..............
+#............#   .############.   .#########....
+#............#   .############.   ..............
+#............#   ..##########..   ..............
+ #..........#     ............     ............
+  #........#       ..........       ..........
+   #......#         ........         ........
+    ######           ......           ......
+```
+
+Known limits: its cuts are sparser than a hand-drawn icon's; a sprite whose outline is no
+darker than its inside gets none; and a part in the outline's own color more than a pixel
+or two wide becomes a hole.
 
 ## Lines
 
@@ -717,6 +795,7 @@ to show.
 |---|---|
 | Filled shapes with their parts cut apart, the End of End look | Cutout |
 | Clean two-tone shapes | Solid |
+| An icon in one color, with its details as holes | Stencil, with the first color None |
 | Line art that shows a sprite's parts | Lines |
 | A hint of shading that stays crisp | Checker |
 | Shading that looks drawn with a pen | Hatch |

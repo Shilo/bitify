@@ -25,7 +25,7 @@ const time = (fn, runs = 3) => {
   for (let i = 0; i < runs; i++) { const t = performance.now(); out = fn(); best = Math.min(best, performance.now() - t); }
   return [best, out];
 };
-const STYLES = ['cutout', 'solid', 'lines', 'silhouette', 'checker', 'hatch', 'bayer', 'noise', 'atkinson'];
+const STYLES = ['cutout', 'solid', 'stencil', 'lines', 'silhouette', 'checker', 'hatch', 'bayer', 'noise', 'atkinson'];
 const sizes = [[512, 512], [2048, 2048], [4000, 3000]];
 const rows = {};
 for (const [w, h] of sizes) for (const alpha of [false, true]) {

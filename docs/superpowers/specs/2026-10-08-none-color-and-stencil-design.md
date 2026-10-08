@@ -123,6 +123,11 @@ the first color None the cuts are holes.
 - A pixel inside is a cut when its brightness is no more than its sprite's outline level
   plus **Cuts**, or when **Edges** is on and it is on the darker side of a color change
   stronger than the edge strength. Otherwise it is the second color.
+- A sprite whose inside is on the whole that dark is left whole: when the mean brightness
+  of its inside pixels is no more than its outline level plus Cuts, none of them is cut for
+  being dark. Such a sprite has no line art, only its own color. Without this a flat shape
+  with no outline drawn, or a dark sprite at a high Cuts, would be hollowed out. (Found
+  while building: the first rule did hollow them.)
 - A pixel inside that touches empty space at a corner is never a cut. Where an outline
   turns a corner it is often two pixels thick, and the inner one would be left as a speck.
 
@@ -131,7 +136,7 @@ is judged against its own outline, which is why a sheet of differently colored i
 converts as well as the same icons one file each.
 
 An image with no empty pixel is one sprite with no outline. Its outline level is the
-image's darkest brightness.
+image's darkest brightness, and all its pixels are inside.
 
 The difference between two pixels and the tie on equal brightness are the ones Lines uses.
 
@@ -139,7 +144,7 @@ The difference between two pixels and the tie on equal brightness are the ones L
 
 | Setting | Values | Default | What it does |
 |---|---|---|---|
-| Cuts | 0 to 100 | 20 | How much lighter than its sprite's outline an inside pixel may be and still be cut. At 0 only pixels as dark as the outline are cut. Higher values cut dark shading too, and far enough up a dark sprite is hollowed out. |
+| Cuts | 0 to 100 | 20 | How much lighter than its sprite's outline an inside pixel may be and still be cut. At 0 only pixels as dark as the outline are cut. Higher values cut dark shading too. Once it reaches the brightness of a sprite's inside as a whole, that sprite is left whole. |
 | Outline | Keep, Trim | Keep | Keep leaves the outline as the second color, so the shape is full size and thin parts survive. Trim makes the outline a cut: in two colors that draws the sprite's own outline, in one color it takes one pixel off all round. |
 | Edges | Off, or 1 to 100% | Off | Also cuts along strong color changes inside the sprite, such as an emblem on a book. The edge strength is `255 − 2 × Edges`: a change counts when the largest of the red, green and blue differences is above it. |
 | Brightness | Luma, Value, R, G, B | Luma | As in the other styles. |
@@ -163,9 +168,10 @@ Stencil is always in the list. It does not look at the colors.
 
 - Each pixel of a smaller picture is exactly what its image pixel is in the full
   conversion, as in Cutout, Lines, Solid and Silhouette.
-- The outline levels are found once for an analysed image, the first time Stencil converts
-  it, and kept with the analysis. An image with no empty pixel needs none found. Finding
-  them walks every sprite once and briefly needs four bytes for each pixel of the image.
+- Each sprite's outline level and the mean brightness of its inside are found once for an
+  analysed image, the first time Stencil converts it, and kept with the analysis. An image
+  with no empty pixel needs no walk. Finding them walks every sprite once, keeps two bytes
+  for each pixel and briefly needs four more.
 - Each frame of an animation has its own outline levels. A sprite whose outline changes
   brightness between frames could change its cuts between frames.
 
@@ -179,7 +185,7 @@ side, Outline Trim, Cuts 70 and Edges 70%.
 
 - Cut lines are sparser than in a hand-drawn icon. Cuts and Edges add more at the cost of
   noise.
-- A sprite whose outline is no darker than its inside gets few cuts or none.
+- A sprite whose outline is no darker than its inside gets no cuts.
 - A part drawn in the outline's own color and more than a pixel or two wide becomes a hole.
 
 ### Considered and left out

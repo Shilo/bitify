@@ -179,6 +179,47 @@ export function unify(frames) {
   return frames;
 }
 
+// What Stencil needs to know of each sprite, held for every solid pixel of it: `level`, the
+// brightness of the darkest pixel on the sprite's outline, and `body`, the mean brightness of the
+// pixels inside it. A sprite is a group of solid pixels that touch, diagonals included, and a
+// pixel is on its outline when one of the four pixels beside it is empty or off the canvas; the
+// rest are inside. An image with no empty pixel is one sprite with no outline: its level is the
+// image's darkest brightness and its body the mean of all its pixels.
+// Each sprite is walked once, outwards from its first pixel, with `queue` holding the pixels found.
+// ponytail: the queue is four bytes for every pixel of the image, a moment's 48 MB for 12
+// megapixels with see-through parts. Label the sprites row by row if that ever matters.
+function sprites(img) {
+  const { w, h, lum, data, hist, cut = ALPHA_CUT } = img, level = new Uint8Array(w * h), body = new Uint8Array(w * h);
+  if (!img.hasAlpha) {
+    let sum = 0;
+    for (let l = 0; l < 256; l++) sum += l * hist[l];
+    return { level: level.fill(img.lo), body: body.fill(sum / (w * h)) };
+  }
+  const seen = new Uint8Array(w * h), queue = new Int32Array(w * h);
+  for (let start = 0; start < w * h; start++) {
+    if (seen[start] || data[start * 4 + 3] < cut) continue;
+    let n = 0, low = 255, inside = 0, sum = 0;
+    queue[n++] = start;
+    seen[start] = 1;
+    for (let i = 0; i < n; i++) {
+      const p = queue[i], x = p % w, y = (p - x) / w;
+      let rim = x === 0 || y === 0 || x === w - 1 || y === h - 1;
+      for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+        const X = x + dx, Y = y + dy;
+        if (X < 0 || Y < 0 || X >= w || Y >= h) continue;
+        const q = Y * w + X;
+        if (data[q * 4 + 3] < cut) { if (!dx || !dy) rim = true; }
+        else if (!seen[q]) { seen[q] = 1; queue[n++] = q; }
+      }
+      if (!rim) { inside++; sum += lum[p]; }
+      else if (lum[p] < low) low = lum[p];
+    }
+    const mean = inside ? sum / inside : 0;
+    for (let i = 0; i < n; i++) { level[queue[i]] = low; body[queue[i]] = mean; }
+  }
+  return { level, body };
+}
+
 // The styles that turn brightness into a pattern.
 const PATTERNS = [...Object.keys(TILES), 'atkinson'];
 
@@ -201,7 +242,7 @@ const spread = (n, m) => Int32Array.from({ length: m }, (_, i) => Math.floor(((i
 // stippled transparency) would have the same part of its texture picked every time, and come
 // out all light or all dark.
 //
-// In Cutout, Lines, Solid and Silhouette each pixel of the picture is exactly what the image
+// In Cutout, Solid, Stencil, Lines and Silhouette each pixel of the picture is exactly what the image
 // pixel it stands for is in the full mask. The pattern styles and Atkinson are instead drawn
 // afresh on the picture's own pixels, because their look comes from how neighbouring pixels
 // alternate, and pixels picked from a pattern do not alternate as the pattern does.
@@ -288,6 +329,32 @@ export function mask(img, style, set = null, mw = img.w, mh = img.h) {
       if (own === 2) m[o] = seam && !beside && !corner(p, L, R, U, D, 0) ? 1 : 2;
       // a dark pixel on the silhouette with no light pixel around it becomes a light rim, unless rims are off
       else m[o] = seam || (rim && beside && l !== 2 && r !== 2 && u !== 2 && d !== 2 && !corner(p, L, R, U, D, 2)) ? 2 : 1;
+    }
+    return m;
+  }
+
+  if (style === 'stencil') {
+    // Every solid pixel is the second color but the cuts: inside pixels about as dark as their
+    // sprite's own outline, and with Edges the darker side of a strong color change. A sprite
+    // whose inside is on the whole that dark has no line art to cut, only its own color, and is
+    // left whole. The outline itself is kept, or cut when it is trimmed. The canvas edge is empty
+    // only for sprites, as in Lines. What is known of the sprites is found once for an analysed
+    // image and kept with it.
+    const { level, body } = (img.sprites ??= sprites(img)), edge = img.hasAlpha;
+    // no two pixels differ by more than 255, so with Edges off nothing is strong enough
+    const cuts = opt.cuts ?? 20, trim = opt.outline === 'trim', strength = 255 - 2 * (opt.edges ?? 0);
+    for (let j = 0, o = 0; j < mh; j++) for (let i = 0, y = ys[j]; i < mw; i++, o++) {
+      const x = xs[i], p = y * w + x;
+      if (!solid(p)) continue;
+      if ((x ? !solid(p - 1) : edge) || (x + 1 < w ? !solid(p + 1) : edge) || (y ? !solid(p - w) : edge) || (y + 1 < h ? !solid(p + w) : edge)) m[o] = trim ? 1 : 2;
+      else {
+        const seam =
+          (x && right[p - 1] > strength && darker(p, p - 1)) || (x + 1 < w && right[p] > strength && darker(p, p + 1)) || (y && down[p - w] > strength && darker(p, p - w)) || (y + 1 < h && down[p] > strength && darker(p, p + w));
+        // an inside pixel that touches empty space at a corner is never cut: there an outline two pixels thick would leave a speck
+        const corner = !solid(p - w - 1) || !solid(p - w + 1) || !solid(p + w - 1) || !solid(p + w + 1);
+        const dark = level[p] + cuts; // as dark as this is as dark as the outline
+        m[o] = !corner && (seam || (lum[p] <= dark && body[p] > dark)) ? 1 : 2;
+      }
     }
     return m;
   }
