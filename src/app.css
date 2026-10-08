@@ -412,6 +412,13 @@ button { font: inherit; color: inherit; }
 /* A dot marks a setting that is not at its default: after its value on a chip, after its name in the tray. */
 .chip.changed b::after, .row .key.changed::after { content: " \2022"; }
 .row .key.changed::after { color: var(--fg); font-weight: 600; }
+/* A style with no settings to show (Silhouette, with no soft-edged image on the wall) has no
+   chips for its button to make room for. The button then fills the row and has its words back:
+   "Style", the style's name, and the caret at the far end. */
+.bare .pick { flex: 1; }
+.bare .pick .key, .bare #style-name { display: inline; }
+.bare .pick .btn { flex: 1; justify-content: flex-start; padding: 0 14px 0 8px; }
+.bare .pick .ico { margin-left: auto; }
 .chip.reset { flex-direction: row; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; } /* the last in the row: all the style's settings back to their defaults */
 .chip:disabled { opacity: 0.4; cursor: default; }
 /* the list of styles, opened by the style button; it sits above the panel, lined up with its left edge */

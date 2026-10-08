@@ -732,7 +732,9 @@ style did before it had settings.
   every cut. So its row in the tray and its chip are shown only while an image on the wall
   has such a pixel, and on the empty screen only if the example has one, which the logo does
   not. Without it Silhouette has no settings at all: its strip has the style button and
-  nothing else, with no More button, and on a phone its panel is one row. A value set while
+  nothing else, with no More button, and on a phone its panel is one row, in which the style
+  button is as wide as the panel and has its words back ("Style", the style's name, and the
+  caret at the far end), since there are no chips to make room for. A value set while
   it showed stays stored and is not counted as a change while it is hidden: it lights
   neither a dot nor Reset, and comes back with the control when such an image is added.
   Whether an image has such a pixel is found in the pass over its pixels that the analysis

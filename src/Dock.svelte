@@ -256,7 +256,7 @@
       </div>
     </div>
   {:else if panel === 'style'}
-    <div class="panel" bind:offsetHeight={panelHeight}>
+    <div class="panel" class:bare={chips && !keys.length} bind:offsetHeight={panelHeight}>
       <div class="pick anchor">
         {#if pop === 'styles'}
           <div class="menu" role="group" aria-label="Style" use:reveal onwheel={e => (e.currentTarget.scrollLeft += e.deltaY)}>
@@ -273,7 +273,7 @@
         </button>
       </div>
       {#if chips && !keys.length}
-        <!-- a style with no settings to show: the style button alone -->
+        <!-- a style with no settings to show: the style button alone, as wide as the panel (.bare in app.css) -->
       {:else if chips}
         <div class="setbox">
         <div class="sets" role="group" aria-label="Settings" bind:this={chipRow} onscroll={fades} onwheel={e => (e.currentTarget.scrollLeft += e.deltaY)}>
