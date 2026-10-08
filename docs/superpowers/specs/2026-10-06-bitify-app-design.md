@@ -466,8 +466,9 @@ scaffolding and are not part of the app.
 
 ### Quick switch
 
-The style and the palette can be changed from anywhere, without opening a panel. The style
-is the main one, on the up-and-down axis; the palette is on the sideways axis.
+The style and the palette can be changed without opening a panel: by the wheel or a swipe
+over the top bar, the wall or the empty screen, and by the arrow keys from anywhere. The style is the
+main one, on the up-and-down axis; the palette is on the sideways axis.
 
 | | Next or previous style | Next or previous palette |
 |---|---|---|
@@ -482,27 +483,33 @@ styles, the palettes in the order of the palettes panel.
 Each step shows a short message under the top bar for 1.4 seconds, with what changed, its
 name and its place: "Style: Bayer · 6/9", "Palette: Game Boy · 5/12".
 
+**Only the background steps.** The wheel and a swipe step only while the pointer or finger
+is over the top bar, the wall (the tiles and the space around them) or the empty screen,
+and not over a button or link there: the top bar's buttons, a tile's buttons, the empty
+screen's button. Over the dock, a panel, a menu, a sheet or the help they never step, so a
+move that just misses a row that scrolls, or lands on a panel with nothing to scroll,
+changes nothing. A swipe is judged by where it starts.
+
 **Nothing that scrolls is taken over.** Before acting, the app looks at what is under the
 pointer or finger, and at everything that contains it:
 
 - If any of it has more content than it shows, the wheel belongs to it and no step is
-  taken. That covers the wall once it has too many images to fit, the empty screen on a
-  very short window, and the palettes panel while its chips scroll. The wheel never goes
-  on to change the style when such an element reaches its end.
+  taken. That covers the wall once it has too many images to fit and the empty screen on a
+  very short window. The wheel never goes on to change the style when such an element
+  reaches its end.
 - A finger is judged on the axis it first moves along. Moving up or down over a wall that
   scrolls is the wall's own scroll; moving sideways there still steps the palettes, since
-  the wall does not scroll that way. Over the palettes panel while its chips scroll it is
-  the other way round.
+  the wall does not scroll that way.
 - An arrow key keeps its own job in a number box, on a slider, and while focus is inside
   something that scrolls on that key's axis.
 - Shift with the wheel is the usual way to scroll sideways, so it is judged on that axis
-  alone: it steps the palettes over a wall that scrolls up and down, and is left to the
-  palettes panel while its chips scroll. The help names Shift.
-- Ctrl with the wheel steps the palettes everywhere. Ctrl with the wheel never scrolls
-  anything, so there is nothing to take over. It would zoom the page; the app stops that.
-  Ctrl with + and − still zooms.
-- So with a wall that scrolls, the wheel changes the style over the top bar and the dock
-  but not over the images. The arrow keys change it from anywhere.
+  alone: it steps the palettes over a wall that scrolls up and down. The help names Shift.
+- Ctrl with the wheel steps the palettes anywhere over the background. Ctrl with the wheel never
+  scrolls anything, so there is nothing to take over. It would zoom the page; the app stops
+  that everywhere, also where it does not step. Ctrl with + and − still zooms.
+- So with a wall that scrolls, the wheel changes the style over the top bar but not over
+  the images; a sideways swipe, Shift or Ctrl with the wheel still change the palette
+  there. The arrow keys change both from anywhere.
 - While the Share sheet, the More menu or the help is open, no step is taken by wheel,
   swipe or key.
 
@@ -518,8 +525,7 @@ Details:
   silence. These numbers live in `wheelSteps` in `src/lib/gesture.js`.
 - A swipe is one finger. It steps after 32px, and again every further 72px, so a flick is
   one step and a long drag goes through several. It keeps to the axis it started on. Two
-  fingers are left to the browser's pinch zoom. A swipe that starts on a slider or a color
-  swatch is that control's own drag.
+  fingers are left to the browser's pinch zoom.
 - A tile that is already being held to compare keeps the gesture: moving the finger then
   does not step.
 - While a swipe is the app's, the browser does not scroll, bounce the page or pull to

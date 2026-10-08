@@ -212,19 +212,24 @@
     return false;
   }
 
-  // The wheel steps the styles wherever it has nothing to scroll. With Shift, with Ctrl or
-  // sideways it steps the palettes. Shift and the wheel scroll sideways, so Shift steps wherever
-  // nothing scrolls that way, the wall included; Ctrl and the wheel never scroll, so Ctrl steps
-  // everywhere. A trackpad pinch also arrives as a wheel event marked Ctrl, with no key pressed.
+  // A wheel or a finger steps only over the background: the top bar, the wall or the empty screen,
+  // and no button of theirs. Never over the dock, a panel or a dialog, where a move that just
+  // misses what scrolls would step by mistake.
+  const onWall = e => e.target.closest?.('.bar, .grid, .empty') && !e.target.closest('button, a');
+
+  // The wheel steps the styles over the wall wherever it has nothing to scroll. With Shift, with
+  // Ctrl or sideways it steps the palettes. Shift and the wheel scroll sideways, so Shift steps
+  // though the wall scrolls up and down; Ctrl and the wheel never scroll, so neither does Ctrl.
+  // A trackpad pinch also arrives as a wheel event marked Ctrl, with no key pressed.
   // That one is left to the browser, which zooms the page, so Ctrl only counts once the keyboard
   // has said so.
   let ctrlHeld = false;
   const wheelStep = wheelSteps();
   function wheel(e) {
-    if (document.querySelector('dialog[open]')) return; // nothing behind an open dialog changes
     // If the browser will not let a Ctrl move be stopped it is about to zoom, and one effect is enough.
     if (e.ctrlKey ? !ctrlHeld || !e.cancelable : scrolls(e.target, e.shiftKey ? 'x' : undefined)) return;
     e.preventDefault(); // or Ctrl and the wheel would zoom the page
+    if (!onWall(e)) return;
     const sideways = Math.abs(e.deltaX) > Math.abs(e.deltaY);
     const dir = wheelStep((sideways ? e.deltaX : e.deltaY) * (e.deltaMode ? 40 : 1), e.timeStamp);
     if (dir) step(e.ctrlKey || e.shiftKey || sideways, dir);
@@ -235,10 +240,9 @@
   let swipe = null; // where the finger was at its last step, and its axis once it has one
   function touchstart(e) {
     const { clientX: x, clientY: y } = e.touches[0];
-    // Two fingers are a pinch, a slider or a color picker keeps its own drag, a press that has
-    // just closed a panel (the Dock stops that one) does nothing else, and nothing behind the
-    // open sheet changes.
-    swipe = e.touches.length === 1 && !e.defaultPrevented && !e.target.closest('input, dialog') ? { x, y } : null;
+    // Two fingers are a pinch, a press that has just closed a panel (the Dock stops that one)
+    // does nothing else, and only the background is swiped: not a button, the dock or a dialog.
+    swipe = e.touches.length === 1 && !e.defaultPrevented && onWall(e) ? { x, y } : null;
   }
   function touchmove(e) {
     if (!swipe) return;
