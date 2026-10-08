@@ -253,8 +253,11 @@ height it has always had there:
   first. A chip shows the setting's name over its value ("Auto", "Off", "70%", "2×"), and
   a dot after the value while that is not the default. The chips scroll sideways by swipe
   or wheel, as the palettes do.
-- Second row: the control of the pressed chip, as wide as the row, then a Reset button (an
-  icon) that works as the tray's does.
+  After the last chip the row ends in a Reset chip (an icon and the word), which works as
+  the tray's Reset does and is disabled while there is nothing to reset.
+- Second row: the control of the pressed chip, as wide as the row. Reset is not on this row
+  because the control needs all of it: on a phone 280px wide, with Auto showing a range,
+  a button beside it left the slider under 50px.
 - The threshold's chip is pressed to begin with, so the panel opens as the strip it was.
   The pressed chip is remembered while the app is open; a style that does not have that
   setting shows its first. The pressed chip is the only thing that says which setting the
@@ -264,8 +267,10 @@ height it has always had there:
 
 **On a phone on its side** (520px high or less, and wider than high) there is the width for
 a tray but not the height: open, it would leave the wall no room at all. So it has the chips
-too, in one row: the style button (preview and caret), the chips, then the pressed chip's
-control and Reset beside them. The panel is one row high, as the strip always was there.
+too, in one row: the style button (preview and caret), the chips with Reset at their end,
+then the pressed chip's control beside them. A screen that is also 520px wide or less (a
+very small phone on its side) keeps the dock's two rows, and its panel is as wide as the
+screen allows, not only as wide as the dock. The panel is one row high, as the strip always was there.
 The list of styles is one row there as well, scrolling sideways by swipe or wheel, because
 two rows do not fit above the strip; it opens with the current style in view. On a screen
 280px high it still fits, over the top bar while it is open.

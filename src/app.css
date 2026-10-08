@@ -359,7 +359,6 @@ button { font: inherit; color: inherit; }
 .panel .seg button { flex: 1 1 auto; min-width: 0; padding: 0 4px; } /* auto: a longer word gets the room it needs before the rest is shared out */
 .foot { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 8px; color: var(--muted); font-size: 12px; }
 .foot .btn { height: 28px; min-width: 0; padding: 0 10px; font-size: 12px; }
-.ib:disabled { opacity: 0.4; cursor: default; }
 /* On a phone every setting is a chip showing its value, in a row that scrolls sideways, and the
    chip that is pressed has its control on the row below. So the panel is two rows high for
    every style, and the wall keeps its room. */
@@ -374,7 +373,8 @@ button { font: inherit; color: inherit; }
 .chip b { font-size: 12px; }
 .chip[aria-pressed="true"] { border-color: var(--fg); background: var(--tile); }
 .chip.changed b::after { content: " \2022"; } /* not at its default */
-.thr .ib { width: var(--hit); height: var(--hit); background: transparent; }
+.chip.reset { flex-direction: row; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; } /* the last in the row: all the style's settings back to their defaults */
+.chip:disabled { opacity: 0.4; cursor: default; }
 /* the list of styles, opened by the style button; it sits above the panel, lined up with its left edge */
 .menu {
   position: absolute; bottom: calc(100% + 10px); left: 0; box-sizing: border-box; max-width: 100%; padding: 8px;
@@ -430,4 +430,11 @@ button { font: inherit; color: inherit; }
   .thr { flex-basis: 100%; }
   .panel > .sep { display: none; } /* dividers only make sense while the panel is a single row */
   .menu { right: 0; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+/* Narrow and short at once: a very small phone on its side. The dock keeps its two rows, which
+   leaves no height for two more, so the panel is the one row of a phone on its side, and as
+   wide as the screen allows instead of only as wide as the dock. */
+@media (max-width: 520px) and (max-height: 520px) and (orientation: landscape) {
+  .panel:not(.fit) { left: 50%; right: auto; width: calc(100vw - 56px); transform: translateX(-50%); }
+  .thr { flex: 1.4 1 0; }
 }

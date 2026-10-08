@@ -268,11 +268,12 @@
               <span>{SETTINGS[key].label}</span><b>{shown(key, own[key])}</b>
             </button>
           {/each}
+          <!-- Reset ends the row, and not the control's, which needs its whole width on a narrow phone. -->
+          <button class="chip reset" disabled={!changed(style, own)} aria-label="Reset {styleName}" title="Reset {styleName}" onclick={reset}>
+            <PixelIcon name="reset" />Reset
+          </button>
         </div>
-        <div class="thr">
-          {@render control(active)}
-          <button class="ib" disabled={!changed(style, own)} aria-label="Reset {styleName}" title="Reset {styleName}" onclick={reset}><PixelIcon name="reset" /></button>
-        </div>
+        <div class="thr">{@render control(active)}</div>
       {:else}
         <span class="sep"></span>
         {#if keys[0] === 'threshold'}
