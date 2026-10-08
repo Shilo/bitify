@@ -188,7 +188,7 @@ button { font: inherit; color: inherit; }
 .sheet[open] { display: grid; gap: 8px; }
 .sheet::backdrop { background: rgba(0, 0, 0, 0.45); }
 .sheet .name { margin: 0 2px 4px; font-size: 13px; text-align: center; }
-/* the More menu: the theme, Help, GitHub and Install, dropped down from the More button at the right end of the top bar */
+/* the More menu: the theme and Install, Help and GitHub, then Reset settings, dropped down from the More button at the right end of the top bar */
 .more {
   inset: calc(env(safe-area-inset-top, 0px) + var(--hit) + 20px) calc(env(safe-area-inset-right, 0px) + 16px) auto auto;
   box-sizing: border-box; max-width: calc(100% - 32px); margin: 0; padding: 6px;
@@ -197,6 +197,16 @@ button { font: inherit; color: inherit; }
 .more[open] { display: grid; gap: 2px; }
 .more::backdrop { background: transparent; }
 .more .btn { box-sizing: border-box; justify-content: flex-start; border-color: transparent; text-decoration: none; color: inherit; }
+.more a .ico:last-child { margin-left: auto; color: var(--muted); } /* at the row's right end: the link opens outside the app */
+.more hr { margin: 4px 6px; border: 0; border-top: 1px solid var(--line); } /* between the menu's three groups */
+.btn.undo { color: var(--undo); } /* Reset settings, in the menu and in its question */
+/* Reset settings's question: the sheet's card in the middle of the screen, Cancel and Reset side by side under the words */
+.confirm { margin: auto; padding: 16px; }
+.confirm[open] { grid-template-columns: 1fr 1fr; }
+.confirm h2, .confirm p { grid-column: 1 / -1; margin: 0; }
+.confirm h2 { font-size: 16px; font-weight: 600; }
+.confirm p { margin-bottom: 8px; color: var(--muted); font-size: 13px; text-wrap: pretty; }
+.confirm .undo { border-color: color-mix(in srgb, var(--undo) 40%, var(--line)); }
 /* The help, which is also the welcome on a first visit: a card in the middle of a dimmed screen.
    On a screen too short for it, it scrolls. */
 .help {
