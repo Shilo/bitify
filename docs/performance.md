@@ -66,7 +66,8 @@ are picked from all of them.
   two arrays Cutout is about 2 times slower and Lines about 3 times (measured by a
   reviewer). They cost 2 more bytes per pixel of memory.
 - An image holds 7 bytes per pixel in all: 4 of RGBA, 1 of brightness, 2 of differences.
-  That is 84 MB for a 12-megapixel photo.
+  That is 84 MB for a 12-megapixel photo. One that has been shown in Stencil holds 3 more
+  (see "Conversion").
 - For an image with no empty pixel, `mask` never reads the RGBA array (`opaque`), which
   keeps a photo's conversion to the three small arrays.
 
@@ -79,7 +80,7 @@ smaller `mw` by `mh` it converts a smaller picture of the image, which is what a
   image pixel `floor((i + 0.5) * n / m)`, the one under its middle (`spread`). The spacing
   is whatever that comes to. It is deliberately not a whole number. See "Whole-number
   steps" under what was thrown away: this is the most important lesson of the work.
-- **Cutout, Lines, Solid, Silhouette** give each pixel of the picture exactly what its
+- **Cutout, Solid, Stencil, Lines, Silhouette** give each pixel of the picture exactly what its
   image pixel is in the full mask, worked out from that pixel's real neighbours in the full
   image. The picture is the full result with pixels left out.
 - **Checker, Hatch, Bayer, Noise and Atkinson are drawn afresh on the picture's pixels.**
@@ -98,17 +99,26 @@ smaller `mw` by `mh` it converts a smaller picture of the image, which is what a
 Cost per pixel converted, desktop, Node: Solid 1.3 to 2.5 ns, the patterns 3 to 6, Lines 8
 to 12, Cutout 14 to 20. It is about the same at every picture size.
 
-- **Stencil judges each sprite by its own outline**, so it first needs to know every
-  sprite: `sprites` walks each one once and keeps two bytes per pixel with the analysed
-  image (its outline level and the mean brightness of its inside), so the walk is done once
-  however often the settings change. It is done on the first Stencil conversion, not in
-  `analyze`, so an image never shown in Stencil never pays for it, and a tile's smaller
-  picture reads the same two arrays. A photo has no empty pixel and skips the walk. The
-  walk briefly holds four more bytes for every pixel. In Node on a desktop, the first
-  Stencil mask of a 2048 by 2048 image with see-through parts took 156 ms and the ones
-  after it 67 ms, where Lines took 50 ms; at 4000 by 3000 the first took about 0.7 s
-  longer than the ones after it. A very large see-through image will stall a phone for
-  some seconds the first time it is shown in Stencil. That is not solved.
+- **Stencil judges each sprite on its own**, so it first needs to know every sprite:
+  `sprites` walks each one once and keeps three bytes per pixel with the analysed image
+  (its outline level, what Auto cuts up to, and the median brightness of its inside), so
+  the walk is done once however often the settings change. `spritesOf` does it the first
+  time it is asked, not `analyze`, so an image never shown in Stencil never pays for it,
+  and a tile's smaller picture reads the same arrays.
+  - A photo has no empty pixel and skips the walk.
+  - The walk holds five more bytes for every pixel while it runs: 60 MB for 12 megapixels.
+  - In Node on a desktop the first Stencil mask of a 2048 by 2048 image with see-through
+    parts took about 80 ms longer than the ones after it, and of a 4000 by 3000 one
+    between 0.3 and 1.3 s longer, the most on a machine that was busy. `node bench/bench.mjs` shows it as "stencil first".
+  - The walk is not part of a tile's `pace`: `Tile.svelte` asks for the sprites before it
+    starts its clock, so the first drag of a slider in Stencil is drafted no rougher than
+    the next.
+  - **Not solved:** a very large see-through image stalls a phone for some seconds the
+    first time it is shown in Stencil. That is also paid when Stencil is only stepped
+    past, since it is third in the list, and again after each change of Brightness or
+    Opacity cut, which analyses the image afresh. A cap on size was turned down: above it
+    a large sheet of sprites would be judged as one sprite, which is the case the walk is
+    for.
 
 ### What a tile draws (`shown` in `src/lib/layout.js`, used by `src/Tile.svelte`)
 
@@ -396,7 +406,7 @@ since adding is already asynchronous; it would not make it finish sooner.
    of the image, the spinner turning while the page is busy, and real touch on the slider.
 2. **Adding and saving a photo still stall the page**: about 1.1 s and 0.6 s for 12
    megapixels on the Pixel. A message shows, but nothing else responds. A worker is the fix.
-3. **Memory is 7 bytes per pixel per image.** Of the 84 MB a 12-megapixel photo holds, 48
+3. **Memory is 7 bytes per pixel per image, and 10 for one that has been shown in Stencil.** Of the 84 MB a 12-megapixel photo holds, 48
    are its RGBA pixels, which after analysis are read only for the compare view and for
    transparency. Letting them go, and reading the file again to compare, would more than
    halve it. Several photos can still exhaust a phone.

@@ -1,5 +1,5 @@
 <script>
-  import { analyze, mask, hexToRgb, autoThreshold } from './lib/bitify.js';
+  import { analyze, mask, hexToRgb, autoThreshold, spritesOf } from './lib/bitify.js';
   import { unify } from './lib/bitify.js';
   import { saveOne, saveAll, copyOne, pngBlob } from './lib/save.js';
   import { fitGrid } from './lib/layout.js';
@@ -78,11 +78,13 @@
   // The logo, shown on the empty screen as a live preview of the settings. Never saved or counted.
   let example = $state.raw(null);
   // The lowest and highest value Auto is using for the images on screen, for the Dock to show:
-  // of the threshold, and of Cutout's seam strength.
+  // of the threshold, of Cutout's seam strength, and of Stencil's Cuts. An image's sprites are
+  // only looked for while Stencil is the style: finding them walks the whole image.
   const autos = $derived.by(() => {
     const imgs = (items.length ? items : example ? [example] : []).map(i => i.img);
     const range = of => (imgs.length ? [Math.min(...imgs.map(of)), Math.max(...imgs.map(of))] : [128, 128]);
-    return { threshold: range(img => autoThreshold(img, style)), seams: range(img => img.autoSeam) };
+    const cuts = style === 'stencil' && imgs.length ? [Math.min(...imgs.map(img => spritesOf(img).cuts[0])), Math.max(...imgs.map(img => spritesOf(img).cuts[1]))] : [0, 0];
+    return { threshold: range(img => autoThreshold(img, style)), seams: range(img => img.autoSeam), cuts };
   });
   // Size of the area the wall can use, measured from the page (see .probe in app.css).
   let wallWidth = $state(0);

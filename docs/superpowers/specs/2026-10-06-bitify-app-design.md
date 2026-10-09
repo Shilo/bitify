@@ -164,7 +164,9 @@ each chip's name is its tooltip. Where each pair comes from is in
 
 The panel is as wide as its chips when the screen has room for them in one row. When it
 does not, the chips go in two rows, seven in each with the None chips last, in the same
-order and without the dividers. The panel is then taller, and the wall makes room for it as for any
+order and without the dividers. On a touch screen the chips of two rows are 40px with a
+5px gap, so that all fourteen fit a phone from 360px wide and the None chips are in view
+without scrolling. The panel is then taller, and the wall makes room for it as for any
 panel. A screen too short to spare the height, such as a phone on its side, keeps one row.
 
 Chips that still do not fit scroll sideways, by touch, by keyboard focus or with a mouse
@@ -211,7 +213,9 @@ turning None off brings it back.
 
 - Two **None chips** end the row of palettes, with no label. The first makes the first
   color None, the second the second color. A chip looks like a palette chip of the current
-  two colors, with the missing color's half shown as the checkerboard of the wall.
+  two colors, with the missing color's half shown as the checkerboard of the wall and a
+  slash from its corner, as on the swatch. Beside a dark color the checkerboard alone
+  would read as one more dark half.
 - A None chip is pressed, with the ring a chosen palette has, while its color is None.
   Pressing it again turns None off. Pressing the other moves None to the other color.
 - Their tooltips and names for screen readers are "No color for lines and dark pixels" and
@@ -238,7 +242,8 @@ current style's other settings a press away. Left to right:
   live preview of the current style (a small shaded ball with a stripe, drawn with the
   current two colors) and the style's name. Pressing it
   opens the list of the ten styles above the strip, each with the same live preview and its
-  name, in two rows of five. Choosing a style closes the list. So does a press outside it, or
+  name, in two rows of five. On a phone too short to show them all above the panel, the
+  list scrolls. Choosing a style closes the list. So does a press outside it, or
   Escape; either leaves the strip open.
 - Threshold: a slider from 1 to 254, then a number box and an Auto button joined into one
   outlined control, so it is clear that Auto fills in the number. The Auto half is filled
@@ -247,8 +252,9 @@ current style's other settings a press away. Left to right:
   While Auto is on, the box shows the value Auto picked, or the range when images differ.
   The box is just wide enough for three digits, has no spinner arrows, and widens only to
   fit a range. Silhouette has no threshold, and the strip leaves its place empty. Stencil
-  has none either: the slider and number box of its Cuts setting stand there instead, with
-  no Auto half.
+  has none either: its Cuts setting stands there instead, with a slider, number box and
+  Auto of its own. While its Auto is on, the box shows what Auto comes to for the sprites
+  on the wall, least to most.
 - More: a square button with three dots, one above the other, and no word: the same icon as the More button at
   the right end of the top bar, so "more" looks the same wherever it is. It is named "More
   settings" for a screen reader and on hover. It opens the tray (below), and is drawn
@@ -618,7 +624,7 @@ draws a smaller picture of the image, at its own size:
 - The shorter side of the picture is never given fewer than 32 pixels, unless the image has
   fewer. A long thin image would otherwise be drawn in the wrong shape once its few rows
   were rounded.
-- In Cutout, Lines, Solid and Silhouette each pixel of the picture is exactly what the
+- In Cutout, Solid, Stencil, Lines and Silhouette each pixel of the picture is exactly what the
   image pixel it stands for is in the full conversion, worked out from that pixel's real
   neighbours in the full image.
 - Checker, Hatch, Bayer, Noise and Atkinson are instead drawn afresh on the picture's own
@@ -684,7 +690,7 @@ let go:
 |---|---|
 | **Cutout** (default) | A pixel brighter than the threshold is light, every other pixel dark. Then, using those tones: a pixel on the darker side of a change stronger than the seam strength, between two pixels of the same tone, takes the opposite tone; and a dark pixel that touches empty space, with no light pixel among its eight neighbours, becomes light. Dark is first color, light is second. |
 | **Solid** | Brighter than the threshold: second color. Otherwise first color. |
-| **Stencil** | Every non-empty pixel is second color, except the cuts, which are first color. A pixel on its sprite's outline is never a cut unless Outline is Trim, which makes all of them cuts. A pixel inside is a cut when its brightness is no more than its sprite's outline level plus Cuts, unless the sprite's inside is on the whole that dark; or when Edges is on and it is on the darker side of a change stronger than the edge strength. A pixel inside that touches empty space at a corner is never a cut. |
+| **Stencil** | Every non-empty pixel is second color, except the cuts, which are first color. A pixel on its sprite's outline is never a cut unless Outline is Trim, which makes all of them cuts. A pixel inside is a cut when it is as dark as its sprite's cut level or darker, unless that would cut half the sprite's inside or more; or when Edges is on and it is on the darker side of a change stronger than the edge strength. A pixel inside that touches empty space at a corner is never a cut. On Auto the cut level is Otsu's split of the sprite's own pixels; with Cuts set it is the sprite's outline level plus Cuts. |
 | **Lines** | A pixel is first color if any of its four neighbours is empty, or if a neighbour differs from it by more than the threshold and this pixel is the darker of the two. Everything else is second color. |
 | **Checker** | Second color if the tone (see below) is above 0.25 on even `x + y` cells and above 0.75 on odd ones, so mid-tones become a checkerboard. |
 | **Hatch** | Second color if the tone is above 0.75, 0.5 or 0.25 where `(x + y) mod 3` is 0, 1 or 2, so mid-tones become diagonal lines three pixels apart. |
@@ -713,22 +719,32 @@ Details of Stencil:
   shading. With the first color None the cuts are holes, which gives an icon in one color.
 - A sprite is a group of non-empty pixels that touch, diagonals included. A pixel is on its
   outline when one of its four neighbours is empty; the canvas edge counts as empty by the
-  rule Lines uses. The rest of its pixels are inside.
-- A sprite's outline level is the brightness of the darkest pixel on its outline. Each
-  sprite is judged by its own, so a sheet of differently colored icons converts as well as
-  the same icons one file each.
-- When the mean brightness of a sprite's inside pixels is no more than its outline level
-  plus Cuts, none of them is cut for being dark. Such a sprite has no line art, only its
-  own color: a flat shape with no outline drawn, or a dark sprite at a high Cuts. It is
-  left whole instead of hollowed out.
-- An image with no empty pixel is one sprite with no outline. Its outline level is its
-  darkest brightness, and all its pixels are inside.
+  rule Lines uses. The rest of its pixels are inside. Each sprite is judged on its own, so
+  a sheet of differently colored icons converts as well as the same icons one file each.
+- A sprite's outline level is the brightness of the darkest pixel on its outline. With
+  Cuts set to a number, its cut level is that plus Cuts.
+- On Auto, a sprite's cut level is the value Otsu's method picks on the histogram of the
+  brightness of all its pixels, outline included: the lightest brightness of the darker of
+  the two groups it splits them into. The outline is usually most of that group, so the
+  group is the outline's colors and whatever is drawn in them. A sprite of one brightness
+  has nothing to split, and its cut level is its outline level.
+- A sprite is left whole when at least half of its inside pixels are as dark as its cut
+  level or darker: none of them is then cut for being dark. The dark group is then the
+  sprite's own color, not line art: a flat shape with no outline drawn, or a dark sprite.
+  The test is the median brightness of the inside pixels against the cut level.
+- An image with no empty pixel is one sprite with no outline, all of it inside. Its outline
+  level is its darkest brightness. Each frame of an animation is read from its own pixels,
+  not from what the frames share.
 - The edge strength is `255 − 2 × Edges`. The difference between two pixels and the tie on
-  equal brightness are the ones Lines uses.
+  equal brightness are the ones Lines uses. Edges cuts whatever Cuts is, and is not held
+  back by the half rule.
+- While Auto is on, the Cuts box shows the least and the most that Auto comes to for the
+  sprites of the images on the wall, each as its cut level less its outline level, between
+  0 and 254. Sprites with nothing inside are left out.
 
-Known limits of Stencil: its cuts are sparser than a hand-drawn icon's; a sprite whose
-outline is no darker than its inside gets none; a part in the outline's own color more
-than a pixel or two wide becomes a hole.
+Known limits of Stencil: its cuts are blocks where a hand-drawn icon has thin lines, since
+it can only cut what the sprite already has; a sprite with no outline and no dark detail
+is left as its shape; shading as dark as the outline is cut with it.
 
 Details of Lines:
 
@@ -792,7 +808,7 @@ style did before it had settings.
 | Threshold | all but Stencil and Silhouette | Auto, or 1 to 254 | Auto | See "Threshold". |
 | Seams | Cutout | Auto, or 1 to 255 | Auto | The seam strength. Lower values cut along softer changes. No difference is above 255, so 255 cuts no seams. |
 | Rim | Cutout | On, Off | On | Off leaves out the light rim on dark pixels at the silhouette. With Seams at 255 as well, Cutout is Solid. |
-| Cuts | Stencil | 0 to 100 | 20 | How much lighter than its sprite's outline an inside pixel may be and still be cut. At 0 only pixels as dark as the outline are. Once it reaches the mean brightness of a sprite's inside, that sprite is left whole. |
+| Cuts | Stencil | Auto, or 0 to 254 | Auto | How much lighter than its sprite's outline an inside pixel may be and still be cut. At 0 only pixels as dark as the outline are. Auto picks for each sprite (see "Details of Stencil"). A sprite that would lose half its inside or more is left whole. |
 | Outline | Stencil | Keep, Trim | Keep | Keep leaves the outline second color, so the shape is full size and thin parts survive. Trim makes it first color: in two colors that draws the sprite's own outline, and with the first color None it takes one pixel off all round. |
 | Edges | Stencil | Off, or 1 to 100% | Off | Also cuts the darker side of a color change stronger than `255 − 2 × Edges` between pixels inside a sprite, which finds parts that no dark line separates. |
 | Thickness | Lines | 1, 2, 3 | 1 | A solid pixel fewer than this many steps (left, right, up or down) from a line is a line too. |
@@ -917,8 +933,8 @@ in browsers.
   canvas back, which would put stray colors in a saved file.
 - A PNG lists its colors once, as a palette of three (empty, first color, second color, with
   the empty one transparent), and holds two bits for each pixel. A color that is None is
-  transparent too, and its palette entry holds the other color, so a program that blends
-  the picture's edges has no third color to pull in. The picture is exactly the
+  transparent too. The picture then has one color, and all three palette entries hold it,
+  so a program that blends the picture's edges has no other color to pull in. The picture is exactly the
   same as a file with four bytes per pixel would give, but there is a sixteenth of the data
   to compress, so a photo saves several times faster and into a smaller file. An image
   editor opens such a file as an indexed-color image.
@@ -1082,7 +1098,7 @@ it is doing:
     around a light part, never cuts a light pixel on the silhouette, and rims only images
     that have empty pixels;
   - Silhouette fills everything;
-  - a smaller picture has, in Cutout, Lines, Solid and Silhouette, exactly the full
+  - a smaller picture has, in Cutout, Solid, Stencil, Lines and Silhouette, exactly the full
     conversion's value at the image pixel under the middle of each of its pixels, and
     shrinking the original gives the same pixels of it;
   - at every size the patterns and Atkinson come out as light as the full conversion, and

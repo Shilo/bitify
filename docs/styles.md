@@ -29,11 +29,12 @@ Two measurements are used throughout:
 - **Brightness** of a pixel is `0.2126 R + 0.7152 G + 0.0722 B`, rounded, from 0 to 255,
   unless the style's Brightness setting reads it from something else.
 - **Difference** between two pixels is the largest of their red, green and blue differences,
-  from 0 to 255. It is used by Lines and Cutout.
+  from 0 to 255. It is used by Lines, Cutout and Stencil's Edges.
 
 ### The threshold
 
-Every style except Silhouette depends on one number from 1 to 254, the threshold. Each
+Every style except Stencil and Silhouette depends on one number from 1 to 254, the
+threshold. Each
 style keeps its own.
 
 - In **Lines** it is how different two neighbouring pixels must be to count as an edge.
@@ -282,16 +283,21 @@ in the first. It takes no notice of shading. It is made for icons in one color: 
 first color to None (see [palettes.md](palettes.md)) and the cuts are holes.
 
 - A **sprite** is a group of solid pixels that touch, diagonals included. An image of
-  sixteen separate icons has sixteen sprites.
-- A pixel is on a sprite's **outline** when one of the four pixels beside it is empty. Its
-  **outline level** is the brightness of the darkest pixel on its outline.
-- A pixel on the outline is the second color.
-- A pixel inside is cut, the first color, when its brightness is no more than its sprite's
-  outline level plus Cuts. One that touches empty space at a corner is never cut.
-- A sprite whose inside is on the whole that dark (the mean brightness of its inside pixels
-  is no more than its outline level plus Cuts) has no line art to cut, only its own color.
-  It is left whole. So a flat shape with no outline drawn stays a shape, and a dark sprite
-  is not hollowed out.
+  sixteen separate icons has sixteen sprites, and each is judged on its own.
+- A pixel is on a sprite's **outline** when one of the four pixels beside it is empty. The
+  rest of the sprite is **inside**. A pixel on the outline is the second color.
+- **On Auto** the sprite's colors are split into two groups, a dark one and a light one, by
+  Otsu's method on the brightness of all its pixels, outline included. The outline is
+  usually most of the dark group, so that group is the outline's colors and whatever is
+  drawn in them. A pixel inside that belongs to the dark group is cut.
+- **With Cuts set to a number**, the sprite's **outline level** is the brightness of the
+  darkest pixel on its outline, and a pixel inside is cut when its brightness is no more
+  than that level plus Cuts.
+- **A sprite that would lose half its inside or more is left whole.** Then the dark group is
+  not line art but the sprite's own color: a flat shape with no outline drawn, or a dark
+  sprite.
+- A pixel inside that touches empty space at a corner is never cut. Where an outline turns
+  it is often two pixels thick, and the inner one would be left as a speck.
 
 ```
     ......
@@ -301,27 +307,27 @@ first color to None (see [palettes.md](palettes.md)) and the cuts are holes.
 ..............
 ..............
 ..............
-..............
-..............
-..............
+.############.
+.############.
+..##########..
  ............
   ..........
    ........
     ......
 ```
 
-The ball's outline has a brightness of 25 and its stripe is far lighter than 45, so nothing
-is cut and the ball is one shape. Each sprite is judged by its own outline, so a sheet of
-differently colored icons converts as well as the same icons one file each.
+The ball's outline and its stripe are its dark group, and its body the light one. The
+stripe is inside and well under half of the inside, so it is cut; with the first color None
+the ball is one shape with a band cut through it.
 
-An image with no empty pixel is one sprite with no outline; its level is its darkest
-brightness.
+An image with no empty pixel is one sprite with no outline, all of it inside. Its outline
+level is its darkest brightness.
 
 Its settings:
 
-- **Cuts**, 0 to 100, default 20: how much lighter than the outline an inside pixel may be
-  and still be cut. Higher values cut dark shading as well. Once Cuts reaches the brightness
-  of a sprite's inside as a whole, that sprite is left whole instead.
+- **Cuts**, Auto or 0 to 254, default Auto: how much lighter than the outline an inside
+  pixel may be and still be cut. At 0 only pixels as dark as the outline are. While Auto is
+  on, the box shows what Auto comes to for the sprites on the wall, least to most.
 - **Outline**, Keep or Trim: Keep leaves the outline the second color, so the shape is full
   size and thin parts survive. Trim makes it a cut: in two colors that draws the sprite's
   own outline, in one color it takes a pixel off all round.
@@ -330,7 +336,7 @@ Its settings:
   separates.
 - Brightness and Opacity cut (see "Settings" above). Stencil has no threshold.
 
-Outline Trim, Cuts 70 and Edges 70%:
+Outline Trim, Cuts 20, and Cuts 20 with Edges 70%:
 
 ```
     ######           ......           ......
@@ -340,18 +346,18 @@ Outline Trim, Cuts 70 and Edges 70%:
 #............#   ..............   ..............
 #............#   ..............   ..............
 #............#   ..............   ..............
-#............#   .############.   .#########....
-#............#   .############.   ..............
-#............#   ..##########..   ..............
+##############   ..............   .#########....
+##############   ..............   ..............
+#.##########.#   ..............   ..............
  #..........#     ............     ............
   #........#       ..........       ..........
    #......#         ........         ........
     ######           ......           ......
 ```
 
-Known limits: its cuts are sparser than a hand-drawn icon's; a sprite whose outline is no
-darker than its inside gets none; and a part in the outline's own color more than a pixel
-or two wide becomes a hole.
+Known limits: its cuts are blocks where a hand-drawn icon has thin lines, since it can only
+cut what the sprite already has; a sprite with no outline and no dark detail is left as its
+shape; and shading as dark as the outline is cut with it.
 
 ## Lines
 

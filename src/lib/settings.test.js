@@ -19,9 +19,12 @@ describe('the settings of a style', () => {
   });
 
   it('gives Stencil its own settings, with Cuts first', () => {
-    expect(defaults('stencil')).toEqual({ cuts: 20, outline: 'keep', edges: 0, source: 'luma', alpha: 128 });
+    expect(defaults('stencil')).toEqual({ cuts: null, outline: 'keep', edges: 0, source: 'luma', alpha: 128 });
+    expect(allowed('cuts', null)).toBe(true); // Auto
+    expect(shown('cuts', null)).toBe('Auto');
     expect(allowed('cuts', 0)).toBe(true);
-    expect(allowed('cuts', 101)).toBe(false);
+    expect(allowed('cuts', 254)).toBe(true); // as far above the outline as a brightness can be, so that a number can say whatever Auto comes to
+    expect(allowed('cuts', 255)).toBe(false);
     expect(allowed('outline', 'trim')).toBe(true);
     expect(allowed('outline', 'none')).toBe(false);
     expect(shown('edges', 0)).toBe('Off');

@@ -1,5 +1,5 @@
 <script>
-  import { mask, colorize, shrink } from './lib/bitify.js';
+  import { mask, colorize, shrink, spritesOf } from './lib/bitify.js';
   import { shown } from './lib/layout.js';
   import Pixels from './Pixels.svelte';
   import PixelIcon from './PixelIcon.svelte';
@@ -70,6 +70,8 @@
     const frame = frames[at];
     if (flipped !== held) return (originals[at] ??= mw < item.img.w ? new ImageData(shrink(frame.original, mw, mh), mw) : frame.original);
     if (!masks[at]) {
+      // Stencil's first conversion of an image walks all of it, once. That is not the pace of a conversion, so it is done before the clock starts.
+      if (style === 'stencil') spritesOf(frame.img);
       const start = performance.now();
       masks[at] = mask(frame.img, style, set, mw, mh);
       pace = (performance.now() - start) / masks[at].length;

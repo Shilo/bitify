@@ -325,8 +325,15 @@ button { font: inherit; color: inherit; }
 /* Two rows of chips, when Dock.svelte finds that one row does not fit: half the palettes in each,
    without the dividers. A screen too short to spare the height (a phone on its side) keeps one row. */
 @media not all and (max-height: 520px) and (orientation: landscape) {
-  .chips.two { display: grid; grid-template-columns: repeat(var(--cols), var(--hit)); }
+  .chips.two { display: grid; grid-template-columns: repeat(var(--cols), var(--chip, var(--hit))); }
   .chips.two .sep { display: none; }
+}
+/* On a touch screen two rows of seven chips, the None chips last among them, are wider than a
+   phone at the full touch size, and the None chips would be out of sight until the row was
+   scrolled. At 40px, the smallest size the dock's controls go down to, and a narrower gap, they
+   fit screens from 360px wide. */
+@media (pointer: coarse) {
+  .chips.two { --chip: 40px; gap: 5px; }
 }
 /* A side with more palettes to scroll to fades out under an arrow. Dock.svelte sets more-left and
    more-right. Each fade is solid for well over the width of its arrow, so a chip has dissolved
@@ -339,7 +346,7 @@ button { font: inherit; color: inherit; }
 .fit::before { left: 139px; padding-left: 14px; background: linear-gradient(to right, var(--surface) 45%, transparent); }
 .fit::after { content: "\203A"; right: -1px; justify-content: flex-end; background: linear-gradient(to left, var(--surface) 40%, transparent); }
 .fit.more-left::before, .fit.more-right::after { opacity: 1; }
-.pal { flex: none; box-sizing: border-box; width: var(--hit); height: var(--hit); padding: 0; border: 1px solid var(--line); border-radius: 9px; cursor: pointer; }
+.pal { flex: none; box-sizing: border-box; width: var(--chip, var(--hit)); height: var(--chip, var(--hit)); padding: 0; border: 1px solid var(--line); border-radius: 9px; cursor: pointer; }
 .pal[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--fg); }
 .pal:focus-visible { outline-offset: 5px; }
 /* The None chips: the pair a chip gives (--pair, from Dock.svelte) over the wall's checkerboard,
@@ -507,6 +514,9 @@ button { font: inherit; color: inherit; }
   .panel:not(.fit) { box-sizing: border-box; left: 50%; right: auto; width: calc(100vw - 24px); transform: translateX(-50%); }
   .panel > .sep { display: none; } /* dividers only make sense while the panel is a single row */
   .menu { right: 0; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); } /* as many to a row as fit: three on the narrowest phone, 280px wide */
+  /* Ten styles at three to a row are four rows, more than a short phone has room for above the
+     panel. The list then scrolls, inside the room the dock and the panel leave. */
+  .menu { max-height: calc(100dvh - var(--dock-space) - 16px); overflow-y: auto; overscroll-behavior: contain; }
 }
 /* Narrow and short at once: a very small phone on its side. The dock keeps its two rows, which
    leaves no height for two more, so the panel is the one row of a phone on its side, and as

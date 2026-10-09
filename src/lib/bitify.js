@@ -179,31 +179,40 @@ export function unify(frames) {
   return frames;
 }
 
-// What Stencil needs to know of each sprite, held for every solid pixel of it: `level`, the
-// brightness of the darkest pixel on the sprite's outline, and `body`, the mean brightness of the
-// pixels inside it. A sprite is a group of solid pixels that touch, diagonals included, and a
-// pixel is on its outline when one of the four pixels beside it is empty or off the canvas; the
-// rest are inside. An image with no empty pixel is one sprite with no outline: its level is the
-// image's darkest brightness and its body the mean of all its pixels. Both are read from the
-// image's own histogram, since `lo` is shared by all the frames of an animation.
-// The mean is rounded up: Stencil asks whether it is above a whole number, and that way it is
-// asked exactly.
+// What Stencil needs to know of each sprite, held for every solid pixel of it:
+//   `level`  the brightness of the darkest pixel on the sprite's outline, which a Cuts set by hand
+//            counts up from;
+//   `auto`   the brightness Auto cuts up to: Otsu's split of all the sprite's pixels, its outline
+//            among them, so that the dark group is the outline's colors and what is drawn in them;
+//   `body`   the median brightness of the pixels inside the sprite. At least half of them are that
+//            dark or darker, so a cut that reaches it would take half the inside or more.
+// With them comes `cuts`: the least and the most that Auto comes to for the image's sprites, said
+// the way a Cuts set by hand is, as so much above the outline level.
+// A sprite is a group of solid pixels that touch, diagonals included, and a pixel is on its outline
+// when one of the four pixels beside it is empty or off the canvas; the rest are inside. An image
+// with no empty pixel is one sprite with no outline, all of it inside. What is said of that one is
+// read from the image's own histogram, since `lo` and `auto` are shared by all the frames of an
+// animation.
 // Each sprite is walked once, outwards from its first pixel, with `queue` holding the pixels found.
 // ponytail: the walk holds five bytes for every pixel of the image while it runs (`queue` and
 // `seen`), a moment's 60 MB for 12 megapixels with see-through parts. Label the sprites row by
 // row if that ever matters.
 function sprites(img) {
-  const { w, h, lum, data, hist, cut = ALPHA_CUT } = img, level = new Uint8Array(w * h), body = new Uint8Array(w * h);
+  const { w, h, lum, data, hist, cut = ALPHA_CUT } = img, level = new Uint8Array(w * h), auto = new Uint8Array(w * h), body = new Uint8Array(w * h);
+  // the brightness that at least half of the `n` pixels counted in `of` are at or below
+  const median = (of, n) => { for (let l = 0, c = 0; l < 256; l++) if ((c += of[l]) * 2 >= n) return l; return 0; };
   if (!img.hasAlpha) {
-    let low = 0, sum = 0;
+    let low = 0;
     while (low < 255 && !hist[low]) low++;
-    for (let l = 0; l < 256; l++) sum += l * hist[l];
-    return { level: level.fill(low), body: body.fill(Math.ceil(sum / (w * h))) };
+    const t = otsu(hist, low), says = Math.min(254, t - low);
+    return { level: level.fill(low), auto: auto.fill(t), body: body.fill(median(hist, w * h)), cuts: [says, says] };
   }
   const seen = new Uint8Array(w * h), queue = new Int32Array(w * h);
+  const all = new Uint32Array(256), inner = new Uint32Array(256); // how many of the sprite's pixels, and of those inside it, have each brightness
+  let least = 254, most = 0;
   for (let start = 0; start < w * h; start++) {
     if (seen[start] || data[start * 4 + 3] < cut) continue;
-    let n = 0, low = 255, inside = 0, sum = 0;
+    let n = 0, low = 255, inside = 0;
     queue[n++] = start;
     seen[start] = 1;
     for (let i = 0; i < n; i++) {
@@ -216,14 +225,27 @@ function sprites(img) {
         if (data[q * 4 + 3] < cut) { if (!dx || !dy) rim = true; }
         else if (!seen[q]) { seen[q] = 1; queue[n++] = q; }
       }
-      if (!rim) { inside++; sum += lum[p]; }
+      all[lum[p]]++;
+      if (!rim) { inside++; inner[lum[p]]++; }
       else if (lum[p] < low) low = lum[p];
     }
-    const mean = inside ? Math.ceil(sum / inside) : 0;
-    for (let i = 0; i < n; i++) { level[queue[i]] = low; body[queue[i]] = mean; }
+    // a sprite with nothing inside it has nothing to cut, and Auto has nothing to say of it
+    let t = low, mid = 0;
+    if (inside) {
+      t = otsu(all, low);
+      mid = median(inner, inside);
+      const says = Math.min(254, Math.max(0, t - low));
+      if (says < least) least = says;
+      if (says > most) most = says;
+    }
+    // the counts are put back to nothing for the next sprite here, a pixel at a time: clearing all 256 of each for every sprite would cost more than the walk on an image of specks
+    for (let i = 0; i < n; i++) { const q = queue[i]; level[q] = low; auto[q] = t; body[q] = mid; all[lum[q]] = inner[lum[q]] = 0; }
   }
-  return { level, body };
+  return { level, auto, body, cuts: least > most ? [0, 0] : [least, most] };
 }
+// What Stencil knows of an image's sprites, found the first time it is asked for and kept with the
+// analysis. That walks the whole image once, which a caller may want done before it starts a clock.
+export const spritesOf = img => (img.sprites ??= sprites(img));
 
 // The styles that turn brightness into a pattern.
 const PATTERNS = [...Object.keys(TILES), 'atkinson'];
@@ -340,14 +362,14 @@ export function mask(img, style, set = null, mw = img.w, mh = img.h) {
 
   if (style === 'stencil') {
     // Every solid pixel is the second color but the cuts: inside pixels about as dark as their
-    // sprite's own outline, and with Edges the darker side of a strong color change. A sprite
-    // whose inside is on the whole that dark has no line art to cut, only its own color, and is
-    // left whole. The outline itself is kept, or cut when it is trimmed. The canvas edge is empty
-    // only for sprites, as in Lines. What is known of the sprites is found once for an analysed
-    // image and kept with it.
-    const { level, body } = (img.sprites ??= sprites(img)), edge = img.hasAlpha;
+    // sprite's own outline, and with Edges the darker side of a strong color change. How dark
+    // that is, each sprite says for itself on Auto; a Cuts set by hand is so much above each
+    // sprite's outline level. A sprite that would lose half its inside or more that way has no
+    // line art to cut, only its own color, and is left whole. The outline itself is kept, or cut
+    // when it is trimmed. The canvas edge is empty only for sprites, as in Lines.
+    const { level, auto, body } = spritesOf(img), edge = img.hasAlpha;
     // no two pixels differ by more than 255, so with Edges off nothing is strong enough
-    const cuts = opt.cuts ?? 20, trim = opt.outline === 'trim', strength = 255 - 2 * (opt.edges ?? 0);
+    const cuts = opt.cuts ?? null, trim = opt.outline === 'trim', strength = 255 - 2 * (opt.edges ?? 0);
     for (let j = 0, o = 0; j < mh; j++) for (let i = 0, y = ys[j]; i < mw; i++, o++) {
       const x = xs[i], p = y * w + x;
       if (!solid(p)) continue;
@@ -357,7 +379,7 @@ export function mask(img, style, set = null, mw = img.w, mh = img.h) {
           (x && right[p - 1] > strength && darker(p, p - 1)) || (x + 1 < w && right[p] > strength && darker(p, p + 1)) || (y && down[p - w] > strength && darker(p, p - w)) || (y + 1 < h && down[p] > strength && darker(p, p + w));
         // an inside pixel that touches empty space at a corner is never cut: there an outline two pixels thick would leave a speck
         const corner = !solid(p - w - 1) || !solid(p - w + 1) || !solid(p + w - 1) || !solid(p + w + 1);
-        const dark = level[p] + cuts; // as dark as this is as dark as the outline
+        const dark = cuts === null ? auto[p] : level[p] + cuts; // this dark or darker is cut
         m[o] = !corner && (seam || (lum[p] <= dark && body[p] > dark)) ? 1 : 2;
       }
     }

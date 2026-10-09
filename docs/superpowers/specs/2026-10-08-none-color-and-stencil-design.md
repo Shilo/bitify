@@ -54,13 +54,14 @@ is no label.
 
 - The first makes the first color None, the second makes the second color None.
 - A chip looks like a palette chip of the current two colors with the missing color's half
-  shown as the checkerboard of the wall.
+  shown as the checkerboard of the wall, with a slash from its corner as on the swatch.
 - A chip is pressed (`aria-pressed`, with the ring a chosen palette has) while its color is
   None. Pressing it again turns None off. Pressing the other moves None to the other color.
 - Tooltips and names for screen readers: "No color for lines and dark pixels" and "No color
   for fill and light pixels".
 - When the chips are in two rows there are fourteen in all, seven in each row, and the
-  None chips are the last two of the second row.
+  None chips are the last two of the second row. On a touch screen the chips of two rows
+  are 40px with a 5px gap, so all fourteen fit a phone from 360px wide.
 - A preset stays marked by its two colors as before, whether or not one of them is None.
   Choosing a preset or stepping through the palettes changes the colors and leaves None
   where it is.
@@ -86,8 +87,9 @@ second color.
 ### Files
 
 - **PNG.** Still a palette of three and two bits per pixel. The None color's palette entry
-  is marked transparent in `tRNS` and carries the other color's red, green and blue, so an
-  engine that filters the texture does not pull a different color in at the edges. `tRNS`
+  is marked transparent in `tRNS`. The picture then has one color, and all three entries
+  carry its red, green and blue, the empty pixel's too, so an engine that filters the
+  texture has no other color to pull in at the edges. `tRNS`
   is `[0]` with no None (as today), `[0, 0]` with the first color None and `[0, 255, 0]`
   with the second.
 - **GIF.** A GIF frame has one transparent index. Each frame's mask is written with the
@@ -117,42 +119,54 @@ the first color None the cuts are holes.
 - A **sprite** is a group of solid pixels that touch, diagonals included. An image holding
   sixteen separate icons has sixteen sprites.
 - A pixel is on a sprite's **outline** when one of its four neighbours is empty. The canvas
-  edge counts as empty only if the image has an empty pixel, as in Lines and Cutout.
-- A sprite's **outline level** is the brightness of the darkest pixel on its outline.
+  edge counts as empty only if the image has an empty pixel, as in Lines and Cutout. The
+  rest of the sprite is **inside**.
 - A pixel on the outline is the second color, or a cut when Outline is Trim.
-- A pixel inside is a cut when its brightness is no more than its sprite's outline level
-  plus **Cuts**, or when **Edges** is on and it is on the darker side of a color change
-  stronger than the edge strength. Otherwise it is the second color.
-- A sprite whose inside is on the whole that dark is left whole: when the mean brightness
-  of its inside pixels is no more than its outline level plus Cuts, none of them is cut for
-  being dark. Such a sprite has no line art, only its own color. Without this a flat shape
-  with no outline drawn, or a dark sprite at a high Cuts, would be hollowed out. (Found
-  while building: the first rule did hollow them.)
+- Each sprite has a **cut level**. A pixel inside is a cut when it is that dark or darker.
+  - **On Auto** the cut level is Otsu's split of the brightness of all the sprite's pixels,
+    outline included: the lightest brightness of the darker group. The outline is usually
+    most of that group.
+  - **With Cuts set to a number** it is the sprite's **outline level**, the brightness of
+    the darkest pixel on its outline, plus Cuts.
+- **A sprite that would lose half its inside or more is left whole.** The dark group is
+  then the sprite's own color, not line art.
 - A pixel inside that touches empty space at a corner is never a cut. Where an outline
   turns a corner it is often two pixels thick, and the inner one would be left as a speck.
+- When **Edges** is on, a pixel inside is also a cut when it is on the darker side of a
+  color change stronger than the edge strength.
 
 So the sprite's own dark line art is what gets cut, and shading is left alone. Each sprite
-is judged against its own outline, which is why a sheet of differently colored icons
-converts as well as the same icons one file each.
+is judged against itself, which is why a sheet of differently colored icons converts as
+well as the same icons one file each.
 
-An image with no empty pixel is one sprite with no outline. Its outline level is the
-image's darkest brightness, and all its pixels are inside.
+An image with no empty pixel is one sprite with no outline, all of it inside. Its outline
+level is its darkest brightness.
 
 The difference between two pixels and the tie on equal brightness are the ones Lines uses.
+
+### What changed while building
+
+- **Auto was added to Cuts** and is the default. The first design had a fixed Cuts of 20.
+  Four Auto rules were tried on the four sheets and on five test sprites; splitting each
+  sprite's own colors in two gave the most detail and reproduced the hand-drawn potion
+  (an outlined flask with its liquid filled), where a fixed 20 gave a plain bottle.
+- **The half rule was added.** The first design hollowed out a flat sprite with no outline
+  drawn, and Auto would have hollowed any sprite without one.
+- **Cuts goes to 254**, not 100, so that a number can say whatever Auto comes to.
 
 ### Settings
 
 | Setting | Values | Default | What it does |
 |---|---|---|---|
-| Cuts | 0 to 100 | 20 | How much lighter than its sprite's outline an inside pixel may be and still be cut. At 0 only pixels as dark as the outline are cut. Higher values cut dark shading too. Once it reaches the brightness of a sprite's inside as a whole, that sprite is left whole. |
+| Cuts | Auto, or 0 to 254 | Auto | How much lighter than its sprite's outline an inside pixel may be and still be cut. At 0 only pixels as dark as the outline are cut. While Auto is on, the box shows what Auto comes to for the sprites on the wall, least to most. |
 | Outline | Keep, Trim | Keep | Keep leaves the outline as the second color, so the shape is full size and thin parts survive. Trim makes the outline a cut: in two colors that draws the sprite's own outline, in one color it takes one pixel off all round. |
 | Edges | Off, or 1 to 100% | Off | Also cuts along strong color changes inside the sprite, such as an emblem on a book. The edge strength is `255 − 2 × Edges`: a change counts when the largest of the red, green and blue differences is above it. |
 | Brightness | Luma, Value, R, G, B | Luma | As in the other styles. |
 | Opacity cut | 1 to 255 | 128 | As in the other styles, and shown only while an image has a partly see-through pixel. |
 
 Stencil has no Threshold. **Cuts** takes the threshold's place on the strip: on a wide
-screen its slider sits beside the style button and the others are in the tray, and on a
-phone its chip is first.
+screen its slider, number box and Auto sit beside the style button and the others are in
+the tray, and on a phone its chip is first.
 
 ### In one color and in two
 
@@ -162,40 +176,55 @@ Stencil is always in the list. It does not look at the colors.
   sprites where a neater, smaller shape is wanted.
 - In two colors with Trim it is a flat fill with the sprite's own outline and inner lines,
   a tidier Lines.
-- In two colors with Keep it is close to Silhouette in the second color, with a few marks.
+- In two colors with Keep it is close to Silhouette in the second color, with its dark
+  detail drawn in the first.
 
 ### Pictures smaller than the image, animations, speed
 
 - Each pixel of a smaller picture is exactly what its image pixel is in the full
   conversion, as in Cutout, Lines, Solid and Silhouette.
-- Each sprite's outline level and the mean brightness of its inside are found once for an
-  analysed image, the first time Stencil converts it, and kept with the analysis. An image
-  with no empty pixel needs no walk. Finding them walks every sprite once, keeps two bytes
-  for each pixel and briefly needs four more.
-- Each frame of an animation has its own outline levels. A sprite whose outline changes
-  brightness between frames could change its cuts between frames.
+- What Stencil needs to know of each sprite (its outline level, what Auto cuts up to and
+  the median brightness of its inside) is found once for an analysed image, the first time
+  it is asked for, and kept with the analysis: three bytes for each pixel. An image with no
+  empty pixel needs no walk. The walk goes over every sprite once and holds five more
+  bytes for each pixel while it runs.
+- Each frame of an animation has its own sprites. A sprite whose colors change between
+  frames could change its cuts between frames.
+- A very large image with see-through parts stalls a phone for some seconds the first time
+  it is shown in Stencil. That is not solved; see `docs/performance.md`.
 
 ### The preview
 
-On the preview ball Stencil at its defaults is the whole disc in the second color: the
-ball's outline is far darker than its stripe. `docs/styles.md` shows that and, side by
-side, Outline Trim, Cuts 70 and Edges 70%.
+On the preview ball Stencil on Auto is the disc in the second color with the ball's stripe
+cut out of it: the outline and the stripe are the ball's dark group. `docs/styles.md`
+shows that and, side by side, Outline Trim, Cuts 20, and Cuts 20 with Edges 70%.
+
+### How close it comes to hand-drawn icons
+
+Five colored test sprites were converted and set beside the hand-drawn icons three of them
+were modelled on (`docs/superpowers/mockups/stencil-replicate.png`). On Auto the skull has
+its eyes, nose and teeth, the helmet its visor, and the flask is an outline with its liquid
+filled, as in the hand-drawn ones. What it does not do is choose: a hand-drawn icon has
+thin one-pixel cut lines placed for looks, and Stencil cuts whole dark areas where the
+sprite has them.
 
 ### Known limits
 
-- Cut lines are sparser than in a hand-drawn icon. Cuts and Edges add more at the cost of
-  noise.
-- A sprite whose outline is no darker than its inside gets no cuts.
-- A part drawn in the outline's own color and more than a pixel or two wide becomes a hole.
+- Its cuts are blocks where a hand-drawn icon has thin lines.
+- A sprite with no outline and no dark detail is left as its shape.
+- Shading as dark as the outline is cut with it.
 
 ### Considered and left out
 
-- **Dropping single-pixel cuts.** Tried; it changed almost nothing at the default.
+- **Dropping single-pixel cuts.** Tried; it changed almost nothing.
 - **Trimming the outline only where fill is left behind it.** Tried; thin parts came out
   dotted.
-- **The outline level as the middle brightness of the outline.** Tried; sprites with no
-  dark outline were hollowed out. The darkest pixel is safe for both kinds.
-- **Wider cuts** and **a level set by hand**: not tried, no art to judge them on.
+- **Other Auto rules.** Otsu on the inside pixels alone, the widest gap between two of the
+  sprite's brightnesses, and a fixed 20: each gave less detail or hollowed more sprites
+  than the split of all the sprite's pixels with the half rule.
+- **A cap on image size for the walk.** A large sheet of sprites above it would be judged as
+  one sprite.
+- **Wider cuts**: not tried, no art to judge them on.
 - **Hiding Stencil unless a color is None.** It would break stepping through the styles
   and the rule that style and colors are independent.
 
@@ -205,7 +234,7 @@ side, Outline Trim, Cuts 70 and Edges 70%.
 |---|---|
 | `src/lib/presets.js` | Stencil in `STYLES`. `inks(first, second, none, style)`: the two colors as drawn, a None one as `null`. |
 | `src/lib/settings.js` | `cuts`, `outline`, `edges` in `SETTINGS`; Stencil in `STYLE_SETTINGS`; `none` in `DEFAULTS` and `restore`. |
-| `src/lib/bitify.js` | The Stencil branch of `mask` and the outline levels. `colorize` takes `null` for a color. |
+| `src/lib/bitify.js` | The Stencil branch of `mask`, and `sprites` and `spritesOf`, which find and keep what it needs to know of each sprite. `colorize` takes `null` for a color. |
 | `src/lib/save.js`, `src/lib/gif.js` | `pngBytes` and `encodeGif` take `null` for a color. |
 | `src/App.svelte` | `none` state, stored and reset; the drawn colors passed to tiles and to saving. |
 | `src/Dock.svelte`, `src/app.css` | The None chips and swatch; Swap; Cuts on the strip. |
@@ -220,9 +249,12 @@ Unit tests, in the modules' own test files:
   `tRNS` bytes, and a GIF that decodes with the None color's pixels clear.
 - `restore`: `none` kept when 0, 1 or 2 and 0 otherwise; Stencil's settings checked like
   any other style's.
-- Stencil: the outline kept and trimmed; a cut at and just above the outline level; two
-  sprites in one image judged apart; Edges; an opaque image; an all-empty image; a smaller
-  picture equal to the picked pixels of the full mask; the drawings in `docs/styles.md`.
+- Stencil: Auto's split; Cuts at and just above the outline level; the outline kept and
+  trimmed; two sprites in one image judged apart; the half rule at exactly half and just
+  under; Edges; the corner rule; an opaque image and an opaque animation; another
+  brightness source and another opacity cut; sprites that are all outline; a large sprite
+  and very many small ones; an all-empty image; a smaller picture equal to the picked
+  pixels of the full mask; the drawings in `docs/styles.md`.
 - `node bench/equiv.mjs` shows every existing style's masks unchanged, and
   `node bench/bench.mjs` is run before and after.
 

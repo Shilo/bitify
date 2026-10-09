@@ -9,7 +9,7 @@ export const SETTINGS = {
   threshold: { label: 'Threshold', min: 1, max: 254, auto: true, default: null },
   seams: { label: 'Seams', min: 1, max: 255, auto: true, default: null },
   rim: { label: 'Rim', options: [[true, 'On'], [false, 'Off']], default: true },
-  cuts: { label: 'Cuts', min: 0, max: 100, default: 20 },
+  cuts: { label: 'Cuts', min: 0, max: 254, auto: true, default: null },
   outline: { label: 'Outline', options: [['keep', 'Keep'], ['trim', 'Trim']], default: 'keep' },
   edges: { label: 'Edges', min: 0, max: 100, unit: '%', zero: 'Off', default: 0 },
   thickness: { label: 'Thickness', options: [[1, '1'], [2, '2'], [3, '3']], default: 1 },
