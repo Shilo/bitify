@@ -457,7 +457,7 @@ button { font: inherit; color: inherit; }
 .chip:disabled { opacity: 0.4; cursor: default; }
 /* the list of styles, opened by the style button; it sits above the panel, lined up with its left edge */
 .menu {
-  --style-item: 63px; --style-gap: 4px;
+  --style-item: 61px; --style-gap: 4px;
   position: absolute; bottom: calc(100% + 8px); left: -1px; right: -1px; box-sizing: border-box; padding: 6px;
   /* Match the parent's border edges and fit as many compact buttons as its width allows. */
   display: grid; gap: var(--style-gap);
