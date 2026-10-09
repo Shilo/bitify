@@ -49,22 +49,28 @@ The color under a None is remembered. Turning None off brings it back.
 
 ### Palette panel
 
-Two **None chips** end the row of palettes, after the twelve presets and a divider. There
-is no label.
+A small **switch** makes a color None. It is no palette, so it is kept out of the row of
+palettes and sits with the palette's name: under the name on a wide screen, and at the far
+end of the name's row on a phone. It has no label.
 
-- The first makes the first color None, the second makes the second color None.
-- A chip looks like a palette chip of the current two colors with the missing color's half
-  shown as the checkerboard of the wall, with a slash from its corner as on the swatch.
-- A chip is pressed (`aria-pressed`, with the ring a chosen palette has) while its color is
-  None. Pressing it again turns None off. Pressing the other moves None to the other color.
-- Tooltips and names for screen readers: "No color for lines and dark pixels" and "No color
-  for fill and light pixels".
-- When the chips are in two rows there are fourteen in all, seven in each row, and the
-  None chips are the last two of the second row. On a touch screen the chips of two rows
-  are 40px with a 5px gap, so all fourteen fit a phone from 360px wide.
+- It is the dock's view switch at a smaller size, with three segments that hold pictures
+  in place of words: both colors, the first color gone, the second color gone. Pressing a
+  segment sets that state.
+- Each picture is a small square split as a palette chip is, the first color at the top
+  left. A color that is there is filled; one that is gone is a fine checkerboard. The
+  pictures are in the text color, not the palette's.
+- Tooltips and names for screen readers: "Both colors", "No color for lines and dark
+  pixels" and "No color for fill and light pixels".
 - A preset stays marked by its two colors as before, whether or not one of them is None.
   Choosing a preset or stepping through the palettes changes the colors and leaves None
   where it is.
+
+The first build had two None chips at the end of the row of palettes. They read as two more
+palettes, and on a phone they did not fit the row. Three designs were mocked up
+(`docs/superpowers/mockups/2026-10-08-transparent-control.html` and
+`2026-10-08-transparent-control-labels.html`): this switch, a switch that turns
+transparency on with a choice of side after it, and a switch of three words. Labels were
+tried too ("Transparent", "Clear", "Hide", "None", "Alpha") and left out.
 
 ### Dock swatches
 

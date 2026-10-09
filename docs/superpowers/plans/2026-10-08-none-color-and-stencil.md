@@ -8,7 +8,7 @@
 
 **Tech Stack:** Svelte 5 with runes, plain JavaScript, Vitest, Vite. No new dependencies.
 
-**Built, with changes.** Stencil was built differently from the steps below in three ways, found while building and in review: Cuts has an Auto and is Auto by default, a sprite that would lose half its inside or more is left whole, and Cuts goes to 254. The design spec says what was built, under "What changed while building".
+**Built, with changes.** Stencil was built differently from the steps below in three ways, found while building and in review: Cuts has an Auto and is Auto by default, a sprite that would lose half its inside or more is left whole, and Cuts goes to 254. The two None chips of Task 3 were later replaced by a switch beside the palette's name. The design spec says what was built, under "What changed while building".
 
 **Spec:** `docs/superpowers/specs/2026-10-08-none-color-and-stencil-design.md`. Read it first. The mockup is `docs/superpowers/mockups/2026-10-08-none-color.html`.
 

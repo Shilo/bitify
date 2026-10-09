@@ -156,7 +156,7 @@
       mark();
     };
     fit();
-    const chip = row.querySelector('[aria-pressed="true"]');
+    const chip = row.querySelector('.pal[aria-pressed="true"]');
     if (chip) row.scrollLeft = chip.offsetLeft - (row.clientWidth - chip.offsetWidth) / 2;
     row.addEventListener('scroll', mark, { passive: true });
     // the window, not the row: once in two rows the row no longer changes size as the window widens
@@ -242,8 +242,18 @@
       <!-- The scrolling box fills the panel, so a swipe anywhere on the panel moves the palettes.
            A mouse wheel moves them too, since there is no scrollbar to drag. -->
       <div class="pals" use:scroller onwheel={e => (e.currentTarget.scrollLeft += e.deltaY)}>
-        <span class="pname"><span class="key">Palette</span> {PRESETS.find(chosen)?.name ?? 'Custom'}</span>
-        <div class="chips" role="group" aria-label="Palettes" style:--cols={Math.ceil((PRESETS.length + 2) / 2)}>
+        <span class="pname">
+          <span class="title"><span class="key">Palette</span> {PRESETS.find(chosen)?.name ?? 'Custom'}</span>
+          <!-- Which color is None, if either. It is no palette, so it sits with the name, apart from
+               the palettes: a small switch of three pictures, both colors and each color gone
+               (.seg.mini and .glyph in app.css). -->
+          <span class="seg mini" role="group" aria-label="Transparent color">
+            {#each [['Both colors', ''], ['No color for lines and dark pixels', ' first'], ['No color for fill and light pixels', ' second']] as [label, half], n}
+              <button aria-pressed={none === n} aria-label={label} title={label} onclick={() => (none = n)}><span class="glyph{half}"></span></button>
+            {/each}
+          </span>
+        </span>
+        <div class="chips" role="group" aria-label="Palettes" style:--cols={Math.ceil(PRESETS.length / 2)}>
           {#each PRESETS as p, i}
             {#if i && i % 4 === 0}<span class="sep"></span>{/if}
             <button
@@ -255,27 +265,6 @@
               onclick={() => choose(p)}
             ></button>
           {/each}
-          <!-- The None chips end the row: each leaves one color out. A chip shows the pair it gives, with
-               the wall's checkerboard for the color that is gone (.pal.none in app.css). -->
-          <span class="sep"></span>
-          <button
-            class="pal none"
-            aria-pressed={none === 1}
-            aria-label="No color for lines and dark pixels"
-            title="No color for lines and dark pixels"
-            style:--pair="linear-gradient(135deg, transparent 50%, {second} 50%)"
-            style:--corner="top left"
-            onclick={() => (none = none === 1 ? 0 : 1)}
-          ></button>
-          <button
-            class="pal none"
-            aria-pressed={none === 2}
-            aria-label="No color for fill and light pixels"
-            title="No color for fill and light pixels"
-            style:--pair="linear-gradient(135deg, {first} 50%, transparent 50%)"
-            style:--corner="bottom right"
-            onclick={() => (none = none === 2 ? 0 : 2)}
-          ></button>
         </div>
       </div>
     </div>

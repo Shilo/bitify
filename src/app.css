@@ -314,26 +314,37 @@ button { font: inherit; color: inherit; }
 .pals { flex: 0 1 auto; min-width: 0; position: relative; display: flex; overflow-x: auto; overscroll-behavior: contain; scrollbar-width: none; }
 .pals::-webkit-scrollbar { display: none; }
 /* The name stays put while the chips scroll under it. It is wide enough for the longest name,
-   so the chips do not move as palettes are tried. */
+   so the chips do not move as palettes are tried. Under the name is the switch that makes a
+   color None: it is no palette, and so is kept out of their row. */
 .pname {
-  position: sticky; left: 0; z-index: 3; flex: none; display: flex; align-items: center; gap: 0.3em;
+  position: sticky; left: 0; z-index: 3; flex: none; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 3px;
   min-width: 126px; padding: 0 9px 0 12px; background: var(--surface); font-weight: 600; white-space: nowrap;
 }
+.pname .title { display: flex; gap: 0.3em; }
+/* The switch is the dock's view switch at a smaller size, holding three pictures in place of
+   words: both colors, and each color gone. A touch screen gets it larger. */
+.panel.fit { --mini: 26px; } /* the height of the switch */
+.pname .seg.mini { flex: none; box-sizing: border-box; height: var(--mini); padding: 2px; border-radius: 8px; } /* named by its place too, to outweigh what a panel does to a switch of a setting */
+.pname .seg.mini button { flex: none; display: grid; place-items: center; min-width: 30px; padding: 0 7px; border-radius: 6px; }
+@media (pointer: coarse) {
+  .panel.fit { --mini: 34px; }
+  .pname .seg.mini button { min-width: 40px; }
+}
+/* A picture of the pair of colors, split as a palette chip is, first color at the top left. It
+   is drawn in the text color and not in the palette's, which a dark panel can swallow. A color
+   that is gone is a fine checkerboard, the sign for see-through. */
+.glyph { box-sizing: border-box; width: 16px; height: 16px; border: 1.5px solid currentColor; border-radius: 4px; background: currentColor; }
+.glyph.first, .glyph.second { --dots: conic-gradient(currentColor 25%, transparent 0 50%, currentColor 0 75%, transparent 0) 0 0 / 4px 4px; }
+.glyph.first { background: linear-gradient(135deg, transparent 50%, currentColor 50%), var(--dots); }
+.glyph.second { background: linear-gradient(135deg, currentColor 50%, transparent 50%), var(--dots); }
 .pname::after { content: ""; position: absolute; right: 0; top: calc(50% - 12px); width: 1px; height: 24px; background: var(--line); } /* a divider, as in the dock */
 .chips { flex: none; display: flex; align-items: center; gap: 8px; padding: 10px 12px 10px 8px; }
 .chips .sep { flex: none; } /* between the groups of four */
 /* Two rows of chips, when Dock.svelte finds that one row does not fit: half the palettes in each,
    without the dividers. A screen too short to spare the height (a phone on its side) keeps one row. */
 @media not all and (max-height: 520px) and (orientation: landscape) {
-  .chips.two { display: grid; grid-template-columns: repeat(var(--cols), var(--chip, var(--hit))); }
+  .chips.two { display: grid; grid-template-columns: repeat(var(--cols), var(--hit)); }
   .chips.two .sep { display: none; }
-}
-/* On a touch screen two rows of seven chips, the None chips last among them, are wider than a
-   phone at the full touch size, and the None chips would be out of sight until the row was
-   scrolled. At 40px, the smallest size the dock's controls go down to, and a narrower gap, they
-   fit screens from 360px wide. */
-@media (pointer: coarse) {
-  .chips.two { --chip: 40px; gap: 5px; }
 }
 /* A side with more palettes to scroll to fades out under an arrow. Dock.svelte sets more-left and
    more-right. Each fade is solid for well over the width of its arrow, so a chip has dissolved
@@ -346,17 +357,9 @@ button { font: inherit; color: inherit; }
 .fit::before { left: 139px; padding-left: 14px; background: linear-gradient(to right, var(--surface) 45%, transparent); }
 .fit::after { content: "\203A"; right: -1px; justify-content: flex-end; background: linear-gradient(to left, var(--surface) 40%, transparent); }
 .fit.more-left::before, .fit.more-right::after { opacity: 1; }
-.pal { flex: none; box-sizing: border-box; width: var(--chip, var(--hit)); height: var(--chip, var(--hit)); padding: 0; border: 1px solid var(--line); border-radius: 9px; cursor: pointer; }
+.pal { flex: none; box-sizing: border-box; width: var(--hit); height: var(--hit); padding: 0; border: 1px solid var(--line); border-radius: 9px; cursor: pointer; }
 .pal[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--fg); }
 .pal:focus-visible { outline-offset: 5px; }
-/* The None chips: the pair a chip gives (--pair, from Dock.svelte) over the wall's checkerboard,
-   which shows through the half of the color that is gone. That half also has the swatch's
-   slash, from its corner (--corner) to the middle: beside a dark color the checkerboard alone
-   reads as one more dark half. */
-.pal.none {
-  background: linear-gradient(to top right, transparent calc(50% - 1px), var(--fg) calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)) var(--corner) / 50% 50% no-repeat,
-    var(--pair), conic-gradient(var(--tile2) 25%, var(--tile) 0 50%, var(--tile2) 0 75%, var(--tile) 0) 0 0 / 12px 12px;
-}
 
 /* a style in the list of styles: a preview with its name underneath */
 .preset {
@@ -498,10 +501,10 @@ button { font: inherit; color: inherit; }
      the dock's margins. The name goes on a row of its own above the chips; the fades cover the chips only. */
   .panel.fit { left: 50%; right: auto; max-width: calc(100vw - 26px); transform: translateX(-50%); }
   .pals { display: grid; grid-template-columns: max-content; }
-  .pname { justify-self: start; padding: 10px 12px 0; }
+  .pname { flex-direction: row; align-items: center; justify-content: space-between; justify-self: stretch; padding: 10px 12px 0; }
   .pname::after { display: none; }
   .chips { padding: 8px 12px 10px; }
-  .fit::before, .fit::after { top: 30px; }
+  .fit::before, .fit::after { top: calc(10px + var(--mini)); } /* under the row of the name, which is as high as its switch */
   .fit::before { left: -1px; padding-left: 7px; background: linear-gradient(to right, var(--surface) 40%, transparent); }
   /* The style button is only its preview and caret here, and leaves the rest of the first row to
      the chips. The view switch in the dock already names the style. The control of the chosen

@@ -155,18 +155,16 @@ that and leaves the panel open, and the next press outside the dock closes the p
 was pressed, such as a button, a slider or an image, does not react to that press.
 
 **Palettes panel.** Left to right: the word "Palette" with the name of the chosen
-palette ("Custom" when the two colors match none), a divider, then every preset as a
+palette ("Custom" when the two colors match none) and, under the name, the switch that
+makes a color None (see "A color that is None"), a divider, then every preset as a
 diagonally split chip in a single row. There are twelve, in groups of four with a divider
-between groups: classics, handheld screens, then monitors. After the last group and a
-divider come the two None chips (see "A color that is None"). The chosen chip has a ring, and
+between groups: classics, handheld screens, then monitors. The chosen chip has a ring, and
 each chip's name is its tooltip. Where each pair comes from is in
 [docs/palettes.md](../../palettes.md).
 
 The panel is as wide as its chips when the screen has room for them in one row. When it
-does not, the chips go in two rows, seven in each with the None chips last, in the same
-order and without the dividers. On a touch screen the chips of two rows are 40px with a
-5px gap, so that all fourteen fit a phone from 360px wide and the None chips are in view
-without scrolling. The panel is then taller, and the wall makes room for it as for any
+does not, the chips go in two rows, half the palettes in each, in the same order and
+without the dividers. The panel is then taller, and the wall makes room for it as for any
 panel. A screen too short to spare the height, such as a phone on its side, keeps one row.
 
 Chips that still do not fit scroll sideways, by touch, by keyboard focus or with a mouse
@@ -211,15 +209,23 @@ the conversion changes: a style still decides which pixels are first color and w
 second, and still never looks at the colors. The color under a None is remembered, and
 turning None off brings it back.
 
-- Two **None chips** end the row of palettes, with no label. The first makes the first
-  color None, the second the second color. A chip looks like a palette chip of the current
-  two colors, with the missing color's half shown as the checkerboard of the wall and a
-  slash from its corner, as on the swatch. Beside a dark color the checkerboard alone
-  would read as one more dark half.
-- A None chip is pressed, with the ring a chosen palette has, while its color is None.
-  Pressing it again turns None off. Pressing the other moves None to the other color.
-- Their tooltips and names for screen readers are "No color for lines and dark pixels" and
-  "No color for fill and light pixels".
+- A small **switch** makes a color None. It is no palette, so it is kept out of the row of
+  palettes and sits with the palette's name: under the name on a wide screen, and at the
+  far end of the name's row on a phone, where the name has a row of its own. It has no
+  label.
+- The switch is the dock's view switch at a smaller size, with three segments that hold
+  pictures in place of words: both colors, the first color gone, the second color gone.
+  Pressing a segment sets that state, so any of the three is one press away and the one
+  in force is always marked.
+- Each picture is a small square split as a palette chip is, the first color at the top
+  left. A color that is there is filled, and one that is gone is a fine checkerboard, the
+  sign for see-through. The pictures are drawn in the text color, not in the palette's
+  colors, which a dark panel can swallow.
+- The segments' tooltips and names for screen readers are "Both colors", "No color for
+  lines and dark pixels" and "No color for fill and light pixels"; the group is named
+  "Transparent color".
+- On a touch screen the switch is larger: 34px high with segments 40px wide, against 26px
+  and 30px.
 - A preset stays marked by its two colors as before, whether or not one of them is None.
   Choosing a preset or stepping through the palettes changes the colors and leaves None
   where it is.
