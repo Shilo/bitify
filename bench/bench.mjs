@@ -34,6 +34,8 @@ for (const [w, h] of sizes) for (const alpha of [false, true]) {
   row.analyze = ta;
   let m;
   for (const st of STYLES) { const [t, mm] = time(() => B.mask(img, st)); row[st] = t; m = mm; }
+  // the runs above after the first reuse what Stencil found out about the sprites; this one finds it out each time
+  row['stencil first'] = time(() => { delete img.sprites; return B.mask(img, 'stencil'); })[0];
   const [tm] = time(() => B.mask(img, 'cutout', 100)); row['cutout t=100'] = tm;
   const [tc, px] = time(() => B.colorize(m, '#112233', '#eeddcc')); row.colorize = tc;
   if (w <= 2048 || !alpha) { const [tp] = time(() => (S.pngBytes.length && px.length && m ? S.pngBytes({ mask: m, pixels: px, w, h, first: '#112233', second: '#eeddcc' }) : 0), 1); row.png = tp; }

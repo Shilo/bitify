@@ -477,6 +477,31 @@ describe('stencil', () => {
     expect(show(mask(dim, 'stencil', { cuts: 20 }), 7)).toEqual(whole);
   });
 
+  it('compares the mean of a sprite\'s inside exactly, not rounded down', () => {
+    // the inside is 50 and 51: a mean of 50.5, which is above the outline's 30 plus a Cuts of 20
+    const half = image(['      ', ' kkkk ', ' kefk ', ' kkkk ', '      '], pal);
+    expect(show(mask(half, 'stencil'), 6)).toEqual(['      ', ' .... ', ' .#.. ', ' .... ', '      ']);
+    const opaque = image(['kfef'], pal); // no empty pixel: the mean of all four is 45.5, above the darkest plus a Cuts of 15
+    expect(show(mask(opaque, 'stencil', { cuts: 15 }), 4)).toEqual(['#...']);
+  });
+
+  it('judges each frame of an animation with no empty pixel by its own darkest brightness', () => {
+    const a = image(['abbb'], { a: grey(0), b: grey(200) }), b = image(['cdee'], { c: grey(100), d: grey(110), e: grey(250) });
+    unify([a, b]); // gives both frames the darkest brightness of the two, 0
+    expect(show(mask(a, 'stencil'), 4)).toEqual(['#...']);
+    expect(show(mask(b, 'stencil'), 4)).toEqual(['##..']);
+  });
+
+  it('reads the sprites by the brightness the style is set to', () => {
+    const rows = ['       ', ' ooooo ', ' ogggo ', ' ogdgo ', ' ogggo ', ' ooooo ', '       '], colors = { o: [200, 0, 0], g: [0, 200, 0], d: [150, 0, 0] }, data = new Uint8ClampedArray(7 * 7 * 4);
+    rows.forEach((row, y) => [...row].forEach((ch, x) => colors[ch] && data.set([...colors[ch], 255], (y * 7 + x) * 4)));
+    const src = { width: 7, height: 7, data };
+    // by luma the red outline is dark, and the darker red in the middle is cut
+    expect(show(mask(analyze(src), 'stencil'), 7)[3]).toBe(' ..#.. ');
+    // by the red channel the outline is the lightest part: nothing inside is lighter, and the sprite is whole
+    expect(show(mask(analyze(src, 'red'), 'stencil'), 7)[3]).toBe(' ..... ');
+  });
+
   it('takes the darkest brightness for the level of an image with no empty pixel, which has no outline', () => {
     const opaque = image(['kbbb', 'bebb', 'bbfb'], pal);
     for (const outline of ['keep', 'trim']) expect(show(mask(opaque, 'stencil', { outline }), 4), outline).toEqual(['#...', '.#..', '....']);
@@ -594,6 +619,11 @@ describe('an image shown smaller than it is', () => {
         const full = mask(img, style, threshold);
         for (const [mw, mh] of SIZES) expect([...mask(img, style, threshold, mw, mh)], `${style} ${threshold} ${mw}x${mh}`).toEqual(picked(full, mw, mh));
       }
+    }
+    // Stencil has no threshold: its own settings
+    for (const set of [{ cuts: 60 }, { outline: 'trim', edges: 80 }]) {
+      const full = mask(img, 'stencil', set);
+      for (const [mw, mh] of SIZES) expect([...mask(img, 'stencil', set, mw, mh)], `stencil ${JSON.stringify(set)} ${mw}x${mh}`).toEqual(picked(full, mw, mh));
     }
   });
 

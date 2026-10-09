@@ -264,6 +264,7 @@
             aria-label="No color for lines and dark pixels"
             title="No color for lines and dark pixels"
             style:--pair="linear-gradient(135deg, transparent 50%, {second} 50%)"
+            style:--corner="top left"
             onclick={() => (none = none === 1 ? 0 : 1)}
           ></button>
           <button
@@ -272,6 +273,7 @@
             aria-label="No color for fill and light pixels"
             title="No color for fill and light pixels"
             style:--pair="linear-gradient(135deg, {first} 50%, transparent 50%)"
+            style:--corner="bottom right"
             onclick={() => (none = none === 2 ? 0 : 2)}
           ></button>
         </div>

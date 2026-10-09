@@ -184,16 +184,21 @@ export function unify(frames) {
 // pixels inside it. A sprite is a group of solid pixels that touch, diagonals included, and a
 // pixel is on its outline when one of the four pixels beside it is empty or off the canvas; the
 // rest are inside. An image with no empty pixel is one sprite with no outline: its level is the
-// image's darkest brightness and its body the mean of all its pixels.
+// image's darkest brightness and its body the mean of all its pixels. Both are read from the
+// image's own histogram, since `lo` is shared by all the frames of an animation.
+// The mean is rounded up: Stencil asks whether it is above a whole number, and that way it is
+// asked exactly.
 // Each sprite is walked once, outwards from its first pixel, with `queue` holding the pixels found.
-// ponytail: the queue is four bytes for every pixel of the image, a moment's 48 MB for 12
-// megapixels with see-through parts. Label the sprites row by row if that ever matters.
+// ponytail: the walk holds five bytes for every pixel of the image while it runs (`queue` and
+// `seen`), a moment's 60 MB for 12 megapixels with see-through parts. Label the sprites row by
+// row if that ever matters.
 function sprites(img) {
   const { w, h, lum, data, hist, cut = ALPHA_CUT } = img, level = new Uint8Array(w * h), body = new Uint8Array(w * h);
   if (!img.hasAlpha) {
-    let sum = 0;
+    let low = 0, sum = 0;
+    while (low < 255 && !hist[low]) low++;
     for (let l = 0; l < 256; l++) sum += l * hist[l];
-    return { level: level.fill(img.lo), body: body.fill(sum / (w * h)) };
+    return { level: level.fill(low), body: body.fill(Math.ceil(sum / (w * h))) };
   }
   const seen = new Uint8Array(w * h), queue = new Int32Array(w * h);
   for (let start = 0; start < w * h; start++) {
@@ -214,7 +219,7 @@ function sprites(img) {
       if (!rim) { inside++; sum += lum[p]; }
       else if (lum[p] < low) low = lum[p];
     }
-    const mean = inside ? sum / inside : 0;
+    const mean = inside ? Math.ceil(sum / inside) : 0;
     for (let i = 0; i < n; i++) { level[queue[i]] = low; body[queue[i]] = mean; }
   }
   return { level, body };
