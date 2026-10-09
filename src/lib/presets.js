@@ -28,8 +28,23 @@ export const STYLES = [
   ['hatch', 'Hatch'],
   ['atkinson', 'Atkinson'],
   ['noise', 'Noise'],
-  ['silhouette', 'Silhouette'],
+  ['silhouette', 'Shape'],
 ];
+
+// Use cases for the style picker, based on docs/styles.md.
+export const STYLE_USES = {
+  cutout: 'Two-tone sprites with seams between contrasting parts, such as clothing and equipment.',
+  solid: 'Simple two-tone fills from brightness, for flat graphics and high-contrast art.',
+  lines: 'Line art from sprite edges and color changes. Texture can add extra lines.',
+  stencil: 'Filled sprites with dark inner details. Set the first color to None for holes; shading may also be selected.',
+  icon: 'Small transparent inventory sprites with selected cavities and seams. Set the first color to None for holes; some details may be missed.',
+  checker: 'Crisp, regular checker-pattern shading for pixel-art sprites.',
+  bayer: 'Regular dot-pattern shading for sprites, illustrations and gradients.',
+  hatch: 'Directional line shading for sprites and illustrations, like hatching or scanlines.',
+  atkinson: 'Error-diffused shading for photos and illustrations. Changing animation frames can shimmer.',
+  noise: 'Scattered-dot shading for gradients and textured images; noise positions are fixed.',
+  silhouette: 'A flat, single-color mask of the source shape. Transparent gaps stay empty; opaque images become rectangles.',
+};
 
 // A palette matches the current colors either way round.
 export const isPalette = (p, first, second) => (first === p.dark && second === p.light) || (first === p.light && second === p.dark);

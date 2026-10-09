@@ -134,7 +134,7 @@ Style button that picks what it shows, and Download all.
 The two colors show which palette is in use, and the view switch shows which style: its
 bitified half reads the style's name, so the name is on screen at every width, and changes
 as the styles are stepped through. Its tooltip and its name for screen readers say
-"Bitified:" and the style. That half is as wide as the longest name, "Silhouette", so the
+"Bitified:" and the style. That half is wide enough for every style name, so the
 dock does not move when the style changes; on phones the two halves are equal. Pressing it
 shows the bitified images. It does not open the list of styles; the Style button does.
 
@@ -236,7 +236,7 @@ turning None off brings it back.
   turns into its inverse as it does with two colors.
 - The wall, the style previews, the saved PNG and GIF, the copied PNG and every file in the
   zip leave the None color out.
-- Silhouette draws every solid pixel in the first color. With the first color None it
+- Shape draws every solid pixel in the first color. With the first color None it
   would draw nothing, so there it is drawn in the second color. This is the one place
   where a style's name matters to the coloring; the conversion is unchanged.
 - The drop screen keeps using the two remembered colors.
@@ -253,7 +253,7 @@ current style's other settings a press away. Left to right:
   eleven styles fit in one row at the parent panel's maximum desktop width. Each button
   is at least 58px high, with a 28px preview, 11.5px label, 5px vertical and 3px horizontal
   padding. The popup has 6px padding and 5px gaps. Thin decorative dividers separate
-  Cutout/Solid/Lines, Stencil/Icon, Checker/Bayer/Hatch/Atkinson/Noise, and Silhouette.
+  Cutout/Solid/Lines, Stencil/Icon, Checker/Bayer/Hatch/Atkinson/Noise, and Shape.
   A divider is omitted when its group begins a wrapped row; it never gets its own grid cell.
   On a phone too short to show them all above the panel, the
   list scrolls. Choosing a style closes the list. So does a press outside it, or
@@ -264,7 +264,7 @@ current style's other settings a press away. Left to right:
   typing a number switches to manual; pressing Auto or clearing the box switches back.
   While Auto is on, the box shows the value Auto picked, or the range when images differ.
   The box is just wide enough for three digits, has no spinner arrows, and widens only to
-  fit a range. Silhouette has no threshold, and the strip leaves its place empty. Stencil
+  fit a range. Shape has no threshold, and the strip leaves its place empty. Stencil
   has none either: its Cuts setting stands there instead, with a slider, number box and
   Auto of its own. While its Auto is on, the box shows what Auto comes to for the sprites
   on the wall, least to most.
@@ -638,7 +638,7 @@ draws a smaller picture of the image, at its own size:
 - The shorter side of the picture is never given fewer than 32 pixels, unless the image has
   fewer. A long thin image would otherwise be drawn in the wrong shape once its few rows
   were rounded.
-- In Cutout, Solid, Icon, Stencil, Lines and Silhouette each pixel of the picture is exactly what the
+- In Cutout, Solid, Icon, Stencil, Lines and Shape each pixel of the picture is exactly what the
   image pixel it stands for is in the full conversion, worked out from that pixel's real
   neighbours in the full image.
 - Checker, Hatch, Bayer, Noise and Atkinson are instead drawn afresh on the picture's own
@@ -712,7 +712,7 @@ let go:
 | **Hatch** | Second color if the tone is above 0.75, 0.5 or 0.25 where `(x + y) mod 3` is 0, 1 or 2, so mid-tones become diagonal lines three pixels apart. |
 | **Atkinson** | Error diffusion on `tone × 255`. Each pixel is cut at 127.5, and one eighth of the error goes to each of six neighbours (right, two right, the three below, two below). |
 | **Noise** | Second color if the tone is above `(n + 0.5) / 256`, where `n` is the value at the pixel of a 16×16 blue-noise grid: each number from 0 to 255 once, placed by the void-and-cluster method so that it has no regular pattern. |
-| **Silhouette** | Every non-empty pixel is first color. |
+| **Shape** | Every non-empty pixel is first color. Internal ID: `silhouette`; saved settings and conversion behavior are unchanged. |
 
 Details of Cutout:
 
@@ -731,7 +731,7 @@ already dithered becomes busy.
 Details of Icon:
 
 - The style menu and stepping order is Cutout, Solid, Lines, Stencil, Icon, Checker,
-  Bayer, Hatch, Atkinson, Noise, Silhouette. Icon is fifth; Stencil is fourth.
+  Bayer, Hatch, Atkinson, Noise, Shape. Icon is fifth; Stencil is fourth.
 - Icon reads original RGB and alpha, without quantizing or requiring grayscale. Every
   eight-connected source component is judged independently. See the algorithm and worked
   example in [docs/styles.md](../../styles.md), implemented in `src/lib/icon.js`.
@@ -833,7 +833,7 @@ light or its lightest color dark, and outlines and highlights stay whole.
 
 - In Lines it is the minimum color difference that counts as an edge.
 - In Cutout, Solid, Checker, Hatch, Bayer, Noise and Atkinson it is the brightness cut-off.
-- Icon, Stencil and Silhouette have none.
+- Icon, Stencil and Shape have none.
 
 Auto picks a value per image with Otsu's method, which splits a histogram into two groups
 at the point that separates them best:
@@ -865,7 +865,7 @@ style did before it had settings.
 
 | Setting | Styles | Values | Default | What it does |
 |---|---|---|---|---|
-| Threshold | all but Icon, Stencil and Silhouette | Auto, or 1 to 254 | Auto | See "Threshold". |
+| Threshold | all but Icon, Stencil and Shape | Auto, or 1 to 254 | Auto | See "Threshold". |
 | Seams | Cutout | Auto, or 1 to 255 | Auto | The seam strength. Lower values cut along softer changes. No difference is above 255, so 255 cuts no seams. |
 | Rim | Cutout | On, Off | On | Off leaves out the light rim on dark pixels at the silhouette. With Seams at 255 as well, Cutout is Solid. |
 | Cuts | Stencil | Auto, or 0 to 254 | Auto | How much lighter than its sprite's outline an inside pixel may be and still be cut. At 0 only pixels as dark as the outline are. Auto picks for each sprite (see "Details of Stencil"). Raising it adds cuts or reaches the median protection limit without restoring cuts. Brightness cuts alone remove fewer than half the inside; Edges and Trim are independent. |
@@ -881,7 +881,7 @@ style did before it had settings.
 | Spacing | Hatch | 3, 4, 5, 6 | 3 | How many pixels apart the lines are. With spacing `n` the cut-offs are `(n − d) / (n + 1)` for `d` from 0 to `n − 1`, which gives `n + 1` apparent tones. |
 | Matrix | Bayer | 2, 4, 8 | 4 | The side of the ordered-dither matrix. The cut-offs are `(b + 0.5) / n²`, giving 5, 17 or 65 apparent tones. Each quarter of a matrix is the matrix of half its side times four, plus 0, 2, 3 and 1. |
 | Diffusion | Atkinson | Atkinson, Floyd, Stucki | Atkinson | Where the error goes. Floyd is Floyd–Steinberg: 7/16 right, then 3/16, 5/16 and 1/16 below left, below and below right. Stucki spreads over twelve pixels in the two rows below, in parts of 42: 8 and 4 to the right; 2, 4, 8, 4, 2 below; 1, 2, 4, 2, 1 below that. Both hand on all of the error, where Atkinson drops a quarter. |
-| Brightness | all but Lines and Silhouette | Luma, Value, R, G, B | Luma | What brightness is read from: the weighted mix given under "Conversion", the largest of red, green and blue, or one channel alone. The brightness range and the Auto values follow it. Differences between neighbouring pixels, which seams go by, are of the colors and do not change. |
+| Brightness | all but Lines and Shape | Luma, Value, R, G, B | Luma | What brightness is read from: the weighted mix given under "Conversion", the largest of red, green and blue, or one channel alone. The brightness range and the Auto values follow it. Differences between neighbouring pixels, which seams go by, are of the colors and do not change. |
 | Opacity cut | all | 1 to 255 | 128 | Alpha below this is an empty pixel. Offered only while an image on the wall has a partly see-through pixel (see below). |
 
 - **Opacity cut is offered only where it can do something.** It changes an image only if
@@ -889,7 +889,7 @@ style did before it had settings.
   whose pixels are all clear or all solid (most pixel art, and every photo) is the same at
   every cut. So its row in the tray and its chip are shown only while an image on the wall
   has such a pixel, and on the empty screen only if the example has one, which the logo does
-  not. Without it Silhouette has no settings at all: its strip has the style button and
+  not. Without it Shape has no settings at all: its strip has the style button and
   nothing else, with no More button, and on a phone its panel is one row, in which the style
   button is as wide as the panel and has its words back ("Style", the style's name, and the
   caret at the far end), since there are no chips to make room for. A value set while
@@ -1159,8 +1159,8 @@ it is doing:
     two parts of the same tone, rims a dark part on the silhouette, keeps a dark outline
     around a light part, never cuts a light pixel on the silhouette, and rims only images
     that have empty pixels;
-  - Silhouette fills everything;
-  - a smaller picture has, in Cutout, Solid, Icon, Stencil, Lines and Silhouette, exactly the full
+  - Shape fills everything;
+  - a smaller picture has, in Cutout, Solid, Icon, Stencil, Lines and Shape, exactly the full
     conversion's value at the image pixel under the middle of each of its pixels, and
     shrinking the original gives the same pixels of it;
   - at every size the patterns and Atkinson come out as light as the full conversion, and

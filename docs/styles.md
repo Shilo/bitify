@@ -6,7 +6,7 @@ tests beside it pin every rule described here. The settings are listed in
 [src/lib/settings.js](../src/lib/settings.js).
 
 The menu and stepping order is **Cutout → Solid → Lines → Stencil → Icon → Checker →
-Bayer → Hatch → Atkinson → Noise → Silhouette**. General shape conversions come first,
+Bayer → Hatch → Atkinson → Noise → Shape**. General shape conversions come first,
 then the two negative-space styles, then shading patterns, then the plain mask. This is
 a workflow grouping, not a measured popularity ranking. Checker and Bayer share regular
 dot patterns; Hatch uses directional strokes; Atkinson diffuses tone; Noise scatters it.
@@ -39,7 +39,7 @@ Two measurements are used throughout:
 
 ### The threshold
 
-Every style except Icon, Stencil and Silhouette depends on one number from 1 to 254, the
+Every style except Icon, Stencil and Shape depends on one number from 1 to 254, the
 threshold. Each
 style keeps its own.
 
@@ -105,7 +105,7 @@ style below. Each is remembered for each style separately, the threshold include
 its default a style converts exactly as described here. Two settings are the same wherever
 they appear:
 
-- **Brightness** (every style but Lines and Silhouette): what brightness is read from.
+- **Brightness** (every style but Lines and Shape): what brightness is read from.
   **Luma** is the weighted mix above. **Value** is the largest of red, green and blue, which
   keeps strongly colored parts light: pure blue has a luma of 18 and a value of 255. **R**,
   **G** and **B** read one channel alone, like a colored filter over the lens: with R, red
@@ -871,7 +871,10 @@ gradients, and animations.
 Settings: Shading and Scale (see "Settings" above). Lower shading is what cleans the dirt
 off flat colors: at 50% only the tones near the threshold are still scattered.
 
-## Silhouette
+## Shape
+
+The display name is Shape; the internal style ID remains `silhouette`. Saved settings and
+conversion behavior are unchanged.
 
 Every solid pixel becomes the first color. Empty pixels stay empty. The threshold is
 ignored.
@@ -914,4 +917,4 @@ to show.
 | Shading that looks drawn with a pen | Hatch |
 | Smooth gradients, organic texture | Atkinson |
 | Organic texture that holds still in an animation | Noise |
-| Just the shape | Silhouette |
+| Just the shape | Shape |

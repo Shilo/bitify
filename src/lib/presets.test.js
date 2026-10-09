@@ -13,6 +13,7 @@ describe('stepStyle', () => {
     expect(STYLES[2]).toEqual(['lines', 'Lines']);
     expect(STYLES[3]).toEqual(['stencil', 'Stencil']);
     expect(STYLES[4]).toEqual(['icon', 'Icon']);
+    expect(STYLES.at(-1)).toEqual(['silhouette', 'Shape']);
   });
 
   it('wraps at both ends', () => {

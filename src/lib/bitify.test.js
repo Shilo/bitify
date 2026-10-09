@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { analyze, unify, mask, spritesOf, shrink, colorize, otsu, hexToRgb, brightness, autoThreshold, previewBall } from './bitify.js';
 import { STYLE_SETTINGS, defaults } from './settings.js';
+import { STYLES } from './presets.js';
 
 // Builds an analysed image from rows of characters. Each character maps to [r, g, b] or
 // [r, g, b, a] in `pal`; a character that is not in `pal` is an empty (transparent) pixel.
@@ -991,7 +992,7 @@ describe('docs/styles.md', () => {
     const doc = readFileSync(new URL('../../docs/styles.md', import.meta.url), 'utf8').replace(/\r\n/g, '\n');
     const ball = previewBall();
     for (const style of ['cutout', 'lines', 'solid', 'icon', 'stencil', 'checker', 'hatch', 'bayer', 'noise', 'atkinson', 'silhouette']) {
-      const title = `## ${style[0].toUpperCase()}${style.slice(1)}\n`, from = doc.indexOf(title);
+      const title = `## ${STYLES.find(([key]) => key === style)[1]}\n`, from = doc.indexOf(title);
       expect(from, title).toBeGreaterThan(-1);
       const section = doc.slice(from, doc.indexOf('\n## ', from + 1));
       const drawn = show(mask(ball, style), ball.w).map(row => row.trimEnd()).join('\n');

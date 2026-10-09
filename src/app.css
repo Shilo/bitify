@@ -292,7 +292,7 @@ button { font: inherit; color: inherit; }
 .seg { display: inline-flex; height: var(--hit); padding: 3px; background: var(--tile); border-radius: 10px; }
 .seg button { padding: 0 12px; border: 0; border-radius: 8px; background: transparent; color: var(--muted); font-size: 13px; font-weight: 600; cursor: pointer; }
 .seg button[aria-pressed="true"] { background: var(--surface); color: var(--fg); box-shadow: 0 1px 2px var(--shadow); }
-/* The bitified half shows the style's name. It is wide enough for the longest, "Silhouette", so
+/* The bitified half shows the style's name. It reserves enough room for every label, so
    the dock does not move as styles are stepped through. */
 .dock > .seg button:last-child { min-width: 7em; }
 
