@@ -3,6 +3,7 @@
   import { shown } from './lib/layout.js';
   import Pixels from './Pixels.svelte';
   import PixelIcon from './PixelIcon.svelte';
+  import { tooltip } from './lib/tooltip.js';
 
   // `flipped` true means the wall is showing originals. Holding the tile shows the other version.
   // Without `onremove` the tile is a preview only and has no buttons.
@@ -106,14 +107,14 @@
   {#if onremove}
     <div class="acts">
       <!-- app.css shows Share on touch screens and Copy and Download everywhere else -->
-      <button class="ib touch" onclick={onshare} aria-label="Share {item.name}" title="Share"><PixelIcon name="share" /></button>
-      <button class="ib mouse" onclick={oncopy} aria-label="Copy {item.name}" title="Copy"><PixelIcon name="copy" /></button>
-      <button class="ib mouse" onclick={onsave} aria-label="Download {item.name}" title="Download"><PixelIcon name="save" /></button>
-      <button class="ib" onclick={onremove} aria-label="Remove {item.name}" title="Remove"><PixelIcon name="x" /></button>
+      <button class="ib touch" onclick={onshare} aria-label="Share {item.name}" use:tooltip={'Copy or download this image.'}><PixelIcon name="share" /></button>
+      <button class="ib mouse" onclick={oncopy} aria-label="Copy {item.name}" use:tooltip={'Copy this image to the clipboard as a PNG.'}><PixelIcon name="copy" /></button>
+      <button class="ib mouse" onclick={onsave} aria-label="Download {item.name}" use:tooltip={'Save this image at its original size.'}><PixelIcon name="save" /></button>
+      <button class="ib" onclick={onremove} aria-label="Remove {item.name}" use:tooltip={'Remove this image from the wall.'}><PixelIcon name="x" /></button>
     </div>
   {/if}
   <figcaption class="cap">
-    <span class="name" title={item.name}>{item.name}</span>
+    <span class="name" use:tooltip={item.name}>{item.name}</span>
     <span class="dim">{item.img.w}<span class="by">×</span>{item.img.h}</span>
   </figcaption>
 </figure>

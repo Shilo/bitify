@@ -415,7 +415,8 @@ button { font: inherit; color: inherit; }
 .row .key { flex: none; width: 90px; font-size: 13px; white-space: nowrap; } /* room for the longest name, "Opacity cut", and its dot on one line */
 .panel .seg { flex: 1; min-width: 0; box-sizing: border-box; } /* as high as the sliders and boxes beside it */
 .panel .seg button { flex: 1 1 auto; min-width: 0; padding: 0 4px; } /* auto: a longer word gets the room it needs before the rest is shared out */
-.foot { grid-column: 1 / -1; display: flex; justify-content: flex-end; }
+/* Reset takes the last right-hand cell, sharing the final setting's row when it has room. */
+.foot { grid-column: 2; display: flex; align-items: center; justify-content: flex-end; }
 .foot .btn { height: 28px; min-width: 0; gap: 6px; padding: 0 10px; font-size: 12px; }
 /* Reset throws the style's settings away, and says so quietly: its word, icon and edge are
    tinted, and nothing is filled. The edge is the line's color part of the way to the tint. */
@@ -471,6 +472,17 @@ button { font: inherit; color: inherit; }
   content: ""; position: absolute; left: -3px; top: 50%; transform: translateY(-50%);
   width: 1px; height: 24px; background: var(--line); pointer-events: none;
 }
+[data-tooltip] { -webkit-touch-callout: none; }
+button[data-tooltip], label[data-tooltip] { user-select: none; }
+@media (pointer: coarse) { [data-tooltip] { user-select: none; } }
+/* Manual popovers share one appearance and stay above scroll containers and modal dialogs. */
+.tooltip {
+  position: fixed; inset: auto; margin: 0; z-index: 70; box-sizing: border-box;
+  width: max-content; max-width: min(240px, calc(100vw - 16px)); padding: 8px 10px;
+  color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+  box-shadow: 0 4px 16px var(--shadow); font: 12px/1.45 var(--body); overflow-wrap: anywhere;
+}
+.tooltip::backdrop { background: transparent; pointer-events: none; }
 
 /* A phone on its side has no height to spare: with the tray open the wall would have none left.
    So it has the chips, as an upright phone does, with the pressed chip's control beside them
@@ -492,6 +504,7 @@ button { font: inherit; color: inherit; }
    45px at 521px wide. */
 @media (max-width: 700px) {
   .adv { grid-template-columns: minmax(0, 1fr); }
+  .foot { grid-column: 1; }
   .pick .key { display: none; }
 }
 /* narrower screens: icon-only dock buttons */

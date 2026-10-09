@@ -38,4 +38,4 @@ After a git checkout or merge the dev server can keep serving old CSS. Restart i
 
 The loops in bitify.js run once for every pixel of a photo, on phones. Keep them flat, with no array, object or function made per pixel, and time them before and after any change there: node bench/bench.mjs. To check that a change leaves every mask as it was, copy the file to bench/bitify.old.js before the change and run node bench/equiv.mjs after it. docs/performance.md has the rest, including how to measure the app in a browser and on a phone.
 
-Interface behavior has no automated tests. Check it in a browser at desktop width and at phone width with touch emulation.
+The shared tooltip action (src/lib/tooltip.js) has unit tests for pointer sequences, timing, dynamic text, accessibility and dialog cleanup. All tooltips use it; do not add native title attributes. Check interface behavior in a browser at desktop width and at phone width with touch emulation.

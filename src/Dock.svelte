@@ -1,6 +1,6 @@
 <script module>
   import { mask, colorize, previewBall } from './lib/bitify.js';
-  import { PRESETS, STYLES, isPalette, inOrder, inks } from './lib/presets.js';
+  import { PRESETS, PALETTE_USES, STYLES, STYLE_USES, isPalette, inOrder, inks } from './lib/presets.js';
   import { SETTINGS, STYLE_SETTINGS, defaults, changed, shown } from './lib/settings.js';
 
   const BALL = previewBall(); // previews each style
@@ -12,6 +12,7 @@
   import { on } from 'svelte/events';
   import { tick } from 'svelte';
   import { sliderDrag } from './lib/gesture.js';
+  import { tooltip } from './lib/tooltip.js';
 
   let {
     first = $bindable(),
@@ -242,7 +243,7 @@
         onblur={e => (e.currentTarget.value = boxed(key))}
       />
       {#if auto}
-        <button aria-pressed={own[key] === null} title="Auto {label.toLowerCase()}" onclick={() => (own[key] = null)}>Auto</button>
+        <button aria-pressed={own[key] === null} use:tooltip={`Calculate ${label.toLowerCase()} automatically from each image.`} onclick={() => (own[key] = null)}>Auto</button>
       {/if}
     </div>
   {/if}
@@ -261,7 +262,7 @@
                (.seg.mini and .glyph in app.css). -->
           <span class="seg mini" role="group" aria-label="Transparent color">
             {#each [['Both colors', ''], ['No color for lines and dark pixels', ' first'], ['No color for fill and light pixels', ' second']] as [label, half], n}
-              <button aria-pressed={none === n} aria-label={label} title={label} onclick={() => (none = n)}><span class="glyph{half}"></span></button>
+              <button aria-pressed={none === n} aria-label={label} use:tooltip={['Draw both colors without making either transparent.', 'Make outlines and dark areas transparent.', 'Make fills and highlights transparent.'][n]} onclick={() => (none = n)}><span class="glyph{half}"></span></button>
             {/each}
           </span>
         </span>
@@ -272,7 +273,7 @@
               class="pal"
               aria-pressed={chosen(p)}
               aria-label={p.name}
-              title={p.name}
+              use:tooltip={`${p.name}: ${PALETTE_USES[p.name]}`}
               style:background="linear-gradient(135deg, {p.dark} 50%, {p.light} 50%)"
               onclick={() => choose(p)}
             ></button>
@@ -286,14 +287,14 @@
         {#if pop === 'styles'}
           <div class="menu" role="group" aria-label="Style" use:reveal use:styleDividers onwheel={e => (e.currentTarget.scrollLeft += e.deltaY)}>
             {#each STYLES as [key, name]}
-              <button class="preset" class:group-start={key === 'stencil' || key === 'checker' || key === 'silhouette'} aria-pressed={style === key} onclick={() => { style = key; showOriginal = false; pop = null; }}>
+              <button class="preset" class:group-start={key === 'stencil' || key === 'checker' || key === 'silhouette'} aria-pressed={style === key} use:tooltip={STYLE_USES[key]} onclick={() => { style = key; showOriginal = false; pop = null; }}>
                 <Pixels class="demo" pixels={demo(key)} />{name}
               </button>
             {/each}
           </div>
         {/if}
         <span class="key" id="style-label">Style</span>
-        <button class="btn" aria-labelledby="style-label style-name" aria-expanded={pop === 'styles'} aria-haspopup="true" onclick={() => (pop = pop === 'styles' ? null : 'styles')}>
+        <button class="btn" aria-labelledby="style-label style-name" aria-expanded={pop === 'styles'} aria-haspopup="true" use:tooltip={'Choose how images are converted into two colors.'} onclick={() => (pop = pop === 'styles' ? null : 'styles')}>
           <Pixels class="demo" pixels={demo(style)} /><span id="style-name">{styleName}</span><PixelIcon name="caret" />
         </button>
       </div>
@@ -314,7 +315,7 @@
             </button>
           {/each}
           <!-- Reset ends the row, and not the control's, which needs its whole width on a narrow phone. -->
-          <button class="chip reset" disabled={!changed(style, own, keys)} aria-label="Reset {styleName}" title="Reset {styleName}" onclick={reset}>
+          <button class="chip reset" disabled={!changed(style, own, keys)} aria-label="Reset {styleName}" use:tooltip={'Restore this style’s default settings.'} onclick={reset}>
             <PixelIcon name="reset" />Reset
           </button>
         </div>
@@ -328,7 +329,7 @@
           <span class="grow"></span>
         {/if}
         {#if rest.length}
-          <button class="btn extra" aria-expanded={more} aria-label="More settings" title="More settings" onclick={() => (more = !more)}>
+          <button class="btn extra" aria-expanded={more} aria-label="More settings" use:tooltip={'Show additional settings for the current style.'} onclick={() => (more = !more)}>
             <PixelIcon name="more" />
           </button>
         {/if}
@@ -338,7 +339,7 @@
               <div class="row"><span class="key" class:changed={changed(style, own, [key])}>{SETTINGS[key].label}</span>{@render control(key)}</div>
             {/each}
             <div class="foot">
-              <button class="btn" disabled={!changed(style, own, keys)} aria-label="Reset {styleName}" title="Reset {styleName}" onclick={reset}><PixelIcon name="reset" />Reset</button>
+              <button class="btn" disabled={!changed(style, own, keys)} aria-label="Reset {styleName}" use:tooltip={'Restore this style’s default settings.'} onclick={reset}><PixelIcon name="reset" />Reset</button>
             </div>
           </div>
         {/if}
@@ -349,29 +350,29 @@
   <div class="pair">
     <!-- A color that is None shows no color (.sw.none in app.css). Its picker still opens, on the
          color it had, and choosing one there brings the color back. -->
-    <label class="sw" class:none={none === 1} style:background={none === 1 ? null : first} title="Color for lines and dark pixels{none === 1 ? ': None' : ''}">
+    <label class="sw" class:none={none === 1} style:background={none === 1 ? null : first} use:tooltip={none === 1 ? 'Choose a color to restore outlines and dark areas.' : 'Choose the color for outlines and dark areas.'}>
       <input type="color" bind:value={first} oninput={() => none === 1 && (none = 0)} aria-label="Color for lines and dark pixels{none === 1 ? ': None' : ''}" />
     </label>
-    <button class="ib" onclick={swap} aria-label="Swap colors" title="Swap colors"><PixelIcon name="swap" /></button>
-    <label class="sw" class:none={none === 2} style:background={none === 2 ? null : second} title="Color for fill and light pixels{none === 2 ? ': None' : ''}">
+    <button class="ib" onclick={swap} aria-label="Swap colors" use:tooltip={'Exchange the two colors, including transparency.'}><PixelIcon name="swap" /></button>
+    <label class="sw" class:none={none === 2} style:background={none === 2 ? null : second} use:tooltip={none === 2 ? 'Choose a color to restore fills and highlights.' : 'Choose the color for fills and highlights.'}>
       <input type="color" bind:value={second} oninput={() => none === 2 && (none = 0)} aria-label="Color for fill and light pixels{none === 2 ? ': None' : ''}" />
     </label>
   </div>
-  <button class="btn" aria-expanded={panel === 'palettes'} aria-label="Palette" title="Palette" onclick={() => toggle('palettes')}>
+  <button class="btn" aria-expanded={panel === 'palettes'} aria-label="Palette" use:tooltip={'Choose a color pair or make one color transparent.'} onclick={() => toggle('palettes')}>
     <PixelIcon name="grid" /><span class="lbl">Palette</span>
   </button>
   <span class="sep"></span>
   <!-- The bitified half is named after the style, so the style in use always shows. -->
   <div class="seg" role="group" aria-label="View">
-    <button aria-pressed={showOriginal} onclick={() => (showOriginal = true)}>Original</button>
-    <button aria-pressed={!showOriginal} aria-label="Bitified: {styleName}" title="Bitified: {styleName}" onclick={() => (showOriginal = false)}>{styleName}</button>
+    <button aria-pressed={showOriginal} use:tooltip={'Show the source images before conversion.'} onclick={() => (showOriginal = true)}>Original</button>
+    <button aria-pressed={!showOriginal} aria-label="Bitified: {styleName}" use:tooltip={`Show the converted images using ${styleName}.`} onclick={() => (showOriginal = false)}>{styleName}</button>
   </div>
-  <button class="btn" aria-expanded={panel === 'style'} aria-label="Style" title="Style" onclick={() => toggle('style')}>
+  <button class="btn" aria-expanded={panel === 'style'} aria-label="Style" use:tooltip={'Adjust the conversion style and its settings.'} onclick={() => toggle('style')}>
     <PixelIcon name="sliders" /><span class="lbl">Style</span>
   </button>
   <span class="sep"></span>
   <!-- Only two or more images are "all". One saves as the file itself, not a zip. -->
-  <button class="btn primary" disabled={!count} aria-label={saveLabel} title={saveLabel} onclick={onsaveall}>
+  <button class="btn primary" disabled={!count} aria-label={saveLabel} use:tooltip={count > 1 ? 'Save every image in a ZIP archive.' : count ? 'Save the image at its original size.' : 'Add an image to enable saving.'} onclick={onsaveall}>
     <PixelIcon name="save" /><span class="lbl">{saveLabel}</span>
   </button>
 </div>

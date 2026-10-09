@@ -133,10 +133,12 @@ Style button that picks what it shows, and Download all.
 
 The two colors show which palette is in use, and the view switch shows which style: its
 bitified half reads the style's name, so the name is on screen at every width, and changes
-as the styles are stepped through. Its tooltip and its name for screen readers say
+as the styles are stepped through. Its name for screen readers says
 "Bitified:" and the style. That half is wide enough for every style name, so the
-dock does not move when the style changes; on phones the two halves are equal. Pressing it
+dock does not move when the style changes; on phones the two halves are equal. Its custom
+tooltip explains that it shows the converted images using the named style. Pressing it
 shows the bitified images. It does not open the list of styles; the Style button does.
+The Original half's custom tooltip says "Show the source images before conversion."
 
 Changing the style or any of its settings while the original is showing switches the view back
 to bitified, so the change is seen. That holds for every route: the list of styles (also
@@ -159,7 +161,8 @@ palette ("Custom" when the two colors match none) and, under the name, the switc
 makes a color None (see "A color that is None"), a divider, then every preset as a
 diagonally split chip in a single row. There are twelve, in groups of four with a divider
 between groups: classics, handheld screens, then monitors. The chosen chip has a ring, and
-each chip's name is its tooltip. Where each pair comes from is in
+each chip's custom tooltip starts with its palette name, followed by a colon and its
+description of the colors and appearance. Where each pair comes from is in
 [docs/palettes.md](../../palettes.md).
 
 The panel is as wide as its chips when the screen has room for them in one row. When it
@@ -221,7 +224,7 @@ turning None off brings it back.
   left. A color that is there is filled, and one that is gone is a fine checkerboard, the
   sign for see-through. The pictures are drawn in the text color, not in the palette's
   colors, which a dark panel can swallow.
-- The segments' tooltips and names for screen readers are "Both colors", "No color for
+- The segments' names for screen readers are "Both colors", "No color for
   lines and dark pixels" and "No color for fill and light pixels"; the group is named
   "Transparent color".
 - On a touch screen the switch is larger: 34px high with segments 40px wide, against 26px
@@ -258,6 +261,15 @@ current style's other settings a press away. Left to right:
   On a phone too short to show them all above the panel, the
   list scrolls. Choosing a style closes the list. So does a press outside it, or
   Escape; either leaves the strip open.
+  Each style button has a concise tooltip listing suitable image types and uses, based on
+  `docs/styles.md`, without a "Best for" prefix. It appears after 350 ms of mouse hover,
+  immediately on keyboard focus, or after a 500 ms touch hold. A touch hold only shows
+  the tooltip: release never selects the style or closes the list. The tooltip stays
+  readable after release until another press, scrolling, cancellation or resizing.
+  Moving a finger 8px cancels the hold and leaves scrolling available. A normal tap still
+  selects the style. Escape dismisses a visible tooltip before closing the list. Tooltips
+  fit within the viewport, including when the list scrolls, and describe their buttons to
+  screen readers.
 - Threshold: a slider from 1 to 254, then a number box and an Auto button joined into one
   outlined control, so it is clear that Auto fills in the number. The Auto half is filled
   solid while Auto is on and muted while it is off. Auto is the default. Moving the slider or
@@ -296,8 +308,11 @@ visits.
   when it is cleared, and shows the setting's value again when it loses focus.
 - The rows are two side by side. At 700px wide and below there is one to a row, and the
   strip drops the word "Style" to leave the threshold's slider room beside More.
-- Under the rows, at the right, a Reset button (an icon and the word) that puts all of the
-  current style's settings, the threshold included, back to their defaults. Its word, icon
+- At the right of the tray, a Reset button (an icon and the word) that puts all of the
+  current style's settings, the threshold included, back to their defaults. In the two-column
+  tray it fills the empty right-hand cell beside the last setting when there is one,
+  centered vertically with that setting; otherwise it follows on its own row. In the
+  single-column tray it follows the settings on its own row. Its word, icon
   and edge are tinted red, quietly: `#b3261e` on light, `#f2928a` on dark, the edge only
   part of the way there, and nothing filled. There is no other text under the rows. Reset is disabled while they are all at their defaults. Pressed from the
   keyboard it hands the focus to More (to the pressed chip on a phone), because a disabled
@@ -516,6 +531,31 @@ scaffolding and are not part of the app.
   selected, or a number box has focus, the keys copy that text as usual. On the
   empty screen they do nothing.
 - All controls are reachable by Tab with a visible focus ring.
+
+### Tooltips
+
+Every tooltip uses the shared action in `src/lib/tooltip.js`, including the dock, palette
+chips, style list and dropdown, tile actions, full file names, top bar and help dialog.
+There are no native `title` tooltips. Button tooltips explain the action rather than
+repeating the button name alone. Palette chips prefix their color-pair descriptions with
+the palette name and a colon. The style dropdown
+explains that it chooses how images are converted into two colors; the Style dock button
+opens the conversion controls, and Palette opens colors and transparency.
+
+Mouse hover shows a tooltip after 350 ms, keyboard focus immediately, and a stationary
+touch hold after 500 ms. Holding a button, link or color picker shows only its tooltip;
+release and any delayed click do not activate it. Moving 8px cancels the hold and leaves
+scrolling available. Short taps and clicks retain their usual actions. A held tooltip stays
+readable after release until another press, scrolling, resizing, window blur or Escape.
+Only one tooltip is visible at a time. It can be hovered itself, and Escape dismisses it
+before its surrounding popup or dialog. Touch holds do not open native context menus.
+
+Tooltips fit within the viewport and wrap long file names. Manual popovers keep them above
+clipping containers and modal dialogs; a dialog's tooltip belongs to that dialog and is
+removed or hidden when it closes. Descriptions are linked to focusable controls with
+`aria-describedby`, including the inputs inside color-swatch labels. Dynamic descriptions
+update when the style, transparency state or image count changes. Global dismissal and
+pointer listeners are shared, so adding tiles does not add global listeners per button.
 
 ### Quick switch
 
@@ -1179,6 +1219,9 @@ it is doing:
   never fewer than 32 pixels on the shorter side.
 - `src/lib/presets.js`: styles and palettes step forward and back and wrap at both ends; a
   palette is found either way round; the user's own colors stay as a stop after the presets.
+- `src/lib/tooltip.js`: hover/focus descriptions, viewport placement, normal taps and touch
+  holds without activation, delayed clicks, cancellation, dynamic text, color-picker
+  accessibility, modal lifecycle, single visible tooltip and shared listener cleanup.
 - `src/lib/gesture.js`: one step per notch of a mouse wheel; a trackpad's small moves add
   up; a turn round or a silence starts again; never more than one step per pause; one
   step for a flick with its fading tail.

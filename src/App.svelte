@@ -10,6 +10,7 @@
   import Dock from './Dock.svelte';
   import Tile from './Tile.svelte';
   import PixelIcon from './PixelIcon.svelte';
+  import { tooltip } from './lib/tooltip.js';
   import logoUrl from './assets/logo.gif';
   import logoStill from './assets/logo.png';
 
@@ -503,11 +504,11 @@
   <span class="count">{items.length} image{items.length === 1 ? '' : 's'}</span>
   <span class="grow"></span>
   {#if items.length}
-    <button class="btn sm" onclick={removeAll} aria-label="Remove all" title="Remove all"><PixelIcon name="trash" /></button>
+    <button class="btn sm" onclick={removeAll} aria-label="Remove all" use:tooltip={'Clear every image from the wall.'}><PixelIcon name="trash" /></button>
   {/if}
   <button class="btn" onclick={() => picker.click()}><PixelIcon name="plus" />Add<span class="wide">images</span></button>
   <!-- A mouse click gives up focus before the menu opens, or closing the menu would hand it back (see unfocus). -->
-  <button class="btn sm" aria-haspopup="true" aria-label="More" title="More" onclick={e => { if (e.detail) e.currentTarget.blur(); more.showModal(); }}><PixelIcon name="more" /></button>
+  <button class="btn sm" aria-haspopup="true" aria-label="More" use:tooltip={'Open appearance, help and app options.'} onclick={e => { if (e.detail) e.currentTarget.blur(); more.showModal(); }}><PixelIcon name="more" /></button>
 </header>
 
 {#if items.length}
@@ -557,7 +558,7 @@
 <!-- Any click closes the sheet: one of its buttons, or the dimmed screen around it, which counts as the dialog. -->
 <dialog class="sheet" bind:this={sheet} aria-label="Share" onclick={() => sheet.close()}>
   {#if shared}
-    <p class="name" title={shared.name}>{shared.name}</p>
+    <p class="name" use:tooltip={shared.name}>{shared.name}</p>
     <button class="btn" onclick={() => copy(shared)}><PixelIcon name="copy" />Copy</button>
     <button class="btn" onclick={() => save(shared)}><PixelIcon name="save" />Download</button>
     <button class="btn">Cancel</button>
@@ -592,7 +593,7 @@
      controls of the device in use. A click on the dimmed screen around it counts as the dialog itself. -->
 <dialog class="help" bind:this={help} aria-labelledby="help-title" onclick={e => e.target === help && help.close()}>
   <div class="help-in">
-    <button class="ib" onclick={() => help.close()} aria-label="Close" title="Close"><PixelIcon name="x" /></button>
+    <button class="ib" onclick={() => help.close()} aria-label="Close" use:tooltip={'Dismiss this help window.'}><PixelIcon name="x" /></button>
     <header>
       <img src={logoStill} alt="" />
       <div>

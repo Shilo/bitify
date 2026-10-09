@@ -17,6 +17,21 @@ export const PRESETS = [
   { name: 'Commodore', dark: '#40318e', light: '#88d7de' },
   { name: 'Rose', dark: '#4a0d2b', light: '#ffd1dc' },
 ];
+// Describe the color pair rather than repeating the chip's name (see docs/palettes.md).
+export const PALETTE_USES = {
+  Glow: 'Soft black and near-white for gentle contrast.',
+  Mono: 'Pure black and white for maximum contrast.',
+  Paper: 'Dark brown and grey-green for a muted print look.',
+  Torch: 'Near-black and warm cream, inspired by End of End.',
+  'Game Boy': 'Dark and pea green from the original handheld screen.',
+  Pocket: 'Near-black and pale olive from the smaller handheld screen.',
+  Nokia: 'Grey-green and mint from the classic phone screen.',
+  Playdate: 'Warm black and grey from the modern handheld screen.',
+  Phosphor: 'Dark grey-green and bright green for a glowing monitor look.',
+  Amber: 'Dark brown and golden yellow for a warm monitor look.',
+  Commodore: 'Indigo and cyan for a retro color monitor look.',
+  Rose: 'Dark wine and pale pink for a soft, warm tint.',
+};
 export const STYLES = [
   ['cutout', 'Cutout'],
   ['solid', 'Solid'],
