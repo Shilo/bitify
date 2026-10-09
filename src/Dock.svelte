@@ -15,6 +15,7 @@
   import { tooltip } from './lib/tooltip.js';
 
   let {
+    prototype = false,
     first = $bindable(),
     second = $bindable(),
     none = $bindable(), // which color is None: 0 neither, 1 the first, 2 the second
@@ -51,7 +52,42 @@
   // refits above it (see --panel-space in app.css).
   let panelHeight = $state(0);
   $effect(() => {
-    document.documentElement.style.setProperty('--panel-space', panel ? `${panelHeight + 10}px` : '0px');
+    if (!prototype) document.documentElement.style.setProperty('--panel-space', panel ? `${panelHeight + 10}px` : '0px');
+  });
+
+  // The prototype reserves the bounds of the whole editing stack, including the chooser.
+  // Layout changes happen once; the image viewport is never continuously animated.
+  $effect(() => {
+    if (!prototype || !dock) return;
+    panel, pop, more, width, height, panelHeight;
+    let cancelled = false;
+    const root = document.documentElement;
+    let observer, modes;
+    const measure = () => {
+      if (cancelled) return;
+      const area = document.getElementById('app').getBoundingClientRect();
+      const bounds = [dock, ...dock.querySelectorAll('.panel, .menu, .tray')].map(el => el.getBoundingClientRect());
+      const top = Math.min(...bounds.map(rect => rect.top));
+      const left = Math.min(...bounds.map(rect => rect.left));
+      const dockBounds = dock.getBoundingClientRect();
+      const header = document.querySelector('.bar').getBoundingClientRect();
+      const panelTop = Math.min(dockBounds.top, ...[...dock.querySelectorAll('.panel')].map(el => el.getBoundingClientRect().top));
+      root.style.setProperty('--prototype-header-space', `${header.bottom - area.top}px`);
+      root.style.setProperty('--prototype-panel-base', `${area.bottom - panelTop + 16}px`);
+      const rail = root.dataset.prototype === 'inspector' && innerWidth >= 1000 && innerHeight > 600;
+      root.style.setProperty('--prototype-right-space', rail ? `${Math.max(0, area.right - left + 16)}px` : '0px');
+      root.style.setProperty('--dock-base', `${Math.max(0, area.bottom - dockBounds.top + 16)}px`);
+      root.style.setProperty('--panel-space', rail ? '0px' : `${Math.max(0, dockBounds.top - top + (panel ? 12 : 0))}px`);
+    };
+    tick().then(() => {
+      if (cancelled) return;
+      measure();
+      observer = new ResizeObserver(measure);
+      for (const el of [dock, ...dock.querySelectorAll('.panel, .menu, .tray')]) observer.observe(el);
+      modes = new MutationObserver(measure);
+      modes.observe(root, { attributes: true, attributeFilter: ['data-prototype'] });
+    });
+    return () => { cancelled = true; observer?.disconnect(); modes?.disconnect(); };
   });
 
   const styleName = $derived(STYLES.find(s => s[0] === style)[1]);
@@ -210,14 +246,14 @@
 {#snippet control(key)}
   {@const { label, options, min, max, auto } = SETTINGS[key]}
   {#if options}
-    <div class="seg" role="group" aria-label={label}>
+    <div class="seg" class:glass-segmented={prototype} role="group" aria-label={label}>
       {#each options as [value, name, spoken]}
         <button aria-pressed={own[key] === value} aria-label={spoken} onclick={() => (own[key] = value)}>{name}</button>
       {/each}
     </div>
   {:else}
     <input
-      type="range"
+      type="range" class:glass-range={prototype}
       {min}
       {max}
       aria-label={label}
@@ -249,9 +285,9 @@
   {/if}
 {/snippet}
 
-<div class="dock" bind:this={dock}>
+<div class="dock" class:glass-card={prototype} bind:this={dock}>
   {#if panel === 'palettes'}
-    <div class="panel fit" bind:offsetHeight={panelHeight}>
+    <div class="panel fit" class:glass-card={prototype} bind:offsetHeight={panelHeight}>
       <!-- The scrolling box fills the panel, so a swipe anywhere on the panel moves the palettes.
            A mouse wheel moves them too, since there is no scrollbar to drag. -->
       <div class="pals" use:scroller onwheel={e => (e.currentTarget.scrollLeft += e.deltaY)}>
@@ -260,7 +296,7 @@
           <!-- Which color is None, if either. It is no palette, so it sits with the name, apart from
                the palettes: a small switch of three pictures, both colors and each color gone
                (.seg.mini and .glyph in app.css). -->
-          <span class="seg mini" role="group" aria-label="Transparent color">
+          <span class="seg mini" class:glass-segmented={prototype} role="group" aria-label="Transparent color">
             {#each [['Both colors', ''], ['No color for lines and dark pixels', ' first'], ['No color for fill and light pixels', ' second']] as [label, half], n}
               <button aria-pressed={none === n} aria-label={label} use:tooltip={['Draw both colors without making either transparent.', 'Make outlines and dark areas transparent.', 'Make fills and highlights transparent.'][n]} onclick={() => (none = n)}><span class="glyph{half}"></span></button>
             {/each}
@@ -282,10 +318,10 @@
       </div>
     </div>
   {:else if panel === 'style'}
-    <div class="panel" class:bare={chips && !keys.length} bind:offsetHeight={panelHeight}>
+    <div class="panel" class:glass-card={prototype} class:bare={chips && !keys.length} bind:offsetHeight={panelHeight}>
       <div class="pick anchor">
         {#if pop === 'styles'}
-          <div class="menu" role="group" aria-label="Style" use:reveal use:styleDividers onwheel={e => (e.currentTarget.scrollLeft += e.deltaY)}>
+          <div class="menu" class:glass-card={prototype} role="group" aria-label="Style" use:reveal use:styleDividers onwheel={e => (e.currentTarget.scrollLeft += e.deltaY)}>
             {#each STYLES as [key, name]}
               <button class="preset" class:group-start={key === 'stencil' || key === 'checker' || key === 'silhouette'} aria-pressed={style === key} use:tooltip={STYLE_USES[key]} onclick={() => { style = key; showOriginal = false; pop = null; }}>
                 <Pixels class="demo" pixels={demo(key)} />{name}
@@ -294,7 +330,7 @@
           </div>
         {/if}
         <span class="key" id="style-label">Style</span>
-        <button class="btn" aria-labelledby="style-label style-name" aria-expanded={pop === 'styles'} aria-haspopup="true" use:tooltip={'Choose how images are converted into two colors.'} onclick={() => (pop = pop === 'styles' ? null : 'styles')}>
+        <button class="btn" class:glass-btn={prototype} aria-labelledby="style-label style-name" aria-expanded={pop === 'styles'} aria-haspopup="true" use:tooltip={'Choose how images are converted into two colors.'} onclick={() => (pop = pop === 'styles' ? null : 'styles')}>
           <Pixels class="demo" pixels={demo(style)} /><span id="style-name">{styleName}</span><PixelIcon name="caret" />
         </button>
       </div>
@@ -329,7 +365,7 @@
           <span class="grow"></span>
         {/if}
         {#if rest.length}
-          <button class="btn extra" aria-expanded={more} aria-label="More settings" use:tooltip={'Show additional settings for the current style.'} onclick={() => (more = !more)}>
+          <button class="btn extra" class:glass-btn={prototype} aria-expanded={more} aria-label="More settings" use:tooltip={'Show additional settings for the current style.'} onclick={() => (more = !more)}>
             <PixelIcon name="more" />
           </button>
         {/if}
@@ -339,7 +375,7 @@
               <div class="row"><span class="key" class:changed={changed(style, own, [key])}>{SETTINGS[key].label}</span>{@render control(key)}</div>
             {/each}
             <div class="foot">
-              <button class="btn" disabled={!changed(style, own, keys)} aria-label="Reset {styleName}" use:tooltip={'Restore this style’s default settings.'} onclick={reset}><PixelIcon name="reset" />Reset</button>
+              <button class="btn" class:glass-btn={prototype} disabled={!changed(style, own, keys)} aria-label="Reset {styleName}" use:tooltip={'Restore this style’s default settings.'} onclick={reset}><PixelIcon name="reset" />Reset</button>
             </div>
           </div>
         {/if}
@@ -358,21 +394,21 @@
       <input type="color" bind:value={second} oninput={() => none === 2 && (none = 0)} aria-label="Color for fill and light pixels{none === 2 ? ': None' : ''}" />
     </label>
   </div>
-  <button class="btn" aria-expanded={panel === 'palettes'} aria-label="Palette" use:tooltip={'Choose a color pair or make one color transparent.'} onclick={() => toggle('palettes')}>
+  <button class="btn" class:glass-btn={prototype} aria-expanded={panel === 'palettes'} aria-label="Palette" use:tooltip={'Choose a color pair or make one color transparent.'} onclick={() => toggle('palettes')}>
     <PixelIcon name="grid" /><span class="lbl">Palette</span>
   </button>
   <span class="sep"></span>
   <!-- The bitified half is named after the style, so the style in use always shows. -->
-  <div class="seg" role="group" aria-label="View">
+  <div class="seg" class:glass-segmented={prototype} role="group" aria-label="View">
     <button aria-pressed={showOriginal} use:tooltip={'Show the source images before conversion.'} onclick={() => (showOriginal = true)}>Original</button>
     <button aria-pressed={!showOriginal} aria-label="Bitified: {styleName}" use:tooltip={`Show the converted images using ${styleName}.`} onclick={() => (showOriginal = false)}>{styleName}</button>
   </div>
-  <button class="btn" aria-expanded={panel === 'style'} aria-label="Style" use:tooltip={'Adjust the conversion style and its settings.'} onclick={() => toggle('style')}>
+  <button class="btn" class:glass-btn={prototype} aria-expanded={panel === 'style'} aria-label="Style" use:tooltip={'Adjust the conversion style and its settings.'} onclick={() => toggle('style')}>
     <PixelIcon name="sliders" /><span class="lbl">Style</span>
   </button>
   <span class="sep"></span>
   <!-- Only two or more images are "all". One saves as the file itself, not a zip. -->
-  <button class="btn primary" disabled={!count} aria-label={saveLabel} use:tooltip={count > 1 ? 'Save every image in a ZIP archive.' : count ? 'Save the image at its original size.' : 'Add an image to enable saving.'} onclick={onsaveall}>
+  <button class="btn primary" class:glass-btn={prototype} disabled={!count} aria-label={saveLabel} use:tooltip={count > 1 ? 'Save every image in a ZIP archive.' : count ? 'Save the image at its original size.' : 'Add an image to enable saving.'} onclick={onsaveall}>
     <PixelIcon name="save" /><span class="lbl">{saveLabel}</span>
   </button>
 </div>

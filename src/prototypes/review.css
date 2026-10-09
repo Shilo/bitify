@@ -1,0 +1,31 @@
+/* Review UI is deliberately solid so comparison copy stays readable. */
+.prototype-review { box-sizing: border-box; width: min(1040px, calc(100% - 32px)); max-width: none; max-height: calc(100dvh - 32px); padding: 30px; border: 1px solid var(--line); border-radius: 26px; background: var(--surface); color: var(--fg); overflow: auto; box-shadow: 0 28px 100px #0005; }
+.prototype-review::backdrop { background: #0007; backdrop-filter: blur(6px); }
+.prototype-review-head, .prototype-review-foot { display: flex; gap: 20px; justify-content: space-between; align-items: center; }
+.prototype-review h2 { margin: 7px 0; font-size: clamp(22px, 3vw, 34px); font-weight: 600; letter-spacing: -1px; }
+.prototype-review p { color: var(--muted); margin: 8px 0; }
+.prototype-review .prototype-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: .16em; }
+.prototype-directions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 24px 0; }
+.prototype-direction { display: flex; flex-direction: column; gap: 12px; padding: 12px 12px 20px; background: var(--bg); color: var(--fg); text-align: left; border: 1px solid var(--line); border-radius: 18px; font: inherit; cursor: pointer; }
+.prototype-direction[aria-pressed='true'] { border-color: var(--fg); box-shadow: 0 0 0 1px var(--fg); }
+.prototype-direction strong { font-size: 17px; letter-spacing: -.4px; }
+.prototype-direction > span:last-child { color: var(--muted); font-size: 13px; line-height: 1.5; }
+.prototype-tag { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; }
+.prototype-mini { position: relative; display: block; width: 100%; aspect-ratio: 1.5; border: 1px solid var(--line); border-radius: 10px; background: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 12px 12px; }
+.mini-header { position: absolute; inset: 9px 9px auto; height: 9px; border-radius: 4px; background: var(--fg); opacity: .25; }
+.mini-images { position: absolute; inset: 36px 17px 42px; display: flex; gap: 12px; align-items: center; justify-content: center; }
+.mini-images i { width: 28%; aspect-ratio: .8; background: var(--fg); opacity: .7; clip-path: polygon(25% 0, 75% 0, 75% 20%, 100% 20%, 100% 80%, 75% 80%, 75% 100%, 25% 100%, 25% 80%, 0 80%, 0 20%, 25% 20%); }
+.mini-controls { position: absolute; bottom: 12px; left: 20%; right: 20%; height: 18px; border: 1px solid var(--muted); border-radius: 10px; background: color-mix(in srgb, var(--surface) 80%, transparent); backdrop-filter: blur(3px); }
+[data-direction='inspector'] .mini-controls { top: 30px; bottom: 12px; left: auto; right: 10px; height: auto; width: 18%; border-radius: 8px; }
+[data-direction='inspector'] .mini-images { right: 27%; }
+[data-direction='clear'] .mini-controls { left: 12%; right: 12%; background: repeating-linear-gradient(90deg, var(--surface) 0 24%, transparent 24% 30%); border: 0; border-radius: 0; }
+.prototype-review-options { display: flex; gap: 22px; flex-wrap: wrap; align-items: center; padding: 16px 0; border-block: 1px solid var(--line); }
+.prototype-review-options label { display: flex; gap: 12px; align-items: center; }
+.prototype-review-options select { font: inherit; padding: 10px; border: 1px solid var(--line); border-radius: 9px; background: var(--bg); color: var(--fg); }
+.prototype-check input { width: 20px; height: 20px; accent-color: var(--fg); }
+.prototype-samples { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 20px 0; }
+.prototype-samples > span { color: var(--muted); margin-right: 6px; }
+.prototype-note { max-width: 90ch; font-size: 13px; line-height: 1.6; }
+.prototype-review-foot { margin-top: 24px; font-size: 12px; color: var(--muted); }
+.prototype-review button:focus-visible, .prototype-review select:focus-visible, .prototype-review input:focus-visible { outline: 3px solid var(--fg); outline-offset: 3px; }
+@media (max-width: 620px) { .prototype-review { padding: 20px; } .prototype-directions { grid-template-columns: 1fr; } .prototype-mini { aspect-ratio: 2.4; } .prototype-review-head { align-items: start; } .prototype-review-foot { flex-wrap: wrap; } }

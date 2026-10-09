@@ -9,7 +9,7 @@
   // Without `onremove` the tile is a preview only and has no buttons.
   // `set` is the style's settings. `budget` is set while one of their sliders is being dragged:
   // the milliseconds this tile may take to convert its image after each move.
-  let { item, first, second, style, set, flipped, budget = 0, onshare, oncopy, onsave, onremove } = $props();
+  let { item, first, second, style, set, flipped, budget = 0, inset = 8, onshare, oncopy, onsave, onremove } = $props();
   let held = $state(false);
   let holdTimer, downX = 0, downY = 0;
 
@@ -46,7 +46,7 @@
   // the pace this device last converted this image, fits the budget. It sharpens when the slider
   // rests or is let go. `shown` in layout.js has the rules. The image sits 8px in from each side
   // of the square, and a square with no room for it has not been laid out yet.
-  const size = $derived(box > 16 ? shown(item.img.w, item.img.h, (box - 16) * devicePixelRatio, budget, pace) : null);
+  const size = $derived(box > inset * 2 ? shown(item.img.w, item.img.h, (box - inset * 2) * devicePixelRatio, budget, pace) : null);
   // the picture's width and height, each on its own so that nothing is redrawn when `size` is worked out again to the same numbers
   const mw = $derived(size ? size[0] : 0);
   const mh = $derived(size ? size[1] : 0);

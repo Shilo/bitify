@@ -1259,3 +1259,34 @@ it is doing:
 - Working offline. That needs a service worker, which would cache the app and stand between
   a deploy and the people using it.
 - Hosting and deployment.
+
+## GlassKit design exploration (October 9, 2026)
+
+The isolated worktree branch `codex/glasskit-prototypes` adds experimental interfaces at
+`?prototype=dock`, `?prototype=inspector`, and `?prototype=clear`. This is a proposal, not a
+replacement of the approved default interface. `src/prototypes/` contains the visual
+adapters and comparison controls. The default URL retains the existing layout.
+
+All prototypes retain the real conversion, GIF playback, palette/transparency logic,
+style settings, copy/save paths and gesture/tooltip behavior. A separate
+`bitify-glass-prototypes` storage key prevents prototype settings from changing the
+ordinary app's preferences. Built-in samples pass through the ordinary image-add path.
+
+Prototype changes to geometry are deliberate: image gaps are 12px, image inset is 4px,
+and touch caption footprint is 56px. These values must match both CSS and the parameters
+passed to `fitGrid` and `shown`. Desktop inspector mode reserves horizontal space; other
+modes reserve the measured complete bottom editing stack, including the style chooser.
+Native dialogs remain modal; editing panels remain nonmodal. Workspaces have one
+continuous line/dot grid, with an optional full checkerboard comparison and solid-control
+fallback. The grid and glass surfaces are presentation only and are never exported.
+
+Research, source audit, full UI replacement map and implementation recommendation are
+in `docs/design/2026-10-09-*.md`. Safari/iOS material performance and composited contrast
+on arbitrary user content remain hardware-validation requirements before adoption.
+
+Short-window refinement: the prototype style chooser temporarily replaces its settings
+strip below 650px height on narrow phones, and in short landscape windows. This preserves
+space for the image and its metadata. Closing/choosing restores the strip. On coarse
+pointer screens at most 360px wide, colors occupy their own dock row to keep 44px targets.
+The prototype uses an actual reduced scroll viewport rather than bottom padding to keep
+scrolling image content clear of its editing controls.

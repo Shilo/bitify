@@ -1,0 +1,6 @@
+/* Keep the library, Bitify geometry, and final adapters in one ordered stylesheet.
+   Separate JS imports can be reordered when Vite extracts shared CSS chunks. */
+@import '@jungherz-de/glasskit/glasskit.css';
+@import '../app.css';
+@import './glass-prototypes.css';
+@import './review.css';
