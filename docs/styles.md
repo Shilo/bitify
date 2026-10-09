@@ -518,6 +518,22 @@ details remove at most 25% of that body. **Outline** is Auto, Keep or Trim, defa
 method's valleys and selected side of material boundaries. Previous-method inferred
 outlines use RGB Value. **Opacity cut** works as in other styles.
 
+**Why Detail has no Auto.** Unlike the brightness or edge thresholds in other styles,
+Detail controls how much of the detected structure is included. Feature detection already
+adapts to each source component; the small-sprite path estimates darkness and selects
+cavities, seams and gaps automatically. Detail chooses among those supported candidates.
+Outline's Auto is separate: it controls how the source boundary is treated.
+
+The default 50% is a heuristic, not a measured optimum for every item. An Auto button that
+merely selects 50 would add no image-dependent choice. Maximizing cuts or targeting a
+fixed fill percentage would also be unreliable: a helmet may need a large opening while
+a bone needs none. More negative space does not necessarily improve recognition.
+
+A useful future Auto mode would need evidence that its per-component choices improve
+recognition over the default. Until then, keep Detail manual and prioritize improving
+candidate detection and selection. Choosing Detail automatically cannot recover an
+identifying feature that the detector never offers, or one rejected by its protection rules.
+
 **100% Detail does not mean 100% of the fill is removed.** It admits all supported detail
 levels that pass the detector's rules. Bright or flat regions, ambiguous texture and
 protected parts can remain filled at maximum. Raising the numeric maximum alone would
