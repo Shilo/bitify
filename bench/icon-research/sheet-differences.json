@@ -1,0 +1,14 @@
+{
+  "general/solid_auto": 200,
+  "general/stencil_auto": 0,
+  "general/stencil_100_edges100": 0,
+  "weapons/solid_auto": 227,
+  "weapons/stencil_auto": 0,
+  "weapons/stencil_100_edges100": 0,
+  "accessories/solid_auto": 134,
+  "accessories/stencil_auto": 0,
+  "accessories/stencil_100_edges100": 0,
+  "armor/solid_auto": 292,
+  "armor/stencil_auto": 0,
+  "armor/stencil_100_edges100": 0
+}

@@ -12,6 +12,38 @@ in the sections "Images larger than their tile", "Drafts while a slider is dragg
 since covers every slider of the Style panel, not only the threshold's), "Long jobs", and parts of "Adding images", "Saving", "Copying" and "Errors and
 limits". This file explains the reasons and holds the numbers.
 
+## Icon preparation (October 8, 2026)
+
+Icon adds a separate structural preparation in `src/lib/icon.js`. It is lazy and is not
+run for any other style. `Tile.svelte` prepares it before timing the mask loop, like
+Stencil, so the slider's draft decision measures the cached conversion. Every outline
+choice is cached on the analysed image as two byte arrays: body membership and minimum
+Detail. Moving Detail samples these arrays; colors only repaint. Saving and copying use
+the full-source mask. Brightness/alpha changes produce a fresh analysis and cache.
+
+Preparation uses linear component floods, constant-size connectivity lookups and ranked
+linked buckets. It allocates 13 temporary bytes per source pixel plus 2 cached bytes per
+outline choice, in addition to the existing source/analysis/mask. No pixel creates an
+array or object. Three cached outline choices can retain 6 bytes per pixel. Large inputs
+still have a synchronous first pass and significant temporary memory demand.
+
+`node bench/icon-research/bench-icon.mjs` measured 65 actual 16×16 inventory items at
+2.898 ms for fresh preparation and 0.220 ms for a cached Detail update on this desktop
+(best of five after warming the engine). A noisy, fully opaque stress image took:
+
+| Source size | First Icon pass | Cached full mask |
+|---|---:|---:|
+| 512×512 | 34.1 ms | 0.86 ms |
+| 2048×2048 | 580.8 ms | 13.0 ms |
+| 4000×3000 | 3224.1 ms | 76.3 ms |
+
+Stress results are single passes, not a phone benchmark. Icon is intended for inventory
+sprites. `node bench/bench.mjs` was run before and after; unchanged conversion branches
+showed ordinary shared-machine variance, rather than a consistent regression. All ten
+existing styles matched `bench/bitify.old.js` in 24,000 image/style/threshold cases,
+including sampled pictures, using `node bench/equiv.mjs`. The old baseline remains local
+and untracked.
+
 ## The rules that must hold
 
 Two were set by the owner. The rest are what the work depends on.

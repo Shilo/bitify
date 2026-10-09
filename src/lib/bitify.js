@@ -1,5 +1,8 @@
 // 1-bit conversion. No DOM: everything works on plain typed arrays, so it runs in tests.
 
+import { iconOf } from './icon.js';
+export { iconOf } from './icon.js';
+
 const ALPHA_CUT = 128; // alpha below this is an empty pixel, unless `analyze` is given another cut
 const MIN_EDGE = 24; // Auto never takes a color change weaker than this for a boundary
 // Blue noise: the order in which the cells of a 16x16 tile turn light as the tone rises. Each
@@ -356,6 +359,15 @@ export function mask(img, style, set = null, mw = img.w, mh = img.h) {
       if (own === 2) m[o] = seam && !beside && !corner(p, L, R, U, D, 0) ? 1 : 2;
       // a dark pixel on the silhouette with no light pixel around it becomes a light rim, unless rims are off
       else m[o] = seam || (rim && beside && l !== 2 && r !== 2 && u !== 2 && d !== 2 && !corner(p, L, R, U, D, 2)) ? 2 : 1;
+    }
+    return m;
+  }
+
+  if (style === 'icon') {
+    const prepared = iconOf(img, opt.border ?? 'auto'), detail = opt.detail ?? 50;
+    for (let j = 0, o = 0; j < mh; j++) for (let i = 0, row = ys[j] * w; i < mw; i++, o++) {
+      const p = row + xs[i];
+      if (solid(p)) m[o] = prepared.ink[p] && prepared.detail[p] > detail ? 2 : 1;
     }
     return m;
   }

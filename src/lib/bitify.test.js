@@ -645,7 +645,7 @@ describe('an image shown smaller than it is', () => {
   });
 
   it('converts the whole image when no size is asked for, or its own', () => {
-    for (const style of ['cutout', 'lines', 'solid', 'stencil', 'checker', 'hatch', 'bayer', 'noise', 'atkinson', 'silhouette']) {
+    for (const style of ['cutout', 'lines', 'solid', 'icon', 'stencil', 'checker', 'hatch', 'bayer', 'noise', 'atkinson', 'silhouette']) {
       expect([...mask(img, style, null, w, h)], style).toEqual([...mask(img, style)]);
     }
   });

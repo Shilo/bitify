@@ -1,6 +1,6 @@
 # Conversion styles
 
-How each of Bitify's ten styles decides which of the two colors a pixel gets, and what each
+How each of Bitify's eleven styles decides which of the two colors a pixel gets, and what each
 style's own settings change. The code is in [src/lib/bitify.js](../src/lib/bitify.js); the
 tests beside it pin every rule described here. The settings are listed in
 [src/lib/settings.js](../src/lib/settings.js).
@@ -33,7 +33,7 @@ Two measurements are used throughout:
 
 ### The threshold
 
-Every style except Stencil and Silhouette depends on one number from 1 to 254, the
+Every style except Icon, Stencil and Silhouette depends on one number from 1 to 254, the
 threshold. Each
 style keeps its own.
 
@@ -275,6 +275,63 @@ brighter, so it is the second. All shading inside each group is lost.
 
 This is the classic 1-bit conversion. It suits art that already reads as two tones, and it
 is the most predictable style to tune by hand.
+
+## Icon
+
+A filled body with sparse negative-space grooves, intended for small inventory sprites.
+Set the first color to **None** for one ink plus transparency. Icon is third in the style
+list. Stencil keeps its earlier conversion rules and is fourth.
+
+Icon uses the original RGB and alpha. It does not require grayscale or a limited palette.
+It judges each eight-connected source component separately:
+
+1. **Prepare the body.** Auto infers a drawn near-black stroke when at least 55% of the
+   four-neighbor boundary is near-black and there are at least four interior pixels.
+   Near-black is at most 32 and at most a quarter of the interior median RGB Value.
+   It removes that stroke where the original pixel has at least three neighbors, first
+   together if the remaining body is connected, otherwise conservatively pixel by pixel.
+   Keep retains all source support. Trim attempts to peel the boundary with the same
+   connectivity and thin-part guards. Source transparent gaps stay transparent.
+2. **Find potential grooves.** Interior pixels need at least three filled four-neighbors.
+   Brightness valleys between brighter opposite neighbors identify creases. RGB normalized
+   by Value identifies chromatic material changes without treating a proportional shading
+   ramp as a seam. The darker side takes a seam; equal brightness uses RGB order. A point
+   dark in both axes is weakened as likely texture.
+3. **Select coherent details.** Eight-connected candidate regions are ranked by their
+   mean strength. Single dots, compact patches, broad diagonal checker texture and dense
+   branching regions are rejected. Stronger regions are tried first. A cut may not split
+   the foreground; a resulting single unsupported hole is restored. A region appears at
+   one Detail level, rather than adding its pixels individually.
+
+**Detail** is 0–100%, default 50%. Off keeps the prepared body. Higher values admit weaker
+grooves and more cuts; it never restores earlier cuts. Details remove at most 25% of the
+prepared body of each component. **Outline** is Auto, Keep or Trim, default Auto.
+**Brightness** affects valleys and the selected side of a material boundary; inferred
+outlines always use RGB Value. **Opacity cut** works as in other styles.
+
+The default preview ball (`#` first color, `.` second color):
+
+```
+    ######
+   ##....##
+  #........#
+ #..........#
+##..........##
+#............#
+#............#
+#............#
+#............#
+##..........##
+ #..........#
+  #........#
+   ##....##
+    ######
+```
+
+This is a geometric heuristic, not item recognition. Some shading resembles a crease,
+some decoration is suppressed, and different objects with similar source shapes can
+still become similar filled icons. Connectivity and retained area do not establish
+recognizability. Icon analyses GIF frames separately, so changing input details may flicker.
 
 ## Stencil
 

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { pathToFileURL } from 'node:url';
 const O = await import(pathToFileURL(import.meta.dirname + '/bitify.old.js'));
 const N = await import(pathToFileURL(import.meta.dirname + '/../src/lib/bitify.js'));
-const STYLES = ['cutout', 'solid', 'lines', 'silhouette', 'checker', 'hatch', 'bayer', 'noise', 'atkinson'];
+const STYLES = ['cutout', 'solid', 'stencil', 'lines', 'silhouette', 'checker', 'hatch', 'bayer', 'noise', 'atkinson'];
 let s = 99;
 const rnd = () => ((s = (s * 1664525 + 1013904223) >>> 0) / 2 ** 32);
 let checks = 0;
@@ -24,7 +24,7 @@ for (let n = 0; n < 400; n++) {
     assert.deepEqual([...mb], [...ma], `${st} t=${t} ${w}x${h} n=${n}`);
     // A smaller picture: in these four styles each of its pixels is the full mask's at the image pixel under its middle.
     // (The patterns and Atkinson are drawn afresh on the picture's pixels, so they are not.)
-    for (const [mw, mh] of ['cutout', 'lines', 'solid', 'silhouette'].includes(st) ? [[w, h], [Math.ceil(w / 2), Math.ceil(h / 2)], [Math.ceil(w / 3), Math.ceil(h / 1.7)], [1, 1], [Math.max(1, w - 1), Math.max(1, h - 1)]] : []) {
+    for (const [mw, mh] of ['cutout', 'lines', 'solid', 'stencil', 'silhouette'].includes(st) ? [[w, h], [Math.ceil(w / 2), Math.ceil(h / 2)], [Math.ceil(w / 3), Math.ceil(h / 1.7)], [1, 1], [Math.max(1, w - 1), Math.max(1, h - 1)]] : []) {
       const want = [];
       for (let j = 0; j < mh; j++) for (let i = 0; i < mw; i++) want.push(ma[Math.floor((j + 0.5) * h / mh) * w + Math.floor((i + 0.5) * w / mw)]);
       assert.deepEqual([...N.mask(b, st, t, mw, mh)], want, `${st} t=${t} ${mw}x${mh}`);

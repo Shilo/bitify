@@ -1,0 +1,62 @@
+[
+  {
+    "name": "breastplate-source-1bit.png",
+    "size": [
+      16,
+      16
+    ],
+    "opaque_colors": 1,
+    "alpha": [
+      0,
+      255
+    ]
+  },
+  {
+    "name": "general-source-1bit.png",
+    "size": [
+      64,
+      64
+    ],
+    "opaque_colors": 1,
+    "alpha": [
+      0,
+      255
+    ]
+  },
+  {
+    "name": "weapons-source-1bit.png",
+    "size": [
+      64,
+      64
+    ],
+    "opaque_colors": 1,
+    "alpha": [
+      0,
+      255
+    ]
+  },
+  {
+    "name": "accessories-source-1bit.png",
+    "size": [
+      64,
+      64
+    ],
+    "opaque_colors": 1,
+    "alpha": [
+      0,
+      255
+    ]
+  },
+  {
+    "name": "armor-source-1bit.png",
+    "size": [
+      64,
+      64
+    ],
+    "opaque_colors": 1,
+    "alpha": [
+      0,
+      255
+    ]
+  }
+]

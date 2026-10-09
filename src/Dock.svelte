@@ -63,7 +63,7 @@
   // The opacity cut is left out unless an image on the wall has a partly see-through pixel: it
   // changes nothing for any other image. Silhouette then has no settings at all.
   const keys = $derived(STYLE_SETTINGS[style].filter(key => key !== 'alpha' || soft));
-  const lead = $derived(['threshold', 'cuts'].includes(keys[0]) ? keys[0] : null);
+  const lead = $derived(['threshold', 'cuts', 'detail'].includes(keys[0]) ? keys[0] : null);
   const rest = $derived(keys.filter(key => key !== lead));
   // A wide screen shows the others all at once, in a tray that More opens under the strip.
   let more = $state(false);

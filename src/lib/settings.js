@@ -10,6 +10,8 @@ export const SETTINGS = {
   seams: { label: 'Seams', min: 1, max: 255, auto: true, default: null },
   rim: { label: 'Rim', options: [[true, 'On'], [false, 'Off']], default: true },
   cuts: { label: 'Cuts', min: 0, max: 254, auto: true, default: null },
+  detail: { label: 'Detail', min: 0, max: 100, unit: '%', zero: 'Off', default: 50 },
+  border: { label: 'Outline', options: [['auto', 'Auto'], ['keep', 'Keep'], ['trim', 'Trim']], default: 'auto' },
   outline: { label: 'Outline', options: [['keep', 'Keep'], ['trim', 'Trim']], default: 'keep' },
   edges: { label: 'Edges', min: 0, max: 100, unit: '%', zero: 'Off', default: 0 },
   thickness: { label: 'Thickness', options: [[1, '1'], [2, '2'], [3, '3']], default: 1 },
@@ -25,10 +27,11 @@ export const SETTINGS = {
 };
 
 // The settings each style has, in the order they are shown. The threshold comes first; Stencil
-// has none, and its Cuts comes first instead.
+// has none, and its Cuts comes first instead. Icon leads with Detail.
 export const STYLE_SETTINGS = {
   cutout: ['threshold', 'seams', 'rim', 'source', 'alpha'],
   solid: ['threshold', 'source', 'alpha'],
+  icon: ['detail', 'border', 'source', 'alpha'],
   stencil: ['cuts', 'outline', 'edges', 'source', 'alpha'],
   lines: ['threshold', 'thickness', 'darks', 'alpha'],
   checker: ['threshold', 'shading', 'scale', 'source', 'alpha'],

@@ -5,7 +5,7 @@ const styles = Object.keys(STYLE_SETTINGS);
 
 describe('the settings of a style', () => {
   it('gives every style a known list of settings, with the threshold first where there is one', () => {
-    expect(styles).toEqual(['cutout', 'solid', 'stencil', 'lines', 'checker', 'hatch', 'bayer', 'noise', 'atkinson', 'silhouette']);
+    expect(styles).toEqual(['cutout', 'solid', 'icon', 'stencil', 'lines', 'checker', 'hatch', 'bayer', 'noise', 'atkinson', 'silhouette']);
     for (const [style, keys] of Object.entries(STYLE_SETTINGS)) {
       for (const key of keys) expect(SETTINGS[key], `${style} ${key}`).toBeDefined();
       if (keys.includes('threshold')) expect(keys[0]).toBe('threshold');
@@ -29,6 +29,16 @@ describe('the settings of a style', () => {
     expect(allowed('outline', 'none')).toBe(false);
     expect(shown('edges', 0)).toBe('Off');
     expect(shown('edges', 60)).toBe('60%');
+  });
+
+  it('gives Icon a bounded detail amount and an inferred outline by default', () => {
+    expect(defaults('icon')).toEqual({ detail: 50, border: 'auto', source: 'luma', alpha: 128 });
+    expect(shown('detail', 0)).toBe('Off');
+    expect(shown('detail', 50)).toBe('50%');
+    for (const border of ['auto', 'keep', 'trim']) expect(allowed('border', border)).toBe(true);
+    expect(allowed('detail', null)).toBe(false);
+    expect(allowed('detail', 101)).toBe(false);
+    expect(restore(null, styles).settings.icon).toEqual(defaults('icon'));
   });
 
   it('allows a choice only from its options, and a number only whole and in range', () => {

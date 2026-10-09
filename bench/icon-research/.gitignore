@@ -1,0 +1,11 @@
+.tmp/
+__pycache__/
+!*.png
+inputs.json
+current-output.json
+color2gray-inputs.json
+color2gray-output.json
+viewer-data.json
+implemented.json
+icon-variants.json
+browser-canvases.json

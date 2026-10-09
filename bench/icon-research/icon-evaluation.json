@@ -1,0 +1,47 @@
+{
+  "items": 65,
+  "variants": 524,
+  "comparisons": {
+    "gray": {
+      "changedItems": 52,
+      "changedPixels": 857,
+      "vanished": 0
+    },
+    "palette4": {
+      "changedItems": 46,
+      "changedPixels": 560,
+      "vanished": 0
+    },
+    "sheetpalette4": {
+      "changedItems": 48,
+      "changedPixels": 535,
+      "vanished": 0
+    },
+    "palette8": {
+      "changedItems": 36,
+      "changedPixels": 319,
+      "vanished": 0
+    },
+    "sheetpalette8": {
+      "changedItems": 50,
+      "changedPixels": 506,
+      "vanished": 0
+    },
+    "palette16": {
+      "changedItems": 29,
+      "changedPixels": 151,
+      "vanished": 0
+    },
+    "sheetpalette16": {
+      "changedItems": 43,
+      "changedPixels": 339,
+      "vanished": 0
+    }
+  },
+  "breastplate": {
+    "old": 116,
+    "fresh": 98,
+    "low": 102,
+    "high": 98
+  }
+}

@@ -28,6 +28,11 @@ first or the second color out, and its pixels are transparent on the wall and in
 files. None is not part of a palette. Choosing a palette changes the two colors and leaves
 None where it is, and Swap takes None along with its color.
 
+For minimal inventory icons, choose **Icon** and make the **first color None**. The second
+color fills the body; the inferred outline and selected inner grooves become transparent.
+Changing the ink does not change the geometry. Icon reads source RGB directly, so converting
+the source to grayscale can remove useful material boundaries.
+
 ## The twelve palettes
 
 The panel shows them in one row, in groups of four with a divider between groups, in this

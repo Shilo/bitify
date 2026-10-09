@@ -1,0 +1,67 @@
+[
+  {
+    "group": "breastplate",
+    "path": "C:/Users/shilo/AppData/Local/Temp/codex-clipboard-02eb8cf5-4116-4291-b58d-108f2ebb6258.png",
+    "sha256": "4253720e7166feebf0292cbcdf8c6b46c5516f784ffa4c1dca45ef73652b349d",
+    "width": 16,
+    "height": 16,
+    "opaque": 155,
+    "alpha_values": [
+      0,
+      255
+    ],
+    "colors": 52
+  },
+  {
+    "group": "general",
+    "path": "C:/Users/shilo/AppData/Local/Temp/codex-clipboard-ec6be665-385a-4e8d-a122-5843262fbe9a.png",
+    "sha256": "af9f42ef98a83e4702662c57776dabf58e1c1af615e211da2da6a2fd69c8b676",
+    "width": 64,
+    "height": 64,
+    "opaque": 1574,
+    "alpha_values": [
+      0,
+      255
+    ],
+    "colors": 211
+  },
+  {
+    "group": "weapons",
+    "path": "C:/Users/shilo/AppData/Local/Temp/codex-clipboard-16406bb0-0d6a-48a9-b70d-9734fea3a649.png",
+    "sha256": "c599a7d2fd11bbcb405d4ab0982f4d04ab72ec085934b7c4a3dfd8e3e475a973",
+    "width": 64,
+    "height": 64,
+    "opaque": 1109,
+    "alpha_values": [
+      0,
+      255
+    ],
+    "colors": 217
+  },
+  {
+    "group": "accessories",
+    "path": "C:/Users/shilo/AppData/Local/Temp/codex-clipboard-2d6553b8-5c13-417a-a448-822b6c6921a6.png",
+    "sha256": "73d2b033e941923acb6f907ad006c9d86fdf29ab93b524f8984474db6efe37ad",
+    "width": 64,
+    "height": 64,
+    "opaque": 1606,
+    "alpha_values": [
+      0,
+      255
+    ],
+    "colors": 242
+  },
+  {
+    "group": "armor",
+    "path": "C:/Users/shilo/AppData/Local/Temp/codex-clipboard-5ee67f5c-fb66-4a10-9aae-27cd8336f118.png",
+    "sha256": "b7776f31df3778d1f4dd9e891705a468538b8304d442d96b90a85823a30e558e",
+    "width": 64,
+    "height": 64,
+    "opaque": 2093,
+    "alpha_values": [
+      0,
+      255
+    ],
+    "colors": 231
+  }
+]

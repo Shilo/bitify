@@ -1,0 +1,198 @@
+[
+  {
+    "method": "solid_auto",
+    "variant": "gray",
+    "changed_items": 0,
+    "changed_pixels": 0,
+    "mean_changed_pixels": 0.0
+  },
+  {
+    "method": "solid_auto",
+    "variant": "palette4",
+    "changed_items": 49,
+    "changed_pixels": 372,
+    "mean_changed_pixels": 5.72
+  },
+  {
+    "method": "solid_auto",
+    "variant": "palette8",
+    "changed_items": 47,
+    "changed_pixels": 243,
+    "mean_changed_pixels": 3.74
+  },
+  {
+    "method": "solid_auto",
+    "variant": "palette16",
+    "changed_items": 37,
+    "changed_pixels": 139,
+    "mean_changed_pixels": 2.14
+  },
+  {
+    "method": "solid_auto",
+    "variant": "sheetpalette4",
+    "changed_items": 56,
+    "changed_pixels": 586,
+    "mean_changed_pixels": 9.02
+  },
+  {
+    "method": "solid_auto",
+    "variant": "sheetpalette8",
+    "changed_items": 47,
+    "changed_pixels": 345,
+    "mean_changed_pixels": 5.31
+  },
+  {
+    "method": "solid_auto",
+    "variant": "sheetpalette16",
+    "changed_items": 50,
+    "changed_pixels": 357,
+    "mean_changed_pixels": 5.49
+  },
+  {
+    "method": "solid_50",
+    "variant": "gray",
+    "changed_items": 0,
+    "changed_pixels": 0,
+    "mean_changed_pixels": 0.0
+  },
+  {
+    "method": "solid_50",
+    "variant": "palette4",
+    "changed_items": 48,
+    "changed_pixels": 364,
+    "mean_changed_pixels": 5.6
+  },
+  {
+    "method": "solid_50",
+    "variant": "palette8",
+    "changed_items": 43,
+    "changed_pixels": 172,
+    "mean_changed_pixels": 2.65
+  },
+  {
+    "method": "solid_50",
+    "variant": "palette16",
+    "changed_items": 29,
+    "changed_pixels": 68,
+    "mean_changed_pixels": 1.05
+  },
+  {
+    "method": "solid_50",
+    "variant": "sheetpalette4",
+    "changed_items": 54,
+    "changed_pixels": 431,
+    "mean_changed_pixels": 6.63
+  },
+  {
+    "method": "solid_50",
+    "variant": "sheetpalette8",
+    "changed_items": 47,
+    "changed_pixels": 331,
+    "mean_changed_pixels": 5.09
+  },
+  {
+    "method": "solid_50",
+    "variant": "sheetpalette16",
+    "changed_items": 37,
+    "changed_pixels": 183,
+    "mean_changed_pixels": 2.82
+  },
+  {
+    "method": "stencil_auto",
+    "variant": "gray",
+    "changed_items": 0,
+    "changed_pixels": 0,
+    "mean_changed_pixels": 0.0
+  },
+  {
+    "method": "stencil_auto",
+    "variant": "palette4",
+    "changed_items": 25,
+    "changed_pixels": 196,
+    "mean_changed_pixels": 3.02
+  },
+  {
+    "method": "stencil_auto",
+    "variant": "palette8",
+    "changed_items": 27,
+    "changed_pixels": 232,
+    "mean_changed_pixels": 3.57
+  },
+  {
+    "method": "stencil_auto",
+    "variant": "palette16",
+    "changed_items": 21,
+    "changed_pixels": 206,
+    "mean_changed_pixels": 3.17
+  },
+  {
+    "method": "stencil_auto",
+    "variant": "sheetpalette4",
+    "changed_items": 37,
+    "changed_pixels": 340,
+    "mean_changed_pixels": 5.23
+  },
+  {
+    "method": "stencil_auto",
+    "variant": "sheetpalette8",
+    "changed_items": 25,
+    "changed_pixels": 261,
+    "mean_changed_pixels": 4.02
+  },
+  {
+    "method": "stencil_auto",
+    "variant": "sheetpalette16",
+    "changed_items": 27,
+    "changed_pixels": 307,
+    "mean_changed_pixels": 4.72
+  },
+  {
+    "method": "stencil_100_edges100",
+    "variant": "gray",
+    "changed_items": 39,
+    "changed_pixels": 236,
+    "mean_changed_pixels": 3.63
+  },
+  {
+    "method": "stencil_100_edges100",
+    "variant": "palette4",
+    "changed_items": 55,
+    "changed_pixels": 426,
+    "mean_changed_pixels": 6.55
+  },
+  {
+    "method": "stencil_100_edges100",
+    "variant": "palette8",
+    "changed_items": 50,
+    "changed_pixels": 237,
+    "mean_changed_pixels": 3.65
+  },
+  {
+    "method": "stencil_100_edges100",
+    "variant": "palette16",
+    "changed_items": 33,
+    "changed_pixels": 115,
+    "mean_changed_pixels": 1.77
+  },
+  {
+    "method": "stencil_100_edges100",
+    "variant": "sheetpalette4",
+    "changed_items": 56,
+    "changed_pixels": 435,
+    "mean_changed_pixels": 6.69
+  },
+  {
+    "method": "stencil_100_edges100",
+    "variant": "sheetpalette8",
+    "changed_items": 54,
+    "changed_pixels": 384,
+    "mean_changed_pixels": 5.91
+  },
+  {
+    "method": "stencil_100_edges100",
+    "variant": "sheetpalette16",
+    "changed_items": 53,
+    "changed_pixels": 306,
+    "mean_changed_pixels": 4.71
+  }
+]

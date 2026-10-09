@@ -247,8 +247,8 @@ current style's other settings a press away. Left to right:
 - The word "Style", set like "Palette" in the palettes panel, then the style button: a
   live preview of the current style (a small shaded ball with a stripe, drawn with the
   current two colors) and the style's name. Pressing it
-  opens the list of the ten styles above the strip, each with the same live preview and its
-  name, in two rows of five. On a phone too short to show them all above the panel, the
+  opens the list of the eleven styles above the strip, each with the same live preview and its
+  name, in a grid of the eleven styles. On a phone too short to show them all above the panel, the
   list scrolls. Choosing a style closes the list. So does a press outside it, or
   Escape; either leaves the strip open.
 - Threshold: a slider from 1 to 254, then a number box and an Auto button joined into one
@@ -261,6 +261,7 @@ current style's other settings a press away. Left to right:
   has none either: its Cuts setting stands there instead, with a slider, number box and
   Auto of its own. While its Auto is on, the box shows what Auto comes to for the sprites
   on the wall, least to most.
+  Icon has Detail instead, a 0–100% slider and number box without an Auto button.
 - More: a square button with three dots, one above the other, and no word: the same icon as the More button at
   the right end of the top bar, so "more" looks the same wherever it is. It is named "More
   settings" for a screen reader and on hover. It opens the tray (below), and is drawn
@@ -630,7 +631,7 @@ draws a smaller picture of the image, at its own size:
 - The shorter side of the picture is never given fewer than 32 pixels, unless the image has
   fewer. A long thin image would otherwise be drawn in the wrong shape once its few rows
   were rounded.
-- In Cutout, Solid, Stencil, Lines and Silhouette each pixel of the picture is exactly what the
+- In Cutout, Solid, Icon, Stencil, Lines and Silhouette each pixel of the picture is exactly what the
   image pixel it stands for is in the full conversion, worked out from that pixel's real
   neighbours in the full image.
 - Checker, Hatch, Bayer, Noise and Atkinson are instead drawn afresh on the picture's own
@@ -696,6 +697,7 @@ let go:
 |---|---|
 | **Cutout** (default) | A pixel brighter than the threshold is light, every other pixel dark. Then, using those tones: a pixel on the darker side of a change stronger than the seam strength, between two pixels of the same tone, takes the opposite tone; and a dark pixel that touches empty space, with no light pixel among its eight neighbours, becomes light. Dark is first color, light is second. |
 | **Solid** | Brighter than the threshold: second color. Otherwise first color. |
+| **Icon** | A connected filled body with sparse coherent grooves. Inferred or trimmed outline pixels and selected grooves are first color; the rest of the source support is second color. With first color None, this produces one ink plus transparency. See "Details of Icon". |
 | **Stencil** | Every non-empty pixel is second color, except the cuts, which are first color. A pixel on its sprite's outline is never a cut unless Outline is Trim, which makes all of them cuts. A pixel inside is a cut when it is as dark as its sprite's cut level or darker, unless that would cut half the sprite's inside or more; or when Edges is on and it is on the darker side of a change stronger than the edge strength. A pixel inside that touches empty space at a corner is never a cut. On Auto the cut level is Otsu's split of the sprite's own pixels; with Cuts set it is the sprite's outline level plus Cuts. |
 | **Lines** | A pixel is first color if any of its four neighbours is empty, or if a neighbour differs from it by more than the threshold and this pixel is the darker of the two. Everything else is second color. |
 | **Checker** | Second color if the tone (see below) is above 0.25 on even `x + y` cells and above 0.75 on odd ones, so mid-tones become a checkerboard. |
@@ -718,6 +720,31 @@ Details of Cutout:
 Known limits of Cutout: a flat shading step, such as a shadow drawn in one darker color, is
 cut like a part boundary; a dark part two pixels wide or less becomes all rim; art that is
 already dithered becomes busy.
+
+Details of Icon:
+
+- Icon is third in the list; Stencil is fourth. Existing styles retain their conversion.
+- Icon reads original RGB and alpha, without quantizing or requiring grayscale. Every
+  eight-connected source component is judged independently. See the algorithm and worked
+  example in [docs/styles.md](../../styles.md), implemented in `src/lib/icon.js`.
+- Outline Auto infers a near-black drawn stroke using the component's boundary and interior
+  RGB Value. Keep leaves source support whole; Trim attempts a boundary peel. A prepared
+  component remains connected and nonempty, and original thin shafts are protected.
+- Potential grooves are chromatic boundaries and brightness valleys. Connected candidate
+  regions are ranked together; isolated dots, compact patches and branching texture are
+  suppressed. Foreground connectivity is protected, while new transparent holes are allowed.
+- Detail is 0–100%, default 50%. At Off only the prepared body remains. More Detail never
+  undoes a previous cut. A groove appears together, subject to connectivity guards. Cuts
+  cannot remove more than 25% of a component's prepared body.
+- Icon has no threshold or Auto detail button. Detail occupies the main desktop slider and
+  number box; Outline (Auto/Keep/Trim), Brightness and Opacity cut are in the tray or phone
+  chips. They are remembered independently. Reset restores 50%, Auto, Luma and 128.
+- Preparation is lazy, cached per analysed image and outline choice. Moving Detail samples
+  the cached full-source result, including on a smaller tile. Saving and copying use every
+  original pixel. Brightness and alpha changes reanalyse the source and invalidate its cache.
+- This is geometric abstraction, not semantic item recognition. Ambiguous shading can be
+  mistaken for a groove or suppressed; some results remain generic. GIF frames are prepared
+  separately and detail can flicker as the input changes.
 
 Details of Stencil:
 
@@ -779,7 +806,7 @@ light or its lightest color dark, and outlines and highlights stay whole.
 
 - In Lines it is the minimum color difference that counts as an edge.
 - In Cutout, Solid, Checker, Hatch, Bayer, Noise and Atkinson it is the brightness cut-off.
-- Stencil and Silhouette have none.
+- Icon, Stencil and Silhouette have none.
 
 Auto picks a value per image with Otsu's method, which splits a histogram into two groups
 at the point that separates them best:
@@ -811,10 +838,12 @@ style did before it had settings.
 
 | Setting | Styles | Values | Default | What it does |
 |---|---|---|---|---|
-| Threshold | all but Stencil and Silhouette | Auto, or 1 to 254 | Auto | See "Threshold". |
+| Threshold | all but Icon, Stencil and Silhouette | Auto, or 1 to 254 | Auto | See "Threshold". |
 | Seams | Cutout | Auto, or 1 to 255 | Auto | The seam strength. Lower values cut along softer changes. No difference is above 255, so 255 cuts no seams. |
 | Rim | Cutout | On, Off | On | Off leaves out the light rim on dark pixels at the silhouette. With Seams at 255 as well, Cutout is Solid. |
 | Cuts | Stencil | Auto, or 0 to 254 | Auto | How much lighter than its sprite's outline an inside pixel may be and still be cut. At 0 only pixels as dark as the outline are. Auto picks for each sprite (see "Details of Stencil"). A sprite that would lose half its inside or more is left whole. |
+| Detail | Icon | Off, or 1 to 100% | 50% | Admit coherent negative-space grooves, with a per-component cut budget and connectivity guards. |
+| Outline | Icon | Auto, Keep, Trim | Auto | Infer a drawn near-black stroke, keep the source support, or attempt to peel the boundary. |
 | Outline | Stencil | Keep, Trim | Keep | Keep leaves the outline second color, so the shape is full size and thin parts survive. Trim makes it first color: in two colors that draws the sprite's own outline, and with the first color None it takes one pixel off all round. |
 | Edges | Stencil | Off, or 1 to 100% | Off | Also cuts the darker side of a color change stronger than `255 − 2 × Edges` between pixels inside a sprite, which finds parts that no dark line separates. |
 | Thickness | Lines | 1, 2, 3 | 1 | A solid pixel fewer than this many steps (left, right, up or down) from a line is a line too. |
@@ -889,7 +918,7 @@ restored when the app opens. Nothing leaves the device.
   so the system's theme does not flash.
 - The view switch, the open panel, whether the tray is open and the images are not saved.
 - They are stored as one JSON value under the `localStorage` key `bitify`. On the way back
-  each value is checked on its own: a color must be `#rrggbb`, the style one of the ten,
+  each value is checked on its own: a color must be `#rrggbb`, the style one of the eleven,
   each setting of each style one of its options or a whole number in its range (see
   "Each style's settings"), and the theme `light` or `dark`. Anything else falls back to its default (Glow dark first,
   Cutout, and the defaults in that table), so a damaged or outdated value cannot break the
@@ -1104,7 +1133,7 @@ it is doing:
     around a light part, never cuts a light pixel on the silhouette, and rims only images
     that have empty pixels;
   - Silhouette fills everything;
-  - a smaller picture has, in Cutout, Solid, Stencil, Lines and Silhouette, exactly the full
+  - a smaller picture has, in Cutout, Solid, Icon, Stencil, Lines and Silhouette, exactly the full
     conversion's value at the image pixel under the middle of each of its pixels, and
     shrinking the original gives the same pixels of it;
   - at every size the patterns and Atkinson come out as light as the full conversion, and
