@@ -363,9 +363,10 @@ button { font: inherit; color: inherit; }
 
 /* a style in the list of styles: a preview with its name underneath */
 .preset {
-  display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px 2px;
-  border: 1px solid transparent; border-radius: 10px; background: transparent;
-  color: var(--muted); font-size: 12px; cursor: pointer;
+  box-sizing: border-box; min-width: 0; min-height: 58px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 5px 4px;
+  border: 1px solid transparent; border-radius: 8px; background: transparent;
+  color: var(--muted); font-size: 11.5px; line-height: 1.2; white-space: nowrap; cursor: pointer;
 }
 .preset[aria-pressed="true"] { border-color: var(--fg); color: var(--fg); }
 .demo {
@@ -456,11 +457,14 @@ button { font: inherit; color: inherit; }
 .chip:disabled { opacity: 0.4; cursor: default; }
 /* the list of styles, opened by the style button; it sits above the panel, lined up with its left edge */
 .menu {
-  position: absolute; bottom: calc(100% + 10px); left: 0; box-sizing: border-box; max-width: 100%; padding: 8px;
-  display: grid; gap: 6px; grid-template-columns: repeat(5, minmax(0, 1fr));
-  background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 10px 32px var(--shadow);
+  --style-item: 63px; --style-gap: 4px;
+  position: absolute; bottom: calc(100% + 8px); left: 0; box-sizing: border-box;
+  width: calc(6 * var(--style-item) + 5 * var(--style-gap) + 14px); max-width: 100%; padding: 6px;
+  display: grid; gap: var(--style-gap); grid-template-columns: repeat(auto-fill, minmax(var(--style-item), 1fr));
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 10px 32px var(--shadow);
 }
-.menu .preset { padding: 8px 6px; }
+.menu .demo { width: 28px; height: 28px; background-size: 8px 8px; }
+.menu :focus-visible { outline-offset: -2px; }
 
 /* A phone on its side has no height to spare: with the tray open the wall would have none left.
    So it has the chips, as an upright phone does, with the pressed chip's control beside them
@@ -475,7 +479,7 @@ button { font: inherit; color: inherit; }
   .panel:not(.fit) { box-sizing: border-box; width: min(700px, calc(100vw - 24px)); }
   .menu { display: flex; overflow-x: auto; overscroll-behavior: contain; scrollbar-width: none; }
   .menu::-webkit-scrollbar { display: none; }
-  .menu .preset { flex: none; }
+  .menu .preset { flex: 0 0 var(--style-item); }
 }
 /* Too narrow for two settings side by side in the tray. The strip drops the word "Style" there,
    which the style button says anyway: with More beside it, the threshold's slider was left
@@ -516,8 +520,7 @@ button { font: inherit; color: inherit; }
      chips and the slider have use for every pixel, and the dock for no more than its tools take. */
   .panel:not(.fit) { box-sizing: border-box; left: 50%; right: auto; width: calc(100vw - 24px); transform: translateX(-50%); }
   .panel > .sep { display: none; } /* dividers only make sense while the panel is a single row */
-  .menu { right: 0; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); } /* as many to a row as fit: three on the narrowest phone, 280px wide */
-  /* Ten styles at three to a row are four rows, more than a short phone has room for above the
+  /* Eleven styles at three to a row are four rows, more than a short phone has room for above the
      panel. The list then scrolls, inside the room the dock and the panel leave. */
   .menu { max-height: calc(100dvh - var(--dock-space) - 16px); overflow-y: auto; overscroll-behavior: contain; }
 }
@@ -526,4 +529,5 @@ button { font: inherit; color: inherit; }
    wide as the screen allows instead of only as wide as the dock. */
 @media (max-width: 520px) and (max-height: 520px) and (orientation: landscape) {
   .thr { flex: 1.4 1 0; }
+  .menu { max-height: none; overflow-y: hidden; }
 }

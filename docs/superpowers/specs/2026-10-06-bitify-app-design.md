@@ -248,7 +248,10 @@ current style's other settings a press away. Left to right:
   live preview of the current style (a small shaded ball with a stripe, drawn with the
   current two colors) and the style's name. Pressing it
   opens the list of the eleven styles above the strip, each with the same live preview and its
-  name, in a grid of the eleven styles. On a phone too short to show them all above the panel, the
+  name, in a compact grid sized for six 63px buttons plus gaps, padding and borders
+  (412px), clamped to the parent panel's available width. Narrower panels fit fewer columns. Each button
+  is at least 58px high, with a 28px preview, 11.5px label, 5px vertical and 4px horizontal
+  padding. The popup has 6px padding and 4px gaps. On a phone too short to show them all above the panel, the
   list scrolls. Choosing a style closes the list. So does a press outside it, or
   Escape; either leaves the strip open.
 - Threshold: a slider from 1 to 254, then a number box and an Auto button joined into one
@@ -451,7 +454,7 @@ all change nothing.
 |---|---|
 | Above 800px | Icon and text labels, dividers between groups. |
 | 521 to 800px | Icon-only buttons, one row. |
-| 520px and below | Tools on the first row, the view switch on a second row as wide as the tools. The dock is only as wide as its tools, centered, and is never stretched to fill the screen; it keeps at least 12px from each edge. The style panel is as wide as the screen less 12px on each side. The palettes panel stays as wide as its chips, centered and never wider than the screen less those margins, with the name on a row of its own above the chips. The style panel takes two rows, without dividers: the style button and the chips of the style's settings, then the control of the pressed chip (see "On a phone" under "Style panel"). Its list of styles is a grid as wide as the panel, with as many styles to a row as fit at 72px or more each: three on a phone 280 to 320px wide, four at 375px. The image count and the word "images" in the Add button are hidden. |
+| 520px and below | Tools on the first row, the view switch on a second row as wide as the tools. The dock is only as wide as its tools, centered, and is never stretched to fill the screen; it keeps at least 12px from each edge. The style panel is as wide as the screen less 12px on each side. The palettes panel stays as wide as its chips, centered and never wider than the screen less those margins, with the name on a row of its own above the chips. The style panel takes two rows, without dividers: the style button and the chips of the style's settings, then the control of the pressed chip (see "On a phone" under "Style panel"). Its list of styles is a compact grid up to 412px wide, no wider than the panel, with as many styles to a row as fit at 63px or more each: three at 280px, four at 320px, five at 375px, and at most six. The image count and the word "images" in the Add button are hidden. |
 
 On coarse pointers every dock control is 40 to 44px square. The app uses
 `viewport-fit=cover`, pads for the safe-area insets, and sizes itself with dynamic
