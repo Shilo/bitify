@@ -698,7 +698,7 @@ let go:
 | **Cutout** (default) | A pixel brighter than the threshold is light, every other pixel dark. Then, using those tones: a pixel on the darker side of a change stronger than the seam strength, between two pixels of the same tone, takes the opposite tone; and a dark pixel that touches empty space, with no light pixel among its eight neighbours, becomes light. Dark is first color, light is second. |
 | **Solid** | Brighter than the threshold: second color. Otherwise first color. |
 | **Icon** | A connected filled body with sparse coherent grooves. Inferred or trimmed outline pixels and selected grooves are first color; the rest of the source support is second color. With first color None, this produces one ink plus transparency. See "Details of Icon". |
-| **Stencil** | Every non-empty pixel is second color, except the cuts, which are first color. A pixel on its sprite's outline is never a cut unless Outline is Trim, which makes all of them cuts. A pixel inside is a cut when it is as dark as its sprite's cut level or darker, unless that would cut half the sprite's inside or more; or when Edges is on and it is on the darker side of a change stronger than the edge strength. A pixel inside that touches empty space at a corner is never a cut. On Auto the cut level is Otsu's split of the sprite's own pixels; with Cuts set it is the sprite's outline level plus Cuts. |
+| **Stencil** | Every non-empty pixel is second color, except the cuts, which are first color. A pixel on its sprite's outline is never a cut unless Outline is Trim, which makes all of them cuts. A pixel inside is a cut when it is as dark as its sprite's cut level or darker and also darker than the median of the sprite's inside, so brightness cuts alone remove fewer than half of the inside; or when Edges is on and it is on the darker side of a change stronger than the edge strength. A pixel inside that touches empty space at a corner is never a cut. On Auto the cut level is Otsu's split of the sprite's own pixels (see "Details of Stencil"); with Cuts set it is the sprite's outline level plus Cuts. |
 | **Lines** | A pixel is first color if any of its four neighbours is empty, or if a neighbour differs from it by more than the threshold and this pixel is the darker of the two. Everything else is second color. |
 | **Checker** | Second color if the tone (see below) is above 0.25 on even `x + y` cells and above 0.75 on odd ones, so mid-tones become a checkerboard. |
 | **Hatch** | Second color if the tone is above 0.75, 0.5 or 0.25 where `(x + y) mod 3` is 0, 1 or 2, so mid-tones become diagonal lines three pixels apart. |
@@ -723,7 +723,7 @@ already dithered becomes busy.
 
 Details of Icon:
 
-- Icon is third in the list; Stencil is fourth. Existing styles retain their conversion.
+- Icon is third in the list; Stencil is fourth.
 - Icon reads original RGB and alpha, without quantizing or requiring grayscale. Every
   eight-connected source component is judged independently. See the algorithm and worked
   example in [docs/styles.md](../../styles.md), implemented in `src/lib/icon.js`.
@@ -748,8 +748,9 @@ Details of Icon:
 
 Details of Stencil:
 
-- It fills the whole sprite and cuts only its darkest inner lines, taking no notice of
-  shading. With the first color None the cuts are holes, which gives an icon in one color.
+- It fills the whole sprite and cuts dark interior pixels. Brightness alone cannot tell
+  identifying lines from shading. With the first color None the cuts are holes, which gives
+  an icon in one color.
 - A sprite is a group of non-empty pixels that touch, diagonals included. A pixel is on its
   outline when one of its four neighbours is empty; the canvas edge counts as empty by the
   rule Lines uses. The rest of its pixels are inside. Each sprite is judged on its own, so
@@ -761,23 +762,29 @@ Details of Stencil:
   the two groups it splits them into. The outline is usually most of that group, so the
   group is the outline's colors and whatever is drawn in them. A sprite of one brightness
   has nothing to split, and its cut level is its outline level.
-- A sprite is left whole when at least half of its inside pixels are as dark as its cut
-  level or darker: none of them is then cut for being dark. The dark group is then the
-  sprite's own color, not line art: a flat shape with no outline drawn, or a dark sprite.
-  The test is the median brightness of the inside pixels against the cut level.
+- Only an inside pixel darker than the median brightness of its sprite's inside pixels is
+  cut for being dark, on Auto and with manual Cuts. Brightness cuts therefore remove fewer
+  than half of the four-neighbour interior. Flat interiors stay whole. Increasing Cuts
+  adds cuts or reaches this limit, without undoing previous cuts. Edges and Outline Trim
+  are independent and may remove more; the median cap does not guarantee connectivity.
+  Previously, reaching the median disabled all brightness cuts at once. The cap replaces
+  that whole-sprite switch with a per-pixel condition, retaining earlier cuts.
 - An image with no empty pixel is one sprite with no outline, all of it inside. Its outline
   level is its darkest brightness. Each frame of an animation is read from its own pixels,
   not from what the frames share.
 - The edge strength is `255 − 2 × Edges`. The difference between two pixels and the tie on
   equal brightness are the ones Lines uses. Edges cuts whatever Cuts is, and is not held
-  back by the half rule.
+  back by the median.
 - While Auto is on, the Cuts box shows the least and the most that Auto comes to for the
   sprites of the images on the wall, each as its cut level less its outline level, between
   0 and 254. Sprites with nothing inside are left out.
 
 Known limits of Stencil: its cuts are blocks where a hand-drawn icon has thin lines, since
 it can only cut what the sprite already has; a sprite with no outline and no dark detail
-is left as its shape; shading as dark as the outline is cut with it.
+is left as its shape; shading as dark as the outline is cut with it. Increasing Cuts cannot
+recover features at or above the interior median unless Edges cuts them. Once all eligible
+darker pixels are cut, the slider plateaus even though its range continues to 254. Auto's
+Otsu selection is unchanged and does not identify meaningful item parts.
 
 Details of Lines:
 
@@ -841,7 +848,7 @@ style did before it had settings.
 | Threshold | all but Icon, Stencil and Silhouette | Auto, or 1 to 254 | Auto | See "Threshold". |
 | Seams | Cutout | Auto, or 1 to 255 | Auto | The seam strength. Lower values cut along softer changes. No difference is above 255, so 255 cuts no seams. |
 | Rim | Cutout | On, Off | On | Off leaves out the light rim on dark pixels at the silhouette. With Seams at 255 as well, Cutout is Solid. |
-| Cuts | Stencil | Auto, or 0 to 254 | Auto | How much lighter than its sprite's outline an inside pixel may be and still be cut. At 0 only pixels as dark as the outline are. Auto picks for each sprite (see "Details of Stencil"). A sprite that would lose half its inside or more is left whole. |
+| Cuts | Stencil | Auto, or 0 to 254 | Auto | How much lighter than its sprite's outline an inside pixel may be and still be cut. At 0 only pixels as dark as the outline are. Auto picks for each sprite (see "Details of Stencil"). Raising it adds cuts or reaches the median protection limit without restoring cuts. Brightness cuts alone remove fewer than half the inside; Edges and Trim are independent. |
 | Detail | Icon | Off, or 1 to 100% | 50% | Admit coherent negative-space grooves, with a per-component cut budget and connectivity guards. |
 | Outline | Icon | Auto, Keep, Trim | Auto | Infer a drawn near-black stroke, keep the source support, or attempt to peel the boundary. |
 | Outline | Stencil | Keep, Trim | Keep | Keep leaves the outline second color, so the shape is full size and thin parts survive. Trim makes it first color: in two colors that draws the sprite's own outline, and with the first color None it takes one pixel off all round. |

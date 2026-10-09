@@ -44,6 +44,30 @@ existing styles matched `bench/bitify.old.js` in 24,000 image/style/threshold ca
 including sampled pictures, using `node bench/equiv.mjs`. The old baseline remains local
 and untracked.
 
+## Stencil median cap (October 8, 2026)
+
+The brightness guard in `mask` now compares each pixel with its sprite's cached interior
+median, rather than disabling all brightness cuts when the requested cutoff reaches that
+median. Sprite preparation, caching, sampling and allocations are unchanged. Original
+Otsu Auto selection is retained; the proposed recursive Auto split is not shipped.
+
+`node bench/bench.mjs bench/bitify.old.js` and `node bench/bench.mjs` compared commit
+`7c0437d` with the cap, best of three on this desktop:
+
+| Stencil input | Before, cached | After, cached | Before, first pass | After, first pass |
+|---|---:|---:|---:|---:|
+| 512×512 opaque | 3.7 ms | 3.8 ms | 3.9 ms | 3.9 ms |
+| 512×512 sprite | 4.3 ms | 4.4 ms | 8.5 ms | 8.6 ms |
+| 2048×2048 opaque | 113.0 ms | 111.4 ms | 109.8 ms | 115.8 ms |
+
+Larger/shared-machine timings varied substantially, including unchanged branches. These
+runs support no speedup claim and are not phone measurements. The cap adds no allocation
+or preparation work. `bench/equiv.mjs` verifies 24,000 byte-identical combinations for
+the ten unchanged styles, plus exact preview sampling for 2,400 Stencil cases. The unit
+suite sweeps all 65 AI items through Cuts 0–254 in 30 brightness/outline/edge configurations.
+The historical guard comparison is reproducible with
+`node bench/icon-research/stencil-guard.mjs`, which loads its baseline from Git `7c0437d`.
+
 ## The rules that must hold
 
 Two were set by the owner. The rest are what the work depends on.
@@ -54,8 +78,9 @@ Two were set by the owner. The rest are what the work depends on.
 2. **The slider's draft has no race, its timer is always stopped or started again, and
    nothing leaks.** There is one timer at most; every move and every end of a drag stops it
    first.
-3. **A full conversion gives exactly the pixels it gave before the work.** `mask` with no
-   size is byte-identical to the old `mask`. `bench/equiv.mjs` checks it.
+3. **Performance-only changes preserve conversion.** `mask` with no size is byte-identical
+   to the old `mask`. Intentional algorithm changes must update the spec and tests; the
+   equivalence harness checks unaffected styles and exact structural preview sampling.
 4. **The loops in `src/lib/bitify.js` make nothing per pixel**: no array, no object, no
    function. They run once for every pixel of a photo, on phones.
 5. **Work per change follows the screen, not the file.** Only adding an image, saving and

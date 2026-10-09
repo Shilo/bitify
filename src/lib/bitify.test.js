@@ -469,7 +469,7 @@ describe('stencil', () => {
     expect(show(mask(round, 'stencil', { cuts: 0 }), 8)).toEqual(whole);
   });
 
-  it('leaves a sprite whole when at least half of its inside would be cut', () => {
+  it('keeps flat interiors and excludes the median brightness, including exact-half ties', () => {
     const whole = ['       ', ' ..... ', ' ..... ', ' ..... ', ' ..... ', ' ..... ', '       '];
     // one flat color with no outline drawn: all of the inside is as dark as the outline
     const flat = image(['       ', ' bbbbb ', ' bbbbb ', ' bbbbb ', ' bbbbb ', ' bbbbb ', '       '], pal);
@@ -486,6 +486,65 @@ describe('stencil', () => {
       expect(show(mask(half, 'stencil', set), 6)).toEqual(['      ', ' .... ', ' .... ', ' .... ', ' .... ', '      ']);
       expect(show(mask(less, 'stencil', set), 6)).toEqual(['      ', ' .... ', ' .#.. ', ' .... ', ' .... ', '      ']);
     }
+  });
+
+  it('adds brightness cuts as Cuts goes up, never takes one back, and stops short of half the inside', () => {
+    const steps = { ...pal, 1: grey(40), 2: grey(60), 3: grey(80), 4: grey(100), 5: grey(120) };
+    const ramp = image(['       ', ' kkkkk ', ' k123k ', ' k45bk ', ' kbbbk ', ' kkkkk ', '       '], steps);
+    let before = mask(ramp, 'stencil', { cuts: 0 });
+    for (let cuts = 1; cuts <= 254; cuts++) {
+      const m = mask(ramp, 'stencil', { cuts });
+      expect(before.every((v, p) => v !== 1 || m[p] === 1), `cuts ${cuts}`).toBe(true);
+      before = m;
+    }
+    // the fifth darkest of the nine inside is their median, and is never cut
+    expect(show(before, 7)).toEqual(['       ', ' ..... ', ' .###. ', ' .#... ', ' ..... ', ' ..... ', '       ']);
+    // Auto can reach the median too; it retains the darker marks instead of disabling them all.
+    expect([...mask(ramp, 'stencil')]).toEqual([...before]);
+  });
+
+  const inventory = JSON.parse(readFileSync(new URL('./fixtures/ai-inventory.json', import.meta.url), 'utf8')).map(f => ({
+    id: f.id, width: f.w, height: f.h,
+    data: Uint8ClampedArray.from([...Buffer.from(f.indices, 'base64')].flatMap(i => f.palette[i])),
+  }));
+
+  it('keeps breastplate cuts when the requested threshold reaches its interior median', () => {
+    const img = analyze(inventory.find(f => f.id === 'breastplate-1-1'));
+    expect([74, 75, 76, 77].map(cuts => count(mask(img, 'stencil', { cuts }), 2))).toEqual([116, 114, 114, 114]);
+    // The old whole-sprite guard restored all 41 cuts at 76, leaving 155 filled pixels.
+    expect([...mask(img, 'stencil', { cuts: 254 })]).toEqual([...mask(img, 'stencil', { cuts: 75 })]);
+  });
+
+  it('never reverses Cuts on the 65 AI items across brightness, outline and edge settings', () => {
+    expect(inventory).toHaveLength(65);
+    for (const source of ['luma', 'value', 'red', 'green', 'blue']) for (const src of inventory) {
+      const img = analyze(src, source);
+      for (const outline of ['keep', 'trim']) for (const edges of [0, 50, 100]) {
+        let before = mask(img, 'stencil', { cuts: 0, outline, edges });
+        for (let cuts = 1; cuts <= 254; cuts++) {
+          const m = mask(img, 'stencil', { cuts, outline, edges });
+          for (let p = 0; p < m.length; p++) {
+            if ((before[p] === 1 && m[p] !== 1) || ((m[p] === 0) !== (src.data[p * 4 + 3] < 128))) {
+              throw new Error(`${src.id}: ${source}/${outline}/edges=${edges}/cuts=${cuts}, pixel ${p}`);
+            }
+          }
+          before = m;
+        }
+        // Tile sampling and native output must agree even above the protection limit.
+        const mw = 7, mh = 9, preview = mask(img, 'stencil', { cuts: 254, outline, edges }, mw, mh);
+        for (let y = 0; y < mh; y++) for (let x = 0; x < mw; x++) {
+          const p = Math.floor((y + 0.5) * img.h / mh) * img.w + Math.floor((x + 0.5) * img.w / mw);
+          if (preview[y * mw + x] !== before[p]) throw new Error(`${src.id}: preview mismatch`);
+        }
+      }
+    }
+  }, 15000);
+
+  it('does not apply the brightness half-interior limit to independent Edges cuts', () => {
+    // Five of nine interior pixels are darker than their neighbours, but tied at the median.
+    const parts = image(['       ', ' kkkkk ', ' kmbmk ', ' kbmbk ', ' kmbmk ', ' kkkkk ', '       '], pal);
+    expect(count(mask(parts, 'stencil', { cuts: 254 }), 1)).toBe(0);
+    expect(count(mask(parts, 'stencil', { cuts: 254, edges: 100 }), 1)).toBe(5);
   });
 
   it('takes an image with no empty pixel for one sprite with no outline, all of it inside', () => {

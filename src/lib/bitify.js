@@ -185,10 +185,10 @@ export function unify(frames) {
 // What Stencil needs to know of each sprite, held for every solid pixel of it:
 //   `level`  the brightness of the darkest pixel on the sprite's outline, which a Cuts set by hand
 //            counts up from;
-//   `auto`   the brightness Auto cuts up to: Otsu's split of all the sprite's pixels, its outline
-//            among them, so that the dark group is the outline's colors and what is drawn in them;
-//   `body`   the median brightness of the pixels inside the sprite. At least half of them are that
-//            dark or darker, so a cut that reaches it would take half the inside or more.
+//   `auto`   the Otsu brightness split of all the sprite's pixels, outline included;
+//   `body`   the median brightness of the pixels inside the sprite. Fewer than half of them are
+//            darker than it, so brightness cuts alone remove fewer than half its inside.
+//            Edges and Outline Trim are independent and may remove more.
 // With them comes `cuts`: the least and the most that Auto comes to for the image's sprites, said
 // the way a Cuts set by hand is, as so much above the outline level.
 // A sprite is a group of solid pixels that touch, diagonals included, and a pixel is on its outline
@@ -376,9 +376,10 @@ export function mask(img, style, set = null, mw = img.w, mh = img.h) {
     // Every solid pixel is the second color but the cuts: inside pixels about as dark as their
     // sprite's own outline, and with Edges the darker side of a strong color change. How dark
     // that is, each sprite says for itself on Auto; a Cuts set by hand is so much above each
-    // sprite's outline level. A sprite that would lose half its inside or more that way has no
-    // line art to cut, only its own color, and is left whole. The outline itself is kept, or cut
-    // when it is trimmed. The canvas edge is empty only for sprites, as in Lines.
+    // sprite's outline level. Brightness cuts are limited to pixels below the interior median,
+    // so raising Cuts adds cuts or reaches that limit without undoing them. Edges can cut more.
+    // The outline itself is kept, or cut when trimmed. The canvas edge is empty only for sprites,
+    // as in Lines.
     const { level, auto, body } = spritesOf(img), edge = img.hasAlpha;
     // no two pixels differ by more than 255, so with Edges off nothing is strong enough
     const cuts = opt.cuts ?? null, trim = opt.outline === 'trim', strength = 255 - 2 * (opt.edges ?? 0);
@@ -392,7 +393,7 @@ export function mask(img, style, set = null, mw = img.w, mh = img.h) {
         // an inside pixel that touches empty space at a corner is never cut: there an outline two pixels thick would leave a speck
         const corner = !solid(p - w - 1) || !solid(p - w + 1) || !solid(p + w - 1) || !solid(p + w + 1);
         const dark = cuts === null ? auto[p] : level[p] + cuts; // this dark or darker is cut
-        m[o] = !corner && (seam || (lum[p] <= dark && body[p] > dark)) ? 1 : 2;
+        m[o] = !corner && (seam || (lum[p] <= dark && lum[p] < body[p])) ? 1 : 2;
       }
     }
     return m;

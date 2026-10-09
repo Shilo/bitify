@@ -280,7 +280,7 @@ is the most predictable style to tune by hand.
 
 A filled body with sparse negative-space grooves, intended for small inventory sprites.
 Set the first color to **None** for one ink plus transparency. Icon is third in the style
-list. Stencil keeps its earlier conversion rules and is fourth.
+list. Stencil is fourth.
 
 Icon uses the original RGB and alpha. It does not require grayscale or a limited palette.
 It judges each eight-connected source component separately:
@@ -335,9 +335,9 @@ recognizability. Icon analyses GIF frames separately, so changing input details 
 
 ## Stencil
 
-The whole sprite is the second color, and only its darkest inner lines are cut out of it
-in the first. It takes no notice of shading. It is made for icons in one color: set the
-first color to None (see [palettes.md](palettes.md)) and the cuts are holes.
+The whole sprite is the second color, and dark interior pixels are cut out of it
+in the first. Brightness alone cannot distinguish a line from shading. It is made for icons
+in one color: set the first color to None (see [palettes.md](palettes.md)) and the cuts are holes.
 
 - A **sprite** is a group of solid pixels that touch, diagonals included. An image of
   sixteen separate icons has sixteen sprites, and each is judged on its own.
@@ -350,9 +350,11 @@ first color to None (see [palettes.md](palettes.md)) and the cuts are holes.
 - **With Cuts set to a number**, the sprite's **outline level** is the brightness of the
   darkest pixel on its outline, and a pixel inside is cut when its brightness is no more
   than that level plus Cuts.
-- **A sprite that would lose half its inside or more is left whole.** Then the dark group is
-  not line art but the sprite's own color: a flat shape with no outline drawn, or a dark
-  sprite.
+- **Brightness cuts remove fewer than half the inside.** A pixel must also be strictly
+  darker than the median brightness of the four-neighbour interior. This applies on Auto
+  and with manual Cuts. Flat interiors stay whole, and raising Cuts adds cuts or reaches
+  this protection limit; it never restores previous cuts. Edges and Outline Trim are
+  independent and can remove more pixels. The limit does not guarantee connectivity.
 - A pixel inside that touches empty space at a corner is never cut. Where an outline turns
   it is often two pixels thick, and the inner one would be left as a speck.
 
@@ -374,8 +376,8 @@ first color to None (see [palettes.md](palettes.md)) and the cuts are holes.
 ```
 
 The ball's outline and its stripe are its dark group, and its body the light one. The
-stripe is inside and well under half of the inside, so it is cut; with the first color None
-the ball is one shape with a band cut through it.
+stripe belongs to the dark group and is below the interior median, so it is cut;
+with the first color None the ball is one shape with a band cut through it.
 
 An image with no empty pixel is one sprite with no outline, all of it inside. Its outline
 level is its darkest brightness.
@@ -390,7 +392,7 @@ Its settings:
   own outline, in one color it takes a pixel off all round.
 - **Edges**, Off or 1 to 100%: also cuts the darker side of a color change stronger than
   `255 − 2 × Edges`, between pixels inside the sprite. It finds parts that no dark line
-  separates.
+  separates. These cuts are not limited by the brightness median.
 - Brightness and Opacity cut (see "Settings" above). Stencil has no threshold.
 
 Outline Trim, Cuts 20, and Cuts 20 with Edges 70%:
@@ -414,7 +416,11 @@ Outline Trim, Cuts 20, and Cuts 20 with Edges 70%:
 
 Known limits: its cuts are blocks where a hand-drawn icon has thin lines, since it can only
 cut what the sprite already has; a sprite with no outline and no dark detail is left as its
-shape; and shading as dark as the outline is cut with it.
+shape; and shading as dark as the outline is cut with it. Auto reads brightness only, so it
+cannot tell a seam from a shadow of the same darkness. Raising Cuts can recover additional
+marks only below the interior median; features at or above it remain filled unless Edges
+cuts them. Once all eligible darker pixels are cut, the slider plateaus even though its
+range continues to 254. Neither the cap nor Auto identifies meaningful item parts.
 
 ## Lines
 
