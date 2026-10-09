@@ -1,6 +1,9 @@
 import { readFileSync, writeFileSync } from 'node:fs';
-import { analyze, mask } from '../../src/lib/bitify.js';
+import { pathToFileURL } from 'node:url';
+import { resolve } from 'node:path';
 const root = import.meta.dirname;
+// Compare one module per process: node bench-icon.mjs [module] [output-json].
+const { analyze, mask } = await import(pathToFileURL(process.argv[2] ? resolve(process.argv[2]) : `${root}/../../src/lib/bitify.js`));
 const rows = JSON.parse(readFileSync(`${root}/inputs.json`)).filter(r => r.variant === 'original' && !r.id.endsWith('sheet'));
 const originals = rows.map(r => ({ ...r, data: Uint8ClampedArray.from(r.data) }));
 const time = fn => { const start = performance.now(); fn(); return +(performance.now() - start).toFixed(3); };
@@ -22,5 +25,5 @@ for (const [w, h] of [[512, 512], [2048, 2048], [4000, 3000]]) {
   const cachedMs = time(() => mask(image, 'icon', { detail: 70 }));
   result.stress.push({ w, h, firstMs, cachedMs });
 }
-writeFileSync(`${root}/icon-performance.json`, JSON.stringify(result, null, 2));
+writeFileSync(process.argv[3] ? resolve(process.argv[3]) : `${root}/icon-performance.json`, JSON.stringify(result, null, 2));
 console.log(JSON.stringify(result, null, 2));

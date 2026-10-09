@@ -990,7 +990,7 @@ describe('docs/styles.md', () => {
   it('shows, for every style, exactly what the code draws for the preview ball', () => {
     const doc = readFileSync(new URL('../../docs/styles.md', import.meta.url), 'utf8').replace(/\r\n/g, '\n');
     const ball = previewBall();
-    for (const style of ['cutout', 'lines', 'solid', 'stencil', 'checker', 'hatch', 'bayer', 'noise', 'atkinson', 'silhouette']) {
+    for (const style of ['cutout', 'lines', 'solid', 'icon', 'stencil', 'checker', 'hatch', 'bayer', 'noise', 'atkinson', 'silhouette']) {
       const title = `## ${style[0].toUpperCase()}${style.slice(1)}\n`, from = doc.indexOf(title);
       expect(from, title).toBeGreaterThan(-1);
       const section = doc.slice(from, doc.indexOf('\n## ', from + 1));

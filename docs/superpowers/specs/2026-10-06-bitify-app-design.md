@@ -697,7 +697,7 @@ let go:
 |---|---|
 | **Cutout** (default) | A pixel brighter than the threshold is light, every other pixel dark. Then, using those tones: a pixel on the darker side of a change stronger than the seam strength, between two pixels of the same tone, takes the opposite tone; and a dark pixel that touches empty space, with no light pixel among its eight neighbours, becomes light. Dark is first color, light is second. |
 | **Solid** | Brighter than the threshold: second color. Otherwise first color. |
-| **Icon** | A connected filled body with sparse coherent grooves. Inferred or trimmed outline pixels and selected grooves are first color; the rest of the source support is second color. With first color None, this produces one ink plus transparency. See "Details of Icon". |
+| **Icon** | A connected filled body with coherent cavities, seams and selected openings on small transparent sprites; sparse grooves on larger/opaque art and Trim. Selected cuts are first color; the rest of the source support is second color. With first color None, this produces one ink plus transparency. See "Details of Icon". |
 | **Stencil** | Every non-empty pixel is second color, except the cuts, which are first color. A pixel on its sprite's outline is never a cut unless Outline is Trim, which makes all of them cuts. A pixel inside is a cut when it is as dark as its sprite's cut level or darker and also darker than the median of the sprite's inside, so brightness cuts alone remove fewer than half of the inside; or when Edges is on and it is on the darker side of a change stronger than the edge strength. A pixel inside that touches empty space at a corner is never a cut. On Auto the cut level is Otsu's split of the sprite's own pixels (see "Details of Stencil"); with Cuts set it is the sprite's outline level plus Cuts. |
 | **Lines** | A pixel is first color if any of its four neighbours is empty, or if a neighbour differs from it by more than the threshold and this pixel is the darker of the two. Everything else is second color. |
 | **Checker** | Second color if the tone (see below) is above 0.25 on even `x + y` cells and above 0.75 on odd ones, so mid-tones become a checkerboard. |
@@ -727,15 +727,25 @@ Details of Icon:
 - Icon reads original RGB and alpha, without quantizing or requiring grayscale. Every
   eight-connected source component is judged independently. See the algorithm and worked
   example in [docs/styles.md](../../styles.md), implemented in `src/lib/icon.js`.
-- Outline Auto infers a near-black drawn stroke using the component's boundary and interior
-  RGB Value. Keep leaves source support whole; Trim attempts a boundary peel. A prepared
-  component remains connected and nonempty, and original thin shafts are protected.
-- Potential grooves are chromatic boundaries and brightness valleys. Connected candidate
-  regions are ranked together; isolated dots, compact patches and branching texture are
-  suppressed. Foreground connectivity is protected, while new transparent holes are allowed.
-- Detail is 0–100%, default 50%. At Off only the prepared body remains. More Detail never
-  undoes a previous cut. A groove appears together, subject to connectivity guards. Cuts
-  cannot remove more than 25% of a component's prepared body.
+- Components with at most 1,024 pixels in a box no larger than 64×64, on an image with
+  transparency, select broad dark cavities, short seams between brighter pixels and dark
+  continuations of silhouette notches. Brightness comes from the chosen source. Otsu and
+  recursive dark splits identify candidates below the interior median; three-wide interior
+  cores and isolated cuts are protected. Whole connected regions enter together.
+- On this path Keep preserves the source edge. At Detail 50, Auto can extend a cavity or
+  notch through the edge, along a row or column, but never opens from a seam. Paths are
+  tried independently and together, rejecting joint conflicts without scan-order choices.
+  An opening cannot increase four- or eight-connected ink pieces, cut a protected inner
+  core or leave previously supported ink with fewer than two eight-neighbors. The inner
+  selection is final before opening and identical in Keep and Auto; rollback leaves no
+  dependent cuts. Source transparent gaps stay transparent.
+- Larger/opaque art and Trim retain the previous near-black outline preparation and
+  coherent chromatic/brightness grooves. Trim attempts a boundary peel. This path limits
+  grooves to 25% of its prepared body; small-sprite cavities have no such area budget.
+- Detail is 0–100%, default 50%. At Off the small-sprite path keeps the full silhouette;
+  the previous method keeps its prepared body. Default includes the selected dark features;
+  higher values can add weaker supported seams. More Detail never undoes a previous cut.
+  An eight-connected source component remains connected and nonempty at every setting.
 - Icon has no threshold or Auto detail button. Detail occupies the main desktop slider and
   number box; Outline (Auto/Keep/Trim), Brightness and Opacity cut are in the tray or phone
   chips. They are remembered independently. Reset restores 50%, Auto, Luma and 128.
@@ -849,8 +859,8 @@ style did before it had settings.
 | Seams | Cutout | Auto, or 1 to 255 | Auto | The seam strength. Lower values cut along softer changes. No difference is above 255, so 255 cuts no seams. |
 | Rim | Cutout | On, Off | On | Off leaves out the light rim on dark pixels at the silhouette. With Seams at 255 as well, Cutout is Solid. |
 | Cuts | Stencil | Auto, or 0 to 254 | Auto | How much lighter than its sprite's outline an inside pixel may be and still be cut. At 0 only pixels as dark as the outline are. Auto picks for each sprite (see "Details of Stencil"). Raising it adds cuts or reaches the median protection limit without restoring cuts. Brightness cuts alone remove fewer than half the inside; Edges and Trim are independent. |
-| Detail | Icon | Off, or 1 to 100% | 50% | Admit coherent negative-space grooves, with a per-component cut budget and connectivity guards. |
-| Outline | Icon | Auto, Keep, Trim | Auto | Infer a drawn near-black stroke, keep the source support, or attempt to peel the boundary. |
+| Detail | Icon | Off, or 1 to 100% | 50% | Admit coherent negative-space features with connectivity guards; weaker supported seams enter above 50%. The previous large/opaque/Trim path retains its groove budget. |
+| Outline | Icon | Auto, Keep, Trim | Auto | Open selected cavities/notches on small transparent sprites, keep the source edge, or use the previous boundary-peeling method. Larger/opaque Auto still infers a near-black stroke. |
 | Outline | Stencil | Keep, Trim | Keep | Keep leaves the outline second color, so the shape is full size and thin parts survive. Trim makes it first color: in two colors that draws the sprite's own outline, and with the first color None it takes one pixel off all round. |
 | Edges | Stencil | Off, or 1 to 100% | Off | Also cuts the darker side of a color change stronger than `255 − 2 × Edges` between pixels inside a sprite, which finds parts that no dark line separates. |
 | Thickness | Lines | 1, 2, 3 | 1 | A solid pixel fewer than this many steps (left, right, up or down) from a line is a line too. |

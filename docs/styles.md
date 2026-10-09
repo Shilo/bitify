@@ -282,8 +282,34 @@ A filled body with sparse negative-space grooves, intended for small inventory s
 Set the first color to **None** for one ink plus transparency. Icon is third in the style
 list. Stencil is fourth.
 
-Icon uses the original RGB and alpha. It does not require grayscale or a limited palette.
-It judges each eight-connected source component separately:
+Icon does not require grayscale or a limited palette. It judges each eight-connected
+source component separately. Small sprites with transparency use a cavity-and-gap method:
+
+1. **Find coherent inner shapes.** Otsu separates dark and light brightness; a second
+   split estimates outline darkness. Broad connected dark patches containing a 2×2 block
+   become cavities. Short dark runs between brighter pixels become seams. Dark pixels
+   continuing a source notch become part of that gap. Cuts must be below the interior
+   median. A protected three-wide interior core is never cut; isolated cuts are rejected.
+2. **Rank whole regions.** Connected cuts enter together. Default Detail 50 includes
+   the selected dark features; higher values can add weaker supported seams below the
+   median. Increasing Detail never restores a cut or breaks an eight-connected source
+   component. There is no 25% budget on this path: a genuine helmet opening can exceed it.
+3. **Open selected cavities.** At Detail 50, Auto can extend a cavity or notch through
+   the source edge along a row or column. Seams remain inside. Each path is tried alone,
+   then together; conflicts are rejected without choosing by scan order. The accepted
+   opening cannot increase either four- or eight-connected ink pieces, cut a protected
+   interior core, or leave a previously supported ink pixel with fewer than two eight-
+   neighbors. The inside is decided first, so refusing an opening cannot preserve a speck.
+
+**Keep** preserves the source edge. Auto and Keep share inner cuts and differ by accepted
+opening paths, which can include pixels at corners of transparency. **Trim** retains the
+original boundary-peeling method below. **Detail Off** keeps the full silhouette on the
+small-sprite path. Features enter as regions, so some steps add several pixels and some
+settings produce the same mask. This is a coherent-feature control, not a brightness clamp.
+
+This path applies to components with at most 1,024 source pixels in a box no larger than
+64×64, on an image with transparency. Larger components, opaque images and Trim retain
+the previous method, keeping preparation bounded for large inputs:
 
 1. **Prepare the body.** Auto infers a drawn near-black stroke when at least 55% of the
    four-neighbor boundary is near-black and there are at least four interior pixels.
@@ -303,35 +329,37 @@ It judges each eight-connected source component separately:
    the foreground; a resulting single unsupported hole is restored. A region appears at
    one Detail level, rather than adding its pixels individually.
 
-**Detail** is 0–100%, default 50%. Off keeps the prepared body. Higher values admit weaker
-grooves and more cuts; it never restores earlier cuts. Details remove at most 25% of the
-prepared body of each component. **Outline** is Auto, Keep or Trim, default Auto.
-**Brightness** affects valleys and the selected side of a material boundary; inferred
-outlines always use RGB Value. **Opacity cut** works as in other styles.
+**Detail** is 0–100%, default 50%. On the previous method, Off keeps its prepared body and
+details remove at most 25% of that body. **Outline** is Auto, Keep or Trim, default Auto.
+**Brightness** controls the cavity method's brightness measurements, or the previous
+method's valleys and selected side of material boundaries. Previous-method inferred
+outlines use RGB Value. **Opacity cut** works as in other styles.
 
-The default preview ball (`#` first color, `.` second color):
+The default preview ball (`#` first color, `.` second color). Its shading stripe is
+suppressed rather than treated as an identifying cavity:
 
 ```
-    ######
-   ##....##
-  #........#
- #..........#
-##..........##
-#............#
-#............#
-#............#
-#............#
-##..........##
- #..........#
-  #........#
-   ##....##
-    ######
+    ......
+   ........
+  ..........
+ ............
+..............
+..............
+..............
+..............
+..............
+..............
+ ............
+  ..........
+   ........
+    ......
 ```
 
-This is a geometric heuristic, not item recognition. Some shading resembles a crease,
-some decoration is suppressed, and different objects with similar source shapes can
-still become similar filled icons. Connectivity and retained area do not establish
-recognizability. Icon analyses GIF frames separately, so changing input details may flicker.
+This is a geometric heuristic, not item recognition. Shading can resemble a cavity, crease
+or notch; the supplied breastplate still has a shadow cut, and the steel torso's collar
+remains incomplete. Similar source shapes can still become similar icons. Connectivity
+does not establish recognizability. Icon analyses GIF frames separately, so changing input
+details may flicker. Grayscale and palette reduction do not resolve these ambiguities.
 
 ## Stencil
 

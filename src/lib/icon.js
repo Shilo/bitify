@@ -1,3 +1,5 @@
+import { glyphComponent } from './icon-glyph.js';
+
 // Structural icon conversion. Prepared once; moving Detail only samples two byte arrays.
 // No item names, templates, trained model, or assumptions about the input palette.
 const DX = Int8Array.of(-1, 0, 1, -1, 1, -1, 0, 1);
@@ -67,6 +69,10 @@ export function iconOf(img, outline = 'auto') {
         const q = Y * w + X;
         if (ink[q] && !seen[q]) { seen[q] = 1; queue[n++] = q; }
       }
+    }
+    if (glyphComponent(img, queue, n, outline, detail)) {
+      for (let i = 0; i < n; i++) { const p = queue[i]; allHist[value[p]] = insideHist[value[p]] = 0; }
+      continue;
     }
     const body = median(inner ? insideHist : allHist, inner || n), black = Math.min(32, body / 4);
     let darkRim = 0;
@@ -190,7 +196,7 @@ export function iconOf(img, outline = 'auto') {
     // Try stronger cuts first. Local connectivity is constant work (a lookup in 256 cases).
     // Linked rank buckets visit each candidate once, without sorting or allocating per pixel.
     // Accepted cuts get a minimum Detail setting. All later masks use the same sequence, so
-    // increasing Detail cannot undo previous cuts as Stencil's median guard does.
+    // increasing Detail cannot undo previous cuts.
     let removed = 0;
     const limit = Math.floor(area * 0.25);
     for (let rank = 100; rank >= 30 && removed < limit; rank--) {

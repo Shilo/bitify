@@ -1,5 +1,5 @@
-// Unchanged styles must remain byte-identical. Stencil's intentional median-cap change
-// is covered by its corpus tests; here its preview must still sample the native mask exactly.
+// Against the pre-Icon-integration snapshot, all other styles (including Stencil)
+// must remain byte-identical. Icon's previews must sample its new native mask.
 import assert from 'node:assert/strict';
 import { pathToFileURL } from 'node:url';
 const O = await import(pathToFileURL(import.meta.dirname + '/bitify.old.js'));
@@ -7,7 +7,7 @@ const N = await import(pathToFileURL(import.meta.dirname + '/../src/lib/bitify.j
 const STYLES = ['cutout', 'solid', ...(O.iconOf ? ['icon'] : []), 'stencil', 'lines', 'silhouette', 'checker', 'hatch', 'bayer', 'noise', 'atkinson'];
 let s = 99;
 const rnd = () => ((s = (s * 1664525 + 1013904223) >>> 0) / 2 ** 32);
-let checks = 0, stencilChecks = 0;
+let checks = 0, iconChecks = 0;
 for (let n = 0; n < 400; n++) {
   const w = 1 + Math.floor(rnd() * 40), h = 1 + Math.floor(rnd() * 40), data = new Uint8ClampedArray(w * h * 4);
   const kind = n % 4, levels = [2, 4, 16, 256][n % 4 >> 0], alpha = n % 3;
@@ -22,16 +22,16 @@ for (let n = 0; n < 400; n++) {
   assert.deepEqual([...b.lum], [...a.lum]); assert.deepEqual(b.hist, a.hist); assert.deepEqual(b.edges, a.edges);
   for (const st of STYLES) for (const t of st === 'stencil' ? [null, 0, 60, 75, 76, 254].map(cuts => ({ cuts })) : [null, 1, 60, 128, 200, 254]) {
     const ma = O.mask(a, st, t), mb = N.mask(b, st, t);
-    if (st !== 'stencil') assert.deepEqual([...mb], [...ma], `${st} t=${t} ${w}x${h} n=${n}`);
+    if (st !== 'icon') assert.deepEqual([...mb], [...ma], `${st} t=${t} ${w}x${h} n=${n}`);
     // A smaller picture: in structural styles each pixel samples the native mask under its middle.
     // (The patterns and Atkinson are drawn afresh on the picture's pixels, so they are not.)
     for (const [mw, mh] of ['cutout', 'lines', 'solid', 'icon', 'stencil', 'silhouette'].includes(st) ? [[w, h], [Math.ceil(w / 2), Math.ceil(h / 2)], [Math.ceil(w / 3), Math.ceil(h / 1.7)], [1, 1], [Math.max(1, w - 1), Math.max(1, h - 1)]] : []) {
       const want = [];
-      const full = st === 'stencil' ? mb : ma;
+      const full = st === 'stencil' || st === 'icon' ? mb : ma;
       for (let j = 0; j < mh; j++) for (let i = 0; i < mw; i++) want.push(full[Math.floor((j + 0.5) * h / mh) * w + Math.floor((i + 0.5) * w / mw)]);
       assert.deepEqual([...N.mask(b, st, t, mw, mh)], want, `${st} t=${t} ${mw}x${mh}`);
     }
-    if (st === 'stencil') stencilChecks++; else checks++;
+    if (st === 'icon') iconChecks++; else checks++;
   }
   const m = O.mask(a, 'cutout');
   assert.deepEqual([...N.colorize(m, '#12ab9f', '#fe0180')], [...O.colorize(m, '#12ab9f', '#fe0180')]);
@@ -43,4 +43,4 @@ for (let n = 0; n < 400; n++) {
 const fr = [0, 1, 2].map(j => ({ width: 9, height: 7, data: Uint8ClampedArray.from({ length: 9 * 7 * 4 }, (_, i) => (i % 4 === 3 ? 255 : (i * (j + 3) * 37) % 256)) }));
 const ua = O.unify(fr.map(O.analyze)), ub = N.unify(fr.map(N.analyze));
 for (const f of ['auto', 'autoLine', 'autoTone', 'autoSeam', 'lo', 'hi']) assert.equal(ub[0][f], ua[0][f]);
-console.log(`identical: ${checks} unchanged image/style/threshold combinations; ${stencilChecks} intentional-change Stencil cases; structural previews checked at 5 sizes`);
+console.log(`identical: ${checks} unchanged image/style/threshold combinations including Stencil; ${iconChecks} changed Icon cases with structural previews checked at 5 sizes`);

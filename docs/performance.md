@@ -14,6 +14,29 @@ limits". This file explains the reasons and holds the numbers.
 
 ## Icon preparation (October 8, 2026)
 
+### Small-sprite cavities and openings
+
+Small transparent components (at most 1,024 source pixels in a 64×64 box) now use
+`src/lib/icon-glyph.js` for Auto and Keep. Larger/opaque inputs and Trim keep the previous
+linear groove path. The outer component flood and two-byte cached result are unchanged.
+The new bounded scratch space is under 128 KiB per component and is discarded after
+preparation. Arrays are typed and allocated per component, never per pixel. Opening work
+allows at most 128 unique straight paths; overflow conservatively keeps the contour.
+Moving Detail still samples the cache, without rerunning the detector.
+
+Separate-process measurements are in
+[integration-performance-before.json](../bench/icon-research/integration-performance-before.json)
+and [integration-performance-after.json](../bench/icon-research/integration-performance-after.json).
+For all 65 actual 16px items together, fresh preparation was 2.782 ms before and 6.263 ms
+after; cached updates were 0.226 and 0.289 ms. These are desktop best-of-five timings.
+The extra preparation buys whole cavities and selected edge openings rather than the old
+filled helmet results. The large opaque stress path has identical output and no additional
+per-pixel scratch; single-pass times varied substantially (including roughly twice as long
+at 512² and 2048² after the inventory warm-up). The new small-sprite path does not warm
+the old large-input loops. These figures are not a speedup claim or phone measurements.
+`node bench/bench.mjs` also ran before and after. The earlier figures below describe the
+original Icon implementation and are retained as historical measurements.
+
 Icon adds a separate structural preparation in `src/lib/icon.js`. It is lazy and is not
 run for any other style. `Tile.svelte` prepares it before timing the mask loop, like
 Stencil, so the slider's draft decision measures the cached conversion. Every outline
