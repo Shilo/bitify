@@ -364,7 +364,7 @@ button { font: inherit; color: inherit; }
 /* a style in the list of styles: a preview with its name underneath */
 .preset {
   box-sizing: border-box; min-width: 0; min-height: 58px;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 5px 4px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 5px 3px;
   border: 1px solid transparent; border-radius: 8px; background: transparent;
   color: var(--muted); font-size: 11.5px; line-height: 1.2; white-space: nowrap; cursor: pointer;
 }
@@ -457,7 +457,7 @@ button { font: inherit; color: inherit; }
 .chip:disabled { opacity: 0.4; cursor: default; }
 /* the list of styles, opened by the style button; it sits above the panel, lined up with its left edge */
 .menu {
-  --style-item: 61px; --style-gap: 4px;
+  --style-item: 60px; --style-gap: 5px;
   position: absolute; bottom: calc(100% + 8px); left: -1px; right: -1px; box-sizing: border-box; padding: 6px;
   /* Match the parent's border edges and fit as many compact buttons as its width allows. */
   display: grid; gap: var(--style-gap);
@@ -466,6 +466,11 @@ button { font: inherit; color: inherit; }
 }
 .menu .demo { width: 28px; height: 28px; background-size: 8px 8px; }
 .menu :focus-visible { outline-offset: -2px; }
+.menu .preset { position: relative; }
+.menu .with-divider::before {
+  content: ""; position: absolute; left: -3px; top: 50%; transform: translateY(-50%);
+  width: 1px; height: 24px; background: var(--line); pointer-events: none;
+}
 
 /* A phone on its side has no height to spare: with the tray open the wall would have none left.
    So it has the chips, as an upright phone does, with the pressed chip's control beside them

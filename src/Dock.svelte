@@ -79,6 +79,18 @@
   // The list of styles is one row that scrolls sideways on a phone on its side. It opens with
   // the current style in view.
   const reveal = list => list.querySelector('[aria-pressed="true"]')?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  // Decorative group boundaries belong between neighbors, never at a wrapped row's edge.
+  const styleDividers = list => {
+    const starts = list.querySelectorAll('.group-start');
+    const update = () => {
+      const first = list.firstElementChild.offsetLeft;
+      for (const button of starts) button.classList.toggle('with-divider', button.offsetLeft > first);
+    };
+    const observer = new ResizeObserver(update);
+    observer.observe(list);
+    update();
+    return { destroy: () => observer.disconnect() };
+  };
   let pressed = $state('threshold');
   const active = $derived(keys.includes(pressed) ? pressed : keys[0]);
   // The pressed chip is the only thing that says which setting the control below belongs to, so
@@ -272,9 +284,9 @@
     <div class="panel" class:bare={chips && !keys.length} bind:offsetHeight={panelHeight}>
       <div class="pick anchor">
         {#if pop === 'styles'}
-          <div class="menu" role="group" aria-label="Style" use:reveal onwheel={e => (e.currentTarget.scrollLeft += e.deltaY)}>
+          <div class="menu" role="group" aria-label="Style" use:reveal use:styleDividers onwheel={e => (e.currentTarget.scrollLeft += e.deltaY)}>
             {#each STYLES as [key, name]}
-              <button class="preset" aria-pressed={style === key} onclick={() => { style = key; showOriginal = false; pop = null; }}>
+              <button class="preset" class:group-start={key === 'stencil' || key === 'checker' || key === 'silhouette'} aria-pressed={style === key} onclick={() => { style = key; showOriginal = false; pop = null; }}>
                 <Pixels class="demo" pixels={demo(key)} />{name}
               </button>
             {/each}
