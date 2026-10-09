@@ -6,9 +6,9 @@ October 9, 2026 · exploratory worktree · `codex/glasskit-prototypes`
 
 Run `npm ci` then `npm run dev -- --port 5188 --host 127.0.0.1` in this worktree.
 
-- [Canvas dock — recommended](http://127.0.0.1:5188/?prototype=dock)
+- [Canvas dock — grouped alternative](http://127.0.0.1:5188/?prototype=dock)
 - [Studio rail — desktop alternative](http://127.0.0.1:5188/?prototype=inspector)
-- [Floating islands — transparency challenger](http://127.0.0.1:5188/?prototype=clear)
+- [Floating islands — recommended](http://127.0.0.1:5188/?prototype=clear)
 - [Design comparison controls](http://127.0.0.1:5188/?prototype=dock&review=open)
 - [Existing interface](http://127.0.0.1:5188/)
 
@@ -25,17 +25,21 @@ The gallery is also served at `/docs/design/gallery.html` by the development ser
 
 ## Recommendation
 
-Choose **Canvas dock** as the initial direction: a continuous full-window coordinate grid,
-images without card backgrounds, smaller 12px gaps and 4px insets, floating document text
-and action controls, and a compact glass dock. Preserve the fit-to-window image model.
-Use one editing surface at a time and measure its DOM geometry. Studio rail is a serious alternative when a
-wide window makes horizontal tool placement advantageous; a rail consumes too much of a
-phone or narrow desktop window, so it returns to the bottom layout there.
+Choose **Floating islands** for the user's priorities: modern, minimal, fullscreen,
+immersive and see-through. Use one continuous full-window grid, 12px image gaps and
+4px insets, and three floating surfaces: colors with Palette, the single style-named
+comparison button with Style settings, and Download. Related controls remain grouped
+without a surrounding dock shell. Keep text-heavy editing panels more opaque.
 
-The user's goals—modern, minimal, fullscreen, immersive, and see-through—support removing
-solid bars and image cards. They do not require removing hierarchy or reliable label
-contrast. Floating islands deliberately pushes translucency and separation further so
-the cost can be judged using the same content and controls.
+The comparison button keeps the selected style name visible. Pressed/filled means
+conversion is on; unpressed/hollow means original. Its tooltip and accessible description
+explain the current view and next action. This compact comparison replaces the old
+Original/style segment in all three prototypes. Phone layouts stack the color group above
+conversion and Download, preserving usable targets.
+
+Canvas dock remains a useful alternative with one shared material. Studio rail places
+tools on the trailing edge when desktop width permits and returns to the bottom on
+smaller windows. Preserve the fit-to-window model and measured panel reservation.
 
 ## Where I challenge the idea
 

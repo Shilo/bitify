@@ -96,6 +96,7 @@
 :root[data-prototype] :is(.panel,.menu,.more,.help,.sheet) { background: var(--prototype-popover); }
 :root[data-prototype] .dock { z-index: 5; bottom: 20px; border-radius: 999px; padding: 10px 14px; gap: 10px 12px; }
 :root[data-prototype] :is(.dock,.panel,.more,.sheet) .glass-btn { -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: none; }
+:root[data-prototype] .dock .tool-group > .btn,
 :root[data-prototype] .dock > .btn { border-color: transparent; border-radius: 999px; }
 :root[data-prototype] .dock > .primary { border-color: var(--fg); box-shadow: 0 2px 7px var(--shadow); }
 :root[data-prototype] .pair { gap: 5px; }
@@ -105,7 +106,6 @@
   height: var(--hit); padding: 3px; border: 0; background: color-mix(in srgb,var(--fg) 6%,transparent);
   border-radius: 999px; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none;
 }
-:root[data-prototype] .dock > .seg { box-sizing: content-box; }
 :root[data-prototype] .seg button { border-radius: 999px; }
 :root[data-prototype] .seg button[aria-pressed="true"] { background: var(--surface); color: var(--fg); box-shadow: 0 1px 5px var(--shadow); }
 :root[data-prototype] .sep { background: var(--line); }
@@ -146,21 +146,29 @@
 :root[data-prototype] :focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
 :root[data-prototype] :is(.adv,.sets,.menu) :focus-visible { outline-offset: -3px; }
 
-/* C: clear floating islands intentionally makes grouping/contrast tradeoffs visible. */
+/* Related controls share one material; Download is the only standalone island. */
+:root[data-prototype] .tool-group { display: flex; align-items: center; gap: 6px; min-width: 0; }
+:root[data-prototype] .tool-group > .btn { border-radius: 999px; }
+:root[data-prototype] .view-toggle { min-width: 7em; padding: 0 12px; gap: 8px; }
+:root[data-prototype] .prototype-view-status { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+:root[data-prototype] .view-state { flex: none; width: 8px; height: 8px; border: 1.5px solid currentColor; border-radius: 50%; }
+:root[data-prototype] .view-toggle[aria-pressed="true"] { background: color-mix(in srgb,var(--fg) 8%,transparent); }
+:root[data-prototype] .view-toggle[aria-pressed="true"] .view-state { background: currentColor; }
+:root[data-prototype] .view-toggle[aria-pressed="false"] { color: var(--muted); }
+:root[data-prototype] .view-toggle[aria-pressed="false"] .view-state { border-style: dashed; }
+/* C: two related editing islands and a separate download action. */
 :root[data-prototype="clear"] { --prototype-material: rgba(253,253,254,.30); --prototype-blur: 10px; --prototype-gap: 12px; }
 :root[data-prototype="clear"][data-theme="dark"] { --prototype-material: rgba(37,43,51,.34); }
 :root[data-prototype="clear"] .dock {
   background: transparent; border-color: transparent; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none;
   gap: 10px 14px; padding: 0; border-radius: 0;
 }
-:root[data-prototype="clear"] .dock > :is(.pair,.seg,.btn) {
+:root[data-prototype="clear"] .dock > :is(.tool-group,.primary) {
   background: var(--prototype-material); border: 1px solid var(--prototype-border); box-shadow: 0 5px 18px var(--shadow);
   -webkit-backdrop-filter: blur(var(--gl-blur)); backdrop-filter: blur(var(--gl-blur));
+  border-radius: 999px; padding: 6px 8px;
 }
-:root[data-prototype="clear"] .dock > .pair { padding: 6px 8px; border-radius: 999px; }
-:root[data-prototype="clear"] .dock > .btn { padding: 6px 14px; border-radius: 999px; }
-:root[data-prototype="clear"] .dock > .seg { padding: 6px; border-radius: 999px; }
-:root[data-prototype="clear"] .dock > .primary { color: var(--fg); border-color: var(--line); }
+:root[data-prototype="clear"] .dock > .primary { color: var(--fg); border-color: var(--line); padding-inline: 14px; }
 :root[data-prototype="clear"] .dock > .sep { display: none; }
 :root[data-prototype="clear"] .panel { border-radius: 26px; }
 
@@ -171,12 +179,11 @@
     box-sizing: border-box; width: 250px; max-width: 250px; top: 100px; right: 20px; bottom: auto; left: auto;
     transform: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 16px; border-radius: 25px; align-items: stretch;
   }
-  :root[data-prototype="inspector"] .dock > .pair { grid-column: 1 / -1; justify-content: center; padding: 3px 0 6px; }
+  :root[data-prototype="inspector"] .dock > .tool-group { grid-column: 1 / -1; justify-content: space-between; }
   :root[data-prototype="inspector"] .dock > .sep { display: none; }
-  :root[data-prototype="inspector"] .dock > .seg { grid-column: 1 / -1; order: 1; height: var(--hit); box-sizing: content-box; }
-  :root[data-prototype="inspector"] .dock > .seg button { flex: 1; min-width: 0; padding: 0 8px; }
-  :root[data-prototype="inspector"] .dock > .btn { min-width: 0; padding: 0 8px; font-size: 12px; }
-  :root[data-prototype="inspector"] .dock > .primary { grid-column: 1 / -1; order: 2; }
+  :root[data-prototype="inspector"] .tool-group > .btn { min-width: 0; padding-inline: 8px; font-size: 12px; }
+  :root[data-prototype="inspector"] .style-tools > .view-toggle { flex: 1; }
+  :root[data-prototype="inspector"] .dock > .primary { grid-column: 1 / -1; }
   :root[data-prototype="inspector"] .panel {
     box-sizing: border-box; top: 0; bottom: auto; left: auto; right: calc(100% + 12px); transform: none;
     width: 340px; max-width: 340px; padding: 14px; gap: 12px; border-radius: 25px;
@@ -210,6 +217,7 @@
 @media (max-width: 800px) {
   :root[data-prototype] { --prototype-canvas-left: 16px; --prototype-canvas-right: 16px; }
   :root[data-prototype] .dock { gap: 8px; }
+  :root[data-prototype] .dock .tool-group > .btn:not(.view-toggle),
   :root[data-prototype] .dock > .btn { padding: 0; }
   :root[data-prototype="clear"] .dock > .btn { padding: 6px; }
 }
@@ -221,12 +229,12 @@
   :root[data-prototype] .bar .btn.sm { padding: 0; }
   :root[data-prototype] .prototype-review-button { font-size: 11px; padding: 0 10px; }
   :root[data-prototype] .dock {
-    display: grid; grid-template-columns: repeat(4,auto); bottom: 12px; gap: 8px; padding: 10px; border-radius: 24px;
+    display: grid; grid-template-columns: auto auto; bottom: 12px; gap: 8px; padding: 10px; border-radius: 24px;
     max-width: calc(100% - 42px);
   }
-  :root[data-prototype] .dock > .seg { box-sizing: border-box; grid-column: 1 / -1; }
-  :root[data-prototype] .dock > .seg button { flex: 1; }
-  :root[data-prototype] .dock > .seg button:last-child { min-width: 0; }
+  :root[data-prototype] .dock > .color-tools { grid-column: 1 / -1; justify-content: center; }
+  :root[data-prototype] .dock > .style-tools { grid-column: 1; }
+  :root[data-prototype] .dock > .primary { grid-column: 2; }
   :root[data-prototype] .panel { box-sizing: border-box; }
   :root[data-prototype] .panel:not(.fit) { width: calc(100vw - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px) - 24px); }
   :root[data-prototype] .panel.fit { max-width: calc(100vw - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px) - 24px); }
@@ -236,9 +244,9 @@
   :root[data-prototype] .empty p { font-size: 13px; }
   :root[data-prototype] .help-in { padding: 20px; }
   :root[data-prototype="clear"] .dock { background: transparent; padding: 0; gap: 6px; max-width: calc(100% - 24px); }
-  :root[data-prototype="clear"] .dock > .pair { padding: 5px; gap: 3px; }
-  :root[data-prototype="clear"] .dock > .btn { padding: 5px; }
-  :root[data-prototype="clear"] .dock > .seg { height: calc(var(--hit) + 12px); }
+  :root[data-prototype="clear"] .dock > .tool-group { padding: 5px; gap: 5px; }
+  :root[data-prototype="clear"] .dock > .primary { padding: 5px; }
+
 }
 @media (pointer: coarse) {
   :root[data-prototype] { --hit: 44px; }
@@ -272,7 +280,7 @@
   :root[data-prototype] { --dock-base: 160px; }
 }
 :root[data-prototype][data-opaque="true"] { --prototype-material: var(--surface); --prototype-popover: var(--surface); }
-:root[data-prototype][data-opaque="true"] :is(.glass-card,.glass-popover,.glass-modal,.glass-btn,.glass-segmented,.dock,.panel,.menu,.more,.help,.sheet,.toast,.bar .btn,.prototype-review-button,.dock > .pair,.dock > .seg) {
+:root[data-prototype][data-opaque="true"] :is(.glass-card,.glass-popover,.glass-modal,.glass-btn,.glass-segmented,.dock,.panel,.menu,.more,.help,.sheet,.toast,.bar .btn,.prototype-review-button,.dock > .tool-group) {
   -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
 }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
@@ -280,7 +288,7 @@
 }
 @media (prefers-reduced-transparency: reduce) {
   :root[data-prototype] { --prototype-material: var(--surface); --prototype-popover: var(--surface); }
-  :root[data-prototype] :is(.dock,.panel,.menu,.more,.help,.sheet,.toast,.glass-btn,.bar .btn,.prototype-review-button,.dock > .pair,.dock > .seg) {
+  :root[data-prototype] :is(.dock,.panel,.menu,.more,.help,.sheet,.toast,.glass-btn,.bar .btn,.prototype-review-button,.dock > .tool-group) {
     -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
   }
 }
@@ -289,11 +297,12 @@
 }
 @media (forced-colors: active) {
   :root[data-prototype] { background: Canvas; --bg: Canvas; --surface: Canvas; --fg: CanvasText; --muted: CanvasText; --line: ButtonText; }
-  :root[data-prototype] :is(.dock,.panel,.menu,.more,.help,.sheet,.toast,.btn,.ib,.prototype-review-button) {
+  :root[data-prototype] :is(.dock,.tool-group,.panel,.menu,.more,.help,.sheet,.toast,.btn,.ib,.prototype-review-button) {
     background: Canvas; color: CanvasText; border: 1px solid ButtonText; box-shadow: none;
     -webkit-backdrop-filter: none; backdrop-filter: none;
   }
   :root[data-prototype] .seg button[aria-pressed="true"],
+  :root[data-prototype] .view-toggle[aria-pressed="true"],
   :root[data-prototype] .btn.primary { background: Highlight; color: HighlightText; }
   :root[data-prototype] :focus-visible { outline-color: Highlight; }
 }
@@ -354,13 +363,9 @@
   :root[data-prototype] .panel:has(.menu) .pick > .btn,
   :root[data-prototype] .panel:has(.menu) .pick > .key { display: none; }
 }
-/* 44px touch targets cannot fit all four groups in one 320px row. Keep them
-   usable by giving the color group its own row on the smallest touch screens. */
+/* Keep the header usable alongside the two-row grouped controls on small touch screens. */
 @media (pointer: coarse) and (max-width: 360px) {
   :root[data-prototype] .bar { gap: 5px; }
   :root[data-prototype] .mark { font-size: 24px; }
   :root[data-prototype] .prototype-review-button { padding-inline: 6px; }
-  :root[data-prototype] .dock { grid-template-columns: repeat(3, auto); }
-  :root[data-prototype] .dock > .pair { grid-column: 1 / -1; justify-content: center; }
-  :root[data-prototype] .dock > .seg { grid-column: 1 / -1; }
 }

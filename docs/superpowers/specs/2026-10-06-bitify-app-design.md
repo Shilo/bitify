@@ -1290,3 +1290,13 @@ space for the image and its metadata. Closing/choosing restores the strip. On co
 pointer screens at most 360px wide, colors occupy their own dock row to keep 44px targets.
 The prototype uses an actual reduced scroll viewport rather than bottom padding to keep
 scrolling image content clear of its editing controls.
+
+Prototype control refinement: each prototype uses one style-named comparison button,
+with `aria-pressed` true for converted images. Clicking toggles the persistent original
+view; the style name remains visible in both states. A filled indicator shows conversion
+on; a hollow dashed indicator and subdued button show original. Its accessible
+description and shared tooltip explain the current view and next action. Hold-to-compare
+and Space retain their existing behavior. Floating islands group Palette with the color
+pair and Style with this comparison button; only Download floats independently. All
+three prototypes use these same semantic groups, stacking colors above conversion and
+Download on phones. The approved default interface retains its two-part comparison.

@@ -87,3 +87,21 @@ physical-device test.
    its settings strip there and restores it after selection or dismissal.
 7. Production CSS extraction enlarged buttons relative to the dev preview; the ordered
    foundation stylesheet fixes that and keeps the baseline entry separate.
+
+## Grouped islands and compact comparison refinement
+
+- All three prototypes now have one style-named comparison button; clicking toggles
+  original/converted while preserving its label. Verified both directions in Floating
+  islands, Canvas dock and Studio rail. Space on the focused comparison button also
+  toggles, with pressed state and accessible description updating.
+- Floating islands has exactly three material surfaces: colors/Palette, conversion/Style,
+  and Download. Children do not add blur surfaces.
+- Browser checks at 1440x900, 390x844 and 320x568 show no horizontal overflow. Atkinson's
+  longer name remains visible beside Style. Phone controls use two rows.
+- Palette/Style panels remain clear of the image viewport. At desktop rail width the
+  Style panel starts at x819 and the work area ends at x803. The compact rail is now
+  168px tall, reduced from the initial exploration's 229px.
+- The six main desktop/phone screenshots and comparison contact sheet were refreshed.
+  Other gallery views retain the earlier exploration's control arrangement.
+- Production build passes without Svelte accessibility warnings. These checks use desktop
+  pointer behavior at phone dimensions; physical touch/Safari remain unverified as above.

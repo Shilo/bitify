@@ -7,9 +7,9 @@
   let opaque = $state(false);
   let alpha = $state(false);
   const directions = [
-    { id: 'dock', name: '01 / Canvas dock', label: 'Recommended', text: 'A quiet, continuous workspace. One glass control group, with editing panels that give the images room.' },
+    { id: 'dock', name: '01 / Canvas dock', label: 'Grouped alternative', text: 'A quiet, continuous workspace. One glass control group, with editing panels that give the images room.' },
     { id: 'inspector', name: '02 / Studio rail', label: 'Desktop alternative', text: 'Tools move to the trailing edge on a wide screen. Compare the cost of width against the cost of height.' },
-    { id: 'clear', name: '03 / Floating islands', label: 'Aesthetic challenger', text: 'More transparent chrome and separated controls. Test whether the extra immersion is worth weaker grouping.' },
+    { id: 'clear', name: '03 / Floating islands', label: 'Recommended', text: 'Two transparent editing islands: colors with Palette, conversion with Style. Download floats separately.' },
   ];
   function apply() {
     const root = document.documentElement;
@@ -52,6 +52,6 @@
     <label class="prototype-check"><input type="checkbox" bind:checked={alpha} />Checkerboard comparison</label>
   </div>
   <div class="prototype-samples"><span>Try a workspace</span><button class="btn" onclick={() => sample('single')}>One image</button><button class="btn" onclick={() => sample('batch')}>Six images</button><button class="btn" onclick={() => sample('stress')}>Many images</button><button class="btn" onclick={() => sample('empty')}>Empty</button></div>
-  <p class="prototype-note">My recommendation: start with Canvas dock. Keep the background continuous, group the controls, and protect image clarity. Studio rail is the serious desktop alternative. GlassKit approximates the material; native iOS refraction and adaptive contrast are separate capabilities.</p>
+  <p class="prototype-note">My recommendation: start with Floating islands. Keep related controls together, the background continuous, and text-heavy panels readable. Studio rail is the serious desktop alternative. GlassKit approximates the material; native iOS refraction and adaptive contrast are separate capabilities.</p>
   <div class="prototype-review-foot"><span>Exploratory worktree · local image processing</span><button class="btn primary" onclick={() => dialog.close()}>Explore this design</button></div>
 </dialog>

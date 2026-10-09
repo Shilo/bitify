@@ -383,30 +383,58 @@
     </div>
   {/if}
 
-  <div class="pair">
-    <!-- A color that is None shows no color (.sw.none in app.css). Its picker still opens, on the
-         color it had, and choosing one there brings the color back. -->
-    <label class="sw" class:none={none === 1} style:background={none === 1 ? null : first} use:tooltip={none === 1 ? 'Choose a color to restore outlines and dark areas.' : 'Choose the color for outlines and dark areas.'}>
-      <input type="color" bind:value={first} oninput={() => none === 1 && (none = 0)} aria-label="Color for lines and dark pixels{none === 1 ? ': None' : ''}" />
-    </label>
-    <button class="ib" onclick={swap} aria-label="Swap colors" use:tooltip={'Exchange the two colors, including transparency.'}><PixelIcon name="swap" /></button>
-    <label class="sw" class:none={none === 2} style:background={none === 2 ? null : second} use:tooltip={none === 2 ? 'Choose a color to restore fills and highlights.' : 'Choose the color for fills and highlights.'}>
-      <input type="color" bind:value={second} oninput={() => none === 2 && (none = 0)} aria-label="Color for fill and light pixels{none === 2 ? ': None' : ''}" />
-    </label>
-  </div>
-  <button class="btn" class:glass-btn={prototype} aria-expanded={panel === 'palettes'} aria-label="Palette" use:tooltip={'Choose a color pair or make one color transparent.'} onclick={() => toggle('palettes')}>
-    <PixelIcon name="grid" /><span class="lbl">Palette</span>
-  </button>
-  <span class="sep"></span>
-  <!-- The bitified half is named after the style, so the style in use always shows. -->
-  <div class="seg" class:glass-segmented={prototype} role="group" aria-label="View">
-    <button aria-pressed={showOriginal} use:tooltip={'Show the source images before conversion.'} onclick={() => (showOriginal = true)}>Original</button>
-    <button aria-pressed={!showOriginal} aria-label="Bitified: {styleName}" use:tooltip={`Show the converted images using ${styleName}.`} onclick={() => (showOriginal = false)}>{styleName}</button>
-  </div>
-  <button class="btn" class:glass-btn={prototype} aria-expanded={panel === 'style'} aria-label="Style" use:tooltip={'Adjust the conversion style and its settings.'} onclick={() => toggle('style')}>
-    <PixelIcon name="sliders" /><span class="lbl">Style</span>
-  </button>
-  <span class="sep"></span>
+  {#snippet colorPair()}
+    <div class="pair">
+      <!-- A color that is None shows no color (.sw.none in app.css). Its picker still opens, on the
+           color it had, and choosing one there brings the color back. -->
+      <label class="sw" class:none={none === 1} style:background={none === 1 ? null : first} use:tooltip={none === 1 ? 'Choose a color to restore outlines and dark areas.' : 'Choose the color for outlines and dark areas.'}>
+        <input type="color" bind:value={first} oninput={() => none === 1 && (none = 0)} aria-label="Color for lines and dark pixels{none === 1 ? ': None' : ''}" />
+      </label>
+      <button class="ib" onclick={swap} aria-label="Swap colors" use:tooltip={'Exchange the two colors, including transparency.'}><PixelIcon name="swap" /></button>
+      <label class="sw" class:none={none === 2} style:background={none === 2 ? null : second} use:tooltip={none === 2 ? 'Choose a color to restore fills and highlights.' : 'Choose the color for fills and highlights.'}>
+        <input type="color" bind:value={second} oninput={() => none === 2 && (none = 0)} aria-label="Color for fill and light pixels{none === 2 ? ': None' : ''}" />
+      </label>
+    </div>
+  {/snippet}
+  {#snippet paletteButton()}
+    <button class="btn" class:glass-btn={prototype} aria-expanded={panel === 'palettes'} aria-label="Palette" use:tooltip={'Choose a color pair or make one color transparent.'} onclick={() => toggle('palettes')}>
+      <PixelIcon name="grid" /><span class="lbl">Palette</span>
+    </button>
+  {/snippet}
+  {#snippet styleButton()}
+    <button class="btn" class:glass-btn={prototype} aria-expanded={panel === 'style'} aria-label="Style" use:tooltip={'Adjust the conversion style and its settings.'} onclick={() => toggle('style')}>
+      <PixelIcon name="sliders" /><span class="lbl">Style</span>
+    </button>
+  {/snippet}
+  {#if prototype}
+    <div class="color-tools tool-group" role="group" aria-label="Colors and palette">
+      {@render colorPair()}
+      {@render paletteButton()}
+    </div>
+    <span class="sep"></span>
+    <div class="style-tools tool-group" role="group" aria-label="Conversion and style">
+      <button class="btn glass-btn view-toggle" aria-label="{styleName} conversion" aria-pressed={!showOriginal}
+        aria-describedby="prototype-view-status"
+        use:tooltip={showOriginal ? `Showing original. Click to apply ${styleName}.` : `Showing ${styleName}. Click to compare the original.`}
+        onclick={() => (showOriginal = !showOriginal)}>
+        <span class="view-state" aria-hidden="true"></span><span>{styleName}</span>
+      </button>
+      {@render styleButton()}
+      <span id="prototype-view-status" class="prototype-view-status">{showOriginal ? 'Showing original images.' : `Showing images converted with ${styleName}.`}</span>
+    </div>
+    <span class="sep"></span>
+  {:else}
+    {@render colorPair()}
+    {@render paletteButton()}
+    <span class="sep"></span>
+    <!-- The bitified half is named after the style, so the style in use always shows. -->
+    <div class="seg" class:glass-segmented={prototype} role="group" aria-label="View">
+      <button aria-pressed={showOriginal} use:tooltip={'Show the source images before conversion.'} onclick={() => (showOriginal = true)}>Original</button>
+      <button aria-pressed={!showOriginal} aria-label="Bitified: {styleName}" use:tooltip={`Show the converted images using ${styleName}.`} onclick={() => (showOriginal = false)}>{styleName}</button>
+    </div>
+    {@render styleButton()}
+    <span class="sep"></span>
+  {/if}
   <!-- Only two or more images are "all". One saves as the file itself, not a zip. -->
   <button class="btn primary" class:glass-btn={prototype} disabled={!count} aria-label={saveLabel} use:tooltip={count > 1 ? 'Save every image in a ZIP archive.' : count ? 'Save the image at its original size.' : 'Add an image to enable saving.'} onclick={onsaveall}>
     <PixelIcon name="save" /><span class="lbl">{saveLabel}</span>
