@@ -1,3 +1,11 @@
 node_modules
 dist
 .claude/handoffs/
+
+# Local review experiments. Reproducible shipping evidence is in integration-*.
+/bench/icon-research/bay-*
+/bench/icon-research/region-*
+/bench/icon-research/recognition-*
+/bench/icon-research/claude-coverage/
+/bench/icon-research/claude-rating/
+/bench/icon-research/.tmp/

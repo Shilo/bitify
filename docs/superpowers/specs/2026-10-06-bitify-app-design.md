@@ -697,14 +697,14 @@ let go:
 |---|---|
 | **Cutout** (default) | A pixel brighter than the threshold is light, every other pixel dark. Then, using those tones: a pixel on the darker side of a change stronger than the seam strength, between two pixels of the same tone, takes the opposite tone; and a dark pixel that touches empty space, with no light pixel among its eight neighbours, becomes light. Dark is first color, light is second. |
 | **Solid** | Brighter than the threshold: second color. Otherwise first color. |
-| **Icon** | A connected filled body with coherent cavities, seams and selected openings on small transparent sprites; sparse grooves on larger/opaque art and Trim. Selected cuts are first color; the rest of the source support is second color. With first color None, this produces one ink plus transparency. See "Details of Icon". |
-| **Stencil** | Every non-empty pixel is second color, except the cuts, which are first color. A pixel on its sprite's outline is never a cut unless Outline is Trim, which makes all of them cuts. A pixel inside is a cut when it is as dark as its sprite's cut level or darker and also darker than the median of the sprite's inside, so brightness cuts alone remove fewer than half of the inside; or when Edges is on and it is on the darker side of a change stronger than the edge strength. A pixel inside that touches empty space at a corner is never a cut. On Auto the cut level is Otsu's split of the sprite's own pixels (see "Details of Stencil"); with Cuts set it is the sprite's outline level plus Cuts. |
 | **Lines** | A pixel is first color if any of its four neighbours is empty, or if a neighbour differs from it by more than the threshold and this pixel is the darker of the two. Everything else is second color. |
+| **Stencil** | Every non-empty pixel is second color, except the cuts, which are first color. A pixel on its sprite's outline is never a cut unless Outline is Trim, which makes all of them cuts. A pixel inside is a cut when it is as dark as its sprite's cut level or darker and also darker than the median of the sprite's inside, so brightness cuts alone remove fewer than half of the inside; or when Edges is on and it is on the darker side of a change stronger than the edge strength. A pixel inside that touches empty space at a corner is never a cut. On Auto the cut level is Otsu's split of the sprite's own pixels (see "Details of Stencil"); with Cuts set it is the sprite's outline level plus Cuts. |
+| **Icon** | A connected filled body with coherent cavities, seams and selected openings on small transparent sprites; sparse grooves on larger/opaque art and Trim. Selected cuts are first color; the rest of the source support is second color. With first color None, this produces one ink plus transparency. See "Details of Icon". |
 | **Checker** | Second color if the tone (see below) is above 0.25 on even `x + y` cells and above 0.75 on odd ones, so mid-tones become a checkerboard. |
-| **Hatch** | Second color if the tone is above 0.75, 0.5 or 0.25 where `(x + y) mod 3` is 0, 1 or 2, so mid-tones become diagonal lines three pixels apart. |
 | **Bayer** | Second color if the tone is above `(b + 0.5) / 16`, where `b` is the value of a 4×4 ordered-dither matrix at the pixel. |
-| **Noise** | Second color if the tone is above `(n + 0.5) / 256`, where `n` is the value at the pixel of a 16×16 blue-noise grid: each number from 0 to 255 once, placed by the void-and-cluster method so that it has no regular pattern. |
+| **Hatch** | Second color if the tone is above 0.75, 0.5 or 0.25 where `(x + y) mod 3` is 0, 1 or 2, so mid-tones become diagonal lines three pixels apart. |
 | **Atkinson** | Error diffusion on `tone × 255`. Each pixel is cut at 127.5, and one eighth of the error goes to each of six neighbours (right, two right, the three below, two below). |
+| **Noise** | Second color if the tone is above `(n + 0.5) / 256`, where `n` is the value at the pixel of a 16×16 blue-noise grid: each number from 0 to 255 once, placed by the void-and-cluster method so that it has no regular pattern. |
 | **Silhouette** | Every non-empty pixel is first color. |
 
 Details of Cutout:
@@ -723,7 +723,8 @@ already dithered becomes busy.
 
 Details of Icon:
 
-- Icon is third in the list; Stencil is fourth.
+- The style menu and stepping order is Cutout, Solid, Lines, Stencil, Icon, Checker,
+  Bayer, Hatch, Atkinson, Noise, Silhouette. Icon is fifth; Stencil is fourth.
 - Icon reads original RGB and alpha, without quantizing or requiring grayscale. Every
   eight-connected source component is judged independently. See the algorithm and worked
   example in [docs/styles.md](../../styles.md), implemented in `src/lib/icon.js`.
@@ -746,6 +747,8 @@ Details of Icon:
   the previous method keeps its prepared body. Default includes the selected dark features;
   higher values can add weaker supported seams. More Detail never undoes a previous cut.
   An eight-connected source component remains connected and nonempty at every setting.
+  100% admits every eligible detail level; it is not a requested percentage of removed
+  fill. Unsupported features and protected parts remain filled even at maximum.
 - Icon has no threshold or Auto detail button. Detail occupies the main desktop slider and
   number box; Outline (Auto/Keep/Trim), Brightness and Opacity cut are in the tray or phone
   chips. They are remembered independently. Reset restores 50%, Auto, Luma and 128.

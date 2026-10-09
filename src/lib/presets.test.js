@@ -8,10 +8,11 @@ describe('stepStyle', () => {
     expect(stepStyle('solid', 1)).toBe(2);
     expect(stepStyle('solid', -1)).toBe(0);
   });
-  it('has Icon third and Stencil fourth, after Cutout and Solid', () => {
-    expect(STYLES.map(s => s[0])).toEqual(['cutout', 'solid', 'icon', 'stencil', 'lines', 'checker', 'hatch', 'bayer', 'noise', 'atkinson', 'silhouette']);
-    expect(STYLES[2]).toEqual(['icon', 'Icon']);
+  it('groups general shape styles before icon styles, then patterns and the plain silhouette', () => {
+    expect(STYLES.map(s => s[0])).toEqual(['cutout', 'solid', 'lines', 'stencil', 'icon', 'checker', 'bayer', 'hatch', 'atkinson', 'noise', 'silhouette']);
+    expect(STYLES[2]).toEqual(['lines', 'Lines']);
     expect(STYLES[3]).toEqual(['stencil', 'Stencil']);
+    expect(STYLES[4]).toEqual(['icon', 'Icon']);
   });
 
   it('wraps at both ends', () => {

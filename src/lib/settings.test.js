@@ -5,7 +5,7 @@ const styles = Object.keys(STYLE_SETTINGS);
 
 describe('the settings of a style', () => {
   it('gives every style a known list of settings, with the threshold first where there is one', () => {
-    expect(styles).toEqual(['cutout', 'solid', 'icon', 'stencil', 'lines', 'checker', 'hatch', 'bayer', 'noise', 'atkinson', 'silhouette']);
+    expect(styles).toEqual(['cutout', 'solid', 'lines', 'stencil', 'icon', 'checker', 'bayer', 'hatch', 'atkinson', 'noise', 'silhouette']);
     for (const [style, keys] of Object.entries(STYLE_SETTINGS)) {
       for (const key of keys) expect(SETTINGS[key], `${style} ${key}`).toBeDefined();
       if (keys.includes('threshold')) expect(keys[0]).toBe('threshold');

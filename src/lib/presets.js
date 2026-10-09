@@ -20,14 +20,14 @@ export const PRESETS = [
 export const STYLES = [
   ['cutout', 'Cutout'],
   ['solid', 'Solid'],
-  ['icon', 'Icon'],
-  ['stencil', 'Stencil'],
   ['lines', 'Lines'],
+  ['stencil', 'Stencil'],
+  ['icon', 'Icon'],
   ['checker', 'Checker'],
-  ['hatch', 'Hatch'],
   ['bayer', 'Bayer'],
-  ['noise', 'Noise'],
+  ['hatch', 'Hatch'],
   ['atkinson', 'Atkinson'],
+  ['noise', 'Noise'],
   ['silhouette', 'Silhouette'],
 ];
 

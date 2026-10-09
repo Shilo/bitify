@@ -31,14 +31,14 @@ export const SETTINGS = {
 export const STYLE_SETTINGS = {
   cutout: ['threshold', 'seams', 'rim', 'source', 'alpha'],
   solid: ['threshold', 'source', 'alpha'],
-  icon: ['detail', 'border', 'source', 'alpha'],
-  stencil: ['cuts', 'outline', 'edges', 'source', 'alpha'],
   lines: ['threshold', 'thickness', 'darks', 'alpha'],
+  stencil: ['cuts', 'outline', 'edges', 'source', 'alpha'],
+  icon: ['detail', 'border', 'source', 'alpha'],
   checker: ['threshold', 'shading', 'scale', 'source', 'alpha'],
-  hatch: ['threshold', 'shading', 'scale', 'direction', 'spacing', 'source', 'alpha'],
   bayer: ['threshold', 'shading', 'scale', 'matrix', 'source', 'alpha'],
-  noise: ['threshold', 'shading', 'scale', 'source', 'alpha'],
+  hatch: ['threshold', 'shading', 'scale', 'direction', 'spacing', 'source', 'alpha'],
   atkinson: ['threshold', 'shading', 'diffusion', 'source', 'alpha'],
+  noise: ['threshold', 'shading', 'scale', 'source', 'alpha'],
   silhouette: ['alpha'],
 };
 

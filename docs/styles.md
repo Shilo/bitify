@@ -5,6 +5,12 @@ style's own settings change. The code is in [src/lib/bitify.js](../src/lib/bitif
 tests beside it pin every rule described here. The settings are listed in
 [src/lib/settings.js](../src/lib/settings.js).
 
+The menu and stepping order is **Cutout → Solid → Lines → Stencil → Icon → Checker →
+Bayer → Hatch → Atkinson → Noise → Silhouette**. General shape conversions come first,
+then the two negative-space styles, then shading patterns, then the plain mask. This is
+a workflow grouping, not a measured popularity ranking. Checker and Bayer share regular
+dot patterns; Hatch uses directional strokes; Atkinson diffuses tone; Noise scatters it.
+
 ## What all styles share
 
 Every pixel ends up in one of three states:
@@ -276,90 +282,93 @@ brighter, so it is the second. All shading inside each group is lost.
 This is the classic 1-bit conversion. It suits art that already reads as two tones, and it
 is the most predictable style to tune by hand.
 
-## Icon
+## Lines
 
-A filled body with sparse negative-space grooves, intended for small inventory sprites.
-Set the first color to **None** for one ink plus transparency. Icon is third in the style
-list. Stencil is fourth.
+It draws an outline around every part of a sprite, not only around its
+silhouette, and fills everything else flat.
 
-Icon does not require grayscale or a limited palette. It judges each eight-connected
-source component separately. Small sprites with transparency use a cavity-and-gap method:
+A solid pixel becomes the first color (a line) if either of these is true for any of its
+four neighbours (left, right, up, down):
 
-1. **Find coherent inner shapes.** Otsu separates dark and light brightness; a second
-   split estimates outline darkness. Broad connected dark patches containing a 2×2 block
-   become cavities. Short dark runs between brighter pixels become seams. Dark pixels
-   continuing a source notch become part of that gap. Cuts must be below the interior
-   median. A protected three-wide interior core is never cut; isolated cuts are rejected.
-2. **Rank whole regions.** Connected cuts enter together. Default Detail 50 includes
-   the selected dark features; higher values can add weaker supported seams below the
-   median. Increasing Detail never restores a cut or breaks an eight-connected source
-   component. There is no 25% budget on this path: a genuine helmet opening can exceed it.
-3. **Open selected cavities.** At Detail 50, Auto can extend a cavity or notch through
-   the source edge along a row or column. Seams remain inside. Each path is tried alone,
-   then together; conflicts are rejected without choosing by scan order. The accepted
-   opening cannot increase either four- or eight-connected ink pieces, cut a protected
-   interior core, or leave a previously supported ink pixel with fewer than two eight-
-   neighbors. The inside is decided first, so refusing an opening cannot preserve a speck.
+1. The neighbour is empty.
+2. The neighbour differs from it by more than the threshold, and this pixel is the darker of
+   the two.
 
-**Keep** preserves the source edge. Auto and Keep share inner cuts and differ by accepted
-opening paths, which can include pixels at corners of transparency. **Trim** retains the
-original boundary-peeling method below. **Detail Off** keeps the full silhouette on the
-small-sprite path. Features enter as regions, so some steps add several pixels and some
-settings produce the same mask. This is a coherent-feature control, not a brightness clamp.
-
-This path applies to components with at most 1,024 source pixels in a box no larger than
-64×64, on an image with transparency. Larger components, opaque images and Trim retain
-the previous method, keeping preparation bounded for large inputs:
-
-1. **Prepare the body.** Auto infers a drawn near-black stroke when at least 55% of the
-   four-neighbor boundary is near-black and there are at least four interior pixels.
-   Near-black is at most 32 and at most a quarter of the interior median RGB Value.
-   It removes that stroke where the original pixel has at least three neighbors, first
-   together if the remaining body is connected, otherwise conservatively pixel by pixel.
-   Keep retains all source support. Trim attempts to peel the boundary with the same
-   connectivity and thin-part guards. Source transparent gaps stay transparent.
-2. **Find potential grooves.** Interior pixels need at least three filled four-neighbors.
-   Brightness valleys between brighter opposite neighbors identify creases. RGB normalized
-   by Value identifies chromatic material changes without treating a proportional shading
-   ramp as a seam. The darker side takes a seam; equal brightness uses RGB order. A point
-   dark in both axes is weakened as likely texture.
-3. **Select coherent details.** Eight-connected candidate regions are ranked by their
-   mean strength. Single dots, compact patches, broad diagonal checker texture and dense
-   branching regions are rejected. Stronger regions are tried first. A cut may not split
-   the foreground; a resulting single unsupported hole is restored. A region appears at
-   one Detail level, rather than adding its pixels individually.
-
-**Detail** is 0–100%, default 50%. On the previous method, Off keeps its prepared body and
-details remove at most 25% of that body. **Outline** is Auto, Keep or Trim, default Auto.
-**Brightness** controls the cavity method's brightness measurements, or the previous
-method's valleys and selected side of material boundaries. Previous-method inferred
-outlines use RGB Value. **Opacity cut** works as in other styles.
-
-The default preview ball (`#` first color, `.` second color). Its shading stripe is
-suppressed rather than treated as an identifying cavity:
+Every other solid pixel becomes the second color (fill).
 
 ```
-    ......
-   ........
-  ..........
- ............
-..............
-..............
-..............
-..............
-..............
-..............
- ............
-  ..........
-   ........
-    ......
+    ######
+   ##....##
+  #........#
+ #..........#
+##..........##
+#............#
+#............#
+##############
+#............#
+#.##########.#
+ #..........#
+  #........#
+   ##....##
+    ######
 ```
 
-This is a geometric heuristic, not item recognition. Shading can resemble a cavity, crease
-or notch; the supplied breastplate still has a shadow cut, and the steel torso's collar
-remains incomplete. Similar source shapes can still become similar icons. Connectivity
-does not establish recognizability. Icon analyses GIF frames separately, so changing input
-details may flicker. Grayscale and palette reduction do not resolve these ambiguities.
+The outline is rule 1. The two lines across the middle are rule 2: they are the top and
+bottom rows of the stripe, which is darker than the body on either side. The middle row of
+the stripe has only stripe pixels above and below it, so it is fill. The shading inside the
+body changes by less than the threshold from pixel to pixel, so it draws nothing.
+
+Details:
+
+- **Why the darker side.** An edge has two sides. Marking only the darker one keeps a
+  boundary one pixel wide, and it lands on the pixels an artist would have drawn as the
+  outline.
+- **Equal brightness.** When two neighbours differ in color but not in brightness, the one
+  that comes first in reading order takes the line, so the boundary is still one pixel wide.
+- **The canvas edge.** It counts as empty only if the image has at least one empty pixel. A
+  sprite cropped tight to its canvas still gets a complete outline, while a fully opaque
+  scene does not get a frame drawn around it.
+- **Threshold.** Lower values turn softer changes into lines, which brings out more detail
+  and eventually picks up shading. Higher values keep only the strongest boundaries.
+
+Settings:
+
+- **Thickness**, 1 to 3: a solid pixel fewer than that many steps (left, right, up or down)
+  from a line becomes a line too. On a large image a one-pixel line is hair-thin, and this
+  gives it weight. On a small sprite it soon fills everything.
+- **Fill darks**, Off or 1 to 254: a pixel this dark or darker is first color as well, so
+  dark areas such as hair or shadow stay filled instead of becoming an outline around
+  empty fill. Thickness does not widen them.
+
+Thickness 2, and fill darks at 100:
+
+```
+    ######           ######
+   ########         ##....##
+  ###....###       #........#
+ ##........##     #..........#
+###........###   ##..........##
+##..........##   #............#
+##############   #............#
+##############   ##############
+##############   ##############
+##############   ##############
+ ############     #..........#
+  ###....###       #........#
+   ########         ##....##
+    ######           ######
+```
+
+At thickness 2 the outline is two pixels wide and the two lines of the stripe have grown
+into each other. With fill darks at 100 the stripe, which is darker than that, is filled,
+and the outline is as before.
+
+Limits:
+
+- Two neighbouring parts in nearly the same color, with no outline between them, merge.
+  There is no edge to find.
+- A line is always on the darker side, so a thin dark shape (one or two pixels wide) becomes
+  solid line, and a wide dark shape becomes an outline with fill inside.
 
 ## Stencil
 
@@ -450,93 +459,98 @@ marks only below the interior median; features at or above it remain filled unle
 cuts them. Once all eligible darker pixels are cut, the slider plateaus even though its
 range continues to 254. Neither the cap nor Auto identifies meaningful item parts.
 
-## Lines
+## Icon
 
-It draws an outline around every part of a sprite, not only around its
-silhouette, and fills everything else flat.
+A filled body with sparse negative-space grooves, intended for small inventory sprites.
+Set the first color to **None** for one ink plus transparency. Icon is fifth in the style
+list, after Stencil. Its name describes its intended use; it does not imply item recognition.
 
-A solid pixel becomes the first color (a line) if either of these is true for any of its
-four neighbours (left, right, up, down):
+Icon does not require grayscale or a limited palette. It judges each eight-connected
+source component separately. Small sprites with transparency use a cavity-and-gap method:
 
-1. The neighbour is empty.
-2. The neighbour differs from it by more than the threshold, and this pixel is the darker of
-   the two.
+1. **Find coherent inner shapes.** Otsu separates dark and light brightness; a second
+   split estimates outline darkness. Broad connected dark patches containing a 2×2 block
+   become cavities. Short dark runs between brighter pixels become seams. Dark pixels
+   continuing a source notch become part of that gap. Cuts must be below the interior
+   median. A protected three-wide interior core is never cut; isolated cuts are rejected.
+2. **Rank whole regions.** Connected cuts enter together. Default Detail 50 includes
+   the selected dark features; higher values can add weaker supported seams below the
+   median. Increasing Detail never restores a cut or breaks an eight-connected source
+   component. There is no 25% budget on this path: a genuine helmet opening can exceed it.
+3. **Open selected cavities.** At Detail 50, Auto can extend a cavity or notch through
+   the source edge along a row or column. Seams remain inside. Each path is tried alone,
+   then together; conflicts are rejected without choosing by scan order. The accepted
+   opening cannot increase either four- or eight-connected ink pieces, cut a protected
+   interior core, or leave a previously supported ink pixel with fewer than two eight-
+   neighbors. The inside is decided first, so refusing an opening cannot preserve a speck.
 
-Every other solid pixel becomes the second color (fill).
+**Keep** preserves the source edge. Auto and Keep share inner cuts and differ by accepted
+opening paths, which can include pixels at corners of transparency. **Trim** retains the
+original boundary-peeling method below. **Detail Off** keeps the full silhouette on the
+small-sprite path. Features enter as regions, so some steps add several pixels and some
+settings produce the same mask. This is a coherent-feature control, not a brightness clamp.
+
+This path applies to components with at most 1,024 source pixels in a box no larger than
+64×64, on an image with transparency. Larger components, opaque images and Trim retain
+the previous method, keeping preparation bounded for large inputs:
+
+1. **Prepare the body.** Auto infers a drawn near-black stroke when at least 55% of the
+   four-neighbor boundary is near-black and there are at least four interior pixels.
+   Near-black is at most 32 and at most a quarter of the interior median RGB Value.
+   It removes that stroke where the original pixel has at least three neighbors, first
+   together if the remaining body is connected, otherwise conservatively pixel by pixel.
+   Keep retains all source support. Trim attempts to peel the boundary with the same
+   connectivity and thin-part guards. Source transparent gaps stay transparent.
+2. **Find potential grooves.** Interior pixels need at least three filled four-neighbors.
+   Brightness valleys between brighter opposite neighbors identify creases. RGB normalized
+   by Value identifies chromatic material changes without treating a proportional shading
+   ramp as a seam. The darker side takes a seam; equal brightness uses RGB order. A point
+   dark in both axes is weakened as likely texture.
+3. **Select coherent details.** Eight-connected candidate regions are ranked by their
+   mean strength. Single dots, compact patches, broad diagonal checker texture and dense
+   branching regions are rejected. Stronger regions are tried first. A cut may not split
+   the foreground; a resulting single unsupported hole is restored. A region appears at
+   one Detail level, rather than adding its pixels individually.
+
+**Detail** is 0–100%, default 50%. On the previous method, Off keeps its prepared body and
+details remove at most 25% of that body. **Outline** is Auto, Keep or Trim, default Auto.
+**Brightness** controls the cavity method's brightness measurements, or the previous
+method's valleys and selected side of material boundaries. Previous-method inferred
+outlines use RGB Value. **Opacity cut** works as in other styles.
+
+**100% Detail does not mean 100% of the fill is removed.** It admits all supported detail
+levels that pass the detector's rules. Bright or flat regions, ambiguous texture and
+protected parts can remain filled at maximum. Raising the numeric maximum alone would
+not reveal more shapes: these limits come from feature selection and safety checks.
+For denser source detail, compare Stencil with Cuts and Edges; it permits more cuts but
+can also turn shading into clutter. Trim removes boundary pixels rather than discovering
+missing inner shapes. A mostly filled Icon result is not necessarily a slider-limit bug.
+
+The default preview ball (`#` first color, `.` second color). Its shading stripe is
+suppressed rather than treated as an identifying cavity:
 
 ```
-    ######
-   ##....##
-  #........#
- #..........#
-##..........##
-#............#
-#............#
-##############
-#............#
-#.##########.#
- #..........#
-  #........#
-   ##....##
-    ######
+    ......
+   ........
+  ..........
+ ............
+..............
+..............
+..............
+..............
+..............
+..............
+ ............
+  ..........
+   ........
+    ......
 ```
 
-The outline is rule 1. The two lines across the middle are rule 2: they are the top and
-bottom rows of the stripe, which is darker than the body on either side. The middle row of
-the stripe has only stripe pixels above and below it, so it is fill. The shading inside the
-body changes by less than the threshold from pixel to pixel, so it draws nothing.
-
-Details:
-
-- **Why the darker side.** An edge has two sides. Marking only the darker one keeps a
-  boundary one pixel wide, and it lands on the pixels an artist would have drawn as the
-  outline.
-- **Equal brightness.** When two neighbours differ in color but not in brightness, the one
-  that comes first in reading order takes the line, so the boundary is still one pixel wide.
-- **The canvas edge.** It counts as empty only if the image has at least one empty pixel. A
-  sprite cropped tight to its canvas still gets a complete outline, while a fully opaque
-  scene does not get a frame drawn around it.
-- **Threshold.** Lower values turn softer changes into lines, which brings out more detail
-  and eventually picks up shading. Higher values keep only the strongest boundaries.
-
-Settings:
-
-- **Thickness**, 1 to 3: a solid pixel fewer than that many steps (left, right, up or down)
-  from a line becomes a line too. On a large image a one-pixel line is hair-thin, and this
-  gives it weight. On a small sprite it soon fills everything.
-- **Fill darks**, Off or 1 to 254: a pixel this dark or darker is first color as well, so
-  dark areas such as hair or shadow stay filled instead of becoming an outline around
-  empty fill. Thickness does not widen them.
-
-Thickness 2, and fill darks at 100:
-
-```
-    ######           ######
-   ########         ##....##
-  ###....###       #........#
- ##........##     #..........#
-###........###   ##..........##
-##..........##   #............#
-##############   #............#
-##############   ##############
-##############   ##############
-##############   ##############
- ############     #..........#
-  ###....###       #........#
-   ########         ##....##
-    ######           ######
-```
-
-At thickness 2 the outline is two pixels wide and the two lines of the stripe have grown
-into each other. With fill darks at 100 the stripe, which is darker than that, is filled,
-and the outline is as before.
-
-Limits:
-
-- Two neighbouring parts in nearly the same color, with no outline between them, merge.
-  There is no edge to find.
-- A line is always on the darker side, so a thin dark shape (one or two pixels wide) becomes
-  solid line, and a wide dark shape becomes an outline with fill inside.
+This is a geometric heuristic, not item recognition. Shading can resemble a cavity, crease
+or notch; the supplied breastplate still has a shadow cut, and the steel torso's collar
+remains incomplete. Similar source shapes can still become similar icons. Connectivity
+does not establish recognizability. Icon analyses GIF frames separately, so changing input
+details may flicker. Grayscale and palette reduction do not resolve these ambiguities.
 
 ## Checker
 
@@ -597,73 +611,6 @@ Settings: Shading and Scale (see "Settings" above). Shading at 50%, and scale 2�
 At 50% the stripe and the dim part of the body are far enough from the threshold to be
 solid, and almost no checkerboard is left. At 2× the squares of the board are two pixels
 wide.
-
-## Hatch
-
-Mid-tones drawn as diagonal lines, like pen shading. It gives four apparent tones: dark,
-wide dark lines, thin dark lines, and light.
-
-A pixel becomes the second color if its tone is above a cut-off that depends on which
-diagonal it lies on. With `d = (x + y) mod 3`, the cut-off is 0.75 where `d` is 0, 0.5 where
-it is 1 and 0.25 where it is 2. The effect:
-
-- tone above 0.75: always the second color;
-- tone from 0.5 to 0.75: one diagonal in three is first color, which draws thin dark lines;
-- tone from 0.25 to 0.5: two diagonals in three are first color, which leaves thin light
-  lines;
-- tone 0.25 or below: always the first color.
-
-```
-    ######
-   ##....##
-  #........#
- #..........#
-##.........###
-#............#
-#...........##
-#.##.##.######
-###.##.#######
-#####.########
- ##..#..#..##
-  #.#..#..##
-   ##.#..##
-    ######
-```
-
-The lighter left end of the stripe has a tone between 0.25 and 0.5 and gets wide dark lines;
-its darker right end stays solid. The dimmer lower part of the body has a tone between 0.5
-and 0.75 and gets thin dark lines. The outline, tone 0, stays solid.
-
-The lines run from the lower left to the upper right. They are tied to pixel position, not
-to the image, so they do not shimmer between the frames of an animation. They need room: on
-a part only a few pixels wide there is no line to see, and Checker reads better.
-
-Settings: Shading and Scale (see "Settings" above), and:
-
-- **Direction**, `/`, `\`, `—` or `|`: which way the lines run. `d` is then `x + y`,
-  `x − y`, `y` or `x`, each mod the spacing. `—` gives the look of scanlines.
-- **Spacing**, 3 to 6: how many pixels apart the lines are. With spacing `n` the cut-off is
-  `(n − d) / (n + 1)` for `d` from 0 to `n − 1`: a line one pixel wide at the lightest
-  patterned tone, one pixel wider at each darker one, and `n + 1` apparent tones in all.
-
-Direction `\`, direction `—`, and spacing 5:
-
-```
-    ######           ######           ######
-   ##....##         ##....##         ##....##
-  #........#       #........#       #........#
- #..........#     #.........##     #..........#
-##..........##   ##..........##   ##.........###
-#..........#.#   #............#   #.........#..#
-#...........##   #.........####   #........#...#
-###.##.#######   ##############   ##.####.####.#
-#.##.##.######   #.......######   #.####.####.##
-#####.########   ##############   #####.####.###
- #..#..#..#.#     #..........#     #...#....###
-  #..#..#..#       #........#       #.#....###
-   ##.#..##         ########         ##...###
-    ######           ######           ######
-```
 
 ## Bayer
 
@@ -736,44 +683,72 @@ Matrix 2 and matrix 8:
     ######           ######
 ```
 
-## Noise
+## Hatch
 
-Blue-noise dithering. Shading becomes an irregular scatter of pixels, like Atkinson's, but
-the scatter is fixed in place, so it does not shimmer between the frames of an animation.
+Mid-tones drawn as diagonal lines, like pen shading. It gives four apparent tones: dark,
+wide dark lines, thin dark lines, and light.
 
-It works like Bayer with a different grid. A repeating 16×16 grid holds each number from 0
-to 255 once. The numbers were placed with the void-and-cluster method, so that at every tone
-the cells that are lit are spread evenly and form no regular pattern. For the value `n` at
-the pixel's position in the grid (`x mod 16`, `y mod 16`), the pixel is the second color if
-its tone is above `(n + 0.5) / 256`.
+A pixel becomes the second color if its tone is above a cut-off that depends on which
+diagonal it lies on. With `d = (x + y) mod 3`, the cut-off is 0.75 where `d` is 0, 0.5 where
+it is 1 and 0.25 where it is 2. The effect:
+
+- tone above 0.75: always the second color;
+- tone from 0.5 to 0.75: one diagonal in three is first color, which draws thin dark lines;
+- tone from 0.25 to 0.5: two diagonals in three are first color, which leaves thin light
+  lines;
+- tone 0.25 or below: always the first color.
 
 ```
     ######
+   ##....##
+  #........#
+ #..........#
+##.........###
+#............#
+#...........##
+#.##.##.######
+###.##.#######
+#####.########
+ ##..#..#..##
+  #.#..#..##
    ##.#..##
-  #......#.#
- #.....#..#.#
-##..........##
-#.......#....#
-#..#.....#.#.#
-##.##.###.####
-####.##.###.##
-########.#####
- #....#..#.##
-  #.#....#.#
-   ##.##.##
     ######
 ```
 
-The stripe is dark with a scatter of light pixels, more of them towards its lighter left
-end. The body picks up a scatter of dark pixels, more of them where it is dimmer. The
-outline, tone 0, stays solid.
+The lighter left end of the stripe has a tone between 0.25 and 0.5 and gets wide dark lines;
+its darker right end stays solid. The dimmer lower part of the body has a tone between 0.5
+and 0.75 and gets thin dark lines. The outline, tone 0, stays solid.
 
-On small sprites drawn in flat colors the scatter can read as dirt, and on a still image
-Atkinson, which keeps flat areas clean, usually looks better. Noise suits larger images with
-gradients, and animations.
+The lines run from the lower left to the upper right. They are tied to pixel position, not
+to the image, so they do not shimmer between the frames of an animation. They need room: on
+a part only a few pixels wide there is no line to see, and Checker reads better.
 
-Settings: Shading and Scale (see "Settings" above). Lower shading is what cleans the dirt
-off flat colors: at 50% only the tones near the threshold are still scattered.
+Settings: Shading and Scale (see "Settings" above), and:
+
+- **Direction**, `/`, `\`, `—` or `|`: which way the lines run. `d` is then `x + y`,
+  `x − y`, `y` or `x`, each mod the spacing. `—` gives the look of scanlines.
+- **Spacing**, 3 to 6: how many pixels apart the lines are. With spacing `n` the cut-off is
+  `(n − d) / (n + 1)` for `d` from 0 to `n − 1`: a line one pixel wide at the lightest
+  patterned tone, one pixel wider at each darker one, and `n + 1` apparent tones in all.
+
+Direction `\`, direction `—`, and spacing 5:
+
+```
+    ######           ######           ######
+   ##....##         ##....##         ##....##
+  #........#       #........#       #........#
+ #..........#     #.........##     #..........#
+##..........##   ##..........##   ##.........###
+#..........#.#   #............#   #.........#..#
+#...........##   #.........####   #........#...#
+###.##.#######   ##############   ##.####.####.#
+#.##.##.######   #.......######   #.####.####.##
+#####.########   ##############   #####.####.###
+ #..#..#..#.#     #..........#     #...#....###
+  #..#..#..#       #........#       #.#....###
+   ##.#..##         ########         ##...###
+    ######           ######           ######
+```
 
 ## Atkinson
 
@@ -857,6 +832,45 @@ Limits:
 - Empty pixels are skipped, and any error handed to one is dropped, so shading does not
   carry across a gap in a sprite.
 
+## Noise
+
+Blue-noise dithering. Shading becomes an irregular scatter of pixels, like Atkinson's, but
+the scatter is fixed in place, so it does not shimmer between the frames of an animation.
+
+It works like Bayer with a different grid. A repeating 16×16 grid holds each number from 0
+to 255 once. The numbers were placed with the void-and-cluster method, so that at every tone
+the cells that are lit are spread evenly and form no regular pattern. For the value `n` at
+the pixel's position in the grid (`x mod 16`, `y mod 16`), the pixel is the second color if
+its tone is above `(n + 0.5) / 256`.
+
+```
+    ######
+   ##.#..##
+  #......#.#
+ #.....#..#.#
+##..........##
+#.......#....#
+#..#.....#.#.#
+##.##.###.####
+####.##.###.##
+########.#####
+ #....#..#.##
+  #.#....#.#
+   ##.##.##
+    ######
+```
+
+The stripe is dark with a scatter of light pixels, more of them towards its lighter left
+end. The body picks up a scatter of dark pixels, more of them where it is dimmer. The
+outline, tone 0, stays solid.
+
+On small sprites drawn in flat colors the scatter can read as dirt, and on a still image
+Atkinson, which keeps flat areas clean, usually looks better. Noise suits larger images with
+gradients, and animations.
+
+Settings: Shading and Scale (see "Settings" above). Lower shading is what cleans the dirt
+off flat colors: at 50% only the tones near the threshold are still scattered.
+
 ## Silhouette
 
 Every solid pixel becomes the first color. Empty pixels stay empty. The threshold is
@@ -892,11 +906,12 @@ to show.
 |---|---|
 | Filled shapes with their parts cut apart, the End of End look | Cutout |
 | Clean two-tone shapes | Solid |
-| An icon in one color, with its details as holes | Stencil, with the first color None |
 | Line art that shows a sprite's parts | Lines |
+| A filled sprite with dark inner details as holes | Stencil, with the first color None |
+| A small inventory icon with coherent cavities and selected openings | Icon, with the first color None |
 | A hint of shading that stays crisp | Checker |
-| Shading that looks drawn with a pen | Hatch |
 | Smooth gradients, regular texture | Bayer |
+| Shading that looks drawn with a pen | Hatch |
 | Smooth gradients, organic texture | Atkinson |
 | Organic texture that holds still in an animation | Noise |
 | Just the shape | Silhouette |
