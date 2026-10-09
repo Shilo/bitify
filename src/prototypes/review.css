@@ -5,7 +5,7 @@
 .prototype-review h2 { margin: 7px 0; font-size: clamp(22px, 3vw, 34px); font-weight: 600; letter-spacing: -1px; }
 .prototype-review p { color: var(--muted); margin: 8px 0; }
 .prototype-review .prototype-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: .16em; }
-.prototype-directions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 24px 0; }
+.prototype-directions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 24px 0; }
 .prototype-direction { display: flex; flex-direction: column; gap: 12px; padding: 12px 12px 20px; background: var(--bg); color: var(--fg); text-align: left; border: 1px solid var(--line); border-radius: 18px; font: inherit; cursor: pointer; }
 .prototype-direction[aria-pressed='true'] { border-color: var(--fg); box-shadow: 0 0 0 1px var(--fg); }
 .prototype-direction strong { font-size: 17px; letter-spacing: -.4px; }
@@ -29,3 +29,12 @@
 .prototype-review-foot { margin-top: 24px; font-size: 12px; color: var(--muted); }
 .prototype-review button:focus-visible, .prototype-review select:focus-visible, .prototype-review input:focus-visible { outline: 3px solid var(--fg); outline-offset: 3px; }
 @media (max-width: 620px) { .prototype-review { padding: 20px; } .prototype-directions { grid-template-columns: 1fr; } .prototype-mini { aspect-ratio: 2.4; } .prototype-review-head { align-items: start; } .prototype-review-foot { flex-wrap: wrap; } }
+
+/* Baseline comparison uses the original app CSS and only keeps the Designs entry. */
+[data-direction='legacy'].prototype-mini { background: var(--bg); }
+[data-direction='legacy'] .mini-header { opacity: 1; background: var(--surface); }
+[data-direction='legacy'] .mini-images i { background: var(--muted); opacity: .6; }
+[data-direction='legacy'] .mini-controls { border-radius: 5px; background: var(--surface); backdrop-filter: none; }
+.prototype-review-options fieldset { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; border: 0; margin: 0; padding: 0; min-width: 0; }
+.prototype-review-options fieldset:disabled { opacity: .5; }
+@media (min-width: 621px) and (max-width: 850px) { .prototype-directions { grid-template-columns: repeat(2, 1fr); } }

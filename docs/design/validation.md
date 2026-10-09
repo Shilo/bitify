@@ -105,3 +105,18 @@ physical-device test.
   Other gallery views retain the earlier exploration's control arrangement.
 - Production build passes without Svelte accessibility warnings. These checks use desktop
   pointer behavior at phone dimensions; physical touch/Safari remain unverified as above.
+
+## Old design comparison
+
+- Designs includes Old design beside the three GlassKit directions. Verified switching
+  to it and back retains all six image names, both colors, selected style and the
+  original/converted comparison state.
+- Old design has zero GlassKit component classes, no full-window grid, 16px tile gaps,
+  8px canvas inset, and the existing two-button view switch. Inline prototype dock
+  clearance is removed so the existing responsive CSS supplies 132px desktop or 172px
+  phone clearance. The original Style panel measured 102px, with 112px reserved clearance.
+- Verified no horizontal overflow at 390x844 and compared the picker at 1440x900.
+  Its grid/material options are disabled in Old design and available again in glass modes.
+- Opening `?prototype=legacy` directly initializes the same old interface with Designs
+  available. The ordinary URL and its preference storage remain separate.
+- Production build passes. This refinement has not received physical touch/Safari checks.

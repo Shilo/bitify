@@ -2,5 +2,6 @@ import { mount } from 'svelte';
 import './foundation.css';
 import App from '../App.svelte';
 const mode = new URLSearchParams(location.search).get('prototype');
-document.documentElement.dataset.prototype = ['dock', 'inspector', 'clear'].includes(mode) ? mode : 'dock';
-mount(App, { target: document.getElementById('app'), props: { prototype: true } });
+const initialDesign = ['dock', 'inspector', 'clear', 'legacy'].includes(mode) ? mode : 'dock';
+if (initialDesign !== 'legacy') document.documentElement.dataset.prototype = initialDesign;
+mount(App, { target: document.getElementById('app'), props: { prototype: true, initialDesign } });

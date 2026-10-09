@@ -6,11 +6,17 @@ October 9, 2026 · exploratory worktree · `codex/glasskit-prototypes`
 
 Run `npm ci` then `npm run dev -- --port 5188 --host 127.0.0.1` in this worktree.
 
+- [Old design — same-workspace comparison](http://127.0.0.1:5188/?prototype=legacy)
 - [Canvas dock — grouped alternative](http://127.0.0.1:5188/?prototype=dock)
 - [Studio rail — desktop alternative](http://127.0.0.1:5188/?prototype=inspector)
 - [Floating islands — recommended](http://127.0.0.1:5188/?prototype=clear)
 - [Design comparison controls](http://127.0.0.1:5188/?prototype=dock&review=open)
 - [Existing interface](http://127.0.0.1:5188/)
+
+Use **Designs → Old design** to compare the existing interface with the new directions
+without discarding images, conversion settings or original/converted state. This reuses
+the original components and CSS in the same mounted workspace; only the Designs entry
+is added. The comparison URL still uses the separate prototype storage key.
 
 Use **Designs** to change direction without discarding loaded images, compare line/dot/no
 grid, turn on solid controls, compare a full checkerboard, and load one/six/many images.

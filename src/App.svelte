@@ -16,7 +16,11 @@
   import logoUrl from './assets/logo.gif';
   import logoStill from './assets/logo.png';
 
-  let { prototype = false } = $props();
+  let { prototype = false, initialDesign = 'dock' } = $props();
+  // The comparison workspace stays mounted while only its presentation changes.
+  // svelte-ignore state_referenced_locally
+  let design = $state(initialDesign);
+  const glass = $derived(prototype && design !== 'legacy');
   // The entry fixes this prop for the lifetime of the mounted workspace.
   // svelte-ignore state_referenced_locally
   const storageKey = prototype ? 'bitify-glass-prototypes' : 'bitify';
@@ -99,12 +103,12 @@
   // A tile is its square image plus a caption underneath. On touch screens the caption row also
   // holds the Share and Remove buttons, so it is taller. These mirror the sizes in app.css.
   const noHover = matchMedia('(hover: none)');
-  // svelte-ignore state_referenced_locally
-  let captionHeight = $state(noHover.matches ? (prototype ? 56 : 48) : 27);
-  noHover.addEventListener('change', e => (captionHeight = e.matches ? (prototype ? 56 : 48) : 27));
+  let noHoverMatches = $state(noHover.matches);
+  noHover.addEventListener('change', e => (noHoverMatches = e.matches));
+  const captionHeight = $derived(noHoverMatches ? (glass ? 56 : 48) : 27);
   const layout = $derived(
     fitGrid(items.length, wallWidth, wallHeight, {
-      gap: prototype ? 12 : 16,
+      gap: glass ? 12 : 16,
       extra: captionHeight,
       min: Math.max(140, Math.min(200, wallWidth * 0.16)), // smallest useful tile; below it the wall scrolls
     }),
@@ -535,17 +539,17 @@
   onappinstalled={() => (installOffer = null)}
 />
 
-<header class="bar" class:glass-nav={prototype}>
+<header class="bar" class:glass-nav={glass}>
   <span class="mark">Bitify</span>
   <span class="count">{items.length} image{items.length === 1 ? '' : 's'}</span>
-  {#if prototype}<PrototypeReview />{/if}
+  {#if prototype}<PrototypeReview bind:mode={design} />{/if}
   <span class="grow"></span>
   {#if items.length}
-    <button class="btn sm" class:glass-btn={prototype} onclick={removeAll} aria-label="Remove all" use:tooltip={'Clear every image from the wall.'}><PixelIcon name="trash" /></button>
+    <button class="btn sm" class:glass-btn={glass} onclick={removeAll} aria-label="Remove all" use:tooltip={'Clear every image from the wall.'}><PixelIcon name="trash" /></button>
   {/if}
-  <button class="btn" class:glass-btn={prototype} onclick={() => picker.click()}><PixelIcon name="plus" />Add<span class="wide">images</span></button>
+  <button class="btn" class:glass-btn={glass} onclick={() => picker.click()}><PixelIcon name="plus" />Add<span class="wide">images</span></button>
   <!-- A mouse click gives up focus before the menu opens, or closing the menu would hand it back (see unfocus). -->
-  <button class="btn sm" class:glass-btn={prototype} aria-haspopup="true" aria-label="More" use:tooltip={'Open appearance, help and app options.'} onclick={e => { if (e.detail) e.currentTarget.blur(); more.showModal(); }}><PixelIcon name="more" /></button>
+  <button class="btn sm" class:glass-btn={glass} aria-haspopup="true" aria-label="More" use:tooltip={'Open appearance, help and app options.'} onclick={e => { if (e.detail) e.currentTarget.blur(); more.showModal(); }}><PixelIcon name="more" /></button>
 </header>
 
 {#if items.length}
@@ -555,7 +559,7 @@
       {#each items as item (item.id)}
         <Tile
           {item}
-          inset={prototype ? 4 : 8}
+          inset={glass ? 4 : 8}
           first={ink[0]}
           second={ink[1]}
           {style}
@@ -574,12 +578,12 @@
   <div class="empty">
     <div class="empty-in">
       {#if example}
-        <Tile inset={prototype ? 4 : 8} item={example} first={ink[0]} second={ink[1]} {style} {set} flipped={showOriginal !== spaceHeld} />
+        <Tile inset={glass ? 4 : 8} item={example} first={ink[0]} second={ink[1]} {style} {set} flipped={showOriginal !== spaceHeld} />
       {/if}
       <div class="empty-text">
         <h2>Pixel art in two colors</h2>
         <p>Instantly convert sprites and animated GIFs<br />to <span>1-bit</span> colors and styles.</p>
-        <button class="btn primary" class:glass-btn={prototype} onclick={() => picker.click()}>
+        <button class="btn primary" class:glass-btn={glass} onclick={() => picker.click()}>
           <svg class="plus-icon" aria-hidden="true" viewBox="0 0 16 16"><path d="M8 3v10M3 8h10" /></svg>
           {touch ? 'Choose images' : 'Drop, paste or choose images'}
         </button>
@@ -588,48 +592,48 @@
   </div>
 {/if}
 
-<Dock {prototype} bind:first bind:second bind:none bind:style bind:settings bind:showOriginal bind:dragging {autos} {soft} count={items.length} onsaveall={saveEverything} />
+<Dock prototype={glass} bind:first bind:second bind:none bind:style bind:settings bind:showOriginal bind:dragging {autos} {soft} count={items.length} onsaveall={saveEverything} />
 
 {#if dragDepth > 0}
   <div class="drop" style:background={second} style:color={overlayInk}>Drop to bitify</div>
 {/if}
 <!-- Any click closes the sheet: one of its buttons, or the dimmed screen around it, which counts as the dialog. -->
-<dialog class="sheet" class:glass-sheet={prototype} bind:this={sheet} aria-label="Share" onclick={() => sheet.close()}>
+<dialog class="sheet" class:glass-sheet={glass} bind:this={sheet} aria-label="Share" onclick={() => sheet.close()}>
   {#if shared}
     <p class="name" use:tooltip={shared.name}>{shared.name}</p>
-    <button class="btn" class:glass-btn={prototype} onclick={() => copy(shared)}><PixelIcon name="copy" />Copy</button>
-    <button class="btn" class:glass-btn={prototype} onclick={() => save(shared)}><PixelIcon name="save" />Download</button>
-    <button class="btn" class:glass-btn={prototype}>Cancel</button>
+    <button class="btn" class:glass-btn={glass} onclick={() => copy(shared)}><PixelIcon name="copy" />Copy</button>
+    <button class="btn" class:glass-btn={glass} onclick={() => save(shared)}><PixelIcon name="save" />Download</button>
+    <button class="btn" class:glass-btn={glass}>Cancel</button>
   {/if}
 </dialog>
 <!-- The More menu drops down from the More button. Any click closes it too. Its rows are in three
      groups with a line between: what the app is set to, what tells about it, and what throws things away. -->
-<dialog class="more" class:glass-popover={prototype} bind:this={more} aria-label="More" onclick={() => more.close()}>
-  <button class="btn" class:glass-btn={prototype} onclick={() => (themePick = otherTheme === systemTheme ? undefined : otherTheme)}>
+<dialog class="more" class:glass-popover={glass} bind:this={more} aria-label="More" onclick={() => more.close()}>
+  <button class="btn" class:glass-btn={glass} onclick={() => (themePick = otherTheme === systemTheme ? undefined : otherTheme)}>
     <PixelIcon name={otherTheme === 'dark' ? 'moon' : 'sun'} />{otherTheme === 'dark' ? 'Dark' : 'Light'} mode
   </button>
   {#if installOffer}
-    <button class="btn" class:glass-btn={prototype} onclick={install}><PixelIcon name="save" />Install</button>
+    <button class="btn" class:glass-btn={glass} onclick={install}><PixelIcon name="save" />Install</button>
   {/if}
   <hr />
-  <button class="btn" class:glass-btn={prototype} onclick={() => { more.close(); help.showModal(); }}><PixelIcon name="help" />Help</button>
-  <a class="btn" class:glass-btn={prototype} href="https://github.com/Shilo/bitify" target="_blank" rel="noopener">
+  <button class="btn" class:glass-btn={glass} onclick={() => { more.close(); help.showModal(); }}><PixelIcon name="help" />Help</button>
+  <a class="btn" class:glass-btn={glass} href="https://github.com/Shilo/bitify" target="_blank" rel="noopener">
     <svg class="ico" width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" /></svg>GitHub<PixelIcon name="out" />
   </a>
   <hr />
-  <button class="btn undo" class:glass-btn={prototype} onclick={() => { more.close(); confirm.showModal(); }}><PixelIcon name="reset" />Reset settings</button>
+  <button class="btn undo" class:glass-btn={glass} onclick={() => { more.close(); confirm.showModal(); }}><PixelIcon name="reset" />Reset settings</button>
 </dialog>
 <!-- Reset settings asks first. Any click closes it, as with the sheet; only Reset also resets. Cancel
      comes first, so it is the button the dialog opens on. -->
-<dialog class="sheet confirm" class:glass-modal={prototype} bind:this={confirm} aria-labelledby="confirm-title" onclick={() => confirm.close()}>
+<dialog class="sheet confirm" class:glass-modal={glass} bind:this={confirm} aria-labelledby="confirm-title" onclick={() => confirm.close()}>
   <h2 id="confirm-title">Reset all settings?</h2>
   <p>Colors, styles and theme return to their defaults.<br /><br />Your images stay.</p>
-  <button class="btn" class:glass-btn={prototype}>Cancel</button>
-  <button class="btn undo" class:glass-btn={prototype} onclick={resetAll}>Reset</button>
+  <button class="btn" class:glass-btn={glass}>Cancel</button>
+  <button class="btn undo" class:glass-btn={glass} onclick={resetAll}>Reset</button>
 </dialog>
 <!-- The help, which is also the welcome on a first visit: what Bitify is, four steps, and the
      controls of the device in use. A click on the dimmed screen around it counts as the dialog itself. -->
-<dialog class="help" class:glass-modal={prototype} bind:this={help} aria-labelledby="help-title" onclick={e => e.target === help && help.close()}>
+<dialog class="help" class:glass-modal={glass} bind:this={help} aria-labelledby="help-title" onclick={e => e.target === help && help.close()}>
   <div class="help-in">
     <button class="ib" onclick={() => help.close()} aria-label="Close" use:tooltip={'Dismiss this help window.'}><PixelIcon name="x" /></button>
     <header>
@@ -676,9 +680,9 @@
     <footer>
       <span>Images never leave your device.</span>
       <!-- svelte-ignore a11y_autofocus -->
-      <button class="btn primary" class:glass-btn={prototype} autofocus onclick={() => help.close()}>Got it</button>
+      <button class="btn primary" class:glass-btn={glass} autofocus onclick={() => help.close()}>Got it</button>
     </footer>
   </div>
 </dialog>
-<div class="toast" class:glass-toast={prototype} role="status" hidden={!busy && !message}>{#if busy}<span class="spin" aria-hidden="true"></span>{/if}{busy || message}</div>
+<div class="toast" class:glass-toast={glass} role="status" hidden={!busy && !message}>{#if busy}<span class="spin" aria-hidden="true"></span>{/if}{busy || message}</div>
 <input bind:this={picker} type="file" accept="image/*" multiple hidden onchange={picked} />

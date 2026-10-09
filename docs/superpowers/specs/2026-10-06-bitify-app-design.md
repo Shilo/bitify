@@ -1300,3 +1300,11 @@ and Space retain their existing behavior. Floating islands group Palette with th
 pair and Style with this comparison button; only Download floats independently. All
 three prototypes use these same semantic groups, stacking colors above conversion and
 Download on phones. The approved default interface retains its two-part comparison.
+
+The Designs comparison includes Old design (`?prototype=legacy`). Selecting it removes
+prototype presentation classes and the grid adapter, uses the existing app CSS and
+original Dock controls, and restores 16px image gaps, 8px inset and 48px touch captions.
+The workspace remains mounted, preserving images, colors, style settings and comparison
+state. Designs remains available to switch back; grid/material options are disabled
+while viewing the old design. This comparison uses the prototype storage key and does
+not change ordinary app preferences. Reloading its URL opens the same design mode.

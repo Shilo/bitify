@@ -58,7 +58,12 @@
   // The prototype reserves the bounds of the whole editing stack, including the chooser.
   // Layout changes happen once; the image viewport is never continuously animated.
   $effect(() => {
-    if (!prototype || !dock) return;
+    if (!prototype) {
+      // Let the original responsive CSS own dock clearance when comparing the old design.
+      document.documentElement.style.removeProperty('--dock-base');
+      return;
+    }
+    if (!dock) return;
     panel, pop, more, width, height, panelHeight;
     let cancelled = false;
     const root = document.documentElement;

@@ -2,18 +2,20 @@
   import { onMount } from 'svelte';
   const initialReview = new URLSearchParams(location.search).get('review') === 'open';
   let dialog;
-  let mode = $state(document.documentElement.dataset.prototype || 'dock');
+  let { mode = $bindable('dock') } = $props();
   let grid = $state('lines');
   let opaque = $state(false);
   let alpha = $state(false);
   const directions = [
+    { id: 'legacy', name: '00 / Old design', label: 'Current app', text: 'The existing solid dock, image backgrounds and Original/style switch. Compare using the same images and settings.' },
     { id: 'dock', name: '01 / Canvas dock', label: 'Grouped alternative', text: 'A quiet, continuous workspace. One glass control group, with editing panels that give the images room.' },
     { id: 'inspector', name: '02 / Studio rail', label: 'Desktop alternative', text: 'Tools move to the trailing edge on a wide screen. Compare the cost of width against the cost of height.' },
     { id: 'clear', name: '03 / Floating islands', label: 'Recommended', text: 'Two transparent editing islands: colors with Palette, conversion with Style. Download floats separately.' },
   ];
   function apply() {
     const root = document.documentElement;
-    root.dataset.prototype = mode;
+    if (mode === 'legacy') delete root.dataset.prototype;
+    else root.dataset.prototype = mode;
     root.dataset.grid = grid;
     root.dataset.opaque = String(opaque);
     root.dataset.alpha = String(alpha);
@@ -32,10 +34,10 @@
   });
 </script>
 
-<button class="btn glass-btn prototype-review-button" aria-haspopup="dialog" onclick={() => dialog.showModal()}>Designs</button>
+<button class="btn prototype-review-button" class:glass-btn={mode !== 'legacy'} aria-haspopup="dialog" onclick={() => dialog.showModal()}>Designs</button>
 <dialog class="prototype-review" bind:this={dialog} aria-labelledby="prototype-title" onclick={e => e.target === dialog && dialog.close()}>
   <div class="prototype-review-head">
-    <div><p class="prototype-eyebrow">BITIFY / DESIGN EXPLORATION</p><h2 id="prototype-title">A canvas, with room to breathe.</h2><p>Three working directions. Same conversion engine, different use of space.</p></div>
+    <div><p class="prototype-eyebrow">BITIFY / DESIGN EXPLORATION</p><h2 id="prototype-title">A canvas, with room to breathe.</h2><p>The old design and three new directions. Same images and settings, different use of space.</p></div>
     <button class="btn" aria-label="Close design comparison" onclick={() => dialog.close()}>Close</button>
   </div>
   <div class="prototype-directions">
@@ -47,9 +49,11 @@
     {/each}
   </div>
   <div class="prototype-review-options">
+    <fieldset disabled={mode === 'legacy'}>
     <label>Canvas grid<select bind:value={grid}><option value="lines">Fine lines</option><option value="dots">Dots</option><option value="off">Quiet / no grid</option></select></label>
     <label class="prototype-check"><input type="checkbox" bind:checked={opaque} />Solid controls</label>
     <label class="prototype-check"><input type="checkbox" bind:checked={alpha} />Checkerboard comparison</label>
+    </fieldset>
   </div>
   <div class="prototype-samples"><span>Try a workspace</span><button class="btn" onclick={() => sample('single')}>One image</button><button class="btn" onclick={() => sample('batch')}>Six images</button><button class="btn" onclick={() => sample('stress')}>Many images</button><button class="btn" onclick={() => sample('empty')}>Empty</button></div>
   <p class="prototype-note">My recommendation: start with Floating islands. Keep related controls together, the background continuous, and text-heavy panels readable. Studio rail is the serious desktop alternative. GlassKit approximates the material; native iOS refraction and adaptive contrast are separate capabilities.</p>
