@@ -459,10 +459,9 @@ button { font: inherit; color: inherit; }
 .menu {
   --style-item: 63px; --style-gap: 4px;
   position: absolute; bottom: calc(100% + 8px); left: -1px; right: -1px; box-sizing: border-box; padding: 6px;
-  /* Match the parent's border edges. The fractional minimum caps the grid at six columns;
-     the 63px minimum lets narrower panels use fewer without squeezing labels. */
+  /* Match the parent's border edges and fit as many compact buttons as its width allows. */
   display: grid; gap: var(--style-gap);
-  grid-template-columns: repeat(auto-fill, minmax(max(var(--style-item), calc((100% - 5 * var(--style-gap)) / 6)), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(var(--style-item), 1fr));
   background: var(--surface); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 10px 32px var(--shadow);
 }
 .menu .demo { width: 28px; height: 28px; background-size: 8px 8px; }
