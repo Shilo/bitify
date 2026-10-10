@@ -30,3 +30,7 @@ same sole design. The normal URL is the current implementation.
 `npm test`: **212 tests in 12 files pass**. Production build passes. Real Safari/iOS,
 OS accessibility settings and physical touch gestures remain device checks; generated
 QA fixtures establish CSS geometry/cascade behavior, not hardware behavior.
+
+Current theme correction: [dark](mockups/theme-consistent-dark.png) and
+[light](mockups/theme-consistent-light.png). Both use one shared themed UI material;
+the prior shared middle-gray canvas screenshots are archived comparisons.

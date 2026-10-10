@@ -100,8 +100,11 @@ pointers or the mobile keyboard viewport. Real-device checks remain outstanding.
 
 ## Evidence
 
-[Desktop with focused tile action](mockups/floating-islands-adopted-desktop.jpg),
-[light no-hover/reduced-transparency fixture](mockups/floating-islands-touch-qa.jpg).
+[Current dark theme](mockups/theme-consistent-dark.png),
+[current light theme](mockups/theme-consistent-light.png). The earlier
+[desktop with focused tile action](mockups/floating-islands-adopted-desktop.jpg) and
+[light no-hover/reduced-transparency fixture](mockups/floating-islands-touch-qa.jpg)
+archive the initial shared-gray adoption.
 Earlier gallery screenshots are archived comparisons, not current alternate layouts.
 
 ## Theme consistency correction
@@ -118,3 +121,26 @@ An independent reviewer agreed with the subdued light palette and restored dark 
 and challenged exact equality, transparent-ink contrast and startup theme resolution.
 The parent accepted the shared material invariant and retained opaque interaction states
 and accessibility fallbacks.
+
+### Validation after theme review
+
+- 220 tests across 13 files pass after the final review fix; production build passes.
+- Eight startup cases exercise saved/system light/dark, malformed/invalid/missing settings,
+  and blocked storage. Both native toolbar meta entries follow the resolved theme.
+- Browser-computed caption, brand, editing-island and Download backgrounds match exactly
+  within each theme: surface #e8ecef or #272c32 at .94 alpha. Main ink is opaque.
+- Light Palette panel and More dialog match the light material; dark Style panel and chooser
+  match the dark material. At1440x900, dark chooser top670 exceeds grid bottom642;
+  light Palette panel top759 exceeds grid bottom731.
+- Keyboard-focused Download settles to opaque surface/foreground mix, retaining a visible
+  focus outline. Normal/hover/focus selectors remain unchanged from adoption QA.
+- Production touch/reduced-transparency fixture at390x844 resolves every relevant surface
+  to opaque #e8ecef in light and #272c32 in dark, with no blur and no horizontal overflow.
+  Swatches/view button are46px high; Download56px. At320x568 with dark Palette panel,
+  empty canvas bottom225 and panel top253 remain separate; no horizontal overflow.
+- Fixture checks simulate media rules, not physical iOS or Android behavior. Theme palettes
+  are deliberately subdued; no universal screen-brightness or eye-comfort claim is made.
+
+The reviewer found no remaining proven application material inconsistency. The parent
+accepted the source-backed native toolbar startup mismatch and fixed it in2656320;
+intentional selection, semantic Reset, image swatches and disabled dimming were retained.
