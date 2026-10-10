@@ -1,6 +1,5 @@
 <script>
   import { untrack } from 'svelte';
-  import { STYLES } from './lib/presets.js';
   import Tile from './Tile.svelte';
   import PixelIcon from './PixelIcon.svelte';
   import { tooltip } from './lib/tooltip.js';
@@ -13,7 +12,6 @@
   let converted = $state(untrack(() => flipped));
   let spaceHeld = $state(false), imageHeld = $state(false);
   const originalVisible = $derived(!converted !== (spaceHeld || imageHeld));
-  const styleName = $derived(STYLES.find(s => s[0] === style)?.[1] ?? style);
   const fit = $derived(fitViewerImage(item.img.w, item.img.h, width, height, 0));
   $effect(() => { dialog.showModal(); moreButton.focus(); });
   $effect(() => {
@@ -37,10 +35,10 @@
   onclose={() => { spaceHeld = false; onclose?.(); }} onkeydown={keydown} onkeyup={e => { if (e.code === 'Space') spaceHeld = false; }}>
   <nav class="viewer-workspace" aria-label="Fullscreen image controls">
     <div class="viewer-tools glass-card" role="group" aria-label="Image actions">
-      <button class="btn glass-btn viewer-compare" aria-pressed={!originalVisible}
+      <button class="btn glass-btn icon-only viewer-compare" aria-pressed={!originalVisible}
         aria-label={originalVisible ? 'Show converted image' : 'Show original image'}
         onclick={() => (converted = !converted)} use:tooltip={originalVisible ? 'Show the converted image.' : 'Show the original image.'}>
-        <span class="viewer-convert-dot" aria-hidden="true"></span>{originalVisible ? 'Original' : styleName}
+        <PixelIcon name="swap" />
       </button>
       {#if oncopy}<button class="btn glass-btn icon-only" onclick={oncopy} aria-label="Copy image" use:tooltip={'Copy the converted image as a PNG.'}><PixelIcon name="copy" /></button>{/if}
       {#if onsave}<button class="btn glass-btn icon-only" onclick={onsave} aria-label="Save image" use:tooltip={'Save the converted image at its original size.'}><PixelIcon name="save" /></button>{/if}

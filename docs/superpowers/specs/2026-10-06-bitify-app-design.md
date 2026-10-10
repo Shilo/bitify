@@ -1651,3 +1651,6 @@ Empty-state file-toolbar preference: hide the bottom Add button and its entire f
 
 
 Fullscreen bottom-workspace refinement: remove filename/title header and its measurements. Image art fits the full viewport with zero inset and preserved aspect ratio; letterboxing is unavoidable for mismatched aspect ratios. A solid theme action capsule sits bottom left; solid More sits bottom right and opens Close full screen. Controls respect safe areas and wrap when needed. The local conversion preference starts opposite the main canvas, has matching selected/unselected feedback, and changes only the fullscreen image; closing never updates global conversion state. Holds temporarily invert this local preference. Feedback toast is solid and stays away from the bottom controls.
+
+
+Fullscreen conversion presentation: retain the original circular swap-icon button rather than a style-name label. It has selected/unselected backgrounds and aria-pressed for the local converted state, with dynamic accessible action text. Local opposite initialization and global-state isolation remain unchanged.
