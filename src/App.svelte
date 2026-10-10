@@ -11,9 +11,9 @@
   import Dock from './Dock.svelte';
   import Tile from './Tile.svelte';
   import PixelIcon from './PixelIcon.svelte';
+  import Brand from './Brand.svelte';
   import { tooltip } from './lib/tooltip.js';
   import logoUrl from './assets/logo.gif';
-  import logoStill from './assets/logo.png';
 
   const storageKey = 'bitify';
   const touch = matchMedia('(pointer:coarse)').matches;
@@ -414,9 +414,9 @@
   async function save(item) {
     try {
       const asked = asking(), read = reread(item); // analysed as asked, also while a drag has put that off for the wall
-      await during(`Saving ${item.name}…`, pixelsOf(item), () => saveOne(bitified(read, asked)));
+      await during(`Exporting ${item.name}…`, pixelsOf(item), () => saveOne(bitified(read, asked)));
     } catch {
-      say(`${item.name} could not be saved.`);
+      say(`${item.name} could not be exported.`);
     }
   }
 
@@ -435,10 +435,10 @@
   async function saveEverything() {
     try {
       const asked = asking(), all = items.map(reread); // the images on the wall now, even if some are removed before the job starts
-      const saving = all.length > 1 ? `Saving ${all.length} images…` : `Saving ${all[0].name}…`;
+      const saving = all.length > 1 ? `Exporting ${all.length} images…` : `Exporting ${all[0].name}…`;
       await during(saving, all.reduce((sum, item) => sum + pixelsOf(item), 0), () => saveAll(all, item => bitified(item, asked)));
     } catch {
-      say('The images could not be saved.');
+      say('The images could not be exported.');
     }
   }
 
@@ -513,16 +513,16 @@
   onappinstalled={() => (installOffer = null)}
 />
 
-<header class="bar glass-nav">
-  <div class="brand"><span class="mark">Bitify</span></div>
+<header class="bar glass-nav" class:has-images={!!items.length}>
+  {#if items.length}
+    <button class="btn glass-btn icon-only danger header-clear" onclick={removeAll} aria-label="Remove all images" use:tooltip={'Remove all images from the canvas.'}><PixelIcon name="trash" /></button>
+  {/if}
+  <div class="brand"><Brand /><span class="mark">Bitify</span></div>
   <span class="grow"></span>
   <div class="file-actions" role="group" aria-label="Import and export">
-    <button class="btn glass-btn icon-only" class:glass-btn--primary={!items.length} onclick={() => picker.click()} aria-label="Import images" use:tooltip={'Choose images from your device. Nothing is uploaded.'}><PixelIcon name="import" /></button>
-    <button class="btn glass-btn icon-only" class:glass-btn--primary={!!items.length} disabled={!items.length} aria-label={items.length > 1 ? 'Export all images' : 'Export image'} use:tooltip={items.length > 1 ? 'Download every converted image in a ZIP archive.' : items.length ? 'Download the converted image at its original size.' : 'Import an image to enable export.'} onclick={saveEverything}><PixelIcon name="save" /></button>
+    <button class="btn glass-btn icon-only" class:glass-btn--primary={!items.length} onclick={() => picker.click()} aria-label="Import images" use:tooltip={'Import images from your device. Images stay on your device.'}><PixelIcon name="import" /></button>
+    <button class="btn glass-btn icon-only" class:glass-btn--primary={!!items.length} disabled={!items.length} aria-label={items.length > 1 ? 'Export all images' : 'Export image'} use:tooltip={items.length > 1 ? 'Export all converted images as a ZIP archive.' : items.length ? 'Export the converted image at its original size.' : 'Import an image to enable export.'} onclick={saveEverything}><PixelIcon name="save" /></button>
   </div>
-  {#if items.length}
-    <button class="btn glass-btn icon-only danger header-clear" onclick={removeAll} aria-label="Remove all" use:tooltip={'Clear every image from the wall.'}><PixelIcon name="trash" /></button>
-  {/if}
   <!-- Mouse clicks release focus before opening the native menu. -->
   <button class="btn glass-btn icon-only" bind:this={moreTrigger} aria-haspopup="true" aria-label="More" use:tooltip={'Open appearance, help and app options.'} onclick={e => { if (e.detail) e.currentTarget.blur(); more.showModal(); }}><PixelIcon name="more" /></button>
 </header>
@@ -577,11 +577,11 @@
   <div class="drop" style:background={second} style:color={overlayInk}>Drop to bitify</div>
 {/if}
 <!-- Any click closes the sheet: one of its buttons, or the dimmed screen around it, which counts as the dialog. -->
-<dialog class="sheet glass-sheet" bind:this={sheet} aria-label="Share" onclick={() => sheet.close()}>
+<dialog class="sheet glass-sheet" bind:this={sheet} aria-label="Image actions" onclick={() => sheet.close()}>
   {#if shared}
     <p class="name" use:tooltip={shared.name}>{shared.name}</p>
     <button class="btn glass-btn" onclick={() => copy(shared)}><PixelIcon name="copy" />Copy</button>
-    <button class="btn glass-btn" onclick={() => save(shared)}><PixelIcon name="save" />Download</button>
+    <button class="btn glass-btn" onclick={() => save(shared)}><PixelIcon name="save" />Export</button>
     <button class="btn glass-btn">Cancel</button>
   {/if}
 </dialog>
@@ -598,7 +598,7 @@
   <hr />
   <button class="btn glass-btn" onclick={() => { more.close(); help.showModal(); }}><PixelIcon name="help" />Help</button>
   <a class="btn glass-btn" href="https://github.com/Shilo/bitify" target="_blank" rel="noopener">
-    <svg class="ico" width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" /></svg>GitHub<PixelIcon name="out" />
+    <PixelIcon name="github" />GitHub<PixelIcon name="out" />
   </a>
   <hr />
   <button class="btn undo glass-btn" onclick={() => { more.close(); confirm.showModal(); }}><PixelIcon name="reset" />Reset settings</button>
@@ -622,7 +622,7 @@
   <div class="help-in">
     <button class="ib" onclick={() => help.close()} aria-label="Close" use:tooltip={'Dismiss this help window.'}><PixelIcon name="x" /></button>
     <header>
-      <img src={logoStill} alt="" />
+      <Brand />
       <div>
         <h2 id="help-title">Bitify</h2>
         <p>Instantly convert sprites and animated GIFs to <span>1-bit</span> colors and styles.</p>
@@ -632,7 +632,7 @@
       <li><PixelIcon name="import" /><b>Import</b>{touch ? 'Choose images.' : 'Drop, paste or choose images.'}</li>
       <li><PixelIcon name="grid" /><b>Palette</b>Pick two colors, or a preset. One of them can be None, for a see-through image.</li>
       <li><PixelIcon name="sliders" /><b>Style</b>Pick effect, tune its settings.</li>
-      <li><PixelIcon name="save" /><b>Export</b>Download or copy images.</li>
+      <li><PixelIcon name="save" /><b>Export</b>Export converted images as PNG or GIF, or copy a still image.</li>
     </ol>
     <table>
       <thead>
@@ -650,7 +650,7 @@
           <tr><th>Style settings</th><td><kbd>Touch</kbd> <kbd><PixelIcon name="sliders" /></kbd></td></tr>
           <tr><th>See original image</th><td><kbd>Hold</kbd> <kbd>Image</kbd></td></tr>
           <!-- on touch screens a tile's Download and Copy are behind its Share button -->
-          <tr><th>Save image</th><td><kbd>Touch</kbd> <kbd><PixelIcon name="share" /></kbd></td></tr>
+          <tr><th>Export or copy image</th><td><kbd>Touch</kbd> <kbd><PixelIcon name="share" /></kbd></td></tr>
         {:else}
           <tr><th>Import images</th><td><kbd>Click</kbd> <kbd><PixelIcon name="import" /></kbd> or <kbd>Drop</kbd></td><td><kbd>{mod}</kbd> <kbd>V</kbd></td></tr>
           <tr><th>Next palette</th><td><kbd>Shift</kbd> <kbd>Scroll</kbd></td><td><kbd>←</kbd> <kbd>→</kbd></td></tr>
@@ -658,12 +658,12 @@
           <!-- Style, then More on its strip, which opens the rest of the style's settings; no key does this -->
           <tr><th>Style settings</th><td><kbd>Click</kbd> <kbd><PixelIcon name="sliders" /></kbd> <kbd><PixelIcon name="more" /></kbd></td><td></td></tr>
           <tr><th>See original image</th><td><kbd>Press</kbd> <kbd>Image</kbd></td><td><kbd>Space</kbd></td></tr>
-          <tr><th>Save image</th><td><kbd>Click</kbd> <kbd><PixelIcon name="save" /></kbd> <kbd><PixelIcon name="copy" /></kbd></td><td><kbd>{mod}</kbd> <kbd>C</kbd></td></tr>
+          <tr><th>Export or copy image</th><td><kbd>Click</kbd> <kbd><PixelIcon name="save" /></kbd> <kbd><PixelIcon name="copy" /></kbd></td><td><kbd>{mod}</kbd> <kbd>C</kbd></td></tr>
         {/if}
       </tbody>
     </table>
     <footer>
-      <span>Images never leave your device.</span>
+      <span>Images stay on your device.</span>
       <!-- svelte-ignore a11y_autofocus -->
       <button class="btn primary glass-btn" autofocus onclick={() => help.close()}>Got it</button>
     </footer>

@@ -1,0 +1,13 @@
+/* Header geometry and onboarding; materials stay on the GlassKit theme tokens. */
+:root .brand { flex: none; gap: 8px; padding-inline: 10px; }
+:root .brand-icon { flex: none; display: block; color: var(--fg); shape-rendering: crispEdges; }
+:root .brand-icon-cut { fill: var(--bg); }
+:root .brand .mark { font-family: var(--body); font-size: 22px; font-weight: 700; letter-spacing: -.055em; }
+:root .header-clear { display: inline-flex; }
+:root .more .menu-clear { display: none; }
+:root .help header > .brand-icon { width: 48px; height: 48px; }
+:root .help h2 { font-family: var(--body); font-weight: 700; line-height: 1.15; }
+@media (max-width: 600px) {
+  :root .brand { width: var(--control-shell); padding: 0; justify-content: center; }
+  :root .brand .mark { display: none; }
+}
