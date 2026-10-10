@@ -6,16 +6,17 @@ Implemented in the isolated `codex/glasskit-prototypes` worktree.
 [Try the app](http://127.0.0.1:5188/) or [open the screenshot gallery](gallery.html).
 Run `npm ci` then `npm run dev -- --port 5188 --host 127.0.0.1`.
 
-The full window is a continuous checker canvas with distinct subdued light/dark shades. Overflowing artwork gives outer editing shells an opaque theme surface; nested controls retain glass. The empty header has a single expanded Import action and no note card. Images have no separate backing,
+The full window is a continuous checker canvas with distinct subdued light/dark shades. Overflowing artwork gives outer editing shells an opaque theme surface; nested controls retain glass. The empty workspace has an expanded Add images action and no note card. Images have no separate backing,
 4px insets and 12px gaps. Colors/Palette and comparison/Style are two editing islands;
-Import and Export share a top-right file capsule; Remove all sits immediately before the right-side file capsule and requires confirmation. Image-action capsules use the opaque theme surface, with
+Add, Save and Remove all share a bottom-right file capsule beside More; editing controls sit bottom left. The top bar and brand are removed; whole groups wrap on small phones. Remove all requires confirmation. Image-action capsules use the opaque theme surface, with
 opaque hover/focus ink. Panels reserve space and refit the images.
 
 Checker cells follow 16 source pixels at the median display scale; very dense intervals
 are grouped. The checker anchors after collection/viewport changes and remains fixed through scrolling and panel refits. There are no grid settings or alternate design modes. Existing normal
 `bitify` preferences and first-visit help remain. The checker does not change exports.
 
-- [Current correction pass, challenged review and numbered decisions](2026-10-09-correction-pass.md)
+- [Current tasks23–31, bottom workspace, research and final verification](2026-10-10-bottom-workspace.md)
+- [Earlier correction pass, challenged review and numbered decisions](2026-10-09-correction-pass.md)
 - [Earlier numbered refinements, research and final review](2026-10-09-numbered-refinements.md)
 - [Adoption, adversarial review decisions and validation](2026-10-09-floating-islands-adoption.md)
 - [Current validation and historical exploration checks](validation.md)
