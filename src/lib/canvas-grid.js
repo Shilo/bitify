@@ -21,3 +21,19 @@ export function canvasGridOrigin({ left, top, width, height }, { w, h }) {
   const scale = Math.min(width / w, height / h);
   return { x: left + (width - w * scale) / 2, y: top + (height - h * scale) / 2 };
 }
+
+// A whole-window canvas stays spatially stable while tools refit images and
+// while content scrolls (including panel-driven scrollTop clamps). Re-anchor
+// only for a new image collection or a viewport resize. It aligns initially;
+// independently refitted/scrolled images cannot also stay aligned afterwards.
+export function canvasGridAnchor() {
+  let anchor;
+  return {
+    update({ key, viewport, origin, spacing }) {
+      if (!anchor || anchor.key !== key || anchor.viewport !== viewport) {
+        anchor = { key, viewport, x: origin.x, y: origin.y, spacing };
+      }
+      return { x: anchor.x, y: anchor.y, spacing: anchor.spacing };
+    },
+  };
+}

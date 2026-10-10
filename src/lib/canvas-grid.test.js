@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { canvasGridSpacing, canvasGridOrigin } from './canvas-grid.js';
+import { canvasGridSpacing, canvasGridOrigin, canvasGridAnchor } from './canvas-grid.js';
 
 describe('image-relative canvas grid', () => {
   it('uses 16 source pixels at the actual CSS display scale', () => {
@@ -36,5 +36,28 @@ describe('canvas grid image origin', () => {
   });
   it('handles the transient unlaid-out canvas without NaN', () => {
     expect(canvasGridOrigin({ left: 12, top: 80, width: 0, height: 0 }, { w: 0, h: 0 })).toEqual({ x: 12, y: 80 });
+  });
+});
+
+
+describe('stable canvas workspace anchor', () => {
+  const initial = { key: '1:32x32', viewport: '800x600', origin: { x: 20, y: 100 }, spacing: { step: 64 } };
+  it('keeps origin and spacing through repeated panel openings and closings', () => {
+    const anchor = canvasGridAnchor();
+    const first = anchor.update(initial);
+    for (const y of [80, 130, 80, 100]) {
+      expect(anchor.update({ ...initial, origin: { x: 30, y }, spacing: { step: 32 } })).toEqual(first);
+    }
+  });
+  it('stays viewport fixed during user scrolling and panel-induced scroll clamping', () => {
+    const anchor = canvasGridAnchor(); const first = anchor.update(initial);
+    for (const scrollTop of [120, 450, 300, 0]) {
+      expect(anchor.update({ ...initial, origin: { x: 20, y: 100 - scrollTop }, spacing: { step: 32 } })).toEqual(first);
+    }
+  });
+  it('aligns a new image collection and resized viewport to their current source pixels', () => {
+    const anchor = canvasGridAnchor(); anchor.update(initial);
+    expect(anchor.update({ ...initial, key: '1:32x32|2:64x32', origin: { x: 40, y: 60 } }).x).toBe(40);
+    expect(anchor.update({ ...initial, viewport: '320x568', origin: { x: 12, y: 90 }, spacing: { step: 128 } })).toEqual({ x: 12, y: 90, spacing: { step: 128 } });
   });
 });
