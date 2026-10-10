@@ -12,6 +12,11 @@
 :root .bar .file-actions .file-clear { background: var(--gl-color-error-surface); color: var(--gl-color-error-on-surface); border-color: var(--gl-color-error-border); }
 :root .bar .file-actions .file-clear:is(:hover,:focus-visible) { background: var(--gl-color-error-surface); color: var(--gl-color-error-on-surface); box-shadow: var(--gl-inset-strong); }
 :root .workspace-tools .awaiting-import .export-action { display: none; }
+/* Measure the label at its natural font width without reserving icon-mode space. */
+:root .workspace-tools .export-action { position: relative; gap: 8px; }
+:root .workspace-tools .save-label { position: absolute; visibility: hidden; width: max-content; white-space: nowrap; flex: none; pointer-events: none; }
+:root .workspace-tools.save-labeled .export-action { width: calc(var(--control-size) + var(--save-label-extra)); min-width: calc(var(--control-size) + var(--save-label-extra)); aspect-ratio: auto; border-radius: 999px; }
+:root .workspace-tools.save-labeled .save-label { position: static; visibility: visible; }
 :root .workspace-tools .dock .panel { left: 0; transform: none; max-width: calc(100vw - 48px - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px)); }
 :root .workspace-tools .dock .menu { left: 0; transform: none; max-width: calc(100vw - 48px - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px)); }
 /* The style chooser is positioned within its settings panel. Center that panel

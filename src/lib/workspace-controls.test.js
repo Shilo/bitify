@@ -77,6 +77,12 @@ describe('roomy centered editing controls', () => {
     // Normal one-row packing resumes; no extra row or reduced targets.
     expect(rows(packWorkspaceControls(widths, 847.99, 8))).toEqual([1, 1, 1, 1]);
   });
+  it('includes an expanded Save pill in the centering clearance', () => {
+    const labeled = [200, 160, 192, 56];
+    expect(packWorkspaceControls(labeled, 928, 8)[0].offset).toBe(280);
+    expect(packWorkspaceControls(labeled, 927.99, 8)[0].offset).toBe(0);
+    expect(rows(packWorkspaceControls(labeled, 600, 8))).toEqual([1, 2, 2, 2]);
+  });
   it('recalculates room for long style labels and hidden file actions', () => {
     expect(packWorkspaceControls([200, 240, 152, 56], 848, 8)[0].offset).toBe(0);
     expect(packWorkspaceControls([200, 240, 152, 56], 928, 8)[0].offset).toBe(240);
@@ -95,7 +101,7 @@ describe('roomy centered editing controls', () => {
     expect(packWorkspaceControls([0, 160, 152, 56], 1200, 8)[1].offset).toBe(0);
   });
   it('never overlaps across phone, landscape, desktop, zoom and fractional-width sizes', () => {
-    for (const sizes of [[203, 152, 148, 56], [203, 208, 148, 56], [203, 152, 0, 56], widths.map(size => size * 1.5)]) {
+    for (const sizes of [[203, 152, 148, 56], [203, 208, 148, 56], [203, 152, 0, 56], [203, 152, 186.421875, 56], [203, 208, 192, 56], widths.map(size => size * 1.5)]) {
       for (let available = 320; available <= 2560; available += 0.5) {
         const packed = packWorkspaceControls(sizes, available, 8);
         const boxes = packed.map((item, i) => ({ ...item, width: sizes[i], left: item.side === 'left' ? item.offset : available - item.offset - sizes[i] })).filter(box => box.width);

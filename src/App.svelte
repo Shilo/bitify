@@ -82,7 +82,20 @@
       const groups = [...node.querySelectorAll('.color-tools,.style-tools,.file-actions,.file-tools > .btn')];
       const available = node.getBoundingClientRect().width;
       const gap = parseFloat(getComputedStyle(node).columnGap);
-      const placement = packWorkspaceControls(groups.map(el => el.getBoundingClientRect().width), available, gap);
+      const widths = groups.map(el => el.getBoundingClientRect().width);
+      const saveButton = node.querySelector('.export-action');
+      const saveLabel = saveButton.querySelector('.save-label');
+      const saveRect = saveButton.getBoundingClientRect();
+      // Recover the icon-only width even while the label is showing. Testing
+      // the expanded candidate first avoids a resize/show/hide feedback loop.
+      if (widths[2]) widths[2] -= saveRect.width - saveRect.height;
+      const extra = saveLabel.getBoundingClientRect().width + parseFloat(getComputedStyle(saveButton).gap);
+      node.style.setProperty('--save-label-extra', `${extra}px`);
+      const expanded = [...widths];
+      if (expanded[2]) expanded[2] += extra;
+      const labeled = widths[2] > 0 && packWorkspaceControls(expanded, available, gap)[0].offset > 0;
+      node.classList.toggle('save-labeled', labeled);
+      const placement = packWorkspaceControls(labeled ? expanded : widths, available, gap);
       // Popups follow the editing pair only while the measured layout is centered.
       node.classList.toggle('editing-centered', placement[0].offset > 0);
       groups.forEach((el, i) => {
@@ -103,7 +116,7 @@
       write('--panel-space',`${Math.max(0,tools.top-top+(panels.length?10:0))}px`);
     };
     const resize = new ResizeObserver(measure);
-    const reconnect = () => { resize.disconnect(); resize.observe(node); for (const el of node.querySelectorAll('.panel,.menu,.tray,.color-tools,.style-tools,.file-actions,.file-tools > .btn')) resize.observe(el); measure(); };
+    const reconnect = () => { resize.disconnect(); resize.observe(node); for (const el of node.querySelectorAll('.panel,.menu,.tray,.color-tools,.style-tools,.file-actions,.file-tools > .btn,.save-label')) resize.observe(el); measure(); };
     const mutation = new MutationObserver(reconnect);
     mutation.observe(node,{childList:true,subtree:true});
     const off = on(window,'resize',measure);
@@ -650,7 +663,7 @@
   {/if}
 
     <button class="btn glass-btn icon-only import-action" onclick={() => picker.click()} aria-label={importLabel} use:tooltip={'Add images from your device, or drop or paste them onto the canvas. Images stay on your device.'}><PixelIcon name="import" /></button>
-    <button class="btn glass-btn icon-only export-action" class:glass-btn--primary={!!items.length} disabled={!items.length} aria-label={items.length > 1 ? 'Save all images' : 'Save image'} use:tooltip={items.length > 1 ? 'Save all converted images as a ZIP archive.' : items.length ? 'Save the converted image at its original size.' : 'Add an image to enable saving.'} onclick={saveEverything}><PixelIcon name="save" /></button>
+    <button class="btn glass-btn icon-only export-action" class:glass-btn--primary={!!items.length} disabled={!items.length} aria-label={items.length > 1 ? 'Save all images' : 'Save image'} use:tooltip={items.length > 1 ? 'Save all converted images as a ZIP archive.' : items.length ? 'Save the converted image at its original size.' : 'Add an image to enable saving.'} onclick={saveEverything}><PixelIcon name="save" /><span class="save-label" aria-hidden="true">Save</span></button>
   </div>
   <button class="btn glass-btn icon-only" bind:this={moreTrigger} aria-haspopup="true" aria-label="More" use:tooltip={'Open appearance, help and app options.'} onclick={e => { clearComparison(); if (e.detail) e.currentTarget.blur(); more.showModal(); }}><PixelIcon name="more" /></button>
 </nav>
@@ -737,7 +750,7 @@
       <li><PixelIcon name="import" /><b>Add</b>{touch ? 'Choose images.' : 'Choose, drop or paste images.'}</li>
       <li><PixelIcon name="grid" /><b>Palette</b>Pick one or two colors, or a preset.</li>
       <li><PixelIcon name="sliders" /><b>Style</b>Pick an effect. Tune its settings.</li>
-      <li><PixelIcon name="save" /><b>Save</b>Download or copy images.</li>
+      <li><PixelIcon name="save" /><b>Save</b>Save or copy images.</li>
     </ol>
     <table>
       <thead>
