@@ -483,3 +483,11 @@
   :root .reset-modal .glass-modal::before { background: none; }
   :root .reset-modal .glass-modal__action:focus-visible { outline-color: Highlight; }
 }
+
+:root .empty .tile { width: var(--empty-art-size,96px); }
+@media (max-height: 520px) and (orientation: landscape) {
+  :root .empty-text { padding: 12px; gap: 8px; }
+  :root .empty h2 { font-size: 24px; }
+  :root .empty p { font-size: 12px; line-height: 1.4; }
+  :root .empty .import-note { padding: 8px 12px; }
+}

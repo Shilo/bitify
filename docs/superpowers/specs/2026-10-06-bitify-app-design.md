@@ -1502,3 +1502,9 @@ text element and is-visible state, with existing timers/busy priority and status
 semantics. Its top position follows the measured header and safe area. Legacy toast
 and confirmation paint/layout rules are removed. Component defaults govern materials,
 with narrow-viewport fit and reduced-transparency/forced-color fallbacks retained.
+
+
+The empty-state example measures the available workspace, text and caption to fit
+around instructions and the import action. It observes text/font and workspace
+resizing and disconnects on unmount. Short landscape reduces explanatory spacing;
+small viewports may still scroll naturally when the minimum example cannot fit.

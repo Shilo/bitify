@@ -65,6 +65,24 @@
   $effect(() => {
     if (stored === null) help.showModal();
   });
+  // Fit the example around real text/font sizes, including the instruction notice.
+  function fitEmpty(node) {
+    const area = node.parentElement, text = node.querySelector('.empty-text'), caption = node.querySelector('.cap');
+    const measure = () => {
+      const areaStyle = getComputedStyle(area), gridStyle = getComputedStyle(node);
+      const columns = gridStyle.gridTemplateColumns.split(' ').length > 1;
+      const gap = parseFloat(gridStyle.gap) || 0;
+      const height = area.clientHeight - parseFloat(areaStyle.paddingTop) - parseFloat(areaStyle.paddingBottom)
+        - (caption?.offsetHeight ?? 0) - 8 - (columns ? 0 : text.offsetHeight + gap);
+      const width = area.clientWidth - parseFloat(areaStyle.paddingLeft) - parseFloat(areaStyle.paddingRight)
+        - (columns ? text.offsetWidth + gap : 0);
+      node.style.setProperty('--empty-art-size', `${Math.max(96, Math.min(320, height, width))}px`);
+    };
+    const observer = new ResizeObserver(measure);
+    for (const element of [area, text, caption].filter(Boolean)) observer.observe(element);
+    measure();
+    return { destroy: () => observer.disconnect() };
+  }
   let showOriginal = $state(false);
   // Changing the style or one of its settings, by any route, shows the result: the view goes back to bitified.
   $effect(() => {
@@ -533,7 +551,7 @@
   </div>
 {:else}
   <div class="empty">
-    <div class="empty-in">
+    <div class="empty-in" use:fitEmpty>
       {#if example}
         <Tile inset={IMAGE_INSET} item={example} first={ink[0]} second={ink[1]} {style} {set} flipped={showOriginal !== spaceHeld} />
       {/if}
@@ -541,7 +559,7 @@
         <h2>Pixel art in two colors</h2>
         <p>Instantly convert sprites and animated GIFs<br />to <span>1-bit</span> colors and styles.</p>
         <div class="glass-status import-note">
-          <p>{touch ? 'Import images to begin.' : 'Drop or paste images here, or import from your device.'}<br />Images stay on your device.</p>
+          <p>{touch ? 'Import images to begin.' : 'Drop or paste images here.'}<br />Images stay on your device.</p>
         </div>
         <button class="btn glass-btn glass-btn--primary import-cta" onclick={() => picker.click()}>
           <PixelIcon name="import" />Import images
