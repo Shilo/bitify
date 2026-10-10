@@ -1639,3 +1639,6 @@ Research rationale: Apple’s Icons guidance favors simplified recognizable shap
 
 
 The empty example caption has a right-aligned44px primary Add button using the shared import glyph, matching the mobile title-bar More target. Its left label reads “Add images” for touch/coarse pointers and “Add, drop or paste images” for mouse/keyboard. Example pixel dimensions are replaced by these instructions. The full-width52px caption reserves the62px footer allowance on desktop too. Imported image captions and actions remain unchanged.
+
+
+Example-caption clarification: the entire caption is one primary Add button, with no nested action. Bitify and resolution are stacked at left; device-specific Add instructions are right aligned before a decorative import glyph. Touch caption height remains52px, matching imported image title bars; desktop uses44px for the two-line metadata and accessible target. Instructions read “Add images” for touch/coarse pointers and “Add, drop or paste images” for mouse devices. This supersedes the separate44px caption icon action.
