@@ -138,7 +138,7 @@
     class="art"
     style:aspect-ratio={aspect}
     class:held
-    aria-label={activationLabel ?? (onopen ? `Open ${item.name} in full screen` : `Hold to compare ${item.name}`)}
+    aria-label={activationLabel ?? (onopen ? `Preview ${item.name}` : `Hold to compare ${item.name}`)}
     aria-haspopup={onopen && !onactivate ? 'dialog' : undefined}
     onkeydown={keydown}
     onkeyup={e => { if (e.key === ' ') { e.preventDefault(); hold('keyboard', false); } }}
@@ -158,9 +158,10 @@
   {#if onremove}
     <div class="acts">
       <!-- Desktop actions retain their readable capsule; touch actions live in the caption. -->
+      <button class="ib mouse" onclick={e => activate(e.currentTarget)} aria-label="Preview {item.name}" aria-haspopup="dialog" use:tooltip={'Preview this image.'}><PixelIcon name="expand" /></button>
       <button class="ib mouse" onclick={oncopy} aria-label="Copy {item.name}" use:tooltip={'Copy this image to the clipboard as a PNG.'}><PixelIcon name="copy" /></button>
       <button class="ib mouse" onclick={onsave} aria-label="Save {item.name}" use:tooltip={'Save this image at its original size.'}><PixelIcon name="save" /></button>
-      <button class="ib" onclick={onremove} aria-label="Remove {item.name}" use:tooltip={'Remove this image from the canvas.'}><PixelIcon name="trash" /></button>
+      <button class="ib danger" onclick={onremove} aria-label="Remove {item.name}" use:tooltip={'Remove this image from the canvas.'}><PixelIcon name="trash" /></button>
     </div>
   {/if}
   {#if onactivate}
@@ -184,7 +185,7 @@
         <span class="dim">{item.img.w}<span class="by">×</span>{item.img.h}</span>
       </span>
       {#if onremove}
-        <button class="ib glass-btn tile-share" onclick={onshare} aria-label="Image actions for {item.name}" aria-haspopup="dialog" use:tooltip={'Save, copy or remove this image.'}><PixelIcon name="more" /></button>
+        <button class="ib glass-btn tile-share" onclick={onshare} aria-label="Image actions for {item.name}" aria-haspopup="dialog" use:tooltip={'Preview, save, copy or remove this image.'}><PixelIcon name="more" /></button>
       {/if}
     </figcaption>
   {/if}

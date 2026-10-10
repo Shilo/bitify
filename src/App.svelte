@@ -178,7 +178,7 @@
     themePick = fresh.theme;
     say('Settings reset.');
   }
-  let shared = $state.raw(null); // the image the sheet is for; it stays set after the sheet closes, until the next one
+  let shared = $state.raw(null), sharedTrigger; // the image the sheet is for; it stays set after the sheet closes, until the next one
   // But not once that image is removed, or the sheet would go on holding all of a photo's pixels.
   $effect(() => {
     if (shared && !items.includes(shared)) shared = null;
@@ -197,9 +197,17 @@
       if (installOffer === offer) installOffer = null;
     }
   }
-  function share(item) {
-    shared = item;
+  function share(item, trigger) {
+    shared = item; sharedTrigger = trigger;
     clearComparison(); sheet.showModal();
+  }
+
+  async function previewShared() {
+    const item = shared, trigger = sharedTrigger;
+    sheet.close();
+    // Let the sheet restore its invoking control before opening the next dialog.
+    await tick();
+    if (items.includes(item)) openImage(item, trigger);
   }
 
   // Text color for the drop screen: the first color, unless it is too close to the second to read.
@@ -603,7 +611,7 @@
         oncompare={compareHold} onopen={items.length ? openImage : undefined}
         onactivate={items.length ? undefined : () => picker.click()}
         activationLabel={items.length ? undefined : 'Add images'}
-        onshare={items.length ? () => share(item) : undefined}
+        onshare={items.length ? e => share(item, e.currentTarget) : undefined}
         oncopy={items.length ? () => copy(item) : undefined}
         onsave={items.length ? () => save(item) : undefined}
         onremove={items.length ? () => (items = items.filter(i => i !== item)) : undefined} />
@@ -642,6 +650,7 @@
 <dialog class="sheet glass-sheet" bind:this={sheet} aria-label="Image actions" onclick={() => sheet.close()}>
   {#if shared}
     <p class="name" use:tooltip={shared.name}>{shared.name}</p>
+    <button class="btn glass-btn" onclick={previewShared}><PixelIcon name="expand" />Preview</button>
     <button class="btn glass-btn glass-btn--primary" onclick={() => { const item = shared; sheet.close(); save(item); }}><PixelIcon name="save" />Save</button>
     <button class="btn glass-btn" onclick={() => { const item = shared; sheet.close(); copy(item); }}><PixelIcon name="copy" />Copy</button>
     <button class="btn glass-btn danger" onclick={async () => {

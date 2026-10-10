@@ -66,3 +66,27 @@
 
 :root .viewer-workspace .viewer-close:is(:hover,:focus-visible,:active) { background: var(--surface); box-shadow: var(--gl-inset-strong); transform: none; }
 @media (forced-colors: active) { :root .viewer-workspace .viewer-close:is(:hover,:focus-visible,:active) { background: Canvas; } }
+
+/* Per-image removal carries the same GlassKit destructive tokens as global removal.
+   Keep its existing target geometry and the capsule's opaque protective surface. */
+:root .tile .acts .ib.danger,
+:root .tile .acts .ib.danger:not(:disabled):is(:hover,:focus-visible,:active) {
+  color: var(--gl-color-error-on-surface);
+  background: var(--gl-color-error-surface);
+  border-color: var(--gl-color-error-border);
+}
+:root .tile .acts .ib.danger:not(:disabled):is(:hover,:focus-visible) { box-shadow: var(--gl-inset-medium); }
+:root .tile .acts .ib.danger:not(:disabled):active { box-shadow: var(--gl-inset-strong); }
+@media (forced-colors: active) {
+  :root .tile .acts .ib.danger,
+  :root .tile .acts .ib.danger:not(:disabled):is(:hover,:focus-visible,:active) {
+    color: ButtonText; background: ButtonFace; border-color: ButtonText; box-shadow: none;
+  }
+}
+
+/* Four image actions stay inside small desktop tiles without shrinking targets. */
+@container (max-width: 160px) {
+  @media (hover: hover) {
+    :root .tile .acts { display: grid; grid-template-columns: repeat(2, auto); }
+  }
+}

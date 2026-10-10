@@ -30,11 +30,11 @@
 
 <!-- A native top-layer dialog gives fullscreen image inspection without requiring
      browser fullscreen permission or leaving the app's keyboard focus unmanaged. -->
-<dialog class="image-viewer" bind:this={dialog} aria-label="Full screen image"
+<dialog class="image-viewer" bind:this={dialog} aria-label="Image preview"
   style:--canvas-grid-step={`${grid.step}px`}
   style:background-position={`${(width - fit.width) / 2}px ${(height - fit.height) / 2}px`}
   onclose={() => { spaceHeld = false; onclose?.(); }} onkeydown={keydown} onkeyup={e => { if (e.code === 'Space') spaceHeld = false; }}>
-  <nav class="viewer-workspace" aria-label="Fullscreen image controls">
+  <nav class="viewer-workspace" aria-label="Preview controls">
     <div class="viewer-tools glass-card" role="group" aria-label="Image actions">
       <button class="btn glass-btn icon-only viewer-compare" aria-pressed={!originalVisible}
         aria-label={originalVisible ? 'Show converted image' : 'Show original image'}
@@ -44,7 +44,7 @@
       {#if oncopy}<button class="btn glass-btn icon-only" onclick={oncopy} aria-label="Copy image" use:tooltip={'Copy the converted image as a PNG.'}><PixelIcon name="copy" /></button>{/if}
       {#if onsave}<button class="btn glass-btn icon-only" onclick={onsave} aria-label="Save image" use:tooltip={'Save the converted image at its original size.'}><PixelIcon name="save" /></button>{/if}
     </div>
-    <button class="btn glass-btn icon-only viewer-close" bind:this={closeButton} onclick={() => dialog.close()} aria-label="Close full screen" use:tooltip={'Close full screen.'}><PixelIcon name="x" /></button>
+    <button class="btn glass-btn icon-only viewer-close" bind:this={closeButton} onclick={() => dialog.close()} aria-label="Close preview" use:tooltip={'Close preview.'}><PixelIcon name="x" /></button>
   </nav>
   <div class="viewer-art" bind:clientWidth={width} bind:clientHeight={height}>
     <div class="viewer-tile" style:width="{fit.width}px">

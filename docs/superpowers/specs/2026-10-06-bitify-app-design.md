@@ -1663,3 +1663,6 @@ Fullscreen checker uses dialog-local spacing from the displayed fullscreen sourc
 
 
 Fullscreen focus restoration follows its opening modality: keyboard-opened image previews return focus to the originating image without scrolling. Pointer-opened previews clear the native restored image focus on dismissal, avoiding an unwanted large image outline when Escape closes a click/tap preview. Keyboard navigation retains visible focus normally.
+
+
+Image preview actions (October 10): the user-facing name of the enlarged, edge-to-edge image dialog is Preview, including accessible labels and tooltips. Desktop image actions order Preview, Copy, Save, Remove; Preview uses the shared expand icon and the same viewer activation as clicking the artwork. Remove uses GlassKit error tokens in both themes, including interactive states. Mobile image actions order Preview, Save (primary), Copy, Remove (negative), Cancel. Preview closes the action sheet before opening the image dialog and preserves the originating More control for modality-aware focus restoration. The example retains Add behavior and has no image action menu.
