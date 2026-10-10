@@ -4,6 +4,7 @@ import { packWorkspaceControls } from './workspace-controls.js';
 
 const widths = [200, 160, 152, 56];
 const rows = result => result.map(item => item.row);
+const sweepContext = (available, sizes) => `width=${available}, controls=[${sizes}]`;
 
 describe('independent bottom workspace controls', () => {
   it('puts only Palette above when Style and the right actions fit below', () => {
@@ -106,21 +107,21 @@ describe('roomy centered editing controls', () => {
     // matcher allocations that exceeded Vitest's timeout on the Pages runner.
     for (const sizes of [[203, 152, 148, 56], [203, 208, 148, 56], [203, 152, 0, 56], [203, 152, 186.421875, 56], [203, 208, 192, 56], widths.map(size => size * 1.5)]) {
       for (let available = 320; available <= 2560; available += 0.5) {
-        const context = `width=${available}, controls=[${sizes}]`;
         const packed = packWorkspaceControls(sizes, available, 8);
         const boxes = packed.map((item, i) => ({ ...item, width: sizes[i], left: item.side === 'left' ? item.offset : available - item.offset - sizes[i] })).filter(box => box.width);
         for (let i = 0; i < boxes.length; i++) {
-          assert.ok(boxes[i].left >= 0, `Control ${i} starts outside the row: ${context}`);
-          assert.ok(boxes[i].left + boxes[i].width <= available, `Control ${i} ends outside the row: ${context}`);
+          if (!(boxes[i].left >= 0)) assert.ok(false, `Control ${i} starts outside the row: ${sweepContext(available, sizes)}`);
+          if (!(boxes[i].left + boxes[i].width <= available)) assert.ok(false, `Control ${i} ends outside the row: ${sweepContext(available, sizes)}`);
           for (let j = i + 1; j < boxes.length; j++) {
-            if (boxes[i].row === boxes[j].row) assert.ok(boxes[j].left - boxes[i].left - boxes[i].width >= 8, `Controls ${i}/${j} overlap: ${context}`);
+            if (boxes[i].row === boxes[j].row && !(boxes[j].left - boxes[i].left - boxes[i].width >= 8)) assert.ok(false, `Controls ${i}/${j} overlap: ${sweepContext(available, sizes)}`);
           }
         }
         if (packed[0].offset > 0) {
+          const context = sweepContext(available, sizes);
           assert.deepEqual(rows(packed), [1, 1, 1, 1], `Centered controls wrap: ${context}`);
           assert.equal((packed[0].offset + packed[1].offset + sizes[1]) / 2, available / 2, `Editing pair is not centered: ${context}`);
           const rightmostEdit = packed[1].offset + sizes[1];
-          assert.ok(Math.min(...boxes.filter(box => box.side === 'right').map(box => box.left)) - rightmostEdit >= 24, `Centered controls crowd right actions: ${context}`);
+          if (!(Math.min(...boxes.filter(box => box.side === 'right').map(box => box.left)) - rightmostEdit >= 24)) assert.ok(false, `Centered controls crowd right actions: ${context}`);
         }
       }
     }

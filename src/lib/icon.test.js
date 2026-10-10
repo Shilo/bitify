@@ -16,13 +16,14 @@ const image = (rows, palette, source = 'luma', cut = 128) => {
 };
 const light = [200, 200, 200, 255], dark = [60, 60, 60, 255];
 const components = (m, w, h, value = 2) => {
-  const seen = new Set(); let total = 0;
+  // Every visited position is a bounded mask index, so a byte marks it exactly.
+  const seen = new Uint8Array(m.length); let total = 0;
   for (let start = 0; start < m.length; start++) {
-    if (m[start] !== value || seen.has(start)) continue;
-    total++; const queue = [start]; seen.add(start);
+    if (m[start] !== value || seen[start]) continue;
+    total++; const queue = [start]; seen[start] = 1;
     for (const p of queue) for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
       const x = p % w + dx, y = Math.floor(p / w) + dy, q = y * w + x;
-      if (x >= 0 && y >= 0 && x < w && y < h && m[q] === value && !seen.has(q)) { seen.add(q); queue.push(q); }
+      if (x >= 0 && y >= 0 && x < w && y < h && m[q] === value && !seen[q]) { seen[q] = 1; queue.push(q); }
     }
   }
   return total;

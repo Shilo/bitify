@@ -663,3 +663,46 @@ actual/expected values. A deliberately failing test in a new `bench` subdirector
 discoverable, while a failing `.tmp` test was excluded. These temporary canaries were
 removed after checking them. The `.tmp` exclusion extends Vitest's existing defaults;
 it does not limit discovery to today's test directories.
+
+### Complete suite audit
+
+The next pass read all 19 tracked test files, accounting for all 271 tests, plus the
+runner configuration and Pages workflow. It did not limit the review to the slowest files.
+
+| Test file | Cases | Audit result |
+| --- | ---: | --- |
+| `bitify.test.js` | 93 | Exhaustive conversion cases retained; Stencil remains compute-bound. |
+| `icon.test.js` | 13 | Replace the connectivity helper's visited Set with a byte array; same eight-neighbor traversal. |
+| `workspace-controls.test.js` | 20 | Format exhaustive-sweep diagnostics only on failure; preserve every condition and context. |
+| `style-preview.test.js` | 3 | Small independent previews; no measured change warranted. |
+| `tooltip.test.js` | 15 | Fake timers and per-test cleanup already avoid real waits and shared state. |
+| `save.test.js` | 10 | Tiny fixtures retain independent PNG/ZIP decoding and CRC checks. |
+| `hover-capability.test.js` | 8 | Independent CSS transformations retained. |
+| `gif.test.js` | 11 | Small fixtures and disposal/round-trip checks retained. |
+| `gesture.test.js` | 15 | Fake timers already avoid real waits; cleanup retained. |
+| `theme-startup.test.js` | 8 | Independent VM contexts retained for startup isolation. |
+| `settings.test.js` | 14 | Small validation and persistence cases; no change warranted. |
+| `layout.test.js` | 17 | Small geometry cases and loops; no change warranted. |
+| `canvas-grid.test.js` | 12 | Small synchronous coordinate cases; no change warranted. |
+| `presets.test.js` | 12 | Small synchronous palette/style cases; no change warranted. |
+| `workspace.test.js` | 4 | Small synchronous layout cases; no change warranted. |
+| `viewer-layout.test.js` | 3 | Small synchronous fit cases; no change warranted. |
+| `image-gesture.test.js` | 6 | Deterministic event/clock helpers; no real waits. |
+| `tooltipCoverage.test.js` | 3 | Small source inspections; no change warranted. |
+| `comparison-hold.test.js` | 4 | Small synchronous hold cases; no change warranted. |
+
+Repeated whole-suite measurements showed Icon test time around 448→379 ms and the
+workspace-control sweep around 106→69 ms. JSON-timed suite execution stayed around 2.8
+seconds (command wall time around 4.3–4.4 seconds), dominated by unchanged Stencil execution.
+The alternative thread worker pool was slower (median 4.15 seconds versus 2.79 seconds of
+JSON-timed execution for the current pool) and was rejected; isolation,
+worker defaults and timeout limits remain unchanged.
+
+The old Set-based and new byte-array connectivity oracles agreed on 221,196 exhaustive
+ternary-mask/value combinations, including rectangular boundary cases and an empty mask.
+The workspace checks retain negated original predicates so invalid numeric values still
+fail. Centering assertions retain their original messages and width/configuration context:
+an extra lazy-message variant lost that context in Vitest's cached error stack and was
+rejected. Deliberately wrong component counts, bounds and centered rows still failed with
+the intended diagnostics. All fixtures, test names, conversion calls and sweep iterations
+remain intact; production code is unchanged.
