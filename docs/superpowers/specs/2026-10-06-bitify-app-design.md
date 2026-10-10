@@ -1666,3 +1666,5 @@ Fullscreen focus restoration follows its opening modality: keyboard-opened image
 
 
 Image preview actions (October 10): the user-facing name of the enlarged, edge-to-edge image dialog is Preview, including accessible labels and tooltips. Desktop image actions order Preview, Copy, Save, Remove; Preview uses the shared expand icon and the same viewer activation as clicking the artwork. Remove uses GlassKit error tokens in both themes, including interactive states. Mobile image actions order Preview, Save (primary), Copy, Remove (negative), Cancel. Preview closes the action sheet before opening the image dialog and preserves the originating More control for modality-aware focus restoration. The example retains Add behavior and has no image action menu.
+
+Desktop image actions have a decorative theme-token divider immediately before Remove, including the compact two-row capsule. The separator occupies the existing gap and does not change button target sizes or capsule width. Mobile image actions remain in their sheet.

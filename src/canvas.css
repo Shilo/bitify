@@ -90,3 +90,15 @@
     :root .tile .acts { display: grid; grid-template-columns: repeat(2, auto); }
   }
 }
+
+/* Separate destructive image actions without adding width to compact capsules. */
+@media (hover: hover) {
+  :root .tile .acts .ib.danger { position: relative; }
+  :root .tile .acts .ib.danger::before {
+    content: ''; position: absolute; left: -3px; top: 25%; height: 50%; width: 1px;
+    background: var(--gl-border-medium); pointer-events: none;
+  }
+}
+@media (forced-colors: active) {
+  :root .tile .acts .ib.danger::before { background: ButtonText; }
+}
