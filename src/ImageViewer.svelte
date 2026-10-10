@@ -4,6 +4,7 @@
   import PixelIcon from './PixelIcon.svelte';
   import { tooltip } from './lib/tooltip.js';
   import { fitViewerImage } from './lib/viewer-layout.js';
+  import { canvasGridSpacing } from './lib/canvas-grid.js';
   let { item, first, second, style, set, flipped = false, onsave, oncopy, onclose, busy = '', message = '' } = $props();
   let dialog, closeButton;
   let width = $state(0), height = $state(0);
@@ -12,6 +13,7 @@
   let spaceHeld = $state(false), imageHeld = $state(false);
   const originalVisible = $derived(!converted !== (spaceHeld || imageHeld));
   const fit = $derived(fitViewerImage(item.img.w, item.img.h, width, height, 0));
+  const grid = $derived(canvasGridSpacing([item.img], Math.max(fit.width, fit.height)));
   $effect(() => { dialog.showModal(); closeButton.focus(); });
   $effect(() => {
     const clear = () => { spaceHeld = false; imageHeld = false; };
@@ -29,6 +31,8 @@
 <!-- A native top-layer dialog gives fullscreen image inspection without requiring
      browser fullscreen permission or leaving the app's keyboard focus unmanaged. -->
 <dialog class="image-viewer" bind:this={dialog} aria-label="Full screen image"
+  style:--canvas-grid-step={`${grid.step}px`}
+  style:background-position={`${(width - fit.width) / 2}px ${(height - fit.height) / 2}px`}
   onclose={() => { spaceHeld = false; onclose?.(); }} onkeydown={keydown} onkeyup={e => { if (e.code === 'Space') spaceHeld = false; }}>
   <nav class="viewer-workspace" aria-label="Fullscreen image controls">
     <div class="viewer-tools glass-card" role="group" aria-label="Image actions">

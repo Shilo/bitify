@@ -1657,3 +1657,6 @@ Fullscreen conversion presentation: retain the original circular swap-icon butto
 
 
 Fullscreen dismissal clarification: the bottom-right control is the original direct Close icon button. Remove the fullscreen More dropdown and its menu state/dismissal handlers. Native Escape and Close both dismiss the viewer, restoring focus to the originating image. Bottom placement, solid material and isolated conversion state remain.
+
+
+Fullscreen checker uses dialog-local spacing from the displayed fullscreen source scale, through the same canvasGridSpacing helper and16-source-pixel/dense-photo grouping policy as the main canvas. It anchors to the centered fullscreen image top-left and recomputes with viewer dimensions. The dialog overrides its own --canvas-grid-step only; it never writes the main root grid variables. Closing restores the unchanged main grid.
