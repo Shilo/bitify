@@ -34,3 +34,8 @@ QA fixtures establish CSS geometry/cascade behavior, not hardware behavior.
 Current theme correction: [dark](mockups/theme-consistent-dark.png) and
 [light](mockups/theme-consistent-light.png). Both use one shared themed UI material;
 the prior shared middle-gray canvas screenshots are archived comparisons.
+
+The current live comparison uses [default dark glass](mockups/glasskit-default-dark.png)
+and [default light glass](mockups/glasskit-default-light.png), superseding the 94% experiment.
+The [white/black artwork stress test](mockups/glasskit-default-contrast-stress.png) demonstrates
+why default image-action glass needs a readability decision before final adoption.

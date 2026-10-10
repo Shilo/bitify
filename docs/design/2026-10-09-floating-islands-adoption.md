@@ -11,8 +11,9 @@ backings and grid-setting controls are removed. Normal `bitify` storage and firs
 welcome remain. Archived research/screenshots are retained.
 
 Colors and Palette share one glass island; the style-named original/conversion button
-and Style share another. Download is independent. Strong neutral material protects
-image captions/actions, header brand/count and empty explanatory text. Main ink stays
+and Style share another. Download is independent. The current comparison uses GlassKit default translucent materials for
+image captions/actions, header brand/count and empty explanatory text. The earlier
+94% theme-consistency experiment is archived below. Main ink stays
 opaque in original mode. Hover/focus strengthens tile and standalone actions.
 
 The full-window checker follows the theme: #c5cbd1/#d2d6da in light mode,
@@ -100,8 +101,10 @@ pointers or the mobile keyboard viewport. Real-device checks remain outstanding.
 
 ## Evidence
 
-[Current dark theme](mockups/theme-consistent-dark.png),
-[current light theme](mockups/theme-consistent-light.png). The earlier
+[Current default dark glass](mockups/glasskit-default-dark.png),
+[current default light glass](mockups/glasskit-default-light.png). The
+[94% dark experiment](mockups/theme-consistent-dark.png) and
+[94% light experiment](mockups/theme-consistent-light.png) are archived comparisons. The earlier
 [desktop with focused tile action](mockups/floating-islands-adopted-desktop.jpg) and
 [light no-hover/reduced-transparency fixture](mockups/floating-islands-touch-qa.jpg)
 archive the initial shared-gray adoption.
@@ -144,3 +147,49 @@ and accessibility fallbacks.
 The reviewer found no remaining proven application material inconsistency. The parent
 accepted the source-backed native toolbar startup mismatch and fixed it in2656320;
 intentional selection, semantic Reset, image swatches and disabled dimming were retained.
+
+## Default-glass comparison and challenged findings
+
+The user requested the actual GlassKit defaults as the next live test. The custom94%
+material and opaque hover fills are removed. Normal rendering uses unmodified library
+surface, border, blur, shadow and ink tokens. Compact Bitify geometry, pixel glyphs,
+native dialog lifecycle, theme checker and opaque accessibility fallbacks remain deliberate
+adaptations, so this is default MATERIALS, not untouched default component sizing/markup.
+
+Card surfaces (islands, captions/actions, brand, panels) use white10% dark /60% light,
+24px blur. Header pill material is white14%/70%,24px blur. Download's tertiary material
+is card tint with16px blur. Menus and the tooltip adapter use popover14%/70%. Dialogs
+use the default32-to8%/90-to50% glow gradient with40px blur. Selection and hover states
+use translucent library surfaces4/5. Essential caption/main ink uses the default full text
+role (#fff dark /#1a2a36 light). Native color swatches and the library range thumb are
+functional fills, not added opaque UI backplates. GlassKit does not have a tooltip class;
+that existing behavior is retained with its popover material.
+
+The parent challenged an independent review:
+
+- Accepted a real regression: the newly restored modal backdrop blur escaped the existing
+  reduced-transparency reset. Commit a744572 disables it in reduced transparency and forced
+  colors without changing normal defaults. Browser fixture confirms none for both filters.
+- Confirmed the artwork issue with opaque white/black64x64 original fixtures in a separate
+  tab. On white in dark mode, action ink is white and both capsule10%/focus16% white tints;
+  the icons disappear. The gallery records this actual failure. No94% fix is hidden in the
+  requested baseline. A follow-up could place actions over checker alongside metadata, or
+  use an appropriate stronger library material/ink pair.
+- Accepted default muted text as a design limitation, not a functional bug to silently fix
+  during a defaults comparison. The reviewer computes light small-label contrast around
+  3.3:1 over the light checker/card. A follow-up should first use the library's full text ink
+  for essential small labels, preserving glass rather than making every surface opaque.
+
+Validation after the review fix:220 tests across13 files and production build pass.
+Actual browser-computed card/label/island colors equal the documented library defaults in
+both themes. Focused image actions use translucent surface4, not opaque fills. Light palette
+panel has24px blur; at1075x884 grid bottom715 precedes panel top743. Dark Help shows32-to8%
+gradient,40px blur and12px backdrop blur. No runtime console errors were reported.
+
+Production-bundle simulated touch/reduced fixture at390x844 has no horizontal overflow,
+46px swatch/view controls and56px Download; dark surfaces resolve to opaque#272c32 with
+no filters, including Help's backdrop. Light fallback resolves to#e8ecef. Normal touch
+fixture resolves to white60%/24px blur; at320x568 settings remain above the canvas
+(bottom269/panel top297) without horizontal overflow. These are media-rule simulations,
+not physical iOS/Android or GPU performance measurements. Separate test tabs were closed
+and viewport overrides reset; the main six-image preview remains ready for comparison.
