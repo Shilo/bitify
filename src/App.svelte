@@ -83,6 +83,8 @@
       const available = node.getBoundingClientRect().width;
       const gap = parseFloat(getComputedStyle(node).columnGap);
       const placement = packWorkspaceControls(groups.map(el => el.getBoundingClientRect().width), available, gap);
+      // Popups follow the editing pair only while the measured layout is centered.
+      node.classList.toggle('editing-centered', placement[0].offset > 0);
       groups.forEach((el, i) => {
         const { row, side, offset } = placement[i];
         const styles = { gridRow: String(row), justifySelf: side === 'left' ? 'start' : 'end', marginLeft: side === 'left' ? `${offset}px` : '0px', marginRight: side === 'right' ? `${offset}px` : '0px' };

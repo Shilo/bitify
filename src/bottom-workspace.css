@@ -14,6 +14,10 @@
 :root .workspace-tools .awaiting-import .export-action { display: none; }
 :root .workspace-tools .dock .panel { left: 0; transform: none; max-width: calc(100vw - 48px - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px)); }
 :root .workspace-tools .dock .menu { left: 0; transform: none; max-width: calc(100vw - 48px - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px)); }
+/* The style chooser is positioned within its settings panel. Center that panel
+   on the workspace, then keep the chooser on the same midpoint and border edges. */
+:root .workspace-tools.editing-centered .dock .panel { left: 50%; transform: translateX(-50%); }
+:root .workspace-tools.editing-centered .dock .menu { left: 50%; right: auto; width: calc(100% + 2px); transform: translateX(-50%); }
 :root .workspace-tools.canvas-scrollable .file-actions,
 :root .workspace-tools.canvas-scrollable .file-tools > .btn { background: var(--surface); -webkit-backdrop-filter: none; backdrop-filter: none; }
 /* Blocking/choice surfaces use the same opaque theme token, preserving GlassKit anatomy. */
