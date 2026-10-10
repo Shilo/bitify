@@ -8,7 +8,7 @@ Run `npm ci` then `npm run dev -- --port 5188 --host 127.0.0.1`.
 
 The full window is a continuous checker canvas with distinct subdued light/dark shades. Images have no separate backing,
 4px insets and 12px gaps. Colors/Palette and comparison/Style are two editing islands;
-Download floats independently. Image-action capsules use the opaque theme surface, with
+Import and Export share a top-right file capsule; Clear all stays separate on desktop and moves into More on phones. Image-action capsules use the opaque theme surface, with
 opaque hover/focus ink. Panels reserve space and refit the images.
 
 Checker cells follow 16 source pixels at the median display scale; very dense intervals
@@ -40,5 +40,14 @@ and [default light glass](mockups/glasskit-default-light.png), superseding the 9
 The [white/black artwork stress test](mockups/glasskit-default-contrast-stress.png) demonstrates
 why the user approved a local opaque surface for image actions.
 
-Current protected actions: [dark](mockups/opaque-actions-dark.png) and
+Earlier protected-action comparison: [dark](mockups/opaque-actions-dark.png) and
 [light](mockups/opaque-actions-light.png). Default GlassKit materials remain elsewhere.
+
+Current controls: [dark](mockups/consistent-palette-dark.png) and
+[light](mockups/consistent-palette-light.png). The Palette name no longer stacks a
+second material over its panel. Editing islands, panels and chooser use one card material.
+The small destructive text row inside More uses opaque GlassKit error colors for contrast.
+
+[Compare three Import/Export layouts](import-export-layouts.html): top-right horizontal
+pair (recommended/live), bottom file island, and right-edge vertical pair. The comparison
+supports light/dark, phone sizing and sample panels; file actions are illustrative only.

@@ -259,3 +259,9 @@ The reviewer initially proposed the 30% state scrim. Parent challenged its worst
 contrast over white/black artwork: only 1.20:1 dark and 3.19:1 light. The final opaque
 More row uses library error-dark/on-error tokens: 4.87:1 dark and 6.50:1 light. This
 small text exception does not change the translucent editing or file-control material.
+
+Post-review validation: 220 tests in 13 files and production build pass. UI checks
+covered 600px desktop, 320px touch-layout, both themes, matching 24px card materials,
+PNG/GIF/ZIP export, empty state, mobile Clear, and390px reduced-transparency fixture.
+Final source review found no concrete regression. See validation.md and the new
+import-export-layouts.html comparison. Physical iOS/Safari remains a device check.

@@ -1,6 +1,31 @@
 # Current adoption validation
 
-Floating islands is now the sole runtime design. See the [adoption and final review](2026-10-09-floating-islands-adoption.md) for **212 passing tests in 12 files**, production checks, parsed exports and simulated-media checks. The records below document historical exploration and must not be read as available alternate layouts.
+Floating islands is now the sole runtime design. See the [adoption and final review](2026-10-09-floating-islands-adoption.md) for **220 passing tests in 13 files**, production checks, parsed exports and simulated-media checks. The records below document historical exploration and must not be read as available alternate layouts.
+
+## Compact controls and consistency checks
+
+- Post-review `npm test`: 220 tests in 13 files pass; production build passes.
+- Desktop 600px palette has a fixed name, nowrap swatch viewport and no horizontal
+  page overflow. Desktop 1280px Palette/Style/chooser/editing islands resolve the
+  same surface2 material and 24px blur: white10% dark, white60% light.
+- Production touch-media fixture at320px fits a 296px palette with stacked fixed
+  name/swatches, two editing rows, 44px icon controls and no horizontal overflow.
+- Import via the icon opens the actual local picker. Export is disabled when empty,
+  returns a GIF for one GIF, PNG for one PNG, and ZIP for multiple images. The real
+  downloaded ZIP contains logo-1bit.gif and logo-1bit.png; GIF header is GIF89a.
+- More exposes Clear all on phones; clearing test files restores the empty state
+  and disables Export. Desktop Clear remains separate from the file-action capsule.
+- Reviewed More row computed colors are #d63027/white dark and #b02a37/white light,
+  giving4.87:1 and6.50:1 contrast. Hover/focus preserve those colors.
+- Reduced-transparency production fixture at390px resolves file capsule, panel and
+  editing islands to opaque #e8ecef with no blur; no horizontal overflow or console
+  warning/error occurred. Fixtures simulate media CSS, not a physical iPhone.
+- Import/export comparison renders all three placements and light/dark themes;
+  recommended320px mockup fits without horizontal overflow. It is illustrative,
+  not a second runtime design. Checker pitch represents typical sample image scale.
+- Source reviewer accepted the divider/wrapping fixes. Parent challenged its initial
+  scrim proposal, established failing worst-case contrast, and implemented the
+  stronger scoped destructive-row fix. Final review found no concrete regression.
 
 # Prototype validation
 
