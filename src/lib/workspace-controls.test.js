@@ -13,7 +13,7 @@ describe('independent bottom workspace controls', () => {
       { row: 2, side: 'right', offset: 0 },
     ]);
   });
-  it('aligns both editing units left and file units right when all fit', () => {
+  it('aligns editing units left when a single row fits but centering would crowd actions', () => {
     expect(packWorkspaceControls(widths, 600, 8)).toEqual([
       { row: 1, side: 'left', offset: 0 },
       { row: 1, side: 'left', offset: 208 },
@@ -59,6 +59,61 @@ describe('independent bottom workspace controls', () => {
   });
   it('keeps an oversized unit alone rather than overlapping another unit', () => {
     expect(rows(packWorkspaceControls([300, 140, 152, 56], 180, 8))).toEqual([1, 2, 3, 4]);
+  });
+});
+
+describe('roomy centered editing controls', () => {
+  it('centers the editing pair on the whole workspace, leaving the actions right aligned', () => {
+    expect(packWorkspaceControls(widths, 1200, 8)).toEqual([
+      { row: 1, side: 'left', offset: 416 },
+      { row: 1, side: 'left', offset: 624 },
+      { row: 1, side: 'right', offset: 64 },
+      { row: 1, side: 'right', offset: 0 },
+    ]);
+  });
+  it('requires 24px of clearance at the exact centered threshold', () => {
+    expect(packWorkspaceControls(widths, 848, 8)[0].offset).toBe(240);
+    expect(packWorkspaceControls(widths, 847.99, 8)[0].offset).toBe(0);
+    // Normal one-row packing resumes; no extra row or reduced targets.
+    expect(rows(packWorkspaceControls(widths, 847.99, 8))).toEqual([1, 1, 1, 1]);
+  });
+  it('recalculates room for long style labels and hidden file actions', () => {
+    expect(packWorkspaceControls([200, 240, 152, 56], 848, 8)[0].offset).toBe(0);
+    expect(packWorkspaceControls([200, 240, 152, 56], 928, 8)[0].offset).toBe(240);
+    expect(packWorkspaceControls([200, 160, 0, 56], 528, 8)[0].offset).toBe(80);
+    expect(packWorkspaceControls([200, 160, 152, 56], 528, 8)[0].offset).toBe(0);
+  });
+  it('does not center wrapped controls, even when Palette has room on its own row', () => {
+    const packed = packWorkspaceControls(widths, 400, 8);
+    expect(packed[0].offset).toBe(0);
+    expect(packed[1].offset).toBe(0);
+    expect(rows(packed)).toEqual([1, 2, 2, 2]);
+  });
+  it('respects unusually large layout gaps and ignores missing editing groups', () => {
+    expect(packWorkspaceControls(widths, 976, 40)[0].offset).toBe(288);
+    expect(packWorkspaceControls(widths, 975.99, 40)[0].offset).toBe(0);
+    expect(packWorkspaceControls([0, 160, 152, 56], 1200, 8)[1].offset).toBe(0);
+  });
+  it('never overlaps across phone, landscape, desktop, zoom and fractional-width sizes', () => {
+    for (const sizes of [[203, 152, 148, 56], [203, 208, 148, 56], [203, 152, 0, 56], widths.map(size => size * 1.5)]) {
+      for (let available = 320; available <= 2560; available += 0.5) {
+        const packed = packWorkspaceControls(sizes, available, 8);
+        const boxes = packed.map((item, i) => ({ ...item, width: sizes[i], left: item.side === 'left' ? item.offset : available - item.offset - sizes[i] })).filter(box => box.width);
+        for (let i = 0; i < boxes.length; i++) {
+          expect(boxes[i].left).toBeGreaterThanOrEqual(0);
+          expect(boxes[i].left + boxes[i].width).toBeLessThanOrEqual(available);
+          for (let j = i + 1; j < boxes.length; j++) {
+            if (boxes[i].row === boxes[j].row) expect(boxes[j].left - boxes[i].left - boxes[i].width).toBeGreaterThanOrEqual(8);
+          }
+        }
+        if (packed[0].offset > 0) {
+          expect(rows(packed)).toEqual([1, 1, 1, 1]);
+          expect((packed[0].offset + packed[1].offset + sizes[1]) / 2).toBe(available / 2);
+          const rightmostEdit = packed[1].offset + sizes[1];
+          expect(Math.min(...boxes.filter(box => box.side === 'right').map(box => box.left)) - rightmostEdit).toBeGreaterThanOrEqual(24);
+        }
+      }
+    }
   });
 });
 

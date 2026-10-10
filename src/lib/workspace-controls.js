@@ -1,5 +1,7 @@
 // Four independent units, in semantic order: Palette, Style, Files, More.
-// Prefer one row, then two rows with Palette above the other controls. When
+// Center Palette + Style on roomy single rows; keep the existing left/right
+// packing whenever centering would crowd the actions. Prefer one row, then
+// two rows with Palette above the other controls. When
 // that does not fit, let More accompany Palette before adding a third row.
 export function packWorkspaceControls(widths, available, gap = 8) {
   const clean = value => Number.isFinite(value) ? Math.max(0, value) : 0;
@@ -33,7 +35,7 @@ export function packWorkspaceControls(widths, available, gap = 8) {
     }
     rows = sizes.map((size, index) => size ? row - bottomRows[index] + 1 : row + 1);
   }
-  return sizes.map((size, index) => {
+  const placement = sizes.map((size, index) => {
     const side = index < 2 ? 'left' : 'right';
     let offset = 0;
     if (size && side === 'left') {
@@ -47,4 +49,20 @@ export function packWorkspaceControls(widths, available, gap = 8) {
     }
     return { row: rows[index], side, offset };
   });
+  if (sizes[0] && sizes[1] && active.every(index => rows[index] === 1)) {
+    const editingWidth = sizes[0] + spacing + sizes[1];
+    const actions = active.filter(index => index >= 2);
+    const actionsWidth = actions.reduce((sum, index) => sum + sizes[index], 0)
+      + Math.max(0, actions.length - 1) * spacing;
+    const centeredLeft = (limit - editingWidth) / 2;
+    // Reserve a comfortable 24px beside the right actions, not just the
+    // ordinary island gap. Measured widths account for style labels, zoom,
+    // hidden file actions and window resizing without a device breakpoint.
+    const clearance = Math.max(24, spacing);
+    if (centeredLeft >= 0 && (!actions.length || centeredLeft + editingWidth + clearance <= limit - actionsWidth)) {
+      placement[0].offset = centeredLeft;
+      placement[1].offset = centeredLeft + sizes[0] + spacing;
+    }
+  }
+  return placement;
 }
