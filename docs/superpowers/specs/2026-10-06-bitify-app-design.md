@@ -1523,3 +1523,8 @@ readability exception, not an unmodified default material. Instructions in the n
 GlassKit status notice also use full foreground. Editing islands and selection toasts
 keep their default materials. Reduced transparency and forced colors retain their
 existing solid/system fallbacks.
+
+For short portrait viewports (up to 640px high), empty-state typography and notice
+padding compact, and the example may shrink to 48px. The 56px import action keeps
+its normal target size, and the example caption keeps enough width for its label. The empty workspace remains scrollable for larger system
+text or exceptionally small windows.

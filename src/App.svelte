@@ -76,7 +76,7 @@
         - (node.querySelector('.cap')?.offsetHeight ?? 0) - 8 - (columns ? 0 : text.offsetHeight + gap);
       const width = area.clientWidth - parseFloat(areaStyle.paddingLeft) - parseFloat(areaStyle.paddingRight)
         - (columns ? text.offsetWidth + gap : 0);
-      node.style.setProperty('--empty-art-size', `${Math.max(96, Math.min(320, height, width))}px`);
+      node.style.setProperty('--empty-art-size', `${Math.max(parseFloat(gridStyle.getPropertyValue("--empty-art-min")) || 96, Math.min(320, height, width))}px`);
     };
     const observer = new ResizeObserver(measure);
     for (const element of [area, text]) observer.observe(element);
