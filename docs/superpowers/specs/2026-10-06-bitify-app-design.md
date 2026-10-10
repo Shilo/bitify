@@ -1365,3 +1365,6 @@ The checker uses subdued middle grays #717881 / #868e97 in both themes, so the d
 dark and pale image inks remain distinguishable when either color is None. Theme colors
 apply to chrome. Arbitrary chosen inks can still match a checker shade; no recoloring
 or background-based conversion/export adjustment is performed.
+
+The checker paints once on the root. Body stays transparent, so safe-area padding does
+not restart its phase at a second background origin.

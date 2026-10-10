@@ -32,7 +32,7 @@
   --canvas-readable: rgba(39,44,50,.94);
   --canvas-shadow: 0 12px 32px rgba(0,0,0,.24),0 2px 8px rgba(0,0,0,.15),inset 0 1px 0 rgba(255,255,255,.07);
 }
-:root body { background-color: var(--bg); background-image: inherit; background-size: inherit; background-position: inherit; letter-spacing: -.01em; }
+:root body { background: transparent; letter-spacing: -.01em; }
 :root #app { isolation: isolate; }
 :root .bar {
   position: relative; z-index: 4; min-height: 44px; padding: 18px 24px 12px;
