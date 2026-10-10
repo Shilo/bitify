@@ -55,10 +55,14 @@
   }
   $effect(() => {
     const hidden = () => { if (document.hidden) cancel(); };
+    // A second finger may land on another tile or control, outside this art.
+    const multitouch = e => { if (e.pointerType === 'touch' && e.isPrimary === false) cancel(); };
+    window.addEventListener('pointerdown', multitouch, { passive: true });
     window.addEventListener('blur', cancel);
     document.addEventListener('visibilitychange', hidden);
     return () => {
       cancel();
+      window.removeEventListener('pointerdown', multitouch);
       window.removeEventListener('blur', cancel);
       document.removeEventListener('visibilitychange', hidden);
     };
