@@ -649,7 +649,7 @@
       sheet.close();
       items = items.filter(i => i !== item);
       await tick();
-      (document.querySelector('.tile-share') ?? document.querySelector('.import-action') ?? document.querySelector('.art'))?.focus();
+      (document.querySelector('.tile-share') ?? document.querySelector('.file-actions:not(.awaiting-import) .import-action') ?? document.querySelector('.example-add') ?? document.querySelector('.art'))?.focus();
     }}><PixelIcon name="trash" />Remove</button>
     <button class="btn glass-btn sheet-cancel">Cancel</button>
   {/if}

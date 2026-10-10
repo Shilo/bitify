@@ -47,3 +47,6 @@
 :root[data-theme="dark"] .reset-modal .glass-modal__action--danger { background: var(--gl-color-error-surface); color: var(--gl-color-error-on-surface); }
 :root .reset-modal .glass-modal__action--danger:is(:hover,:focus-visible) { background: var(--gl-color-error-surface); color: var(--gl-color-error-on-surface); box-shadow: var(--gl-inset-strong); }
 @media (forced-colors: active) { :root .reset-modal .glass-modal__action--danger { background: ButtonFace; color: ButtonText; } }
+
+/* Empty-state importing lives in the primary example caption and canvas. */
+:root .workspace-tools .file-actions.awaiting-import { display: none; }

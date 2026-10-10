@@ -1645,3 +1645,6 @@ Example-caption clarification: the entire caption is one primary Add button, wit
 
 
 The example primary-caption button explicitly keeps a nonwrapping horizontal row in portrait and landscape; only its left metadata stacks vertically. This overrides the legacy mobile caption-column rule. Labels and the import glyph stay inside the existing title-bar bounds.
+
+
+Empty-state file-toolbar preference: hide the bottom Add button and its entire file capsule while no images are imported. Keep More and editing islands visible. The primary example caption and canvas activate Add; after import the Remove/Add/Save capsule appears. Hidden capsule width is zero and consumes no packing gap. Focus after removing the final image returns to the visible primary example Add action.
