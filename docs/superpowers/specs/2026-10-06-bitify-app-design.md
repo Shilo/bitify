@@ -1342,7 +1342,7 @@ and the style chooser reserve their measured full extent so artwork refits above
 GlassKit foundation, original geometry and `src/glass.css` adapters load in that order.
 Native dialogs, tooltip/gesture contracts, conversion and full-resolution export remain.
 
-The sole background is a continuous full-window checkerboard, in theme-neutral shades.
+The sole background is a continuous full-window checkerboard, in neutral shades appropriate to each theme.
 Each cell represents 16 source pixels at the median image display scale, updating as
 images are added, removed or refitted. Dense photo intervals group powers-of-two multiples
 to at least 8 CSS pixels. The checker repeat is two cells. Image surfaces are transparent
@@ -1361,9 +1361,10 @@ gap yields a96px capsule at the minimum tile width. Larger touch tiles retain si
 metadata/actions. The style chooser aims to leave191px for one96px art plus95px footer,
 while tiny viewports may scroll. Shared inset/gap constants live in lib/workspace.js.
 
-The checker uses subdued middle grays #717881 / #868e97 in both themes, so the default
-dark and pale image inks remain distinguishable when either color is None. Theme colors
-apply to chrome. Arbitrary chosen inks can still match a checker shade; no recoloring
+The checker uses subdued light grays #c5cbd1 / #d2d6da in light mode and the original
+dark grays #272e35 / #323941 in dark mode. The canvas follows the theme alongside chrome.
+A single transparent image ink can have less contrast against the corresponding theme;
+users can compare the original or change the theme/palette. Arbitrary chosen inks can still match a checker shade; no recoloring
 or background-based conversion/export adjustment is performed.
 
 The checker paints once on the root. Body stays transparent, so safe-area padding does
@@ -1373,7 +1374,7 @@ Wordmark/count share a compact strong neutral label substrate. Empty explanatory
 has the same predictable substrate. Header actions retain strong backing; the original
 comparison state uses opaque foreground plus its hollow/dashed indicator. Small popup
 labels use the main foreground rather than low-contrast muted ink. This protects UI text
-against the middle-gray checker while keeping the image canvas unbacked.
+against the themed checker while keeping the image canvas unbacked.
 
 Standalone header and Download actions use opaque neutral hover/focus fills and main
 foreground; their selectors override generic glass/primary hover rules.

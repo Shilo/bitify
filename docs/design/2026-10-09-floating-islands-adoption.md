@@ -15,8 +15,10 @@ and Style share another. Download is independent. Strong neutral material protec
 image captions/actions, header brand/count and empty explanatory text. Main ink stays
 opaque in original mode. Hover/focus strengthens tile and standalone actions.
 
-The full-window checker uses #717881/#868e97 in both themes, protecting dark and pale
-default artwork better than theme-extreme shades. UI chrome remains themed. It paints
+The full-window checker follows the theme: #c5cbd1/#d2d6da in light mode,
+#272e35/#323941 in dark mode. This supersedes the shared middle-gray experiment,
+which weakened theme consistency. A single transparent ink can have less contrast
+against a matching theme; image conversion and exports are unchanged. It paints
 once on the root, including safe-area margins; body and art surfaces are transparent.
 Its source-space cell is 16px at median image scale, grouped when below 8 CSS px.
 It is a representative guide and cannot pixel-align every independently fitted image.
