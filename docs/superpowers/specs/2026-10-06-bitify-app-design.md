@@ -1,7 +1,7 @@
 # Bitify design
 
 Date: 2026-10-06
-Status: design approved in prototype form; this document awaits review.
+Status: Floating islands adopted October 9, 2026. The adoption section below supersedes historical visual references.
 
 Bitify converts pixel art images to 1-bit: every image is redrawn using two colors the
 user picks. One of the two may be None, which leaves its pixels transparent. It runs
@@ -1260,7 +1260,7 @@ it is doing:
   a deploy and the people using it.
 - Hosting and deployment.
 
-## GlassKit design exploration (October 9, 2026)
+## GlassKit design exploration (October 9, 2026, historical)
 
 The isolated worktree branch `codex/glasskit-prototypes` adds experimental interfaces at
 `?prototype=dock`, `?prototype=inspector`, and `?prototype=clear`. This is a proposal, not a
@@ -1324,3 +1324,20 @@ at least 8 CSS pixels, with the source spacing disclosed in Designs. This contin
 pattern is a representative guide and cannot align every independently fitted image.
 Optional image backing is Canvas only (default), Quiet neutral or Local checkerboard.
 Backings/grid are presentation only and never change image pixels or exports.
+
+## Floating islands adoption (October 9, 2026)
+
+The user approved Floating islands as the sole design. The ordinary URL loads it directly;
+prototype parameters no longer select a design. The comparison picker, alternate dock/rail,
+old-layout branches and built-in sample loader are removed. Historical research/screenshots
+remain documentation. Normal `bitify` preferences and the first-visit welcome are retained.
+
+The window is a continuous canvas with 12px tile gaps and 4px image insets. Colors and
+Palette share one island; the style-named original/conversion toggle and Style share
+another. Download is the only standalone bottom action. Captions and tile action groups
+use stronger neutral material and opaque foreground; hover/focus strengthens backing.
+Fine-pointer caption allowance is 35px and no-hover allowance is 62px. Persistent panels
+and the style chooser reserve their measured full extent so artwork refits above them.
+
+GlassKit foundation, original geometry and `src/glass.css` adapters load in that order.
+Native dialogs, tooltip/gesture contracts, conversion and full-resolution export remain.

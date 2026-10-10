@@ -1,7 +1,7 @@
 <script>
   import { tick } from 'svelte';
-  import { canvasGridSpacing } from './grid-scale.js';
-  let { items, example, basis = 'median', metrics = $bindable() } = $props();
+  import { canvasGridSpacing } from './lib/canvas-grid.js';
+  let { items, example } = $props();
   let across = $state(0);
   // Every fitted tile shares one square width; observe only the first art surface.
   // This also measures the differently sized example on an empty workspace.
@@ -20,10 +20,9 @@
     return () => { cancelled = true; observer?.disconnect(); };
   });
   const spacing = $derived(canvasGridSpacing(
-    (items.length ? items : example ? [example] : []).map(item => item.img), across, basis,
+    (items.length ? items : example ? [example] : []).map(item => item.img), across,
   ));
   $effect(() => {
-    metrics = spacing;
     document.documentElement.style.setProperty('--canvas-grid-step', `${spacing.step}px`);
     return () => document.documentElement.style.removeProperty('--canvas-grid-step');
   });

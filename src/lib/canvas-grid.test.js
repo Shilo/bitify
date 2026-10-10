@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { canvasGridSpacing } from './grid-scale.js';
+import { canvasGridSpacing } from './canvas-grid.js';
 
 describe('image-relative canvas grid', () => {
   it('uses 16 source pixels at the actual CSS display scale', () => {

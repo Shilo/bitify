@@ -28,7 +28,7 @@ src/lib holds the logic as DOM-free modules, each with unit tests: bitify.js tur
 
 App.svelte owns all state and passes it down. Dock.svelte edits settings through bindable props. Tile.svelte derives masks from an image and repaints when they or a color change. A style's settings go to mask as one object; two of them, Brightness and Opacity cut, are read by analyze instead, so App.svelte analyses the images again when the style in use has other values for them. A tile converts only what it can show: for an image larger than the tile, a picture of it at the tile's own size (the width and height given to mask), its pixels spread evenly over the image. Saving and copying convert every pixel.
 
-All CSS is global in src/app.css. Components have no style blocks, and there is no border-box reset; sizes depend on that.
+CSS is global: src/foundation.css orders GlassKit, src/app.css geometry and src/glass.css materials. Floating islands is the single design. Components have no style blocks, and there is no border-box reset; sizes depend on that.
 
 PNGs and GIFs are encoded by hand, not through a canvas, because some browsers add noise when a canvas is read back. A PNG is written with a palette and two bits per pixel, straight from the mask.
 

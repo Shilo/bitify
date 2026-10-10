@@ -1,5 +1,4 @@
-if (new URLSearchParams(location.search).has('prototype')) {
-  import('./prototypes/main.js');
-} else {
-  import('./app-main.js');
-}
+import { mount } from 'svelte';
+import './foundation.css';
+import App from './App.svelte';
+mount(App, { target: document.getElementById('app') });
