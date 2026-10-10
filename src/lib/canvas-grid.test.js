@@ -9,7 +9,6 @@ describe('image-relative canvas grid', () => {
   it('keeps a small enlarged icon from distorting the typical image scale', () => {
     const images = [{ w: 64, h: 64 }, { w: 64, h: 64 }, { w: 64, h: 64 }, { w: 16, h: 16 }];
     expect(canvasGridSpacing(images, 256).step).toBe(64);
-    expect(canvasGridSpacing(images, 256, 'mean').step).toBe(112);
   });
   it('uses the middle pair for an even batch without weighting file area', () => {
     expect(canvasGridSpacing([{ w: 32, h: 32 }, { w: 64, h: 64 }], 128).scale).toBe(3);

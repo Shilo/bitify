@@ -4,9 +4,7 @@
   --line: rgba(38,45,54,.14); --tile: #e6e9eb; --tile2: #dce0e3;
   --shadow: rgba(27,34,44,.10);
   --image-gap: 12px; --image-inset: 4px; --canvas-min-workspace: 131px;
-  --canvas-readable: rgba(252,252,253,.92); --canvas-quiet: rgba(129,135,141,.96);
-  --canvas-image-check-a: #70777f; --canvas-image-check-b: #969da5;
-  --canvas-grid-fine: rgba(34,45,54,.052); --canvas-grid-major: rgba(34,45,54,.065);
+  --canvas-readable: rgba(252,252,253,.92);
   --canvas-material: rgba(253,253,254,.48); --canvas-popover: rgba(253,253,254,.72);
   --canvas-border: rgba(255,255,255,.88);
   --canvas-shadow: 0 12px 32px rgba(26,38,51,.08), 0 2px 6px rgba(26,38,51,.04), inset 0 1px 0 rgba(255,255,255,.85);
@@ -21,32 +19,17 @@
   --gl-border-focus: var(--fg); --gl-blur: var(--canvas-blur);
   --gl-blur-heavy: var(--canvas-blur); --gl-radius-card: 24px; --gl-radius-btn: 14px;
   background-color: var(--bg);
-  background-image: linear-gradient(var(--canvas-grid-major) 1px,transparent 1px),
-    linear-gradient(90deg,var(--canvas-grid-major) 1px,transparent 1px),
-    linear-gradient(var(--canvas-grid-fine) 1px,transparent 1px),
-    linear-gradient(90deg,var(--canvas-grid-fine) 1px,transparent 1px);
-  background-size: calc(var(--canvas-grid-step,32px) * 4) calc(var(--canvas-grid-step,32px) * 4),
-    calc(var(--canvas-grid-step,32px) * 4) calc(var(--canvas-grid-step,32px) * 4),
-    var(--canvas-grid-step,32px) var(--canvas-grid-step,32px),var(--canvas-grid-step,32px) var(--canvas-grid-step,32px);
+  background-image: conic-gradient(var(--tile2) 25%,var(--tile) 0 50%,var(--tile2) 0 75%,var(--tile) 0);
+  background-size: calc(var(--canvas-grid-step,32px) * 2) calc(var(--canvas-grid-step,32px) * 2);
   background-position: 0 0;
 }
 :root[data-theme="dark"] {
   --bg: #191c20; --surface: #272c32; --fg: #f0f2f4; --muted: #b0b7bf;
   --line: rgba(216,229,244,.16); --tile: #323941; --tile2: #272e35; --shadow: rgba(0,0,0,.32);
-  --canvas-grid-fine: rgba(202,221,238,.06); --canvas-grid-major: rgba(202,221,238,.075);
   --canvas-material: rgba(37,43,51,.50); --canvas-popover: rgba(37,43,51,.76);
   --canvas-border: rgba(214,230,244,.18);
   --canvas-readable: rgba(39,44,50,.94);
   --canvas-shadow: 0 12px 32px rgba(0,0,0,.24),0 2px 8px rgba(0,0,0,.15),inset 0 1px 0 rgba(255,255,255,.07);
-}
-:root[data-grid="dots"] {
-  background-image: radial-gradient(circle,var(--canvas-grid-major) 1px,transparent 1.2px);
-  background-size: var(--canvas-grid-step,32px) var(--canvas-grid-step,32px);
-}
-:root[data-grid="off"] { background-image: none; }
-:root[data-grid="checker"] {
-  background-image: conic-gradient(var(--tile2) 25%,var(--tile) 0 50%,var(--tile2) 0 75%,var(--tile) 0);
-  background-size: calc(var(--canvas-grid-step,32px) * 2) calc(var(--canvas-grid-step,32px) * 2);
 }
 :root body { background-color: var(--bg); background-image: inherit; background-size: inherit; background-position: inherit; letter-spacing: -.01em; }
 :root #app { isolation: isolate; }
@@ -96,12 +79,6 @@
 }
 :root .tile .acts .ib:not(:disabled):active {
   background: color-mix(in srgb,var(--surface) 76%,var(--fg)); color: var(--fg);
-}
-/* Optional image support; the full-window background still remains continuous. */
-:root[data-image-backing="quiet"] .art { background: var(--canvas-quiet); }
-:root[data-image-backing="checker"] .art {
-  background-image: conic-gradient(var(--canvas-image-check-a) 25%,var(--canvas-image-check-b) 0 50%,var(--canvas-image-check-a) 0 75%,var(--canvas-image-check-b) 0);
-  background-size: calc(var(--canvas-grid-step,32px) * 2) calc(var(--canvas-grid-step,32px) * 2);
 }
 :root .empty { padding: 18px 24px var(--dock-space); }
 :root .empty-in { gap: 20px; }
@@ -258,10 +235,6 @@
 }
 @media (max-width: 520px) and (max-height: 520px) and (orientation: landscape) {
   :root { --dock-base: 160px; }
-}
-:root[data-opaque="true"] { --canvas-material: var(--surface); --canvas-popover: var(--surface); --canvas-readable: var(--surface); }
-:root[data-opaque="true"] :is(.glass-card,.glass-popover,.glass-modal,.glass-btn,.glass-segmented,.dock,.panel,.menu,.more,.help,.sheet,.toast,.bar .btn,.acts,.dock > .tool-group) {
-  -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
 }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   :root { --canvas-material: var(--surface); --canvas-popover: var(--surface); --canvas-readable: var(--surface); }

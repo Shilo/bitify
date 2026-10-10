@@ -1341,3 +1341,11 @@ and the style chooser reserve their measured full extent so artwork refits above
 
 GlassKit foundation, original geometry and `src/glass.css` adapters load in that order.
 Native dialogs, tooltip/gesture contracts, conversion and full-resolution export remain.
+
+The sole background is a continuous full-window checkerboard, in theme-neutral shades.
+Each cell represents 16 source pixels at the median image display scale, updating as
+images are added, removed or refitted. Dense photo intervals group powers-of-two multiples
+to at least 8 CSS pixels. The checker repeat is two cells. Image surfaces are transparent
+with no separate backing; grid settings and per-image backing are not implemented.
+The checker is a representative visual guide, not a pixel-aligned measurement overlay
+for every differently sized image. Backgrounds never change converted/exported pixels.
