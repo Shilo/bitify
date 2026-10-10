@@ -16,8 +16,6 @@
 }
 
 :root .help tbody td { white-space: normal; }
-:root .help .help-notes { display: grid; gap: 8px; }
-:root .help .help-notes p { margin: 0; text-wrap: pretty; font-size: 12px; line-height: 1.5; }
 
 /* Wrapping descriptions need explicit column space, rather than a 100% label column. */
 :root .help table { table-layout: fixed; }
@@ -28,5 +26,3 @@
   :root .help th, :root .help td { padding-left: 10px; }
   :root .help th:first-child { padding-left: 0; }
 }
-
-@media (hover: hover) { :root .help { width: min(640px, calc(100% - 32px)); } }

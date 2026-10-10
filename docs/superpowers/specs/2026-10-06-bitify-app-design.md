@@ -1689,3 +1689,6 @@ Help audit: use the original logo asset and remove the unused B monogram compone
 
 
 Preview dismissal and Space comparison: a quick stationary primary-pointer click/tap anywhere outside the bottom workspace closes Preview, including image pixels and letterboxed canvas. Long image comparisons, moved/dragged sequences, cancellation and secondary pointers do not dismiss. Bottom controls and their capsule remain exempt. Space is reserved for temporary comparison throughout Preview, including when its toolbar has focus; key release restores the local state and never activates a toolbar button. Enter retains ordinary button activation. Preview initially focuses its dialog, and blur/visibility loss clears transient state. Global conversion preferences remain unchanged.
+
+
+Concise Help correction: use the static original logo.png. Remove Close Preview, Toggle conversion and Compare temporarily rows, plus all appended explanatory paragraphs. Keep concise Add, palette/style navigation, Style settings, Save, Copy, Preview and Remove controls; Preview follows Copy on both input modes. Restore short shortcut cells rather than prose instructions and the original 420px dialog maximum. Retain responsive wrapping to prevent overflow. This supersedes the expanded Help audit presentation; actual interactions are unchanged.

@@ -17,6 +17,7 @@
   import { tooltip } from './lib/tooltip.js';
   import { packWorkspaceControls } from './lib/workspace-controls.js';
   import logoUrl from './assets/logo.gif';
+  import helpLogoUrl from './assets/logo.png';
 
   const storageKey = 'bitify';
   const touch = matchMedia('(pointer:coarse)').matches;
@@ -722,7 +723,7 @@
   <div class="help-in">
     <button class="ib" onclick={() => help.close()} aria-label="Close" use:tooltip={'Dismiss this help window.'}><PixelIcon name="x" /></button>
     <header>
-      <img class="help-logo" src={logoUrl} alt="" width="48" height="48" />
+      <img class="help-logo" src={helpLogoUrl} alt="" width="48" height="48" />
       <div>
         <h2 id="help-title">Bitify</h2>
         <p>Instantly convert sprites and animated GIFs to <span>1-bit</span> colors and styles.</p>
@@ -731,8 +732,8 @@
     <ol>
       <li><PixelIcon name="import" /><b>Add images</b>{touch ? 'Choose images.' : 'Choose, drop or paste images.'}</li>
       <li><PixelIcon name="grid" /><b>Palette</b>Pick two colors, or a preset. One of them can be None, for a see-through image.</li>
-      <li><PixelIcon name="sliders" /><b>Style</b>Pick an effect and tune its settings.</li>
-      <li><PixelIcon name="save" /><b>Save</b>Save converted PNGs or animated GIFs. Copy puts a still PNG on the clipboard.</li>
+      <li><PixelIcon name="sliders" /><b>Style</b>Pick an effect. Tune its settings.</li>
+      <li><PixelIcon name="save" /><b>Save</b>Save converted images as PNG or GIF, or copy a still image.</li>
     </ol>
     <table>
       <thead>
@@ -744,37 +745,25 @@
       <tbody>
         {#if touch}
           <tr><th>Add images</th><td><kbd>Tap</kbd> <kbd><PixelIcon name="import" /></kbd></td></tr>
-          <tr><th>Preview</th><td><kbd>Tap</kbd> image or title, or <kbd><PixelIcon name="more" /></kbd> → <kbd><PixelIcon name="expand" /></kbd></td></tr>
-          <tr><th>Close preview</th><td><kbd>Tap</kbd> image, background or <kbd><PixelIcon name="x" /></kbd></td></tr>
           <tr><th>Next palette</th><td><kbd>Swipe</kbd> <kbd>←</kbd> <kbd>→</kbd></td></tr>
           <tr><th>Next style</th><td><kbd>Swipe</kbd> <kbd>↑</kbd> <kbd>↓</kbd></td></tr>
           <tr><th>Style settings</th><td><kbd>Tap</kbd> <kbd><PixelIcon name="sliders" /></kbd></td></tr>
-          <tr><th>Toggle conversion</th><td><kbd>Tap</kbd> style name</td></tr>
-          <tr><th>Compare temporarily</th><td><kbd>Hold</kbd> image</td></tr>
           <tr><th>Save image</th><td><kbd><PixelIcon name="more" /></kbd> → <kbd><PixelIcon name="save" /></kbd></td></tr>
           <tr><th>Copy image</th><td><kbd><PixelIcon name="more" /></kbd> → <kbd><PixelIcon name="copy" /></kbd></td></tr>
+          <tr><th>Preview</th><td><kbd>Tap</kbd> <kbd>Image</kbd> or <kbd><PixelIcon name="more" /></kbd> → <kbd><PixelIcon name="expand" /></kbd></td></tr>
           <tr><th>Remove image</th><td><kbd><PixelIcon name="more" /></kbd> → <kbd><PixelIcon name="trash" /></kbd></td></tr>
         {:else}
           <tr><th>Add images</th><td><kbd>Click</kbd> <kbd><PixelIcon name="import" /></kbd> or <kbd>Drop</kbd></td><td><kbd>{mod}</kbd> <kbd>V</kbd></td></tr>
-          <tr><th>Preview</th><td>Click image, title or <kbd><PixelIcon name="expand" /></kbd></td><td><kbd>Enter</kbd> on image or title</td></tr>
-          <tr><th>Close preview</th><td><kbd>Click</kbd> image, background or <kbd><PixelIcon name="x" /></kbd></td><td><kbd>Esc</kbd></td></tr>
-          <tr><th>Next palette</th><td><kbd>Shift</kbd>/<kbd>Ctrl</kbd> <kbd>Scroll</kbd> or sideways scroll</td><td><kbd>←</kbd> <kbd>→</kbd></td></tr>
+          <tr><th>Next palette</th><td><kbd>Shift</kbd> <kbd>Scroll</kbd></td><td><kbd>←</kbd> <kbd>→</kbd></td></tr>
           <tr><th>Next style</th><td><kbd>Scroll</kbd></td><td><kbd>↑</kbd> <kbd>↓</kbd></td></tr>
-          <tr><th>Style settings</th><td><kbd><PixelIcon name="sliders" /></kbd>, then <kbd><PixelIcon name="more" /></kbd> if shown</td><td>—</td></tr>
-          <tr><th>Toggle conversion</th><td>Click style name</td><td>—</td></tr>
-          <tr><th>Compare temporarily</th><td><kbd>Hold</kbd> image</td><td>Hold <kbd>Space</kbd></td></tr>
+          <tr><th>Style settings</th><td><kbd>Click</kbd> <kbd><PixelIcon name="sliders" /></kbd></td><td>—</td></tr>
           <tr><th>Save image</th><td><kbd>Click</kbd> <kbd><PixelIcon name="save" /></kbd></td><td>—</td></tr>
-          <tr><th>Copy image</th><td><kbd>Click</kbd> <kbd><PixelIcon name="copy" /></kbd></td><td><kbd>{mod}</kbd> <kbd>C</kbd> first image</td></tr>
+          <tr><th>Copy image</th><td><kbd>Click</kbd> <kbd><PixelIcon name="copy" /></kbd></td><td><kbd>{mod}</kbd> <kbd>C</kbd></td></tr>
+          <tr><th>Preview</th><td><kbd>Click</kbd> <kbd>Image</kbd> or <kbd><PixelIcon name="expand" /></kbd></td><td><kbd>Enter</kbd></td></tr>
           <tr><th>Remove image</th><td><kbd>Click</kbd> <kbd><PixelIcon name="trash" /></kbd></td><td>—</td></tr>
         {/if}
       </tbody>
     </table>
-    <div class="help-notes">
-      <p>{touch ? 'Tap the empty canvas or example title to add images.' : 'Choose files with Add images, or drop or paste them onto the canvas. Copy’s keyboard shortcut copies the first image when no text is selected or being edited.'}</p>
-      <p>Holding temporarily switches the original and converted view; releasing restores it. {touch ? '' : 'On the canvas, Space compares when other buttons or text fields do not have focus. In Preview, Space compares even when bottom controls have focus. ' }Use the style-name button to keep conversion on or off.</p>
-      <p>Scroll or swipe shortcuts work on the canvas when that direction does not scroll. {touch ? '' : 'Hold Ctrl while scrolling to change palettes even on a scrolling canvas. Arrow keys keep their normal behavior in fields and scrollable areas. ' }Style, palette and Copy shortcuts pause while a dialog is open.</p>
-      <p>Save and Copy use the converted image. With multiple images, Save all creates a ZIP. Removing images keeps the original files on your device.</p>
-    </div>
     <footer>
       <span>Images stay on your device.</span>
       <!-- svelte-ignore a11y_autofocus -->
