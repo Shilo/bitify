@@ -1349,3 +1349,6 @@ to at least 8 CSS pixels. The checker repeat is two cells. Image surfaces are tr
 with no separate backing; grid settings and per-image backing are not implemented.
 The checker is a representative visual guide, not a pixel-aligned measurement overlay
 for every differently sized image. Backgrounds never change converted/exported pixels.
+
+Reduced transparency and missing backdrop support use opaque materials in both themes.
+Fallback token selectors match theme specificity; forced colors uses system colors.
