@@ -5,52 +5,56 @@
   import PixelIcon from './PixelIcon.svelte';
   import { tooltip } from './lib/tooltip.js';
   import { imageGesture, IMAGE_HOLD_MS } from './lib/image-gesture.js';
+  import { comparisonHold } from './lib/comparison-hold.js';
 
   // `flipped` true means originals are visible. App-managed comparison updates
   // that same value and the dock toggle; standalone previews use a local hold.
   // Without `onremove` the tile is a preview only and has no buttons.
   // `set` is the style's settings. `budget` is set while one of their sliders is being dragged:
   // the milliseconds this tile may take to convert its image after each move.
-  let { item, first, second, style, set, flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onsave, onremove, onopen, onactivate, activationLabel, oncompare } = $props();
+  let { item, first, second, style, set, flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false } = $props();
   let held = $state(false);
   let holdTimer;
   let clickReady = false;
   const gesture = imageGesture();
+  const holds = comparisonHold();
 
-  function hold(active) {
+  function publishHold(active) {
     if (held === active) return;
     held = active;
     oncompare?.(active, item.id);
   }
-  function activate(trigger) { (onactivate ?? onopen)?.(item, trigger); }
+  function hold(source, active) { publishHold(holds.set(source, active)); }
+  function activate(trigger) { if (!held && !comparing) (onactivate ?? onopen)?.(item, trigger); }
 
   // A touch may be the start of a scroll or a swipe, so it only counts as a hold after a short
   // wait, and not at all if the finger has moved by then.
   function press(e) {
-    hold(false);
+    hold('pointer', false);
     clearTimeout(holdTimer);
     clickReady = false;
     gesture.press(e);
-    if (gesture.canHold()) holdTimer = setTimeout(() => { if (gesture.canHold()) hold(true); }, IMAGE_HOLD_MS);
+    if (gesture.canHold()) holdTimer = setTimeout(() => { if (gesture.canHold()) hold('pointer', true); }, IMAGE_HOLD_MS);
   }
   function move(e) {
     gesture.move(e);
-    if (!gesture.canHold()) { clearTimeout(holdTimer); hold(false); }
+    if (!gesture.canHold()) { clearTimeout(holdTimer); hold('pointer', false); }
   }
   function release(e) {
     // Also check the final position: a browser may omit intermediate moves.
     gesture.move(e);
     clickReady = gesture.release(e);
     clearTimeout(holdTimer);
-    hold(false);
+    hold('pointer', false);
   }
-  function cancel() {
-    gesture.cancel(); clearTimeout(holdTimer); hold(false); clickReady = false;
+  function cancelPointer() {
+    gesture.cancel(); clearTimeout(holdTimer); hold('pointer', false); clickReady = false;
   }
+  function cancel() { cancelPointer(); publishHold(holds.clear()); }
   function keydown(e) {
     if (!['Enter', ' '].includes(e.key)) return;
     e.preventDefault(); e.stopPropagation();
-    if (e.key === ' ') hold(true);
+    if (e.key === ' ') hold('keyboard', true);
     else if (!e.repeat) activate(e.currentTarget);
   }
   $effect(() => {
@@ -137,13 +141,13 @@
     aria-label={activationLabel ?? (onopen ? `Open ${item.name} in full screen` : `Hold to compare ${item.name}`)}
     aria-haspopup={onopen && !onactivate ? 'dialog' : undefined}
     onkeydown={keydown}
-    onkeyup={e => { if (e.key === ' ') { e.preventDefault(); e.stopPropagation(); hold(false); } }}
+    onkeyup={e => { if (e.key === ' ') { e.preventDefault(); e.stopPropagation(); hold('keyboard', false); } }}
     onclick={e => { if (!e.detail || clickReady) activate(e.currentTarget); clickReady = false; }}
     onpointerdown={press}
     onpointermove={move}
     onpointerup={release}
-    onpointerleave={cancel}
-    onpointercancel={cancel}
+    onpointerleave={cancelPointer}
+    onpointercancel={cancelPointer}
     onblur={cancel}
     oncontextmenu={e => e.preventDefault()}
     bind:clientWidth={box}
