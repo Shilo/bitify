@@ -1428,3 +1428,12 @@ contrast. Existing focus outlines, tooltip behavior, hit areas and placement rem
 Captions, editing islands, header controls, popovers and dialogs retain their default
 GlassKit materials. Image canvases have no backing. Forced colors retains system colors.
 This section supersedes only the default-material comparison's tile-action treatment.
+
+## Single editing-panel glass material (October 9, 2026)
+
+Editing islands, Palette/Style panels and chooser popups share card surface2, border,
+shadow and24px blur. The palette name/transparency controls are fixed outside the
+swatch scroll viewport, with transparent background, so the panel paints one layer.
+Desktop Palette remains one flex row; phone uses a name row above the swatches. Scroll
+hints mask swatches instead of painting additional glass. Selected and hover states
+remain distinct. Images still refit above the measured editing stack.

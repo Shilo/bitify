@@ -193,7 +193,7 @@
     };
     fit();
     const chip = row.querySelector('.pal[aria-pressed="true"]');
-    if (chip) row.scrollLeft = chip.offsetLeft - (row.clientWidth - chip.offsetWidth) / 2;
+    if (chip) row.scrollLeft += chip.getBoundingClientRect().left - row.getBoundingClientRect().left - (row.clientWidth - chip.offsetWidth) / 2;
     row.addEventListener('scroll', mark, { passive: true });
     // the window, not the row: once in two rows the row no longer changes size as the window widens
     addEventListener('resize', fit);
@@ -274,21 +274,21 @@
 
 <div class="dock glass-card" bind:this={dock}>
   {#if panel === 'palettes'}
-    <div class="panel fit glass-card" bind:offsetHeight={panelHeight}>
-      <!-- The scrolling box fills the panel, so a swipe anywhere on the panel moves the palettes.
-           A mouse wheel moves them too, since there is no scrollbar to drag. -->
-      <div class="pals" use:scroller onwheel={e => (e.currentTarget.scrollLeft += e.deltaY)}>
-        <span class="pname">
-          <span class="title"><span class="key">Palette</span> {PRESETS.find(chosen)?.name ?? 'Custom'}</span>
-          <!-- Which color is None, if either. It is no palette, so it sits with the name, apart from
-               the palettes: a small switch of three pictures, both colors and each color gone
-               (.seg.mini and .glyph in app.css). -->
-          <span class="seg mini glass-segmented" role="group" aria-label="Transparent color">
-            {#each [['Both colors', ''], ['No color for lines and dark pixels', ' first'], ['No color for fill and light pixels', ' second']] as [label, half], n}
-              <button aria-pressed={none === n} aria-label={label} use:tooltip={['Draw both colors without making either transparent.', 'Make outlines and dark areas transparent.', 'Make fills and highlights transparent.'][n]} onclick={() => (none = n)}><span class="glyph{half}"></span></button>
-            {/each}
-          </span>
+    <div class="panel fit glass-card" bind:offsetHeight={panelHeight} onwheel={e => (e.currentTarget.querySelector('.pals').scrollLeft += e.deltaY)}>
+      <!-- The name/transparency controls stay fixed beside the swatches. A mouse wheel
+           anywhere in the panel scrolls the swatches, which have no visible scrollbar. -->
+      <span class="pname">
+        <span class="title"><span class="key">Palette</span> {PRESETS.find(chosen)?.name ?? 'Custom'}</span>
+        <!-- Which color is None, if either. It is no palette, so it sits with the name, apart from
+             the palettes: a small switch of three pictures, both colors and each color gone
+             (.seg.mini and .glyph in app.css). -->
+        <span class="seg mini glass-segmented" role="group" aria-label="Transparent color">
+          {#each [['Both colors', ''], ['No color for lines and dark pixels', ' first'], ['No color for fill and light pixels', ' second']] as [label, half], n}
+            <button aria-pressed={none === n} aria-label={label} use:tooltip={['Draw both colors without making either transparent.', 'Make outlines and dark areas transparent.', 'Make fills and highlights transparent.'][n]} onclick={() => (none = n)}><span class="glyph{half}"></span></button>
+          {/each}
         </span>
+      </span>
+      <div class="pals" use:scroller>
         <div class="chips" role="group" aria-label="Palettes" style:--cols={Math.ceil(PRESETS.length / 2)}>
           {#each PRESETS as p, i}
             {#if i && i % 4 === 0}<span class="sep"></span>{/if}

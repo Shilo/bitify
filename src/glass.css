@@ -106,7 +106,7 @@
   color: var(--fg); background: var(--canvas-material); border: 1px solid var(--canvas-border);
   box-shadow: var(--canvas-shadow); -webkit-backdrop-filter: blur(var(--gl-blur)); backdrop-filter: blur(var(--gl-blur));
 }
-:root :is(.menu,.more) { background: var(--canvas-popover); }
+:root .more { background: var(--canvas-popover); }
 :root :is(.help,.sheet) { background: var(--canvas-modal); box-shadow: var(--gl-shadow-modal);
   -webkit-backdrop-filter: blur(var(--gl-blur-heavy)); backdrop-filter: blur(var(--gl-blur-heavy)); }
 :root :is(.help,.sheet)::backdrop { background: var(--gl-surface-overlay);
@@ -127,8 +127,8 @@
 :root .seg button[aria-pressed="true"] { background: var(--gl-surface-5); color: var(--gl-color-text-heading); box-shadow: var(--gl-shadow-btn); }
 :root .sep { background: var(--line); }
 :root .panel { border-radius: 22px; padding: 12px 14px; gap: 10px; }
-:root .panel.fit { padding: 0; }
-:root .pname { background: var(--canvas-popover); }
+:root .panel.fit { padding: 0; flex-wrap: nowrap; gap: 0; }
+:root .pname { position: static; background: transparent; }
 :root .pname .seg.mini { border-radius: 10px; }
 :root .pname .seg.mini button { border-radius: 7px; }
 :root .pal { border-radius: 50%; }
@@ -162,10 +162,11 @@
   -webkit-backdrop-filter: blur(var(--gl-blur)); backdrop-filter: blur(var(--gl-blur)); }
 :root .help kbd { background: var(--gl-surface-1); }
 :root .help li .ico { background: var(--gl-surface-3); color: var(--fg); }
-:root .fit::before { background: linear-gradient(to right,var(--canvas-popover) 45%,transparent); }
-:root .fit::after { background: linear-gradient(to left,var(--canvas-popover) 40%,transparent); }
-:root .setbox::before { background: linear-gradient(to right,var(--canvas-popover) 35%,transparent); }
-:root .setbox::after { background: linear-gradient(to left,var(--canvas-popover) 35%,transparent); }
+:root .fit::before, :root .fit::after { content: none; }
+:root .fit.more-left .pals { -webkit-mask-image: linear-gradient(to right,transparent,#000 20px); mask-image: linear-gradient(to right,transparent,#000 20px); }
+:root .fit.more-right .pals { -webkit-mask-image: linear-gradient(to left,transparent,#000 20px); mask-image: linear-gradient(to left,transparent,#000 20px); }
+:root .fit.more-left.more-right .pals { -webkit-mask-image: linear-gradient(to right,transparent,#000 20px,#000 calc(100% - 20px),transparent); mask-image: linear-gradient(to right,transparent,#000 20px,#000 calc(100% - 20px),transparent); }
+:root .setbox::before, :root .setbox::after { background: none; }
 :root :focus-visible { outline: 2px solid var(--gl-border-focus); outline-offset: 3px; }
 :root :is(.adv,.sets,.menu) :focus-visible { outline-offset: -3px; }
 
@@ -376,4 +377,9 @@
   :root .dock > .primary:not(:disabled):is(:hover,:focus-visible) {
     background: Highlight; color: HighlightText;
   }
+}
+
+@media (max-width: 520px) {
+  :root .panel.fit { display: grid; grid-template-columns: minmax(0,1fr); gap: 0; }
+  :root .pals { display: block; }
 }
