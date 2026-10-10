@@ -16,6 +16,7 @@
   import Brand from './Brand.svelte';
   import ImageViewer from './ImageViewer.svelte';
   import { tooltip } from './lib/tooltip.js';
+  import { packWorkspaceControls } from './lib/workspace-controls.js';
   import logoUrl from './assets/logo.gif';
 
   const storageKey = 'bitify';
@@ -75,6 +76,17 @@
     const write = (key, value) => { if (root.style.getPropertyValue(key) !== value) root.style.setProperty(key, value); };
     const measure = () => {
       if (disposed) return;
+      // Each island is one independent grid item. Pack from the bottom/right so
+      // overflow moves Palette upward first, without reserving a whole dock row.
+      const groups = [...node.querySelectorAll('.color-tools,.style-tools,.file-actions,.file-tools > .btn')];
+      const available = node.getBoundingClientRect().width;
+      const gap = parseFloat(getComputedStyle(node).columnGap);
+      const placement = packWorkspaceControls(groups.map(el => el.getBoundingClientRect().width), available, gap);
+      groups.forEach((el, i) => {
+        const { row, side, offset } = placement[i];
+        const styles = { gridRow: String(row), justifySelf: side === 'left' ? 'start' : 'end', marginLeft: side === 'left' ? `${offset}px` : '0px', marginRight: side === 'right' ? `${offset}px` : '0px' };
+        for (const [key, value] of Object.entries(styles)) if (el.style[key] !== value) el.style[key] = value;
+      });
       const area = document.getElementById('app').getBoundingClientRect();
       const tools = node.getBoundingClientRect();
       const panels = [...node.querySelectorAll('.panel,.menu,.tray')];
@@ -86,7 +98,7 @@
       write('--panel-space',`${Math.max(0,tools.top-top+(panels.length?10:0))}px`);
     };
     const resize = new ResizeObserver(measure);
-    const reconnect = () => { resize.disconnect(); resize.observe(node); for (const el of node.querySelectorAll('.panel,.menu,.tray')) resize.observe(el); measure(); };
+    const reconnect = () => { resize.disconnect(); resize.observe(node); for (const el of node.querySelectorAll('.panel,.menu,.tray,.color-tools,.style-tools,.file-actions,.file-tools > .btn')) resize.observe(el); measure(); };
     const mutation = new MutationObserver(reconnect);
     mutation.observe(node,{childList:true,subtree:true});
     const off = on(window,'resize',measure);
