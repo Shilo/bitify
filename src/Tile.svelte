@@ -157,12 +157,12 @@
   </button>
   {#if onremove}
     <div class="acts">
-      <!-- Touch uses a compact action menu; mouse shows Copy and Export directly. -->
-      <button class="ib touch" onclick={onshare} aria-label="Image actions for {item.name}" use:tooltip={'Copy or export this image.'}><PixelIcon name="more" /></button>
+      <!-- Desktop actions share a readable capsule; touch has one standalone Share control. -->
       <button class="ib mouse" onclick={oncopy} aria-label="Copy {item.name}" use:tooltip={'Copy this image to the clipboard as a PNG.'}><PixelIcon name="copy" /></button>
-      <button class="ib mouse" onclick={onsave} aria-label="Export {item.name}" use:tooltip={'Export this image at its original size.'}><PixelIcon name="save" /></button>
+      <button class="ib mouse" onclick={onsave} aria-label="Save {item.name}" use:tooltip={'Save this image at its original size.'}><PixelIcon name="save" /></button>
       <button class="ib" onclick={onremove} aria-label="Remove {item.name}" use:tooltip={'Remove this image from the canvas.'}><PixelIcon name="trash" /></button>
     </div>
+    <button class="ib glass-btn tile-share" onclick={onshare} aria-label="Share {item.name}" aria-haspopup="dialog" use:tooltip={'Save, copy or remove this image.'}><PixelIcon name="share" /></button>
   {/if}
   <figcaption class="cap">
     <span class="name" use:tooltip={item.name}>{item.name}</span>

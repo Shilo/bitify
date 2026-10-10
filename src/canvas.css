@@ -72,3 +72,35 @@
   :root .image-viewer { background: Canvas; color: CanvasText; }
   :root :is(.viewer-tools,.viewer-header h2,.viewer-close) { background: Canvas; color: CanvasText; box-shadow: none; }
 }
+
+/* Tasks 29–30: touch exposes one circular Share target, without a surrounding
+   action capsule. Removing an item lives in the intentional action sheet. */
+:root .tile-share { display: none; }
+@media (hover: none) {
+  :root .tile .acts { display: none; }
+  :root .tile-share {
+    box-sizing: border-box; display: grid; place-items: center;
+    grid-column: 2; grid-row: 2; align-self: center;
+    width: 44px; height: 44px; min-width: 44px; min-height: 44px;
+    padding: 0; border-radius: 50%; color: var(--fg);
+    background: var(--surface); border: 1px solid var(--canvas-border);
+    box-shadow: var(--canvas-shadow); backdrop-filter: none; -webkit-backdrop-filter: none;
+  }
+  :root .tile-share:not(:disabled):is(:hover,:focus-visible,:active) {
+    background: var(--surface); box-shadow: var(--gl-inset-medium);
+  }
+}
+:root .sheet .btn.glass-btn--primary {
+  color: var(--gl-color-on-primary); border-color: var(--gl-border-warm);
+  background: linear-gradient(135deg,var(--gl-color-primary) 0%,var(--gl-color-primary-mid) 50%,var(--gl-color-primary-dark) 100%);
+  box-shadow: var(--gl-shadow-btn-primary),var(--gl-inset-strong); transform: none;
+}
+:root .sheet .btn.danger {
+  color: var(--gl-color-error-on-surface); border-color: var(--gl-color-error-border);
+  background: var(--gl-color-error-surface);
+}
+:root .sheet .sheet-cancel { margin-top: 8px; }
+@media (forced-colors: active) {
+  :root .tile-share, :root .sheet .btn.danger { background: Canvas; color: CanvasText; border-color: ButtonText; box-shadow: none; }
+  :root .sheet .btn.glass-btn--primary { background: Highlight; color: HighlightText; border-color: Highlight; box-shadow: none; }
+}
