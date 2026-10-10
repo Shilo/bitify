@@ -30,7 +30,7 @@
 :root .dock .pname .seg.mini { box-sizing: border-box; height: 44px; }
 :root .dock .pname .seg.mini button { box-sizing: border-box; width: 38px; min-width: 38px; padding: 6px; }
 :root .dock .palette-preview.compact { width: 26px; height: 26px; border-radius: 6px; }
-:root .dock .sw.none { background: conic-gradient(var(--tile2) 25%,var(--tile) 0 50%,var(--tile2) 0 75%,var(--tile) 0) 0 0 / 10px 10px; }
+:root .dock .sw.none { display: grid; place-items: center; background: conic-gradient(var(--tile2) 25%,var(--tile) 0 50%,var(--tile2) 0 75%,var(--tile) 0) 0 0 / 10px 10px; }
 :root .dock .none-label { position: relative; z-index: 1; pointer-events: none; font-size: 10px; font-weight: 600; line-height: 1.5; padding: 0 3px; border-radius: 4px; color: var(--gl-color-text); background: var(--surface); }
 @media (pointer: coarse) {
   :root .dock .pname .seg.mini button { width: 44px; min-width: 44px; }
@@ -54,4 +54,5 @@
   :root .dock .palette-preview { forced-color-adjust: none; }
   :root .dock .none-label { color: CanvasText; background: Canvas; }
 }
+
 
