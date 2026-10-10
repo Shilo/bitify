@@ -102,8 +102,8 @@
   $effect(() => {
     const hidden = () => { if (document.hidden) clearComparison(); };
     const focused = e => { if (e.target.closest?.('dialog[open]')) clearComparison(); };
-    return [on(document, 'visibilitychange', hidden), on(document, 'focusin', focused)]
-      .reduce((cleanup, stop) => () => { cleanup(); stop(); }, () => {});
+    const off = [on(document, 'visibilitychange', hidden), on(document, 'focusin', focused)];
+    return () => off.forEach(stop => stop());
   });
   // While a slider of the style panel is being dragged, the wall as a whole gets this many milliseconds
   // to redraw after each move, shared out between the tiles (see `budget` in Tile.svelte).
@@ -476,8 +476,10 @@
     const up = e => { gesture.move(e); ready = enabled && !excluded(e) && e.isPrimary !== false && gesture.canHold(); gesture.cancel(); };
     const cancel = () => { ready = false; gesture.cancel(); };
     const click = e => { if (ready && enabled && !excluded(e)) picker.click(); cancel(); };
+    const secondary = e => { if (e.pointerType === 'touch' && !e.isPrimary) cancel(); };
     const off = [on(node,'pointerdown',down),on(node,'pointermove',move),on(node,'pointerup',up),
-      on(node,'pointercancel',cancel),on(node,'pointerleave',cancel),on(node,'click',click)];
+      on(node,'pointercancel',cancel),on(node,'pointerleave',cancel),on(node,'click',click),
+      on(window,'pointerdown',secondary,{passive:true})];
     return { update: value => { enabled = value; cancel(); }, destroy: () => off.forEach(stop => stop()) };
   }
   // Read the actual scroll viewport rather than guessing from image count: panel
