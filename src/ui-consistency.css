@@ -17,7 +17,7 @@
 :root { --ui-enter-duration: 150ms; --ui-ease: cubic-bezier(.2,0,0,1); }
 :root :is(.bar,.viewer-header) .glass-btn:is(:hover,:active,:focus-visible) { transform: none; }
 :root .dock :is(.panel,.menu,.tray),
-:root dialog[open]:not(.image-viewer) { animation: ui-surface-enter var(--ui-enter-duration) var(--ui-ease); }
+:root dialog[open] { animation: ui-surface-enter var(--ui-enter-duration) var(--ui-ease); }
 :root .tooltip { transition: opacity 150ms var(--ui-ease); }
 :root .view-toggle { transition: background-color 150ms var(--ui-ease),color 150ms var(--ui-ease),box-shadow 150ms var(--ui-ease); }
 :root .awaiting-images { cursor: pointer; }
@@ -26,3 +26,6 @@
 @media (prefers-reduced-motion: reduce) {
   :root *, :root *::before, :root *::after { animation: none !important; transition: none !important; }
 }
+
+/* Fullscreen inspection keeps the same checker phase as the underlying canvas. */
+:root .image-viewer { background-position: var(--canvas-grid-x,0px) var(--canvas-grid-y,0px); }
