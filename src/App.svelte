@@ -2,7 +2,7 @@
   import { analyze, mask, hexToRgb, autoThreshold, spritesOf } from './lib/bitify.js';
   import { unify } from './lib/bitify.js';
   import { saveOne, saveAll, copyOne, pngBlob } from './lib/save.js';
-  import { fitGrid } from './lib/layout.js';
+  import { fitImageWall, IMAGE_INSET } from './lib/workspace.js';
   import { restore } from './lib/settings.js';
   import { STYLES, inOrder, inks, stepStyle, stepPalette } from './lib/presets.js';
   import { wheelSteps } from './lib/gesture.js';
@@ -97,14 +97,7 @@
   const noHover = matchMedia('(hover: none)');
   let noHoverMatches = $state(noHover.matches);
   noHover.addEventListener('change', e => (noHoverMatches = e.matches));
-  const captionHeight = $derived(noHoverMatches ? 62 : 35);
-  const layout = $derived(
-    fitGrid(items.length, wallWidth, wallHeight, {
-      gap: 12,
-      extra: captionHeight,
-      min: Math.max(140, Math.min(200, wallWidth * 0.16)), // smallest useful tile; below it the wall scrolls
-    }),
-  );
+  const layout = $derived(fitImageWall(items.length, wallWidth, wallHeight, noHoverMatches));
   let dragDepth = $state(0);
   let message = $state('');
   let picker;
@@ -515,13 +508,13 @@
 </header>
 
 {#if items.length}
-  <div class="grid" style:--cols={layout.cols} style:--tile-size="{layout.size}px">
+  <div class="grid" class:stack-captions={layout.stackCaptions} style:--cols={layout.cols} style:--tile-size="{layout.size}px">
     <div class="probe" bind:clientWidth={wallWidth} bind:clientHeight={wallHeight}></div>
     <div class="tiles">
       {#each items as item (item.id)}
         <Tile
           {item}
-          inset={4}
+          inset={IMAGE_INSET}
           first={ink[0]}
           second={ink[1]}
           {style}
@@ -540,7 +533,7 @@
   <div class="empty">
     <div class="empty-in">
       {#if example}
-        <Tile inset={4} item={example} first={ink[0]} second={ink[1]} {style} {set} flipped={showOriginal !== spaceHeld} />
+        <Tile inset={IMAGE_INSET} item={example} first={ink[0]} second={ink[1]} {style} {set} flipped={showOriginal !== spaceHeld} />
       {/if}
       <div class="empty-text">
         <h2>Pixel art in two colors</h2>

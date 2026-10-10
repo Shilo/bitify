@@ -1352,3 +1352,11 @@ for every differently sized image. Backgrounds never change converted/exported p
 
 Reduced transparency and missing backdrop support use opaque materials in both themes.
 Fallback token selectors match theme specificity; forced colors uses system colors.
+
+Narrow no-hover tiles stack full-width caption and a centered Share/Remove capsule below
+the art. The compact 62px fit selects stacking below192px; a second fit reserves95px
+and retains the explicit stack flag even if tiles grow. Caption height26px + action
+height52px + two8px gaps fits that allowance. Actions stay44px each; zero inter-action
+gap yields a96px capsule at the minimum tile width. Larger touch tiles retain side-by-side
+metadata/actions. The style chooser aims to leave191px for one96px art plus95px footer,
+while tiny viewports may scroll. Shared inset/gap constants live in lib/workspace.js.

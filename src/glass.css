@@ -297,7 +297,7 @@
   overflow-y: auto;
 }
 @media (hover: none) {
-  :root { --canvas-min-workspace: 160px; }
+  :root { --canvas-min-workspace: 191px; }
 }
 
 /* In a short window, choosing a style temporarily replaces its setting strip.
@@ -329,5 +329,17 @@
 @container (max-width: 130px) {
   @media (hover: hover) {
     :root .tile .acts .ib { width: 24px; height: 24px; }
+  }
+}
+
+/* Touch captions and actions keep their full width when the layout requests stacking. */
+@media (hover: none) {
+  :root .stack-captions .cap {
+    grid-column: 1 / -1; grid-row: 2; flex-direction: row; align-items: baseline;
+    gap: 6px; line-height: 18px;
+  }
+  :root .stack-captions .cap .dim { margin-left: auto; line-height: 18px; flex: none; }
+  :root .stack-captions .acts {
+    grid-column: 1 / -1; grid-row: 3; justify-self: center; gap: 0;
   }
 }

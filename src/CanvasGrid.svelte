@@ -1,5 +1,6 @@
 <script>
   import { tick } from 'svelte';
+  import { IMAGE_INSET } from './lib/workspace.js';
   import { canvasGridSpacing } from './lib/canvas-grid.js';
   let { items, example } = $props();
   let across = $state(0);
@@ -12,7 +13,7 @@
       if (cancelled) return;
       const art = document.querySelector('#app .tile .art');
       if (!art) return;
-      const measure = () => (across = Math.max(0, art.clientWidth - 8));
+      const measure = () => (across = Math.max(0, art.clientWidth - 2 * IMAGE_INSET));
       measure();
       observer = new ResizeObserver(measure);
       observer.observe(art);
