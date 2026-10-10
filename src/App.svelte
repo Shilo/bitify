@@ -469,7 +469,7 @@
   function emptyImport(node, enabled) {
     const gesture = imageGesture();
     let ready = false;
-    const excluded = e => e.defaultPrevented || document.querySelector('dialog[open]') ||
+    const excluded = e => previewing || e.defaultPrevented || document.querySelector('dialog[open]') ||
       e.target.closest?.('button,input,select,textarea,a,.dock,.panel,.menu,.tray,[role="slider"]');
     const down = e => { ready = false; if (enabled && !excluded(e)) gesture.press(e); else gesture.cancel(); };
     const move = e => gesture.move(e);
@@ -584,7 +584,7 @@
   <div class="tiles">
     {#each canvasItems as item (item.id)}
       <Tile {item} inset={IMAGE_INSET} first={ink[0]} second={ink[1]} {style} {set}
-        flipped={effectiveOriginal} budget={dragging ? DRAG_MS / canvasItems.length : 0}
+        flipped={effectiveOriginal} comparing={previewing} budget={dragging ? DRAG_MS / canvasItems.length : 0}
         oncompare={compareHold} onopen={items.length ? openImage : undefined}
         onactivate={items.length ? undefined : () => picker.click()}
         activationLabel={items.length ? undefined : 'Import images'}
@@ -600,7 +600,7 @@
   <ImageViewer item={viewed} first={ink[0]} second={ink[1]} {style} {set} {busy} {message} flipped={effectiveOriginal}
     onsave={viewed.id === 0 ? undefined : () => save(viewed)}
     oncopy={viewed.id === 0 ? undefined : () => copy(viewed)}
-    onclose={() => { viewing = null; viewTrigger?.focus(); }} />
+    onclose={async () => { const trigger = viewTrigger; viewing = null; await tick(); trigger?.focus(); }} />
 {/if}
 
 <CanvasGrid {items} {example} />
@@ -654,7 +654,7 @@
 <dialog class="glass-modal-overlay is-active reset-modal" bind:this={clearConfirm}
   aria-labelledby="clear-title" aria-describedby="clear-description"
   onclick={e => e.target === clearConfirm && clearConfirm.close()}
-  onclose={() => (clearTrigger?.isConnected ? clearTrigger : moreTrigger)?.focus()}>
+  onclose={async () => { await tick(); (clearTrigger?.isConnected ? clearTrigger : moreTrigger)?.focus(); }}>
   <div class="glass-modal">
     <div class="glass-modal__header"><h2 class="glass-modal__title" id="clear-title">Remove all images?</h2></div>
     <div class="glass-modal__body"><p id="clear-description">All imported images will be removed from this canvas.<br /><br />The original files stay on your device.</p></div>
