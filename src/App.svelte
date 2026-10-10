@@ -749,16 +749,16 @@
           <tr><th>Next palette</th><td><kbd>Swipe</kbd> <kbd>←</kbd> <kbd>→</kbd></td></tr>
           <tr><th>Next style</th><td><kbd>Swipe</kbd> <kbd>↑</kbd> <kbd>↓</kbd></td></tr>
           <tr><th>Style settings</th><td><kbd>Tap</kbd> <kbd><PixelIcon name="sliders" /></kbd></td></tr>
-          <tr><th>Save or copy image</th><td><kbd><PixelIcon name="more" /></kbd> → <kbd><PixelIcon name="save" /></kbd> <kbd><PixelIcon name="copy" /></kbd></td></tr>
           <tr><th>Preview image</th><td><kbd>Tap</kbd> <kbd>Image</kbd></td></tr>
+          <tr><th>Save or copy image</th><td><kbd><PixelIcon name="more" /></kbd> → <kbd><PixelIcon name="save" /></kbd> <kbd><PixelIcon name="copy" /></kbd></td></tr>
           <tr><th>Remove image</th><td><kbd><PixelIcon name="more" /></kbd> → <kbd><PixelIcon name="trash" /></kbd></td></tr>
         {:else}
           <tr><th>Add</th><td><kbd>Click</kbd> <kbd><PixelIcon name="import" /></kbd> or <kbd>Drop</kbd></td><td><kbd>{mod}</kbd> <kbd>V</kbd></td></tr>
           <tr><th>Next palette</th><td><kbd>Shift</kbd> <kbd>Scroll</kbd></td><td><kbd>←</kbd> <kbd>→</kbd></td></tr>
           <tr><th>Next style</th><td><kbd>Scroll</kbd></td><td><kbd>↑</kbd> <kbd>↓</kbd></td></tr>
           <tr><th>Style settings</th><td><kbd>Click</kbd> <kbd><PixelIcon name="sliders" /></kbd></td><td>—</td></tr>
-          <tr><th>Save or copy image</th><td><kbd>Click</kbd> <kbd><PixelIcon name="save" /></kbd> <kbd><PixelIcon name="copy" /></kbd></td><td><kbd>{mod}</kbd> <kbd>C</kbd></td></tr>
           <tr><th>Preview image</th><td><kbd>Click</kbd> <kbd>Image</kbd></td><td><kbd>Enter</kbd></td></tr>
+          <tr><th>Save or copy image</th><td><kbd>Click</kbd> <kbd><PixelIcon name="save" /></kbd> <kbd><PixelIcon name="copy" /></kbd></td><td><kbd>{mod}</kbd> <kbd>C</kbd></td></tr>
           <tr><th>Remove image</th><td><kbd>Click</kbd> <kbd><PixelIcon name="trash" /></kbd></td><td>—</td></tr>
         {/if}
       </tbody>

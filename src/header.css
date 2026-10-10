@@ -26,3 +26,9 @@
   :root .help th, :root .help td { padding-left: 10px; }
   :root .help th:first-child { padding-left: 0; }
 }
+
+/* Reclaim spare keyboard space for the desktop action labels. */
+@media (hover: hover) and (pointer: fine) {
+  :root .help th:first-child { width: 40%; }
+  :root .help thead th:nth-child(2) { width: 34%; }
+}

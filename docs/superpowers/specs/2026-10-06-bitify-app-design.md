@@ -1698,3 +1698,6 @@ Help wording refinement: Add replaces Add images within Help. Palette instructio
 
 
 Preview conversion correction: snapshot the currently visible app original/converted state before clearing main-canvas temporary comparison on opening. Initialize Preview from that snapshot, rather than its opposite. The local swap icon is highlighted and aria-pressed only while the original is visible. Clicking toggles the local preference; holding image or Space temporarily inverts it until release, with overlapping holds inverting once. No Preview interaction updates global conversion state; reopening snapshots the app again. This supersedes opposite initialization and converted-state highlighting.
+
+
+Help row order refinement: Preview image precedes Save or copy image on both input modes. Desktop Controls and Mouse columns use 40% and 34%, leaving spare keyboard space for the combined Save/Copy label. Modal width and touch column sizing remain unchanged.
