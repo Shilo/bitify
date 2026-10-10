@@ -1563,3 +1563,8 @@ Clicking an imported image or the live example opens the native image viewer. Lo
 While the fullscreen viewer is open, export and copy progress/success/error messages are announced by one GlassKit toast inside the native dialog; the outer App toast is hidden to avoid duplicate status announcements and top-layer occlusion.
 
 On phones no wider than 520px and no taller than 700px, opening an editing panel temporarily compacts empty-state onboarding to its heading; Import remains in the toolbar. The subtitle and instructions return when the panel closes. Actual header measurement releases this space to the live example, preventing its caption from sitting behind an editing panel.
+
+The final header refinement also sets the wordmark in the same Schibsted Grotesk
+family as the interface; the static pixel B monogram carries the brand character.
+Pixelify Sans is no longer loaded. The scoped canvas, header, dock and UI adapters
+load after GlassKit and the established geometry/material adapters in every build.

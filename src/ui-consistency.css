@@ -4,3 +4,4 @@
 :root :is(.help h2,.empty h2,.glass-modal__title,.drop) { font-family: var(--body); letter-spacing: -.025em; }
 :root :is(button,input,select,textarea) { font-family: var(--body); }
 :root .ico, :root .glass-btn .ico { width: 18px; height: 18px; flex: none; }
+:root { --display: var(--body); }

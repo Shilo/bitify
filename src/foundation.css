@@ -1,5 +1,8 @@
-/* Keep library, geometry and material adapters in this order in every build. */
+/* Keep library, geometry, material adapters and scoped refinements in this order. */
 @import '@jungherz-de/glasskit/glasskit.css';
 @import './app.css';
 @import './glass.css';
 @import './ui-consistency.css';
+@import './canvas.css';
+@import './header.css';
+@import './dock-refinement.css';
