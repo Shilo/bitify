@@ -12,13 +12,14 @@
   :root .brand .mark { display: none; }
 }
 
-:root .bar { flex: none; align-items: center; }
+:root .bar { display: grid; grid-template-columns: auto minmax(0,1fr) auto auto; flex: none; align-items: center; }
+:root .bar.has-images { grid-template-columns: auto auto minmax(0,1fr) auto auto; }
 :root .bar .file-actions .import-action:not(.icon-only) {
   box-sizing: border-box; flex: none; height: var(--control-size); min-height: var(--control-size);
   padding-inline: 14px; border-radius: 999px; font-size: 13px; gap: 8px;
 }
 :root .onboarding {
-  box-sizing: border-box; flex-basis: 100%; max-width: 760px; margin: 0 auto;
+  box-sizing: border-box; grid-column: 1 / -1; width: min(760px,100%); margin: 0 auto;
   padding: 12px 20px; border-radius: 18px; text-align: center;
   color: var(--gl-color-text); font-family: var(--body);
 }

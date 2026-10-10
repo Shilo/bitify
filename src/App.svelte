@@ -12,6 +12,7 @@
   import Tile from './Tile.svelte';
   import PixelIcon from './PixelIcon.svelte';
   import Brand from './Brand.svelte';
+  import ImageViewer from './ImageViewer.svelte';
   import { tooltip } from './lib/tooltip.js';
   import logoUrl from './assets/logo.gif';
 
@@ -106,6 +107,10 @@
   let items = $state.raw([]);
   // The logo, shown on the empty screen as a live preview of the settings. Never exported.
   let example = $state.raw(null);
+  let viewing = $state.raw(null), viewTrigger;
+  // Resolve the current analysis after a setting changes, without duplicating image pixels.
+  const viewed = $derived(viewing ? (viewing.id === 0 ? example : items.find(item => item.id === viewing.id)) : null);
+  function openImage(item, trigger) { viewing = item; viewTrigger = trigger; }
   // The lowest and highest value Auto is using for the images on screen, for the Dock to show:
   // of the threshold, of Cutout's seam strength, and of Stencil's Cuts. An image's sprites are
   // only looked for while Stencil is the style: finding them walks the whole image.
@@ -254,6 +259,7 @@
   let ctrlHeld = false;
   const wheelStep = wheelSteps();
   function wheel(e) {
+    if (document.querySelector('dialog[open]')) return;
     // If the browser will not let a Ctrl move be stopped it is about to zoom, and one effect is enough.
     if (e.ctrlKey ? !ctrlHeld || !e.cancelable : scrolls(e.target, e.shiftKey ? 'x' : undefined)) return;
     e.preventDefault(); // or Ctrl and the wheel would zoom the page
@@ -525,7 +531,7 @@
   {#if items.length}
     <button class="btn glass-btn icon-only danger header-clear" onclick={removeAll} aria-label="Remove all images" use:tooltip={'Remove all images from the canvas.'}><PixelIcon name="trash" /></button>
   {/if}
-  <div class="brand"><Brand /><span class="mark">Bitify</span></div>
+  <div class="brand" role="img" aria-label="Bitify"><Brand /><span class="mark">Bitify</span></div>
   <span class="grow"></span>
   <div class="file-actions" class:awaiting-import={!items.length} role="group" aria-label="Import and export">
     <button class="btn glass-btn import-action" class:icon-only={!!items.length} class:glass-btn--primary={!items.length} onclick={() => picker.click()} aria-label="Import images" use:tooltip={'Import images from your device. Images stay on your device.'}><PixelIcon name="import" />{#if !items.length}<span>Import images</span>{/if}</button>
@@ -556,6 +562,7 @@
           {set}
           flipped={showOriginal !== spaceHeld}
           budget={dragging ? DRAG_MS / items.length : 0}
+          onopen={openImage}
           onshare={() => share(item)}
           oncopy={() => copy(item)}
           onsave={() => save(item)}
@@ -568,11 +575,18 @@
   <div class="empty">
     <div class="empty-in" use:fitEmpty={example}>
       {#if example}
-        <Tile inset={IMAGE_INSET} item={example} first={ink[0]} second={ink[1]} {style} {set} flipped={showOriginal !== spaceHeld} />
+        <Tile inset={IMAGE_INSET} item={example} onopen={openImage} first={ink[0]} second={ink[1]} {style} {set} flipped={showOriginal !== spaceHeld} />
       {/if}
 
     </div>
   </div>
+{/if}
+
+{#if viewed}
+  <ImageViewer item={viewed} first={ink[0]} second={ink[1]} {style} {set} flipped={showOriginal !== spaceHeld}
+    onsave={viewed.id === 0 ? undefined : () => save(viewed)}
+    oncopy={viewed.id === 0 ? undefined : () => copy(viewed)}
+    onclose={() => { viewing = null; viewTrigger?.focus(); }} />
 {/if}
 
 <CanvasGrid {items} {example} />
