@@ -1,15 +1,16 @@
 /* GlassKit 1.22.2 materials over Bitify geometry. Floating islands is the only layout. */
 :root {
-  --bg: #f1f2f3; --surface: #fcfcfd; --fg: #25282c; --muted: #60666d;
+  --bg: #f1f2f3; --surface: #e8ecef; --fg: #25282c; --muted: #60666d;
   --line: rgba(38,45,54,.14); --tile: #e6e9eb; --tile2: #dce0e3;
   --shadow: rgba(27,34,44,.10);
   --canvas-checker-a: #c5cbd1; --canvas-checker-b: #d2d6da;
   --image-gap: 12px; --image-inset: 4px; --canvas-min-workspace: 131px;
-  --canvas-readable: rgba(252,252,253,.92);
-  --canvas-material: rgba(253,253,254,.48); --canvas-popover: rgba(253,253,254,.72);
-  --canvas-border: rgba(255,255,255,.88);
+  /* One tint and opacity across all glass UI; only the theme surface changes. */
+  --canvas-readable: color-mix(in srgb,var(--surface) 94%,transparent);
+  --canvas-material: var(--canvas-readable); --canvas-popover: var(--canvas-readable);
+  --canvas-border: var(--line);
   --canvas-shadow: 0 12px 32px rgba(26,38,51,.08), 0 2px 6px rgba(26,38,51,.04), inset 0 1px 0 rgba(255,255,255,.85);
-  --canvas-blur: 18px;
+  --canvas-blur: 10px;
   --canvas-left: 24px; --canvas-right: 24px; --dock-base: 112px;
   /* Official GlassKit roles neutralized for a color-sensitive image workspace. */
   --gl-color-primary: var(--fg); --gl-color-primary-dark: var(--fg);
@@ -28,9 +29,6 @@
   --bg: #191c20; --surface: #272c32; --fg: #f0f2f4; --muted: #b0b7bf;
   --canvas-checker-a: #272e35; --canvas-checker-b: #323941;
   --line: rgba(216,229,244,.16); --tile: #323941; --tile2: #272e35; --shadow: rgba(0,0,0,.32);
-  --canvas-material: rgba(37,43,51,.50); --canvas-popover: rgba(37,43,51,.76);
-  --canvas-border: rgba(214,230,244,.18);
-  --canvas-readable: rgba(39,44,50,.94);
   --canvas-shadow: 0 12px 32px rgba(0,0,0,.24),0 2px 8px rgba(0,0,0,.15),inset 0 1px 0 rgba(255,255,255,.07);
 }
 :root body { background: transparent; letter-spacing: -.01em; }
@@ -174,8 +172,6 @@
 :root .view-toggle[aria-pressed="false"] { color: var(--fg); }
 :root .view-toggle[aria-pressed="false"] .view-state { border-style: dashed; }
 /* Two related editing islands and a separate download action. */
-:root { --canvas-material: rgba(253,253,254,.30); --canvas-blur: 10px; --image-gap: 12px; }
-:root[data-theme="dark"] { --canvas-material: rgba(37,43,51,.34); }
 :root .dock {
   background: transparent; border-color: transparent; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none;
   gap: 10px 14px; padding: 0; border-radius: 0;

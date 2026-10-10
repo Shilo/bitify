@@ -103,3 +103,18 @@ pointers or the mobile keyboard viewport. Real-device checks remain outstanding.
 [Desktop with focused tile action](mockups/floating-islands-adopted-desktop.jpg),
 [light no-hover/reduced-transparency fixture](mockups/floating-islands-touch-qa.jpg).
 Earlier gallery screenshots are archived comparisons, not current alternate layouts.
+
+## Theme consistency correction
+
+The shared middle-gray canvas and 30%/34% editing islands were rejected after user
+comparison. Themed checker shades restore light/dark identity. All glass UI now aliases
+one 94% surface material (#e8ecef light / #272c32 dark), including captions, header,
+islands, Download and popovers; borders share the neutral line token. This intentionally
+uses strongly tinted glass so readable surfaces belong to the same palette. The floating
+geometry and uninterrupted canvas preserve immersion. Different underlays still create
+small composite differences; no claim of identical sampled pixels is made.
+
+An independent reviewer agreed with the subdued light palette and restored dark palette,
+and challenged exact equality, transparent-ink contrast and startup theme resolution.
+The parent accepted the shared material invariant and retained opaque interaction states
+and accessibility fallbacks.

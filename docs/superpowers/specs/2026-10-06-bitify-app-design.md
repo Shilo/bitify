@@ -1378,3 +1378,9 @@ against the themed checker while keeping the image canvas unbacked.
 
 Standalone header and Download actions use opaque neutral hover/focus fills and main
 foreground; their selectors override generic glass/primary hover rules.
+
+All glass UI shares one 94% surface tint: captions, actions, header, editing islands,
+Download and popovers. Material roles alias the same readable token, rather than
+assigning different RGB values or opacity by component. Light surface is #e8ecef and
+ink #25282c; dark surface is #272c32 and ink #f0f2f4. Backdrop compositing can cause
+small visible variations; stronger hover/selected fills communicate interaction state.
