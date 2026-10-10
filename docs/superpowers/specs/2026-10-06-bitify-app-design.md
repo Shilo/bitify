@@ -1374,3 +1374,6 @@ has the same predictable substrate. Header actions retain strong backing; the or
 comparison state uses opaque foreground plus its hollow/dashed indicator. Small popup
 labels use the main foreground rather than low-contrast muted ink. This protects UI text
 against the middle-gray checker while keeping the image canvas unbacked.
+
+Standalone header and Download actions use opaque neutral hover/focus fills and main
+foreground; their selectors override generic glass/primary hover rules.

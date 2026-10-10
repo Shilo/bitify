@@ -360,3 +360,15 @@
     grid-column: 1 / -1; grid-row: 3; justify-self: center; gap: 0;
   }
 }
+
+/* Standalone actions must not inherit transparent/primary hover fills. */
+:root .bar .btn:not(:disabled):is(:hover,:focus-visible),
+:root .dock > .primary:not(:disabled):is(:hover,:focus-visible) {
+  background: color-mix(in srgb,var(--surface) 88%,var(--fg)); color: var(--fg);
+}
+@media (forced-colors: active) {
+  :root .bar .btn:not(:disabled):is(:hover,:focus-visible),
+  :root .dock > .primary:not(:disabled):is(:hover,:focus-visible) {
+    background: Highlight; color: HighlightText;
+  }
+}
