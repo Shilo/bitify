@@ -3,6 +3,7 @@
   --bg: #f1f2f3; --surface: #fcfcfd; --fg: #25282c; --muted: #60666d;
   --line: rgba(38,45,54,.14); --tile: #e6e9eb; --tile2: #dce0e3;
   --shadow: rgba(27,34,44,.10);
+  --canvas-checker-a: #717881; --canvas-checker-b: #868e97;
   --image-gap: 12px; --image-inset: 4px; --canvas-min-workspace: 131px;
   --canvas-readable: rgba(252,252,253,.92);
   --canvas-material: rgba(253,253,254,.48); --canvas-popover: rgba(253,253,254,.72);
@@ -19,7 +20,7 @@
   --gl-border-focus: var(--fg); --gl-blur: var(--canvas-blur);
   --gl-blur-heavy: var(--canvas-blur); --gl-radius-card: 24px; --gl-radius-btn: 14px;
   background-color: var(--bg);
-  background-image: conic-gradient(var(--tile2) 25%,var(--tile) 0 50%,var(--tile2) 0 75%,var(--tile) 0);
+  background-image: conic-gradient(var(--canvas-checker-a) 25%,var(--canvas-checker-b) 0 50%,var(--canvas-checker-a) 0 75%,var(--canvas-checker-b) 0);
   background-size: calc(var(--canvas-grid-step,32px) * 2) calc(var(--canvas-grid-step,32px) * 2);
   background-position: 0 0;
 }

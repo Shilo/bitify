@@ -1360,3 +1360,8 @@ height52px + two8px gaps fits that allowance. Actions stay44px each; zero inter-
 gap yields a96px capsule at the minimum tile width. Larger touch tiles retain side-by-side
 metadata/actions. The style chooser aims to leave191px for one96px art plus95px footer,
 while tiny viewports may scroll. Shared inset/gap constants live in lib/workspace.js.
+
+The checker uses subdued middle grays #717881 / #868e97 in both themes, so the default
+dark and pale image inks remain distinguishable when either color is None. Theme colors
+apply to chrome. Arbitrary chosen inks can still match a checker shade; no recoloring
+or background-based conversion/export adjustment is performed.
