@@ -240,7 +240,7 @@
     </div>
   {:else}
     <input
-      type="range" class:glass-range={prototype}
+      type="range" class="glass-range"
       {min}
       {max}
       aria-label={label}
