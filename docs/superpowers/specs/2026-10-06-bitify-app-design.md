@@ -1683,3 +1683,6 @@ Desktop divider correction: restore the original vertical extent; spacing belong
 
 
 Settings scroll fades: gradient masks clear the first 8px and fade chips through 28px beneath each arrow without reserving layout width. The glass panel remains continuous instead of acquiring opaque edge patches. Indicators appear only on overflowing sides and do not intercept input; forced colors keep native system-colored arrows.
+
+
+Help audit: use the original logo asset and remove the unused B monogram component and logo2.gif. Add wording is Choose, drop or paste images on mouse devices. Separate Preview, Close Preview, Save, Copy, Remove, conversion toggling and temporary comparison guidance for each input mode. Hold replaces Press for comparison. Ctrl/Cmd+C copies the first image; Save has no dedicated shortcut. Document gesture, field and dialog guards accurately, including the held-Ctrl wheel exception for palette changes over a scrolling canvas. Help table columns reserve readable action space, with a 640px desktop maximum and the existing 420px touch maximum; narrow/short dialogs scroll vertically without horizontal overflow.

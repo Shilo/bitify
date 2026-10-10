@@ -1,10 +1,8 @@
 /* Minimal fixed-height header: file operations stay together on the right. */
 :root .brand { box-sizing: border-box; flex: none; width: var(--control-shell); height: var(--control-shell); padding: 0; justify-content: center; }
-:root .brand-icon { flex: none; display: block; color: var(--fg); shape-rendering: crispEdges; }
-:root .brand-icon-cut { fill: var(--bg); }
 :root .header-clear { display: inline-flex; }
 :root .more .menu-clear { display: none; }
-:root .help header > .brand-icon { width: 48px; height: 48px; }
+:root .help header > .help-logo { flex: none; display: block; width: 48px; height: 48px; image-rendering: pixelated; }
 :root .help h2 { font-family: var(--body); font-weight: 700; line-height: 1.15; }
 :root .bar { display: grid; grid-template-columns: auto minmax(0,1fr) auto auto; flex: none; align-items: center; }
 :root .bar.has-images { grid-template-columns: auto minmax(0,1fr) auto auto auto; }
@@ -16,3 +14,19 @@
   :root .bar .awaiting-import .export-action { display: none; }
   :root .bar .file-actions .import-action:not(.icon-only) { padding-inline: 12px; }
 }
+
+:root .help tbody td { white-space: normal; }
+:root .help .help-notes { display: grid; gap: 8px; }
+:root .help .help-notes p { margin: 0; text-wrap: pretty; font-size: 12px; line-height: 1.5; }
+
+/* Wrapping descriptions need explicit column space, rather than a 100% label column. */
+:root .help table { table-layout: fixed; }
+:root .help th:first-child { width: 30%; }
+:root .help th, :root .help td { overflow-wrap: anywhere; }
+@media (hover: none) {
+  :root .help th:first-child { width: 42%; }
+  :root .help th, :root .help td { padding-left: 10px; }
+  :root .help th:first-child { padding-left: 0; }
+}
+
+@media (hover: hover) { :root .help { width: min(640px, calc(100% - 32px)); } }
