@@ -143,7 +143,8 @@
   let viewing = $state.raw(null), viewTrigger, viewKeyboardFocus = false;
   // Resolve the current analysis after a setting changes, without duplicating image pixels.
   const viewed = $derived(viewing ? (viewing.id === 0 ? example : items.find(item => item.id === viewing.id)) : null);
-  function openImage(item, trigger) { clearComparison(); viewKeyboardFocus = !!trigger?.matches(':focus-visible'); viewing = item; viewTrigger = trigger; }
+  let viewInitialOriginal = $state(false);
+  function openImage(item, trigger) { viewInitialOriginal = effectiveOriginal; clearComparison(); viewKeyboardFocus = !!trigger?.matches(':focus-visible'); viewing = item; viewTrigger = trigger; }
   // The lowest and highest value Auto is using for the images on screen, for the Dock to show:
   // of the threshold, of Cutout's seam strength, and of Stencil's Cuts. An image's sprites are
   // only looked for while Stencil is the style: finding them walks the whole image.
@@ -629,7 +630,7 @@
 </div>
 
 {#if viewed}
-  <ImageViewer item={viewed} first={ink[0]} second={ink[1]} {style} {set} {busy} {message} flipped={effectiveOriginal}
+  <ImageViewer item={viewed} first={ink[0]} second={ink[1]} {style} {set} {busy} {message} flipped={viewInitialOriginal}
     onsave={viewed.id === 0 ? undefined : () => save(viewed)}
     oncopy={viewed.id === 0 ? undefined : () => copy(viewed)}
     onclose={async () => { const trigger = viewTrigger, keyboard = viewKeyboardFocus; viewing = null; await tick(); if (keyboard) trigger?.focus({ preventScroll: true }); else trigger?.blur(); }} />

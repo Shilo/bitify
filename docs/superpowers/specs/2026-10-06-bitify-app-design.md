@@ -1695,3 +1695,6 @@ Concise Help correction: use the static original logo.png. Remove Close Preview,
 
 
 Help wording refinement: Add replaces Add images within Help. Palette instructions read “Pick one or two colors, or a preset.” Save instructions read “Download or copy images.” Combine Save and Copy into one control row with both icons and the existing Ctrl/Cmd+C shortcut. Preview image follows it and shows only Click/Tap Image, with Enter on desktop. Other Help controls remain unchanged.
+
+
+Preview conversion correction: snapshot the currently visible app original/converted state before clearing main-canvas temporary comparison on opening. Initialize Preview from that snapshot, rather than its opposite. The local swap icon is highlighted and aria-pressed only while the original is visible. Clicking toggles the local preference; holding image or Space temporarily inverts it until release, with overlapping holds inverting once. No Preview interaction updates global conversion state; reopening snapshots the app again. This supersedes opposite initialization and converted-state highlighting.

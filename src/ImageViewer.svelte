@@ -11,8 +11,8 @@
   const dismissal = imageGesture();
   let dismissReady = false;
   let width = $state(0), height = $state(0);
-  // Seed the local conversion preference once, opposite the main canvas.
-  let converted = $state(untrack(() => flipped));
+  // Snapshot the visible main-canvas state; all Preview changes remain local.
+  let converted = $state(untrack(() => !flipped));
   let spaceHeld = $state(false), imageHeld = $state(false);
   const originalVisible = $derived(!converted !== (spaceHeld || imageHeld));
   const fit = $derived(fitViewerImage(item.img.w, item.img.h, width, height, 0));
@@ -66,7 +66,7 @@
     <div class="viewer-tools glass-card" role="group" aria-label="Image actions">
       {#if onsave}<button class="btn glass-btn icon-only" onclick={onsave} aria-label="Save image" use:tooltip={'Save the converted image at its original size.'}><PixelIcon name="save" /></button>{/if}
       {#if oncopy}<button class="btn glass-btn icon-only" onclick={oncopy} aria-label="Copy image" use:tooltip={'Copy the converted image as a PNG.'}><PixelIcon name="copy" /></button>{/if}
-      <button class="btn glass-btn icon-only viewer-compare" aria-pressed={!originalVisible}
+      <button class="btn glass-btn icon-only viewer-compare" aria-pressed={originalVisible}
         aria-label={originalVisible ? 'Show converted image' : 'Show original image'}
         onclick={() => (converted = !converted)} use:tooltip={originalVisible ? 'Show the converted image.' : 'Show the original image.'}>
         <PixelIcon name="swap" />
