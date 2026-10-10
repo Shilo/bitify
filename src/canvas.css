@@ -26,7 +26,7 @@
 :root .viewer-tools .btn:is(:hover,:focus-visible) { background: var(--gl-surface-4); }
 :root .viewer-tools .viewer-compare[aria-pressed="true"] { background: var(--gl-surface-4); box-shadow: var(--gl-inset-medium); }
 :root .viewer-close { box-sizing: border-box; margin-left: auto; width: var(--control-shell); height: var(--control-shell); min-width: var(--control-shell); min-height: var(--control-shell); padding: 0; border-radius: 50%; background: var(--surface); color: var(--fg); transform: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
-:root .viewer-toast { --gl-toast-top: calc(env(safe-area-inset-top,0px) + 16px); background: var(--surface); -webkit-backdrop-filter: none; backdrop-filter: none; }
+:root .viewer-toast { --gl-toast-top: calc(env(safe-area-inset-top,0px) + 16px); }
 :root .viewer-tile { --image-inset: 0px; max-width: 100%; }
 @media (max-width: 800px) { :root .viewer-workspace { left: calc(env(safe-area-inset-left,0px) + 12px); right: calc(env(safe-area-inset-right,0px) + 12px); bottom: calc(env(safe-area-inset-bottom,0px) + 12px); } }
 @media (forced-colors: active) { :root .image-viewer, :root :is(.viewer-tools,.viewer-close,.viewer-toast) { background: Canvas; color: CanvasText; box-shadow: none; } :root .viewer-compare[aria-pressed="true"] { outline: 2px solid Highlight; } }

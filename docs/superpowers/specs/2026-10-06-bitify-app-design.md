@@ -1505,9 +1505,12 @@ native dialogs and already-handled keys, so underlying editing panels stay intac
 
 Transient selection, error and busy messages use the actual GlassKit toast host,
 text element and is-visible state, with existing timers/busy priority and status
-semantics. Its top position follows the measured header and safe area. Legacy toast
-and confirmation paint/layout rules are removed. Component defaults govern materials,
-with narrow-viewport fit and reduced-transparency/forced-color fallbacks retained.
+semantics. Its top position follows the measured header and safe area. The toast keeps
+GlassKit's native surface as the lower background layer, covered by an opaque theme
+surface using `background: linear-gradient(var(--surface),var(--surface)),linear-gradient(to bottom,var(--gl-surface-4) 0%,var(--gl-surface-2) 100%)`;
+backdrop blur is disabled. This applies to both the app and fullscreen toasts so canvas
+art never shows through. Legacy toast and confirmation paint/layout rules are removed.
+Narrow-viewport fit and forced-color system-background overrides remain.
 
 
 The empty-state example measures the available workspace, text and caption to fit
@@ -1526,9 +1529,9 @@ colors from overwhelming this blocking dialog. Body and Cancel use full foregrou
 Reset blends the library error-on-surface ink with foreground (60% error ink in light
 mode, 40% in dark for additional hover contrast). This is an explicit
 readability exception, not an unmodified default material. Instructions in the native
-GlassKit status notice also use full foreground. Editing islands and selection toasts
-keep their default materials. Reduced transparency and forced colors retain their
-existing solid/system fallbacks.
+GlassKit status notice also use full foreground. Editing islands keep their default
+materials. Toasts use the opaque theme-surface layer described above; reduced
+transparency needs no extra toast override, and forced colors use system colors.
 
 For short portrait viewports (up to 640px high), empty-state typography and notice
 padding compact, and the example may shrink to 48px. The 56px import action keeps
