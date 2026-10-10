@@ -3,11 +3,12 @@
   import PixelIcon from './PixelIcon.svelte';
   import { tooltip } from './lib/tooltip.js';
   import { IMAGE_INSET } from './lib/workspace.js';
-  let { item, first, second, style, set, flipped = false, onsave, oncopy, onclose } = $props();
+  import { fitViewerImage } from './lib/viewer-layout.js';
+  let { item, first, second, style, set, flipped = false, onsave, oncopy, onclose, busy = '', message = '' } = $props();
   let dialog, closeButton;
   let width = $state(0), height = $state(0);
   let compare = $state(false), spaceHeld = $state(false);
-  const size = $derived(Math.max(48, Math.min(width - 24, height - 24 - 35)));
+  const fit = $derived(fitViewerImage(item.img.w, item.img.h, width, height, IMAGE_INSET));
   $effect(() => { dialog.showModal(); closeButton.focus(); });
   function keydown(e) {
     if (e.code !== 'Space' || e.target.closest('button')) return;
@@ -32,8 +33,13 @@
     <button class="btn glass-btn icon-only viewer-close" bind:this={closeButton} onclick={() => dialog.close()} aria-label="Close full screen" use:tooltip={'Close full screen.'}><PixelIcon name="x" /></button>
   </header>
   <div class="viewer-art" bind:clientWidth={width} bind:clientHeight={height}>
-    <div class="viewer-tile" style:width="{size}px">
-      <Tile {item} {first} {second} {style} {set} flipped={(flipped !== compare) !== spaceHeld} inset={IMAGE_INSET} />
+    <div class="viewer-tile" style:width="{fit.width}px">
+      <Tile {item} {first} {second} {style} {set} flipped={(flipped !== compare) !== spaceHeld} inset={IMAGE_INSET} aspect={fit.width / fit.height} />
     </div>
+  </div>
+  <div class="glass-toast viewer-toast" class:is-visible={!!busy || !!message}
+    role="status" aria-atomic="true" hidden={!busy && !message}>
+    {#if busy}<span class="spin" aria-hidden="true"></span>{/if}
+    <span class="glass-toast__text">{busy || message}</span>
   </div>
 </dialog>

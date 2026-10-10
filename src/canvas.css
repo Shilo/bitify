@@ -28,6 +28,8 @@
 }
 :root .viewer-tools {
   display: flex; align-items: center; gap: 4px; padding: 5px; margin: 0; border-radius: 999px;
+  background: var(--canvas-material); color: var(--fg); border: 1px solid var(--canvas-border);
+  box-shadow: var(--canvas-shadow); -webkit-backdrop-filter: blur(var(--gl-blur)); backdrop-filter: blur(var(--gl-blur));
 }
 :root .viewer-tools .btn { box-sizing: border-box; height: var(--control-size); min-height: var(--control-size); padding: 0 12px; }
 :root .viewer-tools .btn.icon-only {
@@ -38,6 +40,7 @@
   min-width: var(--control-shell); min-height: var(--control-shell); padding: 0; border-radius: 50%;
 }
 :root .viewer-tools .glass-btn { transform: none; }
+:root .viewer-toast { --gl-toast-top: calc(env(safe-area-inset-top,0px) + 88px); }
 :root .viewer-art {
   flex: 1; min-height: 0; display: grid; place-items: center; overflow: auto;
   padding: 12px; padding-bottom: calc(env(safe-area-inset-bottom,0px) + 12px);
