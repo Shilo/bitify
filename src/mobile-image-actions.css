@@ -1,0 +1,24 @@
+/* Touch metadata and More occupy one full-width title bar. Desktop is unchanged. */
+:root .caption-details { display: contents; }
+@media (hover: none) {
+  :root .tile .cap.has-image-actions {
+    display: grid; grid-template-columns: minmax(0,1fr) 44px;
+    grid-column: 1 / -1; grid-row: 2; align-items: center;
+    width: 100%; min-height: 52px; gap: 6px;
+  }
+  :root .tile .cap.has-image-actions .caption-details {
+    display: flex; flex-direction: column; min-width: 0; gap: 0;
+  }
+  :root .tile .cap.has-image-actions .dim { margin-left: 0; }
+  :root .tile .cap .tile-share {
+    grid-column: 2; grid-row: 1; align-self: center; justify-self: end;
+    background: transparent; border-color: transparent; box-shadow: none;
+    -webkit-backdrop-filter: none; backdrop-filter: none; transform: none;
+  }
+  :root .tile .cap .tile-share:not(:disabled):is(:hover,:focus-visible,:active) {
+    background: var(--gl-surface-4); box-shadow: none; transform: none;
+  }
+}
+@media (forced-colors: active) {
+  :root .tile .cap .tile-share { color: ButtonText; border-color: ButtonText; }
+}
