@@ -65,21 +65,29 @@
   $effect(() => {
     if (stored === null) help.showModal();
   });
-  // Fit the example around real text/font sizes, including the instruction notice.
-  function fitEmpty(node) {
-    const area = node.parentElement, text = node.querySelector('.empty-text');
+  // Header copy may wrap after a viewport or font change; panels use its actual height.
+  function measureHeader(node) {
     const measure = () => {
-      const areaStyle = getComputedStyle(area), gridStyle = getComputedStyle(node);
-      const columns = gridStyle.gridTemplateColumns.split(' ').length > 1;
-      const gap = parseFloat(gridStyle.gap) || 0;
-      const height = area.clientHeight - parseFloat(areaStyle.paddingTop) - parseFloat(areaStyle.paddingBottom)
-        - (node.querySelector('.cap')?.offsetHeight ?? 0) - 8 - (columns ? 0 : text.offsetHeight + gap);
-      const width = area.clientWidth - parseFloat(areaStyle.paddingLeft) - parseFloat(areaStyle.paddingRight)
-        - (columns ? text.offsetWidth + gap : 0);
-      node.style.setProperty('--empty-art-size', `${Math.max(parseFloat(gridStyle.getPropertyValue("--empty-art-min")) || 96, Math.min(320, height, width))}px`);
+      const app = document.getElementById('app').getBoundingClientRect();
+      document.documentElement.style.setProperty('--canvas-header-space', `${node.getBoundingClientRect().bottom - app.top}px`);
     };
     const observer = new ResizeObserver(measure);
-    for (const element of [area, text]) observer.observe(element);
+    observer.observe(node);
+    measure();
+    return { destroy: () => observer.disconnect() };
+  }
+  // Only the live example remains on the empty canvas, so it fits the usable workspace.
+  function fitEmpty(node) {
+    const area = node.parentElement;
+    const measure = () => {
+      const areaStyle = getComputedStyle(area);
+      const height = area.clientHeight - parseFloat(areaStyle.paddingTop) - parseFloat(areaStyle.paddingBottom)
+        - (node.querySelector('.cap')?.offsetHeight ?? 0) - 8;
+      const width = area.clientWidth - parseFloat(areaStyle.paddingLeft) - parseFloat(areaStyle.paddingRight);
+      node.style.setProperty('--empty-art-size', `${Math.max(48, Math.min(320, height, width))}px`);
+    };
+    const observer = new ResizeObserver(measure);
+    observer.observe(area);
     measure();
     return { update: () => { const caption = node.querySelector('.cap'); if (caption) observer.observe(caption); measure(); }, destroy: () => observer.disconnect() };
   }
@@ -513,18 +521,25 @@
   onappinstalled={() => (installOffer = null)}
 />
 
-<header class="bar glass-nav" class:has-images={!!items.length}>
+<header class="bar glass-nav" class:has-images={!!items.length} use:measureHeader>
   {#if items.length}
     <button class="btn glass-btn icon-only danger header-clear" onclick={removeAll} aria-label="Remove all images" use:tooltip={'Remove all images from the canvas.'}><PixelIcon name="trash" /></button>
   {/if}
   <div class="brand"><Brand /><span class="mark">Bitify</span></div>
   <span class="grow"></span>
-  <div class="file-actions" role="group" aria-label="Import and export">
-    <button class="btn glass-btn icon-only" class:glass-btn--primary={!items.length} onclick={() => picker.click()} aria-label="Import images" use:tooltip={'Import images from your device. Images stay on your device.'}><PixelIcon name="import" /></button>
-    <button class="btn glass-btn icon-only" class:glass-btn--primary={!!items.length} disabled={!items.length} aria-label={items.length > 1 ? 'Export all images' : 'Export image'} use:tooltip={items.length > 1 ? 'Export all converted images as a ZIP archive.' : items.length ? 'Export the converted image at its original size.' : 'Import an image to enable export.'} onclick={saveEverything}><PixelIcon name="save" /></button>
+  <div class="file-actions" class:awaiting-import={!items.length} role="group" aria-label="Import and export">
+    <button class="btn glass-btn import-action" class:icon-only={!!items.length} class:glass-btn--primary={!items.length} onclick={() => picker.click()} aria-label="Import images" use:tooltip={'Import images from your device. Images stay on your device.'}><PixelIcon name="import" />{#if !items.length}<span>Import images</span>{/if}</button>
+    <button class="btn glass-btn icon-only export-action" class:glass-btn--primary={!!items.length} disabled={!items.length} aria-label={items.length > 1 ? 'Export all images' : 'Export image'} use:tooltip={items.length > 1 ? 'Export all converted images as a ZIP archive.' : items.length ? 'Export the converted image at its original size.' : 'Import an image to enable export.'} onclick={saveEverything}><PixelIcon name="save" /></button>
   </div>
   <!-- Mouse clicks release focus before opening the native menu. -->
   <button class="btn glass-btn icon-only" bind:this={moreTrigger} aria-haspopup="true" aria-label="More" use:tooltip={'Open appearance, help and app options.'} onclick={e => { if (e.detail) e.currentTarget.blur(); more.showModal(); }}><PixelIcon name="more" /></button>
+  {#if !items.length}
+    <section class="onboarding glass-card" aria-labelledby="onboarding-title">
+      <h1 id="onboarding-title">Pixel art in two colors</h1>
+      <p class="onboarding-subtitle">Convert sprites and animated GIFs to 1-bit colors and styles.</p>
+      <p class="onboarding-note">{touch ? 'Import images to begin.' : 'Import, drop or paste images.'} <span>Images stay on your device.</span></p>
+    </section>
+  {/if}
 </header>
 
 {#if items.length}
@@ -555,16 +570,7 @@
       {#if example}
         <Tile inset={IMAGE_INSET} item={example} first={ink[0]} second={ink[1]} {style} {set} flipped={showOriginal !== spaceHeld} />
       {/if}
-      <div class="empty-text">
-        <h2>Pixel art in two colors</h2>
-        <p>Instantly convert sprites and animated GIFs<br />to <span>1-bit</span> colors and styles.</p>
-        <div class="glass-status import-note">
-          <p>{touch ? 'Import images to begin.' : 'Drop or paste images here.'}<br />Images stay on your device.</p>
-        </div>
-        <button class="btn glass-btn glass-btn--primary import-cta" onclick={() => picker.click()}>
-          <PixelIcon name="import" />Import images
-        </button>
-      </div>
+
     </div>
   </div>
 {/if}
