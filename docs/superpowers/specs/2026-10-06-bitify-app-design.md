@@ -1660,3 +1660,6 @@ Fullscreen dismissal clarification: the bottom-right control is the original dir
 
 
 Fullscreen checker uses dialog-local spacing from the displayed fullscreen source scale, through the same canvasGridSpacing helper and16-source-pixel/dense-photo grouping policy as the main canvas. It anchors to the centered fullscreen image top-left and recomputes with viewer dimensions. The dialog overrides its own --canvas-grid-step only; it never writes the main root grid variables. Closing restores the unchanged main grid.
+
+
+Fullscreen focus restoration follows its opening modality: keyboard-opened image previews return focus to the originating image without scrolling. Pointer-opened previews clear the native restored image focus on dismissal, avoiding an unwanted large image outline when Escape closes a click/tap preview. Keyboard navigation retains visible focus normally.
