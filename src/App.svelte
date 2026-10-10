@@ -658,12 +658,11 @@
 <Dock bind:first bind:second bind:none bind:style bind:settings bind:showOriginal bind:dragging {previewing} {canvasScrollable} {autos} {soft} />
 <nav class="bar file-tools" class:has-images={!!items.length} aria-label="File and app actions">
   <div class="file-actions" class:awaiting-import={!items.length} role="group" aria-label="Add and save images">
+    <button class="btn glass-btn icon-only export-action" class:glass-btn--primary={!!items.length} disabled={!items.length} aria-label={items.length > 1 ? 'Save all images' : 'Save image'} use:tooltip={items.length > 1 ? 'Save all converted images as a ZIP archive.' : items.length ? 'Save the converted image at its original size.' : 'Add an image to enable saving.'} onclick={saveEverything}><PixelIcon name="save" /><span class="save-label" aria-hidden="true">Save</span></button>
+    <button class="btn glass-btn icon-only import-action" onclick={() => picker.click()} aria-label={importLabel} use:tooltip={'Add images from your device, or drop or paste them onto the canvas. Images stay on your device.'}><PixelIcon name="import" /></button>
   {#if items.length}
     <button class="btn glass-btn icon-only danger file-clear" bind:this={clearTrigger} onclick={() => { clearComparison(); clearConfirm.showModal(); }} aria-label="Remove all images" use:tooltip={'Remove all images from the canvas.'}><PixelIcon name="trash" /></button>
   {/if}
-
-    <button class="btn glass-btn icon-only import-action" onclick={() => picker.click()} aria-label={importLabel} use:tooltip={'Add images from your device, or drop or paste them onto the canvas. Images stay on your device.'}><PixelIcon name="import" /></button>
-    <button class="btn glass-btn icon-only export-action" class:glass-btn--primary={!!items.length} disabled={!items.length} aria-label={items.length > 1 ? 'Save all images' : 'Save image'} use:tooltip={items.length > 1 ? 'Save all converted images as a ZIP archive.' : items.length ? 'Save the converted image at its original size.' : 'Add an image to enable saving.'} onclick={saveEverything}><PixelIcon name="save" /><span class="save-label" aria-hidden="true">Save</span></button>
   </div>
   <button class="btn glass-btn icon-only" bind:this={moreTrigger} aria-haspopup="true" aria-label="More" use:tooltip={'Open appearance, help and app options.'} onclick={e => { clearComparison(); if (e.detail) e.currentTarget.blur(); more.showModal(); }}><PixelIcon name="more" /></button>
 </nav>

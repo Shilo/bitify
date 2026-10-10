@@ -1722,4 +1722,6 @@ Centered editing popups: when the measured Palette/Style pair is centered, its P
 
 Responsive Save label: the bottom Save icon expands into an icon-and-Save pill only when its measured text width fits while keeping the editing pair centered and at least 24px clear of the right actions. Evaluate against the recovered icon-only capsule width on every measure, avoiding label-dependent resize oscillation. Otherwise retain the circular icon-only button, existing wrapping and empty-state hiding. Observe label width for font changes. Button height, primary token, accessible Save image/Save all images names, save behavior and Help's Save naming remain consistent.
 
+Bottom file actions appear in Save, Add, Remove order on every screen size. Their DOM and keyboard focus order match their visual order.
+
 Desktop image Save uses the same GlassKit primary gradient and on-primary icon color as Save in the mobile image action sheet. Hover, keyboard focus and press retain the primary treatment without moving the button; forced colors use system Highlight/HighlightText. The action order, capsule geometry and save behavior remain unchanged.
