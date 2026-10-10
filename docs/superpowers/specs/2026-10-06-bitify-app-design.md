@@ -1486,3 +1486,19 @@ Palette and Style remain neutral editing actions. Empty-state instructions are a
 static GlassKit status notice between subtitle and CTA; desktop mentions drop/paste,
 touch asks to import, and both say images stay on the device. The CTA and Help use
 the same import glyph as the header, with no plus glyph for file import.
+
+
+### Native GlassKit reset modal and toasts
+
+Reset confirmation uses the library's native dialog overlay and separate modal
+header/body/footer with Cancel then Reset actions. Cancel, Escape and clicking the
+outside overlay leave settings unchanged. Content clicks do not dismiss it. Reset
+closes the dialog before restoring defaults and announcing feedback; images stay.
+Focus returns to the top More trigger. Dock outside/Escape handlers yield to open
+native dialogs and already-handled keys, so underlying editing panels stay intact.
+
+Transient selection, error and busy messages use the actual GlassKit toast host,
+text element and is-visible state, with existing timers/busy priority and status
+semantics. Its top position follows the measured header and safe area. Legacy toast
+and confirmation paint/layout rules are removed. Component defaults govern materials,
+with narrow-viewport fit and reduced-transparency/forced-color fallbacks retained.

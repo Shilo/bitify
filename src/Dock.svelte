@@ -205,6 +205,7 @@
   bind:innerWidth={width}
   bind:innerHeight={height}
   onpointerdowncapture={e => {
+    if (document.querySelector('dialog[open]')) { eaten = false; return; }
     eaten = pop ? !e.target.closest?.('.anchor') : !!panel && !dock.contains(e.target);
     if (!eaten) return;
     if (pop) pop = null;
@@ -219,7 +220,7 @@
     e.preventDefault();
   }}
   onkeydown={e => {
-    if (e.key !== 'Escape') return;
+    if (e.key !== 'Escape' || e.defaultPrevented || document.querySelector('dialog[open]')) return;
     if (pop) pop = null;
     else panel = null;
   }}

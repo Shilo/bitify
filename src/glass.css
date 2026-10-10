@@ -101,7 +101,7 @@
 :root .empty p { font-size: 14px; line-height: 1.7; }
 :root .empty .btn { padding: 10px 20px; border-radius: 999px; }
 /* Single material per group; controls within a surface do not add another blur. */
-:root :is(.dock,.panel,.menu,.more,.help,.sheet,.toast) {
+:root :is(.dock,.panel,.menu,.more,.help,.sheet) {
   color: var(--fg); background: var(--canvas-material); border: 1px solid var(--canvas-border);
   box-shadow: var(--canvas-shadow); -webkit-backdrop-filter: blur(var(--gl-blur)); backdrop-filter: blur(var(--gl-blur));
 }
@@ -148,14 +148,10 @@
 :root .more .btn { border-radius: 12px; }
 :root .sheet { border-radius: 25px; padding: 14px; transform: none; }
 :root .sheet .btn { border-radius: 13px; }
-:root .confirm { padding: 20px; }
 :root .help { border-radius: 28px; transform: none; overflow-y: auto; }
 :root .help-in { padding: 24px; gap: 18px; }
 :root .help footer .btn { border-radius: 999px; }
 :root .more[open] { opacity: 1; visibility: visible; pointer-events: auto; transform: none; }
-:root .toast { border-radius: 999px; font-size: 12px; padding: 10px 16px; background: linear-gradient(to bottom,var(--gl-surface-4),var(--gl-surface-2)); color: var(--fg); box-shadow: var(--gl-shadow-toast),var(--gl-inset-medium); }
-:root .toast:not([hidden]) { opacity: 1; visibility: visible; transform: translateX(-50%); }
-:root .toast[hidden] { display: none; }
 /* GlassKit has no tooltip class; this adapter uses its default popover material. */
 :root .tooltip { color: var(--fg); background: var(--canvas-popover); border-color: var(--canvas-border); box-shadow: var(--canvas-shadow); border-radius: 12px;
   -webkit-backdrop-filter: blur(var(--gl-blur)); backdrop-filter: blur(var(--gl-blur)); }
@@ -273,7 +269,7 @@
     --gl-surface-1: var(--surface); --gl-surface-2: var(--surface); --gl-surface-3: var(--surface);
     --gl-surface-4: var(--surface); --gl-surface-5: var(--surface);
   }
-  :root :is(.dock,.panel,.menu,.more,.help,.sheet,.toast,.glass-btn,.bar .btn,.brand,.empty-text,.cap,.tooltip,.acts,.dock > .tool-group) {
+  :root :is(.dock,.panel,.menu,.more,.help,.sheet,.glass-btn,.bar .btn,.brand,.empty-text,.cap,.tooltip,.acts,.dock > .tool-group) {
     -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
   }
 }
@@ -283,7 +279,7 @@
 @media (forced-colors: active) {
   :root :is(.help,.sheet)::backdrop { -webkit-backdrop-filter: none; backdrop-filter: none; }
   :root, :root[data-theme] { background: Canvas; --bg: Canvas; --surface: Canvas; --fg: CanvasText; --muted: CanvasText; --line: ButtonText; }
-  :root :is(.dock,.tool-group,.panel,.menu,.more,.help,.sheet,.toast,.btn,.ib,.cap,.acts,.brand,.empty-text) {
+  :root :is(.dock,.tool-group,.panel,.menu,.more,.help,.sheet,.btn,.ib,.cap,.acts,.brand,.empty-text) {
     background: Canvas; color: CanvasText; border: 1px solid ButtonText; box-shadow: none;
     -webkit-backdrop-filter: none; backdrop-filter: none;
   }
@@ -302,7 +298,6 @@
   height: 6px; border: 1px solid var(--gl-range-track-border); border-radius: var(--gl-radius-full); background: var(--gl-range-track-bg);
 }
 :root .glass-range::-webkit-slider-thumb { margin-top: -10px; }
-:root .toast { min-width: 0; }
 
 /* Reserve an actual scroll viewport, rather than letting overflowing images paint
    through the bottom padding underneath editing controls. */
@@ -465,4 +460,26 @@
   :root :is(.bar .file-actions,.empty-text) .btn.glass-btn--primary,
   :root :is(.bar .file-actions,.empty-text) .btn.glass-btn--primary:not(:disabled):is(:hover,:focus-visible) { background: Highlight; color: HighlightText; border-color: Highlight; box-shadow: none; }
   :root :is(.bar .file-actions,.empty-text) .btn.glass-btn--primary svg { fill: HighlightText; stroke: none; }
+}
+
+/* Keep native component materials/anatomy; adapt only safe-area placement and viewport fit. */
+:root { --gl-toast-top: calc(env(safe-area-inset-top,0px) + var(--canvas-header-space,86px) + 8px); }
+:root .glass-toast { box-sizing: border-box; min-width: min(280px,calc(100vw - 32px)); max-width: min(340px,calc(100vw - 32px)); }
+:root .glass-toast[hidden] { display: none; }
+:root .reset-modal { box-sizing: border-box; }
+:root .reset-modal .glass-modal { box-sizing: border-box; max-height: calc(100dvh - 40px); overflow-y: auto; }
+:root .reset-modal :is(h2,p) { margin: 0; }
+:root .reset-modal .glass-modal__action:focus-visible { outline: 2px solid var(--gl-border-focus); outline-offset: -4px; }
+@media (prefers-reduced-transparency: reduce) {
+  :root :is(.glass-toast,.reset-modal,.reset-modal .glass-modal) { -webkit-backdrop-filter: none; backdrop-filter: none; }
+  :root :is(.glass-toast,.reset-modal .glass-modal) { background: var(--surface); }
+}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) {
+  :root :is(.glass-toast,.reset-modal .glass-modal) { background: var(--surface); }
+}
+@media (forced-colors: active) {
+  :root :is(.glass-toast,.reset-modal,.reset-modal .glass-modal) { background: Canvas; color: CanvasText; -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: none; }
+  :root :is(.glass-toast,.reset-modal .glass-modal) { border-color: ButtonText; }
+  :root .reset-modal .glass-modal::before { background: none; }
+  :root .reset-modal .glass-modal__action:focus-visible { outline-color: Highlight; }
 }

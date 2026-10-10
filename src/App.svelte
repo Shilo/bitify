@@ -103,7 +103,7 @@
   let picker;
   let nextId = 0, messageTimer;
   // On touch screens a tile's Share button opens a sheet with Copy and Download for that image.
-  let sheet, more, help, confirm; // the dialogs: the Share sheet, the More menu, the help and Reset settings's question
+  let sheet, more, help, confirm, moreTrigger; // the dialogs: the Share sheet, the More menu, the help and Reset settings's question
   // Reset settings puts back everything kept between visits: the colors, the style, every style's settings
   // and the theme. The images stay. The effect above then stores the defaults over what was kept.
   function resetAll() {
@@ -506,7 +506,7 @@
     <button class="btn glass-btn icon-only danger header-clear" onclick={removeAll} aria-label="Remove all" use:tooltip={'Clear every image from the wall.'}><PixelIcon name="trash" /></button>
   {/if}
   <!-- Mouse clicks release focus before opening the native menu. -->
-  <button class="btn glass-btn icon-only" aria-haspopup="true" aria-label="More" use:tooltip={'Open appearance, help and app options.'} onclick={e => { if (e.detail) e.currentTarget.blur(); more.showModal(); }}><PixelIcon name="more" /></button>
+  <button class="btn glass-btn icon-only" bind:this={moreTrigger} aria-haspopup="true" aria-label="More" use:tooltip={'Open appearance, help and app options.'} onclick={e => { if (e.detail) e.currentTarget.blur(); more.showModal(); }}><PixelIcon name="more" /></button>
 </header>
 
 {#if items.length}
@@ -585,13 +585,18 @@
   <hr />
   <button class="btn undo glass-btn" onclick={() => { more.close(); confirm.showModal(); }}><PixelIcon name="reset" />Reset settings</button>
 </dialog>
-<!-- Reset settings asks first. Any click closes it, as with the sheet; only Reset also resets. Cancel
-     comes first, so it is the button the dialog opens on. -->
-<dialog class="sheet confirm glass-modal" bind:this={confirm} aria-labelledby="confirm-title" onclick={() => confirm.close()}>
-  <h2 id="confirm-title">Reset all settings?</h2>
-  <p>Colors, styles and theme return to their defaults.<br /><br />Your images stay.</p>
-  <button class="btn glass-btn">Cancel</button>
-  <button class="btn undo glass-btn" onclick={resetAll}>Reset</button>
+<!-- Native dialog handles focus/inertness; GlassKit provides the centered modal anatomy. -->
+<dialog class="glass-modal-overlay is-active reset-modal" bind:this={confirm}
+  aria-labelledby="confirm-title" aria-describedby="confirm-description"
+  onclick={e => e.target === confirm && confirm.close()} onclose={() => moreTrigger?.focus()}>
+  <div class="glass-modal">
+    <div class="glass-modal__header"><h2 class="glass-modal__title" id="confirm-title">Reset all settings?</h2></div>
+    <div class="glass-modal__body"><p id="confirm-description">Colors, styles and theme return to their defaults.<br /><br />Your images stay.</p></div>
+    <div class="glass-modal__footer">
+      <button class="glass-modal__action" onclick={() => confirm.close()}>Cancel</button>
+      <button class="glass-modal__action glass-modal__action--danger" onclick={() => { confirm.close(); resetAll(); }}>Reset</button>
+    </div>
+  </div>
 </dialog>
 <!-- The help, which is also the welcome on a first visit: what Bitify is, four steps, and the
      controls of the device in use. A click on the dimmed screen around it counts as the dialog itself. -->
@@ -646,5 +651,7 @@
     </footer>
   </div>
 </dialog>
-<div class="toast glass-toast" role="status" hidden={!busy && !message}>{#if busy}<span class="spin" aria-hidden="true"></span>{/if}{busy || message}</div>
+<div class="glass-toast" class:is-visible={!!busy || !!message} role="status" aria-atomic="true" hidden={!busy && !message}>
+  {#if busy}<span class="spin" aria-hidden="true"></span>{/if}<span class="glass-toast__text">{busy || message}</span>
+</div>
 <input bind:this={picker} type="file" accept="image/*" multiple hidden onchange={picked} />

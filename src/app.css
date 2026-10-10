@@ -166,11 +166,6 @@ button { font: inherit; color: inherit; }
   font-family: var(--display); font-size: clamp(28px, 7vw, 72px);
 }
 .drop::before { content: ""; position: absolute; inset: 16px; border: 4px dashed currentColor; }
-.toast {
-  position: fixed; top: calc(env(safe-area-inset-top, 0px) + 64px); left: 50%; transform: translateX(-50%); z-index: 60;
-  width: max-content; max-width: calc(100% - 32px); padding: 8px 14px; border-radius: 10px;
-  background: var(--fg); color: var(--bg); font-size: 13px; font-weight: 600;
-}
 /* Turns in the message while a long job runs. The browser moves it without the page's help,
    so it keeps turning while the job has the page itself stuck. */
 .spin {
@@ -199,13 +194,6 @@ button { font: inherit; color: inherit; }
 .more a .ico:last-child { margin-left: auto; color: var(--muted); } /* at the row's right end: the link opens outside the app */
 .more hr { margin: 4px 6px; border: 0; border-top: 1px solid var(--line); } /* between the menu's three groups */
 .btn.undo { color: var(--undo); } /* Reset settings, in the menu and in its question */
-/* Reset settings's question: the sheet's card in the middle of the screen, Cancel and Reset side by side under the words */
-.confirm { margin: auto; padding: 16px; }
-.confirm[open] { grid-template-columns: 1fr 1fr; }
-.confirm h2, .confirm p { grid-column: 1 / -1; margin: 0; }
-.confirm h2 { font-size: 16px; font-weight: 600; }
-.confirm p { margin-bottom: 8px; color: var(--muted); font-size: 13px; text-wrap: pretty; }
-.confirm .undo { border-color: color-mix(in srgb, var(--undo) 40%, var(--line)); }
 /* The help, which is also the welcome on a first visit: a card in the middle of a dimmed screen.
    On a screen too short for it, it scrolls. */
 .help {
