@@ -1607,3 +1607,17 @@ The following behavior supersedes earlier conflicting layout, palette and compar
 - **20:** Quick 150ms surface entrances and control feedback complement GlassKit hover/toast behavior. Header controls never translate; geometry, checker phase and blur are not animated. Surface entrance feedback uses opacity only. Reduced-motion preferences suppress app animations and transitions.
 - **21:** Image holds and Space temporarily invert the persistent original/converted state. One shared effective state drives every tile and the bottom toggle label/pressed state; multiple holds and Space count as one temporary comparison. Release, cancel, blur, hiding or image removal clears transient sources. Enter activates the image or empty Import; Space over normal controls retains native behavior.
 - **22:** Color input, swap, palette and transparency changes enable conversion, as style/settings edits do. This includes reselecting unchanged colors or presets through those controls. Temporary holds never restore an obsolete persistent preference.
+
+
+### October 9 tasks 29â€“30: touch image actions
+
+- **29:** A touch image has one standalone 44px circular Share button beside its caption; no surrounding capsule or inline Remove button. Its accessible name identifies the image; its tooltip states that it opens Save, Copy and Remove actions, rather than promising an OS destination chooser. Desktop retains the opaque shared action capsule with Copy, Save and Remove.
+- **30:** The image action sheet orders Save (GlassKit primary tokens), Copy, Remove (GlassKit error tokens), then a separated Cancel. Each action captures the selected image before closing. Removing filters only that image and restores focus to another Share button or the Add images control after DOM update; native dismissal/Cancel restores the surviving invoking control. Original source files are untouched.
+
+
+### October 9 tasks 23–24: transparency geometry and circular style previews
+
+- **23:** The palette transparency switch uses explicit border-box geometry: 36px total height with 32px-high, 36px-wide segments on mouse screens; 48px total with 44px-square segments on coarse pointers. Its 2px padding and 4px gaps are included, not added to an inherited item height. The fixed palette-name section reserves vertical padding so the title and switch cannot be clipped by a one-row swatch popup. Existing GlassKit segmented selection/material tokens remain unchanged.
+- **24:** Style previews use the same circular clipping shape as palette swatches: 44px chooser thumbnails on desktop, 36px on compact screens, and 32px in the current-style picker. The shared input is now a simple 32px tonal disk with one dark circular inset, a broad lower seam and a thin dark rim. All eleven previews still run through the actual converters with remembered settings and selected inks/transparency; default outputs are distinct. Names and explanatory tooltips remain because similar small dither patterns cannot communicate their exact algorithms unaided. Conversion loops and imported artwork are unchanged.
+
+Research rationale: Apple’s Icons guidance favors simplified recognizable shapes and consistent detail; GlassKit’s CSS segmented component supplies materials/states and permits application-specific sizing. Circular framing is a presentation adapter, not a fictional decorative output. Sources: https://developer.apple.com/design/human-interface-guidelines/icons and https://glasskit.jungherz.com/docs.html.

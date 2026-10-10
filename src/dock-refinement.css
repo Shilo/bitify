@@ -4,10 +4,10 @@
 :root .dock :is(.key,.field button,.seg button) { font-size: var(--dock-label-size); }
 :root .dock .key { color: var(--gl-color-text); font-weight: 500; }
 :root .dock .preset { font-size: 12px; font-weight: 500; line-height: 1.2; color: var(--gl-color-text); }
-:root .dock .preset.glass-btn { flex-direction: column; padding: 5px 3px; min-width: 0; min-height: 68px; height: auto; gap: 5px; }
-:root .dock .preset .demo { width: 36px; height: 36px; border-radius: 6px; }
+:root .dock .preset.glass-btn { flex-direction: column; padding: 5px 3px; min-width: 0; min-height: 76px; height: auto; gap: 5px; }
+:root .dock .preset .demo { width: var(--control-size); height: var(--control-size); border-radius: 50%; }
 :root .dock .pick .demo { width: 32px; height: 32px; }
-:root .dock .demo { image-rendering: pixelated; background-size: 8px 8px; outline: 1px solid var(--gl-border-medium); }
+:root .dock .demo { border-radius: 50%; overflow: hidden; image-rendering: pixelated; background-size: 8px 8px; outline: 1px solid var(--gl-border-medium); }
 
 /* All controls fill their column. Labels share the actual longest visible text width. */
 :root .dock .adv { gap: 8px 16px; padding-top: 8px; }
@@ -25,9 +25,9 @@
 :root .dock .pal.glass-btn:is(:hover,:active) { transform: none; }
 :root .dock .pal[aria-pressed="true"] { border-color: var(--gl-border-focus); box-shadow: 0 0 0 2px var(--surface),0 0 0 4px var(--gl-border-focus); }
 :root .dock .palette-preview { display: block; flex: none; width: 100%; height: 100%; overflow: hidden; border-radius: 50%; background: linear-gradient(135deg,var(--preview-first) 50%,var(--preview-second) 50%); }
-:root .dock .pname { gap: 5px; }
-:root .dock .pname .seg.mini { box-sizing: border-box; height: 44px; }
-:root .dock .pname .seg.mini button { box-sizing: border-box; width: 38px; min-width: 38px; padding: 6px; }
+:root .dock .pname { gap: 5px; padding-top: 8px; padding-bottom: 8px; }
+:root .dock .pname .seg.mini { box-sizing: border-box; height: 36px; padding: 2px; gap: 4px; align-items: stretch; }
+:root .dock .pname .seg.mini button { box-sizing: border-box; width: 36px; min-width: 36px; height: 32px; min-height: 0; padding: 0; }
 :root .dock .glyph { overflow: hidden; border-width: 1px; background-clip: padding-box; }
 :root .dock .sw.none { background: linear-gradient(to top right,transparent calc(50% - 1px),var(--gl-color-text) calc(50% - 1px) calc(50% + 1px),transparent calc(50% + 1px)),conic-gradient(var(--tile2) 25%,var(--tile) 0 50%,var(--tile2) 0 75%,var(--tile) 0) 0 0 / 12px 12px; overflow: hidden; }
 
@@ -36,7 +36,8 @@
 :root .dock.canvas-scrollable > .tool-group,
 :root .dock.canvas-scrollable :is(.panel,.menu,.tray) { background: var(--surface); -webkit-backdrop-filter: none; backdrop-filter: none; }
 @media (pointer: coarse) {
-  :root .dock .pname .seg.mini button { width: 44px; min-width: 44px; }
+  :root .dock .pname .seg.mini { height: 48px; }
+  :root .dock .pname .seg.mini button { width: 44px; min-width: 44px; height: 44px; }
 }
 @media (max-width: 800px) {
   :root .dock .adv { grid-template-columns: minmax(0,1fr); }
@@ -45,11 +46,11 @@
 @media (max-width: 520px) {
   :root .dock .pname .key { display: none; }
   :root .dock .preset.glass-btn { min-height: 62px; }
-  :root .dock .preset .demo { width: 30px; height: 30px; }
+  :root .dock .preset .demo { width: 36px; height: 36px; }
 }
 @media (max-height: 520px) and (orientation: landscape) {
   :root .dock .preset.glass-btn { min-height: 60px; }
-  :root .dock .preset .demo { width: 28px; height: 28px; }
+  :root .dock .preset .demo { width: 36px; height: 36px; }
 }
 @media (forced-colors: active) {
   :root .dock .pal.glass-btn { border: 1px solid ButtonText; }

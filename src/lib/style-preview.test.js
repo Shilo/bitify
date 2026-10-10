@@ -11,10 +11,10 @@ describe('style chooser preview', () => {
     const samples = STYLES.map(([key]) => preview(key));
     expect(new Set(samples.map(image => Array.from(image.data).join(','))).size).toBe(STYLES.length);
     for (const image of samples) {
-      expect(image.width).toBe(24);
-      expect(image.height).toBe(24);
+      expect(image.width).toBe(32);
+      expect(image.height).toBe(32);
       expect(alphaCount(image)).toBeGreaterThan(0);
-      expect(alphaCount(image)).toBeLessThan(24 * 24);
+      expect(alphaCount(image)).toBeLessThan(32 * 32);
     }
   });
   it('shows omitted ink as transparency, while Shape remains visible with its first color omitted', () => {
