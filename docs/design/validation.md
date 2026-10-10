@@ -1,6 +1,6 @@
 # Current validation
 
-Latest: [numbered interface refinements and challenged review](2026-10-09-numbered-refinements.md). **235 tests in 16 files pass**, production build passes, and current desktop/phone/browser export checks passed. Earlier records below preserve prior stages.
+Latest: [correction pass, numbered decisions and challenged review](2026-10-09-correction-pass.md). **242 tests in 17 files pass**, production build passes, and current desktop/phone/browser export checks passed. Earlier records below preserve prior stages.
 
 Floating islands is now the sole runtime design. See the [adoption and final review](2026-10-09-floating-islands-adoption.md) for **220 passing tests in 13 files**, production checks, parsed exports and simulated-media checks. The records below document historical exploration and must not be read as available alternate layouts.
 
