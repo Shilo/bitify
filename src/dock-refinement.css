@@ -19,8 +19,8 @@
 :root .dock .adv .choice-row .seg button { box-sizing: border-box; flex: 1 1 auto; min-width: 0; padding: 0 8px; }
 :root .dock .foot .btn { box-sizing: border-box; height: var(--control-size); }
 
-/* Explicit columns keep slider/value/More together despite legacy mobile flex rules.
-   Additional settings occupy their own full-width tray only after More is pressed. */
+/* Explicit columns keep desktop slider/value/More together. Compact settings stay
+   visible beside the selector, with the selected control on its own row on phones. */
 :root .dock .style-panel { display: grid; grid-template-columns: auto auto minmax(0,1fr) auto; }
 :root .dock .style-panel > .pick { grid-column: 1; }
 :root .dock .style-panel > .sep { grid-column: 2; }
@@ -28,22 +28,12 @@
 :root .dock .style-panel > .extra { grid-column: 4; }
 :root .dock .style-panel > .adv { grid-column: 1 / -1; }
 :root .dock .style-panel.bare { grid-template-columns: minmax(0,1fr); }
-:root .dock .style-panel .adv.compact { grid-template-columns: minmax(0,1fr); max-height: max(104px,calc(100dvh - 440px)); }
-@media (max-width: 520px), (max-height: 520px) and (orientation: landscape) {
-  :root .dock .style-panel { grid-template-columns: auto minmax(0,1fr) auto; }
-  :root .dock .style-panel > .sep { display: none; }
-  :root .dock .style-panel > :is(.thr,.grow) { grid-column: 2; }
-  :root .dock .style-panel > .extra { grid-column: 3; }
-}
-@media (max-width: 520px) {
-  :root .dock .style-panel { grid-template-columns: minmax(0,1fr) auto; }
-  :root .dock .style-panel > .pick { grid-column: 1 / -1; }
-  :root .dock .style-panel .pick > .btn { flex: 1; justify-content: flex-start; padding-inline: 8px 14px; }
-  :root .dock .style-panel #style-name { display: inline; }
-  :root .dock .style-panel .pick .ico { margin-left: auto; }
-  :root .dock .style-panel > :is(.thr,.grow) { grid-column: 1; }
-  :root .dock .style-panel > .extra { grid-column: 2; }
-  :root .dock .style-panel.bare { grid-template-columns: minmax(0,1fr); }
+:root .dock .style-panel.compact:not(.bare) { grid-template-columns: auto minmax(0,1fr); }
+:root .dock .style-panel.compact > .setbox { grid-column: 2; }
+:root .dock .style-panel.compact > .thr { grid-column: 1 / -1; }
+@media (min-width: 521px) and (max-height: 520px) and (orientation: landscape) {
+  :root .dock .style-panel.compact:not(.bare) { grid-template-columns: auto minmax(0,1fr) minmax(0,1.4fr); }
+  :root .dock .style-panel.compact > .thr { grid-column: 3; }
 }
 
 /* One round clipping boundary, one outline, and an external selection ring. No stepped seam

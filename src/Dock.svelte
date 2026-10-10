@@ -73,7 +73,7 @@
   let labelWidth = $state(0);
   $effect(() => {
     if (!dock) return;
-    panel, more, rest, own;
+    panel, more, rest, own, chips;
     let cancelled = false, observer;
     tick().then(() => {
       if (cancelled) return;
@@ -87,16 +87,14 @@
   });
   // A wide screen shows the others all at once, in a tray that More opens under the strip.
   let more = $state(false);
-  // More reveals chips on compact screens, with one additional setting's control at a time.
-  // The primary slider/value/More controls stay one row on every screen.
+  // Compact screens show every setting as a chip, with one control at a time and no More.
   // These are the screens app.css lays out for a phone: 520px wide or less, or 520px high or
   // less and wider than high.
-  let width = $state(innerWidth);
-  let height = $state(innerHeight);
-  let chips = $state(false);
-  // Use the same media query as CSS so width and orientation change modes together.
+  const compact = matchMedia('(max-width: 520px), (max-height: 520px) and (orientation: landscape)');
+  let chips = $state(compact.matches);
+  // Android rotation can expose transitional innerWidth/innerHeight values to resize
+  // listeners. Read CSS's breakpoint directly rather than retaining those dimensions.
   $effect(() => {
-    const compact = matchMedia('(max-width: 520px), (max-height: 520px) and (orientation: landscape)');
     const update = () => (chips = compact.matches);
     update();
     compact.addEventListener('change', update);
@@ -117,8 +115,8 @@
     update();
     return { destroy: () => observer.disconnect() };
   };
-  let pressed = $state('seams');
-  const active = $derived(rest.includes(pressed) ? pressed : rest[0]);
+  let pressed = $state('threshold');
+  const active = $derived(keys.includes(pressed) ? pressed : keys[0]);
   // The pressed chip is the only thing that says which setting the control below belongs to, so
   // it is kept in view: when the panel opens, when another style brings other chips, and when
   // it is pressed while half out of sight.
@@ -131,9 +129,16 @@
     chipRow.parentNode.classList.toggle('more-right', chipRow.scrollLeft + chipRow.clientWidth < chipRow.scrollWidth - 1);
   }
   $effect(() => {
-    active, style, width, height, more; // also refresh after More reveals the chips
-    chipRow?.querySelector('[aria-pressed="true"]')?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
-    fades();
+    active, style;
+    if (!chipRow) return;
+    const refresh = () => {
+      chipRow?.querySelector('[aria-pressed="true"]')?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      fades();
+    };
+    refresh();
+    const observer = new ResizeObserver(refresh);
+    observer.observe(chipRow);
+    return () => observer.disconnect();
   });
   // Reset then has nothing to reset and is disabled. Pressed from the keyboard (a click with no
   // press behind it) it would keep the focus, and a disabled button passes no keys on: Space
@@ -209,8 +214,6 @@
      if it is open, and the panel otherwise. These listen on the way down, so the
      press and the click that follows it never reach what was pressed. -->
 <svelte:window
-  bind:innerWidth={width}
-  bind:innerHeight={height}
   onpointerdowncapture={e => {
     if (document.querySelector('dialog[open]')) { eaten = false; return; }
     eaten = pop ? !e.target.closest?.('.anchor') : !!panel && !dock.contains(e.target);
@@ -309,7 +312,7 @@
       </div>
     </div>
   {:else if panel === 'style'}
-    <div class="panel style-panel glass-card" class:bare={!keys.length} bind:offsetHeight={panelHeight}>
+    <div class="panel style-panel glass-card" class:compact={chips} class:bare={!keys.length} bind:offsetHeight={panelHeight}>
       <div class="pick anchor">
         {#if pop === 'styles'}
           <div class="menu glass-card" role="group" aria-label="Style" use:reveal use:styleDividers onwheel={e => (e.currentTarget.scrollLeft += e.deltaY)}>
@@ -327,6 +330,22 @@
       </div>
       {#if !keys.length}
         <!-- a style with no settings to show: the style button alone, as wide as the panel (.bare in app.css) -->
+      {:else if chips}
+        <div class="setbox">
+          <div class="sets" role="group" aria-label="Settings" bind:this={chipRow} onscroll={fades} onwheel={e => (e.currentTarget.scrollLeft += e.deltaY)}>
+            {#each keys as key}
+              <button class="chip" class:changed={changed(style, own, [key])}
+                aria-label="{SETTINGS[key].label}: {shown(key, own[key], true)}"
+                aria-pressed={key === active} onclick={() => (pressed = key)}>
+                <span>{SETTINGS[key].label}</span><b>{shown(key, own[key])}</b>
+              </button>
+            {/each}
+            <button class="chip reset" disabled={!changed(style, own, keys)} aria-label="Reset {styleName}" use:tooltip={'Restore this style’s default settings.'} onclick={reset}>
+              <PixelIcon name="reset" />Reset
+            </button>
+          </div>
+        </div>
+        <div class="thr">{@render control(active)}</div>
       {:else}
         <span class="sep"></span>
         {#if lead}
@@ -340,31 +359,13 @@
           </button>
         {/if}
         {#if more && rest.length}
-          <div class="adv" class:compact={chips}>
-            {#if chips}
-              <div class="setbox">
-                <div class="sets" role="group" aria-label="Settings" bind:this={chipRow} onscroll={fades} onwheel={e => (e.currentTarget.scrollLeft += e.deltaY)}>
-                  {#each rest as key}
-                    <button class="chip" class:changed={changed(style, own, [key])}
-                      aria-label="{SETTINGS[key].label}: {shown(key, own[key], true)}"
-                      aria-pressed={key === active} onclick={() => (pressed = key)}>
-                      <span>{SETTINGS[key].label}</span><b>{shown(key, own[key])}</b>
-                    </button>
-                  {/each}
-                  <button class="chip reset" disabled={!changed(style, own, keys)} aria-label="Reset {styleName}" use:tooltip={'Restore this style’s default settings.'} onclick={reset}>
-                    <PixelIcon name="reset" />Reset
-                  </button>
-                </div>
-              </div>
-              <div class="thr">{@render control(active)}</div>
-            {:else}
-              {#each rest as key}
-                <div class="row" class:choice-row={!!SETTINGS[key].options}><span class="key"><span class="setting-label" class:changed={changed(style, own, [key])}>{SETTINGS[key].label}</span></span>{@render control(key)}</div>
-              {/each}
-              <div class="foot">
-                <button class="btn glass-btn" disabled={!changed(style, own, keys)} aria-label="Reset {styleName}" use:tooltip={'Restore this style’s default settings.'} onclick={reset}><PixelIcon name="reset" />Reset</button>
-              </div>
-            {/if}
+          <div class="adv">
+            {#each rest as key}
+              <div class="row" class:choice-row={!!SETTINGS[key].options}><span class="key"><span class="setting-label" class:changed={changed(style, own, [key])}>{SETTINGS[key].label}</span></span>{@render control(key)}</div>
+            {/each}
+            <div class="foot">
+              <button class="btn glass-btn" disabled={!changed(style, own, keys)} aria-label="Reset {styleName}" use:tooltip={'Restore this style’s default settings.'} onclick={reset}><PixelIcon name="reset" />Reset</button>
+            </div>
           </div>
         {/if}
       {/if}
