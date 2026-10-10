@@ -1,0 +1,6 @@
+/* Static toolbar controls preserve their hit area in every interaction state. */
+:root .bar .glass-btn:is(:hover,:active,:focus-visible) { transform: none; }
+/* One UI typeface; only the branded wordmark keeps its pixel character. */
+:root :is(.help h2,.empty h2,.glass-modal__title,.drop) { font-family: var(--body); letter-spacing: -.025em; }
+:root :is(button,input,select,textarea) { font-family: var(--body); }
+:root .ico, :root .glass-btn .ico { width: 18px; height: 18px; flex: none; }

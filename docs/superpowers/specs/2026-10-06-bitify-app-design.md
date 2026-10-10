@@ -1528,3 +1528,13 @@ For short portrait viewports (up to 640px high), empty-state typography and noti
 padding compact, and the example may shrink to 48px. The 56px import action keeps
 its normal target size, and the example caption keeps enough width for its label. The empty workspace remains scrollable for larger system
 text or exceptionally small windows.
+
+## Numbered refinement tasks (October 9, 2026)
+
+5. Toolbar buttons retain their position on hover, focus and press. GlassKit primary
+   color/shadow feedback remains, but its one-pixel vertical motion is disabled in the toolbar.
+10. Interface actions use one vendored Lucide outline family with 18px glyphs, including
+    Import, Export, Copy, Remove, More and Help. The glyph source is static; no network
+    request is made to render an icon. Lucide's license is kept with the assets. All UI
+    headings, labels and controls use Schibsted Grotesk; the branded wordmark remains
+    Pixelify Sans. Artwork and conversion previews remain pixel rendered.
