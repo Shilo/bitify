@@ -265,6 +265,7 @@
   }
 }
 @media (prefers-reduced-transparency: reduce) {
+  :root :is(.help,.sheet)::backdrop { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
    :root, :root[data-theme] {
     --canvas-material: var(--surface); --canvas-popover: var(--surface); --canvas-readable: var(--surface); --canvas-modal: var(--surface);
     --gl-surface-1: var(--surface); --gl-surface-2: var(--surface); --gl-surface-3: var(--surface);
@@ -278,6 +279,7 @@
   :root *, :root *::before, :root *::after { transition: none !important; animation: none !important; }
 }
 @media (forced-colors: active) {
+  :root :is(.help,.sheet)::backdrop { -webkit-backdrop-filter: none; backdrop-filter: none; }
   :root, :root[data-theme] { background: Canvas; --bg: Canvas; --surface: Canvas; --fg: CanvasText; --muted: CanvasText; --line: ButtonText; }
   :root :is(.dock,.tool-group,.panel,.menu,.more,.help,.sheet,.toast,.btn,.ib,.cap,.acts,.brand,.empty-text) {
     background: Canvas; color: CanvasText; border: 1px solid ButtonText; box-shadow: none;

@@ -1411,3 +1411,6 @@ Opaque reduced-transparency/no-blur and forced-color fallbacks remain conditiona
 This is a comparison baseline, not a claim that default glass guarantees readable image
 actions over arbitrary pale/dark artwork. The default library aura background and bulky
 component spacing are not introduced into the existing canvas layout.
+
+Reduced transparency and forced colors also remove modal-backdrop blur; the normal
+GlassKit-style dim scrim is retained.
