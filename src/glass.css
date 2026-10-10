@@ -66,7 +66,7 @@
 :root .tile { gap: 8px; }
 :root .art { background: transparent; border-radius: 0; }
 :root .art canvas { inset: var(--image-inset); width: calc(100% - 2*var(--image-inset)); height: calc(100% - 2*var(--image-inset)); }
-/* Baseline comparison: caption/action capsules use the default card material too. */
+/* Captions retain the default card material over the themed checker. */
 :root .cap {
   box-sizing: border-box; font-size: 13px; line-height: 18px; gap: 6px;
   padding: 3px 6px; border: 1px solid var(--canvas-border); border-radius: 9px;
@@ -78,14 +78,16 @@
 :root .acts {
   top: 7px; right: 7px; gap: 3px; padding: 3px;
   border: 1px solid var(--canvas-border); border-radius: 999px;
-  background: var(--canvas-readable); color: var(--fg); box-shadow: var(--canvas-shadow);
-  -webkit-backdrop-filter: blur(var(--gl-blur)); backdrop-filter: blur(var(--gl-blur));
+  /* Artwork is arbitrary: this one shared opaque theme surface protects action ink. */
+  background: var(--surface); color: var(--fg); box-shadow: var(--canvas-shadow);
+  -webkit-backdrop-filter: none; backdrop-filter: none;
 }
 :root .tile .acts .ib {
   color: var(--fg); background: transparent; border-color: transparent;
   box-shadow: none; border-radius: 999px; opacity: 1;
+  -webkit-backdrop-filter: none; backdrop-filter: none;
 }
-/* Default tertiary hover/focus stays translucent and increases the glass tint. */
+/* Library hover/focus tints composite over the opaque capsule, never the artwork. */
 :root .tile .acts .ib:not(:disabled):is(:hover,:focus-visible) {
   background: var(--gl-surface-4); color: var(--fg);
 }

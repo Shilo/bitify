@@ -1414,3 +1414,17 @@ component spacing are not introduced into the existing canvas layout.
 
 Reduced transparency and forced colors also remove modal-backdrop blur; the normal
 GlassKit-style dim scrim is retained.
+
+## Image-action contrast protection (October 9, 2026)
+
+The user approved one local exception to default GlassKit materials: the shared tile
+Copy/Download/Remove capsule uses the opaque theme surface (#e8ecef light / #272c32
+dark), with full default foreground ink. Share/Remove uses the same material on touch
+layouts, including when positioned beside or below the caption. The capsule and its
+children have no backdrop blur. Individual buttons remain transparent at rest; library
+hover/focus/active tints composite over the opaque parent, so artwork cannot change their
+contrast. Existing focus outlines, tooltip behavior, hit areas and placement remain.
+
+Captions, editing islands, header controls, popovers and dialogs retain their default
+GlassKit materials. Image canvases have no backing. Forced colors retains system colors.
+This section supersedes only the default-material comparison's tile-action treatment.

@@ -193,3 +193,11 @@ fixture resolves to white60%/24px blur; at320x568 settings remain above the canv
 (bottom269/panel top297) without horizontal overflow. These are media-rule simulations,
 not physical iOS/Android or GPU performance measurements. Separate test tabs were closed
 and viewport overrides reset; the main six-image preview remains ready for comparison.
+
+## Scoped opaque image actions
+
+After testing pure white/black source images, the user approved fully solid shared
+image-action capsules. They use the existing theme surface (#e8ecef / #272c32) and full
+GlassKit text ink, retaining the library border/shadow and hover/focus tint. No blur is
+needed on the capsule or its children. The rule also covers touch Share/Remove groups;
+caption and island materials remain the default glass comparison.
