@@ -21,17 +21,21 @@
   $effect(() => {
     const clear = () => { spaceHeld = false; imageHeld = false; dismissal.cancel(); dismissReady = false; };
     const hidden = () => { if (document.hidden) clear(); };
+    // Pointer clicks may blur toolbar buttons back to the page. Keep comparison
+    // available for the lifetime of this modal, regardless of that focus target.
+    window.addEventListener('keydown', keydown, true);
+    window.addEventListener('keyup', keyup, true);
     window.addEventListener('blur', clear);
     document.addEventListener('visibilitychange', hidden);
-    return () => { window.removeEventListener('blur', clear); document.removeEventListener('visibilitychange', hidden); };
+    return () => { window.removeEventListener('keydown', keydown, true); window.removeEventListener('keyup', keyup, true); window.removeEventListener('blur', clear); document.removeEventListener('visibilitychange', hidden); };
   });
   function keydown(e) {
-    if (e.code !== 'Space' || e.target.closest('input, textarea, select, [contenteditable="true"]')) return;
+    if (!dialog?.open || e.code !== 'Space' || e.target.closest('input, textarea, select, [contenteditable="true"]')) return;
     // Space is the preview comparison shortcut, including when a toolbar has focus.
     e.preventDefault(); e.stopPropagation(); spaceHeld = true;
   }
   function keyup(e) {
-    if (e.code !== 'Space') return;
+    if (!dialog?.open || e.code !== 'Space') return;
     e.preventDefault(); e.stopPropagation(); spaceHeld = false;
   }
   function press(e) {
@@ -59,14 +63,13 @@
   style:--canvas-grid-step={`${grid.step}px`}
   style:background-position={`${(width - fit.width) / 2}px ${(height - fit.height) / 2}px`}
   onclose={() => { spaceHeld = false; imageHeld = false; cancelDismissal(); onclose?.(); }}
-  onkeydowncapture={keydown} onkeyupcapture={keyup}
   onpointerdown={press} onpointermove={e => dismissal.move(e)} onpointerup={release}
   onpointercancel={cancelDismissal} onpointerleave={() => { if (dismissal.canHold()) cancelDismissal(); }} onclick={click}>
   <nav class="viewer-workspace" aria-label="Preview controls">
     <div class="viewer-tools glass-card" role="group" aria-label="Image actions">
       {#if onsave}<button class="btn glass-btn icon-only" onclick={onsave} aria-label="Save image" use:tooltip={'Save the converted image at its original size.'}><PixelIcon name="save" /></button>{/if}
       {#if oncopy}<button class="btn glass-btn icon-only" onclick={oncopy} aria-label="Copy image" use:tooltip={'Copy the converted image as a PNG.'}><PixelIcon name="copy" /></button>{/if}
-      <button class="btn glass-btn icon-only viewer-compare" aria-pressed={originalVisible}
+      <button class="btn glass-btn icon-only viewer-compare" aria-pressed={!originalVisible}
         aria-label={originalVisible ? 'Show converted image' : 'Show original image'}
         onclick={() => (converted = !converted)} use:tooltip={originalVisible ? 'Show the converted image.' : 'Show the original image.'}>
         <PixelIcon name="swap" />
