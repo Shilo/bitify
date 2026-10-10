@@ -1704,3 +1704,6 @@ Help row order refinement: Preview image precedes Save or copy image on both inp
 
 
 Preview highlight refinement: selected/aria-pressed means bitified, matching the main conversion control. Initial visible state still snapshots the main canvas, and all Preview preferences remain local. Capture Space keydown/up at window scope while the viewer dialog is open, so pointer-button blur to the page does not disable temporary comparison. Remove both listeners on viewer teardown. Image/Space holds invert the local preference until release and never change global state. This supersedes original-state highlighting.
+
+
+Desktop Help column correction: Controls uses 37% and Mouse 31%, leaving room for the complete Keyboard heading and shortcuts. Verify Save or copy image and Keyboard remain single-line at the unchanged 420px desktop modal width. Touch columns remain unchanged.

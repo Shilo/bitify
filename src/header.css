@@ -27,8 +27,8 @@
   :root .help th:first-child { padding-left: 0; }
 }
 
-/* Reclaim spare keyboard space for the desktop action labels. */
+/* Fit the longest desktop label while preserving keyboard heading/shortcut space. */
 @media (hover: hover) and (pointer: fine) {
-  :root .help th:first-child { width: 40%; }
-  :root .help thead th:nth-child(2) { width: 34%; }
+  :root .help th:first-child { width: 37%; }
+  :root .help thead th:nth-child(2) { width: 31%; }
 }
