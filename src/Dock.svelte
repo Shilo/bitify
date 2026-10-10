@@ -350,7 +350,7 @@
           <span class="grow"></span>
         {/if}
         {#if rest.length}
-          <button class="btn extra glass-btn" aria-expanded={more} aria-label="More settings" use:tooltip={'Show additional settings for the current style.'} onclick={() => (more = !more)}>
+          <button class="btn extra glass-btn icon-only" aria-expanded={more} aria-label="More settings" use:tooltip={'Show additional settings for the current style.'} onclick={() => (more = !more)}>
             <PixelIcon name="more" />
           </button>
         {/if}

@@ -491,3 +491,5 @@
   :root .empty p { font-size: 12px; line-height: 1.4; }
   :root .empty .import-note { padding: 8px 12px; }
 }
+
+:root .help-in > .ib { box-sizing: border-box; width: var(--control-size); height: var(--control-size); border-radius: 50%; }

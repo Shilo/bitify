@@ -67,21 +67,21 @@
   });
   // Fit the example around real text/font sizes, including the instruction notice.
   function fitEmpty(node) {
-    const area = node.parentElement, text = node.querySelector('.empty-text'), caption = node.querySelector('.cap');
+    const area = node.parentElement, text = node.querySelector('.empty-text');
     const measure = () => {
       const areaStyle = getComputedStyle(area), gridStyle = getComputedStyle(node);
       const columns = gridStyle.gridTemplateColumns.split(' ').length > 1;
       const gap = parseFloat(gridStyle.gap) || 0;
       const height = area.clientHeight - parseFloat(areaStyle.paddingTop) - parseFloat(areaStyle.paddingBottom)
-        - (caption?.offsetHeight ?? 0) - 8 - (columns ? 0 : text.offsetHeight + gap);
+        - (node.querySelector('.cap')?.offsetHeight ?? 0) - 8 - (columns ? 0 : text.offsetHeight + gap);
       const width = area.clientWidth - parseFloat(areaStyle.paddingLeft) - parseFloat(areaStyle.paddingRight)
         - (columns ? text.offsetWidth + gap : 0);
       node.style.setProperty('--empty-art-size', `${Math.max(96, Math.min(320, height, width))}px`);
     };
     const observer = new ResizeObserver(measure);
-    for (const element of [area, text, caption].filter(Boolean)) observer.observe(element);
+    for (const element of [area, text]) observer.observe(element);
     measure();
-    return { destroy: () => observer.disconnect() };
+    return { update: () => { const caption = node.querySelector('.cap'); if (caption) observer.observe(caption); measure(); }, destroy: () => observer.disconnect() };
   }
   let showOriginal = $state(false);
   // Changing the style or one of its settings, by any route, shows the result: the view goes back to bitified.
@@ -551,7 +551,7 @@
   </div>
 {:else}
   <div class="empty">
-    <div class="empty-in" use:fitEmpty>
+    <div class="empty-in" use:fitEmpty={example}>
       {#if example}
         <Tile inset={IMAGE_INSET} item={example} first={ink[0]} second={ink[1]} {style} {set} flipped={showOriginal !== spaceHeld} />
       {/if}

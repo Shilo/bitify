@@ -1508,3 +1508,6 @@ The empty-state example measures the available workspace, text and caption to fi
 around instructions and the import action. It observes text/font and workspace
 resizing and disconnects on unmount. Short landscape reduces explanatory spacing;
 small viewports may still scroll naturally when the minimum example cannot fit.
+
+The example fit updates when the async example arrives, including its actual caption.
+Style-panel More and Help Close also use circular 44px icon controls.
