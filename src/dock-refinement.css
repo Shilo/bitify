@@ -25,6 +25,7 @@
 :root .dock .pal.glass-btn:is(:hover,:active) { transform: none; }
 :root .dock .pal[aria-pressed="true"] { border-color: var(--gl-border-focus); box-shadow: 0 0 0 2px var(--surface),0 0 0 4px var(--gl-border-focus); }
 :root .dock .palette-preview { display: block; flex: none; width: 100%; height: 100%; overflow: hidden; border-radius: 50%; background: linear-gradient(135deg,var(--preview-first) 50%,var(--preview-second) 50%); }
+:root .dock .panel.fit { --mini: 36px; }
 :root .dock .pname { gap: 5px; padding-top: 8px; padding-bottom: 8px; }
 :root .dock .pname .seg.mini { box-sizing: border-box; height: 36px; padding: 2px; gap: 4px; align-items: stretch; }
 :root .dock .pname .seg.mini button { box-sizing: border-box; width: 36px; min-width: 36px; height: 32px; min-height: 0; padding: 0; }
@@ -36,6 +37,7 @@
 :root .dock.canvas-scrollable > .tool-group,
 :root .dock.canvas-scrollable :is(.panel,.menu,.tray) { background: var(--surface); -webkit-backdrop-filter: none; backdrop-filter: none; }
 @media (pointer: coarse) {
+  :root .dock .panel.fit { --mini: 48px; }
   :root .dock .pname .seg.mini { height: 48px; }
   :root .dock .pname .seg.mini button { width: 44px; min-width: 44px; height: 44px; }
 }
@@ -45,6 +47,7 @@
 }
 @media (max-width: 520px) {
   :root .dock .pname .key { display: none; }
+  :root .dock .fit::before, :root .dock .fit::after { top: calc(var(--mini) + 16px); }
   :root .dock .preset.glass-btn { min-height: 62px; }
   :root .dock .preset .demo { width: 36px; height: 36px; }
 }
