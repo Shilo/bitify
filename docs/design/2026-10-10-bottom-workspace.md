@@ -8,9 +8,9 @@ Started October 9 and verified October 10, 2026 in the isolated `codex/glasskit-
 
 | Task | Result and challenge |
 | --- | --- |
-| 23 | Fixed palette transparency geometry: mouse segments 36×32 inside a 36px shell; coarse-pointer segments 44×44 inside a 48px shell. Padding/gaps are accounted for. Popup name/header reserves enough height, and fade offsets use actual switch dimensions. All targets fit their parent and popup. |
+| 23 | Fixed palette transparency geometry: mouse segments 28×24 with 18px glyphs inside a 28px shell; coarse-pointer segments 48×48 with 32px glyphs inside a 52px shell. Padding/gaps are accounted for. Popup name/header reserves enough height, and fade offsets use actual switch dimensions. All targets fit their parent and popup. |
 | 24 | Circular style frames match palette framing. Chooser previews 44px desktop/36px compact, current-style picker 32px. A simple tonal disk with an inset circle, broad seam and rim replaces the faceted sample. All eleven default previews remain distinct actual converter outputs. Names/tooltips remain essential: small Bayer/Checker/Atkinson patterns cannot identify algorithms by appearance alone. |
-| 25 | Removed the top bar and brand. Editing islands sit bottom left; file/app actions bottom right. A single ResizeObserver measurement reserves the combined rows and open panels, and the canvas starts at the window top. Small phones wrap into three rows to preserve44px targets rather than crowding one row. |
+| 25 | Removed the top bar and brand. Editing islands sit bottom left; file/app actions bottom right. A single ResizeObserver measurement reserves the combined rows and open panels, and the canvas starts at the window top. At widths up to 720px, Palette stacks above Style, both left aligned, and file actions occupy the bottom right row. Wider layouts remain one row. |
 | 26 | Remove all now shares the Add/Save capsule. Semantic danger colors and confirmation distinguish destruction from file actions. |
 | 27 | Fullscreen art region covers the whole viewport. The image fits with zero inset and preserved aspect, without reserving header/caption height; protected controls overlay it. Letterboxing is preferable to stretching/cropping. |
 | 28 | More, Help, image-actions sheet and confirmation modal content use opaque themed surfaces, retaining GlassKit anatomy and native dialogs. Backdrops remain separate. Production computed styles confirm no content blur. |
@@ -47,3 +47,12 @@ Browser checks found two additional real CSS bugs: compact picker sizing affecte
 [Desktop](mockups/bottom-workspace-desktop-dark.png), [palette desktop](mockups/bottom-palette-desktop-dark.png), [palette touch](mockups/bottom-palette-touch-dark.png), [dark phone](mockups/bottom-workspace-touch-dark.png), [light phone](mockups/bottom-workspace-touch-light.png), [dark sheet](mockups/bottom-share-sheet-touch-dark.png), [light sheet](mockups/bottom-share-sheet-touch-light.png), [fullscreen phone](mockups/bottom-fullscreen-touch-dark.png).
 
 Physical iOS/Safari, actual multi-touch and the previously reported Brave/GIF backdrop flicker remain device/browser verification items. No further user decision is required for the implemented tasks.
+
+
+## Follow-up correction verification (tasks 23 and 25)
+
+Checkpoint bc57133; geometry bd5cfdc; wrapping c750f93. Independent subagent review found no actionable issues. The compact desktop switch retains 24px-high targets, while the touch switch keeps larger targets with visibly larger symbols; native pt/dp recommendations inform the CSS sizing rather than implying physical unit equivalence.
+
+Verified the live loaded-image desktop layout at 1075px, 600px and the 720/721px breakpoint; the production coarse-pointer fixture at 320×740 and 844×390; transparency selection and restoration; parent containment and horizontal overflow. Wide desktop palette popup measures 66px high; desktop segments measure 28×24 and touch segments 48×48. All 242 tests and the production build passed. Touch checks use a media-query fixture, not physical iOS/Android hardware.
+
+[Desktop proof](C:/Users/shilo/.codex/visualizations/2026/10/09/01a11fbc-7f61-7df0-a43f-50e5ca11310a/task23-compact-desktop.png), [wrapped workspace](C:/Users/shilo/.codex/visualizations/2026/10/09/01a11fbc-7f61-7df0-a43f-50e5ca11310a/task25-stacked-workspace.png), [touch targets](C:/Users/shilo/.codex/visualizations/2026/10/09/01a11fbc-7f61-7df0-a43f-50e5ca11310a/task23-touch-targets.png).
