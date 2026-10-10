@@ -1,3 +1,7 @@
+# Current adoption validation
+
+Floating islands is now the sole runtime design. See the [adoption and final review](2026-10-09-floating-islands-adoption.md) for **212 passing tests in 12 files**, production checks, parsed exports and simulated-media checks. The records below document historical exploration and must not be read as available alternate layouts.
+
 # Prototype validation
 
 October 9, 2026 · `codex/glasskit-prototypes` · GlassKit pinned to 1.22.2.

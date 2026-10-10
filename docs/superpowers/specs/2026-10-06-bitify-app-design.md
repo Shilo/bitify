@@ -8,9 +8,9 @@ user picks. One of the two may be None, which leaves its pixels transparent. It 
 entirely in the browser. Nothing is uploaded.
 
 The approved interactive prototype is saved next to this file as
-[2026-10-06-bitify-prototype.html](2026-10-06-bitify-prototype.html). It is the visual and
-behavioral reference: where this document and the prototype disagree on look, spacing or
-copy, the prototype wins. It is plain HTML and JavaScript, written as a throwaway; the app
+[2026-10-06-bitify-prototype.html](2026-10-06-bitify-prototype.html). It is a historical behavioral reference. The October 9 Floating islands adoption below
+supersedes its appearance and spacing; established conversion and interaction contracts
+remain. It is plain HTML and JavaScript, written as a throwaway; the app
 is a fresh build, not a port of that file's structure.
 
 ## What was asked for
@@ -1355,7 +1355,7 @@ Fallback token selectors match theme specificity; forced colors uses system colo
 
 Narrow no-hover tiles stack full-width caption and a centered Share/Remove capsule below
 the art. The compact 62px fit selects stacking below192px; a second fit reserves95px
-and retains the explicit stack flag even if tiles grow. Caption height26px + action
+and retains the explicit stack flag even if tiles grow. Caption height27px + action
 height52px + two8px gaps fits that allowance. Actions stay44px each; zero inter-action
 gap yields a96px capsule at the minimum tile width. Larger touch tiles retain side-by-side
 metadata/actions. The style chooser aims to leave191px for one96px art plus95px footer,
