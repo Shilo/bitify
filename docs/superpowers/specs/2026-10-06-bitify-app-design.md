@@ -1677,3 +1677,6 @@ Desktop image actions have a decorative theme-token divider immediately before R
 
 
 Image action order and caption activation: desktop actions order Save, Copy, Preview, divider, Remove; mobile sheet orders Save (primary), Copy, Preview, Remove (negative), Cancel. Preview's bottom capsule orders Save, Copy, Convert. The desktop divider adds 2px of vertical spacing at each end, without increasing capsule width. Imported image caption metadata is a native Preview button on both input modes. Touch reserves a 64px-wide More area: the original 44px circular control remains visually unchanged, but its hit area extends 20px left and 4px vertically, with no overlapping Preview target. Example captions continue to add images.
+
+
+Desktop divider correction: restore the original vertical extent; spacing belongs horizontally between Preview and Remove. A 6px additional gap puts the theme-token separator between those targets without changing button sizes. Compact capsules retain two-row packing.
