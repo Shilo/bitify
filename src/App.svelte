@@ -162,7 +162,7 @@
   let noHoverMatches = $state(noHover.matches);
   noHover.addEventListener('change', e => (noHoverMatches = e.matches));
   const canvasItems = $derived(items.length ? items : example ? [example] : []);
-  const layout = $derived(fitImageWall(canvasItems.length, wallWidth, wallHeight, noHoverMatches));
+  const layout = $derived(fitImageWall(canvasItems.length, wallWidth, wallHeight, noHoverMatches || !items.length));
   let dragDepth = $state(0);
   let message = $state('');
   let picker;

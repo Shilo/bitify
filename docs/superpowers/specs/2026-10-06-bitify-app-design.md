@@ -1636,3 +1636,6 @@ Research rationale: Apple’s Icons guidance favors simplified recognizable shap
 3. Mobile image actions use the shared vertical More icon inside the full-width title caption, with a44px target. It opens the existing Save/Copy/Remove sheet and has an image-specific accessible name. Compact captions no longer reserve a separate action row.
 4. Remove-all and Reset confirmations use GlassKit error-surface and error-on-surface tokens for their destructive action, with system-color fallbacks.
 5. Pointer comparison starts after450ms. Stationary taps below that threshold activate Add when empty or fullscreen when loaded. Pointer movement, cancellation and multitouch still suppress activation. Touch pointerleave after a completed release preserves the pending click, while leaving during an active press cancels it. Space comparison remains immediate.
+
+
+The empty example caption has a right-aligned44px primary Add button using the shared import glyph, matching the mobile title-bar More target. Its left label reads “Add images” for touch/coarse pointers and “Add, drop or paste images” for mouse/keyboard. Example pixel dimensions are replaced by these instructions. The full-width52px caption reserves the62px footer allowance on desktop too. Imported image captions and actions remain unchanged.

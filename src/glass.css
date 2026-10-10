@@ -440,8 +440,8 @@
 }
 
 /* The current file-flow action uses GlassKit's primary gradient and documented dark ink. */
-:root :is(.bar .file-actions,.empty-text,.sheet) .btn.glass-btn--primary,
-:root :is(.bar .file-actions,.empty-text,.sheet) .btn.glass-btn--primary:not(:disabled):is(:hover,:focus-visible) {
+:root :is(.bar .file-actions,.empty-text,.sheet,.example-add) .btn.glass-btn--primary,
+:root :is(.bar .file-actions,.empty-text,.sheet,.example-add) .btn.glass-btn--primary:not(:disabled):is(:hover,:focus-visible) {
   --gl-color-on-primary: color-mix(in srgb,var(--gl-color-primary) 17%,#000);
   --gl-icon-on-primary: var(--gl-color-on-primary);
   background: linear-gradient(135deg,var(--gl-color-primary) 0%,var(--gl-color-primary-mid) 50%,var(--gl-color-primary-dark) 100%);
@@ -457,9 +457,9 @@
 @media (forced-colors: active) {
   :root .import-note { background: Canvas; color: CanvasText; border-color: ButtonText; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
   :root .empty .import-note p { color: CanvasText; }
-  :root :is(.bar .file-actions,.empty-text,.sheet) .btn.glass-btn--primary,
-  :root :is(.bar .file-actions,.empty-text,.sheet) .btn.glass-btn--primary:not(:disabled):is(:hover,:focus-visible) { background: Highlight; color: HighlightText; border-color: Highlight; box-shadow: none; }
-  :root :is(.bar .file-actions,.empty-text,.sheet) .btn.glass-btn--primary svg { fill: HighlightText; stroke: none; }
+  :root :is(.bar .file-actions,.empty-text,.sheet,.example-add) .btn.glass-btn--primary,
+  :root :is(.bar .file-actions,.empty-text,.sheet,.example-add) .btn.glass-btn--primary:not(:disabled):is(:hover,:focus-visible) { background: Highlight; color: HighlightText; border-color: Highlight; box-shadow: none; }
+  :root :is(.bar .file-actions,.empty-text,.sheet,.example-add) .btn.glass-btn--primary svg { fill: HighlightText; stroke: none; }
 }
 
 /* Native component anatomy; viewport fit and a local modal readability guard. */

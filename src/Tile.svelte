@@ -163,13 +163,20 @@
       <button class="ib" onclick={onremove} aria-label="Remove {item.name}" use:tooltip={'Remove this image from the canvas.'}><PixelIcon name="trash" /></button>
     </div>
   {/if}
-  <figcaption class="cap" class:has-image-actions={!!onremove}>
+  <figcaption class="cap" class:has-image-actions={!!onremove} class:example-add={!!onactivate}>
     <span class="caption-details">
-      <span class="name" use:tooltip={item.name}>{item.name}</span>
-      <span class="dim">{item.img.w}<span class="by">×</span>{item.img.h}</span>
+      {#if onactivate}
+        <span class="name example-label-desktop">Add, drop or paste images</span>
+        <span class="name example-label-touch">Add images</span>
+      {:else}
+        <span class="name" use:tooltip={item.name}>{item.name}</span>
+        <span class="dim">{item.img.w}<span class="by">×</span>{item.img.h}</span>
+      {/if}
     </span>
     {#if onremove}
       <button class="ib glass-btn tile-share" onclick={onshare} aria-label="Image actions for {item.name}" aria-haspopup="dialog" use:tooltip={'Save, copy or remove this image.'}><PixelIcon name="more" /></button>
+    {:else if onactivate}
+      <button class="btn glass-btn glass-btn--primary example-add-action" onclick={e => activate(e.currentTarget)} aria-label="Add images" use:tooltip={'Choose images from your device.'}><PixelIcon name="import" /></button>
     {/if}
   </figcaption>
 </figure>
