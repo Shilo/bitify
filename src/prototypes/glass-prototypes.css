@@ -4,7 +4,9 @@
   --bg: #f1f2f3; --surface: #fcfcfd; --fg: #25282c; --muted: #60666d;
   --line: rgba(38,45,54,.14); --tile: #e6e9eb; --tile2: #dce0e3;
   --shadow: rgba(27,34,44,.10);
-  --prototype-gap: 12px; --prototype-inset: 4px;
+  --prototype-gap: 12px; --prototype-inset: 4px; --prototype-min-workspace: 131px;
+  --prototype-readable: rgba(252,252,253,.92); --prototype-quiet: rgba(129,135,141,.96);
+  --prototype-image-check-a: #70777f; --prototype-image-check-b: #969da5;
   --prototype-grid-fine: rgba(34,45,54,.052); --prototype-grid-major: rgba(34,45,54,.065);
   --prototype-material: rgba(253,253,254,.48); --prototype-popover: rgba(253,253,254,.72);
   --prototype-border: rgba(255,255,255,.88);
@@ -24,8 +26,10 @@
     linear-gradient(90deg,var(--prototype-grid-major) 1px,transparent 1px),
     linear-gradient(var(--prototype-grid-fine) 1px,transparent 1px),
     linear-gradient(90deg,var(--prototype-grid-fine) 1px,transparent 1px);
-  background-size: 160px 160px,160px 160px,32px 32px,32px 32px;
-  background-position: center;
+  background-size: calc(var(--canvas-grid-step,32px) * 4) calc(var(--canvas-grid-step,32px) * 4),
+    calc(var(--canvas-grid-step,32px) * 4) calc(var(--canvas-grid-step,32px) * 4),
+    var(--canvas-grid-step,32px) var(--canvas-grid-step,32px),var(--canvas-grid-step,32px) var(--canvas-grid-step,32px);
+  background-position: 0 0;
 }
 :root[data-prototype][data-theme="dark"] {
   --bg: #191c20; --surface: #272c32; --fg: #f0f2f4; --muted: #b0b7bf;
@@ -33,16 +37,17 @@
   --prototype-grid-fine: rgba(202,221,238,.06); --prototype-grid-major: rgba(202,221,238,.075);
   --prototype-material: rgba(37,43,51,.50); --prototype-popover: rgba(37,43,51,.76);
   --prototype-border: rgba(214,230,244,.18);
+  --prototype-readable: rgba(39,44,50,.94);
   --prototype-shadow: 0 12px 32px rgba(0,0,0,.24),0 2px 8px rgba(0,0,0,.15),inset 0 1px 0 rgba(255,255,255,.07);
 }
 :root[data-prototype][data-grid="dots"] {
   background-image: radial-gradient(circle,var(--prototype-grid-major) 1px,transparent 1.2px);
-  background-size: 24px 24px;
+  background-size: var(--canvas-grid-step,32px) var(--canvas-grid-step,32px);
 }
 :root[data-prototype][data-grid="off"] { background-image: none; }
-:root[data-prototype][data-alpha="true"] {
+:root[data-prototype][data-grid="checker"] {
   background-image: conic-gradient(var(--tile2) 25%,var(--tile) 0 50%,var(--tile2) 0 75%,var(--tile) 0);
-  background-size: 24px 24px;
+  background-size: calc(var(--canvas-grid-step,32px) * 2) calc(var(--canvas-grid-step,32px) * 2);
 }
 :root[data-prototype] body { background-color: var(--bg); background-image: inherit; background-size: inherit; background-position: inherit; letter-spacing: -.01em; }
 :root[data-prototype] #app { isolation: isolate; }
@@ -76,11 +81,37 @@
 :root[data-prototype] .tile { gap: 8px; }
 :root[data-prototype] .art { background: transparent; border-radius: 0; }
 :root[data-prototype] .art canvas { inset: var(--prototype-inset); width: calc(100% - 2*var(--prototype-inset)); height: calc(100% - 2*var(--prototype-inset)); }
-:root[data-prototype] .cap { font-size: 12px; gap: 6px; }
-:root[data-prototype] .cap .name { font-weight: 550; }
-:root[data-prototype] .dim { font-size: 11px; letter-spacing: 0; }
-:root[data-prototype] .acts { top: 7px; right: 7px; gap: 5px; }
-:root[data-prototype] .acts .ib { background: var(--prototype-popover); border-color: var(--prototype-border); box-shadow: 0 3px 10px var(--shadow); border-radius: 999px; }
+/* Tiny labels and actionable icons need a predictable substrate, not clear glass. */
+:root[data-prototype] .cap {
+  box-sizing: border-box; font-size: 13px; line-height: 18px; gap: 6px;
+  padding: 3px 6px; border: 1px solid var(--line); border-radius: 9px;
+  color: var(--fg); background: var(--prototype-readable);
+}
+:root[data-prototype] .cap .name { font-weight: 600; }
+:root[data-prototype] .cap .dim { font-size: 12px; font-weight: 500; color: var(--fg); letter-spacing: 0; }
+:root[data-prototype] .acts {
+  top: 7px; right: 7px; gap: 3px; padding: 3px;
+  border: 1px solid var(--line); border-radius: 999px;
+  background: var(--prototype-readable); color: var(--fg); box-shadow: 0 3px 10px var(--shadow);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+}
+:root[data-prototype] .tile .acts .ib {
+  color: var(--fg); background: transparent; border-color: transparent;
+  box-shadow: none; border-radius: 999px; opacity: 1;
+}
+/* These selectors must beat the shared .ib:hover rule; hover increases backing. */
+:root[data-prototype] .tile .acts .ib:not(:disabled):is(:hover,:focus-visible) {
+  background: color-mix(in srgb,var(--surface) 88%,var(--fg)); color: var(--fg);
+}
+:root[data-prototype] .tile .acts .ib:not(:disabled):active {
+  background: color-mix(in srgb,var(--surface) 76%,var(--fg)); color: var(--fg);
+}
+/* Optional image support; the full-window background still remains continuous. */
+:root[data-prototype][data-image-backing="quiet"] .art { background: var(--prototype-quiet); }
+:root[data-prototype][data-image-backing="checker"] .art {
+  background-image: conic-gradient(var(--prototype-image-check-a) 25%,var(--prototype-image-check-b) 0 50%,var(--prototype-image-check-a) 0 75%,var(--prototype-image-check-b) 0);
+  background-size: calc(var(--canvas-grid-step,32px) * 2) calc(var(--canvas-grid-step,32px) * 2);
+}
 :root[data-prototype] .empty { padding: 18px 24px var(--dock-space); }
 :root[data-prototype] .empty-in { gap: 20px; }
 :root[data-prototype] .empty-text { gap: 12px; }
@@ -261,7 +292,7 @@
   :root[data-prototype] .acts { position: static; gap: 4px; margin-left: 0; }
   :root[data-prototype] .acts .ib { box-sizing: border-box; width: 44px; height: 44px; }
   :root[data-prototype] .cap { gap: 1px; }
-  :root[data-prototype] .cap .dim { font-size: 11px; }
+  :root[data-prototype] .cap .dim { font-size: 12px; line-height: 16px; }
   :root[data-prototype] .by { margin: 0 1px; }
 }
 @media (max-height: 520px) and (orientation: landscape) {
@@ -279,16 +310,16 @@
 @media (max-width: 520px) and (max-height: 520px) and (orientation: landscape) {
   :root[data-prototype] { --dock-base: 160px; }
 }
-:root[data-prototype][data-opaque="true"] { --prototype-material: var(--surface); --prototype-popover: var(--surface); }
-:root[data-prototype][data-opaque="true"] :is(.glass-card,.glass-popover,.glass-modal,.glass-btn,.glass-segmented,.dock,.panel,.menu,.more,.help,.sheet,.toast,.bar .btn,.prototype-review-button,.dock > .tool-group) {
+:root[data-prototype][data-opaque="true"] { --prototype-material: var(--surface); --prototype-popover: var(--surface); --prototype-readable: var(--surface); }
+:root[data-prototype][data-opaque="true"] :is(.glass-card,.glass-popover,.glass-modal,.glass-btn,.glass-segmented,.dock,.panel,.menu,.more,.help,.sheet,.toast,.bar .btn,.prototype-review-button,.acts,.dock > .tool-group) {
   -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
 }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  :root[data-prototype] { --prototype-material: var(--surface); --prototype-popover: var(--surface); }
+  :root[data-prototype] { --prototype-material: var(--surface); --prototype-popover: var(--surface); --prototype-readable: var(--surface); }
 }
 @media (prefers-reduced-transparency: reduce) {
-  :root[data-prototype] { --prototype-material: var(--surface); --prototype-popover: var(--surface); }
-  :root[data-prototype] :is(.dock,.panel,.menu,.more,.help,.sheet,.toast,.glass-btn,.bar .btn,.prototype-review-button,.dock > .tool-group) {
+  :root[data-prototype] { --prototype-material: var(--surface); --prototype-popover: var(--surface); --prototype-readable: var(--surface); }
+  :root[data-prototype] :is(.dock,.panel,.menu,.more,.help,.sheet,.toast,.glass-btn,.bar .btn,.prototype-review-button,.acts,.dock > .tool-group) {
     -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
   }
 }
@@ -297,7 +328,7 @@
 }
 @media (forced-colors: active) {
   :root[data-prototype] { background: Canvas; --bg: Canvas; --surface: Canvas; --fg: CanvasText; --muted: CanvasText; --line: ButtonText; }
-  :root[data-prototype] :is(.dock,.tool-group,.panel,.menu,.more,.help,.sheet,.toast,.btn,.ib,.prototype-review-button) {
+  :root[data-prototype] :is(.dock,.tool-group,.panel,.menu,.more,.help,.sheet,.toast,.btn,.ib,.cap,.acts,.prototype-review-button) {
     background: Canvas; color: CanvasText; border: 1px solid ButtonText; box-shadow: none;
     -webkit-backdrop-filter: none; backdrop-filter: none;
   }
@@ -344,7 +375,7 @@
   overflow-y: auto;
 }
 @media (hover: none) {
-  :root[data-prototype] { --prototype-min-workspace: 152px; }
+  :root[data-prototype] { --prototype-min-workspace: 160px; }
 }
 @media (min-width: 1000px) and (min-height: 601px) {
   :root[data-prototype='inspector'] .menu { max-height: min(420px, calc(100dvh - 280px)); }
@@ -368,4 +399,17 @@
   :root[data-prototype] .bar { gap: 5px; }
   :root[data-prototype] .mark { font-size: 24px; }
   :root[data-prototype] .prototype-review-button { padding-inline: 6px; }
+}
+
+@media (forced-colors: active) {
+  :root[data-prototype] .tile .acts .ib:not(:disabled):is(:hover,:focus-visible,:active) {
+    background: Highlight; color: HighlightText;
+  }
+}
+
+:root[data-prototype] .tile .acts .ib:focus-visible { outline-offset: -3px; }
+@container (max-width: 130px) {
+  @media (hover: hover) {
+    :root[data-prototype] .tile .acts .ib { width: 24px; height: 24px; }
+  }
 }

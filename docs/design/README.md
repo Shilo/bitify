@@ -18,16 +18,18 @@ without discarding images, conversion settings or original/converted state. This
 the original components and CSS in the same mounted workspace; only the Designs entry
 is added. The comparison URL still uses the separate prototype storage key.
 
-Use **Designs** to change direction without discarding loaded images, compare line/dot/no
-grid, turn on solid controls, compare a full checkerboard, and load one/six/many images.
+Use **Designs** to change direction without discarding loaded images; compare Lines, Dots,
+Checkerboard or Off; choose median/average image scaling; compare canvas-only, neutral or
+local-checker image backing; turn on solid controls; and load one/six/many images.
 The prototypes retain the existing conversion/export handlers; validated workflows are listed below. Sample imports stay local. Changing
 prototype settings uses a separate storage key. The production interface remains the
 default URL; this proposal has not been merged or deployed.
 
 ## Mockup gallery
 
-[Open all 23 browser mockups](gallery.html) or [the desktop/phone comparison](mockups/comparison.png).
+[Open the browser mockup gallery](gallery.html) or [the desktop/phone comparison](mockups/comparison.png).
 The gallery is also served at `/docs/design/gallery.html` by the development server.
+Six new readability comparisons precede the original 23 exploration screenshots.
 
 ## Recommendation
 
@@ -68,10 +70,21 @@ smaller windows. Preserve the fit-to-window model and measured panel reservation
    than persistent editing panels. A future document inspector should use the same
    viewport reservation contract. At a future explicit zoom, preserve zoom and pan
    minimally rather than automatically refitting on every popup.
-7. **Alpha transparency and decorative grids are different.** A whole checkerboard is
-   provided as a challenger; the proposed default is a fine coordinate grid. Before
-   production adoption, test pale/transparent content and add an image-bound alpha
-   substrate option if users cannot reliably judge image boundaries.
+7. **Alpha transparency and decorative grids are different.** Full-window checkerboard
+   is now a grid choice; optional neutral and local-checker image backing help judge
+   pale/dark content without adding padding. Canvas only remains the immersive default.
+   A shared 16-source-pixel guide follows the median display scale, but cannot align with
+   every independently fitted image. Mean scaling is available for comparison.
+
+## Readability refinement
+
+Keep Floating islands, but make tiny image actions and captions more opaque than the
+large bottom groups. Hover/focus now strengthens the action backing instead of fading it.
+Captions have compact neutral substrates and opaque metadata. The canvas grid uses
+16 source-pixel cells at the typical image scale, updating as images refit; dense
+photographic grids group those intervals. Lines remains the initial pattern while the
+background choice is undecided. See the [readability research and implementation](2026-10-09-glass-readability.md)
+for Apple iOS 27 changes, user complaints, GlassKit guidance, contrast bounds and limits.
 
 ## Research and full project migration map
 
@@ -134,7 +147,7 @@ would make the experiment harder to assess.
 
 ## Validation
 
-Existing suite: **203 tests across 10 files pass** after prototype wiring. Browser geometry,
+Current suite: **208 tests across 11 files pass**, including five image-relative grid tests. Browser geometry,
 state checks, screenshot review and build results are recorded in `validation.md`.
 Desktop Chromium checks do not establish iOS Safari GPU performance or native Liquid Glass
 parity. No conversion algorithms or save encoders were changed.

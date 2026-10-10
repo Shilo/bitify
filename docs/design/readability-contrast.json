@@ -1,0 +1,12 @@
+{
+  "light": {
+    "normal_worst_case": 12.07,
+    "hover_focus": 11.49,
+    "pressed": 8.95
+  },
+  "dark": {
+    "normal_worst_case": 10.43,
+    "hover_focus": 8.78,
+    "pressed": 6.05
+  }
+}

@@ -38,3 +38,5 @@
 .prototype-review-options fieldset { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; border: 0; margin: 0; padding: 0; min-width: 0; }
 .prototype-review-options fieldset:disabled { opacity: .5; }
 @media (min-width: 621px) and (max-width: 850px) { .prototype-directions { grid-template-columns: repeat(2, 1fr); } }
+
+.prototype-grid-note { font-size: 12px; line-height: 1.6; max-width: 95ch; }

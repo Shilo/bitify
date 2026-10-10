@@ -1308,3 +1308,19 @@ The workspace remains mounted, preserving images, colors, style settings and com
 state. Designs remains available to switch back; grid/material options are disabled
 while viewing the old design. This comparison uses the prototype storage key and does
 not change ordinary app preferences. Reloading its URL opens the same design mode.
+
+Readability refinement: all new prototypes use one strongly tinted capsule for tile
+actions and a compact tinted caption substrate (13px names, 12px metadata). Hover,
+focus and press retain opaque ink and stronger backing. Fine-pointer caption allowance
+is now 35px and touch allowance 62px, superseding the initial exploration's values.
+The bottom control/popup materials are unchanged. Original design comparisons keep
+the approved default tile CSS and geometry.
+
+Canvas grid has Lines, Dots, Checkerboard and Off. Patterns use a 16-source-pixel cell
+scaled by the median CSS/source image scale; Average image selects the arithmetic mean.
+CanvasGrid observes the actual shared image box, including the empty example. Checker
+repeat tiles span two cells. Extremely fine intervals are grouped in powers of two to
+at least 8 CSS pixels, with the source spacing disclosed in Designs. This continuous
+pattern is a representative guide and cannot align every independently fitted image.
+Optional image backing is Canvas only (default), Quiet neutral or Local checkerboard.
+Backings/grid are presentation only and never change image pixels or exports.

@@ -2,10 +2,10 @@
   import { onMount } from 'svelte';
   const initialReview = new URLSearchParams(location.search).get('review') === 'open';
   let dialog;
-  let { mode = $bindable('dock') } = $props();
+  let { mode = $bindable('dock'), basis = $bindable('median'), metrics } = $props();
   let grid = $state('lines');
   let opaque = $state(false);
-  let alpha = $state(false);
+  let backing = $state('canvas');
   const directions = [
     { id: 'legacy', name: '00 / Old design', label: 'Current app', text: 'The existing solid dock, image backgrounds and Original/style switch. Compare using the same images and settings.' },
     { id: 'dock', name: '01 / Canvas dock', label: 'Grouped alternative', text: 'A quiet, continuous workspace. One glass control group, with editing panels that give the images room.' },
@@ -18,7 +18,7 @@
     else root.dataset.prototype = mode;
     root.dataset.grid = grid;
     root.dataset.opaque = String(opaque);
-    root.dataset.alpha = String(alpha);
+    root.dataset.imageBacking = backing;
     const params = new URLSearchParams(location.search);
     params.set('prototype', mode);
     history.replaceState(null, '', `${location.pathname}?${params}`);
@@ -50,11 +50,15 @@
   </div>
   <div class="prototype-review-options">
     <fieldset disabled={mode === 'legacy'}>
-    <label>Canvas grid<select bind:value={grid}><option value="lines">Fine lines</option><option value="dots">Dots</option><option value="off">Quiet / no grid</option></select></label>
+    <label>Canvas grid<select bind:value={grid}><option value="lines">Fine lines</option><option value="dots">Dots</option><option value="checker">Checkerboard</option><option value="off">Quiet / no grid</option></select></label>
     <label class="prototype-check"><input type="checkbox" bind:checked={opaque} />Solid controls</label>
-    <label class="prototype-check"><input type="checkbox" bind:checked={alpha} />Checkerboard comparison</label>
+    <label>Grid scale<select bind:value={basis}><option value="median">Typical image (median)</option><option value="mean">Average image</option></select></label>
+    <label>Image backing<select bind:value={backing}><option value="canvas">Canvas only</option><option value="quiet">Quiet neutral</option><option value="checker">Local checkerboard</option></select></label>
     </fieldset>
   </div>
+  {#if mode !== 'legacy'}
+    <p class="prototype-grid-note">16 source pixels per cell, scaled to the {basis === 'mean' ? 'average' : 'typical'} image: {Math.round(metrics.step * 10) / 10} screen px.{metrics.sourceCell > 16 ? ` At this zoom, spacing is ${metrics.sourceCell} source px, grouping 16px intervals to avoid a dense pattern.` : ''} A shared grid cannot align to every image in a mixed-size batch.</p>
+  {/if}
   <div class="prototype-samples"><span>Try a workspace</span><button class="btn" onclick={() => sample('single')}>One image</button><button class="btn" onclick={() => sample('batch')}>Six images</button><button class="btn" onclick={() => sample('stress')}>Many images</button><button class="btn" onclick={() => sample('empty')}>Empty</button></div>
   <p class="prototype-note">My recommendation: start with Floating islands. Keep related controls together, the background continuous, and text-heavy panels readable. Studio rail is the serious desktop alternative. GlassKit approximates the material; native iOS refraction and adaptive contrast are separate capabilities.</p>
   <div class="prototype-review-foot"><span>Exploratory worktree · local image processing</span><button class="btn primary" onclick={() => dialog.close()}>Explore this design</button></div>

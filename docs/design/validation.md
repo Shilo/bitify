@@ -4,7 +4,7 @@ October 9, 2026 · `codex/glasskit-prototypes` · GlassKit pinned to 1.22.2.
 
 ## Automated checks
 
-- `npm test`: 203 tests across 10 files pass after the prototype logic/layout changes.
+- `npm test`: 208 tests across 11 files pass, including five source-space grid tests.
 - `npm run build`: passes. Final styles are bundled through a single ordered
   `src/prototypes/foundation.css` so production extraction cannot reorder GlassKit's
   reset/defaults after Bitify's geometry rules.
@@ -59,7 +59,7 @@ handlers and unit coverage remain, but that is not an end-to-end clipboard valid
 
 ## Evidence and limitations
 
-23 screenshots and a contact sheet are in [mockups/](mockups/), browsable through
+29 screenshots and the original contact sheet are in [mockups/](mockups/), browsable through
 [gallery.html](gallery.html). GIF frames differ between captures. The in-app browser
 scales wide viewport previews to its panel, so narrow previews show fine grid details
 more clearly than downsampled desktop screenshots. Geometry values above come from DOM
@@ -120,3 +120,31 @@ physical-device test.
 - Opening `?prototype=legacy` directly initializes the same old interface with Designs
   available. The ordinary URL and its preference storage remain separate.
 - Production build passes. This refinement has not received physical touch/Safari checks.
+
+## Tile readability and image-relative grid refinement
+
+- Fixed a specificity conflict where the generic hover rule replaced the tile button's
+  backing with an almost transparent fill. Settled hover/focus fills are now opaque in
+  both themes; the surrounding action capsule remains 92% light / 94% dark.
+- Real pointer hover on Download accessories.png and keyboard focus on Download armor.png
+  were inspected through computed styles. Hover/focus fill alpha is 1, icon opacity is 1,
+  and caption foreground is opaque. The captions have the same stronger tint.
+- All three glass directions share the fix. Old design retains its transparent caption,
+  original image background, inset and view switch; no prototype grid remains there.
+- Checkerboard belongs to Canvas grid alongside Lines, Dots and Off. Pattern selection,
+  median/mean scaling, neutral backing, local checker and solid controls were checked.
+- Six samples at desktop size yield 79.5 CSS px per 16 source pixels by median, 113.6 by
+  mean; at 390x844 the median is 40.75. Checker repeat size is exactly twice the cell.
+  Resizing, changing direction, empty example and opening panels update scale.
+- 320x568 Floating islands with Style open has no horizontal overflow. The readable
+  caption clears the panel; grid spacing changes from 68.25 to 48 CSS px after refitting.
+  This is a fine-pointer viewport check, not a physical touch/Safari check.
+- Solid controls with grid Off yields no background pattern, opaque caption/actions and
+  no action blur. Keyboard focus rings stay inside the predictable action backing.
+- Computed worst-background contrast bounds for caption/normal icons are 12.07:1 light
+  and 10.43:1 dark; hover/focus 11.49:1 and 8.78:1; press 8.95:1 and 6.05:1. These are
+  declared-color calculations, not a whole-app accessibility certification. See
+  [research](2026-10-09-glass-readability.md) and [raw values](readability-contrast.json).
+- Six new browser screenshots cover dark dots, light lines, full-window checker, neutral
+  backing, local checker and phone checker. Earlier gallery images are marked as archives.
+  The temporary viewport override was reset after checking.

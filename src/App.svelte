@@ -9,6 +9,7 @@
   import { on } from 'svelte/events';
   import { onMount } from 'svelte';
   import PrototypeReview from './prototypes/PrototypeReview.svelte';
+  import CanvasGrid from './prototypes/CanvasGrid.svelte';
   import Dock from './Dock.svelte';
   import Tile from './Tile.svelte';
   import PixelIcon from './PixelIcon.svelte';
@@ -21,6 +22,8 @@
   // svelte-ignore state_referenced_locally
   let design = $state(initialDesign);
   const glass = $derived(prototype && design !== 'legacy');
+  let gridBasis = $state('median');
+  let gridMetrics = $state({ step: 32, sourceCell: 16, scale: 2 });
   // The entry fixes this prop for the lifetime of the mounted workspace.
   // svelte-ignore state_referenced_locally
   const storageKey = prototype ? 'bitify-glass-prototypes' : 'bitify';
@@ -105,7 +108,7 @@
   const noHover = matchMedia('(hover: none)');
   let noHoverMatches = $state(noHover.matches);
   noHover.addEventListener('change', e => (noHoverMatches = e.matches));
-  const captionHeight = $derived(noHoverMatches ? (glass ? 56 : 48) : 27);
+  const captionHeight = $derived(noHoverMatches ? (glass ? 62 : 48) : (glass ? 35 : 27));
   const layout = $derived(
     fitGrid(items.length, wallWidth, wallHeight, {
       gap: glass ? 12 : 16,
@@ -542,7 +545,7 @@
 <header class="bar" class:glass-nav={glass}>
   <span class="mark">Bitify</span>
   <span class="count">{items.length} image{items.length === 1 ? '' : 's'}</span>
-  {#if prototype}<PrototypeReview bind:mode={design} />{/if}
+  {#if prototype}<PrototypeReview bind:mode={design} bind:basis={gridBasis} metrics={gridMetrics} />{/if}
   <span class="grow"></span>
   {#if items.length}
     <button class="btn sm" class:glass-btn={glass} onclick={removeAll} aria-label="Remove all" use:tooltip={'Clear every image from the wall.'}><PixelIcon name="trash" /></button>
@@ -591,6 +594,8 @@
     </div>
   </div>
 {/if}
+
+{#if glass}<CanvasGrid {items} {example} basis={gridBasis} bind:metrics={gridMetrics} />{/if}
 
 <Dock prototype={glass} bind:first bind:second bind:none bind:style bind:settings bind:showOriginal bind:dragging {autos} {soft} count={items.length} onsaveall={saveEverything} />
 
