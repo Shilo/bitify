@@ -1692,3 +1692,6 @@ Preview dismissal and Space comparison: a quick stationary primary-pointer click
 
 
 Concise Help correction: use the static original logo.png. Remove Close Preview, Toggle conversion and Compare temporarily rows, plus all appended explanatory paragraphs. Keep concise Add, palette/style navigation, Style settings, Save, Copy, Preview and Remove controls; Preview follows Copy on both input modes. Restore short shortcut cells rather than prose instructions and the original 420px dialog maximum. Retain responsive wrapping to prevent overflow. This supersedes the expanded Help audit presentation; actual interactions are unchanged.
+
+
+Help wording refinement: Add replaces Add images within Help. Palette instructions read “Pick one or two colors, or a preset.” Save instructions read “Download or copy images.” Combine Save and Copy into one control row with both icons and the existing Ctrl/Cmd+C shortcut. Preview image follows it and shows only Click/Tap Image, with Enter on desktop. Other Help controls remain unchanged.

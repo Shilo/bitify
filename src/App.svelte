@@ -730,10 +730,10 @@
       </div>
     </header>
     <ol>
-      <li><PixelIcon name="import" /><b>Add images</b>{touch ? 'Choose images.' : 'Choose, drop or paste images.'}</li>
-      <li><PixelIcon name="grid" /><b>Palette</b>Pick two colors, or a preset. One of them can be None, for a see-through image.</li>
+      <li><PixelIcon name="import" /><b>Add</b>{touch ? 'Choose images.' : 'Choose, drop or paste images.'}</li>
+      <li><PixelIcon name="grid" /><b>Palette</b>Pick one or two colors, or a preset.</li>
       <li><PixelIcon name="sliders" /><b>Style</b>Pick an effect. Tune its settings.</li>
-      <li><PixelIcon name="save" /><b>Save</b>Save converted images as PNG or GIF, or copy a still image.</li>
+      <li><PixelIcon name="save" /><b>Save</b>Download or copy images.</li>
     </ol>
     <table>
       <thead>
@@ -744,22 +744,20 @@
       </thead>
       <tbody>
         {#if touch}
-          <tr><th>Add images</th><td><kbd>Tap</kbd> <kbd><PixelIcon name="import" /></kbd></td></tr>
+          <tr><th>Add</th><td><kbd>Tap</kbd> <kbd><PixelIcon name="import" /></kbd></td></tr>
           <tr><th>Next palette</th><td><kbd>Swipe</kbd> <kbd>←</kbd> <kbd>→</kbd></td></tr>
           <tr><th>Next style</th><td><kbd>Swipe</kbd> <kbd>↑</kbd> <kbd>↓</kbd></td></tr>
           <tr><th>Style settings</th><td><kbd>Tap</kbd> <kbd><PixelIcon name="sliders" /></kbd></td></tr>
-          <tr><th>Save image</th><td><kbd><PixelIcon name="more" /></kbd> → <kbd><PixelIcon name="save" /></kbd></td></tr>
-          <tr><th>Copy image</th><td><kbd><PixelIcon name="more" /></kbd> → <kbd><PixelIcon name="copy" /></kbd></td></tr>
-          <tr><th>Preview</th><td><kbd>Tap</kbd> <kbd>Image</kbd> or <kbd><PixelIcon name="more" /></kbd> → <kbd><PixelIcon name="expand" /></kbd></td></tr>
+          <tr><th>Save or copy image</th><td><kbd><PixelIcon name="more" /></kbd> → <kbd><PixelIcon name="save" /></kbd> <kbd><PixelIcon name="copy" /></kbd></td></tr>
+          <tr><th>Preview image</th><td><kbd>Tap</kbd> <kbd>Image</kbd></td></tr>
           <tr><th>Remove image</th><td><kbd><PixelIcon name="more" /></kbd> → <kbd><PixelIcon name="trash" /></kbd></td></tr>
         {:else}
-          <tr><th>Add images</th><td><kbd>Click</kbd> <kbd><PixelIcon name="import" /></kbd> or <kbd>Drop</kbd></td><td><kbd>{mod}</kbd> <kbd>V</kbd></td></tr>
+          <tr><th>Add</th><td><kbd>Click</kbd> <kbd><PixelIcon name="import" /></kbd> or <kbd>Drop</kbd></td><td><kbd>{mod}</kbd> <kbd>V</kbd></td></tr>
           <tr><th>Next palette</th><td><kbd>Shift</kbd> <kbd>Scroll</kbd></td><td><kbd>←</kbd> <kbd>→</kbd></td></tr>
           <tr><th>Next style</th><td><kbd>Scroll</kbd></td><td><kbd>↑</kbd> <kbd>↓</kbd></td></tr>
           <tr><th>Style settings</th><td><kbd>Click</kbd> <kbd><PixelIcon name="sliders" /></kbd></td><td>—</td></tr>
-          <tr><th>Save image</th><td><kbd>Click</kbd> <kbd><PixelIcon name="save" /></kbd></td><td>—</td></tr>
-          <tr><th>Copy image</th><td><kbd>Click</kbd> <kbd><PixelIcon name="copy" /></kbd></td><td><kbd>{mod}</kbd> <kbd>C</kbd></td></tr>
-          <tr><th>Preview</th><td><kbd>Click</kbd> <kbd>Image</kbd> or <kbd><PixelIcon name="expand" /></kbd></td><td><kbd>Enter</kbd></td></tr>
+          <tr><th>Save or copy image</th><td><kbd>Click</kbd> <kbd><PixelIcon name="save" /></kbd> <kbd><PixelIcon name="copy" /></kbd></td><td><kbd>{mod}</kbd> <kbd>C</kbd></td></tr>
+          <tr><th>Preview image</th><td><kbd>Click</kbd> <kbd>Image</kbd></td><td><kbd>Enter</kbd></td></tr>
           <tr><th>Remove image</th><td><kbd>Click</kbd> <kbd><PixelIcon name="trash" /></kbd></td><td>—</td></tr>
         {/if}
       </tbody>
