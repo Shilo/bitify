@@ -6,45 +6,63 @@
   import { tooltip } from './lib/tooltip.js';
   import { imageGesture, IMAGE_HOLD_MS } from './lib/image-gesture.js';
 
-  // `flipped` true means the wall is showing originals. Holding the tile shows the other version.
+  // `flipped` true means originals are visible. App-managed comparison updates
+  // that same value and the dock toggle; standalone previews use a local hold.
   // Without `onremove` the tile is a preview only and has no buttons.
   // `set` is the style's settings. `budget` is set while one of their sliders is being dragged:
   // the milliseconds this tile may take to convert its image after each move.
-  let { item, first, second, style, set, flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onsave, onremove, onopen } = $props();
+  let { item, first, second, style, set, flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onsave, onremove, onopen, onactivate, activationLabel, oncompare } = $props();
   let held = $state(false);
   let holdTimer;
   let clickReady = false;
   const gesture = imageGesture();
 
+  function hold(active) {
+    if (held === active) return;
+    held = active;
+    oncompare?.(active, item.id);
+  }
+  function activate(trigger) { (onactivate ?? onopen)?.(item, trigger); }
+
   // A touch may be the start of a scroll or a swipe, so it only counts as a hold after a short
   // wait, and not at all if the finger has moved by then.
   function press(e) {
+    hold(false);
     clearTimeout(holdTimer);
     clickReady = false;
     gesture.press(e);
-    if (gesture.canHold()) holdTimer = setTimeout(() => { if (gesture.canHold()) held = true; }, IMAGE_HOLD_MS);
+    if (gesture.canHold()) holdTimer = setTimeout(() => { if (gesture.canHold()) hold(true); }, IMAGE_HOLD_MS);
   }
   function move(e) {
     gesture.move(e);
-    if (!gesture.canHold()) clearTimeout(holdTimer);
+    if (!gesture.canHold()) { clearTimeout(holdTimer); hold(false); }
   }
   function release(e) {
     // Also check the final position: a browser may omit intermediate moves.
     gesture.move(e);
     clickReady = gesture.release(e);
     clearTimeout(holdTimer);
-    held = false;
+    hold(false);
   }
   function cancel() {
-    gesture.cancel(); clearTimeout(holdTimer); held = false; clickReady = false;
+    gesture.cancel(); clearTimeout(holdTimer); hold(false); clickReady = false;
   }
   function keydown(e) {
     if (!['Enter', ' '].includes(e.key)) return;
     e.preventDefault(); e.stopPropagation();
-    if (onopen) { if (!e.repeat) onopen(item, e.currentTarget); }
-    else if (e.key === ' ') held = true;
+    if (e.key === ' ') hold(true);
+    else if (!e.repeat) activate(e.currentTarget);
   }
-  $effect(() => () => clearTimeout(holdTimer));
+  $effect(() => {
+    const hidden = () => { if (document.hidden) cancel(); };
+    window.addEventListener('blur', cancel);
+    document.addEventListener('visibilitychange', hidden);
+    return () => {
+      cancel();
+      window.removeEventListener('blur', cancel);
+      document.removeEventListener('visibilitychange', hidden);
+    };
+  });
 
   // An animation has `frames`; a still image is treated as a single frame.
   const frames = $derived(item.frames ?? [item]);
@@ -86,7 +104,7 @@
   const pixels = $derived.by(() => {
     if (!mw) return null;
     const frame = frames[at];
-    if (flipped !== held) return (originals[at] ??= mw < item.img.w ? new ImageData(shrink(frame.original, mw, mh), mw) : frame.original);
+    if (oncompare ? flipped : flipped !== held) return (originals[at] ??= mw < item.img.w ? new ImageData(shrink(frame.original, mw, mh), mw) : frame.original);
     if (!masks[at]) {
       // Stencil's first conversion of an image walks all of it, once. That is not the pace of a conversion, so it is done before the clock starts.
       if (style === 'stencil') spritesOf(frame.img);
@@ -112,11 +130,11 @@
     class="art"
     style:aspect-ratio={aspect}
     class:held
-    aria-label={onopen ? `Open ${item.name} in full screen` : `Hold to compare ${item.name}`}
-    aria-haspopup={onopen ? 'dialog' : undefined}
+    aria-label={activationLabel ?? (onopen ? `Open ${item.name} in full screen` : `Hold to compare ${item.name}`)}
+    aria-haspopup={onopen && !onactivate ? 'dialog' : undefined}
     onkeydown={keydown}
-    onkeyup={e => { if (e.key === ' ') held = false; }}
-    onclick={e => { if (!e.detail || clickReady) onopen?.(item, e.currentTarget); clickReady = false; }}
+    onkeyup={e => { if (e.key === ' ') { e.preventDefault(); e.stopPropagation(); hold(false); } }}
+    onclick={e => { if (!e.detail || clickReady) activate(e.currentTarget); clickReady = false; }}
     onpointerdown={press}
     onpointermove={move}
     onpointerup={release}
