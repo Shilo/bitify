@@ -1680,3 +1680,6 @@ Image action order and caption activation: desktop actions order Save, Copy, Pre
 
 
 Desktop divider correction: restore the original vertical extent; spacing belongs horizontally between Preview and Remove. A 6px additional gap puts the theme-token separator between those targets without changing button sizes. Compact capsules retain two-row packing.
+
+
+Settings scroll fades: gradient masks clear the first 8px and fade chips through 28px beneath each arrow without reserving layout width. The glass panel remains continuous instead of acquiring opaque edge patches. Indicators appear only on overflowing sides and do not intercept input; forced colors keep native system-colored arrows.

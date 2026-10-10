@@ -65,3 +65,25 @@
 }
 
 
+
+/* Fade the settings themselves before an overflow arrow, preserving the panel's
+   continuous glass material. The 8px clear edge protects arrow ink; the fade adds
+   no padding and does not narrow the scroll viewport. */
+:root .dock .setbox::before, :root .dock .setbox::after {
+  background: none; color: var(--gl-color-text);
+}
+:root .dock .setbox.more-left .sets {
+  -webkit-mask-image: linear-gradient(to right,transparent 8px,#000 28px);
+  mask-image: linear-gradient(to right,transparent 8px,#000 28px);
+}
+:root .dock .setbox.more-right .sets {
+  -webkit-mask-image: linear-gradient(to left,transparent 8px,#000 28px);
+  mask-image: linear-gradient(to left,transparent 8px,#000 28px);
+}
+:root .dock .setbox.more-left.more-right .sets {
+  -webkit-mask-image: linear-gradient(to right,transparent 8px,#000 28px,#000 calc(100% - 28px),transparent calc(100% - 8px));
+  mask-image: linear-gradient(to right,transparent 8px,#000 28px,#000 calc(100% - 28px),transparent calc(100% - 8px));
+}
+@media (forced-colors: active) {
+  :root .dock .setbox::before, :root .dock .setbox::after { color: CanvasText; }
+}
