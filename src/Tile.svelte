@@ -13,12 +13,14 @@
   let { item, first, second, style, set, flipped, budget = 0, inset = 8, onshare, oncopy, onsave, onremove, onopen } = $props();
   let held = $state(false);
   let holdTimer;
+  let clickReady = false;
   const gesture = imageGesture();
 
   // A touch may be the start of a scroll or a swipe, so it only counts as a hold after a short
   // wait, and not at all if the finger has moved by then.
   function press(e) {
     clearTimeout(holdTimer);
+    clickReady = false;
     gesture.press(e);
     if (gesture.canHold()) holdTimer = setTimeout(() => { if (gesture.canHold()) held = true; }, IMAGE_HOLD_MS);
   }
@@ -29,18 +31,18 @@
   function release(e) {
     // Also check the final position: a browser may omit intermediate moves.
     gesture.move(e);
-    const open = gesture.release(e);
+    clickReady = gesture.release(e);
     clearTimeout(holdTimer);
     held = false;
-    if (open) onopen?.(item, e.currentTarget);
   }
   function cancel() {
-    gesture.cancel(); clearTimeout(holdTimer); held = false;
+    gesture.cancel(); clearTimeout(holdTimer); held = false; clickReady = false;
   }
   function keydown(e) {
-    if (!onopen || !['Enter', ' '].includes(e.key)) return;
+    if (!['Enter', ' '].includes(e.key)) return;
     e.preventDefault(); e.stopPropagation();
-    if (!e.repeat) onopen(item, e.currentTarget);
+    if (onopen) { if (!e.repeat) onopen(item, e.currentTarget); }
+    else if (e.key === ' ') held = true;
   }
   $effect(() => () => clearTimeout(holdTimer));
 
@@ -103,15 +105,15 @@
 </script>
 
 <figure class="tile">
-  <div
+  <button
+    type="button"
     class="art"
     class:held
-    role={onopen ? 'button' : 'presentation'}
-    tabindex={onopen ? 0 : undefined}
-    aria-label={onopen ? `Open ${item.name} in full screen` : undefined}
+    aria-label={onopen ? `Open ${item.name} in full screen` : `Hold to compare ${item.name}`}
     aria-haspopup={onopen ? 'dialog' : undefined}
     onkeydown={keydown}
-    onclick={e => { if (!e.detail) onopen?.(item, e.currentTarget); }}
+    onkeyup={e => { if (e.key === ' ') held = false; }}
+    onclick={e => { if (!e.detail || clickReady) onopen?.(item, e.currentTarget); clickReady = false; }}
     onpointerdown={press}
     onpointermove={move}
     onpointerup={release}
@@ -121,7 +123,7 @@
     bind:clientWidth={box}
   >
     {#if pixels}<Pixels {pixels} />{/if}
-  </div>
+  </button>
   {#if onremove}
     <div class="acts">
       <!-- app.css shows Share on touch screens and Copy and Download everywhere else -->

@@ -1,5 +1,6 @@
 /* The root checker remains continuous, with a cell corner on the first source image. */
 :root { background-position: var(--canvas-grid-x,0px) var(--canvas-grid-y,0px); }
+:root button.art { display: block; width: 100%; padding: 0; border: 0; font: inherit; color: inherit; }
 
 /* Keep the scrolling surface all the way to the edge of the window. Its measured
    probe and trailing space still fit/rest the last image above editing islands. */
