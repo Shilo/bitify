@@ -2,7 +2,6 @@
   import Tile from './Tile.svelte';
   import PixelIcon from './PixelIcon.svelte';
   import { tooltip } from './lib/tooltip.js';
-  import { IMAGE_INSET } from './lib/workspace.js';
   import { fitViewerImage } from './lib/viewer-layout.js';
   let { item, first, second, style, set, flipped = false, onsave, oncopy, onclose, busy = '', message = '' } = $props();
   let dialog, closeButton;
@@ -10,7 +9,7 @@
   let headerHeight = $state(0);
   let compare = $state(false), spaceHeld = $state(false), imageHeld = $state(false);
   const originalVisible = $derived((flipped !== compare) !== (spaceHeld || imageHeld));
-  const fit = $derived(fitViewerImage(item.img.w, item.img.h, width, height, IMAGE_INSET));
+  const fit = $derived(fitViewerImage(item.img.w, item.img.h, width, height, 0));
   $effect(() => { dialog.showModal(); closeButton.focus(); });
   $effect(() => {
     const clear = () => { spaceHeld = false; imageHeld = false; };
@@ -38,13 +37,13 @@
         <PixelIcon name="swap" />
       </button>
       {#if oncopy}<button class="btn glass-btn icon-only" onclick={oncopy} aria-label="Copy image" use:tooltip={'Copy this image as a PNG.'}><PixelIcon name="copy" /></button>{/if}
-      {#if onsave}<button class="btn glass-btn icon-only" onclick={onsave} aria-label="Export image" use:tooltip={'Export this image at its original size.'}><PixelIcon name="save" /></button>{/if}
+      {#if onsave}<button class="btn glass-btn icon-only" onclick={onsave} aria-label="Save image" use:tooltip={'Save this image at its original size.'}><PixelIcon name="save" /></button>{/if}
     </div>
     <button class="btn glass-btn icon-only viewer-close" bind:this={closeButton} onclick={() => dialog.close()} aria-label="Close full screen" use:tooltip={'Close full screen.'}><PixelIcon name="x" /></button>
   </header>
   <div class="viewer-art" bind:clientWidth={width} bind:clientHeight={height}>
     <div class="viewer-tile" style:width="{fit.width}px">
-      <Tile {item} {first} {second} {style} {set} flipped={originalVisible} oncompare={active => (imageHeld = active)} inset={IMAGE_INSET} aspect={fit.width / fit.height} />
+      <Tile {item} {first} {second} {style} {set} flipped={originalVisible} oncompare={active => (imageHeld = active)} inset={0} aspect={fit.width / fit.height} />
     </div>
   </div>
   <div class="glass-toast viewer-toast" class:is-visible={!!busy || !!message}
