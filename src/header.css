@@ -59,3 +59,5 @@
   :root:has(.dock .panel) .onboarding { padding-block: 6px; }
   :root:has(.dock .panel) .onboarding p { display: none; }
 }
+/* Metadata remains separate and readable beside the centered example. */
+:root .empty .cap { gap: 6px; }

@@ -1582,3 +1582,6 @@ Review corrections: smooth Lucide outlines override the historical pixel-icon ed
 snapping. Style Reset and the More menu's Reset use GlassKit semantic error ink;
 style Reset borders use the matching error border token. The old hardcoded reset
 palette is superseded, with system button colors in forced-color mode.
+
+The empty example caption retains a 6px gap between its name and pixel dimensions
+on touch screens, rather than inheriting the dense stacked-tile caption spacing.
