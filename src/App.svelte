@@ -649,7 +649,7 @@
       sheet.close();
       items = items.filter(i => i !== item);
       await tick();
-      (document.querySelector('.tile-share') ?? document.querySelector('.import-action:not(.awaiting-import *)') ?? document.querySelector('.art'))?.focus();
+      (document.querySelector('.tile-share') ?? document.querySelector('.file-actions:not(.awaiting-import) .import-action') ?? document.querySelector('.art'))?.focus();
     }}><PixelIcon name="trash" />Remove</button>
     <button class="btn glass-btn sheet-cancel">Cancel</button>
   {/if}
@@ -732,8 +732,8 @@
           <!-- on a phone the Style panel shows every setting of the style, as chips -->
           <tr><th>Style settings</th><td><kbd>Touch</kbd> <kbd><PixelIcon name="sliders" /></kbd></td></tr>
           <tr><th>See original image</th><td><kbd>Hold</kbd> <kbd>Image</kbd></td></tr>
-          <!-- on touch screens a tile's Download and Copy are behind its Share button -->
-          <tr><th>Save or copy image</th><td><kbd>Touch</kbd> <kbd><PixelIcon name="share" /></kbd></td></tr>
+          <!-- Touch image actions live in the caption More button. -->
+          <tr><th>Save or copy image</th><td><kbd>Touch</kbd> <kbd><PixelIcon name="more" /></kbd></td></tr>
         {:else}
           <tr><th>Add images</th><td><kbd>Click</kbd> <kbd><PixelIcon name="import" /></kbd> or <kbd>Drop</kbd></td><td><kbd>{mod}</kbd> <kbd>V</kbd></td></tr>
           <tr><th>Next palette</th><td><kbd>Shift</kbd> <kbd>Scroll</kbd></td><td><kbd>←</kbd> <kbd>→</kbd></td></tr>

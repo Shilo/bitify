@@ -65,3 +65,16 @@ The previous 720px stack grouped controls too coarsely and forced an unnecessary
 Independent implementation/review agent wrote eight focused packing tests and reviewed the parent integration; no actionable finding remained. Full suite: 250 tests in 18 files pass; production build passes. Browser verification covered empty desktop widths 320,390,410,600,739,1075; Palette/Style/More opening and closing; production touch fixture with a loaded GIF and Remove/Add/Save visible. At410px only Palette is on row1, while Style and both right action units share row2. All four retain56px shell height, with no overlaps or horizontal overflow at supported phone widths. Touch verification uses a media-query fixture rather than physical hardware.
 
 ![Independent two-row workspace](C:/Users/shilo/.codex/visualizations/2026/10/09/01a11fbc-7f61-7df0-a43f-50e5ca11310a/task25-independent-two-rows.png)
+
+
+## Compact rows and mobile interaction follow-up
+
+1. One row remains first priority. If Palette alone moving up still requires three rows, More moves beside Palette before allocating a third row. Verified loaded production touch widths320,360,390,410,600,844,1075:360/390 usePalette+More aboveStyle+files;410 keepsMore below;844/1075 useone row. At320 three rows remain necessary because152pxStyle+148pxfilecapsule+8pxgap exceeds296px available. More dialog follows the measured trigger row with safe-area and max-height protection.
+2. Add is icon-only and its file capsule is hidden while empty. Example activation opened the picker successfully in the production touch fixture; original drop/paste/background entry paths remain.
+3. Mobile More now lives inside the full-width52px image caption with a44px target. Save/Copy/Remove sheet order remains. The uniform62px mobile caption allowance replaces obsolete95px stacking. Help uses the same More glyph.
+4. Both destructive confirmations useGlassKit error-surface/error-on-surface tokens. Cancel preserved imported images and settings in browser checks.
+5. Comparison hold delay increases150→450ms. Deliberate200–449ms taps pass helper tests; pointerleave after release preserves pending clicks. Example Add and loaded fullscreen activation passed production touch-fixture checks. Native physicaltouch/pointer sequencing remains a hardware test limitation.
+
+Two subagents implemented packing/caption changes and reviewed integration. One valid More safe-area finding was fixed in4e2ff80; final review found no actionable issue. Full suite256tests/18files and productionbuildpass; production browser has no errors/warnings.
+
+![Compact loaded mobile workspace](C:/Users/shilo/.codex/visualizations/2026/10/09/01a11fbc-7f61-7df0-a43f-50e5ca11310a/compact-workspace-mobile.png)
