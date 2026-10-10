@@ -745,7 +745,7 @@
         {#if touch}
           <tr><th>Add images</th><td><kbd>Tap</kbd> <kbd><PixelIcon name="import" /></kbd></td></tr>
           <tr><th>Preview</th><td><kbd>Tap</kbd> image or title, or <kbd><PixelIcon name="more" /></kbd> → <kbd><PixelIcon name="expand" /></kbd></td></tr>
-          <tr><th>Close preview</th><td><kbd>Tap</kbd> <kbd><PixelIcon name="x" /></kbd></td></tr>
+          <tr><th>Close preview</th><td><kbd>Tap</kbd> image, background or <kbd><PixelIcon name="x" /></kbd></td></tr>
           <tr><th>Next palette</th><td><kbd>Swipe</kbd> <kbd>←</kbd> <kbd>→</kbd></td></tr>
           <tr><th>Next style</th><td><kbd>Swipe</kbd> <kbd>↑</kbd> <kbd>↓</kbd></td></tr>
           <tr><th>Style settings</th><td><kbd>Tap</kbd> <kbd><PixelIcon name="sliders" /></kbd></td></tr>
@@ -757,7 +757,7 @@
         {:else}
           <tr><th>Add images</th><td><kbd>Click</kbd> <kbd><PixelIcon name="import" /></kbd> or <kbd>Drop</kbd></td><td><kbd>{mod}</kbd> <kbd>V</kbd></td></tr>
           <tr><th>Preview</th><td>Click image, title or <kbd><PixelIcon name="expand" /></kbd></td><td><kbd>Enter</kbd> on image or title</td></tr>
-          <tr><th>Close preview</th><td><kbd>Click</kbd> <kbd><PixelIcon name="x" /></kbd></td><td><kbd>Esc</kbd></td></tr>
+          <tr><th>Close preview</th><td><kbd>Click</kbd> image, background or <kbd><PixelIcon name="x" /></kbd></td><td><kbd>Esc</kbd></td></tr>
           <tr><th>Next palette</th><td><kbd>Shift</kbd>/<kbd>Ctrl</kbd> <kbd>Scroll</kbd> or sideways scroll</td><td><kbd>←</kbd> <kbd>→</kbd></td></tr>
           <tr><th>Next style</th><td><kbd>Scroll</kbd></td><td><kbd>↑</kbd> <kbd>↓</kbd></td></tr>
           <tr><th>Style settings</th><td><kbd><PixelIcon name="sliders" /></kbd>, then <kbd><PixelIcon name="more" /></kbd> if shown</td><td>—</td></tr>
@@ -771,7 +771,7 @@
     </table>
     <div class="help-notes">
       <p>{touch ? 'Tap the empty canvas or example title to add images.' : 'Choose files with Add images, or drop or paste them onto the canvas. Copy’s keyboard shortcut copies the first image when no text is selected or being edited.'}</p>
-      <p>Holding temporarily switches the original and converted view; releasing restores it. {touch ? '' : 'Space compares when other buttons or text fields do not have focus. ' }Use the style-name button to keep conversion on or off.</p>
+      <p>Holding temporarily switches the original and converted view; releasing restores it. {touch ? '' : 'On the canvas, Space compares when other buttons or text fields do not have focus. In Preview, Space compares even when bottom controls have focus. ' }Use the style-name button to keep conversion on or off.</p>
       <p>Scroll or swipe shortcuts work on the canvas when that direction does not scroll. {touch ? '' : 'Hold Ctrl while scrolling to change palettes even on a scrolling canvas. Arrow keys keep their normal behavior in fields and scrollable areas. ' }Style, palette and Copy shortcuts pause while a dialog is open.</p>
       <p>Save and Copy use the converted image. With multiple images, Save all creates a ZIP. Removing images keeps the original files on your device.</p>
     </div>
