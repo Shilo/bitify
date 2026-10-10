@@ -4,32 +4,45 @@
   import Pixels from './Pixels.svelte';
   import PixelIcon from './PixelIcon.svelte';
   import { tooltip } from './lib/tooltip.js';
+  import { imageGesture, IMAGE_HOLD_MS } from './lib/image-gesture.js';
 
   // `flipped` true means the wall is showing originals. Holding the tile shows the other version.
   // Without `onremove` the tile is a preview only and has no buttons.
   // `set` is the style's settings. `budget` is set while one of their sliders is being dragged:
   // the milliseconds this tile may take to convert its image after each move.
-  let { item, first, second, style, set, flipped, budget = 0, inset = 8, onshare, oncopy, onsave, onremove } = $props();
+  let { item, first, second, style, set, flipped, budget = 0, inset = 8, onshare, oncopy, onsave, onremove, onopen } = $props();
   let held = $state(false);
-  let holdTimer, downX = 0, downY = 0;
+  let holdTimer;
+  const gesture = imageGesture();
 
   // A touch may be the start of a scroll or a swipe, so it only counts as a hold after a short
   // wait, and not at all if the finger has moved by then.
   function press(e) {
-    if (e.pointerType === 'mouse') held = true;
-    else {
-      downX = e.clientX;
-      downY = e.clientY;
-      holdTimer = setTimeout(() => (held = true), 150);
-    }
+    clearTimeout(holdTimer);
+    gesture.press(e);
+    if (gesture.canHold()) holdTimer = setTimeout(() => { if (gesture.canHold()) held = true; }, IMAGE_HOLD_MS);
   }
   function move(e) {
-    if (!held && Math.hypot(e.clientX - downX, e.clientY - downY) > 8) clearTimeout(holdTimer);
+    gesture.move(e);
+    if (!gesture.canHold()) clearTimeout(holdTimer);
   }
-  function release() {
+  function release(e) {
+    // Also check the final position: a browser may omit intermediate moves.
+    gesture.move(e);
+    const open = gesture.release(e);
     clearTimeout(holdTimer);
     held = false;
+    if (open) onopen?.(item, e.currentTarget);
   }
+  function cancel() {
+    gesture.cancel(); clearTimeout(holdTimer); held = false;
+  }
+  function keydown(e) {
+    if (!onopen || !['Enter', ' '].includes(e.key)) return;
+    e.preventDefault(); e.stopPropagation();
+    if (!e.repeat) onopen(item, e.currentTarget);
+  }
+  $effect(() => () => clearTimeout(holdTimer));
 
   // An animation has `frames`; a still image is treated as a single frame.
   const frames = $derived(item.frames ?? [item]);
@@ -93,12 +106,17 @@
   <div
     class="art"
     class:held
-    role="presentation"
+    role={onopen ? 'button' : 'presentation'}
+    tabindex={onopen ? 0 : undefined}
+    aria-label={onopen ? `Open ${item.name} in full screen` : undefined}
+    aria-haspopup={onopen ? 'dialog' : undefined}
+    onkeydown={keydown}
+    onclick={e => { if (!e.detail) onopen?.(item, e.currentTarget); }}
     onpointerdown={press}
     onpointermove={move}
     onpointerup={release}
-    onpointerleave={release}
-    onpointercancel={release}
+    onpointerleave={cancel}
+    onpointercancel={cancel}
     oncontextmenu={e => e.preventDefault()}
     bind:clientWidth={box}
   >
@@ -110,7 +128,7 @@
       <button class="ib touch" onclick={onshare} aria-label="Share {item.name}" use:tooltip={'Copy or download this image.'}><PixelIcon name="share" /></button>
       <button class="ib mouse" onclick={oncopy} aria-label="Copy {item.name}" use:tooltip={'Copy this image to the clipboard as a PNG.'}><PixelIcon name="copy" /></button>
       <button class="ib mouse" onclick={onsave} aria-label="Download {item.name}" use:tooltip={'Save this image at its original size.'}><PixelIcon name="save" /></button>
-      <button class="ib" onclick={onremove} aria-label="Remove {item.name}" use:tooltip={'Remove this image from the wall.'}><PixelIcon name="x" /></button>
+      <button class="ib" onclick={onremove} aria-label="Remove {item.name}" use:tooltip={'Remove this image from the canvas.'}><PixelIcon name="trash" /></button>
     </div>
   {/if}
   <figcaption class="cap">
