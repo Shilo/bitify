@@ -659,9 +659,9 @@
 <dialog class="sheet glass-sheet" bind:this={sheet} aria-label="Image actions" onclick={() => sheet.close()}>
   {#if shared}
     <p class="name" use:tooltip={shared.name}>{shared.name}</p>
-    <button class="btn glass-btn" onclick={previewShared}><PixelIcon name="expand" />Preview</button>
     <button class="btn glass-btn glass-btn--primary" onclick={() => { const item = shared; sheet.close(); save(item); }}><PixelIcon name="save" />Save</button>
     <button class="btn glass-btn" onclick={() => { const item = shared; sheet.close(); copy(item); }}><PixelIcon name="copy" />Copy</button>
+    <button class="btn glass-btn" onclick={previewShared}><PixelIcon name="expand" />Preview</button>
     <button class="btn glass-btn danger" onclick={async () => {
       const item = shared;
       sheet.close();

@@ -95,7 +95,7 @@
 @media (hover: hover) {
   :root .tile .acts .ib.danger { position: relative; }
   :root .tile .acts .ib.danger::before {
-    content: ''; position: absolute; left: -3px; top: 25%; height: 50%; width: 1px;
+    content: ''; position: absolute; left: -3px; top: calc(25% + 2px); height: calc(50% - 4px); width: 1px;
     background: var(--gl-border-medium); pointer-events: none;
   }
 }

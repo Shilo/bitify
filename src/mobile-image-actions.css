@@ -1,8 +1,15 @@
 /* Touch metadata and More occupy one full-width title bar. Desktop is unchanged. */
 :root .caption-details { display: contents; }
+:root .tile .cap .caption-preview {
+  box-sizing: border-box; display: flex; align-items: baseline; flex: 1;
+  min-width: 0; gap: 6px; margin: 0; padding: 0; border: 0;
+  font: inherit; color: inherit; background: transparent; text-align: left; cursor: pointer;
+}
+:root .caption-preview .name { flex: 1; }
+:root .tile .cap .caption-preview:focus-visible { border-radius: 4px; outline-offset: 1px; }
 @media (hover: none) {
   :root .tile .cap.has-image-actions {
-    display: grid; grid-template-columns: minmax(0,1fr) 44px;
+    display: grid; grid-template-columns: minmax(0,1fr) 64px;
     grid-column: 1 / -1; grid-row: 2; align-items: center;
     width: 100%; min-height: 52px; gap: 6px;
   }
@@ -10,10 +17,19 @@
     display: flex; flex-direction: column; min-width: 0; gap: 0;
   }
   :root .tile .cap.has-image-actions .dim { margin-left: 0; }
+  :root .tile .cap .caption-preview {
+    grid-column: 1; grid-row: 1; align-items: stretch; align-self: stretch;
+    min-height: 44px;
+  }
   :root .tile .cap .tile-share {
+    position: relative; z-index: 1;
     grid-column: 2; grid-row: 1; align-self: center; justify-self: end;
     background: transparent; border-color: transparent; box-shadow: none;
     -webkit-backdrop-filter: none; backdrop-filter: none; transform: none;
+  }
+  /* The reserved 20px gutter belongs to More, not caption Preview. */
+  :root .tile .cap .tile-share::before {
+    content: ''; position: absolute; left: -20px; right: 0; top: -4px; bottom: -4px;
   }
   :root .tile .cap .tile-share:not(:disabled):is(:hover,:focus-visible,:active) {
     background: var(--gl-surface-4); box-shadow: none; transform: none;

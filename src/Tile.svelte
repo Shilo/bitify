@@ -158,9 +158,9 @@
   {#if onremove}
     <div class="acts">
       <!-- Desktop actions retain their readable capsule; touch actions live in the caption. -->
-      <button class="ib mouse" onclick={e => activate(e.currentTarget)} aria-label="Preview {item.name}" aria-haspopup="dialog" use:tooltip={'Preview this image.'}><PixelIcon name="expand" /></button>
-      <button class="ib mouse" onclick={oncopy} aria-label="Copy {item.name}" use:tooltip={'Copy this image to the clipboard as a PNG.'}><PixelIcon name="copy" /></button>
       <button class="ib mouse" onclick={onsave} aria-label="Save {item.name}" use:tooltip={'Save this image at its original size.'}><PixelIcon name="save" /></button>
+      <button class="ib mouse" onclick={oncopy} aria-label="Copy {item.name}" use:tooltip={'Copy this image to the clipboard as a PNG.'}><PixelIcon name="copy" /></button>
+      <button class="ib mouse" onclick={e => activate(e.currentTarget)} aria-label="Preview {item.name}" aria-haspopup="dialog" use:tooltip={'Preview this image.'}><PixelIcon name="expand" /></button>
       <button class="ib danger" onclick={onremove} aria-label="Remove {item.name}" use:tooltip={'Remove this image from the canvas.'}><PixelIcon name="trash" /></button>
     </div>
   {/if}
@@ -180,12 +180,21 @@
     </figcaption>
   {:else}
     <figcaption class="cap" class:has-image-actions={!!onremove}>
-      <span class="caption-details">
-        <span class="name" use:tooltip={item.name}>{item.name}</span>
-        <span class="dim">{item.img.w}<span class="by">×</span>{item.img.h}</span>
-      </span>
+      {#if onopen}
+        <button type="button" class="caption-preview" onclick={e => activate(e.currentTarget)} aria-label="Preview {item.name}" aria-haspopup="dialog">
+          <span class="caption-details">
+            <span class="name" use:tooltip={item.name}>{item.name}</span>
+            <span class="dim">{item.img.w}<span class="by">×</span>{item.img.h}</span>
+          </span>
+        </button>
+      {:else}
+        <span class="caption-details">
+          <span class="name" use:tooltip={item.name}>{item.name}</span>
+          <span class="dim">{item.img.w}<span class="by">×</span>{item.img.h}</span>
+        </span>
+      {/if}
       {#if onremove}
-        <button class="ib glass-btn tile-share" onclick={onshare} aria-label="Image actions for {item.name}" aria-haspopup="dialog" use:tooltip={'Preview, save, copy or remove this image.'}><PixelIcon name="more" /></button>
+        <button class="ib glass-btn tile-share" onclick={onshare} aria-label="Image actions for {item.name}" aria-haspopup="dialog" use:tooltip={'Save, copy, preview or remove this image.'}><PixelIcon name="more" /></button>
       {/if}
     </figcaption>
   {/if}

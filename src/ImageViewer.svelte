@@ -36,13 +36,13 @@
   onclose={() => { spaceHeld = false; onclose?.(); }} onkeydown={keydown} onkeyup={e => { if (e.code === 'Space') spaceHeld = false; }}>
   <nav class="viewer-workspace" aria-label="Preview controls">
     <div class="viewer-tools glass-card" role="group" aria-label="Image actions">
+      {#if onsave}<button class="btn glass-btn icon-only" onclick={onsave} aria-label="Save image" use:tooltip={'Save the converted image at its original size.'}><PixelIcon name="save" /></button>{/if}
+      {#if oncopy}<button class="btn glass-btn icon-only" onclick={oncopy} aria-label="Copy image" use:tooltip={'Copy the converted image as a PNG.'}><PixelIcon name="copy" /></button>{/if}
       <button class="btn glass-btn icon-only viewer-compare" aria-pressed={!originalVisible}
         aria-label={originalVisible ? 'Show converted image' : 'Show original image'}
         onclick={() => (converted = !converted)} use:tooltip={originalVisible ? 'Show the converted image.' : 'Show the original image.'}>
         <PixelIcon name="swap" />
       </button>
-      {#if oncopy}<button class="btn glass-btn icon-only" onclick={oncopy} aria-label="Copy image" use:tooltip={'Copy the converted image as a PNG.'}><PixelIcon name="copy" /></button>{/if}
-      {#if onsave}<button class="btn glass-btn icon-only" onclick={onsave} aria-label="Save image" use:tooltip={'Save the converted image at its original size.'}><PixelIcon name="save" /></button>{/if}
     </div>
     <button class="btn glass-btn icon-only viewer-close" bind:this={closeButton} onclick={() => dialog.close()} aria-label="Close preview" use:tooltip={'Close preview.'}><PixelIcon name="x" /></button>
   </nav>
