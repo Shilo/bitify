@@ -1585,3 +1585,5 @@ palette is superseded, with system button colors in forced-color mode.
 
 The empty example caption retains a 6px gap between its name and pixel dimensions
 on touch screens, rather than inheriting the dense stacked-tile caption spacing.
+
+Fullscreen feedback sits 8px below the viewer's measured header, including safe-area padding and phone toolbar wrapping. This keeps Copy/Export feedback from obscuring or intercepting the viewer's controls after responsive or font-size changes.

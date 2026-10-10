@@ -40,7 +40,7 @@
   min-width: var(--control-shell); min-height: var(--control-shell); padding: 0; border-radius: 50%;
 }
 :root .viewer-tools .glass-btn { transform: none; }
-:root .viewer-toast { --gl-toast-top: calc(env(safe-area-inset-top,0px) + 88px); }
+:root .viewer-toast { --gl-toast-top: calc(var(--viewer-header-space,80px) + 8px); }
 :root .viewer-art {
   flex: 1; min-height: 0; display: grid; place-items: center; overflow: auto;
   padding: 12px; padding-bottom: calc(env(safe-area-inset-bottom,0px) + 12px);

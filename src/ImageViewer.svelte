@@ -7,6 +7,7 @@
   let { item, first, second, style, set, flipped = false, onsave, oncopy, onclose, busy = '', message = '' } = $props();
   let dialog, closeButton;
   let width = $state(0), height = $state(0);
+  let headerHeight = $state(0);
   let compare = $state(false), spaceHeld = $state(false);
   const fit = $derived(fitViewerImage(item.img.w, item.img.h, width, height, IMAGE_INSET));
   $effect(() => { dialog.showModal(); closeButton.focus(); });
@@ -18,9 +19,9 @@
 
 <!-- A native top-layer dialog gives fullscreen image inspection without requiring
      browser fullscreen permission or leaving the app's keyboard focus unmanaged. -->
-<dialog class="image-viewer" bind:this={dialog} aria-labelledby="viewer-title"
+<dialog class="image-viewer" bind:this={dialog} aria-labelledby="viewer-title" style:--viewer-header-space="{headerHeight}px"
   onclose={onclose} onkeydown={keydown} onkeyup={e => { if (e.code === 'Space') spaceHeld = false; }}>
-  <header class="viewer-header">
+  <header class="viewer-header" bind:clientHeight={headerHeight}>
     <h2 id="viewer-title">{item.name}</h2>
     <div class="viewer-tools glass-card" role="group" aria-label="Image actions">
       <button class="btn glass-btn viewer-compare" aria-pressed={compare}
