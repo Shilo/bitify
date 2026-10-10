@@ -1474,3 +1474,15 @@ squares. Both sizes exceed the 44px web touch target, with no hit-area overlap.
 The view label is a 44px-high capsule inside its island. Panel content adapts to its
 settings rather than forcing complex popups into the toolbar height. More opens below
 the measured header. Existing image-action capsule sizing remains unchanged.
+
+
+### Import and export emphasis
+
+Empty state emphasizes Import in the header and the labeled Import images CTA.
+With images loaded, header Export becomes primary while Import becomes neutral.
+The action positions, dimensions and labels remain stable. Use GlassKit primary
+colors/gradient with the library's documented dark on-primary ink for orange contrast.
+Palette and Style remain neutral editing actions. Empty-state instructions are a
+static GlassKit status notice between subtitle and CTA; desktop mentions drop/paste,
+touch asks to import, and both say images stay on the device. The CTA and Help use
+the same import glyph as the header, with no plus glyph for file import.

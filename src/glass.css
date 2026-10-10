@@ -443,3 +443,26 @@
   :root .mark { font-size: 24px; }
   :root .brand { padding-inline: 6px; }
 }
+
+/* The current file-flow action uses GlassKit's primary gradient and documented dark ink. */
+:root :is(.bar .file-actions,.empty-text) .btn.glass-btn--primary,
+:root :is(.bar .file-actions,.empty-text) .btn.glass-btn--primary:not(:disabled):is(:hover,:focus-visible) {
+  --gl-color-on-primary: color-mix(in srgb,var(--gl-color-primary) 17%,#000);
+  --gl-icon-on-primary: var(--gl-color-on-primary);
+  background: linear-gradient(135deg,var(--gl-color-primary) 0%,var(--gl-color-primary-mid) 50%,var(--gl-color-primary-dark) 100%);
+  color: var(--gl-color-on-primary); border-color: var(--gl-border-warm);
+  box-shadow: var(--gl-shadow-btn-primary),var(--gl-inset-strong);
+}
+:root .empty .import-cta { box-sizing: border-box; height: var(--control-shell); min-height: var(--control-shell); padding: 0 20px; }
+:root .empty .import-note { box-sizing: border-box; max-width: 100%; }
+:root .empty .import-note p { color: var(--gl-color-text-muted); font-size: var(--gl-font-size-sm); line-height: 1.45; }
+@media (prefers-reduced-transparency: reduce) {
+  :root .import-note { background: var(--surface); -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+@media (forced-colors: active) {
+  :root .import-note { background: Canvas; color: CanvasText; border-color: ButtonText; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  :root .empty .import-note p { color: CanvasText; }
+  :root :is(.bar .file-actions,.empty-text) .btn.glass-btn--primary,
+  :root :is(.bar .file-actions,.empty-text) .btn.glass-btn--primary:not(:disabled):is(:hover,:focus-visible) { background: Highlight; color: HighlightText; border-color: Highlight; box-shadow: none; }
+  :root :is(.bar .file-actions,.empty-text) .btn.glass-btn--primary svg { fill: HighlightText; stroke: none; }
+}

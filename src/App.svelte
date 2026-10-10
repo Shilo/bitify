@@ -499,8 +499,8 @@
   <div class="brand"><span class="mark">Bitify</span></div>
   <span class="grow"></span>
   <div class="file-actions" role="group" aria-label="Import and export">
-    <button class="btn glass-btn icon-only" onclick={() => picker.click()} aria-label="Import images" use:tooltip={'Choose images from your device. Nothing is uploaded.'}><PixelIcon name="import" /></button>
-    <button class="btn glass-btn icon-only" disabled={!items.length} aria-label={items.length > 1 ? 'Export all images' : 'Export image'} use:tooltip={items.length > 1 ? 'Download every converted image in a ZIP archive.' : items.length ? 'Download the converted image at its original size.' : 'Import an image to enable export.'} onclick={saveEverything}><PixelIcon name="save" /></button>
+    <button class="btn glass-btn icon-only" class:glass-btn--primary={!items.length} onclick={() => picker.click()} aria-label="Import images" use:tooltip={'Choose images from your device. Nothing is uploaded.'}><PixelIcon name="import" /></button>
+    <button class="btn glass-btn icon-only" class:glass-btn--primary={!!items.length} disabled={!items.length} aria-label={items.length > 1 ? 'Export all images' : 'Export image'} use:tooltip={items.length > 1 ? 'Download every converted image in a ZIP archive.' : items.length ? 'Download the converted image at its original size.' : 'Import an image to enable export.'} onclick={saveEverything}><PixelIcon name="save" /></button>
   </div>
   {#if items.length}
     <button class="btn glass-btn icon-only danger header-clear" onclick={removeAll} aria-label="Remove all" use:tooltip={'Clear every image from the wall.'}><PixelIcon name="trash" /></button>
@@ -540,9 +540,11 @@
       <div class="empty-text">
         <h2>Pixel art in two colors</h2>
         <p>Instantly convert sprites and animated GIFs<br />to <span>1-bit</span> colors and styles.</p>
-        <button class="btn primary glass-btn" onclick={() => picker.click()}>
-          <svg class="plus-icon" aria-hidden="true" viewBox="0 0 16 16"><path d="M8 3v10M3 8h10" /></svg>
-          {touch ? 'Choose images' : 'Drop, paste or choose images'}
+        <div class="glass-status import-note">
+          <p>{touch ? 'Import images to begin.' : 'Drop or paste images here, or import from your device.'}<br />Images stay on your device.</p>
+        </div>
+        <button class="btn glass-btn glass-btn--primary import-cta" onclick={() => picker.click()}>
+          <PixelIcon name="import" />Import images
         </button>
       </div>
     </div>
@@ -604,10 +606,10 @@
       </div>
     </header>
     <ol>
-      <li><PixelIcon name="plus" /><b>Add</b>{touch ? 'Choose images.' : 'Drop, paste or choose images.'}</li>
+      <li><PixelIcon name="import" /><b>Import</b>{touch ? 'Choose images.' : 'Drop, paste or choose images.'}</li>
       <li><PixelIcon name="grid" /><b>Palette</b>Pick two colors, or a preset. One of them can be None, for a see-through image.</li>
       <li><PixelIcon name="sliders" /><b>Style</b>Pick effect, tune its settings.</li>
-      <li><PixelIcon name="save" /><b>Save</b>Download or copy images.</li>
+      <li><PixelIcon name="save" /><b>Export</b>Download or copy images.</li>
     </ol>
     <table>
       <thead>
@@ -618,7 +620,7 @@
       </thead>
       <tbody>
         {#if touch}
-          <tr><th>Add image</th><td><kbd>Touch</kbd> <kbd><PixelIcon name="plus" /></kbd></td></tr>
+          <tr><th>Import images</th><td><kbd>Touch</kbd> <kbd><PixelIcon name="import" /></kbd></td></tr>
           <tr><th>Next palette</th><td><kbd>Swipe</kbd> <kbd>←</kbd> <kbd>→</kbd></td></tr>
           <tr><th>Next style</th><td><kbd>Swipe</kbd> <kbd>↑</kbd> <kbd>↓</kbd></td></tr>
           <!-- on a phone the Style panel shows every setting of the style, as chips -->
@@ -627,7 +629,7 @@
           <!-- on touch screens a tile's Download and Copy are behind its Share button -->
           <tr><th>Save image</th><td><kbd>Touch</kbd> <kbd><PixelIcon name="share" /></kbd></td></tr>
         {:else}
-          <tr><th>Add image</th><td><kbd>Drag</kbd> <kbd>Drop</kbd></td><td><kbd>{mod}</kbd> <kbd>V</kbd></td></tr>
+          <tr><th>Import images</th><td><kbd>Click</kbd> <kbd><PixelIcon name="import" /></kbd> or <kbd>Drop</kbd></td><td><kbd>{mod}</kbd> <kbd>V</kbd></td></tr>
           <tr><th>Next palette</th><td><kbd>Shift</kbd> <kbd>Scroll</kbd></td><td><kbd>←</kbd> <kbd>→</kbd></td></tr>
           <tr><th>Next style</th><td><kbd>Scroll</kbd></td><td><kbd>↑</kbd> <kbd>↓</kbd></td></tr>
           <!-- Style, then More on its strip, which opens the rest of the style's settings; no key does this -->
