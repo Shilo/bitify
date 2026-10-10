@@ -1,6 +1,6 @@
 /* Static toolbar controls preserve their hit area in every interaction state. */
 :root .bar .glass-btn:is(:hover,:active,:focus-visible) { transform: none; }
-/* One UI typeface; only the branded wordmark keeps its pixel character. */
+/* One typeface across all application UI, including dialogs and generated feedback. */
 :root :is(.help h2,.empty h2,.glass-modal__title,.drop) { font-family: var(--body); letter-spacing: -.025em; }
 :root :is(button,input,select,textarea) { font-family: var(--body); }
 :root .ico, :root .glass-btn .ico { width: 18px; height: 18px; flex: none; }
@@ -11,4 +11,18 @@
 :root .dock :is(.foot .btn,.chip.reset) { color: var(--gl-color-error-on-surface); border-color: var(--gl-color-error-border); }
 @media (forced-colors: active) {
   :root .dock :is(.foot .btn,.chip.reset) { color: ButtonText; border-color: ButtonText; }
+}
+
+/* Quick surface feedback without moving hit targets, artwork or the canvas. */
+:root { --ui-enter-duration: 150ms; --ui-ease: cubic-bezier(.2,0,0,1); }
+:root :is(.bar,.viewer-header) .glass-btn:is(:hover,:active,:focus-visible) { transform: none; }
+:root .dock :is(.panel,.menu,.tray),
+:root dialog[open]:not(.image-viewer) { animation: ui-surface-enter var(--ui-enter-duration) var(--ui-ease); }
+:root .tooltip { transition: opacity 150ms var(--ui-ease); }
+:root .view-toggle { transition: background-color 150ms var(--ui-ease),color 150ms var(--ui-ease),box-shadow 150ms var(--ui-ease); }
+:root .awaiting-images { cursor: pointer; }
+:root .awaiting-images :is(button,input,a) { cursor: pointer; }
+@keyframes ui-surface-enter { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  :root *, :root *::before, :root *::after { animation: none !important; transition: none !important; }
 }

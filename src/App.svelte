@@ -7,6 +7,8 @@
   import { STYLES, inOrder, inks, stepStyle, stepPalette } from './lib/presets.js';
   import { wheelSteps } from './lib/gesture.js';
   import { on } from 'svelte/events';
+  import { tick } from 'svelte';
+  import { imageGesture } from './lib/image-gesture.js';
   import CanvasGrid from './CanvasGrid.svelte';
   import Dock from './Dock.svelte';
   import Tile from './Tile.svelte';
@@ -77,28 +79,32 @@
     measure();
     return { destroy: () => observer.disconnect() };
   }
-  // Only the live example remains on the empty canvas, so it fits the usable workspace.
-  function fitEmpty(node) {
-    const area = node.parentElement;
-    const measure = () => {
-      const areaStyle = getComputedStyle(area);
-      const height = area.clientHeight - parseFloat(areaStyle.paddingTop) - parseFloat(areaStyle.paddingBottom)
-        - (node.querySelector('.cap')?.offsetHeight ?? 0) - 8;
-      const width = area.clientWidth - parseFloat(areaStyle.paddingLeft) - parseFloat(areaStyle.paddingRight);
-      node.style.setProperty('--empty-art-size', `${Math.max(48, Math.min(320, height, width))}px`);
-    };
-    const observer = new ResizeObserver(measure);
-    observer.observe(area);
-    measure();
-    return { update: () => { const caption = node.querySelector('.cap'); if (caption) observer.observe(caption); measure(); }, destroy: () => observer.disconnect() };
-  }
   let showOriginal = $state(false);
-  // Changing the style or one of its settings, by any route, shows the result: the view goes back to bitified.
+  // Editing colors or conversion settings returns to the converted result. Temporary
+  // comparison stays separate, so releasing a hold never restores an outdated preference.
   $effect(() => {
-    style, set; // read, so this runs when either changes
+    first, second, none, style, set;
     showOriginal = false;
   });
   let spaceHeld = $state(false);
+  let comparisonHolds = $state.raw(new Set());
+  const previewing = $derived(spaceHeld || comparisonHolds.size > 0);
+  const effectiveOriginal = $derived(showOriginal !== previewing);
+  function compareHold(active, id) {
+    const next = new Set(comparisonHolds);
+    if (active) next.add(id); else next.delete(id);
+    comparisonHolds = next;
+  }
+  function clearComparison() { spaceHeld = false; comparisonHolds = new Set(); }
+  let canvasScrollable = $state(false);
+  let compactHeader = $state(innerWidth <= 600 || touch);
+  const importLabel = $derived(!items.length && !compactHeader ? 'Import, drop or paste images' : 'Import images');
+  $effect(() => {
+    const hidden = () => { if (document.hidden) clearComparison(); };
+    const focused = e => { if (e.target.closest?.('dialog[open]')) clearComparison(); };
+    return [on(document, 'visibilitychange', hidden), on(document, 'focusin', focused)]
+      .reduce((cleanup, stop) => () => { cleanup(); stop(); }, () => {});
+  });
   // While a slider of the style panel is being dragged, the wall as a whole gets this many milliseconds
   // to redraw after each move, shared out between the tiles (see `budget` in Tile.svelte).
   const DRAG_MS = 24;
@@ -110,7 +116,7 @@
   let viewing = $state.raw(null), viewTrigger;
   // Resolve the current analysis after a setting changes, without duplicating image pixels.
   const viewed = $derived(viewing ? (viewing.id === 0 ? example : items.find(item => item.id === viewing.id)) : null);
-  function openImage(item, trigger) { viewing = item; viewTrigger = trigger; }
+  function openImage(item, trigger) { clearComparison(); viewing = item; viewTrigger = trigger; }
   // The lowest and highest value Auto is using for the images on screen, for the Dock to show:
   // of the threshold, of Cutout's seam strength, and of Stencil's Cuts. An image's sprites are
   // only looked for while Stencil is the style: finding them walks the whole image.
@@ -128,13 +134,15 @@
   const noHover = matchMedia('(hover: none)');
   let noHoverMatches = $state(noHover.matches);
   noHover.addEventListener('change', e => (noHoverMatches = e.matches));
-  const layout = $derived(fitImageWall(items.length, wallWidth, wallHeight, noHoverMatches));
+  const canvasItems = $derived(items.length ? items : example ? [example] : []);
+  const layout = $derived(fitImageWall(canvasItems.length, wallWidth, wallHeight, noHoverMatches));
   let dragDepth = $state(0);
   let message = $state('');
   let picker;
   let nextId = 0, messageTimer;
   // On touch screens a tile's Share button opens a sheet with Copy and Download for that image.
-  let sheet, more, help, confirm, moreTrigger; // the dialogs: the Share sheet, the More menu, the help and Reset settings's question
+  let sheet, more, help, confirm, clearConfirm, moreTrigger;
+  let clearTrigger = $state(); // the dialogs: the Share sheet, the More menu, the help and Reset settings's question
   // Reset settings puts back everything kept between visits: the colors, the style, every style's settings
   // and the theme. The images stay. The effect above then stores the defaults over what was kept.
   function resetAll() {
@@ -164,7 +172,7 @@
   }
   function share(item) {
     shared = item;
-    sheet.showModal();
+    clearComparison(); sheet.showModal();
   }
 
   // Text color for the drop screen: the first color, unless it is too close to the second to read.
@@ -362,7 +370,7 @@
   fetch(logoUrl)
     .then(response => response.blob())
     .then(decode)
-    .then(decoded => (example = toItem(0, 'Example', decoded)))
+    .then(decoded => (example = toItem(0, 'Bitify', decoded)))
     .catch(() => {}); // without it the empty screen simply has no preview
 
   // Each image goes on the wall as soon as it is read, so the first of a batch of photos shows
@@ -372,7 +380,7 @@
   let emptied = 0;
   function removeAll() {
     emptied++;
-    items = [];
+    clearComparison(); items = [];
   }
   async function addFiles(files) {
     let skipped = 0, fresh = [], shownAt = 0, done;
@@ -456,6 +464,33 @@
     }
   }
 
+  // Background taps use the same stationary-press rules as image taps. Controls,
+  // dismissing presses, held comparisons and swipes never launch the file picker.
+  function emptyImport(node, enabled) {
+    const gesture = imageGesture();
+    let ready = false;
+    const excluded = e => e.defaultPrevented || document.querySelector('dialog[open]') ||
+      e.target.closest?.('button,input,select,textarea,a,.dock,.panel,.menu,.tray,[role="slider"]');
+    const down = e => { ready = false; if (enabled && !excluded(e)) gesture.press(e); else gesture.cancel(); };
+    const move = e => gesture.move(e);
+    const up = e => { gesture.move(e); ready = enabled && !excluded(e) && e.isPrimary !== false && gesture.canHold(); gesture.cancel(); };
+    const cancel = () => { ready = false; gesture.cancel(); };
+    const click = e => { if (ready && enabled && !excluded(e)) picker.click(); cancel(); };
+    const off = [on(node,'pointerdown',down),on(node,'pointermove',move),on(node,'pointerup',up),
+      on(node,'pointercancel',cancel),on(node,'pointerleave',cancel),on(node,'click',click)];
+    return { update: value => { enabled = value; cancel(); }, destroy: () => off.forEach(stop => stop()) };
+  }
+  // Read the actual scroll viewport rather than guessing from image count: panel
+  // fitting and viewport orientation can change whether artwork passes below the dock.
+  function measureCanvas(node) {
+    let disposed = false;
+    const measure = () => { if (!disposed) canvasScrollable = node.scrollHeight > node.clientHeight + 1; };
+    const observer = new ResizeObserver(measure);
+    observer.observe(node);
+    tick().then(() => { if (!disposed) { const tiles=node.querySelector('.tiles'); if(tiles) observer.observe(tiles); measure(); } });
+    return { destroy: () => { disposed = true; observer.disconnect(); canvasScrollable = false; } };
+  }
+
   function picked(e) {
     addFiles([...e.currentTarget.files]);
     e.currentTarget.value = ''; // so picking the same file again still fires a change
@@ -522,68 +557,45 @@
   onkeyup={keyup}
   ontouchstart={touchstart}
   onclick={unfocus}
-  onblur={() => { dragDepth = 0; spaceHeld = false; ctrlHeld = false; }}
+  onblur={() => { dragDepth = 0; clearComparison(); ctrlHeld = false; }}
+  onresize={() => (compactHeader = innerWidth <= 600 || touch)}
   onbeforeinstallprompt={e => { e.preventDefault(); installOffer = e; }}
   onappinstalled={() => (installOffer = null)}
 />
 
 <header class="bar glass-nav" class:has-images={!!items.length} use:measureHeader>
-  {#if items.length}
-    <button class="btn glass-btn icon-only danger header-clear" onclick={removeAll} aria-label="Remove all images" use:tooltip={'Remove all images from the canvas.'}><PixelIcon name="trash" /></button>
-  {/if}
-  <div class="brand" role="img" aria-label="Bitify"><Brand /><span class="mark">Bitify</span></div>
+  <div class="brand" role="img" aria-label="Bitify"><Brand /></div>
   <span class="grow"></span>
+  {#if items.length}
+    <button class="btn glass-btn icon-only danger header-clear" bind:this={clearTrigger} onclick={() => { clearComparison(); clearConfirm.showModal(); }} aria-label="Remove all images" use:tooltip={'Remove all images from the canvas.'}><PixelIcon name="trash" /></button>
+  {/if}
   <div class="file-actions" class:awaiting-import={!items.length} role="group" aria-label="Import and export">
-    <button class="btn glass-btn import-action" class:icon-only={!!items.length} class:glass-btn--primary={!items.length} onclick={() => picker.click()} aria-label="Import images" use:tooltip={'Import images from your device. Images stay on your device.'}><PixelIcon name="import" />{#if !items.length}<span>Import images</span>{/if}</button>
+    <button class="btn glass-btn import-action" class:icon-only={!!items.length} class:glass-btn--primary={!items.length} onclick={() => picker.click()} aria-label={importLabel} use:tooltip={'Import images from your device. Images stay on your device.'}><PixelIcon name="import" />{#if !items.length}<span>{importLabel}</span>{/if}</button>
     <button class="btn glass-btn icon-only export-action" class:glass-btn--primary={!!items.length} disabled={!items.length} aria-label={items.length > 1 ? 'Export all images' : 'Export image'} use:tooltip={items.length > 1 ? 'Export all converted images as a ZIP archive.' : items.length ? 'Export the converted image at its original size.' : 'Import an image to enable export.'} onclick={saveEverything}><PixelIcon name="save" /></button>
   </div>
-  <!-- Mouse clicks release focus before opening the native menu. -->
-  <button class="btn glass-btn icon-only" bind:this={moreTrigger} aria-haspopup="true" aria-label="More" use:tooltip={'Open appearance, help and app options.'} onclick={e => { if (e.detail) e.currentTarget.blur(); more.showModal(); }}><PixelIcon name="more" /></button>
-  {#if !items.length}
-    <section class="onboarding glass-card" aria-labelledby="onboarding-title">
-      <h1 id="onboarding-title">Pixel art in two colors</h1>
-      <p class="onboarding-subtitle">Convert sprites and animated GIFs to 1-bit colors and styles.</p>
-      <p class="onboarding-note">{touch ? 'Import images to begin.' : 'Import, drop or paste images.'} <span>Images stay on your device.</span></p>
-    </section>
-  {/if}
+  <button class="btn glass-btn icon-only" bind:this={moreTrigger} aria-haspopup="true" aria-label="More" use:tooltip={'Open appearance, help and app options.'} onclick={e => { clearComparison(); if (e.detail) e.currentTarget.blur(); more.showModal(); }}><PixelIcon name="more" /></button>
 </header>
 
-{#if items.length}
-  <div class="grid" class:stack-captions={layout.stackCaptions} style:--cols={layout.cols} style:--tile-size="{layout.size}px">
-    <div class="probe" bind:clientWidth={wallWidth} bind:clientHeight={wallHeight}></div>
-    <div class="tiles">
-      {#each items as item (item.id)}
-        <Tile
-          {item}
-          inset={IMAGE_INSET}
-          first={ink[0]}
-          second={ink[1]}
-          {style}
-          {set}
-          flipped={showOriginal !== spaceHeld}
-          budget={dragging ? DRAG_MS / items.length : 0}
-          onopen={openImage}
-          onshare={() => share(item)}
-          oncopy={() => copy(item)}
-          onsave={() => save(item)}
-          onremove={() => (items = items.filter(i => i !== item))}
-        />
-      {/each}
-    </div>
+<div class="grid" class:awaiting-images={!items.length} class:stack-captions={layout.stackCaptions}
+  style:--cols={layout.cols} style:--tile-size="{layout.size}px" use:measureCanvas use:emptyImport={!items.length}>
+  <div class="probe" bind:clientWidth={wallWidth} bind:clientHeight={wallHeight}></div>
+  <div class="tiles">
+    {#each canvasItems as item (item.id)}
+      <Tile {item} inset={IMAGE_INSET} first={ink[0]} second={ink[1]} {style} {set}
+        flipped={effectiveOriginal} budget={dragging ? DRAG_MS / canvasItems.length : 0}
+        oncompare={compareHold} onopen={items.length ? openImage : undefined}
+        onactivate={items.length ? undefined : () => picker.click()}
+        activationLabel={items.length ? undefined : 'Import images'}
+        onshare={items.length ? () => share(item) : undefined}
+        oncopy={items.length ? () => copy(item) : undefined}
+        onsave={items.length ? () => save(item) : undefined}
+        onremove={items.length ? () => (items = items.filter(i => i !== item)) : undefined} />
+    {/each}
   </div>
-{:else}
-  <div class="empty">
-    <div class="empty-in" use:fitEmpty={example}>
-      {#if example}
-        <Tile inset={IMAGE_INSET} item={example} onopen={openImage} first={ink[0]} second={ink[1]} {style} {set} flipped={showOriginal !== spaceHeld} />
-      {/if}
-
-    </div>
-  </div>
-{/if}
+</div>
 
 {#if viewed}
-  <ImageViewer item={viewed} first={ink[0]} second={ink[1]} {style} {set} {busy} {message} flipped={showOriginal !== spaceHeld}
+  <ImageViewer item={viewed} first={ink[0]} second={ink[1]} {style} {set} {busy} {message} flipped={effectiveOriginal}
     onsave={viewed.id === 0 ? undefined : () => save(viewed)}
     oncopy={viewed.id === 0 ? undefined : () => copy(viewed)}
     onclose={() => { viewing = null; viewTrigger?.focus(); }} />
@@ -591,7 +603,7 @@
 
 <CanvasGrid {items} {example} />
 
-<Dock bind:first bind:second bind:none bind:style bind:settings bind:showOriginal bind:dragging {autos} {soft} />
+<Dock bind:first bind:second bind:none bind:style bind:settings bind:showOriginal bind:dragging {previewing} {canvasScrollable} {autos} {soft} />
 
 {#if dragDepth > 0}
   <div class="drop" style:background={second} style:color={overlayInk}>Drop to bitify</div>
@@ -608,7 +620,7 @@
 <!-- The More menu drops down from the More button. Any click closes it too. Its rows are in three
      groups with a line between: what the app is set to, what tells about it, and what throws things away. -->
 <dialog class="more glass-popover" bind:this={more} aria-label="More" onclick={() => more.close()}>
-  {#if items.length}<button class="btn glass-btn danger menu-clear" onclick={() => { more.close(); removeAll(); }}><PixelIcon name="trash" />Remove all images</button>{/if}
+  {#if items.length}<button class="btn glass-btn danger menu-clear" onclick={() => { more.close(); clearConfirm.showModal(); }}><PixelIcon name="trash" />Remove all images</button>{/if}
   <button class="btn glass-btn" onclick={() => (themePick = otherTheme === systemTheme ? undefined : otherTheme)}>
     <PixelIcon name={otherTheme === 'dark' ? 'moon' : 'sun'} />{otherTheme === 'dark' ? 'Dark' : 'Light'} mode
   </button>
@@ -633,6 +645,20 @@
     <div class="glass-modal__footer">
       <button class="glass-modal__action" onclick={() => confirm.close()}>Cancel</button>
       <button class="glass-modal__action glass-modal__action--danger" onclick={() => { confirm.close(); resetAll(); }}>Reset</button>
+    </div>
+  </div>
+</dialog>
+<!-- Removing imports never deletes the original files. Confirm the whole-canvas action. -->
+<dialog class="glass-modal-overlay is-active reset-modal" bind:this={clearConfirm}
+  aria-labelledby="clear-title" aria-describedby="clear-description"
+  onclick={e => e.target === clearConfirm && clearConfirm.close()}
+  onclose={() => (clearTrigger?.isConnected ? clearTrigger : moreTrigger)?.focus()}>
+  <div class="glass-modal">
+    <div class="glass-modal__header"><h2 class="glass-modal__title" id="clear-title">Remove all images?</h2></div>
+    <div class="glass-modal__body"><p id="clear-description">All imported images will be removed from this canvas.<br /><br />The original files stay on your device.</p></div>
+    <div class="glass-modal__footer">
+      <button class="glass-modal__action" onclick={() => clearConfirm.close()}>Cancel</button>
+      <button class="glass-modal__action glass-modal__action--danger" onclick={() => { clearConfirm.close(); removeAll(); }}>Remove</button>
     </div>
   </div>
 </dialog>
@@ -670,7 +696,7 @@
           <tr><th>Style settings</th><td><kbd>Touch</kbd> <kbd><PixelIcon name="sliders" /></kbd></td></tr>
           <tr><th>See original image</th><td><kbd>Hold</kbd> <kbd>Image</kbd></td></tr>
           <!-- on touch screens a tile's Download and Copy are behind its Share button -->
-          <tr><th>Export or copy image</th><td><kbd>Touch</kbd> <kbd><PixelIcon name="share" /></kbd></td></tr>
+          <tr><th>Export or copy image</th><td><kbd>Touch</kbd> <kbd><PixelIcon name="more" /></kbd></td></tr>
         {:else}
           <tr><th>Import images</th><td><kbd>Click</kbd> <kbd><PixelIcon name="import" /></kbd> or <kbd>Drop</kbd></td><td><kbd>{mod}</kbd> <kbd>V</kbd></td></tr>
           <tr><th>Next palette</th><td><kbd>Shift</kbd> <kbd>Scroll</kbd></td><td><kbd>←</kbd> <kbd>→</kbd></td></tr>

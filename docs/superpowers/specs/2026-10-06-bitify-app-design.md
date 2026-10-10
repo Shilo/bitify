@@ -1587,3 +1587,23 @@ The empty example caption retains a 6px gap between its name and pixel dimension
 on touch screens, rather than inheriting the dense stacked-tile caption spacing.
 
 Fullscreen feedback sits 8px below the viewer's measured header, including safe-area padding and phone toolbar wrapping. This keeps Copy/Export feedback from obscuring or intercepting the viewer's controls after responsive or font-size changes.
+
+
+## October 9 correction pass: superseding numbered refinements
+
+The following behavior supersedes earlier conflicting layout, palette and comparison notes.
+
+- **3:** The explanatory empty-state card, heading and subtitle are removed. The expanded Import button reads “Import, drop or paste images” on a mouse/keyboard screen wider than 600px, and “Import images” on narrow or coarse-pointer screens. Loaded layouts use the icon alone. Help and tooltips retain context.
+- **6:** Global Remove all sits immediately before the right-side Import/Export capsule. It opens the same native GlassKit Modal anatomy as Reset, titled “Remove all images?” with Cancel and Remove. Copy explains that original files remain on the device; Cancel/dismissal makes no changes. The entire batch cancellation remains deferred until confirmation.
+- **7:** Actual canvas vertical overflow, not image count, enables opaque themed backgrounds for the bottom editing island, panel, chooser and tray shells. Their nested controls retain existing GlassKit backgrounds and states. The material returns to normal glass when the wall fits again.
+- **8:** Fullscreen title/action shells use 56px height, 44px inner circular icons and the main header inset/gap. A compact comparison icon has dynamic accessible action text and pressed state. Controls remain in one row at phone widths with a truncated filename.
+- **10:** Schibsted Grotesk is the single application UI typeface. Lucide is the single control icon family through the shared vendored component. The pixel brand and conversion thumbnails represent the product and image output, rather than control glyphs.
+- **11:** Advanced controls fill the complete right column, aligned with the reset edge. The label column measures the longest currently visible setting plus its changed marker, with an 8px label/control gap.
+- **13:** Style previews remain actual conversions of a representative sample sprite, labeled with their style names. They communicate output, not an arbitrary icon metaphor.
+- **14:** Palette circles return to smooth diagonal two-color swatches, with one circular clipping edge and a separate theme selection ring. Transparency uses the original compact monochrome checker symbols; None dock colors use the original checker/slash representation without a text label.
+- **16:** The checker aligns its origin and representative 16-source-pixel spacing after initial import, image collection changes or actual viewport resizing. It then stays viewport fixed during image scrolling, panel/chooser/tray fitting and their closures. Source reanalysis or color/style changes do not reanchor it. Stable full-window background takes precedence over continuously following refitted image coordinates.
+- **17–18:** The empty preview is named Bitify and uses the same item analysis, Tile renderer, sizing probe and fitImageWall layout as imported images. It is shown only when no imported images exist and has no copy/export/remove actions. The top bar keeps only the accessible pixel logo.
+- **19:** A quick stationary empty-canvas press opens the picker immediately in the click activation. The example activates Import too, including Enter. Dock/popup/dialog/control clicks, consumed dismissal presses, swipes, scrolling and long comparison holds never trigger it.
+- **20:** Quick 150ms surface entrances and control feedback complement GlassKit hover/toast behavior. Header controls never translate; checker/artwork/layout/blur are not animated. Reduced-motion preferences suppress app animations and transitions.
+- **21:** Image holds and Space temporarily invert the persistent original/converted state. One shared effective state drives every tile and the bottom toggle label/pressed state; multiple holds and Space count as one temporary comparison. Release, cancel, blur, hiding or image removal clears transient sources. Enter activates the image or empty Import; Space over normal controls retains native behavior.
+- **22:** Color input, swap, palette and transparency changes enable conversion, as style/settings edits do. This includes reselecting unchanged colors or presets through those controls. Temporary holds never restore an obsolete persistent preference.

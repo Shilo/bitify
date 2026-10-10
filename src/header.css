@@ -1,63 +1,18 @@
-/* Header geometry and onboarding; materials stay on the GlassKit theme tokens. */
-:root .brand { flex: none; gap: 8px; padding-inline: 10px; }
+/* Minimal fixed-height header: file operations stay together on the right. */
+:root .brand { box-sizing: border-box; flex: none; width: var(--control-shell); height: var(--control-shell); padding: 0; justify-content: center; }
 :root .brand-icon { flex: none; display: block; color: var(--fg); shape-rendering: crispEdges; }
 :root .brand-icon-cut { fill: var(--bg); }
-:root .brand .mark { font-family: var(--body); font-size: 22px; font-weight: 700; letter-spacing: -.055em; }
 :root .header-clear { display: inline-flex; }
 :root .more .menu-clear { display: none; }
 :root .help header > .brand-icon { width: 48px; height: 48px; }
 :root .help h2 { font-family: var(--body); font-weight: 700; line-height: 1.15; }
-@media (max-width: 600px) {
-  :root .brand { width: var(--control-shell); padding: 0; justify-content: center; }
-  :root .brand .mark { display: none; }
-}
-
 :root .bar { display: grid; grid-template-columns: auto minmax(0,1fr) auto auto; flex: none; align-items: center; }
-:root .bar.has-images { grid-template-columns: auto auto minmax(0,1fr) auto auto; }
+:root .bar.has-images { grid-template-columns: auto minmax(0,1fr) auto auto auto; }
 :root .bar .file-actions .import-action:not(.icon-only) {
   box-sizing: border-box; flex: none; height: var(--control-size); min-height: var(--control-size);
   padding-inline: 14px; border-radius: 999px; font-size: 13px; gap: 8px;
 }
-:root .onboarding {
-  box-sizing: border-box; grid-column: 1 / -1; width: min(760px,100%); margin: 0 auto;
-  padding: 12px 20px; border-radius: 18px; text-align: center;
-  color: var(--gl-color-text); font-family: var(--body);
-}
-:root .onboarding h1 { margin: 0; font: 700 clamp(18px,2.5vw,24px)/1.2 var(--body); letter-spacing: -.035em; text-wrap: balance; }
-:root .onboarding p { margin: 5px 0 0; font-size: 13px; line-height: 1.45; color: var(--gl-color-text); text-wrap: balance; }
-:root .onboarding .onboarding-note { margin-top: 7px; font-size: 12px; }
-:root .onboarding-note span { white-space: normal; }
-:root .empty-in { grid-template-columns: minmax(0,1fr); gap: 0; }
-:root .empty .cap { min-width: min(140px,100%); justify-self: center; }
-@media (max-width: 800px) {
-  :root .bar { flex-wrap: wrap; }
-  :root .onboarding { max-width: 100%; padding: 10px 14px; }
-}
 @media (max-width: 520px) {
   :root .bar .awaiting-import .export-action { display: none; }
   :root .bar .file-actions .import-action:not(.icon-only) { padding-inline: 12px; }
-  :root .onboarding { padding: 10px 12px; }
-  :root .onboarding p { font-size: 12px; }
 }
-@media (max-height: 520px) and (orientation: landscape) {
-  :root .onboarding { padding: 8px 14px; display: grid; grid-template-columns: auto minmax(0,1fr); column-gap: 18px; text-align: left; align-items: center; }
-  :root .onboarding h1 { grid-row: 1 / 3; font-size: 18px; }
-  :root .onboarding p { margin: 0; font-size: 12px; }
-  :root .onboarding .onboarding-note { margin-top: 3px; }
-}
-@media (prefers-reduced-transparency: reduce) {
-  :root .onboarding { background: var(--surface); -webkit-backdrop-filter: none; backdrop-filter: none; }
-}
-@media (forced-colors: active) {
-  :root .onboarding { background: Canvas; color: CanvasText; border-color: ButtonText; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
-  :root .onboarding p { color: CanvasText; }
-}
-
-/* A short phone needs the canvas while a chooser is open. The heading and Import
-   stay discoverable; explanatory copy returns as soon as the editing panel closes. */
-@media (max-width: 520px) and (max-height: 700px) {
-  :root:has(.dock .panel) .onboarding { padding-block: 6px; }
-  :root:has(.dock .panel) .onboarding p { display: none; }
-}
-/* Metadata remains separate and readable beside the centered example. */
-:root .empty .cap { gap: 6px; }
