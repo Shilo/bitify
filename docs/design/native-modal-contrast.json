@@ -1,0 +1,49 @@
+{
+  "dark": {
+    "reset_ink_rounded_rgb": [
+      255,
+      216,
+      214
+    ],
+    "sample_point_css_px": [
+      700,
+      485
+    ],
+    "sampled_footer_rgb": [
+      66,
+      69,
+      76
+    ],
+    "reset_rest_contrast": 7.34,
+    "hover_composited_rgb": [
+      81,
+      84,
+      90
+    ],
+    "reset_hover_declared_contrast": 5.8
+  },
+  "light": {
+    "reset_ink_rounded_rgb": [
+      119,
+      43,
+      56
+    ],
+    "sample_point_css_px": [
+      700,
+      485
+    ],
+    "sampled_footer_rgb": [
+      245,
+      246,
+      248
+    ],
+    "reset_rest_contrast": 8.88,
+    "hover_composited_rgb": [
+      250,
+      250,
+      252
+    ],
+    "reset_hover_declared_contrast": 9.21
+  },
+  "method": "Read rendered 1280x800 white-art screenshot pixels; computed Reset ink rounded to RGB; hover calculated from the pinned GlassKit surface-1 overlay, not a captured pointer hover. Ratios are local samples, not whole-app certification."
+}

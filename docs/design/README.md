@@ -43,7 +43,7 @@ why the user approved a local opaque surface for image actions.
 Earlier protected-action comparison: [dark](mockups/opaque-actions-dark.png) and
 [light](mockups/opaque-actions-light.png). Default GlassKit materials remain elsewhere.
 
-Current controls: [dark](mockups/consistent-palette-dark.png) and
+Earlier compact controls: [dark](mockups/consistent-palette-dark.png) and
 [light](mockups/consistent-palette-light.png). The Palette name no longer stacks a
 second material over its panel. Editing islands, panels and chooser use one card material.
 The small destructive text row inside More uses opaque GlassKit error colors for contrast.
@@ -51,3 +51,8 @@ The small destructive text row inside More uses opaque GlassKit error colors for
 [Compare three Import/Export layouts](import-export-layouts.html): top-right horizontal
 pair (recommended/live), bottom file island, and right-edge vertical pair. The comparison
 supports light/dark, phone sizing and sample panels; file actions are illustrative only.
+Current controls and native feedback: [research and final checks](2026-10-09-control-geometry-and-native-feedback.md),
+[dark desktop](mockups/uniform-empty-desktop-dark.png), [light desktop](mockups/uniform-empty-desktop-light.png),
+[small phone](mockups/uniform-empty-small-phone-dark.png), [native Reset](mockups/native-reset-phone-dark.png),
+and [native selection toast](mockups/native-selection-toast-phone-light.png). The modal has a scoped
+contrast guard; the remaining native glass materials are preserved.

@@ -2,6 +2,15 @@
 
 Floating islands is now the sole runtime design. See the [adoption and final review](2026-10-09-floating-islands-adoption.md) for **220 passing tests in 13 files**, production checks, parsed exports and simulated-media checks. The records below document historical exploration and must not be read as available alternate layouts.
 
+## Circular controls and native feedback checks
+
+Latest [validation and review decisions](2026-10-09-control-geometry-and-native-feedback.md)
+cover220 passing tests, production build,56px shells/44px circular inner controls, primary
+Import→Export handoff, real PNG/18-image ZIP downloads, tiny-phone/landscape empty fit,
+native modal cancel/reset/isolation/focus, native toast updates/expiry, and reduced-material
+fixtures. The modal's scoped contrast guard passed white-art testing in both themes.
+Physical Safari/iOS and OS accessibility settings remain device checks.
+
 ## Compact controls and consistency checks
 
 - Post-review `npm test`: 220 tests in 13 files pass; production build passes.
