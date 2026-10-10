@@ -22,6 +22,9 @@
     style = $bindable(),
     settings = $bindable(), // each style's own settings, by style
     showOriginal = $bindable(),
+    previewing = false, // a held comparison temporarily inverts the persisted view
+    canvasScrollable = false,
+    editing = $bindable(false),
     dragging = $bindable(), // whether a slider of the style panel is being dragged
     autos, // [lowest, highest] value Auto is using, for each setting that has an Auto
     soft, // whether an image on the wall has a partly see-through pixel
@@ -40,6 +43,8 @@
     return drag.end;
   });
   let pop = $state(null); // what is open above the style panel: null or 'styles'
+  $effect(() => { editing = !!(panel || pop); });
+  const effectiveOriginal = $derived(showOriginal !== previewing);
   let dock;
   let eaten = false; // the last press closed something, so its click is dropped too
   // A finger moves a slider through its touch, which stopping the press does not stop.
@@ -90,6 +95,23 @@
   const keys = $derived(STYLE_SETTINGS[style].filter(key => key !== 'alpha' || soft));
   const lead = $derived(['threshold', 'cuts', 'detail'].includes(keys[0]) ? keys[0] : null);
   const rest = $derived(keys.filter(key => key !== lead));
+  // One measured label column fits the longest currently visible name, including its changed
+  // marker. Short names retain alignment without paying for hidden settings' longer names.
+  let labelWidth = $state(0);
+  $effect(() => {
+    if (!dock) return;
+    panel, more, rest, own;
+    let cancelled = false, observer;
+    tick().then(() => {
+      if (cancelled) return;
+      const labels = [...dock.querySelectorAll('.setting-label')];
+      const measure = () => { labelWidth = Math.ceil(Math.max(0, ...labels.map(el => el.getBoundingClientRect().width))); };
+      measure();
+      observer = new ResizeObserver(measure);
+      labels.forEach(el => observer.observe(el));
+    });
+    return () => { cancelled = true; observer?.disconnect(); };
+  });
   // A wide screen shows the others all at once, in a tray that More opens under the strip.
   let more = $state(false);
   // A phone has no room for that with the images still in view. It shows every setting as a chip
@@ -165,6 +187,7 @@
 
   const toggle = name => (panel = panel === name ? null : name);
   function swap() {
+    showOriginal = false;
     const was = first;
     first = second;
     second = was;
@@ -175,6 +198,7 @@
   // way round they are: dark first, unless Swap has put the lighter color first.
   const chosen = p => isPalette(p, first, second);
   function choose(p) {
+    showOriginal = false;
     [first, second] = inOrder(p, first, second);
   }
   // The palettes scroll sideways. They open scrolled to the chosen one, and the panel is marked
@@ -274,7 +298,7 @@
   {/if}
 {/snippet}
 
-<div class="dock glass-card" bind:this={dock}>
+<div class="dock glass-card" class:canvas-scrollable={canvasScrollable} style:--setting-label-width={`${labelWidth}px`} bind:this={dock}>
   {#if panel === 'palettes'}
     <div class="panel fit glass-card" bind:offsetHeight={panelHeight} onwheel={e => (e.currentTarget.querySelector('.pals').scrollLeft += e.deltaY)}>
       <!-- The name/transparency controls stay fixed beside the swatches. A mouse wheel
@@ -286,7 +310,7 @@
              (.seg.mini and .glyph in app.css). -->
         <span class="seg mini glass-segmented" role="group" aria-label="Transparent color">
           {#each ['Both colors', 'Transparent outlines and dark areas', 'Transparent fills and highlights'] as label, n}
-            <button class="glass-segmented__item" aria-pressed={none === n} aria-label={label} use:tooltip={['Draw both colors without making either transparent.', 'Make outlines and dark areas transparent.', 'Make fills and highlights transparent.'][n]} onclick={() => (none = n)}><PalettePreview {first} {second} none={n} compact /></button>
+            <button class="glass-segmented__item" aria-pressed={none === n} aria-label={label} use:tooltip={['Draw both colors without making either transparent.', 'Make outlines and dark areas transparent.', 'Make fills and highlights transparent.'][n]} onclick={() => { none = n; showOriginal = false; }}><PalettePreview none={n} compact /></button>
           {/each}
         </span>
       </span>
@@ -360,7 +384,7 @@
         {#if more && rest.length}
           <div class="adv">
             {#each rest as key}
-              <div class="row" class:choice-row={!!SETTINGS[key].options}><span class="key" class:changed={changed(style, own, [key])}>{SETTINGS[key].label}</span>{@render control(key)}</div>
+              <div class="row" class:choice-row={!!SETTINGS[key].options}><span class="key"><span class="setting-label" class:changed={changed(style, own, [key])}>{SETTINGS[key].label}</span></span>{@render control(key)}</div>
             {/each}
             <div class="foot">
               <button class="btn glass-btn" disabled={!changed(style, own, keys)} aria-label="Reset {styleName}" use:tooltip={'Restore this style’s default settings.'} onclick={reset}><PixelIcon name="reset" />Reset</button>
@@ -376,13 +400,11 @@
       <!-- A color that is None shows no color (.sw.none in app.css). Its picker still opens, on the
            color it had, and choosing one there brings the color back. -->
       <label class="sw" class:none={none === 1} style:background={none === 1 ? null : first} use:tooltip={none === 1 ? 'Choose a color to restore outlines and dark areas.' : 'Choose the color for outlines and dark areas.'}>
-        {#if none === 1}<span class="none-label" aria-hidden="true">None</span>{/if}
-        <input type="color" bind:value={first} oninput={() => none === 1 && (none = 0)} aria-label="Color for lines and dark pixels{none === 1 ? ': None' : ''}" />
+        <input type="color" bind:value={first} oninput={() => { if (none === 1) none = 0; showOriginal = false; }} aria-label="Color for lines and dark pixels{none === 1 ? ': None' : ''}" />
       </label>
       <button class="ib glass-btn" onclick={swap} aria-label="Swap colors" use:tooltip={'Exchange the two colors, including transparency.'}><PixelIcon name="swap" /></button>
       <label class="sw" class:none={none === 2} style:background={none === 2 ? null : second} use:tooltip={none === 2 ? 'Choose a color to restore fills and highlights.' : 'Choose the color for fills and highlights.'}>
-        {#if none === 2}<span class="none-label" aria-hidden="true">None</span>{/if}
-        <input type="color" bind:value={second} oninput={() => none === 2 && (none = 0)} aria-label="Color for fill and light pixels{none === 2 ? ': None' : ''}" />
+        <input type="color" bind:value={second} oninput={() => { if (none === 2) none = 0; showOriginal = false; }} aria-label="Color for fill and light pixels{none === 2 ? ': None' : ''}" />
       </label>
     </div>
   {/snippet}
@@ -402,14 +424,14 @@
   </div>
   <span class="sep"></span>
   <div class="style-tools tool-group" role="group" aria-label="Conversion and style">
-    <button class="btn glass-btn view-toggle" aria-label="{styleName} conversion" aria-pressed={!showOriginal}
+    <button class="btn glass-btn view-toggle" aria-label="{styleName} conversion" aria-pressed={!effectiveOriginal}
       aria-describedby="view-status"
-      use:tooltip={showOriginal ? `Showing original. Click to apply ${styleName}.` : `Showing ${styleName}. Click to compare the original.`}
+      use:tooltip={effectiveOriginal ? `Showing original. Click to apply ${styleName}.` : `Showing ${styleName}. Click to compare the original.`}
       onclick={() => (showOriginal = !showOriginal)}>
       <span class="view-state" aria-hidden="true"></span><span>{styleName}</span>
     </button>
     {@render styleButton()}
-    <span id="view-status" class="view-status">{showOriginal ? 'Showing original images.' : `Showing images converted with ${styleName}.`}</span>
+    <span id="view-status" class="view-status">{effectiveOriginal ? 'Showing original images.' : `Showing images converted with ${styleName}.`}</span>
   </div>
 </div>
 

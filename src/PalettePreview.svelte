@@ -1,9 +1,11 @@
 <script>
-  // Insets and a stepped join keep both inks visible, even with similar colors.
+  // A smooth diagonal pair shows the palette's two inks. Compact transparency glyphs use
+  // the theme's text color, so they stay legible independently of the chosen palette.
   let { first, second, none = 0, compact = false } = $props();
 </script>
 
-<span class="palette-preview" class:compact aria-hidden="true" style:--preview-first={first} style:--preview-second={second}>
-  <span class="preview-ink first-ink" class:transparent={none === 1}></span>
-  <span class="preview-ink second-ink" class:transparent={none === 2}></span>
-</span>
+{#if compact}
+  <span class="glyph" class:first={none === 1} class:second={none === 2} aria-hidden="true"></span>
+{:else}
+  <span class="palette-preview" aria-hidden="true" style:--preview-first={first} style:--preview-second={second}></span>
+{/if}
