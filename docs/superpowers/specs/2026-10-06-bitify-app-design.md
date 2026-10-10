@@ -1642,3 +1642,6 @@ The empty example caption has a right-aligned44px primary Add button using the s
 
 
 Example-caption clarification: the entire caption is one primary Add button, with no nested action. Bitify and resolution are stacked at left; device-specific Add instructions are right aligned before a decorative import glyph. Touch caption height remains52px, matching imported image title bars; desktop uses44px for the two-line metadata and accessible target. Instructions read “Add images” for touch/coarse pointers and “Add, drop or paste images” for mouse devices. This supersedes the separate44px caption icon action.
+
+
+The example primary-caption button explicitly keeps a nonwrapping horizontal row in portrait and landscape; only its left metadata stacks vertically. This overrides the legacy mobile caption-column rule. Labels and the import glyph stay inside the existing title-bar bounds.
