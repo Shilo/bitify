@@ -1,35 +1,27 @@
 /* GlassKit 1.22.2 materials over Bitify geometry. Floating islands is the only layout. */
 :root {
-  --bg: #f1f2f3; --surface: #e8ecef; --fg: #25282c; --muted: #60666d;
-  --line: rgba(38,45,54,.14); --tile: #e6e9eb; --tile2: #dce0e3;
+  --bg: #f1f2f3; --surface: #e8ecef; --fg: var(--gl-color-text); --muted: var(--gl-color-text-muted);
+  --line: var(--gl-border-subtle); --tile: #e6e9eb; --tile2: #dce0e3;
   --shadow: rgba(27,34,44,.10);
   --canvas-checker-a: #c5cbd1; --canvas-checker-b: #d2d6da;
   --image-gap: 12px; --image-inset: 4px; --canvas-min-workspace: 131px;
-  /* One tint and opacity across all glass UI; only the theme surface changes. */
-  --canvas-readable: color-mix(in srgb,var(--surface) 94%,transparent);
-  --canvas-material: var(--canvas-readable); --canvas-popover: var(--canvas-readable);
-  --canvas-border: var(--line);
-  --canvas-shadow: 0 12px 32px rgba(26,38,51,.08), 0 2px 6px rgba(26,38,51,.04), inset 0 1px 0 rgba(255,255,255,.85);
-  --canvas-blur: 10px;
+  /* GlassKit default materials, with Bitify canvas geometry. No surface-token overrides. */
+  --canvas-material: var(--gl-surface-2); --canvas-readable: var(--canvas-material);
+  --canvas-popover: var(--gl-surface-3);
+  --canvas-modal: linear-gradient(to bottom,var(--gl-card-glow-top),var(--gl-card-glow-bottom));
+  --canvas-border: var(--gl-border-medium);
+  --canvas-shadow: var(--gl-shadow-card),var(--gl-inset-strong);
   --canvas-left: 24px; --canvas-right: 24px; --dock-base: 112px;
-  /* Official GlassKit roles neutralized for a color-sensitive image workspace. */
-  --gl-color-primary: var(--fg); --gl-color-primary-dark: var(--fg);
-  --gl-color-primary-mid: var(--fg); --gl-color-text: var(--fg);
-  --gl-color-text-muted: var(--muted); --gl-color-text-heading: var(--fg);
-  --gl-color-on-primary: var(--bg); --gl-font-family: var(--body);
-  --gl-surface-2: var(--canvas-material); --gl-border-medium: var(--canvas-border);
-  --gl-border-focus: var(--fg); --gl-blur: var(--canvas-blur);
-  --gl-blur-heavy: var(--canvas-blur); --gl-radius-card: 24px; --gl-radius-btn: 14px;
+  --gl-font-family: var(--body);
   background-color: var(--bg);
   background-image: conic-gradient(var(--canvas-checker-a) 25%,var(--canvas-checker-b) 0 50%,var(--canvas-checker-a) 0 75%,var(--canvas-checker-b) 0);
   background-size: calc(var(--canvas-grid-step,32px) * 2) calc(var(--canvas-grid-step,32px) * 2);
   background-position: 0 0;
 }
 :root[data-theme="dark"] {
-  --bg: #191c20; --surface: #272c32; --fg: #f0f2f4; --muted: #b0b7bf;
+  --bg: #191c20; --surface: #272c32; --fg: var(--gl-color-text); --muted: var(--gl-color-text-muted);
   --canvas-checker-a: #272e35; --canvas-checker-b: #323941;
-  --line: rgba(216,229,244,.16); --tile: #323941; --tile2: #272e35; --shadow: rgba(0,0,0,.32);
-  --canvas-shadow: 0 12px 32px rgba(0,0,0,.24),0 2px 8px rgba(0,0,0,.15),inset 0 1px 0 rgba(255,255,255,.07);
+  --line: var(--gl-border-subtle); --tile: #323941; --tile2: #272e35; --shadow: rgba(0,0,0,.32);
 }
 :root body { background: transparent; letter-spacing: -.01em; }
 :root #app { isolation: isolate; }
@@ -39,21 +31,23 @@
 }
 :root .mark { font-size: 30px; letter-spacing: -.055em; }
 :root .count { font-size: 12px; font-weight: 500; }
-/* Header controls keep a stable material over the full-window checker. */
+/* Header actions use the default pill material; labels use default card material. */
 :root .bar .btn {
-  background: var(--canvas-readable); color: var(--fg); border: 1px solid var(--canvas-border);
-  border-radius: 999px; box-shadow: 0 2px 8px var(--shadow);
-  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  background: var(--gl-surface-3); color: var(--fg); border: 1px solid var(--gl-border-strong);
+  border-radius: 999px; box-shadow: var(--gl-shadow-glow),var(--gl-inset-medium);
+  -webkit-backdrop-filter: blur(var(--gl-blur)); backdrop-filter: blur(var(--gl-blur));
 }
 :root .brand {
   display: flex; align-items: center; gap: 10px; padding: 6px 8px;
-  background: var(--canvas-readable); color: var(--fg); border: 1px solid var(--line); border-radius: 12px;
+  background: var(--canvas-readable); color: var(--fg); border: 1px solid var(--canvas-border); border-radius: 12px;
+  box-shadow: var(--canvas-shadow); -webkit-backdrop-filter: blur(var(--gl-blur)); backdrop-filter: blur(var(--gl-blur));
 }
 :root .brand .mark { line-height: 1; }
 :root .brand .count { color: var(--fg); }
 :root .empty-text {
   box-sizing: border-box; max-width: 100%; padding: 16px 20px;
-  background: var(--canvas-readable); color: var(--fg); border: 1px solid var(--line); border-radius: 20px;
+  background: var(--canvas-readable); color: var(--fg); border: 1px solid var(--canvas-border); border-radius: 20px;
+  box-shadow: var(--canvas-shadow); -webkit-backdrop-filter: blur(var(--gl-blur)); backdrop-filter: blur(var(--gl-blur));
 }
 :root .empty-text p { color: var(--fg); }
 :root :is(.btn,.ib,.sw,.dock,.panel) { box-sizing: content-box; }
@@ -61,40 +55,42 @@
 :root :is(.btn,.ib,.seg button) { transition: background-color .16s,box-shadow .16s,color .16s; }
 :root .glass-btn .ico { width: 14px; height: 14px; fill: currentColor; stroke: none; stroke-width: 0; }
 :root .glass-btn .plus-icon { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; }
-:root :is(.btn,.ib):not(:disabled):hover { background-color: color-mix(in srgb,var(--fg) 7%,transparent); }
-:root .btn.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); box-shadow: 0 2px 8px var(--shadow); }
-:root .btn.primary:not(:disabled):hover { background: color-mix(in srgb,var(--fg) 90%,var(--bg)); }
-:root .btn[aria-expanded="true"] { background: color-mix(in srgb,var(--fg) 9%,transparent); border-color: var(--line); color: var(--fg); }
+:root :is(.btn,.ib):not(:disabled):hover { background-color: var(--gl-surface-4); }
+:root .btn.primary { background: var(--gl-surface-2); color: var(--fg); border-color: var(--gl-border-subtle); box-shadow: var(--gl-shadow-btn),var(--gl-inset-subtle);
+  -webkit-backdrop-filter: blur(var(--gl-blur-light)); backdrop-filter: blur(var(--gl-blur-light)); }
+:root .btn.primary:not(:disabled):hover { background: var(--gl-surface-4); }
+:root .btn[aria-expanded="true"] { background: var(--gl-surface-5); border-color: var(--line); color: var(--fg); }
 :root .grid { padding: 8px var(--canvas-right) var(--dock-space) var(--canvas-left); }
 :root .probe { inset: 8px var(--canvas-right) var(--dock-space) var(--canvas-left); }
 :root .tiles { gap: var(--image-gap); width: calc(var(--cols)*var(--tile-size) + (var(--cols) - 1)*var(--image-gap)); }
 :root .tile { gap: 8px; }
 :root .art { background: transparent; border-radius: 0; }
 :root .art canvas { inset: var(--image-inset); width: calc(100% - 2*var(--image-inset)); height: calc(100% - 2*var(--image-inset)); }
-/* Tiny labels and actionable icons need a predictable substrate, not clear glass. */
+/* Baseline comparison: caption/action capsules use the default card material too. */
 :root .cap {
   box-sizing: border-box; font-size: 13px; line-height: 18px; gap: 6px;
-  padding: 3px 6px; border: 1px solid var(--line); border-radius: 9px;
+  padding: 3px 6px; border: 1px solid var(--canvas-border); border-radius: 9px;
   color: var(--fg); background: var(--canvas-readable);
+  box-shadow: var(--canvas-shadow); -webkit-backdrop-filter: blur(var(--gl-blur)); backdrop-filter: blur(var(--gl-blur));
 }
 :root .cap .name { font-weight: 600; }
 :root .cap .dim { font-size: 12px; font-weight: 500; color: var(--fg); letter-spacing: 0; }
 :root .acts {
   top: 7px; right: 7px; gap: 3px; padding: 3px;
-  border: 1px solid var(--line); border-radius: 999px;
-  background: var(--canvas-readable); color: var(--fg); box-shadow: 0 3px 10px var(--shadow);
-  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  border: 1px solid var(--canvas-border); border-radius: 999px;
+  background: var(--canvas-readable); color: var(--fg); box-shadow: var(--canvas-shadow);
+  -webkit-backdrop-filter: blur(var(--gl-blur)); backdrop-filter: blur(var(--gl-blur));
 }
 :root .tile .acts .ib {
   color: var(--fg); background: transparent; border-color: transparent;
   box-shadow: none; border-radius: 999px; opacity: 1;
 }
-/* These selectors must beat the shared .ib:hover rule; hover increases backing. */
+/* Default tertiary hover/focus stays translucent and increases the glass tint. */
 :root .tile .acts .ib:not(:disabled):is(:hover,:focus-visible) {
-  background: color-mix(in srgb,var(--surface) 88%,var(--fg)); color: var(--fg);
+  background: var(--gl-surface-4); color: var(--fg);
 }
 :root .tile .acts .ib:not(:disabled):active {
-  background: color-mix(in srgb,var(--surface) 76%,var(--fg)); color: var(--fg);
+  background: var(--gl-surface-5); color: var(--fg);
 }
 :root .empty { padding: 18px 24px var(--dock-space); }
 :root .empty-in { gap: 20px; }
@@ -108,21 +104,25 @@
   color: var(--fg); background: var(--canvas-material); border: 1px solid var(--canvas-border);
   box-shadow: var(--canvas-shadow); -webkit-backdrop-filter: blur(var(--gl-blur)); backdrop-filter: blur(var(--gl-blur));
 }
-:root :is(.panel,.menu,.more,.help,.sheet) { background: var(--canvas-popover); --muted: var(--fg); }
+:root :is(.menu,.more) { background: var(--canvas-popover); }
+:root :is(.help,.sheet) { background: var(--canvas-modal); box-shadow: var(--gl-shadow-modal);
+  -webkit-backdrop-filter: blur(var(--gl-blur-heavy)); backdrop-filter: blur(var(--gl-blur-heavy)); }
+:root :is(.help,.sheet)::backdrop { background: var(--gl-surface-overlay);
+  -webkit-backdrop-filter: blur(var(--gl-blur-soft)); backdrop-filter: blur(var(--gl-blur-soft)); }
 :root .dock { z-index: 5; bottom: 20px; border-radius: 999px; padding: 10px 14px; gap: 10px 12px; }
 :root :is(.dock,.panel,.more,.sheet) .glass-btn { -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: none; }
 :root .dock .tool-group > .btn,
 :root .dock > .btn { border-color: transparent; border-radius: 999px; }
-:root .dock > .primary { border-color: var(--fg); box-shadow: 0 2px 7px var(--shadow); }
+:root .dock > .primary { border-color: var(--gl-border-subtle); }
 :root .pair { gap: 5px; }
 :root .sw { border-radius: 50%; box-shadow: inset 0 0 0 3px var(--canvas-popover); }
 :root .pair .ib { border-radius: 50%; }
 :root .seg {
-  height: var(--hit); padding: 3px; border: 0; background: color-mix(in srgb,var(--fg) 6%,transparent);
+  height: var(--hit); padding: 3px; border: 0; background: var(--gl-surface-1);
   border-radius: 999px; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none;
 }
 :root .seg button { border-radius: 999px; }
-:root .seg button[aria-pressed="true"] { background: var(--surface); color: var(--fg); box-shadow: 0 1px 5px var(--shadow); }
+:root .seg button[aria-pressed="true"] { background: var(--gl-surface-5); color: var(--gl-color-text-heading); box-shadow: var(--gl-shadow-btn); }
 :root .sep { background: var(--line); }
 :root .panel { border-radius: 22px; padding: 12px 14px; gap: 10px; }
 :root .panel.fit { padding: 0; }
@@ -130,14 +130,16 @@
 :root .pname .seg.mini { border-radius: 10px; }
 :root .pname .seg.mini button { border-radius: 7px; }
 :root .pal { border-radius: 50%; }
+:root .pal[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--gl-surface-5),0 0 0 4px var(--gl-border-focus); }
 :root .menu { border-radius: 19px; padding: 8px; gap: 5px; }
 :root .menu .preset { border-radius: 12px; }
-:root .preset[aria-pressed="true"] { background: color-mix(in srgb,var(--fg) 6%,transparent); border-color: var(--line); }
+:root .preset[aria-pressed="true"] { background: var(--gl-surface-5); border-color: var(--canvas-border); }
 :root .demo { border-radius: 7px; }
-:root .field { border-radius: 12px; background: color-mix(in srgb,var(--fg) 3%,transparent); }
+:root .field { border-radius: 12px; background: var(--gl-surface-2); }
 :root .field button { border-radius: 0 11px 11px 0; }
-:root .field button[aria-pressed="true"] { color: var(--bg); background: var(--fg); }
-:root .panel input[type="range"] { accent-color: var(--fg); width: auto; }
+:root .field button[aria-pressed="true"],
+:root .chip[aria-pressed="true"] { color: var(--fg); background: var(--gl-surface-5); }
+:root .panel input[type="range"] { width: auto; }
 :root .adv { border-color: var(--line); }
 :root .adv .row { gap: 10px; }
 :root .chip { border-radius: 12px; }
@@ -150,15 +152,19 @@
 :root .help-in { padding: 24px; gap: 18px; }
 :root .help footer .btn { border-radius: 999px; }
 :root .more[open] { opacity: 1; visibility: visible; pointer-events: auto; transform: none; }
-:root .toast { border-radius: 999px; font-size: 12px; padding: 10px 16px; background: var(--canvas-popover); color: var(--fg); }
+:root .toast { border-radius: 999px; font-size: 12px; padding: 10px 16px; background: linear-gradient(to bottom,var(--gl-surface-4),var(--gl-surface-2)); color: var(--fg); box-shadow: var(--gl-shadow-toast),var(--gl-inset-medium); }
 :root .toast:not([hidden]) { opacity: 1; visibility: visible; transform: translateX(-50%); }
 :root .toast[hidden] { display: none; }
-:root .tooltip { color: var(--fg); background: var(--surface); border-color: var(--line); box-shadow: 0 4px 18px var(--shadow); border-radius: 12px; }
-:root .fit::before { background: linear-gradient(to right,var(--surface) 45%,transparent); }
-:root .fit::after { background: linear-gradient(to left,var(--surface) 40%,transparent); }
-:root .setbox::before { background: linear-gradient(to right,var(--surface) 35%,transparent); }
-:root .setbox::after { background: linear-gradient(to left,var(--surface) 35%,transparent); }
-:root :focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+/* GlassKit has no tooltip class; this adapter uses its default popover material. */
+:root .tooltip { color: var(--fg); background: var(--canvas-popover); border-color: var(--canvas-border); box-shadow: var(--canvas-shadow); border-radius: 12px;
+  -webkit-backdrop-filter: blur(var(--gl-blur)); backdrop-filter: blur(var(--gl-blur)); }
+:root .help kbd { background: var(--gl-surface-1); }
+:root .help li .ico { background: var(--gl-surface-3); color: var(--fg); }
+:root .fit::before { background: linear-gradient(to right,var(--canvas-popover) 45%,transparent); }
+:root .fit::after { background: linear-gradient(to left,var(--canvas-popover) 40%,transparent); }
+:root .setbox::before { background: linear-gradient(to right,var(--canvas-popover) 35%,transparent); }
+:root .setbox::after { background: linear-gradient(to left,var(--canvas-popover) 35%,transparent); }
+:root :focus-visible { outline: 2px solid var(--gl-border-focus); outline-offset: 3px; }
 :root :is(.adv,.sets,.menu) :focus-visible { outline-offset: -3px; }
 
 /* Related controls share one material; Download is the only standalone island. */
@@ -167,7 +173,7 @@
 :root .view-toggle { min-width: 7em; padding: 0 12px; gap: 8px; }
 :root .view-status { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 :root .view-state { flex: none; width: 8px; height: 8px; border: 1.5px solid currentColor; border-radius: 50%; }
-:root .view-toggle[aria-pressed="true"] { background: color-mix(in srgb,var(--fg) 8%,transparent); }
+:root .view-toggle[aria-pressed="true"] { background: var(--gl-surface-5); }
 :root .view-toggle[aria-pressed="true"] .view-state { background: currentColor; }
 :root .view-toggle[aria-pressed="false"] { color: var(--fg); }
 :root .view-toggle[aria-pressed="false"] .view-state { border-style: dashed; }
@@ -177,11 +183,12 @@
   gap: 10px 14px; padding: 0; border-radius: 0;
 }
 :root .dock > :is(.tool-group,.primary) {
-  background: var(--canvas-material); border: 1px solid var(--canvas-border); box-shadow: 0 5px 18px var(--shadow);
+  background: var(--canvas-material); border: 1px solid var(--canvas-border); box-shadow: var(--canvas-shadow);
   -webkit-backdrop-filter: blur(var(--gl-blur)); backdrop-filter: blur(var(--gl-blur));
   border-radius: 999px; padding: 6px 8px;
 }
-:root .dock > .primary { color: var(--fg); border-color: var(--line); padding-inline: 14px; }
+:root .dock > .primary { color: var(--fg); border-color: var(--gl-border-subtle); padding-inline: 14px;
+  box-shadow: var(--gl-shadow-btn),var(--gl-inset-subtle); -webkit-backdrop-filter: blur(var(--gl-blur-light)); backdrop-filter: blur(var(--gl-blur-light)); }
 :root .dock > .sep { display: none; }
 :root .panel { border-radius: 26px; }
 
@@ -251,11 +258,19 @@
   :root { --dock-base: 160px; }
 }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  :root, :root[data-theme] { --canvas-material: var(--surface); --canvas-popover: var(--surface); --canvas-readable: var(--surface); }
+   :root, :root[data-theme] {
+    --canvas-material: var(--surface); --canvas-popover: var(--surface); --canvas-readable: var(--surface); --canvas-modal: var(--surface);
+    --gl-surface-1: var(--surface); --gl-surface-2: var(--surface); --gl-surface-3: var(--surface);
+    --gl-surface-4: var(--surface); --gl-surface-5: var(--surface);
+  }
 }
 @media (prefers-reduced-transparency: reduce) {
-  :root, :root[data-theme] { --canvas-material: var(--surface); --canvas-popover: var(--surface); --canvas-readable: var(--surface); }
-  :root :is(.dock,.panel,.menu,.more,.help,.sheet,.toast,.glass-btn,.bar .btn,.brand,.empty-text,.acts,.dock > .tool-group) {
+   :root, :root[data-theme] {
+    --canvas-material: var(--surface); --canvas-popover: var(--surface); --canvas-readable: var(--surface); --canvas-modal: var(--surface);
+    --gl-surface-1: var(--surface); --gl-surface-2: var(--surface); --gl-surface-3: var(--surface);
+    --gl-surface-4: var(--surface); --gl-surface-5: var(--surface);
+  }
+  :root :is(.dock,.panel,.menu,.more,.help,.sheet,.toast,.glass-btn,.bar .btn,.brand,.empty-text,.cap,.tooltip,.acts,.dock > .tool-group) {
     -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
   }
 }
@@ -278,20 +293,11 @@
 :root .panel input.glass-range {
   height: var(--hit); background: transparent; border: 0; border-radius: 0;
 }
+/* Keep the hit area; the track and thumb use the library's default materials. */
 :root .glass-range::-webkit-slider-runnable-track {
-  height: 4px; border: 0; border-radius: 999px; background: color-mix(in srgb,var(--fg) 22%,transparent);
+  height: 6px; border: 1px solid var(--gl-range-track-border); border-radius: var(--gl-radius-full); background: var(--gl-range-track-bg);
 }
-:root .glass-range::-webkit-slider-thumb {
-  width: 24px; height: 24px; margin-top: -10px; background: var(--surface);
-  border: 1px solid var(--line); box-shadow: 0 2px 6px var(--shadow);
-}
-:root .glass-range::-moz-range-track {
-  height: 4px; border: 0; background: color-mix(in srgb,var(--fg) 22%,transparent);
-}
-:root .glass-range::-moz-range-thumb {
-  width: 22px; height: 22px; background: var(--surface); border: 1px solid var(--line);
-  box-shadow: 0 2px 6px var(--shadow);
-}
+:root .glass-range::-webkit-slider-thumb { margin-top: -10px; }
 :root .toast { min-width: 0; }
 
 /* Reserve an actual scroll viewport, rather than letting overflowing images paint
@@ -358,11 +364,9 @@
   }
 }
 
-/* Standalone actions must not inherit transparent/primary hover fills. */
-:root .bar .btn:not(:disabled):is(:hover,:focus-visible),
-:root .dock > .primary:not(:disabled):is(:hover,:focus-visible) {
-  background: color-mix(in srgb,var(--surface) 88%,var(--fg)); color: var(--fg);
-}
+/* Match default pill and tertiary states without opaque hover fills. */
+:root .bar .btn:not(:disabled):is(:hover,:focus-visible) { background: var(--gl-surface-5); color: var(--fg); }
+:root .dock > .primary:not(:disabled):is(:hover,:focus-visible) { background: var(--gl-surface-4); color: var(--fg); }
 @media (forced-colors: active) {
   :root .bar .btn:not(:disabled):is(:hover,:focus-visible),
   :root .dock > .primary:not(:disabled):is(:hover,:focus-visible) {

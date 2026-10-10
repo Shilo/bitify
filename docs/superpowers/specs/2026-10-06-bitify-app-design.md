@@ -1391,3 +1391,23 @@ so dark mode does not briefly paint a light checker before App mounts.
 
 Startup also sets both browser theme-color metadata entries to the resolved theme,
 including a saved theme opposite the OS preference. App keeps these synchronized later.
+
+## GlassKit default-material comparison (October 9, 2026)
+
+For the user's next visual test, this section supersedes the 94% surface tint and opaque
+interaction fills above. The single live layout remains Floating islands with the themed
+checker. It uses unmodified GlassKit1.22.2 glass material, border, blur, shadow and ink tokens.
+Compact geometry, native dialogs, pixel glyphs and conversion behavior remain Bitify's.
+
+Islands, captions/actions, brand and explanatory text use card surface-2 (white60% light,
+10% dark) with24px blur. Header actions use pill surface-3 (70%/14%), hover surface-5
+(85%/22%). Download uses the tertiary surface-2 and16px blur, hover surface-4 (75%/16%).
+Panels use card material; menus and the tooltip adapter use popover surface-3. Dialogs
+use the library's glow gradient (90% to50% light /32% to8% dark) and40px blur. Segmented
+selection and Auto use surface-5. The library's native range-thumb fill and actual artwork
+color swatches remain functional fills; no custom opaque UI substrate is applied normally.
+
+Opaque reduced-transparency/no-blur and forced-color fallbacks remain conditional.
+This is a comparison baseline, not a claim that default glass guarantees readable image
+actions over arbitrary pale/dark artwork. The default library aura background and bulky
+component spacing are not introduced into the existing canvas layout.
