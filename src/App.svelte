@@ -583,7 +583,7 @@
 {/if}
 
 {#if viewed}
-  <ImageViewer item={viewed} first={ink[0]} second={ink[1]} {style} {set} flipped={showOriginal !== spaceHeld}
+  <ImageViewer item={viewed} first={ink[0]} second={ink[1]} {style} {set} {busy} {message} flipped={showOriginal !== spaceHeld}
     onsave={viewed.id === 0 ? undefined : () => save(viewed)}
     oncopy={viewed.id === 0 ? undefined : () => copy(viewed)}
     onclose={() => { viewing = null; viewTrigger?.focus(); }} />
@@ -689,7 +689,7 @@
     </footer>
   </div>
 </dialog>
-<div class="glass-toast" class:is-visible={!!busy || !!message} role="status" aria-atomic="true" hidden={!busy && !message}>
+<div class="glass-toast" class:is-visible={!viewed && (!!busy || !!message)} role="status" aria-atomic="true" hidden={!!viewed || (!busy && !message)}>
   {#if busy}<span class="spin" aria-hidden="true"></span>{/if}<span class="glass-toast__text">{busy || message}</span>
 </div>
 <input bind:this={picker} type="file" accept="image/*" multiple hidden onchange={picked} />
