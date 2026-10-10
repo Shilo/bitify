@@ -51,35 +51,8 @@
   // Svelte's own touch listeners are passive and could not stop it either.
   $effect(() => on(window, 'touchstart', e => eaten && e.cancelable && e.preventDefault(), { capture: true, passive: false }));
 
-  // Reserve the complete editing stack, including the chooser, above the islands.
-  // Measurements include safe-area padding; no continuous image-layout animation.
+  // App measures the complete bottom workspace, including editing and file rows.
   let panelHeight = $state(0);
-  $effect(() => {
-    if (!dock) return;
-    panel, pop, more, width, height, panelHeight;
-    let cancelled = false, observer;
-    const root = document.documentElement;
-    const measure = () => {
-      if (cancelled) return;
-      const area = document.getElementById('app').getBoundingClientRect();
-      const dockBounds = dock.getBoundingClientRect();
-      const bounds = [dock, ...dock.querySelectorAll('.panel, .menu, .tray')].map(el => el.getBoundingClientRect());
-      const top = Math.min(...bounds.map(rect => rect.top));
-      const header = document.querySelector('.bar').getBoundingClientRect();
-      const panelTop = Math.min(dockBounds.top, ...[...dock.querySelectorAll('.panel')].map(el => el.getBoundingClientRect().top));
-      root.style.setProperty('--canvas-header-space', `${header.bottom - area.top}px`);
-      root.style.setProperty('--canvas-panel-base', `${area.bottom - panelTop + 16}px`);
-      root.style.setProperty('--dock-base', `${Math.max(0, area.bottom - dockBounds.top + 16)}px`);
-      root.style.setProperty('--panel-space', `${Math.max(0, dockBounds.top - top + (panel ? 12 : 0))}px`);
-    };
-    tick().then(() => {
-      if (cancelled) return;
-      measure();
-      observer = new ResizeObserver(measure);
-      for (const el of [dock, ...dock.querySelectorAll('.panel, .menu, .tray')]) observer.observe(el);
-    });
-    return () => { cancelled = true; observer?.disconnect(); };
-  });
 
   const styleName = $derived(STYLES.find(s => s[0] === style)[1]);
   const demo = key => {
