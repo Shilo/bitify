@@ -1,2 +1,58 @@
 /* The root checker remains continuous, with a cell corner on the first source image. */
 :root { background-position: var(--canvas-grid-x,0px) var(--canvas-grid-y,0px); }
+
+/* Keep the scrolling surface all the way to the edge of the window. Its measured
+   probe and trailing space still fit/rest the last image above editing islands. */
+:root .grid, :root .empty { margin-bottom: 0; padding-bottom: var(--dock-space); }
+:root .probe { bottom: var(--dock-space); }
+:root .grid { scroll-padding-bottom: var(--dock-space); }
+
+:root .image-viewer {
+  box-sizing: border-box; position: fixed; inset: 0; margin: 0; border: 0;
+  width: 100%; max-width: none; height: 100dvh; max-height: none; padding: 0;
+  color: var(--gl-color-text); font-family: var(--body);
+  background-color: var(--bg);
+  background-image: conic-gradient(var(--canvas-checker-a) 25%,var(--canvas-checker-b) 0 50%,var(--canvas-checker-a) 0 75%,var(--canvas-checker-b) 0);
+  background-size: calc(var(--canvas-grid-step,32px)*2) calc(var(--canvas-grid-step,32px)*2);
+}
+:root .image-viewer[open] { display: flex; flex-direction: column; }
+:root .image-viewer::backdrop { background: var(--gl-surface-overlay); }
+:root .viewer-header {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px;
+  padding: calc(env(safe-area-inset-top,0px) + 12px) calc(env(safe-area-inset-right,0px) + 12px) 0 calc(env(safe-area-inset-left,0px) + 12px);
+}
+:root .viewer-header h2 {
+  flex: 1; min-width: 0; margin: 0; font: 600 16px/1.4 var(--body);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+:root .viewer-tools {
+  display: flex; align-items: center; gap: 4px; padding: 5px; margin: 0; border-radius: 999px;
+}
+:root .viewer-tools .btn { box-sizing: border-box; height: var(--control-size); min-height: var(--control-size); padding: 0 12px; }
+:root .viewer-tools .btn.icon-only {
+  width: var(--control-size); min-width: var(--control-size); padding: 0; border-radius: 50%;
+}
+:root .viewer-close {
+  box-sizing: border-box; width: var(--control-shell); height: var(--control-shell);
+  min-width: var(--control-shell); min-height: var(--control-shell); padding: 0; border-radius: 50%;
+}
+:root .viewer-tools .glass-btn { transform: none; }
+:root .viewer-art {
+  flex: 1; min-height: 0; display: grid; place-items: center; overflow: auto;
+  padding: 12px; padding-bottom: calc(env(safe-area-inset-bottom,0px) + 12px);
+}
+:root .viewer-tile { max-width: 100%; }
+:root .viewer-tile .cap { grid-column: 1 / -1; flex-direction: row; align-items: baseline; }
+:root .viewer-tile .dim { margin-left: auto; }
+@media (max-width: 520px) {
+  :root .viewer-header h2 { flex-basis: calc(100% - 76px); }
+  :root .viewer-close { order: 1; }
+  :root .viewer-tools { order: 2; margin: 0 auto; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  :root .viewer-tools { background: var(--surface); backdrop-filter: none; -webkit-backdrop-filter: none; }
+}
+@media (forced-colors: active) {
+  :root .image-viewer { background: Canvas; color: CanvasText; }
+  :root .viewer-tools { background: Canvas; color: CanvasText; box-shadow: none; }
+}
