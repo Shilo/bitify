@@ -52,3 +52,10 @@
   :root .onboarding { background: Canvas; color: CanvasText; border-color: ButtonText; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
   :root .onboarding p { color: CanvasText; }
 }
+
+/* A short phone needs the canvas while a chooser is open. The heading and Import
+   stay discoverable; explanatory copy returns as soon as the editing panel closes. */
+@media (max-width: 520px) and (max-height: 700px) {
+  :root:has(.dock .panel) .onboarding { padding-block: 6px; }
+  :root:has(.dock .panel) .onboarding p { display: none; }
+}

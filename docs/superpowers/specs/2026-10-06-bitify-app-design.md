@@ -1561,3 +1561,5 @@ text or exceptionally small windows.
 Clicking an imported image or the live example opens the native image viewer. Long pressing continues to compare the original. The viewer resolves the current analyzed item by ID when conversion settings change, avoids copying source pixel data, and provides export/copy only for imported images. Closing restores keyboard focus to the opening image. A native modal suspends global wheel stepping as well as global keyboard shortcuts, allowing the viewer to handle scrolling and controls.
 
 While the fullscreen viewer is open, export and copy progress/success/error messages are announced by one GlassKit toast inside the native dialog; the outer App toast is hidden to avoid duplicate status announcements and top-layer occlusion.
+
+On phones no wider than 520px and no taller than 700px, opening an editing panel temporarily compacts empty-state onboarding to its heading; Import remains in the toolbar. The subtitle and instructions return when the panel closes. Actual header measurement releases this space to the live example, preventing its caption from sitting behind an editing panel.
