@@ -8,13 +8,14 @@ Run `npm ci` then `npm run dev -- --port 5188 --host 127.0.0.1`.
 
 The full window is a continuous checker canvas with distinct subdued light/dark shades. Images have no separate backing,
 4px insets and 12px gaps. Colors/Palette and comparison/Style are two editing islands;
-Import and Export share a top-right file capsule; Clear all stays separate on desktop and moves into More on phones. Image-action capsules use the opaque theme surface, with
+Import and Export share a top-right file capsule; Remove all stays at the far left on every loaded layout. Image-action capsules use the opaque theme surface, with
 opaque hover/focus ink. Panels reserve space and refit the images.
 
 Checker cells follow 16 source pixels at the median display scale; very dense intervals
 are grouped. There are no grid settings or alternate design modes. Existing normal
 `bitify` preferences and first-visit help remain. The checker does not change exports.
 
+- [Current numbered refinements, research and final review](2026-10-09-numbered-refinements.md)
 - [Adoption, adversarial review decisions and validation](2026-10-09-floating-islands-adoption.md)
 - [Current validation and historical exploration checks](validation.md)
 - [Glass readability research](2026-10-09-glass-readability.md)
@@ -27,7 +28,7 @@ Their former Designs picker, alternate dock/rail layouts, optional backgrounds a
 sample loader are removed from the live app. Prototype query parameters now load the
 same sole design. The normal URL is the current implementation.
 
-`npm test`: **220 tests in 13 files pass**. Production build passes. Real Safari/iOS,
+`npm test`: **235 tests in 16 files pass**. Production build passes. Real Safari/iOS,
 OS accessibility settings and physical touch gestures remain device checks; generated
 QA fixtures establish CSS geometry/cascade behavior, not hardware behavior.
 
@@ -51,7 +52,7 @@ The small destructive text row inside More uses opaque GlassKit error colors for
 [Compare three Import/Export layouts](import-export-layouts.html): top-right horizontal
 pair (recommended/live), bottom file island, and right-edge vertical pair. The comparison
 supports light/dark, phone sizing and sample panels; file actions are illustrative only.
-Current controls and native feedback: [research and final checks](2026-10-09-control-geometry-and-native-feedback.md),
+Earlier controls and native feedback: [research and final checks](2026-10-09-control-geometry-and-native-feedback.md),
 [dark desktop](mockups/uniform-empty-desktop-dark.png), [light desktop](mockups/uniform-empty-desktop-light.png),
 [small phone](mockups/uniform-empty-small-phone-dark.png), [native Reset](mockups/native-reset-phone-dark.png),
 and [native selection toast](mockups/native-selection-toast-phone-light.png). The modal has a scoped

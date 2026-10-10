@@ -1,4 +1,6 @@
-# Current adoption validation
+# Current validation
+
+Latest: [numbered interface refinements and challenged review](2026-10-09-numbered-refinements.md). **235 tests in 16 files pass**, production build passes, and current desktop/phone/browser export checks passed. Earlier records below preserve prior stages.
 
 Floating islands is now the sole runtime design. See the [adoption and final review](2026-10-09-floating-islands-adoption.md) for **220 passing tests in 13 files**, production checks, parsed exports and simulated-media checks. The records below document historical exploration and must not be read as available alternate layouts.
 
@@ -17,7 +19,7 @@ Physical Safari/iOS and OS accessibility settings remain device checks.
 - Desktop 600px palette has a fixed name, nowrap swatch viewport and no horizontal
   page overflow. Desktop 1280px Palette/Style/chooser/editing islands resolve the
   same surface2 material and 24px blur: white10% dark, white60% light.
-- Production touch-media fixture at320px fits a 296px palette with stacked fixed
+- Production touch-media fixture at 320px fits a 296px palette with stacked fixed
   name/swatches, two editing rows, 44px icon controls and no horizontal overflow.
 - Import via the icon opens the actual local picker. Export is disabled when empty,
   returns a GIF for one GIF, PNG for one PNG, and ZIP for multiple images. The real
