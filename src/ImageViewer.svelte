@@ -5,15 +5,14 @@
   import { tooltip } from './lib/tooltip.js';
   import { fitViewerImage } from './lib/viewer-layout.js';
   let { item, first, second, style, set, flipped = false, onsave, oncopy, onclose, busy = '', message = '' } = $props();
-  let dialog, moreButton;
-  let menuOpen = $state(false);
+  let dialog, closeButton;
   let width = $state(0), height = $state(0);
   // Seed the local conversion preference once, opposite the main canvas.
   let converted = $state(untrack(() => flipped));
   let spaceHeld = $state(false), imageHeld = $state(false);
   const originalVisible = $derived(!converted !== (spaceHeld || imageHeld));
   const fit = $derived(fitViewerImage(item.img.w, item.img.h, width, height, 0));
-  $effect(() => { dialog.showModal(); moreButton.focus(); });
+  $effect(() => { dialog.showModal(); closeButton.focus(); });
   $effect(() => {
     const clear = () => { spaceHeld = false; imageHeld = false; };
     const hidden = () => { if (document.hidden) clear(); };
@@ -30,8 +29,6 @@
 <!-- A native top-layer dialog gives fullscreen image inspection without requiring
      browser fullscreen permission or leaving the app's keyboard focus unmanaged. -->
 <dialog class="image-viewer" bind:this={dialog} aria-label="Full screen image"
-  onpointerdown={e => { if (menuOpen && !e.target.closest('.viewer-options')) menuOpen = false; }}
-  oncancel={e => { if (menuOpen) { e.preventDefault(); menuOpen = false; moreButton.focus(); } }}
   onclose={() => { spaceHeld = false; onclose?.(); }} onkeydown={keydown} onkeyup={e => { if (e.code === 'Space') spaceHeld = false; }}>
   <nav class="viewer-workspace" aria-label="Fullscreen image controls">
     <div class="viewer-tools glass-card" role="group" aria-label="Image actions">
@@ -43,14 +40,7 @@
       {#if oncopy}<button class="btn glass-btn icon-only" onclick={oncopy} aria-label="Copy image" use:tooltip={'Copy the converted image as a PNG.'}><PixelIcon name="copy" /></button>{/if}
       {#if onsave}<button class="btn glass-btn icon-only" onclick={onsave} aria-label="Save image" use:tooltip={'Save the converted image at its original size.'}><PixelIcon name="save" /></button>{/if}
     </div>
-    <div class="viewer-options">
-      <button class="btn glass-btn icon-only viewer-more" bind:this={moreButton} onclick={() => (menuOpen = !menuOpen)} aria-expanded={menuOpen} aria-haspopup="true" aria-label="More" use:tooltip={'Open fullscreen options.'}><PixelIcon name="more" /></button>
-      {#if menuOpen}
-        <div class="viewer-menu glass-card" role="group" aria-label="Fullscreen options">
-          <button class="btn glass-btn" onclick={() => dialog.close()}><PixelIcon name="x" />Close full screen</button>
-        </div>
-      {/if}
-    </div>
+    <button class="btn glass-btn icon-only viewer-close" bind:this={closeButton} onclick={() => dialog.close()} aria-label="Close full screen" use:tooltip={'Close full screen.'}><PixelIcon name="x" /></button>
   </nav>
   <div class="viewer-art" bind:clientWidth={width} bind:clientHeight={height}>
     <div class="viewer-tile" style:width="{fit.width}px">

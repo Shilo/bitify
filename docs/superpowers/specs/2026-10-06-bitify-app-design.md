@@ -1654,3 +1654,6 @@ Fullscreen bottom-workspace refinement: remove filename/title header and its mea
 
 
 Fullscreen conversion presentation: retain the original circular swap-icon button rather than a style-name label. It has selected/unselected backgrounds and aria-pressed for the local converted state, with dynamic accessible action text. Local opposite initialization and global-state isolation remain unchanged.
+
+
+Fullscreen dismissal clarification: the bottom-right control is the original direct Close icon button. Remove the fullscreen More dropdown and its menu state/dismissal handlers. Native Escape and Close both dismiss the viewer, restoring focus to the originating image. Bottom placement, solid material and isolated conversion state remain.
