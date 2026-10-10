@@ -22,9 +22,6 @@
 :root .more .menu-clear { display: none; }
 /* Task27: art uses the whole window; toolbar and caption overlay it without reserving space. */
 :root .image-viewer[open] { display: block; }
-:root .viewer-header { position: absolute; z-index: 2; inset: 0 0 auto; pointer-events: none; }
-:root .viewer-header > * { pointer-events: auto; }
-:root .viewer-header :is(h2,.viewer-tools,.viewer-close) { background: var(--surface); -webkit-backdrop-filter: none; backdrop-filter: none; }
 :root .viewer-art { position: absolute; inset: 0; padding: 0; display: grid; place-items: center; overflow: hidden; }
 :root .viewer-tile .cap { display: none; }
 :root .viewer-tile .art { margin: 0; }
@@ -38,7 +35,6 @@
 @media (forced-colors: active) {
   :root :is(.more,.help,.sheet), :root .reset-modal .glass-modal,
   :root .workspace-tools.canvas-scrollable :is(.file-actions,.file-tools > .btn),
-  :root .viewer-header :is(h2,.viewer-tools,.viewer-close) { background: Canvas; color: CanvasText; }
   :root .bar .file-actions .file-clear { background: ButtonFace; color: ButtonText; border-color: ButtonText; }
 }
 

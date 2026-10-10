@@ -18,60 +18,21 @@
 }
 :root .image-viewer[open] { display: flex; flex-direction: column; }
 :root .image-viewer::backdrop { background: var(--gl-surface-overlay); }
-:root .viewer-header {
-  display: grid; grid-template-columns: minmax(0,1fr) auto auto; align-items: center; gap: 12px;
-  padding: calc(env(safe-area-inset-top,0px) + 18px) calc(env(safe-area-inset-right,0px) + 24px) 12px calc(env(safe-area-inset-left,0px) + 24px);
-}
-:root .viewer-header h2 {
-  box-sizing: border-box; min-width: 0; margin: 0; height: var(--control-shell);
-  width: max-content; max-width: 100%; justify-self: start;
-  display: block; padding: 0 14px; font: 600 16px/var(--control-shell) var(--body);
-  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-  color: var(--fg); border: 1px solid var(--canvas-border); border-radius: 12px;
-  background: var(--canvas-material); box-shadow: var(--canvas-shadow);
-  -webkit-backdrop-filter: blur(var(--gl-blur)); backdrop-filter: blur(var(--gl-blur));
-}
-:root .viewer-tools {
-  box-sizing: border-box; height: var(--control-shell); display: flex; align-items: center; gap: 2px; padding: 5px; margin: 0; border-radius: 999px;
-  background: var(--canvas-material); color: var(--fg); border: 1px solid var(--canvas-border);
-  box-shadow: var(--canvas-shadow); -webkit-backdrop-filter: blur(var(--gl-blur)); backdrop-filter: blur(var(--gl-blur));
-}
-:root .viewer-tools .btn { box-sizing: border-box; height: var(--control-size); min-height: var(--control-size); padding: 0 12px; }
-:root .viewer-tools .btn.icon-only {
-  width: var(--control-size); min-width: var(--control-size); padding: 0; border-radius: 50%;
-}
-:root .viewer-close {
-  box-sizing: border-box; width: var(--control-shell); height: var(--control-shell);
-  min-width: var(--control-shell); min-height: var(--control-shell); padding: 0; border-radius: 50%;
-  background: var(--gl-surface-3); color: var(--fg); border: 1px solid var(--gl-border-strong);
-  box-shadow: var(--gl-shadow-glow),var(--gl-inset-medium);
-  -webkit-backdrop-filter: blur(var(--gl-blur)); backdrop-filter: blur(var(--gl-blur));
-}
-/* Same unfilled internal controls and stationary feedback as the main toolbar. */
-:root .viewer-tools .btn { background: transparent; border-color: transparent; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+:root .viewer-workspace { position: absolute; z-index: 2; inset: auto calc(env(safe-area-inset-right,0px) + 24px) calc(env(safe-area-inset-bottom,0px) + 20px) calc(env(safe-area-inset-left,0px) + 24px); display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 8px; pointer-events: none; }
+:root .viewer-workspace > * { pointer-events: auto; }
+:root .viewer-tools { box-sizing: border-box; height: var(--control-shell); display: flex; align-items: center; gap: 2px; padding: 5px; margin: 0; border-radius: 999px; background: var(--surface); color: var(--fg); border: 1px solid var(--canvas-border); box-shadow: var(--canvas-shadow); -webkit-backdrop-filter: none; backdrop-filter: none; }
+:root .viewer-tools .btn { box-sizing: border-box; height: var(--control-size); min-height: var(--control-size); padding: 0 12px; background: transparent; border-color: transparent; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; transform: none; }
+:root .viewer-tools .btn.icon-only { width: var(--control-size); min-width: var(--control-size); padding: 0; border-radius: 50%; }
 :root .viewer-tools .btn:is(:hover,:focus-visible) { background: var(--gl-surface-4); }
-:root .viewer-header .glass-btn { transform: none; }
-:root .viewer-toast { --gl-toast-top: calc(var(--viewer-header-space,80px) + 8px); }
-:root .viewer-art {
-  flex: 1; min-height: 0; display: grid; place-items: center; overflow: auto;
-  padding: 12px; padding-bottom: calc(env(safe-area-inset-bottom,0px) + 12px);
-}
-:root .viewer-tile { max-width: 100%; }
-:root .viewer-tile .cap { grid-column: 1 / -1; flex-direction: row; align-items: baseline; }
-:root .viewer-tile .dim { margin-left: auto; }
-@media (max-width: 800px) {
-  :root .viewer-header { padding: calc(env(safe-area-inset-top,0px) + 12px) calc(env(safe-area-inset-right,0px) + 12px) 8px calc(env(safe-area-inset-left,0px) + 12px); gap: 7px; }
-  :root .viewer-header h2 { padding-inline: 8px; font-size: 14px; }
-}
-@media (max-width: 360px) { :root .viewer-header { gap: 6px; } }
-@media (max-height: 520px) and (orientation: landscape) { :root .viewer-header { padding-top: calc(env(safe-area-inset-top,0px) + 8px); padding-bottom: 6px; } }
-@media (prefers-reduced-transparency: reduce) {
-  :root :is(.viewer-tools,.viewer-header h2,.viewer-close) { background: var(--surface); -webkit-backdrop-filter: none; backdrop-filter: none; }
-}
-@media (forced-colors: active) {
-  :root .image-viewer { background: Canvas; color: CanvasText; }
-  :root :is(.viewer-tools,.viewer-header h2,.viewer-close) { background: Canvas; color: CanvasText; box-shadow: none; }
-}
+:root .viewer-tools .viewer-compare[aria-pressed="true"] { background: var(--gl-surface-4); box-shadow: var(--gl-inset-medium); }
+:root .viewer-convert-dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+:root .viewer-options { position: relative; margin-left: auto; }
+:root .viewer-more { box-sizing: border-box; width: var(--control-shell); height: var(--control-shell); min-width: var(--control-shell); min-height: var(--control-shell); padding: 0; border-radius: 50%; background: var(--surface); color: var(--fg); transform: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+:root .viewer-menu { position: absolute; bottom: calc(100% + 10px); right: 0; width: max-content; padding: 8px; background: var(--surface); -webkit-backdrop-filter: none; backdrop-filter: none; }
+:root .viewer-toast { --gl-toast-top: calc(env(safe-area-inset-top,0px) + 16px); background: var(--surface); -webkit-backdrop-filter: none; backdrop-filter: none; }
+:root .viewer-tile { --image-inset: 0px; max-width: 100%; }
+@media (max-width: 800px) { :root .viewer-workspace { left: calc(env(safe-area-inset-left,0px) + 12px); right: calc(env(safe-area-inset-right,0px) + 12px); bottom: calc(env(safe-area-inset-bottom,0px) + 12px); } }
+@media (forced-colors: active) { :root .image-viewer, :root :is(.viewer-tools,.viewer-more,.viewer-menu,.viewer-toast) { background: Canvas; color: CanvasText; box-shadow: none; } :root .viewer-compare[aria-pressed="true"] { outline: 2px solid Highlight; } }
 
 /* Tasks 29–30: touch exposes one circular Share target, without a surrounding
    action capsule. Removing an item lives in the intentional action sheet. */
@@ -105,3 +66,6 @@
   :root .tile-share, :root .sheet .btn.danger { background: Canvas; color: CanvasText; border-color: ButtonText; box-shadow: none; }
   :root .sheet .btn.glass-btn--primary { background: Highlight; color: HighlightText; border-color: Highlight; box-shadow: none; }
 }
+
+:root .viewer-workspace .viewer-more:is(:hover,:focus-visible,:active) { background: var(--surface); box-shadow: var(--gl-inset-strong); transform: none; }
+@media (forced-colors: active) { :root .viewer-workspace .viewer-more:is(:hover,:focus-visible,:active) { background: Canvas; } }

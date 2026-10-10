@@ -1648,3 +1648,6 @@ The example primary-caption button explicitly keeps a nonwrapping horizontal row
 
 
 Empty-state file-toolbar preference: hide the bottom Add button and its entire file capsule while no images are imported. Keep More and editing islands visible. The primary example caption and canvas activate Add; after import the Remove/Add/Save capsule appears. Hidden capsule width is zero and consumes no packing gap. Focus after removing the final image returns to the visible primary example Add action.
+
+
+Fullscreen bottom-workspace refinement: remove filename/title header and its measurements. Image art fits the full viewport with zero inset and preserved aspect ratio; letterboxing is unavoidable for mismatched aspect ratios. A solid theme action capsule sits bottom left; solid More sits bottom right and opens Close full screen. Controls respect safe areas and wrap when needed. The local conversion preference starts opposite the main canvas, has matching selected/unselected feedback, and changes only the fullscreen image; closing never updates global conversion state. Holds temporarily invert this local preference. Feedback toast is solid and stays away from the bottom controls.

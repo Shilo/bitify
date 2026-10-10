@@ -78,3 +78,12 @@ Independent implementation/review agent wrote eight focused packing tests and re
 Two subagents implemented packing/caption changes and reviewed integration. One valid More safe-area finding was fixed in4e2ff80; final review found no actionable issue. Full suite256tests/18files and productionbuildpass; production browser has no errors/warnings.
 
 ![Compact loaded mobile workspace](C:/Users/shilo/.codex/visualizations/2026/10/09/01a11fbc-7f61-7df0-a43f-50e5ca11310a/compact-workspace-mobile.png)
+
+
+## Fullscreen bottom workspace verification
+
+Removed filename title/header and header measurement. Controls now overlay bottom left (local conversion, Copy, Save) and bottom right (More → Close full screen), with opaque theme shells and protected More interaction states. Viewer local conversion initializes opposite main conversion, resets per opening, and never changes the global preference. Native Cancel closes an open options menu before closing the viewer; outside-pointer dismissal and focus restoration are retained.
+
+Production touch fixture verified390×844,844×390,320×568 and1075×884. Art region equalsviewport; square canvas dimensions390×390,390×390,320×320,884×884 respectively, with zero inherited inset. Both shells56px high, backgroundrgb(39,44,50), backdrop-filter:none. Title count0. Both main-state starting directions and local toggle/global preservation verified. Save/Copy tooltips explicitly describe converted output. Native physicaldevices remainunverified. Subagent found valid More-hover material override; fixed and rechecked. Full256tests and productionbuild pass.
+
+![Fullscreen portrait](C:/Users/shilo/.codex/visualizations/2026/10/09/01a11fbc-7f61-7df0-a43f-50e5ca11310a/fullscreen-bottom-portrait.png)
