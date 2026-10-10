@@ -122,6 +122,7 @@
     onpointerup={release}
     onpointerleave={cancel}
     onpointercancel={cancel}
+    onblur={cancel}
     oncontextmenu={e => e.preventDefault()}
     bind:clientWidth={box}
     bind:clientHeight={boxHeight}

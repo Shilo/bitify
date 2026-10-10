@@ -9,7 +9,7 @@
   // This also measures the differently sized example on an empty workspace.
   $effect(() => {
     items, example;
-    let cancelled = false, observer, stop;
+    let cancelled = false, observer, children, stop;
     tick().then(() => {
       if (cancelled) return;
       const art = document.querySelector('#app .tile .art');
@@ -18,11 +18,18 @@
         across = Math.max(0, art.clientWidth - 2 * IMAGE_INSET);
         const source = (items[0] ?? example)?.img;
         const canvas = art.querySelector('canvas');
-        if (source && canvas) origin = canvasGridOrigin(canvas.getBoundingClientRect(), source);
+        if (source && canvas) {
+          const next = canvasGridOrigin(canvas.getBoundingClientRect(), source);
+          if (next.x !== origin.x || next.y !== origin.y) origin = next;
+        }
       };
       measure();
       observer = new ResizeObserver(measure);
       observer.observe(art);
+      // Tile creates its canvas only after its client dimensions are available.
+      // Observe child insertion, not canvas attributes or animated pixel writes.
+      children = new MutationObserver(measure);
+      children.observe(art, { childList: true });
       // Header reflow and tile centering can move an unchanged image box.
       for (const node of [art.parentElement.parentElement, document.querySelector('#app .bar')]) {
         if (node) observer.observe(node);
@@ -36,7 +43,7 @@
         window.visualViewport?.removeEventListener('resize', measure);
       };
     });
-    return () => { cancelled = true; observer?.disconnect(); stop?.(); };
+    return () => { cancelled = true; observer?.disconnect(); children?.disconnect(); stop?.(); };
   });
   const spacing = $derived(canvasGridSpacing(
     (items.length ? items : example ? [example] : []).map(item => item.img), across,
