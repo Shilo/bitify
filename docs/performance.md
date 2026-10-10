@@ -629,6 +629,37 @@ from this machine through `adb reverse`, and uses real touch events.
   during a long job on a phone, `live.mjs` photographs the screen through `adb`.
 - **A tile needs a drawn frame to learn its size.** In a browser pane that is not being
   shown, tiles stay unmeasured and report a canvas of 1 by 1 or none.
-- **`npm test` may count tests twice**, if a copy of the sources (a worktree, or a
-  `bench/baseline`) lies inside the repository. `npx vitest run src/lib` does too. Delete
-  the copy.
+- **Keep historical test copies in `.tmp/`.** Vitest excludes this generated scratch
+  directory while preserving its default discovery elsewhere. A source copy in another
+  directory, such as `bench/baseline`, can still run duplicate tests.
+
+## Unit test overhead (October 10, 2026)
+
+The Pages deployment previously failed when an exhaustive workspace layout test exceeded
+Vitest's five-second timeout. Its strict-assertion optimization retained every half-pixel
+width and packing configuration. A follow-up audit kept the same approach for hot Icon
+assertion loops: all 65 fixtures, Detail values, reflection/rotation cases, preview sizes
+and export pixel comparisons remain unchanged. Ordinary assertions outside these loops
+still use Vitest matchers. Failure messages now identify the fixture, setting and pixel.
+
+Three comparable targeted runs before and after, using
+`npx vitest run src/lib/bitify.test.js src/lib/icon.test.js --reporter=json --outputFile=.tmp/test-speed.json`,
+gave these median test durations on the local machine:
+
+| Check | Before | After |
+| --- | ---: | ---: |
+| Icon file, sum of test durations | 642.66 ms | 446.76 ms |
+| Geometry and symmetry sweep | 237.11 ms | 156.21 ms |
+| Preview and export sweep | 105.35 ms | 16.41 ms |
+
+This reduces Icon test execution time by about 30.5%. Overall parallel wall time remains
+dominated by the unchanged exhaustive Stencil test, approximately 2.3 seconds locally;
+these measurements do not imply the same improvement for the entire suite or a guarantee
+against future CI failures. Precomputing Stencil's transparency oracle was measured slower
+and rejected. No application code, test cases, iteration ranges or timeout limits changed.
+
+An intentionally wrong export color still failed with the correct fixture/pixel and
+actual/expected values. A deliberately failing test in a new `bench` subdirectory remained
+discoverable, while a failing `.tmp` test was excluded. These temporary canaries were
+removed after checking them. The `.tmp` exclusion extends Vitest's existing defaults;
+it does not limit discovery to today's test directories.

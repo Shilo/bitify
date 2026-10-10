@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { analyze, mask, iconOf, colorize } from './bitify.js';
 
@@ -126,7 +127,7 @@ describe('all 65 supplied AI inventory items', () => {
   });
 
   it('has no isolated cuts, protects interior three-wide cores, and gives identical results under reflection and quarter turns', () => {
-    for (const src of sources) for (const border of ['auto','keep']) {
+    for (const [i, src] of sources.entries()) for (const border of ['auto','keep']) {
       const img = analyze(src);
       for (const detail of [0,25,50,75,100]) {
         const m = mask(img, 'icon', {border,detail}), ink = Uint8Array.from(m, (_,p) => src.data[p*4+3] >= 128);
@@ -137,8 +138,9 @@ describe('all 65 supplied AI inventory items', () => {
             const x=p%img.w+dx,y=Math.floor(p/img.w)+dy;
             if ((dx||dy) && x>=0 && y>=0 && x<img.w && y<img.h && m[y*img.w+x]===1) cuts++;
           }
-          expect(cuts).toBeGreaterThan(0);
-          if (!rim[p]) expect((rim[p-1]&&rim[p+1])||(rim[p-img.w]&&rim[p+img.w])).toBeFalsy();
+          const context = `${fixtures[i].id}: ${border}/detail=${detail}, pixel ${p}`;
+          assert.ok(cuts > 0, `${context}: isolated cut`);
+          if (!rim[p]) assert.ok(!((rim[p-1]&&rim[p+1])||(rim[p-img.w]&&rim[p+img.w])), `${context}: interior core cut`);
         }
         for (const turn of [false,true]) {
           const data = new Uint8ClampedArray(src.data.length), positions = [];
@@ -147,22 +149,22 @@ describe('all 65 supplied AI inventory items', () => {
             positions[p]=q;data.set(src.data.subarray(p*4,p*4+4),q*4);
           }
           const other=mask(analyze({...src,data}),'icon',{border,detail});
-          expect(positions.map(p=>other[p])).toEqual([...m]);
+          assert.deepEqual(positions.map(p=>other[p]), [...m], `${fixtures[i].id}: ${border}/detail=${detail}, ${turn ? 'quarter turn' : 'reflection'}`);
         }
       }
     }
   });
 
   it('has exact preview sampling and exports only the chosen ink plus binary transparency', () => {
-    for (const src of sources) {
+    for (const [i, src] of sources.entries()) {
       const img = analyze(src), full = mask(img, 'icon');
       for (const [w, h] of [[7, 9], [1, 1], [16, 16]]) {
         const sampled = mask(img, 'icon', {}, w, h);
         const expected = Array.from({ length: w * h }, (_, p) => full[Math.floor((Math.floor(p / w) + 0.5) * img.h / h) * img.w + Math.floor((p % w + 0.5) * img.w / w)]);
-        expect([...sampled]).toEqual(expected);
+        assert.deepEqual([...sampled], expected, `${fixtures[i].id}: preview ${w}x${h}`);
       }
       const px = colorize(full, null, '#12ab34');
-      for (let p = 0; p < full.length; p++) expect([...px.slice(p * 4, p * 4 + 4)]).toEqual(full[p] === 2 ? [18, 171, 52, 255] : [0, 0, 0, 0]);
+      for (let p = 0; p < full.length; p++) assert.deepEqual([...px.slice(p * 4, p * 4 + 4)], full[p] === 2 ? [18, 171, 52, 255] : [0, 0, 0, 0], `${fixtures[i].id}: exported pixel ${p}`);
     }
   });
 
@@ -186,14 +188,14 @@ describe('Icon opening safeguards', () => {
       const img=analyze({width:16,height:16,data:Uint8ClampedArray.from(Buffer.from(c.rgba,'base64'))});
       for(const border of ['auto','keep']) for(let detail=0;detail<=100;detail++) {
         const m=mask(img,'icon',{border,detail});
-        expect(components(m,16,16)).toBe(components(Uint8Array.from(m,(_,p)=>img.data[p*4+3]>=128?2:0),16,16));
+        assert.equal(components(m,16,16), components(Uint8Array.from(m,(_,p)=>img.data[p*4+3]>=128?2:0),16,16), `sample ${c.sample}/${border}/${detail}: connectivity`);
         for(let p=0;p<m.length;p++)if(m[p]===1){
           let adjacent=0;
           for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){
             const x=p%16+dx,y=Math.floor(p/16)+dy;
             if((dx||dy)&&x>=0&&y>=0&&x<16&&y<16&&m[y*16+x]===1)adjacent++;
           }
-          expect(adjacent,`sample ${c.sample}/${border}/${detail}`).toBeGreaterThan(0);
+          assert.ok(adjacent > 0, `sample ${c.sample}/${border}/${detail}, pixel ${p}: isolated cut`);
         }
       }
     }
