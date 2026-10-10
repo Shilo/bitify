@@ -1,13 +1,14 @@
 <script module>
-  import { mask, colorize, previewBall } from './lib/bitify.js';
-  import { PRESETS, PALETTE_USES, STYLES, STYLE_USES, isPalette, inOrder, inks } from './lib/presets.js';
+  import { stylePreview } from './lib/style-preview.js';
+  import { PRESETS, PALETTE_USES, STYLES, STYLE_USES, isPalette, inOrder } from './lib/presets.js';
   import { SETTINGS, STYLE_SETTINGS, defaults, changed, shown } from './lib/settings.js';
 
-  const BALL = previewBall(); // previews each style
+
 </script>
 
 <script>
   import Pixels from './Pixels.svelte';
+  import PalettePreview from './PalettePreview.svelte';
   import PixelIcon from './PixelIcon.svelte';
   import { on } from 'svelte/events';
   import { tick } from 'svelte';
@@ -76,7 +77,10 @@
   });
 
   const styleName = $derived(STYLES.find(s => s[0] === style)[1]);
-  const demo = key => new ImageData(colorize(mask(BALL, key, settings[key]), ...inks(first, second, none, key)), BALL.w, BALL.h);
+  const demo = key => {
+    const preview = stylePreview(key, settings[key], first, second, none);
+    return new ImageData(preview.data, preview.width, preview.height);
+  };
 
   // The current style's settings: the values, and which settings they are. The threshold has its
   // place on the strip, or Cuts in Stencil, which has no threshold; `rest` is the others.
@@ -233,7 +237,7 @@
   {#if options}
     <div class="seg glass-segmented" role="group" aria-label={label}>
       {#each options as [value, name, spoken]}
-        <button aria-pressed={own[key] === value} aria-label={spoken} onclick={() => (own[key] = value)}>{name}</button>
+        <button class="glass-segmented__item" aria-pressed={own[key] === value} aria-label={spoken} onclick={() => (own[key] = value)}>{name}</button>
       {/each}
     </div>
   {:else}
@@ -281,8 +285,8 @@
              the palettes: a small switch of three pictures, both colors and each color gone
              (.seg.mini and .glyph in app.css). -->
         <span class="seg mini glass-segmented" role="group" aria-label="Transparent color">
-          {#each [['Both colors', ''], ['No color for lines and dark pixels', ' first'], ['No color for fill and light pixels', ' second']] as [label, half], n}
-            <button aria-pressed={none === n} aria-label={label} use:tooltip={['Draw both colors without making either transparent.', 'Make outlines and dark areas transparent.', 'Make fills and highlights transparent.'][n]} onclick={() => (none = n)}><span class="glyph{half}"></span></button>
+          {#each ['Both colors', 'Transparent outlines and dark areas', 'Transparent fills and highlights'] as label, n}
+            <button class="glass-segmented__item" aria-pressed={none === n} aria-label={label} use:tooltip={['Draw both colors without making either transparent.', 'Make outlines and dark areas transparent.', 'Make fills and highlights transparent.'][n]} onclick={() => (none = n)}><PalettePreview {first} {second} none={n} compact /></button>
           {/each}
         </span>
       </span>
@@ -291,13 +295,12 @@
           {#each PRESETS as p, i}
             {#if i && i % 4 === 0}<span class="sep"></span>{/if}
             <button
-              class="pal"
+              class="pal glass-btn"
               aria-pressed={chosen(p)}
               aria-label={p.name}
               use:tooltip={`${p.name}: ${PALETTE_USES[p.name]}`}
-              style:background="linear-gradient(135deg, {p.dark} 50%, {p.light} 50%)"
               onclick={() => choose(p)}
-            ></button>
+            ><PalettePreview first={p.dark} second={p.light} /></button>
           {/each}
         </div>
       </div>
@@ -308,7 +311,7 @@
         {#if pop === 'styles'}
           <div class="menu glass-card" role="group" aria-label="Style" use:reveal use:styleDividers onwheel={e => (e.currentTarget.scrollLeft += e.deltaY)}>
             {#each STYLES as [key, name]}
-              <button class="preset" class:group-start={key === 'stencil' || key === 'checker' || key === 'silhouette'} aria-pressed={style === key} use:tooltip={STYLE_USES[key]} onclick={() => { style = key; showOriginal = false; pop = null; }}>
+              <button class="preset glass-btn" class:group-start={key === 'stencil' || key === 'checker' || key === 'silhouette'} aria-pressed={style === key} use:tooltip={STYLE_USES[key]} onclick={() => { style = key; showOriginal = false; pop = null; }}>
                 <Pixels class="demo" pixels={demo(key)} />{name}
               </button>
             {/each}
@@ -357,7 +360,7 @@
         {#if more && rest.length}
           <div class="adv">
             {#each rest as key}
-              <div class="row"><span class="key" class:changed={changed(style, own, [key])}>{SETTINGS[key].label}</span>{@render control(key)}</div>
+              <div class="row" class:choice-row={!!SETTINGS[key].options}><span class="key" class:changed={changed(style, own, [key])}>{SETTINGS[key].label}</span>{@render control(key)}</div>
             {/each}
             <div class="foot">
               <button class="btn glass-btn" disabled={!changed(style, own, keys)} aria-label="Reset {styleName}" use:tooltip={'Restore this style’s default settings.'} onclick={reset}><PixelIcon name="reset" />Reset</button>
@@ -373,10 +376,12 @@
       <!-- A color that is None shows no color (.sw.none in app.css). Its picker still opens, on the
            color it had, and choosing one there brings the color back. -->
       <label class="sw" class:none={none === 1} style:background={none === 1 ? null : first} use:tooltip={none === 1 ? 'Choose a color to restore outlines and dark areas.' : 'Choose the color for outlines and dark areas.'}>
+        {#if none === 1}<span class="none-label" aria-hidden="true">None</span>{/if}
         <input type="color" bind:value={first} oninput={() => none === 1 && (none = 0)} aria-label="Color for lines and dark pixels{none === 1 ? ': None' : ''}" />
       </label>
-      <button class="ib" onclick={swap} aria-label="Swap colors" use:tooltip={'Exchange the two colors, including transparency.'}><PixelIcon name="swap" /></button>
+      <button class="ib glass-btn" onclick={swap} aria-label="Swap colors" use:tooltip={'Exchange the two colors, including transparency.'}><PixelIcon name="swap" /></button>
       <label class="sw" class:none={none === 2} style:background={none === 2 ? null : second} use:tooltip={none === 2 ? 'Choose a color to restore fills and highlights.' : 'Choose the color for fills and highlights.'}>
+        {#if none === 2}<span class="none-label" aria-hidden="true">None</span>{/if}
         <input type="color" bind:value={second} oninput={() => none === 2 && (none = 0)} aria-label="Color for fill and light pixels{none === 2 ? ': None' : ''}" />
       </label>
     </div>
@@ -407,3 +412,5 @@
     <span id="view-status" class="view-status">{showOriginal ? 'Showing original images.' : `Showing images converted with ${styleName}.`}</span>
   </div>
 </div>
+
+

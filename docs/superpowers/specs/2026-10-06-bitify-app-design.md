@@ -1538,3 +1538,11 @@ text or exceptionally small windows.
     request is made to render an icon. Lucide's license is kept with the assets. All UI
     headings, labels and controls use Schibsted Grotesk; the branded wordmark remains
     Pixelify Sans. Artwork and conversion previews remain pixel rendered.
+
+### October 9 refinement tasks 10, 11, 13, 14 and 15: editing controls
+
+10. Editing labels, inputs and buttons use the shared GlassKit/body font. Style names remain readable labels alongside previews; action glyphs continue through the shared icon component.
+11. Advanced setting rows use compact 8px label/control gaps and 6px row gaps. Discrete choices such as Rim keep their natural width instead of stretching across the column; their targets remain at least 44px wide. The advanced tray uses one column below 800px to keep five-way Brightness choices comfortable. Reset retains a 44px height.
+13. The style chooser now uses a transparent 24px faceted sprite with broad tonal regions, an inset cavity and an offset band, replacing the ball only in the UI. Every preview uses the real conversion algorithm and the style's remembered settings, including Brightness and Opacity cut. All eleven default outputs differ. The original ball and worked examples in docs/styles.md remain historical algorithm illustrations.
+14. Palette buttons show an inset stepped two-color sample, keeping each ink visible and separated from the control border. The transparency switch shows actual selected inks and checkerboard for omitted regions. Bottom color swatches display a readable None label when transparent. Choosing a palette still preserves the active transparency setting; no conversion or palette values change.
+15. Palette/style chooser buttons and transparency/discrete setting choices use native GlassKit button and segmented classes. This adapter changes only spacing, sample geometry and type hierarchy; editing islands and popup surfaces continue to use existing shared GlassKit theme tokens.
