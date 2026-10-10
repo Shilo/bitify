@@ -11,6 +11,8 @@
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^7.3.1",
+    "postcss": "^8.5.29",
+    "postcss-selector-parser": "^7.1.6",
     "svelte": "^5.57.2",
     "vite": "^8.3.3",
     "vitest": "^4.1.11"

@@ -55,6 +55,10 @@
 :root .glass-btn .ico { width: 14px; height: 14px; fill: currentColor; stroke: none; stroke-width: 0; }
 :root .glass-btn .plus-icon { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; }
 :root :is(.btn,.ib):not(:disabled):hover { background-color: var(--gl-surface-4); }
+/* Touch press feedback ends on release; selected-state materials stay intact. */
+@media (hover: none) {
+  :root :is(.btn,.ib):not(:disabled):active { box-shadow: var(--gl-inset-medium); }
+}
 :root .btn.primary { background: var(--gl-surface-2); color: var(--fg); border-color: var(--gl-border-subtle); box-shadow: var(--gl-shadow-btn),var(--gl-inset-subtle);
   -webkit-backdrop-filter: blur(var(--gl-blur-light)); backdrop-filter: blur(var(--gl-blur-light)); }
 :root .btn.primary:not(:disabled):hover { background: var(--gl-surface-4); }

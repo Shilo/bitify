@@ -1710,3 +1710,6 @@ Preview highlight refinement: selected/aria-pressed means bitified, matching the
 
 
 Desktop Help column correction: Controls uses 37% and Mouse 31%, leaving room for the complete Keyboard heading and shortcuts. Verify Save or copy image and Keyboard remain single-line at the unchanged 420px desktop modal width. Touch columns remain unchanged.
+
+
+Touch hover correction: the PostCSS hover-capability adapter gates actual :hover selectors in app and imported GlassKit CSS behind the primary-input (hover: hover) capability. Mixed selectors retain focus-visible/active/non-hover alternatives with unchanged pseudo-class specificity and cascade order. Palette/style selection, segmented toggles, Auto, conversion and aria-expanded panel highlights remain state-driven on every device. Touch buttons retain temporary inset press feedback that ends on release. Desktop hover and keyboard focus remain available. This covers no-hover touch devices; mixed-input devices whose primary input can hover retain native hover behavior.
