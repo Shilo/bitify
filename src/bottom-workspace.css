@@ -10,13 +10,13 @@
 :root .bar .file-actions .file-clear { background: var(--gl-color-error-surface); color: var(--gl-color-error-on-surface); border-color: var(--gl-color-error-border); }
 :root .bar .file-actions .file-clear:is(:hover,:focus-visible) { background: var(--gl-color-error-surface); color: var(--gl-color-error-on-surface); box-shadow: var(--gl-inset-strong); }
 :root .workspace-tools .awaiting-import .export-action { display: none; }
-:root .workspace-tools .dock .panel { left: 0; transform: none; max-width: calc(100vw - 48px); }
-:root .workspace-tools .dock .menu { left: 0; transform: none; max-width: calc(100vw - 48px); }
+:root .workspace-tools .dock .panel { left: 0; transform: none; max-width: calc(100vw - 48px - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px)); }
+:root .workspace-tools .dock .menu { left: 0; transform: none; max-width: calc(100vw - 48px - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px)); }
 :root .workspace-tools.canvas-scrollable .file-actions,
 :root .workspace-tools.canvas-scrollable .file-tools > .btn { background: var(--surface); backdrop-filter: none; -webkit-backdrop-filter: none; }
 /* Blocking/choice surfaces use the same opaque theme token, preserving GlassKit anatomy. */
 :root :is(.more,.help,.sheet), :root .reset-modal .glass-modal { background: var(--surface); backdrop-filter: none; -webkit-backdrop-filter: none; }
-:root .more { inset: auto 24px calc(env(safe-area-inset-bottom,0px) + 86px) auto; max-height: calc(100dvh - 112px); overflow-y: auto; }
+:root .more { inset: auto calc(env(safe-area-inset-right,0px) + 24px) calc(env(safe-area-inset-bottom,0px) + 86px) auto; max-height: calc(100dvh - 112px); overflow-y: auto; }
 :root .more .menu-clear { display: none; }
 /* Task27: art uses the whole window; toolbar and caption overlay it without reserving space. */
 :root .image-viewer[open] { display: block; }
@@ -29,8 +29,8 @@
 :root .viewer-toast { z-index: 3; }
 @media (max-width: 800px) {
   :root .workspace-tools { inset: auto 12px 12px; gap: 8px 16px; }
-  :root .workspace-tools .dock :is(.panel,.menu) { max-width: calc(100vw - 24px); }
-  :root .more { right: 12px; bottom: calc(env(safe-area-inset-bottom,0px) + 78px); }
+  :root .workspace-tools .dock :is(.panel,.menu) { max-width: calc(100vw - 24px - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px)); }
+  :root .more { right: calc(env(safe-area-inset-right,0px) + 12px); bottom: calc(env(safe-area-inset-bottom,0px) + 78px); }
 }
 @media (max-width: 720px) {
   :root .workspace-tools { flex-direction: column; align-items: stretch; }

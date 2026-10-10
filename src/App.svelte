@@ -451,7 +451,7 @@
       const asked = asking(), read = reread(item); // analysed as asked, also while a drag has put that off for the wall
       await during(`Saving ${item.name}…`, pixelsOf(item), () => saveOne(bitified(read, asked)));
     } catch {
-      say(`${item.name} could not be exported.`);
+      say(`${item.name} could not be saved.`);
     }
   }
 
@@ -473,7 +473,7 @@
       const saving = all.length > 1 ? `Saving ${all.length} images…` : `Saving ${all[0].name}…`;
       await during(saving, all.reduce((sum, item) => sum + pixelsOf(item), 0), () => saveAll(all, item => bitified(item, asked)));
     } catch {
-      say('The images could not be exported.');
+      say('The images could not be saved.');
     }
   }
 
