@@ -49,7 +49,12 @@
     background: var(--surface); box-shadow: var(--gl-inset-medium);
   }
 }
-:root .sheet .btn.glass-btn--primary {
+/* Per-image Save shares primary tokens across desktop controls and the touch sheet. */
+:root .sheet .btn.glass-btn--primary,
+:root .tile .acts .ib.glass-btn--primary,
+:root .tile .acts .ib.glass-btn--primary:not(:disabled):is(:hover,:focus-visible,:active) {
+  --gl-color-on-primary: color-mix(in srgb,var(--gl-color-primary) 17%,#000);
+  --gl-icon-on-primary: var(--gl-color-on-primary);
   color: var(--gl-color-on-primary); border-color: var(--gl-border-warm);
   background: linear-gradient(135deg,var(--gl-color-primary) 0%,var(--gl-color-primary-mid) 50%,var(--gl-color-primary-dark) 100%);
   box-shadow: var(--gl-shadow-btn-primary),var(--gl-inset-strong); transform: none;
@@ -61,7 +66,12 @@
 :root .sheet .sheet-cancel { margin-top: 8px; }
 @media (forced-colors: active) {
   :root .tile-share, :root .sheet .btn.danger { background: Canvas; color: CanvasText; border-color: ButtonText; box-shadow: none; }
-  :root .sheet .btn.glass-btn--primary { background: Highlight; color: HighlightText; border-color: Highlight; box-shadow: none; }
+  :root .sheet .btn.glass-btn--primary,
+  :root .tile .acts .ib.glass-btn--primary,
+  :root .tile .acts .ib.glass-btn--primary:not(:disabled):is(:hover,:focus-visible,:active) {
+    --gl-icon-on-primary: HighlightText;
+    background: Highlight; color: HighlightText; border-color: Highlight; box-shadow: none;
+  }
 }
 
 :root .viewer-workspace .viewer-close:is(:hover,:focus-visible,:active) { background: var(--surface); box-shadow: var(--gl-inset-strong); transform: none; }
