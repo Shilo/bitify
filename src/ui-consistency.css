@@ -5,3 +5,10 @@
 :root :is(button,input,select,textarea) { font-family: var(--body); }
 :root .ico, :root .glass-btn .ico { width: 18px; height: 18px; flex: none; }
 :root { --display: var(--body); }
+/* Rounded outline glyphs keep smooth edges; only the pixel brand/art are snapped. */
+:root .ico { shape-rendering: geometricPrecision; }
+:root, :root[data-theme] { --undo: var(--gl-color-error-on-surface); }
+:root .dock :is(.foot .btn,.chip.reset) { color: var(--gl-color-error-on-surface); border-color: var(--gl-color-error-border); }
+@media (forced-colors: active) {
+  :root .dock :is(.foot .btn,.chip.reset) { color: ButtonText; border-color: ButtonText; }
+}

@@ -1577,3 +1577,8 @@ load after GlassKit and the established geometry/material adapters in every buil
 9. Canvas scrolling reaches the available bottom window edge, with trailing dock/panel space and a reduced sizing probe keeping resting images and the final scrolled row clear of editing islands. The empty example uses the same available-height contract; introducing header content does not reserve a second external bottom margin.
 
 The supplied Brave still image shows an older prototype but cannot establish an animation/compositor fault. No speculative blur disabling, opaque dialog replacement or GIF pausing is introduced. Animated canvas writes do not change the measured grid origin. Actual Brave/iOS compositor flicker remains a hardware/browser reproduction requirement.
+
+Review corrections: smooth Lucide outlines override the historical pixel-icon edge
+snapping. Style Reset and the More menu's Reset use GlassKit semantic error ink;
+style Reset borders use the matching error border token. The old hardcoded reset
+palette is superseded, with system button colors in forced-color mode.
