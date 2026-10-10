@@ -450,7 +450,7 @@
 }
 :root .empty .import-cta { box-sizing: border-box; height: var(--control-shell); min-height: var(--control-shell); padding: 0 20px; }
 :root .empty .import-note { box-sizing: border-box; max-width: 100%; }
-:root .empty .import-note p { color: var(--gl-color-text-muted); font-size: var(--gl-font-size-sm); line-height: 1.45; }
+:root .empty .import-note p { color: var(--gl-color-text); font-size: var(--gl-font-size-sm); line-height: 1.45; }
 @media (prefers-reduced-transparency: reduce) {
   :root .import-note { background: var(--surface); -webkit-backdrop-filter: none; backdrop-filter: none; }
 }
@@ -462,13 +462,24 @@
   :root :is(.bar .file-actions,.empty-text) .btn.glass-btn--primary svg { fill: HighlightText; stroke: none; }
 }
 
-/* Keep native component materials/anatomy; adapt only safe-area placement and viewport fit. */
+/* Native component anatomy; viewport fit and a local modal readability guard. */
 :root { --gl-toast-top: calc(env(safe-area-inset-top,0px) + var(--canvas-header-space,86px) + 8px); }
 :root .glass-toast { box-sizing: border-box; min-width: min(280px,calc(100vw - 32px)); max-width: min(340px,calc(100vw - 32px)); }
 :root .glass-toast[hidden] { display: none; }
 :root .reset-modal { box-sizing: border-box; }
 :root .reset-modal .glass-modal { box-sizing: border-box; max-height: calc(100dvh - 40px); overflow-y: auto; }
+/* Arbitrary artwork can overwhelm the native transparent modal. Keep its gradient
+   and blur above a theme tint, without changing the editing-island materials. */
+:root .reset-modal .glass-modal { background-color: color-mix(in srgb,var(--surface) 96%,transparent); }
 :root .reset-modal :is(h2,p) { margin: 0; }
+:root .reset-modal .glass-modal__body p,
+:root .reset-modal .glass-modal__action { color: var(--gl-color-text); }
+:root .reset-modal .glass-modal__action--danger {
+  color: color-mix(in srgb,var(--gl-color-error-on-surface) 60%,var(--gl-color-text));
+}
+:root[data-theme="dark"] .reset-modal .glass-modal__action--danger {
+  color: color-mix(in srgb,var(--gl-color-error-on-surface) 40%,var(--gl-color-text));
+}
 :root .reset-modal .glass-modal__action:focus-visible { outline: 2px solid var(--gl-border-focus); outline-offset: -4px; }
 @media (prefers-reduced-transparency: reduce) {
   :root :is(.glass-toast,.reset-modal,.reset-modal .glass-modal) { -webkit-backdrop-filter: none; backdrop-filter: none; }
@@ -481,6 +492,7 @@
   :root :is(.glass-toast,.reset-modal,.reset-modal .glass-modal) { background: Canvas; color: CanvasText; -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: none; }
   :root :is(.glass-toast,.reset-modal .glass-modal) { border-color: ButtonText; }
   :root .reset-modal .glass-modal::before { background: none; }
+  :root .reset-modal :is(.glass-modal__body p,.glass-modal__action,.glass-modal__action--danger) { color: CanvasText; }
   :root .reset-modal .glass-modal__action:focus-visible { outline-color: Highlight; }
 }
 

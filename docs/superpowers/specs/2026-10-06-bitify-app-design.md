@@ -1511,3 +1511,15 @@ small viewports may still scroll naturally when the minimum example cannot fit.
 
 The example fit updates when the async example arrives, including its actual caption.
 Style-panel More and Help Close also use circular 44px icon controls.
+
+### Modal contrast protection
+
+The Reset dialog retains GlassKit's native modal anatomy, blur, gradient, divider and
+unfilled footer actions. A local 96% theme-surface underlay prevents arbitrary image
+colors from overwhelming this blocking dialog. Body and Cancel use full foreground;
+Reset blends the library error-on-surface ink with foreground (60% error ink in light
+mode, 40% in dark for additional hover contrast). This is an explicit
+readability exception, not an unmodified default material. Instructions in the native
+GlassKit status notice also use full foreground. Editing islands and selection toasts
+keep their default materials. Reduced transparency and forced colors retain their
+existing solid/system fallbacks.
