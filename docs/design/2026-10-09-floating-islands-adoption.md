@@ -201,3 +201,21 @@ image-action capsules. They use the existing theme surface (#e8ecef / #272c32) a
 GlassKit text ink, retaining the library border/shadow and hover/focus tint. No blur is
 needed on the capsule or its children. The rule also covers touch Share/Remove groups;
 caption and island materials remain the default glass comparison.
+
+Validation and challenged review:
+
+- 220 tests in 13 files and the production build pass before and again after review.
+- Browser-computed desktop capsules are opaque rgb(39,44,50) dark / rgb(232,236,239)
+  light, with no backdrop filter; editing islands remain default white10% /60% glass.
+- Keyboard focus retains opaque ink and the visible outline; settled tint is white16%
+  dark /75% light. Desktop download produces a file over the white-source fixture.
+- Production CSS touch simulation at390x844 in both themes has no horizontal overflow,
+  solid capsules and44px Share/Remove buttons. Share opens, Download saves and dismisses
+  the sheet, and removing one fixture leaves the other. This is not physical device QA.
+- The independent review found no valid defect. Parent confirmed the claimed cascade
+  against rendered focus/material values. Calculated settled icon contrast is at least
+  6.90:1 across rest/hover/focus/active in both themes; arbitrary artwork is excluded by
+  the opaque capsule. The existing120ms reveal fade is preserved rather than treated as
+  a new regression. Forced-color state overrides remain later than the ordinary states.
+- [Dark proof](mockups/opaque-actions-dark.png) and [light proof](mockups/opaque-actions-light.png)
+  replace the default-only baseline as the first gallery comparison.

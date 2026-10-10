@@ -6,9 +6,9 @@ Implemented in the isolated `codex/glasskit-prototypes` worktree.
 [Try the app](http://127.0.0.1:5188/) or [open the screenshot gallery](gallery.html).
 Run `npm ci` then `npm run dev -- --port 5188 --host 127.0.0.1`.
 
-The full window is a shared middle-gray checker canvas. Images have no separate backing,
+The full window is a continuous checker canvas with distinct subdued light/dark shades. Images have no separate backing,
 4px insets and 12px gaps. Colors/Palette and comparison/Style are two editing islands;
-Download floats independently. Small labels and actions use stronger material, with
+Download floats independently. Image-action capsules use the opaque theme surface, with
 opaque hover/focus ink. Panels reserve space and refit the images.
 
 Checker cells follow 16 source pixels at the median display scale; very dense intervals
@@ -27,15 +27,18 @@ Their former Designs picker, alternate dock/rail layouts, optional backgrounds a
 sample loader are removed from the live app. Prototype query parameters now load the
 same sole design. The normal URL is the current implementation.
 
-`npm test`: **212 tests in 12 files pass**. Production build passes. Real Safari/iOS,
+`npm test`: **220 tests in 13 files pass**. Production build passes. Real Safari/iOS,
 OS accessibility settings and physical touch gestures remain device checks; generated
 QA fixtures establish CSS geometry/cascade behavior, not hardware behavior.
 
-Current theme correction: [dark](mockups/theme-consistent-dark.png) and
+Archived theme correction: [dark](mockups/theme-consistent-dark.png) and
 [light](mockups/theme-consistent-light.png). Both use one shared themed UI material;
 the prior shared middle-gray canvas screenshots are archived comparisons.
 
-The current live comparison uses [default dark glass](mockups/glasskit-default-dark.png)
+The archived default-material comparison uses [default dark glass](mockups/glasskit-default-dark.png)
 and [default light glass](mockups/glasskit-default-light.png), superseding the 94% experiment.
 The [white/black artwork stress test](mockups/glasskit-default-contrast-stress.png) demonstrates
-why default image-action glass needs a readability decision before final adoption.
+why the user approved a local opaque surface for image actions.
+
+Current protected actions: [dark](mockups/opaque-actions-dark.png) and
+[light](mockups/opaque-actions-light.png). Default GlassKit materials remain elsewhere.
