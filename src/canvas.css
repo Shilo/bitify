@@ -1,0 +1,2 @@
+/* The root checker remains continuous, with a cell corner on the first source image. */
+:root { background-position: var(--canvas-grid-x,0px) var(--canvas-grid-y,0px); }

@@ -13,3 +13,11 @@ export function canvasGridSpacing(images, across) {
   const sourceCell = 16 * multiple;
   return { scale, sourceCell, step: sourceCell * scale };
 }
+
+// CSS object-fit: contain centers rectangular source pixels inside the canvas box.
+// Anchor to their actual top-left, not the square tile or its letterbox padding.
+export function canvasGridOrigin({ left, top, width, height }, { w, h }) {
+  if (!(w > 0 && h > 0 && width > 0 && height > 0)) return { x: left, y: top };
+  const scale = Math.min(width / w, height / h);
+  return { x: left + (width - w * scale) / 2, y: top + (height - h * scale) / 2 };
+}
