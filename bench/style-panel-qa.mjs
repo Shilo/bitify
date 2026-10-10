@@ -11,8 +11,9 @@ import { STYLES } from '../src/lib/presets.js';
 const baseline = process.argv.includes('baseline');
 const flows = process.argv.includes('flows');
 const small = process.argv.includes('small');
+const pixel8 = process.argv.includes('pixel8');
 const build = resolve('dist');
-const output = resolve('.tmp/style-panel-qa', baseline ? 'before' : flows ? 'flows' : small ? 'small' : 'after');
+const output = resolve('.tmp/style-panel-qa', baseline ? 'before' : pixel8 ? 'pixel8' : flows ? 'flows' : small ? 'small' : 'after');
 mkdirSync(output, { recursive: true });
 const server = createServer((req, res) => {
   const url = new URL(req.url, 'http://localhost');
@@ -48,7 +49,10 @@ const measure = () => run(`(() => {
   const ownRow=!!thr&&Math.abs(pick.y+pick.h/2-thr.y-thr.h/2)>2;
   const name=panel.querySelector('#style-name'),text=name.getBoundingClientRect();
   const fullSelector=getComputedStyle(name).display!=='none'&&text.width>0&&text.left>=pick.x&&text.right<=pick.right;
-  return {p,controls,row:!!row&&aligned,ownRow,fullSelector,overflow,slider:slider?rect(slider).w:null,chips:!!panel.querySelector('.setbox'),more:!!extra, viewport:innerWidth};
+  const selected=panel.querySelector('.chip[aria-pressed="true"]')?.getAttribute('aria-label')?.split(':')[0];
+  const control=panel.querySelector(':scope > .thr input[type=range], :scope > .thr .seg')?.getAttribute('aria-label');
+  const count=panel.querySelectorAll(':scope > .thr').length;
+  return {p,controls,row:!!row&&aligned,ownRow,fullSelector,overflow,slider:slider?rect(slider).w:null,chips:!!panel.querySelector('.setbox'),more:!!extra, viewport:innerWidth,selected,control,count,density:devicePixelRatio};
 })()`);
 try {
   let version;
@@ -66,12 +70,14 @@ try {
     await send('Page.enable');await send('Runtime.enable');await send('Page.bringToFront');
     await send('Page.addScriptToEvaluateOnNewDocument',{source:`localStorage.setItem('bitify',JSON.stringify({first:'#222323',second:'#f0f6f0',style:'cutout',theme:'light'}));localStorage.setItem('bitify-welcomed','1');`});
   };
-  const sizes=flows?[[412,915]]:small?[[280,653],[375,812]]:[[280,653],[320,568],[360,640],[375,812],[393,852],[412,915],[448,780],[519,800],[520,800],[521,800],[600,800],[700,900],[768,1024],[800,1000],[801,1000],[1024,768],[1280,720],[1440,900],[1920,1080],[2560,1440],[480,320],[520,360],[568,320],[667,375],[915,412],[1024,520],[1024,521]];
-  for(const touch of flows?[true]:[false,true]) {
+  // Actual Pixel 8 Pro Brave content viewports captured in the rotation audit,
+  // plus the 1008x2244 screenshot's full display at the captured DPR of 2.25.
+  const sizes=pixel8?[[448,819],[947,364],[448,997],[997,448]]:flows?[[412,915]]:small?[[280,653],[375,812]]:[[280,653],[320,568],[360,640],[375,812],[393,852],[412,915],[448,780],[519,800],[520,800],[521,800],[600,800],[700,900],[768,1024],[800,1000],[801,1000],[1024,768],[1280,720],[1440,900],[1920,1080],[2560,1440],[480,320],[520,360],[568,320],[667,375],[915,412],[1024,520],[1024,521]];
+  for(const touch of flows||pixel8?[true]:[false,true]) {
     for(const [width,height] of sizes) {
       await openPage();
       await send('Emulation.setTouchEmulationEnabled',{enabled:touch});
-      await send('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:touch?2:1,mobile:touch});
+      await send('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:pixel8?2.25:touch?2:1,mobile:touch,screenOrientation:{type:width>height?'landscapePrimary':'portraitPrimary',angle:width>height?90:0}});
       await send('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-motion',value:'reduce'}]});
       await send('Page.navigate',{url});
       for(let i=0;i<100&&!await run(`!!document.querySelector('.example-add')`);i++)await pause(50);
@@ -79,6 +85,7 @@ try {
       await run(`document.querySelector('.help[open]')?.close()`);
       await click('button[aria-label="Style"]');
       const initial=await measure();
+      if(pixel8)assert.equal(initial.density,2.25,'Captured Pixel density');
       const label=`${touch?'touch':'mouse'}-${width}x${height}`;
       if ([320,412,521,768,1440,915].includes(width)) writeFileSync(join(output,`${label}.png`),Buffer.from((await send('Page.captureScreenshot')).data,'base64'));
       if(!baseline){
@@ -124,6 +131,8 @@ try {
             for(let i=0;i<count;i++){
               await click(`.sets .chip:nth-child(${i+1})`);
               const selected=await measure();assert.ok(!selected.overflow&&selected.row,label+' compact control '+style+'/'+i+' fit');
+              assert.equal(selected.count,1,label+' exactly one selected control');
+              assert.equal(selected.control,selected.selected,label+' selected chip controls the matching setting');
             }
           } else if(m.ownRow) assert.ok(m.fullSelector,label+' full selector on its own row');
         }
@@ -137,6 +146,17 @@ try {
     }
   }
   if(!baseline){
+    if(pixel8){
+      await click('.pick > .btn');await click('.preset:first-child');
+      await click('.chip[aria-label^="Brightness:"]');
+      for(const [width,height,angle]of [[448,819,0],[947,364,90],[448,819,0],[947,364,270],[448,819,0]]){
+        await send('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:2.25,mobile:true,screenOrientation:{type:angle===270?'landscapeSecondary':angle?'landscapePrimary':'portraitPrimary',angle}});await pause(250);
+        const m=await measure();assert.equal(m.viewport,width,'Rotation settled viewport');
+        assert.ok(m.chips&&!m.more&&m.row&&!m.overflow,'Pixel rotation retains compact layout');
+        assert.equal(m.count,1,'Pixel rotation retains one control');assert.equal(m.control,'Brightness','Pixel rotation preserves selected setting');
+        results.push({label:`pixel-rotation-${angle}`, ...m});
+      }
+    }
     // Native mouse input is reliable in headless Edge; real touch is checked by
     // bench/theme-qa.mjs on Android rather than synthesized after live resizing.
     await send('Emulation.setTouchEmulationEnabled',{enabled:false});
