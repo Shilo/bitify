@@ -6,7 +6,7 @@
 :root .dock .preset { font-size: 12px; font-weight: 500; line-height: 1.2; color: var(--gl-color-text); }
 :root .dock .preset.glass-btn { flex-direction: column; padding: 5px 3px; min-width: 0; min-height: 76px; height: auto; gap: 5px; }
 :root .dock .preset .demo { width: var(--control-size); height: var(--control-size); border-radius: 50%; }
-:root .dock .pick .demo { width: 32px; height: 32px; }
+:root .dock .pick > .btn .demo { width: 32px; height: 32px; }
 :root .dock .demo { border-radius: 50%; overflow: hidden; image-rendering: pixelated; background-size: 8px 8px; outline: 1px solid var(--gl-border-medium); }
 
 /* All controls fill their column. Labels share the actual longest visible text width. */
