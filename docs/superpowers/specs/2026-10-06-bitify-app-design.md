@@ -1622,7 +1622,7 @@ Research rationale: Apple’s Icons guidance favors simplified recognizable shap
 
 ## October 9 tasks25–28 and31: bottom workspace
 
-25. The top bar and brand are removed. Editing groups sit bottom left, file actions and More bottom right. Whole groups wrap on small viewports; 44px targets remain intact. A single measured workspace reserves all wrapped rows and open editing panels, leaving the canvas the full remaining window.
+25. The top bar and brand are removed. Editing groups sit bottom left, file actions and More bottom right. At widths up to 720px the editing groups stack with Palette above Style, both left aligned, and file actions below on the right; wider viewports retain a single row. Whole groups keep their target sizes intact. A single measured workspace reserves all wrapped rows and open editing panels, leaving the canvas the full remaining window.
 26. Remove all shares the Add/Save capsule, separated by semantic danger feedback and the existing confirmation.
 27. Fullscreen art occupies the entire viewport, aspect-preserving contain with zero image inset. Header actions overlay the image in protected theme surfaces. No caption or toolbar height is subtracted from art fitting.
 28. More, Help, image actions and confirmation modal content are opaque theme surfaces. Native dialog backdrop, geometry, semantics and focus handling remain.
