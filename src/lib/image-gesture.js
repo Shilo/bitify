@@ -1,6 +1,6 @@
 // A quick stationary press opens the image. Holding compares; dragging belongs
 // to scrolling/swiping. One pointer owns a sequence, so multitouch never opens.
-export const IMAGE_HOLD_MS = 150;
+export const IMAGE_HOLD_MS = 450;
 export function imageGesture() {
   let start;
   return {

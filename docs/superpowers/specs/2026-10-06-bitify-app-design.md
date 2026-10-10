@@ -1627,3 +1627,12 @@ Research rationale: Apple’s Icons guidance favors simplified recognizable shap
 27. Fullscreen art occupies the entire viewport, aspect-preserving contain with zero image inset. Header actions overlay the image in protected theme surfaces. No caption or toolbar height is subtracted from art fitting.
 28. More, Help, image actions and confirmation modal content are opaque theme surfaces. Native dialog backdrop, geometry, semantics and focus handling remain.
 31. User-facing input is Add images; output is Save image or Save all images. Help, tooltips and progress use the same wording. Tooltips state original-size output and ZIP for batches. Save does not create a persistent project. Import/export identifiers inside encoding modules remain technical names.
+
+
+## October 10 workspace/mobile correction
+
+1. Workspace packing prioritizes one row, then Palette above Style/file actions/More. Before allocating a third row, it tries Palette with More on the upper row and Style with the file capsule below. Editing stays left aligned; app/file actions stay right aligned. More's dialog anchors above its actual row, including safe areas. Hidden file actions consume no width or gaps.
+2. Add is always icon-only. The complete file capsule is hidden while empty; the example art button and stationary background taps activate Add, with drop/paste and accessible keyboard activation retained. After adding images the Remove/Add/Save capsule appears.
+3. Mobile image actions use the shared vertical More icon inside the full-width title caption, with a44px target. It opens the existing Save/Copy/Remove sheet and has an image-specific accessible name. Compact captions no longer reserve a separate action row.
+4. Remove-all and Reset confirmations use GlassKit error-surface and error-on-surface tokens for their destructive action, with system-color fallbacks.
+5. Pointer comparison starts after450ms. Stationary taps below that threshold activate Add when empty or fullscreen when loaded. Pointer movement, cancellation and multitouch still suppress activation. Touch pointerleave after a completed release preserves the pending click, while leaving during an active press cancels it. Space comparison remains immediate.

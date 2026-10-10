@@ -92,6 +92,8 @@
       const panels = [...node.querySelectorAll('.panel,.menu,.tray')];
       const top = Math.min(tools.top,...panels.map(el => el.getBoundingClientRect().top));
       const panelTop = Math.min(tools.top,...[...node.querySelectorAll('.panel')].map(el => el.getBoundingClientRect().top));
+      const moreButton = node.querySelector('.file-tools > .btn');
+      write('--more-bottom',`${Math.max(0,area.bottom-moreButton.getBoundingClientRect().top+10)}px`);
       write('--canvas-header-space','0px');
       write('--canvas-panel-base',`${Math.max(0,area.bottom-panelTop+12)}px`);
       write('--dock-base',`${Math.max(0,area.bottom-tools.top+12)}px`);
@@ -498,12 +500,12 @@
       e.target.closest?.('button,input,select,textarea,a,.dock,.panel,.menu,.tray,[role="slider"]');
     const down = e => { ready = false; if (enabled && !excluded(e)) gesture.press(e); else gesture.cancel(); };
     const move = e => gesture.move(e);
-    const up = e => { gesture.move(e); ready = enabled && !excluded(e) && e.isPrimary !== false && gesture.canHold(); gesture.cancel(); };
+    const up = e => { gesture.move(e); ready = enabled && !excluded(e) && e.isPrimary !== false && gesture.release(e); gesture.cancel(); };
     const cancel = () => { ready = false; gesture.cancel(); };
     const click = e => { if (ready && enabled && !excluded(e)) picker.click(); cancel(); };
     const secondary = e => { if (e.pointerType === 'touch' && !e.isPrimary) cancel(); };
     const off = [on(node,'pointerdown',down),on(node,'pointermove',move),on(node,'pointerup',up),
-      on(node,'pointercancel',cancel),on(node,'pointerleave',cancel),on(node,'click',click),
+      on(node,'pointercancel',cancel),on(node,'pointerleave',() => { if (gesture.canHold()) cancel(); }),on(node,'click',click),
       on(window,'pointerdown',secondary,{passive:true})];
     return { update: value => { enabled = value; cancel(); }, destroy: () => off.forEach(stop => stop()) };
   }
@@ -626,7 +628,7 @@
     <button class="btn glass-btn icon-only danger file-clear" bind:this={clearTrigger} onclick={() => { clearComparison(); clearConfirm.showModal(); }} aria-label="Remove all images" use:tooltip={'Remove all images from the canvas.'}><PixelIcon name="trash" /></button>
   {/if}
 
-    <button class="btn glass-btn import-action" class:icon-only={!!items.length} class:glass-btn--primary={!items.length} onclick={() => picker.click()} aria-label={importLabel} use:tooltip={'Add images from your device, or drop or paste them onto the canvas. Images stay on your device.'}><PixelIcon name="import" />{#if !items.length}<span>{importLabel}</span>{/if}</button>
+    <button class="btn glass-btn icon-only import-action" onclick={() => picker.click()} aria-label={importLabel} use:tooltip={'Add images from your device, or drop or paste them onto the canvas. Images stay on your device.'}><PixelIcon name="import" /></button>
     <button class="btn glass-btn icon-only export-action" class:glass-btn--primary={!!items.length} disabled={!items.length} aria-label={items.length > 1 ? 'Save all images' : 'Save image'} use:tooltip={items.length > 1 ? 'Save all converted images as a ZIP archive.' : items.length ? 'Save the converted image at its original size.' : 'Add an image to enable saving.'} onclick={saveEverything}><PixelIcon name="save" /></button>
   </div>
   <button class="btn glass-btn icon-only" bind:this={moreTrigger} aria-haspopup="true" aria-label="More" use:tooltip={'Open appearance, help and app options.'} onclick={e => { clearComparison(); if (e.detail) e.currentTarget.blur(); more.showModal(); }}><PixelIcon name="more" /></button>
@@ -647,7 +649,7 @@
       sheet.close();
       items = items.filter(i => i !== item);
       await tick();
-      (document.querySelector('.tile-share') ?? document.querySelector('.import-action'))?.focus();
+      (document.querySelector('.tile-share') ?? document.querySelector('.import-action:not(.awaiting-import *)') ?? document.querySelector('.art'))?.focus();
     }}><PixelIcon name="trash" />Remove</button>
     <button class="btn glass-btn sheet-cancel">Cancel</button>
   {/if}

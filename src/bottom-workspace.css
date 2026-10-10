@@ -41,3 +41,11 @@
   :root .viewer-header :is(h2,.viewer-tools,.viewer-close) { background: Canvas; color: CanvasText; }
   :root .bar .file-actions .file-clear { background: ButtonFace; color: ButtonText; border-color: ButtonText; }
 }
+
+/* The empty canvas is the Add action; retain its accessible image button. */
+:root .workspace-tools .file-actions.awaiting-import { display: none; }
+:root .more { bottom: var(--more-bottom,86px); max-height: calc(100dvh - var(--more-bottom,86px) - 16px); }
+:root .reset-modal .glass-modal__action--danger,
+:root[data-theme="dark"] .reset-modal .glass-modal__action--danger { background: var(--gl-color-error-surface); color: var(--gl-color-error-on-surface); }
+:root .reset-modal .glass-modal__action--danger:is(:hover,:focus-visible) { background: var(--gl-color-error-surface); color: var(--gl-color-error-on-surface); box-shadow: var(--gl-inset-strong); }
+@media (forced-colors: active) { :root .reset-modal .glass-modal__action--danger { background: ButtonFace; color: ButtonText; } }
