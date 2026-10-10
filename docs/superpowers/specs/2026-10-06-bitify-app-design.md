@@ -1027,6 +1027,9 @@ in browsers.
   chosen colors, empty pixels transparent and a None color's pixels with them, with the original frame delays and loop count.
   Download all puts GIFs and PNGs in the same zip.
 - Saving always uses the bitified version, whatever the wall is showing.
+- Every download shows a toast naming its output file: an individual PNG or GIF, or
+  `bitify.zip` and the image count for Download all. This includes small downloads and the
+  fullscreen viewer; its toast is inside the open dialog.
 - What is saved or copied is what was asked for: the images that were on the wall and the
   colors, style and settings that were set at the click or key press. A long job starts a
   moment later (see "Long jobs"), and a change made in that moment does not reach it.
@@ -1131,9 +1134,12 @@ it is doing:
 
 - A job of 2 million pixels or more first shows a message under the top bar, where the
   other messages show, with a small square that turns: "Reading name…" ("Reading 2 of 5…"
-  within a batch), "Saving name…", "Saving 5 images…" for Download all, or "Copying name…".
-  An animation counts all its frames, and Download all counts all the images together.
-- A smaller job shows nothing. It is over before a message could be read.
+  within a batch), "Downloading name-1bit.png…", "Downloading bitify.zip (5 images)…" for
+  Download all, or "Copying name…". An animation counts all its frames, and Download all
+  counts all the images together.
+- Every download, including a smaller job, shows a toast naming its output file. A smaller
+  job has no spinner. When the fullscreen viewer is open, it shows the same status in its
+  own toast inside the dialog.
 - The job starts 50 milliseconds after the message, so that the message is drawn first.
   That wait is a timer, not a screen frame, because a hidden tab has no frames and the job
   would wait for the tab to be shown.

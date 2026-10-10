@@ -51,6 +51,7 @@
       <Tile {item} {first} {second} {style} {set} flipped={originalVisible} oncompare={active => (imageHeld = active)} inset={0} aspect={fit.width / fit.height} />
     </div>
   </div>
+  <!-- Keep feedback in the top-layer dialog; the page-level toast is inert while this viewer is open. -->
   <div class="glass-toast viewer-toast" class:is-visible={!!busy || !!message}
     role="status" aria-atomic="true" hidden={!busy && !message}>
     {#if busy}<span class="spin" aria-hidden="true"></span>{/if}

@@ -465,6 +465,7 @@
 /* Native component anatomy; viewport fit and a local modal readability guard. */
 :root { --gl-toast-top: calc(env(safe-area-inset-top,0px) + var(--canvas-header-space,86px) + 8px); }
 :root .glass-toast { box-sizing: border-box; min-width: min(280px,calc(100vw - 32px)); max-width: min(340px,calc(100vw - 32px)); }
+:root .glass-toast__text { overflow-wrap: anywhere; }
 :root .glass-toast[hidden] { display: none; }
 :root .reset-modal { box-sizing: border-box; }
 :root .reset-modal .glass-modal { box-sizing: border-box; max-height: calc(100dvh - 40px); overflow-y: auto; }

@@ -82,11 +82,13 @@ function download(blob, filename) {
 // A still image here is { name, w, h, first, second, mask }: the original file name, the two
 // colors and the image's mask. An animation has { loop, frames: [{ mask, delay }] } in place of mask.
 const kind = image => (image.frames ? 'gif' : 'png');
+// The filename offered to the browser for one image; shared with the toast so its text matches the download.
+export const downloadName = image => outNames([image.name], [kind(image)])[0];
 // The GIF code is loaded only when an animation is saved, which keeps it out of the first download.
 export const fileBytes = async image => (image.frames ? (await import('./gif.js')).encodeGif(image) : pngBytes(image));
 
 export async function saveOne(image) {
-  download(new Blob([await fileBytes(image)], { type: 'image/' + kind(image) }), outNames([image.name], [kind(image)])[0]);
+  download(new Blob([await fileBytes(image)], { type: 'image/' + kind(image) }), downloadName(image));
 }
 
 // A still image, { mask, w, h, first, second }, as a PNG file in memory.

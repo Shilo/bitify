@@ -34,6 +34,9 @@ Toasts use `.glass-toast`, `.is-visible`, `.glass-toast__text` and optional busy
 with existing timers and busy-message priority. A scoped hidden rule handles the library's
 flex display overriding HTML hidden. The installed GlassKit package is CSS; Bitify supplies
 the existing behavior rather than inventing a library JavaScript controller.
+Downloads announce the generated filename in the toast for every image size. The fullscreen
+viewer receives the same status as the page toast and renders it inside its modal, which is
+required while the native dialog makes the page behind it inert.
 
 ## Adversarial review and valid correction
 

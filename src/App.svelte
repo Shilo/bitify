@@ -1,7 +1,7 @@
 <script>
   import { analyze, mask, hexToRgb, autoThreshold, spritesOf } from './lib/bitify.js';
   import { unify } from './lib/bitify.js';
-  import { saveOne, saveAll, copyOne, pngBlob } from './lib/save.js';
+  import { saveOne, saveAll, copyOne, pngBlob, downloadName } from './lib/save.js';
   import { fitImageWall, IMAGE_INSET } from './lib/workspace.js';
   import { restore } from './lib/settings.js';
   import { STYLES, inOrder, inks, stepStyle, stepPalette } from './lib/presets.js';
@@ -470,8 +470,11 @@
 
   async function save(item) {
     try {
+      const downloading = `Downloading ${downloadName(item)}…`;
+      say(downloading);
       const asked = asking(), read = reread(item); // analysed as asked, also while a drag has put that off for the wall
-      await during(`Saving ${item.name}…`, pixelsOf(item), () => saveOne(bitified(read, asked)));
+      await during(downloading, pixelsOf(item), () => saveOne(bitified(read, asked)));
+      say(downloading);
     } catch {
       say(`${item.name} could not be saved.`);
     }
@@ -491,9 +494,15 @@
 
   async function saveEverything() {
     try {
-      const asked = asking(), all = items.map(reread); // the images on the wall now, even if some are removed before the job starts
-      const saving = all.length > 1 ? `Saving ${all.length} images…` : `Saving ${all[0].name}…`;
-      await during(saving, all.reduce((sum, item) => sum + pixelsOf(item), 0), () => saveAll(all, item => bitified(item, asked)));
+      const selected = [...items]; // the images on the wall now, even if some are removed before the job starts
+      if (!selected.length) return;
+      const downloading = selected.length > 1
+        ? `Downloading bitify.zip (${selected.length} images)…`
+        : `Downloading ${downloadName(selected[0])}…`;
+      say(downloading);
+      const asked = asking(), all = selected.map(reread);
+      await during(downloading, all.reduce((sum, item) => sum + pixelsOf(item), 0), () => saveAll(all, item => bitified(item, asked)));
+      say(downloading);
     } catch {
       say('The images could not be saved.');
     }

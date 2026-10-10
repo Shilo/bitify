@@ -275,8 +275,9 @@ Adding, saving and copying a photo go through every pixel on the main thread, an
 can do nothing else meanwhile.
 
 - A job of `BUSY_PIXELS` = 2,000,000 or more first shows a message in the toast with a
-  spinner: "Reading name…", "Saving name…", "Saving 5 images…", "Copying name…". A smaller
-  job shows nothing.
+  spinner: "Reading name…", "Downloading name-1bit.png…", "Downloading bitify.zip (5
+  images)…", or "Copying name…". Every download also shows its output filename in the toast
+  for smaller jobs, without a spinner.
 - The job starts 50 ms after the message (`drawn`), so that the message is on screen
   first. **That wait is a timer, not a screen frame**: a hidden tab has no frames, and a
   job waiting for one would wait until the tab was shown.
