@@ -12,3 +12,5 @@ dist
 
 # Generated production-bundle input/material QA fixtures.
 /bench/design-qa/
+/bench/theme-qa/
+/.tmp/

@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="only light" />
     <title>Bitify</title>
     <meta name="description" content="Instantly convert sprites and animated GIFs to 1-bit colors and styles. Images stay on your device." />
     <!-- The preview a chat or social app shows for a link. Those apps want whole addresses. -->
@@ -32,6 +33,7 @@
       const resolvedTheme = initialTheme === 'light' || initialTheme === 'dark'
         ? initialTheme : matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       document.documentElement.dataset.theme = resolvedTheme;
+      document.querySelector('meta[name=color-scheme]').content = `only ${resolvedTheme}`;
       for (const meta of document.querySelectorAll('meta[name=theme-color]')) {
         meta.content = resolvedTheme === 'dark' ? '#191c20' : '#f1f2f3';
       }

@@ -53,6 +53,7 @@
   const otherTheme = $derived(theme === 'dark' ? 'light' : 'dark');
   $effect(() => {
     document.documentElement.dataset.theme = theme; // app.css takes its colors from this
+    document.querySelector('meta[name=color-scheme]').content = `only ${theme}`;
     // the browser's bar takes the page background (index.html sets it for the system's theme)
     const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
     for (const meta of document.querySelectorAll('meta[name=theme-color]')) meta.content = bg;

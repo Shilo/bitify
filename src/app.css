@@ -17,7 +17,9 @@
   --dock-space: calc(var(--dock-base) + var(--panel-space));
   --display: "Pixelify Sans", ui-monospace, "Courier New", monospace;
   --body: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
-  color-scheme: light;
+  /* We provide both themes. Prevent Android auto-darkening from repainting the
+     selected light theme (including palette swatches) behind our CSS tokens. */
+  color-scheme: only light;
   box-sizing: border-box;
   height: 100vh;
   height: 100dvh;
@@ -36,7 +38,7 @@
     --tile2: #272a33;
     --shadow: rgba(0, 0, 0, 0.5);
     --undo: #f2928a;
-    color-scheme: dark;
+    color-scheme: only dark;
   }
 }
 :root[data-theme="dark"] {
@@ -49,7 +51,7 @@
   --tile2: #272a33;
   --shadow: rgba(0, 0, 0, 0.5);
   --undo: #f2928a;
-  color-scheme: dark;
+  color-scheme: only dark;
 }
 @media (pointer: coarse) {
   :root { --hit: clamp(40px, 12vw, 44px); }
