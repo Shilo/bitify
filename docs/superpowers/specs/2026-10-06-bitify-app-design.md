@@ -1459,3 +1459,7 @@ Reduced-transparency and forced-color materials retain their corresponding fallb
 The separate import/export layout comparison is exploratory documentation; the live
 app still has one layout. Top-right pairing is an app-specific recommendation, not
 an Apple-mandated placement. Bottom and vertical alternatives remain reviewable mockups.
+
+The destructive text row inside More uses GlassKit error-dark/on-error as an opaque
+readability exception, with the same material on hover/focus. Desktop icon-only trash
+retains the negative glass tint. Forced colors still take precedence.

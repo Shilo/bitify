@@ -248,3 +248,14 @@ Sources: [Apple toolbars](https://developer.apple.com/design/human-interface-gui
 [Procreate import/share](https://help.procreate.com/procreate/handbook/gallery/gallery-import-share).
 GlassKit1.22.2 source provides error tokens and specialized destructive roles, but no
 generic glass-btn--danger. The adapter uses those actual theme tokens.
+
+Challenged source review accepted three concrete findings: desktop palette flex wrapping
+was prevented explicitly; the fixed name now positions its divider relative to itself;
+and the small destructive text row in More uses GlassKit error-dark with on-error ink,
+preserving that material on hover/focus instead of stacking white glass. Icon-only
+header trash remains a separate semantic tint. No unrelated preferences were applied.
+
+The reviewer initially proposed the 30% state scrim. Parent challenged its worst-case
+contrast over white/black artwork: only 1.20:1 dark and 3.19:1 light. The final opaque
+More row uses library error-dark/on-error tokens: 4.87:1 dark and 6.50:1 light. This
+small text exception does not change the translucent editing or file-control material.

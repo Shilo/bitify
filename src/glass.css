@@ -126,7 +126,7 @@
 :root .sep { background: var(--line); }
 :root .panel { border-radius: 22px; padding: 12px 14px; gap: 10px; }
 :root .panel.fit { padding: 0; flex-wrap: nowrap; gap: 0; }
-:root .pname { position: static; background: transparent; }
+:root .pname { position: relative; background: transparent; }
 :root .pname .seg.mini { border-radius: 10px; }
 :root .pname .seg.mini button { border-radius: 7px; }
 :root .pal { border-radius: 50%; }
@@ -407,6 +407,14 @@
 @media (prefers-reduced-transparency: reduce) {
   :root .file-actions { -webkit-backdrop-filter: none; backdrop-filter: none; }
 }
+/* Protect small destructive text over arbitrary artwork with GlassKit error colors. */
+:root .more .btn.danger,
+:root .more .btn.danger:not(:disabled):is(:hover,:focus-visible) {
+  background: var(--gl-color-error-dark);
+  color: var(--gl-color-on-error);
+}
+:root .more .btn.danger:not(:disabled):is(:hover,:focus-visible) { box-shadow: var(--gl-inset-strong); }
+:root .more .btn.danger:focus-visible { outline-color: var(--gl-color-on-error); outline-offset: -3px; }
 @media (forced-colors: active) {
   :root .file-actions, :root :is(.bar,.more) .btn.danger { background: Canvas; color: CanvasText; border-color: ButtonText; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
   :root .bar .file-actions .btn:not(:disabled):is(:hover,:focus-visible),
