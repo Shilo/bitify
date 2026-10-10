@@ -1388,3 +1388,6 @@ small visible variations; stronger hover/selected fills communicate interaction 
 The inline startup script resolves an explicit saved theme or the current system theme
 before stylesheet loading. Missing, malformed or unavailable storage follows the system,
 so dark mode does not briefly paint a light checker before App mounts.
+
+Startup also sets both browser theme-color metadata entries to the resolved theme,
+including a saved theme opposite the OS preference. App keeps these synchronized later.

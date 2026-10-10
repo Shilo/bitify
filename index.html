@@ -29,8 +29,12 @@
       } catch {
         // Unavailable or invalid storage still follows the system.
       }
-      document.documentElement.dataset.theme = initialTheme === 'light' || initialTheme === 'dark'
+      const resolvedTheme = initialTheme === 'light' || initialTheme === 'dark'
         ? initialTheme : matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.dataset.theme = resolvedTheme;
+      for (const meta of document.querySelectorAll('meta[name=theme-color]')) {
+        meta.content = resolvedTheme === 'dark' ? '#191c20' : '#f1f2f3';
+      }
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

@@ -15,22 +15,26 @@ describe('theme before the first paint', () => {
     ['{"theme":"invalid"}', true, 'dark'],
     ['broken JSON', true, 'dark'],
   ])('resolves stored %s with system dark=%s to %s', (stored, dark, expected) => {
-    const document = { documentElement: { dataset: {} } };
+    const metas = [{ content: '' }, { content: '' }];
+    const document = { documentElement: { dataset: {} }, querySelectorAll: () => metas };
     runInNewContext(script, {
       document,
       localStorage: { getItem: () => stored },
       matchMedia: () => ({ matches: dark }),
     });
     expect(document.documentElement.dataset.theme).toBe(expected);
+    expect(metas.map(meta => meta.content)).toEqual(Array(2).fill(expected === 'dark' ? '#191c20' : '#f1f2f3'));
   });
 
   it('follows the system when storage access is blocked', () => {
-    const document = { documentElement: { dataset: {} } };
+    const metas = [{ content: '' }, { content: '' }];
+    const document = { documentElement: { dataset: {} }, querySelectorAll: () => metas };
     runInNewContext(script, {
       document,
       localStorage: { getItem: () => { throw new Error('Storage blocked'); } },
       matchMedia: () => ({ matches: true }),
     });
     expect(document.documentElement.dataset.theme).toBe('dark');
+    expect(metas.map(meta => meta.content)).toEqual(['#191c20', '#191c20']);
   });
 });
