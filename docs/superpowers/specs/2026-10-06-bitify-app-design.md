@@ -1463,3 +1463,14 @@ an Apple-mandated placement. Bottom and vertical alternatives remain reviewable 
 The destructive text row inside More uses GlassKit error-dark/on-error as an opaque
 readability exception, with the same material on hover/focus. Desktop icon-only trash
 retains the negative glass tint. Forced colors still take precedence.
+
+
+### Unified control geometry (October 9, 2026)
+
+Header wordmark, grouped file actions, standalone header circles and bottom editing
+islands use a consistent 56px outer height. Grouped buttons and color/swap controls
+are 44px squares with circular borders/states; standalone header circles are 56px
+squares. Both sizes exceed the 44px web touch target, with no hit-area overlap.
+The view label is a 44px-high capsule inside its island. Panel content adapts to its
+settings rather than forcing complex popups into the toolbar height. More opens below
+the measured header. Existing image-action capsule sizing remains unchanged.

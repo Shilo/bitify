@@ -4,6 +4,7 @@
   --line: var(--gl-border-subtle); --tile: #e6e9eb; --tile2: #dce0e3;
   --shadow: rgba(27,34,44,.10);
   --canvas-checker-a: #c5cbd1; --canvas-checker-b: #d2d6da;
+  --control-size: 44px; --control-shell: 56px; --hit: var(--control-size);
   --image-gap: 12px; --image-inset: 4px; --canvas-min-workspace: 131px;
   /* GlassKit default materials, with Bitify canvas geometry. No surface-token overrides. */
   --canvas-material: var(--gl-surface-2); --canvas-readable: var(--canvas-material);
@@ -168,7 +169,7 @@
 :root :focus-visible { outline: 2px solid var(--gl-border-focus); outline-offset: 3px; }
 :root :is(.adv,.sets,.menu) :focus-visible { outline-offset: -3px; }
 
-/* Related controls share one material; Download is the only standalone island. */
+/* Related controls share one material. */
 :root .tool-group { display: flex; align-items: center; gap: 6px; min-width: 0; }
 :root .tool-group > .btn { border-radius: 999px; }
 :root .view-toggle { min-width: 7em; padding: 0 12px; gap: 8px; }
@@ -178,7 +179,7 @@
 :root .view-toggle[aria-pressed="true"] .view-state { background: currentColor; }
 :root .view-toggle[aria-pressed="false"] { color: var(--fg); }
 :root .view-toggle[aria-pressed="false"] .view-state { border-style: dashed; }
-/* Two related editing islands and a separate download action. */
+/* Two related editing islands. */
 :root .dock {
   background: transparent; border-color: transparent; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none;
   gap: 10px 14px; padding: 0; border-radius: 0;
@@ -378,7 +379,7 @@
 }
 
 /* Compact file actions and editing triggers keep explicit 44px targets. */
-:root .btn.icon-only { box-sizing: border-box; flex: none; width: 44px; height: 44px; min-width: 44px; padding: 0; }
+:root :is(.bar,.dock) .btn.icon-only { box-sizing: border-box; flex: none; width: var(--control-size); height: var(--control-size); min-width: var(--control-size); min-height: var(--control-size); padding: 0; border-radius: 50%; aspect-ratio: 1; }
 :root .file-actions {
   display: flex; align-items: center; gap: 2px; padding: 4px;
   color: var(--fg); background: var(--canvas-material); border: 1px solid var(--canvas-border);
@@ -419,4 +420,26 @@
   :root .file-actions, :root :is(.bar,.more) .btn.danger { background: Canvas; color: CanvasText; border-color: ButtonText; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
   :root .bar .file-actions .btn:not(:disabled):is(:hover,:focus-visible),
   :root :is(.bar,.more) .btn.danger:not(:disabled):is(:hover,:focus-visible) { background: Highlight; color: HighlightText; border-color: Highlight; }
+}
+
+/* 44px controls sit inside 56px shells; standalone header controls are 56px circles. */
+:root :is(.brand,.file-actions,.dock > .tool-group) {
+  box-sizing: border-box; height: var(--control-shell); padding: 5px;
+}
+:root .brand { padding-inline: 8px; }
+:root .bar > .btn.icon-only {
+  width: var(--control-shell); height: var(--control-shell);
+  min-width: var(--control-shell); min-height: var(--control-shell);
+}
+:root .dock .pair { gap: 5px; }
+:root .dock .pair :is(.ib,.sw) {
+  box-sizing: border-box; width: var(--control-size); height: var(--control-size);
+  min-width: var(--control-size); padding: 0; border-radius: 50%;
+}
+:root .dock .view-toggle { box-sizing: border-box; height: var(--control-size); }
+:root .more { inset-block-start: calc(env(safe-area-inset-top,0px) + var(--canvas-header-space,86px) + 6px); }
+@media (max-width: 360px) {
+  :root .bar { gap: 6px; }
+  :root .mark { font-size: 24px; }
+  :root .brand { padding-inline: 6px; }
 }
