@@ -141,7 +141,7 @@
     aria-label={activationLabel ?? (onopen ? `Open ${item.name} in full screen` : `Hold to compare ${item.name}`)}
     aria-haspopup={onopen && !onactivate ? 'dialog' : undefined}
     onkeydown={keydown}
-    onkeyup={e => { if (e.key === ' ') { e.preventDefault(); e.stopPropagation(); hold('keyboard', false); } }}
+    onkeyup={e => { if (e.key === ' ') { e.preventDefault(); hold('keyboard', false); } }}
     onclick={e => { if (!e.detail || clickReady) activate(e.currentTarget); clickReady = false; }}
     onpointerdown={press}
     onpointermove={move}
