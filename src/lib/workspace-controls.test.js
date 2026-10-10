@@ -61,3 +61,40 @@ describe('independent bottom workspace controls', () => {
     expect(rows(packWorkspaceControls([300, 140, 152, 56], 180, 8))).toEqual([1, 2, 3, 4]);
   });
 });
+
+// Phone packing must not reserve a third row when a two-row arrangement exists.
+describe('compact two-row alternatives and hidden controls', () => {
+  it('puts Palette and More above Style and Files on 360px and 390px phones', () => {
+    for (const available of [336, 366]) {
+      expect(packWorkspaceControls([203, 152, 148, 56], available, 8)).toEqual([
+        { row: 1, side: 'left', offset: 0 },
+        { row: 2, side: 'left', offset: 0 },
+        { row: 2, side: 'right', offset: 0 },
+        { row: 1, side: 'right', offset: 0 },
+      ]);
+    }
+  });
+  it('still prefers Palette alone above when all other controls fit below', () => {
+    expect(rows(packWorkspaceControls([203, 152, 148, 56], 372, 8))).toEqual([1, 2, 2, 2]);
+  });
+  it('ignores a hidden file capsule including its otherwise intervening gap', () => {
+    const packed = packWorkspaceControls([203, 152, 0, 56], 427, 8);
+    expect(rows(packed)).toEqual([1, 1, 1, 1]);
+    expect(packed[1].offset).toBe(211);
+    expect(packed[2].offset).toBe(0);
+    expect(packed[3].offset).toBe(0);
+    expect(rows(packWorkspaceControls([203, 152, 0, 56], 296, 8))).toEqual([1, 2, 2, 2]);
+  });
+  it('ignores zero-width units in fallback rows and offsets too', () => {
+    expect(packWorkspaceControls([200, 180, 0, 56], 190, 8)).toEqual([
+      { row: 1, side: 'left', offset: 0 },
+      { row: 2, side: 'left', offset: 0 },
+      { row: 3, side: 'right', offset: 0 },
+      { row: 3, side: 'right', offset: 0 },
+    ]);
+  });
+  it('uses the exact two-row threshold before falling back to three rows', () => {
+    expect(rows(packWorkspaceControls([203, 152, 148, 56], 308, 8))).toEqual([1, 2, 2, 1]);
+    expect(Math.max(...rows(packWorkspaceControls([203, 152, 148, 56], 307.99, 8)))).toBe(3);
+  });
+});
