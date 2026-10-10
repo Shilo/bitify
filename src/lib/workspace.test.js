@@ -5,7 +5,7 @@ describe('readable image-wall layout', () => {
   it('stacks metadata above full-size touch actions in the minimum-width regression', () => {
     const fit = fitImageWall(6, 616, 100, true);
     expect(fit).toEqual({ cols: 5, size: 96, scroll: true, stackCaptions: true, extra: 95 });
-    expect(fit.extra).toBeGreaterThanOrEqual(26 + 52 + 16);
+    expect(fit.extra).toBeGreaterThanOrEqual(27 + 52 + 16);
   });
   it('chooses scrolling instead of collapsing names on a phone with six images', () => {
     const fit = fitImageWall(6, 358, 642, true);

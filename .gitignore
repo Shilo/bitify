@@ -9,3 +9,6 @@ dist
 /bench/icon-research/claude-coverage/
 /bench/icon-research/claude-rating/
 /bench/icon-research/.tmp/
+
+# Generated production-bundle input/material QA fixtures.
+/bench/design-qa/
