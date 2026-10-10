@@ -1368,3 +1368,9 @@ or background-based conversion/export adjustment is performed.
 
 The checker paints once on the root. Body stays transparent, so safe-area padding does
 not restart its phase at a second background origin.
+
+Wordmark/count share a compact strong neutral label substrate. Empty explanatory text
+has the same predictable substrate. Header actions retain strong backing; the original
+comparison state uses opaque foreground plus its hollow/dashed indicator. Small popup
+labels use the main foreground rather than low-contrast muted ink. This protects UI text
+against the middle-gray checker while keeping the image canvas unbacked.

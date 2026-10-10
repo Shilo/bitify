@@ -496,8 +496,8 @@
 />
 
 <header class="bar glass-nav">
-  <span class="mark">Bitify</span>
-  <span class="count">{items.length} image{items.length === 1 ? '' : 's'}</span>
+  <div class="brand"><span class="mark">Bitify</span>
+    <span class="count">{items.length} image{items.length === 1 ? '' : 's'}</span></div>
   <span class="grow"></span>
   {#if items.length}
     <button class="btn sm glass-btn" onclick={removeAll} aria-label="Remove all" use:tooltip={'Clear every image from the wall.'}><PixelIcon name="trash" /></button>

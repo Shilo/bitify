@@ -40,7 +40,23 @@
 }
 :root .mark { font-size: 30px; letter-spacing: -.055em; }
 :root .count { font-size: 12px; font-weight: 500; }
-:root .bar .btn,
+/* Header controls keep a stable material over the full-window checker. */
+:root .bar .btn {
+  background: var(--canvas-readable); color: var(--fg); border: 1px solid var(--canvas-border);
+  border-radius: 999px; box-shadow: 0 2px 8px var(--shadow);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+}
+:root .brand {
+  display: flex; align-items: center; gap: 10px; padding: 6px 8px;
+  background: var(--canvas-readable); color: var(--fg); border: 1px solid var(--line); border-radius: 12px;
+}
+:root .brand .mark { line-height: 1; }
+:root .brand .count { color: var(--fg); }
+:root .empty-text {
+  box-sizing: border-box; max-width: 100%; padding: 16px 20px;
+  background: var(--canvas-readable); color: var(--fg); border: 1px solid var(--line); border-radius: 20px;
+}
+:root .empty-text p { color: var(--fg); }
 :root :is(.btn,.ib,.sw,.dock,.panel) { box-sizing: content-box; }
 :root .btn { width: auto; font-family: var(--body); font-size: 13px; min-height: 0; line-height: 1.2; }
 :root :is(.btn,.ib,.seg button) { transition: background-color .16s,box-shadow .16s,color .16s; }
@@ -93,7 +109,7 @@
   color: var(--fg); background: var(--canvas-material); border: 1px solid var(--canvas-border);
   box-shadow: var(--canvas-shadow); -webkit-backdrop-filter: blur(var(--gl-blur)); backdrop-filter: blur(var(--gl-blur));
 }
-:root :is(.panel,.menu,.more,.help,.sheet) { background: var(--canvas-popover); }
+:root :is(.panel,.menu,.more,.help,.sheet) { background: var(--canvas-popover); --muted: var(--fg); }
 :root .dock { z-index: 5; bottom: 20px; border-radius: 999px; padding: 10px 14px; gap: 10px 12px; }
 :root :is(.dock,.panel,.more,.sheet) .glass-btn { -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: none; }
 :root .dock .tool-group > .btn,
@@ -154,7 +170,7 @@
 :root .view-state { flex: none; width: 8px; height: 8px; border: 1.5px solid currentColor; border-radius: 50%; }
 :root .view-toggle[aria-pressed="true"] { background: color-mix(in srgb,var(--fg) 8%,transparent); }
 :root .view-toggle[aria-pressed="true"] .view-state { background: currentColor; }
-:root .view-toggle[aria-pressed="false"] { color: var(--muted); }
+:root .view-toggle[aria-pressed="false"] { color: var(--fg); }
 :root .view-toggle[aria-pressed="false"] .view-state { border-style: dashed; }
 /* Two related editing islands and a separate download action. */
 :root { --canvas-material: rgba(253,253,254,.30); --canvas-blur: 10px; --image-gap: 12px; }
@@ -242,7 +258,7 @@
 }
 @media (prefers-reduced-transparency: reduce) {
   :root, :root[data-theme] { --canvas-material: var(--surface); --canvas-popover: var(--surface); --canvas-readable: var(--surface); }
-  :root :is(.dock,.panel,.menu,.more,.help,.sheet,.toast,.glass-btn,.bar .btn,.acts,.dock > .tool-group) {
+  :root :is(.dock,.panel,.menu,.more,.help,.sheet,.toast,.glass-btn,.bar .btn,.brand,.empty-text,.acts,.dock > .tool-group) {
     -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
   }
 }
@@ -251,7 +267,7 @@
 }
 @media (forced-colors: active) {
   :root, :root[data-theme] { background: Canvas; --bg: Canvas; --surface: Canvas; --fg: CanvasText; --muted: CanvasText; --line: ButtonText; }
-  :root :is(.dock,.tool-group,.panel,.menu,.more,.help,.sheet,.toast,.btn,.ib,.cap,.acts) {
+  :root :is(.dock,.tool-group,.panel,.menu,.more,.help,.sheet,.toast,.btn,.ib,.cap,.acts,.brand,.empty-text) {
     background: Canvas; color: CanvasText; border: 1px solid ButtonText; box-shadow: none;
     -webkit-backdrop-filter: none; backdrop-filter: none;
   }
