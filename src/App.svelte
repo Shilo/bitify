@@ -78,7 +78,7 @@
   let dragging = $state(false);
   // raw: items hold large typed arrays, and the list is only ever replaced, never mutated
   let items = $state.raw([]);
-  // The logo, shown on the empty screen as a live preview of the settings. Never saved or counted.
+  // The logo, shown on the empty screen as a live preview of the settings. Never exported.
   let example = $state.raw(null);
   // The lowest and highest value Auto is using for the images on screen, for the Dock to show:
   // of the threshold, of Cutout's seam strength, and of Stencil's Cuts. An image's sprites are
@@ -496,15 +496,17 @@
 />
 
 <header class="bar glass-nav">
-  <div class="brand"><span class="mark">Bitify</span>
-    <span class="count">{items.length} image{items.length === 1 ? '' : 's'}</span></div>
+  <div class="brand"><span class="mark">Bitify</span></div>
   <span class="grow"></span>
+  <div class="file-actions" role="group" aria-label="Import and export">
+    <button class="btn glass-btn icon-only" onclick={() => picker.click()} aria-label="Import images" use:tooltip={'Choose images from your device. Nothing is uploaded.'}><PixelIcon name="import" /></button>
+    <button class="btn glass-btn icon-only" disabled={!items.length} aria-label={items.length > 1 ? 'Export all images' : 'Export image'} use:tooltip={items.length > 1 ? 'Download every converted image in a ZIP archive.' : items.length ? 'Download the converted image at its original size.' : 'Import an image to enable export.'} onclick={saveEverything}><PixelIcon name="save" /></button>
+  </div>
   {#if items.length}
-    <button class="btn sm glass-btn" onclick={removeAll} aria-label="Remove all" use:tooltip={'Clear every image from the wall.'}><PixelIcon name="trash" /></button>
+    <button class="btn glass-btn icon-only danger header-clear" onclick={removeAll} aria-label="Remove all" use:tooltip={'Clear every image from the wall.'}><PixelIcon name="trash" /></button>
   {/if}
-  <button class="btn glass-btn" onclick={() => picker.click()}><PixelIcon name="plus" />Add<span class="wide">images</span></button>
-  <!-- A mouse click gives up focus before the menu opens, or closing the menu would hand it back (see unfocus). -->
-  <button class="btn sm glass-btn" aria-haspopup="true" aria-label="More" use:tooltip={'Open appearance, help and app options.'} onclick={e => { if (e.detail) e.currentTarget.blur(); more.showModal(); }}><PixelIcon name="more" /></button>
+  <!-- Mouse clicks release focus before opening the native menu. -->
+  <button class="btn glass-btn icon-only" aria-haspopup="true" aria-label="More" use:tooltip={'Open appearance, help and app options.'} onclick={e => { if (e.detail) e.currentTarget.blur(); more.showModal(); }}><PixelIcon name="more" /></button>
 </header>
 
 {#if items.length}
@@ -549,7 +551,7 @@
 
 <CanvasGrid {items} {example} />
 
-<Dock bind:first bind:second bind:none bind:style bind:settings bind:showOriginal bind:dragging {autos} {soft} count={items.length} onsaveall={saveEverything} />
+<Dock bind:first bind:second bind:none bind:style bind:settings bind:showOriginal bind:dragging {autos} {soft} />
 
 {#if dragDepth > 0}
   <div class="drop" style:background={second} style:color={overlayInk}>Drop to bitify</div>
@@ -566,6 +568,7 @@
 <!-- The More menu drops down from the More button. Any click closes it too. Its rows are in three
      groups with a line between: what the app is set to, what tells about it, and what throws things away. -->
 <dialog class="more glass-popover" bind:this={more} aria-label="More" onclick={() => more.close()}>
+  {#if items.length}<button class="btn glass-btn danger menu-clear" onclick={() => { more.close(); removeAll(); }}><PixelIcon name="trash" />Remove all images</button>{/if}
   <button class="btn glass-btn" onclick={() => (themePick = otherTheme === systemTheme ? undefined : otherTheme)}>
     <PixelIcon name={otherTheme === 'dark' ? 'moon' : 'sun'} />{otherTheme === 'dark' ? 'Dark' : 'Light'} mode
   </button>

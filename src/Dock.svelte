@@ -24,8 +24,6 @@
     dragging = $bindable(), // whether a slider of the style panel is being dragged
     autos, // [lowest, highest] value Auto is using, for each setting that has an Auto
     soft, // whether an image on the wall has a partly see-through pixel
-    count,
-    onsaveall,
   } = $props();
 
   let panel = $state(null); // null, 'palettes' or 'style'
@@ -78,7 +76,6 @@
   });
 
   const styleName = $derived(STYLES.find(s => s[0] === style)[1]);
-  const saveLabel = $derived(count > 1 ? 'Download all' : 'Download');
   const demo = key => new ImageData(colorize(mask(BALL, key, settings[key]), ...inks(first, second, none, key)), BALL.w, BALL.h);
 
   // The current style's settings: the values, and which settings they are. The threshold has its
@@ -384,13 +381,13 @@
     </div>
   {/snippet}
   {#snippet paletteButton()}
-    <button class="btn glass-btn" aria-expanded={panel === 'palettes'} aria-label="Palette" use:tooltip={'Choose a color pair or make one color transparent.'} onclick={() => toggle('palettes')}>
-      <PixelIcon name="grid" /><span class="lbl">Palette</span>
+    <button class="btn glass-btn icon-only" aria-expanded={panel === 'palettes'} aria-label="Palette" use:tooltip={'Choose a color pair or make one color transparent.'} onclick={() => toggle('palettes')}>
+      <PixelIcon name="grid" />
     </button>
   {/snippet}
   {#snippet styleButton()}
-    <button class="btn glass-btn" aria-expanded={panel === 'style'} aria-label="Style" use:tooltip={'Adjust the conversion style and its settings.'} onclick={() => toggle('style')}>
-      <PixelIcon name="sliders" /><span class="lbl">Style</span>
+    <button class="btn glass-btn icon-only" aria-expanded={panel === 'style'} aria-label="Style" use:tooltip={'Adjust the conversion style and its settings.'} onclick={() => toggle('style')}>
+      <PixelIcon name="sliders" />
     </button>
   {/snippet}
   <div class="color-tools tool-group" role="group" aria-label="Colors and palette">
@@ -408,9 +405,4 @@
     {@render styleButton()}
     <span id="view-status" class="view-status">{showOriginal ? 'Showing original images.' : `Showing images converted with ${styleName}.`}</span>
   </div>
-  <span class="sep"></span>
-  <!-- Only two or more images are "all". One saves as the file itself, not a zip. -->
-  <button class="btn primary glass-btn" disabled={!count} aria-label={saveLabel} use:tooltip={count > 1 ? 'Save every image in a ZIP archive.' : count ? 'Save the image at its original size.' : 'Add an image to enable saving.'} onclick={onsaveall}>
-    <PixelIcon name="save" /><span class="lbl">{saveLabel}</span>
-  </button>
 </div>

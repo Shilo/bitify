@@ -1429,11 +1429,33 @@ Captions, editing islands, header controls, popovers and dialogs retain their de
 GlassKit materials. Image canvases have no backing. Forced colors retains system colors.
 This section supersedes only the default-material comparison's tile-action treatment.
 
-## Single editing-panel glass material (October 9, 2026)
+## Consistent editing material and file controls (October 9, 2026)
 
-Editing islands, Palette/Style panels and chooser popups share card surface2, border,
-shadow and24px blur. The palette name/transparency controls are fixed outside the
-swatch scroll viewport, with transparent background, so the panel paints one layer.
-Desktop Palette remains one flex row; phone uses a name row above the swatches. Scroll
-hints mask swatches instead of painting additional glass. Selected and hover states
-remain distinct. Images still refit above the measured editing stack.
+The user requested icon-only Palette/Style triggers, Import/Export, no visible image
+count, and a theme-aware destructive action. The visible count and its CSS/formatting
+are removed; item length still drives layout, export eligibility and single-file/ZIP
+behavior. The conversion button retains its style name and Original comparison state.
+
+The Palette name/transparency controls sit outside the swatch scroll viewport with a
+transparent background. Editing islands, Palette/Style panels and their chooser popups
+use one GlassKit card surface, border/shadow and24px blur. Swatch scroll hints use content
+masks instead of a second glass layer. Selected/hover/input states remain distinguishable.
+The panel refits the image wall as before.
+
+Import and Export are44px icon buttons in a horizontal shared glass capsule at the top
+right, Import first. Import opens the local picker; Export downloads one converted
+PNG/GIF or all converted files as ZIP. It stays disabled when empty and its tooltip/
+accessible name describes the action. Export is removed from the bottom editing islands.
+The import glyph is a pixel folder/incoming arrow, export keeps the download-to-tray glyph.
+The labeled empty-state picker remains an introduction for first-time visitors.
+
+Remove all stays separate from the file capsule on wider screens. Its negative glass
+uses GlassKit error surface/border/on-surface ink tokens, which differ by theme; no
+fictional generic danger component is introduced. At520px and narrower it moves into
+More to preserve44px targets and canvas space. Existing clear-all behavior is retained.
+Phone editing islands occupy two centered rows; no export third row is introduced.
+Reduced-transparency and forced-color materials retain their corresponding fallbacks.
+
+The separate import/export layout comparison is exploratory documentation; the live
+app still has one layout. Top-right pairing is an app-specific recommendation, not
+an Apple-mandated placement. Bottom and vertical alternatives remain reviewable mockups.

@@ -219,3 +219,32 @@ Validation and challenged review:
   a new regression. Forced-color state overrides remain later than the ordinary states.
 - [Dark proof](mockups/opaque-actions-dark.png) and [light proof](mockups/opaque-actions-light.png)
   replace the default-only baseline as the first gallery comparison.
+
+## Import/export and panel consistency review
+
+The Palette mismatch was a nested popover surface over a card: white70% over60% light
+yields88%; white14% over10% dark yields22.6%. Moving the fixed name outside the scroller
+lets the panel paint once, without swatches sliding underneath a transparent label.
+Bottom islands, editing panels and chooser now use the same card material/24px blur.
+Meaningful selected, field and hover surfaces are intentionally retained.
+
+Research recommended horizontal Import then Export at top-right, leaving bottom islands
+for edits. This frees the existing phone dock from another file-action row. Clear all is
+separate, subdued negative glass; phones expose it in More to retain44px targets. The
+wordmark has no image count. Existing file cardinality still determines PNG/GIF vs ZIP.
+
+Challenge: icon-only reduces discoverability, so labeled empty-state import, accessible
+names and pointer/keyboard tooltips remain. Calling output Save or drawing a floppy disk
+would suggest an editable document or overwritten source; Bitify exports converted files.
+A vertical Export-above-Import arrangement reverses the suggested workflow and adds
+canvas obstruction. Neither Apple nor other editors mandate the top-right pair.
+
+Sources: [Apple toolbars](https://developer.apple.com/design/human-interface-guidelines/toolbars),
+[Apple buttons](https://developer.apple.com/design/human-interface-guidelines/buttons),
+[Apple UI design tips](https://developer.apple.com/design/tips/),
+[Aseprite saving/export](https://www.aseprite.org/docs/save/),
+[Photopea opening/saving](https://www.photopea.com/learn/opening-saving),
+[Preview exporting](https://support.apple.com/en-ie/guide/preview/prvw0e8da223/mac),
+[Procreate import/share](https://help.procreate.com/procreate/handbook/gallery/gallery-import-share).
+GlassKit1.22.2 source provides error tokens and specialized destructive roles, but no
+generic glass-btn--danger. The adapter uses those actual theme tokens.

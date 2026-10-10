@@ -30,7 +30,6 @@
   gap: 8px 12px; background: transparent;
 }
 :root .mark { font-size: 30px; letter-spacing: -.055em; }
-:root .count { font-size: 12px; font-weight: 500; }
 /* Header actions use the default pill material; labels use default card material. */
 :root .bar .btn {
   background: var(--gl-surface-3); color: var(--fg); border: 1px solid var(--gl-border-strong);
@@ -43,7 +42,6 @@
   box-shadow: var(--canvas-shadow); -webkit-backdrop-filter: blur(var(--gl-blur)); backdrop-filter: blur(var(--gl-blur));
 }
 :root .brand .mark { line-height: 1; }
-:root .brand .count { color: var(--fg); }
 :root .empty-text {
   box-sizing: border-box; max-width: 100%; padding: 16px 20px;
   background: var(--canvas-readable); color: var(--fg); border: 1px solid var(--canvas-border); border-radius: 20px;
@@ -379,7 +377,38 @@
   }
 }
 
+/* Compact file actions and editing triggers keep explicit 44px targets. */
+:root .btn.icon-only { box-sizing: border-box; flex: none; width: 44px; height: 44px; min-width: 44px; padding: 0; }
+:root .file-actions {
+  display: flex; align-items: center; gap: 2px; padding: 4px;
+  color: var(--fg); background: var(--canvas-material); border: 1px solid var(--canvas-border);
+  border-radius: 999px; box-shadow: var(--canvas-shadow);
+  -webkit-backdrop-filter: blur(var(--gl-blur)); backdrop-filter: blur(var(--gl-blur));
+}
+:root .bar .file-actions .btn { background: transparent; border-color: transparent; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+:root .bar .file-actions .btn:not(:disabled):is(:hover,:focus-visible) { background: var(--gl-surface-4); }
+/* GlassKit error tokens already provide different tint and ink for each theme. */
+:root :is(.bar,.more) .btn.danger {
+  background: linear-gradient(var(--gl-color-error-surface),var(--gl-color-error-surface)),var(--canvas-material);
+  color: var(--gl-color-error-on-surface); border-color: var(--gl-color-error-border);
+}
+:root :is(.bar,.more) .btn.danger:not(:disabled):is(:hover,:focus-visible) {
+  background: linear-gradient(var(--gl-color-error-surface),var(--gl-color-error-surface)),var(--gl-surface-4);
+  color: var(--gl-color-error-on-surface); border-color: var(--gl-color-error-border);
+}
+:root .more .menu-clear { display: none; }
 @media (max-width: 520px) {
+  :root .header-clear { display: none; }
+  :root .more .menu-clear { display: flex; }
+  :root .dock { display: flex; flex-direction: column; }
   :root .panel.fit { display: grid; grid-template-columns: minmax(0,1fr); gap: 0; }
   :root .pals { display: block; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  :root .file-actions { -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+@media (forced-colors: active) {
+  :root .file-actions, :root :is(.bar,.more) .btn.danger { background: Canvas; color: CanvasText; border-color: ButtonText; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  :root .bar .file-actions .btn:not(:disabled):is(:hover,:focus-visible),
+  :root :is(.bar,.more) .btn.danger:not(:disabled):is(:hover,:focus-visible) { background: Highlight; color: HighlightText; border-color: Highlight; }
 }

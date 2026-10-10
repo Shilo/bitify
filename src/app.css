@@ -77,7 +77,6 @@ button { font: inherit; color: inherit; }
 /* top bar and shared controls */
 .bar { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; padding: 14px 16px; }
 .mark { font-family: var(--display); font-size: 28px; font-weight: 600; line-height: 1; }
-.count { color: var(--muted); font-size: 13px; white-space: nowrap; }
 .ico { fill: currentColor; shape-rendering: crispEdges; flex: none; }
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
@@ -248,7 +247,7 @@ button { font: inherit; color: inherit; }
 .help footer .btn { padding: 0 20px; font-size: 14px; }
 
 @media (max-width: 520px) {
-  .count, .bar .wide { display: none; }
+
   .bar { gap: 8px; }
   .bar .btn { padding: 0 10px; }
   .empty .tile { --rest: 475px; } /* taller top bar and dock on phones */
@@ -509,7 +508,7 @@ button[data-tooltip], label[data-tooltip] { user-select: none; }
 }
 /* narrower screens: icon-only dock buttons */
 @media (max-width: 800px) {
-  .dock .lbl, .dock > .sep { display: none; }
+  .dock > .sep { display: none; }
   .dock > .btn { padding: 0; }
 }
 /* phones: the view switch gets a row of its own under the tools, as wide as they are */
