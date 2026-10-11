@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { FULL_PRESETS, LIBRARY_KEY, normalizeColors, validateName, customPaletteName, restoreLibrary, serializeLibrary, savePalette, deletePalette, exportHex } from './palette-library.js';
+import { FULL_PRESETS, LIBRARY_KEY, normalizeColors, validateName, newPaletteName, restoreLibrary, serializeLibrary, savePalette, deletePalette, exportHex } from './palette-library.js';
 
 function storage(initial = []) {
   const map = new Map([[LIBRARY_KEY, serializeLibrary(initial)], ['unrelated', 'keep']]);
@@ -20,23 +20,23 @@ describe('palette library', () => {
     for (const name of [' ', 'in\nside', 'a'.repeat(65), 'a\u0000b']) expect(() => validateName(name)).toThrow();
   });
 
-  it('suggests the plain custom name when free, independently of numbered names', () => {
-    expect(customPaletteName([])).toBe('Custom palette');
-    expect(customPaletteName([{ name: 'Custom palette 2' }, { name: 'Custom palette 3' }])).toBe('Custom palette');
+  it('suggests the plain new name when free, independently of numbered names', () => {
+    expect(newPaletteName([])).toBe('New palette');
+    expect(newPaletteName([{ name: 'New palette 2' }, { name: 'New palette 3' }, { name: 'Custom palette' }])).toBe('New palette');
   });
 
   it('finds the first free suffix using trimmed case-insensitive saved and session names', () => {
-    const records = [{ id: 'user-one', name: ' CUSTOM PALETTE ' }, { id: 'session-two', name: 'custom Palette 2' }, { id: 'user-four', name: 'Custom palette 4' }];
+    const records = [{ id: 'user-one', name: ' NEW PALETTE ' }, { id: 'session-two', name: 'new Palette 2' }, { id: 'user-four', name: 'New palette 4' }];
     const previous = structuredClone(records);
-    expect(customPaletteName(records)).toBe('Custom palette 3');
+    expect(newPaletteName(records)).toBe('New palette 3');
     expect(records).toEqual(previous);
-    expect(customPaletteName([...records, { name: 'custom palette 3' }])).toBe('Custom palette 5');
+    expect(newPaletteName([...records, { name: 'new palette 3' }])).toBe('New palette 5');
   });
 
   it('keeps the suggestion valid when all 100 library slots have consecutive names', () => {
-    const records = Array.from({ length: 100 }, (_, i) => ({ name: i ? `Custom palette ${i + 1}` : 'Custom palette' }));
-    expect(customPaletteName(records)).toBe('Custom palette 101');
-    expect(validateName(customPaletteName(records))).toBe('Custom palette 101');
+    const records = Array.from({ length: 100 }, (_, i) => ({ name: i ? `New palette ${i + 1}` : 'New palette' }));
+    expect(newPaletteName(records)).toBe('New palette 101');
+    expect(validateName(newPaletteName(records))).toBe('New palette 101');
   });
 
   it('provides immutable presets with vetted counts, provenance and distinct normalized colors', () => {

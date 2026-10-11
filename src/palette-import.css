@@ -13,10 +13,9 @@
 :root .palette-editor :is(button,input,textarea):disabled { opacity: .5; cursor: default; }
 :root .palette-editor .glass-input { box-sizing: border-box; width: 100%; min-height: 44px; font: inherit; }
 :root .palette-editor-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0; }
-:root .palette-review-utilities:not(:has(button)), :root .palette-review-grid:empty { display: none; }
-:root .palette-review-utilities .icon-only { width: 44px; height: 44px; padding: 0; }
+:root .palette-review-grid:empty { display: none; }
 :root .palette-editor .btn { min-height: 44px; box-sizing: border-box; padding: 8px 12px; white-space: normal; }
-:root .palette-input-method { display: flex; flex-shrink: 0; height: auto; min-height: 50px; margin: 0 24px; }
+:root .palette-input-method { display: flex; flex-shrink: 0; height: auto; min-height: 50px; margin: 0; }
 :root .palette-input-method button { flex: 1 1 0; min-width: 0; min-height: 44px; box-sizing: border-box; font: inherit; white-space: normal; text-overflow: clip; }
 :root .palette-file-button { width: 100%; }
 :root .palette-editor .palette-text-input { min-height: 96px; resize: vertical; margin: 0; }
@@ -30,10 +29,10 @@
 :root .palette-editor-details > summary:focus-visible { outline: 2px solid var(--gl-border-focus); outline-offset: 2px; border-radius: 6px; }
 :root .palette-review-heading { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; margin: 0; }
 :root .palette-review-heading span { color: var(--muted); font-size: 13px; }
-:root .palette-review-grid { display: grid; grid-template-columns: repeat(auto-fill,44px); gap: 8px; padding: 4px; }
+:root .palette-review-grid { display: grid; grid-template-columns: repeat(auto-fill,44px); align-content: start; gap: 8px; padding: 4px; scroll-padding: 4px; box-sizing: border-box; max-height: 156px; overflow: auto; overscroll-behavior: contain; }
 :root .palette-review-swatch { width: 44px; height: 44px; box-sizing: border-box; padding: 0; border: 1px solid color-mix(in srgb,var(--text) 25%,transparent); border-radius: 50%; cursor: pointer; }
 :root .palette-review-swatch.is-selected { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--gl-border-focus); }
-:root .palette-review-swatch:focus-visible { outline: 2px solid var(--gl-border-focus); outline-offset: 3px; }
+:root .palette-review-swatch:focus-visible { outline: 2px solid var(--gl-border-focus); outline-offset: 2px; }
 :root .palette-review-pages { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 0; }
 :root .palette-color-label { display: flex; align-items: center; gap: 8px; font-size: 13px; }
 :root .palette-color-label input { box-sizing: border-box; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 8px; padding: 3px; background: var(--surface); cursor: pointer; }
@@ -41,11 +40,13 @@
 :root .palette-import-progress progress { flex: 1; min-width: 80px; }
 :root .palette-delete-confirm { border-top: 1px solid var(--line); margin-top: 16px; padding-top: 8px; }
 :root .palette-delete-confirm .btn { margin-right: 8px; }
-@media(max-width:400px) { :root .palette-editor .glass-modal__body { padding: 12px 16px; } :root .palette-editor .glass-modal__header { padding: 12px 16px; } :root .palette-input-method { margin-inline: 16px; } }
+@media(max-width:400px) { :root .palette-editor .glass-modal__body { padding: 12px 16px; } :root .palette-editor .glass-modal__header { padding: 12px 16px; } }
 @media(pointer:coarse), (max-width:520px) { :root .palette-editor :is(input:not([type=color]),textarea) { font-size: 16px; } }
 @media(max-height:520px) and (min-width:521px) {
   :root .palette-import-modal .palette-editor { --palette-editor-gap: 6px; }
-  :root .palette-editor .palette-editor-header { padding-block: 8px; padding-bottom: var(--palette-editor-gap); }
+  :root .palette-editor .palette-editor-header { padding-block: 8px; }
   :root .palette-editor .palette-editor-body { padding-block: 6px; }
+  :root .palette-review-grid { max-height: 104px; }
 }
+:root .palette-editor .palette-editor-header { padding-bottom: 0; }
 @media(forced-colors:active) { :root .palette-review-swatch.is-selected { outline: 3px solid Highlight; box-shadow: none; } }

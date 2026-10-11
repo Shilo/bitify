@@ -27,9 +27,9 @@ export function validateName(name) {
 }
 
 // Suggest once when a new draft opens. Saving never changes a chosen name.
-export function customPaletteName(records) {
+export function newPaletteName(records) {
   const occupied = new Set(records.map(record => record.name.trim().toLowerCase()));
-  const base = 'Custom palette';
+  const base = 'New palette';
   if (!occupied.has(base.toLowerCase())) return base;
   let suffix = 2;
   while (occupied.has(`${base} ${suffix}`.toLowerCase())) suffix++;

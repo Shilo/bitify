@@ -30,7 +30,7 @@ npm run dev
 
 `node bench/palette-qa.mjs dist` checks the built app through real controls, including all twelve color pairs with all eleven legacy styles and independently decoded full palette exports. Set `BASE_REF` to the pre-feature Git revision when running this compatibility check after committing the feature.
 
-Saved palettes stay on this browser/device. Reset settings keeps them unless **Delete saved palettes** is selected. Export HEX backups to keep a portable copy. The new palette workflows have browser automation coverage; physical-phone and Safari validation remain outstanding.
+Saved palettes stay on this browser/device. Reset settings keeps them unless **Delete saved palettes** is selected. The download icon beside Close exports a HEX backup when colors are available. Shared color review sits above the editor's three input methods. The new palette workflows have browser automation coverage; physical-phone and Safari validation remain outstanding.
 
 Open Palette to choose **1-bit** or **Palette**. In Palette, the import icon accepts an image, palette file or pasted colors; the edit icon opens color review. The **Nearest** settings popup offers **Matching: Oklab / RGB**, remembered across visits, and Opacity cut when needed. Oklab compares perceived differences; RGB compares channel values. Neither guarantees the best-looking result for every palette. Large palettes use up to sixteen representative colors in their small preview; conversion uses the full palette. Help in More lists the controls available in the current mode. See [palettes.md](docs/palettes.md) and [styles.md](docs/styles.md) for details.
 

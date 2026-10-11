@@ -16,7 +16,7 @@
   import PixelIcon from './PixelIcon.svelte';
   import ImageViewer from './ImageViewer.svelte';
   import PaletteImport from './PaletteImport.svelte';
-  import { FULL_PRESETS, LIBRARY_KEY, restoreLibrary, savePalette, deletePalette, customPaletteName } from './lib/palette-library.js';
+  import { FULL_PRESETS, LIBRARY_KEY, restoreLibrary, savePalette, deletePalette, newPaletteName } from './lib/palette-library.js';
   import { preparePalette } from './lib/quantize.js';
   import { restorePaletteState, conversionSnapshot, fullPaletteImage } from './lib/palette-state.js';
   import { tooltip } from './lib/tooltip.js';
@@ -51,7 +51,7 @@
   function selectPalette(p) { paletteId = p.id; family = 'full-palette'; showOriginal = false; }
   function editPalette(p) {
     paletteTrigger = document.querySelector('.image-viewer[open] button[aria-label="Save image"]') ?? document.activeElement;
-    paletteRequest = p ? { ...p, name: p.id.startsWith('preset-') ? p.name + ' copy' : p.name, expectedRevision: p.revision, forceCopy: !p.id.startsWith('user-') } : { defaultName: customPaletteName(savedPalettes) };
+    paletteRequest = p ? { ...p, name: p.id.startsWith('preset-') ? p.name + ' copy' : p.name, expectedRevision: p.revision, forceCopy: !p.id.startsWith('user-') } : { defaultName: newPaletteName(savedPalettes) };
   }
   function commitPalette(draft) {
     const result = savePalette(localStorage, library, draft, { id: draft.id, expectedRevision: draft.expectedRevision });

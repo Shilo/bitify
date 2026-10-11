@@ -216,17 +216,21 @@ and the persistent-label conversion switch remain available.
 
 ### Import and review
 
-One dialog uses its editable palette name as the header, followed by **Image or file**,
-**Paste colors** and **Add colors**. These stay above its scrolling content. Switch
-methods without losing the draft or pasted text. Color review appears below the input
-controls after the first successful import or add; existing palettes show it immediately.
+One dialog has an editable palette name, download and Close in its fixed header.
+Download stays visible and is disabled when the draft is empty, incomplete or busy.
+The scrolling content shows the shared color count (initially **0 colors**), swatches
+and editing/recovery controls, then **Image or file**, **Paste colors** and **Add colors**.
+Only the chosen input controls appear below those buttons, followed by source notices
+and acquisition errors. Switch methods without losing the draft or pasted text.
+Large swatch lists scroll within a bounded grid; the save footer stays visible.
 Editing and copying start with Add colors.
 File and text actions say Replace when colors exist; manual Add appends a unique color.
-New drafts suggest Custom palette, or the first available Custom palette 2, 3, etc.
+New drafts suggest New palette, or the first available New palette 2, 3, etc.
 when saved or session palettes already use that name (ignoring case and outer spaces).
 Existing and entered names are preserved. An untouched file import can suggest its filename.
-An image with no visible colors reports that and keeps the draft. HEX backup is an
-icon button, and Image options/More options expand only when needed. Image
+The name-to-count gap matches other sections: 12px, or 6px in short landscape.
+An image with no visible colors reports that and keeps the draft. The round HEX backup
+button is beside Close; Image options/More options expand only when needed. Image
 options opens automatically for an over-limit image. Errors and recovery actions stay
 visible, and the saving limit is explained when the draft needs reduction.
 If an earlier GIF export exceeds its color limit while this editor is open, an inline

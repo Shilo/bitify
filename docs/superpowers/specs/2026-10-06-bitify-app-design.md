@@ -1885,17 +1885,21 @@ interpretation. Editing a preset or session palette creates a named copy.
 
 A native dialog provides focus containment, Escape dismissal and inert background.
 One dialog remains mounted throughout acquisition and review. Its editable Name input
-replaces the visible title and separate Name row, before the persistent segmented group offering
-Image or file, Paste colors and Add colors. Name and the group stay outside the scrolling
-body, with complete wrapping labels
-and targets at least 44px high. The header input retains the app's visible glass field
-styling, with a 20px semibold name and a nonshrinking Close button. The field and Close
-button are both 44px high, with enough inner padding for the text. It has an accessible
+replaces the visible title and separate Name row. A round HEX backup button sits directly
+before Close and remains visible, disabled for empty, truncated or busy drafts. Name,
+backup and Close stay outside the scrolling body, along with the save footer. The
+body shows shared color review and editing/recovery controls, then the segmented group
+offering Image or file, Paste colors and Add colors, then the active input controls.
+All three method buttons remain mounted and reachable by body scrolling, with complete
+wrapping labels and targets at least 44px high. The header input retains the app's visible glass field
+styling, with a 20px semibold name and nonshrinking round icon buttons. The field and both
+buttons are 44px high, with enough inner padding for the text. It has an accessible
 Name label and Palette name placeholder when empty. The dialog itself retains its
 Import/Edit/Make a palette copy accessible action label. Native autofocus on Close
 preserves the prior initial focus and keeps it off the text input.
 Short landscape uses smaller vertical section gaps and header padding.
-Vertical sections use one 12px gap, reduced to 6px in short landscape. Input panels,
+Vertical sections, including Name to count, use one 12px gap, reduced to 6px in short
+landscape. Header bottom padding is zero so body padding supplies that gap once. Input panels,
 notices and the shared review do not add overlapping margins; tool rows and swatches
 retain their 8px spacing within a group.
 Native Tab/Enter/Space and aria-pressed convey the choice;
@@ -1907,11 +1911,14 @@ Successful conflict Reload replaces the source as well as the colors/name/revisi
 clearing first-frame/partial-alpha notices and image extraction options from the
 abandoned import. Failed Reload preserves the existing draft and notices.
 
-Color review has one shared position below the active controls. It appears after the
-first successful nonempty import/add, or immediately for existing palettes, and remains
-mounted after Undo or removal leaves zero colors. Name remains mounted from initial
-opening through every method and acquisition. New drafts suggest Custom palette,
-then the first available Custom palette 2, 3, etc. if that name is already occupied by
+Color review has one shared position above the method buttons, with 0 colors at initial
+opening and after removing all colors. The grid remains mounted; an empty grid occupies
+no space. Its native scroll height is bounded to three rows normally and two in short
+landscape, with 64 colors per page. Four pixels of grid padding and scroll padding keep
+the keyboard focus ring inside the scrollport. The body handles remaining overflow; there are no
+sticky method buttons or programmatic scroll changes. Name remains mounted from initial
+opening through every method and acquisition. New drafts suggest New palette,
+then the first available New palette 2, 3, etc. if that name is already occupied by
 saved or session palettes, comparing trimmed names without case. This is a suggestion
 at new-draft opening, not uniqueness enforcement or a reservation across tabs.
 Existing edit/copy names and entered names are never automatically numbered.
@@ -1926,9 +1933,11 @@ It makes no programmatic focus or scroll change. Busy work
 temporarily disables editing. Image options remains reachable through Image or file.
 
 Image options appears only under Image or file when a decoded image exists. Its native
-expandable section opens when the image exceeds the saving limit. Draft notices,
-progress/cancellation and errors remain available across methods. Recovery
-errors and conflict/session actions remain visible. Show removal/limit instructions only
+expandable section opens when the image exceeds the saving limit. Source notices,
+progress/cancellation and acquisition errors sit below the method buttons and remain
+available across methods, including when image paste retains a different input method.
+Shared draft limits, editing errors and conflict/session recovery actions sit above the
+method buttons. Show removal/limit instructions only
 when needed, and do not repeat the GIF compatibility notice.
 Artwork drop/paste and global stepping do not react behind it. Choose a palette image or
 file, paste an image, or use Paste colors. Supported images are PNG/JPEG/WebP/BMP/GIF,
@@ -2094,7 +2103,7 @@ The earlier Help and conversion gates above remain historical coverage; their so
 unchanged in this editor change. Browser emulation does not replace physical-device or
 Safari testing.
 
-### Editable-name header and mixed input verification (2026-10-11)
+### Editable-name header and mixed input verification — before review reordering (2026-10-11)
 
 The editable name now replaces the title and separate Name row. Both it and Close are
 exactly 44px high; the name retains a 20px semibold font, a 24px line and 8px vertical
@@ -2126,3 +2135,31 @@ and equal 44px controls in narrow portrait and short landscape.
 Assertion counts include repeated guards. The matrix exhausts its finite sequences,
 not arbitrary-length interactions or every possible input/browser. Physical phones and
 Safari remain unverified; unchanged Help/conversion coverage above remains historical.
+
+### Review above input methods and New palette verification (2026-10-11)
+
+Shared color count and review now precede the three input methods. The fixed header
+contains Name, HEX backup and Close, all 44px high. Empty drafts say New palette and
+0 colors; backup stays present and is disabled when empty, truncated or busy. The
+name-to-count gap is exactly 12px normally and 6px in short landscape. Numbered
+suggestions use the first free New palette suffix; existing names are preserved.
+
+The independent review challenged pinned input buttons and two scrolling panes; the
+agreed layout uses one body scroller and a bounded swatch grid. It also identified
+keyboard focus rings clipped by the grid. A 2px outline offset and 4px scroll padding
+keep the ring visible without changing control sizes. Final production checks on
+index-DBirBfap.js / index-DRgAmXuj.css pass ten independent viewport/pointer cases,
+including all 640 native swatch Tab focuses, and 60 responsive layout cases. All 362
+unit tests and the build pass.
+
+The final production regression also passes all 216 three-step mixed-method cases
+across new imports, saved edits, preset copies and GIF recovery copies in both pointer
+modes. Editor, naming, codec/control, backup and recovery suites pass, with 8113
+executed assertions and no JavaScript exceptions. These are finite scenarios and
+include repeated guards; they do not exhaust arbitrary interaction sequences.
+
+Native Codex browser checks confirm the supplied 255-color image, last-swatch-on-page
+access, paging, pasted replacement, manual addition, duplicate rejection, Undo and an
+exact four-color HEX download. Normal, 320px portrait and 844×320 landscape checks
+confirm shared review order, header/button geometry and the single section gap.
+Physical-device and Safari limitations still apply.
