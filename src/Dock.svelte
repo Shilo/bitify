@@ -347,6 +347,7 @@
     </div>
   {:else if panel === 'style' && family === 'full-palette'}
     <div class="panel palette-settings-panel glass-card" bind:offsetHeight={panelHeight}>
+      <h2 class="palette-method-name">Nearest</h2>
       <div class="palette-setting-row">
         <span class="key" id="palette-matching-label">Matching</span>
         <div class="seg glass-segmented" role="group" aria-labelledby="palette-matching-label">
@@ -459,7 +460,7 @@
       aria-describedby="view-status"
       use:tooltip={effectiveOriginal ? `Showing original. Click to apply ${styleName}.` : `Showing ${styleName}. Click to compare the original.`}
       onclick={() => (showOriginal = !showOriginal)}>
-      <span class="view-state" aria-hidden="true"></span><span class="view-name" aria-hidden="true">{family === 'full-palette' ? compactPaletteName(styleName, 16) : styleName}</span>
+      <span class="view-state" aria-hidden="true"></span><span class="view-name" aria-hidden="true">{styleName}</span>
     </button>
     {@render styleButton()}
     <span id="view-status" class="view-status">{effectiveOriginal ? 'Showing original images.' : `Showing images converted with ${styleName}.`}</span>

@@ -17,8 +17,10 @@ in this family. Switching back to 1-bit restores the retained colors, style and 
 See [palettes.md](palettes.md) for import and palette library behavior.
 
 Choose **1-bit** in the Palette panel to use these styles. Help shows style stepping and
-Style settings only in this mode. In Palette, it always shows Palette settings and omits
-style stepping. Matching changes the nearest-color rule, without introducing a new effect.
+Style settings only in this mode, with “Pick an effect and tune its settings.” In Palette,
+Help omits the Style step and style stepping, and shows Palette settings. The Palette step
+says “Pick 1-bit, palette or import colors.” The full-palette popup is titled **Nearest**.
+Matching changes the nearest-color rule, without introducing a new effect.
 
 Palette-specific ordered and error-diffusion dithering remain research only. Tests with
 one shared 255-color palette and six buildings found lower locally averaged color error at the cost of

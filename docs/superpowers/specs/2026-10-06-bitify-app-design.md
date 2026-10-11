@@ -422,8 +422,8 @@ under reduced motion. Top to bottom:
   | | Mouse and keyboard | Touch |
   |---|---|---|
   | Add | Drop, paste or choose images. | Choose images. |
-  | Palette | Pick 1-bit colors, a palette, or import your own. | The same. |
-  | Style | Tune 1-bit effects and settings. | The same. |
+  | Palette | Pick 1-bit, palette or import colors. | The same. |
+  | Style | Pick an effect and tune its settings. | The same. |
   | Save | Download or copy images. | The same. |
 
 - Under a divider, a table headed "Controls", with a thin line between its rows. Each row
@@ -1827,7 +1827,7 @@ Full palette conversion uses original source RGB, independently of legacy bright
 threshold and structural settings. It has no None or Swap role and no separate style or
 single-option method chooser. Source alpha below the family-specific Opacity cut becomes
 empty; default 128, adjustable 1–255. Alpha zero always stays empty, and all other output
-alpha is binary. The settings icon/panel is always available: one compact Matching row
+alpha is binary. The settings icon/panel is always available, with a small Nearest heading: one compact Matching row
 offers Oklab / RGB, followed by Opacity cut only for partial source alpha or a nondefault cut.
 Oklab compares squared Euclidean perceived-color coordinates; RGB compares squared
 unweighted encoded sRGB8 channel differences. There is no brightness/contrast adjustment.
@@ -1839,8 +1839,10 @@ benefit; see docs/research/2026-10-11-palette-matching.md. Switching families re
 state. Selecting/altering colors or conversion settings reveals converted output.
 
 The existing single conversion toggle keeps its style name in 1-bit and shows the
-selected palette's name in the full family. Full-palette text is shortened visually in
-a bounded 156px control; accessible labels and tooltips retain the complete name.
+selected palette's name in the full family. Short full-palette names keep their natural
+width; long names use CSS ellipsis within a responsive maximum of 156–208px. The complete
+name remains in the DOM, accessible label and tooltip. Transitions affect only colors
+and shadows, never responsive geometry.
 Its filled/dashed indicator and pressed state show converted/original. Hold image
 and Space comparison still apply to wall and Preview. Full palette horizontal palette
 stepping uses curated and saved/session palettes; vertical style stepping has no full
@@ -1856,9 +1858,15 @@ selected name sits to its right only when measured space allows
 the name, switch and actions to fit; never force another header row. Rail labels render
 the complete name in a fixed single-line width, with CSS ellipsis based on actual rendered
 width rather than a character-count abbreviation. Accessible labels and shared tooltips
-retain the complete name. Header/comparison names remain compact. Palette circles remain
+retain the complete name. Header names remain compact; comparison names use CSS ellipsis.
+Palette circles remain
 44px. Touch targets are at least 44px; fine-pointer desktop header controls remain compact.
 Family buttons transition only colors and shadows, so breakpoint size changes are immediate.
+Full-palette circles show all entries up to twelve; larger sets use twelve actual colors
+selected greedily for RGB coverage, seeded by the color nearest the integer-summed mean.
+Selected colors retain original order. This thumbnail overview avoids hairline wedges;
+conversion, editing and export still use every palette entry. It does not imply frequency
+or per-image usage.
 The transparency group has symmetric 2px padding around fixed 32px fine-pointer or
 44px touch buttons, with centered glyphs. Full-height masks fade both previews and names
 over 36px at scrollable edges; chevrons float over the underlying glass without a dark
@@ -1919,10 +1927,11 @@ the existing explicit 255-color copy flow applies.
 
 The app description is “Convert sprites and animations with 1-bit styles or color
 palettes.” Help, README and page/social metadata use this scope, with the existing local
-privacy statement. Help keeps the four-step layout and compact shortcut table at its
-existing 420px maximum. Palette says “Pick 1-bit colors, a palette, or import your own.”
-Style says “Tune 1-bit effects and settings.” No extra explanatory
-section or palette count is added.
+privacy statement. Help keeps the short numbered layout and compact shortcut table at its
+existing 420px maximum. Palette says “Pick 1-bit, palette or import colors.”
+Style says “Pick an effect and tune its settings.” No extra explanatory
+section or palette count is added. The Style step appears only in 1-bit; Palette shows
+Add, Palette and Save.
 
 The table shows Next style only in 1-bit. Its settings row follows the dock: Style
 settings in 1-bit; Palette settings in Palette. Palette navigation, image actions and device-specific shortcut
@@ -1987,3 +1996,15 @@ the pre-feature revision for `bench/palette-qa.mjs` after committing this featur
 Physical Android/iOS, Safari, arbitrary image profiles, privacy-altered canvas decoding
 and sustained peak-memory behavior of the new family remain unverified. Earlier physical
 device measurements in this document concern the legacy system, not this implementation.
+
+### Merged palette refinement verification (2026-10-11)
+
+Local main 7ff57cb is merged into the palette branch. Its dialog drag-enter guard is
+combined with web-image detection; both branches’ import and palette behavior are retained.
+The final refinement passes 356 unit tests and the production build. Fresh browser
+checks cover 132 old style/pair combinations, both matching rules across all six buildings
+and five presets each, native Codex ZIP output, 80 settings/name cases plus 40 short-name
+and theme cases, and web/Discord URL/GIF drops including errors, progress and cancellation.
+Codex browser independently passed the desktop, phone and asynchronous drop-review flows.
+Settings rows, cut adjustment/reset and exact mode-specific Help text were inspected.
+The thumbnail overview does not alter output pixels. Physical-phone/Safari checks remain open.

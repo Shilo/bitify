@@ -155,13 +155,17 @@ not a promise that every selected color will be used.
 
 Curated presets are immutable. Edit creates a named copy. Saved and session-only palettes
 follow the presets on the same rail, with a divider. One round preview represents each
-palette. Palette circles remain 44px; touch targets are at least 44px, while fine-pointer
+palette. A small preview shows all colors up to twelve; larger palettes show twelve actual
+colors selected to cover their RGB range, in original palette order. This overview avoids
+hairline wedges and does not change conversion, editing or export colors. It does not
+represent color frequency or which colors an image uses. Palette circles remain 44px; touch targets are at least 44px, while fine-pointer
 desktop header controls remain compact. Import and Edit are icon buttons with
 accessible names and tooltips; they open a native dialog. There is no separate full-color
 style list, no one-option method picker, and no Swap/None role in this family.
 
 The comparison button shows the selected palette's name rather than the generic word
-Palette. Its width is bounded; long names are shortened visually and retained in full
+Palette. Short names keep their natural width; long names use CSS ellipsis within a
+responsive maximum of 156–208px. Full text is retained in the DOM,
 in its accessible label and tooltip. Pressing it still compares the converted result
 with the original. The 1-bit comparison button keeps the current style's name.
 
@@ -200,7 +204,8 @@ remain research ideas, not available app controls.
 Output pixels are fully opaque or fully transparent. Opacity cut defaults to 128:
 source alpha below the cut becomes empty. The range is 1–255, so alpha zero always stays
 empty. Palette settings always offers the compact Oklab / RGB control. Opacity cut appears
-only when an image has partial alpha or the cut has changed. Reset restores Oklab and cut
+only when an image has partial alpha or the cut has changed. The popup's small **Nearest**
+title identifies the conversion method for both matching choices. Reset restores Oklab and cut
 128 without changing the selected palette. Neither rule is universally visually best;
 compare with the original, especially when a palette lacks the source's hue. Other color
 spaces and palette dithering remain outside the current controls; see the

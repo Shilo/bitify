@@ -860,8 +860,8 @@
     </header>
     <ol>
       <li><PixelIcon name="import" /><b>Add</b>{touch ? 'Choose images.' : 'Choose, drop or paste images.'}</li>
-      <li><PixelIcon name="grid" /><b>Palette</b>Pick 1-bit colors, a palette, or import your own.</li>
-      <li><PixelIcon name="sliders" /><b>Style</b>Tune 1-bit effects and settings.</li>
+      <li><PixelIcon name="grid" /><b>Palette</b>Pick 1-bit, palette or import colors.</li>
+      {#if family === 'two-color'}<li><PixelIcon name="sliders" /><b>Style</b>Pick an effect and tune its settings.</li>{/if}
       <li><PixelIcon name="save" /><b>Save</b>Save or copy images.</li>
     </ol>
     <table>

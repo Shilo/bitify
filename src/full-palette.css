@@ -34,11 +34,12 @@
 :root .palette-setting-row { display: flex; align-items: center; gap: 8px; width: 100%; min-width: 0; }
 :root .palette-setting-row .key { flex: 0 0 78px; font-size: 13px; white-space: nowrap; }
 :root .palette-setting-row output { text-align: right; font-variant-numeric: tabular-nums; }
+:root .palette-method-name { margin: 0; font-size: 13px; font-weight: 600; line-height: 1.2; }
 :root .palette-settings-panel input { flex: 1; min-width: 0; }
 :root .palette-settings-panel output { font-size: 13px; min-width: 3ch; }
-:root .dock .palette-view-toggle { box-sizing: border-box; width: 156px; min-width: 0; }
+:root .dock .palette-view-toggle { box-sizing: border-box; width: max-content; max-width: clamp(156px, 24vw, 208px); min-width: 0; transition: background-color .16s,box-shadow .16s,color .16s; }
 :root .palette-view-toggle .view-state { flex: none; }
-:root .palette-view-toggle .view-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+:root .palette-view-toggle .view-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 @media(pointer:coarse), (max-width:520px) {
   :root .palette-settings-panel .seg { height: 50px; min-height: 50px; }
   :root .palette-settings-panel .glass-segmented__item { height: 44px; min-height: 44px; }

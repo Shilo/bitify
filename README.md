@@ -8,7 +8,7 @@ Convert sprites and animations with 1-bit styles or color palettes. Runs entirel
 
 ## Features
 
-- Add any number of images by drag and drop, file picker or paste.
+- Add any number of images by drag and drop, file picker or paste. Web and Discord image drops work when the host allows access, including animated GIFs.
 - In 1-bit, choose two colors, swap them, or pick from twelve presets. Either color can be None, for a transparent result. Changes redraw every image at once.
 - Full palettes with 1–256 unique opaque RGB colors, five curated presets, and a named local palette library. Import palette images, HEX/TXT, legacy RGB GPL, JASC-PAL, or pasted hex colors; review and edit before saving.
 - Eleven 1-bit styles: Cutout (filled shapes with their parts cut apart, after the game End of End), Solid, Stencil (a filled shape with its inner lines cut out, for one-color icons), Lines (outlines each part of a sprite), Checker, Hatch, Bayer, Noise, Atkinson, Icon and Shape.
@@ -32,7 +32,7 @@ npm run dev
 
 Saved palettes stay on this browser/device. Reset settings keeps them unless **Delete saved palettes** is selected. Export HEX backups to keep a portable copy. The new palette workflows have browser automation coverage; physical-phone and Safari validation remain outstanding.
 
-Open Palette to choose **1-bit** or **Palette**. In Palette, the import icon accepts an image, palette file or pasted colors; the edit icon opens color review. The settings icon offers **Matching: Oklab / RGB**, remembered across visits. Oklab compares perceived differences; RGB compares channel values. Neither guarantees the best-looking result for every palette. Help in More lists the controls available in the current mode. See [palettes.md](docs/palettes.md) and [styles.md](docs/styles.md) for details.
+Open Palette to choose **1-bit** or **Palette**. In Palette, the import icon accepts an image, palette file or pasted colors; the edit icon opens color review. The **Nearest** settings popup offers **Matching: Oklab / RGB**, remembered across visits, and Opacity cut when needed. Oklab compares perceived differences; RGB compares channel values. Neither guarantees the best-looking result for every palette. Large palettes use up to twelve representative colors in their small preview; conversion uses the full palette. Help in More lists the controls available in the current mode. See [palettes.md](docs/palettes.md) and [styles.md](docs/styles.md) for details.
 
 Built with Svelte 5 and Vite. Every push to `main` is deployed to GitHub Pages by [deploy.yml](.github/workflows/deploy.yml).
 

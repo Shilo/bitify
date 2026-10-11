@@ -814,3 +814,20 @@ matched their scalar references; Oklab native PNG bytes remained unchanged. A re
 baseline run covered 132 legacy combinations; the extended harness then covered five
 Oklab and five RGB presets plus seven integration categories. Phone-size/coarse-pointer
 emulation passed, including partial alpha; physical phone and Safari checks remain open.
+
+### Palette preview refinement
+
+The small palette circle caps its displayed sectors at twelve actual palette colors.
+Selection costs at most 256 entries × twelve passes when palette metadata changes,
+not per source pixel or animation frame. Integer RGB sums seed the greedy range coverage;
+conversion and export use the unchanged full palette. Comparison-label transitions are
+limited to colors and shadows so responsive widths settle without geometry animation.
+
+The merged branch passed 356 unit tests and a production build. Independent built-app
+checks passed 195 Oklab and 189 RGB assertions, including every supplied building and
+new native Codex ZIP downloads. The fresh baseline run covered all 132 legacy
+style/color-pair combinations, five presets under each matching rule and seven
+integration categories. Layout checks covered 80 cases plus 40 short-label/theme cases;
+web-image/GIF drop checks passed in both automated and native Codex browser flows.
+Partial-alpha Opacity cut, reset, paired settings rows and conditional Help were checked.
+Physical-phone and Safari validation remain outstanding.
