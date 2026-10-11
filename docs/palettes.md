@@ -216,14 +216,16 @@ and the persistent-label conversion switch remain available.
 
 ### Import and review
 
-The empty dialog starts with choosing a file/image or pasting colors. Add colors only
-opens the color picker; it keeps the selected import method and any pasted text.
-The first successful manual addition shows Name and color review below that section,
-with an untouched default name of Custom palette. Closing Add colors keeps the draft
-visible. Imported, edited and copied palettes keep Name and review above Add colors.
-Source actions say Replace when the draft has colors: successful import replaces,
-rather than merges, them. A name you entered is retained. HEX backup is an
-icon button, and Image options/Add colors/More options expand only when needed. Image
+One dialog shows **Name** at the top from the start, followed by **Image or file**,
+**Paste colors** and **Add colors**. These stay above its scrolling content. Switch
+methods without losing the draft or pasted text. Color review appears below the input
+controls after the first successful import or add; existing palettes show it immediately.
+Editing and copying start with Add colors.
+File and text actions say Replace when colors exist; manual Add appends a unique color.
+New drafts start as Custom palette; an untouched file import can suggest its filename.
+Entered names are retained.
+An image with no visible colors reports that and keeps the draft. HEX backup is an
+icon button, and Image options/More options expand only when needed. Image
 options opens automatically for an over-limit image. Errors and recovery actions stay
 visible, and the saving limit is explained when the draft needs reduction.
 If an earlier GIF export exceeds its color limit while this editor is open, an inline

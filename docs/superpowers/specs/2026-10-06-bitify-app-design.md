@@ -1884,15 +1884,39 @@ interpretation. Editing a preset or session palette creates a named copy.
 ### Native import/review/editor
 
 A native dialog provides focus containment, Escape dismissal and inert background.
-Its empty state starts with source acquisition. Add colors is a native disclosure only:
-opening or closing it changes no draft, import method or pasted text. The first successful
-manual addition reveals Name and review below and outside the stable Add colors section,
-while leaving source acquisition visible. An untouched manual default becomes Custom
-palette; user-entered names survive later source replacement and Undo. Imported, edited
-and copied drafts retain Name and review above Add colors. Successful source import
-switches to compact review and replaces colors rather than merging them; visible source
-actions say Replace when colors exist. Failed or duplicate additions do not change phase.
-Image options uses a native expandable section; extraction options open when the image exceeds the saving limit. Recovery
+One dialog remains mounted throughout acquisition and review. Name is always shown
+directly below its title, before the persistent three-button segmented group offering
+Image or file, Paste colors and Add colors. Name and the group stay outside the scrolling
+body, with complete wrapping labels
+and targets at least 44px high. Short landscape uses the same Name input with its label
+alongside it, smaller vertical section gaps and body/header padding so a full touch
+control remains reachable in the scrolling area. Portrait retains the stacked label.
+Vertical sections use one 12px gap, reduced to 6px in short landscape. Input panels,
+notices and the shared review do not add overlapping margins; tool rows and swatches
+retain their 8px spacing within a group.
+Native Tab/Enter/Space and aria-pressed convey the choice;
+do not apply partial ARIA tab roles. New imports start with Image or file; editing or
+copying existing colors starts with Add colors. Only the active method's controls show.
+Switching methods preserves the draft, name, pasted text, new-color picker and recovery
+state. It neither imports data nor opens/closes another dialog.
+
+Color review has one shared position below the active controls. It appears after the
+first successful nonempty import/add, or immediately for existing palettes, and remains
+mounted after Undo or removal leaves zero colors. Name remains mounted from initial
+opening through every method and acquisition. New drafts default to Custom palette.
+An untouched file import can suggest its filename. File/text actions explicitly say Replace when colors
+exist and replace rather than merge; Add appends a unique color. Entered names survive
+source replacement. An all-transparent image reports no visible colors and preserves the
+current draft. Failed, cancelled or duplicate operations preserve the method and draft.
+Only an explicit method-button activation changes the selected method. File acquisition,
+including a drop or image paste, updates the shared draft while retaining the chosen
+input tool, text and picker. Names entered before the first acquisition are also retained.
+It makes no programmatic focus or scroll change. Busy work
+temporarily disables editing. Image options remains reachable through Image or file.
+
+Image options appears only under Image or file when a decoded image exists. Its native
+expandable section opens when the image exceeds the saving limit. Draft notices,
+progress/cancellation and errors remain available across methods. Recovery
 errors and conflict/session actions remain visible. Show removal/limit instructions only
 when needed, and do not repeat the GIF compatibility notice.
 Artwork drop/paste and global stepping do not react behind it. Choose a palette image or
@@ -2036,3 +2060,25 @@ isolated keyboard navigation passes all four family/pointer cases. Exact before/
 checks confirm the existing tooltip-first Escape rule. Conversion code is unchanged;
 the earlier conversion matrices remain historical coverage. Physical-device/Safari
 limitations above still apply.
+
+### One-modal palette editor verification (2026-10-11)
+
+The editor keeps one mounted dialog, Name field and shared color review. Name is always
+above the three input methods and initially says Custom palette. Section gaps are 12px,
+or 6px in short landscape; empty utility and swatch rows occupy no space after Undo.
+All 359 unit tests and the production build pass. Final production assets
+index-BKjddKew.js / index-BawmA8RT.css pass 1703 editor assertions, including 404 repeated
+dialog/Name/review continuity observations, 60 layout cases with 781 assertions, and
+23 GIF-copy/recovery assertions, with no JavaScript exceptions. These counts include
+repeated guards, not distinct user scenarios. Checks cover all three methods, replacement,
+manual addition, supported parsers, image/drop/paste, name retention, edit/copy, limits,
+duplicates, save conflicts, storage recovery, cancellation, and Undo to zero colors.
+Every layout checks the 12px/6px gaps, fixed Name/methods, full labels and 44px targets.
+At 844×320 the scrolling body retains 51px of usable content. Independent source checks
+pass 12 spacing cases, 18 target-visibility cases and four empty-draft cases; the reviewer
+also passes ten final production geometry cases. Native Codex browser checks confirm
+Custom palette at initial opening, entered-name retention with the supplied 255-color
+image, persistent controls during long review, Undo to zero and short landscape.
+The earlier Help and conversion gates above remain historical coverage; their source is
+unchanged in this editor change. Browser emulation does not replace physical-device or
+Safari testing.
