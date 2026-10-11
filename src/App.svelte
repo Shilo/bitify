@@ -9,6 +9,7 @@
   import { on } from 'svelte/events';
   import { tick } from 'svelte';
   import { imageGesture } from './lib/image-gesture.js';
+  import { hasImageDrop, droppedImages, fetchDroppedImage } from './lib/image-drop.js';
   import CanvasGrid from './CanvasGrid.svelte';
   import Dock from './Dock.svelte';
   import Tile from './Tile.svelte';
@@ -253,11 +254,12 @@
   const pixelsOf = item => item.img.w * item.img.h * (item.frames?.length ?? 1);
   // Puts `text` on screen as what the page is busy with, and returns what to call when that is over.
   function working(text) {
-    running.push(text);
+    const job = { text };
+    running.push(job);
     busy = text;
     return () => {
-      running.splice(running.indexOf(text), 1);
-      busy = running.at(-1) ?? ''; // the newest job still running, or nothing
+      running.splice(running.indexOf(job), 1);
+      busy = running.at(-1)?.text ?? ''; // the newest job still running, or nothing
     };
   }
   // A message has to be drawn before a job takes over the page, and this is long enough for
@@ -430,13 +432,14 @@
   // Remove all also stops the batches still being read, or their images would turn up on the
   // wall that was just emptied. `emptied` counts the times, for a batch to see that it has been.
   let emptied = 0;
+  const imageDownloads = new Set();
   function removeAll() {
     emptied++;
+    for (const controller of imageDownloads) controller.abort();
     clearComparison(); items = [];
   }
-  async function addFiles(files) {
+  async function addFiles(files, began = emptied, reportSkipped = true) {
     let skipped = 0, fresh = [], shownAt = 0, done;
-    const began = emptied;
     // A photo goes on the wall as soon as it is read. Sprites are read far quicker than the wall
     // can be fitted again around each one, so those read within a quarter of a second go on together.
     const show = () => {
@@ -446,6 +449,7 @@
     };
     try {
       for (const [n, file] of files.entries()) {
+        if (began !== emptied) return;
         try {
           const decoded = await decode(file), { width, height } = decoded.frames[0].original, name = file.name || 'image.png';
           if (began !== emptied) return; // checked after each wait, before the next piece of work
@@ -466,11 +470,39 @@
           skipped++;
         }
       }
+      if (began !== emptied) return;
       show();
     } finally {
       done?.();
     }
-    if (skipped) say(`${skipped} file${skipped === 1 ? '' : 's'} skipped. Bitify reads PNG, GIF, WebP, JPEG and BMP images.`);
+    if (reportSkipped && skipped) say(`${skipped} file${skipped === 1 ? '' : 's'} skipped. Bitify reads PNG, GIF, WebP, JPEG and BMP images.`);
+    return skipped;
+  }
+
+  async function addImageUrls(urls) {
+    const began = emptied, controller = new AbortController();
+    imageDownloads.add(controller);
+    let skipped = 0;
+    const done = working('Fetching image…');
+    try {
+      for (const url of urls) {
+        if (began !== emptied) return;
+        try {
+          const file = await fetchDroppedImage(url, AbortSignal.any([controller.signal, AbortSignal.timeout(30000)]));
+          if (began !== emptied) return;
+          const failed = await addFiles([file], began, false);
+          if (began !== emptied) return;
+          skipped += failed;
+        } catch {
+          if (began !== emptied) return;
+          skipped++;
+        }
+      }
+    } finally {
+      imageDownloads.delete(controller);
+      done();
+    }
+    if (skipped) say(`Could not import ${skipped} dropped image${skipped === 1 ? '' : 's'}. Try copying and pasting the image, or saving it and adding the file.`, 6000);
   }
 
   // What gets saved: the two colors as they are drawn, with a still image's mask, or with one mask per frame of an
@@ -559,20 +591,24 @@
     e.currentTarget.value = ''; // so picking the same file again still fires a change
   }
 
-  const hasFiles = e => e.dataTransfer?.types.includes('Files');
   function dragenter(e) {
-    if (hasFiles(e)) { e.preventDefault(); dragDepth++; }
+    if (hasImageDrop(e.dataTransfer)) { e.preventDefault(); dragDepth++; }
   }
   function dragover(e) {
-    if (hasFiles(e)) e.preventDefault();
+    if (hasImageDrop(e.dataTransfer)) {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'copy';
+    }
   }
   function dragleave(e) {
-    if (hasFiles(e)) dragDepth = Math.max(0, dragDepth - 1);
+    dragDepth = Math.max(0, dragDepth - 1);
   }
   function drop(e) {
     e.preventDefault();
     dragDepth = 0;
-    if (e.dataTransfer?.files.length) addFiles([...e.dataTransfer.files]);
+    const { files, urls } = droppedImages(e.dataTransfer);
+    if (files.length) addFiles(files);
+    else if (urls.length) addImageUrls(urls);
   }
   function paste(e) {
     if (e.clipboardData?.files.length) addFiles([...e.clipboardData.files]);
@@ -614,6 +650,7 @@
   ondragenter={dragenter}
   ondragover={dragover}
   ondragleave={dragleave}
+  ondragend={() => (dragDepth = 0)}
   ondrop={drop}
   onpaste={paste}
   onkeydown={keydown}

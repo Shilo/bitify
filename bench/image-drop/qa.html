@@ -1,0 +1,204 @@
+<!doctype html><meta charset="utf-8"><title>Bitify drop regression review</title>
+<style>body{font:15px system-ui;margin:18px;background:#eef1f3;color:#18232d}button{padding:10px;margin:0 8px 10px 0}iframe{display:block;border:1px solid #666;margin-top:16px}pre{white-space:pre-wrap}</style>
+<h1>Bitify drop regression review</h1>
+<button id="desktop">Run desktop checks</button><button id="phone">Run phone checks</button><button id="edges">Run review edge cases</button>
+<pre id="results" role="status">Ready. Tests run against the production build in an isolated preview.</pre><div id="preview"></div>
+<script type="module">
+const output = document.querySelector('#results'), preview = document.querySelector('#preview');
+const realFetch = window.fetch.bind(window);
+const [png, gif] = await Promise.all(['/fixture/logo.png','/fixture/logo.gif'].map(async path => new Uint8Array(await (await realFetch(path)).arrayBuffer())));
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+function assert(ok, text) { if (!ok) throw new Error(text); }
+async function until(check, text, timeout = 6000) {
+  const start = performance.now();
+  while (!check()) { if (performance.now() - start > timeout) throw new Error(text); await sleep(10); }
+}
+function note(text) { output.textContent += `\n${text}`; }
+let app, doc, requests, active = [];
+async function setup(phone = false) {
+  preview.replaceChildren(); requests = [];
+  const iframe = document.createElement('iframe'); iframe.width = phone ? '390' : '1440'; iframe.height = phone ? '844' : '900';
+  iframe.src = '/app/index.html'; preview.append(iframe);
+  await new Promise(resolve => iframe.onload = resolve);
+  app = iframe.contentWindow; doc = app.document;
+  await until(() => doc.querySelector('.view-toggle'), 'app did not start');
+  doc.querySelector('.help[open]')?.close();
+  app.addEventListener('error', e => active.push(e.message));
+  app.addEventListener('unhandledrejection', e => active.push(e.reason?.message || String(e.reason)));
+}
+const count = () => doc.querySelectorAll('.grid:not(.awaiting-images) .tiles > .tile').length;
+const status = () => doc.querySelector('.glass-toast__text')?.textContent || '';
+const busy = () => !!doc.querySelector('.spin');
+const transferred = data => {
+  const transfer = new app.DataTransfer();
+  for (const [type, value] of Object.entries(data)) transfer.setData(type, value);
+  return transfer;
+};
+function drag(data, drop = true) {
+  const dataTransfer = data instanceof app.DataTransfer ? data : transferred(data), events = {};
+  for (const type of drop ? ['dragenter','dragover','drop'] : ['dragenter','dragover']) {
+    const event = new app.DragEvent(type, { bubbles: true, cancelable: true, dataTransfer });
+    doc.querySelector('.grid').dispatchEvent(event); events[type] = event.defaultPrevented;
+    assert(event.defaultPrevented, `${type} not accepted for ${Array.from(dataTransfer.types).join(', ')}`);
+  }
+  return { events, types: [...dataTransfer.types], dataTransfer };
+}
+function mockImages() {
+  const fetch = app.fetch.bind(app);
+  app.fetch = (url, options = {}) => {
+    if (!String(url).startsWith('https://drop-qa.invalid/')) return fetch(url, options);
+    requests.push({ url: String(url), options });
+    if (String(url).includes('expired')) return Promise.resolve(new app.Response('expired', { status:403 }));
+    if (String(url).includes('blocked')) return Promise.reject(new TypeError('Failed to fetch'));
+    const body = String(url).includes('corrupt') ? 'not pixels' : String(url).includes('animation') ? gif : png;
+    const type = String(url).includes('animation') ? 'application/octet-stream' : 'image/png';
+    return Promise.resolve(new app.Response(body, { headers: { 'content-type':type } }));
+  };
+  return fetch;
+}
+const url = path => `https://drop-qa.invalid/${path}`;
+async function basic(phone) {
+  await setup(phone); mockImages();
+  const entered = drag({ 'text/plain': url('sprite.png') }, false);
+  assert(entered.events.dragenter && entered.events.dragover, 'URL hover not accepted');
+  await until(() => doc.querySelector('.drop'), 'overlay did not show');
+  app.dispatchEvent(new app.DragEvent('dragend', { dataTransfer:entered.dataTransfer }));
+  await until(() => !doc.querySelector('.drop'), 'overlay stayed after dragend');
+  const signed = url('sprite.png?ex=abc&is=def&hm=signature');
+  const first = drag({ 'text/plain':signed });
+  assert(Object.values(first.events).every(Boolean), 'URL drag defaults not prevented');
+  await until(() => count() === 1, 'URL image not imported');
+  assert(requests[0].url === signed, 'signed URL changed');
+  const htmlUrl = url('html.png?a=1&b=2');
+  drag({ 'text/html':`<a href="https://drop-qa.invalid/webpage"><img src="${htmlUrl.replaceAll('&','&amp;')}" onload="window.executed=true"><img src="${htmlUrl.replaceAll('&','&amp;')}"></a><script>window.executed=true<\/script>`, 'text/uri-list':'https://drop-qa.invalid/webpage' });
+  await until(() => count() === 2, 'HTML image not imported');
+  assert(!app.executed && requests.filter(x => x.url === htmlUrl).length === 1, 'HTML executed or duplicate imported');
+  const download = drag({ DownloadURL:`image/png:name.png:${url('download.png')}` });
+  assert(Object.values(download.events).every(Boolean), `DownloadURL hover not accepted: ${download.types}`);
+  await until(() => count() === 3, 'DownloadURL image not imported');
+  drag({ 'text/uri-list':`# Images\r\n${url('one.png')}\r\n${url('two.png')}\r\n${url('one.png')}` });
+  await until(() => count() === 5, 'URI list did not import exactly two images');
+  drag({ 'text/plain': url('animation?id=123') });
+  await until(() => count() === 6 && !busy(), 'extensionless GIF not imported');
+  assert(doc.querySelector('.tiles > .tile:last-child .name').textContent === 'animation.gif', 'generic GIF filename wrong');
+  const canvas = doc.querySelector('.tiles > .tile:last-child canvas');
+  const toggle = doc.querySelector('.view-toggle');
+  if (toggle.getAttribute('aria-pressed') === 'true') toggle.click();
+  await sleep(20); const before = canvas.toDataURL();
+  await until(() => canvas.toDataURL() !== before, 'generic GIF did not animate', 10000);
+  if (toggle.getAttribute('aria-pressed') !== 'true') toggle.click();
+  drag({ 'text/plain':'ordinary text' }); await sleep(20); assert(count() === 6, 'text imported');
+  for (const path of ['expired.png','blocked.png']) {
+    drag({ 'text/plain':url(path) });
+    await sleep(0);
+    await until(() => !busy() && /Could not/.test(status()), 'failure left spinner or was not reported');
+    assert(/Could not/.test(status()) && count() === 6, 'failure not reported');
+  }
+  drag({ 'text/uri-list':`${url('expired.png')}\r\n${url('after-failure.png')}` });
+  await until(() => count() === 7 && !busy(), 'failed URL prevented following import');
+  const file = new app.File([png], 'local.png', { type:'image/png' });
+  const local = new app.DataTransfer(); local.items.add(file); local.setData('text/plain', signed);
+  const requestCount = requests.length; drag(local);
+  await until(() => count() === 8, 'local file drop failed');
+  assert(requests.length === requestCount, 'file+URL was duplicated');
+  const clipboardData = new app.DataTransfer(); clipboardData.items.add(file);
+  app.dispatchEvent(new app.ClipboardEvent('paste', { clipboardData }));
+  await until(() => count() === 9, 'clipboard paste failed');
+  assert(requests.every(({options}) => options.mode === 'cors' && options.credentials === 'omit' && options.referrerPolicy === 'no-referrer'), 'fetch options regressed');
+  assert(app.location.pathname === '/app/index.html', 'drop navigated away');
+  drag({ 'text/plain':'https://cdn.discordapp.com/embed/avatars/0.png' });
+  await until(() => count() === 10 && !busy(), 'live Discord CDN image did not import', 35000);
+  assert(active.length === 0, `browser runtime errors: ${active}`);
+  note(`${phone ? 'Phone-width' : 'Desktop'}: PASS — all payloads, signed query, inert HTML, deduplication, extensionless GIF playback, failures, paste/files, overlay, no navigation and live Discord CDN.`);
+}
+function pendingFetch(path, ignoreAbort = false) {
+  const original = app.fetch.bind(app); let resolve, reject, entered = false, aborted = false, off = () => {};
+  const promise = new Promise((done, fail) => { resolve = done; reject = fail; });
+  app.fetch = (request, options) => {
+    if (request !== url(path)) return original(request, options);
+    entered = true;
+    const abort = () => { aborted = true; if (!ignoreAbort) reject(options.signal.reason); };
+    options.signal.addEventListener('abort', abort, { once:true });
+    off = () => options.signal.removeEventListener('abort', abort);
+    return promise;
+  };
+  return { get entered(){return entered}, get aborted(){return aborted}, release:() => { off(); resolve(new app.Response(png, { headers:{'content-type':'image/png'} })); } };
+}
+async function clear() {
+  doc.querySelector('.file-clear').click();
+  await until(() => doc.querySelector('#clear-title').closest('dialog').open, 'clear dialog absent');
+  doc.querySelector('#clear-title').closest('dialog').querySelector('.glass-modal__action--danger').click();
+  await until(() => count() === 0, 'canvas not empty');
+}
+async function seed() { const transfer = new app.DataTransfer(); transfer.items.add(new app.File([png],'seed.png',{type:'image/png'})); drag(transfer); await until(() => count() === 1, 'seed failed'); }
+async function edgeCases() {
+  await setup(); mockImages(); await seed();
+  const pending = pendingFetch('pending.png'); drag({'text/plain':url('pending.png')});
+  await until(() => pending.entered && busy(), 'pending request did not start');
+  await clear(); await until(() => pending.aborted && !busy(), 'request not aborted');
+  assert(count() === 0, 'aborted request imported');
+  note('PASS — Remove all aborts an observed pending request; spinner clears.');
+  await seed();
+  const late = pendingFetch('late.png', true); drag({'text/plain':url('late.png')});
+  await until(() => late.entered, 'late request did not start'); await clear(); late.release();
+  await until(() => !busy(), 'late cancellation spinner stayed'); assert(count() === 0, 'late response repopulated cleared canvas');
+  note('PASS — late completion cannot repopulate a cleared canvas even if fetch ignores abort.');
+  await seed();
+  const bitmap = app.createImageBitmap.bind(app); let releaseBitmap, decoding = false;
+  app.createImageBitmap = async file => { if (file.name !== 'decoding.png') return bitmap(file); decoding = true; await new Promise(resolve => releaseBitmap = resolve); return bitmap(file); };
+  drag({'text/plain':url('decoding.png')}); await until(() => decoding, 'decode did not start');
+  await clear(); releaseBitmap(); await until(() => !busy(), 'decode cancellation spinner stayed');
+  assert(count() === 0 && !/Could not/.test(status()), 'late decode resurrected image/warning'); app.createImageBitmap = bitmap;
+  note('PASS — cancellation during decode cannot add late pixels.');
+  await setup(); mockImages();
+  const slow = pendingFetch('slow.png');
+  drag({'text/uri-list':`${url('corrupt.png')}\r\n${url('slow.png')}`});
+  await until(() => slow.entered, 'following URL never started');
+  await sleep(3400); slow.release(); await until(() => count() === 1 && !busy(), 'slow batch did not finish');
+  assert(/skipped|Could not/i.test(status()), 'decode warning expired while hidden by fetch progress');
+  note('PASS — corrupt image warning remains visible after a slow successful URL in the same batch.');
+  await setup(); mockImages();
+  drag({'text/uri-list':`${url('expired.png')}\r\n${url('corrupt.png')}\r\n${url('valid.png')}`});
+  await until(() => count() === 1 && !busy(), 'mixed failure batch did not settle');
+  assert(/Could not import 2 dropped images/.test(status()), `wrong aggregate failure count: ${status()}`);
+  note('PASS — network and decode failures are counted together and remaining images still import.');
+  await setup(); mockImages();
+  const nativeTimeout = app.AbortSignal.timeout.bind(app.AbortSignal); let timeoutMs;
+  app.AbortSignal.timeout = ms => { timeoutMs = ms; return nativeTimeout(40); };
+  const timed = pendingFetch('timeout.png'); drag({'text/plain':url('timeout.png')});
+  await until(() => timed.entered && timed.aborted && !busy() && /Could not/.test(status()), 'timed-out request did not report failure');
+  assert(timeoutMs === 30000 && count() === 0, 'timeout duration/wiring incorrect');
+  app.AbortSignal.timeout = nativeTimeout;
+  note('PASS — native timeout aborts the request and reports failure; configured duration is 30 seconds.');
+  await setup(); mockImages();
+  // Hold drawn()'s timer explicitly so this tests progress identity independent of CPU/network speed.
+  const nativeTimer = app.setTimeout.bind(app); let releaseDrawn;
+  app.setTimeout = (callback, delay, ...args) => {
+    if (delay === 50) { releaseDrawn = () => callback(...args); return 0; }
+    return nativeTimer(callback, delay, ...args);
+  };
+  const large = doc.createElement('canvas'); large.width=1600;large.height=1300;
+  const largeBlob = await new Promise(resolve => large.toBlob(resolve,'image/png'));
+  const first = pendingFetch('older.png'); drag({'text/plain':url('older.png')}); await until(() => first.entered, 'older request absent');
+  const transfer = new app.DataTransfer(); transfer.items.add(new app.File([largeBlob],'large.png',{type:'image/png'})); drag(transfer);
+  await until(() => releaseDrawn && /Reading large.png/.test(status()), 'large reading progress not shown or not held');
+  drag({'text/plain':url('newer.png')});
+  await until(() => count() === 1, 'faster URL did not finish before local read');
+  assert(doc.querySelector('.tiles .name').textContent === 'newer.png', 'count came from a different job');
+  assert(/Reading large.png/.test(status()), `wrong concurrent progress: ${status()}`);
+  app.setTimeout = nativeTimer; releaseDrawn(); first.release(); await until(() => count() === 3 && !busy(), 'concurrent imports did not settle');
+  assert(active.length === 0, `runtime errors: ${active}`);
+  note('PASS — same-text URL jobs finish out of order while newest active Reading status stays correct.');
+}
+async function run(name, task) {
+  active = []; document.querySelectorAll('button').forEach(button=>button.disabled=true);output.textContent=`Running ${name}…`;
+  try { await task(); assert(active.length === 0, `browser runtime errors: ${active}`); note('ALL CHECKS PASSED'); }
+  catch(error) { note(`FAIL: ${error.message}\n${error.stack}`); }
+  finally { document.querySelectorAll('button').forEach(button=>button.disabled=false); }
+}
+window.addEventListener('error', e => active?.push(e.message));
+window.addEventListener('unhandledrejection', e => active?.push(e.reason?.message || String(e.reason)));
+document.querySelector('#desktop').onclick=()=>run('desktop checks',()=>basic(false));
+document.querySelector('#phone').onclick=()=>run('phone checks',()=>basic(true));
+document.querySelector('#edges').onclick=()=>run('review edge cases',edgeCases);
+</script>
