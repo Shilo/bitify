@@ -216,9 +216,13 @@ and the persistent-label conversion switch remain available.
 
 ### Import and review
 
-The empty dialog starts with choosing a file/image or pasting colors. Name and color
-review appear after import; Add colors opens manual creation. During review, Replace
-source explicitly replaces the draft rather than merging palettes. HEX backup is an
+The empty dialog starts with choosing a file/image or pasting colors. Add colors only
+opens the color picker; it keeps the selected import method and any pasted text.
+The first successful manual addition shows Name and color review below that section,
+with an untouched default name of Custom palette. Closing Add colors keeps the draft
+visible. Imported, edited and copied palettes keep Name and review above Add colors.
+Source actions say Replace when the draft has colors: successful import replaces,
+rather than merges, them. A name you entered is retained. HEX backup is an
 icon button, and Image options/Add colors/More options expand only when needed. Image
 options opens automatically for an over-limit image. Errors and recovery actions stay
 visible, and the saving limit is explained when the draft needs reduction.

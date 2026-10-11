@@ -10,6 +10,7 @@
   const initial = untrack(() => request);
   let dialog, fileInput;
   let name = $state(initial.name || 'Imported palette');
+  let nameEdited = $state(!!initial.name);
   let colors = $state([...(initial.colors || [])]);
   let baseline = $state([...(initial.colors || [])]);
   let source = $state(initial.source || { kind: 'custom' });
@@ -17,6 +18,7 @@
   let revision = $state(initial.expectedRevision ?? initial.revision);
   let inputOpen = $state(!initial.colors?.length), inputKind = $state('file'), text = $state('');
   let reviewing = $state(!!initial.colors?.length), imageOptionsOpen = $state(false);
+  let manualOrigin = $state(!initial.colors?.length);
   let image = $state(null), solid = $state(false), total = $state(initial.colors?.length || 0), truncated = $state(false);
   let partialAlpha = $state(false), firstFrame = $state(initial.firstFrame || false);
   let selected = $state([]), page = $state(0), addColor = $state('#ffffff');
@@ -41,7 +43,7 @@
   function cancelJob() { controller?.abort(); }
   function resetFailure() { failedSave = false; conflict = false; error = ''; }
   function applyImport(result) {
-    reviewing = true;
+    reviewing = true; manualOrigin = false;
     colors = result.colors; baseline = [...result.colors]; total = result.total;
     truncated = !!result.truncated; partialAlpha = result.partialAlpha;
     selected = []; page = 0; resetFailure();
@@ -54,7 +56,7 @@
       const result = await decodePaletteFile(file, { signal: controller.signal, onProgress: value => progress = value });
       applyImport(result); image = result.image; source = result.source; firstFrame = result.firstFrame; solid = false;
       imageOptionsOpen = result.total > maxColors;
-      if (!initial.name) name = [...(file.name || 'Imported palette').replace(/\.[^.]+$/, '')].slice(0, 64).join('') || 'Imported palette';
+      if (!nameEdited) name = [...(file.name || 'Imported palette').replace(/\.[^.]+$/, '')].slice(0, 64).join('') || 'Imported palette';
       inputOpen = false;
     } catch (problem) { if (problem.name !== 'AbortError') error = problem.message || 'This palette could not be read.'; }
     finally { busy = ''; }
@@ -89,9 +91,11 @@
     colors = colors.map((color, i) => i === index ? value : color); resetFailure();
   }
   function add() {
+    if (busy || truncated) return;
     if (colors.includes(addColor)) { error = 'That color is already in this palette.'; return; }
     if (colors.length >= 4096) { error = 'Review up to 4096 colors. Remove colors before adding another.'; return; }
-    colors = [...colors, addColor]; page = Math.floor((colors.length - 1) / pageSize); resetFailure();
+    if (manualOrigin && !reviewing && !nameEdited && name === 'Imported palette') name = 'Custom palette';
+    colors = [...colors, addColor]; reviewing = true; page = Math.floor((colors.length - 1) / pageSize); resetFailure();
   }
   function draft(copy = false) {
     return { name: validateName(name), colors: normalizeColors(colors, maxColors), source,
@@ -111,7 +115,8 @@
     try {
       const latest = await onreload(editingId);
       if (!latest) throw new Error('This palette was deleted. Save your draft as a copy.');
-      name = latest.name; colors = [...latest.colors]; baseline = [...latest.colors]; revision = latest.revision;
+      name = latest.name; nameEdited = true; colors = [...latest.colors]; baseline = [...latest.colors]; revision = latest.revision;
+      reviewing = true; manualOrigin = false;
       source = latest.source; image = null; total = colors.length; truncated = false; page = 0; selected = []; resetFailure();
     } catch (problem) { error = problem.message; }
   }
@@ -140,6 +145,36 @@
   }
 </script>
 
+{#snippet reviewMetadata()}
+  <label class="palette-name-label" for="palette-name">Name</label>
+  <input id="palette-name" class="glass-input" bind:value={name} oninput={() => nameEdited = true} maxlength="128" disabled={!!busy} autocomplete="off" />
+  <div class="palette-editor-tools palette-review-utilities">
+    {#if !manualOrigin}<button class="btn glass-btn" aria-expanded={inputOpen} onclick={() => inputOpen = !inputOpen} disabled={!!busy} use:tooltip={'Replace this draft with another image, file or pasted colors. Colors are not merged.'}><PixelIcon name="import" />Replace source</button>{/if}
+    {#if colors.length}<button class="btn glass-btn icon-only" aria-label="HEX backup" onclick={backup} disabled={truncated || !!busy} use:tooltip={'Download these colors as a HEX palette backup.'}><PixelIcon name="save" /></button>{/if}
+    {#if edited}<button class="btn glass-btn" disabled={!!busy} onclick={() => { colors = [...baseline]; selected = []; page = 0; resetFailure(); }}>Undo edits</button>{/if}
+  </div>
+{/snippet}
+
+{#snippet colorReview()}
+  {#if colors.length}<div class="palette-review-heading"><strong>{truncated ? total.toLocaleString() + ' colors found' : colors.length.toLocaleString() + (colors.length === 1 ? ' color' : ' colors')}</strong></div>{/if}
+  {#if truncated}<p class="palette-editor-notice">This image has more than 4096 colors. Only the first 4096 are shown, and this draft cannot be saved. Try Find solid colors or a smaller prepared palette image.</p>
+  {:else if colors.length > maxColors}<p class="palette-editor-notice">Remove {colors.length - maxColors} or more colors before saving.</p>
+  {:else if !colors.length}<p class="palette-editor-hint">Add a color, import another palette, or paste colors to start.</p>{/if}
+  <div class="palette-review-grid" aria-label="Palette colors">
+  {#each visible as color, offset}
+    {@const index = page * pageSize + offset}
+    <button class="palette-review-swatch" class:is-selected={selected.includes(index)} style:background-color={color}
+      aria-label={'Select color ' + (index + 1) + ' ' + color} aria-pressed={selected.includes(index)} disabled={!!busy} onclick={() => toggle(index)}
+      use:tooltip={color + '. Select to edit or remove.'}></button>
+  {/each}
+  </div>
+  {#if pages > 1}<nav class="palette-review-pages" aria-label="Color pages"><button class="btn glass-btn" disabled={page === 0} onclick={() => page--}>Previous</button><span>{page + 1} / {pages}</span><button class="btn glass-btn" disabled={page >= pages - 1} onclick={() => page++}>Next</button></nav>{/if}
+  {#if selected.length}<div class="palette-editor-tools">
+  {#if selected.length === 1}<label class="palette-color-label">Edit color<input type="color" value={colors[selected[0]]} onchange={event => editColor(event.currentTarget.value, event.currentTarget)} disabled={!!busy} /></label>{/if}
+    <button class="btn glass-btn danger" onclick={removeSelected} disabled={!!busy}>Remove selected ({selected.length})</button><button class="btn glass-btn" onclick={() => selected = []} disabled={!!busy}>Clear selection</button>
+  </div>{/if}
+{/snippet}
+
 <dialog class="glass-modal-overlay is-active palette-import-modal" bind:this={dialog}
   aria-labelledby="palette-import-title" onclose={() => { controller?.abort(); onclose(); }}
   oncancel={event => { if (busy === 'Saving' || busy === 'Deleting') event.preventDefault(); else controller?.abort(); }}
@@ -153,26 +188,18 @@
     <div class="glass-modal__body palette-editor-body">
       {#if request.exportNotice}<p class="palette-editor-notice" role="alert">{request.exportNotice}</p>{/if}
       {#if initial.notice || initial.maxColors === 255}<p class="palette-editor-notice">{initial.notice || `Keep at most ${maxColors} colors for this GIF. Remove colors, save a copy, then download again.`}</p>{/if}
-      {#if reviewing}
-        <label class="palette-name-label" for="palette-name">Name</label>
-        <input id="palette-name" class="glass-input" bind:value={name} maxlength="128" disabled={!!busy} autocomplete="off" />
-        <div class="palette-editor-tools palette-review-utilities">
-          <button class="btn glass-btn" aria-expanded={inputOpen} onclick={() => inputOpen = !inputOpen} disabled={!!busy} use:tooltip={'Replace this draft with another image, file or pasted colors. Colors are not merged.'}><PixelIcon name="import" />Replace source</button>
-          {#if colors.length}<button class="btn glass-btn icon-only" aria-label="HEX backup" onclick={backup} disabled={truncated || !!busy} use:tooltip={'Download these colors as a HEX palette backup.'}><PixelIcon name="save" /></button>{/if}
-          {#if edited}<button class="btn glass-btn" disabled={!!busy} onclick={() => { colors = [...baseline]; selected = []; page = 0; resetFailure(); }}>Undo edits</button>{/if}
-        </div>
-      {/if}
+      {#if reviewing && !manualOrigin}{@render reviewMetadata()}{/if}
       {#if inputOpen}
         <div class="palette-input-method seg glass-segmented" aria-label="Import method">
           <button class="glass-segmented__item" class:is-active={inputKind === 'file'} aria-pressed={inputKind === 'file'} onclick={() => inputKind = 'file'}>Image or file</button>
           <button class="glass-segmented__item" class:is-active={inputKind === 'text'} aria-pressed={inputKind === 'text'} onclick={() => inputKind = 'text'}>Paste colors</button>
         </div>
         {#if inputKind === 'file'}
-          <button class="btn glass-btn palette-file-button" onclick={() => fileInput.click()} disabled={!!busy}><PixelIcon name="import" />Choose palette image or file</button>
+          <button class="btn glass-btn palette-file-button" onclick={() => fileInput.click()} disabled={!!busy}><PixelIcon name="import" />{colors.length ? 'Replace from image or file' : 'Choose palette image or file'}</button>
           <p class="palette-editor-hint">Or drop or paste a palette image here.</p>
         {:else}
           <textarea class="glass-input palette-text-input" bind:value={text} aria-label="Hex colors" placeholder="#000000, #ffffff, #ff004d" disabled={!!busy}></textarea>
-          <button class="btn glass-btn" onclick={importText} disabled={!!busy || !text.trim()}>Review colors</button>
+          <button class="btn glass-btn" onclick={importText} disabled={!!busy || !text.trim()}>{colors.length ? 'Replace colors' : 'Review colors'}</button>
         {/if}
       {/if}
       <input class="palette-file-input" type="file" bind:this={fileInput} accept=".png,.jpg,.jpeg,.webp,.bmp,.gif,.hex,.txt,.gpl,.pal" onchange={event => { importFile(event.currentTarget.files?.[0]); event.currentTarget.value = ''; }} />
@@ -191,32 +218,18 @@
       {/if}
       {#if firstFrame}<p class="palette-editor-hint">Only the first GIF frame supplies these colors.</p>{/if}
       {#if partialAlpha}<p class="palette-editor-hint">Visible partially transparent pixels become opaque palette colors.</p>{/if}
-      {#if reviewing}
-        {#if colors.length}<div class="palette-review-heading"><strong>{truncated ? total.toLocaleString() + ' colors found' : colors.length.toLocaleString() + (colors.length === 1 ? ' color' : ' colors')}</strong></div>{/if}
-        {#if truncated}<p class="palette-editor-notice">This image has more than 4096 colors. Only the first 4096 are shown, and this draft cannot be saved. Try Find solid colors or a smaller prepared palette image.</p>
-        {:else if colors.length > maxColors}<p class="palette-editor-notice">Remove {colors.length - maxColors} or more colors before saving.</p>
-        {:else if !colors.length}<p class="palette-editor-hint">Add a color, import another palette, or paste colors to start.</p>{/if}
-        <div class="palette-review-grid" aria-label="Palette colors">
-        {#each visible as color, offset}
-          {@const index = page * pageSize + offset}
-          <button class="palette-review-swatch" class:is-selected={selected.includes(index)} style:background-color={color}
-            aria-label={'Select color ' + (index + 1) + ' ' + color} aria-pressed={selected.includes(index)} disabled={!!busy} onclick={() => toggle(index)}
-            use:tooltip={color + '. Select to edit or remove.'}></button>
-        {/each}
-        </div>
-        {#if pages > 1}<nav class="palette-review-pages" aria-label="Color pages"><button class="btn glass-btn" disabled={page === 0} onclick={() => page--}>Previous</button><span>{page + 1} / {pages}</span><button class="btn glass-btn" disabled={page >= pages - 1} onclick={() => page++}>Next</button></nav>{/if}
-        {#if selected.length}<div class="palette-editor-tools">
-        {#if selected.length === 1}<label class="palette-color-label">Edit color<input type="color" value={colors[selected[0]]} onchange={event => editColor(event.currentTarget.value, event.currentTarget)} disabled={!!busy} /></label>{/if}
-          <button class="btn glass-btn danger" onclick={removeSelected} disabled={!!busy}>Remove selected ({selected.length})</button><button class="btn glass-btn" onclick={() => selected = []} disabled={!!busy}>Clear selection</button>
-        </div>{/if}
-      {/if}
-      <details class="palette-editor-details" ontoggle={event => { if (event.currentTarget.open) { if (!reviewing) inputOpen = false; reviewing = true; } }}>
+      {#if reviewing && !manualOrigin}{@render colorReview()}{/if}
+      <details class="palette-editor-details">
         <summary>Add colors</summary>
         <div class="palette-editor-tools">
           <label class="palette-color-label">New color<input type="color" bind:value={addColor} disabled={!!busy} /></label>
           <button class="btn glass-btn" onclick={add} disabled={!!busy || truncated || colors.length >= 4096}><PixelIcon name="plus" />Add color</button>
         </div>
       </details>
+      {#if reviewing && manualOrigin}
+        {@render reviewMetadata()}
+        {@render colorReview()}
+      {/if}
       {#if error}<p class="palette-editor-error" role="alert">{error}</p>{/if}
       {#if conflict}<div class="palette-editor-tools"><button class="btn glass-btn" onclick={() => save(true)} disabled={!eligible}>Save copy</button>{#if onreload}<button class="btn glass-btn" onclick={reload} disabled={!!busy}>Reload saved palette</button>{/if}</div>
       {:else if failedSave && onuse}<button class="btn glass-btn" onclick={useSession} disabled={!eligible}>Use for this session</button>{/if}

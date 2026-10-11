@@ -1884,9 +1884,15 @@ interpretation. Editing a preset or session palette creates a named copy.
 ### Native import/review/editor
 
 A native dialog provides focus containment, Escape dismissal and inert background.
-Its empty state starts with source acquisition. Name and color review appear after an
-import or the manual Add colors route. Add colors and Image options use native expandable
-sections; extraction options open when the image exceeds the saving limit. Recovery
+Its empty state starts with source acquisition. Add colors is a native disclosure only:
+opening or closing it changes no draft, import method or pasted text. The first successful
+manual addition reveals Name and review below and outside the stable Add colors section,
+while leaving source acquisition visible. An untouched manual default becomes Custom
+palette; user-entered names survive later source replacement and Undo. Imported, edited
+and copied drafts retain Name and review above Add colors. Successful source import
+switches to compact review and replaces colors rather than merging them; visible source
+actions say Replace when colors exist. Failed or duplicate additions do not change phase.
+Image options uses a native expandable section; extraction options open when the image exceeds the saving limit. Recovery
 errors and conflict/session actions remain visible. Show removal/limit instructions only
 when needed, and do not repeat the GIF compatibility notice.
 Artwork drop/paste and global stepping do not react behind it. Choose a palette image or
@@ -1931,8 +1937,8 @@ palettes.” Help, README and page/social metadata use this scope, with the exis
 privacy statement. Help keeps the short numbered layout and compact shortcut table at its
 existing 420px maximum. Palette says “Pick 1-bit, palette or import colors.”
 Style says “Pick an effect and tune its settings.” No extra explanatory
-section or palette count is added. The Style step appears only in 1-bit; Palette shows
-Add, Palette and Save.
+section or palette count is added. Both modes retain the four Add, Palette, Style and Save
+steps. Keep the exact Style sentence visible in Palette as well as 1-bit.
 
 The table shows Next style only in 1-bit. Its settings row follows the dock: Style
 settings in 1-bit; Palette settings in Palette. Palette navigation, image actions and device-specific shortcut
@@ -2014,3 +2020,19 @@ Follow-up: the Nearest heading uses 16px/600 body typography and the existing he
 color, distinct from 13px setting labels. The thumbnail cap is sixteen, keeping PICO-8
 and DawnBringer complete. The final follow-up passes 359 unit tests, build, and 120 targeted
 layout/theme cases. Auto matching remains research only; no per-image policy was added.
+
+### Add colors and Help correction verification (2026-10-11)
+
+The frozen editor/Help change passes all 359 unit tests and the production build.
+Targeted production checks pass 290 completed editor/keyboard/recovery/layout assertions,
+20 GIF-copy/export-notice assertions and 21 isolated Help assertions across both families
+and pointer modes, with no JavaScript exceptions. They cover manual creation, both source
+methods, supported file parsers, image/drop/paste, duplicates, name preservation, copies,
+Undo, limits, conflict reload/copy, storage failure/session use and cancellation.
+Native Codex browser checks confirm the supplied 255-color image, stable Add controls,
+320px keyboard focus/text retention, landscape body scrolling and restored Help steps.
+The combined Help-navigation harness encountered an inherited tooltip interception;
+isolated keyboard navigation passes all four family/pointer cases. Exact before/after
+checks confirm the existing tooltip-first Escape rule. Conversion code is unchanged;
+the earlier conversion matrices remain historical coverage. Physical-device/Safari
+limitations above still apply.

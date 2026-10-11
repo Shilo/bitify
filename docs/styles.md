@@ -16,9 +16,9 @@ Reset restores Oklab and cut 128. There is no threshold, Swap, None or style cho
 in this family. Switching back to 1-bit restores the retained colors, style and settings.
 See [palettes.md](palettes.md) for import and palette library behavior.
 
-Choose **1-bit** in the Palette panel to use these styles. Help shows style stepping and
-Style settings only in this mode, with “Pick an effect and tune its settings.” In Palette,
-Help omits the Style step and style stepping, and shows Palette settings. The Palette step
+Choose **1-bit** in the Palette panel to use these styles. Help keeps all four steps in
+both modes, including Style: “Pick an effect and tune its settings.” Its controls table
+shows style stepping and Style settings in 1-bit; Palette settings in Palette. The Palette step
 says “Pick 1-bit, palette or import colors.” The full-palette popup is titled **Nearest**.
 Matching changes the nearest-color rule, without introducing a new effect.
 
