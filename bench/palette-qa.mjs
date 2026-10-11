@@ -229,12 +229,12 @@ try {
   for (const palette of FULL_PRESETS) {
     await openPalette(); await page.getByRole('group',{name:'Full palettes',exact:true}).getByRole('button',{name:palette.name,exact:true}).click(); await closePanel();
     assert.equal((await stored()).paletteId,palette.id); expected = nearestReference(fixture,palette.colors);
-    await tileMatches(expected); await page.getByRole('button',{name:'Palette conversion',exact:true}).click(); await tileMatches(source);
+    await tileMatches(expected); await page.getByRole('button',{name:`${palette.name} conversion`,exact:true}).click(); await tileMatches(source);
     const decoded = readPng(await download(page.getByRole('button',{name:'Save fixture.png',exact:true}),'fixture-palette.png'));
     assert.equal(decoded.w,w); assert.equal(decoded.h,h); samePixels(decoded.pixels,expected,palette.name);
     samePixels(readPng(await copy(page.getByRole('button',{name:'Copy fixture.png',exact:true}))).pixels,expected,`${palette.name} clipboard`);
     results.full.push({palette:palette.name,colors:palette.colors.length,hash:hash(decoded.pixels)});
-    await page.getByRole('button',{name:'Palette conversion',exact:true}).click();
+    await page.getByRole('button',{name:`${palette.name} conversion`,exact:true}).click();
   }
   console.log(`Full matrix: ${results.full.length} independently decoded exports and clipboard PNGs passed.`);
 

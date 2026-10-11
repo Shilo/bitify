@@ -4,7 +4,7 @@
 :root .palette-editor-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-shrink: 0; }
 :root .palette-editor-header .ib { min-width: 44px; width: 44px; height: 44px; padding: 0; flex-shrink: 0; border-radius: 50%; }
 :root .palette-editor .glass-modal__title { font-size: 20px; }
-:root .palette-editor-body { min-height: 0; overflow: auto; overscroll-behavior: contain; }
+:root .palette-editor-body { min-height: 0; overflow: auto; overscroll-behavior: contain; text-align: left; }
 :root .palette-editor .glass-modal__footer { flex-shrink: 0; }
 :root .palette-editor .glass-modal__action { min-height: 48px; }
 :root .palette-editor .palette-save-action { color: var(--gl-color-primary, var(--text)); font-weight: 650; }
@@ -12,8 +12,11 @@
 :root .palette-name-label { display: block; margin-bottom: 6px; font-weight: 600; }
 :root .palette-editor .glass-input { box-sizing: border-box; width: 100%; min-height: 44px; font: inherit; }
 :root .palette-editor-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-block: 12px; }
+:root .palette-review-utilities { gap: 6px; margin-block: 10px 14px; }
+:root .palette-review-utilities .icon-only { width: 44px; height: 44px; padding: 0; }
 :root .palette-editor .btn { min-height: 44px; box-sizing: border-box; padding: 8px 12px; white-space: normal; }
 :root .palette-input-method { display: flex; margin-block: 12px; }
+:root .palette-input-method:first-child { margin-top: 0; }
 :root .palette-input-method button { flex: 1; min-height: 44px; box-sizing: border-box; font: inherit; }
 :root .palette-file-button { width: 100%; }
 :root .palette-editor .palette-text-input { min-height: 96px; resize: vertical; margin-bottom: 8px; }
@@ -21,6 +24,9 @@
 :root .palette-editor-hint { color: var(--muted); font-size: 13px; line-height: 1.5; margin-block: 10px; }
 :root .palette-editor-notice { font-size: 14px; line-height: 1.5; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; }
 :root .palette-editor-error { color: var(--gl-color-error, #c43131); font-size: 14px; line-height: 1.5; overflow-wrap: anywhere; }
+:root .palette-editor-details { margin-top: 12px; }
+:root .palette-editor-details > summary { min-height: 44px; box-sizing: border-box; padding-block: 12px; line-height: 20px; list-style-position: inside; cursor: pointer; font-size: 14px; color: var(--text); }
+:root .palette-editor-details > summary:focus-visible { outline: 2px solid var(--gl-border-focus); outline-offset: 2px; border-radius: 6px; }
 :root .palette-review-heading { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; margin: 16px 0 12px; }
 :root .palette-review-heading span { color: var(--muted); font-size: 13px; }
 :root .palette-review-grid { display: grid; grid-template-columns: repeat(auto-fill,44px); gap: 8px; padding: 4px; }

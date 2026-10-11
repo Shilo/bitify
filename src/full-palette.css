@@ -10,8 +10,8 @@
 :root .palette-family-tabs button { box-sizing: border-box; height: 36px; min-height: 36px; flex: none; padding: 0 11px; font-size: 13px; }
 :root .palette-header-actions { display: flex; flex: none; margin-left: auto; align-items: center; gap: 4px; }
 :root .palette-header-actions > .btn { box-sizing: border-box; width: 36px; min-width: 36px; height: 36px; min-height: 36px; padding: 0; }
-:root .palette-header-actions .palette-transparency { display: flex; flex: none; padding: 2px; gap: 2px; }
-:root .palette-transparency button { box-sizing: border-box; width: 32px; min-width: 32px; height: 32px; min-height: 32px; display: grid; place-items: center; padding: 0; }
+:root .palette-header-actions .palette-transparency { box-sizing: border-box; display: flex; flex: none; height: 36px; min-height: 36px; align-items: center; padding: 2px; gap: 2px; }
+:root .palette-transparency button { box-sizing: border-box; flex: none; width: 32px; min-width: 32px; height: 32px; min-height: 32px; display: grid; place-items: center; padding: 0; }
 :root .palette-rail-wrap { position: relative; min-width: 0; }
 :root .palette-rail { display: flex; gap: 4px; padding: 7px 4px 2px; overflow-x: auto; scrollbar-width: none; overscroll-behavior: contain; }
 :root .palette-rail::-webkit-scrollbar { display: none; }
@@ -22,18 +22,25 @@
 :root .palette-choice[aria-pressed=true] .palette-circle { border-color: var(--gl-border-focus); box-shadow: 0 0 0 2px var(--surface),0 0 0 4px var(--gl-border-focus); }
 :root .palette-choice-name { max-width: 80px; overflow: hidden; font-size: 12px; line-height: 1.2; white-space: nowrap; }
 :root .palette-library-divider { height: 42px; width: 1px; background: var(--line); flex: none; margin: 0 8px; }
-:root .palette-rail-wrap::before, :root .palette-rail-wrap::after { position: absolute; top: 10px; width: 20px; height: 36px; z-index: 1; pointer-events: none; display: none; align-items: center; color: var(--fg); font-size: 20px; }
-:root .palette-rail-wrap.rail-left::before { content: '‹'; display: flex; left: -1px; background: linear-gradient(to right,var(--surface) 25%,transparent); }
-:root .palette-rail-wrap.rail-right::after { content: '›'; display: flex; right: -1px; justify-content: end; background: linear-gradient(to left,var(--surface) 25%,transparent); }
+:root .palette-rail-wrap.rail-left .palette-rail { mask-image: linear-gradient(to right,transparent 12px,#000 36px); }
+:root .palette-rail-wrap.rail-right .palette-rail { mask-image: linear-gradient(to left,transparent 12px,#000 36px); }
+:root .palette-rail-wrap.rail-left.rail-right .palette-rail { mask-image: linear-gradient(to right,transparent 12px,#000 36px,#000 calc(100% - 36px),transparent calc(100% - 12px)); }
+:root .palette-rail-wrap::before, :root .palette-rail-wrap::after { position: absolute; top: 0; bottom: 0; width: 18px; z-index: 1; pointer-events: none; display: none; align-items: center; justify-content: center; color: var(--fg); font-size: 22px; }
+:root .palette-rail-wrap.rail-left::before { content: '‹'; display: flex; left: 0; }
+:root .palette-rail-wrap.rail-right::after { content: '›'; display: flex; right: 0; }
 :root .full-active-palette { display: grid; place-items: center; padding: 0; height: 44px; width: 44px; border-radius: 50%; }
 :root .reset-palette-option { display: flex; gap: 10px; align-items: center; min-height: 44px; }
 :root .workspace-tools .dock .palette-settings-panel { box-sizing: border-box; display: flex; width: 480px; align-items: center; gap: 12px; }
 :root .palette-settings-panel input { flex: 1; min-width: 0; }
 :root .palette-settings-panel output { font-size: 13px; min-width: 3ch; }
+:root .dock .palette-view-toggle { box-sizing: border-box; width: 156px; min-width: 0; }
+:root .palette-view-toggle .view-state { flex: none; }
+:root .palette-view-toggle .view-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 @media(pointer:coarse), (max-width:520px) {
   :root .palette-picker-header { gap: 6px; }
   :root .palette-family-tabs button { height: 44px; min-height: 44px; padding: 0 10px; }
   :root .palette-transparency button, :root .palette-header-actions > .btn { width: 44px; min-width: 44px; height: 44px; min-height: 44px; }
+  :root .palette-header-actions .palette-transparency { height: 48px; min-height: 48px; }
 }
 @media(max-width:300px) { :root .palette-picker-header { flex-wrap: wrap; } }
-@media(forced-colors:active) { :root .palette-circle { border-color: ButtonText; forced-color-adjust: none; } :root .palette-choice[aria-pressed=true] .palette-circle { outline: 2px solid Highlight; } }
+@media(forced-colors:active) { :root .palette-rail-wrap .palette-rail { mask-image: none !important; scrollbar-width: auto; } :root .palette-rail::-webkit-scrollbar { display: block; } :root .palette-rail-wrap::before, :root .palette-rail-wrap::after { display: none !important; } :root .palette-circle { border-color: ButtonText; forced-color-adjust: none; } :root .palette-choice[aria-pressed=true] .palette-circle { outline: 2px solid Highlight; } }

@@ -1774,8 +1774,10 @@ alpha is binary. The settings icon/panel appears for partial source alpha or whe
 has changed, and contains the cut and Reset. Switching families retains the other family's
 state. Selecting/altering colors or conversion settings reveals converted output.
 
-The existing single conversion toggle keeps its style name, or Palette for the full
-family. Its filled/dashed indicator and pressed state show converted/original. Hold image
+The existing single conversion toggle keeps its style name in 1-bit and shows the
+selected palette's name in the full family. Full-palette text is shortened visually in
+a bounded 156px control; accessible labels and tooltips retain the complete name.
+Its filled/dashed indicator and pressed state show converted/original. Hold image
 and Space comparison still apply to wall and Preview. Full palette horizontal palette
 stepping uses curated and saved/session palettes; vertical style stepping has no full
 palette method list to traverse. Controls, fields and open dialogs retain gesture guards.
@@ -1785,10 +1787,16 @@ palette method list to traverse. Controls, fields and open dialogs retain gestur
 Use existing floating materials and measured canvas reservations. A single horizontal
 rail contains one round preview per palette with its name underneath. It scrolls sideways
 with faded edges when needed and reveals the selected choice. The header has the compact
-1-bit/Palette switch. The selected name sits to its left only when measured space allows
+1-bit/Palette switch first, so its position is independent of the selected name. The
+selected name sits to its right only when measured space allows
 the name, switch and actions to fit; never force another header row. Names are shortened
 visually, retaining complete accessible labels and shared tooltips. Palette circles remain
 44px. Touch targets are at least 44px; fine-pointer desktop header controls remain compact.
+The transparency group has symmetric 2px padding around fixed 32px fine-pointer or
+44px touch buttons, with centered glyphs. Full-height masks fade both previews and names
+over 36px at scrollable edges; chevrons float over the underlying glass without a dark
+rectangle. Selection reveal keeps the chosen button beyond the masked region. Forced
+colors removes the masks/chevrons and exposes a normal scrollbar.
 
 The 1-bit header keeps its three-way Both/None switch. The Palette header instead has
 Import and Edit icon buttons with accessible labels and shared tooltips. Its rail starts
@@ -1800,6 +1808,11 @@ interpretation. Editing a preset or session palette creates a named copy.
 ### Native import/review/editor
 
 A native dialog provides focus containment, Escape dismissal and inert background.
+Its empty state starts with source acquisition. Name and color review appear after an
+import or the manual Add colors route. Add colors and Image options use native expandable
+sections; extraction options open when the image exceeds the saving limit. Recovery
+errors and conflict/session actions remain visible. Show removal/limit instructions only
+when needed, and do not repeat the GIF compatibility notice.
 Artwork drop/paste and global stepping do not react behind it. Choose a palette image or
 file, paste an image, or use Paste colors. Supported images are PNG/JPEG/WebP/BMP/GIF,
 up to 32 MiB and 16 × 1024 × 1024 decoded pixels. GIF uses the first frame with a notice.

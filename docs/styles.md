@@ -14,6 +14,12 @@ transparent sources or a changed cut. There is no threshold, Swap, None or style
 in this family. Switching back to 1-bit restores the retained colors, style and settings.
 See [palettes.md](palettes.md) for import and palette library behavior.
 
+Palette-specific ordered or error-diffusion dithering can be useful for gradients, but
+is deferred until its source-coordinate patterns, sampled previews, transparent edges
+and animated output have explicit visual tests. The supplied research also recommends
+nearest matching first. Existing two-ink structural styles cannot be applied to an
+arbitrary color set without defining a different conversion effect.
+
 The menu and stepping order is **Cutout → Solid → Lines → Stencil → Icon → Checker →
 Bayer → Hatch → Atkinson → Noise → Shape**. General shape conversions come first,
 then the two negative-space styles, then shading patterns, then the plain mask. This is

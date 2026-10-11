@@ -58,7 +58,7 @@
   // App measures the complete bottom workspace, including editing and file rows.
   let panelHeight = $state(0);
 
-  const styleName = $derived(family === 'full-palette' ? 'Palette' : STYLES.find(s => s[0] === style)[1]);
+  const styleName = $derived(family === 'full-palette' ? fullPalette.name : STYLES.find(s => s[0] === style)[1]);
   const selectedName = $derived(family === 'full-palette' ? fullPalette.name : PRESETS.find(chosen)?.name ?? 'Custom');
   let showSelectedName = $state(false);
   // Measure the candidate independently of its visibility. Hiding it must not
@@ -87,8 +87,10 @@
       const button = node.querySelector('[aria-pressed="true"]');
       if (button) {
         const a = node.getBoundingClientRect(), b = button.getBoundingClientRect();
-        if (b.left < a.left + 6) node.scrollLeft += b.left - a.left - 6;
-        else if (b.right > a.right - 6) node.scrollLeft += b.right - a.right + 6;
+        const left = node.scrollLeft > 1 ? 36 : 4;
+        const right = node.scrollLeft + node.clientWidth < node.scrollWidth - 1 ? 36 : 4;
+        if (b.left < a.left + left) node.scrollLeft += b.left - a.left - left;
+        else if (b.right > a.right - right) node.scrollLeft += b.right - a.right + right;
       }
       mark();
     };
@@ -304,11 +306,11 @@
     <div class="panel palette-family-panel glass-card" bind:offsetHeight={panelHeight}>
       <div class="palette-picker-header" use:fitPaletteHeader={selectedName + family}>
         <span class="palette-name-measure" aria-hidden="true">{compactPaletteName(selectedName, 22)}</span>
-        <span class="palette-selected-name" hidden={!showSelectedName} use:tooltip={selectedName}>{compactPaletteName(selectedName, 22)}</span>
         <div class="palette-family-tabs glass-segmented" role="group" aria-label="Color system">
           <button class="glass-segmented__item" aria-pressed={family === 'two-color'} onclick={() => family = 'two-color'}>1-bit</button>
           <button class="glass-segmented__item" aria-pressed={family === 'full-palette'} onclick={() => family = 'full-palette'}>Palette</button>
         </div>
+        <span class="palette-selected-name" hidden={!showSelectedName} use:tooltip={selectedName}>{compactPaletteName(selectedName, 22)}</span>
         <div class="palette-header-actions">
           {#if family === 'two-color'}
             <span class="seg mini palette-transparency glass-segmented" role="group" aria-label="Transparent color">
@@ -431,17 +433,17 @@
   {/snippet}
   <div class="color-tools tool-group" role="group" aria-label="Colors and palette">
     {#if family === 'full-palette'}
-      <button class="full-active-palette glass-btn" onclick={() => toggle('palettes')} aria-label={`Selected palette: ${fullPalette.name}, ${fullPalette.colors.length} colors`} use:tooltip={fullPalette.name}><PalettePreview colors={fullPalette.colors}/></button>
+      <button class="full-active-palette glass-btn" onclick={() => toggle('palettes')} aria-label={`Selected palette: ${fullPalette.name}, ${fullPalette.colors.length} ${fullPalette.colors.length === 1 ? 'color' : 'colors'}`} use:tooltip={fullPalette.name}><PalettePreview colors={fullPalette.colors}/></button>
     {:else}{@render colorPair()}{/if}
     {@render paletteButton()}
   </div>
   <span class="sep"></span>
   <div class="style-tools tool-group" role="group" aria-label="Conversion and style">
-    <button class="btn glass-btn view-toggle" aria-label="{styleName} conversion" aria-pressed={!effectiveOriginal}
+    <button class="btn glass-btn view-toggle" class:palette-view-toggle={family === 'full-palette'} aria-label="{styleName} conversion" aria-pressed={!effectiveOriginal}
       aria-describedby="view-status"
       use:tooltip={effectiveOriginal ? `Showing original. Click to apply ${styleName}.` : `Showing ${styleName}. Click to compare the original.`}
       onclick={() => (showOriginal = !showOriginal)}>
-      <span class="view-state" aria-hidden="true"></span><span>{styleName}</span>
+      <span class="view-state" aria-hidden="true"></span><span class="view-name" aria-hidden="true">{family === 'full-palette' ? compactPaletteName(styleName, 16) : styleName}</span>
     </button>
     {#if family === 'two-color' || soft || alphaCut !== 128}{@render styleButton()}{/if}
     <span id="view-status" class="view-status">{effectiveOriginal ? 'Showing original images.' : `Showing images converted with ${styleName}.`}</span>

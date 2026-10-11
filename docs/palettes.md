@@ -120,7 +120,7 @@ the eye.
   colors are in use.
 - The panel has one row of circular choices with names beneath, scrolling sideways when
   necessary. Images move up to make room. A faded edge indicates more choices. The
-  selected name appears left of the 1-bit/Palette switch only when measured space permits;
+  selected name appears right of the fixed-position 1-bit/Palette switch only when measured space permits;
   the individual choices always retain their names. Long names are shortened visually and
   remain available in accessible labels and shared tooltips. A custom pair is named Custom.
 - Palettes are a starting point. Either color can be changed to anything with the swatches.
@@ -155,6 +155,19 @@ desktop header controls remain compact. Import and Edit are icon buttons with
 accessible names and tooltips; they open a native dialog. There is no separate full-color
 style list, no one-option method picker, and no Swap/None role in this family.
 
+The comparison button shows the selected palette's name rather than the generic word
+Palette. Its width is bounded; long names are shortened visually and retained in full
+in its accessible label and tooltip. Pressing it still compares the converted result
+with the original. The 1-bit comparison button keeps the current style's name.
+
+Nearest-color conversion deliberately remains the full palette method. The supplied
+research recommends it first and lists multi-color ordered/error-diffusion dithering
+and shape preservation as later work. Dithering can help gradients with sparse palettes,
+but it introduces spatial texture and needs explicit sampled-preview, transparency,
+animation and performance rules. Legacy Cutout/Stencil/Icon classify two ink roles;
+they do not define how arbitrary full-palette entries should represent those roles.
+Optional palette methods deserve a separate visual comparison before implementation.
+
 Output pixels are fully opaque or fully transparent. Opacity cut defaults to 128:
 source alpha below the cut becomes empty. The range is 1–255, so alpha zero always stays
 empty. The separate settings control appears when an image has partial alpha or the cut
@@ -163,6 +176,13 @@ Selecting or altering a palette returns the display to converted output; hold co
 and the persistent-label conversion switch remain available.
 
 ### Import and review
+
+The empty dialog starts with choosing a file/image or pasting colors. Name and color
+review appear after import; Add colors opens manual creation. During review, Replace
+source explicitly replaces the draft rather than merging palettes. HEX backup is an
+icon button, and Image options/Add colors/More options expand only when needed. Image
+options opens automatically for an over-limit image. Errors and recovery actions stay
+visible, and the saving limit is explained when the draft needs reduction.
 
 - **Images:** PNG, JPEG, WebP, BMP and GIF, up to 32 MiB and 16 × 1024 × 1024 decoded
   pixels. GIF contributes its first frame, with a notice. Decoding is browser-managed,
