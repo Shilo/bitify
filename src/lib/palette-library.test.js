@@ -8,6 +8,10 @@ function storage(initial = []) {
 const record = (id = 'user-one', revision = 1) => ({ id, name: 'Mine', colors: ['#aabbcc'], revision, source: { kind: 'hex' } });
 
 describe('palette library', () => {
+  it('preserves Aseprite source attribution through saving and restoration', () => {
+    const input = { ...record(), source: { kind: 'aseprite' } };
+    expect(restoreLibrary(serializeLibrary([input]))[0].source).toEqual({ kind: 'aseprite' });
+  });
   it('normalizes opaque colors with stable duplicate removal and HEX round-trip contents', () => {
     expect(normalizeColors([' #ABC ', '#aabbcc', 'ffffff', '#000'])).toEqual(['#aabbcc', '#ffffff', '#000000']);
     expect(exportHex(['#abc', '#ABC', '#000'])).toBe('#aabbcc\n#000000\n');

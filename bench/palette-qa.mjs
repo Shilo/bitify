@@ -8,6 +8,7 @@ import { resolve, extname, sep } from 'node:path';
 import { createRequire } from 'node:module';
 import { pathToFileURL } from 'node:url';
 import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { deflateSync, inflateSync, crc32 } from 'node:zlib';
 import { unzipSync } from 'fflate';
 import omggif from 'omggif';
@@ -578,6 +579,37 @@ try {
   }
   await clockContext.close();
   results.extra.push('Built wall/viewer GIF Original advances while conversion yields are held; switching back waits and resumes the exact current frame without stale completion');
+  // Fixed supplied fixture oracle: SHA pins its known modern palette table.
+  // Read raw entry bytes independently; do not call the production ASE parser.
+  const asePath=resolve('src/lib/fixtures/palette-import/palette.ase'),aseBytes=readFileSync(asePath);
+  const aseSha=createHash('sha256').update(aseBytes).digest('hex');
+  assert.equal(aseSha,'f7a97806651302378fb9f4866ba11562d3f7a2f97a6fa825d1f389eed98d8532');
+  assert.equal(aseBytes.readUInt16LE(170),0x2019); assert.deepEqual([172,176,180].map(at=>aseBytes.readUInt32LE(at)),[256,0,255]);
+  const aseExpected=[];
+  for(let i=0;i<256;i++){const at=192+i*6;assert.equal(aseBytes.readUInt16LE(at),0);if(aseBytes[at+5]){const color='#'+aseBytes.subarray(at+2,at+5).toString('hex');if(!aseExpected.includes(color))aseExpected.push(color);}}
+  assert.equal(aseExpected.length,255);
+  const aseContext=await browser.newContext(),asePage=await aseContext.newPage(),aseRequests=[];
+  await asePage.addInitScript(()=>localStorage.setItem('bitify',JSON.stringify({family:'full-palette'})));
+  asePage.on('pageerror',error=>results.consoleErrors.push(error.message));
+  asePage.on('request',request=>{if(/\/palette-ase-[^/]+\.js(?:\?|$)/.test(request.url()))aseRequests.push(request.url());});
+  await asePage.goto(page.url());await asePage.locator('.dock button[aria-label="Palette"]').click();await asePage.getByRole('button',{name:'Import palette',exact:true}).click();
+  const aseEditor=asePage.getByRole('dialog',{name:'Import palette',exact:true}),aseInput=aseEditor.locator('input[type=file]');
+  await aseInput.setInputFiles(fixturePath);await aseEditor.locator('summary').filter({hasText:'Image options'}).waitFor();
+  await aseEditor.getByRole('button',{name:'Paste colors',exact:true}).click();await aseEditor.getByLabel('Hex colors',{exact:true}).fill('#112233 #445566');await aseEditor.getByRole('button',{name:'Replace colors',exact:true}).click();
+  assert.equal(aseRequests.length,0,'Startup/editor/PNG/text loaded the ASE parser');
+  await aseEditor.getByLabel('Name',{exact:true}).fill('Lazy ASE palette');
+  for(let attempt=0;attempt<2;attempt++){
+    await aseEditor.getByRole('button',{name:'Image or file',exact:true}).click();await aseInput.setInputFiles(asePath);await aseEditor.getByText('255 colors',{exact:true}).waitFor();
+    const actual=[];const previous=aseEditor.getByRole('button',{name:'Previous',exact:true});while(await previous.isEnabled())await previous.click();
+    for(;;){actual.push(...await aseEditor.locator('.palette-review-swatch').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('aria-label').split(' ').at(-1))));const next=aseEditor.getByRole('button',{name:'Next',exact:true});if(!await next.isEnabled())break;await next.click();}
+    assert.deepEqual(actual,aseExpected,'ASE review changed raw entry order');assert.equal(aseRequests.length,1,'First ASE must load once and subsequent imports reuse the module');
+    if(!attempt){await aseEditor.getByRole('button',{name:'Paste colors',exact:true}).click();await aseEditor.getByRole('button',{name:'Replace colors',exact:true}).click();}
+  }
+  await aseEditor.getByRole('button',{name:'Save palette',exact:true}).click();await aseEditor.waitFor({state:'detached'});
+  const aseSaved=await asePage.evaluate(()=>JSON.parse(localStorage.getItem('bitify-palettes-v1')).palettes.find(p=>p.name==='Lazy ASE palette'));
+  assert.equal(aseSaved.source.kind,'aseprite');assert.deepEqual(aseSaved.colors,aseExpected);
+  results.aseLazy={fixtureSha256:aseSha,colors:aseExpected.length,requests:aseRequests};await aseContext.close();
+  results.extra.push('ASE parser stays unloaded for startup/editor/PNG/text; first import loads once, repeat reuses cache and exact255 ordered raw entries persist with aseprite metadata');
   assert.deepEqual(results.consoleErrors,[],'Browser JS exceptions');
   results.passed = true;
   writeFileSync(resolve(scratch,'results.json'),JSON.stringify(results,null,2));

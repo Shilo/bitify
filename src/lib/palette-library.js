@@ -54,7 +54,7 @@ export const FULL_PRESETS = Object.freeze([
 ]);
 
 function sourceOf(source) {
-  const kinds = ['image', 'hex', 'gpl', 'pal', 'custom', 'copy'];
+  const kinds = ['image', 'hex', 'gpl', 'pal', 'aseprite', 'custom', 'copy'];
   const kind = kinds.includes(source?.kind) ? source.kind : 'custom';
   // Imported text is never accepted as a link. Attribution is plain text only.
   return { kind, ...(typeof source?.credit === 'string' ? { credit: source.credit.slice(0, 160) } : {}) };

@@ -1948,8 +1948,21 @@ buffers before dimensions are exposed.
 
 Supported text is HEX/TXT, legacy RGB GPL and text JASC-PAL version 0100, up to 256 KiB.
 Hex accepts #RGB, #RRGGBB or bare six-digit tokens separated by whitespace/comma/semicolon.
-Alpha hex, malformed rows/counts, binary PAL, ASE and ACO are rejected. Do not mine
+Alpha hex, malformed rows/counts, binary PAL, Adobe ASE and ACO are rejected. Do not mine
 arbitrary documents for hex-looking substrings. TXT means this hex grammar.
+
+Aseprite `.ase` / `.aseprite` files, up to 32 MiB, use a dynamically imported palette
+parser only when that file type is selected. Read the first frame's embedded palette,
+prefer modern records over legacy records, and require complete known entries rather
+than fabricating defaults or sampling artwork. Keep palette-index order, remove RGB
+duplicates, skip alpha-zero entries and normalize positive alpha to opaque with the
+existing source notice. Multi-frame documents show the existing first-frame notice,
+worded for Aseprite. Read stored RGB channels directly, like HEX; document profiles are
+metadata and are not applied. Export a color-managed PNG first for rendered-appearance
+colors. No layer compositing, cel decompression, external file loading or new controls.
+Limit embedded tables to 4096 entries before deduplication. Validate binary magic,
+lengths, ranges and framing; reject malformed/missing palette data
+without replacing the draft. Cooperative parsing supports cancellation and progress.
 
 Every color scans every full-resolution alpha-positive pixel, in reading order, with RGB
 deduplication. Alpha zero is excluded; partial alpha is normalized to opaque palette RGB
@@ -2202,3 +2215,31 @@ browser checks confirm new/edit/preset-copy controls, duplicate handling, color 
 Undo, cancellation, both families, both matching choices and the retained Style Help row.
 The earlier editor/codec/layout counts remain historical evidence. Physical-device and
 Safari limitations remain unchanged.
+
+### Lazy Aseprite palette import verification (2026-10-11)
+
+The parser imports embedded numeric RGB entries only. Review corrected legacy packet
+starts and six-bit expansion, and rejected treating the supplied document's gamma 2.2
+profile as ordinary sRGB. The agreed contract preserves stored RGB like HEX, ignoring
+artwork/profile payloads after validating their chunk bounds. A final challenge exposed
+late failures after Cancel; the scoped route now preserves cancellation on rejected
+module loads, file reads and parsing, with concise reload guidance for a load failure.
+
+All 407 unit tests and the production build pass. Final assets index-CFW9g8Uc.js,
+palette-ase-1nNkaIAs.js and unchanged index-DRgAmXuj.css pass 311 affected browser
+assertions across both pointer modes, including 36 fixture scenarios. They cover the
+supplied 255-color table and exact HEX backup, modern/legacy records, ranges, names,
+alpha, ignored profile metadata, malformed framing/data, limits, mixed input methods,
+persistence, saved edits, preset/session/GIF copies and both cancellation rejection paths.
+These are finite fixtures and repeated assertions, not exhaustive arbitrary files.
+A retained built-browser gate independently reads the SHA-pinned supplied table and
+verifies no parser request for startup/editor/PNG/text, one first Aseprite load, cached
+repeat imports, all 255 ordered RGB values and saved Aseprite source metadata.
+
+Native Codex browser checks independently match all 255 supplied colors in order,
+save/reload/reopen them, and import PNG/JPEG/WebP/BMP/GIF/HEX/TXT/GPL/JASC-PAL in the
+same editor. Adobe ASE failure retains the draft; Paste/Add/Undo/Cancel preserve the
+saved original. The 320px check retains 44px header targets without horizontal overflow.
+The preceding build's unchanged legacy/export paths pass 132 combinations, five presets
+in both matching modes and nine integration categories; final scoped route checks are
+fresh evidence. Physical-device and Safari limits remain unchanged.

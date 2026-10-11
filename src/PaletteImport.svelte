@@ -230,12 +230,12 @@
           <button class="btn glass-btn" onclick={add} disabled={!!busy || truncated || colors.length >= 4096}><PixelIcon name="plus" />Add color</button>
         </div>
       </div>
-      <input class="palette-file-input" type="file" bind:this={fileInput} accept=".png,.jpg,.jpeg,.webp,.bmp,.gif,.hex,.txt,.gpl,.pal" onchange={event => { importFile(event.currentTarget.files?.[0]); event.currentTarget.value = ''; }} />
+      <input class="palette-file-input" type="file" bind:this={fileInput} accept=".png,.jpg,.jpeg,.webp,.bmp,.gif,.hex,.txt,.gpl,.pal,.ase,.aseprite" onchange={event => { importFile(event.currentTarget.files?.[0]); event.currentTarget.value = ''; }} />
       {#if busy && busy !== 'Saving' && busy !== 'Deleting'}
         <div class="palette-import-progress" role="status"><span>{busy}…</span><progress max="1" value={progress}></progress><button class="btn glass-btn" onclick={cancelJob}>Cancel import</button></div>
       {/if}
-      {#if firstFrame}<p class="palette-editor-hint">Only the first GIF frame supplies these colors.</p>{/if}
-      {#if partialAlpha}<p class="palette-editor-hint">Visible partially transparent pixels become opaque palette colors.</p>{/if}
+      {#if firstFrame}<p class="palette-editor-hint">Only the first {source.kind === 'aseprite' ? 'Aseprite' : 'GIF'} frame supplies these colors.</p>{/if}
+      {#if partialAlpha}<p class="palette-editor-hint">{source.kind === 'aseprite' ? 'Partially transparent entries' : 'Visible partially transparent pixels'} become opaque palette colors.</p>{/if}
       {#if error && errorLocation === 'input'}<p class="palette-editor-error" role="alert">{error}</p>{/if}
     </div>
     <div class="glass-modal__footer">

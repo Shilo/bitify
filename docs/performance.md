@@ -756,6 +756,20 @@ does not remove that existing animation-memory cost. Browser image decode can al
 internally before the palette importer discovers dimensions. Import limits are 32 MiB
 per image and 16 × 1024 × 1024 decoded pixels; palette text is limited to 256 KiB.
 
+Aseprite embedded-palette import is a separate dynamic module, requested only by the
+`.ase` / `.aseprite` file route. Its bounded binary scan reads palette entries directly
+and yields cooperatively for cancellation/progress. It allocates no artwork bitmap,
+decompressed cel, layer composite or color-profile converter. Files are capped at
+32 MiB and the review table at 4096 entries. Stored RGB values are numeric palette
+values, as with HEX import; document display profiles are metadata, not applied.
+Cancel suppresses publication and late read/module errors; it does not terminate the
+browser's module request or file read. Busy clears when that pending operation settles,
+and Close stays available. Parsing itself checks cancellation between bounded batches.
+The production comparison with `2963cd3` adds 575 minified startup bytes (201 bytes
+using the same Node gzip settings). The separate parser is 2492 minified bytes / 1326
+gzip bytes and is not preloaded by the HTML. These are build measurements, not network
+latency or a physical-phone timing guarantee; compression varies by server settings.
+
 Save/Copy snapshots the family, colors, matching and alpha cut and converts original pixels.
 Palette PNG output is packed directly at the smallest fitting 1/2/4/8-bit depth, with a
 direct RGBA fallback when all 256 opaque colors and empty occur. Async PNG packing and

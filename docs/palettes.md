@@ -243,9 +243,18 @@ try Save again. The draft, editing limit and saved record remain unchanged.
   file bytes, and the browser may allocate decode buffers before dimensions are known.
 - **Text:** pasted or HEX/TXT colors, legacy RGB GPL, and text JASC-PAL version 0100,
   up to 256 KiB. Hex tokens accept `#RGB`, `#RRGGBB`, or bare six-digit hex, separated
-  by whitespace, commas or semicolons. Alpha hex, binary PAL/ASE/ACO and malformed or
+  by whitespace, commas or semicolons. Alpha hex, binary PAL, Adobe ASE/ACO and malformed or
   mismatched RGB rows are rejected. TXT uses the hex grammar, rather than every format
   another program happens to call TXT.
+- **Aseprite:** `.ase` / `.aseprite`, up to 32 MiB and 4096 embedded table entries.
+  A lazy parser reads the first frame's
+  embedded palette, preferring modern palette records over legacy ones. Stored RGB
+  channels are imported in palette-index order, with duplicates removed and alpha-zero
+  entries skipped. Partial alpha becomes opaque, with the existing notice. Later frame
+  palettes are not combined. Missing or incomplete palettes, malformed framing or palette data
+  are rejected without replacing the draft. Artwork, layers and document color profiles
+  are not rendered, validated or applied: this preserves authored numeric colors like HEX import.
+  Export a color-managed PNG first to import colors from the rendered appearance.
 - **Every color:** all full-resolution pixels with alpha greater than zero are scanned
   in reading order. RGB duplicates are removed, alpha-zero pixels are ignored, and
   partial alpha produces an opaque-normalization notice. No assumed image layout, color
