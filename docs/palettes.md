@@ -173,6 +173,26 @@ animation and performance rules. Legacy Cutout/Stencil/Icon classify two ink rol
 they do not define how arbitrary full-palette entries should represent those roles.
 Optional palette methods deserve a separate visual comparison before implementation.
 
+### One shared palette for several images
+
+Select or import a palette once; it applies to every image on the wall. A visible pixel
+keeps its RGB if that color is already in the selected palette. Otherwise, Bitify checks
+every palette entry and chooses the closest in Oklab, a color space that approximates
+perceived color differences. The same source RGB maps to the same palette RGB in every
+image. The palette is never regenerated or optimized separately for each image.
+
+Each image can use a different subset of that shared set. It does not have to use every
+selected color. PNG exports compact unused entries, so files can have different stored
+color tables while all visible RGBs still belong to the same shared palette. GIF frames
+share one used-color table per exported animation. Fully transparent pixels stay empty;
+the Opacity cut decides whether partially transparent pixels become empty or opaque.
+
+Nearest matching minimizes each individual visible pixel's Oklab distance to the allowed
+set. Dithering instead spreads different allowed colors over neighboring pixels to
+approximate a missing shade; it can improve averaged shading while increasing individual
+pixel error and changing crisp pixel-art textures. Palette-specific Ordered and Diffusion
+remain research ideas, not available app controls.
+
 Output pixels are fully opaque or fully transparent. Opacity cut defaults to 128:
 source alpha below the cut becomes empty. The range is 1–255, so alpha zero always stays
 empty. The separate settings control appears when an image has partial alpha or the cut

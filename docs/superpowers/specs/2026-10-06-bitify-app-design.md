@@ -1766,6 +1766,12 @@ remain independent. The default is still Glow/Cutout in 1-bit.
   chooses the nearest Oklab entry. Equal distances retain the earliest entry. Every
   opaque output belongs to the selected set; every selected color need not appear.
 
+The selected full palette is shared across all images; no image generates its own palette.
+Identical visible source RGBs map identically at the same alpha cut. Nearest minimizes
+individual pixel Oklab distance, rather than local averaged shading error. PNG exports
+may compact different used subsets into different physical color tables; membership in
+the common selected RGB set is the shared-palette guarantee, not identical table bytes.
+
 Full palette conversion uses original source RGB, independently of legacy brightness,
 threshold and structural settings. It has no None or Swap role and no separate style or
 single-option method chooser. Source alpha below the family-specific Opacity cut becomes

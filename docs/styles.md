@@ -18,11 +18,12 @@ Choose **1-bit** in the Palette panel to use these styles. Help shows style step
 Style settings only in this mode. In Palette, it shows Palette settings when the opacity
 control is available, and omits style stepping.
 
-Palette-specific ordered or error-diffusion dithering can be useful for gradients, but
-is deferred until its source-coordinate patterns, sampled previews, transparent edges
-and animated output have explicit visual tests. The supplied research also recommends
-nearest matching first. Existing two-ink structural styles cannot be applied to an
-arbitrary color set without defining a different conversion effect.
+Palette-specific ordered and error-diffusion dithering remain research only. Tests with
+one shared 255-color palette and six buildings found better averaged hues at the cost of
+texture and greater individual-pixel color error. Nearest retains clean flat fills and
+consistent source-color mapping. See the [shared-palette research](research/2026-10-11-shared-palette.md)
+for the comparison and animation limitations. Existing two-ink structural styles cannot
+be applied to an arbitrary color set without defining a different conversion effect.
 
 The menu and stepping order is **Cutout → Solid → Lines → Stencil → Icon → Checker →
 Bayer → Hatch → Atkinson → Noise → Shape**. General shape conversions come first,

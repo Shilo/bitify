@@ -12,7 +12,7 @@ Convert sprites and animations with 1-bit styles or color palettes. Runs entirel
 - In 1-bit, choose two colors, swap them, or pick from twelve presets. Either color can be None, for a transparent result. Changes redraw every image at once.
 - Full palettes with 1–256 unique opaque RGB colors, five curated presets, and a named local palette library. Import palette images, HEX/TXT, legacy RGB GPL, JASC-PAL, or pasted hex colors; review and edit before saving.
 - Eleven 1-bit styles: Cutout (filled shapes with their parts cut apart, after the game End of End), Solid, Stencil (a filled shape with its inner lines cut out, for one-color icons), Lines (outlines each part of a sprite), Checker, Hatch, Bayer, Noise, Atkinson, Icon and Shape.
-- In 1-bit, use the threshold slider or per-image Auto setting. Palette mode matches source colors directly, with a separate opacity cut when needed.
+- In 1-bit, use the threshold slider or per-image Auto setting. Palette mode matches each pixel to the nearest selected color in Oklab, preserving exact matches and sharing the selected palette across all images. A separate opacity cut appears when needed.
 - An immersive checker canvas with grouped floating glass controls and readable image actions/labels.
 - Compare with the original: click the style- or palette-named button, hold a tile, or hold Space.
 - Save PNGs and animated GIFs at original size, or all images as a ZIP. Full palette GIFs allow up to 256 used colors, including transparency; incompatible exports offer an explicitly edited palette copy.
