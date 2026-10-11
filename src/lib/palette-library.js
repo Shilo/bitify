@@ -26,6 +26,16 @@ export function validateName(name) {
   return result;
 }
 
+// Suggest once when a new draft opens. Saving never changes a chosen name.
+export function customPaletteName(records) {
+  const occupied = new Set(records.map(record => record.name.trim().toLowerCase()));
+  const base = 'Custom palette';
+  if (!occupied.has(base.toLowerCase())) return base;
+  let suffix = 2;
+  while (occupied.has(`${base} ${suffix}`.toLowerCase())) suffix++;
+  return `${base} ${suffix}`;
+}
+
 export function exportHex(colors) { return normalizeColors(colors).join('\n') + '\n'; }
 
 const preset = (id, name, colors, credit, url) => Object.freeze({

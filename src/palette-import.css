@@ -2,8 +2,8 @@
 :root .palette-import-modal { padding: 16px; box-sizing: border-box; }
 :root .palette-import-modal .palette-editor { --palette-editor-gap: 12px; width: min(560px, calc(100vw - 32px)); max-width: none; max-height: calc(100dvh - 32px); display: flex; flex-direction: column; box-sizing: border-box; background: var(--surface); }
 :root .palette-editor-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-shrink: 0; }
-:root .palette-editor-header .ib { min-width: 44px; width: 44px; height: 44px; padding: 0; flex-shrink: 0; border-radius: 50%; }
-:root .palette-editor .glass-modal__title { font-size: 20px; }
+:root .palette-editor-header .ib { min-width: 44px; width: 44px; height: 44px; box-sizing: border-box; padding: 0; flex-shrink: 0; border-radius: 50%; }
+:root .palette-editor .palette-editor-header .palette-editor-title-input { min-width: 0; flex: 1; height: 44px; min-height: 44px; box-sizing: border-box; padding-block: 8px; line-height: 1.2; font-size: 20px; font-weight: 600; }
 :root .palette-editor .palette-editor-body { display: flex; flex-direction: column; gap: var(--palette-editor-gap); min-height: 0; overflow: auto; overscroll-behavior: contain; text-align: left; padding-block: var(--palette-editor-gap); }
 :root .palette-editor-body > * { flex-shrink: 0; }
 :root :is(.palette-method-panel:not([hidden]),.palette-draft-review) { display: flex; flex-direction: column; gap: var(--palette-editor-gap); }
@@ -11,8 +11,6 @@
 :root .palette-editor .glass-modal__action { min-height: 48px; }
 :root .palette-editor .palette-save-action { color: var(--gl-color-primary, var(--text)); font-weight: 650; }
 :root .palette-editor :is(button,input,textarea):disabled { opacity: .5; cursor: default; }
-:root .palette-editor-name { flex-shrink: 0; margin: 0 24px var(--palette-editor-gap); }
-:root .palette-name-label { display: block; margin-bottom: 6px; font-weight: 600; }
 :root .palette-editor .glass-input { box-sizing: border-box; width: 100%; min-height: 44px; font: inherit; }
 :root .palette-editor-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0; }
 :root .palette-review-utilities:not(:has(button)), :root .palette-review-grid:empty { display: none; }
@@ -43,14 +41,11 @@
 :root .palette-import-progress progress { flex: 1; min-width: 80px; }
 :root .palette-delete-confirm { border-top: 1px solid var(--line); margin-top: 16px; padding-top: 8px; }
 :root .palette-delete-confirm .btn { margin-right: 8px; }
-@media(max-width:400px) { :root .palette-editor .glass-modal__body { padding: 12px 16px; } :root .palette-editor .glass-modal__header { padding: 12px 16px; } :root :is(.palette-editor-name,.palette-input-method) { margin-inline: 16px; } }
+@media(max-width:400px) { :root .palette-editor .glass-modal__body { padding: 12px 16px; } :root .palette-editor .glass-modal__header { padding: 12px 16px; } :root .palette-input-method { margin-inline: 16px; } }
 @media(pointer:coarse), (max-width:520px) { :root .palette-editor :is(input:not([type=color]),textarea) { font-size: 16px; } }
 @media(max-height:520px) and (min-width:521px) {
   :root .palette-import-modal .palette-editor { --palette-editor-gap: 6px; }
-  :root .palette-editor .palette-editor-header { padding-block: 8px; }
-  :root .palette-editor .glass-modal__title { margin-block: 0; }
-  :root .palette-editor-name { display: grid; grid-template-columns: max-content minmax(0,1fr); align-items: center; gap: 12px; margin-bottom: 6px; }
-  :root .palette-editor-name .palette-name-label { margin-bottom: 0; }
+  :root .palette-editor .palette-editor-header { padding-block: 8px; padding-bottom: var(--palette-editor-gap); }
   :root .palette-editor .palette-editor-body { padding-block: 6px; }
 }
 @media(forced-colors:active) { :root .palette-review-swatch.is-selected { outline: 3px solid Highlight; box-shadow: none; } }

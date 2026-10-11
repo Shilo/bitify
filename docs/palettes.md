@@ -216,14 +216,15 @@ and the persistent-label conversion switch remain available.
 
 ### Import and review
 
-One dialog shows **Name** at the top from the start, followed by **Image or file**,
+One dialog uses its editable palette name as the header, followed by **Image or file**,
 **Paste colors** and **Add colors**. These stay above its scrolling content. Switch
 methods without losing the draft or pasted text. Color review appears below the input
 controls after the first successful import or add; existing palettes show it immediately.
 Editing and copying start with Add colors.
 File and text actions say Replace when colors exist; manual Add appends a unique color.
-New drafts start as Custom palette; an untouched file import can suggest its filename.
-Entered names are retained.
+New drafts suggest Custom palette, or the first available Custom palette 2, 3, etc.
+when saved or session palettes already use that name (ignoring case and outer spaces).
+Existing and entered names are preserved. An untouched file import can suggest its filename.
 An image with no visible colors reports that and keeps the draft. HEX backup is an
 icon button, and Image options/More options expand only when needed. Image
 options opens automatically for an over-limit image. Errors and recovery actions stay

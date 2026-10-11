@@ -1884,13 +1884,17 @@ interpretation. Editing a preset or session palette creates a named copy.
 ### Native import/review/editor
 
 A native dialog provides focus containment, Escape dismissal and inert background.
-One dialog remains mounted throughout acquisition and review. Name is always shown
-directly below its title, before the persistent three-button segmented group offering
+One dialog remains mounted throughout acquisition and review. Its editable Name input
+replaces the visible title and separate Name row, before the persistent segmented group offering
 Image or file, Paste colors and Add colors. Name and the group stay outside the scrolling
 body, with complete wrapping labels
-and targets at least 44px high. Short landscape uses the same Name input with its label
-alongside it, smaller vertical section gaps and body/header padding so a full touch
-control remains reachable in the scrolling area. Portrait retains the stacked label.
+and targets at least 44px high. The header input retains the app's visible glass field
+styling, with a 20px semibold name and a nonshrinking Close button. The field and Close
+button are both 44px high, with enough inner padding for the text. It has an accessible
+Name label and Palette name placeholder when empty. The dialog itself retains its
+Import/Edit/Make a palette copy accessible action label. Native autofocus on Close
+preserves the prior initial focus and keeps it off the text input.
+Short landscape uses smaller vertical section gaps and header padding.
 Vertical sections use one 12px gap, reduced to 6px in short landscape. Input panels,
 notices and the shared review do not add overlapping margins; tool rows and swatches
 retain their 8px spacing within a group.
@@ -1899,11 +1903,18 @@ do not apply partial ARIA tab roles. New imports start with Image or file; editi
 copying existing colors starts with Add colors. Only the active method's controls show.
 Switching methods preserves the draft, name, pasted text, new-color picker and recovery
 state. It neither imports data nor opens/closes another dialog.
+Successful conflict Reload replaces the source as well as the colors/name/revision,
+clearing first-frame/partial-alpha notices and image extraction options from the
+abandoned import. Failed Reload preserves the existing draft and notices.
 
 Color review has one shared position below the active controls. It appears after the
 first successful nonempty import/add, or immediately for existing palettes, and remains
 mounted after Undo or removal leaves zero colors. Name remains mounted from initial
-opening through every method and acquisition. New drafts default to Custom palette.
+opening through every method and acquisition. New drafts suggest Custom palette,
+then the first available Custom palette 2, 3, etc. if that name is already occupied by
+saved or session palettes, comparing trimmed names without case. This is a suggestion
+at new-draft opening, not uniqueness enforcement or a reservation across tabs.
+Existing edit/copy names and entered names are never automatically numbered.
 An untouched file import can suggest its filename. File/text actions explicitly say Replace when colors
 exist and replace rather than merge; Add appends a unique color. Entered names survive
 source replacement. An all-transparent image reports no visible colors and preserves the
@@ -2061,7 +2072,7 @@ checks confirm the existing tooltip-first Escape rule. Conversion code is unchan
 the earlier conversion matrices remain historical coverage. Physical-device/Safari
 limitations above still apply.
 
-### One-modal palette editor verification (2026-10-11)
+### One-modal palette editor verification — before editable header (2026-10-11)
 
 The editor keeps one mounted dialog, Name field and shared color review. Name is always
 above the three input methods and initially says Custom palette. Section gaps are 12px,
@@ -2082,3 +2093,36 @@ image, persistent controls during long review, Undo to zero and short landscape.
 The earlier Help and conversion gates above remain historical coverage; their source is
 unchanged in this editor change. Browser emulation does not replace physical-device or
 Safari testing.
+
+### Editable-name header and mixed input verification (2026-10-11)
+
+The editable name now replaces the title and separate Name row. Both it and Close are
+exactly 44px high; the name retains a 20px semibold font, a 24px line and 8px vertical
+padding. New drafts receive the first free Custom palette suggestion; provided and
+entered names retain their existing protection. All 362 unit tests, compilation and
+the production build pass. Final assets index-CvmDOgec.js / index-C2nDswBh.css pass:
+
+- All 27 three-step File/Paste/Add sequences across four origins (new, saved edit,
+  preset copy, GIF compatibility copy) and two pointer modes: 216 cases, 4573 assertions.
+  Each occurrence uses different inputs; checks include exact replacement/append order,
+  duplicate rejection, retained inputs/name/identity, eight representative saved drafts
+  and four-step return cycles.
+- The adapted editor baseline: 1703 assertions; 60 responsive cases: 781 assertions;
+  naming/keyboard/session checks: 137 assertions; GIF-copy/recovery: 23 assertions.
+- Codecs and remaining editor controls: 99 assertions, including independent PNG,
+  JPEG, WebP, BMP and GIF decoding, chooser activation, swatch editing/selection,
+  paging, HEX backup, dismissal and deletion.
+- Failed conflict Reload preserves source warnings/draft in eight cases (49 assertions);
+  delete-conflict Reload/Save copy recovers in four cases (21 assertions).
+
+All final browser reports have no JavaScript exceptions. Independent review passes ten
+production header geometry cases and both actual PNG/GIF conflict-reload paths. The
+review discovered that successful Reload kept stale first-frame/partial-alpha guidance;
+the narrow fix clears source-specific notices/options on success, with failure retention
+retested. Source checks also pass 36 layout/focus cases and four naming flows. Native
+Codex browser checks confirm the supplied image→pasted replacement→manual addition,
+duplicate/valid swatch editing, clear selection, exact HEX backup, empty-name validation,
+and equal 44px controls in narrow portrait and short landscape.
+Assertion counts include repeated guards. The matrix exhausts its finite sequences,
+not arbitrary-length interactions or every possible input/browser. Physical phones and
+Safari remain unverified; unchanged Help/conversion coverage above remains historical.

@@ -9,7 +9,7 @@
   let { request = {}, onsave, ondelete, onreload, onuse, onclose } = $props();
   const initial = untrack(() => request);
   let dialog, fileInput;
-  let name = $state(initial.name || 'Custom palette');
+  let name = $state(initial.name || initial.defaultName || 'Custom palette');
   let nameEdited = $state(!!initial.name);
   let colors = $state([...(initial.colors || [])]);
   let baseline = $state([...(initial.colors || [])]);
@@ -59,7 +59,7 @@
       }
       applyImport(result); image = result.image; source = result.source; firstFrame = result.firstFrame; solid = false;
       imageOptionsOpen = result.total > maxColors;
-      if (!nameEdited) name = [...(file.name || '').replace(/\.[^.]+$/, '').trim()].slice(0, 64).join('') || 'Custom palette';
+      if (!nameEdited) name = [...(file.name || '').replace(/\.[^.]+$/, '').trim()].slice(0, 64).join('') || initial.defaultName || 'Custom palette';
     } catch (problem) { if (problem.name !== 'AbortError') error = problem.message || 'This palette could not be read.'; }
     finally { busy = ''; }
   }
@@ -119,7 +119,8 @@
       if (!latest) throw new Error('This palette was deleted. Save your draft as a copy.');
       name = latest.name; nameEdited = true; colors = [...latest.colors]; baseline = [...latest.colors]; revision = latest.revision;
       reviewing = true;
-      source = latest.source; image = null; total = colors.length; truncated = false; page = 0; selected = []; resetFailure();
+      source = latest.source; image = null; firstFrame = false; partialAlpha = false; solid = false; imageOptionsOpen = false;
+      total = colors.length; truncated = false; page = 0; selected = []; resetFailure();
     } catch (problem) { error = problem.message; }
   }
   async function useSession() {
@@ -175,18 +176,15 @@
 {/snippet}
 
 <dialog class="glass-modal-overlay is-active palette-import-modal" bind:this={dialog}
-  aria-labelledby="palette-import-title" onclose={() => { controller?.abort(); onclose(); }}
+  aria-label={editingId ? 'Edit palette' : initial.forceCopy ? 'Make a palette copy' : 'Import palette'} onclose={() => { controller?.abort(); onclose(); }}
   oncancel={event => { if (busy === 'Saving' || busy === 'Deleting') event.preventDefault(); else controller?.abort(); }}
   ondragover={event => { event.preventDefault(); event.stopPropagation(); }} ondrop={drop} onpaste={paste}
   onclick={event => { if (event.target === dialog) close(); }}>
   <div class="glass-modal palette-editor">
     <div class="glass-modal__header palette-editor-header">
-      <h2 class="glass-modal__title" id="palette-import-title">{editingId ? 'Edit palette' : initial.forceCopy ? 'Make a palette copy' : 'Import palette'}</h2>
-      <button class="ib glass-btn" aria-label="Close palette editor" disabled={busy === 'Saving' || busy === 'Deleting'} onclick={close} use:tooltip={'Close without saving this draft.'}><PixelIcon name="x" /></button>
-    </div>
-    <div class="palette-editor-name">
-      <label class="palette-name-label" for="palette-name">Name</label>
-      <input id="palette-name" class="glass-input" bind:value={name} oninput={() => nameEdited = true} maxlength="128" disabled={!!busy} autocomplete="off" />
+      <input id="palette-name" class="glass-input palette-editor-title-input" aria-label="Name" placeholder="Palette name" bind:value={name} oninput={() => nameEdited = true} maxlength="128" disabled={!!busy} autocomplete="off" />
+      <!-- svelte-ignore a11y_autofocus: Preserve initial Close focus without opening a mobile keyboard. -->
+      <button class="ib glass-btn" aria-label="Close palette editor" autofocus disabled={busy === 'Saving' || busy === 'Deleting'} onclick={close} use:tooltip={'Close without saving this draft.'}><PixelIcon name="x" /></button>
     </div>
     <div class="palette-input-method seg glass-segmented" role="group" aria-label="Import method">
       <button class="glass-segmented__item" class:is-active={inputKind === 'file'} aria-pressed={inputKind === 'file'} aria-controls="palette-method-file" disabled={!!busy} onclick={() => inputKind = 'file'}>Image or file</button>
