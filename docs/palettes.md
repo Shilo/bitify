@@ -276,6 +276,8 @@ capacity limit can be reached before 100 large palettes. Source images and draft
 saved. Record validation restores valid palettes independently of damaged records.
 The latest library is read before writing; changed/deleted revisions offer Save copy or
 Reload. Web Storage provides no transaction across simultaneous tab writes.
+Changes or clearing local storage in another tab refresh the saved choices. Session
+palettes and an open editor draft remain available; saving a removed record offers recovery.
 
 Storage failure keeps the draft visible, offers Use for this session, and permits a HEX
 backup. Successful Save selects the palette; it is not labeled saved before persistence
@@ -297,8 +299,9 @@ entry when needed. It permits 256 opaque used colors, or 255 opaque colors plus 
 If all 256 colors and transparency are used, Save opens a named copy constrained to 255
 colors. Remove colors explicitly, save the copy, then request a new download. Cancel
 preserves the original selection. Save all downloads no ZIP until all files succeed.
-Local GIF tables and automatic reduction are not implemented. Preview playback waits for
-converted frames and may slow down on expensive images; exports retain source frame delays.
+Local GIF tables and automatic reduction are not implemented. Converted preview playback
+waits for each frame and may slow down on expensive images. Original comparison follows
+the source frame timers independently of conversion; exports retain source frame delays.
 
 ## Adding or changing one
 

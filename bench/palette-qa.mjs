@@ -144,6 +144,7 @@ const results = { legacy: [], full: [], extra: [], consoleErrors: [], baseline: 
 const TYPES = { '.html':'text/html', '.js':'text/javascript', '.css':'text/css', '.png':'image/png', '.gif':'image/gif', '.svg':'image/svg+xml' };
 const server = createServer((request, response) => {
   const route = new URL(request.url, 'http://localhost').pathname.replace(/^\/bitify\//, '/');
+  if(route === '/storage-driver.html') { response.setHeader('Content-Type','text/html'); response.end('<!doctype html><title>Storage event driver</title>'); return; }
   const file = resolve(dist, '.' + (route === '/' ? '/index.html' : decodeURIComponent(route)));
   if (!file.startsWith(dist + sep)) { response.writeHead(403).end(); return; }
   try { response.setHeader('Content-Type', TYPES[extname(file)] ?? 'application/octet-stream'); response.end(readFileSync(file)); }
@@ -376,7 +377,7 @@ try {
   await raceEditor.getByRole('button',{name:'Review colors',exact:true}).click();
   await raceEditor.getByLabel('Name',{exact:true}).fill('Draft while exporting');
   await raceEditor.getByRole('alert').waitFor({timeout:30000});
-  assert.equal(await raceEditor.locator('h2').textContent(),'Import palette','Late failure replaced import editor');
+  assert.equal(await raceEditor.getAttribute('aria-label'),'Import palette','Late failure replaced import editor');
   assert.equal(await raceEditor.getByLabel('Name',{exact:true}).inputValue(),'Draft while exporting');
   assert.deepEqual(await raceEditor.locator('.palette-review-swatch').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('aria-label'))),['Select color 1 #000000','Select color 2 #ffffff']);
   assert.equal(await raceEditor.getByRole('button',{name:'Save palette',exact:true}).isEnabled(),true);
@@ -408,7 +409,7 @@ try {
   });
   await raceEditor.getByLabel('Name',{exact:true}).fill('Existing256 draft');
   await raceEditor.getByRole('alert').waitFor({timeout:30000});
-  assert.equal(await raceEditor.locator('h2').textContent(),'Edit palette');
+  assert.equal(await raceEditor.getAttribute('aria-label'),'Edit palette');
   assert.equal(await raceEditor.getByLabel('Name',{exact:true}).inputValue(),'Existing256 draft');
   assert.match(await raceEditor.getByRole('alert').textContent(),/GIF export using Exact256 /);
   assert.equal(await raceEditor.getByText('256 colors',{exact:true}).count(),1);
@@ -432,6 +433,151 @@ try {
   await page.waitForTimeout(150); assert.equal(await page.locator('dialog[open]').count(),0);
   page.off('download',counted);
   results.extra.push('6MP async GIF failure preserves named import and 256-color saved drafts/notice/focus/source/revision; retry uses current palette and 255-color copy limit');
+
+  // Real storage events come from a second document, rather than dispatching a
+  // fabricated event or reloading away the in-memory session being checked.
+  const storageContext = await browser.newContext({ viewport: { width:1280,height:900 } });
+  const storagePage = await storageContext.newPage(), storageDriver = await storageContext.newPage();
+  storagePage.on('pageerror', error => results.consoleErrors.push(error.message));
+  const storageRecord = { id:'user-storage-witness',name:'Storage witness',revision:1,source:{kind:'custom'},colors:['#123456','#abcdef'] };
+  await storagePage.addInitScript(record => {
+    if(window!==window.top) return;
+    localStorage.setItem('bitify-palettes-v1',JSON.stringify({version:1,palettes:[record]}));
+    localStorage.setItem('bitify',JSON.stringify({family:'full-palette',paletteId:record.id,metric:'rgb',alphaCut:200,first:'#123456',second:'#abcdef',none:1,style:'bayer',settings:{bayer:{threshold:77,matrix:8}}}));
+  },storageRecord);
+  await storagePage.goto(page.url());
+  // An inert same-origin document has storage access without a second App.
+  await storageDriver.goto(new URL('storage-driver.html',page.url()).href);
+  await storagePage.locator('.dock button[aria-label="Palette"]').click();
+  await storagePage.getByRole('button',{name:'Import palette',exact:true}).click();
+  const storageEditor = storagePage.getByRole('dialog',{name:'Import palette',exact:true});
+  await storageEditor.getByRole('button',{name:'Add colors',exact:true}).click();
+  await storageEditor.getByLabel('New color',{exact:true}).fill('#654321');
+  await storageEditor.getByRole('button',{name:'Add color',exact:true}).click();
+  await storageEditor.getByLabel('Name',{exact:true}).fill('Session witness');
+  await storagePage.evaluate(() => {
+    window.__originalStorageWrite = Storage.prototype.setItem;
+    Storage.prototype.setItem = function(key,value) { if(key==='bitify-palettes-v1') throw new DOMException('QA quota','QuotaExceededError'); return window.__originalStorageWrite.call(this,key,value); };
+  });
+  await storageEditor.getByRole('button',{name:'Save palette',exact:true}).click();
+  await storageEditor.getByRole('button',{name:'Use for this session',exact:true}).click();
+  await storageEditor.waitFor({state:'detached'});
+  await storagePage.evaluate(() => { Storage.prototype.setItem=window.__originalStorageWrite; delete window.__originalStorageWrite; window.__storageEvents=[]; addEventListener('storage',event=>window.__storageEvents.push({key:event.key,local:event.storageArea===localStorage})); });
+  const storagePicker = storagePage.locator('.dock button[aria-label="Palette"]');
+  const openStoragePicker = async () => { if(await storagePicker.getAttribute('aria-expanded')!=='true') await storagePicker.click(); };
+  await openStoragePicker();
+  await storagePage.getByRole('group',{name:'Full palettes',exact:true}).getByRole('button',{name:storageRecord.name,exact:true}).click();
+  const settingsBeforeClear = await storagePage.evaluate(()=>JSON.parse(localStorage.getItem('bitify')));
+  await storageDriver.evaluate(()=>localStorage.clear());
+  await storagePage.waitForFunction(()=>window.__storageEvents.some(event=>event.key===null&&event.local));
+  await storagePage.getByRole('button',{name:storageRecord.name,exact:true}).waitFor({state:'detached'});
+  assert.match(await storagePage.locator('.full-active-palette').getAttribute('aria-label'),/Selected palette: PICO-8,/,'Clear left the removed palette selected');
+  assert.equal(await storagePage.getByRole('button',{name:'Session witness',exact:true}).count(),1,'Clear discarded the in-memory session');
+  // Change family to make the app persist its current in-memory settings. The
+  // external clear itself must not reset either matching or legacy controls.
+  await storagePage.getByRole('group',{name:'Color system',exact:true}).getByRole('button',{name:'1-bit',exact:true}).click();
+  const settingsAfterClear = await storagePage.evaluate(()=>JSON.parse(localStorage.getItem('bitify')));
+  for(const key of ['metric','alphaCut','first','second','none','style','settings']) assert.deepEqual(settingsAfterClear[key],settingsBeforeClear[key],`Clear reset ${key}`);
+  await storagePage.getByRole('group',{name:'Color system',exact:true}).getByRole('button',{name:'Palette',exact:true}).click();
+  await storagePage.getByRole('button',{name:'Session witness',exact:true}).click();
+  const sessionId = await storagePage.evaluate(()=>JSON.parse(localStorage.getItem('bitify')).paletteId);
+  await storagePage.getByRole('button',{name:'Edit palette',exact:true}).click();
+  const sessionDraft=storagePage.getByRole('dialog',{name:'Make a palette copy',exact:true});
+  await sessionDraft.getByLabel('Name',{exact:true}).fill('Uncommitted session draft');
+  await sessionDraft.getByRole('button',{name:'Paste colors',exact:true}).click();
+  await sessionDraft.getByLabel('Hex colors',{exact:true}).fill('#112233 #445566');
+  await sessionDraft.evaluate(dialog=>window.__draftBeforeClear=dialog);
+  await storageDriver.evaluate(()=>localStorage.clear());
+  await storagePage.waitForFunction(()=>window.__storageEvents.filter(event=>event.key===null&&event.local).length===2);
+  assert.match(await storagePage.locator('.full-active-palette').getAttribute('aria-label'),/Selected palette: Session witness,/,'Clear changed an active session palette');
+  assert.equal(await sessionDraft.evaluate(dialog=>dialog===window.__draftBeforeClear&&dialog.open),true,'Clear replaced or closed an open draft');
+  assert.equal(await sessionDraft.getByLabel('Name',{exact:true}).inputValue(),'Uncommitted session draft');
+  assert.equal(await sessionDraft.getByRole('button',{name:'Paste colors',exact:true}).getAttribute('aria-pressed'),'true');
+  assert.equal(await sessionDraft.getByLabel('Hex colors',{exact:true}).inputValue(),'#112233 #445566');
+  assert.deepEqual(await sessionDraft.locator('.palette-review-swatch').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('aria-label'))),['Select color 1 #654321']);
+  await sessionDraft.getByRole('button',{name:'Cancel',exact:true}).click(); await sessionDraft.waitFor({state:'detached'});
+  await openStoragePicker();
+  await storageDriver.evaluate(record=>localStorage.setItem('bitify-palettes-v1',JSON.stringify({version:1,palettes:[record]})),storageRecord);
+  await storagePage.getByRole('button',{name:storageRecord.name,exact:true}).waitFor();
+  const updatedRecord = {...storageRecord,name:'Storage updated',revision:2,colors:['#112233','#445566']};
+  await storageDriver.evaluate(record=>localStorage.setItem('bitify-palettes-v1',JSON.stringify({version:1,palettes:[record]})),updatedRecord);
+  await storagePage.getByRole('button',{name:updatedRecord.name,exact:true}).waitFor();
+  assert.equal(await storagePage.getByRole('button',{name:storageRecord.name,exact:true}).count(),0,'Key update retained stale palette');
+  await storagePage.evaluate(() => { const frame=document.createElement('iframe'); frame.id='storage-area-witness'; document.body.append(frame); frame.contentWindow.sessionStorage.setItem('bitify-palettes-v1',JSON.stringify({version:1,palettes:[{id:'user-session-area-impostor',name:'Session area impostor',revision:1,source:{kind:'custom'},colors:['#ffffff']}]})); });
+  await storagePage.waitForFunction(()=>window.__storageEvents.some(event=>event.key==='bitify-palettes-v1'&&!event.local));
+  assert.equal(await storagePage.getByRole('button',{name:updatedRecord.name,exact:true}).count(),1,'Session storage library-key update replaced persistent palettes');
+  assert.equal(await storagePage.getByRole('button',{name:'Session area impostor',exact:true}).count(),0,'Session storage library-key update entered saved rail');
+  await storagePage.evaluate(()=>document.querySelector('#storage-area-witness').contentWindow.sessionStorage.setItem('bitify-palettes-v1',JSON.stringify({version:1,palettes:[]})));
+  await storagePage.waitForFunction(()=>window.__storageEvents.filter(event=>event.key==='bitify-palettes-v1'&&!event.local).length===2);
+  assert.equal(await storagePage.getByRole('button',{name:updatedRecord.name,exact:true}).count(),1,'Session storage second library-key update replaced persistent palettes');
+  await storagePage.evaluate(()=>document.querySelector('#storage-area-witness').contentWindow.sessionStorage.removeItem('bitify-palettes-v1'));
+  await storagePage.waitForFunction(()=>window.__storageEvents.filter(event=>event.key==='bitify-palettes-v1'&&!event.local).length===3);
+  assert.equal(await storagePage.getByRole('button',{name:updatedRecord.name,exact:true}).count(),1,'Session storage library-key removal deleted persistent palettes');
+  await storagePage.evaluate(() => { sessionStorage.setItem('qa-session','present'); document.querySelector('#storage-area-witness').contentWindow.sessionStorage.clear(); });
+  await storagePage.waitForFunction(()=>window.__storageEvents.some(event=>event.key===null&&!event.local));
+  assert.equal(await storagePage.getByRole('button',{name:updatedRecord.name,exact:true}).count(),1,'Session storage clear removed persistent palettes');
+  assert.match(await storagePage.locator('.full-active-palette').getAttribute('aria-label'),/Selected palette: Session witness,/);
+  await storageDriver.evaluate(()=>localStorage.removeItem('bitify-palettes-v1'));
+  await storagePage.getByRole('button',{name:updatedRecord.name,exact:true}).waitFor({state:'detached'});
+  await storagePage.getByRole('group',{name:'Color system',exact:true}).getByRole('button',{name:'1-bit',exact:true}).click();
+  assert.equal((await storagePage.evaluate(()=>JSON.parse(localStorage.getItem('bitify')))).paletteId,sessionId,'Key remove changed active session identity');
+  results.nativeStorage={events:await storagePage.evaluate(()=>window.__storageEvents),sessionId,settingsBeforeClear,settingsAfterClear,openDraftPreserved:true};
+  await storageContext.close();
+  results.extra.push('Native two-document localStorage clear/update/remove: saved fallback, active session/open draft identity and matching/legacy settings retained; native iframe sessionStorage library-key update/remove/clear ignored');
+
+  // Force genuine asynchronous conversion to remain pending while the native
+  // GIF frame timers run. This reproduces the slow-conversion Original freeze
+  // without relying on a particular machine's CPU speed or sleeping the app.
+  const clockColors = Array.from({length:6},(_,i)=>(10+i*30)<<16|20<<8|30);
+  const clockBytes = new Uint8Array(16384), clockWriter = new omggif.GifWriter(clockBytes,128,128,{palette:[...clockColors,0,0xffffff],loop:0});
+  for(let frame=0;frame<6;frame++) clockWriter.addFrame(0,0,128,128,new Uint8Array(128*128).fill(frame),{delay:18,disposal:2});
+  const clockPath=resolve(scratch,'pending-clock.gif'); writeFileSync(clockPath,clockBytes.subarray(0,clockWriter.end()));
+  const clockContext = await browser.newContext({viewport:{width:900,height:700}});
+  await clockContext.addInitScript(colors => {
+    localStorage.setItem('bitify-palettes-v1',JSON.stringify({version:1,palettes:[{id:'user-clock',name:'Clock colors',revision:1,source:{kind:'custom'},colors}]}));
+    localStorage.setItem('bitify',JSON.stringify({family:'full-palette',paletteId:'user-clock'}));
+    let clock=0; Object.defineProperty(performance,'now',{value:()=>clock+=10});
+    const Channel=MessageChannel; window.__pendingConversion=[]; window.__holdConversion=true;
+    window.MessageChannel=class extends Channel { constructor(){super();const post=this.port2.postMessage.bind(this.port2);this.port2.postMessage=(...args)=>window.__holdConversion?window.__pendingConversion.push(()=>post(...args)):post(...args);} };
+    window.__releaseConversion=()=>{window.__holdConversion=false;window.__pendingConversion.splice(0).forEach(post=>post());};
+  },clockColors.map(color=>'#'+color.toString(16).padStart(6,'0')));
+  results.pendingAnimation=[];
+  for(const mode of ['wall','viewer']) {
+    const clockPage=await clockContext.newPage(); clockPage.on('pageerror',error=>results.consoleErrors.push(error.message));
+    await clockPage.goto(page.url());
+    await clockPage.locator('input[type=file][accept="image/*"]').setInputFiles(clockPath);
+    await clockPage.getByRole('button',{name:'Save pending-clock.gif',exact:true}).waitFor();
+    await clockPage.waitForFunction(()=>window.__pendingConversion.length>0&&!document.querySelector('.tiles canvas'));
+    await clockPage.getByRole('button',{name:'Clock colors conversion',exact:true}).click();
+    let canvas=clockPage.locator('.tiles canvas');
+    if(mode==='viewer') {
+      await clockPage.getByRole('button',{name:'Preview pending-clock.gif',exact:true}).first().click();
+      canvas=clockPage.locator('dialog.image-viewer canvas');
+    }
+    await canvas.waitFor();
+    const sample=()=>canvas.evaluate(node=>node.getContext('2d').getImageData(0,0,1,1).data[0]);
+    const reds=[await sample()];
+    for(let i=0;i<3;i++){await clockPage.waitForTimeout(205);reds.push(await sample());}
+    assert.ok(new Set(reds).size>1,`${mode}: Original GIF froze behind pending conversion`);
+    assert.ok(reds.every(red=>clockColors.some(color=>(color>>>16)===red)),`${mode}: unexpected Original frame`);
+    assert.ok(await clockPage.evaluate(()=>window.__holdConversion&&window.__pendingConversion.length>0),'Conversion was not actually held');
+    const activeRed=await canvas.evaluate((node,mode)=>{
+      const red=node.getContext('2d').getImageData(0,0,1,1).data[0];
+      document.querySelector(mode==='viewer'?'button[aria-label="Show converted image"]':'button[aria-label="Clock colors conversion"]').click();return red;
+    },mode);
+    await canvas.waitFor({state:'detached'});
+    await clockPage.waitForTimeout(205);
+    assert.equal(await canvas.count(),0,`${mode}: Converted frame appeared before readiness`);
+    await clockPage.evaluate(()=>window.__releaseConversion());
+    await canvas.waitFor(); const releasedRed=await sample();
+    assert.equal(releasedRed,activeRed,`${mode}: stale conversion replaced the current frame`);
+    await clockPage.waitForTimeout(205); const nextRed=await sample();
+    assert.notEqual(nextRed,releasedRed,`${mode}: Converted animation failed to resume`);
+    results.pendingAnimation.push({mode,originalReds:reds,activeRed,releasedRed,nextRed});
+    await clockPage.close();
+  }
+  await clockContext.close();
+  results.extra.push('Built wall/viewer GIF Original advances while conversion yields are held; switching back waits and resumes the exact current frame without stale completion');
   assert.deepEqual(results.consoleErrors,[],'Browser JS exceptions');
   results.passed = true;
   writeFileSync(resolve(scratch,'results.json'),JSON.stringify(results,null,2));

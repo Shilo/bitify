@@ -70,7 +70,7 @@
     return library.find(p => p.id === id);
   }
   $effect(() => on(window, 'storage', e => {
-    if (e.key === LIBRARY_KEY) library = restoreLibrary(e.newValue);
+    if (e.storageArea === localStorage && (e.key === LIBRARY_KEY || e.key === null)) library = restoreLibrary(e.newValue);
   }));
 
   let first = $state(saved.first); // lines and dark pixels

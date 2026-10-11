@@ -2007,6 +2007,9 @@ and drafts are not persisted. Validate records independently. Each record has ID
 colors, revision and source attribution. Re-read before writing to retain unrelated tab
 changes; edited/deleted revision conflicts offer Save copy or Reload. Web Storage cannot
 make simultaneous read/modify/write operations transactional.
+Storage events refresh saved choices, including a native local-storage clear in another
+tab. Session palettes, current settings and an open draft stay in memory. Session-storage
+events, including a matching library key or clear, do not change persistent palette choices.
 
 Save closes/selects only after persistence succeeds. Failures retain the draft and offer
 session-only use and HEX backup. Saved palette deletion requires confirmation. Reset
@@ -2036,6 +2039,9 @@ failure reports an error; a missing Worker uses the same direct writer. Source R
 frames and compressed output are still retained. Exported delays/loop remain from the
 source. Full palette preview's next-frame clock starts when conversion is ready, so an
 expensive preview may run slower than the source; this does not change export delays.
+Original comparison, including held and viewer comparison, follows source-frame timers
+without waiting for conversion. While Original is shown, preview readiness does not
+restart that timer. Converted playback still waits for the current converted frame.
 
 ### Verification boundaries
 
@@ -2163,3 +2169,36 @@ access, paging, pasted replacement, manual addition, duplicate rejection, Undo a
 exact four-color HEX download. Normal, 320px portrait and 844×320 landscape checks
 confirm shared review order, header/button geometry and the single section gap.
 Physical-device and Safari limitations still apply.
+
+### Final whole-branch review against main (2026-10-11)
+
+Independent review against main `7ff57cb` confirmed two defects: Original GIF playback
+waited for palette conversion, and the saved library mishandled storage events. The
+agreed fixes share the Original visibility predicate, gate only converted playback,
+and accept library-key or clear events only from local storage. Challenging the first
+storage fix exposed actual session-storage library-key events replacing the saved rail;
+the strengthened guard rejects them as well as session-storage clears.
+
+Final production assets index-DncP2FqG.js / index-DRgAmXuj.css pass all 362 unit tests
+and the build. Actual wall and viewer regressions hold conversion yields while source
+frames keep advancing; converted playback waits, displays the current frame and resumes.
+An independent component witness also checks held comparison, stale-job cancellation
+and that preview completion does not restart the Original timer. Native two-document
+storage checks preserve session identity, matching, opacity, legacy settings and the same
+open draft, while refreshing saved choices and rejecting session-storage events.
+The complete built-app regression passes 132 legacy color/style combinations against
+the pinned main baseline, all five presets in both matching modes, and nine integration
+categories covering independent PNG/GIF/clipboard/ZIP decoding and export snapshots,
+editor recovery, native storage events and pending-conversion animation. No browser
+JavaScript exceptions were observed.
+
+Affected naming, failed Reload and delete-conflict checks pass 229 assertions; session
+copy, preset immutability, persistent reload and edit identity pass 29. The fresh mixed
+matrix passes all 216 three-step File/Paste/Add cases across new, saved edit, preset copy
+and GIF recovery copy in both pointer modes, with 4573 assertions. Synthetic storage
+fixtures now supply the actual local-storage area; their assertions remain unchanged.
+These finite sequences do not exhaust arbitrary interactions. Native Codex
+browser checks confirm new/edit/preset-copy controls, duplicate handling, color editing,
+Undo, cancellation, both families, both matching choices and the retained Style Help row.
+The earlier editor/codec/layout counts remain historical evidence. Physical-device and
+Safari limitations remain unchanged.

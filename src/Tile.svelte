@@ -15,6 +15,7 @@
   // the milliseconds this tile may take to convert its image after each move.
   let { item, first, second, style, set, family = 'two-color', palette, alphaCut = 128, metric = 'oklab', flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false } = $props();
   let held = $state(false);
+  const originalVisible = $derived(oncompare ? flipped : flipped !== held);
   let holdTimer;
   let clickReady = false;
   const gesture = imageGesture();
@@ -126,7 +127,7 @@
   const pixels = $derived.by(() => {
     if (!mw) return null;
     const frame = frames[at];
-    if (oncompare ? flipped : flipped !== held) return (originals[at] ??= mw < item.img.w ? new ImageData(shrink(frame.original, mw, mh), mw) : frame.original);
+    if (originalVisible) return (originals[at] ??= mw < item.img.w ? new ImageData(shrink(frame.original, mw, mh), mw) : frame.original);
     if (family === 'full-palette') return fullPixels;
     if (!masks[at]) {
       // Stencil's first conversion of an image walks all of it, once. That is not the pace of a conversion, so it is done before the clock starts.
@@ -142,7 +143,9 @@
   // Plays an animation: after the current frame's delay, step to the next and start again.
   $effect(() => {
     if (frames.length < 2) return;
-    if (family === 'full-palette' && !fullPixels) return;
+    // Original playback follows source delays independently of conversion. Read
+    // originalVisible first so a finished preview cannot restart that timer.
+    if (family === 'full-palette' && !originalVisible && !fullPixels) return;
     const timer = setTimeout(() => (at = (at + 1) % frames.length), frames[at].delay);
     return () => clearTimeout(timer);
   });

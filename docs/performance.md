@@ -737,7 +737,9 @@ full-palette frame outside the legacy mask cache. Changes to palette, matching, 
 alpha or animation frame cancel the previous cooperative job, so stale results cannot replace the current
 preview. Full palette playback advances only after that frame is converted and its source
 delay has elapsed; expensive previews can play slower than the original. Original view
-and exported frame delays remain independent of that preview timing policy.
+and exported frame delays remain independent of that preview timing policy. Original
+playback does not subscribe to converted-frame readiness, so a pending or completed
+conversion does not stop or restart its source-frame timer.
 
 Quantization runs adaptive batches with an 8ms clock budget and 2048-pixel sub-blocks for
 clock/cancellation checks. MessageChannel tasks yield to the event loop without the
