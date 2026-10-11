@@ -1763,12 +1763,13 @@ remain independent. The default is still Glow/Cutout in 1-bit.
   engine, preset ordering and per-style settings remain unchanged.
 - **Palette:** an allowed set of 1–256 distinct opaque sRGB8 colors, normalized to lowercase
   six-digit hex. Every visible source RGB first checks exact palette membership, then
-  chooses the nearest Oklab entry. Equal distances retain the earliest entry. Every
+  chooses the nearest entry in Oklab (default) or encoded RGB, as selected in Matching.
+  Equal distances retain the earliest entry. Every
   opaque output belongs to the selected set; every selected color need not appear.
 
 The selected full palette is shared across all images; no image generates its own palette.
-Identical visible source RGBs map identically at the same alpha cut. Nearest minimizes
-individual pixel Oklab distance, rather than local averaged shading error. PNG exports
+Identical visible source RGBs map identically at the same alpha cut and matching choice.
+Nearest minimizes individual pixel distance under that rule, rather than local averaged shading error. PNG exports
 may compact different used subsets into different physical color tables; membership in
 the common selected RGB set is the shared-palette guarantee, not identical table bytes.
 
@@ -1776,8 +1777,15 @@ Full palette conversion uses original source RGB, independently of legacy bright
 threshold and structural settings. It has no None or Swap role and no separate style or
 single-option method chooser. Source alpha below the family-specific Opacity cut becomes
 empty; default 128, adjustable 1–255. Alpha zero always stays empty, and all other output
-alpha is binary. The settings icon/panel appears for partial source alpha or when this cut
-has changed, and contains the cut and Reset. Switching families retains the other family's
+alpha is binary. The settings icon/panel is always available: one compact Matching row
+offers Oklab / RGB, followed by Opacity cut only for partial source alpha or a nondefault cut.
+Oklab compares squared Euclidean perceived-color coordinates; RGB compares squared
+unweighted encoded sRGB8 channel differences. There is no brightness/contrast adjustment.
+The panel is at most 360px wide and capped to viewport width minus 24px and safe areas;
+rows stack vertically. Touch matching buttons are at least 44px high. Reset restores
+Oklab and cut 128, retaining the palette; keyboard Reset moves focus to enabled Oklab.
+HSL/HSV, CMYK, additional perceptual metrics and dithering are excluded pending demonstrated
+benefit; see docs/research/2026-10-11-palette-matching.md. Switching families retains the other family's
 state. Selecting/altering colors or conversion settings reveals converted output.
 
 The existing single conversion toggle keeps its style name in 1-bit and shows the
@@ -1867,8 +1875,7 @@ Style says “Tune 1-bit effects and settings.” No extra explanatory
 section or palette count is added.
 
 The table shows Next style only in 1-bit. Its settings row follows the dock: Style
-settings in 1-bit; Palette settings for partial source alpha or a nondefault palette cut;
-otherwise no settings row. Palette navigation, image actions and device-specific shortcut
+settings in 1-bit; Palette settings in Palette. Palette navigation, image actions and device-specific shortcut
 wording remain. Native dismissal, first-visit welcome and background gesture guards remain.
 Initial focus goes to the top Close button, revealing the introduction instead of scrolling
 to Got it on narrow or short screens. Its accessible Close label is sufficient; it has no
@@ -1880,7 +1887,10 @@ including after the first-visit welcome, rather than the Help row in its closed 
 
 ### Persistence and reset
 
-Family, palette ID and alpha cut are additive preferences. Missing selection falls back
+Family, palette ID, alpha cut and global matching `metric` are additive preferences.
+Missing or invalid metric restores Oklab; only `oklab` and `rgb` persist. Palette records
+do not own matching, so imports, edits and selections retain the global choice. Reset
+settings restores Oklab and cut 128. Missing selection falls back
 to PICO-8 while old preferences retain the default 1-bit family. Explicit named Save uses
 `bitify-palettes-v1`: version 1, at most 100 records and 256 KiB serialized UTF-8. Images
 and drafts are not persisted. Validate records independently. Each record has ID, name,
@@ -1896,7 +1906,7 @@ settings/library intact and reports the failure. No `localStorage.clear()` is us
 
 ### Original-resolution exports and playback
 
-Snapshot selected colors/alpha/family at the Save or Copy gesture; asynchronous completion
+Snapshot selected colors/matching/alpha/family at the Save or Copy gesture; asynchronous completion
 cannot adopt later edits. Full palette exports use `-palette` filenames, with existing
 collision handling. Legacy `-1bit` names and bytes remain compatible. Copy exports PNG of
 the first animation frame. Save all downloads no file/ZIP until every encoding succeeds.

@@ -31,6 +31,7 @@
     soft, // whether an image on the wall has a partly see-through pixel
     family = $bindable('two-color'),
     alphaCut = $bindable(128),
+    metric = $bindable('oklab'),
     fullPalette, fullPresets = [], savedPalettes = [], onpalette, onimportpalette, oneditpalette,
   } = $props();
 
@@ -191,6 +192,10 @@
     settings[style] = defaults(style);
     if (!e.detail) (dock.querySelector('.extra') ?? dock.querySelector('.chip[aria-pressed="true"]'))?.focus();
   }
+  function resetPaletteSettings(e) {
+    metric = 'oklab'; alphaCut = 128;
+    if (!e.detail) dock.querySelector('[aria-label="Oklab matching"]')?.focus();
+  }
 
   // A number box is empty while its setting is on Auto or off, and then shows this instead: what
   // Auto picked (a range when images differ), or the word for off.
@@ -342,10 +347,21 @@
     </div>
   {:else if panel === 'style' && family === 'full-palette'}
     <div class="panel palette-settings-panel glass-card" bind:offsetHeight={panelHeight}>
-      <label class="key" for="full-alpha-cut">Opacity cut</label>
-      <input id="full-alpha-cut" class="glass-range" type="range" min="1" max="255" bind:value={alphaCut} aria-label="Palette opacity cut"/>
-      <output for="full-alpha-cut">{alphaCut}</output>
-      <button class="btn glass-btn icon-only" disabled={alphaCut === 128} aria-label="Reset palette opacity cut" use:tooltip={'Restore the default opacity cut.'} onclick={() => alphaCut = 128}><PixelIcon name="reset"/></button>
+      <div class="palette-setting-row">
+        <span class="key" id="palette-matching-label">Matching</span>
+        <div class="seg glass-segmented" role="group" aria-labelledby="palette-matching-label">
+          <button class="glass-segmented__item" aria-label="Oklab matching" aria-pressed={metric === 'oklab'} use:tooltip={'Compare perceived color differences. Default.'} onclick={() => metric = 'oklab'}>Oklab</button>
+          <button class="glass-segmented__item" aria-label="RGB matching" aria-pressed={metric === 'rgb'} use:tooltip={'Compare RGB channel differences.'} onclick={() => metric = 'rgb'}>RGB</button>
+        </div>
+        <button class="btn glass-btn icon-only" disabled={metric === 'oklab' && alphaCut === 128} aria-label="Reset palette settings" use:tooltip={'Restore Oklab matching and the default opacity cut.'} onclick={resetPaletteSettings}><PixelIcon name="reset"/></button>
+      </div>
+      {#if soft || alphaCut !== 128}
+        <div class="palette-setting-row">
+          <label class="key" for="full-alpha-cut">Opacity cut</label>
+          <input id="full-alpha-cut" class="glass-range" type="range" min="1" max="255" bind:value={alphaCut} aria-label="Palette opacity cut"/>
+          <output for="full-alpha-cut">{alphaCut}</output>
+        </div>
+      {/if}
     </div>
   {:else if panel === 'style'}
     <div class="panel style-panel glass-card" class:compact={chips} class:bare={!keys.length} bind:offsetHeight={panelHeight}>
@@ -427,7 +443,7 @@
     </button>
   {/snippet}
   {#snippet styleButton()}
-    <button class="btn glass-btn icon-only" aria-expanded={panel === 'style'} aria-label={family === 'full-palette' ? 'Palette settings' : 'Style'} use:tooltip={family === 'full-palette' ? 'Adjust the palette opacity cut.' : 'Adjust the conversion style and its settings.'} onclick={() => toggle('style')}>
+    <button class="btn glass-btn icon-only" aria-expanded={panel === 'style'} aria-label={family === 'full-palette' ? 'Palette settings' : 'Style'} use:tooltip={family === 'full-palette' ? 'Adjust color matching and transparency.' : 'Adjust the conversion style and its settings.'} onclick={() => toggle('style')}>
       <PixelIcon name="sliders" />
     </button>
   {/snippet}
@@ -445,7 +461,7 @@
       onclick={() => (showOriginal = !showOriginal)}>
       <span class="view-state" aria-hidden="true"></span><span class="view-name" aria-hidden="true">{family === 'full-palette' ? compactPaletteName(styleName, 16) : styleName}</span>
     </button>
-    {#if family === 'two-color' || soft || alphaCut !== 128}{@render styleButton()}{/if}
+    {@render styleButton()}
     <span id="view-status" class="view-status">{effectiveOriginal ? 'Showing original images.' : `Showing images converted with ${styleName}.`}</span>
   </div>
 </div>

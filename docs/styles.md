@@ -6,20 +6,22 @@ tests beside it pin every rule described here. The settings are listed in
 [src/lib/settings.js](../src/lib/settings.js).
 
 The **Palette** family is separate from these structural and dithering styles. It matches
-each visible source RGB to the nearest selected color in Oklab, after preserving exact
+each visible source RGB to the nearest selected color using Oklab (default) or RGB, after preserving exact
 palette RGB matches. It accepts 1–256 unique opaque colors; using a palette does not
 guarantee every color appears in an image. Output alpha stays binary, with a separate
-Opacity cut of 1–255 (128 by default). Its settings control appears for partially
-transparent sources or a changed cut. There is no threshold, Swap, None or style chooser
+Opacity cut of 1–255 (128 by default). Its settings control always offers **Matching:
+Oklab / RGB**; Opacity cut appears for partially transparent sources or a changed cut.
+Oklab approximates perceived differences; RGB compares encoded sRGB channel values.
+Reset restores Oklab and cut 128. There is no threshold, Swap, None or style chooser
 in this family. Switching back to 1-bit restores the retained colors, style and settings.
 See [palettes.md](palettes.md) for import and palette library behavior.
 
 Choose **1-bit** in the Palette panel to use these styles. Help shows style stepping and
-Style settings only in this mode. In Palette, it shows Palette settings when the opacity
-control is available, and omits style stepping.
+Style settings only in this mode. In Palette, it always shows Palette settings and omits
+style stepping. Matching changes the nearest-color rule, without introducing a new effect.
 
 Palette-specific ordered and error-diffusion dithering remain research only. Tests with
-one shared 255-color palette and six buildings found better averaged hues at the cost of
+one shared 255-color palette and six buildings found lower locally averaged color error at the cost of
 texture and greater individual-pixel color error. Nearest retains clean flat fills and
 consistent source-color mapping. See the [shared-palette research](research/2026-10-11-shared-palette.md)
 for the comparison and animation limitations. Existing two-ink structural styles cannot

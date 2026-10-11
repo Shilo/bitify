@@ -13,7 +13,7 @@
   // Without `onremove` the tile is a preview only and has no buttons.
   // `set` is the style's settings. `budget` is set while one of their sliders is being dragged:
   // the milliseconds this tile may take to convert its image after each move.
-  let { item, first, second, style, set, family = 'two-color', palette, alphaCut = 128, flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false } = $props();
+  let { item, first, second, style, set, family = 'two-color', palette, alphaCut = 128, metric = 'oklab', flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false } = $props();
   let held = $state(false);
   let holdTimer;
   let clickReady = false;
@@ -111,14 +111,14 @@
     return frames.map(() => null);
   });
   // One current frame lives outside the legacy mask cache. Cancelling a job prevents
-  // a previous palette, size or animation frame from replacing the current preview.
+  // a previous palette, matching rule, opacity, size or frame from replacing the current preview.
   let fullPixels = $state.raw(null);
   $effect(() => {
-    const source = frames[at].original, colors = palette, width = mw, height = mh, cut = alphaCut;
+    const source = frames[at].original, colors = palette, width = mw, height = mh, cut = alphaCut, matching = metric;
     fullPixels = null;
     if (family !== 'full-palette' || !width || !colors) return;
     const controller = new AbortController();
-    quantizeAsync(source, colors, cut, width, height, { signal: controller.signal }).then(result => {
+    quantizeAsync(source, colors, cut, width, height, { signal: controller.signal, metric: matching }).then(result => {
       if (!controller.signal.aborted) fullPixels = new ImageData(palettePixels(result, colors).data, width, height);
     }).catch(error => { if (error.name !== 'AbortError') console.error('Palette preview failed', error); });
     return () => controller.abort();

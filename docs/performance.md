@@ -715,8 +715,9 @@ remain intact; production code is unchanged.
 ## Full palette conversion (October 11, 2026)
 
 The 1-bit loops in `bitify.js`, preset stepping and legacy setting restoration remain
-unchanged. Full palettes use `quantize.js`: prepared scalar Oklab arrays and a 256-entry
-sRGB linearization table, an exact RGB lookup first, then exact nearest search. Each
+unchanged. Full palettes use `quantize.js`: prepared scalar Oklab and RGB arrays and a
+256-entry sRGB linearization table, an exact RGB lookup first, then exhaustive nearest
+search under the selected Oklab (default) or encoded RGB rule. Each
 opaque output index belongs to the selected palette. Strictly smaller distance replaces
 the current nearest result, preserving earliest-entry ties. No approximate color LUT or
 per-pixel array/object allocation is used. RGB memoization is bounded to 4096 entries and
@@ -725,8 +726,8 @@ bypassed for high-entropy sources, avoiding an unconditional source-color Map.
 The wall uses the existing center-spread sampling coordinates and display-sized picture
 dimensions. Pointwise nearest matching agrees with full conversion at those coordinates.
 Sprites fitting the display remain full resolution. `Tile.svelte` retains one current
-full-palette frame outside the legacy mask cache. Palette, size, alpha or animation-frame
-changes cancel the previous cooperative job, so stale results cannot replace the current
+full-palette frame outside the legacy mask cache. Changes to palette, matching, size,
+alpha or animation frame cancel the previous cooperative job, so stale results cannot replace the current
 preview. Full palette playback advances only after that frame is converted and its source
 delay has elapsed; expensive previews can play slower than the original. Original view
 and exported frame delays remain independent of that preview timing policy.
@@ -746,7 +747,7 @@ does not remove that existing animation-memory cost. Browser image decode can al
 internally before the palette importer discovers dimensions. Import limits are 32 MiB
 per image and 16 × 1024 × 1024 decoded pixels; palette text is limited to 256 KiB.
 
-Save/Copy snapshots the family, colors and alpha cut and converts original pixels.
+Save/Copy snapshots the family, colors, matching and alpha cut and converts original pixels.
 Palette PNG output is packed directly at the smallest fitting 1/2/4/8-bit depth, with a
 direct RGBA fallback when all 256 opaque colors and empty occur. Async PNG packing and
 compression keep the costly path separate from canvas encoding. GIF makes a used-color
@@ -781,3 +782,28 @@ after committing the feature, set `BASE_REF` to the pre-feature revision. Codex 
 interaction checks supplement the harness. These checks do not prove absence of bugs.
 Physical iOS/Android, Safari, arbitrary color profiles, canvas privacy noise and sustained
 large-input memory behavior of the new family remain unverified and need device testing.
+
+### Optional matching verification
+
+Matching adds one rule selection to the existing nearest search. Prepared arrays remain
+metric-independent and private; RGB memoization remains job-local, so switching rules
+cannot reuse a stale color mapping. Exact membership and alpha take the same early paths.
+RGB computes unweighted squared encoded-channel differences without a transform; formula
+simplicity alone does not establish a browser speed advantage.
+
+Isolated Edge 155 comparisons with `626d95e` preserved every previous Oklab output index
+for 1MP exact, repeated-color and noisy inputs. Exact median times were both 10.1ms;
+repeated-color times were 33.8/34.0ms. High-entropy measurements varied widely and reversed
+their apparent ranking after warming. No reliable comparative speed or regression claim
+is supported. Asynchronous results matched synchronous output under both rules, and
+both canceled at the first progress callback. Observed maximum progress gaps were 17.2ms
+Oklab and 19.5ms RGB; the existing 8ms budget remains a target checked between 2048-pixel
+blocks, not a hard pause limit or a phone-performance guarantee.
+
+The final matching change passed 324 unit tests and a production build. Independent
+built-app checks passed 195 Oklab, 189 RGB and nine storage assertions, with intentionally
+overlapping cases across modes. All six supplied buildings and native Codex downloads
+matched their scalar references; Oklab native PNG bytes remained unchanged. A retained
+baseline run covered 132 legacy combinations; the extended harness then covered five
+Oklab and five RGB presets plus seven integration categories. Phone-size/coarse-pointer
+emulation passed, including partial alpha; physical phone and Safari checks remain open.

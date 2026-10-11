@@ -141,7 +141,7 @@ the eye.
 
 Choose **Palette** in the panel to convert source RGB directly into a selected set of
 **1–256 unique opaque sRGB colors**. Exact selected RGB values map to themselves; other
-pixels choose the nearest Oklab color, with the first palette entry winning equal-distance
+pixels choose the nearest color using Oklab (default) or RGB, with the first palette entry winning equal-distance
 ties. Selected order is preserved and duplicates are removed. A palette is an allowed set,
 not a promise that every selected color will be used.
 
@@ -177,8 +177,12 @@ Optional palette methods deserve a separate visual comparison before implementat
 
 Select or import a palette once; it applies to every image on the wall. A visible pixel
 keeps its RGB if that color is already in the selected palette. Otherwise, Bitify checks
-every palette entry and chooses the closest in Oklab, a color space that approximates
-perceived color differences. The same source RGB maps to the same palette RGB in every
+every palette entry and chooses the closest using the selected matching rule. **Oklab**
+approximates perceived color differences; **RGB** minimizes squared differences between
+encoded sRGB channel values (0–255), without channel weighting or brightness adjustment.
+Choose either in **Palette settings → Matching**; Oklab is the default. This global setting
+is remembered across visits and family switches; selecting a palette does not change it.
+The same source RGB maps to the same palette RGB at the same matching setting in every
 image. The palette is never regenerated or optimized separately for each image.
 
 Each image can use a different subset of that shared set. It does not have to use every
@@ -187,7 +191,7 @@ color tables while all visible RGBs still belong to the same shared palette. GIF
 share one used-color table per exported animation. Fully transparent pixels stay empty;
 the Opacity cut decides whether partially transparent pixels become empty or opaque.
 
-Nearest matching minimizes each individual visible pixel's Oklab distance to the allowed
+Nearest matching minimizes each individual visible pixel's distance under the selected rule to the allowed
 set. Dithering instead spreads different allowed colors over neighboring pixels to
 approximate a missing shade; it can improve averaged shading while increasing individual
 pixel error and changing crisp pixel-art textures. Palette-specific Ordered and Diffusion
@@ -195,8 +199,13 @@ remain research ideas, not available app controls.
 
 Output pixels are fully opaque or fully transparent. Opacity cut defaults to 128:
 source alpha below the cut becomes empty. The range is 1–255, so alpha zero always stays
-empty. The separate settings control appears when an image has partial alpha or the cut
-has changed. Switching families retains 1-bit colors, None, style and per-style settings.
+empty. Palette settings always offers the compact Oklab / RGB control. Opacity cut appears
+only when an image has partial alpha or the cut has changed. Reset restores Oklab and cut
+128 without changing the selected palette. Neither rule is universally visually best;
+compare with the original, especially when a palette lacks the source's hue. Other color
+spaces and palette dithering remain outside the current controls; see the
+[matching decision](research/2026-10-11-palette-matching.md).
+Switching families retains 1-bit colors, None, style and per-style settings.
 Selecting or altering a palette returns the display to converted output; hold comparison
 and the persistent-label conversion switch remain available.
 
@@ -262,7 +271,7 @@ A deletion/storage failure is reported rather than silently clearing data.
 ### Export boundaries
 
 Full palette still images save as `-palette.png`; animated images save as `-palette.gif`.
-Save and Copy use every original-resolution pixel and a snapshot of the current colors
+Save and Copy use every original-resolution pixel and a snapshot of the current matching rule, colors
 and alpha cut. PNG packs only used colors at the smallest 1/2/4/8-bit depth; all 256 used
 opaque colors plus empty use directly encoded RGBA PNG instead. No canvas encoding or
 implicit color reduction is used. Copy supplies a PNG of the first animation frame.

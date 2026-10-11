@@ -29,19 +29,25 @@ export function preparePalette(colors) {
 
 function preparedOf(palette) { return preparedData.has(palette) ? palette : preparePalette(palette); }
 
-function job(image, palette, alphaCut, mw, mh) {
+export function validateMatchingMetric(metric = 'oklab') {
+  if (metric !== 'oklab' && metric !== 'rgb') throw new Error('Matching metric must be Oklab or RGB.');
+  return metric;
+}
+
+function job(image, palette, alphaCut, mw, mh, metric) {
+  validateMatchingMetric(metric);
   const w = image.width ?? image.w, h = image.height ?? image.h;
   mw ??= w; mh ??= h;
   if (![w, h, mw, mh].every(n => Number.isSafeInteger(n) && n > 0) || mw > w || mh > h || !image.data || image.data.length !== w * h * 4) throw new Error('Invalid image dimensions or pixel data.');
   if (!Number.isInteger(alphaCut) || alphaCut < 1 || alphaCut > 255) throw new Error('Opacity cut must be between 1 and 255.');
   const prepared = preparedOf(palette);
   return { data: image.data, sourceW: w, xs: Int32Array.from({ length: mw }, (_, i) => Math.floor((i + .5) * w / mw)), ys: Int32Array.from({ length: mh }, (_, i) => Math.floor((i + .5) * h / mh)),
-    ...preparedData.get(prepared), size: prepared.size, alphaCut, scratch: new Float64Array(3), memo: new Map(), hits: 0, misses: 0,
+    ...preparedData.get(prepared), size: prepared.size, alphaCut, metric, scratch: new Float64Array(3), memo: new Map(), hits: 0, misses: 0,
     result: { indices: new Uint16Array(mw * mh), w: mw, h: mh, used: new Uint8Array(256), hasTransparency: false } };
 }
 
 function convert(state, start, end) {
-  const { data, sourceW, xs, ys, exact, labs, scratch, size, alphaCut, result } = state;
+  const { data, sourceW, xs, ys, exact, labs, rgb, metric, scratch, size, alphaCut, result } = state;
   for (let o = start; o < end; o++) {
     const p = (ys[Math.floor(o / result.w)] * sourceW + xs[o % result.w]) * 4;
     if (data[p + 3] < alphaCut) { result.indices[o] = EMPTY_INDEX; result.hasTransparency = true; continue; }
@@ -51,12 +57,22 @@ function convert(state, start, end) {
       index = state.memo?.get(key);
       if (index !== undefined) state.hits++;
       else {
-        lab(linear[data[p]], linear[data[p + 1]], linear[data[p + 2]], scratch, 0);
         let nearest = Infinity; index = 0;
-        for (let i = 0; i < size; i++) {
-          const dl = scratch[0] - labs[i * 3], da = scratch[1] - labs[i * 3 + 1], db = scratch[2] - labs[i * 3 + 2];
-          const distance = dl * dl + da * da + db * db;
-          if (distance < nearest) { nearest = distance; index = i; }
+        if (metric === 'rgb') {
+          // This deliberately compares encoded channel values, not linear light.
+          const r = data[p], g = data[p + 1], b = data[p + 2];
+          for (let i = 0; i < size; i++) {
+            const dr = r - rgb[i * 3], dg = g - rgb[i * 3 + 1], db = b - rgb[i * 3 + 2];
+            const distance = dr * dr + dg * dg + db * db;
+            if (distance < nearest) { nearest = distance; index = i; }
+          }
+        } else {
+          lab(linear[data[p]], linear[data[p + 1]], linear[data[p + 2]], scratch, 0);
+          for (let i = 0; i < size; i++) {
+            const dl = scratch[0] - labs[i * 3], da = scratch[1] - labs[i * 3 + 1], db = scratch[2] - labs[i * 3 + 2];
+            const distance = dl * dl + da * da + db * db;
+            if (distance < nearest) { nearest = distance; index = i; }
+          }
         }
         if (state.memo) {
           state.misses++;
@@ -71,8 +87,8 @@ function convert(state, start, end) {
   }
 }
 
-export function quantize(image, palette, alphaCut = 128, mw, mh) {
-  const state = job(image, palette, alphaCut, mw, mh);
+export function quantize(image, palette, alphaCut = 128, mw, mh, { metric = 'oklab' } = {}) {
+  const state = job(image, palette, alphaCut, mw, mh, metric);
   convert(state, 0, state.result.indices.length);
   return state.result;
 }
@@ -89,9 +105,9 @@ export const yieldTask = () => new Promise(resolve => {
   channel.port2.postMessage(null);
 });
 
-export async function quantizeAsync(image, palette, alphaCut = 128, mw, mh, { signal, onProgress, chunkPixels = 2048 } = {}) {
+export async function quantizeAsync(image, palette, alphaCut = 128, mw, mh, { metric = 'oklab', signal, onProgress, chunkPixels = 2048 } = {}) {
   checkCanceled(signal);
-  const state = job(image, palette, alphaCut, mw, mh), length = state.result.indices.length;
+  const state = job(image, palette, alphaCut, mw, mh, metric), length = state.result.indices.length;
   const chunk = Math.min(8192, Math.max(128, Math.floor(chunkPixels) || 2048));
   for (let start = 0; start < length;) {
     const deadline = performance.now() + 8;

@@ -40,7 +40,7 @@
   try { initialLibrary = restoreLibrary(localStorage.getItem(LIBRARY_KEY)); } catch { /* Session still works. */ }
   let library = $state.raw(initialLibrary);
   const fullSaved = restorePaletteState(stored, initialLibrary);
-  let family = $state(fullSaved.family), paletteId = $state(fullSaved.paletteId), alphaCut = $state(fullSaved.alphaCut);
+  let family = $state(fullSaved.family), paletteId = $state(fullSaved.paletteId), alphaCut = $state(fullSaved.alphaCut), metric = $state(fullSaved.metric);
   let sessionPalettes = $state.raw([]);
   const savedPalettes = $derived([...library, ...sessionPalettes]);
   const fullPalette = $derived([...FULL_PRESETS, ...savedPalettes].find(p => p.id === paletteId) ?? FULL_PRESETS[0]);
@@ -99,7 +99,7 @@
   });
   $effect(() => {
     try {
-      localStorage.setItem(storageKey, JSON.stringify({ first, second, none, style, settings, theme: themePick, family, paletteId, alphaCut }));
+      localStorage.setItem(storageKey, JSON.stringify({ first, second, none, style, settings, theme: themePick, family, paletteId, alphaCut, metric }));
     } catch {
       // no storage; the settings last until the page is closed
     }
@@ -166,7 +166,7 @@
   // Editing colors or conversion settings returns to the converted result. Temporary
   // comparison stays separate, so releasing a hold never restores an outdated preference.
   $effect(() => {
-    first, second, none, style, set, family, fullPalette, alphaCut;
+    first, second, none, style, set, family, fullPalette, alphaCut, metric;
     showOriginal = false;
   });
   let spaceHeld = $state(false);
@@ -236,7 +236,7 @@
     const fresh = restore(null, STYLES.map(s => s[0]));
     ({ first, second, none, style, settings } = fresh);
     themePick = fresh.theme;
-    family = 'two-color'; paletteId = FULL_PRESETS[0].id; alphaCut = 128;
+    family = 'two-color'; paletteId = FULL_PRESETS[0].id; alphaCut = 128; metric = 'oklab';
     say('Settings reset.');
   }
   let shared = $state.raw(null), sharedTrigger; // the image the sheet is for; it stays set after the sheet closes, until the next one
@@ -530,7 +530,7 @@
   // animation. These masks are of every pixel, always: never the smaller picture a tile draws.
   // `asked` is the settings at the moment of asking (see `asking`). A long job starts a moment
   // after it is asked for, and what it saves is what was on screen then, whatever is changed since.
-  const asking = () => conversionSnapshot({ family, palette: fullPalette, alphaCut, first: ink[0], second: ink[1], style, set });
+  const asking = () => conversionSnapshot({ family, palette: fullPalette, alphaCut, metric, first: ink[0], second: ink[1], style, set });
   const about = (item, asked) => ({ name: item.name, w: item.img.w, h: item.img.h, first: asked.first, second: asked.second });
   const still = (item, asked) => asked.family === 'full-palette' ? fullPaletteImage(item, asked, { still: true }) : ({ ...about(item, asked), mask: mask(item.img, asked.style, asked.set) });
   const bitified = (item, asked) =>
@@ -702,7 +702,7 @@
   <div class="probe" bind:clientWidth={wallWidth} bind:clientHeight={wallHeight}></div>
   <div class="tiles">
     {#each canvasItems as item (item.id)}
-      <Tile {item} inset={IMAGE_INSET} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} {alphaCut}
+      <Tile {item} inset={IMAGE_INSET} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} {alphaCut} {metric}
         flipped={effectiveOriginal} comparing={previewing} budget={dragging ? DRAG_MS / canvasItems.length : 0}
         oncompare={compareHold} onopen={items.length ? openImage : undefined}
         onactivate={items.length ? undefined : () => picker.click()}
@@ -716,7 +716,7 @@
 </div>
 
 {#if viewed}
-  <ImageViewer item={viewed} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} {alphaCut} {busy} {message} flipped={viewInitialOriginal}
+  <ImageViewer item={viewed} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} {alphaCut} {metric} {busy} {message} flipped={viewInitialOriginal}
     onsave={viewed.id === 0 ? undefined : () => save(viewed)}
     oncopy={viewed.id === 0 ? undefined : () => copy(viewed)}
     onclose={async () => { const trigger = viewTrigger, keyboard = viewKeyboardFocus; viewing = null; await tick(); if (keyboard) trigger?.focus({ preventScroll: true }); else trigger?.blur(); }} />
@@ -725,7 +725,7 @@
 <CanvasGrid {items} {example} />
 
 <div class="workspace-tools" class:canvas-scrollable={canvasScrollable} use:measureWorkspaceTools>
-<Dock bind:first bind:second bind:none bind:style bind:settings bind:showOriginal bind:dragging bind:family bind:alphaCut {fullPalette} fullPresets={FULL_PRESETS} {savedPalettes} onpalette={selectPalette} onimportpalette={() => editPalette(null)} oneditpalette={editPalette} {previewing} {canvasScrollable} {autos} {soft} />
+<Dock bind:first bind:second bind:none bind:style bind:settings bind:showOriginal bind:dragging bind:family bind:alphaCut bind:metric {fullPalette} fullPresets={FULL_PRESETS} {savedPalettes} onpalette={selectPalette} onimportpalette={() => editPalette(null)} oneditpalette={editPalette} {previewing} {canvasScrollable} {autos} {soft} />
 <nav class="bar file-tools" class:has-images={!!items.length} aria-label="File and app actions">
   <div class="file-actions" class:awaiting-import={!items.length} role="group" aria-label="Add and save images">
     <button class="btn glass-btn icon-only export-action" class:glass-btn--primary={!!items.length} disabled={!items.length} aria-label={items.length > 1 ? 'Save all images' : 'Save image'} use:tooltip={items.length > 1 ? 'Save all converted images as a ZIP archive.' : items.length ? 'Save the converted image at its original size.' : 'Add an image to enable saving.'} onclick={saveEverything}><PixelIcon name="save" /><span class="save-label" aria-hidden="true">Save</span></button>
@@ -839,7 +839,7 @@
           <tr><th>Add</th><td><kbd>Tap</kbd> <kbd><PixelIcon name="import" /></kbd></td></tr>
           <tr><th>Next palette</th><td><kbd>Swipe</kbd> <kbd>←</kbd> <kbd>→</kbd></td></tr>
           {#if family === 'two-color'}<tr><th>Next style</th><td><kbd>Swipe</kbd> <kbd>↑</kbd> <kbd>↓</kbd></td></tr>{/if}
-          {#if family === 'two-color' || soft || alphaCut !== 128}<tr><th>{family === 'two-color' ? 'Style settings' : 'Palette settings'}</th><td><kbd>Tap</kbd> <kbd><PixelIcon name="sliders" /></kbd></td></tr>{/if}
+          <tr><th>{family === 'two-color' ? 'Style settings' : 'Palette settings'}</th><td><kbd>Tap</kbd> <kbd><PixelIcon name="sliders" /></kbd></td></tr>
           <tr><th>Preview image</th><td><kbd>Tap</kbd> <kbd>Image</kbd></td></tr>
           <tr><th>Save or copy image</th><td><kbd><PixelIcon name="more" /></kbd> → <kbd><PixelIcon name="save" /></kbd> <kbd><PixelIcon name="copy" /></kbd></td></tr>
           <tr><th>Remove image</th><td><kbd><PixelIcon name="more" /></kbd> → <kbd><PixelIcon name="trash" /></kbd></td></tr>
@@ -847,7 +847,7 @@
           <tr><th>Add</th><td><kbd>Click</kbd> <kbd><PixelIcon name="import" /></kbd> or <kbd>Drop</kbd></td><td><kbd>{mod}</kbd> <kbd>V</kbd></td></tr>
           <tr><th>Next palette</th><td><kbd>Shift</kbd> <kbd>Scroll</kbd></td><td><kbd>←</kbd> <kbd>→</kbd></td></tr>
           {#if family === 'two-color'}<tr><th>Next style</th><td><kbd>Scroll</kbd></td><td><kbd>↑</kbd> <kbd>↓</kbd></td></tr>{/if}
-          {#if family === 'two-color' || soft || alphaCut !== 128}<tr><th>{family === 'two-color' ? 'Style settings' : 'Palette settings'}</th><td><kbd>Click</kbd> <kbd><PixelIcon name="sliders" /></kbd></td><td>—</td></tr>{/if}
+          <tr><th>{family === 'two-color' ? 'Style settings' : 'Palette settings'}</th><td><kbd>Click</kbd> <kbd><PixelIcon name="sliders" /></kbd></td><td>—</td></tr>
           <tr><th>Preview image</th><td><kbd>Click</kbd> <kbd>Image</kbd></td><td><kbd>Enter</kbd></td></tr>
           <tr><th>Save or copy image</th><td><kbd>Click</kbd> <kbd><PixelIcon name="save" /></kbd> <kbd><PixelIcon name="copy" /></kbd></td><td><kbd>{mod}</kbd> <kbd>C</kbd></td></tr>
           <tr><th>Remove image</th><td><kbd>Click</kbd> <kbd><PixelIcon name="trash" /></kbd></td><td>—</td></tr>

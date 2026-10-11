@@ -1,6 +1,8 @@
 # Shared-palette conversion research
 
-Research only: no palette dithering method or new setting has been added to the app.
+Later adoption: **Matching: Oklab / RGB** is now available in Palette settings, with Oklab
+as default. The comparisons below record the earlier research stage; Ordered and Diffusion
+remain research only. See the [matching decision](2026-10-11-palette-matching.md).
 The six supplied building PNGs were compared using the exact supplied 16×16 palette
 image: 255 unique visible RGB colors and one transparent pixel. All six buildings have
 binary alpha; none has an embedded ICC profile. Their browser-decoded RGBA matched
@@ -52,7 +54,7 @@ and preserve the original binary alpha.
   policy differs from unconstrained diffusion.
 - **RGB Nearest:** minimize squared differences in encoded RGB channels. It challenges
   the assumption that Oklab necessarily looks best on every asset; it is not a shipped
-  option. The RGB choice differed from Oklab on 7.6–47.0% of visible pixels across these
+  option at the time of this experiment. The RGB choice differed from Oklab on 7.6–47.0% of visible pixels across these
   buildings. Each minimizes its own metric; neither proves universal visual superiority.
 
 An unrestricted all-palette-pairs Ordered variant was also tested. It can choose distant

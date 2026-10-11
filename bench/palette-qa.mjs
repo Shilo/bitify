@@ -98,7 +98,7 @@ function readGif(bytes) {
 function hash(bytes) { let n = 2166136261; for (const byte of bytes) n = Math.imul(n ^ byte, 16777619); return n >>> 0; }
 function samePixels(actual, expected, label) { assert.equal(actual.length, expected.length, label); for (let i = 0; i < actual.length; i++) assert.equal(actual[i], expected[i], `${label} byte${i}`); }
 
-// Separate, scalar Oklab nearest reference without the implementation's cache,
+// Separate scalar Oklab/encoded-RGB reference without the implementation's cache,
 // prepared palette or quantizer. Exact RGB is checked first; ties keep index0.
 function lab(r, g, b) {
   const linear = value => { const v = value / 255; return v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; };
@@ -108,15 +108,15 @@ function lab(r, g, b) {
   const s = Math.cbrt(.0883024619 * r + .2817188376 * g + .6299787005 * b);
   return [.2104542553 * l + .7936177850 * m - .0040720468 * s, 1.9779984951 * l - 2.4285922050 * m + .4505937099 * s, .0259040371 * l + .7827717662 * m - .8086757660 * s];
 }
-function nearestReference(original, colors, alphaCut = 128) {
-  const rgb = colors.map(hex => [1,3,5].map(at => parseInt(hex.slice(at, at + 2), 16))), labs = rgb.map(v => lab(...v));
+function nearestReference(original, colors, alphaCut = 128, metric = 'oklab') {
+  const rgb = colors.map(hex => [1,3,5].map(at => parseInt(hex.slice(at, at + 2), 16))), labs = rgb.map(v => metric === 'rgb' ? v : lab(...v));
   const output = new Uint8Array(original.data.length);
   for (let p = 0; p < output.length; p += 4) {
     const data = original.data;
     if (data[p + 3] === 0 || data[p + 3] < alphaCut) continue;
     let chosen = rgb.findIndex(v => v[0] === data[p] && v[1] === data[p + 1] && v[2] === data[p + 2]);
     if (chosen < 0) {
-      const value = lab(data[p], data[p + 1], data[p + 2]); let best = Infinity;
+      const value = metric === 'rgb' ? [data[p], data[p + 1], data[p + 2]] : lab(data[p], data[p + 1], data[p + 2]); let best = Infinity;
       for (let i = 0; i < labs.length; i++) {
         const distance = labs[i].reduce((sum, v, n) => sum + (v - value[n]) ** 2, 0);
         if (distance < best) { best = distance; chosen = i; }
@@ -237,6 +237,26 @@ try {
     await page.getByRole('button',{name:`${palette.name} conversion`,exact:true}).click();
   }
   console.log(`Full matrix: ${results.full.length} independently decoded exports and clipboard PNGs passed.`);
+
+  // Retained coverage for the optional matching choice: the scalar reference
+  // performs encoded RGB distance, independent of the production converter.
+  results.rgb = [];
+  for (const palette of FULL_PRESETS) {
+    await openPalette(); await page.getByRole('group',{name:'Full palettes',exact:true}).getByRole('button',{name:palette.name,exact:true}).click(); await closePanel();
+    await page.getByRole('button',{name:'Palette settings',exact:true}).click();
+    await page.getByRole('button',{name:'RGB matching',exact:true}).click();
+    assert.equal((await stored()).metric,'rgb');assert.equal(await page.getByRole('button',{name:'RGB matching',exact:true}).getAttribute('aria-pressed'),'true');
+    await page.getByRole('button',{name:'Palette settings',exact:true}).click();
+    const rgbExpected = nearestReference(fixture,palette.colors,128,'rgb'); await tileMatches(rgbExpected);
+    samePixels(readPng(await download(page.getByRole('button',{name:'Save fixture.png',exact:true}),'fixture-palette.png')).pixels,rgbExpected,`${palette.name} RGB PNG`);
+    samePixels(readPng(await copy(page.getByRole('button',{name:'Copy fixture.png',exact:true}))).pixels,rgbExpected,`${palette.name} RGB clipboard`);
+    results.rgb.push({palette:palette.name,hash:hash(rgbExpected)});
+  }
+  await openPalette();await page.getByRole('group',{name:'Color system',exact:true}).getByRole('button',{name:'1-bit',exact:true}).click();assert.equal((await stored()).metric,'rgb');
+  await page.getByRole('group',{name:'Color system',exact:true}).getByRole('button',{name:'Palette',exact:true}).click();await closePanel();assert.equal((await stored()).metric,'rgb');
+  await page.getByRole('button',{name:'Palette settings',exact:true}).click();await page.getByRole('button',{name:'Reset palette settings',exact:true}).click();
+  assert.equal((await stored()).metric,'oklab');assert.equal((await stored()).alphaCut,128);await page.getByRole('button',{name:'Palette settings',exact:true}).click();
+  results.extra.push('Five full presets RGB preview/PNG/Copy match independent reference; family retains metric and Reset restores Oklab/cut128');
 
   // Full GIF: source compositing, preserved delays/loop, first-frame clipboard,
   // actual worker asset loaded under a deployment subpath, and mixed ZIP.
@@ -415,7 +435,7 @@ try {
   assert.deepEqual(results.consoleErrors,[],'Browser JS exceptions');
   results.passed = true;
   writeFileSync(resolve(scratch,'results.json'),JSON.stringify(results,null,2));
-  console.log(JSON.stringify({passed:true,legacy:results.legacy.length,full:results.full.length,extra:results.extra,errors:results.consoleErrors}));
+  console.log(JSON.stringify({passed:true,legacy:results.legacy.length,full:results.full.length,rgb:results.rgb.length,extra:results.extra,errors:results.consoleErrors}));
 } catch(error) {
   results.failure = error.stack; writeFileSync(resolve(scratch,'results.json'),JSON.stringify(results,null,2)); throw error;
 } finally {
