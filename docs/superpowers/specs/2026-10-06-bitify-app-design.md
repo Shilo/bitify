@@ -485,6 +485,25 @@ viewport height so mobile browser bars do not cut the dock off.
 
 - Drag files anywhere onto the window. While dragging, a full-screen "Drop to bitify"
   overlay shows, drawn in the two chosen colors.
+- Dragged images from Discord or web pages can also supply an image URL instead of a
+  file. Accept HTTP(S) URLs from HTML image sources, URI lists, Chromium download
+  payloads or plain URL text. Prefer actual files when present, and import each URL
+  only once. Prevent the browser's default navigation when accepting these drags.
+  Copy the payload during drop, then fetch images directly from their host without
+  credentials or a referrer, keeping the complete URL (including Discord signatures).
+  The existing image decoder and conversion handle the downloaded file, including GIF
+  animation. A fetching message covers the request; each request times out after 30
+  seconds. Remove all cancels pending requests and prevents late images from appearing.
+  Generic or missing response MIME types use a GIF87a/GIF89a signature to recognize
+  GIFs even when the URL has no extension; image MIME parameters are normalized before
+  decoding. Concurrent jobs retain separate identities even when their messages match,
+  so the progress message always belongs to the newest job that is still running.
+  Non-URL text is ignored. Dropped HTML is parsed only for image sources and is never
+  inserted into the app.
+  Recognize format names without case sensitivity (the browser API lowercases custom
+  formats such as DownloadURL). URL batches report a combined count of download and
+  decode failures after their final image, so slow requests cannot hide an earlier
+  warning. Clearing the batch suppresses late error messages as well as late images.
 - "Add images" opens the system picker (`accept="image/*"`, multiple). This is the only
   route on phones.
 - Pasting an image from the clipboard also adds it.
@@ -1158,6 +1177,10 @@ it is doing:
 ## Errors and limits
 
 - Undecodable files are skipped with a message; the rest of the batch still loads.
+- Image URL drops require the source host to allow browser cross-origin requests and
+  the URL to still be valid. A failed request or non-image response shows a short
+  message suggesting copying/pasting the image or saving and adding its file. The
+  rest of the batch still loads. There is no proxy or backend; conversion stays local.
 - If saving or copying fails, a message says so. Nothing else is lost.
 - Conversion runs on the main thread. A change costs about as many pixels as the screen
   shows, however large the images are (see "Images larger than their tile"), so it stays
@@ -1218,6 +1241,33 @@ it is doing:
   - Auto returns a value between two clearly separated groups.
 - `src/lib/save.js`: output naming, including duplicates; a PNG holds the palette and
   exactly the given pixels, packed two bits each.
+- `src/lib/image-drop.js`: protected hover payloads, file precedence, URL format
+  fallbacks, signed queries, URI-list comments and duplicates, unsafe URLs, MIME types,
+  filenames, failed responses and cancellation. Browser checks at desktop and phone
+  widths cover inert HTML parsing and entity decoding, prevented navigation, GIF
+  playback, cross-origin success/failure, continued imports after a failed URL,
+  existing file drops and clipboard paste, overlay appearance and Remove all during
+  a pending download. A public image from Discord's CDN was also imported successfully.
+  On October 11, the user tested direct image drags from their Discord client into the
+  live Codex browser preview and confirmed successful imports. The preview displayed
+  eight imported images, stayed on Bitify and reported no browser console errors.
+  The exact native payload formats were not recorded; Firefox and Safari were not
+  directly tested.
+- The October 11 adversarial sub-agent review reproduced four defects before agreeing
+  on their fixes: lowercase DownloadURL hover detection, animation loss for generic or
+  parameterized GIF MIME types, out-of-order progress messages, and skipped-image
+  warnings expiring behind a later fetch. The corrected build passed 289 unit tests.
+  `bench/image-drop/qa.html` preserves the browser regression checks: build with
+  `npm run build`, run `node bench/image-drop/server.mjs` from the repository root, open
+  its loopback URL and run all three buttons. These use synthetic drag payloads and
+  controlled network/decoder waits against the actual production app, plus a real
+  Discord CDN image download. They assert that every supported payload is accepted
+  during hover, GIF frames advance, cancellation aborts a held request and rejects late
+  pixels, failed downloads and corrupt images are counted together, and overlapping
+  jobs show the correct progress. The timeout probe verifies the configured 30-second
+  duration while accelerating the native timeout for the test. The narrow iframe
+  checks phone-width layout only; it does not emulate touch or prove native cross-app
+  dragging on a phone.
 - `src/lib/settings.js`: stored settings come back unchanged; missing or damaged text gives
   the defaults; a single unusable value is replaced on its own.
 - `src/lib/layout.js`: besides the wall's fit, the size of the picture a tile draws: the

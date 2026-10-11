@@ -311,6 +311,13 @@ can do nothing else meanwhile.
   batch checks after every wait).
 - The full-size canvas used to read an image is given back at once (`canvas.width = 0`).
   iOS limits how much memory all canvases may hold.
+- URL image drops (including Discord attachments) fetch one image at a time and hand
+  each file to this same reader. Remove all aborts the pending network requests and
+  the reader checks the original batch generation before adding downloaded pixels.
+  Network waits show a fetching message and time out after 30 seconds per request.
+- Progress jobs use object identity rather than their text, so two concurrent URL
+  fetches with the same message can finish in either order without hiding a newer
+  still-running read, save or copy job.
 
 ### Saving (`src/lib/save.js`)
 
