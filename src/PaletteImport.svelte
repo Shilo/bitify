@@ -151,6 +151,7 @@
       <button class="ib glass-btn" aria-label="Close palette editor" disabled={busy === 'Saving' || busy === 'Deleting'} onclick={close} use:tooltip={'Close without saving this draft.'}><PixelIcon name="x" /></button>
     </div>
     <div class="glass-modal__body palette-editor-body">
+      {#if request.exportNotice}<p class="palette-editor-notice" role="alert">{request.exportNotice}</p>{/if}
       {#if initial.notice || initial.maxColors === 255}<p class="palette-editor-notice">{initial.notice || `Keep at most ${maxColors} colors for this GIF. Remove colors, save a copy, then download again.`}</p>{/if}
       {#if reviewing}
         <label class="palette-name-label" for="palette-name">Name</label>

@@ -582,6 +582,11 @@
   function exportFailure(error, asked, fallback) {
     if (error.code !== 'PALETTE_GIF_LIMIT') { say(fallback); return; }
     say('GIF needs room for transparency. No file was downloaded.');
+    if (paletteRequest) {
+      // An asynchronous export must not replace a draft already being edited.
+      paletteRequest = { ...paletteRequest, exportNotice: `GIF export using ${asked.name} needs room for transparency. No file was downloaded. Finish or cancel this draft, then try Save again.` };
+      return;
+    }
     paletteTrigger = document.querySelector('.image-viewer[open] button[aria-label="Save image"]') ?? document.activeElement;
     paletteRequest = { name: [...asked.name].slice(0, 55).join('') + ' GIF', colors: [...asked.colors], forceCopy: true, maxColors: 255,
       notice: 'GIF needs room for transparency. Remove at least one color and save a 255-color copy, then select Save image again. No file was downloaded.', source: { kind: 'copy' } };
@@ -805,20 +810,21 @@
 </dialog>
 <!-- The help, which is also the welcome on a first visit: what Bitify is, four steps, and the
      controls of the device in use. A click on the dimmed screen around it counts as the dialog itself. -->
-<dialog class="help glass-modal" bind:this={help} aria-labelledby="help-title" onclick={e => e.target === help && help.close()}>
+<dialog class="help glass-modal" bind:this={help} aria-labelledby="help-title" onclose={() => moreTrigger?.focus({ preventScroll: true })} onclick={e => e.target === help && help.close()}>
   <div class="help-in">
-    <button class="ib" onclick={() => help.close()} aria-label="Close" use:tooltip={'Dismiss this help window.'}><PixelIcon name="x" /></button>
+    <!-- svelte-ignore a11y_autofocus -->
+    <button class="ib" autofocus onclick={() => help.close()} aria-label="Close"><PixelIcon name="x" /></button>
     <header>
       <img class="help-logo" src={helpLogoUrl} alt="" width="48" height="48" />
       <div>
         <h2 id="help-title">Bitify</h2>
-        <p>Convert sprites and animated GIFs to <span>1-bit</span> styles or a full color palette.</p>
+        <p>Convert sprites and animated GIFs with <span>1-bit</span> styles or color palettes.</p>
       </div>
     </header>
     <ol>
       <li><PixelIcon name="import" /><b>Add</b>{touch ? 'Choose images.' : 'Choose, drop or paste images.'}</li>
-      <li><PixelIcon name="grid" /><b>Palette</b>Pick 1-bit colors or a full palette. Import your own in Palette mode.</li>
-      <li><PixelIcon name="sliders" /><b>Style</b>Pick an effect. Tune its settings.</li>
+      <li><PixelIcon name="grid" /><b>Palette</b>Choose 1-bit or Palette. Pick a preset; import an image or colors.</li>
+      <li><PixelIcon name="sliders" /><b>Style</b>In 1-bit, pick an effect and tune it.</li>
       <li><PixelIcon name="save" /><b>Save</b>Save or copy images.</li>
     </ol>
     <table>
@@ -832,16 +838,16 @@
         {#if touch}
           <tr><th>Add</th><td><kbd>Tap</kbd> <kbd><PixelIcon name="import" /></kbd></td></tr>
           <tr><th>Next palette</th><td><kbd>Swipe</kbd> <kbd>←</kbd> <kbd>→</kbd></td></tr>
-          <tr><th>Next style</th><td><kbd>Swipe</kbd> <kbd>↑</kbd> <kbd>↓</kbd></td></tr>
-          <tr><th>Style settings</th><td><kbd>Tap</kbd> <kbd><PixelIcon name="sliders" /></kbd></td></tr>
+          {#if family === 'two-color'}<tr><th>Next style</th><td><kbd>Swipe</kbd> <kbd>↑</kbd> <kbd>↓</kbd></td></tr>{/if}
+          {#if family === 'two-color' || soft || alphaCut !== 128}<tr><th>{family === 'two-color' ? 'Style settings' : 'Palette settings'}</th><td><kbd>Tap</kbd> <kbd><PixelIcon name="sliders" /></kbd></td></tr>{/if}
           <tr><th>Preview image</th><td><kbd>Tap</kbd> <kbd>Image</kbd></td></tr>
           <tr><th>Save or copy image</th><td><kbd><PixelIcon name="more" /></kbd> → <kbd><PixelIcon name="save" /></kbd> <kbd><PixelIcon name="copy" /></kbd></td></tr>
           <tr><th>Remove image</th><td><kbd><PixelIcon name="more" /></kbd> → <kbd><PixelIcon name="trash" /></kbd></td></tr>
         {:else}
           <tr><th>Add</th><td><kbd>Click</kbd> <kbd><PixelIcon name="import" /></kbd> or <kbd>Drop</kbd></td><td><kbd>{mod}</kbd> <kbd>V</kbd></td></tr>
           <tr><th>Next palette</th><td><kbd>Shift</kbd> <kbd>Scroll</kbd></td><td><kbd>←</kbd> <kbd>→</kbd></td></tr>
-          <tr><th>Next style</th><td><kbd>Scroll</kbd></td><td><kbd>↑</kbd> <kbd>↓</kbd></td></tr>
-          <tr><th>Style settings</th><td><kbd>Click</kbd> <kbd><PixelIcon name="sliders" /></kbd></td><td>—</td></tr>
+          {#if family === 'two-color'}<tr><th>Next style</th><td><kbd>Scroll</kbd></td><td><kbd>↑</kbd> <kbd>↓</kbd></td></tr>{/if}
+          {#if family === 'two-color' || soft || alphaCut !== 128}<tr><th>{family === 'two-color' ? 'Style settings' : 'Palette settings'}</th><td><kbd>Click</kbd> <kbd><PixelIcon name="sliders" /></kbd></td><td>—</td></tr>{/if}
           <tr><th>Preview image</th><td><kbd>Click</kbd> <kbd>Image</kbd></td><td><kbd>Enter</kbd></td></tr>
           <tr><th>Save or copy image</th><td><kbd>Click</kbd> <kbd><PixelIcon name="save" /></kbd> <kbd><PixelIcon name="copy" /></kbd></td><td><kbd>{mod}</kbd> <kbd>C</kbd></td></tr>
           <tr><th>Remove image</th><td><kbd>Click</kbd> <kbd><PixelIcon name="trash" /></kbd></td><td>—</td></tr>
@@ -850,8 +856,7 @@
     </table>
     <footer>
       <span>Images stay on your device.</span>
-      <!-- svelte-ignore a11y_autofocus -->
-      <button class="btn primary glass-btn" autofocus onclick={() => help.close()}>Got it</button>
+      <button class="btn primary glass-btn" onclick={() => help.close()}>Got it</button>
     </footer>
   </div>
 </dialog>

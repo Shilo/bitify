@@ -325,6 +325,93 @@ try {
   await page.getByRole('button',{name:'Cancel',exact:true}).click();
   page.off('download',counted);
   results.extra.push('256 colors+empty GIF blocks ZIP without download or active palette mutation');
+
+  // A real 6MP/two-frame GIF keeps its asynchronous global-table preflight in
+  // flight while another editor opens. A late failure must inform that editor,
+  // never replace its draft or silently impose the GIF copy's 255-color limit.
+  const raceW = 3000, raceH = 2000, raceBuffer = new Uint8Array(raceW * raceH * 5 + 2048);
+  const raceWriter = new omggif.GifWriter(raceBuffer,raceW,raceH,{palette:limitColors.map(hex=>parseInt(hex.slice(1),16)),loop:0});
+  raceWriter.addFrame(0,0,raceW,raceH,Uint8Array.from({length:raceW*raceH},(_,i)=>i%256),{delay:10,disposal:2});
+  raceWriter.addFrame(0,0,raceW,raceH,new Uint8Array(raceW*raceH),{delay:10,disposal:2,transparent:0});
+  const racePath = resolve(scratch,'editor-race.gif'); writeFileSync(racePath,raceBuffer.subarray(0,raceWriter.end()));
+  const originalRecord = {id:'user-limit',name:'Exact256',colors:limitColors,revision:7,source:{kind:'image',credit:'Original imported RGB set'}};
+  const retryRecord = {...originalRecord,id:'user-retry',name:'Retry256',revision:3,source:{kind:'hex'}};
+  await page.evaluate(records => {
+    localStorage.setItem('bitify-palettes-v1',JSON.stringify({version:1,palettes:records}));
+    const state = JSON.parse(localStorage.getItem('bitify')); state.family = 'full-palette'; state.paletteId = records[0].id;
+    localStorage.setItem('bitify',JSON.stringify(state));
+  },[originalRecord,retryRecord]);
+  await page.reload(); await page.locator('input[type=file][accept="image/*"]').setInputFiles(racePath);
+  await page.getByRole('button',{name:'Save editor-race.gif',exact:true}).waitFor(); await openPalette();
+  forbiddenDownloads = 0; page.on('download',counted);
+  // These are the application's actual handlers. Keeping both clicks in one
+  // task guarantees editor entry during the supported 50ms pre-busy window.
+  await page.evaluate(() => {
+    document.querySelector('button[aria-label="Save editor-race.gif"]').click();
+    const trigger = document.querySelector('button[aria-label="Import palette"]'); trigger.focus(); trigger.click();
+  });
+  const raceEditor = page.locator('dialog.palette-import-modal'); await raceEditor.waitFor();
+  await raceEditor.getByRole('button',{name:'Paste colors',exact:true}).click();
+  await raceEditor.getByRole('textbox',{name:'Hex colors',exact:true}).fill('#000000 #ffffff');
+  await raceEditor.getByRole('button',{name:'Review colors',exact:true}).click();
+  await raceEditor.getByLabel('Name',{exact:true}).fill('Draft while exporting');
+  await raceEditor.getByRole('alert').waitFor({timeout:30000});
+  assert.equal(await raceEditor.locator('h2').textContent(),'Import palette','Late failure replaced import editor');
+  assert.equal(await raceEditor.getByLabel('Name',{exact:true}).inputValue(),'Draft while exporting');
+  assert.deepEqual(await raceEditor.locator('.palette-review-swatch').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('aria-label'))),['Select color 1 #000000','Select color 2 #ffffff']);
+  assert.equal(await raceEditor.getByRole('button',{name:'Save palette',exact:true}).isEnabled(),true);
+  assert.match(await raceEditor.getByRole('alert').textContent(),/GIF export using Exact256 .*No file was downloaded\./);
+  assert.equal(await page.locator('dialog[open]').count(),1,'Late failure stacked a replacement modal');
+  assert.equal(forbiddenDownloads,0,'Late failure downloaded a file');
+  assert.deepEqual(await page.evaluate(()=>JSON.parse(localStorage.getItem('bitify-palettes-v1')).palettes),[originalRecord,retryRecord]);
+  await raceEditor.getByRole('button',{name:'Cancel',exact:true}).click(); await raceEditor.waitFor({state:'detached'});
+  assert.equal(await page.evaluate(()=>document.activeElement?.getAttribute('aria-label')),'Import palette','Cancel lost the import trigger');
+  await page.waitForTimeout(150); assert.equal(await page.locator('dialog[open]').count(),0,'A queued export modal replaced the cancelled draft');
+
+  // Retry is a new request against the selection now, rather than a queued
+  // request against the failed palette. It still enforces 255 for a GIF copy.
+  await openPalette(); await page.getByRole('group',{name:'Full palettes',exact:true}).getByRole('button',{name:'Retry256',exact:true}).click();
+  await page.getByRole('button',{name:'Save editor-race.gif',exact:true}).click();
+  await page.getByRole('dialog',{name:'Make a palette copy',exact:true}).waitFor({timeout:30000});
+  assert.equal(await raceEditor.getByLabel('Name',{exact:true}).inputValue(),'Retry256 GIF','Retry used the previous failed snapshot');
+  assert.equal(await raceEditor.getByRole('button',{name:'Save palette',exact:true}).isDisabled(),true,'Fresh GIF copy lost its255-color limit');
+  assert.equal((await stored()).paletteId,'user-retry');
+  await raceEditor.getByRole('button',{name:'Cancel',exact:true}).click(); await raceEditor.waitFor({state:'detached'});
+  await page.waitForTimeout(150); assert.equal(await page.locator('dialog[open]').count(),0);
+
+  // A saved 256-color editor remains a normal edit, with its revision and
+  // attribution. Renaming its draft must not rename the failed export notice.
+  await openPalette(); await page.getByRole('group',{name:'Full palettes',exact:true}).getByRole('button',{name:'Exact256',exact:true}).click();
+  await page.evaluate(() => {
+    document.querySelector('button[aria-label="Save editor-race.gif"]').click();
+    const trigger = document.querySelector('button[aria-label="Edit palette"]'); trigger.focus(); trigger.click();
+  });
+  await raceEditor.getByLabel('Name',{exact:true}).fill('Existing256 draft');
+  await raceEditor.getByRole('alert').waitFor({timeout:30000});
+  assert.equal(await raceEditor.locator('h2').textContent(),'Edit palette');
+  assert.equal(await raceEditor.getByLabel('Name',{exact:true}).inputValue(),'Existing256 draft');
+  assert.match(await raceEditor.getByRole('alert').textContent(),/GIF export using Exact256 /);
+  assert.equal(await raceEditor.getByText('256 colors',{exact:true}).count(),1);
+  assert.equal(await raceEditor.getByRole('button',{name:'Save changes',exact:true}).isEnabled(),true,'Existing editor inherited255-copy restriction');
+  assert.equal(await page.locator('dialog[open]').count(),1);
+  await page.setViewportSize({width:320,height:568});
+  const noticeLayout = await raceEditor.evaluate(dialog=>{
+    const body=dialog.querySelector('.palette-editor-body'),alert=dialog.querySelector('[role=alert]'),r=alert.getBoundingClientRect(),b=body.getBoundingClientRect();
+    return {overflow:body.scrollWidth>body.clientWidth+1,inside:r.left>=b.left-1&&r.right<=b.right+1};
+  });
+  assert.deepEqual(noticeLayout,{overflow:false,inside:true},'Async notice overflows narrow editor');
+  await page.screenshot({path:resolve(scratch,'editor-race-narrow.png')});
+  await page.setViewportSize({width:1280,height:900});
+  // Restore the original name and save unchanged colors. Persisting succeeds
+  // only if original id/revision/source/maxColors all survived the late failure.
+  await raceEditor.getByLabel('Name',{exact:true}).fill(originalRecord.name);
+  await raceEditor.getByRole('button',{name:'Save changes',exact:true}).click(); await raceEditor.waitFor({state:'detached'});
+  assert.equal(await page.evaluate(()=>document.activeElement?.getAttribute('aria-label')),'Edit palette','Save lost the edit trigger');
+  assert.deepEqual(await page.evaluate(()=>JSON.parse(localStorage.getItem('bitify-palettes-v1')).palettes),[{...originalRecord,revision:8},retryRecord]);
+  assert.equal(forbiddenDownloads,0,'An editor arbitration failure downloaded a file');
+  await page.waitForTimeout(150); assert.equal(await page.locator('dialog[open]').count(),0);
+  page.off('download',counted);
+  results.extra.push('6MP async GIF failure preserves named import and 256-color saved drafts/notice/focus/source/revision; retry uses current palette and 255-color copy limit');
   assert.deepEqual(results.consoleErrors,[],'Browser JS exceptions');
   results.passed = true;
   writeFileSync(resolve(scratch,'results.json'),JSON.stringify(results,null,2));

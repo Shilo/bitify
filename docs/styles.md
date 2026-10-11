@@ -14,6 +14,10 @@ transparent sources or a changed cut. There is no threshold, Swap, None or style
 in this family. Switching back to 1-bit restores the retained colors, style and settings.
 See [palettes.md](palettes.md) for import and palette library behavior.
 
+Choose **1-bit** in the Palette panel to use these styles. Help shows style stepping and
+Style settings only in this mode. In Palette, it shows Palette settings when the opacity
+control is available, and omits style stepping.
+
 Palette-specific ordered or error-diffusion dithering can be useful for gradients, but
 is deferred until its source-coordinate patterns, sampled previews, transparent edges
 and animated output have explicit visual tests. The supplied research also recommends

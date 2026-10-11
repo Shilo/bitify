@@ -22,7 +22,7 @@
 :root .palette-editor .palette-text-input { min-height: 96px; resize: vertical; margin-bottom: 8px; }
 :root .palette-file-input { display: none; }
 :root .palette-editor-hint { color: var(--muted); font-size: 13px; line-height: 1.5; margin-block: 10px; }
-:root .palette-editor-notice { font-size: 14px; line-height: 1.5; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; }
+:root .palette-editor-notice { font-size: 14px; line-height: 1.5; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; overflow-wrap: anywhere; }
 :root .palette-editor-error { color: var(--gl-color-error, #c43131); font-size: 14px; line-height: 1.5; overflow-wrap: anywhere; }
 :root .palette-editor-details { margin-top: 12px; }
 :root .palette-editor-details > summary { min-height: 44px; box-sizing: border-box; padding-block: 12px; line-height: 20px; list-style-position: inside; cursor: pointer; font-size: 14px; color: var(--text); }

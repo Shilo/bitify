@@ -7,7 +7,7 @@
 :root .palette-selected-name { flex: none; }
 :root .palette-selected-name[hidden] { display: none; }
 :root .palette-family-tabs { display: flex; flex: none; gap: 0; }
-:root .palette-family-tabs button { box-sizing: border-box; height: 36px; min-height: 36px; flex: none; padding: 0 11px; font-size: 13px; }
+:root .palette-family-tabs button { box-sizing: border-box; height: 36px; min-height: 36px; flex: none; padding: 0 11px; font-size: 13px; transition: background-color .16s,box-shadow .16s,color .16s; }
 :root .palette-header-actions { display: flex; flex: none; margin-left: auto; align-items: center; gap: 4px; }
 :root .palette-header-actions > .btn { box-sizing: border-box; width: 36px; min-width: 36px; height: 36px; min-height: 36px; padding: 0; }
 :root .palette-header-actions .palette-transparency { box-sizing: border-box; display: flex; flex: none; height: 36px; min-height: 36px; align-items: center; padding: 2px; gap: 2px; }
@@ -20,7 +20,7 @@
 :root .palette-circle :is(.palette-preview,.full-palette-preview) { display: block; width: 100%; height: 100%; border-radius: 50%; }
 :root .full-palette-preview { display: inline-block; border-radius: 50%; width: 32px; height: 32px; }
 :root .palette-choice[aria-pressed=true] .palette-circle { border-color: var(--gl-border-focus); box-shadow: 0 0 0 2px var(--surface),0 0 0 4px var(--gl-border-focus); }
-:root .palette-choice-name { max-width: 80px; overflow: hidden; font-size: 12px; line-height: 1.2; white-space: nowrap; }
+:root .palette-choice-name { display: block; min-width: 0; width: 100%; max-width: 80px; overflow: hidden; text-overflow: ellipsis; font-size: 12px; line-height: 1.2; white-space: nowrap; }
 :root .palette-library-divider { height: 42px; width: 1px; background: var(--line); flex: none; margin: 0 8px; }
 :root .palette-rail-wrap.rail-left .palette-rail { mask-image: linear-gradient(to right,transparent 12px,#000 36px); }
 :root .palette-rail-wrap.rail-right .palette-rail { mask-image: linear-gradient(to left,transparent 12px,#000 36px); }

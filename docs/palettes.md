@@ -5,6 +5,11 @@ Bitify's Palette panel has two families: **1-bit**, with twelve preset color pai
 defined in [src/lib/presets.js](../src/lib/presets.js); full palettes and their provenance
 are in [src/lib/palette-library.js](../src/lib/palette-library.js).
 
+Open Palette and choose **1-bit** or **Palette**. Palette mode's import icon accepts
+an image, palette file or pasted colors; its edit icon opens color review. Names under
+the round choices use a single line with an ellipsis when needed; full names remain in
+accessible labels and tooltips. More → Help lists the current mode's controls.
+
 ## 1-bit color pairs
 
 A 1-bit preset is two colors, a dark one and a light one.
@@ -183,6 +188,9 @@ source explicitly replaces the draft rather than merging palettes. HEX backup is
 icon button, and Image options/Add colors/More options expand only when needed. Image
 options opens automatically for an over-limit image. Errors and recovery actions stay
 visible, and the saving limit is explained when the draft needs reduction.
+If an earlier GIF export exceeds its color limit while this editor is open, an inline
+notice identifies that export palette and asks you to finish or cancel the draft, then
+try Save again. The draft, editing limit and saved record remain unchanged.
 
 - **Images:** PNG, JPEG, WebP, BMP and GIF, up to 32 MiB and 16 × 1024 × 1024 decoded
   pixels. GIF contributes its first frame, with a notice. Decoding is browser-managed,

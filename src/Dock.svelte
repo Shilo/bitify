@@ -329,12 +329,12 @@
           onwheel={e => { if (Math.abs(e.deltaY) > Math.abs(e.deltaX) && e.currentTarget.scrollWidth > e.currentTarget.clientWidth) { e.preventDefault(); e.currentTarget.scrollLeft += e.deltaY; } }}>
           {#if family === 'two-color'}
             {#each PRESETS as p}
-              <button class="palette-choice" aria-pressed={chosen(p)} aria-label={p.name} use:tooltip={`${p.name}: ${PALETTE_USES[p.name]}`} onclick={() => choose(p)}><span class="palette-circle"><PalettePreview first={p.dark} second={p.light}/></span><span class="palette-choice-name">{compactPaletteName(p.name)}</span></button>
+              <button class="palette-choice" aria-pressed={chosen(p)} aria-label={p.name} use:tooltip={`${p.name}: ${PALETTE_USES[p.name]}`} onclick={() => choose(p)}><span class="palette-circle"><PalettePreview first={p.dark} second={p.light}/></span><span class="palette-choice-name">{p.name}</span></button>
             {/each}
           {:else}
             {#each [...fullPresets, ...savedPalettes] as p, i (p.id)}
               {#if i === fullPresets.length}<span class="palette-library-divider" aria-hidden="true"></span>{/if}
-              <button class="palette-choice" aria-pressed={fullPalette.id === p.id} aria-label={p.name} use:tooltip={`${p.name} · ${p.colors.length} colors${p.source?.credit ? ' · ' + p.source.credit : ''}`} onclick={() => onpalette(p)}><span class="palette-circle"><PalettePreview colors={p.colors}/></span><span class="palette-choice-name">{compactPaletteName(p.name)}</span></button>
+              <button class="palette-choice" aria-pressed={fullPalette.id === p.id} aria-label={p.name} use:tooltip={`${p.name} · ${p.colors.length} colors${p.source?.credit ? ' · ' + p.source.credit : ''}`} onclick={() => onpalette(p)}><span class="palette-circle"><PalettePreview colors={p.colors}/></span><span class="palette-choice-name">{p.name}</span></button>
             {/each}
           {/if}
         </div>

@@ -1789,9 +1789,12 @@ rail contains one round preview per palette with its name underneath. It scrolls
 with faded edges when needed and reveals the selected choice. The header has the compact
 1-bit/Palette switch first, so its position is independent of the selected name. The
 selected name sits to its right only when measured space allows
-the name, switch and actions to fit; never force another header row. Names are shortened
-visually, retaining complete accessible labels and shared tooltips. Palette circles remain
+the name, switch and actions to fit; never force another header row. Rail labels render
+the complete name in a fixed single-line width, with CSS ellipsis based on actual rendered
+width rather than a character-count abbreviation. Accessible labels and shared tooltips
+retain the complete name. Header/comparison names remain compact. Palette circles remain
 44px. Touch targets are at least 44px; fine-pointer desktop header controls remain compact.
+Family buttons transition only colors and shadows, so breakpoint size changes are immediate.
 The transparency group has symmetric 2px padding around fixed 32px fine-pointer or
 44px touch buttons, with centered glyphs. Full-height masks fade both previews and names
 over 36px at scrollable edges; chevrons float over the underlying glass without a dark
@@ -1842,6 +1845,32 @@ are displayed; this incomplete draft cannot be saved or exported as a complete b
 Try solid candidates or a smaller prepared input. Cancel changes neither selected palette
 nor saved records. Image scanning/preview jobs yield and cancel; closing releases the
 dialog's owned source and outstanding scan.
+An asynchronous GIF-limit failure cannot replace an editor already open. Preserve its
+request, draft, editing limit and focus-return trigger; show a reactive inline alert
+identifying the failed export palette and instructing the user to finish/cancel, then try
+Save again. No deferred dialog or automatic replacement is queued. Without an open editor,
+the existing explicit 255-color copy flow applies.
+
+### Concise Help and description
+
+The app description is “Convert sprites and animated GIFs with 1-bit styles or color
+palettes.” Help, README and page/social metadata use this scope, with the existing local
+privacy statement. Help keeps the four-step layout and compact shortcut table at its
+existing 420px maximum. Palette says “Choose 1-bit or Palette. Pick a preset; import an
+image or colors.” Style says “In 1-bit, pick an effect and tune it.” No extra explanatory
+section or palette count is added.
+
+The table shows Next style only in 1-bit. Its settings row follows the dock: Style
+settings in 1-bit; Palette settings for partial source alpha or a nondefault palette cut;
+otherwise no settings row. Palette navigation, image actions and device-specific shortcut
+wording remain. Native dismissal, first-visit welcome and background gesture guards remain.
+Initial focus goes to the top Close button, revealing the introduction instead of scrolling
+to Got it on narrow or short screens. Its accessible Close label is sufficient; it has no
+redundant focus tooltip, so a single Escape dismisses Help on initial entry. Other tooltips
+retain their existing Escape handling. Enter still dismisses; Tab reaches Got it using
+native dialog focus behavior. Reopening after scrolling reveals the top again. This supersedes
+the historical footer autofocus rule. Dismissal returns focus to the visible More button,
+including after the first-visit welcome, rather than the Help row in its closed menu.
 
 ### Persistence and reset
 
