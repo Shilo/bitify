@@ -32,7 +32,7 @@ npm run dev
 
 Saved palettes stay on this browser/device. Reset settings keeps them unless **Delete saved palettes** is selected. Export HEX backups to keep a portable copy. The new palette workflows have browser automation coverage; physical-phone and Safari validation remain outstanding.
 
-Open Palette to choose **1-bit** or **Palette**. In Palette, the import icon accepts an image, palette file or pasted colors; the edit icon opens color review. The **Nearest** settings popup offers **Matching: Oklab / RGB**, remembered across visits, and Opacity cut when needed. Oklab compares perceived differences; RGB compares channel values. Neither guarantees the best-looking result for every palette. Large palettes use up to twelve representative colors in their small preview; conversion uses the full palette. Help in More lists the controls available in the current mode. See [palettes.md](docs/palettes.md) and [styles.md](docs/styles.md) for details.
+Open Palette to choose **1-bit** or **Palette**. In Palette, the import icon accepts an image, palette file or pasted colors; the edit icon opens color review. The **Nearest** settings popup offers **Matching: Oklab / RGB**, remembered across visits, and Opacity cut when needed. Oklab compares perceived differences; RGB compares channel values. Neither guarantees the best-looking result for every palette. Large palettes use up to sixteen representative colors in their small preview; conversion uses the full palette. Help in More lists the controls available in the current mode. See [palettes.md](docs/palettes.md) and [styles.md](docs/styles.md) for details.
 
 Built with Svelte 5 and Vite. Every push to `main` is deployed to GitHub Pages by [deploy.yml](.github/workflows/deploy.yml).
 

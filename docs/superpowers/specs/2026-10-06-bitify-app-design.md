@@ -1827,7 +1827,8 @@ Full palette conversion uses original source RGB, independently of legacy bright
 threshold and structural settings. It has no None or Swap role and no separate style or
 single-option method chooser. Source alpha below the family-specific Opacity cut becomes
 empty; default 128, adjustable 1–255. Alpha zero always stays empty, and all other output
-alpha is binary. The settings icon/panel is always available, with a small Nearest heading: one compact Matching row
+alpha is binary. The settings icon/panel is always available, with a 16px semibold Nearest heading in the
+shared body font and heading color above 13px setting labels: one compact Matching row
 offers Oklab / RGB, followed by Opacity cut only for partial source alpha or a nondefault cut.
 Oklab compares squared Euclidean perceived-color coordinates; RGB compares squared
 unweighted encoded sRGB8 channel differences. There is no brightness/contrast adjustment.
@@ -1862,7 +1863,7 @@ retain the complete name. Header names remain compact; comparison names use CSS 
 Palette circles remain
 44px. Touch targets are at least 44px; fine-pointer desktop header controls remain compact.
 Family buttons transition only colors and shadows, so breakpoint size changes are immediate.
-Full-palette circles show all entries up to twelve; larger sets use twelve actual colors
+Full-palette circles show all entries up to sixteen; larger sets use sixteen actual colors
 selected greedily for RGB coverage, seeded by the color nearest the integer-summed mean.
 Selected colors retain original order. This thumbnail overview avoids hairline wedges;
 conversion, editing and export still use every palette entry. It does not imply frequency
@@ -2008,3 +2009,8 @@ and theme cases, and web/Discord URL/GIF drops including errors, progress and ca
 Codex browser independently passed the desktop, phone and asynchronous drop-review flows.
 Settings rows, cut adjustment/reset and exact mode-specific Help text were inspected.
 The thumbnail overview does not alter output pixels. Physical-phone/Safari checks remain open.
+
+Follow-up: the Nearest heading uses 16px/600 body typography and the existing heading
+color, distinct from 13px setting labels. The thumbnail cap is sixteen, keeping PICO-8
+and DawnBringer complete. The final follow-up passes 359 unit tests, build, and 120 targeted
+layout/theme cases. Auto matching remains research only; no per-image policy was added.

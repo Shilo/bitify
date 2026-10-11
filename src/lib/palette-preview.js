@@ -1,7 +1,7 @@
 // Thumbnail overview only. Stored colors, their order and conversion are untouched.
 // RGB distance gives cheap broad coverage; every displayed color is an actual entry.
 export function palettePreviewColors(colors) {
-  if (colors.length <= 12) return colors.slice();
+  if (colors.length <= 16) return colors.slice();
   const rgb = colors.map(color => {
     const value = parseInt(color.slice(1), 16);
     return [value >>> 16, value >>> 8 & 255, value & 255];
@@ -17,7 +17,7 @@ export function palettePreviewColors(colors) {
   }
   const selected = new Set([seed]);
   const minimum = rgb.map(value => distance(value, rgb[seed]));
-  while (selected.size < 12) {
+  while (selected.size < 16) {
     let next = -1, farthest = -1;
     for (let i = 0; i < rgb.length; i++) if (!selected.has(i) && minimum[i] > farthest) { next = i; farthest = minimum[i]; }
     selected.add(next);

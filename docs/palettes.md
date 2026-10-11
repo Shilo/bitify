@@ -155,7 +155,7 @@ not a promise that every selected color will be used.
 
 Curated presets are immutable. Edit creates a named copy. Saved and session-only palettes
 follow the presets on the same rail, with a divider. One round preview represents each
-palette. A small preview shows all colors up to twelve; larger palettes show twelve actual
+palette. A small preview shows all colors up to sixteen; larger palettes show sixteen actual
 colors selected to cover their RGB range, in original palette order. This overview avoids
 hairline wedges and does not change conversion, editing or export colors. It does not
 represent color frequency or which colors an image uses. Palette circles remain 44px; touch targets are at least 44px, while fine-pointer
@@ -204,7 +204,7 @@ remain research ideas, not available app controls.
 Output pixels are fully opaque or fully transparent. Opacity cut defaults to 128:
 source alpha below the cut becomes empty. The range is 1–255, so alpha zero always stays
 empty. Palette settings always offers the compact Oklab / RGB control. Opacity cut appears
-only when an image has partial alpha or the cut has changed. The popup's small **Nearest**
+only when an image has partial alpha or the cut has changed. The popup's 16px semibold **Nearest**
 title identifies the conversion method for both matching choices. Reset restores Oklab and cut
 128 without changing the selected palette. Neither rule is universally visually best;
 compare with the original, especially when a palette lacks the source's hue. Other color

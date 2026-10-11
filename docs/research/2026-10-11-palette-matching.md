@@ -77,3 +77,36 @@ library deletion preserves settings and saved colors, and successful reset resto
 Oklab/cut128. The async options-capture unit test uses a deterministic clock and an
 uncached later-batch color so neither one-batch completion nor memoization can hide a
 metric mutation. The corrected full 324-test suite passed again.
+
+## Automatic matching challenge
+
+A per-image RGB/Oklab chooser is technically feasible, but no validated rule here can
+identify the artist's preferred result. Scoring both outputs by RGB error always favors
+RGB nearest (or ties); scoring by Oklab error always favors Oklab nearest (or ties).
+This follows directly from each exhaustive per-pixel minimization, not from an empirical
+claim of visual superiority. A hue/chroma score, third metric or classifier would encode
+another preference; the source pixels alone do not identify the desired preference.
+
+A low-color sprite classifier might suggest RGB, but authored sprites can still favor
+perceptual matching. A sampled histogram can bound candidate analysis, while missing rare
+colors. These six sources have 1,491 unique visible RGBs in their union, making histogram
+analysis plausibly affordable; no Auto implementation or timing benchmark was performed.
+Large noisy images and multi-frame animations can substantially increase candidate work.
+Detection must be frozen from original data, rather than reselected for reduced previews
+or changing animation frames, to avoid view-dependent output and temporal instability.
+
+Independent scalar references found two shared source colors that map differently under
+the two offered rules. For example #395350 appears in building 1 at (72,17) and building 2
+at (134,60): Oklab picks #20564b, RGB picks #4a5951 from the supplied 255-color palette.
+If per-image Auto chose different rules for these two images, the same original RGB would
+no longer receive the same output RGB. Both outputs would still belong to the shared
+palette; this is a color-mapping consistency risk, not loss of palette membership.
+
+A single batch recommendation would preserve mapping when applied globally, but its
+quality objective needs stated intent and representative human-rated validation. It
+also needs rules for additions, edits and animation analysis. Do not add Auto now.
+Keep Oklab as default and the global explicit RGB/Oklab choice; use RGB for these
+buildings when minimizing original encoded-channel differences is the priority.
+A future optional batch suggestion is a research candidate, not an accurate automatic
+winner or a current app control. The main agent and reviewer challenged sampled scores,
+low-color classification and global selection, and agree on this recommendation.

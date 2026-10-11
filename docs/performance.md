@@ -817,8 +817,8 @@ emulation passed, including partial alpha; physical phone and Safari checks rema
 
 ### Palette preview refinement
 
-The small palette circle caps its displayed sectors at twelve actual palette colors.
-Selection costs at most 256 entries × twelve passes when palette metadata changes,
+The small palette circle caps its displayed sectors at sixteen actual palette colors.
+Selection costs at most 256 entries × sixteen passes when palette metadata changes,
 not per source pixel or animation frame. Integer RGB sums seed the greedy range coverage;
 conversion and export use the unchanged full palette. Comparison-label transitions are
 limited to colors and shadows so responsive widths settle without geometry animation.
@@ -831,3 +831,9 @@ integration categories. Layout checks covered 80 cases plus 40 short-label/theme
 web-image/GIF drop checks passed in both automated and native Codex browser flows.
 Partial-alpha Opacity cut, reset, paired settings rows and conditional Help were checked.
 Physical-phone and Safari validation remain outstanding.
+
+The sixteen-sector/title follow-up passed 359 unit tests and a production build, plus
+80 settings/layout cases and 40 short-name/theme cases against the new assets. Rendered
+PICO-8 and DawnBringer previews retain all sixteen colors in their original order. The
+16px title and paired settings fit native Codex 320px portrait and 844px landscape checks.
+Conversion algorithms are unchanged; prior conversion/export results remain historical.
