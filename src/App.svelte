@@ -14,6 +14,10 @@
   import Tile from './Tile.svelte';
   import PixelIcon from './PixelIcon.svelte';
   import ImageViewer from './ImageViewer.svelte';
+  import PaletteImport from './PaletteImport.svelte';
+  import { FULL_PRESETS, LIBRARY_KEY, restoreLibrary, savePalette, deletePalette } from './lib/palette-library.js';
+  import { preparePalette } from './lib/quantize.js';
+  import { restorePaletteState, conversionSnapshot, fullPaletteImage } from './lib/palette-state.js';
   import { tooltip } from './lib/tooltip.js';
   import { packWorkspaceControls } from './lib/workspace-controls.js';
   import logoUrl from './assets/logo.gif';
@@ -32,6 +36,41 @@
     // no storage
   }
   const saved = restore(stored, STYLES.map(s => s[0]));
+  let initialLibrary = [];
+  try { initialLibrary = restoreLibrary(localStorage.getItem(LIBRARY_KEY)); } catch { /* Session still works. */ }
+  let library = $state.raw(initialLibrary);
+  const fullSaved = restorePaletteState(stored, initialLibrary);
+  let family = $state(fullSaved.family), paletteId = $state(fullSaved.paletteId), alphaCut = $state(fullSaved.alphaCut);
+  let sessionPalettes = $state.raw([]);
+  const savedPalettes = $derived([...library, ...sessionPalettes]);
+  const fullPalette = $derived([...FULL_PRESETS, ...savedPalettes].find(p => p.id === paletteId) ?? FULL_PRESETS[0]);
+  const prepared = $derived(preparePalette(fullPalette.colors));
+  let paletteRequest = $state.raw(null), paletteTrigger;
+  let deleteImports = $state(false);
+  function selectPalette(p) { paletteId = p.id; family = 'full-palette'; showOriginal = false; }
+  function editPalette(p) {
+    paletteTrigger = document.querySelector('.image-viewer[open] button[aria-label="Save image"]') ?? document.activeElement;
+    paletteRequest = p ? { ...p, name: p.id.startsWith('preset-') ? p.name + ' copy' : p.name, expectedRevision: p.revision, forceCopy: !p.id.startsWith('user-') } : {};
+  }
+  function commitPalette(draft) {
+    const result = savePalette(localStorage, library, draft, { id: draft.id, expectedRevision: draft.expectedRevision });
+    library = result.records; selectPalette(result.record); return result.record;
+  }
+  function useSessionPalette(draft) {
+    const record = { ...draft, id: 'session-' + crypto.randomUUID(), revision: 1 };
+    sessionPalettes = [...sessionPalettes, record]; selectPalette(record); say('Using palette for this visit. Export HEX to keep a backup.');
+  }
+  function removePalette(id, revision) {
+    library = deletePalette(localStorage, library, id, { expectedRevision: revision });
+    if (paletteId === id) { paletteId = FULL_PRESETS[0].id; say('Palette deleted. PICO-8 selected.'); }
+  }
+  function reloadPalette(id) {
+    library = restoreLibrary(localStorage.getItem(LIBRARY_KEY));
+    return library.find(p => p.id === id);
+  }
+  $effect(() => on(window, 'storage', e => {
+    if (e.key === LIBRARY_KEY) library = restoreLibrary(e.newValue);
+  }));
 
   let first = $state(saved.first); // lines and dark pixels
   let second = $state(saved.second); // fill and light pixels
@@ -60,7 +99,7 @@
   });
   $effect(() => {
     try {
-      localStorage.setItem(storageKey, JSON.stringify({ first, second, none, style, settings, theme: themePick }));
+      localStorage.setItem(storageKey, JSON.stringify({ first, second, none, style, settings, theme: themePick, family, paletteId, alphaCut }));
     } catch {
       // no storage; the settings last until the page is closed
     }
@@ -127,7 +166,7 @@
   // Editing colors or conversion settings returns to the converted result. Temporary
   // comparison stays separate, so releasing a hold never restores an outdated preference.
   $effect(() => {
-    first, second, none, style, set;
+    first, second, none, style, set, family, fullPalette, alphaCut;
     showOriginal = false;
   });
   let spaceHeld = $state(false);
@@ -190,9 +229,14 @@
   // Reset settings puts back everything kept between visits: the colors, the style, every style's settings
   // and the theme. The images stay. The effect above then stores the defaults over what was kept.
   function resetAll() {
+    if (deleteImports) {
+      try { localStorage.removeItem(LIBRARY_KEY); } catch { say('Saved palettes could not be deleted. Settings were not reset.'); return; }
+      library = []; sessionPalettes = [];
+    }
     const fresh = restore(null, STYLES.map(s => s[0]));
     ({ first, second, none, style, settings } = fresh);
     themePick = fresh.theme;
+    family = 'two-color'; paletteId = FULL_PRESETS[0].id; alphaCut = 128;
     say('Settings reset.');
   }
   let shared = $state.raw(null), sharedTrigger; // the image the sheet is for; it stays set after the sheet closes, until the next one
@@ -280,6 +324,13 @@
   // palette, and a message names it. `dir` is 1 for the next and -1 for the one before.
   let custom; // the user's own two colors, kept as a stop among the palettes (see stepPalette)
   function step(palettes, dir) {
+    if (family === 'full-palette') {
+      if (palettes) {
+        const choices = [...FULL_PRESETS, ...savedPalettes], at = choices.findIndex(p => p.id === fullPalette.id);
+        const p = choices[(at + dir + choices.length) % choices.length]; selectPalette(p); say(`Palette: ${p.name}`, 1400);
+      }
+      return;
+    }
     let name, at, of;
     if (palettes) {
       let palette;
@@ -339,6 +390,7 @@
     swipe = e.touches.length === 1 && !e.defaultPrevented && onWall(e) ? { x, y } : null;
   }
   function touchmove(e) {
+    if (document.querySelector('dialog[open]')) { swipe = null; return; }
     if (!swipe) return;
     const { clientX: x, clientY: y } = e.touches[0], dx = x - swipe.x, dy = y - swipe.y;
     if (!swipe.axis) {
@@ -413,6 +465,7 @@
   // It runs before the tiles redraw (`pre`): after them, each tile would first convert its image
   // as it was analysed before, and then again.
   $effect.pre(() => {
+    if (family === 'full-palette') return;
     if (dragging && items.reduce((n, item) => n + pixelsOf(item), 0) > 1e6) return;
     const next = items.map(reread);
     if (next.some((item, i) => item !== items[i])) items = next;
@@ -477,32 +530,33 @@
   // animation. These masks are of every pixel, always: never the smaller picture a tile draws.
   // `asked` is the settings at the moment of asking (see `asking`). A long job starts a moment
   // after it is asked for, and what it saves is what was on screen then, whatever is changed since.
-  const asking = () => ({ first: ink[0], second: ink[1], style, set });
+  const asking = () => conversionSnapshot({ family, palette: fullPalette, alphaCut, first: ink[0], second: ink[1], style, set });
   const about = (item, asked) => ({ name: item.name, w: item.img.w, h: item.img.h, first: asked.first, second: asked.second });
-  const still = (item, asked) => ({ ...about(item, asked), mask: mask(item.img, asked.style, asked.set) });
+  const still = (item, asked) => asked.family === 'full-palette' ? fullPaletteImage(item, asked, { still: true }) : ({ ...about(item, asked), mask: mask(item.img, asked.style, asked.set) });
   const bitified = (item, asked) =>
-    item.frames
+    asked.family === 'full-palette' ? fullPaletteImage(item, asked) : item.frames
       ? { ...about(item, asked), loop: item.loop, frames: item.frames.map(f => ({ mask: mask(f.img, asked.style, asked.set), delay: f.delay })) }
       : still(item, asked);
 
   async function save(item) {
+    const asked = asking();
     try {
-      const downloading = `Downloading ${downloadName(item)}…`;
+      const downloading = `Downloading ${downloadName({ ...item, family: asked.family })}…`;
       say(downloading);
-      const asked = asking(), read = reread(item); // analysed as asked, also while a drag has put that off for the wall
-      await during(downloading, pixelsOf(item), () => saveOne(bitified(read, asked)));
+      const read = asked.family === 'full-palette' ? item : reread(item);
+      await during(downloading, pixelsOf(item), async () => saveOne(await bitified(read, asked)));
       say(downloading);
-    } catch {
-      say(`${item.name} could not be saved.`);
+    } catch (error) {
+      exportFailure(error, asked, `${item.name} could not be saved.`);
     }
   }
 
   // The clipboard takes a PNG but not a GIF, so an animation is copied as its first frame.
   async function copy(item) {
     try {
-      const asked = asking(), read = reread(item);
+      const asked = asking(), read = asked.family === 'full-palette' ? item : reread(item);
       // the clipboard is asked at once, as Safari demands, and handed the PNG when it has been made
-      await copyOne(during(`Copying ${item.name}…`, item.img.w * item.img.h, () => pngBlob(still(read, asked))));
+      await copyOne(during(`Copying ${item.name}…`, item.img.w * item.img.h, async () => pngBlob(await still(read, asked))));
       say(`${item.name} copied${item.frames ? ' as a still image' : ''}.`);
     } catch {
       say(`${item.name} could not be copied.`);
@@ -510,19 +564,27 @@
   }
 
   async function saveEverything() {
+    const asked = asking();
     try {
       const selected = [...items]; // the images on the wall now, even if some are removed before the job starts
       if (!selected.length) return;
       const downloading = selected.length > 1
         ? `Downloading bitify.zip (${selected.length} images)…`
-        : `Downloading ${downloadName(selected[0])}…`;
+        : `Downloading ${downloadName({ ...selected[0], family: asked.family })}…`;
       say(downloading);
-      const asked = asking(), all = selected.map(reread);
+      const all = asked.family === 'full-palette' ? selected : selected.map(reread);
       await during(downloading, all.reduce((sum, item) => sum + pixelsOf(item), 0), () => saveAll(all, item => bitified(item, asked)));
       say(downloading);
-    } catch {
-      say('The images could not be saved.');
+    } catch (error) {
+      exportFailure(error, asked, 'The images could not be saved.');
     }
+  }
+  function exportFailure(error, asked, fallback) {
+    if (error.code !== 'PALETTE_GIF_LIMIT') { say(fallback); return; }
+    say('GIF needs room for transparency. No file was downloaded.');
+    paletteTrigger = document.querySelector('.image-viewer[open] button[aria-label="Save image"]') ?? document.activeElement;
+    paletteRequest = { name: [...asked.name].slice(0, 55).join('') + ' GIF', colors: [...asked.colors], forceCopy: true, maxColors: 255,
+      notice: 'GIF needs room for transparency. Remove at least one color and save a 255-color copy, then select Save image again. No file was downloaded.', source: { kind: 'copy' } };
   }
 
   // Background taps use the same stationary-press rules as image taps. Controls,
@@ -561,6 +623,7 @@
 
   const hasFiles = e => e.dataTransfer?.types.includes('Files');
   function dragenter(e) {
+    if (document.querySelector('dialog[open]')) return;
     if (hasFiles(e)) { e.preventDefault(); dragDepth++; }
   }
   function dragover(e) {
@@ -570,11 +633,13 @@
     if (hasFiles(e)) dragDepth = Math.max(0, dragDepth - 1);
   }
   function drop(e) {
+    if (document.querySelector('dialog[open]')) { e.preventDefault(); dragDepth = 0; return; }
     e.preventDefault();
     dragDepth = 0;
     if (e.dataTransfer?.files.length) addFiles([...e.dataTransfer.files]);
   }
   function paste(e) {
+    if (document.querySelector('dialog[open]')) return;
     if (e.clipboardData?.files.length) addFiles([...e.clipboardData.files]);
   }
 
@@ -632,7 +697,7 @@
   <div class="probe" bind:clientWidth={wallWidth} bind:clientHeight={wallHeight}></div>
   <div class="tiles">
     {#each canvasItems as item (item.id)}
-      <Tile {item} inset={IMAGE_INSET} first={ink[0]} second={ink[1]} {style} {set}
+      <Tile {item} inset={IMAGE_INSET} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} {alphaCut}
         flipped={effectiveOriginal} comparing={previewing} budget={dragging ? DRAG_MS / canvasItems.length : 0}
         oncompare={compareHold} onopen={items.length ? openImage : undefined}
         onactivate={items.length ? undefined : () => picker.click()}
@@ -646,7 +711,7 @@
 </div>
 
 {#if viewed}
-  <ImageViewer item={viewed} first={ink[0]} second={ink[1]} {style} {set} {busy} {message} flipped={viewInitialOriginal}
+  <ImageViewer item={viewed} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} {alphaCut} {busy} {message} flipped={viewInitialOriginal}
     onsave={viewed.id === 0 ? undefined : () => save(viewed)}
     oncopy={viewed.id === 0 ? undefined : () => copy(viewed)}
     onclose={async () => { const trigger = viewTrigger, keyboard = viewKeyboardFocus; viewing = null; await tick(); if (keyboard) trigger?.focus({ preventScroll: true }); else trigger?.blur(); }} />
@@ -655,7 +720,7 @@
 <CanvasGrid {items} {example} />
 
 <div class="workspace-tools" class:canvas-scrollable={canvasScrollable} use:measureWorkspaceTools>
-<Dock bind:first bind:second bind:none bind:style bind:settings bind:showOriginal bind:dragging {previewing} {canvasScrollable} {autos} {soft} />
+<Dock bind:first bind:second bind:none bind:style bind:settings bind:showOriginal bind:dragging bind:family bind:alphaCut {fullPalette} fullPresets={FULL_PRESETS} {savedPalettes} onpalette={selectPalette} onimportpalette={() => editPalette(null)} oneditpalette={editPalette} {previewing} {canvasScrollable} {autos} {soft} />
 <nav class="bar file-tools" class:has-images={!!items.length} aria-label="File and app actions">
   <div class="file-actions" class:awaiting-import={!items.length} role="group" aria-label="Add and save images">
     <button class="btn glass-btn icon-only export-action" class:glass-btn--primary={!!items.length} disabled={!items.length} aria-label={items.length > 1 ? 'Save all images' : 'Save image'} use:tooltip={items.length > 1 ? 'Save all converted images as a ZIP archive.' : items.length ? 'Save the converted image at its original size.' : 'Add an image to enable saving.'} onclick={saveEverything}><PixelIcon name="save" /><span class="save-label" aria-hidden="true">Save</span></button>
@@ -667,6 +732,11 @@
   <button class="btn glass-btn icon-only" bind:this={moreTrigger} aria-haspopup="true" aria-label="More" use:tooltip={'Open appearance, help and app options.'} onclick={e => { clearComparison(); if (e.detail) e.currentTarget.blur(); more.showModal(); }}><PixelIcon name="more" /></button>
 </nav>
 </div>
+
+{#if paletteRequest}
+  <PaletteImport request={paletteRequest} onsave={commitPalette} ondelete={removePalette} onreload={reloadPalette} onuse={useSessionPalette}
+    onclose={async () => { paletteRequest = null; await tick(); (paletteTrigger?.isConnected ? paletteTrigger : document.querySelector('button[aria-label="Palette"]'))?.focus(); }} />
+{/if}
 
 {#if dragDepth > 0}
   <div class="drop" style:background={second} style:color={overlayInk}>Drop to bitify</div>
@@ -704,7 +774,7 @@
     <PixelIcon name="github" />GitHub<PixelIcon name="out" />
   </a>
   <hr />
-  <button class="btn undo glass-btn" onclick={() => { more.close(); confirm.showModal(); }}><PixelIcon name="reset" />Reset settings</button>
+  <button class="btn undo glass-btn" onclick={() => { more.close(); deleteImports = false; confirm.showModal(); }}><PixelIcon name="reset" />Reset settings</button>
 </dialog>
 <!-- Native dialog handles focus/inertness; GlassKit provides the centered modal anatomy. -->
 <dialog class="glass-modal-overlay is-active reset-modal" bind:this={confirm}
@@ -712,10 +782,10 @@
   onclick={e => e.target === confirm && confirm.close()} onclose={() => moreTrigger?.focus()}>
   <div class="glass-modal">
     <div class="glass-modal__header"><h2 class="glass-modal__title" id="confirm-title">Reset all settings?</h2></div>
-    <div class="glass-modal__body"><p id="confirm-description">Colors, styles and theme return to their defaults.<br /><br />Your images stay.</p></div>
+    <div class="glass-modal__body"><p id="confirm-description">Colors, styles and theme return to their defaults.<br /><br />{deleteImports ? 'Saved palettes will be deleted. Your images stay.' : 'Your images and saved palettes stay.'}</p>{#if savedPalettes.length}<label class="reset-palette-option"><input type="checkbox" bind:checked={deleteImports}/>Delete saved palettes ({savedPalettes.length})</label>{/if}</div>
     <div class="glass-modal__footer">
       <button class="glass-modal__action" onclick={() => confirm.close()}>Cancel</button>
-      <button class="glass-modal__action glass-modal__action--danger" onclick={() => { confirm.close(); resetAll(); }}>Reset</button>
+      <button class="glass-modal__action glass-modal__action--danger" onclick={() => { confirm.close(); resetAll(); }}>{deleteImports ? 'Reset and delete palettes' : 'Reset'}</button>
     </div>
   </div>
 </dialog>
@@ -742,12 +812,12 @@
       <img class="help-logo" src={helpLogoUrl} alt="" width="48" height="48" />
       <div>
         <h2 id="help-title">Bitify</h2>
-        <p>Instantly convert sprites and animated GIFs to <span>1-bit</span> colors and styles.</p>
+        <p>Convert sprites and animated GIFs to <span>1-bit</span> styles or a full color palette.</p>
       </div>
     </header>
     <ol>
       <li><PixelIcon name="import" /><b>Add</b>{touch ? 'Choose images.' : 'Choose, drop or paste images.'}</li>
-      <li><PixelIcon name="grid" /><b>Palette</b>Pick one or two colors, or a preset.</li>
+      <li><PixelIcon name="grid" /><b>Palette</b>Pick 1-bit colors or a full palette. Import your own in Palette mode.</li>
       <li><PixelIcon name="sliders" /><b>Style</b>Pick an effect. Tune its settings.</li>
       <li><PixelIcon name="save" /><b>Save</b>Save or copy images.</li>
     </ol>

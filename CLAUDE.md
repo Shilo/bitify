@@ -1,6 +1,6 @@
 # Bitify
 
-Bitify is a browser-only tool that instantly converts sprites and animated GIFs to 1-bit colors and styles: each image is redrawn in exactly two colors the user picks, either of which can be None (transparent). There is no backend and nothing is uploaded.
+Bitify is a browser-only tool that converts sprites and animated GIFs with either 1-bit styles or a full palette of 1–256 unique opaque RGB colors. The 1-bit family uses two chosen colors, either of which can be None (transparent). There is no backend and nothing is uploaded.
 
 ## What it does
 
@@ -18,6 +18,8 @@ npx vitest run src/lib/bitify.test.js        one test file
 npx vitest run -t "part of a test name"      one test
 npm run build                                writes dist/
 
+node bench/palette-qa.mjs dist                built-browser palette/export regression
+
 Every push to main deploys to GitHub Pages (.github/workflows/deploy.yml).
 
 ## How the code fits together
@@ -26,11 +28,19 @@ Svelte 5 with runes, plain JavaScript, no SvelteKit.
 
 src/lib holds the logic as DOM-free modules, each with unit tests: bitify.js turns pixels into a one-byte-per-pixel mask and the mask into two-color pixels, layout.js sizes the tiles and picks how many of an image's pixels a tile converts, presets.js lists the palettes and styles and steps through them, gesture.js turns wheel moves into single steps and says when a slider of the Style panel is being dragged, gif.js reads and writes GIFs (loaded on demand), save.js encodes PNGs, names files and builds the zip, settings.js lists every setting a style can have and restores what was kept between visits.
 
+The Palette panel's 1-bit/Palette switch selects the conversion family. Both use one horizontal row of round palette choices with names underneath. The selected name sits left of the switch only when measured space permits; import/edit are icon buttons in the Palette family. `PaletteImport.svelte` is a native dialog for image/text import, paged color review, editing, named saving, deletion and HEX backup. Reset retains saved palettes unless its explicit deletion checkbox is selected.
+
+`palette-library.js` owns normalized colors, immutable full presets and the versioned `bitify-palettes-v1` local library; `palette-import.js` scans every visible source pixel and parses supported text formats; `palette-decode.js` uses browser color-managed sRGB image decoding. `quantize.js` prepares an immutable palette snapshot, matches nearest Oklab colors with exact RGB membership first, and yields cooperatively for previews and exports. Results use Uint16 indexes, with 256 reserved for empty. `palette-state.js` keeps family restoration and save snapshots separate from legacy settings. Palette PNGs pack the used colors directly at 1/2/4/8 bits, with a direct RGBA fallback for all 256 colors plus empty. Full palette GIF export makes a used-color preflight, then converts frames sequentially; `palette-gif-worker.js` compresses them with acknowledgment/backpressure. Its global table includes transparency and must fit 256 entries. Failures never silently remove colors or download part of a ZIP.
+
+Legacy conversion loops remain independent. Switching families retains the legacy colors/style/settings. Full palette Opacity cut is 1–255, default 128; its settings control appears when source alpha is partial or the cut has changed. Source RGB supplies nearest matching; there is no brightness threshold, None/Swap role or structural style in this family. Full palette animation playback waits for the current converted frame, so a slow preview may play slower than the source; exports retain source delays.
+
 App.svelte owns all state and passes it down. Dock.svelte edits settings through bindable props. Tile.svelte derives masks from an image and repaints when they or a color change. A style's settings go to mask as one object; two of them, Brightness and Opacity cut, are read by analyze instead, so App.svelte analyses the images again when the style in use has other values for them. A tile converts only what it can show: for an image larger than the tile, a picture of it at the tile's own size (the width and height given to mask), its pixels spread evenly over the image. Saving and copying convert every pixel.
 
 CSS is global: src/foundation.css orders GlassKit, src/app.css geometry and src/glass.css materials. Floating islands is the single design. Components have no style blocks, and there is no border-box reset; sizes depend on that.
 
 PNGs and GIFs are encoded by hand, not through a canvas, because some browsers add noise when a canvas is read back. A PNG is written with a palette and two bits per pixel, straight from the mask.
+
+The preceding two-bit PNG rule applies to the 1-bit family. Full palette exports also avoid canvas encoding. Import exactness refers to browser-decoded visible sRGB values, not arbitrary original file/profile bytes; the supplied PNG fixtures matched an independent decoder. Physical-phone and Safari testing of the new family has not yet been completed. For the built-browser regression harness after a feature commit, set `BASE_REF` to the pre-feature revision; its default `HEAD` is suitable while the feature is still uncommitted.
 
 ## Things that bite
 

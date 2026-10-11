@@ -1,9 +1,18 @@
 # Conversion styles
 
-How each of Bitify's eleven styles decides which of the two colors a pixel gets, and what each
+How each of Bitify's eleven **1-bit** styles decides which of the two colors a pixel gets, and what each
 style's own settings change. The code is in [src/lib/bitify.js](../src/lib/bitify.js); the
 tests beside it pin every rule described here. The settings are listed in
 [src/lib/settings.js](../src/lib/settings.js).
+
+The **Palette** family is separate from these structural and dithering styles. It matches
+each visible source RGB to the nearest selected color in Oklab, after preserving exact
+palette RGB matches. It accepts 1–256 unique opaque colors; using a palette does not
+guarantee every color appears in an image. Output alpha stays binary, with a separate
+Opacity cut of 1–255 (128 by default). Its settings control appears for partially
+transparent sources or a changed cut. There is no threshold, Swap, None or style chooser
+in this family. Switching back to 1-bit restores the retained colors, style and settings.
+See [palettes.md](palettes.md) for import and palette library behavior.
 
 The menu and stepping order is **Cutout → Solid → Lines → Stencil → Icon → Checker →
 Bayer → Hatch → Atkinson → Noise → Shape**. General shape conversions come first,

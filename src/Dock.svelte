@@ -14,6 +14,7 @@
   import { tick } from 'svelte';
   import { sliderDrag } from './lib/gesture.js';
   import { tooltip } from './lib/tooltip.js';
+  import { compactPaletteName } from './lib/palette-label.js';
 
   let {
     first = $bindable(),
@@ -28,6 +29,9 @@
     dragging = $bindable(), // whether a slider of the style panel is being dragged
     autos, // [lowest, highest] value Auto is using, for each setting that has an Auto
     soft, // whether an image on the wall has a partly see-through pixel
+    family = $bindable('two-color'),
+    alphaCut = $bindable(128),
+    fullPalette, fullPresets = [], savedPalettes = [], onpalette, onimportpalette, oneditpalette,
   } = $props();
 
   let panel = $state(null); // null, 'palettes' or 'style'
@@ -54,7 +58,45 @@
   // App measures the complete bottom workspace, including editing and file rows.
   let panelHeight = $state(0);
 
-  const styleName = $derived(STYLES.find(s => s[0] === style)[1]);
+  const styleName = $derived(family === 'full-palette' ? 'Palette' : STYLES.find(s => s[0] === style)[1]);
+  const selectedName = $derived(family === 'full-palette' ? fullPalette.name : PRESETS.find(chosen)?.name ?? 'Custom');
+  let showSelectedName = $state(false);
+  // Measure the candidate independently of its visibility. Hiding it must not
+  // change the fit calculation or trigger a resize/show/hide feedback loop.
+  function fitPaletteHeader(node) {
+    let disposed = false;
+    const measure = () => {
+      if (disposed) return;
+      const controls = node.querySelector('.palette-family-tabs'), actions = node.querySelector('.palette-header-actions');
+      const candidate = node.querySelector('.palette-name-measure');
+      const gap = parseFloat(getComputedStyle(node).gap) || 0;
+      showSelectedName = node.clientWidth >= controls.offsetWidth + actions.offsetWidth + candidate.offsetWidth + gap * 2;
+    };
+    const observer = new ResizeObserver(measure); observer.observe(node);
+    tick().then(measure); document.fonts.ready.then(measure);
+    return { update: () => tick().then(measure), destroy: () => { disposed = true; observer.disconnect(); } };
+  }
+  function paletteRail(node) {
+    let disposed = false;
+    const mark = () => {
+      node.parentNode.classList.toggle('rail-left', node.scrollLeft > 1);
+      node.parentNode.classList.toggle('rail-right', node.scrollLeft + node.clientWidth < node.scrollWidth - 1);
+    };
+    const reveal = () => {
+      if (disposed) return;
+      const button = node.querySelector('[aria-pressed="true"]');
+      if (button) {
+        const a = node.getBoundingClientRect(), b = button.getBoundingClientRect();
+        if (b.left < a.left + 6) node.scrollLeft += b.left - a.left - 6;
+        else if (b.right > a.right - 6) node.scrollLeft += b.right - a.right + 6;
+      }
+      mark();
+    };
+    const observer = new ResizeObserver(reveal); observer.observe(node);
+    node.addEventListener('scroll', mark, { passive: true }); tick().then(reveal);
+    return { update: () => tick().then(reveal), destroy: () => { disposed = true; observer.disconnect(); node.removeEventListener('scroll', mark); } };
+  }
+  $effect(() => { family; pop = null; });
   const demo = key => {
     const preview = stylePreview(key, settings[key], first, second, none);
     return new ImageData(preview.data, preview.width, preview.height);
@@ -185,29 +227,6 @@
     showOriginal = false;
     [first, second] = inOrder(p, first, second);
   }
-  // The palettes scroll sideways. They open scrolled to the chosen one, and the panel is marked
-  // with the sides that have more to scroll to, which app.css shows as a fade with an arrow.
-  function scroller(row) {
-    const chips = row.querySelector('.chips');
-    const mark = () => {
-      row.parentNode.classList.toggle('more-left', row.scrollLeft > 1);
-      row.parentNode.classList.toggle('more-right', row.scrollLeft + row.clientWidth < row.scrollWidth - 1);
-    };
-    // The chips go in two rows when one row does not fit, so more of them show at once. app.css
-    // keeps them in one row on a screen too short to spare the height.
-    const fit = () => {
-      chips.classList.remove('two');
-      chips.classList.toggle('two', row.scrollWidth > row.clientWidth + 1);
-      mark();
-    };
-    fit();
-    const chip = row.querySelector('.pal[aria-pressed="true"]');
-    if (chip) row.scrollLeft += chip.getBoundingClientRect().left - row.getBoundingClientRect().left - (row.clientWidth - chip.offsetWidth) / 2;
-    row.addEventListener('scroll', mark, { passive: true });
-    // the window, not the row: once in two rows the row no longer changes size as the window widens
-    addEventListener('resize', fit);
-    return { destroy: () => removeEventListener('resize', fit) };
-  }
 </script>
 
 <!-- A press outside what is open closes it and does nothing else: only the list of styles
@@ -282,34 +301,49 @@
 
 <div class="dock glass-card" class:canvas-scrollable={canvasScrollable} style:--setting-label-width={`${labelWidth}px`} bind:this={dock}>
   {#if panel === 'palettes'}
-    <div class="panel fit glass-card" bind:offsetHeight={panelHeight} onwheel={e => (e.currentTarget.querySelector('.pals').scrollLeft += e.deltaY)}>
-      <!-- The name/transparency controls stay fixed beside the swatches. A mouse wheel
-           anywhere in the panel scrolls the swatches, which have no visible scrollbar. -->
-      <span class="pname">
-        <span class="title"><span class="key">Palette</span> {PRESETS.find(chosen)?.name ?? 'Custom'}</span>
-        <!-- Which color is None, if either. It is no palette, so it sits with the name, apart from
-             the palettes: a small switch of three pictures, both colors and each color gone
-             (.seg.mini and .glyph in app.css). -->
-        <span class="seg mini glass-segmented" role="group" aria-label="Transparent color">
-          {#each ['Both colors', 'Transparent outlines and dark areas', 'Transparent fills and highlights'] as label, n}
-            <button class="glass-segmented__item" aria-pressed={none === n} aria-label={label} use:tooltip={['Draw both colors without making either transparent.', 'Make outlines and dark areas transparent.', 'Make fills and highlights transparent.'][n]} onclick={() => { none = n; showOriginal = false; }}><PalettePreview none={n} compact /></button>
-          {/each}
-        </span>
-      </span>
-      <div class="pals" use:scroller>
-        <div class="chips" role="group" aria-label="Palettes" style:--cols={Math.ceil(PRESETS.length / 2)}>
-          {#each PRESETS as p, i}
-            {#if i && i % 4 === 0}<span class="sep"></span>{/if}
-            <button
-              class="pal glass-btn"
-              aria-pressed={chosen(p)}
-              aria-label={p.name}
-              use:tooltip={`${p.name}: ${PALETTE_USES[p.name]}`}
-              onclick={() => choose(p)}
-            ><PalettePreview first={p.dark} second={p.light} /></button>
-          {/each}
+    <div class="panel palette-family-panel glass-card" bind:offsetHeight={panelHeight}>
+      <div class="palette-picker-header" use:fitPaletteHeader={selectedName + family}>
+        <span class="palette-name-measure" aria-hidden="true">{compactPaletteName(selectedName, 22)}</span>
+        <span class="palette-selected-name" hidden={!showSelectedName} use:tooltip={selectedName}>{compactPaletteName(selectedName, 22)}</span>
+        <div class="palette-family-tabs glass-segmented" role="group" aria-label="Color system">
+          <button class="glass-segmented__item" aria-pressed={family === 'two-color'} onclick={() => family = 'two-color'}>1-bit</button>
+          <button class="glass-segmented__item" aria-pressed={family === 'full-palette'} onclick={() => family = 'full-palette'}>Palette</button>
+        </div>
+        <div class="palette-header-actions">
+          {#if family === 'two-color'}
+            <span class="seg mini palette-transparency glass-segmented" role="group" aria-label="Transparent color">
+              {#each ['Both colors', 'Transparent outlines and dark areas', 'Transparent fills and highlights'] as label, n}
+                <button class="glass-segmented__item" aria-pressed={none === n} aria-label={label} use:tooltip={['Draw both colors.', 'Make front color transparent.', 'Make back color transparent.'][n]} onclick={() => { none = n; showOriginal = false; }}><PalettePreview none={n} compact /></button>
+              {/each}
+            </span>
+          {:else}
+            <button class="btn glass-btn icon-only" aria-label="Import palette" use:tooltip={'Import a palette from an image, a palette file or pasted hex colors.'} onclick={onimportpalette}><PixelIcon name="import" /></button>
+            <button class="btn glass-btn icon-only" aria-label="Edit palette" use:tooltip={fullPalette.id.startsWith('preset-') ? 'Edit a copy of this palette.' : 'Edit this palette or export a HEX backup.'} onclick={() => oneditpalette(fullPalette)}><PixelIcon name="edit" /></button>
+          {/if}
         </div>
       </div>
+      <div class="palette-rail-wrap">
+        <div class="palette-rail" role="group" aria-label={family === 'two-color' ? 'Palettes' : 'Full palettes'} use:paletteRail={family === 'full-palette' ? fullPalette.id : first + second}
+          onwheel={e => { if (Math.abs(e.deltaY) > Math.abs(e.deltaX) && e.currentTarget.scrollWidth > e.currentTarget.clientWidth) { e.preventDefault(); e.currentTarget.scrollLeft += e.deltaY; } }}>
+          {#if family === 'two-color'}
+            {#each PRESETS as p}
+              <button class="palette-choice" aria-pressed={chosen(p)} aria-label={p.name} use:tooltip={`${p.name}: ${PALETTE_USES[p.name]}`} onclick={() => choose(p)}><span class="palette-circle"><PalettePreview first={p.dark} second={p.light}/></span><span class="palette-choice-name">{compactPaletteName(p.name)}</span></button>
+            {/each}
+          {:else}
+            {#each [...fullPresets, ...savedPalettes] as p, i (p.id)}
+              {#if i === fullPresets.length}<span class="palette-library-divider" aria-hidden="true"></span>{/if}
+              <button class="palette-choice" aria-pressed={fullPalette.id === p.id} aria-label={p.name} use:tooltip={`${p.name} · ${p.colors.length} colors${p.source?.credit ? ' · ' + p.source.credit : ''}`} onclick={() => onpalette(p)}><span class="palette-circle"><PalettePreview colors={p.colors}/></span><span class="palette-choice-name">{compactPaletteName(p.name)}</span></button>
+            {/each}
+          {/if}
+        </div>
+      </div>
+    </div>
+  {:else if panel === 'style' && family === 'full-palette'}
+    <div class="panel palette-settings-panel glass-card" bind:offsetHeight={panelHeight}>
+      <label class="key" for="full-alpha-cut">Opacity cut</label>
+      <input id="full-alpha-cut" class="glass-range" type="range" min="1" max="255" bind:value={alphaCut} aria-label="Palette opacity cut"/>
+      <output for="full-alpha-cut">{alphaCut}</output>
+      <button class="btn glass-btn icon-only" disabled={alphaCut === 128} aria-label="Reset palette opacity cut" use:tooltip={'Restore the default opacity cut.'} onclick={() => alphaCut = 128}><PixelIcon name="reset"/></button>
     </div>
   {:else if panel === 'style'}
     <div class="panel style-panel glass-card" class:compact={chips} class:bare={!keys.length} bind:offsetHeight={panelHeight}>
@@ -386,17 +420,19 @@
     </div>
   {/snippet}
   {#snippet paletteButton()}
-    <button class="btn glass-btn icon-only" aria-expanded={panel === 'palettes'} aria-label="Palette" use:tooltip={'Choose a color pair or make one color transparent.'} onclick={() => toggle('palettes')}>
+    <button class="btn glass-btn icon-only" aria-expanded={panel === 'palettes'} aria-label="Palette" use:tooltip={'Choose 1-bit colors or a full palette.'} onclick={() => toggle('palettes')}>
       <PixelIcon name="grid" />
     </button>
   {/snippet}
   {#snippet styleButton()}
-    <button class="btn glass-btn icon-only" aria-expanded={panel === 'style'} aria-label="Style" use:tooltip={'Adjust the conversion style and its settings.'} onclick={() => toggle('style')}>
+    <button class="btn glass-btn icon-only" aria-expanded={panel === 'style'} aria-label={family === 'full-palette' ? 'Palette settings' : 'Style'} use:tooltip={family === 'full-palette' ? 'Adjust the palette opacity cut.' : 'Adjust the conversion style and its settings.'} onclick={() => toggle('style')}>
       <PixelIcon name="sliders" />
     </button>
   {/snippet}
   <div class="color-tools tool-group" role="group" aria-label="Colors and palette">
-    {@render colorPair()}
+    {#if family === 'full-palette'}
+      <button class="full-active-palette glass-btn" onclick={() => toggle('palettes')} aria-label={`Selected palette: ${fullPalette.name}, ${fullPalette.colors.length} colors`} use:tooltip={fullPalette.name}><PalettePreview colors={fullPalette.colors}/></button>
+    {:else}{@render colorPair()}{/if}
     {@render paletteButton()}
   </div>
   <span class="sep"></span>
@@ -407,7 +443,7 @@
       onclick={() => (showOriginal = !showOriginal)}>
       <span class="view-state" aria-hidden="true"></span><span>{styleName}</span>
     </button>
-    {@render styleButton()}
+    {#if family === 'two-color' || soft || alphaCut !== 128}{@render styleButton()}{/if}
     <span id="view-status" class="view-status">{effectiveOriginal ? 'Showing original images.' : `Showing images converted with ${styleName}.`}</span>
   </div>
 </div>

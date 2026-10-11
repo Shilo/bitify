@@ -1,11 +1,12 @@
 # Bitify design
 
 Date: 2026-10-06
-Status: Floating islands adopted October 9, 2026. The adoption section below supersedes historical visual references.
+Status: Floating islands adopted October 9, 2026; full palette family added October 11, 2026. The adoption sections below supersede historical visual references and the original two-color-only scope.
 
-Bitify converts pixel art images to 1-bit: every image is redrawn using two colors the
-user picks. One of the two may be None, which leaves its pixels transparent. It runs
-entirely in the browser. Nothing is uploaded.
+Bitify converts pixel art images with 1-bit styles or a full palette of 1–256 unique
+opaque RGB colors. In 1-bit, either of the two selected colors may be None, which leaves
+its pixels transparent. Full palettes classify source alpha separately. It runs entirely
+in the browser. Nothing is uploaded.
 
 The approved interactive prototype is saved next to this file as
 [2026-10-06-bitify-prototype.html](2026-10-06-bitify-prototype.html). It is a historical behavioral reference. The October 9 Floating islands adoption below
@@ -43,8 +44,9 @@ Stated by the user:
 Assumptions made here, open to correction:
 
 - Plain JavaScript, not TypeScript.
-- The two colors, which of them is None, the style and every style's settings are remembered between visits (see
-  "Remembered settings"). Nothing else is.
+- The two colors, None, style and style settings are remembered between visits. The October 11
+  full palette adoption additionally remembers family, selected palette and alpha cut, and
+  keeps explicitly saved named palettes in a separate local library. Source images are not persisted.
 - Exports are PNG at the original pixel size, with no upscaling option.
 - Animated WebP and APNG files are converted as their first frame only. (Animated GIFs are fully supported; see "Animated GIFs".)
 
@@ -1747,3 +1749,133 @@ Responsive Save label: the bottom Save icon expands into an icon-and-Save pill o
 Bottom file actions appear in Save, Add, Remove order on every screen size. Their DOM and keyboard focus order match their visual order.
 
 Desktop image Save uses the same GlassKit primary gradient and on-primary icon color as Save in the mobile image action sheet. Hover, keyboard focus and press retain the primary treatment without moving the button; forced colors use system Highlight/HighlightText. The action order, capsule geometry and save behavior remain unchanged.
+
+## October 11: full palette family and minimalist chooser
+
+This adoption supersedes the historical two-color-only palette scope, the old multi-row
+palette-chip presentation, and the statement that no named palettes are stored. Existing
+1-bit conversion algorithms, twelve color pairs, Swap/None roles, styles and settings
+remain independent. The default is still Glow/Cutout in 1-bit.
+
+### Conversion families
+
+- **1-bit:** the existing eleven structural/pattern styles and selected color pair. The
+  engine, preset ordering and per-style settings remain unchanged.
+- **Palette:** an allowed set of 1–256 distinct opaque sRGB8 colors, normalized to lowercase
+  six-digit hex. Every visible source RGB first checks exact palette membership, then
+  chooses the nearest Oklab entry. Equal distances retain the earliest entry. Every
+  opaque output belongs to the selected set; every selected color need not appear.
+
+Full palette conversion uses original source RGB, independently of legacy brightness,
+threshold and structural settings. It has no None or Swap role and no separate style or
+single-option method chooser. Source alpha below the family-specific Opacity cut becomes
+empty; default 128, adjustable 1–255. Alpha zero always stays empty, and all other output
+alpha is binary. The settings icon/panel appears for partial source alpha or when this cut
+has changed, and contains the cut and Reset. Switching families retains the other family's
+state. Selecting/altering colors or conversion settings reveals converted output.
+
+The existing single conversion toggle keeps its style name, or Palette for the full
+family. Its filled/dashed indicator and pressed state show converted/original. Hold image
+and Space comparison still apply to wall and Preview. Full palette horizontal palette
+stepping uses curated and saved/session palettes; vertical style stepping has no full
+palette method list to traverse. Controls, fields and open dialogs retain gesture guards.
+
+### Palette chooser
+
+Use existing floating materials and measured canvas reservations. A single horizontal
+rail contains one round preview per palette with its name underneath. It scrolls sideways
+with faded edges when needed and reveals the selected choice. The header has the compact
+1-bit/Palette switch. The selected name sits to its left only when measured space allows
+the name, switch and actions to fit; never force another header row. Names are shortened
+visually, retaining complete accessible labels and shared tooltips. Palette circles remain
+44px. Touch targets are at least 44px; fine-pointer desktop header controls remain compact.
+
+The 1-bit header keeps its three-way Both/None switch. The Palette header instead has
+Import and Edit icon buttons with accessible labels and shared tooltips. Its rail starts
+with PICO-8 (16), DawnBringer 16, ENDESGA 32, Game Boy green (4) and Grayscale 8, then a
+divider and saved/session palettes. Preset attribution lives with each immutable record
+and in [palettes.md](../../palettes.md). Game Boy green is explicitly an LCD-inspired RGB
+interpretation. Editing a preset or session palette creates a named copy.
+
+### Native import/review/editor
+
+A native dialog provides focus containment, Escape dismissal and inert background.
+Artwork drop/paste and global stepping do not react behind it. Choose a palette image or
+file, paste an image, or use Paste colors. Supported images are PNG/JPEG/WebP/BMP/GIF,
+up to 32 MiB and 16 × 1024 × 1024 decoded pixels. GIF uses the first frame with a notice.
+Browser decoding yields color-managed sRGB values; exactness concerns those decoded
+values, not arbitrary original color-profile bytes. The browser can allocate decode
+buffers before dimensions are exposed.
+
+Supported text is HEX/TXT, legacy RGB GPL and text JASC-PAL version 0100, up to 256 KiB.
+Hex accepts #RGB, #RRGGBB or bare six-digit tokens separated by whitespace/comma/semicolon.
+Alpha hex, malformed rows/counts, binary PAL, ASE and ACO are rejected. Do not mine
+arbitrary documents for hex-looking substrings. TXT means this hex grammar.
+
+Every color scans every full-resolution alpha-positive pixel, in reading order, with RGB
+deduplication. Alpha zero is excluded; partial alpha is normalized to opaque palette RGB
+with a notice. There is no layout assumption or automatic rare/background/black/white
+removal. Optional Find solid colors proposes matching visible RGB in 3×3 patches; differing
+positive alpha still represents one RGB color. Borders/backgrounds may remain. Zero solid
+candidates explain that no patch was found and preserve the current draft. The supplied
+PNG fixtures give exact counts 255/31/345 and solid counts 0/31/31; every ordered browser
+RGB matched independent decoding in the tested browser.
+
+Review uses 64-color pages, select/remove, single-color editing, Add and Undo edits.
+Duplicates are rejected, including restoration of the native color picker's prior value.
+Names require 1–64 trimmed Unicode characters. Up to 4096 candidates may be edited down
+to 1–256 for Save. Above 4096, show the exact total and disclose that only the first 4096
+are displayed; this incomplete draft cannot be saved or exported as a complete backup.
+Try solid candidates or a smaller prepared input. Cancel changes neither selected palette
+nor saved records. Image scanning/preview jobs yield and cancel; closing releases the
+dialog's owned source and outstanding scan.
+
+### Persistence and reset
+
+Family, palette ID and alpha cut are additive preferences. Missing selection falls back
+to PICO-8 while old preferences retain the default 1-bit family. Explicit named Save uses
+`bitify-palettes-v1`: version 1, at most 100 records and 256 KiB serialized UTF-8. Images
+and drafts are not persisted. Validate records independently. Each record has ID, name,
+colors, revision and source attribution. Re-read before writing to retain unrelated tab
+changes; edited/deleted revision conflicts offer Save copy or Reload. Web Storage cannot
+make simultaneous read/modify/write operations transactional.
+
+Save closes/selects only after persistence succeeds. Failures retain the draft and offer
+session-only use and HEX backup. Saved palette deletion requires confirmation. Reset
+settings keeps images and saved palettes by default; an unchecked Delete saved palettes
+checkbox additionally removes only this library key. A storage deletion failure leaves
+settings/library intact and reports the failure. No `localStorage.clear()` is used.
+
+### Original-resolution exports and playback
+
+Snapshot selected colors/alpha/family at the Save or Copy gesture; asynchronous completion
+cannot adopt later edits. Full palette exports use `-palette` filenames, with existing
+collision handling. Legacy `-1bit` names and bytes remain compatible. Copy exports PNG of
+the first animation frame. Save all downloads no file/ZIP until every encoding succeeds.
+
+Internal full palette indices are Uint16, opaque 0–255 and empty sentinel 256. PNG compacts
+used entries to 1/2/4/8-bit indexed output, including transparency when needed. All 256
+used opaque colors plus empty use directly encoded RGBA PNG. Export never reads back a
+canvas or silently reduces the chosen colors. Full palette GIF preflights the global used
+union and its empty entry. It fits 256 opaque colors, or 255 opaque colors plus empty;
+all 256 plus empty opens a named 255-color copy instead of downloading. Remove colors
+explicitly, save/select the copy, then request a new download. Cancel preserves selection.
+Local GIF tables and automatic reduction are not implemented.
+
+GIF conversion retains only one converted frame per pass, transfers the remapped frame
+to one compression worker, and waits for its acknowledgment before proceeding. Worker
+failure reports an error; a missing Worker uses the same direct writer. Source RGBA GIF
+frames and compressed output are still retained. Exported delays/loop remain from the
+source. Full palette preview's next-frame clock starts when conversion is ready, so an
+expensive preview may run slower than the source; this does not change export delays.
+
+### Verification boundaries
+
+The integrated unit suite passed 310 tests. The built-browser harness passed all 132
+legacy color-pair/style combinations and five full preset cases, independently decoding
+exports and checking compatibility/persistence flows. Targeted native-editor checks and
+Codex browser interaction/layout checks complement that coverage. Use `BASE_REF` with
+the pre-feature revision for `bench/palette-qa.mjs` after committing this feature.
+Physical Android/iOS, Safari, arbitrary image profiles, privacy-altered canvas decoding
+and sustained peak-memory behavior of the new family remain unverified. Earlier physical
+device measurements in this document concern the legacy system, not this implementation.

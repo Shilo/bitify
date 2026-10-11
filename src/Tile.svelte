@@ -6,13 +6,14 @@
   import { tooltip } from './lib/tooltip.js';
   import { imageGesture, IMAGE_HOLD_MS } from './lib/image-gesture.js';
   import { comparisonHold } from './lib/comparison-hold.js';
+  import { quantizeAsync, colorize as palettePixels } from './lib/quantize.js';
 
   // `flipped` true means originals are visible. App-managed comparison updates
   // that same value and the dock toggle; standalone previews use a local hold.
   // Without `onremove` the tile is a preview only and has no buttons.
   // `set` is the style's settings. `budget` is set while one of their sliders is being dragged:
   // the milliseconds this tile may take to convert its image after each move.
-  let { item, first, second, style, set, flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false } = $props();
+  let { item, first, second, style, set, family = 'two-color', palette, alphaCut = 128, flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false } = $props();
   let held = $state(false);
   let holdTimer;
   let clickReady = false;
@@ -109,10 +110,24 @@
     mw, mh;
     return frames.map(() => null);
   });
+  // One current frame lives outside the legacy mask cache. Cancelling a job prevents
+  // a previous palette, size or animation frame from replacing the current preview.
+  let fullPixels = $state.raw(null);
+  $effect(() => {
+    const source = frames[at].original, colors = palette, width = mw, height = mh, cut = alphaCut;
+    fullPixels = null;
+    if (family !== 'full-palette' || !width || !colors) return;
+    const controller = new AbortController();
+    quantizeAsync(source, colors, cut, width, height, { signal: controller.signal }).then(result => {
+      if (!controller.signal.aborted) fullPixels = new ImageData(palettePixels(result, colors).data, width, height);
+    }).catch(error => { if (error.name !== 'AbortError') console.error('Palette preview failed', error); });
+    return () => controller.abort();
+  });
   const pixels = $derived.by(() => {
     if (!mw) return null;
     const frame = frames[at];
     if (oncompare ? flipped : flipped !== held) return (originals[at] ??= mw < item.img.w ? new ImageData(shrink(frame.original, mw, mh), mw) : frame.original);
+    if (family === 'full-palette') return fullPixels;
     if (!masks[at]) {
       // Stencil's first conversion of an image walks all of it, once. That is not the pace of a conversion, so it is done before the clock starts.
       if (style === 'stencil') spritesOf(frame.img);
@@ -127,6 +142,7 @@
   // Plays an animation: after the current frame's delay, step to the next and start again.
   $effect(() => {
     if (frames.length < 2) return;
+    if (family === 'full-palette' && !fullPixels) return;
     const timer = setTimeout(() => (at = (at + 1) % frames.length), frames[at].delay);
     return () => clearTimeout(timer);
   });

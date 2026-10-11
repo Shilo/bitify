@@ -6,6 +6,11 @@ of the performance work of October 2026 (commits `e1eccfd` to `6d6e37f`, on top 
 `ce7bffa`), written so that the work can be continued without anything but this file, the
 code and the spec.
 
+The earlier sections describe the legacy 1-bit engine. The full palette implementation
+and its separate scheduling/export limits are recorded in the October 11 section at the
+end of this document. Earlier phone measurements must not be read as validation of the
+new conversion family.
+
 The rules of behavior are in the spec,
 [superpowers/specs/2026-10-06-bitify-app-design.md](superpowers/specs/2026-10-06-bitify-app-design.md),
 in the sections "Images larger than their tile", "Drafts while a slider is dragged" (which
@@ -706,3 +711,73 @@ an extra lazy-message variant lost that context in Vitest's cached error stack a
 rejected. Deliberately wrong component counts, bounds and centered rows still failed with
 the intended diagnostics. All fixtures, test names, conversion calls and sweep iterations
 remain intact; production code is unchanged.
+
+## Full palette conversion (October 11, 2026)
+
+The 1-bit loops in `bitify.js`, preset stepping and legacy setting restoration remain
+unchanged. Full palettes use `quantize.js`: prepared scalar Oklab arrays and a 256-entry
+sRGB linearization table, an exact RGB lookup first, then exact nearest search. Each
+opaque output index belongs to the selected palette. Strictly smaller distance replaces
+the current nearest result, preserving earliest-entry ties. No approximate color LUT or
+per-pixel array/object allocation is used. RGB memoization is bounded to 4096 entries and
+bypassed for high-entropy sources, avoiding an unconditional source-color Map.
+
+The wall uses the existing center-spread sampling coordinates and display-sized picture
+dimensions. Pointwise nearest matching agrees with full conversion at those coordinates.
+Sprites fitting the display remain full resolution. `Tile.svelte` retains one current
+full-palette frame outside the legacy mask cache. Palette, size, alpha or animation-frame
+changes cancel the previous cooperative job, so stale results cannot replace the current
+preview. Full palette playback advances only after that frame is converted and its source
+delay has elapsed; expensive previews can play slower than the original. Original view
+and exported frame delays remain independent of that preview timing policy.
+
+Quantization runs adaptive batches with an 8ms clock budget and 2048-pixel sub-blocks for
+clock/cancellation checks. MessageChannel tasks yield to the event loop without the
+nested-timer 4ms clamp. A sub-block is indivisible, so 8ms is a scheduling target rather
+than a guaranteed maximum on every device. Import scanning also yields cooperatively.
+The exact uniqueness bitset uses 2 MiB; only the first 4096 candidates become review
+strings, while scanning still reports an exact total above that bound. Solid assistance
+matches visible RGB in 3×3 patches and does not allocate a histogram object per pixel.
+
+Full palette indices use Uint16, with 256 reserved for empty. At 12MP this result uses
+24MB, compared with the legacy mask's 12MB, in addition to source RGBA and existing
+analysis. Decoded GIF source frames are still retained by artwork import; this feature
+does not remove that existing animation-memory cost. Browser image decode can allocate
+internally before the palette importer discovers dimensions. Import limits are 32 MiB
+per image and 16 × 1024 × 1024 decoded pixels; palette text is limited to 256 KiB.
+
+Save/Copy snapshots the family, colors and alpha cut and converts original pixels.
+Palette PNG output is packed directly at the smallest fitting 1/2/4/8-bit depth, with a
+direct RGBA fallback when all 256 opaque colors and empty occur. Async PNG packing and
+compression keep the costly path separate from canvas encoding. GIF makes a used-color
+preflight, then reconverts and sends one remapped frame at a time to a module worker for
+compression. Acknowledgment prevents conversion from queuing every indexed frame; the
+worker terminates when finished or failed. Browsers without Worker use the same writer
+directly; an available worker failure is reported and is not silently retried. Compressed
+GIF and ZIP output still accumulate in memory. The global GIF table, including empty,
+must fit 256 entries; a compatibility failure opens an explicitly edited 255-color copy
+and never downloads a partial ZIP.
+
+### Evidence and limits
+
+Desktop Edge 155, with a 256-color palette, measured a 12MP exact-membership conversion
+at roughly 121–123ms, with progress/task intervals around 8.7–9.6ms. A noisy 512×512
+conversion took roughly 118–123ms, with intervals around 9–11.5ms. A 16ms test interval
+continued firing during both jobs. These are repeated development-browser measurements
+on this desktop, not p95 claims, physical-phone measurements or a memory ceiling.
+
+All ordered RGB values from the supplied PNG fixtures matched independently decoded
+values in that browser. Exact/solid counts were 255/0, 31/31 and 345/31. The targeted core
+suite passed 23 tests, including randomized scalar-reference equivalence, alpha boundaries,
+sampled previews, input validation, count overflow, cancellation and storage conflicts.
+Eight native-editor browser checks passed, including zero-solid draft retention, duplicate
+picker restoration, named saving, revision reload and quota/session recovery.
+
+The integrated suite passed 310 unit tests. `node bench/palette-qa.mjs dist` passed 132
+legacy style/color-pair combinations and all five full preset cases through the built
+browser app, with independently decoded exports and additional persistence/compatibility
+flows. The harness compares the legacy engine and encoder against its Git baseline;
+after committing the feature, set `BASE_REF` to the pre-feature revision. Codex browser
+interaction checks supplement the harness. These checks do not prove absence of bugs.
+Physical iOS/Android, Safari, arbitrary color profiles, canvas privacy noise and sustained
+large-input memory behavior of the new family remain unverified and need device testing.

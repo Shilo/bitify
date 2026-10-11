@@ -6,7 +6,7 @@
   import { fitViewerImage } from './lib/viewer-layout.js';
   import { canvasGridSpacing } from './lib/canvas-grid.js';
   import { imageGesture } from './lib/image-gesture.js';
-  let { item, first, second, style, set, flipped = false, onsave, oncopy, onclose, busy = '', message = '' } = $props();
+  let { item, first, second, style, set, family = 'two-color', palette, alphaCut = 128, flipped = false, onsave, oncopy, onclose, busy = '', message = '' } = $props();
   let dialog;
   const dismissal = imageGesture();
   let dismissReady = false;
@@ -21,21 +21,23 @@
   $effect(() => {
     const clear = () => { spaceHeld = false; imageHeld = false; dismissal.cancel(); dismissReady = false; };
     const hidden = () => { if (document.hidden) clear(); };
+    const focused = e => { if (e.target.closest('dialog') !== dialog) clear(); };
     // Pointer clicks may blur toolbar buttons back to the page. Keep comparison
     // available for the lifetime of this modal, regardless of that focus target.
     window.addEventListener('keydown', keydown, true);
     window.addEventListener('keyup', keyup, true);
     window.addEventListener('blur', clear);
     document.addEventListener('visibilitychange', hidden);
-    return () => { window.removeEventListener('keydown', keydown, true); window.removeEventListener('keyup', keyup, true); window.removeEventListener('blur', clear); document.removeEventListener('visibilitychange', hidden); };
+    document.addEventListener('focusin', focused);
+    return () => { window.removeEventListener('keydown', keydown, true); window.removeEventListener('keyup', keyup, true); window.removeEventListener('blur', clear); document.removeEventListener('visibilitychange', hidden); document.removeEventListener('focusin', focused); };
   });
   function keydown(e) {
-    if (!dialog?.open || e.code !== 'Space' || e.target.closest('input, textarea, select, [contenteditable="true"]')) return;
+    if (!dialog?.open || document.querySelector('dialog.palette-import-modal[open]') || e.code !== 'Space' || e.target.closest('input, textarea, select, [contenteditable="true"]')) return;
     // Space is the preview comparison shortcut, including when a toolbar has focus.
     e.preventDefault(); e.stopPropagation(); spaceHeld = true;
   }
   function keyup(e) {
-    if (!dialog?.open || e.code !== 'Space') return;
+    if (!dialog?.open || document.querySelector('dialog.palette-import-modal[open]') || e.code !== 'Space') return;
     e.preventDefault(); e.stopPropagation(); spaceHeld = false;
   }
   function press(e) {
@@ -79,7 +81,7 @@
   </nav>
   <div class="viewer-art" bind:clientWidth={width} bind:clientHeight={height}>
     <div class="viewer-tile" style:width="{fit.width}px">
-      <Tile {item} {first} {second} {style} {set} flipped={originalVisible} oncompare={active => (imageHeld = active)} inset={0} aspect={fit.width / fit.height} />
+      <Tile {item} {first} {second} {style} {set} {family} {palette} {alphaCut} flipped={originalVisible} oncompare={active => (imageHeld = active)} inset={0} aspect={fit.width / fit.height} />
     </div>
   </div>
   <!-- Keep feedback in the top-layer dialog; the page-level toast is inert while this viewer is open. -->
