@@ -818,13 +818,13 @@
       <img class="help-logo" src={helpLogoUrl} alt="" width="48" height="48" />
       <div>
         <h2 id="help-title">Bitify</h2>
-        <p>Convert sprites and animated GIFs with <span>1-bit</span> styles or color palettes.</p>
+        <p>Convert sprites and animations with <span>1-bit</span> styles or color palettes.</p>
       </div>
     </header>
     <ol>
       <li><PixelIcon name="import" /><b>Add</b>{touch ? 'Choose images.' : 'Choose, drop or paste images.'}</li>
-      <li><PixelIcon name="grid" /><b>Palette</b>Choose 1-bit or Palette. Pick a preset; import an image or colors.</li>
-      <li><PixelIcon name="sliders" /><b>Style</b>In 1-bit, pick an effect and tune it.</li>
+      <li><PixelIcon name="grid" /><b>Palette</b>Pick 1-bit colors, a palette, or import your own.</li>
+      <li><PixelIcon name="sliders" /><b>Style</b>Tune 1-bit effects and settings.</li>
       <li><PixelIcon name="save" /><b>Save</b>Save or copy images.</li>
     </ol>
     <table>

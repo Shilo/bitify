@@ -1,6 +1,6 @@
 # Bitify
 
-Bitify converts sprites and animated GIFs with 1-bit styles or color palettes. It runs entirely in the browser, with full palettes of 1–256 unique opaque RGB colors. The 1-bit family uses two chosen colors, either of which can be None (transparent). There is no backend and nothing is uploaded.
+Bitify converts sprites and animations with 1-bit styles or color palettes. It runs entirely in the browser, with full palettes of 1–256 unique opaque RGB colors. The 1-bit family uses two chosen colors, either of which can be None (transparent). There is no backend and nothing is uploaded.
 
 ## What it does
 

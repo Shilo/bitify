@@ -2,7 +2,7 @@
 
 # Bitify
 
-Convert sprites and animated GIFs with 1-bit styles or color palettes. Runs entirely in the browser; nothing is uploaded.
+Convert sprites and animations with 1-bit styles or color palettes. Runs entirely in the browser; nothing is uploaded.
 
 **[shilo.github.io/bitify](https://shilo.github.io/bitify/)**
 

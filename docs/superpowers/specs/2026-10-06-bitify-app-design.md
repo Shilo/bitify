@@ -411,8 +411,8 @@ inside when the screen is too short for it. It fades and rises into place in 150
 under reduced motion. Top to bottom:
 
 - A header in one row, so that it takes little height: the logo, then "Bitify" in Pixelify
-  Sans with the empty screen's one line under it ("Instantly convert sprites and animated
-  GIFs to 1-bit colors and styles."). The logo is the still gold coin itself
+  Sans with the app description under it ("Convert sprites and animations with 1-bit
+  styles or color palettes."). The logo is the still gold coin itself
   (`src/assets/logo.png`), not bitified, drawn at exactly twice its size (56px) with hard
   pixel edges and nothing behind it. A Close button (an X) sits in the top-right corner.
 - Four steps, each an icon, a word and a line. The icons are the app's own: the plus of
@@ -422,8 +422,8 @@ under reduced motion. Top to bottom:
   | | Mouse and keyboard | Touch |
   |---|---|---|
   | Add | Drop, paste or choose images. | Choose images. |
-  | Palette | Pick two colors, or a preset. One of them can be None, for a see-through image. | The same. |
-  | Style | Pick effect, tune its settings. | The same. |
+  | Palette | Pick 1-bit colors, a palette, or import your own. | The same. |
+  | Style | Tune 1-bit effects and settings. | The same. |
   | Save | Download or copy images. | The same. |
 
 - Under a divider, a table headed "Controls", with a thin line between its rows. Each row
@@ -498,7 +498,7 @@ viewport height so mobile browser bars do not cut the dock off.
 
 ### Empty state
 
-A centered slogan ("Pixel art in two colors"), one line saying what the app is ("Instantly convert sprites and animated GIFs to 1-bit colors and styles."; no
+A centered slogan ("Pixel art in two colors"), one line saying what the app is ("Convert sprites and animations with 1-bit styles or color palettes."; no
 counts of styles or palettes, which change), and a
 button labelled "Drop, paste or choose images" ("Choose images" on touch devices, where there is
 nothing to drop), with a plus sign before the words. The text describes the app, not the steps. The dock stays visible.
@@ -1853,11 +1853,11 @@ the existing explicit 255-color copy flow applies.
 
 ### Concise Help and description
 
-The app description is “Convert sprites and animated GIFs with 1-bit styles or color
+The app description is “Convert sprites and animations with 1-bit styles or color
 palettes.” Help, README and page/social metadata use this scope, with the existing local
 privacy statement. Help keeps the four-step layout and compact shortcut table at its
-existing 420px maximum. Palette says “Choose 1-bit or Palette. Pick a preset; import an
-image or colors.” Style says “In 1-bit, pick an effect and tune it.” No extra explanatory
+existing 420px maximum. Palette says “Pick 1-bit colors, a palette, or import your own.”
+Style says “Tune 1-bit effects and settings.” No extra explanatory
 section or palette count is added.
 
 The table shows Next style only in 1-bit. Its settings row follows the dock: Style
