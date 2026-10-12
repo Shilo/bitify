@@ -30,6 +30,11 @@ shows style stepping and Style settings in 1-bit; Palette settings in Palette. T
 says “Pick 1-bit, palette or import colors.” The full-palette popup is titled **Nearest**.
 Matching changes the nearest-color rule, without introducing a new effect.
 
+Glow and Paper in Palette mode provide two-color nearest conversion through the
+variable-color engine. A separate 1-bit Nearest style remains deferred; see the
+[workflow review and research spike](research/2026-10-11-one-bit-nearest.md) for
+the decision, Swap/None tradeoffs and triggers for reconsidering it.
+
 Palette-specific ordered and error-diffusion dithering remain research only. Tests with
 one shared 255-color palette and six buildings found lower locally averaged color error at the cost of
 texture and greater individual-pixel color error. Nearest retains clean flat fills and
