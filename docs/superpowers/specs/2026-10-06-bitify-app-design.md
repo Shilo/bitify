@@ -2242,6 +2242,10 @@ expensive preview may run slower than the source; this does not change export de
 Original comparison, including held and viewer comparison, follows source-frame timers
 without waiting for conversion. While Original is shown, preview readiness does not
 restart that timer. Converted playback still waits for the current converted frame.
+While that frame converts, retain the last completed canvas from the same item.
+Clear retained pixels on item or conversion-family changes. Canceling obsolete jobs
+prevents their results from replacing the newest requested frame. This avoids blank
+canvas gaps without retaining a converted cache of the whole animation.
 
 ### Verification boundaries
 

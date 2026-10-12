@@ -1,0 +1,3093 @@
+{
+  "records": [
+    {
+      "id": "s001",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 4096,
+      "error": 2.1852241720543235,
+      "mse": 0.0005335019951304501,
+      "used": 12
+    },
+    {
+      "id": "s002",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 1171,
+      "error": 3.260149378113289,
+      "mse": 0.002784072910429794,
+      "used": 8
+    },
+    {
+      "id": "s003",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 65136,
+      "error": 123.25871063101351,
+      "mse": 0.001892328522338085,
+      "used": 13
+    },
+    {
+      "id": "s004",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 256,
+      "error": 1.749263124000436,
+      "mse": 0.006833059078126703,
+      "used": 2
+    },
+    {
+      "id": "s005",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 545,
+      "error": 3.882238822564643,
+      "mse": 0.007123373986357143,
+      "used": 17
+    },
+    {
+      "id": "s006",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 5402,
+      "error": 20.342018377850813,
+      "mse": 0.0037656457567291396,
+      "used": 19
+    },
+    {
+      "id": "s007",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 1683,
+      "error": 5.617925734453159,
+      "mse": 0.0033380426229668208,
+      "used": 6
+    },
+    {
+      "id": "s008",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 580,
+      "error": 1.6268393789213498,
+      "mse": 0.002804895480898879,
+      "used": 5
+    },
+    {
+      "id": "s009",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 423,
+      "error": 1.2832407193574078,
+      "mse": 0.003033666003209002,
+      "used": 13
+    },
+    {
+      "id": "s010",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 1320,
+      "error": 32.56920864640565,
+      "mse": 0.024673642913943673,
+      "used": 10
+    },
+    {
+      "id": "s011",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 1049,
+      "error": 2.6706013295713817,
+      "mse": 0.002545854460983205,
+      "used": 11
+    },
+    {
+      "id": "s012",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 699,
+      "error": 1.5007570277833846,
+      "mse": 0.0021470057622079894,
+      "used": 18
+    },
+    {
+      "id": "s013",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 478,
+      "error": 1.299112211217515,
+      "mse": 0.0027178079732583997,
+      "used": 7
+    },
+    {
+      "id": "s014",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 1731,
+      "error": 40.551446610190496,
+      "mse": 0.02342660116128856,
+      "used": 8
+    },
+    {
+      "id": "s015",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 590,
+      "error": 2.4859637129941863,
+      "mse": 0.004213497818634214,
+      "used": 23
+    },
+    {
+      "id": "s016",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 301,
+      "error": 1.8249967578799877,
+      "mse": 0.006063112152425209,
+      "used": 16
+    },
+    {
+      "id": "s017",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 665,
+      "error": 2.787431993306379,
+      "mse": 0.004191627057603578,
+      "used": 19
+    },
+    {
+      "id": "s018",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 755,
+      "error": 5.4779783582813115,
+      "mse": 0.007255600474544784,
+      "used": 8
+    },
+    {
+      "id": "s019",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 1427,
+      "error": 9.282829038647876,
+      "mse": 0.006505135976627803,
+      "used": 6
+    },
+    {
+      "id": "s020",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 6932,
+      "error": 14.526276547435756,
+      "mse": 0.002095539028770305,
+      "used": 17
+    },
+    {
+      "id": "s021",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 230400,
+      "error": 214.44162307057806,
+      "mse": 0.0009307362112438284,
+      "used": 16
+    },
+    {
+      "id": "s022",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 1491,
+      "error": 34.991970411772265,
+      "mse": 0.02346879303271111,
+      "used": 9
+    },
+    {
+      "id": "s023",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 35852,
+      "error": 265.05437693795744,
+      "mse": 0.00739301508808316,
+      "used": 25
+    },
+    {
+      "id": "s024",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 842,
+      "error": 3.014873735472098,
+      "mse": 0.003580610137140259,
+      "used": 15
+    },
+    {
+      "id": "s025",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 300,
+      "error": 1.4966883904323407,
+      "mse": 0.004988961301441136,
+      "used": 14
+    },
+    {
+      "id": "s026",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 3629,
+      "error": 11.700016839292594,
+      "mse": 0.003224033298234388,
+      "used": 24
+    },
+    {
+      "id": "s027",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 7883,
+      "error": 14.60344022709254,
+      "mse": 0.0018525231798924952,
+      "used": 17
+    },
+    {
+      "id": "s028",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 1069,
+      "error": 1.449312214135559,
+      "mse": 0.0013557644659827493,
+      "used": 17
+    },
+    {
+      "id": "s029",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 2205,
+      "error": 13.415104235813997,
+      "mse": 0.006083947499235373,
+      "used": 5
+    },
+    {
+      "id": "s030",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 1379,
+      "error": 1.534020621284051,
+      "mse": 0.0011124152438608057,
+      "used": 13
+    },
+    {
+      "id": "s031",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 1352,
+      "error": 4.5484785781791395,
+      "mse": 0.0033642593033869376,
+      "used": 17
+    },
+    {
+      "id": "s032",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 252,
+      "error": 0.9132591411580644,
+      "mse": 0.0036240442109447,
+      "used": 3
+    },
+    {
+      "id": "s033",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 661,
+      "error": 2.4171738552097803,
+      "mse": 0.0036568439564444483,
+      "used": 18
+    },
+    {
+      "id": "s034",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 440,
+      "error": 1.9333920348384386,
+      "mse": 0.004394072806450997,
+      "used": 17
+    },
+    {
+      "id": "s035",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 604,
+      "error": 1.0509400039793322,
+      "mse": 0.0017399668940055169,
+      "used": 16
+    },
+    {
+      "id": "s036",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 2207,
+      "error": 8.962307696864952,
+      "mse": 0.004060855322548687,
+      "used": 4
+    },
+    {
+      "id": "s037",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 4096,
+      "error": 1.4439075375177721,
+      "mse": 0.00035251648865179983,
+      "used": 3
+    },
+    {
+      "id": "s038",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 3423,
+      "error": 3.3642047752503963,
+      "mse": 0.0009828234809378896,
+      "used": 15
+    },
+    {
+      "id": "s039",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 9258,
+      "error": 22.807884704209354,
+      "mse": 0.0024635865958316434,
+      "used": 20
+    },
+    {
+      "id": "s040",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 1367,
+      "error": 5.432621727579105,
+      "mse": 0.003974119771455087,
+      "used": 13
+    },
+    {
+      "id": "s041",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 2120,
+      "error": 7.122164549169068,
+      "mse": 0.00335951157979673,
+      "used": 29
+    },
+    {
+      "id": "s042",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 237,
+      "error": 0.8228905818514398,
+      "mse": 0.0034721121597107167,
+      "used": 16
+    },
+    {
+      "id": "s043",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 1366,
+      "error": 6.921719945056576,
+      "mse": 0.005067144908533364,
+      "used": 9
+    },
+    {
+      "id": "s044",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 2034,
+      "error": 2.6309946175693297,
+      "mse": 0.001293507678254341,
+      "used": 9
+    },
+    {
+      "id": "s045",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 2289,
+      "error": 5.491828789993655,
+      "mse": 0.0023992262079482987,
+      "used": 14
+    },
+    {
+      "id": "s046",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 9287,
+      "error": 31.202440512949362,
+      "mse": 0.0033597976217238463,
+      "used": 25
+    },
+    {
+      "id": "s047",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 3427,
+      "error": 7.802647756329542,
+      "mse": 0.0022768158028390845,
+      "used": 25
+    },
+    {
+      "id": "s048",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 1635,
+      "error": 7.15243207246909,
+      "mse": 0.0043745761911125934,
+      "used": 6
+    },
+    {
+      "id": "s049",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 561,
+      "error": 1.2639835487935451,
+      "mse": 0.0022530901048013283,
+      "used": 7
+    },
+    {
+      "id": "s050",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 669,
+      "error": 2.2111391303231582,
+      "mse": 0.0033051407030241526,
+      "used": 7
+    },
+    {
+      "id": "s051",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 1155,
+      "error": 5.11133547595605,
+      "mse": 0.004425398680481429,
+      "used": 10
+    },
+    {
+      "id": "s052",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 9003,
+      "error": 11.529442216540453,
+      "mse": 0.0012806222610841334,
+      "used": 14
+    },
+    {
+      "id": "s053",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 256,
+      "error": 0.11769587948537943,
+      "mse": 0.0004597495292397634,
+      "used": 1
+    },
+    {
+      "id": "s054",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 36189,
+      "error": 285.3279865935262,
+      "mse": 0.00788438438734218,
+      "used": 24
+    },
+    {
+      "id": "s055",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 227,
+      "error": 0.9079833376806469,
+      "mse": 0.003999926597712101,
+      "used": 7
+    },
+    {
+      "id": "s056",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 8192,
+      "error": 14.42237440270168,
+      "mse": 0.0017605437503297949,
+      "used": 9
+    },
+    {
+      "id": "s057",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 411,
+      "error": 7.720522051415983,
+      "mse": 0.018784725185926967,
+      "used": 7
+    },
+    {
+      "id": "s058",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 476,
+      "error": 1.110919648509402,
+      "mse": 0.0023338648077928614,
+      "used": 22
+    },
+    {
+      "id": "s059",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 1977,
+      "error": 14.144870030104272,
+      "mse": 0.007154714228681979,
+      "used": 13
+    },
+    {
+      "id": "s060",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 256,
+      "error": 1.1153573140161686,
+      "mse": 0.004356864507875658,
+      "used": 2
+    },
+    {
+      "id": "s061",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 1914,
+      "error": 14.47389389372569,
+      "mse": 0.007562118021800256,
+      "used": 10
+    },
+    {
+      "id": "s062",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 2105,
+      "error": 3.7900524558443376,
+      "mse": 0.0018004999790234384,
+      "used": 20
+    },
+    {
+      "id": "s063",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 4476,
+      "error": 18.548536986406233,
+      "mse": 0.00414399843306663,
+      "used": 13
+    },
+    {
+      "id": "s064",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 615,
+      "error": 2.7635953930238366,
+      "mse": 0.004493651045567214,
+      "used": 16
+    },
+    {
+      "id": "s065",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 2034,
+      "error": 8.39327717196857,
+      "mse": 0.004126488285136957,
+      "used": 23
+    },
+    {
+      "id": "s066",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 391,
+      "error": 1.3877493828224927,
+      "mse": 0.003549231158113792,
+      "used": 17
+    },
+    {
+      "id": "s067",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 16384,
+      "error": 98.27307263274002,
+      "mse": 0.005998112343306886,
+      "used": 27
+    },
+    {
+      "id": "s068",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 2120,
+      "error": 17.495804726070958,
+      "mse": 0.008252738078335358,
+      "used": 12
+    },
+    {
+      "id": "s069",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 438,
+      "error": 0.9047269841502829,
+      "mse": 0.002065586721804299,
+      "used": 14
+    },
+    {
+      "id": "s070",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 342,
+      "error": 1.125573502834384,
+      "mse": 0.0032911505930829942,
+      "used": 7
+    },
+    {
+      "id": "s071",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 482,
+      "error": 0.8558817755079438,
+      "mse": 0.001775688330929344,
+      "used": 8
+    },
+    {
+      "id": "s072",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 1128,
+      "error": 1.548757716812522,
+      "mse": 0.001373012160294789,
+      "used": 13
+    },
+    {
+      "id": "s073",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 1024,
+      "error": 5.606560487504174,
+      "mse": 0.005475156726078295,
+      "used": 9
+    },
+    {
+      "id": "s074",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 1682,
+      "error": 2.964496764038586,
+      "mse": 0.0017624832128647957,
+      "used": 22
+    },
+    {
+      "id": "s075",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 306,
+      "error": 1.6653605251487584,
+      "mse": 0.005442354657348884,
+      "used": 12
+    },
+    {
+      "id": "s076",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 468,
+      "error": 0.6518049870282613,
+      "mse": 0.0013927456987783361,
+      "used": 16
+    },
+    {
+      "id": "s077",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 517,
+      "error": 1.1384572600455718,
+      "mse": 0.0022020449904169665,
+      "used": 13
+    },
+    {
+      "id": "s078",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 5124,
+      "error": 9.296136090399296,
+      "mse": 0.0018142342096798,
+      "used": 19
+    },
+    {
+      "id": "s079",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 677,
+      "error": 0.504375140348142,
+      "mse": 0.0007450149783576692,
+      "used": 9
+    },
+    {
+      "id": "s080",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 970,
+      "error": 3.75960620122559,
+      "mse": 0.003875882681675866,
+      "used": 10
+    },
+    {
+      "id": "s081",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 352,
+      "error": 0.260960157463083,
+      "mse": 0.0007413640837019403,
+      "used": 14
+    },
+    {
+      "id": "s082",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 1697,
+      "error": 13.36914437153713,
+      "mse": 0.007878105109921704,
+      "used": 13
+    },
+    {
+      "id": "s083",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 9496,
+      "error": 35.593916941947455,
+      "mse": 0.003748306333398005,
+      "used": 18
+    },
+    {
+      "id": "s084",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 398,
+      "error": 0.36058247371570623,
+      "mse": 0.0009059861148635835,
+      "used": 7
+    },
+    {
+      "id": "s085",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 4763,
+      "error": 33.58648810306986,
+      "mse": 0.007051540647295793,
+      "used": 16
+    },
+    {
+      "id": "s086",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 526,
+      "error": 0.7352724812424344,
+      "mse": 0.0013978564282175559,
+      "used": 22
+    },
+    {
+      "id": "s087",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 4096,
+      "error": 33.493683122008704,
+      "mse": 0.008177168730959156,
+      "used": 3
+    },
+    {
+      "id": "s088",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 37169,
+      "error": 262.83220462798084,
+      "mse": 0.0070712745736495695,
+      "used": 25
+    },
+    {
+      "id": "s089",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 499,
+      "error": 5.821434275067115,
+      "mse": 0.011666200952038306,
+      "used": 12
+    },
+    {
+      "id": "s090",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 262144,
+      "error": 260.0513043272042,
+      "mse": 0.0009920169995392006,
+      "used": 28
+    },
+    {
+      "id": "s091",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 239400,
+      "error": 535.2838119618599,
+      "mse": 0.00223593906416817,
+      "used": 26
+    },
+    {
+      "id": "s092",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 951,
+      "error": 1.65396447406562,
+      "mse": 0.0017391845153161094,
+      "used": 26
+    },
+    {
+      "id": "s093",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 414,
+      "error": 1.9223713671615874,
+      "mse": 0.004643409099424125,
+      "used": 16
+    },
+    {
+      "id": "s094",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 2601,
+      "error": 3.343945477455405,
+      "mse": 0.001285638399636834,
+      "used": 23
+    },
+    {
+      "id": "s095",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 32768,
+      "error": 119.88450238013601,
+      "mse": 0.0036585846673625492,
+      "used": 28
+    },
+    {
+      "id": "s096",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 977,
+      "error": 2.732500615362795,
+      "mse": 0.0027968276513437,
+      "used": 7
+    },
+    {
+      "id": "s097",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 711,
+      "error": 1.222002781505007,
+      "mse": 0.0017187099599226539,
+      "used": 14
+    },
+    {
+      "id": "s098",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 35367,
+      "error": 269.4371410880498,
+      "mse": 0.007618320498997648,
+      "used": 25
+    },
+    {
+      "id": "s099",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 12280,
+      "error": 47.405082257864876,
+      "mse": 0.003860348718067172,
+      "used": 9
+    },
+    {
+      "id": "s100",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 256,
+      "error": 2.018456002212933,
+      "mse": 0.00788459375864427,
+      "used": 2
+    },
+    {
+      "id": "s101",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 2322,
+      "error": 12.672380121944549,
+      "mse": 0.005457528045626421,
+      "used": 7
+    },
+    {
+      "id": "s102",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 795,
+      "error": 4.149385661027315,
+      "mse": 0.005219353032738761,
+      "used": 16
+    },
+    {
+      "id": "s103",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 133,
+      "error": 0.6651850493497108,
+      "mse": 0.005001391348494066,
+      "used": 11
+    },
+    {
+      "id": "s104",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 2961,
+      "error": 14.426298350558056,
+      "mse": 0.0048721034618568245,
+      "used": 6
+    },
+    {
+      "id": "s105",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 13949,
+      "error": 195.78534660498727,
+      "mse": 0.014035798021721075,
+      "used": 28
+    },
+    {
+      "id": "s106",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 230400,
+      "error": 204.67917871151496,
+      "mse": 0.0008883644909353948,
+      "used": 17
+    },
+    {
+      "id": "s107",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 65,
+      "error": 0.03254178728629484,
+      "mse": 0.0005006428813276129,
+      "used": 9
+    },
+    {
+      "id": "s108",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 765,
+      "error": 0.9445954973430875,
+      "mse": 0.0012347653560040358,
+      "used": 11
+    },
+    {
+      "id": "s109",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 308,
+      "error": 1.073575231845926,
+      "mse": 0.0034856338696296297,
+      "used": 8
+    },
+    {
+      "id": "s110",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 417,
+      "error": 0.838661028240188,
+      "mse": 0.0020111775257558463,
+      "used": 19
+    },
+    {
+      "id": "s111",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 16384,
+      "error": 104.69511653521954,
+      "mse": 0.006390082796339083,
+      "used": 9
+    },
+    {
+      "id": "s112",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 817,
+      "error": 3.798935724788792,
+      "mse": 0.004649860128260455,
+      "used": 20
+    },
+    {
+      "id": "s113",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 8530,
+      "error": 34.332088166536934,
+      "mse": 0.004024863794435748,
+      "used": 26
+    },
+    {
+      "id": "s114",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 2280,
+      "error": 2.634695414889414,
+      "mse": 0.0011555681644251816,
+      "used": 10
+    },
+    {
+      "id": "s115",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 32768,
+      "error": 134.49118532096168,
+      "mse": 0.004104345255156301,
+      "used": 32
+    },
+    {
+      "id": "s116",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 1957,
+      "error": 16.508760227726185,
+      "mse": 0.00843574871115288,
+      "used": 7
+    },
+    {
+      "id": "s117",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 8192,
+      "error": 6.908698277351954,
+      "mse": 0.0008433469576845647,
+      "used": 10
+    },
+    {
+      "id": "s118",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 256,
+      "error": 7.0592853658927,
+      "mse": 0.02757533346051836,
+      "used": 5
+    },
+    {
+      "id": "s119",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 1132,
+      "error": 3.7517697484232126,
+      "mse": 0.0033142842300558414,
+      "used": 14
+    },
+    {
+      "id": "s120",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 495,
+      "error": 1.01122487737395,
+      "mse": 0.002042878540149394,
+      "used": 11
+    },
+    {
+      "id": "s121",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 353,
+      "error": 0.5809498981507278,
+      "mse": 0.0016457504196904472,
+      "used": 11
+    },
+    {
+      "id": "s122",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 417,
+      "error": 1.9351006007894387,
+      "mse": 0.004640529018679709,
+      "used": 21
+    },
+    {
+      "id": "s123",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 120231,
+      "error": 576.2591180601166,
+      "mse": 0.0047929329212941475,
+      "used": 25
+    },
+    {
+      "id": "s124",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 728,
+      "error": 1.6452043511099943,
+      "mse": 0.0022598960866895526,
+      "used": 11
+    },
+    {
+      "id": "s125",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 209,
+      "error": 0.527843455132087,
+      "mse": 0.0025255667709669235,
+      "used": 4
+    },
+    {
+      "id": "s126",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 16384,
+      "error": 48.54681864442876,
+      "mse": 0.0029630626614031226,
+      "used": 9
+    },
+    {
+      "id": "s127",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 2103,
+      "error": 8.10473224386868,
+      "mse": 0.0038538907483921447,
+      "used": 7
+    },
+    {
+      "id": "s128",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 332,
+      "error": 1.658780330851233,
+      "mse": 0.004996326297744678,
+      "used": 18
+    },
+    {
+      "id": "s129",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 811,
+      "error": 2.533296559966937,
+      "mse": 0.0031236702342378997,
+      "used": 23
+    },
+    {
+      "id": "s130",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 256,
+      "error": 1.3237647036000373,
+      "mse": 0.005170955873437646,
+      "used": 2
+    },
+    {
+      "id": "s131",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 3864,
+      "error": 4.898104557220327,
+      "mse": 0.001267625403007331,
+      "used": 24
+    },
+    {
+      "id": "s132",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 2539,
+      "error": 7.444852327733074,
+      "mse": 0.0029321986324273627,
+      "used": 15
+    },
+    {
+      "id": "s133",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 1219,
+      "error": 2.9225559304095077,
+      "mse": 0.0023975028141177256,
+      "used": 18
+    },
+    {
+      "id": "s134",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 251,
+      "error": 0.9354936152054896,
+      "mse": 0.003727066196037807,
+      "used": 5
+    },
+    {
+      "id": "s135",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 755,
+      "error": 4.716177414620291,
+      "mse": 0.006246592602146081,
+      "used": 11
+    },
+    {
+      "id": "s136",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 2469,
+      "error": 15.12367867794068,
+      "mse": 0.0061254267630379425,
+      "used": 4
+    },
+    {
+      "id": "s137",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 4041,
+      "error": 9.461163304518218,
+      "mse": 0.0023412925772131198,
+      "used": 15
+    },
+    {
+      "id": "s138",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 340,
+      "error": 0.9580093313937041,
+      "mse": 0.0028176745040991297,
+      "used": 14
+    },
+    {
+      "id": "s139",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 32256,
+      "error": 360.14718329555996,
+      "mse": 0.011165277259906993,
+      "used": 15
+    },
+    {
+      "id": "s140",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 1609,
+      "error": 19.989322960316485,
+      "mse": 0.012423444972229015,
+      "used": 10
+    },
+    {
+      "id": "s141",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 3100,
+      "error": 6.865036868524288,
+      "mse": 0.002214528022104609,
+      "used": 7
+    },
+    {
+      "id": "s142",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 966,
+      "error": 1.712674162861098,
+      "mse": 0.0017729546199390248,
+      "used": 13
+    },
+    {
+      "id": "s143",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 1263,
+      "error": 4.77991571487293,
+      "mse": 0.0037845730125676403,
+      "used": 17
+    },
+    {
+      "id": "s144",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 2030,
+      "error": 7.577429194309907,
+      "mse": 0.003732723741039363,
+      "used": 24
+    },
+    {
+      "id": "s145",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 256,
+      "error": 1.8977944111105864,
+      "mse": 0.007413259418400728,
+      "used": 7
+    },
+    {
+      "id": "s146",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 20480,
+      "error": 69.88901237783284,
+      "mse": 0.003412549432511369,
+      "used": 6
+    },
+    {
+      "id": "s147",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 1024,
+      "error": 6.2010099791992515,
+      "mse": 0.006055673807811769,
+      "used": 17
+    },
+    {
+      "id": "s148",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 36864,
+      "error": 77.37814568415185,
+      "mse": 0.002099016538741098,
+      "used": 18
+    },
+    {
+      "id": "s149",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 4679,
+      "error": 39.206002853337985,
+      "mse": 0.008379141451878175,
+      "used": 11
+    },
+    {
+      "id": "s150",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 4096,
+      "error": 35.62981426874883,
+      "mse": 0.008698685124206258,
+      "used": 1
+    },
+    {
+      "id": "s151",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 432,
+      "error": 2.0035927049835274,
+      "mse": 0.004637946076350758,
+      "used": 9
+    },
+    {
+      "id": "s152",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 4096,
+      "error": 2.304904848418317,
+      "mse": 0.0005627209102583782,
+      "used": 6
+    },
+    {
+      "id": "s153",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 91,
+      "error": 0.4789693838862994,
+      "mse": 0.005263399822926367,
+      "used": 7
+    },
+    {
+      "id": "s154",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 353,
+      "error": 1.1371365679317174,
+      "mse": 0.0032213500507980663,
+      "used": 15
+    },
+    {
+      "id": "s155",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 136,
+      "error": 0.5141997008167489,
+      "mse": 0.0037808801530643302,
+      "used": 16
+    },
+    {
+      "id": "s156",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 436,
+      "error": 6.293143229727812,
+      "mse": 0.014433814747082137,
+      "used": 8
+    },
+    {
+      "id": "s157",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 4096,
+      "error": 17.845717024258697,
+      "mse": 0.004356864507875658,
+      "used": 2
+    },
+    {
+      "id": "s158",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 496,
+      "error": 0.812059050611852,
+      "mse": 0.0016372158278464759,
+      "used": 21
+    },
+    {
+      "id": "s159",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 25600,
+      "error": 55.21230841842634,
+      "mse": 0.002156730797594779,
+      "used": 29
+    },
+    {
+      "id": "s160",
+      "group": "corpus",
+      "model": "adaptive-32",
+      "visible": 2059,
+      "error": 3.4648482397728237,
+      "mse": 0.0016827820494282777,
+      "used": 19
+    },
+    {
+      "id": "s001",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 4096,
+      "error": 1.6050069630332497,
+      "mse": 0.0003918474030842895,
+      "used": 18
+    },
+    {
+      "id": "s002",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 1171,
+      "error": 2.4933220946340837,
+      "mse": 0.0021292246751785514,
+      "used": 15
+    },
+    {
+      "id": "s003",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 65136,
+      "error": 53.41647705532757,
+      "mse": 0.0008200761031584311,
+      "used": 19
+    },
+    {
+      "id": "s004",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 256,
+      "error": 0,
+      "mse": 0,
+      "used": 2
+    },
+    {
+      "id": "s005",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 545,
+      "error": 3.5924853809066994,
+      "mse": 0.006591716295241651,
+      "used": 21
+    },
+    {
+      "id": "s006",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 5402,
+      "error": 10.376608056809934,
+      "mse": 0.0019208826465771814,
+      "used": 25
+    },
+    {
+      "id": "s007",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 1683,
+      "error": 2.916227136626404,
+      "mse": 0.0017327552802295925,
+      "used": 8
+    },
+    {
+      "id": "s008",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 580,
+      "error": 0.5833370108459829,
+      "mse": 0.0010057534669758326,
+      "used": 5
+    },
+    {
+      "id": "s009",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 423,
+      "error": 0.5478411420374785,
+      "mse": 0.0012951327234928568,
+      "used": 20
+    },
+    {
+      "id": "s010",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 1320,
+      "error": 20.285982999655197,
+      "mse": 0.015368168939132724,
+      "used": 11
+    },
+    {
+      "id": "s011",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 1049,
+      "error": 2.2561581757056848,
+      "mse": 0.0021507704248862583,
+      "used": 21
+    },
+    {
+      "id": "s012",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 699,
+      "error": 0.7289283073875314,
+      "mse": 0.0010428158903970407,
+      "used": 24
+    },
+    {
+      "id": "s013",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 478,
+      "error": 0.7108192720565222,
+      "mse": 0.0014870696068128078,
+      "used": 7
+    },
+    {
+      "id": "s014",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 1731,
+      "error": 24.96445605149409,
+      "mse": 0.014421985009528647,
+      "used": 6
+    },
+    {
+      "id": "s015",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 590,
+      "error": 1.5583696679362702,
+      "mse": 0.0026413045219258816,
+      "used": 31
+    },
+    {
+      "id": "s016",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 301,
+      "error": 0.5995389474110039,
+      "mse": 0.001991823745551508,
+      "used": 21
+    },
+    {
+      "id": "s017",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 665,
+      "error": 0.4855921892003669,
+      "mse": 0.0007302138183464164,
+      "used": 26
+    },
+    {
+      "id": "s018",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 755,
+      "error": 2.169514301185253,
+      "mse": 0.002873528875742057,
+      "used": 8
+    },
+    {
+      "id": "s019",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 1427,
+      "error": 3.592957628023145,
+      "mse": 0.002517839963576135,
+      "used": 8
+    },
+    {
+      "id": "s020",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 6932,
+      "error": 8.328404881667678,
+      "mse": 0.0012014432893346332,
+      "used": 24
+    },
+    {
+      "id": "s021",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 230400,
+      "error": 104.18840129123552,
+      "mse": 0.00045220660282654305,
+      "used": 19
+    },
+    {
+      "id": "s022",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 1491,
+      "error": 31.687546906746018,
+      "mse": 0.02125254655046681,
+      "used": 12
+    },
+    {
+      "id": "s023",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 35852,
+      "error": 181.65137577620538,
+      "mse": 0.005066701321438285,
+      "used": 38
+    },
+    {
+      "id": "s024",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 842,
+      "error": 0.46850151553317054,
+      "mse": 0.000556415101583338,
+      "used": 22
+    },
+    {
+      "id": "s025",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 300,
+      "error": 0.25532808388428324,
+      "mse": 0.0008510936129476108,
+      "used": 18
+    },
+    {
+      "id": "s026",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 3629,
+      "error": 4.040899994792036,
+      "mse": 0.001113502340807946,
+      "used": 37
+    },
+    {
+      "id": "s027",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 7883,
+      "error": 12.455939302280443,
+      "mse": 0.0015801013956971259,
+      "used": 24
+    },
+    {
+      "id": "s028",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 1069,
+      "error": 0.961797834865062,
+      "mse": 0.0008997173385080093,
+      "used": 22
+    },
+    {
+      "id": "s029",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 2205,
+      "error": 8.985361569184137,
+      "mse": 0.004074993908927046,
+      "used": 7
+    },
+    {
+      "id": "s030",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 1379,
+      "error": 1.2997548655049886,
+      "mse": 0.0009425343477193536,
+      "used": 15
+    },
+    {
+      "id": "s031",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 1352,
+      "error": 2.0035480304359092,
+      "mse": 0.001481914223695199,
+      "used": 24
+    },
+    {
+      "id": "s032",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 252,
+      "error": 0.26709593291999134,
+      "mse": 0.0010599044957142513,
+      "used": 4
+    },
+    {
+      "id": "s033",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 661,
+      "error": 0.56701651162117,
+      "mse": 0.0008578162051757487,
+      "used": 25
+    },
+    {
+      "id": "s034",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 440,
+      "error": 0.3032044814167399,
+      "mse": 0.0006891010941289543,
+      "used": 25
+    },
+    {
+      "id": "s035",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 604,
+      "error": 0.5222217814018043,
+      "mse": 0.0008646055983473582,
+      "used": 20
+    },
+    {
+      "id": "s036",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 2207,
+      "error": 2.165808504527569,
+      "mse": 0.000981335978490063,
+      "used": 3
+    },
+    {
+      "id": "s037",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 4096,
+      "error": 1.5004882126608656,
+      "mse": 0.00036633013004415665,
+      "used": 4
+    },
+    {
+      "id": "s038",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 3423,
+      "error": 1.8297069280600349,
+      "mse": 0.0005345331370318537,
+      "used": 17
+    },
+    {
+      "id": "s039",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 9258,
+      "error": 12.31605881660913,
+      "mse": 0.0013303152750711957,
+      "used": 26
+    },
+    {
+      "id": "s040",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 1367,
+      "error": 1.991743710418478,
+      "mse": 0.001457018076385134,
+      "used": 20
+    },
+    {
+      "id": "s041",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 2120,
+      "error": 3.668322060570884,
+      "mse": 0.0017303405946089076,
+      "used": 46
+    },
+    {
+      "id": "s042",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 237,
+      "error": 0.258688977577335,
+      "mse": 0.0010915146733220886,
+      "used": 19
+    },
+    {
+      "id": "s043",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 1366,
+      "error": 3.338177713239503,
+      "mse": 0.0024437611370713786,
+      "used": 15
+    },
+    {
+      "id": "s044",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 2034,
+      "error": 3.005122871485596,
+      "mse": 0.0014774448729034397,
+      "used": 10
+    },
+    {
+      "id": "s045",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 2289,
+      "error": 2.376017545003101,
+      "mse": 0.0010380155286164705,
+      "used": 17
+    },
+    {
+      "id": "s046",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 9287,
+      "error": 20.943575097753175,
+      "mse": 0.002255149682109742,
+      "used": 41
+    },
+    {
+      "id": "s047",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 3427,
+      "error": 2.3806150549193528,
+      "mse": 0.0006946644455556909,
+      "used": 34
+    },
+    {
+      "id": "s048",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 1635,
+      "error": 4.188108913772548,
+      "mse": 0.002561534503836421,
+      "used": 9
+    },
+    {
+      "id": "s049",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 561,
+      "error": 0.6208237087795233,
+      "mse": 0.0011066376270579738,
+      "used": 10
+    },
+    {
+      "id": "s050",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 669,
+      "error": 1.111688774041905,
+      "mse": 0.0016617171510342377,
+      "used": 9
+    },
+    {
+      "id": "s051",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 1155,
+      "error": 2.3845655692623686,
+      "mse": 0.002064558934426293,
+      "used": 13
+    },
+    {
+      "id": "s052",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 9003,
+      "error": 13.177161424195198,
+      "mse": 0.001463641166743885,
+      "used": 19
+    },
+    {
+      "id": "s053",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 256,
+      "error": 0.11065977954848469,
+      "mse": 0.0004322647638612683,
+      "used": 1
+    },
+    {
+      "id": "s054",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 36189,
+      "error": 196.70325656875173,
+      "mse": 0.0054354432719542324,
+      "used": 37
+    },
+    {
+      "id": "s055",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 227,
+      "error": 0.22785552445890722,
+      "mse": 0.0010037688302154504,
+      "used": 11
+    },
+    {
+      "id": "s056",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 8192,
+      "error": 5.993707440318281,
+      "mse": 0.0007316537402732277,
+      "used": 7
+    },
+    {
+      "id": "s057",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 411,
+      "error": 4.087622431253757,
+      "mse": 0.009945553360714737,
+      "used": 6
+    },
+    {
+      "id": "s058",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 476,
+      "error": 0.6443396379320208,
+      "mse": 0.0013536547015378588,
+      "used": 28
+    },
+    {
+      "id": "s059",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 1977,
+      "error": 8.152361651740236,
+      "mse": 0.004123602251765421,
+      "used": 16
+    },
+    {
+      "id": "s060",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 256,
+      "error": 0,
+      "mse": 0,
+      "used": 2
+    },
+    {
+      "id": "s061",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 1914,
+      "error": 10.26737870645185,
+      "mse": 0.005364356690936181,
+      "used": 12
+    },
+    {
+      "id": "s062",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 2105,
+      "error": 3.0396791665234715,
+      "mse": 0.0014440281076121004,
+      "used": 28
+    },
+    {
+      "id": "s063",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 4476,
+      "error": 11.781352781211485,
+      "mse": 0.0026321163496897866,
+      "used": 14
+    },
+    {
+      "id": "s064",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 615,
+      "error": 1.7614969555629192,
+      "mse": 0.0028642226919722265,
+      "used": 23
+    },
+    {
+      "id": "s065",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 2034,
+      "error": 4.680922362475795,
+      "mse": 0.0023013384279625343,
+      "used": 30
+    },
+    {
+      "id": "s066",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 391,
+      "error": 0.5638049310735356,
+      "mse": 0.0014419563454566126,
+      "used": 26
+    },
+    {
+      "id": "s067",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 16384,
+      "error": 55.45440865156849,
+      "mse": 0.0033846684967998347,
+      "used": 44
+    },
+    {
+      "id": "s068",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 2120,
+      "error": 9.59504455349391,
+      "mse": 0.004525964412025429,
+      "used": 15
+    },
+    {
+      "id": "s069",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 438,
+      "error": 0.4945586327240859,
+      "mse": 0.0011291292984568172,
+      "used": 20
+    },
+    {
+      "id": "s070",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 342,
+      "error": 0.37098791697343675,
+      "mse": 0.0010847599911503998,
+      "used": 10
+    },
+    {
+      "id": "s071",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 482,
+      "error": 0.6371559884730552,
+      "mse": 0.001321900391022936,
+      "used": 10
+    },
+    {
+      "id": "s072",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 1128,
+      "error": 0.6798385424987845,
+      "mse": 0.0006026937433499862,
+      "used": 16
+    },
+    {
+      "id": "s073",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 1024,
+      "error": 2.207861631442426,
+      "mse": 0.0021561148744554943,
+      "used": 9
+    },
+    {
+      "id": "s074",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 1682,
+      "error": 2.3422705400010098,
+      "mse": 0.0013925508561242626,
+      "used": 32
+    },
+    {
+      "id": "s075",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 306,
+      "error": 0.5966811069892791,
+      "mse": 0.001949938258134899,
+      "used": 18
+    },
+    {
+      "id": "s076",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 468,
+      "error": 0.34861800123664693,
+      "mse": 0.0007449102590526644,
+      "used": 22
+    },
+    {
+      "id": "s077",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 517,
+      "error": 0.8510046598757681,
+      "mse": 0.0016460438295469403,
+      "used": 20
+    },
+    {
+      "id": "s078",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 5124,
+      "error": 8.491177737398331,
+      "mse": 0.0016571385123728202,
+      "used": 24
+    },
+    {
+      "id": "s079",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 677,
+      "error": 0.5469610005073857,
+      "mse": 0.0008079187599813674,
+      "used": 11
+    },
+    {
+      "id": "s080",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 970,
+      "error": 2.1452993405557526,
+      "mse": 0.0022116488046966523,
+      "used": 12
+    },
+    {
+      "id": "s081",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 352,
+      "error": 0.18087974764070736,
+      "mse": 0.0005138629194338277,
+      "used": 15
+    },
+    {
+      "id": "s082",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 1697,
+      "error": 8.912970325079788,
+      "mse": 0.005252192295273888,
+      "used": 18
+    },
+    {
+      "id": "s083",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 9496,
+      "error": 7.315434532277946,
+      "mse": 0.0007703701066004577,
+      "used": 31
+    },
+    {
+      "id": "s084",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 398,
+      "error": 0.4113629357474103,
+      "mse": 0.0010335752154457545,
+      "used": 10
+    },
+    {
+      "id": "s085",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 4763,
+      "error": 22.391590313661514,
+      "mse": 0.0047011527007477455,
+      "used": 26
+    },
+    {
+      "id": "s086",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 526,
+      "error": 0.4236842374600509,
+      "mse": 0.000805483341178804,
+      "used": 36
+    },
+    {
+      "id": "s087",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 4096,
+      "error": 0.9303465454574876,
+      "mse": 0.00022713538707458194,
+      "used": 3
+    },
+    {
+      "id": "s088",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 37169,
+      "error": 174.61131546540443,
+      "mse": 0.004697767372417994,
+      "used": 41
+    },
+    {
+      "id": "s089",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 499,
+      "error": 3.185209624689265,
+      "mse": 0.0063831856206197695,
+      "used": 14
+    },
+    {
+      "id": "s090",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 262144,
+      "error": 184.43830955687477,
+      "mse": 0.0007035763151431075,
+      "used": 35
+    },
+    {
+      "id": "s091",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 239400,
+      "error": 313.9090333059596,
+      "mse": 0.0013112323864075172,
+      "used": 34
+    },
+    {
+      "id": "s092",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 951,
+      "error": 1.0493493493032429,
+      "mse": 0.0011034167710864803,
+      "used": 45
+    },
+    {
+      "id": "s093",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 414,
+      "error": 0.5150366340666279,
+      "mse": 0.0012440498407406471,
+      "used": 21
+    },
+    {
+      "id": "s094",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 2601,
+      "error": 1.8469478694257246,
+      "mse": 0.000710091453066407,
+      "used": 27
+    },
+    {
+      "id": "s095",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 32768,
+      "error": 64.11729862120265,
+      "mse": 0.0019567046698365067,
+      "used": 45
+    },
+    {
+      "id": "s096",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 977,
+      "error": 1.2752341876597937,
+      "mse": 0.0013052550538994818,
+      "used": 9
+    },
+    {
+      "id": "s097",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 711,
+      "error": 0.746365411436331,
+      "mse": 0.0010497403817669915,
+      "used": 16
+    },
+    {
+      "id": "s098",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 35367,
+      "error": 191.3331036222308,
+      "mse": 0.005409933090797376,
+      "used": 36
+    },
+    {
+      "id": "s099",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 12280,
+      "error": 33.76089750543748,
+      "mse": 0.0027492587545144523,
+      "used": 14
+    },
+    {
+      "id": "s100",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 256,
+      "error": 0,
+      "mse": 0,
+      "used": 2
+    },
+    {
+      "id": "s101",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 2322,
+      "error": 10.797200461733214,
+      "mse": 0.004649957132529377,
+      "used": 9
+    },
+    {
+      "id": "s102",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 795,
+      "error": 2.3676062849946238,
+      "mse": 0.0029781211132007845,
+      "used": 25
+    },
+    {
+      "id": "s103",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 133,
+      "error": 0.4197226043984582,
+      "mse": 0.0031558090556275055,
+      "used": 15
+    },
+    {
+      "id": "s104",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 2961,
+      "error": 11.613223489901085,
+      "mse": 0.003922061293448526,
+      "used": 9
+    },
+    {
+      "id": "s105",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 13949,
+      "error": 148.45059910663198,
+      "mse": 0.010642382902475588,
+      "used": 41
+    },
+    {
+      "id": "s106",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 230400,
+      "error": 105.52273806123475,
+      "mse": 0.0004579979950574425,
+      "used": 22
+    },
+    {
+      "id": "s107",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 65,
+      "error": 0.02371388209260674,
+      "mse": 0.0003648289552708729,
+      "used": 11
+    },
+    {
+      "id": "s108",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 765,
+      "error": 0.7577913018175095,
+      "mse": 0.0009905768651209275,
+      "used": 15
+    },
+    {
+      "id": "s109",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 308,
+      "error": 1.0201049617214706,
+      "mse": 0.003312029096498281,
+      "used": 7
+    },
+    {
+      "id": "s110",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 417,
+      "error": 0.39511613349419356,
+      "mse": 0.0009475207038230062,
+      "used": 27
+    },
+    {
+      "id": "s111",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 16384,
+      "error": 67.45899834739218,
+      "mse": 0.004117370504601574,
+      "used": 10
+    },
+    {
+      "id": "s112",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 817,
+      "error": 1.4465960731879823,
+      "mse": 0.0017706194286266613,
+      "used": 30
+    },
+    {
+      "id": "s113",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 8530,
+      "error": 14.559416526005991,
+      "mse": 0.0017068483617826485,
+      "used": 41
+    },
+    {
+      "id": "s114",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 2280,
+      "error": 3.005122871485596,
+      "mse": 0.0013180363471428052,
+      "used": 11
+    },
+    {
+      "id": "s115",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 32768,
+      "error": 74.86719884251387,
+      "mse": 0.0022847655896763267,
+      "used": 59
+    },
+    {
+      "id": "s116",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 1957,
+      "error": 10.555301699041555,
+      "mse": 0.005393613540644638,
+      "used": 8
+    },
+    {
+      "id": "s117",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 8192,
+      "error": 4.186392552605232,
+      "mse": 0.0005110342471441934,
+      "used": 10
+    },
+    {
+      "id": "s118",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 256,
+      "error": 5.722843867090347,
+      "mse": 0.02235485885582167,
+      "used": 5
+    },
+    {
+      "id": "s119",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 1132,
+      "error": 2.984158520281314,
+      "mse": 0.002636182438411055,
+      "used": 17
+    },
+    {
+      "id": "s120",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 495,
+      "error": 0.4587861769090547,
+      "mse": 0.0009268407614324338,
+      "used": 14
+    },
+    {
+      "id": "s121",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 353,
+      "error": 0.3001333928463477,
+      "mse": 0.0008502362403579255,
+      "used": 13
+    },
+    {
+      "id": "s122",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 417,
+      "error": 0.2643245910217632,
+      "mse": 0.0006338719209154993,
+      "used": 28
+    },
+    {
+      "id": "s123",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 120231,
+      "error": 405.38734138720554,
+      "mse": 0.0033717372506858094,
+      "used": 38
+    },
+    {
+      "id": "s124",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 728,
+      "error": 1.3041980642011612,
+      "mse": 0.0017914808574191776,
+      "used": 15
+    },
+    {
+      "id": "s125",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 209,
+      "error": 0.2290064776883769,
+      "mse": 0.0010957247736285976,
+      "used": 5
+    },
+    {
+      "id": "s126",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 16384,
+      "error": 37.08468839312692,
+      "mse": 0.002263469750557063,
+      "used": 11
+    },
+    {
+      "id": "s127",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 2103,
+      "error": 5.2023971163067335,
+      "mse": 0.0024737979630559837,
+      "used": 11
+    },
+    {
+      "id": "s128",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 332,
+      "error": 0.5499419416943324,
+      "mse": 0.001656451631609435,
+      "used": 26
+    },
+    {
+      "id": "s129",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 811,
+      "error": 0.9265852037105176,
+      "mse": 0.001142521829482759,
+      "used": 29
+    },
+    {
+      "id": "s130",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 256,
+      "error": 0,
+      "mse": 0,
+      "used": 2
+    },
+    {
+      "id": "s131",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 3864,
+      "error": 3.2013188979342555,
+      "mse": 0.0008284986795896106,
+      "used": 30
+    },
+    {
+      "id": "s132",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 2539,
+      "error": 6.998170934663976,
+      "mse": 0.0027562705532351225,
+      "used": 20
+    },
+    {
+      "id": "s133",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 1219,
+      "error": 1.5105944764901225,
+      "mse": 0.0012392079380558838,
+      "used": 25
+    },
+    {
+      "id": "s134",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 251,
+      "error": 0.6193086573848133,
+      "mse": 0.002467365168863798,
+      "used": 7
+    },
+    {
+      "id": "s135",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 755,
+      "error": 2.3038574241331577,
+      "mse": 0.003051466786931335,
+      "used": 16
+    },
+    {
+      "id": "s136",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 2469,
+      "error": 5.521622754362642,
+      "mse": 0.002236380216428774,
+      "used": 6
+    },
+    {
+      "id": "s137",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 4041,
+      "error": 7.340075488448605,
+      "mse": 0.0018164007642782986,
+      "used": 22
+    },
+    {
+      "id": "s138",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 340,
+      "error": 0.5776470483650561,
+      "mse": 0.0016989619069560473,
+      "used": 17
+    },
+    {
+      "id": "s139",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 32256,
+      "error": 266.206864626123,
+      "mse": 0.008252940991633278,
+      "used": 20
+    },
+    {
+      "id": "s140",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 1609,
+      "error": 15.605280622875831,
+      "mse": 0.009698744948959498,
+      "used": 13
+    },
+    {
+      "id": "s141",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 3100,
+      "error": 6.007299247824432,
+      "mse": 0.0019378384670401393,
+      "used": 9
+    },
+    {
+      "id": "s142",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 966,
+      "error": 1.4517464522969998,
+      "mse": 0.0015028431183198756,
+      "used": 16
+    },
+    {
+      "id": "s143",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 1263,
+      "error": 1.6047942123527321,
+      "mse": 0.0012706209123932953,
+      "used": 18
+    },
+    {
+      "id": "s144",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 2030,
+      "error": 3.46592893185132,
+      "mse": 0.00170735415362134,
+      "used": 34
+    },
+    {
+      "id": "s145",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 256,
+      "error": 1.3632981355273774,
+      "mse": 0.005325383341903818,
+      "used": 8
+    },
+    {
+      "id": "s146",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 20480,
+      "error": 54.90898994067981,
+      "mse": 0.0026811030244472565,
+      "used": 8
+    },
+    {
+      "id": "s147",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 1024,
+      "error": 4.596062606985948,
+      "mse": 0.0044883423896347144,
+      "used": 24
+    },
+    {
+      "id": "s148",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 36864,
+      "error": 52.49781425545539,
+      "mse": 0.0014240943537178654,
+      "used": 27
+    },
+    {
+      "id": "s149",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 4679,
+      "error": 18.46484617542052,
+      "mse": 0.003946323183462389,
+      "used": 12
+    },
+    {
+      "id": "s150",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 4096,
+      "error": 0,
+      "mse": 0,
+      "used": 1
+    },
+    {
+      "id": "s151",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 432,
+      "error": 0.4114085054785772,
+      "mse": 0.0009523345034226325,
+      "used": 12
+    },
+    {
+      "id": "s152",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 4096,
+      "error": 2.0439703481770555,
+      "mse": 0.0004990161982854139,
+      "used": 6
+    },
+    {
+      "id": "s153",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 91,
+      "error": 0.2087045804732579,
+      "mse": 0.0022934569282775596,
+      "used": 9
+    },
+    {
+      "id": "s154",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 353,
+      "error": 0.1882488657931025,
+      "mse": 0.0005332829059294688,
+      "used": 19
+    },
+    {
+      "id": "s155",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 136,
+      "error": 0.33586440656875,
+      "mse": 0.0024695912247702204,
+      "used": 18
+    },
+    {
+      "id": "s156",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 436,
+      "error": 3.5997872491668748,
+      "mse": 0.00825639277331852,
+      "used": 9
+    },
+    {
+      "id": "s157",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 4096,
+      "error": 0,
+      "mse": 0,
+      "used": 2
+    },
+    {
+      "id": "s158",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 496,
+      "error": 0.4599204281372172,
+      "mse": 0.0009272589276960024,
+      "used": 26
+    },
+    {
+      "id": "s159",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 25600,
+      "error": 31.631714693739564,
+      "mse": 0.0012356138552242018,
+      "used": 51
+    },
+    {
+      "id": "s160",
+      "group": "corpus",
+      "model": "adaptive-64",
+      "visible": 2059,
+      "error": 3.0206460824989327,
+      "mse": 0.0014670452076245423,
+      "used": 28
+    },
+    {
+      "id": "building1",
+      "group": "buildings",
+      "model": "adaptive-32",
+      "visible": 11647,
+      "error": 17.906303103166863,
+      "mse": 0.001537417627128605,
+      "used": 31
+    },
+    {
+      "id": "building2",
+      "group": "buildings",
+      "model": "adaptive-32",
+      "visible": 29411,
+      "error": 23.675512789374125,
+      "mse": 0.0008049883645361982,
+      "used": 13
+    },
+    {
+      "id": "building3",
+      "group": "buildings",
+      "model": "adaptive-32",
+      "visible": 29055,
+      "error": 16.547154903898658,
+      "mse": 0.0005695114405058909,
+      "used": 13
+    },
+    {
+      "id": "building4",
+      "group": "buildings",
+      "model": "adaptive-32",
+      "visible": 21293,
+      "error": 1.9501552617390088,
+      "mse": 0.00009158668396839378,
+      "used": 7
+    },
+    {
+      "id": "building5",
+      "group": "buildings",
+      "model": "adaptive-32",
+      "visible": 15524,
+      "error": 9.352205369466047,
+      "mse": 0.0006024352853302014,
+      "used": 15
+    },
+    {
+      "id": "building6",
+      "group": "buildings",
+      "model": "adaptive-32",
+      "visible": 30633,
+      "error": 7.885455717430089,
+      "mse": 0.00025741702469330753,
+      "used": 12
+    },
+    {
+      "id": "building1",
+      "group": "buildings",
+      "model": "adaptive-64",
+      "visible": 11647,
+      "error": 6.8508306860960015,
+      "mse": 0.000588205605400189,
+      "used": 57
+    },
+    {
+      "id": "building2",
+      "group": "buildings",
+      "model": "adaptive-64",
+      "visible": 29411,
+      "error": 7.569937062495264,
+      "mse": 0.0002573845521231942,
+      "used": 18
+    },
+    {
+      "id": "building3",
+      "group": "buildings",
+      "model": "adaptive-64",
+      "visible": 29055,
+      "error": 4.101063493902105,
+      "mse": 0.00014114828752029271,
+      "used": 19
+    },
+    {
+      "id": "building4",
+      "group": "buildings",
+      "model": "adaptive-64",
+      "visible": 21293,
+      "error": 1.0874350308014977,
+      "mse": 0.00005107007142260357,
+      "used": 8
+    },
+    {
+      "id": "building5",
+      "group": "buildings",
+      "model": "adaptive-64",
+      "visible": 15524,
+      "error": 2.57089418825632,
+      "mse": 0.00016560771632674053,
+      "used": 18
+    },
+    {
+      "id": "building6",
+      "group": "buildings",
+      "model": "adaptive-64",
+      "visible": 30633,
+      "error": 2.6364635005506183,
+      "mse": 0.000086066121520929,
+      "used": 16
+    },
+    {
+      "id": "building1",
+      "group": "buildings",
+      "model": "custom-255",
+      "visible": 11647,
+      "error": 13.861748469808392,
+      "mse": 0.0011901561320347208,
+      "used": 73
+    },
+    {
+      "id": "building2",
+      "group": "buildings",
+      "model": "custom-255",
+      "visible": 29411,
+      "error": 38.278034596101804,
+      "mse": 0.0013014870149298495,
+      "used": 20
+    },
+    {
+      "id": "building3",
+      "group": "buildings",
+      "model": "custom-255",
+      "visible": 29055,
+      "error": 76.76297247637042,
+      "mse": 0.002641988383285852,
+      "used": 17
+    },
+    {
+      "id": "building4",
+      "group": "buildings",
+      "model": "custom-255",
+      "visible": 21293,
+      "error": 13.453073563238412,
+      "mse": 0.0006318073340176777,
+      "used": 7
+    },
+    {
+      "id": "building5",
+      "group": "buildings",
+      "model": "custom-255",
+      "visible": 15524,
+      "error": 19.491311096695046,
+      "mse": 0.00125555984905276,
+      "used": 14
+    },
+    {
+      "id": "building6",
+      "group": "buildings",
+      "model": "custom-255",
+      "visible": 30633,
+      "error": 18.31483043808664,
+      "mse": 0.00059787909894841,
+      "used": 13
+    }
+  ],
+  "summary": [
+    {
+      "group": "corpus",
+      "model": "adaptive-32",
+      "images": 160,
+      "pixelMSE": 0.002934132886605164,
+      "imageMeanMSE": 0.004526998424204688,
+      "medianUsed": 13,
+      "maxUsed": 32
+    },
+    {
+      "group": "corpus",
+      "model": "adaptive-64",
+      "images": 160,
+      "pixelMSE": 0.001843394016836646,
+      "imageMeanMSE": 0.0025038639016169272,
+      "medianUsed": 17,
+      "maxUsed": 59
+    },
+    {
+      "group": "buildings",
+      "model": "adaptive-32",
+      "images": 6,
+      "pixelMSE": 0.0005620463870741027,
+      "imageMeanMSE": 0.0006438927376937662,
+      "medianUsed": 13,
+      "maxUsed": 31
+    },
+    {
+      "group": "buildings",
+      "model": "adaptive-64",
+      "images": 6,
+      "pixelMSE": 0.00018040188104433467,
+      "imageMeanMSE": 0.0002149137257189915,
+      "medianUsed": 18,
+      "maxUsed": 57
+    },
+    {
+      "group": "buildings",
+      "model": "custom-255",
+      "images": 6,
+      "pixelMSE": 0.0013096688109469894,
+      "imageMeanMSE": 0.0012698129687115452,
+      "medianUsed": 17,
+      "maxUsed": 73
+    }
+  ]
+}

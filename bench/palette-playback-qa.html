@@ -1,0 +1,37 @@
+<!doctype html>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Palette playback regression</title>
+<style>body{margin:0;font:14px system-ui;background:#202630;color:white}header{padding:8px;display:flex;gap:12px;align-items:center}button{font:inherit;padding:8px}pre{margin:8px;white-space:pre-wrap;overflow-wrap:anywhere;max-height:100px;overflow:auto}iframe{width:100%;height:calc(100vh - 175px);border:0}</style>
+<header><button id="measure">Measure playback</button><span>Import an animation in the app below. Checks its wall tile or open Preview for 2 seconds.</span></header>
+<pre id="result">Waiting for a measurement.</pre>
+<iframe title="Bitify under test" src="./"></iframe>
+<script>
+// Browser-only regression harness. Copy next to a built index.html and operate
+// through Codex browser. It observes the actual canvas lifecycle and completed
+// paints; a PNG/GIF export test alone cannot detect gaps during async playback.
+document.querySelector('#measure').onclick=async()=>{
+ const button=document.querySelector('#measure');
+ if(button.disabled)return;
+ const frame=document.querySelector('iframe'),w=frame.contentWindow,d=frame.contentDocument;
+ const art=d.querySelector('dialog.image-viewer[open] .art')??d.querySelector('.grid .art');
+ if(!art){document.querySelector('#result').textContent='FAIL: import an animation first.';return;}
+ button.disabled=true;
+ const original=w.CanvasRenderingContext2D.prototype.putImageData;
+ const stats={samples:0,missingAfterFirst:0,canvasRemovals:0,paints:0,emptyPaints:0,intervals:[]};
+ let painted=!!art.querySelector('canvas'),lastPaint,raf;
+ const observer=new w.MutationObserver(records=>{for(const record of records)for(const node of record.removedNodes)if(node.nodeName==='CANVAS'||node.querySelector?.('canvas'))stats.canvasRemovals++;});
+ observer.observe(art,{childList:true,subtree:true});
+ w.CanvasRenderingContext2D.prototype.putImageData=function(image,...args){
+  if(art.contains(this.canvas)){const now=performance.now();if(lastPaint)stats.intervals.push(now-lastPaint);lastPaint=now;stats.paints++;if(!image.data.some((v,i)=>i%4===3&&v))stats.emptyPaints++;painted=true;}
+  return original.call(this,image,...args);
+ };
+ const sample=()=>{stats.samples++;if(painted&&!art.querySelector('canvas'))stats.missingAfterFirst++;raf=w.requestAnimationFrame(sample);};sample();
+ document.querySelector('#result').textContent='Measuring…';
+ try{await new Promise(resolve=>setTimeout(resolve,2000));}
+ finally{observer.disconnect();w.cancelAnimationFrame(raf);w.CanvasRenderingContext2D.prototype.putImageData=original;button.disabled=false;}
+ stats.maxIntervalMs=Math.round(Math.max(0,...stats.intervals));
+ // Empty paints are descriptive: a source may intentionally have transparent frames.
+ stats.pass=stats.paints>=2&&stats.missingAfterFirst===0&&stats.canvasRemovals===0;
+ document.querySelector('#result').textContent=(stats.pass?'PASS':'FAIL')+' '+JSON.stringify(stats);
+};
+</script>

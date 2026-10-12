@@ -787,8 +787,10 @@ bypassed for high-entropy sources, avoiding an unconditional source-color Map.
 
 The wall uses the existing center-spread sampling coordinates and display-sized picture
 dimensions. Pointwise nearest matching agrees with full conversion at those coordinates.
-Sprites fitting the display remain full resolution. `Tile.svelte` retains one current
-full-palette frame outside the legacy mask cache. Changes to palette, matching, size,
+Sprites fitting the display remain full resolution. `Tile.svelte` retains one completed
+full-palette frame from the same item outside the legacy mask cache while settings or
+the next animation frame convert. This keeps the canvas mounted through cooperative
+yields; item/family changes clear it. Changes to palette, matching, size,
 alpha or animation frame cancel the previous cooperative job, so stale results cannot replace the current
 preview. Full palette playback advances only after that frame is converted and its source
 delay has elapsed; expensive previews can play slower than the original. Original view
@@ -942,9 +944,10 @@ All remains the default and returns the existing prepared palette without import
 selection core or starting a worker. A limit at least the selected palette size does the same.
 The slider updates its local display while dragged and commits after a 200ms pause or
 immediately on release/change. Closing, palette/family switching, pointer cancellation,
-All and Reset cancel pending values. The last completed preview of the same source frame
-stays visible while a new subset/rendering is prepared; unrelated frames/families cannot
-reuse those pixels. Converted playback waits for the current result. The number
+All and Reset cancel pending values. The last completed preview of the same item
+stays visible while a new subset/rendering or next animation frame is prepared;
+unrelated items/families cannot reuse those pixels. Converted playback waits for the
+current result. The number
 field commits valid integers on change/Enter/blur. All/Reset suppress premature pointer
 blur so discarding a typed number does not fetch the optional code.
 

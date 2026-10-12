@@ -154,14 +154,15 @@
   // One current frame lives outside the legacy mask cache. Cancelling a job prevents
   // a previous palette, matching rule, opacity, size or frame from replacing the current preview.
   let fullPixels = $state.raw(null), fullReady = $state(false);
-  let fullSource;
+  let fullItem;
   $effect(() => {
     const source = frames[at].original, colors = conversionPalette, width = mw, height = mh, cut = alphaCut, matching = metric, clean = conversionCleanup;
     fullReady = false;
-    // Retain the last completed rendering of this frame during settings work.
-    // A different source/frame or family must never display unrelated pixels.
-    if (family !== 'full-palette' || fullSource !== source) fullPixels = null;
-    fullSource = source;
+    // Keep the last completed frame while the next frame or settings convert.
+    // Clearing it on every async frame removes the canvas and exposes the grid.
+    // Readiness still belongs to the requested frame, not these retained pixels.
+    if (family !== 'full-palette' || fullItem !== item) fullPixels = null;
+    fullItem = item;
     if (family !== 'full-palette' || !width || !colors || cleanup && !clean) return;
     const controller = new AbortController();
     quantizeAsync(source, colors, cut, width, height, { signal: controller.signal, metric: matching }).then(result => {
