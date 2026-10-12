@@ -195,8 +195,17 @@ approximates perceived color differences; **RGB** minimizes squared differences 
 encoded sRGB channel values (0–255), without channel weighting or brightness adjustment.
 Choose either in **Palette settings → Matching**; Oklab is the default. This global setting
 is remembered across visits and family switches; selecting a palette does not change it.
-The same source RGB maps to the same palette RGB at the same matching setting in every
-image. The palette is never regenerated or optimized separately for each image.
+With **Max colors: All** (the default), the same source RGB maps to the same palette RGB
+at the same matching setting in every image. All preserves the existing nearest conversion.
+The shared palette is never regenerated or changed.
+
+**Max colors** optionally selects up to 1–256 colors from that palette per image. Move
+the slider or enter a number; the change applies when you finish editing. **All** removes
+the limit. Selection reduces weighted color error using a bounded search, then pixels use nearest matching
+within the chosen subset. Small details can merge and separate images can choose different
+subsets, so identical source RGBs need not match identically when limited. Animations use
+one subset for all frames, weighted by frame duration. Transparency does not count toward
+the limit. The limit is remembered across visits and family switches.
 
 Each image can use a different subset of that shared set. It does not have to use every
 selected color. PNG exports compact unused entries, so files can have different stored
@@ -214,7 +223,8 @@ Output pixels are fully opaque or fully transparent. Opacity cut defaults to 128
 source alpha below the cut becomes empty. The range is 1–255, so alpha zero always stays
 empty. Palette settings always offers the compact Oklab / RGB control. Opacity cut appears
 only when an image has partial alpha or the cut has changed. The popup's 16px semibold **Nearest**
-title identifies the conversion method for both matching choices. Reset restores Oklab and cut
+title identifies the conversion method for both matching choices. Max colors follows Matching;
+Opacity cut follows when applicable. Reset restores Oklab, All and cut
 128 without changing the selected palette. Neither rule is universally visually best;
 compare with the original, especially when a palette lacks the source's hue. Other color
 spaces and palette dithering remain outside the current controls; see the
@@ -317,7 +327,8 @@ A deletion/storage failure is reported rather than silently clearing data.
 
 Full palette still images save as `-palette.png`; animated images save as `-palette.gif`.
 Save and Copy use every original-resolution pixel and a snapshot of the current matching rule, colors
-and alpha cut. PNG packs only used colors at the smallest 1/2/4/8-bit depth; all 256 used
+and alpha cut, including the optional maximum. Preview, Save and Copy select from the
+same full-resolution source; animation Copy uses its shared all-frame subset. PNG packs only used colors at the smallest 1/2/4/8-bit depth; all 256 used
 opaque colors plus empty use directly encoded RGBA PNG instead. No canvas encoding or
 implicit color reduction is used. Copy supplies a PNG of the first animation frame.
 
@@ -326,7 +337,8 @@ entry when needed. It permits 256 opaque used colors, or 255 opaque colors plus 
 If all 256 colors and transparency are used, Save opens a named copy constrained to 255
 colors. Remove colors explicitly, save the copy, then request a new download. Cancel
 preserves the original selection. Save all downloads no ZIP until all files succeed.
-Local GIF tables and automatic reduction are not implemented. Converted preview playback
+Local GIF tables and implicit automatic reduction are not implemented. An explicit Max
+colors limit applies before this compatibility check. Converted preview playback
 waits for each frame and may slow down on expensive images. Original comparison follows
 the source frame timers independently of conversion; exports retain source frame delays.
 

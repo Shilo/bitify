@@ -1817,8 +1817,8 @@ remain independent. The default is still Glow/Cutout in 1-bit.
   Equal distances retain the earliest entry. Every
   opaque output belongs to the selected set; every selected color need not appear.
 
-The selected full palette is shared across all images; no image generates its own palette.
-Identical visible source RGBs map identically at the same alpha cut and matching choice.
+The selected full palette is shared across all images; no image generates new palette colors.
+With Max colors: All, identical visible source RGBs map identically at the same alpha cut and matching choice.
 Nearest minimizes individual pixel distance under that rule, rather than local averaged shading error. PNG exports
 may compact different used subsets into different physical color tables; membership in
 the common selected RGB set is the shared-palette guarantee, not identical table bytes.
@@ -1829,15 +1829,46 @@ single-option method chooser. Source alpha below the family-specific Opacity cut
 empty; default 128, adjustable 1–255. Alpha zero always stays empty, and all other output
 alpha is binary. The settings icon/panel is always available, with a 16px semibold Nearest heading in the
 shared body font and heading color above 13px setting labels: one compact Matching row
-offers Oklab / RGB, followed by Opacity cut only for partial source alpha or a nondefault cut.
+offers Oklab / RGB, followed by Max colors and then Opacity cut only for partial source alpha or a nondefault cut.
 Oklab compares squared Euclidean perceived-color coordinates; RGB compares squared
 unweighted encoded sRGB8 channel differences. There is no brightness/contrast adjustment.
 The panel is at most 360px wide and capped to viewport width minus 24px and safe areas;
 rows stack vertically. Touch matching buttons are at least 44px high. Reset restores
-Oklab and cut 128, retaining the palette; keyboard Reset moves focus to enabled Oklab.
+Oklab, Max colors: All and cut 128, retaining the palette; keyboard Reset moves focus to enabled Oklab.
 HSL/HSV, CMYK, additional perceptual metrics and dithering are excluded pending demonstrated
 benefit; see docs/research/2026-10-11-palette-matching.md. Switching families retains the other family's
 state. Selecting/altering colors or conversion settings reveals converted output.
+
+Max colors is an additive integer preference: 0 means All (default), otherwise 1–256.
+All and limits at least the palette size return the original prepared palette immediately;
+they do not load the limiter or change nearest matching. The control is one row with a
+slider, exact integer field and pressed All button, following the existing tolerance/Auto
+pattern. All displays an empty field with a dash placeholder; moving the slider or
+committing a valid integer enables the limit. Range drags commit on change, not every
+pointer movement. Invalid, fractional or out-of-range numbers restore the applied value;
+an empty committed field selects All. The slider remembers its last limit (initially 16).
+All/Reset pointer presses prevent premature field-blur conversion but apply only on click.
+Number and All targets are 44px square, including the field border allowance.
+
+A limit selects existing shared-palette entries independently per original-resolution
+image, then applies the existing nearest quantizer to that subset. Animations select once
+across all frames, weighted by their positive delays (otherwise the existing 100ms fallback).
+Preview, viewer, first-frame Copy, Save and ZIP use the same stable selection. Source/palette
+edits cancel obsolete preview work; frame changes, resizing and comparison do not restart
+selection. Exports capture colors, metric, cut and maximum before awaiting work. Identical
+source RGB can map differently across separately limited images; small details can merge.
+The selected shared palette itself stays unchanged and transparency is outside the cap.
+
+Selection uses a bounded greedy/frequency seed and at most eight improving swaps, with
+original palette order retained for ties. Up to 4096 distinct source RGBs use an exact
+histogram. If unrestricted winners fit the cap, one pass preserves the existing output.
+Otherwise more colors use 4096 bounded bins and a second original-pixel pass choosing
+between the fitted subset and the true full-nearest frequency seed. This safeguards total
+error against that baseline, not semantic detail or a global optimum. A lazy serial worker
+receives new slices of at most 128 KiB with acknowledgment; originals are never detached.
+Shared subscribers cancel independently. The last cancellation terminates the worker and
+releases the queue, including during worker download. Missing workers use a cooperative
+lazy fallback. Failure shows retry/All guidance without silently exceeding the cap.
 
 The existing single conversion toggle keeps its style name in 1-bit and shows the
 selected palette's name in the full family. Short full-palette names keep their natural
@@ -2046,10 +2077,10 @@ including after the first-visit welcome, rather than the Help row in its closed 
 
 ### Persistence and reset
 
-Family, palette ID, alpha cut and global matching `metric` are additive preferences.
+Family, palette ID, alpha cut, global matching `metric` and `maxColors` are additive preferences.
 Missing or invalid metric restores Oklab; only `oklab` and `rgb` persist. Palette records
 do not own matching, so imports, edits and selections retain the global choice. Reset
-settings restores Oklab and cut 128. Missing selection falls back
+settings restores Oklab, Max colors: All, remembered limit 16 and cut 128. Missing selection falls back
 to PICO-8 while old preferences retain the default 1-bit family. Explicit named Save uses
 `bitify-palettes-v1`: version 1, at most 100 records and 256 KiB serialized UTF-8. Images
 and drafts are not persisted. Validate records independently. Each record has ID, name,
@@ -2068,7 +2099,7 @@ settings/library intact and reports the failure. No `localStorage.clear()` is us
 
 ### Original-resolution exports and playback
 
-Snapshot selected colors/matching/alpha/family at the Save or Copy gesture; asynchronous completion
+Snapshot selected colors/matching/maximum/alpha/family at the Save or Copy gesture; asynchronous completion
 cannot adopt later edits. Full palette exports use `-palette` filenames, with existing
 collision handling. Legacy `-1bit` names and bytes remain compatible. Copy exports PNG of
 the first animation frame. Save all downloads no file/ZIP until every encoding succeeds.
@@ -2080,7 +2111,8 @@ canvas or silently reduces the chosen colors. Full palette GIF preflights the gl
 union and its empty entry. It fits 256 opaque colors, or 255 opaque colors plus empty;
 all 256 plus empty opens a named 255-color copy instead of downloading. Remove colors
 explicitly, save/select the copy, then request a new download. Cancel preserves selection.
-Local GIF tables and automatic reduction are not implemented.
+Local GIF tables and implicit automatic reduction are not implemented. An explicit
+Max colors limit selects its subset before this compatibility check.
 
 GIF conversion retains only one converted frame per pass, transfers the remapped frame
 to one compression worker, and waits for its acknowledgment before proceeding. Worker

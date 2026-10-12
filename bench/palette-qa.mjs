@@ -34,6 +34,11 @@ for (const file of ['bitify.js', 'presets.js', 'settings.js']) {
 const baselineRef = process.env.BASE_REF ?? 'HEAD';
 writeFileSync(resolve(scratch,'baseline-save.mjs'),execFileSync('git',['show',`${baselineRef}:src/lib/save.js`],{encoding:'utf8'}).replace("from './bitify.js'","from '../../src/lib/bitify.js'"));
 writeFileSync(resolve(scratch,'baseline-gif.mjs'),execFileSync('git',['show',`${baselineRef}:src/lib/gif.js`],{encoding:'utf8'}));
+// Recent baselines share palette export helpers with their legacy encoders.
+// Snapshot that dependency too; importing today's helper would weaken the oracle.
+if (readFileSync(resolve(scratch, 'baseline-save.mjs'), 'utf8').includes("'./palette-export.js'")) {
+  writeFileSync(resolve(scratch, 'palette-export.js'), execFileSync('git', ['show', `${baselineRef}:src/lib/palette-export.js`], { encoding: 'utf8' }));
+}
 const { pngBytes: baselinePngBytes } = await import(pathToFileURL(resolve(scratch,'baseline-save.mjs')));
 const { encodeGif: baselineEncodeGif } = await import(pathToFileURL(resolve(scratch,'baseline-gif.mjs')));
 
@@ -273,6 +278,30 @@ try {
   await page.getByRole('button',{name:'Palette settings',exact:true}).click();await page.getByRole('button',{name:'Reset palette settings',exact:true}).click();
   assert.equal((await stored()).metric,'oklab');assert.equal((await stored()).alphaCut,128);await page.getByRole('button',{name:'Palette settings',exact:true}).click();
   results.extra.push('Seven full presets RGB preview/PNG/Copy match independent reference; ordered copy swatches/HEX backups preserve every entry; family retains metric and Reset restores Oklab/cut128');
+
+  // A one-color cap has an independently enumerable optimum. Retain a real UI,
+  // preview, PNG and clipboard regression without importing the selector.
+  let oneCost = Infinity, onePixels;
+  for (const color of FULL_PRESETS.at(-1).colors) {
+    const candidate = nearestReference(fixture, [color], 128, 'rgb'); let cost = 0;
+    for (let p = 0; p < source.length; p += 4) if (source[p + 3] >= 128)
+      for (let c = 0; c < 3; c++) cost += (source[p + c] - candidate[p + c]) ** 2;
+    if (cost < oneCost) { oneCost = cost; onePixels = candidate; }
+  }
+  await page.getByRole('button', { name: 'Palette settings', exact: true }).click();
+  await page.getByRole('button', { name: 'RGB matching', exact: true }).click();
+  const maximum = page.getByRole('spinbutton', { name: 'Max colors value', exact: true });
+  await maximum.fill('1'); await maximum.press('Enter'); assert.equal((await stored()).maxColors, 1);
+  await maximum.fill('257'); await maximum.press('Enter'); assert.equal(await maximum.inputValue(), '1');
+  await closePanel(); await tileMatches(onePixels);
+  samePixels(readPng(await download(page.getByRole('button', { name: 'Save fixture.png', exact: true }), 'fixture-palette.png')).pixels, onePixels, 'Max colors PNG optimum');
+  samePixels(readPng(await copy(page.getByRole('button', { name: 'Copy fixture.png', exact: true }))).pixels, onePixels, 'Max colors clipboard optimum');
+  await page.getByRole('button', { name: 'Palette settings', exact: true }).click();
+  await maximum.fill(''); await maximum.press('Enter'); assert.equal((await stored()).maxColors, 0);
+  await page.getByRole('button', { name: 'Reset palette settings', exact: true }).click();
+  state = await stored(); assert.equal(state.maxColors, 0); assert.equal(state.lastMaxColors, 16); assert.equal(state.metric, 'oklab');
+  await closePanel(); await tileMatches(nearestReference(fixture, FULL_PRESETS.at(-1).colors));
+  results.extra.push('Max colors committed/invalid/empty inputs, exact cap-one RGB optimum in preview/PNG/Copy, and All/remembered16 reset');
 
   // Full GIF: source compositing, preserved delays/loop, first-frame clipboard,
   // actual worker asset loaded under a deployment subpath, and mixed ZIP.

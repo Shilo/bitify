@@ -7,13 +7,14 @@
   import { imageGesture, IMAGE_HOLD_MS } from './lib/image-gesture.js';
   import { comparisonHold } from './lib/comparison-hold.js';
   import { quantizeAsync, colorize as palettePixels } from './lib/quantize.js';
+  import { getLimitedPalette } from './lib/palette-limit-client.js';
 
   // `flipped` true means originals are visible. App-managed comparison updates
   // that same value and the dock toggle; standalone previews use a local hold.
   // Without `onremove` the tile is a preview only and has no buttons.
   // `set` is the style's settings. `budget` is set while one of their sliders is being dragged:
   // the milliseconds this tile may take to convert its image after each move.
-  let { item, first, second, style, set, family = 'two-color', palette, alphaCut = 128, metric = 'oklab', flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false } = $props();
+  let { item, first, second, style, set, family = 'two-color', palette, alphaCut = 128, metric = 'oklab', maxColors = 0, onpaletteerror, flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false } = $props();
   let held = $state(false);
   const originalVisible = $derived(oncompare ? flipped : flipped !== held);
   let holdTimer;
@@ -111,11 +112,30 @@
     mw, mh;
     return frames.map(() => null);
   });
+  // A subset belongs to the full item, not the current animation frame or tile
+  // dimensions. Frame playback/resize cannot cancel this shared preparation.
+  const limitRequest = $derived({ item, palette, alphaCut, metric, maxColors });
+  let limited = $state.raw(null);
+  const conversionPalette = $derived(!maxColors || maxColors >= (palette?.size ?? 0) ? palette
+    : limited?.request === limitRequest ? limited.palette : null);
+  $effect(() => {
+    const request = limitRequest;
+    if (family !== 'full-palette' || !request.palette || !request.maxColors || request.maxColors >= request.palette.size) return;
+    const controller = new AbortController();
+    getLimitedPalette(request.item, request.palette, request.alphaCut, request.metric, request.maxColors, { signal: controller.signal }).then(result => {
+      if (!controller.signal.aborted) limited = { request, palette: result };
+    }).catch(error => {
+      if (controller.signal.aborted || error.name === 'AbortError') return;
+      if (onpaletteerror) onpaletteerror();
+      else console.error('Palette selection failed', error);
+    });
+    return () => controller.abort();
+  });
   // One current frame lives outside the legacy mask cache. Cancelling a job prevents
   // a previous palette, matching rule, opacity, size or frame from replacing the current preview.
   let fullPixels = $state.raw(null);
   $effect(() => {
-    const source = frames[at].original, colors = palette, width = mw, height = mh, cut = alphaCut, matching = metric;
+    const source = frames[at].original, colors = conversionPalette, width = mw, height = mh, cut = alphaCut, matching = metric;
     fullPixels = null;
     if (family !== 'full-palette' || !width || !colors) return;
     const controller = new AbortController();

@@ -880,3 +880,62 @@ Native Codex browser checked every preset at desktop/320px width and exercised U
 imports, blocked-host recovery, manual/paste mixing, cancellation and saved editing.
 Timeout tests assert the 30-second setting with shortened fixture timers; physical
 devices, Safari and native Discord-client drags remain unverified for the new modal route.
+
+### Optional Max colors (October 11, 2026)
+
+All remains the default and returns the existing prepared palette without importing the
+selection core or starting a worker. A limit at least the selected palette size does the same.
+The slider updates its local display while dragged and commits after release; the number
+field commits valid integers on change/Enter/blur. All/Reset suppress premature pointer
+blur so discarding a typed number does not fetch the optional code.
+
+Selection always reads full-resolution source pixels, even for reduced previews. A
+duration-weighted animation histogram chooses one subset for the whole animation, including
+its first-frame PNG Copy. Preview selection has its own effect, independent of frame,
+display dimensions and original comparison. A WeakMap keeps one completed selection per
+image; simultaneous preview/viewer/export requests share a job. Source identities, frame
+delays, palette order, matching, alpha cut and maximum participate in its cache signature.
+
+One lazy worker processes the queue serially. Each request transfers a new slice of at
+most 128 KiB and waits for acknowledgment; original RGBA buffers stay intact. The last
+subscriber cancellation terminates the worker immediately, releasing even a stalled module
+download; canceling one consumer does not stop an export that still needs the same job.
+Worker construction failure uses a dynamically imported cooperative core. Other failures
+produce an actionable toast rather than uncapped output.
+
+The source histogram is exact up to 4096 unique visible RGBs. Above that it collapses into
+4096 four-bit RGB bins with means in the chosen matching space, while still scanning every
+pixel. The largest distance matrix is 4096 × 256 Float64s (8 MiB); this excludes source
+frames, browser decoding, bin/histogram bookkeeping and export buffers. Scratch data is
+released after selection; the cache retains the prepared subset, not the matrix.
+
+If unrestricted nearest matching already uses at most the cap, selection returns those
+winning entries after one pass and preserves the output without fitting. Otherwise the
+bounded search compares a full-nearest frequency seed with greedy error reduction,
+then accepts up to eight improving swaps. Binned fitting uses a second original-pixel pass
+to check the final fitted subset against the true frequency seed and chooses the lower-error
+result. This is a heuristic with a baseline safeguard, not a global optimum; it can merge
+rare details. Only afterward does the existing nearest quantizer map pixels to that subset.
+
+Verification: 487 unit tests and the production build pass. The built-browser suite
+retains 132 legacy style/palette exports, all seven full presets in both matching modes
+and twelve integration categories, including a retained cap-one UI/PNG/Copy regression.
+The limiter suite adds 53 runtime flow checks and
+60 stress assertions covering worker/fallback parity, cancellation, export snapshots,
+GIF frame subsets and the 4096/4097-color boundary. Native Codex browser checked all six
+supplied buildings, two 1536×1024 AI images, 1.92/4 MP stress images, animations, partial
+alpha and 320px/short-landscape layouts. Independent decoding verified 136 downloaded outputs
+and 823 named contract assertions, including every-pixel membership, cap and nearest mapping.
+An actual native clipboard PNG also matched its equivalent limited download byte for byte.
+
+In an isolated desktop fixture, 1.92 MP cap-eight selection plus PNG Save took about
+0.94–1.21 seconds. Native mixed five-item exports took 3–9 seconds; those times include
+preview contention, full-resolution conversion, compression and browser automation.
+They are not isolated selector timings or a physical-phone budget. Mobile checks use
+responsive/touch emulation; physical iOS/Android and Safari remain unverified.
+
+Against `bd9bab3` built with identical installed dependencies, initial JavaScript adds
+7,677 raw bytes / 2,528 gzip bytes (3.31% gzip); CSS adds 273 raw / 57 gzip bytes.
+The optional worker including its selection core is 8,841 raw / 4,203 gzip bytes. The
+cooperative fallback is 4,458 raw / 2,212 gzip bytes and loads as an alternative path.
+These are artifact sizes measured with identical gzip settings, not download timings.

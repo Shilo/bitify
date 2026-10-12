@@ -6,13 +6,21 @@ tests beside it pin every rule described here. The settings are listed in
 [src/lib/settings.js](../src/lib/settings.js).
 
 The **Palette** family is separate from these structural and dithering styles. It matches
-each visible source RGB to the nearest selected color using Oklab (default) or RGB, after preserving exact
-palette RGB matches. It accepts 1–256 unique opaque colors; using a palette does not
+each visible source RGB to the nearest selected color using Oklab (default) or RGB. With
+**Max colors: All** (default), exact palette RGB matches are preserved and the existing
+matching path is unchanged. It accepts 1–256 unique opaque colors; using a palette does not
 guarantee every color appears in an image. Output alpha stays binary, with a separate
 Opacity cut of 1–255 (128 by default). Its settings control always offers **Matching:
-Oklab / RGB**; Opacity cut appears for partially transparent sources or a changed cut.
+Oklab / RGB** and **Max colors**; Opacity cut appears for partially transparent sources or a changed cut.
 Oklab approximates perceived differences; RGB compares encoded sRGB channel values.
-Reset restores Oklab and cut 128. There is no threshold, Swap, None or style chooser
+The maximum is optional: drag its slider or type 1–256, then finish the edit. **All**
+restores unrestricted matching. The algorithm chooses a smaller subset from the shared
+palette for each image, then matches original pixels directly to that subset. It never
+changes the saved palette or forces unused colors into the output. Transparency does not
+count against the maximum. GIFs select one subset over all duration-weighted source frames.
+Limits can merge shades or lose accents; the same source RGB can map differently in
+different sprites. This is color reduction, not a new dithering or structural effect.
+Reset restores Oklab, All and cut 128. There is no threshold, Swap, None or style chooser
 in this family. Switching back to 1-bit restores the retained colors, style and settings.
 See [palettes.md](palettes.md) for import and palette library behavior.
 
@@ -25,7 +33,7 @@ Matching changes the nearest-color rule, without introducing a new effect.
 Palette-specific ordered and error-diffusion dithering remain research only. Tests with
 one shared 255-color palette and six buildings found lower locally averaged color error at the cost of
 texture and greater individual-pixel color error. Nearest retains clean flat fills and
-consistent source-color mapping. See the [shared-palette research](research/2026-10-11-shared-palette.md)
+consistent source-color mapping when Max colors is All. See the [shared-palette research](research/2026-10-11-shared-palette.md)
 for the comparison and animation limitations. Existing two-ink structural styles cannot
 be applied to an arbitrary color set without defining a different conversion effect.
 

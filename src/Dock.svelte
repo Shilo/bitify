@@ -32,6 +32,8 @@
     family = $bindable('two-color'),
     alphaCut = $bindable(128),
     metric = $bindable('oklab'),
+    maxColors = $bindable(0),
+    lastMaxColors = $bindable(16),
     fullPalette, fullPresets = [], savedPalettes = [], onpalette, onimportpalette, oneditpalette,
   } = $props();
 
@@ -193,8 +195,29 @@
     if (!e.detail) (dock.querySelector('.extra') ?? dock.querySelector('.chip[aria-pressed="true"]'))?.focus();
   }
   function resetPaletteSettings(e) {
-    metric = 'oklab'; alphaCut = 128;
+    metric = 'oklab'; alphaCut = 128; maxColors = 0; lastMaxColors = 16;
     if (!e.detail) dock.querySelector('[aria-label="Oklab matching"]')?.focus();
+  }
+
+  // Source-wide preparation is expensive: keep edits local until the gesture
+  // finishes. All takes the existing conversion path without preparation.
+  let limitNumber = $state(''), limitRange = $state(16);
+  $effect(() => {
+    limitNumber = maxColors ? String(maxColors) : '';
+    limitRange = maxColors || lastMaxColors;
+  });
+  function applyLimit(value) {
+    if (!Number.isInteger(value) || value < 0 || value > 256) return;
+    if (value) lastMaxColors = value;
+    maxColors = value;
+    limitNumber = value ? String(value) : '';
+    limitRange = value || lastMaxColors;
+  }
+  function finishLimitNumber(e) {
+    const box = e.currentTarget;
+    if (box.validity.valid && (box.value === '' || Number.isInteger(box.valueAsNumber))) applyLimit(box.value === '' ? 0 : box.valueAsNumber);
+    // Restore incomplete/out-of-range edits; they never changed conversion.
+    box.value = limitNumber = maxColors ? String(maxColors) : '';
   }
 
   // A number box is empty while its setting is on Auto or off, and then shows this instead: what
@@ -354,7 +377,23 @@
           <button class="glass-segmented__item" aria-label="Oklab matching" aria-pressed={metric === 'oklab'} use:tooltip={'Compare perceived color differences. Default.'} onclick={() => metric = 'oklab'}>Oklab</button>
           <button class="glass-segmented__item" aria-label="RGB matching" aria-pressed={metric === 'rgb'} use:tooltip={'Compare RGB channel differences.'} onclick={() => metric = 'rgb'}>RGB</button>
         </div>
-        <button class="btn glass-btn icon-only" disabled={metric === 'oklab' && alphaCut === 128} aria-label="Reset palette settings" use:tooltip={'Restore Oklab matching and the default opacity cut.'} onclick={resetPaletteSettings}><PixelIcon name="reset"/></button>
+        <button class="btn glass-btn icon-only" disabled={metric === 'oklab' && alphaCut === 128 && maxColors === 0 && lastMaxColors === 16} aria-label="Reset palette settings" use:tooltip={'Restore Oklab matching, all colors and the default opacity cut.'} onpointerdown={e => e.preventDefault()} onclick={resetPaletteSettings}><PixelIcon name="reset"/></button>
+      </div>
+      <div class="palette-setting-row palette-limit-row">
+        <label class="key" for="full-max-colors">Max colors</label>
+        <input id="full-max-colors" class="glass-range" type="range" min="1" max="256" step="1"
+          value={limitRange} aria-label="Max colors" aria-valuetext={maxColors === 0 && limitNumber === '' ? 'All colors; move to set a limit' : `${limitRange} colors per image`}
+          oninput={e => { limitRange = +e.currentTarget.value; limitNumber = e.currentTarget.value; }}
+          onchange={e => applyLimit(+e.currentTarget.value)}
+          onpointercancel={() => { limitRange = maxColors || lastMaxColors; limitNumber = maxColors ? String(maxColors) : ''; }} />
+        <div class="field palette-limit-field">
+          <input class="tnum" type="number" min="1" max="256" step="1" inputmode="numeric" aria-label="Max colors value"
+            value={limitNumber} placeholder="—" oninput={e => limitNumber = e.currentTarget.value}
+            onchange={finishLimitNumber} onblur={finishLimitNumber}
+            onkeydown={e => { if (e.key === 'Enter') { e.preventDefault(); finishLimitNumber(e); } }} />
+          <button aria-label="Use all palette colors" aria-pressed={maxColors === 0}
+            use:tooltip={'Use all colors. A limit uses fewer colors per image from the selected palette.'} onpointerdown={e => e.preventDefault()} onclick={() => applyLimit(0)}>All</button>
+        </div>
       </div>
       {#if soft || alphaCut !== 128}
         <div class="palette-setting-row">
@@ -444,7 +483,7 @@
     </button>
   {/snippet}
   {#snippet styleButton()}
-    <button class="btn glass-btn icon-only" aria-expanded={panel === 'style'} aria-label={family === 'full-palette' ? 'Palette settings' : 'Style'} use:tooltip={family === 'full-palette' ? 'Adjust color matching and transparency.' : 'Adjust the conversion style and its settings.'} onclick={() => toggle('style')}>
+    <button class="btn glass-btn icon-only" aria-expanded={panel === 'style'} aria-label={family === 'full-palette' ? 'Palette settings' : 'Style'} use:tooltip={family === 'full-palette' ? 'Adjust color matching, maximum colors and transparency.' : 'Adjust the conversion style and its settings.'} onclick={() => toggle('style')}>
       <PixelIcon name="sliders" />
     </button>
   {/snippet}
