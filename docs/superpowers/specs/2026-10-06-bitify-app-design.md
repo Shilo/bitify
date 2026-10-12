@@ -2143,8 +2143,11 @@ palette editing nor blurring an untouched number changes the stored global prefe
 A larger palette restores its remembered value. Only committed edits update the preference;
 invalid edits are restored, and changing palettes or closing the popup discards unfinished
 slider drafts and native gestures. All remains an explicit choice even when a numeric limit equals
-the palette's size. A one-color palette disables the immovable slider but keeps its number
-editable. Accessible descriptions explain a temporarily bounded higher preference.
+the palette's size. The minimum is 2 for palettes with multiple colors. A one-color palette
+uses its sole color and disables both limit inputs; a two-color palette disables only the
+immovable slider. Stored `maxColors` or `lastMaxColors` of 1 restore as 2, retaining All (0),
+palette identity and all higher preferences. Accessible descriptions explain a temporarily
+bounded higher preference.
 Missing or invalid metric restores Oklab; only `oklab` and `rgb` persist. Palette records
 do not own matching, so imports, edits and selections retain the global choice. Reset
 settings restores Oklab, Max colors: All, remembered limit 16 and cut 128. Missing selection falls back

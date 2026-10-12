@@ -204,6 +204,7 @@
   // finishes. All takes the existing conversion path without preparation.
   let limitNumber = $state(''), limitRange = $state(16);
   const limitMax = $derived(fullPalette.colors.length);
+  const limitMin = $derived(Math.min(2, limitMax));
   const visibleLimit = $derived(maxColors ? Math.min(maxColors, limitMax) : 0);
   const limitDescription = $derived(maxColors > limitMax
     ? `This palette has ${limitMax} ${limitMax === 1 ? 'color' : 'colors'}. Your ${maxColors}-color limit returns with a larger palette.`
@@ -220,7 +221,7 @@
     restoreLimitDrafts();
   });
   function applyLimit(value) {
-    if (!Number.isInteger(value) || value < 0 || value > limitMax) return;
+    if (!Number.isInteger(value) || (value !== 0 && value < 2) || value > limitMax) return;
     if (value) lastMaxColors = value;
     maxColors = value;
     restoreLimitDrafts();
@@ -403,14 +404,14 @@
       <div class="palette-setting-row palette-limit-row">
         {#if limitDescription}<span id="full-limit-description" hidden>{limitDescription}</span>{/if}
         <label class="key" for="full-max-colors">Max colors</label>
-        <input id="full-max-colors" class="glass-range" type="range" min="1" max={limitMax} step="1" disabled={limitMax === 1}
+        <input id="full-max-colors" class="glass-range" type="range" min={limitMin} max={limitMax} step="1" disabled={limitMax <= 2}
           value={limitRange} aria-label="Max colors" aria-describedby={limitDescription ? 'full-limit-description' : undefined}
-          aria-valuetext={maxColors === 0 && limitNumber === '' ? (limitMax === 1 ? 'All colors' : 'All colors; move to set a limit') : `${limitRange} colors per image`}
+          aria-valuetext={maxColors === 0 && limitNumber === '' ? (limitMax <= 2 ? 'All colors' : 'All colors; move to set a limit') : `${limitRange} colors per image`}
           oninput={e => { rangeDirty = true; rangePalette = fullPalette; limitRange = +e.currentTarget.value; limitNumber = e.currentTarget.value; }}
           onchange={e => { if (rangeDirty && rangePalette === fullPalette) applyLimit(+e.currentTarget.value); }}
           onpointercancel={restoreLimitDrafts} />
         <div class="field palette-limit-field">
-          <input class="tnum" type="number" min="1" max={limitMax} step="1" inputmode="numeric" aria-label="Max colors value" aria-describedby={limitDescription ? 'full-limit-description' : undefined}
+          <input class="tnum" type="number" min={limitMin} max={limitMax} step="1" disabled={limitMax === 1} inputmode="numeric" aria-label="Max colors value" aria-describedby={limitDescription ? 'full-limit-description' : undefined}
             value={limitNumber} placeholder="—" oninput={e => { numberDirty = true; numberPalette = fullPalette; limitNumber = e.currentTarget.value; }}
             onchange={finishLimitNumber} onblur={finishLimitNumber}
             onkeydown={e => { if (e.key === 'Enter') { e.preventDefault(); finishLimitNumber(e); } }} />

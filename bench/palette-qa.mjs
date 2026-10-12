@@ -279,29 +279,23 @@ try {
   assert.equal((await stored()).metric,'oklab');assert.equal((await stored()).alphaCut,128);await page.getByRole('button',{name:'Palette settings',exact:true}).click();
   results.extra.push('Nine full presets RGB preview/PNG/Copy match independent reference; ordered copy swatches/HEX backups preserve every entry; family retains metric and Reset restores Oklab/cut128');
 
-  // A one-color cap has an independently enumerable optimum. Retain a real UI,
-  // preview, PNG and clipboard regression without importing the selector.
-  let oneCost = Infinity, onePixels;
-  for (const color of FULL_PRESETS.at(-1).colors) {
-    const candidate = nearestReference(fixture, [color], 128, 'rgb'); let cost = 0;
-    for (let p = 0; p < source.length; p += 4) if (source[p + 3] >= 128)
-      for (let c = 0; c < 3; c++) cost += (source[p + c] - candidate[p + c]) ** 2;
-    if (cost < oneCost) { oneCost = cost; onePixels = candidate; }
-  }
+  // Minimum two on the two-color preset uses its complete unchanged palette.
+  const twoPixels = nearestReference(fixture, FULL_PRESETS.at(-1).colors, 128, 'rgb');
   await page.getByRole('button', { name: 'Palette settings', exact: true }).click();
   await page.getByRole('button', { name: 'RGB matching', exact: true }).click();
   const maximum = page.getByRole('spinbutton', { name: 'Max colors value', exact: true });
-  await maximum.fill('1'); await maximum.press('Enter'); assert.equal((await stored()).maxColors, 1);
-  await maximum.fill('257'); await maximum.press('Enter'); assert.equal(await maximum.inputValue(), '1');
-  await closePanel(); await tileMatches(onePixels);
-  samePixels(readPng(await download(page.getByRole('button', { name: 'Save fixture.png', exact: true }), 'fixture-palette.png')).pixels, onePixels, 'Max colors PNG optimum');
-  samePixels(readPng(await copy(page.getByRole('button', { name: 'Copy fixture.png', exact: true }))).pixels, onePixels, 'Max colors clipboard optimum');
+  assert.equal(await maximum.getAttribute('min'),'2');
+  await maximum.fill('2'); await maximum.press('Enter'); assert.equal((await stored()).maxColors, 2);
+  for(const invalid of ['1','257']) { await maximum.fill(invalid); await maximum.press('Enter'); assert.equal(await maximum.inputValue(), '2'); }
+  await closePanel(); await tileMatches(twoPixels);
+  samePixels(readPng(await download(page.getByRole('button', { name: 'Save fixture.png', exact: true }), 'fixture-palette.png')).pixels, twoPixels, 'Max colors minimum-two PNG');
+  samePixels(readPng(await copy(page.getByRole('button', { name: 'Copy fixture.png', exact: true }))).pixels, twoPixels, 'Max colors minimum-two clipboard');
   await page.getByRole('button', { name: 'Palette settings', exact: true }).click();
   await maximum.fill(''); await maximum.press('Enter'); assert.equal((await stored()).maxColors, 0);
   await page.getByRole('button', { name: 'Reset palette settings', exact: true }).click();
   state = await stored(); assert.equal(state.maxColors, 0); assert.equal(state.lastMaxColors, 16); assert.equal(state.metric, 'oklab');
   await closePanel(); await tileMatches(nearestReference(fixture, FULL_PRESETS.at(-1).colors));
-  results.extra.push('Max colors committed/invalid/empty inputs, exact cap-one RGB optimum in preview/PNG/Copy, and All/remembered16 reset');
+  results.extra.push('Max colors minimum-two/invalid/empty inputs, unchanged two-color preview/PNG/Copy, and All/remembered16 reset');
 
   // Palette-sized controls must never write their bounded display back over a
   // larger persisted preference, including native number blur and a reload.

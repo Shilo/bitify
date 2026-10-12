@@ -63,11 +63,20 @@ describe('independent palette state and export snapshots', () => {
   });
   it('restores a global cap and remembered nonzero cap independently of the family', () => {
     for (const family of ['two-color', 'full-palette']) {
-      for (const maxColors of [0, 1, 16, 256]) expect(restorePaletteState(JSON.stringify({family,maxColors,lastMaxColors:7}))).toMatchObject({family,maxColors,lastMaxColors:7});
+      for (const maxColors of [0, 2, 16, 256]) expect(restorePaletteState(JSON.stringify({family,maxColors,lastMaxColors:7}))).toMatchObject({family,maxColors,lastMaxColors:7});
       for (const value of [-1,257,1.5,'16',null,{},[]]) expect(restorePaletteState(JSON.stringify({family,maxColors:value,lastMaxColors:value}))).toMatchObject({maxColors:0,lastMaxColors:16});
       expect(restorePaletteState(JSON.stringify({family,maxColors:16,lastMaxColors:0}))).toMatchObject({maxColors:16,lastMaxColors:16});
     }
     expect(restorePaletteState(JSON.stringify({maxColors:0,lastMaxColors:256})).lastMaxColors).toBe(256);
+  });
+  it('raises previous one-color preferences to two without changing All or palette identity', () => {
+    const library = [{id:'one',colors:['#123456']}];
+    for (const family of ['two-color','full-palette']) {
+      expect(restorePaletteState(JSON.stringify({family,paletteId:'one',maxColors:1,lastMaxColors:1}),library))
+        .toMatchObject({family,paletteId:'one',maxColors:2,lastMaxColors:2});
+      expect(restorePaletteState(JSON.stringify({family,maxColors:0,lastMaxColors:1})))
+        .toMatchObject({maxColors:0,lastMaxColors:2});
+    }
   });
   it('owns a validated cap at the export gesture without adding it to legacy settings', () => {
     const ui={family:'full-palette',palette:{name:'Mono',colors:['#000000','#ffffff']},metric:'rgb',alphaCut:128,maxColors:1};
