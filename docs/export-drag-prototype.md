@@ -11,9 +11,16 @@ and encoders are reused without extraction or changes to Save/Copy/ZIP.
 Coarse/no-hover mobile devices also create no drag runtime or panel with the flag.
 Only a primary mouse press on a fine-pointer/hover device can arm a drag. Touch and pen
 input, pointer release/cancellation and desktop capability loss clear any mouse arm.
+Detected mobile UA data, Android/iOS browsers and touch-enabled iPad Mac identification
+remain excluded even with a connected mouse. Touch/pen takeover cancels queued mouse
+hover exports; an already-running encoder finishes before its unused result is discarded.
+Touch/pen presses on controls also cancel queued hover work through one passive capture
+listener; it does not prevent touch input or end/revoke an active native drag.
 The established wall swipe handlers remain unchanged: horizontal moves step palettes,
 vertical moves step styles where the wall does not scroll; dock/panel/dialog exclusions,
 hold comparison and pinch behavior remain in force.
+Pressed mouse edge crossing preserves drag threshold behavior; window release/cancel
+and blur clear arms when a press ends outside the artwork. Native dragend also clears it.
 
 ## Manual native test
 
@@ -116,3 +123,28 @@ Audit metadata lives in `.tmp/export-drag-qa/native-file-review.json`; native im
 receiver results live in `.tmp/export-drag-qa/native-image-results.json`. The independent
 review agreed with the pixel discrepancy and challenged any claim of browser-only
 impossibility before the separate native image path is tested against Discord desktop.
+
+## Mobile safeguards and post-commit review
+
+The initial prototype/mobile safeguard commit was reviewed independently. We agreed to
+fix reproduced queued mouse-export work surviving touch takeover, extend cancellation
+to touch/pen presses on Dock controls, and fix a reproduced mouse drag starting one pixel
+inside the artwork edge. The edge fix retains the press until drag threshold while
+window release/cancel/blur disarms it; active native export URLs remain retained.
+We also agreed that explicit mobile exclusion warranted conservative mobile detection
+even when a mobile browser reports a fine pointer. Existing swipe/hold code was untouched.
+
+After those fixes, `npm test` passed 520 tests in 33 suites and the production build
+passed. The browser harness passed 252 checks across 14 scenarios each in Chrome for
+Testing 153.0.8010.12 and Edge 155.0.4283.45. Trusted CDP touch streams cover all four
+directions on mobile PNG/GIF artwork with normal and opt-in URLs, full-palette horizontal
+stepping and its established vertical no-op, hold comparison, fine-primary desktop touch
+takeover on artwork and Dock, and detected-mobile-with-mouse exclusion. No mobile runtime,
+panel, viewer opened by a swipe, or native drag was observed. Edge-start/outside release
+and full optimized export/stale-state checks passed again.
+
+The server request regression passed separately. The existing broad export regression
+passed 132 legacy PNG cases, nine full-palette Oklab cases, nine RGB cases and 13 integration
+categories including Copy/GIF/ZIP, asynchronous snapshots and failure behavior, without
+browser errors. Physical phones/tablets and Safari were not tested; these mobile results
+are emulated Chromium touch input, not physical-device certification.

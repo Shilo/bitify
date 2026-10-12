@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { createExportDrag, exportDragArt, EXPORT_DRAG_TYPE } from './export-drag.js';
+import { createExportDrag, exportDragArt, EXPORT_DRAG_TYPE, isMobileExportDevice } from './export-drag.js';
 
 const pending = () => { let resolve, reject; const promise = new Promise((a, b) => { resolve = a; reject = b; }); return { promise, resolve, reject }; };
 function dragEvent() {
@@ -144,6 +144,15 @@ describe('full-export drag controller', () => {
     await vi.advanceTimersByTimeAsync(180); expect(revoke).toHaveBeenCalledWith('blob:A'); expect(prepare).toHaveBeenCalledTimes(2);
     const event = dragEvent(); expect(controller.start(event, b)).toBe(true); expect(event.dataTransfer.files[0].name).toBe('B.png');
   });
+  it('global touch takeover cancels queued hover and discards a running export without restarting on edits', async () => {
+    const job = pending(), f = track(fixture(() => job.promise));
+    f.controller.hover(f.item); f.controller.cancelHover(); await vi.advanceTimersByTimeAsync(180); expect(f.prepare).not.toHaveBeenCalled();
+    f.controller.hover(f.item); await vi.advanceTimersByTimeAsync(180); expect(f.prepare).toHaveBeenCalledTimes(1);
+    f.controller.cancelHover(); f.change('touch-control-edit'); f.controller.refresh();
+    job.resolve({ file: new File(['old'], 'old.png'), url: 'blob:old' }); await vi.advanceTimersByTimeAsync(500);
+    expect(f.revoke).toHaveBeenCalledWith('blob:old'); expect(f.prepare).toHaveBeenCalledTimes(1);
+    expect(f.log.mock.calls.some(([event]) => event === 'ready')).toBe(false);
+  });
   it('cancels even when the browser refuses both clearing and constructing the drag payload', async () => {
     const f = track(fixture()); await prepared(f); const event = dragEvent();
     event.dataTransfer.items.clear.mockImplementation(() => { throw new Error('read-only drag data'); });
@@ -201,5 +210,53 @@ describe('mouse-only image drag action', () => {
     node.handlers.get('pointerdown')({ pointerType: 'mouse', button: 0 }); media.matches = false; change();
     expect(node.draggable).toBe(false); expect(controller.leave).toHaveBeenCalled();
     expect(controller.start).not.toHaveBeenCalled(); expect(cancel).not.toHaveBeenCalled(); action.destroy(); expect(media.removeEventListener).toHaveBeenCalledWith('change', change);
+  });
+  it('touch or pen takeover cancels queued mouse export work and settings refresh cannot restart it', async () => {
+    const f = track(fixture()), node = nodeStub(), action = exportDragArt(node, { controller: f.controller, item: f.item, cancel: vi.fn() });
+    for (const pointerType of ['touch', 'pen']) {
+      node.handlers.get('pointerenter')({ pointerType: 'mouse' });
+      node.handlers.get('pointerenter')({ pointerType }); node.handlers.get('pointerdown')({ pointerType, button: 0 });
+      await vi.advanceTimersByTimeAsync(200);
+      f.change(pointerType); f.controller.refresh(); await vi.advanceTimersByTimeAsync(200);
+      expect(f.prepare).not.toHaveBeenCalled(); expect(node.draggable).toBe(false);
+    }
+    action.destroy();
+  });
+  it('allows pressed mouse edge crossing but clears outside release, cancel and blur', () => {
+    const handlers = new Map(), view = { addEventListener: (type, fn) => handlers.set(type, fn), removeEventListener: type => handlers.delete(type) };
+    const node = nodeStub(); node.ownerDocument = { defaultView: view };
+    const controller = { hover: vi.fn(), leave: vi.fn(), start: vi.fn() }, action = exportDragArt(node, { controller, item: { id: 1 }, cancel: vi.fn() });
+    for (const type of ['pointerup', 'pointercancel', 'blur']) {
+      node.handlers.get('pointerdown')({ pointerType: 'mouse', button: 0 }); node.handlers.get('pointerleave')();
+      expect(node.draggable).toBe(true); handlers.get(type)(); expect(node.draggable).toBe(false);
+    }
+    action.destroy(); expect(handlers.size).toBe(0);
+  });
+  it('window blur disarms the mouse without ending or revoking an active native export', async () => {
+    const handlers = new Map(), node = nodeStub(); node.ownerDocument = { defaultView: { addEventListener: (type, fn) => handlers.set(type, fn), removeEventListener: type => handlers.delete(type) } };
+    const f = track(fixture()); await prepared(f);
+    const action = exportDragArt(node, { controller: f.controller, item: f.item, cancel: vi.fn() });
+    node.handlers.get('pointerdown')({ pointerType: 'mouse', button: 0 }); const event = dragEvent(); node.handlers.get('dragstart')(event);
+    f.controller.cancelHover(); handlers.get('blur')(); expect(node.draggable).toBe(false); expect(f.controller.isOwn({ types: [] })).toBe(true); expect(f.revoke).not.toHaveBeenCalled();
+    node.handlers.get('dragend')(event); expect(f.controller.isOwn({ types: [] })).toBe(false); expect(f.revoke).not.toHaveBeenCalled(); action.destroy();
+  });
+  it.each([
+    { userAgentData: { mobile: true }, userAgent: 'Browser' },
+    { userAgent: 'Mozilla Android' },
+    { userAgent: 'Mozilla iPhone' },
+    { userAgent: 'Mozilla iPad' },
+    { userAgent: 'Mozilla Macintosh', platform: 'MacIntel', maxTouchPoints: 5 },
+  ])('keeps detected mobile devices disabled even with a fine hover pointer: %j', navigator => {
+    vi.stubGlobal('navigator', navigator);
+    expect(isMobileExportDevice()).toBe(true);
+    const node = nodeStub(), controller = { hover: vi.fn(), leave: vi.fn(), start: vi.fn() }, cancel = vi.fn();
+    const action = exportDragArt(node, { controller, item: { id: 1 }, cancel });
+    node.handlers.get('pointerdown')({ pointerType: 'mouse', button: 0 });
+    expect(node.draggable).toBe(false); expect(controller.hover).not.toHaveBeenCalled(); action.destroy();
+  });
+  it('does not exclude a Windows touch laptop or a desktop Mac', () => {
+    for (const navigator of [{ userAgent: 'Mozilla Windows', platform: 'Win32', maxTouchPoints: 10 }, { userAgent: 'Mozilla Macintosh', platform: 'MacIntel', maxTouchPoints: 0 }]) {
+      vi.stubGlobal('navigator', navigator); expect(isMobileExportDevice()).toBe(false);
+    }
   });
 });

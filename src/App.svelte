@@ -8,7 +8,7 @@
   import { wheelSteps } from './lib/gesture.js';
   import { on } from 'svelte/events';
   import { tick, untrack } from 'svelte';
-  import { createExportDrag, exportFingerprint } from './lib/export-drag.js';
+  import { createExportDrag, exportFingerprint, isMobileExportDevice } from './lib/export-drag.js';
   import DragExportProbe from './DragExportProbe.svelte';
   import { imageGesture } from './lib/image-gesture.js';
   import { hasImageDrop, droppedImages, fetchDroppedImage } from './lib/image-drop.js';
@@ -29,7 +29,7 @@
   const storageKey = 'bitify';
   const touch = matchMedia('(pointer:coarse)').matches;
   const dragPrototype = new URLSearchParams(location.search).get('dragExport') === '1'
-    && matchMedia('(hover: hover) and (pointer: fine)').matches;
+    && matchMedia('(hover: hover) and (pointer: fine)').matches && !isMobileExportDevice();
   let dragStatus = $state({ state: 'idle', name: '' });
   let dragMode = $state('combined');
   let dragLogs = $state([]);
@@ -624,12 +624,17 @@
     untrack(() => dragLog('session', { userAgent: navigator.userAgent, platform: navigator.platform }));
     const snapshot = () => ({ status: { ...dragStatus }, logs: [...dragLogs] });
     window.__bitifyDragTest = { snapshot };
+    // A touchscreen edit may begin in the Dock while the mouse still hovers art.
+    // Leave the touch event untouched; only cancel mouse export preparation.
+    const stopTouch = on(window, 'pointerdown', event => {
+      if (event.pointerType === 'touch' || event.pointerType === 'pen') dragExports.cancelHover();
+    }, { capture: true, passive: true });
     const stop = on(window, 'drop', event => {
       if (!dragExports.isOwn(event.dataTransfer)) return;
       event.preventDefault(); event.stopImmediatePropagation(); dragDepth = 0;
       dragLog('self-drop-ignored');
     }, { capture: true });
-    return () => { stop(); dragExports.destroy(); delete window.__bitifyDragTest; };
+    return () => { stopTouch(); stop(); dragExports.destroy(); delete window.__bitifyDragTest; };
   });
 
   async function save(item) {

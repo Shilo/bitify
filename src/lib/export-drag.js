@@ -1,5 +1,10 @@
 // Opt-in compatibility probe. No preview/canvas encoder participates in this path.
 export const EXPORT_DRAG_TYPE = 'application/x-bitify-export';
+// Mobile browsers can report a fine pointer when a mouse is connected.
+export function isMobileExportDevice() {
+  return navigator.userAgentData?.mobile === true || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
+    || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+}
 const same = (a, b) => !!a && !!b && a.item === b.item && a.key === b.key;
 
 export function createExportDrag({ request, prepare, notify, changed = () => {}, log = () => {},
@@ -61,6 +66,7 @@ export function createExportDrag({ request, prepare, notify, changed = () => {},
   }
   return {
     hover(item) { if (disposed) return; desired = item; schedule(); },
+    cancelHover() { desired = null; clearTimeout(timer); if (!active) publish(ready ? 'ready' : 'idle'); },
     leave(item) { if (desired?.id === item.id) { desired = null; clearTimeout(timer); if (!active) publish(ready ? 'ready' : 'idle'); } },
     refresh() {
       if (disposed) return;
@@ -124,26 +130,33 @@ export function createExportDrag({ request, prepare, notify, changed = () => {},
 
 export function exportDragArt(node, options) {
   let armed = false;
-  let desktop;
+  let desktop, view;
   const disarm = () => { armed = false; if (options?.controller) node.draggable = false; };
   const capabilityChanged = () => { if (!desktop.matches) { disarm(); options?.controller?.leave(options.item); } };
   function capability() {
     if (!desktop && options?.controller) {
       desktop = matchMedia('(hover: hover) and (pointer: fine)');
       desktop.addEventListener('change', capabilityChanged);
+      view = node.ownerDocument?.defaultView;
+      view?.addEventListener('pointerup', disarm);
+      view?.addEventListener('pointercancel', disarm);
+      view?.addEventListener('blur', disarm);
     }
-    return desktop?.matches === true;
+    return desktop?.matches === true && !isMobileExportDevice();
   }
   function mouse(event) { return event.pointerType === 'mouse' && event.isPrimary !== false && capability(); }
   const enter = event => {
     if (options?.controller && mouse(event)) options.controller.hover(options.item);
-    else if (options?.controller) disarm();
+    else if (options?.controller) { disarm(); options.controller.leave(options.item); }
   };
-  const leave = () => { disarm(); options?.controller?.leave(options.item); };
+  // Keep a pressed mouse armed across the edge until native drag reaches its
+  // threshold. Window release/cancel also clears presses ending outside the art.
+  const leave = () => options?.controller?.leave(options.item);
   const down = event => {
     armed = !!options?.controller && mouse(event) && event.button === 0 && !event.defaultPrevented;
     if (options?.controller) node.draggable = armed;
     if (armed) options.controller.hover(options.item);
+    else options?.controller?.leave(options.item);
   };
   const start = event => {
     if (!options?.controller) return;
@@ -156,7 +169,11 @@ export function exportDragArt(node, options) {
   for (const [type, handler] of Object.entries(listeners)) node.addEventListener(type, handler);
   return {
     update(value) { options = value; if (!options?.controller) { armed = false; node.removeAttribute('draggable'); } },
-    destroy() { leave(); desktop?.removeEventListener('change', capabilityChanged); for (const [type, handler] of Object.entries(listeners)) node.removeEventListener(type, handler); },
+    destroy() {
+      disarm(); leave(); desktop?.removeEventListener('change', capabilityChanged);
+      for (const type of ['pointerup', 'pointercancel', 'blur']) view?.removeEventListener(type, disarm);
+      for (const [type, handler] of Object.entries(listeners)) node.removeEventListener(type, handler);
+    },
   };
 }
 

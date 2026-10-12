@@ -14,6 +14,12 @@ in the browser. Nothing is uploaded.
 It requires a primary fine pointer with hover support. Coarse/no-hover mobile devices
 create no drag runtime or panel, even with the flag. Touch and pen input cannot arm a
 drag on desktop either. Release, cancellation and capability loss disarm mouse dragging.
+Detected mobile browsers (mobile UA data, Android/iOS user agent, or an iPad reporting
+a Mac platform with touch points) remain excluded even with a connected mouse.
+Touch/pen takeover also cancels queued mouse-hover export work; an already running
+export is allowed to finish and its no-longer-requested result is discarded.
+This applies to touch/pen presses on controls as well as artwork through a passive
+capture listener that does not prevent or consume the original touch gesture.
 Ordinary URLs, touch/pen gestures, the empty example and viewer keep their established
 behavior. This prototype is not a promise of Explorer or Discord interoperability.
 

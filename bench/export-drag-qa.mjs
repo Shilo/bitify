@@ -59,8 +59,8 @@ const origin = `http://127.0.0.1:${server.address().port}`, results = [];
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 let assertions = 0;
 const check = (value, message) => { assert.ok(value, message); assertions++; };
-async function setup(browser, { prototype = true, mobile = false, settings = {} } = {}) {
-  const context = await browser.newContext({ viewport: mobile ? { width: 390, height: 844 } : { width: 1100, height: 800 }, hasTouch: mobile, isMobile: mobile, permissions: ['clipboard-read', 'clipboard-write'] });
+async function setup(browser, { prototype = true, mobile = false, settings = {}, userAgent } = {}) {
+  const context = await browser.newContext({ viewport: mobile ? { width: 390, height: 844 } : { width: 1100, height: 800 }, hasTouch: mobile, isMobile: mobile, userAgent, permissions: ['clipboard-read', 'clipboard-write'] });
   await context.addInitScript(({ settings }) => { localStorage.setItem('bitify', JSON.stringify({ ...settings })); }, { settings });
   const page = await context.newPage();
   const errors = []; page.on('pageerror', error => errors.push(error.message));
@@ -227,12 +227,36 @@ try {
         await page.getByRole('button', { name: 'Close preview', exact: true }).click();
         check(errors.length === 0, errors.join('\n')); record.cases.push({ name: 'trusted-cross-frame-drag-and-click', variants: variants.map(v => ({ mode: v.mode, receiverAcceptedFile: !!v.received?.files.length, types: v.received?.types, text: v.received?.text, downloadUrl: v.received?.downloadUrl })) }); await context.close();
       }
-      for (const prototype of [false, true]) {
-        const { page, context, errors } = await setup(browser, { prototype, mobile: true }); await importFile(page, pngPath);
+      {
+        const { page, context, errors } = await setup(browser); await importFile(page, pngPath); await ready(page);
+        const art = page.locator('.tiles .art'), box = await art.boundingBox(), y = box.y + box.height / 2;
+        await page.mouse.move(box.x + 1, y); await page.mouse.down();
+        await page.mouse.move(box.x - 60, y, { steps: 30 }); await page.mouse.up();
+        const logs = await page.evaluate(() => window.__bitifyDragTest.snapshot().logs), drag = logs.findLast(e => e.event === 'drag-start'), expected = logs.findLast(e => e.event === 'ready');
+        check(drag?.trusted === true && drag.sha256 === expected.sha256, 'trusted mouse drag starting one pixel inside image edge uses full current export');
+        check(await art.getAttribute('draggable') !== 'true', 'dragend clears edge mouse arm');
+        await page.mouse.move(box.x + 1, y); await page.mouse.down(); await page.mouse.move(box.x - 1, y); await page.mouse.up();
+        check(await art.getAttribute('draggable') !== 'true', 'mouse release outside artwork before drag threshold clears native drag arm');
+        check(errors.length === 0, errors.join('\n')); await context.close(); record.cases.push({ name: 'mouse-edge-drag-and-outside-release' });
+      }
+      for (const profile of [
+        { prototype: false, mobile: true, source: pngPath, name: 'mobile-normal-png' },
+        { prototype: true, mobile: true, source: pngPath, name: 'mobile-opt-in-png' },
+        { prototype: true, mobile: true, source: gifPath, name: 'mobile-opt-in-gif' },
+        { prototype: true, mobile: false, source: pngPath, name: 'desktop-hybrid-touch' },
+      ]) {
+        const { prototype, mobile, source } = profile;
+        const { page, context, errors } = await setup(browser, { prototype, mobile }); await importFile(page, source);
         const art = page.locator('.tiles .art').first(), session = await context.newCDPSession(page);
-        check(await page.evaluate(() => !matchMedia('(hover: hover) and (pointer: fine)').matches), 'mobile capability is coarse/no-hover');
-        check(await page.evaluate(() => !window.__bitifyDragTest), 'mobile has no export-drag runtime, even with opt-in URL');
-        check(await page.locator('.drag-export-probe').count() === 0, 'mobile has no drag panel covering swipe area');
+        if (mobile) {
+          check(await page.evaluate(() => !matchMedia('(hover: hover) and (pointer: fine)').matches), 'mobile capability is coarse/no-hover');
+          check(await page.evaluate(() => !window.__bitifyDragTest), 'mobile has no export-drag runtime, even with opt-in URL');
+          check(await page.locator('.drag-export-probe').count() === 0, 'mobile has no drag panel covering swipe area');
+        } else {
+          check(await page.evaluate(() => matchMedia('(hover: hover) and (pointer: fine)').matches && !!window.__bitifyDragTest), 'hybrid witness runs touch on a drag-capable desktop');
+          await art.hover();
+          check(await page.evaluate(() => window.__bitifyDragTest.snapshot().status.state === 'preparing'), 'hybrid witness has pending mouse-hover preparation');
+        }
         await page.evaluate(() => {
           window.mobileGestures = { drags: 0, touches: [] };
           window.addEventListener('dragstart', () => window.mobileGestures.drags++);
@@ -259,11 +283,62 @@ try {
         check(await art.getAttribute('draggable') !== 'true', 'trusted touch swipes never arm native drag');
         const gestures = await page.evaluate(() => window.mobileGestures);
         check(gestures.drags === 0 && gestures.touches.some(e => e.trusted && e.prevented), 'real touch stream remains owned by existing swipe handler');
-        await art.dispatchEvent('pointerenter', { pointerType: 'mouse' });
-        await art.dispatchEvent('pointerdown', { pointerType: 'mouse', button: 0, isPrimary: true });
-        check(await art.getAttribute('draggable') !== 'true', 'mobile also rejects mouse-shaped compatibility events');
-        record.cases.push({ name: prototype ? 'mobile-opt-in-four-direction-swipes' : 'mobile-normal-four-direction-swipes', trustedTouches: gestures.touches.length, exportRuntime: false, nativeDrags: gestures.drags });
+        if (mobile) {
+          await art.dispatchEvent('pointerenter', { pointerType: 'mouse' });
+          await art.dispatchEvent('pointerdown', { pointerType: 'mouse', button: 0, isPrimary: true });
+          check(await art.getAttribute('draggable') !== 'true', 'mobile also rejects mouse-shaped compatibility events');
+          await art.dispatchEvent('pointercancel', { pointerType: 'mouse' });
+        } else {
+          await page.evaluate(() => new Promise(resolve => setTimeout(resolve, 250)));
+          check(await page.evaluate(() => !window.__bitifyDragTest.snapshot().logs.some(e => e.event === 'prepare-start')), 'touch takeover cancels mouse-hover preparation and swipe edits cannot restart it');
+        }
+        const box = await art.boundingBox(), x = box.x + box.width / 2, y = box.y + box.height / 2;
+        await session.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x, y }] });
+        await page.waitForFunction(() => !!document.querySelector('.tiles .held'));
+        await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+        check(await page.locator('.tiles .held').count() === 0 && await page.locator('dialog[open]').count() === 0, 'stationary touch hold compares then releases without opening viewer');
+        record.cases.push({ name: profile.name + '-four-direction-swipes', trustedTouches: gestures.touches.length, exportRuntime: !mobile, nativeDrags: gestures.drags });
         check(errors.length === 0, errors.join('\n')); await context.close();
+      }
+      {
+        const { page, context } = await setup(browser, { userAgent: 'Mozilla/5.0 (Linux; Android 15) AppleWebKit/537.36 Chrome/155 Mobile Safari/537.36' });
+        await importFile(page, pngPath); await page.locator('.tiles .art').hover();
+        await page.mouse.down();
+        check(await page.evaluate(() => matchMedia('(hover: hover) and (pointer: fine)').matches), 'mobile-with-mouse witness reports desktop pointer capability');
+        check(await page.evaluate(() => !window.__bitifyDragTest) && await page.locator('.drag-export-probe').count() === 0, 'detected mobile-with-mouse still has no drag runtime or panel');
+        check(await page.locator('.tiles .art').getAttribute('draggable') !== 'true', 'detected mobile-with-mouse cannot arm drag');
+        await page.mouse.up(); await context.close(); record.cases.push({ name: 'detected-mobile-with-mouse-disabled' });
+      }
+      {
+        const { page, context, errors } = await setup(browser, { mobile: true, settings: { family: 'full-palette', paletteId: 'preset-pico8' } });
+        await importFile(page, pngPath); const session = await context.newCDPSession(page), art = page.locator('.tiles .art');
+        async function paletteSwipe(dx, dy) {
+          const box = await art.boundingBox(), x = box.x + box.width / 2, y = box.y + box.height / 2;
+          await session.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x, y }] });
+          for (const fraction of [0.2, 0.5, 1]) await session.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: x + dx * fraction, y: y + dy * fraction }] });
+          await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+        }
+        await paletteSwipe(-48, 0); await page.waitForFunction(() => JSON.parse(localStorage.getItem('bitify')).paletteId !== 'preset-pico8');
+        check(await page.evaluate(() => JSON.parse(localStorage.getItem('bitify')).family === 'full-palette'), 'full-palette mobile left swipe changes palette within family');
+        await paletteSwipe(48, 0); await page.waitForFunction(() => JSON.parse(localStorage.getItem('bitify')).paletteId === 'preset-pico8');
+        check(await page.evaluate(() => JSON.parse(localStorage.getItem('bitify')).paletteId === 'preset-pico8'), 'full-palette mobile right swipe restores palette');
+        const before = await page.evaluate(() => JSON.parse(localStorage.getItem('bitify')));
+        await paletteSwipe(0, -48); await paletteSwipe(0, 48);
+        check(await page.evaluate(before => { const after = JSON.parse(localStorage.getItem('bitify')); return after.style === before.style && after.paletteId === before.paletteId && after.family === before.family; }, before), 'full-palette vertical swipes preserve established no-style behavior');
+        check(await page.evaluate(() => !window.__bitifyDragTest) && await art.getAttribute('draggable') !== 'true', 'full-palette mobile has no drag runtime or native arm');
+        check(errors.length === 0, errors.join('\n')); await context.close(); record.cases.push({ name: 'mobile-full-palette-four-direction-swipes' });
+      }
+      {
+        const { page, context, errors } = await setup(browser); await importFile(page, pngPath);
+        await page.locator('.tiles .art').hover();
+        check(await page.evaluate(() => window.__bitifyDragTest.snapshot().status.state === 'preparing'), 'Dock touch witness starts with queued mouse export');
+        const session = await context.newCDPSession(page), box = await page.getByRole('button', { name: 'Style', exact: true }).boundingBox();
+        await session.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: box.x + box.width / 2, y: box.y + box.height / 2 }] });
+        await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+        await page.waitForFunction(() => document.querySelector('.style-panel'));
+        await page.evaluate(() => new Promise(resolve => setTimeout(resolve, 250)));
+        check(await page.evaluate(() => !window.__bitifyDragTest.snapshot().logs.some(e => e.event === 'prepare-start')), 'touch on Dock cancels queued mouse export without consuming Dock interaction');
+        check(errors.length === 0, errors.join('\n')); await context.close(); record.cases.push({ name: 'desktop-hybrid-dock-touch-takeover' });
       }
       results.push(record); console.log(`${label} ${record.version}: ${record.cases.length} scenarios passed`);
     } finally { await browser.close(); }
