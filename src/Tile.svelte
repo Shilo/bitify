@@ -8,13 +8,14 @@
   import { comparisonHold } from './lib/comparison-hold.js';
   import { quantizeAsync, colorize as palettePixels } from './lib/quantize.js';
   import { getLimitedPalette } from './lib/palette-limit-client.js';
+  import { exportDragArt } from './lib/export-drag.js';
 
   // `flipped` true means originals are visible. App-managed comparison updates
   // that same value and the dock toggle; standalone previews use a local hold.
   // Without `onremove` the tile is a preview only and has no buttons.
   // `set` is the style's settings. `budget` is set while one of their sliders is being dragged:
   // the milliseconds this tile may take to convert its image after each move.
-  let { item, first, second, style, set, family = 'two-color', palette, alphaCut = 128, metric = 'oklab', maxColors = 0, onpaletteerror, flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false } = $props();
+  let { item, first, second, style, set, family = 'two-color', palette, alphaCut = 128, metric = 'oklab', maxColors = 0, onpaletteerror, flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false, exportDrag, dragMode } = $props();
   let held = $state(false);
   const originalVisible = $derived(oncompare ? flipped : flipped !== held);
   let holdTimer;
@@ -191,6 +192,7 @@
     oncontextmenu={e => e.preventDefault()}
     bind:clientWidth={box}
     bind:clientHeight={boxHeight}
+    use:exportDragArt={exportDrag ? { controller: exportDrag, item, mode: dragMode, cancel: cancelPointer } : undefined}
   >
     {#if pixels}<Pixels {pixels} />{/if}
   </button>

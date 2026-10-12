@@ -8,6 +8,39 @@ opaque RGB colors. In 1-bit, either of the two selected colors may be None, whic
 its pixels transparent. Full palettes classify source alpha separately. It runs entirely
 in the browser. Nothing is uploaded.
 
+### Desktop export-drag compatibility prototype (October 11, 2026)
+
+`?dragExport=1` opts into an experimental main-wall mouse drag and diagnostic panel.
+It requires a primary fine pointer with hover support. Coarse/no-hover mobile devices
+create no drag runtime or panel, even with the flag. Touch and pen input cannot arm a
+drag on desktop either. Release, cancellation and capability loss disarm mouse dragging.
+Ordinary URLs, touch/pen gestures, the empty example and viewer keep their established
+behavior. This prototype is not a promise of Explorer or Discord interoperability.
+
+The drag file uses the existing full-source conversion snapshot, analysis, `bitified`,
+`fileBytes` and `downloadName` paths. Existing Save/Copy/ZIP paths and encoders remain
+unchanged. The displayed canvas is never encoded for dragging; original comparison
+does not change the converted export. GIFs carry all frames, source delays and loop.
+Only the drag filename replaces Windows-invalid characters; encoded bytes match Save.
+
+Mouse hover debounces preparation for one image. Jobs run serially, and only the current
+image/source identity and complete conversion settings may publish a ready file.
+`dragstart` checks those inputs again synchronously. Missing/stale exports cancel the
+drag; they never use a preview, a previous settings export or an animation still.
+Once started, a drag owns its settings snapshot like Save, even if settings change later.
+
+Payload probes offer File + Chromium DownloadURL, DownloadURL only and File only.
+They omit default HTML/preview URL formats. The native URL refers to the same encoded
+file; active drags retain it across window blur, with 60 seconds of consumer grace
+after dragend. At eight evicted exports still in grace, new drags are blocked until
+capacity returns. Drops back into Bitify are ignored before artwork/palette import.
+
+Diagnostics retain at most 250 metadata events locally, including byte size, SHA-256,
+settings, browser, trusted-event flag and explicit manual destination outcomes. A
+received-file check compares against the latest logged drag, labels older matches,
+and guards overlapping hash results. Dragend/dropEffect alone is not proof of delivery.
+Only actual received file bytes establish native compatibility and export identity.
+
 The approved interactive prototype is saved next to this file as
 [2026-10-06-bitify-prototype.html](2026-10-06-bitify-prototype.html). It is a historical behavioral reference. The October 9 Floating islands adoption below
 supersedes its appearance and spacing; established conversion and interaction contracts

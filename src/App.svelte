@@ -1,13 +1,15 @@
 <script>
   import { analyze, mask, hexToRgb, autoThreshold, spritesOf } from './lib/bitify.js';
   import { unify } from './lib/bitify.js';
-  import { saveOne, saveAll, copyOne, pngBlob, downloadName } from './lib/save.js';
+  import { saveOne, saveAll, copyOne, pngBlob, downloadName, fileBytes } from './lib/save.js';
   import { fitImageWall, IMAGE_INSET } from './lib/workspace.js';
   import { restore } from './lib/settings.js';
   import { STYLES, inOrder, inks, stepStyle, stepPalette } from './lib/presets.js';
   import { wheelSteps } from './lib/gesture.js';
   import { on } from 'svelte/events';
-  import { tick } from 'svelte';
+  import { tick, untrack } from 'svelte';
+  import { createExportDrag, exportFingerprint } from './lib/export-drag.js';
+  import DragExportProbe from './DragExportProbe.svelte';
   import { imageGesture } from './lib/image-gesture.js';
   import { hasImageDrop, droppedImages, fetchDroppedImage } from './lib/image-drop.js';
   import CanvasGrid from './CanvasGrid.svelte';
@@ -26,6 +28,14 @@
 
   const storageKey = 'bitify';
   const touch = matchMedia('(pointer:coarse)').matches;
+  const dragPrototype = new URLSearchParams(location.search).get('dragExport') === '1'
+    && matchMedia('(hover: hover) and (pointer: fine)').matches;
+  let dragStatus = $state({ state: 'idle', name: '' });
+  let dragMode = $state('combined');
+  let dragLogs = $state([]);
+  function dragLog(event, detail = {}) {
+    dragLogs = [...dragLogs.slice(-249), { at: new Date().toISOString(), event, ...detail }];
+  }
   const mod = /Mac/.test(navigator.platform) ? '⌘' : 'Ctrl'; // the key the help names for pasting and copying
 
   // The colors, the style and every style's settings are kept between visits. A browser can refuse storage
@@ -580,6 +590,48 @@
       ? { ...about(item, asked), loop: item.loop, frames: item.frames.map(f => ({ mask: mask(f.img, asked.style, asked.set), delay: f.delay })) }
       : still(item, asked);
 
+  // Compatibility prototype only. Keep Save, Copy and ZIP paths untouched.
+  const dragExports = dragPrototype ? createExportDrag({
+    request(item) {
+      const live = items.find(i => i.id === item.id);
+      if (!live) return null;
+      const snapshot = asking();
+      return { item: live, snapshot, key: JSON.stringify(snapshot) };
+    },
+    async prepare({ item, snapshot }) {
+      // Reread is synchronous and reads the current analysis settings. Do this
+      // before yielding; the controller acquired snapshot in this same task.
+      const read = snapshot.family === 'full-palette' ? item : reread(item);
+      const image = await bitified(read, snapshot);
+      const bytes = await fileBytes(image);
+      const name = downloadName(image).replace(/[<>:"/\\|?*\x00-\x1f]/g, '-');
+      const type = image.frames || image.getFrame ? 'image/gif' : 'image/png';
+      const file = new File([bytes], name, { type });
+      const sha256 = await exportFingerprint(file);
+      return { file, sha256, width: image.w, height: image.h, url: URL.createObjectURL(file) };
+    },
+    notify: say, changed: value => (dragStatus = value), log: dragLog,
+  }) : null;
+  $effect(() => {
+    if (!dragExports) return;
+    // Track every export input; the synchronous dragstart check also guards
+    // the interval before this effect runs after a settings edit.
+    asking(); items;
+    untrack(() => dragExports.refresh());
+  });
+  $effect(() => {
+    if (!dragExports) return;
+    untrack(() => dragLog('session', { userAgent: navigator.userAgent, platform: navigator.platform }));
+    const snapshot = () => ({ status: { ...dragStatus }, logs: [...dragLogs] });
+    window.__bitifyDragTest = { snapshot };
+    const stop = on(window, 'drop', event => {
+      if (!dragExports.isOwn(event.dataTransfer)) return;
+      event.preventDefault(); event.stopImmediatePropagation(); dragDepth = 0;
+      dragLog('self-drop-ignored');
+    }, { capture: true });
+    return () => { stop(); dragExports.destroy(); delete window.__bitifyDragTest; };
+  });
+
   async function save(item) {
     const asked = asking();
     try {
@@ -669,10 +721,12 @@
   }
 
   function dragenter(e) {
+    if (dragExports?.isOwn(e.dataTransfer)) return;
     if (document.querySelector('dialog[open]')) return;
     if (hasImageDrop(e.dataTransfer)) { e.preventDefault(); dragDepth++; }
   }
   function dragover(e) {
+    if (dragExports?.isOwn(e.dataTransfer)) { e.preventDefault(); e.dataTransfer.dropEffect = 'none'; return; }
     if (hasImageDrop(e.dataTransfer)) {
       e.preventDefault();
       e.dataTransfer.dropEffect = 'copy';
@@ -752,6 +806,7 @@
       <Tile {item} inset={IMAGE_INSET} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} {alphaCut} {metric} {maxColors} onpaletteerror={paletteLimitFailure}
         flipped={effectiveOriginal} comparing={previewing} budget={dragging ? DRAG_MS / canvasItems.length : 0}
         oncompare={compareHold} onopen={items.length ? openImage : undefined}
+        exportDrag={items.length ? dragExports : undefined} {dragMode}
         onactivate={items.length ? undefined : () => picker.click()}
         activationLabel={items.length ? undefined : 'Add images'}
         onshare={items.length ? e => share(item, e.currentTarget) : undefined}
@@ -770,6 +825,10 @@
 {/if}
 
 <CanvasGrid {items} {example} />
+
+{#if dragPrototype}
+  <DragExportProbe status={dragStatus} logs={dragLogs} bind:mode={dragMode} onlog={dragLog} />
+{/if}
 
 <div class="workspace-tools" class:canvas-scrollable={canvasScrollable} use:measureWorkspaceTools>
 <Dock bind:first bind:second bind:none bind:style bind:settings bind:showOriginal bind:dragging bind:family bind:alphaCut bind:metric bind:maxColors bind:lastMaxColors {fullPalette} fullPresets={FULL_PRESETS} {savedPalettes} onpalette={selectPalette} onimportpalette={() => editPalette(null)} oneditpalette={editPalette} {previewing} {canvasScrollable} {autos} {soft} />

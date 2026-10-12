@@ -1,0 +1,13 @@
+.drag-export-probe {
+  position: fixed; z-index: 1000; top: 64px; left: 12px;
+  width: min(340px, calc(100vw - 48px)); padding: 12px;
+  background: var(--bg, #222); color: var(--fg, #fff);
+  border: 1px solid currentColor; border-radius: 12px;
+  font-size: 12px; max-height: calc(100dvh - 110px); overflow: auto;
+}
+.drag-export-probe summary { cursor: pointer; }
+.drag-export-probe p { margin: 10px 0; overflow-wrap: anywhere; }
+.drag-export-probe label { display: block; margin: 10px 0; }
+.drag-export-probe select, .drag-export-probe input { max-width: 100%; }
+.drag-probe-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+.drag-probe-actions button { padding: 6px; cursor: pointer; }

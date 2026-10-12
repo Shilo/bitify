@@ -112,7 +112,8 @@ Two were set by the owner. The rest are what the work depends on.
 4. **The loops in `src/lib/bitify.js` make nothing per pixel**: no array, no object, no
    function. They run once for every pixel of a photo, on phones.
 5. **Work per change follows the screen, not the file.** Only adding an image, saving and
-   copying may go through every pixel.
+   copying may go through every pixel in normal use. The opt-in desktop drag prototype
+   additionally prepares one hovered image's full export after settings settle.
 
 ## What was wrong
 
