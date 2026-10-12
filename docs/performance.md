@@ -765,7 +765,7 @@ values, as with HEX import; document display profiles are metadata, not applied.
 Cancel suppresses publication and late read/module errors; it does not terminate the
 browser's module request or file read. Busy clears when that pending operation settles,
 and Close stays available. Parsing itself checks cancellation between bounded batches.
-The production comparison with `2963cd3` adds 575 minified startup bytes (201 bytes
+At `ac380bb`, the Aseprite-import production comparison with `2963cd3` added 575 minified startup bytes (201 bytes
 using the same Node gzip settings). The separate parser is 2492 minified bytes / 1326
 gzip bytes and is not preloaded by the HTML. These are build measurements, not network
 latency or a physical-phone timing guarantee; compression varies by server settings.
@@ -853,3 +853,30 @@ The sixteen-sector/title follow-up passed 359 unit tests and a production build,
 PICO-8 and DawnBringer previews retain all sixteen colors in their original order. The
 16px title and paired settings fit native Codex 320px portrait and 844px landscape checks.
 Conversion algorithms are unchanged; prior conversion/export results remain historical.
+
+### Seven presets and palette URL drops (October 11, 2026)
+
+Two additional immutable color tables bring the curated rail to seven entries. The
+matching loops and sixteen-sector preview cap are unchanged; Resurrect uses all 64
+colors for conversion even though its small preview shows sixteen. PICO-8 remains the
+default independently of the descending-count rail order.
+
+The open palette editor reuses the existing drag payload parser, then downloads only
+the first image or Aseprite URL. Its separate fetch helper accumulates streamed chunks
+up to 32 MiB, rejecting larger declared or actual bodies before reading the remainder.
+This is a payload bound, not a bound on all browser memory or File construction copies.
+Cancel and Close abort the request and suppress late results/errors. A 30-second timeout
+bounds network/body reads only; local import and decoding keep their prior cancellation
+behavior. Aseprite's parser remains on demand. No dependency, CSS or conversion changes.
+
+Verification: 446 unit tests and the final production build pass. The built browser
+regression passed 132 legacy combinations, all seven presets in both Oklab and RGB,
+their complete copy/HEX backups, and eleven integration categories. The same build
+passed 311 local import/editor assertions across 36 fixture scenarios. A subsequent
+error-sentence punctuation fix passed a fresh 328-assertion URL suite on the final build,
+including real cross-origin success/denial, all supported image codecs, the supplied
+255-color Aseprite file, timeout/cancellation, limits and mixed import methods.
+Native Codex browser checked every preset at desktop/320px width and exercised URL
+imports, blocked-host recovery, manual/paste mixing, cancellation and saved editing.
+Timeout tests assert the 30-second setting with shortened fixture timers; physical
+devices, Safari and native Discord-client drags remain unverified for the new modal route.

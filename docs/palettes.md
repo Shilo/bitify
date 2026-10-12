@@ -1,7 +1,7 @@
 # Palettes
 
 Bitify's Palette panel has two families: **1-bit**, with twelve preset color pairs, and
-**Palette**, with five curated full palettes and a named local library. The pairs are
+**Palette**, with seven curated full palettes and a named local library. The pairs are
 defined in [src/lib/presets.js](../src/lib/presets.js); full palettes and their provenance
 are in [src/lib/palette-library.js](../src/lib/palette-library.js).
 
@@ -147,11 +147,20 @@ not a promise that every selected color will be used.
 
 | Preset | Colors | Attribution |
 |---|---:|---|
+| Resurrect 64 | 64 | [Kerrie Lake](https://lospec.com/palette-list/resurrect-64) |
+| ENDESGA 32 | 32 | [ENDESGA](https://lospec.com/palette-list/endesga-32), originally for NYKRA |
 | PICO-8 | 16 | [Lexaloffle Games](https://www.lexaloffle.com/pico-8.php) |
 | DawnBringer 16 | 16 | [DawnBringer](https://lospec.com/palette-list/dawnbringer-16) |
-| ENDESGA 32 | 32 | [ENDESGA](https://lospec.com/palette-list/endesga-32), originally for NYKRA |
-| Game Boy green | 4 | Common Game Boy LCD-inspired RGB interpretation; hardware does not define one canonical RGB set |
 | Grayscale 8 | 8 | Bitify: eight evenly spaced sRGB grays |
+| Ice Cream GB | 4 | [Kerrie Lake](https://lospec.com/palette-list/ice-cream-gb) |
+| Game Boy green | 4 | Common Game Boy LCD-inspired RGB interpretation; hardware does not define one canonical RGB set |
+
+The rail groups presets by descending color count: 64, 32, 16, 8, 4. PICO-8 precedes
+DawnBringer 16 using Lospec download counts as a popularity signal; the four-color
+pair puts the warm artist palette before the familiar handheld palette. This curated
+order balances recognition with distinct results, rather than claiming a universal
+popularity ranking. PICO-8 remains the default independently of rail order. Existing
+preset IDs and saved selections are preserved. Published colors retain their original order.
 
 Curated presets are immutable. Edit creates a named copy. Saved and session-only palettes
 follow the presets on the same rail, with a divider. One round preview represents each
@@ -224,6 +233,15 @@ Only the chosen input controls appear below those buttons, followed by source no
 and acquisition errors. Switch methods without losing the draft or pasted text.
 Large swatch lists scroll within a bounded grid; the save footer stays visible.
 Editing and copying start with Add colors.
+
+While this dialog is open, drop a local palette file or an HTTP(S) image/Aseprite URL
+from Discord or a web page anywhere on it. Files take precedence over URLs; only the
+first source replaces the draft, with the chosen method and entered name retained.
+Signed URL queries are kept. Downloads omit credentials and referrers, have a 30-second
+download timeout and stop above 32 MiB. The host must permit browser cross-origin access.
+Failures and cancellation retain the current colors; a failed link can be saved and
+imported as a file instead. Remote text palette links are not supported; use the existing
+file picker/drop or Paste colors for HEX/TXT, GPL and JASC-PAL.
 File and text actions say Replace when colors exist; manual Add appends a unique color.
 New drafts suggest New palette, or the first available New palette 2, 3, etc.
 when saved or session palettes already use that name (ignoring case and outer spaces).

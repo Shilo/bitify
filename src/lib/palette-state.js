@@ -1,4 +1,4 @@
-import { FULL_PRESETS } from './palette-library.js';
+import { FULL_PRESETS, DEFAULT_FULL_PALETTE } from './palette-library.js';
 import { preparePalette, quantizeAsync, validateMatchingMetric } from './quantize.js';
 
 export function restorePaletteState(text, library = []) {
@@ -7,7 +7,7 @@ export function restorePaletteState(text, library = []) {
   const choices = [...FULL_PRESETS, ...library];
   return {
     family: value?.family === 'full-palette' ? 'full-palette' : 'two-color',
-    paletteId: choices.some(p => p.id === value?.paletteId) ? value.paletteId : FULL_PRESETS[0].id,
+    paletteId: choices.some(p => p.id === value?.paletteId) ? value.paletteId : DEFAULT_FULL_PALETTE.id,
     alphaCut: Number.isInteger(value?.alphaCut) && value.alphaCut >= 1 && value.alphaCut <= 255 ? value.alphaCut : 128,
     metric: value?.metric === 'rgb' ? 'rgb' : 'oklab',
   };

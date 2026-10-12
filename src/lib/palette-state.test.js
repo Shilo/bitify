@@ -1,13 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import { restorePaletteState, conversionSnapshot, fullPaletteImage } from './palette-state.js';
-import { FULL_PRESETS } from './palette-library.js';
+import { FULL_PRESETS, DEFAULT_FULL_PALETTE } from './palette-library.js';
 
 describe('independent palette state and export snapshots', () => {
   it('restores only valid family, palette identity and opacity; legacy remains the default', () => {
-    expect(restorePaletteState('{}')).toEqual({ family: 'two-color', paletteId: FULL_PRESETS[0].id, alphaCut: 128, metric: 'oklab' });
+    expect(restorePaletteState('{}')).toEqual({ family: 'two-color', paletteId: DEFAULT_FULL_PALETTE.id, alphaCut: 128, metric: 'oklab' });
     expect(restorePaletteState('{')).toEqual(restorePaletteState(null));
-    expect(restorePaletteState(JSON.stringify({ family:'full-palette',paletteId:'deleted',alphaCut:0 }))).toEqual({ family:'full-palette',paletteId:FULL_PRESETS[0].id,alphaCut:128,metric:'oklab' });
+    expect(restorePaletteState(JSON.stringify({ family:'full-palette',paletteId:'deleted',alphaCut:0 }))).toEqual({ family:'full-palette',paletteId:DEFAULT_FULL_PALETTE.id,alphaCut:128,metric:'oklab' });
     expect(restorePaletteState(JSON.stringify({family:'full-palette',paletteId:'user-a',alphaCut:1}),[{id:'user-a'}]).paletteId).toBe('user-a');
+    for (const palette of FULL_PRESETS) expect(restorePaletteState(JSON.stringify({family:'full-palette',paletteId:palette.id})).paletteId).toBe(palette.id);
   });
   it('restores explicit valid matching choices and defaults absent or malformed metadata to Oklab', () => {
     for (const metric of ['oklab', 'rgb']) expect(restorePaletteState(JSON.stringify({ metric })).metric).toBe(metric);

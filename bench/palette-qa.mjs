@@ -15,7 +15,7 @@ import omggif from 'omggif';
 import { analyze, mask, colorize, unify } from '../src/lib/bitify.js';
 import { PRESETS, STYLES, inks } from '../src/lib/presets.js';
 import { defaults } from '../src/lib/settings.js';
-import { FULL_PRESETS } from '../src/lib/palette-library.js';
+import { FULL_PRESETS, DEFAULT_FULL_PALETTE } from '../src/lib/palette-library.js';
 
 const require = createRequire(import.meta.url);
 let chromium;
@@ -143,9 +143,11 @@ const gifFixture = gifBuffer.subarray(0, gifWriter.end()), gifPath = resolve(scr
 const originalGif = gifIndices.map(indices => ({ width: 3, height: 2, data: Uint8ClampedArray.from(indices.flatMap(i => i ? [[255,0,0,255],[0,0,255,255],[0,255,0,255]][i - 1] : [0,0,0,0])) }));
 const results = { legacy: [], full: [], extra: [], consoleErrors: [], baseline: process.env.BASE_REF ?? execFileSync('git', ['rev-parse', 'HEAD'], { encoding:'utf8' }).trim() };
 const TYPES = { '.html':'text/html', '.js':'text/javascript', '.css':'text/css', '.png':'image/png', '.gif':'image/gif', '.svg':'image/svg+xml' };
+const paletteDropPng=sourcePng(2,1,Uint8Array.from([17,34,51,255,68,85,102,255]));
 const server = createServer((request, response) => {
   const route = new URL(request.url, 'http://localhost').pathname.replace(/^\/bitify\//, '/');
   if(route === '/storage-driver.html') { response.setHeader('Content-Type','text/html'); response.end('<!doctype html><title>Storage event driver</title>'); return; }
+  if(route === '/palette-drop.png' || route === '/palette-drop.ase') { response.setHeader('Content-Type',route.endsWith('.png')?'image/png':'application/octet-stream');response.end(route.endsWith('.png')?paletteDropPng:readFileSync('src/lib/fixtures/palette-import/palette.ase'));return; }
   const file = resolve(dist, '.' + (route === '/' ? '/index.html' : decodeURIComponent(route)));
   if (!file.startsWith(dist + sep)) { response.writeHead(403).end(); return; }
   try { response.setHeader('Content-Type', TYPES[extname(file)] ?? 'application/octet-stream'); response.end(readFileSync(file)); }
@@ -228,6 +230,11 @@ try {
   results.extra.push('Legacy custom colors/None/Swap/settings memory/Original/copy/single-save');
 
   await openPalette(); await page.getByRole('group',{name:'Color system',exact:true}).getByRole('button',{name:'Palette',exact:true}).click();
+  assert.equal(FULL_PRESETS.length,7,'Expected all seven published full presets');
+  assert.deepEqual(FULL_PRESETS.map(palette=>palette.colors.length),[64,32,16,16,8,4,4],'Preset order/counts changed');
+  assert.equal(DEFAULT_FULL_PALETTE.name,'PICO-8','Reordering the rail changed the default');
+  assert.equal((await stored()).paletteId,DEFAULT_FULL_PALETTE.id,'First family switch lost the PICO-8 default');
+  assert.deepEqual(await page.getByRole('group',{name:'Full palettes',exact:true}).locator('button').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('aria-label'))),FULL_PRESETS.map(palette=>palette.name),'Full preset rail order differs from published order');
   for (const palette of FULL_PRESETS) {
     await openPalette(); await page.getByRole('group',{name:'Full palettes',exact:true}).getByRole('button',{name:palette.name,exact:true}).click(); await closePanel();
     assert.equal((await stored()).paletteId,palette.id); expected = nearestReference(fixture,palette.colors);
@@ -237,6 +244,13 @@ try {
     samePixels(readPng(await copy(page.getByRole('button',{name:'Copy fixture.png',exact:true}))).pixels,expected,`${palette.name} clipboard`);
     results.full.push({palette:palette.name,colors:palette.colors.length,hash:hash(decoded.pixels)});
     await page.getByRole('button',{name:`${palette.name} conversion`,exact:true}).click();
+    await openPalette();await page.getByRole('button',{name:'Edit palette',exact:true}).click();
+    const presetCopy=page.getByRole('dialog',{name:'Make a palette copy',exact:true});await presetCopy.waitFor();
+    assert.deepEqual(await presetCopy.locator('.palette-review-swatch').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('aria-label').split(' ').at(-1))),palette.colors,`${palette.name} copy review swatches changed order/colors`);
+    const hexDownload=page.waitForEvent('download');await presetCopy.getByRole('button',{name:'HEX backup',exact:true}).click();
+    assert.equal(readFileSync(await (await hexDownload).path(),'utf8'),palette.colors.join('\n')+'\n',`${palette.name} full copy backup`);
+    await presetCopy.getByRole('button',{name:'Cancel',exact:true}).click();await presetCopy.waitFor({state:'detached'});await closePanel();
+    assert.equal((await stored()).paletteId,palette.id,'Canceling preset copy changed active palette');
   }
   console.log(`Full matrix: ${results.full.length} independently decoded exports and clipboard PNGs passed.`);
 
@@ -258,7 +272,7 @@ try {
   await page.getByRole('group',{name:'Color system',exact:true}).getByRole('button',{name:'Palette',exact:true}).click();await closePanel();assert.equal((await stored()).metric,'rgb');
   await page.getByRole('button',{name:'Palette settings',exact:true}).click();await page.getByRole('button',{name:'Reset palette settings',exact:true}).click();
   assert.equal((await stored()).metric,'oklab');assert.equal((await stored()).alphaCut,128);await page.getByRole('button',{name:'Palette settings',exact:true}).click();
-  results.extra.push('Five full presets RGB preview/PNG/Copy match independent reference; family retains metric and Reset restores Oklab/cut128');
+  results.extra.push('Seven full presets RGB preview/PNG/Copy match independent reference; ordered copy swatches/HEX backups preserve every entry; family retains metric and Reset restores Oklab/cut128');
 
   // Full GIF: source compositing, preserved delays/loop, first-frame clipboard,
   // actual worker asset loaded under a deployment subpath, and mixed ZIP.
@@ -317,9 +331,9 @@ try {
   downloaded = await pendingDownload; assert.equal(downloaded.suggestedFilename(),'bitify.zip');
   const snapshotZip = unzipSync(readFileSync(await downloaded.path()));
   assert.deepEqual(Object.keys(snapshotZip),['fixture-palette.png','walk-palette.gif','big-palette.png']);
-  samePixels(readPng(snapshotZip['fixture-palette.png']).pixels,nearestReference(fixture,FULL_PRESETS[0].colors),'ZIP palette snapshot');
+  samePixels(readPng(snapshotZip['fixture-palette.png']).pixels,nearestReference(fixture,DEFAULT_FULL_PALETTE.colors),'ZIP palette snapshot');
   samePixels(readPng(snapshotZip['big-palette.png']).pixels,bigPixels,'ZIP removed-image snapshot');
-  samePixels(readGif(snapshotZip['walk-palette.gif']).frames[1].pixels,nearestReference(originalGif[1],FULL_PRESETS[0].colors),'ZIP GIF palette snapshot');
+  samePixels(readGif(snapshotZip['walk-palette.gif']).frames[1].pixels,nearestReference(originalGif[1],DEFAULT_FULL_PALETTE.colors),'ZIP GIF palette snapshot');
   assert.equal(await page.getByRole('button',{name:'Save big.png',exact:true}).count(),0);
   results.extra.push('2MP save preserves click palette; ZIP preserves palette and removed-image snapshots');
 
@@ -592,7 +606,7 @@ try {
   await asePage.addInitScript(()=>localStorage.setItem('bitify',JSON.stringify({family:'full-palette'})));
   asePage.on('pageerror',error=>results.consoleErrors.push(error.message));
   asePage.on('request',request=>{if(/\/palette-ase-[^/]+\.js(?:\?|$)/.test(request.url()))aseRequests.push(request.url());});
-  await asePage.goto(page.url());await asePage.locator('.dock button[aria-label="Palette"]').click();await asePage.getByRole('button',{name:'Import palette',exact:true}).click();
+  await asePage.goto(page.url());const aseArtworkCount=await asePage.locator('.tiles .tile').count();await asePage.locator('.dock button[aria-label="Palette"]').click();await asePage.getByRole('button',{name:'Import palette',exact:true}).click();
   const aseEditor=asePage.getByRole('dialog',{name:'Import palette',exact:true}),aseInput=aseEditor.locator('input[type=file]');
   await aseInput.setInputFiles(fixturePath);await aseEditor.locator('summary').filter({hasText:'Image options'}).waitFor();
   await aseEditor.getByRole('button',{name:'Paste colors',exact:true}).click();await aseEditor.getByLabel('Hex colors',{exact:true}).fill('#112233 #445566');await aseEditor.getByRole('button',{name:'Replace colors',exact:true}).click();
@@ -605,11 +619,23 @@ try {
     assert.deepEqual(actual,aseExpected,'ASE review changed raw entry order');assert.equal(aseRequests.length,1,'First ASE must load once and subsequent imports reuse the module');
     if(!attempt){await aseEditor.getByRole('button',{name:'Paste colors',exact:true}).click();await aseEditor.getByRole('button',{name:'Replace colors',exact:true}).click();}
   }
+  await aseEditor.getByRole('button',{name:'Paste colors',exact:true}).click();await aseEditor.getByLabel('Hex colors',{exact:true}).fill('#fedcba #010203');
+  await aseEditor.evaluate(dialog=>window.__qaUrlDialog=dialog);
+  for(const [extension,count]of [['png',2],['ase',255]]){
+    const droppedUrl=new URL(`/bitify/palette-drop.${extension}?signature=retained`,asePage.url()).href;
+    await aseEditor.evaluate((dialog,url)=>{const data=new DataTransfer();data.setData('text/plain',url);dialog.dispatchEvent(new DragEvent('drop',{bubbles:true,cancelable:true,dataTransfer:data}));},droppedUrl);
+    await aseEditor.getByText(`${count} colors`,{exact:true}).waitFor();await aseEditor.locator('.palette-import-progress').waitFor({state:'detached'});
+    const actual=[];for(;;){actual.push(...await aseEditor.locator('.palette-review-swatch').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('aria-label').split(' ').at(-1))));const next=aseEditor.getByRole('button',{name:'Next',exact:true});if(!await next.count()||!await next.isEnabled())break;await next.click();}
+    assert.deepEqual(actual,extension==='ase'?aseExpected:['#112233','#445566'],'URL drop changed exact palette entries');
+    assert.equal(await aseEditor.getByRole('button',{name:'Paste colors',exact:true}).getAttribute('aria-pressed'),'true');assert.equal(await aseEditor.getByLabel('Hex colors',{exact:true}).inputValue(),'#fedcba #010203');assert.equal(await aseEditor.getByLabel('Name',{exact:true}).inputValue(),'Lazy ASE palette');assert.equal(await aseEditor.evaluate(dialog=>dialog===window.__qaUrlDialog&&dialog.open),true);
+  }
+  assert.equal(aseRequests.length,1,'URL ASE did not reuse the parser');assert.equal(await asePage.locator('.tiles .tile').count(),aseArtworkCount,'Palette URL drop added artwork');
   await aseEditor.getByRole('button',{name:'Save palette',exact:true}).click();await aseEditor.waitFor({state:'detached'});
   const aseSaved=await asePage.evaluate(()=>JSON.parse(localStorage.getItem('bitify-palettes-v1')).palettes.find(p=>p.name==='Lazy ASE palette'));
   assert.equal(aseSaved.source.kind,'aseprite');assert.deepEqual(aseSaved.colors,aseExpected);
   results.aseLazy={fixtureSha256:aseSha,colors:aseExpected.length,requests:aseRequests};await aseContext.close();
   results.extra.push('ASE parser stays unloaded for startup/editor/PNG/text; first import loads once, repeat reuses cache and exact255 ordered raw entries persist with aseprite metadata');
+  results.extra.push('Palette URL PNG→ASE imports exact entries without replacing the dialog, chosen Paste tool, name or text history; saved ASE source persists');
   assert.deepEqual(results.consoleErrors,[],'Browser JS exceptions');
   results.passed = true;
   writeFileSync(resolve(scratch,'results.json'),JSON.stringify(results,null,2));

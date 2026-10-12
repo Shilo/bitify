@@ -1876,10 +1876,17 @@ colors removes the masks/chevrons and exposes a normal scrollbar.
 
 The 1-bit header keeps its three-way Both/None switch. The Palette header instead has
 Import and Edit icon buttons with accessible labels and shared tooltips. Its rail starts
-with PICO-8 (16), DawnBringer 16, ENDESGA 32, Game Boy green (4) and Grayscale 8, then a
+with Resurrect 64, ENDESGA 32, PICO-8 (16), DawnBringer 16, Grayscale 8,
+Ice Cream GB (4) and Game Boy green (4), then a
 divider and saved/session palettes. Preset attribution lives with each immutable record
 and in [palettes.md](../../palettes.md). Game Boy green is explicitly an LCD-inspired RGB
 interpretation. Editing a preset or session palette creates a named copy.
+
+Full presets are grouped by descending color count. Equal-count order is curated,
+with Lospec downloads informing PICO-8 before DawnBringer 16. PICO-8 remains the
+default for new, invalid, reset and deleted selections independently of rail order;
+existing stable IDs retain their selection. Resurrect 64 and Ice Cream GB use Kerrie
+Lake's published RGB entries in published order. No palette controls or layout change.
 
 ### Native import/review/editor
 
@@ -1941,6 +1948,20 @@ method buttons. Show removal/limit instructions only
 when needed, and do not repeat the GIF compatibility notice.
 Artwork drop/paste and global stepping do not react behind it. Choose a palette image or
 file, paste an image, or use Paste colors. Supported images are PNG/JPEG/WebP/BMP/GIF,
+and the open dialog also accepts Discord/web HTTP(S) image and Aseprite URL drops.
+Capture drag strings synchronously with the existing artwork payload parser: image
+HTML sources, URI lists, DownloadURL and plain URL text. Files take precedence; only
+the first source replaces the current draft, preserving entered name and selected
+method. Never import into the artwork behind the dialog or navigate the page.
+Fetch signed URLs unchanged with CORS, omitted credentials and no referrer. Stream
+downloads up to 32 MiB; reject larger bodies before accumulating the remainder. The
+30-second timeout covers download only; decoding uses user cancellation without a
+new local deadline. Cancel/Close suppress late successes and errors. Failure/timeout
+retains the draft and offers saving the file locally. Extensionless generic Aseprite
+attachments route by binary magic to the existing lazy parser. Image signatures
+identify supported image types, including extensionless GIF. Remote text palette
+URLs are unsupported; their existing local file and text routes remain available.
+Local supported images are
 up to 32 MiB and 16 × 1024 × 1024 decoded pixels. GIF uses the first frame with a notice.
 Browser decoding yields color-managed sRGB values; exactness concerns those decoded
 values, not arbitrary original color-profile bytes. The browser can allocate decode

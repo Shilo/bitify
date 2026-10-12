@@ -16,7 +16,7 @@
   import PixelIcon from './PixelIcon.svelte';
   import ImageViewer from './ImageViewer.svelte';
   import PaletteImport from './PaletteImport.svelte';
-  import { FULL_PRESETS, LIBRARY_KEY, restoreLibrary, savePalette, deletePalette, newPaletteName } from './lib/palette-library.js';
+  import { FULL_PRESETS, DEFAULT_FULL_PALETTE, LIBRARY_KEY, restoreLibrary, savePalette, deletePalette, newPaletteName } from './lib/palette-library.js';
   import { preparePalette } from './lib/quantize.js';
   import { restorePaletteState, conversionSnapshot, fullPaletteImage } from './lib/palette-state.js';
   import { tooltip } from './lib/tooltip.js';
@@ -44,7 +44,7 @@
   let family = $state(fullSaved.family), paletteId = $state(fullSaved.paletteId), alphaCut = $state(fullSaved.alphaCut), metric = $state(fullSaved.metric);
   let sessionPalettes = $state.raw([]);
   const savedPalettes = $derived([...library, ...sessionPalettes]);
-  const fullPalette = $derived([...FULL_PRESETS, ...savedPalettes].find(p => p.id === paletteId) ?? FULL_PRESETS[0]);
+  const fullPalette = $derived([...FULL_PRESETS, ...savedPalettes].find(p => p.id === paletteId) ?? DEFAULT_FULL_PALETTE);
   const prepared = $derived(preparePalette(fullPalette.colors));
   let paletteRequest = $state.raw(null), paletteTrigger;
   let deleteImports = $state(false);
@@ -63,7 +63,7 @@
   }
   function removePalette(id, revision) {
     library = deletePalette(localStorage, library, id, { expectedRevision: revision });
-    if (paletteId === id) { paletteId = FULL_PRESETS[0].id; say('Palette deleted. PICO-8 selected.'); }
+    if (paletteId === id) { paletteId = DEFAULT_FULL_PALETTE.id; say(`Palette deleted. ${DEFAULT_FULL_PALETTE.name} selected.`); }
   }
   function reloadPalette(id) {
     library = restoreLibrary(localStorage.getItem(LIBRARY_KEY));
@@ -237,7 +237,7 @@
     const fresh = restore(null, STYLES.map(s => s[0]));
     ({ first, second, none, style, settings } = fresh);
     themePick = fresh.theme;
-    family = 'two-color'; paletteId = FULL_PRESETS[0].id; alphaCut = 128; metric = 'oklab';
+    family = 'two-color'; paletteId = DEFAULT_FULL_PALETTE.id; alphaCut = 128; metric = 'oklab';
     say('Settings reset.');
   }
   let shared = $state.raw(null), sharedTrigger; // the image the sheet is for; it stays set after the sheet closes, until the next one

@@ -10,7 +10,7 @@ Convert sprites and animations with 1-bit styles or color palettes. Runs entirel
 
 - Add any number of images by drag and drop, file picker or paste. Web and Discord image drops work when the host allows access, including animated GIFs.
 - In 1-bit, choose two colors, swap them, or pick from twelve presets. Either color can be None, for a transparent result. Changes redraw every image at once.
-- Full palettes with 1–256 unique opaque RGB colors, five curated presets, and a named local palette library. One editor lets you import images or palette files, paste hex colors, or add colors manually, then review and save. Files support HEX/TXT, legacy RGB GPL, JASC-PAL and Aseprite embedded palettes.
+- Full palettes with 1–256 unique opaque RGB colors, seven curated presets, and a named local palette library. One editor lets you import images or palette files, paste hex colors, or add colors manually, then review and save. Drop an image or Aseprite file from your device, Discord or a web page into the editor. Files support HEX/TXT, legacy RGB GPL, JASC-PAL and Aseprite embedded palettes.
 - Eleven 1-bit styles: Cutout (filled shapes with their parts cut apart, after the game End of End), Solid, Stencil (a filled shape with its inner lines cut out, for one-color icons), Lines (outlines each part of a sprite), Checker, Hatch, Bayer, Noise, Atkinson, Icon and Shape.
 - In 1-bit, use the threshold slider or per-image Auto setting. Palette mode matches each pixel to the nearest selected color using Oklab (default) or RGB, preserving exact matches and sharing the selected palette across all images. A separate opacity cut appears when needed.
 - An immersive checker canvas with grouped floating glass controls and readable image actions/labels.

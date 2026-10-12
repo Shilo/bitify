@@ -3,6 +3,9 @@
   import PixelIcon from './PixelIcon.svelte';
   import { tooltip } from './lib/tooltip.js';
   import { decodePaletteFile } from './lib/palette-decode.js';
+  import { droppedImages } from './lib/image-drop.js';
+  import { fetchDroppedPalette } from './lib/palette-drop.js';
+  import { checkCanceled } from './lib/quantize.js';
   import { extractPalette, parsePaletteText } from './lib/palette-import.js';
   import { normalizeColors, validateName } from './lib/palette-library.js';
 
@@ -47,12 +50,17 @@
     truncated = !!result.truncated; partialAlpha = result.partialAlpha;
     selected = []; page = 0; resetFailure();
   }
-  async function importFile(file) {
-    if (!file || busy) return;
+  async function importFile(file, url) {
+    if ((!file && !url) || busy) return;
     resetFailure('input'); controller?.abort(); controller = new AbortController();
-    busy = 'Reading palette'; progress = 0;
+    const signal = controller.signal;
+    const downloadSignal = url ? AbortSignal.any([signal, AbortSignal.timeout(30000)]) : null;
+    busy = url ? 'Downloading palette' : 'Reading palette'; progress = 0;
     try {
-      const result = await decodePaletteFile(file, { signal: controller.signal, onProgress: value => progress = value });
+      if (url) file = await fetchDroppedPalette(url, downloadSignal);
+      checkCanceled(signal); busy = 'Reading palette';
+      const result = await decodePaletteFile(file, { signal, onProgress: value => progress = value });
+      checkCanceled(signal);
       if (!result.colors.length) {
         error = colors.length ? 'No visible colors were found. Your current colors were kept.' : 'This image has no visible colors. Choose another image or add colors.';
         return;
@@ -60,7 +68,13 @@
       applyImport(result); image = result.image; source = result.source; firstFrame = result.firstFrame; solid = false;
       imageOptionsOpen = result.total > maxColors;
       if (!nameEdited) name = [...(file.name || '').replace(/\.[^.]+$/, '').trim()].slice(0, 64).join('') || initial.defaultName || 'New palette';
-    } catch (problem) { if (problem.name !== 'AbortError') error = problem.message || 'This palette could not be read.'; }
+    } catch (problem) {
+      if (!controller.signal.aborted) {
+        error = busy === 'Downloading palette' && downloadSignal?.aborted ? 'Palette download timed out. Try saving the file and importing it.'
+          : url ? (problem.message || 'This palette could not be downloaded.').replace(/[.!?]?$/, '. ') + 'Try saving the file and importing it.'
+          : problem.message || 'This palette could not be read.';
+      }
+    }
     finally { busy = ''; }
   }
   function importText() {
@@ -145,7 +159,13 @@
     const anchor = document.createElement('a'); anchor.href = url; anchor.download = (name.trim() || 'palette').replace(/[^\w -]/g, '_').slice(0, 64) + '.hex';
     anchor.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
-  function drop(event) { event.preventDefault(); event.stopPropagation(); importFile(event.dataTransfer?.files?.[0]); }
+  function drop(event) {
+    event.preventDefault(); event.stopPropagation();
+    // Drag data is readable only during this event. A source replaces one draft.
+    const { files, urls } = droppedImages(event.dataTransfer);
+    if (files.length) importFile(files[0]);
+    else if (urls.length) importFile(null, urls[0]);
+  }
   function paste(event) {
     event.stopPropagation();
     const file = event.clipboardData?.files?.[0];
