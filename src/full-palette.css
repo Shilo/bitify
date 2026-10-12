@@ -36,6 +36,16 @@
 :root .palette-setting-row { display: flex; align-items: center; gap: 8px; width: 100%; min-width: 0; }
 :root .palette-setting-row .key { flex: 0 0 78px; font-size: 13px; white-space: nowrap; }
 :root .palette-setting-row output { text-align: right; font-variant-numeric: tabular-nums; }
+/* Reset has one shape in both settings panels, with a compact icon on phones. */
+:root .dock .settings-reset { flex: none; box-sizing: border-box; border-radius: 12px; color: var(--gl-color-error-on-surface); border-color: var(--gl-color-error-border); }
+:root .dock .settings-reset .reset-label { font-size: inherit; color: inherit; }
+@media (forced-colors: active) {
+  :root .dock .settings-reset { color: ButtonText; border-color: ButtonText; }
+}
+@media (max-width: 520px) {
+  :root .dock .settings-reset { width: 44px; min-width: 44px; height: 44px; min-height: 44px; padding: 0; align-items: center; justify-content: center; }
+  :root .dock .settings-reset .reset-label { display: none; }
+}
 :root .palette-method-name { margin: 0; font-family: var(--body); font-size: 16px; font-weight: 600; line-height: 1.2; color: var(--gl-color-text-heading); }
 :root .palette-settings-panel input { flex: 1; min-width: 0; }
 :root .palette-settings-panel output { font-size: 13px; min-width: 3ch; }

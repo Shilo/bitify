@@ -2152,10 +2152,20 @@ Family, palette ID, alpha cut, global matching `metric` and `maxColors` are addi
 Max colors slider and number bounds follow the active palette's unique color count.
 Nearest settings inherit the Style popup's responsive width and safe-area constraints,
 giving the slider more room on wide screens while fitting phone and landscape viewports.
+Both settings families use Reset buttons with 12px corner radii and the existing reset
+color treatment. They show an icon and Reset text above 520px wide, or a 44px icon-only
+button at 520px and below, retaining complete accessible names and tooltips.
 Their numeric display is the lesser of the requested maximum and that count; All retains
-an empty number and a slider thumb bounded from `lastMaxColors`. Neither palette selection,
+an empty number value with the palette's color count as its placeholder, and a slider thumb
+bounded from `lastMaxColors`. Neither palette selection,
 palette editing nor blurring an untouched number changes the stored global preference.
-A larger palette restores its remembered value. Only committed edits update the preference;
+A larger palette restores its remembered value. Slider moves update the preference after
+200ms without another move, or immediately on release/change. Pending moves are canceled
+on pointer cancellation, closing, palette/family switching, All and Reset. Number fields
+still commit on change/Enter/blur. The last completed rendering stays visible while the
+same frame recalculates, with converted animation playback waiting for the new rendering.
+Exports use the committed settings and full source, never a retained previous preview.
+Only committed edits update the preference;
 invalid edits are restored, and changing palettes or closing the popup discards unfinished
 slider drafts and native gestures. All remains an explicit choice even when a numeric limit equals
 the palette's size. The minimum is 2 for palettes with multiple colors. A one-color palette

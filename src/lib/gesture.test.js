@@ -1,11 +1,67 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
-import { wheelSteps, sliderDrag } from './gesture.js';
+import { wheelSteps, sliderDrag, pausedCommit } from './gesture.js';
 
 // Feeds [delta, time] moves to a fresh stepper and returns the steps that came out.
 const run = moves => {
   const step = wheelSteps();
   return moves.map(([delta, now]) => step(delta, now)).filter(Boolean);
 };
+
+describe('paused expensive-setting commits', () => {
+  afterEach(() => vi.useRealTimers());
+  const setup = () => {
+    vi.useFakeTimers();
+    const commit = vi.fn();
+    return { commit, slider: pausedCommit(commit) };
+  };
+  it('commits after 200ms of rest while preserving the captured context', () => {
+    const {commit, slider} = setup(), palette = {};
+    slider.schedule(8, palette);
+    vi.advanceTimersByTime(199); expect(commit).not.toHaveBeenCalled();
+    vi.advanceTimersByTime(1); expect(commit).toHaveBeenCalledExactlyOnceWith(8, palette);
+    expect(vi.getTimerCount()).toBe(0);
+  });
+  it('coalesces rapid movement into the latest value with one timer', () => {
+    const {commit, slider} = setup();
+    for (let value = 2; value <= 64; value++) {
+      slider.schedule(value, 'palette');
+      expect(vi.getTimerCount()).toBe(1);
+      vi.advanceTimersByTime(50);
+    }
+    expect(commit).not.toHaveBeenCalled();
+    vi.advanceTimersByTime(150); expect(commit).toHaveBeenCalledExactlyOnceWith(64, 'palette');
+  });
+  it('flushes immediately and never repeats after release/change', () => {
+    const {commit, slider} = setup();
+    slider.schedule(16, 'palette'); slider.flush(); slider.flush();
+    vi.advanceTimersByTime(1000);
+    expect(commit).toHaveBeenCalledExactlyOnceWith(16, 'palette');
+    expect(vi.getTimerCount()).toBe(0);
+  });
+  it('allows further movement after a pause without repeating the paused value', () => {
+    const {commit, slider} = setup();
+    slider.schedule(8, 'palette'); vi.advanceTimersByTime(200);
+    slider.schedule(12, 'palette'); slider.flush();
+    vi.advanceTimersByTime(200);
+    expect(commit.mock.calls).toEqual([[8,'palette'],[12,'palette']]);
+  });
+  it('discards pending work when closing, switching, canceling, All or Reset', () => {
+    const {commit, slider} = setup();
+    slider.schedule(4, 'old palette'); slider.cancel(); slider.flush();
+    vi.advanceTimersByTime(200); expect(commit).not.toHaveBeenCalled();
+    slider.schedule(32, 'new palette'); vi.advanceTimersByTime(200);
+    expect(commit).toHaveBeenCalledExactlyOnceWith(32, 'new palette');
+  });
+  it('does not discard a new gesture scheduled by the callback', () => {
+    vi.useFakeTimers();
+    const values = [], slider = pausedCommit(value => {
+      values.push(value);
+      if (value === 2) slider.schedule(3, 'next');
+    });
+    slider.schedule(2, 'first'); slider.flush(); vi.advanceTimersByTime(200);
+    expect(values).toEqual([2,3]); expect(vi.getTimerCount()).toBe(0);
+  });
+});
 
 describe('wheelSteps', () => {
   it('takes one step per notch of a mouse wheel, in its direction', () => {

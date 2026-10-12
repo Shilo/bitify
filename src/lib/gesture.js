@@ -69,3 +69,28 @@ export function sliderDrag(report, redrawn, rest = 150) {
     },
   };
 }
+
+// Expensive controls update after a pause, or synchronously at gesture end.
+// Capture the context with the value; cancellation discards unfinished work.
+export function pausedCommit(commit, rest = 200) {
+  let timer, pending;
+  const cancel = () => {
+    clearTimeout(timer);
+    timer = undefined;
+    pending = null;
+  };
+  const flush = () => {
+    const next = pending;
+    cancel();
+    if (next) commit(next.value, next.context);
+  };
+  return {
+    schedule(value, context) {
+      cancel();
+      pending = { value, context };
+      timer = setTimeout(flush, rest);
+    },
+    flush,
+    cancel,
+  };
+}

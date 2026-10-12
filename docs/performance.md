@@ -890,7 +890,11 @@ devices, Safari and native Discord-client drags remain unverified for the new mo
 
 All remains the default and returns the existing prepared palette without importing the
 selection core or starting a worker. A limit at least the selected palette size does the same.
-The slider updates its local display while dragged and commits after release; the number
+The slider updates its local display while dragged and commits after a 200ms pause or
+immediately on release/change. Closing, palette/family switching, pointer cancellation,
+All and Reset cancel pending values. The last completed preview of the same source frame
+stays visible while a new subset/rendering is prepared; unrelated frames/families cannot
+reuse those pixels. Converted playback waits for the current result. The number
 field commits valid integers on change/Enter/blur. All/Reset suppress premature pointer
 blur so discarding a typed number does not fetch the optional code.
 

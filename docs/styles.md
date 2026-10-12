@@ -14,7 +14,10 @@ Opacity cut of 1–255 (128 by default). Its settings control always offers **Ma
 Oklab / RGB** and **Max colors**; Opacity cut appears for partially transparent sources or a changed cut.
 Oklab approximates perceived differences; RGB compares encoded sRGB channel values.
 The maximum is optional: drag its slider or enter a number from 2 up to the active palette's
-color count, then finish the edit. The controls show the effective limit; switching to a
+color count. The slider updates after a 200ms pause or release; number edits apply when
+finished. The previous preview stays visible while recalculating. Both settings families
+show Reset text on wide screens and an icon on phones, with matching rounded corners.
+The controls show the effective limit; switching to a
 smaller palette retains the remembered limit, which returns with a larger palette.
 Only editing the limit changes that preference. **All** restores unrestricted matching.
 A one-color palette uses its sole color and disables both limit inputs.

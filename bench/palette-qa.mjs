@@ -285,6 +285,7 @@ try {
   await page.getByRole('button', { name: 'RGB matching', exact: true }).click();
   const maximum = page.getByRole('spinbutton', { name: 'Max colors value', exact: true });
   assert.equal(await maximum.getAttribute('min'),'2');
+  assert.equal(await maximum.getAttribute('placeholder'), String(FULL_PRESETS.at(-1).colors.length));
   await maximum.fill('2'); await maximum.press('Enter'); assert.equal((await stored()).maxColors, 2);
   for(const invalid of ['1','257']) { await maximum.fill(invalid); await maximum.press('Enter'); assert.equal(await maximum.inputValue(), '2'); }
   await closePanel(); await tileMatches(twoPixels);

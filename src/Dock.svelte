@@ -12,7 +12,7 @@
   import PixelIcon from './PixelIcon.svelte';
   import { on } from 'svelte/events';
   import { tick } from 'svelte';
-  import { sliderDrag } from './lib/gesture.js';
+  import { sliderDrag, pausedCommit } from './lib/gesture.js';
   import { tooltip } from './lib/tooltip.js';
   import { compactPaletteName } from './lib/palette-label.js';
 
@@ -200,8 +200,8 @@
     if (!e.detail) dock.querySelector('[aria-label="Oklab matching"]')?.focus();
   }
 
-  // Source-wide preparation is expensive: keep edits local until the gesture
-  // finishes. All takes the existing conversion path without preparation.
+  // Source-wide preparation is expensive: update after a pause or release.
+  // All takes the existing conversion path without preparation.
   let limitNumber = $state(''), limitRange = $state(16);
   const limitMax = $derived(fullPalette.colors.length);
   const limitMin = $derived(Math.min(2, limitMax));
@@ -209,16 +209,21 @@
   const limitDescription = $derived(maxColors > limitMax
     ? `This palette has ${limitMax} ${limitMax === 1 ? 'color' : 'colors'}. Your ${maxColors}-color limit returns with a larger palette.`
     : undefined);
-  let numberDirty = false, rangeDirty = false, numberPalette, rangePalette;
+  let numberDirty = false, numberPalette;
+  const limitPause = pausedCommit((value, palette) => {
+    if (palette === fullPalette && family === 'full-palette' && panel === 'style') applyLimit(value);
+  });
   function restoreLimitDrafts() {
+    limitPause.cancel();
     limitNumber = visibleLimit ? String(visibleLimit) : '';
     limitRange = Math.min(maxColors || lastMaxColors, limitMax);
-    numberDirty = rangeDirty = false;
-    numberPalette = rangePalette = null;
+    numberDirty = false;
+    numberPalette = null;
   }
   $effect(() => {
     fullPalette, family, panel; // Palette switches and closing discard unfinished edits.
     restoreLimitDrafts();
+    return limitPause.cancel;
   });
   function applyLimit(value) {
     if (!Number.isInteger(value) || (value !== 0 && value < 2) || value > limitMax) return;
@@ -398,7 +403,7 @@
           <button class="glass-segmented__item" aria-label="Oklab matching" aria-pressed={metric === 'oklab'} use:tooltip={'Compare perceived color differences. Default.'} onclick={() => metric = 'oklab'}>Oklab</button>
           <button class="glass-segmented__item" aria-label="RGB matching" aria-pressed={metric === 'rgb'} use:tooltip={'Compare RGB channel differences.'} onclick={() => metric = 'rgb'}>RGB</button>
         </div>
-        <button class="btn glass-btn icon-only" disabled={metric === 'oklab' && alphaCut === 128 && maxColors === 0 && lastMaxColors === 16} aria-label="Reset palette settings" use:tooltip={'Restore Oklab matching, all colors and the default opacity cut.'} onpointerdown={e => e.preventDefault()} onclick={resetPaletteSettings}><PixelIcon name="reset"/></button>
+        <button class="btn glass-btn settings-reset" disabled={metric === 'oklab' && alphaCut === 128 && maxColors === 0 && lastMaxColors === 16} aria-label="Reset palette settings" use:tooltip={'Restore Oklab matching, all colors and the default opacity cut.'} onpointerdown={e => e.preventDefault()} onclick={resetPaletteSettings}><PixelIcon name="reset"/><span class="reset-label">Reset</span></button>
       </div>
       {#key fullPalette}
       <div class="palette-setting-row palette-limit-row">
@@ -407,12 +412,12 @@
         <input id="full-max-colors" class="glass-range" type="range" min={limitMin} max={limitMax} step="1" disabled={limitMax <= 2}
           value={limitRange} aria-label="Max colors" aria-describedby={limitDescription ? 'full-limit-description' : undefined}
           aria-valuetext={maxColors === 0 && limitNumber === '' ? (limitMax <= 2 ? 'All colors' : 'All colors; move to set a limit') : `${limitRange} colors per image`}
-          oninput={e => { rangeDirty = true; rangePalette = fullPalette; limitRange = +e.currentTarget.value; limitNumber = e.currentTarget.value; }}
-          onchange={e => { if (rangeDirty && rangePalette === fullPalette) applyLimit(+e.currentTarget.value); }}
+          oninput={e => { limitRange = +e.currentTarget.value; limitNumber = e.currentTarget.value; limitPause.schedule(limitRange, fullPalette); }}
+          onchange={limitPause.flush} onpointerup={limitPause.flush}
           onpointercancel={restoreLimitDrafts} />
         <div class="field palette-limit-field">
           <input class="tnum" type="number" min={limitMin} max={limitMax} step="1" disabled={limitMax === 1} inputmode="numeric" aria-label="Max colors value" aria-describedby={limitDescription ? 'full-limit-description' : undefined}
-            value={limitNumber} placeholder="—" oninput={e => { numberDirty = true; numberPalette = fullPalette; limitNumber = e.currentTarget.value; }}
+            value={limitNumber} placeholder={String(limitMax)} oninput={e => { numberDirty = true; numberPalette = fullPalette; limitNumber = e.currentTarget.value; }}
             onchange={finishLimitNumber} onblur={finishLimitNumber}
             onkeydown={e => { if (e.key === 'Enter') { e.preventDefault(); finishLimitNumber(e); } }} />
           <button aria-label="Use all palette colors" aria-pressed={maxColors === 0}
@@ -457,8 +462,8 @@
                 <span>{SETTINGS[key].label}</span><b>{shown(key, own[key])}</b>
               </button>
             {/each}
-            <button class="chip reset" disabled={!changed(style, own, keys)} aria-label="Reset {styleName}" use:tooltip={'Restore this style’s default settings.'} onclick={reset}>
-              <PixelIcon name="reset" />Reset
+            <button class="chip reset settings-reset" disabled={!changed(style, own, keys)} aria-label="Reset {styleName}" use:tooltip={'Restore this style’s default settings.'} onclick={reset}>
+              <PixelIcon name="reset" /><span class="reset-label">Reset</span>
             </button>
           </div>
         </div>
@@ -481,7 +486,7 @@
               <div class="row" class:choice-row={!!SETTINGS[key].options}><span class="key"><span class="setting-label" class:changed={changed(style, own, [key])}>{SETTINGS[key].label}</span></span>{@render control(key)}</div>
             {/each}
             <div class="foot">
-              <button class="btn glass-btn" disabled={!changed(style, own, keys)} aria-label="Reset {styleName}" use:tooltip={'Restore this style’s default settings.'} onclick={reset}><PixelIcon name="reset" />Reset</button>
+              <button class="btn glass-btn settings-reset" disabled={!changed(style, own, keys)} aria-label="Reset {styleName}" use:tooltip={'Restore this style’s default settings.'} onclick={reset}><PixelIcon name="reset" /><span class="reset-label">Reset</span></button>
             </div>
           </div>
         {/if}

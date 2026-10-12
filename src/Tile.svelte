@@ -134,14 +134,22 @@
   });
   // One current frame lives outside the legacy mask cache. Cancelling a job prevents
   // a previous palette, matching rule, opacity, size or frame from replacing the current preview.
-  let fullPixels = $state.raw(null);
+  let fullPixels = $state.raw(null), fullReady = $state(false);
+  let fullSource;
   $effect(() => {
     const source = frames[at].original, colors = conversionPalette, width = mw, height = mh, cut = alphaCut, matching = metric;
-    fullPixels = null;
+    fullReady = false;
+    // Retain the last completed rendering of this frame during settings work.
+    // A different source/frame or family must never display unrelated pixels.
+    if (family !== 'full-palette' || fullSource !== source) fullPixels = null;
+    fullSource = source;
     if (family !== 'full-palette' || !width || !colors) return;
     const controller = new AbortController();
     quantizeAsync(source, colors, cut, width, height, { signal: controller.signal, metric: matching }).then(result => {
-      if (!controller.signal.aborted) fullPixels = new ImageData(palettePixels(result, colors).data, width, height);
+      if (!controller.signal.aborted) {
+        fullPixels = new ImageData(palettePixels(result, colors).data, width, height);
+        fullReady = true;
+      }
     }).catch(error => { if (error.name !== 'AbortError') console.error('Palette preview failed', error); });
     return () => controller.abort();
   });
@@ -166,7 +174,7 @@
     if (frames.length < 2) return;
     // Original playback follows source delays independently of conversion. Read
     // originalVisible first so a finished preview cannot restart that timer.
-    if (family === 'full-palette' && !originalVisible && !fullPixels) return;
+    if (family === 'full-palette' && !originalVisible && !fullReady) return;
     const timer = setTimeout(() => (at = (at + 1) % frames.length), frames[at].delay);
     return () => clearTimeout(timer);
   });
