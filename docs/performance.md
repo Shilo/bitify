@@ -1,12 +1,48 @@
 # Performance
 
+## Optional one-pixel cleanup (October 12, 2026)
+
+Cleanup is Off by default. Off loads no optional cleanup runtime and preserves the
+existing nearest path. On prepares full-source decisions after palette limiting, with
+one lazy serial worker and 128 KiB acknowledged chunks. Only one source frame is
+assembled in the worker at a time. Full-animation agreement is accumulated incrementally;
+converted clips are not retained. A cached replacement map costs two bytes/source pixel.
+Preview resize, playback and Original comparison share the same preparation. Independent
+subscriber cancellation keeps an export alive when its preview closes; canceling the
+last subscriber terminates even a worker whose module is still loading. Unsupported
+worker construction uses the same cooperative core. Runtime failures are reported.
+
+The core has typed scratch and a bounded 4096-entry RGB-to-Oklab cache, with no
+per-pixel arrays/objects. Temporary core arrays are about 11 bytes/source pixel for a
+still and up to 15 for a subsequent animation frame, plus 114,688 bytes of RGB cache and
+palette vectors. This excludes source RGBA, quantizer arrays, decoding, cached maps,
+runtime GC and export buffers. Full-resolution export overlays yield cooperatively;
+display-sized previews use the same synchronous range kernel. The 8ms target is checked
+between bounded blocks and is not a hard device deadline.
+
+The final suite passes 525 tests and a production build. Native Codex browser checks
+decoded 315 PNG/GIF outputs covering the supplied sprite, all six buildings, four
+eight-frame animations, partial alpha and a 1.92MP mixed/noisy fixture. Pixel/cap/alpha,
+GIF metadata, Copy, Preview, Reset, family retention, rapid changes and responsive
+layouts with Opacity cut visible were checked. All 56 supplied-image Off PNGs were
+byte-identical to the existing path at `ecb8088`. A browser-decoded RGBA witness was required
+for partial alpha: existing canvas rounding changes some source RGBs before conversion.
+
+Core-only desktop observations were about 65ms preparation plus 7–9ms overlay on
+1.92MP flat/speckled fixtures; native Save observations ranged 1.4–3.1 seconds with
+mixed cold/warm caches, compression, preview contention and automation included.
+These are not phone budgets or comparative speedup claims. Physical phones, Safari,
+nonzero hardware safe areas and sustained peak memory remain unverified. Optional
+bundle sizes, detailed evidence, intentional-detail loss and animation guard limits are
+in [the cleanup research](research/2026-10-12-one-pixel-cleanup.md).
+
 How Bitify stays fast with big images on phones: what was slow, what was changed and why,
 what was measured, what was tried and thrown away, and what is still open. It is the record
 of the performance work of October 2026 (commits `e1eccfd` to `6d6e37f`, on top of
 `ce7bffa`), written so that the work can be continued without anything but this file, the
 code and the spec.
 
-The earlier sections describe the legacy 1-bit engine. The full palette implementation
+The historical sections below begin with the legacy 1-bit engine. The full palette implementation
 and its separate scheduling/export limits are recorded in the October 11 section at the
 end of this document. Earlier phone measurements must not be read as validation of the
 new conversion family.

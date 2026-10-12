@@ -34,6 +34,7 @@
     metric = $bindable('oklab'),
     maxColors = $bindable(0),
     lastMaxColors = $bindable(16),
+    cleanup = $bindable(false),
     fullPalette, fullPresets = [], savedPalettes = [], onpalette, onimportpalette, oneditpalette,
   } = $props();
 
@@ -195,7 +196,7 @@
     if (!e.detail) (dock.querySelector('.extra') ?? dock.querySelector('.chip[aria-pressed="true"]'))?.focus();
   }
   function resetPaletteSettings(e) {
-    metric = 'oklab'; alphaCut = 128; maxColors = 0; lastMaxColors = 16;
+    metric = 'oklab'; alphaCut = 128; maxColors = 0; lastMaxColors = 16; cleanup = false;
     restoreLimitDrafts(); // Clear pending edits before keyboard focus can blur them.
     if (!e.detail) dock.querySelector('[aria-label="Oklab matching"]')?.focus();
   }
@@ -396,14 +397,9 @@
     </div>
   {:else if panel === 'style' && family === 'full-palette'}
     <div class="panel palette-settings-panel glass-card" bind:offsetHeight={panelHeight}>
-      <h2 class="palette-method-name">Nearest</h2>
-      <div class="palette-setting-row">
-        <span class="key" id="palette-matching-label">Matching</span>
-        <div class="seg glass-segmented" role="group" aria-labelledby="palette-matching-label">
-          <button class="glass-segmented__item" aria-label="Oklab matching" aria-pressed={metric === 'oklab'} use:tooltip={'Compare perceived color differences. Default.'} onclick={() => metric = 'oklab'}>Oklab</button>
-          <button class="glass-segmented__item" aria-label="RGB matching" aria-pressed={metric === 'rgb'} use:tooltip={'Compare RGB channel differences.'} onclick={() => metric = 'rgb'}>RGB</button>
-        </div>
-        <button class="btn glass-btn settings-reset" disabled={metric === 'oklab' && alphaCut === 128 && maxColors === 0 && lastMaxColors === 16} aria-label="Reset palette settings" use:tooltip={'Restore Oklab matching, all colors and the default opacity cut.'} onpointerdown={e => e.preventDefault()} onclick={resetPaletteSettings}><PixelIcon name="reset"/><span class="reset-label">Reset</span></button>
+      <div class="palette-settings-header">
+        <h2 class="palette-method-name">Nearest</h2>
+        <button class="btn glass-btn settings-reset" disabled={metric === 'oklab' && alphaCut === 128 && maxColors === 0 && lastMaxColors === 16 && !cleanup} aria-label="Reset palette settings" use:tooltip={'Restore Oklab, all colors, Cleanup off and the default opacity cut.'} onpointerdown={e => e.preventDefault()} onclick={resetPaletteSettings}><PixelIcon name="reset"/></button>
       </div>
       {#key fullPalette}
       <div class="palette-setting-row palette-limit-row">
@@ -425,6 +421,21 @@
         </div>
       </div>
       {/key}
+      <div class="palette-setting-row">
+        <span class="key" id="palette-matching-label">Matching</span>
+        <div class="seg glass-segmented" role="group" aria-labelledby="palette-matching-label">
+          <button class="glass-segmented__item" aria-label="Oklab matching" aria-pressed={metric === 'oklab'} use:tooltip={'Compare perceived color differences. Default.'} onclick={() => metric = 'oklab'}>Oklab</button>
+          <button class="glass-segmented__item" aria-label="RGB matching" aria-pressed={metric === 'rgb'} use:tooltip={'Compare RGB channel differences.'} onclick={() => metric = 'rgb'}>RGB</button>
+        </div>
+      </div>
+      <div class="palette-setting-row">
+        <span class="key" id="palette-cleanup-label" use:tooltip={'Merge isolated pixels with nearby colors. Can remove eyes or highlights. Animations keep changes only where every frame agrees.'}>Cleanup</span>
+        <span id="palette-cleanup-description" hidden>Merge isolated pixels. Can remove eyes or highlights. Animations keep only changes agreed across every frame.</span>
+        <div class="seg glass-segmented" role="group" aria-labelledby="palette-cleanup-label" aria-describedby="palette-cleanup-description">
+          <button class="glass-segmented__item" aria-label="Cleanup off" aria-pressed={!cleanup} onclick={() => cleanup = false}>Off</button>
+          <button class="glass-segmented__item" aria-label="Cleanup on" aria-pressed={cleanup} use:tooltip={'Merge isolated pixels. Can remove intentional details.'} onclick={() => cleanup = true}>On</button>
+        </div>
+      </div>
       {#if soft || alphaCut !== 128}
         <div class="palette-setting-row">
           <label class="key" for="full-alpha-cut">Opacity cut</label>

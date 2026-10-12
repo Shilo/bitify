@@ -32,8 +32,23 @@
 :root .full-active-palette { display: grid; place-items: center; padding: 0; height: 44px; width: 44px; border-radius: 50%; }
 :root .reset-palette-option { display: flex; gap: 10px; align-items: center; min-height: 44px; }
 /* Share the Style panel's responsive width and sizing so sliders have equal room. */
-:root .workspace-tools .dock .palette-settings-panel { display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
+:root .workspace-tools .dock .palette-settings-panel {
+  box-sizing: border-box; display: flex; flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 8px;
+  width: min(730px,calc(100vw - 48px - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px)));
+  max-width: calc(100vw - 48px - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px));
+  max-height: max(64px,calc(100dvh - var(--dock-base) - 10px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px)));
+  overflow-y: auto; overscroll-behavior: contain;
+}
+:root .palette-settings-panel > * { flex-shrink: 0; }
+@media(max-width:800px) {
+  :root .workspace-tools .dock .palette-settings-panel {
+    width: min(730px,calc(100vw - 24px - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px)));
+    max-width: calc(100vw - 24px - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px));
+  }
+}
 :root .palette-setting-row { display: flex; align-items: center; gap: 8px; width: 100%; min-width: 0; }
+:root .palette-settings-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+:root .palette-settings-header .settings-reset { width: 44px; min-width: 44px; height: 44px; min-height: 44px; padding: 0; align-items: center; justify-content: center; }
 :root .palette-setting-row .key { flex: 0 0 78px; font-size: 13px; white-space: nowrap; }
 :root .palette-setting-row output { text-align: right; font-variant-numeric: tabular-nums; }
 /* Reset has one shape in both settings panels, with a compact icon on phones. */

@@ -15,7 +15,7 @@
   // Without `onremove` the tile is a preview only and has no buttons.
   // `set` is the style's settings. `budget` is set while one of their sliders is being dragged:
   // the milliseconds this tile may take to convert its image after each move.
-  let { item, first, second, style, set, family = 'two-color', palette, alphaCut = 128, metric = 'oklab', maxColors = 0, onpaletteerror, flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false, exportDrag } = $props();
+  let { item, first, second, style, set, family = 'two-color', palette, alphaCut = 128, metric = 'oklab', maxColors = 0, cleanup = false, onpaletteerror, flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false, exportDrag } = $props();
   let held = $state(false);
   const originalVisible = $derived(oncompare ? flipped : flipped !== held);
   let holdTimer;
@@ -132,21 +132,41 @@
     });
     return () => controller.abort();
   });
+  // One whole-source/clip cleanup decision is shared across frame playback,
+  // resized previews and exports. Off does not load the optional code.
+  const cleanupRequest = $derived({ item, palette: conversionPalette, alphaCut, metric, cleanup });
+  let cleaned = $state.raw(null);
+  const conversionCleanup = $derived(cleanup && cleaned?.request === cleanupRequest ? cleaned : null);
+  $effect(() => {
+    const request = cleanupRequest;
+    if (family !== 'full-palette' || !request.cleanup || !request.palette) return;
+    const controller = new AbortController();
+    import('./lib/palette-cleanup-client.js').then(async client => {
+      const result = await client.getPaletteCleanup(request.item, request.palette, request.alphaCut, request.metric, { signal: controller.signal });
+      if (!controller.signal.aborted) cleaned = { request, result, apply: client.applyCleanup };
+    }).catch(error => {
+      if (controller.signal.aborted || error.name === 'AbortError') return;
+      if (onpaletteerror) onpaletteerror(error, 'cleanup');
+      else console.error('Palette cleanup failed', error);
+    });
+    return () => controller.abort();
+  });
   // One current frame lives outside the legacy mask cache. Cancelling a job prevents
   // a previous palette, matching rule, opacity, size or frame from replacing the current preview.
   let fullPixels = $state.raw(null), fullReady = $state(false);
   let fullSource;
   $effect(() => {
-    const source = frames[at].original, colors = conversionPalette, width = mw, height = mh, cut = alphaCut, matching = metric;
+    const source = frames[at].original, colors = conversionPalette, width = mw, height = mh, cut = alphaCut, matching = metric, clean = conversionCleanup;
     fullReady = false;
     // Retain the last completed rendering of this frame during settings work.
     // A different source/frame or family must never display unrelated pixels.
     if (family !== 'full-palette' || fullSource !== source) fullPixels = null;
     fullSource = source;
-    if (family !== 'full-palette' || !width || !colors) return;
+    if (family !== 'full-palette' || !width || !colors || cleanup && !clean) return;
     const controller = new AbortController();
     quantizeAsync(source, colors, cut, width, height, { signal: controller.signal, metric: matching }).then(result => {
       if (!controller.signal.aborted) {
+        if (clean) clean.apply(result, clean.result);
         fullPixels = new ImageData(palettePixels(result, colors).data, width, height);
         fullReady = true;
       }

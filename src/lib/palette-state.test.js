@@ -1,14 +1,77 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { restorePaletteState, conversionSnapshot, fullPaletteImage } from './palette-state.js';
 import { FULL_PRESETS, DEFAULT_FULL_PALETTE } from './palette-library.js';
 import omggif from 'omggif';
 import { fileBytes } from './save.js';
+import { quantize } from './quantize.js';
+import { prepareCleanupAsync, applyCleanup } from './palette-cleanup.js';
 
 describe('independent palette state and export snapshots', () => {
+  const cleanupSource = (middle = '#053452') => {
+    const colors = Array(25).fill('#07050c'); colors[12] = middle;
+    return { width: 5, height: 5, data: Uint8ClampedArray.from(colors.flatMap(hex => [parseInt(hex.slice(1,3),16),parseInt(hex.slice(3,5),16),parseInt(hex.slice(5,7),16),255])) };
+  };
+  it('restores cleanup only for the explicit boolean and owns it separately from legacy', () => {
+    expect(restorePaletteState(JSON.stringify({cleanup:true})).cleanup).toBe(true);
+    for(const cleanup of [false,null,0,1,'true',[],{}]) expect(restorePaletteState(JSON.stringify({cleanup})).cleanup).toBe(false);
+    const ui={family:'full-palette',palette:DEFAULT_FULL_PALETTE,alphaCut:128,cleanup:true};
+    const asked=conversionSnapshot(ui); ui.cleanup=false;
+    expect(asked.cleanup).toBe(true); expect(Object.isFrozen(asked)).toBe(true);
+    expect(conversionSnapshot({family:'two-color',set:{},cleanup:true})).not.toHaveProperty('cleanup');
+  });
+  it('Off preserves every nearest result and never constructs a cleanup worker', async () => {
+    const worker = vi.fn(); vi.stubGlobal('Worker',worker);
+    try {
+      const original=cleanupSource(), item={name:'eye.png',original};
+      for(const metric of ['oklab','rgb']) {
+        const asked=conversionSnapshot({family:'full-palette',palette:DEFAULT_FULL_PALETTE,alphaCut:128,metric,cleanup:false});
+        const result=await fullPaletteImage(item,asked);
+        expect(result.indices).toEqual(quantize(original,asked.colors,128,undefined,undefined,{metric}).indices);
+      }
+      expect(worker).not.toHaveBeenCalled();
+    } finally { vi.unstubAllGlobals(); }
+  });
+  it('uses full-resolution cleanup with the selected subset and unchanged alpha', async () => {
+    const original=cleanupSource(); original.data[3]=0;
+    const item={name:'eye.png',original};
+    for(const maxColors of [0,2,8]) for(const metric of ['oklab','rgb']) {
+      const asked=conversionSnapshot({family:'full-palette',palette:DEFAULT_FULL_PALETTE,alphaCut:128,metric,maxColors,cleanup:true});
+      const result=await fullPaletteImage(item,asked);
+      const baseline=quantize(original,result.colors,128,undefined,undefined,{metric});
+      const expected=applyCleanup(baseline,await prepareCleanupAsync([original],result.colors,128,metric));
+      expect(result.indices).toEqual(expected.indices); expect(result.used).toEqual(expected.used);
+      expect(result.indices[0]).toBe(256); expect(result.hasTransparency).toBe(true);
+      expect([...result.used].reduce((n,v)=>n+v,0)).toBeLessThanOrEqual(maxColors||16);
+    }
+  });
+  it('first-frame Copy shares the whole-animation guard and GIF retains source delays and loop', async () => {
+    const first=cleanupSource(), second=cleanupSource('#07050c');
+    const item={name:'guard.gif',original:first,frames:[{original:first,delay:40},{original:second,delay:90}],loop:3};
+    const asked=conversionSnapshot({family:'full-palette',palette:DEFAULT_FULL_PALETTE,alphaCut:128,cleanup:true});
+    const exported=await fullPaletteImage(item,asked), copy=await fullPaletteImage(item,asked,{still:true});
+    expect(copy.indices[12]).toBe(1); expect((await exported.getFrame(0)).indices[12]).toBe(1); expect((await exported.getFrame(1)).indices[12]).toBe(0);
+    expect(copy.indices).toEqual((await exported.getFrame(0)).indices);
+    const bytes=await fileBytes(exported), reader=new omggif.GifReader(bytes);
+    expect(reader.numFrames()).toBe(2); expect(reader.loopCount()).toBe(3);
+    for(let i=0;i<2;i++) {
+      const rgba=new Uint8Array(100); reader.decodeAndBlitFrameRGBA(i,rgba);
+      expect([...rgba.slice(48,52)]).toEqual(i===0?[29,43,83,255]:[0,0,0,255]);
+      expect(reader.frameInfo(i).delay*10).toBe(item.frames[i].delay);
+    }
+  });
+  it('captures cleanup and every source reference before asynchronous preparation', async () => {
+    const first=cleanupSource(), second=cleanupSource('#07050c'), item={name:'before.gif',original:first,frames:[{original:first,delay:40},{original:second,delay:90}],loop:3};
+    const asked={colors:[...DEFAULT_FULL_PALETTE.colors],alphaCut:128,metric:'oklab',maxColors:0,cleanup:true};
+    const pending=fullPaletteImage(item,asked);
+    asked.cleanup=false; asked.colors.reverse(); item.original=second; item.frames[1]={original:first,delay:10}; item.name='after.gif'; item.loop=7;
+    const result=await pending;
+    expect(result).toMatchObject({name:'before.gif',cleanup:true,loop:3});
+    expect((await result.getFrame(0)).indices[12]).toBe(1); expect((await result.getFrame(1)).indices[12]).toBe(0); expect((await result.getFrame(1)).delay).toBe(90);
+  });
   it('restores only valid family, palette identity and opacity; legacy remains the default', () => {
-    expect(restorePaletteState('{}')).toEqual({ family: 'two-color', paletteId: DEFAULT_FULL_PALETTE.id, alphaCut: 128, metric: 'oklab', maxColors: 0, lastMaxColors: 16 });
+    expect(restorePaletteState('{}')).toEqual({ family: 'two-color', paletteId: DEFAULT_FULL_PALETTE.id, alphaCut: 128, metric: 'oklab', maxColors: 0, lastMaxColors: 16, cleanup: false });
     expect(restorePaletteState('{')).toEqual(restorePaletteState(null));
-    expect(restorePaletteState(JSON.stringify({ family:'full-palette',paletteId:'deleted',alphaCut:0 }))).toEqual({ family:'full-palette',paletteId:DEFAULT_FULL_PALETTE.id,alphaCut:128,metric:'oklab',maxColors:0,lastMaxColors:16 });
+    expect(restorePaletteState(JSON.stringify({ family:'full-palette',paletteId:'deleted',alphaCut:0 }))).toEqual({ family:'full-palette',paletteId:DEFAULT_FULL_PALETTE.id,alphaCut:128,metric:'oklab',maxColors:0,lastMaxColors:16,cleanup:false });
     expect(restorePaletteState(JSON.stringify({family:'full-palette',paletteId:'user-a',alphaCut:1}),[{id:'user-a'}]).paletteId).toBe('user-a');
     for (const palette of FULL_PRESETS) expect(restorePaletteState(JSON.stringify({family:'full-palette',paletteId:palette.id})).paletteId).toBe(palette.id);
   });

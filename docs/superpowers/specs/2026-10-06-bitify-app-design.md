@@ -1867,7 +1867,7 @@ remain independent. The default is still Glow/Cutout in 1-bit.
   opaque output belongs to the selected set; every selected color need not appear.
 
 The selected full palette is shared across all images; no image generates new palette colors.
-With Max colors: All, identical visible source RGBs map identically at the same alpha cut and matching choice.
+With Max colors: All and Cleanup: Off, identical visible source RGBs map identically at the same alpha cut and matching choice.
 Nearest minimizes individual pixel distance under that rule, rather than local averaged shading error. PNG exports
 may compact different used subsets into different physical color tables; membership in
 the common selected RGB set is the shared-palette guarantee, not identical table bytes.
@@ -1877,18 +1877,31 @@ threshold and structural settings. It has no None or Swap role and no separate s
 single-option method chooser. Source alpha below the family-specific Opacity cut becomes
 empty; default 128, adjustable 1–255. Alpha zero always stays empty, and all other output
 alpha is binary. The settings icon/panel is always available, with a 16px semibold Nearest heading in the
-shared body font and heading color above 13px setting labels: one compact Matching row
-offers Oklab / RGB, followed by Max colors and then Opacity cut only for partial source alpha or a nondefault cut.
+shared body font and heading color, vertically centered beside an icon-only Reset button
+at the top right. Below are 13px setting labels in this order: Max colors, Matching
+(Oklab / RGB), Cleanup Off / On, then Opacity cut only for partial source alpha or a nondefault cut.
 Oklab compares squared Euclidean perceived-color coordinates; RGB compares squared
 unweighted encoded sRGB8 channel differences. There is no brightness/contrast adjustment.
-The panel is at most 360px wide and capped to viewport width minus 24px and safe areas;
+The panel shares the Style popup's responsive width and safe-area constraints;
 rows stack vertically. Touch matching buttons are at least 44px high. Reset restores
-Oklab, Max colors: All and cut 128, retaining the palette; keyboard Reset moves focus to enabled Oklab.
+Oklab, Max colors: All, Cleanup Off and cut 128, retaining the palette; keyboard Reset moves focus to enabled Oklab.
 HSL/HSV, CMYK, additional perceptual metrics and dithering are excluded pending demonstrated
 benefit; see docs/research/2026-10-11-palette-matching.md. Switching families retains the other family's
 state. Selecting/altering colors or conversion settings reveals converted output.
 
 Max colors is an additive integer preference: 0 means All (default), otherwise 2–256.
+Cleanup is an independent boolean preference, false/Off by default. On merges isolated
+one-pixel palette regions using frozen nearest labels, bounded Oklab contact/error
+gates and mutually agreed isolated pairs. It is deliberately lossy: eyes/highlights and
+exact matches can change. It never fills transparency or introduces a color outside the
+selected palette/subset. GIFs require all frames to agree at each changed coordinate on
+both the baseline label and the proposed label. Full-source preparation is shared by
+sampled previews and full exports, including first-frame PNG Copy and optimized dragging.
+Worker input is chunked/acknowledged, one assembled frame at a time; cooperative fallback
+and full-export overlay yield and cancel. Off takes the existing path without importing
+the optional cleanup runtime. A failure reports retry/Off rather than silently reverting.
+See docs/research/2026-10-12-one-pixel-cleanup.md for the findings and limitations.
+
 All and limits at least the palette size return the original prepared palette immediately;
 they do not load the limiter or change nearest matching. The control is one row with a
 slider, exact integer field and pressed All button, following the existing tolerance/Auto
@@ -2150,13 +2163,14 @@ including after the first-visit welcome, rather than the Help row in its closed 
 
 ### Persistence and reset
 
-Family, palette ID, alpha cut, global matching `metric` and `maxColors` are additive preferences.
+Family, palette ID, alpha cut, global matching `metric`, `maxColors` and `cleanup` are additive preferences.
 Max colors slider and number bounds follow the active palette's unique color count.
 Nearest settings inherit the Style popup's responsive width and safe-area constraints,
 giving the slider more room on wide screens while fitting phone and landscape viewports.
 Both settings families use Reset buttons with 12px corner radii and the existing reset
-color treatment. They show an icon and Reset text above 520px wide, or a 44px icon-only
-button at 520px and below, retaining complete accessible names and tooltips.
+color treatment. Palette Reset is always a 44px icon-only button beside the Nearest title.
+Style Reset shows an icon and Reset text above 520px wide, or a 44px icon-only
+button at 520px and below. Both retain complete accessible names and tooltips.
 Their numeric display is the lesser of the requested maximum and that count; All retains
 an empty number value with the palette's color count as its placeholder, and a slider thumb
 at that palette's maximum. `lastMaxColors` remains stored independently. Neither palette selection,
@@ -2177,7 +2191,7 @@ palette identity and all higher preferences. Accessible descriptions explain a t
 bounded higher preference.
 Missing or invalid metric restores Oklab; only `oklab` and `rgb` persist. Palette records
 do not own matching, so imports, edits and selections retain the global choice. Reset
-settings restores Oklab, Max colors: All, remembered limit 16 and cut 128. Missing selection falls back
+settings restores Oklab, Max colors: All, Cleanup Off, remembered limit 16 and cut 128. Missing selection falls back
 to PICO-8 while old preferences retain the default 1-bit family. Explicit named Save uses
 `bitify-palettes-v1`: version 1, at most 100 records and 256 KiB serialized UTF-8. Images
 and drafts are not persisted. Validate records independently. Each record has ID, name,

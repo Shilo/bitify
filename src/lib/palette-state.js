@@ -18,14 +18,15 @@ export function restorePaletteState(text, library = []) {
     metric: value?.metric === 'rgb' ? 'rgb' : 'oklab',
     maxColors: value?.maxColors === 1 ? 2 : Number.isInteger(value?.maxColors) && value.maxColors >= 0 && value.maxColors <= 256 ? value.maxColors : 0,
     lastMaxColors: value?.lastMaxColors === 1 ? 2 : Number.isInteger(value?.lastMaxColors) && value.lastMaxColors >= 2 && value.lastMaxColors <= 256 ? value.lastMaxColors : 16,
+    cleanup: value?.cleanup === true,
   };
 }
 
 // A save owns its colors and settings even if the user edits or resets the UI
 // while cooperative conversion is still running. IDs alone are not snapshots.
-export function conversionSnapshot({ family, palette, alphaCut, metric, maxColors, first, second, style, set }) {
+export function conversionSnapshot({ family, palette, alphaCut, metric, maxColors, cleanup, first, second, style, set }) {
   return family === 'full-palette'
-    ? Object.freeze({ family, name: palette.name, colors: Object.freeze([...palette.colors]), alphaCut, metric: validateMatchingMetric(metric), maxColors: maxColorsOf(maxColors) })
+    ? Object.freeze({ family, name: palette.name, colors: Object.freeze([...palette.colors]), alphaCut, metric: validateMatchingMetric(metric), maxColors: maxColorsOf(maxColors), cleanup: cleanup === true })
     : Object.freeze({ family: 'two-color', first, second, style, set: Object.freeze({ ...set }) });
 }
 
@@ -33,14 +34,26 @@ export async function fullPaletteImage(item, asked, { still = false } = {}) {
   let palette = preparePalette(asked.colors);
   // Own scalar preferences and source/frame references before subset preparation
   // yields. Still copies of GIFs select from the same full animation as Save.
-  const metric = validateMatchingMetric(asked.metric), alphaCut = asked.alphaCut, maxColors = maxColorsOf(asked.maxColors);
+  const metric = validateMatchingMetric(asked.metric), alphaCut = asked.alphaCut, maxColors = maxColorsOf(asked.maxColors), cleanup = asked.cleanup === true;
   const original = item.original, name = item.name, loop = item.loop;
-  const frames = item.frames?.map(f => ({ original: f.original, delay: f.delay }));
+  const framesIdentity = item.frames;
+  const frames = item.frames?.map(f => ({ identity: f, original: f.original, delay: f.delay }));
+  const sourceItem = { identity: item, original, frames, framesIdentity, loop };
   if (maxColors && maxColors < palette.size) palette = await getLimitedPalette(item, palette, alphaCut, metric, maxColors);
-  const about = { family: 'full-palette', colors: palette.colors, metric, maxColors, name, w: original.width, h: original.height };
+  let clean, applyCleanupAsync;
+  if (cleanup) {
+    const client = await import('./palette-cleanup-client.js');
+    clean = await client.getPaletteCleanup(item, palette, alphaCut, metric, { sourceItem });
+    applyCleanupAsync = client.applyCleanupAsync;
+  }
+  const convert = async source => {
+    const result = await quantizeAsync(source, palette, alphaCut, undefined, undefined, { metric });
+    return clean ? await applyCleanupAsync(result, clean) : result;
+  };
+  const about = { family: 'full-palette', colors: palette.colors, metric, maxColors, cleanup, name, w: original.width, h: original.height };
   if (frames && !still) {
     return { ...about, loop, frameCount: frames.length,
-      getFrame: async i => ({ ...(await quantizeAsync(frames[i].original, palette, alphaCut, undefined, undefined, { metric })), delay: frames[i].delay }) };
+      getFrame: async i => ({ ...(await convert(frames[i].original)), delay: frames[i].delay }) };
   }
-  return { ...about, ...(await quantizeAsync(original, palette, alphaCut, undefined, undefined, { metric })) };
+  return { ...about, ...(await convert(original)) };
 }

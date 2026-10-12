@@ -3,6 +3,10 @@
 Later adoption: **Matching: Oklab / RGB** is now available in Palette settings, with Oklab
 as default. The comparisons below record the earlier research stage; Ordered and Diffusion
 remain research only. See the [matching decision](2026-10-11-palette-matching.md).
+October 12 adoption: optional one-pixel Cleanup is now available, Off by default.
+The nearest-fidelity and identical-source-color guarantees below refer to Cleanup Off;
+On intentionally trades color fidelity and isolated detail for local coherence. See the
+[cleanup findings and animation guard](2026-10-12-one-pixel-cleanup.md).
 The six supplied building PNGs were compared using the exact supplied 16×16 palette
 image: 255 unique visible RGB colors and one transparent pixel. All six buildings have
 binary alpha; none has an embedded ICC profile. Their browser-decoded RGBA matched

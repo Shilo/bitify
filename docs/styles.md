@@ -7,16 +7,17 @@ tests beside it pin every rule described here. The settings are listed in
 
 The **Palette** family is separate from these structural and dithering styles. It matches
 each visible source RGB to the nearest selected color using Oklab (default) or RGB. With
-**Max colors: All** (default), exact palette RGB matches are preserved and the existing
+**Max colors: All** and **Cleanup: Off** (defaults), exact palette RGB matches are preserved and the existing
 matching path is unchanged. It accepts 1–256 unique opaque colors; using a palette does not
 guarantee every color appears in an image. Output alpha stays binary, with a separate
-Opacity cut of 1–255 (128 by default). Its settings control always offers **Matching:
-Oklab / RGB** and **Max colors**; Opacity cut appears for partially transparent sources or a changed cut.
+Opacity cut of 1–255 (128 by default). Its settings control offers **Max colors**, **Matching:
+Oklab / RGB** and **Cleanup: Off / On**, in that order; Opacity cut follows for partially transparent sources or a changed cut.
 Oklab approximates perceived differences; RGB compares encoded sRGB channel values.
 The maximum is optional: drag its slider or enter a number from 2 up to the active palette's
 color count. The slider updates after a 200ms pause or release; number edits apply when
-finished. The previous preview stays visible while recalculating. Both settings families
-show Reset text on wide screens and an icon on phones, with matching rounded corners.
+finished. The previous preview stays visible while recalculating. Palette Reset is an
+icon-only button aligned beside the Nearest title. Style Reset shows text on wide screens
+and an icon on phones; both buttons have matching rounded corners.
 The controls show the effective limit; switching to a
 smaller palette retains the remembered limit, which returns with a larger palette.
 Only editing the limit changes that preference. **All** restores unrestricted matching.
@@ -27,7 +28,17 @@ changes the saved palette or forces unused colors into the output. Transparency 
 count against the maximum. GIFs select one subset over all duration-weighted source frames.
 Limits can merge shades or lose accents; the same source RGB can map differently in
 different sprites. This is color reduction, not a new dithering or structural effect.
-Reset restores Oklab, All and cut 128. There is no threshold, Swap, None or style chooser
+Cleanup is optional, Off by default. It merges isolated one-pixel palette regions with
+compatible neighboring colors after nearest matching. It can remove intentional eyes or
+highlights and can change an exact source-palette match. Decisions use the full source;
+previews sample those decisions and exports use them at original size. Animations keep a
+replacement only where every frame has the same nearest color and proposes the same
+replacement. This prevents added fixed-coordinate color-label changes, but leaves moving
+noise untouched. Cleanup preserves binary alpha and the selected palette/subset. Its
+compatibility/error gates use Oklab even when Matching is RGB. See the
+[cleanup research and limitations](research/2026-10-12-one-pixel-cleanup.md).
+
+Reset restores Oklab, All, Cleanup Off and cut 128. There is no threshold, Swap, None or style chooser
 in this family. Switching back to 1-bit restores the retained colors, style and settings.
 See [palettes.md](palettes.md) for import and palette library behavior.
 

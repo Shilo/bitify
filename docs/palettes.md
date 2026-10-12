@@ -196,13 +196,13 @@ Optional palette methods deserve a separate visual comparison before implementat
 ### One shared palette for several images
 
 Select or import a palette once; it applies to every image on the wall. A visible pixel
-keeps its RGB if that color is already in the selected palette. Otherwise, Bitify checks
+keeps its RGB if that color is already in the selected palette and Cleanup is Off. Otherwise, the nearest stage checks
 every palette entry and chooses the closest using the selected matching rule. **Oklab**
 approximates perceived color differences; **RGB** minimizes squared differences between
 encoded sRGB channel values (0–255), without channel weighting or brightness adjustment.
 Choose either in **Palette settings → Matching**; Oklab is the default. This global setting
 is remembered across visits and family switches; selecting a palette does not change it.
-With **Max colors: All** (the default), the same source RGB maps to the same palette RGB
+With **Max colors: All** and **Cleanup: Off** (the defaults), the same source RGB maps to the same palette RGB
 at the same matching setting in every image. All preserves the existing nearest conversion.
 The shared palette is never regenerated or changed.
 
@@ -230,6 +230,16 @@ color tables while all visible RGBs still belong to the same shared palette. GIF
 share one used-color table per exported animation. Fully transparent pixels stay empty;
 the Opacity cut decides whether partially transparent pixels become empty or opaque.
 
+**Cleanup: Off / On** optionally merges isolated palette-colored pixels with compatible
+neighbors. Off is the default and keeps ordinary nearest output. On can remove deliberate
+eyes/highlights, change exact matches, and map the same source RGB differently depending
+on its surroundings. It never adds a color outside the selected palette/subset or changes
+transparency. Cleanup uses full-source decisions for previews, Save, Copy, ZIP and export
+dragging. GIFs apply a change at a coordinate only when every frame agrees on both the
+original nearest color and the proposed replacement. Moving noise can therefore remain.
+Read the [research and detail-loss limits](research/2026-10-12-one-pixel-cleanup.md) before
+using it for small sprites.
+
 Nearest matching minimizes each individual visible pixel's distance under the selected rule to the allowed
 set. Dithering instead spreads different allowed colors over neighboring pixels to
 approximate a missing shade; it can improve averaged shading while increasing individual
@@ -240,8 +250,9 @@ Output pixels are fully opaque or fully transparent. Opacity cut defaults to 128
 source alpha below the cut becomes empty. The range is 1–255, so alpha zero always stays
 empty. Palette settings always offers the compact Oklab / RGB control. Opacity cut appears
 only when an image has partial alpha or the cut has changed. The popup's 16px semibold **Nearest**
-title identifies the conversion method for both matching choices. Max colors follows Matching;
-Opacity cut follows when applicable. Reset restores Oklab, All and cut
+title identifies the conversion method for both matching choices, with an icon-only Reset
+button aligned at its right. Rows are Max colors, Matching, Cleanup, then
+Opacity cut when applicable. Reset restores Oklab, All, Cleanup Off and cut
 128 without changing the selected palette. Neither rule is universally visually best;
 compare with the original, especially when a palette lacks the source's hue. Other color
 spaces and palette dithering remain outside the current controls; see the
