@@ -31,7 +31,8 @@
 :root .palette-rail-wrap.rail-right::after { content: '›'; display: flex; right: 0; }
 :root .full-active-palette { display: grid; place-items: center; padding: 0; height: 44px; width: 44px; border-radius: 50%; }
 :root .reset-palette-option { display: flex; gap: 10px; align-items: center; min-height: 44px; }
-:root .workspace-tools .dock .palette-settings-panel { box-sizing: border-box; display: flex; flex-direction: column; width: min(360px, calc(100vw - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px) - 24px)); align-items: stretch; gap: 8px; }
+/* Share the Style panel's responsive width and sizing so sliders have equal room. */
+:root .workspace-tools .dock .palette-settings-panel { display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
 :root .palette-setting-row { display: flex; align-items: center; gap: 8px; width: 100%; min-width: 0; }
 :root .palette-setting-row .key { flex: 0 0 78px; font-size: 13px; white-space: nowrap; }
 :root .palette-setting-row output { text-align: right; font-variant-numeric: tabular-nums; }

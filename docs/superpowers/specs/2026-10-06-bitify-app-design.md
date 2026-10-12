@@ -2143,6 +2143,8 @@ including after the first-visit welcome, rather than the Help row in its closed 
 
 Family, palette ID, alpha cut, global matching `metric` and `maxColors` are additive preferences.
 Max colors slider and number bounds follow the active palette's unique color count.
+Nearest settings inherit the Style popup's responsive width and safe-area constraints,
+giving the slider more room on wide screens while fitting phone and landscape viewports.
 Their numeric display is the lesser of the requested maximum and that count; All retains
 an empty number and a slider thumb bounded from `lastMaxColors`. Neither palette selection,
 palette editing nor blurring an untouched number changes the stored global preference.
