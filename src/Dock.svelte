@@ -16,6 +16,9 @@
   import { tooltip } from './lib/tooltip.js';
   import { compactPaletteName } from './lib/palette-label.js';
 
+  const matchingDescription = 'Compare colors by appearance (Oklab) or red, green and blue values (RGB).';
+  const cleanupDescription = 'Merge isolated pixels with similar neighbors. May remove small details. Animations change only where every frame agrees.';
+
   let {
     first = $bindable(),
     second = $bindable(),
@@ -422,15 +425,16 @@
       </div>
       {/key}
       <div class="palette-setting-row">
-        <span class="key" id="palette-matching-label">Matching</span>
-        <div class="seg glass-segmented" role="group" aria-labelledby="palette-matching-label">
+        <span class="key" id="palette-matching-label" use:tooltip={matchingDescription}>Matching</span>
+        <span id="palette-matching-description" hidden>{matchingDescription}</span>
+        <div class="seg glass-segmented" role="group" aria-labelledby="palette-matching-label" aria-describedby="palette-matching-description">
           <button class="glass-segmented__item" aria-label="Oklab matching" aria-pressed={metric === 'oklab'} use:tooltip={'Compare perceived color differences. Default.'} onclick={() => metric = 'oklab'}>Oklab</button>
           <button class="glass-segmented__item" aria-label="RGB matching" aria-pressed={metric === 'rgb'} use:tooltip={'Compare RGB channel differences.'} onclick={() => metric = 'rgb'}>RGB</button>
         </div>
       </div>
       <div class="palette-setting-row">
-        <span class="key" id="palette-cleanup-label" use:tooltip={'Merge isolated pixels with nearby colors. Can remove eyes or highlights. Animations keep changes only where every frame agrees.'}>Cleanup</span>
-        <span id="palette-cleanup-description" hidden>Merge isolated pixels. Can remove eyes or highlights. Animations keep only changes agreed across every frame.</span>
+        <span class="key" id="palette-cleanup-label" use:tooltip={cleanupDescription}>Cleanup</span>
+        <span id="palette-cleanup-description" hidden>{cleanupDescription}</span>
         <div class="seg glass-segmented" role="group" aria-labelledby="palette-cleanup-label" aria-describedby="palette-cleanup-description">
           <button class="glass-segmented__item" aria-label="Cleanup off" aria-pressed={!cleanup} onclick={() => cleanup = false}>Off</button>
           <button class="glass-segmented__item" aria-label="Cleanup on" aria-pressed={cleanup} use:tooltip={'Merge isolated pixels. Can remove intentional details.'} onclick={() => cleanup = true}>On</button>

@@ -1880,6 +1880,11 @@ alpha is binary. The settings icon/panel is always available, with a 16px semibo
 shared body font and heading color, vertically centered beside an icon-only Reset button
 at the top right. Below are 13px setting labels in this order: Max colors, Matching
 (Oklab / RGB), Cleanup Off / On, then Opacity cut only for partial source alpha or a nondefault cut.
+Matching and Cleanup labels use the shared tooltip action: mouse hover after 350ms,
+stationary touch hold after 500ms. Matching explains appearance (Oklab) versus red,
+green and blue values (RGB); Cleanup explains isolated-pixel merging, possible small
+detail loss and agreement across animation frames. The same descriptions are linked
+to their setting groups for assistive technology. Labels add no icons or controls.
 Oklab compares squared Euclidean perceived-color coordinates; RGB compares squared
 unweighted encoded sRGB8 channel differences. There is no brightness/contrast adjustment.
 The panel shares the Style popup's responsive width and safe-area constraints;

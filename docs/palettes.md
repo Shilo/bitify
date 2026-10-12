@@ -203,6 +203,8 @@ approximates perceived color differences; **RGB** minimizes squared differences 
 encoded sRGB channel values (0–255), without channel weighting or brightness adjustment.
 Choose either in **Palette settings → Matching**; Oklab is the default. This global setting
 is remembered across visits and family switches; selecting a palette does not change it.
+Hover or hold the Matching or Cleanup label for its explanation; the descriptions
+are also available to screen readers.
 With **Max colors: All** and **Cleanup: Off** (the defaults), the same source RGB maps to the same palette RGB
 at the same matching setting in every image. All preserves the existing nearest conversion.
 The shared palette is never regenerated or changed.
