@@ -1,7 +1,8 @@
 # Palette default and shared-adaptive palette challenge
 
-Research and independent subagent challenge, October 12, 2026. Preset defaults and
-dynamic-palette behavior have not been changed. The separately diagnosed GIF preview
+Research and independent subagent challenge, October 12, 2026. ENDESGA 32 was accepted
+and implemented as the full-palette default in a separate follow-up commit. Existing
+saved selections remain intact. Dynamic-palette behavior has not been changed. The separately diagnosed GIF preview
 canvas-lifecycle fix is documented in `2026-10-12-palette-gif-playback.md`.
 
 ## Recommendation
@@ -78,5 +79,5 @@ No new preset or color-space setting is warranted by this evidence.
 
 The root review agrees with ENDESGA 32 as the recommendation, while rejecting a
 claim that it is a universal standard or neutral palette. The image-equal DB16 result
-and building teal shifts are material counterexamples. Keep the existing default until
-the product decision is accepted; changing it is independent of the GIF bug fix.
+and building teal shifts are material counterexamples. The accepted default change
+is independent of the GIF bug fix and does not replace existing saved selections.

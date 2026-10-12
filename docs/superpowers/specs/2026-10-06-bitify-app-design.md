@@ -2008,7 +2008,7 @@ Rapid resizing emitted ResizeObserver undelivered-notification warnings in the d
 server. The same 25-size sequence reproduced them in an isolated unchanged HEAD
 checkout, so these warnings predate the divider changes; settled layout checks passed.
 Equal-count order is curated,
-with Lospec downloads informing PICO-8 before DawnBringer 16. PICO-8 remains the
+with Lospec downloads informing PICO-8 before DawnBringer 16. ENDESGA 32 is the
 default for new, invalid, reset and deleted selections independently of rail order;
 existing stable IDs retain their selection. Resurrect 64 and Ice Cream GB use Kerrie
 Lake's published RGB entries in published order. No palette controls or layout change.
@@ -2200,7 +2200,7 @@ bounded higher preference.
 Missing or invalid metric restores Oklab; only `oklab` and `rgb` persist. Palette records
 do not own matching, so imports, edits and selections retain the global choice. Reset
 settings restores Oklab, Max colors: All, Cleanup Off, remembered limit 16 and cut 128. Missing selection falls back
-to PICO-8 while old preferences retain the default 1-bit family. Explicit named Save uses
+to ENDESGA 32 while old preferences retain the default 1-bit family. Explicit named Save uses
 `bitify-palettes-v1`: version 1, at most 100 records and 256 KiB serialized UTF-8. Images
 and drafts are not persisted. Validate records independently. Each record has ID, name,
 colors, revision and source attribution. Re-read before writing to retain unrelated tab

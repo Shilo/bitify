@@ -166,8 +166,14 @@ PICO-8 precedes
 DawnBringer 16 using Lospec download counts as a popularity signal; the four-color
 pair puts the warm artist palette before the familiar handheld palette. This curated
 order balances recognition with distinct results, rather than claiming a universal
-popularity ranking. PICO-8 remains the default independently of rail order. Existing
+popularity ranking. ENDESGA 32 is the default full palette independently of rail order. Existing
 preset IDs and saved selections are preserved. Published colors retain their original order.
+
+ENDESGA 32 offers broader shared color ramps for varied PixelLab assets while still
+restricting the collection to 32 colors. All, Oklab and Cleanup Off remain the defaults;
+the median sampled asset used 12 colors with All. PICO-8 remains a distinctive console
+look. This is a practical default, not a guarantee of neutral conversion or artist intent;
+see `research/2026-10-12-palette-default-and-adaptive.md` for counterexamples.
 
 Curated presets are immutable. Edit creates a named copy. Saved and session-only palettes
 follow the presets on the same rail, with a divider. One round preview represents each

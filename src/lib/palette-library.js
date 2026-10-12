@@ -58,7 +58,7 @@ export const FULL_PRESETS = Object.freeze([
 ]);
 
 // Rail order follows color count; defaults remain stable independently of it.
-export const DEFAULT_FULL_PALETTE = FULL_PRESETS.find(p => p.id === 'preset-pico8');
+export const DEFAULT_FULL_PALETTE = FULL_PRESETS.find(p => p.id === 'preset-edg32');
 
 function sourceOf(source) {
   const kinds = ['image', 'hex', 'gpl', 'pal', 'aseprite', 'custom', 'copy'];

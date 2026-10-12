@@ -916,7 +916,10 @@ Conversion algorithms are unchanged; prior conversion/export results remain hist
 Two additional immutable color tables bring the curated rail to seven entries. The
 matching loops and sixteen-sector preview cap are unchanged; Resurrect uses all 64
 colors for conversion even though its small preview shows sixteen. PICO-8 remains the
-default independently of the descending-count rail order.
+default independently of the descending-count rail order in that October 11 change.
+The October 12 follow-up selects ENDESGA 32 for fresh/missing selections; existing
+selections, matching kernels and optional settings remain unchanged. Fixed PICO-8
+regression fixtures now select their named preset independently of the product default.
 
 The open palette editor reuses the existing drag payload parser, then downloads only
 the first image or Aseprite URL. Its separate fetch helper accumulates streamed chunks

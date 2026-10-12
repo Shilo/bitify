@@ -237,8 +237,8 @@ try {
   await openPalette(); await page.getByRole('group',{name:'Color system',exact:true}).getByRole('button',{name:'Palette',exact:true}).click();
   assert.equal(FULL_PRESETS.length,9,'Expected all nine published full presets');
   assert.deepEqual(FULL_PRESETS.map(palette=>palette.colors.length),[64,32,16,16,8,4,4,2,2],'Preset order/counts changed');
-  assert.equal(DEFAULT_FULL_PALETTE.name,'PICO-8','Reordering the rail changed the default');
-  assert.equal((await stored()).paletteId,DEFAULT_FULL_PALETTE.id,'First family switch lost the PICO-8 default');
+  assert.equal(DEFAULT_FULL_PALETTE.name,'ENDESGA 32','Unexpected default full palette');
+  assert.equal((await stored()).paletteId,DEFAULT_FULL_PALETTE.id,'First family switch lost the ENDESGA 32 default');
   assert.deepEqual(await page.getByRole('group',{name:'Full palettes',exact:true}).locator('button').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('aria-label'))),FULL_PRESETS.map(palette=>palette.name),'Full preset rail order differs from published order');
   for (const palette of FULL_PRESETS) {
     await openPalette(); await page.getByRole('group',{name:'Full palettes',exact:true}).getByRole('button',{name:palette.name,exact:true}).click(); await closePanel();
@@ -391,9 +391,9 @@ try {
   downloaded = await pendingDownload; assert.equal(downloaded.suggestedFilename(),'bitify.zip');
   const snapshotZip = unzipSync(readFileSync(await downloaded.path()));
   assert.deepEqual(Object.keys(snapshotZip),['fixture-palette.png','walk-palette.gif','big-palette.png']);
-  samePixels(readPng(snapshotZip['fixture-palette.png']).pixels,nearestReference(fixture,DEFAULT_FULL_PALETTE.colors),'ZIP palette snapshot');
+  samePixels(readPng(snapshotZip['fixture-palette.png']).pixels,nearestReference(fixture,FULL_PRESETS.find(p=>p.id==='preset-pico8').colors),'ZIP palette snapshot');
   samePixels(readPng(snapshotZip['big-palette.png']).pixels,bigPixels,'ZIP removed-image snapshot');
-  samePixels(readGif(snapshotZip['walk-palette.gif']).frames[1].pixels,nearestReference(originalGif[1],DEFAULT_FULL_PALETTE.colors),'ZIP GIF palette snapshot');
+  samePixels(readGif(snapshotZip['walk-palette.gif']).frames[1].pixels,nearestReference(originalGif[1],FULL_PRESETS.find(p=>p.id==='preset-pico8').colors),'ZIP GIF palette snapshot');
   assert.equal(await page.getByRole('button',{name:'Save big.png',exact:true}).count(),0);
   results.extra.push('2MP save preserves click palette; ZIP preserves palette and removed-image snapshots');
 
@@ -546,7 +546,7 @@ try {
   await storageDriver.evaluate(()=>localStorage.clear());
   await storagePage.waitForFunction(()=>window.__storageEvents.some(event=>event.key===null&&event.local));
   await storagePage.getByRole('button',{name:storageRecord.name,exact:true}).waitFor({state:'detached'});
-  assert.match(await storagePage.locator('.full-active-palette').getAttribute('aria-label'),/Selected palette: PICO-8,/,'Clear left the removed palette selected');
+  assert.match(await storagePage.locator('.full-active-palette').getAttribute('aria-label'),/Selected palette: ENDESGA 32,/,'Clear left the removed palette selected');
   assert.equal(await storagePage.getByRole('button',{name:'Session witness',exact:true}).count(),1,'Clear discarded the in-memory session');
   // Change family to make the app persist its current in-memory settings. The
   // external clear itself must not reset either matching or legacy controls.

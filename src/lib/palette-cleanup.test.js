@@ -1,11 +1,11 @@
 import { describe, it, expect, vi } from 'vitest';
 import { prepareCleanupAsync, createCleanupAccumulator, applyCleanup, applyCleanupAsync } from './palette-cleanup.js';
 import { quantize, preparePalette } from './quantize.js';
-import { DEFAULT_FULL_PALETTE } from './palette-library.js';
+import { FULL_PRESETS } from './palette-library.js';
 
 const rgba = hex => [parseInt(hex.slice(1, 3), 16), parseInt(hex.slice(3, 5), 16), parseInt(hex.slice(5, 7), 16), 255];
 const image = (colors, width = colors.length, height = 1) => ({ width, height, data: Uint8ClampedArray.from(colors.flatMap(c => typeof c === 'string' ? rgba(c) : c)) });
-const pico = DEFAULT_FULL_PALETTE.colors;
+const pico = FULL_PRESETS.find(p => p.id === 'preset-pico8').colors;
 function lab(rgb) {
   const [r, g, b] = rgb.map(n => { const v = n / 255; return v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; });
   const l = Math.cbrt(.4122214708 * r + .5363325363 * g + .0514459929 * b), m = Math.cbrt(.2119034982 * r + .6806995451 * g + .1073969566 * b), s = Math.cbrt(.0883024619 * r + .2817188376 * g + .6299787005 * b);

@@ -7,6 +7,7 @@ import { quantize } from './quantize.js';
 import { prepareCleanupAsync, applyCleanup } from './palette-cleanup.js';
 
 describe('independent palette state and export snapshots', () => {
+  const pico = FULL_PRESETS.find(p => p.id === 'preset-pico8');
   const cleanupSource = (middle = '#053452') => {
     const colors = Array(25).fill('#07050c'); colors[12] = middle;
     return { width: 5, height: 5, data: Uint8ClampedArray.from(colors.flatMap(hex => [parseInt(hex.slice(1,3),16),parseInt(hex.slice(3,5),16),parseInt(hex.slice(5,7),16),255])) };
@@ -41,13 +42,13 @@ describe('independent palette state and export snapshots', () => {
       const expected=applyCleanup(baseline,await prepareCleanupAsync([original],result.colors,128,metric));
       expect(result.indices).toEqual(expected.indices); expect(result.used).toEqual(expected.used);
       expect(result.indices[0]).toBe(256); expect(result.hasTransparency).toBe(true);
-      expect([...result.used].reduce((n,v)=>n+v,0)).toBeLessThanOrEqual(maxColors||16);
+      expect([...result.used].reduce((n,v)=>n+v,0)).toBeLessThanOrEqual(maxColors||DEFAULT_FULL_PALETTE.colors.length);
     }
   });
   it('first-frame Copy shares the whole-animation guard and GIF retains source delays and loop', async () => {
     const first=cleanupSource(), second=cleanupSource('#07050c');
     const item={name:'guard.gif',original:first,frames:[{original:first,delay:40},{original:second,delay:90}],loop:3};
-    const asked=conversionSnapshot({family:'full-palette',palette:DEFAULT_FULL_PALETTE,alphaCut:128,cleanup:true});
+    const asked=conversionSnapshot({family:'full-palette',palette:pico,alphaCut:128,cleanup:true});
     const exported=await fullPaletteImage(item,asked), copy=await fullPaletteImage(item,asked,{still:true});
     expect(copy.indices[12]).toBe(1); expect((await exported.getFrame(0)).indices[12]).toBe(1); expect((await exported.getFrame(1)).indices[12]).toBe(0);
     expect(copy.indices).toEqual((await exported.getFrame(0)).indices);
@@ -61,7 +62,7 @@ describe('independent palette state and export snapshots', () => {
   });
   it('captures cleanup and every source reference before asynchronous preparation', async () => {
     const first=cleanupSource(), second=cleanupSource('#07050c'), item={name:'before.gif',original:first,frames:[{original:first,delay:40},{original:second,delay:90}],loop:3};
-    const asked={colors:[...DEFAULT_FULL_PALETTE.colors],alphaCut:128,metric:'oklab',maxColors:0,cleanup:true};
+    const asked={colors:[...pico.colors],alphaCut:128,metric:'oklab',maxColors:0,cleanup:true};
     const pending=fullPaletteImage(item,asked);
     asked.cleanup=false; asked.colors.reverse(); item.original=second; item.frames[1]={original:first,delay:10}; item.name='after.gif'; item.loop=7;
     const result=await pending;
