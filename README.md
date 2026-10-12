@@ -39,3 +39,7 @@ Open Palette to choose **1-bit** or **Palette**. In Palette, the import icon acc
 Built with Svelte 5 and Vite. Every push to `main` is deployed to GitHub Pages by [deploy.yml](.github/workflows/deploy.yml).
 
 The full design is in [docs/superpowers/specs/2026-10-06-bitify-app-design.md](docs/superpowers/specs/2026-10-06-bitify-app-design.md).
+
+## Deferred work
+
+[MP4 import feasibility and deferred task](docs/research/2026-10-11-mp4-support.md) records the tested browser-decoding approach, memory and compatibility limits, and proposed scope for MP4 import with GIF export. MP4 app support is not implemented; MP4 export is deferred separately.
