@@ -6,6 +6,16 @@ alternate payload probes, prototype tests and fixture servers have been removed.
 The sections below record the completed research and acceptance history; their old
 prototype URLs, commands and diagnostic-panel instructions are no longer supported.
 
+Cleanup commit `4c67aac` passed independent adversarial review with no agreed fix
+remaining. Verification against the cleaned production bundle passed 494 remaining
+unit tests, the broad 132 legacy/nine Oklab/nine RGB export matrix with 13 integration
+categories, 18 PNG/GIF byte-equality cases with wall and fullscreen dragging in Chrome,
+Edge and Brave, six mobile/hybrid Preview cases, three active-drag/Preview-teardown
+cases, and 12 wall touch profiles covering PNG/GIF, both conversion families and
+desktop touchscreen input. Verification used temporary external instrumentation;
+no app diagnostic hooks were restored. The temporary drag fixtures and test host
+were retired after verification.
+
 Desktop optimized export dragging is enabled on ordinary wall and Preview URLs.
 For optional diagnostics, open
 `http://127.0.0.1:5184/?dragExport=1` in the desktop browser being tested.
