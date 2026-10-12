@@ -1953,8 +1953,23 @@ Capture drag strings synchronously with the existing artwork payload parser: ima
 HTML sources, URI lists, DownloadURL and plain URL text. Files take precedence; only
 the first source replaces the current draft, preserving entered name and selected
 method. Never import into the artwork behind the dialog or navigate the page.
-Fetch signed URLs unchanged with CORS, omitted credentials and no referrer. Stream
-downloads up to 32 MiB; reject larger bodies before accumulating the remainder. The
+Fetch signed URLs unchanged with CORS, omitted credentials and no referrer.
+Direct URL imports require the source to permit browser cross-origin reads. Discord
+image imports succeeding does not imply that its binary Aseprite attachments allow
+them: the supplied paletteV1.ase returns valid bytes but no CORS permission header.
+Such links must be saved first and imported as local files. Fetch-level network errors
+explain that the website may block direct imports or the link/connection may be
+unavailable, without claiming which cause the browser concealed. The existing draft
+is retained and the message offers saving and importing the file. Parser and timeout
+errors retain their specific messages.
+Verification on October 11: the supplied Discord PNG URL includes
+`Access-Control-Allow-Origin: *` and imports into the live Codex browser editor,
+finding 6,743 colors (over the review limit). The supplied `.ase` URL fails with the
+new conditional explanation while preserving the draft; its downloaded 2,055-byte
+file imports 255 colors. Local file drops preserve entered names and the selected
+Paste colors method. All 448 unit tests and the production build pass; independent
+review also ran all 41 palette-download tests.
+Stream downloads up to 32 MiB; reject larger bodies before accumulating the remainder. The
 30-second timeout covers download only; decoding uses user cancellation without a
 new local deadline. Cancel/Close suppress late successes and errors. Failure/timeout
 retains the draft and offers saving the file locally. Extensionless generic Aseprite

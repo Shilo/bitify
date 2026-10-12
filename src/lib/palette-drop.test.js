@@ -161,10 +161,22 @@ describe('bounded dropped palette downloads', () => {
     await vi.waitFor(() => expect(reader.read).toHaveBeenCalled()); controller.abort(); rejectRead(new Error('late read failure')); await expectation;
     expect(reader.releaseLock).toHaveBeenCalledOnce();
   });
-  it('preserves ordinary network/read errors when work was not canceled', async () => {
+  it('explains fetch rejection without claiming to know whether it was CORS or a network failure', async () => {
     const error = new TypeError('Failed to fetch'); vi.stubGlobal('fetch', vi.fn().mockRejectedValue(error));
+    await expect(fetchDroppedPalette(signed)).rejects.toMatchObject({
+      message: 'Could not download this palette. The website may block direct imports, or the link or connection may be unavailable.', cause: error,
+    });
+  });
+  it('preserves other fetch errors and stream errors when work was not canceled', async () => {
+    const error = new Error('network unavailable'); vi.stubGlobal('fetch', vi.fn().mockRejectedValue(error));
     await expect(fetchDroppedPalette(signed)).rejects.toBe(error);
-    respond(new ReadableStream({ start(c) { c.error(error); } }));
-    await expect(fetchDroppedPalette(signed)).rejects.toBe(error);
+    const readError = new TypeError('stream failed'); respond(new ReadableStream({ start(c) { c.error(readError); } }));
+    await expect(fetchDroppedPalette(signed)).rejects.toBe(readError);
+  });
+  it('keeps cancellation authoritative over a late fetch TypeError', async () => {
+    let reject; vi.stubGlobal('fetch', vi.fn(() => new Promise((_, no) => reject = no)));
+    const controller = new AbortController(), pending = fetchDroppedPalette(signed, controller.signal);
+    const expectation = expect(pending).rejects.toMatchObject({ name: 'AbortError' });
+    controller.abort(); reject(new TypeError('Failed to fetch')); await expectation;
   });
 });

@@ -29,7 +29,10 @@ export async function fetchDroppedPalette(url, signal) {
     checkCanceled(signal);
   } catch (error) {
     if (signal?.aborted) { try { await response?.body?.cancel(); } catch { /* Preserve cancellation. */ } }
-    checkCanceled(signal); throw error;
+    checkCanceled(signal);
+    // Fetch deliberately does not distinguish CORS denial from network failure.
+    if (error instanceof TypeError) throw new Error('Could not download this palette. The website may block direct imports, or the link or connection may be unavailable.', { cause: error });
+    throw error;
   }
   const cancelBody = async () => { try { await response.body?.cancel(); } catch { /* Preserve the download error. */ } };
   if (!response.ok) { await cancelBody(); checkCanceled(signal); throw new Error('Palette download failed.'); }
