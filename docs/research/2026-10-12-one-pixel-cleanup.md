@@ -5,6 +5,10 @@ PICO-8 and the supplied shared 255-color palette, plus deliberate-detail and ani
 counterexamples. Cleanup is an optional palette effect, Off by default. It does not
 change the legacy 1-bit styles.
 
+Follow-up: [PixelLab corpus evaluation](2026-10-12-cleanup-pixellab-corpus.md)
+tests 160 stills and 16 real GIFs, distinguishing numerical singleton reduction from
+subjective visual success and documenting the animation guard's limited reach.
+
 ## Why nearest matching separates the reported pixels
 
 The supplied sprite's zero-based coordinates (26,22) and (26,23) use `#053452` and
