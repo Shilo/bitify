@@ -40,7 +40,8 @@ Max colors previews update after a short slider pause or release, keeping the pr
 preview visible while recalculating. Number edits apply when finished.
 
 **Cleanup: Off / On** in Nearest optionally merges isolated pixels with compatible
-neighbors. It can remove eyes or highlights, so Off is the default. GIFs keep a change
+neighbors, limits added color error and preserves exact colors in the active palette.
+It can still remove small details, so Off is the default. GIFs keep a change
 only where every frame agrees on the nearest color and replacement. Moving noise can
 remain. Cleanup uses the same full-source decisions for previews and exports; it retains
 the palette, color cap and transparency. See the [research and limitations](docs/research/2026-10-12-one-pixel-cleanup.md).

@@ -15,12 +15,17 @@ worker construction uses the same cooperative core. Runtime failures are reporte
 The core has typed scratch and a bounded 4096-entry RGB-to-Oklab cache, with no
 per-pixel arrays/objects. Temporary core arrays are about 11 bytes/source pixel for a
 still and up to 15 for a subsequent animation frame, plus 114,688 bytes of RGB cache and
-palette vectors. This excludes source RGBA, quantizer arrays, decoding, cached maps,
+palette vectors, plus at most 1,024 bytes of exact RGB keys. This excludes source RGBA, quantizer arrays, decoding, cached maps,
 runtime GC and export buffers. Full-resolution export overlays yield cooperatively;
 display-sized previews use the same synchronous range kernel. The 8ms target is checked
 between bounded blocks and is not a hard device deadline.
 
-The final suite passes 525 tests and a production build. Native Codex browser checks
+The final error-limited rule adds one cooperative pass over frozen proposals. It only
+converts source RGB to Oklab for proposed changes, reuses the bounded source cache and
+allocates no arrays or objects per pixel. Off and the lazy-loading boundaries are unchanged.
+See the [final decision and validation](research/2026-10-12-cleanup-final-decision.md).
+
+Historical initial implementation: its suite passed 525 tests and a production build. Native Codex browser checks
 decoded 315 PNG/GIF outputs covering the supplied sprite, all six buildings, four
 eight-frame animations, partial alpha and a 1.92MP mixed/noisy fixture. Pixel/cap/alpha,
 GIF metadata, Copy, Preview, Reset, family retention, rapid changes and responsive
@@ -28,13 +33,22 @@ layouts with Opacity cut visible were checked. All 56 supplied-image Off PNGs we
 byte-identical to the existing path at `ecb8088`. A browser-decoded RGBA witness was required
 for partial alpha: existing canvas rounding changes some source RGBs before conversion.
 
-Core-only desktop observations were about 65ms preparation plus 7–9ms overlay on
+Historical initial core-only desktop observations were about 65ms preparation plus 7–9ms overlay on
 1.92MP flat/speckled fixtures; native Save observations ranged 1.4–3.1 seconds with
 mixed cold/warm caches, compression, preview contention and automation included.
 These are not phone budgets or comparative speedup claims. Physical phones, Safari,
 nonzero hardware safe areas and sustained peak memory remain unverified. Optional
 bundle sizes, detailed evidence, intentional-detail loss and animation guard limits are
 in [the cleanup research](research/2026-10-12-one-pixel-cleanup.md).
+
+The revised error-limited implementation passes 528 tests and a production build.
+Final native browser validation covers 161 outputs / 521 frames, including Copy;
+all checked pixels match the independent reference. Three revised core runs on the
+1.92MP mixed/noisy fixture took 192.5, 180.5 and 167.6ms, excluding browser decoding,
+worker transfer, rendering and export encoding. These differ from the historical
+fixtures and are not a before/after speed comparison. Responsive browser checks
+at 320px and 375px include Opacity cut. See the final decision linked above for
+coverage, bundle sizes and remaining artistic/animation limitations.
 
 How Bitify stays fast with big images on phones: what was slow, what was changed and why,
 what was measured, what was tried and thrown away, and what is still open. It is the record

@@ -30,7 +30,8 @@ Limits can merge shades or lose accents; the same source RGB can map differently
 different sprites. This is color reduction, not a new dithering or structural effect.
 Cleanup is optional, Off by default. It merges isolated one-pixel palette regions with
 compatible neighboring colors after nearest matching. It can remove intentional eyes or
-highlights and can change an exact source-palette match. Decisions use the full source;
+highlights, but preserves exact RGB matches in the active palette/subset and limits
+each replacement's added color error. Decisions use the full source;
 previews sample those decisions and exports use them at original size. Animations keep a
 replacement only where every frame has the same nearest color and proposes the same
 replacement. This prevents added fixed-coordinate color-label changes, but leaves moving

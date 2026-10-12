@@ -1,0 +1,1618 @@
+[
+  {
+    "id": "s025",
+    "x": 27,
+    "y": 24,
+    "key": "preset-pico8-oklab-all",
+    "outputs": {
+      "nearest": "#fff1e8",
+      "current": "#ffccaa",
+      "contrast": "#fff1e8",
+      "material": "#fff1e8",
+      "confidence": "#fff1e8",
+      "combined": "#fff1e8",
+      "tight": "#fff1e8"
+    },
+    "trace": {
+      "x": 27,
+      "y": 24,
+      "source": "#fcfefe",
+      "from": "#fff1e8",
+      "to": "#ffccaa",
+      "contrast": true,
+      "material": true,
+      "confidence": true,
+      "added": 0.01735954535525178,
+      "oldError": 0.0012732203425533336,
+      "lightness": 0.9955154482480038,
+      "low": 0.8635237752292215,
+      "high": 0.8635237752292215,
+      "colorGap": 0.0801117032219104
+    }
+  },
+  {
+    "id": "s025",
+    "x": 27,
+    "y": 24,
+    "key": "preset-pico8-oklab-8",
+    "outputs": {
+      "nearest": "#fff1e8",
+      "current": "#ffccaa",
+      "contrast": "#fff1e8",
+      "material": "#fff1e8",
+      "confidence": "#fff1e8",
+      "combined": "#fff1e8",
+      "tight": "#fff1e8"
+    },
+    "trace": {
+      "x": 27,
+      "y": 24,
+      "source": "#fcfefe",
+      "from": "#fff1e8",
+      "to": "#ffccaa",
+      "contrast": true,
+      "material": true,
+      "confidence": true,
+      "added": 0.01735954535525178,
+      "oldError": 0.0012732203425533336,
+      "lightness": 0.9955154482480038,
+      "low": 0.8635237752292215,
+      "high": 0.8635237752292215,
+      "colorGap": 0.0801117032219104
+    }
+  },
+  {
+    "id": "s025",
+    "x": 27,
+    "y": 24,
+    "key": "preset-pico8-rgb-all",
+    "outputs": {
+      "nearest": "#fff1e8",
+      "current": "#ffccaa",
+      "contrast": "#fff1e8",
+      "material": "#fff1e8",
+      "confidence": "#fff1e8",
+      "combined": "#fff1e8",
+      "tight": "#fff1e8"
+    },
+    "trace": {
+      "x": 27,
+      "y": 24,
+      "source": "#fcfefe",
+      "from": "#fff1e8",
+      "to": "#ffccaa",
+      "contrast": true,
+      "material": true,
+      "confidence": true,
+      "added": 0.01735954535525178,
+      "oldError": 0.0012732203425533336,
+      "lightness": 0.9955154482480038,
+      "low": 0.8635237752292215,
+      "high": 0.8635237752292215,
+      "colorGap": 0.0801117032219104
+    }
+  },
+  {
+    "id": "s025",
+    "x": 27,
+    "y": 24,
+    "key": "preset-pico8-rgb-8",
+    "outputs": {
+      "nearest": "#fff1e8",
+      "current": "#fff1e8",
+      "contrast": "#fff1e8",
+      "material": "#fff1e8",
+      "confidence": "#fff1e8",
+      "combined": "#fff1e8",
+      "tight": "#fff1e8"
+    }
+  },
+  {
+    "id": "s025",
+    "x": 27,
+    "y": 24,
+    "key": "preset-res64-oklab-all",
+    "outputs": {
+      "nearest": "#ffffff",
+      "current": "#fdcbb0",
+      "contrast": "#ffffff",
+      "material": "#ffffff",
+      "confidence": "#ffffff",
+      "combined": "#ffffff",
+      "tight": "#ffffff"
+    },
+    "trace": {
+      "x": 27,
+      "y": 24,
+      "source": "#fcfefe",
+      "from": "#ffffff",
+      "to": "#fdcbb0",
+      "contrast": true,
+      "material": true,
+      "confidence": true,
+      "added": 0.018339533045324773,
+      "oldError": 0.000024598248112708534,
+      "lightness": 0.9955154482480038,
+      "low": 0.8635237752292215,
+      "high": 0.8635237752292215,
+      "colorGap": 0.0801117032219104
+    }
+  },
+  {
+    "id": "s025",
+    "x": 27,
+    "y": 24,
+    "key": "preset-res64-oklab-8",
+    "outputs": {
+      "nearest": "#ffffff",
+      "current": "#ffffff",
+      "contrast": "#ffffff",
+      "material": "#ffffff",
+      "confidence": "#ffffff",
+      "combined": "#ffffff",
+      "tight": "#ffffff"
+    }
+  },
+  {
+    "id": "s025",
+    "x": 27,
+    "y": 24,
+    "key": "preset-res64-rgb-all",
+    "outputs": {
+      "nearest": "#ffffff",
+      "current": "#fdcbb0",
+      "contrast": "#ffffff",
+      "material": "#ffffff",
+      "confidence": "#ffffff",
+      "combined": "#ffffff",
+      "tight": "#ffffff"
+    },
+    "trace": {
+      "x": 27,
+      "y": 24,
+      "source": "#fcfefe",
+      "from": "#ffffff",
+      "to": "#fdcbb0",
+      "contrast": true,
+      "material": true,
+      "confidence": true,
+      "added": 0.018339533045324773,
+      "oldError": 0.000024598248112708534,
+      "lightness": 0.9955154482480038,
+      "low": 0.8635237752292215,
+      "high": 0.8635237752292215,
+      "colorGap": 0.0801117032219104
+    }
+  },
+  {
+    "id": "s025",
+    "x": 27,
+    "y": 24,
+    "key": "preset-res64-rgb-8",
+    "outputs": {
+      "nearest": "#ffffff",
+      "current": "#fdcbb0",
+      "contrast": "#ffffff",
+      "material": "#ffffff",
+      "confidence": "#ffffff",
+      "combined": "#ffffff",
+      "tight": "#ffffff"
+    },
+    "trace": {
+      "x": 27,
+      "y": 24,
+      "source": "#fcfefe",
+      "from": "#ffffff",
+      "to": "#fdcbb0",
+      "contrast": true,
+      "material": true,
+      "confidence": true,
+      "added": 0.018339533045324773,
+      "oldError": 0.000024598248112708534,
+      "lightness": 0.9955154482480038,
+      "low": 0.8635237752292215,
+      "high": 0.8635237752292215,
+      "colorGap": 0.0801117032219104
+    }
+  },
+  {
+    "id": "s093",
+    "x": 13,
+    "y": 4,
+    "key": "preset-pico8-oklab-all",
+    "outputs": {
+      "nearest": "#5f574f",
+      "current": "#1d2b53",
+      "contrast": "#5f574f",
+      "material": "#1d2b53",
+      "confidence": "#5f574f",
+      "combined": "#5f574f",
+      "tight": "#5f574f"
+    },
+    "trace": {
+      "x": 13,
+      "y": 4,
+      "source": "#525964",
+      "from": "#5f574f",
+      "to": "#1d2b53",
+      "contrast": true,
+      "material": false,
+      "confidence": true,
+      "added": 0.028011908892725566,
+      "oldError": 0.0013113215781449489,
+      "lightness": 0.4618473122627153,
+      "low": 0.32487427551324255,
+      "high": 0.3300882886289463,
+      "colorGap": 0.006249327446724801
+    }
+  },
+  {
+    "id": "s093",
+    "x": 13,
+    "y": 4,
+    "key": "preset-pico8-oklab-8",
+    "outputs": {
+      "nearest": "#5f574f",
+      "current": "#1d2b53",
+      "contrast": "#5f574f",
+      "material": "#1d2b53",
+      "confidence": "#5f574f",
+      "combined": "#5f574f",
+      "tight": "#5f574f"
+    },
+    "trace": {
+      "x": 13,
+      "y": 4,
+      "source": "#525964",
+      "from": "#5f574f",
+      "to": "#1d2b53",
+      "contrast": true,
+      "material": false,
+      "confidence": true,
+      "added": 0.028011908892725566,
+      "oldError": 0.0013113215781449489,
+      "lightness": 0.4618473122627153,
+      "low": 0.32487427551324255,
+      "high": 0.3300882886289463,
+      "colorGap": 0.006249327446724801
+    }
+  },
+  {
+    "id": "s093",
+    "x": 13,
+    "y": 4,
+    "key": "preset-pico8-rgb-all",
+    "outputs": {
+      "nearest": "#5f574f",
+      "current": "#1d2b53",
+      "contrast": "#5f574f",
+      "material": "#1d2b53",
+      "confidence": "#5f574f",
+      "combined": "#5f574f",
+      "tight": "#5f574f"
+    },
+    "trace": {
+      "x": 13,
+      "y": 4,
+      "source": "#525964",
+      "from": "#5f574f",
+      "to": "#1d2b53",
+      "contrast": true,
+      "material": false,
+      "confidence": true,
+      "added": 0.028011908892725566,
+      "oldError": 0.0013113215781449489,
+      "lightness": 0.4618473122627153,
+      "low": 0.32487427551324255,
+      "high": 0.3300882886289463,
+      "colorGap": 0.006249327446724801
+    }
+  },
+  {
+    "id": "s093",
+    "x": 13,
+    "y": 4,
+    "key": "preset-pico8-rgb-8",
+    "outputs": {
+      "nearest": "#5f574f",
+      "current": "#1d2b53",
+      "contrast": "#5f574f",
+      "material": "#1d2b53",
+      "confidence": "#5f574f",
+      "combined": "#5f574f",
+      "tight": "#5f574f"
+    },
+    "trace": {
+      "x": 13,
+      "y": 4,
+      "source": "#525964",
+      "from": "#5f574f",
+      "to": "#1d2b53",
+      "contrast": true,
+      "material": false,
+      "confidence": true,
+      "added": 0.028011908892725566,
+      "oldError": 0.0013113215781449489,
+      "lightness": 0.4618473122627153,
+      "low": 0.32487427551324255,
+      "high": 0.3300882886289463,
+      "colorGap": 0.006249327446724801
+    }
+  },
+  {
+    "id": "s093",
+    "x": 13,
+    "y": 4,
+    "key": "preset-res64-oklab-all",
+    "outputs": {
+      "nearest": "#625565",
+      "current": "#313638",
+      "contrast": "#625565",
+      "material": "#313638",
+      "confidence": "#625565",
+      "combined": "#625565",
+      "tight": "#625565"
+    },
+    "trace": {
+      "x": 13,
+      "y": 4,
+      "source": "#525964",
+      "from": "#625565",
+      "to": "#313638",
+      "contrast": true,
+      "material": false,
+      "confidence": true,
+      "added": 0.017143492919757714,
+      "oldError": 0.0007524816774697402,
+      "lightness": 0.4618473122627153,
+      "low": 0.32487427551324255,
+      "high": 0.3300882886289463,
+      "colorGap": 0.006249327446724801
+    }
+  },
+  {
+    "id": "s093",
+    "x": 13,
+    "y": 4,
+    "key": "preset-res64-oklab-8",
+    "outputs": {
+      "nearest": "#625565",
+      "current": "#313638",
+      "contrast": "#625565",
+      "material": "#313638",
+      "confidence": "#625565",
+      "combined": "#625565",
+      "tight": "#625565"
+    },
+    "trace": {
+      "x": 13,
+      "y": 4,
+      "source": "#525964",
+      "from": "#625565",
+      "to": "#313638",
+      "contrast": true,
+      "material": false,
+      "confidence": true,
+      "added": 0.017143492919757714,
+      "oldError": 0.0007524816774697402,
+      "lightness": 0.4618473122627153,
+      "low": 0.32487427551324255,
+      "high": 0.3300882886289463,
+      "colorGap": 0.006249327446724801
+    }
+  },
+  {
+    "id": "s093",
+    "x": 13,
+    "y": 4,
+    "key": "preset-res64-rgb-all",
+    "outputs": {
+      "nearest": "#625565",
+      "current": "#313638",
+      "contrast": "#625565",
+      "material": "#313638",
+      "confidence": "#625565",
+      "combined": "#625565",
+      "tight": "#625565"
+    },
+    "trace": {
+      "x": 13,
+      "y": 4,
+      "source": "#525964",
+      "from": "#625565",
+      "to": "#313638",
+      "contrast": true,
+      "material": false,
+      "confidence": true,
+      "added": 0.017143492919757714,
+      "oldError": 0.0007524816774697402,
+      "lightness": 0.4618473122627153,
+      "low": 0.32487427551324255,
+      "high": 0.3300882886289463,
+      "colorGap": 0.006249327446724801
+    }
+  },
+  {
+    "id": "s093",
+    "x": 13,
+    "y": 4,
+    "key": "preset-res64-rgb-8",
+    "outputs": {
+      "nearest": "#625565",
+      "current": "#b33831",
+      "contrast": "#625565",
+      "material": "#b33831",
+      "confidence": "#625565",
+      "combined": "#625565",
+      "tight": "#625565"
+    },
+    "trace": {
+      "x": 13,
+      "y": 4,
+      "source": "#525964",
+      "from": "#625565",
+      "to": "#b33831",
+      "contrast": true,
+      "material": false,
+      "confidence": true,
+      "added": 0.03277107177427347,
+      "oldError": 0.0007524816774697402,
+      "lightness": 0.4618473122627153,
+      "low": 0.511229785413294,
+      "high": 0.511229785413294,
+      "colorGap": 0.15444052670127273
+    }
+  },
+  {
+    "id": "s113",
+    "x": 61,
+    "y": 45,
+    "key": "preset-pico8-oklab-all",
+    "outputs": {
+      "nearest": "#000000",
+      "current": "#1d2b53",
+      "contrast": "#000000",
+      "material": "#000000",
+      "confidence": "#000000",
+      "combined": "#000000",
+      "tight": "#000000"
+    },
+    "trace": {
+      "x": 61,
+      "y": 45,
+      "source": "#000000",
+      "from": "#000000",
+      "to": "#1d2b53",
+      "contrast": true,
+      "material": true,
+      "confidence": true,
+      "added": 0.09543891924556848,
+      "oldError": 0,
+      "lightness": 0,
+      "low": 0.18825179542948778,
+      "high": 0.20887613988369963,
+      "colorGap": 0.03516419401480535
+    }
+  },
+  {
+    "id": "s113",
+    "x": 61,
+    "y": 45,
+    "key": "preset-pico8-oklab-8",
+    "outputs": {
+      "nearest": "#000000",
+      "current": "#1d2b53",
+      "contrast": "#000000",
+      "material": "#000000",
+      "confidence": "#000000",
+      "combined": "#000000",
+      "tight": "#000000"
+    },
+    "trace": {
+      "x": 61,
+      "y": 45,
+      "source": "#000000",
+      "from": "#000000",
+      "to": "#1d2b53",
+      "contrast": true,
+      "material": true,
+      "confidence": true,
+      "added": 0.09543891924556848,
+      "oldError": 0,
+      "lightness": 0,
+      "low": 0.18825179542948778,
+      "high": 0.20887613988369963,
+      "colorGap": 0.03516419401480535
+    }
+  },
+  {
+    "id": "s113",
+    "x": 61,
+    "y": 45,
+    "key": "preset-pico8-rgb-all",
+    "outputs": {
+      "nearest": "#000000",
+      "current": "#000000",
+      "contrast": "#000000",
+      "material": "#000000",
+      "confidence": "#000000",
+      "combined": "#000000",
+      "tight": "#000000"
+    }
+  },
+  {
+    "id": "s113",
+    "x": 61,
+    "y": 45,
+    "key": "preset-pico8-rgb-8",
+    "outputs": {
+      "nearest": "#000000",
+      "current": "#000000",
+      "contrast": "#000000",
+      "material": "#000000",
+      "confidence": "#000000",
+      "combined": "#000000",
+      "tight": "#000000"
+    }
+  },
+  {
+    "id": "s113",
+    "x": 61,
+    "y": 45,
+    "key": "preset-res64-oklab-all",
+    "outputs": {
+      "nearest": "#2e222f",
+      "current": "#2e222f",
+      "contrast": "#2e222f",
+      "material": "#2e222f",
+      "confidence": "#2e222f",
+      "combined": "#2e222f",
+      "tight": "#2e222f"
+    }
+  },
+  {
+    "id": "s113",
+    "x": 61,
+    "y": 45,
+    "key": "preset-res64-oklab-8",
+    "outputs": {
+      "nearest": "#2e222f",
+      "current": "#2e222f",
+      "contrast": "#2e222f",
+      "material": "#2e222f",
+      "confidence": "#2e222f",
+      "combined": "#2e222f",
+      "tight": "#2e222f"
+    }
+  },
+  {
+    "id": "s113",
+    "x": 61,
+    "y": 45,
+    "key": "preset-res64-rgb-all",
+    "outputs": {
+      "nearest": "#2e222f",
+      "current": "#2e222f",
+      "contrast": "#2e222f",
+      "material": "#2e222f",
+      "confidence": "#2e222f",
+      "combined": "#2e222f",
+      "tight": "#2e222f"
+    }
+  },
+  {
+    "id": "s113",
+    "x": 61,
+    "y": 45,
+    "key": "preset-res64-rgb-8",
+    "outputs": {
+      "nearest": "#2e222f",
+      "current": "#2e222f",
+      "contrast": "#2e222f",
+      "material": "#2e222f",
+      "confidence": "#2e222f",
+      "combined": "#2e222f",
+      "tight": "#2e222f"
+    }
+  },
+  {
+    "id": "s121",
+    "x": 16,
+    "y": 11,
+    "key": "preset-pico8-oklab-all",
+    "outputs": {
+      "nearest": "#008751",
+      "current": "#5f574f",
+      "contrast": "#008751",
+      "material": "#008751",
+      "confidence": "#008751",
+      "combined": "#008751",
+      "tight": "#008751"
+    },
+    "trace": {
+      "x": 16,
+      "y": 11,
+      "source": "#698059",
+      "from": "#008751",
+      "to": "#5f574f",
+      "contrast": true,
+      "material": true,
+      "confidence": true,
+      "added": 0.008895507768074337,
+      "oldError": 0.006427129743774675,
+      "lightness": 0.5708560333195809,
+      "low": 0.4404638085708149,
+      "high": 0.49410291134336487,
+      "colorGap": 0.009475950985311316
+    }
+  },
+  {
+    "id": "s121",
+    "x": 31,
+    "y": 11,
+    "key": "preset-pico8-oklab-all",
+    "outputs": {
+      "nearest": "#008751",
+      "current": "#5f574f",
+      "contrast": "#008751",
+      "material": "#008751",
+      "confidence": "#008751",
+      "combined": "#008751",
+      "tight": "#008751"
+    },
+    "trace": {
+      "x": 31,
+      "y": 11,
+      "source": "#698059",
+      "from": "#008751",
+      "to": "#5f574f",
+      "contrast": true,
+      "material": true,
+      "confidence": true,
+      "added": 0.008895507768074337,
+      "oldError": 0.006427129743774675,
+      "lightness": 0.5708560333195809,
+      "low": 0.4404638085708149,
+      "high": 0.49410291134336487,
+      "colorGap": 0.009475950985311316
+    }
+  },
+  {
+    "id": "s121",
+    "x": 16,
+    "y": 13,
+    "key": "preset-pico8-oklab-all",
+    "outputs": {
+      "nearest": "#008751",
+      "current": "#5f574f",
+      "contrast": "#008751",
+      "material": "#008751",
+      "confidence": "#008751",
+      "combined": "#008751",
+      "tight": "#008751"
+    },
+    "trace": {
+      "x": 16,
+      "y": 13,
+      "source": "#698059",
+      "from": "#008751",
+      "to": "#5f574f",
+      "contrast": true,
+      "material": true,
+      "confidence": true,
+      "added": 0.008895507768074337,
+      "oldError": 0.006427129743774675,
+      "lightness": 0.5708560333195809,
+      "low": 0.4404638085708149,
+      "high": 0.536148800805981,
+      "colorGap": 0.012788976037877174
+    }
+  },
+  {
+    "id": "s121",
+    "x": 16,
+    "y": 11,
+    "key": "preset-pico8-oklab-8",
+    "outputs": {
+      "nearest": "#008751",
+      "current": "#5f574f",
+      "contrast": "#008751",
+      "material": "#008751",
+      "confidence": "#008751",
+      "combined": "#008751",
+      "tight": "#008751"
+    },
+    "trace": {
+      "x": 16,
+      "y": 11,
+      "source": "#698059",
+      "from": "#008751",
+      "to": "#5f574f",
+      "contrast": true,
+      "material": true,
+      "confidence": true,
+      "added": 0.008895507768074337,
+      "oldError": 0.006427129743774675,
+      "lightness": 0.5708560333195809,
+      "low": 0.4404638085708149,
+      "high": 0.49410291134336487,
+      "colorGap": 0.009475950985311316
+    }
+  },
+  {
+    "id": "s121",
+    "x": 31,
+    "y": 11,
+    "key": "preset-pico8-oklab-8",
+    "outputs": {
+      "nearest": "#008751",
+      "current": "#5f574f",
+      "contrast": "#008751",
+      "material": "#008751",
+      "confidence": "#008751",
+      "combined": "#008751",
+      "tight": "#008751"
+    },
+    "trace": {
+      "x": 31,
+      "y": 11,
+      "source": "#698059",
+      "from": "#008751",
+      "to": "#5f574f",
+      "contrast": true,
+      "material": true,
+      "confidence": true,
+      "added": 0.008895507768074337,
+      "oldError": 0.006427129743774675,
+      "lightness": 0.5708560333195809,
+      "low": 0.4404638085708149,
+      "high": 0.49410291134336487,
+      "colorGap": 0.009475950985311316
+    }
+  },
+  {
+    "id": "s121",
+    "x": 16,
+    "y": 13,
+    "key": "preset-pico8-oklab-8",
+    "outputs": {
+      "nearest": "#008751",
+      "current": "#5f574f",
+      "contrast": "#008751",
+      "material": "#008751",
+      "confidence": "#008751",
+      "combined": "#008751",
+      "tight": "#008751"
+    },
+    "trace": {
+      "x": 16,
+      "y": 13,
+      "source": "#698059",
+      "from": "#008751",
+      "to": "#5f574f",
+      "contrast": true,
+      "material": true,
+      "confidence": true,
+      "added": 0.008895507768074337,
+      "oldError": 0.006427129743774675,
+      "lightness": 0.5708560333195809,
+      "low": 0.4404638085708149,
+      "high": 0.536148800805981,
+      "colorGap": 0.012788976037877174
+    }
+  },
+  {
+    "id": "s121",
+    "x": 16,
+    "y": 11,
+    "key": "preset-pico8-rgb-all",
+    "outputs": {
+      "nearest": "#5f574f",
+      "current": "#5f574f",
+      "contrast": "#5f574f",
+      "material": "#5f574f",
+      "confidence": "#5f574f",
+      "combined": "#5f574f",
+      "tight": "#5f574f"
+    }
+  },
+  {
+    "id": "s121",
+    "x": 31,
+    "y": 11,
+    "key": "preset-pico8-rgb-all",
+    "outputs": {
+      "nearest": "#5f574f",
+      "current": "#5f574f",
+      "contrast": "#5f574f",
+      "material": "#5f574f",
+      "confidence": "#5f574f",
+      "combined": "#5f574f",
+      "tight": "#5f574f"
+    }
+  },
+  {
+    "id": "s121",
+    "x": 16,
+    "y": 13,
+    "key": "preset-pico8-rgb-all",
+    "outputs": {
+      "nearest": "#5f574f",
+      "current": "#5f574f",
+      "contrast": "#5f574f",
+      "material": "#5f574f",
+      "confidence": "#5f574f",
+      "combined": "#5f574f",
+      "tight": "#5f574f"
+    }
+  },
+  {
+    "id": "s121",
+    "x": 16,
+    "y": 11,
+    "key": "preset-pico8-rgb-8",
+    "outputs": {
+      "nearest": "#5f574f",
+      "current": "#5f574f",
+      "contrast": "#5f574f",
+      "material": "#5f574f",
+      "confidence": "#5f574f",
+      "combined": "#5f574f",
+      "tight": "#5f574f"
+    }
+  },
+  {
+    "id": "s121",
+    "x": 31,
+    "y": 11,
+    "key": "preset-pico8-rgb-8",
+    "outputs": {
+      "nearest": "#5f574f",
+      "current": "#5f574f",
+      "contrast": "#5f574f",
+      "material": "#5f574f",
+      "confidence": "#5f574f",
+      "combined": "#5f574f",
+      "tight": "#5f574f"
+    }
+  },
+  {
+    "id": "s121",
+    "x": 16,
+    "y": 13,
+    "key": "preset-pico8-rgb-8",
+    "outputs": {
+      "nearest": "#5f574f",
+      "current": "#5f574f",
+      "contrast": "#5f574f",
+      "material": "#5f574f",
+      "confidence": "#5f574f",
+      "combined": "#5f574f",
+      "tight": "#5f574f"
+    }
+  },
+  {
+    "id": "s121",
+    "x": 16,
+    "y": 11,
+    "key": "preset-res64-oklab-all",
+    "outputs": {
+      "nearest": "#547e64",
+      "current": "#676633",
+      "contrast": "#547e64",
+      "material": "#547e64",
+      "confidence": "#547e64",
+      "combined": "#547e64",
+      "tight": "#676633"
+    },
+    "trace": {
+      "x": 16,
+      "y": 11,
+      "source": "#698059",
+      "from": "#547e64",
+      "to": "#676633",
+      "contrast": true,
+      "material": true,
+      "confidence": true,
+      "added": 0.005160649059116335,
+      "oldError": 0.0009354071935104176,
+      "lightness": 0.5708560333195809,
+      "low": 0.49410291134336487,
+      "high": 0.49410291134336487,
+      "colorGap": 0.0029125939736124183
+    }
+  },
+  {
+    "id": "s121",
+    "x": 31,
+    "y": 11,
+    "key": "preset-res64-oklab-all",
+    "outputs": {
+      "nearest": "#547e64",
+      "current": "#676633",
+      "contrast": "#547e64",
+      "material": "#547e64",
+      "confidence": "#547e64",
+      "combined": "#547e64",
+      "tight": "#676633"
+    },
+    "trace": {
+      "x": 31,
+      "y": 11,
+      "source": "#698059",
+      "from": "#547e64",
+      "to": "#676633",
+      "contrast": true,
+      "material": true,
+      "confidence": true,
+      "added": 0.005160649059116335,
+      "oldError": 0.0009354071935104176,
+      "lightness": 0.5708560333195809,
+      "low": 0.49410291134336487,
+      "high": 0.49410291134336487,
+      "colorGap": 0.0029125939736124183
+    }
+  },
+  {
+    "id": "s121",
+    "x": 16,
+    "y": 13,
+    "key": "preset-res64-oklab-all",
+    "outputs": {
+      "nearest": "#547e64",
+      "current": "#547e64",
+      "contrast": "#547e64",
+      "material": "#547e64",
+      "confidence": "#547e64",
+      "combined": "#547e64",
+      "tight": "#547e64"
+    }
+  },
+  {
+    "id": "s121",
+    "x": 16,
+    "y": 11,
+    "key": "preset-res64-oklab-8",
+    "outputs": {
+      "nearest": "#547e64",
+      "current": "#676633",
+      "contrast": "#547e64",
+      "material": "#547e64",
+      "confidence": "#547e64",
+      "combined": "#547e64",
+      "tight": "#676633"
+    },
+    "trace": {
+      "x": 16,
+      "y": 11,
+      "source": "#698059",
+      "from": "#547e64",
+      "to": "#676633",
+      "contrast": true,
+      "material": true,
+      "confidence": true,
+      "added": 0.005160649059116335,
+      "oldError": 0.0009354071935104176,
+      "lightness": 0.5708560333195809,
+      "low": 0.49410291134336487,
+      "high": 0.49410291134336487,
+      "colorGap": 0.0029125939736124183
+    }
+  },
+  {
+    "id": "s121",
+    "x": 31,
+    "y": 11,
+    "key": "preset-res64-oklab-8",
+    "outputs": {
+      "nearest": "#547e64",
+      "current": "#676633",
+      "contrast": "#547e64",
+      "material": "#547e64",
+      "confidence": "#547e64",
+      "combined": "#547e64",
+      "tight": "#676633"
+    },
+    "trace": {
+      "x": 31,
+      "y": 11,
+      "source": "#698059",
+      "from": "#547e64",
+      "to": "#676633",
+      "contrast": true,
+      "material": true,
+      "confidence": true,
+      "added": 0.005160649059116335,
+      "oldError": 0.0009354071935104176,
+      "lightness": 0.5708560333195809,
+      "low": 0.49410291134336487,
+      "high": 0.49410291134336487,
+      "colorGap": 0.0029125939736124183
+    }
+  },
+  {
+    "id": "s121",
+    "x": 16,
+    "y": 13,
+    "key": "preset-res64-oklab-8",
+    "outputs": {
+      "nearest": "#547e64",
+      "current": "#547e64",
+      "contrast": "#547e64",
+      "material": "#547e64",
+      "confidence": "#547e64",
+      "combined": "#547e64",
+      "tight": "#547e64"
+    }
+  },
+  {
+    "id": "s121",
+    "x": 16,
+    "y": 11,
+    "key": "preset-res64-rgb-all",
+    "outputs": {
+      "nearest": "#547e64",
+      "current": "#676633",
+      "contrast": "#547e64",
+      "material": "#547e64",
+      "confidence": "#547e64",
+      "combined": "#547e64",
+      "tight": "#676633"
+    },
+    "trace": {
+      "x": 16,
+      "y": 11,
+      "source": "#698059",
+      "from": "#547e64",
+      "to": "#676633",
+      "contrast": true,
+      "material": true,
+      "confidence": true,
+      "added": 0.005160649059116335,
+      "oldError": 0.0009354071935104176,
+      "lightness": 0.5708560333195809,
+      "low": 0.49410291134336487,
+      "high": 0.49410291134336487,
+      "colorGap": 0.0029125939736124183
+    }
+  },
+  {
+    "id": "s121",
+    "x": 31,
+    "y": 11,
+    "key": "preset-res64-rgb-all",
+    "outputs": {
+      "nearest": "#547e64",
+      "current": "#676633",
+      "contrast": "#547e64",
+      "material": "#547e64",
+      "confidence": "#547e64",
+      "combined": "#547e64",
+      "tight": "#676633"
+    },
+    "trace": {
+      "x": 31,
+      "y": 11,
+      "source": "#698059",
+      "from": "#547e64",
+      "to": "#676633",
+      "contrast": true,
+      "material": true,
+      "confidence": true,
+      "added": 0.005160649059116335,
+      "oldError": 0.0009354071935104176,
+      "lightness": 0.5708560333195809,
+      "low": 0.49410291134336487,
+      "high": 0.49410291134336487,
+      "colorGap": 0.0029125939736124183
+    }
+  },
+  {
+    "id": "s121",
+    "x": 16,
+    "y": 13,
+    "key": "preset-res64-rgb-all",
+    "outputs": {
+      "nearest": "#547e64",
+      "current": "#547e64",
+      "contrast": "#547e64",
+      "material": "#547e64",
+      "confidence": "#547e64",
+      "combined": "#547e64",
+      "tight": "#547e64"
+    }
+  },
+  {
+    "id": "s121",
+    "x": 16,
+    "y": 11,
+    "key": "preset-res64-rgb-8",
+    "outputs": {
+      "nearest": "#547e64",
+      "current": "#676633",
+      "contrast": "#547e64",
+      "material": "#547e64",
+      "confidence": "#547e64",
+      "combined": "#547e64",
+      "tight": "#676633"
+    },
+    "trace": {
+      "x": 16,
+      "y": 11,
+      "source": "#698059",
+      "from": "#547e64",
+      "to": "#676633",
+      "contrast": true,
+      "material": true,
+      "confidence": true,
+      "added": 0.005160649059116335,
+      "oldError": 0.0009354071935104176,
+      "lightness": 0.5708560333195809,
+      "low": 0.49410291134336487,
+      "high": 0.49410291134336487,
+      "colorGap": 0.0029125939736124183
+    }
+  },
+  {
+    "id": "s121",
+    "x": 31,
+    "y": 11,
+    "key": "preset-res64-rgb-8",
+    "outputs": {
+      "nearest": "#547e64",
+      "current": "#676633",
+      "contrast": "#547e64",
+      "material": "#547e64",
+      "confidence": "#547e64",
+      "combined": "#547e64",
+      "tight": "#676633"
+    },
+    "trace": {
+      "x": 31,
+      "y": 11,
+      "source": "#698059",
+      "from": "#547e64",
+      "to": "#676633",
+      "contrast": true,
+      "material": true,
+      "confidence": true,
+      "added": 0.005160649059116335,
+      "oldError": 0.0009354071935104176,
+      "lightness": 0.5708560333195809,
+      "low": 0.49410291134336487,
+      "high": 0.49410291134336487,
+      "colorGap": 0.0029125939736124183
+    }
+  },
+  {
+    "id": "s121",
+    "x": 16,
+    "y": 13,
+    "key": "preset-res64-rgb-8",
+    "outputs": {
+      "nearest": "#547e64",
+      "current": "#547e64",
+      "contrast": "#547e64",
+      "material": "#547e64",
+      "confidence": "#547e64",
+      "combined": "#547e64",
+      "tight": "#547e64"
+    }
+  },
+  {
+    "id": "sprite",
+    "x": 26,
+    "y": 22,
+    "key": "preset-pico8-oklab-all",
+    "outputs": {
+      "nearest": "#1d2b53",
+      "current": "#000000",
+      "contrast": "#1d2b53",
+      "material": "#000000",
+      "confidence": "#1d2b53",
+      "combined": "#1d2b53",
+      "tight": "#1d2b53"
+    },
+    "trace": {
+      "x": 26,
+      "y": 22,
+      "source": "#053452",
+      "from": "#1d2b53",
+      "to": "#000000",
+      "contrast": true,
+      "material": false,
+      "confidence": true,
+      "added": 0.10166162693384392,
+      "oldError": 0.001103232394457775,
+      "lightness": 0.31249460574343096,
+      "low": 0.11384773619605458,
+      "high": 0.1233025176879627,
+      "colorGap": 0.06311299025812805
+    }
+  },
+  {
+    "id": "sprite",
+    "x": 18,
+    "y": 25,
+    "key": "preset-pico8-oklab-all",
+    "outputs": {
+      "nearest": "#c2c3c7",
+      "current": "#83769c",
+      "contrast": "#c2c3c7",
+      "material": "#c2c3c7",
+      "confidence": "#c2c3c7",
+      "combined": "#c2c3c7",
+      "tight": "#c2c3c7"
+    },
+    "trace": {
+      "x": 18,
+      "y": 25,
+      "source": "#a7a4a0",
+      "from": "#c2c3c7",
+      "to": "#83769c",
+      "contrast": true,
+      "material": true,
+      "confidence": true,
+      "added": 0.010909430054389258,
+      "oldError": 0.0096695930618945,
+      "lightness": 0.7200081920747261,
+      "low": 0.6215599564315214,
+      "high": 0.6215599564315214,
+      "colorGap": 0.03857262811445866
+    }
+  },
+  {
+    "id": "sprite",
+    "x": 26,
+    "y": 22,
+    "key": "preset-pico8-oklab-8",
+    "outputs": {
+      "nearest": "#1d2b53",
+      "current": "#000000",
+      "contrast": "#1d2b53",
+      "material": "#000000",
+      "confidence": "#1d2b53",
+      "combined": "#1d2b53",
+      "tight": "#1d2b53"
+    },
+    "trace": {
+      "x": 26,
+      "y": 22,
+      "source": "#053452",
+      "from": "#1d2b53",
+      "to": "#000000",
+      "contrast": true,
+      "material": false,
+      "confidence": true,
+      "added": 0.10166162693384392,
+      "oldError": 0.001103232394457775,
+      "lightness": 0.31249460574343096,
+      "low": 0.11384773619605458,
+      "high": 0.1233025176879627,
+      "colorGap": 0.06311299025812805
+    }
+  },
+  {
+    "id": "sprite",
+    "x": 18,
+    "y": 25,
+    "key": "preset-pico8-oklab-8",
+    "outputs": {
+      "nearest": "#c2c3c7",
+      "current": "#83769c",
+      "contrast": "#c2c3c7",
+      "material": "#c2c3c7",
+      "confidence": "#c2c3c7",
+      "combined": "#c2c3c7",
+      "tight": "#c2c3c7"
+    },
+    "trace": {
+      "x": 18,
+      "y": 25,
+      "source": "#a7a4a0",
+      "from": "#c2c3c7",
+      "to": "#83769c",
+      "contrast": true,
+      "material": true,
+      "confidence": true,
+      "added": 0.010909430054389258,
+      "oldError": 0.0096695930618945,
+      "lightness": 0.7200081920747261,
+      "low": 0.6215599564315214,
+      "high": 0.6215599564315214,
+      "colorGap": 0.03857262811445866
+    }
+  },
+  {
+    "id": "sprite",
+    "x": 26,
+    "y": 22,
+    "key": "preset-pico8-rgb-all",
+    "outputs": {
+      "nearest": "#1d2b53",
+      "current": "#000000",
+      "contrast": "#1d2b53",
+      "material": "#000000",
+      "confidence": "#1d2b53",
+      "combined": "#1d2b53",
+      "tight": "#1d2b53"
+    },
+    "trace": {
+      "x": 26,
+      "y": 22,
+      "source": "#053452",
+      "from": "#1d2b53",
+      "to": "#000000",
+      "contrast": true,
+      "material": false,
+      "confidence": true,
+      "added": 0.10166162693384392,
+      "oldError": 0.001103232394457775,
+      "lightness": 0.31249460574343096,
+      "low": 0.11384773619605458,
+      "high": 0.1233025176879627,
+      "colorGap": 0.06311299025812805
+    }
+  },
+  {
+    "id": "sprite",
+    "x": 18,
+    "y": 25,
+    "key": "preset-pico8-rgb-all",
+    "outputs": {
+      "nearest": "#c2c3c7",
+      "current": "#83769c",
+      "contrast": "#c2c3c7",
+      "material": "#c2c3c7",
+      "confidence": "#c2c3c7",
+      "combined": "#c2c3c7",
+      "tight": "#c2c3c7"
+    },
+    "trace": {
+      "x": 18,
+      "y": 25,
+      "source": "#a7a4a0",
+      "from": "#c2c3c7",
+      "to": "#83769c",
+      "contrast": true,
+      "material": true,
+      "confidence": true,
+      "added": 0.010909430054389258,
+      "oldError": 0.0096695930618945,
+      "lightness": 0.7200081920747261,
+      "low": 0.6215599564315214,
+      "high": 0.6215599564315214,
+      "colorGap": 0.03857262811445866
+    }
+  },
+  {
+    "id": "sprite",
+    "x": 26,
+    "y": 22,
+    "key": "preset-pico8-rgb-8",
+    "outputs": {
+      "nearest": "#000000",
+      "current": "#000000",
+      "contrast": "#000000",
+      "material": "#000000",
+      "confidence": "#000000",
+      "combined": "#000000",
+      "tight": "#000000"
+    }
+  },
+  {
+    "id": "sprite",
+    "x": 18,
+    "y": 25,
+    "key": "preset-pico8-rgb-8",
+    "outputs": {
+      "nearest": "#c2c3c7",
+      "current": "#83769c",
+      "contrast": "#c2c3c7",
+      "material": "#c2c3c7",
+      "confidence": "#c2c3c7",
+      "combined": "#c2c3c7",
+      "tight": "#c2c3c7"
+    },
+    "trace": {
+      "x": 18,
+      "y": 25,
+      "source": "#a7a4a0",
+      "from": "#c2c3c7",
+      "to": "#83769c",
+      "contrast": true,
+      "material": true,
+      "confidence": true,
+      "added": 0.010909430054389258,
+      "oldError": 0.0096695930618945,
+      "lightness": 0.7200081920747261,
+      "low": 0.6215599564315214,
+      "high": 0.6215599564315214,
+      "colorGap": 0.03857262811445866
+    }
+  },
+  {
+    "id": "sprite",
+    "x": 26,
+    "y": 22,
+    "key": "preset-res64-oklab-all",
+    "outputs": {
+      "nearest": "#323353",
+      "current": "#2e222f",
+      "contrast": "#323353",
+      "material": "#2e222f",
+      "confidence": "#323353",
+      "combined": "#323353",
+      "tight": "#323353"
+    },
+    "trace": {
+      "x": 26,
+      "y": 22,
+      "source": "#053452",
+      "from": "#323353",
+      "to": "#2e222f",
+      "contrast": true,
+      "material": false,
+      "confidence": true,
+      "added": 0.0044524944176771945,
+      "oldError": 0.0024988187819764136,
+      "lightness": 0.31249460574343096,
+      "low": 0.11384773619605458,
+      "high": 0.1233025176879627,
+      "colorGap": 0.06311299025812805
+    }
+  },
+  {
+    "id": "sprite",
+    "x": 18,
+    "y": 25,
+    "key": "preset-res64-oklab-all",
+    "outputs": {
+      "nearest": "#9babb2",
+      "current": "#9babb2",
+      "contrast": "#9babb2",
+      "material": "#9babb2",
+      "confidence": "#9babb2",
+      "combined": "#9babb2",
+      "tight": "#9babb2"
+    }
+  },
+  {
+    "id": "sprite",
+    "x": 26,
+    "y": 22,
+    "key": "preset-res64-oklab-8",
+    "outputs": {
+      "nearest": "#2e222f",
+      "current": "#2e222f",
+      "contrast": "#2e222f",
+      "material": "#2e222f",
+      "confidence": "#2e222f",
+      "combined": "#2e222f",
+      "tight": "#2e222f"
+    }
+  },
+  {
+    "id": "sprite",
+    "x": 18,
+    "y": 25,
+    "key": "preset-res64-oklab-8",
+    "outputs": {
+      "nearest": "#b2ba90",
+      "current": "#7f708a",
+      "contrast": "#b2ba90",
+      "material": "#b2ba90",
+      "confidence": "#b2ba90",
+      "combined": "#b2ba90",
+      "tight": "#b2ba90"
+    },
+    "trace": {
+      "x": 18,
+      "y": 25,
+      "source": "#a7a4a0",
+      "from": "#b2ba90",
+      "to": "#7f708a",
+      "contrast": true,
+      "material": true,
+      "confidence": true,
+      "added": 0.019782044531667736,
+      "oldError": 0.0054996818258671466,
+      "lightness": 0.7200081920747261,
+      "low": 0.6215599564315214,
+      "high": 0.6215599564315214,
+      "colorGap": 0.03857262811445866
+    }
+  },
+  {
+    "id": "sprite",
+    "x": 26,
+    "y": 22,
+    "key": "preset-res64-rgb-all",
+    "outputs": {
+      "nearest": "#165a4c",
+      "current": "#2e222f",
+      "contrast": "#165a4c",
+      "material": "#2e222f",
+      "confidence": "#2e222f",
+      "combined": "#165a4c",
+      "tight": "#165a4c"
+    },
+    "trace": {
+      "x": 26,
+      "y": 22,
+      "source": "#053452",
+      "from": "#165a4c",
+      "to": "#2e222f",
+      "contrast": true,
+      "material": false,
+      "confidence": false,
+      "added": -0.011250862274061267,
+      "oldError": 0.018202175473714874,
+      "lightness": 0.31249460574343096,
+      "low": 0.11384773619605458,
+      "high": 0.1233025176879627,
+      "colorGap": 0.06311299025812805
+    }
+  },
+  {
+    "id": "sprite",
+    "x": 18,
+    "y": 25,
+    "key": "preset-res64-rgb-all",
+    "outputs": {
+      "nearest": "#9babb2",
+      "current": "#ab947a",
+      "contrast": "#9babb2",
+      "material": "#9babb2",
+      "confidence": "#9babb2",
+      "combined": "#9babb2",
+      "tight": "#9babb2"
+    },
+    "trace": {
+      "x": 18,
+      "y": 25,
+      "source": "#a7a4a0",
+      "from": "#9babb2",
+      "to": "#ab947a",
+      "contrast": true,
+      "material": true,
+      "confidence": true,
+      "added": 0.0022810644651801316,
+      "oldError": 0.0008305081440430665,
+      "lightness": 0.7200081920747261,
+      "low": 0.6215599564315214,
+      "high": 0.6215599564315214,
+      "colorGap": 0.03857262811445866
+    }
+  },
+  {
+    "id": "sprite",
+    "x": 26,
+    "y": 22,
+    "key": "preset-res64-rgb-8",
+    "outputs": {
+      "nearest": "#2e222f",
+      "current": "#2e222f",
+      "contrast": "#2e222f",
+      "material": "#2e222f",
+      "confidence": "#2e222f",
+      "combined": "#2e222f",
+      "tight": "#2e222f"
+    }
+  },
+  {
+    "id": "sprite",
+    "x": 18,
+    "y": 25,
+    "key": "preset-res64-rgb-8",
+    "outputs": {
+      "nearest": "#7f708a",
+      "current": "#7f708a",
+      "contrast": "#7f708a",
+      "material": "#7f708a",
+      "confidence": "#7f708a",
+      "combined": "#7f708a",
+      "tight": "#7f708a"
+    }
+  }
+]

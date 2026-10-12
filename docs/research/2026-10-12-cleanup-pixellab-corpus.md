@@ -6,6 +6,10 @@ Cleanup reliably reduces isolated palette colors in stills. It is much less effe
 on moving animations, and fewer isolated colors does not reliably mean better art.
 Keep it optional and Off by default. No algorithm or default was changed by this study.
 
+Follow-up: [candidate safeguards and independent challenge](2026-10-12-cleanup-safeguards.md)
+revisit the mixed/worse cases and also question a previously "cleaner" roof example.
+The visual categories below are historical unblinded ratings, not artistic ground truth.
+
 ## Sample and checks
 
 The supplied `pixellab-pip-generations` folder contains 38,886 PNG/GIF/WebP paths across

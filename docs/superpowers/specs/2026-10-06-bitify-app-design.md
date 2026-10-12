@@ -1892,8 +1892,11 @@ state. Selecting/altering colors or conversion settings reveals converted output
 Max colors is an additive integer preference: 0 means All (default), otherwise 2–256.
 Cleanup is an independent boolean preference, false/Off by default. On merges isolated
 one-pixel palette regions using frozen nearest labels, bounded Oklab contact/error
-gates and mutually agreed isolated pairs. It is deliberately lossy: eyes/highlights and
-exact matches can change. It never fills transparency or introduces a color outside the
+gates and mutually agreed isolated pairs. A final veto after frozen winner selection
+preserves exact RGB matches in the active palette/subset and permits added squared
+Oklab error only up to min(0.005, 0.5 * original squared error + 0.0004), including when
+Matching is RGB. It does not retry another target after a veto. It remains deliberately
+lossy: ambiguous eyes/highlights can change. It never fills transparency or introduces a color outside the
 selected palette/subset. GIFs require all frames to agree at each changed coordinate on
 both the baseline label and the proposed label. Full-source preparation is shared by
 sampled previews and full exports, including first-frame PNG Copy and optimized dragging.

@@ -51,6 +51,11 @@ function reference(source, colors, base) {
     if (!small[target]) out[p] = chosen;
     else if (p < target && choices[target]?.target === p && choices[target].chosen === chosen) out[p] = out[target] = chosen;
   }
+  for (let p = 0; p < n; p++) if (out[p] !== base[p]) {
+    const P = vector(p), hex = '#' + Array.from(source.data.slice(p * 4, p * 4 + 3), n => n.toString(16).padStart(2, '0')).join('');
+    const originalError = d2(P, palette[base[p]]), addedError = d2(P, palette[out[p]]) - originalError;
+    if (colors.includes(hex) || addedError > Math.min(.005, .5 * originalError + .0004)) out[p] = base[p];
+  }
   return out;
 }
 async function cleaned(source, colors = pico, metric = 'oklab', alphaCut = 128) {
@@ -79,6 +84,10 @@ describe('optional one-pixel palette cleanup', () => {
       const used = new Set(result.indices); used.delete(256);
       expect([...result.used].reduce((sum, value) => sum + value, 0)).toBe(used.size);
       for (let i = 0; i < base.indices.length; i++) expect(result.indices[i] === 256).toBe(base.indices[i] === 256);
+      for (let p = 0; p < base.indices.length; p++) if (result.indices[p] !== base.indices[p]) {
+        const P = lab(Array.from(source.data.slice(p * 4, p * 4 + 3))), old = lab(rgba(colors[base.indices[p]]).slice(0, 3)), next = lab(rgba(colors[result.indices[p]]).slice(0, 3));
+        expect(d2(P, next) - d2(P, old)).toBeLessThanOrEqual(Math.min(.005, .5 * d2(P, old) + .0004) + 1e-12);
+      }
       expect([...used].every(k => k >= 0 && k < colors.length)).toBe(true);
     }
   });
@@ -95,15 +104,27 @@ describe('optional one-pixel palette cleanup', () => {
     }
   });
 
-  it('keeps connected lines and rejects contrasting source contacts while deliberately losing an isolated eye', async () => {
+  it('keeps connected lines and preserves the high-cost isolated blue eye', async () => {
     const background = '#07050c', eye = '#053452';
     const source = image(Array(25).fill(background), 5, 5); source.data.set(rgba(eye), 12 * 4);
     const base = quantize(source, pico), result = await cleaned(source);
-    expect(base.indices[12]).toBe(1); expect(result.indices[12]).toBe(0);
+    expect(base.indices[12]).toBe(1); expect(result.indices[12]).toBe(1);
     source.data.set(rgba(eye), 13 * 4);
     expect((await cleaned(source)).indices).toEqual(quantize(source, pico).indices);
     source.data.set(rgba('#ffffff'), 12 * 4); source.data.set(rgba(background), 13 * 4);
     expect((await cleaned(source)).indices[12]).toBe(7);
+  });
+
+  it.each(['oklab', 'rgb'])('protects exact active-palette colors even when they are isolated under %s', async metric => {
+    const colors = ['#646464', '#666565'], source = image(Array(25).fill(colors[0]), 5, 5); source.data.set(rgba(colors[1]), 12 * 4);
+    expect((await cleaned(source, colors, metric)).indices).toEqual(quantize(source, colors, 128, undefined, undefined, { metric }).indices);
+  });
+
+  it('still removes low-cost palette-boundary noise without claiming to detect intent', async () => {
+    const source = image(Array(25).fill('#000000'), 5, 5); source.data.set(rgba('#080c16'), 12 * 4);
+    expect(quantize(source, pico).indices[12]).toBe(1);
+    expect((await cleaned(source)).indices[12]).toBe(0);
+    // Identical bytes could be an intentional dot; Off preserves nearest output.
   });
 
   it('never invents a third palette color or exceeds an already selected subset', async () => {
@@ -115,7 +136,7 @@ describe('optional one-pixel palette cleanup', () => {
   });
 
   it('uses identical full-source decisions in reduced preview samples and rebuilds export metadata', async () => {
-    const source = image(Array(77).fill('#07050c'), 11, 7); source.data.set(rgba('#053452'), (3 * 11 + 5) * 4); source.data[0 + 3] = 0;
+    const source = image(Array(77).fill('#000000'), 11, 7); source.data.set(rgba('#080c16'), (3 * 11 + 5) * 4); source.data[0 + 3] = 0;
     const cleanup = await prepareCleanupAsync([source], preparePalette(pico)), full = applyCleanup(quantize(source, pico), cleanup);
     const sampled = applyCleanup(quantize(source, pico, 128, 4, 3), cleanup.replacements, cleanup.width, cleanup.height);
     for (let y = 0; y < sampled.h; y++) for (let x = 0; x < sampled.w; x++) expect(sampled.indices[y * sampled.w + x]).toBe(full.indices[Math.floor((y + .5) * 7 / 3) * 11 + Math.floor((x + .5) * 11 / 4)]);
@@ -124,7 +145,7 @@ describe('optional one-pixel palette cleanup', () => {
   });
 
   it('allows stationary cleanup only when every frame baseline AND proposed label agree', async () => {
-    const background = '#07050c', dot = '#053452', frame = image(Array(15).fill(background), 5, 3); frame.data.set(rgba(dot), 7 * 4);
+    const background = '#000000', dot = '#080c16', frame = image(Array(15).fill(background), 5, 3); frame.data.set(rgba(dot), 7 * 4);
     const stable = await prepareCleanupAsync([frame, frame, frame], pico);
     expect(stable.replacements[7]).toBe(0);
     const moved = { ...frame, data: frame.data.slice() }; moved.data.set(rgba(background), 7 * 4); moved.data.set(rgba(dot), 8 * 4);
@@ -138,7 +159,7 @@ describe('optional one-pixel palette cleanup', () => {
   });
 
   it('keeps loop-edge frame disagreements and transparency changes unchanged', async () => {
-    const a = image(['#07050c', '#07050c', '#053452', '#07050c', '#07050c']), b = { ...a, data: a.data.slice() }; b.data[2 * 4 + 3] = 0;
+    const a = image(['#000000', '#000000', '#080c16', '#000000', '#000000']), b = { ...a, data: a.data.slice() }; b.data[2 * 4 + 3] = 0;
     const prepared = await prepareCleanupAsync([a, a, b], pico);
     expect(prepared.replacements[2]).toBe(256);
     const empty = applyCleanup(quantize(b, pico), prepared); expect(empty.indices[2]).toBe(256); expect(empty.hasTransparency).toBe(true);
@@ -146,7 +167,7 @@ describe('optional one-pixel palette cleanup', () => {
   });
 
   it('incremental sequential frames agree with whole-array preparation without retaining caller buffers', async () => {
-    const source = image(['#07050c', '#07050c', '#053452', '#07050c', '#07050c']), accumulator = createCleanupAccumulator(preparePalette(pico));
+    const source = image(['#000000', '#000000', '#080c16', '#000000', '#000000']), accumulator = createCleanupAccumulator(preparePalette(pico));
     await accumulator.addSource(source); await accumulator.addSource(source);
     const expected = await prepareCleanupAsync([source, source], pico);
     expect(accumulator.finish()).toEqual(expected);
@@ -155,7 +176,7 @@ describe('optional one-pixel palette cleanup', () => {
   });
 
   it('async export overlay agrees with preview sampling and cancels without returning a partial result', async () => {
-    const source = image(Array.from({ length: 30000 }, (_, n) => n % 19 ? '#07050c' : '#053452'), 200, 150);
+    const source = image(Array.from({ length: 30000 }, (_, n) => n % 19 ? '#000000' : '#080c16'), 200, 150);
     const prepared = await prepareCleanupAsync([source], pico);
     const expected = applyCleanup(quantize(source, pico, 128, 133, 79), prepared);
     expect(await applyCleanupAsync(quantize(source, pico, 128, 133, 79), prepared)).toEqual(expected);

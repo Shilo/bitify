@@ -1,5 +1,10 @@
 # Optional one-pixel palette cleanup
 
+Implementation follow-up: [safer Cleanup final decision](2026-10-12-cleanup-final-decision.md)
+adds exact selected-palette color protection and a capped relative color-error veto.
+This report retains the original stronger algorithm's measurements as history;
+its detail-loss and exact-color-change results do not describe the revised rule.
+
 Date: October 12, 2026. Scope: the supplied 29×41 AI sprite, six building sprites,
 PICO-8 and the supplied shared 255-color palette, plus deliberate-detail and animation
 counterexamples. Cleanup is an optional palette effect, Off by default. It does not
@@ -184,3 +189,9 @@ quantizer arrays, cached maps, runtime GC and export buffers are additional memo
 - [Temporal consistency research](https://arxiv.org/abs/1808.00449)
 - [Earlier shared-palette research](2026-10-11-shared-palette.md)
 - [Matching decision](2026-10-11-palette-matching.md)
+## Follow-up safeguard research
+
+The [candidate comparison study](2026-10-12-cleanup-safeguards.md) tests narrower
+color-error and source-consistency rules on the corpus, original sprite and annotated
+controls. It finds a useful conservative tradeoff, but no demonstrated replacement
+that preserves intended details while fixing both original defects. Production is unchanged.

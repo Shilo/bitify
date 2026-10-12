@@ -3,6 +3,9 @@ import { preparePalette, quantizeAsync, checkCanceled, yieldTask, validateMatchi
 // A deliberately lossy, single pass over frozen nearest labels. Source contacts
 // and error safeguards stay in Oklab even when nearest matching uses RGB.
 const CONTACT_LIMIT = .22 ** 2, ERROR_LIMIT = .35 ** 2, TIE = 1e-10;
+// Final veto of the frozen proposal: constrain color distortion independently
+// of palette size or matching mode, and retain exact active-palette source RGB.
+const EXTRA_ERROR_LIMIT = .005, RELATIVE_ERROR = .5, ERROR_FLOOR = .0004;
 const linear = Float64Array.from({ length: 256 }, (_, n) => { const v = n / 255; return v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; });
 function lab(r, g, b, values, offset) {
   const l = Math.cbrt(.4122214708 * r + .5363325363 * g + .0514459929 * b);
@@ -36,7 +39,7 @@ async function batches(length, run, signal) {
   checkCanceled(signal);
 }
 
-async function proposals(source, base, paletteVectors, signal) {
+async function proposals(source, base, paletteVectors, paletteRgb, signal) {
   const { width: w, height: h, length } = dimensions(source), { data } = source;
   const small = new Uint8Array(length), targets = new Int32Array(length).fill(-1), labels = new Uint16Array(length).fill(EMPTY_INDEX);
   const neighbors = new Int32Array(8), neighborLabels = new Uint16Array(8), contacts = new Float64Array(8), vectors = new Float64Array(6);
@@ -106,6 +109,17 @@ async function proposals(source, base, paletteVectors, signal) {
       else if (p < q && targets[q] === p && labels[p] === labels[q]) proposed[p] = proposed[q] = labels[p];
     }
   }, signal);
+  await batches(length, (start, end) => {
+    for (let p = start; p < end; p++) {
+      const own = base[p], chosen = proposed[p]; if (chosen === own) continue;
+      const at = p * 4, rgb = data[at] * 65536 + data[at + 1] * 256 + data[at + 2];
+      if (rgb === paletteRgb[own]) { proposed[p] = own; continue; }
+      vector(p, 0);
+      const originalError = distance(vectors, 0, paletteVectors, own * 3);
+      const addedError = distance(vectors, 0, paletteVectors, chosen * 3) - originalError;
+      if (addedError > Math.min(EXTRA_ERROR_LIMIT, RELATIVE_ERROR * originalError + ERROR_FLOOR)) proposed[p] = own;
+    }
+  }, signal);
   return proposed;
 }
 
@@ -114,9 +128,10 @@ async function proposals(source, base, paletteVectors, signal) {
 export function createCleanupAccumulator(palette, alphaCut = 128, metric = 'oklab', { signal } = {}) {
   checkCanceled(signal); validateMatchingMetric(metric);
   if (!Number.isInteger(alphaCut) || alphaCut < 1 || alphaCut > 255) throw new Error('Opacity cut must be between 1 and 255.');
-  const prepared = preparePalette(palette?.colors ?? palette), paletteVectors = new Float64Array(prepared.size * 3);
+  const prepared = preparePalette(palette?.colors ?? palette), paletteVectors = new Float64Array(prepared.size * 3), paletteRgb = new Uint32Array(prepared.size);
   for (let i = 0; i < prepared.size; i++) {
     const value = parseInt(prepared.colors[i].slice(1), 16);
+    paletteRgb[i] = value;
     lab(linear[value >>> 16], linear[value >>> 8 & 255], linear[value & 255], paletteVectors, i * 3);
   }
   let width, height, firstBase, replacements, surviving = 0, busy = false, finished = false;
@@ -130,7 +145,7 @@ export function createCleanupAccumulator(palette, alphaCut = 128, metric = 'okla
       try {
         if (firstBase && !surviving) return;
         const { indices: base } = await quantizeAsync(source, prepared, alphaCut, undefined, undefined, { signal, metric });
-        const proposed = await proposals(source, base, paletteVectors, signal);
+        const proposed = await proposals(source, base, paletteVectors, paletteRgb, signal);
         if (!firstBase) {
           width = shape.width; height = shape.height; firstBase = base; replacements = proposed;
           await batches(base.length, (start, end) => {

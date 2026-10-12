@@ -196,7 +196,8 @@ Optional palette methods deserve a separate visual comparison before implementat
 ### One shared palette for several images
 
 Select or import a palette once; it applies to every image on the wall. A visible pixel
-keeps its RGB if that color is already in the selected palette and Cleanup is Off. Otherwise, the nearest stage checks
+keeps its RGB if that color is already in the active palette or selected Max colors
+subset, including with Cleanup On. Otherwise, the nearest stage checks
 every palette entry and chooses the closest using the selected matching rule. **Oklab**
 approximates perceived color differences; **RGB** minimizes squared differences between
 encoded sRGB channel values (0–255), without channel weighting or brightness adjustment.
@@ -232,11 +233,15 @@ the Opacity cut decides whether partially transparent pixels become empty or opa
 
 **Cleanup: Off / On** optionally merges isolated palette-colored pixels with compatible
 neighbors. Off is the default and keeps ordinary nearest output. On can remove deliberate
-eyes/highlights, change exact matches, and map the same source RGB differently depending
+eyes/highlights and map the same source RGB differently depending
 on its surroundings. It never adds a color outside the selected palette/subset or changes
 transparency. Cleanup uses full-source decisions for previews, Save, Copy, ZIP and export
 dragging. GIFs apply a change at a coordinate only when every frame agrees on both the
 original nearest color and the proposed replacement. Moving noise can therefore remain.
+On preserves exact RGB matches in the active palette/subset. A final veto limits added
+squared Oklab error to the smaller of 0.005 and half the original matching error plus
+0.0004. The fixed ceiling also applies with RGB matching and smaller Max colors subsets.
+This reduces expensive color changes; it cannot identify every intentional detail.
 Read the [research and detail-loss limits](research/2026-10-12-one-pixel-cleanup.md) before
 using it for small sprites.
 
