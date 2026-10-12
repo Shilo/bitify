@@ -216,7 +216,7 @@
   function restoreLimitDrafts() {
     limitPause.cancel();
     limitNumber = visibleLimit ? String(visibleLimit) : '';
-    limitRange = Math.min(maxColors || lastMaxColors, limitMax);
+    limitRange = maxColors ? visibleLimit : limitMax;
     numberDirty = false;
     numberPalette = null;
   }

@@ -324,7 +324,8 @@ try {
   await page.getByRole('button',{name:'Use all palette colors',exact:true}).click();
   for (const [name,size] of [['Paper',2],['Resurrect 64',64]]) {
     await limitPalette(name,size); assert.equal(await maximum.inputValue(),'');
-    assert.equal(await limitRange.inputValue(),String(Math.min(3,size)));
+    assert.equal(await limitRange.inputValue(),String(size));
+    assert.equal(await maximum.getAttribute('placeholder'),String(size));
     assert.equal((await stored()).maxColors,0); assert.equal((await stored()).lastMaxColors,3);
   }
   await page.getByRole('button',{name:'Reset palette settings',exact:true}).click();

@@ -213,8 +213,8 @@ palettes. Switching palettes or leaving an untouched field does not change the p
 editing the limit does. Unfinished edits are discarded when the palette changes.
 Slider changes apply after a 200ms pause or immediately on release; number changes apply
 when you finish editing. The previous preview stays visible during recalculation.
-**All** shows the active palette's color count as the number field's placeholder. It removes
-the limit and stays distinct
+**All** places the slider at the active palette's maximum and shows that color count as
+the number field's placeholder. It removes the limit and stays distinct
 from a numeric limit equal to the palette's size. A one-color palette uses its sole color
 and disables both limit inputs. Two-color palettes disable the immovable slider, while
 the number can select 2. Previous saved limits of 1 restore as 2; All remains unchanged.

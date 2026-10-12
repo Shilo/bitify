@@ -1888,14 +1888,16 @@ HSL/HSV, CMYK, additional perceptual metrics and dithering are excluded pending 
 benefit; see docs/research/2026-10-11-palette-matching.md. Switching families retains the other family's
 state. Selecting/altering colors or conversion settings reveals converted output.
 
-Max colors is an additive integer preference: 0 means All (default), otherwise 1–256.
+Max colors is an additive integer preference: 0 means All (default), otherwise 2–256.
 All and limits at least the palette size return the original prepared palette immediately;
 they do not load the limiter or change nearest matching. The control is one row with a
 slider, exact integer field and pressed All button, following the existing tolerance/Auto
-pattern. All displays an empty field with a dash placeholder; moving the slider or
-committing a valid integer enables the limit. Range drags commit on change, not every
-pointer movement. Invalid, fractional or out-of-range numbers restore the applied value;
-an empty committed field selects All. The slider remembers its last limit (initially 16).
+pattern. All displays an empty field with the palette color count as its placeholder and
+places the slider thumb at that maximum. Moving the slider or committing a valid integer
+enables the limit. Range drags commit after a 200ms pause or on release/change.
+Invalid, fractional or out-of-range numbers restore the applied value;
+an empty committed field selects All. The last limit remains stored (initially 16),
+but does not determine the thumb position while All is selected.
 All/Reset pointer presses prevent premature field-blur conversion but apply only on click.
 Number and All targets are 44px square, including the field border allowance.
 
@@ -2157,7 +2159,7 @@ color treatment. They show an icon and Reset text above 520px wide, or a 44px ic
 button at 520px and below, retaining complete accessible names and tooltips.
 Their numeric display is the lesser of the requested maximum and that count; All retains
 an empty number value with the palette's color count as its placeholder, and a slider thumb
-bounded from `lastMaxColors`. Neither palette selection,
+at that palette's maximum. `lastMaxColors` remains stored independently. Neither palette selection,
 palette editing nor blurring an untouched number changes the stored global preference.
 A larger palette restores its remembered value. Slider moves update the preference after
 200ms without another move, or immediately on release/change. Pending moves are canceled
