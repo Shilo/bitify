@@ -235,3 +235,20 @@ Validation after the fixes:
 Physical phones, Safari, and native Explorer/Discord drops from Chrome/Edge remain
 unverified; the user chose Brave for manual native tests. Automated trusted source-byte
 checks do not claim to automate those destinations. No Discord messages were sent.
+
+## Final manual acceptance (October 11, 2026)
+
+The user confirmed the integrated app works properly in Brave on Windows for all eight
+combinations below, using both PNG and animated GIF exports:
+
+| Image surface | Format | Discord | File Explorer |
+| --- | --- | --- | --- |
+| Main wall | PNG | Accepted | Accepted |
+| Main wall | GIF | Accepted | Accepted |
+| Fullscreen Preview | PNG | Accepted | Accepted |
+| Fullscreen Preview | GIF | Accepted | Accepted |
+
+This is user-reported native destination acceptance. No new received-file hash logs
+were supplied with this confirmation; the automated same-session native/DownloadURL/Save
+byte comparisons above remain the recorded export-identity evidence. Chrome/Edge native
+destination acceptance and physical mobile-device testing remain outside this confirmation.
