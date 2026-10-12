@@ -8,8 +8,7 @@
   import { wheelSteps } from './lib/gesture.js';
   import { on } from 'svelte/events';
   import { tick, untrack } from 'svelte';
-  import { createExportDrag, exportFingerprint, isMobileExportDevice } from './lib/export-drag.js';
-  import DragExportProbe from './DragExportProbe.svelte';
+  import { createExportDrag, isMobileExportDevice } from './lib/export-drag.js';
   import { imageGesture } from './lib/image-gesture.js';
   import { hasImageDrop, droppedImages, fetchDroppedImage } from './lib/image-drop.js';
   import CanvasGrid from './CanvasGrid.svelte';
@@ -29,14 +28,6 @@
   const storageKey = 'bitify';
   const touch = matchMedia('(pointer:coarse)').matches;
   const dragDesktop = matchMedia('(hover: hover) and (pointer: fine)').matches && !isMobileExportDevice();
-  const dragPrototype = dragDesktop && new URLSearchParams(location.search).get('dragExport') === '1';
-  let dragStatus = $state({ state: 'idle', name: '' });
-  let dragMode = $state('native');
-  let dragLogs = $state([]);
-  function dragLog(event, detail = {}) {
-    if (!dragPrototype) return;
-    dragLogs = [...dragLogs.slice(-249), { at: new Date().toISOString(), event, ...detail }];
-  }
   const mod = /Mac/.test(navigator.platform) ? '⌘' : 'Ctrl'; // the key the help names for pasting and copying
 
   // The colors, the style and every style's settings are kept between visits. A browser can refuse storage
@@ -608,10 +599,9 @@
       const name = downloadName(image).replace(/[<>:"/\\|?*\x00-\x1f]/g, '-');
       const type = image.frames || image.getFrame ? 'image/gif' : 'image/png';
       const file = new File([bytes], name, { type });
-      const sha256 = dragPrototype ? await exportFingerprint(file) : undefined;
-      return { file, sha256, width: image.w, height: image.h, url: URL.createObjectURL(file) };
+      return { file, width: image.w, height: image.h, url: URL.createObjectURL(file) };
     },
-    notify: say, changed: value => (dragStatus = value), log: dragLog,
+    notify: say,
   }) : null;
   $effect(() => {
     if (!dragExports) return;
@@ -622,9 +612,6 @@
   });
   $effect(() => {
     if (!dragExports) return;
-    untrack(() => dragLog('session', { userAgent: navigator.userAgent, platform: navigator.platform }));
-    const snapshot = () => ({ status: { ...dragStatus }, logs: [...dragLogs] });
-    if (dragPrototype) window.__bitifyDragTest = { snapshot };
     // A touchscreen edit may begin in the Dock while the mouse still hovers art.
     // Leave the touch event untouched; only cancel mouse export preparation.
     const stopTouch = on(window, 'pointerdown', event => {
@@ -633,9 +620,8 @@
     const stop = on(window, 'drop', event => {
       if (!dragExports.isOwn(event.dataTransfer)) return;
       event.preventDefault(); event.stopImmediatePropagation(); dragDepth = 0;
-      dragLog('self-drop-ignored');
     }, { capture: true });
-    return () => { stopTouch(); stop(); dragExports.destroy(); delete window.__bitifyDragTest; };
+    return () => { stopTouch(); stop(); dragExports.destroy(); };
   });
 
   async function save(item) {
@@ -812,7 +798,7 @@
       <Tile {item} inset={IMAGE_INSET} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} {alphaCut} {metric} {maxColors} onpaletteerror={paletteLimitFailure}
         flipped={effectiveOriginal} comparing={previewing} budget={dragging ? DRAG_MS / canvasItems.length : 0}
         oncompare={compareHold} onopen={items.length ? openImage : undefined}
-        exportDrag={items.length ? dragExports : undefined} {dragMode}
+        exportDrag={items.length ? dragExports : undefined}
         onactivate={items.length ? undefined : () => picker.click()}
         activationLabel={items.length ? undefined : 'Add images'}
         onshare={items.length ? e => share(item, e.currentTarget) : undefined}
@@ -825,7 +811,7 @@
 
 {#if viewed}
   <ImageViewer item={viewed} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} {alphaCut} {metric} {maxColors} onpaletteerror={paletteLimitFailure} {busy} {message} flipped={viewInitialOriginal}
-    exportDrag={viewed.id === 0 ? undefined : dragExports} {dragMode}
+    exportDrag={viewed.id === 0 ? undefined : dragExports}
     onsave={viewed.id === 0 ? undefined : () => save(viewed)}
     oncopy={viewed.id === 0 ? undefined : () => copy(viewed)}
     onclose={async () => { const trigger = viewTrigger, keyboard = viewKeyboardFocus; viewing = null; await tick(); if (keyboard) trigger?.focus({ preventScroll: true }); else trigger?.blur(); }} />
@@ -833,9 +819,6 @@
 
 <CanvasGrid {items} {example} />
 
-{#if dragPrototype}
-  <DragExportProbe status={dragStatus} logs={dragLogs} bind:mode={dragMode} onlog={dragLog} />
-{/if}
 
 <div class="workspace-tools" class:canvas-scrollable={canvasScrollable} use:measureWorkspaceTools>
 <Dock bind:first bind:second bind:none bind:style bind:settings bind:showOriginal bind:dragging bind:family bind:alphaCut bind:metric bind:maxColors bind:lastMaxColors {fullPalette} fullPresets={FULL_PRESETS} {savedPalettes} onpalette={selectPalette} onimportpalette={() => editPalette(null)} oneditpalette={editPalette} {previewing} {canvasScrollable} {autos} {soft} />

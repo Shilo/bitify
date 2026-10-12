@@ -117,7 +117,7 @@ Two were set by the owner. The rest are what the work depends on.
    are debounced and serial, with one current encoded export shared by wall and Preview.
    Native dragging requires a decoded image resource per rendered surface for that
    export, adding full-image decode/memory cost on desktop. Touch/mobile create no drag
-   runtime. Only opt-in diagnostics hash exports and retain metadata logs.
+   runtime. Drag exports are not hashed or logged; prototype diagnostics were removed.
 
 ## What was wrong
 

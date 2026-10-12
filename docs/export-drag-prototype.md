@@ -1,4 +1,10 @@
-# Desktop export-drag compatibility prototype
+# Desktop export dragging: validation record
+
+Production cleanup: desktop wall and fullscreen Preview dragging work on ordinary URLs
+without a query flag. All drag diagnostic UI, metadata logs, fingerprinting, window hooks,
+alternate payload probes, prototype tests and fixture servers have been removed.
+The sections below record the completed research and acceptance history; their old
+prototype URLs, commands and diagnostic-panel instructions are no longer supported.
 
 Desktop optimized export dragging is enabled on ordinary wall and Preview URLs.
 For optional diagnostics, open

@@ -11,9 +11,8 @@ in the browser. Nothing is uploaded.
 ### Desktop optimized export dragging (October 11, 2026)
 
 Main-wall images and fullscreen Preview support mouse dragging on ordinary URLs.
-`?dragExport=1` additionally enables the compatibility diagnostic panel.
 It requires a primary fine pointer with hover support. Coarse/no-hover mobile devices
-create no drag runtime or panel, even with the flag. Touch and pen input cannot arm a
+create no drag runtime. Touch and pen input cannot arm a
 drag on desktop either. Release, cancellation and capability loss disarm mouse dragging.
 Detected mobile browsers (mobile UA data, Android/iOS user agent, or an iPad reporting
 a Mac platform with touch points) remain excluded even with a connected mouse.
@@ -43,20 +42,17 @@ while the preview canvas stays visible. Only a primary left mouse press arms thi
 its parent button is not draggable. Record identity, decoded witness, image target/src,
 dimensions and current conversion inputs are checked synchronously before allowing drag.
 An active source stays connected through settings invalidation until dragend; its own
-dragend listener also handles removal of its tile. Diagnostic probes retain native-only,
-JS File + DownloadURL, DownloadURL-only and JS File-only alternatives.
+dragend listener also handles removal of its tile. There are no alternate probe payloads.
 Default HTML/preview URL formats are removed without destroying the native file.
 The native URL refers to the same encoded
 file; active drags retain it across window blur, with 60 seconds of consumer grace
 after dragend. At eight evicted exports still in grace, new drags are blocked until
 capacity returns. Drops back into Bitify are ignored before artwork/palette import.
 
-Ordinary URLs do not hash exports, retain logs or expose the diagnostic window hook.
-Diagnostics retain at most 250 metadata events locally, including byte size, SHA-256,
-settings, browser, trusted-event flag and explicit manual destination outcomes. A
-received-file check compares against the latest logged drag, labels older matches,
-and guards overlapping hash results. Dragend/dropEffect alone is not proof of delivery.
-Only actual received file bytes establish native compatibility and export identity.
+There is no drag debugging UI, URL flag, fingerprinting, retained metadata log or window
+test hook. Prototype tests and fixture servers were removed after the user verified all
+PNG/GIF wall/Preview combinations in Brave with Discord and File Explorer. Browser-native
+byte equality and touch/lifecycle regression results are recorded in the validation document.
 
 The approved interactive prototype is saved next to this file as
 [2026-10-06-bitify-prototype.html](2026-10-06-bitify-prototype.html). It is a historical behavioral reference. The October 9 Floating islands adoption below
