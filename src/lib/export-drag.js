@@ -149,11 +149,12 @@ export function createExportDrag({ request, prepare, notify, changed = () => {},
 }
 
 export function exportDragArt(node, options) {
-  let armed = false;
+  let armed = false, destroyed = false;
   let source, unsubscribe, controller;
   const nativeMode = () => options?.mode === 'native' || options?.mode === 'native-only';
   function removeSource() { if (source) { source.image.draggable = false; source.image.remove(); } source = undefined; }
   function syncSource() {
+    if (destroyed) return;
     // Native dragend must still reach its source after settings change mid-drag.
     if (source?.dragging) return;
     const record = nativeMode() ? options?.controller?.readyFor(options.item) : null;
@@ -222,6 +223,7 @@ export function exportDragArt(node, options) {
   return {
     update(value) { disarm(); options = value; connect(); if (!options?.controller) node.removeAttribute('draggable'); },
     destroy() {
+      destroyed = true;
       disarm(); leave(); unsubscribe?.(); removeSource(); desktop?.removeEventListener('change', capabilityChanged);
       for (const type of ['pointerup', 'pointercancel', 'blur']) view?.removeEventListener(type, disarm);
       for (const [type, handler] of Object.entries(listeners)) node.removeEventListener(type, handler);

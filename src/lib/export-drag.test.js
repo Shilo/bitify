@@ -244,6 +244,23 @@ describe('mouse-only image drag action', () => {
     expect(f.controller.readyFor(f.item)).not.toBeNull();
     action.destroy();
   });
+  it('late dragend ends the active export after action destruction without recreating an image', async () => {
+    const f = track(fixture()), node = nodeStub(), images = [];
+    node.ownerDocument = { createElement: () => {
+      const handlers = new Map(), image = { complete: true, naturalWidth: 4096, naturalHeight: 2048,
+        decode: () => Promise.resolve(), remove: vi.fn(), addEventListener: (type, fn) => handlers.set(type, fn), handlers };
+      images.push(image); return image;
+    } }; node.appendChild = vi.fn();
+    const action = exportDragArt(node, { controller: f.controller, item: f.item, mode: 'native', cancel: vi.fn() });
+    await prepared(f); await vi.advanceTimersByTimeAsync(0);
+    const event = dragEvent(); event.target = images[0]; event.dataTransfer.items.add(f.controller.readyFor(f.item).file);
+    event.dataTransfer.clearData = () => event.dataTransfer.strings.clear();
+    node.handlers.get('pointerdown')({ pointerType: 'mouse', button: 0 }); node.handlers.get('dragstart')(event);
+    action.destroy(); images[0].handlers.get('dragend')(event);
+    expect(f.log).toHaveBeenCalledWith('drag-end', expect.anything());
+    expect(images).toHaveLength(1); expect(node.appendChild).toHaveBeenCalledTimes(1);
+    expect(f.controller.start(dragEvent(), f.item)).toBe(true);
+  });
   it('leaves touch and pen unarmed, arms a primary mouse press, and clears comparison at dragstart', () => {
     const node = nodeStub(), controller = { subscribe: vi.fn(() => () => {}), hover: vi.fn(), leave: vi.fn(), start: vi.fn(), end: vi.fn() }, cancel = vi.fn(), item = { id: 1 };
     const action = exportDragArt(node, { controller, item, mode: 'combined', cancel });

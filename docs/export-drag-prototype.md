@@ -1,12 +1,13 @@
 # Desktop export-drag compatibility prototype
 
-This is opt-in research, not released cross-application support. Open
+Desktop optimized export dragging is enabled on ordinary wall and Preview URLs.
+For optional diagnostics, open
 `http://127.0.0.1:5184/?dragExport=1` in the desktop browser being tested.
 
 Start with `npm run build`, `node bench/export-drag-qa.mjs` to create/check fixtures,
 then `node bench/export-drag-server.mjs` to serve the built app. The server listens only
 on Windows loopback and serves `dist` plus `.tmp/export-drag-qa` fixtures. Normal app
-URLs do not start the export cache or display diagnostics. Existing export functions
+URLs enable desktop export preparation without hashing/logging or diagnostics. Existing export functions
 and encoders are reused without extraction or changes to Save/Copy/ZIP.
 Coarse/no-hover mobile devices also create no drag runtime or panel with the flag.
 Only a primary mouse press on a fine-pointer/hover device can arm a drag. Touch and pen
@@ -25,8 +26,8 @@ and blur clear arms when a press ends outside the artwork. Native dragend also c
 ## Manual native test
 
 Download `/fixtures/drag-source.png` and `/fixtures/drag-animation.gif`, then add them
-to Bitify. Hover one tile until the panel says ready. Start with File + DownloadURL.
-If rejected, repeat with DownloadURL only and File only; record each mode separately.
+to Bitify. Hover one tile until the panel says ready. Start with Native image + DownloadURL.
+If rejected, use the diagnostic alternatives and record each mode separately.
 
 For each installed Brave, Chrome and Edge version:
 
@@ -61,7 +62,7 @@ GIF timing, full palette caps, comparison, verifier correctness and real browser
 
 Synthetic DataTransfer tests prove what the app supplies. Trusted drag tests prove what
 the browser delivers to the test receiver. Neither proves Explorer/Discord delivery;
-that remains pending until manual results and received files are examined.
+native destination acceptance and byte verification must be recorded separately.
 
 The reviewer challenged diagnostic historical matches, async hash ordering and import
 overlay behavior. Those valid findings were fixed and retested. The review also required
@@ -148,3 +149,89 @@ passed 132 legacy PNG cases, nine full-palette Oklab cases, nine RGB cases and 1
 categories including Copy/GIF/ZIP, asynchronous snapshots and failure behavior, without
 browser errors. Physical phones/tablets and Safari were not tested; these mobile results
 are emulated Chromium touch input, not physical-device certification.
+
+## Native image acceptance and combined-payload experiment
+
+The user subsequently confirmed that the isolated native-image-only fixture attaches
+images in Discord desktop from Brave and the Codex browser, while Explorer rejects it.
+The app's synthetic File plus DownloadURL has the opposite reported behavior.
+This establishes destination-specific acceptance, not universal byte verification.
+
+The app starts from a canvas/button, clears all transfer items and adds a JavaScript
+File plus DownloadURL. The native fixture starts from an actual image resource containing
+the full optimized export and removes only string formats, preserving Chromium's native
+image file contents. Changing items.clear to clearData alone in the app cannot create
+that native image-resource path; integration would require a prepared export-backed image.
+
+[Chromium's Windows drag preparation](https://raw.githubusercontent.com/chromium/chromium/main/content/browser/web_contents/web_contents_view_aura.cc)
+offers download metadata before image file content when both are supplied.
+[Its Windows data provider](https://chromium.googlesource.com/chromium/src/+/refs/heads/main/ui/base/dragdrop/os_exchange_data_provider_win.cc)
+uses delayed CF_HDROP for download and FILEDESCRIPTOR/FILECONTENTS for native image bytes.
+The independent reviewer challenged a guaranteed combined-payload fix: a destination
+could prefer the delayed download path, fail its synchronous request and never use the
+otherwise valid native image content. Actual Explorer and Discord tests remain necessary.
+
+The isolated fixture now defaults to native image plus DownloadURL, with native-only
+available as a control. Both payload paths use identical optimized bytes. Trusted Brave
+PNG/GIF source checks passed in both modes, DownloadURL fetch bytes matched native file
+bytes exactly, text/HTML/ordinary URI formats were absent, release disarmed dragging and
+latest-file verification rejected an older file. Mobile/coarse/touch/pen guards were added
+to the isolated fixture as well. This experiment preceded the app integration below.
+
+Chromium's [DataObject conversion](https://raw.githubusercontent.com/chromium/chromium/main/third_party/blink/renderer/core/clipboard/data_object.cc)
+includes a gated JS-file support path and a fallback that exports the filename as
+text/plain. That explains the observed filename-text symptom; current main is explanatory
+evidence, not a guarantee about every shipped browser version. Native filenames are
+derived separately from resource URL/Content-Disposition, so destination tests must also
+check name and extension. Production integration must bind the decoded native resource
+to the immutable current export key; size/MIME checks alone are not enough.
+
+## Ordinary desktop and fullscreen integration
+
+The user confirmed the isolated native image + DownloadURL mode works in both Discord
+and Explorer. Ordinary production/local app URLs previously did not drag because the
+entire controller required the diagnostic flag, and the app still used its older JS File
+payload. The integrated default now uses the accepted native image + DownloadURL path
+on desktop wall images and fullscreen Preview. The user also reported that the updated
+local app began attaching successfully in Discord. GitHub Pages needs deployment of
+the new commit; rebuilding locally does not update the deployed site.
+
+A transparent image overlays the canvas solely as a native drag resource. Its blob
+contains the existing optimized full-source Save encoding, including every GIF frame.
+The canvas, conversion loops, Save/Copy/ZIP functions and existing Tile gesture code
+were not refactored. Decoding completion is bound to immutable export-record identity;
+dragstart additionally checks current settings, exact image target/src, decoded witness,
+dimensions and native file size/type. Old decode promises cannot rearm a replacement.
+Native strings are cleared while encoded image content is preserved; DownloadURL refers
+to those same encoded bytes. The native source File name is a blob UUID without an
+extension in automated captures; destination filenames/extensions still need manual
+verification, independently of the meaningful DownloadURL/Save name.
+
+The independent reviewer reproduced a valid active-source lifecycle flaw: detaching
+the image on settings invalidation prevented dragend from reaching the parent. The fix
+retains the active source through dragend and listens directly on that source for
+dragend even if its tile is removed. Both unit and trusted-browser reproductions now
+pass, including a settings change mid-drag followed by a successful new current drag.
+A second agreed cleanup fix guards destroyed actions so a late source dragend can end
+the export without recreating a decoded overlay in detached Preview artwork.
+
+Validation after the fixes:
+
+- All 537 unit tests pass, including 43 drag tests and stale decode/current-key guards.
+- Wall export/mobile regression: 252 checks, 14 scenarios each in Chrome for Testing
+  153.0.8010.12 and Edge 155.0.4283.45, including four-direction trusted touch swipes.
+- Native app regression: Chrome, Edge and Brave pass 18 normal/diagnostic PNG/GIF
+  cases, each with wall and fullscreen-original-comparison mouse drags. Native file
+  bytes equal DownloadURL fetch bytes and actual Save download bytes in each session.
+- Each browser passes mobile and desktop fine-pointer CDP touch Preview cases: no
+  native drag, hold comparison/release, four-direction movement without dismissal,
+  and quick tap dismissal. Each also passes trusted active-settings-invalidation drag
+  and closing Preview during a native drag: late dragend ends the active export, no
+  detached overlay is recreated, and the next wall drag succeeds.
+- Broad built-browser export regression passes 132 legacy PNGs, nine full-palette
+  Oklab cases, nine RGB cases and 13 Copy/GIF/ZIP/integration categories without errors.
+
+`bench/export-native-qa.mjs` writes `.tmp/export-drag-qa/native-app-results.json`.
+Physical phones, Safari, and native Explorer/Discord drops from Chrome/Edge remain
+unverified; the user chose Brave for manual native tests. Automated trusted source-byte
+checks do not claim to automate those destinations. No Discord messages were sent.

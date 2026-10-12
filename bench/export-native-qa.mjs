@@ -81,7 +81,7 @@ try {
         await context.close();
       }
       for (const mobile of [true, false]) {
-        const context = await browser.newContext({ viewport: mobile ? { width: 390, height: 844 } : { width: 1100, height: 800 }, hasTouch: true, isMobile: mobile });
+        const context = await browser.newContext({ viewport: mobile ? { width: 390, height: 844 } : { width: 1100, height: 800 }, hasTouch: mobile, isMobile: mobile });
         await context.addInitScript(() => localStorage.setItem('bitify', '{}'));
         const page = await context.newPage(); await page.goto(origin + '/?dragExport=1');
         await page.locator('input[type=file][accept="image/*"]').setInputFiles('.tmp/export-drag-qa/drag-source.png');
@@ -104,9 +104,47 @@ try {
           assert.equal(await viewer.evaluate(n => n.open), true);
         }
         assert.equal(await page.evaluate(() => window.previewDrags), 0);
-        await art.tap(); await viewer.waitFor({ state: 'hidden' });
+        await session.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x, y }] });
+        await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+        await viewer.waitFor({ state: 'hidden' });
         results.push({ engine, previewTouch: mobile ? 'mobile' : 'desktop hybrid', nativeDrags: 0, holdAndSwipeAndTapPreserved: true });
         console.log(`${engine} ${mobile ? 'mobile' : 'desktop hybrid'} Preview: touch cannot arm drag; hold, four-direction movement and tap dismissal preserved`);
+        await context.close();
+      }
+      {
+        const context = await browser.newContext({ viewport: { width: 1100, height: 800 } });
+        await context.addInitScript(() => localStorage.setItem('bitify', '{}'));
+        const page = await context.newPage(); await page.goto(origin + '/?dragExport=1');
+        await page.locator('input[type=file][accept="image/*"]').setInputFiles('.tmp/export-drag-qa/drag-source.png');
+        const art = page.locator('.tiles .art'); await art.hover();
+        await art.locator('img').waitFor({ state: 'attached' }); await art.locator('img').evaluate(i => i.decode());
+        const source = await art.locator('img').elementHandle(), box = await art.boundingBox();
+        await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2); await page.mouse.down(); await page.mouse.move(8, 60, { steps: 25 });
+        await page.waitForFunction(() => window.__bitifyDragTest.snapshot().logs.some(e => e.event === 'drag-start'));
+        await page.evaluate(() => document.body.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true })));
+        await page.waitForFunction(() => window.__bitifyDragTest.snapshot().logs.some(e => e.event === 'invalidated'));
+        assert.equal(await source.evaluate(i => i.isConnected), true);
+        await page.mouse.up(); await page.waitForFunction(() => window.__bitifyDragTest.snapshot().logs.some(e => e.event === 'drag-end'));
+        assert.equal(await source.evaluate(i => i.isConnected), false);
+        await art.hover(); await art.locator('img').waitFor({ state: 'attached' }); await art.locator('img').evaluate(i => i.decode());
+        await page.mouse.down(); await page.mouse.move(8, 60, { steps: 25 }); await page.mouse.up();
+        await page.waitForFunction(() => window.__bitifyDragTest.snapshot().logs.filter(e => e.event === 'drag-start').length === 2);
+        await art.click(); const viewer = page.getByRole('dialog', { name: 'Image preview', exact: true }), viewerArt = viewer.locator('.art');
+        await viewerArt.hover(); await viewerArt.locator('img').waitFor({ state: 'attached' }); await viewerArt.locator('img').evaluate(i => i.decode());
+        const vb = await viewerArt.boundingBox(), detachedArt = await viewerArt.elementHandle();
+        await page.mouse.move(vb.x + vb.width / 2, vb.y + vb.height / 2); await page.mouse.down(); await page.mouse.move(8, 60, { steps: 25 });
+        await page.waitForFunction(() => window.__bitifyDragTest.snapshot().logs.filter(e => e.event === 'drag-start').length === 3);
+        await viewer.evaluate(d => d.close()); await viewer.waitFor({ state: 'hidden' });
+        // close() hides synchronously, but the close event destroys Svelte later.
+        await page.waitForFunction(n => !n.isConnected, detachedArt);
+        await page.mouse.up();
+        await page.waitForFunction(() => window.__bitifyDragTest.snapshot().logs.filter(e => e.event === 'drag-end').length === 3);
+        assert.equal(await detachedArt.evaluate(n => n.querySelectorAll('.export-drag-image').length), 0);
+        await art.hover(); await art.locator('img').waitFor({ state: 'attached' }); await art.locator('img').evaluate(i => i.decode());
+        await page.mouse.down(); await page.mouse.move(8, 60, { steps: 25 }); await page.mouse.up();
+        await page.waitForFunction(() => window.__bitifyDragTest.snapshot().logs.filter(e => e.event === 'drag-start').length === 4);
+        results.push({ engine, activeInvalidation: 'source retained until native dragend; next current export drag succeeds' });
+        console.log(`${engine}: active settings change and Preview teardown preserve dragend; next drag succeeds; no detached overlay resurrection`);
         await context.close();
       }
     } finally { await browser.close(); }
