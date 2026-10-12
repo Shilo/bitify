@@ -4,18 +4,18 @@ import { brightness } from './bitify.js';
 
 // A palette is two colors and nothing else. Which one is the first color is up to Swap.
 export const PRESETS = [
-  { name: 'Glow', dark: '#222323', light: '#f0f6f0' },
-  { name: 'Mono', dark: '#000000', light: '#ffffff' },
-  { name: 'Paper', dark: '#382b26', light: '#b8c2b9' },
-  { name: 'Torch', dark: '#0b0a0c', light: '#f6dfa4' },
-  { name: 'Game Boy', dark: '#0f380f', light: '#9bbc0f' },
-  { name: 'Pocket', dark: '#1f1f1f', light: '#c4cfa1' },
-  { name: 'Nokia', dark: '#43523d', light: '#c7f0d8' },
-  { name: 'Playdate', dark: '#322f29', light: '#d7d4cc' },
-  { name: 'Phosphor', dark: '#25342f', light: '#01eb5f' },
-  { name: 'Amber', dark: '#3f291e', light: '#fdca55' },
-  { name: 'Commodore', dark: '#40318e', light: '#88d7de' },
-  { name: 'Rose', dark: '#4a0d2b', light: '#ffd1dc' },
+  { name: 'Glow', dark: '#222323', light: '#f0f6f0', group: 'classics' },
+  { name: 'Mono', dark: '#000000', light: '#ffffff', group: 'classics' },
+  { name: 'Paper', dark: '#382b26', light: '#b8c2b9', group: 'classics' },
+  { name: 'Torch', dark: '#0b0a0c', light: '#f6dfa4', group: 'classics' },
+  { name: 'Rose', dark: '#4a0d2b', light: '#ffd1dc', group: 'classics' },
+  { name: 'Game Boy', dark: '#0f380f', light: '#9bbc0f', group: 'handhelds' },
+  { name: 'Pocket', dark: '#1f1f1f', light: '#c4cfa1', group: 'handhelds' },
+  { name: 'Nokia', dark: '#43523d', light: '#c7f0d8', group: 'handhelds' },
+  { name: 'Playdate', dark: '#322f29', light: '#d7d4cc', group: 'handhelds' },
+  { name: 'Phosphor', dark: '#25342f', light: '#01eb5f', group: 'monitors' },
+  { name: 'Amber', dark: '#3f291e', light: '#fdca55', group: 'monitors' },
+  { name: 'Commodore', dark: '#40318e', light: '#88d7de', group: 'monitors' },
 ];
 // Describe the color pair rather than repeating the chip's name (see docs/palettes.md).
 export const PALETTE_USES = {

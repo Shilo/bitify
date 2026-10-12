@@ -1,7 +1,7 @@
 # Palettes
 
 Bitify's Palette panel has two families: **1-bit**, with twelve preset color pairs, and
-**Palette**, with seven curated full palettes and a named local library. The pairs are
+**Palette**, with nine curated palettes and a named local library. The pairs are
 defined in [src/lib/presets.js](../src/lib/presets.js); full palettes and their provenance
 are in [src/lib/palette-library.js](../src/lib/palette-library.js).
 
@@ -43,7 +43,9 @@ the source to grayscale can remove useful material boundaries.
 ## The twelve palettes
 
 The panel shows round choices with their names underneath in one horizontal scrolling
-row, in this order: classics, handheld screens, monitors.
+row, with vertical dividers between three groups: classics and decorative pairs
+(Glow, Mono, Paper, Torch, Rose), handheld screens (Game Boy, Pocket, Nokia, Playdate),
+and monitors (Phosphor, Amber, Commodore). Keyboard and gesture stepping follow this order.
 
 Contrast is the WCAG contrast ratio between the two colors, from 1 (identical) to 21 (black
 on white). Higher means the two colors are easier to tell apart.
@@ -54,6 +56,7 @@ on white). Higher means the two colors are easier to tell apart.
 | Mono | `#000000` black | `#ffffff` white | 21.0 | Plain black and white |
 | Paper | `#382b26` dark brown | `#b8c2b9` grey-green | 7.4 | Lospec, [Paperback-2](https://lospec.com/palette-list/paperback-2) by Doph |
 | Torch | `#0b0a0c` near-black | `#f6dfa4` warm cream | 15.1 | Bitify's own, after the game End of End |
+| Rose | `#4a0d2b` dark wine | `#ffd1dc` pale pink | 11.1 | Bitify's own |
 | Game Boy | `#0f380f` dark green | `#9bbc0f` pea green | 6.0 | Original Game Boy, darkest and lightest shade |
 | Pocket | `#1f1f1f` near-black | `#c4cfa1` pale olive | 10.0 | Game Boy Pocket, darkest and lightest shade |
 | Nokia | `#43523d` grey-green | `#c7f0d8` mint | 6.7 | Nokia 3310 screen, Lospec [Nokia 3310](https://lospec.com/palette-list/nokia-3310) |
@@ -61,7 +64,6 @@ on white). Higher means the two colors are easier to tell apart.
 | Phosphor | `#25342f` dark green-grey | `#01eb5f` bright green | 8.1 | Return of the Obra Dinn, IBM 5151 setting |
 | Amber | `#3f291e` dark brown | `#fdca55` amber | 8.9 | Return of the Obra Dinn, Zenith ZVM 1240 setting |
 | Commodore | `#40318e` indigo | `#88d7de` cyan | 6.3 | Return of the Obra Dinn, Commodore 1084 setting |
-| Rose | `#4a0d2b` dark wine | `#ffd1dc` pale pink | 11.1 | Bitify's own |
 
 The app opens on Glow, with the dark color first.
 
@@ -154,8 +156,13 @@ not a promise that every selected color will be used.
 | Grayscale 8 | 8 | Bitify: eight evenly spaced sRGB grays |
 | Ice Cream GB | 4 | [Kerrie Lake](https://lospec.com/palette-list/ice-cream-gb) |
 | Game Boy green | 4 | Common Game Boy LCD-inspired RGB interpretation; hardware does not define one canonical RGB set |
+| Glow | 2 | [Polyducks, 1bit Monitor Glow](https://lospec.com/palette-list/1bit-monitor-glow) |
+| Paper | 2 | [Doph, Paperback-2](https://lospec.com/palette-list/paperback-2) |
 
-The rail groups presets by descending color count: 64, 32, 16, 8, 4. PICO-8 precedes
+The rail groups presets by descending color count: 64, 32, 16, 8, 4, 2, with vertical
+dividers between counts. Glow and Paper form the final preset group, using the exact
+same color pairs as their 1-bit counterparts but applying nearest-color matching.
+PICO-8 precedes
 DawnBringer 16 using Lospec download counts as a popularity signal; the four-color
 pair puts the warm artist palette before the familiar handheld palette. This curated
 order balances recognition with distinct results, rather than claiming a universal

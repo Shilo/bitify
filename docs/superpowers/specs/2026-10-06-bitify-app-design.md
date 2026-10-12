@@ -1810,7 +1810,10 @@ remain independent. The default is still Glow/Cutout in 1-bit.
 ### Conversion families
 
 - **1-bit:** the existing eleven structural/pattern styles and selected color pair. The
-  engine, preset ordering and per-style settings remain unchanged.
+  engine and per-style settings remain unchanged. The rail and stepping order group
+  classics/decorative pairs (Glow, Mono, Paper, Torch, Rose), handheld screens
+  (Game Boy, Pocket, Nokia, Playdate), then monitors (Phosphor, Amber, Commodore).
+  Vertical dividers separate these three groups.
 - **Palette:** an allowed set of 1–256 distinct opaque sRGB8 colors, normalized to lowercase
   six-digit hex. Every visible source RGB first checks exact palette membership, then
   chooses the nearest entry in Oklab (default) or encoded RGB, as selected in Matching.
@@ -1908,12 +1911,34 @@ colors removes the masks/chevrons and exposes a normal scrollbar.
 The 1-bit header keeps its three-way Both/None switch. The Palette header instead has
 Import and Edit icon buttons with accessible labels and shared tooltips. Its rail starts
 with Resurrect 64, ENDESGA 32, PICO-8 (16), DawnBringer 16, Grayscale 8,
-Ice Cream GB (4) and Game Boy green (4), then a
+Ice Cream GB (4), Game Boy green (4), Glow (2) and Paper (2), then a
 divider and saved/session palettes. Preset attribution lives with each immutable record
 and in [palettes.md](../../palettes.md). Game Boy green is explicitly an LCD-inspired RGB
 interpretation. Editing a preset or session palette creates a named copy.
 
-Full presets are grouped by descending color count. Equal-count order is curated,
+Full presets are grouped by descending color count: 64, 32, 16, 8, 4, 2. Vertical
+dividers separate color-count groups, and a separate divider precedes saved/session
+palettes when present. Glow and Paper use the existing 1-bit RGB pairs, attributed to
+Polyducks (1bit Monitor Glow) and Doph (Paperback-2), and run the existing nearest
+matching method. Dividers scroll with the choices and remain visible on touch layouts.
+They use the style chooser's 1px-wide, 24px-high line treatment, with 4px side margins;
+the rail edge masks fade them along with the choices. Palette rails stay one scrolling
+row at all widths, so they have no wrapped-row boundary dividers to hide.
+Divider verification in the Codex in-app browser covered 25 viewports from 280 to
+2560px wide, including portrait and 320–520px-high landscape layouts. The final
+styling passed 100 first/last-preset layout checks, all 21 preset selections at five
+representative sizes (105 checks), four saved-library layouts, 12 light-theme layouts,
+and restored selection after reload. Checks found no horizontal page overflow,
+out-of-viewport palette panels, header-button overflow, wrapped rails or clipped
+selected choices. Tab skips decorative dividers; Enter selects across group boundaries;
+horizontal scrolling preserves selection. Style-divider comparison passed all 25
+sizes, including nine wrapped layouts with row-start dividers hidden after resize
+observers settled. These are browser viewport checks, not physical-device or touch
+emulation results. All 487 unit tests and the production build passed.
+Rapid resizing emitted ResizeObserver undelivered-notification warnings in the dev
+server. The same 25-size sequence reproduced them in an isolated unchanged HEAD
+checkout, so these warnings predate the divider changes; settled layout checks passed.
+Equal-count order is curated,
 with Lospec downloads informing PICO-8 before DawnBringer 16. PICO-8 remains the
 default for new, invalid, reset and deleted selections independently of rail order;
 existing stable IDs retain their selection. Resurrect 64 and Ice Cream GB use Kerrie

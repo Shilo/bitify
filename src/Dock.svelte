@@ -356,12 +356,17 @@
         <div class="palette-rail" role="group" aria-label={family === 'two-color' ? 'Palettes' : 'Full palettes'} use:paletteRail={family === 'full-palette' ? fullPalette.id : first + second}
           onwheel={e => { if (Math.abs(e.deltaY) > Math.abs(e.deltaX) && e.currentTarget.scrollWidth > e.currentTarget.clientWidth) { e.preventDefault(); e.currentTarget.scrollLeft += e.deltaY; } }}>
           {#if family === 'two-color'}
-            {#each PRESETS as p}
+            {#each PRESETS as p, i}
+              {#if i > 0 && p.group !== PRESETS[i - 1].group}<span class="palette-group-divider" aria-hidden="true"></span>{/if}
               <button class="palette-choice" aria-pressed={chosen(p)} aria-label={p.name} use:tooltip={`${p.name}: ${PALETTE_USES[p.name]}`} onclick={() => choose(p)}><span class="palette-circle"><PalettePreview first={p.dark} second={p.light}/></span><span class="palette-choice-name">{p.name}</span></button>
             {/each}
           {:else}
             {#each [...fullPresets, ...savedPalettes] as p, i (p.id)}
-              {#if i === fullPresets.length}<span class="palette-library-divider" aria-hidden="true"></span>{/if}
+              {#if i === fullPresets.length && i > 0}
+                <span class="palette-library-divider" aria-hidden="true"></span>
+              {:else if i > 0 && i < fullPresets.length && p.colors.length !== fullPresets[i - 1].colors.length}
+                <span class="palette-group-divider" aria-hidden="true"></span>
+              {/if}
               <button class="palette-choice" aria-pressed={fullPalette.id === p.id} aria-label={p.name} use:tooltip={`${p.name} · ${p.colors.length} colors${p.source?.credit ? ' · ' + p.source.credit : ''}`} onclick={() => onpalette(p)}><span class="palette-circle"><PalettePreview colors={p.colors}/></span><span class="palette-choice-name">{p.name}</span></button>
             {/each}
           {/if}

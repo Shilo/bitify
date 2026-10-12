@@ -44,12 +44,14 @@ describe('palette library', () => {
   });
 
   it('provides immutable presets with vetted counts, provenance and distinct normalized colors', () => {
-    expect(FULL_PRESETS.map(p => p.colors.length)).toEqual([64, 32, 16, 16, 8, 4, 4]);
-    expect(FULL_PRESETS.map(p => p.id)).toEqual(['preset-res64', 'preset-edg32', 'preset-pico8', 'preset-db16', 'preset-gray8', 'preset-icecreamgb', 'preset-gameboy']);
+    expect(FULL_PRESETS.map(p => p.colors.length)).toEqual([64, 32, 16, 16, 8, 4, 4, 2, 2]);
+    expect(FULL_PRESETS.map(p => p.id)).toEqual(['preset-res64', 'preset-edg32', 'preset-pico8', 'preset-db16', 'preset-gray8', 'preset-icecreamgb', 'preset-gameboy', 'preset-glow', 'preset-paper']);
     expect(DEFAULT_FULL_PALETTE.id).toBe('preset-pico8');
     expect(FULL_PRESETS[1].colors[0]).toBe('#be4a2f');
     expect(FULL_PRESETS[0].colors.at(-1)).toBe('#fdcbb0');
     expect(FULL_PRESETS[5].colors).toEqual(['#7c3f58', '#eb6b6f', '#f9a875', '#fff6d3']);
+    expect(FULL_PRESETS[7].colors).toEqual(['#222323', '#f0f6f0']);
+    expect(FULL_PRESETS[8].colors).toEqual(['#382b26', '#b8c2b9']);
     for (const preset of FULL_PRESETS) {
       expect(preset.source.credit).toBeTruthy();
       expect(new Set(preset.colors).size).toBe(preset.colors.length);

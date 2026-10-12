@@ -53,6 +53,8 @@ export const FULL_PRESETS = Object.freeze([
   preset('gray8', 'Grayscale 8', '000000 242424 494949 6d6d6d 929292 b6b6b6 dbdbdb ffffff', 'Bitify: eight evenly spaced sRGB grays'),
   preset('icecreamgb', 'Ice Cream GB', '7c3f58 eb6b6f f9a875 fff6d3', 'Kerrie Lake', 'https://lospec.com/palette-list/ice-cream-gb'),
   preset('gameboy', 'Game Boy green', '0f380f 306230 8bac0f 9bbc0f', 'Game Boy LCD-inspired RGB interpretation'),
+  preset('glow', 'Glow', '222323 f0f6f0', 'Polyducks', 'https://lospec.com/palette-list/1bit-monitor-glow'),
+  preset('paper', 'Paper', '382b26 b8c2b9', 'Doph', 'https://lospec.com/palette-list/paperback-2'),
 ]);
 
 // Rail order follows color count; defaults remain stable independently of it.

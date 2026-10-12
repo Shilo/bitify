@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { PRESETS, STYLES, isPalette, inOrder, inks, stepStyle, stepPalette } from './presets.js';
 
-const [glow, mono] = PRESETS, rose = PRESETS.at(-1);
+const [glow, mono] = PRESETS, last = PRESETS.at(-1);
 
 describe('stepStyle', () => {
   it('goes to the next and the previous style', () => {
@@ -40,8 +40,8 @@ describe('stepPalette', () => {
     expect(stepPalette(mono.dark, mono.light, -1).palette).toBe(glow);
   });
   it('wraps at both ends', () => {
-    expect(stepPalette(glow.dark, glow.light, -1).palette).toBe(rose);
-    expect(stepPalette(rose.dark, rose.light, 1).palette).toBe(glow);
+    expect(stepPalette(glow.dark, glow.light, -1).palette).toBe(last);
+    expect(stepPalette(last.dark, last.light, 1).palette).toBe(glow);
   });
   it('finds the preset when Swap has turned the colors round', () => {
     expect(stepPalette(glow.light, glow.dark, 1).palette).toBe(mono);
@@ -56,7 +56,7 @@ describe('stepPalette', () => {
     const back = stepPalette(glow.dark, glow.light, -1, away.custom);
     expect(back.palette).toBe(away.custom);
     expect(back.at).toBe(PRESETS.length);
-    expect(stepPalette('#ff0000', '#00ff00', -1, away.custom).palette).toBe(rose);
+    expect(stepPalette('#ff0000', '#00ff00', -1, away.custom).palette).toBe(last);
   });
 });
 
