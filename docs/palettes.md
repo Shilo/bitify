@@ -207,8 +207,13 @@ at the same matching setting in every image. All preserves the existing nearest 
 The shared palette is never regenerated or changed.
 
 **Max colors** optionally selects up to 1–256 colors from that palette per image. Move
-the slider or enter a number; the change applies when you finish editing. **All** removes
-the limit. Selection reduces weighted color error using a bounded search, then pixels use nearest matching
+the slider or enter a number; both controls stop at the active palette's color count.
+They show the effective limit while retaining a higher remembered limit for larger
+palettes. Switching palettes or leaving an untouched field does not change the preference;
+editing the limit does. Unfinished edits are discarded when the palette changes.
+The change applies when you finish editing. **All** removes the limit and stays distinct
+from a numeric limit equal to the palette's size. A one-color palette disables the slider;
+its number field still accepts 1. Selection reduces weighted color error using a bounded search, then pixels use nearest matching
 within the chosen subset. Small details can merge and separate images can choose different
 subsets, so identical source RGBs need not match identically when limited. Animations use
 one subset for all frames, weighted by frame duration. Transparency does not count toward

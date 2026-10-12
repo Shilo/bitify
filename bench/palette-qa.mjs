@@ -235,8 +235,8 @@ try {
   results.extra.push('Legacy custom colors/None/Swap/settings memory/Original/copy/single-save');
 
   await openPalette(); await page.getByRole('group',{name:'Color system',exact:true}).getByRole('button',{name:'Palette',exact:true}).click();
-  assert.equal(FULL_PRESETS.length,7,'Expected all seven published full presets');
-  assert.deepEqual(FULL_PRESETS.map(palette=>palette.colors.length),[64,32,16,16,8,4,4],'Preset order/counts changed');
+  assert.equal(FULL_PRESETS.length,9,'Expected all nine published full presets');
+  assert.deepEqual(FULL_PRESETS.map(palette=>palette.colors.length),[64,32,16,16,8,4,4,2,2],'Preset order/counts changed');
   assert.equal(DEFAULT_FULL_PALETTE.name,'PICO-8','Reordering the rail changed the default');
   assert.equal((await stored()).paletteId,DEFAULT_FULL_PALETTE.id,'First family switch lost the PICO-8 default');
   assert.deepEqual(await page.getByRole('group',{name:'Full palettes',exact:true}).locator('button').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('aria-label'))),FULL_PRESETS.map(palette=>palette.name),'Full preset rail order differs from published order');
@@ -277,7 +277,7 @@ try {
   await page.getByRole('group',{name:'Color system',exact:true}).getByRole('button',{name:'Palette',exact:true}).click();await closePanel();assert.equal((await stored()).metric,'rgb');
   await page.getByRole('button',{name:'Palette settings',exact:true}).click();await page.getByRole('button',{name:'Reset palette settings',exact:true}).click();
   assert.equal((await stored()).metric,'oklab');assert.equal((await stored()).alphaCut,128);await page.getByRole('button',{name:'Palette settings',exact:true}).click();
-  results.extra.push('Seven full presets RGB preview/PNG/Copy match independent reference; ordered copy swatches/HEX backups preserve every entry; family retains metric and Reset restores Oklab/cut128');
+  results.extra.push('Nine full presets RGB preview/PNG/Copy match independent reference; ordered copy swatches/HEX backups preserve every entry; family retains metric and Reset restores Oklab/cut128');
 
   // A one-color cap has an independently enumerable optimum. Retain a real UI,
   // preview, PNG and clipboard regression without importing the selector.
@@ -302,6 +302,41 @@ try {
   state = await stored(); assert.equal(state.maxColors, 0); assert.equal(state.lastMaxColors, 16); assert.equal(state.metric, 'oklab');
   await closePanel(); await tileMatches(nearestReference(fixture, FULL_PRESETS.at(-1).colors));
   results.extra.push('Max colors committed/invalid/empty inputs, exact cap-one RGB optimum in preview/PNG/Copy, and All/remembered16 reset');
+
+  // Palette-sized controls must never write their bounded display back over a
+  // larger persisted preference, including native number blur and a reload.
+  const settingsButton = page.getByRole('button', {name:'Palette settings', exact:true});
+  const limitRange = page.getByRole('slider', {name:'Max colors', exact:true});
+  async function limitPalette(name, size) {
+    await openPalette();
+    await page.getByRole('group', {name:'Full palettes', exact:true}).getByRole('button', {name, exact:true}).click();
+    await closePanel(); await settingsButton.click();
+    assert.equal(await limitRange.getAttribute('max'), String(size));
+    assert.equal(await maximum.getAttribute('max'), String(size));
+  }
+  await limitPalette('Resurrect 64',64);
+  await maximum.fill('64'); await maximum.press('Enter');
+  for (const [name,size] of [['Ice Cream GB',4],['PICO-8',16],['Resurrect 64',64]]) {
+    await limitPalette(name,size); assert.equal(await maximum.inputValue(),String(size));
+    await maximum.focus(); await maximum.press('Tab');
+    assert.equal((await stored()).maxColors,64); assert.equal((await stored()).lastMaxColors,64);
+  }
+  await limitPalette('Ice Cream GB',4);
+  await page.reload(); await page.getByRole('button',{name:'Add images',exact:true}).first().waitFor();
+  await settingsButton.click(); assert.equal(await maximum.inputValue(),'4'); assert.equal((await stored()).maxColors,64);
+  await maximum.fill('5'); await maximum.press('Enter'); assert.equal(await maximum.inputValue(),'4'); assert.equal((await stored()).maxColors,64);
+  await maximum.fill('3'); await maximum.press('Enter'); assert.equal((await stored()).maxColors,3);
+  await page.getByRole('button',{name:'Use all palette colors',exact:true}).click();
+  for (const [name,size] of [['Paper',2],['Resurrect 64',64]]) {
+    await limitPalette(name,size); assert.equal(await maximum.inputValue(),'');
+    assert.equal(await limitRange.inputValue(),String(Math.min(3,size)));
+    assert.equal((await stored()).maxColors,0); assert.equal((await stored()).lastMaxColors,3);
+  }
+  await page.getByRole('button',{name:'Reset palette settings',exact:true}).click();
+  await limitPalette(FULL_PRESETS.at(-1).name,FULL_PRESETS.at(-1).colors.length);
+  await settingsButton.click();
+  await page.locator('input[type=file][accept="image/*"]').setInputFiles(fixturePath);
+  results.extra.push('Palette-sized slider/number, untouched blur, small-palette reload and invalid edit retain64; explicit3 and All remember3 across palette switches');
 
   // Full GIF: source compositing, preserved delays/loop, first-frame clipboard,
   // actual worker asset loaded under a deployment subpath, and mixed ZIP.

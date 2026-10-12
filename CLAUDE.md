@@ -46,6 +46,8 @@ PNGs and GIFs are encoded by hand, not through a canvas, because some browsers a
 
 The preceding two-bit PNG rule applies to the 1-bit family. Full palette exports also avoid canvas encoding. Import exactness refers to browser-decoded visible sRGB values, not arbitrary original file/profile bytes; the supplied PNG fixtures matched an independent decoder. Physical-phone and Safari testing of the new family has not yet been completed. For the built-browser regression harness after a feature commit, set `BASE_REF` to the pre-feature revision; its default `HEAD` is suitable while the feature is still uncommitted.
 
+Max colors controls are bounded to the active palette's color count, displaying the effective limit while retaining the global requested limit for larger palettes. Only dirty committed edits change that preference. `Dock.svelte` keys the row by the immutable palette to cancel old native gestures; palette/family changes reset drafts, and captured palette checks reject stale commits. All stays explicit; the one-color slider is disabled while its number remains editable. Conversion/export behavior and persisted storage fields are unchanged.
+
 ## Things that bite
 
 After a git checkout or merge the dev server can keep serving old CSS. Restart it, or touch the files in src, before trusting the preview.

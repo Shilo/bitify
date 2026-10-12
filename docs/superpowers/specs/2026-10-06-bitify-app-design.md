@@ -2103,6 +2103,15 @@ including after the first-visit welcome, rather than the Help row in its closed 
 ### Persistence and reset
 
 Family, palette ID, alpha cut, global matching `metric` and `maxColors` are additive preferences.
+Max colors slider and number bounds follow the active palette's unique color count.
+Their numeric display is the lesser of the requested maximum and that count; All retains
+an empty number and a slider thumb bounded from `lastMaxColors`. Neither palette selection,
+palette editing nor blurring an untouched number changes the stored global preference.
+A larger palette restores its remembered value. Only committed edits update the preference;
+invalid edits are restored, and changing palettes or closing the popup discards unfinished
+slider drafts and native gestures. All remains an explicit choice even when a numeric limit equals
+the palette's size. A one-color palette disables the immovable slider but keeps its number
+editable. Accessible descriptions explain a temporarily bounded higher preference.
 Missing or invalid metric restores Oklab; only `oklab` and `rgb` persist. Palette records
 do not own matching, so imports, edits and selections retain the global choice. Reset
 settings restores Oklab, Max colors: All, remembered limit 16 and cut 128. Missing selection falls back

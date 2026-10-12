@@ -196,28 +196,43 @@
   }
   function resetPaletteSettings(e) {
     metric = 'oklab'; alphaCut = 128; maxColors = 0; lastMaxColors = 16;
+    restoreLimitDrafts(); // Clear pending edits before keyboard focus can blur them.
     if (!e.detail) dock.querySelector('[aria-label="Oklab matching"]')?.focus();
   }
 
   // Source-wide preparation is expensive: keep edits local until the gesture
   // finishes. All takes the existing conversion path without preparation.
   let limitNumber = $state(''), limitRange = $state(16);
+  const limitMax = $derived(fullPalette.colors.length);
+  const visibleLimit = $derived(maxColors ? Math.min(maxColors, limitMax) : 0);
+  const limitDescription = $derived(maxColors > limitMax
+    ? `This palette has ${limitMax} ${limitMax === 1 ? 'color' : 'colors'}. Your ${maxColors}-color limit returns with a larger palette.`
+    : undefined);
+  let numberDirty = false, rangeDirty = false, numberPalette, rangePalette;
+  function restoreLimitDrafts() {
+    limitNumber = visibleLimit ? String(visibleLimit) : '';
+    limitRange = Math.min(maxColors || lastMaxColors, limitMax);
+    numberDirty = rangeDirty = false;
+    numberPalette = rangePalette = null;
+  }
   $effect(() => {
-    limitNumber = maxColors ? String(maxColors) : '';
-    limitRange = maxColors || lastMaxColors;
+    fullPalette, family, panel; // Palette switches and closing discard unfinished edits.
+    restoreLimitDrafts();
   });
   function applyLimit(value) {
-    if (!Number.isInteger(value) || value < 0 || value > 256) return;
+    if (!Number.isInteger(value) || value < 0 || value > limitMax) return;
     if (value) lastMaxColors = value;
     maxColors = value;
-    limitNumber = value ? String(value) : '';
-    limitRange = value || lastMaxColors;
+    restoreLimitDrafts();
   }
   function finishLimitNumber(e) {
     const box = e.currentTarget;
-    if (box.validity.valid && (box.value === '' || Number.isInteger(box.valueAsNumber))) applyLimit(box.value === '' ? 0 : box.valueAsNumber);
-    // Restore incomplete/out-of-range edits; they never changed conversion.
-    box.value = limitNumber = maxColors ? String(maxColors) : '';
+    if (numberDirty && numberPalette === fullPalette && box.validity.valid && (box.value === '' || Number.isInteger(box.valueAsNumber)))
+      applyLimit(box.value === '' ? 0 : box.valueAsNumber);
+    // Untouched displayed values must not overwrite a larger remembered limit.
+    // Incomplete, out-of-range and abandoned palette edits never change conversion.
+    restoreLimitDrafts();
+    box.value = limitNumber;
   }
 
   // A number box is empty while its setting is on Auto or off, and then shows this instead: what
@@ -384,22 +399,26 @@
         </div>
         <button class="btn glass-btn icon-only" disabled={metric === 'oklab' && alphaCut === 128 && maxColors === 0 && lastMaxColors === 16} aria-label="Reset palette settings" use:tooltip={'Restore Oklab matching, all colors and the default opacity cut.'} onpointerdown={e => e.preventDefault()} onclick={resetPaletteSettings}><PixelIcon name="reset"/></button>
       </div>
+      {#key fullPalette}
       <div class="palette-setting-row palette-limit-row">
+        {#if limitDescription}<span id="full-limit-description" hidden>{limitDescription}</span>{/if}
         <label class="key" for="full-max-colors">Max colors</label>
-        <input id="full-max-colors" class="glass-range" type="range" min="1" max="256" step="1"
-          value={limitRange} aria-label="Max colors" aria-valuetext={maxColors === 0 && limitNumber === '' ? 'All colors; move to set a limit' : `${limitRange} colors per image`}
-          oninput={e => { limitRange = +e.currentTarget.value; limitNumber = e.currentTarget.value; }}
-          onchange={e => applyLimit(+e.currentTarget.value)}
-          onpointercancel={() => { limitRange = maxColors || lastMaxColors; limitNumber = maxColors ? String(maxColors) : ''; }} />
+        <input id="full-max-colors" class="glass-range" type="range" min="1" max={limitMax} step="1" disabled={limitMax === 1}
+          value={limitRange} aria-label="Max colors" aria-describedby={limitDescription ? 'full-limit-description' : undefined}
+          aria-valuetext={maxColors === 0 && limitNumber === '' ? (limitMax === 1 ? 'All colors' : 'All colors; move to set a limit') : `${limitRange} colors per image`}
+          oninput={e => { rangeDirty = true; rangePalette = fullPalette; limitRange = +e.currentTarget.value; limitNumber = e.currentTarget.value; }}
+          onchange={e => { if (rangeDirty && rangePalette === fullPalette) applyLimit(+e.currentTarget.value); }}
+          onpointercancel={restoreLimitDrafts} />
         <div class="field palette-limit-field">
-          <input class="tnum" type="number" min="1" max="256" step="1" inputmode="numeric" aria-label="Max colors value"
-            value={limitNumber} placeholder="—" oninput={e => limitNumber = e.currentTarget.value}
+          <input class="tnum" type="number" min="1" max={limitMax} step="1" inputmode="numeric" aria-label="Max colors value" aria-describedby={limitDescription ? 'full-limit-description' : undefined}
+            value={limitNumber} placeholder="—" oninput={e => { numberDirty = true; numberPalette = fullPalette; limitNumber = e.currentTarget.value; }}
             onchange={finishLimitNumber} onblur={finishLimitNumber}
             onkeydown={e => { if (e.key === 'Enter') { e.preventDefault(); finishLimitNumber(e); } }} />
           <button aria-label="Use all palette colors" aria-pressed={maxColors === 0}
             use:tooltip={'Use all colors. A limit uses fewer colors per image from the selected palette.'} onpointerdown={e => e.preventDefault()} onclick={() => applyLimit(0)}>All</button>
         </div>
       </div>
+      {/key}
       {#if soft || alphaCut !== 128}
         <div class="palette-setting-row">
           <label class="key" for="full-alpha-cut">Opacity cut</label>

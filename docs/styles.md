@@ -13,8 +13,11 @@ guarantee every color appears in an image. Output alpha stays binary, with a sep
 Opacity cut of 1–255 (128 by default). Its settings control always offers **Matching:
 Oklab / RGB** and **Max colors**; Opacity cut appears for partially transparent sources or a changed cut.
 Oklab approximates perceived differences; RGB compares encoded sRGB channel values.
-The maximum is optional: drag its slider or type 1–256, then finish the edit. **All**
-restores unrestricted matching. The algorithm chooses a smaller subset from the shared
+The maximum is optional: drag its slider or type a number up to the active palette's
+color count, then finish the edit. The controls show the effective limit; switching to a
+smaller palette retains the remembered limit, which returns with a larger palette.
+Only editing the limit changes that preference. **All** restores unrestricted matching.
+The algorithm chooses a smaller subset from the shared
 palette for each image, then matches original pixels directly to that subset. It never
 changes the saved palette or forces unused colors into the output. Transparency does not
 count against the maximum. GIFs select one subset over all duration-weighted source frames.
