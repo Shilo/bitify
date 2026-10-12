@@ -1,4 +1,4 @@
-// Opt-in compatibility probe. No preview/canvas encoder participates in this path.
+// No preview/canvas encoder participates in this path.
 export const EXPORT_DRAG_TYPE = 'application/x-bitify-export';
 // Mobile browsers can report a fine pointer when a mouse is connected.
 export function isMobileExportDevice() {
@@ -11,6 +11,7 @@ export function createExportDrag({ request, prepare, notify, changed = () => {},
   delay = 180, grace = 60000, revoke = url => URL.revokeObjectURL(url) }) {
   let desired = null, ready = null, running = null, timer, active = null, disposed = false;
   const retired = new Map();
+  const observers = new Set();
   const release = record => { if (record?.url) revoke(record.url); };
   function retire(record) {
     const remaining = (record.until ?? 0) - Date.now();
@@ -19,7 +20,10 @@ export function createExportDrag({ request, prepare, notify, changed = () => {},
     const timeout = setTimeout(() => { retired.delete(record); release(record); }, remaining);
     retired.set(record, timeout);
   }
-  const publish = state => changed({ state, name: ready?.file.name ?? desired?.name ?? '' });
+  const publish = state => {
+    changed({ state, name: ready?.file.name ?? desired?.name ?? '' });
+    for (const observer of observers) observer();
+  };
   function discardReady() {
     if (ready && ready !== active) retire(ready);
     ready = null;
@@ -65,6 +69,8 @@ export function createExportDrag({ request, prepare, notify, changed = () => {},
     }
   }
   return {
+    readyFor(item) { return !disposed && same(ready?.request, request(item)) ? ready : null; },
+    subscribe(observer) { observers.add(observer); observer(); return () => observers.delete(observer); },
     hover(item) { if (disposed) return; desired = item; schedule(); },
     cancelHover() { desired = null; clearTimeout(timer); if (!active) publish(ready ? 'ready' : 'idle'); },
     leave(item) { if (desired?.id === item.id) { desired = null; clearTimeout(timer); if (!active) publish(ready ? 'ready' : 'idle'); } },
@@ -73,7 +79,7 @@ export function createExportDrag({ request, prepare, notify, changed = () => {},
       if (ready && !valid(ready)) { discardReady(); log('invalidated'); publish('idle'); }
       schedule();
     },
-    start(event, item, mode = 'combined') {
+    start(event, item, mode = 'combined', source) {
       const asked = request(item);
       if (disposed || active || !event.dataTransfer || !same(ready?.request, asked)) {
         event.preventDefault(); log('drag-blocked', { name: item.name, reason: 'missing-or-stale' });
@@ -86,12 +92,25 @@ export function createExportDrag({ request, prepare, notify, changed = () => {},
       }
       const transfer = event.dataTransfer;
       try {
-        transfer.items.clear(); // Do not retain browser-default image/HTML/URL data.
+        if (mode === 'native' || mode === 'native-only') {
+          // The browser must originate the drag from THIS decoded export image.
+          // Size/type alone cannot distinguish an old export from the current one.
+          const image = source?.image;
+          if (source?.record !== ready || !source.decoded || event.target !== image
+            || image.src !== ready.url || !image.complete || image.naturalWidth !== ready.width
+            || image.naturalHeight !== ready.height || transfer.files.length !== 1
+            || transfer.files[0].size !== ready.file.size || transfer.files[0].type !== ready.file.type) {
+            throw new Error('Native image is missing, undecoded or stale');
+          }
+          // clearData removes strings while retaining Chromium's native image bytes.
+          // items.clear/add(File) destroys that native representation on Windows.
+          transfer.clearData();
+        } else transfer.items.clear();
         transfer.effectAllowed = 'copy';
-        if (mode !== 'download-url') {
+        if (mode !== 'download-url' && mode !== 'native' && mode !== 'native-only') {
           if (!transfer.items.add(ready.file)) throw new Error('Browser rejected the file payload');
         }
-        if (mode !== 'file') transfer.setData('DownloadURL', `${ready.file.type}:${ready.file.name}:${ready.url}`);
+        if (mode !== 'file' && mode !== 'native-only') transfer.setData('DownloadURL', `${ready.file.type}:${ready.file.name}:${ready.url}`);
         transfer.setData(EXPORT_DRAG_TYPE, '1');
         active = ready;
         log('drag-start', { name: active.file.name, type: active.file.type, bytes: active.file.size,
@@ -124,14 +143,44 @@ export function createExportDrag({ request, prepare, notify, changed = () => {},
       for (const timeout of retired.values()) clearTimeout(timeout);
       for (const record of records) release(record);
       retired.clear(); ready = active = null;
+      observers.clear();
     },
   };
 }
 
 export function exportDragArt(node, options) {
   let armed = false;
+  let source, unsubscribe, controller;
+  const nativeMode = () => options?.mode === 'native' || options?.mode === 'native-only';
+  function removeSource() { if (source) { source.image.draggable = false; source.image.remove(); } source = undefined; }
+  function syncSource() {
+    // Native dragend must still reach its source after settings change mid-drag.
+    if (source?.dragging) return;
+    const record = nativeMode() ? options?.controller?.readyFor(options.item) : null;
+    if (source?.record === record) return;
+    removeSource();
+    if (!record) return;
+    const image = node.ownerDocument.createElement('img');
+    image.className = 'export-drag-image'; image.alt = ''; image.draggable = false;
+    const current = { record, image, decoded: false };
+    source = current;
+    image.addEventListener('dragend', end);
+    image.src = record.url; node.appendChild(image);
+    image.decode().then(() => {
+      if (source !== current || options?.controller?.readyFor(options.item) !== record) return;
+      current.decoded = true;
+      image.draggable = armed && capability();
+    }).catch(() => { if (source === current) removeSource(); });
+  }
+  function connect() {
+    if (controller !== options?.controller) {
+      unsubscribe?.(); controller = options?.controller;
+      unsubscribe = controller?.subscribe(syncSource);
+    }
+    syncSource();
+  }
   let desktop, view;
-  const disarm = () => { armed = false; if (options?.controller) node.draggable = false; };
+  const disarm = () => { armed = false; if (source) source.image.draggable = false; if (options?.controller) node.draggable = false; };
   const capabilityChanged = () => { if (!desktop.matches) { disarm(); options?.controller?.leave(options.item); } };
   function capability() {
     if (!desktop && options?.controller) {
@@ -154,7 +203,8 @@ export function exportDragArt(node, options) {
   const leave = () => options?.controller?.leave(options.item);
   const down = event => {
     armed = !!options?.controller && mouse(event) && event.button === 0 && !event.defaultPrevented;
-    if (options?.controller) node.draggable = armed;
+    if (options?.controller) node.draggable = armed && !nativeMode();
+    if (source) source.image.draggable = armed && source.decoded && capability();
     if (armed) options.controller.hover(options.item);
     else options?.controller?.leave(options.item);
   };
@@ -162,15 +212,17 @@ export function exportDragArt(node, options) {
     if (!options?.controller) return;
     if (!armed || !capability() || event.defaultPrevented) { disarm(); event.preventDefault(); return; }
     options.cancel();
-    options.controller.start(event, options.item, options.mode);
+    if (nativeMode()) { if (options.controller.start(event, options.item, options.mode, source)) source.dragging = true; }
+    else options.controller.start(event, options.item, options.mode);
   };
-  const end = event => { disarm(); options?.controller?.end(event); };
+  const end = event => { if (source) source.dragging = false; disarm(); options?.controller?.end(event); syncSource(); };
   const listeners = { pointerenter: enter, pointerleave: leave, pointerdown: down, pointerup: disarm, pointercancel: disarm, dragstart: start, dragend: end };
   for (const [type, handler] of Object.entries(listeners)) node.addEventListener(type, handler);
+  connect();
   return {
-    update(value) { options = value; if (!options?.controller) { armed = false; node.removeAttribute('draggable'); } },
+    update(value) { disarm(); options = value; connect(); if (!options?.controller) node.removeAttribute('draggable'); },
     destroy() {
-      disarm(); leave(); desktop?.removeEventListener('change', capabilityChanged);
+      disarm(); leave(); unsubscribe?.(); removeSource(); desktop?.removeEventListener('change', capabilityChanged);
       for (const type of ['pointerup', 'pointercancel', 'blur']) view?.removeEventListener(type, disarm);
       for (const [type, handler] of Object.entries(listeners)) node.removeEventListener(type, handler);
     },

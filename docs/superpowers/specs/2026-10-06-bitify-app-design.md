@@ -8,9 +8,10 @@ opaque RGB colors. In 1-bit, either of the two selected colors may be None, whic
 its pixels transparent. Full palettes classify source alpha separately. It runs entirely
 in the browser. Nothing is uploaded.
 
-### Desktop export-drag compatibility prototype (October 11, 2026)
+### Desktop optimized export dragging (October 11, 2026)
 
-`?dragExport=1` opts into an experimental main-wall mouse drag and diagnostic panel.
+Main-wall images and fullscreen Preview support mouse dragging on ordinary URLs.
+`?dragExport=1` additionally enables the compatibility diagnostic panel.
 It requires a primary fine pointer with hover support. Coarse/no-hover mobile devices
 create no drag runtime or panel, even with the flag. Touch and pen input cannot arm a
 drag on desktop either. Release, cancellation and capability loss disarm mouse dragging.
@@ -20,8 +21,9 @@ Touch/pen takeover also cancels queued mouse-hover export work; an already runni
 export is allowed to finish and its no-longer-requested result is discarded.
 This applies to touch/pen presses on controls as well as artwork through a passive
 capture listener that does not prevent or consume the original touch gesture.
-Ordinary URLs, touch/pen gestures, the empty example and viewer keep their established
-behavior. This prototype is not a promise of Explorer or Discord interoperability.
+Touch/pen gestures and the empty example keep their established behavior. Preview
+uses the same controller and export identity as the wall; successful drags cancel its
+click-dismissal candidate. Original comparison never changes the exported conversion.
 
 The drag file uses the existing full-source conversion snapshot, analysis, `bitified`,
 `fileBytes` and `downloadName` paths. Existing Save/Copy/ZIP paths and encoders remain
@@ -35,12 +37,21 @@ image/source identity and complete conversion settings may publish a ready file.
 drag; they never use a preview, a previous settings export or an animation still.
 Once started, a drag owns its settings snapshot like Save, even if settings change later.
 
-Payload probes offer File + Chromium DownloadURL, DownloadURL only and File only.
-They omit default HTML/preview URL formats. The native URL refers to the same encoded
+The default payload preserves Chromium's native encoded-image file and adds DownloadURL.
+A transparent, hit-testable image resource is decoded from the optimized export's blob,
+while the preview canvas stays visible. Only a primary left mouse press arms this image;
+its parent button is not draggable. Record identity, decoded witness, image target/src,
+dimensions and current conversion inputs are checked synchronously before allowing drag.
+An active source stays connected through settings invalidation until dragend; its own
+dragend listener also handles removal of its tile. Diagnostic probes retain native-only,
+JS File + DownloadURL, DownloadURL-only and JS File-only alternatives.
+Default HTML/preview URL formats are removed without destroying the native file.
+The native URL refers to the same encoded
 file; active drags retain it across window blur, with 60 seconds of consumer grace
 after dragend. At eight evicted exports still in grace, new drags are blocked until
 capacity returns. Drops back into Bitify are ignored before artwork/palette import.
 
+Ordinary URLs do not hash exports, retain logs or expose the diagnostic window hook.
 Diagnostics retain at most 250 metadata events locally, including byte size, SHA-256,
 settings, browser, trusted-event flag and explicit manual destination outcomes. A
 received-file check compares against the latest logged drag, labels older matches,

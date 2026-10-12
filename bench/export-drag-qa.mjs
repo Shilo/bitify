@@ -69,6 +69,9 @@ async function setup(browser, { prototype = true, mobile = false, settings = {},
 }
 async function importFile(page, path) {
   await page.locator('input[type=file][accept="image/*"]').setInputFiles(path);
+  // The empty example also has a canvas; await the actual imported tile first.
+  await page.locator(`.tiles button[aria-label="Save ${path.endsWith('.gif') ? 'drag-animation.gif' : 'drag-source.png'}"]`).waitFor({ state: 'attached' });
+  await page.locator('.tiles .art').first().waitFor({ state: 'visible' });
   await page.locator('.tiles .tile canvas').waitFor();
 }
 async function ready(page) {
@@ -198,9 +201,8 @@ try {
         const frame = page.frames().find(f => f.parentFrame());
         const variants = [];
         for (const mode of ['combined', 'download-url', 'file']) {
-          if (mode !== 'combined') {
-            await page.locator('.drag-export-probe summary').click(); await page.locator('.drag-export-probe select').first().selectOption(mode); await page.locator('.drag-export-probe summary').click();
-          }
+          // Select explicitly; the production default is now native image.
+          await page.locator('.drag-export-probe summary').click(); await page.locator('.drag-export-probe select').first().selectOption(mode); await page.locator('.drag-export-probe summary').click();
           await frame.evaluate(() => { window.received = null; }); await ready(page);
           await page.mouse.move(art.x + art.width / 2, art.y + art.height / 2); await page.mouse.down();
           await page.mouse.move(receiver.x + 90, receiver.y + 60, { steps: 20 }); await page.mouse.up();

@@ -27,6 +27,34 @@ afterEach(() => { controllers.splice(0).forEach(c => c.destroy()); vi.useRealTim
 const prepared = async f => { f.controller.hover(f.item); await vi.advanceTimersByTimeAsync(180); };
 
 describe('full-export drag controller', () => {
+  it('preserves the browser native file while replacing preview strings with the same optimized DownloadURL', async () => {
+    const f = track(fixture()); await prepared(f);
+    const record = f.controller.readyFor(f.item), event = dragEvent();
+    event.dataTransfer.items.add(record.file);
+    event.dataTransfer.clearData = () => event.dataTransfer.strings.clear();
+    const image = { src: record.url, complete: true, naturalWidth: 4096, naturalHeight: 2048 };
+    event.target = image;
+    expect(f.controller.start(event, f.item, 'native', { record, image, decoded: true })).toBe(true);
+    expect(event.dataTransfer.files).toEqual([record.file]);
+    expect(event.dataTransfer.items.clear).not.toHaveBeenCalled();
+    expect(event.dataTransfer.types).toEqual(['DownloadURL', EXPORT_DRAG_TYPE, 'Files']);
+    expect(event.dataTransfer.strings.get('DownloadURL')).toBe('image/png:full-1bit.png:blob:full');
+  });
+  it.each(['record', 'src', 'decoded', 'target', 'dimensions', 'settings'])('cancels a native drag with invalid %s even if file size and MIME match', async problem => {
+    const f = track(fixture()); await prepared(f);
+    const record = f.controller.readyFor(f.item), event = dragEvent();
+    event.dataTransfer.items.add(record.file); event.dataTransfer.clearData = () => event.dataTransfer.strings.clear();
+    const image = { src: record.url, complete: true, naturalWidth: 4096, naturalHeight: 2048 };
+    const source = { record, image, decoded: true }; event.target = image;
+    if (problem === 'record') source.record = { ...record };
+    if (problem === 'src') image.src = 'blob:old';
+    if (problem === 'decoded') source.decoded = false;
+    if (problem === 'target') event.target = {};
+    if (problem === 'dimensions') image.naturalWidth = 0;
+    if (problem === 'settings') f.change('new');
+    expect(f.controller.start(event, f.item, 'native', source)).toBe(false);
+    expect(event.preventDefault).toHaveBeenCalled();
+  });
   it('blocks an unprepared drag, then transfers only the ready export and native download URL', async () => {
     const f = track(fixture()), missing = dragEvent();
     expect(f.controller.start(missing, f.item)).toBe(false); expect(missing.preventDefault).toHaveBeenCalled();
@@ -166,8 +194,58 @@ describe('mouse-only image drag action', () => {
     const handlers = new Map();
     return { handlers, addEventListener: (type, handler) => handlers.set(type, handler), removeEventListener: type => handlers.delete(type), removeAttribute: vi.fn() };
   }
+  it('an obsolete decode cannot arm a replacement image, and touch cannot arm a decoded export', async () => {
+    const f = track(fixture()), node = nodeStub(), images = [], jobs = [];
+    node.ownerDocument = { createElement: () => {
+      const job = pending(), image = { decode: () => job.promise, remove: vi.fn(), addEventListener: vi.fn() };
+      images.push(image); jobs.push(job); return image;
+    } };
+    node.appendChild = vi.fn();
+    const action = exportDragArt(node, { controller: f.controller, item: f.item, mode: 'native', cancel: vi.fn() });
+    await prepared(f);
+    node.handlers.get('pointerdown')({ pointerType: 'mouse', button: 0 });
+    expect(images[0].draggable).toBe(false); expect(node.draggable).toBe(false);
+    f.change('new'); f.controller.refresh(); await vi.advanceTimersByTimeAsync(180);
+    expect(images[0].remove).toHaveBeenCalled();
+    jobs[0].resolve(); await vi.advanceTimersByTimeAsync(0);
+    expect(images[0].draggable).toBe(false); expect(images[1].draggable).toBe(false);
+    jobs[1].resolve(); await vi.advanceTimersByTimeAsync(0);
+    expect(images[1].draggable).toBe(true);
+    node.handlers.get('pointerdown')({ pointerType: 'touch', button: 0 }); expect(images[1].draggable).toBe(false);
+    node.handlers.get('pointerdown')({ pointerType: 'pen', button: 0 }); expect(images[1].draggable).toBe(false);
+    action.destroy(); expect(images[1].remove).toHaveBeenCalled();
+  });
+  it('a decode rejection removes the native source and cannot fall back to the preview button', async () => {
+    const f = track(fixture()), node = nodeStub(), job = pending(), image = { decode: () => job.promise, remove: vi.fn(), addEventListener: vi.fn() };
+    node.ownerDocument = { createElement: () => image }; node.appendChild = vi.fn();
+    const action = exportDragArt(node, { controller: f.controller, item: f.item, mode: 'native', cancel: vi.fn() });
+    await prepared(f); job.reject(new Error('decode failed')); await vi.advanceTimersByTimeAsync(0);
+    node.handlers.get('pointerdown')({ pointerType: 'mouse', button: 0 });
+    expect(image.remove).toHaveBeenCalled(); expect(node.draggable).toBe(false);
+    action.destroy();
+  });
+  it('keeps the active native source connected through invalidation, receives dragend, and prepares the next export', async () => {
+    const f = track(fixture()), node = nodeStub(), images = [];
+    node.ownerDocument = { createElement: () => {
+      const handlers = new Map(), image = { complete: true, naturalWidth: 4096, naturalHeight: 2048,
+        decode: () => Promise.resolve(), remove: vi.fn(), addEventListener: (type, fn) => handlers.set(type, fn), handlers };
+      images.push(image); return image;
+    } }; node.appendChild = vi.fn();
+    const action = exportDragArt(node, { controller: f.controller, item: f.item, mode: 'native', cancel: vi.fn() });
+    await prepared(f); await vi.advanceTimersByTimeAsync(0);
+    const event = dragEvent(); event.target = images[0];
+    event.dataTransfer.items.add(f.controller.readyFor(f.item).file);
+    event.dataTransfer.clearData = () => event.dataTransfer.strings.clear();
+    node.handlers.get('pointerdown')({ pointerType: 'mouse', button: 0 }); node.handlers.get('dragstart')(event);
+    expect(event.preventDefault).not.toHaveBeenCalled();
+    f.change('new'); f.controller.refresh(); expect(images[0].remove).not.toHaveBeenCalled();
+    images[0].handlers.get('dragend')(event); expect(images[0].remove).toHaveBeenCalled();
+    await vi.advanceTimersByTimeAsync(180); expect(f.prepare).toHaveBeenCalledTimes(2);
+    expect(f.controller.readyFor(f.item)).not.toBeNull();
+    action.destroy();
+  });
   it('leaves touch and pen unarmed, arms a primary mouse press, and clears comparison at dragstart', () => {
-    const node = nodeStub(), controller = { hover: vi.fn(), leave: vi.fn(), start: vi.fn(), end: vi.fn() }, cancel = vi.fn(), item = { id: 1 };
+    const node = nodeStub(), controller = { subscribe: vi.fn(() => () => {}), hover: vi.fn(), leave: vi.fn(), start: vi.fn(), end: vi.fn() }, cancel = vi.fn(), item = { id: 1 };
     const action = exportDragArt(node, { controller, item, mode: 'combined', cancel });
     for (const pointerType of ['touch', 'pen']) {
       node.handlers.get('pointerdown')({ pointerType, button: 0 }); const event = dragEvent(); node.handlers.get('dragstart')(event);
@@ -187,7 +265,7 @@ describe('mouse-only image drag action', () => {
   });
   it('rejects mouse-shaped events on a mobile capability and never prepares an export', () => {
     vi.stubGlobal('matchMedia', () => ({ matches: false, addEventListener: vi.fn(), removeEventListener: vi.fn() }));
-    const node = nodeStub(), controller = { hover: vi.fn(), leave: vi.fn(), start: vi.fn() }, cancel = vi.fn();
+    const node = nodeStub(), controller = { subscribe: vi.fn(() => () => {}), hover: vi.fn(), leave: vi.fn(), start: vi.fn() }, cancel = vi.fn();
     const action = exportDragArt(node, { controller, item: { id: 1 }, cancel });
     node.handlers.get('pointerenter')({ pointerType: 'mouse' }); node.handlers.get('pointerdown')({ pointerType: 'mouse', button: 0 });
     const event = dragEvent(); node.handlers.get('dragstart')(event);
@@ -197,7 +275,7 @@ describe('mouse-only image drag action', () => {
   it('disarms after mouse release/cancel, touch/pen takeover, and loss of desktop capability', () => {
     let change; const media = { matches: true, addEventListener: (_, fn) => { change = fn; }, removeEventListener: vi.fn() };
     vi.stubGlobal('matchMedia', () => media);
-    const node = nodeStub(), controller = { hover: vi.fn(), leave: vi.fn(), start: vi.fn(), end: vi.fn() }, cancel = vi.fn();
+    const node = nodeStub(), controller = { subscribe: vi.fn(() => () => {}), hover: vi.fn(), leave: vi.fn(), start: vi.fn(), end: vi.fn() }, cancel = vi.fn();
     const action = exportDragArt(node, { controller, item: { id: 1 }, cancel });
     for (const type of ['pointerup', 'pointercancel', 'dragend']) {
       node.handlers.get('pointerdown')({ pointerType: 'mouse', button: 0 }); expect(node.draggable).toBe(true);
@@ -225,7 +303,7 @@ describe('mouse-only image drag action', () => {
   it('allows pressed mouse edge crossing but clears outside release, cancel and blur', () => {
     const handlers = new Map(), view = { addEventListener: (type, fn) => handlers.set(type, fn), removeEventListener: type => handlers.delete(type) };
     const node = nodeStub(); node.ownerDocument = { defaultView: view };
-    const controller = { hover: vi.fn(), leave: vi.fn(), start: vi.fn() }, action = exportDragArt(node, { controller, item: { id: 1 }, cancel: vi.fn() });
+    const controller = { subscribe: vi.fn(() => () => {}), hover: vi.fn(), leave: vi.fn(), start: vi.fn() }, action = exportDragArt(node, { controller, item: { id: 1 }, cancel: vi.fn() });
     for (const type of ['pointerup', 'pointercancel', 'blur']) {
       node.handlers.get('pointerdown')({ pointerType: 'mouse', button: 0 }); node.handlers.get('pointerleave')();
       expect(node.draggable).toBe(true); handlers.get(type)(); expect(node.draggable).toBe(false);
@@ -249,7 +327,7 @@ describe('mouse-only image drag action', () => {
   ])('keeps detected mobile devices disabled even with a fine hover pointer: %j', navigator => {
     vi.stubGlobal('navigator', navigator);
     expect(isMobileExportDevice()).toBe(true);
-    const node = nodeStub(), controller = { hover: vi.fn(), leave: vi.fn(), start: vi.fn() }, cancel = vi.fn();
+    const node = nodeStub(), controller = { subscribe: vi.fn(() => () => {}), hover: vi.fn(), leave: vi.fn(), start: vi.fn() }, cancel = vi.fn();
     const action = exportDragArt(node, { controller, item: { id: 1 }, cancel });
     node.handlers.get('pointerdown')({ pointerType: 'mouse', button: 0 });
     expect(node.draggable).toBe(false); expect(controller.hover).not.toHaveBeenCalled(); action.destroy();

@@ -119,6 +119,9 @@ button { font: inherit; color: inherit; }
 }
 /* 8px clear on every side, the same as the buttons in the corner and the gap to the caption */
 .art canvas { position: absolute; inset: 8px; width: calc(100% - 16px); height: calc(100% - 16px); object-fit: contain; image-rendering: pixelated; }
+/* Native Windows dragging reads the encoded export from this decoded resource.
+   The canvas stays visible, including original comparison and draft previews. */
+.art .export-drag-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; }
 .cap { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 8px; font-size: 13px; min-width: 0; }
 .name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .dim { margin-left: auto; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }

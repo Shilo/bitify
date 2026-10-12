@@ -112,8 +112,12 @@ Two were set by the owner. The rest are what the work depends on.
 4. **The loops in `src/lib/bitify.js` make nothing per pixel**: no array, no object, no
    function. They run once for every pixel of a photo, on phones.
 5. **Work per change follows the screen, not the file.** Only adding an image, saving and
-   copying may go through every pixel in normal use. The opt-in desktop drag prototype
-   additionally prepares one hovered image's full export after settings settle.
+   copying may go through every pixel; desktop mouse dragging additionally prepares
+   one hovered image's full export after settings settle, on ordinary URLs too. Jobs
+   are debounced and serial, with one current encoded export shared by wall and Preview.
+   Native dragging requires a decoded image resource per rendered surface for that
+   export, adding full-image decode/memory cost on desktop. Touch/mobile create no drag
+   runtime. Only opt-in diagnostics hash exports and retain metadata logs.
 
 ## What was wrong
 

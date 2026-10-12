@@ -33,7 +33,7 @@
     <summary>Drag export test: <span aria-live="polite">{status.state}</span></summary>
     <p>Hover over an image until ready, then drag. Uses full converted PNG/GIF bytes. Destination support is experimental. Touch gestures stay unchanged.</p>
     {#if status.name}<p>{status.name}</p>{/if}
-    <label>Payload <select bind:value={mode}><option value="combined">File + DownloadURL</option><option value="download-url">DownloadURL only</option><option value="file">File only</option></select></label>
+    <label>Payload <select bind:value={mode}><option value="native">Native image + DownloadURL</option><option value="native-only">Native image only</option><option value="combined">JS File + DownloadURL (old probe)</option><option value="download-url">DownloadURL only</option><option value="file">JS File only</option></select></label>
     <label>Destination <select bind:value={target}><option>File Explorer</option><option>Discord desktop</option><option>Discord web</option></select></label>
     <div class="drag-probe-actions">
       <button onclick={() => onlog('manual-result', { target, mode, result: 'accepted' })}>Record accepted</button>

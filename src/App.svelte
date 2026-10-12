@@ -28,12 +28,13 @@
 
   const storageKey = 'bitify';
   const touch = matchMedia('(pointer:coarse)').matches;
-  const dragPrototype = new URLSearchParams(location.search).get('dragExport') === '1'
-    && matchMedia('(hover: hover) and (pointer: fine)').matches && !isMobileExportDevice();
+  const dragDesktop = matchMedia('(hover: hover) and (pointer: fine)').matches && !isMobileExportDevice();
+  const dragPrototype = dragDesktop && new URLSearchParams(location.search).get('dragExport') === '1';
   let dragStatus = $state({ state: 'idle', name: '' });
-  let dragMode = $state('combined');
+  let dragMode = $state('native');
   let dragLogs = $state([]);
   function dragLog(event, detail = {}) {
+    if (!dragPrototype) return;
     dragLogs = [...dragLogs.slice(-249), { at: new Date().toISOString(), event, ...detail }];
   }
   const mod = /Mac/.test(navigator.platform) ? '⌘' : 'Ctrl'; // the key the help names for pasting and copying
@@ -590,8 +591,8 @@
       ? { ...about(item, asked), loop: item.loop, frames: item.frames.map(f => ({ mask: mask(f.img, asked.style, asked.set), delay: f.delay })) }
       : still(item, asked);
 
-  // Compatibility prototype only. Keep Save, Copy and ZIP paths untouched.
-  const dragExports = dragPrototype ? createExportDrag({
+  // Prepare through the existing encoders. Keep Save, Copy and ZIP paths untouched.
+  const dragExports = dragDesktop ? createExportDrag({
     request(item) {
       const live = items.find(i => i.id === item.id);
       if (!live) return null;
@@ -607,7 +608,7 @@
       const name = downloadName(image).replace(/[<>:"/\\|?*\x00-\x1f]/g, '-');
       const type = image.frames || image.getFrame ? 'image/gif' : 'image/png';
       const file = new File([bytes], name, { type });
-      const sha256 = await exportFingerprint(file);
+      const sha256 = dragPrototype ? await exportFingerprint(file) : undefined;
       return { file, sha256, width: image.w, height: image.h, url: URL.createObjectURL(file) };
     },
     notify: say, changed: value => (dragStatus = value), log: dragLog,
@@ -623,7 +624,7 @@
     if (!dragExports) return;
     untrack(() => dragLog('session', { userAgent: navigator.userAgent, platform: navigator.platform }));
     const snapshot = () => ({ status: { ...dragStatus }, logs: [...dragLogs] });
-    window.__bitifyDragTest = { snapshot };
+    if (dragPrototype) window.__bitifyDragTest = { snapshot };
     // A touchscreen edit may begin in the Dock while the mouse still hovers art.
     // Leave the touch event untouched; only cancel mouse export preparation.
     const stopTouch = on(window, 'pointerdown', event => {
@@ -824,6 +825,7 @@
 
 {#if viewed}
   <ImageViewer item={viewed} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} {alphaCut} {metric} {maxColors} onpaletteerror={paletteLimitFailure} {busy} {message} flipped={viewInitialOriginal}
+    exportDrag={viewed.id === 0 ? undefined : dragExports} {dragMode}
     onsave={viewed.id === 0 ? undefined : () => save(viewed)}
     oncopy={viewed.id === 0 ? undefined : () => copy(viewed)}
     onclose={async () => { const trigger = viewTrigger, keyboard = viewKeyboardFocus; viewing = null; await tick(); if (keyboard) trigger?.focus({ preventScroll: true }); else trigger?.blur(); }} />
