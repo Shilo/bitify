@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { inflateSync } from 'node:zlib';
+import { spawnSync } from 'node:child_process';
 import { parsePaletteText, extractPalette } from './palette-import.js';
 
 // Fixture-only independent RGB/RGBA PNG reader, not an application decoder.
@@ -29,6 +30,17 @@ function fixture(name) {
 }
 
 describe('palette text import', () => {
+  it('bounds malformed GPL rows without ambiguous whitespace backtracking', () => {
+    // A regressed synchronous regex cannot be interrupted by Vitest's timeout.
+    // Run the large adversarial witness in a separately killable process.
+    const child = spawnSync(process.execPath, ['--input-type=module', '-e',
+      "const {parsePaletteText}=await import(process.argv[1]); try { parsePaletteText('GIMP Palette\\n0 0 0'+' '.repeat(200000)+'a\\rb','gpl'); process.exit(1); } catch(error) { process.exit(error.message.includes('Palette RGB rows') ? 0 : 2); }",
+      new URL('./palette-import.js', import.meta.url).href], { timeout: 5000 });
+    expect(child.error).toBeUndefined(); expect(child.status).toBe(0);
+    expect(parsePaletteText('GIMP Palette\n  1\t2  3   named shade  \n255 0 128', 'gpl')).toEqual(['#010203', '#ff0080']);
+    expect(() => parsePaletteText('GIMP Palette\n1 2 3Name', 'gpl')).toThrow('Palette RGB rows');
+    expect(() => parsePaletteText('JASC-PAL\n0100\n1\n1 2 3 name', 'pal')).toThrow('Palette RGB rows');
+  }, 10000);
   it('accepts explicit hex grammar and deduplicates without mining arbitrary documents', () => {
     expect(parsePaletteText('\uFEFF#ABC, abcdef;\n000000 #aabbcc')).toEqual(['#aabbcc', '#abcdef', '#000000']);
     for (const text of ['', 'aabbccgarbage', '#1234', '#12345678', 'Color: #abcdef', '<style>#abcdef</style>', '#abcdef,,x']) expect(() => parsePaletteText(text)).toThrow();

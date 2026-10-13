@@ -6,7 +6,9 @@ export const MAX_DRAFT_COLORS = 4096;
 export const MAX_TEXT_BYTES = 256 * 1024;
 
 function rgbRow(line, allowName) {
-  const match = (allowName ? /^\s*(\d+)\s+(\d+)\s+(\d+)(?:\s+[^\r\n]*)?\s*$/ : /^\s*(\d+)\s+(\d+)\s+(\d+)\s*$/).exec(line);
+  // Trim once; overlapping name/trailing whitespace quantifiers can backtrack
+  // catastrophically when a malformed long GPL name contains a carriage return.
+  const match = (allowName ? /^(\d+)\s+(\d+)\s+(\d+)(?:\s[^\r\n]*)?$/ : /^(\d+)\s+(\d+)\s+(\d+)$/).exec(line.trim());
   if (!match || match.slice(1, 4).some(n => Number(n) > 255)) throw new Error('Palette RGB rows must contain three integers between 0 and 255.');
   return '#' + match.slice(1, 4).map(n => Number(n).toString(16).padStart(2, '0')).join('');
 }
