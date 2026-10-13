@@ -20,6 +20,11 @@ summaries up to 4096 entries, 32768 bins thereafter, and six deterministic refin
 Its cache retains two small palettes/signatures rather than old sources/histograms.
 Matching, caps, cleanup, playback and resize do not regenerate it. Worker construction
 failure uses the cooperative core. Export subscribers survive preview cancellation.
+App's completed generated result stores the request key rather than the captured wall.
+Tiles clear inactive limiter/cleanup request references. Canceling the final subscriber
+of an unstarted limiter/cleanup job removes it from the queue immediately; active or
+independently subscribed export jobs remain alive. Cleanup Off skips work, but a prior
+cached map still costs two bytes/source pixel until its source identity is collectible.
 
 Pixel 8 Pro, Android 17, Brave/Chromium 155: the supplied 56-frame GIF took 624ms for a
 cold cap-8 worker job, 129ms for cleanup and 1439ms for Generated 32. Cached generation
@@ -27,8 +32,19 @@ took 0.1ms. At 256×229, warm cached rendering averaged 0.57ms/frame versus 2.08
 all 56 indexes matched. Buffers cost 6,580,224 bytes and were released afterward. This
 is one bounded device run, not FPS, hard deadlines or a controlled speedup distribution.
 Existing noncancelable hover export preparation can retain an old generation subscriber
-and delay a newer serial job. Safari and sustained whole-app memory peaks remain
-unverified. See the [implementation record](research/2026-10-12-palette-implementation.md).
+and delay a newer serial job. Safari, prolonged sessions and isolated whole-app memory
+peaks remain unverified. See the [implementation record](research/2026-10-12-palette-implementation.md).
+
+Built-app desktop and physical-phone wall stress checks each passed 18 lifecycle stages
+with 184 assets, 17 GIFs and 439 total source frames (including stills), about 85 MiB of
+decoded RGBA. A bounded 28-asset cohort exercised cap 8 and Cleanup On/Off. Independent
+decoding of both full-wall ZIPs verified every file/frame's dimensions, alpha, shared
+palette membership and GIF timing/loop. Large import/regeneration changes still caused
+380ms phone and up to 1091ms desktop long tasks. All-Brave Android process PSS remained
+above baseline after clear; it is not isolated app memory, and rounded phone JS heap
+values cannot establish a memory bound. The 8 MiB cache is not a whole-heap limit.
+See the [wall stress and retention record](research/2026-10-12-generated-wall-stress.md)
+for scope, timings, process measurements and cross-device color differences.
 
 ## Optional one-pixel cleanup (October 12, 2026)
 

@@ -122,6 +122,7 @@
     : limited?.request === limitRequest ? limited.palette : null);
   $effect(() => {
     const request = limitRequest;
+    limited = null;
     if (family !== 'full-palette' || !request.palette || !request.maxColors || request.maxColors >= request.palette.size) return;
     const controller = new AbortController();
     getLimitedPalette(request.item, request.palette, request.alphaCut, request.metric, request.maxColors, { signal: controller.signal }).then(result => {
@@ -140,6 +141,7 @@
   const conversionCleanup = $derived(cleanup && cleaned?.request === cleanupRequest ? cleaned : null);
   $effect(() => {
     const request = cleanupRequest;
+    cleaned = null;
     if (family !== 'full-palette' || !request.cleanup || !request.palette) return;
     const controller = new AbortController();
     import('./lib/palette-cleanup-client.js').then(async client => {

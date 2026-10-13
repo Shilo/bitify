@@ -89,7 +89,16 @@ function subscribe(job, signal) {
     const consumer = {};
     job.consumers.add(consumer);
     const leave = () => { active = false; signal?.removeEventListener('abort', canceled); job.consumers.delete(consumer); };
-    const canceled = () => { if (!active) return; leave(); reject(abortError()); if (!job.consumers.size) job.controller.abort(); };
+    const canceled = () => {
+      if (!active) return; leave(); reject(abortError());
+      if (!job.consumers.size) {
+        job.controller.abort();
+        // An unstarted request must not retain its source frames behind a
+        // still-running shared export. Running jobs finish through drain().
+        const index = queue.indexOf(job);
+        if (index >= 0) { queue.splice(index, 1); job.state.active.delete(job); job.reject(abortError()); }
+      }
+    };
     signal?.addEventListener('abort', canceled, { once: true });
     job.promise.then(palette => { if (!active) return; leave(); signal?.aborted ? reject(abortError()) : resolve(palette); }, error => { if (!active) return; leave(); reject(error); });
     if (signal?.aborted) canceled();

@@ -48,6 +48,39 @@ beforeEach(async () => {
 afterEach(() => { vi.unstubAllGlobals(); });
 
 describe('whole-source cleanup job ownership', () => {
+  it('removes canceled queued clips without aborting a running export or another queued subscriber', async () => {
+    failure = 'hang'; const heldItem = { original: image() }, heldController = new AbortController();
+    const heldPreview = getPaletteCleanup(heldItem, palette(), 128, 'rgb', { signal: heldController.signal });
+    const heldExport = getPaletteCleanup(heldItem, palette(), 128, 'rgb');
+    const heldRejected = expect(heldPreview).rejects.toMatchObject({ name: 'AbortError' }); heldController.abort(); await heldRejected;
+    const disposable = { original: image(5) }, disposableController = new AbortController();
+    const canceled = getPaletteCleanup(disposable, palette(), 128, 'rgb', { signal: disposableController.signal });
+    const canceledRejected = expect(canceled).rejects.toMatchObject({ name: 'AbortError' }); disposableController.abort(); await canceledRejected;
+    const sharedItem = { original: image(2) }, sharedController = new AbortController();
+    const sharedPreview = getPaletteCleanup(sharedItem, palette(), 128, 'rgb', { signal: sharedController.signal });
+    const sharedExport = getPaletteCleanup(sharedItem, palette(), 128, 'rgb');
+    const sharedRejected = expect(sharedPreview).rejects.toMatchObject({ name: 'AbortError' }); sharedController.abort(); await sharedRejected;
+    const replacement = getPaletteCleanup(disposable, palette(), 128, 'rgb');
+    expect(instances[0].starts).toBe(1); expect(instances[0].terminated).not.toBe(true);
+    const heldResult = await prepareCleanupAsync([heldItem.original], palette(), 128, 'rgb');
+    instances[0].mode = 'normal'; instances[0].onmessage({ data: { type: 'result', result: structuredClone(heldResult) } });
+    expect(await heldExport).toEqual(heldResult); expect((await sharedExport).width).toBe(2); expect((await replacement).width).toBe(5);
+    expect(instances[0].starts).toBe(3); expect(instances[0].terminated).not.toBe(true);
+  });
+  it.skipIf(typeof globalThis.gc !== 'function')('releases canceled queued clip sources before the active export completes', async () => {
+    failure = 'hang'; const heldItem = { original: image() }, held = getPaletteCleanup(heldItem, palette(), 128, 'rgb');
+    async function canceledSource() {
+      const original = image(40000), weak = new WeakRef(original.data), controller = new AbortController();
+      const pending = getPaletteCleanup({ original }, palette(), 128, 'rgb', { signal: controller.signal });
+      controller.abort(); await pending.catch(() => {}); return weak;
+    }
+    const weak = await canceledSource();
+    for (let i = 0; i < 8; i++) { await new Promise(resolve => setTimeout(resolve, 0)); globalThis.gc(); }
+    const released = weak.deref() === undefined;
+    const result = await prepareCleanupAsync([heldItem.original], palette(), 128, 'rgb');
+    instances[0].mode = 'normal'; instances[0].onmessage({ data: { type: 'result', result: structuredClone(result) } }); await held;
+    expect(released).toBe(true);
+  });
   it('stops pixel transfers after an empty first frame and validates every later frame first', async () => {
     const original = image(70000, [0, 0, 0, 255]), item = { frames: Array.from({ length: 8 }, () => ({ original })) };
     const result = await getPaletteCleanup(item, palette(), 128, 'oklab');

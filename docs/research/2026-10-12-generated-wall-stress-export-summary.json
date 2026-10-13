@@ -1,0 +1,305 @@
+{
+  "method": "Independent Pillow compositing and NumPy full-frame pixel checks; no application imports",
+  "versions": {
+    "python": "3.12.14",
+    "pillow": "12.3.0",
+    "numpy": "2.3.5"
+  },
+  "expected": {
+    "files": 184,
+    "stills": 167,
+    "gifs": 17,
+    "frames": 439
+  },
+  "settings": {
+    "sharedPalette": "Generated 32",
+    "matching": "Oklab",
+    "maxColors": "All",
+    "cleanup": "Off",
+    "alphaCut": 128
+  },
+  "scope": "Exact dimensions, composited alpha, shared-palette membership and GIF timing/loop; no claim of perceptual optimality",
+  "crossDeviceObservation": {
+    "selectedPalettesIdentical": false,
+    "differingSortedPaletteSlots": [
+      {
+        "slot": 8,
+        "android": "#2f2e41",
+        "desktop": "#2f2e42"
+      },
+      {
+        "slot": 9,
+        "android": "#34160e",
+        "desktop": "#34160d"
+      },
+      {
+        "slot": 13,
+        "android": "#52616f",
+        "desktop": "#52616e"
+      },
+      {
+        "slot": 20,
+        "android": "#834930",
+        "desktop": "#83482f"
+      },
+      {
+        "slot": 21,
+        "android": "#a36948",
+        "desktop": "#a26948"
+      },
+      {
+        "slot": 25,
+        "android": "#c73f34",
+        "desktop": "#c74034"
+      }
+    ],
+    "maximumAbsoluteChannelDifferenceBySortedSlot": 1,
+    "note": "Each archive validates against its own captured palette. This comparison does not establish why browser source RGB differs, and does not claim byte-identical device outputs."
+  },
+  "devices": {
+    "android": {
+      "status": "passed",
+      "archiveBytes": 3225350,
+      "actualFileCount": 184,
+      "checkedFrames": 439,
+      "checkedCompositedPixels": 22285170,
+      "selectedColorCount": 32,
+      "alphaDifferences": 0,
+      "colorsOutsideSelectedPalette": [],
+      "maxUsedColorsPerAssetAcrossFrames": 30,
+      "gifTimingAndLoopPassed": true,
+      "failures": [],
+      "userControls": [
+        {
+          "id": "sprite",
+          "dimensions": [
+            29,
+            41
+          ],
+          "frames": 1,
+          "usedColors": 13,
+          "paletteMembership": true,
+          "alphaDifferences": 0,
+          "timingAndLoop": true,
+          "sourceDelayMsRange": null
+        },
+        {
+          "id": "building1",
+          "dimensions": [
+            112,
+            161
+          ],
+          "frames": 1,
+          "usedColors": 22,
+          "paletteMembership": true,
+          "alphaDifferences": 0,
+          "timingAndLoop": true,
+          "sourceDelayMsRange": null
+        },
+        {
+          "id": "building2",
+          "dimensions": [
+            286,
+            193
+          ],
+          "frames": 1,
+          "usedColors": 15,
+          "paletteMembership": true,
+          "alphaDifferences": 0,
+          "timingAndLoop": true,
+          "sourceDelayMsRange": null
+        },
+        {
+          "id": "building3",
+          "dimensions": [
+            133,
+            292
+          ],
+          "frames": 1,
+          "usedColors": 10,
+          "paletteMembership": true,
+          "alphaDifferences": 0,
+          "timingAndLoop": true,
+          "sourceDelayMsRange": null
+        },
+        {
+          "id": "building4",
+          "dimensions": [
+            116,
+            213
+          ],
+          "frames": 1,
+          "usedColors": 5,
+          "paletteMembership": true,
+          "alphaDifferences": 0,
+          "timingAndLoop": true,
+          "sourceDelayMsRange": null
+        },
+        {
+          "id": "building5",
+          "dimensions": [
+            110,
+            190
+          ],
+          "frames": 1,
+          "usedColors": 10,
+          "paletteMembership": true,
+          "alphaDifferences": 0,
+          "timingAndLoop": true,
+          "sourceDelayMsRange": null
+        },
+        {
+          "id": "building6",
+          "dimensions": [
+            171,
+            274
+          ],
+          "frames": 1,
+          "usedColors": 9,
+          "paletteMembership": true,
+          "alphaDifferences": 0,
+          "timingAndLoop": true,
+          "sourceDelayMsRange": null
+        },
+        {
+          "id": "dungeon",
+          "dimensions": [
+            512,
+            458
+          ],
+          "frames": 56,
+          "usedColors": 22,
+          "paletteMembership": true,
+          "alphaDifferences": 0,
+          "timingAndLoop": true,
+          "sourceDelayMsRange": [
+            50,
+            100
+          ]
+        }
+      ]
+    },
+    "desktop": {
+      "status": "passed",
+      "archiveBytes": 3225757,
+      "actualFileCount": 184,
+      "checkedFrames": 439,
+      "checkedCompositedPixels": 22285170,
+      "selectedColorCount": 32,
+      "alphaDifferences": 0,
+      "colorsOutsideSelectedPalette": [],
+      "maxUsedColorsPerAssetAcrossFrames": 30,
+      "gifTimingAndLoopPassed": true,
+      "failures": [],
+      "userControls": [
+        {
+          "id": "sprite",
+          "dimensions": [
+            29,
+            41
+          ],
+          "frames": 1,
+          "usedColors": 13,
+          "paletteMembership": true,
+          "alphaDifferences": 0,
+          "timingAndLoop": true,
+          "sourceDelayMsRange": null
+        },
+        {
+          "id": "building1",
+          "dimensions": [
+            112,
+            161
+          ],
+          "frames": 1,
+          "usedColors": 22,
+          "paletteMembership": true,
+          "alphaDifferences": 0,
+          "timingAndLoop": true,
+          "sourceDelayMsRange": null
+        },
+        {
+          "id": "building2",
+          "dimensions": [
+            286,
+            193
+          ],
+          "frames": 1,
+          "usedColors": 15,
+          "paletteMembership": true,
+          "alphaDifferences": 0,
+          "timingAndLoop": true,
+          "sourceDelayMsRange": null
+        },
+        {
+          "id": "building3",
+          "dimensions": [
+            133,
+            292
+          ],
+          "frames": 1,
+          "usedColors": 10,
+          "paletteMembership": true,
+          "alphaDifferences": 0,
+          "timingAndLoop": true,
+          "sourceDelayMsRange": null
+        },
+        {
+          "id": "building4",
+          "dimensions": [
+            116,
+            213
+          ],
+          "frames": 1,
+          "usedColors": 5,
+          "paletteMembership": true,
+          "alphaDifferences": 0,
+          "timingAndLoop": true,
+          "sourceDelayMsRange": null
+        },
+        {
+          "id": "building5",
+          "dimensions": [
+            110,
+            190
+          ],
+          "frames": 1,
+          "usedColors": 10,
+          "paletteMembership": true,
+          "alphaDifferences": 0,
+          "timingAndLoop": true,
+          "sourceDelayMsRange": null
+        },
+        {
+          "id": "building6",
+          "dimensions": [
+            171,
+            274
+          ],
+          "frames": 1,
+          "usedColors": 9,
+          "paletteMembership": true,
+          "alphaDifferences": 0,
+          "timingAndLoop": true,
+          "sourceDelayMsRange": null
+        },
+        {
+          "id": "dungeon",
+          "dimensions": [
+            512,
+            458
+          ],
+          "frames": 56,
+          "usedColors": 22,
+          "paletteMembership": true,
+          "alphaDifferences": 0,
+          "timingAndLoop": true,
+          "sourceDelayMsRange": [
+            50,
+            100
+          ]
+        }
+      ]
+    }
+  }
+}

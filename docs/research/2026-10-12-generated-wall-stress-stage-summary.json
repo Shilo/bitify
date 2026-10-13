@@ -1,0 +1,688 @@
+{
+  "version": 1,
+  "scope": "Bounded built-app wall lifecycle test and independent full-wall export decode; no total-memory or device-byte-identity guarantee.",
+  "cohort": {
+    "assets": 184,
+    "stills": 167,
+    "gifs": 17,
+    "sourceFrames": 439,
+    "estimatedDecodedRGBABytes": 89140680,
+    "animatedFrames": 272
+  },
+  "optionalSettingsAssets": 28,
+  "phoneMemoryScope": "All Brave processes PSS via Android meminfo; correlated by UTC, not the monitor phase label. Includes other tabs/processes. Not Bitify-only or JS heap.",
+  "runs": [
+    {
+      "target": "android",
+      "startedUTC": "2026-10-13T02:12:40.134Z",
+      "finishedUTC": "2026-10-13T02:14:04.730Z",
+      "passedStages": 18,
+      "totalStages": 18,
+      "errors": 0,
+      "warnings": 0,
+      "reportedHeapReliable": false,
+      "stages": [
+        {
+          "name": "Initial 40 stills / Generated 32 / All",
+          "startedUTC": "2026-10-13T02:12:40.339Z",
+          "durationMs": 3032.5,
+          "passed": true,
+          "assets": 40,
+          "heartbeatP95Ms": 67.4,
+          "heartbeatMaxMs": 115.3,
+          "longTasks": 2,
+          "longTaskMaxMs": 70,
+          "fileChangeToControlsReadyMs": 528.2,
+          "sourceCommitToControlsReadyMs": 310.7,
+          "fileChangeToWallPaintMs": 528.5,
+          "allBravePSS": {
+            "samples": 1,
+            "processCountMin": 16,
+            "processCountMax": 16,
+            "minMiB": 1815.1,
+            "maxMiB": 1815.1
+          }
+        },
+        {
+          "name": "Add first 8 GIFs / Generated 32 / All",
+          "startedUTC": "2026-10-13T02:12:43.385Z",
+          "durationMs": 876.9,
+          "passed": true,
+          "assets": 48,
+          "heartbeatP95Ms": 67,
+          "heartbeatMaxMs": 109.5,
+          "longTasks": 1,
+          "longTaskMaxMs": 71,
+          "fileChangeToControlsReadyMs": 547,
+          "sourceCommitToControlsReadyMs": 304.4,
+          "fileChangeToWallPaintMs": 547.2,
+          "allBravePSS": {
+            "samples": 0
+          }
+        },
+        {
+          "name": "Complete large wall / Generated 32 / All",
+          "startedUTC": "2026-10-13T02:12:44.277Z",
+          "durationMs": 11952.3,
+          "passed": true,
+          "assets": 184,
+          "heartbeatP95Ms": 71.9,
+          "heartbeatMaxMs": 428.4,
+          "longTasks": 4,
+          "longTaskMaxMs": 380,
+          "fileChangeToControlsReadyMs": 3389.9,
+          "sourceCommitToControlsReadyMs": 2166.1,
+          "fileChangeToWallPaintMs": 3390.5,
+          "allBravePSS": {
+            "samples": 2,
+            "processCountMin": 16,
+            "processCountMax": 16,
+            "minMiB": 2003,
+            "maxMiB": 2007.8
+          }
+        },
+        {
+          "name": "Whole-cohort five-second animation observation",
+          "startedUTC": "2026-10-13T02:12:56.328Z",
+          "durationMs": 5459.8,
+          "passed": true,
+          "assets": 184,
+          "heartbeatP95Ms": 78.8,
+          "heartbeatMaxMs": 117.7,
+          "longTasks": 0,
+          "longTaskMaxMs": 0,
+          "removedCanvases": 0,
+          "animationObservation": {
+            "gifs": 17,
+            "minPaints": 28,
+            "maxPaints": 82,
+            "maxPaintGapMs": 224.9
+          },
+          "allBravePSS": {
+            "samples": 1,
+            "processCountMin": 16,
+            "processCountMax": 16,
+            "minMiB": 2149.3,
+            "maxMiB": 2149.3
+          }
+        },
+        {
+          "name": "Matching RGB then Oklab / whole cohort",
+          "startedUTC": "2026-10-13T02:13:01.810Z",
+          "durationMs": 919.7,
+          "passed": true,
+          "assets": 184,
+          "heartbeatP95Ms": 146.7,
+          "heartbeatMaxMs": 148.4,
+          "longTasks": 2,
+          "longTaskMaxMs": 119,
+          "allBravePSS": {
+            "samples": 0
+          }
+        },
+        {
+          "name": "Add partial-alpha control",
+          "startedUTC": "2026-10-13T02:13:02.770Z",
+          "durationMs": 3474.6,
+          "passed": true,
+          "assets": 185,
+          "heartbeatP95Ms": 77.1,
+          "heartbeatMaxMs": 329,
+          "longTasks": 3,
+          "longTaskMaxMs": 162,
+          "fileChangeToControlsReadyMs": 3371.9,
+          "sourceCommitToControlsReadyMs": 3292.9,
+          "fileChangeToWallPaintMs": 3408.4,
+          "allBravePSS": {
+            "samples": 1,
+            "processCountMin": 16,
+            "processCountMax": 16,
+            "minMiB": 2198.3,
+            "maxMiB": 2198.3
+          }
+        },
+        {
+          "name": "Opacity cut 255 / whole cohort",
+          "startedUTC": "2026-10-13T02:13:06.261Z",
+          "durationMs": 3505,
+          "passed": true,
+          "assets": 185,
+          "heartbeatP95Ms": 85,
+          "heartbeatMaxMs": 125.9,
+          "longTasks": 3,
+          "longTaskMaxMs": 169,
+          "actionToControlsAndWallReadyMs": 3443.1,
+          "allBravePSS": {
+            "samples": 0
+          }
+        },
+        {
+          "name": "Opacity cut 128 / whole cohort",
+          "startedUTC": "2026-10-13T02:13:09.799Z",
+          "durationMs": 385.1,
+          "passed": true,
+          "assets": 185,
+          "heartbeatP95Ms": 122,
+          "heartbeatMaxMs": 130.7,
+          "longTasks": 2,
+          "longTaskMaxMs": 112,
+          "actionToControlsAndWallReadyMs": 330.9,
+          "allBravePSS": {
+            "samples": 1,
+            "processCountMin": 16,
+            "processCountMax": 16,
+            "minMiB": 2187.5,
+            "maxMiB": 2187.5
+          }
+        },
+        {
+          "name": "Remove half the wall / regenerate",
+          "startedUTC": "2026-10-13T02:13:10.211Z",
+          "durationMs": 1335.2,
+          "passed": true,
+          "assets": 92,
+          "heartbeatP95Ms": 60.6,
+          "heartbeatMaxMs": 114.9,
+          "longTasks": 1,
+          "longTaskMaxMs": 61,
+          "sourceCommitToControlsReadyMs": 1251,
+          "allBravePSS": {
+            "samples": 0
+          }
+        },
+        {
+          "name": "Re-add removed half / regenerate",
+          "startedUTC": "2026-10-13T02:13:11.566Z",
+          "durationMs": 3310.3,
+          "passed": true,
+          "assets": 185,
+          "heartbeatP95Ms": 64.7,
+          "heartbeatMaxMs": 245.1,
+          "longTasks": 1,
+          "longTaskMaxMs": 157,
+          "fileChangeToControlsReadyMs": 3308.8,
+          "sourceCommitToControlsReadyMs": 2682.3,
+          "fileChangeToWallPaintMs": 3309.5,
+          "allBravePSS": {
+            "samples": 0
+          }
+        },
+        {
+          "name": "Clear large wall and load bounded cap/cleanup cohort",
+          "startedUTC": "2026-10-13T02:13:14.954Z",
+          "durationMs": 696.1,
+          "passed": true,
+          "assets": 28,
+          "heartbeatP95Ms": 100,
+          "heartbeatMaxMs": 124.3,
+          "longTasks": 2,
+          "longTaskMaxMs": 92,
+          "fileChangeToControlsReadyMs": 515.6,
+          "sourceCommitToControlsReadyMs": 241,
+          "fileChangeToWallPaintMs": 515.8,
+          "allBravePSS": {
+            "samples": 1,
+            "processCountMin": 16,
+            "processCountMax": 16,
+            "minMiB": 2235.7,
+            "maxMiB": 2235.7
+          }
+        },
+        {
+          "name": "Subset RGB / cap8 / cleanup off",
+          "startedUTC": "2026-10-13T02:13:15.668Z",
+          "durationMs": 6177.9,
+          "passed": true,
+          "assets": 28,
+          "heartbeatP95Ms": 58,
+          "heartbeatMaxMs": 65.2,
+          "longTasks": 0,
+          "longTaskMaxMs": 0,
+          "settingsToWallReadyMs": 830.3,
+          "removedCanvases": 0,
+          "animationObservation": {
+            "gifs": 8,
+            "minPaints": 42,
+            "maxPaints": 83,
+            "maxPaintGapMs": 144.3
+          },
+          "allBravePSS": {
+            "samples": 1,
+            "processCountMin": 16,
+            "processCountMax": 16,
+            "minMiB": 2122.3,
+            "maxMiB": 2122.3
+          }
+        },
+        {
+          "name": "Subset RGB / cap8 / cleanup on",
+          "startedUTC": "2026-10-13T02:13:21.873Z",
+          "durationMs": 5635.4,
+          "passed": true,
+          "assets": 28,
+          "heartbeatP95Ms": 54.3,
+          "heartbeatMaxMs": 59.7,
+          "longTasks": 0,
+          "longTaskMaxMs": 0,
+          "settingsToWallReadyMs": 329.1,
+          "removedCanvases": 0,
+          "animationObservation": {
+            "gifs": 8,
+            "minPaints": 42,
+            "maxPaints": 83,
+            "maxPaintGapMs": 134.1
+          },
+          "allBravePSS": {
+            "samples": 1,
+            "processCountMin": 16,
+            "processCountMax": 16,
+            "minMiB": 2101,
+            "maxMiB": 2101
+          }
+        },
+        {
+          "name": "Preset reset and restored All / subset",
+          "startedUTC": "2026-10-13T02:13:27.535Z",
+          "durationMs": 928.8,
+          "passed": true,
+          "assets": 28,
+          "heartbeatP95Ms": 66.4,
+          "heartbeatMaxMs": 71.2,
+          "longTasks": 0,
+          "longTaskMaxMs": 0,
+          "allBravePSS": {
+            "samples": 0
+          }
+        },
+        {
+          "name": "Clear subset and restore whole cohort / All",
+          "startedUTC": "2026-10-13T02:13:28.490Z",
+          "durationMs": 10965.5,
+          "passed": true,
+          "assets": 184,
+          "heartbeatP95Ms": 85.5,
+          "heartbeatMaxMs": 393.2,
+          "longTasks": 4,
+          "longTaskMaxMs": 348,
+          "fileChangeToControlsReadyMs": 4939,
+          "sourceCommitToControlsReadyMs": 3430.6,
+          "fileChangeToWallPaintMs": 4939.5,
+          "removedCanvases": 0,
+          "animationObservation": {
+            "gifs": 17,
+            "minPaints": 28,
+            "maxPaints": 83,
+            "maxPaintGapMs": 228.5
+          },
+          "allBravePSS": {
+            "samples": 2,
+            "processCountMin": 16,
+            "processCountMax": 16,
+            "minMiB": 2282.8,
+            "maxMiB": 2323.9
+          }
+        },
+        {
+          "name": "Opacity 128 to 129 to 128 invalidation / whole cohort",
+          "startedUTC": "2026-10-13T02:13:39.498Z",
+          "durationMs": 9662.1,
+          "passed": true,
+          "assets": 184,
+          "heartbeatP95Ms": 86,
+          "heartbeatMaxMs": 388.4,
+          "longTasks": 10,
+          "longTaskMaxMs": 176,
+          "allBravePSS": {
+            "samples": 1,
+            "processCountMin": 16,
+            "processCountMax": 16,
+            "minMiB": 2245.6,
+            "maxMiB": 2245.6
+          }
+        },
+        {
+          "name": "Actual full-wall native ZIP capture",
+          "startedUTC": "2026-10-13T02:13:49.189Z",
+          "durationMs": 7282.4,
+          "passed": true,
+          "assets": 184,
+          "heartbeatP95Ms": 58,
+          "heartbeatMaxMs": 88.5,
+          "longTasks": 0,
+          "longTaskMaxMs": 0,
+          "exportMs": 7049.6,
+          "allBravePSS": {
+            "samples": 2,
+            "processCountMin": 16,
+            "processCountMax": 16,
+            "minMiB": 2225.4,
+            "maxMiB": 2293.5
+          }
+        },
+        {
+          "name": "Final clear / eight-second release observation",
+          "startedUTC": "2026-10-13T02:13:56.500Z",
+          "durationMs": 8178.8,
+          "passed": true,
+          "assets": 0,
+          "heartbeatP95Ms": 51.7,
+          "heartbeatMaxMs": 107.6,
+          "longTasks": 1,
+          "longTaskMaxMs": 87,
+          "allBravePSS": {
+            "samples": 1,
+            "processCountMin": 16,
+            "processCountMax": 16,
+            "minMiB": 2197.4,
+            "maxMiB": 2197.4
+          }
+        }
+      ],
+      "allBravePSSBefore": {
+        "samples": 9,
+        "processCountMin": 15,
+        "processCountMax": 16,
+        "minMiB": 1692.1,
+        "maxMiB": 1724.1
+      },
+      "allBravePSSDuring": {
+        "samples": 15,
+        "processCountMin": 16,
+        "processCountMax": 16,
+        "minMiB": 1815.1,
+        "maxMiB": 2323.9
+      },
+      "allBravePSSAfterFirst60Seconds": {
+        "samples": 9,
+        "processCountMin": 16,
+        "processCountMax": 16,
+        "minMiB": 1859.7,
+        "maxMiB": 1880.1
+      },
+      "phoneJSHeapNote": "Every stage reports the same rounded 23,100,000 bytes; not evidence of constant or small actual memory."
+    },
+    {
+      "target": "desktop",
+      "startedUTC": "2026-10-13T02:17:01.228Z",
+      "finishedUTC": "2026-10-13T02:17:54.538Z",
+      "passedStages": 18,
+      "totalStages": 18,
+      "errors": 0,
+      "warnings": 3,
+      "reportedHeapReliable": true,
+      "stages": [
+        {
+          "name": "Initial 40 stills / Generated 32 / All",
+          "startedUTC": "2026-10-13T02:17:01.339Z",
+          "durationMs": 760.6,
+          "passed": true,
+          "assets": 40,
+          "heartbeatP95Ms": 73,
+          "heartbeatMaxMs": 95.6,
+          "longTasks": 0,
+          "longTaskMaxMs": 0,
+          "fileChangeToControlsReadyMs": 336.6,
+          "sourceCommitToControlsReadyMs": 192.1,
+          "fileChangeToWallPaintMs": 336.8,
+          "reportedJSHeapMiB": 26.9
+        },
+        {
+          "name": "Add first 8 GIFs / Generated 32 / All",
+          "startedUTC": "2026-10-13T02:17:02.105Z",
+          "durationMs": 414.9,
+          "passed": true,
+          "assets": 48,
+          "heartbeatP95Ms": 88.5,
+          "heartbeatMaxMs": 89,
+          "longTasks": 0,
+          "longTaskMaxMs": 0,
+          "fileChangeToControlsReadyMs": 365.8,
+          "sourceCommitToControlsReadyMs": 168.7,
+          "fileChangeToWallPaintMs": 366.1,
+          "reportedJSHeapMiB": 58.7
+        },
+        {
+          "name": "Complete large wall / Generated 32 / All",
+          "startedUTC": "2026-10-13T02:17:02.527Z",
+          "durationMs": 3119.6,
+          "passed": true,
+          "assets": 184,
+          "heartbeatP95Ms": 328.5,
+          "heartbeatMaxMs": 863.5,
+          "longTasks": 2,
+          "longTaskMaxMs": 710,
+          "fileChangeToControlsReadyMs": 2788.3,
+          "sourceCommitToControlsReadyMs": 1100.6,
+          "fileChangeToWallPaintMs": 2788.9,
+          "reportedJSHeapMiB": 208.2
+        },
+        {
+          "name": "Whole-cohort five-second animation observation",
+          "startedUTC": "2026-10-13T02:17:05.656Z",
+          "durationMs": 5531.5,
+          "passed": true,
+          "assets": 184,
+          "heartbeatP95Ms": 63.2,
+          "heartbeatMaxMs": 78.7,
+          "longTasks": 0,
+          "longTaskMaxMs": 0,
+          "removedCanvases": 0,
+          "animationObservation": {
+            "gifs": 17,
+            "minPaints": 27,
+            "maxPaints": 84,
+            "maxPaintGapMs": 207
+          },
+          "reportedJSHeapMiB": 190.1
+        },
+        {
+          "name": "Matching RGB then Oklab / whole cohort",
+          "startedUTC": "2026-10-13T02:17:11.200Z",
+          "durationMs": 1701,
+          "passed": true,
+          "assets": 184,
+          "heartbeatP95Ms": 298.2,
+          "heartbeatMaxMs": 302.2,
+          "longTasks": 10,
+          "longTaskMaxMs": 230,
+          "reportedJSHeapMiB": 250
+        },
+        {
+          "name": "Add partial-alpha control",
+          "startedUTC": "2026-10-13T02:17:12.920Z",
+          "durationMs": 885.6,
+          "passed": true,
+          "assets": 185,
+          "heartbeatP95Ms": 58.2,
+          "heartbeatMaxMs": 67.7,
+          "longTasks": 2,
+          "longTaskMaxMs": 126,
+          "fileChangeToControlsReadyMs": 878.8,
+          "sourceCommitToControlsReadyMs": 808.9,
+          "fileChangeToWallPaintMs": 879.6,
+          "reportedJSHeapMiB": 260
+        },
+        {
+          "name": "Opacity cut 255 / whole cohort",
+          "startedUTC": "2026-10-13T02:17:13.838Z",
+          "durationMs": 1527.3,
+          "passed": true,
+          "assets": 185,
+          "heartbeatP95Ms": 310.2,
+          "heartbeatMaxMs": 336.4,
+          "longTasks": 4,
+          "longTaskMaxMs": 270,
+          "actionToControlsAndWallReadyMs": 1241.3,
+          "reportedJSHeapMiB": 236.3
+        },
+        {
+          "name": "Opacity cut 128 / whole cohort",
+          "startedUTC": "2026-10-13T02:17:15.385Z",
+          "durationMs": 684.5,
+          "passed": true,
+          "assets": 185,
+          "heartbeatP95Ms": 226.6,
+          "heartbeatMaxMs": 332.6,
+          "longTasks": 3,
+          "longTaskMaxMs": 303,
+          "actionToControlsAndWallReadyMs": 372.2,
+          "reportedJSHeapMiB": 243.9
+        },
+        {
+          "name": "Remove half the wall / regenerate",
+          "startedUTC": "2026-10-13T02:17:16.084Z",
+          "durationMs": 550.4,
+          "passed": true,
+          "assets": 92,
+          "heartbeatP95Ms": 52.2,
+          "heartbeatMaxMs": 63,
+          "longTasks": 1,
+          "longTaskMaxMs": 74,
+          "sourceCommitToControlsReadyMs": 474.9,
+          "reportedJSHeapMiB": 255.5
+        },
+        {
+          "name": "Re-add removed half / regenerate",
+          "startedUTC": "2026-10-13T02:17:16.654Z",
+          "durationMs": 1830,
+          "passed": true,
+          "assets": 185,
+          "heartbeatP95Ms": 63.7,
+          "heartbeatMaxMs": 252.2,
+          "longTasks": 3,
+          "longTaskMaxMs": 209,
+          "fileChangeToControlsReadyMs": 1828.8,
+          "sourceCommitToControlsReadyMs": 1196.5,
+          "fileChangeToWallPaintMs": 1829.3,
+          "reportedJSHeapMiB": 239.5
+        },
+        {
+          "name": "Clear large wall and load bounded cap/cleanup cohort",
+          "startedUTC": "2026-10-13T02:17:18.504Z",
+          "durationMs": 674.6,
+          "passed": true,
+          "assets": 28,
+          "heartbeatP95Ms": 135.3,
+          "heartbeatMaxMs": 142.3,
+          "longTasks": 2,
+          "longTaskMaxMs": 118,
+          "fileChangeToControlsReadyMs": 462.6,
+          "sourceCommitToControlsReadyMs": 164.1,
+          "fileChangeToWallPaintMs": 462.6,
+          "reportedJSHeapMiB": 46.9
+        },
+        {
+          "name": "Subset RGB / cap8 / cleanup off",
+          "startedUTC": "2026-10-13T02:17:19.192Z",
+          "durationMs": 6103.7,
+          "passed": true,
+          "assets": 28,
+          "heartbeatP95Ms": 61.9,
+          "heartbeatMaxMs": 63.2,
+          "longTasks": 0,
+          "longTaskMaxMs": 0,
+          "settingsToWallReadyMs": 618.6,
+          "removedCanvases": 0,
+          "animationObservation": {
+            "gifs": 8,
+            "minPaints": 43,
+            "maxPaints": 82,
+            "maxPaintGapMs": 139.5
+          },
+          "reportedJSHeapMiB": 101.7
+        },
+        {
+          "name": "Subset RGB / cap8 / cleanup on",
+          "startedUTC": "2026-10-13T02:17:25.365Z",
+          "durationMs": 5809,
+          "passed": true,
+          "assets": 28,
+          "heartbeatP95Ms": 62.2,
+          "heartbeatMaxMs": 119.1,
+          "longTasks": 1,
+          "longTaskMaxMs": 97,
+          "settingsToWallReadyMs": 280.5,
+          "removedCanvases": 0,
+          "animationObservation": {
+            "gifs": 8,
+            "minPaints": 43,
+            "maxPaints": 83,
+            "maxPaintGapMs": 144.4
+          },
+          "reportedJSHeapMiB": 86.2
+        },
+        {
+          "name": "Preset reset and restored All / subset",
+          "startedUTC": "2026-10-13T02:17:31.252Z",
+          "durationMs": 1025.7,
+          "passed": true,
+          "assets": 28,
+          "heartbeatP95Ms": 97.3,
+          "heartbeatMaxMs": 102,
+          "longTasks": 0,
+          "longTaskMaxMs": 0,
+          "reportedJSHeapMiB": 100.7
+        },
+        {
+          "name": "Clear subset and restore whole cohort / All",
+          "startedUTC": "2026-10-13T02:17:32.295Z",
+          "durationMs": 9266.3,
+          "passed": true,
+          "assets": 184,
+          "heartbeatP95Ms": 63.1,
+          "heartbeatMaxMs": 1128,
+          "longTasks": 9,
+          "longTaskMaxMs": 1091,
+          "fileChangeToControlsReadyMs": 3163.9,
+          "sourceCommitToControlsReadyMs": 835.6,
+          "fileChangeToWallPaintMs": 3164.7,
+          "removedCanvases": 0,
+          "animationObservation": {
+            "gifs": 17,
+            "minPaints": 27,
+            "maxPaints": 83,
+            "maxPaintGapMs": 205.7
+          },
+          "reportedJSHeapMiB": 218.9
+        },
+        {
+          "name": "Opacity 128 to 129 to 128 invalidation / whole cohort",
+          "startedUTC": "2026-10-13T02:17:41.575Z",
+          "durationMs": 1851.8,
+          "passed": true,
+          "assets": 184,
+          "heartbeatP95Ms": 120.2,
+          "heartbeatMaxMs": 170.9,
+          "longTasks": 7,
+          "longTaskMaxMs": 92,
+          "reportedJSHeapMiB": 231
+        },
+        {
+          "name": "Actual full-wall native ZIP capture",
+          "startedUTC": "2026-10-13T02:17:43.440Z",
+          "durationMs": 2898.5,
+          "passed": true,
+          "assets": 184,
+          "heartbeatP95Ms": 54.1,
+          "heartbeatMaxMs": 70.9,
+          "longTasks": 0,
+          "longTaskMaxMs": 0,
+          "exportMs": 2791.1,
+          "reportedJSHeapMiB": 217.5
+        },
+        {
+          "name": "Final clear / eight-second release observation",
+          "startedUTC": "2026-10-13T02:17:46.343Z",
+          "durationMs": 8174.2,
+          "passed": true,
+          "assets": 0,
+          "heartbeatP95Ms": 63.1,
+          "heartbeatMaxMs": 73,
+          "longTasks": 1,
+          "longTaskMaxMs": 53,
+          "reportedJSHeapMiB": 219.4
+        }
+      ]
+    }
+  ]
+}

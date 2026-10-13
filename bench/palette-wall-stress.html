@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Generated palette wall stress</title>
+<style>
+  :root { color-scheme: dark; font: 14px system-ui; }
+  body { margin: 12px; background: #171c20; color: #edf0f1; }
+  h1 { font-size: 19px; margin: 0 0 8px; }
+  p { margin: 8px 0; max-width: 85ch; }
+  button { padding: 10px 16px; margin: 0 8px 8px 0; }
+  iframe { display: block; width: 100%; height: 78vh; border: 1px solid #69727a; }
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 12px; }
+</style>
+<h1>Generated 32: large wall and animation stress</h1>
+<p>Keep this page in the foreground. This bounded test drives the built app through its controls.
+  All uses the whole cohort; cap and cleanup use a smaller, explicitly recorded cohort.
+  Timer gaps include browser and test-page work. JavaScript heap readings are not total memory.</p>
+<button id="run">Run stress test</button><button id="cancel" disabled>Cancel and unload app</button>
+<span id="status">Ready</span>
+<iframe id="app" title="Built Bitify app"></iframe>
+<pre id="output"></pre>
+<script type="module">
+const frame = document.querySelector('#app');
+const runButton = document.querySelector('#run');
+const cancelButton = document.querySelector('#cancel');
+const status = document.querySelector('#status');
+const output = document.querySelector('#output');
+const files = new Map();
+const paintTimes = new WeakMap();
+const canvasIds = new WeakMap();
+let w, d, report, stopped, activeStage, nativePaintId = 0, runBegan;
+let mutationObserver, longTaskObserver, heartbeat, previousTick, stableProbe, zipBlob;
+const exportOnly = new URLSearchParams(location.search).get('exportOnly') === '1';
+if (exportOnly) runButton.textContent = 'Run full-wall export only';
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+const assert = (condition, message) => { if (!condition) throw Error(message); };
+const check = () => {
+  if (stopped) throw new DOMException('Canceled', 'AbortError');
+  if (performance.now() - runBegan > 10 * 60 * 1000) throw Error('Ten-minute stress run limit reached');
+};
+const all = selector => [...d.querySelectorAll(selector)];
+const one = selector => d.querySelector(selector);
+const tiles = () => all('.tiles > .tile:not(:has(.example-caption))');
+const label = (name, root = d) => root.querySelector(`[aria-label="${CSS.escape(name)}"]`);
+const visible = node => node && !node.closest('[hidden]') && node.getClientRects().length > 0;
+const textButton = (text, root = d) => [...root.querySelectorAll('button')]
+  .find(button => button.textContent.trim() === text && visible(button));
+function click(node) {
+  assert(node, 'Missing control during ' + status.textContent);
+  assert(!node.disabled, 'Disabled control: ' + (node.getAttribute('aria-label') || node.textContent));
+  node.click();
+}
+function input(node, value, event = 'input') {
+  assert(node, 'Missing input during ' + status.textContent);
+  node.value = value;
+  node.dispatchEvent(new w.Event(event, { bubbles: true }));
+}
+async function until(read, message, timeout = 60000) {
+  const start = performance.now();
+  while (true) {
+    check();
+    const result = read();
+    if (result) return result;
+    assert(performance.now() - start < timeout, message);
+    await sleep(35);
+  }
+}
+function heap() {
+  const memory = w?.performance.memory;
+  return memory ? {
+    usedJSHeapSize: memory.usedJSHeapSize,
+    totalJSHeapSize: memory.totalJSHeapSize,
+    jsHeapSizeLimit: memory.jsHeapSizeLimit,
+    scope: 'Chromium JavaScript heap; excludes native image, GPU and total process memory',
+  } : null;
+}
+function geometry() {
+  const width = d.documentElement.clientWidth;
+  const overflow = all('.palette-family-panel,.palette-settings-panel,.workspace-tools')
+    .filter(visible).map(node => ({ name: node.className, box: node.getBoundingClientRect() }))
+    .filter(({ box }) => box.left < -.5 || box.right > width + .5)
+    .map(({ name, box }) => ({ name, left: box.left, right: box.right }));
+  assert(!overflow.length && d.documentElement.scrollWidth <= width + 1,
+    'Horizontal overflow: ' + JSON.stringify(overflow));
+  const rows = tiles();
+  const viewportHeight = d.documentElement.clientHeight;
+  return {
+    assets: rows.length,
+    canvases: rows.filter(tile => tile.querySelector('canvas')).length,
+    visibleTiles: rows.filter(tile => {
+      const box = tile.getBoundingClientRect();
+      return box.bottom > 0 && box.top < viewportHeight && box.right > 0 && box.left < width;
+    }).length,
+    viewport: { width, height: viewportHeight },
+  };
+}
+function summary(values) {
+  if (!values.length) return { count: 0, maxMs: 0, p95Ms: 0, meanMs: 0 };
+  const sorted = [...values].sort((a, b) => a - b);
+  return {
+    count: values.length,
+    maxMs: sorted.at(-1),
+    p95Ms: sorted[Math.floor((sorted.length - 1) * .95)],
+    meanMs: values.reduce((a, b) => a + b, 0) / values.length,
+  };
+}
+async function publish() {
+  const body = JSON.stringify(report);
+  assert(body.length < 1024 * 1024, 'Report exceeded 1 MiB');
+  output.textContent = JSON.stringify(report, null, 2);
+  const response = await fetch('/results', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, body,
+  });
+  assert(response.ok, 'Local result capture failed: ' + response.status);
+}
+async function stage(name, action) {
+  check();
+  status.textContent = name;
+  const start = performance.now();
+  const record = { name, started: new Date().toISOString(), heartbeatGaps: [], longTasks: [] };
+  activeStage = record;
+  try {
+    Object.assign(record, await action());
+    record.pass = true;
+  } catch (error) {
+    record.pass = false;
+    record.error = { name: error.name, message: error.message };
+    throw error;
+  } finally {
+    record.ms = performance.now() - start;
+    record.heartbeat = summary(record.heartbeatGaps);
+    delete record.heartbeatGaps;
+    record.longTaskSummary = summary(record.longTasks.map(task => task.duration));
+    record.heap = heap();
+    if (d?.documentElement) record.dom = geometry();
+    report.stages.push(record);
+    activeStage = null;
+    await publish();
+  }
+}
+async function palettePanel() {
+  if (!one('.palette-family-panel')) {
+    click(label('Palette'));
+    await until(() => one('.palette-family-panel'), 'Palette panel did not open');
+  }
+}
+async function settings() {
+  if (!one('.palette-settings-panel')) {
+    click(label('Palette settings'));
+    await until(() => one('.palette-settings-panel'), 'Settings did not open');
+  }
+}
+async function generated() {
+  await palettePanel();
+  const full = textButton('Palette', one('.palette-family-tabs'));
+  if (full.getAttribute('aria-pressed') !== 'true') click(full);
+  await sleep(35);
+  const selected = label('Generated 32', one('.palette-rail'));
+  if (selected.getAttribute('aria-pressed') !== 'true') click(selected);
+  await until(() => label('Generated 32', one('.palette-rail'))?.getAttribute('aria-pressed') === 'true',
+    'Generated 32 was not selected');
+}
+async function ready(expected, after = 0) {
+  await until(() => tiles().length === expected, 'Unexpected imported image count');
+  // Count changes are committed before palette effects; allow those effects to publish busy state.
+  await sleep(70);
+  await palettePanel();
+  await until(() => !label('Edit palette')?.disabled &&
+    !one('.palette-source-status')?.textContent.includes('Updating'), 'Generated palette did not become ready');
+  const controlReady = performance.now();
+  await until(() => tiles().every(tile => {
+    const canvas = tile.querySelector('canvas');
+    return canvas?.width > 0 && (after === 0 || paintTimes.get(canvas) > after);
+  }), 'Current converted wall did not paint', 90000);
+  return { controlReady, wallReady: performance.now() };
+}
+async function configure(metric = 'Oklab', cap = 'All', cleanup = 'off') {
+  await settings();
+  const began = performance.now();
+  const metricButton = label(metric + ' matching');
+  const cleanupButton = label('Cleanup ' + cleanup);
+  const allButton = label('Use all palette colors');
+  let changed = false;
+  if (metricButton.getAttribute('aria-pressed') !== 'true') { click(metricButton); changed = true; }
+  if (cleanupButton.getAttribute('aria-pressed') !== 'true') { click(cleanupButton); changed = true; }
+  if (cap === 'All') {
+    if (allButton.getAttribute('aria-pressed') !== 'true') { click(allButton); changed = true; }
+  } else {
+    const number = label('Max colors value');
+    if (Number(number.value) !== cap || allButton.getAttribute('aria-pressed') === 'true') {
+      input(number, cap);
+      number.dispatchEvent(new w.Event('change', { bubbles: true }));
+      changed = true;
+    }
+  }
+  await sleep(80);
+  return { metric, cap, cleanup, changed, after: changed ? began : 0 };
+}
+async function fileFor(entry) {
+  if (!files.has(entry.id)) {
+    const response = await fetch(entry.url);
+    assert(response.ok, 'Fixture could not load: ' + entry.id);
+    files.set(entry.id, new w.File([await response.arrayBuffer()], entry.name,
+      { type: response.headers.get('Content-Type') || '' }));
+  }
+  return files.get(entry.id);
+}
+async function add(entries) {
+  const before = tiles().length;
+  const transfer = new w.DataTransfer();
+  for (const entry of entries) { check(); transfer.items.add(await fileFor(entry)); }
+  const began = performance.now();
+  const picker = one('input[type=file][multiple]');
+  assert(picker, 'Image file picker missing');
+  picker.files = transfer.files;
+  picker.dispatchEvent(new w.Event('change', { bubbles: true }));
+  await until(() => tiles().length === before + entries.length, 'Batch import did not finish', 90000);
+  const committed = performance.now();
+  await generated();
+  const timing = await ready(before + entries.length, began);
+  return {
+    added: entries.length, ids: entries.map(entry => entry.id),
+    fileChangeToSourceCommitMs: committed - began,
+    sourceCommitToControlsReadyMs: timing.controlReady - committed,
+    fileChangeToControlsReadyMs: timing.controlReady - began,
+    fileChangeToWallPaintMs: timing.wallReady - began,
+  };
+}
+async function clear() {
+  if (!tiles().length) return;
+  click(label('Remove all images'));
+  const dialog = await until(() => one('dialog[open][aria-labelledby="clear-title"]'), 'Clear dialog missing');
+  click(textButton('Remove', dialog));
+  await until(() => tiles().length === 0 && one('.example-caption'), 'Wall did not clear');
+  await sleep(80);
+}
+async function reviewedColors() {
+  await palettePanel();
+  click(label('Edit palette'));
+  await until(() => one('.palette-import-modal[open]'), 'Generated copy editor missing');
+  const colors = all('.palette-review-swatch').map(button =>
+    button.getAttribute('aria-label').match(/#[a-f\d]{6}$/)?.[0]).filter(Boolean);
+  assert(colors.length > 0 && colors.length <= 32, 'Generated color count was invalid');
+  click(label('Close palette editor'));
+  await until(() => !one('.palette-import-modal'), 'Editor did not close');
+  return colors;
+}
+function instrument() {
+  const nativeURL = w.URL.createObjectURL.bind(w.URL);
+  w.URL.createObjectURL = blob => {
+    // ZIP compression also creates JavaScript worker blobs; these are not image exports.
+    if (blob.type.split(';')[0] === 'application/zip') zipBlob = blob;
+    return nativeURL(blob);
+  };
+  d.addEventListener('click', event => {
+    if (event.target.closest('a[download]')) event.preventDefault();
+  }, true);
+  const nativePut = w.CanvasRenderingContext2D.prototype.putImageData;
+  w.CanvasRenderingContext2D.prototype.putImageData = function(...args) {
+    const result = nativePut.apply(this, args);
+    const tile = this.canvas.closest('.tiles > .tile');
+    if (!tile || tile.querySelector('.example-caption')) return result;
+    const now = performance.now();
+    paintTimes.set(this.canvas, now);
+    if (!canvasIds.has(this.canvas)) canvasIds.set(this.canvas, ++nativePaintId);
+    if (stableProbe) {
+      const id = canvasIds.get(this.canvas);
+      let row = stableProbe.rows.get(id);
+      if (!row) {
+        row = { name: tile.querySelector('.name')?.textContent.trim() || '', paints: 0, gaps: [], hashes: new Set(), last: now };
+        stableProbe.rows.set(id, row);
+      }
+      if (row.paints) row.gaps.push(now - row.last);
+      row.last = now;
+      row.paints++;
+      // Cheap evidence of changing frames, from the app's supplied buffer (not a full-frame pixel oracle).
+      const data = args[0]?.data;
+      if (data?.length && row.hashes.size < 64) {
+        let hash = 2166136261;
+        for (let sample = 0; sample < 16; sample++) {
+          const offset = Math.min(data.length - 4, Math.floor(sample * (data.length / 4 - 1) / 15) * 4);
+          for (let channel = 0; channel < 4; channel++) hash = Math.imul(hash ^ data[offset + channel], 16777619);
+        }
+        row.hashes.add(hash >>> 0);
+      }
+    }
+    return result;
+  };
+  mutationObserver = new w.MutationObserver(records => {
+    if (!stableProbe) return;
+    for (const record of records) for (const node of record.removedNodes) {
+      if (node.nodeType === 1) stableProbe.removedCanvases += Number(node.matches('canvas')) + node.querySelectorAll('canvas').length;
+    }
+  });
+  mutationObserver.observe(d.body, { childList: true, subtree: true });
+  try {
+    longTaskObserver = new w.PerformanceObserver(list => {
+      for (const entry of list.getEntries()) if (activeStage && activeStage.longTasks.length < 500)
+        activeStage.longTasks.push({ startTime: entry.startTime, duration: entry.duration });
+    });
+    longTaskObserver.observe({ entryTypes: ['longtask'] });
+    report.longTaskObserverAvailable = true;
+  } catch { report.longTaskObserverAvailable = false; }
+  previousTick = performance.now();
+  heartbeat = setInterval(() => {
+    const now = performance.now();
+    if (activeStage) activeStage.heartbeatGaps.push(now - previousTick);
+    previousTick = now;
+  }, 50);
+  w.addEventListener('error', event => {
+    const entry = { message: event.message, phase: stableProbe ? 'stable-playback' : 'controls' };
+    if (/^ResizeObserver loop (completed with undelivered notifications|limit exceeded)\.?$/.test(event.message)) report.warnings.push(entry);
+    else report.errors.push(entry);
+  });
+  w.addEventListener('unhandledrejection', event => report.errors.push({ message: String(event.reason) }));
+}
+function readbackWitness() {
+  const canvas = d.createElement('canvas');
+  canvas.width = 16; canvas.height = 4;
+  const context = canvas.getContext('2d');
+  const data = context.createImageData(16, 4);
+  for (let i = 0; i < data.data.length; i += 4) {
+    data.data[i] = (i * 19 + 31) % 256;
+    data.data[i + 1] = (i * 7 + 57) % 256;
+    data.data[i + 2] = (i * 13 + 83) % 256;
+    data.data[i + 3] = 255;
+  }
+  context.putImageData(data, 0, 0);
+  const actual = context.getImageData(0, 0, 16, 4).data;
+  const mismatches = [];
+  let count = 0;
+  for (let i = 0; i < actual.length; i++) if (actual[i] !== data.data[i]) {
+    count++;
+    if (mismatches.length < 8) mismatches.push({ byte: i, expected: data.data[i], actual: actual[i] });
+  }
+  report.canvasReadbackWitness = { mismatchedBytes: count, examples: mismatches };
+  report.pixelChecksUnavailable = count > 0;
+  report.pixelScope = count ? 'Readback noise proven; lifecycle and control checks only. No pixel accuracy claim.'
+    : 'This stress harness measures playback lifecycle. Exact output validation is a separate test.';
+}
+async function playback(entries, duration = 5000) {
+  const originalCanvases = tiles().map(tile => tile.querySelector('canvas'));
+  stableProbe = { rows: new Map(), removedCanvases: 0 };
+  const begin = performance.now();
+  try {
+    for (let elapsed = 0; elapsed < duration; elapsed += 100) { check(); await sleep(100); }
+    const currentCanvases = tiles().map(tile => tile.querySelector('canvas'));
+    assert(currentCanvases.length === originalCanvases.length &&
+      currentCanvases.every((canvas, i) => canvas === originalCanvases[i]), 'Stable wall canvas identity changed');
+    assert(stableProbe.removedCanvases === 0, 'Canvas removed during stable playback');
+    const animations = entries.filter(entry => entry.kind === 'gif').map(entry => {
+      const tile = tiles().find(tile => tile.querySelector('.name')?.textContent.trim() === entry.name);
+      assert(tile, 'Animation tile missing: ' + entry.name);
+      const row = stableProbe.rows.get(canvasIds.get(tile.querySelector('canvas')));
+      const paints = row?.paints || 0;
+      // Slow source delays are permitted; absent delay metadata is reported without an FPS assertion.
+      if (entry.frames > 1 && entry.maxDelayMs && entry.maxDelayMs * 2 < duration)
+        assert(paints >= 2, 'Animation stopped painting: ' + entry.name);
+      return { id: entry.id, name: entry.name, sourceFrames: entry.frames, sourceMaxDelayMs: entry.maxDelayMs,
+        paints, sampledFrameHashes: row?.hashes.size || 0, paintGaps: summary(row?.gaps || []) };
+    });
+    return { observedMs: performance.now() - begin, removedCanvases: 0, animations,
+      note: 'Paint gaps include source delays and conversion time; 16-position hashes are not complete-frame identity.' };
+  } finally { stableProbe = null; }
+}
+async function removeEntries(entries) {
+  const before = tiles().length, began = performance.now();
+  for (const entry of entries) { check(); click(label('Remove ' + entry.name)); }
+  await until(() => tiles().length === before - entries.length, 'Remove-half did not finish');
+  const committed = performance.now();
+  const timing = await ready(before - entries.length, began);
+  return { removed: entries.length, sourceCommitToControlsReadyMs: timing.controlReady - committed,
+    actionToWallPaintMs: timing.wallReady - began };
+}
+async function captureExport(colors) {
+  zipBlob = null;
+  const began = performance.now();
+  click(label('Save all images'));
+  await until(() => zipBlob, 'Full-wall ZIP export did not complete', 120000);
+  const blob = zipBlob;
+  const bytes = new Uint8Array(await blob.slice(0, 4).arrayBuffer());
+  assert(bytes[0] === 80 && bytes[1] === 75 && bytes[2] === 3 && bytes[3] === 4, 'Export is not a ZIP archive');
+  const detail = { type: blob.type, bytes: blob.size, exportMs: performance.now() - began,
+    selectedColors: colors, settings: { metric: 'Oklab', cap: 'All', cleanup: 'off', cut: 128 } };
+  if (blob.size > 16 * 1024 * 1024) {
+    detail.captureSkipped = 'ZIP exceeds local capture endpoint 16 MiB limit; export itself completed';
+  } else {
+    const device = /Android/.test(navigator.userAgent) ? 'android' : 'desktop';
+    const response = await fetch('/export?device=' + device, {
+      method: 'POST', headers: { 'Content-Type': 'application/zip' }, body: blob,
+    });
+    assert(response.ok, 'Raw ZIP capture failed: ' + response.status);
+    const captured = await response.json();
+    assert(captured.bytes === blob.size, 'Captured ZIP size mismatch');
+    detail.capturedFile = captured.filename;
+  }
+  report.rawExport = detail;
+  zipBlob = null;
+  return detail;
+}
+cancelButton.onclick = () => {
+  stopped = true;
+  frame.src = 'about:blank';
+  status.textContent = 'Canceled; app unloaded to stop pending work';
+};
+runButton.onclick = async () => {
+  runButton.disabled = true; cancelButton.disabled = false; stopped = false;
+  runBegan = performance.now();
+  files.clear();
+  report = { kind: 'wall-stress', version: 1, userAgent: navigator.userAgent,
+    started: new Date().toISOString(), stages: [], errors: [], warnings: [], completed: false,
+    scopes: ['Built app controls and native canvas lifetime', 'Whole cohort All; subset cap8 and cleanup',
+      'Control-ready timestamps include Svelte publication, polling and any cache reuse; not isolated generator kernel time',
+      'Decoded RGBA estimate counts declared frames; excludes duplicate buffers, GPU, caches and other allocations'] };
+  try {
+    const manifestResponse = await fetch('/qa-stress-fixtures.json');
+    assert(manifestResponse.ok, 'Stress fixture manifest missing');
+    const manifest = await manifestResponse.json();
+    assert(Array.isArray(manifest.files), 'Fixture list missing');
+    const stills = manifest.files.filter(entry => entry.kind === 'still');
+    const gifs = manifest.files.filter(entry => entry.kind === 'gif');
+    const partial = manifest.files.find(entry => entry.kind === 'partial');
+    const cohort = [...stills, ...gifs];
+    report.cohort = { assets: cohort.length, stills: stills.length, gifs: gifs.length,
+      sourceFrames: cohort.reduce((sum, entry) => sum + (entry.frames || 1), 0),
+      estimatedDecodedRGBABytes: cohort.reduce((sum, entry) => sum + entry.width * entry.height * (entry.frames || 1) * 4, 0),
+      ids: cohort.map(entry => entry.id) };
+    frame.src = manifest.appUrl || '/';
+    await new Promise(resolve => frame.addEventListener('load', resolve, { once: true }));
+    w = frame.contentWindow; d = w.document;
+    await until(() => label('Add images'), 'Built app did not initialize');
+    instrument(); readbackWitness();
+    const welcome = one('dialog[open]');
+    if (welcome) {
+      const close = label('Close help', welcome) || label('Close', welcome) ||
+        [...welcome.querySelectorAll('button')].find(button => /close|start|got it/i.test(button.textContent + ' ' + button.getAttribute('aria-label')));
+      if (close) click(close); else welcome.close();
+    }
+    if (exportOnly) {
+      await stage('Load whole cohort / Generated 32 / All export-only', async () => {
+        const loaded = await add(cohort);
+        const config = await configure();
+        await ready(cohort.length, config.after);
+        return loaded;
+      });
+      await stage('Actual full-wall native ZIP capture', async () => captureExport(await reviewedColors()));
+      report.completed = true;
+      status.textContent = 'Full-wall export completed; app retained for inspection';
+      return;
+    }
+    await stage('Initial 40 stills / Generated 32 / All', async () => {
+      const loaded = await add(stills.slice(0, 40));
+      await configure();
+      return { ...loaded, colors: await reviewedColors() };
+    });
+    await stage('Add first 8 GIFs / Generated 32 / All', () => add(gifs.slice(0, 8)));
+    await stage('Complete large wall / Generated 32 / All', () => add([...stills.slice(40), ...gifs.slice(8)]));
+    await stage('Whole-cohort five-second animation observation', () => playback(cohort));
+    await stage('Matching RGB then Oklab / whole cohort', async () => {
+      const before = await reviewedColors();
+      for (const metric of ['RGB', 'Oklab']) {
+        const config = await configure(metric);
+        await ready(cohort.length, config.after);
+      }
+      const after = await reviewedColors();
+      assert(JSON.stringify(before) === JSON.stringify(after), 'Matching changed generated shared colors');
+      return { settingsTransitions: 2, paletteUnchanged: true };
+    });
+    let withPartial = cohort;
+    if (partial) {
+      await stage('Add partial-alpha control', () => add([partial]));
+      withPartial = [...cohort, partial];
+      for (const cut of [255, 128]) await stage('Opacity cut ' + cut + ' / whole cohort', async () => {
+        await settings();
+        const began = performance.now();
+        input(label('Palette opacity cut'), cut);
+        await ready(withPartial.length, began);
+        return { cut, actionToControlsAndWallReadyMs: performance.now() - began };
+      });
+    }
+    const removed = withPartial.filter((entry, i) => i % 2 === 0);
+    await stage('Remove half the wall / regenerate', () => removeEntries(removed));
+    await stage('Re-add removed half / regenerate', () => add(removed));
+    const priorities = stills.filter(entry => ['building', 'sprite'].includes(entry.role));
+    const subsetStills = [...priorities, ...stills.filter(entry => !priorities.includes(entry))].slice(0, 20);
+    const subsetGifs = gifs.filter(entry => entry.role !== 'dungeon').slice(0, 8);
+    const subset = [...subsetStills, ...subsetGifs];
+    report.optionalSettingsCohort = { assets: subset.length, ids: subset.map(entry => entry.id),
+      note: 'Large dungeon excluded from cap/cleanup cost phase; whole wall tested with All.' };
+    await stage('Clear large wall and load bounded cap/cleanup cohort', async () => {
+      await clear(); return await add(subset);
+    });
+    for (const cleanup of ['off', 'on']) await stage('Subset RGB / cap8 / cleanup ' + cleanup, async () => {
+      const config = await configure('RGB', 8, cleanup);
+      const timing = await ready(subset.length, config.after);
+      return { ...config, settingsToWallReadyMs: timing.wallReady - (config.after || timing.wallReady),
+        ...await playback(subset) };
+    });
+    await stage('Preset reset and restored All / subset', async () => {
+      const before = await reviewedColors();
+      await palettePanel(); click(label('PICO-8', one('.palette-rail'))); await sleep(100);
+      await generated();
+      const config = await configure();
+      await ready(subset.length, config.after);
+      const after = await reviewedColors();
+      assert(JSON.stringify(before) === JSON.stringify(after), 'Preset restore changed generated colors');
+      await palettePanel();
+      click(textButton('1-bit', one('.palette-family-tabs')));
+      await sleep(100);
+      assert(!one('.palette-source-status'), 'Generated status remained in 1-bit family');
+      await generated();
+      await ready(subset.length);
+      assert(JSON.stringify(after) === JSON.stringify(await reviewedColors()), 'Family restore changed generated colors');
+      const toggle = one('.view-toggle');
+      assert(toggle, 'Original comparison toggle missing');
+      const was = toggle.getAttribute('aria-pressed');
+      click(toggle);
+      await until(() => toggle.getAttribute('aria-pressed') !== was, 'Original comparison did not switch');
+      click(toggle);
+      await until(() => toggle.getAttribute('aria-pressed') === was, 'Converted comparison did not restore');
+      return { presetTransitions: ['PICO-8', 'Generated 32'], familyTransitions: ['1-bit', 'Palette'],
+        originalComparisonRestored: true, paletteUnchanged: true, settings: config, colors: after };
+    });
+    await stage('Clear subset and restore whole cohort / All', async () => {
+      await clear();
+      const loaded = await add(cohort);
+      const config = await configure();
+      await ready(cohort.length, config.after);
+      return { ...loaded, ...await playback(cohort) };
+    });
+    if (partial) {
+      await stage('Opacity 128 to 129 to 128 invalidation / whole cohort', async () => {
+        await add([partial]);
+        const initial = await reviewedColors();
+        for (const cut of [129, 128]) {
+          await settings();
+          const began = performance.now();
+          input(label('Palette opacity cut'), cut);
+          await ready(cohort.length + 1, began);
+        }
+        assert(JSON.stringify(initial) === JSON.stringify(await reviewedColors()), 'Opacity restore changed generated colors');
+        await removeEntries([partial]);
+        return { restoredCut: 128, restoredSharedPalette: true };
+      });
+    }
+    await stage('Actual full-wall native ZIP capture', async () => captureExport(await reviewedColors()));
+    await stage('Final clear / eight-second release observation', async () => {
+      await clear();
+      files.clear();
+      const before = heap();
+      await sleep(8000); check();
+      assert(tiles().length === 0, 'Cleared sources returned');
+      assert(!one('.tiles canvas')?.closest('.tile:not(:has(.example-caption))'), 'Imported canvas survived clear');
+      return { waitMs: 8000, beforeHeap: before,
+        note: 'No forced GC. Compressed fixture File references released before wait; process PSS observed independently.' };
+    });
+    assert(!report.errors.length, 'Runtime errors: ' + JSON.stringify(report.errors));
+    report.completed = true;
+    status.textContent = 'Completed; large wall cleared and results saved';
+  } catch (error) {
+    report.error = { name: error.name, message: error.message };
+    status.textContent = error.name + ': ' + error.message;
+  } finally {
+    clearInterval(heartbeat);
+    mutationObserver?.disconnect(); longTaskObserver?.disconnect();
+    stableProbe = null; activeStage = null;
+    report.finished = new Date().toISOString();
+    await publish().catch(error => { status.textContent += ' / report: ' + error.message; });
+    runButton.disabled = false; cancelButton.disabled = true;
+  }
+};
+</script>
+</html>

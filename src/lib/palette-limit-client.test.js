@@ -38,6 +38,39 @@ beforeEach(async () => {
 afterEach(() => { vi.unstubAllGlobals(); });
 
 describe('limited palette job ownership and cache', () => {
+  it('removes last-canceled queued work while preserving a running export and a queued shared subscriber', async () => {
+    failure = 'hang';
+    const heldItem = { original: image() }, heldController = new AbortController();
+    const heldPreview = getLimitedPalette(heldItem, palette(), 128, 'rgb', 1, { signal: heldController.signal });
+    const heldExport = getLimitedPalette(heldItem, palette(), 128, 'rgb', 1);
+    const heldRejected = expect(heldPreview).rejects.toMatchObject({ name: 'AbortError' }); heldController.abort(); await heldRejected;
+    const disposable = { original: image([0, 0, 255, 255]) }, disposableController = new AbortController();
+    const canceled = getLimitedPalette(disposable, palette(), 128, 'rgb', 1, { signal: disposableController.signal });
+    const canceledRejected = expect(canceled).rejects.toMatchObject({ name: 'AbortError' }); disposableController.abort(); await canceledRejected;
+    const sharedItem = { original: image([255, 255, 255, 255]) }, sharedController = new AbortController();
+    const sharedPreview = getLimitedPalette(sharedItem, palette(), 128, 'rgb', 1, { signal: sharedController.signal });
+    const sharedExport = getLimitedPalette(sharedItem, palette(), 128, 'rgb', 1);
+    const sharedRejected = expect(sharedPreview).rejects.toMatchObject({ name: 'AbortError' }); sharedController.abort(); await sharedRejected;
+    const replacement = getLimitedPalette(disposable, palette(), 128, 'rgb', 1);
+    expect(instances[0].starts).toBe(1); expect(instances[0].terminated).not.toBe(true);
+    instances[0].mode = 'normal'; instances[0].onmessage({ data: { type: 'result', result: { indices: [0] } } });
+    expect((await heldExport).colors).toEqual(['#ff0000']);
+    expect((await sharedExport).colors).toEqual(['#ffffff']); expect((await replacement).colors).toEqual(['#0000ff']);
+    expect(instances[0].starts).toBe(3); expect(instances[0].terminated).not.toBe(true);
+  });
+  it.skipIf(typeof globalThis.gc !== 'function')('releases canceled queued source buffers before a running export completes', async () => {
+    failure = 'hang'; const heldItem = { original: image() }, held = getLimitedPalette(heldItem, palette(), 128, 'rgb', 1);
+    async function canceledSource() {
+      const original = image([12, 34, 56, 255], 40000), weak = new WeakRef(original.data), controller = new AbortController();
+      const pending = getLimitedPalette({ original }, palette(), 128, 'rgb', 1, { signal: controller.signal });
+      controller.abort(); await pending.catch(() => {}); return weak;
+    }
+    const weak = await canceledSource();
+    for (let i = 0; i < 8; i++) { await new Promise(resolve => setTimeout(resolve, 0)); globalThis.gc(); }
+    const released = weak.deref() === undefined;
+    instances[0].mode = 'normal'; instances[0].onmessage({ data: { type: 'result', result: { indices: [0] } } }); await held;
+    expect(released).toBe(true);
+  });
   it('All and a sufficient cap return the original without touching sources or a worker', async () => {
     const prepared = palette();
     expect(await getLimitedPalette(null, prepared, 0, 'invalid', 0)).toBe(prepared);

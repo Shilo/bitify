@@ -58,6 +58,10 @@ colors are not persisted; Edit saves a fixed ordinary copy. Empty results clear 
 converted art and disable color-dependent actions. Export gestures capture the entire
 wall source signature before awaiting generation. The worker streams 128 KiB slices;
 the result cache holds two small palettes, without old source/histogram references.
+App's completed generated publication retains the request key, not the captured wall.
+Tile clears inactive limiter/cleanup request results. Last-subscriber cancellation
+immediately removes unstarted limiter/cleanup jobs from their queue and active map;
+running jobs with independent export subscribers remain alive.
 
 `palette-animation-cache.js` reserves whole sampled clips within a shared global 8 MiB
 index/used-buffer budget, lazy-filled only for animations. Stills/oversized clips bypass
@@ -66,6 +70,10 @@ viewer pauses hidden wall playback. Exports remain full source and existing 1-bi
 remain independent. Limiting reuses exact RGB nearest error; prepared empty cleanup skips
 overlay scans and exhausted animation agreement skips later transfers after validating
 all metadata. See docs/research/2026-10-12-palette-implementation.md for reviewed limits.
+Cleanup Off skips work but leaves a previously cached two-byte/source-pixel map attached
+to its live source identity. The 8 MiB index cache does not bound the whole app heap.
+See docs/research/2026-10-12-generated-wall-stress.md for built desktop/phone wall tests,
+independent ZIP checks, remaining import long tasks and process-memory limits.
 
 Optional full-palette Cleanup is an Off/On row after Matching, Off by default and
 remembered across visits/families. Reset restores Off. `palette-cleanup-client.js` is

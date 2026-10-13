@@ -1937,7 +1937,11 @@ Save, Copy, drag and ZIP capture the whole-wall signature and source/settings re
 before awaiting generation. All files in a ZIP use that captured palette. Preview
 cancellation cannot cancel an export subscriber. Workers use acknowledged 128 KiB
 slices without detaching sources. At most two small completed palettes are cached;
-old source histograms are not retained.
+old source histograms are not retained. App's completed generated publication stores
+the request key and palette, without retaining the captured source request. Tile clears
+inactive limiter/cleanup request references on All, Off or family changes. Canceling
+the last subscriber immediately removes an unstarted limiter/cleanup job from its
+queue and active map, while running/shared export jobs retain their subscribers.
 
 Palette previews lazily retain completed animation indexes only when the whole sampled
 clip fits a shared global 8 MiB budget, including indexes and used flags. Stills bypass
@@ -1950,6 +1954,11 @@ retaining its cache. Existing 1-bit masks/colors remain cached. Max colors exact
 histograms reuse nearest error without altering accumulation order. Prepared empty
 cleanup skips overlays; exhausted animation agreement skips remaining transfer/processing
 after all source metadata is validated.
+The animation budget covers only sampled indexes and used flags, not total app memory.
+Cleanup Off skips work but does not evict a previously cached two-byte/source-pixel map
+while its source identity remains live. See
+docs/research/2026-10-12-generated-wall-stress.md for the bounded whole-wall validation
+and remaining import and process-memory limitations.
 
 All and limits at least the palette size return the original prepared palette immediately;
 they do not load the limiter or change nearest matching. The control is one row with a

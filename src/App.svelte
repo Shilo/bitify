@@ -58,7 +58,7 @@
   let deleteImports = $state(false);
   function selectPalette(p) { if (p.id === GENERATED_PALETTE_ID && generatedError) generationRetry++; paletteId = p.id; family = 'full-palette'; showOriginal = false; }
   function editPalette(p) {
-    if (p?.id === GENERATED_PALETTE_ID && (generatedBusy || generatedUnavailable || generatedResult?.request !== generatedRequest)) return;
+    if (p?.id === GENERATED_PALETTE_ID && (generatedBusy || generatedUnavailable || generatedResult?.key !== generatedRequest?.key)) return;
     paletteTrigger = document.querySelector('.image-viewer[open] button[aria-label="Save image"]') ?? document.activeElement;
     paletteRequest = p ? { ...p, name: p.id.startsWith('preset-') || p.id === GENERATED_PALETTE_ID ? p.name + ' copy' : p.name, expectedRevision: p.revision, forceCopy: !p.id.startsWith('user-') } : { defaultName: newPaletteName(savedPalettes) };
   }
@@ -218,7 +218,8 @@
     generatedBusy = true; generatedError = false;
     import('./lib/palette-generated-client.js').then(client => client.getGeneratedPalette(request, { signal: controller.signal })).then(result => {
       if (!controller.signal.aborted) {
-        generatedResult = { request, palette: Object.freeze({ ...GENERATED_PALETTE, colors: result.colors }) };
+        // Keep the small result and identity, never the captured wall's frame buffers.
+        generatedResult = { key: request.key, palette: Object.freeze({ ...GENERATED_PALETTE, colors: result.colors }) };
         generatedBusy = false;
       }
     }).catch(error => {

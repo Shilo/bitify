@@ -1,7 +1,9 @@
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
-const root=path.resolve('.tmp/palette-final-build'),reports=path.resolve('.tmp/palette-implementation-20261012');
+const root=path.resolve(process.argv[2] ?? '.tmp/palette-final-build'),reports=path.resolve(process.argv[3] ?? '.tmp/palette-implementation-20261012');
+const port = Number(process.argv[4] ?? 5264);
+if (!Number.isInteger(port) || port < 1 || port > 65535) throw Error('Invalid QA port.');
 fs.mkdirSync(reports,{recursive:true});
 const mime={'.html':'text/html','.json':'application/json','.js':'text/javascript','.css':'text/css','.gif':'image/gif','.png':'image/png'};
 http.createServer(async(req,res)=>{
@@ -31,7 +33,8 @@ http.createServer(async(req,res)=>{
     if(req.method==='POST'&&req.url==='/results') {
       let body='';for await(const chunk of req){body+=chunk;if(body.length>1024*1024)throw Error('Report too large');}
       const data=JSON.parse(body),device=/Android/.test(data.userAgent??'')?'android':'desktop';
-      fs.writeFileSync(path.join(reports,`${device}-${data.kind==='performance'?'performance':'integration'}.json`),JSON.stringify(data,null,2));
+      const kind = data.kind === 'wall-stress' ? 'wall-stress' : data.kind === 'performance' ? 'performance' : 'integration';
+      fs.writeFileSync(path.join(reports,`${device}-${kind}.json`),JSON.stringify(data,null,2));
       res.writeHead(200);res.end('Recorded');return;
     }
     const name=url.pathname==='/'?'/index.html':url.pathname;
@@ -39,4 +42,4 @@ http.createServer(async(req,res)=>{
     if(!fs.existsSync(file)){res.writeHead(404);res.end('Not found');return;}
     res.writeHead(200,{'Content-Type':mime[path.extname(file)]??'application/octet-stream','Cache-Control':'no-store'});fs.createReadStream(file).pipe(res);
   }catch(error){res.writeHead(400);res.end(error.message);}
-}).listen(5264,'127.0.0.1',()=>console.log('Palette final QA: http://127.0.0.1:5264/palette-integration-qa.html'));
+}).listen(port,'127.0.0.1',()=>console.log(`Palette QA: http://127.0.0.1:${port}/`));

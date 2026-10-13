@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { createAnimationCache } from './palette-animation-cache.js';
+import { preparePalette, quantize, colorize } from './quantize.js';
 const source = () => ({ width: 2, height: 1, data: new Uint8Array(8) });
 const result = () => ({ w: 2, h: 1, indices: new Uint16Array([0, 256]), used: new Uint8Array(256), hasTransparency: true });
 const options = () => ({ sources: [source(), source()], palette: { colors: ['#000000'] }, width: 2, height: 1, alphaCut: 128, metric: 'oklab' });
@@ -50,5 +51,41 @@ describe('bounded animation preview cache', () => {
     const cache = createAnimationCache(), h = cache.acquire(options());
     await expect(h.getFrame(0, async () => ({ ...result(), indices: new Uint8Array(2) }))).rejects.toThrow('Invalid cached');
     await expect(h.getFrame(0, async () => result())).resolves.toHaveProperty('w', 2); h.release();
+  });
+  it('returns fresh pixel-identical results across setting, subset, order and source changes', async () => {
+    const image = data => ({ width: 3, height: 2, data: Uint8ClampedArray.from(data) });
+    const first = image([5,52,82,255,7,5,12,255,240,90,20,255,220,230,240,127,40,180,90,180,0,0,0,0]);
+    const second = image([240,90,20,255,5,52,82,255,7,5,12,255,40,180,90,180,220,230,240,127,0,0,0,0]);
+    const base = { sources: [first, second], width: 3, height: 2, alphaCut: 128, metric: 'oklab',
+      palette: preparePalette(['#000000', '#ffffff', '#1d2b53', '#ffec27']) };
+    const cache = createAnimationCache();
+    const cases = [base, { ...base, metric: 'rgb' }, { ...base, alphaCut: 181 },
+      { ...base, palette: preparePalette([...base.palette.colors].reverse()) },
+      { ...base, palette: preparePalette(['#000000', '#ffffff']) },
+      { ...base, width: 2, height: 1 }, { ...base, sources: [second, first] }];
+    const handles = [];
+    for (const args of cases) {
+      const handle = cache.acquire(args); handles.push(handle);
+      const produce = vi.fn(async () => quantize(args.sources[0], args.palette, args.alphaCut, args.width, args.height, { metric: args.metric }));
+      const actual = await handle.getFrame(0, produce), warm = await handle.getFrame(0, produce);
+      const expected = quantize(args.sources[0], args.palette, args.alphaCut, args.width, args.height, { metric: args.metric });
+      expect(actual.indices).toEqual(expected.indices);
+      expect(colorize(actual, args.palette).data).toEqual(colorize(expected, args.palette).data);
+      expect(warm).toBe(actual); expect(produce).toHaveBeenCalledTimes(1);
+    }
+    expect(cache.stats().clips).toBe(cases.length);
+    handles.forEach(handle => handle.release()); expect(cache.stats().bytes).toBe(0);
+  });
+  it('a canceled old producer cannot overwrite a replacement frame in the same clip', async () => {
+    const cache = createAnimationCache(), handle = cache.acquire(options()), controller = new AbortController();
+    let completeOld;
+    const old = handle.getFrame(0, () => new Promise(resolve => { completeOld = resolve; }), { signal: controller.signal });
+    await Promise.resolve(); const rejected = expect(old).rejects.toHaveProperty('name', 'AbortError');
+    controller.abort(); await rejected;
+    const fresh = { ...result(), indices: new Uint16Array([256, 0]) };
+    expect(await handle.getFrame(0, async () => fresh)).toBe(fresh);
+    completeOld(result()); await Promise.resolve(); await Promise.resolve();
+    expect(await handle.getFrame(0, () => { throw Error('Cached frame lost'); })).toBe(fresh);
+    handle.release(); expect(cache.stats().bytes).toBe(0);
   });
 });
