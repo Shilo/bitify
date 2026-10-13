@@ -16,10 +16,13 @@ import PIL
 from PIL import Image
 
 
-if len(sys.argv) != 3:
-    raise SystemExit('Usage: python bench/auto-performance-verify.py <built fixture root> <report root>')
+if len(sys.argv) not in (3, 4):
+    raise SystemExit('Usage: python bench/auto-performance-verify.py <built fixture root> <report root> [expected color count]')
 FIXTURES = Path(sys.argv[1]).resolve()
 ROOT = Path(sys.argv[2]).resolve()
+EXPECTED_COLORS = int(sys.argv[3]) if len(sys.argv) == 4 else None
+if EXPECTED_COLORS is not None and not 1 <= EXPECTED_COLORS <= 64:
+    raise SystemExit('Expected color count must be between 1 and 64.')
 MANIFEST_PATH = FIXTURES / 'qa-stress-fixtures.json'
 OUT_PATH = ROOT / 'auto-independent-export-verification.json'
 
@@ -49,6 +52,9 @@ def verify_device(device, entries):
     colors = exported['selectedColors']
     allowed = {int(color[1:], 16) for color in colors}
     assert 0 < len(allowed) <= 64
+    assert len(colors) == len(allowed), 'Captured palette has duplicate entries.'
+    if EXPECTED_COLORS is not None:
+        assert len(allowed) == EXPECTED_COLORS, f'Expected {EXPECTED_COLORS} captured colors, got {len(allowed)}.'
     assert exported['settings'] == {'metric': 'Oklab', 'cap': 'All', 'cleanup': 'off', 'cut': 128}
     expected_names = {
         f"{Path(entry['name']).stem}-palette{Path(entry['name']).suffix}": entry
@@ -168,7 +174,7 @@ entries = subset_stills + subset_gifs
 result = {
     'method': 'Independent Pillow compositing and NumPy full-frame pixel checks; no application imports',
     'versions': {'python': sys.version.split()[0], 'pillow': PIL.__version__, 'numpy': np.__version__},
-    'expected': {'files': len(entries), 'stills': sum(entry['kind'] == 'still' for entry in entries),
+    'expected': {'selectedColors': EXPECTED_COLORS, 'files': len(entries), 'stills': sum(entry['kind'] == 'still' for entry in entries),
                  'gifs': sum(entry['kind'] == 'gif' for entry in entries),
                  'frames': sum(entry['frames'] for entry in entries)},
     'settings': {'sharedPalette': 'Auto', 'matching': 'Oklab', 'maxColors': 'All',

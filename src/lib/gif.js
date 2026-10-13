@@ -1,12 +1,13 @@
 // Reading and writing animated GIFs. No DOM, so it runs in tests.
 import omggif from 'omggif';
 import { exportPalette, markUsedAsync, compactTable, EMPTY_INDEX, yieldExport } from './palette-export.js';
+import { checkCanceled, yieldTask } from './quantize.js';
 
 // Decodes a GIF into full-size RGBA frames, each as it appears on screen. GIF frames can be
 // partial patches drawn over earlier ones, so they are composited here once.
 // Returns { width, height, loop, frames: [{ data, delay }] }: delay is in milliseconds, loop is
 // the repeat count (0 = forever, null = the file plays once).
-export function decodeGif(bytes) {
+function* decodeGifSteps(bytes) {
   const reader = new omggif.GifReader(bytes), { width, height } = reader;
   const canvas = new Uint8ClampedArray(width * height * 4), frames = [];
   let before = null; // the previous frame, whose "disposal" says how to leave the canvas
@@ -26,8 +27,37 @@ export function decodeGif(bytes) {
     // browsers play frames marked 0 or 1 hundredths of a second at 100ms
     frames.push({ data: canvas.slice(), delay: info.delay > 1 ? info.delay * 10 : 100 });
     before = info;
+    yield;
   }
   return { width, height, loop: reader.loopCount(), frames };
+}
+
+export function decodeGif(bytes) {
+  const steps = decodeGifSteps(bytes);
+  let next;
+  do { next = steps.next(); } while (!next.done);
+  return next.value;
+}
+
+// Workers use the exact synchronous decoder above. Its browser fallback gives
+// input/rendering a turn before decoding and between bounded groups of frames.
+// A single large LZW frame is still synchronous when workers are unavailable.
+export async function decodeGifAsync(bytes, { signal } = {}) {
+  checkCanceled(signal);
+  await yieldTask();
+  checkCanceled(signal);
+  const steps = decodeGifSteps(bytes);
+  let deadline = performance.now() + 8;
+  while (true) {
+    checkCanceled(signal);
+    const next = steps.next();
+    if (next.done) return next.value;
+    if (performance.now() >= deadline) {
+      await yieldTask();
+      checkCanceled(signal);
+      deadline = performance.now() + 8;
+    }
+  }
 }
 
 // Encodes a two-color animation as a GIF with a transparent background. Each frame's `mask` has

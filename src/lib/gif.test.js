@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import omggif from 'omggif';
-import { decodeGif, encodeGif } from './gif.js';
+import { decodeGif, decodeGifAsync, encodeGif } from './gif.js';
 
 const RED = [255, 0, 0, 255], BLUE = [0, 0, 255, 255], GREEN = [0, 255, 0, 255], NONE = [0, 0, 0, 0];
 // Splits RGBA bytes into one [r, g, b, a] per pixel, so expectations read as pictures.
@@ -15,6 +15,22 @@ function gif(frames, loop) {
 }
 
 describe('decodeGif', () => {
+  it('keeps fallback disposal, transparency, delays and loop byte-for-byte', async () => {
+    const bytes = gif([
+      [0, 0, 2, 2, [1, 0, 1, 1], { disposal: 1, delay: 7 }],
+      [1, 1, 1, 1, [2], { disposal: 3, delay: 12 }],
+      [0, 0, 1, 1, [3], { disposal: 2, delay: 25 }],
+      [1, 0, 1, 1, [2], { delay: 0 }],
+    ], 3);
+    expect(await decodeGifAsync(bytes)).toEqual(decodeGif(bytes));
+  });
+
+  it('cancels the fallback before its first decoder task', async () => {
+    const controller = new AbortController();
+    const pending = decodeGifAsync(new Uint8Array(0), { signal: controller.signal });
+    controller.abort();
+    await expect(pending).rejects.toMatchObject({ name: 'AbortError' });
+  });
   it('reads size, loop count, and each frame with its delay in milliseconds', () => {
     const out = decodeGif(gif([[0, 0, 2, 2, [1, 1, 1, 1], { delay: 20 }], [0, 0, 2, 2, [2, 2, 2, 2], { delay: 7 }]], 0));
     expect([out.width, out.height, out.loop, out.frames.length]).toEqual([2, 2, 0, 2]);

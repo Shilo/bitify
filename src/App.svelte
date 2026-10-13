@@ -467,22 +467,34 @@
   });
 
   // Reads a file into frames: one for a still image, several for an animated GIF.
-  async function decode(file) {
+  const importSettings = () => ({ source: set.source ?? 'luma', alphaCut: set.alpha ?? 128 });
+  let importClient;
+  async function decode(file, signal) {
+    const settings = importSettings();
+    importClient = await import('./lib/image-import-client.js');
+    return importClient.decodeImportedFile(file, { ...settings, signal });
+  }
+  async function currentImport(decoded, signal, publish) {
+    while (true) {
+      const settings = importSettings();
+      if (decoded.analysisSource === settings.source
+        && (!decoded.frames[0].img.soft || decoded.analysisCut === settings.alphaCut)) {
+        if (!signal.aborted) publish(importClient.takeImportedFrames(decoded));
+        return;
+      }
+      decoded = await importClient.reanalyzeImported(decoded, { ...settings, signal });
+    }
+  }
+  async function decodeDemo(file, signal) {
     if (file.type === 'image/gif') {
       try {
-        // the GIF code is only downloaded the first time a GIF is added
         const { decodeGif } = await import('./lib/gif.js');
         const gif = decodeGif(new Uint8Array(await file.arrayBuffer()));
-        if (gif.frames.length > 1) {
-          const frames = gif.frames.map(f => ({ original: new ImageData(f.data, gif.width, gif.height), delay: f.delay }));
-          return { frames, loop: gif.loop };
-        }
-      } catch {
-        // not a GIF we can read ourselves; let the browser try below
-      }
+        if (gif.frames.length > 1) return { frames: gif.frames.map(frame => ({
+          original: new ImageData(frame.data, gif.width, gif.height), delay: frame.delay })), loop: gif.loop };
+      } catch { if (signal.aborted) throw new DOMException('Canceled', 'AbortError'); }
     }
-    const original = await decodeImageFile(file);
-    return { frames: [{ original }] };
+    return { frames: [{ original: await decodeImageFile(file, { signal }) }] };
   }
 
   // What the current style reads an image by: what brightness is taken from, and how see-through
@@ -496,10 +508,12 @@
 
   // Turns decoded frames into an item for the wall. `original` and `img` are the first frame;
   // an animation also has `frames` (each with its own original, img and delay) and `loop`.
-  function toItem(id, name, { frames, loop }) {
-    for (const frame of frames) frame.img = analyze(frame.original, set.source, set.alpha);
-    unify(frames.map(frame => frame.img)); // one conversion for the whole animation, so it does not flicker
-    const by = readBy(frames[0].img.soft);
+  function toItem(id, name, { frames, loop, analysisSource, analysisCut }, prepared = false) {
+    if (!prepared) {
+      for (const frame of frames) frame.img = analyze(frame.original, set.source, set.alpha);
+      unify(frames.map(frame => frame.img)); // one conversion for the whole animation, so it does not flicker
+    }
+    const by = prepared ? `${analysisSource} ${frames[0].img.soft ? analysisCut : ''}` : readBy(frames[0].img.soft);
     return frames.length > 1 ? { id, name, by, ...frames[0], frames, loop } : { id, name, by, ...frames[0] };
   }
   // The item analysed the way the current style reads images: itself, if it already is.
@@ -518,10 +532,18 @@
     if (example) example = reread(example);
   });
 
-  fetch(logoUrl)
+  const imageImports = new Set(), exampleImportController = new AbortController();
+  $effect(() => () => {
+    exampleImportController.abort();
+    for (const controller of imageImports) controller.abort();
+    imageImports.clear();
+  });
+  fetch(logoUrl, { signal: exampleImportController.signal })
     .then(response => response.blob())
-    .then(decode)
-    .then(decoded => (example = toItem(0, 'Bitify', decoded)))
+    .then(file => decodeDemo(file, exampleImportController.signal))
+    .then(decoded => {
+      if (!exampleImportController.signal.aborted) example = toItem(0, 'Bitify', decoded);
+    })
     .catch(() => {}); // without it the empty screen simply has no preview
 
   // Each image goes on the wall as soon as it is read, so the first of a batch of photos shows
@@ -533,9 +555,13 @@
   function removeAll() {
     emptied++;
     for (const controller of imageDownloads) controller.abort();
+    for (const controller of imageImports) controller.abort();
     clearComparison(); items = [];
   }
   async function addFiles(files, began = emptied, reportSkipped = true) {
+    if (began !== emptied) return;
+    const controller = new AbortController();
+    imageImports.add(controller);
     let skipped = 0, fresh = [], shownAt = 0, done;
     // A photo goes on the wall as soon as it is read. Sprites are read far quicker than the wall
     // can be fitted again around each one, so those read within a quarter of a second go on together.
@@ -548,7 +574,8 @@
       for (const [n, file] of files.entries()) {
         if (began !== emptied) return;
         try {
-          const decoded = await decode(file), { width, height } = decoded.frames[0].original, name = file.name || 'image.png';
+          let decoded = await decode(file, controller.signal);
+          const { width, height } = decoded.frames[0].original, name = file.name || 'image.png';
           if (began !== emptied) return; // checked after each wait, before the next piece of work
           // From its first large image on, the batch says which file it is reading, and goes on
           // saying so until it ends: the message does not come and go between files.
@@ -561,15 +588,20 @@
             await drawn();
             if (began !== emptied) return;
           }
-          fresh.push(toItem(++nextId, name, decoded));
+          await currentImport(decoded, controller.signal, current => {
+            if (began === emptied) fresh.push(toItem(++nextId, name, current, true));
+          });
+          if (began !== emptied || controller.signal.aborted) return;
           if (performance.now() - shownAt > 250) show();
-        } catch {
+        } catch (error) {
+          if (controller.signal.aborted || error.name === 'AbortError' || began !== emptied) return;
           skipped++;
         }
       }
       if (began !== emptied) return;
       show();
     } finally {
+      imageImports.delete(controller);
       done?.();
     }
     if (reportSkipped && skipped) say(`${skipped} file${skipped === 1 ? '' : 's'} skipped. Bitify reads PNG, GIF, WebP, JPEG and BMP images.`);
