@@ -5,12 +5,14 @@ Bitify's Palette panel has two families: **1-bit**, with twelve preset color pai
 defined in [src/lib/presets.js](../src/lib/presets.js); full palettes and their provenance
 are in [src/lib/palette-library.js](../src/lib/palette-library.js).
 
-Open Palette and choose **1-bit** or **Palette**. Palette mode's import icon accepts
+Open Palette and choose **Palette** or **1-bit**. Palette mode's import icon accepts
 an image, palette file or pasted colors; its edit icon opens color review. Names under
 the round choices use a single line with an ellipsis when needed; full names remain in
 accessible labels and tooltips. More → Help lists the current mode's controls.
 
-**ENDESGA 32 remains the full-palette default.** PICO-8 remains available for its
+**Generated 32 is selected on fresh visits and global Reset, and leads the rail.**
+Saved choices remain intact, including older 1-bit preferences. ENDESGA 32 remains
+the curated fallback for missing/deleted saved selections. PICO-8 remains available for its
 distinctive stylization. A shared preset supplies consistent allowed RGB values;
 Max colors can restrict each asset further.
 
@@ -76,7 +78,8 @@ on white). Higher means the two colors are easier to tell apart.
 | Amber | `#3f291e` dark brown | `#fdca55` amber | 8.9 | Return of the Obra Dinn, Zenith ZVM 1240 setting |
 | Commodore | `#40318e` indigo | `#88d7de` cyan | 6.3 | Return of the Obra Dinn, Commodore 1084 setting |
 
-The app opens on Glow, with the dark color first.
+The 1-bit family initially uses Glow, with the dark color first. Fresh app visits
+start in Palette with Generated 32.
 
 ### Dark first, and Swap
 
@@ -87,10 +90,10 @@ Swap puts the light color first. That gives light lines on a dark fill, the look
 glowing screen, and suits Torch, Phosphor and Amber in the Lines style. It is the same
 press for every palette, and no palette does it for you.
 
-### Why Glow is the default
+### Why Glow is the initial 1-bit pair
 
-The default decides what someone gets who never opens the Palette panel, so it should be
-the pair the most people would pick.
+Glow supplies the initial colors when switching to 1-bit; saved 1-bit colors remain
+independent of Palette mode.
 
 - **It is the most used.** Glow is the most downloaded two-color palette on Lospec, about
   four times ahead of the next one and far ahead of plain black and white.

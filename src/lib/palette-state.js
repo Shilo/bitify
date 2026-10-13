@@ -10,10 +10,14 @@ function maxColorsOf(value = 0) {
 export function restorePaletteState(text, library = []) {
   let value;
   try { value = JSON.parse(text); } catch { /* Defaults also cover damaged settings. */ }
+  const hasPreferences = value !== null && typeof value === 'object' && !Array.isArray(value);
+  // Legacy records predate the family field. Preserve their 1-bit mode; only a
+  // fresh/unreadable record starts with the shared source palette.
+  if (!hasPreferences) value = undefined;
   const choices = [...FULL_PRESETS, ...library];
   return {
-    family: value?.family === 'full-palette' ? 'full-palette' : 'two-color',
-    paletteId: value?.paletteId === GENERATED_PALETTE_ID || choices.some(p => p.id === value?.paletteId) ? value.paletteId : DEFAULT_FULL_PALETTE.id,
+    family: !hasPreferences || value?.family === 'full-palette' ? 'full-palette' : 'two-color',
+    paletteId: value?.paletteId === GENERATED_PALETTE_ID || choices.some(p => p.id === value?.paletteId) ? value.paletteId : hasPreferences ? DEFAULT_FULL_PALETTE.id : GENERATED_PALETTE_ID,
     alphaCut: Number.isInteger(value?.alphaCut) && value.alphaCut >= 1 && value.alphaCut <= 255 ? value.alphaCut : 128,
     metric: value?.metric === 'rgb' ? 'rgb' : 'oklab',
     maxColors: value?.maxColors === 1 ? 2 : Number.isInteger(value?.maxColors) && value.maxColors >= 0 && value.maxColors <= 256 ? value.maxColors : 0,

@@ -236,7 +236,7 @@ or a way round, and no style favors any colors.
   Swap never unmarks it; changing a color with a swatch does.
 - Choosing a preset sets both colors and keeps the way round they are: dark color first,
   or light color first if the first color is currently the brighter of the two.
-- The app opens on Glow with the dark color first.
+- The 1-bit family initially uses Glow with the dark color first. See the October 12 default adoption below.
 
 | Name | Dark color | Light color |
 |---|---|---|
@@ -1851,7 +1851,7 @@ Desktop image Save uses the same GlassKit primary gradient and on-primary icon c
 This adoption supersedes the historical two-color-only palette scope, the old multi-row
 palette-chip presentation, and the statement that no named palettes are stored. Existing
 1-bit conversion algorithms, twelve color pairs, Swap/None roles, styles and settings
-remain independent. The default is still Glow/Cutout in 1-bit.
+remain independent. Glow/Cutout remains the initial 1-bit configuration; fresh visits now use the October 12 Palette default below.
 
 ### Conversion families
 
@@ -1913,8 +1913,10 @@ See docs/research/2026-10-12-one-pixel-cleanup.md for the findings and limitatio
 
 ### Generated 32 and bounded animation preview storage
 
-Generated 32 is explicitly selected after the nine curated full presets, before the
-saved library, with a divider. ENDESGA 32 remains the full-palette default. Generation
+Generated 32 leads the rail, separated from the nine curated full presets; saved
+palettes follow the curated choices. Fresh visits and global Reset select Palette and
+Generated 32. Existing saved choices remain intact. ENDESGA 32 is the curated fallback
+for missing/deleted existing palette selections. Generation
 loads lazily and samples all successfully decoded wall assets and every composited
 animation frame. It publishes one immutable revision of up to 32 opaque RGB colors;
 fewer unique visible colors are retained exactly. The fixed Oklab fit uses bounded
@@ -2015,7 +2017,7 @@ palette method list to traverse. Controls, fields and open dialogs retain gestur
 Use existing floating materials and measured canvas reservations. A single horizontal
 rail contains one round preview per palette with its name underneath. It scrolls sideways
 with faded edges when needed and reveals the selected choice. The header has the compact
-1-bit/Palette switch first, so its position is independent of the selected name. The
+Palette/1-bit switch first, so its position is independent of the selected name. The
 selected name sits to its right only when measured space allows
 the name, switch and actions to fit; never force another header row. Rail labels render
 the complete name in a fixed single-line width, with CSS ellipsis based on actual rendered
@@ -2037,7 +2039,7 @@ colors removes the masks/chevrons and exposes a normal scrollbar.
 
 The 1-bit header keeps its three-way Both/None switch. The Palette header instead has
 Import and Edit icon buttons with accessible labels and shared tooltips. Its rail starts
-with Resurrect 64, ENDESGA 32, PICO-8 (16), DawnBringer 16, Grayscale 8,
+with Generated 32 and a divider, then Resurrect 64, ENDESGA 32, PICO-8 (16), DawnBringer 16, Grayscale 8,
 Ice Cream GB (4), Game Boy green (4), Glow (2) and Paper (2), then a
 divider and saved/session palettes. Preset attribution lives with each immutable record
 and in [palettes.md](../../palettes.md). Game Boy green is explicitly an LCD-inspired RGB
@@ -2067,7 +2069,7 @@ server. The same 25-size sequence reproduced them in an isolated unchanged HEAD
 checkout, so these warnings predate the divider changes; settled layout checks passed.
 Equal-count order is curated,
 with Lospec downloads informing PICO-8 before DawnBringer 16. ENDESGA 32 is the
-default for new, invalid, reset and deleted selections independently of rail order;
+curated fallback for invalid/deleted existing selections independently of rail order;
 existing stable IDs retain their selection. Resurrect 64 and Ice Cream GB use Kerrie
 Lake's published RGB entries in published order. No palette controls or layout change.
 
@@ -2264,8 +2266,10 @@ palette identity and all higher preferences. Accessible descriptions explain a t
 bounded higher preference.
 Missing or invalid metric restores Oklab; only `oklab` and `rgb` persist. Palette records
 do not own matching, so imports, edits and selections retain the global choice. Reset
-settings restores Oklab, Max colors: All, Cleanup Off, remembered limit 16 and cut 128. Missing selection falls back
-to ENDESGA 32 while old preferences retain the default 1-bit family. Explicit named Save uses
+settings restores Oklab, Max colors: All, Cleanup Off, remembered limit 16 and cut 128. Fresh/unreadable/non-record preferences select Palette/Generated 32. Parsed preference objects
+without a valid family retain legacy 1-bit; their missing palette selection falls back
+to ENDESGA 32. Explicit valid family and palette IDs remain intact. Global Reset uses
+the fresh defaults; Nearest settings Reset retains the palette. Explicit named Save uses
 `bitify-palettes-v1`: version 1, at most 100 records and 256 KiB serialized UTF-8. Images
 and drafts are not persisted. Validate records independently. Each record has ID, name,
 colors, revision and source attribution. Re-read before writing to retain unrelated tab

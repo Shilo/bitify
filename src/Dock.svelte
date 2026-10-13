@@ -361,8 +361,8 @@
       <div class="palette-picker-header" use:fitPaletteHeader={selectedName + family}>
         <span class="palette-name-measure" aria-hidden="true">{compactPaletteName(selectedName, 22)}</span>
         <div class="palette-family-tabs glass-segmented" role="group" aria-label="Color system">
-          <button class="glass-segmented__item" aria-pressed={family === 'two-color'} onclick={() => family = 'two-color'}>1-bit</button>
           <button class="glass-segmented__item" aria-pressed={family === 'full-palette'} onclick={() => family = 'full-palette'}>Palette</button>
+          <button class="glass-segmented__item" aria-pressed={family === 'two-color'} onclick={() => family = 'two-color'}>1-bit</button>
         </div>
         <span class="palette-selected-name" hidden={!showSelectedName} use:tooltip={selectedName}>{compactPaletteName(selectedName, 22)}</span>
         <div class="palette-header-actions">
@@ -390,7 +390,7 @@
             {#each [...fullPresets, ...savedPalettes] as p, i (p.id)}
               {#if i === fullPresets.length && i > 0}
                 <span class="palette-library-divider" aria-hidden="true"></span>
-              {:else if i > 0 && i < fullPresets.length && (p.id === GENERATED_PALETTE_ID || p.colors.length !== fullPresets[i - 1].colors.length)}
+              {:else if i > 0 && i < fullPresets.length && (p.id === GENERATED_PALETTE_ID || fullPresets[i - 1].id === GENERATED_PALETTE_ID || p.colors.length !== fullPresets[i - 1].colors.length)}
                 <span class="palette-group-divider" aria-hidden="true"></span>
               {/if}
               <button class="palette-choice" aria-pressed={fullPalette.id === p.id} aria-label={p.name} use:tooltip={p.id === GENERATED_PALETTE_ID ? 'Generate up to 32 shared colors from all images and animation frames. Updates when images or opacity change. Edit a copy to keep a fixed palette.' : `${p.name} · ${p.colors.length} colors${p.source?.credit ? ' · ' + p.source.credit : ''}`} onclick={() => onpalette(p)}><span class="palette-circle"><PalettePreview colors={p.colors}/></span><span class="palette-choice-name">{p.name}</span></button>

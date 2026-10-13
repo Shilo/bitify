@@ -93,9 +93,12 @@ describe('independent palette state and export snapshots', () => {
     expect(result).toMatchObject({name:'before.gif',cleanup:true,loop:3});
     expect((await result.getFrame(0)).indices[12]).toBe(1); expect((await result.getFrame(1)).indices[12]).toBe(0); expect((await result.getFrame(1)).delay).toBe(90);
   });
-  it('restores only valid family, palette identity and opacity; legacy remains the default', () => {
+  it('starts fresh visits in Generated while retaining legacy and explicit saved choices', () => {
+    const fresh = { family: 'full-palette', paletteId: 'generated-32', alphaCut: 128, metric: 'oklab', maxColors: 0, lastMaxColors: 16, cleanup: false };
+    for (const text of [null, undefined, '', '{', 'null', '[]', 'true', '3', '"invalid"']) expect(restorePaletteState(text)).toEqual(fresh);
     expect(restorePaletteState('{}')).toEqual({ family: 'two-color', paletteId: DEFAULT_FULL_PALETTE.id, alphaCut: 128, metric: 'oklab', maxColors: 0, lastMaxColors: 16, cleanup: false });
-    expect(restorePaletteState('{')).toEqual(restorePaletteState(null));
+    expect(restorePaletteState(JSON.stringify({ first:'#222323', second:'#f0f6f0', style:'lines' }))).toMatchObject({ family:'two-color', paletteId:DEFAULT_FULL_PALETTE.id });
+    expect(restorePaletteState(JSON.stringify({ family:'two-color', paletteId:'preset-pico8', metric:'rgb', maxColors:8, cleanup:true }))).toMatchObject({ family:'two-color', paletteId:'preset-pico8', metric:'rgb', maxColors:8, cleanup:true });
     expect(restorePaletteState(JSON.stringify({ family:'full-palette',paletteId:'deleted',alphaCut:0 }))).toEqual({ family:'full-palette',paletteId:DEFAULT_FULL_PALETTE.id,alphaCut:128,metric:'oklab',maxColors:0,lastMaxColors:16,cleanup:false });
     expect(restorePaletteState(JSON.stringify({family:'full-palette',paletteId:'user-a',alphaCut:1}),[{id:'user-a'}]).paletteId).toBe('user-a');
     for (const palette of FULL_PRESETS) expect(restorePaletteState(JSON.stringify({family:'full-palette',paletteId:palette.id})).paletteId).toBe(palette.id);

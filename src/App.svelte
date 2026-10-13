@@ -53,7 +53,7 @@
   const generatedActive = $derived(paletteId === GENERATED_PALETTE_ID);
   const fullPalette = $derived(generatedActive ? generatedResult?.palette ?? GENERATED_PALETTE
     : [...FULL_PRESETS, ...savedPalettes].find(p => p.id === paletteId) ?? DEFAULT_FULL_PALETTE);
-  const fullChoices = $derived([...FULL_PRESETS, generatedResult?.palette ?? GENERATED_PALETTE]);
+  const fullChoices = $derived([generatedResult?.palette ?? GENERATED_PALETTE, ...FULL_PRESETS]);
   const prepared = $derived(fullPalette.colors.length ? preparePalette(fullPalette.colors) : null);
   let paletteRequest = $state.raw(null), paletteTrigger;
   let deleteImports = $state(false);
@@ -274,7 +274,9 @@
     const fresh = restore(null, STYLES.map(s => s[0]));
     ({ first, second, none, style, settings } = fresh);
     themePick = fresh.theme;
-    family = 'two-color'; paletteId = DEFAULT_FULL_PALETTE.id; alphaCut = 128; metric = 'oklab'; maxColors = 0; lastMaxColors = 16; cleanup = false;
+    const freshPalette = restorePaletteState(null);
+    family = freshPalette.family; paletteId = freshPalette.paletteId; alphaCut = 128; metric = 'oklab'; maxColors = 0; lastMaxColors = 16; cleanup = false;
+    if (generatedError) generationRetry++;
     say('Settings reset.');
   }
   let shared = $state.raw(null), sharedTrigger; // the image the sheet is for; it stays set after the sheet closes, until the next one

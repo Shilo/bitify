@@ -122,3 +122,25 @@ skipped; a separate forked run with `--execArgv=--expose-gc` passed all 47 gener
 limit and cleanup client tests, including both retention tests. Production build passed.
 These cases do not cover every editor interaction or prove prolonged animation
 performance; the preceding whole-wall stress study covers the unchanged cache design.
+
+## Generated as the fresh starting point
+
+Fresh, unreadable or non-record stored preferences now start in Palette with Generated
+selected. A parsed preference object retains explicit selections; older objects without
+a family field retain 1-bit. Generated leads the rail with its own divider, followed by
+the existing curated groups and saved library. Palette precedes 1-bit in the toggle.
+The visible name remains unchanged pending the user's naming choice.
+
+Global Reset follows these fresh defaults; Nearest settings Reset retains the selected
+palette. Review identified a failed Generated request with unchanged reset values:
+the generation effect would not restart. Global Reset now increments the retry trigger
+only when generation has failed. This was reproduced with a deliberately failed worker
+and tested after restoring it; both browsers recovered to the two-color source palette.
+
+All seven built UI cases passed in Codex Chromium and physical Android Brave: fresh
+mode/order with visible demo, persisted PICO-8 reload, Nearest Reset retaining PICO-8,
+legacy 1-bit migration, global Reset, next/previous stepping in the new order, and the
+failed-generation Reset recovery. The full native mobile page also displayed the
+Palette/1-bit toggle and first Generated choice correctly. After the recovery fix,
+all 608 normal tests and the production build passed (two GC-only tests skipped).
+No sampling, matching, cleanup or cache algorithm changed in this adoption.
