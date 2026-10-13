@@ -10,6 +10,7 @@
   import { quantizePreviewAsync, colorize as palettePixels } from './lib/quantize.js';
   import { getLimitedPalette } from './lib/palette-limit-client.js';
   import { animationPreviewCache } from './lib/palette-animation-cache.js';
+  import { animationVisibility } from './lib/animation-visibility.js';
   import { exportDragArt } from './lib/export-drag.js';
 
   // `flipped` true means originals are visible. App-managed comparison updates
@@ -81,6 +82,8 @@
   // An animation has `frames`; a still image is treated as a single frame.
   const frames = $derived(item.frames ?? [item]);
   let at = $state(0); // which frame is on screen
+  let inView = $state(true);
+  function trackVisibility(visible) { inView = visible; }
 
   // A photo has far more pixels than its tile can show, and converting them all on every change
   // is what makes a phone stall. So a tile converts and draws a picture of the image at its own
@@ -178,7 +181,8 @@
     // Readiness still belongs to the requested frame, not these retained pixels.
     if (family !== 'full-palette' || fullItem !== item || !palette && !palettePending) fullPixels = null;
     fullItem = item;
-    if (family !== 'full-palette' || !width || !colors || cleanup && !clean || originalVisible || !active) return;
+    if (family !== 'full-palette' || !width || !colors || cleanup && !clean || originalVisible || !active
+      || frames.length > 1 && !inView) return;
     const controller = new AbortController();
     const produce = async signal => {
       const result = await quantizePreviewAsync(source, colors, cut, width, height, { signal, metric: matching });
@@ -224,7 +228,9 @@
 
   // Plays an animation: after the current frame's delay, step to the next and start again.
   $effect(() => {
-    if (!active || frames.length < 2) return;
+    // Offscreen animations retain their current canvas and caches. Resume the
+    // held frame's delay when visible; hidden time does not advance their clock.
+    if (!active || frames.length < 2 || !inView) return;
     // Original playback follows source delays independently of conversion. Read
     // originalVisible first so a finished preview cannot restart that timer.
     if (family === 'full-palette' && !originalVisible && !fullReady) return;
@@ -253,6 +259,7 @@
     oncontextmenu={e => e.preventDefault()}
     bind:clientWidth={box}
     bind:clientHeight={boxHeight}
+    use:animationVisibility={frames.length > 1 ? trackVisibility : undefined}
     use:exportDragArt={exportDrag ? { controller: exportDrag, item, cancel: cancelPointer } : undefined}
   >
     {#if pixels}<Pixels {pixels} />{/if}
