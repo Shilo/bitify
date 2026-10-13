@@ -2609,3 +2609,7 @@ are reused, unrelated imports do not erase failures, and no automatic retry loop
 runs. All, Cleanup Off and 1-bit bypass only their corresponding stages. Changing
 Cleanup does not retry a failed limiter. Source/settings changes filter obsolete
 failures and surface teardown releases its own records.
+
+A drag whose export request is unavailable is refused without a preparing/wait notice;
+existing Auto or preparation-failure guidance explains the block. A valid request
+whose native export file is not yet ready retains the preparation notice.

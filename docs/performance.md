@@ -1197,3 +1197,7 @@ No uncapped or Cleanup-Off fallback is silently produced.
 Actual-build Codex browser and Pixel 8 Pro results, byte-parity/independent decoding,
 finite observer warning notes and limits are in
 `docs/research/2026-10-13-onebit-export-and-palette-recovery.md`.
+
+Blocked export drag requests now refuse without claiming preparation is running.
+The preparation notice applies only to a currently valid request whose file is not
+ready. Unavailable Auto and failed limiter/Cleanup guidance remain authoritative.

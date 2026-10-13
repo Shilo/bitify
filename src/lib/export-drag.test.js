@@ -11,6 +11,17 @@ describe('preparatory export drag ownership', () => {
     return { controller, request, notify, revoke, change: () => { key = 'changed'; controller.refresh(); } };
   }
   const record = url => ({ url, file: new File(['pixels'], 'test.png', { type: 'image/png' }), width: 1, height: 1 });
+  it('refuses an unavailable request without claiming that preparation is running', async () => {
+    vi.useFakeTimers();
+    const prepare = vi.fn(), notify = vi.fn(), item = { id: 1 };
+    const controller = createExportDrag({ request: () => null, prepare, notify });
+    const event = { dataTransfer: {}, preventDefault: vi.fn() };
+    expect(controller.start(event, item)).toBe(false);
+    expect(event.preventDefault).toHaveBeenCalledOnce();
+    await vi.advanceTimersByTimeAsync(1000);
+    expect(prepare).not.toHaveBeenCalled(); expect(notify).not.toHaveBeenCalled();
+    controller.destroy();
+  });
   it('does not compute snapshots for observers without a ready export', () => {
     const f = fixture(vi.fn());
     expect(f.controller.readyFor({ id: 1 })).toBeNull(); expect(f.request).not.toHaveBeenCalled();

@@ -108,7 +108,7 @@ export function createExportDrag({ request, prepare, notify,
       const asked = request(item);
       if (disposed || active || !event.dataTransfer || !same(ready?.request, asked)) {
         event.preventDefault();
-        if (!disposed) { notify('Preparing full export—wait, then drag again.'); desired = item; schedule(); }
+        if (!disposed && asked) { notify('Preparing full export—wait, then drag again.'); desired = item; schedule(); }
         return false;
       }
       if (retired.size >= 8) {
