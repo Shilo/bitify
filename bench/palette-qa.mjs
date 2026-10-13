@@ -26,18 +26,25 @@ mkdirSync(scratch, { recursive: true });
 // The unchanged engine is the pre-feature conversion oracle; the file reader
 // below shares no encoder implementation. This assertion detects accidental
 // changes to the oracle itself rather than letting both sides agree on a bug.
+const baselineRef = process.env.BASE_REF ?? 'HEAD';
+// Historical trees keep their actual filenames; only import relocation is normalized.
+const baselineFiles = new Set(execFileSync('git', ['ls-tree', '-r', '--name-only', baselineRef], { encoding: 'utf8' }).trim().split('\n'));
+const baselineText = file => {
+  const path = file === 'recolor.js' && !baselineFiles.has('src/lib/recolor.js') ? 'src/lib/bitify.js' : 'src/lib/' + file;
+  return execFileSync('git', ['show', baselineRef + ':' + path], { encoding: 'utf8' }).replaceAll('\r\n', '\n').replaceAll("from './bitify.js'", "from './recolor.js'");
+};
 for (const file of ['recolor.js', 'presets.js', 'settings.js']) {
-  assert.equal(readFileSync(`src/lib/${file}`, 'utf8').replaceAll('\r\n', '\n'), execFileSync('git', ['show', `${process.env.BASE_REF ?? 'HEAD'}:src/lib/${file}`], { encoding: 'utf8' }).replaceAll('\r\n', '\n'), `Legacy ${file} differs from baseline`);
+  assert.equal(readFileSync(`src/lib/${file}`, 'utf8').replaceAll('\r\n', '\n'), baselineText(file), `Legacy ${file} differs from baseline`);
 }
 // Byte compatibility uses the old encoders themselves, not today's encoder
 // on both sides. Only the PNG helper's immutable hex parser import is relocated.
-const baselineRef = process.env.BASE_REF ?? 'HEAD';
-writeFileSync(resolve(scratch,'baseline-save.mjs'),execFileSync('git',['show',`${baselineRef}:src/lib/save.js`],{encoding:'utf8'}).replace("from './recolor.js'","from '../../src/lib/recolor.js'"));
+writeFileSync(resolve(scratch,'baseline-save.mjs'),baselineText('save.js').replace("from './recolor.js'","from '../../src/lib/recolor.js'"));
 writeFileSync(resolve(scratch,'baseline-gif.mjs'),execFileSync('git',['show',`${baselineRef}:src/lib/gif.js`],{encoding:'utf8'}));
-// Recent baselines share palette export helpers with their legacy encoders.
-// Snapshot that dependency too; importing today's helper would weaken the oracle.
-if (readFileSync(resolve(scratch, 'baseline-save.mjs'), 'utf8').includes("'./palette-export.js'")) {
-  writeFileSync(resolve(scratch, 'palette-export.js'), execFileSync('git', ['show', `${baselineRef}:src/lib/palette-export.js`], { encoding: 'utf8' }));
+// Snapshot encoder dependencies from the same tree, preserving their historical
+// relative imports. Today's export helpers must not become their own oracle.
+for (const path of baselineFiles) {
+  if (!/^src\/lib\/[^/]+\.js$/.test(path) || path.endsWith('.test.js')) continue;
+  writeFileSync(resolve(scratch, path.slice('src/lib/'.length)), execFileSync('git', ['show', baselineRef + ':' + path], { encoding: 'utf8' }));
 }
 const { pngBytes: baselinePngBytes } = await import(pathToFileURL(resolve(scratch,'baseline-save.mjs')));
 const { encodeGif: baselineEncodeGif } = await import(pathToFileURL(resolve(scratch,'baseline-gif.mjs')));
@@ -239,7 +246,7 @@ try {
   assert.deepEqual(FULL_PRESETS.map(palette=>palette.colors.length),[64,32,16,16,8,4,4,2,2],'Preset order/counts changed');
   assert.equal(DEFAULT_FULL_PALETTE.name,'ENDESGA 32','Unexpected default full palette');
   assert.equal((await stored()).paletteId,DEFAULT_FULL_PALETTE.id,'First family switch lost the ENDESGA 32 default');
-  assert.deepEqual(await page.getByRole('group',{name:'Full palettes',exact:true}).locator('button').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('aria-label'))),FULL_PRESETS.map(palette=>palette.name),'Full preset rail order differs from published order');
+  assert.deepEqual(await page.getByRole('group',{name:'Full palettes',exact:true}).locator('button').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('aria-label'))),['Auto', ...FULL_PRESETS.map(palette=>palette.name)],'Full preset rail order differs from published order');
   for (const palette of FULL_PRESETS) {
     await openPalette(); await page.getByRole('group',{name:'Full palettes',exact:true}).getByRole('button',{name:palette.name,exact:true}).click(); await closePanel();
     assert.equal((await stored()).paletteId,palette.id); expected = nearestReference(fixture,palette.colors);

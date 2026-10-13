@@ -4,7 +4,7 @@ import { configDefaults } from 'vitest/config';
 import { hoverCapability } from './build/hover-capability.js';
 
 export default defineConfig({
-  base: './', // relative asset URLs, so the build works under /colorfetti/ on GitHub Pages
+  base: './', // relative asset URLs, so the build works under the existing GitHub Pages project path
   plugins: [svelte()],
   css: { postcss: { plugins: [hoverCapability()] } },
   // Archived QA checkouts are generated scratch files, never additional tests.

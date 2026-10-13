@@ -1189,18 +1189,10 @@ Colorfetti can be installed as an app, and that is all: there is no service work
 caches nothing itself, and it does not open offline. An installed copy loads from the site like a browser
 tab does, so every deploy reaches it the same way.
 
-- `public/manifest.webmanifest` gives the name, the standalone display, the dark background
-  color for the title bar and the splash screen, and three icons. Its start address is
-  relative, so it works under `/colorfetti/`.
-- The icons in `public/` are made from the favicon, `public/favicon.svg`, by `npx @vite-pwa/assets-generator`
-  (settings in `pwa-assets.config.js`): 192px and 512px, a 512px one with room for a mask,
-  and a 180px one for iOS. The last two have the logo's orange behind them.
-- `index.html` links the manifest and the iOS icon, and sets the browser's bar color to the
-  page background, light or dark.
-- `index.html` also has a description and Open Graph tags, so a link to
-  `https://shilo.github.io/bitify/` shows a preview in chat and social apps: the name, one
-  sentence, and the 512px icon with the orange behind it as a small square image. The
-  addresses in those tags are whole ones, because the apps do not resolve relative ones.
+- `public/manifest.webmanifest` sets Colorfetti, the approved description, standalone display and the dark splash background. Its relative start address supports the existing deployment path.
+- `npm run icons` generates exports from `src/assets/logo.svg` using `build/brand-assets.mjs`. `node build/brand-assets.mjs --check` verifies exact output and maskable safe-area padding.
+- The manifest declares separate ordinary and maskable PNGs at 192px and 512px. Browser tabs use SVG, PNG and a multi-size ICO; Apple home-screen icons are provided at 152px, 167px and 180px. Every logo uses the same opaque off-white backplate and approved palette in both themes.
+- `index.html` links the manifest and platform icons and updates the browser bar for the active theme. Description and Open Graph metadata use the approved copy and 512px icon. Absolute social URLs retain the actual GitHub Pages address.
 - Chrome, Edge and other Chromium browsers, on desktop and Android, tell the page when the
   app can be installed and is not yet. The page keeps that offer and shows Install in the More
   menu; pressing it opens the browser's own install prompt. The offer works once, so the row
@@ -1843,10 +1835,10 @@ Help audit: use the canonical C-frame confetti logo asset. Add wording is Choose
 Preview dismissal and Space comparison: a quick stationary primary-pointer click/tap anywhere outside the bottom workspace closes Preview, including image pixels and letterboxed canvas. Long image comparisons, moved/dragged sequences, cancellation and secondary pointers do not dismiss. Bottom controls and their capsule remain exempt. Space is reserved for temporary comparison throughout Preview, including when its toolbar has focus; key release restores the local state and never activates a toolbar button. Enter retains ordinary button activation. Preview initially focuses its dialog, and blur/visibility loss clears transient state. Global conversion preferences remain unchanged.
 
 
-Concise Help correction: use the static original logo.png. Remove Close Preview, Toggle conversion and Compare temporarily rows, plus all appended explanatory paragraphs. Keep concise Add, palette/style navigation, Style settings, Save, Copy, Preview and Remove controls; Preview follows Copy on both input modes. Restore short shortcut cells rather than prose instructions and the original 420px dialog maximum. Retain responsive wrapping to prevent overflow. This supersedes the expanded Help audit presentation; actual interactions are unchanged.
+Concise Help correction: use the canonical static logo.svg. Remove Close Preview, Toggle conversion and Compare temporarily rows, plus all appended explanatory paragraphs. Keep concise Add, palette/style navigation, Style settings, Save, Copy, Preview and Remove controls; Preview follows Copy on both input modes. Restore short shortcut cells rather than prose instructions and the original 420px dialog maximum. Retain responsive wrapping to prevent overflow. This supersedes the expanded Help audit presentation; actual interactions are unchanged.
 
 
-Help wording refinement: Add replaces Add images within Help. Palette instructions read “Pick one or two colors, or a preset.” Save instructions read “Download or copy images.” Combine Save and Copy into one control row with both icons and the existing Ctrl/Cmd+C shortcut. Preview image follows it and shows only Click/Tap Image, with Enter on desktop. Other Help controls remain unchanged.
+Help wording refinement: Add replaces Add images within Help. Palette instructions read “Pick palette, 1-bit colors or import your own.” Save instructions read “Download or copy images.” Combine Save and Copy into one control row with both icons and the existing Ctrl/Cmd+C shortcut. Preview image follows it and shows only Click/Tap Image, with Enter on desktop. Other Help controls remain unchanged.
 
 
 Preview conversion correction: snapshot the currently visible app original/converted state before clearing main-canvas temporary comparison on opening. Initialize Preview from that snapshot, rather than its opposite. The local swap icon is highlighted and aria-pressed only while the original is visible. Clicking toggles the local preference; holding image or Space temporarily inverts it until release, with overlapping holds inverting once. No Preview interaction updates global conversion state; reopening snapshots the app again. This supersedes opposite initialization and converted-state highlighting.

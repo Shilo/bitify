@@ -33,6 +33,7 @@ for col,(key,label) in enumerate(labels):
  draw.text((col*cw+8,8),label,fill='white',font=font)
  checker=np.zeros((16,16,4),dtype=np.uint8); yy,xx=np.indices((16,16));checker[:,:,:3]=np.where(((xx//2+yy//2)%2)[...,None],[39,43,51],[30,33,39]);checker[:,:,3]=255
  bg=Image.fromarray(checker); bg.alpha_composite(pixels(plate,key));comparison.paste(bg.convert('RGB').resize((224,224),Image.Resampling.NEAREST),(col*cw+8,35))
+comparison.save(ROOT/'breastplate-final-comparison.png')
 
 table=''.join(f'<tr><td>{html.escape(k)}</td><td>{v["changedItems"]}/65</td><td>{v["changedPixels"]}</td><td>{v["vanished"]}</td></tr>' for k,v in metrics['comparisons'].items())
 options=''.join(f'<option>{html.escape(r["id"])}</option>' for r in originals)
@@ -53,4 +54,5 @@ page=f'''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewpo
 <p>Measured in Node on this desktop: all 65 items prepared in {performance['inventory']['firstMs']} ms, then cached control updates in {performance['inventory']['cachedMs']} ms. A noisy 12MP stress image needed {performance['stress'][-1]['firstMs']} ms initially and {performance['stress'][-1]['cachedMs']} ms cached. Icon is intended for sprites; first-time preparation on large images costs more and allocates temporary full-source arrays.</p>
 <h2>Research that informed this approach</h2><p><a href="flat-icon-research.html">Subagent’s full research</a>. <a href="https://gigl.scs.carleton.ca/papers/bnw.pdf">Mould & Grant: Stylized Black and White Images from Photographs</a> supports coherent base regions plus selective details. <a href="https://www.umsl.edu/~kangh/Papers/kang_npar07_hi.pdf">Kang et al.: Coherent Line Drawing</a> supports directional continuity. The implementation uses small-grid heuristics, not either paper’s full algorithm. Graph-cut and semantic reconstruction remain possible further experiments; neither is validated here as a reliable 16px solution.</p>
 <script>const data={json.dumps(viewer)},labels={json.dumps(labels)};const item=document.querySelector('#item'),variant=document.querySelector('#variant'),native=document.querySelector('#native'),comparison=document.querySelector('#comparison');function render(){{comparison.className='compare'+(native.checked?' native':'');comparison.innerHTML=labels.map(([key,label])=>`<figure><img src="${{data[item.value][variant.value][key]}}" alt="${{label}}"><figcaption>${{label}}</figcaption></figure>`).join('')}}item.onchange=variant.onchange=native.onchange=render;render();</script></html>'''
-(ROOT/'results.html').write_text(page,encoding='utf-8')
+(ROOT/'results.html').write_text(page,encoding='utf-8',newline='\n')
+print('Saved results.html and breastplate-final-comparison.png')

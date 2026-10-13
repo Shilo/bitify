@@ -99,6 +99,11 @@ replacements={
  'BREAST_BASE':picture('breastplate-baselines.png','Current behavior on the original breastplate. White is the sole ink; checkerboard is transparent.'),
  'BREAST_ALT':picture('breastplate-alternatives.png','Experimental alternatives: none provides a clear automatic breastplate repair.'),
  'PALETTE_IMG':picture('palette-ablation.png','Stencil Auto after grayscale and foreground palette reduction. Changed geometry is not necessarily better geometry.'),
+ 'C2G_IMG':picture('color2gray-comparison.png','Color2Gray contrast preservation followed by the production Solid/Stencil algorithms.'),
+ 'GENERAL_IMG':picture('general-comparison.png','All 16 general inventory items.'),
+ 'WEAPONS_IMG':picture('weapons-comparison.png','All 16 weapon/tool cells; inspect thin shafts and handles.'),
+ 'ACCESSORIES_IMG':picture('accessories-comparison.png','All 16 accessory/container cells.'),
+ 'ARMOR_IMG':picture('armor-comparison.png','All 16 armor cells; texture and shade do not consistently correspond to meaningful cuts.'),
  'AUDIT_TABLE':f'<table><thead><tr><th>Source</th><th>Dimensions</th><th>Foreground colors</th><th>Opaque pixels</th><th>Alpha</th></tr></thead><tbody>{audit_rows}</tbody></table>',
  'ABL_TABLE':f'<details><summary>Exact grayscale and per-item palette ablation counts</summary><table><thead><tr><th>Method</th><th>Preparation</th><th>Changed items</th><th>Changed pixels</th></tr></thead><tbody>{abl_rows}</tbody></table></details>',
  'METRICS_TABLE':f'<div class="table-wrap"><table><thead><tr><th>Method</th><th>Mean retention</th><th>Empty</th><th>Added fragmentation</th><th>1px ink regions</th><th>1px removed regions</th></tr></thead><tbody>{metrics_rows}</tbody></table></div>',
@@ -127,6 +132,6 @@ function renderSweep(){const p=$('sweepSamples');p.innerHTML='';const t=$('sweep
 item.addEventListener('change',refreshVariants);variant.addEventListener('change',refreshMethods);methodA.addEventListener('change',render);methodB.addEventListener('change',render);bg.addEventListener('change',render);$('sweep').addEventListener('input',renderSweep);refreshVariants();
 '''
 doc=f'<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Colorfetti — one-color inventory icon research</title><style>{style}</style><main>{body}</main><script type="application/json" id="researchData">{json.dumps(data,separators=(",",":"))}</script><script type="application/json" id="methodNames">{json.dumps(names)}</script><script>{script}</script></html>'
-(ROOT/'report.html').write_text(doc,encoding='utf-8')
+(ROOT/'report.html').write_text(doc,encoding='utf-8',newline='\n')
 assert not any(key in doc for key in replacements if key.endswith('_IMG') or key.endswith('_TABLE'))
 print(f'Wrote self-contained report.html ({len(doc):,} characters).')

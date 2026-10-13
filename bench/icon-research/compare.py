@@ -170,7 +170,9 @@ grid('breastplate-alternatives.png',['breastplate-1-1'],['source','normalized50'
 grid('breastplate-sweep.png',['breastplate-1-1'],['source']+[f'sweep_solid_{t}' for t in [40,60,80,100,120,127,140,160]],scale=10)
 for group in ('general','weapons','accessories','armor'):
  ids=[i for i in originals if i.startswith(group)]
+ grid(f'{group}-comparison.png',ids,['source','solid_50','solid_auto','stencil_auto','stencil_100_edges100','normalized50','local_mean','budget20'],scale=6)
 grid('representative-algorithms.png',['breastplate-1-1','general-1-1','general-1-3','weapons-1-1','weapons-3-1','accessories-2-1','armor-2-2','armor-3-1'],['source','lab_otsu','linear_otsu','bilateral_otsu','sauvola','pca_otsu','stencil_clean','edges_clean'],scale=8)
+grid('color2gray-comparison.png',['breastplate-1-1','general-1-1','weapons-3-1','armor-2-2','armor-3-1'],['source','solid_auto','c2g10_45_solid_auto','c2g25_45_solid_auto','stencil_auto','c2g10_45_stencil_auto','c2g25_45_stencil_auto'],scale=8)
 
 # Palette and grayscale ablation with the exact production code.
 ablation=[]

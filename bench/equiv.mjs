@@ -2,7 +2,10 @@
 // must remain byte-identical. Icon's previews must sample its new native mask.
 import assert from 'node:assert/strict';
 import { pathToFileURL } from 'node:url';
-const O = await import(pathToFileURL(import.meta.dirname + '/recolor.old.js'));
+import { existsSync } from 'node:fs';
+// Keep existing local snapshots usable without renaming another session's scratch file.
+const oldSnapshot = existsSync(import.meta.dirname + '/recolor.old.js') ? 'recolor.old.js' : 'bitify.old.js';
+const O = await import(pathToFileURL(import.meta.dirname + '/' + oldSnapshot));
 const N = await import(pathToFileURL(import.meta.dirname + '/../src/lib/recolor.js'));
 const STYLES = ['cutout', 'solid', ...(O.iconOf ? ['icon'] : []), 'stencil', 'lines', 'silhouette', 'checker', 'hatch', 'bayer', 'noise', 'atkinson'];
 let s = 99;

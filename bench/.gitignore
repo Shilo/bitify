@@ -1,6 +1,7 @@
 dist-*/
 baseline/
 recolor.old.js
+bitify.old.js
 *.jsonl
 *.png
 *.log
