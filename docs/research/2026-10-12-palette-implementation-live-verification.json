@@ -1,0 +1,30 @@
+{
+  "bundle": "index-CgTWlYB8.js",
+  "deployment": "38330624481",
+  "cases": [
+    {
+      "name": "Shared255/All/Oklab/Off",
+      "samples": 20,
+      "missing": 0,
+      "distinctScreens": 20
+    },
+    {
+      "name": "PICO-8/8/RGB/On",
+      "samples": 20,
+      "missing": 0,
+      "distinctScreens": 20
+    },
+    {
+      "name": "Generated32/All/Oklab/Off",
+      "samples": 20,
+      "missing": 0,
+      "distinctScreens": 20
+    }
+  ],
+  "mobile": {
+    "width": 320,
+    "scrollWidth": 320,
+    "opacityVisible": true,
+    "capAndAll": true
+  }
+}
