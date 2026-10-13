@@ -10,7 +10,11 @@ Single-frame GIFs keep native still decoding followed by unpublished analysis on
 the same healthy serial worker, avoiding worker churn and main-thread reanalysis.
 Unreadable worker messages use existing terminal rejection/recovery semantics.
 
-Leaving or superseding desktop hover cancels only its preparation, including
+Leaving desktop hover stops queued preparation immediately. An in-flight request
+gets the existing 180 ms hover delay before abort, so a brief return while that same
+request remains pending can reuse it. Completion while away still discards its result.
+Different items, settings invalidation, explicit cancellation and destroy abort at
+once. Cancellation affects only its preparation, including
 matching, cleanup and PNG/GIF compression. Shared Save/preview consumers and native
 drag grace records survive. Module downloads cannot be canceled, but do not block
 the next hover or start obsolete source jobs afterward; late URLs are released.
@@ -20,6 +24,14 @@ and avoid ambiguous whitespace backtracking; tests use a killable child process.
 The 8 MiB cache policy and opacity-slider commits remain unchanged. Measured rAF
 rate does not prove every clip smooth or bound memory. See
 [the fix record](research/2026-10-13-performance-stability-fixes.md).
+
+For the maintained still-preview reuse check, build normally and run
+`node bench/palette-preview-reuse-server.mjs dist 5281`; open `/qa` in a foreground
+desktop browser and Run checks. It checks unchanged Original/viewer return and
+fresh output after a held-Original palette change against a new conversion. Its
+test-only HTML counters leave production assets untouched. Reload for another run.
+See [the review reconciliation](research/2026-10-13-fix-review-reconciliation.md)
+for the bounded hover departure repair and next-batch ownership decisions.
 
 ## Auto tooltip and wall scheduling (October 12, 2026)
 

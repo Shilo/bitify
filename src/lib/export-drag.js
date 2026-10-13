@@ -9,7 +9,7 @@ const same = (a, b) => !!a && !!b && a.item === b.item && a.key === b.key;
 
 export function createExportDrag({ request, prepare, notify,
   delay = 180, grace = 60000, revoke = url => URL.revokeObjectURL(url) }) {
-  let desired = null, ready = null, running = null, timer, active = null, disposed = false;
+  let desired = null, ready = null, running = null, timer, leaveTimer, active = null, disposed = false;
   const retired = new Map();
   const observers = new Set();
   const release = record => { if (record?.url) revoke(record.url); };
@@ -30,6 +30,7 @@ export function createExportDrag({ request, prepare, notify,
   function valid(record) { return same(record?.request, record && request(record.request.item)); }
   function schedule() {
     clearTimeout(timer);
+    clearTimeout(leaveTimer); leaveTimer = undefined;
     if (running && !same(running.asked, desired && request(desired))) running.controller.abort();
     if (disposed || running || active || !desired) return;
     const asked = request(desired);
@@ -83,8 +84,21 @@ export function createExportDrag({ request, prepare, notify,
     readyFor(item) { return !disposed && ready && same(ready.request, request(item)) ? ready : null; },
     subscribe(observer) { observers.add(observer); observer(); return () => observers.delete(observer); },
     hover(item) { if (disposed) return; desired = item; schedule(); },
-    cancelHover() { desired = null; clearTimeout(timer); running?.controller.abort(); if (!active) publish(); },
-    leave(item) { if (desired?.id === item.id) { desired = null; clearTimeout(timer); running?.controller.abort(); if (!active) publish(); } },
+    cancelHover() { desired = null; clearTimeout(timer); clearTimeout(leaveTimer); leaveTimer = undefined; running?.controller.abort(); if (!active) publish(); },
+    leave(item) {
+      if (desired?.id !== item.id) return;
+      desired = null; clearTimeout(timer);
+      // Brief mouse exits can return to this same in-flight request. Queued
+      // work stops at once; settings, another hover and explicit cancel still
+      // invalidate immediately. Completion while away retains its discard rule.
+      const operation = running;
+      clearTimeout(leaveTimer);
+      if (operation) leaveTimer = setTimeout(() => {
+        leaveTimer = undefined;
+        if (running === operation && !desired) operation.controller.abort();
+      }, delay);
+      if (!active) publish();
+    },
     refresh() {
       if (disposed) return;
       if (ready && !valid(ready)) { discardReady(); publish(); }
@@ -140,7 +154,7 @@ export function createExportDrag({ request, prepare, notify,
     },
     isOwn(transfer) { return !!active || Array.from(transfer?.types ?? []).includes(EXPORT_DRAG_TYPE); },
     destroy() {
-      disposed = true; desired = null; clearTimeout(timer);
+      disposed = true; desired = null; clearTimeout(timer); clearTimeout(leaveTimer); leaveTimer = undefined;
       running?.controller.abort();
       const records = new Set([ready, active, ...retired.keys()]);
       for (const timeout of retired.values()) clearTimeout(timeout);

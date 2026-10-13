@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Palette preview reuse acceptance</title>
+<style>
+  body { font: 14px system-ui; margin: 12px; background: #20262b; color: #f3f5f7; }
+  h1 { font-size: 18px; margin: 0 0 8px; }
+  p { margin: 6px 0; } button { font: inherit; padding: 8px 16px; cursor: pointer; }
+  #report { white-space: pre-wrap; margin: 10px 0; max-height: 210px; overflow: auto; }
+  iframe { display: block; width: 100%; height: 720px; border: 1px solid #707a83; }
+  .pass { color: #9be7ad; } .fail { color: #ffaaa0; }
+</style>
+<h1>Built-app palette preview reuse</h1>
+<p>Keep this page foreground. Run at desktop width; six fixtures must fit fully inside the app. One run per page load; reload to rerun. This local test origin resets its own app preferences.</p>
+<button id="run">Run checks</button>
+<pre id="report" role="status">Ready. Counts measure posted preview tasks and wall canvas paints, not kernel timings.</pre>
+<iframe id="app" title="Actual built Bitify app" src="/app/"></iframe>
+<script type="module">
+const iframe = document.querySelector('#app'), runButton = document.querySelector('#run'), report = document.querySelector('#report');
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+const names = Array.from({ length: 6 }, (_, i) => `reuse-${i + 1}.png`);
+const pico = new Set('000000 1d2b53 7e2553 008751 ab5236 5f574f c2c3c7 fff1e8 ff004d ffa300 ffec27 00e436 29adff 83769c ff77a8 ffccaa'.split(' '));
+let step = 'startup', doc, win;
+const qaErrors = [];
+window.addEventListener('error', event => qaErrors.push({ kind: 'error', message: event.message || String(event.error),
+  source: event.filename || '', line: event.lineno || 0, column: event.colno || 0, stack: event.error?.stack || '' }));
+window.addEventListener('unhandledrejection', event => qaErrors.push({ kind: 'unhandledrejection', message: event.reason?.message || String(event.reason),
+  source: '', line: 0, column: 0, stack: event.reason?.stack || '' }));
+let oracleErrors = [];
+function assert(ok, message) { if (!ok) throw new Error(message); }
+function line(message) { report.textContent += '\n' + message; report.scrollTop = report.scrollHeight; }
+async function until(test, label, timeout = 12000) {
+  const deadline = performance.now() + timeout;
+  while (performance.now() < deadline) { if (test()) return; await sleep(40); }
+  throw new Error(`Timed out: ${label}`);
+}
+function button(label) {
+  const node = doc.querySelector(`button[aria-label="${label}"]`);
+  assert(node, `Missing button: ${label}`); return node;
+}
+function canvases() { return [...doc.querySelectorAll('.grid .tile .art canvas')]; }
+function counters() { const value = win.__previewReuseQA; return { channels: value.channels, paints: value.wallPaints, byName: { ...value.byName } }; }
+function delta(before) {
+  const after = counters(); return { channels: after.channels - before.channels, paints: after.paints - before.paints,
+    byName: Object.fromEntries(names.map(name => [`Preview ${name}`, (after.byName[`Preview ${name}`] ?? 0) - (before.byName[`Preview ${name}`] ?? 0)])) };
+}
+async function quiet() {
+  await sleep(80); let previous = JSON.stringify(counters()), since = performance.now();
+  await until(() => { const now = JSON.stringify(counters()); if (now !== previous) { previous = now; since = performance.now(); } return performance.now() - since >= 300; }, 'canvas/task counters settle');
+}
+function hashes() {
+  return canvases().map(canvas => {
+    const data = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data;
+    let hash = 2166136261; for (const byte of data) hash = Math.imul(hash ^ byte, 16777619);
+    return `${canvas.width}x${canvas.height}:${hash >>> 0}`;
+  });
+}
+function same(a, b) { return JSON.stringify(a) === JSON.stringify(b); }
+function pixelCopies(root) { return [...root.querySelectorAll('.grid .tile .art canvas')].map(canvas => ({ width: canvas.width, height: canvas.height,
+  data: canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data })); }
+function assertPaints(diff, each) {
+  assert(diff.paints === names.length * each && Object.values(diff.byName).every(count => count === each), `Expected ${each} wall paint per tile; got ${JSON.stringify(diff)}`);
+}
+function assertVisible() {
+  assert(canvases().length === 6, `Expected six wall canvases, got ${canvases().length}`);
+  for (const canvas of canvases()) {
+    const rect = canvas.getBoundingClientRect();
+    assert(rect.width > 0 && rect.height > 0 && rect.top >= 0 && rect.left >= 0 && rect.bottom <= win.innerHeight && rect.right <= win.innerWidth,
+      `A fixture is not fully visible in the app (${JSON.stringify(rect.toJSON())}); widen the test window.`);
+  }
+}
+async function fixtures() {
+  return Promise.all(names.map(async (name, n) => {
+    const canvas = document.createElement('canvas'); canvas.width = canvas.height = 32;
+    const ctx = canvas.getContext('2d'), image = ctx.createImageData(32, 32);
+    for (let y = 0; y < 32; y++) for (let x = 0; x < 32; x++) {
+      const at = (y * 32 + x) * 4;
+      image.data.set([(x * 7 + n * 31) % 256, (y * 9 + n * 19) % 256, ((x + y) * 5 + n * 47) % 256, x < 2 || y < 2 ? 0 : 255], at);
+    }
+    ctx.putImageData(image, 0, 0);
+    const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+    assert(blob, 'Could not make PNG fixture'); return new File([blob], name, { type: 'image/png' });
+  }));
+}
+function space(type) { doc.body.dispatchEvent(new win.KeyboardEvent(type, { key: ' ', code: 'Space', bubbles: true, cancelable: true })); }
+async function freshOracle(files, expected) {
+  step = 'fresh PICO-8 oracle';
+  const oracle = document.createElement('iframe'); oracle.title = 'Fresh independent PICO-8 conversion oracle';
+  // Give it the same real layout, without obscuring or changing the tested app.
+  // Stills convert irrespective of viewport visibility; display:none would erase its layout.
+  oracle.style.cssText = `position:absolute;left:12px;top:0;width:${iframe.clientWidth}px;height:${iframe.clientHeight}px;opacity:0;pointer-events:none`;
+  oracle.setAttribute('aria-hidden', 'true'); oracle.src = `/app/?palette=pico8&qa=${Date.now()}`; document.body.append(oracle);
+  // Keep both test frames attached until the QA page closes.
+  {
+    await until(() => oracle.contentDocument?.querySelector('button.view-toggle[aria-label="PICO-8 conversion"]'), 'fresh PICO-8 controls');
+    const window = oracle.contentWindow, document = oracle.contentDocument, transfer = new window.DataTransfer();
+    oracleErrors = window.__previewReuseQA.errors;
+    for (const file of files) transfer.items.add(file);
+    const input = document.querySelector('input[type="file"][multiple]'); assert(input, 'Oracle artwork file input missing');
+    input.files = transfer.files; input.dispatchEvent(new window.Event('change', { bubbles: true }));
+    await until(() => document.querySelectorAll('.grid .tile .art canvas').length === 6 && names.every(name => document.querySelector(`.caption-preview[aria-label="Preview ${name}"]`)), 'fresh oracle fixtures');
+    let previous = '', since = performance.now();
+    await until(() => {
+      const now = JSON.stringify(window.__previewReuseQA);
+      if (now !== previous) { previous = now; since = performance.now(); }
+      return performance.now() - since >= 300;
+    }, 'fresh oracle conversion settles');
+    const actual = pixelCopies(document);
+    assert(actual.length === expected.length && actual.every((frame, i) => frame.width === expected[i].width && frame.height === expected[i].height
+      && frame.data.length === expected[i].data.length && frame.data.every((value, byte) => value === expected[i].data[byte])),
+      'Changed-during-Original output differs from independently fresh PICO-8 conversion bytes');
+    line('PASS changed-during-Original output matches fresh PICO-8 iframe byte-for-byte for all six fixtures.');
+  }
+}
+async function originalRoundtrip(label, expected) {
+  step = label; const toggle = doc.querySelector('button.view-toggle');
+  assert(toggle?.getAttribute('aria-pressed') === 'true', 'Expected converted mode before Original');
+  toggle.click(); await until(() => toggle.getAttribute('aria-pressed') === 'false', 'Original mode'); await quiet();
+  const before = counters(); toggle.click();
+  await until(() => toggle.getAttribute('aria-pressed') === 'true', 'converted mode'); await quiet();
+  const diff = delta(before); assert(diff.channels === 0, `Unchanged return queued ${diff.channels} posted tasks`);
+  assertPaints(diff, 1); assert(same(hashes(), expected), 'Unchanged return altered canvas pixel hashes');
+  line(`PASS ${label}: ${diff.paints} paints (one/tile), ${diff.channels} posted tasks; hashes unchanged.`);
+}
+runButton.onclick = async () => {
+  if (runButton.disabled) return;
+  runButton.disabled = true; report.className = ''; report.textContent = 'Running against actual built application…';
+  qaErrors.length = 0; oracleErrors = [];
+  try {
+    step = 'fresh app';
+    await until(() => iframe.contentWindow?.__previewReuseQA
+      && iframe.contentDocument?.querySelector('button.view-toggle'), 'fresh app controls');
+    win = iframe.contentWindow; doc = iframe.contentDocument;
+    assert(doc.querySelector('button.view-toggle').getAttribute('aria-label') === 'ENDESGA 32 conversion', 'Seed did not select ENDESGA 32');
+    step = 'import fixtures'; const transfer = new win.DataTransfer();
+    const files = await fixtures(); for (const file of files) transfer.items.add(file);
+    const input = doc.querySelector('input[type="file"][multiple]'); assert(input, 'Artwork file input missing');
+    input.files = transfer.files; input.dispatchEvent(new win.Event('change', { bubbles: true }));
+    await until(() => names.every(name => doc.querySelector(`.caption-preview[aria-label="Preview ${name}"]`)) && canvases().length === 6, 'all imported canvases');
+    await quiet(); assertVisible(); const initial = hashes();
+    line('PASS six synthetic PNGs imported and fully visible; initial converted hashes captured.');
+    await originalRoundtrip('unchanged Original return', initial);
+    step = 'viewer open'; button(`Preview ${names[0]}`).click();
+    await until(() => doc.querySelector('dialog.image-viewer[open] .viewer-art canvas'), 'converted viewer canvas'); await quiet();
+    const closeBefore = counters(); button('Close preview').click();
+    await until(() => !doc.querySelector('dialog.image-viewer[open]'), 'viewer closes'); await quiet();
+    const closeDiff = delta(closeBefore); assert(closeDiff.channels === 0, `Viewer close queued ${closeDiff.channels} posted tasks`);
+    assertPaints(closeDiff, 0); assert(same(hashes(), initial), 'Viewer close altered wall hashes');
+    line('PASS viewer close: zero wall paints / posted tasks; hashes unchanged.');
+    step = 'palette change during held Original'; button('Palette').click();
+    await until(() => doc.querySelector('button.palette-choice[aria-label="PICO-8"]'), 'palette choices');
+    space('keydown'); await until(() => doc.querySelector('button.view-toggle').getAttribute('aria-pressed') === 'false', 'held Original'); await quiet();
+    const original = hashes(), heldBefore = counters(); button('PICO-8').click(); await quiet();
+    assert(doc.querySelector('button.view-toggle').getAttribute('aria-label') === 'PICO-8 conversion', 'Palette selection did not change');
+    assert(doc.querySelector('button.view-toggle').getAttribute('aria-pressed') === 'false', 'Palette selection released temporary Original');
+    assert(same(hashes(), original), 'Palette selection changed held Original pixels');
+    assert(delta(heldBefore).channels === 0, 'Converted work ran while Original was held');
+    const changedBefore = counters(); space('keyup');
+    await until(() => delta(changedBefore).channels >= 6 && !same(hashes(), initial), 'fresh PICO-8 conversion'); await quiet(); assertVisible();
+    const changed = hashes(), changedDiff = delta(changedBefore);
+    assert(changedDiff.channels >= 6, `Expected at least one posted task per fresh preview; got ${JSON.stringify(changedDiff)}`);
+    for (const canvas of canvases()) {
+      const data = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data;
+      for (let at = 0; at < data.length; at += 4) if (data[at + 3]) {
+        const rgb = [...data.subarray(at, at + 3)].map(value => value.toString(16).padStart(2, '0')).join('');
+        assert(data[at + 3] === 255 && pico.has(rgb), `Fresh output has a color outside PICO-8: ${rgb}`);
+      }
+    }
+    assert(changed.every((hash, i) => hash !== initial[i]), 'A fixture retained old palette output');
+    line(`PASS held palette change: retained Original; release queued ${changedDiff.channels} tasks; every fixture changed to valid PICO-8 colors.`);
+    await originalRoundtrip('unchanged return after palette update', changed);
+    await freshOracle(files, pixelCopies(doc));
+    step = 'runtime error provenance'; await sleep(100);
+    const errors = { app: win.__previewReuseQA.errors, freshOracle: oracleErrors, qa: qaErrors };
+    assert(Object.values(errors).every(list => list.length === 0), `Captured runtime errors by frame: ${JSON.stringify(errors, null, 2)}`);
+    line('PASS runtime error capture: app 0, fresh oracle 0, QA page 0 (message, source, line and stack recorded on failures).');
+    report.className = 'pass'; line('PASS all preview reuse checks. This does not measure animation caching, exports, touch latency or performance speedups.');
+  } catch (error) {
+    if (doc && win) space('keyup'); report.className = 'fail';
+    line(`FAIL ${step}: ${error.message}\nCounters: ${win?.__previewReuseQA ? JSON.stringify(counters()) : 'unavailable'}\nRuntime errors: ${JSON.stringify({ app: win?.__previewReuseQA?.errors ?? [], freshOracle: oracleErrors, qa: qaErrors }, null, 2)}`);
+  } finally { line('Reload this QA page to run again. Both test frames remain attached until the page closes.'); }
+};
+</script>
+</html>

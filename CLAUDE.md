@@ -133,5 +133,8 @@ All four clients terminate unreadable-message jobs with settled-event guards and
 existing recovery. Hover preparation cancellation reaches palette matching and
 encoding without canceling explicit Save or native drag grace records. Module
 downloads may finish late but cannot block a newer hover or publish stale URLs.
+Queued hover work stops immediately on leave; running work waits the existing
+180 ms hover delay before abort, allowing a same-request return while it is pending.
+Completion while away still discards; invalidation/explicit cancel/destroy abort at once.
 GPL rows trim once with an unambiguous name tail. Cache policy and opacity-slider
 commits remain unchanged. See docs/research/2026-10-13-performance-stability-fixes.md.

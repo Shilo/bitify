@@ -15,8 +15,11 @@ serial import worker following a controlled single-frame response. Unreadable
 worker messages terminate/release the affected job through existing failure and
 recovery rules; canceled imports never fall back or publish.
 
-Desktop hover preparation cancels on leave, supersession, settings invalidation or
-destroy. Cancellation releases its own subscribers and compressor, preserving
+Desktop hover stops queued work immediately on leave. In-flight preparation gets
+the existing 180 ms hover delay before abort: returning to the same still-pending
+request during that window reuses it. Results completed while away still discard.
+Supersession, settings invalidation, explicit cancellation and destroy abort at once.
+Cancellation releases its own subscribers and compressor, preserving
 independent Save/preview work and native active/grace records. Noncancelable module
 downloads cannot block a newer hover; late results release their URLs and cannot
 publish. Overlapping explicit exports, animation cache policy and opacity-slider
