@@ -53,12 +53,12 @@ export async function selectPaletteSubset(colors, maxColors, readChunks, { alpha
     for (let at = 0; at < data.length; at += 4) {
       if (data[at + 3] >= alphaCut) {
         const rgb = data[at] << 16 | data[at + 1] << 8 | data[at + 2], old = histogram?.get(rgb);
-        let winner;
-        if (old) { old.weight += weight; winner = old.winner; scratch.set(old.vector); }
+        let winner, cost;
+        if (old) { old.weight += weight; winner = old.winner; cost = old.cost; }
         else {
-          coordinates(data[at], data[at + 1], data[at + 2], metric, scratch); winner = nearest(rgb, scratch);
+          coordinates(data[at], data[at + 1], data[at + 2], metric, scratch); winner = nearest(rgb, scratch); cost = distance(scratch, vectors, winner * 3);
           if (histogram) {
-            if (histogram.size < LIMIT) histogram.set(rgb, { weight, winner, vector: [...scratch] });
+            if (histogram.size < LIMIT) histogram.set(rgb, { weight, winner, cost, vector: [...scratch] });
             else {
               bins = new Float64Array(LIMIT * 4);
               for (const [key, entry] of histogram) addBin(key, entry.vector, entry.weight);
@@ -67,7 +67,9 @@ export async function selectPaletteSubset(colors, maxColors, readChunks, { alpha
           }
           if (bins) addBin(rgb, scratch, weight);
         }
-        frequency[winner] += weight; fullCost += distance(scratch, vectors, winner * 3) * weight;
+        // Repeated exact RGBs have the same error. Retain the original per-pixel
+        // accumulation order; after binning, original pixels are still measured.
+        frequency[winner] += weight; fullCost += cost * weight;
       }
       if ((at & 1023) === 0) await pause();
     }

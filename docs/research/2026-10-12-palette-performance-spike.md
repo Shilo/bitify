@@ -1,6 +1,6 @@
 # Palette rendering performance: research spike
 
-October 12, 2026. Completed research, not a shipped performance rewrite. Main now contains the reviewed retained-frame playback fix (`56c1f0d`) and ENDESGA 32 default (`c26a1b7`). No generated-palette source or animation cache was added to the application.
+October 12, 2026. Historical research spike. The approved preparation/cleanup optimizations, bounded animation caching and Generated 32 have since been implemented. See [implementation and final validation](2026-10-12-palette-implementation.md); measurements and behavior below describe the pre-implementation spike.
 
 ## Decision
 

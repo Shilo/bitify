@@ -8,6 +8,7 @@
   import { comparisonHold } from './lib/comparison-hold.js';
   import { quantizeAsync, colorize as palettePixels } from './lib/quantize.js';
   import { getLimitedPalette } from './lib/palette-limit-client.js';
+  import { animationPreviewCache } from './lib/palette-animation-cache.js';
   import { exportDragArt } from './lib/export-drag.js';
 
   // `flipped` true means originals are visible. App-managed comparison updates
@@ -15,7 +16,7 @@
   // Without `onremove` the tile is a preview only and has no buttons.
   // `set` is the style's settings. `budget` is set while one of their sliders is being dragged:
   // the milliseconds this tile may take to convert its image after each move.
-  let { item, first, second, style, set, family = 'two-color', palette, alphaCut = 128, metric = 'oklab', maxColors = 0, cleanup = false, onpaletteerror, flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false, exportDrag } = $props();
+  let { item, first, second, style, set, family = 'two-color', palette, alphaCut = 128, metric = 'oklab', maxColors = 0, cleanup = false, active = true, exportDisabled = false, onpaletteerror, flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false, exportDrag } = $props();
   let held = $state(false);
   const originalVisible = $derived(oncompare ? flipped : flipped !== held);
   let holdTimer;
@@ -154,6 +155,17 @@
   // One current frame lives outside the legacy mask cache. Cancelling a job prevents
   // a previous palette, matching rule, opacity, size or frame from replacing the current preview.
   let fullPixels = $state.raw(null), fullReady = $state(false);
+  const cacheRequest = $derived({ sources: frames.map(frame => frame.original), colors: conversionPalette,
+    width: mw, height: mh, alphaCut, metric, cleanup: conversionCleanup?.result ?? null });
+  let cachedClip = $state.raw(null);
+  const clipCache = $derived(cachedClip?.request === cacheRequest ? cachedClip.handle : null);
+  $effect(() => {
+    const request = cacheRequest;
+    if (family !== 'full-palette' || !request.colors || !request.width || cleanup && !request.cleanup) { cachedClip = null; return; }
+    const handle = animationPreviewCache.acquire({ ...request, palette: request.colors });
+    cachedClip = { request, handle };
+    return () => { handle?.release(); };
+  });
   let fullItem;
   $effect(() => {
     const source = frames[at].original, colors = conversionPalette, width = mw, height = mh, cut = alphaCut, matching = metric, clean = conversionCleanup;
@@ -161,13 +173,18 @@
     // Keep the last completed frame while the next frame or settings convert.
     // Clearing it on every async frame removes the canvas and exposes the grid.
     // Readiness still belongs to the requested frame, not these retained pixels.
-    if (family !== 'full-palette' || fullItem !== item) fullPixels = null;
+    if (family !== 'full-palette' || fullItem !== item || !palette) fullPixels = null;
     fullItem = item;
-    if (family !== 'full-palette' || !width || !colors || cleanup && !clean) return;
+    if (family !== 'full-palette' || !width || !colors || cleanup && !clean || originalVisible || !active) return;
     const controller = new AbortController();
-    quantizeAsync(source, colors, cut, width, height, { signal: controller.signal, metric: matching }).then(result => {
+    const produce = async signal => {
+      const result = await quantizeAsync(source, colors, cut, width, height, { signal, metric: matching });
+      if (clean) clean.apply(result, clean.result);
+      return result;
+    };
+    const pending = clipCache ? clipCache.getFrame(at, produce, { signal: controller.signal }) : produce(controller.signal);
+    pending.then(result => {
       if (!controller.signal.aborted) {
-        if (clean) clean.apply(result, clean.result);
         fullPixels = new ImageData(palettePixels(result, colors).data, width, height);
         fullReady = true;
       }
@@ -192,7 +209,7 @@
 
   // Plays an animation: after the current frame's delay, step to the next and start again.
   $effect(() => {
-    if (frames.length < 2) return;
+    if (!active || frames.length < 2) return;
     // Original playback follows source delays independently of conversion. Read
     // originalVisible first so a finished preview cannot restart that timer.
     if (family === 'full-palette' && !originalVisible && !fullReady) return;
@@ -228,8 +245,8 @@
   {#if onremove}
     <div class="acts">
       <!-- Desktop actions retain their readable capsule; touch actions live in the caption. -->
-      <button class="ib mouse glass-btn--primary" onclick={onsave} aria-label="Save {item.name}" use:tooltip={'Save this image at its original size.'}><PixelIcon name="save" /></button>
-      <button class="ib mouse" onclick={oncopy} aria-label="Copy {item.name}" use:tooltip={'Copy this image to the clipboard as a PNG.'}><PixelIcon name="copy" /></button>
+      <button class="ib mouse glass-btn--primary" onclick={onsave} disabled={exportDisabled} aria-label="Save {item.name}" use:tooltip={'Save this image at its original size.'}><PixelIcon name="save" /></button>
+      <button class="ib mouse" onclick={oncopy} disabled={exportDisabled} aria-label="Copy {item.name}" use:tooltip={'Copy this image to the clipboard as a PNG.'}><PixelIcon name="copy" /></button>
       <button class="ib mouse" onclick={e => activate(e.currentTarget)} aria-label="Preview {item.name}" aria-haspopup="dialog" use:tooltip={'Preview this image.'}><PixelIcon name="expand" /></button>
       <button class="ib danger" onclick={onremove} aria-label="Remove {item.name}" use:tooltip={'Remove this image from the canvas.'}><PixelIcon name="trash" /></button>
     </div>

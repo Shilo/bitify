@@ -1,7 +1,7 @@
 # Palettes
 
 Bitify's Palette panel has two families: **1-bit**, with twelve preset color pairs, and
-**Palette**, with nine curated palettes and a named local library. The pairs are
+**Palette**, with nine curated palettes, optional Generated 32 and a named local library. The pairs are
 defined in [src/lib/presets.js](../src/lib/presets.js); full palettes and their provenance
 are in [src/lib/palette-library.js](../src/lib/palette-library.js).
 
@@ -9,6 +9,17 @@ Open Palette and choose **1-bit** or **Palette**. Palette mode's import icon acc
 an image, palette file or pasted colors; its edit icon opens color review. Names under
 the round choices use a single line with an ellipsis when needed; full names remain in
 accessible labels and tooltips. More → Help lists the current mode's controls.
+
+**ENDESGA 32 remains the full-palette default.** PICO-8 remains available for its
+distinctive stylization. A shared preset supplies consistent allowed RGB values;
+Max colors can restrict each asset further.
+
+Choose **Generated 32** to fit up to 32 shared colors from every wall image, including
+all animation frames. It runs only when selected and refreshes when images or Opacity
+cut change. Matching, Max colors and Cleanup use that palette without changing its
+colors. Adding/removing art can recolor earlier tiles. Edit saves a fixed copy that
+stops following the wall. Generated improves source fidelity in the tested corpus,
+but may preserve unwanted AI noise; it does not infer intentional outlines/details.
 
 ## 1-bit color pairs
 

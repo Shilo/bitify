@@ -2,6 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { prepareCleanupAsync, createCleanupAccumulator, applyCleanup, applyCleanupAsync } from './palette-cleanup.js';
 import { quantize, preparePalette } from './quantize.js';
 import { FULL_PRESETS } from './palette-library.js';
+import { applyPreparedCleanup, applyPreparedCleanupAsync, validatePreparedCleanupAsync } from './palette-cleanup-apply.js';
 
 const rgba = hex => [parseInt(hex.slice(1, 3), 16), parseInt(hex.slice(3, 5), 16), parseInt(hex.slice(5, 7), 16), 255];
 const image = (colors, width = colors.length, height = 1) => ({ width, height, data: Uint8ClampedArray.from(colors.flatMap(c => typeof c === 'string' ? rgba(c) : c)) });
@@ -69,6 +70,53 @@ function transform(source, transpose = false) {
 }
 
 describe('optional one-pixel palette cleanup', () => {
+  it('marks empty completed maps and retains nearest metadata through the prepared fast path', async () => {
+    const source = image(['#000000', [0, 0, 0, 0], '#ffffff']);
+    const prepared = await prepareCleanupAsync([source, source], pico);
+    expect(prepared.hasChanges).toBe(false);
+    const result = quantize(source, pico), before = structuredClone(result), fill = vi.spyOn(result.used, 'fill');
+    expect(applyPreparedCleanup(result, prepared)).toBe(result);
+    expect(await applyPreparedCleanupAsync(result, prepared)).toBe(result);
+    expect(fill).not.toHaveBeenCalled(); expect(result).toEqual(before);
+    const forged = { ...prepared, replacements: prepared.replacements.slice() };
+    result.used.fill(0); result.hasTransparency = false;
+    applyPreparedCleanup(result, forged);
+    expect(result).toEqual(before); // Unregistered flags retain generic rebuilding.
+    const aborted = new AbortController(); aborted.abort();
+    await expect(applyPreparedCleanupAsync(result, prepared, { signal: aborted.signal })).rejects.toMatchObject({ name: 'AbortError' });
+    const during = new AbortController();
+    await expect(applyPreparedCleanupAsync(result, prepared, { onProgress: () => during.abort(), signal: during.signal })).rejects.toMatchObject({ name: 'AbortError' });
+    expect(() => applyPreparedCleanup({ ...result, w: 4 }, prepared)).toThrow('Invalid');
+  });
+  it('validates worker maps and ignores forged change metadata', async () => {
+    await expect(validatePreparedCleanupAsync({ replacements: new Uint16Array([256]), width: 1, height: 1, hasChanges: false }, 2)).resolves.toHaveProperty('hasChanges', false);
+    for (const cleanup of [
+      { replacements: new Uint16Array([0]), width: 1, height: 1, hasChanges: false },
+      { replacements: new Uint16Array([256]), width: 1, height: 1, hasChanges: true },
+      { replacements: new Uint16Array([2]), width: 1, height: 1, hasChanges: true },
+      { replacements: new Uint16Array([256]), width: 2, height: 1, hasChanges: false },
+    ]) await expect(validatePreparedCleanupAsync(cleanup, 2)).rejects.toThrow('Invalid');
+  });
+  it('yields and cancels worker-map validation before registration', async () => {
+    const cleanup = { replacements: new Uint16Array(20000).fill(256), width: 200, height: 100, hasChanges: false }, controller = new AbortController();
+    let clock = 0; const now = vi.spyOn(performance, 'now').mockImplementation(() => (clock += 9));
+    vi.stubGlobal('MessageChannel', undefined);
+    const timer = setTimeout(() => controller.abort(), 0);
+    try {
+      await expect(validatePreparedCleanupAsync(cleanup, 2, controller.signal)).rejects.toMatchObject({ name: 'AbortError' });
+    } finally { clearTimeout(timer); now.mockRestore(); vi.unstubAllGlobals(); }
+    const result = { w: 1, h: 1, indices: new Uint16Array([0]), used: new Uint8Array(256), hasTransparency: false };
+    // Cancellation never registers a partially checked map as a trusted no-op.
+    applyPreparedCleanup(result, cleanup); expect(result.used[0]).toBe(1);
+  });
+  it('validates the whole clip before an empty guard can skip later pixels', async () => {
+    const source = image(['#000000']), accumulator = createCleanupAccumulator(pico);
+    expect(accumulator.exhausted).toBe(false);
+    await accumulator.addSource(source); expect(accumulator.exhausted).toBe(true);
+    expect(accumulator.finish().hasChanges).toBe(false);
+    await expect(prepareCleanupAsync([source, { width: 1, height: 1, data: new Uint8Array(3) }], pico)).rejects.toThrow('Invalid');
+    await expect(prepareCleanupAsync([source, image(['#000000', '#000000'])], pico)).rejects.toThrow('matching dimensions');
+  });
   it.each(['oklab', 'rgb'])('matches the scalar frozen-pass reference with %s matching across random palettes, alpha and shapes', async metric => {
     let seed = 78921;
     const random = () => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed >>> 16 & 255; };

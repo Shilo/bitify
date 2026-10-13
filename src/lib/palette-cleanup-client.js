@@ -1,5 +1,6 @@
 import { validateMatchingMetric, checkCanceled } from './quantize.js';
-export { applyCleanup, applyCleanupAsync } from './palette-cleanup-apply.js';
+import { validatePreparedCleanupAsync } from './palette-cleanup-apply.js';
+export { applyPreparedCleanup as applyCleanup, applyPreparedCleanupAsync as applyCleanupAsync } from './palette-cleanup-apply.js';
 
 const CHUNK_BYTES = 128 * 1024;
 const items = new WeakMap(), queue = [];
@@ -9,10 +10,11 @@ const abortError = () => new DOMException('Palette cleanup canceled.', 'AbortErr
 function snapshot(item, palette, alphaCut, metric) {
   const frames = (item.frames ?? [item]).map(frame => {
     const original = frame.original, width = original?.width ?? original?.w, height = original?.height ?? original?.h, data = original?.data;
-    if (!Number.isSafeInteger(width) || !Number.isSafeInteger(height) || width < 1 || height < 1 || !data || data.length !== width * height * 4) throw new Error('Invalid palette-cleanup source image.');
+    if (!Number.isSafeInteger(width) || !Number.isSafeInteger(height) || width < 1 || height < 1 || !Number.isSafeInteger(width * height * 4) || !data || data.length !== width * height * 4) throw new Error('Invalid palette-cleanup source image.');
     return { frame: frame.identity ?? frame, original, data, width, height, delay: frame.delay };
   });
   if (!frames.length) throw new Error('Palette-cleanup animation has no frames.');
+  if (frames.some(frame => frame.width !== frames[0].width || frame.height !== frames[0].height)) throw new Error('Cleanup animation frames must have matching dimensions.');
   return { colors: [...palette.colors], alphaCut, metric, frames, framesIdentity: item.framesIdentity ?? item.frames, loop: item.loop };
 }
 function same(a, b) {
@@ -41,7 +43,10 @@ function runWorker(job, target) {
       try {
         checkCanceled(controller.signal);
         if (data.type === 'error') { const error = new Error(data.message); error.name = data.name || 'Error'; fail(error); return; }
-        if (data.type === 'result') { finish(null, data.result); return; }
+        if (data.type === 'result') {
+          if (data.result?.width !== asked.frames[0].width || data.result?.height !== asked.frames[0].height) throw new Error('Invalid palette-cleanup worker result dimensions.');
+          finish(null, data.result); return;
+        }
         if (data.type !== 'next') throw new Error('Invalid palette-cleanup worker response.');
         if (frame >= asked.frames.length) { target.postMessage({ type: 'end' }); return; }
         const source = asked.frames[frame], end = Math.min(at + CHUNK_BYTES, source.data.length);
@@ -52,7 +57,7 @@ function runWorker(job, target) {
       } catch (error) { fail(error); }
     };
     controller.signal.addEventListener('abort', cancel, { once: true });
-    try { target.postMessage({ type: 'start', colors: asked.colors, alphaCut: asked.alphaCut, metric: asked.metric }); }
+    try { target.postMessage({ type: 'start', colors: asked.colors, alphaCut: asked.alphaCut, metric: asked.metric, frames: asked.frames.map(source => ({ width: source.width, height: source.height, byteLength: source.data.length })) }); }
     catch (error) { fail(error); }
   });
 }
@@ -63,6 +68,7 @@ async function fallback(job) {
   for (const frame of job.signature.frames) {
     checkCanceled(job.controller.signal);
     await accumulator.addSource({ width: frame.width, height: frame.height, data: frame.data });
+    if (accumulator.exhausted) break;
   }
   return accumulator.finish();
 }
@@ -75,7 +81,11 @@ async function drain() {
       try {
         checkCanceled(job.controller.signal);
         const target = makeWorker();
-        const result = target ? await runWorker(job, target) : await fallback(job);
+        let result;
+        if (target) {
+          try { result = await validatePreparedCleanupAsync(await runWorker(job, target), job.signature.colors.length, job.controller.signal); }
+          catch (error) { target.terminate(); if (worker === target) worker = null; throw error; }
+        } else result = await fallback(job);
         checkCanceled(job.controller.signal);
         job.state.cached = { signature: job.signature, result }; job.resolve(result);
       } catch (error) { job.reject(error); }

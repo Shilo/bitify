@@ -44,11 +44,28 @@ CSS is global: src/foundation.css orders GlassKit, src/app.css geometry and src/
 
 PNGs and GIFs are encoded by hand, not through a canvas, because some browsers add noise when a canvas is read back. A PNG is written with a palette and two bits per pixel, straight from the mask.
 
-The preceding two-bit PNG rule applies to the 1-bit family. Full palette exports also avoid canvas encoding. Import exactness refers to browser-decoded visible sRGB values, not arbitrary original file/profile bytes; the supplied PNG fixtures matched an independent decoder. Physical-phone and Safari testing of the new family has not yet been completed. For the built-browser regression harness after a feature commit, set `BASE_REF` to the pre-feature revision; its default `HEAD` is suitable while the feature is still uncommitted.
+The preceding two-bit PNG rule applies to the 1-bit family. Full palette exports also avoid canvas encoding. Import exactness refers to browser-decoded visible sRGB values, not arbitrary original file/profile bytes; the supplied PNG fixtures matched an independent decoder. Desktop and physical Pixel 8 Pro testing of the palette family is recorded in docs/research/2026-10-12-palette-implementation.md; Safari remains unvalidated. For the built-browser regression harness after a feature commit, set `BASE_REF` to the pre-feature revision; its default `HEAD` is suitable while the feature is still uncommitted.
 
 Max colors controls run from 2 to the active palette's color count, displaying the effective limit while retaining the global requested limit for larger palettes. Only committed edits change that preference. Slider moves commit after a 200ms pause or immediately on release/change; number edits commit on change/Enter/blur. `pausedCommit` cancellation discards pending work on closing, pointer cancellation, palette/family switches, All and Reset. `Dock.svelte` keys the row by the immutable palette to cancel old native gestures; captured palette checks reject stale commits. Tile retains the last completed rendering of the same item while recalculating settings or the next animation frame; item/family changes clear it. A separate readiness flag gates converted animation playback, and canceled jobs cannot replace the retained pixels; exports always convert the committed settings from full sources. Both settings families use Reset buttons with 12px corner radii. Palette Reset is always a 44px icon-only button vertically aligned beside the Nearest title at the top right; rows follow in the order Max colors, Matching, Cleanup and conditional Opacity cut. Style Reset shows icon plus text above 520px and a 44px icon-only target at 520px and below. All stays explicit, with the thumb at the active palette maximum and that count as the placeholder in the empty number field. The stored last limit does not control the thumb while All is selected. One-color palettes disable both inputs and use their sole color; two-color palettes disable only the slider. Stored limits of 1 restore as 2. Nearest matching and persisted storage fields are unchanged.
 
 ## Things that bite
+
+Generated 32 is an explicit lazy source after the nine full presets, before the saved
+library. It fits one shared palette from all wall sources/animation frames, with equal
+nonempty asset mass and duration weighting inside each GIF. Only sources/durations and
+Opacity cut regenerate it. Matching, caps, cleanup and display state do not. Runtime
+colors are not persisted; Edit saves a fixed ordinary copy. Empty results clear old
+converted art and disable color-dependent actions. Export gestures capture the entire
+wall source signature before awaiting generation. The worker streams 128 KiB slices;
+the result cache holds two small palettes, without old source/histogram references.
+
+`palette-animation-cache.js` reserves whole sampled clips within a shared global 8 MiB
+index/used-buffer budget, lazy-filled only for animations. Stills/oversized clips bypass
+it. Last-consumer release drops storage; Original skips frame conversion and an enlarged
+viewer pauses hidden wall playback. Exports remain full source and existing 1-bit caches
+remain independent. Limiting reuses exact RGB nearest error; prepared empty cleanup skips
+overlay scans and exhausted animation agreement skips later transfers after validating
+all metadata. See docs/research/2026-10-12-palette-implementation.md for reviewed limits.
 
 Optional full-palette Cleanup is an Off/On row after Matching, Off by default and
 remembered across visits/families. Reset restores Off. `palette-cleanup-client.js` is

@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, it, expect, vi } from 'vitest';
 import { preparePalette } from './quantize.js';
-import { createCleanupAccumulator, prepareCleanupAsync } from './palette-cleanup.js';
+import { createCleanupAccumulator, prepareCleanupAsync, validateCleanupFrames } from './palette-cleanup.js';
 
 let instances, failure, getPaletteCleanup;
 class FakeWorker {
@@ -15,12 +15,22 @@ class FakeWorker {
       if (this.mode === 'invalid') { queueMicrotask(() => this.onmessage?.({ data: { type: 'invalid' } })); return; }
       if (this.mode === 'workerError') { queueMicrotask(() => this.onerror?.()); return; }
       this.accumulator = createCleanupAccumulator(data.colors, data.alphaCut, data.metric, { signal: this.controller.signal });
+      validateCleanupFrames(data.frames); this.frames = data.frames; this.frame = 0;
     }
     const process = async () => {
       if (data.type === 'chunk') {
         this.pixels ??= new Uint8ClampedArray(data.width * data.height * 4); this.at ??= 0;
         this.pixels.set(data.data, this.at); this.at += data.data.length;
-        if (data.last) { await this.accumulator.addSource({ width: data.width, height: data.height, data: this.pixels }); this.pixels = null; this.at = 0; }
+        if (data.last) {
+          await this.accumulator.addSource({ width: data.width, height: data.height, data: this.pixels }); this.pixels = null; this.at = 0; this.frame++;
+          if (this.accumulator.exhausted || this.frame === this.frames.length) {
+            const result = structuredClone(this.accumulator.finish());
+            if (this.mode === 'badLabel') { result.replacements[0] = 255; result.hasChanges = true; }
+            if (this.mode === 'badFlag') { result.replacements[0] = 0; result.hasChanges = false; }
+            if (this.mode === 'badShape') result.width++;
+            this.onmessage?.({ data: { type: 'result', result } }); return;
+          }
+        }
       }
       if (data.type === 'end') { this.onmessage?.({ data: { type: 'result', result: this.accumulator.finish() } }); return; }
       this.onmessage?.({ data: { type: 'next' } });
@@ -38,6 +48,27 @@ beforeEach(async () => {
 afterEach(() => { vi.unstubAllGlobals(); });
 
 describe('whole-source cleanup job ownership', () => {
+  it('stops pixel transfers after an empty first frame and validates every later frame first', async () => {
+    const original = image(70000, [0, 0, 0, 255]), item = { frames: Array.from({ length: 8 }, () => ({ original })) };
+    const result = await getPaletteCleanup(item, palette(), 128, 'oklab');
+    expect(result.hasChanges).toBe(false);
+    expect(instances[0].chunks.reduce((sum, chunk) => sum + chunk.size, 0)).toBe(original.data.byteLength);
+    const starts = instances[0].starts;
+    await expect(getPaletteCleanup({ frames: [{ original }, { original: image(1) }] }, palette(), 128, 'oklab')).rejects.toThrow('matching dimensions');
+    await expect(getPaletteCleanup({ frames: [{ original }, { original: { ...original, data: new Uint8Array(3) } }] }, palette(), 128, 'oklab')).rejects.toThrow('source');
+    expect(instances[0].starts).toBe(starts);
+  });
+  it.each([true, false])('stops after the guard loses its last surviving proposal (worker=%s)', async threaded => {
+    if (!threaded) vi.stubGlobal('Worker', undefined);
+    const colors = preparePalette(['#000000', '#1d2b53']);
+    const noisy = image(5, [0, 0, 0, 255]); noisy.data.set([8, 12, 22, 255], 8);
+    const flat = image(5, [0, 0, 0, 255]);
+    const item = { frames: [noisy, flat, noisy, noisy].map(original => ({ original })) };
+    const result = await getPaletteCleanup(item, colors, 128, 'oklab');
+    expect(result).toEqual(await prepareCleanupAsync(item.frames.map(f => f.original), colors));
+    expect(result.hasChanges).toBe(false);
+    if (threaded) expect(instances[0].chunks).toHaveLength(2);
+  });
   it('shares equivalent palettes and keeps only the last completed result per item', async () => {
     const item = { original: image() }, first = await getPaletteCleanup(item, palette(), 128, 'rgb');
     expect(await getPaletteCleanup(item, palette(), 128, 'rgb')).toBe(first); expect(instances[0].starts).toBe(1);
@@ -77,7 +108,7 @@ describe('whole-source cleanup job ownership', () => {
     expect(instances[0].chunks.every(chunk => chunk.size <= 128 * 1024 && chunk.buffer !== a.data.buffer && chunk.buffer !== b.data.buffer)).toBe(true);
     expect(a.data).toEqual(before); expect(a.data.byteLength).toBe(70000 * 4); expect(b.data.byteLength).toBe(35000 * 4);
   });
-  it.each(['startThrow', 'invalid', 'workerError'])('reports %s failures and recovers on the next request', async mode => {
+  it.each(['startThrow', 'invalid', 'workerError', 'badLabel', 'badFlag', 'badShape'])('reports %s failures and recovers on the next request', async mode => {
     failure = mode; await expect(getPaletteCleanup({ original: image() }, palette(), 128, 'rgb')).rejects.toThrow();
     const broken = instances[0]; expect(broken.terminated).toBe(true); expect(broken.onmessage).toBeNull(); expect(broken.onerror).toBeNull();
     failure = 'normal'; expect((await getPaletteCleanup({ original: image() }, palette(), 128, 'rgb')).width).toBe(1);

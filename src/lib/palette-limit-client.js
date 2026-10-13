@@ -9,10 +9,10 @@ function snapshot(item, palette, alphaCut, metric, maxColors) {
   const frames = (item.frames ?? [item]).map(frame => {
     const original = frame.original, width = original?.width ?? original?.w, height = original?.height ?? original?.h, data = original?.data;
     if (!Number.isSafeInteger(width) || !Number.isSafeInteger(height) || width < 1 || height < 1 || !data || data.length !== width * height * 4) throw new Error('Invalid palette-limit source image.');
-    return { frame, original, data, width, height, delay: frame.delay, weight: item.frames ? Number.isFinite(frame.delay) && frame.delay > 0 ? frame.delay : 100 : 1 };
+    return { frame: frame.identity ?? frame, original, data, width, height, delay: frame.delay, weight: item.frames ? Number.isFinite(frame.delay) && frame.delay > 0 ? frame.delay : 100 : 1 };
   });
   if (!frames.length) throw new Error('Palette-limit animation has no frames.');
-  return { colors: [...palette.colors], alphaCut, metric, maxColors, frames, framesIdentity: item.frames, loop: item.loop };
+  return { colors: [...palette.colors], alphaCut, metric, maxColors, frames, framesIdentity: item.framesIdentity ?? item.frames, loop: item.loop };
 }
 function same(a, b) {
   return a.alphaCut === b.alphaCut && a.metric === b.metric && a.maxColors === b.maxColors && a.framesIdentity === b.framesIdentity && a.loop === b.loop
@@ -96,13 +96,13 @@ function subscribe(job, signal) {
   });
 }
 
-export async function getLimitedPalette(item, preparedPalette, alphaCut, metric, maxColors = 0, { signal } = {}) {
+export async function getLimitedPalette(item, preparedPalette, alphaCut, metric, maxColors = 0, { signal, sourceItem = item } = {}) {
   checkCanceled(signal);
   if (!Number.isInteger(maxColors) || maxColors < 0 || maxColors > 256) throw new Error('Max colors must be All or between 1 and 256.');
   if (!maxColors || maxColors >= preparedPalette.size) return preparedPalette;
   validateMatchingMetric(metric);
   if (!Number.isInteger(alphaCut) || alphaCut < 1 || alphaCut > 255) throw new Error('Opacity cut must be between 1 and 255.');
-  const signature = snapshot(item, preparedPalette, alphaCut, metric, maxColors);
+  const signature = snapshot(sourceItem, preparedPalette, alphaCut, metric, maxColors);
   let state = items.get(item);
   if (!state) { state = { active: new Set(), cached: null }; items.set(item, state); }
   if (state.cached && same(state.cached.signature, signature)) { checkCanceled(signal); return state.cached.palette; }

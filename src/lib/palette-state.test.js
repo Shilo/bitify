@@ -5,8 +5,32 @@ import omggif from 'omggif';
 import { fileBytes } from './save.js';
 import { quantize } from './quantize.js';
 import { prepareCleanupAsync, applyCleanup } from './palette-cleanup.js';
+import { captureGeneratedSources } from './palette-generated-sources.js';
 
 describe('independent palette state and export snapshots', () => {
+  it('restores the generated source identity without persisting generated colors', () => {
+    expect(restorePaletteState(JSON.stringify({family:'full-palette',paletteId:'generated-32'})).paletteId).toBe('generated-32');
+  });
+  it('captures whole-wall generation and deferred limiter/cleanup sources before yielding', async () => {
+    const black={width:1,height:1,data:Uint8ClampedArray.of(0,0,0,255)},white={width:1,height:1,data:Uint8ClampedArray.of(255,255,255,255)};
+    const red={width:1,height:1,data:Uint8ClampedArray.of(255,0,0,255)};
+    for(const metric of ['rgb','oklab']) for(const cleanup of [false,true]) {
+      const item={name:'before.gif',original:black,frames:[{original:black,delay:40},{original:white,delay:90}],loop:3};
+      const assets=[item,...[red,{width:1,height:1,data:Uint8ClampedArray.of(0,255,0,255)}].map(original=>({original}))];
+      const generated=captureGeneratedSources(assets),asked={colors:[],generated,alphaCut:128,maxColors:2,metric,cleanup};
+      const promise=fullPaletteImage(item,asked);
+      asked.generated=captureGeneratedSources([{original:red}]); item.original=red;item.frames=[{original:red,delay:10}];item.name='after.gif';item.loop=7;
+      const result=await promise;
+      expect(result).toMatchObject({name:'before.gif',loop:3,frameCount:2,metric,cleanup});
+      expect(result.colors).toHaveLength(2);expect(result.colors).toContain('#000000');expect(result.colors).toContain('#ffffff');
+      expect((await result.getFrame(0)).delay).toBe(40);expect((await result.getFrame(1)).delay).toBe(90);
+      expect((await result.getFrame(0)).indices[0]).not.toBe((await result.getFrame(1)).indices[0]);
+    }
+  });
+  it('rejects an empty generated source explicitly instead of inventing a fallback color', async () => {
+    const original={width:1,height:1,data:Uint8ClampedArray.of(1,2,3,0)};
+    await expect(fullPaletteImage({original,name:'empty.png'},{colors:[],generated:captureGeneratedSources([{original}]),metric:'oklab',alphaCut:128,maxColors:0})).rejects.toThrow('No visible colors');
+  });
   const pico = FULL_PRESETS.find(p => p.id === 'preset-pico8');
   const cleanupSource = (middle = '#053452') => {
     const colors = Array(25).fill('#07050c'); colors[12] = middle;

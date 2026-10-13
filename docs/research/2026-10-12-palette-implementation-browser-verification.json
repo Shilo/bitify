@@ -1,0 +1,584 @@
+{
+  "version": 1,
+  "suite": {
+    "files": 39,
+    "tests": 585,
+    "passed": true
+  },
+  "productionBuild": {
+    "passed": true,
+    "mainBytes": 227680,
+    "gzipBytes": 85530
+  },
+  "devices": {
+    "desktop": {
+      "gifMatrixCases": 80,
+      "gifMatrixPassing": 80,
+      "canvasReadback": {
+        "mismatchedBytes": 0,
+        "examples": []
+      },
+      "canvasPixelChecks": true,
+      "remainingFlowChecks": [
+        {
+          "name": "Load supplied GIF into built app",
+          "pass": true,
+          "ms": 757.8000000007451,
+          "viewport": 320
+        },
+        {
+          "name": "Original comparison and viewer close/reopen",
+          "pass": null,
+          "ms": 1125.199999999255,
+          "manualViewerValidationRequired": true,
+          "syntheticActivation": {
+            "target": "Preview dungeon.gif",
+            "connected": true,
+            "openDialogs": []
+          },
+          "viewport": 305
+        },
+        {
+          "name": "Generated shared six buildings and supplied sprite / All and cap8",
+          "pass": true,
+          "ms": 3070.89999999851,
+          "colors": 32,
+          "type": "text/javascript",
+          "bytes": 5810,
+          "rawCaptured": true
+        },
+        {
+          "name": "Generated source changes update shared palette",
+          "pass": true,
+          "ms": 614.6000000014901,
+          "before": 32,
+          "after": 32
+        },
+        {
+          "name": "Import supplied shared ASE palette for six buildings and GIF",
+          "pass": true,
+          "ms": 258.30000000074506,
+          "colors": 255
+        },
+        {
+          "name": "Supplied ASE / Oklab / All / Cleanup off",
+          "pass": true,
+          "ms": 210.60000000149012,
+          "tiles": 7,
+          "cap": 255,
+          "pixelChecks": true
+        },
+        {
+          "name": "Supplied ASE / Oklab / All / Cleanup on",
+          "pass": true,
+          "ms": 63.30000000074506,
+          "tiles": 7,
+          "cap": 255,
+          "pixelChecks": true
+        },
+        {
+          "name": "Supplied ASE / Oklab / 8 / Cleanup off",
+          "pass": true,
+          "ms": 964.1999999992549,
+          "tiles": 7,
+          "cap": 8,
+          "pixelChecks": true
+        },
+        {
+          "name": "Supplied ASE / Oklab / 8 / Cleanup on",
+          "pass": true,
+          "ms": 96.09999999776483,
+          "tiles": 7,
+          "cap": 8,
+          "pixelChecks": true
+        },
+        {
+          "name": "Supplied ASE / RGB / All / Cleanup off",
+          "pass": true,
+          "ms": 61.69999999925494,
+          "tiles": 7,
+          "cap": 255,
+          "pixelChecks": true
+        },
+        {
+          "name": "Supplied ASE / RGB / All / Cleanup on",
+          "pass": true,
+          "ms": 92.09999999776483,
+          "tiles": 7,
+          "cap": 255,
+          "pixelChecks": true
+        },
+        {
+          "name": "Supplied ASE / RGB / 8 / Cleanup off",
+          "pass": true,
+          "ms": 746.1000000014901,
+          "tiles": 7,
+          "cap": 8,
+          "pixelChecks": true
+        },
+        {
+          "name": "Supplied ASE / RGB / 8 / Cleanup on",
+          "pass": true,
+          "ms": 68.39999999850988,
+          "tiles": 7,
+          "cap": 8,
+          "pixelChecks": true
+        },
+        {
+          "name": "Invisible source clears old pixels, export disabled, opacity recovery",
+          "pass": true,
+          "ms": 676,
+          "viewport": 305
+        },
+        {
+          "name": "1-bit family hides generated guidance",
+          "pass": true,
+          "ms": 125.30000000074506,
+          "viewport": 305
+        },
+        {
+          "name": "Palette import/file \u00e2\u2020\u2019 paste \u00e2\u2020\u2019 add, edit and copy stay in one modal",
+          "pass": true,
+          "ms": 671.6999999992549,
+          "viewport": 305
+        }
+      ],
+      "errors": [],
+      "nativeViewerOriginalCloseVerified": true,
+      "exportChecks": [
+        {
+          "name": "Load supplied GIF into built app",
+          "pass": true,
+          "ms": 1511.6000000014901,
+          "viewport": 1280
+        },
+        {
+          "name": "Actual Generated/cap8/RGB/Cleanup On ZIP export",
+          "pass": true,
+          "ms": 3352.7000000029802,
+          "colors": 32,
+          "type": "application/zip",
+          "bytes": 1482062,
+          "rawCaptured": true
+        }
+      ],
+      "zip": {
+        "entries": [
+          {
+            "file": "dungeon-palette.gif",
+            "dimensions": [
+              512,
+              458
+            ],
+            "frames": 56,
+            "usedColors": 8,
+            "paletteMembership": true,
+            "alphaDifferences": 0,
+            "sourceTimingAndLoop": true
+          },
+          {
+            "file": "building1-palette.png",
+            "dimensions": [
+              112,
+              161
+            ],
+            "frames": 1,
+            "usedColors": 8,
+            "paletteMembership": true,
+            "alphaDifferences": 0,
+            "sourceTimingAndLoop": true
+          },
+          {
+            "file": "building2-palette.png",
+            "dimensions": [
+              286,
+              193
+            ],
+            "frames": 1,
+            "usedColors": 8,
+            "paletteMembership": true,
+            "alphaDifferences": 0,
+            "sourceTimingAndLoop": true
+          },
+          {
+            "file": "building3-palette.png",
+            "dimensions": [
+              133,
+              292
+            ],
+            "frames": 1,
+            "usedColors": 8,
+            "paletteMembership": true,
+            "alphaDifferences": 0,
+            "sourceTimingAndLoop": true
+          },
+          {
+            "file": "building4-palette.png",
+            "dimensions": [
+              116,
+              213
+            ],
+            "frames": 1,
+            "usedColors": 7,
+            "paletteMembership": true,
+            "alphaDifferences": 0,
+            "sourceTimingAndLoop": true
+          },
+          {
+            "file": "building5-palette.png",
+            "dimensions": [
+              110,
+              190
+            ],
+            "frames": 1,
+            "usedColors": 8,
+            "paletteMembership": true,
+            "alphaDifferences": 0,
+            "sourceTimingAndLoop": true
+          },
+          {
+            "file": "building6-palette.png",
+            "dimensions": [
+              171,
+              274
+            ],
+            "frames": 1,
+            "usedColors": 8,
+            "paletteMembership": true,
+            "alphaDifferences": 0,
+            "sourceTimingAndLoop": true
+          },
+          {
+            "file": "sprite-palette.png",
+            "dimensions": [
+              29,
+              41
+            ],
+            "frames": 1,
+            "usedColors": 8,
+            "paletteMembership": true,
+            "alphaDifferences": 0,
+            "sourceTimingAndLoop": true
+          }
+        ],
+        "passed": true,
+        "bytes": 1482062
+      }
+    },
+    "android": {
+      "gifMatrixCases": 80,
+      "gifMatrixPassing": 80,
+      "canvasReadback": {
+        "mismatchedBytes": 94,
+        "examples": [
+          {
+            "byte": 0,
+            "expected": 12,
+            "actual": 13
+          },
+          {
+            "byte": 8,
+            "expected": 20,
+            "actual": 21
+          },
+          {
+            "byte": 14,
+            "expected": 68,
+            "actual": 69
+          },
+          {
+            "byte": 16,
+            "expected": 28,
+            "actual": 29
+          },
+          {
+            "byte": 17,
+            "expected": 50,
+            "actual": 51
+          },
+          {
+            "byte": 18,
+            "expected": 72,
+            "actual": 73
+          },
+          {
+            "byte": 20,
+            "expected": 32,
+            "actual": 33
+          },
+          {
+            "byte": 22,
+            "expected": 76,
+            "actual": 77
+          },
+          {
+            "byte": 24,
+            "expected": 36,
+            "actual": 37
+          },
+          {
+            "byte": 26,
+            "expected": 80,
+            "actual": 81
+          },
+          {
+            "byte": 33,
+            "expected": 66,
+            "actual": 67
+          },
+          {
+            "byte": 36,
+            "expected": 48,
+            "actual": 49
+          }
+        ]
+      },
+      "canvasPixelChecks": false,
+      "remainingFlowChecks": [
+        {
+          "name": "Load supplied GIF into built app",
+          "pass": true,
+          "ms": 677.7000000029802,
+          "viewport": 448
+        },
+        {
+          "name": "Original comparison and viewer close/reopen",
+          "pass": null,
+          "ms": 1061.7000000029802,
+          "manualViewerValidationRequired": true,
+          "syntheticActivation": {
+            "target": "Preview dungeon.gif",
+            "connected": true,
+            "openDialogs": []
+          },
+          "viewport": 448
+        },
+        {
+          "name": "Generated shared six buildings and supplied sprite / All and cap8",
+          "pass": true,
+          "ms": 4091.300000011921,
+          "colors": 32,
+          "type": "text/javascript",
+          "bytes": 5810,
+          "rawCaptured": true
+        },
+        {
+          "name": "Generated source changes update shared palette",
+          "pass": true,
+          "ms": 1122.2999999970198,
+          "before": 32,
+          "after": 32
+        },
+        {
+          "name": "Import supplied shared ASE palette for six buildings and GIF",
+          "pass": true,
+          "ms": 314.30000001192093,
+          "colors": 255
+        },
+        {
+          "name": "Supplied ASE / Oklab / All / Cleanup off",
+          "pass": true,
+          "ms": 160,
+          "tiles": 7,
+          "cap": 255,
+          "pixelChecks": false
+        },
+        {
+          "name": "Supplied ASE / Oklab / All / Cleanup on",
+          "pass": true,
+          "ms": 278.6000000089407,
+          "tiles": 7,
+          "cap": 255,
+          "pixelChecks": false
+        },
+        {
+          "name": "Supplied ASE / Oklab / 8 / Cleanup off",
+          "pass": true,
+          "ms": 1033.5999999940395,
+          "tiles": 7,
+          "cap": 8,
+          "pixelChecks": false
+        },
+        {
+          "name": "Supplied ASE / Oklab / 8 / Cleanup on",
+          "pass": true,
+          "ms": 176.8999999910593,
+          "tiles": 7,
+          "cap": 8,
+          "pixelChecks": false
+        },
+        {
+          "name": "Supplied ASE / RGB / All / Cleanup off",
+          "pass": true,
+          "ms": 119.80000001192093,
+          "tiles": 7,
+          "cap": 255,
+          "pixelChecks": false
+        },
+        {
+          "name": "Supplied ASE / RGB / All / Cleanup on",
+          "pass": true,
+          "ms": 226.30000001192093,
+          "tiles": 7,
+          "cap": 255,
+          "pixelChecks": false
+        },
+        {
+          "name": "Supplied ASE / RGB / 8 / Cleanup off",
+          "pass": true,
+          "ms": 1043.2000000029802,
+          "tiles": 7,
+          "cap": 8,
+          "pixelChecks": false
+        },
+        {
+          "name": "Supplied ASE / RGB / 8 / Cleanup on",
+          "pass": true,
+          "ms": 177.3999999910593,
+          "tiles": 7,
+          "cap": 8,
+          "pixelChecks": false
+        },
+        {
+          "name": "Invisible source clears old pixels, export disabled, opacity recovery",
+          "pass": true,
+          "ms": 596.8999999910593,
+          "viewport": 448
+        },
+        {
+          "name": "1-bit family hides generated guidance",
+          "pass": true,
+          "ms": 112.70000000298023,
+          "viewport": 448
+        },
+        {
+          "name": "Palette import/file \u00e2\u2020\u2019 paste \u00e2\u2020\u2019 add, edit and copy stay in one modal",
+          "pass": true,
+          "ms": 610.5999999940395,
+          "viewport": 448
+        }
+      ],
+      "errors": [],
+      "nativeViewerOriginalCloseVerified": true,
+      "exportChecks": [
+        {
+          "name": "Load supplied GIF into built app",
+          "pass": true,
+          "ms": 668.5,
+          "viewport": 448
+        },
+        {
+          "name": "Actual Generated/cap8/RGB/Cleanup On ZIP export",
+          "pass": true,
+          "ms": 3982.6000000089407,
+          "colors": 32,
+          "type": "application/zip",
+          "bytes": 1482003,
+          "rawCaptured": true
+        }
+      ],
+      "zip": {
+        "entries": [
+          {
+            "file": "dungeon-palette.gif",
+            "dimensions": [
+              512,
+              458
+            ],
+            "frames": 56,
+            "usedColors": 8,
+            "paletteMembership": true,
+            "alphaDifferences": 0,
+            "sourceTimingAndLoop": true
+          },
+          {
+            "file": "building1-palette.png",
+            "dimensions": [
+              112,
+              161
+            ],
+            "frames": 1,
+            "usedColors": 8,
+            "paletteMembership": true,
+            "alphaDifferences": 0,
+            "sourceTimingAndLoop": true
+          },
+          {
+            "file": "building2-palette.png",
+            "dimensions": [
+              286,
+              193
+            ],
+            "frames": 1,
+            "usedColors": 8,
+            "paletteMembership": true,
+            "alphaDifferences": 0,
+            "sourceTimingAndLoop": true
+          },
+          {
+            "file": "building3-palette.png",
+            "dimensions": [
+              133,
+              292
+            ],
+            "frames": 1,
+            "usedColors": 8,
+            "paletteMembership": true,
+            "alphaDifferences": 0,
+            "sourceTimingAndLoop": true
+          },
+          {
+            "file": "building4-palette.png",
+            "dimensions": [
+              116,
+              213
+            ],
+            "frames": 1,
+            "usedColors": 7,
+            "paletteMembership": true,
+            "alphaDifferences": 0,
+            "sourceTimingAndLoop": true
+          },
+          {
+            "file": "building5-palette.png",
+            "dimensions": [
+              110,
+              190
+            ],
+            "frames": 1,
+            "usedColors": 8,
+            "paletteMembership": true,
+            "alphaDifferences": 0,
+            "sourceTimingAndLoop": true
+          },
+          {
+            "file": "building6-palette.png",
+            "dimensions": [
+              171,
+              274
+            ],
+            "frames": 1,
+            "usedColors": 8,
+            "paletteMembership": true,
+            "alphaDifferences": 0,
+            "sourceTimingAndLoop": true
+          },
+          {
+            "file": "sprite-palette.png",
+            "dimensions": [
+              29,
+              41
+            ],
+            "frames": 1,
+            "usedColors": 8,
+            "paletteMembership": true,
+            "alphaDifferences": 0,
+            "sourceTimingAndLoop": true
+          }
+        ],
+        "passed": true,
+        "bytes": 1482003
+      }
+    }
+  }
+}

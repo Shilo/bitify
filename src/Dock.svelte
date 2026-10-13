@@ -15,6 +15,7 @@
   import { sliderDrag, pausedCommit } from './lib/gesture.js';
   import { tooltip } from './lib/tooltip.js';
   import { compactPaletteName } from './lib/palette-label.js';
+  import { GENERATED_PALETTE_ID } from './lib/palette-library.js';
 
   const matchingDescription = 'Compare colors by appearance (Oklab) or red, green and blue values (RGB).';
   const cleanupDescription = 'Merge isolated pixels with similar neighbors. May remove small details. Animations change only where every frame agrees.';
@@ -38,7 +39,7 @@
     maxColors = $bindable(0),
     lastMaxColors = $bindable(16),
     cleanup = $bindable(false),
-    fullPalette, fullPresets = [], savedPalettes = [], onpalette, onimportpalette, oneditpalette,
+    fullPalette, fullPresets = [], savedPalettes = [], generatedNotice = '', generatedEditable = true, onpalette, onimportpalette, oneditpalette,
   } = $props();
 
   let panel = $state(null); // null, 'palettes' or 'style'
@@ -373,7 +374,7 @@
             </span>
           {:else}
             <button class="btn glass-btn icon-only" aria-label="Import palette" use:tooltip={'Import a palette from an image, a palette file or pasted hex colors.'} onclick={onimportpalette}><PixelIcon name="import" /></button>
-            <button class="btn glass-btn icon-only" aria-label="Edit palette" use:tooltip={fullPalette.id.startsWith('preset-') ? 'Edit a copy of this palette.' : 'Edit this palette or export a HEX backup.'} onclick={() => oneditpalette(fullPalette)}><PixelIcon name="edit" /></button>
+            <button class="btn glass-btn icon-only" aria-label="Edit palette" disabled={fullPalette.id === GENERATED_PALETTE_ID && !generatedEditable} use:tooltip={fullPalette.id.startsWith('preset-') || fullPalette.id === GENERATED_PALETTE_ID ? 'Edit a copy of this palette.' : 'Edit this palette or export a HEX backup.'} onclick={() => oneditpalette(fullPalette)}><PixelIcon name="edit" /></button>
           {/if}
         </div>
       </div>
@@ -389,14 +390,15 @@
             {#each [...fullPresets, ...savedPalettes] as p, i (p.id)}
               {#if i === fullPresets.length && i > 0}
                 <span class="palette-library-divider" aria-hidden="true"></span>
-              {:else if i > 0 && i < fullPresets.length && p.colors.length !== fullPresets[i - 1].colors.length}
+              {:else if i > 0 && i < fullPresets.length && (p.id === GENERATED_PALETTE_ID || p.colors.length !== fullPresets[i - 1].colors.length)}
                 <span class="palette-group-divider" aria-hidden="true"></span>
               {/if}
-              <button class="palette-choice" aria-pressed={fullPalette.id === p.id} aria-label={p.name} use:tooltip={`${p.name} · ${p.colors.length} colors${p.source?.credit ? ' · ' + p.source.credit : ''}`} onclick={() => onpalette(p)}><span class="palette-circle"><PalettePreview colors={p.colors}/></span><span class="palette-choice-name">{p.name}</span></button>
+              <button class="palette-choice" aria-pressed={fullPalette.id === p.id} aria-label={p.name} use:tooltip={p.id === GENERATED_PALETTE_ID ? 'Generate up to 32 shared colors from all images and animation frames. Updates when images or opacity change. Edit a copy to keep a fixed palette.' : `${p.name} · ${p.colors.length} colors${p.source?.credit ? ' · ' + p.source.credit : ''}`} onclick={() => onpalette(p)}><span class="palette-circle"><PalettePreview colors={p.colors}/></span><span class="palette-choice-name">{p.name}</span></button>
             {/each}
           {/if}
         </div>
       </div>
+      {#if generatedNotice}<p class="palette-source-status" role="status">{generatedNotice}</p>{/if}
     </div>
   {:else if panel === 'style' && family === 'full-palette'}
     <div class="panel palette-settings-panel glass-card" bind:offsetHeight={panelHeight}>
@@ -415,7 +417,7 @@
           onchange={limitPause.flush} onpointerup={limitPause.flush}
           onpointercancel={restoreLimitDrafts} />
         <div class="field palette-limit-field">
-          <input class="tnum" type="number" min={limitMin} max={limitMax} step="1" disabled={limitMax === 1} inputmode="numeric" aria-label="Max colors value" aria-describedby={limitDescription ? 'full-limit-description' : undefined}
+          <input class="tnum" type="number" min={limitMin} max={limitMax} step="1" disabled={limitMax <= 1} inputmode="numeric" aria-label="Max colors value" aria-describedby={limitDescription ? 'full-limit-description' : undefined}
             value={limitNumber} placeholder={String(limitMax)} oninput={e => { numberDirty = true; numberPalette = fullPalette; limitNumber = e.currentTarget.value; }}
             onchange={finishLimitNumber} onblur={finishLimitNumber}
             onkeydown={e => { if (e.key === 'Enter') { e.preventDefault(); finishLimitNumber(e); } }} />

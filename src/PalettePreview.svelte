@@ -9,7 +9,7 @@
 {#if compact}
   <span class="glyph" class:first={none === 1} class:second={none === 2} aria-hidden="true"></span>
 {:else if colors}
-  <span class="full-palette-preview" aria-hidden="true" style:background={`conic-gradient(${overview.map((c,i) => `${c} ${i*100/overview.length}% ${(i+1)*100/overview.length}%`).join(',')})`}></span>
+  <span class="full-palette-preview" aria-hidden="true" style:background={overview.length ? `conic-gradient(${overview.map((c,i) => `${c} ${i*100/overview.length}% ${(i+1)*100/overview.length}%`).join(',')})` : undefined}></span>
 {:else}
   <span class="palette-preview" aria-hidden="true" style:--preview-first={first} style:--preview-second={second}></span>
 {/if}

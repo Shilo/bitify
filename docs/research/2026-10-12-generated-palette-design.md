@@ -1,6 +1,6 @@
 # Generated shared palette: bounded research and proposed design
 
-October 12, 2026. Research only; this document proposes future behavior and does not describe an implemented source. No generated-palette production code was changed in this spike.
+October 12, 2026. Historical design spike, now adopted with a bounded exact/binned Oklab fit. The implementation and final validation are in [palette implementation](2026-10-12-palette-implementation.md). Details below describe the proposed design and its earlier evidence; the implementation record supersedes cache/algorithm proposals.
 
 ## Firm recommendation
 

@@ -31,6 +31,19 @@ function popular(entries, colors, K, metric, cut = 128) {
 }
 
 describe('whole-source fixed-palette limiting', () => {
+  it.each(['rgb', 'oklab'])('retains original-pixel full error accumulation for repeated colors and bin transitions in %s', async metric => {
+    const colors = ['#000000', '#343d57', '#ff004d', '#00e436', '#ffffff'];
+    const repeated = [source(Array.from({ length: 600 }, (_, i) => [0x123456, 0xa04467, 0x123456, 0xeeeecc][i % 4]), 37), source([0x123456, 0x333333, 0x123456], 129)];
+    const binned = [...repeated, source(Array.from({ length: 5000 }, (_, i) => Math.imul(i, 0x9e3779) & 0xffffff), 11), source([0x123456, 0xa04467], 241)];
+    for (const [entries, expectedBins] of [[repeated, false], [binned, true]]) {
+      const result = await selectPaletteSubset(colors, 2, read(entries), { metric });
+      expect(result.fullCost).toBe(cost(entries, colors, metric));
+      expect(result.binned).toBe(expectedBins);
+      // Splitting source chunks must not reorder any frequency/error additions.
+      const split = entries.flatMap(({ data, weight }) => Array.from({ length: Math.ceil(data.length / 28) }, (_, i) => ({ data: data.slice(i * 28, (i + 1) * 28), weight })));
+      expect(await selectPaletteSubset(colors, 2, read(split), { metric })).toEqual(result);
+    }
+  });
   it.each(['rgb', 'oklab'])('finds the exhaustive best single allowed color in %s', async metric => {
     const colors = ['#000000', '#202020', '#808080', '#ffffff', '#ff0000', '#0000ff'], entries = [source([0x666666, 0x666666, 0x555555, 0x898989, 0xaa1133])];
     const expected = colors.map(c => cost(entries, [c], metric));

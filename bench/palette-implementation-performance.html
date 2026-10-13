@@ -1,0 +1,49 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Palette implementation performance</title>
+<style>body{margin:16px;font:16px system-ui;background:#202630;color:white}button{padding:12px;font:inherit}pre{white-space:pre-wrap}canvas{max-width:100%;image-rendering:pixelated}</style>
+<h1>Palette performance</h1><p>Local test only. Keep foreground. Results return over USB.</p>
+<button id="run">Run benchmark</button><p id="status">Ready</p><canvas></canvas><pre id="result"></pre>
+<script type="module">
+import {decodeGif} from '../src/lib/gif.js';
+import {preparePalette,quantizeAsync,colorize,yieldTask} from '../src/lib/quantize.js';
+import {FULL_PRESETS} from '../src/lib/palette-library.js';
+import {createAnimationCache} from '../src/lib/palette-animation-cache.js';
+import {getLimitedPalette} from '../src/lib/palette-limit-client.js';
+import {captureGeneratedSources} from '../src/lib/palette-generated-sources.js';
+const run=document.querySelector('#run'),status=document.querySelector('#status'),out=document.querySelector('#result');
+run.onclick=async()=>{
+ run.disabled=true;const report={kind:'performance',userAgent:navigator.userAgent,records:[],checks:[],started:new Date().toISOString()};
+ const time=async(name,fn)=>{status.textContent=name;const start=performance.now(),result=await fn();report.records.push({name,ms:performance.now()-start});return result;};
+ try{
+ const decoded=await time('Decode',async()=>decodeGif(new Uint8Array(await(await fetch('/fixtures/dungeon.gif')).arrayBuffer())));
+ const frames=decoded.frames.map(f=>({original:{width:decoded.width,height:decoded.height,data:f.data},delay:f.delay})),item={original:frames[0].original,frames};
+ const palette=preparePalette(FULL_PRESETS.find(p=>p.id==='preset-edg32').colors);
+ const limited=await time('Cap8 cold whole-clip worker',()=>getLimitedPalette(item,palette,128,'oklab',8));
+ await time('Cap8 cached',()=>getLimitedPalette(item,palette,128,'oklab',8));
+ const cleanClient=await import('../src/lib/palette-cleanup-client.js');
+ const clean=await time('Cleanup cold whole-clip worker',()=>cleanClient.getPaletteCleanup(item,limited,128,'oklab'));
+ report.cleanupChanges=clean.hasChanges;
+ const canvas=document.querySelector('canvas');canvas.width=256;canvas.height=229;const context=canvas.getContext('2d');
+ const cache=createAnimationCache(),handle=cache.acquire({sources:frames.map(f=>f.original),palette:limited,alphaCut:128,metric:'oklab',cleanup:clean,width:256,height:229});
+ report.cacheBytes=cache.stats().bytes;
+ for(const phase of ['cold','warm','uncached']){
+ const times=[];await time(`${phase} 56-frame preview`,async()=>{
+ for(let i=0;i<frames.length;i++){
+ const produce=async signal=>{const result=await quantizeAsync(frames[i].original,limited,128,256,229,{metric:'oklab',signal});return cleanClient.applyCleanup(result,clean);};
+ const start=performance.now(),result=phase==='uncached'?await produce():await handle.getFrame(i,produce);
+ context.putImageData(new ImageData(colorize(result,limited).data,256,229),0,0);times.push(performance.now()-start);
+ if(phase==='uncached'){const expected=await handle.getFrame(i,produce);report.checks.push(expected.indices.every((v,p)=>v===result.indices[p]));}
+ await yieldTask();}
+ });report.records.at(-1).meanFrameMs=times.reduce((a,b)=>a+b,0)/times.length;
+ }
+ handle.release();report.cacheReleased=cache.stats().bytes===0;
+ const client=await import('../src/lib/palette-generated-client.js');
+ const captured=captureGeneratedSources([item]);
+ const generated=await time('Generated32 cold whole-clip worker',()=>client.getGeneratedPalette(captured));report.generatedColors=generated.colors.length;
+ await time('Generated32 cached',()=>client.getGeneratedPalette(captured));
+ report.completed=true;
+ }catch(e){report.error={name:e.name,message:e.message};}
+ status.textContent=report.completed?'Finished':'Failed';out.textContent=JSON.stringify(report,null,2);
+ await fetch('/results',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(report)});run.disabled=false;
+};
+</script>

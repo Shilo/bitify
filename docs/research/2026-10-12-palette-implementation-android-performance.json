@@ -1,0 +1,109 @@
+{
+  "kind": "performance",
+  "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+  "records": [
+    {
+      "name": "Decode",
+      "ms": 88.8999999910593
+    },
+    {
+      "name": "Cap8 cold whole-clip worker",
+      "ms": 624
+    },
+    {
+      "name": "Cap8 cached",
+      "ms": 0.5
+    },
+    {
+      "name": "Cleanup cold whole-clip worker",
+      "ms": 129.09999999403954
+    },
+    {
+      "name": "cold 56-frame preview",
+      "ms": 235.79999999701977,
+      "meanFrameMs": 2.974999999361379
+    },
+    {
+      "name": "warm 56-frame preview",
+      "ms": 108.6000000089407,
+      "meanFrameMs": 0.5696428577814784
+    },
+    {
+      "name": "uncached 56-frame preview",
+      "ms": 203.69999998807907,
+      "meanFrameMs": 2.0785714284117733
+    },
+    {
+      "name": "Generated32 cold whole-clip worker",
+      "ms": 1439.2999999970198
+    },
+    {
+      "name": "Generated32 cached",
+      "ms": 0.09999999403953552
+    }
+  ],
+  "checks": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "started": "2026-10-13T00:42:05.495Z",
+  "cleanupChanges": false,
+  "cacheBytes": 6580224,
+  "cacheReleased": true,
+  "generatedColors": 32,
+  "completed": true
+}

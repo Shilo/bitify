@@ -1,4 +1,4 @@
-import { FULL_PRESETS, DEFAULT_FULL_PALETTE } from './palette-library.js';
+import { FULL_PRESETS, DEFAULT_FULL_PALETTE, GENERATED_PALETTE_ID } from './palette-library.js';
 import { preparePalette, quantizeAsync, validateMatchingMetric } from './quantize.js';
 import { getLimitedPalette } from './palette-limit-client.js';
 
@@ -13,7 +13,7 @@ export function restorePaletteState(text, library = []) {
   const choices = [...FULL_PRESETS, ...library];
   return {
     family: value?.family === 'full-palette' ? 'full-palette' : 'two-color',
-    paletteId: choices.some(p => p.id === value?.paletteId) ? value.paletteId : DEFAULT_FULL_PALETTE.id,
+    paletteId: value?.paletteId === GENERATED_PALETTE_ID || choices.some(p => p.id === value?.paletteId) ? value.paletteId : DEFAULT_FULL_PALETTE.id,
     alphaCut: Number.isInteger(value?.alphaCut) && value.alphaCut >= 1 && value.alphaCut <= 255 ? value.alphaCut : 128,
     metric: value?.metric === 'rgb' ? 'rgb' : 'oklab',
     maxColors: value?.maxColors === 1 ? 2 : Number.isInteger(value?.maxColors) && value.maxColors >= 0 && value.maxColors <= 256 ? value.maxColors : 0,
@@ -24,14 +24,13 @@ export function restorePaletteState(text, library = []) {
 
 // A save owns its colors and settings even if the user edits or resets the UI
 // while cooperative conversion is still running. IDs alone are not snapshots.
-export function conversionSnapshot({ family, palette, alphaCut, metric, maxColors, cleanup, first, second, style, set }) {
+export function conversionSnapshot({ family, palette, alphaCut, metric, maxColors, cleanup, generated, first, second, style, set }) {
   return family === 'full-palette'
-    ? Object.freeze({ family, name: palette.name, colors: Object.freeze([...palette.colors]), alphaCut, metric: validateMatchingMetric(metric), maxColors: maxColorsOf(maxColors), cleanup: cleanup === true })
+    ? Object.freeze({ family, name: palette.name, colors: Object.freeze([...palette.colors]), alphaCut, metric: validateMatchingMetric(metric), maxColors: maxColorsOf(maxColors), cleanup: cleanup === true, ...(generated ? { generated } : {}) })
     : Object.freeze({ family: 'two-color', first, second, style, set: Object.freeze({ ...set }) });
 }
 
 export async function fullPaletteImage(item, asked, { still = false } = {}) {
-  let palette = preparePalette(asked.colors);
   // Own scalar preferences and source/frame references before subset preparation
   // yields. Still copies of GIFs select from the same full animation as Save.
   const metric = validateMatchingMetric(asked.metric), alphaCut = asked.alphaCut, maxColors = maxColorsOf(asked.maxColors), cleanup = asked.cleanup === true;
@@ -39,7 +38,15 @@ export async function fullPaletteImage(item, asked, { still = false } = {}) {
   const framesIdentity = item.frames;
   const frames = item.frames?.map(f => ({ identity: f, original: f.original, delay: f.delay }));
   const sourceItem = { identity: item, original, frames, framesIdentity, loop };
-  if (maxColors && maxColors < palette.size) palette = await getLimitedPalette(item, palette, alphaCut, metric, maxColors);
+  let colors = asked.colors;
+  const generated = asked.generated;
+  if (generated) {
+    const client = await import('./palette-generated-client.js');
+    colors = (await client.getGeneratedPalette(generated)).colors;
+    if (!colors.length) throw new Error('No visible colors. Add images or lower Opacity cut.');
+  }
+  let palette = preparePalette(colors);
+  if (maxColors && maxColors < palette.size) palette = await getLimitedPalette(item, palette, alphaCut, metric, maxColors, { sourceItem });
   let clean, applyCleanupAsync;
   if (cleanup) {
     const client = await import('./palette-cleanup-client.js');

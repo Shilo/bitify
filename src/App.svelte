@@ -17,7 +17,8 @@
   import PixelIcon from './PixelIcon.svelte';
   import ImageViewer from './ImageViewer.svelte';
   import PaletteImport from './PaletteImport.svelte';
-  import { FULL_PRESETS, DEFAULT_FULL_PALETTE, LIBRARY_KEY, restoreLibrary, savePalette, deletePalette, newPaletteName } from './lib/palette-library.js';
+  import { FULL_PRESETS, DEFAULT_FULL_PALETTE, GENERATED_PALETTE, GENERATED_PALETTE_ID, LIBRARY_KEY, restoreLibrary, savePalette, deletePalette, newPaletteName } from './lib/palette-library.js';
+  import { captureGeneratedSources } from './lib/palette-generated-sources.js';
   import { preparePalette } from './lib/quantize.js';
   import { restorePaletteState, conversionSnapshot, fullPaletteImage } from './lib/palette-state.js';
   import { tooltip } from './lib/tooltip.js';
@@ -47,14 +48,19 @@
   let maxColors = $state(fullSaved.maxColors), lastMaxColors = $state(fullSaved.lastMaxColors), cleanup = $state(fullSaved.cleanup);
   let sessionPalettes = $state.raw([]);
   const savedPalettes = $derived([...library, ...sessionPalettes]);
-  const fullPalette = $derived([...FULL_PRESETS, ...savedPalettes].find(p => p.id === paletteId) ?? DEFAULT_FULL_PALETTE);
-  const prepared = $derived(preparePalette(fullPalette.colors));
+  let generatedResult = $state.raw(null), generatedBusy = $state(false), generatedError = $state(false), generationRetry = $state(0);
+  const generatedActive = $derived(paletteId === GENERATED_PALETTE_ID);
+  const fullPalette = $derived(generatedActive ? generatedResult?.palette ?? GENERATED_PALETTE
+    : [...FULL_PRESETS, ...savedPalettes].find(p => p.id === paletteId) ?? DEFAULT_FULL_PALETTE);
+  const fullChoices = $derived([...FULL_PRESETS, generatedResult?.palette ?? GENERATED_PALETTE]);
+  const prepared = $derived(fullPalette.colors.length ? preparePalette(fullPalette.colors) : null);
   let paletteRequest = $state.raw(null), paletteTrigger;
   let deleteImports = $state(false);
-  function selectPalette(p) { paletteId = p.id; family = 'full-palette'; showOriginal = false; }
+  function selectPalette(p) { if (p.id === GENERATED_PALETTE_ID && generatedError) generationRetry++; paletteId = p.id; family = 'full-palette'; showOriginal = false; }
   function editPalette(p) {
+    if (p?.id === GENERATED_PALETTE_ID && (generatedBusy || generatedUnavailable || generatedResult?.request !== generatedRequest)) return;
     paletteTrigger = document.querySelector('.image-viewer[open] button[aria-label="Save image"]') ?? document.activeElement;
-    paletteRequest = p ? { ...p, name: p.id.startsWith('preset-') ? p.name + ' copy' : p.name, expectedRevision: p.revision, forceCopy: !p.id.startsWith('user-') } : { defaultName: newPaletteName(savedPalettes) };
+    paletteRequest = p ? { ...p, name: p.id.startsWith('preset-') || p.id === GENERATED_PALETTE_ID ? p.name + ' copy' : p.name, expectedRevision: p.revision, forceCopy: !p.id.startsWith('user-') } : { defaultName: newPaletteName(savedPalettes) };
   }
   function commitPalette(draft) {
     const result = savePalette(localStorage, library, draft, { id: draft.id, expectedRevision: draft.expectedRevision });
@@ -197,6 +203,31 @@
   let dragging = $state(false);
   // raw: items hold large typed arrays, and the list is only ever replaced, never mutated
   let items = $state.raw([]);
+  const generatedRequest = $derived(generatedActive ? captureGeneratedSources(items, alphaCut) : null);
+  const generatedNotice = $derived(family !== 'full-palette' || !generatedActive ? '' : generatedBusy ? 'Updating shared colors…'
+    : generatedError ? 'Could not generate colors. Select Generated 32 to retry.'
+    : !items.length ? 'Add images to generate shared colors.'
+    : !fullPalette.colors.length ? 'No visible colors. Lower Opacity cut.' : '');
+  const generatedUnavailable = $derived(family === 'full-palette' && generatedActive
+    && (generatedError || !fullPalette.colors.length));
+  $effect(() => {
+    const request = generatedRequest;
+    generationRetry;
+    if (family !== 'full-palette' || !request) { generatedBusy = false; return; }
+    const controller = new AbortController();
+    generatedBusy = true; generatedError = false;
+    import('./lib/palette-generated-client.js').then(client => client.getGeneratedPalette(request, { signal: controller.signal })).then(result => {
+      if (!controller.signal.aborted) {
+        generatedResult = { request, palette: Object.freeze({ ...GENERATED_PALETTE, colors: result.colors }) };
+        generatedBusy = false;
+      }
+    }).catch(error => {
+      if (controller.signal.aborted || error.name === 'AbortError') return;
+      generatedBusy = false; generatedError = true;
+      say('Could not generate shared colors. Select Generated 32 to retry.');
+    });
+    return () => controller.abort();
+  });
   // The logo, shown on the empty screen as a live preview of the settings. Never exported.
   let example = $state.raw(null);
   let viewing = $state.raw(null), viewTrigger, viewKeyboardFocus = false;
@@ -340,7 +371,7 @@
   function step(palettes, dir) {
     if (family === 'full-palette') {
       if (palettes) {
-        const choices = [...FULL_PRESETS, ...savedPalettes], at = choices.findIndex(p => p.id === fullPalette.id);
+        const choices = [...fullChoices, ...savedPalettes], at = choices.findIndex(p => p.id === fullPalette.id);
         const p = choices[(at + dir + choices.length) % choices.length]; selectPalette(p); say(`Palette: ${p.name}`, 1400);
       }
       return;
@@ -574,7 +605,8 @@
   // animation. These masks are of every pixel, always: never the smaller picture a tile draws.
   // `asked` is the settings at the moment of asking (see `asking`). A long job starts a moment
   // after it is asked for, and what it saves is what was on screen then, whatever is changed since.
-  const asking = () => conversionSnapshot({ family, palette: fullPalette, alphaCut, metric, maxColors, cleanup, first: ink[0], second: ink[1], style, set });
+  const asking = () => conversionSnapshot({ family, palette: fullPalette, alphaCut, metric, maxColors, cleanup,
+    generated: family === 'full-palette' && generatedActive ? generatedRequest : null, first: ink[0], second: ink[1], style, set });
   const about = (item, asked) => ({ name: item.name, w: item.img.w, h: item.img.h, first: asked.first, second: asked.second });
   const still = (item, asked) => asked.family === 'full-palette' ? fullPaletteImage(item, asked, { still: true }) : ({ ...about(item, asked), mask: mask(item.img, asked.style, asked.set) });
   const bitified = (item, asked) =>
@@ -588,7 +620,8 @@
       const live = items.find(i => i.id === item.id);
       if (!live) return null;
       const snapshot = asking();
-      return { item: live, snapshot, key: JSON.stringify(snapshot) };
+      if (generatedUnavailable) return null;
+      return { item: live, snapshot, key: JSON.stringify({ ...snapshot, generated: snapshot.generated?.key }) };
     },
     async prepare({ item, snapshot }) {
       // Reread is synchronous and reads the current analysis settings. Do this
@@ -625,6 +658,7 @@
   });
 
   async function save(item) {
+    if (generatedUnavailable) return;
     const asked = asking();
     try {
       const downloading = `Downloading ${downloadName({ ...item, family: asked.family })}…`;
@@ -639,6 +673,7 @@
 
   // The clipboard takes a PNG but not a GIF, so an animation is copied as its first frame.
   async function copy(item) {
+    if (generatedUnavailable) return;
     try {
       const asked = asking(), read = asked.family === 'full-palette' ? item : reread(item);
       // the clipboard is asked at once, as Safari demands, and handed the PNG when it has been made
@@ -650,6 +685,7 @@
   }
 
   async function saveEverything() {
+    if (generatedUnavailable) return;
     const asked = asking();
     try {
       const selected = [...items]; // the images on the wall now, even if some are removed before the job starts
@@ -796,7 +832,7 @@
   <div class="tiles">
     {#each canvasItems as item (item.id)}
       <Tile {item} inset={IMAGE_INSET} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} {alphaCut} {metric} {maxColors} {cleanup} onpaletteerror={paletteLimitFailure}
-        flipped={effectiveOriginal} comparing={previewing} budget={dragging ? DRAG_MS / canvasItems.length : 0}
+        flipped={effectiveOriginal} comparing={previewing} active={!viewed} exportDisabled={generatedUnavailable} budget={dragging ? DRAG_MS / canvasItems.length : 0}
         oncompare={compareHold} onopen={items.length ? openImage : undefined}
         exportDrag={items.length ? dragExports : undefined}
         onactivate={items.length ? undefined : () => picker.click()}
@@ -811,7 +847,7 @@
 
 {#if viewed}
   <ImageViewer item={viewed} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} {alphaCut} {metric} {maxColors} {cleanup} onpaletteerror={paletteLimitFailure} {busy} {message} flipped={viewInitialOriginal}
-    exportDrag={viewed.id === 0 ? undefined : dragExports}
+    exportDisabled={generatedUnavailable} exportDrag={viewed.id === 0 ? undefined : dragExports}
     onsave={viewed.id === 0 ? undefined : () => save(viewed)}
     oncopy={viewed.id === 0 ? undefined : () => copy(viewed)}
     onclose={async () => { const trigger = viewTrigger, keyboard = viewKeyboardFocus; viewing = null; await tick(); if (keyboard) trigger?.focus({ preventScroll: true }); else trigger?.blur(); }} />
@@ -821,10 +857,10 @@
 
 
 <div class="workspace-tools" class:canvas-scrollable={canvasScrollable} use:measureWorkspaceTools>
-<Dock bind:first bind:second bind:none bind:style bind:settings bind:showOriginal bind:dragging bind:family bind:alphaCut bind:metric bind:maxColors bind:lastMaxColors bind:cleanup {fullPalette} fullPresets={FULL_PRESETS} {savedPalettes} onpalette={selectPalette} onimportpalette={() => editPalette(null)} oneditpalette={editPalette} {previewing} {canvasScrollable} {autos} {soft} />
+<Dock bind:first bind:second bind:none bind:style bind:settings bind:showOriginal bind:dragging bind:family bind:alphaCut bind:metric bind:maxColors bind:lastMaxColors bind:cleanup {fullPalette} fullPresets={fullChoices} {savedPalettes} {generatedNotice} generatedEditable={!generatedBusy && !generatedUnavailable} onpalette={selectPalette} onimportpalette={() => editPalette(null)} oneditpalette={editPalette} {previewing} {canvasScrollable} {autos} {soft} />
 <nav class="bar file-tools" class:has-images={!!items.length} aria-label="File and app actions">
   <div class="file-actions" class:awaiting-import={!items.length} role="group" aria-label="Add and save images">
-    <button class="btn glass-btn icon-only export-action" class:glass-btn--primary={!!items.length} disabled={!items.length} aria-label={items.length > 1 ? 'Save all images' : 'Save image'} use:tooltip={items.length > 1 ? 'Save all converted images as a ZIP archive.' : items.length ? 'Save the converted image at its original size.' : 'Add an image to enable saving.'} onclick={saveEverything}><PixelIcon name="save" /><span class="save-label" aria-hidden="true">Save</span></button>
+    <button class="btn glass-btn icon-only export-action" class:glass-btn--primary={!!items.length} disabled={!items.length || generatedUnavailable} aria-label={items.length > 1 ? 'Save all images' : 'Save image'} use:tooltip={items.length > 1 ? 'Save all converted images as a ZIP archive.' : items.length ? 'Save the converted image at its original size.' : 'Add an image to enable saving.'} onclick={saveEverything}><PixelIcon name="save" /><span class="save-label" aria-hidden="true">Save</span></button>
     <button class="btn glass-btn icon-only import-action" onclick={() => picker.click()} aria-label={importLabel} use:tooltip={'Add images from your device, or drop or paste them onto the canvas. Images stay on your device.'}><PixelIcon name="import" /></button>
   {#if items.length}
     <button class="btn glass-btn icon-only danger file-clear" bind:this={clearTrigger} onclick={() => { clearComparison(); clearConfirm.showModal(); }} aria-label="Remove all images" use:tooltip={'Remove all images from the canvas.'}><PixelIcon name="trash" /></button>
@@ -846,8 +882,8 @@
 <dialog class="sheet glass-sheet" bind:this={sheet} aria-label="Image actions" onclick={() => sheet.close()}>
   {#if shared}
     <p class="name" use:tooltip={shared.name}>{shared.name}</p>
-    <button class="btn glass-btn glass-btn--primary" onclick={() => { const item = shared; sheet.close(); save(item); }}><PixelIcon name="save" />Save</button>
-    <button class="btn glass-btn" onclick={() => { const item = shared; sheet.close(); copy(item); }}><PixelIcon name="copy" />Copy</button>
+    <button class="btn glass-btn glass-btn--primary" disabled={generatedUnavailable} onclick={() => { const item = shared; sheet.close(); save(item); }}><PixelIcon name="save" />Save</button>
+    <button class="btn glass-btn" disabled={generatedUnavailable} onclick={() => { const item = shared; sheet.close(); copy(item); }}><PixelIcon name="copy" />Copy</button>
     <button class="btn glass-btn" onclick={previewShared}><PixelIcon name="expand" />Preview</button>
     <button class="btn glass-btn danger" onclick={async () => {
       const item = shared;

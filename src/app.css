@@ -542,3 +542,5 @@ button[data-tooltip], label[data-tooltip] { user-select: none; }
   .thr { flex: 1.4 1 0; }
   .menu { max-height: none; overflow-y: hidden; }
 }
+/* Generated is one shared source, with a brief state only while unavailable. */
+.palette-source-status { margin: 8px 0 0; font-size: 12px; color: var(--muted); }

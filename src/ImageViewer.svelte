@@ -6,7 +6,7 @@
   import { fitViewerImage } from './lib/viewer-layout.js';
   import { canvasGridSpacing } from './lib/canvas-grid.js';
   import { imageGesture } from './lib/image-gesture.js';
-  let { item, first, second, style, set, family = 'two-color', palette, alphaCut = 128, metric = 'oklab', maxColors = 0, cleanup = false, onpaletteerror, flipped = false, onsave, oncopy, onclose, busy = '', message = '', exportDrag } = $props();
+  let { item, first, second, style, set, family = 'two-color', palette, alphaCut = 128, metric = 'oklab', maxColors = 0, cleanup = false, onpaletteerror, exportDisabled = false, flipped = false, onsave, oncopy, onclose, busy = '', message = '', exportDrag } = $props();
   let dialog;
   const dismissal = imageGesture();
   let dismissReady = false;
@@ -70,8 +70,8 @@
   onpointercancel={cancelDismissal} onpointerleave={() => { if (dismissal.canHold()) cancelDismissal(); }} onclick={click}>
   <nav class="viewer-workspace" aria-label="Preview controls">
     <div class="viewer-tools glass-card" role="group" aria-label="Image actions">
-      {#if onsave}<button class="btn glass-btn icon-only" onclick={onsave} aria-label="Save image" use:tooltip={'Save the converted image at its original size.'}><PixelIcon name="save" /></button>{/if}
-      {#if oncopy}<button class="btn glass-btn icon-only" onclick={oncopy} aria-label="Copy image" use:tooltip={'Copy the converted image as a PNG.'}><PixelIcon name="copy" /></button>{/if}
+      {#if onsave}<button class="btn glass-btn icon-only" onclick={onsave} disabled={exportDisabled} aria-label="Save image" use:tooltip={'Save the converted image at its original size.'}><PixelIcon name="save" /></button>{/if}
+      {#if oncopy}<button class="btn glass-btn icon-only" onclick={oncopy} disabled={exportDisabled} aria-label="Copy image" use:tooltip={'Copy the converted image as a PNG.'}><PixelIcon name="copy" /></button>{/if}
       <button class="btn glass-btn icon-only viewer-compare" aria-pressed={!originalVisible}
         aria-label={originalVisible ? 'Show converted image' : 'Show original image'}
         onclick={() => (converted = !converted)} use:tooltip={originalVisible ? 'Show the converted image.' : 'Show the original image.'}>

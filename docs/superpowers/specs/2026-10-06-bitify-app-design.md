@@ -1866,7 +1866,8 @@ remain independent. The default is still Glow/Cutout in 1-bit.
   Equal distances retain the earliest entry. Every
   opaque output belongs to the selected set; every selected color need not appear.
 
-The selected full palette is shared across all images; no image generates new palette colors.
+The selected full palette is shared across all images. Presets and saved palettes do not
+generate new colors. Generated 32 fits one common palette from the whole wall.
 With Max colors: All and Cleanup: Off, identical visible source RGBs map identically at the same alpha cut and matching choice.
 Nearest minimizes individual pixel distance under that rule, rather than local averaged shading error. PNG exports
 may compact different used subsets into different physical color tables; membership in
@@ -1909,6 +1910,46 @@ Worker input is chunked/acknowledged, one assembled frame at a time; cooperative
 and full-export overlay yield and cancel. Off takes the existing path without importing
 the optional cleanup runtime. A failure reports retry/Off rather than silently reverting.
 See docs/research/2026-10-12-one-pixel-cleanup.md for the findings and limitations.
+
+### Generated 32 and bounded animation preview storage
+
+Generated 32 is explicitly selected after the nine curated full presets, before the
+saved library, with a divider. ENDESGA 32 remains the full-palette default. Generation
+loads lazily and samples all successfully decoded wall assets and every composited
+animation frame. It publishes one immutable revision of up to 32 opaque RGB colors;
+fewer unique visible colors are retained exactly. The fixed Oklab fit uses bounded
+histograms and six refinements; it is a heuristic, not semantic cleanup or a global optimum.
+
+Each nonempty asset contributes equal total mass. GIF visible pixels are duration
+weighted within that asset; loop counts do not affect fitting. Sources, frame durations
+and Opacity cut refresh generation. Matching, Max colors, Cleanup, playback, wall order,
+layout and Original comparison do not. All retains its existing meaning; per-image
+caps select from the shared generated colors.
+
+Retain the last completed palette while updating, with brief source status. Initial
+empty/wholly invisible inputs produce zero colors and disable Save/Copy/Edit; completed
+empty results clear old pixels. Failures retain the last preview with retry guidance,
+without substituting a preset. Generated guidance is hidden in 1-bit. Only the source
+ID persists. Edit opens a fixed copy in the existing editor. Adding/removing assets can
+recolor existing artwork; saving a copy freezes it.
+
+Save, Copy, drag and ZIP capture the whole-wall signature and source/settings references
+before awaiting generation. All files in a ZIP use that captured palette. Preview
+cancellation cannot cancel an export subscriber. Workers use acknowledged 128 KiB
+slices without detaching sources. At most two small completed palettes are cached;
+old source histograms are not retained.
+
+Palette previews lazily retain completed animation indexes only when the whole sampled
+clip fits a shared global 8 MiB budget, including indexes and used flags. Stills bypass
+storage. No eager native bake or small frame LRU is added; oversized/over-budget previews
+stream without evicting admitted clips. Identity includes source buffers/dimensions,
+ordered colors, matching, opacity, sampled dimensions and guarded cleanup. Last-consumer
+release frees storage; canceled work cannot publish late. Exports convert full sources.
+Original skips converted-frame jobs. Opening Preview pauses hidden wall playback while
+retaining its cache. Existing 1-bit masks/colors remain cached. Max colors exact
+histograms reuse nearest error without altering accumulation order. Prepared empty
+cleanup skips overlays; exhausted animation agreement skips remaining transfer/processing
+after all source metadata is validated.
 
 All and limits at least the palette size return the original prepared palette immediately;
 they do not load the limiter or change nearest matching. The control is one row with a

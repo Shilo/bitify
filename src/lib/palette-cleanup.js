@@ -1,4 +1,5 @@
 import { preparePalette, quantizeAsync, checkCanceled, yieldTask, validateMatchingMetric, EMPTY_INDEX } from './quantize.js';
+import { registerPreparedCleanup } from './palette-cleanup-apply.js';
 
 // A deliberately lossy, single pass over frozen nearest labels. Source contacts
 // and error safeguards stay in Oklab even when nearest matching uses RGB.
@@ -23,6 +24,19 @@ function dimensions(source) {
   const width = source?.width ?? source?.w, height = source?.height ?? source?.h, length = width * height;
   if (!Number.isSafeInteger(width) || width < 1 || !Number.isSafeInteger(height) || height < 1 || !Number.isSafeInteger(length * 4) || !source.data || source.data.length !== length * 4) throw new Error('Invalid cleanup image dimensions or pixel data.');
   return { width, height, length };
+}
+
+// Metadata is checked for the complete clip before an empty agreement guard can
+// omit later pixel transfers. Workers receive lengths, never all frame buffers.
+export function validateCleanupFrames(frames) {
+  if (!Array.isArray(frames) || !frames.length) throw new Error('Cleanup needs at least one source image.');
+  let first;
+  for (const frame of frames) {
+    const { width, height, byteLength } = frame;
+    if (!Number.isSafeInteger(width) || width < 1 || !Number.isSafeInteger(height) || height < 1 || !Number.isSafeInteger(width * height * 4) || byteLength !== width * height * 4) throw new Error('Invalid cleanup image dimensions or pixel data.');
+    if (first && (width !== first.width || height !== first.height)) throw new Error('Cleanup animation frames must have matching dimensions.');
+    first ??= frame;
+  }
 }
 
 // Keep the costlier proposal loop interruptible between bounded 256-pixel
@@ -136,6 +150,7 @@ export function createCleanupAccumulator(palette, alphaCut = 128, metric = 'okla
   }
   let width, height, firstBase, replacements, surviving = 0, busy = false, finished = false;
   return {
+    get exhausted() { return firstBase !== undefined && surviving === 0; },
     async addSource(source) {
       checkCanceled(signal);
       if (busy || finished) throw new Error('Cleanup sources must be added sequentially before finishing.');
@@ -167,15 +182,17 @@ export function createCleanupAccumulator(palette, alphaCut = 128, metric = 'okla
       checkCanceled(signal);
       if (busy || !firstBase || finished) throw new Error('Cleanup needs completed source frames before finishing.');
       finished = true; firstBase = undefined;
-      return { replacements, width, height };
+      return registerPreparedCleanup({ replacements, width, height, hasChanges: surviving > 0 });
     },
   };
 }
 
 export async function prepareCleanupAsync(sources, palette, alphaCut = 128, metric = 'oklab', options = {}) {
   if (!Array.isArray(sources) || !sources.length) throw new Error('Cleanup needs at least one source image.');
+  checkCanceled(options.signal);
+  validateCleanupFrames(sources.map(source => { const { width, height } = dimensions(source); return { width, height, byteLength: source.data.length }; }));
   const accumulator = createCleanupAccumulator(palette, alphaCut, metric, options);
-  for (const source of sources) await accumulator.addSource(source);
+  for (const source of sources) { await accumulator.addSource(source); if (accumulator.exhausted) break; }
   return accumulator.finish();
 }
 

@@ -1,5 +1,35 @@
 # Performance
 
+## Palette performance implementation (October 12, 2026)
+
+Max colors reuses nearest error for repeated exact histogram RGBs, preserving original
+cost accumulation and binned validation. Cleanup Off still loads/runs no cleanup
+engine. On validates all animation metadata first, then stops frame transfer/processing
+when agreement is empty. Validated prepared empty maps skip overlays; arbitrary helper
+callers retain metadata rebuilding.
+
+Palette animations lazily cache sampled Uint16 indexes and used flags when the whole
+clip fits a shared **8 MiB** budget. Stills bypass it; over-budget clips stream without
+eviction. Last-consumer release frees the reservation. Original comparison skips frame
+conversion; an open viewer pauses hidden wall playback, retaining its cache. The budget
+excludes source RGBA, JS objects, canvases, temporary/worker buffers and exports. It is
+not a total app memory guarantee. Exports remain full-source; 1-bit caching is unchanged.
+
+Generated 32 is lazy and shared at wall level: 128 KiB acknowledged chunks, exact RGB
+summaries up to 4096 entries, 32768 bins thereafter, and six deterministic refinements.
+Its cache retains two small palettes/signatures rather than old sources/histograms.
+Matching, caps, cleanup, playback and resize do not regenerate it. Worker construction
+failure uses the cooperative core. Export subscribers survive preview cancellation.
+
+Pixel 8 Pro, Android 17, Brave/Chromium 155: the supplied 56-frame GIF took 624ms for a
+cold cap-8 worker job, 129ms for cleanup and 1439ms for Generated 32. Cached generation
+took 0.1ms. At 256×229, warm cached rendering averaged 0.57ms/frame versus 2.08ms uncached;
+all 56 indexes matched. Buffers cost 6,580,224 bytes and were released afterward. This
+is one bounded device run, not FPS, hard deadlines or a controlled speedup distribution.
+Existing noncancelable hover export preparation can retain an old generation subscriber
+and delay a newer serial job. Safari and sustained whole-app memory peaks remain
+unverified. See the [implementation record](research/2026-10-12-palette-implementation.md).
+
 ## Optional one-pixel cleanup (October 12, 2026)
 
 Cleanup is Off by default. Off loads no optional cleanup runtime and preserves the
