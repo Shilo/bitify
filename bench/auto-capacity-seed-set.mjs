@@ -2,11 +2,9 @@
 import fs from 'node:fs/promises';
 import {captureGeneratedSources} from '../src/lib/palette-generated-sources.js';
 const root=new URL('../.tmp/auto-capacity/',import.meta.url);
-const source=await fs.readFile(new URL('../src/lib/palette-generated.js',import.meta.url),'utf8');
 for(const count of [32,64]) {
-  const clone=source.replace("'./quantize.js'", "'../../src/lib/quantize.js'")
-    .replace("'./palette-generated-sources.js'", "'../../src/lib/palette-generated-sources.js'")
-    .replace('COLORS = 32',`COLORS = ${count}`)
+  const source=await fs.readFile(new URL(`generated${count}.js`,root),'utf8');
+  const clone=source
     .replace('nearest = new Float64Array(length).fill(Infinity);','nearest = new Float64Array(length).fill(Infinity);\n      const selectedColors = new Set(colors);')
     .replace('!colors.includes(rgb[i])','!selectedColors.has(rgb[i])')
     .replace('colors.push(rgb[selected]);','colors.push(rgb[selected]); selectedColors.add(rgb[selected]);');
@@ -28,7 +26,7 @@ for(const [name,cohort] of [
   ['mixed wall',items.filter(i=>i.name!=='synthetic-high-entropy')],
   ['adversarial high-entropy bins',items.filter(i=>i.name==='synthetic-high-entropy')]
 ]) for(const count of [32,64]) {
-  const baseline=await import(count===32?'../src/lib/palette-generated.js':'../.tmp/auto-capacity/generated64.js');
+  const baseline=await import(`../.tmp/auto-capacity/generated${count}.js`);
   const candidate=await import(`../.tmp/auto-capacity/generated${count}-set.js`);
   const snapshot=captureGeneratedSources(cohort),record={cohort:name,count,baseline:[],candidate:[],identical:true};
   let expected;

@@ -1,4 +1,4 @@
-import { generatePaletteAsync as generate32 } from '../src/lib/palette-generated.js';
+import { generatePaletteAsync as generate32 } from '../.tmp/auto-capacity/generated32.js';
 import { generatePaletteAsync as generate64 } from '../.tmp/auto-capacity/generated64.js';
 import { captureGeneratedSources } from '../src/lib/palette-generated-sources.js';
 import { preparePalette, quantizeAsync, EMPTY_INDEX, yieldTask } from '../src/lib/quantize.js';
@@ -67,6 +67,7 @@ export async function runCapacity({manifest, readBytes, status=()=>{}, device='n
     for(let iteration=0;iteration<3;iteration++) for(const count of iteration%2?[64,32]:[32,64]) {
       status(`${name}: ${count}, run ${iteration+1}`);
       const start=performance.now(), result=await (count===32?generate32:generate64)(snapshot);
+      if(result.colors.length>count) throw new Error(`Research ${count}-color clone exceeded its capacity.`);
       let record=report.records.find(r=>r.cohort===name&&r.count===count);
       if(!record) { record={cohort:name,count,generationMs:[],colors:result.colors.length,binned:result.binned}; report.records.push(record); }
       record.generationMs.push(performance.now()-start);

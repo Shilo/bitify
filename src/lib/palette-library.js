@@ -2,6 +2,7 @@
 export const LIBRARY_KEY = 'bitify-palettes-v1';
 export const LIBRARY_LIMIT = 100;
 export const LIBRARY_BYTES = 256 * 1024;
+export const GENERATED_MAX_COLORS = 64;
 
 export function normalizeColors(colors, limit = 256) {
   if (!Array.isArray(colors) || colors.length > 4096) throw new Error('A palette must contain a list of colors.');

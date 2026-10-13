@@ -24,6 +24,7 @@ class FakeWorker {
       if (data.type === 'end') {
         let result = await this.accumulator.finish();
         if (this.mode === 'badResult') result = { ...result, colors: ['bad'] };
+        if (this.mode === 'overCapacity') result = { ...result, colors: Array.from({ length: 65 }, (_, n) => '#' + n.toString(16).padStart(6, '0')) };
         this.onmessage?.({ data: { type: 'result', result } }); return;
       }
       this.onmessage?.({ data: { type: 'next' } });
@@ -44,6 +45,15 @@ beforeEach(async () => {
 afterEach(() => vi.unstubAllGlobals());
 
 describe('generated palette job ownership', () => {
+  it.each([33, 64])('accepts and caches complete %i-color worker results without merging', async count => {
+    const original = image(count);
+    for (let n = 0; n < count; n++) original.data.set([n, n * 2, n * 3, 255], n * 4);
+    const snapshot = capture([{ original }]);
+    const result = await getPalette(snapshot);
+    expect(result.colors).toEqual(Array.from({ length: count }, (_, n) => '#' + [n, n * 2, n * 3].map(v => v.toString(16).padStart(2, '0')).join('')).sort());
+    expect(await getPalette(snapshot)).toBe(result);
+    expect(instances[0].starts).toBe(1);
+  });
   it('empty/pre-aborted/invalid requests start no worker', async () => {
     expect((await getPalette(capture([]))).colors).toEqual([]);
     const controller = new AbortController(); controller.abort();
@@ -87,7 +97,7 @@ describe('generated palette job ownership', () => {
     queued.abort(); held.abort(); await Promise.all([firstRejected, secondRejected]); expect(instances).toHaveLength(1);
     failure = 'normal'; expect((await getPalette(capture([{ original: image() }]))).colors).toEqual(['#0c2238']);
   });
-  it.each(['startThrow', 'invalid', 'workerError', 'badResult'])('reports %s and terminates malformed workers before recovery', async mode => {
+  it.each(['startThrow', 'invalid', 'workerError', 'badResult', 'overCapacity'])('reports %s and terminates malformed workers before recovery', async mode => {
     failure = mode; await expect(getPalette(capture([{ original: image() }]))).rejects.toThrow(); expect(instances[0].terminated).toBe(true);
     failure = 'normal'; expect((await getPalette(capture([{ original: image() }]))).colors).toEqual(['#0c2238']);
   });

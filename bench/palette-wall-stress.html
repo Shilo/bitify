@@ -241,7 +241,7 @@ async function reviewedColors() {
   await until(() => one('.palette-import-modal[open]'), 'Generated copy editor missing');
   const colors = all('.palette-review-swatch').map(button =>
     button.getAttribute('aria-label').match(/#[a-f\d]{6}$/)?.[0]).filter(Boolean);
-  assert(colors.length > 0 && colors.length <= 32, 'Generated color count was invalid');
+  assert(colors.length > 0 && colors.length <= 64, 'Generated color count was invalid');
   click(label('Close palette editor'));
   await until(() => !one('.palette-import-modal'), 'Editor did not close');
   return colors;

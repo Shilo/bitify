@@ -16,7 +16,7 @@ the curated fallback for missing/deleted saved selections. PICO-8 remains availa
 distinctive stylization. A shared preset supplies consistent allowed RGB values;
 Max colors can restrict each asset further.
 
-Choose **Auto** to fit up to 32 shared colors from every wall image, including
+Choose **Auto** to fit up to 64 shared colors from every wall image, including
 all animation frames. It runs only when selected and refreshes when images or Opacity
 cut change. Matching, Max colors and Cleanup use that palette without changing its
 colors. Adding/removing art can recolor earlier tiles. Edit saves a fixed copy that

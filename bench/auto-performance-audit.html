@@ -33,8 +33,10 @@ let w, d, report, stopped, activeStage, nativePaintId = 0, runBegan;
 let mutationObserver, longTaskObserver, heartbeat, previousTick, stableProbe, zipBlob;
 const exportOnly = new URLSearchParams(location.search).get('exportOnly') === '1';
 const resumeOnly = new URLSearchParams(location.search).get('resume') === '1';
+const pngOnly = new URLSearchParams(location.search).get('pngOnly') === '1';
 if (exportOnly) runButton.textContent = 'Run full-wall export only';
 if (resumeOnly) runButton.textContent = 'Run remaining subset checks';
+if (pngOnly) runButton.textContent = 'Run 40 PNG check';
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const assert = (condition, message) => { if (!condition) throw Error(message); };
 const check = () => {
@@ -44,6 +46,12 @@ const check = () => {
 const all = selector => [...d.querySelectorAll(selector)];
 const one = selector => d.querySelector(selector);
 const tiles = () => all('.tiles > .tile:not(:has(.example-caption))');
+function artVisible(tile) {
+  const rect = tile.querySelector('.art').getBoundingClientRect();
+  const outer = frame.getBoundingClientRect();
+  const top = Math.max(0, -outer.top), bottom = Math.min(d.documentElement.clientHeight, innerHeight - outer.top);
+  return rect.bottom > top && rect.top < bottom && rect.right > 0 && rect.left < d.documentElement.clientWidth;
+}
 const label = (name, root = d) => root.querySelector(`[aria-label="${CSS.escape(name)}"]`);
 const visible = node => node && !node.closest('[hidden]') && node.getClientRects().length > 0;
 const textButton = (text, root = d) => [...root.querySelectorAll('button')]
@@ -172,6 +180,9 @@ async function ready(expected, after = 0) {
     !one('.palette-source-status')?.textContent.includes('Updating'), 'Generated palette did not become ready');
   const controlReady = performance.now();
   await until(() => tiles().every(tile => {
+    // Animated hidden tiles intentionally retain their old frame or await their
+    // first entry; settings readiness does not demand unnecessary hidden work.
+    if (tile.querySelector('.name')?.textContent.trim().endsWith('.gif') && !artVisible(tile)) return true;
     const canvas = tile.querySelector('canvas');
     return canvas?.width > 0 && (after === 0 || paintTimes.get(canvas) > after);
   }), 'Current converted wall did not paint', 90000);
@@ -373,6 +384,7 @@ function readbackWitness() {
     : 'This stress harness measures playback lifecycle. Exact output validation is a separate test.';
 }
 async function playback(entries, duration = 5000) {
+  await sleep(150); // allow the browser's visibility measurement to settle
   const originalCanvases = tiles().map(tile => tile.querySelector('canvas'));
   stableProbe = { rows: new Map(), removedCanvases: 0 };
   const begin = performance.now();
@@ -387,15 +399,51 @@ async function playback(entries, duration = 5000) {
       assert(tile, 'Animation tile missing: ' + entry.name);
       const row = stableProbe.rows.get(canvasIds.get(tile.querySelector('canvas')));
       const paints = row?.paints || 0;
+      const visible = artVisible(tile);
       // Slow source delays are permitted; absent delay metadata is reported without an FPS assertion.
-      if (entry.frames > 1 && entry.maxDelayMs && entry.maxDelayMs * 2 < duration)
+      if (visible && entry.frames > 1 && entry.maxDelayMs && entry.maxDelayMs * 2 < duration)
         assert(paints >= 2, 'Animation stopped painting: ' + entry.name);
+      if (!visible) assert(paints === 0, 'Hidden animation kept painting: ' + entry.name);
       return { id: entry.id, name: entry.name, sourceFrames: entry.frames, sourceMaxDelayMs: entry.maxDelayMs,
-        paints, sampledFrameHashes: row?.hashes.size || 0, paintGaps: summary(row?.gaps || []) };
+        visible, paints, sampledFrameHashes: row?.hashes.size || 0, paintGaps: summary(row?.gaps || []) };
     });
     return { observedMs: performance.now() - begin, removedCanvases: 0, animations,
       note: 'Paint gaps include source delays and conversion time; 16-position hashes are not complete-frame identity.' };
   } finally { stableProbe = null; }
+}
+async function scrollPlayback(entries) {
+  const target = tiles().find(tile => tile.querySelector('.name')?.textContent.trim() === entries.find(e => e.kind === 'gif').name);
+  const top = tiles()[0].querySelector('.art'), art = target.querySelector('.art');
+  const records = [];
+  for (const mode of ['Palette', '1-bit', 'Original']) {
+    await palettePanel();
+    if (mode !== 'Original') click(textButton(mode, one('.palette-family-tabs')));
+    else click(one('.view-toggle'));
+    await sleep(80);
+    // Close the panel using its own trigger; then scroll the actual wall surface.
+    click(label('Palette'));
+    top.scrollIntoView({ block: 'start' });
+    await until(() => !artVisible(target), 'Target GIF did not leave view');
+    const hidden = await playback(entries, 700);
+    art.scrollIntoView({ block: 'center' });
+    await until(() => artVisible(target) && target.querySelector('canvas'), 'Target GIF did not enter view');
+    const shown = await playback(entries, 700);
+    assert(shown.animations.find(e => e.name === entries.find(e => e.kind === 'gif').name).paints >= 2, 'Visible target did not resume in ' + mode);
+    const canvas = target.querySelector('canvas');
+    top.scrollIntoView({ block: 'start' });
+    await until(() => !artVisible(target), 'Target GIF did not leave view again');
+    await playback(entries, 700);
+    assert(target.querySelector('canvas') === canvas, 'Hiding removed the completed canvas');
+    art.scrollIntoView({ block: 'center' });
+    await until(() => artVisible(target), 'Target GIF did not return');
+    const resumed = await playback(entries, 700);
+    records.push({ mode, hidden, shown, resumed });
+  }
+  await generated();
+  // Family changes retain comparison; explicitly restore conversion for next checks.
+  if (one('.view-toggle').getAttribute('aria-pressed') !== 'true') click(one('.view-toggle'));
+  top.scrollIntoView({ block: 'start' });
+  return { records, note: 'Real wall scrolling verifies pause and return in both families and Original; source export timing is checked independently.' };
 }
 async function removeEntries(entries) {
   const before = tiles().length, began = performance.now();
@@ -441,7 +489,7 @@ runButton.onclick = async () => {
   runButton.disabled = true; cancelButton.disabled = false; stopped = false;
   runBegan = performance.now();
   files.clear();
-  report = { kind: 'wall-stress', version: 2, userAgent: navigator.userAgent,
+  report = { kind: 'wall-stress', version: 3, userAgent: navigator.userAgent,
     resumeOnly,
     started: new Date().toISOString(), stages: [], errors: [], warnings: [], completed: false,
     scopes: ['Built app controls and native canvas lifetime', 'Whole cohort All; subset cap8 and cleanup',
@@ -488,10 +536,17 @@ runButton.onclick = async () => {
       const loaded = await add(stills.slice(0, 40)); await configure();
       return { ...loaded, colors: await reviewedColors() };
     });
+    if (pngOnly) {
+      await stage('Clear focused PNG wall', () => clear());
+      report.completed = true;
+      status.textContent = 'Focused PNG check completed';
+      return;
+    }
     await stage('Import all17 GIFs / Auto All Off', () => add(gifs));
     await stage('Complete184-asset wall / Auto All Off', () => add(stills.slice(40)));
     await stage('Cold full-wall playback / 6seconds', () => playback(cohort, 6000));
     await stage('Warm full-wall playback / 6seconds', () => playback(cohort, 6000));
+    await stage('Scroll out and return / Palette, 1-bit and Original', () => scrollPlayback(cohort));
     await stage('Wholewall RGB then Oklab / no resampling', async () => {
       const before = await reviewedColors();
       for (const metric of ['RGB', 'Oklab']) { const config = await configure(metric); await ready(cohort.length, config.after); }

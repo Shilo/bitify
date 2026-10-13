@@ -1914,7 +1914,7 @@ See docs/research/2026-10-12-one-pixel-cleanup.md for the findings and limitatio
 ### Auto and bounded animation preview storage
 
 The visible generated source name is Auto; retain its `generated-32` identity and
-32-color capacity. Its tooltip's first line is `Auto · X colors · Your images` or
+64-color capacity. Its tooltip's first line is `Auto · X colors · Your images` or
 `Auto · X colors · Example image` (singular for one color), followed by the existing
 generation guidance on a new line. Publish source provenance atomically with the
 palette; a pending/inactive tooltip describes the retained completed result. Updating
@@ -1927,12 +1927,40 @@ hits bypass that work, and exports retain their direct async conversion path.
 This bounds initial conversion slices across a wall effect flush; it does not
 promise to eliminate import, layout, colorization or memory-pressure long tasks.
 
+Animated art surfaces share one IntersectionObserver. Their timers and subsequent
+palette frame conversions pause outside the viewport, retaining the held frame,
+completed canvas and clip cache. Positive visible area resumes that frame with its
+normal source delay, without catching up hidden elapsed time. This applies to both
+families and Original comparison. Stills do not register; unavailable observation
+retains prior playback. Enlarged Preview remains independent and its `active` prop
+still pauses hidden wall playback. Visibility never gates source fitting, subset
+selection, cleanup, full-source exports or GIF output delays/loop metadata.
+
+User artwork import lazily loads one serial analysis worker. GIFs use the existing
+compositor and analyze/unify off the main thread. PNG/other formats keep their
+existing native/browser sRGB decode path; only newly decoded, unpublished RGBA
+may transfer. Return original and analysis buffers one frame per acknowledgment,
+dropping worker references to each returned frame. Preserve every composited
+pixel, dimensions, delays, loop and legacy analysis result. Capture source/cut
+before awaiting import; changed settings reprepare unpublished frames and publish
+atomically with the matching analysis metadata. Remove all/unmount cancels queued
+and active imports, and no canceled work may fall back or repopulate the wall.
+Failed workers discard partial output and re-decode the immutable File. Unsupported
+workers use cooperative GIF/frame-analysis fallback; one huge frame/shared unify
+may still block. The tiny example keeps its prior path and does not start the new
+worker. Existing live-wall 1-bit reanalysis/export snapshots remain synchronous;
+no source/analysis memory reduction, downsampling or export change is implied.
+Single-frame non-GIF stills up to 4096 pixels instead use the same cooperative
+analysis through that queue, with posted tasks before analysis/unification and
+unchanged settings, ownership and cancellation guards. This measured conservative
+transport cutoff is not a cross-device timing guarantee.
+
 Auto leads the rail, separated from the nine curated full presets; saved
 palettes follow the curated choices. Fresh visits and global Reset select Palette and
 Auto. Existing saved choices remain intact. ENDESGA 32 is the curated fallback
 for missing/deleted existing palette selections. Generation
 loads lazily and samples all successfully decoded wall assets and every composited
-animation frame. It publishes one immutable revision of up to 32 opaque RGB colors;
+animation frame. It publishes one immutable revision of up to 64 opaque RGB colors;
 fewer unique visible colors are retained exactly. The fixed Oklab fit uses bounded
 histograms and six refinements; it is a heuristic, not semantic cleanup or a global optimum.
 With no real wall assets, generation uses the ready animated demo. A nonempty real

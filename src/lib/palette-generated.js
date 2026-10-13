@@ -1,7 +1,8 @@
 import { checkCanceled, yieldTask } from './quantize.js';
 import { validateGeneratedSources } from './palette-generated-sources.js';
+import { GENERATED_MAX_COLORS } from './palette-library.js';
 
-const EXACT_LIMIT = 4096, BINS = 32768, MASS = 2 ** 24, COLORS = 32, ITERATIONS = 6;
+const EXACT_LIMIT = 4096, BINS = 32768, MASS = 2 ** 24, COLORS = GENERATED_MAX_COLORS, ITERATIONS = 6;
 const linear = Float64Array.from({ length: 256 }, (_, n) => { const v = n / 255; return v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; });
 const gamma = v => { v /= 255; return v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; };
 function toLab(r, g, b, out, at) {

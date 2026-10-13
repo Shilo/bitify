@@ -35,7 +35,10 @@ assets.append(dict(name='synthetic-high-entropy', frames=[dict(url='/raw/synthet
 source = (root / 'src/lib/palette-generated.js').read_text(encoding='utf-8')
 source = source.replace("'./quantize.js'", "'../../src/lib/quantize.js'")
 source = source.replace("'./palette-generated-sources.js'", "'../../src/lib/palette-generated-sources.js'")
-assert 'COLORS = 32' in source
-(out / 'generated64.js').write_text(source.replace('COLORS = 32', 'COLORS = 64'), encoding='utf-8')
+source = source.replace("'./palette-library.js'", "'../../src/lib/palette-library.js'")
+capacity = 'COLORS = GENERATED_MAX_COLORS' if 'COLORS = GENERATED_MAX_COLORS' in source else 'COLORS = 32'
+assert capacity in source
+for count in (32, 64):
+    (out / f'generated{count}.js').write_text(source.replace(capacity, f'COLORS = {count}'), encoding='utf-8')
 print(json.dumps(dict(assets=len(assets), frames=sum(len(a['frames']) for a in assets),
                      bytes=sum((raw / f['url'].split('/')[-1]).stat().st_size for a in assets for f in a['frames']))))

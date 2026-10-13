@@ -1,0 +1,46 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Auto capacity boundaries</title>
+<style>body{background:#252b33;color:white;font:14px system-ui}iframe{width:100%;height:75vh;border:0}button{padding:12px}pre{white-space:pre-wrap}</style>
+<button id="run">Run capacity checks</button><span id="status">Ready</span><iframe id="app"></iframe><pre id="out"></pre>
+<script type="module">
+const app=document.querySelector('#app'),run=document.querySelector('#run'),status=document.querySelector('#status'),out=document.querySelector('#out');
+const sleep=ms=>new Promise(r=>setTimeout(r,ms)),assert=(v,m)=>{if(!v)throw Error(m)};
+let w,d,report,exported;
+const one=s=>d.querySelector(s),all=s=>[...d.querySelectorAll(s)],label=(s,root=d)=>root.querySelector(`[aria-label="${CSS.escape(s)}"]`);
+const button=(s,root=d)=>[...root.querySelectorAll('button')].find(e=>e.textContent.trim()===s&&!e.closest('[hidden]'));
+const click=e=>{assert(e&&!e.disabled,'Missing/disabled control');e.click()};
+async function until(fn,m){const at=performance.now();while(!fn()){assert(performance.now()-at<60000,m);await sleep(30)}return fn()}
+async function panel(){if(!one('.palette-family-panel')){click(label('Palette'));await until(()=>one('.palette-family-panel'),'Palette panel')}}
+async function clear(){if(!all('.tiles>.tile:not(:has(.example-caption))').length)return;click(label('Remove all images'));const dialog=await until(()=>one('dialog[open][aria-labelledby="clear-title"]'),'Clear confirmation');click(button('Remove',dialog));await until(()=>one('.example-caption'),'Empty wall')}
+async function colors(){await panel();await until(()=>!label('Edit palette').disabled&&!one('.palette-source-status')?.textContent.includes('Updating'),'Palette ready');click(label('Edit palette'));const dialog=await until(()=>one('.palette-import-modal[open]'),'Editor');const result=[];while(true){result.push(...all('.palette-review-swatch').map(e=>e.getAttribute('aria-label').match(/#[a-f\d]{6}$/)[0]));const next=button('Next',dialog);if(!next||next.disabled)break;click(next);await sleep(20)}click(label('Close palette editor'));return result}
+run.onclick=async()=>{
+run.disabled=true;report={kind:'integration',userAgent:navigator.userAgent,checks:[],exports:[],workers:[],errors:[],completed:false};
+try{
+app.src='/index.html';await new Promise(r=>app.addEventListener('load',r,{once:true}));w=app.contentWindow;d=w.document;
+await until(()=>label('Palette'),'App ready');const help=one('dialog[open]');if(help)click(label('Close help',help)||label('Close',help));
+await panel();click(button('Palette',one('.palette-family-tabs')));await sleep(30);click(label('Auto',one('.palette-rail')));
+click(label('Palette settings'));await until(()=>label('Cleanup off'),'Settings ready');click(label('Oklab matching'));click(label('Use all palette colors'));click(label('Cleanup off'));
+const cut=label('Palette opacity cut');if(cut){cut.value='128';cut.dispatchEvent(new w.Event('input',{bubbles:true}));cut.dispatchEvent(new w.Event('change',{bubbles:true}))}
+const Worker=w.Worker;w.Worker=class extends Worker{constructor(url,options){super(url,options);report.workers.push(String(url))}};
+w.addEventListener('error',e=>{if(!e.message.startsWith('ResizeObserver loop'))report.errors.push(e.message)});w.addEventListener('unhandledrejection',e=>report.errors.push(String(e.reason)));
+const native=w.URL.createObjectURL.bind(w.URL);w.URL.createObjectURL=blob=>{if(blob.type.startsWith('image/'))exported=blob;return native(blob)};
+d.addEventListener('click',e=>{if(e.target.closest('a[download]'))e.preventDefault()},true);
+const cases=await(await fetch('/edge-manifest.json')).json();
+for(const entry of cases){
+status.textContent=entry.name;await clear();const response=await fetch('/fixtures/'+entry.name),file=new w.File([await response.arrayBuffer()],entry.name,{type:entry.name.endsWith('.gif')?'image/gif':'image/png'}),transfer=new w.DataTransfer();transfer.items.add(file);const picker=one('input[type=file][multiple]');picker.files=transfer.files;picker.dispatchEvent(new w.Event('change',{bubbles:true}));
+await until(()=>all('.tiles>.tile:not(:has(.example-caption))').length===1,'Source imported');
+const allowed=await colors();assert(allowed.length<=64&&new Set(allowed).size===allowed.length,'Capacity/duplicates');if(entry.expected)assert(allowed.length===entry.expected,'Exact source count: '+entry.name);else assert(allowed.length>32,'Old capacity used');
+await until(()=>label('Save image')&&!label('Save image').disabled,'Save ready');exported=null;click(label('Save image'));await until(()=>exported,'Output missing');const bytes=new Uint8Array(await exported.arrayBuffer());let binary='';for(const n of bytes)binary+=String.fromCharCode(n);
+report.exports.push({name:entry.name,type:exported.type,colors:allowed,base64:btoa(binary)});
+click(label('Palette settings'));await until(()=>label('Max colors'),'Settings ready');assert(Number(label('Max colors').max)===allowed.length,'Dynamic slider max');assert(label('Use all palette colors').getAttribute('aria-pressed')==='true','All default');assert(label('Cleanup off').getAttribute('aria-pressed')==='true','Cleanup default');
+report.checks.push({name:entry.name,colors:allowed.length,pass:true});
+}
+// The clear control is available because an earlier source is present. Cancel
+// a real worker import, then check that no late decoded item repopulates the wall.
+const pendingResponse=await fetch('/fixtures/dungeon.gif'),pendingFile=new w.File([await pendingResponse.arrayBuffer()],'cancel-dungeon.gif',{type:'image/gif'}),pendingTransfer=new w.DataTransfer();pendingTransfer.items.add(pendingFile);
+const pendingPicker=one('input[type=file][multiple]');pendingPicker.files=pendingTransfer.files;pendingPicker.dispatchEvent(new w.Event('change',{bubbles:true}));
+await clear();await sleep(1000);assert(all('.tiles>.tile:not(:has(.example-caption))').length===0,'Canceled import returned');report.checks.push({name:'Real GIF import canceled by Remove all',pass:true});
+await clear();await panel();await until(()=>!label('Edit palette').disabled,'Demo restored');const demo=await colors();assert(demo.length>0&&demo.length<=64,'Demo palette');assert(!report.errors.length,'Runtime errors');report.completed=true;status.textContent='Completed';
+}catch(e){report.error=e.message;status.textContent=e.message}finally{out.textContent=JSON.stringify(report,null,2);await fetch('/results',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(report)});run.disabled=false}
+};
+</script>

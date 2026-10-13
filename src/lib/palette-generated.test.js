@@ -37,7 +37,7 @@ describe('generated whole-wall palette', () => {
     expect((await generatePaletteAsync(captureGeneratedWallSources(wall, demo, 128))).colors).toEqual(['#00ff00']);
     expect(() => captureGeneratedWallSources(null, demo)).toThrow('Invalid');
   });
-  it('returns empty colors for no wall/visible pixels and preserves all unique source RGBs up to 32', async () => {
+  it('returns empty colors for no wall/visible pixels and preserves unique source RGBs', async () => {
     expect((await generatePaletteAsync(captureGeneratedSources([]))).colors).toEqual([]);
     expect((await generatePaletteAsync(captureGeneratedSources([item(source([[255, 0, 0, 0]]))]))).colors).toEqual([]);
     const original = source([[255, 0, 0, 255], [0, 255, 0, 255], [0, 0, 255, 255], [1, 2, 3, 127]]);
@@ -45,6 +45,21 @@ describe('generated whole-wall palette', () => {
     expect(result.colors).toEqual(['#0000ff', '#00ff00', '#ff0000']); expect(result.assets).toBe(1);
     expect(Object.isFrozen(result)).toBe(true); expect(Object.isFrozen(result.colors)).toBe(true);
     expect((await generatePaletteAsync(captureGeneratedSources([item(original)], 127))).colors).toContain('#010203');
+  });
+  it.each([1, 2, 32, 33, 63, 64])('retains exactly %i source colors without padding or merging at the capacity boundary', async count => {
+    const original = source([...Array.from({ length: count }, (_, n) => [n, n * 3, n * 2, 255]), [255, 0, 0, 0]]);
+    const result = await generatePaletteAsync(captureGeneratedSources([item(original)]));
+    const colors = Array.from({ length: count }, (_, n) => '#' + [n, n * 3, n * 2].map(v => v.toString(16).padStart(2, '0')).join(''));
+    expect(result.colors).toEqual(colors.sort());
+    const converted = quantize(original, result.colors);
+    expect(converted.hasTransparency).toBe(true);
+    expect([...colorize(converted, result.colors).data]).toEqual([...original.data.slice(0, -4), 0, 0, 0, 0]);
+  });
+  it('fits 65 source colors within 64 unique allowed colors', async () => {
+    const result = await generatePaletteAsync(captureGeneratedSources([item(gradient(0, 65))]));
+    expect(result.colors.length).toBeGreaterThan(32);
+    expect(result.colors.length).toBeLessThanOrEqual(64);
+    expect(new Set(result.colors).size).toBe(result.colors.length);
   });
   it('captures immutable source references and excludes wall order/name/loop/display settings', () => {
     const a = item(gradient()), b = { original: gradient(1), name: 'before', loop: 2 };
@@ -79,7 +94,7 @@ describe('generated whole-wall palette', () => {
     const a = source(Array.from({ length: 5000 }, (_, n) => [n >> 8, n & 255, n * 13 & 255, 255]));
     const b = source(Array.from({ length: 5000 }, (_, n) => [n * 7 & 255, n >> 8, n & 255, 255]));
     const before = a.data.slice(), first = await generatePaletteAsync(captureGeneratedSources([item(a), item(b)]));
-    expect(first.binned).toBe(true); expect(first.colors.length).toBeGreaterThan(0); expect(first.colors.length).toBeLessThanOrEqual(32);
+    expect(first.binned).toBe(true); expect(first.colors.length).toBeGreaterThan(0); expect(first.colors.length).toBeLessThanOrEqual(64);
     expect(new Set(first.colors).size).toBe(first.colors.length); expect(first.colors.every(c => /^#[\da-f]{6}$/.test(c))).toBe(true);
     expect(Number.isFinite(first.cost)).toBe(true); expect(first.cost).toBeLessThanOrEqual(first.initialCost);
     expect((await generatePaletteAsync(captureGeneratedSources([item(b), item(a)]))).colors).toEqual(first.colors);

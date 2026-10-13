@@ -123,6 +123,22 @@ verification after this adjustment is **161 passing tests across six suites**.
 Its focused phone throughput and exported-subset checks are recorded in the
 release report after the reviewed commit.
 
+The focused 40-PNG rerun after the small-still adjustment passes on both devices,
+with exactly **19 worker starts** (21 small stills use cooperative analysis).
+Phone controls-ready time improves from the worker-only 635.1 to **586.3 ms** and
+source-commit time from 468.8 to **414.2 ms**; no long tasks occur. Desktop source
+commit is 82.9 versus 84.6 ms and controls ready 249.6 versus 242.7 ms, also without
+long tasks. This recovers part of the small-PNG transport cost, not all of it:
+phone controls readiness remains 165.2 ms slower than the 421.1 ms pre-worker
+baseline. Preserve that tradeoff alongside the elimination of measured GIF import
+long tasks; no larger cutoff or repeated exploratory tuning is justified here.
+
+After the cutoff commit, the final focused exported subsets were checked again
+on both devices: each actual ZIP passes the same 64-color/28-file/144-frame/
+3,533,753-pixel independent checks. Comparing these final outputs with the
+pre-fix archives still finds identical palettes and zero changed pixels, delays
+or loop counts. The final scheduling adjustment changes no exported artwork.
+
 ## Remaining performance boundaries
 
 Final source RGBA, eager legacy analysis, and existing cache budgets are unchanged.

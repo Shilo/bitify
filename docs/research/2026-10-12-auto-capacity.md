@@ -1,7 +1,10 @@
 # Auto palette capacity: 32 or 64
 
 October 12, 2026. This is a bounded research experiment, separate from the Auto
-rename and tooltip implementation. The production generator remains capped at 32.
+rename and tooltip implementation. At that point production remained capped at 32.
+The user subsequently approved 64; see [the production release review](2026-10-12-auto-64-release.md)
+for implementation, physical-device regression tests and the separately reviewed
+import/offscreen performance fixes. The measurements below remain the original paired experiment.
 
 ## Recommendation
 

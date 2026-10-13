@@ -55,6 +55,16 @@ ImageDecoder and straight RGBA/sRGB copyTo, avoiding canvas readback noise witho
 merging colors. Capability/errors/transforms fall back to the existing bitmap/canvas
 decoder; other formats and the independent GIF decoder keep their paths. Release all
 decoder/frame/bitmap/canvas resources, preserve cancellation and palette pixel limits.
+User artwork import lazily loads `image-import-client.js` and one serial worker.
+Single-frame non-GIF stills up to 4096 pixels use the same cooperative analysis
+through the serial queue, avoiding worker round trips; larger sources/GIFs use it.
+GIF compositing and legacy analyze/unify run there; PNG/other formats retain native
+browser decoding before unpublished RGBA transfers. Acknowledged frames transfer
+their original and analysis buffers once. Worker failures re-decode the immutable
+File; canceled work never falls back or publishes. Source/cut changes reprepare
+unpublished imports before atomic publication. The tiny demo keeps its old path.
+No-worker fallback yields between GIF frames/analyses; one large frame/unify and
+live-wall 1-bit reanalysis can still block. Source/analysis memory is unchanged.
 Generated's empty wall uses the ready animated demo; an invisible nonempty real wall
 must remain authoritative. Pending generation and conversion handoff retain the same
 item's completed preview, including a prior 1-bit conversion, with current-frame
@@ -71,7 +81,7 @@ converted art and disable color-dependent actions. Export gestures capture the e
 wall source signature before awaiting generation. The worker streams 128 KiB slices;
 the result cache holds two small palettes, without old source/histogram references.
 App's completed generated publication retains the request key, not the captured wall.
-The visible source name is Auto with its stable `generated-32` ID and 32-color capacity.
+The visible source name is Auto with its stable `generated-32` ID and 64-color capacity.
 Tooltip metadata reads the published palette count and its captured source label;
 pending/inactive results describe retained swatches without scanning on hover.
 New palette preview conversions defer their first slice to a posted browser task,

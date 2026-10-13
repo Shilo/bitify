@@ -2,7 +2,7 @@
 
 ## Auto tooltip and wall scheduling (October 12, 2026)
 
-Auto is the visible name of the existing generated source, still capped at 32.
+Auto is the visible name of the existing generated source, now capped at 64.
 Its tooltip reads the completed palette's count and published source label;
 showing it performs no sampling or generation. A new preview conversion posts its
 first task before accessing source data, preventing many tile effects from combining
@@ -17,6 +17,27 @@ and offscreen animation remain concrete performance targets. Source RGBA/analysi
 GPU and export scratch are outside the 8 MiB animation-index budget.
 See [the audit](research/2026-10-12-auto-performance-audit.md) and the separate
 [32/64 experiment](research/2026-10-12-auto-capacity.md) for measured costs and limits.
+
+The approved 64-color release retains the saved `generated-32` identity and All
+default, and preserves exact visible source colors up to 64 without padding.
+Generation and uncached matching can cost more with 64 candidates; the 8 MiB index
+budget, 128 KiB worker slices and full-source export rules are unchanged.
+Animated tiles outside the viewport pause their timers and subsequent palette
+conversions while retaining their frame/cache. They resume the held frame's normal
+delay on return, including 1-bit and Original; enlarged Preview remains independent.
+Stills and full-source preparation/export paths are unaffected by visibility.
+See [the release checks](research/2026-10-12-auto-64-release.md) and
+[offscreen playback](research/2026-10-12-offscreen-playback.md).
+
+User imports now load a serial worker for GIF compositing and analyze/unify, with
+acknowledged original/analysis buffer transfers. Native PNG decoding stays intact;
+the tiny demo starts no import worker. Failed workers recover from the original
+File, while canceled imports cannot publish late. Unsupported-worker fallback
+yields between frames/analyses, but one huge frame, shared unify and live-wall
+1-bit reanalysis can still block. Source and analysis storage remain unchanged.
+Single-frame non-GIF stills up to 4096 pixels use the same cooperative analysis
+through that serial queue to avoid unnecessary worker round trips.
+See [the import review](research/2026-10-12-import-worker.md).
 
 ## Generated preview and PNG source decoding (October 12, 2026)
 

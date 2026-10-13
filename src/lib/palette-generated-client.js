@@ -1,5 +1,6 @@
 import { checkCanceled } from './quantize.js';
 import { validateGeneratedSources } from './palette-generated-sources.js';
+import { GENERATED_MAX_COLORS } from './palette-library.js';
 
 const CHUNK_BYTES = 128 * 1024, pending = new Map(), completed = new Map(), queue = [];
 const EMPTY = Object.freeze({ colors: Object.freeze([]), binned: false, assets: 0 });
@@ -38,7 +39,7 @@ function runWorker(job, target) {
   });
 }
 function freezeResult(result) {
-  if (!result || !Array.isArray(result.colors) || result.colors.length > 32 || result.colors.some(color => !/^#[\da-f]{6}$/.test(color)) || new Set(result.colors).size !== result.colors.length || typeof result.binned !== 'boolean' || !Number.isSafeInteger(result.assets) || result.assets < 0 || (result.cost !== undefined && (!Number.isFinite(result.cost) || result.cost < 0)) || (result.initialCost !== undefined && (!Number.isFinite(result.initialCost) || result.initialCost < 0))) throw new Error('Invalid generated palette result.');
+  if (!result || !Array.isArray(result.colors) || result.colors.length > GENERATED_MAX_COLORS || result.colors.some(color => !/^#[\da-f]{6}$/.test(color)) || new Set(result.colors).size !== result.colors.length || typeof result.binned !== 'boolean' || !Number.isSafeInteger(result.assets) || result.assets < 0 || (result.cost !== undefined && (!Number.isFinite(result.cost) || result.cost < 0)) || (result.initialCost !== undefined && (!Number.isFinite(result.initialCost) || result.initialCost < 0))) throw new Error('Invalid generated palette result.');
   return Object.freeze({ ...result, colors: Object.freeze([...result.colors]) });
 }
 async function drain() {
