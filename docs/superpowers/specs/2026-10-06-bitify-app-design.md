@@ -2575,3 +2575,10 @@ saved original. The 320px check retains 44px header targets without horizontal o
 The preceding build's unchanged legacy/export paths pass 132 combinations, five presets
 in both matching modes and nine integration categories; final scoped route checks are
 fresh evidence. Physical-device and Safari limits remain unchanged.
+
+### Cooperative Save all scheduling (October 13)
+
+Batch exports give browser input and rendering a turn between fully encoded files.
+The gesture's captured item list and settings remain authoritative; a later file
+failure downloads no partial ZIP. One-file Save adds no batch scheduling turn.
+Individual synchronous masks and still PNG encoders retain their existing behavior.

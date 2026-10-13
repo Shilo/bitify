@@ -242,12 +242,15 @@ export const copyOne = png => navigator.clipboard.write([new ClipboardItem({ 'im
 export async function saveAll(items, image) {
   if (items.length === 1) return saveOne(await image(items[0]));
   const kinds = [], families = [], names = [], files = [];
-  for (const item of items) {
+  for (const [index, item] of items.entries()) {
     const one = await image(item);
     kinds.push(kind(one));
     families.push(one.family);
     names.push(one.name);
     files.push(await fileBytes(one));
+    // A batch of synchronous 1-bit stills must give input and rendering a turn
+    // between files. Keep final ZIP assembly and download atomic.
+    if (index + 1 < items.length) await yieldExport();
   }
   download(new Blob([zipBytes(outNames(names, kinds, families), files)], { type: 'application/zip' }), 'bitify.zip');
 }

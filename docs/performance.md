@@ -1149,3 +1149,18 @@ Against `bd9bab3` built with identical installed dependencies, initial JavaScrip
 The optional worker including its selection core is 8,841 raw / 4,203 gzip bytes. The
 cooperative fallback is 4,458 raw / 2,212 gzip bytes and loads as an alternative path.
 These are artifact sizes measured with identical gzip settings, not download timings.
+
+### October 13: cooperative batch export
+
+Save all yields through the existing posted-task scheduler between encoded files,
+before starting the next. The captured item list and settings remain unchanged;
+the ZIP downloads only after every file succeeds. Single-file Save retains its path.
+This does not make an individual still's synchronous mask/PNG encoder cooperative.
+
+Claude's physical Pixel 8 Pro measurements at `18f8dd2` found the twelve 1024×1024
+still ZIP's longest task dropped from 719–1,104 ms to 60–116 ms with between-file
+yielding; total times overlapped. The real 23-file animated wall remained
+near 350 ms because one GIF's eager masks/encoding still dominated. These are
+reviewer diagnostic measurements, not measurements of the committed production patch.
+`save-batch.test.js` checks ordering, identical PNG entries, between-file scheduling
+and no partial download on a later failure.

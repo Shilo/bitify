@@ -138,3 +138,7 @@ Queued hover work stops immediately on leave; running work waits the existing
 Completion while away still discards; invalidation/explicit cancel/destroy abort at once.
 GPL rows trim once with an unambiguous name tail. Cache policy and opacity-slider
 commits remain unchanged. See docs/research/2026-10-13-performance-stability-fixes.md.
+
+Save all yields through the posted export scheduler between encoded files. It keeps
+the captured item list/settings and downloads only a complete successful batch. An
+individual 1-bit still remains synchronous; its own long task is not eliminated.
