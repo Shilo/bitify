@@ -8,6 +8,22 @@ import { prepareCleanupAsync, applyCleanup } from './palette-cleanup.js';
 import { captureGeneratedSources } from './palette-generated-sources.js';
 
 describe('independent palette state and export snapshots', () => {
+  it('cancels a hover subscriber without canceling an independent generated export', async () => {
+    const original = { width: 1, height: 1, data: Uint8ClampedArray.of(0, 0, 0, 255) };
+    const item = { name: 'test.gif', original, frames: [{ original, delay: 100 }, { original, delay: 100 }] };
+    const asked = { colors: [], generated: captureGeneratedSources([item]), metric: 'rgb', alphaCut: 128, maxColors: 0, cleanup: true };
+    const controller = new AbortController();
+    const hover = fullPaletteImage(item, asked, { signal: controller.signal });
+    const saved = fullPaletteImage(item, asked);
+    controller.abort();
+    await expect(hover).rejects.toMatchObject({ name: 'AbortError' });
+    const result = await saved;
+    expect([...(await result.getFrame(1)).indices]).toEqual([0]);
+    const replayController = new AbortController();
+    const replay = await fullPaletteImage(item, asked, { signal: replayController.signal });
+    replayController.abort();
+    await expect(replay.getFrame(0)).rejects.toMatchObject({ name: 'AbortError' });
+  });
   it('restores the generated source identity without persisting generated colors', () => {
     expect(restorePaletteState(JSON.stringify({family:'full-palette',paletteId:'generated-32'})).paletteId).toBe('generated-32');
   });

@@ -4,8 +4,46 @@ import omggif from 'omggif';
 import { unzipSync } from 'fflate';
 import { palettePngBytes, palettePngBytesAsync, pngBytes, pngBlob, fileBytes, downloadName, outNames, saveAll } from './save.js';
 import { encodePaletteGif } from './gif.js';
+import { yieldExport } from './palette-export.js';
 
 const colors = count => Array.from({ length: count }, (_, i) => `#${i.toString(16).padStart(2, '0')}00${(255 - i).toString(16).padStart(2, '0')}`);
+describe('export scheduling and cancellation', () => {
+  it('uses posted tasks with closed ports and retains the unsupported-channel timer fallback', async () => {
+    const close1 = vi.fn(), close2 = vi.fn();
+    vi.stubGlobal('MessageChannel', class { constructor() {
+      this.port1 = { close: close1 }; this.port2 = { close: close2, postMessage: () => queueMicrotask(() => this.port1.onmessage()) };
+    } });
+    await yieldExport(); expect(close1).toHaveBeenCalledOnce(); expect(close2).toHaveBeenCalledOnce();
+    vi.stubGlobal('MessageChannel', undefined); await yieldExport();
+    vi.unstubAllGlobals();
+  });
+  it('cancels before PNG/GIF work and between replayed frames', async () => {
+    const controller = new AbortController(); controller.abort();
+    await expect(fileBytes({}, { signal: controller.signal })).rejects.toMatchObject({ name: 'AbortError' });
+    const during = new AbortController(), getFrame = vi.fn(async () => {
+      during.abort(); return { indices: Uint16Array.of(0), delay: 100 };
+    });
+    await expect(encodePaletteGif({ colors: colors(2), w: 1, h: 1, frameCount: 3, getFrame }, { signal: during.signal })).rejects.toMatchObject({ name: 'AbortError' });
+    expect(getFrame).toHaveBeenCalledOnce();
+  });
+  it('terminates a GIF compressor waiting for a frame acknowledgement on cancellation', async () => {
+    let worker;
+    vi.stubGlobal('Worker', class {
+      constructor() { worker = this; this.terminate = vi.fn(); }
+      postMessage(message) {
+        if (message.type === 'start') queueMicrotask(() => this.onmessage?.({ data: {} }));
+        if (message.type === 'frame') this.pendingFrame = true;
+      }
+    });
+    const controller = new AbortController();
+    const pending = encodePaletteGif({ colors: colors(2), w: 1, h: 1, frames: [{ indices: Uint16Array.of(0), delay: 100 }] }, { signal: controller.signal });
+    const rejected = expect(pending).rejects.toMatchObject({ name: 'AbortError' });
+    await vi.waitFor(() => expect(worker?.pendingFrame).toBe(true)); controller.abort(); await rejected;
+    expect(worker.terminate).toHaveBeenCalled();
+    expect(worker.onmessage).toBeNull(); expect(worker.onmessageerror).toBeNull();
+    vi.unstubAllGlobals();
+  });
+});
 const still = (palette, values, w = values.length) => ({ family: 'full-palette', name: 'sprite.png', colors: palette, indices: Uint16Array.from(values), w, h: values.length / w });
 const rgba = (palette, values) => values.flatMap(index => index === 256 ? [0, 0, 0, 0] : [parseInt(palette[index].slice(1, 3), 16), parseInt(palette[index].slice(3, 5), 16), parseInt(palette[index].slice(5, 7), 16), 255]);
 

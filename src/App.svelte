@@ -642,8 +642,8 @@
     generated: family === 'full-palette' && generatedActive ? generatedRequest : null, first: ink[0], second: ink[1], style, set });
   const about = (item, asked) => ({ name: item.name, w: item.img.w, h: item.img.h, first: asked.first, second: asked.second });
   const still = (item, asked) => asked.family === 'full-palette' ? fullPaletteImage(item, asked, { still: true }) : ({ ...about(item, asked), mask: mask(item.img, asked.style, asked.set) });
-  const bitified = (item, asked) =>
-    asked.family === 'full-palette' ? fullPaletteImage(item, asked) : item.frames
+  const bitified = (item, asked, options) =>
+    asked.family === 'full-palette' ? fullPaletteImage(item, asked, options) : item.frames
       ? { ...about(item, asked), loop: item.loop, frames: item.frames.map(f => ({ mask: mask(f.img, asked.style, asked.set), delay: f.delay })) }
       : still(item, asked);
 
@@ -656,12 +656,12 @@
       if (generatedUnavailable) return null;
       return { item: live, snapshot, key: JSON.stringify({ ...snapshot, generated: snapshot.generated?.key }) };
     },
-    async prepare({ item, snapshot }) {
+    async prepare({ item, snapshot }, { signal }) {
       // Reread is synchronous and reads the current analysis settings. Do this
       // before yielding; the controller acquired snapshot in this same task.
       const read = snapshot.family === 'full-palette' ? item : reread(item);
-      const image = await bitified(read, snapshot);
-      const bytes = await fileBytes(image);
+      const image = await bitified(read, snapshot, { signal });
+      const bytes = await fileBytes(image, { signal });
       const name = downloadName(image).replace(/[<>:"/\\|?*\x00-\x1f]/g, '-');
       const type = image.frames || image.getFrame ? 'image/gif' : 'image/png';
       const file = new File([bytes], name, { type });

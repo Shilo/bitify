@@ -1,6 +1,7 @@
 import { zipSync, zlibSync, zlib } from 'fflate';
 import { hexToRgb } from './bitify.js';
 import { exportPalette, markUsed, markUsedAsync, compactTable, EMPTY_INDEX, yieldExport } from './palette-export.js';
+import { checkCanceled } from './quantize.js';
 
 // Output file names for a list of original names: extension replaced by "-1bit.png", or
 // "-1bit.gif" where `kinds` says 'gif', with -2, -3... added so no two outputs collide
@@ -41,7 +42,8 @@ function chunk(type, data) {
   return out;
 }
 
-async function chunkAsync(type, data) {
+async function chunkAsync(type, data, signal) {
+  checkCanceled(signal);
   const out = new Uint8Array(12 + data.length), view = new DataView(out.buffer);
   view.setUint32(0, data.length);
   out.set([...type].map(ch => ch.charCodeAt(0)), 4);
@@ -49,6 +51,7 @@ async function chunkAsync(type, data) {
   let crc = ~0;
   const end = 8 + data.length, batch = 262144;
   for (let start = 4; start < end; start += batch) {
+    checkCanceled(signal);
     for (let at = start, stop = Math.min(end, start + batch); at < stop; at++) crc = CRC_TABLE[(crc ^ out[at]) & 255] ^ (crc >>> 8);
     if (start + batch < end) await yieldExport();
   }
@@ -154,17 +157,40 @@ export function palettePngBytes(image) {
 
 // New-family jobs pack bounded row batches and compress in fflate's worker.
 // Legacy pngBytes remains the existing synchronous, byte-identical path.
-export async function palettePngBytesAsync(image) {
+export async function palettePngBytesAsync(image, { signal } = {}) {
+  checkCanceled(signal);
   const state = exportPalette(image);
-  await markUsedAsync(image.indices, state);
+  await markUsedAsync(image.indices, state, { signal });
   const layout = palettePngLayout(image, state);
   const batch = Math.max(1, Math.floor(65536 / image.w));
   for (let y = 0; y < image.h; y += batch) {
+    checkCanceled(signal);
     packPaletteRows(image, layout, y, Math.min(image.h, y + batch));
     if (y + batch < image.h) await yieldExport();
   }
-  const compressed = await new Promise((resolve, reject) => zlib(layout.rows, { level: 3, consume: true }, (error, data) => error ? reject(error) : resolve(data)));
-  return assemblePng([...layout.parts, await chunkAsync('IDAT', compressed), chunk('IEND', new Uint8Array(0))]);
+  checkCanceled(signal);
+  const compressed = await new Promise((resolve, reject) => {
+    let terminate, settled = false;
+    const finish = (error, data) => {
+      if (settled) return; settled = true;
+      signal?.removeEventListener('abort', cancel);
+      error ? reject(error) : resolve(data);
+    };
+    const cancel = () => {
+      if (settled) return;
+      terminate?.(); finish(new DOMException('The export was canceled.', 'AbortError'));
+    };
+    signal?.addEventListener('abort', cancel, { once: true });
+    try {
+      terminate = zlib(layout.rows, { level: 3, consume: true }, (error, data) => {
+        if (signal?.aborted) { cancel(); return; }
+        finish(error, data);
+      });
+    } catch (error) { finish(error); }
+  });
+  const idat = await chunkAsync('IDAT', compressed, signal);
+  checkCanceled(signal);
+  return assemblePng([...layout.parts, idat, chunk('IEND', new Uint8Array(0))]);
 }
 
 function download(blob, filename) {
@@ -183,7 +209,15 @@ const kind = image => (image.frames || image.getFrame ? 'gif' : 'png');
 // The filename offered to the browser for one image; shared with the toast so its text matches the download.
 export const downloadName = image => outNames([image.name], [kind(image)], [image.family])[0];
 // The GIF code is loaded only when an animation is saved, which keeps it out of the first download.
-export const fileBytes = async image => (kind(image) === 'gif' ? (await import('./gif.js')).encodeGif(image) : image.colors ? palettePngBytesAsync(image) : pngBytes(image));
+export const fileBytes = async (image, { signal } = {}) => {
+  checkCanceled(signal);
+  if (kind(image) === 'gif') {
+    const gif = await import('./gif.js');
+    checkCanceled(signal);
+    return gif.encodeGif(image, { signal });
+  }
+  return image.colors ? palettePngBytesAsync(image, { signal }) : pngBytes(image);
+};
 
 export async function saveOne(image) {
   download(new Blob([await fileBytes(image)], { type: 'image/' + kind(image) }), downloadName(image));

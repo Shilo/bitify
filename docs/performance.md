@@ -1,5 +1,26 @@
 # Performance
 
+## Reviewed scheduling and recovery (October 13, 2026)
+
+Palette export yields reuse matching's posted-task primitive, retaining its timer
+fallback. A Tile keeps one completed-input record for its existing pixels:
+unchanged Original/viewer return reuses them without conversion. Changed source,
+frame, sample size, palette subset, matching, alpha or cleanup require current work.
+Single-frame GIFs keep native still decoding followed by unpublished analysis on
+the same healthy serial worker, avoiding worker churn and main-thread reanalysis.
+Unreadable worker messages use existing terminal rejection/recovery semantics.
+
+Leaving or superseding desktop hover cancels only its preparation, including
+matching, cleanup and PNG/GIF compression. Shared Save/preview consumers and native
+drag grace records survive. Module downloads cannot be canceled, but do not block
+the next hover or start obsolete source jobs afterward; late URLs are released.
+Legacy synchronous masks/codecs remain a separate candidate. GPL rows trim once
+and avoid ambiguous whitespace backtracking; tests use a killable child process.
+
+The 8 MiB cache policy and opacity-slider commits remain unchanged. Measured rAF
+rate does not prove every clip smooth or bound memory. See
+[the fix record](research/2026-10-13-performance-stability-fixes.md).
+
 ## Auto tooltip and wall scheduling (October 12, 2026)
 
 Auto is the visible name of the existing generated source, now capped at 64.

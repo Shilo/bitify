@@ -1,5 +1,6 @@
 // Exact export helpers shared by PNG and GIF. Index 256 is empty; color indexes
 // retain the selected palette's order. No canvas readback or color reduction.
+import { yieldTask, checkCanceled } from './quantize.js';
 export const EMPTY_INDEX = 256;
 
 export function exportPalette(image) {
@@ -41,13 +42,16 @@ function markRange(indices, state, start, end) {
   }
 }
 
-export async function markUsedAsync(indices, state) {
+export async function markUsedAsync(indices, state, { signal } = {}) {
+  checkCanceled(signal);
   validateIndices(indices, state);
   const batch = 262144;
   for (let p = 0; p < indices.length; p += batch) {
+    checkCanceled(signal);
     markRange(indices, state, p, Math.min(indices.length, p + batch));
     if (p + batch < indices.length) await yieldExport();
   }
+  checkCanceled(signal);
 }
 
 export function compactTable({ rgb, used }) {
@@ -62,4 +66,4 @@ export function compactTable({ rgb, used }) {
   return { map, table, transparent };
 }
 
-export const yieldExport = () => new Promise(resolve => setTimeout(resolve, 0));
+export const yieldExport = yieldTask;

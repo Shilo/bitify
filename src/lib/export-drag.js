@@ -30,6 +30,7 @@ export function createExportDrag({ request, prepare, notify,
   function valid(record) { return same(record?.request, record && request(record.request.item)); }
   function schedule() {
     clearTimeout(timer);
+    if (running && !same(running.asked, desired && request(desired))) running.controller.abort();
     if (disposed || running || active || !desired) return;
     const asked = request(desired);
     if (!asked) { desired = null; publish(); return; }
@@ -42,33 +43,48 @@ export function createExportDrag({ request, prepare, notify,
     if (disposed || running || active || !desired) return;
     const asked = request(desired);
     if (!asked) return;
-    running = asked;
+    const controller = new AbortController();
+    const operation = { asked, controller };
+    running = operation;
     try {
       // prepare starts synchronously: App's reread must precede its first await.
-      const result = await prepare(asked);
+      // Module imports cannot be canceled. Free the hover queue immediately on
+      // abort, while releasing any file URL an obsolete preparation returns later.
+      const result = await new Promise((resolve, reject) => {
+        const signal = controller.signal;
+        const cancel = () => { signal.removeEventListener('abort', cancel); reject(new DOMException('The drag preparation was canceled.', 'AbortError')); };
+        signal.addEventListener('abort', cancel, { once: true });
+        try {
+          Promise.resolve(prepare(asked, { signal })).then(result => {
+            signal.removeEventListener('abort', cancel);
+            if (signal.aborted) release(result);
+            else resolve(result);
+          }, error => { signal.removeEventListener('abort', cancel); reject(error); });
+        } catch (error) { signal.removeEventListener('abort', cancel); reject(error); }
+      });
       const record = { ...result, request: asked };
-      if (disposed || !desired || !same(asked, request(desired))) {
+      if (controller.signal.aborted || disposed || !desired || !same(asked, request(desired))) {
         release(record);
       } else {
         discardReady(); ready = record;
         publish();
       }
     } catch {
-      if (!disposed && desired && same(asked, request(desired))) {
+      if (!controller.signal.aborted && !disposed && desired && same(asked, request(desired))) {
         desired = null; publish();
         notify('Could not prepare drag export. Use Save for details.');
       }
     } finally {
-      running = null;
+      if (running === operation) running = null;
       if (!disposed && desired && !ready) schedule();
     }
   }
   return {
-    readyFor(item) { return !disposed && same(ready?.request, request(item)) ? ready : null; },
+    readyFor(item) { return !disposed && ready && same(ready.request, request(item)) ? ready : null; },
     subscribe(observer) { observers.add(observer); observer(); return () => observers.delete(observer); },
     hover(item) { if (disposed) return; desired = item; schedule(); },
-    cancelHover() { desired = null; clearTimeout(timer); if (!active) publish(); },
-    leave(item) { if (desired?.id === item.id) { desired = null; clearTimeout(timer); if (!active) publish(); } },
+    cancelHover() { desired = null; clearTimeout(timer); running?.controller.abort(); if (!active) publish(); },
+    leave(item) { if (desired?.id === item.id) { desired = null; clearTimeout(timer); running?.controller.abort(); if (!active) publish(); } },
     refresh() {
       if (disposed) return;
       if (ready && !valid(ready)) { discardReady(); publish(); }
@@ -125,6 +141,7 @@ export function createExportDrag({ request, prepare, notify,
     isOwn(transfer) { return !!active || Array.from(transfer?.types ?? []).includes(EXPORT_DRAG_TYPE); },
     destroy() {
       disposed = true; desired = null; clearTimeout(timer);
+      running?.controller.abort();
       const records = new Set([ready, active, ...retired.keys()]);
       for (const timeout of retired.values()) clearTimeout(timeout);
       for (const record of records) release(record);

@@ -64,8 +64,9 @@ export async function decodeGifAsync(bytes, { signal } = {}) {
 // one byte per pixel: 0 empty, 1 first color, 2 second color (the output of bitify's `mask`),
 // which are used directly as palette indexes. Colors are '#rrggbb', or null for a color that is
 // None. A GIF frame has one see-through index, 0, so that color's pixels are written as 0 too.
-export function encodeGif(image) {
-  if (image.colors) return encodePaletteGif(image);
+export function encodeGif(image, { signal } = {}) {
+  checkCanceled(signal);
+  if (image.colors) return encodePaletteGif(image, { signal });
   const { w, h, frames, first, second, loop } = image;
   const color = hex => (hex ? parseInt(hex.slice(1), 16) : 0);
   const gone = first ? (second ? 0 : 2) : 1; // the index of the color that is None, or 0
@@ -85,7 +86,8 @@ export function encodeGif(image) {
 // A replayable async getFrame(index) keeps only one converted Uint16 frame in
 // memory. The first pass finds the stable global table; the second encodes.
 // Callers snapshot the palette, source frames and conversion at the save click.
-export async function encodePaletteGif(image) {
+export async function encodePaletteGif(image, { signal } = {}) {
+  checkCanceled(signal);
   const state = exportPalette(image);
   const { w, h, loop } = image;
   if (w > 65535 || h > 65535) throw new Error('GIF dimensions cannot exceed 65535 pixels.');
@@ -95,9 +97,11 @@ export async function encodePaletteGif(image) {
   const getFrame = image.getFrame ?? (i => image.frames[i]);
   const delays = new Float64Array(count);
   for (let i = 0; i < count; i++) {
+    checkCanceled(signal);
     const frame = await getFrame(i);
+    checkCanceled(signal);
     if (!frame || !Number.isFinite(frame.delay) || frame.delay < 0 || frame.delay > 655350) throw new Error('Invalid GIF frame delay.');
-    await markUsedAsync(frame.indices, state);
+    await markUsedAsync(frame.indices, state, { signal });
     delays[i] = frame.delay;
     if (i + 1 < count) await yieldExport();
   }
@@ -113,16 +117,20 @@ export async function encodePaletteGif(image) {
   while (padded < table.length) padded *= 2;
   while (table.length < padded) table.push(0);
   const options = { w, h, table, transparent, loop };
-  const writer = typeof Worker === 'undefined' ? createPaletteGifWriter(options) : await paletteGifWorker(options);
+  checkCanceled(signal);
+  const writer = typeof Worker === 'undefined' ? createPaletteGifWriter(options) : await paletteGifWorker(options, signal);
   try {
     for (let i = 0; i < count; i++) {
+      checkCanceled(signal);
       const frame = await getFrame(i);
+      checkCanceled(signal);
       if (!frame || frame.delay !== delays[i]) throw new Error('The animation changed while it was being exported.');
       // Validate again: a broken/replaced frame source must never silently map
       // an unexpected color to slot zero.
       if (!(frame.indices instanceof Uint16Array) || frame.indices.length !== state.pixels) throw new Error('Invalid palette image indices.');
       const indexed = new Uint8Array(state.pixels), batch = 262144;
       for (let start = 0; start < indexed.length; start += batch) {
+        checkCanceled(signal);
         for (let p = start, end = Math.min(indexed.length, start + batch); p < end; p++) {
           const index = frame.indices[p];
           if (index > EMPTY_INDEX || !state.used[index]) throw new Error('The animation changed while it was being exported.');
@@ -135,6 +143,7 @@ export async function encodePaletteGif(image) {
       await writer.add(indexed, frame.delay);
       if (i + 1 < count) await yieldExport();
     }
+    checkCanceled(signal);
     return await writer.end();
   } finally {
     writer.close();
@@ -166,7 +175,8 @@ export function createPaletteGifWriter({ w, h, table, transparent, loop }) {
   };
 }
 
-async function paletteGifWorker(options) {
+async function paletteGifWorker(options, signal) {
+  checkCanceled(signal);
   const worker = new Worker(new URL('./palette-gif-worker.js', import.meta.url), { type: 'module' });
   let pending = null, failure = null;
   const fail = error => {
@@ -174,6 +184,9 @@ async function paletteGifWorker(options) {
     pending?.reject(error);
     pending = null;
   };
+  const cancel = () => { fail(new DOMException('The export was canceled.', 'AbortError')); worker.terminate(); };
+  const close = () => { signal?.removeEventListener('abort', cancel); worker.onmessage = worker.onerror = worker.onmessageerror = null; worker.terminate(); };
+  signal?.addEventListener('abort', cancel, { once: true });
   worker.onmessage = ({ data }) => {
     if (data.error) { fail(new Error(data.error)); return; }
     pending?.resolve(data.bytes);
@@ -182,6 +195,7 @@ async function paletteGifWorker(options) {
   worker.onerror = event => fail(new Error(event.message || 'GIF export worker failed.'));
   worker.onmessageerror = () => fail(new Error('GIF export worker returned unreadable data.'));
   const request = (message, transfer = []) => new Promise((resolve, reject) => {
+    if (signal?.aborted) { cancel(); }
     if (failure) { reject(failure); return; }
     pending = { resolve, reject };
     try { worker.postMessage(message, transfer); } catch (error) { fail(error); }
@@ -191,10 +205,10 @@ async function paletteGifWorker(options) {
     return {
       add: (indices, delay) => request({ type: 'frame', indices, delay }, [indices.buffer]),
       end: () => request({ type: 'end' }),
-      close: () => worker.terminate(),
+      close,
     };
   } catch (error) {
-    worker.terminate();
+    close();
     throw error;
   }
 }

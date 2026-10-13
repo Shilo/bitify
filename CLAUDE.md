@@ -124,3 +124,14 @@ After a git checkout or merge the dev server can keep serving old CSS. Restart i
 The loops in bitify.js run once for every pixel of a photo, on phones. Keep them flat, with no array, object or function made per pixel, and time them before and after any change there: node bench/bench.mjs. To check that a change leaves every mask as it was, copy the file to bench/bitify.old.js before the change and run node bench/equiv.mjs after it. docs/performance.md has the rest, including how to measure the app in a browser and on a phone.
 
 The shared tooltip action (src/lib/tooltip.js) has unit tests for pointer sequences, timing, dynamic text, accessibility and dialog cleanup. All tooltips use it; do not add native title attributes. Check interface behavior in a browser at desktop width and at phone width with touch emulation.
+
+October 13 fixes reuse posted export tasks and a Tile's one completed-input record;
+unchanged Original/viewer return does not reconvert stills. Changed inputs and
+canceled pending requests still require fresh current readiness. Single-frame GIFs
+use native browser decoding then analysis on the same healthy serial import worker.
+All four clients terminate unreadable-message jobs with settled-event guards and
+existing recovery. Hover preparation cancellation reaches palette matching and
+encoding without canceling explicit Save or native drag grace records. Module
+downloads may finish late but cannot block a newer hover or publish stale URLs.
+GPL rows trim once with an unambiguous name tail. Cache policy and opacity-slider
+commits remain unchanged. See docs/research/2026-10-13-performance-stability-fixes.md.

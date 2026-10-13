@@ -1,5 +1,5 @@
 import { FULL_PRESETS, DEFAULT_FULL_PALETTE, GENERATED_PALETTE_ID } from './palette-library.js';
-import { preparePalette, quantizeAsync, validateMatchingMetric } from './quantize.js';
+import { preparePalette, quantizeAsync, validateMatchingMetric, checkCanceled } from './quantize.js';
 import { getLimitedPalette } from './palette-limit-client.js';
 
 function maxColorsOf(value = 0) {
@@ -34,7 +34,8 @@ export function conversionSnapshot({ family, palette, alphaCut, metric, maxColor
     : Object.freeze({ family: 'two-color', first, second, style, set: Object.freeze({ ...set }) });
 }
 
-export async function fullPaletteImage(item, asked, { still = false } = {}) {
+export async function fullPaletteImage(item, asked, { still = false, signal } = {}) {
+  checkCanceled(signal);
   // Own scalar preferences and source/frame references before subset preparation
   // yields. Still copies of GIFs select from the same full animation as Save.
   const metric = validateMatchingMetric(asked.metric), alphaCut = asked.alphaCut, maxColors = maxColorsOf(asked.maxColors), cleanup = asked.cleanup === true;
@@ -46,20 +47,21 @@ export async function fullPaletteImage(item, asked, { still = false } = {}) {
   const generated = asked.generated;
   if (generated) {
     const client = await import('./palette-generated-client.js');
-    colors = (await client.getGeneratedPalette(generated)).colors;
+    colors = (await client.getGeneratedPalette(generated, { signal })).colors;
     if (!colors.length) throw new Error('No visible colors. Add images or lower Opacity cut.');
   }
   let palette = preparePalette(colors);
-  if (maxColors && maxColors < palette.size) palette = await getLimitedPalette(item, palette, alphaCut, metric, maxColors, { sourceItem });
+  checkCanceled(signal);
+  if (maxColors && maxColors < palette.size) palette = await getLimitedPalette(item, palette, alphaCut, metric, maxColors, { sourceItem, signal });
   let clean, applyCleanupAsync;
   if (cleanup) {
     const client = await import('./palette-cleanup-client.js');
-    clean = await client.getPaletteCleanup(item, palette, alphaCut, metric, { sourceItem });
+    clean = await client.getPaletteCleanup(item, palette, alphaCut, metric, { sourceItem, signal });
     applyCleanupAsync = client.applyCleanupAsync;
   }
   const convert = async source => {
-    const result = await quantizeAsync(source, palette, alphaCut, undefined, undefined, { metric });
-    return clean ? await applyCleanupAsync(result, clean) : result;
+    const result = await quantizeAsync(source, palette, alphaCut, undefined, undefined, { metric, signal });
+    return clean ? await applyCleanupAsync(result, clean, { signal }) : result;
   };
   const about = { family: 'full-palette', colors: palette.colors, metric, maxColors, cleanup, name, w: original.width, h: original.height };
   if (frames && !still) {

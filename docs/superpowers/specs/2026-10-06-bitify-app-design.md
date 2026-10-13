@@ -1,5 +1,31 @@
 # Bitify design
 
+## Reviewed performance contracts — October 13, 2026
+
+The unchanged successful palette rendering of a Tile may be reused after Original,
+viewer or visibility pause only when source/frame, sample size, palette/subset,
+matching, alpha and cleanup inputs match. Pending/canceled or changed inputs never
+restore readiness from an old rendering. Keep one identity record for the already
+retained pixels, without a new still-image cache or additional pixel buffer.
+
+Palette export packing yields through the existing posted-task primitive, retaining
+the unsupported-MessageChannel timer fallback and exact output/timing contracts.
+Single-frame GIFs preserve native/browser still pixels; analysis stays on the same
+serial import worker following a controlled single-frame response. Unreadable
+worker messages terminate/release the affected job through existing failure and
+recovery rules; canceled imports never fall back or publish.
+
+Desktop hover preparation cancels on leave, supersession, settings invalidation or
+destroy. Cancellation releases its own subscribers and compressor, preserving
+independent Save/preview work and native active/grace records. Noncancelable module
+downloads cannot block a newer hover; late results release their URLs and cannot
+publish. Overlapping explicit exports, animation cache policy and opacity-slider
+commits remain unchanged. GPL RGB import avoids ambiguous whitespace backtracking.
+
+See docs/research/2026-10-13-performance-stability-fixes.md for verification and
+remaining review items. These contracts supersede earlier performance wording
+where it implies every Original/viewer transition must reconvert.
+
 Date: 2026-10-06
 Status: Floating islands adopted October 9, 2026; full palette family added October 11, 2026. The adoption sections below supersede historical visual references and the original two-color-only scope.
 
