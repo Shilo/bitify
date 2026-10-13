@@ -1,4 +1,5 @@
 <script>
+  import { untrack } from 'svelte';
   import { mask, colorize, shrink, spritesOf, iconOf } from './lib/bitify.js';
   import { shown } from './lib/layout.js';
   import Pixels from './Pixels.svelte';
@@ -16,7 +17,7 @@
   // Without `onremove` the tile is a preview only and has no buttons.
   // `set` is the style's settings. `budget` is set while one of their sliders is being dragged:
   // the milliseconds this tile may take to convert its image after each move.
-  let { item, first, second, style, set, family = 'two-color', palette, alphaCut = 128, metric = 'oklab', maxColors = 0, cleanup = false, active = true, exportDisabled = false, onpaletteerror, flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false, exportDrag } = $props();
+  let { item, first, second, style, set, family = 'two-color', palette, palettePending = false, alphaCut = 128, metric = 'oklab', maxColors = 0, cleanup = false, active = true, exportDisabled = false, onpaletteerror, flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false, exportDrag } = $props();
   let held = $state(false);
   const originalVisible = $derived(oncompare ? flipped : flipped !== held);
   let holdTimer;
@@ -175,7 +176,7 @@
     // Keep the last completed frame while the next frame or settings convert.
     // Clearing it on every async frame removes the canvas and exposes the grid.
     // Readiness still belongs to the requested frame, not these retained pixels.
-    if (family !== 'full-palette' || fullItem !== item || !palette) fullPixels = null;
+    if (family !== 'full-palette' || fullItem !== item || !palette && !palettePending) fullPixels = null;
     fullItem = item;
     if (family !== 'full-palette' || !width || !colors || cleanup && !clean || originalVisible || !active) return;
     const controller = new AbortController();
@@ -193,11 +194,11 @@
     }).catch(error => { if (error.name !== 'AbortError') console.error('Palette preview failed', error); });
     return () => controller.abort();
   });
-  const pixels = $derived.by(() => {
+  const completedPixels = $derived.by(() => {
     if (!mw) return null;
     const frame = frames[at];
     if (originalVisible) return (originals[at] ??= mw < item.img.w ? new ImageData(shrink(frame.original, mw, mh), mw) : frame.original);
-    if (family === 'full-palette') return fullPixels;
+    if (family === 'full-palette') return fullItem === item ? fullPixels : null;
     if (!masks[at]) {
       // Stencil's first conversion of an image walks all of it, once. That is not the pace of a conversion, so it is done before the clock starts.
       if (style === 'stencil') spritesOf(frame.img);
@@ -208,6 +209,18 @@
     }
     return (colored[at] ??= new ImageData(colorize(masks[at], first, second), mw));
   });
+  // The first Generated selection has no palette yet. Retain an already painted
+  // conversion of this same item, including a prior 1-bit conversion, while it loads.
+  // Originals remain explicit; a resolved empty result must expose transparency.
+  let lastConverted = $state.raw(null);
+  $effect(() => {
+    const completed = completedPixels, currentItem = item;
+    if (completed && !originalVisible) lastConverted = { item: currentItem, pixels: completed };
+    else if (family === 'full-palette' && !palettePending && !palette
+      || untrack(() => lastConverted?.item) !== currentItem) lastConverted = null;
+  });
+  const pixels = $derived(completedPixels ?? (!originalVisible && family === 'full-palette' && (palettePending || palette && !fullReady)
+    && lastConverted?.item === item ? lastConverted.pixels : null));
 
   // Plays an animation: after the current frame's delay, step to the next and start again.
   $effect(() => {

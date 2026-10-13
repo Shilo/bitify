@@ -1919,12 +1919,20 @@ loads lazily and samples all successfully decoded wall assets and every composit
 animation frame. It publishes one immutable revision of up to 32 opaque RGB colors;
 fewer unique visible colors are retained exactly. The fixed Oklab fit uses bounded
 histograms and six refinements; it is a heuristic, not semantic cleanup or a global optimum.
+With no real wall assets, generation uses the ready animated demo. A nonempty real
+wall remains authoritative even when all its pixels are invisible at the opacity cut;
+the demo must not supply colors in that case.
 
 Each nonempty asset contributes equal total mass. GIF visible pixels are duration
 weighted within that asset; loop counts do not affect fitting. Sources, frame durations
 and Opacity cut refresh generation. Matching, Max colors, Cleanup, playback, wall order,
 layout and Original comparison do not. All retains its existing meaning; per-image
 caps select from the shared generated colors.
+During initial generation and the subsequent conversion handoff, keep the last completed
+converted rendering of the same item, including an existing 1-bit preview. Original
+comparison stays explicit. An item replacement cannot reuse another item's rendering.
+Completed empty results clear the retained preview; animation readiness still belongs
+to the requested converted frame, and canceled jobs cannot publish late.
 
 Retain the last completed palette while updating, with brief source status. Initial
 empty/wholly invisible inputs produce zero colors and disable Save/Copy/Edit; completed
@@ -2154,7 +2162,14 @@ URLs are unsupported; their existing local file and text routes remain available
 Local supported images are
 up to 32 MiB and 16 × 1024 × 1024 decoded pixels. GIF uses the first frame with a notice.
 Browser decoding yields color-managed sRGB values; exactness concerns those decoded
-values, not arbitrary original color-profile bytes. The browser can allocate decode
+values, not arbitrary original color-profile bytes. Artwork and palette-image import
+share `image-decode.js`: PNG uses native ImageDecoder when supported and copies its
+frame directly to straight RGBA/sRGB, avoiding canvas readback noise and alpha round-trip
+rounding. Native capability, decoding/copy errors or presentation transforms fall back
+to the existing color-managed bitmap/canvas path. Other image formats retain that path;
+the existing multi-frame GIF decoder is unchanged. Both paths honor cancellation,
+palette pixel limits and resource cleanup. No colors are heuristically rounded or merged.
+The browser can allocate decode
 buffers before dimensions are exposed.
 
 Supported text is HEX/TXT, legacy RGB GPL and text JASC-PAL version 0100, up to 256 KiB.

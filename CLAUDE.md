@@ -50,6 +50,18 @@ Max colors controls run from 2 to the active palette's color count, displaying t
 
 ## Things that bite
 
+Artwork and palette-image import share `image-decode.js`. PNG prefers native
+ImageDecoder and straight RGBA/sRGB copyTo, avoiding canvas readback noise without
+merging colors. Capability/errors/transforms fall back to the existing bitmap/canvas
+decoder; other formats and the independent GIF decoder keep their paths. Release all
+decoder/frame/bitmap/canvas resources, preserve cancellation and palette pixel limits.
+Generated's empty wall uses the ready animated demo; an invisible nonempty real wall
+must remain authoritative. Pending generation and conversion handoff retain the same
+item's completed preview, including a prior 1-bit conversion, with current-frame
+readiness still gating animation. See
+docs/research/2026-10-12-generated-preview-decoding.md for reproduced source noise and
+preview gaps, the fix, and cache/export work that remains per frame.
+
 Generated 32 is an explicit lazy source after the nine full presets, before the saved
 library. It fits one shared palette from all wall sources/animation frames, with equal
 nonempty asset mass and duration weighting inside each GIF. Only sources/durations and

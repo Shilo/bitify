@@ -1,5 +1,32 @@
 # Performance
 
+## Generated preview and PNG source decoding (October 12, 2026)
+
+Generated 32 uses the animated demo only for an empty wall, including a persisted
+Generated selection and clearing the last real image. A wholly invisible real wall
+remains authoritative and yields zero colors. The initial request and conversion
+handoff retain an already completed conversion of the same item; pending work does
+not remove its canvas. This is display continuity, not reduced generation cost.
+
+Artwork and palette-image import share native PNG ImageDecoder/copyTo RGBA/sRGB when
+supported. It streams the file and avoids a canvas readback/premultiplied-alpha round
+trip, without adding a PNG parser or color-merging heuristic. Native capability/errors
+and transformed frames fall back to the previous bitmap/canvas decoder. Other formats
+and the independent animated GIF decoder retain their paths. Native/frame/bitmap/canvas
+resources close on completion, failure and cancellation; palette import limits remain.
+The supplied two-color PNG had eight visible colors after physical-phone canvas
+readback, but exactly its two original colors through native decoding. This fixes
+source corruption rather than altering Generated 32's exact-color rule.
+
+Admitted animation clips quantize each sampled frame on its first visit and retain
+indexes within the 8 MiB budget. Colorization and canvas upload still happen each
+displayed frame. Over-budget clips quantize again on revisits. Generation, palette
+limiting and guarded cleanup are shared whole-source/clip preparations. Full GIF
+export intentionally converts two sequential passes: used-table preflight, then
+encoding with worker backpressure; it does not retain a full native RGBA bake.
+See [the decoding and preview record](research/2026-10-12-generated-preview-decoding.md)
+for reproduction, browser evidence and limits.
+
 ## Palette performance implementation (October 12, 2026)
 
 Max colors reuses nearest error for repeated exact histogram RGBs, preserving original

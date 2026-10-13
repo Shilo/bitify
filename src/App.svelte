@@ -11,6 +11,7 @@
   import { createExportDrag, isMobileExportDevice } from './lib/export-drag.js';
   import { imageGesture } from './lib/image-gesture.js';
   import { hasImageDrop, droppedImages, fetchDroppedImage } from './lib/image-drop.js';
+  import { decodeImageFile } from './lib/image-decode.js';
   import CanvasGrid from './CanvasGrid.svelte';
   import Dock from './Dock.svelte';
   import Tile from './Tile.svelte';
@@ -18,7 +19,7 @@
   import ImageViewer from './ImageViewer.svelte';
   import PaletteImport from './PaletteImport.svelte';
   import { FULL_PRESETS, DEFAULT_FULL_PALETTE, GENERATED_PALETTE, GENERATED_PALETTE_ID, LIBRARY_KEY, restoreLibrary, savePalette, deletePalette, newPaletteName } from './lib/palette-library.js';
-  import { captureGeneratedSources } from './lib/palette-generated-sources.js';
+  import { captureGeneratedWallSources } from './lib/palette-generated-sources.js';
   import { preparePalette } from './lib/quantize.js';
   import { restorePaletteState, conversionSnapshot, fullPaletteImage } from './lib/palette-state.js';
   import { tooltip } from './lib/tooltip.js';
@@ -203,17 +204,20 @@
   let dragging = $state(false);
   // raw: items hold large typed arrays, and the list is only ever replaced, never mutated
   let items = $state.raw([]);
-  const generatedRequest = $derived(generatedActive ? captureGeneratedSources(items, alphaCut) : null);
-  const generatedNotice = $derived(family !== 'full-palette' || !generatedActive ? '' : generatedBusy ? 'Updating shared colors…'
+  // The logo is the empty wall's live preview. It never joins an imported wall or its exports.
+  let example = $state.raw(null);
+  const generatedRequest = $derived(generatedActive ? captureGeneratedWallSources(items, example, alphaCut) : null);
+  const generatedPending = $derived(family === 'full-palette' && generatedActive && !generatedError
+    && (generatedBusy || generatedResult?.key !== generatedRequest?.key));
+  const generatedNotice = $derived(family !== 'full-palette' || !generatedActive ? '' : generatedPending ? (!items.length && !example ? 'Loading example…' : 'Updating shared colors…')
     : generatedError ? 'Could not generate colors. Select Generated 32 to retry.'
-    : !items.length ? 'Add images to generate shared colors.'
     : !fullPalette.colors.length ? 'No visible colors. Lower Opacity cut.' : '');
   const generatedUnavailable = $derived(family === 'full-palette' && generatedActive
     && (generatedError || !fullPalette.colors.length));
   $effect(() => {
     const request = generatedRequest;
     generationRetry;
-    if (family !== 'full-palette' || !request) { generatedBusy = false; return; }
+    if (family !== 'full-palette' || !request?.assets.length) { generatedBusy = false; return; }
     const controller = new AbortController();
     generatedBusy = true; generatedError = false;
     import('./lib/palette-generated-client.js').then(client => client.getGeneratedPalette(request, { signal: controller.signal })).then(result => {
@@ -229,8 +233,6 @@
     });
     return () => controller.abort();
   });
-  // The logo, shown on the empty screen as a live preview of the settings. Never exported.
-  let example = $state.raw(null);
   let viewing = $state.raw(null), viewTrigger, viewKeyboardFocus = false;
   // Resolve the current analysis after a setting changes, without duplicating image pixels.
   const viewed = $derived(viewing ? (viewing.id === 0 ? example : items.find(item => item.id === viewing.id)) : null);
@@ -475,13 +477,7 @@
         // not a GIF we can read ourselves; let the browser try below
       }
     }
-    const bitmap = await createImageBitmap(file);
-    const canvas = Object.assign(document.createElement('canvas'), { width: bitmap.width, height: bitmap.height });
-    const ctx = canvas.getContext('2d', { willReadFrequently: true });
-    ctx.drawImage(bitmap, 0, 0);
-    bitmap.close();
-    const original = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    canvas.width = 0; // gives the canvas's memory back now; iOS limits how much all canvases may hold
+    const original = await decodeImageFile(file);
     return { frames: [{ original }] };
   }
 
@@ -832,7 +828,7 @@
   <div class="probe" bind:clientWidth={wallWidth} bind:clientHeight={wallHeight}></div>
   <div class="tiles">
     {#each canvasItems as item (item.id)}
-      <Tile {item} inset={IMAGE_INSET} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} {alphaCut} {metric} {maxColors} {cleanup} onpaletteerror={paletteLimitFailure}
+      <Tile {item} inset={IMAGE_INSET} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} palettePending={generatedPending} {alphaCut} {metric} {maxColors} {cleanup} onpaletteerror={paletteLimitFailure}
         flipped={effectiveOriginal} comparing={previewing} active={!viewed} exportDisabled={generatedUnavailable} budget={dragging ? DRAG_MS / canvasItems.length : 0}
         oncompare={compareHold} onopen={items.length ? openImage : undefined}
         exportDrag={items.length ? dragExports : undefined}
@@ -847,7 +843,7 @@
 </div>
 
 {#if viewed}
-  <ImageViewer item={viewed} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} {alphaCut} {metric} {maxColors} {cleanup} onpaletteerror={paletteLimitFailure} {busy} {message} flipped={viewInitialOriginal}
+  <ImageViewer item={viewed} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} palettePending={generatedPending} {alphaCut} {metric} {maxColors} {cleanup} onpaletteerror={paletteLimitFailure} {busy} {message} flipped={viewInitialOriginal}
     exportDisabled={generatedUnavailable} exportDrag={viewed.id === 0 ? undefined : dragExports}
     onsave={viewed.id === 0 ? undefined : () => save(viewed)}
     oncopy={viewed.id === 0 ? undefined : () => copy(viewed)}
@@ -858,7 +854,7 @@
 
 
 <div class="workspace-tools" class:canvas-scrollable={canvasScrollable} use:measureWorkspaceTools>
-<Dock bind:first bind:second bind:none bind:style bind:settings bind:showOriginal bind:dragging bind:family bind:alphaCut bind:metric bind:maxColors bind:lastMaxColors bind:cleanup {fullPalette} fullPresets={fullChoices} {savedPalettes} {generatedNotice} generatedEditable={!generatedBusy && !generatedUnavailable} onpalette={selectPalette} onimportpalette={() => editPalette(null)} oneditpalette={editPalette} {previewing} {canvasScrollable} {autos} {soft} />
+<Dock bind:first bind:second bind:none bind:style bind:settings bind:showOriginal bind:dragging bind:family bind:alphaCut bind:metric bind:maxColors bind:lastMaxColors bind:cleanup {fullPalette} fullPresets={fullChoices} {savedPalettes} {generatedNotice} generatedEditable={!generatedPending && !generatedUnavailable} onpalette={selectPalette} onimportpalette={() => editPalette(null)} oneditpalette={editPalette} {previewing} {canvasScrollable} {autos} {soft} />
 <nav class="bar file-tools" class:has-images={!!items.length} aria-label="File and app actions">
   <div class="file-actions" class:awaiting-import={!items.length} role="group" aria-label="Add and save images">
     <button class="btn glass-btn icon-only export-action" class:glass-btn--primary={!!items.length} disabled={!items.length || generatedUnavailable} aria-label={items.length > 1 ? 'Save all images' : 'Save image'} use:tooltip={items.length > 1 ? 'Save all converted images as a ZIP archive.' : items.length ? 'Save the converted image at its original size.' : 'Add an image to enable saving.'} onclick={saveEverything}><PixelIcon name="save" /><span class="save-label" aria-hidden="true">Save</span></button>

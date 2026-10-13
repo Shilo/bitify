@@ -7,6 +7,12 @@ function identity(value) {
   if (!identities.has(value)) identities.set(value, ++nextIdentity);
   return identities.get(value);
 }
+// The empty wall's live example is a preview source, never mixed into a real wall.
+// An existing wall remains authoritative even when all of its pixels are transparent.
+export function captureGeneratedWallSources(items, example, alphaCut = 128) {
+  if (!Array.isArray(items)) throw new Error('Invalid generated palette wall sources.');
+  return captureGeneratedSources(items.length ? items : example ? [example] : [], alphaCut);
+}
 export function captureGeneratedSources(items, alphaCut = 128) {
   if (!Array.isArray(items) || !Number.isInteger(alphaCut) || alphaCut < 1 || alphaCut > 255) throw new Error('Invalid generated palette sources or opacity cut.');
   const assets = items.map(item => {

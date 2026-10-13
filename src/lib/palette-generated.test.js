@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { captureGeneratedSources } from './palette-generated-sources.js';
+import { captureGeneratedSources, captureGeneratedWallSources } from './palette-generated-sources.js';
 import { generatePaletteAsync, createGeneratedAccumulator } from './palette-generated.js';
 import { quantize, preparePalette, colorize } from './quantize.js';
 
@@ -9,6 +9,34 @@ const gray = n => [n, n, n, 255];
 const gradient = (offset = 0, size = 256) => source(Array.from({ length: size }, (_, i) => [(i + offset) & 255, i * 3 & 255, i * 7 & 255, 255]));
 
 describe('generated whole-wall palette', () => {
+  it('uses the ready animated demo only for an empty wall and restores it after removing real assets', async () => {
+    const red = source([[255, 0, 0, 255]]), blue = source([[0, 0, 255, 255]]);
+    const demo = { frames: [{ original: red, delay: 20 }, { original: blue, delay: 80 }] };
+    const initial = captureGeneratedWallSources([], null);
+    expect(initial.assets).toHaveLength(0);
+    const preview = captureGeneratedWallSources([], demo);
+    expect(preview.key).not.toBe(initial.key);
+    expect(preview.assets).toHaveLength(1);
+    expect(preview.assets[0].frames.map(frame => frame.delay)).toEqual([20, 80]);
+    expect((await generatePaletteAsync(preview)).colors).toEqual(['#0000ff', '#ff0000']);
+    const wall = [item(source([[0, 255, 0, 255]]))];
+    const imported = captureGeneratedWallSources(wall, demo);
+    expect(imported.assets).toHaveLength(1);
+    expect((await generatePaletteAsync(imported)).colors).toEqual(['#00ff00']);
+    wall.length = 0;
+    expect(captureGeneratedWallSources(wall, demo).key).toBe(preview.key);
+    expect(imported.assets[0].frames[0].original.data).toEqual(Uint8ClampedArray.of(0, 255, 0, 255));
+  });
+  it('never replaces a nonempty invisible user wall with demo colors, including opacity-cut changes', async () => {
+    const demo = item(source([[255, 0, 0, 255]]));
+    const original = source([[0, 255, 0, 128]]);
+    const wall = [item(original)];
+    const hidden = captureGeneratedWallSources(wall, demo, 255);
+    expect(hidden.assets[0].frames[0].original).toBe(original);
+    expect((await generatePaletteAsync(hidden)).colors).toEqual([]);
+    expect((await generatePaletteAsync(captureGeneratedWallSources(wall, demo, 128))).colors).toEqual(['#00ff00']);
+    expect(() => captureGeneratedWallSources(null, demo)).toThrow('Invalid');
+  });
   it('returns empty colors for no wall/visible pixels and preserves all unique source RGBs up to 32', async () => {
     expect((await generatePaletteAsync(captureGeneratedSources([]))).colors).toEqual([]);
     expect((await generatePaletteAsync(captureGeneratedSources([item(source([[255, 0, 0, 0]]))]))).colors).toEqual([]);
