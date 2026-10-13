@@ -23,11 +23,6 @@ singleton counts. If a safer alternative is developed, validate it against artis
 annotations, new images and production performance before deciding whether to ship.
 An absolute error ceiling is a possible next experiment, not a tested recommendation.
 
-![Original, Cleanup Off, current Cleanup and candidate safeguards](assets/2026-10-12-cleanup-safeguards.png)
-
-The figure uses enlarged, unfiltered crops with a shared crop per row. Full-image
-changed-pixel counts are shown below each converted crop. All use PICO-8/Oklab/All.
-
 ## Independent challenge
 
 A subagent reviewed the previous 40-image sheets independently and tested source-color
@@ -204,7 +199,6 @@ Retained repository evidence:
   corpus images and the supplied sprite have no ground-truth error score.
 - [Eight-configuration pixel probes](2026-10-12-cleanup-safeguards-probes.json), including
   exact output colors and current-proposal gate measurements.
-- [Focused visual figure](assets/2026-10-12-cleanup-safeguards.png).
 
 Local harnesses and all output images/GIFs are in `.tmp/cleanup-qa/candidates/`:
 `experiment.mjs`, `rules.mjs`, `validate.mjs`, `confidence-counterexample.mjs`,

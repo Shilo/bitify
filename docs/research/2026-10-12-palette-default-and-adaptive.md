@@ -63,10 +63,6 @@ Start with32 shared colors as an optional user choice,64 when material fidelity 
 
 ## Preserved evidence
 
-![Preset comparisons](assets/2026-10-12-palette-default-comparison.png)
-
-![Building comparisons with a shared adaptive palette](assets/2026-10-12-shared-adaptive-buildings.png)
-
 Full per-image results are in `2026-10-12-palette-default-measurements.json` and
 `2026-10-12-adaptive-palette-measurements.json`. Local prototype scripts, generated
 palettes and per-image outputs remain in `.tmp/palette-default-20261012/`.

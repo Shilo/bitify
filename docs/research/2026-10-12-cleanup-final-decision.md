@@ -58,12 +58,7 @@ The independent subagent approved the capped compromise and challenged the
 uncapped rule's dependence on baseline color error. Its documentation findings
 were accepted and fixed; its warning about ambiguous intentional dots remains valid.
 
-![Original, Cleanup Off, previous stronger Cleanup and implemented safer Cleanup](assets/2026-10-12-cleanup-final.png)
-
-The cropped figure compares identical regions, enlarged without filtering.
-Off and revised On columns come from actual browser exports; the previous column
-comes from the earlier independently validated research baseline. The final row
-shows a deliberate limitation: reported sprite pixels (26,22) and (18,25) remain
+Reported sprite pixels (26,22) and (18,25) remain
 unchanged with the safer rule. Aggressively merging them conflicts with protecting
 the reviewed detail counterexamples.
 
