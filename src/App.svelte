@@ -24,6 +24,7 @@
   import { preparePalette } from './lib/quantize.js';
   import { restorePaletteState, conversionSnapshot, fullPaletteImage } from './lib/palette-state.js';
   import { tooltip } from './lib/tooltip.js';
+  import { paletteFailureRegistry } from './lib/palette-failure.js';
   import { packWorkspaceControls } from './lib/workspace-controls.js';
   import logoUrl from './assets/logo.gif';
   import helpLogoUrl from './assets/logo.png';
@@ -58,7 +59,7 @@
   const prepared = $derived(fullPalette.colors.length ? preparePalette(fullPalette.colors) : null);
   let paletteRequest = $state.raw(null), paletteTrigger;
   let deleteImports = $state(false);
-  function selectPalette(p) { if (p.id === GENERATED_PALETTE_ID && generatedError) generationRetry++; paletteId = p.id; family = 'full-palette'; showOriginal = false; }
+  function selectPalette(p) { if (p.id === GENERATED_PALETTE_ID && generatedError) generationRetry++; retryPaletteFailures(); paletteId = p.id; family = 'full-palette'; showOriginal = false; }
   function editPalette(p) {
     if (p?.id === GENERATED_PALETTE_ID && (generatedBusy || generatedUnavailable || generatedResult?.key !== generatedRequest?.key)) return;
     paletteTrigger = document.querySelector('.image-viewer[open] button[aria-label="Save image"]') ?? document.activeElement;
@@ -147,11 +148,12 @@
       const labeled = widths[2] > 0 && packWorkspaceControls(expanded, available, gap)[0].offset > 0;
       node.classList.toggle('save-labeled', labeled);
       const placement = packWorkspaceControls(labeled ? expanded : widths, available, gap);
+      const failureRow = node.querySelector('.palette-failure-status') ? 1 : 0;
       // Popups follow the editing pair only while the measured layout is centered.
       node.classList.toggle('editing-centered', placement[0].offset > 0);
       groups.forEach((el, i) => {
         const { row, side, offset } = placement[i];
-        const styles = { gridRow: String(row), justifySelf: side === 'left' ? 'start' : 'end', marginLeft: side === 'left' ? `${offset}px` : '0px', marginRight: side === 'right' ? `${offset}px` : '0px' };
+        const styles = { gridRow: String(row + failureRow), justifySelf: side === 'left' ? 'start' : 'end', marginLeft: side === 'left' ? `${offset}px` : '0px', marginRight: side === 'right' ? `${offset}px` : '0px' };
         for (const [key, value] of Object.entries(styles)) if (el.style[key] !== value) el.style[key] = value;
       });
       const area = document.getElementById('app').getBoundingClientRect();
@@ -167,7 +169,7 @@
       write('--panel-space',`${Math.max(0,tools.top-top+(panels.length?10:0))}px`);
     };
     const resize = new ResizeObserver(measure);
-    const reconnect = () => { resize.disconnect(); resize.observe(node); for (const el of node.querySelectorAll('.panel,.menu,.tray,.color-tools,.style-tools,.file-actions,.file-tools > .btn,.save-label')) resize.observe(el); measure(); };
+    const reconnect = () => { resize.disconnect(); resize.observe(node); for (const el of node.querySelectorAll('.panel,.menu,.tray,.color-tools,.style-tools,.file-actions,.file-tools > .btn,.save-label,.palette-failure-status')) resize.observe(el); measure(); };
     const mutation = new MutationObserver(reconnect);
     mutation.observe(node,{childList:true,subtree:true});
     const off = on(window,'resize',measure);
@@ -330,13 +332,24 @@
     messageTimer = setTimeout(() => (message = ''), time);
   }
 
-  let limitFailureAt = -Infinity;
-  function paletteLimitFailure(error, stage) {
-    const now = performance.now();
-    // Wall and viewer can subscribe to the same failed selection job.
-    if (now - limitFailureAt < 3200) return;
-    limitFailureAt = now;
-    say(stage === 'cleanup' ? "Couldn't clean up pixels. Retry or turn Cleanup off." : "Couldn't limit colors. Retry or choose All.");
+  const paletteFailures = paletteFailureRegistry();
+  let failureVersion = $state(0), paletteRetry = $state(0);
+  const currentPaletteFailures = $derived.by(() => {
+    failureVersion;
+    return paletteFailures.current(canvasItems, { family, palette: prepared, alphaCut, metric, maxColors, cleanup });
+  });
+  const failureNotice = failures => failures.length
+    ? failures.some(f => f.stage === 'limit') ? "Couldn't limit colors. Retry or choose All."
+      : "Couldn't clean up pixels. Retry or turn Cleanup off." : '';
+  const paletteFailureNotice = $derived(failureNotice(currentPaletteFailures));
+  const itemPaletteFailed = item => currentPaletteFailures.some(f => f.inputs.item === item);
+  function retryPaletteFailures() { paletteRetry++; }
+  function reportPaletteStage(event) {
+    const changed = event.type === 'remove' ? paletteFailures.remove(event.owner)
+      : event.type === 'clear' ? paletteFailures.clear(event.owner, event.stage)
+      : event.type === 'begin' ? paletteFailures.begin(event.owner, event.stage, event.inputs, event.attempt)
+      : paletteFailures.settle(event.owner, event.stage, event.attempt, event.type === 'failed' ? event.error : null);
+    if (changed) failureVersion++;
   }
 
   // Reading, saving or copying a photo goes through every one of its pixels. On a phone that can
@@ -654,7 +667,7 @@
       const live = items.find(i => i.id === item.id);
       if (!live) return null;
       const snapshot = asking();
-      if (generatedUnavailable) return null;
+      if (generatedUnavailable || itemPaletteFailed(live)) return null;
       return { item: live, snapshot, key: JSON.stringify({ ...snapshot, generated: snapshot.generated?.key }) };
     },
     async prepare({ item, snapshot }, { signal }) {
@@ -674,7 +687,7 @@
     if (!dragExports) return;
     // Track every export input; the synchronous dragstart check also guards
     // the interval before this effect runs after a settings edit.
-    asking(); items;
+    asking(); items; currentPaletteFailures;
     untrack(() => dragExports.refresh());
   });
   $effect(() => {
@@ -692,7 +705,7 @@
   });
 
   async function save(item) {
-    if (generatedUnavailable) return;
+    if (generatedUnavailable || itemPaletteFailed(item)) return;
     const asked = asking();
     try {
       const downloading = `Downloading ${downloadName({ ...item, family: asked.family })}…`;
@@ -707,7 +720,7 @@
 
   // The clipboard takes a PNG but not a GIF, so an animation is copied as its first frame.
   async function copy(item) {
-    if (generatedUnavailable) return;
+    if (generatedUnavailable || itemPaletteFailed(item)) return;
     try {
       const asked = asking(), read = asked.family === 'full-palette' ? item : reread(item);
       // the clipboard is asked at once, as Safari demands, and handed the PNG when it has been made
@@ -719,7 +732,7 @@
   }
 
   async function saveEverything() {
-    if (generatedUnavailable) return;
+    if (generatedUnavailable || items.some(itemPaletteFailed)) return;
     const asked = asking();
     try {
       const selected = [...items]; // the images on the wall now, even if some are removed before the job starts
@@ -865,8 +878,8 @@
   <div class="probe" bind:clientWidth={wallWidth} bind:clientHeight={wallHeight}></div>
   <div class="tiles">
     {#each canvasItems as item (item.id)}
-      <Tile {item} inset={IMAGE_INSET} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} palettePending={generatedPending} {alphaCut} {metric} {maxColors} {cleanup} onpaletteerror={paletteLimitFailure}
-        flipped={effectiveOriginal} comparing={previewing} active={!viewed} exportDisabled={generatedUnavailable} budget={dragging ? DRAG_MS / canvasItems.length : 0}
+      <Tile {item} inset={IMAGE_INSET} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} palettePending={generatedPending} {alphaCut} {metric} {maxColors} {cleanup} onpalettestatus={reportPaletteStage} {paletteRetry}
+        flipped={effectiveOriginal} comparing={previewing} active={!viewed} exportDisabled={generatedUnavailable || itemPaletteFailed(item)} budget={dragging ? DRAG_MS / canvasItems.length : 0}
         oncompare={compareHold} onopen={items.length ? openImage : undefined}
         exportDrag={items.length ? dragExports : undefined}
         onactivate={items.length ? undefined : () => picker.click()}
@@ -880,8 +893,8 @@
 </div>
 
 {#if viewed}
-  <ImageViewer item={viewed} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} palettePending={generatedPending} {alphaCut} {metric} {maxColors} {cleanup} onpaletteerror={paletteLimitFailure} {busy} {message} flipped={viewInitialOriginal}
-    exportDisabled={generatedUnavailable} exportDrag={viewed.id === 0 ? undefined : dragExports}
+  <ImageViewer item={viewed} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} palettePending={generatedPending} {alphaCut} {metric} {maxColors} {cleanup} onpalettestatus={reportPaletteStage} {paletteRetry} {busy} {message} flipped={viewInitialOriginal}
+    paletteFailureNotice={failureNotice(currentPaletteFailures.filter(f => f.inputs.item === viewed))} onpaletteretry={retryPaletteFailures} exportDisabled={generatedUnavailable || itemPaletteFailed(viewed)} exportDrag={viewed.id === 0 ? undefined : dragExports}
     onsave={viewed.id === 0 ? undefined : () => save(viewed)}
     oncopy={viewed.id === 0 ? undefined : () => copy(viewed)}
     onclose={async () => { const trigger = viewTrigger, keyboard = viewKeyboardFocus; viewing = null; await tick(); if (keyboard) trigger?.focus({ preventScroll: true }); else trigger?.blur(); }} />
@@ -891,10 +904,10 @@
 
 
 <div class="workspace-tools" class:canvas-scrollable={canvasScrollable} use:measureWorkspaceTools>
-<Dock bind:first bind:second bind:none bind:style bind:settings bind:showOriginal bind:dragging bind:family bind:alphaCut bind:metric bind:maxColors bind:lastMaxColors bind:cleanup {fullPalette} fullPresets={fullChoices} {savedPalettes} {generatedNotice} {generatedSource} generatedEditable={!generatedPending && !generatedUnavailable} onpalette={selectPalette} onimportpalette={() => editPalette(null)} oneditpalette={editPalette} {previewing} {canvasScrollable} {autos} {soft} />
+<Dock bind:first bind:second bind:none bind:style bind:settings bind:showOriginal bind:dragging bind:family bind:alphaCut bind:metric bind:maxColors bind:lastMaxColors bind:cleanup {fullPalette} fullPresets={fullChoices} {savedPalettes} {generatedNotice} {generatedSource} {paletteFailureNotice} onpaletteretry={retryPaletteFailures} generatedEditable={!generatedPending && !generatedUnavailable} onpalette={selectPalette} onimportpalette={() => editPalette(null)} oneditpalette={editPalette} {previewing} {canvasScrollable} {autos} {soft} />
 <nav class="bar file-tools" class:has-images={!!items.length} aria-label="File and app actions">
   <div class="file-actions" class:awaiting-import={!items.length} role="group" aria-label="Add and save images">
-    <button class="btn glass-btn icon-only export-action" class:glass-btn--primary={!!items.length} disabled={!items.length || generatedUnavailable} aria-label={items.length > 1 ? 'Save all images' : 'Save image'} use:tooltip={items.length > 1 ? 'Save all converted images as a ZIP archive.' : items.length ? 'Save the converted image at its original size.' : 'Add an image to enable saving.'} onclick={saveEverything}><PixelIcon name="save" /><span class="save-label" aria-hidden="true">Save</span></button>
+    <button class="btn glass-btn icon-only export-action" class:glass-btn--primary={!!items.length} disabled={!items.length || generatedUnavailable || items.some(itemPaletteFailed)} aria-label={items.length > 1 ? 'Save all images' : 'Save image'} use:tooltip={items.length > 1 ? 'Save all converted images as a ZIP archive.' : items.length ? 'Save the converted image at its original size.' : 'Add an image to enable saving.'} onclick={saveEverything}><PixelIcon name="save" /><span class="save-label" aria-hidden="true">Save</span></button>
     <button class="btn glass-btn icon-only import-action" onclick={() => picker.click()} aria-label={importLabel} use:tooltip={'Add images from your device, or drop or paste them onto the canvas. Images stay on your device.'}><PixelIcon name="import" /></button>
   {#if items.length}
     <button class="btn glass-btn icon-only danger file-clear" bind:this={clearTrigger} onclick={() => { clearComparison(); clearConfirm.showModal(); }} aria-label="Remove all images" use:tooltip={'Remove all images from the canvas.'}><PixelIcon name="trash" /></button>
@@ -916,8 +929,8 @@
 <dialog class="sheet glass-sheet" bind:this={sheet} aria-label="Image actions" onclick={() => sheet.close()}>
   {#if shared}
     <p class="name" use:tooltip={shared.name}>{shared.name}</p>
-    <button class="btn glass-btn glass-btn--primary" disabled={generatedUnavailable} onclick={() => { const item = shared; sheet.close(); save(item); }}><PixelIcon name="save" />Save</button>
-    <button class="btn glass-btn" disabled={generatedUnavailable} onclick={() => { const item = shared; sheet.close(); copy(item); }}><PixelIcon name="copy" />Copy</button>
+    <button class="btn glass-btn glass-btn--primary" disabled={generatedUnavailable || itemPaletteFailed(shared)} onclick={() => { const item = shared; sheet.close(); save(item); }}><PixelIcon name="save" />Save</button>
+    <button class="btn glass-btn" disabled={generatedUnavailable || itemPaletteFailed(shared)} onclick={() => { const item = shared; sheet.close(); copy(item); }}><PixelIcon name="copy" />Copy</button>
     <button class="btn glass-btn" onclick={previewShared}><PixelIcon name="expand" />Preview</button>
     <button class="btn glass-btn danger" onclick={async () => {
       const item = shared;

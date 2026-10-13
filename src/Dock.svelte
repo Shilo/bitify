@@ -40,6 +40,7 @@
     lastMaxColors = $bindable(16),
     cleanup = $bindable(false),
     fullPalette, fullPresets = [], savedPalettes = [], generatedNotice = '', generatedSource = 'Your images', generatedEditable = true, onpalette, onimportpalette, oneditpalette,
+    paletteFailureNotice = '', onpaletteretry,
   } = $props();
 
   let panel = $state(null); // null, 'palettes' or 'style'
@@ -232,9 +233,11 @@
   });
   function applyLimit(value) {
     if (!Number.isInteger(value) || (value !== 0 && value < 2) || value > limitMax) return;
+    const unchanged = value === maxColors;
     if (value) lastMaxColors = value;
     maxColors = value;
     restoreLimitDrafts();
+    if (unchanged) onpaletteretry?.();
   }
   function finishLimitNumber(e) {
     const box = e.currentTarget;
@@ -356,6 +359,11 @@
 {/snippet}
 
 <div class="dock glass-card" class:canvas-scrollable={canvasScrollable} style:--setting-label-width={`${labelWidth}px`} bind:this={dock}>
+  {#if paletteFailureNotice}
+    <div class="palette-failure-status glass-card" role="status">
+      <span>{paletteFailureNotice}</span><button class="btn glass-btn" onclick={onpaletteretry}>Retry</button>
+    </div>
+  {/if}
   {#if panel === 'palettes'}
     <div class="panel palette-family-panel glass-card" bind:offsetHeight={panelHeight}>
       <div class="palette-picker-header" use:fitPaletteHeader={selectedName + family}>
@@ -420,7 +428,7 @@
           <input class="tnum" type="number" min={limitMin} max={limitMax} step="1" disabled={limitMax <= 1} inputmode="numeric" aria-label="Max colors value" aria-describedby={limitDescription ? 'full-limit-description' : undefined}
             value={limitNumber} placeholder={String(limitMax)} oninput={e => { numberDirty = true; numberPalette = fullPalette; limitNumber = e.currentTarget.value; }}
             onchange={finishLimitNumber} onblur={finishLimitNumber}
-            onkeydown={e => { if (e.key === 'Enter') { e.preventDefault(); finishLimitNumber(e); } }} />
+            onkeydown={e => { if (e.key === 'Enter') { e.preventDefault(); const edited = numberDirty; finishLimitNumber(e); if (!edited) onpaletteretry?.(); } }} />
           <button aria-label="Use all palette colors" aria-pressed={maxColors === 0}
             use:tooltip={'Use all colors. A limit uses fewer colors per image from the selected palette.'} onpointerdown={e => e.preventDefault()} onclick={() => applyLimit(0)}>All</button>
         </div>
@@ -430,16 +438,16 @@
         <span class="key" id="palette-matching-label" use:tooltip={matchingDescription}>Matching</span>
         <span id="palette-matching-description" hidden>{matchingDescription}</span>
         <div class="seg glass-segmented" role="group" aria-labelledby="palette-matching-label" aria-describedby="palette-matching-description">
-          <button class="glass-segmented__item" aria-label="Oklab matching" aria-pressed={metric === 'oklab'} use:tooltip={'Compare perceived color differences. Default.'} onclick={() => metric = 'oklab'}>Oklab</button>
-          <button class="glass-segmented__item" aria-label="RGB matching" aria-pressed={metric === 'rgb'} use:tooltip={'Compare RGB channel differences.'} onclick={() => metric = 'rgb'}>RGB</button>
+          <button class="glass-segmented__item" aria-label="Oklab matching" aria-pressed={metric === 'oklab'} use:tooltip={'Compare perceived color differences. Default.'} onclick={() => { if (metric === 'oklab') onpaletteretry?.(); metric = 'oklab'; }}>Oklab</button>
+          <button class="glass-segmented__item" aria-label="RGB matching" aria-pressed={metric === 'rgb'} use:tooltip={'Compare RGB channel differences.'} onclick={() => { if (metric === 'rgb') onpaletteretry?.(); metric = 'rgb'; }}>RGB</button>
         </div>
       </div>
       <div class="palette-setting-row">
         <span class="key" id="palette-cleanup-label" use:tooltip={cleanupDescription}>Cleanup</span>
         <span id="palette-cleanup-description" hidden>{cleanupDescription}</span>
         <div class="seg glass-segmented" role="group" aria-labelledby="palette-cleanup-label" aria-describedby="palette-cleanup-description">
-          <button class="glass-segmented__item" aria-label="Cleanup off" aria-pressed={!cleanup} onclick={() => cleanup = false}>Off</button>
-          <button class="glass-segmented__item" aria-label="Cleanup on" aria-pressed={cleanup} use:tooltip={'Merge isolated pixels. Can remove intentional details.'} onclick={() => cleanup = true}>On</button>
+          <button class="glass-segmented__item" aria-label="Cleanup off" aria-pressed={!cleanup} onclick={() => { if (!cleanup) onpaletteretry?.(); cleanup = false; }}>Off</button>
+          <button class="glass-segmented__item" aria-label="Cleanup on" aria-pressed={cleanup} use:tooltip={'Merge isolated pixels. Can remove intentional details.'} onclick={() => { if (cleanup) onpaletteretry?.(); cleanup = true; }}>On</button>
         </div>
       </div>
       {#if soft || alphaCut !== 128}

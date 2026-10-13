@@ -1,0 +1,56 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Palette recovery acceptance</title>
+<style>body{font:14px system-ui;background:#20262b;color:white;margin:12px}button{padding:10px}pre{white-space:pre-wrap;max-height:240px;overflow:auto}iframe{width:100%;height:720px;border:1px solid #aaa}.pass{color:#9be7ad}.fail{color:#ffaaa0}</style>
+<h1>Actual-build palette failure recovery</h1><p>Local fault injection only; no real downloads or clipboard changes. One run per load.</p>
+<button id="run">Run recovery checks</button><pre id="report" role="status">Ready.</pre><iframe id="app" title="Actual built app" src="/app/"></iframe>
+<script type="module">
+const frame=document.querySelector('#app'),report=document.querySelector('#report'),run=document.querySelector('#run');let doc,win,q,step='startup';
+const sleep=ms=>new Promise(r=>setTimeout(r,ms)),assert=(v,s)=>{if(!v)throw Error(s);};
+const line=s=>{report.textContent+='\n'+s;report.scrollTop=report.scrollHeight;};
+async function until(fn,label,ms=20000){const end=performance.now()+ms;while(performance.now()<end){if(fn())return;await sleep(40);}throw Error('Timed out: '+label);}
+function button(name){const b=doc.querySelector(`button[aria-label="${name}"]`);assert(b,'Missing '+name);return b;}
+function retry(){const b=doc.querySelector('.palette-failure-status button');assert(b,'Missing persistent Retry');b.click();}
+const failed=()=>[...doc.querySelectorAll('.grid .tile')].filter(t=>t.querySelector('.palette-failure-mark'));
+function hash(tile){const c=tile.querySelector('canvas');assert(c,'Retained canvas missing');const d=c.getContext('2d').getImageData(0,0,c.width,c.height).data;let h=2166136261;for(const b of d)h=Math.imul(h^b,16777619);return `${c.width}x${c.height}:${h>>>0}`;}
+async function add(start,count){const transfer=new win.DataTransfer();for(let n=start;n<start+count;n++){
+ const c=document.createElement('canvas');c.width=c.height=32;const ctx=c.getContext('2d'),im=ctx.createImageData(32,32);
+ for(let p=0;p<1024;p++)im.data.set([(p*13+n*41)%256,(p*7+n*19)%256,(p*3+n*73)%256,p%19?255:0],p*4);
+ ctx.putImageData(im,0,0);transfer.items.add(new File([await new Promise(r=>c.toBlob(r))],`failure-${n}.png`,{type:'image/png'}));
+ }const input=doc.querySelector('input[type=file][multiple]');input.files=transfer.files;input.dispatchEvent(new win.Event('change',{bubbles:true}));await until(()=>doc.querySelectorAll('.grid .tile').length>=start+count-1,'import fixtures');await sleep(500);}
+function cap(value){const input=doc.querySelector('input[aria-label="Max colors value"]');assert(input,'Limit field missing');input.value=String(value);input.dispatchEvent(new win.Event('input',{bubbles:true}));input.dispatchEvent(new win.Event('change',{bubbles:true}));}
+async function openSettings(){if(!doc.querySelector('input[aria-label="Max colors value"]'))button('Palette settings').click();await until(()=>doc.querySelector('input[aria-label="Max colors value"]'),'settings rendered');}
+function blocked(tile){assert(tile.querySelector('button[aria-label^="Save "]').disabled,'Affected Save enabled');assert(tile.querySelector('button[aria-label^="Copy "]').disabled,'Affected Copy enabled');}
+async function settle(){await sleep(1000);assert(q.errors.length===0,'Runtime error '+q.errors.join(';'));}
+run.onclick=async()=>{
+ run.disabled=true;report.textContent='Running…';const result=window.__failureAcceptance={userAgent:navigator.userAgent,done:false,status:'running',checks:[]};
+ const pass=s=>{step=s;result.phase=s;result.checks.push(s);line('PASS '+s);};
+ try{
+  await until(()=>frame.contentWindow.__failureQA&&frame.contentDocument.querySelector('.example-add'),'app ready');win=frame.contentWindow;doc=frame.contentDocument;q=win.__failureQA;
+  result.entry=doc.querySelector('script[type=module][src]').getAttribute('src');const built=await fetch(new URL(result.entry,win.location.href));assert(built.ok,'Built entry unavailable');result.entrySha256=[...new Uint8Array(await crypto.subtle.digest('SHA-256',await built.arrayBuffer()))].map(b=>b.toString(16).padStart(2,'0')).join('');
+  await add(1,3);await openSettings();q.failLimit=2;cap(8);await until(()=>failed().length===2,'two limit failures');await settle();
+  failed().forEach(blocked);assert(doc.querySelector('.export-action').disabled,'Batch Save enabled');
+  result.failureLayout={viewport:[win.innerWidth,win.innerHeight],touch:win.matchMedia('(hover: none)').matches,captions:failed().map(t=>({height:t.querySelector('.cap').getBoundingClientRect().height,children:t.querySelector('.cap').children.length})),overflow:doc.documentElement.scrollWidth>win.innerWidth};
+  assert(!result.failureLayout.overflow,'Failure UI horizontally overflows');if(result.failureLayout.touch)assert(result.failureLayout.captions.every(c=>c.height<=52&&c.children===2),'Failure adds mobile caption row');
+  const starts=q.starts.limit;await sleep(3500);assert(q.starts.limit===starts,'Automatic retry loop');assert(doc.querySelector('.palette-failure-status'),'Failure line expired');pass('two independent failures remain blocked without automatic retry');
+  const healthy=[...doc.querySelectorAll('.grid .tile')].find(t=>!t.querySelector('.palette-failure-mark')),healthyPixels=hash(healthy);
+  q.failLimit=1;retry();assert(doc.querySelector('.export-action').disabled,'Retry briefly enabled batch');await until(()=>q.starts.limit===starts+2,'failed-only retry');await settle();assert(failed().length===1,'Retry did not preserve only remaining failure');assert(hash(healthy)===healthyPixels,'Healthy result changed');pass('retry touches only failed stages; one recovery does not hide another failure');
+  const affected=failed()[0],beforeHash=hash(affected);await add(4,1);assert(failed().length===1,'Unrelated import erased failure');assert(hash(affected)===beforeHash,'Retained failed picture changed');pass('unrelated addition preserves failure and retained pixels');
+  button('Cleanup on').click();await settle();assert(failed().length===1,'Cleanup change erased limiter failure');pass('Cleanup change does not retry or clear failed limiter');
+  assert(affected===doc.querySelector('.grid .tile'),'Keyboard Copy fixture must be first item');
+  const share=affected.querySelector('.tile-share');share.click();await until(()=>doc.querySelector('.sheet[open]'),'Share sheet');const sheet=doc.querySelector('.sheet[open]');for(const label of ['Save','Copy'])assert([...sheet.querySelectorAll('button')].find(b=>b.textContent.trim()===label).disabled,'Affected Share '+label+' enabled');sheet.querySelector('.sheet-cancel').click();await settle();pass('Share sheet disables affected Save and Copy');
+  const beforeExports=q.exports.length,beforeCopies=q.copies;
+  affected.querySelector('button[aria-label^="Save "]').dispatchEvent(new win.MouseEvent('click',{bubbles:true}));
+  affected.querySelector('button[aria-label^="Copy "]').dispatchEvent(new win.MouseEvent('click',{bubbles:true}));
+  doc.body.dispatchEvent(new win.KeyboardEvent('keydown',{key:'c',code:'KeyC',ctrlKey:true,bubbles:true,cancelable:true}));await sleep(400);
+  assert(q.exports.length===beforeExports&&q.copies===beforeCopies,'Guarded action ran');pass('forced buttons and keyboard Copy are guarded');
+  affected.querySelector('.caption-preview').click();await until(()=>doc.querySelector('.image-viewer[open]'),'viewer');await settle();
+  assert(doc.querySelector('.image-viewer button[aria-label="Save image"]').disabled,'Viewer cleared wall failure');const modalRetry=doc.querySelector('.viewer-toast button');assert(modalRetry,'Modal Retry inaccessible');modalRetry.click();await until(()=>failed().length===0,'wall retry recovery');await settle();assert(doc.querySelector('.image-viewer[open]'),'Retry dismissed viewer');assert(!doc.querySelector('.image-viewer button[aria-label="Save image"]').disabled,'Viewer Save still blocked');button('Close preview').click();await settle();pass('viewer success preserves wall ownership; modal Retry recovers without dismissal');
+  button('Cleanup off').click();await settle();cap(9);await settle();q.failCleanup=1;button('Cleanup on').click();await until(()=>failed().length===1,'cleanup failure');failed().forEach(blocked);assert(doc.querySelector('.palette-failure-status').textContent.includes('clean up'),'Wrong stage guidance');
+  await settle();const cleanupStarts=q.starts.cleanup;retry();assert(doc.querySelector('.export-action').disabled,'Cleanup retry enabled exports early');await until(()=>failed().length===0,'cleanup retry');await settle();assert(q.starts.cleanup===cleanupStarts+1,`Healthy cleanup re-requested (${cleanupStarts} to ${q.starts.cleanup})`);pass('cleanup failure and retry preserve stage readiness');
+  q.failLimit=1;cap(7);await until(()=>failed().length===1,'same-value retry fixture');await settle();const again=q.starts.limit;cap(7);await until(()=>failed().length===0,'same-value retry');await settle();assert(q.starts.limit===again+1,`Unchanged commit did not target only failure (${again} to ${q.starts.limit})`);pass('unchanged Max colors recommit explicitly retries failed stage');
+  q.failLimit=1;cap(6);await until(()=>failed().length===1,'family bypass fixture');button('Palette').click();await until(()=>[...doc.querySelectorAll('button')].some(b=>b.textContent.trim()==='1-bit'),'family switch');[...doc.querySelectorAll('button')].find(b=>b.textContent.trim()==='1-bit').click();await settle();assert(!doc.querySelector('.export-action').disabled,'1-bit blocked by palette failure');assert(!doc.querySelector('.palette-failure-status'),'Palette warning persists in 1-bit');pass('1-bit bypasses palette failure gates');
+  assert(doc.documentElement.scrollWidth<=win.innerWidth,'Horizontal overflow');assert(q.errors.length===0,'Runtime errors');const warnings=q.resizeWarnings.length;await sleep(2500);assert(q.resizeWarnings.length===warnings,'ResizeObserver warnings continue at idle');result.status='pass';report.className='pass';pass('no horizontal overflow, runtime errors, or ongoing observer warnings at idle');
+ }catch(error){result.status='fail';result.error={step,message:error.message,stack:error.stack};report.className='fail';line('FAIL '+error.message);}
+ finally{result.errors=q?.errors??[];result.resizeWarnings=q?.resizeWarnings??[];result.starts=q?.starts;result.done=true;await fetch('/results',{method:'POST',body:JSON.stringify(result)});line('Saved local results. Reload to repeat.');}
+};
+</script>

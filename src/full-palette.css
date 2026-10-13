@@ -81,3 +81,8 @@
 }
 @media(max-width:300px) { :root .palette-picker-header { flex-wrap: wrap; } }
 @media(forced-colors:active) { :root .palette-rail-wrap .palette-rail { mask-image: none !important; scrollbar-width: auto; } :root .palette-rail::-webkit-scrollbar { display: block; } :root .palette-rail-wrap::before, :root .palette-rail-wrap::after { display: none !important; } :root .palette-circle { border-color: ButtonText; forced-color-adjust: none; } :root .palette-choice[aria-pressed=true] .palette-circle { outline: 2px solid Highlight; } }
+/* A failure stays visible with the dock closed and participates in wall sizing. */
+:root .workspace-tools .palette-failure-status { grid-column: 1; grid-row: 1; justify-self: center; box-sizing: border-box; width: min(760px,100%); display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 6px 10px; border-radius: 12px; font-size: 12px; }
+:root .palette-failure-status > span { min-width: 0; overflow-wrap: anywhere; }
+:root .palette-failure-status .btn { flex: none; }
+:root .palette-failure-mark { color: var(--muted); font-size: 11px; flex: none; }

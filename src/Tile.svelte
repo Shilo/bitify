@@ -12,13 +12,17 @@
   import { animationPreviewCache } from './lib/palette-animation-cache.js';
   import { animationVisibility } from './lib/animation-visibility.js';
   import { exportDragArt } from './lib/export-drag.js';
+  import { paletteFailureInputs, samePaletteFailureInputs } from './lib/palette-failure.js';
 
   // `flipped` true means originals are visible. App-managed comparison updates
   // that same value and the dock toggle; standalone previews use a local hold.
   // Without `onremove` the tile is a preview only and has no buttons.
   // `set` is the style's settings. `budget` is set while one of their sliders is being dragged:
   // the milliseconds this tile may take to convert its image after each move.
-  let { item, first, second, style, set, family = 'two-color', palette, palettePending = false, alphaCut = 128, metric = 'oklab', maxColors = 0, cleanup = false, active = true, exportDisabled = false, onpaletteerror, flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false, exportDrag } = $props();
+  let { item, first, second, style, set, family = 'two-color', palette, palettePending = false, alphaCut = 128, metric = 'oklab', maxColors = 0, cleanup = false, active = true, exportDisabled = false, onpalettestatus, paletteRetry = 0, flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false, exportDrag } = $props();
+  const failureOwner = Symbol('palette preview surface');
+  const reportStage = (type, stage, inputs, attempt, error) => untrack(() => onpalettestatus?.({ type, owner: failureOwner, stage, inputs, attempt, error }));
+  $effect(() => () => onpalettestatus?.({ type: 'remove', owner: failureOwner }));
   let held = $state(false);
   const originalVisible = $derived(oncompare ? flipped : flipped !== held);
   let holdTimer;
@@ -120,41 +124,75 @@
   });
   // A subset belongs to the full item, not the current animation frame or tile
   // dimensions. Frame playback/resize cannot cancel this shared preparation.
-  const limitRequest = $derived({ item, palette, alphaCut, metric, maxColors });
+  const stageInputs = $derived(paletteFailureInputs(item, palette, alphaCut, metric, maxColors));
+  let limitAttempt = $state(0), cleanupAttempt = $state(0);
+  const limitRequest = $derived({ item, palette, alphaCut, metric, maxColors, inputs: stageInputs, attempt: limitAttempt });
   let limited = $state.raw(null);
+  const limitFailed = $derived(family === 'full-palette' && !!maxColors && maxColors < (palette?.size ?? 0)
+    && samePaletteFailureInputs(limited?.inputs, stageInputs) && !!limited?.error);
   const conversionPalette = $derived(!maxColors || maxColors >= (palette?.size ?? 0) ? palette
     : limited?.request === limitRequest ? limited.palette : null);
   $effect(() => {
     const request = limitRequest;
-    limited = null;
-    if (family !== 'full-palette' || !request.palette || !request.maxColors || request.maxColors >= request.palette.size) return;
+    const previous = untrack(() => limited);
+    const error = samePaletteFailureInputs(previous?.inputs, request.inputs) ? previous?.error : null;
+    limited = { request, inputs: request.inputs, error };
+    if (family !== 'full-palette' || !request.palette || !request.maxColors || request.maxColors >= request.palette.size) {
+      limited = null;
+      reportStage('clear', 'limit'); return;
+    }
     const controller = new AbortController();
+    reportStage('begin', 'limit', request.inputs, controller);
     getLimitedPalette(request.item, request.palette, request.alphaCut, request.metric, request.maxColors, { signal: controller.signal }).then(result => {
-      if (!controller.signal.aborted) limited = { request, palette: result };
+      if (!controller.signal.aborted) {
+        limited = { request, inputs: request.inputs, palette: result };
+        reportStage('ready', 'limit', request.inputs, controller);
+      }
     }).catch(error => {
       if (controller.signal.aborted || error.name === 'AbortError') return;
-      if (onpaletteerror) onpaletteerror();
-      else console.error('Palette selection failed', error);
+      limited = { request, inputs: request.inputs, error };
+      reportStage('failed', 'limit', request.inputs, controller, error);
     });
     return () => controller.abort();
   });
   // One whole-source/clip cleanup decision is shared across frame playback,
   // resized previews and exports. Off does not load the optional code.
-  const cleanupRequest = $derived({ item, palette: conversionPalette, alphaCut, metric, cleanup });
+  const cleanupRequest = $derived({ item, palette: conversionPalette, alphaCut, metric, cleanup, inputs: stageInputs, attempt: cleanupAttempt });
   let cleaned = $state.raw(null);
-  const conversionCleanup = $derived(cleanup && cleaned?.request === cleanupRequest ? cleaned : null);
+  const cleanupFailed = $derived(family === 'full-palette' && cleanup
+    && samePaletteFailureInputs(cleaned?.inputs, stageInputs) && !!cleaned?.error);
+  const failureDescription = $derived(limitFailed ? "Couldn't limit colors. Retry or choose All."
+    : cleanupFailed ? "Couldn't clean up pixels. Retry or turn Cleanup off." : '');
+  const conversionCleanup = $derived(cleanup && cleaned?.request === cleanupRequest && cleaned.result ? cleaned : null);
+  let seenRetry = untrack(() => paletteRetry);
+  $effect(() => {
+    const command = paletteRetry;
+    if (command === seenRetry) return;
+    seenRetry = command;
+    // Inspect failure only when explicitly commanded, never in reaction to a catch.
+    untrack(() => { if (limitFailed) limitAttempt++; if (cleanupFailed) cleanupAttempt++; });
+  });
   $effect(() => {
     const request = cleanupRequest;
-    cleaned = null;
-    if (family !== 'full-palette' || !request.cleanup || !request.palette) return;
+    const previous = untrack(() => cleaned);
+    const error = samePaletteFailureInputs(previous?.inputs, request.inputs) ? previous?.error : null;
+    cleaned = { request, inputs: request.inputs, error };
+    if (family !== 'full-palette' || !request.cleanup) { cleaned = null; reportStage('clear', 'cleanup'); return; }
+    // A same-input limiter retry temporarily removes the prerequisite palette.
+    // Keep the cleanup failure owned and blocked until its own successful retry.
+    if (!request.palette) return;
     const controller = new AbortController();
+    reportStage('begin', 'cleanup', request.inputs, controller);
     import('./lib/palette-cleanup-client.js').then(async client => {
       const result = await client.getPaletteCleanup(request.item, request.palette, request.alphaCut, request.metric, { signal: controller.signal });
-      if (!controller.signal.aborted) cleaned = { request, result, apply: client.applyCleanup };
+      if (!controller.signal.aborted) {
+        cleaned = { request, inputs: request.inputs, result, apply: client.applyCleanup };
+        reportStage('ready', 'cleanup', request.inputs, controller);
+      }
     }).catch(error => {
       if (controller.signal.aborted || error.name === 'AbortError') return;
-      if (onpaletteerror) onpaletteerror(error, 'cleanup');
-      else console.error('Palette cleanup failed', error);
+      cleaned = { request, inputs: request.inputs, error };
+      reportStage('failed', 'cleanup', request.inputs, controller, error);
     });
     return () => controller.abort();
   });
@@ -311,13 +349,13 @@
         <button type="button" class="caption-preview" onclick={e => activate(e.currentTarget)} aria-label="Preview {item.name}" aria-haspopup="dialog">
           <span class="caption-details">
             <span class="name" use:tooltip={item.name}>{item.name}</span>
-            <span class="dim">{item.img.w}<span class="by">×</span>{item.img.h}</span>
+            <span class="dim">{item.img.w}<span class="by">×</span>{item.img.h}{#if failureDescription}<span class="palette-failure-mark" use:tooltip={failureDescription}> · Retry needed</span>{/if}</span>
           </span>
         </button>
       {:else}
         <span class="caption-details">
           <span class="name" use:tooltip={item.name}>{item.name}</span>
-          <span class="dim">{item.img.w}<span class="by">×</span>{item.img.h}</span>
+          <span class="dim">{item.img.w}<span class="by">×</span>{item.img.h}{#if failureDescription}<span class="palette-failure-mark" use:tooltip={failureDescription}> · Retry needed</span>{/if}</span>
         </span>
       {/if}
       {#if onremove}

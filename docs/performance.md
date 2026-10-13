@@ -1179,3 +1179,21 @@ interrupt an individual synchronous mask/LZW call. One large frame, cold Stencil
 preparation and final output copying can exceed the budget. Average compression time
 per frame does not prove a maximum. Tests compare all eleven styles, either None ink,
 loop variants, buffer growth and captured mutations against the old GIF bytes.
+
+### October 13: palette failure recovery
+
+`palette-failure.js` records failures per surface, stage, logical inputs and attempt.
+Retried requests retain their failure until they succeed. Removing a viewer cannot
+remove a wall failure; unrelated imports do not reset failures. Registry notifications
+invalidate app state only when failure presence changes, not on every successful
+preparation. Source removal and Tile destruction remove owner references.
+
+Retained previews are marked in the existing caption line without adding a phone
+caption row. Persistent Dock/viewer Retry actions recover only failed stages. All
+export entry points gate affected items, including keyboard Copy and native drag
+requests; the batch button gates any failure. Already captured exports stay independent.
+No uncapped or Cleanup-Off fallback is silently produced.
+
+Actual-build Codex browser and Pixel 8 Pro results, byte-parity/independent decoding,
+finite observer warning notes and limits are in
+`docs/research/2026-10-13-onebit-export-and-palette-recovery.md`.

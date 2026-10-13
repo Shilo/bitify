@@ -2591,3 +2591,21 @@ an individual frame remains synchronous. None, transparency, disposal, delay rou
 dimensions, loop and output bytes remain compatible. Aborted hover work stops before
 later frame production; explicit Save subscribers and active native drag grace remain
 independent. PNG Copy still exports the first frame.
+
+### Palette preparation failure contract (October 13)
+
+A Max colors or Cleanup failure retains the same item's last completed preview,
+marks Retry needed in its existing dimensions line and shows persistent Dock
+Retry guidance. In the viewer the notice and Retry remain in the top-layer dialog;
+pressing Retry does not dismiss it. Each surface/stage owns its failure against
+immutable source and conversion inputs; stale attempts cannot settle replacements.
+A successful viewer cannot hide a failed wall preview.
+
+Save, Copy, Share export actions and drag export are disabled/guarded for an affected
+item; Save all is disabled/guarded if any selected item is affected. Previously
+captured exports are independent. Explicit Retry and unchanged palette/settings
+reselection retry only failed stages, retaining gates until success. Healthy stages
+are reused, unrelated imports do not erase failures, and no automatic retry loop
+runs. All, Cleanup Off and 1-bit bypass only their corresponding stages. Changing
+Cleanup does not retry a failed limiter. Source/settings changes filter obsolete
+failures and surface teardown releases its own records.

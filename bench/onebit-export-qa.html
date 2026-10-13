@@ -1,0 +1,96 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Actual-build 1-bit export acceptance</title>
+<style>body{margin:12px;font:14px system-ui;background:#20262b;color:#fff}button,select{font:inherit;padding:8px}pre{white-space:pre-wrap;max-height:260px;overflow:auto}iframe{width:100%;height:720px;border:1px solid #888}.pass{color:#9be7ad}.fail{color:#ffaaa0}</style>
+<h1>Actual-build 1-bit export acceptance</h1>
+<p>Keep this page foreground. One run per page load. Exports are intercepted and saved on the local test server, without device downloads. Input/rendering work is included in task timings; no source instrumentation is used. Longest-task values use Long Tasks entries: zero means none at least 50 ms, not zero work. This check makes no universal 50 ms guarantee.</p>
+<label>Target <select id="target"><option>desktop</option><option>phone</option></select></label>
+<label>Exports per case/build <select id="runs"><option>3</option><option>1</option></select></label>
+<button id="run">Run checks</button><pre id="report" role="status">Ready. Baseline/candidate builds must exist before running.</pre>
+<iframe id="app" title="Actual built app"></iframe>
+<script type="module">
+const frame=document.querySelector('#app'), report=document.querySelector('#report'), button=document.querySelector('#run');
+if(/Android|iPhone|iPad/.test(navigator.userAgent)) document.querySelector('#target').value='phone';
+const sleep=ms=>new Promise(done=>setTimeout(done,ms));
+const assert=(ok,message)=>{if(!ok)throw new Error(message);};
+const line=text=>{report.textContent+='\n'+text;report.scrollTop=report.scrollHeight;};
+async function json(response){const data=await response.json();if(!response.ok)throw new Error(data.error || `HTTP ${response.status}`);return data;}
+async function until(test,label,timeout=120000){const end=performance.now()+timeout;while(performance.now()<end){if(test())return;await sleep(40);}throw new Error(`Timed out: ${label}`);}
+const clips=[...Array.from({length:16},(_,i)=>`a${String(i+1).padStart(3,'0')}.gif`),'dungeon.gif'];
+const cases=[
+ {id:'cutout-dungeon',seed:'cutout',names:['dungeon.gif']},
+ {id:'cutout-wall23',seed:'cutout',names:[...clips,...Array.from({length:6},(_,i)=>`building${i+1}.png`)]},
+ {id:'cutout-stills12',seed:'cutout',names:Array.from({length:12},(_,i)=>`photo${i}.png`)},
+ {id:'bayer-dungeon',seed:'bayer',names:['dungeon.gif']},
+ {id:'none1-dungeon',seed:'none1',names:['dungeon.gif']},
+ {id:'none2-dungeon',seed:'none2',names:['dungeon.gif']},
+ {id:'captured-settings',seed:'cutout',names:['dungeon.gif'],mutate:true}
+];
+const cached=new Map();
+async function files(names){return Promise.all(names.map(async name=>{
+ if(!cached.has(name)){const path=name.startsWith('photo')?`/noise/${name.match(/\d+/)[0]}.png`:`/fixtures/${name}`;const response=await fetch(path,{cache:'no-store'});assert(response.ok,`Fixture missing: ${name}`);cached.set(name,new File([await response.blob()],name,{type:name.endsWith('.gif')?'image/gif':'image/png'}));}
+ return cached.get(name);
+}));}
+const digest=async bytes=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(n=>n.toString(16).padStart(2,'0')).join('');
+const content=value=>JSON.stringify(value.entries ?? {sha256:value.sha256,size:value.size});
+let win,doc,currentErrors,step='startup';const errorLists=[];
+async function load(build,test,runId){
+ frame.src=`/${build}/?seed=${test.seed}&qa=${runId}-${test.id}`;
+ await until(()=>{try{return frame.contentWindow?.location.pathname===`/${build}/` && new URLSearchParams(frame.contentWindow.location.search).get('qa')===`${runId}-${test.id}` && frame.contentWindow.__onebitQA && frame.contentDocument?.querySelector('.export-action');}catch{return false;}},'built app startup');
+ win=frame.contentWindow;doc=frame.contentDocument;currentErrors=win.__onebitQA.errors;errorLists.push({build,scenario:test.id,errors:currentErrors});
+ const module=doc.querySelector('script[type="module"][src]');assert(module,'Built module entry missing');
+ const transfer=new win.DataTransfer();for(const file of await files(test.names))transfer.items.add(file);
+ const input=doc.querySelector('input[type="file"][multiple]');assert(input,'Artwork file input missing');input.files=transfer.files;input.dispatchEvent(new win.Event('change',{bubbles:true}));
+ await until(()=>test.names.every(name=>[...doc.querySelectorAll('.caption-preview')].some(node=>node.getAttribute('aria-label')===`Preview ${name}`)),'all imported items');
+ assert(doc.querySelectorAll('.grid .tile').length===test.names.length,'Unexpected wall item count');await sleep(1000);
+ return {entry:module.getAttribute('src'),viewport:[win.innerWidth,win.innerHeight],dpr:win.devicePixelRatio,longTasksSupported:win.__onebitQA.observed};
+}
+async function exported(test,build,iteration,result){
+ await sleep(600);assert(!document.hidden&&!doc.hidden,'Test must remain foreground');
+ // Verify frame drawing before measurement. Scheduler waits do not depend on rAF afterward.
+ await Promise.race([new Promise(done=>win.requestAnimationFrame(()=>done())),sleep(2000).then(()=>{throw new Error('App frame did not draw');})]);
+ const q=win.__onebitQA;q.observer?.takeRecords();q.long.length=0;q.exports.length=0;
+ const start=win.performance.now();let mutation=null;
+ const save=doc.querySelector('.export-action');assert(!save.disabled,'Export unexpectedly disabled');save.click();
+ if(test.mutate)win.setTimeout(()=>{
+   mutation={at:win.performance.now(),before:JSON.parse(win.localStorage.getItem('bitify')).style};
+   doc.body.dispatchEvent(new win.KeyboardEvent('keydown',{key:'ArrowDown',code:'ArrowDown',bubbles:true,cancelable:true}));
+   win.queueMicrotask(()=>{mutation.after=JSON.parse(win.localStorage.getItem('bitify')).style;});
+ },0);
+ await until(()=>q.exports.length>0,'export anchor');const e=q.exports[0];
+ await sleep(100);q.long.push(...(q.observer?.takeRecords()??[]).map(e=>({start:e.startTime,duration:e.duration})));
+ const bytes=await (await win.fetch(e.href)).arrayBuffer(), clientSha=await digest(bytes);
+ const capture=await json(await fetch(`/capture/${result.id}/${test.id}/${build}/${iteration}`,{method:'POST',headers:{'x-export-name':e.name},body:bytes}));
+ assert(clientSha===capture.sha256,'Captured bytes changed during local upload');
+ const tasks=q.long.filter(task=>task.start+task.duration>start && task.start<e.at);
+ const row={iteration,totalMs:e.at-start,longestTaskMs:q.observed?Math.max(0,...tasks.map(t=>t.duration)):null,tasksOver50:q.observed?tasks.length:null,...capture};
+ if(mutation){row.mutation={...mutation,offsetMs:mutation.at-start};assert(mutation.at<e.at&&mutation.before!==mutation.after,'Settings did not change while export was pending');}
+ if(test.mutate)assert(content(capture)===result.cases['cutout-dungeon'][build].identity,'Captured export adopted later style settings');
+ assert(currentErrors.length===0,`App runtime errors: ${JSON.stringify(currentErrors)}`);return row;
+}
+button.onclick=async()=>{
+ if(button.disabled)return;button.disabled=true;report.textContent='Running actual builds…';report.className='';
+ const result=window.__onebitAcceptance={id:`${document.querySelector('#target').value}-${Date.now()}`,started:new Date().toISOString(),userAgent:navigator.userAgent,runs:Number(document.querySelector('#runs').value),cases:{},done:false,status:'running'};
+ try{
+  result.builds=await json(await fetch('/manifest',{cache:'no-store'}));
+  line(`Baseline ${result.builds.base.entry}; candidate ${result.builds.candidate.entry}.`);
+  for(const [caseIndex,test] of cases.entries()){
+   result.cases[test.id]={};const order=caseIndex%2?['candidate','base']:['base','candidate'];
+   for(const build of order){
+    step=`${test.id} / ${build}`;line(`RUN ${step}`);
+    const entry=result.cases[test.id][build]={environment:await load(build,test,result.id),rows:[]};
+    for(let iteration=1;iteration<=(test.mutate?1:result.runs);iteration++){
+     const row=await exported(test,build,iteration,result);entry.rows.push(row);
+     entry.identity??=content(row);assert(entry.identity===content(row),'Output varies between repeated exports');
+     line(`  ${iteration}: ${row.totalMs.toFixed(0)} ms total; longest >50 ms task ${row.longestTaskMs===null?'unsupported':row.longestTaskMs.toFixed(0)+' ms'}; ${row.size} bytes`);
+    }
+   }
+   assert(result.cases[test.id].base.identity===result.cases[test.id].candidate.identity,`${test.id}: baseline/candidate content differs`);
+   result.cases[test.id].identicalContent=true;line(`PASS ${test.id}: identical content${test.names.length>1?' per ZIP entry':''}.`);
+  }
+  assert(JSON.stringify(await json(await fetch('/manifest',{cache:'no-store'})))===JSON.stringify(result.builds),'Build assets changed during this run');
+  assert(errorLists.every(list=>list.errors.length===0),`Runtime errors: ${JSON.stringify(errorLists)}`);
+  result.status='pass';report.className='pass';line('PASS bounded checks. Independent decode and physical provenance review remain separate.');
+ }catch(error){result.status='fail';result.error={step,message:error.message,stack:error.stack};report.className='fail';line(`FAIL ${step}: ${error.message}`);}
+ finally{result.runtimeErrors=errorLists;result.finished=new Date().toISOString();try{result.saved=await json(await fetch(`/results/${result.id}`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(result)}));line(`Results: ${result.saved.saved}`);}catch(error){result.status='fail';result.saveError=error.message;line(`FAIL saving results: ${error.message}`);}result.done=true;line('Reload this QA page to rerun. The app iframe stays attached until page close.');}
+};
+</script></html>
