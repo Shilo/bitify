@@ -1955,7 +1955,7 @@ analysis through that queue, with posted tasks before analysis/unification and
 unchanged settings, ownership and cancellation guards. This measured conservative
 transport cutoff is not a cross-device timing guarantee.
 
-Auto leads the rail, separated from the nine curated full presets; saved
+Auto leads the rail directly before Resurrect 64 without a divider; saved
 palettes follow the curated choices. Fresh visits and global Reset select Palette and
 Auto. Existing saved choices remain intact. ENDESGA 32 is the curated fallback
 for missing/deleted existing palette selections. Generation
@@ -2081,7 +2081,8 @@ colors removes the masks/chevrons and exposes a normal scrollbar.
 
 The 1-bit header keeps its three-way Both/None switch. The Palette header instead has
 Import and Edit icon buttons with accessible labels and shared tooltips. Its rail starts
-with Auto and a divider, then Resurrect 64, ENDESGA 32, PICO-8 (16), DawnBringer 16, Grayscale 8,
+with Auto directly followed by Resurrect 64 without a divider, then ENDESGA 32,
+PICO-8 (16), DawnBringer 16, Grayscale 8,
 Ice Cream GB (4), Game Boy green (4), Glow (2) and Paper (2), then a
 divider and saved/session palettes. Preset attribution lives with each immutable record
 and in [palettes.md](../../palettes.md). Game Boy green is explicitly an LCD-inspired RGB

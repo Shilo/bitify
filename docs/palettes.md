@@ -10,7 +10,8 @@ an image, palette file or pasted colors; its edit icon opens color review. Names
 the round choices use a single line with an ellipsis when needed; full names remain in
 accessible labels and tooltips. More → Help lists the current mode's controls.
 
-**Auto is selected on fresh visits and global Reset, and leads the rail.**
+**Auto is selected on fresh visits and global Reset, and leads the rail.** It sits
+directly before Resurrect 64, without a divider between them.
 Saved choices remain intact, including older 1-bit preferences. ENDESGA 32 remains
 the curated fallback for missing/deleted saved selections. PICO-8 remains available for its
 distinctive stylization. A shared preset supplies consistent allowed RGB values;
