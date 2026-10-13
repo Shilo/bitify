@@ -3,7 +3,9 @@ import omggif from 'omggif';
 import { analyzeImportFrames, importFrameMessage, importFrameTransfers } from './image-import-core.js';
 import { decodeGif } from './gif.js';
 
-const rgba = Uint8ClampedArray.of(34, 35, 35, 255, 35, 35, 35, 128, 240, 246, 240, 255, 0, 0, 0, 0);
+const pixelPattern = [34, 35, 35, 255, 35, 35, 35, 128, 240, 246, 240, 255, 0, 0, 0, 0];
+const width = 65, height = 64; // Genuine >4096px source exercises production worker routing.
+const rgba = Uint8ClampedArray.from({ length: width * height * 4 }, (_, i) => pixelPattern[i % pixelPattern.length]);
 const png = () => Object.assign(new Blob([new Uint8Array(20)], { type: 'image/png' }), { name: 'exact.png' });
 function gif() {
   const bytes = new Uint8Array(2048), writer = new omggif.GifWriter(bytes, 2, 2, { palette: [0, 0x222323, 0xf0f6f0, 0xff8844], loop: 3 });
@@ -17,8 +19,8 @@ beforeEach(async () => {
   vi.resetModules(); workers = []; fault = null;
   vi.stubGlobal('ImageData', class { constructor(data, width, height) { Object.assign(this, { data, width, height }); } });
   native = vi.fn(function () {
-    return { close() {}, async decode() { return { image: { displayWidth: 2, displayHeight: 2,
-      visibleRect: { width: 2, height: 2 }, close() {}, async copyTo(data) { data.set(rgba); } } }; } };
+    return { close() {}, async decode() { return { image: { displayWidth: width, displayHeight: height,
+      visibleRect: { width, height }, close() {}, async copyTo(data) { data.set(rgba); } } }; } };
   });
   native.isTypeSupported = async () => true;
   vi.stubGlobal('ImageDecoder', native);
@@ -72,6 +74,26 @@ beforeEach(async () => {
 afterEach(() => { workers.forEach(w => w.terminate()); vi.unstubAllGlobals(); });
 
 describe('lazy serial image imports', () => {
+  it('uses identical cooperative analysis for a 4096px still, without loading a worker', async () => {
+    const small = rgba.slice(0, 4096 * 4);
+    native.mockImplementation(function () {
+      return { close() {}, async decode() { return { image: { displayWidth: 64, displayHeight: 64,
+        visibleRect: { width: 64, height: 64 }, close() {}, async copyTo(data) { data.set(small); } } }; } };
+    });
+    const expected = await analyzeImportFrames({ frames: [{ original: { width: 64, height: 64, data: small } }] }, 'blue', 200, { cooperative: false });
+    const decoded = await api.decodeImportedFile(png(), { source: 'blue', alphaCut: 200 });
+    expect(workers).toHaveLength(0);
+    expect(decoded.frames[0].original.data).toEqual(small);
+    expect(decoded.frames[0].img).toEqual(expected.frames[0].img);
+    const original = decoded.frames[0].original;
+    const next = await api.reanalyzeImported(decoded, { source: 'green', alphaCut: 1 });
+    expect(next.frames[0].original).toBe(original); // No extra RGBA copy or detached source.
+    expect(next.frames[0].img.data).toBe(original.data);
+    expect(next).toMatchObject({ analysisSource: 'green', analysisCut: 1 });
+    api.takeImportedFrames(next);
+    expect(() => api.reanalyzeImported(next)).toThrow('unpublished');
+    expect(workers).toHaveLength(0); expect(native).toHaveBeenCalledOnce();
+  });
   it('retains native straight PNG bytes and aliasing through actual transfers, with no canvas', async () => {
     expect(workers).toHaveLength(0);
     const decoded = await api.decodeImportedFile(png());

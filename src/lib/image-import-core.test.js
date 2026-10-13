@@ -59,4 +59,11 @@ describe('import analysis and transferable reconstruction', () => {
     expect(() => validateImportSettings('other', 128)).toThrow();
     expect(() => validateImportSettings('luma', 0)).toThrow();
   });
+  it('cancels a small still during its initial posted task without analyzing it', async () => {
+    const controller = new AbortController(), input = fixture();
+    const result = analyzeImportFrames(input, 'luma', 128, { signal: controller.signal });
+    controller.abort();
+    await expect(result).rejects.toMatchObject({ name: 'AbortError' });
+    expect(input.frames.every(f => !Object.hasOwn(f, 'img'))).toBe(true);
+  });
 });

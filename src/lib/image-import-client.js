@@ -3,6 +3,9 @@ import { checkCanceled } from './quantize.js';
 import { analyzeImportFrames, validateImportSettings, validateImportPixels, validateImportFrame } from './image-import-core.js';
 
 const queue = [], owned = new WeakMap();
+// Tiny stills avoid worker round trips; posted-task-separated analysis keeps
+// batches cooperative. GIFs and larger sources always use the worker when available.
+const SMALL_STILL_PIXELS = 4096;
 let worker, running = false;
 const abortError = () => new DOMException('The image import was canceled.', 'AbortError');
 function makeWorker() {
@@ -104,7 +107,9 @@ async function drain() {
       const job = queue.shift();
       try {
         checkCanceled(job.controller.signal);
-        const target = makeWorker();
+        const smallStill = job.file.type !== 'image/gif' && job.input?.frames.length === 1
+          && validateImportPixels(job.input.frames[0].original) <= SMALL_STILL_PIXELS;
+        const target = smallStill ? null : makeWorker();
         let result;
         if (target) {
           try { result = await runWorker(job, target); }
