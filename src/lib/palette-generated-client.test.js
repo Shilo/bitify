@@ -14,6 +14,7 @@ class FakeWorker {
         if (this.mode === 'hang') return;
         if (this.mode === 'invalid') { this.onmessage?.({ data: { type: 'invalid' } }); return; }
         if (this.mode === 'workerError') { this.onerror?.(); return; }
+        if (this.mode === 'messageError') { this.onmessageerror?.(); return; }
         this.accumulator = createGeneratedAccumulator(data.alphaCut, { signal: this.controller.signal }); this.inAsset = false;
       }
       if (data.type === 'chunk') {
@@ -45,6 +46,28 @@ beforeEach(async () => {
 afterEach(() => vi.unstubAllGlobals());
 
 describe('generated palette job ownership', () => {
+  it('rejects shared unreadable-message jobs, releases handlers and drains queued/retry work without poisoning caches', async () => {
+    failure = 'hang'; const snapshot = capture([{ original: image() }]);
+    const first = getPalette(snapshot), shared = getPalette(snapshot);
+    const rejected = expect(first).rejects.toThrow('could not be read'), sharedRejected = expect(shared).rejects.toThrow('could not be read');
+    const queued = getPalette(capture([{ original: image(1, [9, 8, 7]) }]));
+    await vi.waitFor(() => expect(instances[0]?.starts).toBe(1));
+    const broken = instances[0], late = broken.onmessageerror;
+    failure = 'normal'; broken.onmessageerror();
+    await Promise.all([rejected, sharedRejected]); expect((await queued).colors).toEqual(['#090807']);
+    expect((await getPalette(snapshot)).colors).toEqual(['#0c2238']);
+    expect(broken.terminated).toBe(true);
+    expect([broken.onmessage, broken.onerror, broken.onmessageerror]).toEqual([null, null, null]);
+    late(); expect(instances[1].terminated).not.toBe(true); expect(instances).toHaveLength(2);
+  });
+  it('lets abort win over a late unreadable-message event and leaves the replacement worker healthy', async () => {
+    failure = 'hang'; const controller = new AbortController(), snapshot = capture([{ original: image() }]);
+    const pending = getPalette(snapshot, { signal: controller.signal }), rejected = expect(pending).rejects.toMatchObject({ name: 'AbortError' });
+    await vi.waitFor(() => expect(instances[0]?.onmessageerror).toBeTypeOf('function'));
+    const late = instances[0].onmessageerror; controller.abort(); await rejected;
+    failure = 'normal'; expect((await getPalette(snapshot)).colors).toEqual(['#0c2238']);
+    late(); expect(instances[1].terminated).not.toBe(true);
+  });
   it.each([33, 64])('accepts and caches complete %i-color worker results without merging', async count => {
     const original = image(count);
     for (let n = 0; n < count; n++) original.data.set([n, n * 2, n * 3, 255], n * 4);
@@ -97,7 +120,7 @@ describe('generated palette job ownership', () => {
     queued.abort(); held.abort(); await Promise.all([firstRejected, secondRejected]); expect(instances).toHaveLength(1);
     failure = 'normal'; expect((await getPalette(capture([{ original: image() }]))).colors).toEqual(['#0c2238']);
   });
-  it.each(['startThrow', 'invalid', 'workerError', 'badResult', 'overCapacity'])('reports %s and terminates malformed workers before recovery', async mode => {
+  it.each(['startThrow', 'invalid', 'workerError', 'messageError', 'badResult', 'overCapacity'])('reports %s and terminates malformed workers before recovery', async mode => {
     failure = mode; await expect(getPalette(capture([{ original: image() }]))).rejects.toThrow(); expect(instances[0].terminated).toBe(true);
     failure = 'normal'; expect((await getPalette(capture([{ original: image() }]))).colors).toEqual(['#0c2238']);
   });

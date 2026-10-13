@@ -15,12 +15,14 @@ function makeWorker() {
 function runWorker(job, target) {
   return new Promise((resolve, reject) => {
     let asset = 0, frame = 0, at = 0, settled = false;
-    const clean = () => { target.onmessage = target.onerror = null; job.controller.signal.removeEventListener('abort', cancel); };
+    const clean = () => { target.onmessage = target.onerror = target.onmessageerror = null; job.controller.signal.removeEventListener('abort', cancel); };
     const finish = (error, result) => { if (settled) return; settled = true; clean(); error ? reject(error) : resolve(result); };
-    const fail = error => { target.terminate(); worker = null; finish(error); };
+    const fail = error => { if (settled) return; target.terminate(); if (worker === target) worker = null; finish(error); };
     const cancel = () => fail(abortError());
     target.onerror = () => fail(job.controller.signal.aborted ? abortError() : new Error('Generated palette worker failed.'));
+    target.onmessageerror = () => fail(job.controller.signal.aborted ? abortError() : new Error('Generated palette worker response could not be read.'));
     target.onmessage = ({ data }) => {
+      if (settled) return;
       try {
         checkCanceled(job.controller.signal);
         if (data.type === 'error') { const error = new Error(data.message); error.name = data.name || 'Error'; fail(error); return; }

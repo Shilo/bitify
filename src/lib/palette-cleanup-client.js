@@ -34,12 +34,14 @@ function runWorker(job, target) {
   const { signature: asked, controller } = job;
   return new Promise((resolve, reject) => {
     let frame = 0, at = 0, settled = false;
-    const clean = () => { target.onmessage = null; target.onerror = null; controller.signal.removeEventListener('abort', cancel); };
+    const clean = () => { target.onmessage = target.onerror = target.onmessageerror = null; controller.signal.removeEventListener('abort', cancel); };
     const finish = (error, result) => { if (settled) return; settled = true; clean(); error ? reject(error) : resolve(result); };
-    const fail = error => { target.terminate(); worker = null; finish(error); };
+    const fail = error => { if (settled) return; target.terminate(); if (worker === target) worker = null; finish(error); };
     const cancel = () => fail(abortError());
     target.onerror = () => fail(controller.signal.aborted ? abortError() : new Error('Palette cleanup worker failed.'));
+    target.onmessageerror = () => fail(controller.signal.aborted ? abortError() : new Error('Palette cleanup worker response could not be read.'));
     target.onmessage = ({ data }) => {
+      if (settled) return;
       try {
         checkCanceled(controller.signal);
         if (data.type === 'error') { const error = new Error(data.message); error.name = data.name || 'Error'; fail(error); return; }

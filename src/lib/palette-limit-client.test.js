@@ -15,6 +15,7 @@ class FakeWorker {
     if (this.mode === 'hang') return;
     if (this.mode === 'invalid') { queueMicrotask(() => this.onmessage?.({ data: { type: 'invalid' } })); return; }
     if (this.mode === 'workerError') { queueMicrotask(() => this.onerror?.()); return; }
+    if (this.mode === 'messageError') { queueMicrotask(() => this.onmessageerror?.()); return; }
     const self = this; let pass = 0;
     async function* read() {
       const current = ++pass;
@@ -38,6 +39,27 @@ beforeEach(async () => {
 afterEach(() => { vi.unstubAllGlobals(); });
 
 describe('limited palette job ownership and cache', () => {
+  it('rejects shared unreadable-message jobs, releases handlers and drains queued/retry work without poisoning caches', async () => {
+    failure = 'hang'; const item = { original: image() };
+    const first = getLimitedPalette(item, palette(), 128, 'rgb', 1), shared = getLimitedPalette(item, palette(), 128, 'rgb', 1);
+    const rejected = expect(first).rejects.toThrow('could not be read'), sharedRejected = expect(shared).rejects.toThrow('could not be read');
+    const queued = getLimitedPalette({ original: image([0, 0, 255, 255]) }, palette(), 128, 'rgb', 1);
+    const broken = instances[0], late = broken.onmessageerror;
+    failure = 'normal'; broken.onmessageerror();
+    await Promise.all([rejected, sharedRejected]); expect((await queued).colors).toEqual(['#0000ff']);
+    expect((await getLimitedPalette(item, palette(), 128, 'rgb', 1)).colors).toEqual(['#ff0000']);
+    expect(broken.terminated).toBe(true);
+    expect([broken.onmessage, broken.onerror, broken.onmessageerror]).toEqual([null, null, null]);
+    late(); expect(instances[1].terminated).not.toBe(true); expect(instances).toHaveLength(2);
+  });
+  it('lets abort win over a late unreadable-message event and leaves the replacement worker healthy', async () => {
+    failure = 'hang'; const controller = new AbortController(), item = { original: image() };
+    const pending = getLimitedPalette(item, palette(), 128, 'rgb', 1, { signal: controller.signal });
+    const rejected = expect(pending).rejects.toMatchObject({ name: 'AbortError' });
+    const late = instances[0].onmessageerror; controller.abort(); await rejected;
+    failure = 'normal'; expect((await getLimitedPalette(item, palette(), 128, 'rgb', 1)).colors).toEqual(['#ff0000']);
+    late(); expect(instances[1].terminated).not.toBe(true);
+  });
   it('removes last-canceled queued work while preserving a running export and a queued shared subscriber', async () => {
     failure = 'hang';
     const heldItem = { original: image() }, heldController = new AbortController();
@@ -138,7 +160,7 @@ describe('limited palette job ownership and cache', () => {
     expect(instances[0].chunks.every(chunk => chunk.size <= 128 * 1024 && chunk.buffer !== a.original.data.buffer && chunk.buffer !== b.original.data.buffer)).toBe(true);
     expect(a.original.data.byteLength).toBe(70000 * 4); expect(b.original.data.byteLength).toBe(35000 * 4);
   });
-  it.each(['startThrow', 'invalid', 'workerError'])('cleans failed %s worker state and permits the next queued job', async mode => {
+  it.each(['startThrow', 'invalid', 'workerError', 'messageError'])('cleans failed %s worker state and permits the next queued job', async mode => {
     failure = mode;
     await expect(getLimitedPalette({ original: image() }, palette(), 128, 'rgb', 1)).rejects.toThrow();
     const broken = instances[0]; expect(broken.terminated).toBe(true); expect(broken.onmessage).toBeNull(); expect(broken.onerror).toBeNull();

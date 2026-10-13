@@ -1,16 +1,21 @@
-import { analyzeImportFrames, importFrameMessage, importFrameTransfers } from './image-import-core.js';
+import { analyzeImportFrames, importFrameMessage, importFrameTransfers, validateImportSettings } from './image-import-core.js';
 
 let state, preparing = false;
 self.onmessage = async ({ data }) => {
   try {
     if (data.type === 'start') {
       if (state || preparing) throw new Error('An import is already running.');
+      validateImportSettings(data.source, data.alphaCut);
       preparing = true;
       let decoded;
       if (data.mode === 'gif') {
         const { decodeGif } = await import('./gif.js');
         const gif = decodeGif(new Uint8Array(await data.file.arrayBuffer()));
-        if (gif.frames.length < 2) throw new Error('Use browser decoding for a single-frame GIF.');
+        if (gif.frames.length === 1) {
+          preparing = false;
+          self.postMessage({ type: 'single-frame', count: 1, width: gif.width, height: gif.height });
+          return;
+        }
         decoded = { frames: gif.frames.map(frame => ({ original: { width: gif.width,
           height: gif.height, data: frame.data }, delay: frame.delay })), loop: gif.loop };
       } else if (data.mode === 'frames') decoded = { frames: data.frames, loop: data.loop };

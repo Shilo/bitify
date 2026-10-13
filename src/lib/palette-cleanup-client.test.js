@@ -14,6 +14,7 @@ class FakeWorker {
       if (this.mode === 'hang') return;
       if (this.mode === 'invalid') { queueMicrotask(() => this.onmessage?.({ data: { type: 'invalid' } })); return; }
       if (this.mode === 'workerError') { queueMicrotask(() => this.onerror?.()); return; }
+      if (this.mode === 'messageError') { queueMicrotask(() => this.onmessageerror?.()); return; }
       this.accumulator = createCleanupAccumulator(data.colors, data.alphaCut, data.metric, { signal: this.controller.signal });
       validateCleanupFrames(data.frames); this.frames = data.frames; this.frame = 0;
     }
@@ -48,6 +49,27 @@ beforeEach(async () => {
 afterEach(() => { vi.unstubAllGlobals(); });
 
 describe('whole-source cleanup job ownership', () => {
+  it('rejects shared unreadable-message jobs, releases handlers and drains queued/retry work without poisoning caches', async () => {
+    failure = 'hang'; const item = { original: image() };
+    const first = getPaletteCleanup(item, palette(), 128, 'rgb'), shared = getPaletteCleanup(item, palette(), 128, 'rgb');
+    const rejected = expect(first).rejects.toThrow('could not be read'), sharedRejected = expect(shared).rejects.toThrow('could not be read');
+    const queued = getPaletteCleanup({ original: image(2) }, palette(), 128, 'rgb');
+    const broken = instances[0], late = broken.onmessageerror;
+    failure = 'normal'; broken.onmessageerror();
+    await Promise.all([rejected, sharedRejected]); expect((await queued).width).toBe(2);
+    expect((await getPaletteCleanup(item, palette(), 128, 'rgb')).width).toBe(1);
+    expect(broken.terminated).toBe(true);
+    expect([broken.onmessage, broken.onerror, broken.onmessageerror]).toEqual([null, null, null]);
+    late(); expect(instances[1].terminated).not.toBe(true); expect(instances).toHaveLength(2);
+  });
+  it('lets abort win over a late unreadable-message event and leaves the replacement worker healthy', async () => {
+    failure = 'hang'; const controller = new AbortController(), item = { original: image() };
+    const pending = getPaletteCleanup(item, palette(), 128, 'rgb', { signal: controller.signal });
+    const rejected = expect(pending).rejects.toMatchObject({ name: 'AbortError' });
+    const late = instances[0].onmessageerror; controller.abort(); await rejected;
+    failure = 'normal'; expect((await getPaletteCleanup(item, palette(), 128, 'rgb')).width).toBe(1);
+    late(); expect(instances[1].terminated).not.toBe(true);
+  });
   it('removes canceled queued clips without aborting a running export or another queued subscriber', async () => {
     failure = 'hang'; const heldItem = { original: image() }, heldController = new AbortController();
     const heldPreview = getPaletteCleanup(heldItem, palette(), 128, 'rgb', { signal: heldController.signal });
@@ -141,7 +163,7 @@ describe('whole-source cleanup job ownership', () => {
     expect(instances[0].chunks.every(chunk => chunk.size <= 128 * 1024 && chunk.buffer !== a.data.buffer && chunk.buffer !== b.data.buffer)).toBe(true);
     expect(a.data).toEqual(before); expect(a.data.byteLength).toBe(70000 * 4); expect(b.data.byteLength).toBe(35000 * 4);
   });
-  it.each(['startThrow', 'invalid', 'workerError', 'badLabel', 'badFlag', 'badShape'])('reports %s failures and recovers on the next request', async mode => {
+  it.each(['startThrow', 'invalid', 'workerError', 'messageError', 'badLabel', 'badFlag', 'badShape'])('reports %s failures and recovers on the next request', async mode => {
     failure = mode; await expect(getPaletteCleanup({ original: image() }, palette(), 128, 'rgb')).rejects.toThrow();
     const broken = instances[0]; expect(broken.terminated).toBe(true); expect(broken.onmessage).toBeNull(); expect(broken.onerror).toBeNull();
     failure = 'normal'; expect((await getPaletteCleanup({ original: image() }, palette(), 128, 'rgb')).width).toBe(1);

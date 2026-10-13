@@ -33,17 +33,20 @@ function makeWorker() {
 function runWorker(job, target) {
   const { signature: asked, controller } = job;
   return new Promise((resolve, reject) => {
-    let pass = 0, frame = 0, at = 0;
-    const clean = () => { target.onmessage = null; target.onerror = null; controller.signal.removeEventListener('abort', cancel); };
-    const finish = (error, result) => { clean(); error ? reject(error) : resolve(result); };
+    let pass = 0, frame = 0, at = 0, settled = false;
+    const clean = () => { target.onmessage = target.onerror = target.onmessageerror = null; controller.signal.removeEventListener('abort', cancel); };
+    const finish = (error, result) => { if (settled) return; settled = true; clean(); error ? reject(error) : resolve(result); };
+    const fail = error => { if (settled) return; target.terminate(); if (worker === target) worker = null; finish(error); };
     const cancel = () => {
       // A worker whose module is still loading cannot acknowledge cancellation.
       // Only the last subscriber aborts this controller; release the serial queue
       // immediately rather than waiting for that canceled worker to start.
-      target.terminate(); worker = null; finish(abortError());
+      fail(abortError());
     };
-    target.onerror = () => { target.terminate(); worker = null; finish(controller.signal.aborted ? abortError() : new Error('Palette limit worker failed.')); };
+    target.onerror = () => fail(controller.signal.aborted ? abortError() : new Error('Palette limit worker failed.'));
+    target.onmessageerror = () => fail(controller.signal.aborted ? abortError() : new Error('Palette limit worker response could not be read.'));
     target.onmessage = ({ data }) => {
+      if (settled) return;
       try {
         if (data.type === 'error') { const error = new Error(data.message); error.name = data.name || 'Error'; finish(error); return; }
         if (data.type === 'result') { checkCanceled(controller.signal); finish(null, data.result); return; }
@@ -57,12 +60,12 @@ function runWorker(job, target) {
         const pixels = source.data.slice(at, end); at = end;
         target.postMessage({ type: 'chunk', data: pixels, weight: source.weight }, [pixels.buffer]);
       } catch (error) {
-        target.terminate(); worker = null; finish(error);
+        fail(error);
       }
     };
     controller.signal.addEventListener('abort', cancel, { once: true });
     try { target.postMessage({ type: 'start', colors: asked.colors, alphaCut: asked.alphaCut, metric: asked.metric, maxColors: asked.maxColors }); }
-    catch (error) { target.terminate(); worker = null; finish(error); }
+    catch (error) { fail(error); }
   });
 }
 async function drain() {
