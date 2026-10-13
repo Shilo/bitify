@@ -1,0 +1,139 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Actual-build live reanalysis acceptance</title>
+<style>body{margin:12px;font:14px system-ui;background:#20262b;color:#fff}button,select{font:inherit;padding:8px}pre{white-space:pre-wrap;max-height:260px;overflow:auto}iframe{width:100%;height:720px;border:1px solid #888}.pass{color:#9be7ad}.fail{color:#ffaaa0}</style>
+<h1>Actual-build live reanalysis acceptance</h1>
+<p>Foreground only, one run per page load. The production assets are unchanged. Test-only HTML observes canvas paints, browser Long Tasks and captures download bytes. Zero long-task duration means no task at least 50 ms was observed. Settlement includes a fixed 50 ms initial wait, 80 ms after the Updating images indicator clears and up to 30 ms polling overhead; it is not a kernel timing. Controlled posted-task holds apply only to correctness checks.</p>
+<label>Target <select id="target"><option>desktop</option><option>phone</option></select></label>
+<label>Alternating source changes per build <select id="runs"><option>6</option><option>2</option></select></label>
+<button id="run">Run checks</button><pre id="report" role="status">Ready. Build base/candidate under .tmp/reanalysis/site first.</pre>
+<button id="edges">Run edge checks</button>
+<iframe id="app" title="Actual built app"></iframe>
+<script type="module">
+const frame=document.querySelector('#app'),report=document.querySelector('#report'),button=document.querySelector('#run');
+if(/Android|iPhone|iPad/.test(navigator.userAgent))document.querySelector('#target').value='phone';
+const sleep=ms=>new Promise(done=>setTimeout(done,ms));
+const assert=(ok,message)=>{if(!ok)throw Error(message);};
+const line=text=>{report.textContent+='\n'+text;report.scrollTop=report.scrollHeight;};
+async function json(response){const data=await response.json();if(!response.ok)throw Error(data.error||`HTTP ${response.status}`);return data;}
+async function until(test,label,timeout=120000){const end=performance.now()+timeout;while(performance.now()<end){if(test())return;await sleep(30);}throw Error(`Timed out: ${label}`);}
+const clips=[...Array.from({length:16},(_,i)=>`a${String(i+1).padStart(3,'0')}.gif`),'dungeon.gif'];
+const photos=(count,size)=>Array.from({length:count},(_,i)=>`noise${size}-${i}.png`);
+const cases=[{id:'real-wall23',names:[...clips,...Array.from({length:6},(_,i)=>`building${i+1}.png`)]},{id:'stills12-1mp',names:photos(12,1024)},{id:'stills4-4mp',names:photos(4,2048)}];
+const cached=new Map(),errorLists=[];let win,doc,q,step='startup',loadSerial=0,result;
+const topTasks=[];
+const topLongTasksSupported=PerformanceObserver.supportedEntryTypes.includes('longtask');
+const topObserver=topLongTasksSupported?new PerformanceObserver(list=>topTasks.push(...list.getEntries().map(entry=>({start:entry.startTime,duration:entry.duration,name:entry.name,attribution:[...entry.attribution].map(value=>({containerType:value.containerType,containerName:value.containerName}))})))):null;
+topObserver?.observe({type:'longtask'});
+const settings=()=>JSON.parse(win.localStorage.getItem('bitify'));
+const updateVisible=()=>[...doc.querySelectorAll('.glass-toast.is-visible')].some(node=>node.textContent.includes('Updating images'));
+const content=value=>JSON.stringify(value.entries??{size:value.size,sha256:value.sha256});
+async function files(names){return Promise.all(names.map(async name=>{
+ if(!cached.has(name)){const noise=name.match(/^noise(1024|2048)-(\d+)\.png$/),path=noise?`/noise/${noise[1]}/${noise[2]}.png`:`/fixtures/${name}`;
+  const response=await fetch(path,{cache:'no-store'});assert(response.ok,`Missing fixture: ${name}`);cached.set(name,new File([await response.blob()],name,{type:name.endsWith('.gif')?'image/gif':'image/png'}));}
+ return cached.get(name);
+}));}
+async function load(build,names,source='green'){
+ const identity=`${result.id}-${++loadSerial}`;frame.src=`/${build}/?seed=${source}&qa=${identity}`;
+ await until(()=>{try{return frame.contentWindow?.location.pathname===`/${build}/`&&new URLSearchParams(frame.contentWindow.location.search).get('qa')===identity&&frame.contentWindow.__reanalysisQA&&frame.contentDocument?.querySelector('.export-action');}catch{return false;}},'app startup');
+ win=frame.contentWindow;doc=frame.contentDocument;q=win.__reanalysisQA;errorLists.push({build,identity,errors:q.errors,warnings:q.warnings});
+ const transfer=new win.DataTransfer();for(const file of await files(names))transfer.items.add(file);
+ const input=doc.querySelector('input[type="file"][multiple]');assert(input,'Artwork file input missing');input.files=transfer.files;input.dispatchEvent(new win.Event('change',{bubbles:true}));
+ await until(()=>names.every(name=>[...doc.querySelectorAll('.caption-preview')].some(node=>node.getAttribute('aria-label')===`Preview ${name}`)),'all imported images');
+ await until(()=>doc.querySelectorAll('.grid .tile canvas').length===names.length,'initial canvases');await sleep(600);
+ assert(settings().style==='cutout'&&settings().settings.cutout.source==='luma'&&settings().settings.solid.source===source,'Brightness seed mismatch');
+ return {entry:doc.querySelector('script[type="module"][src]').getAttribute('src'),viewport:[win.innerWidth,win.innerHeight],dpr:win.devicePixelRatio,longTasksSupported:q.observed};
+}
+function arrow(down){doc.body.dispatchEvent(new win.KeyboardEvent('keydown',{key:down?'ArrowDown':'ArrowUp',code:down?'ArrowDown':'ArrowUp',bubbles:true,cancelable:true}));}
+async function settle(style){await sleep(50);await until(()=>settings().style===style&&!updateVisible(),`${style} analysis publication`);await sleep(80);assert(q.errors.length===0,`Runtime error: ${JSON.stringify(q.errors)}`);}
+async function hashes(selector='.grid .tile canvas'){return Promise.all([...doc.querySelectorAll(selector)].map(async canvas=>{
+ const bytes=canvas.getContext('2d').getImageData(0,0,canvas.width,canvas.height).data;
+ return `${canvas.width}x${canvas.height}:`+[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(n=>n.toString(16).padStart(2,'0')).join('');
+}));}
+async function addExisting(names){
+ const transfer=new win.DataTransfer();for(const file of await files(names))transfer.items.add(file);
+ const input=doc.querySelector('input[type="file"][multiple]');input.files=transfer.files;input.dispatchEvent(new win.Event('change',{bubbles:true}));
+ await until(()=>names.every(name=>[...doc.querySelectorAll('.caption-preview')].some(node=>node.getAttribute('aria-label')===`Preview ${name}`)),'new imported images');await sleep(300);
+}
+async function edgeChecks(){
+ const photos2=photos(2,1024),out=result.checks={};
+ step='edges/viewer';await load('candidate',photos2);
+ // Use existing controls to challenge a viewer already mounted during an external
+ // settings change. Synthetic clicks behind a modal are test-only adversarial input.
+ doc.querySelector('button[aria-label="Style"]').click();await until(()=>doc.querySelector('button[aria-labelledby="style-label style-name"]'),'style chooser');doc.querySelector('button[aria-labelledby="style-label style-name"]').click();
+ await until(()=>doc.querySelector('[role="group"][aria-label="Style"] .preset'),'style choices');
+ const solid=[...doc.querySelectorAll('[role="group"][aria-label="Style"] .preset')].find(node=>node.textContent.trim()==='Solid');assert(solid,'Solid choice missing');
+ doc.querySelector('.caption-preview').click();await until(()=>doc.querySelector('.image-viewer[open] canvas'),'ready viewer');await sleep(100);const oldViewer=await hashes('.image-viewer canvas');q.hold=true;solid.click();await until(()=>q.queued.length>0,'held viewer source job');await sleep(100);
+ assert(JSON.stringify(await hashes('.image-viewer canvas'))===JSON.stringify(oldViewer),'Pending source change blanked/replaced existing viewer picture');
+ doc.querySelector('.viewer-compare').click();await sleep(80);assert(JSON.stringify(await hashes('.image-viewer canvas'))!==JSON.stringify(oldViewer),'Viewer Original unavailable during source update');doc.querySelector('.viewer-compare').click();await sleep(80);assert(JSON.stringify(await hashes('.image-viewer canvas'))===JSON.stringify(oldViewer),'Viewer lost retained conversion after Original');q.release();await settle('solid');doc.querySelector('.viewer-close').click();await sleep(80);out.viewer=true;line('PASS mounted viewer retention and Original during held source update.');
+ step='edges/animation';await load('candidate',['dungeon.gif']);q.hold=true;arrow(true);await until(()=>q.queued.length>0,'held animated source job');await sleep(80);const frozen=await hashes();const count=q.paints;await sleep(350);assert(q.paints===count&&JSON.stringify(await hashes())===JSON.stringify(frozen),'Converted GIF advanced during pending source update');
+ doc.querySelector('.view-toggle').click();await sleep(80);const originalPaints=q.paints;await sleep(500);assert(q.paints>originalPaints,'Original GIF stopped during source update');doc.querySelector('.view-toggle').click();await sleep(80);const returned=q.paints;await sleep(250);assert(q.paints===returned,'Returned converted GIF did not stay held');q.release();await settle('solid');const resumed=q.paints;await sleep(350);assert(q.paints>resumed,'Converted GIF did not resume after source publication');out.animation=true;line('PASS held converted GIF, independent Original playback and resumed conversion.');
+ step='edges/remove-all';await load('candidate',photos2);q.hold=true;arrow(true);await until(()=>q.queued.length>0,'held remove-all source job');doc.querySelector('button[aria-label="Remove all images"]').click();await until(()=>doc.querySelector('dialog[aria-labelledby="clear-title"][open]'),'remove-all dialog');doc.querySelector('dialog[aria-labelledby="clear-title"] .glass-modal__action--danger').click();await sleep(80);q.release();await until(()=>doc.querySelector('.example-caption')&&!updateVisible(),'example only after remove-all');await sleep(250);assert(doc.querySelectorAll('.caption-preview').length===0,'Canceled source pass restored removed wall');await addExisting(['building1.png']);assert(doc.querySelectorAll('.caption-preview').length===1,'Old images returned after new import');out.removeAll=true;line('PASS pending remove-all, example recovery and subsequent new import.');
+ step='edges/failure';await load('candidate',photos2);q.failNextPost=true;arrow(true);await until(()=>[...doc.querySelectorAll('.glass-toast.is-visible')].some(node=>node.textContent.includes('Could not update images')),'handled analysis failure');await sleep(400);assert(q.injectedFailures===1&&q.errors.length===0&&!updateVisible(),'Failure retried itself or escaped handling');arrow(false);await settle('cutout');arrow(true);await settle('solid');assert(q.injectedFailures===1&&q.errors.length===0,'Different source did not recover cleanly');out.failure=true;line('PASS one-shot handled source failure, no automatic loop and subsequent source recovery.');
+}
+document.querySelector('#edges').onclick=async()=>{
+ const edgeButton=document.querySelector('#edges');if(edgeButton.disabled||window.__reanalysisAcceptance?.status==='running')return;edgeButton.disabled=true;button.disabled=true;report.textContent='Running candidate edge checks…';report.className='';
+ result=window.__reanalysisEdgeAcceptance={id:`edge-${document.querySelector('#target').value}-${Date.now()}`,started:new Date().toISOString(),userAgent:navigator.userAgent,done:false,status:'running'};
+ try{result.builds=await json(await fetch('/manifest',{cache:'no-store'}));await edgeChecks();assert(errorLists.every(row=>row.errors.length===0&&row.warnings.length<=5),'Unexpected runtime errors or repeated ResizeObserver warning loop');result.status='pass';report.className='pass';line('PASS bounded candidate edge checks. Native clipboard and opacity drag are not part of this run.');}
+ catch(error){result.status='fail';result.error={step,message:error.message,stack:error.stack};report.className='fail';line(`FAIL ${step}: ${error.message}`);}
+ finally{q?.release();result.runtimeErrors=errorLists;result.finished=new Date().toISOString();try{result.saved=await json(await fetch(`/results/${result.id}`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(result)}));line(`Results: ${result.saved.saved}`);}catch(error){result.status='fail';result.saveError=error.message;}result.done=true;line('Reload to repeat edge checks.');}
+};
+async function measure(down){
+ assert(!document.hidden&&!doc.hidden,'Keep app foreground');const lastFrame=await new Promise(done=>win.requestAnimationFrame(done));
+ q.observer?.takeRecords();q.long.length=0;topObserver?.takeRecords();topTasks.length=0;q.rafGapMax=0;q.lastRaf=lastFrame;
+ const start=win.performance.now(),parentStart=performance.now(),before=q.paints;arrow(down);await settle(down?'solid':'cutout');const end=win.performance.now(),parentEnd=performance.now();
+ q.long.push(...(q.observer?.takeRecords()??[]).map(e=>({start:e.startTime,duration:e.duration})));
+ topTasks.push(...(topObserver?.takeRecords()??[]).map(entry=>({start:entry.startTime,duration:entry.duration,name:entry.name,attribution:[...entry.attribution].map(value=>({containerType:value.containerType,containerName:value.containerName}))})));
+ const tasks=q.long.filter(task=>task.start+task.duration>start&&task.start<end);
+ const authoritative=topLongTasksSupported?topTasks.filter(task=>task.start+task.duration>parentStart&&task.start<parentEnd):tasks;
+ return {style:settings().style,brightness:settings().settings[settings().style].source,settleMs:end-start,longestTaskMs:topLongTasksSupported||q.observed?Math.max(0,...authoritative.map(task=>task.duration)):null,tasksOver50:topLongTasksSupported||q.observed?authoritative.length:null,childLongestTaskMs:q.observed?Math.max(0,...tasks.map(task=>task.duration)):null,rafGapMaxMs:q.rafGapMax,wallPaints:q.paints-before,measurement:{parentStart,parentEnd,parentTimeOrigin:performance.timeOrigin,iframeStart:start,iframeEnd:end,iframeTimeOrigin:win.performance.timeOrigin,longTasksObserver:topLongTasksSupported?'top-level':'iframe',longTasks:authoritative}};
+}
+async function capture(scenario,build,iteration=1){
+ q.exports.length=0;const save=doc.querySelector('.export-action');assert(!save.disabled,'Save unexpectedly disabled');save.click();return await capturePending(scenario,build,iteration);
+}
+async function capturePending(scenario,build,iteration=1){
+ await until(()=>q.exports.length>0,'captured export');const e=q.exports[0],bytes=await(await win.fetch(e.href)).arrayBuffer();
+ const stored=await json(await fetch(`/capture/${result.id}/${scenario}/${build}/${iteration}`,{method:'POST',headers:{'x-export-name':e.name},body:bytes}));
+ assert(q.errors.length===0,`Runtime errors: ${JSON.stringify(q.errors)}`);return stored;
+}
+async function selectFamily(family){
+ doc.querySelector('button[aria-label="Palette"]').click();
+ await until(()=>doc.querySelector('[role="group"][aria-label="Color system"] button'),'color-family panel');
+ const buttons=[...doc.querySelectorAll('[role="group"][aria-label="Color system"] button')];
+ const selected=buttons.find(node=>node.textContent.trim()===(family==='full-palette'?'Palette':'1-bit'));assert(selected,'Color-family control missing');selected.click();
+}
+async function correctness(){
+ const names=photos(2,1024),out=result.correctness={};step='correctness: green baseline';await load('base',names);arrow(true);await settle('solid');out.greenBaseline=await capture('green-reference','base');
+ step='correctness: pending preview + A/B/A';await load('candidate',names);const old=await hashes();q.hold=true;arrow(true);await until(()=>q.queued.length>0,'held reanalysis task');await sleep(100);
+ assert(JSON.stringify(await hashes())===JSON.stringify(old),'Pending analysis replaced/blanked retained previews');out.retainedPreview=true;
+ doc.querySelector('.view-toggle').click();await sleep(50);assert(JSON.stringify(await hashes())!==JSON.stringify(old),'Original unavailable during pending analysis');doc.querySelector('.view-toggle').click();await sleep(50);assert(JSON.stringify(await hashes())===JSON.stringify(old),'Returning from Original lost retained preview');out.originalPending=true;
+ arrow(false);await sleep(50);q.release();await settle('cutout');assert(JSON.stringify(await hashes())===JSON.stringify(old),'Canceled green pass overwrote current luma preview');out.cancelABA=true;
+ step='correctness: captured source export';q.hold=true;arrow(true);await until(()=>q.queued.length>0,'held green pass');q.exports.length=0;doc.querySelector('.export-action').click();await sleep(50);assert(q.exports.length===0,'Export finished before held source reanalysis');arrow(false);await sleep(50);q.release();out.capturedGreen=await capturePending('captured-green','candidate');await settle('cutout');
+ assert(content(out.capturedGreen)===content(out.greenBaseline),'Export adopted later brightness/style');out.capturedSource=true;
+ step='correctness: removal while pending';q.hold=true;arrow(true);await until(()=>q.queued.length>0,'held removal pass');const remove=doc.querySelector(`button[aria-label="Remove ${names[0]}"]`);assert(remove,'Remove control missing');remove.click();await sleep(50);q.release();await settle('solid');assert(doc.querySelectorAll('.grid .tile').length===1,'Canceled pass restored removed image');out.removed=await capture('removed-green','candidate');
+ await load('base',[names[1]]);arrow(true);await settle('solid');out.removedBaseline=await capture('removed-green','base');assert(content(out.removed)===content(out.removedBaseline),'Remaining image differs after canceled-wall replacement');out.removePending=true;
+ step='correctness: family switch while pending';await load('candidate',names);q.hold=true;arrow(true);await until(()=>q.queued.length>0,'held family-switch pass');await selectFamily('full-palette');await sleep(50);q.release();await until(()=>settings().family==='full-palette'&&!updateVisible(),'palette family');await sleep(500);out.paletteAfterCancel=await capture('palette-cancel','candidate');
+ await load('base',names);await selectFamily('full-palette');await until(()=>settings().family==='full-palette','baseline palette family');await sleep(500);out.paletteBaseline=await capture('palette-cancel','base');assert(content(out.paletteAfterCancel)===content(out.paletteBaseline),'Canceled analysis affected palette output');out.familyPending=true;
+ line('PASS retained previews, A/B/A cancellation, captured-source export, removal and family switch; exact content versus fresh baselines.');
+}
+button.onclick=async()=>{
+ if(button.disabled)return;button.disabled=true;report.textContent='Running actual builds…';report.className='';
+ result=window.__reanalysisAcceptance={id:`${document.querySelector('#target').value}-${Date.now()}`,started:new Date().toISOString(),userAgent:navigator.userAgent,runs:Number(document.querySelector('#runs').value),cases:{},done:false,status:'running'};
+ try{
+  result.builds=await json(await fetch('/manifest',{cache:'no-store'}));line(`Base ${result.builds.base.entry}; candidate ${result.builds.candidate.entry}.`);
+  for(const [index,test]of cases.entries()){
+   const entry=result.cases[test.id]={};
+   for(const build of(index%2?['candidate','base']:['base','candidate'])){
+    step=`${test.id}/${build}`;line(`RUN ${step}`);const data=entry[build]={environment:await load(build,test.names),rows:[]};
+    for(let i=0;i<result.runs;i++){await sleep(400);const row=await measure(i%2===0);data.rows.push(row);line(` ${row.style}: ${row.settleMs.toFixed(0)} ms settle; longest >=50 ms task ${row.longestTaskMs===null?'unsupported':row.longestTaskMs.toFixed(0)+' ms'}; max rAF gap ${row.rafGapMaxMs.toFixed(0)} ms`);}
+    data.output=await capture(test.id,build);assert(settings().style==='cutout','Even alternating run count required');
+   }
+   assert(content(entry.base.output)===content(entry.candidate.output),`${test.id}: settled output changed`);entry.identicalOutput=true;line(`PASS ${test.id}: identical export content.`);
+  }
+  result.sameSourceControl={scope:'two 1024-square stills, two alternating changes per build'};
+  for(const build of ['base','candidate']){step=`same-source-control/${build}`;await load(build,photos(2,1024),'luma');result.sameSourceControl[build]=[await measure(true),await measure(false)];line(`PASS ${build} same-Luma style control.`);}
+  await correctness();assert(errorLists.every(row=>row.errors.length===0&&row.warnings.length<=5),`Runtime errors or repeated ResizeObserver warning loop: ${JSON.stringify(errorLists)}`);
+  assert(JSON.stringify(await json(await fetch('/manifest',{cache:'no-store'})))===JSON.stringify(result.builds),'Builds changed during run');result.status='pass';report.className='pass';line('PASS bounded checks. Independent export decoding and phone provenance remain separate.');
+ }catch(error){result.status='fail';result.error={step,message:error.message,stack:error.stack};report.className='fail';line(`FAIL ${step}: ${error.message}`);}
+ finally{q?.release();result.runtimeErrors=errorLists;result.finished=new Date().toISOString();try{result.saved=await json(await fetch(`/results/${result.id}`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(result)}));line(`Results: ${result.saved.saved}`);}catch(error){result.status='fail';result.saveError=error.message;line(`FAIL saving results: ${error.message}`);}result.done=true;line('Reload to rerun. Test iframe remains attached until page close.');}
+};
+</script></html>

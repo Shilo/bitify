@@ -2613,3 +2613,13 @@ failures and surface teardown releases its own records.
 A drag whose export request is unavailable is refused without a preparing/wait notice;
 existing Auto or preparation-failure guidance explains the block. A valid request
 whose native export file is not yet ready retains the preparation notice.
+
+Live 1-bit Brightness and relevant Opacity cut changes capture immutable source/frame
+metadata, prepare replacement analyses cooperatively between frames and shared seam
+passes, and publish the captured wall together only for the current source/cut,
+family and membership. Existing converted pictures remain visible while preparation
+is pending or deferred by dragging, with converted animation held; Original remains
+available. Empty-wall preparation uses only the example. Matching analyses perform
+no replacement work. Failure reports once without an automatic retry loop. Export
+gestures prepare their captured sources/settings independently from wall cancellation,
+and Copy requests clipboard writing immediately with a promise for the PNG.

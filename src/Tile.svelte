@@ -19,7 +19,7 @@
   // Without `onremove` the tile is a preview only and has no buttons.
   // `set` is the style's settings. `budget` is set while one of their sliders is being dragged:
   // the milliseconds this tile may take to convert its image after each move.
-  let { item, first, second, style, set, family = 'two-color', palette, palettePending = false, alphaCut = 128, metric = 'oklab', maxColors = 0, cleanup = false, active = true, exportDisabled = false, onpalettestatus, paletteRetry = 0, flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false, exportDrag } = $props();
+  let { item, first, second, style, set, family = 'two-color', palette, palettePending = false, analysisPending = false, alphaCut = 128, metric = 'oklab', maxColors = 0, cleanup = false, active = true, exportDisabled = false, onpalettestatus, paletteRetry = 0, flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false, exportDrag } = $props();
   const failureOwner = Symbol('palette preview surface');
   const reportStage = (type, stage, inputs, attempt, error) => untrack(() => onpalettestatus?.({ type, owner: failureOwner, stage, inputs, attempt, error }));
   $effect(() => () => onpalettestatus?.({ type: 'remove', owner: failureOwner }));
@@ -259,6 +259,7 @@
     const frame = frames[at];
     if (originalVisible) return (originals[at] ??= mw < item.img.w ? new ImageData(shrink(frame.original, mw, mh), mw) : frame.original);
     if (family === 'full-palette') return fullItem === item ? fullPixels : null;
+    if (analysisPending) return null;
     if (!masks[at]) {
       // Stencil's first conversion of an image walks all of it, once. That is not the pace of a conversion, so it is done before the clock starts.
       if (style === 'stencil') spritesOf(frame.img);
@@ -279,7 +280,7 @@
     else if (family === 'full-palette' && !palettePending && !palette
       || untrack(() => lastConverted?.item) !== currentItem) lastConverted = null;
   });
-  const pixels = $derived(completedPixels ?? (!originalVisible && family === 'full-palette' && (palettePending || palette && !fullReady)
+  const pixels = $derived(completedPixels ?? (!originalVisible && (family === 'two-color' ? analysisPending : palettePending || palette && !fullReady)
     && lastConverted?.item === item ? lastConverted.pixels : null));
 
   // Plays an animation: after the current frame's delay, step to the next and start again.
@@ -287,6 +288,7 @@
     // Offscreen animations retain their current canvas and caches. Resume the
     // held frame's delay when visible; hidden time does not advance their clock.
     if (!active || frames.length < 2 || !inView) return;
+    if (family === 'two-color' && !originalVisible && analysisPending) return;
     // Original playback follows source delays independently of conversion. Read
     // originalVisible first so a finished preview cannot restart that timer.
     if (family === 'full-palette' && !originalVisible && !fullReady) return;

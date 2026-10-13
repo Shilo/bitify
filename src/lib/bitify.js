@@ -1,6 +1,7 @@
 // 1-bit conversion. No DOM: everything works on plain typed arrays, so it runs in tests.
 
 import { iconOf } from './icon.js';
+import { checkCanceled, yieldTask } from './quantize.js';
 export { iconOf } from './icon.js';
 
 const ALPHA_CUT = 128; // alpha below this is an empty pixel, unless `analyze` is given another cut
@@ -95,13 +96,17 @@ function toneCenter(hist, cut) {
 // jumps from one side to the other are left out; the tone split already shows those.
 function seamStrength(frames, t) {
   const hist = new Array(256).fill(0);
-  for (const { w, h, lum, right, down } of frames) {
-    for (let y = 0, p = 0; y < h; y++) for (let x = 0; x < w; x++, p++) {
-      const light = lum[p] > t;
-      if (x + 1 < w && lum[p + 1] > t === light) hist[right[p]]++;
-      if (y + 1 < h && lum[p + w] > t === light) hist[down[p]]++;
-    }
+  for (const frame of frames) addSeams(hist, frame, t);
+  return seamThreshold(hist);
+}
+function addSeams(hist, { w, h, lum, right, down }, t) {
+  for (let y = 0, p = 0; y < h; y++) for (let x = 0; x < w; x++, p++) {
+    const light = lum[p] > t;
+    if (x + 1 < w && lum[p + 1] > t === light) hist[right[p]]++;
+    if (y + 1 < h && lum[p + w] > t === light) hist[down[p]]++;
   }
+}
+function seamThreshold(hist) {
   hist[0] = 0; // identical neighbours are not seams, and a pair with an empty pixel in it is on record as 0
   return Math.max(MIN_EDGE, otsu(hist, 0));
 }
@@ -165,14 +170,21 @@ export function analyze({ width: w, height: h, data }, source = 'luma', cut = AL
 // updates them in place.
 export function unify(frames) {
   if (frames.length < 2) return frames;
+  const { hist, edges, auto } = unifyHistograms(frames);
+  return assignUnified(frames, hist, edges, auto, seamStrength(frames, auto));
+}
+function unifyHistograms(frames) {
   const hist = new Array(256).fill(0), edges = new Array(256).fill(0);
   for (const f of frames) for (let i = 0; i < 256; i++) { hist[i] += f.hist[i]; edges[i] += f.edges[i]; }
   const auto = otsu(hist, 127);
+  return { hist, edges, auto };
+}
+function assignUnified(frames, hist, edges, auto, autoSeam) {
   const shared = {
     auto,
     autoTone: toneCenter(hist, auto),
     autoLine: Math.max(MIN_EDGE, otsu(edges, 0)),
-    autoSeam: seamStrength(frames, auto), // picked after the shared cut, which decides the tones
+    autoSeam, // picked after the shared cut, which decides the tones
     hasAlpha: frames.some(f => f.hasAlpha),
     soft: frames.some(f => f.soft),
     lo: Math.min(...frames.map(f => f.lo)),
@@ -180,6 +192,21 @@ export function unify(frames) {
   };
   for (const f of frames) Object.assign(f, shared);
   return frames;
+}
+
+// Only unpublished analyses may be passed here. The same seam kernel runs one
+// frame per posted task; single-frame behavior remains the synchronous no-op.
+export async function unifyAsync(frames, { signal } = {}) {
+  checkCanceled(signal);
+  if (frames.length < 2) return frames;
+  const { hist, edges, auto } = unifyHistograms(frames), seams = new Array(256).fill(0);
+  for (const frame of frames) {
+    await yieldTask();
+    checkCanceled(signal);
+    addSeams(seams, frame, auto);
+  }
+  checkCanceled(signal);
+  return assignUnified(frames, hist, edges, auto, seamThreshold(seams));
 }
 
 // What Stencil needs to know of each sprite, held for every solid pixel of it:

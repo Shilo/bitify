@@ -63,8 +63,14 @@ browser decoding before unpublished RGBA transfers. Acknowledged frames transfer
 their original and analysis buffers once. Worker failures re-decode the immutable
 File; canceled work never falls back or publishes. Source/cut changes reprepare
 unpublished imports before atomic publication. The tiny demo keeps its old path.
-No-worker fallback yields between GIF frames/analyses; one large frame/unify and
-live-wall 1-bit reanalysis can still block. Source/analysis memory is unchanged.
+No-worker import fallback yields between GIF frames/analyses; one large frame/unify
+can still block. Live 1-bit source/cut reanalysis uses new unpublished analyses,
+yielding before each frame analysis and shared seam pass. Only the current captured
+wall/source/cut publishes together; pending converted playback holds its last picture,
+and Original remains available. Exports independently prepare captured settings.
+Matching analyses skip all preparation; there is no remembered-source cache. Old and
+new analyses coexist temporarily, adding roughly three bytes per changed source pixel.
+One large frame and cold structural rendering can still block.
 Generated's empty wall uses the ready animated demo; an invisible nonempty real wall
 must remain authoritative. Pending generation and conversion handoff retain the same
 item's completed preview, including a prior 1-bit conversion, with current-frame

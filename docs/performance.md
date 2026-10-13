@@ -1201,3 +1201,29 @@ finite observer warning notes and limits are in
 Blocked export drag requests now refuse without claiming preparation is running.
 The preparation notice applies only to a currently valid request whose file is not
 ready. Unavailable Auto and failed limiter/Cleanup guidance remain authoritative.
+
+### October 13: live 1-bit source changes
+
+Changing Brightness or a relevant Opacity cut no longer replaces analyses in a
+synchronous wall-wide pass. `image-reanalysis.js` captures immutable source references
+and frame metadata before yielding, analyzes into new arrays, and runs the unchanged
+shared animation seam calculation one frame per posted turn. An already matching
+analysis retains identity without posting work. There is no extra remembered-source
+cache. Original sources are neither transferred nor mutated.
+
+The app publishes the completed captured wall together only while its controller,
+family, wall membership, source and relevant cut remain current. An empty wall handles
+only the demo; an imported wall never reanalyzes the hidden demo. Rapid changes cancel
+obsolete preparation. During pending or deferred slider analysis, a tile holds its
+completed converted picture and pauses converted animation; Original remains available.
+Save, Copy, ZIP and drag preparation independently analyze their captured source and
+settings. Copy supplies its clipboard promise in the initiating gesture.
+
+Analysis failures report once and leave the prior picture until a source/cut change
+requests another attempt. Temporary old and new analyses add roughly three bytes per
+changed source pixel, plus histograms and existing render caches. Individual large
+frame analysis/seam calls, cold Stencil/Icon preparation and publication rendering
+remain synchronous; yielding is not a universal task-time bound.
+Independent overlapping exports may also own replacement analyses; this figure is
+not a bound on total transient memory. Actual-build acceptance and native Pixel task
+measurements are in `docs/research/2026-10-13-live-onebit-reanalysis.md`.

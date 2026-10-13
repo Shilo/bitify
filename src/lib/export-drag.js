@@ -48,7 +48,7 @@ export function createExportDrag({ request, prepare, notify,
     const operation = { asked, controller };
     running = operation;
     try {
-      // prepare starts synchronously: App's reread must precede its first await.
+      // prepare captures its source/settings before asynchronous conversion.
       // Module imports cannot be canceled. Free the hover queue immediately on
       // abort, while releasing any file URL an obsolete preparation returns later.
       const result = await new Promise((resolve, reject) => {

@@ -3,6 +3,7 @@
   import { unify } from './lib/bitify.js';
   import { saveOne, saveAll, copyOne, pngBlob, downloadName, fileBytes } from './lib/save.js';
   import { bitifiedAnimation } from './lib/bitified-animation.js';
+  import { analysisMatches, reanalyzeItem, reanalyzeItems } from './lib/image-reanalysis.js';
   import { fitImageWall, IMAGE_INSET } from './lib/workspace.js';
   import { restore } from './lib/settings.js';
   import { STYLES, inOrder, inks, stepStyle, stepPalette } from './lib/presets.js';
@@ -93,6 +94,9 @@
   // a plain object that is a new one whenever any of them changes.
   let settings = $state(saved.settings);
   const set = $derived({ ...settings[style] });
+  const analysisSource = $derived(set.source ?? 'luma');
+  const analysisCut = $derived(set.alpha ?? 128);
+  const needsAnalysis = item => family === 'two-color' && !analysisMatches(item, { source: analysisSource, alphaCut: analysisCut });
   // The two colors as they are drawn: a None one is null (see `inks`).
   const ink = $derived(inks(first, second, none, style));
   // The theme follows the system until the other one is picked in the More menu. A pick is kept
@@ -249,7 +253,7 @@
   const autos = $derived.by(() => {
     const imgs = (items.length ? items : example ? [example] : []).map(i => i.img);
     const range = of => (imgs.length ? [Math.min(...imgs.map(of)), Math.max(...imgs.map(of))] : [128, 128]);
-    const cuts = style === 'stencil' && imgs.length ? [Math.min(...imgs.map(img => spritesOf(img).cuts[0])), Math.max(...imgs.map(img => spritesOf(img).cuts[1]))] : [0, 0];
+    const cuts = family === 'two-color' && style === 'stencil' && imgs.length && !canvasItems.some(needsAnalysis) ? [Math.min(...imgs.map(img => spritesOf(img).cuts[0])), Math.max(...imgs.map(img => spritesOf(img).cuts[1]))] : [0, 0];
     return { threshold: range(img => autoThreshold(img, style)), seams: range(img => img.autoSeam), cuts };
   });
   // Size of the area the wall can use, measured from the page (see .probe in app.css).
@@ -530,20 +534,28 @@
     const by = prepared ? `${analysisSource} ${frames[0].img.soft ? analysisCut : ''}` : readBy(frames[0].img.soft);
     return frames.length > 1 ? { id, name, by, ...frames[0], frames, loop } : { id, name, by, ...frames[0] };
   }
-  // The item analysed the way the current style reads images: itself, if it already is.
-  const reread = item =>
-    item.by === readBy(item.img.soft) ? item : toItem(item.id, item.name, { frames: (item.frames ?? [item]).map(f => ({ original: f.original, delay: f.delay })), loop: item.loop });
-  // When a setting or a change of style changes how images are read, every image is analysed
-  // again. That reads every pixel, so while a slider is being dragged over a wall with a lot of
-  // pixels on it, it waits for the slider to rest or be let go.
-  // It runs before the tiles redraw (`pre`): after them, each tile would first convert its image
-  // as it was analysed before, and then again.
+  // Live analyses stay unpublished until the captured wall is ready. Never transfer
+  // or mutate live buffers; canceled passes cannot replace a newer source/settings epoch.
+  let analysisRequest;
   $effect.pre(() => {
     if (family === 'full-palette') return;
-    if (dragging && items.reduce((n, item) => n + pixelsOf(item), 0) > 1e6) return;
-    const next = items.map(reread);
-    if (next.some((item, i) => item !== items[i])) items = next;
-    if (example) example = reread(example);
+    const realWall = items, demo = realWall.length ? null : example;
+    const selected = realWall.length ? realWall : demo ? [demo] : [];
+    const settings = { source: analysisSource, alphaCut: selected.some(i => i.img.soft) ? analysisCut : 128 };
+    if (!selected.some(item => !analysisMatches(item, settings))) return;
+    if (dragging && selected.reduce((n, item) => n + pixelsOf(item), 0) > 1e6) return;
+    const controller = new AbortController();
+    analysisRequest = controller;
+    const done = selected.reduce((n, item) => n + pixelsOf(item), 0) >= BUSY_PIXELS ? working('Updating images…') : () => {};
+    reanalyzeItems(selected, settings, { signal: controller.signal }).then(next => {
+      if (controller.signal.aborted || analysisRequest !== controller || family !== 'two-color'
+        || analysisSource !== settings.source || (selected.some(item => item.img.soft) && analysisCut !== settings.alphaCut)
+        || items !== realWall || (!realWall.length && example !== demo)) return;
+      if (realWall.length) items = next; else example = next[0];
+    }).catch(error => {
+      if (!controller.signal.aborted && error.name !== 'AbortError') say('Could not update images. Try changing Brightness or Opacity cut again.', 6000);
+    }).finally(done);
+    return () => controller.abort();
   });
 
   const imageImports = new Set(), exampleImportController = new AbortController();
@@ -671,9 +683,7 @@
       return { item: live, snapshot, key: JSON.stringify({ ...snapshot, generated: snapshot.generated?.key }) };
     },
     async prepare({ item, snapshot }, { signal }) {
-      // Reread is synchronous and reads the current analysis settings. Do this
-      // before yielding; the controller acquired snapshot in this same task.
-      const read = snapshot.family === 'full-palette' ? item : reread(item);
+      const read = snapshot.family === 'full-palette' ? item : await reanalyzeItem(item, { source: snapshot.set.source, alphaCut: snapshot.set.alpha }, { signal });
       const image = await bitified(read, snapshot, { signal });
       const bytes = await fileBytes(image, { signal });
       const name = downloadName(image).replace(/[<>:"/\\|?*\x00-\x1f]/g, '-');
@@ -710,8 +720,10 @@
     try {
       const downloading = `Downloading ${downloadName({ ...item, family: asked.family })}…`;
       say(downloading);
-      const read = asked.family === 'full-palette' ? item : reread(item);
-      await during(downloading, pixelsOf(item), async () => saveOne(await bitified(read, asked)));
+      await during(downloading, pixelsOf(item), async () => {
+        const read = asked.family === 'full-palette' ? item : await reanalyzeItem(item, { source: asked.set.source, alphaCut: asked.set.alpha });
+        return saveOne(await bitified(read, asked));
+      });
       say(downloading);
     } catch (error) {
       exportFailure(error, asked, `${item.name} could not be saved.`);
@@ -722,9 +734,12 @@
   async function copy(item) {
     if (generatedUnavailable || itemPaletteFailed(item)) return;
     try {
-      const asked = asking(), read = asked.family === 'full-palette' ? item : reread(item);
+      const asked = asking();
       // the clipboard is asked at once, as Safari demands, and handed the PNG when it has been made
-      await copyOne(during(`Copying ${item.name}…`, item.img.w * item.img.h, async () => pngBlob(await still(read, asked))));
+      await copyOne(during(`Copying ${item.name}…`, item.img.w * item.img.h, async () => {
+        const read = asked.family === 'full-palette' ? item : await reanalyzeItem(item, { source: asked.set.source, alphaCut: asked.set.alpha });
+        return pngBlob(await still(read, asked));
+      }));
       say(`${item.name} copied${item.frames ? ' as a still image' : ''}.`);
     } catch {
       say(`${item.name} could not be copied.`);
@@ -741,8 +756,10 @@
         ? `Downloading bitify.zip (${selected.length} images)…`
         : `Downloading ${downloadName({ ...selected[0], family: asked.family })}…`;
       say(downloading);
-      const all = asked.family === 'full-palette' ? selected : selected.map(reread);
-      await during(downloading, all.reduce((sum, item) => sum + pixelsOf(item), 0), () => saveAll(all, item => bitified(item, asked)));
+      await during(downloading, selected.reduce((sum, item) => sum + pixelsOf(item), 0), () => saveAll(selected, async item => {
+        const read = asked.family === 'full-palette' ? item : await reanalyzeItem(item, { source: asked.set.source, alphaCut: asked.set.alpha });
+        return bitified(read, asked);
+      }));
       say(downloading);
     } catch (error) {
       exportFailure(error, asked, 'The images could not be saved.');
@@ -879,7 +896,7 @@
   <div class="tiles">
     {#each canvasItems as item (item.id)}
       <Tile {item} inset={IMAGE_INSET} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} palettePending={generatedPending} {alphaCut} {metric} {maxColors} {cleanup} onpalettestatus={reportPaletteStage} {paletteRetry}
-        flipped={effectiveOriginal} comparing={previewing} active={!viewed} exportDisabled={generatedUnavailable || itemPaletteFailed(item)} budget={dragging ? DRAG_MS / canvasItems.length : 0}
+        analysisPending={needsAnalysis(item)} flipped={effectiveOriginal} comparing={previewing} active={!viewed} exportDisabled={generatedUnavailable || itemPaletteFailed(item)} budget={dragging ? DRAG_MS / canvasItems.length : 0}
         oncompare={compareHold} onopen={items.length ? openImage : undefined}
         exportDrag={items.length ? dragExports : undefined}
         onactivate={items.length ? undefined : () => picker.click()}
@@ -893,7 +910,7 @@
 </div>
 
 {#if viewed}
-  <ImageViewer item={viewed} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} palettePending={generatedPending} {alphaCut} {metric} {maxColors} {cleanup} onpalettestatus={reportPaletteStage} {paletteRetry} {busy} {message} flipped={viewInitialOriginal}
+  <ImageViewer item={viewed} analysisPending={needsAnalysis(viewed)} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} palettePending={generatedPending} {alphaCut} {metric} {maxColors} {cleanup} onpalettestatus={reportPaletteStage} {paletteRetry} {busy} {message} flipped={viewInitialOriginal}
     paletteFailureNotice={failureNotice(currentPaletteFailures.filter(f => f.inputs.item === viewed))} onpaletteretry={retryPaletteFailures} exportDisabled={generatedUnavailable || itemPaletteFailed(viewed)} exportDrag={viewed.id === 0 ? undefined : dragExports}
     onsave={viewed.id === 0 ? undefined : () => save(viewed)}
     oncopy={viewed.id === 0 ? undefined : () => copy(viewed)}
