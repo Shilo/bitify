@@ -172,17 +172,33 @@
     cachedClip = { request, handle };
     return () => { handle?.release(); };
   });
-  let fullItem;
+  let fullItem, fullCompleted;
   $effect(() => {
-    const source = frames[at].original, colors = conversionPalette, width = mw, height = mh, cut = alphaCut, matching = metric, clean = conversionCleanup;
+    const frame = frames[at], frameAt = at, source = frame.original, data = source.data, sourceWidth = source.width, sourceHeight = source.height;
+    const colors = conversionPalette, width = mw, height = mh, cut = alphaCut, matching = metric, clean = conversionCleanup, cleaning = cleanup;
     fullReady = false;
     // Keep the last completed frame while the next frame or settings convert.
     // Clearing it on every async frame removes the canvas and exposes the grid.
     // Readiness still belongs to the requested frame, not these retained pixels.
-    if (family !== 'full-palette' || fullItem !== item || !palette && !palettePending) fullPixels = null;
+    if (family !== 'full-palette' || fullItem !== item || !palette && !palettePending) {
+      fullPixels = null;
+      fullCompleted = null;
+    }
     fullItem = item;
-    if (family !== 'full-palette' || !width || !colors || cleanup && !clean || originalVisible || !active
+    if (family !== 'full-palette' || !width || !colors || cleaning && !clean || originalVisible || !active
       || frames.length > 1 && !inView) return;
+    // This record belongs only to the retained, successfully published pixels.
+    // Original/viewer/visibility changes do not alter their conversion inputs.
+    // A canceled request or a different animation frame can never make it ready.
+    const completed = fullCompleted;
+    if (completed && completed.frame === frame && completed.frameAt === frameAt
+      && completed.source === source && completed.data === data && completed.sourceWidth === sourceWidth && completed.sourceHeight === sourceHeight
+      && completed.colors === colors && completed.width === width && completed.height === height
+      && completed.cut === cut && completed.matching === matching && completed.cleaning === cleaning
+      && completed.cleaned === clean?.result && completed.apply === clean?.apply) {
+      fullReady = true;
+      return;
+    }
     const controller = new AbortController();
     const produce = async signal => {
       const result = await quantizePreviewAsync(source, colors, cut, width, height, { signal, metric: matching });
@@ -193,6 +209,8 @@
     pending.then(result => {
       if (!controller.signal.aborted) {
         fullPixels = new ImageData(palettePixels(result, colors).data, width, height);
+        fullCompleted = { frame, frameAt, source, data, sourceWidth, sourceHeight, colors, width, height, cut, matching,
+          cleaning, cleaned: clean?.result, apply: clean?.apply };
         fullReady = true;
       }
     }).catch(error => { if (error.name !== 'AbortError') console.error('Palette preview failed', error); });
