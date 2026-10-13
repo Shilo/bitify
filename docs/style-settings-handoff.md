@@ -2,7 +2,7 @@
 
 Written 2026-10-08. For whoever picks this up next: what was built, what has been checked,
 what has not, and what is left to decide. The rules themselves are in the spec,
-[2026-10-06-bitify-app-design.md](superpowers/specs/2026-10-06-bitify-app-design.md)
+[2026-10-06-colorfetti-app-design.md](superpowers/specs/2026-10-06-colorfetti-app-design.md)
 ("Style panel", "Each style's settings", "Remembered settings"), and per style in
 [styles.md](styles.md). This file does not repeat them.
 
@@ -148,7 +148,7 @@ These need a person, or a device this work did not have:
 ## Before merging
 
 - Run through "What has not been checked", items 1 to 3 at least.
-- Merge or rebase onto `main` if it has moved. `src/lib/bitify.js`, `src/App.svelte`,
+- Merge or rebase onto `main` if it has moved. `src/lib/recolor.js`, `src/App.svelte`,
   `src/Dock.svelte`, `src/Tile.svelte` and `src/app.css` are all touched here.
 - Every push to `main` deploys.
 
@@ -158,7 +158,7 @@ These need a person, or a device this work did not have:
   setting is an entry there, a line in `mask` (or in `analyze`, if it changes what the
   analysis finds), a row in the spec's table and a paragraph in `styles.md`. The tray and
   the chips draw themselves from the list.
-- Time `bitify.js` before and after any change to its loops, each case in its own process.
+- Time `recolor.js` before and after any change to its loops, each case in its own process.
   Two measurements in one process disagree by more than the changes being measured.
 - The dev server for this worktree: `npm run dev -- --port 5176 --strictPort`. The preview
   tool reads the main checkout's `.claude/launch.json`, not this worktree's.

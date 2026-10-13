@@ -1,4 +1,4 @@
-/* GlassKit 1.22.2 materials over Bitify geometry. Floating islands is the only layout. */
+/* GlassKit 1.22.2 materials over Colorfetti geometry. Floating islands is the only layout. */
 :root {
   --bg: #f1f2f3; --surface: #e8ecef; --fg: var(--gl-color-text); --muted: var(--gl-color-text-muted);
   --line: var(--gl-border-subtle); --tile: #e6e9eb; --tile2: #dce0e3;
@@ -6,7 +6,7 @@
   --canvas-checker-a: #c5cbd1; --canvas-checker-b: #d2d6da;
   --control-size: 44px; --control-shell: 56px; --hit: var(--control-size);
   --image-gap: 12px; --image-inset: 4px; --canvas-min-workspace: 131px;
-  /* GlassKit default materials, with Bitify canvas geometry. No surface-token overrides. */
+  /* GlassKit default materials, with Colorfetti canvas geometry. No surface-token overrides. */
   --canvas-material: var(--gl-surface-2); --canvas-readable: var(--canvas-material);
   --canvas-popover: var(--gl-surface-3);
   --canvas-modal: linear-gradient(to bottom,var(--gl-card-glow-top),var(--gl-card-glow-bottom));

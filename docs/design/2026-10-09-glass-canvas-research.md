@@ -9,7 +9,7 @@ Use an immersive full-window workspace with a quiet grid, a small number of grou
 
 The strongest version of the proposal is not glass on everything. It is a clear functional layer above an unglazed content layer. GlassKit should provide a reusable material vocabulary for the functional layer; it should not decide interaction behavior, accessibility, canvas geometry, or the appearance of image pixels.
 
-These are researched guidance and design recommendations, not measured usability findings from Bitify. Suggested gaps, surface sizes, responsive thresholds, and performance targets below require prototype evaluation.
+These are researched guidance and design recommendations, not measured usability findings from Colorfetti. Suggested gaps, surface sizes, responsive thresholds, and performance targets below require prototype evaluation.
 
 ## Evidence from Apple
 
@@ -35,7 +35,7 @@ Source: [Human Interface Guidelines: Layout](https://developer.apple.com/design/
 
 Apple recommends related command groups, generally no more than three groups, predictable placement, and one prominent primary action. Navigation and document context belong at the leading edge, common commands centrally, and persistent actions and inspector toggles at the trailing edge. Placement and grouping should remain recognizable across platforms.
 
-For Bitify, preserve relationships among document operations, conversion controls, and export actions. Numerous independent capsules would add material boundaries without improving understanding.
+For Colorfetti, preserve relationships among document operations, conversion controls, and export actions. Numerous independent capsules would add material boundaries without improving understanding.
 
 Source: [Human Interface Guidelines: Toolbars](https://developer.apple.com/design/human-interface-guidelines/toolbars).
 
@@ -49,7 +49,7 @@ A sheet serves a scoped task. iOS supports nonmodal sheets and medium/large dete
 
 Source: [Human Interface Guidelines: Sheets](https://developer.apple.com/design/human-interface-guidelines/sheets).
 
-Desktop panels supplement a document or selection. An inspector can instead occupy a split-view pane. Direct controls such as sliders are appropriate for quick adjustments. Bitify's recurring style and palette tasks benefit from a coherent inspector rather than unrelated dialogs.
+Desktop panels supplement a document or selection. An inspector can instead occupy a split-view pane. Direct controls such as sliders are appropriate for quick adjustments. Colorfetti's recurring style and palette tasks benefit from a coherent inspector rather than unrelated dialogs.
 
 Source: [Human Interface Guidelines: Panels](https://developer.apple.com/design/human-interface-guidelines/panels).
 
@@ -57,7 +57,7 @@ Source: [Human Interface Guidelines: Panels](https://developer.apple.com/design/
 
 Current Apple guidance recommends adequate separation for dense chrome and text outside glass controls. Scroll-edge effects establish legibility where content moves beneath floating elements; they are not decoration. Do not copy an effect into regions that do not need it.
 
-Bitify's floating document titles, image names, and status need predictable backing, protected positioning, or an appropriate edge treatment. Naked low-contrast text over arbitrary imagery will not remain dependable.
+Colorfetti's floating document titles, image names, and status need predictable backing, protected positioning, or an appropriate edge treatment. Naked low-contrast text over arbitrary imagery will not remain dependable.
 
 Source: [Human Interface Guidelines: Scroll Views](https://developer.apple.com/design/human-interface-guidelines/scroll-views).
 
@@ -75,7 +75,7 @@ Fine, high-contrast repeating detail can compete with sprites. A heavy blur can 
 
 A checkerboard communicates actual image transparency. A full-window checkerboard can make the surrounding workspace appear to be transparent image content. Use a subtle line/dot grid for the workspace and reserve a checkerboard for alpha inside image bounds. Never export the workspace grid or material into the converted image.
 
-This distinction is especially important because Bitify permits either of its two image colors to be None. Transparency is a real feature, not just decoration.
+This distinction is especially important because Colorfetti permits either of its two image colors to be None. Transparency is a real feature, not just decoration.
 
 ### Group floating controls
 
@@ -106,11 +106,11 @@ Distinguish persistent layout reservations from temporary overlays:
 - Do not initiate an automatic layout reflow while a user is dragging a slider or interacting directly with an image.
 - Switching the inspector's tab should preserve its outer size where practical.
 
-These are recommended interaction rules to test, not Apple mandates. The existing source-of-truth Bitify design already emphasizes watching image changes without dock or settings overlap. Preserve that goal even when the visual background extends under the controls.
+These are recommended interaction rules to test, not Apple mandates. The existing source-of-truth Colorfetti design already emphasizes watching image changes without dock or settings overlap. Preserve that goal even when the visual background extends under the controls.
 
 ### Continuous background does not require an infinite canvas
 
-A full-window background can coexist with Bitify's existing arranged image wall. An infinite/freeform canvas introduces separate questions about pan, zoom, ordering, keyboard navigation, selection, and how exported images relate to the workspace. Do not silently introduce that product change as a side effect of a glass treatment.
+A full-window background can coexist with Colorfetti's existing arranged image wall. An infinite/freeform canvas introduces separate questions about pan, zoom, ordering, keyboard navigation, selection, and how exported images relate to the workspace. Do not silently introduce that product change as a side effect of a glass treatment.
 
 ## Recommended responsive behavior
 

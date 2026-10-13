@@ -37,14 +37,14 @@ Browser checks found two additional real CSS bugs: compact picker sizing affecte
 - Fullscreen art region is 1075×884 or 320×568. Square source fits 884×884 or 320×320 without cropping, zero inset; headers remain 56px shells with44px actions. Close restores the image trigger focus.
 - Mobile Share is 44×44 and a direct figure child; desktop action capsule display:none in touch fixture. Sheet ordering, Cancel/native focus, Copy success, selected-item Remove, last-item Add focus and modal Cancel/Remove were exercised.
 - Imported 18 files including GIF; removed the first via sheet and saved remaining 17 as a ZIP. Parsed outputs: ZIP 17 entries including GIF; single GIF 28×28,8 frames; PNG 64×64. Real picker/encoding/download paths were used.
-- Actual overflowing canvas makes only outer editing/file shells opaque with blur:none in both themes. Clearing imports restores normal glass and Bitify example. More/Help/Reset/Remove modal contents compute opaque themed backgrounds.
+- Actual overflowing canvas makes only outer editing/file shells opaque with blur:none in both themes. Clearing imports restores normal glass and Colorfetti example. More/Help/Reset/Remove modal contents compute opaque themed backgrounds.
 - Motion fixture computes surface animation:none and toggle transition0s. Production fixture console contains no warnings/errors. Temporary test images were removed and normal preview viewport restored.
 
 ## Screenshots and limits
 
-![Circular real style previews and bottom-only controls](mockups/bottom-circular-style-desktop-dark.png)
 
-[Desktop](mockups/bottom-workspace-desktop-dark.png), [palette desktop](mockups/bottom-palette-desktop-dark.png), [palette touch](mockups/bottom-palette-touch-dark.png), [dark phone](mockups/bottom-workspace-touch-dark.png), [light phone](mockups/bottom-workspace-touch-light.png), [dark sheet](mockups/bottom-share-sheet-touch-dark.png), [light sheet](mockups/bottom-share-sheet-touch-light.png), [fullscreen phone](mockups/bottom-fullscreen-touch-dark.png).
+
+Desktop, palette desktop, palette touch, dark phone, light phone, dark sheet, light sheet, fullscreen phone.
 
 Physical iOS/Safari, actual multi-touch and the previously reported Brave/GIF backdrop flicker remain device/browser verification items. No further user decision is required for the implemented tasks.
 

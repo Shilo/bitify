@@ -4,26 +4,25 @@
 
 **Goal:** Add the Cutout style (the End of End look) as the default, stop Lines Auto from collapsing on soft shading, and stop Checker, Bayer and Atkinson from breaking an image's darkest and lightest colors.
 
-**Architecture:** Everything that decides pixels stays in the DOM-free module `src/lib/bitify.js`. `analyze` records three more facts per image (darkest brightness, lightest brightness, seam strength), `unify` shares them across the frames of an animation, and `mask` gains one style and new rules for three. `mask` keeps its arguments and never reads the two colors, so Swap inverts every style and the components need no new props. The interface change is one list entry, one help line, two CSS numbers and the default style.
+**Architecture:** Everything that decides pixels stays in the DOM-free module `src/lib/recolor.js`. `analyze` records three more facts per image (darkest brightness, lightest brightness, seam strength), `unify` shares them across the frames of an animation, and `mask` gains one style and new rules for three. `mask` keeps its arguments and never reads the two colors, so Swap inverts every style and the components need no new props. The interface change is one list entry, one help line, two CSS numbers and the default style.
 
 **Tech Stack:** Vite 8, Svelte 5 (runes, no SvelteKit), plain JavaScript, Vitest 4.
 
-**Spec:** [docs/superpowers/specs/2026-10-07-conversion-styles-design.md](../specs/2026-10-07-conversion-styles-design.md). Read it before starting; this plan argues from it. The app's standing source of truth, [2026-10-06-bitify-app-design.md](../specs/2026-10-06-bitify-app-design.md), is updated by each task below.
+**Spec:** [docs/superpowers/specs/2026-10-07-conversion-styles-design.md](../specs/2026-10-07-conversion-styles-design.md). Read it before starting; this plan argues from it. The app's standing source of truth, [2026-10-06-colorfetti-app-design.md](../specs/2026-10-06-colorfetti-app-design.md), is updated by each task below.
 
-Every change to `src/lib/bitify.js` and `src/lib/bitify.test.js` in this plan was applied task by task to a throwaway copy before the plan was written. `npx vitest run src/lib/bitify.test.js` passed 25 tests after Task 1, 30 after Task 2 and 40 after Task 3, and the worked examples in the documentation steps are the real output of that code. The interface changes in Task 4 were not run; Task 4 has its own browser checks.
+Every change to `src/lib/recolor.js` and `src/lib/recolor.test.js` in this plan was applied task by task to a throwaway copy before the plan was written. `npx vitest run src/lib/recolor.test.js` passed 25 tests after Task 1, 30 after Task 2 and 40 after Task 3, and the worked examples in the documentation steps are the real output of that code. The interface changes in Task 4 were not run; Task 4 has its own browser checks.
 
 ## Before Task 1
 
 - The spec, its comparison sheet and this plan are not committed yet. Create the branch `conversion-styles` from `main` (in a worktree, per superpowers:using-git-worktrees), make sure these three files are in it, and commit them first:
 
 ```bash
-git add docs/superpowers/specs/2026-10-07-conversion-styles-design.md docs/superpowers/specs/2026-10-07-conversion-styles-spike.png docs/superpowers/plans/2026-10-07-conversion-styles.md
 git commit -m "docs: spec and plan for Cutout and the conversion fixes
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 ```
 
-- Run `npx vitest run src/lib/bitify.test.js` and confirm `Tests  24 passed (24)`. If the count differs, `main` has moved since this plan was written: read the test file and adjust the counts below, not the code.
+- Run `npx vitest run src/lib/recolor.test.js` and confirm `Tests  24 passed (24)`. If the count differs, `main` has moved since this plan was written: read the test file and adjust the counts below, not the code.
 
 ## Global Constraints
 
@@ -31,7 +30,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 - **One commit per task**, made at the end of that task, containing only that task's files. This is a standing instruction from the user.
 - End every commit message with the trailer `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`.
 - Plain JavaScript, Svelte 5 runes only. No TypeScript, no new dependencies.
-- `src/lib/bitify.js` stays free of DOM access.
+- `src/lib/recolor.js` stays free of DOM access.
 - `mask(analysis, style, threshold)` keeps exactly these arguments and returns one byte per pixel: 0 empty, 1 first color, 2 second color. It must never read the chosen colors. Dark pixels and lines are 1; light pixels and fill are 2.
 - The floor for Auto edge strength and Auto seam strength is the single constant `MIN_EDGE = 24`.
 - A pixel is empty when its alpha is below 128. Empty pixels stay empty in every style.
@@ -57,9 +56,9 @@ Inputs the spec implies but does not spell out, most likely first. Each is pinne
 An image with only soft shading has nothing for Otsu to separate, so it splits the shading steps themselves and almost every pixel becomes a line. A floor fixes it.
 
 **Files:**
-- Modify: `src/lib/bitify.js` (constants at the top, the last line of `analyze`, the `shared` line of `unify`)
-- Test: `src/lib/bitify.test.js` (the `lines` block)
-- Modify: `docs/superpowers/specs/2026-10-06-bitify-app-design.md` (Threshold, Testing)
+- Modify: `src/lib/recolor.js` (constants at the top, the last line of `analyze`, the `shared` line of `unify`)
+- Test: `src/lib/recolor.test.js` (the `lines` block)
+- Modify: `docs/superpowers/specs/2026-10-06-colorfetti-app-design.md` (Threshold, Testing)
 - Modify: `docs/styles.md` (The threshold)
 
 **Interfaces:**
@@ -68,7 +67,7 @@ An image with only soft shading has nothing for Otsu to separate, so it splits t
 
 - [ ] **Step 1: Write the failing tests**
 
-In `src/lib/bitify.test.js`, inside `describe('lines', ...)`, add this test directly above the test named `survives an image with no solid pixels, and a large non-square one`:
+In `src/lib/recolor.test.js`, inside `describe('lines', ...)`, add this test directly above the test named `survives an image with no solid pixels, and a large non-square one`:
 
 ```js
   it('auto does not take soft shading for boundaries', () => {
@@ -109,12 +108,12 @@ becomes
 
 - [ ] **Step 2: Run the tests to verify they fail**
 
-Run: `npx vitest run src/lib/bitify.test.js`
+Run: `npx vitest run src/lib/recolor.test.js`
 Expected: 2 failed, both with `expected +0 to be 24`.
 
 - [ ] **Step 3: Implement the floor**
 
-In `src/lib/bitify.js`, add the constant under `ALPHA_CUT`:
+In `src/lib/recolor.js`, add the constant under `ALPHA_CUT`:
 
 ```js
 const ALPHA_CUT = 128; // alpha below this is an empty pixel
@@ -147,12 +146,12 @@ to
 
 - [ ] **Step 4: Run the tests to verify they pass**
 
-Run: `npx vitest run src/lib/bitify.test.js`
+Run: `npx vitest run src/lib/recolor.test.js`
 Expected: `Tests  25 passed (25)`
 
 - [ ] **Step 5: Update the documents**
 
-In `docs/superpowers/specs/2026-10-06-bitify-app-design.md`, under `### Threshold`, replace
+In `docs/superpowers/specs/2026-10-06-colorfetti-app-design.md`, under `### Threshold`, replace
 
 ```
 - For Lines, on the histogram of non-zero differences between horizontally and vertically
@@ -201,7 +200,7 @@ with
 - [ ] **Step 6: Commit**
 
 ```bash
-git add src/lib/bitify.js src/lib/bitify.test.js docs/superpowers/specs/2026-10-06-bitify-app-design.md docs/styles.md
+git add src/lib/recolor.js src/lib/recolor.test.js docs/superpowers/specs/2026-10-06-colorfetti-app-design.md docs/styles.md
 git commit -m "fix: Lines Auto no longer takes soft shading for boundaries
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
@@ -214,9 +213,9 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 Today these styles shift the cut-off by a fixed amount, which can pass an image's darkest or lightest color and punch holes in outlines and highlights. They now work on a tone from 0 to 1 that runs from the image's darkest brightness, through the threshold at 0.5, to its lightest.
 
 **Files:**
-- Modify: `src/lib/bitify.js` (`analyze`, `unify`, `mask`)
-- Test: `src/lib/bitify.test.js` (the `analyze`, `mask` and `unify` blocks)
-- Modify: `docs/superpowers/specs/2026-10-06-bitify-app-design.md` (Styles, Animated GIFs, Structure, Testing)
+- Modify: `src/lib/recolor.js` (`analyze`, `unify`, `mask`)
+- Test: `src/lib/recolor.test.js` (the `analyze`, `mask` and `unify` blocks)
+- Modify: `docs/superpowers/specs/2026-10-06-colorfetti-app-design.md` (Styles, Animated GIFs, Structure, Testing)
 - Modify: `docs/styles.md` (a new Tone subsection; the Checker, Bayer and Atkinson sections)
 
 **Interfaces:**
@@ -225,7 +224,7 @@ Today these styles shift the cut-off by a fixed amount, which can pass an image'
 
 - [ ] **Step 1: Write the failing tests**
 
-In `src/lib/bitify.test.js`, inside `describe('analyze', ...)`, add this test directly above the test named `treats alpha below 128 as empty and 128 or more as solid`:
+In `src/lib/recolor.test.js`, inside `describe('analyze', ...)`, add this test directly above the test named `treats alpha below 128 as empty and 128 or more as solid`:
 
 ```js
   it('records the darkest and lightest brightness of the solid pixels', () => {
@@ -301,12 +300,12 @@ Inside `describe('unify', ...)`, add this test after the last one (`leaves a sin
 
 - [ ] **Step 2: Run the tests to verify they fail**
 
-Run: `npx vitest run src/lib/bitify.test.js`
+Run: `npx vitest run src/lib/recolor.test.js`
 Expected: several failures. Among them `records the darkest and lightest brightness` with `expected [ undefined, undefined ] to deeply equal [ 20, 240 ]`, and `checker and bayer: a color at the threshold is dark when nothing is darker`, where today's code patterns the darkest color.
 
 - [ ] **Step 3: Record the range in `analyze` and share it in `unify`**
 
-In `src/lib/bitify.js`, change the comment above `analyze` from
+In `src/lib/recolor.js`, change the comment above `analyze` from
 
 ```js
 // `auto` is the Auto threshold for the brightness styles, `autoLine` the one for Lines.
@@ -428,12 +427,12 @@ The last line is Solid, unchanged in behavior.
 
 - [ ] **Step 5: Run the tests to verify they pass**
 
-Run: `npx vitest run src/lib/bitify.test.js`
+Run: `npx vitest run src/lib/recolor.test.js`
 Expected: `Tests  30 passed (30)`
 
 - [ ] **Step 6: Update the app spec**
 
-In `docs/superpowers/specs/2026-10-06-bitify-app-design.md`, in the table under `### Styles`, replace the Checker, Bayer and Atkinson rows with
+In `docs/superpowers/specs/2026-10-06-colorfetti-app-design.md`, in the table under `### Styles`, replace the Checker, Bayer and Atkinson rows with
 
 ```
 | **Checker** | Second color if the tone (see below) is above 0.25 on even `x + y` cells and above 0.75 on odd ones, so mid-tones become a checkerboard. |
@@ -473,7 +472,7 @@ with
   plays.
 ```
 
-Under `## Structure`, in the `src/lib/bitify.js` row, replace `whether any pixel is empty, and the two auto thresholds` with `whether any pixel is empty, the darkest and lightest brightness, and the auto thresholds`.
+Under `## Structure`, in the `src/lib/recolor.js` row, replace `whether any pixel is empty, and the two auto thresholds` with `whether any pixel is empty, the darkest and lightest brightness, and the auto thresholds`.
 
 Under `## Testing`, replace
 
@@ -623,7 +622,7 @@ Run this from the repository root. It prints the preview ball in the three style
 
 ```bash
 node --input-type=module -e "
-import { analyze, mask } from './src/lib/bitify.js';
+import { analyze, mask } from './src/lib/recolor.js';
 const s = 14, data = new Uint8ClampedArray(s * s * 4);
 for (let y = 0; y < s; y++) for (let x = 0; x < s; x++) {
   const r = Math.hypot(x - 6.5, y - 6.5);
@@ -647,7 +646,7 @@ Expected first line: `auto 81 darkest 25 lightest 240`. If a block differs, the 
 - [ ] **Step 9: Commit**
 
 ```bash
-git add src/lib/bitify.js src/lib/bitify.test.js docs/superpowers/specs/2026-10-06-bitify-app-design.md docs/styles.md
+git add src/lib/recolor.js src/lib/recolor.test.js docs/superpowers/specs/2026-10-06-colorfetti-app-design.md docs/styles.md
 git commit -m "fix: Checker, Bayer and Atkinson keep an image's darkest and lightest colors
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
@@ -660,9 +659,9 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 Cutout fills bright parts, leaves dark parts dark, cuts the boundaries between parts of the same tone in the opposite tone, and gives a dark part a light rim where it meets empty space. This task adds it to `mask` and its Auto seam strength to `analyze` and `unify`. It is not in the interface yet; Task 4 does that.
 
 **Files:**
-- Modify: `src/lib/bitify.js` (constants, a new `seamStrength` function, `analyze`, `unify`, `mask`)
-- Test: `src/lib/bitify.test.js` (a new `cutout` block; the `analyze`, `mask` and `unify` blocks)
-- Modify: `docs/superpowers/specs/2026-10-06-bitify-app-design.md` (Styles, Threshold, Animated GIFs, Testing)
+- Modify: `src/lib/recolor.js` (constants, a new `seamStrength` function, `analyze`, `unify`, `mask`)
+- Test: `src/lib/recolor.test.js` (a new `cutout` block; the `analyze`, `mask` and `unify` blocks)
+- Modify: `docs/superpowers/specs/2026-10-06-colorfetti-app-design.md` (Styles, Threshold, Animated GIFs, Testing)
 - Modify: `docs/styles.md` (intro, The threshold, a new Cutout section, Choosing between them)
 
 **Interfaces:**
@@ -671,7 +670,7 @@ Cutout fills bright parts, leaves dark parts dark, cuts the boundaries between p
 
 - [ ] **Step 1: Write the failing tests**
 
-In `src/lib/bitify.test.js`, in the `analyze` test named `survives an image with no solid pixels`, add `'cutout'` to the list of styles:
+In `src/lib/recolor.test.js`, in the `analyze` test named `survives an image with no solid pixels`, add `'cutout'` to the list of styles:
 
 ```js
     for (const style of ['cutout', 'solid', 'checker', 'bayer', 'atkinson', 'silhouette']) {
@@ -839,12 +838,12 @@ Inside `describe('unify', ...)`, add this test after the last one:
 
 - [ ] **Step 2: Run the tests to verify they fail**
 
-Run: `npx vitest run src/lib/bitify.test.js`
+Run: `npx vitest run src/lib/recolor.test.js`
 Expected: the nine `cutout` tests and the new `unify` test fail. Before the change `mask` treats the unknown style `cutout` as Solid and `autoSeam` is `undefined`, so for example `ignores a shading step` fails with `expected undefined to be 24`.
 
 - [ ] **Step 3: Add the seam strength**
 
-In `src/lib/bitify.js`, add a constant under `NEIGHBOURS`:
+In `src/lib/recolor.js`, add a constant under `NEIGHBOURS`:
 
 ```js
 const NEIGHBOURS = [[1, 0], [-1, 0], [0, 1], [0, -1]];
@@ -954,7 +953,7 @@ Notes for the implementer:
 
 - [ ] **Step 5: Run the tests to verify they pass**
 
-Run: `npx vitest run src/lib/bitify.test.js`
+Run: `npx vitest run src/lib/recolor.test.js`
 Expected: `Tests  40 passed (40)`
 
 Then run everything: `npm test`
@@ -962,7 +961,7 @@ Expected: every test file passes.
 
 - [ ] **Step 6: Update the app spec**
 
-In `docs/superpowers/specs/2026-10-06-bitify-app-design.md`, in the table under `### Styles`, add this row as the first row, above Lines:
+In `docs/superpowers/specs/2026-10-06-colorfetti-app-design.md`, in the table under `### Styles`, add this row as the first row, above Lines:
 
 ```
 | **Cutout** | A pixel brighter than the threshold is light, every other pixel dark. Then, using those tones: a pixel on the darker side of a change stronger than the seam strength, between two pixels of the same tone, takes the opposite tone; and a dark pixel that touches empty space, with no light pixel among its eight neighbours, becomes light. Dark is first color, light is second. |
@@ -1022,7 +1021,7 @@ Under `## Testing`, directly above the line that starts `  - Silhouette fills ev
 
 - [ ] **Step 7: Update `docs/styles.md`**
 
-In the first line of the file, change `Bitify's six styles` to `Bitify's seven styles`.
+In the first line of the file, change `Colorfetti's six styles` to `Colorfetti's seven styles`.
 
 Under `## What all styles share`, change `from 0 to 255. It is used only by Lines.` to `from 0 to 255. It is used by Lines and Cutout.`
 
@@ -1142,7 +1141,7 @@ Run from the repository root; the block must match the Cutout example now in `do
 
 ```bash
 node --input-type=module -e "
-import { analyze, mask } from './src/lib/bitify.js';
+import { analyze, mask } from './src/lib/recolor.js';
 const s = 14, data = new Uint8ClampedArray(s * s * 4);
 for (let y = 0; y < s; y++) for (let x = 0; x < s; x++) {
   const r = Math.hypot(x - 6.5, y - 6.5);
@@ -1163,7 +1162,7 @@ Expected first line: `auto 81 autoLine 52 autoSeam 24`. If the block differs, th
 - [ ] **Step 9: Commit**
 
 ```bash
-git add src/lib/bitify.js src/lib/bitify.test.js docs/superpowers/specs/2026-10-06-bitify-app-design.md docs/styles.md
+git add src/lib/recolor.js src/lib/recolor.test.js docs/superpowers/specs/2026-10-06-colorfetti-app-design.md docs/styles.md
 git commit -m "feat: Cutout style, filled shapes with their parts cut apart
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
@@ -1177,7 +1176,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 - Modify: `src/Dock.svelte` (the `STYLES` list, the help text)
 - Modify: `src/App.svelte` (the starting style)
 - Modify: `src/app.css` (the two `.menu` column counts)
-- Modify: `docs/superpowers/specs/2026-10-06-bitify-app-design.md` (Advanced panel, Responsive behavior, Styles)
+- Modify: `docs/superpowers/specs/2026-10-06-colorfetti-app-design.md` (Advanced panel, Responsive behavior, Styles)
 - Modify: `docs/styles.md` (which style is the default)
 - Modify: `README.md`, `CLAUDE.md`
 
@@ -1269,7 +1268,7 @@ Expected: the build finishes with no errors and no new warnings. The line `no Sv
 
 - [ ] **Step 5: Check it in a browser at desktop width**
 
-Start the dev server with the preview tool, configuration `bitify` from `.claude/launch.json` (never with Bash). If the branch was just checked out, restart the server first: it can keep serving old CSS.
+Start the dev server with the preview tool, configuration `colorfetti` from `.claude/launch.json` (never with Bash). If the branch was just checked out, restart the server first: it can keep serving old CSS.
 
 With no images added, the empty screen shows the logo as a live example. Open Advanced and check each of these, reading the page rather than guessing from a screenshot:
 
@@ -1298,7 +1297,7 @@ Reset the preview to the desktop preset when done.
 
 - [ ] **Step 7: Update the documents**
 
-In `docs/superpowers/specs/2026-10-06-bitify-app-design.md`:
+In `docs/superpowers/specs/2026-10-06-colorfetti-app-design.md`:
 
 - Under `**Advanced panel.**`, replace
 
@@ -1357,7 +1356,7 @@ Expected: no output. Fix any line it prints.
 - [ ] **Step 8: Commit**
 
 ```bash
-git add src/Dock.svelte src/App.svelte src/app.css docs/superpowers/specs/2026-10-06-bitify-app-design.md docs/styles.md README.md CLAUDE.md
+git add src/Dock.svelte src/App.svelte src/app.css docs/superpowers/specs/2026-10-06-colorfetti-app-design.md docs/styles.md README.md CLAUDE.md
 git commit -m "feat: Cutout in the style list, as the default style
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"

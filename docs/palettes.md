@@ -1,6 +1,6 @@
 # Palettes
 
-Bitify's Palette panel has two families: **1-bit**, with twelve preset color pairs, and
+Colorfetti's Palette panel has two families: **1-bit**, with twelve preset color pairs, and
 **Palette**, with nine curated palettes, optional Auto and a named local library. The pairs are
 defined in [src/lib/presets.js](../src/lib/presets.js); full palettes and their provenance
 are in [src/lib/palette-library.js](../src/lib/palette-library.js).
@@ -76,8 +76,8 @@ on white). Higher means the two colors are easier to tell apart.
 | Glow | `#222323` soft black | `#f0f6f0` soft white | 14.4 | Lospec, [1bit Monitor Glow](https://lospec.com/palette-list/1bit-monitor-glow) by Polyducks |
 | Mono | `#000000` black | `#ffffff` white | 21.0 | Plain black and white |
 | Paper | `#382b26` dark brown | `#b8c2b9` grey-green | 7.4 | Lospec, [Paperback-2](https://lospec.com/palette-list/paperback-2) by Doph |
-| Torch | `#0b0a0c` near-black | `#f6dfa4` warm cream | 15.1 | Bitify's own, after the game End of End |
-| Rose | `#4a0d2b` dark wine | `#ffd1dc` pale pink | 11.1 | Bitify's own |
+| Torch | `#0b0a0c` near-black | `#f6dfa4` warm cream | 15.1 | Colorfetti's own, after the game End of End |
+| Rose | `#4a0d2b` dark wine | `#ffd1dc` pale pink | 11.1 | Colorfetti's own |
 | Game Boy | `#0f380f` dark green | `#9bbc0f` pea green | 6.0 | Original Game Boy, darkest and lightest shade |
 | Pocket | `#1f1f1f` near-black | `#c4cfa1` pale olive | 10.0 | Game Boy Pocket, darkest and lightest shade |
 | Nokia | `#43523d` grey-green | `#c7f0d8` mint | 6.7 | Nokia 3310 screen, Lospec [Nokia 3310](https://lospec.com/palette-list/nokia-3310) |
@@ -125,7 +125,7 @@ the eye.
 - **Phosphor, Amber and Commodore** are three of the monitor settings in the 1-bit game
   Return of the Obra Dinn, as recorded on Lospec. They stand for a green monochrome
   monitor, an amber one, and a Commodore color monitor.
-- **Torch and Rose** were made for Bitify.
+- **Torch and Rose** were made for Colorfetti.
 
 ### What was left out
 
@@ -175,7 +175,7 @@ not a promise that every selected color will be used.
 | ENDESGA 32 | 32 | [ENDESGA](https://lospec.com/palette-list/endesga-32), originally for NYKRA |
 | PICO-8 | 16 | [Lexaloffle Games](https://www.lexaloffle.com/pico-8.php) |
 | DawnBringer 16 | 16 | [DawnBringer](https://lospec.com/palette-list/dawnbringer-16) |
-| Grayscale 8 | 8 | Bitify: eight evenly spaced sRGB grays |
+| Grayscale 8 | 8 | Colorfetti: eight evenly spaced sRGB grays |
 | Ice Cream GB | 4 | [Kerrie Lake](https://lospec.com/palette-list/ice-cream-gb) |
 | Game Boy green | 4 | Common Game Boy LCD-inspired RGB interpretation; hardware does not define one canonical RGB set |
 | Glow | 2 | [Polyducks, 1bit Monitor Glow](https://lospec.com/palette-list/1bit-monitor-glow) |
@@ -370,7 +370,7 @@ results, not a guarantee that arbitrary screenshot borders can be inferred autom
 
 ### Saving, persistence and reset
 
-Named palettes are committed to the separately versioned `bitify-palettes-v1` local
+Named palettes are committed to the separately versioned `colorfetti-palettes-v1` local
 storage key, with a maximum of 100 records and 256 KiB of serialized UTF-8 data. The
 capacity limit can be reached before 100 large palettes. Source images and drafts are not
 saved. Record validation restores valid palettes independently of damaged records.

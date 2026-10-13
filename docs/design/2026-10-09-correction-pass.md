@@ -18,7 +18,7 @@ Implemented and independently reviewed in `codex/glasskit-prototypes`. The user'
 | 14 | Restored smooth diagonal palette circles and the prior monochrome transparency symbols. Circular clipping and a separate selection ring fix uneven edges. The comparison page shows the previous smooth version, rejected stepped version and corrected smooth version at equal sizes in both themes. |
 | 16 | Grid origin and median 16-source-pixel spacing anchor after collection changes or viewport resizing, then remain fixed while scrolling and opening/closing panels. Continuous alignment to a refitted image would require the checker to move; the user's requested stable background takes precedence. |
 | 17 | The example uses the same image item, analysis, renderer, sizing probe and fitting system as imports, while suppressing copy/export/remove actions. It appears only with no imported images. |
-| 18 | The example caption is **Bitify**; the main header contains the accessible logo alone. |
+| 18 | The example caption is **Colorfetti**; the main header contains the accessible logo alone. |
 | 19 | Stationary empty-canvas presses and example activation open Import. Controls, dialogs, consumed dismissals, scrolling, swipes, secondary touches and long comparison holds are excluded. Keyboard Enter imports; Space compares. |
 | 20 | Quick 150ms surface entrances and state feedback complement GlassKit. Header buttons do not translate. Geometry, checker phase and blur do not animate. Reduced-motion CSS suppresses animations/transitions. |
 | 21 | Image pointer/touch and Space holds temporarily invert the persistent conversion view. Shared effective state drives the bottom toggle and all images. Independent pointer/keyboard sources prevent early restoration; release/cancel/blur/hiding clears them. This applies to image comparison, not arbitrary toolbar buttons. |
@@ -44,12 +44,12 @@ The final independent review found no remaining actionable source finding. A rev
 - Repeated panel open/close and scrolling preserve checker origin and spacing. Actual overflowing wall uses opaque dark `#272c32` or light `#e8ecef` shell backgrounds; nested controls retain translucent states. Empty state restores normal glass.
 - Real downloads decoded: PNG **28×28**; GIF **28×28, 8 frames**; batch ZIP **19 entries**, including GIF fixtures. Conversion/export paths remain unchanged.
 - Touch/reduced-transparency/motion production fixtures verify CSS cascade and compact geometry. Motion fixture computes no surface animation and zero button transition duration. Fixtures simulate media behavior; they do not establish physical device behavior.
-- Final browser warning/error console is empty. Temporary test images were removed; the app is left with the Bitify example.
+- Final browser warning/error console is empty. Temporary test images were removed; the app is left with the Colorfetti example.
 
 ## Visual comparison and remaining checks
 
 ![Previous smooth, rejected stepped, corrected smooth palette treatments](mockups/palette-old-rejected-restored-dark.png)
 
-[Light comparison](mockups/palette-old-rejected-restored-light.png), [minimal desktop](mockups/corrected-empty-desktop-dark.png), [dark phone](mockups/corrected-empty-phone-dark.png), [light phone](mockups/corrected-empty-phone-light.png), [advanced controls](mockups/corrected-advanced-desktop-dark.png), [fullscreen phone](mockups/corrected-fullscreen-phone-dark.png), [scrolling dark panels](mockups/corrected-palette-scroll-dark.png), [scrolling light panels](mockups/corrected-scrolling-palette-light.png), and [Remove confirmation](mockups/corrected-remove-confirm-dark.png).
+[Light comparison](mockups/palette-old-rejected-restored-light.png), minimal desktop, dark phone, light phone, advanced controls, fullscreen phone, scrolling dark panels, scrolling light panels, and Remove confirmation.
 
 The originally reported GIF/backdrop flicker has **not** been reproduced and verified in the affected Brave/GPU environment. Stable checker state does not prove compositor flicker is fixed. Physical iOS/Safari, real multi-touch and OS accessibility preferences remain device checks. No further user decision is required for this correction pass.

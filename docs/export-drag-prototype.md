@@ -42,7 +42,7 @@ and blur clear arms when a press ends outside the artwork. Native dragend also c
 ## Manual native test
 
 Download `/fixtures/drag-source.png` and `/fixtures/drag-animation.gif`, then add them
-to Bitify. Hover one tile until the panel says ready. Start with Native image + DownloadURL.
+to Colorfetti. Hover one tile until the panel says ready. Start with Native image + DownloadURL.
 If rejected, use the diagnostic alternatives and record each mode separately.
 
 For each installed Brave, Chrome and Edge version:
@@ -60,7 +60,7 @@ For each installed Brave, Chrome and Edge version:
    only, not byte identity. Where a received attachment can be downloaded, verify that
    file too. Record inability to retrieve bytes as unverified. Posting is not required
    for the prototype's local checks.
-6. Drop back onto Bitify; no duplicate image or import overlay should appear. Normal
+6. Drop back onto Colorfetti; no duplicate image or import overlay should appear. Normal
    click still opens the viewer, stationary hold compares, and touch scrolls/swipes.
 
 Save test log once per browser. Logs contain filenames, browser information, settings,

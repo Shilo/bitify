@@ -25,7 +25,7 @@ function preload(seed, cut) {
   const alpha = cut === '200' ? 200 : 128;
   const stored = {family:'two-color',paletteId:'preset-pico8',style:'cutout',none:0,first:'#222323',second:'#f0f6f0',settings:{cutout:{threshold:null,seams:null,rim:true,source:'luma',alpha},solid:{threshold:null,source:green?'green':'luma',alpha}}};
   return `<script>
-localStorage.setItem('bitify', ${JSON.stringify(JSON.stringify(stored))});
+localStorage.setItem('colorfetti', ${JSON.stringify(JSON.stringify(stored))});
 const q = window.__reanalysisQA = {exports:[],errors:[],warnings:[],long:[],paints:0,hold:false,queued:[],rafGapMax:0,lastRaf:0,observed:PerformanceObserver.supportedEntryTypes.includes('longtask')};
 window.addEventListener('error', e => {const entry={message:e.message,source:e.filename,line:e.lineno,stack:e.error?.stack};if(e.message==='ResizeObserver loop completed with undelivered notifications.' && e.lineno===0)q.warnings.push(entry);else q.errors.push(entry);});
 window.addEventListener('unhandledrejection', e => q.errors.push({message:e.reason?.message || String(e.reason),stack:e.reason?.stack}));

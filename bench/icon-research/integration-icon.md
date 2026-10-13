@@ -19,7 +19,7 @@ No additional raters, generation credits or external services were used.
   Brightness, instead of the research detector's hardcoded alpha 128.
 - Modified `src/lib/icon.js` to use that preparation where applicable. Larger/opaque art
   and Trim retain the original groove/outline-peel implementation. No production pixel
-  loop in `bitify.js`, UI setting or palette behavior changed. The new path keeps full
+  loop in `recolor.js`, UI setting or palette behavior changed. The new path keeps full
   source support at Detail Off, rather than peeling a whole black stroke automatically.
 - Detail ranks whole inner regions. Default dark features enter by 50; weaker supported
   seams can enter above 50. Increasing Detail never reverses a cut. At 50, Auto attempts

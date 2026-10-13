@@ -24,7 +24,7 @@ const seeds = { cutout: ['cutout', 0], bayer: ['bayer', 0], none1: ['cutout', 1]
 function preload(seed) {
   const [style, none] = seeds[seed] ?? seeds.cutout;
   return `<script>
-localStorage.setItem('bitify', JSON.stringify({family:'two-color',style:${JSON.stringify(style)},none:${none},first:'#222323',second:'#f0f6f0'}));
+localStorage.setItem('colorfetti', JSON.stringify({family:'two-color',style:${JSON.stringify(style)},none:${none},first:'#222323',second:'#f0f6f0'}));
 const q = window.__onebitQA = {exports:[],errors:[],long:[],observed:PerformanceObserver.supportedEntryTypes.includes('longtask')};
 window.addEventListener('error', e => q.errors.push({message:e.message,source:e.filename,line:e.lineno,stack:e.error?.stack}));
 window.addEventListener('unhandledrejection', e => q.errors.push({message:e.reason?.message || String(e.reason),stack:e.reason?.stack}));

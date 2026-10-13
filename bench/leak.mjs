@@ -18,7 +18,7 @@ const server = createServer((req, res) => {
 await new Promise(r => server.listen(0, '127.0.0.1', r));
 const PORT = 9400 + Math.floor(Math.random() * 500);
 const edge = spawn(process.env.BROWSER ?? 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe', [
-  '--headless=new', `--remote-debugging-port=${PORT}`, `--user-data-dir=${mkdtempSync(join(tmpdir(), 'bitify-bench-'))}`, '--no-first-run', '--window-size=412,915', 'about:blank',
+  '--headless=new', `--remote-debugging-port=${PORT}`, `--user-data-dir=${mkdtempSync(join(tmpdir(), 'colorfetti-bench-'))}`, '--no-first-run', '--window-size=412,915', 'about:blank',
 ], { stdio: 'ignore' });
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 // Opens the connection to the page, trying again if the browser, still starting, does not answer.
@@ -57,7 +57,7 @@ const appReady = async () => {
 await send('Page.enable');
 await send('Emulation.setDeviceMetricsOverride', { width: 412, height: 915, deviceScaleFactor: 2.625, mobile: true });
 await send('Page.addScriptToEvaluateOnNewDocument', { source: `
-  localStorage.setItem('bitify', JSON.stringify({ first: '#222323', second: '#f0f6f0', style: 'cutout', threshold: null }));
+  localStorage.setItem('colorfetti', JSON.stringify({ first: '#222323', second: '#f0f6f0', style: 'cutout', threshold: null }));
   window.__urls = 0; const make = URL.createObjectURL, drop = URL.revokeObjectURL;
   URL.createObjectURL = b => { __urls++; return make.call(URL, b); }; URL.revokeObjectURL = u => { __urls--; return drop.call(URL, u); };
   const click = HTMLAnchorElement.prototype.click; HTMLAnchorElement.prototype.click = function () { if (!this.download) click.call(this); };

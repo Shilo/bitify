@@ -33,9 +33,9 @@ try{
     await page.evaluate(async()=>{const q=window.__reanalysisQA;const at=await new Promise(requestAnimationFrame);q.observer?.takeRecords();q.long.length=0;q.lastRaf=at;q.rafGapMax=0;q.start=performance.now();});
     const time=Date.now();await page.keyboard.press(i%2?'ArrowUp':'ArrowDown');
     await page.waitForTimeout(60);
-    await page.waitForFunction(style=>JSON.parse(localStorage.getItem('bitify')).style===style&&![...document.querySelectorAll('.glass-toast.is-visible')].some(n=>n.textContent.includes('Updating images')),i%2?'cutout':'solid');
+    await page.waitForFunction(style=>JSON.parse(localStorage.getItem('colorfetti')).style===style&&![...document.querySelectorAll('.glass-toast.is-visible')].some(n=>n.textContent.includes('Updating images')),i%2?'cutout':'solid');
     await page.waitForTimeout(80);
-    const row=await page.evaluate(()=>{const q=window.__reanalysisQA,end=performance.now();q.long.push(...(q.observer?.takeRecords()??[]).map(e=>({start:e.startTime,duration:e.duration})));const tasks=q.long.filter(t=>t.start+t.duration>q.start&&t.start<end);return{style:JSON.parse(localStorage.getItem('bitify')).style,settleMs:end-q.start,longestTaskMs:Math.max(0,...tasks.map(t=>t.duration)),tasksOver50:tasks.length,rafGapMaxMs:q.rafGapMax,tasks,errors:q.errors};});
+    const row=await page.evaluate(()=>{const q=window.__reanalysisQA,end=performance.now();q.long.push(...(q.observer?.takeRecords()??[]).map(e=>({start:e.startTime,duration:e.duration})));const tasks=q.long.filter(t=>t.start+t.duration>q.start&&t.start<end);return{style:JSON.parse(localStorage.getItem('colorfetti')).style,settleMs:end-q.start,longestTaskMs:Math.max(0,...tasks.map(t=>t.duration)),tasksOver50:tasks.length,rafGapMaxMs:q.rafGapMax,tasks,errors:q.errors};});
     if(row.errors.length)throw Error(JSON.stringify(row.errors));
     row.driverMs=Date.now()-time;rows.push(row);
     console.log(name,build,row.style,'longest',Math.round(row.longestTaskMs),'rafGap',Math.round(row.rafGapMaxMs));

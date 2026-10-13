@@ -24,7 +24,7 @@ const server = createServer((req, res) => {
 await new Promise(r => server.listen(0, '127.0.0.1', r));
 const url = `http://127.0.0.1:${server.address().port}/`;
 const port = 9800 + Math.floor(Math.random() * 100);
-const browser = spawn(process.env.BROWSER ?? 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe', ['--headless=new', `--remote-debugging-port=${port}`, `--user-data-dir=${mkdtempSync(join(tmpdir(), 'bitify-style-'))}`, '--no-first-run', '--no-default-browser-check', 'about:blank'], { stdio: 'ignore' });
+const browser = spawn(process.env.BROWSER ?? 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe', ['--headless=new', `--remote-debugging-port=${port}`, `--user-data-dir=${mkdtempSync(join(tmpdir(), 'colorfetti-style-'))}`, '--no-first-run', '--no-default-browser-check', 'about:blank'], { stdio: 'ignore' });
 const pause = ms => new Promise(r => setTimeout(r, ms));
 let socket, sequence = 0;
 const pending = new Map(), errors = [], results = [];
@@ -68,7 +68,7 @@ try {
     socket=await connect(page.webSocketDebuggerUrl);
     socket.onmessage=e=>{const m=JSON.parse(e.data);if(m.id){pending.get(m.id)?.(m);pending.delete(m.id);}if(m.method==='Runtime.exceptionThrown')errors.push(m.params.exceptionDetails);};
     await send('Page.enable');await send('Runtime.enable');await send('Page.bringToFront');
-    await send('Page.addScriptToEvaluateOnNewDocument',{source:`localStorage.setItem('bitify',JSON.stringify({first:'#222323',second:'#f0f6f0',style:'cutout',theme:'light'}));localStorage.setItem('bitify-welcomed','1');`});
+    await send('Page.addScriptToEvaluateOnNewDocument',{source:`localStorage.setItem('colorfetti',JSON.stringify({first:'#222323',second:'#f0f6f0',style:'cutout',theme:'light'}));localStorage.setItem('colorfetti-welcomed','1');`});
   };
   // Actual Pixel 8 Pro Brave content viewports captured in the rotation audit,
   // plus the 1008x2244 screenshot's full display at the captured DPR of 2.25.
@@ -173,12 +173,12 @@ try {
     await nativeTap('.chip[aria-label^="Threshold:"]');
     await run(`(()=>{const e=document.querySelector('.style-panel > .thr .tnum');e.value='123';e.dispatchEvent(new Event('input',{bubbles:true}));})()`);
     await pause(80);
-    assert.equal(await run(`JSON.parse(localStorage.getItem('bitify')).settings.cutout.threshold`),123);
+    assert.equal(await run(`JSON.parse(localStorage.getItem('colorfetti')).settings.cutout.threshold`),123);
     await nativeTap('.chip[aria-label^="Brightness:"]');await nativeTap('.style-panel > .thr .seg button:nth-child(3)');
-    assert.equal(await run(`JSON.parse(localStorage.getItem('bitify')).settings.cutout.source`),'red');
+    assert.equal(await run(`JSON.parse(localStorage.getItem('colorfetti')).settings.cutout.source`),'red');
     await nativeTap('.chip.reset');
-    assert.equal(await run(`JSON.parse(localStorage.getItem('bitify')).settings.cutout.threshold`),null);
-    assert.equal(await run(`JSON.parse(localStorage.getItem('bitify')).settings.cutout.source`),'luma');
+    assert.equal(await run(`JSON.parse(localStorage.getItem('colorfetti')).settings.cutout.threshold`),null);
+    assert.equal(await run(`JSON.parse(localStorage.getItem('colorfetti')).settings.cutout.source`),'luma');
     // Resize with the panel still open, crossing both compact-mode boundaries.
     for(const [width,height]of [[320,568],[520,800],[521,800],[915,412],[1024,520],[1024,521],[1920,1080],[412,915]]){
       await send('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:2,mobile:false});await pause(250);

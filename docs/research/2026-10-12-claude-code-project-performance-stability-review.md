@@ -349,7 +349,7 @@ Round 1 ranking, kept for the record. F6 is withdrawn and F5 and F8 are deferred
   failure clears the shared worker. On a 184-tile wall a worker that cannot load is tried 184
   times. There is no main-thread fallback for a worker that constructs but fails to load;
   the spec only promises one when `Worker` is missing
-  (`docs/superpowers/specs/2026-10-06-bitify-app-design.md:2044-2045`; later `spec:` references
+  (`docs/superpowers/specs/2026-10-06-colorfetti-app-design.md:2044-2045`; later `spec:` references
   are to the same file).
 - **Confidence:** high for the behavior. What the tile should show instead is a product
   decision the spec does not make (docs cross-check, topic 9).
@@ -527,10 +527,10 @@ mechanism but did not measure it in a browser.
 - **O2.** `image-decode.js:26-29` and `:50-54` check `maxPixels` after the browser has decoded
   the image, so the palette editor's 16-megapixel limit bounds the copy, not the decode. The
   tests name the contract "before copying". Reported by the delegated reader; not reproduced.
-- **O3.** `bitify.js:207-212`: for an opaque image, Stencil's sprite data is three full-size
+- **O3.** `recolor.js:207-212`: for an opaque image, Stencil's sprite data is three full-size
   arrays each filled with one value, kept for the session. 3 bytes per pixel, 36 MB for a
   12-megapixel photo. I read the lines and agree; not measured in the app.
-- **O4.** `bitify.js:158` computes the seam strength in every `analyze`, and `unify` (`:175`)
+- **O4.** `recolor.js:158` computes the seam strength in every `analyze`, and `unify` (`:175`)
   recomputes and overwrites it for animations. The delegated reader measured 17.8 ms of an
   83 ms `analyze` at 2048×2048. Any change there needs `bench/equiv.mjs`.
 

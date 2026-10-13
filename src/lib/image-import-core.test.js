@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { analyze, unify, mask } from './bitify.js';
+import { analyze, unify, mask } from './recolor.js';
 import { STYLES } from './presets.js';
 import { defaults } from './settings.js';
 import { analyzeImportFrames, importFrameMessage, importFrameTransfers, validateImportFrame, validateImportSettings } from './image-import-core.js';

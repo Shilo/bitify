@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { analyze, mask, iconOf, colorize } from './bitify.js';
+import { analyze, mask, iconOf, colorize } from './recolor.js';
 
 // The user's unmodified 16px AI source art: palette indices compress the fixture only;
 // no quantization or grayscale preprocessing was performed.

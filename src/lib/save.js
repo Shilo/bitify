@@ -1,5 +1,5 @@
 import { zipSync, zlibSync, zlib } from 'fflate';
-import { hexToRgb } from './bitify.js';
+import { hexToRgb } from './recolor.js';
 import { exportPalette, markUsed, markUsedAsync, compactTable, EMPTY_INDEX, yieldExport } from './palette-export.js';
 import { checkCanceled } from './quantize.js';
 
@@ -60,7 +60,7 @@ async function chunkAsync(type, data, signal) {
 }
 
 // Encodes a mask (one byte per pixel: 0 empty, 1 first color, 2 second color, the output of
-// bitify's `mask`) as a PNG, by hand instead of through a canvas. Some browsers add noise to
+// colorfetti's `mask`) as a PNG, by hand instead of through a canvas. Some browsers add noise to
 // canvas readback as fingerprinting protection, which would put stray colors in a 1-bit image.
 // The PNG lists the colors once, as a palette, and holds two bits for each pixel instead of
 // four bytes. That is a sixteenth of the data to compress, so a photo saves several times

@@ -1,7 +1,7 @@
 # Conversion styles
 
-How each of Bitify's eleven **1-bit** styles decides which of the two colors a pixel gets, and what each
-style's own settings change. The code is in [src/lib/bitify.js](../src/lib/bitify.js); the
+How each of Colorfetti's eleven **1-bit** styles decides which of the two colors a pixel gets, and what each
+style's own settings change. The code is in [src/lib/recolor.js](../src/lib/recolor.js); the
 tests beside it pin every rule described here. The settings are listed in
 [src/lib/settings.js](../src/lib/settings.js).
 
@@ -46,7 +46,7 @@ See [palettes.md](palettes.md) for import and palette library behavior.
 Choose **1-bit** in the Palette panel to use these styles. Help keeps all four steps in
 both modes, including Style: “Pick an effect and tune its settings.” Its controls table
 shows style stepping and Style settings in 1-bit; Palette settings in Palette. The Palette step
-says “Pick 1-bit, palette or import colors.” The full-palette popup is titled **Nearest**.
+says “Pick palette, 1-bit colors or import your own.” The full-palette popup is titled **Nearest**.
 Matching changes the nearest-color rule, without introducing a new effect.
 
 Glow and Paper in Palette mode provide two-color nearest conversion through the

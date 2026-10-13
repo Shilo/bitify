@@ -1,4 +1,4 @@
-# Bitify: Floating islands
+# Colorfetti: Floating islands
 
 October 9, 2026. The user approved Floating islands as the sole application design.
 Implemented in the isolated `codex/glasskit-prototypes` worktree.
@@ -13,7 +13,7 @@ opaque hover/focus ink. Panels reserve space and refit the images.
 
 Checker cells follow 16 source pixels at the median display scale; very dense intervals
 are grouped. The checker anchors after collection/viewport changes and remains fixed through scrolling and panel refits. There are no grid settings or alternate design modes. Existing normal
-`bitify` preferences and first-visit help remain. The checker does not change exports.
+`colorfetti` preferences and first-visit help remain. The checker does not change exports.
 
 - [Current tasks23–31, bottom workspace, research and final verification](2026-10-10-bottom-workspace.md)
 - [Earlier correction pass, challenged review and numbered decisions](2026-10-09-correction-pass.md)
@@ -25,37 +25,16 @@ are grouped. The checker anchors after collection/viewport changes and remains f
 - [Apple/UI research and critique](2026-10-09-glass-canvas-research.md)
 - [Original interface and migration audit](2026-10-09-current-ui-migration.md)
 
-Earlier research and screenshots retain the proposals considered before adoption.
-Their former Designs picker, alternate dock/rail layouts, optional backgrounds and
-sample loader are removed from the live app. Prototype query parameters now load the
-same sole design. The normal URL is the current implementation.
+Earlier research documents preserve layout decisions. The gallery retains only unbranded
+layout and palette studies; obsolete branded screenshots have been removed. Alternate
+design modes are absent from the live app. Prototype query parameters load the same sole design. The normal URL is the current implementation.
 
 `npm test`: **242 tests in 17 files pass**. Production build passes. Real Safari/iOS,
 OS accessibility settings and physical touch gestures remain device checks; generated
 QA fixtures establish CSS geometry/cascade behavior, not hardware behavior.
 
-Archived theme correction: [dark](mockups/theme-consistent-dark.png) and
-[light](mockups/theme-consistent-light.png). Both use one shared themed UI material;
-the prior shared middle-gray canvas screenshots are archived comparisons.
-
-The archived default-material comparison uses [default dark glass](mockups/glasskit-default-dark.png)
-and [default light glass](mockups/glasskit-default-light.png), superseding the 94% experiment.
-The [white/black artwork stress test](mockups/glasskit-default-contrast-stress.png) demonstrates
-why the user approved a local opaque surface for image actions.
-
-Earlier protected-action comparison: [dark](mockups/opaque-actions-dark.png) and
-[light](mockups/opaque-actions-light.png). Default GlassKit materials remain elsewhere.
-
-Earlier compact controls: [dark](mockups/consistent-palette-dark.png) and
-[light](mockups/consistent-palette-light.png). The Palette name no longer stacks a
-second material over its panel. Editing islands, panels and chooser use one card material.
-The small destructive text row inside More uses opaque GlassKit error colors for contrast.
-
 [Compare three Import/Export layouts](import-export-layouts.html): top-right horizontal
 pair (recommended/live), bottom file island, and right-edge vertical pair. The comparison
 supports light/dark, phone sizing and sample panels; file actions are illustrative only.
-Earlier controls and native feedback: [research and final checks](2026-10-09-control-geometry-and-native-feedback.md),
-[dark desktop](mockups/uniform-empty-desktop-dark.png), [light desktop](mockups/uniform-empty-desktop-light.png),
-[small phone](mockups/uniform-empty-small-phone-dark.png), [native Reset](mockups/native-reset-phone-dark.png),
-and [native selection toast](mockups/native-selection-toast-phone-light.png). The modal has a scoped
-contrast guard; the remaining native glass materials are preserved.
+Control geometry, native feedback and later workspace decisions are documented in the
+linked research above. Historical measurements describe their recorded revisions.

@@ -2,8 +2,8 @@
 // must remain byte-identical. Icon's previews must sample its new native mask.
 import assert from 'node:assert/strict';
 import { pathToFileURL } from 'node:url';
-const O = await import(pathToFileURL(import.meta.dirname + '/bitify.old.js'));
-const N = await import(pathToFileURL(import.meta.dirname + '/../src/lib/bitify.js'));
+const O = await import(pathToFileURL(import.meta.dirname + '/recolor.old.js'));
+const N = await import(pathToFileURL(import.meta.dirname + '/../src/lib/recolor.js'));
 const STYLES = ['cutout', 'solid', ...(O.iconOf ? ['icon'] : []), 'stencil', 'lines', 'silhouette', 'checker', 'hatch', 'bayer', 'noise', 'atkinson'];
 let s = 99;
 const rnd = () => ((s = (s * 1664525 + 1013904223) >>> 0) / 2 ** 32);

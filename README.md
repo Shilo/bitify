@@ -4,7 +4,7 @@
 
 Throw your pixels a palette party. Recolor images and animations.
 
-**[shilo.github.io/bitify](https://shilo.github.io/bitify/)**
+**[Open Colorfetti](https://shilo.github.io/bitify/)**
 
 ## Features
 
@@ -50,7 +50,7 @@ the palette, color cap and transparency. See the [research and limitations](docs
 
 Built with Svelte 5 and Vite. Every push to `main` is deployed to GitHub Pages by [deploy.yml](.github/workflows/deploy.yml).
 
-The full design is in [docs/superpowers/specs/2026-10-06-bitify-app-design.md](docs/superpowers/specs/2026-10-06-bitify-app-design.md).
+The full design is in [docs/superpowers/specs/2026-10-06-colorfetti-app-design.md](docs/superpowers/specs/2026-10-06-colorfetti-app-design.md).
 
 ## Deferred work
 

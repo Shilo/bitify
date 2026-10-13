@@ -7,7 +7,7 @@ October 9, 2026. Implemented on `codex/glasskit-prototypes`, unmerged and undepl
 Floating islands is the only runtime layout. Main directly imports the ordered GlassKit
 foundation, app geometry and material adapter, then mounts App. Alternate entry points,
 Designs UI, prototype/sample state, old comparison controls, rail styling, per-image
-backings and grid-setting controls are removed. Normal `bitify` storage and first-visit
+backings and grid-setting controls are removed. Normal `colorfetti` storage and first-visit
 welcome remain. Archived research/screenshots are retained.
 
 Colors and Palette share one glass island; the style-named original/conversion button
@@ -101,12 +101,12 @@ pointers or the mobile keyboard viewport. Real-device checks remain outstanding.
 
 ## Evidence
 
-[Current default dark glass](mockups/glasskit-default-dark.png),
-[current default light glass](mockups/glasskit-default-light.png). The
-[94% dark experiment](mockups/theme-consistent-dark.png) and
-[94% light experiment](mockups/theme-consistent-light.png) are archived comparisons. The earlier
-[desktop with focused tile action](mockups/floating-islands-adopted-desktop.jpg) and
-[light no-hover/reduced-transparency fixture](mockups/floating-islands-touch-qa.jpg)
+Current default dark glass,
+current default light glass. The
+94% dark experiment and
+94% light experiment are archived comparisons. The earlier
+desktop with focused tile action and
+light no-hover/reduced-transparency fixture
 archive the initial shared-gray adoption.
 Earlier gallery screenshots are archived comparisons, not current alternate layouts.
 
@@ -152,7 +152,7 @@ intentional selection, semantic Reset, image swatches and disabled dimming were 
 
 The user requested the actual GlassKit defaults as the next live test. The custom94%
 material and opaque hover fills are removed. Normal rendering uses unmodified library
-surface, border, blur, shadow and ink tokens. Compact Bitify geometry, pixel glyphs,
+surface, border, blur, shadow and ink tokens. Compact Colorfetti geometry, pixel glyphs,
 native dialog lifecycle, theme checker and opaque accessibility fallbacks remain deliberate
 adaptations, so this is default MATERIALS, not untouched default component sizing/markup.
 
@@ -217,7 +217,7 @@ Validation and challenged review:
   6.90:1 across rest/hover/focus/active in both themes; arbitrary artwork is excluded by
   the opaque capsule. The existing120ms reveal fade is preserved rather than treated as
   a new regression. Forced-color state overrides remain later than the ordinary states.
-- [Dark proof](mockups/opaque-actions-dark.png) and [light proof](mockups/opaque-actions-light.png)
+- Dark proof and light proof
   replace the default-only baseline as the first gallery comparison.
 
 ## Import/export and panel consistency review
@@ -235,7 +235,7 @@ wordmark has no image count. Existing file cardinality still determines PNG/GIF 
 
 Challenge: icon-only reduces discoverability, so labeled empty-state import, accessible
 names and pointer/keyboard tooltips remain. Calling output Save or drawing a floppy disk
-would suggest an editable document or overwritten source; Bitify exports converted files.
+would suggest an editable document or overwritten source; Colorfetti exports converted files.
 A vertical Export-above-Import arrangement reverses the suggested workflow and adds
 canvas obstruction. Neither Apple nor other editors mandate the top-right pair.
 

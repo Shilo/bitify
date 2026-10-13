@@ -33,7 +33,7 @@ async function session(dist, style) {
   await new Promise(r => server.listen(0, '127.0.0.1', r));
   const PORT = 9400 + Math.floor(Math.random() * 500);
   const edge = spawn(process.env.BROWSER ?? 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe', [
-    '--headless=new', `--remote-debugging-port=${PORT}`, `--user-data-dir=${mkdtempSync(join(tmpdir(), 'bitify-bench-'))}`, '--no-first-run', '--window-size=412,915', 'about:blank',
+    '--headless=new', `--remote-debugging-port=${PORT}`, `--user-data-dir=${mkdtempSync(join(tmpdir(), 'colorfetti-bench-'))}`, '--no-first-run', '--window-size=412,915', 'about:blank',
   ], { stdio: 'ignore' });
   let target;
   for (let i = 0; i < 100 && !target; i++) { await sleep(200); try { target = (await (await fetch(`http://127.0.0.1:${PORT}/json`)).json()).find(t => t.type === 'page'); } catch {} }
@@ -66,7 +66,7 @@ async function session(dist, style) {
     // one script at a time: a second one declaring the same names would fail and leave the first style in place
     if (hook) await send('Page.removeScriptToEvaluateOnNewDocument', { identifier: hook });
     hook = (await send('Page.addScriptToEvaluateOnNewDocument', { source: `
-      localStorage.setItem('bitify', JSON.stringify({ first: '#3f291e', second: '#fdca55', style: '${style}', threshold: null }));
+      localStorage.setItem('colorfetti', JSON.stringify({ first: '#3f291e', second: '#fdca55', style: '${style}', threshold: null }));
       window.__saved = null; window.__copied = null;
       const make = URL.createObjectURL; URL.createObjectURL = blob => { __saved = blob; return make.call(URL, blob); };
       const click = HTMLAnchorElement.prototype.click; HTMLAnchorElement.prototype.click = function () { if (!this.download) click.call(this); };
@@ -101,7 +101,7 @@ async function session(dist, style) {
       window.__save = () => __get(() => document.querySelector('.dock .btn.primary').click());
       window.__copy = () => __get(() => window.dispatchEvent(new KeyboardEvent('keydown', { key: 'c', ctrlKey: true, bubbles: true })));
     }`);
-    const r = { style: await run(`() => JSON.parse(localStorage.getItem('bitify')).style`) };
+    const r = { style: await run(`() => JSON.parse(localStorage.getItem('colorfetti')).style`) };
     r.savedAtAuto = await run(`() => __save()`);
     r.copiedAtAuto = await run(`() => __copy()`);
     // now with the processor slowed and a finger moving the slider and not letting go, which is when the new build draws drafts

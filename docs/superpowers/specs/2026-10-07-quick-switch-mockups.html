@@ -1,11 +1,11 @@
 <!doctype html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Bitify Quick Switch</title>
+<title>Colorfetti Quick Switch</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Schibsted+Grotesk:wght@400..700&display=swap">
 <style>
-/* Layout: a short study header (pick a design, see how to try it), then a framed working copy of the Bitify screen. */
+/* Layout: a short study header (pick a design, see how to try it), then a framed working copy of the Colorfetti screen. */
 :root {
   --page: #dcdee6; --bg: #ecedf1; --surface: #ffffff; --fg: #1b1c24; --muted: #666979;
   --line: #d5d7e0; --tile: #e3e5eb; --tile2: #d9dbe3; --shadow: rgba(27, 28, 36, 0.16);
@@ -49,7 +49,7 @@ kbd { padding: 0 5px; border: 1px solid var(--muted); border-radius: 5px; font: 
 .seg button { padding: 0 12px; border: 0; border-radius: 8px; background: transparent; color: var(--muted); font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; }
 .seg button[aria-pressed="true"] { background: var(--surface); color: var(--fg); box-shadow: 0 1px 2px var(--shadow); }
 
-/* the Bitify screen */
+/* the Colorfetti screen */
 #app {
   flex: 1; min-height: 0; position: relative; display: flex; flex-direction: column; overflow: hidden;
   background: var(--bg); border: 1px solid var(--line); border-radius: 14px;
@@ -158,7 +158,7 @@ body[data-design="B"] [data-handle] { cursor: ew-resize; }
 
 <div id="app">
   <div class="bar">
-    <span class="mark">Bitify</span><span class="count">3 images</span><span class="grow"></span>
+    <span class="mark">Colorfetti</span><span class="count">3 images</span><span class="grow"></span>
     <button class="btn" id="add" data-ico="plus">Add<span class="wide">images</span></button>
   </div>
   <div class="wall" id="wall"><div class="tiles" id="tiles"></div></div>
@@ -185,7 +185,7 @@ body[data-design="B"] [data-handle] { cursor: ew-resize; }
     <span class="sep"></span>
     <div class="seg" id="view" role="group" aria-label="View">
       <button data-v="1" aria-pressed="false">Original</button>
-      <button data-v="" aria-pressed="true">Bitified</button>
+      <button data-v="" aria-pressed="true">converted</button>
     </div>
     <span class="sep"></span>
     <button class="btn" id="bAdv" data-handle="style" data-ico="sliders" aria-label="Advanced"><span class="lbl">Advanced</span></button>
@@ -207,7 +207,7 @@ const PRESETS = [
 ];
 const STYLES = [['cutout', 'Cutout'], ['lines', 'Lines'], ['solid', 'Solid'], ['checker', 'Checker'], ['bayer', 'Bayer'], ['atkinson', 'Atkinson'], ['silhouette', 'Silhouette']];
 
-/* ---- conversion, copied from src/lib/bitify.js so the styles here are the real ones ---- */
+/* ---- conversion, copied from src/lib/recolor.js so the styles here are the real ones ---- */
 const ALPHA_CUT = 128, MIN_EDGE = 24;
 const BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
 const NEIGHBOURS = [[1, 0], [-1, 0], [0, 1], [0, -1]];
@@ -579,7 +579,7 @@ document.querySelectorAll('[data-ico]').forEach(el => {
   el.insertAdjacentHTML('afterbegin', `<svg class="ico" width="14" height="14" viewBox="0 0 7 7" aria-hidden="true">${cells}</svg>`);
 });
 
-// start: the Bitify logo, then two drawn sprites
+// start: the Colorfetti logo, then two drawn sprites
 function start() {
   add('potion.png', potionData());
   add('ball.png', ballData());
@@ -591,9 +591,9 @@ logo.onload = () => {
   const c = Object.assign(document.createElement('canvas'), { width: logo.width, height: logo.height }), ctx = c.getContext('2d');
   ctx.drawImage(logo, 0, 0);
   const d = ctx.getImageData(0, 0, c.width, c.height);
-  add('coin.png', { width: d.width, height: d.height, data: d.data });
+  add('colorfetti.png', { width: d.width, height: d.height, data: d.data });
   start();
 };
 logo.onerror = start;
-logo.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABF0lEQVR4nO2XsQ3CMBBF2QCJESgQZWrEDmzBMBGTsAILUDAAEyDRUNJQBKUwco6787+zTSQUS79JivfuLnHi2bQsa7NcdEiqgrt7q6a4CAqO8zxt8yU84ACP4xIZwF+3AWDXzNVQAZcEBw+A7rr/yuPYfCKJwAI58GwJbu4SWIJTEdMoODgV0OaPdEIUQKtPwbQunNu13AW09RIoJdHDQ9wCGqS6AALRxLIEOBDyEBYRsLSZu345rPwCljlz93r4aAIBPopADDcJBImwcVg3HBSu7obxtsnBtLeAg0PV0y5QidRHh87cVb3UBakTGpyrPFm9V6I4XBoFFZFCwXDrUQkOoKXY37EVXuVs0AcFVz8h/fRo9tfrDTQSA4eoK8/CAAAAAElFTkSuQmCC';
+logo.src = '../../../src/assets/logo.png';
 </script>

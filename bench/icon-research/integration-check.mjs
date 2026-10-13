@@ -1,7 +1,7 @@
 // Production safeguards on unseen synthetic geometry, not recognition evaluation.
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {analyze,mask} from '../../src/lib/bitify.js';
+import {analyze,mask} from '../../src/lib/recolor.js';
 function pieces(m,diagonal){
  const seen=new Set();let n=0;
  for(let s=0;s<256;s++)if(m[s]===2&&!seen.has(s)){

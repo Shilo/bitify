@@ -133,7 +133,7 @@ Things I looked for and did not find:
 
 The spec already says what a failed Auto palette does: keep the last preview, show retry
 guidance, disable Save, retry when the palette is selected again
-(`docs/superpowers/specs/2026-10-06-bitify-app-design.md:2009` at this commit). I propose exactly that for
+(`docs/superpowers/specs/2026-10-06-colorfetti-app-design.md:2009` at this commit). I propose exactly that for
 the other two preparations, so there is one rule instead of three.
 
 | Aspect | Proposal |

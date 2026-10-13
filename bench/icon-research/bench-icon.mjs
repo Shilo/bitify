@@ -3,7 +3,7 @@ import { pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
 const root = import.meta.dirname;
 // Compare one module per process: node bench-icon.mjs [module] [output-json].
-const { analyze, mask } = await import(pathToFileURL(process.argv[2] ? resolve(process.argv[2]) : `${root}/../../src/lib/bitify.js`));
+const { analyze, mask } = await import(pathToFileURL(process.argv[2] ? resolve(process.argv[2]) : `${root}/../../src/lib/recolor.js`));
 const rows = JSON.parse(readFileSync(`${root}/inputs.json`)).filter(r => r.variant === 'original' && !r.id.endsWith('sheet'));
 const originals = rows.map(r => ({ ...r, data: Uint8ClampedArray.from(r.data) }));
 const time = fn => { const start = performance.now(); fn(); return +(performance.now() - start).toFixed(3); };

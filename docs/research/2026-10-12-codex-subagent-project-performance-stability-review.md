@@ -30,7 +30,7 @@ These core timings measure actual synchronous functions, including allocations, 
 
 **Locations:** `src/App.svelte:645` (whole-clip `frames.map(mask)`), `src/App.svelte:659` (hover export), `src/App.svelte:364` (busy wrapper), `src/lib/save.js:186` (fileBytes), `src/lib/gif.js:67` (legacy encodeGif), `src/lib/gif.js:73` (whole-clip output allocation), `src/lib/gif.js:78` (synchronous frame encoding loop).
 
-**Ownership/trigger:** A 1-bit Save or prepared desktop drag owns full-resolution masks for every source frame. `bitified` constructs all masks synchronously; the encoder allocates its entire worst-case output buffer and compresses every frame in one loop. Source pixels remain published/immutable; masks and compression buffer are export-owned. Full-palette streaming export has a different, cooperative/acknowledged path.
+**Ownership/trigger:** A 1-bit Save or prepared desktop drag owns full-resolution masks for every source frame. `converted` constructs all masks synchronously; the encoder allocates its entire worst-case output buffer and compresses every frame in one loop. Source pixels remain published/immutable; masks and compression buffer are export-owned. Full-palette streaming export has a different, cooperative/acknowledged path.
 
 **Evidence:** Dungeon cutout masks took 244 ms first call and 428–509 ms warm in run 1; run 2 took 774 ms first / 486–1274 ms warm. GIF encoding took 527 ms first / 477–612 ms warm in run 1, and 1484 ms first / 580–1550 ms warm in run 2. Warm medians are 444/613 ms for masks and 529/1151 ms for encoding. Preserve the variance; do not advertise a single best result. Full masks alone are 13,131,776 bytes. The encoder's explicit buffer formula reserves 26,321,920 bytes for this source before omggif bookkeeping and final Blob/file storage.
 
@@ -44,7 +44,7 @@ These core timings measure actual synchronous functions, including allocations, 
 
 ### CXS-02 — P1 / measured bottleneck: live-wall 1-bit reanalysis remains synchronous despite import workers
 
-**Locations:** `src/App.svelte:511` (toItem), `src/App.svelte:520` (reread), `src/App.svelte:527` (pre-effect), `src/lib/bitify.js:123` (analyze), `src/lib/bitify.js:166` (unify), `src/lib/bitify.js:96` (whole-source seam scan). Export callers also reread before their busy wrapper at `src/App.svelte:699` and `src/App.svelte:730`.
+**Locations:** `src/App.svelte:511` (toItem), `src/App.svelte:520` (reread), `src/App.svelte:527` (pre-effect), `src/lib/recolor.js:123` (analyze), `src/lib/recolor.js:166` (unify), `src/lib/recolor.js:96` (whole-source seam scan). Export callers also reread before their busy wrapper at `src/App.svelte:699` and `src/App.svelte:730`.
 
 **Ownership/trigger:** Changing a legacy Brightness source or applicable Opacity cut replaces source analysis for live items; original RGBA is reused. That pre-effect maps the whole wall, and `toItem` maps all animation frames then unifies them in one synchronous call. Published originals must not be transferred to the unpublished-import worker route.
 
@@ -84,7 +84,7 @@ These core timings measure actual synchronous functions, including allocations, 
 
 ### CXS-05 — P2 / measured opportunity: structural 1-bit first preparation escapes the tile's drag budget
 
-**Locations:** `src/App.svelte:249` (Stencil automatic-cut summary); `src/Tile.svelte:208`, `src/Tile.svelte:209`, `src/Tile.svelte:210`; `src/lib/bitify.js:203`, `src/lib/bitify.js:251`; `src/lib/icon.js:40`, `src/lib/icon.js:44`, `src/lib/icon.js:246`.
+**Locations:** `src/App.svelte:249` (Stencil automatic-cut summary); `src/Tile.svelte:208`, `src/Tile.svelte:209`, `src/Tile.svelte:210`; `src/lib/recolor.js:203`, `src/lib/recolor.js:251`; `src/lib/icon.js:40`, `src/lib/icon.js:44`, `src/lib/icon.js:246`.
 
 **Ownership/trigger:** First Stencil or Icon for an analysis/outline walks the full source before sampled mask timing begins. App's Stencil automatic-cut summary also calls spritesOf across source analyses; controls can trigger preparation before the Tile call. `pace` and `shown` budget only the later sampled mask, intentionally excluding preparation. Cached structural arrays remain on that live analysis; Auto/Keep/Trim Icon variants cache separately.
 

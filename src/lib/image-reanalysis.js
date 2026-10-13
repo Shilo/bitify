@@ -1,4 +1,4 @@
-import { analyze, unifyAsync } from './bitify.js';
+import { analyze, unifyAsync } from './recolor.js';
 import { validateImportPixels, validateImportSettings } from './image-import-core.js';
 import { checkCanceled, yieldTask } from './quantize.js';
 

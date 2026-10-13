@@ -1,5 +1,6 @@
 // User palettes are stored separately from settings. Nothing here stores source images.
-export const LIBRARY_KEY = 'bitify-palettes-v1';
+import { readStoredValue } from './storage-migration.js';
+export const LIBRARY_KEY = 'colorfetti-palettes-v1';
 export const LIBRARY_LIMIT = 100;
 export const LIBRARY_BYTES = 256 * 1024;
 export const GENERATED_MAX_COLORS = 64;
@@ -110,7 +111,7 @@ function conflict() {
 // Re-read just before a write to preserve unrelated changes from another tab. Web
 // Storage has no transaction/CAS: simultaneous writes remain a platform limitation.
 export function savePalette(storage, records, draft, { id, expectedRevision } = {}) {
-  const latest = restoreLibrary(storage.getItem(LIBRARY_KEY));
+  const latest = restoreLibrary(readStoredValue(storage, LIBRARY_KEY));
   const previous = id ? latest.find(r => r.id === id) : null;
   if (id && (!previous || previous.revision !== expectedRevision || previous.revision === Number.MAX_SAFE_INTEGER)) throw conflict();
   const newId = id || 'user-' + globalThis.crypto.randomUUID();
@@ -121,7 +122,7 @@ export function savePalette(storage, records, draft, { id, expectedRevision } = 
 }
 
 export function deletePalette(storage, records, id, { expectedRevision } = {}) {
-  const latest = restoreLibrary(storage.getItem(LIBRARY_KEY)), record = latest.find(r => r.id === id);
+  const latest = restoreLibrary(readStoredValue(storage, LIBRARY_KEY)), record = latest.find(r => r.id === id);
   if (!record || record.revision !== expectedRevision) throw conflict();
   const next = latest.filter(r => r.id !== id);
   storage.setItem(LIBRARY_KEY, serializeLibrary(next));

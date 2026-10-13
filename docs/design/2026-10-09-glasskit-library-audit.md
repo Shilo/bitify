@@ -6,7 +6,7 @@ Date: 2026-10-09. Research-only recommendations for the design prototype worktre
 
 Use the CSS foundation, **`@jungherz-de/glasskit` pinned to `1.22.2`**, behind a small set of native Svelte 5 wrappers. Keep the conversion wall, image pixels and the full-window grid outside GlassKit surfaces. Apply glass to a few floating control groups and one active inspector. This fits the proposed immersive canvas while controlling contrast, clutter and rendering cost.
 
-GlassKit is a visual CSS library, not an application framework or a complete accessible interaction system. Its buttons, inputs and surfaces can replace presentation rules. It cannot replace Bitify's state, conversion algorithms, tile fitting, gesture rules, file import/export, focus management or tooltip action.
+GlassKit is a visual CSS library, not an application framework or a complete accessible interaction system. Its buttons, inputs and surfaces can replace presentation rules. It cannot replace Colorfetti's state, conversion algorithms, tile fitting, gesture rules, file import/export, focus management or tooltip action.
 
 ## Sources and reproducibility
 
@@ -25,7 +25,7 @@ Read the landing page, full README, docs, CSS, package manifest, changelog, them
 
 Latest main SHA inspected: `aa0bc3e44cecc6be15e2c5b2ab8b0b1881fd5792`. The package and direct live docs both reported 1.22.2, released October 8, 2026. Search-indexed docs returned older 1.19.1 text and indexed raw CSS returned 1.22.1; direct HTTP reads verified current source. The repository description and a family description still say 24 components while current package/docs say 34. Use the pinned package and source, not indexed snippets or component-count marketing.
 
-The MIT license permits use, modification and distribution; preserve its copyright/license notice when vendoring. This is a young, small project: repository metadata at research time showed creation March 21, 2026, 14 stars and zero forks. Those counts are context, not a quality score. Recent releases fixed hidden button behavior, disabled state presentation, input hit testing and density. The visible workflows verify builds and releases; the package does not expose a comprehensive automated interaction test command. Changelog reports Chromium and WebKit measurements, but these are not evidence of Bitify's device performance.
+The MIT license permits use, modification and distribution; preserve its copyright/license notice when vendoring. This is a young, small project: repository metadata at research time showed creation March 21, 2026, 14 stars and zero forks. Those counts are context, not a quality score. Recent releases fixed hidden button behavior, disabled state presentation, input hit testing and density. The visible workflows verify builds and releases; the package does not expose a comprehensive automated interaction test command. Changelog reports Chromium and WebKit measurements, but these are not evidence of Colorfetti's device performance.
 
 ## Installation and delivered artifacts
 
@@ -51,7 +51,7 @@ The manifest's main/style entry is `glasskit.css`. Published files include unmin
 
 This maps visual responsibility, not a promise that adding a class reproduces existing behavior.
 
-| Bitify responsibility | GlassKit primitive | Application-specific work retained |
+| Colorfetti responsibility | GlassKit primitive | Application-specific work retained |
 | --- | --- | --- |
 | Add, export, comparison, overflow actions | `.glass-pill` or `.glass-btn` plus `--auto`, `--sm`, `--primary`/`--tertiary` | Native buttons, accessible names, tooltip action, disabled state, file picker/save handlers |
 | Floating control group | `.glass-card` with restrained padding, or `.glass-tab-bar--floating` material | Toolbar semantics, responsive anchoring, measured canvas clearance |
@@ -62,11 +62,11 @@ This maps visual responsibility, not a promise that adding a class reproduces ex
 | Native mobile Share dialog | `.glass-sheet-overlay`, `.glass-sheet` | Modal behavior, focus/inert, dismissal; CSS class does not implement drag-to-dismiss |
 | Welcome/help dialog | `dialog.glass-modal-overlay` containing `.glass-modal` | `showModal()`, label, close/cancel handling, existing first-visit rule |
 | Threshold and style sliders | `.glass-range`, range header/value classes | Native input, labels, value formatting, draft/full conversion timing |
-| Original comparison switch | `.glass-toggle` with `__input`, `__track`, `__label` | Native checked input and Bitify bindings |
+| Original comparison switch | `.glass-toggle` with `__input`, `__track`, `__label` | Native checked input and Colorfetti bindings |
 | Checkbox, radio, dropdown, fields | `.glass-checkbox`, `.glass-radio`, `.glass-select`, `.glass-input` | Correct required child structure; labels and actual form semantics |
 | Toasts | `.glass-toast` plus `.is-visible`, variant classes | `role="status"`, timeout policy, action/close behavior |
 | Loading indication | `.glass-progress` or `.glass-skeleton` | Existing progress lifecycle and `aria-busy` |
-| Help body | `.glass-prose` | Bitify's device-specific wording |
+| Help body | `.glass-prose` | Colorfetti's device-specific wording |
 | Empty state | `.glass-empty` or restrained `.glass-status` | Live converted logo and import action |
 | Image tiles, transparent pixels, grid background | **Custom canvas/tile classes** | No blur/tint/glow on exported-image preview; sharp pixel edges; conversion sizing |
 | Palette swatches, None state, custom color editor | **Custom small components** using shared tokens | Two-color/transparent semantics, checkerboard or transparency cue, swatch contrast |
@@ -86,16 +86,16 @@ Defaults need adjustment for this product:
 - Blur is 24px, light 16px, soft 12px, heavy 40px. Use a limited number of surfaces; measure device behavior before choosing a blur budget.
 - The card's default padding is 40px top, 24px horizontal and 32px bottom, much larger than an editing inspector needs.
 - `.glass-pill` is a fixed 46px circle. `.glass-btn` defaults full width; use `--auto` for toolbar actions.
-- Primary button SVGs are forced to filled rendering and `stroke-width: 0`. Bitify's line icons need an explicit wrapper override or an intentional filled primary icon.
+- Primary button SVGs are forced to filled rendering and `stroke-width: 0`. Colorfetti's line icons need an explicit wrapper override or an intentional filled primary icon.
 - Default field/base type is 15px. Use at least 16px text in editable mobile fields to avoid the familiar iOS Safari zoom interaction; independently test text enlargement.
 - `.glass-bg` includes aurora effects, pseudo-elements, `min-height:100vh`, `overflow-x:hidden` and isolation. Build a neutral full-window grid directly instead of carrying those assumptions into the canvas.
-- The scoped reset applies border-box to class substrings `glass-` and `gl-`. Bitify explicitly relies on content-box sizes. Wrapper migration therefore changes geometry and must be checked against actual measured dock/panel/tile rectangles.
+- The scoped reset applies border-box to class substrings `glass-` and `gl-`. Colorfetti explicitly relies on content-box sizes. Wrapper migration therefore changes geometry and must be checked against actual measured dock/panel/tile rectangles.
 
-[Svelte's global-style documentation](https://svelte.dev/docs/svelte/global-styles) supports using global rules when a component's scoped selectors are inappropriate. Keep the library global and keep Bitify wrapper overrides in an explicit namespace. Do not depend on a scoped parent rule to reach arbitrary children. Preserve the existing convention of no component style blocks unless the design migration deliberately changes it.
+[Svelte's global-style documentation](https://svelte.dev/docs/svelte/global-styles) supports using global rules when a component's scoped selectors are inappropriate. Keep the library global and keep Colorfetti wrapper overrides in an explicit namespace. Do not depend on a scoped parent rule to reach arbitrary children. Preserve the existing convention of no component style blocks unless the design migration deliberately changes it.
 
 ## Accessibility gaps requiring application fixes
 
-The inspected CSS removes outlines from `.glass-btn`, `.glass-pill`, tab items, theme toggle and modal actions without supplying focus-visible replacements for all of them. Some controls, including ranges, segmented controls and toast actions, have rings. Add a universal visible keyboard outline in the Bitify wrapper namespace; do not assume every library class is keyboard-ready.
+The inspected CSS removes outlines from `.glass-btn`, `.glass-pill`, tab items, theme toggle and modal actions without supplying focus-visible replacements for all of them. Some controls, including ranges, segmented controls and toast actions, have rings. Add a universal visible keyboard outline in the Colorfetti wrapper namespace; do not assume every library class is keyboard-ready.
 
 The CSS/changelog explicitly document that default primary text has only **2.03:1 in dark theme and 2.68:1 in light**, below the normal-text 4.5:1 target. Its default white primary/checkbox/accessory ink preserves a visual choice rather than universal AA compliance. Choose accessible role ink or a darker primary, then calculate actual contrast across all gradient stops. State badges include a scrim, but upstream measurements use the library's own background: an arbitrary uploaded image changes the composite.
 
@@ -130,7 +130,7 @@ These are product recommendations, not upstream library claims:
 3. Minimal image gaps can create ambiguous tile boundaries, hard-to-hit per-image actions and collisions with transparent sprite shapes. Reduce spacing experimentally, keeping room for labels/actions and clear selection/hover states.
 4. Floating every label scatters hierarchy. Group controls by task and place short contextual labels on predictable material or protected quiet regions. A handful of glass islands is stronger than dozens of individual glass chips.
 5. On a narrow phone, fitting many images above an expanding inspector can make previews too small. Use one inspector, capped height and internal scrolling, preserve the selected/primary image where possible, and test short/landscape viewports. Reflow does not guarantee usable preview size.
-6. A CSS approximation cannot reproduce Apple's adaptive native material/refraction. Treat GlassKit as an intentional web material system; optimize for Bitify's conversion task rather than visual similarity alone.
+6. A CSS approximation cannot reproduce Apple's adaptive native material/refraction. Treat GlassKit as an intentional web material system; optimize for Colorfetti's conversion task rather than visual similarity alone.
 
 ## Prototype validation gate
 

@@ -74,7 +74,7 @@ try {
   socket.onmessage = e => { const m = JSON.parse(e.data); if(m.id){ pending.get(m.id)?.(m); pending.delete(m.id); } if(m.method === 'Runtime.exceptionThrown') errors.push(m.params.exceptionDetails); };
   await send('Page.enable'); await send('Runtime.enable'); await send('Page.bringToFront');
   adb('shell', 'wm', 'user-rotation', 'lock', '0'); await pause(500);
-  await send('Page.addScriptToEvaluateOnNewDocument', { source: `localStorage.setItem('bitify',JSON.stringify({first:'#222323',second:'#f0f6f0',style:'cutout',theme:'light'}));localStorage.setItem('bitify-welcomed','1');window.__rotations=[];const record=e=>__rotations.push({type:e.type,time:performance.now(),width:innerWidth,height:innerHeight,clientWidth:document.documentElement.clientWidth,clientHeight:document.documentElement.clientHeight,media:matchMedia('(max-width:520px), (max-height:520px) and (orientation:landscape)').matches});addEventListener('resize',record);addEventListener('orientationchange',record);matchMedia('(max-width:520px), (max-height:520px) and (orientation:landscape)').addEventListener('change',record);` });
+  await send('Page.addScriptToEvaluateOnNewDocument', { source: `localStorage.setItem('colorfetti',JSON.stringify({first:'#222323',second:'#f0f6f0',style:'cutout',theme:'light'}));localStorage.setItem('colorfetti-welcomed','1');window.__rotations=[];const record=e=>__rotations.push({type:e.type,time:performance.now(),width:innerWidth,height:innerHeight,clientWidth:document.documentElement.clientWidth,clientHeight:document.documentElement.clientHeight,media:matchMedia('(max-width:520px), (max-height:520px) and (orientation:landscape)').matches});addEventListener('resize',record);addEventListener('orientationchange',record);matchMedia('(max-width:520px), (max-height:520px) and (orientation:landscape)').addEventListener('change',record);` });
   await send('Page.navigate', { url });
   for(let i=0;i<100&&!await run(`!!document.querySelector('.example-add')`);i++) await pause(100);
   assert.ok(await run(`!!document.querySelector('.example-add')`), 'Phone loads app over LAN');
@@ -95,8 +95,8 @@ try {
   if(!options.baseline) {
     await tap('.chip[aria-label^="Brightness:"]'); await tap('.style-panel > .thr .seg button:nth-child(3)');
     for(const angle of [1,0]) { await rotate(angle, `selected-${angle}`); assert.ok((await measure()).selected.startsWith('Brightness:'), 'Selected chip survives rotation'); }
-    assert.equal(await run(`JSON.parse(localStorage.getItem('bitify')).settings.cutout.source`), 'red');
-    await tap('.chip.reset'); assert.equal(await run(`JSON.parse(localStorage.getItem('bitify')).settings.cutout.source`), 'luma');
+    assert.equal(await run(`JSON.parse(localStorage.getItem('colorfetti')).settings.cutout.source`), 'red');
+    await tap('.chip.reset'); assert.equal(await run(`JSON.parse(localStorage.getItem('colorfetti')).settings.cutout.source`), 'luma');
     await run(`(async()=>{
       const blob=await(await fetch('/fixture.png')).blob(),dt=new DataTransfer();dt.items.add(new File([blob],'rotation.png',{type:'image/png'}));
       const c=document.createElement('canvas');c.width=32;c.height=32;const ctx=c.getContext('2d');ctx.fillStyle='rgba(220,220,220,.5)';ctx.fillRect(0,0,32,32);

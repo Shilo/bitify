@@ -1,6 +1,6 @@
 // The palettes and styles on offer, and stepping through them. No DOM.
 
-import { brightness } from './bitify.js';
+import { brightness } from './recolor.js';
 
 // A palette is two colors and nothing else. Which one is the first color is up to Swap.
 export const PRESETS = [

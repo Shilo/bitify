@@ -1,5 +1,5 @@
 // Research only: measure existing single-frame preparation, independently of worker round trips.
-import { analyze, unify } from '../src/lib/bitify.js';
+import { analyze, unify } from '../src/lib/recolor.js';
 import { decodeImageFile } from '../src/lib/image-decode.js';
 import { yieldTask } from '../src/lib/quantize.js';
 

@@ -1,6 +1,6 @@
 // Cost per converted pixel for the whole image and for smaller pictures of it, in nanoseconds.
 import { pathToFileURL } from 'node:url';
-const B = await import(pathToFileURL(import.meta.dirname + '/../src/lib/bitify.js'));
+const B = await import(pathToFileURL(import.meta.dirname + '/../src/lib/recolor.js'));
 function photo(w, h) {
   const data = new Uint8ClampedArray(w * h * 4);
   let s = 12345; const rnd = () => ((s = (s * 1664525 + 1013904223) >>> 0) / 2 ** 32);

@@ -2,6 +2,7 @@
 // These simulate input/material media in CSS and matchMedia; they are not device tests.
 import { readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { animationFixture } from './animation-fixture.mjs';
 const root = resolve(import.meta.dirname, '..');
 const index = await readFile(resolve(root, 'dist/index.html'), 'utf8');
 const asset = index.match(/href="\.\/(assets\/index-[^"]+\.css)"/)[1];
@@ -39,8 +40,9 @@ console.log('QA fixtures: /bench/design-qa/{touch,reduced,touch-reduced,motion}.
 
 // Local import fixtures: many images, one long filename, one animated GIF.
 for (let i = 0; i < 18; i++) {
-  const source = i === 17 ? 'src/assets/logo.gif' : 'bench/icon-research/armor-source.png';
+  const source = 'bench/icon-research/armor-source.png';
   const name = i === 0 ? 'a-very-long-file-name-for-readable-image-caption-checks-0.png'
     : `sample-${i}.${i === 17 ? 'gif' : 'png'}`;
-  await copyFile(resolve(root, source), resolve(output, name));
+  if (i === 17) await writeFile(resolve(output, name), animationFixture());
+  else await copyFile(resolve(root, source), resolve(output, name));
 }

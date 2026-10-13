@@ -61,7 +61,7 @@ export async function decodeGifAsync(bytes, { signal } = {}) {
 }
 
 // Encodes a two-color animation as a GIF with a transparent background. Each frame's `mask` has
-// one byte per pixel: 0 empty, 1 first color, 2 second color (the output of bitify's `mask`),
+// one byte per pixel: 0 empty, 1 first color, 2 second color (the output of colorfetti's `mask`),
 // which are used directly as palette indexes. Colors are '#rrggbb', or null for a color that is
 // None. A GIF frame has one see-through index, 0, so that color's pixels are written as 0 too.
 export function encodeGif(image, { signal } = {}) {

@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Let either of the two colors be None (transparent) and add a tenth style, Stencil, so Bitify can make one-color icons with transparent cut lines.
+**Goal:** Let either of the two colors be None (transparent) and add a tenth style, Stencil, so Colorfetti can make one-color icons with transparent cut lines.
 
 **Architecture:** A None color is one extra piece of state, `none` (0, 1 or 2). The two colors stay hex strings; where they are drawn they pass through `inks()`, which turns a None color into `null`, and `colorize`, `pngBytes` and `encodeGif` each learn to take `null`. Stencil is one more branch of `mask` that writes 2 for the body and 1 for cuts, plus a helper that finds each sprite's outline level once per analysed image. No style looks at the colors.
 
@@ -14,11 +14,11 @@
 
 ## Global Constraints
 
-- Read `CLAUDE.md` and, before touching `src/lib/bitify.js`, `docs/performance.md`.
+- Read `CLAUDE.md` and, before touching `src/lib/recolor.js`, `docs/performance.md`.
 - Plain JavaScript, Svelte 5 runes. No TypeScript, no new dependencies.
 - All CSS goes in `src/app.css`. Components have no style blocks. There is no border-box reset.
-- The loops in `src/lib/bitify.js` make nothing per pixel: no array, no object, no function.
-- `docs/superpowers/specs/2026-10-06-bitify-app-design.md` (the main spec) is updated in the same commit as the code it describes.
+- The loops in `src/lib/recolor.js` make nothing per pixel: no array, no object, no function.
+- `docs/superpowers/specs/2026-10-06-colorfetti-app-design.md` (the main spec) is updated in the same commit as the code it describes.
 - Match the surrounding code: its comment density, its plain wording, its long single-line statements.
 - One commit per task. End every commit message with `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`.
 - Do not work on `main`. Use a branch or worktree. `main` may hold the owner's own staged changes to `index.html` and the main spec; never commit those.
@@ -41,7 +41,7 @@
 |---|---|
 | `src/lib/presets.js` | `inks()`; Stencil in `STYLES` |
 | `src/lib/settings.js` | `none` in `DEFAULTS` and `restore`; `cuts`, `outline`, `edges`; Stencil's list |
-| `src/lib/bitify.js` | `colorize` takes `null`; `outlineLevels`; the Stencil branch of `mask` |
+| `src/lib/recolor.js` | `colorize` takes `null`; `outlineLevels`; the Stencil branch of `mask` |
 | `src/lib/save.js`, `src/lib/gif.js` | `pngBytes` and `encodeGif` take `null` |
 | `src/App.svelte` | `none` state, stored and reset; drawn colors to tiles and saving; help text |
 | `src/Dock.svelte`, `src/app.css` | None chips, None swatch, Swap; Cuts on the strip |
@@ -159,10 +159,10 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 ### Task 2: `colorize`, `pngBytes` and `encodeGif` take a None color
 
 **Files:**
-- Modify: `src/lib/bitify.js:378-386` (`colorize`)
+- Modify: `src/lib/recolor.js:378-386` (`colorize`)
 - Modify: `src/lib/save.js:42-60` (`pngBytes`)
 - Modify: `src/lib/gif.js:32-48` (`encodeGif`)
-- Test: `src/lib/bitify.test.js`, `src/lib/save.test.js`, `src/lib/gif.test.js`
+- Test: `src/lib/recolor.test.js`, `src/lib/save.test.js`, `src/lib/gif.test.js`
 
 **Interfaces:**
 - Consumes: nothing from Task 1.
@@ -170,7 +170,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 
 - [ ] **Step 1: Write the failing tests**
 
-In `src/lib/bitify.test.js`, inside `describe('colorize', ...)`:
+In `src/lib/recolor.test.js`, inside `describe('colorize', ...)`:
 
 ```js
   it('leaves the pixels of a color that is None clear, like the empty ones', () => {
@@ -209,12 +209,12 @@ In `src/lib/gif.test.js`, inside `describe('encodeGif', ...)`:
 
 - [ ] **Step 2: Run the tests and see them fail**
 
-Run: `npx vitest run src/lib/bitify.test.js src/lib/save.test.js src/lib/gif.test.js`
+Run: `npx vitest run src/lib/recolor.test.js src/lib/save.test.js src/lib/gif.test.js`
 Expected: FAIL in the three new tests with `Cannot read properties of null (reading 'slice')`.
 
 - [ ] **Step 3: Implement**
 
-`src/lib/bitify.js`, replace the comment line above `colorize` and the line that builds `c`:
+`src/lib/recolor.js`, replace the comment line above `colorize` and the line that builds `c`:
 
 ```js
 // Turns a mask into RGBA pixels. Colors are '#rrggbb', or null for a color that is None, whose
@@ -243,7 +243,7 @@ export function colorize(m, first, second) {
 
 ```js
 // Encodes a two-color animation as a GIF with a transparent background. Each frame's `mask` has
-// one byte per pixel: 0 empty, 1 first color, 2 second color (the output of bitify's `mask`),
+// one byte per pixel: 0 empty, 1 first color, 2 second color (the output of colorfetti's `mask`),
 // which are used directly as palette indexes. Colors are '#rrggbb', or null for a color that is
 // None. A GIF frame has one see-through index, 0, so that color's pixels are written as 0 too.
 export function encodeGif({ w, h, frames, first, second, loop }) {
@@ -262,13 +262,13 @@ Expected: PASS, all files.
 
 - [ ] **Step 5: Check that nothing else changed**
 
-Run: `git show HEAD:src/lib/bitify.js > bench/bitify.old.js && node bench/equiv.mjs && rm bench/bitify.old.js`
+Run: `git show HEAD:src/lib/recolor.js > bench/recolor.old.js && node bench/equiv.mjs && rm bench/recolor.old.js`
 Expected: it finishes without an assertion error (`colorize` with two colors is byte-identical to the code before this task).
 
 - [ ] **Step 6: Commit**
 
 ```bash
-git add src/lib/bitify.js src/lib/bitify.test.js src/lib/save.js src/lib/save.test.js src/lib/gif.js src/lib/gif.test.js
+git add src/lib/recolor.js src/lib/recolor.test.js src/lib/save.js src/lib/save.test.js src/lib/gif.js src/lib/gif.test.js
 git commit -m "feat: a color given as null is left out of the pixels, the PNG and the GIF
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
@@ -312,7 +312,7 @@ After `const set = $derived({ ...settings[style] });`:
 In the storage effect:
 
 ```js
-      localStorage.setItem('bitify', JSON.stringify({ first, second, none, style, settings, theme: themePick }));
+      localStorage.setItem('colorfetti', JSON.stringify({ first, second, none, style, settings, theme: themePick }));
 ```
 
 In `resetAll`:
@@ -452,7 +452,7 @@ Expected: PASS. (No test covers the interface.)
 
 - [ ] **Step 7: Check in a browser, desktop width**
 
-Start the dev server (`npm run dev`, or the `bitify` preview) and open `http://localhost:5173`. Add a sprite with a transparent background (any PNG from `docs/superpowers/mockups/tile-*-off.png` will do). Confirm each of these, and fix what fails before going on:
+Start the dev server (`npm run dev`, or the `colorfetti` preview) and open `http://localhost:5173`. Add a sprite with a transparent background (any PNG from `docs/superpowers/mockups/tile-*-off.png` will do). Confirm each of these, and fix what fails before going on:
 
 1. Palette panel: after the twelve palettes and a divider there are two more chips. The first shows checkerboard on its left half, the second on its right half.
 2. Press the first None chip: it gets the ring, the first swatch shows checkerboard with a slash, and the first color's pixels on the wall turn to checkerboard. The style previews on the Style button and in the list of styles lose that color too.
@@ -462,7 +462,7 @@ Start the dev server (`npm run dev`, or the `bitify` preview) and open `http://l
 6. Choose another palette with None on: the colors change, None stays.
 7. Press the None swatch and choose a color in the picker: None goes off and the color shows.
 8. Style Silhouette with the first color None: the shape is drawn in the second color, not blank.
-9. Download a still with the first color None and open it in an image editor: the first color's pixels are transparent. Do the same for an animated GIF (`src/assets/logo.gif` added to the wall).
+9. Download a still with the first color None and open it in an image editor: the first color's pixels are transparent. Do the same with a two-frame animated GIF from `bench/animation-fixture.mjs` added to the wall.
 10. Copy a tile and paste it into an image editor: transparent where the color is None.
 11. More menu, Reset settings: None goes off.
 12. Reload the page with None on: it is still on.
@@ -474,7 +474,7 @@ At 375 px wide: the palette chips go in two rows of seven with the None chips la
 
 - [ ] **Step 9: Update the docs**
 
-Main spec, `docs/superpowers/specs/2026-10-06-bitify-app-design.md`:
+Main spec, `docs/superpowers/specs/2026-10-06-colorfetti-app-design.md`:
 
 | Where | Change |
 |---|---|
@@ -508,7 +508,7 @@ None where it is, and Swap takes None along with its color.
 - [ ] **Step 10: Commit**
 
 ```bash
-git add src/App.svelte src/Dock.svelte src/app.css docs/superpowers/specs/2026-10-06-bitify-app-design.md docs/palettes.md docs/performance.md CLAUDE.md README.md
+git add src/App.svelte src/Dock.svelte src/app.css docs/superpowers/specs/2026-10-06-colorfetti-app-design.md docs/palettes.md docs/performance.md CLAUDE.md README.md
 git commit -m "feat: either color can be None, from two chips that end the palette row
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
@@ -520,10 +520,10 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 
 **Files:**
 - Modify: `src/lib/settings.js:8-35`
-- Modify: `src/lib/bitify.js` (a new function above `// The styles that turn brightness into a pattern.`; a new branch of `mask` above `if (style === 'solid' || style === 'silhouette')`)
+- Modify: `src/lib/recolor.js` (a new function above `// The styles that turn brightness into a pattern.`; a new branch of `mask` above `if (style === 'solid' || style === 'silhouette')`)
 - Modify: `bench/bench.mjs:28`
 - Modify: `docs/styles.md`, `docs/performance.md`
-- Test: `src/lib/bitify.test.js`, `src/lib/settings.test.js`
+- Test: `src/lib/recolor.test.js`, `src/lib/settings.test.js`
 
 **Interfaces:**
 - Consumes: nothing from Tasks 1 to 3.
@@ -531,7 +531,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 
 - [ ] **Step 1: Save a copy of the old code and time it**
 
-Run: `cp src/lib/bitify.js bench/bitify.old.js && node bench/bench.mjs`
+Run: `cp src/lib/recolor.js bench/recolor.old.js && node bench/bench.mjs`
 Keep the printed table to compare with Step 8.
 
 - [ ] **Step 2: Write the failing tests**
@@ -563,7 +563,7 @@ In `src/lib/settings.test.js`:
   });
 ```
 
-In `src/lib/bitify.test.js`:
+In `src/lib/recolor.test.js`:
 
 - Add `'stencil'` to the style lists on the lines that begin `for (const style of ['cutout', 'solid', 'checker', ...` (two of them, in "an all-empty image" and in the test over a random 300 by 200 image), to `['cutout', 'lines', 'solid', 'silhouette']` in `'gives each pixel of a smaller picture what its image pixel is in the full conversion'`, to the list in `'converts the whole image when no size is asked for, or its own'`, and to the list in the first `docs/styles.md` test.
 - In the second `docs/styles.md` test add to `examples`:
@@ -652,7 +652,7 @@ describe('stencil', () => {
 
 - [ ] **Step 3: Run the tests and see them fail**
 
-Run: `npx vitest run src/lib/bitify.test.js src/lib/settings.test.js`
+Run: `npx vitest run src/lib/recolor.test.js src/lib/settings.test.js`
 Expected: FAIL. The style list differs, `defaults('stencil')` throws, and `mask(…, 'stencil')` throws `TILES[style] is not a function`.
 
 - [ ] **Step 4: Implement the settings**
@@ -678,7 +678,7 @@ Change the comment above `STYLE_SETTINGS` and add Stencil's line after `solid`:
 
 - [ ] **Step 5: Implement the outline levels**
 
-In `src/lib/bitify.js`, above the line `// The styles that turn brightness into a pattern.`:
+In `src/lib/recolor.js`, above the line `// The styles that turn brightness into a pattern.`:
 
 ```js
 // Stencil's outline levels: for each solid pixel, the brightness of the darkest pixel on the
@@ -719,7 +719,7 @@ function outlineLevels(img) {
 
 - [ ] **Step 6: Implement the Stencil branch of `mask`**
 
-In `src/lib/bitify.js`, inside `mask`, above `if (style === 'solid' || style === 'silhouette') {`:
+In `src/lib/recolor.js`, inside `mask`, above `if (style === 'solid' || style === 'silhouette') {`:
 
 ```js
   if (style === 'stencil') {
@@ -850,7 +850,7 @@ Expected: no assertion error. Every other style's masks are byte-identical to th
 In `bench/bench.mjs` line 28 add Stencil: `const STYLES = ['cutout', 'solid', 'stencil', 'lines', 'silhouette', 'checker', 'hatch', 'bayer', 'noise', 'atkinson'];`
 
 Run: `node bench/bench.mjs`
-Expected: the other styles within a few percent of Step 1. Stencil's own column on the "sprite" rows includes finding the outline levels the first time; note the 4000x3000 sprite figure for the doc below. Then `rm bench/bitify.old.js`: it is not ignored by git and must not be committed.
+Expected: the other styles within a few percent of Step 1. Stencil's own column on the "sprite" rows includes finding the outline levels the first time; note the 4000x3000 sprite figure for the doc below. Then `rm bench/recolor.old.js`: it is not ignored by git and must not be committed.
 
 - [ ] **Step 9: `docs/performance.md`**
 
@@ -869,7 +869,7 @@ In "### Conversion (`mask`)", add a bullet at the end of that section, with the 
 - [ ] **Step 10: Commit**
 
 ```bash
-git add src/lib/settings.js src/lib/settings.test.js src/lib/bitify.js src/lib/bitify.test.js bench/bench.mjs docs/styles.md docs/performance.md
+git add src/lib/settings.js src/lib/settings.test.js src/lib/recolor.js src/lib/recolor.test.js bench/bench.mjs docs/styles.md docs/performance.md
 git commit -m "feat: Stencil in the library: the whole sprite filled, its darkest inner lines cut
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
@@ -971,7 +971,7 @@ At 375 px wide: Stencil's panel shows chips Cuts, Outline, Edges, Brightness and
 
 - [ ] **Step 8: Update the docs**
 
-Main spec, `docs/superpowers/specs/2026-10-06-bitify-app-design.md`:
+Main spec, `docs/superpowers/specs/2026-10-06-colorfetti-app-design.md`:
 
 | Where | Change |
 |---|---|
@@ -983,7 +983,7 @@ Main spec, `docs/superpowers/specs/2026-10-06-bitify-app-design.md`:
 | The paragraph about the style button's list ("opens the list of the nine styles") | "ten styles". |
 | "Remembered settings" ("the style one of the nine") | "one of the ten". |
 | "Animated GIFs", first bullet | Add: "Stencil's outline levels are the exception: each frame has its own." |
-| "Structure" table, `bitify.js` row | Add Stencil's outline levels to what the file holds. |
+| "Structure" table, `recolor.js` row | Add Stencil's outline levels to what the file holds. |
 
 `CLAUDE.md`: "There are nine styles; the default, Cutout, fills ..." becomes "There are ten styles; the default, Cutout, fills ...", and add after that sentence: "Stencil, the third, fills a whole sprite and cuts only its darkest inner lines; with the first color None it makes icons in one color." Also "docs/styles.md explains how each of the nine styles works" becomes "ten".
 
@@ -994,7 +994,7 @@ Then mark the design spec built: in `docs/superpowers/specs/2026-10-08-none-colo
 - [ ] **Step 9: Commit**
 
 ```bash
-git add src/lib/presets.js src/lib/presets.test.js src/Dock.svelte docs/superpowers/specs/2026-10-06-bitify-app-design.md docs/superpowers/specs/2026-10-08-none-color-and-stencil-design.md CLAUDE.md README.md
+git add src/lib/presets.js src/lib/presets.test.js src/Dock.svelte docs/superpowers/specs/2026-10-06-colorfetti-app-design.md docs/superpowers/specs/2026-10-08-none-color-and-stencil-design.md CLAUDE.md README.md
 git commit -m "feat: Stencil, a tenth style, third in the list, with Cuts on the strip
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"

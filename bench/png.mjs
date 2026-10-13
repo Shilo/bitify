@@ -3,7 +3,7 @@ import { pathToFileURL } from 'node:url';
 import { createRequire } from 'node:module';
 const root = import.meta.dirname + '/../';
 const { zlibSync } = createRequire(root + 'package.json')('fflate');
-const B = await import(pathToFileURL(root + 'src/lib/bitify.js'));
+const B = await import(pathToFileURL(root + 'src/lib/recolor.js'));
 const S = await import(pathToFileURL(root + 'src/lib/save.js'));
 
 

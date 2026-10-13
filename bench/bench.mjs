@@ -1,7 +1,7 @@
-// node bench.mjs [path-to-bitify.js] [path-to-save.js]
+// node bench.mjs [path-to-recolor.js] [path-to-save.js]
 import { pathToFileURL } from 'node:url';
 const root = import.meta.dirname + '/../src/lib/';
-const B = await import(pathToFileURL(process.argv[2] ?? root + 'bitify.js'));
+const B = await import(pathToFileURL(process.argv[2] ?? root + 'recolor.js'));
 const S = await import(pathToFileURL(process.argv[3] ?? root + 'save.js'));
 
 // A photo-like image: smooth blobs, hard-edged shapes and grain. `alpha` cuts a round sprite out of it.

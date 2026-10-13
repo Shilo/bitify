@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync } from 'node:fs';
-import { analyze, mask, colorize } from '../../src/lib/bitify.js';
+import { analyze, mask, colorize } from '../../src/lib/recolor.js';
 const root=import.meta.dirname;
 const all=JSON.parse(readFileSync(`${root}/inputs.json`));
 const items=v=>all.filter(x=>x.variant===v && x.width===16).map(x=>({...x,data:Uint8ClampedArray.from(x.data)}));

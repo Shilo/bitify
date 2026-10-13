@@ -1,5 +1,5 @@
 // No preview/canvas encoder participates in this path.
-export const EXPORT_DRAG_TYPE = 'application/x-bitify-export';
+export const EXPORT_DRAG_TYPE = 'application/x-colorfetti-export';
 // Mobile browsers can report a fine pointer when a mouse is connected.
 export function isMobileExportDevice() {
   return navigator.userAgentData?.mobile === true || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)

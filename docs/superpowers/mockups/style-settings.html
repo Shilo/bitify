@@ -256,7 +256,7 @@ function frameMain({ id, opt, style, touch, SET, STYLES }) {
 
   const n = touch ? 4 : 6, names = ['ball', 'gem', 'crate'];
   document.getElementById('app').innerHTML = `
-    <header class="bar"><span class="mark">Bitify</span><span class="count">${n} images</span><span class="grow"></span><button class="btn">${ico('plus')}<span class="wide">Add images</span></button><button class="btn sm">${ico('dots')}</button></header>
+    <header class="bar"><span class="mark">Colorfetti</span><span class="count">${n} images</span><span class="grow"></span><button class="btn">${ico('plus')}<span class="wide">Add images</span></button><button class="btn sm">${ico('dots')}</button></header>
     <div class="grid"><div class="probe"></div><div class="tiles">${Array.from({ length: n }, (_, i) => `<figure class="tile"><div class="art"><canvas></canvas></div><figcaption class="cap"><span class="name">${names[i % 3]}.png</span><span class="dim">${[48, 32, 64][i % 3]}×${[48, 32, 64][i % 3]}</span></figcaption></figure>`).join('')}</div></div>
     <div class="dock"><div class="pair"><span class="sw" style="background:#222323"></span><button class="ib">${ico('swap')}</button><span class="sw" style="background:#f0f6f0"></span></div>
       <button class="btn">${ico('grid')}<span class="lbl">Palette</span></button><span class="sep"></span>

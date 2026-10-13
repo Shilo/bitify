@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Bitify — Import / Export layout comparison</title>
+<title>Colorfetti — Import / Export layout comparison</title>
 <link rel="stylesheet" href="/node_modules/@jungherz-de/glasskit/glasskit.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -138,7 +138,7 @@ select { color:var(--gl-color-text); background:var(--review-surface); border:0;
 </head>
 <body>
 <section class="review-tools" aria-label="Mockup comparison controls">
-  <div class="review-title"><strong>Bitify · Layout study</strong><span>Interactive mockup · file actions are samples</span></div>
+  <div class="review-title"><strong>Colorfetti · Layout study</strong><span>Interactive mockup · file actions are samples</span></div>
   <div class="choices">
     <div class="layout-choices" role="group" aria-label="Layout candidate">
       <button data-layout-choice="top" aria-pressed="true">A · Top</button>
@@ -150,9 +150,9 @@ select { color:var(--gl-color-text); background:var(--review-surface); border:0;
     <a class="live-link" href="/">Live app ↗</a>
   </div>
 </section>
-<main class="stage" id="stage" aria-label="Sample Bitify canvas">
+<main class="stage" id="stage" aria-label="Sample Colorfetti canvas">
   <header class="app-header">
-    <div class="brand material" aria-label="Bitify">bitify</div>
+    <div class="brand material" aria-label="Colorfetti">Colorfetti</div>
     <div class="header-tools">
       <div class="file-tools material top-files" role="group" aria-label="Sample Import and Export actions">
         <button class="icon-button" data-icon="import" aria-label="Import images — sample only" data-tip="Import images · sample" data-sample="Import"></button>
@@ -202,7 +202,7 @@ const sprites={
   star:['.......##.......','.......##.......','......####......','......####......','.##############.','..############..','....########....','.....######.....','....########....','....###..###....','...###....###...','...##......##...']};
 const spriteSvg=name=>`<svg class="sprite" viewBox="0 0 16 16" aria-hidden="true">${sprites[name].flatMap((row,y)=>[...row].flatMap((cell,x)=>cell==='#'?[`<rect x="${x}" y="${y}" width="1" height="1"/>`]:[])).join('')}</svg>`;
 const samples=[['logo.png','28 × 28','logo'],['ghost.png','16 × 16','ghost'],['leaf.png','16 × 16','leaf'],['logo-small.png','28 × 28','logo'],['castle.png','16 × 16','castle'],['star.png','16 × 16','star']];
-document.getElementById('art-grid').innerHTML=samples.map(([name,size,art])=>`<article class="tile" aria-label="Sample ${name}"><div class="art">${art==='logo'?'<img src="/src/assets/logo.png" alt="Sample Bitify logo">':spriteSvg(art)}<div class="acts"><button class="icon-button copy-action" data-icon="copy" aria-label="Copy sample ${name}" data-tip="Copy · sample" data-sample="Copy"></button><button class="icon-button" data-icon="save" aria-label="Save sample ${name}" data-tip="Save · sample" data-sample="Save"></button><button class="icon-button" data-icon="x" aria-label="Remove sample ${name}" data-tip="Remove · sample" data-sample="Remove"></button></div></div><div class="caption material"><strong>${name}</strong><span>${size}</span></div></article>`).join('');
+document.getElementById('art-grid').innerHTML=samples.map(([name,size,art])=>`<article class="tile" aria-label="Sample ${name}"><div class="art">${art==='logo'?'<img src="/src/assets/logo.png" alt="Sample Colorfetti logo">':spriteSvg(art)}<div class="acts"><button class="icon-button copy-action" data-icon="copy" aria-label="Copy sample ${name}" data-tip="Copy · sample" data-sample="Copy"></button><button class="icon-button" data-icon="save" aria-label="Save sample ${name}" data-tip="Save · sample" data-sample="Save"></button><button class="icon-button" data-icon="x" aria-label="Remove sample ${name}" data-tip="Remove · sample" data-sample="Remove"></button></div></div><div class="caption material"><strong>${name}</strong><span>${size}</span></div></article>`).join('');
 document.querySelectorAll('[data-icon]').forEach(node=>node.innerHTML=svgIcon(node.dataset.icon));
 const palettes=[['#202426','#f0f6f0'],['#000','#fff'],['#45413e','#b5c6ba'],['#363121','#fce4a4'],['#293400','#90be05'],['#162810','#c2cf98'],['#304525','#ccf5d9'],['#24291f','#d5d8cb'],['#162b20','#03dc6c'],['#4a2715','#ffd15a'],['#393285','#94dce6'],['#590d28','#ffd3e0']];
 document.querySelector('.palette-list').innerHTML=palettes.map(([a,b],i)=>`<span class="palette-disc" style="--a:${a};--b:${b}" role="img" aria-label="Sample palette ${i+1}"></span>`).join('');

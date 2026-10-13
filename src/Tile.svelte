@@ -1,6 +1,6 @@
 <script>
   import { untrack } from 'svelte';
-  import { mask, colorize, shrink, spritesOf, iconOf } from './lib/bitify.js';
+  import { mask, colorize, shrink, spritesOf, iconOf } from './lib/recolor.js';
   import { shown } from './lib/layout.js';
   import Pixels from './Pixels.svelte';
   import PixelIcon from './PixelIcon.svelte';

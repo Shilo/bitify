@@ -1,4 +1,4 @@
-import { analyze, colorize, mask } from './bitify.js';
+import { analyze, colorize, mask } from './recolor.js';
 import { inks } from './presets.js';
 
 // One simple tonal disk with a dark circular inset. Broad, smooth tones expose the

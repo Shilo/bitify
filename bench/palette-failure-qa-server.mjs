@@ -7,7 +7,7 @@ const port = Number(process.argv[2] ?? 5285);
 const html = new URL('./palette-failure-qa.html', import.meta.url);
 const types = { '.html':'text/html', '.js':'text/javascript', '.css':'text/css', '.png':'image/png', '.gif':'image/gif', '.svg':'image/svg+xml', '.webmanifest':'application/manifest+json' };
 const preload = `<script>
-localStorage.setItem('bitify',JSON.stringify({family:'full-palette',paletteId:'preset-edg32',maxColors:0,cleanup:false,alphaCut:128,metric:'oklab'}));
+localStorage.setItem('colorfetti',JSON.stringify({family:'full-palette',paletteId:'preset-edg32',maxColors:0,cleanup:false,alphaCut:128,metric:'oklab'}));
 const q=window.__failureQA={failLimit:0,failCleanup:0,starts:{limit:0,cleanup:0},errors:[],resizeWarnings:[],exports:[],copies:0};
 window.addEventListener('error',e=>(e.message.startsWith('ResizeObserver loop')?q.resizeWarnings:q.errors).push({message:e.message,at:performance.now()}));window.addEventListener('unhandledrejection',e=>q.errors.push(String(e.reason)));
 const W=window.Worker;window.Worker=class extends W{

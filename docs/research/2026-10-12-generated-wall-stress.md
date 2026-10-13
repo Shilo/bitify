@@ -114,7 +114,7 @@ Sampling was coarse, and short stages sometimes had no memory sample.
 The final monitor sample was 1,903,968 KiB PSS across 16 Brave processes, compared
 with approximately 1,732,726 KiB across 15 before the run. This stayed above the
 baseline. Other tabs, process changes, native allocation caches and lack of forced
-GC prevent attribution to Bitify or a conclusion of full reclamation. Phone-reported
+GC prevent attribution to Colorfetti or a conclusion of full reclamation. Phone-reported
 JS heap was exactly 23,100,000 bytes throughout, below decoded RGBA alone; this
 rounded/stale browser value is not evidence of a constant 23.1 MB app heap.
 Desktop heap likewise did not fall immediately during the final unforced clear

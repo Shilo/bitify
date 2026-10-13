@@ -25,7 +25,7 @@ const topTasks=[];
 const topLongTasksSupported=PerformanceObserver.supportedEntryTypes.includes('longtask');
 const topObserver=topLongTasksSupported?new PerformanceObserver(list=>topTasks.push(...list.getEntries().map(entry=>({start:entry.startTime,duration:entry.duration,name:entry.name,attribution:[...entry.attribution].map(value=>({containerType:value.containerType,containerName:value.containerName}))})))):null;
 topObserver?.observe({type:'longtask'});
-const settings=()=>JSON.parse(win.localStorage.getItem('bitify'));
+const settings=()=>JSON.parse(win.localStorage.getItem('colorfetti'));
 const updateVisible=()=>[...doc.querySelectorAll('.glass-toast.is-visible')].some(node=>node.textContent.includes('Updating images'));
 const content=value=>JSON.stringify(value.entries??{size:value.size,sha256:value.sha256});
 async function files(names){return Promise.all(names.map(async name=>{

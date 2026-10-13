@@ -1,12 +1,12 @@
-<!doctype html><meta charset="utf-8"><title>Bitify drop regression review</title>
+<!doctype html><meta charset="utf-8"><title>Colorfetti drop regression review</title>
 <style>body{font:15px system-ui;margin:18px;background:#eef1f3;color:#18232d}button{padding:10px;margin:0 8px 10px 0}iframe{display:block;border:1px solid #666;margin-top:16px}pre{white-space:pre-wrap}</style>
-<h1>Bitify drop regression review</h1>
+<h1>Colorfetti drop regression review</h1>
 <button id="desktop">Run desktop checks</button><button id="phone">Run phone checks</button><button id="edges">Run review edge cases</button>
 <pre id="results" role="status">Ready. Tests run against the production build in an isolated preview.</pre><div id="preview"></div>
 <script type="module">
 const output = document.querySelector('#results'), preview = document.querySelector('#preview');
 const realFetch = window.fetch.bind(window);
-const [png, gif] = await Promise.all(['/fixture/logo.png','/fixture/logo.gif'].map(async path => new Uint8Array(await (await realFetch(path)).arrayBuffer())));
+const [png, gif] = await Promise.all(['/fixture/logo.png','/fixture/animation.gif'].map(async path => new Uint8Array(await (await realFetch(path)).arrayBuffer())));
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 function assert(ok, text) { if (!ok) throw new Error(text); }
 async function until(check, text, timeout = 6000) {

@@ -31,7 +31,7 @@
     <script>
       let initialTheme;
       try {
-        initialTheme = JSON.parse(localStorage.getItem('bitify'))?.theme;
+        initialTheme = JSON.parse(localStorage.getItem('colorfetti') ?? localStorage.getItem('bitify'))?.theme;
       } catch {
         // Unavailable or invalid storage still follows the system.
       }

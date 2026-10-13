@@ -124,7 +124,7 @@ try {
     execFileSync('adb', ['reverse', 'tcp:5199', 'tcp:5199']);
     execFileSync('adb', ['shell', 'input', 'keyevent', 'KEYCODE_WAKEUP']);
   } else browser = spawn(process.env.BROWSER ?? 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe', [
-    '--headless=new', `--remote-debugging-port=${port}`, `--user-data-dir=${mkdtempSync(join(tmpdir(), 'bitify-theme-'))}`,
+    '--headless=new', `--remote-debugging-port=${port}`, `--user-data-dir=${mkdtempSync(join(tmpdir(), 'colorfetti-theme-'))}`,
     '--no-first-run', '--no-default-browser-check', '--disable-features=msEdgeWelcomePage', 'about:blank',
   ], { stdio: 'ignore' });
   let version;
@@ -153,7 +153,7 @@ try {
   }
   await send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-color-scheme', value: options.system }, { name: 'prefers-reduced-motion', value: 'reduce' }, { name: 'prefers-reduced-transparency', value: options.transparency ?? 'no-preference' }] });
   await send('Emulation.setAutoDarkModeOverride', { enabled: options.system === 'dark' });
-  const seed = await send('Page.addScriptToEvaluateOnNewDocument', { source: `localStorage.setItem('bitify',JSON.stringify({first:'#222323',second:'#f0f6f0',style:'solid',theme:'light'}));` });
+  const seed = await send('Page.addScriptToEvaluateOnNewDocument', { source: `localStorage.setItem('colorfetti',JSON.stringify({first:'#222323',second:'#f0f6f0',style:'solid',theme:'light'}));` });
   await send('Page.navigate', { url: pageUrl }); await ready();
   await send('Page.removeScriptToEvaluateOnNewDocument', { identifier: seed.identifier });
   console.log(JSON.stringify({ browser: version.Browser, package: version['Android-Package'], options, initialScheme: await run('getComputedStyle(document.documentElement).colorScheme') }));
@@ -191,7 +191,7 @@ try {
   if (!options.baseline) assert.equal(await run(`getComputedStyle(document.documentElement).colorScheme.split(' ').sort().join(' ')`), 'light only');
   // Returning to the system theme resumes following subsequent system changes.
   await switchTheme(options.system);
-  assert.equal(await run(`JSON.parse(localStorage.getItem('bitify')).theme`), undefined);
+  assert.equal(await run(`JSON.parse(localStorage.getItem('colorfetti')).theme`), undefined);
   const opposite = options.system === 'dark' ? 'light' : 'dark';
   await send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-color-scheme', value: opposite }] });
   await pause(250);
@@ -205,7 +205,7 @@ try {
   await send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-color-scheme', value: 'light' }] });
   await pause(250);
   await switchTheme('dark');
-  assert.equal(await run(`JSON.parse(localStorage.getItem('bitify')).theme`), 'dark');
+  assert.equal(await run(`JSON.parse(localStorage.getItem('colorfetti')).theme`), 'dark');
   await send('Page.reload'); await ready();
   assert.equal(await run('document.documentElement.dataset.theme'), 'dark');
   if (!options.baseline) {

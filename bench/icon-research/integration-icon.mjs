@@ -5,7 +5,7 @@ import {execFileSync} from 'node:child_process';
 import {pathToFileURL} from 'node:url';
 import {inflateSync} from 'node:zlib';
 import assert from 'node:assert/strict';
-import {analyze,mask} from '../../src/lib/bitify.js';
+import {analyze,mask} from '../../src/lib/recolor.js';
 import {pngBytes,zipBytes} from '../../src/lib/save.js';
 import {detect} from './icon-candidate.mjs';
 const root=import.meta.dirname,fixtures=JSON.parse(readFileSync(`${root}/../../src/lib/fixtures/ai-inventory.json`));

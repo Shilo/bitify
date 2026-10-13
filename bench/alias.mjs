@@ -2,7 +2,7 @@
 // tile that draws them smaller show them as light as they are? Share of light pixels among the
 // solid ones, for the whole image and for the picture each of several tiles would draw of it.
 import { pathToFileURL } from 'node:url';
-const B = await import(pathToFileURL(import.meta.dirname + '/../src/lib/bitify.js'));
+const B = await import(pathToFileURL(import.meta.dirname + '/../src/lib/recolor.js'));
 const { shown } = await import(pathToFileURL(import.meta.dirname + '/../src/lib/layout.js'));
 const w = 1024, h = 1024;
 const BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];

@@ -10,7 +10,7 @@
     "animatedFrames": 272
   },
   "optionalSettingsAssets": 28,
-  "phoneMemoryScope": "All Brave processes PSS via Android meminfo; correlated by UTC, not the monitor phase label. Includes other tabs/processes. Not Bitify-only or JS heap.",
+  "phoneMemoryScope": "All Brave processes PSS via Android meminfo; correlated by UTC, not the monitor phase label. Includes other tabs/processes. Not Colorfetti-only or JS heap.",
   "runs": [
     {
       "target": "android",

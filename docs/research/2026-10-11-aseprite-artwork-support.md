@@ -190,6 +190,6 @@ links as well as actual browser requests.
 - Existing artwork integration: `src/App.svelte` (`decode`, `toItem`, `addFiles`),
   `src/lib/gif.js`, `src/lib/save.js`, and `src/lib/image-drop.js`.
 - [Performance constraints and recorded Aseprite bundle measurements](../performance.md)
-  and [behavior spec](../superpowers/specs/2026-10-06-bitify-app-design.md).
+  and [behavior spec](../superpowers/specs/2026-10-06-colorfetti-app-design.md).
 - [MP4 support — deferred task](2026-10-11-mp4-support.md), which uses the same
   existing frame representation and records a separate deferred import feature.

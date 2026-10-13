@@ -5,7 +5,7 @@ Implemented on `codex/glasskit-prototypes`. Floating islands remains the only li
 ## Changes
 
 1. **Checker origin:** anchored to the first image's actual top-left pixels, including object-fit letterboxing. It follows scrolling, resizing, imports, removals and header changes. Spacing remains 16 source pixels at median image scale, grouped when dense.
-2. **Brand:** new static pixel B mark with Bitify beside it on desktop; mark alone on narrow screens. The wordmark uses the shared UI font.
+2. **Brand:** new static pixel B mark with Colorfetti beside it on desktop; mark alone on narrow screens. The wordmark uses the shared UI font.
 3. **Empty header:** heading, subtitle and concise instructions now occupy their own responsive header row. Loaded images remove that row. Short phone editing views retain the heading and Import while compacting explanatory copy.
 4. **Single Import action:** the top Import button expands to icon plus “Import images” when empty. The duplicate center button is removed.
 5. **Stationary Export:** header button hover/focus/press states preserve position; GlassKit colors and feedback remain.
@@ -49,7 +49,7 @@ Three subagents implemented separate header, canvas/viewer and dock responsibili
 
 ## Current screenshots
 
-- [Dark desktop](mockups/refined-empty-desktop-dark.png), [light desktop](mockups/refined-empty-desktop-light.png)
-- [Dark phone](mockups/refined-empty-phone-dark.png), [light phone](mockups/refined-empty-phone-light.png)
-- [Style previews](mockups/refined-style-previews-dark.png), [palette](mockups/refined-palette-dark.png), [None](mockups/refined-palette-none-dark.png)
-- [Phone fullscreen feedback](mockups/refined-fullscreen-phone-dark.png)
+- Dark desktop, light desktop
+- Dark phone, light phone
+- Style previews, palette, None
+- Phone fullscreen feedback

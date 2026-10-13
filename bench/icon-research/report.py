@@ -20,7 +20,7 @@ audit_rows=''.join(f'<tr><td>{x["group"]}</td><td>{x["width"]} × {x["height"]}<
 abl_rows=''.join(f'<tr><td>{names[x["method"]]}</td><td>{x["variant"]}</td><td>{x["changed_items"]}/65</td><td>{x["changed_pixels"]}</td></tr>' for x in ablation if x['variant'] in ['gray','palette4','palette8','palette16'])
 
 body='''
-<header><p class="eyebrow">Bitify · research on the supplied sprites · October 8, 2026 · HEAD b2711a4</p>
+<header><p class="eyebrow">Colorfetti · research on the supplied sprites · October 8, 2026 · HEAD b2711a4</p>
 <h1>One ink needs a decision about shape.</h1>
 <p class="lead">A universal grayscale threshold cannot reliably turn shaded 16 × 16 inventory art into a consistent minimal icon family. The strongest next step is per-item structural simplification with bounded, coherent cuts and a choice of a few candidates. Color reduction alone does not solve it.</p>
 <p>Study: the breastplate plus 64 inventory cells from the four original PNGs. Baselines use the actual app code. Experimental algorithms run offline. No production behavior was changed.</p></header>
@@ -41,7 +41,7 @@ BREAST_ALT
 <p>The local methods recover a connected body here, but add conspicuous holes; bilateral filtering barely changes the problematic split. The percentile prototype is tidier but still looks like a generic filled plate. None of these experiments warrants claiming the breastplate is solved.</p></section>
 
 <section><h2>Grayscale and a limited palette: controlled tests</h2>
-<p>Bitify already computes rounded <code>0.2126 R + 0.7152 G + 0.0722 B</code> for thresholding. Replacing RGB with exactly that gray value produces <strong>zero changed pixels on all 65 items</strong> for Solid Auto, Solid 50% and Stencil Auto with Edges off. Preconverting to the same grayscale is redundant.</p>
+<p>Colorfetti already computes rounded <code>0.2126 R + 0.7152 G + 0.0722 B</code> for thresholding. Replacing RGB with exactly that gray value produces <strong>zero changed pixels on all 65 items</strong> for Solid Auto, Solid 50% and Stencil Auto with Edges off. Preconverting to the same grayscale is redundant.</p>
 <p>There is an exception: edges use the largest difference in any RGB channel. Grayscale preprocessing changes the strong-edge Stencil result on 39 items, by 236 pixels in total. It suppresses some chromatic texture and may also erase useful boundaries between differently colored parts. Brightness Value or R/G/B changes the tone decisions but retains the original RGB edge measurements. These controls are not interchangeable with converting the input to grayscale.</p>
 <p>The images have binary alpha already: no partly transparent pixels. Individual cells contain 16–56 foreground colors; whole sheets contain 211–242. The breastplate is comparatively color-rich, but color count is not itself a semantic defect. The source problems are mostly how shading, materials, texture and outlines are encoded.</p>
 AUDIT_TABLE
@@ -91,7 +91,7 @@ METRICS_TABLE
 
 <section><h2>All item comparisons and reproducibility</h2><p>The complete contact sheets keep every cell in source row order. The interactive comparator includes the grayscale/palette variants, current styles, experimental sources, cleanup prototypes and breastplate sweeps.</p>
 GENERAL_IMG WEAPONS_IMG ACCESSORIES_IMG ARMOR_IMG
-<p>Run <code>prepare.py</code>, <code>node current.mjs</code>, <code>compare.py</code>, <code>node verify.mjs</code>, then <code>report.py</code> from this folder. Python requires Pillow and NumPy; Node imports ../../src/lib/bitify.js. Copied original PNGs are included, so reproduction does not depend on clipboard files remaining in Temp. source-audit.json records original file hashes. ablation.json, metrics.json, summary.json and sheet-differences.json contain the numerical results.</p>
+<p>Run <code>prepare.py</code>, <code>node current.mjs</code>, <code>compare.py</code>, <code>node verify.mjs</code>, then <code>report.py</code> from this folder. Python requires Pillow and NumPy; Node imports ../../src/lib/recolor.js. Copied original PNGs are included, so reproduction does not depend on clipboard files remaining in Temp. source-audit.json records original file hashes. ablation.json, metrics.json, summary.json and sheet-differences.json contain the numerical results.</p>
 <p>Experimental parameters: bilateral radius 1 / spatial σ1 / RGB σ35; local mean window 5 with offset 8; Sauvola window 5, k=.2, R128; percentile cuts at the 20th percentile of eight-neighbor interior luma followed by removal of singleton cuts. Filtering windows exclude transparent pixels. No scaling or dithering precedes conversion. A grayscale quantization step adds its own rounding. Singleton cleanup is intentionally simple and can damage details; it is not an approved default.</p>
 <p>Baseline validation: <strong>all 167 existing tests in 7 suites passed</strong>. The initial test run encountered a sandbox Temp rename error; rerunning with a workspace-local temporary directory passed. Research verification also checked None alpha/ink invariants and Color2Gray’s linear equations. The generated contact sheets were visually inspected. <code>node verify-report.mjs</code> checks the report script against a DOM stub across all item/variant/method combinations, sweep positions and backgrounds; this is not browser visual QA, which was unavailable through the agent’s browser surface. Sources are still PNGs; animation stability, phone performance, arbitrary sheet layouts and new AI generations have not been tested.</p></section>
 '''
@@ -99,11 +99,6 @@ replacements={
  'BREAST_BASE':picture('breastplate-baselines.png','Current behavior on the original breastplate. White is the sole ink; checkerboard is transparent.'),
  'BREAST_ALT':picture('breastplate-alternatives.png','Experimental alternatives: none provides a clear automatic breastplate repair.'),
  'PALETTE_IMG':picture('palette-ablation.png','Stencil Auto after grayscale and foreground palette reduction. Changed geometry is not necessarily better geometry.'),
- 'C2G_IMG':picture('color2gray-comparison.png','Color2Gray contrast preservation followed by the production Solid/Stencil algorithms.'),
- 'GENERAL_IMG':picture('general-comparison.png','All 16 general inventory items.'),
- 'WEAPONS_IMG':picture('weapons-comparison.png','All 16 weapon/tool cells; inspect thin shafts and handles.'),
- 'ACCESSORIES_IMG':picture('accessories-comparison.png','All 16 accessory/container cells.'),
- 'ARMOR_IMG':picture('armor-comparison.png','All 16 armor cells; texture and shade do not consistently correspond to meaningful cuts.'),
  'AUDIT_TABLE':f'<table><thead><tr><th>Source</th><th>Dimensions</th><th>Foreground colors</th><th>Opaque pixels</th><th>Alpha</th></tr></thead><tbody>{audit_rows}</tbody></table>',
  'ABL_TABLE':f'<details><summary>Exact grayscale and per-item palette ablation counts</summary><table><thead><tr><th>Method</th><th>Preparation</th><th>Changed items</th><th>Changed pixels</th></tr></thead><tbody>{abl_rows}</tbody></table></details>',
  'METRICS_TABLE':f'<div class="table-wrap"><table><thead><tr><th>Method</th><th>Mean retention</th><th>Empty</th><th>Added fragmentation</th><th>1px ink regions</th><th>1px removed regions</th></tr></thead><tbody>{metrics_rows}</tbody></table></div>',
@@ -131,7 +126,7 @@ function render(){const parent=$('samples');parent.innerHTML='';sample(parent,'O
 function renderSweep(){const p=$('sweepSamples');p.innerHTML='';const t=$('sweep').value;$('sweepValue').textContent=t;for(const style of ['solid','stencil'])sample(p,`${style==='solid'?'Solid threshold':'Stencil Cuts'} ${t}`,masks.get(key('breastplate-1-1','original',`sweep_${style}_${t}`)),true)}
 item.addEventListener('change',refreshVariants);variant.addEventListener('change',refreshMethods);methodA.addEventListener('change',render);methodB.addEventListener('change',render);bg.addEventListener('change',render);$('sweep').addEventListener('input',renderSweep);refreshVariants();
 '''
-doc=f'<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bitify — one-color inventory icon research</title><style>{style}</style><main>{body}</main><script type="application/json" id="researchData">{json.dumps(data,separators=(",",":"))}</script><script type="application/json" id="methodNames">{json.dumps(names)}</script><script>{script}</script></html>'
+doc=f'<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Colorfetti — one-color inventory icon research</title><style>{style}</style><main>{body}</main><script type="application/json" id="researchData">{json.dumps(data,separators=(",",":"))}</script><script type="application/json" id="methodNames">{json.dumps(names)}</script><script>{script}</script></html>'
 (ROOT/'report.html').write_text(doc,encoding='utf-8')
 assert not any(key in doc for key in replacements if key.endswith('_IMG') or key.endswith('_TABLE'))
 print(f'Wrote self-contained report.html ({len(doc):,} characters).')

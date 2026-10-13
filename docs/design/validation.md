@@ -47,7 +47,7 @@ October 9, 2026 · `codex/glasskit-prototypes` · GlassKit pinned to 1.22.2.
 - `npm test`: 208 tests across 11 files pass, including five source-space grid tests.
 - `npm run build`: passes. Final styles are bundled through a single ordered
   `src/prototypes/foundation.css` so production extraction cannot reorder GlassKit's
-  reset/defaults after Bitify's geometry rules.
+  reset/defaults after Colorfetti's geometry rules.
 - `git diff --check`: checked after cleanup.
 
 ## Browser workflows checked
@@ -91,8 +91,8 @@ Downloaded through the UI, then parsed using the existing encoders' format libra
 | Output | Verified result |
 |---|---|
 | `armor-1bit.png` | 64×64, PNG palette color type 3, 2-bit depth |
-| `bitify-animated-1bit.gif` | 28×28, 8 frames |
-| `bitify (6).zip` | six files: five PNGs and the animated GIF |
+| `colorfetti-animated-1bit.gif` | 28×28, 8 frames |
+| `colorfetti (6).zip` | six files: five PNGs and the animated GIF |
 
 Copy-to-clipboard and native mobile Share were not re-exercised in this session. Existing
 handlers and unit coverage remain, but that is not an end-to-end clipboard validation.
@@ -116,7 +116,7 @@ physical-device test.
 ## Issues found and corrected during review
 
 1. GlassKit's popover/toast classes expected library-specific visible state classes;
-   the native Bitify surfaces now have explicit state adapters.
+   the native Colorfetti surfaces now have explicit state adapters.
 2. Prototype query updates were discarding review/sample parameters; they are preserved.
 3. The chooser was omitted from the existing panel reservation; its bounds are included.
 4. Bottom padding permitted scrolling content to paint beneath controls; prototypes

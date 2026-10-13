@@ -1,11 +1,12 @@
 <script>
-  import { analyze, mask, hexToRgb, autoThreshold, spritesOf } from './lib/bitify.js';
-  import { unify } from './lib/bitify.js';
+  import { analyze, mask, hexToRgb, autoThreshold, spritesOf } from './lib/recolor.js';
+  import { unify } from './lib/recolor.js';
   import { saveOne, saveAll, copyOne, pngBlob, downloadName, fileBytes } from './lib/save.js';
-  import { bitifiedAnimation } from './lib/bitified-animation.js';
+  import { convertedAnimation } from './lib/converted-animation.js';
   import { analysisMatches, reanalyzeItem, reanalyzeItems } from './lib/image-reanalysis.js';
   import { fitImageWall, IMAGE_INSET } from './lib/workspace.js';
   import { restore } from './lib/settings.js';
+  import { readStoredValue } from './lib/storage-migration.js';
   import { STYLES, inOrder, inks, stepStyle, stepPalette } from './lib/presets.js';
   import { wheelSteps } from './lib/gesture.js';
   import { on } from 'svelte/events';
@@ -30,7 +31,7 @@
   import logoUrl from './assets/logo.png';
   import helpLogoUrl from './assets/logo.svg';
 
-  const storageKey = 'bitify';
+  const storageKey = 'colorfetti';
   const touch = matchMedia('(pointer:coarse)').matches;
   const dragDesktop = matchMedia('(hover: hover) and (pointer: fine)').matches && !isMobileExportDevice();
   const mod = /Mac/.test(navigator.platform) ? '⌘' : 'Ctrl'; // the key the help names for pasting and copying
@@ -39,13 +40,13 @@
   // (private windows, blocked site data), and then the app simply starts from the defaults.
   let stored = null;
   try {
-    stored = localStorage.getItem(storageKey);
+    stored = readStoredValue(localStorage, storageKey);
   } catch {
     // no storage
   }
   const saved = restore(stored, STYLES.map(s => s[0]));
   let initialLibrary = [];
-  try { initialLibrary = restoreLibrary(localStorage.getItem(LIBRARY_KEY)); } catch { /* Session still works. */ }
+  try { initialLibrary = restoreLibrary(readStoredValue(localStorage, LIBRARY_KEY)); } catch { /* Session still works. */ }
   let library = $state.raw(initialLibrary);
   const fullSaved = restorePaletteState(stored, initialLibrary);
   let family = $state(fullSaved.family), paletteId = $state(fullSaved.paletteId), alphaCut = $state(fullSaved.alphaCut), metric = $state(fullSaved.metric);
@@ -277,7 +278,7 @@
   // and the theme. The images stay. The effect above then stores the defaults over what was kept.
   function resetAll() {
     if (deleteImports) {
-      try { localStorage.removeItem(LIBRARY_KEY); } catch { say('Saved palettes could not be deleted. Settings were not reset.'); return; }
+      try { localStorage.setItem(LIBRARY_KEY, '{"version":1,"palettes":[]}'); } catch { say('Saved palettes could not be deleted. Settings were not reset.'); return; }
       library = []; sessionPalettes = [];
     }
     const fresh = restore(null, STYLES.map(s => s[0]));
@@ -678,9 +679,9 @@
     generated: family === 'full-palette' && generatedActive ? generatedRequest : null, first: ink[0], second: ink[1], style, set });
   const about = (item, asked) => ({ name: item.name, w: item.img.w, h: item.img.h, first: asked.first, second: asked.second });
   const still = (item, asked) => asked.family === 'full-palette' ? fullPaletteImage(item, asked, { still: true }) : ({ ...about(item, asked), mask: mask(item.img, asked.style, asked.set) });
-  const bitified = (item, asked, options) =>
+  const converted = (item, asked, options) =>
     asked.family === 'full-palette' ? fullPaletteImage(item, asked, options) : item.frames
-      ? bitifiedAnimation(item, asked, options)
+      ? convertedAnimation(item, asked, options)
       : still(item, asked);
 
   // Prepare through the existing encoders. Keep Save, Copy and ZIP paths untouched.
@@ -694,7 +695,7 @@
     },
     async prepare({ item, snapshot }, { signal }) {
       const read = snapshot.family === 'full-palette' ? item : await reanalyzeItem(item, { source: snapshot.set.source, alphaCut: snapshot.set.alpha }, { signal });
-      const image = await bitified(read, snapshot, { signal });
+      const image = await converted(read, snapshot, { signal });
       const bytes = await fileBytes(image, { signal });
       const name = downloadName(image).replace(/[<>:"/\\|?*\x00-\x1f]/g, '-');
       const type = image.frames || image.getFrame ? 'image/gif' : 'image/png';
@@ -732,7 +733,7 @@
       say(downloading);
       await during(downloading, pixelsOf(item), async () => {
         const read = asked.family === 'full-palette' ? item : await reanalyzeItem(item, { source: asked.set.source, alphaCut: asked.set.alpha });
-        return saveOne(await bitified(read, asked));
+        return saveOne(await converted(read, asked));
       });
       say(downloading);
     } catch (error) {
@@ -768,7 +769,7 @@
       say(downloading);
       await during(downloading, selected.reduce((sum, item) => sum + pixelsOf(item), 0), () => saveAll(selected, async item => {
         const read = asked.family === 'full-palette' ? item : await reanalyzeItem(item, { source: asked.set.source, alphaCut: asked.set.alpha });
-        return bitified(read, asked);
+        return converted(read, asked);
       }));
       say(downloading);
     } catch (error) {

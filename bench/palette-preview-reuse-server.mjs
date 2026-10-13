@@ -10,7 +10,7 @@ const dist = resolve(process.argv[2] ?? 'dist'), port = Number(process.argv[3] ?
 if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error('Choose a valid port.');
 const qa = fileURLToPath(new URL('./palette-preview-reuse-qa.html', import.meta.url));
 const preload = paletteId => `<script>
-localStorage.setItem('bitify', JSON.stringify({ family:'full-palette', paletteId:'${paletteId}', metric:'oklab', maxColors:0, cleanup:false, alphaCut:128 }));
+localStorage.setItem('colorfetti', JSON.stringify({ family:'full-palette', paletteId:'${paletteId}', metric:'oklab', maxColors:0, cleanup:false, alphaCut:128 }));
 const qa = window.__previewReuseQA = { channels:0, wallPaints:0, byName:{}, errors:[] };
 window.addEventListener('error', event => qa.errors.push({ kind:'error', message:event.message || String(event.error),
   source:event.filename || '', line:event.lineno || 0, column:event.colno || 0, stack:event.error?.stack || '' }));

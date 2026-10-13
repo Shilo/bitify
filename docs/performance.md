@@ -195,7 +195,7 @@ fixtures and are not a before/after speed comparison. Responsive browser checks
 at 320px and 375px include Opacity cut. See the final decision linked above for
 coverage, bundle sizes and remaining artistic/animation limitations.
 
-How Bitify stays fast with big images on phones: what was slow, what was changed and why,
+How Colorfetti stays fast with big images on phones: what was slow, what was changed and why,
 what was measured, what was tried and thrown away, and what is still open. It is the record
 of the performance work of October 2026 (commits `e1eccfd` to `6d6e37f`, on top of
 `ce7bffa`), written so that the work can be continued without anything but this file, the
@@ -207,7 +207,7 @@ end of this document. Earlier phone measurements must not be read as validation 
 new conversion family.
 
 The rules of behavior are in the spec,
-[superpowers/specs/2026-10-06-bitify-app-design.md](superpowers/specs/2026-10-06-bitify-app-design.md),
+[superpowers/specs/2026-10-06-colorfetti-app-design.md](superpowers/specs/2026-10-06-colorfetti-app-design.md),
 in the sections "Images larger than their tile", "Drafts while a slider is dragged" (which
 since covers every slider of the Style panel, not only the threshold's), "Long jobs", and parts of "Adding images", "Saving", "Copying" and "Errors and
 limits". This file explains the reasons and holds the numbers.
@@ -263,7 +263,7 @@ still have a synchronous first pass and significant temporary memory demand.
 Stress results are single passes, not a phone benchmark. Icon is intended for inventory
 sprites. `node bench/bench.mjs` was run before and after; unchanged conversion branches
 showed ordinary shared-machine variance, rather than a consistent regression. All ten
-existing styles matched `bench/bitify.old.js` in 24,000 image/style/threshold cases,
+existing styles matched `bench/recolor.old.js` in 24,000 image/style/threshold cases,
 including sampled pictures, using `node bench/equiv.mjs`. The old baseline remains local
 and untracked.
 
@@ -274,7 +274,7 @@ median, rather than disabling all brightness cuts when the requested cutoff reac
 median. Sprite preparation, caching, sampling and allocations are unchanged. Original
 Otsu Auto selection is retained; the proposed recursive Auto split is not shipped.
 
-`node bench/bench.mjs bench/bitify.old.js` and `node bench/bench.mjs` compared commit
+`node bench/bench.mjs bench/recolor.old.js` and `node bench/bench.mjs` compared commit
 `7c0437d` with the cap, best of three on this desktop:
 
 | Stencil input | Before, cached | After, cached | Before, first pass | After, first pass |
@@ -304,7 +304,7 @@ Two were set by the owner. The rest are what the work depends on.
 3. **Performance-only changes preserve conversion.** `mask` with no size is byte-identical
    to the old `mask`. Intentional algorithm changes must update the spec and tests; the
    equivalence harness checks unaffected styles and exact structural preview sampling.
-4. **The loops in `src/lib/bitify.js` make nothing per pixel**: no array, no object, no
+4. **The loops in `src/lib/recolor.js` make nothing per pixel**: no array, no object, no
    function. They run once for every pixel of a photo, on phones.
 5. **Work per change follows the screen, not the file.** Only adding an image, saving and
    copying may go through every pixel; desktop mouse dragging additionally prepares
@@ -335,7 +335,7 @@ add and 13 s for every move of the threshold slider.
 
 ## How it works now
 
-### Analysis (`analyze` in `src/lib/bitify.js`)
+### Analysis (`analyze` in `src/lib/recolor.js`)
 
 Done once when an image is added. It goes through every pixel, because the Auto thresholds
 are picked from all of them.
@@ -480,7 +480,7 @@ Adding, saving and copying a photo go through every pixel on the main thread, an
 can do nothing else meanwhile.
 
 - A job of `BUSY_PIXELS` = 2,000,000 or more first shows a message in the toast with a
-  spinner: "Reading name…", "Downloading name-1bit.png…", "Downloading bitify.zip (5
+  spinner: "Reading name…", "Downloading name-1bit.png…", "Downloading colorfetti.zip (5
   images)…", or "Copying name…". Every download also shows its output filename in the toast
   for smaller jobs, without a spinner.
 - The job starts 50 ms after the message (`drawn`), so that the message is on screen
@@ -752,7 +752,7 @@ location).
 | Script | What it does |
 |---|---|
 | `bench.mjs` | Times `analyze`, `mask` in every style, `colorize` and `pngBytes` on whole images, in Node |
-| `equiv.mjs` | Checks the conversion against an earlier copy of `bitify.js` saved as `bench/bitify.old.js` |
+| `equiv.mjs` | Checks the conversion against an earlier copy of `recolor.js` saved as `bench/recolor.old.js` |
 | `kcost.mjs` | Cost per pixel converted at several picture sizes |
 | `tone.mjs` | Each style's brightness and texture at several picture sizes, on a smooth image |
 | `alias.mjs` | The same for dithered art, stripes and a stippled transparency, at the size each of several tiles would draw |
@@ -766,7 +766,7 @@ location).
 Before a change to the conversion:
 
 ```bash
-cp src/lib/bitify.js bench/bitify.old.js && node bench/bench.mjs
+cp src/lib/recolor.js bench/recolor.old.js && node bench/bench.mjs
 ```
 
 After it:
@@ -855,7 +855,7 @@ and export pixel comparisons remain unchanged. Ordinary assertions outside these
 still use Vitest matchers. Failure messages now identify the fixture, setting and pixel.
 
 Three comparable targeted runs before and after, using
-`npx vitest run src/lib/bitify.test.js src/lib/icon.test.js --reporter=json --outputFile=.tmp/test-speed.json`,
+`npx vitest run src/lib/recolor.test.js src/lib/icon.test.js --reporter=json --outputFile=.tmp/test-speed.json`,
 gave these median test durations on the local machine:
 
 | Check | Before | After |
@@ -883,7 +883,7 @@ runner configuration and Pages workflow. It did not limit the review to the slow
 
 | Test file | Cases | Audit result |
 | --- | ---: | --- |
-| `bitify.test.js` | 93 | Exhaustive conversion cases retained; Stencil remains compute-bound. |
+| `recolor.test.js` | 93 | Exhaustive conversion cases retained; Stencil remains compute-bound. |
 | `icon.test.js` | 13 | Replace the connectivity helper's visited Set with a byte array; same eight-neighbor traversal. |
 | `workspace-controls.test.js` | 20 | Format exhaustive-sweep diagnostics only on failure; preserve every condition and context. |
 | `style-preview.test.js` | 3 | Small independent previews; no measured change warranted. |
@@ -921,7 +921,7 @@ remain intact; production code is unchanged.
 
 ## Full palette conversion (October 11, 2026)
 
-The 1-bit loops in `bitify.js`, preset stepping and legacy setting restoration remain
+The 1-bit loops in `recolor.js`, preset stepping and legacy setting restoration remain
 unchanged. Full palettes use `quantize.js`: prepared scalar Oklab and RGB arrays and a
 256-entry sRGB linearization table, an exact RGB lookup first, then exhaustive nearest
 search under the selected Oklab (default) or encoded RGB rule. Each

@@ -18,7 +18,7 @@ animation frames, tiles, scenes and some reference/derived images. Generation pr
 was not verified from metadata, and these are not 176 independent artist-labeled trials.
 
 Select 160 stills and 16 GIFs by deterministic SHA-256 ordering seeded with
-`bitify-cleanup-20261012`, one still and one GIF at most per top-level group. Deduplicate
+`colorfetti-cleanup-20261012`, one still and one GIF at most per top-level group. Deduplicate
 file contents. Exclude obvious masks, review/contact sheets, upscales and several derived
 formats by filename. Limit stills to 262,144 pixels; GIFs to 2–64 frames and 1.5 million
 frame-pixels. All selected inputs have binary alpha. The filter cannot perfectly identify

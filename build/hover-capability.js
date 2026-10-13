@@ -5,7 +5,7 @@ import selectorParser from 'postcss-selector-parser';
 // both the app and imported GlassKit, without changing selection or focus rules.
 export function hoverCapability() {
   return {
-    postcssPlugin: 'bitify-hover-capability',
+    postcssPlugin: 'colorfetti-hover-capability',
     OnceExit(root) {
       const rules = [];
       root.walkRules(rule => rules.push(rule));

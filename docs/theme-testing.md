@@ -6,12 +6,12 @@ A hidden `background-color: Canvas; color-scheme: light` probe computed to `rgb(
 
 ## Research and fix
 
-- [GlassKit's documented theme contract](https://github.com/JUNGHERZ/GlassKit#-theming) uses the root `data-theme` attribute, which Bitify already supplies. The pinned 1.22.2 library declares ordinary `color-scheme: light`/`dark`. Neither its token definitions nor Bitify's hover adapter were responsible for this repainting.
+- [GlassKit's documented theme contract](https://github.com/JUNGHERZ/GlassKit#-theming) uses the root `data-theme` attribute, which Colorfetti already supplies. The pinned 1.22.2 library declares ordinary `color-scheme: light`/`dark`. Neither its token definitions nor Colorfetti's hover adapter were responsible for this repainting.
 - [Chrome's Auto Dark Theme documentation](https://developer.chrome.com/blog/auto-dark-theme) describes the Canvas probe and the root `color-scheme: only light` opt-out. Device-size emulation alone does not reproduce automatic darkening; it needs a separate rendering override.
 - [Brave's Android appearance documentation](https://support.brave.app/hc/en-us/articles/41672849116045-How-do-I-change-the-browser-theme-in-Brave-Android) describes browser color inversion and potentially incorrect page colors. This explains the class of failure, without assuming the owner's Night Mode toggle was enabled.
 - [CSS Color Adjustment](https://drafts.csswg.org/css-color-adjust/#color-scheme-prop) defines `only` as disallowing automatic scheme overrides. Forced-colors accessibility is a separate adjustment mechanism.
 
-Bitify now declares `only light`/`only dark` at the root. Color-scheme metadata is resolved in the existing inline startup script before styles paint, and updated with the theme in the Svelte effect. All palette, conversion, geometry, GlassKit material and saved-choice/system-following logic remains unchanged. No dependency update was required.
+Colorfetti now declares `only light`/`only dark` at the root. Color-scheme metadata is resolved in the existing inline startup script before styles paint, and updated with the theme in the Svelte effect. All palette, conversion, geometry, GlassKit material and saved-choice/system-following logic remains unchanged. No dependency update was required.
 
 Chromium's [color-scheme implementation](https://github.com/chromium/chromium/blob/main/third_party/blink/renderer/core/style/computed_style.cc) deliberately bypasses the author opt-out when force-dark is combined with a **light** preferred scheme, for WebView's `FORCE_DARK_ONLY` behavior. The regression harness tests normal light-system rendering and Android auto-dark rendering with a dark preference separately. It does not assert that author CSS can defeat this browser-enforced WebView mode.
 

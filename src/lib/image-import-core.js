@@ -1,4 +1,4 @@
-import { analyze, unify } from './bitify.js';
+import { analyze, unify } from './recolor.js';
 import { checkCanceled, yieldTask } from './quantize.js';
 
 export function validateImportSettings(source = 'luma', alphaCut = 128) {

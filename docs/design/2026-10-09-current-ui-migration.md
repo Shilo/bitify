@@ -30,7 +30,7 @@ Use glass on controls and navigation, preserving crisp image pixels and meaningf
 
 ## Geometry contracts
 
-The source of truth is docs/superpowers/specs/2026-10-06-bitify-app-design.md. Update that specification with future production behavior changes. Prototype alternatives are isolated experiments.
+The source of truth is docs/superpowers/specs/2026-10-06-colorfetti-app-design.md. Update that specification with future production behavior changes. Prototype alternatives are isolated experiments.
 
 - CLAUDE.md and src/app.css:3 explicitly warn against a global border-box reset. Existing button height includes content plus borders; segments add padding. GlassKit has a scoped border-box reset, so restore existing content-box contracts selectively.
 - src/App.svelte:98 uses gap 16, caption extra 27 on hover/48 without hover, minimum 140-200px. src/app.css:108 repeats gap 16 in spacing and width. A shared geometry token must drive fitGrid and CSS.

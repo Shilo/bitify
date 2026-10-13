@@ -2,25 +2,25 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "bitify",
+      "name": "colorfetti",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
       "port": 5173
     },
     {
-      "name": "bitify-5174",
+      "name": "colorfetti-5174",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev", "--", "--port", "5174", "--strictPort"],
       "port": 5174
     },
     {
-      "name": "bitify-5175",
+      "name": "colorfetti-5175",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev", "--", "--port", "5175", "--strictPort"],
       "port": 5175
     },
     {
-      "name": "bitify-5176",
+      "name": "colorfetti-5176",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev", "--", "--port", "5176", "--strictPort"],
       "port": 5176

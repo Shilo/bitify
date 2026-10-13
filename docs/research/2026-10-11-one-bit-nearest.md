@@ -141,8 +141,8 @@ task. Do not claim visual quality from synthetic RGB-grid disagreement alone.
 - [Style rules and controls](../styles.md).
 - [Palette matching decision](2026-10-11-palette-matching.md).
 - [Shared-palette research](2026-10-11-shared-palette.md).
-- [Behavior spec](../superpowers/specs/2026-10-06-bitify-app-design.md) and
+- [Behavior spec](../superpowers/specs/2026-10-06-colorfetti-app-design.md) and
   [performance constraints](../performance.md).
 - Integration points: `src/lib/palette-library.js`, `src/lib/quantize.js`,
-  `src/lib/palette-state.js`, `src/lib/presets.js`, `src/lib/bitify.js`,
+  `src/lib/palette-state.js`, `src/lib/presets.js`, `src/lib/recolor.js`,
   `src/App.svelte`, `src/Dock.svelte`, `src/Tile.svelte` and `src/lib/save.js`.

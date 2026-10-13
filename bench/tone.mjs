@@ -1,7 +1,7 @@
 // Does a tile show the same share of light pixels as the saved file? Share of light among solid
 // pixels, per style, for the full mask (k=1) and for what a tile draws at larger k.
 import { pathToFileURL } from 'node:url';
-const B = await import(pathToFileURL(import.meta.dirname + '/../src/lib/bitify.js'));
+const B = await import(pathToFileURL(import.meta.dirname + '/../src/lib/recolor.js'));
 const w = 1200, h = 900, data = new Uint8ClampedArray(w * h * 4);
 for (let y = 0, i = 0; y < h; y++) for (let x = 0; x < w; x++, i += 4) {
   const v = 128 + 100 * Math.sin(x / 190) * Math.cos(y / 140);

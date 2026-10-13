@@ -14,7 +14,7 @@ natural height, and compact image accessories retain their existing smaller dime
 Import is the highlighted action when empty. After importing, Export takes the highlight
 and Import becomes neutral, without moving either action. Apple recommends using style
 for important actions, and Material describes filled icon buttons as high emphasis.
-This state handoff is our judgment for Bitify, not a mandated placement or exact platform
+This state handoff is our judgment for Colorfetti, not a mandated placement or exact platform
 pattern. It keeps Palette/Style neutral and avoids multiple competing action colors.
 The centered empty CTA repeats the same Import action for onboarding discoverability.
 
@@ -32,7 +32,7 @@ respect the active native dialog and no longer swallow its first button click.
 
 Toasts use `.glass-toast`, `.is-visible`, `.glass-toast__text` and optional busy spinner,
 with existing timers and busy-message priority. A scoped hidden rule handles the library's
-flex display overriding HTML hidden. The installed GlassKit package is CSS; Bitify supplies
+flex display overriding HTML hidden. The installed GlassKit package is CSS; Colorfetti supplies
 the existing behavior rather than inventing a library JavaScript controller.
 Downloads announce the generated filename in the toast for every image size. The fullscreen
 viewer receives the same status as the page toast and renders it inside its modal, which is

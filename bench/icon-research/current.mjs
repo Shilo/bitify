@@ -1,6 +1,6 @@
 // Run the actual app implementation, not a reimplementation of its algorithms.
 import { readFileSync, writeFileSync } from 'node:fs';
-import { analyze, mask, spritesOf } from '../../src/lib/bitify.js';
+import { analyze, mask, spritesOf } from '../../src/lib/recolor.js';
 const root=import.meta.dirname;
 const inputs=JSON.parse(readFileSync(process.argv[2] ?? `${root}/inputs.json`));
 const outputs=[];
@@ -29,4 +29,4 @@ for (const src of inputs) {
  }
 }
 writeFileSync(process.argv[3] ?? `${root}/current-output.json`,JSON.stringify(outputs));
-console.log(`Converted ${inputs.length} source variants; ${outputs.length} masks using actual src/lib/bitify.js.`);
+console.log(`Converted ${inputs.length} source variants; ${outputs.length} masks using actual src/lib/recolor.js.`);

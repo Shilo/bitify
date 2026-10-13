@@ -6,7 +6,7 @@ import { execFileSync } from 'node:child_process';
 const root = import.meta.dirname;
 mkdirSync(`${root}/.tmp`, { recursive: true });
 const baselineCommit = '7c0437d';
-const original = execFileSync('git', ['show', `${baselineCommit}:src/lib/bitify.js`], { cwd: `${root}/../..`, encoding: 'utf8' });
+const original = execFileSync('git', ['show', `${baselineCommit}:src/lib/recolor.js`], { cwd: `${root}/../..`, encoding: 'utf8' });
 const guard = '(lum[p] <= dark && body[p] > dark)';
 if (original.split(guard).length !== 2) throw new Error('Historical guard does not match; inspect baseline.');
 writeFileSync(`${root}/.tmp/stencil-original.mjs`, original.replaceAll("'./icon.js'", "'../../../src/lib/icon.js'"));

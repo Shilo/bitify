@@ -2,14 +2,14 @@
 
 Date: 2026-10-08. Status: built.
 
-This adds two things to Bitify, which can be built one after the other:
+This adds two things to Colorfetti, which can be built one after the other:
 
 1. Either of the two colors can be **None**. Its pixels come out transparent.
 2. A tenth style, **Stencil**, which fills a whole sprite and cuts only its darkest inner
    lines.
 
 Together they give icons in one color on a transparent background, with transparent cut
-lines for detail. The main spec, `2026-10-06-bitify-app-design.md`, stays the source of truth
+lines for detail. The main spec, `2026-10-06-colorfetti-app-design.md`, stays the source of truth
 and is updated in the same changes as the code.
 
 ## What was asked for
@@ -18,7 +18,7 @@ A user wants minimalist 16×16 inventory icons: one solid color, usually white, 
 transparent background, with detail shown only by transparent gaps. Engines tint a white
 sprite to any color, which is why white on transparent is the usual delivery format.
 
-Bitify could not make these. It already has transparency (an empty pixel stays empty on the
+Colorfetti could not make these. It already has transparency (an empty pixel stays empty on the
 wall, in the PNG, in the GIF and on the clipboard), but both colors were always opaque.
 
 ## What was tried
@@ -110,7 +110,7 @@ Which color is None is saved with the colors as `none`: 0 for neither, 1 for the
 
 - Help, step two: "Pick two colors, or a preset. One of them can be None, for a see-through
   image."
-- The slogan "Pixel art in two colors" stays.
+- The slogan "Throw your pixels a palette party." stays.
 
 ## Part 2: the Stencil style
 
@@ -240,7 +240,7 @@ sprite has them.
 |---|---|
 | `src/lib/presets.js` | Stencil in `STYLES`. `inks(first, second, none, style)`: the two colors as drawn, a None one as `null`. |
 | `src/lib/settings.js` | `cuts`, `outline`, `edges` in `SETTINGS`; Stencil in `STYLE_SETTINGS`; `none` in `DEFAULTS` and `restore`. |
-| `src/lib/bitify.js` | The Stencil branch of `mask`, and `sprites` and `spritesOf`, which find and keep what it needs to know of each sprite. `colorize` takes `null` for a color. |
+| `src/lib/recolor.js` | The Stencil branch of `mask`, and `sprites` and `spritesOf`, which find and keep what it needs to know of each sprite. `colorize` takes `null` for a color. |
 | `src/lib/save.js`, `src/lib/gif.js` | `pngBytes` and `encodeGif` take `null` for a color. |
 | `src/App.svelte` | `none` state, stored and reset; the drawn colors passed to tiles and to saving. |
 | `src/Dock.svelte`, `src/app.css` | The None chips and swatch; Swap; Cuts on the strip. |

@@ -33,7 +33,7 @@ if (DEVICE) execFileSync('adb', ['reverse', 'tcp:5199', 'tcp:5199']);
 const PORT = DEVICE ?? 9400 + Math.floor(Math.random() * 500);
 const edge = DEVICE ? { kill() {} } : spawn(process.env.BROWSER ?? 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe', [
   ...(process.env.HEADLESS ? ['--headless=new'] : []),
-  `--remote-debugging-port=${PORT}`, `--user-data-dir=${mkdtempSync(join(tmpdir(), 'bitify-bench-'))}`,
+  `--remote-debugging-port=${PORT}`, `--user-data-dir=${mkdtempSync(join(tmpdir(), 'colorfetti-bench-'))}`,
   '--no-first-run', '--no-default-browser-check', '--disable-features=CalculateNativeWinOcclusion,msEdgeWelcomePage',
   '--disable-backgrounding-occluded-windows', '--disable-renderer-backgrounding', '--disable-background-timer-throttling',
   `--window-size=${Math.min(vw + 40, 1500)},${Math.min(vh + 140, 1000)}`, 'about:blank',
@@ -94,7 +94,7 @@ if (!DEVICE) await send('Emulation.setDeviceMetricsOverride', { width: vw, heigh
 if (mobile && !DEVICE) await send('Emulation.setTouchEmulationEnabled', { enabled: true });
 // Runs before the app: the settings, and hooks that note every draw to a canvas on the page.
 await send('Page.addScriptToEvaluateOnNewDocument', { source: `
-  localStorage.setItem('bitify', JSON.stringify({ first: '#222323', second: '#f0f6f0', style: '${o.style}', threshold: null }));
+  localStorage.setItem('colorfetti', JSON.stringify({ first: '#222323', second: '#f0f6f0', style: '${o.style}', threshold: null }));
   window.__paints = [];
   const note = (proto, name) => { const was = proto[name]; proto[name] = function (...a) { const r = was.apply(this, a); if (this.canvas.isConnected) __paints.push(performance.now()); return r; }; };
   note(CanvasRenderingContext2D.prototype, 'putImageData'); note(CanvasRenderingContext2D.prototype, 'drawImage');

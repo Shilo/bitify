@@ -1,6 +1,6 @@
 // Reproduce the implementation comparison and preprocessing tests using production code.
 import { readFileSync, writeFileSync } from 'node:fs';
-import { analyze, mask } from '../../src/lib/bitify.js';
+import { analyze, mask } from '../../src/lib/recolor.js';
 const root = import.meta.dirname;
 const sources = JSON.parse(readFileSync(`${root}/inputs.json`));
 const rows = sources.map(src => {

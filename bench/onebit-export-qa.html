@@ -52,9 +52,9 @@ async function exported(test,build,iteration,result){
  const start=win.performance.now();let mutation=null;
  const save=doc.querySelector('.export-action');assert(!save.disabled,'Export unexpectedly disabled');save.click();
  if(test.mutate)win.setTimeout(()=>{
-   mutation={at:win.performance.now(),before:JSON.parse(win.localStorage.getItem('bitify')).style};
+   mutation={at:win.performance.now(),before:JSON.parse(win.localStorage.getItem('colorfetti')).style};
    doc.body.dispatchEvent(new win.KeyboardEvent('keydown',{key:'ArrowDown',code:'ArrowDown',bubbles:true,cancelable:true}));
-   win.queueMicrotask(()=>{mutation.after=JSON.parse(win.localStorage.getItem('bitify')).style;});
+   win.queueMicrotask(()=>{mutation.after=JSON.parse(win.localStorage.getItem('colorfetti')).style;});
  },0);
  await until(()=>q.exports.length>0,'export anchor');const e=q.exports[0];
  await sleep(100);q.long.push(...(q.observer?.takeRecords()??[]).map(e=>({start:e.startTime,duration:e.duration})));
