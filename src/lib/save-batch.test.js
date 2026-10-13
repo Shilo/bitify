@@ -27,7 +27,7 @@ describe('atomic batch export scheduling', () => {
     pause.mockImplementation(async () => { order.push('yield'); expect(captured.names).toEqual([]); });
     await saveAll(images, image => { order.push(image.name); return image; });
     expect(order).toEqual(['one.png', 'yield', 'two.png', 'yield', 'three.png']);
-    expect(captured.names).toEqual(['bitify.zip']);
+    expect(captured.names).toEqual(['colorfetti.zip']);
     const files = unzipSync(new Uint8Array(await captured.blobs[0].arrayBuffer()));
     expect(Object.keys(files)).toEqual(['one-1bit.png', 'two-1bit.png', 'three-1bit.png']);
     for (const image of images) expect(files[image.name.replace('.png', '-1bit.png')]).toEqual(pngBytes(image));

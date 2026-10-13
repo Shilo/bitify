@@ -27,8 +27,8 @@
   import { tooltip } from './lib/tooltip.js';
   import { paletteFailureRegistry } from './lib/palette-failure.js';
   import { packWorkspaceControls } from './lib/workspace-controls.js';
-  import logoUrl from './assets/logo.gif';
-  import helpLogoUrl from './assets/logo.png';
+  import logoUrl from './assets/logo.png';
+  import helpLogoUrl from './assets/logo.svg';
 
   const storageKey = 'bitify';
   const touch = matchMedia('(pointer:coarse)').matches;
@@ -293,7 +293,7 @@
   $effect(() => {
     if (shared && !items.includes(shared)) shared = null;
   });
-  // The browser's offer to install Bitify as an app. It comes only where that can be done and is
+  // The browser's offer to install Colorfetti as an app. It comes only where that can be done and is
   // not done yet, and can be taken up once; the More menu shows Install while one is held.
   let installOffer = $state.raw(null);
   async function install() {
@@ -568,7 +568,7 @@
     .then(response => response.blob())
     .then(file => decodeDemo(file, exampleImportController.signal))
     .then(decoded => {
-      if (!exampleImportController.signal.aborted) example = toItem(0, 'Bitify', decoded);
+      if (!exampleImportController.signal.aborted) example = toItem(0, 'Colorfetti', decoded);
     })
     .catch(() => {}); // without it the empty screen simply has no preview
 
@@ -630,7 +630,7 @@
       imageImports.delete(controller);
       done?.();
     }
-    if (reportSkipped && skipped) say(`${skipped} file${skipped === 1 ? '' : 's'} skipped. Bitify reads PNG, GIF, WebP, JPEG and BMP images.`);
+    if (reportSkipped && skipped) say(`${skipped} file${skipped === 1 ? '' : 's'} skipped. Colorfetti reads PNG, GIF, WebP, JPEG and BMP images.`);
     return skipped;
   }
 
@@ -753,7 +753,7 @@
       const selected = [...items]; // the images on the wall now, even if some are removed before the job starts
       if (!selected.length) return;
       const downloading = selected.length > 1
-        ? `Downloading bitify.zip (${selected.length} images)…`
+        ? `Downloading colorfetti.zip (${selected.length} images)…`
         : `Downloading ${downloadName({ ...selected[0], family: asked.family })}…`;
       say(downloading);
       await during(downloading, selected.reduce((sum, item) => sum + pixelsOf(item), 0), () => saveAll(selected, async item => {
@@ -940,7 +940,7 @@
 {/if}
 
 {#if dragDepth > 0}
-  <div class="drop" style:background={second} style:color={overlayInk}>Drop to bitify</div>
+  <div class="drop" style:background={second} style:color={overlayInk}>Drop to Colorfetti</div>
 {/if}
 <!-- Any click closes the sheet: one of its buttons, or the dimmed screen around it, which counts as the dialog. -->
 <dialog class="sheet glass-sheet" bind:this={sheet} aria-label="Image actions" onclick={() => sheet.close()}>
@@ -1004,7 +1004,7 @@
     </div>
   </div>
 </dialog>
-<!-- The help, which is also the welcome on a first visit: what Bitify is, four steps, and the
+<!-- The help, which is also the welcome on a first visit: what Colorfetti is, four steps, and the
      controls of the device in use. A click on the dimmed screen around it counts as the dialog itself. -->
 <dialog class="help glass-modal" bind:this={help} aria-labelledby="help-title" onclose={() => moreTrigger?.focus({ preventScroll: true })} onclick={e => e.target === help && help.close()}>
   <div class="help-in">
@@ -1013,8 +1013,8 @@
     <header>
       <img class="help-logo" src={helpLogoUrl} alt="" width="48" height="48" />
       <div>
-        <h2 id="help-title">Bitify</h2>
-        <p>Convert sprites and animations with <span>1-bit</span> styles or color palettes.</p>
+        <h2 id="help-title">Colorfetti</h2>
+        <p>Recolor images and GIFs with automatic, preset, or custom palettes.</p>
       </div>
     </header>
     <ol>

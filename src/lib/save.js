@@ -252,5 +252,5 @@ export async function saveAll(items, image) {
     // between files. Keep final ZIP assembly and download atomic.
     if (index + 1 < items.length) await yieldExport();
   }
-  download(new Blob([zipBytes(outNames(names, kinds, families), files)], { type: 'application/zip' }), 'bitify.zip');
+  download(new Blob([zipBytes(outNames(names, kinds, families), files)], { type: 'application/zip' }), 'colorfetti.zip');
 }

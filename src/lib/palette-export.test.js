@@ -236,7 +236,7 @@ describe('palette save names and batch atomicity', () => {
     expect(result.clicked).toEqual(['sprite-palette.png']);
     const items = [{ name: 'first.png' }, { name: 'second.png' }];
     await saveAll(items, async item => ({ ...image, name: item.name === 'first.png' ? 'same.png' : 'SAME.png' }));
-    expect(result.clicked).toEqual(['sprite-palette.png', 'bitify.zip']);
+    expect(result.clicked).toEqual(['sprite-palette.png', 'colorfetti.zip']);
     const files = unzipSync(new Uint8Array(await result.captured[1].arrayBuffer()));
     expect(Object.keys(files)).toEqual(['same-palette.png', 'SAME-2-palette.png']);
     for (const file of Object.values(files)) expect(readPng(file).pixels).toEqual(rgba(palette, [0, 1, 256]));

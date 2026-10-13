@@ -215,7 +215,7 @@ button { font: inherit; color: inherit; }
 .help-in > .ib { position: absolute; top: 10px; right: 10px; width: var(--hit); height: var(--hit); border-color: transparent; background: transparent; }
 /* one row: the logo, then the name and what it is */
 .help header { display: flex; align-items: center; gap: 14px; padding-right: var(--hit); } /* the padding keeps the text clear of Close */
-.help img { flex: none; width: 56px; height: 56px; image-rendering: pixelated; } /* the logo is 28 pixels square: twice its size */
+.help img { flex: none; width: 56px; height: 56px; image-rendering: pixelated; }
 .help h2 { margin: 0; font-family: var(--display); font-size: 24px; font-weight: 600; line-height: 1; }
 .help p { margin: 4px 0 0; color: var(--muted); text-wrap: balance; }
 /* the steps: an icon, a word and a line each */

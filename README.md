@@ -1,16 +1,16 @@
-<img src="src/assets/logo.gif" width="240" alt="Bitify logo: a spinning gold coin">
+<img src="src/assets/logo.svg" width="152" height="152" alt="Colorfetti: a black C frame with five colorful confetti pieces">
 
-# Bitify
+# Colorfetti
 
-Convert sprites and animations with 1-bit styles or color palettes. Runs entirely in the browser; nothing is uploaded.
+Recolor images, sprites, and animated GIFs with automatic, preset, or custom palettes. Explore two-color styles for a different look. Runs entirely in the browser; nothing is uploaded.
 
 **[shilo.github.io/bitify](https://shilo.github.io/bitify/)**
 
 ## Features
 
 - Add any number of images by drag and drop, file picker or paste. Web and Discord image drops work when the host allows access, including animated GIFs.
+- Start with Auto colors generated from your images and GIFs, choose from nine curated full-palette presets, or use a named local palette library. Full palettes support 1–256 unique opaque RGB colors. One editor lets you import images or palette files, paste hex colors, or add colors manually, then review and save. Drop an image or Aseprite file from your device into the editor. Discord and web URL drops require the host to allow browser access; otherwise save the attachment and import the local file. Files support HEX/TXT, legacy RGB GPL, JASC-PAL and Aseprite embedded palettes.
 - In 1-bit, choose two colors, swap them, or pick from twelve presets. Either color can be None, for a transparent result. Changes redraw every image at once.
-- Full palettes with 1–256 unique opaque RGB colors, seven curated presets, and a named local palette library. One editor lets you import images or palette files, paste hex colors, or add colors manually, then review and save. Drop an image or Aseprite file from your device into the editor. Discord and web URL drops require the host to allow browser access; otherwise save the attachment and import the local file. Files support HEX/TXT, legacy RGB GPL, JASC-PAL and Aseprite embedded palettes.
 - Eleven 1-bit styles: Cutout (filled shapes with their parts cut apart, after the game End of End), Solid, Stencil (a filled shape with its inner lines cut out, for one-color icons), Lines (outlines each part of a sprite), Checker, Hatch, Bayer, Noise, Atkinson, Icon and Shape.
 - In 1-bit, use the threshold slider or per-image Auto setting. Palette mode matches colors using Oklab (default) or RGB. **Max colors** optionally limits each image to a smaller subset of the shared palette. Optional **Cleanup** merges isolated pixels and can remove small details; it defaults to Off. A separate opacity cut appears when needed.
 - An immersive checker canvas with grouped floating glass controls and readable image actions/labels.
@@ -27,6 +27,8 @@ npm run dev
 ```
 
 `npm test` runs the unit tests, `npm run build` writes the site to `dist/`.
+
+`npm run icons` regenerates the production favicon and app icons from [the approved logo](src/assets/logo.svg). [Brand guide](docs/research/2026-10-13-colorfetti-identity.md).
 
 `node bench/palette-qa.mjs dist` checks the built app through real controls, including all twelve color pairs with all eleven legacy styles, independently decoded full palette exports, cross-tab storage changes and GIF comparison during pending conversion. Set `BASE_REF` to the pre-feature Git revision when running this compatibility check after committing the feature.
 

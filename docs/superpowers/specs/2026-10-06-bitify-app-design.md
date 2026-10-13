@@ -1,4 +1,24 @@
-# Bitify design
+# Colorfetti design
+
+## Colorfetti identity — October 13, 2026
+
+Colorfetti is the product name. The logo is the approved square black C frame with
+five confetti pieces and the fixed orange, violet, pink, yellow and teal palette.
+The master is `src/assets/logo.svg`; geometry and HEX values are specified in
+[the brand guide](../../research/2026-10-13-colorfetti-identity.md).
+
+Help, favicon, installed icons, README and social previews share this mark. Public
+icons use an opaque `#FFFDF9` backplate in both themes; maskable icons add safe-area
+padding without changing the mark. The empty-wall example uses a static 76×76 PNG
+of the same geometry and backplate and is named Colorfetti. It still responds
+to the active conversion settings. This replaces the spinning coin and pixel B
+branding described in historical sections below.
+
+Title and install metadata use Colorfetti. The functional description is
+“Recolor images and GIFs with automatic, preset, or custom palettes.” Campaign
+copy remains unselected. Download all saves `colorfetti.zip`; individual suffixes,
+storage keys, repository URLs and conversion behavior retain their existing rules.
+These identity rules supersede earlier branding and example-animation references.
 
 ## Reviewed performance contracts — October 13, 2026
 

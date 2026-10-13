@@ -1,6 +1,6 @@
 # Colorfetti brand guide
 
-Colorfetti is the selected identity for the browser-based image, sprite and animated GIF recoloring app currently called Bitify. This guide defines the name, logo and brand colors for the rebrand. The live app has not yet adopted this identity.
+Colorfetti is the identity of the browser-based image, sprite and animated GIF recoloring app. This guide defines its name, logo, colors and production icon suite.
 
 ## Name and positioning
 
@@ -54,10 +54,32 @@ The five confetti colors give the mark a bright, playful personality against the
 
 ## Consistent use
 
-Derive the favicon, installed app icons, Help branding, README artwork and social previews from the same master geometry and palette. A monochrome rendition preserves the geometry and gaps. Pair the icon with the exact name **Colorfetti** when a wordmark is needed; final wordmark typography remains to be specified.
+The favicon, installed app icons, Help branding, README artwork and social previews derive from [one SVG master](../../src/assets/logo.svg). Pair the icon with the exact name **Colorfetti**; in-app text uses the app's existing typography.
 
 A live recoloring demonstration may use the logo geometry as example artwork. Public brand assets use the fixed palette above.
 
-Check the finished exports at their actual display sizes, including browser tabs and phone installation surfaces. Small-size recognition and color-blind accessibility have not been established through user testing.
+### Background and theme handling
 
-The selected logo artwork is saved by the project owner. This guide records its construction and colors; producing the final app assets and applying the identity across the live app remain implementation work. Trademark clearance remains unresolved.
+Use the same **`#FFFDF9` off-white backplate** in light and dark mode. It keeps the black C visible and preserves all five approved colors. Separate light and dark artwork would add theme-selection dependencies to installation surfaces; this suite uses one universal identity. Platform masks control installed-icon corners; rounding is not baked into the artwork.
+
+Android maskable exports use extra outer padding. The entire foreground fits inside the centered safe circle with radius 40% of the icon width, as specified by [web.dev's maskable guidance](https://web.dev/articles/maskable-icon). Ordinary and maskable assets have separate manifest purposes, avoiding unnecessary padding on ordinary icons.
+
+### Production files
+
+| Surface | Files and sizes |
+| --- | --- |
+| Master, Help and README | `src/assets/logo.svg`, scalable 38 × 38 grid |
+| Browser tabs | `public/favicon.svg`; PNGs at 16 and 32px; `public/favicon.ico` containing 16, 32 and 48px images |
+| Installed PWA, desktop and Android | `public/pwa-192x192.png`, `public/pwa-512x512.png` |
+| Android adaptive masks | `public/maskable-icon-192x192.png`, `public/maskable-icon-512x512.png` |
+| iPhone and iPad home screen | `public/apple-touch-icon-152x152.png`, `public/apple-touch-icon-167x167.png`, `public/apple-touch-icon-180x180.png` |
+| Social link preview | `public/pwa-512x512.png` |
+| Recoloring example artwork | `src/assets/logo.png`, 76 × 76 PNG with the same backplate |
+
+The example starts with the same background and colors as the public icons. The app's conversion controls process the whole example image, including its background; the public brand exports retain the fixed palette.
+
+Run `npm run icons` to regenerate exports from the master. Run `node build/brand-assets.mjs --check` to verify reproducibility and the maskable safe area. Raster edges snap to whole pixels without introducing blended colors. At small sizes, pixel rounding necessarily changes some measured widths by a pixel; the master proportions remain unchanged.
+
+The suite follows [manifest icon guidance](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest/Reference/icons) and [Apple's web clip icon guidance](https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html). Operating systems can still apply user-selected icon effects. Installed-device testing is needed to verify each platform's presentation; this is not a native App Store icon package.
+
+Small-size recognition and color-blind accessibility have not been established through user testing. Trademark clearance remains unresolved.
