@@ -1,0 +1,53 @@
+{
+  "scope": "Small algebraic/state fixtures only; no generated-palette fit, production/browser/cancellation performance validation.",
+  "checks": 23,
+  "baseline": [
+    [
+      "blue",
+      1
+    ],
+    [
+      "green",
+      0.1
+    ],
+    [
+      "red",
+      1
+    ],
+    [
+      "yellow",
+      0.9
+    ]
+  ],
+  "pooledPixelTimeWarning": {
+    "large": 10000,
+    "tiny": 100,
+    "clip": 100000,
+    "note": "Unnormalized still=1 and GIF=delay mix incomparable units."
+  },
+  "reports": [
+    "One equal contribution per nonempty asset",
+    "Wall order independent fixture clip,tiny,large",
+    "Wall order independent fixture tiny,large,clip",
+    "Wall order independent fixture large,clip,tiny",
+    "Uniform source scaling does not dominate fit",
+    "Clip duration scaling does not dominate fit",
+    "Splitting an identical frame does not change fit",
+    "Fully invisible assets contribute nothing",
+    "Opacity cut changes actual participating colors",
+    "No regeneration on metric",
+    "No regeneration on maxColors",
+    "No regeneration on cleanup",
+    "No regeneration on width",
+    "No regeneration on frame",
+    "No regeneration on original",
+    "Generation dependency independent of rail/wall order",
+    "Asset removal rebuilds",
+    "Asset replacement revision rebuilds",
+    "Opacity cutoff rebuilds",
+    "Frame duration edit rebuilds",
+    "Export owns immutable palette revision",
+    "Stale worker result cannot publish",
+    "Current generation publishes atomically"
+  ]
+}

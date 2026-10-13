@@ -1,0 +1,27 @@
+{
+  "scope": "Actual physical phone app, supplied GIF, ENDESGA32 All Oklab CleanupOff; short visual blank-output probe, not complete FPS or regression validation",
+  "capturedFrames": 43,
+  "warmBrickPixelMin": 8127,
+  "warmBrickPixelMax": 9559,
+  "missingBrickFrames": 0,
+  "video": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "width": 1008,
+        "height": 2244,
+        "nb_frames": "43"
+      },
+      {
+        "nb_frames": "1"
+      },
+      {
+        "nb_frames": "1"
+      }
+    ],
+    "format": {
+      "duration": "4.127211"
+    }
+  }
+}

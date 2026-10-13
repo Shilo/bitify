@@ -1,0 +1,75 @@
+<!doctype html>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bitify palette performance spike</title>
+<style>body{max-width:800px;margin:20px auto;padding:0 16px;font:16px system-ui;background:#202630;color:#f1f3f5}button{font:inherit;padding:12px;margin:0 8px 12px 0}canvas{max-width:100%;image-rendering:pixelated;background:#343b46}pre{white-space:pre-wrap;overflow-wrap:anywhere}small{display:block;color:#c4ccd7;margin-bottom:16px}</style>
+<h1>Palette performance test</h1>
+<small>Research only. Uses the supplied dungeon GIF and the real production palette modules.
+Results go only to the connected computer. Keep the browser foreground and the screen awake.
+This measures kernel/worker/canvas work, not the complete Svelte UI or source-speed playback.</small>
+<button id="run">Run benchmark</button><button id="cancel" disabled>Cancel</button>
+<p id="status">Ready. Approximately one minute; cancel is available.</p><canvas id="picture"></canvas><pre id="results"></pre>
+<script type="module">
+import {preparePalette,quantizeAsync,colorize,yieldTask} from '../src/lib/quantize.js';
+import {FULL_PRESETS} from '../src/lib/palette-library.js';
+import {getLimitedPalette} from '../src/lib/palette-limit-client.js';
+
+const run=document.querySelector('#run'),cancel=document.querySelector('#cancel'),status=document.querySelector('#status'),out=document.querySelector('#results'),canvas=document.querySelector('canvas'),ctx=canvas.getContext('2d');
+let controller;
+cancel.onclick=()=>controller?.abort();
+const digest=indices=>{let hash=2166136261;for(const index of indices)hash=Math.imul(hash^index,16777619);return hash>>>0;};
+const summary=values=>{const sorted=[...values].sort((a,b)=>a-b);return {count:values.length,meanMs:values.reduce((a,b)=>a+b,0)/values.length,medianMs:sorted[Math.floor(sorted.length/2)],p95Ms:sorted[Math.floor((sorted.length-1)*.95)],maxMs:sorted.at(-1)};};
+
+run.onclick=async()=>{
+ if(run.disabled)return;
+ run.disabled=true;cancel.disabled=false;controller=new AbortController();
+ const signal=controller.signal,records=[],longTasks=[];
+ const report={benchmarkVersion:2,userAgent:navigator.userAgent,hardwareConcurrency:navigator.hardwareConcurrency,deviceMemory:navigator.deviceMemory,started:new Date().toISOString(),records,longTasks};
+ let observer;
+ try{observer=new PerformanceObserver(list=>longTasks.push(...list.getEntries().map(e=>({start:e.startTime,duration:e.duration}))));observer.observe({type:'longtask',buffered:false});}catch{}
+ const publish=async()=>{out.textContent=JSON.stringify(report,null,2);await fetch('/results',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(report)});};
+ const timed=async(name,fn)=>{status.textContent=name;const start=performance.now(),value=await fn();records.push({name,ms:performance.now()-start});await publish();return value;};
+ try{
+  const bytes=new Uint8Array(await (await fetch('/fixtures/dungeon.gif')).arrayBuffer());
+  const {decodeGif}=await import('../src/lib/gif.js');
+  const decoded=await timed('Decode supplied 56-frame GIF',()=>decodeGif(bytes));
+  const frames=decoded.frames.map(f=>({original:{width:decoded.width,height:decoded.height,data:f.data},delay:f.delay}));
+  const item={original:frames[0].original,frames,loop:decoded.loop};
+  const palette=preparePalette(FULL_PRESETS.find(p=>p.id==='preset-edg32').colors);
+  report.source={width:decoded.width,height:decoded.height,frames:frames.length,sourceBytes:frames.reduce((n,f)=>n+f.original.data.byteLength,0)};
+  const caches=new Map(),exactChecks=[];
+  const render=async(name,{width=256,metric='oklab',colors=palette,clean,client,cache=false,repeat=false,compareCache=false,count=frames.length}={})=>{
+   status.textContent=name;const height=Math.round(decoded.height*width/decoded.width),times=[],hashes=[];
+   canvas.width=width;canvas.height=height;
+   for(let i=0;i<count;i++){
+    if(signal.aborted)throw new DOMException('Canceled','AbortError');
+    const start=performance.now();let result;
+    if(repeat)result=caches.get(i);
+    else{result=await quantizeAsync(frames[i].original,colors,128,width,height,{metric,signal});if(clean)client.applyCleanup(result,clean);}
+    const pixels=colorize(result,colors);ctx.putImageData(new ImageData(pixels.data,width,height),0,0);
+    times.push(performance.now()-start);
+    if(repeat||compareCache){const expected=caches.get(i).indices;exactChecks.push(expected.length===result.indices.length&&expected.every((value,p)=>value===result.indices[p]));}
+    hashes.push(digest(result.indices));if(cache)caches.set(i,result);
+    await yieldTask();
+   }
+   records.push({name,...summary(times),hashes,cacheBytes:repeat?[...caches.values()].reduce((n,r)=>n+r.indices.byteLength+r.used.byteLength,0):0});await publish();
+   return hashes;
+  };
+  const first=await render('All / Cleanup Off / Oklab / 256px first loop',{cache:true});
+  const second=await render('All / Cleanup Off / Oklab / 256px reconverted loop',{compareCache:true});
+  const cached=await render('Research-only retained indices / 256px loop',{repeat:true});
+  report.cachedOutputExact=exactChecks.length===frames.length*2&&exactChecks.every(Boolean);
+  report.cachedIndexHashesMatch=first.every((hash,i)=>hash===second[i]&&hash===cached[i]);
+  report.offAllResources=performance.getEntriesByType('resource').map(r=>r.name).filter(name=>/palette-(cleanup|limit)/.test(name));
+  await render('All / Cleanup Off / RGB / 256px loop',{metric:'rgb'});
+  await render('All / Cleanup Off / Oklab / native512px / eight frames',{width:decoded.width,count:8});
+  const limited=await timed('Max colors8 / cold whole-clip preparation',()=>getLimitedPalette(item,palette,128,'oklab',8,{signal}));
+  await timed('Max colors8 / cached whole-clip preparation',()=>getLimitedPalette(item,palette,128,'oklab',8,{signal}));
+  const client=await import('../src/lib/palette-cleanup-client.js');
+  const clean=await timed('Cleanup On / cold whole-clip preparation',()=>client.getPaletteCleanup(item,limited,128,'oklab',{signal}));
+  await timed('Cleanup On / cached whole-clip preparation',()=>client.getPaletteCleanup(item,limited,128,'oklab',{signal}));
+  await render('Max colors8 / Cleanup On / Oklab / 256px loop',{colors:limited,clean,client});
+  report.completed=true;status.textContent='Finished. Results saved on the connected computer.';
+ }catch(error){report.error={name:error.name,message:error.message};status.textContent=error.name==='AbortError'?'Canceled.':'Failed: '+error.message;}
+ finally{observer?.disconnect();report.finished=new Date().toISOString();report.resources=performance.getEntriesByType('resource').map(r=>r.name);await publish().catch(()=>{});run.disabled=false;cancel.disabled=true;}
+};
+</script>
