@@ -1,0 +1,146 @@
+{
+  "frame": [
+    [
+      4,
+      4,
+      22,
+      6
+    ],
+    [
+      4,
+      10,
+      6,
+      18
+    ],
+    [
+      4,
+      28,
+      22,
+      6
+    ]
+  ],
+  "tiles": [
+    [
+      28,
+      4,
+      6,
+      6
+    ],
+    [
+      28,
+      28,
+      6,
+      6
+    ],
+    [
+      12,
+      12,
+      14,
+      6
+    ],
+    [
+      12,
+      20,
+      14,
+      6
+    ],
+    [
+      28,
+      12,
+      6,
+      14
+    ]
+  ],
+  "concepts": [
+    {
+      "id": "01-carnival-swap",
+      "name": "Carnival · Direct swap",
+      "note": "Original hues, with teal on the bar and yellow inside.",
+      "colors": [
+        "#FF8A32",
+        "#7755C7",
+        "#E94785",
+        "#F2C84B",
+        "#1BB6AE"
+      ]
+    },
+    {
+      "id": "02-carnival-refined",
+      "name": "Carnival · Refined",
+      "note": "Clearer orange, vivid pink, rich violet, and deeper teal.",
+      "colors": [
+        "#F47A34",
+        "#7952C7",
+        "#E63E82",
+        "#F4C340",
+        "#0EAAA5"
+      ]
+    },
+    {
+      "id": "03-studio-coral",
+      "name": "Studio · Coral and jade",
+      "note": "Warmer coral and jade soften the primary-color feel.",
+      "colors": [
+        "#F0B83F",
+        "#865BC4",
+        "#F26664",
+        "#20A58B",
+        "#4779CB"
+      ]
+    },
+    {
+      "id": "04-studio-berry",
+      "name": "Studio · Berry and blue",
+      "note": "Berry pink and apricot give Studio a more festive identity.",
+      "colors": [
+        "#F6A443",
+        "#845CCC",
+        "#DA4C7F",
+        "#30AA80",
+        "#3F80C9"
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "id": "01-carnival-swap",
+      "pixelCountsAt16": {
+        "#FF8A32": 4,
+        "#7755C7": 4,
+        "#E94785": 18,
+        "#F2C84B": 18,
+        "#1BB6AE": 12
+      }
+    },
+    {
+      "id": "02-carnival-refined",
+      "pixelCountsAt16": {
+        "#F47A34": 4,
+        "#7952C7": 4,
+        "#E63E82": 18,
+        "#F4C340": 18,
+        "#0EAAA5": 12
+      }
+    },
+    {
+      "id": "03-studio-coral",
+      "pixelCountsAt16": {
+        "#F0B83F": 4,
+        "#865BC4": 4,
+        "#F26664": 18,
+        "#20A58B": 18,
+        "#4779CB": 12
+      }
+    },
+    {
+      "id": "04-studio-berry",
+      "pixelCountsAt16": {
+        "#F6A443": 4,
+        "#845CCC": 4,
+        "#DA4C7F": 18,
+        "#30AA80": 18,
+        "#3F80C9": 12
+      }
+    }
+  ]
+}

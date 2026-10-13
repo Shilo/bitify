@@ -1,0 +1,56 @@
+[
+  {
+    "id": "01-full-fragments",
+    "silhouetteWidth": 30,
+    "silhouetteHeight": 30,
+    "blackStroke": 6,
+    "cornerTiles": "6x6",
+    "centerPieces": 4,
+    "centerSizesVary": true
+  },
+  {
+    "id": "02-offset-pieces",
+    "silhouetteWidth": 30,
+    "silhouetteHeight": 30,
+    "blackStroke": 6,
+    "cornerTiles": "6x6",
+    "centerPieces": 4,
+    "centerSizesVary": true
+  },
+  {
+    "id": "03-three-big-pieces",
+    "silhouetteWidth": 30,
+    "silhouetteHeight": 30,
+    "blackStroke": 6,
+    "cornerTiles": "6x6",
+    "centerPieces": 3,
+    "centerSizesVary": true
+  },
+  {
+    "id": "04-wide-and-short",
+    "silhouetteWidth": 30,
+    "silhouetteHeight": 30,
+    "blackStroke": 6,
+    "cornerTiles": "6x6",
+    "centerPieces": 3,
+    "centerSizesVary": true
+  },
+  {
+    "id": "05-loose-confetti",
+    "silhouetteWidth": 30,
+    "silhouetteHeight": 30,
+    "blackStroke": 6,
+    "cornerTiles": "6x6",
+    "centerPieces": 4,
+    "centerSizesVary": true
+  },
+  {
+    "id": "06-tall-and-wide",
+    "silhouetteWidth": 30,
+    "silhouetteHeight": 30,
+    "blackStroke": 6,
+    "cornerTiles": "6x6",
+    "centerPieces": 4,
+    "centerSizesVary": true
+  }
+]

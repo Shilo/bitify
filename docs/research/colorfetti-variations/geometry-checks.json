@@ -1,0 +1,74 @@
+[
+  {
+    "id": "c1-paper-pieces",
+    "uniqueSilhouette": true,
+    "binaryAlpha": true,
+    "monochromeMatches": true
+  },
+  {
+    "id": "c2-paper-strips",
+    "uniqueSilhouette": true,
+    "binaryAlpha": true,
+    "monochromeMatches": true
+  },
+  {
+    "id": "c3-confetti-stencil",
+    "uniqueSilhouette": true,
+    "binaryAlpha": true,
+    "monochromeMatches": true
+  },
+  {
+    "id": "c4-scatter-tail",
+    "uniqueSilhouette": true,
+    "binaryAlpha": true,
+    "monochromeMatches": true
+  },
+  {
+    "id": "b1-c-burst",
+    "uniqueSilhouette": true,
+    "binaryAlpha": true,
+    "monochromeMatches": true
+  },
+  {
+    "id": "b2-paper-shower",
+    "uniqueSilhouette": true,
+    "binaryAlpha": true,
+    "monochromeMatches": true
+  },
+  {
+    "id": "b3-confetti-swirl",
+    "uniqueSilhouette": true,
+    "binaryAlpha": true,
+    "monochromeMatches": true
+  },
+  {
+    "id": "b4-pixel-toss",
+    "uniqueSilhouette": true,
+    "binaryAlpha": true,
+    "monochromeMatches": true
+  },
+  {
+    "id": "p1-corner-spill",
+    "uniqueSilhouette": true,
+    "binaryAlpha": true,
+    "monochromeMatches": true
+  },
+  {
+    "id": "p2-pixel-window",
+    "uniqueSilhouette": true,
+    "binaryAlpha": true,
+    "monochromeMatches": true
+  },
+  {
+    "id": "p3-paper-landscape",
+    "uniqueSilhouette": true,
+    "binaryAlpha": true,
+    "monochromeMatches": true
+  },
+  {
+    "id": "p4-c-canvas",
+    "uniqueSilhouette": true,
+    "binaryAlpha": true,
+    "monochromeMatches": true
+  }
+]

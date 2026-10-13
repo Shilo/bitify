@@ -1,0 +1,162 @@
+{
+  "checks": {
+    "stroke": 6,
+    "gutter": 2,
+    "gaps": {
+      "topArmToCorner": 2,
+      "bottomArmToCorner": 2,
+      "spineToUpperCenter": 2,
+      "spineToLowerCenter": 2,
+      "topArmToCenter": 2,
+      "centerToBottomArm": 2,
+      "upperToLowerCenter": 2,
+      "centerColumns": 2,
+      "upperCornerToCenter": 2,
+      "centerToLowerCorner": 2
+    },
+    "width": 30,
+    "height": 30,
+    "centerWidths": [
+      10,
+      10,
+      10
+    ],
+    "equalArms": true
+  },
+  "frame": [
+    [
+      4,
+      4,
+      22,
+      6
+    ],
+    [
+      4,
+      10,
+      6,
+      18
+    ],
+    [
+      4,
+      28,
+      22,
+      6
+    ]
+  ],
+  "tiles": [
+    [
+      28,
+      4,
+      6,
+      6
+    ],
+    [
+      28,
+      28,
+      6,
+      6
+    ],
+    [
+      12,
+      12,
+      10,
+      6
+    ],
+    [
+      12,
+      20,
+      10,
+      6
+    ],
+    [
+      24,
+      12,
+      10,
+      14
+    ]
+  ],
+  "concepts": [
+    {
+      "id": "01-colorfetti-classic",
+      "name": "Colorfetti Classic",
+      "note": "Coral red · yellow · green · blue · violet",
+      "recommended": true,
+      "colors": [
+        "#F3BE45",
+        "#8969C7",
+        "#F2645A",
+        "#35AA85",
+        "#4786D3"
+      ]
+    },
+    {
+      "id": "02-paper-party",
+      "name": "Paper Party",
+      "note": "Pink · golden yellow · mint · blue · lavender",
+      "colors": [
+        "#EAA844",
+        "#906EB5",
+        "#DE758C",
+        "#69A58B",
+        "#6297C5"
+      ]
+    },
+    {
+      "id": "03-festival",
+      "name": "Festival",
+      "note": "Orange · purple · pink · turquoise · blue",
+      "colors": [
+        "#EF983E",
+        "#AC5BB2",
+        "#E3546B",
+        "#269F9C",
+        "#5C78C8"
+      ]
+    },
+    {
+      "id": "04-primary-pop",
+      "name": "Primary Pop",
+      "note": "Red · yellow · green · blue · purple",
+      "colors": [
+        "#F4C333",
+        "#8D5AC8",
+        "#E94F4B",
+        "#4EAD57",
+        "#337BD1"
+      ]
+    },
+    {
+      "id": "05-creative-bright",
+      "name": "Creative Bright",
+      "note": "Amber · pink · violet · teal · sky blue",
+      "colors": [
+        "#ECA638",
+        "#CE5997",
+        "#6C62B5",
+        "#42A78B",
+        "#4C9ECC"
+      ]
+    },
+    {
+      "id": "06-warm-contrast",
+      "name": "Warm Contrast",
+      "note": "Yellow · blue · orange · pink · green",
+      "colors": [
+        "#F5BA4C",
+        "#5578C4",
+        "#E66743",
+        "#D9578C",
+        "#42A58E"
+      ]
+    }
+  ],
+  "research": {
+    "scope": "Manufacturer catalogs and standard confetti color availability, not a sales-frequency ranking.",
+    "sources": [
+      "https://flutterfetti.com/faq/",
+      "https://www.confettivibe.com/shop/disposable-cannons/tissue-streamer-cannon/",
+      "https://www.confettimagic.com/confetti-magic-colour-swatch-2024.pdf"
+    ],
+    "recommendation": "Red/coral, warm yellow, green, blue, and violet; curated saturation and lightness for a playful creative software identity."
+  }
+}

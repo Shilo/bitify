@@ -1,0 +1,134 @@
+{
+  "black": "#202020",
+  "frame": [
+    [
+      4,
+      4,
+      22,
+      6
+    ],
+    [
+      4,
+      10,
+      6,
+      18
+    ],
+    [
+      4,
+      28,
+      22,
+      6
+    ]
+  ],
+  "tiles": [
+    [
+      28,
+      4,
+      6,
+      6
+    ],
+    [
+      28,
+      28,
+      6,
+      6
+    ],
+    [
+      12,
+      12,
+      8,
+      5
+    ],
+    [
+      12,
+      19,
+      8,
+      7
+    ],
+    [
+      26,
+      12,
+      8,
+      14
+    ]
+  ],
+  "centerRightLeftEdge": 26,
+  "cRightEdge": 26,
+  "centerRightRightEdge": 34,
+  "cornerSquaresRightEdge": 34,
+  "squareSilhouette": "30x30",
+  "concepts": [
+    {
+      "id": "01-studio",
+      "name": "Studio",
+      "note": "Coral, teal, blue, gold, and violet.",
+      "colors": [
+        "#f0b644",
+        "#7267b5",
+        "#ef6256",
+        "#419ca7",
+        "#5187c7"
+      ]
+    },
+    {
+      "id": "02-bold",
+      "name": "Bold",
+      "note": "Blue and magenta, with warm orange and gold.",
+      "colors": [
+        "#ff7849",
+        "#0b9aa4",
+        "#3459d8",
+        "#dd4d9d",
+        "#eabb39"
+      ]
+    },
+    {
+      "id": "03-earth",
+      "name": "Earth",
+      "note": "Terracotta, sage, ochre, and muted plum.",
+      "colors": [
+        "#dab76a",
+        "#86734d",
+        "#b95f43",
+        "#709482",
+        "#9273a0"
+      ]
+    },
+    {
+      "id": "04-pastel",
+      "name": "Pastel",
+      "note": "Soft rose, seafoam, lavender, peach, and blue.",
+      "colors": [
+        "#f5c37b",
+        "#b39bdb",
+        "#ea91a9",
+        "#82c5b8",
+        "#92b6db"
+      ]
+    },
+    {
+      "id": "05-tropical",
+      "name": "Tropical",
+      "note": "Turquoise and lime, with gold and berry.",
+      "colors": [
+        "#f7bd38",
+        "#e4597e",
+        "#22a08b",
+        "#9ac544",
+        "#8170c9"
+      ]
+    },
+    {
+      "id": "06-neon",
+      "name": "Neon",
+      "note": "Acid yellow, cyan, coral, orchid, and green.",
+      "colors": [
+        "#d6f43c",
+        "#36d7de",
+        "#fe6650",
+        "#c95de8",
+        "#7dda77"
+      ]
+    }
+  ]
+}

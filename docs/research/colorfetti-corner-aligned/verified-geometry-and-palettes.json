@@ -1,0 +1,152 @@
+{
+  "check": {
+    "padding": 2,
+    "allNeighboringGaps": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ],
+    "rightColumnX": 28,
+    "rightColumnWidth": 6,
+    "innerLeftWidths": [
+      14,
+      14
+    ],
+    "squareSilhouette": "30x30",
+    "palettesUnchanged": true
+  },
+  "frame": [
+    [
+      4,
+      4,
+      22,
+      6
+    ],
+    [
+      4,
+      10,
+      6,
+      18
+    ],
+    [
+      4,
+      28,
+      22,
+      6
+    ]
+  ],
+  "tiles": [
+    [
+      28,
+      4,
+      6,
+      6
+    ],
+    [
+      28,
+      28,
+      6,
+      6
+    ],
+    [
+      12,
+      12,
+      14,
+      6
+    ],
+    [
+      12,
+      20,
+      14,
+      6
+    ],
+    [
+      28,
+      12,
+      6,
+      14
+    ]
+  ],
+  "concepts": [
+    {
+      "id": "01-studio",
+      "name": "Studio",
+      "note": "Creative, balanced, approachable.",
+      "colors": [
+        "#F2BB3B",
+        "#8965C7",
+        "#EF6258",
+        "#32A884",
+        "#4487D4"
+      ]
+    },
+    {
+      "id": "02-carnival",
+      "name": "Carnival",
+      "note": "Bold, warm, festive.",
+      "colors": [
+        "#FF8A32",
+        "#7755C7",
+        "#E94785",
+        "#1BB6AE",
+        "#F2C84B"
+      ]
+    },
+    {
+      "id": "03-coastal",
+      "name": "Coastal",
+      "note": "Calm, airy, assured.",
+      "colors": [
+        "#E98667",
+        "#D4AF42",
+        "#6B9DD7",
+        "#43AF9B",
+        "#9576C9"
+      ]
+    },
+    {
+      "id": "04-arcade",
+      "name": "Arcade",
+      "note": "Energetic, digital, expressive.",
+      "colors": [
+        "#D5EB38",
+        "#29C9DD",
+        "#FF754C",
+        "#CC55D4",
+        "#5465D8"
+      ]
+    },
+    {
+      "id": "05-paper",
+      "name": "Paper",
+      "note": "Tactile, understated, artistic.",
+      "colors": [
+        "#D5A548",
+        "#537CBA",
+        "#C86849",
+        "#739B69",
+        "#9E6DA7"
+      ]
+    },
+    {
+      "id": "06-candy",
+      "name": "Candy",
+      "note": "Friendly, soft, imaginative.",
+      "colors": [
+        "#F3C56C",
+        "#DB709C",
+        "#A27BCE",
+        "#6CB9A2",
+        "#6B9BD1"
+      ]
+    }
+  ]
+}
