@@ -39,7 +39,7 @@
     maxColors = $bindable(0),
     lastMaxColors = $bindable(16),
     cleanup = $bindable(false),
-    fullPalette, fullPresets = [], savedPalettes = [], generatedNotice = '', generatedEditable = true, onpalette, onimportpalette, oneditpalette,
+    fullPalette, fullPresets = [], savedPalettes = [], generatedNotice = '', generatedSource = 'Your images', generatedEditable = true, onpalette, onimportpalette, oneditpalette,
   } = $props();
 
   let panel = $state(null); // null, 'palettes' or 'style'
@@ -393,7 +393,7 @@
               {:else if i > 0 && i < fullPresets.length && (p.id === GENERATED_PALETTE_ID || fullPresets[i - 1].id === GENERATED_PALETTE_ID || p.colors.length !== fullPresets[i - 1].colors.length)}
                 <span class="palette-group-divider" aria-hidden="true"></span>
               {/if}
-              <button class="palette-choice" aria-pressed={fullPalette.id === p.id} aria-label={p.name} use:tooltip={p.id === GENERATED_PALETTE_ID ? 'Generate up to 32 shared colors from all images and animation frames. Updates when images or opacity change. Edit a copy to keep a fixed palette.' : `${p.name} · ${p.colors.length} colors${p.source?.credit ? ' · ' + p.source.credit : ''}`} onclick={() => onpalette(p)}><span class="palette-circle"><PalettePreview colors={p.colors}/></span><span class="palette-choice-name">{p.name}</span></button>
+              <button class="palette-choice" aria-pressed={fullPalette.id === p.id} aria-label={p.name} use:tooltip={p.id === GENERATED_PALETTE_ID ? `${p.name} · ${p.colors.length} ${p.colors.length === 1 ? 'color' : 'colors'} · ${generatedSource}\nGenerate up to 32 shared colors from all images and animation frames. Updates when images or opacity change. Edit a copy to keep a fixed palette.` : `${p.name} · ${p.colors.length} colors${p.source?.credit ? ' · ' + p.source.credit : ''}`} onclick={() => onpalette(p)}><span class="palette-circle"><PalettePreview colors={p.colors}/></span><span class="palette-choice-name">{p.name}</span></button>
             {/each}
           {/if}
         </div>

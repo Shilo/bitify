@@ -7,7 +7,7 @@
   import { tooltip } from './lib/tooltip.js';
   import { imageGesture, IMAGE_HOLD_MS } from './lib/image-gesture.js';
   import { comparisonHold } from './lib/comparison-hold.js';
-  import { quantizeAsync, colorize as palettePixels } from './lib/quantize.js';
+  import { quantizePreviewAsync, colorize as palettePixels } from './lib/quantize.js';
   import { getLimitedPalette } from './lib/palette-limit-client.js';
   import { animationPreviewCache } from './lib/palette-animation-cache.js';
   import { exportDragArt } from './lib/export-drag.js';
@@ -181,7 +181,7 @@
     if (family !== 'full-palette' || !width || !colors || cleanup && !clean || originalVisible || !active) return;
     const controller = new AbortController();
     const produce = async signal => {
-      const result = await quantizeAsync(source, colors, cut, width, height, { signal, metric: matching });
+      const result = await quantizePreviewAsync(source, colors, cut, width, height, { signal, metric: matching });
       if (clean) clean.apply(result, clean.result);
       return result;
     };

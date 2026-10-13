@@ -1,0 +1,18 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Auto capacity 32 / 64</title><style>body{font:16px system-ui;color:#eee;background:#202630;margin:16px}button{padding:12px;font:inherit}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style>
+<h1>Auto palette: 32 / 64</h1><p>Research only. Source files are decoded ahead of time for an identical comparison across browsers. Keep foreground.</p>
+<button id="run">Run paired benchmark</button><p id="status">Ready</p><pre id="result"></pre>
+<script type="module">
+import {runCapacity} from './auto-capacity-core.js';
+const button=document.querySelector('#run'),status=document.querySelector('#status'),output=document.querySelector('#result');
+button.onclick=async()=>{
+ button.disabled=true;let report;
+ try{ report=await runCapacity({manifest:await(await fetch('/manifest.json')).json(),
+   readBytes:async url=>await(await fetch(url)).arrayBuffer(),status:text=>status.textContent=text,
+   device:navigator.userAgent}); report.userAgent=navigator.userAgent;
+ }catch(error){report={kind:'performance',experiment:'auto-capacity',userAgent:navigator.userAgent,error:{name:error.name,message:error.message}};}
+ output.textContent=JSON.stringify(report,null,2);status.textContent=report.completed?'Finished':'Failed';
+ await fetch('/results',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(report)});
+ button.disabled=false;
+};
+</script></html>

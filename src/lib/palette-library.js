@@ -60,7 +60,7 @@ export const FULL_PRESETS = Object.freeze([
 // Curated fallback for existing missing/deleted selections. Fresh visits use Generated.
 export const DEFAULT_FULL_PALETTE = FULL_PRESETS.find(p => p.id === 'preset-edg32');
 export const GENERATED_PALETTE_ID = 'generated-32';
-export const GENERATED_PALETTE = Object.freeze({ id: GENERATED_PALETTE_ID, name: 'Generated 32',
+export const GENERATED_PALETTE = Object.freeze({ id: GENERATED_PALETTE_ID, name: 'Auto',
   colors: Object.freeze([]), revision: 1, source: Object.freeze({ kind: 'generated',
     credit: 'Shared colors from all images; updates when images change.' }) });
 

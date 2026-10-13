@@ -1,5 +1,23 @@
 # Performance
 
+## Auto tooltip and wall scheduling (October 12, 2026)
+
+Auto is the visible name of the existing generated source, still capped at 32.
+Its tooltip reads the completed palette's count and published source label;
+showing it performs no sampling or generation. A new preview conversion posts its
+first task before accessing source data, preventing many tile effects from combining
+their first slices in one synchronous flush. Cache hits and exports keep their paths.
+
+Both built Codex and physical Pixel 8 Pro audits passed thirteen phases with
+184 assets/17 GIFs. Independent exports passed 28 files and 144 composited frames
+per device. The phone's matching phase had no observed task above 50ms in the final
+run, but the desktop phase was slower and still had long tasks. This is an input-ordering
+guard, not a demonstrated universal speedup. Synchronous GIF decode/legacy analysis
+and offscreen animation remain concrete performance targets. Source RGBA/analysis,
+GPU and export scratch are outside the 8 MiB animation-index budget.
+See [the audit](research/2026-10-12-auto-performance-audit.md) and the separate
+[32/64 experiment](research/2026-10-12-auto-capacity.md) for measured costs and limits.
+
 ## Generated preview and PNG source decoding (October 12, 2026)
 
 Generated 32 uses the animated demo only for an empty wall, including a persisted

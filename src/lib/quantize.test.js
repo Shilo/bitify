@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { preparePalette, quantize, quantizeAsync, colorize, EMPTY_INDEX } from './quantize.js';
+import { preparePalette, quantize, quantizeAsync, quantizePreviewAsync, colorize, EMPTY_INDEX } from './quantize.js';
 
 const image = (pixels, width = pixels.length, height = 1) => ({ width, height, data: Uint8ClampedArray.from(pixels.flat()) });
 const hex = n => '#' + n.toString(16).padStart(6, '0');
@@ -24,6 +24,26 @@ function reference(pixel, colors, cut = 128, metric = 'oklab') {
 }
 
 describe('full palette quantization', () => {
+  it('defers preview source access and cancels queued work before allocation', async () => {
+    let reads = 0;
+    const source = { width: 1, height: 1, get data() { reads++; return Uint8ClampedArray.of(0, 0, 0, 255); } };
+    const controller = new AbortController();
+    const pending = quantizePreviewAsync(source, ['#000000'], 128, undefined, undefined, { signal: controller.signal });
+    expect(reads).toBe(0);
+    controller.abort();
+    await expect(pending).rejects.toMatchObject({ name: 'AbortError' });
+    expect(reads).toBe(0);
+  });
+
+  it.each(['oklab', 'rgb'])('deferred preview preserves resized pixels, alpha and captured %s options', async metric => {
+    const source = image(Array.from({ length: 77 }, (_, i) => [100, i * 3, i, i % 3 ? 255 : 100]), 11, 7);
+    const colors = preparePalette(['#000000', '#777777', '#ffffff']);
+    const options = { metric };
+    const pending = quantizePreviewAsync(source, colors, 128, 4, 3, options);
+    options.metric = metric === 'oklab' ? 'rgb' : 'oklab';
+    expect(await pending).toEqual(quantize(source, colors, 128, 4, 3, { metric }));
+  });
+
   it.each(['oklab', 'rgb'])('retains exact palette membership and a separate empty index with all 256 colors using %s', metric => {
     const colors = Array.from({ length: 256 }, (_, i) => hex(i * 65793));
     const pixels = colors.map(c => [...[1, 3, 5].map(i => parseInt(c.slice(i, i + 2), 16)), 255]);

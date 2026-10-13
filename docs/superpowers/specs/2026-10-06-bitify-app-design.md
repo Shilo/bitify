@@ -1867,7 +1867,7 @@ remain independent. Glow/Cutout remains the initial 1-bit configuration; fresh v
   opaque output belongs to the selected set; every selected color need not appear.
 
 The selected full palette is shared across all images. Presets and saved palettes do not
-generate new colors. Generated 32 fits one common palette from the whole wall.
+generate new colors. Auto fits one common palette from the whole wall.
 With Max colors: All and Cleanup: Off, identical visible source RGBs map identically at the same alpha cut and matching choice.
 Nearest minimizes individual pixel distance under that rule, rather than local averaged shading error. PNG exports
 may compact different used subsets into different physical color tables; membership in
@@ -1911,11 +1911,25 @@ and full-export overlay yield and cancel. Off takes the existing path without im
 the optional cleanup runtime. A failure reports retry/Off rather than silently reverting.
 See docs/research/2026-10-12-one-pixel-cleanup.md for the findings and limitations.
 
-### Generated 32 and bounded animation preview storage
+### Auto and bounded animation preview storage
 
-Generated 32 leads the rail, separated from the nine curated full presets; saved
+The visible generated source name is Auto; retain its `generated-32` identity and
+32-color capacity. Its tooltip's first line is `Auto · X colors · Your images` or
+`Auto · X colors · Example image` (singular for one color), followed by the existing
+generation guidance on a new line. Publish source provenance atomically with the
+palette; a pending/inactive tooltip describes the retained completed result. Updating
+or showing the tooltip does not scan sources or start a job. Preserve keyboard focus,
+hover and touch long-press behavior, accessible description and narrow-screen bounds.
+
+New full-palette preview conversions post their first browser task before source
+access/allocation, preserving captured options and cancellation. Animation cache
+hits bypass that work, and exports retain their direct async conversion path.
+This bounds initial conversion slices across a wall effect flush; it does not
+promise to eliminate import, layout, colorization or memory-pressure long tasks.
+
+Auto leads the rail, separated from the nine curated full presets; saved
 palettes follow the curated choices. Fresh visits and global Reset select Palette and
-Generated 32. Existing saved choices remain intact. ENDESGA 32 is the curated fallback
+Auto. Existing saved choices remain intact. ENDESGA 32 is the curated fallback
 for missing/deleted existing palette selections. Generation
 loads lazily and samples all successfully decoded wall assets and every composited
 animation frame. It publishes one immutable revision of up to 32 opaque RGB colors;
@@ -2039,7 +2053,7 @@ colors removes the masks/chevrons and exposes a normal scrollbar.
 
 The 1-bit header keeps its three-way Both/None switch. The Palette header instead has
 Import and Edit icon buttons with accessible labels and shared tooltips. Its rail starts
-with Generated 32 and a divider, then Resurrect 64, ENDESGA 32, PICO-8 (16), DawnBringer 16, Grayscale 8,
+with Auto and a divider, then Resurrect 64, ENDESGA 32, PICO-8 (16), DawnBringer 16, Grayscale 8,
 Ice Cream GB (4), Game Boy green (4), Glow (2) and Paper (2), then a
 divider and saved/session palettes. Preset attribution lives with each immutable record
 and in [palettes.md](../../palettes.md). Game Boy green is explicitly an LCD-inspired RGB
@@ -2266,7 +2280,7 @@ palette identity and all higher preferences. Accessible descriptions explain a t
 bounded higher preference.
 Missing or invalid metric restores Oklab; only `oklab` and `rgb` persist. Palette records
 do not own matching, so imports, edits and selections retain the global choice. Reset
-settings restores Oklab, Max colors: All, Cleanup Off, remembered limit 16 and cut 128. Fresh/unreadable/non-record preferences select Palette/Generated 32. Parsed preference objects
+settings restores Oklab, Max colors: All, Cleanup Off, remembered limit 16 and cut 128. Fresh/unreadable/non-record preferences select Palette/Auto. Parsed preference objects
 without a valid family retain legacy 1-bit; their missing palette selection falls back
 to ENDESGA 32. Explicit valid family and palette IDs remain intact. Global Reset uses
 the fresh defaults; Nearest settings Reset retains the palette. Explicit named Save uses

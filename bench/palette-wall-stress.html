@@ -12,7 +12,7 @@
   iframe { display: block; width: 100%; height: 78vh; border: 1px solid #69727a; }
   pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 12px; }
 </style>
-<h1>Generated 32: large wall and animation stress</h1>
+<h1>Auto: large wall and animation stress</h1>
 <p>Keep this page in the foreground. This bounded test drives the built app through its controls.
   All uses the whole cohort; cap and cleanup use a smaller, explicitly recorded cohort.
   Timer gaps include browser and test-page work. JavaScript heap readings are not total memory.</p>
@@ -156,10 +156,10 @@ async function generated() {
   const full = textButton('Palette', one('.palette-family-tabs'));
   if (full.getAttribute('aria-pressed') !== 'true') click(full);
   await sleep(35);
-  const selected = label('Generated 32', one('.palette-rail'));
+  const selected = label('Auto', one('.palette-rail'));
   if (selected.getAttribute('aria-pressed') !== 'true') click(selected);
-  await until(() => label('Generated 32', one('.palette-rail'))?.getAttribute('aria-pressed') === 'true',
-    'Generated 32 was not selected');
+  await until(() => label('Auto', one('.palette-rail'))?.getAttribute('aria-pressed') === 'true',
+    'Auto was not selected');
 }
 async function ready(expected, after = 0) {
   await until(() => tiles().length === expected, 'Unexpected imported image count');
@@ -438,7 +438,7 @@ runButton.onclick = async () => {
       if (close) click(close); else welcome.close();
     }
     if (exportOnly) {
-      await stage('Load whole cohort / Generated 32 / All export-only', async () => {
+      await stage('Load whole cohort / Auto / All export-only', async () => {
         const loaded = await add(cohort);
         const config = await configure();
         await ready(cohort.length, config.after);
@@ -449,13 +449,13 @@ runButton.onclick = async () => {
       status.textContent = 'Full-wall export completed; app retained for inspection';
       return;
     }
-    await stage('Initial 40 stills / Generated 32 / All', async () => {
+    await stage('Initial 40 stills / Auto / All', async () => {
       const loaded = await add(stills.slice(0, 40));
       await configure();
       return { ...loaded, colors: await reviewedColors() };
     });
-    await stage('Add first 8 GIFs / Generated 32 / All', () => add(gifs.slice(0, 8)));
-    await stage('Complete large wall / Generated 32 / All', () => add([...stills.slice(40), ...gifs.slice(8)]));
+    await stage('Add first 8 GIFs / Auto / All', () => add(gifs.slice(0, 8)));
+    await stage('Complete large wall / Auto / All', () => add([...stills.slice(40), ...gifs.slice(8)]));
     await stage('Whole-cohort five-second animation observation', () => playback(cohort));
     await stage('Matching RGB then Oklab / whole cohort', async () => {
       const before = await reviewedColors();
@@ -519,7 +519,7 @@ runButton.onclick = async () => {
       await until(() => toggle.getAttribute('aria-pressed') !== was, 'Original comparison did not switch');
       click(toggle);
       await until(() => toggle.getAttribute('aria-pressed') === was, 'Converted comparison did not restore');
-      return { presetTransitions: ['PICO-8', 'Generated 32'], familyTransitions: ['1-bit', 'Palette'],
+      return { presetTransitions: ['PICO-8', 'Auto'], familyTransitions: ['1-bit', 'Palette'],
         originalComparisonRestored: true, paletteUnchanged: true, settings: config, colors: after };
     });
     await stage('Clear subset and restore whole cohort / All', async () => {

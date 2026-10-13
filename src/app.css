@@ -472,7 +472,7 @@ button[data-tooltip], label[data-tooltip] { user-select: none; }
   position: fixed; inset: auto; margin: 0; z-index: 70; box-sizing: border-box;
   width: max-content; max-width: min(240px, calc(100vw - 16px)); padding: 8px 10px;
   color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
-  box-shadow: 0 4px 16px var(--shadow); font: 12px/1.45 var(--body); overflow-wrap: anywhere;
+  box-shadow: 0 4px 16px var(--shadow); font: 12px/1.45 var(--body); overflow-wrap: anywhere; white-space: pre-line;
 }
 .tooltip::backdrop { background: transparent; pointer-events: none; }
 

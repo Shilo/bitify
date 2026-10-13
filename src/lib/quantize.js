@@ -122,6 +122,16 @@ export async function quantizeAsync(image, palette, alphaCut = 128, mw, mh, { me
   return state.result;
 }
 
+// A wall can start many tile effects in one flush. Defer even their first
+// conversion slice so those individually bounded slices cannot form one long task.
+// Exports keep the direct async path; animation cache hits need no posted task.
+export async function quantizePreviewAsync(image, palette, alphaCut = 128, mw, mh, options = {}) {
+  const captured = { ...options };
+  checkCanceled(captured.signal);
+  await yieldTask();
+  return quantizeAsync(image, palette, alphaCut, mw, mh, captured);
+}
+
 export function colorize(result, palette) {
   const prepared = preparedOf(palette), { rgb } = preparedData.get(prepared);
   const data = new Uint8ClampedArray(result.w * result.h * 4);

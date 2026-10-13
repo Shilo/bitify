@@ -1,7 +1,7 @@
 # Palettes
 
 Bitify's Palette panel has two families: **1-bit**, with twelve preset color pairs, and
-**Palette**, with nine curated palettes, optional Generated 32 and a named local library. The pairs are
+**Palette**, with nine curated palettes, optional Auto and a named local library. The pairs are
 defined in [src/lib/presets.js](../src/lib/presets.js); full palettes and their provenance
 are in [src/lib/palette-library.js](../src/lib/palette-library.js).
 
@@ -10,18 +10,25 @@ an image, palette file or pasted colors; its edit icon opens color review. Names
 the round choices use a single line with an ellipsis when needed; full names remain in
 accessible labels and tooltips. More → Help lists the current mode's controls.
 
-**Generated 32 is selected on fresh visits and global Reset, and leads the rail.**
+**Auto is selected on fresh visits and global Reset, and leads the rail.**
 Saved choices remain intact, including older 1-bit preferences. ENDESGA 32 remains
 the curated fallback for missing/deleted saved selections. PICO-8 remains available for its
 distinctive stylization. A shared preset supplies consistent allowed RGB values;
 Max colors can restrict each asset further.
 
-Choose **Generated 32** to fit up to 32 shared colors from every wall image, including
+Choose **Auto** to fit up to 32 shared colors from every wall image, including
 all animation frames. It runs only when selected and refreshes when images or Opacity
 cut change. Matching, Max colors and Cleanup use that palette without changing its
 colors. Adding/removing art can recolor earlier tiles. Edit saves a fixed copy that
 stops following the wall. Generated improves source fidelity in the tested corpus,
 but may preserve unwanted AI noise; it does not infer intentional outlines/details.
+
+Auto's tooltip starts with its completed color count and source: for example,
+**Auto · 32 colors · Your images**, or **Auto · 11 colors · Example image**.
+The next line explains generation. This metadata updates with the published palette;
+opening the tooltip does not scan images or start work. During regeneration it describes
+the retained completed swatches. Imported images and the empty-wall example are never
+combined. The visible name is Auto; its stable saved identity remains `generated-32`.
 
 ## 1-bit color pairs
 
@@ -79,7 +86,7 @@ on white). Higher means the two colors are easier to tell apart.
 | Commodore | `#40318e` indigo | `#88d7de` cyan | 6.3 | Return of the Obra Dinn, Commodore 1084 setting |
 
 The 1-bit family initially uses Glow, with the dark color first. Fresh app visits
-start in Palette with Generated 32.
+start in Palette with Auto.
 
 ### Dark first, and Swap
 

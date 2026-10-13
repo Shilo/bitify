@@ -10,7 +10,7 @@ Read docs/superpowers/specs/2026-10-06-bitify-app-design.md before changing beha
 
 docs/styles.md explains how each of the eleven styles works, with a worked example of each, and what each style's settings do. docs/palettes.md lists the twelve preset palettes, where each comes from, and how to change them. docs/performance.md explains how the app stays fast with big images on phones: what a tile converts and why, the drafts while a slider is dragged, what was measured, and what was tried and thrown away. Read it before changing bitify.js, layout.js, gesture.js, Tile.svelte or the saving and adding code in App.svelte.
 
-Generated 32 leads the full rail with its own divider. The nine curated presets follow in descending color count: Resurrect 64, ENDESGA 32, PICO-8, DawnBringer 16, Grayscale 8, Ice Cream GB, Game Boy green, Glow and Paper. Vertical dividers separate the 64/32/16/8/4/2-color groups and the saved library. The 1-bit rail and stepping order group Glow/Mono/Paper/Torch/Rose, then Game Boy/Pocket/Nokia/Playdate, then Phosphor/Amber/Commodore, with dividers between these classics/decorative, handheld and monitor groups. Fresh visits and global Reset select Palette/Generated; existing saved selections remain intact, including legacy records without a family field. `DEFAULT_FULL_PALETTE` remains ENDESGA 32 as the curated fallback for existing missing/deleted selections. Stable preset IDs preserve saved selections. While the palette editor is open, local palette files and Discord/web image or Aseprite URL drops replace its shared draft, retaining the chosen method and entered name. `palette-drop.js` reuses `droppedImages` payload parsing, bounds streamed downloads to 32 MiB and preserves cancellation; only download has a 30-second timeout. The artwork drop helper remains separate.
+Auto leads the full rail with its own divider. The nine curated presets follow in descending color count: Resurrect 64, ENDESGA 32, PICO-8, DawnBringer 16, Grayscale 8, Ice Cream GB, Game Boy green, Glow and Paper. Vertical dividers separate the 64/32/16/8/4/2-color groups and the saved library. The 1-bit rail and stepping order group Glow/Mono/Paper/Torch/Rose, then Game Boy/Pocket/Nokia/Playdate, then Phosphor/Amber/Commodore, with dividers between these classics/decorative, handheld and monitor groups. Fresh visits and global Reset select Palette/Generated; existing saved selections remain intact, including legacy records without a family field. `DEFAULT_FULL_PALETTE` remains ENDESGA 32 as the curated fallback for existing missing/deleted selections. Stable preset IDs preserve saved selections. While the palette editor is open, local palette files and Discord/web image or Aseprite URL drops replace its shared draft, retaining the chosen method and entered name. `palette-drop.js` reuses `droppedImages` payload parsing, bounds streamed downloads to 32 MiB and preserves cancellation; only download has a 30-second timeout. The artwork drop helper remains separate.
 
 ## Commands
 
@@ -62,7 +62,7 @@ readiness still gating animation. See
 docs/research/2026-10-12-generated-preview-decoding.md for reproduced source noise and
 preview gaps, the fix, and cache/export work that remains per frame.
 
-Generated 32 is the fresh default and leads the full rail, before the curated presets
+Auto is the fresh default and leads the full rail, before the curated presets
 and saved library. Its algorithm remains lazy until this source is active. It fits one shared palette from all wall sources/animation frames, with equal
 nonempty asset mass and duration weighting inside each GIF. Only sources/durations and
 Opacity cut regenerate it. Matching, caps, cleanup and display state do not. Runtime
@@ -71,6 +71,12 @@ converted art and disable color-dependent actions. Export gestures capture the e
 wall source signature before awaiting generation. The worker streams 128 KiB slices;
 the result cache holds two small palettes, without old source/histogram references.
 App's completed generated publication retains the request key, not the captured wall.
+The visible source name is Auto with its stable `generated-32` ID and 32-color capacity.
+Tooltip metadata reads the published palette count and its captured source label;
+pending/inactive results describe retained swatches without scanning on hover.
+New palette preview conversions defer their first slice to a posted browser task,
+preventing many tile effects from aggregating bounded slices into one input stall.
+Canceled queued previews do no source work; cache hits and exports keep their paths.
 Tile clears inactive limiter/cleanup request results. Last-subscriber cancellation
 immediately removes unstarted limiter/cleanup jobs from their queue and active map;
 running jobs with independent export subscribers remain alive.

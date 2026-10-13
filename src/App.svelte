@@ -209,8 +209,9 @@
   const generatedRequest = $derived(generatedActive ? captureGeneratedWallSources(items, example, alphaCut) : null);
   const generatedPending = $derived(family === 'full-palette' && generatedActive && !generatedError
     && (generatedBusy || generatedResult?.key !== generatedRequest?.key));
+  const generatedSource = $derived(generatedResult?.sourceLabel ?? (items.length ? 'Your images' : 'Example image'));
   const generatedNotice = $derived(family !== 'full-palette' || !generatedActive ? '' : generatedPending ? (!items.length && !example ? 'Loading example…' : 'Updating shared colors…')
-    : generatedError ? 'Could not generate colors. Select Generated 32 to retry.'
+    : generatedError ? `Could not generate colors. Select ${GENERATED_PALETTE.name} to retry.`
     : !fullPalette.colors.length ? 'No visible colors. Lower Opacity cut.' : '');
   const generatedUnavailable = $derived(family === 'full-palette' && generatedActive
     && (generatedError || !fullPalette.colors.length));
@@ -218,18 +219,19 @@
     const request = generatedRequest;
     generationRetry;
     if (family !== 'full-palette' || !request?.assets.length) { generatedBusy = false; return; }
+    const sourceLabel = items.length ? 'Your images' : 'Example image';
     const controller = new AbortController();
     generatedBusy = true; generatedError = false;
     import('./lib/palette-generated-client.js').then(client => client.getGeneratedPalette(request, { signal: controller.signal })).then(result => {
       if (!controller.signal.aborted) {
         // Keep the small result and identity, never the captured wall's frame buffers.
-        generatedResult = { key: request.key, palette: Object.freeze({ ...GENERATED_PALETTE, colors: result.colors }) };
+        generatedResult = { key: request.key, sourceLabel, palette: Object.freeze({ ...GENERATED_PALETTE, colors: result.colors }) };
         generatedBusy = false;
       }
     }).catch(error => {
       if (controller.signal.aborted || error.name === 'AbortError') return;
       generatedBusy = false; generatedError = true;
-      say('Could not generate shared colors. Select Generated 32 to retry.');
+      say(`Could not generate shared colors. Select ${GENERATED_PALETTE.name} to retry.`);
     });
     return () => controller.abort();
   });
@@ -856,7 +858,7 @@
 
 
 <div class="workspace-tools" class:canvas-scrollable={canvasScrollable} use:measureWorkspaceTools>
-<Dock bind:first bind:second bind:none bind:style bind:settings bind:showOriginal bind:dragging bind:family bind:alphaCut bind:metric bind:maxColors bind:lastMaxColors bind:cleanup {fullPalette} fullPresets={fullChoices} {savedPalettes} {generatedNotice} generatedEditable={!generatedPending && !generatedUnavailable} onpalette={selectPalette} onimportpalette={() => editPalette(null)} oneditpalette={editPalette} {previewing} {canvasScrollable} {autos} {soft} />
+<Dock bind:first bind:second bind:none bind:style bind:settings bind:showOriginal bind:dragging bind:family bind:alphaCut bind:metric bind:maxColors bind:lastMaxColors bind:cleanup {fullPalette} fullPresets={fullChoices} {savedPalettes} {generatedNotice} {generatedSource} generatedEditable={!generatedPending && !generatedUnavailable} onpalette={selectPalette} onimportpalette={() => editPalette(null)} oneditpalette={editPalette} {previewing} {canvasScrollable} {autos} {soft} />
 <nav class="bar file-tools" class:has-images={!!items.length} aria-label="File and app actions">
   <div class="file-actions" class:awaiting-import={!items.length} role="group" aria-label="Add and save images">
     <button class="btn glass-btn icon-only export-action" class:glass-btn--primary={!!items.length} disabled={!items.length || generatedUnavailable} aria-label={items.length > 1 ? 'Save all images' : 'Save image'} use:tooltip={items.length > 1 ? 'Save all converted images as a ZIP archive.' : items.length ? 'Save the converted image at its original size.' : 'Add an image to enable saving.'} onclick={saveEverything}><PixelIcon name="save" /><span class="save-label" aria-hidden="true">Save</span></button>
