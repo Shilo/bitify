@@ -142,3 +142,11 @@ commits remain unchanged. See docs/research/2026-10-13-performance-stability-fix
 Save all yields through the posted export scheduler between encoded files. It keeps
 the captured item list/settings and downloads only a complete successful batch. An
 individual 1-bit still remains synchronous; its own long task is not eliminated.
+
+1-bit animation exports capture analysis references, inks, style/settings and frame
+metadata before yielding, then produce and encode one full-resolution mask at a time.
+The async writer gives a posted task before the first mask and after groups exceeding
+8 ms, including mask, None remapping, buffer growth and LZW. It grows output as needed
+instead of reserving every frame's worst case. Save, ZIP and hover use this path;
+Copy remains first-frame PNG. One huge frame/cold structural preparation and final
+output copying remain synchronous. The old synchronous encoder is a test reference.

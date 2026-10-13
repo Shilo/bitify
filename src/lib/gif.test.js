@@ -1,6 +1,9 @@
-import { describe, it, expect } from 'vitest';
+import { afterEach, describe, it, expect, vi } from 'vitest';
 import omggif from 'omggif';
-import { decodeGif, decodeGifAsync, encodeGif } from './gif.js';
+import { decodeGif, decodeGifAsync, encodeGif, encodeGifAsync } from './gif.js';
+import * as quantize from './quantize.js';
+
+afterEach(() => vi.restoreAllMocks());
 
 const RED = [255, 0, 0, 255], BLUE = [0, 0, 255, 255], GREEN = [0, 255, 0, 255], NONE = [0, 0, 0, 0];
 // Splits RGBA bytes into one [r, g, b, a] per pixel, so expectations read as pictures.
@@ -113,5 +116,83 @@ describe('encodeGif', () => {
     expect(out.frames.length).toBe(2);
     expect(out.frames[1].data.length).toBe(w * h * 4);
     expect([...out.frames[1].data.slice(0, 4)]).toEqual([NONE, A, B][mask[0]]);
+  });
+});
+
+describe('cooperative 1-bit GIF encoding', () => {
+  const image = { w: 3, h: 2, first: '#222323', second: '#f0f6f0', loop: 0,
+    frames: Array.from({ length: 4 }, (_, frame) => ({ mask: Uint8Array.from({ length: 6 }, (_, pixel) => (pixel + frame) % 3), delay: 80 + frame * 10 })) };
+  it('yields before asking for the first lazy frame and includes mask generation in its 8ms budget', async () => {
+    let clock = 0; const events = [], getFrame = vi.fn(index => { events.push(`mask${index}`); clock += 9; return image.frames[index]; });
+    vi.spyOn(performance, 'now').mockImplementation(() => clock);
+    const yieldSpy = vi.spyOn(quantize, 'yieldTask').mockImplementation(async () => { events.push('yield'); });
+    const output = await encodeGifAsync({ ...image, frames: undefined, frameCount: 4, getFrame });
+    expect(events).toEqual(['yield', 'mask0', 'yield', 'mask1', 'yield', 'mask2', 'yield', 'mask3']);
+    expect(yieldSpy).toHaveBeenCalledTimes(4); expect(output).toEqual(encodeGif(image));
+  });
+  it('includes LZW compression cost in the same frame-group budget', async () => {
+    let clock = 0; const OriginalWriter = omggif.GifWriter;
+    vi.spyOn(performance, 'now').mockImplementation(() => clock);
+    const yieldSpy = vi.spyOn(quantize, 'yieldTask').mockImplementation(async () => {});
+    vi.spyOn(omggif, 'GifWriter').mockImplementation(function (...args) {
+      const writer = new OriginalWriter(...args), add = writer.addFrame;
+      writer.addFrame = (...frame) => { const result = add(...frame); clock += 9; return result; }; return writer;
+    });
+    expect(await encodeGifAsync(image)).toEqual(encodeGif(image)); expect(yieldSpy).toHaveBeenCalledTimes(4);
+  });
+  it('grows output through many frames without changing bytes or mutating None masks', async () => {
+    const OriginalWriter = omggif.GifWriter, initial = [], growth = [];
+    vi.spyOn(omggif, 'GifWriter').mockImplementation(function (buffer, ...args) {
+      initial.push(buffer.length);
+      const writer = new OriginalWriter(buffer, ...args), set = writer.setOutputBuffer;
+      writer.setOutputBuffer = next => { growth.push(next.length); return set(next); }; return writer;
+    });
+    const source = { ...image, w: 160, h: 120, first: null, loop: 3,
+      frames: Array.from({ length: 20 }, (_, frame) => ({ mask: Uint8Array.from({ length: 160 * 120 }, (_, pixel) => ((Math.imul(pixel + frame * 23, 2654435761) >>> 20) % 3)), delay: 123 + frame * 7 })) };
+    const before = source.frames.map(frame => frame.mask.slice());
+    const actual = await encodeGifAsync(source);
+    expect(initial).toEqual([1024]); expect(growth.length).toBeGreaterThan(1);
+    expect(actual.length).toBeGreaterThan(1024); expect(actual).toEqual(encodeGif(source));
+    expect(source.frames.map(frame => frame.mask)).toEqual(before);
+    const decoded = decodeGif(actual);
+    expect(decoded.frames).toHaveLength(20); expect(decoded.loop).toBe(3);
+    expect(decoded.frames.map(frame => frame.delay)).toEqual(source.frames.map(frame => Math.round(frame.delay / 10) * 10));
+  });
+  it('cancels during the first yield without asking for any frame', async () => {
+    const controller = new AbortController(), getFrame = vi.fn();
+    vi.spyOn(quantize, 'yieldTask').mockImplementation(async () => controller.abort());
+    await expect(encodeGifAsync({ ...image, frameCount: 4, getFrame }, { signal: controller.signal })).rejects.toMatchObject({ name: 'AbortError' });
+    expect(getFrame).not.toHaveBeenCalled();
+  });
+  it('cancels after lazy generation without encoding or asking for later frames', async () => {
+    const controller = new AbortController(), OriginalWriter = omggif.GifWriter; let add;
+    vi.spyOn(omggif, 'GifWriter').mockImplementation(function (...args) {
+      const writer = new OriginalWriter(...args); add = vi.fn(writer.addFrame); writer.addFrame = add; return writer;
+    });
+    const getFrame = vi.fn(index => { controller.abort(); return image.frames[index]; });
+    await expect(encodeGifAsync({ ...image, frameCount: 4, getFrame }, { signal: controller.signal })).rejects.toMatchObject({ name: 'AbortError' });
+    expect(getFrame).toHaveBeenCalledOnce(); expect(add).not.toHaveBeenCalled();
+  });
+  it('checks cancellation after compression before finishing or asking for another frame', async () => {
+    const controller = new AbortController(), OriginalWriter = omggif.GifWriter; let end;
+    vi.spyOn(omggif, 'GifWriter').mockImplementation(function (...args) {
+      const writer = new OriginalWriter(...args), add = writer.addFrame;
+      writer.addFrame = (...frame) => { const result = add(...frame); controller.abort(); return result; };
+      end = vi.fn(writer.end); writer.end = end; return writer;
+    });
+    const getFrame = vi.fn(index => image.frames[index]);
+    await expect(encodeGifAsync({ ...image, frameCount: 4, getFrame }, { signal: controller.signal })).rejects.toMatchObject({ name: 'AbortError' });
+    expect(getFrame).toHaveBeenCalledOnce(); expect(end).not.toHaveBeenCalled();
+  });
+  it('rejects a failed frame and never generates its successors', async () => {
+    const getFrame = vi.fn(index => { if (index === 1) throw new Error('Frame failed'); return image.frames[index]; });
+    await expect(encodeGifAsync({ ...image, frameCount: 4, getFrame })).rejects.toThrow('Frame failed');
+    expect(getFrame.mock.calls).toEqual([[0], [1]]);
+  });
+  it.each([
+    { w: 0 }, { h: 65536 }, { loop: -1 }, { frameCount: 0, getFrame() {} },
+    { frames: [{ mask: new Uint8Array(1), delay: 80 }] }, { frames: [{ mask: image.frames[0].mask, delay: NaN }] },
+  ])('rejects malformed animation inputs before returning bytes: %j', async changed => {
+    await expect(encodeGifAsync({ ...image, ...changed })).rejects.toThrow();
   });
 });

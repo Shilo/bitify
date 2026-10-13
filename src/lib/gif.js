@@ -83,6 +83,45 @@ export function encodeGif(image, { signal } = {}) {
   return buffer.subarray(0, writer.end());
 }
 
+// Animation saves use a captured lazy mask producer. Give the browser a turn
+// before masking, then budget each sequential group including mask, None remap,
+// buffer growth and LZW. One unusually large frame remains synchronous.
+export async function encodeGifAsync(image, { signal } = {}) {
+  checkCanceled(signal);
+  if (image.colors) return encodePaletteGif(image, { signal });
+  const { w, h, first, second, loop } = image;
+  if (![w, h].every(n => Number.isInteger(n) && n > 0 && n <= 65535)) throw new Error('Invalid GIF dimensions.');
+  if (loop != null && (!Number.isInteger(loop) || loop < 0 || loop > 65535)) throw new Error('Invalid GIF loop count.');
+  const count = image.getFrame ? image.frameCount : image.frames?.length;
+  if (!Number.isInteger(count) || count < 1) throw new Error('A GIF needs at least one frame.');
+  const getFrame = image.getFrame ?? (i => image.frames[i]);
+  const color = hex => (hex ? parseInt(hex.slice(1), 16) : 0);
+  const gone = first ? (second ? 0 : 2) : 1;
+  const writer = createPaletteGifWriter({ w, h, loop, transparent: 0,
+    table: [0x000000, color(first), color(second), 0x000000] });
+  try {
+    await yieldTask();
+    checkCanceled(signal);
+    let deadline = performance.now() + 8;
+    for (let i = 0; i < count; i++) {
+      checkCanceled(signal);
+      const frame = await getFrame(i);
+      checkCanceled(signal);
+      if (!frame || !(frame.mask instanceof Uint8Array) || frame.mask.length !== w * h) throw new Error('Invalid GIF frame mask.');
+      if (!Number.isFinite(frame.delay) || frame.delay < 0 || frame.delay > 655350) throw new Error('Invalid GIF frame delay.');
+      writer.add(gone ? frame.mask.map(value => value === gone ? 0 : value) : frame.mask, frame.delay);
+      checkCanceled(signal);
+      if (i + 1 < count && performance.now() >= deadline) {
+        await yieldTask();
+        checkCanceled(signal);
+        deadline = performance.now() + 8;
+      }
+    }
+    checkCanceled(signal);
+    return writer.end();
+  } finally { writer.close(); }
+}
+
 // A replayable async getFrame(index) keeps only one converted Uint16 frame in
 // memory. The first pass finds the stable global table; the second encodes.
 // Callers snapshot the palette, source frames and conversion at the save click.

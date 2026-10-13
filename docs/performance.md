@@ -1164,3 +1164,18 @@ near 350 ms because one GIF's eager masks/encoding still dominated. These are
 reviewer diagnostic measurements, not measurements of the committed production patch.
 `save-batch.test.js` checks ordering, identical PNG entries, between-file scheduling
 and no partial download on a later failure.
+
+1-bit animation export now captures each frame's analysis and metadata before any
+yield, without eagerly allocating every mask. The asynchronous GIF writer produces
+and encodes one mask at a time, giving input/rendering a turn before the first frame
+and after a frame group reaches the 8 ms budget. Mask creation, None remapping, buffer
+growth and compression all count toward the budget. Output starts with a 1 KiB buffer
+and grows with encoded data; it no longer reserves worst-case output for the whole
+clip. Palette exports, still PNG and Copy retain their paths. Shared source analysis
+is still retained; this is not a bound on whole-app memory.
+
+Cancellation checks surround production, compression and posted yields, and cannot
+interrupt an individual synchronous mask/LZW call. One large frame, cold Stencil/Icon
+preparation and final output copying can exceed the budget. Average compression time
+per frame does not prove a maximum. Tests compare all eleven styles, either None ink,
+loop variants, buffer growth and captured mutations against the old GIF bytes.

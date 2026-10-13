@@ -2,6 +2,7 @@
   import { analyze, mask, hexToRgb, autoThreshold, spritesOf } from './lib/bitify.js';
   import { unify } from './lib/bitify.js';
   import { saveOne, saveAll, copyOne, pngBlob, downloadName, fileBytes } from './lib/save.js';
+  import { bitifiedAnimation } from './lib/bitified-animation.js';
   import { fitImageWall, IMAGE_INSET } from './lib/workspace.js';
   import { restore } from './lib/settings.js';
   import { STYLES, inOrder, inks, stepStyle, stepPalette } from './lib/presets.js';
@@ -634,8 +635,8 @@
     if (skipped) say(`Could not import ${skipped} dropped image${skipped === 1 ? '' : 's'}. Try copying and pasting the image, or saving it and adding the file.`, 6000);
   }
 
-  // What gets saved: the two colors as they are drawn, with a still image's mask, or with one mask per frame of an
-  // animation. These masks are of every pixel, always: never the smaller picture a tile draws.
+  // What gets saved: the two colors as they are drawn, with a still image's mask,
+  // or lazy full-resolution animation masks consumed one frame at a time.
   // `asked` is the settings at the moment of asking (see `asking`). A long job starts a moment
   // after it is asked for, and what it saves is what was on screen then, whatever is changed since.
   const asking = () => conversionSnapshot({ family, palette: fullPalette, alphaCut, metric, maxColors, cleanup,
@@ -644,7 +645,7 @@
   const still = (item, asked) => asked.family === 'full-palette' ? fullPaletteImage(item, asked, { still: true }) : ({ ...about(item, asked), mask: mask(item.img, asked.style, asked.set) });
   const bitified = (item, asked, options) =>
     asked.family === 'full-palette' ? fullPaletteImage(item, asked, options) : item.frames
-      ? { ...about(item, asked), loop: item.loop, frames: item.frames.map(f => ({ mask: mask(f.img, asked.style, asked.set), delay: f.delay })) }
+      ? bitifiedAnimation(item, asked, options)
       : still(item, asked);
 
   // Prepare through the existing encoders. Keep Save, Copy and ZIP paths untouched.

@@ -2582,3 +2582,12 @@ Batch exports give browser input and rendering a turn between fully encoded file
 The gesture's captured item list and settings remain authoritative; a later file
 failure downloads no partial ZIP. One-file Save adds no batch scheduling turn.
 Individual synchronous masks and still PNG encoders retain their existing behavior.
+
+1-bit animated Save/Save all/hover exports capture frame analyses, delays, order,
+loop, inks and copied style settings at the gesture, then produce and encode frames
+sequentially. No clip-wide output-mask allocation precedes encoding. The GIF writer
+uses growable output storage and posted turns between groups at an 8 ms budget;
+an individual frame remains synchronous. None, transparency, disposal, delay rounding,
+dimensions, loop and output bytes remain compatible. Aborted hover work stops before
+later frame production; explicit Save subscribers and active native drag grace remain
+independent. PNG Copy still exports the first frame.

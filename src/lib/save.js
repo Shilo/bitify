@@ -214,7 +214,7 @@ export const fileBytes = async (image, { signal } = {}) => {
   if (kind(image) === 'gif') {
     const gif = await import('./gif.js');
     checkCanceled(signal);
-    return gif.encodeGif(image, { signal });
+    return image.colors ? gif.encodeGif(image, { signal }) : gif.encodeGifAsync(image, { signal });
   }
   return image.colors ? palettePngBytesAsync(image, { signal }) : pngBytes(image);
 };

@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { inflateSync, crc32 } from 'node:zlib';
 import { unzipSync } from 'fflate';
 import { outNames, zipBytes, pngBytes, fileBytes } from './save.js';
-import { decodeGif } from './gif.js';
+import { decodeGif, encodeGif } from './gif.js';
 
 describe('outNames', () => {
   it('replaces the extension with -1bit.png', () => {
@@ -77,6 +77,15 @@ describe('pngBytes', () => {
 });
 
 describe('animations', () => {
+  it('consumes a lazy 1-bit animation with the unchanged encoded bytes', async () => {
+    const frames = [{ mask: Uint8Array.of(1, 0), delay: 70 }, { mask: Uint8Array.of(2, 1), delay: 120 }];
+    const about = { name: 'lazy.gif', w: 2, h: 1, first: '#222323', second: null, loop: 3 };
+    const requested = [];
+    const bytes = await fileBytes({ ...about, frameCount: frames.length, getFrame: i => { requested.push(i); return frames[i]; } });
+    expect(requested).toEqual([0, 1]);
+    expect(bytes).toEqual(encodeGif({ ...about, frames }));
+    expect(decodeGif(bytes)).toMatchObject({ width: 2, height: 1, loop: 3 });
+  });
   it('names an animated image .gif and a still one .png', () => {
     expect(outNames(['walk.gif', 'hero.png', 'walk.png'], ['gif', 'png', 'png'])).toEqual(['walk-1bit.gif', 'hero-1bit.png', 'walk-1bit.png']);
   });
