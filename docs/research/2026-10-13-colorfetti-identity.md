@@ -10,11 +10,11 @@ Lead with recoloring and palette choice. Automatic colors derived from the image
 
 ## Product description
 
-Recolor images, sprites, and animated GIFs with automatic, preset, or custom palettes. Explore two-color styles for a different look.
+**Throw your pixels a palette party. Recolor images and animations.**
 
-For a short category label, use **Image and GIF recoloring tool**. Where privacy needs a separate line, use **Images stay on your device.**
+For a short category label, use **Image and animation recoloring tool**. Where privacy needs a separate line, use **Images stay on your device.**
 
-Keep copy concise, friendly and specific. Confetti language can express play and color exploration, but the app's purpose should remain clear. Recoloring changes an image's colors; it does not add decorative confetti. A campaign tagline has not been selected.
+Use the approved two-sentence copy consistently in Help, site metadata, installation metadata and the README. “Animations” keeps the positioning open to future formats; current technical support remains documented separately.
 
 ## Logo
 

@@ -2,7 +2,7 @@
 
 # Colorfetti
 
-Recolor images, sprites, and animated GIFs with automatic, preset, or custom palettes. Explore two-color styles for a different look. Runs entirely in the browser; nothing is uploaded.
+Throw your pixels a palette party. Recolor images and animations.
 
 **[shilo.github.io/bitify](https://shilo.github.io/bitify/)**
 

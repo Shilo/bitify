@@ -1,5 +1,7 @@
 # Colorfetti
 
+Throw your pixels a palette party. Recolor images and animations.
+
 Colorfetti recolors images, sprites and animated GIFs with automatic, preset or custom palettes. It runs entirely in the browser, with full palettes of 1–256 unique opaque RGB colors. The 1-bit family uses two chosen colors, either of which can be None (transparent). There is no backend and nothing is uploaded.
 
 The brand master is `src/assets/logo.svg`: a black C frame with five fixed confetti colors on an off-white backplate, used in both themes. `npm run icons` generates its production exports; `node build/brand-assets.mjs --check` verifies them. The empty-wall example uses its static 76×76 PNG with the same backplate. The brand guide is docs/research/2026-10-13-colorfetti-identity.md. Keep existing storage keys and repository URLs stable.

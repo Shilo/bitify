@@ -1014,12 +1014,12 @@
       <img class="help-logo" src={helpLogoUrl} alt="" width="48" height="48" />
       <div>
         <h2 id="help-title">Colorfetti</h2>
-        <p>Recolor images and GIFs with automatic, preset, or custom palettes.</p>
+        <p>Throw your pixels a palette party. Recolor images and animations.</p>
       </div>
     </header>
     <ol>
       <li><PixelIcon name="import" /><b>Add</b>{touch ? 'Choose images.' : 'Choose, drop or paste images.'}</li>
-      <li><PixelIcon name="grid" /><b>Palette</b>Pick 1-bit, palette or import colors.</li>
+      <li><PixelIcon name="grid" /><b>Palette</b>Pick palette, 1-bit colors or import your own.</li>
       <li><PixelIcon name="sliders" /><b>Style</b>Pick an effect and tune its settings.</li>
       <li><PixelIcon name="save" /><b>Save</b>Save or copy images.</li>
     </ol>

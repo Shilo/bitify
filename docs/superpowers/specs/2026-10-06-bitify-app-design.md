@@ -14,9 +14,10 @@ of the same geometry and backplate and is named Colorfetti. It still responds
 to the active conversion settings. This replaces the spinning coin and pixel B
 branding described in historical sections below.
 
-Title and install metadata use Colorfetti. The functional description is
-“Recolor images and GIFs with automatic, preset, or custom palettes.” Campaign
-copy remains unselected. Download all saves `colorfetti.zip`; individual suffixes,
+Title and install metadata use Colorfetti. The approved description is
+“Throw your pixels a palette party. Recolor images and animations.”
+Help's Palette step says “Pick palette, 1-bit colors or import your own.”
+Download all saves `colorfetti.zip`; individual suffixes,
 storage keys, repository URLs and conversion behavior retain their existing rules.
 These identity rules supersede earlier branding and example-animation references.
 
