@@ -5,8 +5,9 @@
 <p>Foreground only, one run per page load. The production assets are unchanged. Test-only HTML observes canvas paints, browser Long Tasks and captures download bytes. Zero long-task duration means no task at least 50 ms was observed. Settlement includes a fixed 50 ms initial wait, 80 ms after the Updating images indicator clears and up to 30 ms polling overhead; it is not a kernel timing. Controlled posted-task holds apply only to correctness checks.</p>
 <label>Target <select id="target"><option>desktop</option><option>phone</option></select></label>
 <label>Alternating source changes per build <select id="runs"><option>6</option><option>2</option></select></label>
-<button id="run">Run checks</button><pre id="report" role="status">Ready. Build base/candidate under .tmp/reanalysis/site first.</pre>
+<button id="run">Run checks</button><pre id="report" role="status">Ready. Serve the base and candidate builds from the selected diagnostic root.</pre>
 <button id="edges">Run edge checks</button>
+<button id="slider-race">Run slider race checks</button>
 <iframe id="app" title="Actual built app"></iframe>
 <script type="module">
 const frame=document.querySelector('#app'),report=document.querySelector('#report'),button=document.querySelector('#run');
@@ -28,12 +29,12 @@ const settings=()=>JSON.parse(win.localStorage.getItem('bitify'));
 const updateVisible=()=>[...doc.querySelectorAll('.glass-toast.is-visible')].some(node=>node.textContent.includes('Updating images'));
 const content=value=>JSON.stringify(value.entries??{size:value.size,sha256:value.sha256});
 async function files(names){return Promise.all(names.map(async name=>{
- if(!cached.has(name)){const noise=name.match(/^noise(1024|2048)-(\d+)\.png$/),path=noise?`/noise/${noise[1]}/${noise[2]}.png`:`/fixtures/${name}`;
+ if(!cached.has(name)){const noise=name.match(/^noise(1024|2048)-(\d+)\.png$/),path=name==='soft.png'?'/soft.png':noise?`/noise/${noise[1]}/${noise[2]}.png`:`/fixtures/${name}`;
   const response=await fetch(path,{cache:'no-store'});assert(response.ok,`Missing fixture: ${name}`);cached.set(name,new File([await response.blob()],name,{type:name.endsWith('.gif')?'image/gif':'image/png'}));}
  return cached.get(name);
 }));}
-async function load(build,names,source='green'){
- const identity=`${result.id}-${++loadSerial}`;frame.src=`/${build}/?seed=${source}&qa=${identity}`;
+async function load(build,names,source='green',cut=128){
+ const identity=`${result.id}-${++loadSerial}`;frame.src=`/${build}/?seed=${source}&cut=${cut}&qa=${identity}`;
  await until(()=>{try{return frame.contentWindow?.location.pathname===`/${build}/`&&new URLSearchParams(frame.contentWindow.location.search).get('qa')===identity&&frame.contentWindow.__reanalysisQA&&frame.contentDocument?.querySelector('.export-action');}catch{return false;}},'app startup');
  win=frame.contentWindow;doc=frame.contentDocument;q=win.__reanalysisQA;errorLists.push({build,identity,errors:q.errors,warnings:q.warnings});
  const transfer=new win.DataTransfer();for(const file of await files(names))transfer.items.add(file);
@@ -43,6 +44,47 @@ async function load(build,names,source='green'){
  assert(settings().style==='cutout'&&settings().settings.cutout.source==='luma'&&settings().settings.solid.source===source,'Brightness seed mismatch');
  return {entry:doc.querySelector('script[type="module"][src]').getAttribute('src'),viewport:[win.innerWidth,win.innerHeight],dpr:win.devicePixelRatio,longTasksSupported:q.observed};
 }
+async function settingControl(label){
+ if(!doc.querySelector('button[aria-labelledby="style-label style-name"]'))doc.querySelector('button[aria-label="Style"]').click();
+ await until(()=>doc.querySelector('button[aria-labelledby="style-label style-name"]'),'Style panel');
+ const more=doc.querySelector('button[aria-label="More settings"]');if(more&&more.getAttribute('aria-expanded')!=='true')more.click();
+ const chip=[...doc.querySelectorAll('[role="group"][aria-label="Settings"] button')].find(node=>node.getAttribute('aria-label')?.startsWith(label+':'));
+ if(chip)chip.click();
+ await until(()=>doc.querySelector(`input[type="range"][aria-label="${label}"]`)||doc.querySelector(`[role="group"][aria-label="${label}"]`),`${label} control`);
+ return doc.querySelector(`input[type="range"][aria-label="${label}"]`);
+}
+async function green(){await settingControl('Brightness');const control=[...doc.querySelectorAll('[role="group"][aria-label="Brightness"] button')].find(node=>node.textContent.trim()==='G');assert(control,'G Brightness button missing');control.click();}
+function inputValue(input,value){input.value=String(value);input.dispatchEvent(new win.Event('input',{bubbles:true}));}
+function pointer(input,type){input.dispatchEvent(new win.PointerEvent(type,{bubbles:true,pointerId:1,pointerType:'mouse',buttons:type==='pointerdown'?1:0}));}
+let sliderPulse;
+function pulse(input,value){pointer(input,'pointerdown');inputValue(input,value);sliderPulse=setInterval(()=>inputValue(input,value),50);}
+function stopPulse(input){clearInterval(sliderPulse);sliderPulse=null;pointer(input,'pointerup');input.dispatchEvent(new win.Event('change',{bubbles:true}));}
+async function sliderRaceChecks(){
+ const names=photos(2,1024),out=result.checks={};
+ // Hold the already requested source job before starting a real Dock drag. The
+ // baseline must reproduce zero paints until release, rather than silently pass.
+ for(const build of ['base','candidate']){
+  step=`slider/source-then-threshold/${build}`;await load(build,names);q.hold=true;await green();await until(()=>q.queued.length===1,'one held source job');
+  const range=await settingControl('Threshold');pulse(range,120);await sleep(100);const before=q.paints,posted=q.posted;q.release();await sleep(2000);const during=q.paints-before;stopPulse(range);await settle('cutout');
+  out[build]={paintsDuringDrag:during,postedAtRelease:posted,postedAfter:q.posted,output:await capture('threshold-race',build)};
+  assert(build==='base'?during===0:during>0,build==='base'?'Baseline did not reproduce the reported freeze':'Candidate source job was aborted by a Threshold drag');
+  line(`${build==='base'?'EXPECTED BASELINE DEFECT':'PASS candidate'}: ${during} wall paints while Threshold remains pressed.`);
+ }
+ step='slider/fresh-reference';await load('base',names);await green();await settle('cutout');const freshRange=await settingControl('Threshold');inputValue(freshRange,120);freshRange.dispatchEvent(new win.Event('change',{bubbles:true}));await sleep(200);out.fresh=await capture('threshold-fresh','base');
+ assert(content(out.candidate.output)===content(out.fresh),'Threshold drag final output differs from fresh G/120 export');out.freshOutput=true;line('PASS final Threshold output exactly matches a fresh selection.');
+ step='slider/opacity-source-cancellation';await load('candidate',['soft.png']);q.hold=true;await green();await until(()=>q.queued.length===1,'held soft source job');const opacity=await settingControl('Opacity cut');pulse(opacity,200);await sleep(100);const before=q.posted;q.release();await sleep(400);
+ assert(q.posted===before,'Changed opacity launched analysis before the drag settled');stopPulse(opacity);await settle('cutout');out.opacity=await capture('opacity-drag','candidate');
+ await load('base',['soft.png'],'green',200);await green();await settle('cutout');out.opacityFresh=await capture('opacity-fresh','base');assert(content(out.opacity)===content(out.opacityFresh),'Opacity/source drag published stale cut or source');out.opacityDeferred=true;line('PASS a changed opacity cut cancels stale source work, defers while moving and exports exact fresh pixels.');
+ step='slider/failure-no-retry';await load('candidate',names);q.failNextPost=true;await green();await until(()=>[...doc.querySelectorAll('.glass-toast.is-visible')].some(node=>node.textContent.includes('Could not update images')),'handled source failure');const threshold=await settingControl('Threshold'),posted=q.posted;pulse(threshold,120);await sleep(400);stopPulse(threshold);await sleep(250);
+ assert(q.injectedFailures===1&&q.posted===posted&&q.errors.length===0,'Threshold drag retried unchanged failed analysis');out.failureNoRetry=true;line('PASS unrelated Threshold dragging cannot retry a failed source request.');
+}
+document.querySelector('#slider-race').onclick=async()=>{
+ const run=document.querySelector('#slider-race');if(run.disabled||window.__reanalysisAcceptance?.status==='running'||window.__reanalysisEdgeAcceptance?.status==='running')return;run.disabled=true;button.disabled=true;document.querySelector('#edges').disabled=true;report.textContent='Running bounded actual-build slider checks…';report.className='';
+ result=window.__sliderRaceAcceptance={id:`slider-${document.querySelector('#target').value}-${Date.now()}`,started:new Date().toISOString(),userAgent:navigator.userAgent,done:false,status:'running'};
+ try{result.builds=await json(await fetch('/manifest',{cache:'no-store'}));await sliderRaceChecks();assert(errorLists.every(row=>row.errors.length===0&&row.warnings.length<=5),'Unexpected errors or repeated ResizeObserver warnings');result.status='pass';report.className='pass';line('PASS four bounded checks; synthetic DOM drags, physical finger testing is separate.');}
+ catch(error){result.status='fail';result.error={step,message:error.message,stack:error.stack};report.className='fail';line(`FAIL ${step}: ${error.message}`);}
+ finally{clearInterval(sliderPulse);q?.release();result.runtimeErrors=errorLists;result.finished=new Date().toISOString();try{result.saved=await json(await fetch(`/results/${result.id}`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(result)}));line(`Results: ${result.saved.saved}`);}catch(error){result.status='fail';result.saveError=error.message;}result.done=true;line('Reload to repeat.');}
+};
 function arrow(down){doc.body.dispatchEvent(new win.KeyboardEvent('keydown',{key:down?'ArrowDown':'ArrowUp',code:down?'ArrowDown':'ArrowUp',bubbles:true,cancelable:true}));}
 async function settle(style){await sleep(50);await until(()=>settings().style===style&&!updateVisible(),`${style} analysis publication`);await sleep(80);assert(q.errors.length===0,`Runtime error: ${JSON.stringify(q.errors)}`);}
 async function hashes(selector='.grid .tile canvas'){return Promise.all([...doc.querySelectorAll(selector)].map(async canvas=>{

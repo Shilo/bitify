@@ -2644,3 +2644,9 @@ available. Empty-wall preparation uses only the example. Matching analyses perfo
 no replacement work. Failure reports once without an automatic retry loop. Export
 gestures prepare their captured sources/settings independently from wall cancellation,
 and Copy requests clipboard writing immediately with a promise for the PNG.
+
+A slider drag does not cancel an existing live analysis for the same captured wall,
+Brightness and relevant Opacity cut. New heavy analyses may wait until dragging
+pauses or ends. Changed analysis inputs, wall membership or conversion family cancel
+obsolete preparation; teardown also cancels it. Unrelated slider changes do not
+retry a settled analysis failure.

@@ -8,7 +8,7 @@ import { createHash } from 'node:crypto';
 import { deflateSync, crc32 } from 'node:zlib';
 import { unzipSync } from 'fflate';
 
-const root = resolve('.tmp/reanalysis'), sites = resolve(root, 'site');
+const root = resolve(process.argv[3] ?? '.tmp/reanalysis'), sites = resolve(root, 'site');
 const fixtures = resolve('.tmp/auto64-ui-20261012/build/fixtures'), output = resolve(root, 'results');
 const qa = fileURLToPath(new URL('./live-reanalysis-qa.html', import.meta.url));
 const port = Number(process.argv[2] ?? 5286);
@@ -20,16 +20,18 @@ function inside(base, path) {
   if (part.startsWith('..') || isAbsolute(part)) throw new Error('Path outside test root.');
   return file;
 }
-function preload(seed) {
+function preload(seed, cut) {
   const green = seed !== 'luma';
+  const alpha = cut === '200' ? 200 : 128;
+  const stored = {family:'two-color',paletteId:'preset-pico8',style:'cutout',none:0,first:'#222323',second:'#f0f6f0',settings:{cutout:{threshold:null,seams:null,rim:true,source:'luma',alpha},solid:{threshold:null,source:green?'green':'luma',alpha}}};
   return `<script>
-localStorage.setItem('bitify', JSON.stringify({family:'two-color',paletteId:'preset-pico8',style:'cutout',none:0,first:'#222323',second:'#f0f6f0',settings:{cutout:{threshold:null,seams:null,rim:true,source:'luma',alpha:128},solid:{threshold:null,source:${JSON.stringify(green?'green':'luma')},alpha:128}}}));
+localStorage.setItem('bitify', ${JSON.stringify(JSON.stringify(stored))});
 const q = window.__reanalysisQA = {exports:[],errors:[],warnings:[],long:[],paints:0,hold:false,queued:[],rafGapMax:0,lastRaf:0,observed:PerformanceObserver.supportedEntryTypes.includes('longtask')};
 window.addEventListener('error', e => {const entry={message:e.message,source:e.filename,line:e.lineno,stack:e.error?.stack};if(e.message==='ResizeObserver loop completed with undelivered notifications.' && e.lineno===0)q.warnings.push(entry);else q.errors.push(entry);});
 window.addEventListener('unhandledrejection', e => q.errors.push({message:e.reason?.message || String(e.reason),stack:e.reason?.stack}));
 if(q.observed){q.observer=new PerformanceObserver(list=>q.long.push(...list.getEntries().map(e=>({start:e.startTime,duration:e.duration}))));q.observer.observe({type:'longtask'});}
 const NativeChannel=window.MessageChannel;
-window.MessageChannel=class extends NativeChannel{constructor(){super();const send=this.port2.postMessage.bind(this.port2);this.port2.postMessage=(...args)=>{if(q.failNextPost){q.failNextPost=false;q.injectedFailures=(q.injectedFailures||0)+1;throw Error('Injected one-shot reanalysis scheduling failure');}if(q.hold)q.queued.push(()=>send(...args));else send(...args);};}};
+window.MessageChannel=class extends NativeChannel{constructor(){super();const send=this.port2.postMessage.bind(this.port2);this.port2.postMessage=(...args)=>{q.posted=(q.posted||0)+1;if(q.failNextPost){q.failNextPost=false;q.injectedFailures=(q.injectedFailures||0)+1;throw Error('Injected one-shot reanalysis scheduling failure');}if(q.hold)q.queued.push(()=>send(...args));else send(...args);};}};
 q.release=()=>{q.hold=false;for(const send of q.queued.splice(0))send();};
 const put=CanvasRenderingContext2D.prototype.putImageData;
 CanvasRenderingContext2D.prototype.putImageData=function(...args){const result=put.apply(this,args);if(this.canvas.matches('.grid .tile .art canvas'))q.paints++;return result;};
@@ -45,8 +47,8 @@ async function manifest(build) {
   return { entry, indexSha256: sha(html), entrySha256: sha(await readFile(inside(dir, entry))) };
 }
 const noise = new Map();
-async function photo(index, w) {
-  const key = `${w}-${index}`;
+async function photo(index, w, soft = false) {
+  const key = `${w}-${index}-${soft}`;
   if (noise.has(key)) return noise.get(key);
   const rows = Buffer.alloc((w * 4 + 1) * w); let state = index + 1;
   for (let y = 0; y < w; y++) for (let x = 0; x < w; x++) {
@@ -54,7 +56,7 @@ async function photo(index, w) {
     const at = y * (w * 4 + 1) + 1 + x * 4;
     rows[at] = w === 2048 ? x * 255 / w : (x * 255 / w + (state >>> 16 & 31)) & 255;
     rows[at + 1] = w === 2048 ? y * 255 / w : (y * 255 / w + (state >>> 8 & 31)) & 255;
-    rows[at + 2] = w === 2048 ? (x + y) & 255 : state >>> 20 & 255; rows[at + 3] = 255;
+    rows[at + 2] = w === 2048 ? (x + y) & 255 : state >>> 20 & 255; rows[at + 3] = soft ? [64,192,255][(x + y) % 3] : 255;
   }
   const chunk = (type, bytes) => {
     const result = Buffer.alloc(12 + bytes.length); result.writeUInt32BE(bytes.length); result.write(type, 4); bytes.copy(result, 8);
@@ -63,7 +65,7 @@ async function photo(index, w) {
   const head = Buffer.alloc(13); head.writeUInt32BE(w); head.writeUInt32BE(w, 4); head.set([8, 6, 0, 0, 0], 8);
   const bytes = Buffer.concat([Buffer.from([137,80,78,71,13,10,26,10]),chunk('IHDR', head),chunk('IDAT', deflateSync(rows, {level:1})),chunk('IEND', Buffer.alloc(0))]);
   await mkdir(resolve(output, 'sources'), { recursive:true });
-  await writeFile(resolve(output, 'sources', `noise${w}-${index}.png`), bytes);
+  await writeFile(resolve(output, 'sources', soft ? 'soft.png' : `noise${w}-${index}.png`), bytes);
   noise.set(key, bytes); return bytes;
 }
 async function body(req, limit) {
@@ -100,13 +102,14 @@ const server = createServer(async (req,res) => {
     }
     if (path === '/qa' || path === '/qa/') return send(200,await readFile(qa),'text/html');
     if (path === '/manifest') return send(200,{base:await manifest('base'),candidate:await manifest('candidate')});
+    if (path === '/soft.png') return send(200,await photo(0,1024,true),'image/png');
     const noiseMatch = path.match(/^\/noise\/(1024|2048)\/([0-9]|1[01])\.png$/);
     if (noiseMatch) return send(200,await photo(Number(noiseMatch[2]),Number(noiseMatch[1])),'image/png');
     if (/^\/fixtures\/(a\d{3}\.gif|dungeon\.gif|building[1-6]\.png)$/.test(path)) return send(200,await readFile(inside(fixtures,path.slice(10))),mime[extname(path)]);
     const match = path.match(/^\/(base|candidate)\/(.*)$/);
     if (!match) return send(404,{error:'Use /qa.'});
     const [,build,tail] = match, file = inside(resolve(sites,build),tail || 'index.html'); let bytes = await readFile(file);
-    if (!tail || tail === 'index.html') bytes = Buffer.from(bytes.toString().replace(/<script\s+type="module"/,preload(url.searchParams.get('seed'))+'<script type="module"'));
+    if (!tail || tail === 'index.html') bytes = Buffer.from(bytes.toString().replace(/<script\s+type="module"/,preload(url.searchParams.get('seed'),url.searchParams.get('cut'))+'<script type="module"'));
     return send(200,bytes,mime[extname(file)] ?? 'application/octet-stream');
   } catch(error) { return send(error.code==='ENOENT'?404:500,{error:error.message}); }
 });

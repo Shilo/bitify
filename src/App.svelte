@@ -537,26 +537,36 @@
   // Live analyses stay unpublished until the captured wall is ready. Never transfer
   // or mutate live buffers; canceled passes cannot replace a newer source/settings epoch.
   let analysisRequest;
+  function stopAnalysis() {
+    analysisRequest?.controller.abort();
+    analysisRequest = undefined;
+  }
   $effect.pre(() => {
-    if (family === 'full-palette') return;
+    if (family === 'full-palette') { stopAnalysis(); return; }
     const realWall = items, demo = realWall.length ? null : example;
     const selected = realWall.length ? realWall : demo ? [demo] : [];
     const settings = { source: analysisSource, alphaCut: selected.some(i => i.img.soft) ? analysisCut : 128 };
+    // A drag defers new heavy work, but must not cancel a pass for these same inputs.
+    // Keep a settled failure too: unrelated drag events must not silently retry it.
+    if (analysisRequest && (analysisRequest.realWall !== realWall || analysisRequest.demo !== demo
+      || analysisRequest.settings.source !== settings.source || analysisRequest.settings.alphaCut !== settings.alphaCut)) stopAnalysis();
     if (!selected.some(item => !analysisMatches(item, settings))) return;
+    if (analysisRequest) return;
     if (dragging && selected.reduce((n, item) => n + pixelsOf(item), 0) > 1e6) return;
     const controller = new AbortController();
-    analysisRequest = controller;
+    const request = { controller, realWall, demo, settings };
+    analysisRequest = request;
     const done = selected.reduce((n, item) => n + pixelsOf(item), 0) >= BUSY_PIXELS ? working('Updating images…') : () => {};
     reanalyzeItems(selected, settings, { signal: controller.signal }).then(next => {
-      if (controller.signal.aborted || analysisRequest !== controller || family !== 'two-color'
+      if (controller.signal.aborted || analysisRequest !== request || family !== 'two-color'
         || analysisSource !== settings.source || (selected.some(item => item.img.soft) && analysisCut !== settings.alphaCut)
         || items !== realWall || (!realWall.length && example !== demo)) return;
       if (realWall.length) items = next; else example = next[0];
     }).catch(error => {
       if (!controller.signal.aborted && error.name !== 'AbortError') say('Could not update images. Try changing Brightness or Opacity cut again.', 6000);
     }).finally(done);
-    return () => controller.abort();
   });
+  $effect(() => () => stopAnalysis());
 
   const imageImports = new Set(), exampleImportController = new AbortController();
   $effect(() => () => {

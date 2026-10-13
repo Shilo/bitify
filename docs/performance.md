@@ -1227,3 +1227,11 @@ remain synchronous; yielding is not a universal task-time bound.
 Independent overlapping exports may also own replacement analyses; this figure is
 not a bound on total transient memory. Actual-build acceptance and native Pixel task
 measurements are in `docs/research/2026-10-13-live-onebit-reanalysis.md`.
+
+Starting a slider drag retains an already running analysis for the same captured
+wall, Brightness and relevant Opacity cut. Dragging still defers a new heavy pass;
+changing those inputs or the family cancels obsolete work. The request has an
+explicit lifetime rather than the reactive effect's rerun lifetime. A settled
+failure is retained until its inputs change, preventing drag events from retrying it.
+Desktop and native Pixel touch checks close the reported drag freeze in
+`docs/research/2026-10-13-slider-reanalysis-resolution.md`.
