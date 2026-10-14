@@ -18,7 +18,8 @@ the original creator's machine. The app and trailer have separate npm dependenci
 | `video/assets/audio/music.mp3` | Active soundtrack, copied from the supplied sibling-project file | Ignored; local only |
 | `video/assets/audio/wholesome-source.mp3` | Previous soundtrack preserved as a local backup | Ignored; local only |
 
-The current compact export is 8,812,865 bytes (8.81 MB decimal). A fresh
+The compact export targets approximately 8.8 MB decimal. Its exact byte count is
+recorded in `.work/qa/production-manifest.json` after verification. A fresh
 render may differ with Chromium, FFmpeg, OS font rendering, or dependency changes.
 `npm run verify` checks the real file size, codec, frame count, streaming layout,
 decoded quality and browser playback. Only the compact MP4 belongs in Git. PNG
@@ -145,6 +146,14 @@ depends on elapsed wall-clock time; `renderFrame(t)` must remain deterministic.
 Professional, concise, dark neutral surfaces with Colorfetti's five confetti colors
 and actual SVG brand mark (`src/assets/logo-dark.svg`). Screens are real app captures;
 enlarged control crops make the edits readable. No voiceover. Music stays subtle.
+
+Phone frames use a modest 14px outer radius, 6px border and 6px inner padding at
+the 1920×1080 render size. The screenshot remains rectangular and sets its own
+height from its natural aspect ratio. Crossfade layers occupy that same inset
+screen rectangle. Do not round or crop the screenshot, use `object-fit: cover`,
+or force the outer frame to the screenshot's aspect ratio: the border and padding
+would change the available screen proportions and cut off the app UI.
+
 Intro and conclusion use empty app states, title, approved slogan, website and repository,
 with a mirrored closing composition that uses the surrounding background space.
 

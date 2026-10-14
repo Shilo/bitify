@@ -2,7 +2,7 @@
   {
     "slide": "Introduction / conclusion",
     "copy": "Approved Colorfetti name, slogan, purpose, website and GitHub repository URL.",
-    "image": "Actual empty app states on desktop and touch mobile.",
+    "image": "Actual empty app states on desktop and touch mobile. Phone screenshots retain their complete rectangular bounds inside a lightly rounded, padded frame.",
     "decision": "Retain matching bookends with a mirrored closing composition. Show github.com/Shilo/colorfetti below the primary yellow website URL, in smaller muted type. No music-credit footer."
   },
   {
