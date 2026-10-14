@@ -1074,7 +1074,7 @@
       </tbody>
     </table>
     <footer>
-      <a class="btn glass-btn help-trailer" href={trailerUrl} target="_blank" rel="noopener noreferrer" aria-label="Watch trailer (opens in a new tab)" use:tooltip={'Watch trailer (opens in a new tab)'}>Trailer<PixelIcon name="out" /></a>
+      <a class="btn glass-btn help-trailer" href={trailerUrl} target="_blank" rel="noopener noreferrer" aria-label="Watch trailer (opens in a new tab)" use:tooltip={'Watch trailer (opens in a new tab)'}>Trailer<PixelIcon name="trailer" /><PixelIcon name="out" /></a>
       <button class="btn primary glass-btn" onclick={() => help.close()}>Got it</button>
     </footer>
   </div>
