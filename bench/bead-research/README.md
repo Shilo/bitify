@@ -3,6 +3,10 @@
 Originally developed on `codex/fuse-bead-research` and retained on `main` after
 research review. **Research only; no production imports or UI changes.**
 
+Follow-up: [automatic mode decision](AUTOMATIC-DECISION.md) tests the minimal-input
+proposal without selected colors or keep masks. Its final recommendation is
+**do not add Patches; retain the existing Off/On behavior**.
+
 Start the existing dev server with `npm run dev`, then open
 `http://127.0.0.1:5173/bench/bead-research/index.html`.
 The main Colorfetti route remains unchanged. The bench offers source/24-color charts,
