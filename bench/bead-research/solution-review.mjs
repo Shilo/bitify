@@ -26,7 +26,7 @@ function render(){
 }
 async function load(){
  const own=++request,id=$('image').value;rects=[];first=null;marking=false;mode='spatial';selectedShades=new Set();outlineColor=null;$('status').textContent='Loading private local input…';
- try{const img=new Image();img.src=id==='original-prepared'?'../../.tmp/bead-research-private/fixtures/original-attachment-background-prepared.png':id==='original-raw'?'../../.tmp/bead-research-private/fixtures/original-attachment-native.png':`../../.tmp/bead-research-private/semantic-spike/${id}-original.png`;await img.decode();if(own!==request)return;
+ try{const img=new Image();img.src=id==='native-original'?'../../.tmp/bead-research-private/native-original/original.png':id==='original-prepared'?'../../.tmp/bead-research-private/fixtures/original-attachment-background-prepared.png':id==='original-raw'?'../../.tmp/bead-research-private/fixtures/original-attachment-native.png':`../../.tmp/bead-research-private/semantic-spike/${id}-original.png`;await img.decode();if(own!==request)return;
  const canvas=document.createElement('canvas');canvas.width=img.naturalWidth;canvas.height=img.naturalHeight;const ctx=canvas.getContext('2d');ctx.drawImage(img,0,0);const rgba=ctx.getImageData(0,0,canvas.width,canvas.height).data,colors=[],indexes=new Map(),labels=new Int32Array(canvas.width*canvas.height).fill(-1);
  for(let p=0;p<labels.length;p++)if(rgba[p*4+3]>=128){const c='#'+[0,1,2].map(k=>rgba[p*4+k].toString(16).padStart(2,'0')).join('');if(!indexes.has(c)){indexes.set(c,colors.length);colors.push(c);}labels[p]=indexes.get(c);}
  input={width:canvas.width,height:canvas.height,labels,colors};$('color').replaceChildren(new Option('All colors','all'),...colors.map((c,i)=>new Option(c,String(i))));render();

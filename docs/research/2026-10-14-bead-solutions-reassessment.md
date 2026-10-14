@@ -1,5 +1,9 @@
 # Bead conversion reassessment: useful assistance exists
 
+Follow-up: [exact native-original retest](2026-10-14-native-original-retest.md)
+tests the later 96×96, 24-color transparent attachment directly, without preprocessing.
+The opaque-source discussion below refers to the earlier enlarged attachment.
+
 October 14, 2026. Research only on main. Production Cleanup and application behavior
 are unchanged. All artwork, screenshots, derived PNGs and pixel payloads remain in
 ignored local scratch. This document contains text and aggregate measurements only.
