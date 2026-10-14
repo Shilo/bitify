@@ -27,8 +27,9 @@ source assets are tracked; a fresh checkout must restore the ignored music befor
 No Git LFS, external asset service or API keys are needed.
 
 The root README links to the deployed MP4 with a clickable poster; GitHub Markdown
-does not provide dependable inline playback for a committed MP4. Help has a
-“Watch the 30-second trailer” link that opens the same asset in a new tab. Vite
+does not provide dependable inline playback for a committed MP4. Help has a compact
+clapperboard icon link at the bottom left, labeled “Watch trailer (opens in a new tab)”,
+that opens the same asset in a new tab. Vite
 copies `public/` to the deployed site. A local commit does not update that site;
 the repository's existing Pages workflow deploys on a push to `main`.
 

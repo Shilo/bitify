@@ -1040,10 +1040,6 @@
         <p>Throw your pixels a palette party. Recolor images and animations.</p>
       </div>
     </header>
-    <a class="help-trailer" href={trailerUrl} target="_blank" rel="noopener noreferrer">
-      <span>Watch the 30-second trailer</span>
-      <small>Opens in a new tab</small>
-    </a>
     <ol>
       <li><PixelIcon name="import" /><b>Add</b>{touch ? 'Choose images.' : 'Choose, drop or paste images.'}</li>
       <li><PixelIcon name="grid" /><b>Palette</b>{family === 'full-palette' ? 'Use Auto, pick a palette or import your own.' : 'Pick a color pair or choose your own colors.'}</li>
@@ -1078,7 +1074,7 @@
       </tbody>
     </table>
     <footer>
-      <span>Images stay on your device.</span>
+      <a class="ib glass-btn help-trailer" href={trailerUrl} target="_blank" rel="noopener noreferrer" aria-label="Watch trailer (opens in a new tab)" use:tooltip={'Watch trailer (opens in a new tab)'}><PixelIcon name="trailer" /></a>
       <button class="btn primary glass-btn" onclick={() => help.close()}>Got it</button>
     </footer>
   </div>

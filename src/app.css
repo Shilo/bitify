@@ -218,13 +218,6 @@ button { font: inherit; color: inherit; }
 .help img { flex: none; width: 56px; height: 56px; image-rendering: pixelated; }
 .help h2 { margin: 0; font-family: var(--display); font-size: 24px; font-weight: 600; line-height: 1; }
 .help p { margin: 4px 0 0; color: var(--muted); text-wrap: balance; }
-.help-trailer {
-  display: flex; flex-direction: column; justify-content: center; gap: 3px;
-  min-height: 44px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px;
-  color: var(--fg); font-weight: 600; text-decoration: none;
-}
-.help-trailer:hover { background: var(--tile); }
-.help-trailer small { color: var(--muted); font-size: 12px; font-weight: 400; }
 /* the steps: an icon, a word and a line each */
 .help ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
 .help li { display: grid; grid-template-columns: auto 4em minmax(0, 1fr); gap: 10px; align-items: center; color: var(--muted); }
@@ -245,6 +238,12 @@ button { font: inherit; color: inherit; }
 .help kbd .ico { width: 10px; height: 10px; vertical-align: -1px; }
 .help footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 13px; }
 .help footer .btn { padding: 0 20px; font-size: 14px; }
+.help footer .help-trailer {
+  box-sizing: border-box; width: var(--control-size, 44px); height: var(--control-size, 44px);
+  min-width: 44px; min-height: 44px; padding: 0; border-radius: 50%;
+  color: var(--fg); text-decoration: none;
+}
+.help footer .help-trailer .ico { width: 18px; height: 18px; }
 
 @media (max-width: 520px) {
 

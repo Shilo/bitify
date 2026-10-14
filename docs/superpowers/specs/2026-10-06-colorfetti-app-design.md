@@ -525,10 +525,6 @@ under reduced motion. Top to bottom:
   The Colorfetti wordmark and approved description appear beside it:
   “Throw your pixels a palette party. Recolor images and animations.”
   A Close button sits in the top-right corner.
-- A full-width link below the header says “Watch the 30-second trailer”, with
-  “Opens in a new tab” beneath it. It opens the bundled `colorfetti-trailer.mp4`
-  through the app's base URL in a separate tab (`noopener noreferrer`). The video
-  is not fetched until the link is followed; Help remains open in the original tab.
 - Four steps, each an icon, a word and a line. The icons are the app's own: the plus of
   Add and the icons of the dock's Palette, settings and Download buttons. The first is worded
   for the device in use:
@@ -575,8 +571,13 @@ under reduced motion. Top to bottom:
   Style settings names the way to every setting of a style: with a mouse the Style button
   and then More on its strip, which opens the tray; on touch the Style button alone, since
   its panel shows them all as chips there. It has no key, and its Keyboard cell is empty.
-- A last row: "Images never leave your device." and a filled "Got it" button, which has
-  the focus when the dialog opens.
+- A last row has a compact, icon-only trailer link aligned left and a filled “Got it”
+  button aligned right. The trailer uses the Lucide clapperboard icon through
+  `PixelIcon`, a circular 44px target, and the shared tooltip and accessible name
+  “Watch trailer (opens in a new tab)”. It opens bundled `colorfetti-trailer.mp4`
+  through the app's base URL in a separate tab (`noopener noreferrer`). The video
+  is not fetched until the link is followed; Help remains open in the original tab.
+  There is no privacy line or separate trailer block in the dialog.
 
 Touch means a coarse main pointer, the same test the rest of the app uses. The steps give no
 counts of styles or palettes, which change, and the help says where a style's settings are
