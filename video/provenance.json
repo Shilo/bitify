@@ -6,7 +6,12 @@
       "page": "https://kenney.nl/assets/tiny-town",
       "download": "https://kenney.nl/media/pages/assets/tiny-town/a415fbeb49-1735736916/kenney_tiny-town.zip",
       "source": "Sample.png",
-      "crop": { "left": 400, "top": 0, "width": 440, "height": 440 },
+      "crop": {
+        "left": 400,
+        "top": 0,
+        "width": 440,
+        "height": 440
+      },
       "file": "assets/town.png",
       "license": "CC0",
       "changes": "Crop removes promotional footer; derivatives recolored in Colorfetti."
@@ -17,7 +22,12 @@
       "page": "https://kenney.nl/assets/pixel-platformer",
       "download": "https://kenney.nl/media/pages/assets/pixel-platformer/33bb4921eb-1696667883/kenney_pixel-platformer.zip",
       "source": "SampleA.png",
-      "crop": { "left": 210, "top": 0, "width": 440, "height": 440 },
+      "crop": {
+        "left": 210,
+        "top": 0,
+        "width": 440,
+        "height": 440
+      },
       "file": "assets/platformer.png",
       "license": "CC0",
       "changes": "Crop removes promotional footer; screenshots show actual Colorfetti conversions."
@@ -31,14 +41,21 @@
     "license": "SIL Open Font License 1.1"
   },
   "music": {
-    "title": "Wholesome",
-    "creator": "Kevin MacLeod",
-    "file": "assets/audio/wholesome-source.mp3",
-    "source": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Wholesome.mp3",
-    "page": "https://incompetech.com/music/royalty-free/index.html?Search=Search&isrc=USUAN1900022",
-    "license": "CC BY 4.0",
-    "licenseURL": "https://creativecommons.org/licenses/by/4.0/",
-    "edits": "Excerpt starts at 12 seconds, lasts 30 seconds; normalized and faded in/out."
+    "title": "Cinematic Trailer Music - Collection (supplied music.mp3)",
+    "creator": "Gregor Quendel",
+    "file": "assets/audio/music.mp3",
+    "sourcePage": "https://gregor-quendel.itch.io/cinematic-trailer-music-collection",
+    "creatorPage": "https://gregor-quendel.itch.io/",
+    "license": "CC BY-NC 4.0",
+    "licenseURL": "https://creativecommons.org/licenses/by-nc/4.0/",
+    "licenseEvidence": "Creator license comment on collection page; also credited in source project README. CC0 was not substantiated.",
+    "sha256": "fb9a931aac0f786febf5b1373d8996b8080bbad6a858a88eeb42699bd4d6aa03",
+    "bytes": 734771,
+    "ignored": true,
+    "restoreFrom": "../rg-backpack-planner/showcase-video/public/music.mp3 (sibling repository, if available)",
+    "excerptStartSeconds": 0,
+    "durationSeconds": 30,
+    "edits": "First 30 seconds of supplied 30.589-second file; normalized to subtle background level, 0.8-second fade in and 2.5-second fade out."
   },
   "comparison": {
     "original": "assets/town.png",
@@ -52,5 +69,11 @@
     "phoneCSS": "390x844, touch and mobile emulated",
     "devicePixelRatio": 2,
     "theme": "dark"
+  },
+  "archivedMusic": {
+    "file": "assets/audio/wholesome-source.mp3",
+    "metadata": "assets/audio/archive-wholesome.json",
+    "ignored": true,
+    "usedInCurrentExport": false
   }
 }

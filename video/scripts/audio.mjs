@@ -1,4 +1,14 @@
+import { existsSync } from "node:fs";
 import { assets, work, encode } from "./project.mjs";
+
+const source = assets + "/audio/music.mp3";
+if (!existsSync(source)) {
+  throw Error(
+    "Missing ignored local music source: " +
+      source +
+      ". See video/README.md for restoration instructions.",
+  );
+}
 
 await encode(
   [
@@ -7,9 +17,9 @@ await encode(
     "warning",
     "-y",
     "-ss",
-    "12",
+    "0",
     "-i",
-    assets + "/audio/wholesome-source.mp3",
+    source,
     "-t",
     "30",
     "-af",

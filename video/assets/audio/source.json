@@ -1,9 +1,17 @@
 {
-  "title": "Wholesome",
-  "creator": "Kevin MacLeod",
-  "url": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Wholesome.mp3",
-  "sourcePage": "https://incompetech.com/music/royalty-free/index.html?Search=Search&isrc=USUAN1900022",
-  "license": "Creative Commons Attribution 4.0",
-  "licenseURL": "https://creativecommons.org/licenses/by/4.0/",
-  "plannedEdits": "Excerpt, level reduction, fades"
+  "title": "Cinematic Trailer Music - Collection (supplied music.mp3)",
+  "creator": "Gregor Quendel",
+  "file": "assets/audio/music.mp3",
+  "sourcePage": "https://gregor-quendel.itch.io/cinematic-trailer-music-collection",
+  "creatorPage": "https://gregor-quendel.itch.io/",
+  "license": "CC BY-NC 4.0",
+  "licenseURL": "https://creativecommons.org/licenses/by-nc/4.0/",
+  "licenseEvidence": "Creator license comment on collection page; also credited in source project README. CC0 was not substantiated.",
+  "sha256": "fb9a931aac0f786febf5b1373d8996b8080bbad6a858a88eeb42699bd4d6aa03",
+  "bytes": 734771,
+  "ignored": true,
+  "restoreFrom": "../rg-backpack-planner/showcase-video/public/music.mp3 (sibling repository, if available)",
+  "excerptStartSeconds": 0,
+  "durationSeconds": 30,
+  "edits": "First 30 seconds of supplied 30.589-second file; normalized to subtle background level, 0.8-second fade in and 2.5-second fade out."
 }

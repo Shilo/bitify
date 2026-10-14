@@ -147,6 +147,7 @@ const report = {
   sharingSSIMvsMaster: ssim,
   nativePlayback: playback,
   render: JSON.parse(readFileSync(work + "/qa/render.json")),
+  music: JSON.parse(readFileSync(project + "/assets/audio/source.json")),
   editorial: JSON.parse(readFileSync(project + "/editorial-review.json")),
 };
 writeFileSync(

@@ -1,0 +1,13 @@
+{
+  "title": "Wholesome",
+  "creator": "Kevin MacLeod",
+  "url": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Wholesome.mp3",
+  "sourcePage": "https://incompetech.com/music/royalty-free/index.html?Search=Search&isrc=USUAN1900022",
+  "license": "Creative Commons Attribution 4.0",
+  "licenseURL": "https://creativecommons.org/licenses/by/4.0/",
+  "plannedEdits": "Excerpt, level reduction, fades",
+  "file": "assets/audio/wholesome-source.mp3",
+  "sha256": "9eadc79a1a2cb68cd63be1432ebf8f8ae3387cb9d2e85f9b8dbc74ba5a96b231",
+  "archived": true,
+  "notes": "Previous soundtrack, preserved locally and ignored. Not used by current exports."
+}

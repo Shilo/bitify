@@ -17,7 +17,7 @@ export const ffmpeg = process.env.FFMPEG_PATH || "ffmpeg";
 export const ffprobe = process.env.FFPROBE_PATH || "ffprobe";
 export const run = promisify(execFile);
 export const credit =
-  "Music: Wholesome by Kevin MacLeod (incompetech.com), CC BY 4.0 https://creativecommons.org/licenses/by/4.0/ . Edited excerpt. Artwork: Kenney, CC0.";
+  "Colorfetti — https://github.com/Shilo/colorfetti . Artwork: Kenney, CC0.";
 export const title = "Colorfetti — Recolor images and animations";
 
 for (const path of [

@@ -84,9 +84,6 @@
       views[i].setAttribute("aria-hidden", String(!active));
       if (active || previous) stage(i, t);
     }
-    root.querySelector(".cfs-music-credit").style.opacity = String(
-      index === 6 ? ease((t - 26.55) / 0.45) : 0,
-    );
     return { time: t, scene: shots[index].name };
   };
   window.filmReady = (async () => {

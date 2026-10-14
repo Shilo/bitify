@@ -48,6 +48,7 @@
 #cf-studio .cfs-slogan{margin:3.7cqw 0 0;font-size:3.35cqw;line-height:1.17;letter-spacing:-.035em}
 #cf-studio .cfs-purpose{margin:2.4cqw 0 0;font-size:1.65cqw;line-height:1.4;color:var(--cfs-muted)}
 #cf-studio .cfs-website{margin-top:4cqw;font-size:2.2cqw;line-height:1.3;letter-spacing:-.015em;color:var(--cfs-yellow);white-space:nowrap}
+#cf-studio .cfs-repository{margin-top:.65cqw;font-size:1.45cqw;line-height:1.4;letter-spacing:.005em;color:var(--cfs-muted);white-space:nowrap}
 #cf-studio .cfs-hero .cfs-desktop{left:45%;top:32%;width:50%;transform:perspective(1200px) rotateY(5deg) translateY(calc(var(--cfs-drift,0)*-1px));transform-origin:left center}
 #cf-studio .cfs-hero .cfs-phone{left:78%;top:9%;width:17%;transform:perspective(1200px) rotateY(-8deg) translateY(calc(var(--cfs-drift,0)*1px))}
 #cf-studio .cfs-end .cfs-bookend-copy{left:58%;top:21%;width:36.5%}
@@ -79,12 +80,12 @@
 @media(prefers-reduced-motion:reduce){#cf-studio .cfs-view{transition:none;transform:none}#cf-studio .cfs-desktop,#cf-studio .cfs-phone,#cf-studio .cfs-focus{transform:none!important}}
 @media(pointer:coarse){#cf-studio button{min-height:44px}}
 
-@font-face{font-family:Schibsted Grotesk;src:url(../assets/schibsted-grotesk.ttf);font-weight:100 900;font-style:normal;font-display:block}html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:#14151a;color-scheme:dark}#cf-studio{width:1920px;height:1080px}#cf-studio .cfs-film{width:1920px;height:1080px;border-radius:0}#cf-studio .cfs-view{transition:none!important}#cf-studio .cfs-phone{border-width:6px}#cf-studio .cfs-desktop{border-width:2px}#cf-studio .cfs-music-credit{position:absolute;bottom:24px;left:5.5%;right:5.5%;text-align:center;font-size:18px;line-height:1.45;color:#b7bbc8;z-index:6;opacity:0}#cf-studio .cfs-palette-stripe{height:5px}#cf-studio .cfs-caption{font-size:1.65cqw}#cf-studio .cfs-focus{border:1px solid #737d8f5c}#cf-studio img{backface-visibility:hidden}#cf-studio .cfs-crossfade{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}#cf-studio .cfs-focus .cfs-crossfade{height:auto}#cf-studio .cfs-focus{min-height:1px}</style></head><body><div id="cf-studio" aria-label="Colorfetti desktop and mobile trailer concept">
+@font-face{font-family:Schibsted Grotesk;src:url(../assets/schibsted-grotesk.ttf);font-weight:100 900;font-style:normal;font-display:block}html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:#14151a;color-scheme:dark}#cf-studio{width:1920px;height:1080px}#cf-studio .cfs-film{width:1920px;height:1080px;border-radius:0}#cf-studio .cfs-view{transition:none!important}#cf-studio .cfs-phone{border-width:6px}#cf-studio .cfs-desktop{border-width:2px}#cf-studio .cfs-palette-stripe{height:5px}#cf-studio .cfs-caption{font-size:1.65cqw}#cf-studio .cfs-focus{border:1px solid #737d8f5c}#cf-studio img{backface-visibility:hidden}#cf-studio .cfs-crossfade{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}#cf-studio .cfs-focus .cfs-crossfade{height:auto}#cf-studio .cfs-focus{min-height:1px}</style></head><body><div id="cf-studio" aria-label="Colorfetti desktop and mobile trailer concept">
 
  <div class="cfs-film">
   <div class="cfs-ambient"></div>
   <section class="cfs-view cfs-hero cfs-bookend" data-scene="0" aria-label="Colorfetti introduction and initial app state">
-   <div class="cfs-bookend-copy"><div class="cfs-bookend-brand"><img data-asset="logo" alt=""/><h2>Colorfetti</h2></div><p class="cfs-slogan">Throw your pixels<br>a palette party.</p><p class="cfs-purpose">Recolor images and animations.</p><div class="cfs-website">shilo.github.io/colorfetti</div></div>
+   <div class="cfs-bookend-copy"><div class="cfs-bookend-brand"><img data-asset="logo" alt=""/><h2>Colorfetti</h2></div><p class="cfs-slogan">Throw your pixels<br>a palette party.</p><p class="cfs-purpose">Recolor images and animations.</p><div class="cfs-website">shilo.github.io/colorfetti</div><div class="cfs-repository">github.com/Shilo/colorfetti</div></div>
    <div class="cfs-desktop"><img data-asset="desktop-empty" alt="Colorfetti desktop before adding artwork"/></div><div class="cfs-phone"><img data-asset="phone-empty" alt="Colorfetti mobile before adding artwork"/></div>
   </section>
   <section class="cfs-view cfs-palettes" data-scene="1" aria-label="Desktop palette selection">
@@ -109,8 +110,8 @@
    <span class="cfs-eyebrow">THE RESULT</span><h2>Compare the results.</h2>
    <div class="cfs-triptych"><figure><div><img data-asset="original" alt="Original Kenney Tiny Town artwork"/></div><figcaption>Original<span>Kenney · Tiny Town</span></figcaption></figure><figure><div><img data-asset="palette-result" alt="Actual palette result from Colorfetti"/></div><figcaption>Palette<span>PICO-8 · 8 colors</span></figcaption></figure><figure><div><img data-asset="onebit-result" alt="Actual black-and-white 1-bit result from Colorfetti"/></div><figcaption>1-bit<span>Black &amp; white</span></figcaption></figure></div>
   </section>
-  <section class="cfs-view cfs-end cfs-bookend" data-scene="6" aria-label="Colorfetti conclusion and app website"><div class="cfs-desktop"><img data-asset="desktop-empty" alt="Colorfetti desktop initial state"/></div><div class="cfs-phone"><img data-asset="phone-empty" alt="Colorfetti mobile initial state"/></div><div class="cfs-bookend-copy"><div class="cfs-bookend-brand"><img data-asset="logo" alt=""/><h2>Colorfetti</h2></div><p class="cfs-slogan">Throw your pixels<br>a palette party.</p><p class="cfs-purpose">Recolor images and animations.</p><div class="cfs-website">shilo.github.io/colorfetti</div></div></section>
-  <div class="cfs-music-credit">Music: “Wholesome” by Kevin MacLeod · incompetech.com<br>CC BY 4.0 · creativecommons.org/licenses/by/4.0/ · Edited excerpt</div><div class="cfs-palette-stripe"><span></span><span></span><span></span><span></span><span></span></div>
+  <section class="cfs-view cfs-end cfs-bookend" data-scene="6" aria-label="Colorfetti conclusion and app website"><div class="cfs-desktop"><img data-asset="desktop-empty" alt="Colorfetti desktop initial state"/></div><div class="cfs-phone"><img data-asset="phone-empty" alt="Colorfetti mobile initial state"/></div><div class="cfs-bookend-copy"><div class="cfs-bookend-brand"><img data-asset="logo" alt=""/><h2>Colorfetti</h2></div><p class="cfs-slogan">Throw your pixels<br>a palette party.</p><p class="cfs-purpose">Recolor images and animations.</p><div class="cfs-website">shilo.github.io/colorfetti</div><div class="cfs-repository">github.com/Shilo/colorfetti</div></div></section>
+  <div class="cfs-palette-stripe"><span></span><span></span><span></span><span></span><span></span></div>
  </div>
 </div><!-- FILM_RUNTIME -->
 </body></html>

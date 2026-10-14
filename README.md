@@ -78,3 +78,5 @@ The full design is in [docs/superpowers/specs/2026-10-06-colorfetti-app-design.m
 ## Deferred work
 
 [MP4 import feasibility and deferred task](docs/research/2026-10-11-mp4-support.md) records the tested browser-decoding approach, memory and compatibility limits, and proposed scope for MP4 import with GIF export. MP4 app support is not implemented; MP4 export is deferred separately.
+
+Trailer video music from **[Cinematic Trailer Music - Collection](https://gregor-quendel.itch.io/cinematic-trailer-music-collection)** by [Gregor Quendel](https://gregor-quendel.itch.io/) (CC BY-NC 4.0). Edited excerpt, with volume adjustment and fades.

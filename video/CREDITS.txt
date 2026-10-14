@@ -1,10 +1,12 @@
 COLORFETTI TRAILER — ASSET AND MUSIC CREDITS
 
-Music: "Wholesome" by Kevin MacLeod (incompetech.com)
-Licensed under Creative Commons Attribution 4.0
-https://creativecommons.org/licenses/by/4.0/
-Source: https://incompetech.com/music/royalty-free/index.html?Search=Search&isrc=USUAN1900022
-Changes: excerpt from 00:12, cut to 30 seconds, normalized to a subtle background level, fade in and fade out.
+Music from Cinematic Trailer Music - Collection by Gregor Quendel
+https://gregor-quendel.itch.io/cinematic-trailer-music-collection
+https://gregor-quendel.itch.io/
+Licensed under Creative Commons Attribution-NonCommercial 4.0
+https://creativecommons.org/licenses/by-nc/4.0/
+Changes: first 30 seconds of supplied music.mp3, normalized, fade in and fade out.
+Attribution: bottom of repository README; no on-screen music credit or music attribution in MP4 metadata.
 
 Artwork: Kenney — Tiny Town 1.1 and Pixel Platformer 1.2
 https://kenney.nl/assets/tiny-town
@@ -20,4 +22,7 @@ App screens and recoloring output: current local Colorfetti application captures
 Colorfetti brand: source SVG logo and exact identity colors.
 
 Recommended posting credit:
-Music: "Wholesome" by Kevin MacLeod (incompetech.com), CC BY 4.0 — https://creativecommons.org/licenses/by/4.0/ . Edited excerpt. Artwork: Kenney (CC0).
+Music from Cinematic Trailer Music - Collection by Gregor Quendel, CC BY-NC 4.0 — https://gregor-quendel.itch.io/cinematic-trailer-music-collection . Edited excerpt. Artwork: Kenney (CC0).
+
+Previous soundtrack is retained locally only: assets/audio/wholesome-source.mp3.
+Its source and CC BY 4.0 attribution are preserved in assets/audio/archive-wholesome.json.

@@ -8,6 +8,8 @@ function scan(dir) {
     withFileTypes: true,
   }).sort((a, b) => a.name.localeCompare(b.name))) {
     const path = dir + "/" + entry.name;
+    // Local music and its archived predecessor are intentionally excluded from Git.
+    if (path.startsWith("assets/audio/") && path.endsWith(".mp3")) continue;
     if (entry.isDirectory()) scan(path);
     else {
       let bytes = readFileSync(project + "/" + path);

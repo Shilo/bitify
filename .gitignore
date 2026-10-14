@@ -18,6 +18,7 @@ dist
 # Trailer sources live in video/; only the compact public MP4 is committed.
 /video/.work/
 /video/*.log
+/video/assets/audio/*.mp3
 /output/colorfetti-trailer/
 
 # Private bead research inputs, derived images and embedded pixel payloads.

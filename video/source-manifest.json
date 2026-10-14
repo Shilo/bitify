@@ -1,14 +1,15 @@
 [
   {
-    "path": "assets/audio/source.json",
+    "path": "assets/audio/archive-wholesome.json",
     "encoding": "UTF-8, LF canonical line endings",
-    "bytes": 412,
-    "sha256": "52644e39bf883dd6d0272d0de7530d5922965a0b10e919779dffbe0b4cd8ba42"
+    "bytes": 655,
+    "sha256": "d9bf3b85a70eedf89f4550af776f43105cb110318c0d6534a3a514fde7f485d3"
   },
   {
-    "path": "assets/audio/wholesome-source.mp3",
-    "bytes": 14556390,
-    "sha256": "9eadc79a1a2cb68cd63be1432ebf8f8ae3387cb9d2e85f9b8dbc74ba5a96b231"
+    "path": "assets/audio/source.json",
+    "encoding": "UTF-8, LF canonical line endings",
+    "bytes": 937,
+    "sha256": "c69ea5cc61e0b6bee5702e3017116cc6c271c6cc84f8208467380b03d97cc127"
   },
   {
     "path": "assets/captures/comparison-solid.png",

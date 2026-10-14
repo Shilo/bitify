@@ -2,7 +2,8 @@
 
 Start here when an agent or editor resumes work on the trailer. This directory
 contains the editable composition, deterministic animation code, actual app
-captures, original artwork crops, original music, font, licenses, and export tools.
+captures, original artwork crops, font, licenses, and export tools. Music files
+are kept locally and gitignored; their source metadata and restoration steps are tracked.
 It has no dependency on `.tmp/`, a Codex conversation, a remote design mockup, or
 the original creator's machine. The app and trailer have separate npm dependencies.
 
@@ -14,12 +15,14 @@ the original creator's machine. The app and trailer have separate npm dependenci
 | `public/colorfetti-trailer-poster.png` | Intro still linked near the top of the root README | Tracked |
 | `output/colorfetti-trailer/colorfetti-trailer-1080.mp4` | 1080 master, CRF 17 video / 192 kbps audio | Ignored; regenerate locally |
 | `video/.work/` | Generated HTML, enlarged control crops, mixed audio, QA stills, logs and reports | Ignored |
+| `video/assets/audio/music.mp3` | Active soundtrack, copied from the supplied sibling-project file | Ignored; local only |
+| `video/assets/audio/wholesome-source.mp3` | Previous soundtrack preserved as a local backup | Ignored; local only |
 
-The original accepted compact export is 8,808,894 bytes (8.81 MB decimal). A fresh
+The current compact export is 8,812,865 bytes (8.81 MB decimal). A fresh
 render may differ with Chromium, FFmpeg, OS font rendering, or dependency changes.
 `npm run verify` checks the real file size, codec, frame count, streaming layout,
-decoded quality and browser playback. Only the compact MP4 belongs in Git. Original
-audio and PNG source assets are deliberately tracked so a fresh checkout can render.
+decoded quality and browser playback. Only the compact MP4 belongs in Git. PNG
+source assets are tracked; a fresh checkout must restore the ignored music before exporting.
 No Git LFS, external asset service or API keys are needed.
 
 The root README links to the deployed MP4 with a clickable poster; GitHub Markdown
@@ -43,8 +46,27 @@ npm --prefix video ci
 cd video
 npx playwright install chromium
 npm run qa
-npm run preview
 ```
+
+Restore `video/assets/audio/music.mp3` before `preview`, `audio`, `render`, or `export`.
+On this workstation the supplied source is in the sibling `rg-backpack-planner`
+repository. From the Colorfetti repository root, in PowerShell:
+
+```powershell
+Copy-Item -LiteralPath '..\rg-backpack-planner\showcase-video\public\music.mp3' -Destination 'video\assets\audio\music.mp3'
+npm --prefix video run preview
+```
+
+On another machine, restore the same file from your own backup or obtain the track
+from the collection linked in `assets/audio/source.json`. That record contains the
+expected size and SHA-256; the particular track title is not known from the supplied
+file. The current source is 734,771 bytes, SHA-256
+`fb9a931aac0f786febf5b1373d8996b8080bbad6a858a88eeb42699bd4d6aa03`.
+Neither soundtrack is downloaded automatically or added to the tracked manifest.
+The previous `wholesome-source.mp3` remains locally in the same folder, with its
+source, license and hash in tracked `archive-wholesome.json`. Restoring the previous
+music requires changing the audio input and 12-second excerpt offset, and restoring
+its CC BY 4.0 attribution; never silently use it as a fallback for missing new music.
 
 The preview server prints a local URL and provides play/pause, audio, and a scrubber.
 Stop it with Ctrl+C. After editing source, rebuild (`npm run build`) and refresh.
@@ -87,12 +109,14 @@ Linux hosts may also need `npx playwright install-deps chromium`.
 |---|---|
 | `composition.html` | All headlines, bookend branding, device frames, layout and CSS |
 | `timeline.json` | Scene boundaries, capture order and per-control captions |
-| `runtime.js` | Time-based crossfades, drift, comparison reveals and credit fade |
+| `runtime.js` | Time-based crossfades, drift and comparison reveals |
 | `assets/captures/*.png` | Frozen real app screenshots, desktop and touch mobile |
 | `assets/captures/metadata.json` | CSS panel bounds, viewport and DPR for focus crops |
 | `assets/town.png`, `assets/platformer.png` | The two CC0 example scenes |
 | `assets/palette-result.png`, `assets/onebit-solid.png` | Actual full-resolution app results used in the comparison |
-| `assets/audio/wholesome-source.mp3` | Original licensed music; keep this source |
+| `assets/audio/music.mp3` | Active licensed music; ignored local source |
+| `assets/audio/wholesome-source.mp3` | Previous music; ignored local backup |
+| `assets/audio/source.json`, `assets/audio/archive-wholesome.json` | Active and archived music provenance and hashes |
 | `assets/schibsted-grotesk.ttf` | Local variable font for reproducible, network-free rendering |
 | `scripts/build.mjs` | Asset mapping and focus-crop generation |
 | `scripts/audio.mjs` | Excerpt, level and fades |
@@ -100,7 +124,7 @@ Linux hosts may also need `npx playwright install-deps chromium`.
 | `scripts/encode.mjs` | Compact bitrate, two-pass settings and strict size gate |
 | `scripts/capture.mjs` | Browser actions that recreate the real UI and result captures |
 | `scripts/verify.mjs` | Technical validation and generated production report |
-| `scripts/project.mjs` | Portable paths, tool overrides, export names and metadata credits |
+| `scripts/project.mjs` | Portable paths, tool overrides, export names and MP4 metadata |
 | `editorial-review.json` | Copy/image decisions and rejected ambiguous claims |
 | `source-manifest.json` | Baseline source/license byte counts and SHA-256 hashes |
 | `baseline-manifest.json` | Historical technical evidence for the approved export, using its original filenames |
@@ -121,21 +145,24 @@ depends on elapsed wall-clock time; `renderFrame(t)` must remain deterministic.
 Professional, concise, dark neutral surfaces with Colorfetti's five confetti colors
 and actual SVG brand mark (`src/assets/logo-dark.svg`). Screens are real app captures;
 enlarged control crops make the edits readable. No voiceover. Music stays subtle.
-Intro and conclusion use empty app states, title, approved slogan and website,
+Intro and conclusion use empty app states, title, approved slogan, website and repository,
 with a mirrored closing composition that uses the surrounding background space.
 
 | Time | Headline / focus | Visible material |
 |---|---|---|
-| 0–3 s | Colorfetti + slogan + website | Empty desktop and phone app |
+| 0–3 s | Colorfetti + slogan + website + repository | Empty desktop and phone app |
 | 3–7 s | Choose a palette. | Tiny Town: Auto → ENDESGA 32 → PICO-8 |
 | 7–12 s | Fine-tune your palette. | Max colors All → 16 → 8, then Cleanup On |
 | 12–16 s | Explore two-color looks. | Phone/platform scene: Mono → Game Boy → Rose |
 | 16–21 s | Tune the 1-bit effect. | Phone: threshold Auto → 140, pattern matrix 4 → 8 |
 | 21–26 s | Compare the results. | Same town source: original / PICO-8 with 8 colors and Cleanup On / Mono + Solid |
-| 26–30 s | Colorfetti + slogan + website | Empty desktop and phone; music attribution footer |
+| 26–30 s | Colorfetti + slogan + website + repository | Empty desktop and phone; no music-credit footer |
 
 Use the exact slogan: “Throw your pixels a palette party. Recolor images and
 animations.” Website: `shilo.github.io/colorfetti`.
+Place `github.com/Shilo/colorfetti` below it on both bookends, in smaller muted
+type. The website remains the primary yellow call to action; both URLs omit the
+scheme for readability and map to their HTTPS addresses.
 
 Keep the user-approved constraints: show desktop **and** mobile; focus on palettes,
 1-bit palettes, max colors, cleanup, and 1-bit settings. Do not add dedicated
@@ -175,13 +202,15 @@ capture: a built static app avoids optimizer stalls and stale CSS.
 After intentionally changing assets, regenerate `source-manifest.json` using
 `node scripts/source-manifest.mjs`, then rebuild, visually inspect and export. The
 manifest uses canonical UTF-8/LF bytes for text to remain useful across Git line-ending
-settings. It is an inventory, not a substitute for reviewing images and license terms.
+settings and excludes ignored MP3 files. It is an inventory, not a substitute for
+reviewing images and license terms.
 
 ## Quality checks and release
 
 Inspect `.work/qa/frame-*.png` and the whole encoded compact video. Check for cropped
 type, overlapping device frames, readable settings, clean transitions, music fades,
-and the closing credit. Listen with headphones as well as speakers.
+and both bookend URLs. There must be no music-credit overlay. Listen with headphones
+as well as speakers.
 
 `verify` checks 1920×1080 H.264/yuv420p, 900 frames at 30 fps, AAC stereo at 48 kHz,
 duration within 0.1 seconds, MP4 fast-start (`moov` before `mdat`), **strictly less
@@ -193,9 +222,10 @@ Chromium playback. It extracts encoded QA frames and writes
 The compact uses two-pass 2200 kbps H.264 and 128 kbps AAC. If duration/content changes
 push it over the limit, lower video bitrate and run `share` and `verify` again.
 Keep headroom under the cap. The master uses CRF 17 and is not size-constrained.
-Audio takes the original track from 00:12 for 30 seconds, fades in over 0.8 seconds
+Audio takes the first 30 seconds of the supplied 30.589-second file, fades in over 0.8 seconds
 and out over the last 2.5 seconds, and applies loudness normalization targeting
-−23 LUFS / −3 dBTP (original measured result −23.2 LUFS / −10.2 dBTP).
+−23 LUFS / −3 dBTP. The current prepared WAV measures −23.41 LUFS integrated and
+−4.93 dBTP. Do not reuse the old track's measured loudness values for this track.
 
 For app integration changes, run `npm test` and `npm run build` from the root.
 Check Help on desktop and touch mobile, in light and dark themes. Verify the link
@@ -210,16 +240,18 @@ Do not publish/push merely to validate a local preview.
 
 ## Attribution
 
-Music is **“Wholesome” by Kevin MacLeod (incompetech.com), CC BY 4.0**. Its
-attribution is embedded in the closing frame, MP4 metadata and `CREDITS.txt`.
-Retain credit in derivative exports. Recommended text for GitHub/Discord posts:
-
-> Music: “Wholesome” by Kevin MacLeod (incompetech.com),
-> [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Edited excerpt.
-> Artwork: Kenney (CC0).
+Current music comes from **Cinematic Trailer Music - Collection by Gregor Quendel**.
+The creator identifies the collection as **CC BY-NC 4.0** on its itch.io page;
+the supplied source project's README uses that same license. CC0 was not verified.
+The bottom of the repository README carries attribution and describes the edits.
+The trailer has no on-screen music credit or music attribution in its MP4 metadata.
+Keep the README attribution when distributing this version. `CREDITS.txt` records
+both the active source and the archived previous soundtrack's provenance.
 
 Artwork comes from Kenney Tiny Town 1.1 and Pixel Platformer 1.2 (CC0); the cropped
 scenes and actual app conversions are tracked. Schibsted Grotesk is OFL 1.1; retain
 its license when redistributing the font. Full source URLs, crop coordinates and
 edits are in `provenance.json`. These third-party licenses apply independently of
 the application's license.
+
+Trailer video music from **[Cinematic Trailer Music - Collection](https://gregor-quendel.itch.io/cinematic-trailer-music-collection)** by [Gregor Quendel](https://gregor-quendel.itch.io/) (CC BY-NC 4.0). Edited excerpt, with volume adjustment and fades.
