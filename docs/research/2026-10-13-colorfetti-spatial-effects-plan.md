@@ -1,36 +1,55 @@
-# Colorfetti spatial visual effects plan
+# Deferred Colorfetti confetti effects
 
-Make Colorfetti feel like a creative workspace where images arrive, leave and are sent out. Use a transparent effect layer spanning the application viewport, with particles emitted at the image or action location. Keep the image data, conversion state and exported files unchanged.
+**Status: Deferred on October 13, 2026.** The user remained dissatisfied with the visual design and stopped exploration. No production effect has been implemented. The prototype is an unfinished reference, not an approved design or a plan authorized for execution.
 
-The selected direction is **Paper pop at Balanced** for import, individual removal and Save: an incoming image lands with a short scatter, a removed image leaves a smaller puff, and Save sends a directional plume into the workspace. Effects render above the entire application interface, including the Save control. Useful confirmations remain ordinary readable text.
+The feature under consideration is spatial, randomized falling confetti for **import, individual image removal and Save**, based on the Paper pop Balanced experiment. Its goal is to make images feel like physical objects arriving, leaving and being sent out, while keeping recoloring useful and professional. Preserve image data, conversion state and exported files.
 
-The [interactive prototype](colorfetti-spatial-effects-preview.html) uses the selected effect for Import, Remove and Save. It offers small tiles, a large single image, tall and wide image layouts, a movable drop point, both themes and motion suppression. This is a design prototype; production behavior is unchanged.
+The [retained prototype](colorfetti-spatial-effects-preview.html) simulates these actions with small, large, tall and wide images, a movable drop point, both themes and motion suppression. Preserve it as evidence of the investigation. Revisit the visual design with the user before implementing or shipping it.
 
-## Recommended events
+## Requested behavior
+
+- Effects happen in the workspace at a meaningful image or action location, rather than being confined to a notification badge.
+- Every burst varies its launch directions, positions, dimensions, color order, velocities and timing. Sample randomness once per burst; do not introduce frame-to-frame flicker.
+- Confetti explodes outward, loses momentum and **continues falling naturally** as it fades.
+- For an image filling most of the screen, spread near its visible edges while staying inside the image region. The rectangle is a movement boundary, not an outline for particles to assemble into or stop on.
+- Render above the application interface, including the Save button, while allowing input through the decorative layer.
+- Keep the exact Colorfetti logo palette and maintain usable confirmations separately from decoration.
+
+The event contexts and these constraints are established preferences. The appearance, physics and tuning remain unresolved.
+
+## Events and completion semantics
 
 | Event | Spatial effect | Trigger and purpose |
 | --- | --- | --- |
-| Successful image arrival | 44 flat pieces scatter around a small tile or in an expanding rectangle inside a large/edge-constrained image | Shows where the new image entered the workspace. Start after publication and a visible tile are established, not at file-picker opening. |
-| Remove one image | 20 pieces leave its former region and quickly fade, using the same adaptive placement | A tactile departure acknowledges removal. It is smaller than import/export and should feel like clearing space, not winning a prize. |
-| Export handoff | 44 pieces rise from Save or the relevant image corner, above the control, then fall away | A send-off connects the result to the person's action. Fire after complete encoding and browser handoff; the browser cannot confirm the eventual disk save. |
-| New custom palette save | Optional short paper fan above the Palette control | A later extension for a reusable creative choice; first verify the core image effects. |
+| Successful image arrival | Randomized splash at the arriving tile or recent drop point | Start after publication and the designated image's first usable visible draw, not at file-picker opening. |
+| Remove one image | Short departure response at its captured former bounds | Removal takes effect immediately. It should feel like clearing space, not winning a prize. |
+| Save or Save all handoff | Upward send-off at Save or the relevant image action | Fire after complete encoding and browser handoff. The browser cannot confirm eventual disk save. One ZIP is one event, not a burst per file. |
 
-**The approved scope is import, individual removal and Save, all at Balanced.** Arrival/departure create the sense of physical objects entering and leaving; Save uses the matching send-off.
+A viewport-sized effect layer provides free movement across UI boundaries. Actual travel should adapt to the visible image or control rather than requiring a screen-wide shower. Copy, palette saving, installation and Remove all effects are outside this deferred feature's scope.
 
-A viewport-sized overlay does not require a screen-wide shower. Starting at a meaningful location and allowing pieces to travel freely for roughly 100–250px gives the effect room to exist in the workspace. The Playful study intentionally explores a wider envelope for comparison.
-
-## Selected placement behavior
+## Placement requirements
 
 | Situation | Placement |
 | --- | --- |
 | Small image with surrounding room | Perimeter scatter, preserving the chosen Paper pop feel. |
-| One image fills most of the wall | Rectangular expansion from an interior origin to its padded inner edges; no burst from the screen edges. |
-| Narrow image or tile close to a viewport edge | The same interior-rectangle fallback, sized to both visible dimensions. |
-| Dropped image | Use the deliberate drop point when appropriate; constrain an interior-rectangle origin to a safe location within the visible image. |
+| One image fills most of the wall | A randomized explosion that spreads near the image edges and then falls; its full path fits inside the visible image. |
+| Narrow image or tile close to a viewport edge | The same contained falling splash, with movement adapted to both visible dimensions. |
+| Dropped image | Use the deliberate drop point when appropriate; constrain an interior origin to a safe location within the visible image. |
 | Removal | Capture the old image rectangle first; clear the image immediately, then use that region for its departure response. |
 | Save | Keep the upward control-origin plume, with lateral travel fitted to viewport space and reduced gravity so pieces stay visible. |
 
-The rectangular splash expands to the visible image's padded inner edges, then stops expanding and fades. Each particle's endpoint includes its own width/height so the entire piece stays inside the image. Fresh per-burst randomness varies origins, perimeter positions, dimensions, palette order, speeds, start delays and fade timing; the approved five colors and Balanced counts remain fixed. Random values are sampled once per event, keeping each particle's path stable during playback.
+Measure the actually displayed image region, accounting for letterboxing, aspect ratio, inset and viewport clipping. Do not use the entire figure including its caption, or an offscreen portion of a large image, as the containment rectangle. Capture removal geometry before the element disappears; remeasure living async anchors at completion.
+
+The last prototype used damped velocity plus gravity: `x = x0 + vx × D(t) + flutter`, `y = y0 + vy × D(t) + 0.5 × g × t²`, where `D(t) = (1 − exp(−drag × t)) / drag`. It fitted horizontal travel and vertical extrema to available space once at creation. Scaling vertical velocity and gravity together retained the falling trajectory instead of parking particles on a border. This is an implementation experiment to revisit, not finished motion to copy directly.
+
+## Lessons from rejected approaches
+
+| Approach | Why it did not meet the request |
+| --- | --- |
+| Tiny confetti inside a status badge | Too restrained and disconnected from the workspace; the user wanted spatial, immersive effects. |
+| Reusing deterministic particle parameters | Bursts looked static and repetitive. Fresh randomness must affect every event. |
+| Expanding circular or rectangular formation that stops at its outline | Lost the falling-confetti behavior. Bounds should constrain a natural explosion, not become destinations. |
+| Latest fitted ballistic prototype | Technical checks passed, but the user still disliked the design. Containment and frame timing do not establish visual acceptance. |
 
 ## Why this direction fits
 
@@ -41,32 +60,6 @@ Nielsen Norman Group describes animation as useful for feedback and spatial rela
 Carbon distinguishes subtle productive motion from expressive motion reserved for important moments. Import/removal can receive a compact physical response; more expressive export motion can be bounded independently. Neither model requires animation on every control press. [Carbon motion guidance](https://www.carbondesignsystem.com/building-blocks/foundations/motion/overview).
 
 Interface animation timing guidance favors short feedback. The proposed particle lifespans are longer than a button acknowledgment because particles travel further, but the underlying action takes effect immediately and never waits for their disappearance. Paper pop lasts 650ms for removal and 950ms for import/Save; tune downward if repeated use feels distracting. These are design starting points, not validated performance or preference findings. [NN/g timing guidance](https://www.nngroup.com/articles/animation-duration/).
-
-## More ideas considered
-
-| Idea | Natural event or location | Decision |
-| --- | --- | --- |
-| Landing scatter | First visibly published image from an import batch | Recommended core effect. |
-| Drop impact | Actual drop coordinates, followed by the arriving image | Good for fast imports; fall back to the actual tile for slow or distant arrivals. |
-| Magnetic stream | Drop/import origin to new tile | Prototype alternative; only use a short, coherent path. |
-| Corner confetti | New tile perimeter/corners | Quieter form of Paper pop for dense walls. |
-| Departure puff | Removed tile's captured former bounds | Recommended core effect. |
-| Removal vacuum | Former tile perimeter contracts inward | Good alternative to outward departure; avoid making it look like an upload. |
-| Directional send-off | Save control or originating image | Recommended companion after browser handoff. |
-| ZIP parcel | Save all gathers a small packet then sends it away | Optional later; one event per batch, never per file. |
-| Palette fan | New saved palette near Palette control | Optional later; no particles for every swatch edit. |
-| Palette transfer | Former editor region to a newly saved rail entry | Defer. The destination can be offscreen or hidden. |
-| Copy lift | Copied tile toward Copy control | Defer. Repeated copying may benefit more from a simple check. |
-| Sparse pixel wave | Local expanding/inward shader pulse | Prototype challenger; preserve the actual checker and media. |
-| Droplet of confetti | Touch drop/arrival coordinates | Same semantic effect as pointer input, with identical meaning and smaller screen-aware travel. |
-| Last-image departure | Last tile's old bounds; empty example appears normally | Same departure vocabulary, with no animated reconstruction of the logo. |
-| Remove all sweep | Confirmed removal clears the wall | Defer. Prefer one sparse aggregate response if added, not a puff for every removed item. |
-| Image disintegration | A departing picture appears to break into its own colored pixels | Visually strong but defer: capturing content adds memory, can duplicate animated surfaces and makes deleted media seem to remain. Brand-colored proxy pieces are simpler. |
-| Image displacement shader | Ripple bends the actual picture | Reject for this use: changes what the user sees while judging image conversion and would require an image rendering/filter pipeline. |
-| Pointer trail | Particles follow routine movement | Reject. Constant motion, poor touch parity and no meaningful event. |
-| Generic click burst | Any mouse/touch click emits confetti | Reject. No distinction between choosing, completing, comparing or dismissing. |
-| Palette/style change fireworks | Palette clicks, wheel stepping or slider changes | Reject. Rapid experimentation and reactive work need a stable image. |
-| Ambient falling confetti | Continuous idle decoration | Reject. Uses attention/resources without communicating anything useful. |
 
 ## Color and material
 
@@ -96,7 +89,7 @@ PixiJS supports particle containers and WebGL/WebGPU filters, including displace
 | tsParticles | Multiple emitter/path systems and extensive configuration | Defer; avoid an all-features bundle for three event types. |
 | PixiJS and image filters | A future app already built around a scene renderer | Defer; changing the actual media presentation is outside this feature. |
 
-The selected prototype uses only Canvas2D. Alternative renderers informed the research, but no shader or particle-library runtime is required for Paper pop.
+The retained prototype uses only Canvas2D. A shader or external particle-library runtime is not necessary for the investigated falling-confetti effect.
 
 For production, initialize optional renderers without holding the user action, cap backing resolution, and release GPU resources on teardown. MDN recommends accounting for per-pixel memory, rendering at a smaller back buffer when appropriate and avoiding blocking API calls. Scissoring limits the portion of the framebuffer processed by a local effect. [WebGL best practices](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/WebGL_best_practices), [scissor reference](https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/scissor).
 
@@ -115,7 +108,6 @@ A fresh read-only subagent audit confirmed that a transient viewport overlay is 
 | Mobile Share-sheet removal | Use the underlying shared tile, not the closing sheet button. Restore focus through the existing path. |
 | `App.svelte`, `save` / `saveEverything` | Pass explicit action metadata rather than discarding the original event. Remeasure a still-live action anchor when encoding completes; skip a stale spatial effect if its surface disappeared. |
 | `ImageViewer.svelte` | Own a separate effect layer inside the native dialog; a page-root canvas cannot cover the top layer. Coordinate budgets through the app. |
-| `App.svelte`, `commitPalette` and editor close | Tie any later palette fan to the exact successful request and close outcome, then use a visible Palette anchor. Never emit from a hidden editor. |
 
 `getBoundingClientRect()` uses viewport coordinates and reflects scrolling. Match particle coordinates to that space; do not cache live geometry through arbitrary resize/reflow. Native dialogs occupy a separate top layer and need their own effect surface. [MDN geometry](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect), [MDN top layer](https://developer.mozilla.org/en-US/docs/Glossary/Top_layer).
 
@@ -123,9 +115,17 @@ Imported data publication is not proof that every palette preview has finished. 
 
 For a long batch, acknowledge the first representative visible arrival and suppress subsequent particles for that same operation. Partial failures retain accurate ordinary feedback. An arrival response must not claim that every file succeeded. Canceled or never-visible arrivals produce no delayed effect.
 
-## Budget and accessibility
+## Cost estimates and performance evidence
 
-The selected Balanced design uses 44 pieces for import/export and 20 for removal. Production should adapt to screen area and measured cost, with a proposed total cap of 80 pieces on desktop and 48 on phones, and at most two active emitters. These are tuning budgets, not universal performance guarantees.
+A minimal production implementation was estimated at **250–400 lines of runtime code plus 80–150 lines of tests**, with two small new runtime files, one test file and targeted edits to roughly 5–7 existing files. This preliminary estimate preceded the final bounds-fitting iteration; actual scope depends on the motion design, readiness handshake, native viewer and preferences. It is not a completed implementation or measured bundle-size estimate.
+
+An earlier Paper pop drawing benchmark in headless desktop Edge measured approximately **0.1–0.2ms at the 95th percentile for CPU-side Canvas2D drawing submission** with 44/20 pieces at 1920×1080, 1200×850 and phone-sized 390×844 viewports, using a 1.5 backing scale. It did not measure GPU/compositor completion, real phone hardware, integrated recoloring load or the later ballistic setup fitting. Do not treat it as a total frame-cost guarantee.
+
+Memory depends chiefly on canvas area. One raw RGBA buffer is approximately `CSS width × CSS height × backing scale² × 4 bytes`: 1920×1080 at 1.5 uses **17.8MiB**; a 600×600 effect region at that scale uses **3.1MiB**. Browser buffering/compositing adds overhead. A viewport-wide overlay can contain a canvas sized to the active effect region; calculate those bounds and cancel/release idle drawing resources without changing the visible effect.
+
+## Starting parameters and accessibility
+
+Prototype starting values were 44 pieces and 950ms for import/Save, 20 pieces and 650ms for removal, and a backing scale capped at 1.5. These counts, durations and physics are subject to visual revision. Proposed production budgets were 80 pieces on desktop, 48 on phones and at most two active emitters; validate against animated artwork and actual devices before adopting them.
 
 Coalesce repeated import publications by operation. Permit a couple of quick removal puffs within the shared budget so direct manipulation stays responsive. If full, drop or replace an older decorative effect; do not queue it. A proposed two-second export-decoration throttle avoids plumes from rapid repeated downloads without blocking the downloads. This replaces the earlier long celebration cooldown, which was poorly suited to tactile arrival/departure.
 
@@ -137,16 +137,16 @@ Use a simple Motion effects On/Off preference in More if adopted. Honor operatin
 
 No effect on ordinary clicks, hover, palette stepping, slider movement, Original comparison, background generation, failures or retries. A deliberate removal may have a small physical response without being a celebratory success. Failed storage/export/import retains its useful error treatment.
 
-## Implementation sequence
+## Conditions for revisiting implementation
 
-1. **Use the selected vocabulary.** Paper pop at Balanced applies to import, removal and export. Verify adaptive interior placement for large, narrow and edge-constrained images.
+1. **Resolve the visual design with the user.** Keep the requested random explosion, gravity, foreground placement and image-bound behavior. Show real motion across repeated import/removal/Save events; obtain acceptance before adopting it in the app.
 2. **Add semantic event metadata and anchors.** Register tile/action geometry by item ID; capture removal bounds synchronously and add the explicit Tile/Pixels first-visible-draw handshake owned by the import operation. Keep event records small and independent of pixel buffers.
 3. **Build the bounded effect layer.** Add the short-lived Canvas2D renderer, policy, teardown and motion controls. Root and native viewer layers share admission/budget rules. Keep conversion/export code independent.
 4. **Integrate import and single removal.** Publish/clear state immediately; never await visual completion. Validate mixed imports, multiple files, cancel/remove during import and mobile sheet origins.
 5. **Add the matching export send-off.** Fire after complete encoding plus browser handoff, with accurate text and stale-anchor suppression. Preserve immediate clipboard/native-download gesture requirements.
 6. **Measure and challenge.** Check phone frame cost over animated sources and large imports, then test repeat use. Verify interior containment and foreground layering across image sizes. Update the authoritative behavior spec when implementation is adopted.
 
-Suggested production files: `src/SpatialEffects.svelte`, `src/lib/spatial-effects.js` for Canvas2D rendering and lifecycle, and `src/lib/effect-events.js` for bounded admission/deduplication, with meaningful policy tests. Global styling follows the existing `foundation.css` convention. A shader would be a separately lazy optional module rather than baseline startup work.
+A minimal file structure could be `src/SpatialEffects.svelte` for the accessible decorative surface and `src/lib/paper-pop.js` for rendering, lifecycle and admission policy, plus focused tests. Split event policy into its own module only if complexity warrants it. Global styling follows the existing `foundation.css` convention. Before integration, read [CLAUDE.md](../../CLAUDE.md), the [behavior specification](../superpowers/specs/2026-10-06-colorfetti-app-design.md), [performance guidance](../performance.md) and [brand guide](2026-10-13-colorfetti-identity.md). Update the behavior spec with any adopted implementation.
 
 ## Prototype behavior and checks
 
@@ -154,7 +154,7 @@ The studies simulate successful actions with fixed sample artwork. They do not r
 
 Replay deliberately allows repeated comparisons; it is not the production deduplication/throttle policy. Changing layout/theme, enabling reduced motion or resizing cancels the active effect. The neighboring sample's artwork stays unchanged, although decorative pieces can pass in front of it. The prototype's controls and sample layout simplify the app; renderer/frame checks do not establish physical Safari/iOS performance.
 
-The updated Balanced prototype passed headless Edge checks at 1200×850, 390×844, 360×740 and 844×390 in both themes, for all four image layouts and all three actions. Particle positions were checked throughout their lifetimes for viewport containment, and rectangular bursts stayed inside the image bounds and reached their padded inner edges. Screenshot pixel comparisons confirmed particles visibly render over the Save button. Twenty repeated bursts per action produced distinct particle patterns in each tested viewport/theme. Immediate removal, focus restoration, particle counts and motion suppression also passed. Screenshots were reviewed for desktop and phone composition; real-device performance remains an implementation check.
+The updated Balanced prototype passed headless Edge checks at 1200×850, 390×844, 360×740 and 844×390 in both themes, for all four image layouts and all three actions. Particle positions were checked throughout their lifetimes for viewport containment, and falling bursts stayed inside the image bounds and continued moving downward late in their lifetime. Screenshot pixel comparisons confirmed particles visibly render over the Save button. Twenty repeated bursts per action produced distinct particle patterns in each tested viewport/theme. Immediate removal, focus restoration, particle counts and motion suppression also passed. Screenshots were reviewed for desktop and phone composition; real-device performance remains an implementation check.
 
 | Acceptance check | Required production behavior |
 | --- | --- |
@@ -173,4 +173,4 @@ The updated Balanced prototype passed headless Edge checks at 1200×850, 390×84
 | Export/readback isolation | Effects never enter source pixels, exported bytes, clipboard images or drag payloads. |
 | Idle/performance | No idle frame loop, per-frame geometry reads or toolbar observer activity from particles; cost verified on real target devices. |
 
-The personal connection comes from spatial ownership: **these pieces respond to this image arriving, this image leaving, or this result being sent out**. That is the strongest way to make the confetti theme felt in ordinary use.
+Passing technical checks is required, but a future implementation also needs an accepted visual design. The current prototype satisfies several containment and lifecycle checks and remains visually unapproved.

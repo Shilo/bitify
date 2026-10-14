@@ -38,3 +38,7 @@ pair (recommended/live), bottom file island, and right-edge vertical pair. The c
 supports light/dark, phone sizing and sample panels; file actions are illustrative only.
 Control geometry, native feedback and later workspace decisions are documented in the
 linked research above. Historical measurements describe their recorded revisions.
+
+## Deferred confetti effects
+
+[Import, removal and Save confetti research](../research/2026-10-13-colorfetti-spatial-effects-plan.md) records the spatial-effect requirements, integration hooks, renderer choices, cost estimates and checks for future work. The user stopped exploration while dissatisfied with the visual design; the retained prototype is unapproved and no effect is implemented in the app.
