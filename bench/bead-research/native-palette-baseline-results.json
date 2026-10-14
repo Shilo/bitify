@@ -1,0 +1,111 @@
+{
+  "sourceSha256": "638eac1fb9938856b468b9d600ccf9cdf2da74a098b790544119eaf8312cd233",
+  "preprocessing": "None; exact native PNG",
+  "width": 96,
+  "height": 96,
+  "sourceColors": 24,
+  "protectionByClass": {
+    "dark": 7,
+    "nearWhite": 0,
+    "pink": 0
+  },
+  "metricScope": "Small cells: 8-connected same-color components <=4. Seams: cardinal #200402/#250603 pairs. Accent labels are RGB proxies, not semantic blush.",
+  "rows": [
+    {
+      "variant": "original",
+      "edits": 0,
+      "faceEdits": 0,
+      "alphaChanges": 0,
+      "darkMembershipChanges": 0,
+      "accentOriginalCellsRecolored": 0,
+      "newAccentCells": 0,
+      "newAccentCellsInFace": 0,
+      "seamsBetweenTwoDarks": 171,
+      "smallCells": 848,
+      "exteriorColors": 4,
+      "usedColors": 24
+    },
+    {
+      "variant": "selected-small",
+      "edits": 39,
+      "faceEdits": 13,
+      "alphaChanges": 0,
+      "darkMembershipChanges": 0,
+      "accentOriginalCellsRecolored": 0,
+      "newAccentCells": 5,
+      "newAccentCellsInFace": 4,
+      "seamsBetweenTwoDarks": 171,
+      "smallCells": 809,
+      "exteriorColors": 4,
+      "usedColors": 24
+    },
+    {
+      "variant": "C",
+      "edits": 168,
+      "faceEdits": 13,
+      "alphaChanges": 0,
+      "darkMembershipChanges": 2,
+      "accentOriginalCellsRecolored": 0,
+      "newAccentCells": 5,
+      "newAccentCellsInFace": 4,
+      "seamsBetweenTwoDarks": 124,
+      "smallCells": 704,
+      "exteriorColors": 1,
+      "usedColors": 24
+    },
+    {
+      "variant": "A",
+      "removedPaletteColors": [
+        "#250603"
+      ],
+      "edits": 670,
+      "faceEdits": 65,
+      "alphaChanges": 0,
+      "darkMembershipChanges": 0,
+      "accentOriginalCellsRecolored": 0,
+      "newAccentCells": 0,
+      "newAccentCellsInFace": 0,
+      "seamsBetweenTwoDarks": 0,
+      "smallCells": 590,
+      "exteriorColors": 3,
+      "usedColors": 23
+    },
+    {
+      "variant": "B",
+      "removedPaletteColors": [
+        "#250603",
+        "#f3be91",
+        "#c18b70"
+      ],
+      "edits": 773,
+      "faceEdits": 86,
+      "alphaChanges": 0,
+      "darkMembershipChanges": 0,
+      "accentOriginalCellsRecolored": 0,
+      "newAccentCells": 0,
+      "newAccentCellsInFace": 0,
+      "seamsBetweenTwoDarks": 0,
+      "smallCells": 548,
+      "exteriorColors": 3,
+      "usedColors": 21
+    },
+    {
+      "variant": "remove-two-only",
+      "removedPaletteColors": [
+        "#f3be91",
+        "#c18b70"
+      ],
+      "edits": 103,
+      "faceEdits": 21,
+      "alphaChanges": 0,
+      "darkMembershipChanges": 0,
+      "accentOriginalCellsRecolored": 0,
+      "newAccentCells": 0,
+      "newAccentCellsInFace": 0,
+      "seamsBetweenTwoDarks": 171,
+      "smallCells": 806,
+      "exteriorColors": 4,
+      "usedColors": 22
+    }
+  ]
+}

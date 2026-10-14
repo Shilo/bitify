@@ -4,6 +4,8 @@ import {regions,toLab,validateInput} from './regions.mjs';
 
 export function simplifySelectedShades(input,{selected=new Set(),keep=null,maxDistanceSquared=.04}={}){
  validateInput(input);
+ // These are RGB/lightness heuristics, not semantic detail guards. On the native
+ // 24-color test only seven dark labels match; no pink or near-white label does.
  const protectedLabels=new Set(input.colors.map((hex,i)=>{
   const rgb=parseInt(hex.slice(1),16),r=rgb>>>16,g=rgb>>>8&255,b=rgb&255;
   return toLab(hex)[0]<.5||toLab(hex)[0]>.96||(r>g+20&&b>g+5)?i:-1;

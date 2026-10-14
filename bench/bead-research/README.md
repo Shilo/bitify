@@ -1,5 +1,10 @@
 # Fuse-bead research, October 13, 2026
 
+Current recommendation: [Claude reconciliation](../../docs/research/2026-10-14-bead-claude-reconciliation.md)
+prioritizes the existing palette editor after adding native A/B baselines. It
+corrects inactive pink/near-white protection and incoming accent gains. The earlier
+selected-fill-plus-Solid proposal below is superseded; production Cleanup is unchanged.
+
 October 14 follow-up: [broader reassessment](../../docs/research/2026-10-14-bead-solutions-reassessment.md)
 finds useful assisted partial operations while retaining the rejected automatic
 filters. The live research page is `solution-review.html`; selected-shade cleanup,

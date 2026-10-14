@@ -3,6 +3,9 @@
 Follow-up: [exact native-original retest](2026-10-14-native-original-retest.md)
 tests the later 96×96, 24-color transparent attachment directly, without preprocessing.
 The opaque-source discussion below refers to the earlier enlarged attachment.
+The [Claude reconciliation](2026-10-14-bead-claude-reconciliation.md) corrects the
+protection claim and adds native production-palette baselines. Its recommendation
+supersedes the earlier selected-fill-plus-Solid proposal.
 
 October 14, 2026. Research only on main. Production Cleanup and application behavior
 are unchanged. All artwork, screenshots, derived PNGs and pixel payloads remain in
@@ -11,16 +14,18 @@ ignored local scratch. This document contains text and aggregate measurements on
 ## Decision
 
 **Snowie's request is reasonable. Useful deterministic partial solutions exist.**
-The strongest measured workflow is explicit selected-fill simplification plus a
-chosen solid exterior color. It needs a few design choices and review, rather than
-editing every affected pixel. It does not produce a guaranteed finished bead chart
-or repair every internal gap, double line or jagged contour.
+On the exact native input, the strongest measured first step uses the existing
+palette editor: merge the two near-identical darks, then compare removing the two
+problem fill shades globally against retaining their larger connected regions.
+This supplies useful partial help without new code. It does not produce a guaranteed
+finished bead chart or repair every internal gap, double line or jagged contour.
 
 Keep the five rejected automatic outline candidates rejected. Do not replace or
-strengthen current Cleanup On based on these experiments. The new assisted workflow
-is worth a designer trial as a separate per-image operation. It is not yet justified
-as a production wall-wide setting. The current research page already allows local
-preview, isolated-color inspection, Keep selection and exact-label PNG preparation.
+strengthen current Cleanup On based on these experiments. A new selected-fragment
+operation is worth a further trial only if the designer prefers it over existing
+global palette removal. Solid exterior leaves the integration path unless the maker
+explicitly wants exterior and interior line colors to differ. The research page
+allows local preview, isolated-color inspection, Keep and exact-label PNG preparation.
 
 ## What the earlier report establishes
 
@@ -75,10 +80,12 @@ and diagonal selected lines remain unchanged. An eligible fragment may take the
 nearest adjacent larger four-connected fill, using fixed squared Oklab tolerance
 `.04` and minimum anchor area five. Ambiguity/error vetoes remain.
 
-Dark, pink and near-white color classes are heuristically protected, and cannot
-receive added pixels through this operation. A Keep area vetoes its whole selected
-eight-connected component. Only selected-source cells can change. These are explicit
-algorithm contracts; they are not recognition of eyes, blush or materials.
+The code has dark, pink and near-white heuristic protection rules. On the exact
+native palette only seven dark labels qualify; no pink or near-white label does.
+Classified labels cannot gain or lose cells, but salmon/peach blush is not protected
+by the pink rule. Selected-only adds five cells to #f7c4ae, four in the face box.
+A Keep area vetoes its whole selected eight-connected component. Only selected-source
+cells can change. These contracts do not recognize eyes, blush or materials.
 
 The current prepared attachment's two selected shades occupy 103 cells; 61 are in
 small eight-connected components. They come directly from Snowie's isolated-color
@@ -96,8 +103,9 @@ examples. Not every occurrence has a maker-provided unwanted/keep annotation.
 The combined operation makes 129 exterior recolors and 39 fill recolors, with zero
 prepared occupancy changes. Total small-component cells change 849→705. With Keep,
 all kept face cells remain exact. The selected-only transform leaves every other
-source color unchanged, retaining this character's pink blush and dark eye/outline
-pixels. These observations do not establish generic facial preservation.
+source cell of other colors unchanged, including original accent and dark cells.
+This does not keep their color areas exact: the accent-gain correction above applies
+to the native source. These observations do not establish semantic facial preservation.
 
 Four related poses were tested with nearest source-swatch proxies for the same two
 shade roles, not maker selections. Without Keep, selected small cells change
@@ -150,7 +158,8 @@ and all small cells 849→705. Its PNG was prepared in that live page and downlo
 through the Codex browser, then independently decoded and compared with the Node
 result over all 9,216 cells. Visible RGBA and alpha match exactly; 3,563 fully
 transparent cells have different unused RGB bytes between the two PNG encoders.
-The current source's two pink blush colors have zero edits. Solid recoloring adds
+Original source accent cells have zero outgoing edits; this one-way metric omitted
+incoming accent gains, corrected in the native retest. Solid recoloring adds
 two dark-class cells at existing occupied boundary positions and removes none:
 unchanged occupancy is not a claim that apparent dark-line thickness cannot change.
 Numeric evidence is `bench/bead-research/solution-browser-checks.json`.
@@ -186,22 +195,23 @@ validation. This research does not change production source or persisted setting
 
 ## Practical next decision
 
-Present the targeted before/after to the pattern designer. For a native transparent
-sprite the proposed input is two problematic shade choices, one outline color, and
-optional Keep areas for deliberate accents. The designer reviews the full image and
-isolated colors once; the builder receives the completed exact-color chart.
+Present original plus A (global dark merge), B (A plus global removal of the two
+fill shades), and C (previous selected-small plus Solid) to the designer in full and
+isolated-color views. A/B use the existing palette editor and Nearest Oklab. Ask
+whether inner lines should share the outline color, which coherent shade areas
+should stay, and which residual cells need manual corrections.
 
-Worth pursuing: a per-image, reviewable **simplify selected fills + solid exterior**
-action. Not justified: automatic wall-wide artistic reconstruction, generic internal
-thinning, or changing current Cleanup's exact-source-color preservation.
+If A or B is adequate, document that workflow; add no feature. Only if C or its fill
+half clearly beats B on maker evidence should a 5–10 unrelated-design trial proceed,
+with A/B baselines on every design. For a fill-only comparison, use the same global
+dark merge on both sides. Screen for preference on at least two-thirds of designs,
+fewer residual manual cells, no deliberate details needing restoration, and useful
+selection/review time. This small-trial gate does not establish generality.
 
-Before shipping, collect new native noisy/desired-after chart pairs and maker-marked
-intentional details; test light outlines and shared-role shades; measure accepted
-bulk edits and residual corrections, including the time to choose/verify masks.
-Then evaluate whether per-image selections fit Colorfetti's shared palette interface.
-Preview/export state and cancellation would need implementation; animations require
-a separate motion-aware design. Failed filters should remain failed evidence rather
-than being tuned repeatedly on the same held-outs.
+Keep current Cleanup unchanged. A positive trial would favor a narrow chosen-color
+fragment operation; defer masks and animation support. Solid exterior is conditional
+on maker-requested exterior-versus-interior styling and needs selective-outline/rim
+light controls. Do not tune the rejected filters further on this character.
 
 The existing research workflow can help this image now. A complete automatic
 bead-ready conversion has not been demonstrated, and that limitation should not

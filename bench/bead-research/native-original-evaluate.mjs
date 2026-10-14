@@ -20,15 +20,18 @@ const palette=preparePalette(colors),baseline=colorize(applyCleanup(quantize(sou
 const guided=simplifySelectedShades(image,{selected}).labels,guidedKeep=simplifySelectedShades(image,{selected,keep}).labels;
 const variants=[['current-cleanup',cleanup],['selected-shades',guided],['selected-shades-keep',guidedKeep],['solid',solidBoundary(image,target)],['combined',solidBoundary({...image,labels:guided},target)],['combined-keep',solidBoundary({...image,labels:guidedKeep},target)],['spatial-auto',spatialSimplify(image).labels],['spatial-keep',spatialSimplify(image,{keep}).labels],['border-refill',rebuildOuter(image,{outlineColor:target,sourceShades:new Set(['#200402','#250603','#380d06'].map(c=>map.get(c))),refill:true,bandDepth:2}).labels]];
 const small=out=>regions(out,96,96,8).filter(r=>r.pixels.length<=4),metrics=out=>({smallCells:small(out).reduce((s,r)=>s+r.pixels.length,0),selectedSmallCells:small(out).filter(r=>selected.has(r.label)).reduce((s,r)=>s+r.pixels.length,0),borderColors:new Set(Array.from(out).filter((c,p)=>boundary[p])).size,usedColors:new Set(out.filter(c=>c>=0)).size});
-const rows=[];
-for(const [name,out]of variants){let changed=0,alphaChanged=0,faceChanged=0,pinkAccentChanged=0,faceDarkChanged=0,darkAdded=0,darkRemoved=0,borderChanged=0;
+const rows=[],pinkAccentLabels=new Set(['#f7c4ae','#fc9884','#bf6251'].map(c=>map.get(c)));
+// Count losses and gains separately. Original accent-cell retention does not
+// imply unchanged accent area, nor do these RGB labels identify semantic blush.
+for(const [name,out]of variants){let changed=0,alphaChanged=0,faceChanged=0,pinkAccentChanged=0,pinkAccentAdded=0,pinkAccentAddedInFace=0,faceDarkChanged=0,darkAdded=0,darkRemoved=0,borderChanged=0;
  const data=Buffer.from(png.data);for(let p=0;p<out.length;p++){
   assert.equal(out[p]<0,labels[p]<0);if((out[p]<0)!==(labels[p]<0))alphaChanged++;
-  if(out[p]!==labels[p]){changed++;if(keep[p]){faceChanged++;if(labs[labels[p]][0]<.5)faceDarkChanged++;}if(['#f7c4ae','#fc9884','#bf6251'].includes(colors[labels[p]]))pinkAccentChanged++;if(boundary[p])borderChanged++;}
+  if(out[p]!==labels[p]){changed++;if(keep[p]){faceChanged++;if(labs[labels[p]][0]<.5)faceDarkChanged++;}if(pinkAccentLabels.has(labels[p]))pinkAccentChanged++;if(boundary[p])borderChanged++;}
+  if(!pinkAccentLabels.has(labels[p])&&pinkAccentLabels.has(out[p])){pinkAccentAdded++;if(keep[p])pinkAccentAddedInFace++;}
   if(labels[p]>=0){const old=labs[labels[p]][0]<.5,next=labs[out[p]][0]<.5;if(!old&&next)darkAdded++;if(old&&!next)darkRemoved++;const rgb=parseInt(colors[out[p]].slice(1),16);for(let k=0;k<3;k++)data[p*4+k]=rgb>>>(16-k*8)&255;}
  }
  const encoded=PNG.sync.write({width:96,height:96,data}),witness=PNG.sync.read(encoded);assert.deepEqual(witness.data,data);writeFileSync(new URL(name+'.png',priv),encoded);
- rows.push({name,changed,alphaChanged,borderChanged,faceChanged,pinkAccentChanged,faceDarkChanged,darkAdded,darkRemoved,...metrics(out)});
+ rows.push({name,changed,alphaChanged,borderChanged,faceChanged,pinkAccentChanged,pinkAccentAdded,pinkAccentAddedInFace,faceDarkChanged,darkAdded,darkRemoved,...metrics(out)});
 }
 const report={sourceSha256:createHash('sha256').update(bytes).digest('hex'),width:96,height:96,sourceColors:24,occupied:labels.filter(c=>c>=0).length,transparent:labels.filter(c=>c<0).length,preprocessing:'None: exact native attached PNG, original alpha, original RGB palette',choices:{selectedFillShades:[...selected].map(c=>colors[c]),outlineColor:colors[target],optionalKeepRectangle:[34,30,65,50]},baseline:metrics(labels),rows};
 writeFileSync(new URL('./native-original-results.json',import.meta.url),JSON.stringify(report,null,2));console.log(JSON.stringify(report,null,2));

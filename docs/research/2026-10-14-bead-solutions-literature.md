@@ -1,5 +1,10 @@
 # Bead-friendly art: broader literature and spatial research spike
 
+Current product recommendation: the [Claude reconciliation](2026-10-14-bead-claude-reconciliation.md)
+adds the previously omitted existing-editor native baselines. Start with global
+palette merging; require maker preference over that workflow before a spatial-tool
+trial. Literature plausibility and earlier spike measurements are unchanged.
+
 Research only, October 14, 2026. No production edits, external inference, or paid API
 calls. Source artwork, derived PNGs and comparisons remain in ignored local scratch.
 This document contains no images or reconstructable artwork data.

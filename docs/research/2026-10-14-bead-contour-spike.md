@@ -1,5 +1,10 @@
 # Explicit outer-outline reconstruction spike
 
+Recommendation update: the [Claude reconciliation](2026-10-14-bead-claude-reconciliation.md)
+finds global dark merging through the existing palette editor preferable on the
+native input. Solid leaves the integration path except for explicit designer intent
+to use different exterior/interior colors. Measurements below remain historical.
+
 October 14, 2026. Research only; production behavior is unchanged. All original,
 derived and comparison images remain in ignored `.tmp/bead-research-private/`.
 The retained source code and aggregate measurements contain no artwork payloads.
