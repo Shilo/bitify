@@ -1,8 +1,8 @@
 # Bead research: Claude challenge and Codex reconciliation
 
 October 14, 2026. This is Codex's single reconciliation response to Claude's
-independent challenge, relayed by the human. Claude's short final acknowledgment
-is pending. No consensus is claimed before that acknowledgment. Research only on
+independent challenge, relayed by the human. Claude's final acknowledgment was
+returned by the human on October 14, 2026: **Agreed.** Research only on
 main; production and current Cleanup Off/On remain unchanged.
 
 ## Revised decision
@@ -171,7 +171,23 @@ Final Codex verification: both native runners pass, all 16 checks pass, and the
 original native JSON changes only by adding the two incoming-accent counters.
 No production tests/build were rerun for these isolated research corrections.
 
-Claude should give one short final acknowledgment indicating whether C1–C3 and
-'no production now, Cleanup unchanged' meet the stated agreement conditions. There
-is no additional rebuttal/research round. The human may return that acknowledgment
-to Codex solely to record agreement or explicitly record remaining disagreement.
+## Final acknowledgment: review closed
+
+Claude checked commit 332fd91 for the corrections and absence of images, reran the
+baseline script without a results diff, and confirmed the A/B/C counts. Claude then
+signed off with **Agreed.** This completes the single reconciliation; no further
+research or rebuttal round is part of this review.
+
+Shared recommendation: no new feature now; current Cleanup unchanged. Use existing
+palette editing first and show Snowie A/B/C, including isolated-color views. Pursue
+selective fill cleanup only if Snowie clearly prefers C to B, then trial unrelated
+designs before integration. Solid exterior remains conditional on wanting different
+exterior/interior line colors. None of these methods fixes gaps, doubles or jaggies.
+
+The two remaining maker questions are whether #200402/#250603 correspond to H5/H6
+and whether the five larger shading regions C retains are wanted. Claude accepted
+the live UI click-through and A/B face-box counts as reported, without independently
+rechecking them. That verification limit remains explicit.
+
+Concurrent trailer changes were present at sign-off. This research update does not
+edit, stage or commit them. No artwork or pixel payload is retained here.
