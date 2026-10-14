@@ -571,9 +571,10 @@ under reduced motion. Top to bottom:
   Style settings names the way to every setting of a style: with a mouse the Style button
   and then More on its strip, which opens the tray; on touch the Style button alone, since
   its panel shows them all as chips there. It has no key, and its Keyboard cell is empty.
-- A last row has a compact, icon-only trailer link aligned left and a filled “Got it”
-  button aligned right. The trailer uses the Lucide clapperboard icon through
-  `PixelIcon`, a circular 44px target, and the shared tooltip and accessible name
+- A last row has a compact “Trailer” link styled as a button aligned left and a
+  filled “Got it” button aligned right. Trailer uses the same pill button geometry
+  as Got it, with the existing Lucide external-link icon to the right of its label
+  through `PixelIcon`, and the shared tooltip and accessible name
   “Watch trailer (opens in a new tab)”. It opens bundled `colorfetti-trailer.mp4`
   through the app's base URL in a separate tab (`noopener noreferrer`). The video
   is not fetched until the link is followed; Help remains open in the original tab.

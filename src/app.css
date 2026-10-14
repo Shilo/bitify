@@ -239,11 +239,8 @@ button { font: inherit; color: inherit; }
 .help footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 13px; }
 .help footer .btn { padding: 0 20px; font-size: 14px; }
 .help footer .help-trailer {
-  box-sizing: border-box; width: var(--control-size, 44px); height: var(--control-size, 44px);
-  min-width: 44px; min-height: 44px; padding: 0; border-radius: 50%;
   color: var(--fg); text-decoration: none;
 }
-.help footer .help-trailer .ico { width: 18px; height: 18px; }
 
 @media (max-width: 520px) {
 
