@@ -1,0 +1,314 @@
+{
+  "verdict": "NO-GO automatic outline cleanup; GO explicit color union and reviewable proposals only",
+  "sources": [
+    {
+      "url": "https://scikit-image.org/docs/stable/auto_examples/edges/plot_skeleton.html",
+      "supports": "Skeletonization iteratively removes border pixels while preserving connectivity; it does not infer artistic intent."
+    },
+    {
+      "url": "https://scikit-image.org/docs/stable/api/skimage.morphology.html",
+      "supports": "Closing is dilation followed by erosion and can connect cracks or close gaps; changing topology is inherent."
+    }
+  ],
+  "limitations": [
+    "Screenshots are grid charts, not native sprites; sampled outline masks omit popup-obscured cells.",
+    "Alignment chosen by visible-cell agreement is approximate; counts are evidence on the sampled charts, not verified source-pixel ground truth.",
+    "8-connected contours are valid diagonally; 4-connected component counts would wrongly penalize stair steps.",
+    "Binary thinning does not decide which fill color should replace removed outline pixels.",
+    "Protected mask must be supplied; geometry alone cannot identify blush/eyes or intentional openings.",
+    "Same-pattern accidental and intentional gaps are indistinguishable; bridge must be explicit and reviewable.",
+    "Simple-point deletion preserves tested topology but scan order changes the retained contour."
+  ],
+  "alignment": {
+    "dx": 0,
+    "dy": -3,
+    "intersection": 180,
+    "mismatch": 32,
+    "known": 2104,
+    "score": 148
+  },
+  "merged": {
+    "grid": {
+      "x0": 49,
+      "y0": 2,
+      "step": 10
+    },
+    "dimensions": [
+      52,
+      52
+    ],
+    "knownCells": 2534,
+    "before": {
+      "pixels": 202,
+      "components8": 6,
+      "holes4": 4,
+      "blocks2x2": 4,
+      "endpoints8": 11
+    },
+    "manualComparison": {
+      "scope": "approximately aligned cells known in both screenshots only",
+      "commonKnownCells": 2104,
+      "maskCells": 199,
+      "manualCells": 193,
+      "extraRelativeToManual": 19,
+      "missingRelativeToManual": 13
+    }
+  },
+  "bridge": {
+    "added": 0,
+    "stats": {
+      "pixels": 202,
+      "components8": 6,
+      "holes4": 4,
+      "blocks2x2": 4,
+      "endpoints8": 11
+    },
+    "manualComparison": {
+      "scope": "approximately aligned cells known in both screenshots only",
+      "commonKnownCells": 2104,
+      "maskCells": 199,
+      "manualCells": 193,
+      "extraRelativeToManual": 19,
+      "missingRelativeToManual": 13
+    }
+  },
+  "thin": {
+    "removed": 12,
+    "stats": {
+      "pixels": 190,
+      "components8": 6,
+      "holes4": 4,
+      "blocks2x2": 0,
+      "endpoints8": 13
+    },
+    "manualComparison": {
+      "scope": "approximately aligned cells known in both screenshots only",
+      "commonKnownCells": 2104,
+      "maskCells": 187,
+      "manualCells": 193,
+      "extraRelativeToManual": 11,
+      "missingRelativeToManual": 17
+    }
+  },
+  "combined": {
+    "added": 0,
+    "removed": 12,
+    "stats": {
+      "pixels": 190,
+      "components8": 6,
+      "holes4": 4,
+      "blocks2x2": 0,
+      "endpoints8": 13
+    },
+    "manualComparison": {
+      "scope": "approximately aligned cells known in both screenshots only",
+      "commonKnownCells": 2104,
+      "maskCells": 187,
+      "manualCells": 193,
+      "extraRelativeToManual": 11,
+      "missingRelativeToManual": 17
+    }
+  },
+  "scanOrderDifference": 2,
+  "synthetic": {
+    "thickLine": {
+      "before": {
+        "pixels": 10,
+        "components8": 1,
+        "holes4": 0,
+        "blocks2x2": 4,
+        "endpoints8": 0
+      },
+      "thin": {
+        "pixels": 5,
+        "components8": 1,
+        "holes4": 0,
+        "blocks2x2": 0,
+        "endpoints8": 2
+      },
+      "bridge": {
+        "pixels": 10,
+        "components8": 1,
+        "holes4": 0,
+        "blocks2x2": 4,
+        "endpoints8": 0
+      },
+      "removed": 5,
+      "added": 0
+    },
+    "ring": {
+      "before": {
+        "pixels": 14,
+        "components8": 1,
+        "holes4": 1,
+        "blocks2x2": 0,
+        "endpoints8": 0
+      },
+      "thin": {
+        "pixels": 14,
+        "components8": 1,
+        "holes4": 1,
+        "blocks2x2": 0,
+        "endpoints8": 0
+      },
+      "bridge": {
+        "pixels": 14,
+        "components8": 1,
+        "holes4": 1,
+        "blocks2x2": 0,
+        "endpoints8": 0
+      },
+      "removed": 0,
+      "added": 0
+    },
+    "accidentalGap": {
+      "before": {
+        "pixels": 4,
+        "components8": 2,
+        "holes4": 0,
+        "blocks2x2": 0,
+        "endpoints8": 4
+      },
+      "thin": {
+        "pixels": 4,
+        "components8": 2,
+        "holes4": 0,
+        "blocks2x2": 0,
+        "endpoints8": 4
+      },
+      "bridge": {
+        "pixels": 5,
+        "components8": 1,
+        "holes4": 0,
+        "blocks2x2": 0,
+        "endpoints8": 2
+      },
+      "removed": 0,
+      "added": 1
+    },
+    "intentionalGap": {
+      "before": {
+        "pixels": 4,
+        "components8": 2,
+        "holes4": 0,
+        "blocks2x2": 0,
+        "endpoints8": 4
+      },
+      "thin": {
+        "pixels": 4,
+        "components8": 2,
+        "holes4": 0,
+        "blocks2x2": 0,
+        "endpoints8": 4
+      },
+      "bridge": {
+        "pixels": 5,
+        "components8": 1,
+        "holes4": 0,
+        "blocks2x2": 0,
+        "endpoints8": 2
+      },
+      "removed": 0,
+      "added": 1
+    },
+    "diagonal": {
+      "before": {
+        "pixels": 5,
+        "components8": 1,
+        "holes4": 0,
+        "blocks2x2": 0,
+        "endpoints8": 2
+      },
+      "thin": {
+        "pixels": 5,
+        "components8": 1,
+        "holes4": 0,
+        "blocks2x2": 0,
+        "endpoints8": 2
+      },
+      "bridge": {
+        "pixels": 5,
+        "components8": 1,
+        "holes4": 0,
+        "blocks2x2": 0,
+        "endpoints8": 2
+      },
+      "removed": 0,
+      "added": 0
+    },
+    "endpoint": {
+      "before": {
+        "pixels": 5,
+        "components8": 1,
+        "holes4": 0,
+        "blocks2x2": 0,
+        "endpoints8": 2
+      },
+      "thin": {
+        "pixels": 5,
+        "components8": 1,
+        "holes4": 0,
+        "blocks2x2": 0,
+        "endpoints8": 2
+      },
+      "bridge": {
+        "pixels": 5,
+        "components8": 1,
+        "holes4": 0,
+        "blocks2x2": 0,
+        "endpoints8": 2
+      },
+      "removed": 0,
+      "added": 0
+    },
+    "eyeHighlight": {
+      "before": {
+        "pixels": 8,
+        "components8": 1,
+        "holes4": 1,
+        "blocks2x2": 0,
+        "endpoints8": 0
+      },
+      "thin": {
+        "pixels": 8,
+        "components8": 1,
+        "holes4": 1,
+        "blocks2x2": 0,
+        "endpoints8": 0
+      },
+      "bridge": {
+        "pixels": 8,
+        "components8": 1,
+        "holes4": 1,
+        "blocks2x2": 0,
+        "endpoints8": 0
+      },
+      "removed": 0,
+      "added": 0
+    }
+  },
+  "sampling": {
+    "nativeSprite": false,
+    "method": "manually calibrated cell-center RGB threshold sampled from supplied grid screenshots",
+    "threshold": {
+      "rBelow": 120,
+      "gBelow": 135,
+      "bBelow": 130
+    },
+    "visualVerification": "Reconstruction checked visually against both screenshots; outlines align with visible chart cells.",
+    "uncertainties": [
+      "Grid spacing and origin are calibrated manually; no native bead coordinates or chart metadata were supplied.",
+      "Threshold identifies selected dark green cells in these views, not an image-independent outline classifier.",
+      "Popup occlusion and chart clipping leave unknown cells; edits touching popup cells are vetoed.",
+      "Topology counts refer only to sampled binary masks; unknown cells may disconnect an otherwise continuous original outline.",
+      "Manual target may contain deliberate redraws in addition to repair; mismatch counts do not score artistic correctness."
+    ],
+    "fixtures": [
+      ".tmp/bead-research-private/fixtures/outline-full-pattern.png",
+      ".tmp/bead-research-private/fixtures/outline-h5.png",
+      ".tmp/bead-research-private/fixtures/outline-h6.png",
+      ".tmp/bead-research-private/fixtures/outline-merged.png",
+      ".tmp/bead-research-private/fixtures/outline-manual.png"
+    ]
+  }
+}

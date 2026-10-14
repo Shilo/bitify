@@ -1,0 +1,4631 @@
+{
+  "thresholds": [
+    0.005,
+    0.02,
+    0.04
+  ],
+  "thresholdPolicy": "Fixed .005/.02/.04 comparison; .02 is the predeclared display value, not tuned on these images.",
+  "cases": 27,
+  "invariantChecks": 3288384,
+  "rows": [
+    {
+      "id": "snowie",
+      "method": "nearest",
+      "maxDistanceSquared": 0.005,
+      "changed": 8,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 1.2586000000000013,
+      "baseline": {
+        "singletons4": 632,
+        "selectedSmallPixels4": 71,
+        "singletons8": 294,
+        "selectedSmallPixels8": 61
+      },
+      "after": {
+        "singletons4": 626,
+        "selectedSmallPixels4": 63,
+        "singletons8": 288,
+        "selectedSmallPixels8": 53
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "color-distance-veto": 21,
+        "merged": 7,
+        "no-admissible-anchor": 15,
+        "protected-region": 10
+      }
+    },
+    {
+      "id": "snowie",
+      "method": "nearest",
+      "maxDistanceSquared": 0.02,
+      "changed": 50,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.6001999999999725,
+      "baseline": {
+        "singletons4": 632,
+        "selectedSmallPixels4": 71,
+        "singletons8": 294,
+        "selectedSmallPixels8": 61
+      },
+      "after": {
+        "singletons4": 615,
+        "selectedSmallPixels4": 42,
+        "singletons8": 279,
+        "selectedSmallPixels8": 32
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "merged": 24,
+        "no-admissible-anchor": 15,
+        "protected-region": 10,
+        "color-distance-veto": 4
+      }
+    },
+    {
+      "id": "snowie",
+      "method": "nearest",
+      "maxDistanceSquared": 0.04,
+      "changed": 52,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.40510000000000446,
+      "baseline": {
+        "singletons4": 632,
+        "selectedSmallPixels4": 71,
+        "singletons8": 294,
+        "selectedSmallPixels8": 61
+      },
+      "after": {
+        "singletons4": 613,
+        "selectedSmallPixels4": 40,
+        "singletons8": 277,
+        "selectedSmallPixels8": 30
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "merged": 26,
+        "no-admissible-anchor": 15,
+        "protected-region": 10,
+        "color-distance-veto": 2
+      }
+    },
+    {
+      "id": "snowie",
+      "method": "vote",
+      "maxDistanceSquared": 0.005,
+      "changed": 4,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.7404999999999973,
+      "baseline": {
+        "singletons4": 632,
+        "selectedSmallPixels4": 71,
+        "singletons8": 294,
+        "selectedSmallPixels8": 61
+      },
+      "after": {
+        "singletons4": 628,
+        "selectedSmallPixels4": 67,
+        "singletons8": 290,
+        "selectedSmallPixels8": 57
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "color-distance": 12,
+        "tie": 12,
+        "merged": 4,
+        "protected": 10,
+        "protected-boundary": 14,
+        "unanchored": 1
+      }
+    },
+    {
+      "id": "snowie",
+      "method": "vote",
+      "maxDistanceSquared": 0.02,
+      "changed": 38,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.42480000000000473,
+      "baseline": {
+        "singletons4": 632,
+        "selectedSmallPixels4": 71,
+        "singletons8": 294,
+        "selectedSmallPixels8": 61
+      },
+      "after": {
+        "singletons4": 623,
+        "selectedSmallPixels4": 54,
+        "singletons8": 287,
+        "selectedSmallPixels8": 44
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "merged": 14,
+        "tie": 12,
+        "protected": 10,
+        "protected-boundary": 14,
+        "unanchored": 1,
+        "color-distance": 2
+      }
+    },
+    {
+      "id": "snowie",
+      "method": "vote",
+      "maxDistanceSquared": 0.04,
+      "changed": 39,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.4637000000000171,
+      "baseline": {
+        "singletons4": 632,
+        "selectedSmallPixels4": 71,
+        "singletons8": 294,
+        "selectedSmallPixels8": 61
+      },
+      "after": {
+        "singletons4": 622,
+        "selectedSmallPixels4": 53,
+        "singletons8": 286,
+        "selectedSmallPixels8": 43
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "merged": 15,
+        "tie": 12,
+        "protected": 10,
+        "protected-boundary": 14,
+        "unanchored": 1,
+        "color-distance": 1
+      }
+    },
+    {
+      "id": "s009",
+      "method": "nearest",
+      "maxDistanceSquared": 0.005,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.07649999999995316,
+      "baseline": {
+        "singletons4": 266,
+        "selectedSmallPixels4": 8,
+        "singletons8": 238,
+        "selectedSmallPixels8": 8
+      },
+      "after": {
+        "singletons4": 266,
+        "selectedSmallPixels4": 8,
+        "singletons8": 238,
+        "selectedSmallPixels8": 8
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 6
+      }
+    },
+    {
+      "id": "s009",
+      "method": "nearest",
+      "maxDistanceSquared": 0.02,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.0625999999999749,
+      "baseline": {
+        "singletons4": 266,
+        "selectedSmallPixels4": 8,
+        "singletons8": 238,
+        "selectedSmallPixels8": 8
+      },
+      "after": {
+        "singletons4": 266,
+        "selectedSmallPixels4": 8,
+        "singletons8": 238,
+        "selectedSmallPixels8": 8
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 6
+      }
+    },
+    {
+      "id": "s009",
+      "method": "nearest",
+      "maxDistanceSquared": 0.04,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.09990000000004784,
+      "baseline": {
+        "singletons4": 266,
+        "selectedSmallPixels4": 8,
+        "singletons8": 238,
+        "selectedSmallPixels8": 8
+      },
+      "after": {
+        "singletons4": 266,
+        "selectedSmallPixels4": 8,
+        "singletons8": 238,
+        "selectedSmallPixels8": 8
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 6
+      }
+    },
+    {
+      "id": "s009",
+      "method": "vote",
+      "maxDistanceSquared": 0.005,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.07699999999999818,
+      "baseline": {
+        "singletons4": 266,
+        "selectedSmallPixels4": 8,
+        "singletons8": 238,
+        "selectedSmallPixels8": 8
+      },
+      "after": {
+        "singletons4": 266,
+        "selectedSmallPixels4": 8,
+        "singletons8": 238,
+        "selectedSmallPixels8": 8
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "unanchored": 2,
+        "tie": 3,
+        "protected-boundary": 1
+      }
+    },
+    {
+      "id": "s009",
+      "method": "vote",
+      "maxDistanceSquared": 0.02,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.08220000000000027,
+      "baseline": {
+        "singletons4": 266,
+        "selectedSmallPixels4": 8,
+        "singletons8": 238,
+        "selectedSmallPixels8": 8
+      },
+      "after": {
+        "singletons4": 266,
+        "selectedSmallPixels4": 8,
+        "singletons8": 238,
+        "selectedSmallPixels8": 8
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "unanchored": 2,
+        "tie": 3,
+        "protected-boundary": 1
+      }
+    },
+    {
+      "id": "s009",
+      "method": "vote",
+      "maxDistanceSquared": 0.04,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.08070000000003574,
+      "baseline": {
+        "singletons4": 266,
+        "selectedSmallPixels4": 8,
+        "singletons8": 238,
+        "selectedSmallPixels8": 8
+      },
+      "after": {
+        "singletons4": 266,
+        "selectedSmallPixels4": 8,
+        "singletons8": 238,
+        "selectedSmallPixels8": 8
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "unanchored": 2,
+        "tie": 3,
+        "protected-boundary": 1
+      }
+    },
+    {
+      "id": "s009-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.005,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.06099999999997863,
+      "baseline": {
+        "singletons4": 45,
+        "selectedSmallPixels4": 19,
+        "singletons8": 28,
+        "selectedSmallPixels8": 3
+      },
+      "after": {
+        "singletons4": 45,
+        "selectedSmallPixels4": 19,
+        "singletons8": 28,
+        "selectedSmallPixels8": 3
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 10,
+        "color-distance-veto": 1
+      }
+    },
+    {
+      "id": "s009-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.02,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.04789999999997008,
+      "baseline": {
+        "singletons4": 45,
+        "selectedSmallPixels4": 19,
+        "singletons8": 28,
+        "selectedSmallPixels8": 3
+      },
+      "after": {
+        "singletons4": 45,
+        "selectedSmallPixels4": 19,
+        "singletons8": 28,
+        "selectedSmallPixels8": 3
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 10,
+        "color-distance-veto": 1
+      }
+    },
+    {
+      "id": "s009-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.04,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.06529999999997926,
+      "baseline": {
+        "singletons4": 45,
+        "selectedSmallPixels4": 19,
+        "singletons8": 28,
+        "selectedSmallPixels8": 3
+      },
+      "after": {
+        "singletons4": 45,
+        "selectedSmallPixels4": 19,
+        "singletons8": 28,
+        "selectedSmallPixels8": 3
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 10,
+        "color-distance-veto": 1
+      }
+    },
+    {
+      "id": "s009-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.005,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.08039999999999736,
+      "baseline": {
+        "singletons4": 45,
+        "selectedSmallPixels4": 19,
+        "singletons8": 28,
+        "selectedSmallPixels8": 3
+      },
+      "after": {
+        "singletons4": 45,
+        "selectedSmallPixels4": 19,
+        "singletons8": 28,
+        "selectedSmallPixels8": 3
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "protected-boundary": 10,
+        "color-distance": 1
+      }
+    },
+    {
+      "id": "s009-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.02,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.05809999999996762,
+      "baseline": {
+        "singletons4": 45,
+        "selectedSmallPixels4": 19,
+        "singletons8": 28,
+        "selectedSmallPixels8": 3
+      },
+      "after": {
+        "singletons4": 45,
+        "selectedSmallPixels4": 19,
+        "singletons8": 28,
+        "selectedSmallPixels8": 3
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "protected-boundary": 10,
+        "color-distance": 1
+      }
+    },
+    {
+      "id": "s009-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.04,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.08529999999996107,
+      "baseline": {
+        "singletons4": 45,
+        "selectedSmallPixels4": 19,
+        "singletons8": 28,
+        "selectedSmallPixels8": 3
+      },
+      "after": {
+        "singletons4": 45,
+        "selectedSmallPixels4": 19,
+        "singletons8": 28,
+        "selectedSmallPixels8": 3
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "protected-boundary": 10,
+        "color-distance": 1
+      }
+    },
+    {
+      "id": "s017",
+      "method": "nearest",
+      "maxDistanceSquared": 0.005,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.12740000000002283,
+      "baseline": {
+        "singletons4": 184,
+        "selectedSmallPixels4": 8,
+        "singletons8": 161,
+        "selectedSmallPixels8": 8
+      },
+      "after": {
+        "singletons4": 184,
+        "selectedSmallPixels4": 8,
+        "singletons8": 161,
+        "selectedSmallPixels8": 8
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 6,
+        "color-distance-veto": 2
+      }
+    },
+    {
+      "id": "s017",
+      "method": "nearest",
+      "maxDistanceSquared": 0.02,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.11719999999996844,
+      "baseline": {
+        "singletons4": 184,
+        "selectedSmallPixels4": 8,
+        "singletons8": 161,
+        "selectedSmallPixels8": 8
+      },
+      "after": {
+        "singletons4": 184,
+        "selectedSmallPixels4": 8,
+        "singletons8": 161,
+        "selectedSmallPixels8": 8
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 6,
+        "color-distance-veto": 2
+      }
+    },
+    {
+      "id": "s017",
+      "method": "nearest",
+      "maxDistanceSquared": 0.04,
+      "changed": 1,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.1383999999999901,
+      "baseline": {
+        "singletons4": 184,
+        "selectedSmallPixels4": 8,
+        "singletons8": 161,
+        "selectedSmallPixels8": 8
+      },
+      "after": {
+        "singletons4": 183,
+        "selectedSmallPixels4": 7,
+        "singletons8": 159,
+        "selectedSmallPixels8": 7
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 6,
+        "color-distance-veto": 1,
+        "merged": 1
+      }
+    },
+    {
+      "id": "s017",
+      "method": "vote",
+      "maxDistanceSquared": 0.005,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.1308999999999969,
+      "baseline": {
+        "singletons4": 184,
+        "selectedSmallPixels4": 8,
+        "singletons8": 161,
+        "selectedSmallPixels8": 8
+      },
+      "after": {
+        "singletons4": 184,
+        "selectedSmallPixels4": 8,
+        "singletons8": 161,
+        "selectedSmallPixels8": 8
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "unanchored": 1,
+        "protected-boundary": 3,
+        "tie": 4
+      }
+    },
+    {
+      "id": "s017",
+      "method": "vote",
+      "maxDistanceSquared": 0.02,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.11610000000001719,
+      "baseline": {
+        "singletons4": 184,
+        "selectedSmallPixels4": 8,
+        "singletons8": 161,
+        "selectedSmallPixels8": 8
+      },
+      "after": {
+        "singletons4": 184,
+        "selectedSmallPixels4": 8,
+        "singletons8": 161,
+        "selectedSmallPixels8": 8
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "unanchored": 1,
+        "protected-boundary": 3,
+        "tie": 4
+      }
+    },
+    {
+      "id": "s017",
+      "method": "vote",
+      "maxDistanceSquared": 0.04,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.14150000000000773,
+      "baseline": {
+        "singletons4": 184,
+        "selectedSmallPixels4": 8,
+        "singletons8": 161,
+        "selectedSmallPixels8": 8
+      },
+      "after": {
+        "singletons4": 184,
+        "selectedSmallPixels4": 8,
+        "singletons8": 161,
+        "selectedSmallPixels8": 8
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "unanchored": 1,
+        "protected-boundary": 3,
+        "tie": 4
+      }
+    },
+    {
+      "id": "s017-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.005,
+      "changed": 2,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.14269999999999072,
+      "baseline": {
+        "singletons4": 181,
+        "selectedSmallPixels4": 26,
+        "singletons8": 150,
+        "selectedSmallPixels8": 20
+      },
+      "after": {
+        "singletons4": 181,
+        "selectedSmallPixels4": 24,
+        "singletons8": 151,
+        "selectedSmallPixels8": 18
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 15,
+        "color-distance-veto": 3,
+        "merged": 1
+      }
+    },
+    {
+      "id": "s017-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.02,
+      "changed": 2,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.11570000000000391,
+      "baseline": {
+        "singletons4": 181,
+        "selectedSmallPixels4": 26,
+        "singletons8": 150,
+        "selectedSmallPixels8": 20
+      },
+      "after": {
+        "singletons4": 181,
+        "selectedSmallPixels4": 24,
+        "singletons8": 151,
+        "selectedSmallPixels8": 18
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 15,
+        "color-distance-veto": 3,
+        "merged": 1
+      }
+    },
+    {
+      "id": "s017-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.04,
+      "changed": 3,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.13229999999998654,
+      "baseline": {
+        "singletons4": 181,
+        "selectedSmallPixels4": 26,
+        "singletons8": 150,
+        "selectedSmallPixels8": 20
+      },
+      "after": {
+        "singletons4": 180,
+        "selectedSmallPixels4": 23,
+        "singletons8": 149,
+        "selectedSmallPixels8": 17
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 15,
+        "color-distance-veto": 2,
+        "merged": 2
+      }
+    },
+    {
+      "id": "s017-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.005,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.150100000000009,
+      "baseline": {
+        "singletons4": 181,
+        "selectedSmallPixels4": 26,
+        "singletons8": 150,
+        "selectedSmallPixels8": 20
+      },
+      "after": {
+        "singletons4": 181,
+        "selectedSmallPixels4": 26,
+        "singletons8": 150,
+        "selectedSmallPixels8": 20
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "tie": 13,
+        "protected-boundary": 6
+      }
+    },
+    {
+      "id": "s017-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.02,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.1272999999999911,
+      "baseline": {
+        "singletons4": 181,
+        "selectedSmallPixels4": 26,
+        "singletons8": 150,
+        "selectedSmallPixels8": 20
+      },
+      "after": {
+        "singletons4": 181,
+        "selectedSmallPixels4": 26,
+        "singletons8": 150,
+        "selectedSmallPixels8": 20
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "tie": 13,
+        "protected-boundary": 6
+      }
+    },
+    {
+      "id": "s017-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.04,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.12990000000002055,
+      "baseline": {
+        "singletons4": 181,
+        "selectedSmallPixels4": 26,
+        "singletons8": 150,
+        "selectedSmallPixels8": 20
+      },
+      "after": {
+        "singletons4": 181,
+        "selectedSmallPixels4": 26,
+        "singletons8": 150,
+        "selectedSmallPixels8": 20
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "tie": 13,
+        "protected-boundary": 6
+      }
+    },
+    {
+      "id": "s025",
+      "method": "nearest",
+      "maxDistanceSquared": 0.005,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.08830000000000382,
+      "baseline": {
+        "singletons4": 48,
+        "selectedSmallPixels4": 9,
+        "singletons8": 18,
+        "selectedSmallPixels8": 9
+      },
+      "after": {
+        "singletons4": 48,
+        "selectedSmallPixels4": 9,
+        "singletons8": 18,
+        "selectedSmallPixels8": 9
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 6
+      }
+    },
+    {
+      "id": "s025",
+      "method": "nearest",
+      "maxDistanceSquared": 0.02,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.056700000000034834,
+      "baseline": {
+        "singletons4": 48,
+        "selectedSmallPixels4": 9,
+        "singletons8": 18,
+        "selectedSmallPixels8": 9
+      },
+      "after": {
+        "singletons4": 48,
+        "selectedSmallPixels4": 9,
+        "singletons8": 18,
+        "selectedSmallPixels8": 9
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 6
+      }
+    },
+    {
+      "id": "s025",
+      "method": "nearest",
+      "maxDistanceSquared": 0.04,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.07810000000000628,
+      "baseline": {
+        "singletons4": 48,
+        "selectedSmallPixels4": 9,
+        "singletons8": 18,
+        "selectedSmallPixels8": 9
+      },
+      "after": {
+        "singletons4": 48,
+        "selectedSmallPixels4": 9,
+        "singletons8": 18,
+        "selectedSmallPixels8": 9
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 6
+      }
+    },
+    {
+      "id": "s025",
+      "method": "vote",
+      "maxDistanceSquared": 0.005,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.06500000000005457,
+      "baseline": {
+        "singletons4": 48,
+        "selectedSmallPixels4": 9,
+        "singletons8": 18,
+        "selectedSmallPixels8": 9
+      },
+      "after": {
+        "singletons4": 48,
+        "selectedSmallPixels4": 9,
+        "singletons8": 18,
+        "selectedSmallPixels8": 9
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "protected-boundary": 5,
+        "tie": 1
+      }
+    },
+    {
+      "id": "s025",
+      "method": "vote",
+      "maxDistanceSquared": 0.02,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.057900000000017826,
+      "baseline": {
+        "singletons4": 48,
+        "selectedSmallPixels4": 9,
+        "singletons8": 18,
+        "selectedSmallPixels8": 9
+      },
+      "after": {
+        "singletons4": 48,
+        "selectedSmallPixels4": 9,
+        "singletons8": 18,
+        "selectedSmallPixels8": 9
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "protected-boundary": 5,
+        "tie": 1
+      }
+    },
+    {
+      "id": "s025",
+      "method": "vote",
+      "maxDistanceSquared": 0.04,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.07630000000000337,
+      "baseline": {
+        "singletons4": 48,
+        "selectedSmallPixels4": 9,
+        "singletons8": 18,
+        "selectedSmallPixels8": 9
+      },
+      "after": {
+        "singletons4": 48,
+        "selectedSmallPixels4": 9,
+        "singletons8": 18,
+        "selectedSmallPixels8": 9
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "protected-boundary": 5,
+        "tie": 1
+      }
+    },
+    {
+      "id": "s025-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.005,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.06459999999998445,
+      "baseline": {
+        "singletons4": 48,
+        "selectedSmallPixels4": 9,
+        "singletons8": 17,
+        "selectedSmallPixels8": 9
+      },
+      "after": {
+        "singletons4": 48,
+        "selectedSmallPixels4": 9,
+        "singletons8": 17,
+        "selectedSmallPixels8": 9
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 6
+      }
+    },
+    {
+      "id": "s025-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.02,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.050700000000006185,
+      "baseline": {
+        "singletons4": 48,
+        "selectedSmallPixels4": 9,
+        "singletons8": 17,
+        "selectedSmallPixels8": 9
+      },
+      "after": {
+        "singletons4": 48,
+        "selectedSmallPixels4": 9,
+        "singletons8": 17,
+        "selectedSmallPixels8": 9
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 6
+      }
+    },
+    {
+      "id": "s025-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.04,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.06409999999999627,
+      "baseline": {
+        "singletons4": 48,
+        "selectedSmallPixels4": 9,
+        "singletons8": 17,
+        "selectedSmallPixels8": 9
+      },
+      "after": {
+        "singletons4": 48,
+        "selectedSmallPixels4": 9,
+        "singletons8": 17,
+        "selectedSmallPixels8": 9
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 6
+      }
+    },
+    {
+      "id": "s025-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.005,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.06200000000001182,
+      "baseline": {
+        "singletons4": 48,
+        "selectedSmallPixels4": 9,
+        "singletons8": 17,
+        "selectedSmallPixels8": 9
+      },
+      "after": {
+        "singletons4": 48,
+        "selectedSmallPixels4": 9,
+        "singletons8": 17,
+        "selectedSmallPixels8": 9
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "protected-boundary": 5,
+        "tie": 1
+      }
+    },
+    {
+      "id": "s025-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.02,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.05689999999998463,
+      "baseline": {
+        "singletons4": 48,
+        "selectedSmallPixels4": 9,
+        "singletons8": 17,
+        "selectedSmallPixels8": 9
+      },
+      "after": {
+        "singletons4": 48,
+        "selectedSmallPixels4": 9,
+        "singletons8": 17,
+        "selectedSmallPixels8": 9
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "protected-boundary": 5,
+        "tie": 1
+      }
+    },
+    {
+      "id": "s025-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.04,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.0886000000000422,
+      "baseline": {
+        "singletons4": 48,
+        "selectedSmallPixels4": 9,
+        "singletons8": 17,
+        "selectedSmallPixels8": 9
+      },
+      "after": {
+        "singletons4": 48,
+        "selectedSmallPixels4": 9,
+        "singletons8": 17,
+        "selectedSmallPixels8": 9
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "protected-boundary": 5,
+        "tie": 1
+      }
+    },
+    {
+      "id": "s041",
+      "method": "nearest",
+      "maxDistanceSquared": 0.005,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.3754000000000133,
+      "baseline": {
+        "singletons4": 1432,
+        "selectedSmallPixels4": 7,
+        "singletons8": 1312,
+        "selectedSmallPixels8": 7
+      },
+      "after": {
+        "singletons4": 1432,
+        "selectedSmallPixels4": 7,
+        "singletons8": 1312,
+        "selectedSmallPixels8": 7
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 6
+      }
+    },
+    {
+      "id": "s041",
+      "method": "nearest",
+      "maxDistanceSquared": 0.02,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.36899999999997135,
+      "baseline": {
+        "singletons4": 1432,
+        "selectedSmallPixels4": 7,
+        "singletons8": 1312,
+        "selectedSmallPixels8": 7
+      },
+      "after": {
+        "singletons4": 1432,
+        "selectedSmallPixels4": 7,
+        "singletons8": 1312,
+        "selectedSmallPixels8": 7
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 6
+      }
+    },
+    {
+      "id": "s041",
+      "method": "nearest",
+      "maxDistanceSquared": 0.04,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.3270999999999731,
+      "baseline": {
+        "singletons4": 1432,
+        "selectedSmallPixels4": 7,
+        "singletons8": 1312,
+        "selectedSmallPixels8": 7
+      },
+      "after": {
+        "singletons4": 1432,
+        "selectedSmallPixels4": 7,
+        "singletons8": 1312,
+        "selectedSmallPixels8": 7
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 6
+      }
+    },
+    {
+      "id": "s041",
+      "method": "vote",
+      "maxDistanceSquared": 0.005,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.38730000000003884,
+      "baseline": {
+        "singletons4": 1432,
+        "selectedSmallPixels4": 7,
+        "singletons8": 1312,
+        "selectedSmallPixels8": 7
+      },
+      "after": {
+        "singletons4": 1432,
+        "selectedSmallPixels4": 7,
+        "singletons8": 1312,
+        "selectedSmallPixels8": 7
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "tie": 6
+      }
+    },
+    {
+      "id": "s041",
+      "method": "vote",
+      "maxDistanceSquared": 0.02,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.4504000000000019,
+      "baseline": {
+        "singletons4": 1432,
+        "selectedSmallPixels4": 7,
+        "singletons8": 1312,
+        "selectedSmallPixels8": 7
+      },
+      "after": {
+        "singletons4": 1432,
+        "selectedSmallPixels4": 7,
+        "singletons8": 1312,
+        "selectedSmallPixels8": 7
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "tie": 6
+      }
+    },
+    {
+      "id": "s041",
+      "method": "vote",
+      "maxDistanceSquared": 0.04,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.2994000000000483,
+      "baseline": {
+        "singletons4": 1432,
+        "selectedSmallPixels4": 7,
+        "singletons8": 1312,
+        "selectedSmallPixels8": 7
+      },
+      "after": {
+        "singletons4": 1432,
+        "selectedSmallPixels4": 7,
+        "singletons8": 1312,
+        "selectedSmallPixels8": 7
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "tie": 6
+      }
+    },
+    {
+      "id": "s041-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.005,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.24389999999999645,
+      "baseline": {
+        "singletons4": 604,
+        "selectedSmallPixels4": 99,
+        "singletons8": 362,
+        "selectedSmallPixels8": 88
+      },
+      "after": {
+        "singletons4": 604,
+        "selectedSmallPixels4": 99,
+        "singletons8": 362,
+        "selectedSmallPixels8": 88
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "color-distance-veto": 35,
+        "no-admissible-anchor": 42
+      }
+    },
+    {
+      "id": "s041-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.02,
+      "changed": 3,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.1775000000000091,
+      "baseline": {
+        "singletons4": 604,
+        "selectedSmallPixels4": 99,
+        "singletons8": 362,
+        "selectedSmallPixels8": 88
+      },
+      "after": {
+        "singletons4": 600,
+        "selectedSmallPixels4": 96,
+        "singletons8": 359,
+        "selectedSmallPixels8": 85
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "color-distance-veto": 32,
+        "no-admissible-anchor": 42,
+        "merged": 3
+      }
+    },
+    {
+      "id": "s041-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.04,
+      "changed": 37,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.4379999999999882,
+      "baseline": {
+        "singletons4": 604,
+        "selectedSmallPixels4": 99,
+        "singletons8": 362,
+        "selectedSmallPixels8": 88
+      },
+      "after": {
+        "singletons4": 582,
+        "selectedSmallPixels4": 62,
+        "singletons8": 356,
+        "selectedSmallPixels8": 57
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "merged": 27,
+        "no-admissible-anchor": 42,
+        "color-distance-veto": 8
+      }
+    },
+    {
+      "id": "s041-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.005,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.24260000000003856,
+      "baseline": {
+        "singletons4": 604,
+        "selectedSmallPixels4": 99,
+        "singletons8": 362,
+        "selectedSmallPixels8": 88
+      },
+      "after": {
+        "singletons4": 604,
+        "selectedSmallPixels4": 99,
+        "singletons8": 362,
+        "selectedSmallPixels8": 88
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "color-distance": 16,
+        "protected-boundary": 18,
+        "unanchored": 21,
+        "tie": 22
+      }
+    },
+    {
+      "id": "s041-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.02,
+      "changed": 2,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.24099999999998545,
+      "baseline": {
+        "singletons4": 604,
+        "selectedSmallPixels4": 99,
+        "singletons8": 362,
+        "selectedSmallPixels8": 88
+      },
+      "after": {
+        "singletons4": 601,
+        "selectedSmallPixels4": 97,
+        "singletons8": 360,
+        "selectedSmallPixels8": 86
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "color-distance": 14,
+        "protected-boundary": 18,
+        "unanchored": 21,
+        "tie": 22,
+        "merged": 2
+      }
+    },
+    {
+      "id": "s041-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.04,
+      "changed": 17,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.2055000000000291,
+      "baseline": {
+        "singletons4": 604,
+        "selectedSmallPixels4": 99,
+        "singletons8": 362,
+        "selectedSmallPixels8": 88
+      },
+      "after": {
+        "singletons4": 593,
+        "selectedSmallPixels4": 82,
+        "singletons8": 358,
+        "selectedSmallPixels8": 71
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "merged": 13,
+        "protected-boundary": 18,
+        "unanchored": 21,
+        "tie": 22,
+        "color-distance": 3
+      }
+    },
+    {
+      "id": "s045",
+      "method": "nearest",
+      "maxDistanceSquared": 0.005,
+      "changed": 5,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.2604999999999791,
+      "baseline": {
+        "singletons4": 308,
+        "selectedSmallPixels4": 23,
+        "singletons8": 234,
+        "selectedSmallPixels8": 23
+      },
+      "after": {
+        "singletons4": 305,
+        "selectedSmallPixels4": 18,
+        "singletons8": 231,
+        "selectedSmallPixels8": 18
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "color-distance-veto": 10,
+        "merged": 4,
+        "no-admissible-anchor": 2
+      }
+    },
+    {
+      "id": "s045",
+      "method": "nearest",
+      "maxDistanceSquared": 0.02,
+      "changed": 11,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.2700999999999567,
+      "baseline": {
+        "singletons4": 308,
+        "selectedSmallPixels4": 23,
+        "singletons8": 234,
+        "selectedSmallPixels8": 23
+      },
+      "after": {
+        "singletons4": 305,
+        "selectedSmallPixels4": 12,
+        "singletons8": 231,
+        "selectedSmallPixels8": 12
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "color-distance-veto": 8,
+        "merged": 6,
+        "no-admissible-anchor": 2
+      }
+    },
+    {
+      "id": "s045",
+      "method": "nearest",
+      "maxDistanceSquared": 0.04,
+      "changed": 19,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.29069999999995844,
+      "baseline": {
+        "singletons4": 308,
+        "selectedSmallPixels4": 23,
+        "singletons8": 234,
+        "selectedSmallPixels8": 23
+      },
+      "after": {
+        "singletons4": 300,
+        "selectedSmallPixels4": 4,
+        "singletons8": 227,
+        "selectedSmallPixels8": 4
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "merged": 12,
+        "no-admissible-anchor": 2,
+        "color-distance-veto": 2
+      }
+    },
+    {
+      "id": "s045",
+      "method": "vote",
+      "maxDistanceSquared": 0.005,
+      "changed": 1,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.27309999999999945,
+      "baseline": {
+        "singletons4": 308,
+        "selectedSmallPixels4": 23,
+        "singletons8": 234,
+        "selectedSmallPixels8": 23
+      },
+      "after": {
+        "singletons4": 307,
+        "selectedSmallPixels4": 22,
+        "singletons8": 233,
+        "selectedSmallPixels8": 22
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "color-distance": 5,
+        "protected-boundary": 2,
+        "tie": 6,
+        "unanchored": 2,
+        "merged": 1
+      }
+    },
+    {
+      "id": "s045",
+      "method": "vote",
+      "maxDistanceSquared": 0.02,
+      "changed": 1,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.516900000000021,
+      "baseline": {
+        "singletons4": 308,
+        "selectedSmallPixels4": 23,
+        "singletons8": 234,
+        "selectedSmallPixels8": 23
+      },
+      "after": {
+        "singletons4": 307,
+        "selectedSmallPixels4": 22,
+        "singletons8": 233,
+        "selectedSmallPixels8": 22
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "color-distance": 5,
+        "protected-boundary": 2,
+        "tie": 6,
+        "unanchored": 2,
+        "merged": 1
+      }
+    },
+    {
+      "id": "s045",
+      "method": "vote",
+      "maxDistanceSquared": 0.04,
+      "changed": 9,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.2499000000000251,
+      "baseline": {
+        "singletons4": 308,
+        "selectedSmallPixels4": 23,
+        "singletons8": 234,
+        "selectedSmallPixels8": 23
+      },
+      "after": {
+        "singletons4": 304,
+        "selectedSmallPixels4": 14,
+        "singletons8": 231,
+        "selectedSmallPixels8": 14
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "merged": 6,
+        "protected-boundary": 2,
+        "tie": 6,
+        "unanchored": 2
+      }
+    },
+    {
+      "id": "s045-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.005,
+      "changed": 5,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.2977999999999952,
+      "baseline": {
+        "singletons4": 308,
+        "selectedSmallPixels4": 23,
+        "singletons8": 234,
+        "selectedSmallPixels8": 23
+      },
+      "after": {
+        "singletons4": 305,
+        "selectedSmallPixels4": 18,
+        "singletons8": 231,
+        "selectedSmallPixels8": 18
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "color-distance-veto": 10,
+        "merged": 4,
+        "no-admissible-anchor": 2
+      }
+    },
+    {
+      "id": "s045-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.02,
+      "changed": 11,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.3050000000000068,
+      "baseline": {
+        "singletons4": 308,
+        "selectedSmallPixels4": 23,
+        "singletons8": 234,
+        "selectedSmallPixels8": 23
+      },
+      "after": {
+        "singletons4": 305,
+        "selectedSmallPixels4": 12,
+        "singletons8": 231,
+        "selectedSmallPixels8": 12
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "color-distance-veto": 8,
+        "merged": 6,
+        "no-admissible-anchor": 2
+      }
+    },
+    {
+      "id": "s045-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.04,
+      "changed": 19,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.2647999999999797,
+      "baseline": {
+        "singletons4": 308,
+        "selectedSmallPixels4": 23,
+        "singletons8": 234,
+        "selectedSmallPixels8": 23
+      },
+      "after": {
+        "singletons4": 300,
+        "selectedSmallPixels4": 4,
+        "singletons8": 227,
+        "selectedSmallPixels8": 4
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "merged": 12,
+        "no-admissible-anchor": 2,
+        "color-distance-veto": 2
+      }
+    },
+    {
+      "id": "s045-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.005,
+      "changed": 1,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.25670000000002346,
+      "baseline": {
+        "singletons4": 308,
+        "selectedSmallPixels4": 23,
+        "singletons8": 234,
+        "selectedSmallPixels8": 23
+      },
+      "after": {
+        "singletons4": 307,
+        "selectedSmallPixels4": 22,
+        "singletons8": 233,
+        "selectedSmallPixels8": 22
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "color-distance": 5,
+        "protected-boundary": 2,
+        "tie": 6,
+        "unanchored": 2,
+        "merged": 1
+      }
+    },
+    {
+      "id": "s045-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.02,
+      "changed": 1,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.24260000000003856,
+      "baseline": {
+        "singletons4": 308,
+        "selectedSmallPixels4": 23,
+        "singletons8": 234,
+        "selectedSmallPixels8": 23
+      },
+      "after": {
+        "singletons4": 307,
+        "selectedSmallPixels4": 22,
+        "singletons8": 233,
+        "selectedSmallPixels8": 22
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "color-distance": 5,
+        "protected-boundary": 2,
+        "tie": 6,
+        "unanchored": 2,
+        "merged": 1
+      }
+    },
+    {
+      "id": "s045-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.04,
+      "changed": 9,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.2644000000000233,
+      "baseline": {
+        "singletons4": 308,
+        "selectedSmallPixels4": 23,
+        "singletons8": 234,
+        "selectedSmallPixels8": 23
+      },
+      "after": {
+        "singletons4": 304,
+        "selectedSmallPixels4": 14,
+        "singletons8": 231,
+        "selectedSmallPixels8": 14
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "merged": 6,
+        "protected-boundary": 2,
+        "tie": 6,
+        "unanchored": 2
+      }
+    },
+    {
+      "id": "s085",
+      "method": "nearest",
+      "maxDistanceSquared": 0.005,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 1.0125000000000455,
+      "baseline": {
+        "singletons4": 3860,
+        "selectedSmallPixels4": 6,
+        "singletons8": 3645,
+        "selectedSmallPixels8": 6
+      },
+      "after": {
+        "singletons4": 3860,
+        "selectedSmallPixels4": 6,
+        "singletons8": 3645,
+        "selectedSmallPixels8": 6
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 6
+      }
+    },
+    {
+      "id": "s085",
+      "method": "nearest",
+      "maxDistanceSquared": 0.02,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.7563999999999851,
+      "baseline": {
+        "singletons4": 3860,
+        "selectedSmallPixels4": 6,
+        "singletons8": 3645,
+        "selectedSmallPixels8": 6
+      },
+      "after": {
+        "singletons4": 3860,
+        "selectedSmallPixels4": 6,
+        "singletons8": 3645,
+        "selectedSmallPixels8": 6
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 6
+      }
+    },
+    {
+      "id": "s085",
+      "method": "nearest",
+      "maxDistanceSquared": 0.04,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.7173000000000229,
+      "baseline": {
+        "singletons4": 3860,
+        "selectedSmallPixels4": 6,
+        "singletons8": 3645,
+        "selectedSmallPixels8": 6
+      },
+      "after": {
+        "singletons4": 3860,
+        "selectedSmallPixels4": 6,
+        "singletons8": 3645,
+        "selectedSmallPixels8": 6
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 6
+      }
+    },
+    {
+      "id": "s085",
+      "method": "vote",
+      "maxDistanceSquared": 0.005,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.7866000000000213,
+      "baseline": {
+        "singletons4": 3860,
+        "selectedSmallPixels4": 6,
+        "singletons8": 3645,
+        "selectedSmallPixels8": 6
+      },
+      "after": {
+        "singletons4": 3860,
+        "selectedSmallPixels4": 6,
+        "singletons8": 3645,
+        "selectedSmallPixels8": 6
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "tie": 6
+      }
+    },
+    {
+      "id": "s085",
+      "method": "vote",
+      "maxDistanceSquared": 0.02,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.8926000000000158,
+      "baseline": {
+        "singletons4": 3860,
+        "selectedSmallPixels4": 6,
+        "singletons8": 3645,
+        "selectedSmallPixels8": 6
+      },
+      "after": {
+        "singletons4": 3860,
+        "selectedSmallPixels4": 6,
+        "singletons8": 3645,
+        "selectedSmallPixels8": 6
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "tie": 6
+      }
+    },
+    {
+      "id": "s085",
+      "method": "vote",
+      "maxDistanceSquared": 0.04,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.7257999999999925,
+      "baseline": {
+        "singletons4": 3860,
+        "selectedSmallPixels4": 6,
+        "singletons8": 3645,
+        "selectedSmallPixels8": 6
+      },
+      "after": {
+        "singletons4": 3860,
+        "selectedSmallPixels4": 6,
+        "singletons8": 3645,
+        "selectedSmallPixels8": 6
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "tie": 6
+      }
+    },
+    {
+      "id": "s085-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.005,
+      "changed": 37,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.49150000000003047,
+      "baseline": {
+        "singletons4": 556,
+        "selectedSmallPixels4": 111,
+        "singletons8": 277,
+        "selectedSmallPixels8": 85
+      },
+      "after": {
+        "singletons4": 544,
+        "selectedSmallPixels4": 96,
+        "singletons8": 276,
+        "selectedSmallPixels8": 75
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "color-distance-veto": 21,
+        "merged": 14,
+        "no-admissible-anchor": 49,
+        "ambiguous-near-tie": 4
+      }
+    },
+    {
+      "id": "s085-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.02,
+      "changed": 49,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.4911999999999921,
+      "baseline": {
+        "singletons4": 556,
+        "selectedSmallPixels4": 111,
+        "singletons8": 277,
+        "selectedSmallPixels8": 85
+      },
+      "after": {
+        "singletons4": 537,
+        "selectedSmallPixels4": 84,
+        "singletons8": 270,
+        "selectedSmallPixels8": 63
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "merged": 23,
+        "color-distance-veto": 12,
+        "no-admissible-anchor": 49,
+        "ambiguous-near-tie": 4
+      }
+    },
+    {
+      "id": "s085-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.04,
+      "changed": 50,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.44069999999999254,
+      "baseline": {
+        "singletons4": 556,
+        "selectedSmallPixels4": 111,
+        "singletons8": 277,
+        "selectedSmallPixels8": 85
+      },
+      "after": {
+        "singletons4": 536,
+        "selectedSmallPixels4": 83,
+        "singletons8": 269,
+        "selectedSmallPixels8": 62
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "merged": 24,
+        "color-distance-veto": 11,
+        "no-admissible-anchor": 49,
+        "ambiguous-near-tie": 4
+      }
+    },
+    {
+      "id": "s085-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.005,
+      "changed": 7,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.47800000000000864,
+      "baseline": {
+        "singletons4": 556,
+        "selectedSmallPixels4": 111,
+        "singletons8": 277,
+        "selectedSmallPixels8": 85
+      },
+      "after": {
+        "singletons4": 551,
+        "selectedSmallPixels4": 104,
+        "singletons8": 277,
+        "selectedSmallPixels8": 78
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "tie": 33,
+        "color-distance": 11,
+        "protected-boundary": 37,
+        "merged": 6,
+        "unanchored": 1
+      }
+    },
+    {
+      "id": "s085-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.02,
+      "changed": 11,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.4285000000000423,
+      "baseline": {
+        "singletons4": 556,
+        "selectedSmallPixels4": 111,
+        "singletons8": 277,
+        "selectedSmallPixels8": 85
+      },
+      "after": {
+        "singletons4": 549,
+        "selectedSmallPixels4": 100,
+        "singletons8": 275,
+        "selectedSmallPixels8": 74
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "tie": 33,
+        "merged": 9,
+        "protected-boundary": 37,
+        "color-distance": 8,
+        "unanchored": 1
+      }
+    },
+    {
+      "id": "s085-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.04,
+      "changed": 11,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.44839999999999236,
+      "baseline": {
+        "singletons4": 556,
+        "selectedSmallPixels4": 111,
+        "singletons8": 277,
+        "selectedSmallPixels8": 85
+      },
+      "after": {
+        "singletons4": 549,
+        "selectedSmallPixels4": 100,
+        "singletons8": 275,
+        "selectedSmallPixels8": 74
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "tie": 33,
+        "merged": 9,
+        "protected-boundary": 37,
+        "color-distance": 8,
+        "unanchored": 1
+      }
+    },
+    {
+      "id": "s093",
+      "method": "nearest",
+      "maxDistanceSquared": 0.005,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.0695999999999799,
+      "baseline": {
+        "singletons4": 277,
+        "selectedSmallPixels4": 8,
+        "singletons8": 250,
+        "selectedSmallPixels8": 8
+      },
+      "after": {
+        "singletons4": 277,
+        "selectedSmallPixels4": 8,
+        "singletons8": 250,
+        "selectedSmallPixels8": 8
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 6
+      }
+    },
+    {
+      "id": "s093",
+      "method": "nearest",
+      "maxDistanceSquared": 0.02,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.05889999999999418,
+      "baseline": {
+        "singletons4": 277,
+        "selectedSmallPixels4": 8,
+        "singletons8": 250,
+        "selectedSmallPixels8": 8
+      },
+      "after": {
+        "singletons4": 277,
+        "selectedSmallPixels4": 8,
+        "singletons8": 250,
+        "selectedSmallPixels8": 8
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 6
+      }
+    },
+    {
+      "id": "s093",
+      "method": "nearest",
+      "maxDistanceSquared": 0.04,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.06740000000002055,
+      "baseline": {
+        "singletons4": 277,
+        "selectedSmallPixels4": 8,
+        "singletons8": 250,
+        "selectedSmallPixels8": 8
+      },
+      "after": {
+        "singletons4": 277,
+        "selectedSmallPixels4": 8,
+        "singletons8": 250,
+        "selectedSmallPixels8": 8
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 6
+      }
+    },
+    {
+      "id": "s093",
+      "method": "vote",
+      "maxDistanceSquared": 0.005,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.06329999999996971,
+      "baseline": {
+        "singletons4": 277,
+        "selectedSmallPixels4": 8,
+        "singletons8": 250,
+        "selectedSmallPixels8": 8
+      },
+      "after": {
+        "singletons4": 277,
+        "selectedSmallPixels4": 8,
+        "singletons8": 250,
+        "selectedSmallPixels8": 8
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "protected-boundary": 1,
+        "unanchored": 1,
+        "tie": 4
+      }
+    },
+    {
+      "id": "s093",
+      "method": "vote",
+      "maxDistanceSquared": 0.02,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.05890000000005102,
+      "baseline": {
+        "singletons4": 277,
+        "selectedSmallPixels4": 8,
+        "singletons8": 250,
+        "selectedSmallPixels8": 8
+      },
+      "after": {
+        "singletons4": 277,
+        "selectedSmallPixels4": 8,
+        "singletons8": 250,
+        "selectedSmallPixels8": 8
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "protected-boundary": 1,
+        "unanchored": 1,
+        "tie": 4
+      }
+    },
+    {
+      "id": "s093",
+      "method": "vote",
+      "maxDistanceSquared": 0.04,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.07179999999999609,
+      "baseline": {
+        "singletons4": 277,
+        "selectedSmallPixels4": 8,
+        "singletons8": 250,
+        "selectedSmallPixels8": 8
+      },
+      "after": {
+        "singletons4": 277,
+        "selectedSmallPixels4": 8,
+        "singletons8": 250,
+        "selectedSmallPixels8": 8
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "protected-boundary": 1,
+        "unanchored": 1,
+        "tie": 4
+      }
+    },
+    {
+      "id": "s093-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.005,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.06220000000001846,
+      "baseline": {
+        "singletons4": 124,
+        "selectedSmallPixels4": 26,
+        "singletons8": 81,
+        "selectedSmallPixels8": 21
+      },
+      "after": {
+        "singletons4": 124,
+        "selectedSmallPixels4": 26,
+        "singletons8": 81,
+        "selectedSmallPixels8": 21
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "color-distance-veto": 6,
+        "no-admissible-anchor": 15
+      }
+    },
+    {
+      "id": "s093-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.02,
+      "changed": 1,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.04480000000000928,
+      "baseline": {
+        "singletons4": 124,
+        "selectedSmallPixels4": 26,
+        "singletons8": 81,
+        "selectedSmallPixels8": 21
+      },
+      "after": {
+        "singletons4": 123,
+        "selectedSmallPixels4": 25,
+        "singletons8": 80,
+        "selectedSmallPixels8": 20
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "color-distance-veto": 5,
+        "no-admissible-anchor": 15,
+        "merged": 1
+      }
+    },
+    {
+      "id": "s093-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.04,
+      "changed": 4,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.07150000000001455,
+      "baseline": {
+        "singletons4": 124,
+        "selectedSmallPixels4": 26,
+        "singletons8": 81,
+        "selectedSmallPixels8": 21
+      },
+      "after": {
+        "singletons4": 120,
+        "selectedSmallPixels4": 22,
+        "singletons8": 78,
+        "selectedSmallPixels8": 22
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "merged": 4,
+        "no-admissible-anchor": 15,
+        "color-distance-veto": 1,
+        "ambiguous-near-tie": 1
+      }
+    },
+    {
+      "id": "s093-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.005,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.0483000000000402,
+      "baseline": {
+        "singletons4": 124,
+        "selectedSmallPixels4": 26,
+        "singletons8": 81,
+        "selectedSmallPixels8": 21
+      },
+      "after": {
+        "singletons4": 124,
+        "selectedSmallPixels4": 26,
+        "singletons8": 81,
+        "selectedSmallPixels8": 21
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "tie": 6,
+        "protected-boundary": 7,
+        "unanchored": 6,
+        "color-distance": 2
+      }
+    },
+    {
+      "id": "s093-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.02,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.043400000000019645,
+      "baseline": {
+        "singletons4": 124,
+        "selectedSmallPixels4": 26,
+        "singletons8": 81,
+        "selectedSmallPixels8": 21
+      },
+      "after": {
+        "singletons4": 124,
+        "selectedSmallPixels4": 26,
+        "singletons8": 81,
+        "selectedSmallPixels8": 21
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "tie": 6,
+        "protected-boundary": 7,
+        "unanchored": 6,
+        "color-distance": 2
+      }
+    },
+    {
+      "id": "s093-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.04,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.06560000000001764,
+      "baseline": {
+        "singletons4": 124,
+        "selectedSmallPixels4": 26,
+        "singletons8": 81,
+        "selectedSmallPixels8": 21
+      },
+      "after": {
+        "singletons4": 124,
+        "selectedSmallPixels4": 26,
+        "singletons8": 81,
+        "selectedSmallPixels8": 21
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "tie": 6,
+        "protected-boundary": 7,
+        "unanchored": 6,
+        "color-distance": 2
+      }
+    },
+    {
+      "id": "s113",
+      "method": "nearest",
+      "maxDistanceSquared": 0.005,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 1.191500000000019,
+      "baseline": {
+        "singletons4": 6267,
+        "selectedSmallPixels4": 7,
+        "singletons8": 6042,
+        "selectedSmallPixels8": 7
+      },
+      "after": {
+        "singletons4": 6267,
+        "selectedSmallPixels4": 7,
+        "singletons8": 6042,
+        "selectedSmallPixels8": 7
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 6
+      }
+    },
+    {
+      "id": "s113",
+      "method": "nearest",
+      "maxDistanceSquared": 0.02,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 1.198599999999999,
+      "baseline": {
+        "singletons4": 6267,
+        "selectedSmallPixels4": 7,
+        "singletons8": 6042,
+        "selectedSmallPixels8": 7
+      },
+      "after": {
+        "singletons4": 6267,
+        "selectedSmallPixels4": 7,
+        "singletons8": 6042,
+        "selectedSmallPixels8": 7
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 6
+      }
+    },
+    {
+      "id": "s113",
+      "method": "nearest",
+      "maxDistanceSquared": 0.04,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 1.18059999999997,
+      "baseline": {
+        "singletons4": 6267,
+        "selectedSmallPixels4": 7,
+        "singletons8": 6042,
+        "selectedSmallPixels8": 7
+      },
+      "after": {
+        "singletons4": 6267,
+        "selectedSmallPixels4": 7,
+        "singletons8": 6042,
+        "selectedSmallPixels8": 7
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 6
+      }
+    },
+    {
+      "id": "s113",
+      "method": "vote",
+      "maxDistanceSquared": 0.005,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 1.1523000000000252,
+      "baseline": {
+        "singletons4": 6267,
+        "selectedSmallPixels4": 7,
+        "singletons8": 6042,
+        "selectedSmallPixels8": 7
+      },
+      "after": {
+        "singletons4": 6267,
+        "selectedSmallPixels4": 7,
+        "singletons8": 6042,
+        "selectedSmallPixels8": 7
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "tie": 6
+      }
+    },
+    {
+      "id": "s113",
+      "method": "vote",
+      "maxDistanceSquared": 0.02,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 1.1299000000000206,
+      "baseline": {
+        "singletons4": 6267,
+        "selectedSmallPixels4": 7,
+        "singletons8": 6042,
+        "selectedSmallPixels8": 7
+      },
+      "after": {
+        "singletons4": 6267,
+        "selectedSmallPixels4": 7,
+        "singletons8": 6042,
+        "selectedSmallPixels8": 7
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "tie": 6
+      }
+    },
+    {
+      "id": "s113",
+      "method": "vote",
+      "maxDistanceSquared": 0.04,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 1.1222999999999956,
+      "baseline": {
+        "singletons4": 6267,
+        "selectedSmallPixels4": 7,
+        "singletons8": 6042,
+        "selectedSmallPixels8": 7
+      },
+      "after": {
+        "singletons4": 6267,
+        "selectedSmallPixels4": 7,
+        "singletons8": 6042,
+        "selectedSmallPixels8": 7
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "tie": 6
+      }
+    },
+    {
+      "id": "s113-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.005,
+      "changed": 15,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.8315000000000055,
+      "baseline": {
+        "singletons4": 1048,
+        "selectedSmallPixels4": 134,
+        "singletons8": 623,
+        "selectedSmallPixels8": 93
+      },
+      "after": {
+        "singletons4": 1041,
+        "selectedSmallPixels4": 124,
+        "singletons8": 619,
+        "selectedSmallPixels8": 83
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 46,
+        "color-distance-veto": 31,
+        "merged": 9
+      }
+    },
+    {
+      "id": "s113-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.02,
+      "changed": 59,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.5581999999999994,
+      "baseline": {
+        "singletons4": 1048,
+        "selectedSmallPixels4": 134,
+        "singletons8": 623,
+        "selectedSmallPixels8": 93
+      },
+      "after": {
+        "singletons4": 1028,
+        "selectedSmallPixels4": 89,
+        "singletons8": 612,
+        "selectedSmallPixels8": 50
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 46,
+        "merged": 32,
+        "color-distance-veto": 8
+      }
+    },
+    {
+      "id": "s113-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.04,
+      "changed": 59,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.5557999999999765,
+      "baseline": {
+        "singletons4": 1048,
+        "selectedSmallPixels4": 134,
+        "singletons8": 623,
+        "selectedSmallPixels8": 93
+      },
+      "after": {
+        "singletons4": 1028,
+        "selectedSmallPixels4": 89,
+        "singletons8": 612,
+        "selectedSmallPixels8": 50
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 46,
+        "merged": 32,
+        "color-distance-veto": 8
+      }
+    },
+    {
+      "id": "s113-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.005,
+      "changed": 5,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.6066000000000145,
+      "baseline": {
+        "singletons4": 1048,
+        "selectedSmallPixels4": 134,
+        "singletons8": 623,
+        "selectedSmallPixels8": 93
+      },
+      "after": {
+        "singletons4": 1047,
+        "selectedSmallPixels4": 134,
+        "singletons8": 623,
+        "selectedSmallPixels8": 93
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "unanchored": 9,
+        "color-distance": 17,
+        "protected-boundary": 27,
+        "tie": 32,
+        "merged": 1
+      }
+    },
+    {
+      "id": "s113-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.02,
+      "changed": 35,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.7676999999999907,
+      "baseline": {
+        "singletons4": 1048,
+        "selectedSmallPixels4": 134,
+        "singletons8": 623,
+        "selectedSmallPixels8": 93
+      },
+      "after": {
+        "singletons4": 1038,
+        "selectedSmallPixels4": 113,
+        "singletons8": 617,
+        "selectedSmallPixels8": 74
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "unanchored": 9,
+        "merged": 15,
+        "protected-boundary": 27,
+        "tie": 32,
+        "color-distance": 3
+      }
+    },
+    {
+      "id": "s113-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.04,
+      "changed": 35,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.6027000000000271,
+      "baseline": {
+        "singletons4": 1048,
+        "selectedSmallPixels4": 134,
+        "singletons8": 623,
+        "selectedSmallPixels8": 93
+      },
+      "after": {
+        "singletons4": 1038,
+        "selectedSmallPixels4": 113,
+        "singletons8": 617,
+        "selectedSmallPixels8": 74
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "unanchored": 9,
+        "merged": 15,
+        "protected-boundary": 27,
+        "tie": 32,
+        "color-distance": 3
+      }
+    },
+    {
+      "id": "s121",
+      "method": "nearest",
+      "maxDistanceSquared": 0.005,
+      "changed": 4,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.05340000000001055,
+      "baseline": {
+        "singletons4": 90,
+        "selectedSmallPixels4": 9,
+        "singletons8": 76,
+        "selectedSmallPixels8": 9
+      },
+      "after": {
+        "singletons4": 87,
+        "selectedSmallPixels4": 5,
+        "singletons8": 74,
+        "selectedSmallPixels8": 5
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 5,
+        "merged": 3
+      }
+    },
+    {
+      "id": "s121",
+      "method": "nearest",
+      "maxDistanceSquared": 0.02,
+      "changed": 4,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.04080000000004702,
+      "baseline": {
+        "singletons4": 90,
+        "selectedSmallPixels4": 9,
+        "singletons8": 76,
+        "selectedSmallPixels8": 9
+      },
+      "after": {
+        "singletons4": 87,
+        "selectedSmallPixels4": 5,
+        "singletons8": 74,
+        "selectedSmallPixels8": 5
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 5,
+        "merged": 3
+      }
+    },
+    {
+      "id": "s121",
+      "method": "nearest",
+      "maxDistanceSquared": 0.04,
+      "changed": 4,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.05490000000003192,
+      "baseline": {
+        "singletons4": 90,
+        "selectedSmallPixels4": 9,
+        "singletons8": 76,
+        "selectedSmallPixels8": 9
+      },
+      "after": {
+        "singletons4": 87,
+        "selectedSmallPixels4": 5,
+        "singletons8": 74,
+        "selectedSmallPixels8": 5
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 5,
+        "merged": 3
+      }
+    },
+    {
+      "id": "s121",
+      "method": "vote",
+      "maxDistanceSquared": 0.005,
+      "changed": 4,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.05129999999996926,
+      "baseline": {
+        "singletons4": 90,
+        "selectedSmallPixels4": 9,
+        "singletons8": 76,
+        "selectedSmallPixels8": 9
+      },
+      "after": {
+        "singletons4": 87,
+        "selectedSmallPixels4": 5,
+        "singletons8": 74,
+        "selectedSmallPixels8": 5
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "tie": 5,
+        "merged": 3
+      }
+    },
+    {
+      "id": "s121",
+      "method": "vote",
+      "maxDistanceSquared": 0.02,
+      "changed": 4,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.04590000000001737,
+      "baseline": {
+        "singletons4": 90,
+        "selectedSmallPixels4": 9,
+        "singletons8": 76,
+        "selectedSmallPixels8": 9
+      },
+      "after": {
+        "singletons4": 87,
+        "selectedSmallPixels4": 5,
+        "singletons8": 74,
+        "selectedSmallPixels8": 5
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "tie": 5,
+        "merged": 3
+      }
+    },
+    {
+      "id": "s121",
+      "method": "vote",
+      "maxDistanceSquared": 0.04,
+      "changed": 4,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.05889999999999418,
+      "baseline": {
+        "singletons4": 90,
+        "selectedSmallPixels4": 9,
+        "singletons8": 76,
+        "selectedSmallPixels8": 9
+      },
+      "after": {
+        "singletons4": 87,
+        "selectedSmallPixels4": 5,
+        "singletons8": 74,
+        "selectedSmallPixels8": 5
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "tie": 5,
+        "merged": 3
+      }
+    },
+    {
+      "id": "s121-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.005,
+      "changed": 4,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.05369999999999209,
+      "baseline": {
+        "singletons4": 88,
+        "selectedSmallPixels4": 9,
+        "singletons8": 74,
+        "selectedSmallPixels8": 9
+      },
+      "after": {
+        "singletons4": 85,
+        "selectedSmallPixels4": 5,
+        "singletons8": 72,
+        "selectedSmallPixels8": 5
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 5,
+        "merged": 3
+      }
+    },
+    {
+      "id": "s121-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.02,
+      "changed": 4,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.04189999999999827,
+      "baseline": {
+        "singletons4": 88,
+        "selectedSmallPixels4": 9,
+        "singletons8": 74,
+        "selectedSmallPixels8": 9
+      },
+      "after": {
+        "singletons4": 85,
+        "selectedSmallPixels4": 5,
+        "singletons8": 72,
+        "selectedSmallPixels8": 5
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 5,
+        "merged": 3
+      }
+    },
+    {
+      "id": "s121-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.04,
+      "changed": 4,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.04629999999997381,
+      "baseline": {
+        "singletons4": 88,
+        "selectedSmallPixels4": 9,
+        "singletons8": 74,
+        "selectedSmallPixels8": 9
+      },
+      "after": {
+        "singletons4": 85,
+        "selectedSmallPixels4": 5,
+        "singletons8": 72,
+        "selectedSmallPixels8": 5
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 5,
+        "merged": 3
+      }
+    },
+    {
+      "id": "s121-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.005,
+      "changed": 4,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.044499999999970896,
+      "baseline": {
+        "singletons4": 88,
+        "selectedSmallPixels4": 9,
+        "singletons8": 74,
+        "selectedSmallPixels8": 9
+      },
+      "after": {
+        "singletons4": 85,
+        "selectedSmallPixels4": 5,
+        "singletons8": 72,
+        "selectedSmallPixels8": 5
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "tie": 5,
+        "merged": 3
+      }
+    },
+    {
+      "id": "s121-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.02,
+      "changed": 4,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.04019999999997026,
+      "baseline": {
+        "singletons4": 88,
+        "selectedSmallPixels4": 9,
+        "singletons8": 74,
+        "selectedSmallPixels8": 9
+      },
+      "after": {
+        "singletons4": 85,
+        "selectedSmallPixels4": 5,
+        "singletons8": 72,
+        "selectedSmallPixels8": 5
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "tie": 5,
+        "merged": 3
+      }
+    },
+    {
+      "id": "s121-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.04,
+      "changed": 4,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.05680000000000973,
+      "baseline": {
+        "singletons4": 88,
+        "selectedSmallPixels4": 9,
+        "singletons8": 74,
+        "selectedSmallPixels8": 9
+      },
+      "after": {
+        "singletons4": 85,
+        "selectedSmallPixels4": 5,
+        "singletons8": 72,
+        "selectedSmallPixels8": 5
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "tie": 5,
+        "merged": 3
+      }
+    },
+    {
+      "id": "s149",
+      "method": "nearest",
+      "maxDistanceSquared": 0.005,
+      "changed": 3,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.3380000000000223,
+      "baseline": {
+        "singletons4": 445,
+        "selectedSmallPixels4": 6,
+        "singletons8": 335,
+        "selectedSmallPixels8": 6
+      },
+      "after": {
+        "singletons4": 444,
+        "selectedSmallPixels4": 3,
+        "singletons8": 334,
+        "selectedSmallPixels8": 3
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 2,
+        "color-distance-veto": 1,
+        "merged": 2
+      }
+    },
+    {
+      "id": "s149",
+      "method": "nearest",
+      "maxDistanceSquared": 0.02,
+      "changed": 3,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.2979000000000269,
+      "baseline": {
+        "singletons4": 445,
+        "selectedSmallPixels4": 6,
+        "singletons8": 335,
+        "selectedSmallPixels8": 6
+      },
+      "after": {
+        "singletons4": 444,
+        "selectedSmallPixels4": 3,
+        "singletons8": 334,
+        "selectedSmallPixels8": 3
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 2,
+        "color-distance-veto": 1,
+        "merged": 2
+      }
+    },
+    {
+      "id": "s149",
+      "method": "nearest",
+      "maxDistanceSquared": 0.04,
+      "changed": 3,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.32030000000003156,
+      "baseline": {
+        "singletons4": 445,
+        "selectedSmallPixels4": 6,
+        "singletons8": 335,
+        "selectedSmallPixels8": 6
+      },
+      "after": {
+        "singletons4": 444,
+        "selectedSmallPixels4": 3,
+        "singletons8": 334,
+        "selectedSmallPixels8": 3
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 2,
+        "color-distance-veto": 1,
+        "merged": 2
+      }
+    },
+    {
+      "id": "s149",
+      "method": "vote",
+      "maxDistanceSquared": 0.005,
+      "changed": 1,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.4461000000000013,
+      "baseline": {
+        "singletons4": 445,
+        "selectedSmallPixels4": 6,
+        "singletons8": 335,
+        "selectedSmallPixels8": 6
+      },
+      "after": {
+        "singletons4": 444,
+        "selectedSmallPixels4": 5,
+        "singletons8": 334,
+        "selectedSmallPixels8": 5
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "tie": 3,
+        "merged": 1,
+        "protected-boundary": 1
+      }
+    },
+    {
+      "id": "s149",
+      "method": "vote",
+      "maxDistanceSquared": 0.02,
+      "changed": 1,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.44990000000001373,
+      "baseline": {
+        "singletons4": 445,
+        "selectedSmallPixels4": 6,
+        "singletons8": 335,
+        "selectedSmallPixels8": 6
+      },
+      "after": {
+        "singletons4": 444,
+        "selectedSmallPixels4": 5,
+        "singletons8": 334,
+        "selectedSmallPixels8": 5
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "tie": 3,
+        "merged": 1,
+        "protected-boundary": 1
+      }
+    },
+    {
+      "id": "s149",
+      "method": "vote",
+      "maxDistanceSquared": 0.04,
+      "changed": 1,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.7005000000000337,
+      "baseline": {
+        "singletons4": 445,
+        "selectedSmallPixels4": 6,
+        "singletons8": 335,
+        "selectedSmallPixels8": 6
+      },
+      "after": {
+        "singletons4": 444,
+        "selectedSmallPixels4": 5,
+        "singletons8": 334,
+        "selectedSmallPixels8": 5
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "tie": 3,
+        "merged": 1,
+        "protected-boundary": 1
+      }
+    },
+    {
+      "id": "s149-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.005,
+      "changed": 1,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.3185000000000855,
+      "baseline": {
+        "singletons4": 340,
+        "selectedSmallPixels4": 23,
+        "singletons8": 247,
+        "selectedSmallPixels8": 23
+      },
+      "after": {
+        "singletons4": 339,
+        "selectedSmallPixels4": 22,
+        "singletons8": 246,
+        "selectedSmallPixels8": 22
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 5,
+        "color-distance-veto": 17,
+        "merged": 1
+      }
+    },
+    {
+      "id": "s149-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.02,
+      "changed": 6,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.5153000000000247,
+      "baseline": {
+        "singletons4": 340,
+        "selectedSmallPixels4": 23,
+        "singletons8": 247,
+        "selectedSmallPixels8": 23
+      },
+      "after": {
+        "singletons4": 333,
+        "selectedSmallPixels4": 17,
+        "singletons8": 241,
+        "selectedSmallPixels8": 17
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 5,
+        "color-distance-veto": 12,
+        "merged": 6
+      }
+    },
+    {
+      "id": "s149-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.04,
+      "changed": 8,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.5138000000000602,
+      "baseline": {
+        "singletons4": 340,
+        "selectedSmallPixels4": 23,
+        "singletons8": 247,
+        "selectedSmallPixels8": 23
+      },
+      "after": {
+        "singletons4": 331,
+        "selectedSmallPixels4": 15,
+        "singletons8": 239,
+        "selectedSmallPixels8": 15
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 5,
+        "color-distance-veto": 10,
+        "merged": 8
+      }
+    },
+    {
+      "id": "s149-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.005,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.3705999999999676,
+      "baseline": {
+        "singletons4": 340,
+        "selectedSmallPixels4": 23,
+        "singletons8": 247,
+        "selectedSmallPixels8": 23
+      },
+      "after": {
+        "singletons4": 340,
+        "selectedSmallPixels4": 23,
+        "singletons8": 247,
+        "selectedSmallPixels8": 23
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "protected-boundary": 9,
+        "tie": 11,
+        "color-distance": 3
+      }
+    },
+    {
+      "id": "s149-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.02,
+      "changed": 2,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.3443000000000893,
+      "baseline": {
+        "singletons4": 340,
+        "selectedSmallPixels4": 23,
+        "singletons8": 247,
+        "selectedSmallPixels8": 23
+      },
+      "after": {
+        "singletons4": 337,
+        "selectedSmallPixels4": 21,
+        "singletons8": 245,
+        "selectedSmallPixels8": 21
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "protected-boundary": 9,
+        "tie": 11,
+        "color-distance": 1,
+        "merged": 2
+      }
+    },
+    {
+      "id": "s149-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.04,
+      "changed": 2,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.3469000000000051,
+      "baseline": {
+        "singletons4": 340,
+        "selectedSmallPixels4": 23,
+        "singletons8": 247,
+        "selectedSmallPixels8": 23
+      },
+      "after": {
+        "singletons4": 337,
+        "selectedSmallPixels4": 21,
+        "singletons8": 245,
+        "selectedSmallPixels8": 21
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "protected-boundary": 9,
+        "tie": 11,
+        "color-distance": 1,
+        "merged": 2
+      }
+    },
+    {
+      "id": "s153",
+      "method": "nearest",
+      "maxDistanceSquared": 0.005,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.022499999999922693,
+      "baseline": {
+        "singletons4": 20,
+        "selectedSmallPixels4": 8,
+        "singletons8": 14,
+        "selectedSmallPixels8": 8
+      },
+      "after": {
+        "singletons4": 20,
+        "selectedSmallPixels4": 8,
+        "singletons8": 14,
+        "selectedSmallPixels8": 8
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 3,
+        "color-distance-veto": 2
+      }
+    },
+    {
+      "id": "s153",
+      "method": "nearest",
+      "maxDistanceSquared": 0.02,
+      "changed": 3,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.01269999999999527,
+      "baseline": {
+        "singletons4": 20,
+        "selectedSmallPixels4": 8,
+        "singletons8": 14,
+        "selectedSmallPixels8": 8
+      },
+      "after": {
+        "singletons4": 19,
+        "selectedSmallPixels4": 5,
+        "singletons8": 13,
+        "selectedSmallPixels8": 5
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 3,
+        "merged": 2
+      }
+    },
+    {
+      "id": "s153",
+      "method": "nearest",
+      "maxDistanceSquared": 0.04,
+      "changed": 3,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.022199999999998,
+      "baseline": {
+        "singletons4": 20,
+        "selectedSmallPixels4": 8,
+        "singletons8": 14,
+        "selectedSmallPixels8": 8
+      },
+      "after": {
+        "singletons4": 19,
+        "selectedSmallPixels4": 5,
+        "singletons8": 13,
+        "selectedSmallPixels8": 5
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 3,
+        "merged": 2
+      }
+    },
+    {
+      "id": "s153",
+      "method": "vote",
+      "maxDistanceSquared": 0.005,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.018799999999941974,
+      "baseline": {
+        "singletons4": 20,
+        "selectedSmallPixels4": 8,
+        "singletons8": 14,
+        "selectedSmallPixels8": 8
+      },
+      "after": {
+        "singletons4": 20,
+        "selectedSmallPixels4": 8,
+        "singletons8": 14,
+        "selectedSmallPixels8": 8
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "protected-boundary": 3,
+        "tie": 1,
+        "unanchored": 1
+      }
+    },
+    {
+      "id": "s153",
+      "method": "vote",
+      "maxDistanceSquared": 0.02,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.01340000000004693,
+      "baseline": {
+        "singletons4": 20,
+        "selectedSmallPixels4": 8,
+        "singletons8": 14,
+        "selectedSmallPixels8": 8
+      },
+      "after": {
+        "singletons4": 20,
+        "selectedSmallPixels4": 8,
+        "singletons8": 14,
+        "selectedSmallPixels8": 8
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "protected-boundary": 3,
+        "tie": 1,
+        "unanchored": 1
+      }
+    },
+    {
+      "id": "s153",
+      "method": "vote",
+      "maxDistanceSquared": 0.04,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.025599999999940337,
+      "baseline": {
+        "singletons4": 20,
+        "selectedSmallPixels4": 8,
+        "singletons8": 14,
+        "selectedSmallPixels8": 8
+      },
+      "after": {
+        "singletons4": 20,
+        "selectedSmallPixels4": 8,
+        "singletons8": 14,
+        "selectedSmallPixels8": 8
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "protected-boundary": 3,
+        "tie": 1,
+        "unanchored": 1
+      }
+    },
+    {
+      "id": "s153-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.005,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.022399999999947795,
+      "baseline": {
+        "singletons4": 20,
+        "selectedSmallPixels4": 8,
+        "singletons8": 14,
+        "selectedSmallPixels8": 8
+      },
+      "after": {
+        "singletons4": 20,
+        "selectedSmallPixels4": 8,
+        "singletons8": 14,
+        "selectedSmallPixels8": 8
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 3,
+        "color-distance-veto": 2
+      }
+    },
+    {
+      "id": "s153-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.02,
+      "changed": 3,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.011700000000018917,
+      "baseline": {
+        "singletons4": 20,
+        "selectedSmallPixels4": 8,
+        "singletons8": 14,
+        "selectedSmallPixels8": 8
+      },
+      "after": {
+        "singletons4": 19,
+        "selectedSmallPixels4": 5,
+        "singletons8": 13,
+        "selectedSmallPixels8": 5
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 3,
+        "merged": 2
+      }
+    },
+    {
+      "id": "s153-bead24",
+      "method": "nearest",
+      "maxDistanceSquared": 0.04,
+      "changed": 3,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.017699999999990723,
+      "baseline": {
+        "singletons4": 20,
+        "selectedSmallPixels4": 8,
+        "singletons8": 14,
+        "selectedSmallPixels8": 8
+      },
+      "after": {
+        "singletons4": 19,
+        "selectedSmallPixels4": 5,
+        "singletons8": 13,
+        "selectedSmallPixels8": 5
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "no-admissible-anchor": 3,
+        "merged": 2
+      }
+    },
+    {
+      "id": "s153-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.005,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.016500000000064574,
+      "baseline": {
+        "singletons4": 20,
+        "selectedSmallPixels4": 8,
+        "singletons8": 14,
+        "selectedSmallPixels8": 8
+      },
+      "after": {
+        "singletons4": 20,
+        "selectedSmallPixels4": 8,
+        "singletons8": 14,
+        "selectedSmallPixels8": 8
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "protected-boundary": 3,
+        "tie": 1,
+        "unanchored": 1
+      }
+    },
+    {
+      "id": "s153-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.02,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.012900000000058753,
+      "baseline": {
+        "singletons4": 20,
+        "selectedSmallPixels4": 8,
+        "singletons8": 14,
+        "selectedSmallPixels8": 8
+      },
+      "after": {
+        "singletons4": 20,
+        "selectedSmallPixels4": 8,
+        "singletons8": 14,
+        "selectedSmallPixels8": 8
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "protected-boundary": 3,
+        "tie": 1,
+        "unanchored": 1
+      }
+    },
+    {
+      "id": "s153-bead24",
+      "method": "vote",
+      "maxDistanceSquared": 0.04,
+      "changed": 0,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.019700000000057116,
+      "baseline": {
+        "singletons4": 20,
+        "selectedSmallPixels4": 8,
+        "singletons8": 14,
+        "selectedSmallPixels8": 8
+      },
+      "after": {
+        "singletons4": 20,
+        "selectedSmallPixels4": 8,
+        "singletons8": 14,
+        "selectedSmallPixels8": 8
+      },
+      "unwantedRemoved": null,
+      "unwantedCount": null,
+      "keepChanged": null,
+      "reasons": {
+        "protected-boundary": 3,
+        "tie": 1,
+        "unanchored": 1
+      }
+    },
+    {
+      "id": "protected-highlight",
+      "method": "nearest",
+      "maxDistanceSquared": 0.005,
+      "changed": 3,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.029300000000034743,
+      "baseline": {
+        "singletons4": 6,
+        "selectedSmallPixels4": 4,
+        "singletons8": 6,
+        "selectedSmallPixels8": 4
+      },
+      "after": {
+        "singletons4": 3,
+        "selectedSmallPixels4": 1,
+        "singletons8": 3,
+        "selectedSmallPixels8": 1
+      },
+      "unwantedRemoved": 3,
+      "unwantedCount": 3,
+      "keepChanged": 0,
+      "reasons": {
+        "merged": 3,
+        "protected-region": 1
+      }
+    },
+    {
+      "id": "protected-highlight",
+      "method": "nearest",
+      "maxDistanceSquared": 0.02,
+      "changed": 3,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.02539999999999054,
+      "baseline": {
+        "singletons4": 6,
+        "selectedSmallPixels4": 4,
+        "singletons8": 6,
+        "selectedSmallPixels8": 4
+      },
+      "after": {
+        "singletons4": 3,
+        "selectedSmallPixels4": 1,
+        "singletons8": 3,
+        "selectedSmallPixels8": 1
+      },
+      "unwantedRemoved": 3,
+      "unwantedCount": 3,
+      "keepChanged": 0,
+      "reasons": {
+        "merged": 3,
+        "protected-region": 1
+      }
+    },
+    {
+      "id": "protected-highlight",
+      "method": "nearest",
+      "maxDistanceSquared": 0.04,
+      "changed": 3,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.02650000000005548,
+      "baseline": {
+        "singletons4": 6,
+        "selectedSmallPixels4": 4,
+        "singletons8": 6,
+        "selectedSmallPixels8": 4
+      },
+      "after": {
+        "singletons4": 3,
+        "selectedSmallPixels4": 1,
+        "singletons8": 3,
+        "selectedSmallPixels8": 1
+      },
+      "unwantedRemoved": 3,
+      "unwantedCount": 3,
+      "keepChanged": 0,
+      "reasons": {
+        "merged": 3,
+        "protected-region": 1
+      }
+    },
+    {
+      "id": "protected-highlight",
+      "method": "vote",
+      "maxDistanceSquared": 0.005,
+      "changed": 3,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.021299999999996544,
+      "baseline": {
+        "singletons4": 6,
+        "selectedSmallPixels4": 4,
+        "singletons8": 6,
+        "selectedSmallPixels8": 4
+      },
+      "after": {
+        "singletons4": 3,
+        "selectedSmallPixels4": 1,
+        "singletons8": 3,
+        "selectedSmallPixels8": 1
+      },
+      "unwantedRemoved": 3,
+      "unwantedCount": 3,
+      "keepChanged": 0,
+      "reasons": {
+        "merged": 3,
+        "protected": 1
+      }
+    },
+    {
+      "id": "protected-highlight",
+      "method": "vote",
+      "maxDistanceSquared": 0.02,
+      "changed": 3,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.017900000000054206,
+      "baseline": {
+        "singletons4": 6,
+        "selectedSmallPixels4": 4,
+        "singletons8": 6,
+        "selectedSmallPixels8": 4
+      },
+      "after": {
+        "singletons4": 3,
+        "selectedSmallPixels4": 1,
+        "singletons8": 3,
+        "selectedSmallPixels8": 1
+      },
+      "unwantedRemoved": 3,
+      "unwantedCount": 3,
+      "keepChanged": 0,
+      "reasons": {
+        "merged": 3,
+        "protected": 1
+      }
+    },
+    {
+      "id": "protected-highlight",
+      "method": "vote",
+      "maxDistanceSquared": 0.04,
+      "changed": 3,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.028800000000046566,
+      "baseline": {
+        "singletons4": 6,
+        "selectedSmallPixels4": 4,
+        "singletons8": 6,
+        "selectedSmallPixels8": 4
+      },
+      "after": {
+        "singletons4": 3,
+        "selectedSmallPixels4": 1,
+        "singletons8": 3,
+        "selectedSmallPixels8": 1
+      },
+      "unwantedRemoved": 3,
+      "unwantedCount": 3,
+      "keepChanged": 0,
+      "reasons": {
+        "merged": 3,
+        "protected": 1
+      }
+    },
+    {
+      "id": "unprotected-highlight",
+      "method": "nearest",
+      "maxDistanceSquared": 0.005,
+      "changed": 4,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.024999999999977263,
+      "baseline": {
+        "singletons4": 6,
+        "selectedSmallPixels4": 4,
+        "singletons8": 6,
+        "selectedSmallPixels8": 4
+      },
+      "after": {
+        "singletons4": 2,
+        "selectedSmallPixels4": 0,
+        "singletons8": 2,
+        "selectedSmallPixels8": 0
+      },
+      "unwantedRemoved": 3,
+      "unwantedCount": 3,
+      "keepChanged": 1,
+      "reasons": {
+        "merged": 4
+      }
+    },
+    {
+      "id": "unprotected-highlight",
+      "method": "nearest",
+      "maxDistanceSquared": 0.02,
+      "changed": 4,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.02549999999996544,
+      "baseline": {
+        "singletons4": 6,
+        "selectedSmallPixels4": 4,
+        "singletons8": 6,
+        "selectedSmallPixels8": 4
+      },
+      "after": {
+        "singletons4": 2,
+        "selectedSmallPixels4": 0,
+        "singletons8": 2,
+        "selectedSmallPixels8": 0
+      },
+      "unwantedRemoved": 3,
+      "unwantedCount": 3,
+      "keepChanged": 1,
+      "reasons": {
+        "merged": 4
+      }
+    },
+    {
+      "id": "unprotected-highlight",
+      "method": "nearest",
+      "maxDistanceSquared": 0.04,
+      "changed": 4,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.027399999999943248,
+      "baseline": {
+        "singletons4": 6,
+        "selectedSmallPixels4": 4,
+        "singletons8": 6,
+        "selectedSmallPixels8": 4
+      },
+      "after": {
+        "singletons4": 2,
+        "selectedSmallPixels4": 0,
+        "singletons8": 2,
+        "selectedSmallPixels8": 0
+      },
+      "unwantedRemoved": 3,
+      "unwantedCount": 3,
+      "keepChanged": 1,
+      "reasons": {
+        "merged": 4
+      }
+    },
+    {
+      "id": "unprotected-highlight",
+      "method": "vote",
+      "maxDistanceSquared": 0.005,
+      "changed": 4,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.020999999999958163,
+      "baseline": {
+        "singletons4": 6,
+        "selectedSmallPixels4": 4,
+        "singletons8": 6,
+        "selectedSmallPixels8": 4
+      },
+      "after": {
+        "singletons4": 2,
+        "selectedSmallPixels4": 0,
+        "singletons8": 2,
+        "selectedSmallPixels8": 0
+      },
+      "unwantedRemoved": 3,
+      "unwantedCount": 3,
+      "keepChanged": 1,
+      "reasons": {
+        "merged": 4
+      }
+    },
+    {
+      "id": "unprotected-highlight",
+      "method": "vote",
+      "maxDistanceSquared": 0.02,
+      "changed": 4,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.018299999999953798,
+      "baseline": {
+        "singletons4": 6,
+        "selectedSmallPixels4": 4,
+        "singletons8": 6,
+        "selectedSmallPixels8": 4
+      },
+      "after": {
+        "singletons4": 2,
+        "selectedSmallPixels4": 0,
+        "singletons8": 2,
+        "selectedSmallPixels8": 0
+      },
+      "unwantedRemoved": 3,
+      "unwantedCount": 3,
+      "keepChanged": 1,
+      "reasons": {
+        "merged": 4
+      }
+    },
+    {
+      "id": "unprotected-highlight",
+      "method": "vote",
+      "maxDistanceSquared": 0.04,
+      "changed": 4,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.028900000000021464,
+      "baseline": {
+        "singletons4": 6,
+        "selectedSmallPixels4": 4,
+        "singletons8": 6,
+        "selectedSmallPixels8": 4
+      },
+      "after": {
+        "singletons4": 2,
+        "selectedSmallPixels4": 0,
+        "singletons8": 2,
+        "selectedSmallPixels8": 0
+      },
+      "unwantedRemoved": 3,
+      "unwantedCount": 3,
+      "keepChanged": 1,
+      "reasons": {
+        "merged": 4
+      }
+    },
+    {
+      "id": "diagonal",
+      "method": "nearest",
+      "maxDistanceSquared": 0.005,
+      "changed": 2,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.02580000000000382,
+      "baseline": {
+        "singletons4": 17,
+        "selectedSmallPixels4": 3,
+        "singletons8": 5,
+        "selectedSmallPixels8": 3
+      },
+      "after": {
+        "singletons4": 15,
+        "selectedSmallPixels4": 1,
+        "singletons8": 3,
+        "selectedSmallPixels8": 1
+      },
+      "unwantedRemoved": 2,
+      "unwantedCount": 2,
+      "keepChanged": 0,
+      "reasons": {
+        "protected-region": 1,
+        "merged": 2
+      }
+    },
+    {
+      "id": "diagonal",
+      "method": "nearest",
+      "maxDistanceSquared": 0.02,
+      "changed": 2,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.01749999999992724,
+      "baseline": {
+        "singletons4": 17,
+        "selectedSmallPixels4": 3,
+        "singletons8": 5,
+        "selectedSmallPixels8": 3
+      },
+      "after": {
+        "singletons4": 15,
+        "selectedSmallPixels4": 1,
+        "singletons8": 3,
+        "selectedSmallPixels8": 1
+      },
+      "unwantedRemoved": 2,
+      "unwantedCount": 2,
+      "keepChanged": 0,
+      "reasons": {
+        "protected-region": 1,
+        "merged": 2
+      }
+    },
+    {
+      "id": "diagonal",
+      "method": "nearest",
+      "maxDistanceSquared": 0.04,
+      "changed": 2,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.02719999999999345,
+      "baseline": {
+        "singletons4": 17,
+        "selectedSmallPixels4": 3,
+        "singletons8": 5,
+        "selectedSmallPixels8": 3
+      },
+      "after": {
+        "singletons4": 15,
+        "selectedSmallPixels4": 1,
+        "singletons8": 3,
+        "selectedSmallPixels8": 1
+      },
+      "unwantedRemoved": 2,
+      "unwantedCount": 2,
+      "keepChanged": 0,
+      "reasons": {
+        "protected-region": 1,
+        "merged": 2
+      }
+    },
+    {
+      "id": "diagonal",
+      "method": "vote",
+      "maxDistanceSquared": 0.005,
+      "changed": 2,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.021700000000009823,
+      "baseline": {
+        "singletons4": 17,
+        "selectedSmallPixels4": 3,
+        "singletons8": 5,
+        "selectedSmallPixels8": 3
+      },
+      "after": {
+        "singletons4": 15,
+        "selectedSmallPixels4": 1,
+        "singletons8": 3,
+        "selectedSmallPixels8": 1
+      },
+      "unwantedRemoved": 2,
+      "unwantedCount": 2,
+      "keepChanged": 0,
+      "reasons": {
+        "protected": 1,
+        "merged": 2
+      }
+    },
+    {
+      "id": "diagonal",
+      "method": "vote",
+      "maxDistanceSquared": 0.02,
+      "changed": 2,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.017600000000015825,
+      "baseline": {
+        "singletons4": 17,
+        "selectedSmallPixels4": 3,
+        "singletons8": 5,
+        "selectedSmallPixels8": 3
+      },
+      "after": {
+        "singletons4": 15,
+        "selectedSmallPixels4": 1,
+        "singletons8": 3,
+        "selectedSmallPixels8": 1
+      },
+      "unwantedRemoved": 2,
+      "unwantedCount": 2,
+      "keepChanged": 0,
+      "reasons": {
+        "protected": 1,
+        "merged": 2
+      }
+    },
+    {
+      "id": "diagonal",
+      "method": "vote",
+      "maxDistanceSquared": 0.04,
+      "changed": 2,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.03120000000001255,
+      "baseline": {
+        "singletons4": 17,
+        "selectedSmallPixels4": 3,
+        "singletons8": 5,
+        "selectedSmallPixels8": 3
+      },
+      "after": {
+        "singletons4": 15,
+        "selectedSmallPixels4": 1,
+        "singletons8": 3,
+        "selectedSmallPixels8": 1
+      },
+      "unwantedRemoved": 2,
+      "unwantedCount": 2,
+      "keepChanged": 0,
+      "reasons": {
+        "protected": 1,
+        "merged": 2
+      }
+    },
+    {
+      "id": "partial-alpha",
+      "method": "nearest",
+      "maxDistanceSquared": 0.005,
+      "changed": 3,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.025900000000092405,
+      "baseline": {
+        "singletons4": 7,
+        "selectedSmallPixels4": 4,
+        "singletons8": 7,
+        "selectedSmallPixels8": 4
+      },
+      "after": {
+        "singletons4": 4,
+        "selectedSmallPixels4": 1,
+        "singletons8": 4,
+        "selectedSmallPixels8": 1
+      },
+      "unwantedRemoved": 3,
+      "unwantedCount": 3,
+      "keepChanged": 0,
+      "reasons": {
+        "merged": 3,
+        "protected-region": 1
+      }
+    },
+    {
+      "id": "partial-alpha",
+      "method": "nearest",
+      "maxDistanceSquared": 0.02,
+      "changed": 3,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.01859999999999218,
+      "baseline": {
+        "singletons4": 7,
+        "selectedSmallPixels4": 4,
+        "singletons8": 7,
+        "selectedSmallPixels8": 4
+      },
+      "after": {
+        "singletons4": 4,
+        "selectedSmallPixels4": 1,
+        "singletons8": 4,
+        "selectedSmallPixels8": 1
+      },
+      "unwantedRemoved": 3,
+      "unwantedCount": 3,
+      "keepChanged": 0,
+      "reasons": {
+        "merged": 3,
+        "protected-region": 1
+      }
+    },
+    {
+      "id": "partial-alpha",
+      "method": "nearest",
+      "maxDistanceSquared": 0.04,
+      "changed": 3,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.0261000000000422,
+      "baseline": {
+        "singletons4": 7,
+        "selectedSmallPixels4": 4,
+        "singletons8": 7,
+        "selectedSmallPixels8": 4
+      },
+      "after": {
+        "singletons4": 4,
+        "selectedSmallPixels4": 1,
+        "singletons8": 4,
+        "selectedSmallPixels8": 1
+      },
+      "unwantedRemoved": 3,
+      "unwantedCount": 3,
+      "keepChanged": 0,
+      "reasons": {
+        "merged": 3,
+        "protected-region": 1
+      }
+    },
+    {
+      "id": "partial-alpha",
+      "method": "vote",
+      "maxDistanceSquared": 0.005,
+      "changed": 3,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.02060000000005857,
+      "baseline": {
+        "singletons4": 7,
+        "selectedSmallPixels4": 4,
+        "singletons8": 7,
+        "selectedSmallPixels8": 4
+      },
+      "after": {
+        "singletons4": 4,
+        "selectedSmallPixels4": 1,
+        "singletons8": 4,
+        "selectedSmallPixels8": 1
+      },
+      "unwantedRemoved": 3,
+      "unwantedCount": 3,
+      "keepChanged": 0,
+      "reasons": {
+        "merged": 3,
+        "protected": 1
+      }
+    },
+    {
+      "id": "partial-alpha",
+      "method": "vote",
+      "maxDistanceSquared": 0.02,
+      "changed": 3,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.017699999999990723,
+      "baseline": {
+        "singletons4": 7,
+        "selectedSmallPixels4": 4,
+        "singletons8": 7,
+        "selectedSmallPixels8": 4
+      },
+      "after": {
+        "singletons4": 4,
+        "selectedSmallPixels4": 1,
+        "singletons8": 4,
+        "selectedSmallPixels8": 1
+      },
+      "unwantedRemoved": 3,
+      "unwantedCount": 3,
+      "keepChanged": 0,
+      "reasons": {
+        "merged": 3,
+        "protected": 1
+      }
+    },
+    {
+      "id": "partial-alpha",
+      "method": "vote",
+      "maxDistanceSquared": 0.04,
+      "changed": 3,
+      "protectedChanged": 0,
+      "protectedColorGrowth": 0,
+      "ms": 0.04000000000007731,
+      "baseline": {
+        "singletons4": 7,
+        "selectedSmallPixels4": 4,
+        "singletons8": 7,
+        "selectedSmallPixels8": 4
+      },
+      "after": {
+        "singletons4": 4,
+        "selectedSmallPixels4": 1,
+        "singletons8": 4,
+        "selectedSmallPixels8": 1
+      },
+      "unwantedRemoved": 3,
+      "unwantedCount": 3,
+      "keepChanged": 0,
+      "reasons": {
+        "merged": 3,
+        "protected": 1
+      }
+    }
+  ]
+}

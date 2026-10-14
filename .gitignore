@@ -14,3 +14,8 @@ dist
 /bench/design-qa/
 /bench/theme-qa/
 /.tmp/
+
+# Private bead research inputs, derived images and embedded pixel payloads.
+/bench/bead-research/fixtures/
+/bench/bead-research/outputs/
+/bench/bead-research/gallery-data.json

@@ -1,0 +1,50 @@
+{
+  "browser": "Codex in-app browser",
+  "threshold": 0.02,
+  "checks": [
+    {
+      "id": "snowie",
+      "matched": true
+    },
+    {
+      "id": "s017-bead24",
+      "matched": true
+    },
+    {
+      "id": "s045-bead24",
+      "matched": true
+    },
+    {
+      "id": "s085-bead24",
+      "matched": true
+    },
+    {
+      "id": "s113-bead24",
+      "matched": true
+    },
+    {
+      "id": "s121-bead24",
+      "matched": true
+    },
+    {
+      "id": "s153-bead24",
+      "matched": true
+    },
+    {
+      "id": "protected-highlight",
+      "matched": true
+    },
+    {
+      "id": "unprotected-highlight",
+      "matched": true
+    },
+    {
+      "id": "diagonal",
+      "matched": true
+    },
+    {
+      "id": "partial-alpha",
+      "matched": true
+    }
+  ]
+}

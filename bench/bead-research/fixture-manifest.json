@@ -1,0 +1,78 @@
+[
+  {
+    "id": "snowie",
+    "file": "snowie.png",
+    "group": "User-supplied 96x96 pattern",
+    "selectedColors": [
+      "#f3be91",
+      "#c18b70"
+    ],
+    "annotation": "Two source colors from isolated-color references; not every selected occurrence is annotated unwanted."
+  },
+  {
+    "id": "s009",
+    "file": "s009.png",
+    "group": "clay-flower-pot",
+    "annotation": "Exploratory real sprite. Selected shades and protection below are declared heuristics, not maker annotations."
+  },
+  {
+    "id": "s017",
+    "file": "s017.png",
+    "group": "rpg-maker-character-test4-mz",
+    "annotation": "Exploratory real sprite. Selected shades and protection below are declared heuristics, not maker annotations."
+  },
+  {
+    "id": "s025",
+    "file": "s025.png",
+    "group": "rpg-maker-character-run-34",
+    "annotation": "Exploratory real sprite. Selected shades and protection below are declared heuristics, not maker annotations."
+  },
+  {
+    "id": "s041",
+    "file": "s041.png",
+    "group": "forge-fire-loop",
+    "annotation": "Exploratory real sprite. Selected shades and protection below are declared heuristics, not maker annotations."
+  },
+  {
+    "id": "s045",
+    "file": "s045.png",
+    "group": "south-v3-start-end-16f-seed15485523-shortprompt-20260630",
+    "annotation": "Exploratory real sprite. Selected shades and protection below are declared heuristics, not maker annotations."
+  },
+  {
+    "id": "s085",
+    "file": "s085.png",
+    "group": "campfire-loop-20260712",
+    "annotation": "Exploratory real sprite. Selected shades and protection below are declared heuristics, not maker annotations."
+  },
+  {
+    "id": "s093",
+    "file": "s093.png",
+    "group": "silver-ring",
+    "annotation": "Exploratory real sprite. Selected shades and protection below are declared heuristics, not maker annotations."
+  },
+  {
+    "id": "s113",
+    "file": "s113.png",
+    "group": "rustic-ancient-village-house-v3",
+    "annotation": "Exploratory real sprite. Selected shades and protection below are declared heuristics, not maker annotations."
+  },
+  {
+    "id": "s121",
+    "file": "s121.png",
+    "group": "rpg-maker-character-run-8",
+    "annotation": "Exploratory real sprite. Selected shades and protection below are declared heuristics, not maker annotations."
+  },
+  {
+    "id": "s149",
+    "file": "s149.png",
+    "group": "spinning-star-transparent-loop-20260712",
+    "annotation": "Exploratory real sprite. Selected shades and protection below are declared heuristics, not maker annotations."
+  },
+  {
+    "id": "s153",
+    "file": "s153.png",
+    "group": "animals-16x16",
+    "annotation": "Exploratory real sprite. Selected shades and protection below are declared heuristics, not maker annotations."
+  }
+]
