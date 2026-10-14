@@ -1,0 +1,201 @@
+{
+  "contract": "Continuous encoded-RGB L0-gradient smoothing with nearest-opaque extension and 8px edge padding, original-palette Oklab remap, hard dark/alpha/boundary/optionalKeep restoration",
+  "fixedParameters": {
+    "strengths": [
+      0.01,
+      0.03
+    ],
+    "firstBetaMultiplier": 2,
+    "betaStep": 2,
+    "betaMaximum": 100000,
+    "padding": 8
+  },
+  "cases": 1,
+  "checks": 165888,
+  "rows": [
+    {
+      "id": "original-attachment",
+      "family": "most recent original attachment; correlated character variant",
+      "strength": 0.01,
+      "protectGestures": 0,
+      "protectedOccupied": 0,
+      "before": {
+        "components8": 670,
+        "smallPixels8": 858,
+        "singletons8": 298,
+        "usedColors": 26,
+        "targetSmall": 61
+      },
+      "after": {
+        "components8": 868,
+        "smallPixels8": 1056,
+        "singletons8": 479,
+        "usedColors": 26,
+        "targetSmall": 64
+      },
+      "changed": 1669,
+      "targetChanged": 23,
+      "targetCount": 103,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "original-attachment-0.01-auto.png"
+    },
+    {
+      "id": "original-attachment",
+      "family": "most recent original attachment; correlated character variant",
+      "strength": 0.01,
+      "protectGestures": 1,
+      "protectedOccupied": 672,
+      "before": {
+        "components8": 670,
+        "smallPixels8": 858,
+        "singletons8": 298,
+        "usedColors": 26,
+        "targetSmall": 61
+      },
+      "after": {
+        "components8": 875,
+        "smallPixels8": 1070,
+        "singletons8": 483,
+        "usedColors": 26,
+        "targetSmall": 65
+      },
+      "changed": 1656,
+      "targetChanged": 22,
+      "targetCount": 103,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "original-attachment-0.01-keep.png"
+    },
+    {
+      "id": "original-attachment",
+      "family": "most recent original attachment; correlated character variant",
+      "strength": 0.03,
+      "protectGestures": 0,
+      "protectedOccupied": 0,
+      "before": {
+        "components8": 670,
+        "smallPixels8": 858,
+        "singletons8": 298,
+        "usedColors": 26,
+        "targetSmall": 61
+      },
+      "after": {
+        "components8": 852,
+        "smallPixels8": 1028,
+        "singletons8": 496,
+        "usedColors": 26,
+        "targetSmall": 52
+      },
+      "changed": 2731,
+      "targetChanged": 49,
+      "targetCount": 103,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "original-attachment-0.03-auto.png"
+    },
+    {
+      "id": "original-attachment",
+      "family": "most recent original attachment; correlated character variant",
+      "strength": 0.03,
+      "protectGestures": 1,
+      "protectedOccupied": 672,
+      "before": {
+        "components8": 670,
+        "smallPixels8": 858,
+        "singletons8": 298,
+        "usedColors": 26,
+        "targetSmall": 61
+      },
+      "after": {
+        "components8": 871,
+        "smallPixels8": 1052,
+        "singletons8": 507,
+        "usedColors": 26,
+        "targetSmall": 58
+      },
+      "changed": 2642,
+      "targetChanged": 43,
+      "targetCount": 103,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "original-attachment-0.03-keep.png"
+    }
+  ],
+  "pipelineRows": [
+    {
+      "id": "original-attachment",
+      "strength": 0.03,
+      "lambda": 0.008,
+      "protectGestures": 0,
+      "changed": 2780,
+      "targetChanged": 53,
+      "before": {
+        "components8": 670,
+        "smallPixels8": 858,
+        "singletons8": 298,
+        "usedColors": 26,
+        "targetSmall": 61
+      },
+      "after": {
+        "components8": 712,
+        "smallPixels8": 827,
+        "singletons8": 403,
+        "usedColors": 26,
+        "targetSmall": 33
+      },
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "original-attachment-0.03-auto-spatial.png"
+    },
+    {
+      "id": "original-attachment",
+      "strength": 0.03,
+      "lambda": 0.008,
+      "protectGestures": 1,
+      "changed": 2655,
+      "targetChanged": 44,
+      "before": {
+        "components8": 670,
+        "smallPixels8": 858,
+        "singletons8": 298,
+        "usedColors": 26,
+        "targetSmall": 61
+      },
+      "after": {
+        "components8": 740,
+        "smallPixels8": 882,
+        "singletons8": 416,
+        "usedColors": 26,
+        "targetSmall": 45
+      },
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "original-attachment-0.03-keep-spatial.png"
+    }
+  ]
+}

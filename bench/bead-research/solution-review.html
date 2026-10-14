@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Assisted bead research — live experiment</title>
+<style>
+body{font:16px system-ui;margin:24px;background:#f3f1ee;color:#252323}h1{font-size:24px}p{max-width:900px;line-height:1.5}button,select{font:inherit;padding:8px;margin:4px}label{display:inline-block;margin:8px}canvas{width:384px;max-width:100%;height:auto;image-rendering:pixelated;background:#b8b8b8;cursor:crosshair;touch-action:none}figure{margin:8px}figcaption{margin:8px 0}.panels{display:flex;flex-wrap:wrap;gap:12px}#status{white-space:pre-wrap}.hint{color:#614a31}.precomputed img{max-width:100%;image-rendering:pixelated}a{color:#244e80}
+</style>
+<h1>Assisted bead conversion: research only</h1>
+<p>This experiment runs spatial simplification in your browser. It preserves transparency, source dark colors, and source boundary cells. To retain important details, mark an area to keep: click its two opposite corners on the original. This is designer input, not automatic face recognition. It still needs review.</p>
+<p>The current attachment has an opaque checkerboard. The default input first removes its two identified gray background shades. This is explicit research preprocessing; a native transparent sprite would skip it.</p>
+<label>Image <select id="image"><option value="original-prepared">Current attachment — background prepared</option><option value="original-raw">Current attachment — raw checkerboard</option><option value="latest">Earlier transparent character</option><option value="pose0">Raised arm pose</option><option value="pose1">Smiling pose</option><option value="pose2">Open eyes pose</option><option value="pose3">Closed eyes pose</option><option value="s009-bead24">Other sprite s009 — Auto24</option><option value="s017-bead24">Other sprite s017 — Auto24</option></select></label>
+<label>Spatial strength <select id="strength"><option value="0.004">Mild — tested</option><option value="0.008" selected>Moderate — tested</option><option value="0.02">Strong — exploratory</option></select></label>
+<label>Single-color view <select id="color"><option value="all">All colors</option></select></label>
+<div><button id="mark">Mark an area to keep</button><button id="clear">Clear keep areas</button><button id="solid">Preview solid outer color</button><button id="restore">Show spatial result</button></div>
+<div><button id="add-shade">Toggle current swatch as a fill shade</button><button id="guided">Preview selected-shade cleanup</button><button id="combined">Preview selected shades and solid border</button><span id="shade-list">No fill shades selected.</span></div>
+<div><button id="prepare-png">Prepare current research PNG</button><a id="download-png" hidden>Download current research PNG</a></div>
+<p class="hint" id="hint">No areas protected. Mark a face or other important details before judging the output.</p>
+<div class="panels"><figure><figcaption>Original — mark keep areas here</figcaption><canvas id="before" width="96" height="96" aria-label="Original image and keep selection"></canvas></figure><figure><figcaption id="after-caption">Spatial simplification</figcaption><canvas id="after" width="96" height="96" aria-label="Research output"></canvas></figure></div>
+<p id="status" role="status">Loading private local input…</p>
+<p>Solid outer color uses the selected single-color-view swatch as its border color. Select a swatch first. It recolors only the occupied exterior boundary and preserves all interior cells. This styling does not repair internal lines, reshape the silhouette, or promise one-bead width.</p>
+<p>Selected-shade cleanup requires choosing problematic fill colors. It only merges their tiny components into an adjacent larger fill, leaving larger connected shading unchanged. Source dark, pink and near-white classes are heuristically protected. An intentional highlight using a selected shade can still be lost outside a Keep area.</p>
+<details class="precomputed"><summary>Precomputed outline construction comparisons</summary><p>Left to right: original, Solid, contour trace, contour plus old-border refill. Refill can remove intended perimeter details.</p><img src="../../.tmp/bead-research-private/contour-spike/latest-comparison.png" alt="Private outline construction comparison"></details>
+<p><a href="../../docs/research/2026-10-14-bead-solutions-reassessment.md">Research findings</a> · <a href="../../">Production app</a></p>
+<script type="module" src="./solution-review.mjs"></script>
+</html>

@@ -1,0 +1,453 @@
+{
+  "contract": "Two selected shades; only original 8-connected components up to four cells; nearest adjacent large nonprotected fill; fixed squaredOklab .04; optional face Keep",
+  "selectionPolicy": "Original/latest: exact two shades from isolated-color references. Other poses: nearest Oklab source swatches used as designer-choice proxies, not maker annotations or automatic role recognition.",
+  "background": "Current attachment is fully opaque with two baked checker shades. Original-prepared explicitly removes those two background colors first; original-raw is a diagnostic, not a valid transparent silhouette.",
+  "cases": 7,
+  "correlation": "same character poses/background variants, not independent held-outs",
+  "rows": [
+    {
+      "id": "original-raw",
+      "faceKeep": false,
+      "shadeSelections": 2,
+      "selectedColors": [
+        "#f3be91",
+        "#c18b70"
+      ],
+      "edits": 39,
+      "keepEdits": 0,
+      "darkEdits": 0,
+      "alphaEdits": 0,
+      "before": {
+        "allSmall": 858,
+        "selectedSmall": 61,
+        "selectedTotal": 103,
+        "colors": 26
+      },
+      "after": {
+        "allSmall": 819,
+        "selectedSmall": 22,
+        "selectedTotal": 64,
+        "colors": 26
+      },
+      "merged": 29,
+      "abstained": 24,
+      "file": "original-raw-selected.png"
+    },
+    {
+      "id": "original-raw",
+      "faceKeep": true,
+      "shadeSelections": 2,
+      "selectedColors": [
+        "#f3be91",
+        "#c18b70"
+      ],
+      "edits": 26,
+      "keepEdits": 0,
+      "darkEdits": 0,
+      "alphaEdits": 0,
+      "before": {
+        "allSmall": 858,
+        "selectedSmall": 61,
+        "selectedTotal": 103,
+        "colors": 26
+      },
+      "after": {
+        "allSmall": 832,
+        "selectedSmall": 35,
+        "selectedTotal": 77,
+        "colors": 26
+      },
+      "merged": 20,
+      "abstained": 33,
+      "file": "original-raw-keep.png"
+    },
+    {
+      "id": "original-prepared",
+      "faceKeep": false,
+      "shadeSelections": 2,
+      "selectedColors": [
+        "#f3be91",
+        "#c18b70"
+      ],
+      "edits": 39,
+      "keepEdits": 0,
+      "darkEdits": 0,
+      "alphaEdits": 0,
+      "before": {
+        "allSmall": 849,
+        "selectedSmall": 61,
+        "selectedTotal": 103,
+        "colors": 24
+      },
+      "after": {
+        "allSmall": 810,
+        "selectedSmall": 22,
+        "selectedTotal": 64,
+        "colors": 24
+      },
+      "merged": 29,
+      "abstained": 24,
+      "file": "original-prepared-selected.png"
+    },
+    {
+      "id": "original-prepared",
+      "faceKeep": true,
+      "shadeSelections": 2,
+      "selectedColors": [
+        "#f3be91",
+        "#c18b70"
+      ],
+      "edits": 26,
+      "keepEdits": 0,
+      "darkEdits": 0,
+      "alphaEdits": 0,
+      "before": {
+        "allSmall": 849,
+        "selectedSmall": 61,
+        "selectedTotal": 103,
+        "colors": 24
+      },
+      "after": {
+        "allSmall": 823,
+        "selectedSmall": 35,
+        "selectedTotal": 77,
+        "colors": 24
+      },
+      "merged": 20,
+      "abstained": 33,
+      "file": "original-prepared-keep.png"
+    },
+    {
+      "id": "latest",
+      "faceKeep": false,
+      "shadeSelections": 2,
+      "selectedColors": [
+        "#f3be91",
+        "#c18b70"
+      ],
+      "edits": 39,
+      "keepEdits": 0,
+      "darkEdits": 0,
+      "alphaEdits": 0,
+      "before": {
+        "allSmall": 848,
+        "selectedSmall": 61,
+        "selectedTotal": 103,
+        "colors": 24
+      },
+      "after": {
+        "allSmall": 809,
+        "selectedSmall": 22,
+        "selectedTotal": 64,
+        "colors": 24
+      },
+      "merged": 29,
+      "abstained": 24,
+      "file": "latest-selected.png"
+    },
+    {
+      "id": "latest",
+      "faceKeep": true,
+      "shadeSelections": 2,
+      "selectedColors": [
+        "#f3be91",
+        "#c18b70"
+      ],
+      "edits": 26,
+      "keepEdits": 0,
+      "darkEdits": 0,
+      "alphaEdits": 0,
+      "before": {
+        "allSmall": 848,
+        "selectedSmall": 61,
+        "selectedTotal": 103,
+        "colors": 24
+      },
+      "after": {
+        "allSmall": 822,
+        "selectedSmall": 35,
+        "selectedTotal": 77,
+        "colors": 24
+      },
+      "merged": 20,
+      "abstained": 33,
+      "file": "latest-keep.png"
+    },
+    {
+      "id": "pose0",
+      "faceKeep": false,
+      "shadeSelections": 2,
+      "selectedColors": [
+        "#f2be8f",
+        "#c08c72"
+      ],
+      "edits": 65,
+      "keepEdits": 0,
+      "darkEdits": 0,
+      "alphaEdits": 0,
+      "before": {
+        "allSmall": 965,
+        "selectedSmall": 110,
+        "selectedTotal": 170,
+        "colors": 24
+      },
+      "after": {
+        "allSmall": 892,
+        "selectedSmall": 45,
+        "selectedTotal": 105,
+        "colors": 24
+      },
+      "merged": 51,
+      "abstained": 43,
+      "file": "pose0-selected.png"
+    },
+    {
+      "id": "pose0",
+      "faceKeep": true,
+      "shadeSelections": 2,
+      "selectedColors": [
+        "#f2be8f",
+        "#c08c72"
+      ],
+      "edits": 44,
+      "keepEdits": 0,
+      "darkEdits": 0,
+      "alphaEdits": 0,
+      "before": {
+        "allSmall": 965,
+        "selectedSmall": 110,
+        "selectedTotal": 170,
+        "colors": 24
+      },
+      "after": {
+        "allSmall": 920,
+        "selectedSmall": 66,
+        "selectedTotal": 126,
+        "colors": 24
+      },
+      "merged": 36,
+      "abstained": 58,
+      "file": "pose0-keep.png"
+    },
+    {
+      "id": "pose1",
+      "faceKeep": false,
+      "shadeSelections": 2,
+      "selectedColors": [
+        "#f3be91",
+        "#c18b70"
+      ],
+      "edits": 39,
+      "keepEdits": 0,
+      "darkEdits": 0,
+      "alphaEdits": 0,
+      "before": {
+        "allSmall": 849,
+        "selectedSmall": 61,
+        "selectedTotal": 103,
+        "colors": 24
+      },
+      "after": {
+        "allSmall": 810,
+        "selectedSmall": 22,
+        "selectedTotal": 64,
+        "colors": 24
+      },
+      "merged": 29,
+      "abstained": 24,
+      "file": "pose1-selected.png"
+    },
+    {
+      "id": "pose1",
+      "faceKeep": true,
+      "shadeSelections": 2,
+      "selectedColors": [
+        "#f3be91",
+        "#c18b70"
+      ],
+      "edits": 18,
+      "keepEdits": 0,
+      "darkEdits": 0,
+      "alphaEdits": 0,
+      "before": {
+        "allSmall": 849,
+        "selectedSmall": 61,
+        "selectedTotal": 103,
+        "colors": 24
+      },
+      "after": {
+        "allSmall": 831,
+        "selectedSmall": 43,
+        "selectedTotal": 85,
+        "colors": 24
+      },
+      "merged": 13,
+      "abstained": 40,
+      "file": "pose1-keep.png"
+    },
+    {
+      "id": "pose2",
+      "faceKeep": false,
+      "shadeSelections": 2,
+      "selectedColors": [
+        "#f3c091",
+        "#c48c6c"
+      ],
+      "edits": 34,
+      "keepEdits": 0,
+      "darkEdits": 0,
+      "alphaEdits": 0,
+      "before": {
+        "allSmall": 879,
+        "selectedSmall": 48,
+        "selectedTotal": 71,
+        "colors": 24
+      },
+      "after": {
+        "allSmall": 844,
+        "selectedSmall": 14,
+        "selectedTotal": 37,
+        "colors": 24
+      },
+      "merged": 27,
+      "abstained": 19,
+      "file": "pose2-selected.png"
+    },
+    {
+      "id": "pose2",
+      "faceKeep": true,
+      "shadeSelections": 2,
+      "selectedColors": [
+        "#f3c091",
+        "#c48c6c"
+      ],
+      "edits": 19,
+      "keepEdits": 0,
+      "darkEdits": 0,
+      "alphaEdits": 0,
+      "before": {
+        "allSmall": 879,
+        "selectedSmall": 48,
+        "selectedTotal": 71,
+        "colors": 24
+      },
+      "after": {
+        "allSmall": 859,
+        "selectedSmall": 29,
+        "selectedTotal": 52,
+        "colors": 24
+      },
+      "merged": 15,
+      "abstained": 31,
+      "file": "pose2-keep.png"
+    },
+    {
+      "id": "pose3",
+      "faceKeep": false,
+      "shadeSelections": 2,
+      "selectedColors": [
+        "#f0c69b",
+        "#c08c72"
+      ],
+      "edits": 28,
+      "keepEdits": 0,
+      "darkEdits": 0,
+      "alphaEdits": 0,
+      "before": {
+        "allSmall": 750,
+        "selectedSmall": 37,
+        "selectedTotal": 60,
+        "colors": 24
+      },
+      "after": {
+        "allSmall": 722,
+        "selectedSmall": 9,
+        "selectedTotal": 32,
+        "colors": 24
+      },
+      "merged": 19,
+      "abstained": 13,
+      "file": "pose3-selected.png"
+    },
+    {
+      "id": "pose3",
+      "faceKeep": true,
+      "shadeSelections": 2,
+      "selectedColors": [
+        "#f0c69b",
+        "#c08c72"
+      ],
+      "edits": 16,
+      "keepEdits": 0,
+      "darkEdits": 0,
+      "alphaEdits": 0,
+      "before": {
+        "allSmall": 750,
+        "selectedSmall": 37,
+        "selectedTotal": 60,
+        "colors": 24
+      },
+      "after": {
+        "allSmall": 734,
+        "selectedSmall": 21,
+        "selectedTotal": 44,
+        "colors": 24
+      },
+      "merged": 11,
+      "abstained": 21,
+      "file": "pose3-keep.png"
+    }
+  ],
+  "combined": [
+    {
+      "id": "original-prepared",
+      "faceKeep": false,
+      "outlineColor": "#200402",
+      "changes": 168,
+      "borderChanges": 129,
+      "insideChanges": 39,
+      "occupancyChanges": 0,
+      "keptFaceChanges": 0,
+      "borderColorsBefore": 4,
+      "borderColorsAfter": 1,
+      "before": {
+        "allSmall": 849,
+        "selectedSmall": 61,
+        "selectedTotal": 103,
+        "colors": 24
+      },
+      "after": {
+        "allSmall": 705,
+        "selectedSmall": 22,
+        "selectedTotal": 64,
+        "colors": 24
+      },
+      "file": "original-prepared-combined-selected.png"
+    },
+    {
+      "id": "original-prepared",
+      "faceKeep": true,
+      "outlineColor": "#200402",
+      "changes": 155,
+      "borderChanges": 129,
+      "insideChanges": 26,
+      "occupancyChanges": 0,
+      "keptFaceChanges": 0,
+      "borderColorsBefore": 4,
+      "borderColorsAfter": 1,
+      "before": {
+        "allSmall": 849,
+        "selectedSmall": 61,
+        "selectedTotal": 103,
+        "colors": 24
+      },
+      "after": {
+        "allSmall": 718,
+        "selectedSmall": 35,
+        "selectedTotal": 77,
+        "colors": 24
+      },
+      "file": "original-prepared-combined-keep.png"
+    }
+  ]
+}

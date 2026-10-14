@@ -1,0 +1,1475 @@
+{
+  "contract": "Continuous encoded-RGB L0-gradient smoothing with nearest-opaque extension and 8px edge padding, original-palette Oklab remap, hard dark/alpha/boundary/optionalKeep restoration",
+  "fixedParameters": {
+    "strengths": [
+      0.01,
+      0.03
+    ],
+    "firstBetaMultiplier": 2,
+    "betaStep": 2,
+    "betaMaximum": 100000,
+    "padding": 8
+  },
+  "cases": 8,
+  "checks": 860544,
+  "rows": [
+    {
+      "id": "latest",
+      "family": "required",
+      "strength": 0.01,
+      "protectGestures": 0,
+      "protectedOccupied": 0,
+      "before": {
+        "components8": 656,
+        "smallPixels8": 848,
+        "singletons8": 292,
+        "usedColors": 24,
+        "targetSmall": 61
+      },
+      "after": {
+        "components8": 631,
+        "smallPixels8": 793,
+        "singletons8": 280,
+        "usedColors": 24,
+        "targetSmall": 64
+      },
+      "changed": 129,
+      "targetChanged": 23,
+      "targetCount": 103,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "latest-0.01-auto.png"
+    },
+    {
+      "id": "latest",
+      "family": "required",
+      "strength": 0.01,
+      "protectGestures": 1,
+      "protectedOccupied": 672,
+      "before": {
+        "components8": 656,
+        "smallPixels8": 848,
+        "singletons8": 292,
+        "usedColors": 24,
+        "targetSmall": 61
+      },
+      "after": {
+        "components8": 638,
+        "smallPixels8": 807,
+        "singletons8": 284,
+        "usedColors": 24,
+        "targetSmall": 65
+      },
+      "changed": 116,
+      "targetChanged": 22,
+      "targetCount": 103,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "latest-0.01-keep.png"
+    },
+    {
+      "id": "latest",
+      "family": "required",
+      "strength": 0.03,
+      "protectGestures": 0,
+      "protectedOccupied": 0,
+      "before": {
+        "components8": 656,
+        "smallPixels8": 848,
+        "singletons8": 292,
+        "usedColors": 24,
+        "targetSmall": 61
+      },
+      "after": {
+        "components8": 642,
+        "smallPixels8": 809,
+        "singletons8": 305,
+        "usedColors": 24,
+        "targetSmall": 56
+      },
+      "changed": 1106,
+      "targetChanged": 47,
+      "targetCount": 103,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "latest-0.03-auto.png"
+    },
+    {
+      "id": "latest",
+      "family": "required",
+      "strength": 0.03,
+      "protectGestures": 1,
+      "protectedOccupied": 672,
+      "before": {
+        "components8": 656,
+        "smallPixels8": 848,
+        "singletons8": 292,
+        "usedColors": 24,
+        "targetSmall": 61
+      },
+      "after": {
+        "components8": 661,
+        "smallPixels8": 836,
+        "singletons8": 315,
+        "usedColors": 24,
+        "targetSmall": 62
+      },
+      "changed": 1016,
+      "targetChanged": 41,
+      "targetCount": 103,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "latest-0.03-keep.png"
+    },
+    {
+      "id": "pose0",
+      "family": "related",
+      "strength": 0.01,
+      "protectGestures": 0,
+      "protectedOccupied": 0,
+      "before": {
+        "components8": 754,
+        "smallPixels8": 965,
+        "singletons8": 378,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 733,
+        "smallPixels8": 944,
+        "singletons8": 366,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "changed": 320,
+      "targetChanged": null,
+      "targetCount": null,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "pose0-0.01-auto.png"
+    },
+    {
+      "id": "pose0",
+      "family": "related",
+      "strength": 0.01,
+      "protectGestures": 1,
+      "protectedOccupied": 1515,
+      "before": {
+        "components8": 754,
+        "smallPixels8": 965,
+        "singletons8": 378,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 746,
+        "smallPixels8": 952,
+        "singletons8": 369,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "changed": 218,
+      "targetChanged": null,
+      "targetCount": null,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "pose0-0.01-keep.png"
+    },
+    {
+      "id": "pose0",
+      "family": "related",
+      "strength": 0.03,
+      "protectGestures": 0,
+      "protectedOccupied": 0,
+      "before": {
+        "components8": 754,
+        "smallPixels8": 965,
+        "singletons8": 378,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 678,
+        "smallPixels8": 830,
+        "singletons8": 376,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "changed": 1552,
+      "targetChanged": null,
+      "targetCount": null,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "pose0-0.03-auto.png"
+    },
+    {
+      "id": "pose0",
+      "family": "related",
+      "strength": 0.03,
+      "protectGestures": 1,
+      "protectedOccupied": 1515,
+      "before": {
+        "components8": 754,
+        "smallPixels8": 965,
+        "singletons8": 378,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 721,
+        "smallPixels8": 907,
+        "singletons8": 382,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "changed": 1215,
+      "targetChanged": null,
+      "targetCount": null,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "pose0-0.03-keep.png"
+    },
+    {
+      "id": "pose1",
+      "family": "related",
+      "strength": 0.01,
+      "protectGestures": 0,
+      "protectedOccupied": 0,
+      "before": {
+        "components8": 657,
+        "smallPixels8": 849,
+        "singletons8": 293,
+        "usedColors": 24,
+        "targetSmall": 61
+      },
+      "after": {
+        "components8": 632,
+        "smallPixels8": 794,
+        "singletons8": 281,
+        "usedColors": 24,
+        "targetSmall": 64
+      },
+      "changed": 129,
+      "targetChanged": null,
+      "targetCount": null,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "pose1-0.01-auto.png"
+    },
+    {
+      "id": "pose1",
+      "family": "related",
+      "strength": 0.01,
+      "protectGestures": 1,
+      "protectedOccupied": 1272,
+      "before": {
+        "components8": 657,
+        "smallPixels8": 849,
+        "singletons8": 293,
+        "usedColors": 24,
+        "targetSmall": 61
+      },
+      "after": {
+        "components8": 642,
+        "smallPixels8": 813,
+        "singletons8": 285,
+        "usedColors": 24,
+        "targetSmall": 60
+      },
+      "changed": 106,
+      "targetChanged": null,
+      "targetCount": null,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "pose1-0.01-keep.png"
+    },
+    {
+      "id": "pose1",
+      "family": "related",
+      "strength": 0.03,
+      "protectGestures": 0,
+      "protectedOccupied": 0,
+      "before": {
+        "components8": 657,
+        "smallPixels8": 849,
+        "singletons8": 293,
+        "usedColors": 24,
+        "targetSmall": 61
+      },
+      "after": {
+        "components8": 643,
+        "smallPixels8": 810,
+        "singletons8": 306,
+        "usedColors": 24,
+        "targetSmall": 56
+      },
+      "changed": 1106,
+      "targetChanged": null,
+      "targetCount": null,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "pose1-0.03-auto.png"
+    },
+    {
+      "id": "pose1",
+      "family": "related",
+      "strength": 0.03,
+      "protectGestures": 1,
+      "protectedOccupied": 1272,
+      "before": {
+        "components8": 657,
+        "smallPixels8": 849,
+        "singletons8": 293,
+        "usedColors": 24,
+        "targetSmall": 61
+      },
+      "after": {
+        "components8": 675,
+        "smallPixels8": 842,
+        "singletons8": 323,
+        "usedColors": 24,
+        "targetSmall": 55
+      },
+      "changed": 876,
+      "targetChanged": null,
+      "targetCount": null,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "pose1-0.03-keep.png"
+    },
+    {
+      "id": "pose2",
+      "family": "related",
+      "strength": 0.01,
+      "protectGestures": 0,
+      "protectedOccupied": 0,
+      "before": {
+        "components8": 650,
+        "smallPixels8": 879,
+        "singletons8": 271,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 623,
+        "smallPixels8": 827,
+        "singletons8": 254,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "changed": 206,
+      "targetChanged": null,
+      "targetCount": null,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "pose2-0.01-auto.png"
+    },
+    {
+      "id": "pose2",
+      "family": "related",
+      "strength": 0.01,
+      "protectGestures": 1,
+      "protectedOccupied": 1215,
+      "before": {
+        "components8": 650,
+        "smallPixels8": 879,
+        "singletons8": 271,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 634,
+        "smallPixels8": 849,
+        "singletons8": 259,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "changed": 180,
+      "targetChanged": null,
+      "targetCount": null,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "pose2-0.01-keep.png"
+    },
+    {
+      "id": "pose2",
+      "family": "related",
+      "strength": 0.03,
+      "protectGestures": 0,
+      "protectedOccupied": 0,
+      "before": {
+        "components8": 650,
+        "smallPixels8": 879,
+        "singletons8": 271,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 632,
+        "smallPixels8": 825,
+        "singletons8": 278,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "changed": 1672,
+      "targetChanged": null,
+      "targetCount": null,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "pose2-0.03-auto.png"
+    },
+    {
+      "id": "pose2",
+      "family": "related",
+      "strength": 0.03,
+      "protectGestures": 1,
+      "protectedOccupied": 1215,
+      "before": {
+        "components8": 650,
+        "smallPixels8": 879,
+        "singletons8": 271,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 651,
+        "smallPixels8": 868,
+        "singletons8": 284,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "changed": 1495,
+      "targetChanged": null,
+      "targetCount": null,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "pose2-0.03-keep.png"
+    },
+    {
+      "id": "pose3",
+      "family": "related",
+      "strength": 0.01,
+      "protectGestures": 0,
+      "protectedOccupied": 0,
+      "before": {
+        "components8": 567,
+        "smallPixels8": 750,
+        "singletons8": 224,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 554,
+        "smallPixels8": 703,
+        "singletons8": 223,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "changed": 218,
+      "targetChanged": null,
+      "targetCount": null,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "pose3-0.01-auto.png"
+    },
+    {
+      "id": "pose3",
+      "family": "related",
+      "strength": 0.01,
+      "protectGestures": 1,
+      "protectedOccupied": 1260,
+      "before": {
+        "components8": 567,
+        "smallPixels8": 750,
+        "singletons8": 224,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 570,
+        "smallPixels8": 731,
+        "singletons8": 233,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "changed": 181,
+      "targetChanged": null,
+      "targetCount": null,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "pose3-0.01-keep.png"
+    },
+    {
+      "id": "pose3",
+      "family": "related",
+      "strength": 0.03,
+      "protectGestures": 0,
+      "protectedOccupied": 0,
+      "before": {
+        "components8": 567,
+        "smallPixels8": 750,
+        "singletons8": 224,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 544,
+        "smallPixels8": 686,
+        "singletons8": 227,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "changed": 1814,
+      "targetChanged": null,
+      "targetCount": null,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "pose3-0.03-auto.png"
+    },
+    {
+      "id": "pose3",
+      "family": "related",
+      "strength": 0.03,
+      "protectGestures": 1,
+      "protectedOccupied": 1260,
+      "before": {
+        "components8": 567,
+        "smallPixels8": 750,
+        "singletons8": 224,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 562,
+        "smallPixels8": 726,
+        "singletons8": 241,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "changed": 1623,
+      "targetChanged": null,
+      "targetCount": null,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "pose3-0.03-keep.png"
+    },
+    {
+      "id": "control-warm",
+      "family": "authored",
+      "strength": 0.01,
+      "protectGestures": 0,
+      "protectedOccupied": 0,
+      "before": {
+        "components8": 11,
+        "smallPixels8": 11,
+        "singletons8": 7,
+        "usedColors": 5,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 11,
+        "smallPixels8": 11,
+        "singletons8": 7,
+        "usedColors": 5,
+        "targetSmall": 0
+      },
+      "changed": 0,
+      "targetChanged": null,
+      "targetCount": null,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": 0,
+      "blushChanged": 0,
+      "eyeChanged": 0,
+      "highlightChanged": 0,
+      "file": "control-warm-0.01-auto.png"
+    },
+    {
+      "id": "control-warm",
+      "family": "authored",
+      "strength": 0.01,
+      "protectGestures": 1,
+      "protectedOccupied": 98,
+      "before": {
+        "components8": 11,
+        "smallPixels8": 11,
+        "singletons8": 7,
+        "usedColors": 5,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 11,
+        "smallPixels8": 11,
+        "singletons8": 7,
+        "usedColors": 5,
+        "targetSmall": 0
+      },
+      "changed": 0,
+      "targetChanged": null,
+      "targetCount": null,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": 0,
+      "blushChanged": 0,
+      "eyeChanged": 0,
+      "highlightChanged": 0,
+      "file": "control-warm-0.01-keep.png"
+    },
+    {
+      "id": "control-warm",
+      "family": "authored",
+      "strength": 0.03,
+      "protectGestures": 0,
+      "protectedOccupied": 0,
+      "before": {
+        "components8": 11,
+        "smallPixels8": 11,
+        "singletons8": 7,
+        "usedColors": 5,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 6,
+        "smallPixels8": 4,
+        "singletons8": 4,
+        "usedColors": 3,
+        "targetSmall": 0
+      },
+      "changed": 9,
+      "targetChanged": null,
+      "targetCount": null,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": 2,
+      "blushChanged": 4,
+      "eyeChanged": 2,
+      "highlightChanged": 1,
+      "file": "control-warm-0.03-auto.png"
+    },
+    {
+      "id": "control-warm",
+      "family": "authored",
+      "strength": 0.03,
+      "protectGestures": 1,
+      "protectedOccupied": 98,
+      "before": {
+        "components8": 11,
+        "smallPixels8": 11,
+        "singletons8": 7,
+        "usedColors": 5,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 8,
+        "smallPixels8": 8,
+        "singletons8": 4,
+        "usedColors": 4,
+        "targetSmall": 0
+      },
+      "changed": 3,
+      "targetChanged": null,
+      "targetCount": null,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": 2,
+      "blushChanged": 0,
+      "eyeChanged": 0,
+      "highlightChanged": 1,
+      "file": "control-warm-0.03-keep.png"
+    },
+    {
+      "id": "control-gray",
+      "family": "authored",
+      "strength": 0.01,
+      "protectGestures": 0,
+      "protectedOccupied": 0,
+      "before": {
+        "components8": 11,
+        "smallPixels8": 11,
+        "singletons8": 7,
+        "usedColors": 5,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 6,
+        "smallPixels8": 4,
+        "singletons8": 4,
+        "usedColors": 3,
+        "targetSmall": 0
+      },
+      "changed": 7,
+      "targetChanged": null,
+      "targetCount": null,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": 2,
+      "blushChanged": 4,
+      "eyeChanged": 0,
+      "highlightChanged": 1,
+      "file": "control-gray-0.01-auto.png"
+    },
+    {
+      "id": "control-gray",
+      "family": "authored",
+      "strength": 0.01,
+      "protectGestures": 1,
+      "protectedOccupied": 98,
+      "before": {
+        "components8": 11,
+        "smallPixels8": 11,
+        "singletons8": 7,
+        "usedColors": 5,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 8,
+        "smallPixels8": 8,
+        "singletons8": 4,
+        "usedColors": 4,
+        "targetSmall": 0
+      },
+      "changed": 3,
+      "targetChanged": null,
+      "targetCount": null,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": 2,
+      "blushChanged": 0,
+      "eyeChanged": 0,
+      "highlightChanged": 1,
+      "file": "control-gray-0.01-keep.png"
+    },
+    {
+      "id": "control-gray",
+      "family": "authored",
+      "strength": 0.03,
+      "protectGestures": 0,
+      "protectedOccupied": 0,
+      "before": {
+        "components8": 11,
+        "smallPixels8": 11,
+        "singletons8": 7,
+        "usedColors": 5,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 6,
+        "smallPixels8": 4,
+        "singletons8": 4,
+        "usedColors": 3,
+        "targetSmall": 0
+      },
+      "changed": 7,
+      "targetChanged": null,
+      "targetCount": null,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": 2,
+      "blushChanged": 4,
+      "eyeChanged": 0,
+      "highlightChanged": 1,
+      "file": "control-gray-0.03-auto.png"
+    },
+    {
+      "id": "control-gray",
+      "family": "authored",
+      "strength": 0.03,
+      "protectGestures": 1,
+      "protectedOccupied": 98,
+      "before": {
+        "components8": 11,
+        "smallPixels8": 11,
+        "singletons8": 7,
+        "usedColors": 5,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 8,
+        "smallPixels8": 8,
+        "singletons8": 4,
+        "usedColors": 4,
+        "targetSmall": 0
+      },
+      "changed": 3,
+      "targetChanged": null,
+      "targetCount": null,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": 2,
+      "blushChanged": 0,
+      "eyeChanged": 0,
+      "highlightChanged": 1,
+      "file": "control-gray-0.03-keep.png"
+    },
+    {
+      "id": "control-blue",
+      "family": "authored",
+      "strength": 0.01,
+      "protectGestures": 0,
+      "protectedOccupied": 0,
+      "before": {
+        "components8": 11,
+        "smallPixels8": 11,
+        "singletons8": 7,
+        "usedColors": 5,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 6,
+        "smallPixels8": 4,
+        "singletons8": 4,
+        "usedColors": 3,
+        "targetSmall": 0
+      },
+      "changed": 7,
+      "targetChanged": null,
+      "targetCount": null,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": 2,
+      "blushChanged": 4,
+      "eyeChanged": 0,
+      "highlightChanged": 1,
+      "file": "control-blue-0.01-auto.png"
+    },
+    {
+      "id": "control-blue",
+      "family": "authored",
+      "strength": 0.01,
+      "protectGestures": 1,
+      "protectedOccupied": 98,
+      "before": {
+        "components8": 11,
+        "smallPixels8": 11,
+        "singletons8": 7,
+        "usedColors": 5,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 8,
+        "smallPixels8": 8,
+        "singletons8": 4,
+        "usedColors": 4,
+        "targetSmall": 0
+      },
+      "changed": 3,
+      "targetChanged": null,
+      "targetCount": null,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": 2,
+      "blushChanged": 0,
+      "eyeChanged": 0,
+      "highlightChanged": 1,
+      "file": "control-blue-0.01-keep.png"
+    },
+    {
+      "id": "control-blue",
+      "family": "authored",
+      "strength": 0.03,
+      "protectGestures": 0,
+      "protectedOccupied": 0,
+      "before": {
+        "components8": 11,
+        "smallPixels8": 11,
+        "singletons8": 7,
+        "usedColors": 5,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 6,
+        "smallPixels8": 4,
+        "singletons8": 4,
+        "usedColors": 3,
+        "targetSmall": 0
+      },
+      "changed": 7,
+      "targetChanged": null,
+      "targetCount": null,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": 2,
+      "blushChanged": 4,
+      "eyeChanged": 0,
+      "highlightChanged": 1,
+      "file": "control-blue-0.03-auto.png"
+    },
+    {
+      "id": "control-blue",
+      "family": "authored",
+      "strength": 0.03,
+      "protectGestures": 1,
+      "protectedOccupied": 98,
+      "before": {
+        "components8": 11,
+        "smallPixels8": 11,
+        "singletons8": 7,
+        "usedColors": 5,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 8,
+        "smallPixels8": 8,
+        "singletons8": 4,
+        "usedColors": 4,
+        "targetSmall": 0
+      },
+      "changed": 3,
+      "targetChanged": null,
+      "targetCount": null,
+      "darkChanged": 0,
+      "alphaChanged": 0,
+      "keepChanged": 0,
+      "noiseRemoved": 2,
+      "blushChanged": 0,
+      "eyeChanged": 0,
+      "highlightChanged": 1,
+      "file": "control-blue-0.03-keep.png"
+    }
+  ],
+  "pipelineRows": [
+    {
+      "id": "latest",
+      "strength": 0.03,
+      "lambda": 0.008,
+      "protectGestures": 0,
+      "changed": 1083,
+      "targetChanged": 51,
+      "before": {
+        "components8": 656,
+        "smallPixels8": 848,
+        "singletons8": 292,
+        "usedColors": 24,
+        "targetSmall": 61
+      },
+      "after": {
+        "components8": 535,
+        "smallPixels8": 654,
+        "singletons8": 231,
+        "usedColors": 24,
+        "targetSmall": 31
+      },
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "latest-0.03-auto-spatial.png"
+    },
+    {
+      "id": "latest",
+      "strength": 0.03,
+      "lambda": 0.008,
+      "protectGestures": 1,
+      "changed": 957,
+      "targetChanged": 41,
+      "before": {
+        "components8": 656,
+        "smallPixels8": 848,
+        "singletons8": 292,
+        "usedColors": 24,
+        "targetSmall": 61
+      },
+      "after": {
+        "components8": 564,
+        "smallPixels8": 704,
+        "singletons8": 246,
+        "usedColors": 24,
+        "targetSmall": 44
+      },
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "latest-0.03-keep-spatial.png"
+    },
+    {
+      "id": "pose0",
+      "strength": 0.03,
+      "lambda": 0.008,
+      "protectGestures": 0,
+      "changed": 1523,
+      "targetChanged": null,
+      "before": {
+        "components8": 754,
+        "smallPixels8": 965,
+        "singletons8": 378,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 492,
+        "smallPixels8": 637,
+        "singletons8": 222,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "pose0-0.03-auto-spatial.png"
+    },
+    {
+      "id": "pose0",
+      "strength": 0.03,
+      "lambda": 0.008,
+      "protectGestures": 1,
+      "changed": 1124,
+      "targetChanged": null,
+      "before": {
+        "components8": 754,
+        "smallPixels8": 965,
+        "singletons8": 378,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 595,
+        "smallPixels8": 772,
+        "singletons8": 278,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "pose0-0.03-keep-spatial.png"
+    },
+    {
+      "id": "pose1",
+      "strength": 0.03,
+      "lambda": 0.008,
+      "protectGestures": 0,
+      "changed": 1083,
+      "targetChanged": null,
+      "before": {
+        "components8": 657,
+        "smallPixels8": 849,
+        "singletons8": 293,
+        "usedColors": 24,
+        "targetSmall": 61
+      },
+      "after": {
+        "components8": 536,
+        "smallPixels8": 655,
+        "singletons8": 232,
+        "usedColors": 24,
+        "targetSmall": 31
+      },
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "pose1-0.03-auto-spatial.png"
+    },
+    {
+      "id": "pose1",
+      "strength": 0.03,
+      "lambda": 0.008,
+      "protectGestures": 1,
+      "changed": 797,
+      "targetChanged": null,
+      "before": {
+        "components8": 657,
+        "smallPixels8": 849,
+        "singletons8": 293,
+        "usedColors": 24,
+        "targetSmall": 61
+      },
+      "after": {
+        "components8": 595,
+        "smallPixels8": 755,
+        "singletons8": 264,
+        "usedColors": 24,
+        "targetSmall": 48
+      },
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "pose1-0.03-keep-spatial.png"
+    },
+    {
+      "id": "pose2",
+      "strength": 0.03,
+      "lambda": 0.008,
+      "protectGestures": 0,
+      "changed": 1605,
+      "targetChanged": null,
+      "before": {
+        "components8": 650,
+        "smallPixels8": 879,
+        "singletons8": 271,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 509,
+        "smallPixels8": 664,
+        "singletons8": 203,
+        "usedColors": 23,
+        "targetSmall": 0
+      },
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "pose2-0.03-auto-spatial.png"
+    },
+    {
+      "id": "pose2",
+      "strength": 0.03,
+      "lambda": 0.008,
+      "protectGestures": 1,
+      "changed": 1355,
+      "targetChanged": null,
+      "before": {
+        "components8": 650,
+        "smallPixels8": 879,
+        "singletons8": 271,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 564,
+        "smallPixels8": 758,
+        "singletons8": 234,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "pose2-0.03-keep-spatial.png"
+    },
+    {
+      "id": "pose3",
+      "strength": 0.03,
+      "lambda": 0.008,
+      "protectGestures": 0,
+      "changed": 1747,
+      "targetChanged": null,
+      "before": {
+        "components8": 567,
+        "smallPixels8": 750,
+        "singletons8": 224,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 430,
+        "smallPixels8": 579,
+        "singletons8": 148,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "pose3-0.03-auto-spatial.png"
+    },
+    {
+      "id": "pose3",
+      "strength": 0.03,
+      "lambda": 0.008,
+      "protectGestures": 1,
+      "changed": 1553,
+      "targetChanged": null,
+      "before": {
+        "components8": 567,
+        "smallPixels8": 750,
+        "singletons8": 224,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 479,
+        "smallPixels8": 641,
+        "singletons8": 181,
+        "usedColors": 24,
+        "targetSmall": 0
+      },
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "file": "pose3-0.03-keep-spatial.png"
+    },
+    {
+      "id": "control-warm",
+      "strength": 0.03,
+      "lambda": 0.008,
+      "protectGestures": 0,
+      "changed": 9,
+      "targetChanged": null,
+      "before": {
+        "components8": 11,
+        "smallPixels8": 11,
+        "singletons8": 7,
+        "usedColors": 5,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 6,
+        "smallPixels8": 4,
+        "singletons8": 4,
+        "usedColors": 3,
+        "targetSmall": 0
+      },
+      "noiseRemoved": 2,
+      "blushChanged": 4,
+      "eyeChanged": 2,
+      "highlightChanged": 1,
+      "file": "control-warm-0.03-auto-spatial.png"
+    },
+    {
+      "id": "control-warm",
+      "strength": 0.03,
+      "lambda": 0.008,
+      "protectGestures": 1,
+      "changed": 3,
+      "targetChanged": null,
+      "before": {
+        "components8": 11,
+        "smallPixels8": 11,
+        "singletons8": 7,
+        "usedColors": 5,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 8,
+        "smallPixels8": 8,
+        "singletons8": 4,
+        "usedColors": 4,
+        "targetSmall": 0
+      },
+      "noiseRemoved": 2,
+      "blushChanged": 0,
+      "eyeChanged": 0,
+      "highlightChanged": 1,
+      "file": "control-warm-0.03-keep-spatial.png"
+    },
+    {
+      "id": "control-gray",
+      "strength": 0.03,
+      "lambda": 0.008,
+      "protectGestures": 0,
+      "changed": 7,
+      "targetChanged": null,
+      "before": {
+        "components8": 11,
+        "smallPixels8": 11,
+        "singletons8": 7,
+        "usedColors": 5,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 6,
+        "smallPixels8": 4,
+        "singletons8": 4,
+        "usedColors": 3,
+        "targetSmall": 0
+      },
+      "noiseRemoved": 2,
+      "blushChanged": 4,
+      "eyeChanged": 0,
+      "highlightChanged": 1,
+      "file": "control-gray-0.03-auto-spatial.png"
+    },
+    {
+      "id": "control-gray",
+      "strength": 0.03,
+      "lambda": 0.008,
+      "protectGestures": 1,
+      "changed": 3,
+      "targetChanged": null,
+      "before": {
+        "components8": 11,
+        "smallPixels8": 11,
+        "singletons8": 7,
+        "usedColors": 5,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 8,
+        "smallPixels8": 8,
+        "singletons8": 4,
+        "usedColors": 4,
+        "targetSmall": 0
+      },
+      "noiseRemoved": 2,
+      "blushChanged": 0,
+      "eyeChanged": 0,
+      "highlightChanged": 1,
+      "file": "control-gray-0.03-keep-spatial.png"
+    },
+    {
+      "id": "control-blue",
+      "strength": 0.03,
+      "lambda": 0.008,
+      "protectGestures": 0,
+      "changed": 7,
+      "targetChanged": null,
+      "before": {
+        "components8": 11,
+        "smallPixels8": 11,
+        "singletons8": 7,
+        "usedColors": 5,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 6,
+        "smallPixels8": 4,
+        "singletons8": 4,
+        "usedColors": 3,
+        "targetSmall": 0
+      },
+      "noiseRemoved": 2,
+      "blushChanged": 4,
+      "eyeChanged": 0,
+      "highlightChanged": 1,
+      "file": "control-blue-0.03-auto-spatial.png"
+    },
+    {
+      "id": "control-blue",
+      "strength": 0.03,
+      "lambda": 0.008,
+      "protectGestures": 1,
+      "changed": 3,
+      "targetChanged": null,
+      "before": {
+        "components8": 11,
+        "smallPixels8": 11,
+        "singletons8": 7,
+        "usedColors": 5,
+        "targetSmall": 0
+      },
+      "after": {
+        "components8": 8,
+        "smallPixels8": 8,
+        "singletons8": 4,
+        "usedColors": 4,
+        "targetSmall": 0
+      },
+      "noiseRemoved": 2,
+      "blushChanged": 0,
+      "eyeChanged": 0,
+      "highlightChanged": 1,
+      "file": "control-blue-0.03-keep-spatial.png"
+    }
+  ]
+}

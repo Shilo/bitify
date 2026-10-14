@@ -1,0 +1,166 @@
+{
+  "contract": "Region-block Potts local descent, squared Oklab unary + contrast-weighted label interfaces; source dark L<.5 and boundary protected, one optional Keep rectangle",
+  "backgroundPolicy": "Explicit supplied-background annotation removes #dcdcdc/#ebebeb; not automatic detection",
+  "fixedParameters": {
+    "lambdas": [
+      0.004,
+      0.008
+    ],
+    "maxArea": 32,
+    "maxDistanceSquared": 0.05,
+    "maxPasses": 8
+  },
+  "cases": 1,
+  "checks": 147456,
+  "sourceCharacterSha256": "d34d26977d387580bec6807fe2455d47ec6b14f6d17ea8784195460961ee53c5",
+  "rows": [
+    {
+      "id": "original-prepared",
+      "family": "most recent original attachment; correlated character variant",
+      "lambda": 0.004,
+      "protectGestures": 0,
+      "protectedOccupied": 0,
+      "sourceColors": 24,
+      "before": {
+        "components8": 657,
+        "smallPixels8": 849,
+        "singletons8": 293,
+        "usedColors": 24
+      },
+      "after": {
+        "components8": 572,
+        "smallPixels8": 715,
+        "singletons8": 246,
+        "usedColors": 24
+      },
+      "changed": 166,
+      "darkChanges": 0,
+      "keepChanges": 0,
+      "alphaChanges": 0,
+      "targetChanges": 16,
+      "targetCount": 103,
+      "targetSmallBefore": 61,
+      "targetSmallAfter": 48,
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "initialEnergy": 4.013800106331889,
+      "finalEnergy": 3.4758966188471754,
+      "moves": 103,
+      "ms": 10.368400000000008,
+      "file": "original-prepared-0.004-auto.png"
+    },
+    {
+      "id": "original-prepared",
+      "family": "most recent original attachment; correlated character variant",
+      "lambda": 0.004,
+      "protectGestures": 1,
+      "protectedOccupied": 672,
+      "sourceColors": 24,
+      "before": {
+        "components8": 657,
+        "smallPixels8": 849,
+        "singletons8": 293,
+        "usedColors": 24
+      },
+      "after": {
+        "components8": 590,
+        "smallPixels8": 741,
+        "singletons8": 255,
+        "usedColors": 24
+      },
+      "changed": 134,
+      "darkChanges": 0,
+      "keepChanges": 0,
+      "alphaChanges": 0,
+      "targetChanges": 8,
+      "targetCount": 103,
+      "targetSmallBefore": 61,
+      "targetSmallAfter": 56,
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "initialEnergy": 4.013800106331889,
+      "finalEnergy": 3.5738330296555096,
+      "moves": 81,
+      "ms": 7.071200000000033,
+      "file": "original-prepared-0.004-keep.png"
+    },
+    {
+      "id": "original-prepared",
+      "family": "most recent original attachment; correlated character variant",
+      "lambda": 0.008,
+      "protectGestures": 0,
+      "protectedOccupied": 0,
+      "sourceColors": 24,
+      "before": {
+        "components8": 657,
+        "smallPixels8": 849,
+        "singletons8": 293,
+        "usedColors": 24
+      },
+      "after": {
+        "components8": 540,
+        "smallPixels8": 665,
+        "singletons8": 227,
+        "usedColors": 24
+      },
+      "changed": 243,
+      "darkChanges": 0,
+      "keepChanges": 0,
+      "alphaChanges": 0,
+      "targetChanges": 23,
+      "targetCount": 103,
+      "targetSmallBefore": 61,
+      "targetSmallAfter": 41,
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "initialEnergy": 8.027600212663778,
+      "finalEnergy": 6.554976870585637,
+      "moves": 153,
+      "ms": 6.8571999999999775,
+      "file": "original-prepared-0.008-auto.png"
+    },
+    {
+      "id": "original-prepared",
+      "family": "most recent original attachment; correlated character variant",
+      "lambda": 0.008,
+      "protectGestures": 1,
+      "protectedOccupied": 672,
+      "sourceColors": 24,
+      "before": {
+        "components8": 657,
+        "smallPixels8": 849,
+        "singletons8": 293,
+        "usedColors": 24
+      },
+      "after": {
+        "components8": 567,
+        "smallPixels8": 705,
+        "singletons8": 241,
+        "usedColors": 24
+      },
+      "changed": 191,
+      "darkChanges": 0,
+      "keepChanges": 0,
+      "alphaChanges": 0,
+      "targetChanges": 12,
+      "targetCount": 103,
+      "targetSmallBefore": 61,
+      "targetSmallAfter": 52,
+      "noiseRemoved": null,
+      "blushChanged": null,
+      "eyeChanged": null,
+      "highlightChanged": null,
+      "initialEnergy": 8.027600212663778,
+      "finalEnergy": 6.8446696293309985,
+      "moves": 119,
+      "ms": 6.638599999999997,
+      "file": "original-prepared-0.008-keep.png"
+    }
+  ]
+}

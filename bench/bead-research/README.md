@@ -1,5 +1,12 @@
 # Fuse-bead research, October 13, 2026
 
+October 14 follow-up: [broader reassessment](../../docs/research/2026-10-14-bead-solutions-reassessment.md)
+finds useful assisted partial operations while retaining the rejected automatic
+filters. The live research page is `solution-review.html`; selected-shade cleanup,
+Keep selection and explicit solid exterior color run in the browser. Artwork and
+derived media remain private. The current attachment's baked checkerboard requires
+declared background preprocessing; see the source-provenance section.
+
 Originally developed on `codex/fuse-bead-research` and retained on `main` after
 research review. **Research only; no production imports or UI changes.**
 
