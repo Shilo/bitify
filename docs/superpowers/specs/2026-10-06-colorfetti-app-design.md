@@ -525,6 +525,10 @@ under reduced motion. Top to bottom:
   The Colorfetti wordmark and approved description appear beside it:
   “Throw your pixels a palette party. Recolor images and animations.”
   A Close button sits in the top-right corner.
+- A full-width link below the header says “Watch the 30-second trailer”, with
+  “Opens in a new tab” beneath it. It opens the bundled `colorfetti-trailer.mp4`
+  through the app's base URL in a separate tab (`noopener noreferrer`). The video
+  is not fetched until the link is followed; Help remains open in the original tab.
 - Four steps, each an icon, a word and a line. The icons are the app's own: the plus of
   Add and the icons of the dock's Palette, settings and Download buttons. The first is worded
   for the device in use:

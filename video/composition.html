@@ -1,0 +1,116 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+#cf-studio{--cfs-dark:#14151a;--cfs-ink:#fffdf9;--cfs-muted:#b7bbc8;--cfs-line:#353945;--cfs-orange:#f47a34;--cfs-violet:#7952c7;--cfs-pink:#e63e82;--cfs-yellow:#f4c340;--cfs-teal:#0eaaa5;font-family:'Schibsted Grotesk',system-ui,sans-serif;color:light-dark(#202020,#fffdf9);width:100%}
+#cf-studio *{box-sizing:border-box}
+#cf-studio .cfs-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:7px;font-size:11px;letter-spacing:.045em;padding:8px 0 12px;color:light-dark(#626572,#b7bbc8)}
+#cf-studio .cfs-film{position:relative;container-type:inline-size;aspect-ratio:16/9;background:var(--cfs-dark);color:var(--cfs-ink);overflow:hidden;border-radius:13px;isolation:isolate}
+#cf-studio .cfs-ambient{position:absolute;inset:0;background:radial-gradient(ellipse at 77% 26%,#7952c71d,transparent 50%),radial-gradient(ellipse at 18% 100%,#0eaaa51b,transparent 60%)}
+#cf-studio .cfs-view{position:absolute;inset:0;opacity:0;transform:translateY(18px);pointer-events:none;transition:opacity .38s ease,transform .65s cubic-bezier(.22,1,.36,1);visibility:hidden}
+#cf-studio .cfs-view.is-active{opacity:1;transform:translateY(0);visibility:visible;z-index:2}
+#cf-studio .cfs-view.is-leaving{visibility:visible;transform:translateY(-12px)}
+#cf-studio h2{position:absolute;left:5.5%;top:25%;margin:0;font-size:4.5cqw;line-height:1.08;font-weight:500;letter-spacing:-.04em}
+#cf-studio .cfs-eyebrow{position:absolute;left:5.5%;top:12%;font-size:1.4cqw;letter-spacing:.15em;color:var(--cfs-muted)}
+#cf-studio .cfs-desktop{position:absolute;left:35%;top:20%;width:60%;aspect-ratio:16/9;overflow:hidden;border:1px solid #747c8c70;border-radius:9px;background:#272a33;box-shadow:0 2cqw 6cqw #0007;transform:translateY(calc(var(--cfs-drift,0)*-1px))}
+#cf-studio .cfs-desktop img{width:100%;height:100%;object-fit:cover;display:block}
+#cf-studio .cfs-phone{position:absolute;left:67%;top:7%;width:21.5%;aspect-ratio:390/844;overflow:hidden;border:3px solid #484d57;border-radius:3.4cqw;background:#22242c;box-shadow:0 2cqw 5cqw #0009;transform:translateY(calc(var(--cfs-drift,0)*1px))}
+#cf-studio .cfs-phone img{width:100%;height:100%;display:block;object-fit:cover}
+#cf-studio .cfs-focus{position:absolute;left:5.5%;top:56%;width:55%;overflow:hidden;border-radius:10px;box-shadow:0 1cqw 4cqw #0005;background:#343940;transform:translateY(calc(var(--cfs-drift,0)*-.35px))}
+#cf-studio .cfs-focus img{width:100%;height:auto;display:block}
+#cf-studio .cfs-caption{position:absolute;left:5.5%;bottom:7%;font-size:1.8cqw;color:var(--cfs-muted);letter-spacing:.01em}
+#cf-studio .cfs-brand{position:absolute;left:5.5%;top:7%;display:flex;align-items:center;gap:1.2cqw;font-size:3.3cqw;letter-spacing:-.03em;font-weight:500}
+#cf-studio .cfs-brand img{width:3.8cqw;height:3.8cqw}
+#cf-studio .cfs-hero h2{top:22%;font-size:4.2cqw}
+#cf-studio .cfs-hero .cfs-desktop{left:5.5%;top:39%;width:60%;transform:perspective(1200px) rotateY(5deg) translateY(calc(var(--cfs-drift,0)*-1px));transform-origin:left center}
+#cf-studio .cfs-hero .cfs-phone{left:73%;top:12%;width:19.5%;transform:perspective(1200px) rotateY(-8deg) translateY(calc(var(--cfs-drift,0)*1px))}
+#cf-studio .cfs-platform-label{position:absolute;left:5.5%;bottom:5%;font-size:1.25cqw;color:var(--cfs-muted);letter-spacing:.16em}
+#cf-studio .cfs-palettes h2{top:23%;font-size:3.7cqw;max-width:31%}
+#cf-studio .cfs-palettes .cfs-desktop{left:35%;top:12%;width:61%}
+#cf-studio .cfs-palettes .cfs-focus{left:5.5%;top:58%;width:89%;border-radius:8px}
+#cf-studio .cfs-palettes .cfs-caption{bottom:5.3%;font-size:1.6cqw}
+#cf-studio .cfs-settings h2{font-size:4cqw;top:24%}
+#cf-studio .cfs-settings .cfs-desktop{left:37%;top:15%;width:51%}
+#cf-studio .cfs-settings .cfs-phone{left:81%;top:25%;width:15%;opacity:.9}
+#cf-studio .cfs-settings .cfs-focus{top:55%;width:65%}
+#cf-studio .cfs-settings .cfs-caption{bottom:5%}
+#cf-studio .cfs-pairs .cfs-focus{width:53%;top:51%}
+#cf-studio .cfs-pairs .cfs-caption{bottom:4%}
+#cf-studio .cfs-style .cfs-focus{width:53%;top:55%}
+#cf-studio .cfs-results h2{top:22%;font-size:4cqw}
+#cf-studio .cfs-triptych{position:absolute;left:5.5%;right:5.5%;top:37%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2.4cqw}
+#cf-studio figure{margin:0;min-width:0}
+#cf-studio figure>div{aspect-ratio:1;overflow:hidden;background:#20242a;clip-path:inset(0 calc((1 - var(--cfs-reveal,1))*100%) 0 0);border-radius:4px}
+#cf-studio figure img{width:100%;height:100%;object-fit:contain;image-rendering:pixelated;display:block}
+#cf-studio figcaption{margin-top:1.2cqw;font-size:2cqw;font-weight:500}
+#cf-studio figcaption span{display:block;font-size:1.35cqw;color:var(--cfs-muted);margin-top:.5cqw;font-weight:400}
+#cf-studio .cfs-bookend-copy{position:absolute;left:5.5%;top:21%;width:39%;z-index:3}
+#cf-studio .cfs-bookend-brand{display:flex;align-items:center;gap:1.1cqw}
+#cf-studio .cfs-bookend-brand img{width:5.2cqw;height:5.2cqw}
+#cf-studio .cfs-bookend-brand h2{position:static;font-size:5.8cqw;line-height:1;font-weight:500;letter-spacing:-.045em;margin:0}
+#cf-studio .cfs-slogan{margin:3.7cqw 0 0;font-size:3.35cqw;line-height:1.17;letter-spacing:-.035em}
+#cf-studio .cfs-purpose{margin:2.4cqw 0 0;font-size:1.65cqw;line-height:1.4;color:var(--cfs-muted)}
+#cf-studio .cfs-website{margin-top:4cqw;font-size:2.2cqw;line-height:1.3;letter-spacing:-.015em;color:var(--cfs-yellow);white-space:nowrap}
+#cf-studio .cfs-hero .cfs-desktop{left:45%;top:32%;width:50%;transform:perspective(1200px) rotateY(5deg) translateY(calc(var(--cfs-drift,0)*-1px));transform-origin:left center}
+#cf-studio .cfs-hero .cfs-phone{left:78%;top:9%;width:17%;transform:perspective(1200px) rotateY(-8deg) translateY(calc(var(--cfs-drift,0)*1px))}
+#cf-studio .cfs-end .cfs-bookend-copy{left:58%;top:21%;width:36.5%}
+#cf-studio .cfs-end .cfs-bookend-brand h2{font-size:5.4cqw}
+#cf-studio .cfs-end .cfs-slogan{font-size:3.15cqw}
+#cf-studio .cfs-end .cfs-purpose{font-size:1.6cqw}
+#cf-studio .cfs-end .cfs-website{font-size:2.1cqw}
+#cf-studio .cfs-end .cfs-desktop{left:4%;top:32%;width:49%;transform:perspective(1200px) rotateY(-5deg) translateY(calc(var(--cfs-drift,0)*-1px));transform-origin:right center}
+#cf-studio .cfs-end .cfs-phone{left:7%;top:9%;width:17%;transform:perspective(1200px) rotateY(8deg) translateY(calc(var(--cfs-drift,0)*1px))}
+#cf-studio .cfs-palette-stripe{position:absolute;bottom:0;left:0;right:0;height:3px;display:flex;z-index:4;opacity:.8}
+#cf-studio .cfs-palette-stripe span{flex:1;background:var(--cfs-orange)}
+#cf-studio .cfs-palette-stripe span:nth-child(2){background:var(--cfs-violet)}
+#cf-studio .cfs-palette-stripe span:nth-child(3){background:var(--cfs-pink)}
+#cf-studio .cfs-palette-stripe span:nth-child(4){background:var(--cfs-yellow)}
+#cf-studio .cfs-palette-stripe span:nth-child(5){background:var(--cfs-teal)}
+#cf-studio .cfs-controls{display:flex;align-items:center;gap:10px;padding:14px 0 10px}
+#cf-studio button{font:inherit;font-size:12px;min-height:36px;border:1px solid light-dark(#d4d6df,#373b46);border-radius:7px;background:light-dark(#f4f4f6,#22242c);color:inherit;padding:8px 11px;white-space:nowrap}
+#cf-studio .cfs-play{background:light-dark(#202020,#fffdf9);color:light-dark(#fffdf9,#202020);border-color:transparent;min-width:100px}
+#cf-studio .cfs-controls label{flex:1;min-width:20px;display:flex;align-items:center}
+#cf-studio .cfs-seek{width:100%;margin:0;accent-color:light-dark(#202020,#fffdf9)}
+#cf-studio output{font-variant-numeric:tabular-nums;font-size:12px;white-space:nowrap}
+#cf-studio .cfs-chapters{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+#cf-studio .cfs-chapters button{text-align:left;white-space:normal;min-height:56px;font-size:11px;padding:8px}
+#cf-studio .cfs-chapters button span{display:block;opacity:.65;margin-bottom:4px;font-variant-numeric:tabular-nums}
+#cf-studio .cfs-chapters button[aria-pressed=true]{background:light-dark(#202020,#fffdf9);color:light-dark(#fffdf9,#202020);border-color:transparent}
+#cf-studio .cfs-detail{padding-top:12px;font-size:12px;line-height:1.5;color:light-dark(#626572,#b7bbc8);min-height:42px}
+#cf-studio .cfs-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+@media(max-width:540px){#cf-studio .cfs-chapters{grid-template-columns:repeat(4,minmax(0,1fr))}#cf-studio .cfs-replay{display:none}#cf-studio .cfs-controls{gap:7px}#cf-studio .cfs-play{min-width:79px;padding:8px}#cf-studio .cfs-eyebrow{font-size:2cqw}#cf-studio .cfs-caption{font-size:2.25cqw}#cf-studio .cfs-platform-label{font-size:1.8cqw}#cf-studio figcaption span{font-size:2cqw}#cf-studio .cfs-end>span{font-size:2.8cqw}#cf-studio .cfs-end>div{font-size:3cqw}}
+@media(prefers-reduced-motion:reduce){#cf-studio .cfs-view{transition:none;transform:none}#cf-studio .cfs-desktop,#cf-studio .cfs-phone,#cf-studio .cfs-focus{transform:none!important}}
+@media(pointer:coarse){#cf-studio button{min-height:44px}}
+
+@font-face{font-family:Schibsted Grotesk;src:url(../assets/schibsted-grotesk.ttf);font-weight:100 900;font-style:normal;font-display:block}html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:#14151a;color-scheme:dark}#cf-studio{width:1920px;height:1080px}#cf-studio .cfs-film{width:1920px;height:1080px;border-radius:0}#cf-studio .cfs-view{transition:none!important}#cf-studio .cfs-phone{border-width:6px}#cf-studio .cfs-desktop{border-width:2px}#cf-studio .cfs-music-credit{position:absolute;bottom:24px;left:5.5%;right:5.5%;text-align:center;font-size:18px;line-height:1.45;color:#b7bbc8;z-index:6;opacity:0}#cf-studio .cfs-palette-stripe{height:5px}#cf-studio .cfs-caption{font-size:1.65cqw}#cf-studio .cfs-focus{border:1px solid #737d8f5c}#cf-studio img{backface-visibility:hidden}#cf-studio .cfs-crossfade{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}#cf-studio .cfs-focus .cfs-crossfade{height:auto}#cf-studio .cfs-focus{min-height:1px}</style></head><body><div id="cf-studio" aria-label="Colorfetti desktop and mobile trailer concept">
+
+ <div class="cfs-film">
+  <div class="cfs-ambient"></div>
+  <section class="cfs-view cfs-hero cfs-bookend" data-scene="0" aria-label="Colorfetti introduction and initial app state">
+   <div class="cfs-bookend-copy"><div class="cfs-bookend-brand"><img data-asset="logo" alt=""/><h2>Colorfetti</h2></div><p class="cfs-slogan">Throw your pixels<br>a palette party.</p><p class="cfs-purpose">Recolor images and animations.</p><div class="cfs-website">shilo.github.io/colorfetti</div></div>
+   <div class="cfs-desktop"><img data-asset="desktop-empty" alt="Colorfetti desktop before adding artwork"/></div><div class="cfs-phone"><img data-asset="phone-empty" alt="Colorfetti mobile before adding artwork"/></div>
+  </section>
+  <section class="cfs-view cfs-palettes" data-scene="1" aria-label="Desktop palette selection">
+   <span class="cfs-eyebrow">PALETTES</span><h2>Choose<br>a palette.</h2>
+   <div class="cfs-desktop"><img data-screen="1" alt="Desktop palette changes"/></div><div class="cfs-focus"><img data-focus="1" alt="Magnified real palette chooser"/></div>
+   <div class="cfs-caption" data-caption="1">Auto → ENDESGA 32 → PICO-8</div>
+  </section>
+  <section class="cfs-view cfs-settings" data-scene="2" aria-label="Palette settings on desktop and mobile">
+   <span class="cfs-eyebrow">PALETTE SETTINGS</span><h2>Fine-tune<br>your palette.</h2>
+   <div class="cfs-desktop"><img data-screen="2" alt="Desktop palette settings"/></div><div class="cfs-phone"><img data-asset="phone-settings-cleanup" alt="The same palette controls on mobile"/></div>
+   <div class="cfs-focus"><img data-focus="2" alt="Actual Max colors, Matching and Cleanup controls"/></div><div class="cfs-caption" data-caption="2">Max colors · All → 8</div>
+  </section>
+  <section class="cfs-view cfs-pairs" data-scene="3" aria-label="1-bit palettes on mobile">
+   <span class="cfs-eyebrow">1-BIT PALETTES</span><h2>Explore<br>two-color looks.</h2><div class="cfs-phone"><img data-screen="3" alt="Mobile 1-bit palette selection"/></div>
+   <div class="cfs-focus"><img data-focus="3" alt="Magnified 1-bit palette rail"/></div><div class="cfs-caption" data-caption="3">Glow → Game Boy → Rose</div>
+  </section>
+  <section class="cfs-view cfs-style" data-scene="4" aria-label="1-bit style settings on mobile">
+   <span class="cfs-eyebrow">1-BIT STYLE SETTINGS</span><h2>Tune the<br>1-bit effect.</h2><div class="cfs-phone"><img data-screen="4" alt="Mobile Bayer settings"/></div>
+   <div class="cfs-focus"><img data-focus="4" alt="Magnified Bayer threshold and matrix controls"/></div><div class="cfs-caption" data-caption="4">Bayer · Threshold</div>
+  </section>
+  <section class="cfs-view cfs-results" data-scene="5" aria-label="Original, palette and 1-bit comparison">
+   <span class="cfs-eyebrow">THE RESULT</span><h2>Compare the results.</h2>
+   <div class="cfs-triptych"><figure><div><img data-asset="original" alt="Original Kenney Tiny Town artwork"/></div><figcaption>Original<span>Kenney · Tiny Town</span></figcaption></figure><figure><div><img data-asset="palette-result" alt="Actual palette result from Colorfetti"/></div><figcaption>Palette<span>PICO-8 · 8 colors</span></figcaption></figure><figure><div><img data-asset="onebit-result" alt="Actual black-and-white 1-bit result from Colorfetti"/></div><figcaption>1-bit<span>Black &amp; white</span></figcaption></figure></div>
+  </section>
+  <section class="cfs-view cfs-end cfs-bookend" data-scene="6" aria-label="Colorfetti conclusion and app website"><div class="cfs-desktop"><img data-asset="desktop-empty" alt="Colorfetti desktop initial state"/></div><div class="cfs-phone"><img data-asset="phone-empty" alt="Colorfetti mobile initial state"/></div><div class="cfs-bookend-copy"><div class="cfs-bookend-brand"><img data-asset="logo" alt=""/><h2>Colorfetti</h2></div><p class="cfs-slogan">Throw your pixels<br>a palette party.</p><p class="cfs-purpose">Recolor images and animations.</p><div class="cfs-website">shilo.github.io/colorfetti</div></div></section>
+  <div class="cfs-music-credit">Music: “Wholesome” by Kevin MacLeod · incompetech.com<br>CC BY 4.0 · creativecommons.org/licenses/by/4.0/ · Edited excerpt</div><div class="cfs-palette-stripe"><span></span><span></span><span></span><span></span><span></span></div>
+ </div>
+</div><!-- FILM_RUNTIME -->
+</body></html>

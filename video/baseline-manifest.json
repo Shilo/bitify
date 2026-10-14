@@ -1,0 +1,167 @@
+{
+  "files": [
+    {
+      "name": "colorfetti-trailer-1080p.mp4",
+      "bytes": 12537825,
+      "decimalMB": 12.54,
+      "sha256": "71669dda034d6ea6bb86387d708c24359fd3ed3bcb2b037b32a79eef104cd8fc",
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 1920,
+          "height": 1080,
+          "pix_fmt": "yuv420p",
+          "color_space": "bt709",
+          "r_frame_rate": "30/1",
+          "nb_frames": "900"
+        },
+        {
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "sample_rate": "48000",
+          "channels": 2,
+          "r_frame_rate": "0/0",
+          "nb_frames": "1408"
+        }
+      ],
+      "format": {
+        "duration": "30.000000",
+        "size": "12537825",
+        "bit_rate": "3343420"
+      },
+      "atoms": [
+        "ftyp",
+        "moov",
+        "free",
+        "mdat"
+      ]
+    },
+    {
+      "name": "colorfetti-trailer-under-10mb.mp4",
+      "bytes": 8808894,
+      "decimalMB": 8.81,
+      "sha256": "6f5f974b081fff633b921c2076dffeb45a831ba383aaac88be086c7132ba4c28",
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 1920,
+          "height": 1080,
+          "pix_fmt": "yuv420p",
+          "color_space": "bt709",
+          "r_frame_rate": "30/1",
+          "nb_frames": "900"
+        },
+        {
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "sample_rate": "48000",
+          "channels": 2,
+          "r_frame_rate": "0/0",
+          "nb_frames": "1408"
+        }
+      ],
+      "format": {
+        "duration": "30.016000",
+        "size": "8808894",
+        "bit_rate": "2347786"
+      },
+      "atoms": [
+        "ftyp",
+        "moov",
+        "free",
+        "mdat"
+      ]
+    }
+  ],
+  "sharingSSIMvsMaster": 0.997977,
+  "nativePlayback": {
+    "currentTime": 1.232885,
+    "width": 1920,
+    "height": 1080,
+    "duration": 30.016,
+    "error": null
+  },
+  "render": {
+    "frames": 900,
+    "fps": 30,
+    "duration": 30,
+    "width": 1920,
+    "height": 1080,
+    "pageErrors": [],
+    "seconds": 156.872
+  },
+  "music": {
+    "title": "Wholesome",
+    "artist": "Kevin MacLeod",
+    "license": "CC BY 4.0",
+    "integratedLUFS": -23.2,
+    "truePeakDBFS": -10.2,
+    "fades": "0.8s in, 2.5s out"
+  },
+  "editorial": [
+    {
+      "slide": "Introduction / conclusion",
+      "copy": "Approved Colorfetti name, slogan, purpose and website.",
+      "image": "Actual empty app states on desktop and touch mobile.",
+      "decision": "Retain matching bookends, with a mirrored closing composition."
+    },
+    {
+      "slide": "Palettes",
+      "before": "A different palette. A different feel.",
+      "after": "Choose a palette.",
+      "image": "Same Tiny Town scene with Auto, ENDESGA 32 and PICO-8.",
+      "decision": "Describe the visible action without promising a subjective feeling."
+    },
+    {
+      "slide": "Palette settings",
+      "before": "Fewer colors. More control.",
+      "after": "Fine-tune your palette.",
+      "image": "Real All → 16 → 8 limit edits, then Cleanup On.",
+      "decision": "Name the actual controls; do not imply Cleanup always improves or preserves intentional details."
+    },
+    {
+      "slide": "1-bit palettes",
+      "before": "Two colors. A new character.",
+      "after": "Explore two-color looks.",
+      "image": "Kenney Pixel Platformer scene in Mono, Game Boy and Rose.",
+      "decision": "Character was ambiguous for a scene; the new wording accurately describes palette changes."
+    },
+    {
+      "slide": "1-bit style settings",
+      "before": "Shape the final look.",
+      "after": "Tune the 1-bit effect.",
+      "image": "Mono black-and-white Bayer controls, Threshold Auto → 140, Matrix 4 → 8.",
+      "decision": "Keep algorithm names in the real UI; use plain captions for what changes."
+    },
+    {
+      "slide": "Comparison",
+      "before": "Torch · Bayer",
+      "after": "Black & white",
+      "image": "Actual Mono + Solid conversion of the same full-resolution Tiny Town source.",
+      "decision": "Change the actual conversion as well as its label. Compare one identical source in Original / PICO-8 / black-and-white 1-bit."
+    }
+  ],
+  "artwork": [
+    {
+      "creator": "Kenney",
+      "pack": "Tiny Town",
+      "license": "CC0"
+    },
+    {
+      "creator": "Kenney",
+      "pack": "Pixel Platformer",
+      "license": "CC0"
+    }
+  ],
+  "comparison": {
+    "source": "Identical 440x440 Tiny Town crop",
+    "palette": "PICO-8, 8 colors, Cleanup On",
+    "onebit": "Mono + Solid, exactly #000000 and #FFFFFF"
+  }
+}

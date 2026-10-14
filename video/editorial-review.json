@@ -1,0 +1,43 @@
+[
+  {
+    "slide": "Introduction / conclusion",
+    "copy": "Approved Colorfetti name, slogan, purpose and website.",
+    "image": "Actual empty app states on desktop and touch mobile.",
+    "decision": "Retain matching bookends, with a mirrored closing composition."
+  },
+  {
+    "slide": "Palettes",
+    "before": "A different palette. A different feel.",
+    "after": "Choose a palette.",
+    "image": "Same Tiny Town scene with Auto, ENDESGA 32 and PICO-8.",
+    "decision": "Describe the visible action without promising a subjective feeling."
+  },
+  {
+    "slide": "Palette settings",
+    "before": "Fewer colors. More control.",
+    "after": "Fine-tune your palette.",
+    "image": "Real All → 16 → 8 limit edits, then Cleanup On.",
+    "decision": "Name the actual controls; do not imply Cleanup always improves or preserves intentional details."
+  },
+  {
+    "slide": "1-bit palettes",
+    "before": "Two colors. A new character.",
+    "after": "Explore two-color looks.",
+    "image": "Kenney Pixel Platformer scene in Mono, Game Boy and Rose.",
+    "decision": "Character was ambiguous for a scene; the new wording accurately describes palette changes."
+  },
+  {
+    "slide": "1-bit style settings",
+    "before": "Shape the final look.",
+    "after": "Tune the 1-bit effect.",
+    "image": "Mono black-and-white Bayer controls, Threshold Auto → 140, Matrix 4 → 8.",
+    "decision": "Keep algorithm names in the real UI; use plain captions for what changes."
+  },
+  {
+    "slide": "Comparison",
+    "before": "Torch · Bayer",
+    "after": "Black & white",
+    "image": "Actual Mono + Solid conversion of the same full-resolution Tiny Town source.",
+    "decision": "Change the actual conversion as well as its label. Compare one identical source in Original / PICO-8 / black-and-white 1-bit."
+  }
+]

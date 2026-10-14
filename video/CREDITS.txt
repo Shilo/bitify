@@ -1,0 +1,23 @@
+COLORFETTI TRAILER — ASSET AND MUSIC CREDITS
+
+Music: "Wholesome" by Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons Attribution 4.0
+https://creativecommons.org/licenses/by/4.0/
+Source: https://incompetech.com/music/royalty-free/index.html?Search=Search&isrc=USUAN1900022
+Changes: excerpt from 00:12, cut to 30 seconds, normalized to a subtle background level, fade in and fade out.
+
+Artwork: Kenney — Tiny Town 1.1 and Pixel Platformer 1.2
+https://kenney.nl/assets/tiny-town
+https://kenney.nl/assets/pixel-platformer
+Creative Commons Zero (CC0): https://creativecommons.org/publicdomain/zero/1.0/
+Changes: cropped sample scenes to remove promotional footers; recolored using Colorfetti.
+
+Font: Schibsted Grotesk, Schibsted-Grotesk Project Authors
+SIL Open Font License 1.1
+https://github.com/schibsted/schibsted-grotesk
+
+App screens and recoloring output: current local Colorfetti application captures.
+Colorfetti brand: source SVG logo and exact identity colors.
+
+Recommended posting credit:
+Music: "Wholesome" by Kevin MacLeod (incompetech.com), CC BY 4.0 — https://creativecommons.org/licenses/by/4.0/ . Edited excerpt. Artwork: Kenney (CC0).

@@ -15,6 +15,11 @@ dist
 /bench/theme-qa/
 /.tmp/
 
+# Trailer sources live in video/; only the compact public MP4 is committed.
+/video/.work/
+/video/*.log
+/output/colorfetti-trailer/
+
 # Private bead research inputs, derived images and embedded pixel payloads.
 /bench/bead-research/fixtures/
 /bench/bead-research/outputs/

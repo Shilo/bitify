@@ -1,0 +1,56 @@
+{
+  "artwork": [
+    {
+      "pack": "Tiny Town 1.1",
+      "creator": "Kenney",
+      "page": "https://kenney.nl/assets/tiny-town",
+      "download": "https://kenney.nl/media/pages/assets/tiny-town/a415fbeb49-1735736916/kenney_tiny-town.zip",
+      "source": "Sample.png",
+      "crop": { "left": 400, "top": 0, "width": 440, "height": 440 },
+      "file": "assets/town.png",
+      "license": "CC0",
+      "changes": "Crop removes promotional footer; derivatives recolored in Colorfetti."
+    },
+    {
+      "pack": "Pixel Platformer 1.2",
+      "creator": "Kenney",
+      "page": "https://kenney.nl/assets/pixel-platformer",
+      "download": "https://kenney.nl/media/pages/assets/pixel-platformer/33bb4921eb-1696667883/kenney_pixel-platformer.zip",
+      "source": "SampleA.png",
+      "crop": { "left": 210, "top": 0, "width": 440, "height": 440 },
+      "file": "assets/platformer.png",
+      "license": "CC0",
+      "changes": "Crop removes promotional footer; screenshots show actual Colorfetti conversions."
+    }
+  ],
+  "font": {
+    "name": "Schibsted Grotesk variable",
+    "file": "assets/schibsted-grotesk.ttf",
+    "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/schibstedgrotesk/SchibstedGrotesk%5Bwght%5D.ttf",
+    "licenseSource": "https://raw.githubusercontent.com/google/fonts/main/ofl/schibstedgrotesk/OFL.txt",
+    "license": "SIL Open Font License 1.1"
+  },
+  "music": {
+    "title": "Wholesome",
+    "creator": "Kevin MacLeod",
+    "file": "assets/audio/wholesome-source.mp3",
+    "source": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Wholesome.mp3",
+    "page": "https://incompetech.com/music/royalty-free/index.html?Search=Search&isrc=USUAN1900022",
+    "license": "CC BY 4.0",
+    "licenseURL": "https://creativecommons.org/licenses/by/4.0/",
+    "edits": "Excerpt starts at 12 seconds, lasts 30 seconds; normalized and faded in/out."
+  },
+  "comparison": {
+    "original": "assets/town.png",
+    "palette": "assets/palette-result.png: PICO-8, max colors 8, Cleanup On",
+    "onebit": "assets/onebit-solid.png: Mono + Solid, exactly black and white",
+    "dimensions": "All three are identical 440x440 source framing."
+  },
+  "capture": {
+    "date": "2026-10-14",
+    "desktopCSS": "1280x720",
+    "phoneCSS": "390x844, touch and mobile emulated",
+    "devicePixelRatio": 2,
+    "theme": "dark"
+  }
+}

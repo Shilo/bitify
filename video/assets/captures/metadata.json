@@ -1,0 +1,258 @@
+{
+  "desktop-empty": {
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": []
+  },
+  "phone-empty": {
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": []
+  },
+  "desktop-palettes-auto": {
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 260,
+        "y": 489,
+        "width": 760,
+        "height": 145
+      }
+    ]
+  },
+  "desktop-palettes-endesga": {
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 260,
+        "y": 489,
+        "width": 760,
+        "height": 145
+      }
+    ]
+  },
+  "desktop-palettes-pico": {
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 260,
+        "y": 489,
+        "width": 760,
+        "height": 145
+      }
+    ]
+  },
+  "desktop-settings-all": {
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 275,
+        "y": 406,
+        "width": 730,
+        "height": 228
+      }
+    ]
+  },
+  "desktop-settings-sixteen": {
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 275,
+        "y": 406,
+        "width": 730,
+        "height": 228
+      }
+    ]
+  },
+  "desktop-settings-eight": {
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 275,
+        "y": 406,
+        "width": 730,
+        "height": 228
+      }
+    ]
+  },
+  "desktop-settings-cleanup": {
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 275,
+        "y": 406,
+        "width": 730,
+        "height": 228
+      }
+    ]
+  },
+  "comparison-solid": {
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 275,
+        "y": 562,
+        "width": 730,
+        "height": 72
+      }
+    ]
+  },
+  "phone-settings-cleanup": {
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 12,
+        "y": 462,
+        "width": 366,
+        "height": 240
+      }
+    ]
+  },
+  "phone-pairs-mono": {
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 12,
+        "y": 549,
+        "width": 366,
+        "height": 153
+      }
+    ]
+  },
+  "phone-pairs-gameboy": {
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 12,
+        "y": 549,
+        "width": 366,
+        "height": 153
+      }
+    ]
+  },
+  "phone-pairs-rose": {
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 12,
+        "y": 549,
+        "width": 366,
+        "height": 153
+      }
+    ]
+  },
+  "phone-bayer-threshold": {
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 12,
+        "y": 576,
+        "width": 366,
+        "height": 126
+      }
+    ]
+  },
+  "phone-bayer-threshold-tuned": {
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 12,
+        "y": 576,
+        "width": 366,
+        "height": 126
+      }
+    ]
+  },
+  "phone-bayer-matrix-four": {
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 12,
+        "y": 576,
+        "width": 366,
+        "height": 126
+      }
+    ]
+  },
+  "phone-bayer-matrix-eight": {
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 12,
+        "y": 576,
+        "width": 366,
+        "height": 126
+      }
+    ]
+  }
+}

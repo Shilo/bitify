@@ -14,6 +14,10 @@ own. Optional 1-bit styles offer two-color effects. Images stay on your device.
 
 **[Open Colorfetti](https://shilo.github.io/colorfetti/)**
 
+[![Watch the 30-second Colorfetti trailer](public/colorfetti-trailer-poster.png)](https://shilo.github.io/colorfetti/colorfetti-trailer.mp4)
+
+**[Watch the 30-second trailer](https://shilo.github.io/colorfetti/colorfetti-trailer.mp4)** · Desktop and mobile, palettes and 1-bit effects. [Editable video project and export instructions](video/README.md).
+
 ## Features
 
 - Add any number of images by drag and drop, file picker or paste. Web and Discord image drops work when the host allows access, including animated GIFs.

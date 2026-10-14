@@ -1,0 +1,152 @@
+[
+  {
+    "path": "assets/audio/source.json",
+    "encoding": "UTF-8, LF canonical line endings",
+    "bytes": 412,
+    "sha256": "52644e39bf883dd6d0272d0de7530d5922965a0b10e919779dffbe0b4cd8ba42"
+  },
+  {
+    "path": "assets/audio/wholesome-source.mp3",
+    "bytes": 14556390,
+    "sha256": "9eadc79a1a2cb68cd63be1432ebf8f8ae3387cb9d2e85f9b8dbc74ba5a96b231"
+  },
+  {
+    "path": "assets/captures/comparison-solid.png",
+    "bytes": 209554,
+    "sha256": "9a936248e371e37c8e887aced014ed490cfdf910785872a0c304ec2152c09db0"
+  },
+  {
+    "path": "assets/captures/desktop-empty.png",
+    "bytes": 142895,
+    "sha256": "ac99b014a8581cd6b085a01b3ce3445167e00993bd44d608f6138fdd58132d60"
+  },
+  {
+    "path": "assets/captures/desktop-palettes-auto.png",
+    "bytes": 327359,
+    "sha256": "165321dfc95d12ea1066fc739d2d4361089606524885bbbf3c211fcd98a7806e"
+  },
+  {
+    "path": "assets/captures/desktop-palettes-endesga.png",
+    "bytes": 282886,
+    "sha256": "bb01f2153d1f41204cf58bb4df98260ea0f12506ff237962466edbfa1ffff271"
+  },
+  {
+    "path": "assets/captures/desktop-palettes-pico.png",
+    "bytes": 277641,
+    "sha256": "4c1520df74dc0c92b7cd4755f36b2a138dc7677070967df179139489194c1638"
+  },
+  {
+    "path": "assets/captures/desktop-settings-all.png",
+    "bytes": 260179,
+    "sha256": "655312e0ca8e08f8ef0999537bb6d01b91d1e5af50bccb7e9510b2b954b60037"
+  },
+  {
+    "path": "assets/captures/desktop-settings-cleanup.png",
+    "bytes": 245177,
+    "sha256": "072dbc13efa3b2d0d5c4c9f903d82e5e6dced7861ed972e6f159f2ce10488d68"
+  },
+  {
+    "path": "assets/captures/desktop-settings-eight.png",
+    "bytes": 247823,
+    "sha256": "c18364b1384400aab36e587cbca257a3bf614831ed6c3ba679aee3275ee975f3"
+  },
+  {
+    "path": "assets/captures/desktop-settings-sixteen.png",
+    "bytes": 255836,
+    "sha256": "05424b2605d89c95086cab6fb83b52ecf2d6f884a72ce6231b42d3231581629f"
+  },
+  {
+    "path": "assets/captures/metadata.json",
+    "encoding": "UTF-8, LF canonical line endings",
+    "bytes": 3944,
+    "sha256": "803f06250e4904b70d0a8eea3a4b771c6c99696d89f394a78ecadecc115bcc01"
+  },
+  {
+    "path": "assets/captures/phone-bayer-matrix-eight.png",
+    "bytes": 202242,
+    "sha256": "293a39b90f9586c23cb50db3b4629376025801755e145f539ae016e2ac5711c7"
+  },
+  {
+    "path": "assets/captures/phone-bayer-matrix-four.png",
+    "bytes": 201613,
+    "sha256": "fcac25309a387001a3ab96f47c68cc02563b1359bb7aa5863ada92e84ecda2a4"
+  },
+  {
+    "path": "assets/captures/phone-bayer-threshold-tuned.png",
+    "bytes": 206779,
+    "sha256": "682bd5b06b0a163e8676613c1b4b0dd2e3affee59a7bb7a0ae1bbe7794f82ba8"
+  },
+  {
+    "path": "assets/captures/phone-bayer-threshold.png",
+    "bytes": 207900,
+    "sha256": "f8f3f78f5437025e9a733fc0bf20c4f036f58d11d4a61c50b9351e63f6bf310e"
+  },
+  {
+    "path": "assets/captures/phone-empty.png",
+    "bytes": 115164,
+    "sha256": "536828de6b06f7270aa3c53fc4cd792d6613aa3d0c2bed24b01669bc8e9b49e9"
+  },
+  {
+    "path": "assets/captures/phone-pairs-gameboy.png",
+    "bytes": 202880,
+    "sha256": "8e75a1f730759a64f07bfc5e601173a2dc138ec1ed2a724ed846c69050c260ce"
+  },
+  {
+    "path": "assets/captures/phone-pairs-mono.png",
+    "bytes": 200573,
+    "sha256": "6c3259857cc4289718f10f8ab2dfed30ea79518ddd998796e8d9cfe129ffbf9a"
+  },
+  {
+    "path": "assets/captures/phone-pairs-rose.png",
+    "bytes": 201295,
+    "sha256": "81f9ed3f2f6a4df6d4e531893e3739929d53aab493b4a77998f807f0300d937e"
+  },
+  {
+    "path": "assets/captures/phone-settings-cleanup.png",
+    "bytes": 212565,
+    "sha256": "ddd3c21d49cd4e782158372c08bbae015389a56927383c42adcf27d5125c6870"
+  },
+  {
+    "path": "assets/onebit-solid.png",
+    "bytes": 18338,
+    "sha256": "37a6c54d0f7f98d8be6cbbbf244ce3d8131d452c26bd3b9dbde03023c3e84f98"
+  },
+  {
+    "path": "assets/palette-result.png",
+    "bytes": 36911,
+    "sha256": "e5c211add153ae5fb987a2c23d847d6da887c8b0df626ad3dd78bf2c13ce2aee"
+  },
+  {
+    "path": "assets/platformer.png",
+    "bytes": 9092,
+    "sha256": "27324a94a14a4350ac86cf43b16fde96465d7f0c8a3d957d98c2b53b19b488ab"
+  },
+  {
+    "path": "assets/schibsted-grotesk.ttf",
+    "bytes": 176068,
+    "sha256": "6ceeadf6be8e1fd7687011c7fa38ed0edd1abe967a0b73d97caec183552e823d"
+  },
+  {
+    "path": "assets/town.png",
+    "bytes": 72661,
+    "sha256": "298ee1746842852110d6f21326cfcaf50d69d5101e03917259cff8fc4e293ea3"
+  },
+  {
+    "path": "licenses/font-license.txt",
+    "encoding": "UTF-8, LF canonical line endings",
+    "bytes": 4405,
+    "sha256": "851b03806ddbd92890a59a8512a883ff231587f9bef037895efa544a0f250432"
+  },
+  {
+    "path": "licenses/kenney-pixel-platformer-license.txt",
+    "encoding": "UTF-8, LF canonical line endings",
+    "bytes": 681,
+    "sha256": "1686159ac69cbd0d344a497670346bb1c763770a1bda72aa52f32bd282da71f0"
+  },
+  {
+    "path": "licenses/kenney-tiny-town-license.txt",
+    "encoding": "UTF-8, LF canonical line endings",
+    "bytes": 544,
+    "sha256": "a6aea8150db86ee5c9e90e6eba4eae3ca2e0f92d18c56d70b99942b53585b256"
+  }
+]

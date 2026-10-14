@@ -1,0 +1,81 @@
+[
+  {
+    "start": 0,
+    "end": 3,
+    "name": "Introduction"
+  },
+  {
+    "start": 3,
+    "end": 7,
+    "name": "Palettes",
+    "frames": [
+      "desktop-palettes-auto",
+      "desktop-palettes-endesga",
+      "desktop-palettes-pico"
+    ],
+    "captions": [
+      "Auto · Colors from your artwork",
+      "ENDESGA 32 · Preset palette",
+      "PICO-8 · Preset palette"
+    ]
+  },
+  {
+    "start": 7,
+    "end": 12,
+    "name": "Palette settings",
+    "frames": [
+      "desktop-settings-all",
+      "desktop-settings-sixteen",
+      "desktop-settings-eight",
+      "desktop-settings-cleanup"
+    ],
+    "captions": [
+      "Max colors · All",
+      "Max colors · 16",
+      "Max colors · 8",
+      "Cleanup · On"
+    ]
+  },
+  {
+    "start": 12,
+    "end": 16,
+    "name": "1-bit palettes",
+    "frames": [
+      "phone-pairs-mono",
+      "phone-pairs-gameboy",
+      "phone-pairs-rose"
+    ],
+    "captions": [
+      "Mono · Black & white",
+      "Game Boy · Classic green",
+      "Rose · Pink & burgundy"
+    ]
+  },
+  {
+    "start": 16,
+    "end": 21,
+    "name": "1-bit style settings",
+    "frames": [
+      "phone-bayer-threshold",
+      "phone-bayer-threshold-tuned",
+      "phone-bayer-matrix-four",
+      "phone-bayer-matrix-eight"
+    ],
+    "captions": [
+      "Threshold · Auto",
+      "Threshold · 140",
+      "Pattern matrix · 4",
+      "Pattern matrix · 8"
+    ]
+  },
+  {
+    "start": 21,
+    "end": 26,
+    "name": "Comparison"
+  },
+  {
+    "start": 26,
+    "end": 30,
+    "name": "Conclusion"
+  }
+]

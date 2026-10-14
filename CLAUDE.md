@@ -25,6 +25,10 @@ Auto leads the full rail directly before Resurrect 64, without a divider between
 
 ## Commands
 
+The editable promotional trailer project is `video/README.md`. Read it before
+changing trailer copy, captures, music or exports. Only `public/colorfetti-trailer.mp4`
+is a tracked video export; the 1080 master and intermediate renders are ignored.
+
 npm run dev                                  dev server on localhost:5173
 npm test                                     all unit tests (Vitest)
 npx vitest run src/lib/recolor.test.js        one test file

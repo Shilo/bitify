@@ -34,6 +34,7 @@
   import darkHelpLogoUrl from './assets/logo-dark.svg';
 
   const storageKey = 'colorfetti';
+  const trailerUrl = `${import.meta.env.BASE_URL}colorfetti-trailer.mp4`;
   const touch = matchMedia('(pointer:coarse)').matches;
   const dragDesktop = matchMedia('(hover: hover) and (pointer: fine)').matches && !isMobileExportDevice();
   const mod = /Mac/.test(navigator.platform) ? '⌘' : 'Ctrl'; // the key the help names for pasting and copying
@@ -1039,6 +1040,10 @@
         <p>Throw your pixels a palette party. Recolor images and animations.</p>
       </div>
     </header>
+    <a class="help-trailer" href={trailerUrl} target="_blank" rel="noopener noreferrer">
+      <span>Watch the 30-second trailer</span>
+      <small>Opens in a new tab</small>
+    </a>
     <ol>
       <li><PixelIcon name="import" /><b>Add</b>{touch ? 'Choose images.' : 'Choose, drop or paste images.'}</li>
       <li><PixelIcon name="grid" /><b>Palette</b>{family === 'full-palette' ? 'Use Auto, pick a palette or import your own.' : 'Pick a color pair or choose your own colors.'}</li>

@@ -1,0 +1,20 @@
+{
+  "name": "colorfetti-trailer",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "preview": "npm run build && npm run audio && node scripts/preview.mjs",
+    "audio": "node scripts/audio.mjs",
+    "qa": "npm run build && node scripts/render.mjs --qa-only",
+    "render": "npm run build && npm run audio && node scripts/render.mjs",
+    "share": "node scripts/encode.mjs",
+    "verify": "node scripts/verify.mjs",
+    "capture": "node scripts/capture.mjs",
+    "export": "npm run render && npm run share && npm run verify"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1",
+    "sharp": "0.35.5"
+  }
+}
