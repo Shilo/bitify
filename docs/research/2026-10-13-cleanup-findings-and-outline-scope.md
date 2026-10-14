@@ -2,6 +2,11 @@
 
 October 13, 2026. Text-only research. Production Cleanup remains Off/On unchanged.
 
+Completed October 14: [outline decision](2026-10-14-outline-cleanup-decision.md).
+Five frozen candidates were independently evaluated; none justified a new setting.
+The research is closed with a no-add recommendation, separately from the shading
+decision below. Production remains unchanged.
+
 ## Automatic shading decision
 
 Do not add the tested automatic Patches mode. Its visible benefit was insufficient

@@ -7,6 +7,11 @@ Follow-up: [automatic mode decision](AUTOMATIC-DECISION.md) tests the minimal-in
 proposal without selected colors or keep masks. Its final recommendation is
 **do not add Patches; retain the existing Off/On behavior**.
 
+The separate outline investigation is complete: [outline decision](../../docs/research/2026-10-14-outline-cleanup-decision.md)
+and [independent review](OUTLINE-REVIEW.md). Five frozen outline candidates failed
+the practical benefit gate on the exact latest character and 24 fresh held-outs.
+Do not add an outline setting. Earlier outline notes below remain historical.
+
 Start the existing dev server with `npm run dev`, then open
 `http://127.0.0.1:5173/bench/bead-research/index.html`.
 The main Colorfetti route remains unchanged. The bench offers source/24-color charts,
