@@ -573,7 +573,7 @@ under reduced motion. Top to bottom:
   its panel shows them all as chips there. It has no key, and its Keyboard cell is empty.
 - A last row has a compact “Trailer” link styled as a button aligned left and a
   filled “Got it” button aligned right. Trailer uses the same pill button geometry
-  as Got it, with the Lucide clapperboard icon immediately to the right of its label
+  as Got it, with the Lucide clapperboard icon to the left of its label
   and the external-link icon at the right edge, through `PixelIcon`. It uses the
   shared tooltip and accessible name
   “Watch trailer (opens in a new tab)”. It opens bundled `colorfetti-trailer.mp4`

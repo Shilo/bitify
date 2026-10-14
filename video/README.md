@@ -28,7 +28,7 @@ No Git LFS, external asset service or API keys are needed.
 
 The root README links to the deployed MP4 with a clickable poster; GitHub Markdown
 does not provide dependable inline playback for a committed MP4. Help has a compact
-“Trailer” button at the bottom left with a clapperboard icon after its label,
+“Trailer” button at the bottom left with a clapperboard icon before its label,
 followed by the external-link indicator, and the
 accessible label “Watch trailer (opens in a new tab)”,
 that opens the same asset in a new tab. Vite
