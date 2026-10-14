@@ -533,7 +533,7 @@
     </div>
   {/snippet}
   {#snippet paletteButton()}
-    <button class="btn glass-btn icon-only" aria-expanded={panel === 'palettes'} aria-label="Palette" use:tooltip={'Choose 1-bit colors or a full palette.'} onclick={() => toggle('palettes')}>
+    <button class="btn glass-btn icon-only" aria-expanded={panel === 'palettes'} aria-label="Palette" use:tooltip={'Choose a palette or switch to 1-bit colors.'} onclick={() => toggle('palettes')}>
       <PixelIcon name="grid" />
     </button>
   {/snippet}

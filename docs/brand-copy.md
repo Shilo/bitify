@@ -6,7 +6,13 @@
 
 Use this exact copy in Help, the README, search and social metadata, and app installation metadata. The first sentence connects pixels, palette selection and celebration through alliteration. The second states the app's purpose plainly. “Animations” keeps the brand open to future formats; it does not change the current import or export implementation.
 
-The approved Help Palette instruction is **Pick palette, 1-bit colors or import your own.**
+Lead feature descriptions with generating, choosing, importing and editing palettes.
+Describe 1-bit as an optional mode for two-color effects after the palette workflow.
+
+Help follows the selected mode. In Palette, the Palette instruction is **Use Auto, pick
+a palette or import your own.** The next step is **Nearest: Tune color matching and
+limits.** In 1-bit, use **Palette: Pick a color pair or choose your own colors.** and
+**Style: Pick an effect and tune its settings.**
 
 ## Writing approach
 

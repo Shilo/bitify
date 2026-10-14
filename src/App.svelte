@@ -1041,8 +1041,8 @@
     </header>
     <ol>
       <li><PixelIcon name="import" /><b>Add</b>{touch ? 'Choose images.' : 'Choose, drop or paste images.'}</li>
-      <li><PixelIcon name="grid" /><b>Palette</b>Pick palette, 1-bit colors or import your own.</li>
-      <li><PixelIcon name="sliders" /><b>Style</b>Pick an effect and tune its settings.</li>
+      <li><PixelIcon name="grid" /><b>Palette</b>{family === 'full-palette' ? 'Use Auto, pick a palette or import your own.' : 'Pick a color pair or choose your own colors.'}</li>
+      <li><PixelIcon name="sliders" /><b>{family === 'full-palette' ? 'Nearest' : 'Style'}</b>{family === 'full-palette' ? 'Tune color matching and limits.' : 'Pick an effect and tune its settings.'}</li>
       <li><PixelIcon name="save" /><b>Save</b>Save or copy images.</li>
     </ol>
     <table>

@@ -22,7 +22,11 @@ separate from normal full-color icons.
 
 Title and install metadata use Colorfetti. The approved description is
 “Throw your pixels a palette party. Recolor images and animations.”
-Help's Palette step says “Pick palette, 1-bit colors or import your own.”
+Product descriptions lead with generating, choosing, importing and editing palettes;
+1-bit is an optional mode for two-color effects. Help follows the selected mode:
+Palette says “Use Auto, pick a palette or import your own.” followed by
+Nearest: “Tune color matching and limits.” In 1-bit, Palette says “Pick a color pair
+or choose your own colors.” followed by Style: “Pick an effect and tune its settings.”
 Download all saves `colorfetti.zip`; individual suffixes,
 repository URLs and conversion behavior retain their existing rules. Settings use
 `colorfetti` and saved palettes use `colorfetti-palettes-v1`; read-only legacy aliases
@@ -61,8 +65,9 @@ where it implies every Original/viewer transition must reconvert.
 Date: 2026-10-06
 Status: Floating islands adopted October 9, 2026; full palette family added October 11, 2026. The adoption sections below supersede historical visual references and the original two-color-only scope.
 
-Colorfetti converts pixel art images with 1-bit styles or a full palette of 1–256 unique
-opaque RGB colors. In 1-bit, either of the two selected colors may be None, which leaves
+Colorfetti recolors images, sprites and animated GIFs with automatic, preset or custom
+palettes of 1–256 unique opaque RGB colors. Optional 1-bit styles use two chosen colors.
+In 1-bit, either of the two selected colors may be None, which leaves
 its pixels transparent. Full palettes classify source alpha separately. It runs entirely
 in the browser. Nothing is uploaded.
 
@@ -521,15 +526,18 @@ under reduced motion. Top to bottom:
   “Throw your pixels a palette party. Recolor images and animations.”
   A Close button sits in the top-right corner.
 - Four steps, each an icon, a word and a line. The icons are the app's own: the plus of
-  Add and the icons of the dock's Palette, Style and Download buttons. The first is worded
+  Add and the icons of the dock's Palette, settings and Download buttons. The first is worded
   for the device in use:
 
   | | Mouse and keyboard | Touch |
   |---|---|---|
   | Add | Drop, paste or choose images. | Choose images. |
-  | Palette | Pick palette, 1-bit colors or import your own. | The same. |
-  | Style | Pick an effect and tune its settings. | The same. |
+  | Palette | Use Auto, pick a palette or import your own. | The same. |
+  | Nearest | Tune color matching and limits. | The same. |
   | Save | Download or copy images. | The same. |
+
+  In 1-bit, Palette says “Pick a color pair or choose your own colors.” and Nearest
+  becomes Style: “Pick an effect and tune its settings.”
 
 - Under a divider, a table headed "Controls", with a thin line between its rows. Each row
   names a control and gives every way to do it, one way to a column. The rows are in the
@@ -2311,13 +2319,14 @@ the existing explicit 255-color copy flow applies.
 
 ### Concise Help and description
 
-The app description is “Convert sprites and animations with 1-bit styles or color
-palettes.” Help, README and page/social metadata use this scope, with the existing local
+The app description is “Throw your pixels a palette party. Recolor images and animations.”
+Help, README and page/social metadata use this copy, with the existing local
 privacy statement. Help keeps the short numbered layout and compact shortcut table at its
-existing 420px maximum. Palette says “Pick palette, 1-bit colors or import your own.”
-Style says “Pick an effect and tune its settings.” No extra explanatory
-section or palette count is added. Both modes retain the four Add, Palette, Style and Save
-steps. Keep the exact Style sentence visible in Palette as well as 1-bit.
+existing 420px maximum. In Palette, the Palette step says “Use Auto, pick a palette or
+import your own.” and Nearest says “Tune color matching and limits.” In 1-bit, Palette
+says “Pick a color pair or choose your own colors.” and Style says “Pick an effect and
+tune its settings.” No extra explanatory section or palette count is added. Both modes
+retain four steps: Add, Palette, Nearest/Style and Save.
 
 The table shows Next style only in 1-bit. Its settings row follows the dock: Style
 settings in 1-bit; Palette settings in Palette. Palette navigation, image actions and device-specific shortcut

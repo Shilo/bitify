@@ -1,6 +1,9 @@
-# Conversion styles
+# 1-bit conversion styles
 
-How each of Colorfetti's eleven **1-bit** styles decides which of the two colors a pixel gets, and what each
+Colorfetti starts in **Palette** mode for recoloring with automatic, preset or custom
+palettes; see [palettes.md](palettes.md). This guide covers the optional **1-bit** mode.
+
+How each of its eleven styles decides which of the two colors a pixel gets, and what each
 style's own settings change. The code is in [src/lib/recolor.js](../src/lib/recolor.js); the
 tests beside it pin every rule described here. The settings are listed in
 [src/lib/settings.js](../src/lib/settings.js).
@@ -43,10 +46,11 @@ Reset restores Oklab, All, Cleanup Off and cut 128. There is no threshold, Swap,
 in this family. Switching back to 1-bit restores the retained colors, style and settings.
 See [palettes.md](palettes.md) for import and palette library behavior.
 
-Choose **1-bit** in the Palette panel to use these styles. Help keeps all four steps in
-both modes, including Style: “Pick an effect and tune its settings.” Its controls table
-shows style stepping and Style settings in 1-bit; Palette settings in Palette. The Palette step
-says “Pick palette, 1-bit colors or import your own.” The full-palette popup is titled **Nearest**.
+Choose **1-bit** in the Palette panel to use these styles. Help follows the selected mode:
+Palette uses “Use Auto, pick a palette or import your own.” and **Nearest: “Tune color
+matching and limits.”** 1-bit uses “Pick a color pair or choose your own colors.” and
+**Style: “Pick an effect and tune its settings.”** Its controls table shows style stepping
+and Style settings in 1-bit; Palette settings in Palette. The full-palette popup is titled **Nearest**.
 Matching changes the nearest-color rule, without introducing a new effect.
 
 Glow and Paper in Palette mode provide two-color nearest conversion through the
