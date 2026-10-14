@@ -993,7 +993,7 @@
   {/if}
   <hr />
   <button class="btn glass-btn" onclick={() => { more.close(); help.showModal(); }}><PixelIcon name="help" />Help</button>
-  <a class="btn glass-btn" href="https://github.com/Shilo/bitify" target="_blank" rel="noopener">
+  <a class="btn glass-btn" href="https://github.com/Shilo/colorfetti" target="_blank" rel="noopener">
     <PixelIcon name="github" />GitHub<PixelIcon name="out" />
   </a>
   <hr />

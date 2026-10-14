@@ -6,6 +6,12 @@ are now tightly cropped transparent light/dark variants; installed icons retain
 dedicated opaque backgrounds and platform padding. Prior measurements below
 describe the earlier assets and remain historical evidence.
 
+The repository and production addresses subsequently moved to
+`https://github.com/Shilo/colorfetti` and `https://shilo.github.io/colorfetti/`.
+The owner chose no old-site redirect and no installed-app migration. References
+below to the former external addresses describe the earlier audit; saved-data
+aliases and historical source paths remain intentional compatibility data.
+
 October 13, 2026. The approved identity is Colorfetti, the fixed C-frame confetti mark and “Throw your pixels a palette party. Recolor images and animations.” Help uses “Pick palette, 1-bit colors or import your own.”
 
 ## Parent review of the independent findings

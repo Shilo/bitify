@@ -20,7 +20,7 @@ const requests = [];
 const server = createServer((req, res) => {
   let path = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
   requests.push(path);
-  if (path.startsWith('/bitify/')) path = path.slice('/bitify'.length);
+  if (path.startsWith('/colorfetti/')) path = path.slice('/colorfetti'.length);
   const file = resolve(root, '.' + (path.endsWith('/') ? path + 'index.html' : path));
   if (!file.startsWith(root + sep)) return res.writeHead(403).end();
   try { res.writeHead(200, { 'Content-Type': types[extname(file)] ?? 'application/octet-stream', 'Cache-Control': 'no-store' }).end(readFileSync(file)); }
@@ -82,7 +82,7 @@ try {
     const browser = await engine.launch({ ...options, headless: true });
     try {
       for (const system of ['light', 'dark']) for (const phone of [false, true]) {
-        const base = phone ? '/bitify/' : '/';
+        const base = phone ? '/colorfetti/' : '/';
         const context = await browser.newContext({ viewport: phone ? { width: 390, height: 844 } : { width: 1365, height: 900 }, hasTouch: phone, deviceScaleFactor: phone ? 2 : 1, colorScheme: system });
         const page = await context.newPage(), errors = [], badAssets = [];
         page.on('pageerror', e => errors.push(e.message));

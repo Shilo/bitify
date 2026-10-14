@@ -488,7 +488,7 @@ throws things away (Reset settings).
 - Install: asks the browser to install Colorfetti as an app (see "Installing"). The row
   is there only while the browser offers that.
 - Help: closes the menu and opens the help (see "Help and welcome").
-- GitHub: opens `https://github.com/Shilo/bitify` in a new tab. A second, muted icon at the
+- GitHub: opens `https://github.com/Shilo/colorfetti` in a new tab. A second, muted icon at the
   right end of the row, an arrow leaving a box, shows that the link leaves the app.
 - Reset settings, last, in the Reset color: closes the menu and asks "Reset all settings?" in a
   small dialog in the middle of a dimmed screen, with one line saying that colors, styles

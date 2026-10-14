@@ -8,7 +8,7 @@
 
 Throw your pixels a palette party. Recolor images and animations.
 
-**[Open Colorfetti](https://shilo.github.io/bitify/)**
+**[Open Colorfetti](https://shilo.github.io/colorfetti/)**
 
 ## Features
 

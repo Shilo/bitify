@@ -14,7 +14,7 @@ function start(baseURI, dark) {
   return { links, change(dark) { scheme.matches = dark; changed(); } };
 }
 describe('browser favicon selection', () => {
-  it.each(['https://example.test/', 'https://example.test/bitify/', 'https://example.test/bitify/index.html'])('resolves every format within %s, then follows live browser preference changes', base => {
+  it.each(['https://example.test/', 'https://example.test/colorfetti/', 'https://example.test/colorfetti/index.html'])('resolves every format within %s, then follows live browser preference changes', base => {
     const { links, change } = start(base, false);
     const root = new URL('./', base).href;
     expect(links.map(l => l.href)).toEqual(['favicon.ico', 'favicon-32x32.png', 'favicon-light.svg'].map(p => root + p + '?v=2'));
@@ -24,7 +24,7 @@ describe('browser favicon selection', () => {
     expect(links[2].href).toBe(root + 'favicon-light.svg?v=2');
   });
   it('selects explicit dark SVG and raster artwork at startup, independently of app storage', () => {
-    const { links } = start('https://example.test/bitify/', true);
+    const { links } = start('https://example.test/colorfetti/', true);
     expect(links.every(l => l.href.includes('favicon-dark'))).toBe(true);
   });
   it('keeps adaptive SVG, PNG and ICO initial fallbacks for script-disabled documents', () => {
