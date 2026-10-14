@@ -6,6 +6,9 @@ import { createServer } from 'node:http';
 import { readFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import { resolve, extname, sep } from 'node:path';
 import { createRequire } from 'node:module';
+const engineNames = ['edge', 'firefox', 'webkit'];
+assert(!process.env.ENGINE || engineNames.includes(process.env.ENGINE),
+  `Unsupported ENGINE "${process.env.ENGINE}"; choose ${engineNames.join(', ')} or leave it unset.`);
 const require = createRequire(import.meta.url);
 const bundled = 'C:/Users/shilo/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/';
 function dependency(name, override) { try { return require(override ?? name); } catch { return require(bundled + name); } }
@@ -213,6 +216,7 @@ try {
     } finally { await browser.close(); }
   }
   results.faviconRequests = [...new Set(requests.filter(path => path.includes('favicon')))];
+  assert(results.cases.length > 0 && results.assetRenders.length > 0, 'Browser QA must run cases and render assets');
   results.passed = true;
   writeFileSync(resolve(output, 'results.json'), JSON.stringify(results, null, 2));
   console.log(`PASS ${results.cases.length} browser/theme/viewport cases and ${results.assetRenders.length} independent engine asset-render sets`);

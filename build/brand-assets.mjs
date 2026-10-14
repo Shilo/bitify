@@ -5,7 +5,9 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { deflateSync } from 'node:zlib';
 
 const root = new URL('../', import.meta.url);
-const source = readFileSync(new URL('src/assets/logo.svg', root), 'utf8');
+// Git may check out SVG text with CRLF on Windows. Line endings are not artwork.
+const svgText = text => text.replaceAll('\r\n', '\n');
+const source = svgText(readFileSync(new URL('src/assets/logo.svg', root), 'utf8'));
 const check = process.argv.includes('--check');
 const rects = [...source.matchAll(/<rect\b([^>]+)\/>/g)].map(([, text]) => {
   const attrs = Object.fromEntries([...text.matchAll(/([\w-]+)="([^"]*)"/g)].map(([, key, value]) => [key, value]));
@@ -120,7 +122,11 @@ for (const size of [192, 512]) {
 for (const size of [152, 167, 180]) outputs.set(`public/apple-touch-icon-${size}x${size}.png`, png(size, { installed: true }));
 for (const [path, bytes] of outputs) {
   const url = new URL(path, root);
-  if (check) assert.deepEqual(readFileSync(url), bytes, `${path} is out of date: run npm run icons`);
+  if (check) {
+    const actual = readFileSync(url);
+    assert.deepEqual(path.endsWith('.svg') ? Buffer.from(svgText(actual.toString('utf8'))) : actual,
+      bytes, `${path} is out of date: run npm run icons`);
+  }
   else writeFileSync(url, bytes);
 }
 console.log(`${check ? 'Verified' : 'Generated'} ${outputs.size} exports; every piece survives and maskable foreground fits the safe circle.`);

@@ -22,12 +22,25 @@ A separate read-only reviewer checked the generator, exact source pixels, ICO de
 
 The reviewer then checked the final corrections, confirmed all 15 browser cases and three asset-render sets passed, acknowledged the overstated Original-mode claim, and reported no remaining demonstrated defects.
 
+### Fresh review after the implementation commit
+
+A second independent reviewer challenged commit `901b6a1` against its parent and reproduced two additional issues. The parent accepted both after evaluating their concrete triggers and kept the fixes confined to asset verification and browser QA:
+
+| Finding | Parent evaluation and fix |
+| --- | --- |
+| Adaptive SVG verification falsely reports stale artwork after a normal Windows CRLF checkout | Valid reproducibility regression: the parent revision passes the same fixture. Canonicalize SVG source line endings and normalize only SVG verification comparisons. PNG and ICO checks remain byte-exact. Regression coverage also proves verification does not rewrite assets and still rejects changed SVG colors or binary bytes. |
+| Unsupported `ENGINE` values report successful QA with zero cases | Valid false-success path. Reject unknown engine names before loading dependencies or touching results; require nonempty cases and asset renders before recording success. A subprocess regression verifies the invalid filter fails with a clear diagnostic. |
+
+The deliberately invalid-filter reproduction overwrote the ignored browser result file. A complete real browser rerun replaces that artifact; zero-case output is not verification evidence. No new production rendering or lifecycle defect was demonstrated by this review.
+
+The second reviewer independently reran the original failing CRLF fixture with the corrected generator and confirmed all 23 exports verify. The reviewer also confirmed the three new regression cases pass and that SVG normalization does not suppress artwork changes or weaken binary comparisons. The complete 15-case browser rerun and three engine asset-render sets passed again and replaced the invalid-filter artifact.
+
 During implementation, browser testing exposed a blank converted demo after repeated source changes under the same numeric demo ID. The demo is now keyed by its immutable source image identity, so switching between the two cached theme sources remounts that tile. Ordinary imported-image keys remain unchanged. Reanalysis of the same source preserves its tile. No broader conversion-cache refactor was needed.
 
 ## Verification
 
 - `node build/brand-assets.mjs --check`: all 23 generated exports match the master and generator; maskable containment passes.
-- `npm test`: 803 passed, 2 existing skipped, across 53 test files. Icon checks include exact colors, alpha, dimensions, cropped bounds, ICO alpha/AND masks, opaque installed padding and monochrome roles.
+- `npm test`: 806 passed, 2 existing skipped, across 54 test files. Icon checks include exact colors, alpha, dimensions, cropped bounds, ICO alpha/AND masks, opaque installed padding, monochrome roles and the three post-commit verification regressions.
 - `npm run build`: passes.
 - `node bench/brand-icons-qa.mjs`: 15 cases passed across Edge, Firefox and WebKit, plus three independent engine asset-render sets. Covers desktop/phone viewports, light/dark preferences, saved app overrides, live preference changes, root/project subpaths, pending startup decoding, Original/converted previews, repeated theme switches, 1-bit reanalysis and imported-source preservation. Manifest and installation-asset URLs resolve; no JavaScript or local-asset errors were observed.
 - Help screenshots were inspected for transparent artwork and layout on light and dark surfaces.
