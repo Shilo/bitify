@@ -1,4 +1,8 @@
-<img src="src/assets/logo.svg" width="152" height="152" alt="Colorfetti: a black C frame with five colorful confetti pieces">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="src/assets/logo-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="src/assets/logo.svg">
+  <img src="src/assets/logo.svg" width="152" height="152" alt="Colorfetti: a C frame with five colorful confetti pieces">
+</picture>
 
 # Colorfetti
 

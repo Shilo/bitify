@@ -3,7 +3,7 @@ import { runInNewContext } from 'node:vm';
 import { describe, it, expect } from 'vitest';
 
 const html = readFileSync(new URL('../../index.html', import.meta.url), 'utf8');
-const script = html.match(/<script>([\s\S]*?)<\/script>/)[1];
+const script = html.match(/<script id="colorfetti-theme">([\s\S]*?)<\/script>/)[1];
 const makeDocument = () => {
   const scheme = { content: 'only light' };
   const metas = [{ content: '' }, { content: '' }];

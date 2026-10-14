@@ -29,7 +29,9 @@
   import { paletteFailureRegistry } from './lib/palette-failure.js';
   import { packWorkspaceControls } from './lib/workspace-controls.js';
   import logoUrl from './assets/logo.png';
+  import darkLogoUrl from './assets/logo-dark.png';
   import helpLogoUrl from './assets/logo.svg';
+  import darkHelpLogoUrl from './assets/logo-dark.svg';
 
   const storageKey = 'colorfetti';
   const touch = matchMedia('(pointer:coarse)').matches;
@@ -570,18 +572,25 @@
   $effect(() => () => stopAnalysis());
 
   const imageImports = new Set(), exampleImportController = new AbortController();
+  let themeExamples = $state.raw(null);
   $effect(() => () => {
     exampleImportController.abort();
     for (const controller of imageImports) controller.abort();
     imageImports.clear();
   });
-  fetch(logoUrl, { signal: exampleImportController.signal })
-    .then(response => response.blob())
-    .then(file => decodeDemo(file, exampleImportController.signal))
-    .then(decoded => {
-      if (!exampleImportController.signal.aborted) example = toItem(0, 'Colorfetti', decoded);
+  // Decode two immutable sources once. Switching reuses their identities and
+  // the generated-palette cache instead of allocating new sources on every toggle.
+  Promise.all([logoUrl, darkLogoUrl].map(url => fetch(url, { signal: exampleImportController.signal })
+    .then(response => { if (!response.ok) throw new Error('Example unavailable'); return response.blob(); })
+    .then(file => decodeDemo(file, exampleImportController.signal))))
+    .then(([light, dark]) => {
+      if (!exampleImportController.signal.aborted) themeExamples = { light: toItem(0, 'Colorfetti', light), dark: toItem(0, 'Colorfetti', dark) };
     })
-    .catch(() => {}); // without it the empty screen simply has no preview
+    .catch(() => {}); // the empty workspace still offers image import
+  $effect(() => {
+    const selected = themeExamples?.[theme];
+    if (selected) example = selected;
+  });
 
   // Each image goes on the wall as soon as it is read, so the first of a batch of photos shows
   // without waiting for the rest.
@@ -905,7 +914,9 @@
   style:--cols={layout.cols} style:--tile-size="{layout.size}px" use:measureCanvas use:emptyImport={!items.length}>
   <div class="probe" bind:clientWidth={wallWidth} bind:clientHeight={wallHeight}></div>
   <div class="tiles">
-    {#each canvasItems as item (item.id)}
+    <!-- Theme demo variants are different immutable artwork sources. Remount only
+         the demo when its source changes; real images retain their ID and caches. -->
+    {#each canvasItems as item (item.id === 0 ? item.original : item.id)}
       <Tile {item} inset={IMAGE_INSET} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} palettePending={generatedPending} {alphaCut} {metric} {maxColors} {cleanup} onpalettestatus={reportPaletteStage} {paletteRetry}
         analysisPending={needsAnalysis(item)} flipped={effectiveOriginal} comparing={previewing} active={!viewed} exportDisabled={generatedUnavailable || itemPaletteFailed(item)} budget={dragging ? DRAG_MS / canvasItems.length : 0}
         oncompare={compareHold} onopen={items.length ? openImage : undefined}
@@ -1022,7 +1033,7 @@
     <!-- svelte-ignore a11y_autofocus -->
     <button class="ib" autofocus onclick={() => help.close()} aria-label="Close"><PixelIcon name="x" /></button>
     <header>
-      <img class="help-logo" src={helpLogoUrl} alt="" width="48" height="48" />
+      <img class="help-logo" src={theme === 'dark' ? darkHelpLogoUrl : helpLogoUrl} alt="" width="56" height="56" />
       <div>
         <h2 id="help-title">Colorfetti</h2>
         <p>Throw your pixels a palette party. Recolor images and animations.</p>

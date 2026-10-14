@@ -12,23 +12,27 @@ const rects = [...source.matchAll(/<rect\b([^>]+)\/>/g)].map(([, text]) => {
   return { x: Number(attrs.x ?? 0), y: Number(attrs.y ?? 0), width: Number(attrs.width),
     height: Number(attrs.height), fill: attrs.fill, background: attrs.id === 'backplate' };
 });
-const background = rects.find(r => r.background).fill;
-const mark = rects.filter(r => !r.background);
+const background = '#FFFDF9', frameDark = '#FFFDF9';
+const mark = rects;
 assert.equal(mark.length, 8);
+assert.equal(Math.min(...mark.map(r => r.x)), 0);
+assert.equal(Math.min(...mark.map(r => r.y)), 0);
+assert.equal(Math.max(...mark.map(r => r.x + r.width)), 30);
+assert.equal(Math.max(...mark.map(r => r.y + r.height)), 30);
 const rgb = hex => Buffer.from(hex.slice(1), 'hex');
 
 // Each edge snaps once to the output grid. No interpolated or blended colors.
-function raster(size, { maskable = false } = {}) {
-  const grid = maskable ? 56 : 38, inset = maskable ? 9 : 0;
+function raster(size, { installed = false, maskable = false, dark = false, monochrome = false } = {}) {
+  const grid = maskable ? 56 : installed ? 38 : 30, inset = maskable ? 13 : installed ? 4 : 0;
   const pixels = Buffer.alloc(size * size * 4);
   const backplate = rgb(background);
-  for (let i = 0; i < pixels.length; i += 4) { backplate.copy(pixels, i); pixels[i + 3] = 255; }
+  if (installed || maskable) for (let i = 0; i < pixels.length; i += 4) { backplate.copy(pixels, i); pixels[i + 3] = 255; }
   for (const rect of mark) {
     const left = Math.round((rect.x + inset) * size / grid);
     const top = Math.round((rect.y + inset) * size / grid);
     const right = Math.round((rect.x + rect.width + inset) * size / grid);
     const bottom = Math.round((rect.y + rect.height + inset) * size / grid);
-    const color = rgb(rect.fill);
+    const color = rgb(monochrome ? '#202020' : dark && rect.fill === '#202020' ? frameDark : rect.fill);
     assert(right > left && bottom > top, 'Every logo piece must survive export');
     for (let y = top; y < bottom; y++) for (let x = left; x < right; x++) {
       if (maskable) {
@@ -64,15 +68,16 @@ function png(size, options) {
   return Buffer.concat([Buffer.from('89504e470d0a1a0a', 'hex'), chunk('IHDR', header),
     chunk('sRGB', Buffer.from([0])), chunk('IDAT', deflateSync(rows, { level: 9 })), chunk('IEND', Buffer.alloc(0))]);
 }
-function ico(sizes) {
+function ico(sizes, options) {
   const entries = sizes.map(size => {
-    const rgba = raster(size), maskBytes = Math.ceil(size / 32) * 4 * size;
+    const rgba = raster(size, options), maskStride = Math.ceil(size / 32) * 4, maskBytes = maskStride * size;
     const dib = Buffer.alloc(40 + rgba.length + maskBytes);
     dib.writeUInt32LE(40); dib.writeInt32LE(size, 4); dib.writeInt32LE(size * 2, 8);
     dib.writeUInt16LE(1, 12); dib.writeUInt16LE(32, 14); dib.writeUInt32LE(rgba.length + maskBytes, 20);
     for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
       const from = (y * size + x) * 4, to = 40 + ((size - 1 - y) * size + x) * 4;
-      dib[to] = rgba[from + 2]; dib[to + 1] = rgba[from + 1]; dib[to + 2] = rgba[from]; dib[to + 3] = 255;
+      dib[to] = rgba[from + 2]; dib[to + 1] = rgba[from + 1]; dib[to + 2] = rgba[from]; dib[to + 3] = rgba[from + 3];
+      if (!rgba[from + 3]) dib[40 + rgba.length + (size - 1 - y) * maskStride + (x >> 3)] |= 1 << (7 - (x & 7));
     }
     return { size, dib };
   });
@@ -88,17 +93,31 @@ function ico(sizes) {
   return Buffer.concat([header, ...entries.map(e => e.dib)]);
 }
 
+const darkSource = source.replaceAll('fill="#202020"', `fill="${frameDark}"`);
+const adaptiveSource = source.replace('<title>Colorfetti</title>', '<title>Colorfetti</title>\n  <style>.frame{fill:#202020}@media(prefers-color-scheme:dark){.frame{fill:#FFFDF9}}</style>')
+  .replaceAll('fill="#202020"', 'class="frame" fill="#202020"');
+const monochromeSource = source.replace(/fill="#[\da-f]{6}"/gi, 'fill="#202020"');
 const outputs = new Map([
-  ['public/favicon.svg', Buffer.from(source)],
+  ['src/assets/logo-dark.svg', Buffer.from(darkSource)],
+  ['public/favicon.svg', Buffer.from(adaptiveSource)],
+  ['public/favicon-light.svg', Buffer.from(source)],
+  ['public/favicon-dark.svg', Buffer.from(darkSource)],
   ['public/favicon.ico', ico([16, 32, 48])],
-  ['src/assets/logo.png', png(76)],
+  ['public/favicon-dark.ico', ico([16, 32, 48], { dark: true })],
+  ['public/safari-pinned-tab.svg', Buffer.from(monochromeSource)],
+  ['public/monochrome-192x192.png', png(192, { monochrome: true })],
+  ['src/assets/logo.png', png(60)],
+  ['src/assets/logo-dark.png', png(60, { dark: true })],
 ]);
-for (const size of [16, 32]) outputs.set(`public/favicon-${size}x${size}.png`, png(size));
+for (const size of [16, 32, 48]) {
+  outputs.set(`public/favicon-${size}x${size}.png`, png(size));
+  outputs.set(`public/favicon-dark-${size}x${size}.png`, png(size, { dark: true }));
+}
 for (const size of [192, 512]) {
-  outputs.set(`public/pwa-${size}x${size}.png`, png(size));
+  outputs.set(`public/pwa-${size}x${size}.png`, png(size, { installed: true }));
   outputs.set(`public/maskable-icon-${size}x${size}.png`, png(size, { maskable: true }));
 }
-for (const size of [152, 167, 180]) outputs.set(`public/apple-touch-icon-${size}x${size}.png`, png(size));
+for (const size of [152, 167, 180]) outputs.set(`public/apple-touch-icon-${size}x${size}.png`, png(size, { installed: true }));
 for (const [path, bytes] of outputs) {
   const url = new URL(path, root);
   if (check) assert.deepEqual(readFileSync(url), bytes, `${path} is out of date: run npm run icons`);

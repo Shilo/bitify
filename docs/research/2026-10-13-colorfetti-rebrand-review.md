@@ -1,5 +1,11 @@
 # Colorfetti rebrand audit and resolutions
 
+The background and export policy in this historical audit was superseded by the
+[current brand guide](2026-10-13-colorfetti-identity.md): general logos and favicons
+are now tightly cropped transparent light/dark variants; installed icons retain
+dedicated opaque backgrounds and platform padding. Prior measurements below
+describe the earlier assets and remain historical evidence.
+
 October 13, 2026. The approved identity is Colorfetti, the fixed C-frame confetti mark and “Throw your pixels a palette party. Recolor images and animations.” Help uses “Pick palette, 1-bit colors or import your own.”
 
 ## Parent review of the independent findings

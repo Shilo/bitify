@@ -170,7 +170,7 @@ select { color:var(--gl-color-text); background:var(--review-surface); border:0;
     <div class="palette-list" aria-label="Sample palette swatches"></div>
   </section>
   <section class="edit-panel material" id="style-panel" aria-label="Sample Style panel" hidden>
-    <span class="style-label">Style</span><div class="style-pick"><img src="/src/assets/logo.png" alt=""><span>Cutout</span><span data-icon="caret"></span></div>
+    <span class="style-label">Style</span><div class="style-pick"><img data-colorfetti-logo src="../../src/assets/logo.png" alt=""><span>Cutout</span><span data-icon="caret"></span></div>
     <span class="divider" aria-hidden="true"></span><div class="slider" role="img" aria-label="Sample threshold slider"></div><div class="auto-field"><span>127</span><strong>Auto</strong></div>
     <button class="icon-button extra-settings" data-icon="more" aria-label="Additional settings — sample only" data-tip="More settings · sample" data-sample="Additional settings"></button>
   </section>
@@ -201,8 +201,8 @@ const sprites={
   castle:['.##...##...##...','.##...##...##...','.############...','.############...','...########.....','...########.....','...##.##.##.....','...##.##.##.....','...########.....','...########.....','...###..###.....','...##....##.....','...##....##.....','.############...'],
   star:['.......##.......','.......##.......','......####......','......####......','.##############.','..############..','....########....','.....######.....','....########....','....###..###....','...###....###...','...##......##...']};
 const spriteSvg=name=>`<svg class="sprite" viewBox="0 0 16 16" aria-hidden="true">${sprites[name].flatMap((row,y)=>[...row].flatMap((cell,x)=>cell==='#'?[`<rect x="${x}" y="${y}" width="1" height="1"/>`]:[])).join('')}</svg>`;
-const samples=[['logo.png','76 × 76','logo'],['ghost.png','16 × 16','ghost'],['leaf.png','16 × 16','leaf'],['logo-small.png','76 × 76','logo'],['castle.png','16 × 16','castle'],['star.png','16 × 16','star']];
-document.getElementById('art-grid').innerHTML=samples.map(([name,size,art])=>`<article class="tile" aria-label="Sample ${name}"><div class="art">${art==='logo'?'<img src="/src/assets/logo.png" alt="Sample Colorfetti logo">':spriteSvg(art)}<div class="acts"><button class="icon-button copy-action" data-icon="copy" aria-label="Copy sample ${name}" data-tip="Copy · sample" data-sample="Copy"></button><button class="icon-button" data-icon="save" aria-label="Save sample ${name}" data-tip="Save · sample" data-sample="Save"></button><button class="icon-button" data-icon="x" aria-label="Remove sample ${name}" data-tip="Remove · sample" data-sample="Remove"></button></div></div><div class="caption material"><strong>${name}</strong><span>${size}</span></div></article>`).join('');
+const samples=[['logo.png','60 × 60','logo'],['ghost.png','16 × 16','ghost'],['leaf.png','16 × 16','leaf'],['logo-small.png','60 × 60','logo'],['castle.png','16 × 16','castle'],['star.png','16 × 16','star']];
+document.getElementById('art-grid').innerHTML=samples.map(([name,size,art])=>`<article class="tile" aria-label="Sample ${name}"><div class="art">${art==='logo'?'<img data-colorfetti-logo src="../../src/assets/logo.png" alt="Sample Colorfetti logo">':spriteSvg(art)}<div class="acts"><button class="icon-button copy-action" data-icon="copy" aria-label="Copy sample ${name}" data-tip="Copy · sample" data-sample="Copy"></button><button class="icon-button" data-icon="save" aria-label="Save sample ${name}" data-tip="Save · sample" data-sample="Save"></button><button class="icon-button" data-icon="x" aria-label="Remove sample ${name}" data-tip="Remove · sample" data-sample="Remove"></button></div></div><div class="caption material"><strong>${name}</strong><span>${size}</span></div></article>`).join('');
 document.querySelectorAll('[data-icon]').forEach(node=>node.innerHTML=svgIcon(node.dataset.icon));
 const palettes=[['#202426','#f0f6f0'],['#000','#fff'],['#45413e','#b5c6ba'],['#363121','#fce4a4'],['#293400','#90be05'],['#162810','#c2cf98'],['#304525','#ccf5d9'],['#24291f','#d5d8cb'],['#162b20','#03dc6c'],['#4a2715','#ffd15a'],['#393285','#94dce6'],['#590d28','#ffd3e0']];
 document.querySelector('.palette-list').innerHTML=palettes.map(([a,b],i)=>`<span class="palette-disc" style="--a:${a};--b:${b}" role="img" aria-label="Sample palette ${i+1}"></span>`).join('');
@@ -212,6 +212,7 @@ let theme=['light','dark'].includes(params.get('theme'))?params.get('theme'):'da
 let panel=['palette','style'].includes(params.get('panel'))?params.get('panel'):'none';
 function update(){
   root.dataset.layout=layout;root.dataset.theme=theme;root.dataset.panel=panel;
+  document.querySelectorAll('[data-colorfetti-logo]').forEach(image=>image.src=theme==='dark'?'../../src/assets/logo-dark.png':'../../src/assets/logo.png');
   document.querySelectorAll('[data-layout-choice]').forEach(button=>button.setAttribute('aria-pressed',button.dataset.layoutChoice===layout));
   const themeButton=document.getElementById('theme-toggle');themeButton.textContent=theme==='dark'?'Light':'Dark';themeButton.setAttribute('aria-label',`Switch mockup to ${theme==='dark'?'light':'dark'} theme`);
   document.getElementById('panel-select').value=panel;document.getElementById('palette-panel').hidden=panel!=='palette';document.getElementById('style-panel').hidden=panel!=='style';document.getElementById('stage').dataset.open=panel!=='none';

@@ -2,16 +2,23 @@
 
 ## Colorfetti identity — October 13, 2026
 
-Colorfetti is the product name. The logo is the approved square black C frame with
+Colorfetti is the product name. The logo is the approved square C frame (black on light surfaces, off-white on dark surfaces) with
 five confetti pieces and the fixed orange, violet, pink, yellow and teal palette.
 The master is `src/assets/logo.svg`; geometry and HEX values are specified in
 [the brand guide](../../research/2026-10-13-colorfetti-identity.md).
 
-Help, favicon, installed icons, README and social previews share this mark. Public
-icons use an opaque `#FFFDF9` backplate in both themes; maskable icons add safe-area
-padding without changing the mark. The empty-wall example uses a static 76×76 PNG
-of the same geometry and backplate and is named Colorfetti. It still responds
-to the active conversion settings.
+Help, favicon, installed icons, README and social previews share this mark.
+General artwork is transparent and cropped to 30×30 logical units with no outer
+margin. Help selects the explicit SVG matching the app theme. The empty-wall
+example uses the corresponding transparent 60×60 PNG, still processed by the
+active conversion settings. Two immutable PNG sources decode once; selection always follows the current theme.
+The demo tile is keyed by source identity to reset its conversion caches, while
+imported-image tile identities stay unchanged. Unmount cancels pending decoding.
+Browser favicon selection uses the browser preference independently of the app's
+saved override, choosing versioned explicit SVG/PNG/ICO variants and following preference
+changes. Installed and Apple icons retain opaque off-white tiles with platform
+padding; maskables use their separate safe-area inset. Monochrome variants remain
+separate from normal full-color icons.
 
 Title and install metadata use Colorfetti. The approved description is
 “Throw your pixels a palette party. Recolor images and animations.”
@@ -508,7 +515,8 @@ inside when the screen is too short for it. It fades and rises into place in 150
 under reduced motion. Top to bottom:
 
 - A compact header contains the approved C-frame logo (`src/assets/logo.svg`),
-  drawn at 56px with crisp pixel edges and its opaque off-white backplate in both themes.
+  drawn at 56px with crisp pixel edges, transparent gaps and no outer source padding.
+  Its C is black in light mode and off-white in dark mode; confetti colors stay fixed.
   The Colorfetti wordmark and approved description appear beside it:
   “Throw your pixels a palette party. Recolor images and animations.”
   A Close button sits in the top-right corner.
@@ -623,7 +631,7 @@ example is at most as wide as the screen less 16px a side however much height th
 on a screen narrower than the button's words they wrap onto a second line.
 
 Above the heading sits the approved square Colorfetti logo (`src/assets/logo.png`),
-with a 76×76 static source image and the same off-white backplate, labelled “Example”.
+with a tightly cropped transparent 60×60 static source image matching the app theme, labelled “Example”.
 It goes through the same conversion as real
 images, so the colors, Swap, palettes, style, every setting of the style, the view switch and
 hold or Space all apply to it. It is for previewing only. It has no Copy, Download or Remove, is
@@ -1191,7 +1199,7 @@ tab does, so every deploy reaches it the same way.
 
 - `public/manifest.webmanifest` sets Colorfetti, the approved description, standalone display and the dark splash background. Its relative start address supports the existing deployment path.
 - `npm run icons` generates exports from `src/assets/logo.svg` using `build/brand-assets.mjs`. `node build/brand-assets.mjs --check` verifies exact output and maskable safe-area padding.
-- The manifest declares separate ordinary and maskable PNGs at 192px and 512px. Browser tabs use SVG, PNG and a multi-size ICO; Apple home-screen icons are provided at 152px, 167px and 180px. Every logo uses the same opaque off-white backplate and approved palette in both themes.
+- The manifest declares separate ordinary and maskable PNGs at 192px and 512px, plus a separate transparent monochrome icon. Browser tabs use SVG, PNG and a multi-size ICO; Apple home-screen icons are provided at 152px, 167px and 180px. Installation icons use opaque off-white tiles and approved colors; general logos and favicons are transparent light/dark variants with no outer margin.
 - `index.html` links the manifest and platform icons and updates the browser bar for the active theme. Description and Open Graph metadata use the approved copy and 512px icon. Absolute social URLs retain the actual GitHub Pages address.
 - Chrome, Edge and other Chromium browsers, on desktop and Android, tell the page when the
   app can be installed and is not yet. The page keeps that offer and shows Install in the More

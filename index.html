@@ -17,9 +17,10 @@
     <meta property="og:image:height" content="512" />
     <meta property="og:image:alt" content="Colorfetti: a black C frame with five colorful confetti pieces" />
     <meta name="twitter:card" content="summary" />
-    <link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48" href="/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48" href="/favicon.ico?v=2" data-favicon-light="/favicon.ico?v=2" data-favicon-dark="/favicon-dark.ico?v=2" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2" data-favicon-light="/favicon-32x32.png?v=2" data-favicon-dark="/favicon-dark-32x32.png?v=2" />
+    <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg?v=2" data-favicon-light="/favicon-light.svg?v=2" data-favicon-dark="/favicon-dark.svg?v=2" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#0EAAA5" />
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png" />
     <link rel="apple-touch-icon" sizes="167x167" href="/apple-touch-icon-167x167.png" />
@@ -27,8 +28,22 @@
     <meta name="apple-mobile-web-app-title" content="Colorfetti" />
     <meta name="theme-color" content="#f1f2f3" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#191c20" media="(prefers-color-scheme: dark)" />
+    <!-- Choose explicit artwork, including in Safari versions that ignore SVG media queries.
+         Relative URLs also work at the GitHub Pages project subpath. App theme overrides
+         do not determine the browser chrome preference. -->
+    <script id="colorfetti-favicons">
+      const faviconScheme = matchMedia('(prefers-color-scheme: dark)');
+      const updateFavicons = () => {
+        for (const icon of document.querySelectorAll('[data-favicon-light]')) {
+          const path = faviconScheme.matches ? icon.dataset.faviconDark : icon.dataset.faviconLight;
+          icon.href = new URL(path.replace(/^\//, './'), document.baseURI).href;
+        }
+      };
+      updateFavicons();
+      faviconScheme.addEventListener('change', updateFavicons);
+    </script>
     <!-- Resolve the saved or system theme before any CSS paints (see App.svelte). -->
-    <script>
+    <script id="colorfetti-theme">
       let initialTheme;
       try {
         initialTheme = JSON.parse(localStorage.getItem('colorfetti') ?? localStorage.getItem('bitify'))?.theme;
