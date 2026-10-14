@@ -9,14 +9,14 @@
     "slide": "Palettes",
     "before": "A different palette. A different feel.",
     "after": "Choose a palette.",
-    "image": "Same Tiny Town scene with Auto, ENDESGA 32 and PICO-8.",
+    "image": "Tiny Town and Pixel Platformer together in the desktop wall with Auto, ENDESGA 32 and PICO-8. Mobile remains single-image.",
     "decision": "Describe the visible action without promising a subjective feeling."
   },
   {
     "slide": "Palette settings",
     "before": "Fewer colors. More control.",
     "after": "Fine-tune your palette.",
-    "image": "Real All → 16 → 8 limit edits, then Cleanup On.",
+    "image": "Real All → 16 → 8 limit edits, then Cleanup On, applied to the two-image desktop wall. The phone inset retains one image.",
     "decision": "Name the actual controls; do not imply Cleanup always improves or preserves intentional details."
   },
   {

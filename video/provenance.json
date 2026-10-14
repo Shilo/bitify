@@ -68,7 +68,11 @@
     "desktopCSS": "1280x720",
     "phoneCSS": "390x844, touch and mobile emulated",
     "devicePixelRatio": 2,
-    "theme": "dark"
+    "theme": "dark",
+    "desktopFeatureImages": ["assets/town.png", "assets/platformer.png"],
+    "desktopFeatureImageCount": 2,
+    "mobileImageCount": 1,
+    "comparisonImageCount": 1
   },
   "archivedMusic": {
     "file": "assets/audio/wholesome-source.mp3",

@@ -23,44 +23,44 @@
   },
   {
     "path": "assets/captures/desktop-palettes-auto.png",
-    "bytes": 327359,
-    "sha256": "165321dfc95d12ea1066fc739d2d4361089606524885bbbf3c211fcd98a7806e"
+    "bytes": 343900,
+    "sha256": "9b22bb622700dcd13b3a92bf2d1421c2fc5c39daf5aade62f75c71186d9fbf00"
   },
   {
     "path": "assets/captures/desktop-palettes-endesga.png",
-    "bytes": 282886,
-    "sha256": "bb01f2153d1f41204cf58bb4df98260ea0f12506ff237962466edbfa1ffff271"
+    "bytes": 300230,
+    "sha256": "b33d495002ac9fb7d206cafe6f2b6b289355ef3aaee7b5873d9606216de6e839"
   },
   {
     "path": "assets/captures/desktop-palettes-pico.png",
-    "bytes": 277641,
-    "sha256": "4c1520df74dc0c92b7cd4755f36b2a138dc7677070967df179139489194c1638"
+    "bytes": 293657,
+    "sha256": "9f41b187545ea4ca70875be87a13235b348fcbd5b4502c0c92350bad55ce4db4"
   },
   {
     "path": "assets/captures/desktop-settings-all.png",
-    "bytes": 260179,
-    "sha256": "655312e0ca8e08f8ef0999537bb6d01b91d1e5af50bccb7e9510b2b954b60037"
+    "bytes": 279934,
+    "sha256": "2b1ae2de291cda5707c556d75984e6fb11232b16df018ab02df6108662373acd"
   },
   {
     "path": "assets/captures/desktop-settings-cleanup.png",
-    "bytes": 245177,
-    "sha256": "072dbc13efa3b2d0d5c4c9f903d82e5e6dced7861ed972e6f159f2ce10488d68"
+    "bytes": 266137,
+    "sha256": "98cb018e98db7cf0cc4f375e7ae8e92ce9784bd2a584283a35b56e973f0aa8cf"
   },
   {
     "path": "assets/captures/desktop-settings-eight.png",
-    "bytes": 247823,
-    "sha256": "c18364b1384400aab36e587cbca257a3bf614831ed6c3ba679aee3275ee975f3"
+    "bytes": 268731,
+    "sha256": "7783b0ef76fd533b9b00b670bb70212725820bdbf6ca3c7b0d6333b6a6d66d7a"
   },
   {
     "path": "assets/captures/desktop-settings-sixteen.png",
-    "bytes": 255836,
-    "sha256": "05424b2605d89c95086cab6fb83b52ecf2d6f884a72ce6231b42d3231581629f"
+    "bytes": 276273,
+    "sha256": "746b894fc17a7cb43080574ad13bf7f38b2ec5f6dd02d213a632aacbbc7d52e9"
   },
   {
     "path": "assets/captures/metadata.json",
     "encoding": "UTF-8, LF canonical line endings",
-    "bytes": 3944,
-    "sha256": "803f06250e4904b70d0a8eea3a4b771c6c99696d89f394a78ecadecc115bcc01"
+    "bytes": 4420,
+    "sha256": "9b7e03dca2315459716d6cf69374919c6607650ea2175a0358d7cf89b55b2798"
   },
   {
     "path": "assets/captures/phone-bayer-matrix-eight.png",

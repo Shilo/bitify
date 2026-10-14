@@ -16,6 +16,10 @@
     "panels": []
   },
   "desktop-palettes-auto": {
+    "imageNames": [
+      "town.png",
+      "platformer.png"
+    ],
     "dpr": 2,
     "viewport": {
       "width": 1280,
@@ -31,6 +35,10 @@
     ]
   },
   "desktop-palettes-endesga": {
+    "imageNames": [
+      "town.png",
+      "platformer.png"
+    ],
     "dpr": 2,
     "viewport": {
       "width": 1280,
@@ -46,6 +54,10 @@
     ]
   },
   "desktop-palettes-pico": {
+    "imageNames": [
+      "town.png",
+      "platformer.png"
+    ],
     "dpr": 2,
     "viewport": {
       "width": 1280,
@@ -61,6 +73,10 @@
     ]
   },
   "desktop-settings-all": {
+    "imageNames": [
+      "town.png",
+      "platformer.png"
+    ],
     "dpr": 2,
     "viewport": {
       "width": 1280,
@@ -76,6 +92,10 @@
     ]
   },
   "desktop-settings-sixteen": {
+    "imageNames": [
+      "town.png",
+      "platformer.png"
+    ],
     "dpr": 2,
     "viewport": {
       "width": 1280,
@@ -91,6 +111,10 @@
     ]
   },
   "desktop-settings-eight": {
+    "imageNames": [
+      "town.png",
+      "platformer.png"
+    ],
     "dpr": 2,
     "viewport": {
       "width": 1280,
@@ -106,6 +130,10 @@
     ]
   },
   "desktop-settings-cleanup": {
+    "imageNames": [
+      "town.png",
+      "platformer.png"
+    ],
     "dpr": 2,
     "viewport": {
       "width": 1280,

@@ -98,6 +98,7 @@ the changes before committing. Run individual steps when appropriate:
 | `npm run share` | Two-pass compact encode from the existing master |
 | `npm run verify` | Probe both files, decode/compare and test native playback |
 | `npm run capture` | Replace saved app captures and comparison results; see below |
+| `npm run capture -- --desktop-only` | Refresh only the seven two-image desktop palette/settings captures |
 
 Optional environment overrides: `BROWSER_EXECUTABLE` for an existing compatible
 Chromium binary, `FFMPEG_PATH`, `FFPROBE_PATH`, and `PORT` for the preview server.
@@ -115,7 +116,7 @@ Linux hosts may also need `npx playwright install-deps chromium`.
 | `timeline.json` | Scene boundaries, capture order and per-control captions |
 | `runtime.js` | Time-based crossfades, drift and comparison reveals |
 | `assets/captures/*.png` | Frozen real app screenshots, desktop and touch mobile |
-| `assets/captures/metadata.json` | CSS panel bounds, viewport and DPR for focus crops |
+| `assets/captures/metadata.json` | CSS panel bounds, viewport, DPR and captured image names for focus crops/QA |
 | `assets/town.png`, `assets/platformer.png` | The two CC0 example scenes |
 | `assets/palette-result.png`, `assets/onebit-solid.png` | Actual full-resolution app results used in the comparison |
 | `assets/audio/music.mp3` | Active licensed music; ignored local source |
@@ -163,8 +164,8 @@ with a mirrored closing composition that uses the surrounding background space.
 | Time | Headline / focus | Visible material |
 |---|---|---|
 | 0–3 s | Colorfetti + slogan + website + repository | Empty desktop and phone app |
-| 3–7 s | Choose a palette. | Tiny Town: Auto → ENDESGA 32 → PICO-8 |
-| 7–12 s | Fine-tune your palette. | Max colors All → 16 → 8, then Cleanup On |
+| 3–7 s | Choose a palette. | Desktop wall with Tiny Town and Pixel Platformer together: Auto → ENDESGA 32 → PICO-8 |
+| 7–12 s | Fine-tune your palette. | Same two-image desktop wall: Max colors All → 16 → 8, then Cleanup On; phone inset stays single-image |
 | 12–16 s | Explore two-color looks. | Phone/platform scene: Mono → Game Boy → Rose |
 | 16–21 s | Tune the 1-bit effect. | Phone: threshold Auto → 140, pattern matrix 4 → 8 |
 | 21–26 s | Compare the results. | Same town source: original / PICO-8 with 8 colors and Cleanup On / Mono + Solid |
@@ -184,6 +185,10 @@ comparison: it must be the actual Mono + Solid black-and-white result, labeled
 “Black & white”. Bayer is appropriate in the settings demonstration only.
 Cleanup can remove details; avoid claims that it always improves the image.
 Compare identical crops, with identical scaling and no misleading retouching.
+The desktop palette and palette-settings examples must show exactly two wall images
+at once: `town.png` and `platformer.png`. Mobile examples and phone insets must
+show one image only. Empty bookends remain empty, and the result comparison keeps
+one identical Town crop across its three treatments.
 
 ## Refreshing app screens
 
@@ -203,6 +208,14 @@ and drives the real palette/style controls. It replaces the PNGs, metadata, and
 comparison outputs under `assets/`. It serves the local Schibsted font instead of
 relying on Google Fonts, and uses Node fetch to fulfill local browser requests.
 Selectors may need updating after app UI changes; read the script before a refresh.
+
+Desktop feature captures import Town and Platformer together. The comparison uses
+a separate single-Town context; mobile contexts import just one source. The capture
+script checks each wall's image count before saving it and records image names in
+metadata. To preserve frozen mobile/bookend/comparison assets while refreshing only
+the desktop feature shots, use `npm --prefix video run capture -- --desktop-only`
+from the root after building the capture app. This partial mode merges updated
+desktop metadata with the existing tracked metadata.
 
 Capture pitfalls: blur controls and move the pointer away before screenshots to
 hide tooltips. Panel rectangles are CSS pixels; multiply by recorded DPR when

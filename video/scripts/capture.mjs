@@ -3,7 +3,9 @@ import { createServer } from "node:http";
 import { resolve, extname, sep } from "node:path";
 import { assets, work, repo, launchBrowser } from "./project.mjs";
 // Default refreshes tracked assets; CAPTURE_DIR allows an isolated capture rehearsal.
-const out = process.env.CAPTURE_DIR ? resolve(repo, process.env.CAPTURE_DIR) : assets;
+const out = process.env.CAPTURE_DIR
+  ? resolve(repo, process.env.CAPTURE_DIR)
+  : assets;
 mkdirSync(out + "/captures", { recursive: true });
 const root = resolve(work, "app");
 const server = createServer((req, res) => {
@@ -34,7 +36,10 @@ const server = createServer((req, res) => {
 await new Promise((r) => server.listen(0, "127.0.0.1", r));
 const origin = `http://127.0.0.1:${server.address().port}`;
 const browser = await launchBrowser();
-const metadata = {};
+const desktopOnly = process.argv.includes("--desktop-only");
+const metadata = desktopOnly
+  ? JSON.parse(readFileSync(assets + "/captures/metadata.json", "utf8"))
+  : {};
 async function open(mobile = false, art = "town") {
   const context = await browser.newContext({
     viewport: mobile
@@ -78,7 +83,11 @@ async function open(mobile = false, art = "town") {
   if (art)
     await page
       .locator('input[type=file][accept="image/*"]')
-      .setInputFiles(assets + "/" + art + ".png");
+      .setInputFiles(
+        (Array.isArray(art) ? art : [art]).map(
+          (name) => assets + "/" + name + ".png",
+        ),
+      );
   await page.waitForTimeout(1500);
   return { page, context };
 }
@@ -86,8 +95,21 @@ async function cap(page, name) {
   await page.evaluate(() => document.activeElement?.blur());
   await page.mouse.move(10, 10);
   await page.waitForTimeout(450);
+  const imageNames = await page
+    .locator(".tiles .tile .caption-preview .name")
+    .allTextContents();
+  const expected = name.endsWith("-empty")
+    ? 0
+    : name.startsWith("desktop-")
+      ? 2
+      : 1;
+  if (imageNames.length !== expected)
+    throw Error(
+      name + ": expected " + expected + " images, got " + imageNames.length,
+    );
   await page.screenshot({ path: out + "/captures/" + name + ".png" });
   metadata[name] = {
+    imageNames,
     dpr: 2,
     viewport: page.viewportSize(),
     panels: await page.locator(".panel").evaluateAll((nodes) =>
@@ -100,16 +122,14 @@ async function cap(page, name) {
   console.log(name);
 }
 async function output(page, name) {
-  const canvases = await page
-    .locator(".art canvas")
-    .evaluateAll((nodes) =>
-      nodes.map((canvas) => ({
-        width: canvas.width,
-        height: canvas.height,
-        url: canvas.toDataURL(),
-        visible: canvas.checkVisibility(),
-      })),
-    );
+  const canvases = await page.locator(".art canvas").evaluateAll((nodes) =>
+    nodes.map((canvas) => ({
+      width: canvas.width,
+      height: canvas.height,
+      url: canvas.toDataURL(),
+      visible: canvas.checkVisibility(),
+    })),
+  );
   console.log(
     "output canvases",
     name,
@@ -136,29 +156,21 @@ async function fullResult(page, name) {
     .locator(".image-viewer[open]")
     .evaluate((dialog) => dialog.close());
 }
-const emptyD = await open(false, null);
-await cap(emptyD.page, "desktop-empty");
-await emptyD.context.close();
-const emptyM = await open(true, null);
-await cap(emptyM.page, "phone-empty");
-await emptyM.context.close();
-const { page: d, context: dc } = await open();
+if (!desktopOnly) {
+  const emptyD = await open(false, null);
+  await cap(emptyD.page, "desktop-empty");
+  await emptyD.context.close();
+  const emptyM = await open(true, null);
+  await cap(emptyM.page, "phone-empty");
+  await emptyM.context.close();
+}
+const { page: d, context: dc } = await open(false, ["town", "platformer"]);
 await d.getByRole("button", { name: "Palette", exact: true }).last().click();
 await cap(d, "desktop-palettes-auto");
 await d.getByRole("button", { name: "ENDESGA 32", exact: true }).click();
 await cap(d, "desktop-palettes-endesga");
 await d.getByRole("button", { name: "PICO-8", exact: true }).click();
 await cap(d, "desktop-palettes-pico");
-await d.getByRole("button", { name: "Palette settings", exact: true }).click();
-const number = d.getByRole("spinbutton", {
-  name: "Max colors value",
-  exact: true,
-});
-await number.fill("8");
-await number.press("Enter");
-await d.getByRole("button", { name: "Cleanup on", exact: true }).click();
-await fullResult(d, "palette-result");
-await d.getByRole("button", { name: "Palette", exact: true }).last().click();
 await d.getByRole("button", { name: "ENDESGA 32", exact: true }).click();
 await d.getByRole("button", { name: "Palette settings", exact: true }).click();
 await d
@@ -180,57 +192,79 @@ for (const [count, name] of [
 }
 await d.getByRole("button", { name: "Cleanup on", exact: true }).click();
 await cap(d, "desktop-settings-cleanup");
-await d.getByRole("button", { name: "Palette", exact: true }).last().click();
-await d.getByRole("button", { name: "1-bit", exact: true }).click();
-await d.getByRole("button", { name: "Mono", exact: true }).click();
-await d.getByRole("button", { name: "Style", exact: true }).click();
-for (const style of ["Solid"]) {
-  await d.locator('button[aria-labelledby="style-label style-name"]').click();
-  await d.getByRole("button", { name: style, exact: true }).click();
-  await cap(d, "comparison-" + style.toLowerCase());
-  await fullResult(d, "onebit-" + style.toLowerCase());
-}
 await dc.close();
-let { page: m, context: mc } = await open(true);
-await m.getByRole("button", { name: "Palette settings", exact: true }).click();
-await m
-  .getByRole("spinbutton", { name: "Max colors value", exact: true })
-  .fill("8");
-await m
-  .getByRole("spinbutton", { name: "Max colors value", exact: true })
-  .press("Enter");
-await m.getByRole("button", { name: "Cleanup on", exact: true }).click();
-await cap(m, "phone-settings-cleanup");
-await mc.close();
-({ page: m, context: mc } = await open(true, "platformer"));
-await m.getByRole("button", { name: "Palette", exact: true }).last().click();
-await m.getByRole("button", { name: "1-bit", exact: true }).click();
-await m.getByRole("button", { name: "Mono", exact: true }).click();
-await cap(m, "phone-pairs-mono");
-await m.getByRole("button", { name: "Game Boy", exact: true }).click();
-await cap(m, "phone-pairs-gameboy");
-await m.getByRole("button", { name: "Rose", exact: true }).click();
-await cap(m, "phone-pairs-rose");
-await m.getByRole("button", { name: "Mono", exact: true }).click();
-await m.getByRole("button", { name: "Style", exact: true }).click();
-await m.locator('button[aria-labelledby="style-label style-name"]').click();
-await m.getByRole("button", { name: "Bayer", exact: true }).click();
-await cap(m, "phone-bayer-threshold");
-const threshold = m.getByRole("slider", { name: "Threshold", exact: true });
-await threshold.fill("140");
-await threshold.dispatchEvent("change");
-await cap(m, "phone-bayer-threshold-tuned");
-await m.getByRole("button", { name: /^Matrix:/ }).click();
-await cap(m, "phone-bayer-matrix-four");
-await m
-  .getByRole("group", { name: "Matrix", exact: true })
-  .getByRole("button", { name: "8", exact: true })
-  .click();
-await cap(m, "phone-bayer-matrix-eight");
+
+if (!desktopOnly) {
+  // Comparison results deliberately use the single Town source, independent of
+  // the two-image desktop wall and the single-image phone captures below.
+  const { page: d, context: dc } = await open(false, "town");
+  await d.getByRole("button", { name: "Palette", exact: true }).last().click();
+  await d.getByRole("button", { name: "PICO-8", exact: true }).click();
+  await d
+    .getByRole("button", { name: "Palette settings", exact: true })
+    .click();
+  const number = d.getByRole("spinbutton", {
+    name: "Max colors value",
+    exact: true,
+  });
+  await number.fill("8");
+  await number.press("Enter");
+  await d.getByRole("button", { name: "Cleanup on", exact: true }).click();
+  await fullResult(d, "palette-result");
+  await d.getByRole("button", { name: "Palette", exact: true }).last().click();
+  await d.getByRole("button", { name: "1-bit", exact: true }).click();
+  await d.getByRole("button", { name: "Mono", exact: true }).click();
+  await d.getByRole("button", { name: "Style", exact: true }).click();
+  for (const style of ["Solid"]) {
+    await d.locator('button[aria-labelledby="style-label style-name"]').click();
+    await d.getByRole("button", { name: style, exact: true }).click();
+    await cap(d, "comparison-" + style.toLowerCase());
+    await fullResult(d, "onebit-" + style.toLowerCase());
+  }
+  await dc.close();
+  let { page: m, context: mc } = await open(true);
+  await m
+    .getByRole("button", { name: "Palette settings", exact: true })
+    .click();
+  await m
+    .getByRole("spinbutton", { name: "Max colors value", exact: true })
+    .fill("8");
+  await m
+    .getByRole("spinbutton", { name: "Max colors value", exact: true })
+    .press("Enter");
+  await m.getByRole("button", { name: "Cleanup on", exact: true }).click();
+  await cap(m, "phone-settings-cleanup");
+  await mc.close();
+  ({ page: m, context: mc } = await open(true, "platformer"));
+  await m.getByRole("button", { name: "Palette", exact: true }).last().click();
+  await m.getByRole("button", { name: "1-bit", exact: true }).click();
+  await m.getByRole("button", { name: "Mono", exact: true }).click();
+  await cap(m, "phone-pairs-mono");
+  await m.getByRole("button", { name: "Game Boy", exact: true }).click();
+  await cap(m, "phone-pairs-gameboy");
+  await m.getByRole("button", { name: "Rose", exact: true }).click();
+  await cap(m, "phone-pairs-rose");
+  await m.getByRole("button", { name: "Mono", exact: true }).click();
+  await m.getByRole("button", { name: "Style", exact: true }).click();
+  await m.locator('button[aria-labelledby="style-label style-name"]').click();
+  await m.getByRole("button", { name: "Bayer", exact: true }).click();
+  await cap(m, "phone-bayer-threshold");
+  const threshold = m.getByRole("slider", { name: "Threshold", exact: true });
+  await threshold.fill("140");
+  await threshold.dispatchEvent("change");
+  await cap(m, "phone-bayer-threshold-tuned");
+  await m.getByRole("button", { name: /^Matrix:/ }).click();
+  await cap(m, "phone-bayer-matrix-four");
+  await m
+    .getByRole("group", { name: "Matrix", exact: true })
+    .getByRole("button", { name: "8", exact: true })
+    .click();
+  await cap(m, "phone-bayer-matrix-eight");
+  await mc.close();
+}
 writeFileSync(
   out + "/captures/metadata.json",
   JSON.stringify(metadata, null, 2),
 );
-await mc.close();
 await browser.close();
 server.close();
