@@ -7,15 +7,15 @@ import {createRequire} from 'node:module';
 import {execFileSync} from 'node:child_process';
 import {loadClipboardManifest,clipboardFixtureDirectory,verifyClipboardPng} from './palette-clipboard-fixtures.mjs';
 const require=createRequire(import.meta.url),{chromium}=require(process.env.PLAYWRIGHT_MODULE??'C:/Users/shilo/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
-const hash=data=>createHash('sha256').update(data).digest('hex'),prefix='bench/png-precision-validation-final-app-android',adb=(...args)=>execFileSync(process.env.ADB??'adb',args,{timeout:15000,stdio:['ignore','pipe','ignore']});
+const hash=data=>createHash('sha256').update(data).digest('hex'),prefix=process.env.PNG_VALIDATION_PREFIX??'bench/png-precision-validation-final-app-android',base=process.env.PNG_VALIDATION_BASE??'http://localhost:5301',adb=(...args)=>execFileSync(process.env.ADB??'adb',args,{timeout:15000,stdio:['ignore','pipe','ignore']});
 const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms)),manifest=loadClipboardManifest(),pages=[],report={started:new Date().toISOString(),scope:'Actual built app import, actual Save gesture and Android Download file bytes. No download interception or clipboard access. Frozen conversion goldens are production-derived; Sharp independently decodes downloaded PNGs and compares every alpha byte and visible RGB.',distIndexSha256:hash(fs.readFileSync('dist/index.html')),decoderSha256:hash(fs.readFileSync('src/lib/image-decode.js')),fixtureManifestSha256:hash(fs.readFileSync(path.join(clipboardFixtureDirectory,'manifest.json'))),checks:[],errors:[]};
-adb('reverse','tcp:5301','tcp:5301');const browser=await chromium.connectOverCDP('http://127.0.0.1:9333'),context=browser.contexts()[0];
+const port=new URL(base).port;adb('reverse','tcp:'+port,'tcp:'+port);const browser=await chromium.connectOverCDP('http://127.0.0.1:9333'),context=browser.contexts()[0];
 try{
 const session=await browser.newBrowserCDPSession();await session.send('Browser.setDownloadBehavior',{behavior:'default'});await session.detach();
 for(const key of ['palette-keep','palette-cut']){
  const fixture=manifest.fixtures.find(f=>f.key===key),page=await context.newPage();pages.push(page);page.on('pageerror',error=>report.errors.push(error.message));
  await page.addInitScript(settings=>{localStorage.setItem('colorfetti-help-seen','1');localStorage.setItem('colorfetti',JSON.stringify(settings));},fixture.settings);
- await page.goto('http://localhost:5301/?png-precision='+key);await page.bringToFront();report.userAgent??=await page.evaluate(()=>navigator.userAgent);
+ await page.goto(base+'/?png-precision='+key);await page.bringToFront();report.userAgent??=await page.evaluate(()=>navigator.userAgent);
  const source=fs.readFileSync(path.join(clipboardFixtureDirectory,fixture.sourceFile));assert.equal(hash(source),fixture.sourcePngSha256);
  const filename='png-precision-'+key+'-'+Date.now()+'.png',saved=filename.replace(/\.png$/,'-palette.png'),devicePath='/sdcard/Download/'+saved;
  const start=Date.now();await page.locator('input[type=file][accept="image/*"]').setInputFiles({name:filename,mimeType:'image/png',buffer:source});const action=page.getByRole('button',{name:'Image actions for '+filename,exact:true});await action.waitFor({timeout:25000});const importedMs=Date.now()-start;

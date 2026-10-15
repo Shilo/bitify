@@ -1,0 +1,275 @@
+{
+  "started": "2026-10-15T10:00:05.914Z",
+  "scope": "Actual built app import, actual Save gesture and Android Download file bytes. No download interception or clipboard access. Frozen conversion goldens are production-derived; Sharp independently decodes downloaded PNGs and compares every alpha byte and visible RGB.",
+  "distIndexSha256": "16d2776e085ab2d3907d055ccf5bd52e2fb20bdd089a7c0a87b2fc19cdb92837",
+  "decoderSha256": "e1207e72ec51656ee6a0b516632599b60de0e510110fd319036203c9cefe15a9",
+  "fixtureManifestSha256": "960bc0bb5ea479030f33b89a0dfe5238d57439a52b02e09bd297d185da8e3b9b",
+  "checks": [
+    {
+      "key": "palette-keep",
+      "sourcePngSha256": "7f37bd9f7f235d65265bbe2e922adfd35d74cb4f07c73e52366251701bf57bb9",
+      "sourceFilename": "png-precision-palette-keep-1792058406631.png",
+      "devicePath": "/sdcard/Download/png-precision-palette-keep-1792058406631-palette.png",
+      "nativeDownload": true,
+      "unrelatedDownloadsRead": false,
+      "importedMs": 152,
+      "nativeSaveAndReadMs": 546,
+      "settings": {
+        "first": "#222323",
+        "second": "#f0f6f0",
+        "none": 0,
+        "style": "cutout",
+        "settings": {
+          "cutout": {
+            "threshold": null,
+            "seams": null,
+            "rim": true,
+            "source": "luma",
+            "alpha": 128
+          },
+          "solid": {
+            "threshold": null,
+            "source": "luma",
+            "alpha": 128
+          },
+          "lines": {
+            "threshold": null,
+            "thickness": 1,
+            "darks": 0,
+            "alpha": 128
+          },
+          "stencil": {
+            "cuts": null,
+            "outline": "keep",
+            "edges": 0,
+            "source": "luma",
+            "alpha": 128
+          },
+          "icon": {
+            "detail": 50,
+            "border": "auto",
+            "source": "luma",
+            "alpha": 128
+          },
+          "checker": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "bayer": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "matrix": 4,
+            "source": "luma",
+            "alpha": 128
+          },
+          "hatch": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "direction": "/",
+            "spacing": 3,
+            "source": "luma",
+            "alpha": 128
+          },
+          "atkinson": {
+            "threshold": null,
+            "shading": 100,
+            "diffusion": "atkinson",
+            "source": "luma",
+            "alpha": 128
+          },
+          "noise": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "silhouette": {
+            "alpha": 128
+          }
+        },
+        "family": "full-palette",
+        "paletteId": "preset-pico8",
+        "alphaCut": 128,
+        "alphaMode": "keep",
+        "metric": "oklab",
+        "maxColors": 8,
+        "lastMaxColors": 16,
+        "cleanup": true,
+        "dither": "4x4",
+        "ditherStrength": 50
+      },
+      "verification": {
+        "key": "palette-keep",
+        "width": 32,
+        "height": 24,
+        "pixels": 768,
+        "visiblePixels": 672,
+        "alphaMismatches": 0,
+        "visibleRgbMismatches": 0,
+        "alphaValues": [
+          0,
+          1,
+          64,
+          127,
+          128,
+          192,
+          254,
+          255
+        ],
+        "usedColors": 8,
+        "encodedBytes": 422,
+        "encodedSha256": "14d0012def2b51dbf17ce7e0022fb43d7cc2911209be1ed2b43bfe995c427691",
+        "exactVisibleRgba": true
+      },
+      "file": "bench/webkit-fallback-validation-final-app-android-palette-keep-saved.png"
+    },
+    {
+      "key": "palette-cut",
+      "sourcePngSha256": "7f37bd9f7f235d65265bbe2e922adfd35d74cb4f07c73e52366251701bf57bb9",
+      "sourceFilename": "png-precision-palette-cut-1792058408719.png",
+      "devicePath": "/sdcard/Download/png-precision-palette-cut-1792058408719-palette.png",
+      "nativeDownload": true,
+      "unrelatedDownloadsRead": false,
+      "importedMs": 121,
+      "nativeSaveAndReadMs": 212,
+      "settings": {
+        "first": "#222323",
+        "second": "#f0f6f0",
+        "none": 0,
+        "style": "cutout",
+        "settings": {
+          "cutout": {
+            "threshold": null,
+            "seams": null,
+            "rim": true,
+            "source": "luma",
+            "alpha": 128
+          },
+          "solid": {
+            "threshold": null,
+            "source": "luma",
+            "alpha": 128
+          },
+          "lines": {
+            "threshold": null,
+            "thickness": 1,
+            "darks": 0,
+            "alpha": 128
+          },
+          "stencil": {
+            "cuts": null,
+            "outline": "keep",
+            "edges": 0,
+            "source": "luma",
+            "alpha": 128
+          },
+          "icon": {
+            "detail": 50,
+            "border": "auto",
+            "source": "luma",
+            "alpha": 128
+          },
+          "checker": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "bayer": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "matrix": 4,
+            "source": "luma",
+            "alpha": 128
+          },
+          "hatch": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "direction": "/",
+            "spacing": 3,
+            "source": "luma",
+            "alpha": 128
+          },
+          "atkinson": {
+            "threshold": null,
+            "shading": 100,
+            "diffusion": "atkinson",
+            "source": "luma",
+            "alpha": 128
+          },
+          "noise": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "silhouette": {
+            "alpha": 128
+          }
+        },
+        "family": "full-palette",
+        "paletteId": "preset-pico8",
+        "alphaCut": 128,
+        "alphaMode": "cut",
+        "metric": "oklab",
+        "maxColors": 8,
+        "lastMaxColors": 16,
+        "cleanup": true,
+        "dither": "4x4",
+        "ditherStrength": 50
+      },
+      "verification": {
+        "key": "palette-cut",
+        "width": 32,
+        "height": 24,
+        "pixels": 768,
+        "visiblePixels": 384,
+        "alphaMismatches": 0,
+        "visibleRgbMismatches": 0,
+        "alphaValues": [
+          0,
+          255
+        ],
+        "usedColors": 8,
+        "encodedBytes": 213,
+        "encodedSha256": "90f8ad8434df0f4bbde30276102f63cfd25858b0655e377c7fe9744a97ef0e90",
+        "exactVisibleRgba": true
+      },
+      "file": "bench/webkit-fallback-validation-final-app-android-palette-cut-saved.png"
+    }
+  ],
+  "errors": [],
+  "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+  "paletteImport": {
+    "file": "palette-keep-expected.png",
+    "pngSha256": "14d0012def2b51dbf17ce7e0022fb43d7cc2911209be1ed2b43bfe995c427691",
+    "colors": [
+      "#000000",
+      "#00e436",
+      "#1d2b53",
+      "#29adff",
+      "#83769c",
+      "#c2c3c7",
+      "#ff004d",
+      "#ffec27"
+    ],
+    "count": 8,
+    "enteredNamePreserved": true,
+    "wallImagesUnchanged": true,
+    "libraryUnchanged": true,
+    "automaticallySaved": false,
+    "elapsedMs": 105
+  },
+  "completed": true,
+  "finished": "2026-10-15T10:00:09.389Z"
+}

@@ -1,0 +1,924 @@
+{
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "checks": [
+    {
+      "name": "Fresh full-palette defaults are off",
+      "pass": true,
+      "ms": 28,
+      "width": 1280
+    },
+    {
+      "name": "Import original stills and animation",
+      "pass": true,
+      "ms": 75,
+      "tiles": 3
+    },
+    {
+      "name": "Pixels and native ZIP {\"paletteId\":\"preset-pico8\",\"metric\":\"oklab\",\"maxColors\":0,\"cleanup\":false,\"dither\":\"none\",\"ditherStrength\":50}",
+      "pass": true,
+      "ms": 105,
+      "paintChecks": 3,
+      "width": 1265,
+      "exports": [
+        {
+          "name": "ramp-palette.png",
+          "pixels": true,
+          "width": 128,
+          "height": 64,
+          "usedColors": 6,
+          "colors": [
+            "#000000",
+            "#1d2b53",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#fff1e8"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "sprite-palette.png",
+          "pixels": true,
+          "width": 64,
+          "height": 64,
+          "usedColors": 4,
+          "colors": [
+            "#1d2b53",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "clip-palette.gif",
+          "frames": 3,
+          "pixels": true,
+          "timing": true,
+          "usedColors": 7,
+          "colors": [
+            "#000000",
+            "#1d2b53",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#ff004d",
+            "#fff1e8"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pixels and native ZIP {\"paletteId\":\"preset-pico8\",\"metric\":\"oklab\",\"maxColors\":0,\"cleanup\":false,\"dither\":\"2x2\",\"ditherStrength\":0}",
+      "pass": true,
+      "ms": 147,
+      "paintChecks": 3,
+      "width": 1265,
+      "exports": [
+        {
+          "name": "ramp-palette.png",
+          "pixels": true,
+          "width": 128,
+          "height": 64,
+          "usedColors": 6,
+          "colors": [
+            "#000000",
+            "#1d2b53",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#fff1e8"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "sprite-palette.png",
+          "pixels": true,
+          "width": 64,
+          "height": 64,
+          "usedColors": 4,
+          "colors": [
+            "#1d2b53",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "clip-palette.gif",
+          "frames": 3,
+          "pixels": true,
+          "timing": true,
+          "usedColors": 7,
+          "colors": [
+            "#000000",
+            "#1d2b53",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#ff004d",
+            "#fff1e8"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pixels and native ZIP {\"paletteId\":\"preset-pico8\",\"metric\":\"oklab\",\"maxColors\":0,\"cleanup\":false,\"dither\":\"2x2\",\"ditherStrength\":50}",
+      "pass": true,
+      "ms": 88,
+      "paintChecks": 3,
+      "width": 1265,
+      "exports": [
+        {
+          "name": "ramp-palette.png",
+          "pixels": true,
+          "width": 128,
+          "height": 64,
+          "usedColors": 8,
+          "colors": [
+            "#000000",
+            "#008751",
+            "#1d2b53",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#ffccaa",
+            "#fff1e8"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "sprite-palette.png",
+          "pixels": true,
+          "width": 64,
+          "height": 64,
+          "usedColors": 4,
+          "colors": [
+            "#1d2b53",
+            "#83769c",
+            "#c2c3c7",
+            "#ffa300"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "clip-palette.gif",
+          "frames": 3,
+          "pixels": true,
+          "timing": true,
+          "usedColors": 8,
+          "colors": [
+            "#000000",
+            "#008751",
+            "#1d2b53",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#ff004d",
+            "#fff1e8"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pixels and native ZIP {\"paletteId\":\"preset-pico8\",\"metric\":\"oklab\",\"maxColors\":0,\"cleanup\":false,\"dither\":\"2x2\",\"ditherStrength\":100}",
+      "pass": true,
+      "ms": 88,
+      "paintChecks": 3,
+      "width": 1265,
+      "exports": [
+        {
+          "name": "ramp-palette.png",
+          "pixels": true,
+          "width": 128,
+          "height": 64,
+          "usedColors": 10,
+          "colors": [
+            "#000000",
+            "#008751",
+            "#1d2b53",
+            "#29adff",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#ffa300",
+            "#ffccaa",
+            "#fff1e8"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "sprite-palette.png",
+          "pixels": true,
+          "width": 64,
+          "height": 64,
+          "usedColors": 6,
+          "colors": [
+            "#1d2b53",
+            "#29adff",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#ffa300"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "clip-palette.gif",
+          "frames": 3,
+          "pixels": true,
+          "timing": true,
+          "usedColors": 11,
+          "colors": [
+            "#000000",
+            "#008751",
+            "#1d2b53",
+            "#29adff",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#ff004d",
+            "#ffa300",
+            "#ffccaa",
+            "#fff1e8"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pixels and native ZIP {\"paletteId\":\"preset-pico8\",\"metric\":\"oklab\",\"maxColors\":0,\"cleanup\":false,\"dither\":\"4x4\",\"ditherStrength\":0}",
+      "pass": true,
+      "ms": 88,
+      "paintChecks": 3,
+      "width": 1265,
+      "exports": [
+        {
+          "name": "ramp-palette.png",
+          "pixels": true,
+          "width": 128,
+          "height": 64,
+          "usedColors": 6,
+          "colors": [
+            "#000000",
+            "#1d2b53",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#fff1e8"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "sprite-palette.png",
+          "pixels": true,
+          "width": 64,
+          "height": 64,
+          "usedColors": 4,
+          "colors": [
+            "#1d2b53",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "clip-palette.gif",
+          "frames": 3,
+          "pixels": true,
+          "timing": true,
+          "usedColors": 7,
+          "colors": [
+            "#000000",
+            "#1d2b53",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#ff004d",
+            "#fff1e8"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pixels and native ZIP {\"paletteId\":\"preset-pico8\",\"metric\":\"oklab\",\"maxColors\":0,\"cleanup\":false,\"dither\":\"4x4\",\"ditherStrength\":50}",
+      "pass": true,
+      "ms": 124,
+      "paintChecks": 3,
+      "width": 1265,
+      "exports": [
+        {
+          "name": "ramp-palette.png",
+          "pixels": true,
+          "width": 128,
+          "height": 64,
+          "usedColors": 8,
+          "colors": [
+            "#000000",
+            "#008751",
+            "#1d2b53",
+            "#29adff",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#fff1e8"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "sprite-palette.png",
+          "pixels": true,
+          "width": 64,
+          "height": 64,
+          "usedColors": 5,
+          "colors": [
+            "#008751",
+            "#1d2b53",
+            "#83769c",
+            "#c2c3c7",
+            "#ffa300"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "clip-palette.gif",
+          "frames": 3,
+          "pixels": true,
+          "timing": true,
+          "usedColors": 9,
+          "colors": [
+            "#000000",
+            "#008751",
+            "#1d2b53",
+            "#29adff",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#ff004d",
+            "#fff1e8"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pixels and native ZIP {\"paletteId\":\"preset-pico8\",\"metric\":\"oklab\",\"maxColors\":0,\"cleanup\":false,\"dither\":\"4x4\",\"ditherStrength\":100}",
+      "pass": true,
+      "ms": 123,
+      "paintChecks": 3,
+      "width": 1265,
+      "exports": [
+        {
+          "name": "ramp-palette.png",
+          "pixels": true,
+          "width": 128,
+          "height": 64,
+          "usedColors": 8,
+          "colors": [
+            "#000000",
+            "#008751",
+            "#1d2b53",
+            "#29adff",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#fff1e8"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "sprite-palette.png",
+          "pixels": true,
+          "width": 64,
+          "height": 64,
+          "usedColors": 6,
+          "colors": [
+            "#1d2b53",
+            "#29adff",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#ffa300"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "clip-palette.gif",
+          "frames": 3,
+          "pixels": true,
+          "timing": true,
+          "usedColors": 10,
+          "colors": [
+            "#000000",
+            "#008751",
+            "#1d2b53",
+            "#29adff",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#ff004d",
+            "#ffa300",
+            "#fff1e8"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pixels and native ZIP {\"paletteId\":\"preset-pico8\",\"metric\":\"oklab\",\"maxColors\":0,\"cleanup\":false,\"dither\":\"8x8\",\"ditherStrength\":0}",
+      "pass": true,
+      "ms": 87,
+      "paintChecks": 3,
+      "width": 1265,
+      "exports": [
+        {
+          "name": "ramp-palette.png",
+          "pixels": true,
+          "width": 128,
+          "height": 64,
+          "usedColors": 6,
+          "colors": [
+            "#000000",
+            "#1d2b53",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#fff1e8"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "sprite-palette.png",
+          "pixels": true,
+          "width": 64,
+          "height": 64,
+          "usedColors": 4,
+          "colors": [
+            "#1d2b53",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "clip-palette.gif",
+          "frames": 3,
+          "pixels": true,
+          "timing": true,
+          "usedColors": 7,
+          "colors": [
+            "#000000",
+            "#1d2b53",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#ff004d",
+            "#fff1e8"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pixels and native ZIP {\"paletteId\":\"preset-pico8\",\"metric\":\"oklab\",\"maxColors\":0,\"cleanup\":false,\"dither\":\"8x8\",\"ditherStrength\":50}",
+      "pass": true,
+      "ms": 122,
+      "paintChecks": 3,
+      "width": 1265,
+      "exports": [
+        {
+          "name": "ramp-palette.png",
+          "pixels": true,
+          "width": 128,
+          "height": 64,
+          "usedColors": 8,
+          "colors": [
+            "#000000",
+            "#008751",
+            "#1d2b53",
+            "#29adff",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#fff1e8"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "sprite-palette.png",
+          "pixels": true,
+          "width": 64,
+          "height": 64,
+          "usedColors": 5,
+          "colors": [
+            "#008751",
+            "#1d2b53",
+            "#83769c",
+            "#c2c3c7",
+            "#ffa300"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "clip-palette.gif",
+          "frames": 3,
+          "pixels": true,
+          "timing": true,
+          "usedColors": 9,
+          "colors": [
+            "#000000",
+            "#008751",
+            "#1d2b53",
+            "#29adff",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#ff004d",
+            "#fff1e8"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pixels and native ZIP {\"paletteId\":\"preset-pico8\",\"metric\":\"oklab\",\"maxColors\":0,\"cleanup\":false,\"dither\":\"8x8\",\"ditherStrength\":100}",
+      "pass": true,
+      "ms": 115,
+      "paintChecks": 3,
+      "width": 1265,
+      "exports": [
+        {
+          "name": "ramp-palette.png",
+          "pixels": true,
+          "width": 128,
+          "height": 64,
+          "usedColors": 10,
+          "colors": [
+            "#000000",
+            "#008751",
+            "#1d2b53",
+            "#29adff",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#ff77a8",
+            "#ffa300",
+            "#fff1e8"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "sprite-palette.png",
+          "pixels": true,
+          "width": 64,
+          "height": 64,
+          "usedColors": 6,
+          "colors": [
+            "#1d2b53",
+            "#29adff",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#ffa300"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "clip-palette.gif",
+          "frames": 3,
+          "pixels": true,
+          "timing": true,
+          "usedColors": 10,
+          "colors": [
+            "#000000",
+            "#008751",
+            "#1d2b53",
+            "#29adff",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#ff004d",
+            "#ffa300",
+            "#fff1e8"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pixels and native ZIP {\"paletteId\":\"preset-pico8\",\"metric\":\"rgb\",\"maxColors\":8,\"cleanup\":true,\"dither\":\"4x4\",\"ditherStrength\":60}",
+      "pass": true,
+      "ms": 177,
+      "paintChecks": 3,
+      "width": 1265,
+      "exports": [
+        {
+          "name": "ramp-palette.png",
+          "pixels": true,
+          "width": 128,
+          "height": 64,
+          "usedColors": 6,
+          "colors": [
+            "#000000",
+            "#1d2b53",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#fff1e8"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "sprite-palette.png",
+          "pixels": true,
+          "width": 64,
+          "height": 64,
+          "usedColors": 4,
+          "colors": [
+            "#1d2b53",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "clip-palette.gif",
+          "frames": 3,
+          "pixels": true,
+          "timing": true,
+          "usedColors": 7,
+          "colors": [
+            "#000000",
+            "#1d2b53",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#ff004d",
+            "#fff1e8"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Rapid settings use only latest conversion",
+      "pass": true,
+      "ms": 111,
+      "paintChecks": 3,
+      "width": 1265
+    },
+    {
+      "name": "ZIP owns settings across later edits",
+      "pass": true,
+      "ms": 79,
+      "exports": [
+        {
+          "name": "ramp-palette.png",
+          "pixels": true,
+          "width": 128,
+          "height": 64,
+          "usedColors": 9,
+          "colors": [
+            "#000000",
+            "#008751",
+            "#1d2b53",
+            "#29adff",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#ff77a8",
+            "#fff1e8"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "sprite-palette.png",
+          "pixels": true,
+          "width": 64,
+          "height": 64,
+          "usedColors": 5,
+          "colors": [
+            "#008751",
+            "#1d2b53",
+            "#83769c",
+            "#c2c3c7",
+            "#ffa300"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "clip-palette.gif",
+          "frames": 3,
+          "pixels": true,
+          "timing": true,
+          "usedColors": 9,
+          "colors": [
+            "#000000",
+            "#008751",
+            "#1d2b53",
+            "#29adff",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#ff004d",
+            "#fff1e8"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Copy uses native dithered PNG",
+      "pass": true,
+      "ms": 95,
+      "export": {
+        "name": "ramp-palette.png",
+        "pixels": true,
+        "width": 128,
+        "height": 64,
+        "usedColors": 9,
+        "colors": [
+          "#000000",
+          "#008751",
+          "#1d2b53",
+          "#29adff",
+          "#5f574f",
+          "#83769c",
+          "#c2c3c7",
+          "#ff77a8",
+          "#fff1e8"
+        ],
+        "alphaValues": [
+          0,
+          255
+        ]
+      }
+    },
+    {
+      "name": "Enlarged preview and its Save agree with wall/export",
+      "pass": true,
+      "ms": 168,
+      "export": {
+        "name": "ramp-palette.png",
+        "pixels": true,
+        "width": 128,
+        "height": 64,
+        "usedColors": 9,
+        "colors": [
+          "#000000",
+          "#008751",
+          "#1d2b53",
+          "#29adff",
+          "#5f574f",
+          "#83769c",
+          "#c2c3c7",
+          "#ff77a8",
+          "#fff1e8"
+        ],
+        "alphaValues": [
+          0,
+          255
+        ]
+      }
+    },
+    {
+      "name": "1-bit styles remain separate and retain full-palette choices",
+      "pass": true,
+      "ms": 133,
+      "width": 1265
+    },
+    {
+      "name": "Committed dithering persists through reload",
+      "pass": true,
+      "ms": 85,
+      "width": 1265
+    },
+    {
+      "name": "Reset restores Off and amount50",
+      "pass": true,
+      "ms": 31,
+      "width": 1265
+    }
+  ],
+  "errors": [],
+  "longTasks": [],
+  "started": "2026-10-15T09:59:28.265Z",
+  "completed": true,
+  "finished": "2026-10-15T09:59:31.042Z"
+}

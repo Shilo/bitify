@@ -15,6 +15,11 @@ dist
 /bench/theme-qa/
 /.tmp/
 
+# Regenerated native PNG fallback stress input and the mutable research bundle.
+/bench/webkit-fallback-validation-stress/one-mp.png
+/bench/webkit-fallback-validation-stress/one-mp.rgba
+/bench/webkit-fallback-review/assets/candidate.js
+
 # Trailer sources live in video/; only the compact public MP4 is committed.
 /video/.work/
 /video/*.log

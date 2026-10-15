@@ -1,0 +1,981 @@
+{
+  "device": "android",
+  "started": "2026-10-15T10:01:28.188Z",
+  "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+  "scope": "Unmodified production native decoder; direct native GL helper; instrumented ImageDecoder-absent fallback control. Owned PNGs; no clipboard. Unsupported helper inputs decline rather than promise exactness. Metadata-only huge header never decoded.",
+  "cases": [
+    {
+      "id": "rgba8-srgb-low-alpha",
+      "oraclePolicy": "exact-srgb8",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 3.900000035762787,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "a2f9f6ff72cf18b7a6f55458144edca38167045ed300170606057e73f0e65347",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "exactVisibleRgba": true
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "ms": 32.30000001192093,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "a2f9f6ff72cf18b7a6f55458144edca38167045ed300170606057e73f0e65347",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "exactVisibleRgba": true
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 4.400000035762787,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "25a83356e464514de0fff205cc150545d487472c01efb75131c2941dc8b48b7a",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 114,
+          "maxChannelDelta": 87,
+          "exactVisibleRgba": false
+        },
+        {
+          "name": "legacy-bitmap-canvas",
+          "ok": true,
+          "ms": 4.600000023841858,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "25a83356e464514de0fff205cc150545d487472c01efb75131c2941dc8b48b7a",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 114,
+          "maxChannelDelta": 87,
+          "exactVisibleRgba": false
+        }
+      ],
+      "forcedVersusLegacyBitmap": {
+        "alphaMismatches": 0,
+        "visibleRgbMismatches": 0,
+        "maxChannelDelta": 0,
+        "exactVisibleRgba": true
+      }
+    },
+    {
+      "id": "indexed1-trns",
+      "oraclePolicy": "exact-srgb8",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 1.899999976158142,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "a0b9f72be836a3c61bf789971bbad146ab3abc142bcef965e359b47f562b7ab7",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "exactVisibleRgba": true
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "declined": true,
+          "ms": 1.399999976158142
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 2.199999988079071,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "c2047296a758ac9462a66d937d1c7b7cadd18215a3c6f2b2b568382798aa211c",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 71,
+          "maxChannelDelta": 84,
+          "exactVisibleRgba": false
+        },
+        {
+          "name": "legacy-bitmap-canvas",
+          "ok": true,
+          "ms": 1.100000023841858,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "c2047296a758ac9462a66d937d1c7b7cadd18215a3c6f2b2b568382798aa211c",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 71,
+          "maxChannelDelta": 84,
+          "exactVisibleRgba": false
+        }
+      ],
+      "forcedVersusLegacyBitmap": {
+        "alphaMismatches": 0,
+        "visibleRgbMismatches": 0,
+        "maxChannelDelta": 0,
+        "exactVisibleRgba": true
+      }
+    },
+    {
+      "id": "indexed4-trns",
+      "oraclePolicy": "exact-srgb8",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 3.699999988079071,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "c3015247d470fd9894ef2c40cc2d5b8ceed62f8d4452404173e03f5885ffd69a",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "exactVisibleRgba": true
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "declined": true,
+          "ms": 1.399999976158142
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 2.099999964237213,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "651870bbf4b9b6820b485232788fd429ff5e62b2321d4f65a4e1f0959862ce3e",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 103,
+          "maxChannelDelta": 85,
+          "exactVisibleRgba": false
+        },
+        {
+          "name": "legacy-bitmap-canvas",
+          "ok": true,
+          "ms": 3.699999988079071,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "651870bbf4b9b6820b485232788fd429ff5e62b2321d4f65a4e1f0959862ce3e",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 103,
+          "maxChannelDelta": 85,
+          "exactVisibleRgba": false
+        }
+      ],
+      "forcedVersusLegacyBitmap": {
+        "alphaMismatches": 0,
+        "visibleRgbMismatches": 0,
+        "maxChannelDelta": 0,
+        "exactVisibleRgba": true
+      }
+    },
+    {
+      "id": "gray16",
+      "oraclePolicy": "exact-srgb8",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 3,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "775e7b670323fb1779e867716c8d1d7bcda36bea1ee9dbf20c48c1e4b4d66893",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "exactVisibleRgba": true
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "declined": true,
+          "ms": 1.2999999523162842
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 3.699999988079071,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "0a39cd46239c0dbf646511dec2a07d66c3be4b6577f27ae8d6be87783e664439",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 97,
+          "maxChannelDelta": 1,
+          "exactVisibleRgba": false
+        },
+        {
+          "name": "legacy-bitmap-canvas",
+          "ok": true,
+          "ms": 1.5999999642372131,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "0a39cd46239c0dbf646511dec2a07d66c3be4b6577f27ae8d6be87783e664439",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 97,
+          "maxChannelDelta": 1,
+          "exactVisibleRgba": false
+        }
+      ],
+      "forcedVersusLegacyBitmap": {
+        "alphaMismatches": 0,
+        "visibleRgbMismatches": 0,
+        "maxChannelDelta": 0,
+        "exactVisibleRgba": true
+      }
+    },
+    {
+      "id": "gray-alpha16",
+      "oraclePolicy": "exact-srgb8",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 3,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "dba48e8098cdf018e271283e5b2ccedd2299b9c1c3921c4b6bc62b4d661cc45f",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "exactVisibleRgba": true
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "declined": true,
+          "ms": 2.5
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 2,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "15a2e9de8e380fb5c5541c7e9f10c74a0f42b687a07fb6c57f687c099fc9b632",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 109,
+          "maxChannelDelta": 33,
+          "exactVisibleRgba": false
+        },
+        {
+          "name": "legacy-bitmap-canvas",
+          "ok": true,
+          "ms": 1.199999988079071,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "15a2e9de8e380fb5c5541c7e9f10c74a0f42b687a07fb6c57f687c099fc9b632",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 109,
+          "maxChannelDelta": 33,
+          "exactVisibleRgba": false
+        }
+      ],
+      "forcedVersusLegacyBitmap": {
+        "alphaMismatches": 0,
+        "visibleRgbMismatches": 0,
+        "maxChannelDelta": 0,
+        "exactVisibleRgba": true
+      }
+    },
+    {
+      "id": "rgba16",
+      "oraclePolicy": "exact-srgb8",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 3.199999988079071,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "a2f9f6ff72cf18b7a6f55458144edca38167045ed300170606057e73f0e65347",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "exactVisibleRgba": true
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "declined": true,
+          "ms": 0.800000011920929
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 1.699999988079071,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "25a83356e464514de0fff205cc150545d487472c01efb75131c2941dc8b48b7a",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 114,
+          "maxChannelDelta": 87,
+          "exactVisibleRgba": false
+        },
+        {
+          "name": "legacy-bitmap-canvas",
+          "ok": true,
+          "ms": 1.399999976158142,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "25a83356e464514de0fff205cc150545d487472c01efb75131c2941dc8b48b7a",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 114,
+          "maxChannelDelta": 87,
+          "exactVisibleRgba": false
+        }
+      ],
+      "forcedVersusLegacyBitmap": {
+        "alphaMismatches": 0,
+        "visibleRgbMismatches": 0,
+        "maxChannelDelta": 0,
+        "exactVisibleRgba": true
+      }
+    },
+    {
+      "id": "rgb8-trns-key",
+      "oraclePolicy": "exact-srgb8",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 1.899999976158142,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "8309530a8851f9c6854d1444fb6f1aec8acadcf2a2bf9e8280c69cbdc81bf3e2",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "exactVisibleRgba": true
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "declined": true,
+          "ms": 1
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 1.800000011920929,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "6a44d714e481924adb87ee8b375b7620d6e2d710c805fd2999459905747b9d4c",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 72,
+          "maxChannelDelta": 1,
+          "exactVisibleRgba": false
+        },
+        {
+          "name": "legacy-bitmap-canvas",
+          "ok": true,
+          "ms": 1.5,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "6a44d714e481924adb87ee8b375b7620d6e2d710c805fd2999459905747b9d4c",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 72,
+          "maxChannelDelta": 1,
+          "exactVisibleRgba": false
+        }
+      ],
+      "forcedVersusLegacyBitmap": {
+        "alphaMismatches": 0,
+        "visibleRgbMismatches": 0,
+        "maxChannelDelta": 0,
+        "exactVisibleRgba": true
+      }
+    },
+    {
+      "id": "rgba8-adam7",
+      "oraclePolicy": "exact-srgb8",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 2,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "a2f9f6ff72cf18b7a6f55458144edca38167045ed300170606057e73f0e65347",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "exactVisibleRgba": true
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "declined": true,
+          "ms": 1
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 1.800000011920929,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "25a83356e464514de0fff205cc150545d487472c01efb75131c2941dc8b48b7a",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 114,
+          "maxChannelDelta": 87,
+          "exactVisibleRgba": false
+        },
+        {
+          "name": "legacy-bitmap-canvas",
+          "ok": true,
+          "ms": 1.2000000476837158,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "25a83356e464514de0fff205cc150545d487472c01efb75131c2941dc8b48b7a",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 114,
+          "maxChannelDelta": 87,
+          "exactVisibleRgba": false
+        }
+      ],
+      "forcedVersusLegacyBitmap": {
+        "alphaMismatches": 0,
+        "visibleRgbMismatches": 0,
+        "maxChannelDelta": 0,
+        "exactVisibleRgba": true
+      }
+    },
+    {
+      "id": "rgba8-linear-gamma",
+      "oraclePolicy": "browser-color-managed",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 2.400000035762787,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "0e1738c9b1bf2fbd0aad2f3c079120acaa743b8ddc57ccbfa5a69d2d002713b4"
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "declined": true,
+          "ms": 1.9000000357627869
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 3.5,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "d639abe1d5c8428d486af050456056876e99d459dd3c5e7b0405c8c8f9cb828d"
+        },
+        {
+          "name": "legacy-bitmap-canvas",
+          "ok": true,
+          "ms": 2.399999976158142,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "d639abe1d5c8428d486af050456056876e99d459dd3c5e7b0405c8c8f9cb828d"
+        }
+      ],
+      "forcedVersusLegacyBitmap": {
+        "alphaMismatches": 0,
+        "visibleRgbMismatches": 0,
+        "maxChannelDelta": 0,
+        "exactVisibleRgba": true
+      }
+    },
+    {
+      "id": "rgba8-p3-icc",
+      "oraclePolicy": "browser-color-managed",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 10.300000011920929,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "4041bba16c1fdbd0954bca96a5083a7e2f947d9011edc04be6f9f06a3bac9ff0"
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "declined": true,
+          "ms": 1.199999988079071
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 1.7000000476837158,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "0ea7777a98a7ba036095f73ca36e29eb0ddb1b36d26da606dd5a6a7aea00a826"
+        },
+        {
+          "name": "legacy-bitmap-canvas",
+          "ok": true,
+          "ms": 1,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "0ea7777a98a7ba036095f73ca36e29eb0ddb1b36d26da606dd5a6a7aea00a826"
+        }
+      ],
+      "forcedVersusLegacyBitmap": {
+        "alphaMismatches": 0,
+        "visibleRgbMismatches": 0,
+        "maxChannelDelta": 0,
+        "exactVisibleRgba": true
+      }
+    },
+    {
+      "id": "rgba8-exif-rotate90",
+      "oraclePolicy": "browser-transform",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 2.599999964237213,
+          "width": 11,
+          "height": 13,
+          "rgbaSha256": "d24a8add2a4a58c029a356396647d393410d662eab34902c87ee20aa2691e129"
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "declined": true,
+          "ms": 0.5999999642372131
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 0.7999999523162842,
+          "width": 11,
+          "height": 13,
+          "rgbaSha256": "d24a8add2a4a58c029a356396647d393410d662eab34902c87ee20aa2691e129"
+        },
+        {
+          "name": "legacy-bitmap-canvas",
+          "ok": true,
+          "ms": 1.100000023841858,
+          "width": 11,
+          "height": 13,
+          "rgbaSha256": "d24a8add2a4a58c029a356396647d393410d662eab34902c87ee20aa2691e129"
+        }
+      ],
+      "forcedVersusLegacyBitmap": {
+        "alphaMismatches": 0,
+        "visibleRgbMismatches": 0,
+        "maxChannelDelta": 0,
+        "exactVisibleRgba": true
+      }
+    },
+    {
+      "id": "apng-default-is-frame0",
+      "oraclePolicy": "browser-animation",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 1.199999988079071,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "a2f9f6ff72cf18b7a6f55458144edca38167045ed300170606057e73f0e65347"
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "declined": true,
+          "ms": 1
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 4,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "25a83356e464514de0fff205cc150545d487472c01efb75131c2941dc8b48b7a"
+        },
+        {
+          "name": "legacy-bitmap-canvas",
+          "ok": true,
+          "ms": 2,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "25a83356e464514de0fff205cc150545d487472c01efb75131c2941dc8b48b7a"
+        }
+      ],
+      "forcedVersusLegacyBitmap": {
+        "alphaMismatches": 0,
+        "visibleRgbMismatches": 0,
+        "maxChannelDelta": 0,
+        "exactVisibleRgba": true
+      }
+    },
+    {
+      "id": "apng-default-excluded",
+      "oraclePolicy": "browser-animation",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 2.099999964237213,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "8fa40ceae7a643d5249695ec6f58927ec3de1626681af23d90bca46fc0aa9bdf"
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "declined": true,
+          "ms": 0.9000000357627869
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 1.300000011920929,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "8c8e5869e031b9798fc05d05eaf30c21119463c7e06fd0078a9fc983b5aa26ed"
+        },
+        {
+          "name": "legacy-bitmap-canvas",
+          "ok": true,
+          "ms": 2.100000023841858,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "8c8e5869e031b9798fc05d05eaf30c21119463c7e06fd0078a9fc983b5aa26ed"
+        }
+      ],
+      "forcedVersusLegacyBitmap": {
+        "alphaMismatches": 0,
+        "visibleRgbMismatches": 0,
+        "maxChannelDelta": 0,
+        "exactVisibleRgba": true
+      }
+    },
+    {
+      "id": "invalid-crc",
+      "oraclePolicy": "invalid",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 9.400000035762787,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "a2f9f6ff72cf18b7a6f55458144edca38167045ed300170606057e73f0e65347"
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "ms": 16.900000035762787,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "a2f9f6ff72cf18b7a6f55458144edca38167045ed300170606057e73f0e65347"
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 1.5,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "25a83356e464514de0fff205cc150545d487472c01efb75131c2941dc8b48b7a"
+        },
+        {
+          "name": "legacy-bitmap-canvas",
+          "ok": true,
+          "ms": 0.800000011920929,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "25a83356e464514de0fff205cc150545d487472c01efb75131c2941dc8b48b7a"
+        }
+      ],
+      "forcedVersusLegacyBitmap": {
+        "alphaMismatches": 0,
+        "visibleRgbMismatches": 0,
+        "maxChannelDelta": 0,
+        "exactVisibleRgba": true
+      }
+    },
+    {
+      "id": "invalid-truncated",
+      "oraclePolicy": "invalid",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": false,
+          "ms": 3.599999964237213,
+          "error": {
+            "name": "InvalidStateError",
+            "message": "The source image could not be decoded."
+          }
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "declined": true,
+          "ms": 1.2000000476837158
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": false,
+          "ms": 1.800000011920929,
+          "error": {
+            "name": "InvalidStateError",
+            "message": "The source image could not be decoded."
+          }
+        },
+        {
+          "name": "legacy-bitmap-canvas",
+          "ok": false,
+          "ms": 1,
+          "error": {
+            "name": "InvalidStateError",
+            "message": "The source image could not be decoded."
+          }
+        }
+      ]
+    },
+    {
+      "id": "unknown-critical",
+      "oraclePolicy": "invalid",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": false,
+          "ms": 8.400000035762787,
+          "error": {
+            "name": "InvalidStateError",
+            "message": "The source image could not be decoded."
+          }
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "declined": true,
+          "ms": 0.8999999761581421
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": false,
+          "ms": 1.300000011920929,
+          "error": {
+            "name": "InvalidStateError",
+            "message": "The source image could not be decoded."
+          }
+        },
+        {
+          "name": "legacy-bitmap-canvas",
+          "ok": false,
+          "ms": 0.800000011920929,
+          "error": {
+            "name": "InvalidStateError",
+            "message": "The source image could not be decoded."
+          }
+        }
+      ]
+    },
+    {
+      "id": "declared-oversize-header",
+      "oraclePolicy": "metadata-only",
+      "methods": [],
+      "skipped": "Huge header is metadata-only"
+    },
+    {
+      "id": "source",
+      "oraclePolicy": "frozen-app-srgb8",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 1.300000011920929,
+          "width": 32,
+          "height": 24,
+          "rgbaSha256": "74550bbbf6f6667b56ab35dbffdbc0ac85ca64efaa4bfc31663d1c7fe454cd32",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "exactVisibleRgba": true
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "ms": 27.30000001192093,
+          "width": 32,
+          "height": 24,
+          "rgbaSha256": "74550bbbf6f6667b56ab35dbffdbc0ac85ca64efaa4bfc31663d1c7fe454cd32",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "exactVisibleRgba": true
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 2.800000011920929,
+          "width": 32,
+          "height": 24,
+          "rgbaSha256": "f2db96484457a5c571943b808b51062fcff0dbed321af309a7d137132021c734",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 300,
+          "maxChannelDelta": 109,
+          "exactVisibleRgba": false
+        },
+        {
+          "name": "legacy-bitmap-canvas",
+          "ok": true,
+          "ms": 2.5,
+          "width": 32,
+          "height": 24,
+          "rgbaSha256": "f2db96484457a5c571943b808b51062fcff0dbed321af309a7d137132021c734",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 300,
+          "maxChannelDelta": 109,
+          "exactVisibleRgba": false
+        }
+      ],
+      "forcedVersusLegacyBitmap": {
+        "alphaMismatches": 0,
+        "visibleRgbMismatches": 0,
+        "maxChannelDelta": 0,
+        "exactVisibleRgba": true
+      }
+    },
+    {
+      "id": "converted",
+      "oraclePolicy": "frozen-app-srgb8",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 1.5,
+          "width": 32,
+          "height": 24,
+          "rgbaSha256": "1023ed1b1862f83de49c8c85ce30d1e821fd3e5a0b57a1447abd98a598b972d4",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "exactVisibleRgba": true
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "ms": 20,
+          "width": 32,
+          "height": 24,
+          "rgbaSha256": "1023ed1b1862f83de49c8c85ce30d1e821fd3e5a0b57a1447abd98a598b972d4",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "exactVisibleRgba": true
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 3.199999988079071,
+          "width": 32,
+          "height": 24,
+          "rgbaSha256": "36f070c13cb47208bc2bee1acb3fd8dd80798f7f887972a0afaf4400d82af4c6",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 343,
+          "maxChannelDelta": 124,
+          "exactVisibleRgba": false
+        },
+        {
+          "name": "legacy-bitmap-canvas",
+          "ok": true,
+          "ms": 1.4000000357627869,
+          "width": 32,
+          "height": 24,
+          "rgbaSha256": "36f070c13cb47208bc2bee1acb3fd8dd80798f7f887972a0afaf4400d82af4c6",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 343,
+          "maxChannelDelta": 124,
+          "exactVisibleRgba": false
+        }
+      ],
+      "forcedVersusLegacyBitmap": {
+        "alphaMismatches": 0,
+        "visibleRgbMismatches": 0,
+        "maxChannelDelta": 0,
+        "exactVisibleRgba": true
+      }
+    }
+  ],
+  "performance": [
+    {
+      "name": "1MP directGLhelper",
+      "run": 0,
+      "ms": 131.4000000357628,
+      "width": 1024,
+      "height": 1024,
+      "declined": false,
+      "alphaMismatches": 0,
+      "visibleRgbMismatches": 0,
+      "maxChannelDelta": 0,
+      "exactVisibleRgba": true,
+      "scope": "One native decode/upload/readback operation; excludes fixture fetch and independent comparison. No FPS or totalmemory claim."
+    },
+    {
+      "name": "1MP directGLhelper",
+      "run": 1,
+      "ms": 69.5,
+      "width": 1024,
+      "height": 1024,
+      "declined": false,
+      "alphaMismatches": 0,
+      "visibleRgbMismatches": 0,
+      "maxChannelDelta": 0,
+      "exactVisibleRgba": true,
+      "scope": "One native decode/upload/readback operation; excludes fixture fetch and independent comparison. No FPS or totalmemory claim."
+    },
+    {
+      "name": "1MP directGLhelper",
+      "run": 2,
+      "ms": 75.19999998807907,
+      "width": 1024,
+      "height": 1024,
+      "declined": false,
+      "alphaMismatches": 0,
+      "visibleRgbMismatches": 0,
+      "maxChannelDelta": 0,
+      "exactVisibleRgba": true,
+      "scope": "One native decode/upload/readback operation; excludes fixture fetch and independent comparison. No FPS or totalmemory claim."
+    }
+  ],
+  "dependencies": {
+    "helperPath": "bench/webkit-fallback-candidate-gl.mjs",
+    "hashes": {
+      "bench/webkit-fallback-candidate-gl.mjs": "509a2b869ffead7f0d9f2ff5ad038c8b2cce032adbfc62b7f8f982613f511279",
+      "bench/webkit-fallback-candidate-stream-reader.mjs": "82dfb70589cb068c3c7fbe0e162445af97f8d6d8ffb393c08ccd7993e8fc0f7b",
+      "src/lib/image-decode.js": "e1207e72ec51656ee6a0b516632599b60de0e510110fd319036203c9cefe15a9",
+      "src/lib/quantize.js": "6dacaca42d615b72a4ee511bb7ed32344aa7118ae946769e290d7a9463f8d0a3",
+      "bench/webkit-fallback-validation-probe.mjs": "810ddbcbc91641c479d1f2fbc16ae986da4086793237eeeb6dc0c7f6b7171408",
+      "bench/png-precision-validation-fixtures/manifest.json": "2a4d7b973efbf211d8a0d086a2537388d57b161f0f1c70bb55caee840c592e19",
+      "bench/png-import-precision-review/fixtures/manifest.json": "11cec4224e868e83f44f7619b29225372ee18c4da99f98ab832b350ac9a3d41b",
+      "bench/webkit-fallback-validation-stress/manifest.json": "83bcb80b1839a30cd430c3311a9c0b44594301b1db52ac57b09d7a44fce7977d"
+    }
+  },
+  "dependenciesAfter": {
+    "helperPath": "bench/webkit-fallback-candidate-gl.mjs",
+    "hashes": {
+      "bench/webkit-fallback-candidate-gl.mjs": "509a2b869ffead7f0d9f2ff5ad038c8b2cce032adbfc62b7f8f982613f511279",
+      "bench/webkit-fallback-candidate-stream-reader.mjs": "82dfb70589cb068c3c7fbe0e162445af97f8d6d8ffb393c08ccd7993e8fc0f7b",
+      "src/lib/image-decode.js": "e1207e72ec51656ee6a0b516632599b60de0e510110fd319036203c9cefe15a9",
+      "src/lib/quantize.js": "6dacaca42d615b72a4ee511bb7ed32344aa7118ae946769e290d7a9463f8d0a3",
+      "bench/webkit-fallback-validation-probe.mjs": "810ddbcbc91641c479d1f2fbc16ae986da4086793237eeeb6dc0c7f6b7171408",
+      "bench/png-precision-validation-fixtures/manifest.json": "2a4d7b973efbf211d8a0d086a2537388d57b161f0f1c70bb55caee840c592e19",
+      "bench/png-import-precision-review/fixtures/manifest.json": "11cec4224e868e83f44f7619b29225372ee18c4da99f98ab832b350ac9a3d41b",
+      "bench/webkit-fallback-validation-stress/manifest.json": "83bcb80b1839a30cd430c3311a9c0b44594301b1db52ac57b09d7a44fce7977d"
+    }
+  },
+  "dependenciesStable": true,
+  "validation": {
+    "eligibleHelperExact": true,
+    "unsupportedHelperDeclines": true,
+    "oneMpExact": true,
+    "productionHelperIntegrated": false,
+    "passed": true
+  },
+  "completed": true,
+  "finished": "2026-10-15T10:01:29.555Z"
+}

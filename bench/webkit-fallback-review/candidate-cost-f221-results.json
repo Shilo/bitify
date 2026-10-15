@@ -1,0 +1,2232 @@
+{
+  "scope": "Windows WebKit actual research helper including metadata/load/post turns and GL cleanup; isolated1/4/16MP. Offscreen is a separately adapted control. No appFPS, Apple, OSclipboard or totalheap claim.",
+  "helperSha256": "f22137782727c1b309ae1969b23460a34100a2b57be8ac331a6f6f28353f6d80",
+  "bundleSha256": "5d3e6ad7334b9835f5ff9bcab151db6f68876ee9ff6d1994c36f8c6802c4fe44",
+  "platform": "win32",
+  "started": "2026-10-15T09:57:17.999Z",
+  "runs": [
+    {
+      "mode": "dom-helper",
+      "coldRun": 0,
+      "repetition": 0,
+      "id": "tiny32",
+      "pixels": 768,
+      "pngBytes": 552,
+      "totalMs": 296,
+      "calls": [
+        {
+          "method": "getContext",
+          "ms": 147
+        },
+        {
+          "method": "texImage2D",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        }
+      ],
+      "maxNativeCallMs": 147,
+      "maxRafGapMs": 173,
+      "rgbaReturned": true,
+      "startMemory": null,
+      "memoryScope": "Optional reported JS heap only; no retained/GPU/native memory measurement",
+      "alphaMismatches": 0,
+      "visibleRgbMismatches": 0,
+      "exact": true,
+      "normalizedRgbaSha256": "09dfe23d2aef1f6230afffe0be5ff43aa526eb87e2c8bb0cf302d9278f0ba77d"
+    },
+    {
+      "mode": "dom-helper",
+      "coldRun": 1,
+      "repetition": 0,
+      "id": "tiny32",
+      "pixels": 768,
+      "pngBytes": 552,
+      "totalMs": 266,
+      "calls": [
+        {
+          "method": "getContext",
+          "ms": 135
+        },
+        {
+          "method": "texImage2D",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        }
+      ],
+      "maxNativeCallMs": 135,
+      "maxRafGapMs": 156,
+      "rgbaReturned": true,
+      "startMemory": null,
+      "memoryScope": "Optional reported JS heap only; no retained/GPU/native memory measurement",
+      "alphaMismatches": 0,
+      "visibleRgbMismatches": 0,
+      "exact": true,
+      "normalizedRgbaSha256": "09dfe23d2aef1f6230afffe0be5ff43aa526eb87e2c8bb0cf302d9278f0ba77d"
+    },
+    {
+      "mode": "dom-helper",
+      "coldRun": 2,
+      "repetition": 0,
+      "id": "tiny32",
+      "pixels": 768,
+      "pngBytes": 552,
+      "totalMs": 269,
+      "calls": [
+        {
+          "method": "getContext",
+          "ms": 133
+        },
+        {
+          "method": "texImage2D",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        }
+      ],
+      "maxNativeCallMs": 133,
+      "maxRafGapMs": 173,
+      "rgbaReturned": true,
+      "startMemory": null,
+      "memoryScope": "Optional reported JS heap only; no retained/GPU/native memory measurement",
+      "alphaMismatches": 0,
+      "visibleRgbMismatches": 0,
+      "exact": true,
+      "normalizedRgbaSha256": "09dfe23d2aef1f6230afffe0be5ff43aa526eb87e2c8bb0cf302d9278f0ba77d"
+    },
+    {
+      "mode": "offscreen-adapted",
+      "coldRun": 0,
+      "repetition": 0,
+      "id": "tiny32",
+      "unavailable": "OffscreenCanvas absent"
+    },
+    {
+      "mode": "offscreen-adapted",
+      "coldRun": 1,
+      "repetition": 0,
+      "id": "tiny32",
+      "unavailable": "OffscreenCanvas absent"
+    },
+    {
+      "mode": "offscreen-adapted",
+      "coldRun": 2,
+      "repetition": 0,
+      "id": "tiny32",
+      "unavailable": "OffscreenCanvas absent"
+    },
+    {
+      "mode": "dom-helper",
+      "coldRun": "sizes-fresh-browser",
+      "repetition": 0,
+      "id": "1024square",
+      "pixels": 1048576,
+      "pngBytes": 956142,
+      "totalMs": 2346,
+      "calls": [
+        {
+          "method": "getContext",
+          "ms": 374
+        },
+        {
+          "method": "texImage2D",
+          "ms": 8
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        }
+      ],
+      "maxNativeCallMs": 374,
+      "maxRafGapMs": 393,
+      "rgbaReturned": true,
+      "startMemory": null,
+      "memoryScope": "Optional reported JS heap only; no retained/GPU/native memory measurement",
+      "alphaMismatches": 0,
+      "visibleRgbMismatches": 0,
+      "exact": true,
+      "normalizedRgbaSha256": "2822f9d73b1c9f6756803c3172f825ee1f703ec78f3dd360cbb43f272d65ce3f"
+    },
+    {
+      "mode": "dom-helper",
+      "coldRun": "sizes-fresh-browser",
+      "repetition": 1,
+      "id": "1024square",
+      "pixels": 1048576,
+      "pngBytes": 956142,
+      "totalMs": 2107,
+      "calls": [
+        {
+          "method": "getContext",
+          "ms": 2
+        },
+        {
+          "method": "texImage2D",
+          "ms": 8
+        },
+        {
+          "method": "readPixels",
+          "ms": 3
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 4
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 4
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 4
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        }
+      ],
+      "maxNativeCallMs": 8,
+      "maxRafGapMs": 60,
+      "rgbaReturned": true,
+      "startMemory": null,
+      "memoryScope": "Optional reported JS heap only; no retained/GPU/native memory measurement",
+      "alphaMismatches": 0,
+      "visibleRgbMismatches": 0,
+      "exact": true,
+      "normalizedRgbaSha256": "2822f9d73b1c9f6756803c3172f825ee1f703ec78f3dd360cbb43f272d65ce3f"
+    },
+    {
+      "mode": "dom-helper",
+      "coldRun": "sizes-fresh-browser",
+      "repetition": 2,
+      "id": "1024square",
+      "pixels": 1048576,
+      "pngBytes": 956142,
+      "totalMs": 2113,
+      "calls": [
+        {
+          "method": "getContext",
+          "ms": 3
+        },
+        {
+          "method": "texImage2D",
+          "ms": 9
+        },
+        {
+          "method": "readPixels",
+          "ms": 3
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 3
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 3
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 3
+        }
+      ],
+      "maxNativeCallMs": 9,
+      "maxRafGapMs": 62,
+      "rgbaReturned": true,
+      "startMemory": null,
+      "memoryScope": "Optional reported JS heap only; no retained/GPU/native memory measurement",
+      "alphaMismatches": 0,
+      "visibleRgbMismatches": 0,
+      "exact": true,
+      "normalizedRgbaSha256": "2822f9d73b1c9f6756803c3172f825ee1f703ec78f3dd360cbb43f272d65ce3f"
+    },
+    {
+      "mode": "dom-helper",
+      "coldRun": "sizes-fresh-browser",
+      "repetition": 0,
+      "id": "2048square",
+      "pixels": 4194304,
+      "pngBytes": 1991641,
+      "totalMs": 4693,
+      "calls": [
+        {
+          "method": "getContext",
+          "ms": 39
+        },
+        {
+          "method": "texImage2D",
+          "ms": 39
+        },
+        {
+          "method": "readPixels",
+          "ms": 13
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 3
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 5
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 3
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 3
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 3
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 3
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 3
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 3
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 3
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 3
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        }
+      ],
+      "maxNativeCallMs": 39,
+      "maxRafGapMs": 109,
+      "rgbaReturned": true,
+      "startMemory": null,
+      "memoryScope": "Optional reported JS heap only; no retained/GPU/native memory measurement",
+      "alphaMismatches": 0,
+      "visibleRgbMismatches": 0,
+      "exact": true,
+      "normalizedRgbaSha256": "e42721dc3a7e0a20c98739fb26d774493a21149af2fcd5c598dbf073be9b5b9a"
+    },
+    {
+      "mode": "dom-helper",
+      "coldRun": "sizes-fresh-browser",
+      "repetition": 1,
+      "id": "2048square",
+      "pixels": 4194304,
+      "pngBytes": 1991641,
+      "totalMs": 4453,
+      "calls": [
+        {
+          "method": "getContext",
+          "ms": 2
+        },
+        {
+          "method": "texImage2D",
+          "ms": 24
+        },
+        {
+          "method": "readPixels",
+          "ms": 3
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 3
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 3
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 3
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 3
+        },
+        {
+          "method": "readPixels",
+          "ms": 3
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 3
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        }
+      ],
+      "maxNativeCallMs": 24,
+      "maxRafGapMs": 77,
+      "rgbaReturned": true,
+      "startMemory": null,
+      "memoryScope": "Optional reported JS heap only; no retained/GPU/native memory measurement",
+      "alphaMismatches": 0,
+      "visibleRgbMismatches": 0,
+      "exact": true,
+      "normalizedRgbaSha256": "e42721dc3a7e0a20c98739fb26d774493a21149af2fcd5c598dbf073be9b5b9a"
+    },
+    {
+      "mode": "dom-helper",
+      "coldRun": "sizes-fresh-browser",
+      "repetition": 2,
+      "id": "2048square",
+      "pixels": 4194304,
+      "pngBytes": 1991641,
+      "totalMs": 4356,
+      "calls": [
+        {
+          "method": "getContext",
+          "ms": 4
+        },
+        {
+          "method": "texImage2D",
+          "ms": 30
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 1
+        },
+        {
+          "method": "readPixels",
+          "ms": 2
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        },
+        {
+          "method": "readPixels",
+          "ms": 0
+        }
+      ],
+      "maxNativeCallMs": 30,
+      "maxRafGapMs": 93,
+      "rgbaReturned": true,
+      "startMemory": null,
+      "memoryScope": "Optional reported JS heap only; no retained/GPU/native memory measurement",
+      "alphaMismatches": 0,
+      "visibleRgbMismatches": 0,
+      "exact": true,
+      "normalizedRgbaSha256": "e42721dc3a7e0a20c98739fb26d774493a21149af2fcd5c598dbf073be9b5b9a"
+    },
+    {
+      "mode": "dom-helper",
+      "coldRun": "sizes-fresh-browser",
+      "repetition": 0,
+      "id": "4096square",
+      "pixels": 16777216,
+      "pngBytes": 4300405,
+      "totalMs": 3904,
+      "calls": [],
+      "maxNativeCallMs": null,
+      "maxRafGapMs": 36,
+      "rgbaReturned": false,
+      "startMemory": null,
+      "memoryScope": "Optional reported JS heap only; no retained/GPU/native memory measurement"
+    }
+  ],
+  "helperStable": true,
+  "completed": true,
+  "finished": "2026-10-15T09:59:04.093Z"
+}

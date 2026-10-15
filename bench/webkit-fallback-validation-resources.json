@@ -1,0 +1,89 @@
+{
+  "scope": "Independent native-helper API fault injection with fakeHTMLImage/WebGL; does not establish actual browser color fidelity or platform delivery.",
+  "helperPath": "bench/webkit-fallback-candidate-gl.mjs",
+  "helperSha256": "509a2b869ffead7f0d9f2ff5ad038c8b2cce032adbfc62b7f8f982613f511279",
+  "streamReaderSha256": "82dfb70589cb068c3c7fbe0e162445af97f8d6d8ffb393c08ccd7993e8fc0f7b",
+  "checks": [
+    {
+      "name": "Exact straight RGBA including all8alpha values",
+      "pass": true
+    },
+    {
+      "name": "Failure cleanup context-absent",
+      "pass": true
+    },
+    {
+      "name": "Failure cleanup texture-limit",
+      "pass": true
+    },
+    {
+      "name": "Failure cleanup texture-null",
+      "pass": true
+    },
+    {
+      "name": "Failure cleanup framebuffer-null",
+      "pass": true
+    },
+    {
+      "name": "Failure cleanup bad-framebuffer",
+      "pass": true
+    },
+    {
+      "name": "Failure cleanup context-lost",
+      "pass": true
+    },
+    {
+      "name": "Failure cleanup gl-error",
+      "pass": true
+    },
+    {
+      "name": "Failure cleanup read-throw",
+      "pass": true
+    },
+    {
+      "name": "Failure cleanup load-error",
+      "pass": true
+    },
+    {
+      "name": "Failure cleanup pixel-limit",
+      "pass": true
+    },
+    {
+      "name": "Preabort has no resources",
+      "pass": true
+    },
+    {
+      "name": "Oversized source declines without reading",
+      "pass": true
+    },
+    {
+      "name": "Unsupported metadata/format guards have no native resources",
+      "pass": true
+    },
+    {
+      "name": "Metadata stream canceled and lock released after accepted input",
+      "pass": true
+    },
+    {
+      "name": "Abort pending metadata read cancels reader/releases lock before DOM",
+      "pass": true
+    },
+    {
+      "name": "Abort after metadata beforecontext has no GPUresources",
+      "pass": true
+    },
+    {
+      "name": "Native natural-dimension mismatch declines and releases",
+      "pass": true
+    },
+    {
+      "name": "Abort pending load releases owned URL/image",
+      "pass": true
+    },
+    {
+      "name": "Abort between bounded read stripes never publishes",
+      "pass": true
+    }
+  ],
+  "completed": true
+}

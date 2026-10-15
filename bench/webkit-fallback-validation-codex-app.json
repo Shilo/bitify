@@ -1,0 +1,75 @@
+{
+  "verifiedAt": "2026-10-15T10:09:01.019Z",
+  "scope": "CUA Codex Browser, unchanged shipping build. Actual picker import and native Save download; independently decoded retained PNG. Research GL helper is not integrated. QA copy hooks inspect payloads only, not OS clipboard delivery.",
+  "distIndexSha256": "16d2776e085ab2d3907d055ccf5bd52e2fb20bdd089a7c0a87b2fc19cdb92837",
+  "decoderSha256": "e1207e72ec51656ee6a0b516632599b60de0e510110fd319036203c9cefe15a9",
+  "suites": [
+    {
+      "file": "bench/webkit-fallback-validation-codex-qa.json",
+      "checks": 20,
+      "passed": true,
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+    },
+    {
+      "file": "bench/webkit-fallback-validation-codex-improvements.json",
+      "checks": 16,
+      "passed": true,
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+    }
+  ],
+  "nativeSave": {
+    "file": "bench/webkit-fallback-validation-codex-native-saved.png",
+    "source": "bench/palette-clipboard-review/fixtures/palette-source.png",
+    "sourcePngSha256": "7f37bd9f7f235d65265bbe2e922adfd35d74cb4f07c73e52366251701bf57bb9",
+    "settingsObservedInRecolor": {
+      "palette": "PICO-8",
+      "maxColors": 8,
+      "matching": "Oklab",
+      "cleanup": "On",
+      "dither": "4x4",
+      "strength": 50,
+      "opacity": "Keep"
+    },
+    "verification": {
+      "key": "palette-keep",
+      "width": 32,
+      "height": 24,
+      "pixels": 768,
+      "visiblePixels": 672,
+      "alphaMismatches": 0,
+      "visibleRgbMismatches": 0,
+      "alphaValues": [
+        0,
+        1,
+        64,
+        127,
+        128,
+        192,
+        254,
+        255
+      ],
+      "usedColors": 8,
+      "encodedBytes": 422,
+      "encodedSha256": "14d0012def2b51dbf17ce7e0022fb43d7cc2911209be1ed2b43bfe995c427691",
+      "exactVisibleRgba": true
+    }
+  },
+  "paletteImageImport": {
+    "source": "bench/webkit-fallback-validation-codex-native-saved.png",
+    "evidence": "CUA dialog snapshot and screenshot; exact Select color aria-labels read from the DOM",
+    "observedColors": [
+      "#000000",
+      "#c2c3c7",
+      "#ff004d",
+      "#ffec27",
+      "#00e436",
+      "#29adff",
+      "#1d2b53",
+      "#83769c"
+    ],
+    "nameObserved": "Fallback review owned draft",
+    "savePalettePressed": false,
+    "closedThrough": "Close palette editor",
+    "screenshot": "bench/webkit-fallback-validation-codex-palette-import.png"
+  }
+}
