@@ -1,0 +1,32 @@
+{
+  "at": "2026-10-15T14:50:26.739Z",
+  "surface": "REST POST /v2/reduce-colors",
+  "request": {
+    "inputs": [
+      {
+        "file": "bench/important-colors-review/fixtures/real-inventory.png",
+        "sha256": "1cb29a0f28d91b8de247fe21eecfb545f512b6cd00cac33d53b4fdbca4571086"
+      }
+    ],
+    "num_colors": null,
+    "palette_image": {
+      "file": "bench/claude-audit-2026-10-15/service/fixtures/target-edg8.png",
+      "sha256": "6da8d72b9650675d121214e3eeaf09c06f70e2c1e9b924752aea346a416b5ab2"
+    },
+    "dithering": "none"
+  },
+  "status": 200,
+  "ms": 850,
+  "usage": {
+    "type": "generations",
+    "generations": 0.1
+  },
+  "n_colors": 7,
+  "outputs": [
+    {
+      "file": "bench/important-colors-service/service/real-inventory-edg8-0.png",
+      "sha256": "eb1342724f7aa09fe4c36c8f3716215d463dd0cfffc878b734eaf05c9859a6a8",
+      "bytes": 1464
+    }
+  ]
+}

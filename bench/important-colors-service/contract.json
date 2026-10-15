@@ -1,0 +1,254 @@
+{
+  "at": "2026-10-15T14:47:47.768Z",
+  "publicSchema": {
+    "url": "https://api.pixellab.ai/v2/openapi.json",
+    "status": 200,
+    "sha256": "300176c91c623d47f43818f633a40995349127014797085191cfc8336d8df37f"
+  },
+  "operation": {
+    "tags": [
+      "Cleanup"
+    ],
+    "summary": "Reduce colors",
+    "description": "Quantize images onto a smaller, shared palette.\n\nPixel art reads as pixel art partly because of its restricted palette. AI output\nand converted artwork often carry hundreds of near-identical colors; this snaps\nthem onto a tight palette, optionally with ordered dithering.\n\nPassing several frames in one call is the point of the endpoint: they are\nquantized together, so an animation or a character's eight directions come back\nsharing ONE palette instead of drifting apart frame by frame.\n\nThree ways to choose the palette:\n- omit `num_colors` and `palette_image` — the palette size is auto-detected\n- `num_colors` — quantize to exactly this many colors\n- `palette_image` — reuse the colors of an existing image (your game's palette)\n\nTotal size limit across all frames is 512x512 worth of pixels (e.g. sixteen\n64x64 frames, or four 128x128).\n\n```bash\ncurl -X POST https://api.pixellab.ai/v2/reduce-colors \\\n    -H \"Authorization: Bearer YOUR_API_TOKEN\" \\\n    -H \"Content-Type: application/json\" \\\n    -d '{\"images\": [{\"base64\": \"...\"}, {\"base64\": \"...\"}], \"num_colors\": 16}'\n```",
+    "operationId": "reduce_colors_endpoint_reduce_colors_post",
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/ReduceColorsRequest"
+          }
+        }
+      },
+      "required": true
+    },
+    "responses": {
+      "200": {
+        "description": "Successfully quantized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ReduceColorsResponse"
+            },
+            "example": {
+              "images": [
+                {
+                  "type": "base64",
+                  "base64": "data:image/png;base64,..."
+                }
+              ],
+              "palette": {
+                "type": "base64",
+                "base64": "data:image/png;base64,..."
+              },
+              "n_colors": 16,
+              "usage": {
+                "type": "usd",
+                "usd": 0.005
+              }
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Invalid API token"
+      },
+      "402": {
+        "description": "Insufficient credits"
+      },
+      "422": {
+        "description": "Validation error"
+      },
+      "429": {
+        "description": "Too many requests"
+      }
+    },
+    "security": [
+      {
+        "HTTPBearer": []
+      }
+    ]
+  },
+  "modelName": "ReduceColorsRequest",
+  "requestModel": {
+    "properties": {
+      "images": {
+        "items": {
+          "$ref": "#/components/schemas/Base64Image"
+        },
+        "type": "array",
+        "minItems": 1,
+        "title": "Images",
+        "description": "Image(s) to quantize (PNG base64). Several frames are quantized together onto ONE shared palette and must all be the same size — pass an animation's frames or a character's directions in one call so their colors stay consistent."
+      },
+      "num_colors": {
+        "anyOf": [
+          {
+            "type": "integer",
+            "maximum": 256,
+            "minimum": 2
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Num Colors",
+        "description": "Target number of colors. Omit to auto-detect a good palette size from the image itself. Mutually exclusive with palette_image."
+      },
+      "palette_image": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/Base64Image"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "An image whose colors become the palette (max 256 colors). Use it to force frames onto an existing game palette. Mutually exclusive with num_colors."
+      },
+      "dithering": {
+        "type": "string",
+        "enum": [
+          "none",
+          "2x2",
+          "4x4",
+          "8x8"
+        ],
+        "title": "Dithering",
+        "description": "Ordered dithering matrix size. Larger matrices give smoother gradients at the cost of a busier look.",
+        "default": "none"
+      },
+      "dithering_strength": {
+        "type": "number",
+        "maximum": 10,
+        "minimum": 0,
+        "title": "Dithering Strength",
+        "description": "How strongly to dither. Ignored when dithering is 'none'.",
+        "default": 5
+      }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+      "images"
+    ],
+    "title": "ReduceColorsRequest",
+    "description": "Request model for the reduce-colors endpoint",
+    "example": {
+      "dithering": "none",
+      "images": [
+        {
+          "base64": "iVBORw0KGgoAAAANS..."
+        }
+      ],
+      "num_colors": 16
+    }
+  },
+  "mcp": {
+    "status": 200,
+    "tools": 117,
+    "reduceColors": {
+      "name": "reduce_colors",
+      "description": "Quantize images onto a smaller, shared palette.\n\nPixel art reads as pixel art partly because of its restricted palette. AI\noutput and converted artwork often carry hundreds of near-identical colors;\nthis snaps them onto a tight palette, optionally with ordered dithering.\n\nPassing several frames in one call is the point: they are quantized TOGETHER,\nso an animation or a character's eight directions come back sharing ONE\npalette instead of drifting apart frame by frame. Quantizing them one at a\ntime is the mistake this tool exists to prevent.\n\nThree ways to choose the palette:\n- omit num_colors and the palette image — the size is auto-detected\n- num_colors — quantize to exactly this many colors\n- palette_image — reuse the colors of an existing image (the game's palette)\n\nThe result carries a `palette` strip you can feed back as palette_image_base64\nto lock later frames onto the same colors.\n\nTotal size limit across all frames is 512x512 worth of pixels (sixteen 64x64\nframes, or four 128x128).\n\nCost: 0.1 generations. Runs locally in about a second — poll once with\nget_image(job_id).",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "images_base64": {
+            "default": null,
+            "description": "Base64 PNG(s) to quantize — pass a one-element list for a single image. All frames must be the same size. PREFER image_urls; MCP clients routinely truncate large inline base64.",
+            "items": {
+              "type": "string"
+            },
+            "type": [
+              "array",
+              "null"
+            ]
+          },
+          "image_urls": {
+            "default": null,
+            "description": "Alternative to images_base64: https, data: or `upload:<id>` (POST /v2/uploads with this same bearer token) URLs to the PNG(s), one per frame. PREFER THIS. Give urls OR base64, not both.",
+            "items": {
+              "type": "string"
+            },
+            "type": [
+              "array",
+              "null"
+            ]
+          },
+          "num_colors": {
+            "default": null,
+            "description": "Target number of colors. Omit to auto-detect a good palette size from the images. Cannot be combined with a palette image.",
+            "maximum": 256,
+            "minimum": 2,
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "palette_image_base64": {
+            "default": null,
+            "description": "Base64 PNG whose colors become the palette (max 256 colors) — use it to force frames onto an existing game palette. Cannot be combined with num_colors.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "palette_image_url": {
+            "default": null,
+            "description": "Alternative to palette_image_base64: an https (or data:) URL to the palette image. Give one, not both.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "dithering": {
+            "default": "none",
+            "description": "Ordered dithering matrix size. Larger matrices give smoother gradients at the cost of a busier look.",
+            "enum": [
+              "none",
+              "2x2",
+              "4x4",
+              "8x8"
+            ],
+            "type": "string"
+          },
+          "dithering_strength": {
+            "default": 5,
+            "description": "How strongly to dither. Ignored when dithering is 'none'.",
+            "maximum": 10,
+            "minimum": 0,
+            "type": "number"
+          },
+          "project_id": {
+            "default": null,
+            "description": "Internal Game Builder project context; the finished image is linked after generation.",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "fastmcp": {
+          "tags": []
+        }
+      }
+    }
+  },
+  "balance": {
+    "status": 200,
+    "credits": {
+      "type": "usd",
+      "usd": 22.5136616860766
+    },
+    "subscriptionGenerations": 5624.99999999998
+  }
+}

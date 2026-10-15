@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-15T14:50:25.415Z",
+  "surface": "REST POST /v2/reduce-colors",
+  "request": {
+    "inputs": [
+      {
+        "file": "bench/important-colors-review/fixtures/real-inventory.png",
+        "sha256": "1cb29a0f28d91b8de247fe21eecfb545f512b6cd00cac33d53b4fdbca4571086"
+      }
+    ],
+    "num_colors": 4,
+    "palette_image": null,
+    "dithering": "none"
+  },
+  "status": 200,
+  "ms": 700,
+  "usage": {
+    "type": "generations",
+    "generations": 0.1
+  },
+  "n_colors": 3,
+  "outputs": [
+    {
+      "file": "bench/important-colors-service/service/real-inventory-k4-0.png",
+      "sha256": "7abeb6caef62e172c7e8bd4fe50e6f78f2f619342b12fa4b3604beb401239bcb",
+      "bytes": 1014
+    }
+  ]
+}

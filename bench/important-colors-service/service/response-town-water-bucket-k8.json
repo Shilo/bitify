@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-15T14:50:30.670Z",
+  "surface": "REST POST /v2/reduce-colors",
+  "request": {
+    "inputs": [
+      {
+        "file": "bench/important-colors-review/fixtures/town-water-bucket.png",
+        "sha256": "3befce5d6373d4315f35eeed22752bb1cf7a2ab5d008ce26dd6b4aebbb278978"
+      }
+    ],
+    "num_colors": 8,
+    "palette_image": null,
+    "dithering": "none"
+  },
+  "status": 200,
+  "ms": 2937,
+  "usage": {
+    "type": "generations",
+    "generations": 0.1
+  },
+  "n_colors": 8,
+  "outputs": [
+    {
+      "file": "bench/important-colors-service/service/town-water-bucket-k8-0.png",
+      "sha256": "7dbc1f7fb5c674d3eb0500685230de6e8df93069912543b192e8ddb135e31951",
+      "bytes": 326
+    }
+  ]
+}

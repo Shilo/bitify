@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-15T14:50:43.057Z",
+  "surface": "REST POST /v2/reduce-colors",
+  "request": {
+    "inputs": [
+      {
+        "file": "bench/important-colors-review/fixtures/dungeon-archer.png",
+        "sha256": "1e82481db9d95d0cec64ba0ea95b8fadf1e3675936e93731d0ff0e3bc72470b0"
+      }
+    ],
+    "num_colors": 8,
+    "palette_image": null,
+    "dithering": "none"
+  },
+  "status": 200,
+  "ms": 1482,
+  "usage": {
+    "type": "generations",
+    "generations": 0.1
+  },
+  "n_colors": 7,
+  "outputs": [
+    {
+      "file": "bench/important-colors-service/service/dungeon-archer-k8-0.png",
+      "sha256": "5e2c764c60b16fb68273e57d47809db008ac768425554863f33e93c03517c8b3",
+      "bytes": 391
+    }
+  ]
+}

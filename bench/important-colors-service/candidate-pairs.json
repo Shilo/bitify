@@ -1,0 +1,2303 @@
+{
+  "at": "2026-10-15T14:57:01.586Z",
+  "method": "Independent Sharp PNG decode; source-coordinate region output colors and RGB errors. Blind reviews elsewhere determine meaningful tradeoffs; no semantic automatic score.",
+  "rows": [
+    {
+      "id": "real-inventory-k4",
+      "candidateRow": "real-inventory-auto-oklab-k4",
+      "baselineEquality": "Visible RGB and all alpha bytes; fully transparent RGB normalized to zero because indexed PNG permits hidden palette RGB.",
+      "metrics": [
+        {
+          "label": "Source",
+          "file": "bench/important-colors-review/fixtures/real-inventory.png",
+          "rgbaSha256": "362ad811dff608d8bc0def0e6bae2f8fc0e77d9f330cbaf66ea8418ef31bfcbc",
+          "alphaWrong": 0,
+          "regions": {
+            "dungeon-wizard/purple-hood": {
+              "colors": {
+                "#9b4ca3": 45,
+                "#d176d0": 10
+              },
+              "channelRmse": 0
+            },
+            "dungeon-wizard/face": {
+              "colors": {
+                "#f7c282": 24,
+                "#bd6c4a": 1
+              },
+              "channelRmse": 0
+            },
+            "dungeon-archer/green-headband": {
+              "colors": {
+                "#25956a": 19,
+                "#43e1b3": 3
+              },
+              "channelRmse": 0
+            },
+            "dungeon-archer/face": {
+              "colors": {
+                "#f7c282": 15,
+                "#e19a65": 9
+              },
+              "channelRmse": 0
+            },
+            "dungeon-knight/face": {
+              "colors": {
+                "#e19a65": 9,
+                "#f7c282": 28
+              },
+              "channelRmse": 0
+            },
+            "dungeon-knight/metal": {
+              "colors": {
+                "#8b9bb4": 35,
+                "#c0cbdc": 14
+              },
+              "channelRmse": 0
+            },
+            "dungeon-potion/red-liquid": {
+              "colors": {
+                "#ff706d": 8,
+                "#e84537": 18
+              },
+              "channelRmse": 0
+            },
+            "dungeon-potion/stopper": {
+              "colors": {
+                "#bd6c4a": 4,
+                "#eaa56c": 4
+              },
+              "channelRmse": 0
+            },
+            "dungeon-neutral-shield/metal": {
+              "colors": {
+                "#8b9bb4": 10,
+                "#c0cbdc": 24
+              },
+              "channelRmse": 0
+            },
+            "town-water-bucket/water": {
+              "colors": {
+                "#76e4ff": 8,
+                "#009adc": 22
+              },
+              "channelRmse": 0
+            },
+            "town-water-bucket/bucket": {
+              "colors": {
+                "#bd6c4a": 15,
+                "#763b36": 35,
+                "#eaa56c": 16,
+                "#be6c49": 4,
+                "#eba66c": 12
+              },
+              "channelRmse": 0
+            },
+            "platformer-pilot/green-visor": {
+              "colors": {
+                "#86f6bb": 20,
+                "#5ad28c": 76,
+                "#34995e": 6
+              },
+              "channelRmse": 0
+            },
+            "platformer-pilot/eyes": {
+              "colors": {
+                "#434a5f": 10
+              },
+              "channelRmse": 0
+            },
+            "platformer-axe/red-fastening": {
+              "colors": {
+                "#fb6338": 6
+              },
+              "channelRmse": 0
+            },
+            "platformer-axe/blade": {
+              "colors": {
+                "#dce1e7": 16,
+                "#959ab1": 8
+              },
+              "channelRmse": 0
+            }
+          }
+        },
+        {
+          "label": "PixelLab",
+          "file": "bench/important-colors-service/service/real-inventory-k4-0.png",
+          "rgbaSha256": "5060ee7f59ddc6686bf9f3c48db14e2fa02f4e4021948c815f549f869a704edd",
+          "alphaWrong": 0,
+          "regions": {
+            "dungeon-wizard/purple-hood": {
+              "colors": {
+                "#4c353f": 45,
+                "#e09067": 10
+              },
+              "channelRmse": 72.77653634533758
+            },
+            "dungeon-wizard/face": {
+              "colors": {
+                "#e09067": 25
+              },
+              "channelRmse": 35.318361607903995
+            },
+            "dungeon-archer/green-headband": {
+              "colors": {
+                "#a2ccce": 22
+              },
+              "channelRmse": 93.33346861462057
+            },
+            "dungeon-archer/face": {
+              "colors": {
+                "#e09067": 24
+              },
+              "channelRmse": 28.214210367590773
+            },
+            "dungeon-knight/face": {
+              "colors": {
+                "#e09067": 37
+              },
+              "channelRmse": 30.926970066229856
+            },
+            "dungeon-knight/metal": {
+              "colors": {
+                "#a2ccce": 49
+              },
+              "channelRmse": 31.033008540062934
+            },
+            "dungeon-potion/red-liquid": {
+              "colors": {
+                "#e09067": 26
+              },
+              "channelRmse": 45.29702543015946
+            },
+            "dungeon-potion/stopper": {
+              "colors": {
+                "#e09067": 8
+              },
+              "channelRmse": 25.58645474986065
+            },
+            "dungeon-neutral-shield/metal": {
+              "colors": {
+                "#a2ccce": 34
+              },
+              "channelRmse": 24.73149932421262
+            },
+            "town-water-bucket/water": {
+              "colors": {
+                "#a2ccce": 30
+              },
+              "channelRmse": 86.66564101957208
+            },
+            "town-water-bucket/bucket": {
+              "colors": {
+                "#e09067": 47,
+                "#4c353f": 35
+              },
+              "channelRmse": 24.38587155931313
+            },
+            "platformer-pilot/green-visor": {
+              "colors": {
+                "#a2ccce": 102
+              },
+              "channelRmse": 55.70187919994467
+            },
+            "platformer-pilot/eyes": {
+              "colors": {
+                "#4c353f": 10
+              },
+              "channelRmse": 22.700954458641895
+            },
+            "platformer-axe/red-fastening": {
+              "colors": {
+                "#e09067": 6
+              },
+              "channelRmse": 40.67349669420289
+            },
+            "platformer-axe/blade": {
+              "colors": {
+                "#a2ccce": 24
+              },
+              "channelRmse": 37.07350056906475
+            }
+          }
+        },
+        {
+          "label": "Current",
+          "file": "bench/important-colors-service/ours/real-inventory-k4-oklab-0.png",
+          "rgbaSha256": "3286e999be806e54f6f021dd480e67a755c48ee9f08f4b33daf2d0a8d8d20452",
+          "alphaWrong": 0,
+          "regions": {
+            "dungeon-wizard/purple-hood": {
+              "colors": {
+                "#6f3e43": 45,
+                "#cb815e": 10
+              },
+              "channelRmse": 62.38638157531342
+            },
+            "dungeon-wizard/face": {
+              "colors": {
+                "#c1ccdd": 24,
+                "#cb815e": 1
+              },
+              "channelRmse": 60.2400752544904
+            },
+            "dungeon-archer/green-headband": {
+              "colors": {
+                "#cb815e": 19,
+                "#c1ccdd": 3
+              },
+              "channelRmse": 94.39945749715713
+            },
+            "dungeon-archer/face": {
+              "colors": {
+                "#c1ccdd": 15,
+                "#cb815e": 9
+              },
+              "channelRmse": 49.98291374726634
+            },
+            "dungeon-knight/face": {
+              "colors": {
+                "#cb815e": 9,
+                "#c1ccdd": 28
+              },
+              "channelRmse": 54.25482085110581
+            },
+            "dungeon-knight/metal": {
+              "colors": {
+                "#cb815e": 35,
+                "#c1ccdd": 14
+              },
+              "channelRmse": 53.82776766157567
+            },
+            "dungeon-potion/red-liquid": {
+              "colors": {
+                "#cb815e": 26
+              },
+              "channelRmse": 41.302511254128795
+            },
+            "dungeon-potion/stopper": {
+              "colors": {
+                "#cb815e": 8
+              },
+              "channelRmse": 24.11776661854631
+            },
+            "dungeon-neutral-shield/metal": {
+              "colors": {
+                "#cb815e": 10,
+                "#c1ccdd": 24
+              },
+              "channelRmse": 34.54919765817333
+            },
+            "town-water-bucket/water": {
+              "colors": {
+                "#c1ccdd": 30
+              },
+              "channelRmse": 101.83625200400014
+            },
+            "town-water-bucket/bucket": {
+              "colors": {
+                "#cb815e": 47,
+                "#6f3e43": 35
+              },
+              "channelRmse": 19.961344758128032
+            },
+            "platformer-pilot/green-visor": {
+              "colors": {
+                "#c1ccdd": 96,
+                "#cb815e": 6
+              },
+              "channelRmse": 71.76436569082553
+            },
+            "platformer-pilot/eyes": {
+              "colors": {
+                "#6f3e43": 10
+              },
+              "channelRmse": 30.89768060335058
+            },
+            "platformer-axe/red-fastening": {
+              "colors": {
+                "#cb815e": 6
+              },
+              "channelRmse": 39.36157178433469
+            },
+            "platformer-axe/blade": {
+              "colors": {
+                "#c1ccdd": 16,
+                "#cb815e": 8
+              },
+              "channelRmse": 37.9619692733545
+            }
+          }
+        },
+        {
+          "label": "concave",
+          "file": "bench/important-colors-spike/outputs/real-inventory-auto-oklab-k4-concave-f0.png",
+          "rgbaSha256": "5b53cfd8fa5e5c7a6d3231242ddd60600dc4f83ca101c317cd66d4dff1413241",
+          "alphaWrong": 0,
+          "regions": {
+            "dungeon-wizard/purple-hood": {
+              "colors": {
+                "#51607d": 45,
+                "#cb815e": 10
+              },
+              "channelRmse": 52.853714642540986
+            },
+            "dungeon-wizard/face": {
+              "colors": {
+                "#bedef1": 24,
+                "#cb815e": 1
+              },
+              "channelRmse": 72.43691508248172
+            },
+            "dungeon-archer/green-headband": {
+              "colors": {
+                "#51607d": 19,
+                "#bedef1": 3
+              },
+              "channelRmse": 48.29831542328648
+            },
+            "dungeon-archer/face": {
+              "colors": {
+                "#bedef1": 15,
+                "#cb815e": 9
+              },
+              "channelRmse": 59.59725944482123
+            },
+            "dungeon-knight/face": {
+              "colors": {
+                "#cb815e": 9,
+                "#bedef1": 28
+              },
+              "channelRmse": 64.95556346630538
+            },
+            "dungeon-knight/metal": {
+              "colors": {
+                "#cb815e": 35,
+                "#bedef1": 14
+              },
+              "channelRmse": 54.53351961779802
+            },
+            "dungeon-potion/red-liquid": {
+              "colors": {
+                "#cb815e": 26
+              },
+              "channelRmse": 41.302511254128795
+            },
+            "dungeon-potion/stopper": {
+              "colors": {
+                "#cb815e": 8
+              },
+              "channelRmse": 24.11776661854631
+            },
+            "dungeon-neutral-shield/metal": {
+              "colors": {
+                "#cb815e": 10,
+                "#bedef1": 24
+              },
+              "channelRmse": 37.18317139909018
+            },
+            "town-water-bucket/water": {
+              "colors": {
+                "#bedef1": 8,
+                "#51607d": 22
+              },
+              "channelRmse": 71.50975069488388
+            },
+            "town-water-bucket/bucket": {
+              "colors": {
+                "#cb815e": 47,
+                "#51607d": 35
+              },
+              "channelRmse": 38.378728864675715
+            },
+            "platformer-pilot/green-visor": {
+              "colors": {
+                "#bedef1": 96,
+                "#51607d": 6
+              },
+              "channelRmse": 74.73451923986045
+            },
+            "platformer-pilot/eyes": {
+              "colors": {
+                "#51607d": 10
+              },
+              "channelRmse": 22.949219304078007
+            },
+            "platformer-axe/red-fastening": {
+              "colors": {
+                "#cb815e": 6
+              },
+              "channelRmse": 39.36157178433469
+            },
+            "platformer-axe/blade": {
+              "colors": {
+                "#bedef1": 16,
+                "#cb815e": 8
+              },
+              "channelRmse": 37.190201815950275
+            }
+          }
+        },
+        {
+          "label": "hue",
+          "file": "bench/important-colors-spike/outputs/real-inventory-auto-oklab-k4-hue-f0.png",
+          "rgbaSha256": "5b53cfd8fa5e5c7a6d3231242ddd60600dc4f83ca101c317cd66d4dff1413241",
+          "alphaWrong": 0,
+          "regions": {
+            "dungeon-wizard/purple-hood": {
+              "colors": {
+                "#51607d": 45,
+                "#cb815e": 10
+              },
+              "channelRmse": 52.853714642540986
+            },
+            "dungeon-wizard/face": {
+              "colors": {
+                "#bedef1": 24,
+                "#cb815e": 1
+              },
+              "channelRmse": 72.43691508248172
+            },
+            "dungeon-archer/green-headband": {
+              "colors": {
+                "#51607d": 19,
+                "#bedef1": 3
+              },
+              "channelRmse": 48.29831542328648
+            },
+            "dungeon-archer/face": {
+              "colors": {
+                "#bedef1": 15,
+                "#cb815e": 9
+              },
+              "channelRmse": 59.59725944482123
+            },
+            "dungeon-knight/face": {
+              "colors": {
+                "#cb815e": 9,
+                "#bedef1": 28
+              },
+              "channelRmse": 64.95556346630538
+            },
+            "dungeon-knight/metal": {
+              "colors": {
+                "#cb815e": 35,
+                "#bedef1": 14
+              },
+              "channelRmse": 54.53351961779802
+            },
+            "dungeon-potion/red-liquid": {
+              "colors": {
+                "#cb815e": 26
+              },
+              "channelRmse": 41.302511254128795
+            },
+            "dungeon-potion/stopper": {
+              "colors": {
+                "#cb815e": 8
+              },
+              "channelRmse": 24.11776661854631
+            },
+            "dungeon-neutral-shield/metal": {
+              "colors": {
+                "#cb815e": 10,
+                "#bedef1": 24
+              },
+              "channelRmse": 37.18317139909018
+            },
+            "town-water-bucket/water": {
+              "colors": {
+                "#bedef1": 8,
+                "#51607d": 22
+              },
+              "channelRmse": 71.50975069488388
+            },
+            "town-water-bucket/bucket": {
+              "colors": {
+                "#cb815e": 47,
+                "#51607d": 35
+              },
+              "channelRmse": 38.378728864675715
+            },
+            "platformer-pilot/green-visor": {
+              "colors": {
+                "#bedef1": 96,
+                "#51607d": 6
+              },
+              "channelRmse": 74.73451923986045
+            },
+            "platformer-pilot/eyes": {
+              "colors": {
+                "#51607d": 10
+              },
+              "channelRmse": 22.949219304078007
+            },
+            "platformer-axe/red-fastening": {
+              "colors": {
+                "#cb815e": 6
+              },
+              "channelRmse": 39.36157178433469
+            },
+            "platformer-axe/blade": {
+              "colors": {
+                "#bedef1": 16,
+                "#cb815e": 8
+              },
+              "channelRmse": 37.190201815950275
+            }
+          }
+        }
+      ],
+      "sheetColumns": [
+        "Source",
+        "PixelLab",
+        "Current",
+        "concave",
+        "hue"
+      ]
+    },
+    {
+      "id": "real-inventory-k8",
+      "candidateRow": "real-inventory-auto-oklab-k8",
+      "baselineEquality": "Visible RGB and all alpha bytes; fully transparent RGB normalized to zero because indexed PNG permits hidden palette RGB.",
+      "metrics": [
+        {
+          "label": "Source",
+          "file": "bench/important-colors-review/fixtures/real-inventory.png",
+          "rgbaSha256": "362ad811dff608d8bc0def0e6bae2f8fc0e77d9f330cbaf66ea8418ef31bfcbc",
+          "alphaWrong": 0,
+          "regions": {
+            "dungeon-wizard/purple-hood": {
+              "colors": {
+                "#9b4ca3": 45,
+                "#d176d0": 10
+              },
+              "channelRmse": 0
+            },
+            "dungeon-wizard/face": {
+              "colors": {
+                "#f7c282": 24,
+                "#bd6c4a": 1
+              },
+              "channelRmse": 0
+            },
+            "dungeon-archer/green-headband": {
+              "colors": {
+                "#25956a": 19,
+                "#43e1b3": 3
+              },
+              "channelRmse": 0
+            },
+            "dungeon-archer/face": {
+              "colors": {
+                "#f7c282": 15,
+                "#e19a65": 9
+              },
+              "channelRmse": 0
+            },
+            "dungeon-knight/face": {
+              "colors": {
+                "#e19a65": 9,
+                "#f7c282": 28
+              },
+              "channelRmse": 0
+            },
+            "dungeon-knight/metal": {
+              "colors": {
+                "#8b9bb4": 35,
+                "#c0cbdc": 14
+              },
+              "channelRmse": 0
+            },
+            "dungeon-potion/red-liquid": {
+              "colors": {
+                "#ff706d": 8,
+                "#e84537": 18
+              },
+              "channelRmse": 0
+            },
+            "dungeon-potion/stopper": {
+              "colors": {
+                "#bd6c4a": 4,
+                "#eaa56c": 4
+              },
+              "channelRmse": 0
+            },
+            "dungeon-neutral-shield/metal": {
+              "colors": {
+                "#8b9bb4": 10,
+                "#c0cbdc": 24
+              },
+              "channelRmse": 0
+            },
+            "town-water-bucket/water": {
+              "colors": {
+                "#76e4ff": 8,
+                "#009adc": 22
+              },
+              "channelRmse": 0
+            },
+            "town-water-bucket/bucket": {
+              "colors": {
+                "#bd6c4a": 15,
+                "#763b36": 35,
+                "#eaa56c": 16,
+                "#be6c49": 4,
+                "#eba66c": 12
+              },
+              "channelRmse": 0
+            },
+            "platformer-pilot/green-visor": {
+              "colors": {
+                "#86f6bb": 20,
+                "#5ad28c": 76,
+                "#34995e": 6
+              },
+              "channelRmse": 0
+            },
+            "platformer-pilot/eyes": {
+              "colors": {
+                "#434a5f": 10
+              },
+              "channelRmse": 0
+            },
+            "platformer-axe/red-fastening": {
+              "colors": {
+                "#fb6338": 6
+              },
+              "channelRmse": 0
+            },
+            "platformer-axe/blade": {
+              "colors": {
+                "#dce1e7": 16,
+                "#959ab1": 8
+              },
+              "channelRmse": 0
+            }
+          }
+        },
+        {
+          "label": "PixelLab",
+          "file": "bench/important-colors-service/service/real-inventory-k8-0.png",
+          "rgbaSha256": "61b5fe5f849d740d55fb0520f423421ac4624c0d8e6b63a46a55d85ad678982f",
+          "alphaWrong": 0,
+          "regions": {
+            "dungeon-wizard/purple-hood": {
+              "colors": {
+                "#a554ab": 55
+              },
+              "channelRmse": 18.235828869164532
+            },
+            "dungeon-wizard/face": {
+              "colors": {
+                "#f1b375": 24,
+                "#ce6c4d": 1
+              },
+              "channelRmse": 11.898459284013764
+            },
+            "dungeon-archer/green-headband": {
+              "colors": {
+                "#367052": 19,
+                "#63da97": 3
+              },
+              "channelRmse": 26.97276965812564
+            },
+            "dungeon-archer/face": {
+              "colors": {
+                "#f1b375": 24
+              },
+              "channelRmse": 15.221968773234734
+            },
+            "dungeon-knight/face": {
+              "colors": {
+                "#f1b375": 37
+              },
+              "channelRmse": 14.165368249984102
+            },
+            "dungeon-knight/metal": {
+              "colors": {
+                "#b4cbdf": 49
+              },
+              "channelRmse": 37.46490421206289
+            },
+            "dungeon-potion/red-liquid": {
+              "colors": {
+                "#ce6c4d": 26
+              },
+              "channelRmse": 31.17074565382395
+            },
+            "dungeon-potion/stopper": {
+              "colors": {
+                "#ce6c4d": 4,
+                "#f1b375": 4
+              },
+              "channelRmse": 10.198039027185569
+            },
+            "dungeon-neutral-shield/metal": {
+              "colors": {
+                "#b4cbdf": 34
+              },
+              "channelRmse": 24.65686079600819
+            },
+            "town-water-bucket/water": {
+              "colors": {
+                "#b4cbdf": 30
+              },
+              "channelRmse": 94.8545084736502
+            },
+            "town-water-bucket/bucket": {
+              "colors": {
+                "#ce6c4d": 19,
+                "#472c37": 35,
+                "#f1b375": 28
+              },
+              "channelRmse": 20.10450339875544
+            },
+            "platformer-pilot/green-visor": {
+              "colors": {
+                "#63da97": 96,
+                "#367052": 6
+              },
+              "channelRmse": 17.83090509398186
+            },
+            "platformer-pilot/eyes": {
+              "colors": {
+                "#472c37": 10
+              },
+              "channelRmse": 28.959742171964628
+            },
+            "platformer-axe/red-fastening": {
+              "colors": {
+                "#ce6c4d": 6
+              },
+              "channelRmse": 29.13760456866693
+            },
+            "platformer-axe/blade": {
+              "colors": {
+                "#b4cbdf": 24
+              },
+              "channelRmse": 32.95451410656816
+            }
+          }
+        },
+        {
+          "label": "Current",
+          "file": "bench/important-colors-service/ours/real-inventory-k8-oklab-0.png",
+          "rgbaSha256": "10d3269f1e291bc6066bae802940cb4f81c91716e1c0072a40bdf195f5cc3b5c",
+          "alphaWrong": 0,
+          "regions": {
+            "dungeon-wizard/purple-hood": {
+              "colors": {
+                "#6f3e43": 45,
+                "#8b9bb4": 10
+              },
+              "channelRmse": 59.34950409534722
+            },
+            "dungeon-wizard/face": {
+              "colors": {
+                "#f4ac66": 24,
+                "#be6c49": 1
+              },
+              "channelRmse": 20.215505600075073
+            },
+            "dungeon-archer/green-headband": {
+              "colors": {
+                "#346547": 19,
+                "#5ad28c": 3
+              },
+              "channelRmse": 34.41084219553571
+            },
+            "dungeon-archer/face": {
+              "colors": {
+                "#f4ac66": 24
+              },
+              "channelRmse": 18.75611011555079
+            },
+            "dungeon-knight/face": {
+              "colors": {
+                "#f4ac66": 37
+              },
+              "channelRmse": 19.43573378464903
+            },
+            "dungeon-knight/metal": {
+              "colors": {
+                "#8b9bb4": 35,
+                "#bedef1": 14
+              },
+              "channelRmse": 8.761387148271943
+            },
+            "dungeon-potion/red-liquid": {
+              "colors": {
+                "#be6c49": 26
+              },
+              "channelRmse": 37.42650918458185
+            },
+            "dungeon-potion/stopper": {
+              "colors": {
+                "#be6c49": 4,
+                "#f4ac66": 4
+              },
+              "channelRmse": 5.582711408148075
+            },
+            "dungeon-neutral-shield/metal": {
+              "colors": {
+                "#8b9bb4": 10,
+                "#bedef1": 24
+              },
+              "channelRmse": 13.771240279057272
+            },
+            "town-water-bucket/water": {
+              "colors": {
+                "#bedef1": 8,
+                "#8b9bb4": 22
+              },
+              "channelRmse": 74.8043373668191
+            },
+            "town-water-bucket/bucket": {
+              "colors": {
+                "#be6c49": 19,
+                "#6f3e43": 35,
+                "#f4ac66": 28
+              },
+              "channelRmse": 7.205181062703523
+            },
+            "platformer-pilot/green-visor": {
+              "colors": {
+                "#5ad28c": 96,
+                "#346547": 6
+              },
+              "channelRmse": 20.469808789908733
+            },
+            "platformer-pilot/eyes": {
+              "colors": {
+                "#6f3e43": 10
+              },
+              "channelRmse": 30.89768060335058
+            },
+            "platformer-axe/red-fastening": {
+              "colors": {
+                "#be6c49": 6
+              },
+              "channelRmse": 36.927857596490306
+            },
+            "platformer-axe/blade": {
+              "colors": {
+                "#bedef1": 16,
+                "#8b9bb4": 8
+              },
+              "channelRmse": 15.376750126227728
+            }
+          }
+        },
+        {
+          "label": "concave",
+          "file": "bench/important-colors-spike/outputs/real-inventory-auto-oklab-k8-concave-f0.png",
+          "rgbaSha256": "49a5b6c325f5ca8673ff6e5d3acd43bacef416b9ebd87579e8dcbe683ef66ebb",
+          "alphaWrong": 0,
+          "regions": {
+            "dungeon-wizard/purple-hood": {
+              "colors": {
+                "#6f3e43": 45,
+                "#8b9bb4": 10
+              },
+              "channelRmse": 59.34950409534722
+            },
+            "dungeon-wizard/face": {
+              "colors": {
+                "#f4ac66": 24,
+                "#be6c49": 1
+              },
+              "channelRmse": 20.215505600075073
+            },
+            "dungeon-archer/green-headband": {
+              "colors": {
+                "#346547": 19,
+                "#5ad28c": 3
+              },
+              "channelRmse": 34.41084219553571
+            },
+            "dungeon-archer/face": {
+              "colors": {
+                "#f4ac66": 24
+              },
+              "channelRmse": 18.75611011555079
+            },
+            "dungeon-knight/face": {
+              "colors": {
+                "#f4ac66": 37
+              },
+              "channelRmse": 19.43573378464903
+            },
+            "dungeon-knight/metal": {
+              "colors": {
+                "#8b9bb4": 35,
+                "#bedef1": 14
+              },
+              "channelRmse": 8.761387148271943
+            },
+            "dungeon-potion/red-liquid": {
+              "colors": {
+                "#be6c49": 26
+              },
+              "channelRmse": 37.42650918458185
+            },
+            "dungeon-potion/stopper": {
+              "colors": {
+                "#be6c49": 4,
+                "#f4ac66": 4
+              },
+              "channelRmse": 5.582711408148075
+            },
+            "dungeon-neutral-shield/metal": {
+              "colors": {
+                "#8b9bb4": 10,
+                "#bedef1": 24
+              },
+              "channelRmse": 13.771240279057272
+            },
+            "town-water-bucket/water": {
+              "colors": {
+                "#bedef1": 8,
+                "#8b9bb4": 22
+              },
+              "channelRmse": 74.8043373668191
+            },
+            "town-water-bucket/bucket": {
+              "colors": {
+                "#be6c49": 19,
+                "#6f3e43": 35,
+                "#f4ac66": 28
+              },
+              "channelRmse": 7.205181062703523
+            },
+            "platformer-pilot/green-visor": {
+              "colors": {
+                "#5ad28c": 96,
+                "#346547": 6
+              },
+              "channelRmse": 20.469808789908733
+            },
+            "platformer-pilot/eyes": {
+              "colors": {
+                "#6f3e43": 10
+              },
+              "channelRmse": 30.89768060335058
+            },
+            "platformer-axe/red-fastening": {
+              "colors": {
+                "#be6c49": 6
+              },
+              "channelRmse": 36.927857596490306
+            },
+            "platformer-axe/blade": {
+              "colors": {
+                "#bedef1": 16,
+                "#8b9bb4": 8
+              },
+              "channelRmse": 15.376750126227728
+            }
+          }
+        },
+        {
+          "label": "hue",
+          "file": "bench/important-colors-spike/outputs/real-inventory-auto-oklab-k8-hue-f0.png",
+          "rgbaSha256": "d4c04d560cf22eeea5b14098b75068956170e68c551a8275eb388bacd80819aa",
+          "alphaWrong": 0,
+          "regions": {
+            "dungeon-wizard/purple-hood": {
+              "colors": {
+                "#9b4ca3": 55
+              },
+              "channelRmse": 20.158463144883747
+            },
+            "dungeon-wizard/face": {
+              "colors": {
+                "#f4ac66": 24,
+                "#be6c49": 1
+              },
+              "channelRmse": 20.215505600075073
+            },
+            "dungeon-archer/green-headband": {
+              "colors": {
+                "#8b9bb4": 19,
+                "#5ad28c": 3
+              },
+              "channelRmse": 68.4491627325556
+            },
+            "dungeon-archer/face": {
+              "colors": {
+                "#f4ac66": 24
+              },
+              "channelRmse": 18.75611011555079
+            },
+            "dungeon-knight/face": {
+              "colors": {
+                "#f4ac66": 37
+              },
+              "channelRmse": 19.43573378464903
+            },
+            "dungeon-knight/metal": {
+              "colors": {
+                "#8b9bb4": 35,
+                "#bedef1": 14
+              },
+              "channelRmse": 8.761387148271943
+            },
+            "dungeon-potion/red-liquid": {
+              "colors": {
+                "#be6c49": 26
+              },
+              "channelRmse": 37.42650918458185
+            },
+            "dungeon-potion/stopper": {
+              "colors": {
+                "#be6c49": 4,
+                "#f4ac66": 4
+              },
+              "channelRmse": 5.582711408148075
+            },
+            "dungeon-neutral-shield/metal": {
+              "colors": {
+                "#8b9bb4": 10,
+                "#bedef1": 24
+              },
+              "channelRmse": 13.771240279057272
+            },
+            "town-water-bucket/water": {
+              "colors": {
+                "#bedef1": 8,
+                "#8b9bb4": 22
+              },
+              "channelRmse": 74.8043373668191
+            },
+            "town-water-bucket/bucket": {
+              "colors": {
+                "#be6c49": 19,
+                "#434a5f": 35,
+                "#f4ac66": 28
+              },
+              "channelRmse": 25.70715315971871
+            },
+            "platformer-pilot/green-visor": {
+              "colors": {
+                "#5ad28c": 96,
+                "#8b9bb4": 6
+              },
+              "channelRmse": 25.478043860434976
+            },
+            "platformer-pilot/eyes": {
+              "colors": {
+                "#434a5f": 10
+              },
+              "channelRmse": 0
+            },
+            "platformer-axe/red-fastening": {
+              "colors": {
+                "#be6c49": 6
+              },
+              "channelRmse": 36.927857596490306
+            },
+            "platformer-axe/blade": {
+              "colors": {
+                "#bedef1": 16,
+                "#8b9bb4": 8
+              },
+              "channelRmse": 15.376750126227728
+            }
+          }
+        }
+      ],
+      "sheetColumns": [
+        "Source",
+        "PixelLab",
+        "Current",
+        "concave",
+        "hue"
+      ]
+    },
+    {
+      "id": "real-inventory-edg8",
+      "candidateRow": "real-inventory-edg8-oklab-k8",
+      "baselineEquality": "Visible RGB and all alpha bytes; fully transparent RGB normalized to zero because indexed PNG permits hidden palette RGB.",
+      "metrics": [
+        {
+          "label": "Source",
+          "file": "bench/important-colors-review/fixtures/real-inventory.png",
+          "rgbaSha256": "362ad811dff608d8bc0def0e6bae2f8fc0e77d9f330cbaf66ea8418ef31bfcbc",
+          "alphaWrong": 0,
+          "regions": {
+            "dungeon-wizard/purple-hood": {
+              "colors": {
+                "#9b4ca3": 45,
+                "#d176d0": 10
+              },
+              "channelRmse": 0
+            },
+            "dungeon-wizard/face": {
+              "colors": {
+                "#f7c282": 24,
+                "#bd6c4a": 1
+              },
+              "channelRmse": 0
+            },
+            "dungeon-archer/green-headband": {
+              "colors": {
+                "#25956a": 19,
+                "#43e1b3": 3
+              },
+              "channelRmse": 0
+            },
+            "dungeon-archer/face": {
+              "colors": {
+                "#f7c282": 15,
+                "#e19a65": 9
+              },
+              "channelRmse": 0
+            },
+            "dungeon-knight/face": {
+              "colors": {
+                "#e19a65": 9,
+                "#f7c282": 28
+              },
+              "channelRmse": 0
+            },
+            "dungeon-knight/metal": {
+              "colors": {
+                "#8b9bb4": 35,
+                "#c0cbdc": 14
+              },
+              "channelRmse": 0
+            },
+            "dungeon-potion/red-liquid": {
+              "colors": {
+                "#ff706d": 8,
+                "#e84537": 18
+              },
+              "channelRmse": 0
+            },
+            "dungeon-potion/stopper": {
+              "colors": {
+                "#bd6c4a": 4,
+                "#eaa56c": 4
+              },
+              "channelRmse": 0
+            },
+            "dungeon-neutral-shield/metal": {
+              "colors": {
+                "#8b9bb4": 10,
+                "#c0cbdc": 24
+              },
+              "channelRmse": 0
+            },
+            "town-water-bucket/water": {
+              "colors": {
+                "#76e4ff": 8,
+                "#009adc": 22
+              },
+              "channelRmse": 0
+            },
+            "town-water-bucket/bucket": {
+              "colors": {
+                "#bd6c4a": 15,
+                "#763b36": 35,
+                "#eaa56c": 16,
+                "#be6c49": 4,
+                "#eba66c": 12
+              },
+              "channelRmse": 0
+            },
+            "platformer-pilot/green-visor": {
+              "colors": {
+                "#86f6bb": 20,
+                "#5ad28c": 76,
+                "#34995e": 6
+              },
+              "channelRmse": 0
+            },
+            "platformer-pilot/eyes": {
+              "colors": {
+                "#434a5f": 10
+              },
+              "channelRmse": 0
+            },
+            "platformer-axe/red-fastening": {
+              "colors": {
+                "#fb6338": 6
+              },
+              "channelRmse": 0
+            },
+            "platformer-axe/blade": {
+              "colors": {
+                "#dce1e7": 16,
+                "#959ab1": 8
+              },
+              "channelRmse": 0
+            }
+          }
+        },
+        {
+          "label": "PixelLab",
+          "file": "bench/important-colors-service/service/real-inventory-edg8-0.png",
+          "rgbaSha256": "316500a286bb3e5d3779a0cd1cd0427ff55eb7a41e894ba9ba08df9f18eb1732",
+          "alphaWrong": 0,
+          "regions": {
+            "dungeon-wizard/purple-hood": {
+              "colors": {
+                "#7b53ad": 55
+              },
+              "channelRmse": 30.27600309876394
+            },
+            "dungeon-wizard/face": {
+              "colors": {
+                "#da7d22": 25
+              },
+              "channelRmse": 69.12423598131122
+            },
+            "dungeon-archer/green-headband": {
+              "colors": {
+                "#28c641": 22
+              },
+              "channelRmse": 42.833539676427876
+            },
+            "dungeon-archer/face": {
+              "colors": {
+                "#da7d22": 24
+              },
+              "channelRmse": 61.314421903279275
+            },
+            "dungeon-knight/face": {
+              "colors": {
+                "#da7d22": 37
+              },
+              "channelRmse": 64.60657094296995
+            },
+            "dungeon-knight/metal": {
+              "colors": {
+                "#2d93dd": 35,
+                "#fdfdf8": 14
+              },
+              "channelRmse": 56.44845942475819
+            },
+            "dungeon-potion/red-liquid": {
+              "colors": {
+                "#d32734": 26
+              },
+              "channelRmse": 37.28132824749456
+            },
+            "dungeon-potion/stopper": {
+              "colors": {
+                "#da7d22": 8
+              },
+              "channelRmse": 40.95119045888654
+            },
+            "dungeon-neutral-shield/metal": {
+              "colors": {
+                "#2d93dd": 10,
+                "#fdfdf8": 24
+              },
+              "channelRmse": 51.82266140689918
+            },
+            "town-water-bucket/water": {
+              "colors": {
+                "#fdfdf8": 8,
+                "#2d93dd": 22
+              },
+              "channelRmse": 46.76679733885284
+            },
+            "town-water-bucket/bucket": {
+              "colors": {
+                "#da7d22": 47,
+                "#d32734": 35
+              },
+              "channelRmse": 48.34013128532986
+            },
+            "platformer-pilot/green-visor": {
+              "colors": {
+                "#28c641": 102
+              },
+              "channelRmse": 61.75494476245914
+            },
+            "platformer-pilot/eyes": {
+              "colors": {
+                "#1b1c33": 10
+              },
+              "channelRmse": 43.40506882842141
+            },
+            "platformer-axe/red-fastening": {
+              "colors": {
+                "#d32734": 6
+              },
+              "channelRmse": 41.697322056298376
+            },
+            "platformer-axe/blade": {
+              "colors": {
+                "#fdfdf8": 16,
+                "#2d93dd": 8
+              },
+              "channelRmse": 43.62084109434134
+            }
+          }
+        },
+        {
+          "label": "Current",
+          "file": "bench/important-colors-service/ours/real-inventory-edg8-oklab-0.png",
+          "rgbaSha256": "cff989dc8364ddca029c495ca12b8d12435909759b6b2608f27695ef1dc6ead6",
+          "alphaWrong": 0,
+          "regions": {
+            "dungeon-wizard/purple-hood": {
+              "colors": {
+                "#7b53ad": 55
+              },
+              "channelRmse": 30.27600309876394
+            },
+            "dungeon-wizard/face": {
+              "colors": {
+                "#e6da29": 24,
+                "#da7d22": 1
+              },
+              "channelRmse": 53.3659067195527
+            },
+            "dungeon-archer/green-headband": {
+              "colors": {
+                "#28c641": 22
+              },
+              "channelRmse": 42.833539676427876
+            },
+            "dungeon-archer/face": {
+              "colors": {
+                "#e6da29": 15,
+                "#da7d22": 9
+              },
+              "channelRmse": 50.02790887761217
+            },
+            "dungeon-knight/face": {
+              "colors": {
+                "#da7d22": 9,
+                "#e6da29": 28
+              },
+              "channelRmse": 51.5016836950349
+            },
+            "dungeon-knight/metal": {
+              "colors": {
+                "#2d93dd": 35,
+                "#fdfdf8": 14
+              },
+              "channelRmse": 56.44845942475819
+            },
+            "dungeon-potion/red-liquid": {
+              "colors": {
+                "#da7d22": 8,
+                "#d32734": 18
+              },
+              "channelRmse": 32.34509434528099
+            },
+            "dungeon-potion/stopper": {
+              "colors": {
+                "#da7d22": 8
+              },
+              "channelRmse": 40.95119045888654
+            },
+            "dungeon-neutral-shield/metal": {
+              "colors": {
+                "#2d93dd": 10,
+                "#fdfdf8": 24
+              },
+              "channelRmse": 51.82266140689918
+            },
+            "town-water-bucket/water": {
+              "colors": {
+                "#fdfdf8": 8,
+                "#2d93dd": 22
+              },
+              "channelRmse": 46.76679733885284
+            },
+            "town-water-bucket/bucket": {
+              "colors": {
+                "#da7d22": 47,
+                "#d32734": 35
+              },
+              "channelRmse": 48.34013128532986
+            },
+            "platformer-pilot/green-visor": {
+              "colors": {
+                "#e6da29": 20,
+                "#28c641": 82
+              },
+              "channelRmse": 64.49461648506451
+            },
+            "platformer-pilot/eyes": {
+              "colors": {
+                "#7b53ad": 10
+              },
+              "channelRmse": 55.680636969536664
+            },
+            "platformer-axe/red-fastening": {
+              "colors": {
+                "#da7d22": 6
+              },
+              "channelRmse": 27.380041392712805
+            },
+            "platformer-axe/blade": {
+              "colors": {
+                "#fdfdf8": 16,
+                "#2d93dd": 8
+              },
+              "channelRmse": 43.62084109434134
+            }
+          }
+        },
+        {
+          "label": "concave",
+          "file": "bench/important-colors-service/ours/real-inventory-edg8-oklab-0.png",
+          "rgbaSha256": "cff989dc8364ddca029c495ca12b8d12435909759b6b2608f27695ef1dc6ead6",
+          "alphaWrong": 0,
+          "regions": {
+            "dungeon-wizard/purple-hood": {
+              "colors": {
+                "#7b53ad": 55
+              },
+              "channelRmse": 30.27600309876394
+            },
+            "dungeon-wizard/face": {
+              "colors": {
+                "#e6da29": 24,
+                "#da7d22": 1
+              },
+              "channelRmse": 53.3659067195527
+            },
+            "dungeon-archer/green-headband": {
+              "colors": {
+                "#28c641": 22
+              },
+              "channelRmse": 42.833539676427876
+            },
+            "dungeon-archer/face": {
+              "colors": {
+                "#e6da29": 15,
+                "#da7d22": 9
+              },
+              "channelRmse": 50.02790887761217
+            },
+            "dungeon-knight/face": {
+              "colors": {
+                "#da7d22": 9,
+                "#e6da29": 28
+              },
+              "channelRmse": 51.5016836950349
+            },
+            "dungeon-knight/metal": {
+              "colors": {
+                "#2d93dd": 35,
+                "#fdfdf8": 14
+              },
+              "channelRmse": 56.44845942475819
+            },
+            "dungeon-potion/red-liquid": {
+              "colors": {
+                "#da7d22": 8,
+                "#d32734": 18
+              },
+              "channelRmse": 32.34509434528099
+            },
+            "dungeon-potion/stopper": {
+              "colors": {
+                "#da7d22": 8
+              },
+              "channelRmse": 40.95119045888654
+            },
+            "dungeon-neutral-shield/metal": {
+              "colors": {
+                "#2d93dd": 10,
+                "#fdfdf8": 24
+              },
+              "channelRmse": 51.82266140689918
+            },
+            "town-water-bucket/water": {
+              "colors": {
+                "#fdfdf8": 8,
+                "#2d93dd": 22
+              },
+              "channelRmse": 46.76679733885284
+            },
+            "town-water-bucket/bucket": {
+              "colors": {
+                "#da7d22": 47,
+                "#d32734": 35
+              },
+              "channelRmse": 48.34013128532986
+            },
+            "platformer-pilot/green-visor": {
+              "colors": {
+                "#e6da29": 20,
+                "#28c641": 82
+              },
+              "channelRmse": 64.49461648506451
+            },
+            "platformer-pilot/eyes": {
+              "colors": {
+                "#7b53ad": 10
+              },
+              "channelRmse": 55.680636969536664
+            },
+            "platformer-axe/red-fastening": {
+              "colors": {
+                "#da7d22": 6
+              },
+              "channelRmse": 27.380041392712805
+            },
+            "platformer-axe/blade": {
+              "colors": {
+                "#fdfdf8": 16,
+                "#2d93dd": 8
+              },
+              "channelRmse": 43.62084109434134
+            }
+          }
+        },
+        {
+          "label": "hue",
+          "file": "bench/important-colors-service/ours/real-inventory-edg8-oklab-0.png",
+          "rgbaSha256": "cff989dc8364ddca029c495ca12b8d12435909759b6b2608f27695ef1dc6ead6",
+          "alphaWrong": 0,
+          "regions": {
+            "dungeon-wizard/purple-hood": {
+              "colors": {
+                "#7b53ad": 55
+              },
+              "channelRmse": 30.27600309876394
+            },
+            "dungeon-wizard/face": {
+              "colors": {
+                "#e6da29": 24,
+                "#da7d22": 1
+              },
+              "channelRmse": 53.3659067195527
+            },
+            "dungeon-archer/green-headband": {
+              "colors": {
+                "#28c641": 22
+              },
+              "channelRmse": 42.833539676427876
+            },
+            "dungeon-archer/face": {
+              "colors": {
+                "#e6da29": 15,
+                "#da7d22": 9
+              },
+              "channelRmse": 50.02790887761217
+            },
+            "dungeon-knight/face": {
+              "colors": {
+                "#da7d22": 9,
+                "#e6da29": 28
+              },
+              "channelRmse": 51.5016836950349
+            },
+            "dungeon-knight/metal": {
+              "colors": {
+                "#2d93dd": 35,
+                "#fdfdf8": 14
+              },
+              "channelRmse": 56.44845942475819
+            },
+            "dungeon-potion/red-liquid": {
+              "colors": {
+                "#da7d22": 8,
+                "#d32734": 18
+              },
+              "channelRmse": 32.34509434528099
+            },
+            "dungeon-potion/stopper": {
+              "colors": {
+                "#da7d22": 8
+              },
+              "channelRmse": 40.95119045888654
+            },
+            "dungeon-neutral-shield/metal": {
+              "colors": {
+                "#2d93dd": 10,
+                "#fdfdf8": 24
+              },
+              "channelRmse": 51.82266140689918
+            },
+            "town-water-bucket/water": {
+              "colors": {
+                "#fdfdf8": 8,
+                "#2d93dd": 22
+              },
+              "channelRmse": 46.76679733885284
+            },
+            "town-water-bucket/bucket": {
+              "colors": {
+                "#da7d22": 47,
+                "#d32734": 35
+              },
+              "channelRmse": 48.34013128532986
+            },
+            "platformer-pilot/green-visor": {
+              "colors": {
+                "#e6da29": 20,
+                "#28c641": 82
+              },
+              "channelRmse": 64.49461648506451
+            },
+            "platformer-pilot/eyes": {
+              "colors": {
+                "#7b53ad": 10
+              },
+              "channelRmse": 55.680636969536664
+            },
+            "platformer-axe/red-fastening": {
+              "colors": {
+                "#da7d22": 6
+              },
+              "channelRmse": 27.380041392712805
+            },
+            "platformer-axe/blade": {
+              "colors": {
+                "#fdfdf8": 16,
+                "#2d93dd": 8
+              },
+              "channelRmse": 43.62084109434134
+            }
+          }
+        }
+      ],
+      "sheetColumns": [
+        "Source",
+        "PixelLab",
+        "Current",
+        "concave",
+        "hue"
+      ]
+    },
+    {
+      "id": "town-water-bucket-k4",
+      "candidateRow": "town-water-bucket-auto-oklab-k4",
+      "baselineEquality": "Visible RGB and all alpha bytes; fully transparent RGB normalized to zero because indexed PNG permits hidden palette RGB.",
+      "metrics": [
+        {
+          "label": "Source",
+          "file": "bench/important-colors-review/fixtures/town-water-bucket.png",
+          "rgbaSha256": "da25bcc3803c7c7fc9cb57a557c93023441c173b683fba3cd9afba49732a264d",
+          "alphaWrong": 0,
+          "regions": {
+            "town-water-bucket/water": {
+              "colors": {
+                "#76e4ff": 8,
+                "#009adc": 22
+              },
+              "channelRmse": 0
+            },
+            "town-water-bucket/bucket": {
+              "colors": {
+                "#bd6c4a": 15,
+                "#763b36": 35,
+                "#eaa56c": 16,
+                "#be6c49": 4,
+                "#eba66c": 12
+              },
+              "channelRmse": 0
+            }
+          }
+        },
+        {
+          "label": "PixelLab",
+          "file": "bench/important-colors-service/service/town-water-bucket-k4-0.png",
+          "rgbaSha256": "abb7973df644b3521fb60da23c6350bc52b9ac1df198e1ce24e3e86fcd6917bb",
+          "alphaWrong": 0,
+          "regions": {
+            "town-water-bucket/water": {
+              "colors": {
+                "#98b0c7": 8,
+                "#009adc": 22
+              },
+              "channelRmse": 24.93725459361288
+            },
+            "town-water-bucket/bucket": {
+              "colors": {
+                "#d88e5e": 47,
+                "#4e2c34": 35
+              },
+              "channelRmse": 23.66449091109506
+            }
+          }
+        },
+        {
+          "label": "Current",
+          "file": "bench/important-colors-service/ours/town-water-bucket-k4-oklab-0.png",
+          "rgbaSha256": "dd23b6104e2777df03e9a3861589c7ac3571186c597f6ffd724b8d8798755da8",
+          "alphaWrong": 0,
+          "regions": {
+            "town-water-bucket/water": {
+              "colors": {
+                "#8c9cb5": 30
+              },
+              "channelRmse": 78.45040896430474
+            },
+            "town-water-bucket/bucket": {
+              "colors": {
+                "#eaa56c": 47,
+                "#763b36": 35
+              },
+              "channelRmse": 22.279999416152144
+            }
+          }
+        },
+        {
+          "label": "concave",
+          "file": "bench/important-colors-spike/outputs/town-water-bucket-auto-oklab-k4-concave-f0.png",
+          "rgbaSha256": "15c9d091079768b4ff265618a0b3cfbb4679d2b141bdddbb474922e107f0e742",
+          "alphaWrong": 0,
+          "regions": {
+            "town-water-bucket/water": {
+              "colors": {
+                "#c1ccdd": 8,
+                "#8c9cb5": 22
+              },
+              "channelRmse": 76.27479560408173
+            },
+            "town-water-bucket/bucket": {
+              "colors": {
+                "#8c9cb5": 19,
+                "#763b36": 35,
+                "#c1ccdd": 28
+              },
+              "channelRmse": 55.41572375259923
+            }
+          }
+        },
+        {
+          "label": "hue",
+          "file": "bench/important-colors-spike/outputs/town-water-bucket-auto-oklab-k4-hue-f0.png",
+          "rgbaSha256": "9f4618f571af11c755d81a0df12521ed09c59f4ca91415d1a2c42f3039c4f971",
+          "alphaWrong": 0,
+          "regions": {
+            "town-water-bucket/water": {
+              "colors": {
+                "#8c9cb5": 30
+              },
+              "channelRmse": 78.45040896430474
+            },
+            "town-water-bucket/bucket": {
+              "colors": {
+                "#eaa56c": 47,
+                "#763b36": 35
+              },
+              "channelRmse": 22.279999416152144
+            }
+          }
+        }
+      ],
+      "sheetColumns": [
+        "Source",
+        "PixelLab",
+        "Current",
+        "concave",
+        "hue"
+      ]
+    },
+    {
+      "id": "town-water-bucket-k8",
+      "candidateRow": "town-water-bucket-auto-oklab-k8",
+      "baselineEquality": "Visible RGB and all alpha bytes; fully transparent RGB normalized to zero because indexed PNG permits hidden palette RGB.",
+      "metrics": [
+        {
+          "label": "Source",
+          "file": "bench/important-colors-review/fixtures/town-water-bucket.png",
+          "rgbaSha256": "da25bcc3803c7c7fc9cb57a557c93023441c173b683fba3cd9afba49732a264d",
+          "alphaWrong": 0,
+          "regions": {
+            "town-water-bucket/water": {
+              "colors": {
+                "#76e4ff": 8,
+                "#009adc": 22
+              },
+              "channelRmse": 0
+            },
+            "town-water-bucket/bucket": {
+              "colors": {
+                "#bd6c4a": 15,
+                "#763b36": 35,
+                "#eaa56c": 16,
+                "#be6c49": 4,
+                "#eba66c": 12
+              },
+              "channelRmse": 0
+            }
+          }
+        },
+        {
+          "label": "PixelLab",
+          "file": "bench/important-colors-service/service/town-water-bucket-k8-0.png",
+          "rgbaSha256": "fefcdff08f34832ec9188b4a89a7c2a4c9038626dac25ec28df90f115adb77f7",
+          "alphaWrong": 0,
+          "regions": {
+            "town-water-bucket/water": {
+              "colors": {
+                "#76e4ff": 8,
+                "#009adc": 22
+              },
+              "channelRmse": 0
+            },
+            "town-water-bucket/bucket": {
+              "colors": {
+                "#bd6c4a": 19,
+                "#763b36": 35,
+                "#eaa56c": 28
+              },
+              "channelRmse": 0.3606678538669729
+            }
+          }
+        },
+        {
+          "label": "Current",
+          "file": "bench/important-colors-service/ours/town-water-bucket-k8-oklab-0.png",
+          "rgbaSha256": "0f51f15d6ac7cab60524b9176a3d65af4339aab58680251c94739674bfbe7e6d",
+          "alphaWrong": 0,
+          "regions": {
+            "town-water-bucket/water": {
+              "colors": {
+                "#c1ccdd": 8,
+                "#009adc": 22
+              },
+              "channelRmse": 25.572554732672987
+            },
+            "town-water-bucket/bucket": {
+              "colors": {
+                "#bd6c4a": 19,
+                "#763b36": 35,
+                "#eaa56c": 28
+              },
+              "channelRmse": 0.3606678538669729
+            }
+          }
+        },
+        {
+          "label": "concave",
+          "file": "bench/important-colors-service/ours/town-water-bucket-k8-oklab-0.png",
+          "rgbaSha256": "0f51f15d6ac7cab60524b9176a3d65af4339aab58680251c94739674bfbe7e6d",
+          "alphaWrong": 0,
+          "regions": {
+            "town-water-bucket/water": {
+              "colors": {
+                "#c1ccdd": 8,
+                "#009adc": 22
+              },
+              "channelRmse": 25.572554732672987
+            },
+            "town-water-bucket/bucket": {
+              "colors": {
+                "#bd6c4a": 19,
+                "#763b36": 35,
+                "#eaa56c": 28
+              },
+              "channelRmse": 0.3606678538669729
+            }
+          }
+        },
+        {
+          "label": "hue",
+          "file": "bench/important-colors-service/ours/town-water-bucket-k8-oklab-0.png",
+          "rgbaSha256": "0f51f15d6ac7cab60524b9176a3d65af4339aab58680251c94739674bfbe7e6d",
+          "alphaWrong": 0,
+          "regions": {
+            "town-water-bucket/water": {
+              "colors": {
+                "#c1ccdd": 8,
+                "#009adc": 22
+              },
+              "channelRmse": 25.572554732672987
+            },
+            "town-water-bucket/bucket": {
+              "colors": {
+                "#bd6c4a": 19,
+                "#763b36": 35,
+                "#eaa56c": 28
+              },
+              "channelRmse": 0.3606678538669729
+            }
+          }
+        }
+      ],
+      "sheetColumns": [
+        "Source",
+        "PixelLab",
+        "Current",
+        "concave",
+        "hue"
+      ]
+    },
+    {
+      "id": "town-water-bucket-edg8",
+      "candidateRow": "town-water-bucket-edg8-oklab-k8",
+      "baselineEquality": "Visible RGB and all alpha bytes; fully transparent RGB normalized to zero because indexed PNG permits hidden palette RGB.",
+      "metrics": [
+        {
+          "label": "Source",
+          "file": "bench/important-colors-review/fixtures/town-water-bucket.png",
+          "rgbaSha256": "da25bcc3803c7c7fc9cb57a557c93023441c173b683fba3cd9afba49732a264d",
+          "alphaWrong": 0,
+          "regions": {
+            "town-water-bucket/water": {
+              "colors": {
+                "#76e4ff": 8,
+                "#009adc": 22
+              },
+              "channelRmse": 0
+            },
+            "town-water-bucket/bucket": {
+              "colors": {
+                "#bd6c4a": 15,
+                "#763b36": 35,
+                "#eaa56c": 16,
+                "#be6c49": 4,
+                "#eba66c": 12
+              },
+              "channelRmse": 0
+            }
+          }
+        },
+        {
+          "label": "PixelLab",
+          "file": "bench/important-colors-service/service/town-water-bucket-edg8-0.png",
+          "rgbaSha256": "d63e214698467a872b862133c5ab54b62b49c005d667b957326b0cd33dcb1e37",
+          "alphaWrong": 0,
+          "regions": {
+            "town-water-bucket/water": {
+              "colors": {
+                "#fdfdf8": 8,
+                "#2d93dd": 22
+              },
+              "channelRmse": 46.76679733885284
+            },
+            "town-water-bucket/bucket": {
+              "colors": {
+                "#da7d22": 47,
+                "#d32734": 35
+              },
+              "channelRmse": 48.34013128532986
+            }
+          }
+        },
+        {
+          "label": "Current",
+          "file": "bench/important-colors-service/ours/town-water-bucket-edg8-oklab-0.png",
+          "rgbaSha256": "6129a9fb6f56985ba8715c4ed1612e615c824f53d3f73607bb435d093f26746f",
+          "alphaWrong": 0,
+          "regions": {
+            "town-water-bucket/water": {
+              "colors": {
+                "#fdfdf8": 8,
+                "#2d93dd": 22
+              },
+              "channelRmse": 46.76679733885284
+            },
+            "town-water-bucket/bucket": {
+              "colors": {
+                "#da7d22": 47,
+                "#d32734": 35
+              },
+              "channelRmse": 48.34013128532986
+            }
+          }
+        },
+        {
+          "label": "concave",
+          "file": "bench/important-colors-service/ours/town-water-bucket-edg8-oklab-0.png",
+          "rgbaSha256": "6129a9fb6f56985ba8715c4ed1612e615c824f53d3f73607bb435d093f26746f",
+          "alphaWrong": 0,
+          "regions": {
+            "town-water-bucket/water": {
+              "colors": {
+                "#fdfdf8": 8,
+                "#2d93dd": 22
+              },
+              "channelRmse": 46.76679733885284
+            },
+            "town-water-bucket/bucket": {
+              "colors": {
+                "#da7d22": 47,
+                "#d32734": 35
+              },
+              "channelRmse": 48.34013128532986
+            }
+          }
+        },
+        {
+          "label": "hue",
+          "file": "bench/important-colors-service/ours/town-water-bucket-edg8-oklab-0.png",
+          "rgbaSha256": "6129a9fb6f56985ba8715c4ed1612e615c824f53d3f73607bb435d093f26746f",
+          "alphaWrong": 0,
+          "regions": {
+            "town-water-bucket/water": {
+              "colors": {
+                "#fdfdf8": 8,
+                "#2d93dd": 22
+              },
+              "channelRmse": 46.76679733885284
+            },
+            "town-water-bucket/bucket": {
+              "colors": {
+                "#da7d22": 47,
+                "#d32734": 35
+              },
+              "channelRmse": 48.34013128532986
+            }
+          }
+        }
+      ],
+      "sheetColumns": [
+        "Source",
+        "PixelLab",
+        "Current",
+        "concave",
+        "hue"
+      ]
+    },
+    {
+      "id": "dungeon-archer-k4",
+      "candidateRow": "dungeon-archer-auto-oklab-k4",
+      "baselineEquality": "Visible RGB and all alpha bytes; fully transparent RGB normalized to zero because indexed PNG permits hidden palette RGB.",
+      "metrics": [
+        {
+          "label": "Source",
+          "file": "bench/important-colors-review/fixtures/dungeon-archer.png",
+          "rgbaSha256": "98198ed98f11e6d56079242da987c6b27a94cf9c9fe5931eeecd704f3676a8c8",
+          "alphaWrong": 0,
+          "regions": {
+            "dungeon-archer/green-headband": {
+              "colors": {
+                "#25956a": 19,
+                "#43e1b3": 3
+              },
+              "channelRmse": 0
+            },
+            "dungeon-archer/face": {
+              "colors": {
+                "#f7c282": 15,
+                "#e19a65": 9
+              },
+              "channelRmse": 0
+            }
+          }
+        },
+        {
+          "label": "PixelLab",
+          "file": "bench/important-colors-service/service/dungeon-archer-k4-0.png",
+          "rgbaSha256": "eb305595ad398a851f23383555e2c5b7495c1631ec8c04508ac08aad6aaad789",
+          "alphaWrong": 0,
+          "regions": {
+            "dungeon-archer/green-headband": {
+              "colors": {
+                "#299f74": 22
+              },
+              "channelRmse": 21.70986369874721
+            },
+            "dungeon-archer/face": {
+              "colors": {
+                "#d2895c": 24
+              },
+              "channelRmse": 36.56899871020079
+            }
+          }
+        },
+        {
+          "label": "Current",
+          "file": "bench/important-colors-service/ours/dungeon-archer-k4-oklab-0.png",
+          "rgbaSha256": "0e0bbba85268206d07f087b40b8595e5f02c75577e7f72756e0f88d2af4b2181",
+          "alphaWrong": 0,
+          "regions": {
+            "dungeon-archer/green-headband": {
+              "colors": {
+                "#25956a": 19,
+                "#f7c282": 3
+              },
+              "channelRmse": 40.31805370482874
+            },
+            "dungeon-archer/face": {
+              "colors": {
+                "#f7c282": 24
+              },
+              "channelRmse": 19.121323175972943
+            }
+          }
+        },
+        {
+          "label": "concave",
+          "file": "bench/important-colors-service/ours/dungeon-archer-k4-oklab-0.png",
+          "rgbaSha256": "0e0bbba85268206d07f087b40b8595e5f02c75577e7f72756e0f88d2af4b2181",
+          "alphaWrong": 0,
+          "regions": {
+            "dungeon-archer/green-headband": {
+              "colors": {
+                "#25956a": 19,
+                "#f7c282": 3
+              },
+              "channelRmse": 40.31805370482874
+            },
+            "dungeon-archer/face": {
+              "colors": {
+                "#f7c282": 24
+              },
+              "channelRmse": 19.121323175972943
+            }
+          }
+        },
+        {
+          "label": "hue",
+          "file": "bench/important-colors-service/ours/dungeon-archer-k4-oklab-0.png",
+          "rgbaSha256": "0e0bbba85268206d07f087b40b8595e5f02c75577e7f72756e0f88d2af4b2181",
+          "alphaWrong": 0,
+          "regions": {
+            "dungeon-archer/green-headband": {
+              "colors": {
+                "#25956a": 19,
+                "#f7c282": 3
+              },
+              "channelRmse": 40.31805370482874
+            },
+            "dungeon-archer/face": {
+              "colors": {
+                "#f7c282": 24
+              },
+              "channelRmse": 19.121323175972943
+            }
+          }
+        }
+      ],
+      "sheetColumns": [
+        "Source",
+        "PixelLab",
+        "Current",
+        "concave",
+        "hue"
+      ]
+    },
+    {
+      "id": "dungeon-archer-k8",
+      "candidateRow": "dungeon-archer-auto-oklab-k8",
+      "baselineEquality": "Visible RGB and all alpha bytes; fully transparent RGB normalized to zero because indexed PNG permits hidden palette RGB.",
+      "metrics": [
+        {
+          "label": "Source",
+          "file": "bench/important-colors-review/fixtures/dungeon-archer.png",
+          "rgbaSha256": "98198ed98f11e6d56079242da987c6b27a94cf9c9fe5931eeecd704f3676a8c8",
+          "alphaWrong": 0,
+          "regions": {
+            "dungeon-archer/green-headband": {
+              "colors": {
+                "#25956a": 19,
+                "#43e1b3": 3
+              },
+              "channelRmse": 0
+            },
+            "dungeon-archer/face": {
+              "colors": {
+                "#f7c282": 15,
+                "#e19a65": 9
+              },
+              "channelRmse": 0
+            }
+          }
+        },
+        {
+          "label": "PixelLab",
+          "file": "bench/important-colors-service/service/dungeon-archer-k8-0.png",
+          "rgbaSha256": "49bd2f7fe3a5a8221f341e47a7584b11595124f986324783b41c3930d084be38",
+          "alphaWrong": 0,
+          "regions": {
+            "dungeon-archer/green-headband": {
+              "colors": {
+                "#25956a": 19,
+                "#43e1b3": 3
+              },
+              "channelRmse": 0
+            },
+            "dungeon-archer/face": {
+              "colors": {
+                "#f7c282": 15,
+                "#e19a65": 9
+              },
+              "channelRmse": 0
+            }
+          }
+        },
+        {
+          "label": "Current",
+          "file": "bench/important-colors-service/ours/dungeon-archer-k8-oklab-0.png",
+          "rgbaSha256": "b6381cabc46bbe405ad34ba914470aabcb5b8d4ca9cfc737cbdb8db6203822ef",
+          "alphaWrong": 0,
+          "regions": {
+            "dungeon-archer/green-headband": {
+              "colors": {
+                "#25956a": 19,
+                "#43e1b3": 3
+              },
+              "channelRmse": 0
+            },
+            "dungeon-archer/face": {
+              "colors": {
+                "#f7c282": 15,
+                "#e19a65": 9
+              },
+              "channelRmse": 0
+            }
+          }
+        },
+        {
+          "label": "concave",
+          "file": "bench/important-colors-service/ours/dungeon-archer-k8-oklab-0.png",
+          "rgbaSha256": "b6381cabc46bbe405ad34ba914470aabcb5b8d4ca9cfc737cbdb8db6203822ef",
+          "alphaWrong": 0,
+          "regions": {
+            "dungeon-archer/green-headband": {
+              "colors": {
+                "#25956a": 19,
+                "#43e1b3": 3
+              },
+              "channelRmse": 0
+            },
+            "dungeon-archer/face": {
+              "colors": {
+                "#f7c282": 15,
+                "#e19a65": 9
+              },
+              "channelRmse": 0
+            }
+          }
+        },
+        {
+          "label": "hue",
+          "file": "bench/important-colors-service/ours/dungeon-archer-k8-oklab-0.png",
+          "rgbaSha256": "b6381cabc46bbe405ad34ba914470aabcb5b8d4ca9cfc737cbdb8db6203822ef",
+          "alphaWrong": 0,
+          "regions": {
+            "dungeon-archer/green-headband": {
+              "colors": {
+                "#25956a": 19,
+                "#43e1b3": 3
+              },
+              "channelRmse": 0
+            },
+            "dungeon-archer/face": {
+              "colors": {
+                "#f7c282": 15,
+                "#e19a65": 9
+              },
+              "channelRmse": 0
+            }
+          }
+        }
+      ],
+      "sheetColumns": [
+        "Source",
+        "PixelLab",
+        "Current",
+        "concave",
+        "hue"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-15T14:50:23.882Z",
+  "note": "Before paid outputs; six Auto K4/K8 and two fixed ENDESGA8. Independent real cohort; known synthetic knight retained separately.",
+  "casesSha256": "8bff0ef4919ed6ff34ac5e084c311c233de3af6f8f8fca771ca2ac94acce14ac",
+  "caseIds": [
+    "real-inventory-k4",
+    "real-inventory-k8",
+    "real-inventory-edg8",
+    "town-water-bucket-k4",
+    "town-water-bucket-k8",
+    "town-water-bucket-edg8",
+    "dungeon-archer-k4",
+    "dungeon-archer-k8"
+  ]
+}
