@@ -1,0 +1,232 @@
+[
+  {
+    "id": "sprite-generated16",
+    "status": 200,
+    "ms": 1059,
+    "request": {
+      "num_colors": 16
+    },
+    "input": "../palette-paired-comparison/input-sprite.png",
+    "inputPngSha256": "af9f42ef98a83e4702662c57776dabf58e1c1af615e211da2da6a2fd69c8b676",
+    "inputRgbaSha256": "96dd5eed411929de1b7bab0603472b52fda94ee50234ee0df25459a29bcd36d5",
+    "endpoint": "https://api.pixellab.ai/v2/reduce-colors",
+    "recordedAt": "2026-10-15T07:46:01.695Z",
+    "usage": {
+      "type": "generations",
+      "generations": 0.1
+    },
+    "reportedColors": 15,
+    "outputs": [
+      "native-sprite-generated16-0.png"
+    ],
+    "outputMetrics": [
+      {
+        "width": 64,
+        "height": 64,
+        "visible_colors": 15,
+        "transparent_pixels": 2522,
+        "alpha_histogram": {
+          "0": 2522,
+          "255": 1574
+        },
+        "color_histogram": {
+          "#3a130b": 291,
+          "#613720": 224,
+          "#b22029": 188,
+          "#dbbd8b": 155,
+          "#8e5f37": 142,
+          "#16231c": 124,
+          "#be803f": 120,
+          "#4d5a6a": 86,
+          "#eda726": 62,
+          "#fde43e": 55,
+          "#b0c2cd": 50,
+          "#f1e5c5": 34,
+          "#429030": 30,
+          "#11276a": 9,
+          "#2194ff": 4
+        },
+        "rgba_sha256": "10073ba2ed7ae343e7e151f8ed86e19a4ded6c7018a203e585a5660e7188ce30",
+        "pngSha256": "9b92e17502f4e6f5ed34dc77e0d01b5150b6f02c58dd83d6cbd46682fcb44896"
+      }
+    ]
+  },
+  {
+    "id": "armor-generated2",
+    "status": 200,
+    "ms": 277,
+    "request": {
+      "num_colors": 2
+    },
+    "input": "../palette-paired-comparison/input-armor.png",
+    "inputPngSha256": "4253720e7166feebf0292cbcdf8c6b46c5516f784ffa4c1dca45ef73652b349d",
+    "inputRgbaSha256": "cd02bf17c144402c23029c043f2bfd9bbdf330e099b8368d2d1997a05efa5834",
+    "endpoint": "https://api.pixellab.ai/v2/reduce-colors",
+    "recordedAt": "2026-10-15T07:46:01.984Z",
+    "usage": {
+      "type": "generations",
+      "generations": 0.1
+    },
+    "reportedColors": 2,
+    "outputs": [
+      "native-armor-generated2-0.png"
+    ],
+    "outputMetrics": [
+      {
+        "width": 16,
+        "height": 16,
+        "visible_colors": 2,
+        "transparent_pixels": 101,
+        "alpha_histogram": {
+          "0": 101,
+          "255": 155
+        },
+        "color_histogram": {
+          "#61666b": 93,
+          "#000000": 62
+        },
+        "rgba_sha256": "a1e31acb832ad4cf225bf884ea5bd00f39b35d6cb94051010fc458effa14cdd8",
+        "pngSha256": "c8bccd577d46d1e0f4e41702187f108c05a4ff60f46d2f3c378e48ce620df017"
+      }
+    ]
+  },
+  {
+    "id": "armor-generated4",
+    "status": 200,
+    "ms": 683,
+    "request": {
+      "num_colors": 4
+    },
+    "input": "../palette-paired-comparison/input-armor.png",
+    "inputPngSha256": "4253720e7166feebf0292cbcdf8c6b46c5516f784ffa4c1dca45ef73652b349d",
+    "inputRgbaSha256": "cd02bf17c144402c23029c043f2bfd9bbdf330e099b8368d2d1997a05efa5834",
+    "endpoint": "https://api.pixellab.ai/v2/reduce-colors",
+    "recordedAt": "2026-10-15T07:46:02.672Z",
+    "usage": {
+      "type": "generations",
+      "generations": 0.1
+    },
+    "reportedColors": 4,
+    "outputs": [
+      "native-armor-generated4-0.png"
+    ],
+    "outputMetrics": [
+      {
+        "width": 16,
+        "height": 16,
+        "visible_colors": 4,
+        "transparent_pixels": 101,
+        "alpha_histogram": {
+          "0": 101,
+          "255": 155
+        },
+        "color_histogram": {
+          "#000000": 49,
+          "#393230": 49,
+          "#6a737b": 45,
+          "#b4bec4": 12
+        },
+        "rgba_sha256": "16f04b06588d6d4b15c9a91785173580390a3fcf56dc0cb2116aca37c8e52bba",
+        "pngSha256": "2415957cb7fe7de6282a34510bd78577a3ca7a204e13bab030d61482baa495bd"
+      }
+    ]
+  },
+  {
+    "id": "armor-generated8",
+    "status": 200,
+    "ms": 277,
+    "request": {
+      "num_colors": 8
+    },
+    "input": "../palette-paired-comparison/input-armor.png",
+    "inputPngSha256": "4253720e7166feebf0292cbcdf8c6b46c5516f784ffa4c1dca45ef73652b349d",
+    "inputRgbaSha256": "cd02bf17c144402c23029c043f2bfd9bbdf330e099b8368d2d1997a05efa5834",
+    "endpoint": "https://api.pixellab.ai/v2/reduce-colors",
+    "recordedAt": "2026-10-15T07:46:02.956Z",
+    "usage": {
+      "type": "generations",
+      "generations": 0.1
+    },
+    "reportedColors": 8,
+    "outputs": [
+      "native-armor-generated8-0.png"
+    ],
+    "outputMetrics": [
+      {
+        "width": 16,
+        "height": 16,
+        "visible_colors": 8,
+        "transparent_pixels": 101,
+        "alpha_histogram": {
+          "0": 101,
+          "255": 155
+        },
+        "color_histogram": {
+          "#000000": 32,
+          "#7b858c": 30,
+          "#34393f": 25,
+          "#090807": 24,
+          "#515a63": 23,
+          "#3c1b06": 11,
+          "#bdc7cc": 9,
+          "#7f3000": 1
+        },
+        "rgba_sha256": "8b93135091baffdb45497d38b6624d126e109c08e7790310e205b1bac057078d",
+        "pngSha256": "165ce5c7b904669b4d9f572a11d6e8981c9ce433de4fa134ccc2732afef3be8b"
+      }
+    ]
+  },
+  {
+    "id": "armor-generated16",
+    "status": 200,
+    "ms": 266,
+    "request": {
+      "num_colors": 16
+    },
+    "input": "../palette-paired-comparison/input-armor.png",
+    "inputPngSha256": "4253720e7166feebf0292cbcdf8c6b46c5516f784ffa4c1dca45ef73652b349d",
+    "inputRgbaSha256": "cd02bf17c144402c23029c043f2bfd9bbdf330e099b8368d2d1997a05efa5834",
+    "endpoint": "https://api.pixellab.ai/v2/reduce-colors",
+    "recordedAt": "2026-10-15T07:46:03.228Z",
+    "usage": {
+      "type": "generations",
+      "generations": 0.1
+    },
+    "reportedColors": 16,
+    "outputs": [
+      "native-armor-generated16-0.png"
+    ],
+    "outputMetrics": [
+      {
+        "width": 16,
+        "height": 16,
+        "visible_colors": 16,
+        "transparent_pixels": 101,
+        "alpha_histogram": {
+          "0": 101,
+          "255": 155
+        },
+        "color_histogram": {
+          "#000000": 26,
+          "#78848b": 24,
+          "#545d66": 17,
+          "#2e343d": 16,
+          "#060403": 14,
+          "#3e484d": 12,
+          "#3d1804": 9,
+          "#a7b0b7": 8,
+          "#010000": 7,
+          "#0e1012": 5,
+          "#cfdadf": 4,
+          "#706d72": 4,
+          "#493b29": 3,
+          "#1c1202": 3,
+          "#000408": 2,
+          "#7f3000": 1
+        },
+        "rgba_sha256": "3047e241013cc183a37b1db7df4e86baacb6bbc067edeecca5c29137f63a5f02",
+        "pngSha256": "87c37bcbb48d371d909e81462878d435dc01fdfc227f5a3ac7fd8640bd945efb"
+      }
+    ]
+  }
+]
