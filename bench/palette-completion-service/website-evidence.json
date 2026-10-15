@@ -1,0 +1,452 @@
+{
+  "at": "2026-10-15T15:29:39.772Z",
+  "browserSandbox": true,
+  "headless": true,
+  "submissions": 4,
+  "maxSubmissions": 5,
+  "observations": [
+    {
+      "navigation": {
+        "host": "www.pixellab.ai",
+        "path": "/create"
+      }
+    },
+    {
+      "navigation": {
+        "host": "www.pixellab.ai",
+        "path": "/create"
+      }
+    },
+    {
+      "navigation": {
+        "host": "www.pixellab.ai",
+        "path": "/create"
+      }
+    },
+    {
+      "navigation": {
+        "host": "www.pixellab.ai",
+        "path": "/create"
+      }
+    },
+    {
+      "label": "initial",
+      "location": {
+        "host": "www.pixellab.ai",
+        "path": "/create"
+      },
+      "sidebar": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\"\n      - option \"Palette\" [selected]\n  - group:\n    - text: Color palette (Beta)\n    - button \"PICO-8 (16) 16 colours\":\n      - paragraph: PICO-8 (16)\n    - paragraph: Max colours\n    - spinbutton \"No limit\": \"2\"\n    - paragraph: Every pixel goes onto these colours. Max colours limits the image.\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\" [selected]\n      - option \"2x2\"\n      - option \"4x4\"\n      - option \"8x8\"\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "dialogs": [],
+      "workingActions": [
+        "Generate · 0.1 generations",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image"
+      ]
+    },
+    {
+      "label": "w1-uploaded",
+      "location": {
+        "host": "www.pixellab.ai",
+        "path": "/create"
+      },
+      "sidebar": "(no reducer sidebar)",
+      "dialogs": [
+        "Upscaled pixel art detectedThis image looks like pixel art that has been scaled up. Each art pixel spans about 3×3 image pixels instead of 1×1. Generations work best when uploads are at native resolution (one image pixel per art pixel). If you have the original, upload that instead.DiscardUse anywayTurn off these checks (re-enable in Account settings)"
+      ],
+      "workingActions": []
+    },
+    {
+      "label": "w1-ready",
+      "location": {
+        "host": "www.pixellab.ai",
+        "path": "/create"
+      },
+      "sidebar": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 32x32px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\" [selected]\n      - option \"Palette\"\n  - group:\n    - text: Number of colors\n    - spinbutton \"Number of colors\": \"4\"\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\" [selected]\n      - option \"2x2\"\n      - option \"4x4\"\n      - option \"8x8\"\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "dialogs": [],
+      "workingActions": [
+        "Generate · 0.1 generations",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image"
+      ]
+    },
+    {
+      "label": "before-submit",
+      "location": {
+        "host": "www.pixellab.ai",
+        "path": "/create"
+      },
+      "sidebar": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 32x32px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\" [selected]\n      - option \"Palette\"\n  - group:\n    - text: Number of colors\n    - spinbutton \"Number of colors\": \"4\"\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\" [selected]\n      - option \"2x2\"\n      - option \"4x4\"\n      - option \"8x8\"\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "dialogs": [],
+      "workingActions": [
+        "Generate · 0.1 generations",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image"
+      ]
+    },
+    {
+      "label": "after-submit",
+      "location": {
+        "host": "www.pixellab.ai",
+        "path": "/create"
+      },
+      "sidebar": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 32x32px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\" [selected]\n      - option \"Palette\"\n  - group:\n    - text: Number of colors\n    - spinbutton \"Number of colors\": \"4\"\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\" [selected]\n      - option \"2x2\"\n      - option \"4x4\"\n      - option \"8x8\"\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "dialogs": [],
+      "workingActions": [
+        "Generate · 0.1 generations",
+        "Download image",
+        "Download 3x upscaled",
+        "Gallery view",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image"
+      ]
+    },
+    {
+      "error": "locator.click: Error: strict mode violation: getByRole('button', { name: 'Download image', exact: true }) resolved to 5 elements:"
+    },
+    {
+      "navigation": {
+        "host": "www.pixellab.ai",
+        "path": "/create"
+      }
+    },
+    {
+      "navigation": {
+        "host": "www.pixellab.ai",
+        "path": "/create"
+      }
+    },
+    {
+      "navigation": {
+        "host": "www.pixellab.ai",
+        "path": "/create"
+      }
+    },
+    {
+      "navigation": {
+        "host": "www.pixellab.ai",
+        "path": "/create"
+      }
+    },
+    {
+      "label": "initial",
+      "location": {
+        "host": "www.pixellab.ai",
+        "path": "/create"
+      },
+      "sidebar": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\" [selected]\n      - option \"Palette\"\n  - group:\n    - text: Number of colors\n    - spinbutton \"Number of colors\": \"4\"\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\" [selected]\n      - option \"2x2\"\n      - option \"4x4\"\n      - option \"8x8\"\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "dialogs": [],
+      "workingActions": [
+        "Generate · 0.1 generations",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image"
+      ]
+    },
+    {
+      "label": "before-submit",
+      "location": {
+        "host": "www.pixellab.ai",
+        "path": "/create"
+      },
+      "sidebar": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 32x32px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\" [selected]\n      - option \"Palette\"\n  - group:\n    - text: Number of colors\n    - spinbutton \"Number of colors\": \"4\"\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\" [selected]\n      - option \"2x2\"\n      - option \"4x4\"\n      - option \"8x8\"\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "dialogs": [],
+      "workingActions": [
+        "Generate · 0.1 generations",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image"
+      ]
+    },
+    {
+      "label": "after-submit",
+      "location": {
+        "host": "www.pixellab.ai",
+        "path": "/create"
+      },
+      "sidebar": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 32x32px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\" [selected]\n      - option \"Palette\"\n  - group:\n    - text: Number of colors\n    - spinbutton \"Number of colors\": \"4\"\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\" [selected]\n      - option \"2x2\"\n      - option \"4x4\"\n      - option \"8x8\"\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "dialogs": [],
+      "workingActions": [
+        "Generate · 0.1 generations",
+        "Download image",
+        "Download 3x upscaled",
+        "Gallery view",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image"
+      ]
+    },
+    {
+      "label": "palette-picker",
+      "location": {
+        "host": "www.pixellab.ai",
+        "path": "/create"
+      },
+      "sidebar": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 24x24px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\"\n      - option \"Palette\" [selected]\n  - group:\n    - text: Color palette (Beta)\n    - button \"PICO-8 (16) 16 colours\" [expanded]:\n      - paragraph: PICO-8 (16)\n    - menu:\n      - menuitem \"None\"\n      - menuitem \"1-bit (black and white) (2) 2 colours\":\n        - paragraph: 1-bit (black and white) (2)\n      - menuitem \"Game Boy (4) 4 colours\":\n        - paragraph: Game Boy (4)\n      - menuitem \"PICO-8 (16) 16 colours\":\n        - paragraph: PICO-8 (16)\n      - menuitem \"NES (55) 55 colours\":\n        - paragraph: NES (55)\n      - menuitem \"Commodore 64 (16) 16 colours\":\n        - paragraph: Commodore 64 (16)\n      - menuitem \"CGA (4) 4 colours\":\n        - paragraph: CGA (4)\n      - menuitem \"ZX Spectrum (15) 15 colours\":\n        - paragraph: ZX Spectrum (15)\n      - menuitem \"Sweetie 16 (16) 16 colours\":\n        - paragraph: Sweetie 16 (16)\n      - menuitem \"DawnBringer 16 (16) 16 colours\":\n        - paragraph: DawnBringer 16 (16)\n      - menuitem \"DawnBringer 32 (32) 32 colours\":\n        - paragraph: DawnBringer 32 (32)\n      - menuitem \"Endesga 32 (32) 32 colours\":\n        - paragraph: Endesga 32 (32)\n      - menuitem \"SLSO8 (8) 8 colours\":\n        - paragraph: SLSO8 (8)\n      - menuitem \"Hollow (4) 4 colours\":\n        - paragraph: Hollow (4)\n      - menuitem \"Oil 6 (6) 6 colours\":\n        - paragraph: Oil 6 (6)\n      - menuitem \"Twilight 5 (5) 5 colours\":\n        - paragraph: Twilight 5 (5)\n      - menuitem \"AAP-64 (64) 64 colours\":\n        - paragraph: AAP-64 (64)\n      - menuitem \"Resurrect 64 (64) 64 colours\":\n        - paragraph: Resurrect 64 (64)\n      - separator\n      - menuitem \"From Lospec Import any palette by its link\":\n        - paragraph: From Lospec\n        - paragraph: Import any palette by its link\n      - menuitem \"From a palette image Its colours become the palette\":\n        - paragraph: From a palette image\n        - paragraph: Its colours become the palette\n      - 'menuitem \"Paste hex colours #081820 #346856 #88c070 ...\"':\n        - paragraph: Paste hex colours\n        - paragraph: \"#081820 #346856 #88c070 ...\"\n    - paragraph: Max colours\n    - spinbutton \"No limit\": \"2\"\n    - paragraph: Every pixel goes onto these colours. Max colours limits the image.\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\" [selected]\n      - option \"2x2\"\n      - option \"4x4\"\n      - option \"8x8\"\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "dialogs": [],
+      "workingActions": [
+        "Generate · 0.1 generations",
+        "Download image",
+        "Download 3x upscaled",
+        "Gallery view",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image"
+      ]
+    },
+    {
+      "label": "palette-image-input",
+      "location": {
+        "host": "www.pixellab.ai",
+        "path": "/create"
+      },
+      "sidebar": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 24x24px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\"\n      - option \"Palette\" [selected]\n  - group:\n    - text: Color palette (Beta)\n    - button \"From a palette image\":\n      - paragraph: From a palette image\n    - group:\n      - button \"Pick from gallery\"\n      - button \"Paste from clipboard\"\n      - img\n      - paragraph: Click to upload or drag and drop\n      - paragraph: PNG, JPG, GIF up to 10MB\n      - paragraph: Its colours become the palette (transparent pixels skipped). Over 256 colours, its 32 main ones.\n    - paragraph: Max colours\n    - spinbutton \"No limit\": \"2\"\n    - paragraph: Every pixel goes onto these colours. Max colours limits the image.\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\" [selected]\n      - option \"2x2\"\n      - option \"4x4\"\n      - option \"8x8\"\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "dialogs": [],
+      "workingActions": [
+        "Generate · 0.1 generations",
+        "Download image",
+        "Download 3x upscaled",
+        "Gallery view",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image"
+      ]
+    },
+    {
+      "label": "before-submit",
+      "location": {
+        "host": "www.pixellab.ai",
+        "path": "/create"
+      },
+      "sidebar": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 24x24px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\"\n      - option \"Palette\" [selected]\n  - group:\n    - text: Color palette (Beta)\n    - button \"Your image (8 colours) 8 colours\":\n      - paragraph: Your image (8 colours)\n    - group:\n      - img \"Preview\"\n      - button \"Remove\"\n      - paragraph: Its colours become the palette (transparent pixels skipped). Over 256 colours, its 32 main ones.\n    - paragraph: Max colours\n    - spinbutton \"No limit\"\n    - paragraph: Every pixel goes onto these colours. Max colours limits the image.\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\" [selected]\n      - option \"2x2\"\n      - option \"4x4\"\n      - option \"8x8\"\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "dialogs": [],
+      "workingActions": [
+        "Generate · 0.1 generations",
+        "Download image",
+        "Download 3x upscaled",
+        "Gallery view",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image"
+      ]
+    },
+    {
+      "label": "after-submit",
+      "location": {
+        "host": "www.pixellab.ai",
+        "path": "/create"
+      },
+      "sidebar": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 24x24px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\"\n      - option \"Palette\" [selected]\n  - group:\n    - text: Color palette (Beta)\n    - button \"Your image (8 colours) 8 colours\":\n      - paragraph: Your image (8 colours)\n    - group:\n      - img \"Preview\"\n      - button \"Remove\"\n      - paragraph: Its colours become the palette (transparent pixels skipped). Over 256 colours, its 32 main ones.\n    - paragraph: Max colours\n    - spinbutton \"No limit\"\n    - paragraph: Every pixel goes onto these colours. Max colours limits the image.\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\" [selected]\n      - option \"2x2\"\n      - option \"4x4\"\n      - option \"8x8\"\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "dialogs": [],
+      "workingActions": [
+        "Generate · 0.1 generations",
+        "Download image",
+        "Download 3x upscaled",
+        "Gallery view",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image"
+      ]
+    },
+    {
+      "label": "before-submit",
+      "location": {
+        "host": "www.pixellab.ai",
+        "path": "/create"
+      },
+      "sidebar": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 24x24px\n    - button \"Remove\"\n    - img \"Preview\"\n    - paragraph: 24x24px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\" [selected]\n      - option \"Palette\"\n  - group:\n    - text: Number of colors\n    - spinbutton \"Number of colors\": \"8\"\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\" [selected]\n      - option \"2x2\"\n      - option \"4x4\"\n      - option \"8x8\"\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "dialogs": [],
+      "workingActions": [
+        "Generate · 0.1 generations",
+        "Download image",
+        "Download 3x upscaled",
+        "Gallery view",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image"
+      ]
+    },
+    {
+      "label": "after-submit",
+      "location": {
+        "host": "www.pixellab.ai",
+        "path": "/create"
+      },
+      "sidebar": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 24x24px\n    - button \"Remove\"\n    - img \"Preview\"\n    - paragraph: 24x24px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\" [selected]\n      - option \"Palette\"\n  - group:\n    - text: Number of colors\n    - spinbutton \"Number of colors\": \"8\"\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\" [selected]\n      - option \"2x2\"\n      - option \"4x4\"\n      - option \"8x8\"\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"\n  - paragraph: 1 generating",
+      "dialogs": [],
+      "workingActions": [
+        "Generate · 0.1 generations",
+        "Cancel",
+        "Gallery view",
+        "Cancel",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image"
+      ]
+    },
+    {
+      "label": "wait",
+      "location": {
+        "host": "www.pixellab.ai",
+        "path": "/create"
+      },
+      "sidebar": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 24x24px\n    - button \"Remove\"\n    - img \"Preview\"\n    - paragraph: 24x24px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\" [selected]\n      - option \"Palette\"\n  - group:\n    - text: Number of colors\n    - spinbutton \"Number of colors\": \"8\"\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\" [selected]\n      - option \"2x2\"\n      - option \"4x4\"\n      - option \"8x8\"\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "dialogs": [],
+      "workingActions": [
+        "Generate · 0.1 generations",
+        "Download image",
+        "Download 3x upscaled",
+        "Gallery view",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image"
+      ]
+    }
+  ],
+  "network": [
+    {
+      "status": 200,
+      "method": "GET",
+      "path": "/background-jobs/active"
+    },
+    {
+      "status": 200,
+      "method": "POST",
+      "path": "/quantize-image/background"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "path": "/background-jobs/[id]"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "path": "/background-jobs/[id]"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "path": "/background-jobs/active"
+    },
+    {
+      "status": 200,
+      "method": "POST",
+      "path": "/quantize-image/background"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "path": "/background-jobs/[id]"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "path": "/background-jobs/[id]"
+    },
+    {
+      "status": 200,
+      "method": "POST",
+      "path": "/quantize-image/background"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "path": "/background-jobs/[id]"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "path": "/background-jobs/[id]"
+    },
+    {
+      "status": 200,
+      "method": "POST",
+      "path": "/quantize-image/background"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "path": "/background-jobs/[id]"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "path": "/background-jobs/[id]"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "path": "/background-jobs/[id]"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "path": "/background-jobs/[id]"
+    }
+  ],
+  "downloads": [
+    {
+      "file": "website/web-w1.png",
+      "suggested": "pixellab--1792078359103.png"
+    },
+    {
+      "file": "website/web-w2.png",
+      "suggested": "pixellab--1792078447736.png"
+    },
+    {
+      "file": "website/web-w3-sheet.png",
+      "suggested": "pixellab--1792078498533.png",
+      "recordedDownloadName": "website/web-w3-0.png",
+      "postDownloadRename": "Native48x24sheetretained;derivedframesseparate"
+    }
+  ],
+  "authentication": "available"
+}

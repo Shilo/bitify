@@ -1,0 +1,51 @@
+{
+  "at": "2026-10-15T15:27:57.545Z",
+  "browserSandbox": true,
+  "headless": true,
+  "submissions": 0,
+  "maxSubmissions": 5,
+  "observations": [
+    {
+      "label": "initial",
+      "sidebar": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\"\n      - option \"Palette\" [selected]\n  - group:\n    - text: Color palette (Beta)\n    - button \"PICO-8 (16) 16 colours\":\n      - paragraph: PICO-8 (16)\n    - paragraph: Max colours\n    - spinbutton \"No limit\": \"2\"\n    - paragraph: Every pixel goes onto these colours. Max colours limits the image.\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\" [selected]\n      - option \"2x2\"\n      - option \"4x4\"\n      - option \"8x8\"\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "dialogs": [],
+      "workingActions": [
+        "Generate · 0.1 generations",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image",
+        "Download image"
+      ]
+    },
+    {
+      "error": "locator.selectOption: Timeout 10000ms exceeded."
+    },
+    {
+      "error": "locator.selectOption: Timeout 10000ms exceeded."
+    },
+    {
+      "error": "locator.fill: Timeout 10000ms exceeded."
+    },
+    {
+      "error": "locator.ariaSnapshot: Timeout 10000ms exceeded."
+    },
+    {
+      "error": "locator.ariaSnapshot: Timeout 10000ms exceeded."
+    }
+  ],
+  "network": [
+    {
+      "status": 200,
+      "method": "GET",
+      "path": "/background-jobs/active"
+    }
+  ],
+  "downloads": [],
+  "authentication": "available"
+}

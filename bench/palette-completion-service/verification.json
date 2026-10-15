@@ -1,0 +1,92 @@
+{
+  "at": "2026-10-15T15:40:48.481Z",
+  "passed": true,
+  "rows": [
+    {
+      "id": "w1",
+      "dimensions": [
+        32,
+        32
+      ],
+      "visibleColors": [
+        10,
+        3,
+        3,
+        4
+      ],
+      "alphaPreserved": true,
+      "targetMembership": false,
+      "cap": 4
+    },
+    {
+      "id": "w2",
+      "dimensions": [
+        24,
+        24
+      ],
+      "visibleColors": [
+        17,
+        6,
+        6,
+        7
+      ],
+      "alphaPreserved": true,
+      "targetMembership": true,
+      "cap": null
+    },
+    {
+      "id": "w3-0",
+      "dimensions": [
+        24,
+        24
+      ],
+      "visibleColors": [
+        17,
+        7,
+        7,
+        8
+      ],
+      "alphaPreserved": true,
+      "targetMembership": false,
+      "cap": 8
+    },
+    {
+      "id": "w3-1",
+      "dimensions": [
+        24,
+        24
+      ],
+      "visibleColors": [
+        17,
+        7,
+        7,
+        8
+      ],
+      "alphaPreserved": true,
+      "targetMembership": false,
+      "cap": 8
+    }
+  ],
+  "alphaChecks": 8256,
+  "websiteShared": {
+    "nativeSheet": [
+      48,
+      24
+    ],
+    "frames": 2,
+    "unionColors": 7,
+    "unchangedCoordinates": 531,
+    "changedOutputsAtUnchangedCoordinates": 0
+  },
+  "billing": {
+    "jobs": 4,
+    "subscriptionDelta": 0.3999999999996362,
+    "usdUnchanged": true,
+    "repeatCausedByHarnessDownloadSelector": true
+  },
+  "ownedFileSecretScan": {
+    "scanned": 26,
+    "matches": 0
+  },
+  "sheets": "Source / Website / Retained REST / Colorfetti, 1x then 8x, flat gray background. Not blind judgments."
+}

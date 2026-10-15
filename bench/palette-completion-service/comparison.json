@@ -1,0 +1,369 @@
+{
+  "at": "2026-10-15T15:40:47.346Z",
+  "method": "Native Sharp decode; regenerated unchanged production modules in Node. W3 is one equal-duration animation, not a promise of one cap across separate still files. Composite RMSE is descriptive, not artistic quality.",
+  "cases": [
+    {
+      "id": "w1",
+      "inputs": [
+        {
+          "file": "bench\\claude-audit-2026-10-15\\service\\fixtures\\glow-alpha.png",
+          "pngSha256": "adcf73c22e83245fb77e143b1e69aa50db973d57e13afc391a54084176f408dc",
+          "width": 32,
+          "height": 32
+        }
+      ],
+      "settings": {
+        "numColors": 4,
+        "target": null,
+        "dithering": "none",
+        "alphaMode": "keep",
+        "matching": "oklab",
+        "cleanup": false
+      },
+      "outputs": [
+        {
+          "frame": 0,
+          "local": {
+            "dimensionsMatch": true,
+            "width": 32,
+            "height": 32,
+            "pngSha256": "8a72d714b4c6d018c998f2dc78973568ab34669896e83d6202312fd4e7b785c1",
+            "rgbaSha256": "a2de055b66af397065d1496642a347b0aee2b16ed6094b559817256839106d58",
+            "alphaChanges": 0,
+            "visibleRgb": 4,
+            "colors": [
+              "#00ff40",
+              "#aa320c",
+              "#f06e18",
+              "#fff3b0"
+            ],
+            "visibleRgbChanges": 406,
+            "opaqueRgbChanges": 96,
+            "compositeChannelRmse": 9.115214302973854,
+            "targetViolations": null
+          },
+          "retainedRest": {
+            "dimensionsMatch": true,
+            "width": 32,
+            "height": 32,
+            "pngSha256": "d075be5596c5e333e8633bd1ace42d2ae9a9af2d66d6b8298e5a867b28da4db4",
+            "rgbaSha256": "35cc33b0d6bd39a7a623ed6a184fdf197ce18c59096fe82e609af8a01c78b752",
+            "alphaChanges": 0,
+            "visibleRgb": 3,
+            "colors": [
+              "#10f540",
+              "#ac340c",
+              "#f4812d"
+            ],
+            "visibleRgbChanges": 616,
+            "opaqueRgbChanges": 112,
+            "compositeChannelRmse": 18.939222660799246,
+            "targetViolations": null
+          },
+          "localMatchesRetained": true,
+          "website": {
+            "dimensionsMatch": true,
+            "width": 32,
+            "height": 32,
+            "pngSha256": "a65b62ecf328468e4cf5c5a7e9ebecebb7921c4a26accdb3d8676c983f459540",
+            "rgbaSha256": "8f00cf156579ecc5bb3b36586f2cd4b89d742bee982cc0f0cc21fde524085647",
+            "alphaChanges": 0,
+            "visibleRgb": 3,
+            "colors": [
+              "#10f524",
+              "#d73a0c",
+              "#fc8e34"
+            ],
+            "visibleRgbChanges": 616,
+            "opaqueRgbChanges": 112,
+            "compositeChannelRmse": 18.029216163398377,
+            "targetViolations": null,
+            "nativeDownload": "website\\web-w1.png",
+            "nativeDownloadPngSha256": "a65b62ecf328468e4cf5c5a7e9ebecebb7921c4a26accdb3d8676c983f459540",
+            "derivedSheetCrop": false,
+            "matchesRetainedRest": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "w2",
+      "inputs": [
+        {
+          "file": "bench\\claude-audit-2026-10-15\\service\\fixtures\\knight-a.png",
+          "pngSha256": "fbe0f27539ac667c61977282e5b481027dbe54cabbd2e3a4eac80d7818c725ea",
+          "width": 24,
+          "height": 24
+        }
+      ],
+      "settings": {
+        "numColors": null,
+        "target": [
+          "#fdfdf8",
+          "#d32734",
+          "#da7d22",
+          "#e6da29",
+          "#28c641",
+          "#2d93dd",
+          "#7b53ad",
+          "#1b1c33"
+        ],
+        "dithering": "none",
+        "alphaMode": "keep",
+        "matching": "oklab",
+        "cleanup": false
+      },
+      "outputs": [
+        {
+          "frame": 0,
+          "local": {
+            "dimensionsMatch": true,
+            "width": 24,
+            "height": 24,
+            "pngSha256": "788480c4bbe60443839d7649b34bb45ed4dfdc65a6080d5d7c97611f3ad96411",
+            "rgbaSha256": "5c967b7b4b5b6a88f4f6112aeb075fd07ebff1ac8b4d5a9d3ae3ed01ee97280b",
+            "alphaChanges": 0,
+            "visibleRgb": 7,
+            "colors": [
+              "#1b1c33",
+              "#28c641",
+              "#2d93dd",
+              "#d32734",
+              "#da7d22",
+              "#e6da29",
+              "#fdfdf8"
+            ],
+            "visibleRgbChanges": 304,
+            "opaqueRgbChanges": 304,
+            "compositeChannelRmse": 34.47938298283763,
+            "targetViolations": []
+          },
+          "retainedRest": {
+            "dimensionsMatch": true,
+            "width": 24,
+            "height": 24,
+            "pngSha256": "7250669584e50e005951c2e720e3b9b3387c69d9c4ff8a067b208ac4f8d270ac",
+            "rgbaSha256": "83ae0aa3bb19d2baee24228ac35600ac9cd36c6e58a23e2769d80a4dc3894ace",
+            "alphaChanges": 0,
+            "visibleRgb": 6,
+            "colors": [
+              "#1b1c33",
+              "#28c641",
+              "#2d93dd",
+              "#d32734",
+              "#da7d22",
+              "#fdfdf8"
+            ],
+            "visibleRgbChanges": 304,
+            "opaqueRgbChanges": 304,
+            "compositeChannelRmse": 34.360000714825475,
+            "targetViolations": []
+          },
+          "localMatchesRetained": true,
+          "website": {
+            "dimensionsMatch": true,
+            "width": 24,
+            "height": 24,
+            "pngSha256": "7250669584e50e005951c2e720e3b9b3387c69d9c4ff8a067b208ac4f8d270ac",
+            "rgbaSha256": "83ae0aa3bb19d2baee24228ac35600ac9cd36c6e58a23e2769d80a4dc3894ace",
+            "alphaChanges": 0,
+            "visibleRgb": 6,
+            "colors": [
+              "#1b1c33",
+              "#28c641",
+              "#2d93dd",
+              "#d32734",
+              "#da7d22",
+              "#fdfdf8"
+            ],
+            "visibleRgbChanges": 304,
+            "opaqueRgbChanges": 304,
+            "compositeChannelRmse": 34.360000714825475,
+            "targetViolations": [],
+            "nativeDownload": "website\\web-w2.png",
+            "nativeDownloadPngSha256": "7250669584e50e005951c2e720e3b9b3387c69d9c4ff8a067b208ac4f8d270ac",
+            "derivedSheetCrop": false,
+            "matchesRetainedRest": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "w3",
+      "inputs": [
+        {
+          "file": "bench\\claude-audit-2026-10-15\\service\\fixtures\\knight-a.png",
+          "pngSha256": "fbe0f27539ac667c61977282e5b481027dbe54cabbd2e3a4eac80d7818c725ea",
+          "width": 24,
+          "height": 24
+        },
+        {
+          "file": "bench\\claude-audit-2026-10-15\\service\\fixtures\\knight-b.png",
+          "pngSha256": "84e4a32b885f9487531af0a80085865f2f294aa278951fcc5f582ab00900ad90",
+          "width": 24,
+          "height": 24
+        }
+      ],
+      "settings": {
+        "numColors": 8,
+        "target": null,
+        "dithering": "none",
+        "alphaMode": "keep",
+        "matching": "oklab",
+        "cleanup": false
+      },
+      "outputs": [
+        {
+          "frame": 0,
+          "local": {
+            "dimensionsMatch": true,
+            "width": 24,
+            "height": 24,
+            "pngSha256": "dd8e418b0fdaa93f88ed12f6ca769cebe5305aae094185f5c21600326911f642",
+            "rgbaSha256": "f4ea503023f573925bc678379e4585fddc7c637da12718713a5edcb12ea09c65",
+            "alphaChanges": 0,
+            "visibleRgb": 8,
+            "colors": [
+              "#1a1420",
+              "#3d4655",
+              "#4a2f1c",
+              "#6c7a8c",
+              "#7a4f2c",
+              "#a9b4c2",
+              "#b07a46",
+              "#e8eef2"
+            ],
+            "visibleRgbChanges": 50,
+            "opaqueRgbChanges": 50,
+            "compositeChannelRmse": 15.371424844639028,
+            "targetViolations": null
+          },
+          "retainedRest": {
+            "dimensionsMatch": true,
+            "width": 24,
+            "height": 24,
+            "pngSha256": "720b9ec8baaa5812ac5c6fd9bf8dfe2be780aced02b006056e4cda08ca7e1f06",
+            "rgbaSha256": "f9c46a1c01e1a184e14b297c7df550e3baeb9aec8044d0f663961729666b547b",
+            "alphaChanges": 0,
+            "visibleRgb": 7,
+            "colors": [
+              "#1a1420",
+              "#2a7fff",
+              "#475160",
+              "#5c3525",
+              "#af2d3f",
+              "#b87b4d",
+              "#dcdfdd"
+            ],
+            "visibleRgbChanges": 208,
+            "opaqueRgbChanges": 208,
+            "compositeChannelRmse": 18.573526245518984,
+            "targetViolations": null
+          },
+          "localMatchesRetained": true,
+          "website": {
+            "dimensionsMatch": true,
+            "width": 24,
+            "height": 24,
+            "pngSha256": "684839eef79eb8a6c3c5b4440538838d992504a9d0fc3850e81a950b0418336a",
+            "rgbaSha256": "f9c46a1c01e1a184e14b297c7df550e3baeb9aec8044d0f663961729666b547b",
+            "alphaChanges": 0,
+            "visibleRgb": 7,
+            "colors": [
+              "#1a1420",
+              "#2a7fff",
+              "#475160",
+              "#5c3525",
+              "#af2d3f",
+              "#b87b4d",
+              "#dcdfdd"
+            ],
+            "visibleRgbChanges": 208,
+            "opaqueRgbChanges": 208,
+            "compositeChannelRmse": 18.573526245518984,
+            "targetViolations": null,
+            "nativeDownload": "website\\web-w3-sheet.png",
+            "nativeDownloadPngSha256": "2c3bea7edd89b1133df876e59e7ff872df2a575625fdfc46428d773c856db756",
+            "derivedSheetCrop": true,
+            "matchesRetainedRest": true
+          }
+        },
+        {
+          "frame": 1,
+          "local": {
+            "dimensionsMatch": true,
+            "width": 24,
+            "height": 24,
+            "pngSha256": "9c44acb9e9ff66a3ca42a58d895df2a79701707854794938664dc4da336b4277",
+            "rgbaSha256": "36f89bfb14371524d4258cc5c7d2608df7e0c490a32d9d44d2168a04fd5b8800",
+            "alphaChanges": 0,
+            "visibleRgb": 8,
+            "colors": [
+              "#1a1420",
+              "#3d4655",
+              "#4a2f1c",
+              "#6c7a8c",
+              "#7a4f2c",
+              "#a9b4c2",
+              "#b07a46",
+              "#e8eef2"
+            ],
+            "visibleRgbChanges": 50,
+            "opaqueRgbChanges": 50,
+            "compositeChannelRmse": 15.371424844639028,
+            "targetViolations": null
+          },
+          "retainedRest": {
+            "dimensionsMatch": true,
+            "width": 24,
+            "height": 24,
+            "pngSha256": "4a64445ec456b8ac7dfd5842c00e2f2c9288bac74ef1dd3632114690d7853101",
+            "rgbaSha256": "0b19a69d1379d480bbd2080a5d583ccd3f308adbb23ef2f377c211ed98dc0d1d",
+            "alphaChanges": 0,
+            "visibleRgb": 7,
+            "colors": [
+              "#1a1420",
+              "#2a7fff",
+              "#475160",
+              "#5c3525",
+              "#af2d3f",
+              "#b87b4d",
+              "#dcdfdd"
+            ],
+            "visibleRgbChanges": 208,
+            "opaqueRgbChanges": 208,
+            "compositeChannelRmse": 18.573526245518984,
+            "targetViolations": null
+          },
+          "localMatchesRetained": true,
+          "website": {
+            "dimensionsMatch": true,
+            "width": 24,
+            "height": 24,
+            "pngSha256": "ac6a09d9c7c54c0ebcc1c27b854e62b70558f7a45138e2f5ec171f0bd9d406dd",
+            "rgbaSha256": "0b19a69d1379d480bbd2080a5d583ccd3f308adbb23ef2f377c211ed98dc0d1d",
+            "alphaChanges": 0,
+            "visibleRgb": 7,
+            "colors": [
+              "#1a1420",
+              "#2a7fff",
+              "#475160",
+              "#5c3525",
+              "#af2d3f",
+              "#b87b4d",
+              "#dcdfdd"
+            ],
+            "visibleRgbChanges": 208,
+            "opaqueRgbChanges": 208,
+            "compositeChannelRmse": 18.573526245518984,
+            "targetViolations": null,
+            "nativeDownload": "website\\web-w3-sheet.png",
+            "nativeDownloadPngSha256": "2c3bea7edd89b1133df876e59e7ff872df2a575625fdfc46428d773c856db756",
+            "derivedSheetCrop": true,
+            "matchesRetainedRest": true
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,299 @@
+{
+  "at": "2026-10-15T15:25:00.596Z",
+  "noPaidCalls": true,
+  "pages": [
+    {
+      "url": "https://api.pixellab.ai/v2/openapi.json",
+      "status": 200,
+      "sha256": "11352d92a6ffe1ba653bf94c40bf1e0b9db51781e3d8f47b88f73ed49206575a",
+      "smartMentions": [
+        "0\\\"], \\\"name\\\": \\\"Game Boy\\\", \\\"max_colors\\\": 4}. The reference image is put on the palette first. `smart` is for single images and is refused here.\"}},\"additionalProperties\":false,\"type\":\"object\",\"required\":[\"reference_image\",\"reference_image_size\",\"action\",\"image_size\"],\"title\":\"Ani",
+        "tle\":\"Max Colors\",\"description\":\"At most this many colours in each image (from colors if given).\"},\"smart\":{\"type\":\"boolean\",\"title\":\"Smart\",\"description\":\"Beta, single images only: put each object on the palette as a whole (a face stays skin-coloured, wood stays brown) instead of giv"
+      ]
+    },
+    {
+      "url": "https://api.pixellab.ai/mcp/docs",
+      "status": 200,
+      "sha256": "be6a7b18105249e7abd6626925e2f043487a189472b70542cf377445c4f98781",
+      "smartMentions": []
+    },
+    {
+      "url": "https://api.pixellab.ai/v2/llms.txt",
+      "status": 200,
+      "sha256": "013f141b4fc23d553c5c942844925213c28f2063e4618ac855df51f2deee31d5",
+      "smartMentions": []
+    },
+    {
+      "url": "https://www.pixellab.ai/docs/tools/reduce-colors",
+      "status": 200,
+      "sha256": "b0ae5338b28f3bf49c067ed763191cd80b645705ca1e6e06fdbb5e92f3cc4a97",
+      "smartMentions": []
+    },
+    {
+      "url": "https://www.pixellab.ai/docs/options/color",
+      "status": 200,
+      "sha256": "0d5a674c1fb787e10f30288b9c3a705873922618e50c037d2a74cac632929d8d",
+      "smartMentions": []
+    },
+    {
+      "url": "https://www.pixellab.ai/docs/options/dithering",
+      "status": 200,
+      "sha256": "35fc2257d352e18c86d4f62d2e9e70e7158ddf7986eea42c6386f2a46be49d76",
+      "smartMentions": []
+    }
+  ],
+  "rest": {
+    "totalPaths": 101,
+    "reducer": {
+      "operationId": "reduce_colors_endpoint_reduce_colors_post",
+      "model": "ReduceColorsRequest",
+      "schema": {
+        "properties": {
+          "images": {
+            "items": {
+              "$ref": "#/components/schemas/Base64Image"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Images",
+            "description": "Image(s) to quantize (PNG base64). Several frames are quantized together onto ONE shared palette and must all be the same size — pass an animation's frames or a character's directions in one call so their colors stay consistent."
+          },
+          "num_colors": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 256,
+                "minimum": 2
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Num Colors",
+            "description": "Target number of colors. Omit to auto-detect a good palette size from the image itself. Mutually exclusive with palette_image."
+          },
+          "palette_image": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Base64Image"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "An image whose colors become the palette (max 256 colors). Use it to force frames onto an existing game palette. Mutually exclusive with num_colors."
+          },
+          "dithering": {
+            "type": "string",
+            "enum": [
+              "none",
+              "2x2",
+              "4x4",
+              "8x8"
+            ],
+            "title": "Dithering",
+            "description": "Ordered dithering matrix size. Larger matrices give smoother gradients at the cost of a busier look.",
+            "default": "none"
+          },
+          "dithering_strength": {
+            "type": "number",
+            "maximum": 10,
+            "minimum": 0,
+            "title": "Dithering Strength",
+            "description": "How strongly to dither. Ignored when dithering is 'none'.",
+            "default": 5
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "images"
+        ],
+        "title": "ReduceColorsRequest",
+        "description": "Request model for the reduce-colors endpoint",
+        "example": {
+          "dithering": "none",
+          "images": [
+            {
+              "base64": "iVBORw0KGgoAAAANS..."
+            }
+          ],
+          "num_colors": 16
+        }
+      }
+    },
+    "smartModels": {
+      "TargetPalette": {
+        "properties": {
+          "colors": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Colors",
+            "description": "2 to 256 hex colours like '#1a2b3c'."
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name",
+            "description": "The palette's name ('Game Boy', 'PICO-8'); helps the look."
+          },
+          "max_colors": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 64,
+                "minimum": 2
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Colors",
+            "description": "At most this many colours in each image (from colors if given)."
+          },
+          "smart": {
+            "type": "boolean",
+            "title": "Smart",
+            "description": "Beta, single images only: put each object on the palette as a whole (a face stays skin-coloured, wood stays brown) instead of giving every pixel its nearest colour. Needs colors; adds about 15-60 s.",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "TargetPalette",
+        "description": "Colours the result must use (colors) and/or at most max_colors per image."
+      }
+    },
+    "smartRoutes": [
+      {
+        "path": "/generate-image-v2",
+        "method": "post",
+        "requestModel": "GenerateImageV2Request",
+        "summary": "Generate image (Pro)"
+      },
+      {
+        "path": "/animate-with-text-v2",
+        "method": "post",
+        "requestModel": "AnimateWithTextV2Request",
+        "summary": "Animate with text (pro)"
+      }
+    ]
+  },
+  "mcp": {
+    "tested": true,
+    "status": 200,
+    "tools": 117,
+    "smartTools": [],
+    "reduceColors": {
+      "name": "reduce_colors",
+      "description": "Quantize images onto a smaller, shared palette.\n\nPixel art reads as pixel art partly because of its restricted palette. AI\noutput and converted artwork often carry hundreds of near-identical colors;\nthis snaps them onto a tight palette, optionally with ordered dithering.\n\nPassing several frames in one call is the point: they are quantized TOGETHER,\nso an animation or a character's eight directions come back sharing ONE\npalette instead of drifting apart frame by frame. Quantizing them one at a\ntime is the mistake this tool exists to prevent.\n\nThree ways to choose the palette:\n- omit num_colors and the palette image — the size is auto-detected\n- num_colors — quantize to exactly this many colors\n- palette_image — reuse the colors of an existing image (the game's palette)\n\nThe result carries a `palette` strip you can feed back as palette_image_base64\nto lock later frames onto the same colors.\n\nTotal size limit across all frames is 512x512 worth of pixels (sixteen 64x64\nframes, or four 128x128).\n\nCost: 0.1 generations. Runs locally in about a second — poll once with\nget_image(job_id).",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "images_base64": {
+            "default": null,
+            "description": "Base64 PNG(s) to quantize — pass a one-element list for a single image. All frames must be the same size. PREFER image_urls; MCP clients routinely truncate large inline base64.",
+            "items": {
+              "type": "string"
+            },
+            "type": [
+              "array",
+              "null"
+            ]
+          },
+          "image_urls": {
+            "default": null,
+            "description": "Alternative to images_base64: https, data: or `upload:<id>` (POST /v2/uploads with this same bearer token) URLs to the PNG(s), one per frame. PREFER THIS. Give urls OR base64, not both.",
+            "items": {
+              "type": "string"
+            },
+            "type": [
+              "array",
+              "null"
+            ]
+          },
+          "num_colors": {
+            "default": null,
+            "description": "Target number of colors. Omit to auto-detect a good palette size from the images. Cannot be combined with a palette image.",
+            "maximum": 256,
+            "minimum": 2,
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "palette_image_base64": {
+            "default": null,
+            "description": "Base64 PNG whose colors become the palette (max 256 colors) — use it to force frames onto an existing game palette. Cannot be combined with num_colors.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "palette_image_url": {
+            "default": null,
+            "description": "Alternative to palette_image_base64: an https (or data:) URL to the palette image. Give one, not both.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "dithering": {
+            "default": "none",
+            "description": "Ordered dithering matrix size. Larger matrices give smoother gradients at the cost of a busier look.",
+            "enum": [
+              "none",
+              "2x2",
+              "4x4",
+              "8x8"
+            ],
+            "type": "string"
+          },
+          "dithering_strength": {
+            "default": 5,
+            "description": "How strongly to dither. Ignored when dithering is 'none'.",
+            "maximum": 10,
+            "minimum": 0,
+            "type": "number"
+          },
+          "project_id": {
+            "default": null,
+            "description": "Internal Game Builder project context; the finished image is linked after generation.",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "fastmcp": {
+          "tags": []
+        }
+      }
+    }
+  }
+}
