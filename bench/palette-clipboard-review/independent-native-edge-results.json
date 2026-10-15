@@ -1,0 +1,189 @@
+{
+  "scope": "Native headful sandboxed Edge real app Copy, Windows PNG/bitmap read and trusted Ctrl+V; no mocked clipboard methods or synthetic ClipboardEvent.",
+  "previousClipboardRead": false,
+  "allFormatDump": false,
+  "productionIndexSha256": "0b61657e4bf8e35317a45bd2973d02cc94282855b1f9d14b5b8435eb94822d20",
+  "fixturePngSha256": "f76d11701571e7e8fb7769169213ae404f024a5b03608e733f40775ddd7318a0",
+  "settings": {
+    "family": "full-palette",
+    "paletteId": "preset-pico8",
+    "colors": [
+      "#000000",
+      "#1d2b53",
+      "#7e2553",
+      "#008751",
+      "#ab5236",
+      "#5f574f",
+      "#c2c3c7",
+      "#fff1e8",
+      "#ff004d",
+      "#ffa300",
+      "#ffec27",
+      "#00e436",
+      "#29adff",
+      "#83769c",
+      "#ff77a8",
+      "#ffccaa"
+    ],
+    "metric": "oklab",
+    "alphaMode": "keep",
+    "alphaCut": 128,
+    "maxColors": 8,
+    "cleanup": true,
+    "dither": "4x4",
+    "ditherStrength": 50
+  },
+  "checks": [
+    {
+      "name": "Actual app Save independently decodes exact pre-clipboard Keep output",
+      "passed": true,
+      "bytes": 1912,
+      "pngSha256": "af55fff6eab37b18e9020222f792ed60bc87010a2665daeb063811b236409388",
+      "rgbaSha256": "37d9c27e0bdab34b86140377da5d75552ff2694d6a59dd3b924b68a1fc5e2fba",
+      "width": 128,
+      "height": 64,
+      "alphaBytesMatched": 8192,
+      "alphaMismatches": 0,
+      "visibleRgbPixelsMatched": 7680,
+      "rgbMismatches": 0,
+      "opaqueRgbMismatches": 0,
+      "maxChannelDelta": 0,
+      "byAlpha": {
+        "127": {
+          "pixels": 512,
+          "rgbMismatches": 0
+        },
+        "128": {
+          "pixels": 512,
+          "rgbMismatches": 0
+        },
+        "255": {
+          "pixels": 6656,
+          "rgbMismatches": 0
+        }
+      },
+      "exact": true,
+      "alphaValues": [
+        0,
+        127,
+        128,
+        255
+      ],
+      "usedRgb": 6
+    },
+    {
+      "name": "Trusted app Copy resolves with success",
+      "passed": true
+    },
+    {
+      "name": "True Windows image clipboard independently decoded; exactness recorded rather than assumed",
+      "transportCompleted": true,
+      "bytes": 3520,
+      "pngSha256": "c66b96b1081fa0cb24b00a9b2fa00344d01b6bab78b959b4fcb7a39f438c56b6",
+      "rgbaSha256": "98a27e483f49b7728937a07e7428d459d4c878810bc3600e2e6da0d4d4c96090",
+      "width": 128,
+      "height": 64,
+      "alphaBytesMatched": 8192,
+      "alphaMismatches": 0,
+      "visibleRgbPixelsMatched": 6742,
+      "rgbMismatches": 938,
+      "opaqueRgbMismatches": 0,
+      "maxChannelDelta": 1,
+      "byAlpha": {
+        "127": {
+          "pixels": 512,
+          "rgbMismatches": 469
+        },
+        "128": {
+          "pixels": 512,
+          "rgbMismatches": 469
+        },
+        "255": {
+          "pixels": 6656,
+          "rgbMismatches": 0
+        }
+      },
+      "exact": false,
+      "alphaValues": [
+        0,
+        127,
+        128,
+        255
+      ],
+      "usedRgb": 16
+    },
+    {
+      "name": "Trusted OS Ctrl+V file independently decoded and adds one wall image",
+      "transportCompleted": true,
+      "isTrusted": true,
+      "bytes": 3520,
+      "pngSha256": "c66b96b1081fa0cb24b00a9b2fa00344d01b6bab78b959b4fcb7a39f438c56b6",
+      "rgbaSha256": "98a27e483f49b7728937a07e7428d459d4c878810bc3600e2e6da0d4d4c96090",
+      "width": 128,
+      "height": 64,
+      "alphaBytesMatched": 8192,
+      "alphaMismatches": 0,
+      "visibleRgbPixelsMatched": 6742,
+      "rgbMismatches": 938,
+      "opaqueRgbMismatches": 0,
+      "maxChannelDelta": 1,
+      "byAlpha": {
+        "127": {
+          "pixels": 512,
+          "rgbMismatches": 469
+        },
+        "128": {
+          "pixels": 512,
+          "rgbMismatches": 469
+        },
+        "255": {
+          "pixels": 6656,
+          "rgbMismatches": 0
+        }
+      },
+      "exact": false,
+      "alphaValues": [
+        0,
+        127,
+        128,
+        255
+      ],
+      "usedRgb": 16
+    },
+    {
+      "name": "Real Ctrl+V in palette editor replaces only owned draft, preserving pasted RGB, name and wall",
+      "passed": true,
+      "colors": [
+        "#000000",
+        "#1c2a52",
+        "#1d2b53",
+        "#1e2c54",
+        "#5e564e",
+        "#5f574f",
+        "#605850",
+        "#83769b",
+        "#83769c",
+        "#83769d",
+        "#c1c3c7",
+        "#c2c3c7",
+        "#c3c3c7",
+        "#fff1e7",
+        "#fff1e8",
+        "#fff1e9"
+      ],
+      "wallImages": 2
+    }
+  ],
+  "errors": [],
+  "started": "2026-10-15T08:37:37.858Z",
+  "seed": {
+    "seededOwnedPng": true,
+    "previousClipboardRead": false
+  },
+  "osRead": {
+    "format": "Windows PNG",
+    "allFormatDump": false
+  },
+  "completed": true,
+  "finished": "2026-10-15T08:37:40.919Z"
+}

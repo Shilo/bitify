@@ -1,0 +1,36 @@
+{
+  "device": "android",
+  "key": "palette-cut",
+  "trusted": true,
+  "mime": "image/png",
+  "clipboardTypes": [
+    "image-uri",
+    "Files"
+  ],
+  "pasteStartedAt": "2026-10-15T08:57:37.284Z",
+  "file": "android-palette-cut-pasted.png",
+  "attemptFile": "android-palette-cut-attempt-2026-10-15T08-57-36-864Z-84e7367c5923-0c3299dd.png",
+  "attemptReceipt": "android-palette-cut-attempt-2026-10-15T08-57-36-864Z-84e7367c5923-0c3299dd.json",
+  "canonicalUpdated": true,
+  "bytes": 283,
+  "sha256": "84e7367c5923c634baa7570884d40dfb4343206c165ca5b150e2160de722139f",
+  "verification": {
+    "pass": true,
+    "key": "palette-cut",
+    "width": 32,
+    "height": 24,
+    "pixels": 768,
+    "visiblePixels": 384,
+    "alphaMismatches": 0,
+    "visibleRgbMismatches": 0,
+    "alphaValues": [
+      0,
+      255
+    ],
+    "usedColors": 8,
+    "encodedBytes": 283,
+    "encodedSha256": "84e7367c5923c634baa7570884d40dfb4343206c165ca5b150e2160de722139f",
+    "exactVisibleRgba": true
+  },
+  "recordedAt": "2026-10-15T08:57:36.864Z"
+}

@@ -1,0 +1,22 @@
+{
+  "device": "android",
+  "key": "palette-keep",
+  "trusted": true,
+  "mime": "image/png",
+  "clipboardTypes": [
+    "image-uri",
+    "Files"
+  ],
+  "pasteStartedAt": "2026-10-15T08:57:34.218Z",
+  "file": "android-palette-keep-pasted.png",
+  "attemptFile": "android-palette-keep-attempt-2026-10-15T08-57-33-802Z-66f1dfe72983-f87a57f6.png",
+  "attemptReceipt": "android-palette-keep-attempt-2026-10-15T08-57-33-802Z-66f1dfe72983-f87a57f6.json",
+  "canonicalUpdated": true,
+  "bytes": 516,
+  "sha256": "66f1dfe72983c7a2fb652b8d07e6a4db42d497608e4c7d4fb0a67f25dd0b809d",
+  "verification": {
+    "pass": false,
+    "error": "palette-keep: 246 visible RGB pixels differ\n\n246 !== 0\n"
+  },
+  "recordedAt": "2026-10-15T08:57:33.802Z"
+}

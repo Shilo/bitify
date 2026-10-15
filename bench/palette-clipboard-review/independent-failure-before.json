@@ -1,0 +1,51 @@
+{
+  "scope": "Injected missing/refused platform APIs and a later PNG promise rejection; no OS clipboard API or private contents accessed.",
+  "saveModuleSha256": "373b1d312b56474c572817b29fcbab67dea9fdf1a634c787e7ed2a73fd59c4cf",
+  "outcomes": [
+    {
+      "scenario": "missing-clipboard",
+      "copyRejected": true,
+      "copyError": {
+        "name": "TypeError",
+        "message": "Cannot read properties of undefined (reading 'write')"
+      },
+      "unhandledImageRejections": [
+        "Owned encoder rejected after platform failure."
+      ]
+    },
+    {
+      "scenario": "missing-item",
+      "copyRejected": true,
+      "copyError": {
+        "name": "ReferenceError",
+        "message": "ClipboardItem is not defined"
+      },
+      "unhandledImageRejections": [
+        "Owned encoder rejected after platform failure."
+      ]
+    },
+    {
+      "scenario": "item-constructor-throws",
+      "copyRejected": true,
+      "copyError": {
+        "name": "TypeError",
+        "message": "Unsupported clipboard item."
+      },
+      "unhandledImageRejections": [
+        "Owned encoder rejected after platform failure."
+      ]
+    },
+    {
+      "scenario": "write-throws",
+      "copyRejected": true,
+      "copyError": {
+        "name": "NotAllowedError",
+        "message": "Refused synchronously."
+      },
+      "unhandledImageRejections": [
+        "Owned encoder rejected after platform failure."
+      ]
+    }
+  ],
+  "completedAt": "2026-10-15T08:39:00.601Z"
+}

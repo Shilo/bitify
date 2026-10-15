@@ -1,0 +1,36 @@
+{
+  "device": "android",
+  "key": "gif-frame0",
+  "trusted": true,
+  "mime": "image/png",
+  "clipboardTypes": [
+    "image-uri",
+    "Files"
+  ],
+  "pasteStartedAt": "2026-10-15T08:57:40.843Z",
+  "file": "android-gif-frame0-pasted.png",
+  "attemptFile": "android-gif-frame0-attempt-2026-10-15T08-57-40-420Z-0f2d70e5b04a-ba00c4dc.png",
+  "attemptReceipt": "android-gif-frame0-attempt-2026-10-15T08-57-40-420Z-0f2d70e5b04a-ba00c4dc.json",
+  "canonicalUpdated": true,
+  "bytes": 378,
+  "sha256": "0f2d70e5b04ac36db6beff81aff0c6fac11e317d5e62db7b6fbe3d60a970f338",
+  "verification": {
+    "pass": true,
+    "key": "gif-frame0",
+    "width": 32,
+    "height": 24,
+    "pixels": 768,
+    "visiblePixels": 660,
+    "alphaMismatches": 0,
+    "visibleRgbMismatches": 0,
+    "alphaValues": [
+      0,
+      255
+    ],
+    "usedColors": 8,
+    "encodedBytes": 378,
+    "encodedSha256": "0f2d70e5b04ac36db6beff81aff0c6fac11e317d5e62db7b6fbe3d60a970f338",
+    "exactVisibleRgba": true
+  },
+  "recordedAt": "2026-10-15T08:57:40.420Z"
+}

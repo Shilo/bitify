@@ -1,0 +1,43 @@
+{
+  "scope": "Injected missing/refused platform APIs and a later PNG promise rejection; no OS clipboard API or private contents accessed.",
+  "saveModuleSha256": "c44966acd7925ab6895199736c55d0cc6e8311e6af1b116d3c72a2e3451075c4",
+  "outcomes": [
+    {
+      "scenario": "missing-clipboard",
+      "copyRejected": true,
+      "copyError": {
+        "name": "TypeError",
+        "message": "Cannot read properties of undefined (reading 'write')"
+      },
+      "unhandledImageRejections": []
+    },
+    {
+      "scenario": "missing-item",
+      "copyRejected": true,
+      "copyError": {
+        "name": "ReferenceError",
+        "message": "ClipboardItem is not defined"
+      },
+      "unhandledImageRejections": []
+    },
+    {
+      "scenario": "item-constructor-throws",
+      "copyRejected": true,
+      "copyError": {
+        "name": "TypeError",
+        "message": "Unsupported clipboard item."
+      },
+      "unhandledImageRejections": []
+    },
+    {
+      "scenario": "write-throws",
+      "copyRejected": true,
+      "copyError": {
+        "name": "NotAllowedError",
+        "message": "Refused synchronously."
+      },
+      "unhandledImageRejections": []
+    }
+  ],
+  "completedAt": "2026-10-15T08:43:09.264Z"
+}

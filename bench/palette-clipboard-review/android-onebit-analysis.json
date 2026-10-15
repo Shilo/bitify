@@ -1,0 +1,177 @@
+{
+  "key": "onebit",
+  "scope": "Exact independent Sharp decode comparison with the frozen production-conversion oracle. No new matching oracle, tolerance, clipboard access or causal attribution. Hidden expected-alpha-zero RGB is ignored; every alpha byte and expected-visible RGB byte is compared.",
+  "runtime": {
+    "node": "v25.0.0",
+    "sharp": "0.35.5"
+  },
+  "decodedChannelFormat": "sRGB 8-bit RGBA through Sharp toColourspace(srgb), ensureAlpha and raw; PNG encoding/profile metadata is reported separately",
+  "expected": {
+    "width": 32,
+    "height": 24,
+    "encodedBytes": 139,
+    "encodedSha256": "695986ac931cb433b58d4527d1f16a2ca05d1b06f67ca067adb5ebadac99392e",
+    "metadata": {
+      "format": "png",
+      "width": 32,
+      "height": 24,
+      "channels": 4,
+      "space": "srgb",
+      "depth": "uchar",
+      "hasAlpha": true,
+      "hasProfile": false,
+      "density": 72,
+      "iccBytes": 0,
+      "iccSha256": null
+    },
+    "png": {
+      "isPng": true,
+      "chunks": [
+        {
+          "type": "IHDR",
+          "length": 13
+        },
+        {
+          "type": "PLTE",
+          "length": 9
+        },
+        {
+          "type": "tRNS",
+          "length": 1
+        },
+        {
+          "type": "IDAT",
+          "length": 48
+        },
+        {
+          "type": "IEND",
+          "length": 0
+        }
+      ],
+      "header": {
+        "width": 32,
+        "height": 24,
+        "bitDepth": 2,
+        "colorType": 3,
+        "compression": 0,
+        "filter": 0,
+        "interlace": 0
+      }
+    },
+    "activePalette": [
+      "#000000",
+      "#ffffff"
+    ]
+  },
+  "actual": {
+    "encodedBytes": 171,
+    "encodedSha256": "03a1e4027a8ce703c8b6ed050378fc56997e34a6abd2a1da465f674b49ffb33b",
+    "png": {
+      "isPng": true,
+      "chunks": [
+        {
+          "type": "IHDR",
+          "length": 13
+        },
+        {
+          "type": "IDAT",
+          "length": 96
+        },
+        {
+          "type": "IDAT",
+          "length": 6
+        },
+        {
+          "type": "IEND",
+          "length": 0
+        }
+      ],
+      "header": {
+        "width": 32,
+        "height": 24,
+        "bitDepth": 8,
+        "colorType": 6,
+        "compression": 0,
+        "filter": 0,
+        "interlace": 0
+      }
+    },
+    "width": 32,
+    "height": 24,
+    "metadata": {
+      "format": "png",
+      "width": 32,
+      "height": 24,
+      "channels": 4,
+      "space": "srgb",
+      "depth": "uchar",
+      "hasAlpha": true,
+      "hasProfile": false,
+      "density": 72,
+      "iccBytes": 0,
+      "iccSha256": null
+    },
+    "usedColors": 2,
+    "colorsOutsideActivePalette": []
+  },
+  "exactVisibleRgba": true,
+  "dimensionsMatch": true,
+  "comparisonStatus": "compared at identical dimensions",
+  "totals": {
+    "pixels": 768,
+    "expectedVisiblePixels": 384,
+    "actualVisiblePixels": 384,
+    "alphaMismatchPixels": 0,
+    "visibleRgbMismatchPixels": 0,
+    "visibleRgbMismatchChannels": 0,
+    "maxAbsChannelError": 0,
+    "maxAbsChannelErrors": [
+      0,
+      0,
+      0
+    ],
+    "maxAlphaError": 0,
+    "actualVisiblePaletteMembershipViolations": 0,
+    "hiddenRgbDifferencesIgnored": 0
+  },
+  "byExpectedAlpha": [
+    {
+      "expectedAlpha": 0,
+      "pixels": 384,
+      "actualAlphaCounts": {
+        "0": 384
+      },
+      "alphaMismatchPixels": 0,
+      "visibleRgbMismatchPixels": 0,
+      "visibleRgbMismatchChannels": 0,
+      "maxAbsChannelError": 0,
+      "maxAbsChannelErrors": [
+        0,
+        0,
+        0
+      ],
+      "actualVisiblePaletteMembershipViolations": 0,
+      "examples": []
+    },
+    {
+      "expectedAlpha": 255,
+      "pixels": 384,
+      "actualAlphaCounts": {
+        "255": 384
+      },
+      "alphaMismatchPixels": 0,
+      "visibleRgbMismatchPixels": 0,
+      "visibleRgbMismatchChannels": 0,
+      "maxAbsChannelError": 0,
+      "maxAbsChannelErrors": [
+        0,
+        0,
+        0
+      ],
+      "actualVisiblePaletteMembershipViolations": 0,
+      "examples": []
+    }
+  ],
+  "rgbTransitions": [],
+  "rgbTransitionKinds": 0
+}

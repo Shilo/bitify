@@ -1,0 +1,15 @@
+{
+  "device": "codex",
+  "key": "palette-keep",
+  "trusted": true,
+  "mime": "image/png",
+  "clipboardTypes": [],
+  "file": "codex-palette-keep-pasted.png",
+  "bytes": 7913,
+  "sha256": "ceb860a325919eb79818643c8f5bcb0ece1381175d9af8a891eb32587c80c823",
+  "verification": {
+    "pass": false,
+    "error": "Clipboard width differs\n\n128 !== 32\n"
+  },
+  "recordedAt": "2026-10-15T08:46:19.346Z"
+}

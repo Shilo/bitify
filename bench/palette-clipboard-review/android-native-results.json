@@ -1,0 +1,2648 @@
+{
+  "scope": "Real app trusted Copy clicks and Android native paste. Success is observed before any paste. No navigator.clipboard polling, ClipboardEvent construction or clipboard monkeypatching. Only owned fixtures are copied; user browser remains open.",
+  "previousClipboardRead": false,
+  "clipboardMethodsMocked": false,
+  "syntheticPasteEvents": false,
+  "started": "2026-10-15T08:58:15.596Z",
+  "distIndexSha256": "a4b434562abb9dd2fe7c52957318499de02f0f1244e4cb786379f7256b28834f",
+  "manifestSha256": "960bc0bb5ea479030f33b89a0dfe5238d57439a52b02e09bd297d185da8e3b9b",
+  "checks": [
+    {
+      "key": "palette-keep",
+      "settings": {
+        "family": "full-palette",
+        "colors": [
+          "#000000",
+          "#1d2b53",
+          "#7e2553",
+          "#008751",
+          "#ab5236",
+          "#5f574f",
+          "#c2c3c7",
+          "#fff1e8",
+          "#ff004d",
+          "#ffa300",
+          "#ffec27",
+          "#00e436",
+          "#29adff",
+          "#83769c",
+          "#ff77a8",
+          "#ffccaa"
+        ],
+        "paletteId": "preset-pico8",
+        "metric": "oklab",
+        "alphaCut": 128,
+        "maxColors": 8,
+        "cleanup": true,
+        "dither": "4x4",
+        "ditherStrength": 50,
+        "alphaMode": "keep"
+      },
+      "sourceFile": "palette-source.png",
+      "copySuccessMessage": "palette-source.png copied.",
+      "paste": {
+        "method": "ADB KEYCODE_PASTE",
+        "trusted": true
+      },
+      "receipt": {
+        "device": "android",
+        "key": "palette-keep",
+        "trusted": true,
+        "mime": "image/png",
+        "clipboardTypes": [
+          "image-uri",
+          "Files"
+        ],
+        "pasteStartedAt": "2026-10-15T08:58:17.928Z",
+        "file": "android-palette-keep-pasted.png",
+        "attemptFile": "android-palette-keep-attempt-2026-10-15T08-58-17-509Z-66f1dfe72983-9b96f8ca.png",
+        "attemptReceipt": "android-palette-keep-attempt-2026-10-15T08-58-17-509Z-66f1dfe72983-9b96f8ca.json",
+        "canonicalUpdated": true,
+        "bytes": 516,
+        "sha256": "66f1dfe72983c7a2fb652b8d07e6a4db42d497608e4c7d4fb0a67f25dd0b809d",
+        "verification": {
+          "pass": false,
+          "error": "palette-keep: 246 visible RGB pixels differ\n\n246 !== 0\n"
+        },
+        "recordedAt": "2026-10-15T08:58:17.509Z"
+      },
+      "exactVisibleRgba": false,
+      "totals": {
+        "pixels": 768,
+        "expectedVisiblePixels": 672,
+        "actualVisiblePixels": 672,
+        "alphaMismatchPixels": 0,
+        "visibleRgbMismatchPixels": 246,
+        "visibleRgbMismatchChannels": 438,
+        "maxAbsChannelError": 124,
+        "maxAbsChannelErrors": [
+          124,
+          118,
+          99
+        ],
+        "maxAlphaError": 0,
+        "actualVisiblePaletteMembershipViolations": 237,
+        "hiddenRgbDifferencesIgnored": 0
+      }
+    },
+    {
+      "key": "palette-cut",
+      "settings": {
+        "family": "full-palette",
+        "colors": [
+          "#000000",
+          "#1d2b53",
+          "#7e2553",
+          "#008751",
+          "#ab5236",
+          "#5f574f",
+          "#c2c3c7",
+          "#fff1e8",
+          "#ff004d",
+          "#ffa300",
+          "#ffec27",
+          "#00e436",
+          "#29adff",
+          "#83769c",
+          "#ff77a8",
+          "#ffccaa"
+        ],
+        "paletteId": "preset-pico8",
+        "metric": "oklab",
+        "alphaCut": 128,
+        "maxColors": 8,
+        "cleanup": true,
+        "dither": "4x4",
+        "ditherStrength": 50,
+        "alphaMode": "cut"
+      },
+      "sourceFile": "palette-source.png",
+      "copySuccessMessage": "palette-source.png copied.",
+      "paste": {
+        "method": "ADB KEYCODE_PASTE",
+        "trusted": true
+      },
+      "receipt": {
+        "device": "android",
+        "key": "palette-cut",
+        "trusted": true,
+        "mime": "image/png",
+        "clipboardTypes": [
+          "image-uri",
+          "Files"
+        ],
+        "pasteStartedAt": "2026-10-15T08:58:20.667Z",
+        "file": "android-palette-cut-pasted.png",
+        "attemptFile": "android-palette-cut-attempt-2026-10-15T08-58-20-244Z-84e7367c5923-61ebd943.png",
+        "attemptReceipt": "android-palette-cut-attempt-2026-10-15T08-58-20-244Z-84e7367c5923-61ebd943.json",
+        "canonicalUpdated": true,
+        "bytes": 283,
+        "sha256": "84e7367c5923c634baa7570884d40dfb4343206c165ca5b150e2160de722139f",
+        "verification": {
+          "pass": true,
+          "key": "palette-cut",
+          "width": 32,
+          "height": 24,
+          "pixels": 768,
+          "visiblePixels": 384,
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "alphaValues": [
+            0,
+            255
+          ],
+          "usedColors": 8,
+          "encodedBytes": 283,
+          "encodedSha256": "84e7367c5923c634baa7570884d40dfb4343206c165ca5b150e2160de722139f",
+          "exactVisibleRgba": true
+        },
+        "recordedAt": "2026-10-15T08:58:20.244Z"
+      },
+      "exactVisibleRgba": true,
+      "totals": {
+        "pixels": 768,
+        "expectedVisiblePixels": 384,
+        "actualVisiblePixels": 384,
+        "alphaMismatchPixels": 0,
+        "visibleRgbMismatchPixels": 0,
+        "visibleRgbMismatchChannels": 0,
+        "maxAbsChannelError": 0,
+        "maxAbsChannelErrors": [
+          0,
+          0,
+          0
+        ],
+        "maxAlphaError": 0,
+        "actualVisiblePaletteMembershipViolations": 0,
+        "hiddenRgbDifferencesIgnored": 0
+      }
+    },
+    {
+      "key": "onebit",
+      "settings": {
+        "family": "two-color",
+        "first": "#000000",
+        "second": "#ffffff",
+        "none": 0,
+        "style": "solid",
+        "set": {
+          "threshold": 128,
+          "source": "luma",
+          "alpha": 128
+        },
+        "settings": {
+          "solid": {
+            "threshold": 128,
+            "source": "luma",
+            "alpha": 128
+          }
+        }
+      },
+      "sourceFile": "palette-source.png",
+      "copySuccessMessage": "palette-source.png copied.",
+      "paste": {
+        "method": "ADB KEYCODE_PASTE",
+        "trusted": true
+      },
+      "receipt": {
+        "device": "android",
+        "key": "onebit",
+        "trusted": true,
+        "mime": "image/png",
+        "clipboardTypes": [
+          "image-uri",
+          "Files"
+        ],
+        "pasteStartedAt": "2026-10-15T08:58:22.409Z",
+        "file": "android-onebit-pasted.png",
+        "attemptFile": "android-onebit-attempt-2026-10-15T08-58-21-984Z-03a1e4027a8c-991dd163.png",
+        "attemptReceipt": "android-onebit-attempt-2026-10-15T08-58-21-984Z-03a1e4027a8c-991dd163.json",
+        "canonicalUpdated": true,
+        "bytes": 171,
+        "sha256": "03a1e4027a8ce703c8b6ed050378fc56997e34a6abd2a1da465f674b49ffb33b",
+        "verification": {
+          "pass": true,
+          "key": "onebit",
+          "width": 32,
+          "height": 24,
+          "pixels": 768,
+          "visiblePixels": 384,
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "alphaValues": [
+            0,
+            255
+          ],
+          "usedColors": 2,
+          "encodedBytes": 171,
+          "encodedSha256": "03a1e4027a8ce703c8b6ed050378fc56997e34a6abd2a1da465f674b49ffb33b",
+          "exactVisibleRgba": true
+        },
+        "recordedAt": "2026-10-15T08:58:21.984Z"
+      },
+      "exactVisibleRgba": true,
+      "totals": {
+        "pixels": 768,
+        "expectedVisiblePixels": 384,
+        "actualVisiblePixels": 384,
+        "alphaMismatchPixels": 0,
+        "visibleRgbMismatchPixels": 0,
+        "visibleRgbMismatchChannels": 0,
+        "maxAbsChannelError": 0,
+        "maxAbsChannelErrors": [
+          0,
+          0,
+          0
+        ],
+        "maxAlphaError": 0,
+        "actualVisiblePaletteMembershipViolations": 0,
+        "hiddenRgbDifferencesIgnored": 0
+      }
+    },
+    {
+      "key": "gif-frame0",
+      "settings": {
+        "family": "full-palette",
+        "colors": [
+          "#000000",
+          "#1d2b53",
+          "#7e2553",
+          "#008751",
+          "#ab5236",
+          "#5f574f",
+          "#c2c3c7",
+          "#fff1e8",
+          "#ff004d",
+          "#ffa300",
+          "#ffec27",
+          "#00e436",
+          "#29adff",
+          "#83769c",
+          "#ff77a8",
+          "#ffccaa"
+        ],
+        "paletteId": "preset-pico8",
+        "metric": "oklab",
+        "alphaCut": 128,
+        "maxColors": 8,
+        "cleanup": true,
+        "dither": "4x4",
+        "ditherStrength": 50,
+        "alphaMode": "keep"
+      },
+      "sourceFile": "clip-source.gif",
+      "copySuccessMessage": "clip-source.gif copied as a still image.",
+      "paste": {
+        "method": "ADB KEYCODE_PASTE",
+        "trusted": true
+      },
+      "receipt": {
+        "device": "android",
+        "key": "gif-frame0",
+        "trusted": true,
+        "mime": "image/png",
+        "clipboardTypes": [
+          "image-uri",
+          "Files"
+        ],
+        "pasteStartedAt": "2026-10-15T08:58:24.441Z",
+        "file": "android-gif-frame0-pasted.png",
+        "attemptFile": "android-gif-frame0-attempt-2026-10-15T08-58-24-019Z-0f2d70e5b04a-a8d0c560.png",
+        "attemptReceipt": "android-gif-frame0-attempt-2026-10-15T08-58-24-019Z-0f2d70e5b04a-a8d0c560.json",
+        "canonicalUpdated": true,
+        "bytes": 378,
+        "sha256": "0f2d70e5b04ac36db6beff81aff0c6fac11e317d5e62db7b6fbe3d60a970f338",
+        "verification": {
+          "pass": true,
+          "key": "gif-frame0",
+          "width": 32,
+          "height": 24,
+          "pixels": 768,
+          "visiblePixels": 660,
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "alphaValues": [
+            0,
+            255
+          ],
+          "usedColors": 8,
+          "encodedBytes": 378,
+          "encodedSha256": "0f2d70e5b04ac36db6beff81aff0c6fac11e317d5e62db7b6fbe3d60a970f338",
+          "exactVisibleRgba": true
+        },
+        "recordedAt": "2026-10-15T08:58:24.019Z"
+      },
+      "exactVisibleRgba": true,
+      "totals": {
+        "pixels": 768,
+        "expectedVisiblePixels": 660,
+        "actualVisiblePixels": 660,
+        "alphaMismatchPixels": 0,
+        "visibleRgbMismatchPixels": 0,
+        "visibleRgbMismatchChannels": 0,
+        "maxAbsChannelError": 0,
+        "maxAbsChannelErrors": [
+          0,
+          0,
+          0
+        ],
+        "maxAlphaError": 0,
+        "actualVisiblePaletteMembershipViolations": 0,
+        "hiddenRgbDifferencesIgnored": 0
+      }
+    }
+  ],
+  "carriers": [
+    {
+      "mode": "both",
+      "copyCompleted": true,
+      "paste": {
+        "trusted": true,
+        "focused": true,
+        "types": [
+          "text/html",
+          "image-uri",
+          "Files"
+        ],
+        "pngFiles": 1,
+        "htmlCharacters": 0
+      },
+      "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+      "write": {
+        "mode": "image/png + text/html",
+        "trustedClick": true,
+        "activation": true,
+        "focused": true,
+        "started": "2026-10-15T08:58:25.203Z",
+        "completed": true,
+        "expectedPngSha256": "14d0012def2b51dbf17ce7e0022fb43d7cc2911209be1ed2b43bfe995c427691"
+      },
+      "source": {
+        "bytes": 422,
+        "sha256": "14d0012def2b51dbf17ce7e0022fb43d7cc2911209be1ed2b43bfe995c427691"
+      },
+      "nativePng": [
+        {
+          "bytes": 516,
+          "sha256": "66f1dfe72983c7a2fb652b8d07e6a4db42d497608e4c7d4fb0a67f25dd0b809d",
+          "exactEncodedBytes": false
+        }
+      ],
+      "htmlPng": {
+        "recovered": false,
+        "reason": "Missing or oversized HTML"
+      },
+      "completed": true,
+      "nativeAnalysis": {
+        "key": "palette-keep",
+        "scope": "Exact independent Sharp decode comparison with the frozen production-conversion oracle. No new matching oracle, tolerance, clipboard access or causal attribution. Hidden expected-alpha-zero RGB is ignored; every alpha byte and expected-visible RGB byte is compared.",
+        "runtime": {
+          "node": "v25.0.0",
+          "sharp": "0.35.5"
+        },
+        "decodedChannelFormat": "sRGB 8-bit RGBA through Sharp toColourspace(srgb), ensureAlpha and raw; PNG encoding/profile metadata is reported separately",
+        "expected": {
+          "width": 32,
+          "height": 24,
+          "encodedBytes": 422,
+          "encodedSha256": "14d0012def2b51dbf17ce7e0022fb43d7cc2911209be1ed2b43bfe995c427691",
+          "metadata": {
+            "format": "png",
+            "width": 32,
+            "height": 24,
+            "channels": 4,
+            "space": "srgb",
+            "depth": "uchar",
+            "hasAlpha": true,
+            "hasProfile": false,
+            "density": 72,
+            "iccBytes": 0,
+            "iccSha256": null
+          },
+          "png": {
+            "isPng": true,
+            "chunks": [
+              {
+                "type": "IHDR",
+                "length": 13
+              },
+              {
+                "type": "sRGB",
+                "length": 1
+              },
+              {
+                "type": "IDAT",
+                "length": 352
+              },
+              {
+                "type": "IEND",
+                "length": 0
+              }
+            ],
+            "header": {
+              "width": 32,
+              "height": 24,
+              "bitDepth": 8,
+              "colorType": 6,
+              "compression": 0,
+              "filter": 0,
+              "interlace": 0
+            },
+            "sRGBRenderingIntent": 0
+          },
+          "activePalette": [
+            "#000000",
+            "#1d2b53",
+            "#c2c3c7",
+            "#ff004d",
+            "#ffec27",
+            "#00e436",
+            "#29adff",
+            "#83769c"
+          ]
+        },
+        "actual": {
+          "encodedBytes": 516,
+          "encodedSha256": "66f1dfe72983c7a2fb652b8d07e6a4db42d497608e4c7d4fb0a67f25dd0b809d",
+          "png": {
+            "isPng": true,
+            "chunks": [
+              {
+                "type": "IHDR",
+                "length": 13
+              },
+              {
+                "type": "IDAT",
+                "length": 441
+              },
+              {
+                "type": "IDAT",
+                "length": 6
+              },
+              {
+                "type": "IEND",
+                "length": 0
+              }
+            ],
+            "header": {
+              "width": 32,
+              "height": 24,
+              "bitDepth": 8,
+              "colorType": 6,
+              "compression": 0,
+              "filter": 0,
+              "interlace": 0
+            }
+          },
+          "width": 32,
+          "height": 24,
+          "metadata": {
+            "format": "png",
+            "width": 32,
+            "height": 24,
+            "channels": 4,
+            "space": "srgb",
+            "depth": "uchar",
+            "hasAlpha": true,
+            "hasProfile": false,
+            "density": 72,
+            "iccBytes": 0,
+            "iccSha256": null
+          },
+          "usedColors": 33,
+          "colorsOutsideActivePalette": [
+            "#00e336",
+            "#00e338",
+            "#00e536",
+            "#00ff00",
+            "#00ffff",
+            "#1c2a52",
+            "#1c2c54",
+            "#1d2a52",
+            "#1e2c54",
+            "#28abff",
+            "#28adff",
+            "#2aadff",
+            "#83769b",
+            "#83769d",
+            "#83789b",
+            "#c1c3c7",
+            "#c3c3c7",
+            "#ff0000",
+            "#ff004c",
+            "#ff004e",
+            "#ff00ff",
+            "#ffeb28",
+            "#ffed26",
+            "#ffff00",
+            "#ffffff"
+          ]
+        },
+        "exactVisibleRgba": false,
+        "dimensionsMatch": true,
+        "comparisonStatus": "compared at identical dimensions",
+        "totals": {
+          "pixels": 768,
+          "expectedVisiblePixels": 672,
+          "actualVisiblePixels": 672,
+          "alphaMismatchPixels": 0,
+          "visibleRgbMismatchPixels": 246,
+          "visibleRgbMismatchChannels": 438,
+          "maxAbsChannelError": 124,
+          "maxAbsChannelErrors": [
+            124,
+            118,
+            99
+          ],
+          "maxAlphaError": 0,
+          "actualVisiblePaletteMembershipViolations": 237,
+          "hiddenRgbDifferencesIgnored": 0
+        },
+        "byExpectedAlpha": [
+          {
+            "expectedAlpha": 0,
+            "pixels": 96,
+            "actualAlphaCounts": {
+              "0": 96
+            },
+            "alphaMismatchPixels": 0,
+            "visibleRgbMismatchPixels": 0,
+            "visibleRgbMismatchChannels": 0,
+            "maxAbsChannelError": 0,
+            "maxAbsChannelErrors": [
+              0,
+              0,
+              0
+            ],
+            "actualVisiblePaletteMembershipViolations": 0,
+            "examples": []
+          },
+          {
+            "expectedAlpha": 1,
+            "pixels": 96,
+            "actualAlphaCounts": {
+              "1": 96
+            },
+            "alphaMismatchPixels": 0,
+            "visibleRgbMismatchPixels": 57,
+            "visibleRgbMismatchChannels": 135,
+            "maxAbsChannelError": 124,
+            "maxAbsChannelErrors": [
+              124,
+              118,
+              99
+            ],
+            "actualVisiblePaletteMembershipViolations": 48,
+            "examples": [
+              {
+                "x": 10,
+                "y": 1,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  255,
+                  255,
+                  255,
+                  1
+                ]
+              },
+              {
+                "x": 11,
+                "y": 1,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  255,
+                  255,
+                  255,
+                  1
+                ]
+              },
+              {
+                "x": 12,
+                "y": 1,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 13,
+                "y": 1,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 14,
+                "y": 1,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 15,
+                "y": 1,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  1
+                ],
+                "actual": [
+                  255,
+                  255,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 16,
+                "y": 1,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  1
+                ],
+                "actual": [
+                  255,
+                  255,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 17,
+                "y": 1,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  1
+                ],
+                "actual": [
+                  255,
+                  255,
+                  0,
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "expectedAlpha": 64,
+            "pixels": 96,
+            "actualAlphaCounts": {
+              "64": 96
+            },
+            "alphaMismatchPixels": 0,
+            "visibleRgbMismatchPixels": 57,
+            "visibleRgbMismatchChannels": 105,
+            "maxAbsChannelError": 2,
+            "maxAbsChannelErrors": [
+              1,
+              2,
+              2
+            ],
+            "actualVisiblePaletteMembershipViolations": 57,
+            "examples": [
+              {
+                "x": 10,
+                "y": 2,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  64
+                ],
+                "actual": [
+                  255,
+                  235,
+                  40,
+                  64
+                ]
+              },
+              {
+                "x": 11,
+                "y": 2,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  64
+                ],
+                "actual": [
+                  195,
+                  195,
+                  199,
+                  64
+                ]
+              },
+              {
+                "x": 12,
+                "y": 2,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  64
+                ],
+                "actual": [
+                  255,
+                  0,
+                  76,
+                  64
+                ]
+              },
+              {
+                "x": 13,
+                "y": 2,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  64
+                ],
+                "actual": [
+                  255,
+                  0,
+                  76,
+                  64
+                ]
+              },
+              {
+                "x": 14,
+                "y": 2,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  64
+                ],
+                "actual": [
+                  255,
+                  0,
+                  76,
+                  64
+                ]
+              },
+              {
+                "x": 15,
+                "y": 2,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  64
+                ],
+                "actual": [
+                  255,
+                  235,
+                  40,
+                  64
+                ]
+              },
+              {
+                "x": 16,
+                "y": 2,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  64
+                ],
+                "actual": [
+                  255,
+                  235,
+                  40,
+                  64
+                ]
+              },
+              {
+                "x": 17,
+                "y": 2,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  64
+                ],
+                "actual": [
+                  255,
+                  235,
+                  40,
+                  64
+                ]
+              }
+            ]
+          },
+          {
+            "expectedAlpha": 127,
+            "pixels": 96,
+            "actualAlphaCounts": {
+              "127": 96
+            },
+            "alphaMismatchPixels": 0,
+            "visibleRgbMismatchPixels": 57,
+            "visibleRgbMismatchChannels": 81,
+            "maxAbsChannelError": 1,
+            "maxAbsChannelErrors": [
+              1,
+              1,
+              1
+            ],
+            "actualVisiblePaletteMembershipViolations": 57,
+            "examples": [
+              {
+                "x": 10,
+                "y": 3,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  127
+                ],
+                "actual": [
+                  195,
+                  195,
+                  199,
+                  127
+                ]
+              },
+              {
+                "x": 11,
+                "y": 3,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  127
+                ],
+                "actual": [
+                  195,
+                  195,
+                  199,
+                  127
+                ]
+              },
+              {
+                "x": 12,
+                "y": 3,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  127
+                ],
+                "actual": [
+                  255,
+                  0,
+                  76,
+                  127
+                ]
+              },
+              {
+                "x": 13,
+                "y": 3,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  127
+                ],
+                "actual": [
+                  255,
+                  0,
+                  76,
+                  127
+                ]
+              },
+              {
+                "x": 14,
+                "y": 3,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  127
+                ],
+                "actual": [
+                  255,
+                  0,
+                  76,
+                  127
+                ]
+              },
+              {
+                "x": 15,
+                "y": 3,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  127
+                ],
+                "actual": [
+                  255,
+                  237,
+                  38,
+                  127
+                ]
+              },
+              {
+                "x": 16,
+                "y": 3,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  127
+                ],
+                "actual": [
+                  255,
+                  237,
+                  38,
+                  127
+                ]
+              },
+              {
+                "x": 17,
+                "y": 3,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  127
+                ],
+                "actual": [
+                  255,
+                  237,
+                  38,
+                  127
+                ]
+              }
+            ]
+          },
+          {
+            "expectedAlpha": 128,
+            "pixels": 96,
+            "actualAlphaCounts": {
+              "128": 96
+            },
+            "alphaMismatchPixels": 0,
+            "visibleRgbMismatchPixels": 57,
+            "visibleRgbMismatchChannels": 87,
+            "maxAbsChannelError": 1,
+            "maxAbsChannelErrors": [
+              1,
+              1,
+              1
+            ],
+            "actualVisiblePaletteMembershipViolations": 57,
+            "examples": [
+              {
+                "x": 10,
+                "y": 4,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  128
+                ],
+                "actual": [
+                  255,
+                  235,
+                  40,
+                  128
+                ]
+              },
+              {
+                "x": 11,
+                "y": 4,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  128
+                ],
+                "actual": [
+                  193,
+                  195,
+                  199,
+                  128
+                ]
+              },
+              {
+                "x": 12,
+                "y": 4,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  128
+                ],
+                "actual": [
+                  255,
+                  0,
+                  78,
+                  128
+                ]
+              },
+              {
+                "x": 13,
+                "y": 4,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  128
+                ],
+                "actual": [
+                  255,
+                  0,
+                  78,
+                  128
+                ]
+              },
+              {
+                "x": 14,
+                "y": 4,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  128
+                ],
+                "actual": [
+                  255,
+                  0,
+                  78,
+                  128
+                ]
+              },
+              {
+                "x": 15,
+                "y": 4,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  128
+                ],
+                "actual": [
+                  255,
+                  235,
+                  40,
+                  128
+                ]
+              },
+              {
+                "x": 16,
+                "y": 4,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  128
+                ],
+                "actual": [
+                  255,
+                  235,
+                  40,
+                  128
+                ]
+              },
+              {
+                "x": 17,
+                "y": 4,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  128
+                ],
+                "actual": [
+                  255,
+                  235,
+                  40,
+                  128
+                ]
+              }
+            ]
+          },
+          {
+            "expectedAlpha": 192,
+            "pixels": 96,
+            "actualAlphaCounts": {
+              "192": 96
+            },
+            "alphaMismatchPixels": 0,
+            "visibleRgbMismatchPixels": 18,
+            "visibleRgbMismatchChannels": 30,
+            "maxAbsChannelError": 1,
+            "maxAbsChannelErrors": [
+              0,
+              1,
+              1
+            ],
+            "actualVisiblePaletteMembershipViolations": 18,
+            "examples": [
+              {
+                "x": 25,
+                "y": 5,
+                "expected": [
+                  29,
+                  43,
+                  83,
+                  192
+                ],
+                "actual": [
+                  29,
+                  42,
+                  82,
+                  192
+                ]
+              },
+              {
+                "x": 26,
+                "y": 5,
+                "expected": [
+                  29,
+                  43,
+                  83,
+                  192
+                ],
+                "actual": [
+                  29,
+                  42,
+                  82,
+                  192
+                ]
+              },
+              {
+                "x": 27,
+                "y": 5,
+                "expected": [
+                  131,
+                  118,
+                  156,
+                  192
+                ],
+                "actual": [
+                  131,
+                  118,
+                  155,
+                  192
+                ]
+              },
+              {
+                "x": 28,
+                "y": 5,
+                "expected": [
+                  131,
+                  118,
+                  156,
+                  192
+                ],
+                "actual": [
+                  131,
+                  118,
+                  155,
+                  192
+                ]
+              },
+              {
+                "x": 21,
+                "y": 13,
+                "expected": [
+                  29,
+                  43,
+                  83,
+                  192
+                ],
+                "actual": [
+                  29,
+                  42,
+                  82,
+                  192
+                ]
+              },
+              {
+                "x": 22,
+                "y": 13,
+                "expected": [
+                  29,
+                  43,
+                  83,
+                  192
+                ],
+                "actual": [
+                  29,
+                  42,
+                  82,
+                  192
+                ]
+              },
+              {
+                "x": 23,
+                "y": 13,
+                "expected": [
+                  29,
+                  43,
+                  83,
+                  192
+                ],
+                "actual": [
+                  29,
+                  42,
+                  82,
+                  192
+                ]
+              },
+              {
+                "x": 25,
+                "y": 13,
+                "expected": [
+                  29,
+                  43,
+                  83,
+                  192
+                ],
+                "actual": [
+                  29,
+                  42,
+                  82,
+                  192
+                ]
+              }
+            ]
+          },
+          {
+            "expectedAlpha": 254,
+            "pixels": 96,
+            "actualAlphaCounts": {
+              "254": 96
+            },
+            "alphaMismatchPixels": 0,
+            "visibleRgbMismatchPixels": 0,
+            "visibleRgbMismatchChannels": 0,
+            "maxAbsChannelError": 0,
+            "maxAbsChannelErrors": [
+              0,
+              0,
+              0
+            ],
+            "actualVisiblePaletteMembershipViolations": 0,
+            "examples": []
+          },
+          {
+            "expectedAlpha": 255,
+            "pixels": 96,
+            "actualAlphaCounts": {
+              "255": 96
+            },
+            "alphaMismatchPixels": 0,
+            "visibleRgbMismatchPixels": 0,
+            "visibleRgbMismatchChannels": 0,
+            "maxAbsChannelError": 0,
+            "maxAbsChannelErrors": [
+              0,
+              0,
+              0
+            ],
+            "actualVisiblePaletteMembershipViolations": 0,
+            "examples": []
+          }
+        ],
+        "rgbTransitions": [
+          {
+            "transition": "#c2c3c7 -> #c1c3c7 @ alpha 128",
+            "pixels": 16
+          },
+          {
+            "transition": "#c2c3c7 -> #c3c3c7 @ alpha 127",
+            "pixels": 14
+          },
+          {
+            "transition": "#1d2b53 -> #1d2a52 @ alpha 192",
+            "pixels": 12
+          },
+          {
+            "transition": "#1d2b53 -> #1e2c54 @ alpha 128",
+            "pixels": 12
+          },
+          {
+            "transition": "#c2c3c7 -> #ffffff @ alpha 1",
+            "pixels": 11
+          },
+          {
+            "transition": "#c2c3c7 -> #c3c3c7 @ alpha 64",
+            "pixels": 10
+          },
+          {
+            "transition": "#ffec27 -> #ffeb28 @ alpha 64",
+            "pixels": 10
+          },
+          {
+            "transition": "#00e436 -> #00ff00 @ alpha 1",
+            "pixels": 9
+          },
+          {
+            "transition": "#1d2b53 -> #000000 @ alpha 1",
+            "pixels": 9
+          },
+          {
+            "transition": "#1d2b53 -> #1c2a52 @ alpha 127",
+            "pixels": 9
+          },
+          {
+            "transition": "#29adff -> #00ffff @ alpha 1",
+            "pixels": 9
+          },
+          {
+            "transition": "#29adff -> #28abff @ alpha 64",
+            "pixels": 9
+          },
+          {
+            "transition": "#29adff -> #28adff @ alpha 127",
+            "pixels": 9
+          },
+          {
+            "transition": "#29adff -> #2aadff @ alpha 128",
+            "pixels": 9
+          },
+          {
+            "transition": "#83769c -> #83789b @ alpha 64",
+            "pixels": 9
+          },
+          {
+            "transition": "#00e436 -> #00e336 @ alpha 128",
+            "pixels": 8
+          },
+          {
+            "transition": "#00e436 -> #00e338 @ alpha 64",
+            "pixels": 8
+          },
+          {
+            "transition": "#00e436 -> #00e536 @ alpha 127",
+            "pixels": 8
+          },
+          {
+            "transition": "#ffec27 -> #ffff00 @ alpha 1",
+            "pixels": 8
+          },
+          {
+            "transition": "#1d2b53 -> #1c2c54 @ alpha 64",
+            "pixels": 6
+          },
+          {
+            "transition": "#83769c -> #83769b @ alpha 192",
+            "pixels": 6
+          },
+          {
+            "transition": "#83769c -> #83769d @ alpha 127",
+            "pixels": 6
+          },
+          {
+            "transition": "#83769c -> #ff00ff @ alpha 1",
+            "pixels": 6
+          },
+          {
+            "transition": "#ffec27 -> #ffeb28 @ alpha 128",
+            "pixels": 6
+          },
+          {
+            "transition": "#ffec27 -> #ffed26 @ alpha 127",
+            "pixels": 6
+          },
+          {
+            "transition": "#ff004d -> #ff0000 @ alpha 1",
+            "pixels": 5
+          },
+          {
+            "transition": "#ff004d -> #ff004c @ alpha 127",
+            "pixels": 5
+          },
+          {
+            "transition": "#ff004d -> #ff004c @ alpha 64",
+            "pixels": 5
+          },
+          {
+            "transition": "#83769c -> #83769b @ alpha 128",
+            "pixels": 3
+          },
+          {
+            "transition": "#ff004d -> #ff004e @ alpha 128",
+            "pixels": 3
+          }
+        ],
+        "rgbTransitionKinds": 30
+      }
+    },
+    {
+      "mode": "png",
+      "copyCompleted": true,
+      "paste": {
+        "trusted": true,
+        "focused": true,
+        "types": [
+          "image-uri",
+          "Files"
+        ],
+        "pngFiles": 1,
+        "htmlCharacters": 0
+      },
+      "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+      "write": {
+        "mode": "image/png",
+        "trustedClick": true,
+        "activation": true,
+        "focused": true,
+        "started": "2026-10-15T08:58:26.287Z",
+        "completed": true,
+        "expectedPngSha256": "14d0012def2b51dbf17ce7e0022fb43d7cc2911209be1ed2b43bfe995c427691"
+      },
+      "source": {
+        "bytes": 422,
+        "sha256": "14d0012def2b51dbf17ce7e0022fb43d7cc2911209be1ed2b43bfe995c427691"
+      },
+      "nativePng": [
+        {
+          "bytes": 516,
+          "sha256": "66f1dfe72983c7a2fb652b8d07e6a4db42d497608e4c7d4fb0a67f25dd0b809d",
+          "exactEncodedBytes": false
+        }
+      ],
+      "htmlPng": {
+        "recovered": false,
+        "reason": "Missing or oversized HTML"
+      },
+      "completed": true,
+      "nativeAnalysis": {
+        "key": "palette-keep",
+        "scope": "Exact independent Sharp decode comparison with the frozen production-conversion oracle. No new matching oracle, tolerance, clipboard access or causal attribution. Hidden expected-alpha-zero RGB is ignored; every alpha byte and expected-visible RGB byte is compared.",
+        "runtime": {
+          "node": "v25.0.0",
+          "sharp": "0.35.5"
+        },
+        "decodedChannelFormat": "sRGB 8-bit RGBA through Sharp toColourspace(srgb), ensureAlpha and raw; PNG encoding/profile metadata is reported separately",
+        "expected": {
+          "width": 32,
+          "height": 24,
+          "encodedBytes": 422,
+          "encodedSha256": "14d0012def2b51dbf17ce7e0022fb43d7cc2911209be1ed2b43bfe995c427691",
+          "metadata": {
+            "format": "png",
+            "width": 32,
+            "height": 24,
+            "channels": 4,
+            "space": "srgb",
+            "depth": "uchar",
+            "hasAlpha": true,
+            "hasProfile": false,
+            "density": 72,
+            "iccBytes": 0,
+            "iccSha256": null
+          },
+          "png": {
+            "isPng": true,
+            "chunks": [
+              {
+                "type": "IHDR",
+                "length": 13
+              },
+              {
+                "type": "sRGB",
+                "length": 1
+              },
+              {
+                "type": "IDAT",
+                "length": 352
+              },
+              {
+                "type": "IEND",
+                "length": 0
+              }
+            ],
+            "header": {
+              "width": 32,
+              "height": 24,
+              "bitDepth": 8,
+              "colorType": 6,
+              "compression": 0,
+              "filter": 0,
+              "interlace": 0
+            },
+            "sRGBRenderingIntent": 0
+          },
+          "activePalette": [
+            "#000000",
+            "#1d2b53",
+            "#c2c3c7",
+            "#ff004d",
+            "#ffec27",
+            "#00e436",
+            "#29adff",
+            "#83769c"
+          ]
+        },
+        "actual": {
+          "encodedBytes": 516,
+          "encodedSha256": "66f1dfe72983c7a2fb652b8d07e6a4db42d497608e4c7d4fb0a67f25dd0b809d",
+          "png": {
+            "isPng": true,
+            "chunks": [
+              {
+                "type": "IHDR",
+                "length": 13
+              },
+              {
+                "type": "IDAT",
+                "length": 441
+              },
+              {
+                "type": "IDAT",
+                "length": 6
+              },
+              {
+                "type": "IEND",
+                "length": 0
+              }
+            ],
+            "header": {
+              "width": 32,
+              "height": 24,
+              "bitDepth": 8,
+              "colorType": 6,
+              "compression": 0,
+              "filter": 0,
+              "interlace": 0
+            }
+          },
+          "width": 32,
+          "height": 24,
+          "metadata": {
+            "format": "png",
+            "width": 32,
+            "height": 24,
+            "channels": 4,
+            "space": "srgb",
+            "depth": "uchar",
+            "hasAlpha": true,
+            "hasProfile": false,
+            "density": 72,
+            "iccBytes": 0,
+            "iccSha256": null
+          },
+          "usedColors": 33,
+          "colorsOutsideActivePalette": [
+            "#00e336",
+            "#00e338",
+            "#00e536",
+            "#00ff00",
+            "#00ffff",
+            "#1c2a52",
+            "#1c2c54",
+            "#1d2a52",
+            "#1e2c54",
+            "#28abff",
+            "#28adff",
+            "#2aadff",
+            "#83769b",
+            "#83769d",
+            "#83789b",
+            "#c1c3c7",
+            "#c3c3c7",
+            "#ff0000",
+            "#ff004c",
+            "#ff004e",
+            "#ff00ff",
+            "#ffeb28",
+            "#ffed26",
+            "#ffff00",
+            "#ffffff"
+          ]
+        },
+        "exactVisibleRgba": false,
+        "dimensionsMatch": true,
+        "comparisonStatus": "compared at identical dimensions",
+        "totals": {
+          "pixels": 768,
+          "expectedVisiblePixels": 672,
+          "actualVisiblePixels": 672,
+          "alphaMismatchPixels": 0,
+          "visibleRgbMismatchPixels": 246,
+          "visibleRgbMismatchChannels": 438,
+          "maxAbsChannelError": 124,
+          "maxAbsChannelErrors": [
+            124,
+            118,
+            99
+          ],
+          "maxAlphaError": 0,
+          "actualVisiblePaletteMembershipViolations": 237,
+          "hiddenRgbDifferencesIgnored": 0
+        },
+        "byExpectedAlpha": [
+          {
+            "expectedAlpha": 0,
+            "pixels": 96,
+            "actualAlphaCounts": {
+              "0": 96
+            },
+            "alphaMismatchPixels": 0,
+            "visibleRgbMismatchPixels": 0,
+            "visibleRgbMismatchChannels": 0,
+            "maxAbsChannelError": 0,
+            "maxAbsChannelErrors": [
+              0,
+              0,
+              0
+            ],
+            "actualVisiblePaletteMembershipViolations": 0,
+            "examples": []
+          },
+          {
+            "expectedAlpha": 1,
+            "pixels": 96,
+            "actualAlphaCounts": {
+              "1": 96
+            },
+            "alphaMismatchPixels": 0,
+            "visibleRgbMismatchPixels": 57,
+            "visibleRgbMismatchChannels": 135,
+            "maxAbsChannelError": 124,
+            "maxAbsChannelErrors": [
+              124,
+              118,
+              99
+            ],
+            "actualVisiblePaletteMembershipViolations": 48,
+            "examples": [
+              {
+                "x": 10,
+                "y": 1,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  255,
+                  255,
+                  255,
+                  1
+                ]
+              },
+              {
+                "x": 11,
+                "y": 1,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  255,
+                  255,
+                  255,
+                  1
+                ]
+              },
+              {
+                "x": 12,
+                "y": 1,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 13,
+                "y": 1,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 14,
+                "y": 1,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 15,
+                "y": 1,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  1
+                ],
+                "actual": [
+                  255,
+                  255,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 16,
+                "y": 1,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  1
+                ],
+                "actual": [
+                  255,
+                  255,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 17,
+                "y": 1,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  1
+                ],
+                "actual": [
+                  255,
+                  255,
+                  0,
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "expectedAlpha": 64,
+            "pixels": 96,
+            "actualAlphaCounts": {
+              "64": 96
+            },
+            "alphaMismatchPixels": 0,
+            "visibleRgbMismatchPixels": 57,
+            "visibleRgbMismatchChannels": 105,
+            "maxAbsChannelError": 2,
+            "maxAbsChannelErrors": [
+              1,
+              2,
+              2
+            ],
+            "actualVisiblePaletteMembershipViolations": 57,
+            "examples": [
+              {
+                "x": 10,
+                "y": 2,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  64
+                ],
+                "actual": [
+                  255,
+                  235,
+                  40,
+                  64
+                ]
+              },
+              {
+                "x": 11,
+                "y": 2,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  64
+                ],
+                "actual": [
+                  195,
+                  195,
+                  199,
+                  64
+                ]
+              },
+              {
+                "x": 12,
+                "y": 2,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  64
+                ],
+                "actual": [
+                  255,
+                  0,
+                  76,
+                  64
+                ]
+              },
+              {
+                "x": 13,
+                "y": 2,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  64
+                ],
+                "actual": [
+                  255,
+                  0,
+                  76,
+                  64
+                ]
+              },
+              {
+                "x": 14,
+                "y": 2,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  64
+                ],
+                "actual": [
+                  255,
+                  0,
+                  76,
+                  64
+                ]
+              },
+              {
+                "x": 15,
+                "y": 2,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  64
+                ],
+                "actual": [
+                  255,
+                  235,
+                  40,
+                  64
+                ]
+              },
+              {
+                "x": 16,
+                "y": 2,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  64
+                ],
+                "actual": [
+                  255,
+                  235,
+                  40,
+                  64
+                ]
+              },
+              {
+                "x": 17,
+                "y": 2,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  64
+                ],
+                "actual": [
+                  255,
+                  235,
+                  40,
+                  64
+                ]
+              }
+            ]
+          },
+          {
+            "expectedAlpha": 127,
+            "pixels": 96,
+            "actualAlphaCounts": {
+              "127": 96
+            },
+            "alphaMismatchPixels": 0,
+            "visibleRgbMismatchPixels": 57,
+            "visibleRgbMismatchChannels": 81,
+            "maxAbsChannelError": 1,
+            "maxAbsChannelErrors": [
+              1,
+              1,
+              1
+            ],
+            "actualVisiblePaletteMembershipViolations": 57,
+            "examples": [
+              {
+                "x": 10,
+                "y": 3,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  127
+                ],
+                "actual": [
+                  195,
+                  195,
+                  199,
+                  127
+                ]
+              },
+              {
+                "x": 11,
+                "y": 3,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  127
+                ],
+                "actual": [
+                  195,
+                  195,
+                  199,
+                  127
+                ]
+              },
+              {
+                "x": 12,
+                "y": 3,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  127
+                ],
+                "actual": [
+                  255,
+                  0,
+                  76,
+                  127
+                ]
+              },
+              {
+                "x": 13,
+                "y": 3,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  127
+                ],
+                "actual": [
+                  255,
+                  0,
+                  76,
+                  127
+                ]
+              },
+              {
+                "x": 14,
+                "y": 3,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  127
+                ],
+                "actual": [
+                  255,
+                  0,
+                  76,
+                  127
+                ]
+              },
+              {
+                "x": 15,
+                "y": 3,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  127
+                ],
+                "actual": [
+                  255,
+                  237,
+                  38,
+                  127
+                ]
+              },
+              {
+                "x": 16,
+                "y": 3,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  127
+                ],
+                "actual": [
+                  255,
+                  237,
+                  38,
+                  127
+                ]
+              },
+              {
+                "x": 17,
+                "y": 3,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  127
+                ],
+                "actual": [
+                  255,
+                  237,
+                  38,
+                  127
+                ]
+              }
+            ]
+          },
+          {
+            "expectedAlpha": 128,
+            "pixels": 96,
+            "actualAlphaCounts": {
+              "128": 96
+            },
+            "alphaMismatchPixels": 0,
+            "visibleRgbMismatchPixels": 57,
+            "visibleRgbMismatchChannels": 87,
+            "maxAbsChannelError": 1,
+            "maxAbsChannelErrors": [
+              1,
+              1,
+              1
+            ],
+            "actualVisiblePaletteMembershipViolations": 57,
+            "examples": [
+              {
+                "x": 10,
+                "y": 4,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  128
+                ],
+                "actual": [
+                  255,
+                  235,
+                  40,
+                  128
+                ]
+              },
+              {
+                "x": 11,
+                "y": 4,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  128
+                ],
+                "actual": [
+                  193,
+                  195,
+                  199,
+                  128
+                ]
+              },
+              {
+                "x": 12,
+                "y": 4,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  128
+                ],
+                "actual": [
+                  255,
+                  0,
+                  78,
+                  128
+                ]
+              },
+              {
+                "x": 13,
+                "y": 4,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  128
+                ],
+                "actual": [
+                  255,
+                  0,
+                  78,
+                  128
+                ]
+              },
+              {
+                "x": 14,
+                "y": 4,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  128
+                ],
+                "actual": [
+                  255,
+                  0,
+                  78,
+                  128
+                ]
+              },
+              {
+                "x": 15,
+                "y": 4,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  128
+                ],
+                "actual": [
+                  255,
+                  235,
+                  40,
+                  128
+                ]
+              },
+              {
+                "x": 16,
+                "y": 4,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  128
+                ],
+                "actual": [
+                  255,
+                  235,
+                  40,
+                  128
+                ]
+              },
+              {
+                "x": 17,
+                "y": 4,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  128
+                ],
+                "actual": [
+                  255,
+                  235,
+                  40,
+                  128
+                ]
+              }
+            ]
+          },
+          {
+            "expectedAlpha": 192,
+            "pixels": 96,
+            "actualAlphaCounts": {
+              "192": 96
+            },
+            "alphaMismatchPixels": 0,
+            "visibleRgbMismatchPixels": 18,
+            "visibleRgbMismatchChannels": 30,
+            "maxAbsChannelError": 1,
+            "maxAbsChannelErrors": [
+              0,
+              1,
+              1
+            ],
+            "actualVisiblePaletteMembershipViolations": 18,
+            "examples": [
+              {
+                "x": 25,
+                "y": 5,
+                "expected": [
+                  29,
+                  43,
+                  83,
+                  192
+                ],
+                "actual": [
+                  29,
+                  42,
+                  82,
+                  192
+                ]
+              },
+              {
+                "x": 26,
+                "y": 5,
+                "expected": [
+                  29,
+                  43,
+                  83,
+                  192
+                ],
+                "actual": [
+                  29,
+                  42,
+                  82,
+                  192
+                ]
+              },
+              {
+                "x": 27,
+                "y": 5,
+                "expected": [
+                  131,
+                  118,
+                  156,
+                  192
+                ],
+                "actual": [
+                  131,
+                  118,
+                  155,
+                  192
+                ]
+              },
+              {
+                "x": 28,
+                "y": 5,
+                "expected": [
+                  131,
+                  118,
+                  156,
+                  192
+                ],
+                "actual": [
+                  131,
+                  118,
+                  155,
+                  192
+                ]
+              },
+              {
+                "x": 21,
+                "y": 13,
+                "expected": [
+                  29,
+                  43,
+                  83,
+                  192
+                ],
+                "actual": [
+                  29,
+                  42,
+                  82,
+                  192
+                ]
+              },
+              {
+                "x": 22,
+                "y": 13,
+                "expected": [
+                  29,
+                  43,
+                  83,
+                  192
+                ],
+                "actual": [
+                  29,
+                  42,
+                  82,
+                  192
+                ]
+              },
+              {
+                "x": 23,
+                "y": 13,
+                "expected": [
+                  29,
+                  43,
+                  83,
+                  192
+                ],
+                "actual": [
+                  29,
+                  42,
+                  82,
+                  192
+                ]
+              },
+              {
+                "x": 25,
+                "y": 13,
+                "expected": [
+                  29,
+                  43,
+                  83,
+                  192
+                ],
+                "actual": [
+                  29,
+                  42,
+                  82,
+                  192
+                ]
+              }
+            ]
+          },
+          {
+            "expectedAlpha": 254,
+            "pixels": 96,
+            "actualAlphaCounts": {
+              "254": 96
+            },
+            "alphaMismatchPixels": 0,
+            "visibleRgbMismatchPixels": 0,
+            "visibleRgbMismatchChannels": 0,
+            "maxAbsChannelError": 0,
+            "maxAbsChannelErrors": [
+              0,
+              0,
+              0
+            ],
+            "actualVisiblePaletteMembershipViolations": 0,
+            "examples": []
+          },
+          {
+            "expectedAlpha": 255,
+            "pixels": 96,
+            "actualAlphaCounts": {
+              "255": 96
+            },
+            "alphaMismatchPixels": 0,
+            "visibleRgbMismatchPixels": 0,
+            "visibleRgbMismatchChannels": 0,
+            "maxAbsChannelError": 0,
+            "maxAbsChannelErrors": [
+              0,
+              0,
+              0
+            ],
+            "actualVisiblePaletteMembershipViolations": 0,
+            "examples": []
+          }
+        ],
+        "rgbTransitions": [
+          {
+            "transition": "#c2c3c7 -> #c1c3c7 @ alpha 128",
+            "pixels": 16
+          },
+          {
+            "transition": "#c2c3c7 -> #c3c3c7 @ alpha 127",
+            "pixels": 14
+          },
+          {
+            "transition": "#1d2b53 -> #1d2a52 @ alpha 192",
+            "pixels": 12
+          },
+          {
+            "transition": "#1d2b53 -> #1e2c54 @ alpha 128",
+            "pixels": 12
+          },
+          {
+            "transition": "#c2c3c7 -> #ffffff @ alpha 1",
+            "pixels": 11
+          },
+          {
+            "transition": "#c2c3c7 -> #c3c3c7 @ alpha 64",
+            "pixels": 10
+          },
+          {
+            "transition": "#ffec27 -> #ffeb28 @ alpha 64",
+            "pixels": 10
+          },
+          {
+            "transition": "#00e436 -> #00ff00 @ alpha 1",
+            "pixels": 9
+          },
+          {
+            "transition": "#1d2b53 -> #000000 @ alpha 1",
+            "pixels": 9
+          },
+          {
+            "transition": "#1d2b53 -> #1c2a52 @ alpha 127",
+            "pixels": 9
+          },
+          {
+            "transition": "#29adff -> #00ffff @ alpha 1",
+            "pixels": 9
+          },
+          {
+            "transition": "#29adff -> #28abff @ alpha 64",
+            "pixels": 9
+          },
+          {
+            "transition": "#29adff -> #28adff @ alpha 127",
+            "pixels": 9
+          },
+          {
+            "transition": "#29adff -> #2aadff @ alpha 128",
+            "pixels": 9
+          },
+          {
+            "transition": "#83769c -> #83789b @ alpha 64",
+            "pixels": 9
+          },
+          {
+            "transition": "#00e436 -> #00e336 @ alpha 128",
+            "pixels": 8
+          },
+          {
+            "transition": "#00e436 -> #00e338 @ alpha 64",
+            "pixels": 8
+          },
+          {
+            "transition": "#00e436 -> #00e536 @ alpha 127",
+            "pixels": 8
+          },
+          {
+            "transition": "#ffec27 -> #ffff00 @ alpha 1",
+            "pixels": 8
+          },
+          {
+            "transition": "#1d2b53 -> #1c2c54 @ alpha 64",
+            "pixels": 6
+          },
+          {
+            "transition": "#83769c -> #83769b @ alpha 192",
+            "pixels": 6
+          },
+          {
+            "transition": "#83769c -> #83769d @ alpha 127",
+            "pixels": 6
+          },
+          {
+            "transition": "#83769c -> #ff00ff @ alpha 1",
+            "pixels": 6
+          },
+          {
+            "transition": "#ffec27 -> #ffeb28 @ alpha 128",
+            "pixels": 6
+          },
+          {
+            "transition": "#ffec27 -> #ffed26 @ alpha 127",
+            "pixels": 6
+          },
+          {
+            "transition": "#ff004d -> #ff0000 @ alpha 1",
+            "pixels": 5
+          },
+          {
+            "transition": "#ff004d -> #ff004c @ alpha 127",
+            "pixels": 5
+          },
+          {
+            "transition": "#ff004d -> #ff004c @ alpha 64",
+            "pixels": 5
+          },
+          {
+            "transition": "#83769c -> #83769b @ alpha 128",
+            "pixels": 3
+          },
+          {
+            "transition": "#ff004d -> #ff004e @ alpha 128",
+            "pixels": 3
+          }
+        ],
+        "rgbTransitionKinds": 30
+      }
+    }
+  ],
+  "errors": [],
+  "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+  "artworkPaste": {
+    "method": "ADB KEYCODE_PASTE on actual app",
+    "artworkAdded": true,
+    "note": "One new artwork item observed"
+  },
+  "editorPaste": {
+    "method": "ADB KEYCODE_PASTE",
+    "trusted": true,
+    "colors": [
+      "#000000",
+      "#00e336",
+      "#00e338",
+      "#00e436",
+      "#00e536",
+      "#00ff00",
+      "#00ffff",
+      "#1c2a52",
+      "#1c2c54",
+      "#1d2a52",
+      "#1d2b53",
+      "#1e2c54",
+      "#28abff",
+      "#28adff",
+      "#29adff",
+      "#2aadff",
+      "#83769b",
+      "#83769c",
+      "#83769d",
+      "#83789b",
+      "#c1c3c7",
+      "#c2c3c7",
+      "#c3c3c7",
+      "#ff0000",
+      "#ff004c",
+      "#ff004d",
+      "#ff004e",
+      "#ff00ff",
+      "#ffeb28",
+      "#ffec27",
+      "#ffed26",
+      "#ffff00",
+      "#ffffff"
+    ],
+    "wallImagesUnchanged": 2,
+    "enteredNamePreserved": true
+  },
+  "completed": true,
+  "finished": "2026-10-15T08:58:26.654Z"
+}

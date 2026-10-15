@@ -1,0 +1,15 @@
+{
+  "device": "codex",
+  "key": "palette-keep",
+  "trusted": true,
+  "mime": "image/png",
+  "clipboardTypes": [],
+  "file": "codex-palette-keep-pasted.png",
+  "bytes": 683,
+  "sha256": "0f8d8a357a15a11ae29950c2a5159632ac3fc1c93c4542c862a9dd2b7c9d19b5",
+  "verification": {
+    "pass": false,
+    "error": "palette-keep: 284 visible RGB pixels differ\n\n284 !== 0\n"
+  },
+  "recordedAt": "2026-10-15T08:51:51.997Z"
+}

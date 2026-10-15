@@ -1,0 +1,35 @@
+{
+  "completed": true,
+  "scope": "Read-only independent original-source alpha oracle; no fixture regeneration or clipboard access",
+  "manifestSha256": "960bc0bb5ea479030f33b89a0dfe5238d57439a52b02e09bd297d185da8e3b9b",
+  "checks": [
+    {
+      "key": "palette-keep",
+      "pixels": 768,
+      "visiblePixels": 672,
+      "sourceDerivedAlphaMismatches": 0,
+      "rule": "Original source alpha byte-for-byte"
+    },
+    {
+      "key": "palette-cut",
+      "pixels": 768,
+      "visiblePixels": 384,
+      "sourceDerivedAlphaMismatches": 0,
+      "rule": "Source cutoff128, opaque color roles; no None-role claim"
+    },
+    {
+      "key": "onebit",
+      "pixels": 768,
+      "visiblePixels": 384,
+      "sourceDerivedAlphaMismatches": 0,
+      "rule": "Source cutoff128, opaque color roles; no None-role claim"
+    },
+    {
+      "key": "gif-frame0",
+      "pixels": 768,
+      "visiblePixels": 660,
+      "sourceDerivedAlphaMismatches": 0,
+      "rule": "Original source alpha byte-for-byte"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "kind": "injected receiver and isolated HTTP guards; not native clipboard evidence",
+  "checks": [
+    "Captures selection and protected native metadata before await",
+    "A slower previous completion cannot replace newer receipt or status",
+    "Oversize and untrusted injected events never POST",
+    "Repeated owned HTTP attempts get distinct immutable PNG/JSON receipts; canonical alias follows latest completed request",
+    "Decoded mismatch retained as FAIL; untrusted HTTP metadata rejected"
+  ],
+  "isolatedDirectory": ".tmp\\independent-clipboard-receiver-1792054373555",
+  "receiptCount": 3,
+  "pass": true
+}

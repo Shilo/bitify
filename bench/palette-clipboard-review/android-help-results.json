@@ -1,0 +1,96 @@
+{
+  "scope": "Actual final production Help dialog on USB Android. Only fixture/settings seeding; no source modification or clipboard access.",
+  "productionChanged": false,
+  "clipboardAccessed": false,
+  "started": "2026-10-15T08:58:10.553Z",
+  "distIndexSha256": "a4b434562abb9dd2fe7c52957318499de02f0f1244e4cb786379f7256b28834f",
+  "cases": [
+    {
+      "id": "keep-partial",
+      "key": "palette-keep",
+      "expectedSentence": true,
+      "sentencePresent": true,
+      "saveText": "SaveSave or copy images. Save a PNG for exact translucent colors.",
+      "viewportWidth": 448,
+      "viewportHeight": 819,
+      "documentScrollWidth": 448,
+      "dialogClientWidth": 414,
+      "dialogScrollWidth": 414,
+      "closeRect": {
+        "x": 377.1111145019531,
+        "y": 105.43811798095703,
+        "width": 44,
+        "height": 44.00000762939453
+      },
+      "closeCenterHitsButton": true,
+      "actualCloseClickPassed": true,
+      "pass": true
+    },
+    {
+      "id": "cut-partial",
+      "key": "palette-cut",
+      "expectedSentence": false,
+      "sentencePresent": false,
+      "saveText": "SaveSave or copy images.",
+      "viewportWidth": 448,
+      "viewportHeight": 819,
+      "documentScrollWidth": 448,
+      "dialogClientWidth": 414,
+      "dialogScrollWidth": 414,
+      "closeRect": {
+        "x": 377.1111145019531,
+        "y": 110.14543914794922,
+        "width": 44,
+        "height": 44
+      },
+      "closeCenterHitsButton": true,
+      "actualCloseClickPassed": true,
+      "pass": true
+    },
+    {
+      "id": "onebit-partial",
+      "key": "onebit",
+      "expectedSentence": false,
+      "sentencePresent": false,
+      "saveText": "SaveSave or copy images.",
+      "viewportWidth": 448,
+      "viewportHeight": 819,
+      "documentScrollWidth": 448,
+      "dialogClientWidth": 414,
+      "dialogScrollWidth": 414,
+      "closeRect": {
+        "x": 377.1111145019531,
+        "y": 93.46329498291016,
+        "width": 44,
+        "height": 44
+      },
+      "closeCenterHitsButton": true,
+      "actualCloseClickPassed": true,
+      "pass": true
+    },
+    {
+      "id": "keep-binary",
+      "key": "gif-frame0",
+      "expectedSentence": false,
+      "sentencePresent": false,
+      "saveText": "SaveSave or copy images.",
+      "viewportWidth": 448,
+      "viewportHeight": 819,
+      "documentScrollWidth": 448,
+      "dialogClientWidth": 414,
+      "dialogScrollWidth": 414,
+      "closeRect": {
+        "x": 377.1111145019531,
+        "y": 109.82568359375,
+        "width": 44,
+        "height": 44
+      },
+      "closeCenterHitsButton": true,
+      "actualCloseClickPassed": true,
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "completed": true,
+  "finished": "2026-10-15T08:58:15.275Z"
+}

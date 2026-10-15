@@ -1,0 +1,2805 @@
+{
+  "scope": "Controlled read-only pair comparison. Save is independent of clipboard transport. Frozen golden is production-derived from exact source bytes; models are plausible input transformations only, not observed decoder output or proof of cause.",
+  "hashes": {
+    "golden": "14d0012def2b51dbf17ce7e0022fb43d7cc2911209be1ed2b43bfe995c427691",
+    "saved": "ad85be51a3efaf7647c66e05a780c3878ddd84f9c137d17488239ee19166f7c3",
+    "pasted": "0f8d8a357a15a11ae29950c2a5159632ac3fc1c93c4542c862a9dd2b7c9d19b5",
+    "source": "7f37bd9f7f235d65265bbe2e922adfd35d74cb4f07c73e52366251701bf57bb9"
+  },
+  "comparisons": {
+    "goldenToSave": {
+      "expected": "fixtures/palette-keep-expected.png",
+      "actual": "codex-app-save.png",
+      "dimensionsMatch": true,
+      "alphaMismatchPixels": 0,
+      "visibleRgbMismatchPixels": 118,
+      "maxRgbChannelError": 216,
+      "byExpectedAlpha": [
+        {
+          "alpha": 0,
+          "pixels": 96,
+          "alphaMismatchPixels": 0,
+          "rgbMismatchPixels": 0,
+          "maxRgbChannelError": 0
+        },
+        {
+          "alpha": 1,
+          "pixels": 96,
+          "alphaMismatchPixels": 0,
+          "rgbMismatchPixels": 35,
+          "maxRgbChannelError": 214
+        },
+        {
+          "alpha": 64,
+          "pixels": 96,
+          "alphaMismatchPixels": 0,
+          "rgbMismatchPixels": 14,
+          "maxRgbChannelError": 216
+        },
+        {
+          "alpha": 127,
+          "pixels": 96,
+          "alphaMismatchPixels": 0,
+          "rgbMismatchPixels": 14,
+          "maxRgbChannelError": 153
+        },
+        {
+          "alpha": 128,
+          "pixels": 96,
+          "alphaMismatchPixels": 0,
+          "rgbMismatchPixels": 17,
+          "maxRgbChannelError": 194
+        },
+        {
+          "alpha": 192,
+          "pixels": 96,
+          "alphaMismatchPixels": 0,
+          "rgbMismatchPixels": 14,
+          "maxRgbChannelError": 153
+        },
+        {
+          "alpha": 254,
+          "pixels": 96,
+          "alphaMismatchPixels": 0,
+          "rgbMismatchPixels": 12,
+          "maxRgbChannelError": 216
+        },
+        {
+          "alpha": 255,
+          "pixels": 96,
+          "alphaMismatchPixels": 0,
+          "rgbMismatchPixels": 12,
+          "maxRgbChannelError": 153
+        }
+      ],
+      "transitions": [
+        {
+          "transition": "#c2c3c7 -> #fff1e8 @ alpha 1",
+          "pixels": 11
+        },
+        {
+          "transition": "#c2c3c7 -> #fff1e8 @ alpha 127",
+          "pixels": 11
+        },
+        {
+          "transition": "#c2c3c7 -> #fff1e8 @ alpha 192",
+          "pixels": 11
+        },
+        {
+          "transition": "#29adff -> #fff1e8 @ alpha 1",
+          "pixels": 9
+        },
+        {
+          "transition": "#1d2b53 -> #000000 @ alpha 1",
+          "pixels": 9
+        },
+        {
+          "transition": "#c2c3c7 -> #fff1e8 @ alpha 128",
+          "pixels": 9
+        },
+        {
+          "transition": "#c2c3c7 -> #fff1e8 @ alpha 255",
+          "pixels": 9
+        },
+        {
+          "transition": "#c2c3c7 -> #fff1e8 @ alpha 64",
+          "pixels": 6
+        },
+        {
+          "transition": "#c2c3c7 -> #fff1e8 @ alpha 254",
+          "pixels": 5
+        },
+        {
+          "transition": "#83769c -> #000000 @ alpha 1",
+          "pixels": 3
+        },
+        {
+          "transition": "#83769c -> #fff1e8 @ alpha 1",
+          "pixels": 3
+        },
+        {
+          "transition": "#c2c3c7 -> #29adff @ alpha 64",
+          "pixels": 3
+        },
+        {
+          "transition": "#ffec27 -> #29adff @ alpha 64",
+          "pixels": 3
+        },
+        {
+          "transition": "#c2c3c7 -> #29adff @ alpha 127",
+          "pixels": 3
+        },
+        {
+          "transition": "#c2c3c7 -> #00e436 @ alpha 128",
+          "pixels": 3
+        },
+        {
+          "transition": "#c2c3c7 -> #29adff @ alpha 128",
+          "pixels": 3
+        },
+        {
+          "transition": "#c2c3c7 -> #29adff @ alpha 192",
+          "pixels": 3
+        },
+        {
+          "transition": "#c2c3c7 -> #29adff @ alpha 254",
+          "pixels": 3
+        },
+        {
+          "transition": "#ffec27 -> #29adff @ alpha 254",
+          "pixels": 3
+        },
+        {
+          "transition": "#c2c3c7 -> #29adff @ alpha 255",
+          "pixels": 3
+        },
+        {
+          "transition": "#ffec27 -> #fff1e8 @ alpha 64",
+          "pixels": 1
+        },
+        {
+          "transition": "#ffec27 -> #fff1e8 @ alpha 128",
+          "pixels": 1
+        },
+        {
+          "transition": "#c2c3c7 -> #83769c @ alpha 64",
+          "pixels": 1
+        },
+        {
+          "transition": "#c2c3c7 -> #83769c @ alpha 128",
+          "pixels": 1
+        },
+        {
+          "transition": "#c2c3c7 -> #83769c @ alpha 254",
+          "pixels": 1
+        }
+      ],
+      "exactVisibleRgba": false
+    },
+    "goldenToPaste": {
+      "expected": "fixtures/palette-keep-expected.png",
+      "actual": "codex-palette-keep-pasted.png",
+      "dimensionsMatch": true,
+      "alphaMismatchPixels": 0,
+      "visibleRgbMismatchPixels": 284,
+      "maxRgbChannelError": 216,
+      "byExpectedAlpha": [
+        {
+          "alpha": 0,
+          "pixels": 96,
+          "alphaMismatchPixels": 0,
+          "rgbMismatchPixels": 0,
+          "maxRgbChannelError": 0
+        },
+        {
+          "alpha": 1,
+          "pixels": 96,
+          "alphaMismatchPixels": 0,
+          "rgbMismatchPixels": 57,
+          "maxRgbChannelError": 214
+        },
+        {
+          "alpha": 64,
+          "pixels": 96,
+          "alphaMismatchPixels": 0,
+          "rgbMismatchPixels": 57,
+          "maxRgbChannelError": 216
+        },
+        {
+          "alpha": 127,
+          "pixels": 96,
+          "alphaMismatchPixels": 0,
+          "rgbMismatchPixels": 57,
+          "maxRgbChannelError": 154
+        },
+        {
+          "alpha": 128,
+          "pixels": 96,
+          "alphaMismatchPixels": 0,
+          "rgbMismatchPixels": 57,
+          "maxRgbChannelError": 194
+        },
+        {
+          "alpha": 192,
+          "pixels": 96,
+          "alphaMismatchPixels": 0,
+          "rgbMismatchPixels": 32,
+          "maxRgbChannelError": 153
+        },
+        {
+          "alpha": 254,
+          "pixels": 96,
+          "alphaMismatchPixels": 0,
+          "rgbMismatchPixels": 12,
+          "maxRgbChannelError": 216
+        },
+        {
+          "alpha": 255,
+          "pixels": 96,
+          "alphaMismatchPixels": 0,
+          "rgbMismatchPixels": 12,
+          "maxRgbChannelError": 153
+        }
+      ],
+      "transitions": [
+        {
+          "transition": "#1d2b53 -> #1e2c54 @ alpha 128",
+          "pixels": 12
+        },
+        {
+          "transition": "#1d2b53 -> #1d2a52 @ alpha 192",
+          "pixels": 12
+        },
+        {
+          "transition": "#c2c3c7 -> #ffffff @ alpha 1",
+          "pixels": 11
+        },
+        {
+          "transition": "#c2c3c7 -> #fff1e9 @ alpha 127",
+          "pixels": 11
+        },
+        {
+          "transition": "#c2c3c7 -> #fff0e8 @ alpha 192",
+          "pixels": 11
+        },
+        {
+          "transition": "#00e436 -> #00ff00 @ alpha 1",
+          "pixels": 9
+        },
+        {
+          "transition": "#29adff -> #ffffff @ alpha 1",
+          "pixels": 9
+        },
+        {
+          "transition": "#1d2b53 -> #000000 @ alpha 1",
+          "pixels": 9
+        },
+        {
+          "transition": "#29adff -> #28abff @ alpha 64",
+          "pixels": 9
+        },
+        {
+          "transition": "#83769c -> #83789b @ alpha 64",
+          "pixels": 9
+        },
+        {
+          "transition": "#29adff -> #28adff @ alpha 127",
+          "pixels": 9
+        },
+        {
+          "transition": "#1d2b53 -> #1c2a52 @ alpha 127",
+          "pixels": 9
+        },
+        {
+          "transition": "#c2c3c7 -> #fff1e7 @ alpha 128",
+          "pixels": 9
+        },
+        {
+          "transition": "#29adff -> #2aadff @ alpha 128",
+          "pixels": 9
+        },
+        {
+          "transition": "#c2c3c7 -> #fff1e8 @ alpha 255",
+          "pixels": 9
+        },
+        {
+          "transition": "#ffec27 -> #ffff00 @ alpha 1",
+          "pixels": 8
+        },
+        {
+          "transition": "#00e436 -> #00e338 @ alpha 64",
+          "pixels": 8
+        },
+        {
+          "transition": "#00e436 -> #00e536 @ alpha 127",
+          "pixels": 8
+        },
+        {
+          "transition": "#00e436 -> #00e336 @ alpha 128",
+          "pixels": 8
+        },
+        {
+          "transition": "#c2c3c7 -> #ffefe7 @ alpha 64",
+          "pixels": 6
+        },
+        {
+          "transition": "#ffec27 -> #ffeb28 @ alpha 64",
+          "pixels": 6
+        },
+        {
+          "transition": "#1d2b53 -> #1c2c54 @ alpha 64",
+          "pixels": 6
+        },
+        {
+          "transition": "#ffec27 -> #ffed26 @ alpha 127",
+          "pixels": 6
+        },
+        {
+          "transition": "#83769c -> #83769d @ alpha 127",
+          "pixels": 6
+        },
+        {
+          "transition": "#83769c -> #83769b @ alpha 192",
+          "pixels": 6
+        },
+        {
+          "transition": "#ff004d -> #ff0000 @ alpha 1",
+          "pixels": 5
+        },
+        {
+          "transition": "#ff004d -> #ff004c @ alpha 64",
+          "pixels": 5
+        },
+        {
+          "transition": "#ff004d -> #ff004c @ alpha 127",
+          "pixels": 5
+        },
+        {
+          "transition": "#ffec27 -> #ffeb28 @ alpha 128",
+          "pixels": 5
+        },
+        {
+          "transition": "#c2c3c7 -> #fff1e8 @ alpha 254",
+          "pixels": 5
+        },
+        {
+          "transition": "#83769c -> #000000 @ alpha 1",
+          "pixels": 3
+        },
+        {
+          "transition": "#83769c -> #ffffff @ alpha 1",
+          "pixels": 3
+        },
+        {
+          "transition": "#c2c3c7 -> #28abff @ alpha 64",
+          "pixels": 3
+        },
+        {
+          "transition": "#ffec27 -> #28abff @ alpha 64",
+          "pixels": 3
+        },
+        {
+          "transition": "#c2c3c7 -> #28adff @ alpha 127",
+          "pixels": 3
+        },
+        {
+          "transition": "#ff004d -> #ff004e @ alpha 128",
+          "pixels": 3
+        },
+        {
+          "transition": "#83769c -> #83769b @ alpha 128",
+          "pixels": 3
+        },
+        {
+          "transition": "#c2c3c7 -> #00e336 @ alpha 128",
+          "pixels": 3
+        },
+        {
+          "transition": "#c2c3c7 -> #2aadff @ alpha 128",
+          "pixels": 3
+        },
+        {
+          "transition": "#c2c3c7 -> #29adff @ alpha 192",
+          "pixels": 3
+        },
+        {
+          "transition": "#c2c3c7 -> #29adff @ alpha 254",
+          "pixels": 3
+        },
+        {
+          "transition": "#ffec27 -> #29adff @ alpha 254",
+          "pixels": 3
+        },
+        {
+          "transition": "#c2c3c7 -> #29adff @ alpha 255",
+          "pixels": 3
+        },
+        {
+          "transition": "#ffec27 -> #ffefe7 @ alpha 64",
+          "pixels": 1
+        },
+        {
+          "transition": "#ffec27 -> #fff1e7 @ alpha 128",
+          "pixels": 1
+        },
+        {
+          "transition": "#c2c3c7 -> #83789b @ alpha 64",
+          "pixels": 1
+        },
+        {
+          "transition": "#c2c3c7 -> #83769b @ alpha 128",
+          "pixels": 1
+        },
+        {
+          "transition": "#c2c3c7 -> #83769c @ alpha 254",
+          "pixels": 1
+        }
+      ],
+      "exactVisibleRgba": false
+    },
+    "saveToPaste": {
+      "expected": "codex-app-save.png",
+      "actual": "codex-palette-keep-pasted.png",
+      "dimensionsMatch": true,
+      "alphaMismatchPixels": 0,
+      "visibleRgbMismatchPixels": 245,
+      "maxRgbChannelError": 77,
+      "byExpectedAlpha": [
+        {
+          "alpha": 0,
+          "pixels": 96,
+          "alphaMismatchPixels": 0,
+          "rgbMismatchPixels": 0,
+          "maxRgbChannelError": 0
+        },
+        {
+          "alpha": 1,
+          "pixels": 96,
+          "alphaMismatchPixels": 0,
+          "rgbMismatchPixels": 45,
+          "maxRgbChannelError": 77
+        },
+        {
+          "alpha": 64,
+          "pixels": 96,
+          "alphaMismatchPixels": 0,
+          "rgbMismatchPixels": 57,
+          "maxRgbChannelError": 2
+        },
+        {
+          "alpha": 127,
+          "pixels": 96,
+          "alphaMismatchPixels": 0,
+          "rgbMismatchPixels": 57,
+          "maxRgbChannelError": 1
+        },
+        {
+          "alpha": 128,
+          "pixels": 96,
+          "alphaMismatchPixels": 0,
+          "rgbMismatchPixels": 57,
+          "maxRgbChannelError": 1
+        },
+        {
+          "alpha": 192,
+          "pixels": 96,
+          "alphaMismatchPixels": 0,
+          "rgbMismatchPixels": 29,
+          "maxRgbChannelError": 1
+        },
+        {
+          "alpha": 254,
+          "pixels": 96,
+          "alphaMismatchPixels": 0,
+          "rgbMismatchPixels": 0,
+          "maxRgbChannelError": 0
+        },
+        {
+          "alpha": 255,
+          "pixels": 96,
+          "alphaMismatchPixels": 0,
+          "rgbMismatchPixels": 0,
+          "maxRgbChannelError": 0
+        }
+      ],
+      "transitions": [
+        {
+          "transition": "#fff1e8 -> #ffffff @ alpha 1",
+          "pixels": 23
+        },
+        {
+          "transition": "#29adff -> #28abff @ alpha 64",
+          "pixels": 15
+        },
+        {
+          "transition": "#29adff -> #28adff @ alpha 127",
+          "pixels": 12
+        },
+        {
+          "transition": "#29adff -> #2aadff @ alpha 128",
+          "pixels": 12
+        },
+        {
+          "transition": "#1d2b53 -> #1e2c54 @ alpha 128",
+          "pixels": 12
+        },
+        {
+          "transition": "#1d2b53 -> #1d2a52 @ alpha 192",
+          "pixels": 12
+        },
+        {
+          "transition": "#fff1e8 -> #fff1e9 @ alpha 127",
+          "pixels": 11
+        },
+        {
+          "transition": "#00e436 -> #00e336 @ alpha 128",
+          "pixels": 11
+        },
+        {
+          "transition": "#fff1e8 -> #fff0e8 @ alpha 192",
+          "pixels": 11
+        },
+        {
+          "transition": "#83769c -> #83789b @ alpha 64",
+          "pixels": 10
+        },
+        {
+          "transition": "#fff1e8 -> #fff1e7 @ alpha 128",
+          "pixels": 10
+        },
+        {
+          "transition": "#00e436 -> #00ff00 @ alpha 1",
+          "pixels": 9
+        },
+        {
+          "transition": "#1d2b53 -> #1c2a52 @ alpha 127",
+          "pixels": 9
+        },
+        {
+          "transition": "#ffec27 -> #ffff00 @ alpha 1",
+          "pixels": 8
+        },
+        {
+          "transition": "#00e436 -> #00e338 @ alpha 64",
+          "pixels": 8
+        },
+        {
+          "transition": "#00e436 -> #00e536 @ alpha 127",
+          "pixels": 8
+        },
+        {
+          "transition": "#fff1e8 -> #ffefe7 @ alpha 64",
+          "pixels": 7
+        },
+        {
+          "transition": "#ffec27 -> #ffeb28 @ alpha 64",
+          "pixels": 6
+        },
+        {
+          "transition": "#1d2b53 -> #1c2c54 @ alpha 64",
+          "pixels": 6
+        },
+        {
+          "transition": "#ffec27 -> #ffed26 @ alpha 127",
+          "pixels": 6
+        },
+        {
+          "transition": "#83769c -> #83769d @ alpha 127",
+          "pixels": 6
+        },
+        {
+          "transition": "#83769c -> #83769b @ alpha 192",
+          "pixels": 6
+        },
+        {
+          "transition": "#ff004d -> #ff0000 @ alpha 1",
+          "pixels": 5
+        },
+        {
+          "transition": "#ff004d -> #ff004c @ alpha 64",
+          "pixels": 5
+        },
+        {
+          "transition": "#ff004d -> #ff004c @ alpha 127",
+          "pixels": 5
+        },
+        {
+          "transition": "#ffec27 -> #ffeb28 @ alpha 128",
+          "pixels": 5
+        },
+        {
+          "transition": "#83769c -> #83769b @ alpha 128",
+          "pixels": 4
+        },
+        {
+          "transition": "#ff004d -> #ff004e @ alpha 128",
+          "pixels": 3
+        }
+      ],
+      "exactVisibleRgba": false
+    }
+  },
+  "membership": {
+    "goldenWithinActiveSubset": {
+      "usedColors": [
+        "#000000",
+        "#00e436",
+        "#1d2b53",
+        "#29adff",
+        "#83769c",
+        "#c2c3c7",
+        "#ff004d",
+        "#ffec27"
+      ],
+      "colorsOutside": [],
+      "visiblePixelsOutside": 0
+    },
+    "saveWithinGoldenSubset": {
+      "usedColors": [
+        "#000000",
+        "#00e436",
+        "#1d2b53",
+        "#29adff",
+        "#83769c",
+        "#ff004d",
+        "#ffec27",
+        "#fff1e8"
+      ],
+      "colorsOutside": [
+        "#fff1e8"
+      ],
+      "visiblePixelsOutside": 76
+    },
+    "saveWithinPublishedPico8": {
+      "usedColors": [
+        "#000000",
+        "#00e436",
+        "#1d2b53",
+        "#29adff",
+        "#83769c",
+        "#ff004d",
+        "#ffec27",
+        "#fff1e8"
+      ],
+      "colorsOutside": [],
+      "visiblePixelsOutside": 0
+    },
+    "pasteWithinSavedOutputColors": {
+      "usedColors": [
+        "#000000",
+        "#00e336",
+        "#00e338",
+        "#00e436",
+        "#00e536",
+        "#00ff00",
+        "#1c2a52",
+        "#1c2c54",
+        "#1d2a52",
+        "#1d2b53",
+        "#1e2c54",
+        "#28abff",
+        "#28adff",
+        "#29adff",
+        "#2aadff",
+        "#83769b",
+        "#83769c",
+        "#83769d",
+        "#83789b",
+        "#ff0000",
+        "#ff004c",
+        "#ff004d",
+        "#ff004e",
+        "#ffeb28",
+        "#ffec27",
+        "#ffed26",
+        "#ffefe7",
+        "#fff0e8",
+        "#fff1e7",
+        "#fff1e8",
+        "#fff1e9",
+        "#ffff00",
+        "#ffffff"
+      ],
+      "colorsOutside": [
+        "#00e336",
+        "#00e338",
+        "#00e536",
+        "#00ff00",
+        "#1c2a52",
+        "#1c2c54",
+        "#1d2a52",
+        "#1e2c54",
+        "#28abff",
+        "#28adff",
+        "#2aadff",
+        "#83769b",
+        "#83769d",
+        "#83789b",
+        "#ff0000",
+        "#ff004c",
+        "#ff004e",
+        "#ffeb28",
+        "#ffed26",
+        "#ffefe7",
+        "#fff0e8",
+        "#fff1e7",
+        "#fff1e9",
+        "#ffff00",
+        "#ffffff"
+      ],
+      "visiblePixelsOutside": 245
+    },
+    "pasteWithinPublishedPico8": {
+      "usedColors": [
+        "#000000",
+        "#00e336",
+        "#00e338",
+        "#00e436",
+        "#00e536",
+        "#00ff00",
+        "#1c2a52",
+        "#1c2c54",
+        "#1d2a52",
+        "#1d2b53",
+        "#1e2c54",
+        "#28abff",
+        "#28adff",
+        "#29adff",
+        "#2aadff",
+        "#83769b",
+        "#83769c",
+        "#83769d",
+        "#83789b",
+        "#ff0000",
+        "#ff004c",
+        "#ff004d",
+        "#ff004e",
+        "#ffeb28",
+        "#ffec27",
+        "#ffed26",
+        "#ffefe7",
+        "#fff0e8",
+        "#fff1e7",
+        "#fff1e8",
+        "#fff1e9",
+        "#ffff00",
+        "#ffffff"
+      ],
+      "colorsOutside": [
+        "#00e336",
+        "#00e338",
+        "#00e536",
+        "#00ff00",
+        "#1c2a52",
+        "#1c2c54",
+        "#1d2a52",
+        "#1e2c54",
+        "#28abff",
+        "#28adff",
+        "#2aadff",
+        "#83769b",
+        "#83769d",
+        "#83789b",
+        "#ff0000",
+        "#ff004c",
+        "#ff004e",
+        "#ffeb28",
+        "#ffed26",
+        "#ffefe7",
+        "#fff0e8",
+        "#fff1e7",
+        "#fff1e9",
+        "#ffff00",
+        "#ffffff"
+      ],
+      "visiblePixelsOutside": 245
+    }
+  },
+  "models": [
+    {
+      "model": "identity",
+      "selectedColors": [
+        "#000000",
+        "#1d2b53",
+        "#c2c3c7",
+        "#ff004d",
+        "#ffec27",
+        "#00e436",
+        "#29adff",
+        "#83769c"
+      ],
+      "sourceDifference": {
+        "expected": "fixtures/palette-source.png",
+        "actual": "identity source",
+        "dimensionsMatch": true,
+        "alphaMismatchPixels": 0,
+        "visibleRgbMismatchPixels": 0,
+        "maxRgbChannelError": 0,
+        "byExpectedAlpha": [
+          {
+            "alpha": 0,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 1,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 64,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 127,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 128,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 192,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 254,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 255,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          }
+        ],
+        "transitions": [],
+        "exactVisibleRgba": true
+      },
+      "comparedToGolden": {
+        "expected": "fixtures/palette-keep-expected.png",
+        "actual": "identity",
+        "dimensionsMatch": true,
+        "alphaMismatchPixels": 0,
+        "visibleRgbMismatchPixels": 0,
+        "maxRgbChannelError": 0,
+        "byExpectedAlpha": [
+          {
+            "alpha": 0,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 1,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 64,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 127,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 128,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 192,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 254,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 255,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          }
+        ],
+        "transitions": [],
+        "exactVisibleRgba": true
+      },
+      "comparedToActualSave": {
+        "expected": "codex-app-save.png",
+        "actual": "identity",
+        "dimensionsMatch": true,
+        "alphaMismatchPixels": 0,
+        "visibleRgbMismatchPixels": 118,
+        "maxRgbChannelError": 216,
+        "byExpectedAlpha": [
+          {
+            "alpha": 0,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 1,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 35,
+            "maxRgbChannelError": 214
+          },
+          {
+            "alpha": 64,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 14,
+            "maxRgbChannelError": 216
+          },
+          {
+            "alpha": 127,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 14,
+            "maxRgbChannelError": 153
+          },
+          {
+            "alpha": 128,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 17,
+            "maxRgbChannelError": 194
+          },
+          {
+            "alpha": 192,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 14,
+            "maxRgbChannelError": 153
+          },
+          {
+            "alpha": 254,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 12,
+            "maxRgbChannelError": 216
+          },
+          {
+            "alpha": 255,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 12,
+            "maxRgbChannelError": 153
+          }
+        ],
+        "transitions": [
+          {
+            "transition": "#fff1e8 -> #c2c3c7 @ alpha 1",
+            "pixels": 11
+          },
+          {
+            "transition": "#fff1e8 -> #c2c3c7 @ alpha 127",
+            "pixels": 11
+          },
+          {
+            "transition": "#fff1e8 -> #c2c3c7 @ alpha 192",
+            "pixels": 11
+          },
+          {
+            "transition": "#fff1e8 -> #29adff @ alpha 1",
+            "pixels": 9
+          },
+          {
+            "transition": "#000000 -> #1d2b53 @ alpha 1",
+            "pixels": 9
+          },
+          {
+            "transition": "#fff1e8 -> #c2c3c7 @ alpha 128",
+            "pixels": 9
+          },
+          {
+            "transition": "#fff1e8 -> #c2c3c7 @ alpha 255",
+            "pixels": 9
+          },
+          {
+            "transition": "#fff1e8 -> #c2c3c7 @ alpha 64",
+            "pixels": 6
+          },
+          {
+            "transition": "#fff1e8 -> #c2c3c7 @ alpha 254",
+            "pixels": 5
+          },
+          {
+            "transition": "#000000 -> #83769c @ alpha 1",
+            "pixels": 3
+          },
+          {
+            "transition": "#fff1e8 -> #83769c @ alpha 1",
+            "pixels": 3
+          },
+          {
+            "transition": "#29adff -> #c2c3c7 @ alpha 64",
+            "pixels": 3
+          },
+          {
+            "transition": "#29adff -> #ffec27 @ alpha 64",
+            "pixels": 3
+          },
+          {
+            "transition": "#29adff -> #c2c3c7 @ alpha 127",
+            "pixels": 3
+          },
+          {
+            "transition": "#00e436 -> #c2c3c7 @ alpha 128",
+            "pixels": 3
+          },
+          {
+            "transition": "#29adff -> #c2c3c7 @ alpha 128",
+            "pixels": 3
+          },
+          {
+            "transition": "#29adff -> #c2c3c7 @ alpha 192",
+            "pixels": 3
+          },
+          {
+            "transition": "#29adff -> #c2c3c7 @ alpha 254",
+            "pixels": 3
+          },
+          {
+            "transition": "#29adff -> #ffec27 @ alpha 254",
+            "pixels": 3
+          },
+          {
+            "transition": "#29adff -> #c2c3c7 @ alpha 255",
+            "pixels": 3
+          },
+          {
+            "transition": "#fff1e8 -> #ffec27 @ alpha 64",
+            "pixels": 1
+          },
+          {
+            "transition": "#fff1e8 -> #ffec27 @ alpha 128",
+            "pixels": 1
+          },
+          {
+            "transition": "#83769c -> #c2c3c7 @ alpha 64",
+            "pixels": 1
+          },
+          {
+            "transition": "#83769c -> #c2c3c7 @ alpha 128",
+            "pixels": 1
+          },
+          {
+            "transition": "#83769c -> #c2c3c7 @ alpha 254",
+            "pixels": 1
+          }
+        ],
+        "exactVisibleRgba": false
+      }
+    },
+    {
+      "model": "round-premul-round-unpremul",
+      "selectedColors": [
+        "#000000",
+        "#1d2b53",
+        "#fff1e8",
+        "#ff004d",
+        "#ffec27",
+        "#00e436",
+        "#29adff",
+        "#83769c"
+      ],
+      "sourceDifference": {
+        "expected": "fixtures/palette-source.png",
+        "actual": "round-premul-round-unpremul source",
+        "dimensionsMatch": true,
+        "alphaMismatchPixels": 0,
+        "visibleRgbMismatchPixels": 207,
+        "maxRgbChannelError": 109,
+        "byExpectedAlpha": [
+          {
+            "alpha": 0,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 1,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 54,
+            "maxRgbChannelError": 109
+          },
+          {
+            "alpha": 64,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 49,
+            "maxRgbChannelError": 2
+          },
+          {
+            "alpha": 127,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 48,
+            "maxRgbChannelError": 1
+          },
+          {
+            "alpha": 128,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 48,
+            "maxRgbChannelError": 1
+          },
+          {
+            "alpha": 192,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 8,
+            "maxRgbChannelError": 1
+          },
+          {
+            "alpha": 254,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 255,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          }
+        ],
+        "transitions": [
+          {
+            "transition": "#00e436 -> #00ff00 @ alpha 1",
+            "pixels": 9
+          },
+          {
+            "transition": "#29adff -> #00ffff @ alpha 1",
+            "pixels": 9
+          },
+          {
+            "transition": "#29adff -> #28abff @ alpha 64",
+            "pixels": 9
+          },
+          {
+            "transition": "#29adff -> #28adff @ alpha 127",
+            "pixels": 9
+          },
+          {
+            "transition": "#29adff -> #2aadff @ alpha 128",
+            "pixels": 9
+          },
+          {
+            "transition": "#ffec27 -> #ffff00 @ alpha 1",
+            "pixels": 8
+          },
+          {
+            "transition": "#00e436 -> #00e338 @ alpha 64",
+            "pixels": 8
+          },
+          {
+            "transition": "#00e436 -> #00e536 @ alpha 127",
+            "pixels": 8
+          },
+          {
+            "transition": "#00e436 -> #00e336 @ alpha 128",
+            "pixels": 8
+          },
+          {
+            "transition": "#ffec27 -> #ffeb28 @ alpha 64",
+            "pixels": 6
+          },
+          {
+            "transition": "#ffec27 -> #ffed26 @ alpha 127",
+            "pixels": 6
+          },
+          {
+            "transition": "#1d2b53 -> #1e2c54 @ alpha 128",
+            "pixels": 6
+          },
+          {
+            "transition": "#1d2b53 -> #1d2b52 @ alpha 192",
+            "pixels": 6
+          },
+          {
+            "transition": "#ff004d -> #ff0000 @ alpha 1",
+            "pixels": 5
+          },
+          {
+            "transition": "#ff004d -> #ff004c @ alpha 64",
+            "pixels": 5
+          },
+          {
+            "transition": "#ff004d -> #ff004c @ alpha 127",
+            "pixels": 5
+          },
+          {
+            "transition": "#ffec27 -> #ffeb28 @ alpha 128",
+            "pixels": 5
+          },
+          {
+            "transition": "#242424 -> #000000 @ alpha 1",
+            "pixels": 3
+          },
+          {
+            "transition": "#494949 -> #000000 @ alpha 1",
+            "pixels": 3
+          },
+          {
+            "transition": "#6d6d6d -> #000000 @ alpha 1",
+            "pixels": 3
+          },
+          {
+            "transition": "#929292 -> #ffffff @ alpha 1",
+            "pixels": 3
+          },
+          {
+            "transition": "#b6b6b6 -> #ffffff @ alpha 1",
+            "pixels": 3
+          },
+          {
+            "transition": "#dbdbdb -> #ffffff @ alpha 1",
+            "pixels": 3
+          },
+          {
+            "transition": "#494949 -> #484848 @ alpha 64",
+            "pixels": 3
+          },
+          {
+            "transition": "#6d6d6d -> #6c6c6c @ alpha 64",
+            "pixels": 3
+          },
+          {
+            "transition": "#929292 -> #939393 @ alpha 64",
+            "pixels": 3
+          },
+          {
+            "transition": "#b6b6b6 -> #b7b7b7 @ alpha 64",
+            "pixels": 3
+          },
+          {
+            "transition": "#494949 -> #484848 @ alpha 127",
+            "pixels": 3
+          },
+          {
+            "transition": "#6d6d6d -> #6c6c6c @ alpha 127",
+            "pixels": 3
+          },
+          {
+            "transition": "#929292 -> #939393 @ alpha 127",
+            "pixels": 3
+          },
+          {
+            "transition": "#b6b6b6 -> #b7b7b7 @ alpha 127",
+            "pixels": 3
+          },
+          {
+            "transition": "#ff004d -> #ff004e @ alpha 128",
+            "pixels": 3
+          },
+          {
+            "transition": "#494949 -> #4a4a4a @ alpha 128",
+            "pixels": 3
+          },
+          {
+            "transition": "#6d6d6d -> #6e6e6e @ alpha 128",
+            "pixels": 3
+          },
+          {
+            "transition": "#929292 -> #919191 @ alpha 128",
+            "pixels": 3
+          },
+          {
+            "transition": "#b6b6b6 -> #b5b5b5 @ alpha 128",
+            "pixels": 3
+          },
+          {
+            "transition": "#1d2b53 -> #000000 @ alpha 1",
+            "pixels": 3
+          },
+          {
+            "transition": "#1d2b53 -> #1c2c54 @ alpha 64",
+            "pixels": 3
+          },
+          {
+            "transition": "#c2c3c7 -> #c3c3c7 @ alpha 64",
+            "pixels": 3
+          },
+          {
+            "transition": "#1d2b53 -> #1c2a52 @ alpha 127",
+            "pixels": 3
+          },
+          {
+            "transition": "#c2c3c7 -> #c3c3c7 @ alpha 127",
+            "pixels": 3
+          },
+          {
+            "transition": "#c2c3c7 -> #c1c3c7 @ alpha 128",
+            "pixels": 3
+          },
+          {
+            "transition": "#fff1e8 -> #ffffff @ alpha 1",
+            "pixels": 2
+          },
+          {
+            "transition": "#fff1e8 -> #ffefe7 @ alpha 64",
+            "pixels": 2
+          },
+          {
+            "transition": "#fff1e8 -> #fff1e9 @ alpha 127",
+            "pixels": 2
+          },
+          {
+            "transition": "#fff1e8 -> #fff1e7 @ alpha 128",
+            "pixels": 2
+          },
+          {
+            "transition": "#fff1e8 -> #fff0e8 @ alpha 192",
+            "pixels": 2
+          },
+          {
+            "transition": "#080c16 -> #080c18 @ alpha 64",
+            "pixels": 1
+          }
+        ],
+        "exactVisibleRgba": false
+      },
+      "comparedToGolden": {
+        "expected": "fixtures/palette-keep-expected.png",
+        "actual": "round-premul-round-unpremul",
+        "dimensionsMatch": true,
+        "alphaMismatchPixels": 0,
+        "visibleRgbMismatchPixels": 118,
+        "maxRgbChannelError": 216,
+        "byExpectedAlpha": [
+          {
+            "alpha": 0,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 1,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 35,
+            "maxRgbChannelError": 214
+          },
+          {
+            "alpha": 64,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 14,
+            "maxRgbChannelError": 216
+          },
+          {
+            "alpha": 127,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 14,
+            "maxRgbChannelError": 153
+          },
+          {
+            "alpha": 128,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 17,
+            "maxRgbChannelError": 194
+          },
+          {
+            "alpha": 192,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 14,
+            "maxRgbChannelError": 153
+          },
+          {
+            "alpha": 254,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 12,
+            "maxRgbChannelError": 216
+          },
+          {
+            "alpha": 255,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 12,
+            "maxRgbChannelError": 153
+          }
+        ],
+        "transitions": [
+          {
+            "transition": "#c2c3c7 -> #fff1e8 @ alpha 1",
+            "pixels": 11
+          },
+          {
+            "transition": "#c2c3c7 -> #fff1e8 @ alpha 127",
+            "pixels": 11
+          },
+          {
+            "transition": "#c2c3c7 -> #fff1e8 @ alpha 192",
+            "pixels": 11
+          },
+          {
+            "transition": "#29adff -> #fff1e8 @ alpha 1",
+            "pixels": 9
+          },
+          {
+            "transition": "#1d2b53 -> #000000 @ alpha 1",
+            "pixels": 9
+          },
+          {
+            "transition": "#c2c3c7 -> #fff1e8 @ alpha 128",
+            "pixels": 9
+          },
+          {
+            "transition": "#c2c3c7 -> #fff1e8 @ alpha 255",
+            "pixels": 9
+          },
+          {
+            "transition": "#c2c3c7 -> #fff1e8 @ alpha 64",
+            "pixels": 6
+          },
+          {
+            "transition": "#c2c3c7 -> #fff1e8 @ alpha 254",
+            "pixels": 5
+          },
+          {
+            "transition": "#83769c -> #000000 @ alpha 1",
+            "pixels": 3
+          },
+          {
+            "transition": "#83769c -> #fff1e8 @ alpha 1",
+            "pixels": 3
+          },
+          {
+            "transition": "#c2c3c7 -> #29adff @ alpha 64",
+            "pixels": 3
+          },
+          {
+            "transition": "#ffec27 -> #29adff @ alpha 64",
+            "pixels": 3
+          },
+          {
+            "transition": "#c2c3c7 -> #29adff @ alpha 127",
+            "pixels": 3
+          },
+          {
+            "transition": "#c2c3c7 -> #00e436 @ alpha 128",
+            "pixels": 3
+          },
+          {
+            "transition": "#c2c3c7 -> #29adff @ alpha 128",
+            "pixels": 3
+          },
+          {
+            "transition": "#c2c3c7 -> #29adff @ alpha 192",
+            "pixels": 3
+          },
+          {
+            "transition": "#c2c3c7 -> #29adff @ alpha 254",
+            "pixels": 3
+          },
+          {
+            "transition": "#ffec27 -> #29adff @ alpha 254",
+            "pixels": 3
+          },
+          {
+            "transition": "#c2c3c7 -> #29adff @ alpha 255",
+            "pixels": 3
+          },
+          {
+            "transition": "#ffec27 -> #fff1e8 @ alpha 64",
+            "pixels": 1
+          },
+          {
+            "transition": "#ffec27 -> #fff1e8 @ alpha 128",
+            "pixels": 1
+          },
+          {
+            "transition": "#c2c3c7 -> #83769c @ alpha 64",
+            "pixels": 1
+          },
+          {
+            "transition": "#c2c3c7 -> #83769c @ alpha 128",
+            "pixels": 1
+          },
+          {
+            "transition": "#c2c3c7 -> #83769c @ alpha 254",
+            "pixels": 1
+          }
+        ],
+        "exactVisibleRgba": false
+      },
+      "comparedToActualSave": {
+        "expected": "codex-app-save.png",
+        "actual": "round-premul-round-unpremul",
+        "dimensionsMatch": true,
+        "alphaMismatchPixels": 0,
+        "visibleRgbMismatchPixels": 0,
+        "maxRgbChannelError": 0,
+        "byExpectedAlpha": [
+          {
+            "alpha": 0,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 1,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 64,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 127,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 128,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 192,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 254,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 255,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          }
+        ],
+        "transitions": [],
+        "exactVisibleRgba": true
+      }
+    },
+    {
+      "model": "round-premul-floor-unpremul",
+      "selectedColors": [
+        "#000000",
+        "#1d2b53",
+        "#fff1e8",
+        "#ff004d",
+        "#ffec27",
+        "#00e436",
+        "#29adff",
+        "#83769c"
+      ],
+      "sourceDifference": {
+        "expected": "fixtures/palette-source.png",
+        "actual": "round-premul-floor-unpremul source",
+        "dimensionsMatch": true,
+        "alphaMismatchPixels": 0,
+        "visibleRgbMismatchPixels": 239,
+        "maxRgbChannelError": 109,
+        "byExpectedAlpha": [
+          {
+            "alpha": 0,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 1,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 54,
+            "maxRgbChannelError": 109
+          },
+          {
+            "alpha": 64,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 52,
+            "maxRgbChannelError": 2
+          },
+          {
+            "alpha": 127,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 37,
+            "maxRgbChannelError": 1
+          },
+          {
+            "alpha": 128,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 28,
+            "maxRgbChannelError": 1
+          },
+          {
+            "alpha": 192,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 34,
+            "maxRgbChannelError": 1
+          },
+          {
+            "alpha": 254,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 34,
+            "maxRgbChannelError": 1
+          },
+          {
+            "alpha": 255,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          }
+        ],
+        "transitions": [
+          {
+            "transition": "#00e436 -> #00ff00 @ alpha 1",
+            "pixels": 9
+          },
+          {
+            "transition": "#29adff -> #00ffff @ alpha 1",
+            "pixels": 9
+          },
+          {
+            "transition": "#29adff -> #27abff @ alpha 64",
+            "pixels": 9
+          },
+          {
+            "transition": "#29adff -> #28acff @ alpha 127",
+            "pixels": 9
+          },
+          {
+            "transition": "#29adff -> #29acff @ alpha 192",
+            "pixels": 9
+          },
+          {
+            "transition": "#29adff -> #29acff @ alpha 254",
+            "pixels": 9
+          },
+          {
+            "transition": "#ffec27 -> #ffff00 @ alpha 1",
+            "pixels": 8
+          },
+          {
+            "transition": "#00e436 -> #00e337 @ alpha 64",
+            "pixels": 8
+          },
+          {
+            "transition": "#00e436 -> #00e335 @ alpha 128",
+            "pixels": 8
+          },
+          {
+            "transition": "#00e436 -> #00e336 @ alpha 254",
+            "pixels": 8
+          },
+          {
+            "transition": "#ffec27 -> #ffeb27 @ alpha 64",
+            "pixels": 6
+          },
+          {
+            "transition": "#ffec27 -> #ffec26 @ alpha 127",
+            "pixels": 6
+          },
+          {
+            "transition": "#1d2b53 -> #1d2a52 @ alpha 192",
+            "pixels": 6
+          },
+          {
+            "transition": "#ff004d -> #ff0000 @ alpha 1",
+            "pixels": 5
+          },
+          {
+            "transition": "#ff004d -> #ff004b @ alpha 64",
+            "pixels": 5
+          },
+          {
+            "transition": "#ff004d -> #ff004c @ alpha 127",
+            "pixels": 5
+          },
+          {
+            "transition": "#ffec27 -> #ffeb27 @ alpha 128",
+            "pixels": 5
+          },
+          {
+            "transition": "#ffec27 -> #ffec26 @ alpha 192",
+            "pixels": 5
+          },
+          {
+            "transition": "#ffec27 -> #ffeb27 @ alpha 254",
+            "pixels": 5
+          },
+          {
+            "transition": "#242424 -> #000000 @ alpha 1",
+            "pixels": 3
+          },
+          {
+            "transition": "#494949 -> #000000 @ alpha 1",
+            "pixels": 3
+          },
+          {
+            "transition": "#6d6d6d -> #000000 @ alpha 1",
+            "pixels": 3
+          },
+          {
+            "transition": "#929292 -> #ffffff @ alpha 1",
+            "pixels": 3
+          },
+          {
+            "transition": "#b6b6b6 -> #ffffff @ alpha 1",
+            "pixels": 3
+          },
+          {
+            "transition": "#dbdbdb -> #ffffff @ alpha 1",
+            "pixels": 3
+          },
+          {
+            "transition": "#242424 -> #232323 @ alpha 64",
+            "pixels": 3
+          },
+          {
+            "transition": "#494949 -> #474747 @ alpha 64",
+            "pixels": 3
+          },
+          {
+            "transition": "#6d6d6d -> #6b6b6b @ alpha 64",
+            "pixels": 3
+          },
+          {
+            "transition": "#929292 -> #939393 @ alpha 64",
+            "pixels": 3
+          },
+          {
+            "transition": "#b6b6b6 -> #b7b7b7 @ alpha 64",
+            "pixels": 3
+          },
+          {
+            "transition": "#494949 -> #484848 @ alpha 127",
+            "pixels": 3
+          },
+          {
+            "transition": "#6d6d6d -> #6c6c6c @ alpha 127",
+            "pixels": 3
+          },
+          {
+            "transition": "#dbdbdb -> #dadada @ alpha 127",
+            "pixels": 3
+          },
+          {
+            "transition": "#242424 -> #232323 @ alpha 128",
+            "pixels": 3
+          },
+          {
+            "transition": "#929292 -> #919191 @ alpha 128",
+            "pixels": 3
+          },
+          {
+            "transition": "#b6b6b6 -> #b5b5b5 @ alpha 128",
+            "pixels": 3
+          },
+          {
+            "transition": "#242424 -> #232323 @ alpha 192",
+            "pixels": 3
+          },
+          {
+            "transition": "#6d6d6d -> #6c6c6c @ alpha 192",
+            "pixels": 3
+          },
+          {
+            "transition": "#b6b6b6 -> #b5b5b5 @ alpha 192",
+            "pixels": 3
+          },
+          {
+            "transition": "#929292 -> #919191 @ alpha 254",
+            "pixels": 3
+          },
+          {
+            "transition": "#b6b6b6 -> #b5b5b5 @ alpha 254",
+            "pixels": 3
+          },
+          {
+            "transition": "#dbdbdb -> #dadada @ alpha 254",
+            "pixels": 3
+          },
+          {
+            "transition": "#1d2b53 -> #000000 @ alpha 1",
+            "pixels": 3
+          },
+          {
+            "transition": "#1d2b53 -> #1b2b53 @ alpha 64",
+            "pixels": 3
+          },
+          {
+            "transition": "#c2c3c7 -> #c3c3c7 @ alpha 64",
+            "pixels": 3
+          },
+          {
+            "transition": "#1d2b53 -> #1c2a52 @ alpha 127",
+            "pixels": 3
+          },
+          {
+            "transition": "#c2c3c7 -> #c2c2c6 @ alpha 127",
+            "pixels": 3
+          },
+          {
+            "transition": "#c2c3c7 -> #c1c3c7 @ alpha 128",
+            "pixels": 3
+          },
+          {
+            "transition": "#c2c3c7 -> #c1c3c7 @ alpha 192",
+            "pixels": 3
+          },
+          {
+            "transition": "#c2c3c7 -> #c1c2c6 @ alpha 254",
+            "pixels": 3
+          },
+          {
+            "transition": "#fff1e8 -> #ffffff @ alpha 1",
+            "pixels": 2
+          },
+          {
+            "transition": "#fff1e8 -> #ffefe7 @ alpha 64",
+            "pixels": 2
+          },
+          {
+            "transition": "#fff1e8 -> #fff0e8 @ alpha 127",
+            "pixels": 2
+          },
+          {
+            "transition": "#fff1e8 -> #fff1e7 @ alpha 128",
+            "pixels": 2
+          },
+          {
+            "transition": "#fff1e8 -> #fff0e8 @ alpha 192",
+            "pixels": 2
+          },
+          {
+            "transition": "#080c16 -> #070b17 @ alpha 64",
+            "pixels": 1
+          },
+          {
+            "transition": "#080c16 -> #070b15 @ alpha 128",
+            "pixels": 1
+          }
+        ],
+        "exactVisibleRgba": false
+      },
+      "comparedToGolden": {
+        "expected": "fixtures/palette-keep-expected.png",
+        "actual": "round-premul-floor-unpremul",
+        "dimensionsMatch": true,
+        "alphaMismatchPixels": 0,
+        "visibleRgbMismatchPixels": 121,
+        "maxRgbChannelError": 216,
+        "byExpectedAlpha": [
+          {
+            "alpha": 0,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 1,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 35,
+            "maxRgbChannelError": 214
+          },
+          {
+            "alpha": 64,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 14,
+            "maxRgbChannelError": 216
+          },
+          {
+            "alpha": 127,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 14,
+            "maxRgbChannelError": 153
+          },
+          {
+            "alpha": 128,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 17,
+            "maxRgbChannelError": 194
+          },
+          {
+            "alpha": 192,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 17,
+            "maxRgbChannelError": 153
+          },
+          {
+            "alpha": 254,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 12,
+            "maxRgbChannelError": 216
+          },
+          {
+            "alpha": 255,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 12,
+            "maxRgbChannelError": 153
+          }
+        ],
+        "transitions": [
+          {
+            "transition": "#c2c3c7 -> #fff1e8 @ alpha 1",
+            "pixels": 11
+          },
+          {
+            "transition": "#c2c3c7 -> #fff1e8 @ alpha 127",
+            "pixels": 11
+          },
+          {
+            "transition": "#c2c3c7 -> #fff1e8 @ alpha 192",
+            "pixels": 11
+          },
+          {
+            "transition": "#29adff -> #fff1e8 @ alpha 1",
+            "pixels": 9
+          },
+          {
+            "transition": "#1d2b53 -> #000000 @ alpha 1",
+            "pixels": 9
+          },
+          {
+            "transition": "#c2c3c7 -> #fff1e8 @ alpha 128",
+            "pixels": 9
+          },
+          {
+            "transition": "#c2c3c7 -> #fff1e8 @ alpha 255",
+            "pixels": 9
+          },
+          {
+            "transition": "#c2c3c7 -> #fff1e8 @ alpha 64",
+            "pixels": 6
+          },
+          {
+            "transition": "#c2c3c7 -> #fff1e8 @ alpha 254",
+            "pixels": 5
+          },
+          {
+            "transition": "#83769c -> #000000 @ alpha 1",
+            "pixels": 3
+          },
+          {
+            "transition": "#83769c -> #fff1e8 @ alpha 1",
+            "pixels": 3
+          },
+          {
+            "transition": "#c2c3c7 -> #29adff @ alpha 64",
+            "pixels": 3
+          },
+          {
+            "transition": "#ffec27 -> #29adff @ alpha 64",
+            "pixels": 3
+          },
+          {
+            "transition": "#c2c3c7 -> #29adff @ alpha 127",
+            "pixels": 3
+          },
+          {
+            "transition": "#c2c3c7 -> #00e436 @ alpha 128",
+            "pixels": 3
+          },
+          {
+            "transition": "#c2c3c7 -> #29adff @ alpha 128",
+            "pixels": 3
+          },
+          {
+            "transition": "#1d2b53 -> #000000 @ alpha 192",
+            "pixels": 3
+          },
+          {
+            "transition": "#c2c3c7 -> #29adff @ alpha 192",
+            "pixels": 3
+          },
+          {
+            "transition": "#c2c3c7 -> #29adff @ alpha 254",
+            "pixels": 3
+          },
+          {
+            "transition": "#ffec27 -> #29adff @ alpha 254",
+            "pixels": 3
+          },
+          {
+            "transition": "#c2c3c7 -> #29adff @ alpha 255",
+            "pixels": 3
+          },
+          {
+            "transition": "#ffec27 -> #fff1e8 @ alpha 64",
+            "pixels": 1
+          },
+          {
+            "transition": "#ffec27 -> #fff1e8 @ alpha 128",
+            "pixels": 1
+          },
+          {
+            "transition": "#c2c3c7 -> #83769c @ alpha 64",
+            "pixels": 1
+          },
+          {
+            "transition": "#c2c3c7 -> #83769c @ alpha 128",
+            "pixels": 1
+          },
+          {
+            "transition": "#c2c3c7 -> #83769c @ alpha 254",
+            "pixels": 1
+          }
+        ],
+        "exactVisibleRgba": false
+      },
+      "comparedToActualSave": {
+        "expected": "codex-app-save.png",
+        "actual": "round-premul-floor-unpremul",
+        "dimensionsMatch": true,
+        "alphaMismatchPixels": 0,
+        "visibleRgbMismatchPixels": 3,
+        "maxRgbChannelError": 83,
+        "byExpectedAlpha": [
+          {
+            "alpha": 0,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 1,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 64,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 127,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 128,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 192,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 3,
+            "maxRgbChannelError": 83
+          },
+          {
+            "alpha": 254,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 255,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          }
+        ],
+        "transitions": [
+          {
+            "transition": "#1d2b53 -> #000000 @ alpha 192",
+            "pixels": 3
+          }
+        ],
+        "exactVisibleRgba": false
+      }
+    },
+    {
+      "model": "floor-premul-round-unpremul",
+      "selectedColors": [
+        "#000000",
+        "#1d2b53",
+        "#c2c3c7",
+        "#ff004d",
+        "#ffec27",
+        "#00e436",
+        "#29adff",
+        "#83769c"
+      ],
+      "sourceDifference": {
+        "expected": "fixtures/palette-source.png",
+        "actual": "floor-premul-round-unpremul source",
+        "dimensionsMatch": true,
+        "alphaMismatchPixels": 0,
+        "visibleRgbMismatchPixels": 292,
+        "maxRgbChannelError": 241,
+        "byExpectedAlpha": [
+          {
+            "alpha": 0,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 1,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 54,
+            "maxRgbChannelError": 241
+          },
+          {
+            "alpha": 64,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 52,
+            "maxRgbChannelError": 4
+          },
+          {
+            "alpha": 127,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 51,
+            "maxRgbChannelError": 2
+          },
+          {
+            "alpha": 128,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 51,
+            "maxRgbChannelError": 2
+          },
+          {
+            "alpha": 192,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 45,
+            "maxRgbChannelError": 1
+          },
+          {
+            "alpha": 254,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 39,
+            "maxRgbChannelError": 1
+          },
+          {
+            "alpha": 255,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          }
+        ],
+        "transitions": [
+          {
+            "transition": "#00e436 -> #000000 @ alpha 1",
+            "pixels": 9
+          },
+          {
+            "transition": "#29adff -> #0000ff @ alpha 1",
+            "pixels": 9
+          },
+          {
+            "transition": "#29adff -> #28abff @ alpha 64",
+            "pixels": 9
+          },
+          {
+            "transition": "#29adff -> #28adff @ alpha 127",
+            "pixels": 9
+          },
+          {
+            "transition": "#29adff -> #28abff @ alpha 128",
+            "pixels": 9
+          },
+          {
+            "transition": "#29adff -> #28adff @ alpha 192",
+            "pixels": 9
+          },
+          {
+            "transition": "#29adff -> #28adff @ alpha 254",
+            "pixels": 9
+          },
+          {
+            "transition": "#ffec27 -> #ff0000 @ alpha 1",
+            "pixels": 8
+          },
+          {
+            "transition": "#00e436 -> #00e334 @ alpha 64",
+            "pixels": 8
+          },
+          {
+            "transition": "#00e436 -> #00e334 @ alpha 127",
+            "pixels": 8
+          },
+          {
+            "transition": "#00e436 -> #00e336 @ alpha 128",
+            "pixels": 8
+          },
+          {
+            "transition": "#00e436 -> #00e335 @ alpha 192",
+            "pixels": 8
+          },
+          {
+            "transition": "#00e436 -> #00e435 @ alpha 254",
+            "pixels": 8
+          },
+          {
+            "transition": "#ffec27 -> #ffeb24 @ alpha 64",
+            "pixels": 6
+          },
+          {
+            "transition": "#ffec27 -> #ffeb26 @ alpha 127",
+            "pixels": 6
+          },
+          {
+            "transition": "#1d2b53 -> #1c2a52 @ alpha 128",
+            "pixels": 6
+          },
+          {
+            "transition": "#1d2b53 -> #1c2b52 @ alpha 192",
+            "pixels": 6
+          },
+          {
+            "transition": "#1d2b53 -> #1c2a52 @ alpha 254",
+            "pixels": 6
+          },
+          {
+            "transition": "#ff004d -> #ff0000 @ alpha 1",
+            "pixels": 5
+          },
+          {
+            "transition": "#ff004d -> #ff004c @ alpha 64",
+            "pixels": 5
+          },
+          {
+            "transition": "#ff004d -> #ff004c @ alpha 127",
+            "pixels": 5
+          },
+          {
+            "transition": "#ffec27 -> #ffeb26 @ alpha 128",
+            "pixels": 5
+          },
+          {
+            "transition": "#ffec27 -> #ffeb27 @ alpha 192",
+            "pixels": 5
+          },
+          {
+            "transition": "#ffec27 -> #ffec26 @ alpha 254",
+            "pixels": 5
+          },
+          {
+            "transition": "#242424 -> #000000 @ alpha 1",
+            "pixels": 3
+          },
+          {
+            "transition": "#494949 -> #000000 @ alpha 1",
+            "pixels": 3
+          },
+          {
+            "transition": "#6d6d6d -> #000000 @ alpha 1",
+            "pixels": 3
+          },
+          {
+            "transition": "#929292 -> #000000 @ alpha 1",
+            "pixels": 3
+          },
+          {
+            "transition": "#b6b6b6 -> #000000 @ alpha 1",
+            "pixels": 3
+          },
+          {
+            "transition": "#dbdbdb -> #000000 @ alpha 1",
+            "pixels": 3
+          },
+          {
+            "transition": "#494949 -> #484848 @ alpha 64",
+            "pixels": 3
+          },
+          {
+            "transition": "#6d6d6d -> #6c6c6c @ alpha 64",
+            "pixels": 3
+          },
+          {
+            "transition": "#929292 -> #8f8f8f @ alpha 64",
+            "pixels": 3
+          },
+          {
+            "transition": "#b6b6b6 -> #b3b3b3 @ alpha 64",
+            "pixels": 3
+          },
+          {
+            "transition": "#dbdbdb -> #d7d7d7 @ alpha 64",
+            "pixels": 3
+          },
+          {
+            "transition": "#242424 -> #222222 @ alpha 127",
+            "pixels": 3
+          },
+          {
+            "transition": "#494949 -> #484848 @ alpha 127",
+            "pixels": 3
+          },
+          {
+            "transition": "#6d6d6d -> #6c6c6c @ alpha 127",
+            "pixels": 3
+          },
+          {
+            "transition": "#929292 -> #919191 @ alpha 127",
+            "pixels": 3
+          },
+          {
+            "transition": "#b6b6b6 -> #b5b5b5 @ alpha 127",
+            "pixels": 3
+          },
+          {
+            "transition": "#ff004d -> #ff004c @ alpha 128",
+            "pixels": 3
+          },
+          {
+            "transition": "#494949 -> #484848 @ alpha 128",
+            "pixels": 3
+          },
+          {
+            "transition": "#6d6d6d -> #6c6c6c @ alpha 128",
+            "pixels": 3
+          },
+          {
+            "transition": "#929292 -> #919191 @ alpha 128",
+            "pixels": 3
+          },
+          {
+            "transition": "#b6b6b6 -> #b5b5b5 @ alpha 128",
+            "pixels": 3
+          },
+          {
+            "transition": "#dbdbdb -> #d9d9d9 @ alpha 128",
+            "pixels": 3
+          },
+          {
+            "transition": "#ff004d -> #ff004c @ alpha 192",
+            "pixels": 3
+          },
+          {
+            "transition": "#494949 -> #484848 @ alpha 192",
+            "pixels": 3
+          },
+          {
+            "transition": "#929292 -> #919191 @ alpha 192",
+            "pixels": 3
+          },
+          {
+            "transition": "#dbdbdb -> #dadada @ alpha 192",
+            "pixels": 3
+          },
+          {
+            "transition": "#242424 -> #232323 @ alpha 254",
+            "pixels": 3
+          },
+          {
+            "transition": "#494949 -> #484848 @ alpha 254",
+            "pixels": 3
+          },
+          {
+            "transition": "#6d6d6d -> #6c6c6c @ alpha 254",
+            "pixels": 3
+          },
+          {
+            "transition": "#1d2b53 -> #000000 @ alpha 1",
+            "pixels": 3
+          },
+          {
+            "transition": "#1d2b53 -> #1c2850 @ alpha 64",
+            "pixels": 3
+          },
+          {
+            "transition": "#c2c3c7 -> #bfbfc3 @ alpha 64",
+            "pixels": 3
+          },
+          {
+            "transition": "#1d2b53 -> #1c2a52 @ alpha 127",
+            "pixels": 3
+          },
+          {
+            "transition": "#c2c3c7 -> #c1c3c7 @ alpha 127",
+            "pixels": 3
+          },
+          {
+            "transition": "#c2c3c7 -> #c1c1c5 @ alpha 128",
+            "pixels": 3
+          },
+          {
+            "transition": "#c2c3c7 -> #c2c2c6 @ alpha 192",
+            "pixels": 3
+          },
+          {
+            "transition": "#fff1e8 -> #ff0000 @ alpha 1",
+            "pixels": 2
+          },
+          {
+            "transition": "#fff1e8 -> #ffefe7 @ alpha 64",
+            "pixels": 2
+          },
+          {
+            "transition": "#fff1e8 -> #fff1e7 @ alpha 127",
+            "pixels": 2
+          },
+          {
+            "transition": "#fff1e8 -> #ffefe7 @ alpha 128",
+            "pixels": 2
+          },
+          {
+            "transition": "#fff1e8 -> #fff0e7 @ alpha 192",
+            "pixels": 2
+          },
+          {
+            "transition": "#ff004d -> #ff004c @ alpha 254",
+            "pixels": 2
+          },
+          {
+            "transition": "#080c16 -> #080c14 @ alpha 64",
+            "pixels": 1
+          }
+        ],
+        "exactVisibleRgba": false
+      },
+      "comparedToGolden": {
+        "expected": "fixtures/palette-keep-expected.png",
+        "actual": "floor-premul-round-unpremul",
+        "dimensionsMatch": true,
+        "alphaMismatchPixels": 0,
+        "visibleRgbMismatchPixels": 52,
+        "maxRgbChannelError": 236,
+        "byExpectedAlpha": [
+          {
+            "alpha": 0,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 1,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 49,
+            "maxRgbChannelError": 236
+          },
+          {
+            "alpha": 64,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 3,
+            "maxRgbChannelError": 160
+          },
+          {
+            "alpha": 127,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 128,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 192,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 254,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 255,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          }
+        ],
+        "transitions": [
+          {
+            "transition": "#00e436 -> #000000 @ alpha 1",
+            "pixels": 9
+          },
+          {
+            "transition": "#29adff -> #1d2b53 @ alpha 1",
+            "pixels": 9
+          },
+          {
+            "transition": "#1d2b53 -> #000000 @ alpha 1",
+            "pixels": 9
+          },
+          {
+            "transition": "#ffec27 -> #ff004d @ alpha 1",
+            "pixels": 8
+          },
+          {
+            "transition": "#83769c -> #000000 @ alpha 1",
+            "pixels": 6
+          },
+          {
+            "transition": "#c2c3c7 -> #000000 @ alpha 1",
+            "pixels": 6
+          },
+          {
+            "transition": "#ffec27 -> #c2c3c7 @ alpha 64",
+            "pixels": 3
+          },
+          {
+            "transition": "#c2c3c7 -> #ff004d @ alpha 1",
+            "pixels": 2
+          }
+        ],
+        "exactVisibleRgba": false
+      },
+      "comparedToActualSave": {
+        "expected": "codex-app-save.png",
+        "actual": "floor-premul-round-unpremul",
+        "dimensionsMatch": true,
+        "alphaMismatchPixels": 0,
+        "visibleRgbMismatchPixels": 123,
+        "maxRgbChannelError": 255,
+        "byExpectedAlpha": [
+          {
+            "alpha": 0,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 0,
+            "maxRgbChannelError": 0
+          },
+          {
+            "alpha": 1,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 40,
+            "maxRgbChannelError": 255
+          },
+          {
+            "alpha": 64,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 14,
+            "maxRgbChannelError": 193
+          },
+          {
+            "alpha": 127,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 14,
+            "maxRgbChannelError": 153
+          },
+          {
+            "alpha": 128,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 17,
+            "maxRgbChannelError": 194
+          },
+          {
+            "alpha": 192,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 14,
+            "maxRgbChannelError": 153
+          },
+          {
+            "alpha": 254,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 12,
+            "maxRgbChannelError": 216
+          },
+          {
+            "alpha": 255,
+            "pixels": 96,
+            "alphaMismatchPixels": 0,
+            "rgbMismatchPixels": 12,
+            "maxRgbChannelError": 153
+          }
+        ],
+        "transitions": [
+          {
+            "transition": "#fff1e8 -> #c2c3c7 @ alpha 127",
+            "pixels": 11
+          },
+          {
+            "transition": "#fff1e8 -> #c2c3c7 @ alpha 192",
+            "pixels": 11
+          },
+          {
+            "transition": "#00e436 -> #000000 @ alpha 1",
+            "pixels": 9
+          },
+          {
+            "transition": "#fff1e8 -> #1d2b53 @ alpha 1",
+            "pixels": 9
+          },
+          {
+            "transition": "#fff1e8 -> #000000 @ alpha 1",
+            "pixels": 9
+          },
+          {
+            "transition": "#fff1e8 -> #c2c3c7 @ alpha 128",
+            "pixels": 9
+          },
+          {
+            "transition": "#fff1e8 -> #c2c3c7 @ alpha 255",
+            "pixels": 9
+          },
+          {
+            "transition": "#ffec27 -> #ff004d @ alpha 1",
+            "pixels": 8
+          },
+          {
+            "transition": "#fff1e8 -> #c2c3c7 @ alpha 64",
+            "pixels": 6
+          },
+          {
+            "transition": "#29adff -> #c2c3c7 @ alpha 64",
+            "pixels": 6
+          },
+          {
+            "transition": "#fff1e8 -> #c2c3c7 @ alpha 254",
+            "pixels": 5
+          },
+          {
+            "transition": "#fff1e8 -> #c2c3c7 @ alpha 1",
+            "pixels": 3
+          },
+          {
+            "transition": "#29adff -> #c2c3c7 @ alpha 127",
+            "pixels": 3
+          },
+          {
+            "transition": "#00e436 -> #c2c3c7 @ alpha 128",
+            "pixels": 3
+          },
+          {
+            "transition": "#29adff -> #c2c3c7 @ alpha 128",
+            "pixels": 3
+          },
+          {
+            "transition": "#29adff -> #c2c3c7 @ alpha 192",
+            "pixels": 3
+          },
+          {
+            "transition": "#29adff -> #c2c3c7 @ alpha 254",
+            "pixels": 3
+          },
+          {
+            "transition": "#29adff -> #ffec27 @ alpha 254",
+            "pixels": 3
+          },
+          {
+            "transition": "#29adff -> #c2c3c7 @ alpha 255",
+            "pixels": 3
+          },
+          {
+            "transition": "#fff1e8 -> #ff004d @ alpha 1",
+            "pixels": 2
+          },
+          {
+            "transition": "#fff1e8 -> #ffec27 @ alpha 64",
+            "pixels": 1
+          },
+          {
+            "transition": "#fff1e8 -> #ffec27 @ alpha 128",
+            "pixels": 1
+          },
+          {
+            "transition": "#83769c -> #c2c3c7 @ alpha 64",
+            "pixels": 1
+          },
+          {
+            "transition": "#83769c -> #c2c3c7 @ alpha 128",
+            "pixels": 1
+          },
+          {
+            "transition": "#83769c -> #c2c3c7 @ alpha 254",
+            "pixels": 1
+          }
+        ],
+        "exactVisibleRgba": false
+      }
+    }
+  ]
+}

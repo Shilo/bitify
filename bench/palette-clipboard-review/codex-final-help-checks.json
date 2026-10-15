@@ -1,0 +1,31 @@
+{
+  "scope": "Fresh final build in owned Codex Browser tab; real UI family/opacity changes; DOM Help text and geometry only, not clipboard delivery.",
+  "checks": [
+    {
+      "case": "Palette Keep partial source",
+      "clientWidth": 418,
+      "closeVisible": true,
+      "scrollWidth": 418,
+      "text": "SaveSave or copy images. Save a PNG for exact translucent colors.",
+      "viewport": 1280
+    },
+    {
+      "case": "Palette Cut partial source",
+      "text": [
+        "AddChoose, drop or paste images.",
+        "PaletteUse Auto, pick a palette or import your own.",
+        "RecolorTune matching, color limits and dithering.",
+        "SaveSave or copy images."
+      ]
+    },
+    {
+      "case": "1-bit partial source",
+      "text": [
+        "AddChoose, drop or paste images.",
+        "PalettePick a color pair or choose your own colors.",
+        "StylePick an effect and tune its settings.",
+        "SaveSave or copy images."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "device": "android",
+  "key": "onebit",
+  "trusted": true,
+  "mime": "image/png",
+  "clipboardTypes": [
+    "image-uri",
+    "Files"
+  ],
+  "pasteStartedAt": "2026-10-15T08:58:22.409Z",
+  "file": "android-onebit-pasted.png",
+  "attemptFile": "android-onebit-attempt-2026-10-15T08-58-21-984Z-03a1e4027a8c-991dd163.png",
+  "attemptReceipt": "android-onebit-attempt-2026-10-15T08-58-21-984Z-03a1e4027a8c-991dd163.json",
+  "canonicalUpdated": true,
+  "bytes": 171,
+  "sha256": "03a1e4027a8ce703c8b6ed050378fc56997e34a6abd2a1da465f674b49ffb33b",
+  "verification": {
+    "pass": true,
+    "key": "onebit",
+    "width": 32,
+    "height": 24,
+    "pixels": 768,
+    "visiblePixels": 384,
+    "alphaMismatches": 0,
+    "visibleRgbMismatches": 0,
+    "alphaValues": [
+      0,
+      255
+    ],
+    "usedColors": 2,
+    "encodedBytes": 171,
+    "encodedSha256": "03a1e4027a8ce703c8b6ed050378fc56997e34a6abd2a1da465f674b49ffb33b",
+    "exactVisibleRgba": true
+  },
+  "recordedAt": "2026-10-15T08:58:21.984Z"
+}

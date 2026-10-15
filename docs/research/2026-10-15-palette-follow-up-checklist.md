@@ -33,3 +33,10 @@ Commit record: `fecb141` starts this checklist; `d582e58` corrects and cleans up
 the acceptance harness; `3a44e10` retains the independent boundary probes.
 Device receipts and final documentation are committed separately. All current
 production assets remain identical to the frozen `4523a4a` build.
+
+Subsequent clipboard follow-up: [actual native verification](2026-10-15-clipboard-verification.md)
+closes the requested Codex/USB Android delivery gap within its recorded scope,
+fixes one later-PNG-rejection ownership defect and adds conditional Save guidance.
+Native partial-alpha RGB changes and the distinct PNG-import precision observation
+remain explicit; Safari/iOS still needs testing. The earlier frozen-build results
+above remain historical evidence rather than claims about the later source revision.
