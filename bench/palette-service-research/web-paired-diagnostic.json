@@ -1,0 +1,108 @@
+{
+  "date": "2026-10-15T05:54:21.229Z",
+  "browserSandbox": true,
+  "submissions": 1,
+  "observations": [
+    {
+      "label": "initial",
+      "controls": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\"\n      - option \"Palette\" [selected]\n  - group:\n    - text: Color palette (Beta)\n    - button \"SLSO8 (8) 8 colours\":\n      - paragraph: SLSO8 (8)\n    - textbox \"https://lospec.com/palette-list/sweetie-16\"\n    - button \"Import\"\n    - paragraph:\n      - text: Find one on\n      - link \"Lospec\":\n        - /url: https://lospec.com/palette-list\n      - text: and paste its link here.\n    - paragraph: Max colours\n    - spinbutton \"No limit\": \"2\"\n    - paragraph: Every pixel goes onto these colours. Max colours limits the image.\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\"\n      - option \"2x2\"\n      - option \"4x4\" [selected]\n      - option \"8x8\"\n  - group:\n    - text: Dithering strength\n    - paragraph: \"5.0\"\n    - slider\n    - paragraph: Subtle\n    - paragraph: Strong\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "images": [],
+      "forms": []
+    },
+    {
+      "label": "number-mode",
+      "controls": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\" [selected]\n      - option \"Palette\"\n  - group:\n    - text: Number of colors\n    - spinbutton \"Number of colors\": \"8\"\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\"\n      - option \"2x2\"\n      - option \"4x4\" [selected]\n      - option \"8x8\"\n  - group:\n    - text: Dithering strength\n    - paragraph: \"5.0\"\n    - slider\n    - paragraph: Subtle\n    - paragraph: Strong\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "images": [],
+      "forms": []
+    },
+    {
+      "label": "owned-upload",
+      "controls": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\" [selected]\n      - option \"Palette\"\n  - group:\n    - text: Number of colors\n    - spinbutton \"Number of colors\": \"2\"\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\" [selected]\n      - option \"2x2\"\n      - option \"4x4\"\n      - option \"8x8\"\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "images": [],
+      "forms": []
+    },
+    {
+      "label": "owned-ready",
+      "controls": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 64x32px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\" [selected]\n      - option \"Palette\"\n  - group:\n    - text: Number of colors\n    - spinbutton \"Number of colors\": \"2\"\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\" [selected]\n      - option \"2x2\"\n      - option \"4x4\"\n      - option \"8x8\"\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "images": [
+        {
+          "tag": "IMG",
+          "width": 64,
+          "height": 32,
+          "sourceKind": "data",
+          "pixelHash": "04be2749b7b9b4cc96c8132d41606f4982e638698d2f7fea914c641a8bcf1e4c",
+          "visibleColors": 64
+        }
+      ],
+      "forms": []
+    },
+    {
+      "label": "before-submit",
+      "controls": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 64x32px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\" [selected]\n      - option \"Palette\"\n  - group:\n    - text: Number of colors\n    - spinbutton \"Number of colors\": \"2\"\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\" [selected]\n      - option \"2x2\"\n      - option \"4x4\"\n      - option \"8x8\"\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "images": [
+        {
+          "tag": "IMG",
+          "width": 64,
+          "height": 32,
+          "sourceKind": "data",
+          "pixelHash": "04be2749b7b9b4cc96c8132d41606f4982e638698d2f7fea914c641a8bcf1e4c",
+          "visibleColors": 64
+        }
+      ],
+      "forms": []
+    },
+    {
+      "label": "after-5s",
+      "controls": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 64x32px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\" [selected]\n      - option \"Palette\"\n  - group:\n    - text: Number of colors\n    - spinbutton \"Number of colors\": \"2\"\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\" [selected]\n      - option \"2x2\"\n      - option \"4x4\"\n      - option \"8x8\"\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "images": [
+        {
+          "tag": "IMG",
+          "width": 64,
+          "height": 32,
+          "sourceKind": "data",
+          "pixelHash": "04be2749b7b9b4cc96c8132d41606f4982e638698d2f7fea914c641a8bcf1e4c",
+          "visibleColors": 64
+        }
+      ],
+      "forms": []
+    },
+    {
+      "label": "after-10s",
+      "controls": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 64x32px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\" [selected]\n      - option \"Palette\"\n  - group:\n    - text: Number of colors\n    - spinbutton \"Number of colors\": \"2\"\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\" [selected]\n      - option \"2x2\"\n      - option \"4x4\"\n      - option \"8x8\"\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "images": [
+        {
+          "tag": "IMG",
+          "width": 64,
+          "height": 32,
+          "sourceKind": "data",
+          "pixelHash": "04be2749b7b9b4cc96c8132d41606f4982e638698d2f7fea914c641a8bcf1e4c",
+          "visibleColors": 64
+        }
+      ],
+      "forms": []
+    },
+    {
+      "label": "after-15s",
+      "controls": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 64x32px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\" [selected]\n      - option \"Palette\"\n  - group:\n    - text: Number of colors\n    - spinbutton \"Number of colors\": \"2\"\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\" [selected]\n      - option \"2x2\"\n      - option \"4x4\"\n      - option \"8x8\"\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "images": [
+        {
+          "tag": "IMG",
+          "width": 64,
+          "height": 32,
+          "sourceKind": "data",
+          "pixelHash": "04be2749b7b9b4cc96c8132d41606f4982e638698d2f7fea914c641a8bcf1e4c",
+          "visibleColors": 64
+        }
+      ],
+      "forms": []
+    }
+  ],
+  "processingRequests": [],
+  "downloads": 0,
+  "authentication": "existing profile reached reducer",
+  "clickRoute": {
+    "normalLocatorClick": true,
+    "enabled": true,
+    "buttons": 1
+  }
+}

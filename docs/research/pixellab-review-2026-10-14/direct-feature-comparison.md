@@ -102,3 +102,5 @@ Do not add 1×1 as a false extra method: one cell cannot distribute two colors s
 ## Remaining evidence limits
 
 The website still has no attributable generated export despite authenticated controls and two later bounded attempts. Broad artist preference, arbitrary smart superiority, editor runtime, every repair operation, Safari, prolonged sessions and object-relative motion stability remain unverified. The service's internal quantizer, color metric and semantic algorithm are unknown. The paired output cohort must retain all variants and report point error, integrated tone, alpha/geometry, details, temporal behavior and size separately; pooling them into one “winner” would conceal useful tradeoffs.
+
+The final [website preview diagnostic](web-paired-diagnostic.md) did not change the uploaded preview in place within 15 seconds of the one allowed Generate. Website output/export remains an explicit unresolved surface; successful API output comparison must not be attributed to the website.
