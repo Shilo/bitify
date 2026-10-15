@@ -1,0 +1,121 @@
+{
+  "chromiumSandbox": true,
+  "scope": "Native Edge; unmodified build; synthetic PNGs and intercepted Lospec responses; no service calls, authenticated profile or OS picker substitution claim.",
+  "productionIndexSha256": "0b61657e4bf8e35317a45bd2973d02cc94282855b1f9d14b5b8435eb94822d20",
+  "checks": [
+    {
+      "name": "Detached native Edit color cannot modify a different current swatch",
+      "passed": true,
+      "detached": true,
+      "expected": "#445566",
+      "actual": "#445566",
+      "secondSwatchLabel": "Select color 2 #445566",
+      "uncaughtErrors": []
+    },
+    {
+      "name": "Keep256RGB plus empty/alpha1 counts and reuses all256 in order across4pages",
+      "passed": true,
+      "count": 256,
+      "reviewPages": 4,
+      "paintCanvasesPerPage": 64,
+      "localSave": true
+    },
+    {
+      "name": "Fixed transparent source reports zero and disables reuse",
+      "passed": true
+    },
+    {
+      "name": "InvalidUTF8 octetstream Lospec failure preserves current draft and name",
+      "passed": true
+    },
+    {
+      "name": "Trusted outside Save first dismisses Recolor; second click downloads exact PNG",
+      "passed": true,
+      "firstClick": {
+        "panelClosed": true,
+        "downloadAttempts": 0,
+        "downloadEvents": 0,
+        "observationMs": 300
+      },
+      "secondClick": {
+        "downloadEvents": 1,
+        "filename": "owned-ramp-palette.png",
+        "bytes": 1912,
+        "sha256": "af55fff6eab37b18e9020222f792ed60bc87010a2665daeb063811b236409388",
+        "width": 128,
+        "height": 64,
+        "sourceAlphaBytesMatched": 8192,
+        "visibleRgbMatchesProduction": true
+      },
+      "interaction": "One trusted page.mouse.click without locator action retries for dismissal, then locator click for Save; anchor observation forwards the original native implementation.",
+      "settings": {
+        "colors": [
+          "#000000",
+          "#1d2b53",
+          "#7e2553",
+          "#008751",
+          "#ab5236",
+          "#5f574f",
+          "#c2c3c7",
+          "#fff1e8",
+          "#ff004d",
+          "#ffa300",
+          "#ffec27",
+          "#00e436",
+          "#29adff",
+          "#83769c",
+          "#ff77a8",
+          "#ffccaa"
+        ],
+        "name": "PICO-8",
+        "metric": "oklab",
+        "maxColors": 8,
+        "cleanup": true,
+        "dither": "4x4",
+        "ditherStrength": 50,
+        "alphaCut": 128,
+        "alphaMode": "keep"
+      }
+    }
+  ],
+  "findings": [],
+  "trustedSaveDiagnostic": {
+    "beforeClick": {
+      "downloadAttempts": 0,
+      "panel": true,
+      "expanded": "true",
+      "dialogs": []
+    },
+    "downloadsAfterFirst": 0,
+    "trace": [
+      {
+        "type": "pointerdown",
+        "detail": 0,
+        "isTrusted": true,
+        "defaultPrevented": true,
+        "target": "Save owned-ramp.png",
+        "panel": false,
+        "openDialogs": []
+      },
+      {
+        "type": "pointerup",
+        "detail": 0,
+        "isTrusted": true,
+        "defaultPrevented": false,
+        "panel": false,
+        "openDialogs": []
+      },
+      {
+        "type": "click",
+        "detail": 1,
+        "isTrusted": true,
+        "defaultPrevented": true,
+        "panel": false,
+        "openDialogs": []
+      }
+    ],
+    "attempts": []
+  },
+  "completed": true,
+  "finished": "2026-10-15T08:20:52.028Z"
+}

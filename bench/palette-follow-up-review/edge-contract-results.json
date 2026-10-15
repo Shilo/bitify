@@ -1,0 +1,686 @@
+{
+  "completed": true,
+  "productionEdited": false,
+  "runtime": {
+    "node": "v25.0.0",
+    "sharp": "0.35.5"
+  },
+  "scope": "32 combinations = 2 target sizes × 2 alpha modes × 4 dither patterns × 2 Cleanup states. Eight all-transparent cases = 2 targets × 2 alpha modes × 2 Cleanup states, with RGB matching/cap2/8x8 fixed. These are combinations of synthetic fixtures, not independent artwork quality cases.",
+  "checks": "Different two-frame sources; full-GIF used-color union from actual indices; every-frame independent PNG decode; full/sample coordinate consistency; both frames cached and warm-reused; exact cache byte reservation/release; all-transparent fixed palettes and explicit empty Auto rejection.",
+  "limitations": "Main fixture uses exact grayscale palette members or a single chromatic target. It does not create multi-color Cleanup replacements or assess semantic detail quality. Hidden alpha-zero RGB is not compared. No browser, encoding-performance or GIF-container claims.",
+  "sourceHashes": [
+    "267067dfa9bf18ccf22dfc6ca47b813b55b864d415abe9c57c63ccc9f6387a1c",
+    "a1fb687fe32b8a4cbef4d3d2e4a95dcfa6d01fdf63066d904a65a6ab2472fa72"
+  ],
+  "sourceShape": {
+    "width": 257,
+    "height": 2,
+    "frames": 2,
+    "delays": [
+      40,
+      160
+    ],
+    "alphaValues": [
+      0,
+      1,
+      127,
+      128,
+      254,
+      255
+    ]
+  },
+  "sourceDependencies": {
+    "quantize.js": "6dacaca42d615b72a4ee511bb7ed32344aa7118ae946769e290d7a9463f8d0a3",
+    "palette-usage.js": "f6f37dd64d58515862e9ffe4f33f3812f2fef568e82390b052bf8923dd272ce5",
+    "palette-state.js": "2e7cd14844c1539cb321b27200be18955db70ec22ca6f06190d7a75007cac0ad",
+    "palette-alpha.js": "92fc032f80728ef7027569b91be8cb91aa9486f203bbff9646ed89d674ab6b92",
+    "palette-dither.js": "5452f7b1af4d5f656d8733635856eab5ba565e8d7ee81cced4d77041a9638152",
+    "palette-cleanup.js": "8dba109b8da1a85e1361ce5307167c8814cdbd75dd96569f0145662897dce46d",
+    "palette-cleanup-apply.js": "178b4e225afaecca657df5ab843cb48e1aaca6112517fa372a40f2e06d4ca6a3",
+    "palette-animation-cache.js": "710372b3a29169ac006d8c2286120f3ebab4908b0727940a96af340514b3670a",
+    "palette-limit.js": "739a3fb97a80d1ecbfa23c5e33f72893b894adc4425ea89217a88d7264abae20",
+    "palette-generated.js": "ff11e62b92853b12c99946f60e9635de734b903702bcbd2b39834b84087e8c58",
+    "palette-generated-sources.js": "cdab664272c650d51f1347275ed7d985f36fc1fa23e5f0d31d8c872caf820652",
+    "palette-library.js": "9fdd23d6239d25de7bce7e2d1e6a3563f9f15061f01e1404195dbfe8cd2f2d6e",
+    "palette-export.js": "fe8f942e584abeca5353b844f133ae053ced48b682ef0b6dd4ff78ec496a6ae0",
+    "save.js": "373b1d312b56474c572817b29fcbab67dea9fdf1a634c787e7ed2a73fd59c4cf"
+  },
+  "cases": [
+    {
+      "targetSize": 1,
+      "alphaMode": "cut",
+      "dither": "none",
+      "strength": 100,
+      "cleanup": false,
+      "frameUsedCounts": [
+        1,
+        1
+      ],
+      "wholeGifUsedCount": 1,
+      "reservedBytes": 564,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 1,
+      "alphaMode": "cut",
+      "dither": "none",
+      "strength": 100,
+      "cleanup": true,
+      "frameUsedCounts": [
+        1,
+        1
+      ],
+      "wholeGifUsedCount": 1,
+      "reservedBytes": 564,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 1,
+      "alphaMode": "cut",
+      "dither": "2x2",
+      "strength": 100,
+      "cleanup": false,
+      "frameUsedCounts": [
+        1,
+        1
+      ],
+      "wholeGifUsedCount": 1,
+      "reservedBytes": 564,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 1,
+      "alphaMode": "cut",
+      "dither": "2x2",
+      "strength": 100,
+      "cleanup": true,
+      "frameUsedCounts": [
+        1,
+        1
+      ],
+      "wholeGifUsedCount": 1,
+      "reservedBytes": 564,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 1,
+      "alphaMode": "cut",
+      "dither": "4x4",
+      "strength": 100,
+      "cleanup": false,
+      "frameUsedCounts": [
+        1,
+        1
+      ],
+      "wholeGifUsedCount": 1,
+      "reservedBytes": 564,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 1,
+      "alphaMode": "cut",
+      "dither": "4x4",
+      "strength": 100,
+      "cleanup": true,
+      "frameUsedCounts": [
+        1,
+        1
+      ],
+      "wholeGifUsedCount": 1,
+      "reservedBytes": 564,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 1,
+      "alphaMode": "cut",
+      "dither": "8x8",
+      "strength": 100,
+      "cleanup": false,
+      "frameUsedCounts": [
+        1,
+        1
+      ],
+      "wholeGifUsedCount": 1,
+      "reservedBytes": 564,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 1,
+      "alphaMode": "cut",
+      "dither": "8x8",
+      "strength": 100,
+      "cleanup": true,
+      "frameUsedCounts": [
+        1,
+        1
+      ],
+      "wholeGifUsedCount": 1,
+      "reservedBytes": 564,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 1,
+      "alphaMode": "keep",
+      "dither": "none",
+      "strength": 100,
+      "cleanup": false,
+      "frameUsedCounts": [
+        1,
+        1
+      ],
+      "wholeGifUsedCount": 1,
+      "reservedBytes": 590,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 1,
+      "alphaMode": "keep",
+      "dither": "none",
+      "strength": 100,
+      "cleanup": true,
+      "frameUsedCounts": [
+        1,
+        1
+      ],
+      "wholeGifUsedCount": 1,
+      "reservedBytes": 590,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 1,
+      "alphaMode": "keep",
+      "dither": "2x2",
+      "strength": 100,
+      "cleanup": false,
+      "frameUsedCounts": [
+        1,
+        1
+      ],
+      "wholeGifUsedCount": 1,
+      "reservedBytes": 590,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 1,
+      "alphaMode": "keep",
+      "dither": "2x2",
+      "strength": 100,
+      "cleanup": true,
+      "frameUsedCounts": [
+        1,
+        1
+      ],
+      "wholeGifUsedCount": 1,
+      "reservedBytes": 590,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 1,
+      "alphaMode": "keep",
+      "dither": "4x4",
+      "strength": 100,
+      "cleanup": false,
+      "frameUsedCounts": [
+        1,
+        1
+      ],
+      "wholeGifUsedCount": 1,
+      "reservedBytes": 590,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 1,
+      "alphaMode": "keep",
+      "dither": "4x4",
+      "strength": 100,
+      "cleanup": true,
+      "frameUsedCounts": [
+        1,
+        1
+      ],
+      "wholeGifUsedCount": 1,
+      "reservedBytes": 590,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 1,
+      "alphaMode": "keep",
+      "dither": "8x8",
+      "strength": 100,
+      "cleanup": false,
+      "frameUsedCounts": [
+        1,
+        1
+      ],
+      "wholeGifUsedCount": 1,
+      "reservedBytes": 590,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 1,
+      "alphaMode": "keep",
+      "dither": "8x8",
+      "strength": 100,
+      "cleanup": true,
+      "frameUsedCounts": [
+        1,
+        1
+      ],
+      "wholeGifUsedCount": 1,
+      "reservedBytes": 590,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 256,
+      "alphaMode": "cut",
+      "dither": "none",
+      "strength": 100,
+      "cleanup": false,
+      "frameUsedCounts": [
+        192,
+        192
+      ],
+      "wholeGifUsedCount": 256,
+      "reservedBytes": 564,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 256,
+      "alphaMode": "cut",
+      "dither": "none",
+      "strength": 100,
+      "cleanup": true,
+      "frameUsedCounts": [
+        192,
+        192
+      ],
+      "wholeGifUsedCount": 256,
+      "reservedBytes": 564,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 256,
+      "alphaMode": "cut",
+      "dither": "2x2",
+      "strength": 100,
+      "cleanup": false,
+      "frameUsedCounts": [
+        192,
+        192
+      ],
+      "wholeGifUsedCount": 256,
+      "reservedBytes": 564,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 256,
+      "alphaMode": "cut",
+      "dither": "2x2",
+      "strength": 100,
+      "cleanup": true,
+      "frameUsedCounts": [
+        192,
+        192
+      ],
+      "wholeGifUsedCount": 256,
+      "reservedBytes": 564,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 256,
+      "alphaMode": "cut",
+      "dither": "4x4",
+      "strength": 100,
+      "cleanup": false,
+      "frameUsedCounts": [
+        192,
+        192
+      ],
+      "wholeGifUsedCount": 256,
+      "reservedBytes": 564,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 256,
+      "alphaMode": "cut",
+      "dither": "4x4",
+      "strength": 100,
+      "cleanup": true,
+      "frameUsedCounts": [
+        192,
+        192
+      ],
+      "wholeGifUsedCount": 256,
+      "reservedBytes": 564,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 256,
+      "alphaMode": "cut",
+      "dither": "8x8",
+      "strength": 100,
+      "cleanup": false,
+      "frameUsedCounts": [
+        192,
+        192
+      ],
+      "wholeGifUsedCount": 256,
+      "reservedBytes": 564,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 256,
+      "alphaMode": "cut",
+      "dither": "8x8",
+      "strength": 100,
+      "cleanup": true,
+      "frameUsedCounts": [
+        192,
+        192
+      ],
+      "wholeGifUsedCount": 256,
+      "reservedBytes": 564,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 256,
+      "alphaMode": "keep",
+      "dither": "none",
+      "strength": 100,
+      "cleanup": false,
+      "frameUsedCounts": [
+        256,
+        256
+      ],
+      "wholeGifUsedCount": 256,
+      "reservedBytes": 590,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 256,
+      "alphaMode": "keep",
+      "dither": "none",
+      "strength": 100,
+      "cleanup": true,
+      "frameUsedCounts": [
+        256,
+        256
+      ],
+      "wholeGifUsedCount": 256,
+      "reservedBytes": 590,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 256,
+      "alphaMode": "keep",
+      "dither": "2x2",
+      "strength": 100,
+      "cleanup": false,
+      "frameUsedCounts": [
+        256,
+        256
+      ],
+      "wholeGifUsedCount": 256,
+      "reservedBytes": 590,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 256,
+      "alphaMode": "keep",
+      "dither": "2x2",
+      "strength": 100,
+      "cleanup": true,
+      "frameUsedCounts": [
+        256,
+        256
+      ],
+      "wholeGifUsedCount": 256,
+      "reservedBytes": 590,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 256,
+      "alphaMode": "keep",
+      "dither": "4x4",
+      "strength": 100,
+      "cleanup": false,
+      "frameUsedCounts": [
+        256,
+        256
+      ],
+      "wholeGifUsedCount": 256,
+      "reservedBytes": 590,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 256,
+      "alphaMode": "keep",
+      "dither": "4x4",
+      "strength": 100,
+      "cleanup": true,
+      "frameUsedCounts": [
+        256,
+        256
+      ],
+      "wholeGifUsedCount": 256,
+      "reservedBytes": 590,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 256,
+      "alphaMode": "keep",
+      "dither": "8x8",
+      "strength": 100,
+      "cleanup": false,
+      "frameUsedCounts": [
+        256,
+        256
+      ],
+      "wholeGifUsedCount": 256,
+      "reservedBytes": 590,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    },
+    {
+      "targetSize": 256,
+      "alphaMode": "keep",
+      "dither": "8x8",
+      "strength": 100,
+      "cleanup": true,
+      "frameUsedCounts": [
+        256,
+        256
+      ],
+      "wholeGifUsedCount": 256,
+      "reservedBytes": 590,
+      "pngFramesDecoded": 2,
+      "coldCacheFrames": 2,
+      "warmCacheHits": 2,
+      "pass": true
+    }
+  ],
+  "allTransparent": [
+    {
+      "targetSize": 1,
+      "alphaMode": "cut",
+      "cleanup": false,
+      "metric": "rgb",
+      "requestedMaxColors": 2,
+      "dither": "8x8",
+      "usedCount": 0,
+      "pass": true
+    },
+    {
+      "targetSize": 1,
+      "alphaMode": "cut",
+      "cleanup": true,
+      "metric": "rgb",
+      "requestedMaxColors": 2,
+      "dither": "8x8",
+      "usedCount": 0,
+      "pass": true
+    },
+    {
+      "targetSize": 256,
+      "alphaMode": "cut",
+      "cleanup": false,
+      "metric": "rgb",
+      "requestedMaxColors": 2,
+      "dither": "8x8",
+      "usedCount": 0,
+      "pass": true
+    },
+    {
+      "targetSize": 256,
+      "alphaMode": "cut",
+      "cleanup": true,
+      "metric": "rgb",
+      "requestedMaxColors": 2,
+      "dither": "8x8",
+      "usedCount": 0,
+      "pass": true
+    },
+    {
+      "targetSize": 1,
+      "alphaMode": "keep",
+      "cleanup": false,
+      "metric": "rgb",
+      "requestedMaxColors": 2,
+      "dither": "8x8",
+      "usedCount": 0,
+      "pass": true
+    },
+    {
+      "targetSize": 1,
+      "alphaMode": "keep",
+      "cleanup": true,
+      "metric": "rgb",
+      "requestedMaxColors": 2,
+      "dither": "8x8",
+      "usedCount": 0,
+      "pass": true
+    },
+    {
+      "targetSize": 256,
+      "alphaMode": "keep",
+      "cleanup": false,
+      "metric": "rgb",
+      "requestedMaxColors": 2,
+      "dither": "8x8",
+      "usedCount": 0,
+      "pass": true
+    },
+    {
+      "targetSize": 256,
+      "alphaMode": "keep",
+      "cleanup": true,
+      "metric": "rgb",
+      "requestedMaxColors": 2,
+      "dither": "8x8",
+      "usedCount": 0,
+      "pass": true
+    }
+  ],
+  "summary": {
+    "combinedCornerCases": 32,
+    "independentPngRoundtrips": 64,
+    "coldCacheFrameConversions": 64,
+    "warmCacheFrameHits": 64,
+    "releasedCacheReservations": 32,
+    "allTransparentFixedCases": 8,
+    "emptyAutoExplicitlyRejected": true,
+    "sourceBytesUnchanged": true
+  }
+}
