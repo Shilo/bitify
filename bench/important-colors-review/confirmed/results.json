@@ -1,0 +1,997 @@
+{
+  "status": "Unblinded second-round explicit region confirmation; no blind preference tally",
+  "rows": [
+    {
+      "id": "town-water-bucket-auto-oklab-k4",
+      "region": "bucket",
+      "note": "Concave replaces 47 warm bucket pixels with gray/white, while blue water remains absent.",
+      "settings": {
+        "target": "auto",
+        "cap": 4,
+        "metric": "oklab",
+        "alphaCut": 128,
+        "alphaMode": "cut",
+        "dither": "none",
+        "cleanup": false
+      },
+      "source": {
+        "pngSha256": "3befce5d6373d4315f35eeed22752bb1cf7a2ab5d008ce26dd6b4aebbb278978",
+        "rgbaSha256": "da25bcc3803c7c7fc9cb57a557c93023441c173b683fba3cd9afba49732a264d"
+      },
+      "outputs": {
+        "baseline": {
+          "pngSha256": "713f18aa950d2e1e176322d835f979689312a622f173350a8129f56c299e70bb",
+          "rgbaSha256": "9f4618f571af11c755d81a0df12521ed09c59f4ca91415d1a2c42f3039c4f971",
+          "colors": [
+            "#3d212d",
+            "#763b36",
+            "#8c9cb5",
+            "#eaa56c"
+          ],
+          "alphaWrong": 0,
+          "usedColors": [
+            "3d212d",
+            "763b36",
+            "8c9cb5",
+            "eaa56c"
+          ],
+          "channelRmse": 36.689196132661344,
+          "labMse": 0.006471064272976189,
+          "regions": {
+            "bucket": {
+              "count": 82,
+              "labRmse": 0.07913192571227025,
+              "colors": {
+                "eaa56c": 47,
+                "763b36": 35
+              },
+              "exact": 51,
+              "sourceMeanLab": [
+                0.5900885158143669,
+                0.07019057477257859,
+                0.0663718193656879
+              ],
+              "outputMeanLab": [
+                0.6269831976806106,
+                0.06374476249938936,
+                0.07010203299537066
+              ],
+              "sourceChroma": 0.09660194197228361,
+              "outputChroma": 0.09475067163977041,
+              "hueDegrees": 4.321082419529311,
+              "edgeCount": 44,
+              "sourceContrast": 0.29716411967314077,
+              "outputContrast": 0.24519725028363737
+            }
+          }
+        },
+        "concave": {
+          "pngSha256": "dcc51ff4e5825ccc22d6fdad961a9510ccb26229e1cebe889c4dd8d55f497da6",
+          "rgbaSha256": "15c9d091079768b4ff265618a0b3cfbb4679d2b141bdddbb474922e107f0e742",
+          "colors": [
+            "#3d212d",
+            "#763b36",
+            "#8c9cb5",
+            "#c1ccdd"
+          ],
+          "alphaWrong": 0,
+          "usedColors": [
+            "3d212d",
+            "763b36",
+            "8c9cb5",
+            "c1ccdd"
+          ],
+          "channelRmse": 41.95485637865158,
+          "labMse": 0.006499886803070662,
+          "regions": {
+            "bucket": {
+              "count": 82,
+              "labRmse": 0.11885455995099142,
+              "colors": {
+                "8c9cb5": 19,
+                "763b36": 35,
+                "c1ccdd": 28
+              },
+              "exact": 35,
+              "sourceMeanLab": [
+                0.5900885158143669,
+                0.07019057477257859,
+                0.0663718193656879
+              ],
+              "outputMeanLab": [
+                0.6291463487953172,
+                0.02851460755238219,
+                -0.002557519019002054
+              ],
+              "sourceChroma": 0.09660194197228361,
+              "outputChroma": 0.028629071717380716,
+              "hueDegrees": 48.523462400643446,
+              "edgeCount": 44,
+              "sourceContrast": 0.29716411967314077,
+              "outputContrast": 0.2511611373219805
+            }
+          }
+        },
+        "hue": {
+          "pngSha256": "713f18aa950d2e1e176322d835f979689312a622f173350a8129f56c299e70bb",
+          "rgbaSha256": "9f4618f571af11c755d81a0df12521ed09c59f4ca91415d1a2c42f3039c4f971",
+          "colors": [
+            "#3d212d",
+            "#763b36",
+            "#8c9cb5",
+            "#eaa56c"
+          ],
+          "alphaWrong": 0,
+          "usedColors": [
+            "3d212d",
+            "763b36",
+            "8c9cb5",
+            "eaa56c"
+          ],
+          "channelRmse": 36.689196132661344,
+          "labMse": 0.006471064272976189,
+          "regions": {
+            "bucket": {
+              "count": 82,
+              "labRmse": 0.07913192571227025,
+              "colors": {
+                "eaa56c": 47,
+                "763b36": 35
+              },
+              "exact": 51,
+              "sourceMeanLab": [
+                0.5900885158143669,
+                0.07019057477257859,
+                0.0663718193656879
+              ],
+              "outputMeanLab": [
+                0.6269831976806106,
+                0.06374476249938936,
+                0.07010203299537066
+              ],
+              "sourceChroma": 0.09660194197228361,
+              "outputChroma": 0.09475067163977041,
+              "hueDegrees": 4.321082419529311,
+              "edgeCount": 44,
+              "sourceContrast": 0.29716411967314077,
+              "outputContrast": 0.24519725028363737
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "real-inventory-auto-oklab-k8",
+      "component": "dungeon-archer",
+      "region": "green-headband",
+      "note": "Hue restores the purple hood but removes the archer green headband.",
+      "settings": {
+        "target": "auto",
+        "cap": 8,
+        "metric": "oklab",
+        "alphaCut": 128,
+        "alphaMode": "cut",
+        "dither": "none",
+        "cleanup": false
+      },
+      "source": {
+        "pngSha256": "1cb29a0f28d91b8de247fe21eecfb545f512b6cd00cac33d53b4fdbca4571086",
+        "rgbaSha256": "362ad811dff608d8bc0def0e6bae2f8fc0e77d9f330cbaf66ea8418ef31bfcbc"
+      },
+      "outputs": {
+        "baseline": {
+          "pngSha256": "840ee0678f8f37eba468a9bdddaa27e519cc86ca17c5149a15c0716a2e6d8c26",
+          "rgbaSha256": "49a5b6c325f5ca8673ff6e5d3acd43bacef416b9ebd87579e8dcbe683ef66ebb",
+          "colors": [
+            "#346547",
+            "#3f2631",
+            "#5ad28c",
+            "#6f3e43",
+            "#8b9bb4",
+            "#be6c49",
+            "#bedef1",
+            "#f4ac66"
+          ],
+          "alphaWrong": 0,
+          "usedColors": [
+            "346547",
+            "3f2631",
+            "5ad28c",
+            "6f3e43",
+            "8b9bb4",
+            "be6c49",
+            "bedef1",
+            "f4ac66"
+          ],
+          "channelRmse": 21.01977586128735,
+          "labMse": 0.0031171651430303734,
+          "regions": {
+            "dungeon-archer/green-headband": {
+              "count": 22,
+              "labRmse": 0.13387790706185726,
+              "colors": {
+                "346547": 19,
+                "5ad28c": 3
+              },
+              "exact": 0,
+              "sourceMeanLab": [
+                0.6275996016533145,
+                -0.11699461738259592,
+                0.03466192424700109
+              ],
+              "outputMeanLab": [
+                0.5059878696341497,
+                -0.07556874456649217,
+                0.0347989521491541
+              ],
+              "sourceChroma": 0.12202126654401214,
+              "outputChroma": 0.0831961671354808,
+              "hueDegrees": 8.22284164871869,
+              "edgeCount": 50,
+              "sourceContrast": 0.25802827770070336,
+              "outputContrast": 0.21271727991738096
+            }
+          }
+        },
+        "concave": {
+          "pngSha256": "840ee0678f8f37eba468a9bdddaa27e519cc86ca17c5149a15c0716a2e6d8c26",
+          "rgbaSha256": "49a5b6c325f5ca8673ff6e5d3acd43bacef416b9ebd87579e8dcbe683ef66ebb",
+          "colors": [
+            "#346547",
+            "#3f2631",
+            "#5ad28c",
+            "#6f3e43",
+            "#8b9bb4",
+            "#be6c49",
+            "#bedef1",
+            "#f4ac66"
+          ],
+          "alphaWrong": 0,
+          "usedColors": [
+            "346547",
+            "3f2631",
+            "5ad28c",
+            "6f3e43",
+            "8b9bb4",
+            "be6c49",
+            "bedef1",
+            "f4ac66"
+          ],
+          "channelRmse": 21.01977586128735,
+          "labMse": 0.0031171651430303734,
+          "regions": {
+            "dungeon-archer/green-headband": {
+              "count": 22,
+              "labRmse": 0.13387790706185726,
+              "colors": {
+                "346547": 19,
+                "5ad28c": 3
+              },
+              "exact": 0,
+              "sourceMeanLab": [
+                0.6275996016533145,
+                -0.11699461738259592,
+                0.03466192424700109
+              ],
+              "outputMeanLab": [
+                0.5059878696341497,
+                -0.07556874456649217,
+                0.0347989521491541
+              ],
+              "sourceChroma": 0.12202126654401214,
+              "outputChroma": 0.0831961671354808,
+              "hueDegrees": 8.22284164871869,
+              "edgeCount": 50,
+              "sourceContrast": 0.25802827770070336,
+              "outputContrast": 0.21271727991738096
+            }
+          }
+        },
+        "hue": {
+          "pngSha256": "62b3df355d3b42d7d4cdae65f12b6b40a19a4467c462d19ee09983756c63d079",
+          "rgbaSha256": "d4c04d560cf22eeea5b14098b75068956170e68c551a8275eb388bacd80819aa",
+          "colors": [
+            "#3f2631",
+            "#434a5f",
+            "#5ad28c",
+            "#8b9bb4",
+            "#9b4ca3",
+            "#be6c49",
+            "#bedef1",
+            "#f4ac66"
+          ],
+          "alphaWrong": 0,
+          "usedColors": [
+            "3f2631",
+            "434a5f",
+            "5ad28c",
+            "8b9bb4",
+            "9b4ca3",
+            "be6c49",
+            "bedef1",
+            "f4ac66"
+          ],
+          "channelRmse": 21.656975438089198,
+          "labMse": 0.003245227280935259,
+          "regions": {
+            "dungeon-archer/green-headband": {
+              "count": 22,
+              "labRmse": 0.14705835946615936,
+              "colors": {
+                "8b9bb4": 19,
+                "5ad28c": 3
+              },
+              "exact": 0,
+              "sourceMeanLab": [
+                0.6275996016533145,
+                -0.11699461738259592,
+                0.03466192424700109
+              ],
+              "outputMeanLab": [
+                0.6979746931430809,
+                -0.024964757671114137,
+                -0.026453043605573646
+              ],
+              "sourceChroma": 0.12202126654401214,
+              "outputChroma": 0.03637310327117873,
+              "hueDegrees": 63.160905150399046,
+              "edgeCount": 50,
+              "sourceContrast": 0.25802827770070336,
+              "outputContrast": 0.24891263326538207
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "dungeon-potion-edg8-rgb-k4",
+      "region": "red-liquid",
+      "note": "Both candidates turn red liquid orange.",
+      "settings": {
+        "target": "edg8",
+        "cap": 4,
+        "metric": "rgb",
+        "alphaCut": 128,
+        "alphaMode": "cut",
+        "dither": "none",
+        "cleanup": false
+      },
+      "source": {
+        "pngSha256": "ad27340925ae7e936788c22cbd0f7d1922ef5bdd21377f916f1be9af6be4312d",
+        "rgbaSha256": "d16c02b070422010931c5112739b8ec655944ac7d764b2687d12a4f8104b1567"
+      },
+      "outputs": {
+        "baseline": {
+          "pngSha256": "d80c17a04883578dfd522493720a10fee88c8c9cfb4343dc08f7a21cccdf1344",
+          "rgbaSha256": "5c8a9b08c33f11c3593a9fa7e1f73ad6f65222a4f18b04857c2c55c7cd288dba",
+          "colors": [
+            "#d32734",
+            "#da7d22",
+            "#7b53ad",
+            "#1b1c33"
+          ],
+          "alphaWrong": 0,
+          "usedColors": [
+            "1b1c33",
+            "7b53ad",
+            "d32734",
+            "da7d22"
+          ],
+          "channelRmse": 28.93933047748079,
+          "labMse": 0.009402108603033386,
+          "regions": {
+            "red-liquid": {
+              "count": 26,
+              "labRmse": 0.08056093372155772,
+              "colors": {
+                "da7d22": 8,
+                "d32734": 18
+              },
+              "exact": 0,
+              "sourceMeanLab": [
+                0.6534368857198003,
+                0.1716555297517461,
+                0.08956818501053247
+              ],
+              "outputMeanLab": [
+                0.5983661729359281,
+                0.15401622731364087,
+                0.09645389339862988
+              ],
+              "sourceChroma": 0.19361838926205735,
+              "outputChroma": 0.18172603508490837,
+              "hueDegrees": 4.502070436937618,
+              "edgeCount": 22,
+              "sourceContrast": 0.36436291896662387,
+              "outputContrast": 0.39826208895555815
+            }
+          }
+        },
+        "concave": {
+          "pngSha256": "2641674a3322562e36a4072a9df6d4bba386a3577eaba576cd12d9d0bae04435",
+          "rgbaSha256": "8a753295f1110d43ce4f1aaac19903b0699938b4e9338b3867adbae7dd5ddd72",
+          "colors": [
+            "#fdfdf8",
+            "#da7d22",
+            "#7b53ad",
+            "#1b1c33"
+          ],
+          "alphaWrong": 0,
+          "usedColors": [
+            "1b1c33",
+            "7b53ad",
+            "da7d22",
+            "fdfdf8"
+          ],
+          "channelRmse": 29.708380615373144,
+          "labMse": 0.00932747004190268,
+          "regions": {
+            "red-liquid": {
+              "count": 26,
+              "labRmse": 0.11371999641968031,
+              "colors": {
+                "da7d22": 26
+              },
+              "exact": 0,
+              "sourceMeanLab": [
+                0.6534368857198003,
+                0.1716555297517461,
+                0.08956818501053247
+              ],
+              "outputMeanLab": [
+                0.6782116404821292,
+                0.0780170411215359,
+                0.1277300094025778
+              ],
+              "sourceChroma": 0.19361838926205735,
+              "outputChroma": 0.14967168739391576,
+              "hueDegrees": 31.028446587451292,
+              "edgeCount": 22,
+              "sourceContrast": 0.36436291896662387,
+              "outputContrast": 0.46555581455521666
+            }
+          }
+        },
+        "hue": {
+          "pngSha256": "2641674a3322562e36a4072a9df6d4bba386a3577eaba576cd12d9d0bae04435",
+          "rgbaSha256": "8a753295f1110d43ce4f1aaac19903b0699938b4e9338b3867adbae7dd5ddd72",
+          "colors": [
+            "#fdfdf8",
+            "#da7d22",
+            "#7b53ad",
+            "#1b1c33"
+          ],
+          "alphaWrong": 0,
+          "usedColors": [
+            "1b1c33",
+            "7b53ad",
+            "da7d22",
+            "fdfdf8"
+          ],
+          "channelRmse": 29.708380615373144,
+          "labMse": 0.00932747004190268,
+          "regions": {
+            "red-liquid": {
+              "count": 26,
+              "labRmse": 0.11371999641968031,
+              "colors": {
+                "da7d22": 26
+              },
+              "exact": 0,
+              "sourceMeanLab": [
+                0.6534368857198003,
+                0.1716555297517461,
+                0.08956818501053247
+              ],
+              "outputMeanLab": [
+                0.6782116404821292,
+                0.0780170411215359,
+                0.1277300094025778
+              ],
+              "sourceChroma": 0.19361838926205735,
+              "outputChroma": 0.14967168739391576,
+              "hueDegrees": 31.028446587451292,
+              "edgeCount": 22,
+              "sourceContrast": 0.36436291896662387,
+              "outputContrast": 0.46555581455521666
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "owned-knight-a-pico8-oklab-k4",
+      "region": "observed-face",
+      "observationalRegion": {
+        "id": "observed-face",
+        "sourceColors": [
+          "f2c79b",
+          "d9966b",
+          "a8603f"
+        ]
+      },
+      "note": "Hue turns warm skin gray; observed skin ROI follows the pre-existing owned fixture color constants, not a new acceptance fixture.",
+      "settings": {
+        "target": "pico8",
+        "cap": 4,
+        "metric": "oklab",
+        "alphaCut": 128,
+        "alphaMode": "cut",
+        "dither": "none",
+        "cleanup": false
+      },
+      "source": {
+        "pngSha256": "fbe0f27539ac667c61977282e5b481027dbe54cabbd2e3a4eac80d7818c725ea",
+        "rgbaSha256": "7cbb269f9f9d260da038611b3dc72df3b841b8cb06f1609c0cb8e6b55daa1d15"
+      },
+      "outputs": {
+        "baseline": {
+          "pngSha256": "c46f31de1fd8a56f2f28c3e92afb298b33d2aac1ff08a6083584f75186d9a99e",
+          "rgbaSha256": "063dbce7f0343c1986968f96ed7ef0775a12bd9b1280887ea9bc948e42ad09e1",
+          "colors": [
+            "#1d2b53",
+            "#ab5236",
+            "#5f574f",
+            "#ffccaa"
+          ],
+          "alphaWrong": 0,
+          "usedColors": [
+            "1d2b53",
+            "5f574f",
+            "ab5236",
+            "ffccaa"
+          ],
+          "channelRmse": 36.976669979961926,
+          "labMse": 0.012072850957508298,
+          "regions": {
+            "observed-face": {
+              "count": 22,
+              "labRmse": 0.0961304142949319,
+              "colors": {
+                "ffccaa": 15,
+                "ab5236": 7
+              },
+              "exact": 0,
+              "sourceMeanLab": [
+                0.7174044610439775,
+                0.054707330358802396,
+                0.07464815488821541
+              ],
+              "outputMeanLab": [
+                0.7741321048836824,
+                0.059711395156502076,
+                0.06556970183071925
+              ],
+              "sourceChroma": 0.09254857655956758,
+              "outputChroma": 0.08868391347761649,
+              "hueDegrees": 6.086185997789016,
+              "edgeCount": 28,
+              "sourceContrast": 0.2847013805216749,
+              "outputContrast": 0.24194801664172877
+            }
+          }
+        },
+        "concave": {
+          "pngSha256": "e8f40a81425193f3892b8e7ee6700f8fb500a32f29dae3598cc1e512e3fbcb79",
+          "rgbaSha256": "c94b20286d612784f93537938c256ef0c038fb3b07c80e87fa26919017863eb7",
+          "colors": [
+            "#1d2b53",
+            "#ab5236",
+            "#c2c3c7",
+            "#fff1e8"
+          ],
+          "alphaWrong": 0,
+          "usedColors": [
+            "1d2b53",
+            "ab5236",
+            "c2c3c7",
+            "fff1e8"
+          ],
+          "channelRmse": 34.051254581828424,
+          "labMse": 0.01132965059395365,
+          "regions": {
+            "observed-face": {
+              "count": 22,
+              "labRmse": 0.09799105326658904,
+              "colors": {
+                "c2c3c7": 15,
+                "ab5236": 7
+              },
+              "exact": 0,
+              "sourceMeanLab": [
+                0.7174044610439775,
+                0.054707330358802396,
+                0.07464815488821541
+              ],
+              "outputMeanLab": [
+                0.7304726384227912,
+                0.031454217478672004,
+                0.02051537695576959
+              ],
+              "sourceChroma": 0.09254857655956758,
+              "outputChroma": 0.03755327534094619,
+              "hueDegrees": 20.649873587739414,
+              "edgeCount": 28,
+              "sourceContrast": 0.2847013805216749,
+              "outputContrast": 0.19134577200989705
+            }
+          }
+        },
+        "hue": {
+          "pngSha256": "8dce0a7f021906a1338254e798f40c11256e465cec5b1548d0145a94c572c9c9",
+          "rgbaSha256": "9a0b6bd8f70236a6c73dcd787a4ae3505e611e99448e82c2be6db9fe825aef39",
+          "colors": [
+            "#1d2b53",
+            "#ab5236",
+            "#c2c3c7",
+            "#83769c"
+          ],
+          "alphaWrong": 0,
+          "usedColors": [
+            "1d2b53",
+            "83769c",
+            "ab5236",
+            "c2c3c7"
+          ],
+          "channelRmse": 34.43731592430187,
+          "labMse": 0.012184113721385892,
+          "regions": {
+            "observed-face": {
+              "count": 22,
+              "labRmse": 0.09799105326658904,
+              "colors": {
+                "c2c3c7": 15,
+                "ab5236": 7
+              },
+              "exact": 0,
+              "sourceMeanLab": [
+                0.7174044610439775,
+                0.054707330358802396,
+                0.07464815488821541
+              ],
+              "outputMeanLab": [
+                0.7304726384227912,
+                0.031454217478672004,
+                0.02051537695576959
+              ],
+              "sourceChroma": 0.09254857655956758,
+              "outputChroma": 0.03755327534094619,
+              "hueDegrees": 20.649873587739414,
+              "edgeCount": 28,
+              "sourceContrast": 0.2847013805216749,
+              "outputContrast": 0.20650947693645594
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "real-inventory-pico8-oklab-k8",
+      "component": "platformer-pilot",
+      "region": "green-visor",
+      "note": "Concave loses the green visor while current and hue retain it.",
+      "settings": {
+        "target": "pico8",
+        "cap": 8,
+        "metric": "oklab",
+        "alphaCut": 128,
+        "alphaMode": "cut",
+        "dither": "none",
+        "cleanup": false
+      },
+      "source": {
+        "pngSha256": "1cb29a0f28d91b8de247fe21eecfb545f512b6cd00cac33d53b4fdbca4571086",
+        "rgbaSha256": "362ad811dff608d8bc0def0e6bae2f8fc0e77d9f330cbaf66ea8418ef31bfcbc"
+      },
+      "outputs": {
+        "baseline": {
+          "pngSha256": "1ebf4148cda07ec6dcda3613f5c6cdfd46a170cbfa0618511d8ce8823c52e483",
+          "rgbaSha256": "72658df664764bb27e262c57191ab63d4b4f7eccff51a27752d9cb733738843e",
+          "colors": [
+            "#1d2b53",
+            "#ab5236",
+            "#5f574f",
+            "#c2c3c7",
+            "#fff1e8",
+            "#ffa300",
+            "#00e436",
+            "#83769c"
+          ],
+          "alphaWrong": 0,
+          "usedColors": [
+            "00e436",
+            "1d2b53",
+            "5f574f",
+            "83769c",
+            "ab5236",
+            "c2c3c7",
+            "ffa300",
+            "fff1e8"
+          ],
+          "channelRmse": 38.30063898862659,
+          "labMse": 0.00787911137029826,
+          "regions": {
+            "platformer-pilot/green-visor": {
+              "count": 102,
+              "labRmse": 0.12908028691357182,
+              "colors": {
+                "c2c3c7": 20,
+                "00e436": 76,
+                "83769c": 6
+              },
+              "exact": 0,
+              "sourceMeanLab": [
+                0.7897500883151855,
+                -0.13138511103068962,
+                0.0592924264720804
+              ],
+              "outputMeanLab": [
+                0.7896211654589971,
+                -0.15333803172156563,
+                0.10755707124565138
+              ],
+              "sourceChroma": 0.14414450817666868,
+              "outputChroma": 0.18729942751430395,
+              "hueDegrees": 10.758216245238716,
+              "edgeCount": 86,
+              "sourceContrast": 0.32094414044681635,
+              "outputContrast": 0.35892681047070324
+            }
+          }
+        },
+        "concave": {
+          "pngSha256": "8cf241681669061986e29b133758a3401e4a31c9d6d85eb51cefac5127ad883e",
+          "rgbaSha256": "e7675db7eee7a4da1a0a3fb579d4f9d22e83a33c79bb01712ec4c7827147b152",
+          "colors": [
+            "#1d2b53",
+            "#008751",
+            "#ab5236",
+            "#5f574f",
+            "#c2c3c7",
+            "#fff1e8",
+            "#ffa300",
+            "#83769c"
+          ],
+          "alphaWrong": 0,
+          "usedColors": [
+            "008751",
+            "1d2b53",
+            "5f574f",
+            "83769c",
+            "ab5236",
+            "c2c3c7",
+            "ffa300",
+            "fff1e8"
+          ],
+          "channelRmse": 37.35982611378983,
+          "labMse": 0.007994100850527796,
+          "regions": {
+            "platformer-pilot/green-visor": {
+              "count": 102,
+              "labRmse": 0.1520560557799364,
+              "colors": {
+                "c2c3c7": 96,
+                "008751": 6
+              },
+              "exact": 0,
+              "sourceMeanLab": [
+                0.7897500883151855,
+                -0.13138511103068962,
+                0.0592924264720804
+              ],
+              "outputMeanLab": [
+                0.8017607703112383,
+                -0.0066137476232205885,
+                -0.00230928417078165
+              ],
+              "sourceChroma": 0.14414450817666868,
+              "outputChroma": 0.007005315910441062,
+              "hueDegrees": null,
+              "edgeCount": 86,
+              "sourceContrast": 0.32094414044681635,
+              "outputContrast": 0.2642037422742572
+            }
+          }
+        },
+        "hue": {
+          "pngSha256": "1ebf4148cda07ec6dcda3613f5c6cdfd46a170cbfa0618511d8ce8823c52e483",
+          "rgbaSha256": "72658df664764bb27e262c57191ab63d4b4f7eccff51a27752d9cb733738843e",
+          "colors": [
+            "#1d2b53",
+            "#ab5236",
+            "#5f574f",
+            "#c2c3c7",
+            "#fff1e8",
+            "#ffa300",
+            "#00e436",
+            "#83769c"
+          ],
+          "alphaWrong": 0,
+          "usedColors": [
+            "00e436",
+            "1d2b53",
+            "5f574f",
+            "83769c",
+            "ab5236",
+            "c2c3c7",
+            "ffa300",
+            "fff1e8"
+          ],
+          "channelRmse": 38.30063898862659,
+          "labMse": 0.00787911137029826,
+          "regions": {
+            "platformer-pilot/green-visor": {
+              "count": 102,
+              "labRmse": 0.12908028691357182,
+              "colors": {
+                "c2c3c7": 20,
+                "00e436": 76,
+                "83769c": 6
+              },
+              "exact": 0,
+              "sourceMeanLab": [
+                0.7897500883151855,
+                -0.13138511103068962,
+                0.0592924264720804
+              ],
+              "outputMeanLab": [
+                0.7896211654589971,
+                -0.15333803172156563,
+                0.10755707124565138
+              ],
+              "sourceChroma": 0.14414450817666868,
+              "outputChroma": 0.18729942751430395,
+              "hueDegrees": 10.758216245238716,
+              "edgeCount": 86,
+              "sourceContrast": 0.32094414044681635,
+              "outputContrast": 0.35892681047070324
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "platformer-axe-pico8-rgb-k2",
+      "region": "blade",
+      "note": "Hue paints a neutral blade pink to retain a tiny warm fastening; this is a clear material loss even at two colors.",
+      "settings": {
+        "target": "pico8",
+        "cap": 2,
+        "metric": "rgb",
+        "alphaCut": 128,
+        "alphaMode": "cut",
+        "dither": "none",
+        "cleanup": false
+      },
+      "source": {
+        "pngSha256": "590a1609364b960b979f780d207ea8f1f951620fa229c3c8a9d63fd85d099336",
+        "rgbaSha256": "344d89be4a08d099b93c190d717290663e8025733c136faba4faef87bf2582a5"
+      },
+      "outputs": {
+        "baseline": {
+          "pngSha256": "999487e82229c5302d40eb50a836479bb2b63f7a2828c2c7b1298c81d5bdc8ec",
+          "rgbaSha256": "803abb99429ff47b02550ed786f61a08324b63e7f3030f94f11739fe6e06beb0",
+          "colors": [
+            "#5f574f",
+            "#c2c3c7"
+          ],
+          "alphaWrong": 0,
+          "usedColors": [
+            "5f574f",
+            "c2c3c7"
+          ],
+          "channelRmse": 42.91637000976218,
+          "labMse": 0.01775207576189045,
+          "regions": {
+            "blade": {
+              "count": 24,
+              "labRmse": 0.10552894467417426,
+              "colors": {
+                "c2c3c7": 24
+              },
+              "exact": 0,
+              "sourceMeanLab": [
+                0.835052232904514,
+                -0.0007861077917515891,
+                -0.017579688558955493
+              ],
+              "outputMeanLab": [
+                0.8175842439738932,
+                0.0004889947536003691,
+                -0.005646575839784784
+              ],
+              "sourceChroma": 0.017597255902274175,
+              "outputChroma": 0.0056677098182149315,
+              "hueDegrees": null,
+              "edgeCount": 42,
+              "sourceContrast": 0.3820602716140393,
+              "outputContrast": 0.32237757390218424
+            }
+          }
+        },
+        "concave": {
+          "pngSha256": "999487e82229c5302d40eb50a836479bb2b63f7a2828c2c7b1298c81d5bdc8ec",
+          "rgbaSha256": "803abb99429ff47b02550ed786f61a08324b63e7f3030f94f11739fe6e06beb0",
+          "colors": [
+            "#5f574f",
+            "#c2c3c7"
+          ],
+          "alphaWrong": 0,
+          "usedColors": [
+            "5f574f",
+            "c2c3c7"
+          ],
+          "channelRmse": 42.91637000976218,
+          "labMse": 0.01775207576189045,
+          "regions": {
+            "blade": {
+              "count": 24,
+              "labRmse": 0.10552894467417426,
+              "colors": {
+                "c2c3c7": 24
+              },
+              "exact": 0,
+              "sourceMeanLab": [
+                0.835052232904514,
+                -0.0007861077917515891,
+                -0.017579688558955493
+              ],
+              "outputMeanLab": [
+                0.8175842439738932,
+                0.0004889947536003691,
+                -0.005646575839784784
+              ],
+              "sourceChroma": 0.017597255902274175,
+              "outputChroma": 0.0056677098182149315,
+              "hueDegrees": null,
+              "edgeCount": 42,
+              "sourceContrast": 0.3820602716140393,
+              "outputContrast": 0.32237757390218424
+            }
+          }
+        },
+        "hue": {
+          "pngSha256": "308d1dbaf26fe4a8a8538001c1fd85415ad99ec4dfc5d429426dd522e866476b",
+          "rgbaSha256": "928201048327e98d2ef5ded266ee9dff5a93d82f445a14fcc7132322b761217f",
+          "colors": [
+            "#5f574f",
+            "#ff77a8"
+          ],
+          "alphaWrong": 0,
+          "usedColors": [
+            "5f574f",
+            "ff77a8"
+          ],
+          "channelRmse": 43.02836375166931,
+          "labMse": 0.017505711020341323,
+          "regions": {
+            "blade": {
+              "count": 24,
+              "labRmse": 0.22239907830696343,
+              "colors": {
+                "ff77a8": 24
+              },
+              "exact": 0,
+              "sourceMeanLab": [
+                0.835052232904514,
+                -0.0007861077917515891,
+                -0.017579688558955493
+              ],
+              "outputMeanLab": [
+                0.7420785076563678,
+                0.17205389955146225,
+                -0.001568259960240237
+              ],
+              "sourceChroma": 0.017597255902274175,
+              "outputChroma": 0.17206104669612918,
+              "hueDegrees": null,
+              "edgeCount": 42,
+              "sourceContrast": 0.3820602716140393,
+              "outputContrast": 0.2328098227082355
+            }
+          }
+        }
+      }
+    }
+  ]
+}
