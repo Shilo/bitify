@@ -1,5 +1,9 @@
 # Handoff: independent real-art acceptance for Keep opacity selection
 
+**Closed (October 15).** The study is complete, and the owner kept current Keep: no
+weighting and no new setting. No further weighting experiments are planned. See
+docs/research/2026-10-15-keep-real-art-decision.md.
+
 ## Session Metadata
 
 October 15, 2026. Project: C:/Programming_Files/Shilocity/colorfetti. Branch: main.

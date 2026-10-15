@@ -4,6 +4,10 @@ October 15, 2026. Baseline: 310df63, including Claude's Firefox PNG and Lospec
 fixes. User authorizes the recommended research, sub-agents and useful proven
 improvements, with a Claude handoff if independent follow-up is needed. No push.
 
+**Status: complete and closed (October 15).** The owner kept current Keep: no opacity
+weighting and no new setting. No further weighting experiments are planned. See the
+[real-art decision](2026-10-15-keep-real-art-decision.md) and the coverage limits below.
+
 ## Decision to test
 
 When Keep is selected, pixels at alpha 1 currently compete equally with opaque
@@ -73,7 +77,23 @@ a product decision, not repeat the same synthetic-only review or force a fix.
 **Status (October 15):** that study is complete; see the
 [real-art decision](2026-10-15-keep-real-art-decision.md). Blind judges strongly prefer
 linear over current Keep on real art, but linear keeps about ten meaningful judged
-losses, so it does not meet the no-regression gate. Shipping it is an owner tradeoff.
+losses, so it does not meet the no-regression gate. The owner declined the tradeoff:
+current Keep stays, with no weighting and no new setting.
+
+| Real-art acceptance item | Status |
+|---|---|
+| Licensed cohort frozen before comparison (26 assets, 4 animations, 6 synthetic counterexamples) | Complete: `4525906`, `f49000d`; preserved |
+| Blind evaluation, two judging rounds, metrics, unblinding | Complete: `756415a`; judgments and keys preserved |
+| Built-in browser pane and USB Pixel 8 Pro research-module parity | Complete: 115/115 each |
+| Decision | Complete: no ship, owner-accepted |
+
+**Coverage limits, recorded rather than pursued:**
+- No hand-placed multi-color pixel art with partial alpha; every pack checked was binary.
+- Grayscale particle textures are over-represented, and only one translucent subject has a neutral soft shadow.
+- Selections are concentrated at caps 3–8. Cap 2 and fixed palettes at All were not run.
+- Device checks covered the research module only, not built-app import, export, Count or Use.
+- Cut invariance under a weighting flag was never measured, because no flag was built.
+- Real Safari/iOS were not tested.
 
 Other separate concerns remain: low-cap preservation of small important hues,
 known fallback/clipboard translucent RGB rounding, and human-only existing-image

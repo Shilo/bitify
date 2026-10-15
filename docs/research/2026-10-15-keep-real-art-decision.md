@@ -8,6 +8,11 @@ continues the [synthetic spike](2026-10-15-keep-alpha-weighting-spike.md) and
 
 ## Decision
 
+**Final (owner, October 15): keep current Keep. No weighting, no new setting.** The
+owner accepted the no-ship result below and closed this investigation; no further
+weighting experiments are planned. The licensed cohort, synthetic counterexamples,
+blind judgments and keys are preserved under `bench/keep-real-art-study/`.
+
 **No ship under the stated gate.** The gate was "demonstrated improvements without
 meaningful regressions":
 - **Squared weighting fails on improvement.** It loses intended neutral shadows and dark rims on real art.
