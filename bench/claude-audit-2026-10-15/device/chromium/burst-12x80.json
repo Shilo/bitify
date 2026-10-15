@@ -1,0 +1,55 @@
+{
+  "where": "desktop",
+  "taps": 12,
+  "gap": 80,
+  "log": [
+    "t+1s paints(after fill) total:member 0:0,0:0",
+    "t+2s paints(after fill) total:member 0:0,1:1",
+    "t+3s paints(after fill) total:member 1:1,1:1"
+  ],
+  "initial": [
+    [
+      444,
+      1,
+      256,
+      256,
+      true
+    ],
+    [
+      550,
+      0,
+      801,
+      801,
+      true
+    ]
+  ],
+  "storedAfter": {
+    "dither": "8x8",
+    "ditherStrength": 100
+  },
+  "paintsSinceBurst": [
+    {
+      "dt": -3791,
+      "idx": 0,
+      "w": 473,
+      "h": 473
+    },
+    {
+      "dt": 1292,
+      "idx": 1,
+      "w": 256,
+      "h": 256
+    },
+    {
+      "dt": 2685,
+      "idx": 0,
+      "w": 473,
+      "h": 473
+    }
+  ],
+  "captions": [
+    "b1.png 1024×1024",
+    "b2.png 256×256"
+  ],
+  "dock": []
+}

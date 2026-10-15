@@ -1,0 +1,9 @@
+3c3
+< const LINK = /^https?:\/\/(?:www\.)?lospec\.com\/palette-list\/([a-z0-9]+(?:-[a-z0-9]+)*)(?:\.json)?\/?(?:[?#][^\s]*)?$/i;
+---
+> const LINK = /^(?:https?:\/\/)?(?:www\.)?lospec\.com\/palette-list\/([a-z0-9]+(?:-[a-z0-9]+)*)(?:\.json)?\/?(?:[?#][^\s]*)?$/i;
+25c25,26
+<   return /:\/\/|^(?:www\.)?lospec\.com\//i.test(text);
+---
+>   // One link-like token only: multi-line palette text with URL comments stays local.
+>   return /^(?:[a-z][\w+.-]*:\/\/|(?:www\.)?lospec\.com\/)\S*$/i.test(text);

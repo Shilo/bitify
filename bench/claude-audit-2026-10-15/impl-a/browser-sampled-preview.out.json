@@ -1,0 +1,23 @@
+{
+ "canvas": [
+  561,
+  263
+ ],
+ "source": [
+  1501,
+  703
+ ],
+ "subset": [
+  "#1d2b53",
+  "#ab5236",
+  "#00e436",
+  "#29adff",
+  "#83769c",
+  "#ffccaa"
+ ],
+ "compared": 147543,
+ "rgbMismatch": 0,
+ "alphaMismatch": 0,
+ "firstBad": null,
+ "errors": []
+}

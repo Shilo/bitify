@@ -1,0 +1,15 @@
+{
+ "engine": "webkit",
+ "fileBytesModel": "3/75",
+ "models": {
+  "floor-premultiply/floor-unpremultiply": "0/0",
+  "floor-premultiply/round-unpremultiply": "0/0",
+  "floor-premultiply/ceil-unpremultiply": "3/4",
+  "round-premultiply/floor-unpremultiply": "1/73",
+  "round-premultiply/round-unpremultiply": "2/74",
+  "round-premultiply/ceil-unpremultiply": "4/76",
+  "ceil-premultiply/floor-unpremultiply": "5/80",
+  "ceil-premultiply/round-unpremultiply": "5/81",
+  "ceil-premultiply/ceil-unpremultiply": "7/83"
+ }
+}

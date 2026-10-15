@@ -1,0 +1,24 @@
+{
+  "at": "2026-10-15T11:43:12.955Z",
+  "authorization": "[redacted]",
+  "request": {
+    "num_colors": 4,
+    "dithering": "4x4",
+    "dithering_strength": 11
+  },
+  "status": 422,
+  "ms": 213,
+  "errors": [
+    {
+      "type": "less_than_equal",
+      "loc": [
+        "body",
+        "dithering_strength"
+      ],
+      "msg": "Input should be less than or equal to 10",
+      "ctx": {
+        "le": 10
+      }
+    }
+  ]
+}

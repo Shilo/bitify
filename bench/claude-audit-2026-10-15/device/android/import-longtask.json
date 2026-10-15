@@ -1,0 +1,63 @@
+{
+  "where": "android",
+  "legend": {
+    "A": "Playwright setInputFiles payload",
+    "B": "page fetch + DataTransfer + change"
+  },
+  "rows": [
+    {
+      "file": "hi1024.png",
+      "path": "A",
+      "firstPaintMs": 335,
+      "longtasks": [
+        {
+          "startRelChange": -381,
+          "d": 385,
+          "attr": "window:unknown"
+        }
+      ]
+    },
+    {
+      "file": "hi1024.png",
+      "path": "B",
+      "firstPaintMs": 428,
+      "longtasks": []
+    },
+    {
+      "file": "hi1024.png",
+      "path": "A",
+      "firstPaintMs": 305,
+      "longtasks": [
+        {
+          "startRelChange": -373,
+          "d": 378,
+          "attr": "window:unknown"
+        }
+      ]
+    },
+    {
+      "file": "hi1024.png",
+      "path": "B",
+      "firstPaintMs": 383,
+      "longtasks": []
+    },
+    {
+      "file": "hi256.png",
+      "path": "A",
+      "firstPaintMs": 226,
+      "longtasks": [
+        {
+          "startRelChange": -80,
+          "d": 83,
+          "attr": "window:unknown"
+        }
+      ]
+    },
+    {
+      "file": "hi256.png",
+      "path": "B",
+      "firstPaintMs": 228,
+      "longtasks": []
+    }
+  ]
+}

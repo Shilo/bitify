@@ -1,0 +1,53 @@
+{
+ "chromium": {
+  "version": "149.0.7827.55",
+  "faintDecoded": {
+   "00ff40@1": 508
+  },
+  "autoKeep": [
+   "#00ff40",
+   "#dc5a14",
+   "#ff8a1e",
+   "#fff3b0"
+  ],
+  "autoCut": [
+   "#dc5a14",
+   "#ff8a1e",
+   "#fff3b0"
+  ]
+ },
+ "firefox": {
+  "version": "153.0",
+  "faintDecoded": {
+   "00ffff@1": 508
+  },
+  "autoKeep": [
+   "#00ffff",
+   "#dc5a14",
+   "#ff8a1e",
+   "#fff3b0"
+  ],
+  "autoCut": [
+   "#dc5a14",
+   "#ff8a1e",
+   "#fff3b0"
+  ]
+ },
+ "webkit": {
+  "version": "26.5",
+  "faintDecoded": {
+   "00ff00@1": 508
+  },
+  "autoKeep": [
+   "#00ff00",
+   "#dc5a14",
+   "#ff8a1e",
+   "#fff3b0"
+  ],
+  "autoCut": [
+   "#dc5a14",
+   "#ff8a1e",
+   "#fff3b0"
+  ]
+ }
+}

@@ -1,0 +1,60 @@
+{
+ "total": 80,
+ "failed": [],
+ "firstFrameOnly": 7,
+ "gifUnion": 8,
+ "sample": [
+  {
+   "name": "gif-union",
+   "pal": "edg8",
+   "alphaMode": "cut",
+   "dither": "none",
+   "maxColors": 0,
+   "cleanup": false,
+   "count": 8,
+   "oracle": 8,
+   "pages": 2,
+   "frames": 2,
+   "ok": true
+  },
+  {
+   "name": "gif-union",
+   "pal": "edg8",
+   "alphaMode": "cut",
+   "dither": "none",
+   "maxColors": 0,
+   "cleanup": true,
+   "count": 8,
+   "oracle": 8,
+   "pages": 2,
+   "frames": 2,
+   "ok": true
+  },
+  {
+   "name": "gif-union",
+   "pal": "edg8",
+   "alphaMode": "cut",
+   "dither": "none",
+   "maxColors": 2,
+   "cleanup": false,
+   "count": 2,
+   "oracle": 2,
+   "pages": 2,
+   "frames": 2,
+   "ok": true
+  },
+  {
+   "name": "gif-union",
+   "pal": "edg8",
+   "alphaMode": "cut",
+   "dither": "none",
+   "maxColors": 2,
+   "cleanup": true,
+   "count": 2,
+   "oracle": 2,
+   "pages": 2,
+   "frames": 2,
+   "ok": true
+  }
+ ]
+}

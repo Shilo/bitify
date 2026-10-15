@@ -1,0 +1,82 @@
+[
+  {
+    "id": "preset-res64",
+    "slug": "resurrect-64",
+    "lospecName": "Resurrect 64",
+    "author": "Kerrie Lake",
+    "count": 64,
+    "prodCount": 64,
+    "sameSet": true,
+    "sameOrder": true,
+    "missing": [],
+    "extra": []
+  },
+  {
+    "id": "preset-edg32",
+    "slug": "endesga-32",
+    "lospecName": "Endesga 32",
+    "author": "ENDESGA",
+    "count": 32,
+    "prodCount": 32,
+    "sameSet": true,
+    "sameOrder": true,
+    "missing": [],
+    "extra": []
+  },
+  {
+    "id": "preset-pico8",
+    "slug": "pico-8",
+    "lospecName": "PICO-8",
+    "author": "",
+    "count": 16,
+    "prodCount": 16,
+    "sameSet": true,
+    "sameOrder": true,
+    "missing": [],
+    "extra": []
+  },
+  {
+    "id": "preset-db16",
+    "slug": "dawnbringer-16",
+    "lospecName": "DawnBringer 16",
+    "author": "",
+    "count": 16,
+    "prodCount": 16,
+    "sameSet": true,
+    "sameOrder": true,
+    "missing": [],
+    "extra": []
+  },
+  {
+    "id": "preset-edg8",
+    "slug": "endesga-8",
+    "lospecName": "Endesga 8",
+    "author": "ENDESGA",
+    "count": 8,
+    "prodCount": 8,
+    "sameSet": true,
+    "sameOrder": true,
+    "missing": [],
+    "extra": []
+  },
+  {
+    "id": "preset-icecreamgb",
+    "slug": "ice-cream-gb",
+    "lospecName": "Ice Cream GB",
+    "author": "Kerrie Lake",
+    "count": 4,
+    "prodCount": 4,
+    "sameSet": true,
+    "sameOrder": true,
+    "missing": [],
+    "extra": []
+  },
+  {
+    "id": "preset-gray8",
+    "expected": "round(i*255/7)",
+    "ok": true
+  },
+  {
+    "duplicatePresetSets": []
+  }
+]

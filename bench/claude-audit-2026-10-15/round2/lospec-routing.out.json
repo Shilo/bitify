@@ -1,0 +1,373 @@
+{
+ "violations": 0,
+ "rows": [
+  {
+   "text": "\"  https://lospec.com/palette-list/slso8  \"",
+   "routed": true,
+   "jsonUrl": "https://lospec.com/palette-list/slso8.json",
+   "error": null,
+   "local": null,
+   "canonical": "https://lospec.com/palette-list/slso8"
+  },
+  {
+   "text": "\"https://lospec.com/palette-list/slso8\\r\\n\"",
+   "routed": true,
+   "jsonUrl": "https://lospec.com/palette-list/slso8.json",
+   "error": null,
+   "local": null,
+   "canonical": "https://lospec.com/palette-list/slso8"
+  },
+  {
+   "text": "\"https://lospec.com/palette-list/slso8\\n\"",
+   "routed": true,
+   "jsonUrl": "https://lospec.com/palette-list/slso8.json",
+   "error": null,
+   "local": null,
+   "canonical": "https://lospec.com/palette-list/slso8"
+  },
+  {
+   "text": "\"\\r\\nhttps://lospec.com/palette-list/slso8\\r\\n\\r\\n\"",
+   "routed": true,
+   "jsonUrl": "https://lospec.com/palette-list/slso8.json",
+   "error": null,
+   "local": null,
+   "canonical": "https://lospec.com/palette-list/slso8"
+  },
+  {
+   "text": "\"http://lospec.com/palette-list/slso8\"",
+   "routed": true,
+   "jsonUrl": "https://lospec.com/palette-list/slso8.json",
+   "error": null,
+   "local": null,
+   "canonical": "https://lospec.com/palette-list/slso8"
+  },
+  {
+   "text": "\"HTTPS://LOSPEC.COM/PALETTE-LIST/SLSO8\"",
+   "routed": true,
+   "jsonUrl": "https://lospec.com/palette-list/slso8.json",
+   "error": null,
+   "local": null,
+   "canonical": "https://lospec.com/palette-list/slso8"
+  },
+  {
+   "text": "\"lospec.com/palette-list/x?foo\"",
+   "routed": true,
+   "jsonUrl": "https://lospec.com/palette-list/x.json",
+   "error": null,
+   "local": null,
+   "canonical": "https://lospec.com/palette-list/x"
+  },
+  {
+   "text": "\"lospec.com/palette-list/x#frag\"",
+   "routed": true,
+   "jsonUrl": "https://lospec.com/palette-list/x.json",
+   "error": null,
+   "local": null,
+   "canonical": "https://lospec.com/palette-list/x"
+  },
+  {
+   "text": "\"lospec.com/palette-list/x.json\"",
+   "routed": true,
+   "jsonUrl": "https://lospec.com/palette-list/x.json",
+   "error": null,
+   "local": null,
+   "canonical": "https://lospec.com/palette-list/x"
+  },
+  {
+   "text": "\"https://www.lospec.com/palette-list/a-b-c/\"",
+   "routed": true,
+   "jsonUrl": "https://lospec.com/palette-list/a-b-c.json",
+   "error": null,
+   "local": null,
+   "canonical": "https://lospec.com/palette-list/a-b-c"
+  },
+  {
+   "text": "\"https://evil.test/x\"",
+   "routed": true,
+   "jsonUrl": null,
+   "error": "guidance",
+   "local": null,
+   "canonical": null
+  },
+  {
+   "text": "\"https://evil.test/palette-list/slso8\"",
+   "routed": true,
+   "jsonUrl": null,
+   "error": "guidance",
+   "local": null,
+   "canonical": null
+  },
+  {
+   "text": "\"www.lospec.com\"",
+   "routed": false,
+   "jsonUrl": null,
+   "error": null,
+   "local": "error: Paste #RGB, #RRGGBB, or six-digit hex colors separated by sp",
+   "canonical": null
+  },
+  {
+   "text": "\"www.lospec.com/\"",
+   "routed": true,
+   "jsonUrl": null,
+   "error": "guidance",
+   "local": null,
+   "canonical": null
+  },
+  {
+   "text": "\"lospec.com/\"",
+   "routed": true,
+   "jsonUrl": null,
+   "error": "guidance",
+   "local": null,
+   "canonical": null
+  },
+  {
+   "text": "\"lospec.com\"",
+   "routed": false,
+   "jsonUrl": null,
+   "error": null,
+   "local": "error: Paste #RGB, #RRGGBB, or six-digit hex colors separated by sp",
+   "canonical": null
+  },
+  {
+   "text": "\"https://lospec.com/\"",
+   "routed": true,
+   "jsonUrl": null,
+   "error": "guidance",
+   "local": null,
+   "canonical": null
+  },
+  {
+   "text": "\"data:text/plain,ff0000\"",
+   "routed": false,
+   "jsonUrl": null,
+   "error": null,
+   "local": "error: Paste #RGB, #RRGGBB, or six-digit hex colors separated by sp",
+   "canonical": null
+  },
+  {
+   "text": "\"javascript:alert(1)\"",
+   "routed": false,
+   "jsonUrl": null,
+   "error": null,
+   "local": "error: Paste #RGB, #RRGGBB, or six-digit hex colors separated by sp",
+   "canonical": null
+  },
+  {
+   "text": "\"JAVASCRIPT://lospec.com/palette-list/x\"",
+   "routed": true,
+   "jsonUrl": null,
+   "error": "guidance",
+   "local": null,
+   "canonical": null
+  },
+  {
+   "text": "\"ftp://lospec.com/palette-list/slso8\"",
+   "routed": true,
+   "jsonUrl": null,
+   "error": "guidance",
+   "local": null,
+   "canonical": null
+  },
+  {
+   "text": "\"abc123://x\"",
+   "routed": true,
+   "jsonUrl": null,
+   "error": "guidance",
+   "local": null,
+   "canonical": null
+  },
+  {
+   "text": "\"ff0000\"",
+   "routed": false,
+   "jsonUrl": null,
+   "error": null,
+   "local": 1,
+   "canonical": null
+  },
+  {
+   "text": "\"#ff0000\"",
+   "routed": false,
+   "jsonUrl": null,
+   "error": null,
+   "local": 1,
+   "canonical": null
+  },
+  {
+   "text": "\"ff0000\\n00ff00\"",
+   "routed": false,
+   "jsonUrl": null,
+   "error": null,
+   "local": 2,
+   "canonical": null
+  },
+  {
+   "text": "\"deadbeef\"",
+   "routed": false,
+   "jsonUrl": null,
+   "error": null,
+   "local": "error: Paste #RGB, #RRGGBB, or six-digit hex colors separated by sp",
+   "canonical": null
+  },
+  {
+   "text": "\"https://lospec.com.evil.test/palette-list/x\"",
+   "routed": true,
+   "jsonUrl": null,
+   "error": "guidance",
+   "local": null,
+   "canonical": null
+  },
+  {
+   "text": "\"https://lospec.com@evil.test/palette-list/x\"",
+   "routed": true,
+   "jsonUrl": null,
+   "error": "guidance",
+   "local": null,
+   "canonical": null
+  },
+  {
+   "text": "\"https://user@lospec.com/palette-list/x\"",
+   "routed": true,
+   "jsonUrl": null,
+   "error": "guidance",
+   "local": null,
+   "canonical": null
+  },
+  {
+   "text": "\"https://lospec.com:443/palette-list/x\"",
+   "routed": true,
+   "jsonUrl": null,
+   "error": "guidance",
+   "local": null,
+   "canonical": null
+  },
+  {
+   "text": "\"//lospec.com/palette-list/slso8\"",
+   "routed": false,
+   "jsonUrl": null,
+   "error": null,
+   "local": "error: Paste #RGB, #RRGGBB, or six-digit hex colors separated by sp",
+   "canonical": null
+  },
+  {
+   "text": "\"https://lospec.com/palette-list/slso8 extra\"",
+   "routed": false,
+   "jsonUrl": null,
+   "error": null,
+   "local": "error: Paste #RGB, #RRGGBB, or six-digit hex colors separated by sp",
+   "canonical": null
+  },
+  {
+   "text": "\"https://lospec.com/palette-list/slso8​\"",
+   "routed": true,
+   "jsonUrl": null,
+   "error": "guidance",
+   "local": null,
+   "canonical": null
+  },
+  {
+   "text": "\" https://lospec.com/palette-list/slso8 \"",
+   "routed": true,
+   "jsonUrl": "https://lospec.com/palette-list/slso8.json",
+   "error": null,
+   "local": null,
+   "canonical": "https://lospec.com/palette-list/slso8"
+  },
+  {
+   "text": "\"https://lospec.com/palette-list/slso8.hex\"",
+   "routed": true,
+   "jsonUrl": null,
+   "error": "guidance",
+   "local": null,
+   "canonical": null
+  },
+  {
+   "text": "\"https://lospec.com/palette-list/../x\"",
+   "routed": true,
+   "jsonUrl": null,
+   "error": "guidance",
+   "local": null,
+   "canonical": null
+  },
+  {
+   "text": "\"https://lospec.com/palette-list/%2e%2e\"",
+   "routed": true,
+   "jsonUrl": null,
+   "error": "guidance",
+   "local": null,
+   "canonical": null
+  },
+  {
+   "text": "\"https://lospec.com/palette-list/x?u=https://evil.test\"",
+   "routed": true,
+   "jsonUrl": "https://lospec.com/palette-list/x.json",
+   "error": null,
+   "local": null,
+   "canonical": "https://lospec.com/palette-list/x"
+  },
+  {
+   "text": "\"https://lospec.com/palette-list/slso8\\nhttps://lospec.com/palette-list/pico-8\"",
+   "routed": false,
+   "jsonUrl": null,
+   "error": null,
+   "local": "error: Paste #RGB, #RRGGBB, or six-digit hex colors separated by sp",
+   "canonical": null
+  },
+  {
+   "text": "\"GIMP Palette\\n# https://lospec.com/palette-list/slso8\\n0 0 0\"",
+   "routed": false,
+   "jsonUrl": null,
+   "error": null,
+   "local": 1,
+   "canonical": null
+  },
+  {
+   "text": "\";paint.net\\nhttps://lospec.com/palette-list/slso8\"",
+   "routed": false,
+   "jsonUrl": null,
+   "error": null,
+   "local": "error: Paste #RGB, #RRGGBB, or six-digit hex colors separated by sp",
+   "canonical": null
+  },
+  {
+   "text": "\"https://lospec.com/palette-list/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "routed": true,
+   "jsonUrl": null,
+   "error": "guidance",
+   "local": null,
+   "canonical": null
+  },
+  {
+   "text": "\"https://lospec.com/palette-list/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "routed": true,
+   "jsonUrl": "https://lospec.com/palette-list/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.json",
+   "error": null,
+   "local": null,
+   "canonical": "https://lospec.com/palette-list/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  {
+   "text": "\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+   "routed": true,
+   "jsonUrl": null,
+   "error": "guidance",
+   "local": null,
+   "canonical": null
+  },
+  {
+   "text": "\"lospec.com/palette-list/-bad\"",
+   "routed": true,
+   "jsonUrl": null,
+   "error": "guidance",
+   "local": null,
+   "canonical": null
+  },
+  {
+   "text": "\"lospec.com/palette-list/a--b\"",
+   "routed": true,
+   "jsonUrl": null,
+   "error": "guidance",
+   "local": null,
+   "canonical": null
+  }
+ ]
+}

@@ -1,0 +1,581 @@
+{
+  "at": "2026-10-15T11:40:22.764Z",
+  "initStatus": 200,
+  "server": {
+    "name": "PixelLab MCP Server",
+    "version": "0.2.0"
+  },
+  "listStatus": 200,
+  "total": 117,
+  "previousTotal": 117,
+  "names": [
+    "add_to_project",
+    "agent_feedback",
+    "agent_inspect",
+    "agent_list",
+    "agent_talk",
+    "animate_character",
+    "animate_image",
+    "animate_image_pixminimax",
+    "animate_object",
+    "animate_with_skeleton_v3",
+    "cancel_job",
+    "chat_get_messages",
+    "chat_list_conversations",
+    "chat_send_message",
+    "correct_pixelart",
+    "create_1_direction_object",
+    "create_8_direction_object",
+    "create_building_kit",
+    "create_character",
+    "create_character_pro_flash",
+    "create_character_state",
+    "create_font",
+    "create_image_pixen",
+    "create_image_pixflux",
+    "create_image_pro",
+    "create_image_pro_flash",
+    "create_isometric_tile",
+    "create_map",
+    "create_map_object",
+    "create_normal_map",
+    "create_object_pro_flash",
+    "create_object_state",
+    "create_path_tiles",
+    "create_portrait_character",
+    "create_sidescroller_tileset",
+    "create_talking_gif",
+    "create_tiles_pro",
+    "create_topdown_tileset",
+    "create_ui_asset",
+    "create_vocal_animation",
+    "delete_animation",
+    "delete_character",
+    "delete_isometric_tile",
+    "delete_map",
+    "delete_object",
+    "delete_sidescroller_tileset",
+    "delete_tiles_pro",
+    "delete_topdown_tileset",
+    "delete_ui_asset",
+    "dismiss_review",
+    "edit_image",
+    "edit_image_pixen",
+    "edit_image_pro_flash",
+    "edit_map",
+    "get_balance",
+    "get_character",
+    "get_font",
+    "get_image",
+    "get_isometric_tile",
+    "get_lip_sync",
+    "get_map",
+    "get_map_object",
+    "get_object",
+    "get_portrait_character",
+    "get_pro_flash_capabilities",
+    "get_sidescroller_tileset",
+    "get_tiles_pro",
+    "get_topdown_tileset",
+    "get_ui_asset",
+    "get_upload_url",
+    "get_vocal_animation",
+    "image_to_pixelart",
+    "image_to_pixelart_pro_flash",
+    "inpaint_image",
+    "inpaint_image_pro_flash",
+    "list_characters",
+    "list_images",
+    "list_isometric_tiles",
+    "list_jobs",
+    "list_map_objects",
+    "list_maps",
+    "list_objects",
+    "list_projects",
+    "list_sidescroller_tilesets",
+    "list_tiles_pro",
+    "list_topdown_tilesets",
+    "list_ui_assets",
+    "move_map_object",
+    "pixelart_workbench",
+    "place_map_object",
+    "reduce_colors",
+    "remove_from_project",
+    "remove_map_object",
+    "sandbox_bash",
+    "sandbox_create_session",
+    "sandbox_deploy_worker",
+    "sandbox_destroy_session",
+    "sandbox_edit",
+    "sandbox_playtest",
+    "sandbox_read",
+    "sandbox_read_image",
+    "sandbox_run",
+    "sandbox_sync",
+    "sandbox_undeploy",
+    "sandbox_write",
+    "save_to_asset",
+    "search_help",
+    "search_knowledge",
+    "select_object_frames",
+    "set_character_portrait",
+    "transfer_outfit",
+    "unzoom_image",
+    "update_character_tags",
+    "update_object_tags",
+    "vfx_workbench",
+    "view_map",
+    "wait_for_jobs"
+  ],
+  "smartMentions": [],
+  "relevant": [
+    {
+      "name": "create_image_pro_flash",
+      "keys": [
+        "description",
+        "width",
+        "height",
+        "no_background",
+        "style_image",
+        "style_options",
+        "seed",
+        "project_id"
+      ]
+    },
+    {
+      "name": "edit_image_pro_flash",
+      "keys": [
+        "description",
+        "image_base64",
+        "image_url",
+        "source_image_id",
+        "method",
+        "reference_image",
+        "no_background",
+        "use_color_palette_correction",
+        "seed",
+        "project_id"
+      ]
+    },
+    {
+      "name": "inpaint_image",
+      "keys": [
+        "description",
+        "image_base64",
+        "image_url",
+        "mask_x",
+        "mask_y",
+        "mask_width",
+        "mask_height",
+        "mask_image_base64",
+        "mask_image_url",
+        "crop_to_mask",
+        "no_background",
+        "seed",
+        "project_id"
+      ]
+    },
+    {
+      "name": "inpaint_image_pro_flash",
+      "keys": [
+        "description",
+        "image_base64",
+        "image_url",
+        "source_image_id",
+        "mask_x",
+        "mask_y",
+        "mask_width",
+        "mask_height",
+        "mask_image_base64",
+        "mask_image_url",
+        "context_image",
+        "bounding_box",
+        "crop_to_mask",
+        "no_background",
+        "background_removal_task",
+        "output_method",
+        "seed",
+        "project_id"
+      ]
+    },
+    {
+      "name": "create_character_pro_flash",
+      "keys": [
+        "description",
+        "source_image_id",
+        "first_frame_base64",
+        "first_frame_url",
+        "name",
+        "view",
+        "first_frame_direction",
+        "n_directions",
+        "template_id",
+        "seed",
+        "width",
+        "height",
+        "style_image",
+        "style_options"
+      ]
+    },
+    {
+      "name": "create_object_pro_flash",
+      "keys": [
+        "description",
+        "source_image_id",
+        "first_frame_base64",
+        "first_frame_url",
+        "name",
+        "view",
+        "first_frame_direction",
+        "n_directions",
+        "seed",
+        "width",
+        "height",
+        "style_image",
+        "style_options"
+      ]
+    },
+    {
+      "name": "get_pro_flash_capabilities",
+      "keys": [
+        "operation",
+        "width",
+        "height",
+        "n_directions"
+      ]
+    },
+    {
+      "name": "create_character_state",
+      "keys": [
+        "character_id",
+        "edit_description",
+        "seed",
+        "state_name",
+        "use_color_palette_from_reference",
+        "override_width",
+        "override_height"
+      ]
+    },
+    {
+      "name": "create_map_object",
+      "keys": [
+        "description",
+        "width",
+        "height",
+        "view",
+        "outline",
+        "shading",
+        "detail",
+        "background_image",
+        "inpainting"
+      ]
+    },
+    {
+      "name": "create_ui_asset",
+      "keys": [
+        "description",
+        "width",
+        "height",
+        "color_palette",
+        "style_image_base64",
+        "no_background",
+        "seed",
+        "name",
+        "project_id",
+        "elements",
+        "pieces"
+      ]
+    },
+    {
+      "name": "create_tiles_pro",
+      "keys": [
+        "description",
+        "tile_type",
+        "tile_size",
+        "tile_height",
+        "tile_view",
+        "tile_view_angle",
+        "tile_depth_ratio",
+        "tile_flat_top_px",
+        "seed",
+        "style_images",
+        "style_options",
+        "outline_mode",
+        "tile_feature",
+        "oblique_lean"
+      ]
+    },
+    {
+      "name": "create_image_pixflux",
+      "keys": [
+        "description",
+        "width",
+        "height",
+        "no_background",
+        "view",
+        "direction",
+        "isometric",
+        "outline",
+        "shading",
+        "detail",
+        "text_guidance_scale",
+        "init_image_base64",
+        "init_image_url",
+        "init_image_strength",
+        "color_image_base64",
+        "color_image_url",
+        "seed",
+        "project_id"
+      ]
+    },
+    {
+      "name": "create_image_pixen",
+      "keys": [
+        "description",
+        "width",
+        "height",
+        "no_background",
+        "view",
+        "direction",
+        "outline",
+        "detail",
+        "seed",
+        "project_id"
+      ]
+    },
+    {
+      "name": "create_image_pro",
+      "keys": [
+        "description",
+        "width",
+        "height",
+        "no_background",
+        "reference_images",
+        "style_image_base64",
+        "style_image_url",
+        "style_copy",
+        "palette",
+        "palette_name",
+        "max_colors",
+        "seed",
+        "project_id"
+      ]
+    },
+    {
+      "name": "get_image",
+      "keys": [
+        "job_id",
+        "index"
+      ]
+    },
+    {
+      "name": "list_images",
+      "keys": [
+        "limit",
+        "offset",
+        "search"
+      ]
+    },
+    {
+      "name": "edit_image",
+      "keys": [
+        "images_base64",
+        "image_urls",
+        "description",
+        "reference_image_base64",
+        "reference_image_url",
+        "width",
+        "height",
+        "no_background",
+        "seed",
+        "project_id"
+      ]
+    },
+    {
+      "name": "create_normal_map",
+      "keys": [
+        "image",
+        "convention",
+        "project_id"
+      ]
+    },
+    {
+      "name": "transfer_outfit",
+      "keys": [
+        "frames_base64",
+        "frame_urls",
+        "reference_image_base64",
+        "reference_image_url",
+        "additional_instructions",
+        "width",
+        "height",
+        "no_background",
+        "seed",
+        "project_id"
+      ]
+    },
+    {
+      "name": "image_to_pixelart_pro_flash",
+      "keys": [
+        "image_url",
+        "image_base64",
+        "source_image_id",
+        "description",
+        "seed",
+        "project_id"
+      ]
+    },
+    {
+      "name": "unzoom_image",
+      "keys": [
+        "image_base64",
+        "image_url",
+        "quantize",
+        "project_id"
+      ]
+    },
+    {
+      "name": "correct_pixelart",
+      "keys": [
+        "images_base64",
+        "image_urls",
+        "strength",
+        "project_id"
+      ]
+    },
+    {
+      "name": "reduce_colors",
+      "keys": [
+        "images_base64",
+        "image_urls",
+        "num_colors",
+        "palette_image_base64",
+        "palette_image_url",
+        "dithering",
+        "dithering_strength",
+        "project_id"
+      ]
+    },
+    {
+      "name": "pixelart_workbench",
+      "keys": [
+        "argv",
+        "mode",
+        "notes"
+      ]
+    },
+    {
+      "name": "vfx_workbench",
+      "keys": [
+        "argv",
+        "mode",
+        "notes"
+      ]
+    },
+    {
+      "name": "save_to_asset",
+      "keys": [
+        "image",
+        "target",
+        "description"
+      ]
+    }
+  ],
+  "reduceColors": {
+    "name": "reduce_colors",
+    "description": "Quantize images onto a smaller, shared palette.\n\nPixel art reads as pixel art partly because of its restricted palette. AI\noutput and converted artwork often carry hundreds of near-identical colors;\nthis snaps them onto a tight palette, optionally with ordered dithering.\n\nPassing several frames in one call is the point: they are quantized TOGETHER,\nso an animation or a character's eight directions come back sharing ONE\npalette instead of drifting apart frame by frame. Quantizing them one at a\ntime is the mistake this tool exists to prevent.\n\nThree ways to choose the palette:\n- omit num_colors and the palette image — the size is auto-detected\n- num_colors — quantize to exactly this many colors\n- palette_image — reuse the colors of an existing image (the game's palette)\n\nThe result carries a `palette` strip you can feed back as palette_image_base64\nto lock later frames onto the same colors.\n\nTotal size limit across all frames is 512x512 worth of pixels (sixteen 64x64\nframes, or four 128x128).\n\nCost: 0.1 generations. Runs locally in about a second — poll once with\nget_image(job_id).",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "images_base64": {
+          "default": null,
+          "description": "Base64 PNG(s) to quantize — pass a one-element list for a single image. All frames must be the same size. PREFER image_urls; MCP clients routinely truncate large inline base64.",
+          "items": {
+            "type": "string"
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "image_urls": {
+          "default": null,
+          "description": "Alternative to images_base64: https, data: or `upload:<id>` (POST /v2/uploads with this same bearer token) URLs to the PNG(s), one per frame. PREFER THIS. Give urls OR base64, not both.",
+          "items": {
+            "type": "string"
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "num_colors": {
+          "default": null,
+          "description": "Target number of colors. Omit to auto-detect a good palette size from the images. Cannot be combined with a palette image.",
+          "maximum": 256,
+          "minimum": 2,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "palette_image_base64": {
+          "default": null,
+          "description": "Base64 PNG whose colors become the palette (max 256 colors) — use it to force frames onto an existing game palette. Cannot be combined with num_colors.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "palette_image_url": {
+          "default": null,
+          "description": "Alternative to palette_image_base64: an https (or data:) URL to the palette image. Give one, not both.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "dithering": {
+          "default": "none",
+          "description": "Ordered dithering matrix size. Larger matrices give smoother gradients at the cost of a busier look.",
+          "enum": [
+            "none",
+            "2x2",
+            "4x4",
+            "8x8"
+          ],
+          "type": "string"
+        },
+        "dithering_strength": {
+          "default": 5,
+          "description": "How strongly to dither. Ignored when dithering is 'none'.",
+          "maximum": 10,
+          "minimum": 0,
+          "type": "number"
+        },
+        "project_id": {
+          "default": null,
+          "description": "Internal Game Builder project context; the finished image is linked after generation.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "annotations": {
+      "readOnlyHint": false,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    },
+    "_meta": {
+      "fastmcp": {
+        "tags": []
+      }
+    }
+  },
+  "reduceColorsChanged": false,
+  "createImageProChanged": false
+}

@@ -1,0 +1,485 @@
+{
+  "at": "2026-10-15T11:40:20.754Z",
+  "fetched": {
+    "openapi.json": {
+      "url": "https://api.pixellab.ai/v2/openapi.json",
+      "status": 200,
+      "bytes": 480179,
+      "sha256": "11352d92a6ffe1ba653bf94c40bf1e0b9db51781e3d8f47b88f73ed49206575a"
+    },
+    "llms.txt": {
+      "url": "https://api.pixellab.ai/v2/llms.txt",
+      "status": 200,
+      "bytes": 20165,
+      "sha256": "013f141b4fc23d553c5c942844925213c28f2063e4618ac855df51f2deee31d5"
+    },
+    "v2-docs.html": {
+      "url": "https://api.pixellab.ai/v2/docs",
+      "status": 200,
+      "bytes": 5970,
+      "sha256": "4bff119cb7669348cd1b2588c30d09e259c26e66b04a49b56c55f4b6652844fc"
+    },
+    "mcp-docs.html": {
+      "url": "https://api.pixellab.ai/mcp/docs",
+      "status": 200,
+      "bytes": 125176,
+      "sha256": "718191cb7765463ebec64040c96a62b9a48e43b525da64bae69361c0586f2f73"
+    },
+    "docs-reduce-colors.html": {
+      "url": "https://www.pixellab.ai/docs/tools/reduce-colors",
+      "status": 200,
+      "bytes": 90061,
+      "sha256": "c960b93e14b37a1fbd4dfab389b910aa0eaf597113e3a0bc93186c63cd9d0b1b"
+    },
+    "docs-color.html": {
+      "url": "https://www.pixellab.ai/docs/options/color",
+      "status": 200,
+      "bytes": 91686,
+      "sha256": "e3d7e70408454d476a19cfd73f5ad50ef5448f33a80886d18066e6d2f9583d02"
+    },
+    "docs-dithering.html": {
+      "url": "https://www.pixellab.ai/docs/options/dithering",
+      "status": 200,
+      "bytes": 81371,
+      "sha256": "a31b07b2862f7f174d468e0e801bec929ba7a6ab7a727a9b29e7804bfe661540"
+    },
+    "mcp-page.html": {
+      "url": "https://www.pixellab.ai/mcp",
+      "status": 200,
+      "bytes": 111902,
+      "sha256": "6ec46edf57ace788a807ea15a997fbc8e0440979c503865748f331a80d0f5202"
+    }
+  },
+  "totalPaths": 101,
+  "paths": [
+    "/animate-character",
+    "/animate-pixminimax",
+    "/animate-with-skeleton",
+    "/animate-with-skeleton-v3",
+    "/animate-with-text",
+    "/animate-with-text-v2",
+    "/animate-with-text-v3",
+    "/background-jobs/{job_id}",
+    "/balance",
+    "/characters",
+    "/characters/animations",
+    "/characters/{character_id}",
+    "/characters/{character_id}/animations",
+    "/characters/{character_id}/animations/{animation_group_id}",
+    "/characters/{character_id}/animations/{animation_group_id}/directions/{direction}",
+    "/characters/{character_id}/portrait",
+    "/characters/{character_id}/spritesheet",
+    "/characters/{character_id}/tags",
+    "/characters/{character_id}/zip",
+    "/correct-pixelart",
+    "/create-1-direction-object",
+    "/create-8-direction-object",
+    "/create-character-pro",
+    "/create-character-pro-flash",
+    "/create-character-state",
+    "/create-character-v3",
+    "/create-character-with-4-directions",
+    "/create-character-with-8-directions",
+    "/create-image-bitforge",
+    "/create-image-pixen",
+    "/create-image-pixflux",
+    "/create-image-pixflux-background",
+    "/create-image-pro-flash",
+    "/create-isometric-tile",
+    "/create-object-pro-flash",
+    "/create-tiles-pro",
+    "/create-tileset",
+    "/create-tileset-sidescroller",
+    "/create-ui-asset",
+    "/edit-animation-v2",
+    "/edit-image",
+    "/edit-image-pixen",
+    "/edit-image-pro-flash",
+    "/edit-images-v2",
+    "/enhance-animation-v3-prompt",
+    "/enhance-character-v3-prompt",
+    "/enhance-pixen-prompt",
+    "/estimate-skeleton",
+    "/generate-8-rotations-v2",
+    "/generate-8-rotations-v3",
+    "/generate-font-pro",
+    "/generate-font-pro/{job_id}",
+    "/generate-image-v2",
+    "/generate-ui-v2",
+    "/generate-with-style-v2",
+    "/image-to-pixelart",
+    "/image-to-pixelart-pro",
+    "/image-to-pixelart-pro-flash",
+    "/image-to-text",
+    "/inpaint",
+    "/inpaint-image-pro-flash",
+    "/inpaint-v3",
+    "/interpolation-v2",
+    "/isometric-tiles",
+    "/isometric-tiles/{tile_id}",
+    "/lip-sync",
+    "/llms.txt",
+    "/map-objects",
+    "/map-objects/{object_id}",
+    "/normal-map",
+    "/objects",
+    "/objects/{object_id}",
+    "/objects/{object_id}/animations",
+    "/objects/{object_id}/dismiss-review",
+    "/objects/{object_id}/select-frames",
+    "/objects/{object_id}/spritesheet",
+    "/objects/{object_id}/states",
+    "/objects/{object_id}/tags",
+    "/portrait-character-pro",
+    "/portrait-character-pro/{job_id}",
+    "/pro-flash/capabilities",
+    "/pro-flash/cost",
+    "/reduce-colors",
+    "/remove-background",
+    "/resize",
+    "/rotate",
+    "/talking-gif",
+    "/tiles-pro",
+    "/tiles-pro/{tile_id}",
+    "/tilesets",
+    "/tilesets-sidescroller",
+    "/tilesets-sidescroller/{tileset_id}",
+    "/tilesets/{tileset_id}",
+    "/transfer-outfit-v2",
+    "/ui-assets",
+    "/ui-assets/{ui_asset_id}",
+    "/unzoom",
+    "/uploads",
+    "/uploads/{ticket}",
+    "/vocal-animation",
+    "/vocal-animation/{job_id}"
+  ],
+  "recolorRelatedPaths": [
+    "/inpaint",
+    "/inpaint-image-pro-flash",
+    "/inpaint-v3",
+    "/reduce-colors"
+  ],
+  "reduceColors": {
+    "requestModel": "ReduceColorsRequest",
+    "fields": [
+      "images",
+      "num_colors",
+      "palette_image",
+      "dithering",
+      "dithering_strength"
+    ],
+    "previousFields": [
+      "images",
+      "num_colors",
+      "palette_image",
+      "dithering",
+      "dithering_strength"
+    ],
+    "added": [],
+    "removed": [],
+    "changed": [],
+    "additionalProperties": false,
+    "description": "Quantize images onto a smaller, shared palette.\n\nPixel art reads as pixel art partly because of its restricted palette. AI output\nand converted artwork often carry hundreds of near-identical colors; this snaps\nthem onto a tight palette, optionally with ordered dithering.\n\nPassing several frames in one call is the point of the endpoint: they are\nquantized together, so an animation or a character's eight directions come back\nsharing ONE palette instead of drifting apart frame by frame.\n\nThree ways to choose the palette:\n- omit `num_colors` and `palette_image` — the palette size is auto-detected\n- `num_colors` — quantize to exactly this many colors\n- `palette_image` — reuse the colors of an existing image (your game's palette)\n\nTotal size limit across all frames is 512x512 worth of pixels (e.g. sixteen\n64x64 frames, or four 128x128).\n\n```bash\ncurl -X POST https://api.pixellab.ai/v2/reduce-colors \\\n    -H \"Authorization: Bearer YOUR_API_TOKEN\" \\\n    -H \"Content-Type: application/json\" \\\n    -d '{\"images\": [{\"base64\": \"...\"}, {\"base64\": \"...\"}], \"num_colors\": 16}'\n```"
+  },
+  "targetPalette": {
+    "current": {
+      "properties": {
+        "colors": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Colors",
+          "description": "2 to 256 hex colours like '#1a2b3c'."
+        },
+        "name": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 100
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Name",
+          "description": "The palette's name ('Game Boy', 'PICO-8'); helps the look."
+        },
+        "max_colors": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "maximum": 64,
+              "minimum": 2
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Max Colors",
+          "description": "At most this many colours in each image (from colors if given)."
+        },
+        "smart": {
+          "type": "boolean",
+          "title": "Smart",
+          "description": "Beta, single images only: put each object on the palette as a whole (a face stays skin-coloured, wood stays brown) instead of giving every pixel its nearest colour. Needs colors; adds about 15-60 s.",
+          "default": false
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "TargetPalette",
+      "description": "Colours the result must use (colors) and/or at most max_colors per image."
+    },
+    "changedFromRetained": false
+  },
+  "smartModels": [
+    "AnimateWithTextV2Request",
+    "TargetPalette"
+  ],
+  "smartRoutes": [
+    {
+      "path": "/generate-image-v2",
+      "verb": "post",
+      "via": [
+        "TargetPalette"
+      ]
+    },
+    {
+      "path": "/animate-with-text-v2",
+      "verb": "post",
+      "via": [
+        "AnimateWithTextV2Request",
+        "TargetPalette"
+      ]
+    }
+  ],
+  "paletteFieldHits": [
+    {
+      "model": "AnimateWithSkeletonRequest",
+      "field": "color_image",
+      "smart": false,
+      "recolor": false
+    },
+    {
+      "model": "AnimateWithTextRequest",
+      "field": "color_image",
+      "smart": false,
+      "recolor": false
+    },
+    {
+      "model": "AnimateWithTextV2Request",
+      "field": "target_palette",
+      "smart": true,
+      "recolor": false
+    },
+    {
+      "model": "CreateCharacterAnimationRequest",
+      "field": "color_image",
+      "smart": false,
+      "recolor": false
+    },
+    {
+      "model": "CreateCharacterStateRequest",
+      "field": "use_color_palette_from_reference",
+      "smart": false,
+      "recolor": false
+    },
+    {
+      "model": "CreateCharacterWith4DirectionsRequest",
+      "field": "color_image",
+      "smart": false,
+      "recolor": false
+    },
+    {
+      "model": "CreateCharacterWith8DirectionsRequest",
+      "field": "color_image",
+      "smart": false,
+      "recolor": false
+    },
+    {
+      "model": "CreateImageBitforgeRequest",
+      "field": "color_image",
+      "smart": false,
+      "recolor": false
+    },
+    {
+      "model": "CreateImagePixfluxRequest",
+      "field": "color_image",
+      "smart": false,
+      "recolor": false
+    },
+    {
+      "model": "CreateIsometricTileRequest",
+      "field": "color_image",
+      "smart": false,
+      "recolor": false
+    },
+    {
+      "model": "CreateMapObjectRequest",
+      "field": "color_image",
+      "smart": false,
+      "recolor": false
+    },
+    {
+      "model": "CreateTilesetRequest",
+      "field": "color_image",
+      "smart": false,
+      "recolor": false
+    },
+    {
+      "model": "CreateTilesetSidescrollerRequest",
+      "field": "color_image",
+      "smart": false,
+      "recolor": false
+    },
+    {
+      "model": "CreateUIAssetRequest",
+      "field": "color_palette",
+      "smart": false,
+      "recolor": false
+    },
+    {
+      "model": "EditImageProFlashRequest",
+      "field": "use_color_palette_correction",
+      "smart": false,
+      "recolor": false
+    },
+    {
+      "model": "GenerateImageV2Request",
+      "field": "target_palette",
+      "smart": false,
+      "recolor": false
+    },
+    {
+      "model": "GenerateUIV2Request",
+      "field": "color_palette",
+      "smart": false,
+      "recolor": false
+    },
+    {
+      "model": "InpaintRequest",
+      "field": "color_image",
+      "smart": false,
+      "recolor": false
+    },
+    {
+      "model": "ProFlashStyleOptions",
+      "field": "color_palette",
+      "smart": false,
+      "recolor": false
+    },
+    {
+      "model": "ReduceColorsRequest",
+      "field": "images",
+      "smart": false,
+      "recolor": false
+    },
+    {
+      "model": "ReduceColorsRequest",
+      "field": "num_colors",
+      "smart": false,
+      "recolor": false
+    },
+    {
+      "model": "ReduceColorsRequest",
+      "field": "palette_image",
+      "smart": false,
+      "recolor": false
+    },
+    {
+      "model": "ReduceColorsResponse",
+      "field": "palette",
+      "smart": false,
+      "recolor": false
+    },
+    {
+      "model": "ReduceColorsResponse",
+      "field": "n_colors",
+      "smart": false,
+      "recolor": false
+    },
+    {
+      "model": "ResizeRequest",
+      "field": "color_image",
+      "smart": false,
+      "recolor": false
+    },
+    {
+      "model": "RotateRequest",
+      "field": "color_image",
+      "smart": false,
+      "recolor": false
+    },
+    {
+      "model": "StyleOptions",
+      "field": "color_palette",
+      "smart": false,
+      "recolor": false
+    },
+    {
+      "model": "TargetPalette",
+      "field": "name",
+      "smart": false,
+      "recolor": false
+    },
+    {
+      "model": "TargetPalette",
+      "field": "smart",
+      "smart": true,
+      "recolor": false
+    },
+    {
+      "model": "TilesProStyleOptions",
+      "field": "color_palette",
+      "smart": false,
+      "recolor": false
+    },
+    {
+      "model": "UnzoomRequest",
+      "field": "quantize",
+      "smart": false,
+      "recolor": false
+    }
+  ],
+  "docsMentions": {
+    "llms.txt": {
+      "smart": [],
+      "recolor": []
+    },
+    "v2-docs.html": {
+      "smart": [],
+      "recolor": []
+    },
+    "mcp-docs.html": {
+      "smart": [],
+      "recolor": [
+        "ptional[str] (optional) [default: None] — Base64 PNG of the SAME character wearing the new outfit (e.g. a re-dressed or recoloured sprite of it). A different character as reference is unreliable — it can freeze the motion or barely change anything. Max 256x256. - `reference_image"
+      ]
+    },
+    "docs-reduce-colors.html": {
+      "smart": [],
+      "recolor": []
+    },
+    "docs-color.html": {
+      "smart": [],
+      "recolor": []
+    },
+    "docs-dithering.html": {
+      "smart": [],
+      "recolor": []
+    },
+    "mcp-page.html": {
+      "smart": [],
+      "recolor": []
+    }
+  }
+}

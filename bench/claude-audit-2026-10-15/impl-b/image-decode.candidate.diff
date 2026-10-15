@@ -1,0 +1,9 @@
+1c1
+< import { checkCanceled, yieldTask } from './quantize.js';
+---
+> import { checkCanceled, yieldTask } from '/src/lib/quantize.js';
+51a52,55
+>         // Candidate fix B-3: Gecko exposes an all-null VideoColorSpace and premultiplied
+>         // BGRA that neither copy path unpremultiplies. Use the bitmap/canvas decoder instead.
+>         const space = frame.colorSpace;
+>         if (!space || ['primaries', 'transfer', 'matrix', 'fullRange'].every(key => space[key] == null)) throw new Error('Unknown native frame metadata.');

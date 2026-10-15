@@ -1,0 +1,62 @@
+{
+  "alpha-sprite.png": {
+    "bytes": 2023,
+    "sha256": "e315b1ea6ead995085a66e634b56933b56b97fe9e81ae3e1b5f5646a985ff819",
+    "dir": "bench"
+  },
+  "ramp.png": {
+    "bytes": 1512,
+    "sha256": "d983d1dd0f71118c6910a2a493b120b8aa16fa776bfd78cd7afe6b24b028917c",
+    "dir": "bench"
+  },
+  "walk.gif": {
+    "bytes": 3638,
+    "sha256": "4b983d0caa70739aa804e90cb63e69ef023e86b90bd5c2efb5ae8bbee1982b24",
+    "dir": "bench"
+  },
+  "hi256.png": {
+    "bytes": 224846,
+    "sha256": "829ddbb117acb4d48db25350c388ef6a1f1afeb4ba6231f070e655efe9d993b1",
+    "dir": ".tmp"
+  },
+  "hi1024.png": {
+    "bytes": 3593315,
+    "sha256": "c66bb291e70a316e0c0dee0f5f0c0a58387c7b928f168198937ce0b57a54cc56",
+    "dir": ".tmp"
+  },
+  "hi1024-alpha.png": {
+    "bytes": 3357839,
+    "sha256": "c9ad73f1af58d05e830d8afdca4daae705b6eb87c37aea94e288c607e9993923",
+    "dir": ".tmp"
+  },
+  "wall0.gif": {
+    "bytes": 270125,
+    "sha256": "996dea3631be907dc2b4e8b3cd457ca5169f6fa16707cdd657d3bcb994e84851",
+    "dir": ".tmp"
+  },
+  "wall1.gif": {
+    "bytes": 270026,
+    "sha256": "6e645dc92c4219ecb7acad424888ea2c47b9e8b9b155d8426b54faaba3c5e528",
+    "dir": ".tmp"
+  },
+  "wall2.gif": {
+    "bytes": 270173,
+    "sha256": "f61eeb761e846a469efb0b94438edf953845f9eba6c16b628c61315bcdd387f3",
+    "dir": ".tmp"
+  },
+  "wall3.gif": {
+    "bytes": 270151,
+    "sha256": "823ed34cb0dce9bd5dd06cd7215d093be081986ca2e839cbc39996ceea721841",
+    "dir": ".tmp"
+  },
+  "wall4.gif": {
+    "bytes": 270075,
+    "sha256": "759996cb0ea98562cc5b779461b7276a233e2a41b782b176f782a10c5ae160b2",
+    "dir": ".tmp"
+  },
+  "wall5.gif": {
+    "bytes": 270103,
+    "sha256": "7d113213faf15e645f6e76857fd072fd2c4331208ed76401e513238fb526631d",
+    "dir": ".tmp"
+  }
+}

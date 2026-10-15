@@ -1,0 +1,2 @@
+{"cut":1,"limitedSize":4,"cleanupReplacements":24,"ditherChangedPixels":383}
+{"cut":128,"limitedSize":4,"cleanupReplacements":24,"ditherChangedPixels":253}

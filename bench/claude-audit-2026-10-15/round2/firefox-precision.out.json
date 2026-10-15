@@ -1,0 +1,82 @@
+{
+ "firefox": "153.0",
+ "bands": [
+  {
+   "alpha": "1-3",
+   "pixels": 755,
+   "appMeanAbs": 75.73,
+   "idealPremul8MeanAbs": 38.17,
+   "channelsWorseThanIdeal": 1138
+  },
+  {
+   "alpha": "4-15",
+   "pixels": 3056,
+   "appMeanAbs": 15.28,
+   "idealPremul8MeanAbs": 7.87,
+   "channelsWorseThanIdeal": 4452
+  },
+  {
+   "alpha": "16-63",
+   "pixels": 12257,
+   "appMeanAbs": 3.25,
+   "idealPremul8MeanAbs": 1.85,
+   "channelsWorseThanIdeal": 15361
+  },
+  {
+   "alpha": "64-127",
+   "pixels": 16532,
+   "appMeanAbs": 0.91,
+   "idealPremul8MeanAbs": 0.67,
+   "channelsWorseThanIdeal": 14371
+  },
+  {
+   "alpha": "128-254",
+   "pixels": 32416,
+   "appMeanAbs": 0.25,
+   "idealPremul8MeanAbs": 0.25,
+   "channelsWorseThanIdeal": 20513
+  },
+  {
+   "alpha": "255-255",
+   "pixels": 266,
+   "appMeanAbs": 0,
+   "idealPremul8MeanAbs": 0,
+   "channelsWorseThanIdeal": 0
+  }
+ ],
+ "grayAlphaFixture": {
+  "source": "gray+alpha [10,1, 200,64, 77,254, 5,255]",
+  "out": [
+   255,
+   255,
+   255,
+   1,
+   203,
+   203,
+   203,
+   64,
+   77,
+   77,
+   77,
+   254,
+   5,
+   5,
+   5,
+   255
+  ]
+ },
+ "timing4096": [
+  {
+   "appMs": 88,
+   "canvasOnlyMs": 63
+  },
+  {
+   "appMs": 86,
+   "canvasOnlyMs": 60
+  },
+  {
+   "appMs": 90,
+   "canvasOnlyMs": 60
+  }
+ ]
+}

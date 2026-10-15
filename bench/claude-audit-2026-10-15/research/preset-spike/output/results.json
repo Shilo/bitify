@@ -1,0 +1,405 @@
+{
+  "date": "2026-10-14",
+  "environment": {
+    "node": "v25.0.0",
+    "platform": "win32"
+  },
+  "method": "Original synthetic flat region sprite and chromatic ramp; current Oklab nearest, cap 8, alpha cut128, no cleanup/dither. Source files preserve primary swatch order/author. Oklab point score favors selected matching objective; no human preference or performance study.",
+  "palettes": [
+    {
+      "id": "endesga-8",
+      "name": "Endesga 8",
+      "author": "ENDESGA",
+      "source": "https://lospec.com/palette-list/endesga-8",
+      "colors": [
+        "#fdfdf8",
+        "#d32734",
+        "#da7d22",
+        "#e6da29",
+        "#28c641",
+        "#2d93dd",
+        "#7b53ad",
+        "#1b1c33"
+      ]
+    },
+    {
+      "id": "slso8",
+      "name": "SLSO8",
+      "author": "Luis Miguel Maldonado",
+      "source": "https://lospec.com/palette-list/slso8",
+      "colors": [
+        "#0d2b45",
+        "#203c56",
+        "#544e68",
+        "#8d697a",
+        "#d08159",
+        "#ffaa5e",
+        "#ffd4a3",
+        "#ffecd6"
+      ]
+    },
+    {
+      "id": "preset-gray8",
+      "name": "Grayscale 8",
+      "source": "Colorfetti existing preset",
+      "colors": [
+        "#000000",
+        "#242424",
+        "#494949",
+        "#6d6d6d",
+        "#929292",
+        "#b6b6b6",
+        "#dbdbdb",
+        "#ffffff"
+      ]
+    },
+    {
+      "id": "preset-pico8",
+      "name": "PICO-8 capped 8",
+      "source": "Colorfetti existing preset",
+      "colors": [
+        "#000000",
+        "#1d2b53",
+        "#7e2553",
+        "#008751",
+        "#ab5236",
+        "#5f574f",
+        "#c2c3c7",
+        "#fff1e8",
+        "#ff004d",
+        "#ffa300",
+        "#ffec27",
+        "#00e436",
+        "#29adff",
+        "#83769c",
+        "#ff77a8",
+        "#ffccaa"
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "fixture": "material-sprite",
+      "palette": "endesga-8",
+      "selectedColors": [
+        "#fdfdf8",
+        "#d32734",
+        "#da7d22",
+        "#e6da29",
+        "#2d93dd",
+        "#7b53ad",
+        "#1b1c33"
+      ],
+      "usedColors": 7,
+      "pointOklabMSE": 0.015802239776701536,
+      "paletteMembership": true,
+      "alphaMismatch": 0,
+      "roleMidtoneProbes": {
+        "skin": "#da7d22",
+        "cloth": "#7b53ad",
+        "wood": "#d32734",
+        "metal": "#2d93dd",
+        "outline": "#1b1c33",
+        "accent": "#d32734"
+      },
+      "distinctRoleMidtones": 5,
+      "shadeSteps": {
+        "skin": [
+          "#d32734",
+          "#da7d22",
+          "#e6da29"
+        ],
+        "cloth": [
+          "#1b1c33",
+          "#7b53ad",
+          "#2d93dd"
+        ],
+        "wood": [
+          "#1b1c33",
+          "#d32734",
+          "#da7d22"
+        ],
+        "metal": [
+          "#1b1c33",
+          "#2d93dd",
+          "#fdfdf8"
+        ]
+      },
+      "uniqueShadeSteps": {
+        "skin": 3,
+        "cloth": 3,
+        "wood": 3,
+        "metal": 3
+      },
+      "roleCollisions": [
+        [
+          "wood",
+          "accent"
+        ]
+      ]
+    },
+    {
+      "fixture": "material-sprite",
+      "palette": "slso8",
+      "selectedColors": [
+        "#0d2b45",
+        "#203c56",
+        "#544e68",
+        "#8d697a",
+        "#d08159",
+        "#ffd4a3"
+      ],
+      "usedColors": 6,
+      "pointOklabMSE": 0.009009146768960965,
+      "paletteMembership": true,
+      "alphaMismatch": 0,
+      "roleMidtoneProbes": {
+        "skin": "#d08159",
+        "cloth": "#544e68",
+        "wood": "#8d697a",
+        "metal": "#8d697a",
+        "outline": "#0d2b45",
+        "accent": "#d08159"
+      },
+      "distinctRoleMidtones": 4,
+      "shadeSteps": {
+        "skin": [
+          "#8d697a",
+          "#d08159",
+          "#ffd4a3"
+        ],
+        "cloth": [
+          "#203c56",
+          "#544e68",
+          "#d08159"
+        ],
+        "wood": [
+          "#203c56",
+          "#8d697a",
+          "#d08159"
+        ],
+        "metal": [
+          "#203c56",
+          "#8d697a",
+          "#ffd4a3"
+        ]
+      },
+      "uniqueShadeSteps": {
+        "skin": 3,
+        "cloth": 3,
+        "wood": 3,
+        "metal": 3
+      },
+      "roleCollisions": [
+        [
+          "skin",
+          "accent"
+        ],
+        [
+          "wood",
+          "metal"
+        ]
+      ]
+    },
+    {
+      "fixture": "material-sprite",
+      "palette": "preset-gray8",
+      "selectedColors": [
+        "#242424",
+        "#494949",
+        "#6d6d6d",
+        "#929292",
+        "#b6b6b6",
+        "#dbdbdb"
+      ],
+      "usedColors": 6,
+      "pointOklabMSE": 0.006486261060262005,
+      "paletteMembership": true,
+      "alphaMismatch": 0,
+      "roleMidtoneProbes": {
+        "skin": "#929292",
+        "cloth": "#6d6d6d",
+        "wood": "#6d6d6d",
+        "metal": "#929292",
+        "outline": "#242424",
+        "accent": "#929292"
+      },
+      "distinctRoleMidtones": 3,
+      "shadeSteps": {
+        "skin": [
+          "#6d6d6d",
+          "#929292",
+          "#dbdbdb"
+        ],
+        "cloth": [
+          "#494949",
+          "#6d6d6d",
+          "#b6b6b6"
+        ],
+        "wood": [
+          "#494949",
+          "#6d6d6d",
+          "#929292"
+        ],
+        "metal": [
+          "#494949",
+          "#929292",
+          "#b6b6b6"
+        ]
+      },
+      "uniqueShadeSteps": {
+        "skin": 3,
+        "cloth": 3,
+        "wood": 3,
+        "metal": 3
+      },
+      "roleCollisions": [
+        [
+          "skin",
+          "metal"
+        ],
+        [
+          "skin",
+          "accent"
+        ],
+        [
+          "cloth",
+          "wood"
+        ],
+        [
+          "metal",
+          "accent"
+        ]
+      ]
+    },
+    {
+      "fixture": "material-sprite",
+      "palette": "preset-pico8",
+      "selectedColors": [
+        "#1d2b53",
+        "#ab5236",
+        "#5f574f",
+        "#c2c3c7",
+        "#ffa300",
+        "#29adff",
+        "#83769c",
+        "#ffccaa"
+      ],
+      "usedColors": 8,
+      "pointOklabMSE": 0.007081371094348484,
+      "paletteMembership": true,
+      "alphaMismatch": 0,
+      "roleMidtoneProbes": {
+        "skin": "#ffa300",
+        "cloth": "#83769c",
+        "wood": "#5f574f",
+        "metal": "#83769c",
+        "outline": "#1d2b53",
+        "accent": "#ab5236"
+      },
+      "distinctRoleMidtones": 5,
+      "shadeSteps": {
+        "skin": [
+          "#ab5236",
+          "#ffa300",
+          "#ffccaa"
+        ],
+        "cloth": [
+          "#1d2b53",
+          "#83769c",
+          "#29adff"
+        ],
+        "wood": [
+          "#5f574f",
+          "#5f574f",
+          "#ab5236"
+        ],
+        "metal": [
+          "#5f574f",
+          "#83769c",
+          "#c2c3c7"
+        ]
+      },
+      "uniqueShadeSteps": {
+        "skin": 3,
+        "cloth": 3,
+        "wood": 2,
+        "metal": 3
+      },
+      "roleCollisions": [
+        [
+          "cloth",
+          "metal"
+        ]
+      ]
+    },
+    {
+      "fixture": "chromatic-ramp",
+      "palette": "endesga-8",
+      "selectedColors": [
+        "#d32734",
+        "#da7d22",
+        "#e6da29",
+        "#28c641",
+        "#2d93dd",
+        "#7b53ad",
+        "#1b1c33"
+      ],
+      "usedColors": 7,
+      "pointOklabMSE": 0.013250826549797185,
+      "paletteMembership": true,
+      "alphaMismatch": 0
+    },
+    {
+      "fixture": "chromatic-ramp",
+      "palette": "slso8",
+      "selectedColors": [
+        "#203c56",
+        "#544e68",
+        "#8d697a",
+        "#d08159",
+        "#ffaa5e",
+        "#ffd4a3",
+        "#ffecd6"
+      ],
+      "usedColors": 7,
+      "pointOklabMSE": 0.021200180429736405,
+      "paletteMembership": true,
+      "alphaMismatch": 0
+    },
+    {
+      "fixture": "chromatic-ramp",
+      "palette": "preset-gray8",
+      "selectedColors": [
+        "#494949",
+        "#6d6d6d",
+        "#929292",
+        "#b6b6b6",
+        "#dbdbdb",
+        "#ffffff"
+      ],
+      "usedColors": 6,
+      "pointOklabMSE": 0.026232937867216026,
+      "paletteMembership": true,
+      "alphaMismatch": 0
+    },
+    {
+      "fixture": "chromatic-ramp",
+      "palette": "preset-pico8",
+      "selectedColors": [
+        "#1d2b53",
+        "#7e2553",
+        "#008751",
+        "#ab5236",
+        "#ffa300",
+        "#ffec27",
+        "#00e436",
+        "#83769c"
+      ],
+      "usedColors": 8,
+      "pointOklabMSE": 0.012383182494499819,
+      "paletteMembership": true,
+      "alphaMismatch": 0
+    }
+  ]
+}

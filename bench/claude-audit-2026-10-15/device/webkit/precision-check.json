@@ -1,0 +1,62 @@
+{
+ "Cut128-alpha-sprite-palette.png": {
+  "vsFileBytes": {
+   "alphaMismatch": 0,
+   "rgbMismatch": 3,
+   "first": {
+    "p": 340,
+    "actual": [
+     45,
+     147,
+     221,
+     255
+    ],
+    "expected": [
+     40,
+     198,
+     65,
+     255
+    ]
+   }
+  },
+  "vsPremultipliedRoundTrip": {
+   "alphaMismatch": 0,
+   "rgbMismatch": 0,
+   "first": null
+  }
+ },
+ "Keep-alpha-sprite-palette.png": {
+  "vsFileBytes": {
+   "alphaMismatch": 0,
+   "rgbMismatch": 75,
+   "first": {
+    "p": 72,
+    "actual": [
+     27,
+     28,
+     51,
+     1
+    ],
+    "expected": [
+     123,
+     83,
+     173,
+     1
+    ]
+   }
+  },
+  "vsPremultipliedRoundTrip": {
+   "alphaMismatch": 0,
+   "rgbMismatch": 0,
+   "first": null
+  }
+ },
+ "dither-4x4-50-keep-alpha-sprite-palette.png": {
+  "exactChangedVsFile": 7,
+  "exactChangedVsRoundTrip": 0
+ },
+ "dither-8x8-100-keep-alpha-sprite-palette.png": {
+  "exactChangedVsFile": 7,
+  "exactChangedVsRoundTrip": 0
+ }
+}

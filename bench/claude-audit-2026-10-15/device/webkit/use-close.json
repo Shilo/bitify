@@ -1,0 +1,86 @@
+[
+  {
+    "run": 0,
+    "focusAfterOneEscape": "Save image",
+    "closeButtons": 1,
+    "closeErr": null,
+    "openAfterClose": [
+      "image-viewer"
+    ],
+    "openAfterEscape": [
+      "image-viewer"
+    ],
+    "settingsErr": "locator.click: Timeout 5000ms exceeded. / Call log: / \u001b[2m  - waiting for getByRole('button', { name: 'Palette settings', exact: true })\u001b[22m / \u001b[2m    - locator resolved to <button data-tooltip=\"\" aria-expanded=\"false\" aria-describedby=\"tooltip-4\" aria-label=\"Palette settings\" class=\"btn glass-btn icon-only\">…</button>\u001b[22m / \u001b[2m  - attempting click action\u001b[22m / \u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m",
+    "errors": []
+  },
+  {
+    "run": 1,
+    "focusAfterOneEscape": "Save image",
+    "closeButtons": 1,
+    "closeErr": null,
+    "openAfterClose": [
+      "image-viewer"
+    ],
+    "openAfterEscape": [
+      "image-viewer"
+    ],
+    "settingsErr": "locator.click: Timeout 5000ms exceeded. / Call log: / \u001b[2m  - waiting for getByRole('button', { name: 'Palette settings', exact: true })\u001b[22m / \u001b[2m    - locator resolved to <button data-tooltip=\"\" aria-expanded=\"false\" aria-describedby=\"tooltip-4\" aria-label=\"Palette settings\" class=\"btn glass-btn icon-only\">…</button>\u001b[22m / \u001b[2m  - attempting click action\u001b[22m / \u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m",
+    "errors": []
+  },
+  {
+    "run": 2,
+    "focusAfterOneEscape": "Save image",
+    "closeButtons": 1,
+    "closeErr": null,
+    "openAfterClose": [
+      "image-viewer"
+    ],
+    "openAfterEscape": [
+      "image-viewer"
+    ],
+    "settingsErr": "locator.click: Timeout 5000ms exceeded. / Call log: / \u001b[2m  - waiting for getByRole('button', { name: 'Palette settings', exact: true })\u001b[22m / \u001b[2m    - locator resolved to <button data-tooltip=\"\" aria-expanded=\"false\" aria-describedby=\"tooltip-4\" aria-label=\"Palette settings\" class=\"btn glass-btn icon-only\">…</button>\u001b[22m / \u001b[2m  - attempting click action\u001b[22m / \u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m",
+    "errors": []
+  },
+  {
+    "run": 3,
+    "focusAfterOneEscape": "Save image",
+    "closeButtons": 1,
+    "closeErr": null,
+    "openAfterClose": [
+      "image-viewer"
+    ],
+    "openAfterEscape": [
+      "image-viewer"
+    ],
+    "settingsErr": "locator.click: Timeout 5000ms exceeded. / Call log: / \u001b[2m  - waiting for getByRole('button', { name: 'Palette settings', exact: true })\u001b[22m / \u001b[2m    - locator resolved to <button data-tooltip=\"\" aria-expanded=\"false\" aria-describedby=\"tooltip-4\" aria-label=\"Palette settings\" class=\"btn glass-btn icon-only\">…</button>\u001b[22m / \u001b[2m  - attempting click action\u001b[22m / \u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m",
+    "errors": []
+  },
+  {
+    "run": 4,
+    "focusAfterOneEscape": "Save image",
+    "closeButtons": 1,
+    "closeErr": null,
+    "openAfterClose": [
+      "image-viewer"
+    ],
+    "openAfterEscape": [
+      "image-viewer"
+    ],
+    "settingsErr": "locator.click: Timeout 5000ms exceeded. / Call log: / \u001b[2m  - waiting for getByRole('button', { name: 'Palette settings', exact: true })\u001b[22m / \u001b[2m    - locator resolved to <button data-tooltip=\"\" aria-expanded=\"false\" aria-describedby=\"tooltip-4\" aria-label=\"Palette settings\" class=\"btn glass-btn icon-only\">…</button>\u001b[22m / \u001b[2m  - attempting click action\u001b[22m / \u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m",
+    "errors": []
+  },
+  {
+    "run": 5,
+    "focusAfterOneEscape": "Save image",
+    "closeButtons": 1,
+    "closeErr": null,
+    "openAfterClose": [
+      "image-viewer"
+    ],
+    "openAfterEscape": [
+      "image-viewer"
+    ],
+    "settingsErr": "locator.click: Timeout 5000ms exceeded. / Call log: / \u001b[2m  - waiting for getByRole('button', { name: 'Palette settings', exact: true })\u001b[22m / \u001b[2m    - locator resolved to <button data-tooltip=\"\" aria-expanded=\"false\" aria-describedby=\"tooltip-4\" aria-label=\"Palette settings\" class=\"btn glass-btn icon-only\">…</button>\u001b[22m / \u001b[2m  - attempting click action\u001b[22m / \u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m",
+    "errors": []
+  }
+]

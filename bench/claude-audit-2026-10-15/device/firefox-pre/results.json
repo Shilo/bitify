@@ -1,0 +1,1243 @@
+{
+  "engine": "firefox",
+  "dist": ".tmp/device/pre-dist",
+  "date": "2026-10-15T12:47:40.685Z",
+  "indexSha256": "a9c33d240c472e3f6b1db90699ed49a6530dbeb748158b2f1180915b3d12398d",
+  "decodePaths": {
+    "imageDecoder": true,
+    "calls": [
+      {
+        "path": "managed-copyTo",
+        "format": "BGRA",
+        "colorSpace": {
+          "primaries": null,
+          "transfer": null,
+          "matrix": null,
+          "fullRange": null
+        }
+      },
+      {
+        "path": "managed-copyTo",
+        "format": "BGRA",
+        "colorSpace": {
+          "primaries": null,
+          "transfer": null,
+          "matrix": null,
+          "fullRange": null
+        }
+      },
+      {
+        "path": "managed-copyTo",
+        "format": "BGRA",
+        "colorSpace": {
+          "primaries": null,
+          "transfer": null,
+          "matrix": null,
+          "fullRange": null
+        }
+      },
+      {
+        "path": "managed-copyTo",
+        "format": "BGRA",
+        "colorSpace": {
+          "primaries": null,
+          "transfer": null,
+          "matrix": null,
+          "fullRange": null
+        }
+      }
+    ]
+  },
+  "phases": [
+    {
+      "name": "Fresh visit defaults",
+      "pass": true,
+      "ms": 1943,
+      "stored": {
+        "first": "#222323",
+        "second": "#f0f6f0",
+        "none": 0,
+        "style": "cutout",
+        "settings": {
+          "cutout": {
+            "threshold": null,
+            "seams": null,
+            "rim": true,
+            "source": "luma",
+            "alpha": 128
+          },
+          "solid": {
+            "threshold": null,
+            "source": "luma",
+            "alpha": 128
+          },
+          "lines": {
+            "threshold": null,
+            "thickness": 1,
+            "darks": 0,
+            "alpha": 128
+          },
+          "stencil": {
+            "cuts": null,
+            "outline": "keep",
+            "edges": 0,
+            "source": "luma",
+            "alpha": 128
+          },
+          "icon": {
+            "detail": 50,
+            "border": "auto",
+            "source": "luma",
+            "alpha": 128
+          },
+          "checker": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "bayer": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "matrix": 4,
+            "source": "luma",
+            "alpha": 128
+          },
+          "hatch": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "direction": "/",
+            "spacing": 3,
+            "source": "luma",
+            "alpha": 128
+          },
+          "atkinson": {
+            "threshold": null,
+            "shading": 100,
+            "diffusion": "atkinson",
+            "source": "luma",
+            "alpha": 128
+          },
+          "noise": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "silhouette": {
+            "alpha": 128
+          }
+        },
+        "family": "full-palette",
+        "paletteId": "generated-32",
+        "alphaCut": 128,
+        "alphaMode": "cut",
+        "metric": "oklab",
+        "maxColors": 0,
+        "lastMaxColors": 16,
+        "cleanup": false,
+        "dither": "none",
+        "ditherStrength": 50
+      },
+      "dialogs": 1
+    },
+    {
+      "name": "ENDESGA 8 nearest Cut128: native Save vs oracle + preview",
+      "pass": false,
+      "ms": 1018,
+      "out": {
+        "alpha-sprite.png": {
+          "dims": [
+            24,
+            24
+          ],
+          "frames": 1,
+          "alphaMismatch": 0,
+          "rgbMismatch": 81,
+          "nearTies": 0,
+          "first": {
+            "p": 288,
+            "actual": [
+              123,
+              83,
+              173,
+              255
+            ],
+            "expected": [
+              45,
+              147,
+              221,
+              255
+            ]
+          },
+          "preview": {
+            "canvas": [
+              24,
+              24
+            ],
+            "mismatches": 0
+          },
+          "file": {
+            "bytes": 235,
+            "sha256": "e705b42cd7a79ef655481044aa34a5566f1797231434bf35214b579b9a082b04",
+            "channels": 4,
+            "palette": true,
+            "bits": 4
+          }
+        },
+        "ramp.png": {
+          "dims": [
+            128,
+            32
+          ],
+          "frames": 1,
+          "alphaMismatch": 0,
+          "rgbMismatch": 0,
+          "nearTies": 0,
+          "first": null,
+          "preview": {
+            "canvas": [
+              128,
+              32
+            ],
+            "mismatches": 0
+          },
+          "file": {
+            "bytes": 190,
+            "sha256": "381cd83d711c302843cfedfc1cdb820fba43f8d851cda2df2bf233572acf6721",
+            "channels": 3,
+            "palette": true,
+            "bits": 4
+          }
+        },
+        "walk.gif": {
+          "dims": [
+            48,
+            48
+          ],
+          "frames": 4,
+          "alphaMismatch": 0,
+          "rgbMismatch": 0,
+          "nearTies": 0,
+          "first": null,
+          "delays": [
+            100,
+            200,
+            100,
+            300
+          ],
+          "loop": 0,
+          "srcDelays": [
+            100,
+            200,
+            100,
+            300
+          ],
+          "preview": {
+            "canvas": [
+              48,
+              48
+            ],
+            "mismatches": 0
+          },
+          "file": {
+            "bytes": 1515,
+            "sha256": "ebe6ecf4be33a1ad96f854a969ac5a7a96912aa7fb953b1b63a32c9321106306",
+            "channels": 4,
+            "palette": true,
+            "bits": 3
+          }
+        }
+      }
+    },
+    {
+      "name": "ENDESGA 8 nearest Keep: native Save vs oracle + preview",
+      "pass": false,
+      "ms": 1515,
+      "out": {
+        "alpha-sprite.png": {
+          "dims": [
+            24,
+            24
+          ],
+          "frames": 1,
+          "alphaMismatch": 0,
+          "rgbMismatch": 282,
+          "nearTies": 0,
+          "first": {
+            "p": 72,
+            "actual": [
+              27,
+              28,
+              51,
+              1
+            ],
+            "expected": [
+              123,
+              83,
+              173,
+              1
+            ]
+          },
+          "preview": {
+            "canvas": [
+              24,
+              24
+            ],
+            "mismatches": 0
+          },
+          "file": {
+            "bytes": 328,
+            "sha256": "8a0de6e015e14f7869110e6bf0a51aef24bf17c2391fcb9bb4eff85bc1bc7b59",
+            "channels": 4,
+            "palette": false,
+            "bits": 8
+          }
+        },
+        "ramp.png": {
+          "dims": [
+            128,
+            32
+          ],
+          "frames": 1,
+          "alphaMismatch": 0,
+          "rgbMismatch": 0,
+          "nearTies": 0,
+          "first": null,
+          "preview": {
+            "canvas": [
+              128,
+              32
+            ],
+            "mismatches": 0
+          },
+          "file": {
+            "bytes": 190,
+            "sha256": "381cd83d711c302843cfedfc1cdb820fba43f8d851cda2df2bf233572acf6721",
+            "channels": 3,
+            "palette": true,
+            "bits": 4
+          }
+        },
+        "walk.gif": {
+          "dims": [
+            48,
+            48
+          ],
+          "frames": 4,
+          "alphaMismatch": 0,
+          "rgbMismatch": 0,
+          "nearTies": 0,
+          "first": null,
+          "delays": [
+            100,
+            200,
+            100,
+            300
+          ],
+          "loop": 0,
+          "srcDelays": [
+            100,
+            200,
+            100,
+            300
+          ],
+          "preview": {
+            "canvas": [
+              48,
+              48
+            ],
+            "mismatches": 0
+          },
+          "file": {
+            "bytes": 1515,
+            "sha256": "ebe6ecf4be33a1ad96f854a969ac5a7a96912aa7fb953b1b63a32c9321106306",
+            "channels": 4,
+            "palette": true,
+            "bits": 3
+          }
+        }
+      }
+    },
+    {
+      "name": "Dither 4x4 strength 0 equals nearest (Keep)",
+      "pass": true,
+      "ms": 908,
+      "stored": {
+        "dither": "4x4",
+        "ditherStrength": 0
+      },
+      "dims": [
+        128,
+        32
+      ],
+      "frames": 1,
+      "alphaMismatch": 0,
+      "rgbMismatch": 0,
+      "nearTies": 0,
+      "first": null
+    },
+    {
+      "name": "Dither 4x4 50% keep: contract + preview",
+      "pass": false,
+      "ms": 1676,
+      "out": {
+        "alpha-sprite.png": {
+          "offPalette": 0,
+          "alphaWrong": 0,
+          "exactChanged": 33,
+          "used": 8,
+          "differsFromNearest": 311,
+          "preview": {
+            "canvas": [
+              24,
+              24
+            ],
+            "mismatches": 0
+          },
+          "sha256": "0b878c833a3bcb8a65a0dcb9c65f41c270fe9c1566b3d9abe68a9dd8014d3fe5"
+        },
+        "ramp.png": {
+          "offPalette": 0,
+          "alphaWrong": 0,
+          "exactChanged": 0,
+          "used": 8,
+          "differsFromNearest": 528,
+          "preview": {
+            "canvas": [
+              128,
+              32
+            ],
+            "mismatches": 0
+          },
+          "sha256": "8ce4198a12ac30e88089e971da810df24d3add1948a2414f0b83dfbef2bc4abe"
+        },
+        "walk.gif": {
+          "offPalette": 0,
+          "alphaWrong": 0,
+          "exactChanged": 0,
+          "used": 8,
+          "differsFromNearest": 1138,
+          "preview": {
+            "canvas": [
+              48,
+              48
+            ],
+            "mismatches": 0
+          },
+          "sha256": "aea7adc36a58fd7293af3c21503c70d17194284b946140191100870bde71b541"
+        }
+      }
+    },
+    {
+      "name": "Dither 8x8 100% keep: contract + preview",
+      "pass": false,
+      "ms": 1673,
+      "out": {
+        "alpha-sprite.png": {
+          "offPalette": 0,
+          "alphaWrong": 0,
+          "exactChanged": 31,
+          "used": 8,
+          "differsFromNearest": 328,
+          "preview": {
+            "canvas": [
+              24,
+              24
+            ],
+            "mismatches": 0
+          },
+          "sha256": "cb0e5d9ea68137e752dcef46b9e471e4d18302700fdc74cfaaa2a8fc0fdf4db3"
+        },
+        "ramp.png": {
+          "offPalette": 0,
+          "alphaWrong": 0,
+          "exactChanged": 0,
+          "used": 8,
+          "differsFromNearest": 1440,
+          "preview": {
+            "canvas": [
+              128,
+              32
+            ],
+            "mismatches": 0
+          },
+          "sha256": "8a4a2f6d2ae3056e7d460ea09633e477ea86e8afdaedc52b7724443868bb3851"
+        },
+        "walk.gif": {
+          "offPalette": 0,
+          "alphaWrong": 0,
+          "exactChanged": 0,
+          "used": 8,
+          "differsFromNearest": 3156,
+          "preview": {
+            "canvas": [
+              48,
+              48
+            ],
+            "mismatches": 0
+          },
+          "sha256": "a671d613092d44ca9b6f4c1c46e30208c3192eaae1c970b09956a10781a1f00d"
+        }
+      }
+    },
+    {
+      "name": "Dither 2x2 50% cut: contract + preview",
+      "pass": false,
+      "ms": 1669,
+      "out": {
+        "alpha-sprite.png": {
+          "offPalette": 0,
+          "alphaWrong": 0,
+          "exactChanged": 11,
+          "used": 8,
+          "differsFromNearest": 106,
+          "preview": {
+            "canvas": [
+              24,
+              24
+            ],
+            "mismatches": 0
+          },
+          "sha256": "f9409f1e83ea317cc0001d2f634c7f32388762b02c6f02b68df745c4baf06b54"
+        },
+        "ramp.png": {
+          "offPalette": 0,
+          "alphaWrong": 0,
+          "exactChanged": 0,
+          "used": 8,
+          "differsFromNearest": 511,
+          "preview": {
+            "canvas": [
+              128,
+              32
+            ],
+            "mismatches": 0
+          },
+          "sha256": "245c3810781ee5fad4626369d269afe225537a2b421bb929207236a9b2de7672"
+        },
+        "walk.gif": {
+          "offPalette": 0,
+          "alphaWrong": 0,
+          "exactChanged": 0,
+          "used": 8,
+          "differsFromNearest": 1452,
+          "preview": {
+            "canvas": [
+              48,
+              48
+            ],
+            "mismatches": 0
+          },
+          "sha256": "6c3c2b67ceeef443d91aa2cc0d4fb0d363e4ab0a1e75bd7aa3a6cdbb06b3c871"
+        }
+      }
+    },
+    {
+      "name": "Dither 8x8 100% cut: contract + preview",
+      "pass": false,
+      "ms": 1639,
+      "out": {
+        "alpha-sprite.png": {
+          "offPalette": 0,
+          "alphaWrong": 0,
+          "exactChanged": 12,
+          "used": 8,
+          "differsFromNearest": 126,
+          "preview": {
+            "canvas": [
+              24,
+              24
+            ],
+            "mismatches": 0
+          },
+          "sha256": "53f39f402c5613f0f6a632278591950a9cbf34022e6635b747cbf38bb7b0a08c"
+        },
+        "ramp.png": {
+          "offPalette": 0,
+          "alphaWrong": 0,
+          "exactChanged": 0,
+          "used": 8,
+          "differsFromNearest": 1440,
+          "preview": {
+            "canvas": [
+              128,
+              32
+            ],
+            "mismatches": 0
+          },
+          "sha256": "8a4a2f6d2ae3056e7d460ea09633e477ea86e8afdaedc52b7724443868bb3851"
+        },
+        "walk.gif": {
+          "offPalette": 0,
+          "alphaWrong": 0,
+          "exactChanged": 0,
+          "used": 8,
+          "differsFromNearest": 3156,
+          "preview": {
+            "canvas": [
+              48,
+              48
+            ],
+            "mismatches": 0
+          },
+          "sha256": "a671d613092d44ca9b6f4c1c46e30208c3192eaae1c970b09956a10781a1f00d"
+        }
+      }
+    },
+    {
+      "name": "Count output colors on GIF equals independent all-frame union; Use opens exact draft",
+      "pass": true,
+      "ms": 1814,
+      "label": "Use 8 output colors",
+      "count": 8,
+      "expected": 8,
+      "draft": 8,
+      "draftEqualsExport": true,
+      "libraryUnchanged": true
+    },
+    {
+      "name": "Max colors 3 + RGB + Cleanup On (dither Off, Cut): membership/cap/alpha",
+      "pass": true,
+      "ms": 3159,
+      "stored": {
+        "metric": "rgb",
+        "maxColors": 3,
+        "cleanup": true
+      },
+      "out": {
+        "alpha-sprite.png": {
+          "used": [
+            "#1b1c33",
+            "#7b53ad",
+            "#d32734"
+          ],
+          "offPalette": 0,
+          "alphaWrong": 0
+        },
+        "ramp.png": {
+          "used": [
+            "#1b1c33",
+            "#7b53ad",
+            "#da7d22"
+          ],
+          "offPalette": 0,
+          "alphaWrong": 0
+        },
+        "walk.gif": {
+          "used": [
+            "#28c641",
+            "#7b53ad",
+            "#e6da29"
+          ],
+          "offPalette": 0,
+          "alphaWrong": 0
+        }
+      }
+    },
+    {
+      "name": "RGB matching All, Cleanup Off: exact RGB-nearest oracle",
+      "pass": false,
+      "ms": 2085,
+      "out": {
+        "alpha-sprite.png": {
+          "dims": [
+            24,
+            24
+          ],
+          "frames": 1,
+          "alphaMismatch": 0,
+          "rgbMismatch": 66,
+          "nearTies": 0,
+          "first": {
+            "p": 288,
+            "actual": [
+              27,
+              28,
+              51,
+              255
+            ],
+            "expected": [
+              45,
+              147,
+              221,
+              255
+            ]
+          }
+        },
+        "ramp.png": {
+          "dims": [
+            128,
+            32
+          ],
+          "frames": 1,
+          "alphaMismatch": 0,
+          "rgbMismatch": 0,
+          "nearTies": 0,
+          "first": null
+        }
+      }
+    },
+    {
+      "name": "Download all ZIP: entries, order, oracle/contract",
+      "pass": false,
+      "ms": 1450,
+      "fileName": "colorfetti.zip",
+      "entries": [
+        "alpha-sprite-palette.png",
+        "ramp-palette.png",
+        "walk-palette.gif"
+      ],
+      "out": {
+        "alpha-sprite-palette.png": {
+          "dims": [
+            24,
+            24
+          ],
+          "frames": 1,
+          "alphaMismatch": 0,
+          "rgbMismatch": 81,
+          "nearTies": 0,
+          "first": {
+            "p": 288,
+            "actual": [
+              123,
+              83,
+              173,
+              255
+            ],
+            "expected": [
+              45,
+              147,
+              221,
+              255
+            ]
+          }
+        },
+        "ramp-palette.png": {
+          "dims": [
+            128,
+            32
+          ],
+          "frames": 1,
+          "alphaMismatch": 0,
+          "rgbMismatch": 0,
+          "nearTies": 0,
+          "first": null
+        },
+        "walk-palette.gif": {
+          "dims": [
+            48,
+            48
+          ],
+          "frames": 4,
+          "alphaMismatch": 0,
+          "rgbMismatch": 0,
+          "nearTies": 0,
+          "first": null
+        }
+      }
+    },
+    {
+      "name": "Keep ZIP with partial-alpha PNG + binary GIF",
+      "pass": false,
+      "ms": 1268,
+      "out": {
+        "alpha-sprite-palette.png": {
+          "dims": [
+            24,
+            24
+          ],
+          "frames": 1,
+          "alphaMismatch": 0,
+          "rgbMismatch": 282,
+          "nearTies": 0,
+          "first": {
+            "p": 72,
+            "actual": [
+              27,
+              28,
+              51,
+              1
+            ],
+            "expected": [
+              123,
+              83,
+              173,
+              1
+            ]
+          }
+        },
+        "ramp-palette.png": {
+          "dims": [
+            128,
+            32
+          ],
+          "frames": 1,
+          "alphaMismatch": 0,
+          "rgbMismatch": 0,
+          "nearTies": 0,
+          "first": null
+        },
+        "walk-palette.gif": {
+          "dims": [
+            48,
+            48
+          ],
+          "frames": 4,
+          "alphaMismatch": 0,
+          "rgbMismatch": 0,
+          "nearTies": 0,
+          "first": null
+        }
+      }
+    },
+    {
+      "name": "Auto: contract (alpha, <=64 colors) and Count",
+      "pass": true,
+      "ms": 3064,
+      "used": 44,
+      "alphaWrong": 0
+    },
+    {
+      "name": "Persistence across reload then Reset",
+      "pass": true,
+      "ms": 2848,
+      "before": {
+        "first": "#222323",
+        "second": "#f0f6f0",
+        "none": 0,
+        "style": "cutout",
+        "settings": {
+          "cutout": {
+            "threshold": null,
+            "seams": null,
+            "rim": true,
+            "source": "luma",
+            "alpha": 128
+          },
+          "solid": {
+            "threshold": null,
+            "source": "luma",
+            "alpha": 128
+          },
+          "lines": {
+            "threshold": null,
+            "thickness": 1,
+            "darks": 0,
+            "alpha": 128
+          },
+          "stencil": {
+            "cuts": null,
+            "outline": "keep",
+            "edges": 0,
+            "source": "luma",
+            "alpha": 128
+          },
+          "icon": {
+            "detail": 50,
+            "border": "auto",
+            "source": "luma",
+            "alpha": 128
+          },
+          "checker": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "bayer": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "matrix": 4,
+            "source": "luma",
+            "alpha": 128
+          },
+          "hatch": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "direction": "/",
+            "spacing": 3,
+            "source": "luma",
+            "alpha": 128
+          },
+          "atkinson": {
+            "threshold": null,
+            "shading": 100,
+            "diffusion": "atkinson",
+            "source": "luma",
+            "alpha": 128
+          },
+          "noise": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "silhouette": {
+            "alpha": 128
+          }
+        },
+        "family": "full-palette",
+        "paletteId": "preset-edg8",
+        "alphaCut": 128,
+        "alphaMode": "keep",
+        "metric": "rgb",
+        "maxColors": 6,
+        "lastMaxColors": 6,
+        "cleanup": false,
+        "dither": "8x8",
+        "ditherStrength": 70
+      },
+      "after": {
+        "first": "#222323",
+        "second": "#f0f6f0",
+        "none": 0,
+        "style": "cutout",
+        "settings": {
+          "cutout": {
+            "threshold": null,
+            "seams": null,
+            "rim": true,
+            "source": "luma",
+            "alpha": 128
+          },
+          "solid": {
+            "threshold": null,
+            "source": "luma",
+            "alpha": 128
+          },
+          "lines": {
+            "threshold": null,
+            "thickness": 1,
+            "darks": 0,
+            "alpha": 128
+          },
+          "stencil": {
+            "cuts": null,
+            "outline": "keep",
+            "edges": 0,
+            "source": "luma",
+            "alpha": 128
+          },
+          "icon": {
+            "detail": 50,
+            "border": "auto",
+            "source": "luma",
+            "alpha": 128
+          },
+          "checker": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "bayer": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "matrix": 4,
+            "source": "luma",
+            "alpha": 128
+          },
+          "hatch": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "direction": "/",
+            "spacing": 3,
+            "source": "luma",
+            "alpha": 128
+          },
+          "atkinson": {
+            "threshold": null,
+            "shading": 100,
+            "diffusion": "atkinson",
+            "source": "luma",
+            "alpha": 128
+          },
+          "noise": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "silhouette": {
+            "alpha": 128
+          }
+        },
+        "family": "full-palette",
+        "paletteId": "preset-edg8",
+        "alphaCut": 128,
+        "alphaMode": "keep",
+        "metric": "rgb",
+        "maxColors": 6,
+        "lastMaxColors": 6,
+        "cleanup": false,
+        "dither": "8x8",
+        "ditherStrength": 70
+      },
+      "ui": {
+        "rgb": "true",
+        "d8": "true",
+        "strength": "70",
+        "max": "6"
+      },
+      "reset": {
+        "first": "#222323",
+        "second": "#f0f6f0",
+        "none": 0,
+        "style": "cutout",
+        "settings": {
+          "cutout": {
+            "threshold": null,
+            "seams": null,
+            "rim": true,
+            "source": "luma",
+            "alpha": 128
+          },
+          "solid": {
+            "threshold": null,
+            "source": "luma",
+            "alpha": 128
+          },
+          "lines": {
+            "threshold": null,
+            "thickness": 1,
+            "darks": 0,
+            "alpha": 128
+          },
+          "stencil": {
+            "cuts": null,
+            "outline": "keep",
+            "edges": 0,
+            "source": "luma",
+            "alpha": 128
+          },
+          "icon": {
+            "detail": 50,
+            "border": "auto",
+            "source": "luma",
+            "alpha": 128
+          },
+          "checker": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "bayer": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "matrix": 4,
+            "source": "luma",
+            "alpha": 128
+          },
+          "hatch": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "direction": "/",
+            "spacing": 3,
+            "source": "luma",
+            "alpha": 128
+          },
+          "atkinson": {
+            "threshold": null,
+            "shading": 100,
+            "diffusion": "atkinson",
+            "source": "luma",
+            "alpha": 128
+          },
+          "noise": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "silhouette": {
+            "alpha": 128
+          }
+        },
+        "family": "full-palette",
+        "paletteId": "preset-edg8",
+        "alphaCut": 128,
+        "alphaMode": "cut",
+        "metric": "oklab",
+        "maxColors": 0,
+        "lastMaxColors": 16,
+        "cleanup": false,
+        "dither": "none",
+        "ditherStrength": 50
+      }
+    },
+    {
+      "name": "Layout 320x568 touch",
+      "pass": true,
+      "ms": 3190,
+      "vw": 320,
+      "vh": 568,
+      "docW": 320,
+      "rows": 6,
+      "overlaps": [],
+      "strength": {
+        "l": 113,
+        "r": 260.6499938964844,
+        "t": 311,
+        "b": 355,
+        "h": 44
+      },
+      "kids": [
+        {
+          "tag": "LABEL",
+          "l": 27,
+          "r": 105,
+          "t": 318.04998779296875,
+          "b": 347.9499816894531,
+          "sw": 78,
+          "cw": 78
+        },
+        {
+          "tag": "INPUT",
+          "l": 113,
+          "r": 260.6499938964844,
+          "t": 311,
+          "b": 355,
+          "sw": 148,
+          "cw": 148
+        },
+        {
+          "tag": "OUTPUT",
+          "l": 268.6499938964844,
+          "r": 293,
+          "t": 323.8999938964844,
+          "b": 342.1000061035156,
+          "sw": 24,
+          "cw": 24
+        }
+      ],
+      "countShot": true
+    },
+    {
+      "name": "Layout 568x320 touch",
+      "pass": true,
+      "ms": 2996,
+      "vw": 568,
+      "vh": 320,
+      "docW": 568,
+      "rows": 6,
+      "overlaps": [],
+      "strength": {
+        "l": 113,
+        "r": 508.6499938964844,
+        "t": 301,
+        "b": 345,
+        "h": 44
+      },
+      "kids": [
+        {
+          "tag": "LABEL",
+          "l": 27,
+          "r": 105,
+          "t": 308.04998779296875,
+          "b": 337.9499816894531,
+          "sw": 78,
+          "cw": 78
+        },
+        {
+          "tag": "INPUT",
+          "l": 113,
+          "r": 508.6499938964844,
+          "t": 301,
+          "b": 345,
+          "sw": 396,
+          "cw": 396
+        },
+        {
+          "tag": "OUTPUT",
+          "l": 516.6500244140625,
+          "r": 541.0000305175781,
+          "t": 313.8999938964844,
+          "b": 332.1000061035156,
+          "sw": 24,
+          "cw": 24
+        }
+      ],
+      "countShot": true
+    },
+    {
+      "name": "Layout 1280x900",
+      "pass": true,
+      "ms": 3602,
+      "vw": 1280,
+      "vh": 900,
+      "docW": 1280,
+      "rows": 6,
+      "overlaps": [],
+      "strength": {
+        "l": 376,
+        "r": 957.6500244140625,
+        "t": 705,
+        "b": 749,
+        "h": 44
+      },
+      "kids": [
+        {
+          "tag": "LABEL",
+          "l": 290,
+          "r": 368,
+          "t": 712.0499877929688,
+          "b": 741.9499816894531,
+          "sw": 78,
+          "cw": 78
+        },
+        {
+          "tag": "INPUT",
+          "l": 376,
+          "r": 957.6500244140625,
+          "t": 705,
+          "b": 749,
+          "sw": 582,
+          "cw": 582
+        },
+        {
+          "tag": "OUTPUT",
+          "l": 965.6500244140625,
+          "r": 990.0000305175781,
+          "t": 717.9000244140625,
+          "b": 736.1000366210938,
+          "sw": 24,
+          "cw": 24
+        }
+      ],
+      "countShot": true
+    }
+  ],
+  "errors": [],
+  "browserVersion": "153.0",
+  "passed": 9,
+  "failed": [
+    "ENDESGA 8 nearest Cut128: native Save vs oracle + preview",
+    "ENDESGA 8 nearest Keep: native Save vs oracle + preview",
+    "Dither 4x4 50% keep: contract + preview",
+    "Dither 8x8 100% keep: contract + preview",
+    "Dither 2x2 50% cut: contract + preview",
+    "Dither 8x8 100% cut: contract + preview",
+    "RGB matching All, Cleanup Off: exact RGB-nearest oracle",
+    "Download all ZIP: entries, order, oracle/contract",
+    "Keep ZIP with partial-alpha PNG + binary GIF"
+  ]
+}

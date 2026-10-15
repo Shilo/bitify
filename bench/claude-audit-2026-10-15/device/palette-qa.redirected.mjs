@@ -1,0 +1,726 @@
+// Built-app palette regression through real controls, with independent file decoding.
+// npm run build && node bench/palette-qa.mjs dist
+// BROWSER overrides the Chromium executable; PLAYWRIGHT_MODULE overrides its package.
+import assert from 'node:assert/strict';
+import { createServer } from 'node:http';
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { resolve, extname, sep } from 'node:path';
+import { createRequire } from 'node:module';
+import { pathToFileURL } from 'node:url';
+import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
+import { deflateSync, inflateSync, crc32 } from 'node:zlib';
+import { unzipSync } from 'fflate';
+import omggif from 'omggif';
+import { analyze, mask, colorize, unify } from '../../../src/lib/recolor.js';
+import { PRESETS, STYLES, inks } from '../../../src/lib/presets.js';
+import { defaults } from '../../../src/lib/settings.js';
+import { FULL_PRESETS, DEFAULT_FULL_PALETTE } from '../../../src/lib/palette-library.js';
+
+const require = createRequire(import.meta.url);
+let chromium;
+try { ({ chromium } = require(process.env.PLAYWRIGHT_MODULE ?? 'playwright')); }
+catch { ({ chromium } = require('C:/Users/shilo/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright')); }
+const dist = resolve(process.argv[2] ?? 'dist'), scratch = resolve('.tmp/device/palette-qa');
+mkdirSync(scratch, { recursive: true });
+// The unchanged engine is the pre-feature conversion oracle; the file reader
+// below shares no encoder implementation. This assertion detects accidental
+// changes to the oracle itself rather than letting both sides agree on a bug.
+const baselineRef = process.env.BASE_REF ?? 'HEAD';
+// Historical trees keep their actual filenames; only import relocation is normalized.
+const baselineFiles = new Set(execFileSync('git', ['ls-tree', '-r', '--name-only', baselineRef], { encoding: 'utf8' }).trim().split('\n'));
+const baselineText = file => {
+  const path = file === 'recolor.js' && !baselineFiles.has('src/lib/recolor.js') ? 'src/lib/bitify.js' : 'src/lib/' + file;
+  return execFileSync('git', ['show', baselineRef + ':' + path], { encoding: 'utf8' }).replaceAll('\r\n', '\n').replaceAll("from './bitify.js'", "from './recolor.js'");
+};
+for (const file of ['recolor.js', 'presets.js', 'settings.js']) {
+  assert.equal(readFileSync(`src/lib/${file}`, 'utf8').replaceAll('\r\n', '\n'), baselineText(file), `Legacy ${file} differs from baseline`);
+}
+// Byte compatibility uses the old encoders themselves, not today's encoder
+// on both sides. Only the PNG helper's immutable hex parser import is relocated.
+writeFileSync(resolve(scratch,'baseline-save.mjs'),baselineText('save.js').replace("from './recolor.js'","from '../../../src/lib/recolor.js'"));
+writeFileSync(resolve(scratch,'baseline-gif.mjs'),execFileSync('git',['show',`${baselineRef}:src/lib/gif.js`],{encoding:'utf8'}));
+// Snapshot encoder dependencies from the same tree, preserving their historical
+// relative imports. Today's export helpers must not become their own oracle.
+for (const path of baselineFiles) {
+  if (!/^src\/lib\/[^/]+\.js$/.test(path) || path.endsWith('.test.js')) continue;
+  writeFileSync(resolve(scratch, path.slice('src/lib/'.length)), execFileSync('git', ['show', baselineRef + ':' + path], { encoding: 'utf8' }));
+}
+const { pngBytes: baselinePngBytes } = await import(pathToFileURL(resolve(scratch,'baseline-save.mjs')));
+const { encodeGif: baselineEncodeGif } = await import(pathToFileURL(resolve(scratch,'baseline-gif.mjs')));
+
+function pngChunk(type, data) {
+  const body = Buffer.concat([Buffer.from(type), data]), result = Buffer.alloc(body.length + 8);
+  result.writeUInt32BE(data.length); body.copy(result, 4); result.writeUInt32BE(crc32(body), body.length + 4); return result;
+}
+function sourcePng(w, h, pixels) {
+  const head = Buffer.alloc(13); head.writeUInt32BE(w); head.writeUInt32BE(h, 4); head.set([8, 6, 0, 0, 0], 8);
+  const rows = Buffer.alloc((w * 4 + 1) * h);
+  for (let y = 0; y < h; y++) rows.set(pixels.subarray(y * w * 4, (y + 1) * w * 4), y * (w * 4 + 1) + 1);
+  return Buffer.concat([Buffer.from([137,80,78,71,13,10,26,10]), pngChunk('IHDR', head), pngChunk('sRGB', Buffer.from([0])), pngChunk('IDAT', deflateSync(rows)), pngChunk('IEND', Buffer.alloc(0))]);
+}
+function readPng(bytes) {
+  bytes = Buffer.from(bytes); assert.deepEqual([...bytes.subarray(0, 8)], [137,80,78,71,13,10,26,10]);
+  const chunks = new Map();
+  for (let at = 8; at < bytes.length;) {
+    const length = bytes.readUInt32BE(at), body = bytes.subarray(at + 4, at + 8 + length);
+    assert.equal(crc32(body), bytes.readUInt32BE(at + 8 + length), 'PNG CRC');
+    const type = body.subarray(0, 4).toString();
+    if (type === 'IDAT') chunks.set(type, Buffer.concat([chunks.get(type) ?? Buffer.alloc(0), body.subarray(4)]));
+    else chunks.set(type, body.subarray(4));
+    at += length + 12;
+  }
+  const head = chunks.get('IHDR'), w = head.readUInt32BE(0), h = head.readUInt32BE(4), depth = head[8], type = head[9];
+  assert.ok(type === 3 || type === 6 || type === 2); assert.equal(head[12], 0);
+  const palette = chunks.get('PLTE'), alpha = chunks.get('tRNS'), raw = inflateSync(chunks.get('IDAT'));
+  const rowBytes = Math.ceil(w * (type === 6 ? 32 : type === 2 ? 24 : depth) / 8), stride = rowBytes + 1;
+  const bpp = type === 6 ? 4 : type === 2 ? 3 : 1, unfiltered = new Uint8Array(rowBytes * h), pixels = new Uint8Array(w * h * 4);
+  assert.equal(raw.length, stride * h);
+  const paeth = (a,b,c) => { const p = a + b - c, da = Math.abs(p - a), db = Math.abs(p - b), dc = Math.abs(p - c); return da <= db && da <= dc ? a : db <= dc ? b : c; };
+  for (let y = 0; y < h; y++) {
+    const filter = raw[y * stride]; assert.ok(filter <= 4);
+    for (let x = 0; x < rowBytes; x++) {
+      const at = y * rowBytes + x, a = x < bpp ? 0 : unfiltered[at - bpp], b = y ? unfiltered[at - rowBytes] : 0, c = y && x >= bpp ? unfiltered[at - rowBytes - bpp] : 0;
+      const predictor = filter === 0 ? 0 : filter === 1 ? a : filter === 2 ? b : filter === 3 ? Math.floor((a + b) / 2) : paeth(a,b,c);
+      unfiltered[at] = (raw[y * stride + 1 + x] + predictor) & 255;
+    }
+    for (let x = 0; x < w; x++) {
+      const p = (y * w + x) * 4;
+      if (type === 6) pixels.set(unfiltered.subarray(y * rowBytes + x * 4, y * rowBytes + 4 + x * 4), p);
+      else if (type === 2) { pixels.set(unfiltered.subarray(y * rowBytes + x * 3, y * rowBytes + 3 + x * 3), p); pixels[p + 3] = 255; }
+      else {
+        const bit = x * depth, index = (unfiltered[y * rowBytes + (bit >> 3)] >> (8 - depth - bit % 8)) & ((1 << depth) - 1);
+        const a = alpha?.[index] ?? 255;
+        if (a) pixels.set(palette.subarray(index * 3, index * 3 + 3), p);
+        pixels[p + 3] = a;
+      }
+      if (!pixels[p + 3]) pixels[p] = pixels[p + 1] = pixels[p + 2] = 0;
+    }
+  }
+  return { w, h, depth, type, pixels };
+}
+function readGif(bytes) {
+  const reader = new omggif.GifReader(bytes), frames = [];
+  for (let i = 0; i < reader.numFrames(); i++) {
+    const info = reader.frameInfo(i), pixels = new Uint8Array(reader.width * reader.height * 4);
+    assert.equal(info.disposal, 2); reader.decodeAndBlitFrameRGBA(i, pixels);
+    frames.push({ pixels, delay: info.delay * 10 });
+  }
+  return { w: reader.width, h: reader.height, loop: reader.loopCount(), frames };
+}
+function hash(bytes) { let n = 2166136261; for (const byte of bytes) n = Math.imul(n ^ byte, 16777619); return n >>> 0; }
+function samePixels(actual, expected, label) { assert.equal(actual.length, expected.length, label); for (let i = 0; i < actual.length; i++) assert.equal(actual[i], expected[i], `${label} byte${i}`); }
+
+// Separate scalar Oklab/encoded-RGB reference without the implementation's cache,
+// prepared palette or quantizer. Exact RGB is checked first; ties keep index0.
+function lab(r, g, b) {
+  const linear = value => { const v = value / 255; return v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; };
+  r = linear(r); g = linear(g); b = linear(b);
+  const l = Math.cbrt(.4122214708 * r + .5363325363 * g + .0514459929 * b);
+  const m = Math.cbrt(.2119034982 * r + .6806995451 * g + .1073969566 * b);
+  const s = Math.cbrt(.0883024619 * r + .2817188376 * g + .6299787005 * b);
+  return [.2104542553 * l + .7936177850 * m - .0040720468 * s, 1.9779984951 * l - 2.4285922050 * m + .4505937099 * s, .0259040371 * l + .7827717662 * m - .8086757660 * s];
+}
+function nearestReference(original, colors, alphaCut = 128, metric = 'oklab') {
+  const rgb = colors.map(hex => [1,3,5].map(at => parseInt(hex.slice(at, at + 2), 16))), labs = rgb.map(v => metric === 'rgb' ? v : lab(...v));
+  const output = new Uint8Array(original.data.length);
+  for (let p = 0; p < output.length; p += 4) {
+    const data = original.data;
+    if (data[p + 3] === 0 || data[p + 3] < alphaCut) continue;
+    let chosen = rgb.findIndex(v => v[0] === data[p] && v[1] === data[p + 1] && v[2] === data[p + 2]);
+    if (chosen < 0) {
+      const value = metric === 'rgb' ? [data[p], data[p + 1], data[p + 2]] : lab(data[p], data[p + 1], data[p + 2]); let best = Infinity;
+      for (let i = 0; i < labs.length; i++) {
+        const distance = labs[i].reduce((sum, v, n) => sum + (v - value[n]) ** 2, 0);
+        if (distance < best) { best = distance; chosen = i; }
+      }
+    }
+    output.set(rgb[chosen], p); output[p + 3] = 255;
+  }
+  return output;
+}
+const w = 17, h = 19, source = new Uint8ClampedArray(w * h * 4);
+for (let y = 0, p = 0; y < h; y++) for (let x = 0; x < w; x++, p += 4) {
+  source[p] = (x * 17 + y * 11) & 255; source[p + 1] = (x * 7 + y * 23) & 255; source[p + 2] = (x * 31 + y * 5) & 255;
+  source[p + 3] = x < 2 || y < 2 || x + y > 30 ? 0 : 255;
+  if (x === 2 && y > 2 && y < 8) { source[p] = source[p + 1] = source[p + 2] = 255; source[p + 3] = [64,127,128,192,255][y - 3]; }
+  if (!source[p + 3]) source[p] = source[p + 1] = source[p + 2] = 0;
+}
+const fixture = { width: w, height: h, data: source }, png = sourcePng(w, h, source), fixturePath = resolve(scratch, 'fixture.png');
+writeFileSync(fixturePath, png);
+const gifBuffer = new Uint8Array(4096), gifWriter = new omggif.GifWriter(gifBuffer, 3, 2, { palette: [0,0xff0000,0x0000ff,0x00ff00], loop: 3 });
+const gifIndices = [[1,0,2,3,0,1],[0,2,0,1,3,0]], gifDelays = [200,70];
+for (let i = 0; i < 2; i++) gifWriter.addFrame(0,0,3,2,gifIndices[i],{transparent:0,disposal:2,delay:gifDelays[i]/10});
+const gifFixture = gifBuffer.subarray(0, gifWriter.end()), gifPath = resolve(scratch, 'walk.gif'); writeFileSync(gifPath, gifFixture);
+const originalGif = gifIndices.map(indices => ({ width: 3, height: 2, data: Uint8ClampedArray.from(indices.flatMap(i => i ? [[255,0,0,255],[0,0,255,255],[0,255,0,255]][i - 1] : [0,0,0,0])) }));
+const results = { legacy: [], full: [], extra: [], consoleErrors: [], baseline: process.env.BASE_REF ?? execFileSync('git', ['rev-parse', 'HEAD'], { encoding:'utf8' }).trim() };
+const TYPES = { '.html':'text/html', '.js':'text/javascript', '.css':'text/css', '.png':'image/png', '.gif':'image/gif', '.svg':'image/svg+xml' };
+const paletteDropPng=sourcePng(2,1,Uint8Array.from([17,34,51,255,68,85,102,255]));
+const server = createServer((request, response) => {
+  const route = new URL(request.url, 'http://localhost').pathname.replace(/^\/colorfetti\//, '/');
+  if(route === '/storage-driver.html') { response.setHeader('Content-Type','text/html'); response.end('<!doctype html><title>Storage event driver</title>'); return; }
+  if(route === '/palette-drop.png' || route === '/palette-drop.ase') { response.setHeader('Content-Type',route.endsWith('.png')?'image/png':'application/octet-stream');response.end(route.endsWith('.png')?paletteDropPng:readFileSync('src/lib/fixtures/palette-import/palette.ase'));return; }
+  const file = resolve(dist, '.' + (route === '/' ? '/index.html' : decodeURIComponent(route)));
+  if (!file.startsWith(dist + sep)) { response.writeHead(403).end(); return; }
+  try { response.setHeader('Content-Type', TYPES[extname(file)] ?? 'application/octet-stream'); response.end(readFileSync(file)); }
+  catch { response.writeHead(404).end(); }
+});
+let browser;
+try {
+  await new Promise(resolve => server.listen(5311, '127.0.0.1', resolve));
+  browser = await chromium.launch({ executablePath: process.env.BROWSER ?? 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe', headless: true, chromiumSandbox: true });
+  const context = await browser.newContext({ viewport: { width:1280,height:900 }, permissions:['clipboard-read','clipboard-write'], acceptDownloads:true });
+  await context.addInitScript(() => { if (!localStorage.getItem('colorfetti')) localStorage.setItem('colorfetti', '{}'); });
+  const page = await context.newPage(); page.setDefaultTimeout(10000);
+  page.on('pageerror', error => results.consoleErrors.push(error.message));
+  await page.goto(`http://127.0.0.1:${server.address().port}/colorfetti/`);
+  await page.locator('input[type=file][accept="image/*"]').setInputFiles(fixturePath);
+  await page.locator('.tiles .tile canvas').waitFor();
+  const stored = () => page.evaluate(() => JSON.parse(localStorage.getItem('colorfetti')));
+  const paletteButton = () => page.locator('.dock button[aria-label="Palette"]');
+  async function openPalette() { if (await paletteButton().getAttribute('aria-expanded') !== 'true') await paletteButton().click(); }
+  async function closePanel() { if (await paletteButton().getAttribute('aria-expanded') === 'true') await paletteButton().click(); else if (await page.getByRole('button',{name:'Style',exact:true}).count() && await page.getByRole('button',{name:'Style',exact:true}).getAttribute('aria-expanded') === 'true') await page.getByRole('button',{name:'Style',exact:true}).click(); }
+  async function chooseStyle(key, name) {
+    const button = page.getByRole('button',{name:'Style',exact:true});
+    if (await button.getAttribute('aria-expanded') !== 'true') await button.click();
+    await page.locator('.style-panel button[aria-haspopup=true]').click();
+    await page.getByRole('group',{name:'Style',exact:true}).getByRole('button',{name,exact:true}).click();
+    await page.waitForFunction(key => JSON.parse(localStorage.getItem('colorfetti')).style === key, key);
+    await closePanel();
+  }
+  async function tileMatches(expected, width = w, height = h) {
+    await page.waitForFunction(({value,width,height}) => {
+      const canvas = document.querySelector('.tiles .tile canvas'); if (!canvas || canvas.width !== width || canvas.height !== height) return false;
+      let result = 2166136261; for (const byte of canvas.getContext('2d').getImageData(0,0,width,height).data) result = Math.imul(result ^ byte,16777619);
+      return (result >>> 0) === value;
+    }, {value:hash(expected),width,height});
+  }
+  async function download(button, expectedName) {
+    const next = page.waitForEvent('download'); await button.click(); const file = await next;
+    assert.equal(file.suggestedFilename(), expectedName); return readFileSync(await file.path());
+  }
+  async function copy(button) {
+    await button.click(); await page.waitForFunction(() => document.querySelector('.glass-toast__text')?.textContent.includes('copied'));
+    return Buffer.from(await page.evaluate(async () => { const items = await navigator.clipboard.read(); const blob = await items[0].getType('image/png'); return [...new Uint8Array(await blob.arrayBuffer())]; }));
+  }
+  const analysis = analyze(fixture);
+  for (const palette of process.env.SKIP_LEGACY_MATRIX === '1' ? [] : PRESETS) {
+    await openPalette(); await page.getByRole('group',{name:'Palettes',exact:true}).getByRole('button',{name:palette.name,exact:true}).click();
+    for (const [key,name] of STYLES) {
+      await chooseStyle(key,name); const state = await stored();
+      assert.equal(state.first,palette.dark); assert.equal(state.second,palette.light); assert.equal(state.none,0); assert.deepEqual(state.settings[key],defaults(key));
+      const pixels = colorize(mask(analysis,key,defaults(key)),palette.dark,palette.light);
+      await tileMatches(pixels);
+      const toggle = page.getByRole('button',{name:`${name} conversion`,exact:true});
+      if (results.legacy.length % 2 === 0) { await toggle.click(); assert.equal(await toggle.getAttribute('aria-pressed'),'false'); await tileMatches(source); }
+      const bytes = await download(page.getByRole('button',{name:'Save fixture.png',exact:true}),'fixture-1bit.png');
+      const decoded = readPng(bytes); assert.equal(decoded.w,w); assert.equal(decoded.h,h); samePixels(decoded.pixels,pixels,`${palette.name}/${name}`);
+      assert.deepEqual(bytes,Buffer.from(baselinePngBytes({mask:mask(analysis,key,defaults(key)),w,h,first:palette.dark,second:palette.light})), 'Legacy PNG bytes changed');
+      results.legacy.push({palette:palette.name,style:name,hash:hash(decoded.pixels)});
+      if (await toggle.getAttribute('aria-pressed') === 'false') await toggle.click();
+    }
+    console.log(`Legacy ${palette.name}: all11 styles passed.`);
+  }
+  console.log(`Legacy matrix: ${results.legacy.length} independently decoded exports passed.`);
+
+  // Custom pair, None, Swap (None follows its color), remembered settings,
+  // copy and save while Original is shown use the same conversion.
+  await chooseStyle('solid','Solid');
+  await page.getByLabel('Color for lines and dark pixels',{exact:true}).fill('#123456');
+  await page.getByLabel('Color for fill and light pixels',{exact:true}).fill('#fedcba');
+  await openPalette(); await page.getByRole('button',{name:'Transparent outlines and dark areas',exact:true}).click(); await closePanel();
+  await page.getByRole('button',{name:'Swap colors',exact:true}).click();
+  let state = await stored(); assert.equal(state.first,'#fedcba'); assert.equal(state.second,'#123456'); assert.equal(state.none,2);
+  await page.getByRole('button',{name:'Style',exact:true}).click();
+  await page.getByRole('slider',{name:'Threshold',exact:true}).fill('100');
+  await closePanel(); state = await stored(); assert.equal(state.settings.solid.threshold,100);
+  let [first,second] = inks(state.first,state.second,state.none,state.style), expected = colorize(mask(analysis,'solid',state.settings.solid),first,second);
+  await tileMatches(expected); await page.getByRole('button',{name:'Solid conversion',exact:true}).click();
+  samePixels(readPng(await copy(page.getByRole('button',{name:'Copy fixture.png',exact:true}))).pixels,expected,'Legacy custom clipboard');
+  samePixels(readPng(await download(page.getByRole('button',{name:'Save image',exact:true}),'fixture-1bit.png')).pixels,expected,'Legacy custom Save image');
+  await chooseStyle('cutout','Cutout'); await chooseStyle('solid','Solid'); assert.equal((await stored()).settings.solid.threshold,100);
+  results.extra.push('Legacy custom colors/None/Swap/settings memory/Original/copy/single-save');
+
+  await openPalette(); await page.getByRole('group',{name:'Color system',exact:true}).getByRole('button',{name:'Palette',exact:true}).click();
+  assert.equal(FULL_PRESETS.length,11,'Expected all eleven published full presets');
+  assert.deepEqual(FULL_PRESETS.map(palette=>palette.colors.length),[64,32,16,16,8,8,4,4,2,2,2],'Preset order/counts changed');
+  assert.equal(DEFAULT_FULL_PALETTE.name,'ENDESGA 32','Unexpected default full palette');
+  assert.equal((await stored()).paletteId,DEFAULT_FULL_PALETTE.id,'First family switch lost the ENDESGA 32 default');
+  assert.deepEqual(await page.getByRole('group',{name:'Full palettes',exact:true}).locator('button').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('aria-label'))),['Auto', ...FULL_PRESETS.map(palette=>palette.name)],'Full preset rail order differs from published order');
+  for (const palette of FULL_PRESETS) {
+    await openPalette(); await page.getByRole('group',{name:'Full palettes',exact:true}).getByRole('button',{name:palette.name,exact:true}).click(); await closePanel();
+    assert.equal((await stored()).paletteId,palette.id); expected = nearestReference(fixture,palette.colors);
+    await tileMatches(expected); await page.getByRole('button',{name:`${palette.name} conversion`,exact:true}).click(); await tileMatches(source);
+    const decoded = readPng(await download(page.getByRole('button',{name:'Save fixture.png',exact:true}),'fixture-palette.png'));
+    assert.equal(decoded.w,w); assert.equal(decoded.h,h); samePixels(decoded.pixels,expected,palette.name);
+    samePixels(readPng(await copy(page.getByRole('button',{name:'Copy fixture.png',exact:true}))).pixels,expected,`${palette.name} clipboard`);
+    results.full.push({palette:palette.name,colors:palette.colors.length,hash:hash(decoded.pixels)});
+    await page.getByRole('button',{name:`${palette.name} conversion`,exact:true}).click();
+    await openPalette();await page.getByRole('button',{name:'Edit palette',exact:true}).click();
+    const presetCopy=page.getByRole('dialog',{name:'Make a palette copy',exact:true});await presetCopy.waitFor();
+    assert.deepEqual(await presetCopy.locator('.palette-review-swatch').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('aria-label').split(' ').at(-1))),palette.colors,`${palette.name} copy review swatches changed order/colors`);
+    const hexDownload=page.waitForEvent('download');await presetCopy.getByRole('button',{name:'HEX backup',exact:true}).click();
+    assert.equal(readFileSync(await (await hexDownload).path(),'utf8'),palette.colors.join('\n')+'\n',`${palette.name} full copy backup`);
+    await presetCopy.getByRole('button',{name:'Cancel',exact:true}).click();await presetCopy.waitFor({state:'detached'});await closePanel();
+    assert.equal((await stored()).paletteId,palette.id,'Canceling preset copy changed active palette');
+  }
+  console.log(`Full matrix: ${results.full.length} independently decoded exports and clipboard PNGs passed.`);
+
+  // Retained coverage for the optional matching choice: the scalar reference
+  // performs encoded RGB distance, independent of the production converter.
+  results.rgb = [];
+  for (const palette of FULL_PRESETS) {
+    await openPalette(); await page.getByRole('group',{name:'Full palettes',exact:true}).getByRole('button',{name:palette.name,exact:true}).click(); await closePanel();
+    await page.getByRole('button',{name:'Palette settings',exact:true}).click();
+    await page.getByRole('button',{name:'RGB matching',exact:true}).click();
+    assert.equal((await stored()).metric,'rgb');assert.equal(await page.getByRole('button',{name:'RGB matching',exact:true}).getAttribute('aria-pressed'),'true');
+    await page.getByRole('button',{name:'Palette settings',exact:true}).click();
+    const rgbExpected = nearestReference(fixture,palette.colors,128,'rgb'); await tileMatches(rgbExpected);
+    samePixels(readPng(await download(page.getByRole('button',{name:'Save fixture.png',exact:true}),'fixture-palette.png')).pixels,rgbExpected,`${palette.name} RGB PNG`);
+    samePixels(readPng(await copy(page.getByRole('button',{name:'Copy fixture.png',exact:true}))).pixels,rgbExpected,`${palette.name} RGB clipboard`);
+    results.rgb.push({palette:palette.name,hash:hash(rgbExpected)});
+  }
+  await openPalette();await page.getByRole('group',{name:'Color system',exact:true}).getByRole('button',{name:'1-bit',exact:true}).click();assert.equal((await stored()).metric,'rgb');
+  await page.getByRole('group',{name:'Color system',exact:true}).getByRole('button',{name:'Palette',exact:true}).click();await closePanel();assert.equal((await stored()).metric,'rgb');
+  await page.getByRole('button',{name:'Palette settings',exact:true}).click();await page.getByRole('button',{name:'Reset palette settings',exact:true}).click();
+  assert.equal((await stored()).metric,'oklab');assert.equal((await stored()).alphaCut,128);await page.getByRole('button',{name:'Palette settings',exact:true}).click();
+  results.extra.push('Eleven full presets RGB preview/PNG/Copy match independent reference; ordered copy swatches/HEX backups preserve every entry; family retains metric and Reset restores Oklab/cut128');
+
+  // Minimum two on the two-color preset uses its complete unchanged palette.
+  const twoPixels = nearestReference(fixture, FULL_PRESETS.at(-1).colors, 128, 'rgb');
+  await page.getByRole('button', { name: 'Palette settings', exact: true }).click();
+  await page.getByRole('button', { name: 'RGB matching', exact: true }).click();
+  const maximum = page.getByRole('spinbutton', { name: 'Max colors value', exact: true });
+  assert.equal(await maximum.getAttribute('min'),'2');
+  assert.equal(await maximum.getAttribute('placeholder'), String(FULL_PRESETS.at(-1).colors.length));
+  await maximum.fill('2'); await maximum.press('Enter'); assert.equal((await stored()).maxColors, 2);
+  for(const invalid of ['1','257']) { await maximum.fill(invalid); await maximum.press('Enter'); assert.equal(await maximum.inputValue(), '2'); }
+  await closePanel(); await tileMatches(twoPixels);
+  samePixels(readPng(await download(page.getByRole('button', { name: 'Save fixture.png', exact: true }), 'fixture-palette.png')).pixels, twoPixels, 'Max colors minimum-two PNG');
+  samePixels(readPng(await copy(page.getByRole('button', { name: 'Copy fixture.png', exact: true }))).pixels, twoPixels, 'Max colors minimum-two clipboard');
+  await page.getByRole('button', { name: 'Palette settings', exact: true }).click();
+  await maximum.fill(''); await maximum.press('Enter'); assert.equal((await stored()).maxColors, 0);
+  await page.getByRole('button', { name: 'Reset palette settings', exact: true }).click();
+  state = await stored(); assert.equal(state.maxColors, 0); assert.equal(state.lastMaxColors, 16); assert.equal(state.metric, 'oklab');
+  await closePanel(); await tileMatches(nearestReference(fixture, FULL_PRESETS.at(-1).colors));
+  results.extra.push('Max colors minimum-two/invalid/empty inputs, unchanged two-color preview/PNG/Copy, and All/remembered16 reset');
+
+  // Palette-sized controls must never write their bounded display back over a
+  // larger persisted preference, including native number blur and a reload.
+  const settingsButton = page.getByRole('button', {name:'Palette settings', exact:true});
+  const limitRange = page.getByRole('slider', {name:'Max colors', exact:true});
+  async function limitPalette(name, size) {
+    await openPalette();
+    await page.getByRole('group', {name:'Full palettes', exact:true}).getByRole('button', {name, exact:true}).click();
+    await closePanel(); await settingsButton.click();
+    assert.equal(await limitRange.getAttribute('max'), String(size));
+    assert.equal(await maximum.getAttribute('max'), String(size));
+  }
+  await limitPalette('Resurrect 64',64);
+  await maximum.fill('64'); await maximum.press('Enter');
+  for (const [name,size] of [['Ice Cream GB',4],['PICO-8',16],['Resurrect 64',64]]) {
+    await limitPalette(name,size); assert.equal(await maximum.inputValue(),String(size));
+    await maximum.focus(); await maximum.press('Tab');
+    assert.equal((await stored()).maxColors,64); assert.equal((await stored()).lastMaxColors,64);
+  }
+  await limitPalette('Ice Cream GB',4);
+  await page.reload(); await page.getByRole('button',{name:'Add images',exact:true}).first().waitFor();
+  await settingsButton.click(); assert.equal(await maximum.inputValue(),'4'); assert.equal((await stored()).maxColors,64);
+  await maximum.fill('5'); await maximum.press('Enter'); assert.equal(await maximum.inputValue(),'4'); assert.equal((await stored()).maxColors,64);
+  await maximum.fill('3'); await maximum.press('Enter'); assert.equal((await stored()).maxColors,3);
+  await page.getByRole('button',{name:'Use all palette colors',exact:true}).click();
+  for (const [name,size] of [['Paper',2],['Resurrect 64',64]]) {
+    await limitPalette(name,size); assert.equal(await maximum.inputValue(),'');
+    assert.equal(await limitRange.inputValue(),String(size));
+    assert.equal(await maximum.getAttribute('placeholder'),String(size));
+    assert.equal((await stored()).maxColors,0); assert.equal((await stored()).lastMaxColors,3);
+  }
+  await page.getByRole('button',{name:'Reset palette settings',exact:true}).click();
+  await limitPalette(FULL_PRESETS.at(-1).name,FULL_PRESETS.at(-1).colors.length);
+  await settingsButton.click();
+  await page.locator('input[type=file][accept="image/*"]').setInputFiles(fixturePath);
+  // setInputFiles only dispatches change; it does not await asynchronous image
+  // decoding/publication. Finish this import before starting another batch so
+  // the intended fixture-first wall does not race the faster GIF decode.
+  await page.getByRole('button',{name:'Save fixture.png',exact:true}).waitFor();
+  results.extra.push('Palette-sized slider/number, untouched blur, small-palette reload and invalid edit retain64; explicit3 and All remember3 across palette switches');
+
+  // Full GIF: source compositing, preserved delays/loop, first-frame clipboard,
+  // actual worker asset loaded under a deployment subpath, and mixed ZIP.
+  await page.locator('input[type=file][accept="image/*"]').setInputFiles(gifPath);
+  await page.getByRole('button',{name:'Save walk.gif',exact:true}).waitFor();
+  const active = FULL_PRESETS.at(-1), gifExpected = originalGif.map(frame => nearestReference(frame,active.colors));
+  const gif = readGif(await download(page.getByRole('button',{name:'Save walk.gif',exact:true}),'walk-palette.gif'));
+  assert.deepEqual([gif.w,gif.h,gif.loop,gif.frames.length],[3,2,3,2]);
+  for (let i=0;i<2;i++) { assert.equal(gif.frames[i].delay,gifDelays[i]); samePixels(gif.frames[i].pixels,gifExpected[i],`Full GIF frame${i}`); }
+  samePixels(readPng(await copy(page.getByRole('button',{name:'Copy walk.gif',exact:true}))).pixels,gifExpected[0],'GIF first-frame clipboard');
+  const wallNames = () => page.locator('.tiles > .tile .cap .name').allTextContents();
+  const exportOrder = (names, family) => names.map(name => name.replace(/\.[^.]+$/, '') + (family === 'full-palette' ? '-palette' : '-1bit') + (/\.gif$/i.test(name) ? '.gif' : '.png'));
+  const fullZipWall = await wallNames();
+  assert.deepEqual(fullZipWall,['fixture.png','walk.gif'],'Sequential imports must append in wall order');
+  const zip = unzipSync(await download(page.getByRole('button',{name:'Save all images',exact:true}),'colorfetti.zip'));
+  assert.deepEqual(Object.keys(zip),exportOrder(fullZipWall,'full-palette'),'ZIP must preserve the captured wall order');
+  samePixels(readPng(zip['fixture-palette.png']).pixels,nearestReference(fixture,active.colors),'ZIP full still');
+  samePixels(readGif(zip['walk-palette.gif']).frames[1].pixels,gifExpected[1],'ZIP full GIF');
+  results.extra.push('Full GIF exact frames/delays/loop/first-frame copy and mixed ZIP');
+
+  await openPalette(); await page.getByRole('group',{name:'Color system',exact:true}).getByRole('button',{name:'1-bit',exact:true}).click(); await closePanel();
+  state = await stored(); assert.equal(state.style,'solid'); assert.equal(state.none,2); assert.equal(state.settings.solid.threshold,100);
+  const frames = originalGif.map(frame => analyze(frame)); unify(frames); [first,second] = inks(state.first,state.second,state.none,state.style);
+  const legacyGifBytes = await download(page.getByRole('button',{name:'Save walk.gif',exact:true}),'walk-1bit.gif');
+  const legacyGif = readGif(legacyGifBytes);
+  assert.deepEqual(legacyGifBytes,Buffer.from(baselineEncodeGif({w:3,h:2,first,second,loop:3,frames:frames.map((frame,i)=>({mask:mask(frame,'solid',state.settings.solid),delay:gifDelays[i]}))})),'Legacy GIF bytes changed');
+  for (let i=0;i<2;i++) samePixels(legacyGif.frames[i].pixels,colorize(mask(frames[i],'solid',state.settings.solid),first,second),`Legacy GIF frame${i}`);
+  const legacyZipWall = await wallNames();
+  assert.deepEqual(legacyZipWall,fullZipWall,'Family changes must preserve wall order');
+  const legacyZip = unzipSync(await download(page.getByRole('button',{name:'Save all images',exact:true}),'colorfetti.zip'));
+  assert.deepEqual(Object.keys(legacyZip),exportOrder(legacyZipWall,'two-color'),'Legacy ZIP must preserve the captured wall order');
+  samePixels(readPng(legacyZip['fixture-1bit.png']).pixels,colorize(mask(analysis,'solid',state.settings.solid),first,second),'ZIP legacy still');
+  results.extra.push('Family round-trip preserves legacy custom colors/None/style settings, legacy GIF and mixed ZIP');
+
+  // A2MP save takes the busy50ms path. Changing palette and removing an image
+  // during the job must not change the conversion or the requested batch.
+  const bigW = 1600, bigH = 1250, bigPixels = new Uint8ClampedArray(bigW * bigH * 4);
+  for (let p = 0; p < bigPixels.length; p += 4) bigPixels.set((p / 4) % 17 ? [255,0,77,255] : [41,173,255,255],p);
+  const bigPath = resolve(scratch,'big.png'); writeFileSync(bigPath,sourcePng(bigW,bigH,bigPixels));
+  await openPalette(); await page.getByRole('group',{name:'Color system',exact:true}).getByRole('button',{name:'Palette',exact:true}).click();
+  await page.getByRole('group',{name:'Full palettes',exact:true}).getByRole('button',{name:'PICO-8',exact:true}).click();
+  await page.locator('input[type=file][accept="image/*"]').setInputFiles(bigPath);
+  await page.getByRole('button',{name:'Save big.png',exact:true}).waitFor(); await openPalette();
+  let pendingDownload = page.waitForEvent('download');
+  // Invoke real UI handlers in one turn so the change is guaranteed to precede
+  // the busy wait, without Playwright's pointer/scroll waits consuming50ms.
+  await page.evaluate(() => {
+    document.querySelector('button[aria-label="Save big.png"]').click();
+    document.querySelector('.palette-rail button[aria-label="DawnBringer 16"]').click();
+  });
+  let downloaded = await pendingDownload;
+  assert.equal(downloaded.suggestedFilename(),'big-palette.png');
+  let large = readPng(readFileSync(await downloaded.path())); assert.deepEqual([large.w,large.h],[bigW,bigH]);
+  samePixels(large.pixels,bigPixels,'2MP save click palette snapshot');
+  await openPalette(); await page.getByRole('group',{name:'Full palettes',exact:true}).getByRole('button',{name:'PICO-8',exact:true}).click();
+  const snapshotZipWall = await wallNames();
+  assert.deepEqual(snapshotZipWall,['fixture.png','walk.gif','big.png'],'Completed large import must append to the wall');
+  pendingDownload = page.waitForEvent('download');
+  await page.evaluate(() => {
+    document.querySelector('button[aria-label="Save all images"]').click();
+    document.querySelector('button[aria-label="Remove big.png"]').click();
+    document.querySelector('.palette-rail button[aria-label="DawnBringer 16"]').click();
+  });
+  downloaded = await pendingDownload; assert.equal(downloaded.suggestedFilename(),'colorfetti.zip');
+  const snapshotZip = unzipSync(readFileSync(await downloaded.path()));
+  assert.deepEqual(Object.keys(snapshotZip),exportOrder(snapshotZipWall,'full-palette'),'ZIP must preserve the gesture wall including later removals');
+  samePixels(readPng(snapshotZip['fixture-palette.png']).pixels,nearestReference(fixture,FULL_PRESETS.find(p=>p.id==='preset-pico8').colors),'ZIP palette snapshot');
+  samePixels(readPng(snapshotZip['big-palette.png']).pixels,bigPixels,'ZIP removed-image snapshot');
+  samePixels(readGif(snapshotZip['walk-palette.gif']).frames[1].pixels,nearestReference(originalGif[1],FULL_PRESETS.find(p=>p.id==='preset-pico8').colors),'ZIP GIF palette snapshot');
+  assert.equal(await page.getByRole('button',{name:'Save big.png',exact:true}).count(),0);
+  results.extra.push('2MP save preserves click palette; ZIP preserves palette and removed-image snapshots');
+
+  // A valid source GIF can use different local tables in different frames.
+  // Its converted global union can require256 opaque colors plus empty. No
+  // individual file or prefix ZIP may be downloaded; a255-color draft is shown.
+  const limitColors = Array.from({length:256},(_,i) => `#${i.toString(16).padStart(2,'0')}00ff`);
+  const limitBuffer = new Uint8Array(65536), limitWriter = new omggif.GifWriter(limitBuffer,256,1,{palette:[0,0xffffff],loop:0});
+  limitWriter.addFrame(0,0,256,1,Uint8Array.from(Array(256).keys()),{palette:limitColors.map(hex=>parseInt(hex.slice(1),16)),delay:10,disposal:2});
+  limitWriter.addFrame(0,0,256,1,new Uint8Array(256),{palette:[0,0xffffff],transparent:0,delay:10,disposal:2});
+  const limitPath = resolve(scratch,'limit.gif'); writeFileSync(limitPath,limitBuffer.subarray(0,limitWriter.end()));
+  await page.evaluate(colors => {
+    localStorage.setItem('colorfetti-palettes-v1',JSON.stringify({version:1,palettes:[{id:'user-limit',name:'Exact256',colors,revision:1,source:{kind:'custom'}}]}));
+    const state = JSON.parse(localStorage.getItem('colorfetti')); state.family = 'full-palette'; state.paletteId = 'user-limit'; localStorage.setItem('colorfetti',JSON.stringify(state));
+  },limitColors);
+  await page.reload(); await page.locator('input[type=file][accept="image/*"]').setInputFiles([fixturePath,limitPath]);
+  await page.getByRole('button',{name:'Save limit.gif',exact:true}).waitFor();
+  let forbiddenDownloads = 0; const counted = () => forbiddenDownloads++; page.on('download',counted);
+  await page.getByRole('button',{name:'Save all images',exact:true}).click();
+  await page.getByRole('dialog',{name:'Make a palette copy',exact:true}).waitFor();
+  await page.waitForFunction(() => document.querySelector('.glass-toast__text')?.textContent.includes('No file was downloaded.'));
+  assert.equal(forbiddenDownloads,0,'A blocked ZIP downloaded a prefix');
+  assert.equal((await stored()).paletteId,'user-limit','The blocked export changed the active palette');
+  assert.equal(await page.getByRole('button',{name:'Save palette',exact:true}).isDisabled(),true);
+  await page.getByRole('button',{name:'Cancel',exact:true}).click();
+  page.off('download',counted);
+  results.extra.push('256 colors+empty GIF blocks ZIP without download or active palette mutation');
+
+  // A real 6MP/two-frame GIF keeps its asynchronous global-table preflight in
+  // flight while another editor opens. A late failure must inform that editor,
+  // never replace its draft or silently impose the GIF copy's 255-color limit.
+  const raceW = 3000, raceH = 2000, raceBuffer = new Uint8Array(raceW * raceH * 5 + 2048);
+  const raceWriter = new omggif.GifWriter(raceBuffer,raceW,raceH,{palette:limitColors.map(hex=>parseInt(hex.slice(1),16)),loop:0});
+  raceWriter.addFrame(0,0,raceW,raceH,Uint8Array.from({length:raceW*raceH},(_,i)=>i%256),{delay:10,disposal:2});
+  raceWriter.addFrame(0,0,raceW,raceH,new Uint8Array(raceW*raceH),{delay:10,disposal:2,transparent:0});
+  const racePath = resolve(scratch,'editor-race.gif'); writeFileSync(racePath,raceBuffer.subarray(0,raceWriter.end()));
+  const originalRecord = {id:'user-limit',name:'Exact256',colors:limitColors,revision:7,source:{kind:'image',credit:'Original imported RGB set'}};
+  const retryRecord = {...originalRecord,id:'user-retry',name:'Retry256',revision:3,source:{kind:'hex'}};
+  await page.evaluate(records => {
+    localStorage.setItem('colorfetti-palettes-v1',JSON.stringify({version:1,palettes:records}));
+    const state = JSON.parse(localStorage.getItem('colorfetti')); state.family = 'full-palette'; state.paletteId = records[0].id;
+    localStorage.setItem('colorfetti',JSON.stringify(state));
+  },[originalRecord,retryRecord]);
+  await page.reload(); await page.locator('input[type=file][accept="image/*"]').setInputFiles(racePath);
+  await page.getByRole('button',{name:'Save editor-race.gif',exact:true}).waitFor(); await openPalette();
+  forbiddenDownloads = 0; page.on('download',counted);
+  // These are the application's actual handlers. Keeping both clicks in one
+  // task guarantees editor entry during the supported 50ms pre-busy window.
+  await page.evaluate(() => {
+    document.querySelector('button[aria-label="Save editor-race.gif"]').click();
+    const trigger = document.querySelector('button[aria-label="Import palette"]'); trigger.focus(); trigger.click();
+  });
+  const raceEditor = page.locator('dialog.palette-import-modal'); await raceEditor.waitFor();
+  await raceEditor.getByRole('button',{name:'Paste colors',exact:true}).click();
+  await raceEditor.getByRole('textbox',{name:'Colors or Lospec link',exact:true}).fill('#000000 #ffffff');
+  await raceEditor.getByRole('button',{name:'Review colors',exact:true}).click();
+  await raceEditor.getByLabel('Name',{exact:true}).fill('Draft while exporting');
+  await raceEditor.getByRole('alert').waitFor({timeout:30000});
+  assert.equal(await raceEditor.getAttribute('aria-label'),'Import palette','Late failure replaced import editor');
+  assert.equal(await raceEditor.getByLabel('Name',{exact:true}).inputValue(),'Draft while exporting');
+  assert.deepEqual(await raceEditor.locator('.palette-review-swatch').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('aria-label'))),['Select color 1 #000000','Select color 2 #ffffff']);
+  assert.equal(await raceEditor.getByRole('button',{name:'Save palette',exact:true}).isEnabled(),true);
+  assert.match(await raceEditor.getByRole('alert').textContent(),/GIF export using Exact256 .*No file was downloaded\./);
+  assert.equal(await page.locator('dialog[open]').count(),1,'Late failure stacked a replacement modal');
+  assert.equal(forbiddenDownloads,0,'Late failure downloaded a file');
+  assert.deepEqual(await page.evaluate(()=>JSON.parse(localStorage.getItem('colorfetti-palettes-v1')).palettes),[originalRecord,retryRecord]);
+  await raceEditor.getByRole('button',{name:'Cancel',exact:true}).click(); await raceEditor.waitFor({state:'detached'});
+  assert.equal(await page.evaluate(()=>document.activeElement?.getAttribute('aria-label')),'Import palette','Cancel lost the import trigger');
+  await page.waitForTimeout(150); assert.equal(await page.locator('dialog[open]').count(),0,'A queued export modal replaced the cancelled draft');
+
+  // Retry is a new request against the selection now, rather than a queued
+  // request against the failed palette. It still enforces 255 for a GIF copy.
+  await openPalette(); await page.getByRole('group',{name:'Full palettes',exact:true}).getByRole('button',{name:'Retry256',exact:true}).click();
+  await page.getByRole('button',{name:'Save editor-race.gif',exact:true}).click();
+  await page.getByRole('dialog',{name:'Make a palette copy',exact:true}).waitFor({timeout:30000});
+  assert.equal(await raceEditor.getByLabel('Name',{exact:true}).inputValue(),'Retry256 GIF','Retry used the previous failed snapshot');
+  assert.equal(await raceEditor.getByRole('button',{name:'Save palette',exact:true}).isDisabled(),true,'Fresh GIF copy lost its255-color limit');
+  assert.equal((await stored()).paletteId,'user-retry');
+  await raceEditor.getByRole('button',{name:'Cancel',exact:true}).click(); await raceEditor.waitFor({state:'detached'});
+  await page.waitForTimeout(150); assert.equal(await page.locator('dialog[open]').count(),0);
+
+  // A saved 256-color editor remains a normal edit, with its revision and
+  // attribution. Renaming its draft must not rename the failed export notice.
+  await openPalette(); await page.getByRole('group',{name:'Full palettes',exact:true}).getByRole('button',{name:'Exact256',exact:true}).click();
+  await page.evaluate(() => {
+    document.querySelector('button[aria-label="Save editor-race.gif"]').click();
+    const trigger = document.querySelector('button[aria-label="Edit palette"]'); trigger.focus(); trigger.click();
+  });
+  await raceEditor.getByLabel('Name',{exact:true}).fill('Existing256 draft');
+  await raceEditor.getByRole('alert').waitFor({timeout:30000});
+  assert.equal(await raceEditor.getAttribute('aria-label'),'Edit palette');
+  assert.equal(await raceEditor.getByLabel('Name',{exact:true}).inputValue(),'Existing256 draft');
+  assert.match(await raceEditor.getByRole('alert').textContent(),/GIF export using Exact256 /);
+  assert.equal(await raceEditor.getByText('256 colors',{exact:true}).count(),1);
+  assert.equal(await raceEditor.getByRole('button',{name:'Save changes',exact:true}).isEnabled(),true,'Existing editor inherited255-copy restriction');
+  assert.equal(await page.locator('dialog[open]').count(),1);
+  await page.setViewportSize({width:320,height:568});
+  const noticeLayout = await raceEditor.evaluate(dialog=>{
+    const body=dialog.querySelector('.palette-editor-body'),alert=dialog.querySelector('[role=alert]'),r=alert.getBoundingClientRect(),b=body.getBoundingClientRect();
+    return {overflow:body.scrollWidth>body.clientWidth+1,inside:r.left>=b.left-1&&r.right<=b.right+1};
+  });
+  assert.deepEqual(noticeLayout,{overflow:false,inside:true},'Async notice overflows narrow editor');
+  await page.screenshot({path:resolve(scratch,'editor-race-narrow.png')});
+  await page.setViewportSize({width:1280,height:900});
+  // Restore the original name and save unchanged colors. Persisting succeeds
+  // only if original id/revision/source/maxColors all survived the late failure.
+  await raceEditor.getByLabel('Name',{exact:true}).fill(originalRecord.name);
+  await raceEditor.getByRole('button',{name:'Save changes',exact:true}).click(); await raceEditor.waitFor({state:'detached'});
+  assert.equal(await page.evaluate(()=>document.activeElement?.getAttribute('aria-label')),'Edit palette','Save lost the edit trigger');
+  assert.deepEqual(await page.evaluate(()=>JSON.parse(localStorage.getItem('colorfetti-palettes-v1')).palettes),[{...originalRecord,revision:8},retryRecord]);
+  assert.equal(forbiddenDownloads,0,'An editor arbitration failure downloaded a file');
+  await page.waitForTimeout(150); assert.equal(await page.locator('dialog[open]').count(),0);
+  page.off('download',counted);
+  results.extra.push('6MP async GIF failure preserves named import and 256-color saved drafts/notice/focus/source/revision; retry uses current palette and 255-color copy limit');
+
+  // Real storage events come from a second document, rather than dispatching a
+  // fabricated event or reloading away the in-memory session being checked.
+  const storageContext = await browser.newContext({ viewport: { width:1280,height:900 } });
+  const storagePage = await storageContext.newPage(), storageDriver = await storageContext.newPage();
+  storagePage.on('pageerror', error => results.consoleErrors.push(error.message));
+  const storageRecord = { id:'user-storage-witness',name:'Storage witness',revision:1,source:{kind:'custom'},colors:['#123456','#abcdef'] };
+  await storagePage.addInitScript(record => {
+    if(window!==window.top) return;
+    localStorage.setItem('colorfetti-palettes-v1',JSON.stringify({version:1,palettes:[record]}));
+    localStorage.setItem('colorfetti',JSON.stringify({family:'full-palette',paletteId:record.id,metric:'rgb',alphaCut:200,first:'#123456',second:'#abcdef',none:1,style:'bayer',settings:{bayer:{threshold:77,matrix:8}}}));
+  },storageRecord);
+  await storagePage.goto(page.url());
+  // An inert same-origin document has storage access without a second App.
+  await storageDriver.goto(new URL('storage-driver.html',page.url()).href);
+  await storagePage.locator('.dock button[aria-label="Palette"]').click();
+  await storagePage.getByRole('button',{name:'Import palette',exact:true}).click();
+  const storageEditor = storagePage.getByRole('dialog',{name:'Import palette',exact:true});
+  await storageEditor.getByRole('button',{name:'Add colors',exact:true}).click();
+  await storageEditor.getByLabel('New color',{exact:true}).fill('#654321');
+  await storageEditor.getByRole('button',{name:'Add color',exact:true}).click();
+  await storageEditor.getByLabel('Name',{exact:true}).fill('Session witness');
+  await storagePage.evaluate(() => {
+    window.__originalStorageWrite = Storage.prototype.setItem;
+    Storage.prototype.setItem = function(key,value) { if(key==='colorfetti-palettes-v1') throw new DOMException('QA quota','QuotaExceededError'); return window.__originalStorageWrite.call(this,key,value); };
+  });
+  await storageEditor.getByRole('button',{name:'Save palette',exact:true}).click();
+  await storageEditor.getByRole('button',{name:'Use for this session',exact:true}).click();
+  await storageEditor.waitFor({state:'detached'});
+  await storagePage.evaluate(() => { Storage.prototype.setItem=window.__originalStorageWrite; delete window.__originalStorageWrite; window.__storageEvents=[]; addEventListener('storage',event=>window.__storageEvents.push({key:event.key,local:event.storageArea===localStorage})); });
+  const storagePicker = storagePage.locator('.dock button[aria-label="Palette"]');
+  const openStoragePicker = async () => { if(await storagePicker.getAttribute('aria-expanded')!=='true') await storagePicker.click(); };
+  await openStoragePicker();
+  await storagePage.getByRole('group',{name:'Full palettes',exact:true}).getByRole('button',{name:storageRecord.name,exact:true}).click();
+  const settingsBeforeClear = await storagePage.evaluate(()=>JSON.parse(localStorage.getItem('colorfetti')));
+  await storageDriver.evaluate(()=>localStorage.clear());
+  await storagePage.waitForFunction(()=>window.__storageEvents.some(event=>event.key===null&&event.local));
+  await storagePage.getByRole('button',{name:storageRecord.name,exact:true}).waitFor({state:'detached'});
+  assert.match(await storagePage.locator('.full-active-palette').getAttribute('aria-label'),/Selected palette: ENDESGA 32,/,'Clear left the removed palette selected');
+  assert.equal(await storagePage.getByRole('button',{name:'Session witness',exact:true}).count(),1,'Clear discarded the in-memory session');
+  // Change family to make the app persist its current in-memory settings. The
+  // external clear itself must not reset either matching or legacy controls.
+  await storagePage.getByRole('group',{name:'Color system',exact:true}).getByRole('button',{name:'1-bit',exact:true}).click();
+  const settingsAfterClear = await storagePage.evaluate(()=>JSON.parse(localStorage.getItem('colorfetti')));
+  for(const key of ['metric','alphaCut','first','second','none','style','settings']) assert.deepEqual(settingsAfterClear[key],settingsBeforeClear[key],`Clear reset ${key}`);
+  await storagePage.getByRole('group',{name:'Color system',exact:true}).getByRole('button',{name:'Palette',exact:true}).click();
+  await storagePage.getByRole('button',{name:'Session witness',exact:true}).click();
+  const sessionId = await storagePage.evaluate(()=>JSON.parse(localStorage.getItem('colorfetti')).paletteId);
+  await storagePage.getByRole('button',{name:'Edit palette',exact:true}).click();
+  const sessionDraft=storagePage.getByRole('dialog',{name:'Make a palette copy',exact:true});
+  await sessionDraft.getByLabel('Name',{exact:true}).fill('Uncommitted session draft');
+  await sessionDraft.getByRole('button',{name:'Paste colors',exact:true}).click();
+  await sessionDraft.getByLabel('Colors or Lospec link',{exact:true}).fill('#112233 #445566');
+  await sessionDraft.evaluate(dialog=>window.__draftBeforeClear=dialog);
+  await storageDriver.evaluate(()=>localStorage.clear());
+  await storagePage.waitForFunction(()=>window.__storageEvents.filter(event=>event.key===null&&event.local).length===2);
+  assert.match(await storagePage.locator('.full-active-palette').getAttribute('aria-label'),/Selected palette: Session witness,/,'Clear changed an active session palette');
+  assert.equal(await sessionDraft.evaluate(dialog=>dialog===window.__draftBeforeClear&&dialog.open),true,'Clear replaced or closed an open draft');
+  assert.equal(await sessionDraft.getByLabel('Name',{exact:true}).inputValue(),'Uncommitted session draft');
+  assert.equal(await sessionDraft.getByRole('button',{name:'Paste colors',exact:true}).getAttribute('aria-pressed'),'true');
+  assert.equal(await sessionDraft.getByLabel('Colors or Lospec link',{exact:true}).inputValue(),'#112233 #445566');
+  assert.deepEqual(await sessionDraft.locator('.palette-review-swatch').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('aria-label'))),['Select color 1 #654321']);
+  await sessionDraft.getByRole('button',{name:'Cancel',exact:true}).click(); await sessionDraft.waitFor({state:'detached'});
+  await openStoragePicker();
+  await storageDriver.evaluate(record=>localStorage.setItem('colorfetti-palettes-v1',JSON.stringify({version:1,palettes:[record]})),storageRecord);
+  await storagePage.getByRole('button',{name:storageRecord.name,exact:true}).waitFor();
+  const updatedRecord = {...storageRecord,name:'Storage updated',revision:2,colors:['#112233','#445566']};
+  await storageDriver.evaluate(record=>localStorage.setItem('colorfetti-palettes-v1',JSON.stringify({version:1,palettes:[record]})),updatedRecord);
+  await storagePage.getByRole('button',{name:updatedRecord.name,exact:true}).waitFor();
+  assert.equal(await storagePage.getByRole('button',{name:storageRecord.name,exact:true}).count(),0,'Key update retained stale palette');
+  await storagePage.evaluate(() => { const frame=document.createElement('iframe'); frame.id='storage-area-witness'; document.body.append(frame); frame.contentWindow.sessionStorage.setItem('colorfetti-palettes-v1',JSON.stringify({version:1,palettes:[{id:'user-session-area-impostor',name:'Session area impostor',revision:1,source:{kind:'custom'},colors:['#ffffff']}]})); });
+  await storagePage.waitForFunction(()=>window.__storageEvents.some(event=>event.key==='colorfetti-palettes-v1'&&!event.local));
+  assert.equal(await storagePage.getByRole('button',{name:updatedRecord.name,exact:true}).count(),1,'Session storage library-key update replaced persistent palettes');
+  assert.equal(await storagePage.getByRole('button',{name:'Session area impostor',exact:true}).count(),0,'Session storage library-key update entered saved rail');
+  await storagePage.evaluate(()=>document.querySelector('#storage-area-witness').contentWindow.sessionStorage.setItem('colorfetti-palettes-v1',JSON.stringify({version:1,palettes:[]})));
+  await storagePage.waitForFunction(()=>window.__storageEvents.filter(event=>event.key==='colorfetti-palettes-v1'&&!event.local).length===2);
+  assert.equal(await storagePage.getByRole('button',{name:updatedRecord.name,exact:true}).count(),1,'Session storage second library-key update replaced persistent palettes');
+  await storagePage.evaluate(()=>document.querySelector('#storage-area-witness').contentWindow.sessionStorage.removeItem('colorfetti-palettes-v1'));
+  await storagePage.waitForFunction(()=>window.__storageEvents.filter(event=>event.key==='colorfetti-palettes-v1'&&!event.local).length===3);
+  assert.equal(await storagePage.getByRole('button',{name:updatedRecord.name,exact:true}).count(),1,'Session storage library-key removal deleted persistent palettes');
+  await storagePage.evaluate(() => { sessionStorage.setItem('qa-session','present'); document.querySelector('#storage-area-witness').contentWindow.sessionStorage.clear(); });
+  await storagePage.waitForFunction(()=>window.__storageEvents.some(event=>event.key===null&&!event.local));
+  assert.equal(await storagePage.getByRole('button',{name:updatedRecord.name,exact:true}).count(),1,'Session storage clear removed persistent palettes');
+  assert.match(await storagePage.locator('.full-active-palette').getAttribute('aria-label'),/Selected palette: Session witness,/);
+  await storageDriver.evaluate(()=>localStorage.removeItem('colorfetti-palettes-v1'));
+  await storagePage.getByRole('button',{name:updatedRecord.name,exact:true}).waitFor({state:'detached'});
+  await storagePage.getByRole('group',{name:'Color system',exact:true}).getByRole('button',{name:'1-bit',exact:true}).click();
+  assert.equal((await storagePage.evaluate(()=>JSON.parse(localStorage.getItem('colorfetti')))).paletteId,sessionId,'Key remove changed active session identity');
+  results.nativeStorage={events:await storagePage.evaluate(()=>window.__storageEvents),sessionId,settingsBeforeClear,settingsAfterClear,openDraftPreserved:true};
+  await storageContext.close();
+  results.extra.push('Native two-document localStorage clear/update/remove: saved fallback, active session/open draft identity and matching/legacy settings retained; native iframe sessionStorage library-key update/remove/clear ignored');
+
+  // Force genuine asynchronous conversion to remain pending while the native
+  // GIF frame timers run. This reproduces the slow-conversion Original freeze
+  // without relying on a particular machine's CPU speed or sleeping the app.
+  const clockColors = Array.from({length:6},(_,i)=>(10+i*30)<<16|20<<8|30);
+  const clockBytes = new Uint8Array(16384), clockWriter = new omggif.GifWriter(clockBytes,128,128,{palette:[...clockColors,0,0xffffff],loop:0});
+  for(let frame=0;frame<6;frame++) clockWriter.addFrame(0,0,128,128,new Uint8Array(128*128).fill(frame),{delay:18,disposal:2});
+  const clockPath=resolve(scratch,'pending-clock.gif'); writeFileSync(clockPath,clockBytes.subarray(0,clockWriter.end()));
+  const clockContext = await browser.newContext({viewport:{width:900,height:700}});
+  await clockContext.addInitScript(colors => {
+    localStorage.setItem('colorfetti-palettes-v1',JSON.stringify({version:1,palettes:[{id:'user-clock',name:'Clock colors',revision:1,source:{kind:'custom'},colors}]}));
+    localStorage.setItem('colorfetti',JSON.stringify({family:'full-palette',paletteId:'user-clock'}));
+    let clock=0; Object.defineProperty(performance,'now',{value:()=>clock+=10});
+    const Channel=MessageChannel; window.__pendingConversion=[]; window.__holdConversion=true;
+    window.MessageChannel=class extends Channel { constructor(){super();const post=this.port2.postMessage.bind(this.port2);this.port2.postMessage=(...args)=>window.__holdConversion?window.__pendingConversion.push(()=>post(...args)):post(...args);} };
+    window.__releaseConversion=()=>{window.__holdConversion=false;window.__pendingConversion.splice(0).forEach(post=>post());};
+  },clockColors.map(color=>'#'+color.toString(16).padStart(6,'0')));
+  results.pendingAnimation=[];
+  for(const mode of ['wall','viewer']) {
+    const clockPage=await clockContext.newPage(); clockPage.on('pageerror',error=>results.consoleErrors.push(error.message));
+    await clockPage.goto(page.url());
+    await clockPage.locator('input[type=file][accept="image/*"]').setInputFiles(clockPath);
+    await clockPage.getByRole('button',{name:'Save pending-clock.gif',exact:true}).waitFor();
+    await clockPage.waitForFunction(()=>window.__pendingConversion.length>0&&!document.querySelector('.tiles canvas'));
+    await clockPage.getByRole('button',{name:'Clock colors conversion',exact:true}).click();
+    let canvas=clockPage.locator('.tiles canvas');
+    if(mode==='viewer') {
+      await clockPage.getByRole('button',{name:'Preview pending-clock.gif',exact:true}).first().click();
+      canvas=clockPage.locator('dialog.image-viewer canvas');
+    }
+    await canvas.waitFor();
+    const sample=()=>canvas.evaluate(node=>node.getContext('2d').getImageData(0,0,1,1).data[0]);
+    const reds=[await sample()];
+    for(let i=0;i<3;i++){await clockPage.waitForTimeout(205);reds.push(await sample());}
+    assert.ok(new Set(reds).size>1,`${mode}: Original GIF froze behind pending conversion`);
+    assert.ok(reds.every(red=>clockColors.some(color=>(color>>>16)===red)),`${mode}: unexpected Original frame`);
+    assert.ok(await clockPage.evaluate(()=>window.__holdConversion&&window.__pendingConversion.length>0),'Conversion was not actually held');
+    const activeRed=await canvas.evaluate((node,mode)=>{
+      const red=node.getContext('2d').getImageData(0,0,1,1).data[0];
+      document.querySelector(mode==='viewer'?'button[aria-label="Show converted image"]':'button[aria-label="Clock colors conversion"]').click();return red;
+    },mode);
+    await canvas.waitFor({state:'detached'});
+    await clockPage.waitForTimeout(205);
+    assert.equal(await canvas.count(),0,`${mode}: Converted frame appeared before readiness`);
+    await clockPage.evaluate(()=>window.__releaseConversion());
+    await canvas.waitFor(); const releasedRed=await sample();
+    assert.equal(releasedRed,activeRed,`${mode}: stale conversion replaced the current frame`);
+    await clockPage.waitForTimeout(205); const nextRed=await sample();
+    assert.notEqual(nextRed,releasedRed,`${mode}: Converted animation failed to resume`);
+    results.pendingAnimation.push({mode,originalReds:reds,activeRed,releasedRed,nextRed});
+    await clockPage.close();
+  }
+  await clockContext.close();
+  results.extra.push('Built wall/viewer GIF Original advances while conversion yields are held; switching back waits and resumes the exact current frame without stale completion');
+  // Fixed supplied fixture oracle: SHA pins its known modern palette table.
+  // Read raw entry bytes independently; do not call the production ASE parser.
+  const asePath=resolve('src/lib/fixtures/palette-import/palette.ase'),aseBytes=readFileSync(asePath);
+  const aseSha=createHash('sha256').update(aseBytes).digest('hex');
+  assert.equal(aseSha,'f7a97806651302378fb9f4866ba11562d3f7a2f97a6fa825d1f389eed98d8532');
+  assert.equal(aseBytes.readUInt16LE(170),0x2019); assert.deepEqual([172,176,180].map(at=>aseBytes.readUInt32LE(at)),[256,0,255]);
+  const aseExpected=[];
+  for(let i=0;i<256;i++){const at=192+i*6;assert.equal(aseBytes.readUInt16LE(at),0);if(aseBytes[at+5]){const color='#'+aseBytes.subarray(at+2,at+5).toString('hex');if(!aseExpected.includes(color))aseExpected.push(color);}}
+  assert.equal(aseExpected.length,255);
+  const aseContext=await browser.newContext(),asePage=await aseContext.newPage(),aseRequests=[];
+  await asePage.addInitScript(()=>localStorage.setItem('colorfetti',JSON.stringify({family:'full-palette'})));
+  asePage.on('pageerror',error=>results.consoleErrors.push(error.message));
+  asePage.on('request',request=>{if(/\/palette-ase-[^/]+\.js(?:\?|$)/.test(request.url()))aseRequests.push(request.url());});
+  await asePage.goto(page.url());const aseArtworkCount=await asePage.locator('.tiles .tile').count();await asePage.locator('.dock button[aria-label="Palette"]').click();await asePage.getByRole('button',{name:'Import palette',exact:true}).click();
+  const aseEditor=asePage.getByRole('dialog',{name:'Import palette',exact:true}),aseInput=aseEditor.locator('input[type=file]');
+  await aseInput.setInputFiles(fixturePath);await aseEditor.locator('summary').filter({hasText:'Image options'}).waitFor();
+  await aseEditor.getByRole('button',{name:'Paste colors',exact:true}).click();await aseEditor.getByLabel('Colors or Lospec link',{exact:true}).fill('#112233 #445566');await aseEditor.getByRole('button',{name:'Replace colors',exact:true}).click();
+  assert.equal(aseRequests.length,0,'Startup/editor/PNG/text loaded the ASE parser');
+  await aseEditor.getByLabel('Name',{exact:true}).fill('Lazy ASE palette');
+  for(let attempt=0;attempt<2;attempt++){
+    await aseEditor.getByRole('button',{name:'Image or file',exact:true}).click();await aseInput.setInputFiles(asePath);await aseEditor.getByText('255 colors',{exact:true}).waitFor();
+    const actual=[];const previous=aseEditor.getByRole('button',{name:'Previous',exact:true});while(await previous.isEnabled())await previous.click();
+    for(;;){actual.push(...await aseEditor.locator('.palette-review-swatch').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('aria-label').split(' ').at(-1))));const next=aseEditor.getByRole('button',{name:'Next',exact:true});if(!await next.isEnabled())break;await next.click();}
+    assert.deepEqual(actual,aseExpected,'ASE review changed raw entry order');assert.equal(aseRequests.length,1,'First ASE must load once and subsequent imports reuse the module');
+    if(!attempt){await aseEditor.getByRole('button',{name:'Paste colors',exact:true}).click();await aseEditor.getByRole('button',{name:'Replace colors',exact:true}).click();}
+  }
+  await aseEditor.getByRole('button',{name:'Paste colors',exact:true}).click();await aseEditor.getByLabel('Colors or Lospec link',{exact:true}).fill('#fedcba #010203');
+  await aseEditor.evaluate(dialog=>window.__qaUrlDialog=dialog);
+  for(const [extension,count]of [['png',2],['ase',255]]){
+    const droppedUrl=new URL(`/colorfetti/palette-drop.${extension}?signature=retained`,asePage.url()).href;
+    await aseEditor.evaluate((dialog,url)=>{const data=new DataTransfer();data.setData('text/plain',url);dialog.dispatchEvent(new DragEvent('drop',{bubbles:true,cancelable:true,dataTransfer:data}));},droppedUrl);
+    await aseEditor.getByText(`${count} colors`,{exact:true}).waitFor();await aseEditor.locator('.palette-import-progress').waitFor({state:'detached'});
+    const actual=[];for(;;){actual.push(...await aseEditor.locator('.palette-review-swatch').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('aria-label').split(' ').at(-1))));const next=aseEditor.getByRole('button',{name:'Next',exact:true});if(!await next.count()||!await next.isEnabled())break;await next.click();}
+    assert.deepEqual(actual,extension==='ase'?aseExpected:['#112233','#445566'],'URL drop changed exact palette entries');
+    assert.equal(await aseEditor.getByRole('button',{name:'Paste colors',exact:true}).getAttribute('aria-pressed'),'true');assert.equal(await aseEditor.getByLabel('Colors or Lospec link',{exact:true}).inputValue(),'#fedcba #010203');assert.equal(await aseEditor.getByLabel('Name',{exact:true}).inputValue(),'Lazy ASE palette');assert.equal(await aseEditor.evaluate(dialog=>dialog===window.__qaUrlDialog&&dialog.open),true);
+  }
+  assert.equal(aseRequests.length,1,'URL ASE did not reuse the parser');assert.equal(await asePage.locator('.tiles .tile').count(),aseArtworkCount,'Palette URL drop added artwork');
+  await aseEditor.getByRole('button',{name:'Save palette',exact:true}).click();await aseEditor.waitFor({state:'detached'});
+  const aseSaved=await asePage.evaluate(()=>JSON.parse(localStorage.getItem('colorfetti-palettes-v1')).palettes.find(p=>p.name==='Lazy ASE palette'));
+  assert.equal(aseSaved.source.kind,'aseprite');assert.deepEqual(aseSaved.colors,aseExpected);
+  results.aseLazy={fixtureSha256:aseSha,colors:aseExpected.length,requests:aseRequests};await aseContext.close();
+  results.extra.push('ASE parser stays unloaded for startup/editor/PNG/text; first import loads once, repeat reuses cache and exact255 ordered raw entries persist with aseprite metadata');
+  results.extra.push('Palette URL PNG→ASE imports exact entries without replacing the dialog, chosen Paste tool, name or text history; saved ASE source persists');
+  assert.deepEqual(results.consoleErrors,[],'Browser JS exceptions');
+  results.passed = true;
+  writeFileSync(resolve(scratch,'results.json'),JSON.stringify(results,null,2));
+  console.log(JSON.stringify({passed:true,legacy:results.legacy.length,full:results.full.length,rgb:results.rgb.length,extra:results.extra,errors:results.consoleErrors}));
+} catch(error) {
+  results.failure = error.stack; writeFileSync(resolve(scratch,'results.json'),JSON.stringify(results,null,2)); throw error;
+} finally {
+  await browser?.close(); await new Promise(resolve => server.close(resolve));
+}

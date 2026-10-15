@@ -1,0 +1,62 @@
+[
+ {
+  "name": "input commits only after 200ms pause",
+  "pass": true,
+  "early": 50,
+  "late": 70
+ },
+ {
+  "name": "pointercancel discards pending draft",
+  "pass": true,
+  "s": 70,
+  "shown": "70%",
+  "value": "70"
+ },
+ {
+  "name": "panel close discards pending draft",
+  "pass": true,
+  "s": 70,
+  "shown": "70%"
+ },
+ {
+  "name": "pattern change discards pending draft",
+  "pass": true,
+  "dither": "8x8",
+  "strength": 70
+ },
+ {
+  "name": "palette step (ArrowRight) discards pending draft",
+  "pass": true,
+  "paletteId": "preset-db16"
+ },
+ {
+  "name": "keyboard change commits immediately",
+  "pass": true,
+  "s": 71
+ },
+ {
+  "name": "reset with pending draft yields 50 and Off, no late commit",
+  "pass": true
+ },
+ {
+  "name": "real mouse drag commits on release",
+  "pass": true,
+  "during": 50,
+  "after": 92
+ },
+ {
+  "name": "Save exports committed strength, not abandoned draft",
+  "pass": true,
+  "d100": 0,
+  "d5": 1048
+ },
+ {
+  "name": "Keep save writes RGBA8 with exact source alpha",
+  "pass": true,
+  "colorType": 6,
+  "bytes": 391
+ },
+ {
+  "pageErrors": []
+ }
+]

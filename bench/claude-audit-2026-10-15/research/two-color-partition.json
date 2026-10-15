@@ -1,0 +1,42 @@
+{
+ "items64/none": {
+  "visible": 1574,
+  "glowPartitionDiffers": 211,
+  "paperPartitionDiffers": 134
+ },
+ "items64/4x4": {
+  "visible": 1574,
+  "glowPartitionDiffers": 184,
+  "paperPartitionDiffers": 198
+ },
+ "armor16/none": {
+  "visible": 155,
+  "glowPartitionDiffers": 16,
+  "paperPartitionDiffers": 3
+ },
+ "armor16/4x4": {
+  "visible": 155,
+  "glowPartitionDiffers": 14,
+  "paperPartitionDiffers": 8
+ },
+ "material-synthetic/none": {
+  "visible": 7168,
+  "glowPartitionDiffers": 1175,
+  "paperPartitionDiffers": 1175
+ },
+ "material-synthetic/4x4": {
+  "visible": 7168,
+  "glowPartitionDiffers": 861,
+  "paperPartitionDiffers": 1325
+ },
+ "ramp-synthetic/none": {
+  "visible": 8192,
+  "glowPartitionDiffers": 1774,
+  "paperPartitionDiffers": 857
+ },
+ "ramp-synthetic/4x4": {
+  "visible": 8192,
+  "glowPartitionDiffers": 1370,
+  "paperPartitionDiffers": 1308
+ }
+}

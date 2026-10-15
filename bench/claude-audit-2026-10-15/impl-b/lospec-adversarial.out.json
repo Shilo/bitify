@@ -1,0 +1,42 @@
+{
+ "total": 46,
+ "passed": 42,
+ "failed": [
+  {
+   "name": "routed scheme-less link is importable: lospec.com/palette-list/slso8",
+   "ok": false,
+   "detail": {
+    "routedToLospec": true,
+    "parsedSlug": null
+   }
+  },
+  {
+   "name": "routed scheme-less link is importable: www.lospec.com/palette-list/slso8",
+   "ok": false,
+   "detail": {
+    "routedToLospec": true,
+    "parsedSlug": null
+   }
+  },
+  {
+   "name": "GPL text with URL comment stays on local text path",
+   "ok": false,
+   "detail": {
+    "routedToLospec": true,
+    "localParse": [
+     "#000000",
+     "#ffffff"
+    ],
+    "lospecParse": null
+   }
+  },
+  {
+   "name": "name has no bidi/C1 controls (informational)",
+   "ok": false,
+   "detail": {
+    "name": "\"evil‮gnp.exe\"",
+    "creditUnits": 200
+   }
+  }
+ ]
+}

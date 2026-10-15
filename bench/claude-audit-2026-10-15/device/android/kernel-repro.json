@@ -1,0 +1,149 @@
+{
+  "deps": {
+    "src/lib/quantize.js": "6dacaca42d615b72a4ee511bb7ed32344aa7118ae946769e290d7a9463f8d0a3",
+    "src/lib/palette-dither.js": "5452f7b1af4d5f656d8733635856eab5ba565e8d7ee81cced4d77041a9638152"
+  },
+  "runs": [
+    {
+      "date": "2026-10-15T12:23:25.223Z",
+      "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+      "hardwareConcurrency": 4,
+      "cases": [
+        {
+          "pixels": 65536,
+          "targetColors": 8,
+          "nearestMs": 17.30000001192093,
+          "ms": 78.5,
+          "maxProgressGap": 8.800000011920929,
+          "wrongAlpha": 0,
+          "wrongMembership": 0,
+          "start": 179,
+          "end": 257.5
+        },
+        {
+          "pixels": 1048576,
+          "targetColors": 8,
+          "nearestMs": 109.59999996423721,
+          "ms": 1033.300000011921,
+          "maxProgressGap": 13.900000035762787,
+          "wrongAlpha": 0,
+          "wrongMembership": 0,
+          "start": 402.5,
+          "end": 1435.800000011921
+        },
+        {
+          "pixels": 1048576,
+          "targetColors": 256,
+          "nearestMs": 556.1999999880791,
+          "ms": 2059.099999964237,
+          "maxProgressGap": 8.600000023841858,
+          "wrongAlpha": 0,
+          "wrongMembership": 0,
+          "start": 2081.400000035763,
+          "end": 4140.5
+        }
+      ],
+      "cancellation": {
+        "error": "AbortError",
+        "ms": 11.900000035762787
+      },
+      "maxRafGapWholeProbe": 83.40000000000009,
+      "longTasksDuringQuantize": [],
+      "scope": "Foreground current shipping kernel. Source preparation and oracle checking are excluded from quantize intervals. Not whole-app FPS or memory."
+    },
+    {
+      "date": "2026-10-15T12:23:29.713Z",
+      "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+      "hardwareConcurrency": 4,
+      "cases": [
+        {
+          "pixels": 65536,
+          "targetColors": 8,
+          "nearestMs": 19.19999998807907,
+          "ms": 79.10000002384186,
+          "maxProgressGap": 9.100000023841858,
+          "wrongAlpha": 0,
+          "wrongMembership": 0,
+          "start": 154.79999995231628,
+          "end": 233.89999997615814
+        },
+        {
+          "pixels": 1048576,
+          "targetColors": 8,
+          "nearestMs": 110.59999996423721,
+          "ms": 1036.199999988079,
+          "maxProgressGap": 16.100000023841858,
+          "wrongAlpha": 0,
+          "wrongMembership": 0,
+          "start": 385.5999999642372,
+          "end": 1421.7999999523163
+        },
+        {
+          "pixels": 1048576,
+          "targetColors": 256,
+          "nearestMs": 566.4000000357628,
+          "ms": 2071.899999976158,
+          "maxProgressGap": 8.5,
+          "wrongAlpha": 0,
+          "wrongMembership": 0,
+          "start": 2053.5,
+          "end": 4125.399999976158
+        }
+      ],
+      "cancellation": {
+        "error": "AbortError",
+        "ms": 13.800000011920929
+      },
+      "maxRafGapWholeProbe": 50,
+      "longTasksDuringQuantize": [],
+      "scope": "Foreground current shipping kernel. Source preparation and oracle checking are excluded from quantize intervals. Not whole-app FPS or memory."
+    },
+    {
+      "date": "2026-10-15T12:23:34.170Z",
+      "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+      "hardwareConcurrency": 4,
+      "cases": [
+        {
+          "pixels": 65536,
+          "targetColors": 8,
+          "nearestMs": 12.699999988079071,
+          "ms": 81,
+          "maxProgressGap": 9.100000023841858,
+          "wrongAlpha": 0,
+          "wrongMembership": 0,
+          "start": 138.69999998807907,
+          "end": 219.69999998807907
+        },
+        {
+          "pixels": 1048576,
+          "targetColors": 8,
+          "nearestMs": 109.59999996423721,
+          "ms": 1038.4000000357628,
+          "maxProgressGap": 16.5,
+          "wrongAlpha": 0,
+          "wrongMembership": 0,
+          "start": 375,
+          "end": 1413.4000000357628
+        },
+        {
+          "pixels": 1048576,
+          "targetColors": 256,
+          "nearestMs": 571.1999999880791,
+          "ms": 2088.5,
+          "maxProgressGap": 8.5,
+          "wrongAlpha": 0,
+          "wrongMembership": 0,
+          "start": 2041.300000011921,
+          "end": 4129.800000011921
+        }
+      ],
+      "cancellation": {
+        "error": "AbortError",
+        "ms": 11.5
+      },
+      "maxRafGapWholeProbe": 41.700000000000045,
+      "longTasksDuringQuantize": [],
+      "scope": "Foreground current shipping kernel. Source preparation and oracle checking are excluded from quantize intervals. Not whole-app FPS or memory."
+    }
+  ]
+}

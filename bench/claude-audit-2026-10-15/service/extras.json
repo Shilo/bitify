@@ -1,0 +1,204 @@
+{
+  "at": "2026-10-15T11:46:45.591Z",
+  "note": "Offline, actual src/lib Auto + Max colors (Oklab). No service calls.",
+  "knightCapSweep": [
+    {
+      "cap": 4,
+      "singleFrame": {
+        "red": [],
+        "eye": false,
+        "gem": false
+      },
+      "twoFrame": {
+        "red": [],
+        "eye": false,
+        "gem": false
+      }
+    },
+    {
+      "cap": 5,
+      "singleFrame": {
+        "red": [],
+        "eye": false,
+        "gem": false
+      },
+      "twoFrame": {
+        "red": [],
+        "eye": false,
+        "gem": false
+      }
+    },
+    {
+      "cap": 6,
+      "singleFrame": {
+        "red": [],
+        "eye": false,
+        "gem": false
+      },
+      "twoFrame": {
+        "red": [],
+        "eye": false,
+        "gem": false
+      }
+    },
+    {
+      "cap": 7,
+      "singleFrame": {
+        "red": [],
+        "eye": false,
+        "gem": false
+      },
+      "twoFrame": {
+        "red": [],
+        "eye": false,
+        "gem": false
+      }
+    },
+    {
+      "cap": 8,
+      "singleFrame": {
+        "red": [],
+        "eye": false,
+        "gem": false
+      },
+      "twoFrame": {
+        "red": [],
+        "eye": false,
+        "gem": false
+      }
+    },
+    {
+      "cap": 9,
+      "singleFrame": {
+        "red": [
+          "#d4364a"
+        ],
+        "eye": false,
+        "gem": false
+      },
+      "twoFrame": {
+        "red": [
+          "#d4364a"
+        ],
+        "eye": false,
+        "gem": false
+      }
+    },
+    {
+      "cap": 10,
+      "singleFrame": {
+        "red": [
+          "#d4364a"
+        ],
+        "eye": false,
+        "gem": false
+      },
+      "twoFrame": {
+        "red": [
+          "#d4364a"
+        ],
+        "eye": false,
+        "gem": false
+      }
+    },
+    {
+      "cap": 11,
+      "singleFrame": {
+        "red": [
+          "#d4364a"
+        ],
+        "eye": false,
+        "gem": false
+      },
+      "twoFrame": {
+        "red": [
+          "#d4364a"
+        ],
+        "eye": false,
+        "gem": false
+      }
+    },
+    {
+      "cap": 12,
+      "singleFrame": {
+        "red": [
+          "#962638",
+          "#d4364a"
+        ],
+        "eye": false,
+        "gem": false
+      },
+      "twoFrame": {
+        "red": [
+          "#962638",
+          "#d4364a"
+        ],
+        "eye": false,
+        "gem": false
+      }
+    },
+    {
+      "cap": 13,
+      "singleFrame": {
+        "red": [
+          "#962638",
+          "#d4364a"
+        ],
+        "eye": true,
+        "gem": false
+      },
+      "twoFrame": {
+        "red": [
+          "#962638",
+          "#d4364a"
+        ],
+        "eye": true,
+        "gem": false
+      }
+    },
+    {
+      "cap": 14,
+      "singleFrame": {
+        "red": [
+          "#5c1a2c",
+          "#962638",
+          "#d4364a"
+        ],
+        "eye": true,
+        "gem": false
+      },
+      "twoFrame": {
+        "red": [
+          "#5c1a2c",
+          "#962638",
+          "#d4364a"
+        ],
+        "eye": true,
+        "gem": false
+      }
+    }
+  ],
+  "spillAlpha1": {
+    "fixture": "fixtures/spill-alpha1.png (3 opaque colors plus 508 alpha-1 green pixels, invisible)",
+    "results": {
+      "keep-cap2": [
+        "#00ff40",
+        "#dc5a14"
+      ],
+      "keep-cap3": [
+        "#00ff40",
+        "#dc5a14",
+        "#ff8a1e"
+      ],
+      "cut-cap2": [
+        "#dc5a14",
+        "#ff8a1e"
+      ],
+      "cut-cap3": [
+        "#dc5a14",
+        "#ff8a1e",
+        "#fff3b0"
+      ]
+    }
+  }
+}

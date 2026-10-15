@@ -1,0 +1,74 @@
+[
+  {
+    "run": 0,
+    "focusAfterOneEscape": "BODY",
+    "closeButtons": 1,
+    "closeErr": null,
+    "openAfterClose": [
+      "image-viewer"
+    ],
+    "openAfterEscape": [],
+    "settingsErr": null,
+    "errors": []
+  },
+  {
+    "run": 1,
+    "focusAfterOneEscape": "BODY",
+    "closeButtons": 1,
+    "closeErr": null,
+    "openAfterClose": [
+      "image-viewer"
+    ],
+    "openAfterEscape": [],
+    "settingsErr": null,
+    "errors": []
+  },
+  {
+    "run": 2,
+    "focusAfterOneEscape": "BODY",
+    "closeButtons": 1,
+    "closeErr": null,
+    "openAfterClose": [
+      "image-viewer"
+    ],
+    "openAfterEscape": [],
+    "settingsErr": null,
+    "errors": []
+  },
+  {
+    "run": 3,
+    "focusAfterOneEscape": "BODY",
+    "closeButtons": 1,
+    "closeErr": null,
+    "openAfterClose": [
+      "image-viewer"
+    ],
+    "openAfterEscape": [],
+    "settingsErr": null,
+    "errors": []
+  },
+  {
+    "run": 4,
+    "focusAfterOneEscape": "BODY",
+    "closeButtons": 1,
+    "closeErr": null,
+    "openAfterClose": [
+      "image-viewer"
+    ],
+    "openAfterEscape": [],
+    "settingsErr": null,
+    "errors": []
+  },
+  {
+    "run": 5,
+    "focusAfterOneEscape": "BODY",
+    "closeButtons": 1,
+    "closeErr": null,
+    "openAfterClose": [
+      "image-viewer"
+    ],
+    "openAfterEscape": [],
+    "settingsErr": null,
+    "errors": []
+  }
+]

@@ -1,0 +1,1065 @@
+{
+ "chromium": {
+  "version": "149.0.7827.55",
+  "plain": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": "bt709",
+    "transfer": "iec61966-2-1",
+    "matrix": "rgb",
+    "fullRange": true
+   },
+   "allNull": false,
+   "appErr": {
+    "meanWorstErr": 0,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 8.27,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 8.27,
+    "premultipliedLikePx": 0
+   },
+   "appEqualsCanvas": false,
+   "appEqualsManaged": false
+  },
+  "sRGB": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": "bt709",
+    "transfer": "iec61966-2-1",
+    "matrix": "rgb",
+    "fullRange": true
+   },
+   "allNull": false,
+   "appErr": {
+    "meanWorstErr": 0,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 8.27,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 8.27,
+    "premultipliedLikePx": 0
+   },
+   "appEqualsCanvas": false,
+   "appEqualsManaged": false
+  },
+  "gAMA_linear": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": "bt709",
+    "transfer": "linear",
+    "matrix": "rgb",
+    "fullRange": true
+   },
+   "allNull": false,
+   "appErr": {
+    "meanWorstErr": 51.18,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 46.45,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 51.18,
+    "premultipliedLikePx": 0
+   },
+   "appEqualsCanvas": false,
+   "appEqualsManaged": true
+  },
+  "cHRM_bt2020_gAMA": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": "bt2020",
+    "transfer": null,
+    "matrix": "rgb",
+    "fullRange": true
+   },
+   "allNull": false,
+   "appErr": {
+    "meanWorstErr": 24.91,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 23.36,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 24.91,
+    "premultipliedLikePx": 0
+   },
+   "appEqualsCanvas": false,
+   "appEqualsManaged": true
+  },
+  "iCCP_sharp_p3": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": null,
+    "transfer": "iec61966-2-1",
+    "matrix": "rgb",
+    "fullRange": true
+   },
+   "allNull": false,
+   "appErr": {
+    "meanWorstErr": 19.82,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 17.55,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 19.82,
+    "premultipliedLikePx": 0
+   },
+   "appEqualsCanvas": false,
+   "appEqualsManaged": true
+  },
+  "iCCP_table_srgbPrim": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": "bt709",
+    "transfer": "iec61966-2-1",
+    "matrix": "rgb",
+    "fullRange": true
+   },
+   "allNull": false,
+   "appErr": {
+    "meanWorstErr": 4.91,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 11.09,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 11.09,
+    "premultipliedLikePx": 0
+   },
+   "appEqualsCanvas": false,
+   "appEqualsManaged": false
+  },
+  "iCCP_prophoto_g18": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": null,
+    "transfer": null,
+    "matrix": "rgb",
+    "fullRange": true
+   },
+   "allNull": false,
+   "appErr": {
+    "meanWorstErr": 26.27,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 25.82,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 26.27,
+    "premultipliedLikePx": 0
+   },
+   "appEqualsCanvas": false,
+   "appEqualsManaged": true
+  },
+  "iCCP_garbage": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": "bt709",
+    "transfer": "iec61966-2-1",
+    "matrix": "rgb",
+    "fullRange": true
+   },
+   "allNull": false,
+   "appErr": {
+    "meanWorstErr": 0,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 8.27,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 8.27,
+    "premultipliedLikePx": 0
+   },
+   "appEqualsCanvas": false,
+   "appEqualsManaged": false
+  },
+  "iCCP_windows_srgb": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": "bt709",
+    "transfer": "iec61966-2-1",
+    "matrix": "rgb",
+    "fullRange": true
+   },
+   "allNull": false,
+   "appErr": {
+    "meanWorstErr": 0,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 8.27,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 8.27,
+    "premultipliedLikePx": 0
+   },
+   "appEqualsCanvas": false,
+   "appEqualsManaged": false
+  },
+  "cICP_srgb": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": "bt709",
+    "transfer": "iec61966-2-1",
+    "matrix": "rgb",
+    "fullRange": true
+   },
+   "allNull": false,
+   "appErr": {
+    "meanWorstErr": 0,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 8.27,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 8.27,
+    "premultipliedLikePx": 0
+   },
+   "appEqualsCanvas": false,
+   "appEqualsManaged": false
+  },
+  "cICP_p3": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": "smpte432",
+    "transfer": "iec61966-2-1",
+    "matrix": "rgb",
+    "fullRange": true
+   },
+   "allNull": false,
+   "appErr": {
+    "meanWorstErr": 15.73,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 14.36,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 15.73,
+    "premultipliedLikePx": 0
+   },
+   "appEqualsCanvas": false,
+   "appEqualsManaged": true
+  },
+  "cICP_linear": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": "bt709",
+    "transfer": "linear",
+    "matrix": "rgb",
+    "fullRange": true
+   },
+   "allNull": false,
+   "appErr": {
+    "meanWorstErr": 51.18,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 46.45,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 51.18,
+    "premultipliedLikePx": 0
+   },
+   "appEqualsCanvas": false,
+   "appEqualsManaged": true
+  },
+  "cICP_bt2020_pq": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": "bt2020",
+    "transfer": "pq",
+    "matrix": "rgb",
+    "fullRange": true
+   },
+   "allNull": false,
+   "appErr": {
+    "meanWorstErr": 37.91,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 37.91,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 37.91,
+    "premultipliedLikePx": 0
+   },
+   "appEqualsCanvas": false,
+   "appEqualsManaged": true
+  },
+  "cICP_limited": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": "bt709",
+    "transfer": "iec61966-2-1",
+    "matrix": "rgb",
+    "fullRange": true
+   },
+   "allNull": false,
+   "appErr": {
+    "meanWorstErr": 0,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 8.27,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 8.27,
+    "premultipliedLikePx": 0
+   },
+   "appEqualsCanvas": false,
+   "appEqualsManaged": false
+  },
+  "cICP_unspecified": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": "bt709",
+    "transfer": "iec61966-2-1",
+    "matrix": "rgb",
+    "fullRange": true
+   },
+   "allNull": false,
+   "appErr": {
+    "meanWorstErr": 0,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 8.27,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 8.27,
+    "premultipliedLikePx": 0
+   },
+   "appEqualsCanvas": false,
+   "appEqualsManaged": false
+  },
+  "indexed_tRNS": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": "bt709",
+    "transfer": "iec61966-2-1",
+    "matrix": "rgb",
+    "fullRange": true
+   },
+   "allNull": false,
+   "appErr": {
+    "meanWorstErr": 0,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 26,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 26,
+    "premultipliedLikePx": 0
+   },
+   "appEqualsCanvas": false,
+   "appEqualsManaged": false
+  },
+  "gray_alpha": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": "bt709",
+    "transfer": "iec61966-2-1",
+    "matrix": "rgb",
+    "fullRange": true
+   },
+   "allNull": false,
+   "appErr": {
+    "meanWorstErr": 0,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 2.75,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 2.75,
+    "premultipliedLikePx": 0
+   },
+   "appEqualsCanvas": false,
+   "appEqualsManaged": false
+  }
+ },
+ "firefox": {
+  "version": "153.0",
+  "plain": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": null,
+    "transfer": null,
+    "matrix": null,
+    "fullRange": null
+   },
+   "allNull": true,
+   "appErr": {
+    "meanWorstErr": 42,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 42,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 128.55,
+    "premultipliedLikePx": 8
+   },
+   "appEqualsCanvas": true,
+   "appEqualsManaged": false
+  },
+  "sRGB": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": null,
+    "transfer": null,
+    "matrix": null,
+    "fullRange": null
+   },
+   "allNull": true,
+   "appErr": {
+    "meanWorstErr": 42,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 42,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 128.55,
+    "premultipliedLikePx": 8
+   },
+   "appEqualsCanvas": true,
+   "appEqualsManaged": false
+  },
+  "gAMA_linear": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": null,
+    "transfer": null,
+    "matrix": null,
+    "fullRange": null
+   },
+   "allNull": true,
+   "appErr": {
+    "meanWorstErr": 42,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 42,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 128.55,
+    "premultipliedLikePx": 8
+   },
+   "appEqualsCanvas": true,
+   "appEqualsManaged": false
+  },
+  "cHRM_bt2020_gAMA": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": null,
+    "transfer": null,
+    "matrix": null,
+    "fullRange": null
+   },
+   "allNull": true,
+   "appErr": {
+    "meanWorstErr": 42,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 42,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 128.55,
+    "premultipliedLikePx": 8
+   },
+   "appEqualsCanvas": true,
+   "appEqualsManaged": false
+  },
+  "iCCP_sharp_p3": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": null,
+    "transfer": null,
+    "matrix": null,
+    "fullRange": null
+   },
+   "allNull": true,
+   "appErr": {
+    "meanWorstErr": 54.64,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 54.64,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 130.82,
+    "premultipliedLikePx": 5
+   },
+   "appEqualsCanvas": true,
+   "appEqualsManaged": false
+  },
+  "iCCP_table_srgbPrim": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": null,
+    "transfer": null,
+    "matrix": null,
+    "fullRange": null
+   },
+   "allNull": true,
+   "appErr": {
+    "meanWorstErr": 42,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 42,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 128.55,
+    "premultipliedLikePx": 8
+   },
+   "appEqualsCanvas": true,
+   "appEqualsManaged": false
+  },
+  "iCCP_prophoto_g18": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": null,
+    "transfer": null,
+    "matrix": null,
+    "fullRange": null
+   },
+   "allNull": true,
+   "appErr": {
+    "meanWorstErr": 42,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 42,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 128.55,
+    "premultipliedLikePx": 8
+   },
+   "appEqualsCanvas": true,
+   "appEqualsManaged": false
+  },
+  "iCCP_garbage": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": null,
+    "transfer": null,
+    "matrix": null,
+    "fullRange": null
+   },
+   "allNull": true,
+   "appErr": {
+    "meanWorstErr": 42,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 42,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 128.55,
+    "premultipliedLikePx": 8
+   },
+   "appEqualsCanvas": true,
+   "appEqualsManaged": false
+  },
+  "iCCP_windows_srgb": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": null,
+    "transfer": null,
+    "matrix": null,
+    "fullRange": null
+   },
+   "allNull": true,
+   "appErr": {
+    "meanWorstErr": 42,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 42,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 128.55,
+    "premultipliedLikePx": 8
+   },
+   "appEqualsCanvas": true,
+   "appEqualsManaged": false
+  },
+  "cICP_srgb": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": null,
+    "transfer": null,
+    "matrix": null,
+    "fullRange": null
+   },
+   "allNull": true,
+   "appErr": {
+    "meanWorstErr": 42,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 42,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 128.55,
+    "premultipliedLikePx": 8
+   },
+   "appEqualsCanvas": true,
+   "appEqualsManaged": false
+  },
+  "cICP_p3": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": null,
+    "transfer": null,
+    "matrix": null,
+    "fullRange": null
+   },
+   "allNull": true,
+   "appErr": {
+    "meanWorstErr": 42,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 42,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 128.55,
+    "premultipliedLikePx": 8
+   },
+   "appEqualsCanvas": true,
+   "appEqualsManaged": false
+  },
+  "cICP_linear": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": null,
+    "transfer": null,
+    "matrix": null,
+    "fullRange": null
+   },
+   "allNull": true,
+   "appErr": {
+    "meanWorstErr": 42,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 42,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 128.55,
+    "premultipliedLikePx": 8
+   },
+   "appEqualsCanvas": true,
+   "appEqualsManaged": false
+  },
+  "cICP_bt2020_pq": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": null,
+    "transfer": null,
+    "matrix": null,
+    "fullRange": null
+   },
+   "allNull": true,
+   "appErr": {
+    "meanWorstErr": 42,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 42,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 128.55,
+    "premultipliedLikePx": 8
+   },
+   "appEqualsCanvas": true,
+   "appEqualsManaged": false
+  },
+  "cICP_limited": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": null,
+    "transfer": null,
+    "matrix": null,
+    "fullRange": null
+   },
+   "allNull": true,
+   "appErr": {
+    "meanWorstErr": 42,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 42,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 128.55,
+    "premultipliedLikePx": 8
+   },
+   "appEqualsCanvas": true,
+   "appEqualsManaged": false
+  },
+  "cICP_unspecified": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": null,
+    "transfer": null,
+    "matrix": null,
+    "fullRange": null
+   },
+   "allNull": true,
+   "appErr": {
+    "meanWorstErr": 42,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 42,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 128.55,
+    "premultipliedLikePx": 8
+   },
+   "appEqualsCanvas": true,
+   "appEqualsManaged": false
+  },
+  "indexed_tRNS": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": null,
+    "transfer": null,
+    "matrix": null,
+    "fullRange": null
+   },
+   "allNull": true,
+   "appErr": {
+    "meanWorstErr": 81.33,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 81.33,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 129,
+    "premultipliedLikePx": 2
+   },
+   "appEqualsCanvas": true,
+   "appEqualsManaged": false
+  },
+  "gray_alpha": {
+   "format": "BGRA",
+   "colorSpace": {
+    "primaries": null,
+    "transfer": null,
+    "matrix": null,
+    "fullRange": null
+   },
+   "allNull": true,
+   "appErr": {
+    "meanWorstErr": 62,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 62,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": {
+    "meanWorstErr": 39.5,
+    "premultipliedLikePx": 1
+   },
+   "appEqualsCanvas": true,
+   "appEqualsManaged": false
+  }
+ },
+ "webkit": {
+  "version": "26.5",
+  "plain": {
+   "noImageDecoder": true,
+   "appErr": {
+    "meanWorstErr": 38,
+    "premultipliedLikePx": 1
+   },
+   "canvasErr": {
+    "meanWorstErr": 38,
+    "premultipliedLikePx": 1
+   },
+   "managedErr": null,
+   "appEqualsCanvas": true,
+   "appEqualsManaged": null
+  },
+  "sRGB": {
+   "noImageDecoder": true,
+   "appErr": {
+    "meanWorstErr": 38,
+    "premultipliedLikePx": 1
+   },
+   "canvasErr": {
+    "meanWorstErr": 38,
+    "premultipliedLikePx": 1
+   },
+   "managedErr": null,
+   "appEqualsCanvas": true,
+   "appEqualsManaged": null
+  },
+  "gAMA_linear": {
+   "noImageDecoder": true,
+   "appErr": {
+    "meanWorstErr": 74.55,
+    "premultipliedLikePx": 1
+   },
+   "canvasErr": {
+    "meanWorstErr": 74.55,
+    "premultipliedLikePx": 1
+   },
+   "managedErr": null,
+   "appEqualsCanvas": true,
+   "appEqualsManaged": null
+  },
+  "cHRM_bt2020_gAMA": {
+   "noImageDecoder": true,
+   "appErr": {
+    "meanWorstErr": 38,
+    "premultipliedLikePx": 1
+   },
+   "canvasErr": {
+    "meanWorstErr": 38,
+    "premultipliedLikePx": 1
+   },
+   "managedErr": null,
+   "appEqualsCanvas": true,
+   "appEqualsManaged": null
+  },
+  "iCCP_sharp_p3": {
+   "noImageDecoder": true,
+   "appErr": {
+    "meanWorstErr": 41,
+    "premultipliedLikePx": 1
+   },
+   "canvasErr": {
+    "meanWorstErr": 41,
+    "premultipliedLikePx": 1
+   },
+   "managedErr": null,
+   "appEqualsCanvas": true,
+   "appEqualsManaged": null
+  },
+  "iCCP_table_srgbPrim": {
+   "noImageDecoder": true,
+   "appErr": {
+    "meanWorstErr": 95.55,
+    "premultipliedLikePx": 2
+   },
+   "canvasErr": {
+    "meanWorstErr": 95.55,
+    "premultipliedLikePx": 2
+   },
+   "managedErr": null,
+   "appEqualsCanvas": true,
+   "appEqualsManaged": null
+  },
+  "iCCP_prophoto_g18": {
+   "noImageDecoder": true,
+   "appErr": {
+    "meanWorstErr": 98.82,
+    "premultipliedLikePx": 2
+   },
+   "canvasErr": {
+    "meanWorstErr": 98.82,
+    "premultipliedLikePx": 2
+   },
+   "managedErr": null,
+   "appEqualsCanvas": true,
+   "appEqualsManaged": null
+  },
+  "iCCP_garbage": {
+   "noImageDecoder": true,
+   "appErr": {
+    "meanWorstErr": 38,
+    "premultipliedLikePx": 1
+   },
+   "canvasErr": {
+    "meanWorstErr": 38,
+    "premultipliedLikePx": 1
+   },
+   "managedErr": null,
+   "appEqualsCanvas": true,
+   "appEqualsManaged": null
+  },
+  "iCCP_windows_srgb": {
+   "noImageDecoder": true,
+   "appErr": {
+    "meanWorstErr": 38,
+    "premultipliedLikePx": 1
+   },
+   "canvasErr": {
+    "meanWorstErr": 38,
+    "premultipliedLikePx": 1
+   },
+   "managedErr": null,
+   "appEqualsCanvas": true,
+   "appEqualsManaged": null
+  },
+  "cICP_srgb": {
+   "noImageDecoder": true,
+   "appErr": {
+    "meanWorstErr": 38,
+    "premultipliedLikePx": 1
+   },
+   "canvasErr": {
+    "meanWorstErr": 38,
+    "premultipliedLikePx": 1
+   },
+   "managedErr": null,
+   "appEqualsCanvas": true,
+   "appEqualsManaged": null
+  },
+  "cICP_p3": {
+   "noImageDecoder": true,
+   "appErr": {
+    "meanWorstErr": 38,
+    "premultipliedLikePx": 1
+   },
+   "canvasErr": {
+    "meanWorstErr": 38,
+    "premultipliedLikePx": 1
+   },
+   "managedErr": null,
+   "appEqualsCanvas": true,
+   "appEqualsManaged": null
+  },
+  "cICP_linear": {
+   "noImageDecoder": true,
+   "appErr": {
+    "meanWorstErr": 38,
+    "premultipliedLikePx": 1
+   },
+   "canvasErr": {
+    "meanWorstErr": 38,
+    "premultipliedLikePx": 1
+   },
+   "managedErr": null,
+   "appEqualsCanvas": true,
+   "appEqualsManaged": null
+  },
+  "cICP_bt2020_pq": {
+   "noImageDecoder": true,
+   "appErr": {
+    "meanWorstErr": 38,
+    "premultipliedLikePx": 1
+   },
+   "canvasErr": {
+    "meanWorstErr": 38,
+    "premultipliedLikePx": 1
+   },
+   "managedErr": null,
+   "appEqualsCanvas": true,
+   "appEqualsManaged": null
+  },
+  "cICP_limited": {
+   "noImageDecoder": true,
+   "appErr": {
+    "meanWorstErr": 38,
+    "premultipliedLikePx": 1
+   },
+   "canvasErr": {
+    "meanWorstErr": 38,
+    "premultipliedLikePx": 1
+   },
+   "managedErr": null,
+   "appEqualsCanvas": true,
+   "appEqualsManaged": null
+  },
+  "cICP_unspecified": {
+   "noImageDecoder": true,
+   "appErr": {
+    "meanWorstErr": 38,
+    "premultipliedLikePx": 1
+   },
+   "canvasErr": {
+    "meanWorstErr": 38,
+    "premultipliedLikePx": 1
+   },
+   "managedErr": null,
+   "appEqualsCanvas": true,
+   "appEqualsManaged": null
+  },
+  "indexed_tRNS": {
+   "noImageDecoder": true,
+   "appErr": {
+    "meanWorstErr": 68,
+    "premultipliedLikePx": 1
+   },
+   "canvasErr": {
+    "meanWorstErr": 68,
+    "premultipliedLikePx": 1
+   },
+   "managedErr": null,
+   "appEqualsCanvas": true,
+   "appEqualsManaged": null
+  },
+  "gray_alpha": {
+   "noImageDecoder": true,
+   "appErr": {
+    "meanWorstErr": 3,
+    "premultipliedLikePx": 0
+   },
+   "canvasErr": {
+    "meanWorstErr": 3,
+    "premultipliedLikePx": 0
+   },
+   "managedErr": null,
+   "appEqualsCanvas": true,
+   "appEqualsManaged": null
+  }
+ }
+}

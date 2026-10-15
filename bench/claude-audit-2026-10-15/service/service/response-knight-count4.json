@@ -1,0 +1,38 @@
+{
+  "at": "2026-10-15T11:43:01.723Z",
+  "endpoint": "POST /v2/reduce-colors",
+  "authorization": "[redacted]",
+  "request": {
+    "inputs": [
+      {
+        "file": "knight-a.png",
+        "pngSha256": "fbe0f27539ac667c61977282e5b481027dbe54cabbd2e3a4eac80d7818c725ea"
+      }
+    ],
+    "num_colors": 4,
+    "palette_image": null,
+    "dithering": "none",
+    "dithering_strength": null
+  },
+  "status": 200,
+  "ms": 595,
+  "result": {
+    "usage": {
+      "type": "generations",
+      "generations": 0.1
+    },
+    "images": [
+      {
+        "type": "base64",
+        "base64": "[omitted 388 chars]",
+        "format": "png"
+      }
+    ],
+    "palette": {
+      "type": "base64",
+      "base64": "[omitted 104 chars]",
+      "format": "png"
+    },
+    "n_colors": 3
+  }
+}

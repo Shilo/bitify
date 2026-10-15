@@ -1,0 +1,30 @@
+{
+ "cases": 30,
+ "unhandledCases": [],
+ "falseSuccess": [
+  {
+   "timing": "already-rejected",
+   "platform": "write-ignores-item",
+   "result": "resolved",
+   "unhandled": []
+  },
+  {
+   "timing": "microtask",
+   "platform": "write-ignores-item",
+   "result": "resolved",
+   "unhandled": []
+  },
+  {
+   "timing": "macrotask",
+   "platform": "write-ignores-item",
+   "result": "resolved",
+   "unhandled": []
+  },
+  {
+   "timing": "thenable",
+   "platform": "write-ignores-item",
+   "result": "resolved",
+   "unhandled": []
+  }
+ ]
+}

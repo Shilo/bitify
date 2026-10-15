@@ -1,0 +1,10 @@
+{
+ "checks": 738,
+ "settings": 144,
+ "pngKinds": {
+  "rgba": 72,
+  "indexed": 72
+ },
+ "failureCount": 0,
+ "failures": []
+}

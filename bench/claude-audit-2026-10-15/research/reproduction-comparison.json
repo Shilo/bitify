@@ -1,0 +1,24 @@
+{
+  "bench/palette-collection-spike/results.json": {
+    "differences": 0,
+    "first": []
+  },
+  "bench/palette-preset-spike/output/results.json": {
+    "differences": 0,
+    "first": []
+  },
+  "bench/palette-algorithm-spikes/output/results.json": {
+    "differences": 0,
+    "first": []
+  },
+  "bench/palette-algorithm-spikes/output files": {
+    "compared": 60,
+    "mismatched": [
+      "index.html"
+    ]
+  },
+  "bench/palette-preset-spike/output files": {
+    "compared": 12,
+    "mismatched": []
+  }
+}

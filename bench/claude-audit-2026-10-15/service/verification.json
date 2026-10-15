@@ -1,0 +1,522 @@
+{
+  "at": "2026-10-15T11:49:34.186Z",
+  "pngFilesValidated": 50,
+  "nonPng": [],
+  "pngs": {
+    "fixtures\\glow-alpha.png": {
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "channels": 4,
+      "bitDepth": 8,
+      "palette": false,
+      "hasAlpha": true,
+      "bytes": 296
+    },
+    "fixtures\\hue-ramp.png": {
+      "format": "png",
+      "width": 64,
+      "height": 16,
+      "channels": 4,
+      "bitDepth": 8,
+      "palette": false,
+      "hasAlpha": true,
+      "bytes": 2605
+    },
+    "fixtures\\knight-a.png": {
+      "format": "png",
+      "width": 24,
+      "height": 24,
+      "channels": 4,
+      "bitDepth": 8,
+      "palette": false,
+      "hasAlpha": true,
+      "bytes": 271
+    },
+    "fixtures\\knight-b.png": {
+      "format": "png",
+      "width": 24,
+      "height": 24,
+      "channels": 4,
+      "bitDepth": 8,
+      "palette": false,
+      "hasAlpha": true,
+      "bytes": 264
+    },
+    "fixtures\\spill-alpha1.png": {
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "channels": 4,
+      "bitDepth": 8,
+      "palette": false,
+      "hasAlpha": true,
+      "bytes": 221
+    },
+    "fixtures\\target-edg8.png": {
+      "format": "png",
+      "width": 8,
+      "height": 1,
+      "channels": 4,
+      "bitDepth": 8,
+      "palette": false,
+      "hasAlpha": true,
+      "bytes": 101
+    },
+    "fixtures\\target-pico8.png": {
+      "format": "png",
+      "width": 16,
+      "height": 1,
+      "channels": 4,
+      "bitDepth": 8,
+      "palette": false,
+      "hasAlpha": true,
+      "bytes": 133
+    },
+    "fixtures\\tiny-2x2.png": {
+      "format": "png",
+      "width": 2,
+      "height": 2,
+      "channels": 4,
+      "bitDepth": 8,
+      "palette": false,
+      "hasAlpha": true,
+      "bytes": 77
+    },
+    "ours\\ours-glow-count4-auto-cap-cut128-0.png": {
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "channels": 4,
+      "bitDepth": 4,
+      "palette": true,
+      "hasAlpha": true,
+      "bytes": 194
+    },
+    "ours\\ours-glow-count4-auto-cap-keep-0.png": {
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "channels": 4,
+      "bitDepth": 8,
+      "palette": false,
+      "hasAlpha": true,
+      "bytes": 328
+    },
+    "ours\\ours-hue-edg8-none-oklab-4x4-10-0.png": {
+      "format": "png",
+      "width": 64,
+      "height": 16,
+      "channels": 3,
+      "bitDepth": 4,
+      "palette": true,
+      "hasAlpha": false,
+      "bytes": 313
+    },
+    "ours\\ours-hue-edg8-none-oklab-4x4-100-0.png": {
+      "format": "png",
+      "width": 64,
+      "height": 16,
+      "channels": 3,
+      "bitDepth": 4,
+      "palette": true,
+      "hasAlpha": false,
+      "bytes": 418
+    },
+    "ours\\ours-hue-edg8-none-oklab-4x4-20-0.png": {
+      "format": "png",
+      "width": 64,
+      "height": 16,
+      "channels": 3,
+      "bitDepth": 4,
+      "palette": true,
+      "hasAlpha": false,
+      "bytes": 339
+    },
+    "ours\\ours-hue-edg8-none-oklab-4x4-30-0.png": {
+      "format": "png",
+      "width": 64,
+      "height": 16,
+      "channels": 3,
+      "bitDepth": 4,
+      "palette": true,
+      "hasAlpha": false,
+      "bytes": 357
+    },
+    "ours\\ours-hue-edg8-none-oklab-4x4-40-0.png": {
+      "format": "png",
+      "width": 64,
+      "height": 16,
+      "channels": 3,
+      "bitDepth": 4,
+      "palette": true,
+      "hasAlpha": false,
+      "bytes": 371
+    },
+    "ours\\ours-hue-edg8-none-oklab-4x4-50-0.png": {
+      "format": "png",
+      "width": 64,
+      "height": 16,
+      "channels": 3,
+      "bitDepth": 4,
+      "palette": true,
+      "hasAlpha": false,
+      "bytes": 381
+    },
+    "ours\\ours-hue-edg8-none-oklab-4x4-60-0.png": {
+      "format": "png",
+      "width": 64,
+      "height": 16,
+      "channels": 3,
+      "bitDepth": 4,
+      "palette": true,
+      "hasAlpha": false,
+      "bytes": 397
+    },
+    "ours\\ours-hue-edg8-none-oklab-4x4-70-0.png": {
+      "format": "png",
+      "width": 64,
+      "height": 16,
+      "channels": 3,
+      "bitDepth": 4,
+      "palette": true,
+      "hasAlpha": false,
+      "bytes": 404
+    },
+    "ours\\ours-hue-edg8-none-oklab-4x4-80-0.png": {
+      "format": "png",
+      "width": 64,
+      "height": 16,
+      "channels": 3,
+      "bitDepth": 4,
+      "palette": true,
+      "hasAlpha": false,
+      "bytes": 402
+    },
+    "ours\\ours-hue-edg8-none-oklab-4x4-90-0.png": {
+      "format": "png",
+      "width": 64,
+      "height": 16,
+      "channels": 3,
+      "bitDepth": 4,
+      "palette": true,
+      "hasAlpha": false,
+      "bytes": 414
+    },
+    "ours\\ours-hue-edg8-none-oklab-off-0.png": {
+      "format": "png",
+      "width": 64,
+      "height": 16,
+      "channels": 3,
+      "bitDepth": 4,
+      "palette": true,
+      "hasAlpha": false,
+      "bytes": 296
+    },
+    "ours\\ours-hue-edg8-none-rgb-off-0.png": {
+      "format": "png",
+      "width": 64,
+      "height": 16,
+      "channels": 3,
+      "bitDepth": 4,
+      "palette": true,
+      "hasAlpha": false,
+      "bytes": 260
+    },
+    "ours\\ours-knight-2frame-count8-auto-cap-oklab-0.png": {
+      "format": "png",
+      "width": 24,
+      "height": 24,
+      "channels": 4,
+      "bitDepth": 4,
+      "palette": true,
+      "hasAlpha": true,
+      "bytes": 233
+    },
+    "ours\\ours-knight-2frame-count8-auto-cap-oklab-1.png": {
+      "format": "png",
+      "width": 24,
+      "height": 24,
+      "channels": 4,
+      "bitDepth": 4,
+      "palette": true,
+      "hasAlpha": true,
+      "bytes": 229
+    },
+    "ours\\ours-knight-2frame-count8-auto-cap-rgb-0.png": {
+      "format": "png",
+      "width": 24,
+      "height": 24,
+      "channels": 4,
+      "bitDepth": 4,
+      "palette": true,
+      "hasAlpha": true,
+      "bytes": 234
+    },
+    "ours\\ours-knight-2frame-count8-auto-cap-rgb-1.png": {
+      "format": "png",
+      "width": 24,
+      "height": 24,
+      "channels": 4,
+      "bitDepth": 4,
+      "palette": true,
+      "hasAlpha": true,
+      "bytes": 230
+    },
+    "ours\\ours-knight-count16-auto-cap-oklab-0.png": {
+      "format": "png",
+      "width": 24,
+      "height": 24,
+      "channels": 4,
+      "bitDepth": 8,
+      "palette": true,
+      "hasAlpha": true,
+      "bytes": 266
+    },
+    "ours\\ours-knight-count16-auto-cap-rgb-0.png": {
+      "format": "png",
+      "width": 24,
+      "height": 24,
+      "channels": 4,
+      "bitDepth": 8,
+      "palette": true,
+      "hasAlpha": true,
+      "bytes": 266
+    },
+    "ours\\ours-knight-count4-auto-cap-oklab-0.png": {
+      "format": "png",
+      "width": 24,
+      "height": 24,
+      "channels": 4,
+      "bitDepth": 4,
+      "palette": true,
+      "hasAlpha": true,
+      "bytes": 212
+    },
+    "ours\\ours-knight-count4-auto-cap-rgb-0.png": {
+      "format": "png",
+      "width": 24,
+      "height": 24,
+      "channels": 4,
+      "bitDepth": 4,
+      "palette": true,
+      "hasAlpha": true,
+      "bytes": 213
+    },
+    "ours\\ours-knight-count4-mcp-auto-cap-oklab-0.png": {
+      "format": "png",
+      "width": 24,
+      "height": 24,
+      "channels": 4,
+      "bitDepth": 4,
+      "palette": true,
+      "hasAlpha": true,
+      "bytes": 212
+    },
+    "ours\\ours-knight-count4-mcp-auto-cap-rgb-0.png": {
+      "format": "png",
+      "width": 24,
+      "height": 24,
+      "channels": 4,
+      "bitDepth": 4,
+      "palette": true,
+      "hasAlpha": true,
+      "bytes": 213
+    },
+    "ours\\ours-knight-edg8-oklab-0.png": {
+      "format": "png",
+      "width": 24,
+      "height": 24,
+      "channels": 4,
+      "bitDepth": 4,
+      "palette": true,
+      "hasAlpha": true,
+      "bytes": 230
+    },
+    "ours\\ours-knight-edg8-rgb-0.png": {
+      "format": "png",
+      "width": 24,
+      "height": 24,
+      "channels": 4,
+      "bitDepth": 4,
+      "palette": true,
+      "hasAlpha": true,
+      "bytes": 229
+    },
+    "ours\\ours-knight-pico8-oklab-0.png": {
+      "format": "png",
+      "width": 24,
+      "height": 24,
+      "channels": 4,
+      "bitDepth": 4,
+      "palette": true,
+      "hasAlpha": true,
+      "bytes": 248
+    },
+    "ours\\ours-knight-pico8-rgb-0.png": {
+      "format": "png",
+      "width": 24,
+      "height": 24,
+      "channels": 4,
+      "bitDepth": 4,
+      "palette": true,
+      "hasAlpha": true,
+      "bytes": 243
+    },
+    "ours\\ours-spill1-count3-auto-cap-cut128-0.png": {
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "channels": 4,
+      "bitDepth": 2,
+      "palette": true,
+      "hasAlpha": true,
+      "bytes": 170
+    },
+    "ours\\ours-spill1-count3-auto-cap-keep-0.png": {
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "channels": 4,
+      "bitDepth": 8,
+      "palette": false,
+      "hasAlpha": true,
+      "bytes": 284
+    },
+    "service\\service-glow-count4-0.png": {
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "channels": 4,
+      "bitDepth": 8,
+      "palette": false,
+      "hasAlpha": true,
+      "bytes": 434
+    },
+    "service\\service-hue-edg8-4x4-s2-0.png": {
+      "format": "png",
+      "width": 64,
+      "height": 16,
+      "channels": 4,
+      "bitDepth": 8,
+      "palette": false,
+      "hasAlpha": true,
+      "bytes": 417
+    },
+    "service\\service-hue-edg8-4x4-s8-0.png": {
+      "format": "png",
+      "width": 64,
+      "height": 16,
+      "channels": 4,
+      "bitDepth": 8,
+      "palette": false,
+      "hasAlpha": true,
+      "bytes": 569
+    },
+    "service\\service-hue-edg8-none-0.png": {
+      "format": "png",
+      "width": 64,
+      "height": 16,
+      "channels": 4,
+      "bitDepth": 8,
+      "palette": false,
+      "hasAlpha": true,
+      "bytes": 448
+    },
+    "service\\service-knight-2frame-count8-0.png": {
+      "format": "png",
+      "width": 24,
+      "height": 24,
+      "channels": 4,
+      "bitDepth": 8,
+      "palette": false,
+      "hasAlpha": true,
+      "bytes": 406
+    },
+    "service\\service-knight-2frame-count8-1.png": {
+      "format": "png",
+      "width": 24,
+      "height": 24,
+      "channels": 4,
+      "bitDepth": 8,
+      "palette": false,
+      "hasAlpha": true,
+      "bytes": 388
+    },
+    "service\\service-knight-count16-0.png": {
+      "format": "png",
+      "width": 24,
+      "height": 24,
+      "channels": 4,
+      "bitDepth": 8,
+      "palette": false,
+      "hasAlpha": true,
+      "bytes": 450
+    },
+    "service\\service-knight-count4-0.png": {
+      "format": "png",
+      "width": 24,
+      "height": 24,
+      "channels": 4,
+      "bitDepth": 8,
+      "palette": false,
+      "hasAlpha": true,
+      "bytes": 290
+    },
+    "service\\service-knight-count4-mcp-0.png": {
+      "format": "png",
+      "width": 24,
+      "height": 24,
+      "channels": 4,
+      "bitDepth": 8,
+      "palette": false,
+      "hasAlpha": true,
+      "bytes": 290
+    },
+    "service\\service-knight-edg8-0.png": {
+      "format": "png",
+      "width": 24,
+      "height": 24,
+      "channels": 4,
+      "bitDepth": 8,
+      "palette": false,
+      "hasAlpha": true,
+      "bytes": 344
+    },
+    "service\\service-knight-pico8-0.png": {
+      "format": "png",
+      "width": 24,
+      "height": 24,
+      "channels": 4,
+      "bitDepth": 8,
+      "palette": false,
+      "hasAlpha": true,
+      "bytes": 409
+    },
+    "service\\service-spill1-count3-0.png": {
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "channels": 4,
+      "bitDepth": 8,
+      "palette": false,
+      "hasAlpha": true,
+      "bytes": 268
+    }
+  },
+  "requestHashMismatches": [],
+  "billing": {
+    "successfulRest": 10,
+    "successfulMcp": 1,
+    "reportedGenerations": 1.1,
+    "balanceBefore": 5626.09999999998,
+    "balanceAfter": 5624.99999999998,
+    "balanceDelta": 1.1,
+    "usdBefore": 22.5136616860766,
+    "usdAfter": 22.5136616860766
+  },
+  "secretScan": {
+    "filesScanned": 87,
+    "filesContainingSecret": 0
+  }
+}

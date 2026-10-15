@@ -1,0 +1,40 @@
+{
+ "orderMatchesClaude": true,
+ "idsUnique": true,
+ "noGeneratedCollision": true,
+ "idsPrefixed": true,
+ "colorSetsDistinct": true,
+ "nonIncreasingCounts": true,
+ "counts": [
+  64,
+  32,
+  16,
+  16,
+  8,
+  8,
+  4,
+  4,
+  2,
+  2,
+  2
+ ],
+ "frozen": true,
+ "bw": [
+  "#000000",
+  "#ffffff"
+ ],
+ "minDistance": {
+  "preset-res64": 10,
+  "preset-edg32": 22,
+  "preset-pico8": 59,
+  "preset-db16": 47,
+  "preset-edg8": 88,
+  "preset-gray8": 62,
+  "preset-icecreamgb": 63,
+  "preset-gameboy": 23,
+  "preset-mono": 442,
+  "preset-glow": 359,
+  "preset-paper": 247
+ },
+ "default": "preset-edg32"
+}

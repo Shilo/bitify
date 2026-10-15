@@ -1,0 +1,14 @@
+{
+ "app": {
+  "meanAbsRGB": 63.06,
+  "maxAbs": 253,
+  "exactPixelsPct": 0.96,
+  "meanMaxErrAlphaGE128": 46.27
+ },
+ "canvasFallback": {
+  "meanAbsRGB": 3.09,
+  "maxAbs": 252,
+  "exactPixelsPct": 25.48,
+  "meanMaxErrAlphaGE128": 0.52
+ }
+}

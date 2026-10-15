@@ -1,0 +1,75 @@
+{
+  "fixture": "two original 100 pixel assets, each 50 black, 45 red or blue, 5 common purple",
+  "target": [
+    "#000000",
+    "#FFFFFF",
+    "#FF0000",
+    "#0000FF"
+  ],
+  "cap": 2,
+  "individual": [
+    {
+      "colors": [
+        "#000000",
+        "#FF0000"
+      ],
+      "used": [
+        "#000000",
+        "#FF0000"
+      ],
+      "sharedProbe": "#FF0000",
+      "weightedSquaredError": 0.4164444614030405
+    },
+    {
+      "colors": [
+        "#000000",
+        "#0000FF"
+      ],
+      "used": [
+        "#000000",
+        "#0000FF"
+      ],
+      "sharedProbe": "#0000FF",
+      "weightedSquaredError": 0.43345750702197067
+    }
+  ],
+  "individualUnion": [
+    "#000000",
+    "#FF0000",
+    "#0000FF"
+  ],
+  "collection": {
+    "colors": [
+      "#000000",
+      "#FF0000"
+    ],
+    "assets": [
+      {
+        "used": [
+          "#000000",
+          "#FF0000"
+        ],
+        "sharedProbe": "#FF0000"
+      },
+      {
+        "used": [
+          "#000000",
+          "#FF0000"
+        ],
+        "sharedProbe": "#FF0000"
+      }
+    ],
+    "equalAssetSquaredError": 0.1381383522340508
+  },
+  "unequalSizeWeighting": {
+    "pixelMass": [
+      "#000000",
+      "#FF0000"
+    ],
+    "equalAsset": [
+      "#000000",
+      "#FF0000"
+    ]
+  },
+  "conclusion": "A per-image cap does not impose a collection cap. Shared source colors can map differently with independent subsets. A shared subset enforces a common bound but sacrifices asset-specific accents."
+}

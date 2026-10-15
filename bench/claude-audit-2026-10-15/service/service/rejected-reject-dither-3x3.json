@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-15T11:43:12.739Z",
+  "authorization": "[redacted]",
+  "request": {
+    "num_colors": 4,
+    "dithering": "3x3"
+  },
+  "status": 422,
+  "ms": 181,
+  "errors": [
+    {
+      "type": "literal_error",
+      "loc": [
+        "body",
+        "dithering"
+      ],
+      "msg": "Input should be 'none', '2x2', '4x4' or '8x8'",
+      "ctx": {
+        "expected": "'none', '2x2', '4x4' or '8x8'"
+      }
+    }
+  ]
+}

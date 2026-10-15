@@ -1,0 +1,14 @@
+{
+ "total": 46,
+ "passed": 45,
+ "failed": [
+  {
+   "name": "name has no bidi/C1 controls (informational)",
+   "ok": false,
+   "detail": {
+    "name": "\"evil‮gnp.exe\"",
+    "creditUnits": 200
+   }
+  }
+ ]
+}

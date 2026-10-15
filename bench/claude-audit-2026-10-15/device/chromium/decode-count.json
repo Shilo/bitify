@@ -1,0 +1,138 @@
+{
+  "Generated default alpha-sprite.png": {
+    "beforeImport": 2,
+    "calls": [
+      {
+        "t": 25,
+        "stack": "at al (/colorfetti/assets/index-BGOH0uUe.js:3:77512) < at async on (/colorfetti/assets/index-BGOH0uUe.js:6:30417) < at async Promise.all (index 0)"
+      },
+      {
+        "t": 25,
+        "stack": "at al (/colorfetti/assets/index-BGOH0uUe.js:3:77512) < at async on (/colorfetti/assets/index-BGOH0uUe.js:6:30417) < at async Promise.all (index 1)"
+      },
+      {
+        "t": 1055,
+        "stack": "at al (/colorfetti/assets/index-BGOH0uUe.js:3:77512) < at async Module.x (/colorfetti/assets/image-import-client-CBpse5s2.js:2:4950) < at async bn (/colorfetti/assets/index-BGOH0uUe.js:6:32519)"
+      }
+    ]
+  },
+  "Generated default ramp.png": {
+    "beforeImport": 2,
+    "calls": [
+      {
+        "t": 39,
+        "stack": "at al (/colorfetti/assets/index-BGOH0uUe.js:3:77512) < at async on (/colorfetti/assets/index-BGOH0uUe.js:6:30417) < at async Promise.all (index 0)"
+      },
+      {
+        "t": 39,
+        "stack": "at al (/colorfetti/assets/index-BGOH0uUe.js:3:77512) < at async on (/colorfetti/assets/index-BGOH0uUe.js:6:30417) < at async Promise.all (index 1)"
+      },
+      {
+        "t": 1092,
+        "stack": "at al (/colorfetti/assets/index-BGOH0uUe.js:3:77512) < at async Module.x (/colorfetti/assets/image-import-client-CBpse5s2.js:2:4950) < at async bn (/colorfetti/assets/index-BGOH0uUe.js:6:32519)"
+      }
+    ]
+  },
+  "ENDESGA 8 Cut alpha-sprite.png": {
+    "beforeImport": 2,
+    "calls": [
+      {
+        "t": 69,
+        "stack": "at al (/colorfetti/assets/index-BGOH0uUe.js:3:77512) < at async on (/colorfetti/assets/index-BGOH0uUe.js:6:30417) < at async Promise.all (index 0)"
+      },
+      {
+        "t": 69,
+        "stack": "at al (/colorfetti/assets/index-BGOH0uUe.js:3:77512) < at async on (/colorfetti/assets/index-BGOH0uUe.js:6:30417) < at async Promise.all (index 1)"
+      },
+      {
+        "t": 1166,
+        "stack": "at al (/colorfetti/assets/index-BGOH0uUe.js:3:77512) < at async Module.x (/colorfetti/assets/image-import-client-CBpse5s2.js:2:4950) < at async bn (/colorfetti/assets/index-BGOH0uUe.js:6:32519)"
+      }
+    ]
+  },
+  "ENDESGA 8 Cut ramp.png": {
+    "beforeImport": 2,
+    "calls": [
+      {
+        "t": 46,
+        "stack": "at al (/colorfetti/assets/index-BGOH0uUe.js:3:77512) < at async on (/colorfetti/assets/index-BGOH0uUe.js:6:30417) < at async Promise.all (index 0)"
+      },
+      {
+        "t": 46,
+        "stack": "at al (/colorfetti/assets/index-BGOH0uUe.js:3:77512) < at async on (/colorfetti/assets/index-BGOH0uUe.js:6:30417) < at async Promise.all (index 1)"
+      },
+      {
+        "t": 1152,
+        "stack": "at al (/colorfetti/assets/index-BGOH0uUe.js:3:77512) < at async Module.x (/colorfetti/assets/image-import-client-CBpse5s2.js:2:4950) < at async bn (/colorfetti/assets/index-BGOH0uUe.js:6:32519)"
+      }
+    ]
+  },
+  "ENDESGA 8 Keep alpha-sprite.png": {
+    "beforeImport": 2,
+    "calls": [
+      {
+        "t": 33,
+        "stack": "at al (/colorfetti/assets/index-BGOH0uUe.js:3:77512) < at async on (/colorfetti/assets/index-BGOH0uUe.js:6:30417) < at async Promise.all (index 0)"
+      },
+      {
+        "t": 33,
+        "stack": "at al (/colorfetti/assets/index-BGOH0uUe.js:3:77512) < at async on (/colorfetti/assets/index-BGOH0uUe.js:6:30417) < at async Promise.all (index 1)"
+      },
+      {
+        "t": 1134,
+        "stack": "at al (/colorfetti/assets/index-BGOH0uUe.js:3:77512) < at async Module.x (/colorfetti/assets/image-import-client-CBpse5s2.js:2:4950) < at async bn (/colorfetti/assets/index-BGOH0uUe.js:6:32519)"
+      }
+    ]
+  },
+  "ENDESGA 8 Keep ramp.png": {
+    "beforeImport": 2,
+    "calls": [
+      {
+        "t": 24,
+        "stack": "at al (/colorfetti/assets/index-BGOH0uUe.js:3:77512) < at async on (/colorfetti/assets/index-BGOH0uUe.js:6:30417) < at async Promise.all (index 0)"
+      },
+      {
+        "t": 25,
+        "stack": "at al (/colorfetti/assets/index-BGOH0uUe.js:3:77512) < at async on (/colorfetti/assets/index-BGOH0uUe.js:6:30417) < at async Promise.all (index 1)"
+      },
+      {
+        "t": 1052,
+        "stack": "at al (/colorfetti/assets/index-BGOH0uUe.js:3:77512) < at async Module.x (/colorfetti/assets/image-import-client-CBpse5s2.js:2:4950) < at async bn (/colorfetti/assets/index-BGOH0uUe.js:6:32519)"
+      }
+    ]
+  },
+  "1-bit alpha-sprite.png": {
+    "beforeImport": 2,
+    "calls": [
+      {
+        "t": 48,
+        "stack": "at al (/colorfetti/assets/index-BGOH0uUe.js:3:77512) < at async on (/colorfetti/assets/index-BGOH0uUe.js:6:30417) < at async Promise.all (index 0)"
+      },
+      {
+        "t": 48,
+        "stack": "at al (/colorfetti/assets/index-BGOH0uUe.js:3:77512) < at async on (/colorfetti/assets/index-BGOH0uUe.js:6:30417) < at async Promise.all (index 1)"
+      },
+      {
+        "t": 1088,
+        "stack": "at al (/colorfetti/assets/index-BGOH0uUe.js:3:77512) < at async Module.x (/colorfetti/assets/image-import-client-CBpse5s2.js:2:4950) < at async bn (/colorfetti/assets/index-BGOH0uUe.js:6:32519)"
+      }
+    ]
+  },
+  "1-bit ramp.png": {
+    "beforeImport": 2,
+    "calls": [
+      {
+        "t": 48,
+        "stack": "at al (/colorfetti/assets/index-BGOH0uUe.js:3:77512) < at async on (/colorfetti/assets/index-BGOH0uUe.js:6:30417) < at async Promise.all (index 0)"
+      },
+      {
+        "t": 49,
+        "stack": "at al (/colorfetti/assets/index-BGOH0uUe.js:3:77512) < at async on (/colorfetti/assets/index-BGOH0uUe.js:6:30417) < at async Promise.all (index 1)"
+      },
+      {
+        "t": 1122,
+        "stack": "at al (/colorfetti/assets/index-BGOH0uUe.js:3:77512) < at async Module.x (/colorfetti/assets/image-import-client-CBpse5s2.js:2:4950) < at async bn (/colorfetti/assets/index-BGOH0uUe.js:6:32519)"
+      }
+    ]
+  }
+}

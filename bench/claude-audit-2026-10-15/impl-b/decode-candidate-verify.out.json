@@ -1,0 +1,22 @@
+{
+ "firefox": {
+  "current": {
+   "exactPct": 0.96,
+   "meanAbsRGB": 63.06
+  },
+  "candidate": {
+   "exactPct": 25.48,
+   "meanAbsRGB": 3.09
+  }
+ },
+ "chromium": {
+  "current": {
+   "exactPct": 100,
+   "meanAbsRGB": 0
+  },
+  "candidate": {
+   "exactPct": 100,
+   "meanAbsRGB": 0
+  }
+ }
+}

@@ -1,0 +1,18 @@
+{
+ "firefox": "153.0",
+ "pngBytes": 17722326,
+ "runs": [
+  {
+   "appMs": 99,
+   "canvasOnlyMs": 48
+  },
+  {
+   "appMs": 91,
+   "canvasOnlyMs": 49
+  },
+  {
+   "appMs": 92,
+   "canvasOnlyMs": 51
+  }
+ ]
+}

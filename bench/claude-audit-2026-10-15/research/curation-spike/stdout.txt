@@ -1,0 +1,122 @@
+{
+  "conversions": 64,
+  "assertions": "allpassed",
+  "summary": [
+    {
+      "fixture": "items64",
+      "palette": "edg8",
+      "dither": "none",
+      "used": 8,
+      "point": 0.014694137733301936
+    },
+    {
+      "fixture": "items64",
+      "palette": "edg8",
+      "dither": "4x4",
+      "used": 8,
+      "point": 0.01814590999445646
+    },
+    {
+      "fixture": "items64",
+      "palette": "mono",
+      "dither": "none",
+      "used": 2,
+      "point": 0.12298007216414901
+    },
+    {
+      "fixture": "items64",
+      "palette": "mono",
+      "dither": "4x4",
+      "used": 2,
+      "point": 0.1675335650908114
+    },
+    {
+      "fixture": "armor16",
+      "palette": "edg8",
+      "dither": "none",
+      "used": 5,
+      "point": 0.02504411348418368
+    },
+    {
+      "fixture": "armor16",
+      "palette": "edg8",
+      "dither": "4x4",
+      "used": 7,
+      "point": 0.027930054639133055
+    },
+    {
+      "fixture": "armor16",
+      "palette": "mono",
+      "dither": "none",
+      "used": 2,
+      "point": 0.09250160890233436
+    },
+    {
+      "fixture": "armor16",
+      "palette": "mono",
+      "dither": "4x4",
+      "used": 2,
+      "point": 0.11856524552436483
+    },
+    {
+      "fixture": "material-synthetic",
+      "palette": "edg8",
+      "dither": "none",
+      "used": 7,
+      "point": 0.015802239776701536,
+      "roles": 5
+    },
+    {
+      "fixture": "material-synthetic",
+      "palette": "edg8",
+      "dither": "4x4",
+      "used": 8,
+      "point": 0.018708531771399688,
+      "roles": 5
+    },
+    {
+      "fixture": "material-synthetic",
+      "palette": "mono",
+      "dither": "none",
+      "used": 2,
+      "point": 0.13336736130054244,
+      "roles": 2
+    },
+    {
+      "fixture": "material-synthetic",
+      "palette": "mono",
+      "dither": "4x4",
+      "used": 2,
+      "point": 0.18926428767471684,
+      "roles": 2
+    },
+    {
+      "fixture": "ramp-synthetic",
+      "palette": "edg8",
+      "dither": "none",
+      "used": 7,
+      "point": 0.013250826549797185
+    },
+    {
+      "fixture": "ramp-synthetic",
+      "palette": "edg8",
+      "dither": "4x4",
+      "used": 8,
+      "point": 0.016589430540120974
+    },
+    {
+      "fixture": "ramp-synthetic",
+      "palette": "mono",
+      "dither": "none",
+      "used": 2,
+      "point": 0.14822071932274947
+    },
+    {
+      "fixture": "ramp-synthetic",
+      "palette": "mono",
+      "dither": "4x4",
+      "used": 2,
+      "point": 0.21438316333805163
+    }
+  ]
+}

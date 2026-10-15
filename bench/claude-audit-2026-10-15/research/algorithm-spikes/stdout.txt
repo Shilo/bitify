@@ -1,0 +1,396 @@
+{
+  "files": 61,
+  "dither": [
+    {
+      "fixture": "grayscale_ramp",
+      "mode": "nearest",
+      "point": 0.001955015045222234,
+      "block": 0.00155306701689717,
+      "texture": 0,
+      "ms": 0.4497000000000071
+    },
+    {
+      "fixture": "grayscale_ramp",
+      "mode": "bayer-pair",
+      "point": 0.005923840788278075,
+      "block": 0.003678256012822495,
+      "texture": 0,
+      "ms": 6.262699999999995
+    },
+    {
+      "fixture": "grayscale_ramp",
+      "mode": "bayer-grid-aware",
+      "point": 0.004384437845381106,
+      "block": 0.00033270210481580685,
+      "texture": 0,
+      "ms": 10.56140000000002
+    },
+    {
+      "fixture": "grayscale_ramp",
+      "mode": "fs-linear",
+      "point": 0.004327726650752628,
+      "block": 0.000050757673472166905,
+      "texture": 0,
+      "ms": 19.703899999999976
+    },
+    {
+      "fixture": "grayscale_ramp",
+      "mode": "fs-oklab",
+      "point": 0.0036057529931644463,
+      "block": 0.00045498314727707227,
+      "texture": 0,
+      "ms": 15.176199999999994
+    },
+    {
+      "fixture": "color_ramps",
+      "mode": "nearest",
+      "point": 0.010536248322010017,
+      "block": 0.00874558549874315,
+      "texture": 0,
+      "ms": 1.103399999999965
+    },
+    {
+      "fixture": "color_ramps",
+      "mode": "bayer-pair",
+      "point": 0.020779515678661174,
+      "block": 0.0021946533519885377,
+      "texture": 0,
+      "ms": 238.89330000000018
+    },
+    {
+      "fixture": "color_ramps",
+      "mode": "bayer-grid-aware",
+      "point": 0.020735338149203062,
+      "block": 0.002261829858878015,
+      "texture": 0,
+      "ms": 258.46579999999994
+    },
+    {
+      "fixture": "color_ramps",
+      "mode": "fs-linear",
+      "point": 0.018416233161853996,
+      "block": 0.004223573559720671,
+      "texture": 0,
+      "ms": 7.444800000000214
+    },
+    {
+      "fixture": "color_ramps",
+      "mode": "fs-oklab",
+      "point": 0.02262589513520064,
+      "block": 0.004017849604869052,
+      "texture": 0,
+      "ms": 6.655300000000352
+    },
+    {
+      "fixture": "flat_sprite",
+      "mode": "nearest",
+      "point": 0.008581685100403236,
+      "block": 0.007248485077417178,
+      "texture": 0,
+      "ms": 0.08740000000034343
+    },
+    {
+      "fixture": "flat_sprite",
+      "mode": "bayer-pair",
+      "point": 0.018671766814233697,
+      "block": 0.001133734315369876,
+      "texture": 0.44138232720909887,
+      "ms": 1.2251999999998588
+    },
+    {
+      "fixture": "flat_sprite",
+      "mode": "bayer-grid-aware",
+      "point": 0.018671766814233697,
+      "block": 0.001133734315369876,
+      "texture": 0.44138232720909887,
+      "ms": 1.1657999999997628
+    },
+    {
+      "fixture": "flat_sprite",
+      "mode": "fs-linear",
+      "point": 0.017131819357558864,
+      "block": 0.0009738022452270756,
+      "texture": 0.7979002624671916,
+      "ms": 2.271600000000035
+    },
+    {
+      "fixture": "flat_sprite",
+      "mode": "fs-oklab",
+      "point": 0.018489369698164327,
+      "block": 0.0011078364282132852,
+      "texture": 0.8792650918635171,
+      "ms": 2.0697000000000116
+    },
+    {
+      "fixture": "eight_color_ramps",
+      "mode": "nearest",
+      "point": 0.024174786877839353,
+      "block": 0.02250067329653889,
+      "texture": 0,
+      "ms": 0.5021999999999025
+    },
+    {
+      "fixture": "eight_color_ramps",
+      "mode": "bayer-pair",
+      "point": 0.055646262052906605,
+      "block": 0.011161410415209131,
+      "texture": 0,
+      "ms": 68.71659999999974
+    },
+    {
+      "fixture": "eight_color_ramps",
+      "mode": "bayer-grid-aware",
+      "point": 0.05248524695934367,
+      "block": 0.01116243708334492,
+      "texture": 0,
+      "ms": 73.22460000000137
+    },
+    {
+      "fixture": "eight_color_ramps",
+      "mode": "fs-linear",
+      "point": 0.03926646115727508,
+      "block": 0.022907213549943517,
+      "texture": 0,
+      "ms": 6.608600000001388
+    },
+    {
+      "fixture": "eight_color_ramps",
+      "mode": "fs-oklab",
+      "point": 0.06364695746810736,
+      "block": 0.01821131873435236,
+      "texture": 0,
+      "ms": 5.964500000000044
+    },
+    {
+      "fixture": "exact_palette",
+      "mode": "nearest",
+      "point": 0,
+      "block": 0,
+      "texture": 0,
+      "ms": 0.07430000000022119
+    },
+    {
+      "fixture": "exact_palette",
+      "mode": "bayer-pair",
+      "point": 0,
+      "block": 0,
+      "texture": 0,
+      "ms": 1.31289999999899
+    },
+    {
+      "fixture": "exact_palette",
+      "mode": "bayer-grid-aware",
+      "point": 0,
+      "block": 0,
+      "texture": 0,
+      "ms": 1.2786999999989348
+    },
+    {
+      "fixture": "exact_palette",
+      "mode": "fs-linear",
+      "point": 0,
+      "block": 0,
+      "texture": 0,
+      "ms": 1.2916999999997643
+    },
+    {
+      "fixture": "exact_palette",
+      "mode": "fs-oklab",
+      "point": 0,
+      "block": 0,
+      "texture": 0,
+      "ms": 1.2726999999995314
+    },
+    {
+      "fixture": "alpha_islands",
+      "mode": "nearest",
+      "point": 0.006974406424842437,
+      "block": 0.0035952737826210265,
+      "texture": 0,
+      "ms": 0.12269999999989523
+    },
+    {
+      "fixture": "alpha_islands",
+      "mode": "bayer-pair",
+      "point": 0.04821170815647201,
+      "block": 0.0032300254098270313,
+      "texture": 0,
+      "ms": 2.6085999999995693
+    },
+    {
+      "fixture": "alpha_islands",
+      "mode": "bayer-grid-aware",
+      "point": 0.02755694083456411,
+      "block": 0.001428510550207633,
+      "texture": 0,
+      "ms": 2.580500000000029
+    },
+    {
+      "fixture": "alpha_islands",
+      "mode": "fs-linear",
+      "point": 0.01442551397541092,
+      "block": 0.0008214388087837875,
+      "texture": 0,
+      "ms": 4.58350000000064
+    },
+    {
+      "fixture": "alpha_islands",
+      "mode": "fs-oklab",
+      "point": 0.018448328549638328,
+      "block": 0.0014351503740695501,
+      "texture": 0,
+      "ms": 4.300100000000384
+    }
+  ],
+  "temporal": {
+    "nearest": {
+      "unchangedSourcePixels": 6143,
+      "changedStaticPixels": 0,
+      "rate": 0
+    },
+    "bayer-pair": {
+      "unchangedSourcePixels": 6143,
+      "changedStaticPixels": 0,
+      "rate": 0
+    },
+    "bayer-grid-aware": {
+      "unchangedSourcePixels": 6143,
+      "changedStaticPixels": 0,
+      "rate": 0
+    },
+    "fs-linear": {
+      "unchangedSourcePixels": 6143,
+      "changedStaticPixels": 4116,
+      "rate": 0.6700309295132671
+    },
+    "fs-oklab": {
+      "unchangedSourcePixels": 6143,
+      "changedStaticPixels": 4026,
+      "rate": 0.6553801074393619
+    }
+  },
+  "subset": [
+    {
+      "case": "rare-accent",
+      "name": "area-weighted",
+      "colors": [
+        "#243447",
+        "#669bbc"
+      ],
+      "accentPreserved": false,
+      "usedColors": 2,
+      "pixelOklabMSE": 0.00974907788243018,
+      "block4OklabMSE": 0.009444220524706353,
+      "exactPixels": 2688,
+      "exactLoss": 0,
+      "alphaMismatch": 0,
+      "flatHorizontalTexture": 0,
+      "pngBytes": 174
+    },
+    {
+      "case": "rare-accent",
+      "name": "locked-accent",
+      "colors": [
+        "#38618c",
+        "#ef233c"
+      ],
+      "accentPreserved": true,
+      "usedColors": 2,
+      "pixelOklabMSE": 0.02029786539126578,
+      "block4OklabMSE": 0.019696100166417846,
+      "exactPixels": 1408,
+      "exactLoss": 0,
+      "alphaMismatch": 0,
+      "flatHorizontalTexture": 0,
+      "pngBytes": 169
+    },
+    {
+      "case": "animation-scope",
+      "name": "shared",
+      "indices": [
+        0,
+        1
+      ],
+      "changedStaticPixels": 0,
+      "unchangedSourcePixels": 2176
+    },
+    {
+      "case": "animation-scope",
+      "name": "per-frame",
+      "indices": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "changedStaticPixels": 256,
+      "unchangedSourcePixels": 2176
+    }
+  ],
+  "generation": [
+    {
+      "fixture": "color_ramps",
+      "k": 4,
+      "method": "auto64-then-cap",
+      "error": 0.01029556133450427,
+      "ms": 46.055999999998676
+    },
+    {
+      "fixture": "color_ramps",
+      "k": 4,
+      "method": "direct-k-prototype",
+      "error": 0.009672913386132848,
+      "ms": 13.177300000001196
+    },
+    {
+      "fixture": "color_ramps",
+      "k": 8,
+      "method": "auto64-then-cap",
+      "error": 0.004987837279805497,
+      "ms": 52.22439999999915
+    },
+    {
+      "fixture": "color_ramps",
+      "k": 8,
+      "method": "direct-k-prototype",
+      "error": 0.004715936244719339,
+      "ms": 20.76929999999993
+    },
+    {
+      "fixture": "flat_sprite",
+      "k": 4,
+      "method": "auto64-then-cap",
+      "error": 0.000058435830977844246,
+      "ms": 0.7748000000010506
+    },
+    {
+      "fixture": "flat_sprite",
+      "k": 4,
+      "method": "direct-k-prototype",
+      "error": 0.000058435830977844246,
+      "ms": 0.11599999999998545
+    },
+    {
+      "fixture": "flat_sprite",
+      "k": 8,
+      "method": "auto64-then-cap",
+      "error": 0,
+      "ms": 0.6510000000016589
+    },
+    {
+      "fixture": "flat_sprite",
+      "k": 8,
+      "method": "direct-k-prototype",
+      "error": 0,
+      "ms": 0.10800000000017462
+    }
+  ],
+  "preview": {
+    "sampledPixels": 512,
+    "displayCoordinateDisagreements": 277
+  }
+}

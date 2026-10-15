@@ -1,0 +1,593 @@
+{
+  "tag": "clamv9hs8v4",
+  "date": "2026-10-15T12:05:29.473Z",
+  "indexSha256": "16d2776e085ab2d3907d055ccf5bd52e2fb20bdd089a7c0a87b2fc19cdb92837",
+  "fixtures": {
+    "alpha-sprite.png": "e315b1ea6ead995085a66e634b56933b56b97fe9e81ae3e1b5f5646a985ff819",
+    "ramp.png": "d983d1dd0f71118c6910a2a493b120b8aa16fa776bfd78cd7afe6b24b028917c",
+    "walk.gif": "4b983d0caa70739aa804e90cb63e69ef023e86b90bd5c2efb5ae8bbee1982b24",
+    "hi256.png": "829ddbb117acb4d48db25350c388ef6a1f1afeb4ba6231f070e655efe9d993b1",
+    "hi1024.png": "c66bb291e70a316e0c0dee0f5f0c0a58387c7b928f168198937ce0b57a54cc56",
+    "hi1024-alpha.png": "c9ad73f1af58d05e830d8afdca4daae705b6eb87c37aea94e288c607e9993923",
+    "wall0.gif": "996dea3631be907dc2b4e8b3cd457ca5169f6fa16707cdd657d3bcb994e84851"
+  },
+  "correctness": [],
+  "perf": [
+    {
+      "name": "Import alpha-sprite.png target8 {}",
+      "pass": true,
+      "wallMs": 63451,
+      "cold": {
+        "firstUsablePreviewMs": 82,
+        "sample": [
+          24,
+          24
+        ],
+        "longtasks": 0,
+        "longtaskMs": 0,
+        "longestTask": 0,
+        "rafMaxGap": 25,
+        "rafP95Gap": 25,
+        "rafFrames": 7,
+        "heapMB": 10
+      },
+      "warm": {
+        "firstUsablePreviewMs": 46,
+        "sample": [
+          24,
+          24
+        ],
+        "longtasks": 0,
+        "longtaskMs": 0,
+        "longestTask": 0,
+        "rafMaxGap": 17,
+        "rafP95Gap": 17,
+        "rafFrames": 5,
+        "heapMB": 10
+      },
+      "device": {
+        "wake": "Awake",
+        "battery": 30,
+        "thermal": "0"
+      }
+    },
+    {
+      "name": "Import hi256.png target8 {}",
+      "pass": true,
+      "wallMs": 63906,
+      "cold": {
+        "firstUsablePreviewMs": 188,
+        "sample": [
+          256,
+          256
+        ],
+        "longtasks": 1,
+        "longtaskMs": 64,
+        "longestTask": 64,
+        "rafMaxGap": 25,
+        "rafP95Gap": 25,
+        "rafFrames": 14,
+        "heapMB": 10
+      },
+      "warm": {
+        "firstUsablePreviewMs": 93,
+        "sample": [
+          256,
+          256
+        ],
+        "longtasks": 1,
+        "longtaskMs": 88,
+        "longestTask": 88,
+        "rafMaxGap": 20,
+        "rafP95Gap": 20,
+        "rafFrames": 9,
+        "heapMB": 10
+      },
+      "device": {
+        "wake": "Awake",
+        "battery": 30.1,
+        "thermal": "0"
+      }
+    },
+    {
+      "name": "Import hi1024.png target8 {}",
+      "pass": true,
+      "wallMs": 66662,
+      "cold": {
+        "firstUsablePreviewMs": 351,
+        "sample": [
+          936,
+          936
+        ],
+        "longtasks": 1,
+        "longtaskMs": 386,
+        "longestTask": 386,
+        "rafMaxGap": 18,
+        "rafP95Gap": 18,
+        "rafFrames": 21,
+        "heapMB": 78
+      },
+      "warm": {
+        "firstUsablePreviewMs": 344,
+        "sample": [
+          936,
+          936
+        ],
+        "longtasks": 1,
+        "longtaskMs": 374,
+        "longestTask": 374,
+        "rafMaxGap": 25,
+        "rafP95Gap": 23,
+        "rafFrames": 23,
+        "heapMB": 78
+      },
+      "device": {
+        "wake": "Awake",
+        "battery": 30.1,
+        "thermal": "0"
+      }
+    },
+    {
+      "name": "Import hi1024.png target256 {\"dither\":\"8x8\",\"ditherStrength\":100}",
+      "pass": true,
+      "wallMs": 70275,
+      "cold": {
+        "firstUsablePreviewMs": 2357,
+        "sample": [
+          936,
+          936
+        ],
+        "longtasks": 1,
+        "longtaskMs": 387,
+        "longestTask": 387,
+        "rafMaxGap": 33,
+        "rafP95Gap": 17,
+        "rafFrames": 143,
+        "heapMB": 82
+      },
+      "warm": {
+        "firstUsablePreviewMs": 2330,
+        "sample": [
+          936,
+          936
+        ],
+        "longtasks": 1,
+        "longtaskMs": 364,
+        "longestTask": 364,
+        "rafMaxGap": 33,
+        "rafP95Gap": 25,
+        "rafFrames": 138,
+        "heapMB": 82
+      },
+      "device": {
+        "wake": "Awake",
+        "battery": 30.1,
+        "thermal": "0"
+      }
+    },
+    {
+      "name": "Import hi1024-alpha.png target256 {\"dither\":\"8x8\",\"ditherStrength\":100,\"alphaMode\":\"keep\"}",
+      "pass": true,
+      "wallMs": 69252,
+      "cold": {
+        "firstUsablePreviewMs": 1958,
+        "sample": [
+          936,
+          936
+        ],
+        "longtasks": 1,
+        "longtaskMs": 378,
+        "longestTask": 378,
+        "rafMaxGap": 17,
+        "rafP95Gap": 17,
+        "rafFrames": 119,
+        "heapMB": 65
+      },
+      "warm": {
+        "firstUsablePreviewMs": 1922,
+        "sample": [
+          936,
+          936
+        ],
+        "longtasks": 1,
+        "longtaskMs": 360,
+        "longestTask": 360,
+        "rafMaxGap": 25,
+        "rafP95Gap": 17,
+        "rafFrames": 117,
+        "heapMB": 65
+      },
+      "device": {
+        "wake": "Awake",
+        "battery": 30.1,
+        "thermal": "0"
+      }
+    },
+    {
+      "name": "Import hi1024-alpha.png target256 {\"dither\":\"8x8\",\"ditherStrength\":100,\"alphaMode\":\"cut\"}",
+      "pass": true,
+      "wallMs": 68384,
+      "cold": {
+        "firstUsablePreviewMs": 1274,
+        "sample": [
+          936,
+          936
+        ],
+        "longtasks": 1,
+        "longtaskMs": 364,
+        "longestTask": 364,
+        "rafMaxGap": 18,
+        "rafP95Gap": 17,
+        "rafFrames": 78,
+        "heapMB": 58
+      },
+      "warm": {
+        "firstUsablePreviewMs": 1312,
+        "sample": [
+          936,
+          936
+        ],
+        "longtasks": 1,
+        "longtaskMs": 367,
+        "longestTask": 367,
+        "rafMaxGap": 24,
+        "rafP95Gap": 17,
+        "rafFrames": 82,
+        "heapMB": 58
+      },
+      "device": {
+        "wake": "Awake",
+        "battery": 30.2,
+        "thermal": "0"
+      }
+    },
+    {
+      "name": "Count 1Mi hi1024.png target8 none@50 cut",
+      "pass": true,
+      "wallMs": 4474,
+      "countMs": 273,
+      "usedColors": 8,
+      "longtasks": 0,
+      "longtaskMs": 0,
+      "longestTask": 0,
+      "rafMaxGap": 17,
+      "rafP95Gap": 17,
+      "rafFrames": 18,
+      "heapMB": 78,
+      "device": {
+        "wake": "Awake",
+        "battery": 30.3,
+        "thermal": "0"
+      }
+    },
+    {
+      "name": "Count 1Mi hi1024.png target8 4x4@50 cut",
+      "pass": true,
+      "wallMs": 5994,
+      "countMs": 1521,
+      "usedColors": 8,
+      "longtasks": 0,
+      "longtaskMs": 0,
+      "longestTask": 0,
+      "rafMaxGap": 17,
+      "rafP95Gap": 17,
+      "rafFrames": 92,
+      "heapMB": 58,
+      "device": {
+        "wake": "Awake",
+        "battery": 30.3,
+        "thermal": "0"
+      }
+    },
+    {
+      "name": "Count 1Mi hi1024.png target8 8x8@100 cut",
+      "pass": true,
+      "wallMs": 6042,
+      "countMs": 1554,
+      "usedColors": 8,
+      "longtasks": 0,
+      "longtaskMs": 0,
+      "longestTask": 0,
+      "rafMaxGap": 17,
+      "rafP95Gap": 17,
+      "rafFrames": 95,
+      "heapMB": 58,
+      "device": {
+        "wake": "Awake",
+        "battery": 30.3,
+        "thermal": "0"
+      }
+    },
+    {
+      "name": "Count 1Mi hi1024-alpha.png target8 8x8@100 keep",
+      "pass": true,
+      "wallMs": 5770,
+      "countMs": 1516,
+      "usedColors": 8,
+      "longtasks": 0,
+      "longtaskMs": 0,
+      "longestTask": 0,
+      "rafMaxGap": 17,
+      "rafP95Gap": 17,
+      "rafFrames": 93,
+      "heapMB": 69,
+      "device": {
+        "wake": "Awake",
+        "battery": 30.3,
+        "thermal": "0"
+      }
+    },
+    {
+      "name": "Count 1Mi hi1024-alpha.png target8 none@50 keep",
+      "pass": true,
+      "wallMs": 3739,
+      "countMs": 238,
+      "usedColors": 8,
+      "longtasks": 0,
+      "longtaskMs": 0,
+      "longestTask": 0,
+      "rafMaxGap": 25,
+      "rafP95Gap": 25,
+      "rafFrames": 15,
+      "heapMB": 61,
+      "device": {
+        "wake": "Awake",
+        "battery": 30.3,
+        "thermal": "0"
+      }
+    },
+    {
+      "name": "Count 1Mi hi1024.png target64 none@50 cut",
+      "pass": true,
+      "wallMs": 4191,
+      "countMs": 429,
+      "usedColors": 64,
+      "longtasks": 0,
+      "longtaskMs": 0,
+      "longestTask": 0,
+      "rafMaxGap": 17,
+      "rafP95Gap": 17,
+      "rafFrames": 28,
+      "heapMB": 58,
+      "device": {
+        "wake": "Awake",
+        "battery": 30.3,
+        "thermal": "0"
+      }
+    },
+    {
+      "name": "Count 1Mi hi1024.png target64 4x4@50 cut",
+      "pass": true,
+      "wallMs": 6989,
+      "countMs": 2088,
+      "usedColors": 64,
+      "longtasks": 0,
+      "longtaskMs": 0,
+      "longestTask": 0,
+      "rafMaxGap": 50,
+      "rafP95Gap": 17,
+      "rafFrames": 124,
+      "heapMB": 58,
+      "device": {
+        "wake": "Awake",
+        "battery": 30.3,
+        "thermal": "0"
+      }
+    },
+    {
+      "name": "Count 1Mi hi1024.png target64 8x8@100 cut",
+      "pass": true,
+      "wallMs": 6982,
+      "countMs": 2140,
+      "usedColors": 64,
+      "longtasks": 0,
+      "longtaskMs": 0,
+      "longestTask": 0,
+      "rafMaxGap": 42,
+      "rafP95Gap": 17,
+      "rafFrames": 129,
+      "heapMB": 82,
+      "device": {
+        "wake": "Awake",
+        "battery": 30.3,
+        "thermal": "0"
+      }
+    },
+    {
+      "name": "Count 1Mi hi1024.png target256 none@50 cut",
+      "pass": true,
+      "wallMs": 5329,
+      "countMs": 1039,
+      "usedColors": 256,
+      "longtasks": 0,
+      "longtaskMs": 0,
+      "longestTask": 0,
+      "rafMaxGap": 17,
+      "rafP95Gap": 17,
+      "rafFrames": 65,
+      "heapMB": 58,
+      "device": {
+        "wake": "Awake",
+        "battery": 30.3,
+        "thermal": "0"
+      }
+    },
+    {
+      "name": "Count 1Mi hi1024.png target256 4x4@50 cut",
+      "pass": true,
+      "wallMs": 8779,
+      "countMs": 3106,
+      "usedColors": 256,
+      "longtasks": 0,
+      "longtaskMs": 0,
+      "longestTask": 0,
+      "rafMaxGap": 25,
+      "rafP95Gap": 17,
+      "rafFrames": 187,
+      "heapMB": 58,
+      "device": {
+        "wake": "Awake",
+        "battery": 30.3,
+        "thermal": "0"
+      }
+    },
+    {
+      "name": "Count 1Mi hi1024.png target256 8x8@100 cut",
+      "pass": true,
+      "wallMs": 8931,
+      "countMs": 3107,
+      "usedColors": 256,
+      "longtasks": 0,
+      "longtaskMs": 0,
+      "longestTask": 0,
+      "rafMaxGap": 21,
+      "rafP95Gap": 17,
+      "rafFrames": 186,
+      "heapMB": 58,
+      "device": {
+        "wake": "Awake",
+        "battery": 30.5,
+        "thermal": "0"
+      }
+    },
+    {
+      "name": "Count 1Mi hi1024-alpha.png target256 8x8@100 keep",
+      "pass": true,
+      "wallMs": 7895,
+      "countMs": 2648,
+      "usedColors": 256,
+      "longtasks": 0,
+      "longtaskMs": 0,
+      "longestTask": 0,
+      "rafMaxGap": 42,
+      "rafP95Gap": 17,
+      "rafFrames": 159,
+      "heapMB": 73,
+      "device": {
+        "wake": "Awake",
+        "battery": 30.5,
+        "thermal": "0"
+      }
+    },
+    {
+      "name": "Count 1Mi hi1024-alpha.png target256 none@50 keep",
+      "pass": true,
+      "wallMs": 4957,
+      "countMs": 1004,
+      "usedColors": 256,
+      "longtasks": 0,
+      "longtaskMs": 0,
+      "longestTask": 0,
+      "rafMaxGap": 17,
+      "rafP95Gap": 17,
+      "rafFrames": 62,
+      "heapMB": 54,
+      "device": {
+        "wake": "Awake",
+        "battery": 30.5,
+        "thermal": "0"
+      }
+    },
+    {
+      "name": "Repeated dither/strength changes (12 taps, 1Mi + 256², target 64)",
+      "pass": false,
+      "error": "page.waitForFunction: Timeout 120000ms exceeded."
+    },
+    {
+      "name": "Cancel: Count 1Mi target256 8x8@100 canceled by Dithering off",
+      "pass": true,
+      "wallMs": 9764,
+      "countingWhenChanged": true,
+      "labelClearedMs": 235,
+      "newPreviewMs": 475,
+      "afterChange": {
+        "longtasks": 0,
+        "longtaskMs": 0,
+        "longestTask": 0,
+        "rafMaxGap": 33,
+        "rafP95Gap": 17,
+        "rafFrames": 183,
+        "heapMB": 73
+      },
+      "beforeChange": {
+        "longtasks": 0,
+        "longtaskMs": 0,
+        "longestTask": 0,
+        "rafMaxGap": 17,
+        "rafP95Gap": 17,
+        "rafFrames": 28,
+        "heapMB": 73
+      },
+      "longtasksAfter100ms": [],
+      "device": {
+        "wake": "Awake",
+        "battery": 31.2,
+        "thermal": "0"
+      }
+    },
+    {
+      "name": "GIF wall 6x(128x128x12) Resurrect64 nearest",
+      "pass": true,
+      "wallMs": 13948,
+      "sourceFps": 12.5,
+      "convertedPaintsPerSecondPerTile": [
+        12.1,
+        12.1,
+        12.1,
+        12.1,
+        12.1,
+        12.1
+      ],
+      "longtasks": 0,
+      "longtaskMs": 0,
+      "longestTask": 0,
+      "rafMaxGap": 17,
+      "rafP95Gap": 17,
+      "rafFrames": 601,
+      "heapMB": 61,
+      "device": {
+        "wake": "Awake",
+        "battery": 31.2,
+        "thermal": "0"
+      }
+    },
+    {
+      "name": "GIF wall 6x(128x128x12) Resurrect64 4x4@100",
+      "pass": true,
+      "wallMs": 13724,
+      "sourceFps": 12.5,
+      "convertedPaintsPerSecondPerTile": [
+        12.1,
+        12.1,
+        12.1,
+        12.1,
+        12.1,
+        12.1
+      ],
+      "longtasks": 0,
+      "longtaskMs": 0,
+      "longestTask": 0,
+      "rafMaxGap": 17,
+      "rafP95Gap": 17,
+      "rafFrames": 602,
+      "heapMB": 22,
+      "device": {
+        "wake": "Awake",
+        "battery": 31.2,
+        "thermal": "0"
+      }
+    }
+  ],
+  "errors": [],
+  "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+  "deviceStart": {
+    "wake": "Awake",
+    "battery": 30,
+    "thermal": "0"
+  },
+  "deviceEnd": {
+    "wake": "Awake",
+    "battery": 31.2,
+    "thermal": "0"
+  }
+}

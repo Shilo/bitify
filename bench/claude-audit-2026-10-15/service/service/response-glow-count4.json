@@ -1,0 +1,38 @@
+{
+  "at": "2026-10-15T11:43:11.735Z",
+  "endpoint": "POST /v2/reduce-colors",
+  "authorization": "[redacted]",
+  "request": {
+    "inputs": [
+      {
+        "file": "glow-alpha.png",
+        "pngSha256": "adcf73c22e83245fb77e143b1e69aa50db973d57e13afc391a54084176f408dc"
+      }
+    ],
+    "num_colors": 4,
+    "palette_image": null,
+    "dithering": "none",
+    "dithering_strength": null
+  },
+  "status": 200,
+  "ms": 4444,
+  "result": {
+    "usage": {
+      "type": "generations",
+      "generations": 0.1
+    },
+    "images": [
+      {
+        "type": "base64",
+        "base64": "[omitted 580 chars]",
+        "format": "png"
+      }
+    ],
+    "palette": {
+      "type": "base64",
+      "base64": "[omitted 104 chars]",
+      "format": "png"
+    },
+    "n_colors": 9
+  }
+}

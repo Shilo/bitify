@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-15T11:43:12.554Z",
+  "authorization": "[redacted]",
+  "request": {
+    "num_colors": 257
+  },
+  "status": 422,
+  "ms": 173,
+  "errors": [
+    {
+      "type": "less_than_equal",
+      "loc": [
+        "body",
+        "num_colors"
+      ],
+      "msg": "Input should be less than or equal to 256",
+      "ctx": {
+        "le": 256
+      }
+    }
+  ]
+}

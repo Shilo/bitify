@@ -1,0 +1,2 @@
+{"mode":"cut","cap":3,"subset":["#dc1e1e","#1ec828","#283cdc"],"opaquePixelsChanged":0,"opaquePixels":400}
+{"mode":"keep","cap":3,"subset":["#1ec828","#283cdc","#ff00ff"],"opaquePixelsChanged":140,"opaquePixels":400}

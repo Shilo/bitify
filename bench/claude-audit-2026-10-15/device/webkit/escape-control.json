@@ -1,0 +1,13 @@
+{
+  "viewerOnlyEscape": [],
+  "afterEscapeClosesEditor": [
+    "image-viewer",
+    "glass-modal-overlay is-active palette-import-modal"
+  ],
+  "secondEscape": [
+    "image-viewer"
+  ],
+  "escapeAfterRefocus": [
+    "image-viewer"
+  ]
+}

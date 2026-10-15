@@ -1,0 +1,78 @@
+{
+ "node": "v25.0.0",
+ "cpuNote": "desktop Node; not phone",
+ "rows": [
+  {
+   "name": "noise",
+   "colors": 8,
+   "mode": "none",
+   "ms": 53
+  },
+  {
+   "name": "noise",
+   "colors": 8,
+   "mode": "8x8",
+   "ms": 638
+  },
+  {
+   "name": "noise",
+   "colors": 64,
+   "mode": "none",
+   "ms": 175
+  },
+  {
+   "name": "noise",
+   "colors": 64,
+   "mode": "8x8",
+   "ms": 922
+  },
+  {
+   "name": "noise",
+   "colors": 256,
+   "mode": "none",
+   "ms": 736
+  },
+  {
+   "name": "noise",
+   "colors": 256,
+   "mode": "8x8",
+   "ms": 2772
+  },
+  {
+   "name": "sprite",
+   "colors": 8,
+   "mode": "none",
+   "ms": 35
+  },
+  {
+   "name": "sprite",
+   "colors": 8,
+   "mode": "8x8",
+   "ms": 32
+  },
+  {
+   "name": "sprite",
+   "colors": 64,
+   "mode": "none",
+   "ms": 27
+  },
+  {
+   "name": "sprite",
+   "colors": 64,
+   "mode": "8x8",
+   "ms": 35
+  },
+  {
+   "name": "sprite",
+   "colors": 256,
+   "mode": "none",
+   "ms": 25
+  },
+  {
+   "name": "sprite",
+   "colors": 256,
+   "mode": "8x8",
+   "ms": 28
+  }
+ ]
+}

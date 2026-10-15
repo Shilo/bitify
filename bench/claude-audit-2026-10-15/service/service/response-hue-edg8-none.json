@@ -1,0 +1,41 @@
+{
+  "at": "2026-10-15T11:43:06.292Z",
+  "endpoint": "POST /v2/reduce-colors",
+  "authorization": "[redacted]",
+  "request": {
+    "inputs": [
+      {
+        "file": "hue-ramp.png",
+        "pngSha256": "3da43196ff9bb99588fa726dae1aa6e57e44bd6f2167eea29e37fcc9052461bc"
+      }
+    ],
+    "num_colors": null,
+    "palette_image": {
+      "file": "target-edg8.png",
+      "pngSha256": "6da8d72b9650675d121214e3eeaf09c06f70e2c1e9b924752aea346a416b5ab2"
+    },
+    "dithering": "none",
+    "dithering_strength": null
+  },
+  "status": 200,
+  "ms": 1865,
+  "result": {
+    "usage": {
+      "type": "generations",
+      "generations": 0.1
+    },
+    "images": [
+      {
+        "type": "base64",
+        "base64": "[omitted 600 chars]",
+        "format": "png"
+      }
+    ],
+    "palette": {
+      "type": "base64",
+      "base64": "[omitted 136 chars]",
+      "format": "png"
+    },
+    "n_colors": 8
+  }
+}

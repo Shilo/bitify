@@ -1,0 +1,340 @@
+{
+ "chromium": {
+  "version": "149.0.7827.55",
+  "runs": [
+   {
+    "closeBy": "escape",
+    "viewerOpened": {
+     "open": [
+      "image-viewer"
+     ],
+     "tooltip": [],
+     "active": "DIALOG.image-viewer Image preview"
+    },
+    "editorOpened": {
+     "open": [
+      "image-viewer",
+      "palette-import-modal"
+     ],
+     "tooltip": [],
+     "active": "BUTTON.ib Close palette editor"
+    },
+    "editorEscape1": {
+     "open": [
+      "image-viewer"
+     ],
+     "tooltip": [
+      "Save the converted image at it"
+     ],
+     "active": "BUTTON.btn Save image"
+    },
+    "viewerEscape1": {
+     "open": [
+      "image-viewer"
+     ],
+     "tooltip": [],
+     "active": "BUTTON.btn Save image"
+    },
+    "viewerEscape2": {
+     "open": [],
+     "tooltip": [],
+     "active": "BODY. "
+    },
+    "viewerClosedByEscape": true
+   },
+   {
+    "closeBy": "closeButton",
+    "viewerOpened": {
+     "open": [
+      "image-viewer"
+     ],
+     "tooltip": [],
+     "active": "DIALOG.image-viewer Image preview"
+    },
+    "editorOpened": {
+     "open": [
+      "image-viewer",
+      "palette-import-modal"
+     ],
+     "tooltip": [],
+     "active": "BUTTON.ib Close palette editor"
+    },
+    "afterCloseButton": {
+     "open": [
+      "image-viewer"
+     ],
+     "tooltip": [],
+     "active": "BUTTON.btn Save image"
+    },
+    "viewerEscape1": {
+     "open": [],
+     "tooltip": [],
+     "active": "BODY. "
+    },
+    "viewerClosedByEscape": true
+   },
+   {
+    "closeBy": "controlTabFocus",
+    "viewerOpened": {
+     "open": [
+      "image-viewer"
+     ],
+     "tooltip": [],
+     "active": "DIALOG.image-viewer Image preview"
+    },
+    "afterTab": {
+     "open": [
+      "image-viewer"
+     ],
+     "tooltip": [
+      "Save the converted image at it"
+     ],
+     "active": "BUTTON.btn Save image"
+    },
+    "viewerEscape1": {
+     "open": [
+      "image-viewer"
+     ],
+     "tooltip": [],
+     "active": "BUTTON.btn Save image"
+    },
+    "viewerEscape2": {
+     "open": [],
+     "tooltip": [
+      "walk.gif"
+     ],
+     "active": "BODY. "
+    },
+    "viewerClosedByEscape": true
+   }
+  ]
+ },
+ "firefox": {
+  "version": "153.0",
+  "runs": [
+   {
+    "closeBy": "escape",
+    "viewerOpened": {
+     "open": [
+      "image-viewer"
+     ],
+     "tooltip": [],
+     "active": "DIALOG.image-viewer Image preview"
+    },
+    "editorOpened": {
+     "open": [
+      "image-viewer",
+      "palette-import-modal"
+     ],
+     "tooltip": [],
+     "active": "BUTTON.ib Close palette editor"
+    },
+    "editorEscape1": {
+     "open": [
+      "image-viewer"
+     ],
+     "tooltip": [],
+     "active": "BUTTON.btn Save image"
+    },
+    "viewerEscape1": {
+     "open": [],
+     "tooltip": [],
+     "active": "BODY. "
+    },
+    "viewerClosedByEscape": true
+   },
+   {
+    "closeBy": "closeButton",
+    "viewerOpened": {
+     "open": [
+      "image-viewer"
+     ],
+     "tooltip": [],
+     "active": "DIALOG.image-viewer Image preview"
+    },
+    "editorOpened": {
+     "open": [
+      "image-viewer",
+      "palette-import-modal"
+     ],
+     "tooltip": [],
+     "active": "BUTTON.ib Close palette editor"
+    },
+    "afterCloseButton": {
+     "open": [
+      "image-viewer"
+     ],
+     "tooltip": [],
+     "active": "BUTTON.btn Save image"
+    },
+    "viewerEscape1": {
+     "open": [],
+     "tooltip": [],
+     "active": "BODY. "
+    },
+    "viewerClosedByEscape": true
+   },
+   {
+    "closeBy": "controlTabFocus",
+    "viewerOpened": {
+     "open": [
+      "image-viewer"
+     ],
+     "tooltip": [],
+     "active": "DIALOG.image-viewer Image preview"
+    },
+    "afterTab": {
+     "open": [
+      "image-viewer"
+     ],
+     "tooltip": [
+      "Save the converted image at it"
+     ],
+     "active": "BUTTON.btn Save image"
+    },
+    "viewerEscape1": {
+     "open": [
+      "image-viewer"
+     ],
+     "tooltip": [],
+     "active": "BUTTON.btn Save image"
+    },
+    "viewerEscape2": {
+     "open": [],
+     "tooltip": [],
+     "active": "BODY. "
+    },
+    "viewerClosedByEscape": true
+   }
+  ]
+ },
+ "webkit": {
+  "version": "26.5",
+  "runs": [
+   {
+    "closeBy": "escape",
+    "viewerOpened": {
+     "open": [
+      "image-viewer"
+     ],
+     "tooltip": [],
+     "active": "DIALOG.image-viewer Image preview"
+    },
+    "editorOpened": {
+     "open": [
+      "image-viewer",
+      "palette-import-modal"
+     ],
+     "tooltip": [
+      "Close without saving this draf"
+     ],
+     "active": "BUTTON.ib Close palette editor"
+    },
+    "editorEscape1": {
+     "open": [
+      "image-viewer",
+      "palette-import-modal"
+     ],
+     "tooltip": [],
+     "active": "BUTTON.ib Close palette editor"
+    },
+    "editorEscape2": {
+     "open": [
+      "image-viewer"
+     ],
+     "tooltip": [
+      "Save the converted image at it"
+     ],
+     "active": "BUTTON.btn Save image"
+    },
+    "viewerEscape1": {
+     "open": [
+      "image-viewer"
+     ],
+     "tooltip": [],
+     "active": "BUTTON.btn Save image"
+    },
+    "viewerEscape2": {
+     "open": [],
+     "tooltip": [],
+     "active": "BODY. "
+    },
+    "viewerClosedByEscape": true
+   },
+   {
+    "closeBy": "closeButton",
+    "viewerOpened": {
+     "open": [
+      "image-viewer"
+     ],
+     "tooltip": [],
+     "active": "DIALOG.image-viewer Image preview"
+    },
+    "editorOpened": {
+     "open": [
+      "image-viewer",
+      "palette-import-modal"
+     ],
+     "tooltip": [
+      "Close without saving this draf"
+     ],
+     "active": "BUTTON.ib Close palette editor"
+    },
+    "afterCloseButton": {
+     "open": [
+      "image-viewer"
+     ],
+     "tooltip": [
+      "Save the converted image at it"
+     ],
+     "active": "BUTTON.btn Save image"
+    },
+    "viewerEscape1": {
+     "open": [
+      "image-viewer"
+     ],
+     "tooltip": [],
+     "active": "BUTTON.btn Save image"
+    },
+    "viewerEscape2": {
+     "open": [],
+     "tooltip": [],
+     "active": "BODY. "
+    },
+    "viewerClosedByEscape": true
+   },
+   {
+    "closeBy": "controlTabFocus",
+    "viewerOpened": {
+     "open": [
+      "image-viewer"
+     ],
+     "tooltip": [],
+     "active": "DIALOG.image-viewer Image preview"
+    },
+    "afterTab": {
+     "open": [
+      "image-viewer"
+     ],
+     "tooltip": [
+      "Save the converted image at it"
+     ],
+     "active": "BUTTON.btn Save image"
+    },
+    "viewerEscape1": {
+     "open": [
+      "image-viewer"
+     ],
+     "tooltip": [],
+     "active": "BUTTON.btn Save image"
+    },
+    "viewerEscape2": {
+     "open": [],
+     "tooltip": [],
+     "active": "BODY. "
+    },
+    "viewerClosedByEscape": true
+   }
+  ]
+ }
+}

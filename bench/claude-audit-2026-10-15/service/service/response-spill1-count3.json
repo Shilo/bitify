@@ -1,0 +1,38 @@
+{
+  "at": "2026-10-15T11:46:17.257Z",
+  "endpoint": "POST /v2/reduce-colors",
+  "authorization": "[redacted]",
+  "request": {
+    "inputs": [
+      {
+        "file": "spill-alpha1.png",
+        "pngSha256": "8387d9144be95c3dc429de6c218d705c13ccca3c29bfcb1aa36dea8408f6a9bc"
+      }
+    ],
+    "num_colors": 3,
+    "palette_image": null,
+    "dithering": "none",
+    "dithering_strength": null
+  },
+  "status": 200,
+  "ms": 6275,
+  "result": {
+    "usage": {
+      "type": "generations",
+      "generations": 0.1
+    },
+    "images": [
+      {
+        "type": "base64",
+        "base64": "[omitted 360 chars]",
+        "format": "png"
+      }
+    ],
+    "palette": {
+      "type": "base64",
+      "base64": "[omitted 100 chars]",
+      "format": "png"
+    },
+    "n_colors": 2
+  }
+}

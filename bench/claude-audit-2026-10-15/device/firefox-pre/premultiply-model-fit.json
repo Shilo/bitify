@@ -1,0 +1,15 @@
+{
+ "engine": "firefox-pre",
+ "fileBytesModel": "81/282",
+ "models": {
+  "floor-premultiply/floor-unpremultiply": "82/213",
+  "floor-premultiply/round-unpremultiply": "82/213",
+  "floor-premultiply/ceil-unpremultiply": "81/212",
+  "round-premultiply/floor-unpremultiply": "81/282",
+  "round-premultiply/round-unpremultiply": "81/282",
+  "round-premultiply/ceil-unpremultiply": "81/282",
+  "ceil-premultiply/floor-unpremultiply": "81/284",
+  "ceil-premultiply/round-unpremultiply": "81/284",
+  "ceil-premultiply/ceil-unpremultiply": "81/284"
+ }
+}

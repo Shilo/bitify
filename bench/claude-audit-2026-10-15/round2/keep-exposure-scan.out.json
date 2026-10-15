@@ -1,0 +1,216 @@
+{
+ "scanned": 393,
+ "withFaintPixels": 21,
+ "rows": [
+  {
+   "file": "bench/palette-clipboard-review/android-carrier-both-native.png",
+   "w": 32,
+   "h": 24,
+   "visible": 672,
+   "opaque": 96,
+   "faint1to127": 288,
+   "tiny1to15": 96,
+   "faintShare": 0.429
+  },
+  {
+   "file": "bench/palette-clipboard-review/android-carrier-png-native.png",
+   "w": 32,
+   "h": 24,
+   "visible": 672,
+   "opaque": 96,
+   "faint1to127": 288,
+   "tiny1to15": 96,
+   "faintShare": 0.429
+  },
+  {
+   "file": "bench/palette-clipboard-review/android-palette-keep-attempt-2026-10-15T08-57-33-802Z-66f1dfe72983-f87a57f6.png",
+   "w": 32,
+   "h": 24,
+   "visible": 672,
+   "opaque": 96,
+   "faint1to127": 288,
+   "tiny1to15": 96,
+   "faintShare": 0.429
+  },
+  {
+   "file": "bench/palette-clipboard-review/android-palette-keep-attempt-2026-10-15T08-58-17-509Z-66f1dfe72983-9b96f8ca.png",
+   "w": 32,
+   "h": 24,
+   "visible": 672,
+   "opaque": 96,
+   "faint1to127": 288,
+   "tiny1to15": 96,
+   "faintShare": 0.429
+  },
+  {
+   "file": "bench/palette-clipboard-review/android-palette-keep-pasted.png",
+   "w": 32,
+   "h": 24,
+   "visible": 672,
+   "opaque": 96,
+   "faint1to127": 288,
+   "tiny1to15": 96,
+   "faintShare": 0.429
+  },
+  {
+   "file": "bench/palette-clipboard-review/codex-app-save.png",
+   "w": 32,
+   "h": 24,
+   "visible": 672,
+   "opaque": 96,
+   "faint1to127": 288,
+   "tiny1to15": 96,
+   "faintShare": 0.429
+  },
+  {
+   "file": "bench/palette-clipboard-review/codex-palette-keep-pasted.png",
+   "w": 32,
+   "h": 24,
+   "visible": 672,
+   "opaque": 96,
+   "faint1to127": 288,
+   "tiny1to15": 96,
+   "faintShare": 0.429
+  },
+  {
+   "file": "bench/palette-clipboard-review/fixtures/palette-keep-expected.png",
+   "w": 32,
+   "h": 24,
+   "visible": 672,
+   "opaque": 96,
+   "faint1to127": 288,
+   "tiny1to15": 96,
+   "faintShare": 0.429
+  },
+  {
+   "file": "bench/palette-clipboard-review/fixtures/palette-source.png",
+   "w": 32,
+   "h": 24,
+   "visible": 672,
+   "opaque": 96,
+   "faint1to127": 288,
+   "tiny1to15": 96,
+   "faintShare": 0.429
+  },
+  {
+   "file": "bench/palette-handoff-implementation-review/android-native-save-palette-keep-saved.png",
+   "w": 32,
+   "h": 24,
+   "visible": 672,
+   "opaque": 96,
+   "faint1to127": 288,
+   "tiny1to15": 96,
+   "faintShare": 0.429
+  },
+  {
+   "file": "bench/palette-handoff-service-review/input-alpha-target4.png",
+   "w": 32,
+   "h": 16,
+   "visible": 448,
+   "opaque": 64,
+   "faint1to127": 192,
+   "tiny1to15": 64,
+   "faintShare": 0.429
+  },
+  {
+   "file": "bench/palette-handoff-service-review/ours-alpha-target4.png",
+   "w": 32,
+   "h": 16,
+   "visible": 448,
+   "opaque": 64,
+   "faint1to127": 192,
+   "tiny1to15": 64,
+   "faintShare": 0.429
+  },
+  {
+   "file": "bench/palette-handoff-service-review/service-alpha-target4.png",
+   "w": 32,
+   "h": 16,
+   "visible": 448,
+   "opaque": 64,
+   "faint1to127": 192,
+   "tiny1to15": 64,
+   "faintShare": 0.429
+  },
+  {
+   "file": "bench/palette-clipboard-review/codex-attempt-wrong-tab.png",
+   "w": 128,
+   "h": 64,
+   "visible": 7680,
+   "opaque": 6656,
+   "faint1to127": 512,
+   "tiny1to15": 0,
+   "faintShare": 0.067
+  },
+  {
+   "file": "bench/palette-clipboard-review/independent-app-save.png",
+   "w": 128,
+   "h": 64,
+   "visible": 7680,
+   "opaque": 6656,
+   "faint1to127": 512,
+   "tiny1to15": 0,
+   "faintShare": 0.067
+  },
+  {
+   "file": "bench/palette-clipboard-review/independent-native-paste.png",
+   "w": 128,
+   "h": 64,
+   "visible": 7680,
+   "opaque": 6656,
+   "faint1to127": 512,
+   "tiny1to15": 0,
+   "faintShare": 0.067
+  },
+  {
+   "file": "bench/palette-clipboard-review/independent-os-clipboard.png",
+   "w": 128,
+   "h": 64,
+   "visible": 7680,
+   "opaque": 6656,
+   "faint1to127": 512,
+   "tiny1to15": 0,
+   "faintShare": 0.067
+  },
+  {
+   "file": "bench/palette-follow-up-review/android-native-followup.png",
+   "w": 128,
+   "h": 64,
+   "visible": 7680,
+   "opaque": 6656,
+   "faint1to127": 512,
+   "tiny1to15": 0,
+   "faintShare": 0.067
+  },
+  {
+   "file": "bench/palette-follow-up-review/codex-native-followup.png",
+   "w": 128,
+   "h": 64,
+   "visible": 7680,
+   "opaque": 6656,
+   "faint1to127": 512,
+   "tiny1to15": 0,
+   "faintShare": 0.067
+  },
+  {
+   "file": "bench/palette-follow-up-review/trusted-save.png",
+   "w": 128,
+   "h": 64,
+   "visible": 7680,
+   "opaque": 6656,
+   "faint1to127": 512,
+   "tiny1to15": 0,
+   "faintShare": 0.067
+  },
+  {
+   "file": "bench/palette-improvements-review/android-native-keep.png",
+   "w": 128,
+   "h": 64,
+   "visible": 7680,
+   "opaque": 6656,
+   "faint1to127": 512,
+   "tiny1to15": 0,
+   "faintShare": 0.067
+  }
+ ]
+}

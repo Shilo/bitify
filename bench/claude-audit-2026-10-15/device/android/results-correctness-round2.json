@@ -1,0 +1,303 @@
+{
+  "tag": "clamv9jcvbp",
+  "date": "2026-10-15T12:49:31.322Z",
+  "indexSha256": "67b5a088de09d901f63badcb14a4f7ba41e4e8c4b78ddc8b9b8767d8128dd82f",
+  "fixtures": {
+    "alpha-sprite.png": "e315b1ea6ead995085a66e634b56933b56b97fe9e81ae3e1b5f5646a985ff819",
+    "ramp.png": "d983d1dd0f71118c6910a2a493b120b8aa16fa776bfd78cd7afe6b24b028917c",
+    "walk.gif": "4b983d0caa70739aa804e90cb63e69ef023e86b90bd5c2efb5ae8bbee1982b24",
+    "hi256.png": "829ddbb117acb4d48db25350c388ef6a1f1afeb4ba6231f070e655efe9d993b1",
+    "hi1024.png": "c66bb291e70a316e0c0dee0f5f0c0a58387c7b928f168198937ce0b57a54cc56",
+    "hi1024-alpha.png": "c9ad73f1af58d05e830d8afdca4daae705b6eb87c37aea94e288c607e9993923",
+    "wall0.gif": "996dea3631be907dc2b4e8b3cd457ca5169f6fa16707cdd657d3bcb994e84851"
+  },
+  "correctness": [
+    {
+      "name": "Native Save Keep nearest: sprite PNG + GIF",
+      "pass": true,
+      "wallMs": 7927,
+      "out": {
+        "alpha-sprite.png": {
+          "bytes": 410,
+          "sha256": "d7b028014add7ac66b3dc32ba76e6a7e746d740e8795ff3afa8e23ff097bc3c3",
+          "frames": 1,
+          "alphaMismatch": 0,
+          "rgbMismatch": 0,
+          "preview": {
+            "canvas": [
+              24,
+              24
+            ],
+            "mismatches": 0,
+            "readbackBytesDiffer": 801
+          },
+          "decodePaths": [
+            {
+              "path": "raw-copyTo",
+              "format": "RGBA",
+              "colorSpace": [
+                "bt709",
+                "iec61966-2-1",
+                "rgb",
+                true
+              ]
+            },
+            {
+              "path": "raw-copyTo",
+              "format": "RGBA",
+              "colorSpace": [
+                "bt709",
+                "iec61966-2-1",
+                "rgb",
+                true
+              ]
+            },
+            {
+              "path": "raw-copyTo",
+              "format": "RGBA",
+              "colorSpace": [
+                "bt709",
+                "iec61966-2-1",
+                "rgb",
+                true
+              ]
+            }
+          ]
+        },
+        "walk.gif": {
+          "bytes": 1515,
+          "sha256": "ebe6ecf4be33a1ad96f854a969ac5a7a96912aa7fb953b1b63a32c9321106306",
+          "frames": 4,
+          "delays": [
+            100,
+            200,
+            100,
+            300
+          ],
+          "alphaMismatch": 0,
+          "rgbMismatch": 0,
+          "preview": {
+            "canvas": [
+              48,
+              48
+            ],
+            "mismatches": 0,
+            "readbackBytesDiffer": 226
+          },
+          "decodePaths": [],
+          "srcDelays": [
+            100,
+            200,
+            100,
+            300
+          ]
+        }
+      }
+    },
+    {
+      "name": "Native Save Cut 4x4 50: sprite PNG + GIF",
+      "pass": true,
+      "wallMs": 7694,
+      "out": {
+        "alpha-sprite.png": {
+          "bytes": 247,
+          "sha256": "6bd519432e25a56dacac5522e77f7104ba7dcabb51374ce6e44cb501ac904fb3",
+          "frames": 1,
+          "offPalette": 0,
+          "alphaWrong": 0,
+          "exactChanged": 0,
+          "preview": {
+            "canvas": [
+              24,
+              24
+            ],
+            "mismatches": 0,
+            "readbackBytesDiffer": 160
+          },
+          "decodePaths": [
+            {
+              "path": "raw-copyTo",
+              "format": "RGBA",
+              "colorSpace": [
+                "bt709",
+                "iec61966-2-1",
+                "rgb",
+                true
+              ]
+            },
+            {
+              "path": "raw-copyTo",
+              "format": "RGBA",
+              "colorSpace": [
+                "bt709",
+                "iec61966-2-1",
+                "rgb",
+                true
+              ]
+            },
+            {
+              "path": "raw-copyTo",
+              "format": "RGBA",
+              "colorSpace": [
+                "bt709",
+                "iec61966-2-1",
+                "rgb",
+                true
+              ]
+            }
+          ]
+        },
+        "walk.gif": {
+          "bytes": 2440,
+          "sha256": "aea7adc36a58fd7293af3c21503c70d17194284b946140191100870bde71b541",
+          "frames": 4,
+          "delays": [
+            100,
+            200,
+            100,
+            300
+          ],
+          "offPalette": 0,
+          "alphaWrong": 0,
+          "exactChanged": 0,
+          "preview": {
+            "canvas": [
+              48,
+              48
+            ],
+            "mismatches": 0,
+            "readbackBytesDiffer": 258
+          },
+          "decodePaths": [],
+          "srcDelays": [
+            100,
+            200,
+            100,
+            300
+          ]
+        }
+      }
+    },
+    {
+      "name": "Native Save Keep 8x8 100: sprite PNG + GIF",
+      "pass": true,
+      "wallMs": 7616,
+      "out": {
+        "alpha-sprite.png": {
+          "bytes": 488,
+          "sha256": "7d97266cfe273a6d469d7758127086e36e922733e064a77f488aeb2cd4a0c5e4",
+          "frames": 1,
+          "offPalette": 0,
+          "alphaWrong": 0,
+          "exactChanged": 0,
+          "preview": {
+            "canvas": [
+              24,
+              24
+            ],
+            "mismatches": 0,
+            "readbackBytesDiffer": 777
+          },
+          "decodePaths": [
+            {
+              "path": "raw-copyTo",
+              "format": "RGBA",
+              "colorSpace": [
+                "bt709",
+                "iec61966-2-1",
+                "rgb",
+                true
+              ]
+            },
+            {
+              "path": "raw-copyTo",
+              "format": "RGBA",
+              "colorSpace": [
+                "bt709",
+                "iec61966-2-1",
+                "rgb",
+                true
+              ]
+            },
+            {
+              "path": "raw-copyTo",
+              "format": "RGBA",
+              "colorSpace": [
+                "bt709",
+                "iec61966-2-1",
+                "rgb",
+                true
+              ]
+            }
+          ]
+        },
+        "walk.gif": {
+          "bytes": 2701,
+          "sha256": "a671d613092d44ca9b6f4c1c46e30208c3192eaae1c970b09956a10781a1f00d",
+          "frames": 4,
+          "delays": [
+            100,
+            200,
+            100,
+            300
+          ],
+          "offPalette": 0,
+          "alphaWrong": 0,
+          "exactChanged": 0,
+          "preview": {
+            "canvas": [
+              48,
+              48
+            ],
+            "mismatches": 0,
+            "readbackBytesDiffer": 222
+          },
+          "decodePaths": [],
+          "srcDelays": [
+            100,
+            200,
+            100,
+            300
+          ]
+        }
+      }
+    },
+    {
+      "name": "Count on GIF (Cut 8x8 100) equals native GIF all-frame union",
+      "pass": true,
+      "wallMs": 65642,
+      "count": 8,
+      "expected": 8,
+      "draftMatches": true
+    },
+    {
+      "name": "1 Mi-pixel native Save (Oklab nearest, Resurrect 64, Cut) vs independent oracle",
+      "pass": true,
+      "wallMs": 5973,
+      "saveToAnchorMs": 890,
+      "longtasks": 0,
+      "longtaskMs": 0,
+      "longestTask": 0,
+      "rafMaxGap": 33,
+      "rafP95Gap": 17,
+      "rafFrames": 53,
+      "heapMB": 58,
+      "alphaMismatch": 0,
+      "rgbMismatch": 0,
+      "first": null
+    }
+  ],
+  "perf": [],
+  "errors": [],
+  "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+  "deviceStart": {
+    "wake": "Awake",
+    "battery": 29.8,
+    "thermal": "0"
+  },
+  "deviceEnd": {
+    "wake": "Awake",
+    "battery": 29.8,
+    "thermal": "0"
+  }
+}

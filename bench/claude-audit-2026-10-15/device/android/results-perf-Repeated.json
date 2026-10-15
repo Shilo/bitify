@@ -1,0 +1,49 @@
+{
+  "tag": "clamv9idfyi",
+  "date": "2026-10-15T12:21:58.447Z",
+  "indexSha256": "16d2776e085ab2d3907d055ccf5bd52e2fb20bdd089a7c0a87b2fc19cdb92837",
+  "fixtures": {
+    "alpha-sprite.png": "e315b1ea6ead995085a66e634b56933b56b97fe9e81ae3e1b5f5646a985ff819",
+    "ramp.png": "d983d1dd0f71118c6910a2a493b120b8aa16fa776bfd78cd7afe6b24b028917c",
+    "walk.gif": "4b983d0caa70739aa804e90cb63e69ef023e86b90bd5c2efb5ae8bbee1982b24",
+    "hi256.png": "829ddbb117acb4d48db25350c388ef6a1f1afeb4ba6231f070e655efe9d993b1",
+    "hi1024.png": "c66bb291e70a316e0c0dee0f5f0c0a58387c7b928f168198937ce0b57a54cc56",
+    "hi1024-alpha.png": "c9ad73f1af58d05e830d8afdca4daae705b6eb87c37aea94e288c607e9993923",
+    "wall0.gif": "996dea3631be907dc2b4e8b3cd457ca5169f6fa16707cdd657d3bcb994e84851"
+  },
+  "correctness": [],
+  "perf": [
+    {
+      "name": "Repeated dither/strength changes (12 taps, 1Mi + 256², target 64)",
+      "pass": true,
+      "wallMs": 7373,
+      "tapsMs": 3189,
+      "settleAfterLastChangeMs": 386,
+      "tilePaintsDuringBurst": 15,
+      "longtasks": 0,
+      "longtaskMs": 0,
+      "longestTask": 0,
+      "rafMaxGap": 17,
+      "rafP95Gap": 17,
+      "rafFrames": 230,
+      "heapMB": 78,
+      "device": {
+        "wake": "Awake",
+        "battery": 30.9,
+        "thermal": "0"
+      }
+    }
+  ],
+  "errors": [],
+  "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+  "deviceStart": {
+    "wake": "Awake",
+    "battery": 30.9,
+    "thermal": "0"
+  },
+  "deviceEnd": {
+    "wake": "Awake",
+    "battery": 30.9,
+    "thermal": "0"
+  }
+}

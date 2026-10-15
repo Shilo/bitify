@@ -1,0 +1,38 @@
+{
+  "at": "2026-10-15T11:43:13.422Z",
+  "surface": "MCP tools/call reduce_colors",
+  "authorization": "[redacted]",
+  "request": {
+    "inputs": [
+      {
+        "file": "knight-a.png",
+        "pngSha256": "fbe0f27539ac667c61977282e5b481027dbe54cabbd2e3a4eac80d7818c725ea"
+      }
+    ],
+    "num_colors": 4,
+    "dithering": "none"
+  },
+  "submitStatus": 200,
+  "submitText": "id: 0e2033f3-0d00-4508-bce5-3bf6f37efa1f\njob_id: 0e2033f3-0d00-4508-bce5-3bf6f37efa1f\nasset_id: fa36e834-9a8e-5e51-897e-275643aa6d75\nasset_status: pending (saved when generation completes)\nframes: 1\nsize: 24x24px (unchanged)\npalette: 4 colors\ndithering: none\ncost: 0.1 generations\nstatus: processing (~1s)\n\nhint: get_image(job_id=\"0e2033f3-0d00-4508-bce5-3bf6f37efa1f\")",
+  "job": "0e2033f3-0d00-4508-bce5-3bf6f37efa1f",
+  "polls": [
+    {
+      "at": 656,
+      "images": 0,
+      "isError": false
+    },
+    {
+      "at": 5192,
+      "images": 1,
+      "isError": false
+    }
+  ],
+  "result": {
+    "status": "completed",
+    "frames": 1,
+    "charged_generations": 0.1,
+    "asset_status": "saved",
+    "text": "status: completed\nid: 0e2033f3-0d00-4508-bce5-3bf6f37efa1f\njob_id: 0e2033f3-0d00-4508-bce5-3bf6f37efa1f\nframes: 1\ntransparent: yes\nasset_id: fa36e834-9a8e-5e51-897e-275643aa6d75\nasset_type: image\nasset_status: saved\ngallery: saved to your PixelLab gallery (pixellab.ai/create)\ncharged: 0.1 generations\ndownload: [url omitted]"
+  },
+  "elapsedMs": 5193
+}

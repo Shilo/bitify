@@ -1,0 +1,109 @@
+{
+  "at": "2026-10-15T11:42:06.021Z",
+  "note": "Owned synthetic fixtures created for this audit; no user art.",
+  "rareCoordinates": {
+    "eye": [
+      [
+        10,
+        7
+      ],
+      [
+        13,
+        7
+      ]
+    ],
+    "gem": [
+      [
+        4,
+        13
+      ]
+    ],
+    "specular": [
+      [
+        8,
+        11
+      ]
+    ]
+  },
+  "files": {
+    "knight-a.png": {
+      "pngSha256": "fbe0f27539ac667c61977282e5b481027dbe54cabbd2e3a4eac80d7818c725ea",
+      "rgbaSha256": "7cbb269f9f9d260da038611b3dc72df3b841b8cb06f1609c0cb8e6b55daa1d15",
+      "width": 24,
+      "height": 24,
+      "visibleRgb": 17,
+      "alphaHistogram": {
+        "0": 272,
+        "255": 304
+      }
+    },
+    "knight-b.png": {
+      "pngSha256": "84e4a32b885f9487531af0a80085865f2f294aa278951fcc5f582ab00900ad90",
+      "rgbaSha256": "067591791af1476f91153f55d7de490255e64b7e5e74b82edf06f280e4789832",
+      "width": 24,
+      "height": 24,
+      "visibleRgb": 17,
+      "alphaHistogram": {
+        "0": 272,
+        "255": 304
+      }
+    },
+    "hue-ramp.png": {
+      "pngSha256": "3da43196ff9bb99588fa726dae1aa6e57e44bd6f2167eea29e37fcc9052461bc",
+      "rgbaSha256": "a44291dd73528483306958920106f12f396c78661415993ebef76ce9c88766b6",
+      "width": 64,
+      "height": 16,
+      "visibleRgb": 1024,
+      "alphaHistogram": {
+        "255": 1024
+      }
+    },
+    "glow-alpha.png": {
+      "pngSha256": "adcf73c22e83245fb77e143b1e69aa50db973d57e13afc391a54084176f408dc",
+      "rgbaSha256": "92594a69b17b58fa7a759c12a4d88590dac3b8aa20db64a408da1c468ede17e1",
+      "width": 32,
+      "height": 32,
+      "visibleRgb": 10,
+      "alphaHistogram": {
+        "0": 408,
+        "1": 208,
+        "64": 92,
+        "127": 60,
+        "128": 48,
+        "192": 52,
+        "254": 44,
+        "255": 112
+      }
+    },
+    "target-pico8.png": {
+      "pngSha256": "d08741f948b7e577f29f003e7377a32a6b39611f480582eafc6972801a397e45",
+      "rgbaSha256": "8866172d4db89679f402b760859acf91caf5a789ac65f40f64e55cf8bc9145e6",
+      "width": 16,
+      "height": 1,
+      "visibleRgb": 16,
+      "alphaHistogram": {
+        "255": 16
+      }
+    },
+    "target-edg8.png": {
+      "pngSha256": "6da8d72b9650675d121214e3eeaf09c06f70e2c1e9b924752aea346a416b5ab2",
+      "rgbaSha256": "027399d376df01a0de6798f6fe5b593eba25ff9c12dd14b76e79dab75e4d2b79",
+      "width": 8,
+      "height": 1,
+      "visibleRgb": 8,
+      "alphaHistogram": {
+        "255": 8
+      }
+    },
+    "tiny-2x2.png": {
+      "pngSha256": "921305abd60a49d8355c22cb3f4e7a256ef4b8cc7df0002ca37ffdcc9bbea980",
+      "rgbaSha256": "e5621192cf644365a72cdc2b445c57107f17f1668e3559a06ac0ef0feb11d1bc",
+      "width": 2,
+      "height": 2,
+      "visibleRgb": 2,
+      "alphaHistogram": {
+        "255": 4
+      }
+    }
+  }
+}
