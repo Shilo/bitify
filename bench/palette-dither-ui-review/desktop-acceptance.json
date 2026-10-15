@@ -1,0 +1,391 @@
+{
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "checks": [
+    {
+      "name": "Fresh full-palette defaults are off",
+      "pass": true,
+      "ms": 32,
+      "width": 1280
+    },
+    {
+      "name": "Import original stills and animation",
+      "pass": true,
+      "ms": 51,
+      "tiles": 3
+    },
+    {
+      "name": "Pixels and native ZIP {\"paletteId\":\"preset-pico8\",\"metric\":\"oklab\",\"maxColors\":0,\"cleanup\":false,\"dither\":\"none\",\"ditherStrength\":50}",
+      "pass": true,
+      "ms": 102,
+      "paintChecks": 3,
+      "width": 1265,
+      "exports": [
+        {
+          "name": "ramp-palette.png",
+          "pixels": true,
+          "width": 128,
+          "height": 64
+        },
+        {
+          "name": "sprite-palette.png",
+          "pixels": true,
+          "width": 64,
+          "height": 64
+        },
+        {
+          "name": "clip-palette.gif",
+          "frames": 3,
+          "pixels": true,
+          "timing": true
+        }
+      ]
+    },
+    {
+      "name": "Pixels and native ZIP {\"paletteId\":\"preset-pico8\",\"metric\":\"oklab\",\"maxColors\":0,\"cleanup\":false,\"dither\":\"2x2\",\"ditherStrength\":0}",
+      "pass": true,
+      "ms": 153,
+      "paintChecks": 3,
+      "width": 1265,
+      "exports": [
+        {
+          "name": "ramp-palette.png",
+          "pixels": true,
+          "width": 128,
+          "height": 64
+        },
+        {
+          "name": "sprite-palette.png",
+          "pixels": true,
+          "width": 64,
+          "height": 64
+        },
+        {
+          "name": "clip-palette.gif",
+          "frames": 3,
+          "pixels": true,
+          "timing": true
+        }
+      ]
+    },
+    {
+      "name": "Pixels and native ZIP {\"paletteId\":\"preset-pico8\",\"metric\":\"oklab\",\"maxColors\":0,\"cleanup\":false,\"dither\":\"2x2\",\"ditherStrength\":50}",
+      "pass": true,
+      "ms": 122,
+      "paintChecks": 3,
+      "width": 1265,
+      "exports": [
+        {
+          "name": "ramp-palette.png",
+          "pixels": true,
+          "width": 128,
+          "height": 64
+        },
+        {
+          "name": "sprite-palette.png",
+          "pixels": true,
+          "width": 64,
+          "height": 64
+        },
+        {
+          "name": "clip-palette.gif",
+          "frames": 3,
+          "pixels": true,
+          "timing": true
+        }
+      ]
+    },
+    {
+      "name": "Pixels and native ZIP {\"paletteId\":\"preset-pico8\",\"metric\":\"oklab\",\"maxColors\":0,\"cleanup\":false,\"dither\":\"2x2\",\"ditherStrength\":100}",
+      "pass": true,
+      "ms": 123,
+      "paintChecks": 3,
+      "width": 1265,
+      "exports": [
+        {
+          "name": "ramp-palette.png",
+          "pixels": true,
+          "width": 128,
+          "height": 64
+        },
+        {
+          "name": "sprite-palette.png",
+          "pixels": true,
+          "width": 64,
+          "height": 64
+        },
+        {
+          "name": "clip-palette.gif",
+          "frames": 3,
+          "pixels": true,
+          "timing": true
+        }
+      ]
+    },
+    {
+      "name": "Pixels and native ZIP {\"paletteId\":\"preset-pico8\",\"metric\":\"oklab\",\"maxColors\":0,\"cleanup\":false,\"dither\":\"4x4\",\"ditherStrength\":0}",
+      "pass": true,
+      "ms": 102,
+      "paintChecks": 3,
+      "width": 1265,
+      "exports": [
+        {
+          "name": "ramp-palette.png",
+          "pixels": true,
+          "width": 128,
+          "height": 64
+        },
+        {
+          "name": "sprite-palette.png",
+          "pixels": true,
+          "width": 64,
+          "height": 64
+        },
+        {
+          "name": "clip-palette.gif",
+          "frames": 3,
+          "pixels": true,
+          "timing": true
+        }
+      ]
+    },
+    {
+      "name": "Pixels and native ZIP {\"paletteId\":\"preset-pico8\",\"metric\":\"oklab\",\"maxColors\":0,\"cleanup\":false,\"dither\":\"4x4\",\"ditherStrength\":50}",
+      "pass": true,
+      "ms": 127,
+      "paintChecks": 3,
+      "width": 1265,
+      "exports": [
+        {
+          "name": "ramp-palette.png",
+          "pixels": true,
+          "width": 128,
+          "height": 64
+        },
+        {
+          "name": "sprite-palette.png",
+          "pixels": true,
+          "width": 64,
+          "height": 64
+        },
+        {
+          "name": "clip-palette.gif",
+          "frames": 3,
+          "pixels": true,
+          "timing": true
+        }
+      ]
+    },
+    {
+      "name": "Pixels and native ZIP {\"paletteId\":\"preset-pico8\",\"metric\":\"oklab\",\"maxColors\":0,\"cleanup\":false,\"dither\":\"4x4\",\"ditherStrength\":100}",
+      "pass": true,
+      "ms": 122,
+      "paintChecks": 3,
+      "width": 1265,
+      "exports": [
+        {
+          "name": "ramp-palette.png",
+          "pixels": true,
+          "width": 128,
+          "height": 64
+        },
+        {
+          "name": "sprite-palette.png",
+          "pixels": true,
+          "width": 64,
+          "height": 64
+        },
+        {
+          "name": "clip-palette.gif",
+          "frames": 3,
+          "pixels": true,
+          "timing": true
+        }
+      ]
+    },
+    {
+      "name": "Pixels and native ZIP {\"paletteId\":\"preset-pico8\",\"metric\":\"oklab\",\"maxColors\":0,\"cleanup\":false,\"dither\":\"8x8\",\"ditherStrength\":0}",
+      "pass": true,
+      "ms": 114,
+      "paintChecks": 3,
+      "width": 1265,
+      "exports": [
+        {
+          "name": "ramp-palette.png",
+          "pixels": true,
+          "width": 128,
+          "height": 64
+        },
+        {
+          "name": "sprite-palette.png",
+          "pixels": true,
+          "width": 64,
+          "height": 64
+        },
+        {
+          "name": "clip-palette.gif",
+          "frames": 3,
+          "pixels": true,
+          "timing": true
+        }
+      ]
+    },
+    {
+      "name": "Pixels and native ZIP {\"paletteId\":\"preset-pico8\",\"metric\":\"oklab\",\"maxColors\":0,\"cleanup\":false,\"dither\":\"8x8\",\"ditherStrength\":50}",
+      "pass": true,
+      "ms": 76,
+      "paintChecks": 3,
+      "width": 1265,
+      "exports": [
+        {
+          "name": "ramp-palette.png",
+          "pixels": true,
+          "width": 128,
+          "height": 64
+        },
+        {
+          "name": "sprite-palette.png",
+          "pixels": true,
+          "width": 64,
+          "height": 64
+        },
+        {
+          "name": "clip-palette.gif",
+          "frames": 3,
+          "pixels": true,
+          "timing": true
+        }
+      ]
+    },
+    {
+      "name": "Pixels and native ZIP {\"paletteId\":\"preset-pico8\",\"metric\":\"oklab\",\"maxColors\":0,\"cleanup\":false,\"dither\":\"8x8\",\"ditherStrength\":100}",
+      "pass": true,
+      "ms": 98,
+      "paintChecks": 3,
+      "width": 1265,
+      "exports": [
+        {
+          "name": "ramp-palette.png",
+          "pixels": true,
+          "width": 128,
+          "height": 64
+        },
+        {
+          "name": "sprite-palette.png",
+          "pixels": true,
+          "width": 64,
+          "height": 64
+        },
+        {
+          "name": "clip-palette.gif",
+          "frames": 3,
+          "pixels": true,
+          "timing": true
+        }
+      ]
+    },
+    {
+      "name": "Pixels and native ZIP {\"paletteId\":\"preset-pico8\",\"metric\":\"rgb\",\"maxColors\":8,\"cleanup\":true,\"dither\":\"4x4\",\"ditherStrength\":60}",
+      "pass": true,
+      "ms": 195,
+      "paintChecks": 3,
+      "width": 1265,
+      "exports": [
+        {
+          "name": "ramp-palette.png",
+          "pixels": true,
+          "width": 128,
+          "height": 64
+        },
+        {
+          "name": "sprite-palette.png",
+          "pixels": true,
+          "width": 64,
+          "height": 64
+        },
+        {
+          "name": "clip-palette.gif",
+          "frames": 3,
+          "pixels": true,
+          "timing": true
+        }
+      ]
+    },
+    {
+      "name": "Rapid settings use only latest conversion",
+      "pass": true,
+      "ms": 124,
+      "paintChecks": 3,
+      "width": 1265
+    },
+    {
+      "name": "ZIP owns settings across later edits",
+      "pass": true,
+      "ms": 72,
+      "exports": [
+        {
+          "name": "ramp-palette.png",
+          "pixels": true,
+          "width": 128,
+          "height": 64
+        },
+        {
+          "name": "sprite-palette.png",
+          "pixels": true,
+          "width": 64,
+          "height": 64
+        },
+        {
+          "name": "clip-palette.gif",
+          "frames": 3,
+          "pixels": true,
+          "timing": true
+        }
+      ]
+    },
+    {
+      "name": "Copy uses native dithered PNG",
+      "pass": true,
+      "ms": 75,
+      "export": {
+        "name": "ramp-palette.png",
+        "pixels": true,
+        "width": 128,
+        "height": 64
+      }
+    },
+    {
+      "name": "Enlarged preview and its Save agree with wall/export",
+      "pass": true,
+      "ms": 227,
+      "export": {
+        "name": "ramp-palette.png",
+        "pixels": true,
+        "width": 128,
+        "height": 64
+      }
+    },
+    {
+      "name": "1-bit styles remain separate and retain full-palette choices",
+      "pass": true,
+      "ms": 130,
+      "width": 1265
+    },
+    {
+      "name": "Committed dithering persists through reload",
+      "pass": true,
+      "ms": 91,
+      "width": 1265
+    },
+    {
+      "name": "Reset restores Off and amount50",
+      "pass": true,
+      "ms": 43,
+      "width": 1265
+    }
+  ],
+  "errors": [],
+  "longTasks": [],
+  "started": "2026-10-15T05:42:47.360Z",
+  "completed": true,
+  "finished": "2026-10-15T05:42:49.724Z"
+}

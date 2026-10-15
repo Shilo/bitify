@@ -4,9 +4,13 @@
 
 Recolor settings now includes **Dithering: Off / 2×2 / 4×4 / 8×8**. Off remains the
 default and keeps the previous nearest-color result. Choose a pattern to mix target
-colors spatially for smoother sparse shading, then adjust Amount (0–100%, initially
+colors spatially for smoother sparse shading, then adjust Dither strength (0–100%, initially
 50%). Zero keeps nearest colors. Dithering can add unwanted texture to flat sprites;
 compare at native size before saving. Existing 1-bit dithering styles remain separate.
+
+The sizes describe repeating squares of source pixels, not color counts or strength.
+The explicit 2×2, 4×4 and 8×8 labels keep that distinction visible. Dither strength
+appears directly below Dithering only while a pattern is selected.
 
 The pattern uses original source coordinates, so previews and native exports agree.
 It never changes transparency, invents target colors or alters exact RGB colors in

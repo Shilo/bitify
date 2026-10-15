@@ -1,0 +1,24 @@
+{
+  "width": 448,
+  "height": 819,
+  "scrollWidth": 448,
+  "strength": [
+    {
+      "label": null,
+      "text": "Dither strength",
+      "width": 78,
+      "height": 29.88888931274414,
+      "left": 26.88888931274414,
+      "right": 104.88888931274414
+    },
+    {
+      "label": "Dither strength",
+      "text": "",
+      "width": 275.8819580078125,
+      "height": 44,
+      "left": 112.8888931274414,
+      "right": 388.7708511352539,
+      "value": "51"
+    }
+  ]
+}

@@ -13,7 +13,7 @@ intentional compatibility references.
 
 ## What it does
 
-Optional full-palette ordered dithering offers Off/2×2/4×4/8×8 and Amount 0–100%
+Optional full-palette ordered dithering offers Off/2×2/4×4/8×8 and Dither strength 0–100%
 (remembered 50%); fresh and Reset default to Off. The settings heading and Help
 step are Recolor. Source-coordinate Bayer patterns preserve alpha and exact active
 palette colors; zero preserves nearest output. Existing 1-bit styles stay separate.
@@ -21,7 +21,9 @@ The bounded four-candidate linear-light mixture heuristic is in palette-dither.j
 RGB Matching ranks candidates, while mixture scoring remains Oklab. Cap/Auto and
 frozen nearest Cleanup decisions remain independent; approved cleanup replacements
 override the pattern with solid colors. Dither and amount must participate in every
-preview/cache/export snapshot. Amount commits after 200ms or release/change; native
+preview/cache/export snapshot. Dither strength appears only while enabled, wraps within
+the existing 78px label column and has a 44px-high range target. The explicit pattern
+dimensions describe source pixels. Strength commits after 200ms or release/change; native
 range ownership is keyed by palette and method, and abandoned edits are canceled.
 See docs/research/2026-10-14-full-palette-dithering-implementation.md for review,
 desktop/physical Android tests, performance and limits. This contract supersedes

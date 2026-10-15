@@ -3,7 +3,7 @@
 ## Full palette ordered dithering — October 14, 2026
 
 Full palettes offer Dithering Off, 2×2, 4×4 and 8×8. Off is the fresh and Reset
-default, preserving previous nearest output exactly. The optional Amount control
+default, preserving previous nearest output exactly. The optional Dither strength control
 runs from 0 to 100%, defaults to 50%, commits after a 200 ms pause or release/change,
 and discards pending edits on pointer cancellation, panel close, palette/family or
 pattern change. Zero is identical to nearest. The setting and amount are remembered
@@ -11,7 +11,11 @@ across visits and family changes. Invalid stored fields restore Off and 50%.
 
 The full-palette settings heading and Help step are Recolor. Help says “Tune
 matching, color limits and dithering.” Rows retain Max colors, Matching and Cleanup,
-then add Dithering and conditional Amount before conditional Opacity cut. The
+then add Dithering and conditional Dither strength before conditional Opacity cut.
+Pattern choices retain explicit 2×2, 4×4 and 8×8 dimensions rather than bare numbers;
+the label explanation identifies them as source-pixel pattern sizes. Dither strength
+wraps within the existing label column, with a 44px-high range target, keeping the
+relationship explicit without increasing the label column or adding another row. The
 existing optional 1-bit Bayer, Noise and diffusion styles keep their behavior and
 settings. Multicolor dithering belongs only to the full-palette conversion family.
 
@@ -28,7 +32,7 @@ coordinates with solid target colors after dithering. Other pixels keep the patt
 Matching chooses the four nearest candidates (or all entries for smaller palettes)
 and the nearest anchor. Up to six candidate pairs are scored at up to three
 grid-realizable occupancies. Pair averages use linear-light RGB and Oklab tone error,
-plus 0.03 times expected point distortion to discourage distant mixtures. Amount
+plus 0.03 times expected point distortion to discourage distant mixtures. Strength
 interpolates the target average from the nearest color toward source linear light.
 RGB Matching changes candidate ranking/anchor, not the Oklab mixture objective.
 These bounded heuristics add texture and cannot recover hues absent from a palette.

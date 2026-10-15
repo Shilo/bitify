@@ -35,7 +35,7 @@ try{
  assert.deepEqual(decoded.data,expected.data.map((v,i)=>i>=256*4&&i%4!==3?0:v),'PNG pixels');
  fs.writeFileSync(path.join(out,'boundary-palette.png'),saved);
  await page.getByRole('button',{name:'Palette settings',exact:true}).click();
- const oldSlider=await page.getByRole('slider',{name:'Dithering amount',exact:true}).elementHandle();
+ const oldSlider=await page.getByRole('slider',{name:'Dither strength',exact:true}).elementHandle();
  await page.getByRole('button',{name:'Dithering 4x4',exact:true}).click();
  await oldSlider.evaluate(node=>{node.value='17';node.dispatchEvent(new Event('input',{bubbles:true}));node.dispatchEvent(new Event('change',{bubbles:true}));});
  await page.waitForTimeout(250);

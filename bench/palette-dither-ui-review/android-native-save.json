@@ -1,0 +1,18 @@
+{
+  "settings": {
+    "paletteId": "preset-pico8",
+    "metric": "oklab",
+    "maxColors": 0,
+    "cleanup": false,
+    "dither": "4x4",
+    "ditherStrength": 51
+  },
+  "result": {
+    "name": "ramp-palette.png",
+    "pixels": true,
+    "width": 128,
+    "height": 64
+  },
+  "date": "2026-10-15T05:46:42.629Z",
+  "downloadBehavior": "Restored normal browser default after Playwright connection had set deny"
+}

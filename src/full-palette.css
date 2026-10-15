@@ -50,6 +50,8 @@
 :root .palette-settings-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 :root .palette-settings-header .settings-reset { width: 44px; min-width: 44px; height: 44px; min-height: 44px; padding: 0; align-items: center; justify-content: center; }
 :root .palette-setting-row .key { flex: 0 0 78px; font-size: 13px; white-space: nowrap; }
+:root .palette-dither-strength-row .key { white-space: normal; line-height: 1.15; }
+:root .palette-dither-strength-row input[type=range] { height: 44px; }
 :root .palette-setting-row output { text-align: right; font-variant-numeric: tabular-nums; }
 /* Reset has one shape in both settings panels, with a compact icon on phones. */
 :root .dock .settings-reset { flex: none; box-sizing: border-box; border-radius: 12px; color: var(--gl-color-error-on-surface); border-color: var(--gl-color-error-border); }

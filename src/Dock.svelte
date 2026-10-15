@@ -19,7 +19,7 @@
 
   const matchingDescription = 'Compare colors by appearance (Oklab) or red, green and blue values (RGB).';
   const cleanupDescription = 'Merge isolated pixels with similar neighbors. May remove small details. Animations change only where every frame agrees. Cleaned pixels keep their solid replacement color when dithering is on.';
-  const ditherDescription = 'Blend palette colors in a repeating pattern. Useful with few colors. Patterns stay fixed to source pixels; exact palette colors stay unchanged.';
+  const ditherDescription = 'Blend palette colors in a repeating pattern. The sizes are pattern dimensions in source pixels. Useful with few colors. Patterns stay fixed to source pixels; exact palette colors stay unchanged.';
 
   let {
     first = $bindable(),
@@ -504,9 +504,9 @@
       {#if dither !== 'none'}
         {#key fullPalette}
         {#key dither}
-        <div class="palette-setting-row">
-          <label class="key" for="full-dither-amount" use:tooltip={'How strongly palette colors blend. Zero keeps nearest colors.'}>Amount</label>
-          <input id="full-dither-amount" class="glass-range" type="range" min="0" max="100" step="1" value={ditherDraft} aria-label="Dithering amount" aria-valuetext={ditherDraft + '%'} use:ditherAmountGesture/>
+        <div class="palette-setting-row palette-dither-strength-row">
+          <label class="key" for="full-dither-amount" use:tooltip={'How strongly dithering blends palette colors. Zero keeps nearest colors.'}>Dither strength</label>
+          <input id="full-dither-amount" class="glass-range" type="range" min="0" max="100" step="1" value={ditherDraft} aria-label="Dither strength" aria-valuetext={ditherDraft + '%'} use:ditherAmountGesture/>
           <output for="full-dither-amount">{ditherDraft}%</output>
         </div>
         {/key}
