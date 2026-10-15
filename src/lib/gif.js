@@ -1,6 +1,7 @@
 // Reading and writing animated GIFs. No DOM, so it runs in tests.
 import omggif from 'omggif';
 import { exportPalette, markUsedAsync, compactTable, EMPTY_INDEX, yieldExport } from './palette-export.js';
+import { paletteAlpha, inspectAlphaPixel } from './palette-alpha.js';
 import { checkCanceled, yieldTask } from './quantize.js';
 
 // Decodes a GIF into full-size RGBA frames, each as it appears on screen. GIF frames can be
@@ -125,6 +126,19 @@ export async function encodeGifAsync(image, { signal } = {}) {
 // A replayable async getFrame(index) keeps only one converted Uint16 frame in
 // memory. The first pass finds the stable global table; the second encodes.
 // Callers snapshot the palette, source frames and conversion at the save click.
+async function checkGifAlpha(frame, w, h, signal) {
+  const alpha = paletteAlpha({ ...frame, w, h });
+  if (!alpha) return;
+  for (let start = 0; start < alpha.length; start += 65536) {
+    checkCanceled(signal);
+    for (let p = start, end = Math.min(start + 65536, alpha.length); p < end; p++) if (inspectAlphaPixel(alpha, frame.indices, p)) {
+      const error = new Error('GIF cannot preserve partial opacity. Choose Opacity Cut, or copy a frame as PNG.');
+      error.code = 'PALETTE_GIF_ALPHA'; throw error;
+    }
+    if (start + 65536 < alpha.length) await yieldExport();
+  }
+}
+
 export async function encodePaletteGif(image, { signal } = {}) {
   checkCanceled(signal);
   const state = exportPalette(image);
@@ -141,6 +155,7 @@ export async function encodePaletteGif(image, { signal } = {}) {
     checkCanceled(signal);
     if (!frame || !Number.isFinite(frame.delay) || frame.delay < 0 || frame.delay > 655350) throw new Error('Invalid GIF frame delay.');
     await markUsedAsync(frame.indices, state, { signal });
+    await checkGifAlpha(frame, w, h, signal);
     delays[i] = frame.delay;
     if (i + 1 < count) await yieldExport();
   }
@@ -167,6 +182,7 @@ export async function encodePaletteGif(image, { signal } = {}) {
       // Validate again: a broken/replaced frame source must never silently map
       // an unexpected color to slot zero.
       if (!(frame.indices instanceof Uint16Array) || frame.indices.length !== state.pixels) throw new Error('Invalid palette image indices.');
+      await checkGifAlpha(frame, w, h, signal);
       const indexed = new Uint8Array(state.pixels), batch = 262144;
       for (let start = 0; start < indexed.length; start += batch) {
         checkCanceled(signal);

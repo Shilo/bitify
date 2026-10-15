@@ -1,5 +1,21 @@
 # Performance
 
+## Explicit color inspection and optional opacity preservation
+
+Count output colors runs only when requested. It uses full export conversion and
+serial animation frames, retaining only up to 256 used RGB strings and a count per
+item. Settings/source changes abort pending subscribers. A later Save can repeat
+conversion; no full-resolution frame cache is added for this convenience. Auto
+identity uses its captured wall request, excluding ignored retained preview colors.
+
+Opacity Keep adds one byte per sampled/full converted pixel for original alpha;
+Cut allocates no alpha buffer. The existing 8 MiB animation cache reserves three
+bytes/sample in Keep versus two in Cut, retaining existing per-frame overhead.
+Partial-alpha PNG export uses RGBA8 rows, increasing scratch and encoded size
+relative to indexed PNG; binary Keep retains indexed encoding. Alpha validation
+and async encoding yield in bounded slices. Keep changes capability, not a claim
+of faster conversion or lower whole-app memory use.
+
 ## Optional ordered dithering (October 14, 2026)
 
 Off and Amount zero retain the existing nearest path without dither scratch.

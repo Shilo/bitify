@@ -1,5 +1,29 @@
 # Colorfetti design
 
+## Optional original opacity — October 14, 2026
+
+Palette mode offers Opacity Cut / Keep when partial source opacity exists or Keep
+is selected. Fresh and Reset remain Cut with cutoff 128; the cutoff slider appears
+only in Cut, and its remembered value survives switching modes. Keep preserves
+each visible source pixel's original alpha byte, excluding alpha zero. It maps
+uncomposited RGB without changing distance or adding alpha weighting. Auto, subset
+selection and Cleanup include all alpha-positive pixels using eligibility cutoff 1.
+Keep participates in storage, immutable export snapshots, retained-preview and
+animation-cache identity. Old detached cutoff gestures cannot modify settings.
+
+Keep allocates one alpha byte per converted sample, including binary sources;
+Cut retains its old allocation and pixel output. Sampled previews use the same
+source coordinates for RGB and alpha. Cleanup changes only RGB labels. The shared
+8 MiB animation index cache charges three bytes per Keep sample, two per Cut sample,
+plus existing per-frame metadata. No extra converted clip is retained.
+
+PNG Save, Copy, ZIP and drag use exact RGBA8 when any output alpha is partial;
+binary PNGs retain indexed packing. Keep on binary GIF input preserves the prior
+GIF output. Unexpected partial-alpha GIF frames fail explicitly before compression
+and are checked again on replay: users may choose Cut or copy a frame as PNG.
+No partial ZIP or silently thresholded Keep output is downloaded. Existing 1-bit
+transparency and settings are independent.
+
 ## Lospec palette links — October 14, 2026
 
 The existing Paste colors method accepts HEX text or a full Lospec palette URL.

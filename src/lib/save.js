@@ -2,6 +2,7 @@ import { zipSync, zlibSync, zlib } from 'fflate';
 import { hexToRgb } from './recolor.js';
 import { exportPalette, markUsed, markUsedAsync, compactTable, EMPTY_INDEX, yieldExport } from './palette-export.js';
 import { checkCanceled } from './quantize.js';
+import { paletteAlpha, inspectAlphaPixel } from './palette-alpha.js';
 
 // Output file names for a list of original names: extension replaced by "-1bit.png", or
 // "-1bit.gif" where `kinds` says 'gif', with -2, -3... added so no two outputs collide
@@ -102,13 +103,17 @@ function assemblePng(parts) {
   return result;
 }
 
-function palettePngLayout(image, state) {
+function palettePngLayout(image, state, partialAlpha) {
   if (!state) {
     state = exportPalette(image);
     markUsed(image.indices, state);
   }
+  if (partialAlpha === undefined) {
+    const alpha = paletteAlpha(image); partialAlpha = false;
+    if (alpha) for (let p = 0; p < alpha.length; p++) if (inspectAlphaPixel(alpha, image.indices, p)) partialAlpha = true;
+  }
   const { table, map, transparent } = compactTable(state);
-  const rgba = table.length > 256;
+  const rgba = table.length > 256 || partialAlpha;
   const depth = rgba ? 8 : table.length <= 2 ? 1 : table.length <= 4 ? 2 : table.length <= 16 ? 4 : 8;
   const stride = (rgba ? image.w * 4 : Math.ceil(image.w * depth / 8)) + 1;
   const head = new Uint8Array(13), view = new DataView(head.buffer);
@@ -127,7 +132,7 @@ function palettePngLayout(image, state) {
 }
 
 function packPaletteRows(image, layout, start, end) {
-  const { w, indices } = image;
+  const { w, indices, alpha } = image;
   const { rgba, rgb, map, depth, stride, rows } = layout;
   for (let y = start, p = start * w; y < end; y++) {
     const offset = y * stride + 1;
@@ -136,7 +141,7 @@ function packPaletteRows(image, layout, start, end) {
         const index = indices[p], at = offset + x * 4;
         if (index === EMPTY_INDEX) continue;
         const color = rgb[index];
-        rows[at] = color >> 16; rows[at + 1] = color >> 8; rows[at + 2] = color; rows[at + 3] = 255;
+        rows[at] = color >> 16; rows[at + 1] = color >> 8; rows[at + 2] = color; rows[at + 3] = alpha ? alpha[p] : 255;
       }
     } else {
       for (let x = 0; x < w; x++, p++) {
@@ -161,7 +166,13 @@ export async function palettePngBytesAsync(image, { signal } = {}) {
   checkCanceled(signal);
   const state = exportPalette(image);
   await markUsedAsync(image.indices, state, { signal });
-  const layout = palettePngLayout(image, state);
+  const alpha = paletteAlpha(image); let partialAlpha = false;
+  if (alpha) for (let start = 0; start < alpha.length; start += 65536) {
+    checkCanceled(signal);
+    for (let p = start, end = Math.min(start + 65536, alpha.length); p < end; p++) if (inspectAlphaPixel(alpha, image.indices, p)) partialAlpha = true;
+    if (start + 65536 < alpha.length) await yieldExport();
+  }
+  const layout = palettePngLayout(image, state, partialAlpha);
   const batch = Math.max(1, Math.floor(65536 / image.w));
   for (let y = 0; y < image.h; y += batch) {
     checkCanceled(signal);

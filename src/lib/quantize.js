@@ -1,6 +1,7 @@
 import { normalizeColors } from './palette-library.js';
 import { normalizeDither, normalizeDitherStrength } from './palette-dither-settings.js';
 import { prepareDither, convertDither } from './palette-dither.js';
+import { normalizeAlphaMode, effectiveAlphaCut } from './palette-alpha.js';
 
 export const EMPTY_INDEX = 256;
 const preparedData = new WeakMap();
@@ -36,23 +37,26 @@ export function validateMatchingMetric(metric = 'oklab') {
   return metric;
 }
 
-function job(image, palette, alphaCut, mw, mh, metric) {
+function job(image, palette, alphaCut, mw, mh, metric, alphaMode) {
   validateMatchingMetric(metric);
   const w = image.width ?? image.w, h = image.height ?? image.h;
   mw ??= w; mh ??= h;
   if (![w, h, mw, mh].every(n => Number.isSafeInteger(n) && n > 0) || mw > w || mh > h || !image.data || image.data.length !== w * h * 4) throw new Error('Invalid image dimensions or pixel data.');
   if (!Number.isInteger(alphaCut) || alphaCut < 1 || alphaCut > 255) throw new Error('Opacity cut must be between 1 and 255.');
   const prepared = preparedOf(palette);
+  alphaMode = normalizeAlphaMode(alphaMode);
   return { data: image.data, sourceW: w, xs: Int32Array.from({ length: mw }, (_, i) => Math.floor((i + .5) * w / mw)), ys: Int32Array.from({ length: mh }, (_, i) => Math.floor((i + .5) * h / mh)),
-    ...preparedData.get(prepared), size: prepared.size, alphaCut, metric, scratch: new Float64Array(3), memo: new Map(), hits: 0, misses: 0,
-    result: { indices: new Uint16Array(mw * mh), w: mw, h: mh, used: new Uint8Array(256), hasTransparency: false } };
+    ...preparedData.get(prepared), size: prepared.size, alphaCut: effectiveAlphaCut(alphaMode, alphaCut), metric, scratch: new Float64Array(3), memo: new Map(), hits: 0, misses: 0,
+    result: { indices: new Uint16Array(mw * mh), w: mw, h: mh, used: new Uint8Array(256), hasTransparency: false, ...(alphaMode === 'keep' ? { alpha: new Uint8Array(mw * mh) } : {}) } };
 }
 
 function convert(state, start, end) {
   const { data, sourceW, xs, ys, exact, labs, rgb, metric, scratch, size, alphaCut, result } = state;
+  const alpha = result.alpha;
   for (let o = start; o < end; o++) {
     const p = (ys[Math.floor(o / result.w)] * sourceW + xs[o % result.w]) * 4;
     if (data[p + 3] < alphaCut) { result.indices[o] = EMPTY_INDEX; result.hasTransparency = true; continue; }
+    if (alpha) alpha[o] = data[p + 3];
     const key = data[p] << 16 | data[p + 1] << 8 | data[p + 2];
     let index = exact.get(key);
     if (index === undefined) {
@@ -89,8 +93,8 @@ function convert(state, start, end) {
   }
 }
 
-export function quantize(image, palette, alphaCut = 128, mw, mh, { metric = 'oklab', dither = 'none', ditherStrength = 50 } = {}) {
-  const state = job(image, palette, alphaCut, mw, mh, metric);
+export function quantize(image, palette, alphaCut = 128, mw, mh, { metric = 'oklab', dither = 'none', ditherStrength = 50, alphaMode = 'cut' } = {}) {
+  const state = job(image, palette, alphaCut, mw, mh, metric, alphaMode);
   const enabled = normalizeDither(dither) !== 'none' && normalizeDitherStrength(ditherStrength) > 0 && state.size > 1;
   if (enabled) state.ditherData = prepareDither(state, dither, normalizeDitherStrength(ditherStrength), linear, lab);
   (enabled ? convertDither : convert)(state, 0, state.result.indices.length);
@@ -109,9 +113,9 @@ export const yieldTask = () => new Promise(resolve => {
   channel.port2.postMessage(null);
 });
 
-export async function quantizeAsync(image, palette, alphaCut = 128, mw, mh, { metric = 'oklab', dither = 'none', ditherStrength = 50, signal, onProgress, chunkPixels = 2048 } = {}) {
+export async function quantizeAsync(image, palette, alphaCut = 128, mw, mh, { metric = 'oklab', dither = 'none', ditherStrength = 50, alphaMode = 'cut', signal, onProgress, chunkPixels = 2048 } = {}) {
   checkCanceled(signal);
-  const state = job(image, palette, alphaCut, mw, mh, metric), length = state.result.indices.length;
+  const state = job(image, palette, alphaCut, mw, mh, metric, alphaMode), length = state.result.indices.length;
   const enabled = normalizeDither(dither) !== 'none' && normalizeDitherStrength(ditherStrength) > 0 && state.size > 1;
   if (enabled) state.ditherData = prepareDither(state, dither, normalizeDitherStrength(ditherStrength), linear, lab);
   const chunk = Math.min(enabled ? 128 : 8192, Math.max(128, Math.floor(chunkPixels) || 2048));
@@ -146,7 +150,7 @@ export function colorize(result, palette) {
     const index = result.indices[i];
     if (index === EMPTY_INDEX) continue;
     if (index >= prepared.size) throw new Error('The result does not match this palette.');
-    data[i * 4] = rgb[index * 3]; data[i * 4 + 1] = rgb[index * 3 + 1]; data[i * 4 + 2] = rgb[index * 3 + 2]; data[i * 4 + 3] = 255;
+    data[i * 4] = rgb[index * 3]; data[i * 4 + 1] = rgb[index * 3 + 1]; data[i * 4 + 2] = rgb[index * 3 + 2]; data[i * 4 + 3] = result.alpha ? result.alpha[i] : 255;
   }
   return { data, w: result.w, h: result.h, width: result.w, height: result.h };
 }

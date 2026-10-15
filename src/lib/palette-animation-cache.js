@@ -1,4 +1,5 @@
 import { normalizeDither, normalizeDitherStrength } from './palette-dither-settings.js';
+import { normalizeAlphaMode, paletteAlpha } from './palette-alpha.js';
 // Shared preview storage only. Reserve the entire animation before lazy filling:
 // a small per-frame LRU would miss every frame during a cyclic animation scan.
 export const ANIMATION_CACHE_BYTES = 8 * 1024 * 1024;
@@ -9,7 +10,7 @@ export function createAnimationCache(budget = ANIMATION_CACHE_BYTES) {
   let reserved = 0;
   function same(a, b) {
     return a.width === b.width && a.height === b.height && a.colors === b.colors
-      && a.alphaCut === b.alphaCut && a.metric === b.metric && a.cleanup === b.cleanup
+      && a.alphaCut === b.alphaCut && a.alphaMode === b.alphaMode && a.metric === b.metric && a.cleanup === b.cleanup
       && a.dither === b.dither && a.ditherStrength === b.ditherStrength
       && a.sources.length === b.sources.length && a.sources.every((f, i) => {
         const g = b.sources[i];
@@ -23,13 +24,14 @@ export function createAnimationCache(budget = ANIMATION_CACHE_BYTES) {
     entry.pending.clear(); entry.frames.length = 0;
   }
   return {
-    acquire({ sources, palette, alphaCut, metric, cleanup = null, dither = 'none', ditherStrength = 50, width, height }) {
+    acquire({ sources, palette, alphaCut, alphaMode = 'cut', metric, cleanup = null, dither = 'none', ditherStrength = 50, width, height }) {
       // Stills and oversized previews incur no cache allocation or eviction.
       if (!sources || sources.length < 2) return null;
-      const bytes = sources.length * (width * height * 2 + 256);
+      alphaMode = normalizeAlphaMode(alphaMode);
+      const bytes = sources.length * (width * height * (alphaMode === 'keep' ? 3 : 2) + 256);
       if (![width, height, bytes].every(Number.isSafeInteger) || width < 1 || height < 1 || bytes > budget) return null;
       const key = { sources: sources.map(f => ({ data: f.data, width: f.width, height: f.height })),
-        colors: palette.colors.join(','), alphaCut, metric, cleanup, dither: normalizeDither(dither), ditherStrength: normalizeDitherStrength(ditherStrength), width, height };
+        colors: palette.colors.join(','), alphaCut, alphaMode, metric, cleanup, dither: normalizeDither(dither), ditherStrength: normalizeDitherStrength(ditherStrength), width, height };
       let entry = [...entries].find(e => same(e.key, key));
       if (!entry) {
         if (reserved + bytes > budget) return null;
@@ -53,6 +55,8 @@ export function createAnimationCache(budget = ANIMATION_CACHE_BYTES) {
                 || result.w !== width || result.h !== height || !(result.used instanceof Uint8Array) || result.used.length !== 256) {
                 throw new Error('Invalid cached animation preview.');
               }
+              const alpha = paletteAlpha(result);
+              if (key.alphaMode === 'keep' ? !alpha : alpha) throw new Error('Invalid cached animation alpha policy.');
               entry.frames[index] = result;
               return result;
             }).finally(() => { if (entry.pending.get(index) === job) entry.pending.delete(index); });

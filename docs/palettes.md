@@ -64,6 +64,14 @@ combined. The visible name is Auto; its stable saved identity remains `generated
 
 ## Full palettes
 
+**Opacity: Cut / Keep** appears when an image has partial opacity. Cut keeps the
+existing hard cutoff: each pixel becomes fully visible or empty. Keep retains its
+original opacity, including soft edges, translucent shadows and effects. Keep hides
+the cutoff slider; switching back to Cut restores its value. Cut remains the default.
+Keep saves partial opacity exactly in PNGs and PNG clipboard copies. GIF supports
+only visible/empty pixels; an unexpected partial-opacity animation cannot be saved
+as GIF in Keep mode. Existing GIF sources already have binary transparency.
+
 To import from Lospec, open Import palette → Paste colors and paste the palette's
 full Lospec link. Choose Import from Lospec, review its colors/name and Save palette.
 Its author and source link stay with the local palette. Requests fetch only public

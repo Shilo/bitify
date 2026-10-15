@@ -6,7 +6,7 @@
   import { fitViewerImage } from './lib/viewer-layout.js';
   import { canvasGridSpacing } from './lib/canvas-grid.js';
   import { imageGesture } from './lib/image-gesture.js';
-  let { item, first, second, style, set, family = 'two-color', palette, palettePending = false, analysisPending = false, alphaCut = 128, metric = 'oklab', maxColors = 0, cleanup = false, dither = 'none', ditherStrength = 50, onpalettestatus, paletteRetry = 0, paletteFailureNotice = '', onpaletteretry, exportDisabled = false, flipped = false, onsave, oncopy, onclose, busy = '', message = '', colorUsageLabel = '', colorUsageActionLabel = '', oncountcolors, countingColors = false, exportDrag } = $props();
+  let { item, first, second, style, set, family = 'two-color', palette, palettePending = false, analysisPending = false, alphaCut = 128, alphaMode = 'cut', metric = 'oklab', maxColors = 0, cleanup = false, dither = 'none', ditherStrength = 50, onpalettestatus, paletteRetry = 0, paletteFailureNotice = '', onpaletteretry, exportDisabled = false, flipped = false, onsave, oncopy, onclose, busy = '', message = '', colorUsageLabel = '', colorUsageActionLabel = '', oncountcolors, countingColors = false, exportDrag } = $props();
   let dialog;
   const dismissal = imageGesture();
   let dismissReady = false;
@@ -83,7 +83,7 @@
   </nav>
   <div class="viewer-art" bind:clientWidth={width} bind:clientHeight={height}>
     <div class="viewer-tile" style:width="{fit.width}px">
-      <Tile {item} {first} {second} {style} {set} {family} {palette} {palettePending} {analysisPending} {alphaCut} {metric} {maxColors} {cleanup} {dither} {ditherStrength} {onpalettestatus} {paletteRetry} {exportDrag} {colorUsageLabel} flipped={originalVisible} oncompare={active => (imageHeld = active)} inset={0} aspect={fit.width / fit.height} />
+      <Tile {item} {first} {second} {style} {set} {family} {palette} {palettePending} {analysisPending} {alphaCut} {alphaMode} {metric} {maxColors} {cleanup} {dither} {ditherStrength} {onpalettestatus} {paletteRetry} {exportDrag} {colorUsageLabel} flipped={originalVisible} oncompare={active => (imageHeld = active)} inset={0} aspect={fit.width / fit.height} />
     </div>
   </div>
   <!-- Keep feedback in the top-layer dialog; the page-level toast is inert while this viewer is open. -->

@@ -36,6 +36,7 @@
     soft, // whether an image on the wall has a partly see-through pixel
     family = $bindable('two-color'),
     alphaCut = $bindable(128),
+    alphaMode = $bindable('cut'),
     metric = $bindable('oklab'),
     maxColors = $bindable(0),
     lastMaxColors = $bindable(16),
@@ -204,7 +205,7 @@
     if (!e.detail) (dock.querySelector('.extra') ?? dock.querySelector('.chip[aria-pressed="true"]'))?.focus();
   }
   function resetPaletteSettings(e) {
-    metric = 'oklab'; alphaCut = 128; maxColors = 0; lastMaxColors = 16; cleanup = false; dither = 'none'; ditherStrength = 50;
+    metric = 'oklab'; alphaCut = 128; alphaMode = 'cut'; maxColors = 0; lastMaxColors = 16; cleanup = false; dither = 'none'; ditherStrength = 50;
     restoreDitherDraft();
     restoreLimitDrafts(); // Clear pending edits before keyboard focus can blur them.
     if (!e.detail) dock.querySelector('[aria-label="Oklab matching"]')?.focus();
@@ -289,6 +290,18 @@
     restoreDitherDraft();
     return ditherPause.cancel;
   });
+  function alphaCutGesture(node) {
+    const palette = fullPalette;
+    const input = () => {
+      if (!node.isConnected || palette !== fullPalette || alphaMode !== 'cut'
+        || family !== 'full-palette' || panel !== 'style') return;
+      const value = +node.value;
+      if (Number.isInteger(value) && value >= 1 && value <= 255) alphaCut = value;
+    };
+    node.addEventListener('input', input);
+    node.addEventListener('change', input);
+    return { destroy() { node.removeEventListener('input', input); node.removeEventListener('change', input); } };
+  }
 
   // A number box is empty while its setting is on Auto or off, and then shows this instead: what
   // Auto picked (a range when images differ), or the word for off.
@@ -453,7 +466,7 @@
     <div class="panel palette-settings-panel glass-card" bind:offsetHeight={panelHeight}>
       <div class="palette-settings-header">
         <h2 class="palette-method-name">Recolor</h2>
-        <button class="btn glass-btn settings-reset" disabled={metric === 'oklab' && alphaCut === 128 && maxColors === 0 && lastMaxColors === 16 && !cleanup && dither === 'none' && ditherStrength === 50} aria-label="Reset palette settings" use:tooltip={'Restore Oklab, all colors, Cleanup off, dithering off and the default opacity cut.'} onpointerdown={e => e.preventDefault()} onclick={resetPaletteSettings}><PixelIcon name="reset"/></button>
+        <button class="btn glass-btn settings-reset" disabled={metric === 'oklab' && alphaCut === 128 && alphaMode === 'cut' && maxColors === 0 && lastMaxColors === 16 && !cleanup && dither === 'none' && ditherStrength === 50} aria-label="Reset palette settings" use:tooltip={'Restore Oklab, all colors, Cleanup off, dithering off and the default opacity cut.'} onpointerdown={e => e.preventDefault()} onclick={resetPaletteSettings}><PixelIcon name="reset"/></button>
       </div>
       {#key fullPalette}
       <div class="palette-setting-row palette-limit-row">
@@ -512,12 +525,23 @@
         {/key}
         {/key}
       {/if}
-      {#if soft || alphaCut !== 128}
+      {#if soft || alphaMode === 'keep'}
+        <div class="palette-setting-row">
+          <span class="key" id="palette-opacity-label" use:tooltip={'Cut makes pixels fully visible or empty. Keep preserves each source opacity in PNGs. GIF cannot keep partial opacity.'}>Opacity</span>
+          <div class="seg glass-segmented" role="group" aria-labelledby="palette-opacity-label">
+            <button class="glass-segmented__item" aria-pressed={alphaMode === 'cut'} onclick={() => { alphaMode = 'cut'; }}>Cut</button>
+            <button class="glass-segmented__item" aria-pressed={alphaMode === 'keep'} onclick={() => { alphaMode = 'keep'; }}>Keep</button>
+          </div>
+        </div>
+      {/if}
+      {#if alphaMode !== 'keep' && (soft || alphaCut !== 128)}
+        {#key fullPalette}
         <div class="palette-setting-row">
           <label class="key" for="full-alpha-cut">Opacity cut</label>
-          <input id="full-alpha-cut" class="glass-range" type="range" min="1" max="255" bind:value={alphaCut} aria-label="Palette opacity cut"/>
+          <input id="full-alpha-cut" class="glass-range" type="range" min="1" max="255" value={alphaCut} aria-label="Palette opacity cut" use:alphaCutGesture/>
           <output for="full-alpha-cut">{alphaCut}</output>
         </div>
+        {/key}
       {/if}
     </div>
   {:else if panel === 'style'}

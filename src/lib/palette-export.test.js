@@ -5,8 +5,48 @@ import { unzipSync } from 'fflate';
 import { palettePngBytes, palettePngBytesAsync, pngBytes, pngBlob, fileBytes, downloadName, outNames, saveAll } from './save.js';
 import { encodePaletteGif } from './gif.js';
 import { yieldExport } from './palette-export.js';
+import { quantize, colorize } from './quantize.js';
 
 const colors = count => Array.from({ length: count }, (_, i) => `#${i.toString(16).padStart(2, '0')}00${(255 - i).toString(16).padStart(2, '0')}`);
+
+describe('preserved palette opacity exports', () => {
+  it('writes RGBA8 for actual partial alpha and independently round-trips every alpha value', async () => {
+    const source = { width: 257, height: 1, data: Uint8ClampedArray.from({ length: 257 * 4 }, (_, i) => i % 4 === 3 ? Math.floor(i / 4) & 255 : [240, 64, 16][i % 4]) };
+    const palette = ['#f04010', '#000000'];
+    for (const dither of ['none', '4x4']) {
+      const matched = quantize(source, palette, 128, undefined, undefined, { alphaMode: 'keep', dither }), image = { ...matched, colors: palette };
+      const expected = [...colorize(matched, palette).data];
+      for (const bytes of [palettePngBytes(image), await palettePngBytesAsync(image)]) {
+        const decoded = readPng(bytes); expect(decoded.type).toBe(6); expect(decoded.depth).toBe(8); expect(decoded.pixels).toEqual(expected); expect(decoded.palette).toBeUndefined();
+      }
+    }
+  });
+  it('retains byte-identical indexed PNG and GIF bytes for binary Keep frames', async () => {
+    const image = still(['#000000', '#ffffff'], [0, 1, 256, 1, 0, 256], 3), alpha = Uint8Array.of(255, 255, 0, 255, 255, 0);
+    expect(palettePngBytes({ ...image, alpha })).toEqual(palettePngBytes(image));
+    expect(await palettePngBytesAsync({ ...image, alpha })).toEqual(await palettePngBytesAsync(image));
+    const frame = { ...image, delay: 100 };
+    const binary = { ...image, frames: [frame] }, keep = { ...image, frames: [{ ...frame, alpha }] };
+    expect(await encodePaletteGif(keep)).toEqual(await encodePaletteGif(binary));
+  });
+  it('rejects malformed alpha buffers and inconsistent empty/visible alpha instead of encoding them', async () => {
+    const image = still(['#000000'], [0, 256]);
+    for (const alpha of [null, [], Uint8Array.of(255), Uint8Array.of(0, 0), Uint8Array.of(255, 1)]) {
+      expect(() => palettePngBytes({ ...image, alpha })).toThrow(/alpha/);
+      await expect(palettePngBytesAsync({ ...image, alpha })).rejects.toThrow(/alpha/);
+    }
+  });
+  it('rejects partial GIF alpha during preflight before starting a compressor', async () => {
+    const Worker = vi.fn(); vi.stubGlobal('Worker', Worker);
+    const image = { colors: ['#000000'], w: 1, h: 1, frames: [{ indices: Uint16Array.of(0), alpha: Uint8Array.of(127), delay: 100 }] };
+    await expect(encodePaletteGif(image)).rejects.toMatchObject({ code: 'PALETTE_GIF_ALPHA' }); expect(Worker).not.toHaveBeenCalled();
+  });
+  it('checks GIF opacity again when a frame changes after preflight', async () => {
+    vi.stubGlobal('Worker', undefined); let calls = 0;
+    const getFrame = async () => ({ indices: Uint16Array.of(0), alpha: Uint8Array.of(++calls === 1 ? 255 : 128), delay: 100 });
+    await expect(encodePaletteGif({ colors: ['#000000'], w: 1, h: 1, frameCount: 1, getFrame })).rejects.toMatchObject({ code: 'PALETTE_GIF_ALPHA' }); expect(calls).toBe(2);
+  });
+});
 describe('export scheduling and cancellation', () => {
   it('uses posted tasks with closed ports and retains the unsupported-channel timer fallback', async () => {
     const close1 = vi.fn(), close2 = vi.fn();

@@ -79,10 +79,12 @@ function mixturePlan(state, p) {
 
 export function convertDither(state, start, end) {
   const { data, sourceW, xs, ys, exact, alphaCut, result } = state;
+  const alpha = result.alpha;
   const { side, ranks } = state.ditherData;
   for (let o = start; o < end; o++) {
     const x = xs[o % result.w], y = ys[Math.floor(o / result.w)], p = (y * sourceW + x) * 4;
     if (data[p + 3] < alphaCut) { result.indices[o] = 256; result.hasTransparency = true; continue; }
+    if (alpha) alpha[o] = data[p + 3];
     const key = data[p] << 16 | data[p + 1] << 8 | data[p + 2];
     let index = exact.get(key);
     if (index === undefined) {

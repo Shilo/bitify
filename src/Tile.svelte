@@ -8,6 +8,7 @@
   import { imageGesture, IMAGE_HOLD_MS } from './lib/image-gesture.js';
   import { comparisonHold } from './lib/comparison-hold.js';
   import { quantizePreviewAsync, colorize as palettePixels } from './lib/quantize.js';
+  import { effectiveAlphaCut } from './lib/palette-alpha.js';
   import { getLimitedPalette } from './lib/palette-limit-client.js';
   import { animationPreviewCache } from './lib/palette-animation-cache.js';
   import { animationVisibility } from './lib/animation-visibility.js';
@@ -19,7 +20,8 @@
   // Without `onremove` the tile is a preview only and has no buttons.
   // `set` is the style's settings. `budget` is set while one of their sliders is being dragged:
   // the milliseconds this tile may take to convert its image after each move.
-  let { item, first, second, style, set, family = 'two-color', palette, palettePending = false, analysisPending = false, alphaCut = 128, metric = 'oklab', maxColors = 0, cleanup = false, dither = 'none', ditherStrength = 50, colorUsageLabel = '', active = true, exportDisabled = false, onpalettestatus, paletteRetry = 0, flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false, exportDrag } = $props();
+  let { item, first, second, style, set, family = 'two-color', palette, palettePending = false, analysisPending = false, alphaCut = 128, alphaMode = 'cut', metric = 'oklab', maxColors = 0, cleanup = false, dither = 'none', ditherStrength = 50, colorUsageLabel = '', active = true, exportDisabled = false, onpalettestatus, paletteRetry = 0, flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false, exportDrag } = $props();
+  const paletteCut = $derived(effectiveAlphaCut(alphaMode, alphaCut));
   const failureOwner = Symbol('palette preview surface');
   const reportStage = (type, stage, inputs, attempt, error) => untrack(() => onpalettestatus?.({ type, owner: failureOwner, stage, inputs, attempt, error }));
   $effect(() => () => onpalettestatus?.({ type: 'remove', owner: failureOwner }));
@@ -124,9 +126,9 @@
   });
   // A subset belongs to the full item, not the current animation frame or tile
   // dimensions. Frame playback/resize cannot cancel this shared preparation.
-  const stageInputs = $derived(paletteFailureInputs(item, palette, alphaCut, metric, maxColors));
+  const stageInputs = $derived(paletteFailureInputs(item, palette, paletteCut, metric, maxColors));
   let limitAttempt = $state(0), cleanupAttempt = $state(0);
-  const limitRequest = $derived({ item, palette, alphaCut, metric, maxColors, inputs: stageInputs, attempt: limitAttempt });
+  const limitRequest = $derived({ item, palette, alphaCut: paletteCut, metric, maxColors, inputs: stageInputs, attempt: limitAttempt });
   let limited = $state.raw(null);
   const limitFailed = $derived(family === 'full-palette' && !!maxColors && maxColors < (palette?.size ?? 0)
     && samePaletteFailureInputs(limited?.inputs, stageInputs) && !!limited?.error);
@@ -157,7 +159,7 @@
   });
   // One whole-source/clip cleanup decision is shared across frame playback,
   // resized previews and exports. Off does not load the optional code.
-  const cleanupRequest = $derived({ item, palette: conversionPalette, alphaCut, metric, cleanup, inputs: stageInputs, attempt: cleanupAttempt });
+  const cleanupRequest = $derived({ item, palette: conversionPalette, alphaCut: paletteCut, metric, cleanup, inputs: stageInputs, attempt: cleanupAttempt });
   let cleaned = $state.raw(null);
   const cleanupFailed = $derived(family === 'full-palette' && cleanup
     && samePaletteFailureInputs(cleaned?.inputs, stageInputs) && !!cleaned?.error);
@@ -200,7 +202,7 @@
   // a previous palette, matching rule, opacity, size or frame from replacing the current preview.
   let fullPixels = $state.raw(null), fullReady = $state(false);
   const cacheRequest = $derived({ sources: frames.map(frame => frame.original), colors: conversionPalette,
-    width: mw, height: mh, alphaCut, metric, dither, ditherStrength, cleanup: conversionCleanup?.result ?? null });
+    width: mw, height: mh, alphaCut, alphaMode, metric, dither, ditherStrength, cleanup: conversionCleanup?.result ?? null });
   let cachedClip = $state.raw(null);
   const clipCache = $derived(cachedClip?.request === cacheRequest ? cachedClip.handle : null);
   $effect(() => {
@@ -213,7 +215,7 @@
   let fullItem, fullCompleted;
   $effect(() => {
     const frame = frames[at], frameAt = at, source = frame.original, data = source.data, sourceWidth = source.width, sourceHeight = source.height;
-    const colors = conversionPalette, width = mw, height = mh, cut = alphaCut, matching = metric, clean = conversionCleanup, cleaning = cleanup, dithering = dither, amount = ditherStrength;
+    const colors = conversionPalette, width = mw, height = mh, cut = alphaCut, opacity = alphaMode, matching = metric, clean = conversionCleanup, cleaning = cleanup, dithering = dither, amount = ditherStrength;
     fullReady = false;
     // Keep the last completed frame while the next frame or settings convert.
     // Clearing it on every async frame removes the canvas and exposes the grid.
@@ -232,7 +234,7 @@
     if (completed && completed.frame === frame && completed.frameAt === frameAt
       && completed.source === source && completed.data === data && completed.sourceWidth === sourceWidth && completed.sourceHeight === sourceHeight
       && completed.colors === colors && completed.width === width && completed.height === height
-      && completed.cut === cut && completed.matching === matching && completed.cleaning === cleaning
+      && completed.cut === cut && completed.opacity === opacity && completed.matching === matching && completed.cleaning === cleaning
       && completed.dithering === dithering && completed.amount === amount
       && completed.cleaned === clean?.result && completed.apply === clean?.apply) {
       fullReady = true;
@@ -240,7 +242,7 @@
     }
     const controller = new AbortController();
     const produce = async signal => {
-      const result = await quantizePreviewAsync(source, colors, cut, width, height, { signal, metric: matching, dither: dithering, ditherStrength: amount });
+      const result = await quantizePreviewAsync(source, colors, cut, width, height, { signal, metric: matching, dither: dithering, ditherStrength: amount, alphaMode: opacity });
       // The same post-dither source-coordinate overlay is used by exports.
       if (clean) clean.apply(result, clean.result);
       return result;
@@ -249,7 +251,7 @@
     pending.then(result => {
       if (!controller.signal.aborted) {
         fullPixels = new ImageData(palettePixels(result, colors).data, width, height);
-        fullCompleted = { frame, frameAt, source, data, sourceWidth, sourceHeight, colors, width, height, cut, matching,
+        fullCompleted = { frame, frameAt, source, data, sourceWidth, sourceHeight, colors, width, height, cut, opacity, matching,
           cleaning, dithering, amount, cleaned: clean?.result, apply: clean?.apply };
         fullReady = true;
       }

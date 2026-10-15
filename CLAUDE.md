@@ -13,6 +13,21 @@ intentional compatibility references.
 
 ## What it does
 
+Palette improvements add eleven curated presets (including exact Black & white
+and ENDESGA 8), full Lospec URL import through Paste colors, and explicit Count
+output colors in Preview/touch Image actions. Counts use full export conversion,
+union all GIF frames, exclude empty pixels and retain tiny metadata only. Use N
+output colors opens a new editor draft for local Save/HEX backup. Settings/source
+changes cancel counts; Auto uses captured wall identity rather than old swatches.
+
+Optional Palette Opacity Cut/Keep defaults to Cut128. Keep uses eligibility cut1
+for Auto/subset/Cleanup, preserves source alpha in sampled previews/exports and
+adds one alpha byte per sample. PNG with partial alpha uses RGBA8; binary packing
+and GIF stay unchanged. Partial-alpha GIF fails explicitly, including atomic ZIP;
+it never silently thresholds Keep. All snapshot/cache/drag identities include mode.
+The cutoff slider is Cut-only and guards detached native gestures. See the working
+checklist docs/research/2026-10-14-palette-improvements-todo.md for evidence and limits.
+
 Optional full-palette ordered dithering offers Off/2×2/4×4/8×8 and Dither strength 0–100%
 (remembered 50%); fresh and Reset default to Off. The settings heading and Help
 step are Recolor. Source-coordinate Bayer patterns preserve alpha and exact active

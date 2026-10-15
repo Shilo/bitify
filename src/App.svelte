@@ -24,6 +24,7 @@
   import { FULL_PRESETS, DEFAULT_FULL_PALETTE, GENERATED_PALETTE, GENERATED_PALETTE_ID, LIBRARY_KEY, restoreLibrary, savePalette, deletePalette, newPaletteName } from './lib/palette-library.js';
   import { captureGeneratedWallSources } from './lib/palette-generated-sources.js';
   import { preparePalette } from './lib/quantize.js';
+  import { effectiveAlphaCut } from './lib/palette-alpha.js';
   import { restorePaletteState, conversionSnapshot, fullPaletteImage } from './lib/palette-state.js';
   import { tooltip } from './lib/tooltip.js';
   import { paletteFailureRegistry } from './lib/palette-failure.js';
@@ -54,6 +55,8 @@
   const fullSaved = restorePaletteState(stored, initialLibrary);
   let family = $state(fullSaved.family), paletteId = $state(fullSaved.paletteId), alphaCut = $state(fullSaved.alphaCut), metric = $state(fullSaved.metric);
   let maxColors = $state(fullSaved.maxColors), lastMaxColors = $state(fullSaved.lastMaxColors), cleanup = $state(fullSaved.cleanup);
+  let alphaMode = $state(fullSaved.alphaMode);
+  const paletteCut = $derived(effectiveAlphaCut(alphaMode, alphaCut));
   let dither = $state(fullSaved.dither), ditherStrength = $state(fullSaved.ditherStrength);
   let sessionPalettes = $state.raw([]);
   const savedPalettes = $derived([...library, ...sessionPalettes]);
@@ -121,7 +124,7 @@
   });
   $effect(() => {
     try {
-      localStorage.setItem(storageKey, JSON.stringify({ first, second, none, style, settings, theme: themePick, family, paletteId, alphaCut, metric, maxColors, lastMaxColors, cleanup, dither, ditherStrength }));
+      localStorage.setItem(storageKey, JSON.stringify({ first, second, none, style, settings, theme: themePick, family, paletteId, alphaCut, alphaMode, metric, maxColors, lastMaxColors, cleanup, dither, ditherStrength }));
     } catch {
       // no storage; the settings last until the page is closed
     }
@@ -189,7 +192,7 @@
   // Editing colors or conversion settings returns to the converted result. Temporary
   // comparison stays separate, so releasing a hold never restores an outdated preference.
   $effect(() => {
-    first, second, none, style, set, family, fullPalette, alphaCut, metric, maxColors, cleanup, dither, ditherStrength;
+    first, second, none, style, set, family, fullPalette, alphaCut, alphaMode, metric, maxColors, cleanup, dither, ditherStrength;
     showOriginal = false;
   });
   let spaceHeld = $state(false);
@@ -218,7 +221,7 @@
   let items = $state.raw([]);
   // The logo is the empty wall's live preview. It never joins an imported wall or its exports.
   let example = $state.raw(null);
-  const generatedRequest = $derived(generatedActive ? captureGeneratedWallSources(items, example, alphaCut) : null);
+  const generatedRequest = $derived(generatedActive ? captureGeneratedWallSources(items, example, paletteCut) : null);
   const generatedPending = $derived(family === 'full-palette' && generatedActive && !generatedError
     && (generatedBusy || generatedResult?.key !== generatedRequest?.key));
   const generatedSource = $derived(generatedResult?.sourceLabel ?? (items.length ? 'Your images' : 'Example image'));
@@ -289,7 +292,7 @@
     ({ first, second, none, style, settings } = fresh);
     themePick = fresh.theme;
     const freshPalette = restorePaletteState(null);
-    family = freshPalette.family; paletteId = freshPalette.paletteId; alphaCut = 128; metric = 'oklab'; maxColors = 0; lastMaxColors = 16; cleanup = false; dither = 'none'; ditherStrength = 50;
+    family = freshPalette.family; paletteId = freshPalette.paletteId; alphaCut = 128; alphaMode = 'cut'; metric = 'oklab'; maxColors = 0; lastMaxColors = 16; cleanup = false; dither = 'none'; ditherStrength = 50;
     if (generatedError) generationRetry++;
     say('Settings reset.');
   }
@@ -345,7 +348,7 @@
   let failureVersion = $state(0), paletteRetry = $state(0);
   const currentPaletteFailures = $derived.by(() => {
     failureVersion;
-    return paletteFailures.current(canvasItems, { family, palette: prepared, alphaCut, metric, maxColors, cleanup });
+    return paletteFailures.current(canvasItems, { family, palette: prepared, alphaCut: paletteCut, metric, maxColors, cleanup });
   });
   const failureNotice = failures => failures.length
     ? failures.some(f => f.stage === 'limit') ? "Couldn't limit colors. Retry or choose All."
@@ -686,7 +689,7 @@
   // or lazy full-resolution animation masks consumed one frame at a time.
   // `asked` is the settings at the moment of asking (see `asking`). A long job starts a moment
   // after it is asked for, and what it saves is what was on screen then, whatever is changed since.
-  const asking = () => conversionSnapshot({ family, palette: fullPalette, alphaCut, metric, maxColors, cleanup, dither, ditherStrength,
+  const asking = () => conversionSnapshot({ family, palette: fullPalette, alphaCut, alphaMode, metric, maxColors, cleanup, dither, ditherStrength,
     generated: family === 'full-palette' && generatedActive ? generatedRequest : null, first: ink[0], second: ink[1], style, set });
   const usageKey = $derived.by(() => {
     const snapshot = asking();
@@ -847,6 +850,7 @@
     }
   }
   function exportFailure(error, asked, fallback) {
+    if (error.code === 'PALETTE_GIF_ALPHA') { say('GIF cannot keep partial opacity. Choose Opacity Cut, or copy a frame as PNG. No file was downloaded.'); return; }
     if (error.code !== 'PALETTE_GIF_LIMIT') { say(fallback); return; }
     say('GIF needs room for transparency. No file was downloaded.');
     if (paletteRequest) {
@@ -978,7 +982,7 @@
     <!-- Theme demo variants are different immutable artwork sources. Remount only
          the demo when its source changes; real images retain their ID and caches. -->
     {#each canvasItems as item (item.id === 0 ? item.original : item.id)}
-      <Tile {item} inset={IMAGE_INSET} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} palettePending={generatedPending} {alphaCut} {metric} {maxColors} {cleanup} {dither} {ditherStrength} onpalettestatus={reportPaletteStage} {paletteRetry}
+      <Tile {item} inset={IMAGE_INSET} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} palettePending={generatedPending} {alphaCut} {alphaMode} {metric} {maxColors} {cleanup} {dither} {ditherStrength} onpalettestatus={reportPaletteStage} {paletteRetry}
         colorUsageLabel={usageLabel(item)} analysisPending={needsAnalysis(item)} flipped={effectiveOriginal} comparing={previewing} active={!viewed} exportDisabled={generatedUnavailable || itemPaletteFailed(item)} budget={dragging ? DRAG_MS / canvasItems.length : 0}
         oncompare={compareHold} onopen={items.length ? openImage : undefined}
         exportDrag={items.length ? dragExports : undefined}
@@ -993,7 +997,7 @@
 </div>
 
 {#if viewed}
-  <ImageViewer item={viewed} analysisPending={needsAnalysis(viewed)} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} palettePending={generatedPending} {alphaCut} {metric} {maxColors} {cleanup} {dither} {ditherStrength} onpalettestatus={reportPaletteStage} {paletteRetry} {busy} {message} flipped={viewInitialOriginal}
+  <ImageViewer item={viewed} analysisPending={needsAnalysis(viewed)} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} palettePending={generatedPending} {alphaCut} {alphaMode} {metric} {maxColors} {cleanup} {dither} {ditherStrength} onpalettestatus={reportPaletteStage} {paletteRetry} {busy} {message} flipped={viewInitialOriginal}
     colorUsageLabel={usageLabel(viewed)} colorUsageActionLabel={usageActionLabel(viewed)} oncountcolors={family === 'full-palette' && viewed.id !== 0 ? () => outputColors(viewed) : undefined} countingColors={usageFor(viewed)?.status === 'pending' || usageFor(viewed)?.result?.count === 0}
     paletteFailureNotice={failureNotice(currentPaletteFailures.filter(f => f.inputs.item === viewed))} onpaletteretry={retryPaletteFailures} exportDisabled={generatedUnavailable || itemPaletteFailed(viewed)} exportDrag={viewed.id === 0 ? undefined : dragExports}
     onsave={viewed.id === 0 ? undefined : () => save(viewed)}
@@ -1005,7 +1009,7 @@
 
 
 <div class="workspace-tools" class:canvas-scrollable={canvasScrollable} use:measureWorkspaceTools>
-<Dock bind:first bind:second bind:none bind:style bind:settings bind:showOriginal bind:dragging bind:family bind:alphaCut bind:metric bind:maxColors bind:lastMaxColors bind:cleanup bind:dither bind:ditherStrength {fullPalette} fullPresets={fullChoices} {savedPalettes} {generatedNotice} {generatedSource} {paletteFailureNotice} onpaletteretry={retryPaletteFailures} generatedEditable={!generatedPending && !generatedUnavailable} onpalette={selectPalette} onimportpalette={() => editPalette(null)} oneditpalette={editPalette} {previewing} {canvasScrollable} {autos} {soft} />
+<Dock bind:first bind:second bind:none bind:style bind:settings bind:showOriginal bind:dragging bind:family bind:alphaCut bind:alphaMode bind:metric bind:maxColors bind:lastMaxColors bind:cleanup bind:dither bind:ditherStrength {fullPalette} fullPresets={fullChoices} {savedPalettes} {generatedNotice} {generatedSource} {paletteFailureNotice} onpaletteretry={retryPaletteFailures} generatedEditable={!generatedPending && !generatedUnavailable} onpalette={selectPalette} onimportpalette={() => editPalette(null)} oneditpalette={editPalette} {previewing} {canvasScrollable} {autos} {soft} />
 <nav class="bar file-tools" class:has-images={!!items.length} aria-label="File and app actions">
   <div class="file-actions" class:awaiting-import={!items.length} role="group" aria-label="Add and save images">
     <button class="btn glass-btn icon-only export-action" class:glass-btn--primary={!!items.length} disabled={!items.length || generatedUnavailable || items.some(itemPaletteFailed)} aria-label={items.length > 1 ? 'Save all images' : 'Save image'} use:tooltip={items.length > 1 ? 'Save all converted images as a ZIP archive.' : items.length ? 'Save the converted image at its original size.' : 'Add an image to enable saving.'} onclick={saveEverything}><PixelIcon name="save" /><span class="save-label" aria-hidden="true">Save</span></button>
