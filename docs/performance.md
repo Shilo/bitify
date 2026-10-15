@@ -1,5 +1,32 @@
 # Performance
 
+## Optional ordered dithering (October 14, 2026)
+
+Off and Amount zero retain the existing nearest path without dither scratch.
+Enabled conversion uses bounded four-candidate pair search, up to 4096 memoized
+source colors (bypassed for high-entropy input), smaller 128-pixel async slices and
+the existing posted-task cancellation scheduler. Conversion is slower than nearest;
+the fixed pattern prevents propagation between pixels, not all visible animation
+texture or motion-relative swimming. Dither and amount invalidate retained previews
+and the existing animation-index cache without increasing its 8 MiB budget.
+
+Foreground browser measurements used three warm async conversions per case. On a
+256×256 high-entropy image at 4×4/50%, medians for 8/64/256 target colors were
+117/160/266 ms in Codex Browser and 64/89/144 ms on a USB Pixel 8 Pro. Nearest medians
+were 10/20/51 ms and 6/15/40 ms respectively. These totals include scheduler turns;
+they are not animation FPS or a whole-app speed comparison. Thirty cases per device
+also covered repeated-color 128×128 sprites, 8×8 and 100% strength. No task above
+50 ms was observed in these bounded runs; maximum rAF gaps were 16.9 ms desktop and
+25.1 ms phone. Device load and future workloads can differ.
+
+Run `node bench/palette-dither-qa-server.mjs`, then `/qa` for built-app acceptance
+and `/perf` for the foreground source-kernel benchmark. `/qa` serves the unmodified
+build with synthetic fixtures and test-only settings seeding; `/perf` serves the
+current DOM-free source modules. Build before acceptance. Exact-alpha, membership,
+metadata and sampled-source phase checks accompany every timing case. See the
+[implementation record](research/2026-10-14-full-palette-dithering-implementation.md)
+for retained device results, independent checks and test limitations.
+
 ## Reviewed scheduling and recovery (October 13, 2026)
 
 Palette export yields reuse matching's posted-task primitive, retaining its timer

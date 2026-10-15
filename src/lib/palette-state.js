@@ -1,5 +1,6 @@
 import { FULL_PRESETS, DEFAULT_FULL_PALETTE, GENERATED_PALETTE_ID } from './palette-library.js';
 import { preparePalette, quantizeAsync, validateMatchingMetric, checkCanceled } from './quantize.js';
+import { normalizeDither, normalizeDitherStrength } from './palette-dither-settings.js';
 import { getLimitedPalette } from './palette-limit-client.js';
 
 function maxColorsOf(value = 0) {
@@ -23,14 +24,16 @@ export function restorePaletteState(text, library = []) {
     maxColors: value?.maxColors === 1 ? 2 : Number.isInteger(value?.maxColors) && value.maxColors >= 0 && value.maxColors <= 256 ? value.maxColors : 0,
     lastMaxColors: value?.lastMaxColors === 1 ? 2 : Number.isInteger(value?.lastMaxColors) && value.lastMaxColors >= 2 && value.lastMaxColors <= 256 ? value.lastMaxColors : 16,
     cleanup: value?.cleanup === true,
+    dither: normalizeDither(value?.dither),
+    ditherStrength: normalizeDitherStrength(value?.ditherStrength),
   };
 }
 
 // A save owns its colors and settings even if the user edits or resets the UI
 // while cooperative conversion is still running. IDs alone are not snapshots.
-export function conversionSnapshot({ family, palette, alphaCut, metric, maxColors, cleanup, generated, first, second, style, set }) {
+export function conversionSnapshot({ family, palette, alphaCut, metric, maxColors, cleanup, dither, ditherStrength, generated, first, second, style, set }) {
   return family === 'full-palette'
-    ? Object.freeze({ family, name: palette.name, colors: Object.freeze([...palette.colors]), alphaCut, metric: validateMatchingMetric(metric), maxColors: maxColorsOf(maxColors), cleanup: cleanup === true, ...(generated ? { generated } : {}) })
+    ? Object.freeze({ family, name: palette.name, colors: Object.freeze([...palette.colors]), alphaCut, metric: validateMatchingMetric(metric), maxColors: maxColorsOf(maxColors), cleanup: cleanup === true, dither: normalizeDither(dither), ditherStrength: normalizeDitherStrength(ditherStrength), ...(generated ? { generated } : {}) })
     : Object.freeze({ family: 'two-color', first, second, style, set: Object.freeze({ ...set }) });
 }
 
@@ -39,6 +42,7 @@ export async function fullPaletteImage(item, asked, { still = false, signal } = 
   // Own scalar preferences and source/frame references before subset preparation
   // yields. Still copies of GIFs select from the same full animation as Save.
   const metric = validateMatchingMetric(asked.metric), alphaCut = asked.alphaCut, maxColors = maxColorsOf(asked.maxColors), cleanup = asked.cleanup === true;
+  const dither = normalizeDither(asked.dither), ditherStrength = normalizeDitherStrength(asked.ditherStrength);
   const original = item.original, name = item.name, loop = item.loop;
   const framesIdentity = item.frames;
   const frames = item.frames?.map(f => ({ identity: f, original: f.original, delay: f.delay }));
@@ -60,10 +64,12 @@ export async function fullPaletteImage(item, asked, { still = false, signal } = 
     applyCleanupAsync = client.applyCleanupAsync;
   }
   const convert = async source => {
-    const result = await quantizeAsync(source, palette, alphaCut, undefined, undefined, { metric, signal });
+    const result = await quantizeAsync(source, palette, alphaCut, undefined, undefined, { metric, signal, dither, ditherStrength });
+    // Cleanup decisions come from undithered source labels. Their approved
+    // replacement coordinates stay solid; every other pixel keeps its texture.
     return clean ? await applyCleanupAsync(result, clean, { signal }) : result;
   };
-  const about = { family: 'full-palette', colors: palette.colors, metric, maxColors, cleanup, name, w: original.width, h: original.height };
+  const about = { family: 'full-palette', colors: palette.colors, metric, maxColors, cleanup, dither, ditherStrength, name, w: original.width, h: original.height };
   if (frames && !still) {
     return { ...about, loop, frameCount: frames.length,
       getFrame: async i => ({ ...(await convert(frames[i].original)), delay: frames[i].delay }) };

@@ -1,0 +1,200 @@
+{
+  "date": "2026-10-15T05:19:58.143Z",
+  "browserSandbox": true,
+  "submissions": 1,
+  "steps": [
+    {
+      "action": "ax",
+      "snapshot": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\"\n      - option \"Palette\" [selected]\n  - group:\n    - text: Color palette (Beta)\n    - button \"PICO-8 (16) 16 colours\":\n      - paragraph: PICO-8 (16)\n    - paragraph: Max colours\n    - spinbutton \"No limit\": \"8\"\n    - paragraph: Every pixel goes onto these colours. Max colours limits the image.\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\"\n      - option \"2x2\"\n      - option \"4x4\" [selected]\n      - option \"8x8\"\n  - group:\n    - text: Dithering strength\n    - paragraph: \"5.0\"\n    - slider\n    - paragraph: Subtle\n    - paragraph: Strong\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\""
+    },
+    {
+      "action": "ax",
+      "snapshot": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\"\n      - option \"Palette\" [selected]\n  - group:\n    - text: Color palette (Beta)\n    - button \"From a palette image\":\n      - paragraph: From a palette image\n    - group:\n      - button \"Pick from gallery\"\n      - button \"Paste from clipboard\"\n      - img\n      - paragraph: Click to upload or drag and drop\n      - paragraph: PNG, JPG, GIF up to 10MB\n      - paragraph: Its colours become the palette (transparent pixels skipped). Over 256 colours, its 32 main ones.\n    - paragraph: Max colours\n    - spinbutton \"No limit\": \"8\"\n    - paragraph: Every pixel goes onto these colours. Max colours limits the image.\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\"\n      - option \"2x2\"\n      - option \"4x4\" [selected]\n      - option \"8x8\"\n  - group:\n    - text: Dithering strength\n    - paragraph: \"5.0\"\n    - slider\n    - paragraph: Subtle\n    - paragraph: Strong\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\""
+    },
+    {
+      "action": "ax",
+      "snapshot": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\"\n      - option \"Palette\" [selected]\n  - group:\n    - text: Color palette (Beta)\n    - button \"From a palette image\":\n      - paragraph: From a palette image\n    - group:\n      - button \"Pick from gallery\"\n      - button \"Paste from clipboard\"\n      - img\n      - paragraph: Click to upload or drag and drop\n      - paragraph: PNG, JPG, GIF up to 10MB\n      - paragraph: Its colours become the palette (transparent pixels skipped). Over 256 colours, its 32 main ones.\n    - paragraph: Max colours\n    - spinbutton \"No limit\": \"8\"\n    - paragraph: Every pixel goes onto these colours. Max colours limits the image.\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\"\n      - option \"2x2\"\n      - option \"4x4\" [selected]\n      - option \"8x8\"\n  - group:\n    - text: Dithering strength\n    - paragraph: \"5.0\"\n    - slider\n    - paragraph: Subtle\n    - paragraph: Strong\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\""
+    },
+    {
+      "action": "ax",
+      "snapshot": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\"\n      - option \"Palette\" [selected]\n  - group:\n    - text: Color palette (Beta)\n    - button \"Your image (3 colours) 3 colours\":\n      - paragraph: Your image (3 colours)\n    - group:\n      - img \"Preview\"\n      - button \"Remove\"\n      - paragraph: Its colours become the palette (transparent pixels skipped). Over 256 colours, its 32 main ones.\n    - paragraph: Max colours\n    - spinbutton \"No limit\": \"8\"\n    - paragraph: Every pixel goes onto these colours. Max colours limits the image.\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\"\n      - option \"2x2\"\n      - option \"4x4\" [selected]\n      - option \"8x8\"\n  - group:\n    - text: Dithering strength\n    - paragraph: \"5.0\"\n    - slider\n    - paragraph: Subtle\n    - paragraph: Strong\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\""
+    },
+    {
+      "screenshot": "web-followup-image-import.png"
+    },
+    {
+      "action": "ax",
+      "snapshot": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 64x32px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\"\n      - option \"Palette\" [selected]\n  - group:\n    - text: Color palette (Beta)\n    - button \"Your image (3 colours) 3 colours\":\n      - paragraph: Your image (3 colours)\n    - group:\n      - img \"Preview\"\n      - button \"Remove\"\n      - paragraph: Its colours become the palette (transparent pixels skipped). Over 256 colours, its 32 main ones.\n    - paragraph: Max colours\n    - spinbutton \"No limit\": \"8\"\n    - paragraph: Every pixel goes onto these colours. Max colours limits the image.\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\"\n      - option \"2x2\"\n      - option \"4x4\" [selected]\n      - option \"8x8\"\n  - group:\n    - text: Dithering strength\n    - paragraph: \"5.0\"\n    - slider\n    - paragraph: Subtle\n    - paragraph: Strong\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\""
+    },
+    {
+      "action": "before-submit",
+      "snapshot": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 64x32px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\"\n      - option \"Palette\" [selected]\n  - group:\n    - text: Color palette (Beta)\n    - button \"Your image (3 colours) 3 colours\":\n      - paragraph: Your image (3 colours)\n    - group:\n      - img \"Preview\"\n      - button \"Remove\"\n      - paragraph: Its colours become the palette (transparent pixels skipped). Over 256 colours, its 32 main ones.\n    - paragraph: Max colours\n    - spinbutton \"No limit\": \"8\"\n    - paragraph: Every pixel goes onto these colours. Max colours limits the image.\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\"\n      - option \"2x2\"\n      - option \"4x4\" [selected]\n      - option \"8x8\"\n  - group:\n    - text: Dithering strength\n    - paragraph: \"5.0\"\n    - slider\n    - paragraph: Subtle\n    - paragraph: Strong\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\""
+    },
+    {
+      "action": "after-submit",
+      "controls": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 64x32px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\"\n      - option \"Palette\" [selected]\n  - group:\n    - text: Color palette (Beta)\n    - button \"Your image (3 colours) 3 colours\":\n      - paragraph: Your image (3 colours)\n    - group:\n      - img \"Preview\"\n      - button \"Remove\"\n      - paragraph: Its colours become the palette (transparent pixels skipped). Over 256 colours, its 32 main ones.\n    - paragraph: Max colours\n    - spinbutton \"No limit\": \"8\"\n    - paragraph: Every pixel goes onto these colours. Max colours limits the image.\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\"\n      - option \"2x2\"\n      - option \"4x4\" [selected]\n      - option \"8x8\"\n  - group:\n    - text: Dithering strength\n    - paragraph: \"5.0\"\n    - slider\n    - paragraph: Subtle\n    - paragraph: Strong\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\""
+    },
+    {
+      "action": "ax",
+      "snapshot": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 64x32px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\"\n      - option \"Palette\" [selected]\n  - group:\n    - text: Color palette (Beta)\n    - button \"Your image (3 colours) 3 colours\":\n      - paragraph: Your image (3 colours)\n    - group:\n      - img \"Preview\"\n      - button \"Remove\"\n      - paragraph: Its colours become the palette (transparent pixels skipped). Over 256 colours, its 32 main ones.\n    - paragraph: Max colours\n    - spinbutton \"No limit\": \"8\"\n    - paragraph: Every pixel goes onto these colours. Max colours limits the image.\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\"\n      - option \"2x2\"\n      - option \"4x4\" [selected]\n      - option \"8x8\"\n  - group:\n    - text: Dithering strength\n    - paragraph: \"5.0\"\n    - slider\n    - paragraph: Subtle\n    - paragraph: Strong\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\""
+    }
+  ],
+  "network": [
+    {
+      "kind": "request",
+      "host": "api.pixellab.ai",
+      "path": "/account/attribution/anonymous",
+      "method": "POST"
+    },
+    {
+      "kind": "request",
+      "host": "www.pixellab.ai",
+      "path": "/cdn-cgi/rum",
+      "method": "POST"
+    },
+    {
+      "kind": "request",
+      "host": "www.pixellab.ai",
+      "path": "/_next/data/UeDQ92jzUZfODBiI0IYt-/docs.json",
+      "method": "GET"
+    },
+    {
+      "kind": "request",
+      "host": "api.pixellab.ai",
+      "path": "/get-account-data",
+      "method": "GET"
+    },
+    {
+      "kind": "request",
+      "host": "api.pixellab.ai",
+      "path": "/get-subscription-status",
+      "method": "GET"
+    },
+    {
+      "kind": "request",
+      "host": "api.pixellab.ai",
+      "path": "/check-terms",
+      "method": "GET"
+    },
+    {
+      "kind": "response",
+      "host": "www.pixellab.ai",
+      "path": "/cdn-cgi/rum",
+      "status": 204
+    },
+    {
+      "kind": "request",
+      "host": "api.pixellab.ai",
+      "path": "/background-jobs/active",
+      "method": "GET"
+    },
+    {
+      "kind": "request",
+      "host": "pear.pixellab.ai",
+      "path": "/flags/",
+      "method": "POST"
+    },
+    {
+      "kind": "request",
+      "host": "api.pixellab.ai",
+      "path": "/projects",
+      "method": "GET"
+    },
+    {
+      "kind": "response",
+      "host": "www.pixellab.ai",
+      "path": "/_next/data/UeDQ92jzUZfODBiI0IYt-/docs.json",
+      "status": 200
+    },
+    {
+      "kind": "request",
+      "host": "api.pixellab.ai",
+      "path": "/check-terms",
+      "method": "GET"
+    },
+    {
+      "kind": "request",
+      "host": "api.pixellab.ai",
+      "path": "/creator/images",
+      "method": "GET"
+    },
+    {
+      "kind": "response",
+      "host": "pear.pixellab.ai",
+      "path": "/flags/",
+      "status": 200
+    },
+    {
+      "kind": "response",
+      "host": "api.pixellab.ai",
+      "path": "/account/attribution/anonymous",
+      "status": 200
+    },
+    {
+      "kind": "response",
+      "host": "api.pixellab.ai",
+      "path": "/background-jobs/active",
+      "status": 200
+    },
+    {
+      "kind": "response",
+      "host": "api.pixellab.ai",
+      "path": "/get-subscription-status",
+      "status": 200
+    },
+    {
+      "kind": "response",
+      "host": "api.pixellab.ai",
+      "path": "/get-account-data",
+      "status": 200
+    },
+    {
+      "kind": "request",
+      "host": "api.pixellab.ai",
+      "path": "/projects",
+      "method": "GET"
+    },
+    {
+      "kind": "response",
+      "host": "api.pixellab.ai",
+      "path": "/projects",
+      "status": 200
+    },
+    {
+      "kind": "response",
+      "host": "api.pixellab.ai",
+      "path": "/check-terms",
+      "status": 200
+    },
+    {
+      "kind": "response",
+      "host": "api.pixellab.ai",
+      "path": "/creator/images",
+      "status": 200
+    },
+    {
+      "kind": "request",
+      "host": "api.pixellab.ai",
+      "path": "/creator/images",
+      "method": "GET"
+    },
+    {
+      "kind": "response",
+      "host": "api.pixellab.ai",
+      "path": "/creator/images",
+      "status": 200
+    },
+    {
+      "kind": "response",
+      "host": "api.pixellab.ai",
+      "path": "/check-terms",
+      "status": 200
+    },
+    {
+      "kind": "response",
+      "host": "api.pixellab.ai",
+      "path": "/projects",
+      "status": 200
+    }
+  ]
+}

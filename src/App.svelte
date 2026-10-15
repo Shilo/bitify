@@ -54,6 +54,7 @@
   const fullSaved = restorePaletteState(stored, initialLibrary);
   let family = $state(fullSaved.family), paletteId = $state(fullSaved.paletteId), alphaCut = $state(fullSaved.alphaCut), metric = $state(fullSaved.metric);
   let maxColors = $state(fullSaved.maxColors), lastMaxColors = $state(fullSaved.lastMaxColors), cleanup = $state(fullSaved.cleanup);
+  let dither = $state(fullSaved.dither), ditherStrength = $state(fullSaved.ditherStrength);
   let sessionPalettes = $state.raw([]);
   const savedPalettes = $derived([...library, ...sessionPalettes]);
   let generatedResult = $state.raw(null), generatedBusy = $state(false), generatedError = $state(false), generationRetry = $state(0);
@@ -120,7 +121,7 @@
   });
   $effect(() => {
     try {
-      localStorage.setItem(storageKey, JSON.stringify({ first, second, none, style, settings, theme: themePick, family, paletteId, alphaCut, metric, maxColors, lastMaxColors, cleanup }));
+      localStorage.setItem(storageKey, JSON.stringify({ first, second, none, style, settings, theme: themePick, family, paletteId, alphaCut, metric, maxColors, lastMaxColors, cleanup, dither, ditherStrength }));
     } catch {
       // no storage; the settings last until the page is closed
     }
@@ -188,7 +189,7 @@
   // Editing colors or conversion settings returns to the converted result. Temporary
   // comparison stays separate, so releasing a hold never restores an outdated preference.
   $effect(() => {
-    first, second, none, style, set, family, fullPalette, alphaCut, metric, maxColors, cleanup;
+    first, second, none, style, set, family, fullPalette, alphaCut, metric, maxColors, cleanup, dither, ditherStrength;
     showOriginal = false;
   });
   let spaceHeld = $state(false);
@@ -288,7 +289,7 @@
     ({ first, second, none, style, settings } = fresh);
     themePick = fresh.theme;
     const freshPalette = restorePaletteState(null);
-    family = freshPalette.family; paletteId = freshPalette.paletteId; alphaCut = 128; metric = 'oklab'; maxColors = 0; lastMaxColors = 16; cleanup = false;
+    family = freshPalette.family; paletteId = freshPalette.paletteId; alphaCut = 128; metric = 'oklab'; maxColors = 0; lastMaxColors = 16; cleanup = false; dither = 'none'; ditherStrength = 50;
     if (generatedError) generationRetry++;
     say('Settings reset.');
   }
@@ -685,7 +686,7 @@
   // or lazy full-resolution animation masks consumed one frame at a time.
   // `asked` is the settings at the moment of asking (see `asking`). A long job starts a moment
   // after it is asked for, and what it saves is what was on screen then, whatever is changed since.
-  const asking = () => conversionSnapshot({ family, palette: fullPalette, alphaCut, metric, maxColors, cleanup,
+  const asking = () => conversionSnapshot({ family, palette: fullPalette, alphaCut, metric, maxColors, cleanup, dither, ditherStrength,
     generated: family === 'full-palette' && generatedActive ? generatedRequest : null, first: ink[0], second: ink[1], style, set });
   const about = (item, asked) => ({ name: item.name, w: item.img.w, h: item.img.h, first: asked.first, second: asked.second });
   const still = (item, asked) => asked.family === 'full-palette' ? fullPaletteImage(item, asked, { still: true }) : ({ ...about(item, asked), mask: mask(item.img, asked.style, asked.set) });
@@ -918,7 +919,7 @@
     <!-- Theme demo variants are different immutable artwork sources. Remount only
          the demo when its source changes; real images retain their ID and caches. -->
     {#each canvasItems as item (item.id === 0 ? item.original : item.id)}
-      <Tile {item} inset={IMAGE_INSET} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} palettePending={generatedPending} {alphaCut} {metric} {maxColors} {cleanup} onpalettestatus={reportPaletteStage} {paletteRetry}
+      <Tile {item} inset={IMAGE_INSET} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} palettePending={generatedPending} {alphaCut} {metric} {maxColors} {cleanup} {dither} {ditherStrength} onpalettestatus={reportPaletteStage} {paletteRetry}
         analysisPending={needsAnalysis(item)} flipped={effectiveOriginal} comparing={previewing} active={!viewed} exportDisabled={generatedUnavailable || itemPaletteFailed(item)} budget={dragging ? DRAG_MS / canvasItems.length : 0}
         oncompare={compareHold} onopen={items.length ? openImage : undefined}
         exportDrag={items.length ? dragExports : undefined}
@@ -933,7 +934,7 @@
 </div>
 
 {#if viewed}
-  <ImageViewer item={viewed} analysisPending={needsAnalysis(viewed)} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} palettePending={generatedPending} {alphaCut} {metric} {maxColors} {cleanup} onpalettestatus={reportPaletteStage} {paletteRetry} {busy} {message} flipped={viewInitialOriginal}
+  <ImageViewer item={viewed} analysisPending={needsAnalysis(viewed)} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} palettePending={generatedPending} {alphaCut} {metric} {maxColors} {cleanup} {dither} {ditherStrength} onpalettestatus={reportPaletteStage} {paletteRetry} {busy} {message} flipped={viewInitialOriginal}
     paletteFailureNotice={failureNotice(currentPaletteFailures.filter(f => f.inputs.item === viewed))} onpaletteretry={retryPaletteFailures} exportDisabled={generatedUnavailable || itemPaletteFailed(viewed)} exportDrag={viewed.id === 0 ? undefined : dragExports}
     onsave={viewed.id === 0 ? undefined : () => save(viewed)}
     oncopy={viewed.id === 0 ? undefined : () => copy(viewed)}
@@ -944,7 +945,7 @@
 
 
 <div class="workspace-tools" class:canvas-scrollable={canvasScrollable} use:measureWorkspaceTools>
-<Dock bind:first bind:second bind:none bind:style bind:settings bind:showOriginal bind:dragging bind:family bind:alphaCut bind:metric bind:maxColors bind:lastMaxColors bind:cleanup {fullPalette} fullPresets={fullChoices} {savedPalettes} {generatedNotice} {generatedSource} {paletteFailureNotice} onpaletteretry={retryPaletteFailures} generatedEditable={!generatedPending && !generatedUnavailable} onpalette={selectPalette} onimportpalette={() => editPalette(null)} oneditpalette={editPalette} {previewing} {canvasScrollable} {autos} {soft} />
+<Dock bind:first bind:second bind:none bind:style bind:settings bind:showOriginal bind:dragging bind:family bind:alphaCut bind:metric bind:maxColors bind:lastMaxColors bind:cleanup bind:dither bind:ditherStrength {fullPalette} fullPresets={fullChoices} {savedPalettes} {generatedNotice} {generatedSource} {paletteFailureNotice} onpaletteretry={retryPaletteFailures} generatedEditable={!generatedPending && !generatedUnavailable} onpalette={selectPalette} onimportpalette={() => editPalette(null)} oneditpalette={editPalette} {previewing} {canvasScrollable} {autos} {soft} />
 <nav class="bar file-tools" class:has-images={!!items.length} aria-label="File and app actions">
   <div class="file-actions" class:awaiting-import={!items.length} role="group" aria-label="Add and save images">
     <button class="btn glass-btn icon-only export-action" class:glass-btn--primary={!!items.length} disabled={!items.length || generatedUnavailable || items.some(itemPaletteFailed)} aria-label={items.length > 1 ? 'Save all images' : 'Save image'} use:tooltip={items.length > 1 ? 'Save all converted images as a ZIP archive.' : items.length ? 'Save the converted image at its original size.' : 'Add an image to enable saving.'} onclick={saveEverything}><PixelIcon name="save" /><span class="save-label" aria-hidden="true">Save</span></button>
@@ -1043,7 +1044,7 @@
     <ol>
       <li><PixelIcon name="import" /><b>Add</b>{touch ? 'Choose images.' : 'Choose, drop or paste images.'}</li>
       <li><PixelIcon name="grid" /><b>Palette</b>{family === 'full-palette' ? 'Use Auto, pick a palette or import your own.' : 'Pick a color pair or choose your own colors.'}</li>
-      <li><PixelIcon name="sliders" /><b>{family === 'full-palette' ? 'Nearest' : 'Style'}</b>{family === 'full-palette' ? 'Tune color matching and limits.' : 'Pick an effect and tune its settings.'}</li>
+      <li><PixelIcon name="sliders" /><b>{family === 'full-palette' ? 'Recolor' : 'Style'}</b>{family === 'full-palette' ? 'Tune matching, color limits and dithering.' : 'Pick an effect and tune its settings.'}</li>
       <li><PixelIcon name="save" /><b>Save</b>Save or copy images.</li>
     </ol>
     <table>

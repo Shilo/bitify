@@ -1,0 +1,46 @@
+{
+  "controls": [
+    {
+      "height": 44,
+      "label": "Dithering off",
+      "left": 116,
+      "pressed": "false",
+      "right": 153.609375,
+      "width": 37.609375
+    },
+    {
+      "height": 44,
+      "label": "Dithering 2x2",
+      "left": 157.609375,
+      "pressed": "false",
+      "right": 198.671875,
+      "width": 41.0625
+    },
+    {
+      "height": 44,
+      "label": "Dithering 4x4",
+      "left": 202.671875,
+      "pressed": "true",
+      "right": 244.25,
+      "width": 41.578125
+    },
+    {
+      "height": 44,
+      "label": "Dithering 8x8",
+      "left": 248.25,
+      "pressed": "false",
+      "right": 290,
+      "width": 41.75
+    },
+    {
+      "height": 44,
+      "label": "Dithering amount",
+      "left": 113,
+      "pressed": null,
+      "right": 260.65625,
+      "width": 147.65625
+    }
+  ],
+  "scrollWidth": 320,
+  "width": 320
+}

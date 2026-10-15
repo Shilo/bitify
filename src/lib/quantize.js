@@ -1,4 +1,6 @@
 import { normalizeColors } from './palette-library.js';
+import { normalizeDither, normalizeDitherStrength } from './palette-dither-settings.js';
+import { prepareDither, convertDither } from './palette-dither.js';
 
 export const EMPTY_INDEX = 256;
 const preparedData = new WeakMap();
@@ -87,9 +89,11 @@ function convert(state, start, end) {
   }
 }
 
-export function quantize(image, palette, alphaCut = 128, mw, mh, { metric = 'oklab' } = {}) {
+export function quantize(image, palette, alphaCut = 128, mw, mh, { metric = 'oklab', dither = 'none', ditherStrength = 50 } = {}) {
   const state = job(image, palette, alphaCut, mw, mh, metric);
-  convert(state, 0, state.result.indices.length);
+  const enabled = normalizeDither(dither) !== 'none' && normalizeDitherStrength(ditherStrength) > 0 && state.size > 1;
+  if (enabled) state.ditherData = prepareDither(state, dither, normalizeDitherStrength(ditherStrength), linear, lab);
+  (enabled ? convertDither : convert)(state, 0, state.result.indices.length);
   return state.result;
 }
 
@@ -105,14 +109,17 @@ export const yieldTask = () => new Promise(resolve => {
   channel.port2.postMessage(null);
 });
 
-export async function quantizeAsync(image, palette, alphaCut = 128, mw, mh, { metric = 'oklab', signal, onProgress, chunkPixels = 2048 } = {}) {
+export async function quantizeAsync(image, palette, alphaCut = 128, mw, mh, { metric = 'oklab', dither = 'none', ditherStrength = 50, signal, onProgress, chunkPixels = 2048 } = {}) {
   checkCanceled(signal);
   const state = job(image, palette, alphaCut, mw, mh, metric), length = state.result.indices.length;
-  const chunk = Math.min(8192, Math.max(128, Math.floor(chunkPixels) || 2048));
+  const enabled = normalizeDither(dither) !== 'none' && normalizeDitherStrength(ditherStrength) > 0 && state.size > 1;
+  if (enabled) state.ditherData = prepareDither(state, dither, normalizeDitherStrength(ditherStrength), linear, lab);
+  const chunk = Math.min(enabled ? 128 : 8192, Math.max(128, Math.floor(chunkPixels) || 2048));
+  const convertSlice = enabled ? convertDither : convert;
   for (let start = 0; start < length;) {
     const deadline = performance.now() + 8;
     do {
-      checkCanceled(signal); convert(state, start, Math.min(start + chunk, length));
+      checkCanceled(signal); convertSlice(state, start, Math.min(start + chunk, length));
       start += chunk;
     } while (start < length && performance.now() < deadline);
     onProgress?.(Math.min(start, length) / length);

@@ -1,0 +1,75 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Colorfetti ordered-dither kernel performance</title>
+<style>body{font:16px system-ui;margin:24px;max-width:900px;background:#fffdf9;color:#191825}button{font:inherit;padding:14px 24px;border-radius:10px}pre{white-space:pre-wrap;overflow-wrap:anywhere}progress{width:100%}</style>
+<h1>Ordered-dither kernel performance</h1>
+<p>Asynchronous source conversion. Timings include scheduler turns; these measurements do not establish animation frame rates.</p>
+<button id="run">Run kernel benchmark</button>
+<progress id="progress" value="0" max="1"></progress>
+<pre id="status">Ready. Keep this page in the foreground.</pre>
+<script type="module">
+import {quantizeAsync} from '/engine/quantize.js';
+const status=document.querySelector('#status'),button=document.querySelector('#run'),progress=document.querySelector('#progress');
+const palette=n=>Array.from({length:n},(_,i)=>'#'+((Math.imul(i+1,65111))&0xffffff).toString(16).padStart(6,'0'));
+function fixture(width,height,repeated,colors){
+ const data=new Uint8ClampedArray(width*height*4);
+ let seed=0x4e03d291;
+ for(let i=0;i<width*height;i++){
+  let r,g,b;
+  if(repeated){const c=parseInt(colors[i%Math.min(colors.length,6)].slice(1),16);r=((c>>>16)+17)&255;g=((c>>>8&255)+9)&255;b=((c&255)+23)&255;}
+  else{seed=(Math.imul(seed,1664525)+1013904223)>>>0;r=seed>>>24;g=seed>>>16&255;b=seed>>>8&255;}
+  data.set([r,g,b,i%29===0?127:255],i*4);
+ }
+ // Real exact matches as well as nonexact RGBs; alpha stays independently tested.
+ for(let i=0;i<colors.length;i++){const c=parseInt(colors[i].slice(1),16);data.set([c>>>16,c>>>8&255,c&255,255],i*4);}
+ return {width,height,data};
+}
+const median=values=>[...values].sort((a,b)=>a-b)[Math.floor(values.length/2)];
+function assertResult(result,source,count){
+ const used=new Uint8Array(256);let empty=false;
+ for(let i=0;i<count;i++)if(result.indices[i]!==i)throw Error('Exact palette RGB changed at '+i);
+ for(let i=0;i<result.indices.length;i++){
+  const index=result.indices[i],transparent=source.data[i*4+3]<128;
+  if((index===256)!==transparent||(!transparent&&index>=count))throw Error('Membership/alpha mismatch at '+i);
+  if(transparent)empty=true;else used[index]=1;
+ }
+ if(empty!==result.hasTransparency||used.some((v,i)=>v!==result.used[i]))throw Error('Incorrect result metadata');
+}
+button.onclick=async()=>{
+ button.disabled=true;status.textContent='Starting…';progress.value=0;
+ const report={kind:'kernel-performance',userAgent:navigator.userAgent,started:new Date().toISOString(),cases:[],errors:[]};
+ let ticking=true,last=performance.now(),maxRafGap=0;const gaps=[];const tasks=[];
+ const heartbeat=now=>{if(!ticking)return;const gap=now-last;gaps.push({at:now,gap});maxRafGap=Math.max(maxRafGap,gap);last=now;requestAnimationFrame(heartbeat);};requestAnimationFrame(heartbeat);
+ let observer;try{observer=new PerformanceObserver(list=>{for(const entry of list.getEntries())tasks.push({start:entry.startTime,duration:entry.duration});});observer.observe({type:'longtask',buffered:false});}catch{}
+ try{
+  const configurations=[{dither:'none',ditherStrength:50},{dither:'4x4',ditherStrength:50},{dither:'4x4',ditherStrength:100},{dither:'8x8',ditherStrength:50},{dither:'8x8',ditherStrength:100}];
+  const total=3*2*configurations.length;let done=0;
+  for(const count of [8,64,256])for(const repeated of [false,true]){
+   const colors=palette(count),source=fixture(repeated?128:256,repeated?128:256,repeated,colors);
+   for(const options of configurations){
+    status.textContent=`${done+1}/${total}: ${repeated?'repeated sprite':'high-entropy image'}, ${count} colors, ${options.dither}, ${options.ditherStrength}%`;
+    const start=performance.now();const samples=[],progressIntervals=[];let result;
+    for(let run=0;run<4;run++){
+     let previous=performance.now();const intervals=[];const began=previous;
+     result=await quantizeAsync(source,colors,128,undefined,undefined,{...options,onProgress:()=>{const now=performance.now();intervals.push(now-previous);previous=now;}});
+     if(run){samples.push(performance.now()-began);progressIntervals.push(...intervals);}
+    }
+    const conversionEnd=performance.now();assertResult(result,source,count);
+    const small=await quantizeAsync(source,colors,128,23,17,options);
+    for(let y=0;y<17;y++)for(let x=0;x<23;x++){
+     const sx=Math.floor((x+.5)*source.width/23),sy=Math.floor((y+.5)*source.height/17);
+     if(small.indices[y*23+x]!==result.indices[sy*source.width+sx])throw Error('Preview source-coordinate phase mismatch');
+    }
+    await new Promise(resolve=>requestAnimationFrame(resolve));
+    const duringGaps=gaps.filter(v=>v.at>=start&&v.at<=conversionEnd),duringTasks=tasks.filter(v=>v.start>=start&&v.start<=conversionEnd);
+    report.cases.push({fixture:repeated?'repeated-sprite':'high-entropy',width:source.width,height:source.height,paletteSize:count,...options,warmRuns:3,medianMs:median(samples),samplesMs:samples,maxProgressIntervalMs:Math.max(0,...progressIntervals),maxRafGapMs:Math.max(0,...duringGaps.map(v=>v.gap)),longTasks:duringTasks,usedColors:result.used.reduce((a,b)=>a+b,0),membershipAlphaMetadataPassed:true,exactRgbPassed:true,sampledPhasePassed:true,resultBytes:result.indices.byteLength+result.used.byteLength});
+    done++;progress.value=done/total;
+   }
+  }
+ }catch(error){report.errors.push(String(error?.stack||error));}
+ finally{ticking=false;observer?.disconnect();report.finished=new Date().toISOString();report.maxRafGapMs=maxRafGap;report.longTasks=tasks;report.complete=report.errors.length===0&&report.cases.length===30;}
+ try{const response=await fetch('/report',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(report)});report.saved=response.ok;if(!response.ok)report.saveError='HTTP '+response.status;}catch(error){report.saveError=String(error);}
+ window.kernelPerformanceReport=report;status.textContent=(report.complete?'COMPLETE':'FAILED')+'\n'+JSON.stringify(report,null,2);button.disabled=false;
+};
+</script>

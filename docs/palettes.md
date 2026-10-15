@@ -1,5 +1,23 @@
 # Palettes
 
+## Optional full palette dithering
+
+Recolor settings now includes **Dithering: Off / 2×2 / 4×4 / 8×8**. Off remains the
+default and keeps the previous nearest-color result. Choose a pattern to mix target
+colors spatially for smoother sparse shading, then adjust Amount (0–100%, initially
+50%). Zero keeps nearest colors. Dithering can add unwanted texture to flat sprites;
+compare at native size before saving. Existing 1-bit dithering styles remain separate.
+
+The pattern uses original source coordinates, so previews and native exports agree.
+It never changes transparency, invents target colors or alters exact RGB colors in
+the active palette/subset. Max colors still chooses the allowed subset first.
+Cleanup's approved replacements remain solid; other pixels retain dithering.
+Settings are saved across visits, and Reset restores Off and 50% while retaining the
+selected palette. Fixed unchanged animation coordinates remain stable, but moving
+art can move through the pattern. Diffusion is not offered in this family.
+
+These rules supersede historical nearest-only method guidance below.
+
 Colorfetti starts in **Palette** mode: generate colors with Auto, choose from nine
 curated palettes, or import, edit and save your own. The optional **1-bit** mode offers
 twelve preset color pairs and two-color styles. Full palettes and their provenance are
@@ -85,13 +103,10 @@ responsive maximum of 156–208px. Full text is retained in the DOM,
 in its accessible label and tooltip. Pressing it still compares the converted result
 with the original. The 1-bit comparison button keeps the current style's name.
 
-Nearest-color conversion deliberately remains the full palette method. The supplied
-research recommends it first and lists multi-color ordered/error-diffusion dithering
-and shape preservation as later work. Dithering can help gradients with sparse palettes,
-but it introduces spatial texture and needs explicit sampled-preview, transparency,
-animation and performance rules. Legacy Cutout/Stencil/Icon classify two ink roles;
-they do not define how arbitrary full-palette entries should represent those roles.
-Optional palette methods deserve a separate visual comparison before implementation.
+Nearest-color conversion remains the default. Optional multicolor ordered dithering
+adds spatial texture to approximate intermediate shading. Legacy Cutout/Stencil/Icon
+classify two ink roles; they do not define arbitrary full-palette recoloring. Error
+diffusion and automatic shape preservation remain separate future investigations.
 
 ### One shared palette for several images
 
@@ -105,7 +120,7 @@ Choose either in **Palette settings → Matching**; Oklab is the default. This g
 is remembered across visits and family switches; selecting a palette does not change it.
 Hover or hold the Matching or Cleanup label for its explanation; the descriptions
 are also available to screen readers.
-With **Max colors: All** and **Cleanup: Off** (the defaults), the same source RGB maps to the same palette RGB
+With **Max colors: All**, **Cleanup: Off** and **Dithering: Off** (the defaults), the same source RGB maps to the same palette RGB
 at the same matching setting in every image. All preserves the existing nearest conversion.
 The shared palette is never regenerated or changed.
 
@@ -150,19 +165,20 @@ using it for small sprites.
 Nearest matching minimizes each individual visible pixel's distance under the selected rule to the allowed
 set. Dithering instead spreads different allowed colors over neighboring pixels to
 approximate a missing shade; it can improve averaged shading while increasing individual
-pixel error and changing crisp pixel-art textures. Palette-specific Ordered and Diffusion
-remain research ideas, not available app controls.
+pixel error and changing crisp pixel-art textures. Ordered 2×2, 4×4 and 8×8 patterns are available as optional full-palette controls.
+Error diffusion remains deferred because it can propagate changes through animation frames.
 
 Output pixels are fully opaque or fully transparent. Opacity cut defaults to 128:
 source alpha below the cut becomes empty. The range is 1–255, so alpha zero always stays
 empty. Palette settings always offers the compact Oklab / RGB control. Opacity cut appears
-only when an image has partial alpha or the cut has changed. The popup's 16px semibold **Nearest**
-title identifies the conversion method for both matching choices, with an icon-only Reset
-button aligned at its right. Rows are Max colors, Matching, Cleanup, then
-Opacity cut when applicable. Reset restores Oklab, All, Cleanup Off and cut
+only when an image has partial alpha or the cut has changed. The popup's 16px semibold **Recolor**
+title identifies the settings, with an icon-only Reset button aligned at its right.
+Rows are Max colors, Matching, Cleanup, Dithering, conditional Amount, then
+Opacity cut when applicable. Reset restores Oklab, All, Cleanup Off, Dithering Off,
+Amount 50% and cut
 128 without changing the selected palette. Neither rule is universally visually best;
 compare with the original, especially when a palette lacks the source's hue. Other color
-spaces and palette dithering remain outside the current controls; see the
+spaces remain outside the current controls; see the
 [matching decision](research/2026-10-11-palette-matching.md).
 Switching families retains 1-bit colors, None, style and per-style settings.
 Selecting or altering a palette returns the display to converted output; hold comparison

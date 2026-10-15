@@ -19,7 +19,7 @@
   // Without `onremove` the tile is a preview only and has no buttons.
   // `set` is the style's settings. `budget` is set while one of their sliders is being dragged:
   // the milliseconds this tile may take to convert its image after each move.
-  let { item, first, second, style, set, family = 'two-color', palette, palettePending = false, analysisPending = false, alphaCut = 128, metric = 'oklab', maxColors = 0, cleanup = false, active = true, exportDisabled = false, onpalettestatus, paletteRetry = 0, flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false, exportDrag } = $props();
+  let { item, first, second, style, set, family = 'two-color', palette, palettePending = false, analysisPending = false, alphaCut = 128, metric = 'oklab', maxColors = 0, cleanup = false, dither = 'none', ditherStrength = 50, active = true, exportDisabled = false, onpalettestatus, paletteRetry = 0, flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false, exportDrag } = $props();
   const failureOwner = Symbol('palette preview surface');
   const reportStage = (type, stage, inputs, attempt, error) => untrack(() => onpalettestatus?.({ type, owner: failureOwner, stage, inputs, attempt, error }));
   $effect(() => () => onpalettestatus?.({ type: 'remove', owner: failureOwner }));
@@ -200,7 +200,7 @@
   // a previous palette, matching rule, opacity, size or frame from replacing the current preview.
   let fullPixels = $state.raw(null), fullReady = $state(false);
   const cacheRequest = $derived({ sources: frames.map(frame => frame.original), colors: conversionPalette,
-    width: mw, height: mh, alphaCut, metric, cleanup: conversionCleanup?.result ?? null });
+    width: mw, height: mh, alphaCut, metric, dither, ditherStrength, cleanup: conversionCleanup?.result ?? null });
   let cachedClip = $state.raw(null);
   const clipCache = $derived(cachedClip?.request === cacheRequest ? cachedClip.handle : null);
   $effect(() => {
@@ -213,7 +213,7 @@
   let fullItem, fullCompleted;
   $effect(() => {
     const frame = frames[at], frameAt = at, source = frame.original, data = source.data, sourceWidth = source.width, sourceHeight = source.height;
-    const colors = conversionPalette, width = mw, height = mh, cut = alphaCut, matching = metric, clean = conversionCleanup, cleaning = cleanup;
+    const colors = conversionPalette, width = mw, height = mh, cut = alphaCut, matching = metric, clean = conversionCleanup, cleaning = cleanup, dithering = dither, amount = ditherStrength;
     fullReady = false;
     // Keep the last completed frame while the next frame or settings convert.
     // Clearing it on every async frame removes the canvas and exposes the grid.
@@ -233,13 +233,15 @@
       && completed.source === source && completed.data === data && completed.sourceWidth === sourceWidth && completed.sourceHeight === sourceHeight
       && completed.colors === colors && completed.width === width && completed.height === height
       && completed.cut === cut && completed.matching === matching && completed.cleaning === cleaning
+      && completed.dithering === dithering && completed.amount === amount
       && completed.cleaned === clean?.result && completed.apply === clean?.apply) {
       fullReady = true;
       return;
     }
     const controller = new AbortController();
     const produce = async signal => {
-      const result = await quantizePreviewAsync(source, colors, cut, width, height, { signal, metric: matching });
+      const result = await quantizePreviewAsync(source, colors, cut, width, height, { signal, metric: matching, dither: dithering, ditherStrength: amount });
+      // The same post-dither source-coordinate overlay is used by exports.
       if (clean) clean.apply(result, clean.result);
       return result;
     };
@@ -248,7 +250,7 @@
       if (!controller.signal.aborted) {
         fullPixels = new ImageData(palettePixels(result, colors).data, width, height);
         fullCompleted = { frame, frameAt, source, data, sourceWidth, sourceHeight, colors, width, height, cut, matching,
-          cleaning, cleaned: clean?.result, apply: clean?.apply };
+          cleaning, dithering, amount, cleaned: clean?.result, apply: clean?.apply };
         fullReady = true;
       }
     }).catch(error => { if (error.name !== 'AbortError') console.error('Palette preview failed', error); });

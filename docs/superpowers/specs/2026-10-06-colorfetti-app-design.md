@@ -1,5 +1,54 @@
 # Colorfetti design
 
+## Full palette ordered dithering — October 14, 2026
+
+Full palettes offer Dithering Off, 2×2, 4×4 and 8×8. Off is the fresh and Reset
+default, preserving previous nearest output exactly. The optional Amount control
+runs from 0 to 100%, defaults to 50%, commits after a 200 ms pause or release/change,
+and discards pending edits on pointer cancellation, panel close, palette/family or
+pattern change. Zero is identical to nearest. The setting and amount are remembered
+across visits and family changes. Invalid stored fields restore Off and 50%.
+
+The full-palette settings heading and Help step are Recolor. Help says “Tune
+matching, color limits and dithering.” Rows retain Max colors, Matching and Cleanup,
+then add Dithering and conditional Amount before conditional Opacity cut. The
+existing optional 1-bit Bayer, Noise and diffusion styles keep their behavior and
+settings. Multicolor dithering belongs only to the full-palette conversion family.
+
+Ordered Bayer ranks are anchored to original source coordinates, with no changing
+frame seed. Alpha is classified before color work; dithering never changes the
+opacity cut, visible mask or target palette. Exact RGB members of the active
+palette/subset remain exact. Pattern phase and full-source pixel results are the
+same in sampled wall previews, enlarged Preview, Save, Copy, GIF, ZIP and dragging.
+The cap still selects its existing per-asset/whole-GIF subset first. Dither settings
+do not regenerate Auto or refit the subset. Cleanup keeps its independent frozen
+nearest-source proposals, then its approved replacements override those source
+coordinates with solid target colors after dithering. Other pixels keep the pattern.
+
+Matching chooses the four nearest candidates (or all entries for smaller palettes)
+and the nearest anchor. Up to six candidate pairs are scored at up to three
+grid-realizable occupancies. Pair averages use linear-light RGB and Oklab tone error,
+plus 0.03 times expected point distortion to discourage distant mixtures. Amount
+interpolates the target average from the nearest color toward source linear light.
+RGB Matching changes candidate ranking/anchor, not the Oklab mixture objective.
+These bounded heuristics add texture and cannot recover hues absent from a palette.
+
+Identical source RGB may now map to different palette colors at different pattern
+positions. Fixed unchanged coordinates remain stable across animation frames when
+their palette/subset and settings stay fixed; moving shapes can swim through the
+pattern. This is not motion compensation or a promise of universally better art.
+Error diffusion is deferred because it can change distant unchanged pixels.
+
+Dither mode and amount participate in immutable export snapshots, retained-preview
+identity, animation-cache identity and export-drag invalidation. Changed/canceled
+jobs cannot publish stale settings. Existing palette export overflow/failure rules
+remain; no extra color or undithered fallback is silently exported. Off allocates
+no dither scratch. Enabled async work uses smaller bounded slices and the existing
+posted-task/cancellation scheduler; repeated-color memoization is bounded.
+
+This section supersedes older full-palette wording that restricts conversion to
+nearest matching alone or labels the settings panel Nearest.
+
 ## Colorfetti identity — October 13, 2026
 
 Colorfetti is the product name. The logo is the approved square C frame (black on light surfaces, off-white on dark surfaces) with

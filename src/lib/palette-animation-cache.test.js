@@ -20,11 +20,12 @@ describe('bounded animation preview cache', () => {
     expect(x).toBe(y); expect(await a.getFrame(0, produce)).toBe(x); expect(produce).toHaveBeenCalledTimes(1);
     a.release(); expect(cache.stats().clips).toBe(1); b.release(); expect(cache.stats().bytes).toBe(0);
   });
-  it('keeps keys separate for dimensions, ordered colors, metric, cut, cleanup and source buffers', () => {
+  it('keeps keys separate for dimensions, ordered colors, metric, cut, cleanup, dithering and source buffers', () => {
     const cache = createAnimationCache(), args = options(), handles = [cache.acquire(args)];
     for (const change of [{ width: 1 }, { metric: 'rgb' }, { alphaCut: 100 }, { cleanup: {} },
+      { dither: '2x2' }, { dither: '4x4' }, { dither: '8x8' }, { ditherStrength: 0 }, { ditherStrength: 100 },
       { palette: { colors: ['#ffffff', '#000000'] } }, { sources: [source(), source()] }]) handles.push(cache.acquire({ ...args, ...change }));
-    expect(cache.stats().clips).toBe(7); handles.forEach(h => h.release()); expect(cache.stats().bytes).toBe(0);
+    expect(cache.stats().clips).toBe(12); handles.forEach(h => h.release()); expect(cache.stats().bytes).toBe(0);
   });
   it('one cancellation preserves another consumer, while the last cancellation aborts production', async () => {
     const cache = createAnimationCache(), handle = cache.acquire(options()), a = new AbortController(), b = new AbortController();
@@ -60,15 +61,17 @@ describe('bounded animation preview cache', () => {
       palette: preparePalette(['#000000', '#ffffff', '#1d2b53', '#ffec27']) };
     const cache = createAnimationCache();
     const cases = [base, { ...base, metric: 'rgb' }, { ...base, alphaCut: 181 },
+      { ...base, dither: '2x2', ditherStrength: 100 }, { ...base, dither: '4x4', ditherStrength: 100 },
+      { ...base, dither: '8x8', ditherStrength: 70 }, { ...base, dither: '8x8', ditherStrength: 0 },
       { ...base, palette: preparePalette([...base.palette.colors].reverse()) },
       { ...base, palette: preparePalette(['#000000', '#ffffff']) },
       { ...base, width: 2, height: 1 }, { ...base, sources: [second, first] }];
     const handles = [];
     for (const args of cases) {
       const handle = cache.acquire(args); handles.push(handle);
-      const produce = vi.fn(async () => quantize(args.sources[0], args.palette, args.alphaCut, args.width, args.height, { metric: args.metric }));
+      const produce = vi.fn(async () => quantize(args.sources[0], args.palette, args.alphaCut, args.width, args.height, args));
       const actual = await handle.getFrame(0, produce), warm = await handle.getFrame(0, produce);
-      const expected = quantize(args.sources[0], args.palette, args.alphaCut, args.width, args.height, { metric: args.metric });
+      const expected = quantize(args.sources[0], args.palette, args.alphaCut, args.width, args.height, args);
       expect(actual.indices).toEqual(expected.indices);
       expect(colorize(actual, args.palette).data).toEqual(colorize(expected, args.palette).data);
       expect(warm).toBe(actual); expect(produce).toHaveBeenCalledTimes(1);

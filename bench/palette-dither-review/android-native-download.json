@@ -1,0 +1,19 @@
+{
+  "device": "USB Pixel 8 Pro; Brave",
+  "path": "/sdcard/Download/dither-qa-20261014-palette.png",
+  "settings": {
+    "paletteId": "preset-pico8",
+    "metric": "oklab",
+    "maxColors": 0,
+    "cleanup": false,
+    "dither": "4x4",
+    "ditherStrength": 50
+  },
+  "result": {
+    "name": "ramp-palette.png",
+    "pixels": true,
+    "width": 128,
+    "height": 64
+  },
+  "verified": "2026-10-15T05:38:01.197Z"
+}

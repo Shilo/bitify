@@ -168,7 +168,7 @@ const server = createServer((request, response) => {
 let browser;
 try {
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
-  browser = await chromium.launch({ executablePath: process.env.BROWSER ?? 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe', headless: true });
+  browser = await chromium.launch({ executablePath: process.env.BROWSER ?? 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe', headless: true, chromiumSandbox: true });
   const context = await browser.newContext({ viewport: { width:1280,height:900 }, permissions:['clipboard-read','clipboard-write'], acceptDownloads:true });
   await context.addInitScript(() => { if (!localStorage.getItem('colorfetti')) localStorage.setItem('colorfetti', '{}'); });
   const page = await context.newPage(); page.setDefaultTimeout(10000);
@@ -339,6 +339,10 @@ try {
   await limitPalette(FULL_PRESETS.at(-1).name,FULL_PRESETS.at(-1).colors.length);
   await settingsButton.click();
   await page.locator('input[type=file][accept="image/*"]').setInputFiles(fixturePath);
+  // setInputFiles only dispatches change; it does not await asynchronous image
+  // decoding/publication. Finish this import before starting another batch so
+  // the intended fixture-first wall does not race the faster GIF decode.
+  await page.getByRole('button',{name:'Save fixture.png',exact:true}).waitFor();
   results.extra.push('Palette-sized slider/number, untouched blur, small-palette reload and invalid edit retain64; explicit3 and All remember3 across palette switches');
 
   // Full GIF: source compositing, preserved delays/loop, first-frame clipboard,
@@ -350,8 +354,12 @@ try {
   assert.deepEqual([gif.w,gif.h,gif.loop,gif.frames.length],[3,2,3,2]);
   for (let i=0;i<2;i++) { assert.equal(gif.frames[i].delay,gifDelays[i]); samePixels(gif.frames[i].pixels,gifExpected[i],`Full GIF frame${i}`); }
   samePixels(readPng(await copy(page.getByRole('button',{name:'Copy walk.gif',exact:true}))).pixels,gifExpected[0],'GIF first-frame clipboard');
+  const wallNames = () => page.locator('.tiles > .tile .cap .name').allTextContents();
+  const exportOrder = (names, family) => names.map(name => name.replace(/\.[^.]+$/, '') + (family === 'full-palette' ? '-palette' : '-1bit') + (/\.gif$/i.test(name) ? '.gif' : '.png'));
+  const fullZipWall = await wallNames();
+  assert.deepEqual(fullZipWall,['fixture.png','walk.gif'],'Sequential imports must append in wall order');
   const zip = unzipSync(await download(page.getByRole('button',{name:'Save all images',exact:true}),'colorfetti.zip'));
-  assert.deepEqual(Object.keys(zip),['fixture-palette.png','walk-palette.gif']);
+  assert.deepEqual(Object.keys(zip),exportOrder(fullZipWall,'full-palette'),'ZIP must preserve the captured wall order');
   samePixels(readPng(zip['fixture-palette.png']).pixels,nearestReference(fixture,active.colors),'ZIP full still');
   samePixels(readGif(zip['walk-palette.gif']).frames[1].pixels,gifExpected[1],'ZIP full GIF');
   results.extra.push('Full GIF exact frames/delays/loop/first-frame copy and mixed ZIP');
@@ -363,8 +371,10 @@ try {
   const legacyGif = readGif(legacyGifBytes);
   assert.deepEqual(legacyGifBytes,Buffer.from(baselineEncodeGif({w:3,h:2,first,second,loop:3,frames:frames.map((frame,i)=>({mask:mask(frame,'solid',state.settings.solid),delay:gifDelays[i]}))})),'Legacy GIF bytes changed');
   for (let i=0;i<2;i++) samePixels(legacyGif.frames[i].pixels,colorize(mask(frames[i],'solid',state.settings.solid),first,second),`Legacy GIF frame${i}`);
+  const legacyZipWall = await wallNames();
+  assert.deepEqual(legacyZipWall,fullZipWall,'Family changes must preserve wall order');
   const legacyZip = unzipSync(await download(page.getByRole('button',{name:'Save all images',exact:true}),'colorfetti.zip'));
-  assert.deepEqual(Object.keys(legacyZip),['fixture-1bit.png','walk-1bit.gif']);
+  assert.deepEqual(Object.keys(legacyZip),exportOrder(legacyZipWall,'two-color'),'Legacy ZIP must preserve the captured wall order');
   samePixels(readPng(legacyZip['fixture-1bit.png']).pixels,colorize(mask(analysis,'solid',state.settings.solid),first,second),'ZIP legacy still');
   results.extra.push('Family round-trip preserves legacy custom colors/None/style settings, legacy GIF and mixed ZIP');
 
@@ -389,6 +399,8 @@ try {
   let large = readPng(readFileSync(await downloaded.path())); assert.deepEqual([large.w,large.h],[bigW,bigH]);
   samePixels(large.pixels,bigPixels,'2MP save click palette snapshot');
   await openPalette(); await page.getByRole('group',{name:'Full palettes',exact:true}).getByRole('button',{name:'PICO-8',exact:true}).click();
+  const snapshotZipWall = await wallNames();
+  assert.deepEqual(snapshotZipWall,['fixture.png','walk.gif','big.png'],'Completed large import must append to the wall');
   pendingDownload = page.waitForEvent('download');
   await page.evaluate(() => {
     document.querySelector('button[aria-label="Save all images"]').click();
@@ -397,7 +409,7 @@ try {
   });
   downloaded = await pendingDownload; assert.equal(downloaded.suggestedFilename(),'colorfetti.zip');
   const snapshotZip = unzipSync(readFileSync(await downloaded.path()));
-  assert.deepEqual(Object.keys(snapshotZip),['fixture-palette.png','walk-palette.gif','big-palette.png']);
+  assert.deepEqual(Object.keys(snapshotZip),exportOrder(snapshotZipWall,'full-palette'),'ZIP must preserve the gesture wall including later removals');
   samePixels(readPng(snapshotZip['fixture-palette.png']).pixels,nearestReference(fixture,FULL_PRESETS.find(p=>p.id==='preset-pico8').colors),'ZIP palette snapshot');
   samePixels(readPng(snapshotZip['big-palette.png']).pixels,bigPixels,'ZIP removed-image snapshot');
   samePixels(readGif(snapshotZip['walk-palette.gif']).frames[1].pixels,nearestReference(originalGif[1],FULL_PRESETS.find(p=>p.id==='preset-pico8').colors),'ZIP GIF palette snapshot');

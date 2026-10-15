@@ -18,7 +18,8 @@
   import { GENERATED_PALETTE_ID, GENERATED_MAX_COLORS } from './lib/palette-library.js';
 
   const matchingDescription = 'Compare colors by appearance (Oklab) or red, green and blue values (RGB).';
-  const cleanupDescription = 'Merge isolated pixels with similar neighbors. May remove small details. Animations change only where every frame agrees.';
+  const cleanupDescription = 'Merge isolated pixels with similar neighbors. May remove small details. Animations change only where every frame agrees. Cleaned pixels keep their solid replacement color when dithering is on.';
+  const ditherDescription = 'Blend palette colors in a repeating pattern. Useful with few colors. Patterns stay fixed to source pixels; exact palette colors stay unchanged.';
 
   let {
     first = $bindable(),
@@ -39,6 +40,8 @@
     maxColors = $bindable(0),
     lastMaxColors = $bindable(16),
     cleanup = $bindable(false),
+    dither = $bindable('none'),
+    ditherStrength = $bindable(50),
     fullPalette, fullPresets = [], savedPalettes = [], generatedNotice = '', generatedSource = 'Your images', generatedEditable = true, onpalette, onimportpalette, oneditpalette,
     paletteFailureNotice = '', onpaletteretry,
   } = $props();
@@ -201,7 +204,8 @@
     if (!e.detail) (dock.querySelector('.extra') ?? dock.querySelector('.chip[aria-pressed="true"]'))?.focus();
   }
   function resetPaletteSettings(e) {
-    metric = 'oklab'; alphaCut = 128; maxColors = 0; lastMaxColors = 16; cleanup = false;
+    metric = 'oklab'; alphaCut = 128; maxColors = 0; lastMaxColors = 16; cleanup = false; dither = 'none'; ditherStrength = 50;
+    restoreDitherDraft();
     restoreLimitDrafts(); // Clear pending edits before keyboard focus can blur them.
     if (!e.detail) dock.querySelector('[aria-label="Oklab matching"]')?.focus();
   }
@@ -248,6 +252,43 @@
     restoreLimitDrafts();
     box.value = limitNumber;
   }
+
+  // Keep costly preview updates committed and discard abandoned native gestures.
+  let ditherDraft = $state(50);
+  const ditherPause = pausedCommit((value, context) => {
+    if (context.palette === fullPalette && context.mode === dither && dither !== 'none'
+      && family === 'full-palette' && panel === 'style') ditherStrength = value;
+  });
+  function restoreDitherDraft() { ditherPause.cancel(); ditherDraft = ditherStrength; }
+  function ditherAmountGesture(node) {
+    // Own this native range gesture's context once. A removed node or an old
+    // method cannot adopt a newer method through late input/change events.
+    const context = { palette: fullPalette, mode: dither };
+    const current = () => node.isConnected && context.palette === fullPalette && context.mode === dither
+      && dither !== 'none' && family === 'full-palette' && panel === 'style';
+    const input = () => {
+      if (!current()) return;
+      ditherDraft = +node.value;
+      ditherPause.schedule(ditherDraft, context);
+    };
+    const finish = () => { if (current()) ditherPause.flush(); };
+    const cancel = () => { if (current()) restoreDitherDraft(); };
+    node.addEventListener('input', input);
+    node.addEventListener('change', finish);
+    node.addEventListener('pointerup', finish);
+    node.addEventListener('pointercancel', cancel);
+    return { destroy() {
+      node.removeEventListener('input', input);
+      node.removeEventListener('change', finish);
+      node.removeEventListener('pointerup', finish);
+      node.removeEventListener('pointercancel', cancel);
+    } };
+  }
+  $effect(() => {
+    fullPalette, family, panel, dither, ditherStrength;
+    restoreDitherDraft();
+    return ditherPause.cancel;
+  });
 
   // A number box is empty while its setting is on Auto or off, and then shows this instead: what
   // Auto picked (a range when images differ), or the word for off.
@@ -411,8 +452,8 @@
   {:else if panel === 'style' && family === 'full-palette'}
     <div class="panel palette-settings-panel glass-card" bind:offsetHeight={panelHeight}>
       <div class="palette-settings-header">
-        <h2 class="palette-method-name">Nearest</h2>
-        <button class="btn glass-btn settings-reset" disabled={metric === 'oklab' && alphaCut === 128 && maxColors === 0 && lastMaxColors === 16 && !cleanup} aria-label="Reset palette settings" use:tooltip={'Restore Oklab, all colors, Cleanup off and the default opacity cut.'} onpointerdown={e => e.preventDefault()} onclick={resetPaletteSettings}><PixelIcon name="reset"/></button>
+        <h2 class="palette-method-name">Recolor</h2>
+        <button class="btn glass-btn settings-reset" disabled={metric === 'oklab' && alphaCut === 128 && maxColors === 0 && lastMaxColors === 16 && !cleanup && dither === 'none' && ditherStrength === 50} aria-label="Reset palette settings" use:tooltip={'Restore Oklab, all colors, Cleanup off, dithering off and the default opacity cut.'} onpointerdown={e => e.preventDefault()} onclick={resetPaletteSettings}><PixelIcon name="reset"/></button>
       </div>
       {#key fullPalette}
       <div class="palette-setting-row palette-limit-row">
@@ -450,6 +491,27 @@
           <button class="glass-segmented__item" aria-label="Cleanup on" aria-pressed={cleanup} use:tooltip={'Merge isolated pixels. Can remove intentional details.'} onclick={() => { if (cleanup) onpaletteretry?.(); cleanup = true; }}>On</button>
         </div>
       </div>
+      <div class="palette-setting-row">
+        <span class="key" id="palette-dither-label" use:tooltip={ditherDescription}>Dithering</span>
+        <span id="palette-dither-description" hidden>{ditherDescription}</span>
+        <div class="seg glass-segmented" role="group" aria-labelledby="palette-dither-label" aria-describedby="palette-dither-description">
+          {#each [['none', 'Off'], ['2x2', '2×2'], ['4x4', '4×4'], ['8x8', '8×8']] as [mode, label]}
+            <button class="glass-segmented__item" aria-label={mode === 'none' ? 'Dithering off' : 'Dithering ' + mode} aria-pressed={dither === mode}
+              onclick={() => { restoreDitherDraft(); dither = mode; }}>{label}</button>
+          {/each}
+        </div>
+      </div>
+      {#if dither !== 'none'}
+        {#key fullPalette}
+        {#key dither}
+        <div class="palette-setting-row">
+          <label class="key" for="full-dither-amount" use:tooltip={'How strongly palette colors blend. Zero keeps nearest colors.'}>Amount</label>
+          <input id="full-dither-amount" class="glass-range" type="range" min="0" max="100" step="1" value={ditherDraft} aria-label="Dithering amount" aria-valuetext={ditherDraft + '%'} use:ditherAmountGesture/>
+          <output for="full-dither-amount">{ditherDraft}%</output>
+        </div>
+        {/key}
+        {/key}
+      {/if}
       {#if soft || alphaCut !== 128}
         <div class="palette-setting-row">
           <label class="key" for="full-alpha-cut">Opacity cut</label>

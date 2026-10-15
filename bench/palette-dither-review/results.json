@@ -1,0 +1,14 @@
+{
+  "seed": "0x531e94",
+  "cases": 54,
+  "assertions": [
+    "source immutability",
+    "binary alpha + threshold",
+    "target membership",
+    "used flags",
+    "source-coordinate preview phase",
+    "sync/async equality",
+    "unchanged-coordinate animation stability"
+  ],
+  "status": "passed"
+}

@@ -1,10 +1,14 @@
 # Palette feature review and improvement priorities
 
-Date: October 14, 2026. Scope: service research, current Colorfetti audit and independent executable spikes. No production behavior changed.
+Date: October 14, 2026. Scope: service research, current Colorfetti audit and independent executable spikes. The initial research changed no production behavior. The subsequent reviewed implementation is recorded below.
 
 Colorfetti already covers much of the core recoloring workflow. The strongest improvements to investigate are optional multicolor dithering, clearer count and scope controls, artist-directed protection of small details, and easier palette reuse. Keep Oklab nearest matching as the default. Neither a new distance formula nor more presets alone solves low-color readability.
 
 The current full-palette controls were also inspected live in the local app: Nearest exposes Max colors, Oklab/RGB Matching and Cleanup, with no multicolor dither control. The [captured baseline controls](../../bench/palette-collection-spike/colorfetti-controls.jpg) complement the code and behavior audit; they are not a participant usability study.
+
+## Implemented follow-up
+
+Optional full-palette ordered 2×2/4×4/8×8 dithering is now implemented, Off by default, with a remembered amount. Existing one-bit effects remain separate. The [implementation and validation record](2026-10-14-full-palette-dithering-implementation.md) covers desktop, USB Android, independent review and performance. The experimental spike kernels were not shipped unchanged. Next, prioritize used-color counts and quick budgets, then palette reuse/export and a reviewed chromatic eight-color preset; evaluate locks and direct-capacity generation afterward.
 
 ## Research outputs
 
@@ -96,6 +100,6 @@ These rows share dependencies and are not eight separate required implementation
 
 The user's email magic link established a working session in sandboxed Edge. The live reducer exposes Auto detect, Number of colors and Palette; 17 built-in presets; Lospec, palette-image and hex inputs; Max colours; ordered matrix size; and a strength slider. PICO-8 with maximum eight, 4×4 dithering and strength five was set with a decoded 64×32 original ramp preview. Malformed hex produced a minimum-color message; mixed comma/space/newline input with a duplicate parsed to four unique colors.
 
-Two ready-state agent Generate clicks did not produce a verified new result. A 12-second capture after one click saw no new card or processing request, although account-related requests succeeded. An earlier main-agent click showed progress but no result identity, exported dimensions or charge was verified. Website target-plus-cap behavior, downloaded output, multi-frame export and Lospec/image fetching remain unverified. No extra billed website total is inferred from clicks or button labels.
+Two ready-state agent Generate clicks did not produce a verified new result. A 12-second capture after one click saw no new card or processing request, although account-related requests succeeded. An earlier main-agent click showed progress but no result identity, exported dimensions or charge was verified. Website target-plus-cap enforcement, downloaded output and multi-frame export remain unverified. Follow-up subsequently verified Lospec acquisition, transparent-aware palette-image extraction and two-source upload; see the [coverage closure](pixellab-review-2026-10-14/coverage-closure.md). No extra billed website total is inferred from clicks or button labels.
 
 The [captured reducer controls](../../bench/palette-service-research/web-reducer-controls-ready.png) show the live inputs, not a successful reduction result. These website limitations do not replace the successful independent REST/MCP output measurements. The original Codex Browser fetch/session problem remains undiagnosed; Google's separate rejection in automated Edge is consistent with its [documented restrictions](https://support.google.com/accounts/answer/7675428?hl=en). No sign-in bypass or disabled browser sandbox was used for authenticated testing.
