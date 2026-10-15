@@ -1,0 +1,811 @@
+{
+  "chromiumSandbox": true,
+  "scope": "Synthetic held-response lifecycle checks in native Edge; no live external requests, OS clipboard, Safari or device claims.",
+  "phases": [
+    {
+      "name": "detached opacity range after Keep",
+      "status": "passed"
+    },
+    {
+      "name": "Lospec module Cancel/new owner, stale text, close/reopen",
+      "status": "passed",
+      "externalNetworkRequests": 0,
+      "syntheticCompletedRequests": 1
+    },
+    {
+      "name": "Count canceled by reset",
+      "status": "passed"
+    },
+    {
+      "name": "Count canceled by family",
+      "status": "passed"
+    },
+    {
+      "name": "Count canceled by remove",
+      "status": "passed"
+    },
+    {
+      "name": "Auto refresh completes pending Count despite preview palette replacement",
+      "status": "passed"
+    },
+    {
+      "name": "Auto Dark changes CSS control but preserves sixteen canvas swatches, native input overlays and both palette pies",
+      "status": "passed",
+      "setup": "CDP Auto Dark on; test-only CSS/meta light removes the global only optout; source build unchanged",
+      "cssControlExpected": "#fff1e8",
+      "cssControlActual": [
+        43,
+        33,
+        27,
+        255
+      ],
+      "exactSolidColors": [
+        "#000000",
+        "#1d2b53",
+        "#7e2553",
+        "#008751",
+        "#ab5236",
+        "#5f574f",
+        "#c2c3c7",
+        "#fff1e8",
+        "#ff004d",
+        "#ffa300",
+        "#ffec27",
+        "#00e436",
+        "#29adff",
+        "#83769c",
+        "#ff77a8",
+        "#ffccaa"
+      ],
+      "pieSectorsChecked": 32,
+      "nativeInputChecks": {
+        "targetSize": 44,
+        "overlaySize": 36,
+        "centerHit": "native input",
+        "newColor": "#123456",
+        "editedColor": "#abcdef",
+        "events": "native element input/change dispatched; OS picker not opened"
+      },
+      "screenshots": [
+        "edge-swatch-autodark-off.png",
+        "edge-swatch-autodark-on.png",
+        "edge-pie-autodark-on.png",
+        "edge-input-autodark-initial.png",
+        "edge-input-autodark-new.png",
+        "edge-input-autodark-edit-before.png",
+        "edge-input-autodark-edit-after.png"
+      ]
+    },
+    {
+      "name": "Touch layout 320x568",
+      "status": "passed",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "strengthTarget": {
+        "x": 113,
+        "y": 305,
+        "width": 147.65625,
+        "height": 44
+      },
+      "opacity": {
+        "width": 320,
+        "height": 568,
+        "documentWidth": 320,
+        "boxes": [
+          {
+            "selector": "[aria-labelledby=\"palette-opacity-label\"] button",
+            "label": "Cut",
+            "x": 116,
+            "y": 366,
+            "width": 79.953125,
+            "height": 44,
+            "right": 195.953125,
+            "bottom": 410
+          },
+          {
+            "selector": "[aria-labelledby=\"palette-opacity-label\"] button",
+            "label": "Keep",
+            "x": 199.953125,
+            "y": 366,
+            "width": 90.046875,
+            "height": 44,
+            "right": 290,
+            "bottom": 410
+          }
+        ]
+      },
+      "cutoff": {
+        "width": 320,
+        "height": 568,
+        "documentWidth": 320,
+        "boxes": [
+          {
+            "selector": "#full-alpha-cut",
+            "label": "Palette opacity cut",
+            "x": 113,
+            "y": 381,
+            "width": 147.65625,
+            "height": 44,
+            "right": 260.65625,
+            "bottom": 425
+          }
+        ]
+      },
+      "preview": {
+        "width": 320,
+        "height": 568,
+        "documentWidth": 320,
+        "boxes": [
+          {
+            "selector": ".viewer-workspace button",
+            "label": "Save image",
+            "x": 18,
+            "y": 442,
+            "width": 44,
+            "height": 44,
+            "right": 62,
+            "bottom": 486
+          },
+          {
+            "selector": ".viewer-workspace button",
+            "label": "Copy image",
+            "x": 64,
+            "y": 442,
+            "width": 44,
+            "height": 44,
+            "right": 108,
+            "bottom": 486
+          },
+          {
+            "selector": ".viewer-workspace button",
+            "label": "Show original image",
+            "x": 110,
+            "y": 442,
+            "width": 44,
+            "height": 44,
+            "right": 154,
+            "bottom": 486
+          },
+          {
+            "selector": ".viewer-workspace button",
+            "label": "Use 4 output colors",
+            "x": 18,
+            "y": 506,
+            "width": 146.71875,
+            "height": 44,
+            "right": 164.71875,
+            "bottom": 550
+          },
+          {
+            "selector": ".viewer-workspace button",
+            "label": "Close preview",
+            "x": 252,
+            "y": 500,
+            "width": 56,
+            "height": 56,
+            "right": 308,
+            "bottom": 556
+          }
+        ]
+      },
+      "editor": {
+        "width": 320,
+        "height": 568,
+        "documentWidth": 320,
+        "boxes": [
+          {
+            "selector": ".palette-editor",
+            "label": "4 colors         4 colors used in the converted image. Save this palette to reuse it, or export a HEX backup.   Image or file Paste colors Add colors Replace from image or file Or drop or paste a palette image here.    Paste HEX colors or a Lospec palette link, such as https://lospec.com/palette-list/slso8. Replace colors New color Add color      Cancel Save palette",
+            "x": 16,
+            "y": 67.203125,
+            "width": 288,
+            "height": 433.59375,
+            "right": 304,
+            "bottom": 500.796875
+          }
+        ]
+      },
+      "editorActions": {
+        "width": 320,
+        "height": 568,
+        "documentWidth": 320,
+        "boxes": [
+          {
+            "selector": ".palette-editor [aria-label=\"HEX backup\"]",
+            "label": "HEX backup",
+            "x": 191,
+            "y": 80.203125,
+            "width": 44,
+            "height": 44,
+            "right": 235,
+            "bottom": 124.203125
+          },
+          {
+            "selector": ".palette-editor [aria-label=\"Close palette editor\"]",
+            "label": "Close palette editor",
+            "x": 243,
+            "y": 80.203125,
+            "width": 44,
+            "height": 44,
+            "right": 287,
+            "bottom": 124.203125
+          },
+          {
+            "selector": ".palette-editor .palette-save-action",
+            "label": "Save palette",
+            "x": 159.5,
+            "y": 447.796875,
+            "width": 143.5,
+            "height": 52,
+            "right": 303,
+            "bottom": 499.796875
+          }
+        ]
+      },
+      "importBounds": {
+        "width": 320,
+        "height": 568,
+        "documentWidth": 320,
+        "boxes": [
+          {
+            "selector": ".palette-link-hint",
+            "label": "Paste HEX colors or a Lospec palette link, such as https://lospec.com/palette-list/slso8.",
+            "x": 33,
+            "y": 329.046875,
+            "width": 254,
+            "height": 58.5,
+            "right": 287,
+            "bottom": 387.546875
+          },
+          {
+            "selector": ".palette-text-input",
+            "label": "Colors or Lospec link",
+            "x": 33,
+            "y": 221.046875,
+            "width": 254,
+            "height": 96,
+            "right": 287,
+            "bottom": 317.046875
+          }
+        ]
+      },
+      "importTarget": {
+        "x": 33,
+        "y": 399.546875,
+        "width": 254,
+        "height": 44
+      },
+      "captions": [
+        {
+          "text": "4 colors used ·32×16",
+          "captionWidth": 140,
+          "previewRight": 77,
+          "moreLeft": 103,
+          "dimLeft": 19,
+          "dimRight": 77,
+          "usedNumber": {
+            "text": "4",
+            "left": 19,
+            "right": 26.625,
+            "width": 7.625
+          },
+          "truncated": true,
+          "overflow": "hidden",
+          "ellipsis": "ellipsis"
+        },
+        {
+          "text": "4 colors used ·32×16",
+          "captionWidth": 140,
+          "previewRight": 231,
+          "moreLeft": 257,
+          "dimLeft": 173,
+          "dimRight": 231,
+          "usedNumber": {
+            "text": "4",
+            "left": 173,
+            "right": 180.625,
+            "width": 7.625
+          },
+          "truncated": true,
+          "overflow": "hidden",
+          "ellipsis": "ellipsis"
+        },
+        {
+          "text": "4 colors used ·32×16",
+          "captionWidth": 140,
+          "previewRight": 77,
+          "moreLeft": 103,
+          "dimLeft": 19,
+          "dimRight": 77,
+          "usedNumber": {
+            "text": "4",
+            "left": 19,
+            "right": 26.625,
+            "width": 7.625
+          },
+          "truncated": true,
+          "overflow": "hidden",
+          "ellipsis": "ellipsis"
+        },
+        {
+          "text": "4 colors used ·32×16",
+          "captionWidth": 140,
+          "previewRight": 231,
+          "moreLeft": 257,
+          "dimLeft": 173,
+          "dimRight": 231,
+          "usedNumber": {
+            "text": "4",
+            "left": 173,
+            "right": 180.625,
+            "width": 7.625
+          },
+          "truncated": true,
+          "overflow": "hidden",
+          "ellipsis": "ellipsis"
+        },
+        {
+          "text": "4 colors used ·32×16",
+          "captionWidth": 140,
+          "previewRight": 77,
+          "moreLeft": 103,
+          "dimLeft": 19,
+          "dimRight": 77,
+          "usedNumber": {
+            "text": "4",
+            "left": 19,
+            "right": 26.625,
+            "width": 7.625
+          },
+          "truncated": true,
+          "overflow": "hidden",
+          "ellipsis": "ellipsis"
+        },
+        {
+          "text": "4 colors used ·32×16",
+          "captionWidth": 140,
+          "previewRight": 231,
+          "moreLeft": 257,
+          "dimLeft": 173,
+          "dimRight": 231,
+          "usedNumber": {
+            "text": "4",
+            "left": 173,
+            "right": 180.625,
+            "width": 7.625
+          },
+          "truncated": true,
+          "overflow": "hidden",
+          "ellipsis": "ellipsis"
+        },
+        {
+          "text": "4 colors used ·32×16",
+          "captionWidth": 140,
+          "previewRight": 77,
+          "moreLeft": 103,
+          "dimLeft": 19,
+          "dimRight": 77,
+          "usedNumber": {
+            "text": "4",
+            "left": 19,
+            "right": 26.625,
+            "width": 7.625
+          },
+          "truncated": true,
+          "overflow": "hidden",
+          "ellipsis": "ellipsis"
+        },
+        {
+          "text": "4 colors used ·32×16",
+          "captionWidth": 140,
+          "previewRight": 231,
+          "moreLeft": 257,
+          "dimLeft": 173,
+          "dimRight": 231,
+          "usedNumber": {
+            "text": "4",
+            "left": 173,
+            "right": 180.625,
+            "width": 7.625
+          },
+          "truncated": true,
+          "overflow": "hidden",
+          "ellipsis": "ellipsis"
+        },
+        {
+          "text": "4 colors used ·32×16",
+          "captionWidth": 140,
+          "previewRight": 154,
+          "moreLeft": 180,
+          "dimLeft": 96,
+          "dimRight": 154,
+          "usedNumber": {
+            "text": "4",
+            "left": 96,
+            "right": 103.625,
+            "width": 7.625
+          },
+          "truncated": true,
+          "overflow": "hidden",
+          "ellipsis": "ellipsis"
+        }
+      ],
+      "screenshots": [
+        "layout-320x568-settings.png",
+        "layout-320x568-preview.png",
+        "layout-320x568-reuse-editor.png",
+        "layout-320x568-lospec-editor.png",
+        "layout-320x568-wall.png"
+      ]
+    },
+    {
+      "name": "Touch layout 568x320",
+      "status": "passed",
+      "viewport": {
+        "width": 568,
+        "height": 320
+      },
+      "strengthTarget": {
+        "x": 113,
+        "y": 162,
+        "width": 395.65625,
+        "height": 44
+      },
+      "opacity": {
+        "width": 568,
+        "height": 320,
+        "documentWidth": 568,
+        "boxes": [
+          {
+            "selector": "[aria-labelledby=\"palette-opacity-label\"] button",
+            "label": "Cut",
+            "x": 116,
+            "y": 201,
+            "width": 203.953125,
+            "height": 44,
+            "right": 319.953125,
+            "bottom": 245
+          },
+          {
+            "selector": "[aria-labelledby=\"palette-opacity-label\"] button",
+            "label": "Keep",
+            "x": 323.953125,
+            "y": 201,
+            "width": 214.046875,
+            "height": 44,
+            "right": 538,
+            "bottom": 245
+          }
+        ]
+      },
+      "cutoff": {
+        "width": 568,
+        "height": 320,
+        "documentWidth": 568,
+        "boxes": [
+          {
+            "selector": "#full-alpha-cut",
+            "label": "Palette opacity cut",
+            "x": 113,
+            "y": 193,
+            "width": 395.65625,
+            "height": 44,
+            "right": 508.65625,
+            "bottom": 237
+          }
+        ]
+      },
+      "preview": {
+        "width": 568,
+        "height": 320,
+        "documentWidth": 568,
+        "boxes": [
+          {
+            "selector": ".viewer-workspace button",
+            "label": "Save image",
+            "x": 18,
+            "y": 258,
+            "width": 44,
+            "height": 44,
+            "right": 62,
+            "bottom": 302
+          },
+          {
+            "selector": ".viewer-workspace button",
+            "label": "Copy image",
+            "x": 64,
+            "y": 258,
+            "width": 44,
+            "height": 44,
+            "right": 108,
+            "bottom": 302
+          },
+          {
+            "selector": ".viewer-workspace button",
+            "label": "Show original image",
+            "x": 110,
+            "y": 258,
+            "width": 44,
+            "height": 44,
+            "right": 154,
+            "bottom": 302
+          },
+          {
+            "selector": ".viewer-workspace button",
+            "label": "Use 4 output colors",
+            "x": 174,
+            "y": 258,
+            "width": 146.71875,
+            "height": 44,
+            "right": 320.71875,
+            "bottom": 302
+          },
+          {
+            "selector": ".viewer-workspace button",
+            "label": "Close preview",
+            "x": 500,
+            "y": 252,
+            "width": 56,
+            "height": 56,
+            "right": 556,
+            "bottom": 308
+          }
+        ]
+      },
+      "editor": {
+        "width": 568,
+        "height": 320,
+        "documentWidth": 568,
+        "boxes": [
+          {
+            "selector": ".palette-editor",
+            "label": "4 colors         4 colors used in the converted image. Save this palette to reuse it, or export a HEX backup.   Image or file Paste colors Add colors Replace from image or file Or drop or paste a palette image here.    Paste HEX colors or a Lospec palette link, such as https://lospec.com/palette-list/slso8. Replace colors New color Add color      Cancel Save palette",
+            "x": 16,
+            "y": 16,
+            "width": 536,
+            "height": 288,
+            "right": 552,
+            "bottom": 304
+          }
+        ]
+      },
+      "editorActions": {
+        "width": 568,
+        "height": 320,
+        "documentWidth": 568,
+        "boxes": [
+          {
+            "selector": ".palette-editor [aria-label=\"HEX backup\"]",
+            "label": "HEX backup",
+            "x": 431,
+            "y": 25,
+            "width": 44,
+            "height": 44,
+            "right": 475,
+            "bottom": 69
+          },
+          {
+            "selector": ".palette-editor [aria-label=\"Close palette editor\"]",
+            "label": "Close palette editor",
+            "x": 483,
+            "y": 25,
+            "width": 44,
+            "height": 44,
+            "right": 527,
+            "bottom": 69
+          },
+          {
+            "selector": ".palette-editor .palette-save-action",
+            "label": "Save palette",
+            "x": 283.5,
+            "y": 251,
+            "width": 267.5,
+            "height": 52,
+            "right": 551,
+            "bottom": 303
+          }
+        ]
+      },
+      "importBounds": {
+        "width": 568,
+        "height": 320,
+        "documentWidth": 568,
+        "boxes": [
+          {
+            "selector": ".palette-link-hint",
+            "label": "Paste HEX colors or a Lospec palette link, such as https://lospec.com/palette-list/slso8.",
+            "x": 41,
+            "y": 154.59375,
+            "width": 486,
+            "height": 39,
+            "right": 527,
+            "bottom": 193.59375
+          },
+          {
+            "selector": ".palette-text-input",
+            "label": "Colors or Lospec link",
+            "x": 41,
+            "y": 52.59375,
+            "width": 486,
+            "height": 96,
+            "right": 527,
+            "bottom": 148.59375
+          }
+        ]
+      },
+      "importTarget": {
+        "x": 41,
+        "y": 199.59375,
+        "width": 486,
+        "height": 44
+      },
+      "captions": [
+        {
+          "text": "4 colors used ·32×16",
+          "captionWidth": 168,
+          "previewRight": 110,
+          "moreLeft": 136,
+          "dimLeft": 24,
+          "dimRight": 110,
+          "usedNumber": {
+            "text": "4",
+            "left": 24,
+            "right": 31.625,
+            "width": 7.625
+          },
+          "truncated": true,
+          "overflow": "hidden",
+          "ellipsis": "ellipsis"
+        },
+        {
+          "text": "4 colors used ·32×16",
+          "captionWidth": 168,
+          "previewRight": 292,
+          "moreLeft": 318,
+          "dimLeft": 206,
+          "dimRight": 292,
+          "usedNumber": {
+            "text": "4",
+            "left": 206,
+            "right": 213.625,
+            "width": 7.625
+          },
+          "truncated": true,
+          "overflow": "hidden",
+          "ellipsis": "ellipsis"
+        },
+        {
+          "text": "4 colors used ·32×16",
+          "captionWidth": 168,
+          "previewRight": 474,
+          "moreLeft": 500,
+          "dimLeft": 388,
+          "dimRight": 474,
+          "usedNumber": {
+            "text": "4",
+            "left": 388,
+            "right": 395.625,
+            "width": 7.625
+          },
+          "truncated": true,
+          "overflow": "hidden",
+          "ellipsis": "ellipsis"
+        },
+        {
+          "text": "4 colors used ·32×16",
+          "captionWidth": 168,
+          "previewRight": 110,
+          "moreLeft": 136,
+          "dimLeft": 24,
+          "dimRight": 110,
+          "usedNumber": {
+            "text": "4",
+            "left": 24,
+            "right": 31.625,
+            "width": 7.625
+          },
+          "truncated": true,
+          "overflow": "hidden",
+          "ellipsis": "ellipsis"
+        },
+        {
+          "text": "4 colors used ·32×16",
+          "captionWidth": 168,
+          "previewRight": 292,
+          "moreLeft": 318,
+          "dimLeft": 206,
+          "dimRight": 292,
+          "usedNumber": {
+            "text": "4",
+            "left": 206,
+            "right": 213.625,
+            "width": 7.625
+          },
+          "truncated": true,
+          "overflow": "hidden",
+          "ellipsis": "ellipsis"
+        },
+        {
+          "text": "4 colors used ·32×16",
+          "captionWidth": 168,
+          "previewRight": 474,
+          "moreLeft": 500,
+          "dimLeft": 388,
+          "dimRight": 474,
+          "usedNumber": {
+            "text": "4",
+            "left": 388,
+            "right": 395.625,
+            "width": 7.625
+          },
+          "truncated": true,
+          "overflow": "hidden",
+          "ellipsis": "ellipsis"
+        },
+        {
+          "text": "4 colors used ·32×16",
+          "captionWidth": 168,
+          "previewRight": 110,
+          "moreLeft": 136,
+          "dimLeft": 24,
+          "dimRight": 110,
+          "usedNumber": {
+            "text": "4",
+            "left": 24,
+            "right": 31.625,
+            "width": 7.625
+          },
+          "truncated": true,
+          "overflow": "hidden",
+          "ellipsis": "ellipsis"
+        },
+        {
+          "text": "4 colors used ·32×16",
+          "captionWidth": 168,
+          "previewRight": 292,
+          "moreLeft": 318,
+          "dimLeft": 206,
+          "dimRight": 292,
+          "usedNumber": {
+            "text": "4",
+            "left": 206,
+            "right": 213.625,
+            "width": 7.625
+          },
+          "truncated": true,
+          "overflow": "hidden",
+          "ellipsis": "ellipsis"
+        },
+        {
+          "text": "4 colors used ·32×16",
+          "captionWidth": 168,
+          "previewRight": 474,
+          "moreLeft": 500,
+          "dimLeft": 388,
+          "dimRight": 474,
+          "usedNumber": {
+            "text": "4",
+            "left": 388,
+            "right": 395.625,
+            "width": 7.625
+          },
+          "truncated": true,
+          "overflow": "hidden",
+          "ellipsis": "ellipsis"
+        }
+      ],
+      "screenshots": [
+        "layout-568x320-settings.png",
+        "layout-568x320-preview.png",
+        "layout-568x320-reuse-editor.png",
+        "layout-568x320-lospec-editor.png",
+        "layout-568x320-wall.png"
+      ]
+    }
+  ],
+  "status": "passed",
+  "productionIndexSha256": "0b61657e4bf8e35317a45bd2973d02cc94282855b1f9d14b5b8435eb94822d20",
+  "completedAt": "2026-10-15T08:10:13.078Z"
+}

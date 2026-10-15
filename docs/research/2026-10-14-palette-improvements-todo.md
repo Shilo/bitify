@@ -12,7 +12,7 @@ This temporary checklist tracks the requested improvements, their evidence and r
 | Quick 2/4/8/16 limits | Evaluated; permanent row deferred | [Decision](2026-10-14-auto-fitting-and-color-locks.md): existing integer field already handles these budgets. Extra mobile controls have no demonstrated benefit yet. |
 | Keep / Cut opacity | Implemented and reviewed; both devices and native Android download passed | Cut128 unchanged; Keep preserves original alpha through preview and PNG payloads. Downloaded phone PNG independently decodes alpha 0/127/128/255. Unexpected partial GIF and partial ZIP fail atomically. |
 | Color fidelity under forced browser darkening | Implemented; phone and independent forced-dark checks passed | Paint-only canvas preserves twelve phone swatches and sixteen inner pie probes exactly. Independent Edge checks sixteen solids, thirty-two pie probes and native input hit/value updates. Rejected SVG before committing; no browser preferences or conversion changes. |
-| Auto fitted directly to requested count | Experiment complete; production change deferred | [24 scope/count cases](2026-10-14-auto-fitting-and-color-locks.md), including a duration-weighted GIF and wall-scope control. Direct K lowers point error in 16/20 equal-scope cases but regresses four; shared K also changes current per-asset semantics. |
+| Auto fitted directly to requested count | Evaluated; not adopted | [Direct fitting](2026-10-14-auto-fitting-and-color-locks.md) regresses four of twenty comparable cases. The completed [176-observation guarded follow-up](2026-10-15-auto-refinement-decision.md) also fails the shipping gate; strict variants retain the current outputs. This is a completed rejection decision, not an unfinished implementation. |
 | Color locks | Experiment complete; production change deferred | Exact red-eye retention costs average error; a locked red entry does not recolor a muted eye automatically. Need explicit availability-versus-pixel behavior and count-conflict design. |
 | Independent challenge | Complete within recorded scope | Auto count identity, detached-cutoff gestures and dense-wall count visibility were fixed. Nine native-browser phases pass, including portrait/landscape and nine counted tiles. [Review](2026-10-14-palette-improvements-adversarial-review.md). No outstanding actionable finding in this scope. |
 | Regression and device verification | Complete within recorded scope | 59 unit files, 910 passed / 2 existing skips; build; 132 legacy + 11 full + 11 RGB baseline cases and 13 integration groups. Final build passes 15 phases each in Codex Browser and USB Android, plus responsive checks at 320×568 and 568×320. [Validation](2026-10-14-palette-improvements-validation.md) states exact coverage and limits. |
@@ -40,14 +40,14 @@ The successful [website output verification](pixellab-review-2026-10-14/web-outp
 The authorized guarded-refinement investigation is now complete. Its
 [follow-up checklist](2026-10-15-auto-refinement-todo.md) records the research,
 service comparison and device tests. The tested candidates did not justify a
-production change; the [decision](2026-10-15-auto-refinement-decision.md) supersedes
-the research proposal below rather than leaving it as unperformed work.
+production change; the [decision](2026-10-15-auto-refinement-decision.md) closes
+that proposal rather than leaving it as unperformed work.
 
-The implementation batch is complete. Keep this checklist until its conclusions
-are incorporated into the next project plan. The next useful research task is a
-guarded compact Auto fit initialized from the current result, retaining the old
-result if the measured objective worsens. Evaluate tiny features and animation
-separately; do not silently change per-image versus collection budgets. Color locks
-need an explicit availability-versus-pixel-mapping contract first. More presets or
-a permanent quick-budget row require a demonstrated missing workflow. Safari/iOS
-verification remains a platform coverage gap rather than a passed test.
+All authorized implementation and research items above are complete within their
+recorded scope. The [fresh follow-up checklist](2026-10-15-palette-follow-up-checklist.md)
+tracks the requested additional review and desktop/physical-phone verification.
+Retain the current Auto algorithm. Color locks require a clear distinction between
+retaining a target entry and forcing a source region to use it, including cap
+conflicts; they remain a deferred design question, not an approved control.
+More presets or a permanent quick-budget row require a demonstrated missing
+workflow. Safari/iOS and OS clipboard readback remain platform coverage gaps.

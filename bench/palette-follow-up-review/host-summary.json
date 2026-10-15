@@ -1,0 +1,231 @@
+{
+  "recordedAt": "2026-10-15T08:13:19.007Z",
+  "productionSourceHead": "4523a4ab80362a4b329f518c827dd4c0b1a5fc0b",
+  "indexSha256": "0b61657e4bf8e35317a45bd2973d02cc94282855b1f9d14b5b8435eb94822d20",
+  "buildFrozen": true,
+  "unit": {
+    "files": 59,
+    "passed": 910,
+    "skipped": 2,
+    "total": 912
+  },
+  "explicitGcClientRun": {
+    "files": 2,
+    "passed": 41,
+    "skipped": 0,
+    "includesBothFormerSkips": true
+  },
+  "baseline": {
+    "ref": "061c880",
+    "passed": true,
+    "legacy": 132,
+    "full": 11,
+    "rgb": 11,
+    "integrationGroups": 13,
+    "errors": []
+  },
+  "edge": {
+    "status": "passed",
+    "phases": 9,
+    "chromiumSandbox": true,
+    "productionIndexSha256": "0b61657e4bf8e35317a45bd2973d02cc94282855b1f9d14b5b8435eb94822d20"
+  },
+  "qaCleanup": {
+    "completed": true,
+    "phases": 16,
+    "last": {
+      "deletedPaletteId": "user-9c3a5f90-7e3f-45cd-b368-a7d8653df7cf",
+      "unrelatedPalettesPreserved": 1,
+      "name": "Remove only the saved palette created by this QA run",
+      "pass": true,
+      "elapsedMs": 125
+    },
+    "initialAndroidFailure": {
+      "file": "android-initial-cleanup-failure.json",
+      "message": "Missing control",
+      "existingPhasesPassed": 15,
+      "cause": "New QA cleanup clicked confirmation before Svelte rendered it; fixed by waiting for confirmation control."
+    },
+    "oldOwnedRecordCleanup": {
+      "file": "android-failed-test-cleanup.json",
+      "completed": true,
+      "removedOwnedId": "user-14767c64-032d-41db-965c-32ea29784e17",
+      "unrelatedPalettesPreserved": 6
+    },
+    "finalDeviceRunsPassed": true,
+    "productionChangeRequired": false
+  },
+  "productionEdits": false,
+  "serviceCalls": 0,
+  "definedUnitTestsExercisedAcrossRuns": 912,
+  "nativeEdgeBoundary": {
+    "file": "results.json",
+    "completed": true,
+    "checks": 5,
+    "findings": [],
+    "expectedOutsideDismissalVerified": {
+      "name": "Trusted outside Save first dismisses Recolor; second click downloads exact PNG",
+      "passed": true,
+      "firstClick": {
+        "panelClosed": true,
+        "downloadAttempts": 0,
+        "downloadEvents": 0,
+        "observationMs": 300
+      },
+      "secondClick": {
+        "downloadEvents": 1,
+        "filename": "owned-ramp-palette.png",
+        "bytes": 1912,
+        "sha256": "af55fff6eab37b18e9020222f792ed60bc87010a2665daeb063811b236409388",
+        "width": 128,
+        "height": 64,
+        "sourceAlphaBytesMatched": 8192,
+        "visibleRgbMatchesProduction": true
+      },
+      "interaction": "One trusted page.mouse.click without locator action retries for dismissal, then locator click for Save; anchor observation forwards the original native implementation.",
+      "settings": {
+        "colors": [
+          "#000000",
+          "#1d2b53",
+          "#7e2553",
+          "#008751",
+          "#ab5236",
+          "#5f574f",
+          "#c2c3c7",
+          "#fff1e8",
+          "#ff004d",
+          "#ffa300",
+          "#ffec27",
+          "#00e436",
+          "#29adff",
+          "#83769c",
+          "#ff77a8",
+          "#ffccaa"
+        ],
+        "name": "PICO-8",
+        "metric": "oklab",
+        "maxColors": 8,
+        "cleanup": true,
+        "dither": "4x4",
+        "ditherStrength": 50,
+        "alphaCut": 128,
+        "alphaMode": "keep"
+      }
+    }
+  },
+  "sourceExportCacheChallenge": {
+    "file": "edge-contract-results.json",
+    "completed": true,
+    "combinations": 32,
+    "allTransparentControls": 8
+  },
+  "devices": {
+    "codex": {
+      "dither": {
+        "file": "codex-dither.json",
+        "completed": true,
+        "checks": 20,
+        "errors": []
+      },
+      "improvements": {
+        "file": "codex-improvements.json",
+        "completed": true,
+        "checks": 16,
+        "errors": [],
+        "liveLospec": "success",
+        "cleanup": {
+          "deletedPaletteId": "user-fed43291-d31f-4791-b1a7-7009387a6390",
+          "unrelatedPalettesPreserved": 4,
+          "name": "Remove only the saved palette created by this QA run",
+          "pass": true,
+          "elapsedMs": 126
+        }
+      }
+    },
+    "android": {
+      "dither": {
+        "file": "android-dither.json",
+        "completed": true,
+        "checks": 20,
+        "errors": []
+      },
+      "improvements": {
+        "file": "android-improvements.json",
+        "completed": true,
+        "checks": 16,
+        "errors": [],
+        "liveLospec": "success",
+        "cleanup": {
+          "deletedPaletteId": "user-197f571d-b00f-4f61-af05-57880bd7fe55",
+          "unrelatedPalettesPreserved": 6,
+          "name": "Remove only the saved palette created by this QA run",
+          "pass": true,
+          "elapsedMs": 125
+        }
+      }
+    }
+  },
+  "nativeDownloads": {
+    "codex": {
+      "report": "codex-native-decoded.json",
+      "png": "codex-native-followup.png",
+      "completed": true,
+      "bytes": 1912,
+      "width": 128,
+      "height": 64,
+      "sha256": "af55fff6eab37b18e9020222f792ed60bc87010a2665daeb063811b236409388",
+      "sourceAlphaBytesMatched": 8192,
+      "visibleColorCount": 6
+    },
+    "android": {
+      "report": "android-native-followup.json",
+      "png": "android-native-followup.png",
+      "completed": true,
+      "bytes": 1912,
+      "width": 128,
+      "height": 64,
+      "sha256": "af55fff6eab37b18e9020222f792ed60bc87010a2665daeb063811b236409388",
+      "sourceAlphaBytesMatched": 8192,
+      "visibleColorCount": 6
+    },
+    "sameReportedSha256": true,
+    "finalCodexCountUseScreenshot": "codex-output-palette.jpg"
+  },
+  "nativeAndroidPicker": {
+    "file": "android-native-picker-results.json",
+    "device": "Authorized USB Pixel 8 Pro / native Brave color picker",
+    "started": "2026-10-15T08:19:50.697Z",
+    "checks": [
+      {
+        "label": "New color",
+        "choice": "Red",
+        "expected": "#ff0000",
+        "nativeDialogOpened": true,
+        "nativeSuggestionSelected": true,
+        "nativeSetConfirmed": true,
+        "inputValue": "#ff0000",
+        "reviewSwatchUpdated": true
+      },
+      {
+        "label": "Edit color",
+        "choice": "Blue",
+        "expected": "#0000ff",
+        "nativeDialogOpened": true,
+        "nativeSuggestionSelected": true,
+        "nativeSetConfirmed": true,
+        "inputValue": "#0000ff",
+        "reviewSwatchUpdated": true
+      }
+    ],
+    "productionChanged": false,
+    "finished": "2026-10-15T08:20:03.960Z",
+    "completed": true,
+    "savedPalette": false
+  },
+  "limits": [
+    "OS clipboard readback not tested; encoded clipboard PNG payloads verified",
+    "Safari/iOS untested",
+    "Kernel/Node timings are not application FPS or whole-device memory"
+  ],
+  "finalizedAt": "2026-10-15T08:23:02.594Z"
+}

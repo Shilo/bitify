@@ -1,0 +1,8 @@
+{
+  "sourceHarness": "/C:/Programming_Files/Shilocity/colorfetti/bench/palette-improvements-qa.mjs",
+  "sourceHarnessSha256": "6a5b8c967471c3ab0aa76866512ee5a90e1da4ce467a4722134ddcdd2a67ca3f",
+  "changes": [
+    "artifact destination",
+    "createRequire base URL retained for in-memory module"
+  ]
+}

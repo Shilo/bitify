@@ -1,0 +1,14 @@
+{
+  "builtAt": "2026-10-15T08:07:20.132Z",
+  "head": "4523a4ab80362a4b329f518c827dd4c0b1a5fc0b",
+  "indexSha256": "0b61657e4bf8e35317a45bd2973d02cc94282855b1f9d14b5b8435eb94822d20",
+  "mainJs": {
+    "file": "index-BuuGkGvJ.js",
+    "sha256": "20019c24990b4fddca9a637d90e88011bba5b191cf5ab04dd28bb9a688f2dfa7"
+  },
+  "mainCss": {
+    "file": "index-FVm9n676.css",
+    "sha256": "1bf8f32ff7cbfc91ce3bae7c5ec32f01c28f84e285d380ce43be8b50d86538c1"
+  },
+  "frozenForDeviceQA": true
+}

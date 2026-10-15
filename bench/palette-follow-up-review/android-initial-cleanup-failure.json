@@ -1,0 +1,413 @@
+{
+  "kind": "palette-improvements",
+  "paletteName": "QA clip output colors mv99dysv",
+  "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+  "checks": [
+    {
+      "width": 448,
+      "name": "Fresh defaults and two exact new presets",
+      "pass": true,
+      "elapsedMs": 132
+    },
+    {
+      "assets": 3,
+      "name": "Import partial-alpha ramp, sprite and three-frame clip",
+      "pass": true,
+      "elapsedMs": 150
+    },
+    {
+      "surfaces": 3,
+      "verifiedSamplePixels": 20480,
+      "indicesAndUsedBytes": 41728,
+      "totalPreviewPayloadBytes": 62208,
+      "alphaBytes": 20480,
+      "canvasRgbaBytes": 81920,
+      "memoryScope": "sample indices/alpha/used and canvas RGBA only; excludes source, preparation, GPU and export scratch",
+      "width": 448,
+      "name": "Keep + dither + cap8 + Cleanup exact preview alpha",
+      "pass": true,
+      "elapsedMs": 243
+    },
+    {
+      "artifactReadyMs": 125.39999997615814,
+      "exports": [
+        {
+          "name": "ramp-palette.png",
+          "pixels": true,
+          "width": 128,
+          "height": 64,
+          "usedColors": 6,
+          "colors": [
+            "#000000",
+            "#1d2b53",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#fff1e8"
+          ],
+          "alphaValues": [
+            0,
+            127,
+            128,
+            255
+          ]
+        },
+        {
+          "name": "sprite-palette.png",
+          "pixels": true,
+          "width": 64,
+          "height": 64,
+          "usedColors": 4,
+          "colors": [
+            "#1d2b53",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "clip-palette.gif",
+          "frames": 3,
+          "pixels": true,
+          "timing": true,
+          "usedColors": 7,
+          "colors": [
+            "#000000",
+            "#1d2b53",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#ff004d",
+            "#fff1e8"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        }
+      ],
+      "name": "Keep native PNG/GIF/ZIP independently decode",
+      "pass": true,
+      "elapsedMs": 214
+    },
+    {
+      "export": {
+        "name": "ramp-palette.png",
+        "pixels": true,
+        "width": 128,
+        "height": 64,
+        "usedColors": 6,
+        "colors": [
+          "#000000",
+          "#1d2b53",
+          "#5f574f",
+          "#83769c",
+          "#c2c3c7",
+          "#fff1e8"
+        ],
+        "alphaValues": [
+          0,
+          127,
+          128,
+          255
+        ]
+      },
+      "name": "Copy preserves native PNG alpha",
+      "pass": true,
+      "elapsedMs": 110
+    },
+    {
+      "artifactReadyMs": 122.5,
+      "exports": [
+        {
+          "name": "ramp-palette.png",
+          "pixels": true,
+          "width": 128,
+          "height": 64,
+          "usedColors": 6,
+          "colors": [
+            "#000000",
+            "#1d2b53",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#fff1e8"
+          ],
+          "alphaValues": [
+            0,
+            127,
+            128,
+            255
+          ]
+        },
+        {
+          "name": "sprite-palette.png",
+          "pixels": true,
+          "width": 64,
+          "height": 64,
+          "usedColors": 4,
+          "colors": [
+            "#1d2b53",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "clip-palette.gif",
+          "frames": 3,
+          "pixels": true,
+          "timing": true,
+          "usedColors": 7,
+          "colors": [
+            "#000000",
+            "#1d2b53",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#ff004d",
+            "#fff1e8"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        }
+      ],
+      "name": "Captured Keep export survives immediate Cut edit",
+      "pass": true,
+      "elapsedMs": 161
+    },
+    {
+      "surfaces": 3,
+      "verifiedSamplePixels": 20480,
+      "indicesAndUsedBytes": 41728,
+      "totalPreviewPayloadBytes": 41728,
+      "alphaBytes": 0,
+      "canvasRgbaBytes": 81920,
+      "memoryScope": "sample indices/alpha/used and canvas RGBA only; excludes source, preparation, GPU and export scratch",
+      "width": 448,
+      "artifactReadyMs": 121.5,
+      "exports": [
+        {
+          "name": "ramp-palette.png",
+          "pixels": true,
+          "width": 128,
+          "height": 64,
+          "usedColors": 6,
+          "colors": [
+            "#000000",
+            "#1d2b53",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#fff1e8"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "sprite-palette.png",
+          "pixels": true,
+          "width": 64,
+          "height": 64,
+          "usedColors": 4,
+          "colors": [
+            "#1d2b53",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "clip-palette.gif",
+          "frames": 3,
+          "pixels": true,
+          "timing": true,
+          "usedColors": 7,
+          "colors": [
+            "#000000",
+            "#1d2b53",
+            "#5f574f",
+            "#83769c",
+            "#c2c3c7",
+            "#ff004d",
+            "#fff1e8"
+          ],
+          "alphaValues": [
+            0,
+            255
+          ]
+        }
+      ],
+      "name": "Cut native ZIP and preview remain exact",
+      "pass": true,
+      "elapsedMs": 262
+    },
+    {
+      "rememberedCut": 191,
+      "name": "Removed opacity slider cannot change remembered cutoff",
+      "pass": true,
+      "elapsedMs": 125
+    },
+    {
+      "used": 7,
+      "decodedUnion": [
+        "#000000",
+        "#1d2b53",
+        "#5f574f",
+        "#83769c",
+        "#c2c3c7",
+        "#ff004d",
+        "#fff1e8"
+      ],
+      "frames": 3,
+      "name": "Whole-GIF used count matches decoded export union",
+      "pass": true,
+      "elapsedMs": 41
+    },
+    {
+      "width": 448,
+      "name": "Settings and family changes retire old count captions",
+      "pass": true,
+      "elapsedMs": 137
+    },
+    {
+      "colors": [
+        "#000000",
+        "#1d2b53",
+        "#5f574f",
+        "#83769c",
+        "#c2c3c7",
+        "#ff004d",
+        "#fff1e8"
+      ],
+      "savedPaletteId": "user-14767c64-032d-41db-965c-32ea29784e17",
+      "name": "Use output colors opens exact whole-clip palette and HEX backup",
+      "pass": true,
+      "elapsedMs": 103
+    },
+    {
+      "width": 448,
+      "name": "Saved used palette and opacity policy restore after reload",
+      "pass": true,
+      "elapsedMs": 140
+    },
+    {
+      "cases": [
+        {
+          "source": "binary-alpha",
+          "alphaMode": "cut",
+          "pixels": 32768,
+          "visiblePixels": 28672,
+          "warmRuns": 3,
+          "medianMs": 33.19999998807907,
+          "timesMs": [
+            49.19999998807907,
+            33.19999998807907,
+            33
+          ],
+          "maxProgressIntervalMs": 9.5,
+          "indicesAndUsedBytes": 65792,
+          "alphaBytes": 0
+        },
+        {
+          "source": "binary-alpha",
+          "alphaMode": "keep",
+          "pixels": 32768,
+          "visiblePixels": 28672,
+          "warmRuns": 3,
+          "medianMs": 32.60000002384186,
+          "timesMs": [
+            33,
+            32.5,
+            32.60000002384186
+          ],
+          "maxProgressIntervalMs": 8.300000011920929,
+          "indicesAndUsedBytes": 65792,
+          "alphaBytes": 32768
+        },
+        {
+          "source": "partial-alpha",
+          "alphaMode": "cut",
+          "pixels": 32768,
+          "visiblePixels": 16384,
+          "warmRuns": 3,
+          "medianMs": 18.600000023841858,
+          "timesMs": [
+            19,
+            18.600000023841858,
+            18.5
+          ],
+          "maxProgressIntervalMs": 8.199999988079071,
+          "indicesAndUsedBytes": 65792,
+          "alphaBytes": 0
+        },
+        {
+          "source": "partial-alpha",
+          "alphaMode": "keep",
+          "pixels": 32768,
+          "visiblePixels": 28672,
+          "warmRuns": 3,
+          "medianMs": 32.5,
+          "timesMs": [
+            32.59999996423721,
+            32.5,
+            32
+          ],
+          "maxProgressIntervalMs": 8.300000011920929,
+          "indicesAndUsedBytes": 65792,
+          "alphaBytes": 32768
+        }
+      ],
+      "longTasks": [],
+      "longTaskObserverSupported": true,
+      "maxRafGapMs": 16.800000000000182,
+      "scope": "Kernel and scheduler only, not FPS. PartialKeep includes more visible RGBs thanCut; binary case isolates policy overhead. Source RGBA, canvas, cleanup, GPU and encoder buffers excluded; actual partial PNG also needs RGBA rows.",
+      "name": "Bounded Keep versus Cut source-kernel timing and alpha memory",
+      "pass": true,
+      "elapsedMs": 577
+    },
+    {
+      "optional": true,
+      "outcome": "success",
+      "swatches": 8,
+      "paletteName": "SLSO8",
+      "name": "Optional real public Lospec URL import",
+      "pass": true,
+      "elapsedMs": 585
+    },
+    {
+      "width": 448,
+      "name": "Reset returns opacity Cut and dithering Off",
+      "pass": true,
+      "elapsedMs": 65
+    }
+  ],
+  "errors": [],
+  "longTasks": [],
+  "longTaskObserverSupported": true,
+  "longTaskObservationScope": "Initial application load through persistence reload; kernel phase has a separate observer",
+  "started": "2026-10-15T08:10:26.287Z",
+  "savedPaletteId": "user-14767c64-032d-41db-965c-32ea29784e17",
+  "completed": false,
+  "error": {
+    "message": "Missing control",
+    "stack": "Error: Missing control\n    at assert (http://localhost:5294/improvements:8:48)\n    at click (http://localhost:5294/improvements:12:20)\n    at http://localhost:5294/improvements:83:168\n    at async check (http://localhost:5294/improvements:17:95)\n    at async run.onclick (http://localhost:5294/improvements:77:2)"
+  },
+  "finished": "2026-10-15T08:10:29.803Z"
+}

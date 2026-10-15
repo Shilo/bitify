@@ -1,0 +1,10 @@
+Passed: detached opacity range after Keep
+Passed: Lospec module Cancel/new owner, stale text, close/reopen
+Passed: Count canceled by reset
+Passed: Count canceled by family
+Passed: Count canceled by remove
+Passed: Auto refresh completes pending Count despite preview palette replacement
+Passed: Auto Dark changes CSS control but preserves sixteen canvas swatches, native input overlays and both palette pies
+Passed: Touch layout 320x568
+Passed: Touch layout 568x320
+{"status":"passed","phases":9,"result":"bench/palette-improvements-review/edge-results.json","productionIndexSha256":"0b61657e4bf8e35317a45bd2973d02cc94282855b1f9d14b5b8435eb94822d20"}

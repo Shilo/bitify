@@ -1,0 +1,55 @@
+{
+  "completed": true,
+  "device": "Authorized USB Pixel 8 Pro / Brave",
+  "saved": "colorfetti-followup-1792052058895-palette.png",
+  "devicePath": "/sdcard/Download/colorfetti-followup-1792052058895-palette.png",
+  "bytes": 1912,
+  "sha256": "af55fff6eab37b18e9020222f792ed60bc87010a2665daeb063811b236409388",
+  "width": 128,
+  "height": 64,
+  "sourceAlphaBytesMatched": 8192,
+  "alphaValues": [
+    0,
+    127,
+    128,
+    255
+  ],
+  "usedColors": [
+    "#000000",
+    "#1d2b53",
+    "#5f574f",
+    "#83769c",
+    "#c2c3c7",
+    "#fff1e8"
+  ],
+  "settings": {
+    "colors": [
+      "#000000",
+      "#1d2b53",
+      "#7e2553",
+      "#008751",
+      "#ab5236",
+      "#5f574f",
+      "#c2c3c7",
+      "#fff1e8",
+      "#ff004d",
+      "#ffa300",
+      "#ffec27",
+      "#00e436",
+      "#29adff",
+      "#83769c",
+      "#ff77a8",
+      "#ffccaa"
+    ],
+    "name": "PICO-8",
+    "metric": "oklab",
+    "maxColors": 8,
+    "cleanup": true,
+    "dither": "4x4",
+    "ditherStrength": 50,
+    "alphaCut": 128,
+    "alphaMode": "keep"
+  },
+  "oracle": "Independent Sharp PNG decoding; every alpha byte compared directly to original; visible RGB compared to actual production fullPaletteImage conversion.",
+  "unrelatedDownloadsRead": false
+}

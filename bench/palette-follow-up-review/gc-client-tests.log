@@ -1,0 +1,9 @@
+1:10:37 AM [vite-plugin-svelte] no Svelte config found at C:/Programming_Files/Shilocity/colorfetti - using default configuration.
+
+ RUN  v4.1.11 C:/Programming_Files/Shilocity/colorfetti
+
+
+ Test Files  2 passed (2)
+      Tests  41 passed (41)
+   Start at  01:10:37
+   Duration  797ms (transform 119ms, setup 0ms, import 156ms, tests 739ms, environment 0ms)

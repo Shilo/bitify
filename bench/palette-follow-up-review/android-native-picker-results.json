@@ -1,0 +1,30 @@
+{
+  "device": "Authorized USB Pixel 8 Pro / native Brave color picker",
+  "started": "2026-10-15T08:19:50.697Z",
+  "checks": [
+    {
+      "label": "New color",
+      "choice": "Red",
+      "expected": "#ff0000",
+      "nativeDialogOpened": true,
+      "nativeSuggestionSelected": true,
+      "nativeSetConfirmed": true,
+      "inputValue": "#ff0000",
+      "reviewSwatchUpdated": true
+    },
+    {
+      "label": "Edit color",
+      "choice": "Blue",
+      "expected": "#0000ff",
+      "nativeDialogOpened": true,
+      "nativeSuggestionSelected": true,
+      "nativeSetConfirmed": true,
+      "inputValue": "#0000ff",
+      "reviewSwatchUpdated": true
+    }
+  ],
+  "productionChanged": false,
+  "finished": "2026-10-15T08:20:03.960Z",
+  "completed": true,
+  "savedPalette": false
+}
