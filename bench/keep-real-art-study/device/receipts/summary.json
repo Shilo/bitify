@@ -1,0 +1,959 @@
+{
+  "at": "2026-10-15T14:04:18.172Z",
+  "node": "v25.0.0",
+  "scope": "Research-module parity on Node-decoded RGBA in native browser engines; not built-app import/export.",
+  "sets": {
+    "main": {
+      "cases": 14,
+      "nodeTotalMs": 1369,
+      "devices": {
+        "android": {
+          "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+          "at": "2026-10-15T14:02:51.573Z",
+          "head": "f49000dff443fe8115727e5d40b5e1f4c9051799",
+          "pass": true,
+          "mismatches": [],
+          "checks": 70,
+          "matched": 70,
+          "totalMs": 2415
+        },
+        "desktop": {
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Claude/2.37337.1 Chrome/152.0.7977.130 Safari/537.36",
+          "at": "2026-10-15T14:02:24.415Z",
+          "head": "f49000dff443fe8115727e5d40b5e1f4c9051799",
+          "pass": true,
+          "mismatches": [],
+          "checks": 70,
+          "matched": 70,
+          "totalMs": 1063
+        }
+      },
+      "rows": [
+        {
+          "settingId": "auto-c3-oklab",
+          "units": [
+            "glow-orb-red"
+          ],
+          "pixels": 31500,
+          "ms": {
+            "production": {
+              "node": 52,
+              "android": 94,
+              "desktop": 46
+            },
+            "none": {
+              "node": 31,
+              "android": 63,
+              "desktop": 37
+            },
+            "linear": {
+              "node": 31,
+              "android": 60,
+              "desktop": 28
+            },
+            "squared": {
+              "node": 26,
+              "android": 46,
+              "desktop": 24
+            },
+            "cut128": {
+              "node": 82,
+              "android": 141,
+              "desktop": 60
+            }
+          }
+        },
+        {
+          "settingId": "auto-c4-oklab",
+          "units": [
+            "glow-orb-red"
+          ],
+          "pixels": 31500,
+          "ms": {
+            "production": {
+              "node": 24,
+              "android": 55,
+              "desktop": 28
+            },
+            "none": {
+              "node": 25,
+              "android": 52,
+              "desktop": 20
+            },
+            "linear": {
+              "node": 22,
+              "android": 41,
+              "desktop": 18
+            },
+            "squared": {
+              "node": 17,
+              "android": 46,
+              "desktop": 15
+            },
+            "cut128": {
+              "node": 46,
+              "android": 84,
+              "desktop": 35
+            }
+          }
+        },
+        {
+          "settingId": "auto-c4-rgb",
+          "units": [
+            "glow-orb-red"
+          ],
+          "pixels": 31500,
+          "ms": {
+            "production": {
+              "node": 23,
+              "android": 50,
+              "desktop": 20
+            },
+            "none": {
+              "node": 19,
+              "android": 40,
+              "desktop": 12
+            },
+            "linear": {
+              "node": 31,
+              "android": 43,
+              "desktop": 12
+            },
+            "squared": {
+              "node": 24,
+              "android": 24,
+              "desktop": 12
+            },
+            "cut128": {
+              "node": 73,
+              "android": 53,
+              "desktop": 35
+            }
+          }
+        },
+        {
+          "settingId": "auto-c8-oklab",
+          "units": [
+            "glow-orb-red"
+          ],
+          "pixels": 31500,
+          "ms": {
+            "production": {
+              "node": 36,
+              "android": 53,
+              "desktop": 23
+            },
+            "none": {
+              "node": 22,
+              "android": 50,
+              "desktop": 21
+            },
+            "linear": {
+              "node": 19,
+              "android": 69,
+              "desktop": 16
+            },
+            "squared": {
+              "node": 19,
+              "android": 41,
+              "desktop": 16
+            },
+            "cut128": {
+              "node": 51,
+              "android": 61,
+              "desktop": 33
+            }
+          }
+        },
+        {
+          "settingId": "auto-c8-rgb",
+          "units": [
+            "glow-orb-red"
+          ],
+          "pixels": 31500,
+          "ms": {
+            "production": {
+              "node": 28,
+              "android": 50,
+              "desktop": 25
+            },
+            "none": {
+              "node": 21,
+              "android": 22,
+              "desktop": 16
+            },
+            "linear": {
+              "node": 19,
+              "android": 27,
+              "desktop": 14
+            },
+            "squared": {
+              "node": 17,
+              "android": 27,
+              "desktop": 14
+            },
+            "cut128": {
+              "node": 56,
+              "android": 58,
+              "desktop": 47
+            }
+          }
+        },
+        {
+          "settingId": "auto-c16-oklab",
+          "units": [
+            "glow-orb-red"
+          ],
+          "pixels": 31500,
+          "ms": {
+            "production": {
+              "node": 25,
+              "android": 67,
+              "desktop": 23
+            },
+            "none": {
+              "node": 14,
+              "android": 61,
+              "desktop": 15
+            },
+            "linear": {
+              "node": 15,
+              "android": 39,
+              "desktop": 15
+            },
+            "squared": {
+              "node": 15,
+              "android": 33,
+              "desktop": 15
+            },
+            "cut128": {
+              "node": 62,
+              "android": 67,
+              "desktop": 28
+            }
+          }
+        },
+        {
+          "settingId": "auto-all-oklab",
+          "units": [
+            "glow-orb-red"
+          ],
+          "pixels": 31500,
+          "ms": {
+            "production": {
+              "node": 7,
+              "android": 11,
+              "desktop": 6
+            },
+            "none": {
+              "node": 6,
+              "android": 7,
+              "desktop": 6
+            },
+            "linear": {
+              "node": 7,
+              "android": 9,
+              "desktop": 6
+            },
+            "squared": {
+              "node": 6,
+              "android": 7,
+              "desktop": 6
+            },
+            "cut128": {
+              "node": 21,
+              "android": 21,
+              "desktop": 15
+            }
+          }
+        },
+        {
+          "settingId": "res64-c4-oklab",
+          "units": [
+            "glow-orb-red"
+          ],
+          "pixels": 31500,
+          "ms": {
+            "production": {
+              "node": 25,
+              "android": 35,
+              "desktop": 13
+            },
+            "none": {
+              "node": 8,
+              "android": 36,
+              "desktop": 14
+            },
+            "linear": {
+              "node": 8,
+              "android": 17,
+              "desktop": 10
+            },
+            "squared": {
+              "node": 8,
+              "android": 17,
+              "desktop": 10
+            },
+            "cut128": {
+              "node": 22,
+              "android": 39,
+              "desktop": 9
+            }
+          }
+        },
+        {
+          "settingId": "res64-c4-rgb",
+          "units": [
+            "glow-orb-red"
+          ],
+          "pixels": 31500,
+          "ms": {
+            "production": {
+              "node": 20,
+              "android": 36,
+              "desktop": 10
+            },
+            "none": {
+              "node": 7,
+              "android": 17,
+              "desktop": 8
+            },
+            "linear": {
+              "node": 7,
+              "android": 19,
+              "desktop": 7
+            },
+            "squared": {
+              "node": 7,
+              "android": 16,
+              "desktop": 7
+            },
+            "cut128": {
+              "node": 7,
+              "android": 15,
+              "desktop": 7
+            }
+          }
+        },
+        {
+          "settingId": "res64-c8-oklab",
+          "units": [
+            "glow-orb-red"
+          ],
+          "pixels": 31500,
+          "ms": {
+            "production": {
+              "node": 23,
+              "android": 41,
+              "desktop": 14
+            },
+            "none": {
+              "node": 9,
+              "android": 24,
+              "desktop": 10
+            },
+            "linear": {
+              "node": 9,
+              "android": 18,
+              "desktop": 11
+            },
+            "squared": {
+              "node": 9,
+              "android": 21,
+              "desktop": 10
+            },
+            "cut128": {
+              "node": 27,
+              "android": 22,
+              "desktop": 10
+            }
+          }
+        },
+        {
+          "settingId": "res64-c8-rgb",
+          "units": [
+            "glow-orb-red"
+          ],
+          "pixels": 31500,
+          "ms": {
+            "production": {
+              "node": 20,
+              "android": 48,
+              "desktop": 12
+            },
+            "none": {
+              "node": 8,
+              "android": 50,
+              "desktop": 8
+            },
+            "linear": {
+              "node": 8,
+              "android": 19,
+              "desktop": 8
+            },
+            "squared": {
+              "node": 8,
+              "android": 16,
+              "desktop": 8
+            },
+            "cut128": {
+              "node": 10,
+              "android": 18,
+              "desktop": 8
+            }
+          }
+        },
+        {
+          "settingId": "pico8-c4-oklab",
+          "units": [
+            "glow-orb-red"
+          ],
+          "pixels": 31500,
+          "ms": {
+            "production": {
+              "node": 16,
+              "android": 29,
+              "desktop": 8
+            },
+            "none": {
+              "node": 5,
+              "android": 14,
+              "desktop": 6
+            },
+            "linear": {
+              "node": 5,
+              "android": 12,
+              "desktop": 6
+            },
+            "squared": {
+              "node": 5,
+              "android": 13,
+              "desktop": 6
+            },
+            "cut128": {
+              "node": 8,
+              "android": 8,
+              "desktop": 4
+            }
+          }
+        },
+        {
+          "settingId": "pico8-c4-rgb",
+          "units": [
+            "glow-orb-red"
+          ],
+          "pixels": 31500,
+          "ms": {
+            "production": {
+              "node": 10,
+              "android": 25,
+              "desktop": 10
+            },
+            "none": {
+              "node": 4,
+              "android": 6,
+              "desktop": 4
+            },
+            "linear": {
+              "node": 4,
+              "android": 6,
+              "desktop": 4
+            },
+            "squared": {
+              "node": 4,
+              "android": 17,
+              "desktop": 8
+            },
+            "cut128": {
+              "node": 5,
+              "android": 5,
+              "desktop": 4
+            }
+          }
+        },
+        {
+          "settingId": "res64-c8-oklab",
+          "units": [
+            "glow-lens-flare"
+          ],
+          "pixels": 262144,
+          "ms": {
+            "production": {
+              "node": 13,
+              "android": 13,
+              "desktop": 9
+            },
+            "none": {
+              "node": 18,
+              "android": 26,
+              "desktop": 15
+            },
+            "linear": {
+              "node": 11,
+              "android": 21,
+              "desktop": 9
+            },
+            "squared": {
+              "node": 13,
+              "android": 17,
+              "desktop": 9
+            },
+            "cut128": {
+              "node": 6,
+              "android": 7,
+              "desktop": 5
+            }
+          }
+        }
+      ]
+    },
+    "extra": {
+      "cases": 9,
+      "nodeTotalMs": 1442,
+      "devices": {
+        "android-rerun": {
+          "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+          "at": "2026-10-15T14:04:15.539Z",
+          "head": "f49000dff443fe8115727e5d40b5e1f4c9051799",
+          "pass": true,
+          "mismatches": [],
+          "checks": 45,
+          "matched": 45,
+          "totalMs": 2785
+        },
+        "android": {
+          "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+          "at": "2026-10-15T14:03:26.622Z",
+          "head": "f49000dff443fe8115727e5d40b5e1f4c9051799",
+          "pass": true,
+          "mismatches": [],
+          "checks": 45,
+          "matched": 45,
+          "totalMs": 2790
+        },
+        "desktop-rerun": {
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Claude/2.37337.1 Chrome/152.0.7977.130 Safari/537.36",
+          "at": "2026-10-15T14:03:40.171Z",
+          "head": "f49000dff443fe8115727e5d40b5e1f4c9051799",
+          "pass": true,
+          "mismatches": [],
+          "checks": 45,
+          "matched": 45,
+          "totalMs": 12978
+        },
+        "desktop": {
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Claude/2.37337.1 Chrome/152.0.7977.130 Safari/537.36",
+          "at": "2026-10-15T14:03:07.452Z",
+          "head": "f49000dff443fe8115727e5d40b5e1f4c9051799",
+          "pass": true,
+          "mismatches": [],
+          "checks": 45,
+          "matched": 45,
+          "totalMs": 13113
+        }
+      },
+      "rows": [
+        {
+          "settingId": "auto-c8-oklab",
+          "units": [
+            "shadow-tree-topdown"
+          ],
+          "pixels": 36864,
+          "ms": {
+            "production": {
+              "node": 41,
+              "android-rerun": 90,
+              "android": 106,
+              "desktop-rerun": 214,
+              "desktop": 429
+            },
+            "none": {
+              "node": 23,
+              "android-rerun": 80,
+              "android": 84,
+              "desktop-rerun": 436,
+              "desktop": 301
+            },
+            "linear": {
+              "node": 19,
+              "android-rerun": 69,
+              "android": 79,
+              "desktop-rerun": 545,
+              "desktop": 428
+            },
+            "squared": {
+              "node": 18,
+              "android-rerun": 60,
+              "android": 63,
+              "desktop-rerun": 342,
+              "desktop": 261
+            },
+            "cut128": {
+              "node": 25,
+              "android-rerun": 51,
+              "android": 49,
+              "desktop-rerun": 381,
+              "desktop": 182
+            }
+          }
+        },
+        {
+          "settingId": "auto-c4-oklab-dither4x4",
+          "units": [
+            "aa-tango-face-smile"
+          ],
+          "pixels": 1024,
+          "ms": {
+            "production": {
+              "node": 13,
+              "android-rerun": 51,
+              "android": 51,
+              "desktop-rerun": 135,
+              "desktop": 356
+            },
+            "none": {
+              "node": 20,
+              "android-rerun": 45,
+              "android": 47,
+              "desktop-rerun": 244,
+              "desktop": 202
+            },
+            "linear": {
+              "node": 15,
+              "android-rerun": 35,
+              "android": 36,
+              "desktop-rerun": 132,
+              "desktop": 171
+            },
+            "squared": {
+              "node": 10,
+              "android-rerun": 42,
+              "android": 37,
+              "desktop-rerun": 141,
+              "desktop": 151
+            },
+            "cut128": {
+              "node": 10,
+              "android-rerun": 33,
+              "android": 35,
+              "desktop-rerun": 214,
+              "desktop": 152
+            }
+          }
+        },
+        {
+          "settingId": "res64-c4-oklab",
+          "units": [
+            "fade-radial-light"
+          ],
+          "pixels": 262144,
+          "ms": {
+            "production": {
+              "node": 13,
+              "android-rerun": 43,
+              "android": 44,
+              "desktop-rerun": 132,
+              "desktop": 162
+            },
+            "none": {
+              "node": 13,
+              "android-rerun": 50,
+              "android": 41,
+              "desktop-rerun": 38,
+              "desktop": 192
+            },
+            "linear": {
+              "node": 13,
+              "android-rerun": 35,
+              "android": 42,
+              "desktop-rerun": 85,
+              "desktop": 153
+            },
+            "squared": {
+              "node": 13,
+              "android-rerun": 38,
+              "android": 40,
+              "desktop-rerun": 186,
+              "desktop": 115
+            },
+            "cut128": {
+              "node": 5,
+              "android-rerun": 15,
+              "android": 14,
+              "desktop-rerun": 109,
+              "desktop": 100
+            }
+          }
+        },
+        {
+          "settingId": "auto-all-oklab",
+          "units": [
+            "fx-sparks-64"
+          ],
+          "pixels": 4096,
+          "ms": {
+            "production": {
+              "node": 2,
+              "android-rerun": 2,
+              "android": 2,
+              "desktop-rerun": 75,
+              "desktop": 20
+            },
+            "none": {
+              "node": 2,
+              "android-rerun": 2,
+              "android": 2,
+              "desktop-rerun": 42,
+              "desktop": 7
+            },
+            "linear": {
+              "node": 2,
+              "android-rerun": 2,
+              "android": 2,
+              "desktop-rerun": 28,
+              "desktop": 6
+            },
+            "squared": {
+              "node": 2,
+              "android-rerun": 2,
+              "android": 2,
+              "desktop-rerun": 30,
+              "desktop": 5
+            },
+            "cut128": {
+              "node": 1,
+              "android-rerun": 1,
+              "android": 2,
+              "desktop-rerun": 15,
+              "desktop": 6
+            }
+          }
+        },
+        {
+          "settingId": "auto-c4-oklab",
+          "units": [
+            "soft-cloud"
+          ],
+          "pixels": 16384,
+          "ms": {
+            "production": {
+              "node": 6,
+              "android-rerun": 12,
+              "android": 15,
+              "desktop-rerun": 67,
+              "desktop": 29
+            },
+            "none": {
+              "node": 3,
+              "android-rerun": 15,
+              "android": 13,
+              "desktop-rerun": 83,
+              "desktop": 45
+            },
+            "linear": {
+              "node": 2,
+              "android-rerun": 13,
+              "android": 13,
+              "desktop-rerun": 73,
+              "desktop": 30
+            },
+            "squared": {
+              "node": 2,
+              "android-rerun": 11,
+              "android": 10,
+              "desktop-rerun": 75,
+              "desktop": 36
+            },
+            "cut128": {
+              "node": 3,
+              "android-rerun": 11,
+              "android": 11,
+              "desktop-rerun": 13,
+              "desktop": 27
+            }
+          }
+        },
+        {
+          "settingId": "auto-c16-oklab",
+          "units": [
+            "synthetic-many-soft-colors"
+          ],
+          "pixels": 5120,
+          "ms": {
+            "production": {
+              "node": 86,
+              "android-rerun": 113,
+              "android": 126,
+              "desktop-rerun": 418,
+              "desktop": 608
+            },
+            "none": {
+              "node": 57,
+              "android-rerun": 117,
+              "android": 135,
+              "desktop-rerun": 662,
+              "desktop": 189
+            },
+            "linear": {
+              "node": 50,
+              "android-rerun": 95,
+              "android": 81,
+              "desktop-rerun": 404,
+              "desktop": 717
+            },
+            "squared": {
+              "node": 49,
+              "android-rerun": 97,
+              "android": 116,
+              "desktop-rerun": 192,
+              "desktop": 472
+            },
+            "cut128": {
+              "node": 67,
+              "android-rerun": 58,
+              "android": 59,
+              "desktop-rerun": 111,
+              "desktop": 561
+            }
+          }
+        },
+        {
+          "settingId": "auto-c8-oklab",
+          "units": [
+            "anim:anim-para-fire"
+          ],
+          "pixels": 131072,
+          "ms": {
+            "production": {
+              "node": 25,
+              "android-rerun": 40,
+              "android": 35,
+              "desktop-rerun": 35,
+              "desktop": 153
+            },
+            "none": {
+              "node": 19,
+              "android-rerun": 30,
+              "android": 29,
+              "desktop-rerun": 67,
+              "desktop": 103
+            },
+            "linear": {
+              "node": 10,
+              "android-rerun": 16,
+              "android": 16,
+              "desktop-rerun": 173,
+              "desktop": 39
+            },
+            "squared": {
+              "node": 10,
+              "android-rerun": 15,
+              "android": 15,
+              "desktop-rerun": 94,
+              "desktop": 99
+            },
+            "cut128": {
+              "node": 8,
+              "android-rerun": 24,
+              "android": 24,
+              "desktop-rerun": 15,
+              "desktop": 74
+            }
+          }
+        },
+        {
+          "settingId": "pico8-c4-rgb",
+          "units": [
+            "anim:anim-rubberduck-magic"
+          ],
+          "pixels": 6144,
+          "ms": {
+            "production": {
+              "node": 3,
+              "android-rerun": 10,
+              "android": 7,
+              "desktop-rerun": 9,
+              "desktop": 34
+            },
+            "none": {
+              "node": 5,
+              "android-rerun": 20,
+              "android": 17,
+              "desktop-rerun": 20,
+              "desktop": 30
+            },
+            "linear": {
+              "node": 5,
+              "android-rerun": 11,
+              "android": 11,
+              "desktop-rerun": 35,
+              "desktop": 42
+            },
+            "squared": {
+              "node": 5,
+              "android-rerun": 7,
+              "android": 11,
+              "desktop-rerun": 19,
+              "desktop": 39
+            },
+            "cut128": {
+              "node": 3,
+              "android-rerun": 4,
+              "android": 3,
+              "desktop-rerun": 20,
+              "desktop": 4
+            }
+          }
+        },
+        {
+          "settingId": "wall-auto-c8-oklab",
+          "units": [
+            "aa-twemoji-fire",
+            "aa-twemoji-ghost",
+            "aa-tango-face-smile",
+            "aa-tango-system-search",
+            "aa-magic-orbs-sheet"
+          ],
+          "pixels": 143488,
+          "ms": {
+            "production": {
+              "node": 155,
+              "android-rerun": 250,
+              "android": 237,
+              "desktop-rerun": 735,
+              "desktop": 1612
+            },
+            "none": {
+              "node": 157,
+              "android-rerun": 245,
+              "android": 233,
+              "desktop-rerun": 1020,
+              "desktop": 802
+            },
+            "linear": {
+              "node": 153,
+              "android-rerun": 262,
+              "android": 233,
+              "desktop-rerun": 1827,
+              "desktop": 920
+            },
+            "squared": {
+              "node": 148,
+              "android-rerun": 258,
+              "android": 254,
+              "desktop-rerun": 2187,
+              "desktop": 1247
+            },
+            "cut128": {
+              "node": 151,
+              "android-rerun": 305,
+              "android": 308,
+              "desktop-rerun": 1100,
+              "desktop": 1802
+            }
+          }
+        }
+      ]
+    }
+  }
+}

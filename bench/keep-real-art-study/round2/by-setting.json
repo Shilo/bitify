@@ -1,0 +1,162 @@
+{
+ "auto-c3-oklab": {
+  "n": 30,
+  "identical": 8,
+  "better": 13,
+  "worse": 0,
+  "mixed": 3,
+  "tie": 14,
+  "worstSoftStrong": 0.069,
+  "worstCase": "aa-tango-face-smile|auto-c3-oklab"
+ },
+ "auto-c4-oklab": {
+  "n": 30,
+  "identical": 9,
+  "better": 13,
+  "worse": 1,
+  "mixed": 1,
+  "tie": 15,
+  "worstSoftStrong": 0.042,
+  "worstCase": "aa-tango-system-search|auto-c4-oklab"
+ },
+ "auto-c4-rgb": {
+  "n": 30,
+  "identical": 9,
+  "better": 12,
+  "worse": 1,
+  "mixed": 1,
+  "tie": 16,
+  "worstSoftStrong": 0.044,
+  "worstCase": "aa-tango-face-smile|auto-c4-rgb"
+ },
+ "auto-c8-oklab": {
+  "n": 30,
+  "identical": 7,
+  "better": 5,
+  "worse": 0,
+  "mixed": 1,
+  "tie": 24,
+  "worstSoftStrong": 0.039,
+  "worstCase": "aa-tango-face-smile|auto-c8-oklab"
+ },
+ "auto-c8-rgb": {
+  "n": 30,
+  "identical": 7,
+  "better": 5,
+  "worse": 0,
+  "mixed": 1,
+  "tie": 24,
+  "worstSoftStrong": 0.012,
+  "worstCase": "aa-tango-face-smile|auto-c8-rgb"
+ },
+ "auto-c16-oklab": {
+  "n": 30,
+  "identical": 7,
+  "better": 3,
+  "worse": 0,
+  "mixed": 0,
+  "tie": 27,
+  "worstSoftStrong": 0.005,
+  "worstCase": "aa-tango-system-search|auto-c16-oklab"
+ },
+ "auto-all-oklab": {
+  "n": 30,
+  "identical": 8,
+  "better": 0,
+  "worse": 0,
+  "mixed": 0,
+  "tie": 30,
+  "worstSoftStrong": 0.002,
+  "worstCase": "aa-tango-face-smile|auto-all-oklab"
+ },
+ "res64-c4-oklab": {
+  "n": 30,
+  "identical": 16,
+  "better": 6,
+  "worse": 1,
+  "mixed": 1,
+  "tie": 22,
+  "worstSoftStrong": 0.037,
+  "worstCase": "aa-tango-face-smile|res64-c4-oklab"
+ },
+ "res64-c4-rgb": {
+  "n": 30,
+  "identical": 15,
+  "better": 5,
+  "worse": 1,
+  "mixed": 2,
+  "tie": 22,
+  "worstSoftStrong": 0.023,
+  "worstCase": "aa-tango-face-smile|res64-c4-rgb"
+ },
+ "res64-c8-oklab": {
+  "n": 30,
+  "identical": 23,
+  "better": 0,
+  "worse": 0,
+  "mixed": 0,
+  "tie": 30,
+  "worstSoftStrong": 0,
+  "worstCase": "fade-radial-light|res64-c8-oklab"
+ },
+ "res64-c8-rgb": {
+  "n": 30,
+  "identical": 24,
+  "better": 0,
+  "worse": 0,
+  "mixed": 0,
+  "tie": 30,
+  "worstSoftStrong": 0,
+  "worstCase": "anim:anim-rubberduck-magic|res64-c8-rgb"
+ },
+ "pico8-c4-oklab": {
+  "n": 30,
+  "identical": 23,
+  "better": 1,
+  "worse": 0,
+  "mixed": 0,
+  "tie": 29,
+  "worstSoftStrong": 0.006,
+  "worstCase": "fx-energy-star|pico8-c4-oklab"
+ },
+ "pico8-c4-rgb": {
+  "n": 30,
+  "identical": 19,
+  "better": 5,
+  "worse": 0,
+  "mixed": 2,
+  "tie": 23,
+  "worstSoftStrong": 0.035,
+  "worstCase": "fade-trail-streak|pico8-c4-rgb"
+ },
+ "auto-c4-oklab-dither4x4": {
+  "n": 30,
+  "identical": 9,
+  "better": 12,
+  "worse": 1,
+  "mixed": 2,
+  "tie": 15,
+  "worstSoftStrong": 0.041,
+  "worstCase": "aa-tango-system-search|auto-c4-oklab-dither4x4"
+ },
+ "wall-auto-c4-oklab": {
+  "n": 30,
+  "identical": 3,
+  "better": 13,
+  "worse": 2,
+  "mixed": 0,
+  "tie": 15,
+  "worstSoftStrong": 0.147,
+  "worstCase": "aa-magic-orbs-sheet|wall-auto-c4-oklab"
+ },
+ "wall-auto-c8-oklab": {
+  "n": 30,
+  "identical": 3,
+  "better": 9,
+  "worse": 0,
+  "mixed": 0,
+  "tie": 21,
+  "worstSoftStrong": 0.008,
+  "worstCase": "fade-island-shore|wall-auto-c8-oklab"
+ }
+}

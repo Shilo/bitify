@@ -1,0 +1,2307 @@
+{
+ "rule": "bench/keep-real-art-study/analysis/selection-rule.md",
+ "seed": 20261015,
+ "notesRedaction": "/; (current Keep lets faint pixels displace core colours|linear weighting worsens it slightly)/g",
+ "shared": [
+  "sheets/sheet-0267.png",
+  "sheets/sheet-0230.png",
+  "sheets/sheet-0031.png",
+  "sheets/sheet-0062.png",
+  "sheets/sheet-0066.png",
+  "sheets/sheet-0282.png",
+  "sheets/sheet-0096.png",
+  "sheets/sheet-0080.png",
+  "sheets/sheet-0242.png",
+  "sheets/sheet-0172.png",
+  "sheets/sheet-0132.png",
+  "sheets/sheet-0136.png"
+ ],
+ "packets": {
+  "A": [
+   {
+    "j": "J001",
+    "sheet": "sheets/sheet-0132.png",
+    "shared": true,
+    "cases": [
+     "fade-trail-streak|res64-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J002",
+    "sheet": "sheets/sheet-0136.png",
+    "shared": true,
+    "cases": [
+     "fade-trail-streak|pico8-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J003",
+    "sheet": "sheets/sheet-0260.png",
+    "shared": false,
+    "cases": [
+     "synthetic-all-soft-water-ramp|auto-c3-oklab"
+    ],
+    "reasons": [
+     "rule1-synthetic"
+    ]
+   },
+   {
+    "j": "J004",
+    "sheet": "sheets/sheet-0150.png",
+    "shared": false,
+    "cases": [
+     "fx-green-magic-32|auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J005",
+    "sheet": "sheets/sheet-0226.png",
+    "shared": false,
+    "cases": [
+     "soft-air-bubbles|auto-c8-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J006",
+    "sheet": "sheets/sheet-0025.png",
+    "shared": false,
+    "cases": [
+     "glow-light-64|pico8-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J007",
+    "sheet": "sheets/sheet-0211.png",
+    "shared": false,
+    "cases": [
+     "soft-magic-ring|auto-c3-oklab"
+    ],
+    "reasons": [
+     "rule3-extreme-opaque+strong"
+    ]
+   },
+   {
+    "j": "J008",
+    "sheet": "sheets/sheet-0218.png",
+    "shared": false,
+    "cases": [
+     "soft-magic-ring|res64-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J009",
+    "sheet": "sheets/sheet-0080.png",
+    "shared": true,
+    "cases": [
+     "aa-tango-face-smile|res64-c4-rgb"
+    ],
+    "reasons": [
+     "rule3-extreme-soft+faint"
+    ]
+   },
+   {
+    "j": "J010",
+    "sheet": "sheets/sheet-0152.png",
+    "shared": false,
+    "cases": [
+     "fx-green-magic-32|auto-c8-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J011",
+    "sheet": "sheets/sheet-0069.png",
+    "shared": false,
+    "cases": [
+     "shadow-glass-orb|pico8-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J012",
+    "sheet": "sheets/sheet-0196.png",
+    "shared": false,
+    "cases": [
+     "soft-cloud|auto-c8-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J013",
+    "sheet": "sheets/sheet-0081.png",
+    "shared": false,
+    "cases": [
+     "aa-tango-face-smile|pico8-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J014",
+    "sheet": "sheets/sheet-0114.png",
+    "shared": false,
+    "cases": [
+     "fade-radial-light|auto-c8-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J015",
+    "sheet": "sheets/sheet-0220.png",
+    "shared": false,
+    "cases": [
+     "soft-magic-ring|pico8-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J016",
+    "sheet": "sheets/sheet-0103.png",
+    "shared": false,
+    "cases": [
+     "fade-island-shore|auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J017",
+    "sheet": "sheets/sheet-0163.png",
+    "shared": false,
+    "cases": [
+     "fx-sparks-64|auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J018",
+    "sheet": "sheets/sheet-0029.png",
+    "shared": false,
+    "cases": [
+     "glow-flash-yellow|auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J019",
+    "sheet": "sheets/sheet-0178.png",
+    "shared": false,
+    "cases": [
+     "fx-energy-star|res64-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J020",
+    "sheet": "sheets/sheet-0142.png",
+    "shared": false,
+    "cases": [
+     "fx-teleporter-burst|auto-c8-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J021",
+    "sheet": "sheets/sheet-0267.png",
+    "shared": true,
+    "cases": [
+     "synthetic-all-soft-water-ramp|res64-c4-rgb"
+    ],
+    "reasons": [
+     "rule1-synthetic"
+    ]
+   },
+   {
+    "j": "J022",
+    "sheet": "sheets/sheet-0012.png",
+    "shared": false,
+    "cases": [
+     "glow-orb-red|pico8-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J023",
+    "sheet": "sheets/sheet-0255.png",
+    "shared": false,
+    "cases": [
+     "synthetic-many-soft-colors|res64-c4-rgb"
+    ],
+    "reasons": [
+     "rule1-synthetic"
+    ]
+   },
+   {
+    "j": "J024",
+    "sheet": "sheets/sheet-0002.png",
+    "shared": false,
+    "cases": [
+     "glow-orb-red|auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J025",
+    "sheet": "sheets/sheet-0274.png",
+    "shared": false,
+    "cases": [
+     "anim:anim-rubberduck-magic|auto-c8-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J026",
+    "sheet": "sheets/sheet-0206.png",
+    "shared": false,
+    "cases": [
+     "soft-smoke-puff|res64-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J027",
+    "sheet": "sheets/sheet-0230.png",
+    "shared": true,
+    "cases": [
+     "soft-air-bubbles|res64-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J028",
+    "sheet": "sheets/sheet-0147.png",
+    "shared": false,
+    "cases": [
+     "fx-teleporter-burst|pico8-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J029",
+    "sheet": "sheets/sheet-0049.png",
+    "shared": false,
+    "cases": [
+     "glow-lens-flare|res64-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J030",
+    "sheet": "sheets/sheet-0300.png",
+    "shared": false,
+    "cases": [
+     "anim:anim-kenney-explosion|pico8-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J031",
+    "sheet": "sheets/sheet-0294.png",
+    "shared": false,
+    "cases": [
+     "anim:anim-kenney-explosion|auto-c8-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J032",
+    "sheet": "sheets/sheet-0259.png",
+    "shared": false,
+    "cases": [
+     "synthetic-intentional-cyan-halo|auto-c3-oklab"
+    ],
+    "reasons": [
+     "rule1-synthetic"
+    ]
+   },
+   {
+    "j": "J033",
+    "sheet": "sheets/sheet-0086.png",
+    "shared": false,
+    "cases": [
+     "aa-tango-system-search|auto-c8-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J034",
+    "sheet": "sheets/sheet-0043.png",
+    "shared": false,
+    "cases": [
+     "glow-lens-flare|auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit",
+     "rule3-extreme-opaque+strong"
+    ]
+   },
+   {
+    "j": "J035",
+    "sheet": "sheets/sheet-0261.png",
+    "shared": false,
+    "cases": [
+     "synthetic-all-soft-water-ramp|auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule1-synthetic"
+    ]
+   },
+   {
+    "j": "J036",
+    "sheet": "sheets/sheet-0282.png",
+    "shared": true,
+    "cases": [
+     "anim:anim-rubberduck-magic|pico8-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J037",
+    "sheet": "sheets/sheet-0015.png",
+    "shared": false,
+    "cases": [
+     "glow-light-64|auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J038",
+    "sheet": "sheets/sheet-0075.png",
+    "shared": false,
+    "cases": [
+     "aa-tango-face-smile|auto-c8-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J039",
+    "sheet": "sheets/sheet-0172.png",
+    "shared": true,
+    "cases": [
+     "fx-energy-star|auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J040",
+    "sheet": "sheets/sheet-0067.png",
+    "shared": false,
+    "cases": [
+     "shadow-glass-orb|res64-c4-rgb"
+    ],
+    "reasons": [
+     "rule3-extreme-soft+faint"
+    ]
+   },
+   {
+    "j": "J041",
+    "sheet": "sheets/sheet-0242.png",
+    "shared": true,
+    "cases": [
+     "soft-bubble|res64-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J042",
+    "sheet": "sheets/sheet-0079.png",
+    "shared": false,
+    "cases": [
+     "aa-tango-face-smile|res64-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J043",
+    "sheet": "sheets/sheet-0128.png",
+    "shared": false,
+    "cases": [
+     "fade-trail-streak|auto-c8-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J044",
+    "sheet": "sheets/sheet-0060.png",
+    "shared": false,
+    "cases": [
+     "shadow-glass-orb|auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J045",
+    "sheet": "sheets/sheet-0222.png",
+    "shared": false,
+    "cases": [
+     "soft-magic-ring|auto-c4-oklab-dither4x4"
+    ],
+    "reasons": [
+     "rule3-extreme-opaque+strong"
+    ]
+   },
+   {
+    "j": "J046",
+    "sheet": "sheets/sheet-0004.png",
+    "shared": false,
+    "cases": [
+     "glow-orb-red|auto-c8-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J047",
+    "sheet": "sheets/sheet-0066.png",
+    "shared": true,
+    "cases": [
+     "shadow-glass-orb|res64-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J048",
+    "sheet": "sheets/sheet-0174.png",
+    "shared": false,
+    "cases": [
+     "fx-energy-star|auto-c8-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J049",
+    "sheet": "sheets/sheet-0159.png",
+    "shared": false,
+    "cases": [
+     "fx-green-magic-32|pico8-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J050",
+    "sheet": "sheets/sheet-0224.png",
+    "shared": false,
+    "cases": [
+     "soft-air-bubbles|auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J051",
+    "sheet": "sheets/sheet-0333.png",
+    "shared": false,
+    "cases": [
+     "fx-energy-star|wall-auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule4-wall"
+    ]
+   },
+   {
+    "j": "J052",
+    "sheet": "sheets/sheet-0305.png",
+    "shared": false,
+    "cases": [
+     "glow-flash-yellow|wall-auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule4-wall"
+    ]
+   },
+   {
+    "j": "J053",
+    "sheet": "sheets/sheet-0165.png",
+    "shared": false,
+    "cases": [
+     "fx-sparks-64|auto-c8-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J054",
+    "sheet": "sheets/sheet-0096.png",
+    "shared": true,
+    "cases": [
+     "aa-tango-system-search|auto-c4-oklab-dither4x4"
+    ],
+    "reasons": [
+     "rule3-extreme-soft+faint"
+    ]
+   },
+   {
+    "j": "J055",
+    "sheet": "sheets/sheet-0031.png",
+    "shared": true,
+    "cases": [
+     "glow-flash-yellow|auto-c8-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J056",
+    "sheet": "sheets/sheet-0062.png",
+    "shared": true,
+    "cases": [
+     "shadow-glass-orb|auto-c8-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J057",
+    "sheet": "sheets/sheet-0140.png",
+    "shared": false,
+    "cases": [
+     "fx-teleporter-burst|auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J058",
+    "sheet": "sheets/sheet-0112.png",
+    "shared": false,
+    "cases": [
+     "fade-radial-light|auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J059",
+    "sheet": "sheets/sheet-0292.png",
+    "shared": false,
+    "cases": [
+     "anim:anim-kenney-explosion|auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   }
+  ],
+  "B": [
+   {
+    "j": "J001",
+    "sheet": "sheets/sheet-0052.png",
+    "shared": false,
+    "cases": [
+     "glow-lens-flare|pico8-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J002",
+    "sheet": "sheets/sheet-0214.png",
+    "shared": false,
+    "cases": [
+     "soft-magic-ring|auto-c8-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J003",
+    "sheet": "sheets/sheet-0200.png",
+    "shared": false,
+    "cases": [
+     "soft-smoke-puff|auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J004",
+    "sheet": "sheets/sheet-0317.png",
+    "shared": false,
+    "cases": [
+     "aa-tango-face-smile|wall-auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule3-extreme-soft+faint"
+    ]
+   },
+   {
+    "j": "J005",
+    "sheet": "sheets/sheet-0084.png",
+    "shared": false,
+    "cases": [
+     "aa-tango-system-search|auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit",
+     "rule3-extreme-soft+faint"
+    ]
+   },
+   {
+    "j": "J006",
+    "sheet": "sheets/sheet-0126.png",
+    "shared": false,
+    "cases": [
+     "fade-trail-streak|auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit",
+     "rule3-extreme-opaque+strong"
+    ]
+   },
+   {
+    "j": "J007",
+    "sheet": "sheets/sheet-0236.png",
+    "shared": false,
+    "cases": [
+     "soft-bubble|auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J008",
+    "sheet": "sheets/sheet-0073.png",
+    "shared": false,
+    "cases": [
+     "aa-tango-face-smile|auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J009",
+    "sheet": "sheets/sheet-0282.png",
+    "shared": true,
+    "cases": [
+     "anim:anim-rubberduck-magic|pico8-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J010",
+    "sheet": "sheets/sheet-0122.png",
+    "shared": false,
+    "cases": [
+     "fade-radial-light|pico8-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J011",
+    "sheet": "sheets/sheet-0017.png",
+    "shared": false,
+    "cases": [
+     "glow-light-64|auto-c8-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J012",
+    "sheet": "sheets/sheet-0357.png",
+    "shared": false,
+    "cases": [
+     "anim:anim-rubberduck-magic|wall-auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule4-wall"
+    ]
+   },
+   {
+    "j": "J013",
+    "sheet": "sheets/sheet-0298.png",
+    "shared": false,
+    "cases": [
+     "anim:anim-kenney-explosion|res64-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J014",
+    "sheet": "sheets/sheet-0212.png",
+    "shared": false,
+    "cases": [
+     "soft-magic-ring|auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit",
+     "rule3-extreme-opaque+strong"
+    ]
+   },
+   {
+    "j": "J015",
+    "sheet": "sheets/sheet-0290.png",
+    "shared": false,
+    "cases": [
+     "anim:anim-para-fire|res64-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J016",
+    "sheet": "sheets/sheet-0247.png",
+    "shared": false,
+    "cases": [
+     "synthetic-opaque-core-alpha1-spill|auto-c3-oklab"
+    ],
+    "reasons": [
+     "rule1-synthetic"
+    ]
+   },
+   {
+    "j": "J017",
+    "sheet": "sheets/sheet-0132.png",
+    "shared": true,
+    "cases": [
+     "fade-trail-streak|res64-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J018",
+    "sheet": "sheets/sheet-0125.png",
+    "shared": false,
+    "cases": [
+     "fade-trail-streak|auto-c3-oklab"
+    ],
+    "reasons": [
+     "rule3-extreme-opaque+strong"
+    ]
+   },
+   {
+    "j": "J019",
+    "sheet": "sheets/sheet-0194.png",
+    "shared": false,
+    "cases": [
+     "soft-cloud|auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J020",
+    "sheet": "sheets/sheet-0267.png",
+    "shared": true,
+    "cases": [
+     "synthetic-all-soft-water-ramp|res64-c4-rgb"
+    ],
+    "reasons": [
+     "rule1-synthetic"
+    ]
+   },
+   {
+    "j": "J021",
+    "sheet": "sheets/sheet-0272.png",
+    "shared": false,
+    "cases": [
+     "anim:anim-rubberduck-magic|auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J022",
+    "sheet": "sheets/sheet-0094.png",
+    "shared": false,
+    "cases": [
+     "aa-tango-system-search|pico8-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J023",
+    "sheet": "sheets/sheet-0080.png",
+    "shared": true,
+    "cases": [
+     "aa-tango-face-smile|res64-c4-rgb"
+    ],
+    "reasons": [
+     "rule3-extreme-soft+faint"
+    ]
+   },
+   {
+    "j": "J024",
+    "sheet": "sheets/sheet-0062.png",
+    "shared": true,
+    "cases": [
+     "shadow-glass-orb|auto-c8-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J025",
+    "sheet": "sheets/sheet-0182.png",
+    "shared": false,
+    "cases": [
+     "fx-energy-star|pico8-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J026",
+    "sheet": "sheets/sheet-0021.png",
+    "shared": false,
+    "cases": [
+     "glow-light-64|res64-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J027",
+    "sheet": "sheets/sheet-0319.png",
+    "shared": false,
+    "cases": [
+     "aa-magic-orbs-sheet|wall-auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule3-extreme-soft+faint"
+    ]
+   },
+   {
+    "j": "J028",
+    "sheet": "sheets/sheet-0072.png",
+    "shared": false,
+    "cases": [
+     "aa-tango-face-smile|auto-c3-oklab"
+    ],
+    "reasons": [
+     "rule3-extreme-soft+faint"
+    ]
+   },
+   {
+    "j": "J029",
+    "sheet": "sheets/sheet-0031.png",
+    "shared": true,
+    "cases": [
+     "glow-flash-yellow|auto-c8-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J030",
+    "sheet": "sheets/sheet-0008.png",
+    "shared": false,
+    "cases": [
+     "glow-orb-red|res64-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J031",
+    "sheet": "sheets/sheet-0248.png",
+    "shared": false,
+    "cases": [
+     "synthetic-many-soft-colors|auto-c3-oklab"
+    ],
+    "reasons": [
+     "rule1-synthetic"
+    ]
+   },
+   {
+    "j": "J032",
+    "sheet": "sheets/sheet-0118.png",
+    "shared": false,
+    "cases": [
+     "fade-radial-light|res64-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J033",
+    "sheet": "sheets/sheet-0056.png",
+    "shared": false,
+    "cases": [
+     "shadow-tree-topdown|auto-c8-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J034",
+    "sheet": "sheets/sheet-0286.png",
+    "shared": false,
+    "cases": [
+     "anim:anim-para-fire|auto-c8-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J035",
+    "sheet": "sheets/sheet-0242.png",
+    "shared": true,
+    "cases": [
+     "soft-bubble|res64-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J036",
+    "sheet": "sheets/sheet-0105.png",
+    "shared": false,
+    "cases": [
+     "fade-island-shore|auto-c8-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J037",
+    "sheet": "sheets/sheet-0238.png",
+    "shared": false,
+    "cases": [
+     "soft-bubble|auto-c8-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J038",
+    "sheet": "sheets/sheet-0035.png",
+    "shared": false,
+    "cases": [
+     "glow-flash-yellow|res64-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J039",
+    "sheet": "sheets/sheet-0188.png",
+    "shared": false,
+    "cases": [
+     "fx-black-smoke|auto-c8-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J040",
+    "sheet": "sheets/sheet-0098.png",
+    "shared": false,
+    "cases": [
+     "aa-magic-orbs-sheet|auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J041",
+    "sheet": "sheets/sheet-0090.png",
+    "shared": false,
+    "cases": [
+     "aa-tango-system-search|res64-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J042",
+    "sheet": "sheets/sheet-0109.png",
+    "shared": false,
+    "cases": [
+     "fade-island-shore|res64-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J043",
+    "sheet": "sheets/sheet-0230.png",
+    "shared": true,
+    "cases": [
+     "soft-air-bubbles|res64-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J044",
+    "sheet": "sheets/sheet-0249.png",
+    "shared": false,
+    "cases": [
+     "synthetic-many-soft-colors|auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule1-synthetic"
+    ]
+   },
+   {
+    "j": "J045",
+    "sheet": "sheets/sheet-0325.png",
+    "shared": false,
+    "cases": [
+     "fade-radial-light|wall-auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule4-wall"
+    ]
+   },
+   {
+    "j": "J046",
+    "sheet": "sheets/sheet-0278.png",
+    "shared": false,
+    "cases": [
+     "anim:anim-rubberduck-magic|res64-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J047",
+    "sheet": "sheets/sheet-0202.png",
+    "shared": false,
+    "cases": [
+     "soft-smoke-puff|auto-c8-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J048",
+    "sheet": "sheets/sheet-0258.png",
+    "shared": false,
+    "cases": [
+     "synthetic-faint-green-spill|auto-c3-oklab"
+    ],
+    "reasons": [
+     "rule1-synthetic"
+    ]
+   },
+   {
+    "j": "J049",
+    "sheet": "sheets/sheet-0172.png",
+    "shared": true,
+    "cases": [
+     "fx-energy-star|auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J050",
+    "sheet": "sheets/sheet-0169.png",
+    "shared": false,
+    "cases": [
+     "fx-sparks-64|res64-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J051",
+    "sheet": "sheets/sheet-0186.png",
+    "shared": false,
+    "cases": [
+     "fx-black-smoke|auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J052",
+    "sheet": "sheets/sheet-0039.png",
+    "shared": false,
+    "cases": [
+     "glow-flash-yellow|pico8-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J053",
+    "sheet": "sheets/sheet-0096.png",
+    "shared": true,
+    "cases": [
+     "aa-tango-system-search|auto-c4-oklab-dither4x4"
+    ],
+    "reasons": [
+     "rule3-extreme-soft+faint"
+    ]
+   },
+   {
+    "j": "J054",
+    "sheet": "sheets/sheet-0042.png",
+    "shared": false,
+    "cases": [
+     "glow-lens-flare|auto-c3-oklab"
+    ],
+    "reasons": [
+     "rule3-extreme-opaque+strong"
+    ]
+   },
+   {
+    "j": "J055",
+    "sheet": "sheets/sheet-0045.png",
+    "shared": false,
+    "cases": [
+     "glow-lens-flare|auto-c8-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J056",
+    "sheet": "sheets/sheet-0306.png",
+    "shared": false,
+    "cases": [
+     "glow-lens-flare|wall-auto-c4-oklab"
+    ],
+    "reasons": [
+     "rule3-extreme-opaque+strong"
+    ]
+   },
+   {
+    "j": "J057",
+    "sheet": "sheets/sheet-0074.png",
+    "shared": false,
+    "cases": [
+     "aa-tango-face-smile|auto-c4-rgb"
+    ],
+    "reasons": [
+     "rule3-extreme-soft+faint"
+    ]
+   },
+   {
+    "j": "J058",
+    "sheet": "sheets/sheet-0066.png",
+    "shared": true,
+    "cases": [
+     "shadow-glass-orb|res64-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   },
+   {
+    "j": "J059",
+    "sheet": "sheets/sheet-0136.png",
+    "shared": true,
+    "cases": [
+     "fade-trail-streak|pico8-c4-oklab"
+    ],
+    "reasons": [
+     "rule2-real-unit"
+    ]
+   }
+  ]
+ },
+ "sheets": [
+  {
+   "sheet": "sheets/sheet-0002.png",
+   "cases": [
+    "glow-orb-red|auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0004.png",
+   "cases": [
+    "glow-orb-red|auto-c8-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0008.png",
+   "cases": [
+    "glow-orb-red|res64-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0012.png",
+   "cases": [
+    "glow-orb-red|pico8-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0015.png",
+   "cases": [
+    "glow-light-64|auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0017.png",
+   "cases": [
+    "glow-light-64|auto-c8-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0021.png",
+   "cases": [
+    "glow-light-64|res64-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0025.png",
+   "cases": [
+    "glow-light-64|pico8-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0029.png",
+   "cases": [
+    "glow-flash-yellow|auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0031.png",
+   "cases": [
+    "glow-flash-yellow|auto-c8-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0035.png",
+   "cases": [
+    "glow-flash-yellow|res64-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0039.png",
+   "cases": [
+    "glow-flash-yellow|pico8-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0042.png",
+   "cases": [
+    "glow-lens-flare|auto-c3-oklab"
+   ],
+   "reasons": [
+    "rule3-extreme-opaque+strong"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0043.png",
+   "cases": [
+    "glow-lens-flare|auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit",
+    "rule3-extreme-opaque+strong"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0045.png",
+   "cases": [
+    "glow-lens-flare|auto-c8-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0049.png",
+   "cases": [
+    "glow-lens-flare|res64-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0052.png",
+   "cases": [
+    "glow-lens-flare|pico8-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0056.png",
+   "cases": [
+    "shadow-tree-topdown|auto-c8-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0060.png",
+   "cases": [
+    "shadow-glass-orb|auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0062.png",
+   "cases": [
+    "shadow-glass-orb|auto-c8-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0066.png",
+   "cases": [
+    "shadow-glass-orb|res64-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0067.png",
+   "cases": [
+    "shadow-glass-orb|res64-c4-rgb"
+   ],
+   "reasons": [
+    "rule3-extreme-soft+faint"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0069.png",
+   "cases": [
+    "shadow-glass-orb|pico8-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0072.png",
+   "cases": [
+    "aa-tango-face-smile|auto-c3-oklab"
+   ],
+   "reasons": [
+    "rule3-extreme-soft+faint"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0073.png",
+   "cases": [
+    "aa-tango-face-smile|auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0074.png",
+   "cases": [
+    "aa-tango-face-smile|auto-c4-rgb"
+   ],
+   "reasons": [
+    "rule3-extreme-soft+faint"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0075.png",
+   "cases": [
+    "aa-tango-face-smile|auto-c8-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0079.png",
+   "cases": [
+    "aa-tango-face-smile|res64-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0080.png",
+   "cases": [
+    "aa-tango-face-smile|res64-c4-rgb"
+   ],
+   "reasons": [
+    "rule3-extreme-soft+faint"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0081.png",
+   "cases": [
+    "aa-tango-face-smile|pico8-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0084.png",
+   "cases": [
+    "aa-tango-system-search|auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit",
+    "rule3-extreme-soft+faint"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0086.png",
+   "cases": [
+    "aa-tango-system-search|auto-c8-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0090.png",
+   "cases": [
+    "aa-tango-system-search|res64-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0094.png",
+   "cases": [
+    "aa-tango-system-search|pico8-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0096.png",
+   "cases": [
+    "aa-tango-system-search|auto-c4-oklab-dither4x4"
+   ],
+   "reasons": [
+    "rule3-extreme-soft+faint"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0098.png",
+   "cases": [
+    "aa-magic-orbs-sheet|auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0103.png",
+   "cases": [
+    "fade-island-shore|auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0105.png",
+   "cases": [
+    "fade-island-shore|auto-c8-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0109.png",
+   "cases": [
+    "fade-island-shore|res64-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0112.png",
+   "cases": [
+    "fade-radial-light|auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0114.png",
+   "cases": [
+    "fade-radial-light|auto-c8-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0118.png",
+   "cases": [
+    "fade-radial-light|res64-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0122.png",
+   "cases": [
+    "fade-radial-light|pico8-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0125.png",
+   "cases": [
+    "fade-trail-streak|auto-c3-oklab"
+   ],
+   "reasons": [
+    "rule3-extreme-opaque+strong"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0126.png",
+   "cases": [
+    "fade-trail-streak|auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit",
+    "rule3-extreme-opaque+strong"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0128.png",
+   "cases": [
+    "fade-trail-streak|auto-c8-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0132.png",
+   "cases": [
+    "fade-trail-streak|res64-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0136.png",
+   "cases": [
+    "fade-trail-streak|pico8-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0140.png",
+   "cases": [
+    "fx-teleporter-burst|auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0142.png",
+   "cases": [
+    "fx-teleporter-burst|auto-c8-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0147.png",
+   "cases": [
+    "fx-teleporter-burst|pico8-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0150.png",
+   "cases": [
+    "fx-green-magic-32|auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0152.png",
+   "cases": [
+    "fx-green-magic-32|auto-c8-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0159.png",
+   "cases": [
+    "fx-green-magic-32|pico8-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0163.png",
+   "cases": [
+    "fx-sparks-64|auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0165.png",
+   "cases": [
+    "fx-sparks-64|auto-c8-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0169.png",
+   "cases": [
+    "fx-sparks-64|res64-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0172.png",
+   "cases": [
+    "fx-energy-star|auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0174.png",
+   "cases": [
+    "fx-energy-star|auto-c8-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0178.png",
+   "cases": [
+    "fx-energy-star|res64-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0182.png",
+   "cases": [
+    "fx-energy-star|pico8-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0186.png",
+   "cases": [
+    "fx-black-smoke|auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0188.png",
+   "cases": [
+    "fx-black-smoke|auto-c8-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0194.png",
+   "cases": [
+    "soft-cloud|auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0196.png",
+   "cases": [
+    "soft-cloud|auto-c8-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0200.png",
+   "cases": [
+    "soft-smoke-puff|auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0202.png",
+   "cases": [
+    "soft-smoke-puff|auto-c8-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0206.png",
+   "cases": [
+    "soft-smoke-puff|res64-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0211.png",
+   "cases": [
+    "soft-magic-ring|auto-c3-oklab"
+   ],
+   "reasons": [
+    "rule3-extreme-opaque+strong"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0212.png",
+   "cases": [
+    "soft-magic-ring|auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit",
+    "rule3-extreme-opaque+strong"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0214.png",
+   "cases": [
+    "soft-magic-ring|auto-c8-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0218.png",
+   "cases": [
+    "soft-magic-ring|res64-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0220.png",
+   "cases": [
+    "soft-magic-ring|pico8-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0222.png",
+   "cases": [
+    "soft-magic-ring|auto-c4-oklab-dither4x4"
+   ],
+   "reasons": [
+    "rule3-extreme-opaque+strong"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0224.png",
+   "cases": [
+    "soft-air-bubbles|auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0226.png",
+   "cases": [
+    "soft-air-bubbles|auto-c8-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0230.png",
+   "cases": [
+    "soft-air-bubbles|res64-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0236.png",
+   "cases": [
+    "soft-bubble|auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0238.png",
+   "cases": [
+    "soft-bubble|auto-c8-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0242.png",
+   "cases": [
+    "soft-bubble|res64-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0247.png",
+   "cases": [
+    "synthetic-opaque-core-alpha1-spill|auto-c3-oklab"
+   ],
+   "reasons": [
+    "rule1-synthetic"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0248.png",
+   "cases": [
+    "synthetic-many-soft-colors|auto-c3-oklab"
+   ],
+   "reasons": [
+    "rule1-synthetic"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0249.png",
+   "cases": [
+    "synthetic-many-soft-colors|auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule1-synthetic"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0255.png",
+   "cases": [
+    "synthetic-many-soft-colors|res64-c4-rgb"
+   ],
+   "reasons": [
+    "rule1-synthetic"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0258.png",
+   "cases": [
+    "synthetic-faint-green-spill|auto-c3-oklab"
+   ],
+   "reasons": [
+    "rule1-synthetic"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0259.png",
+   "cases": [
+    "synthetic-intentional-cyan-halo|auto-c3-oklab"
+   ],
+   "reasons": [
+    "rule1-synthetic"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0260.png",
+   "cases": [
+    "synthetic-all-soft-water-ramp|auto-c3-oklab"
+   ],
+   "reasons": [
+    "rule1-synthetic"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0261.png",
+   "cases": [
+    "synthetic-all-soft-water-ramp|auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule1-synthetic"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0267.png",
+   "cases": [
+    "synthetic-all-soft-water-ramp|res64-c4-rgb"
+   ],
+   "reasons": [
+    "rule1-synthetic"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0272.png",
+   "cases": [
+    "anim:anim-rubberduck-magic|auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0274.png",
+   "cases": [
+    "anim:anim-rubberduck-magic|auto-c8-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0278.png",
+   "cases": [
+    "anim:anim-rubberduck-magic|res64-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0282.png",
+   "cases": [
+    "anim:anim-rubberduck-magic|pico8-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0286.png",
+   "cases": [
+    "anim:anim-para-fire|auto-c8-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0290.png",
+   "cases": [
+    "anim:anim-para-fire|res64-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0292.png",
+   "cases": [
+    "anim:anim-kenney-explosion|auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0294.png",
+   "cases": [
+    "anim:anim-kenney-explosion|auto-c8-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0298.png",
+   "cases": [
+    "anim:anim-kenney-explosion|res64-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0300.png",
+   "cases": [
+    "anim:anim-kenney-explosion|pico8-c4-oklab"
+   ],
+   "reasons": [
+    "rule2-real-unit"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0305.png",
+   "cases": [
+    "glow-flash-yellow|wall-auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule4-wall"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0306.png",
+   "cases": [
+    "glow-lens-flare|wall-auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule3-extreme-opaque+strong"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0317.png",
+   "cases": [
+    "aa-tango-face-smile|wall-auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule3-extreme-soft+faint"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0319.png",
+   "cases": [
+    "aa-magic-orbs-sheet|wall-auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule3-extreme-soft+faint"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0325.png",
+   "cases": [
+    "fade-radial-light|wall-auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule4-wall"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0333.png",
+   "cases": [
+    "fx-energy-star|wall-auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule4-wall"
+   ]
+  },
+  {
+   "sheet": "sheets/sheet-0357.png",
+   "cases": [
+    "anim:anim-rubberduck-magic|wall-auto-c4-oklab"
+   ],
+   "reasons": [
+    "rule4-wall"
+   ]
+  }
+ ],
+ "counts": {
+  "total": 106,
+  "shared": 12,
+  "A": 59,
+  "B": 59,
+  "byReason": {
+   "rule1-synthetic": 9,
+   "rule2-real-unit": 81,
+   "rule3-extreme-opaque+strong": 8,
+   "rule3-extreme-soft+faint": 8,
+   "rule4-wall": 4
+  },
+  "firstReason": {
+   "rule1-synthetic": 9,
+   "rule2-real-unit": 81,
+   "rule3-extreme-opaque+strong": 5,
+   "rule3-extreme-soft+faint": 7,
+   "rule4-wall": 4
+  }
+ }
+}

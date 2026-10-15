@@ -1,0 +1,685 @@
+{
+  "note": "SECRET round-2 P/Q -> policy mapping. Do not share with judges until judgments are recorded.",
+  "seed": "9201df3ec2409eb1c9c5534cb599de84d0d833caebb141ccea28bb594146bbb9",
+  "sheets": {
+    "K001.png": {
+      "cases": [
+        "glow-flash-yellow|pico8-c4-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K002.png": {
+      "cases": [
+        "anim:anim-rubberduck-magic|pico8-c4-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K003.png": {
+      "cases": [
+        "fx-sparks-64|auto-c4-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K004.png": {
+      "cases": [
+        "fx-sparks-64|auto-c8-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K005.png": {
+      "cases": [
+        "fade-radial-light|auto-c8-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K006.png": {
+      "cases": [
+        "glow-orb-red|res64-c8-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K007.png": {
+      "cases": [
+        "fx-energy-star|auto-c8-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K008.png": {
+      "cases": [
+        "glow-orb-red|auto-c4-oklab"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K009.png": {
+      "cases": [
+        "glow-light-64|res64-c4-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K010.png": {
+      "cases": [
+        "glow-orb-red|res64-c4-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K011.png": {
+      "cases": [
+        "fade-radial-light|auto-c4-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K012.png": {
+      "cases": [
+        "soft-bubble|auto-c8-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K013.png": {
+      "cases": [
+        "glow-flash-yellow|res64-c4-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K014.png": {
+      "cases": [
+        "aa-tango-system-search|auto-c4-oklab-dither4x4"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K015.png": {
+      "cases": [
+        "anim:anim-kenney-explosion|pico8-c4-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K016.png": {
+      "cases": [
+        "fx-green-magic-32|res64-c4-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K017.png": {
+      "cases": [
+        "glow-flash-yellow|res64-c8-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K018.png": {
+      "cases": [
+        "soft-air-bubbles|auto-c4-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K019.png": {
+      "cases": [
+        "glow-orb-red|auto-c4-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K020.png": {
+      "cases": [
+        "anim:anim-rubberduck-magic|auto-c8-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K021.png": {
+      "cases": [
+        "glow-orb-red|res64-c4-oklab"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K022.png": {
+      "cases": [
+        "fx-black-smoke|auto-c8-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K023.png": {
+      "cases": [
+        "glow-light-64|pico8-c4-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K024.png": {
+      "cases": [
+        "aa-tango-face-smile|auto-c8-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K025.png": {
+      "cases": [
+        "anim:anim-rubberduck-magic|res64-c4-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K026.png": {
+      "cases": [
+        "anim:anim-kenney-explosion|auto-c4-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K027.png": {
+      "cases": [
+        "aa-tango-system-search|auto-c4-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K028.png": {
+      "cases": [
+        "fx-energy-star|auto-c4-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K029.png": {
+      "cases": [
+        "fade-radial-light|res64-c4-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K030.png": {
+      "cases": [
+        "aa-tango-system-search|auto-c8-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K031.png": {
+      "cases": [
+        "fx-green-magic-32|auto-c8-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K032.png": {
+      "cases": [
+        "glow-light-64|auto-c4-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K033.png": {
+      "cases": [
+        "anim:anim-rubberduck-magic|res64-c8-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K034.png": {
+      "cases": [
+        "glow-lens-flare|auto-c8-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K035.png": {
+      "cases": [
+        "anim:anim-para-fire|auto-c8-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K036.png": {
+      "cases": [
+        "soft-cloud|auto-c4-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K037.png": {
+      "cases": [
+        "soft-smoke-puff|auto-c8-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K038.png": {
+      "cases": [
+        "shadow-glass-orb|res64-c4-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K039.png": {
+      "cases": [
+        "fx-teleporter-burst|auto-c8-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K040.png": {
+      "cases": [
+        "soft-magic-ring|auto-c4-oklab"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K041.png": {
+      "cases": [
+        "fx-green-magic-32|pico8-c4-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K042.png": {
+      "cases": [
+        "aa-tango-face-smile|wall-auto-c4-oklab"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K043.png": {
+      "cases": [
+        "fade-island-shore|auto-c4-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K044.png": {
+      "cases": [
+        "glow-light-64|res64-c4-oklab"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K045.png": {
+      "cases": [
+        "soft-magic-ring|auto-c4-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K046.png": {
+      "cases": [
+        "fade-island-shore|auto-c8-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K047.png": {
+      "cases": [
+        "anim:anim-kenney-explosion|pico8-c4-oklab"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K048.png": {
+      "cases": [
+        "fx-green-magic-32|auto-c4-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K049.png": {
+      "cases": [
+        "aa-tango-system-search|res64-c4-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K050.png": {
+      "cases": [
+        "soft-magic-ring|auto-c8-oklab"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K051.png": {
+      "cases": [
+        "soft-smoke-puff|pico8-c4-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K052.png": {
+      "cases": [
+        "anim:anim-para-fire|auto-c8-oklab"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K053.png": {
+      "cases": [
+        "fx-energy-star|pico8-c4-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K054.png": {
+      "cases": [
+        "soft-magic-ring|auto-c8-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K055.png": {
+      "cases": [
+        "aa-tango-system-search|pico8-c4-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K056.png": {
+      "cases": [
+        "aa-tango-system-search|auto-c3-oklab"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K057.png": {
+      "cases": [
+        "soft-smoke-puff|auto-c4-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K058.png": {
+      "cases": [
+        "soft-magic-ring|auto-c4-oklab-dither4x4"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K059.png": {
+      "cases": [
+        "fx-energy-star|res64-c8-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K060.png": {
+      "cases": [
+        "shadow-glass-orb|auto-c8-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K061.png": {
+      "cases": [
+        "fade-radial-light|pico8-c4-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K062.png": {
+      "cases": [
+        "anim:anim-rubberduck-magic|auto-c4-oklab"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K063.png": {
+      "cases": [
+        "aa-tango-system-search|auto-c4-oklab"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K064.png": {
+      "cases": [
+        "fx-teleporter-burst|auto-c4-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K065.png": {
+      "cases": [
+        "fx-black-smoke|auto-c3-oklab"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K066.png": {
+      "cases": [
+        "glow-orb-red|auto-c8-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K067.png": {
+      "cases": [
+        "soft-air-bubbles|res64-c4-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K068.png": {
+      "cases": [
+        "soft-smoke-puff|res64-c4-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K069.png": {
+      "cases": [
+        "aa-tango-face-smile|res64-c4-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K070.png": {
+      "cases": [
+        "fade-trail-streak|auto-c4-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K071.png": {
+      "cases": [
+        "fx-black-smoke|auto-c4-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K072.png": {
+      "cases": [
+        "glow-lens-flare|auto-c4-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K073.png": {
+      "cases": [
+        "glow-flash-yellow|auto-c8-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K074.png": {
+      "cases": [
+        "fx-green-magic-32|res64-c8-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K075.png": {
+      "cases": [
+        "fx-black-smoke|auto-c4-oklab"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K076.png": {
+      "cases": [
+        "glow-lens-flare|res64-c4-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K077.png": {
+      "cases": [
+        "soft-bubble|auto-c4-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K078.png": {
+      "cases": [
+        "glow-orb-red|pico8-c4-oklab"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K079.png": {
+      "cases": [
+        "soft-air-bubbles|auto-c8-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K080.png": {
+      "cases": [
+        "anim:anim-rubberduck-magic|auto-c4-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K081.png": {
+      "cases": [
+        "glow-flash-yellow|auto-c4-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K082.png": {
+      "cases": [
+        "aa-magic-orbs-sheet|wall-auto-c4-oklab"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K083.png": {
+      "cases": [
+        "shadow-tree-topdown|auto-c8-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K084.png": {
+      "cases": [
+        "soft-air-bubbles|pico8-c4-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K085.png": {
+      "cases": [
+        "fade-radial-light|auto-c4-oklab"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K086.png": {
+      "cases": [
+        "glow-light-64|auto-c8-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K087.png": {
+      "cases": [
+        "fade-trail-streak|auto-c8-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K088.png": {
+      "cases": [
+        "aa-tango-face-smile|auto-c4-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K089.png": {
+      "cases": [
+        "aa-tango-face-smile|res64-c4-oklab"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K090.png": {
+      "cases": [
+        "fade-trail-streak|res64-c4-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K091.png": {
+      "cases": [
+        "aa-tango-face-smile|auto-c3-oklab"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K092.png": {
+      "cases": [
+        "fx-energy-star|res64-c4-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K093.png": {
+      "cases": [
+        "fade-radial-light|res64-c8-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K094.png": {
+      "cases": [
+        "fx-teleporter-burst|res64-c4-rgb"
+      ],
+      "P": "none",
+      "Q": "linear"
+    },
+    "K095.png": {
+      "cases": [
+        "aa-tango-face-smile|auto-c8-oklab"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K096.png": {
+      "cases": [
+        "fade-trail-streak|pico8-c4-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    },
+    "K097.png": {
+      "cases": [
+        "anim:anim-kenney-explosion|auto-c8-rgb"
+      ],
+      "P": "linear",
+      "Q": "none"
+    }
+  }
+}

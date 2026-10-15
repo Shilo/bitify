@@ -1,0 +1,1996 @@
+{
+ "summary": {
+  "real": {
+   "judgments": 108,
+   "none": {
+    "meanSeverity": 1.12,
+    "meaningful": 45,
+    "major": 4
+   },
+   "linear": {
+    "meanSeverity": 0.38,
+    "meaningful": 8,
+    "major": 0
+   },
+   "squared": {
+    "meanSeverity": 0.333,
+    "meaningful": 7,
+    "major": 0
+   },
+   "linearVsNone": {
+    "better": 57,
+    "worse": 5,
+    "tie": 46,
+    "worseMeaningful": [
+     "A:J040.png shadow-glass-orb|res64-c4-rgb none=1 linear=2"
+    ],
+    "betterMeaningful": [
+     "A:J001.png fade-trail-streak|res64-c4-oklab none=2 linear=1",
+     "A:J007.png soft-magic-ring|auto-c3-oklab none=2 linear=0",
+     "A:J014.png fade-radial-light|auto-c8-oklab none=2 linear=1",
+     "A:J018.png glow-flash-yellow|auto-c4-oklab none=2 linear=0",
+     "A:J019.png fx-energy-star|res64-c4-oklab none=2 linear=0",
+     "A:J025.png anim:anim-rubberduck-magic|auto-c8-oklab none=2 linear=1",
+     "A:J029.png glow-lens-flare|res64-c4-oklab none=2 linear=0",
+     "A:J036.png anim:anim-rubberduck-magic|pico8-c4-oklab none=2 linear=0",
+     "A:J037.png glow-light-64|auto-c4-oklab none=2 linear=0",
+     "A:J039.png fx-energy-star|auto-c4-oklab none=2 linear=0",
+     "A:J042.png aa-tango-face-smile|res64-c4-oklab none=2 linear=1",
+     "A:J045.png soft-magic-ring|auto-c4-oklab-dither4x4 none=2 linear=0",
+     "A:J051.png fx-energy-star|wall-auto-c4-oklab none=2 linear=0",
+     "A:J052.png glow-flash-yellow|wall-auto-c4-oklab none=2 linear=0",
+     "A:J058.png fade-radial-light|auto-c4-oklab none=2 linear=1",
+     "A:J059.png anim:anim-kenney-explosion|auto-c4-oklab none=2 linear=0",
+     "B:J004 aa-tango-face-smile|wall-auto-c4-oklab none=2 linear=1",
+     "B:J005 aa-tango-system-search|auto-c4-oklab none=2 linear=0",
+     "B:J006 fade-trail-streak|auto-c4-oklab none=2 linear=1",
+     "B:J009 anim:anim-rubberduck-magic|pico8-c4-oklab none=2 linear=0",
+     "B:J011 glow-light-64|auto-c8-oklab none=2 linear=0",
+     "B:J012 anim:anim-rubberduck-magic|wall-auto-c4-oklab none=2 linear=1",
+     "B:J017 fade-trail-streak|res64-c4-oklab none=2 linear=1",
+     "B:J018 fade-trail-streak|auto-c3-oklab none=2 linear=0",
+     "B:J021 anim:anim-rubberduck-magic|auto-c4-oklab none=2 linear=1",
+     "B:J025 fx-energy-star|pico8-c4-oklab none=3 linear=0",
+     "B:J027 aa-magic-orbs-sheet|wall-auto-c4-oklab none=2 linear=0",
+     "B:J028 aa-tango-face-smile|auto-c3-oklab none=3 linear=0",
+     "B:J029 glow-flash-yellow|auto-c8-oklab none=2 linear=0",
+     "B:J030 glow-orb-red|res64-c4-oklab none=2 linear=0",
+     "B:J032 fade-radial-light|res64-c4-oklab none=2 linear=1",
+     "B:J038 glow-flash-yellow|res64-c4-oklab none=2 linear=0",
+     "B:J042 fade-island-shore|res64-c4-oklab none=2 linear=0",
+     "B:J045 fade-radial-light|wall-auto-c4-oklab none=2 linear=1",
+     "B:J049 fx-energy-star|auto-c4-oklab none=2 linear=0",
+     "B:J053 aa-tango-system-search|auto-c4-oklab-dither4x4 none=2 linear=1",
+     "B:J054 glow-lens-flare|auto-c3-oklab none=3 linear=0",
+     "B:J055 glow-lens-flare|auto-c8-oklab none=2 linear=0",
+     "B:J056 glow-lens-flare|wall-auto-c4-oklab none=3 linear=2"
+    ]
+   },
+   "squaredVsNone": {
+    "better": 63,
+    "worse": 14,
+    "tie": 31,
+    "worseMeaningful": [
+     "A:J011.png shadow-glass-orb|pico8-c4-oklab none=0 squared=2",
+     "A:J013.png aa-tango-face-smile|pico8-c4-oklab none=0 squared=2",
+     "A:J040.png shadow-glass-orb|res64-c4-rgb none=1 squared=2",
+     "A:J044.png shadow-glass-orb|auto-c4-oklab none=0 squared=2",
+     "B:J035 soft-bubble|res64-c4-oklab none=1 squared=2",
+     "B:J058 shadow-glass-orb|res64-c4-oklab none=0 squared=2"
+    ],
+    "betterMeaningful": [
+     "A:J001.png fade-trail-streak|res64-c4-oklab none=2 squared=0",
+     "A:J007.png soft-magic-ring|auto-c3-oklab none=2 squared=1",
+     "A:J014.png fade-radial-light|auto-c8-oklab none=2 squared=0",
+     "A:J018.png glow-flash-yellow|auto-c4-oklab none=2 squared=0",
+     "A:J019.png fx-energy-star|res64-c4-oklab none=2 squared=1",
+     "A:J025.png anim:anim-rubberduck-magic|auto-c8-oklab none=2 squared=0",
+     "A:J029.png glow-lens-flare|res64-c4-oklab none=2 squared=0",
+     "A:J034.png glow-lens-flare|auto-c4-oklab none=2 squared=0",
+     "A:J036.png anim:anim-rubberduck-magic|pico8-c4-oklab none=2 squared=0",
+     "A:J037.png glow-light-64|auto-c4-oklab none=2 squared=0",
+     "A:J039.png fx-energy-star|auto-c4-oklab none=2 squared=0",
+     "A:J042.png aa-tango-face-smile|res64-c4-oklab none=2 squared=0",
+     "A:J045.png soft-magic-ring|auto-c4-oklab-dither4x4 none=2 squared=1",
+     "A:J051.png fx-energy-star|wall-auto-c4-oklab none=2 squared=0",
+     "A:J052.png glow-flash-yellow|wall-auto-c4-oklab none=2 squared=0",
+     "A:J054.png aa-tango-system-search|auto-c4-oklab-dither4x4 none=2 squared=0",
+     "A:J058.png fade-radial-light|auto-c4-oklab none=2 squared=0",
+     "A:J059.png anim:anim-kenney-explosion|auto-c4-oklab none=2 squared=0",
+     "B:J001 glow-lens-flare|pico8-c4-oklab none=2 squared=0",
+     "B:J004 aa-tango-face-smile|wall-auto-c4-oklab none=2 squared=1",
+     "B:J006 fade-trail-streak|auto-c4-oklab none=2 squared=0",
+     "B:J009 anim:anim-rubberduck-magic|pico8-c4-oklab none=2 squared=0",
+     "B:J010 fade-radial-light|pico8-c4-oklab none=2 squared=1",
+     "B:J011 glow-light-64|auto-c8-oklab none=2 squared=0",
+     "B:J012 anim:anim-rubberduck-magic|wall-auto-c4-oklab none=2 squared=1",
+     "B:J013 anim:anim-kenney-explosion|res64-c4-oklab none=2 squared=0",
+     "B:J017 fade-trail-streak|res64-c4-oklab none=2 squared=0",
+     "B:J018 fade-trail-streak|auto-c3-oklab none=2 squared=0",
+     "B:J021 anim:anim-rubberduck-magic|auto-c4-oklab none=2 squared=0",
+     "B:J025 fx-energy-star|pico8-c4-oklab none=3 squared=0",
+     "B:J027 aa-magic-orbs-sheet|wall-auto-c4-oklab none=2 squared=0",
+     "B:J028 aa-tango-face-smile|auto-c3-oklab none=3 squared=0",
+     "B:J029 glow-flash-yellow|auto-c8-oklab none=2 squared=0",
+     "B:J030 glow-orb-red|res64-c4-oklab none=2 squared=0",
+     "B:J032 fade-radial-light|res64-c4-oklab none=2 squared=1",
+     "B:J038 glow-flash-yellow|res64-c4-oklab none=2 squared=0",
+     "B:J041 aa-tango-system-search|res64-c4-oklab none=2 squared=0",
+     "B:J042 fade-island-shore|res64-c4-oklab none=2 squared=0",
+     "B:J045 fade-radial-light|wall-auto-c4-oklab none=2 squared=1",
+     "B:J049 fx-energy-star|auto-c4-oklab none=2 squared=0",
+     "B:J053 aa-tango-system-search|auto-c4-oklab-dither4x4 none=2 squared=0",
+     "B:J054 glow-lens-flare|auto-c3-oklab none=3 squared=0",
+     "B:J055 glow-lens-flare|auto-c8-oklab none=2 squared=0",
+     "B:J056 glow-lens-flare|wall-auto-c4-oklab none=3 squared=0"
+    ]
+   }
+  },
+  "synthetic": {
+   "judgments": 10,
+   "none": {
+    "meanSeverity": 1.1,
+    "meaningful": 4,
+    "major": 2
+   },
+   "linear": {
+    "meanSeverity": 0.4,
+    "meaningful": 1,
+    "major": 0
+   },
+   "squared": {
+    "meanSeverity": 0.6,
+    "meaningful": 1,
+    "major": 1
+   },
+   "linearVsNone": {
+    "better": 3,
+    "worse": 1,
+    "tie": 6,
+    "worseMeaningful": [],
+    "betterMeaningful": [
+     "B:J016 synthetic-opaque-core-alpha1-spill|auto-c3-oklab none=3 linear=0",
+     "B:J020 synthetic-all-soft-water-ramp|res64-c4-rgb none=2 linear=0",
+     "B:J048 synthetic-faint-green-spill|auto-c3-oklab none=3 linear=0"
+    ]
+   },
+   "squaredVsNone": {
+    "better": 3,
+    "worse": 3,
+    "tie": 4,
+    "worseMeaningful": [
+     "A:J032.png synthetic-intentional-cyan-halo|auto-c3-oklab none=2 squared=3"
+    ],
+    "betterMeaningful": [
+     "B:J016 synthetic-opaque-core-alpha1-spill|auto-c3-oklab none=3 squared=0",
+     "B:J020 synthetic-all-soft-water-ramp|res64-c4-rgb none=2 squared=0",
+     "B:J048 synthetic-faint-green-spill|auto-c3-oklab none=3 squared=0"
+    ]
+   }
+  },
+  "agreement": [
+   {
+    "sheet": "sheet-0132.png",
+    "caseId": "fade-trail-streak|res64-c4-oklab",
+    "A": {
+     "none": 2,
+     "linear": 1,
+     "squared": 0
+    },
+    "B": {
+     "none": 2,
+     "linear": 1,
+     "squared": 0
+    }
+   },
+   {
+    "sheet": "sheet-0136.png",
+    "caseId": "fade-trail-streak|pico8-c4-oklab",
+    "A": {
+     "linear": 0,
+     "squared": 1,
+     "none": 0
+    },
+    "B": {
+     "linear": 1,
+     "squared": 1,
+     "none": 1
+    }
+   },
+   {
+    "sheet": "sheet-0080.png",
+    "caseId": "aa-tango-face-smile|res64-c4-rgb",
+    "A": {
+     "squared": 0,
+     "linear": 0,
+     "none": 1
+    },
+    "B": {
+     "squared": 0,
+     "linear": 0,
+     "none": 1
+    }
+   },
+   {
+    "sheet": "sheet-0267.png",
+    "caseId": "synthetic-all-soft-water-ramp|res64-c4-rgb",
+    "A": {
+     "squared": 0,
+     "none": 0,
+     "linear": 0
+    },
+    "B": {
+     "squared": 0,
+     "none": 2,
+     "linear": 0
+    }
+   },
+   {
+    "sheet": "sheet-0230.png",
+    "caseId": "soft-air-bubbles|res64-c4-oklab",
+    "A": {
+     "none": 0,
+     "squared": 0,
+     "linear": 0
+    },
+    "B": {
+     "none": 0,
+     "squared": 0,
+     "linear": 0
+    }
+   },
+   {
+    "sheet": "sheet-0282.png",
+    "caseId": "anim:anim-rubberduck-magic|pico8-c4-oklab",
+    "A": {
+     "linear": 0,
+     "squared": 0,
+     "none": 2
+    },
+    "B": {
+     "linear": 0,
+     "squared": 0,
+     "none": 2
+    }
+   },
+   {
+    "sheet": "sheet-0172.png",
+    "caseId": "fx-energy-star|auto-c4-oklab",
+    "A": {
+     "none": 2,
+     "squared": 0,
+     "linear": 0
+    },
+    "B": {
+     "none": 2,
+     "squared": 0,
+     "linear": 0
+    }
+   },
+   {
+    "sheet": "sheet-0242.png",
+    "caseId": "soft-bubble|res64-c4-oklab",
+    "A": {
+     "linear": 1,
+     "squared": 1,
+     "none": 1
+    },
+    "B": {
+     "linear": 1,
+     "squared": 2,
+     "none": 1
+    }
+   },
+   {
+    "sheet": "sheet-0066.png",
+    "caseId": "shadow-glass-orb|res64-c4-oklab",
+    "A": {
+     "none": 0,
+     "squared": 1,
+     "linear": 0
+    },
+    "B": {
+     "none": 0,
+     "squared": 2,
+     "linear": 0
+    }
+   },
+   {
+    "sheet": "sheet-0096.png",
+    "caseId": "aa-tango-system-search|auto-c4-oklab-dither4x4",
+    "A": {
+     "squared": 0,
+     "none": 2,
+     "linear": 2
+    },
+    "B": {
+     "squared": 0,
+     "none": 2,
+     "linear": 1
+    }
+   },
+   {
+    "sheet": "sheet-0031.png",
+    "caseId": "glow-flash-yellow|auto-c8-oklab",
+    "A": {
+     "squared": 0,
+     "linear": 0,
+     "none": 1
+    },
+    "B": {
+     "squared": 0,
+     "linear": 0,
+     "none": 2
+    }
+   },
+   {
+    "sheet": "sheet-0062.png",
+    "caseId": "shadow-glass-orb|auto-c8-oklab",
+    "A": {
+     "linear": 0,
+     "squared": 0,
+     "none": 0
+    },
+    "B": {
+     "linear": 0,
+     "squared": 0,
+     "none": 0
+    }
+   }
+  ]
+ },
+ "rows": [
+  {
+   "judge": "A",
+   "file": "J001.png",
+   "sheet": "sheet-0132.png",
+   "caseId": "fade-trail-streak|res64-c4-oklab",
+   "category": "fade",
+   "setting": "res64-c4-oklab",
+   "sev": {
+    "none": 2,
+    "linear": 1,
+    "squared": 0
+   },
+   "note": "Source is a neutral white-hot streak; Z keeps a white hot center, X and Y flatten it to a mint plateau (X adds a pink fringe)."
+  },
+  {
+   "judge": "A",
+   "file": "J002.png",
+   "sheet": "sheet-0136.png",
+   "caseId": "fade-trail-streak|pico8-c4-oklab",
+   "category": "fade",
+   "setting": "pico8-c4-oklab",
+   "sev": {
+    "linear": 0,
+    "squared": 1,
+    "none": 0
+   },
+   "note": "X/Z stay neutral gray but a little dim; Y keeps a brighter core but tints it peach with a lavender ring."
+  },
+  {
+   "judge": "A",
+   "file": "J003.png",
+   "sheet": "sheet-0260.png",
+   "caseId": "synthetic-all-soft-water-ramp|auto-c3-oklab",
+   "category": "synthetic-counterexample",
+   "setting": "auto-c3-oklab",
+   "sev": {
+    "linear": 0,
+    "squared": 0,
+    "none": 0
+   },
+   "note": "Synthetic ramp: all three band into blue/lavender/mauve with different band boundaries; no clear winner, all lose the tan corner."
+  },
+  {
+   "judge": "A",
+   "file": "J004.png",
+   "sheet": "sheet-0150.png",
+   "caseId": "fx-green-magic-32|auto-c4-oklab",
+   "category": "effect",
+   "setting": "auto-c4-oklab",
+   "sev": {
+    "none": 0,
+    "linear": 0,
+    "squared": 0
+   },
+   "note": "Indistinguishable at 4x zoom."
+  },
+  {
+   "judge": "A",
+   "file": "J005.png",
+   "sheet": "sheet-0226.png",
+   "caseId": "soft-air-bubbles|auto-c8-oklab",
+   "category": "all-soft",
+   "setting": "auto-c8-oklab",
+   "sev": {
+    "squared": 0,
+    "none": 0,
+    "linear": 0
+   },
+   "note": "Indistinguishable; faint bubble rings preserved by all."
+  },
+  {
+   "judge": "A",
+   "file": "J006.png",
+   "sheet": "sheet-0025.png",
+   "caseId": "glow-light-64|pico8-c4-oklab",
+   "category": "glow",
+   "setting": "pico8-c4-oklab",
+   "sev": {
+    "none": 1,
+    "squared": 0,
+    "linear": 0
+   },
+   "note": "All share the large loss (cyan core to blue, white rays to gray); Y/Z keep two white highlight specks that X loses."
+  },
+  {
+   "judge": "A",
+   "file": "J007.png",
+   "sheet": "sheet-0211.png",
+   "caseId": "soft-magic-ring|auto-c3-oklab",
+   "category": "all-soft",
+   "setting": "auto-c3-oklab",
+   "sev": {
+    "squared": 1,
+    "linear": 0,
+    "none": 2
+   },
+   "note": "Z renders the white ring linework as dim/dark gray with dark blobs in ring centers; X has small center spots; Y closest."
+  },
+  {
+   "judge": "A",
+   "file": "J008.png",
+   "sheet": "sheet-0218.png",
+   "caseId": "soft-magic-ring|res64-c4-oklab",
+   "category": "all-soft",
+   "setting": "res64-c4-oklab",
+   "sev": {
+    "linear": 0,
+    "none": 1,
+    "squared": 1
+   },
+   "note": "Very close; only small tints/specks."
+  },
+  {
+   "judge": "A",
+   "file": "J009.png",
+   "sheet": "sheet-0080.png",
+   "caseId": "aa-tango-face-smile|res64-c4-rgb",
+   "category": "antialiased",
+   "setting": "res64-c4-rgb",
+   "sev": {
+    "squared": 0,
+    "linear": 0,
+    "none": 1
+   },
+   "note": "Z draws a heavier maroon outline ring than the golden-brown source rim (but darker eyes); X/Y softer, X shows a faint yellowish shadow haze on black."
+  },
+  {
+   "judge": "A",
+   "file": "J010.png",
+   "sheet": "sheet-0152.png",
+   "caseId": "fx-green-magic-32|auto-c8-oklab",
+   "category": "effect",
+   "setting": "auto-c8-oklab",
+   "sev": {
+    "none": 0,
+    "linear": 0,
+    "squared": 0
+   },
+   "note": "Indistinguishable."
+  },
+  {
+   "judge": "A",
+   "file": "J011.png",
+   "sheet": "sheet-0069.png",
+   "caseId": "shadow-glass-orb|pico8-c4-oklab",
+   "category": "shadow",
+   "setting": "pico8-c4-oklab",
+   "sev": {
+    "squared": 2,
+    "none": 0,
+    "linear": 0
+   },
+   "note": "X turns the neutral gray contact shadow peach/brown; Y/Z keep it gray-lavender. Orb body banding equal."
+  },
+  {
+   "judge": "A",
+   "file": "J012.png",
+   "sheet": "sheet-0196.png",
+   "caseId": "soft-cloud|auto-c8-oklab",
+   "category": "all-soft",
+   "setting": "auto-c8-oklab",
+   "sev": {
+    "linear": 0,
+    "none": 0,
+    "squared": 0
+   },
+   "note": "Indistinguishable; pale blue cloud preserved."
+  },
+  {
+   "judge": "A",
+   "file": "J013.png",
+   "sheet": "sheet-0081.png",
+   "caseId": "aa-tango-face-smile|pico8-c4-oklab",
+   "category": "antialiased",
+   "setting": "pico8-c4-oklab",
+   "sev": {
+    "squared": 2,
+    "linear": 0,
+    "none": 0
+   },
+   "note": "X makes the eyes navy blue and gives a blue soft shadow; Y/Z keep dark red-black eyes."
+  },
+  {
+   "judge": "A",
+   "file": "J014.png",
+   "sheet": "sheet-0114.png",
+   "caseId": "fade-radial-light|auto-c8-oklab",
+   "category": "fade",
+   "setting": "auto-c8-oklab",
+   "sev": {
+    "linear": 1,
+    "squared": 0,
+    "none": 2
+   },
+   "note": "Y keeps a small hot white core; X a wider flat center; Z a large flat plateau with smeared rings and stray light specks."
+  },
+  {
+   "judge": "A",
+   "file": "J015.png",
+   "sheet": "sheet-0220.png",
+   "caseId": "soft-magic-ring|pico8-c4-oklab",
+   "category": "all-soft",
+   "setting": "pico8-c4-oklab",
+   "sev": {
+    "none": 1,
+    "linear": 1,
+    "squared": 0
+   },
+   "note": "Z keeps the rings brighter white; X/Y render them dim beige-gray."
+  },
+  {
+   "judge": "A",
+   "file": "J016.png",
+   "sheet": "sheet-0103.png",
+   "caseId": "fade-island-shore|auto-c4-oklab",
+   "category": "fade",
+   "setting": "auto-c4-oklab",
+   "sev": {
+    "squared": 0,
+    "linear": 0,
+    "none": 0
+   },
+   "note": "All lose teal shore and orange accents to dark green/beige equally (palette limit)."
+  },
+  {
+   "judge": "A",
+   "file": "J017.png",
+   "sheet": "sheet-0163.png",
+   "caseId": "fx-sparks-64|auto-c4-oklab",
+   "category": "effect",
+   "setting": "auto-c4-oklab",
+   "sev": {
+    "linear": 0,
+    "none": 0,
+    "squared": 0
+   },
+   "note": "Indistinguishable."
+  },
+  {
+   "judge": "A",
+   "file": "J018.png",
+   "sheet": "sheet-0029.png",
+   "caseId": "glow-flash-yellow|auto-c4-oklab",
+   "category": "glow",
+   "setting": "auto-c4-oklab",
+   "sev": {
+    "linear": 0,
+    "squared": 0,
+    "none": 2
+   },
+   "note": "Z flattens the core into one big cream plateau and loses the saturated yellow ring; X/Y keep graded yellow rings."
+  },
+  {
+   "judge": "A",
+   "file": "J019.png",
+   "sheet": "sheet-0178.png",
+   "caseId": "fx-energy-star|res64-c4-oklab",
+   "category": "effect",
+   "setting": "res64-c4-oklab",
+   "sev": {
+    "squared": 1,
+    "linear": 0,
+    "none": 2
+   },
+   "note": "Z turns orange spark accents gray-brown and the rim lime-yellow; Y keeps orange accents best."
+  },
+  {
+   "judge": "A",
+   "file": "J020.png",
+   "sheet": "sheet-0142.png",
+   "caseId": "fx-teleporter-burst|auto-c8-oklab",
+   "category": "effect",
+   "setting": "auto-c8-oklab",
+   "sev": {
+    "none": 1,
+    "squared": 0,
+    "linear": 0
+   },
+   "note": "X adds oversaturated cyan particles where the source fades blue to pale cyan; Y/Z closer."
+  },
+  {
+   "judge": "A",
+   "file": "J021.png",
+   "sheet": "sheet-0267.png",
+   "caseId": "synthetic-all-soft-water-ramp|res64-c4-rgb",
+   "category": "synthetic-counterexample",
+   "setting": "res64-c4-rgb",
+   "sev": {
+    "squared": 0,
+    "none": 0,
+    "linear": 0
+   },
+   "note": "Synthetic ramp: all add khaki and saturated lavender regions; different band layouts, no clear winner."
+  },
+  {
+   "judge": "A",
+   "file": "J022.png",
+   "sheet": "sheet-0012.png",
+   "caseId": "glow-orb-red|pico8-c4-oklab",
+   "category": "glow",
+   "setting": "pico8-c4-oklab",
+   "sev": {
+    "none": 1,
+    "linear": 0,
+    "squared": 0
+   },
+   "note": "PICO-8 tradeoff, all meaningfully off vs source: X reads magenta-pink rim with plum core; Y/Z read warmer orange/brown/plum with an orange outer glow; Y and Z nearly identical."
+  },
+  {
+   "judge": "A",
+   "file": "J023.png",
+   "sheet": "sheet-0255.png",
+   "caseId": "synthetic-many-soft-colors|res64-c4-rgb",
+   "category": "synthetic-counterexample",
+   "setting": "res64-c4-rgb",
+   "sev": {
+    "linear": 1,
+    "squared": 1,
+    "none": 1
+   },
+   "note": "Synthetic high-entropy: X/Y use green/maroon/lavender/beige, Z uses lime/pink/blue/slate; no clear winner."
+  },
+  {
+   "judge": "A",
+   "file": "J024.png",
+   "sheet": "sheet-0002.png",
+   "caseId": "glow-orb-red|auto-c4-oklab",
+   "category": "glow",
+   "setting": "auto-c4-oklab",
+   "sev": {
+    "linear": 1,
+    "none": 0,
+    "squared": 1
+   },
+   "note": "Y keeps vivid orange rim strokes; X has a darker core; Z has a nicer core gradient but pale salmon rim."
+  },
+  {
+   "judge": "A",
+   "file": "J025.png",
+   "sheet": "sheet-0274.png",
+   "caseId": "anim:anim-rubberduck-magic|auto-c8-oklab",
+   "category": "animation",
+   "setting": "auto-c8-oklab",
+   "sev": {
+    "linear": 1,
+    "squared": 0,
+    "none": 2
+   },
+   "note": "Z loses the cyan hue of frame 2 and the yellow specks of frame 4; Y keeps both best."
+  },
+  {
+   "judge": "A",
+   "file": "J026.png",
+   "sheet": "sheet-0206.png",
+   "caseId": "soft-smoke-puff|res64-c4-oklab",
+   "category": "all-soft",
+   "setting": "res64-c4-oklab",
+   "sev": {
+    "linear": 1,
+    "none": 1,
+    "squared": 0
+   },
+   "note": "Z keeps the bright highlight puffs at top (mint-tinted); X/Y flatten them to mid teal-gray. All add a mauve tint."
+  },
+  {
+   "judge": "A",
+   "file": "J027.png",
+   "sheet": "sheet-0230.png",
+   "caseId": "soft-air-bubbles|res64-c4-oklab",
+   "category": "all-soft",
+   "setting": "res64-c4-oklab",
+   "sev": {
+    "none": 0,
+    "squared": 0,
+    "linear": 0
+   },
+   "note": "Indistinguishable."
+  },
+  {
+   "judge": "A",
+   "file": "J028.png",
+   "sheet": "sheet-0147.png",
+   "caseId": "fx-teleporter-burst|pico8-c4-oklab",
+   "category": "effect",
+   "setting": "pico8-c4-oklab",
+   "sev": {
+    "none": 0,
+    "squared": 1,
+    "linear": 0
+   },
+   "note": "All lose indigo (to gray) and cyan (to peach-white) under PICO-8; Y additionally grays some lower particles."
+  },
+  {
+   "judge": "A",
+   "file": "J029.png",
+   "sheet": "sheet-0049.png",
+   "caseId": "glow-lens-flare|res64-c4-oklab",
+   "category": "glow",
+   "setting": "res64-c4-oklab",
+   "sev": {
+    "none": 2,
+    "linear": 0,
+    "squared": 0
+   },
+   "note": "X turns the white flare core yellow-olive with greenish rings; Y/Z keep a near-white (mint) core."
+  },
+  {
+   "judge": "A",
+   "file": "J030.png",
+   "sheet": "sheet-0300.png",
+   "caseId": "anim:anim-kenney-explosion|pico8-c4-oklab",
+   "category": "animation",
+   "setting": "pico8-c4-oklab",
+   "sev": {
+    "squared": 1,
+    "none": 0,
+    "linear": 1
+   },
+   "note": "X/Z tint the outer smoke plum/purple; Y keeps it warmer brown/salmon, closer to source. Cores identical."
+  },
+  {
+   "judge": "A",
+   "file": "J031.png",
+   "sheet": "sheet-0294.png",
+   "caseId": "anim:anim-kenney-explosion|auto-c8-oklab",
+   "category": "animation",
+   "setting": "auto-c8-oklab",
+   "sev": {
+    "squared": 0,
+    "linear": 0,
+    "none": 1
+   },
+   "note": "Z collapses core gradation into a flat lemon plateau with a hard red ring; X/Y keep more steps."
+  },
+  {
+   "judge": "A",
+   "file": "J032.png",
+   "sheet": "sheet-0259.png",
+   "caseId": "synthetic-intentional-cyan-halo|auto-c3-oklab",
+   "category": "synthetic-counterexample",
+   "setting": "auto-c3-oklab",
+   "sev": {
+    "linear": 2,
+    "none": 2,
+    "squared": 3
+   },
+   "note": "Explicit tradeoff: X/Y keep the intentional cyan halo but recolor the opaque tan rings cyan; Z repairs the opaque tan core but loses the cyan halo, which dominates the image."
+  },
+  {
+   "judge": "A",
+   "file": "J033.png",
+   "sheet": "sheet-0086.png",
+   "caseId": "aa-tango-system-search|auto-c8-oklab",
+   "category": "antialiased",
+   "setting": "auto-c8-oklab",
+   "sev": {
+    "squared": 0,
+    "none": 0,
+    "linear": 0
+   },
+   "note": "All lose some light-blue lens fill on white equally; otherwise the same."
+  },
+  {
+   "judge": "A",
+   "file": "J034.png",
+   "sheet": "sheet-0043.png",
+   "caseId": "glow-lens-flare|auto-c4-oklab",
+   "category": "glow",
+   "setting": "auto-c4-oklab",
+   "sev": {
+    "linear": 2,
+    "squared": 0,
+    "none": 2
+   },
+   "note": "Y keeps the white star core; X and Z flatten it, and Z even reads as a dark spot on white."
+  },
+  {
+   "judge": "A",
+   "file": "J035.png",
+   "sheet": "sheet-0261.png",
+   "caseId": "synthetic-all-soft-water-ramp|auto-c4-oklab",
+   "category": "synthetic-counterexample",
+   "setting": "auto-c4-oklab",
+   "sev": {
+    "squared": 0,
+    "none": 0,
+    "linear": 0
+   },
+   "note": "Synthetic ramp: different band layouts, comparable faithfulness."
+  },
+  {
+   "judge": "A",
+   "file": "J036.png",
+   "sheet": "sheet-0282.png",
+   "caseId": "anim:anim-rubberduck-magic|pico8-c4-oklab",
+   "category": "animation",
+   "setting": "pico8-c4-oklab",
+   "sev": {
+    "linear": 0,
+    "squared": 0,
+    "none": 2
+   },
+   "note": "Z turns the yellow first-frame burst entirely peach; X/Y keep yellow. All lose frame-2 cyan."
+  },
+  {
+   "judge": "A",
+   "file": "J037.png",
+   "sheet": "sheet-0015.png",
+   "caseId": "glow-light-64|auto-c4-oklab",
+   "category": "glow",
+   "setting": "auto-c4-oklab",
+   "sev": {
+    "linear": 0,
+    "squared": 0,
+    "none": 2
+   },
+   "note": "Z grays the cyan core into a pale uniform blue blob (borderline major); X/Y keep a cyan core and ray structure."
+  },
+  {
+   "judge": "A",
+   "file": "J038.png",
+   "sheet": "sheet-0075.png",
+   "caseId": "aa-tango-face-smile|auto-c8-oklab",
+   "category": "antialiased",
+   "setting": "auto-c8-oklab",
+   "sev": {
+    "none": 0,
+    "squared": 0,
+    "linear": 0
+   },
+   "note": "Near identical; tiny highlight-band differences."
+  },
+  {
+   "judge": "A",
+   "file": "J039.png",
+   "sheet": "sheet-0172.png",
+   "caseId": "fx-energy-star|auto-c4-oklab",
+   "category": "effect",
+   "setting": "auto-c4-oklab",
+   "sev": {
+    "none": 2,
+    "squared": 0,
+    "linear": 0
+   },
+   "note": "X flattens the white core and yellow rim into one pale cream fill; Y/Z keep a white core with a yellow rim."
+  },
+  {
+   "judge": "A",
+   "file": "J040.png",
+   "sheet": "sheet-0067.png",
+   "caseId": "shadow-glass-orb|res64-c4-rgb",
+   "category": "shadow",
+   "setting": "res64-c4-rgb",
+   "sev": {
+    "squared": 2,
+    "none": 1,
+    "linear": 2
+   },
+   "note": "X/Z tint the gray shadow pink; Y keeps the shadow gray but adds a rust-brown body band."
+  },
+  {
+   "judge": "A",
+   "file": "J041.png",
+   "sheet": "sheet-0242.png",
+   "caseId": "soft-bubble|res64-c4-oklab",
+   "category": "all-soft",
+   "setting": "res64-c4-oklab",
+   "sev": {
+    "linear": 1,
+    "squared": 1,
+    "none": 1
+   },
+   "note": "All add a false colored accent arc to the neutral bubble rim; different colors, similar severity."
+  },
+  {
+   "judge": "A",
+   "file": "J042.png",
+   "sheet": "sheet-0079.png",
+   "caseId": "aa-tango-face-smile|res64-c4-oklab",
+   "category": "antialiased",
+   "setting": "res64-c4-oklab",
+   "sev": {
+    "squared": 0,
+    "none": 2,
+    "linear": 1
+   },
+   "note": "X keeps a saturated orange face; Z is darker rust; Y has a dull tan/salmon body with an olive outline."
+  },
+  {
+   "judge": "A",
+   "file": "J043.png",
+   "sheet": "sheet-0128.png",
+   "caseId": "fade-trail-streak|auto-c8-oklab",
+   "category": "fade",
+   "setting": "auto-c8-oklab",
+   "sev": {
+    "none": 1,
+    "linear": 1,
+    "squared": 0
+   },
+   "note": "Z keeps a narrow bright core; X flattens it most."
+  },
+  {
+   "judge": "A",
+   "file": "J044.png",
+   "sheet": "sheet-0060.png",
+   "caseId": "shadow-glass-orb|auto-c4-oklab",
+   "category": "shadow",
+   "setting": "auto-c4-oklab",
+   "sev": {
+    "squared": 2,
+    "linear": 0,
+    "none": 0
+   },
+   "note": "X turns the gray contact shadow pink; Y/Z keep it gray."
+  },
+  {
+   "judge": "A",
+   "file": "J045.png",
+   "sheet": "sheet-0222.png",
+   "caseId": "soft-magic-ring|auto-c4-oklab-dither4x4",
+   "category": "all-soft",
+   "setting": "auto-c4-oklab-dither4x4",
+   "sev": {
+    "squared": 1,
+    "none": 2,
+    "linear": 0
+   },
+   "note": "Dithered: Z has the cleanest/brightest lines; Y dims the rings and adds dark speckle."
+  },
+  {
+   "judge": "A",
+   "file": "J046.png",
+   "sheet": "sheet-0004.png",
+   "caseId": "glow-orb-red|auto-c8-oklab",
+   "category": "glow",
+   "setting": "auto-c8-oklab",
+   "sev": {
+    "squared": 0,
+    "none": 0,
+    "linear": 0
+   },
+   "note": "Near identical."
+  },
+  {
+   "judge": "A",
+   "file": "J047.png",
+   "sheet": "sheet-0066.png",
+   "caseId": "shadow-glass-orb|res64-c4-oklab",
+   "category": "shadow",
+   "setting": "res64-c4-oklab",
+   "sev": {
+    "none": 0,
+    "squared": 1,
+    "linear": 0
+   },
+   "note": "All shadows slightly warm; Y's is noticeably browner/pinker."
+  },
+  {
+   "judge": "A",
+   "file": "J048.png",
+   "sheet": "sheet-0174.png",
+   "caseId": "fx-energy-star|auto-c8-oklab",
+   "category": "effect",
+   "setting": "auto-c8-oklab",
+   "sev": {
+    "squared": 0,
+    "none": 1,
+    "linear": 1
+   },
+   "note": "X keeps a white core; Y (and slightly Z) tint it cream."
+  },
+  {
+   "judge": "A",
+   "file": "J049.png",
+   "sheet": "sheet-0159.png",
+   "caseId": "fx-green-magic-32|pico8-c4-oklab",
+   "category": "effect",
+   "setting": "pico8-c4-oklab",
+   "sev": {
+    "squared": 0,
+    "linear": 0,
+    "none": 0
+   },
+   "note": "Near identical (X/Y have one extra light pixel)."
+  },
+  {
+   "judge": "A",
+   "file": "J050.png",
+   "sheet": "sheet-0224.png",
+   "caseId": "soft-air-bubbles|auto-c4-oklab",
+   "category": "all-soft",
+   "setting": "auto-c4-oklab",
+   "sev": {
+    "squared": 0,
+    "linear": 0,
+    "none": 0
+   },
+   "note": "Indistinguishable."
+  },
+  {
+   "judge": "A",
+   "file": "J051.png",
+   "sheet": "sheet-0333.png",
+   "caseId": "fx-energy-star|wall-auto-c4-oklab",
+   "category": "effect",
+   "setting": "wall-auto-c4-oklab",
+   "sev": {
+    "linear": 0,
+    "squared": 0,
+    "none": 2
+   },
+   "note": "Shared wall palette: Z flattens the burst to a uniform cream fill; X/Y keep the white core and yellow rim."
+  },
+  {
+   "judge": "A",
+   "file": "J052.png",
+   "sheet": "sheet-0305.png",
+   "caseId": "glow-flash-yellow|wall-auto-c4-oklab",
+   "category": "glow",
+   "setting": "wall-auto-c4-oklab",
+   "sev": {
+    "linear": 0,
+    "squared": 0,
+    "none": 2
+   },
+   "note": "Shared wall palette: Z has a flat cream plateau and loses the saturated yellow ring; X/Y keep graded rings."
+  },
+  {
+   "judge": "A",
+   "file": "J053.png",
+   "sheet": "sheet-0165.png",
+   "caseId": "fx-sparks-64|auto-c8-oklab",
+   "category": "effect",
+   "setting": "auto-c8-oklab",
+   "sev": {
+    "squared": 0,
+    "none": 0,
+    "linear": 0
+   },
+   "note": "Indistinguishable."
+  },
+  {
+   "judge": "A",
+   "file": "J054.png",
+   "sheet": "sheet-0096.png",
+   "caseId": "aa-tango-system-search|auto-c4-oklab-dither4x4",
+   "category": "antialiased",
+   "setting": "auto-c4-oklab-dither4x4",
+   "sev": {
+    "squared": 0,
+    "none": 2,
+    "linear": 2
+   },
+   "note": "Dithered: X keeps the handle/frame gray (lens less blue); Y has the best blue lens but a blue handle; Z has a blue handle plus noise."
+  },
+  {
+   "judge": "A",
+   "file": "J055.png",
+   "sheet": "sheet-0031.png",
+   "caseId": "glow-flash-yellow|auto-c8-oklab",
+   "category": "glow",
+   "setting": "auto-c8-oklab",
+   "sev": {
+    "squared": 0,
+    "linear": 0,
+    "none": 1
+   },
+   "note": "Z has a flatter core and harsher bands; X/Y close to source."
+  },
+  {
+   "judge": "A",
+   "file": "J056.png",
+   "sheet": "sheet-0062.png",
+   "caseId": "shadow-glass-orb|auto-c8-oklab",
+   "category": "shadow",
+   "setting": "auto-c8-oklab",
+   "sev": {
+    "linear": 0,
+    "squared": 0,
+    "none": 0
+   },
+   "note": "Indistinguishable; shadow gray in all."
+  },
+  {
+   "judge": "A",
+   "file": "J057.png",
+   "sheet": "sheet-0140.png",
+   "caseId": "fx-teleporter-burst|auto-c4-oklab",
+   "category": "effect",
+   "setting": "auto-c4-oklab",
+   "sev": {
+    "linear": 0,
+    "squared": 0,
+    "none": 1
+   },
+   "note": "Z adds vivid cyan particles; X/Y are closer to the source blue-to-pale-cyan fade."
+  },
+  {
+   "judge": "A",
+   "file": "J058.png",
+   "sheet": "sheet-0112.png",
+   "caseId": "fade-radial-light|auto-c4-oklab",
+   "category": "fade",
+   "setting": "auto-c4-oklab",
+   "sev": {
+    "none": 2,
+    "squared": 0,
+    "linear": 1
+   },
+   "note": "Y keeps a bright central disk; X inverts the hot center into a gray dip."
+  },
+  {
+   "judge": "A",
+   "file": "J059.png",
+   "sheet": "sheet-0292.png",
+   "caseId": "anim:anim-kenney-explosion|auto-c4-oklab",
+   "category": "animation",
+   "setting": "auto-c4-oklab",
+   "sev": {
+    "squared": 0,
+    "none": 2,
+    "linear": 0
+   },
+   "note": "Y loses the yellow hot core in every frame; X/Z keep a yellow core with orange/red rings."
+  },
+  {
+   "judge": "B",
+   "file": "J001",
+   "sheet": "sheet-0052.png",
+   "caseId": "glow-lens-flare|pico8-c4-oklab",
+   "category": "glow",
+   "setting": "pico8-c4-oklab",
+   "sev": {
+    "squared": 0,
+    "none": 2,
+    "linear": 2
+   },
+   "note": "X keeps a bright star-shaped hotspot (slightly peach); Y and Z flatten the core into a dim gray disk. All three add a brownish halo ring."
+  },
+  {
+   "judge": "B",
+   "file": "J002",
+   "sheet": "sheet-0214.png",
+   "caseId": "soft-magic-ring|auto-c8-oklab",
+   "category": "all-soft",
+   "setting": "auto-c8-oklab",
+   "sev": {
+    "none": 1,
+    "linear": 0,
+    "squared": 1
+   },
+   "note": "Nearly indistinguishable; X and Z nodes have slightly darker gray centers on white."
+  },
+  {
+   "judge": "B",
+   "file": "J003",
+   "sheet": "sheet-0200.png",
+   "caseId": "soft-smoke-puff|auto-c4-oklab",
+   "category": "all-soft",
+   "setting": "auto-c4-oklab",
+   "sev": {
+    "none": 1,
+    "linear": 0,
+    "squared": 0
+   },
+   "note": "All posterize the smoke. X flattens the bright highlight blobs into a more uniform mid-gray; Y and Z keep more highlight levels and Z keeps slightly more outer haze."
+  },
+  {
+   "judge": "B",
+   "file": "J004",
+   "sheet": "sheet-0317.png",
+   "caseId": "aa-tango-face-smile|wall-auto-c4-oklab",
+   "category": "antialiased",
+   "setting": "wall-auto-c4-oklab",
+   "sev": {
+    "linear": 1,
+    "none": 2,
+    "squared": 1
+   },
+   "note": "Z has the most saturated orange body. X has dark eyes but a cold blue-black lower rim. Y washes the body to pale tan and loses the saturated orange. Z's soft shadow turns orange-brown on black."
+  },
+  {
+   "judge": "B",
+   "file": "J005",
+   "sheet": "sheet-0084.png",
+   "caseId": "aa-tango-system-search|auto-c4-oklab",
+   "category": "antialiased",
+   "setting": "auto-c4-oklab",
+   "sev": {
+    "none": 2,
+    "linear": 0,
+    "squared": 2
+   },
+   "note": "Y keeps the blue glass lens and a gray handle. X turns the handle blue and adds a dotted dark inner ring. Z loses the lens's blue translucent tint, which becomes gray."
+  },
+  {
+   "judge": "B",
+   "file": "J006",
+   "sheet": "sheet-0126.png",
+   "caseId": "fade-trail-streak|auto-c4-oklab",
+   "category": "fade",
+   "setting": "auto-c4-oklab",
+   "sev": {
+    "linear": 1,
+    "none": 2,
+    "squared": 0
+   },
+   "note": "Z keeps a tight white hot core. X is bright but broader and banded. Y dims the core to mid-gray, so it reads as a dark streak on white."
+  },
+  {
+   "judge": "B",
+   "file": "J007",
+   "sheet": "sheet-0236.png",
+   "caseId": "soft-bubble|auto-c4-oklab",
+   "category": "all-soft",
+   "setting": "auto-c4-oklab",
+   "sev": {
+    "squared": 1,
+    "linear": 0,
+    "none": 1
+   },
+   "note": "Y keeps a faint cool film. X makes the film neutral or slightly warm. Z keeps the cool film but adds a saturated teal arc on the rim."
+  },
+  {
+   "judge": "B",
+   "file": "J008",
+   "sheet": "sheet-0073.png",
+   "caseId": "aa-tango-face-smile|auto-c4-oklab",
+   "category": "antialiased",
+   "setting": "auto-c4-oklab",
+   "sev": {
+    "squared": 0,
+    "linear": 0,
+    "none": 1
+   },
+   "note": "X and Y are near-identical, with a yellow face highlight. Z turns the highlight peach-pink."
+  },
+  {
+   "judge": "B",
+   "file": "J009",
+   "sheet": "sheet-0282.png",
+   "caseId": "anim:anim-rubberduck-magic|pico8-c4-oklab",
+   "category": "animation",
+   "setting": "pico8-c4-oklab",
+   "sev": {
+    "linear": 0,
+    "squared": 0,
+    "none": 2
+   },
+   "note": "In frame 0, X and Y keep the yellow burst and Z turns it peach. All three lose the frame 2 cyan to white/peach. Frames 4 and 5 are similar."
+  },
+  {
+   "judge": "B",
+   "file": "J010",
+   "sheet": "sheet-0122.png",
+   "caseId": "fade-radial-light|pico8-c4-oklab",
+   "category": "fade",
+   "setting": "pico8-c4-oklab",
+   "sev": {
+    "linear": 2,
+    "squared": 1,
+    "none": 2
+   },
+   "note": "Y keeps a bright central hotspot, but as a hard peach disk. X and Z lose the hotspot, and Z's lavender halo is darker and heavier. All tint the grayscale light lavender."
+  },
+  {
+   "judge": "B",
+   "file": "J011",
+   "sheet": "sheet-0017.png",
+   "caseId": "glow-light-64|auto-c8-oklab",
+   "category": "glow",
+   "setting": "auto-c8-oklab",
+   "sev": {
+    "linear": 0,
+    "none": 2,
+    "squared": 0
+   },
+   "note": "X and Z keep a smooth cyan core and halo. Y posterizes the soft halo into blotchy pale bands."
+  },
+  {
+   "judge": "B",
+   "file": "J012",
+   "sheet": "sheet-0357.png",
+   "caseId": "anim:anim-rubberduck-magic|wall-auto-c4-oklab",
+   "category": "animation",
+   "setting": "wall-auto-c4-oklab",
+   "sev": {
+    "linear": 1,
+    "squared": 1,
+    "none": 2
+   },
+   "note": "X and Y keep the yellow then cyan color sequence (yellow a bit olive). Z renders both frames pale pink with stray teal dots, losing the color change."
+  },
+  {
+   "judge": "B",
+   "file": "J013",
+   "sheet": "sheet-0298.png",
+   "caseId": "anim:anim-kenney-explosion|res64-c4-oklab",
+   "category": "animation",
+   "setting": "res64-c4-oklab",
+   "sev": {
+    "none": 2,
+    "squared": 0,
+    "linear": 2
+   },
+   "note": "Y repairs the explosion core with a yellow center and three warm levels. X and Z make the core dull tan/peach. Z's outer smoke haze is grayer, closer to the source, while X's is maroon."
+  },
+  {
+   "judge": "B",
+   "file": "J014",
+   "sheet": "sheet-0212.png",
+   "caseId": "soft-magic-ring|auto-c4-oklab",
+   "category": "all-soft",
+   "setting": "auto-c4-oklab",
+   "sev": {
+    "linear": 0,
+    "squared": 0,
+    "none": 1
+   },
+   "note": "Near-identical. Z has darker node rings on white and a faint ring in the empty center."
+  },
+  {
+   "judge": "B",
+   "file": "J015",
+   "sheet": "sheet-0290.png",
+   "caseId": "anim:anim-para-fire|res64-c4-oklab",
+   "category": "animation",
+   "setting": "res64-c4-oklab",
+   "sev": {
+    "squared": 0,
+    "none": 1,
+    "linear": 0
+   },
+   "note": "All lose the saturated red glow under res64 cap 4. Y's glow is the faintest, while X and Z keep a little more warm or pink glow. The opaque flame is identical."
+  },
+  {
+   "judge": "B",
+   "file": "J016",
+   "sheet": "sheet-0247.png",
+   "caseId": "synthetic-opaque-core-alpha1-spill|auto-c3-oklab",
+   "category": "synthetic-counterexample",
+   "setting": "auto-c3-oklab",
+   "sev": {
+    "none": 3,
+    "linear": 0,
+    "squared": 0
+   },
+   "note": "In X the alpha-1 magenta spill displaces the red core stripes, which become magenta. Y and Z match the source exactly."
+  },
+  {
+   "judge": "B",
+   "file": "J017",
+   "sheet": "sheet-0132.png",
+   "caseId": "fade-trail-streak|res64-c4-oklab",
+   "category": "fade",
+   "setting": "res64-c4-oklab",
+   "sev": {
+    "none": 2,
+    "linear": 1,
+    "squared": 0
+   },
+   "note": "Z keeps a white hot core. X and Y turn the core mint green, and X adds a visible mauve fringe along the streak."
+  },
+  {
+   "judge": "B",
+   "file": "J018",
+   "sheet": "sheet-0125.png",
+   "caseId": "fade-trail-streak|auto-c3-oklab",
+   "category": "fade",
+   "setting": "auto-c3-oklab",
+   "sev": {
+    "none": 2,
+    "linear": 0,
+    "squared": 0
+   },
+   "note": "X dims the white core to gray, so it reads as a dark streak on white. Y and Z keep a bright core."
+  },
+  {
+   "judge": "B",
+   "file": "J019",
+   "sheet": "sheet-0194.png",
+   "caseId": "soft-cloud|auto-c4-oklab",
+   "category": "all-soft",
+   "setting": "auto-c4-oklab",
+   "sev": {
+    "none": 0,
+    "linear": 0,
+    "squared": 0
+   },
+   "note": "Indistinguishable."
+  },
+  {
+   "judge": "B",
+   "file": "J020",
+   "sheet": "sheet-0267.png",
+   "caseId": "synthetic-all-soft-water-ramp|res64-c4-rgb",
+   "category": "synthetic-counterexample",
+   "setting": "res64-c4-rgb",
+   "sev": {
+    "squared": 0,
+    "none": 2,
+    "linear": 0
+   },
+   "note": "All lose the peach top-right, which becomes khaki. Y also pushes a mauve/dark wedge into the blue region."
+  },
+  {
+   "judge": "B",
+   "file": "J021",
+   "sheet": "sheet-0272.png",
+   "caseId": "anim:anim-rubberduck-magic|auto-c4-oklab",
+   "category": "animation",
+   "setting": "auto-c4-oklab",
+   "sev": {
+    "linear": 1,
+    "squared": 0,
+    "none": 2
+   },
+   "note": "Y keeps a brighter yellow in frame 0 and cyan in frame 2, X a duller olive yellow. Z turns frames 0 and 2 pink/tan with stray teal dots."
+  },
+  {
+   "judge": "B",
+   "file": "J022",
+   "sheet": "sheet-0094.png",
+   "caseId": "aa-tango-system-search|pico8-c4-oklab",
+   "category": "antialiased",
+   "setting": "pico8-c4-oklab",
+   "sev": {
+    "none": 1,
+    "squared": 0,
+    "linear": 1
+   },
+   "note": "All lose the blue lens to lavender/peach (pico8 cap 4). Y keeps a dark handle outline closer to the source. Otherwise very close."
+  },
+  {
+   "judge": "B",
+   "file": "J023",
+   "sheet": "sheet-0080.png",
+   "caseId": "aa-tango-face-smile|res64-c4-rgb",
+   "category": "antialiased",
+   "setting": "res64-c4-rgb",
+   "sev": {
+    "squared": 0,
+    "linear": 0,
+    "none": 1
+   },
+   "note": "X and Y are identical. Z has darker, more faithful eyes but a heavier maroon rim. This is a net tie."
+  },
+  {
+   "judge": "B",
+   "file": "J024",
+   "sheet": "sheet-0062.png",
+   "caseId": "shadow-glass-orb|auto-c8-oklab",
+   "category": "shadow",
+   "setting": "auto-c8-oklab",
+   "sev": {
+    "linear": 0,
+    "squared": 0,
+    "none": 0
+   },
+   "note": "Indistinguishable. All keep the neutral gray contact shadow."
+  },
+  {
+   "judge": "B",
+   "file": "J025",
+   "sheet": "sheet-0182.png",
+   "caseId": "fx-energy-star|pico8-c4-oklab",
+   "category": "effect",
+   "setting": "pico8-c4-oklab",
+   "sev": {
+    "none": 3,
+    "linear": 0,
+    "squared": 0
+   },
+   "note": "X collapses the burst to a flat peach-white blob with a brown edge, losing all yellow/orange fringe. Y and Z keep the yellow rim."
+  },
+  {
+   "judge": "B",
+   "file": "J026",
+   "sheet": "sheet-0021.png",
+   "caseId": "glow-light-64|res64-c4-oklab",
+   "category": "glow",
+   "setting": "res64-c4-oklab",
+   "sev": {
+    "squared": 1,
+    "linear": 1,
+    "none": 0
+   },
+   "note": "All lose the cyan saturation to light blue and add a gray ring. X and Y render the white ray highlights as yellowish-cream blotches, while Z is smoother without them."
+  },
+  {
+   "judge": "B",
+   "file": "J027",
+   "sheet": "sheet-0319.png",
+   "caseId": "aa-magic-orbs-sheet|wall-auto-c4-oklab",
+   "category": "antialiased",
+   "setting": "wall-auto-c4-oklab",
+   "sev": {
+    "linear": 0,
+    "none": 2,
+    "squared": 0
+   },
+   "note": "In this shared-wall cap 4, X and Z keep a warm brown for the red/orange orbs. Y has no warm color: the red orb becomes magenta and the orange orb gray."
+  },
+  {
+   "judge": "B",
+   "file": "J028",
+   "sheet": "sheet-0072.png",
+   "caseId": "aa-tango-face-smile|auto-c3-oklab",
+   "category": "antialiased",
+   "setting": "auto-c3-oklab",
+   "sev": {
+    "none": 3,
+    "linear": 0,
+    "squared": 0
+   },
+   "note": "X turns the body dull tan-brown and reduces the smile to a flat dash, so the face reads neutral. Y and Z keep the saturated orange and the smile."
+  },
+  {
+   "judge": "B",
+   "file": "J029",
+   "sheet": "sheet-0031.png",
+   "caseId": "glow-flash-yellow|auto-c8-oklab",
+   "category": "glow",
+   "setting": "auto-c8-oklab",
+   "sev": {
+    "squared": 0,
+    "linear": 0,
+    "none": 2
+   },
+   "note": "X and Y keep fine yellow-white gradations. Z coarsely bands the core into pale cream steps and loses yellow saturation."
+  },
+  {
+   "judge": "B",
+   "file": "J030",
+   "sheet": "sheet-0008.png",
+   "caseId": "glow-orb-red|res64-c4-oklab",
+   "category": "glow",
+   "setting": "res64-c4-oklab",
+   "sev": {
+    "none": 2,
+    "linear": 0,
+    "squared": 0
+   },
+   "note": "Y and Z keep the orange-red outer glow halo. X largely loses it (more vivid orange wisps but no halo) and flattens the center red."
+  },
+  {
+   "judge": "B",
+   "file": "J031",
+   "sheet": "sheet-0248.png",
+   "caseId": "synthetic-many-soft-colors|auto-c3-oklab",
+   "category": "synthetic-counterexample",
+   "setting": "auto-c3-oklab",
+   "sev": {
+    "linear": 1,
+    "none": 0,
+    "squared": 1
+   },
+   "note": "In this synthetic stress case, Y spans lime, magenta and navy. X is muted sage, Z lime/mauve/plum with no blue."
+  },
+  {
+   "judge": "B",
+   "file": "J032",
+   "sheet": "sheet-0118.png",
+   "caseId": "fade-radial-light|res64-c4-oklab",
+   "category": "fade",
+   "setting": "res64-c4-oklab",
+   "sev": {
+    "none": 2,
+    "linear": 1,
+    "squared": 1
+   },
+   "note": "Y and Z keep a bright core as a hard-edged mint disk. X loses the hotspot, leaving a darker gray-blue center on white."
+  },
+  {
+   "judge": "B",
+   "file": "J033",
+   "sheet": "sheet-0056.png",
+   "caseId": "shadow-tree-topdown|auto-c8-oklab",
+   "category": "shadow",
+   "setting": "auto-c8-oklab",
+   "sev": {
+    "linear": 0,
+    "none": 0,
+    "squared": 1
+   },
+   "note": "All keep the soft drop shadow. X and Y keep a light yellow-green highlight cluster, while Z's foliage is more uniform and muted."
+  },
+  {
+   "judge": "B",
+   "file": "J034",
+   "sheet": "sheet-0286.png",
+   "caseId": "anim:anim-para-fire|auto-c8-oklab",
+   "category": "animation",
+   "setting": "auto-c8-oklab",
+   "sev": {
+    "squared": 0,
+    "linear": 1,
+    "none": 0
+   },
+   "note": "Near-identical flames. Y's red glow is slightly fainter."
+  },
+  {
+   "judge": "B",
+   "file": "J035",
+   "sheet": "sheet-0242.png",
+   "caseId": "soft-bubble|res64-c4-oklab",
+   "category": "all-soft",
+   "setting": "res64-c4-oklab",
+   "sev": {
+    "linear": 1,
+    "squared": 2,
+    "none": 1
+   },
+   "note": "All add a colored rim arc. Z's is teal, keeping the cool film. X adds a tan arc. Y makes the film lavender-gray and adds tan and purple arcs, losing the cool tint."
+  },
+  {
+   "judge": "B",
+   "file": "J036",
+   "sheet": "sheet-0105.png",
+   "caseId": "fade-island-shore|auto-c8-oklab",
+   "category": "fade",
+   "setting": "auto-c8-oklab",
+   "sev": {
+    "none": 1,
+    "linear": 0,
+    "squared": 0
+   },
+   "note": "All lose the orange shore foliage accents and the teal shallow water. X's beach is grayer, while Y and Z keep warmer brown sand."
+  },
+  {
+   "judge": "B",
+   "file": "J037",
+   "sheet": "sheet-0238.png",
+   "caseId": "soft-bubble|auto-c8-oklab",
+   "category": "all-soft",
+   "setting": "auto-c8-oklab",
+   "sev": {
+    "squared": 0,
+    "none": 0,
+    "linear": 0
+   },
+   "note": "Indistinguishable."
+  },
+  {
+   "judge": "B",
+   "file": "J038",
+   "sheet": "sheet-0035.png",
+   "caseId": "glow-flash-yellow|res64-c4-oklab",
+   "category": "glow",
+   "setting": "res64-c4-oklab",
+   "sev": {
+    "linear": 0,
+    "none": 2,
+    "squared": 0
+   },
+   "note": "All posterize. X and Z keep an orange/yellow warm halo. Y's outer halo turns olive-green, the wrong hue for a warm flash."
+  },
+  {
+   "judge": "B",
+   "file": "J039",
+   "sheet": "sheet-0188.png",
+   "caseId": "fx-black-smoke|auto-c8-oklab",
+   "category": "effect",
+   "setting": "auto-c8-oklab",
+   "sev": {
+    "linear": 0,
+    "none": 1,
+    "squared": 0
+   },
+   "note": "Near-identical posterized smoke. Y shows a slightly more visible lighter inner band."
+  },
+  {
+   "judge": "B",
+   "file": "J040",
+   "sheet": "sheet-0098.png",
+   "caseId": "aa-magic-orbs-sheet|auto-c4-oklab",
+   "category": "antialiased",
+   "setting": "auto-c4-oklab",
+   "sev": {
+    "squared": 0,
+    "none": 0,
+    "linear": 0
+   },
+   "note": "Indistinguishable (salmon/light blue/slate palette in all)."
+  },
+  {
+   "judge": "B",
+   "file": "J041",
+   "sheet": "sheet-0090.png",
+   "caseId": "aa-tango-system-search|res64-c4-oklab",
+   "category": "antialiased",
+   "setting": "res64-c4-oklab",
+   "sev": {
+    "squared": 0,
+    "none": 2,
+    "linear": 2
+   },
+   "note": "X keeps the saturated blue inner ring. Y and Z turn it mauve/purple. The lens is mint-gray in all."
+  },
+  {
+   "judge": "B",
+   "file": "J042",
+   "sheet": "sheet-0109.png",
+   "caseId": "fade-island-shore|res64-c4-oklab",
+   "category": "fade",
+   "setting": "res64-c4-oklab",
+   "sev": {
+    "linear": 0,
+    "none": 2,
+    "squared": 0
+   },
+   "note": "All lose the green forest ring (slate or olive). Y makes the fading shore ring dark plum-purple instead of slate."
+  },
+  {
+   "judge": "B",
+   "file": "J043",
+   "sheet": "sheet-0230.png",
+   "caseId": "soft-air-bubbles|res64-c4-oklab",
+   "category": "all-soft",
+   "setting": "res64-c4-oklab",
+   "sev": {
+    "none": 0,
+    "squared": 0,
+    "linear": 0
+   },
+   "note": "Indistinguishable faint bubbles."
+  },
+  {
+   "judge": "B",
+   "file": "J044",
+   "sheet": "sheet-0249.png",
+   "caseId": "synthetic-many-soft-colors|auto-c4-oklab",
+   "category": "synthetic-counterexample",
+   "setting": "auto-c4-oklab",
+   "sev": {
+    "squared": 1,
+    "linear": 0,
+    "none": 0
+   },
+   "note": "Synthetic stress case. Y and Z keep magenta plus lime/mint, while X substitutes violet and mauve for magenta. All are heavy reductions."
+  },
+  {
+   "judge": "B",
+   "file": "J045",
+   "sheet": "sheet-0325.png",
+   "caseId": "fade-radial-light|wall-auto-c4-oklab",
+   "category": "fade",
+   "setting": "wall-auto-c4-oklab",
+   "sev": {
+    "none": 2,
+    "linear": 1,
+    "squared": 1
+   },
+   "note": "Z keeps a bright core (hard disk, stronger ring contrast) and Y a partial one. X loses the hotspot, leaving a darker center on white and a warm cast on blue."
+  },
+  {
+   "judge": "B",
+   "file": "J046",
+   "sheet": "sheet-0278.png",
+   "caseId": "anim:anim-rubberduck-magic|res64-c4-oklab",
+   "category": "animation",
+   "setting": "res64-c4-oklab",
+   "sev": {
+    "none": 0,
+    "linear": 0,
+    "squared": 0
+   },
+   "note": "Indistinguishable. All turn the frame 2 cyan mint and add teal speckles in frame 4."
+  },
+  {
+   "judge": "B",
+   "file": "J047",
+   "sheet": "sheet-0202.png",
+   "caseId": "soft-smoke-puff|auto-c8-oklab",
+   "category": "all-soft",
+   "setting": "auto-c8-oklab",
+   "sev": {
+    "none": 0,
+    "squared": 0,
+    "linear": 0
+   },
+   "note": "Indistinguishable."
+  },
+  {
+   "judge": "B",
+   "file": "J048",
+   "sheet": "sheet-0258.png",
+   "caseId": "synthetic-faint-green-spill|auto-c3-oklab",
+   "category": "synthetic-counterexample",
+   "setting": "auto-c3-oklab",
+   "sev": {
+    "squared": 0,
+    "none": 3,
+    "linear": 0
+   },
+   "note": "In Y the faint alpha-1 green spill displaces a core shade, so the tan/brown core becomes bright green. X and Z match the source."
+  },
+  {
+   "judge": "B",
+   "file": "J049",
+   "sheet": "sheet-0172.png",
+   "caseId": "fx-energy-star|auto-c4-oklab",
+   "category": "effect",
+   "setting": "auto-c4-oklab",
+   "sev": {
+    "none": 2,
+    "squared": 0,
+    "linear": 0
+   },
+   "note": "X flattens the burst to a pale yellow blob, losing the white core vs yellow-orange fringe. Y and Z keep it."
+  },
+  {
+   "judge": "B",
+   "file": "J050",
+   "sheet": "sheet-0169.png",
+   "caseId": "fx-sparks-64|res64-c4-oklab",
+   "category": "effect",
+   "setting": "res64-c4-oklab",
+   "sev": {
+    "linear": 0,
+    "squared": 0,
+    "none": 0
+   },
+   "note": "Near-identical. All recolor the cream sparks to pink/lime/ochre."
+  },
+  {
+   "judge": "B",
+   "file": "J051",
+   "sheet": "sheet-0186.png",
+   "caseId": "fx-black-smoke|auto-c4-oklab",
+   "category": "effect",
+   "setting": "auto-c4-oklab",
+   "sev": {
+    "none": 1,
+    "linear": 0,
+    "squared": 1
+   },
+   "note": "All posterize the dark smoke core differently; none is clearly better. X is flat with a strong rim and Z has more inner rings."
+  },
+  {
+   "judge": "B",
+   "file": "J052",
+   "sheet": "sheet-0039.png",
+   "caseId": "glow-flash-yellow|pico8-c4-oklab",
+   "category": "glow",
+   "setting": "pico8-c4-oklab",
+   "sev": {
+    "none": 0,
+    "linear": 0,
+    "squared": 0
+   },
+   "note": "Indistinguishable (peach core, pink rim, saturated yellow halo in all)."
+  },
+  {
+   "judge": "B",
+   "file": "J053",
+   "sheet": "sheet-0096.png",
+   "caseId": "aa-tango-system-search|auto-c4-oklab-dither4x4",
+   "category": "antialiased",
+   "setting": "auto-c4-oklab-dither4x4",
+   "sev": {
+    "squared": 0,
+    "none": 2,
+    "linear": 1
+   },
+   "note": "With dither 4x4, X keeps a solid blue ring and gray handle. Y turns the handle blue and the rim noisy blue-gray. Z dithers blue into the rim and handle."
+  },
+  {
+   "judge": "B",
+   "file": "J054",
+   "sheet": "sheet-0042.png",
+   "caseId": "glow-lens-flare|auto-c3-oklab",
+   "category": "glow",
+   "setting": "auto-c3-oklab",
+   "sev": {
+    "squared": 0,
+    "linear": 0,
+    "none": 3
+   },
+   "note": "X and Y keep a lighter core disk, neither with the white star sparkle. Z makes the flare core dark (gray on white, brown on blue), so the light reads as a dark spot."
+  },
+  {
+   "judge": "B",
+   "file": "J055",
+   "sheet": "sheet-0045.png",
+   "caseId": "glow-lens-flare|auto-c8-oklab",
+   "category": "glow",
+   "setting": "auto-c8-oklab",
+   "sev": {
+    "squared": 0,
+    "none": 2,
+    "linear": 0
+   },
+   "note": "X and Z keep the white star hotspot. Y reduces it to a gray disk."
+  },
+  {
+   "judge": "B",
+   "file": "J056",
+   "sheet": "sheet-0306.png",
+   "caseId": "glow-lens-flare|wall-auto-c4-oklab",
+   "category": "glow",
+   "setting": "wall-auto-c4-oklab",
+   "sev": {
+    "linear": 2,
+    "squared": 0,
+    "none": 3
+   },
+   "note": "Y keeps a bright white star core. X reduces it to a gray disk, and Z darkens it so it reads as a dark spot."
+  },
+  {
+   "judge": "B",
+   "file": "J057",
+   "sheet": "sheet-0074.png",
+   "caseId": "aa-tango-face-smile|auto-c4-rgb",
+   "category": "antialiased",
+   "setting": "auto-c4-rgb",
+   "sev": {
+    "linear": 0,
+    "squared": 1,
+    "none": 0
+   },
+   "note": "All are acceptable. Y has a smaller highlight and a darker lower half, while Z has the darkest, most faithful eyes."
+  },
+  {
+   "judge": "B",
+   "file": "J058",
+   "sheet": "sheet-0066.png",
+   "caseId": "shadow-glass-orb|res64-c4-oklab",
+   "category": "shadow",
+   "setting": "res64-c4-oklab",
+   "sev": {
+    "none": 0,
+    "squared": 2,
+    "linear": 0
+   },
+   "note": "All band the orb heavily. Y tints the neutral contact shadow reddish-brown or pink and adds a peach band. X and Z keep a near-neutral mauve-gray shadow."
+  },
+  {
+   "judge": "B",
+   "file": "J059",
+   "sheet": "sheet-0136.png",
+   "caseId": "fade-trail-streak|pico8-c4-oklab",
+   "category": "fade",
+   "setting": "pico8-c4-oklab",
+   "sev": {
+    "linear": 1,
+    "squared": 1,
+    "none": 1
+   },
+   "note": "Y keeps the brightest peach-white core but adds a lavender fringe. X and Z have a dimmer gray core."
+  }
+ ]
+}

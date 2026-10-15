@@ -1,0 +1,762 @@
+[
+ {
+  "file": "J001.png",
+  "ranking": "Z > Y > X",
+  "severity": {
+   "X": 2,
+   "Y": 1,
+   "Z": 0
+  },
+  "where": {
+   "X": "streak core (soft/strong alpha), all bgs; pink fringe on white",
+   "Y": "streak core, all bgs"
+  },
+  "note": "Source is a neutral white-hot streak; Z keeps a white hot center, X and Y flatten it to a mint plateau (X adds a pink fringe)."
+ },
+ {
+  "file": "J002.png",
+  "ranking": "X = Z > Y",
+  "severity": {
+   "X": 0,
+   "Y": 1,
+   "Z": 0
+  },
+  "where": {
+   "X": "core slightly dimmer than source",
+   "Y": "glow halo and core, most visible on white",
+   "Z": "core slightly dimmer than source"
+  },
+  "note": "X/Z stay neutral gray but a little dim; Y keeps a brighter core but tints it peach with a lavender ring."
+ },
+ {
+  "file": "J003.png",
+  "ranking": "X = Y = Z",
+  "severity": {
+   "X": 0,
+   "Y": 0,
+   "Z": 0
+  },
+  "where": {},
+  "note": "Synthetic ramp: all three band into blue/lavender/mauve with different band boundaries; no clear winner, all lose the tan corner."
+ },
+ {
+  "file": "J004.png",
+  "ranking": "X = Y = Z",
+  "severity": {
+   "X": 0,
+   "Y": 0,
+   "Z": 0
+  },
+  "where": {},
+  "note": "Indistinguishable at 4x zoom."
+ },
+ {
+  "file": "J005.png",
+  "ranking": "X = Y = Z",
+  "severity": {
+   "X": 0,
+   "Y": 0,
+   "Z": 0
+  },
+  "where": {},
+  "note": "Indistinguishable; faint bubble rings preserved by all."
+ },
+ {
+  "file": "J006.png",
+  "ranking": "Y = Z > X",
+  "severity": {
+   "X": 1,
+   "Y": 0,
+   "Z": 0
+  },
+  "where": {
+   "X": "small bright highlight specks, all bgs"
+  },
+  "note": "All share the large loss (cyan core to blue, white rays to gray); Y/Z keep two white highlight specks that X loses."
+ },
+ {
+  "file": "J007.png",
+  "ranking": "Y > X > Z",
+  "severity": {
+   "X": 1,
+   "Y": 0,
+   "Z": 2
+  },
+  "where": {
+   "X": "tiny dark spot in ring centers",
+   "Z": "thin rings/lines (faint+soft alpha), all bgs; nearly vanish on checker, dark gray on white"
+  },
+  "note": "Z renders the white ring linework as dim/dark gray with dark blobs in ring centers; X has small center spots; Y closest."
+ },
+ {
+  "file": "J008.png",
+  "ranking": "X > Y = Z",
+  "severity": {
+   "X": 0,
+   "Y": 1,
+   "Z": 1
+  },
+  "where": {
+   "Y": "dark speck in ring center",
+   "Z": "faint pink/lavender tint in ring halo on white"
+  },
+  "note": "Very close; only small tints/specks."
+ },
+ {
+  "file": "J009.png",
+  "ranking": "X = Y > Z",
+  "severity": {
+   "X": 0,
+   "Y": 0,
+   "Z": 1
+  },
+  "where": {
+   "Z": "rim/outline, all bgs"
+  },
+  "note": "Z draws a heavier maroon outline ring than the golden-brown source rim (but darker eyes); X/Y softer, X shows a faint yellowish shadow haze on black."
+ },
+ {
+  "file": "J010.png",
+  "ranking": "X = Y = Z",
+  "severity": {
+   "X": 0,
+   "Y": 0,
+   "Z": 0
+  },
+  "where": {},
+  "note": "Indistinguishable."
+ },
+ {
+  "file": "J011.png",
+  "ranking": "Y = Z > X",
+  "severity": {
+   "X": 2,
+   "Y": 0,
+   "Z": 0
+  },
+  "where": {
+   "X": "contact shadow, all bgs (peach on white, brown on black)"
+  },
+  "note": "X turns the neutral gray contact shadow peach/brown; Y/Z keep it gray-lavender. Orb body banding equal."
+ },
+ {
+  "file": "J012.png",
+  "ranking": "X = Y = Z",
+  "severity": {
+   "X": 0,
+   "Y": 0,
+   "Z": 0
+  },
+  "where": {},
+  "note": "Indistinguishable; pale blue cloud preserved."
+ },
+ {
+  "file": "J013.png",
+  "ranking": "Y = Z > X",
+  "severity": {
+   "X": 2,
+   "Y": 0,
+   "Z": 0
+  },
+  "where": {
+   "X": "opaque eyes (navy) and soft bottom shadow (blue), all bgs"
+  },
+  "note": "X makes the eyes navy blue and gives a blue soft shadow; Y/Z keep dark red-black eyes."
+ },
+ {
+  "file": "J014.png",
+  "ranking": "Y > X > Z",
+  "severity": {
+   "X": 1,
+   "Y": 0,
+   "Z": 2
+  },
+  "where": {
+   "X": "hot center flattened",
+   "Z": "center and ring structure; light speck artifacts at top, all bgs"
+  },
+  "note": "Y keeps a small hot white core; X a wider flat center; Z a large flat plateau with smeared rings and stray light specks."
+ },
+ {
+  "file": "J015.png",
+  "ranking": "Z > X = Y",
+  "severity": {
+   "X": 1,
+   "Y": 1,
+   "Z": 0
+  },
+  "where": {
+   "X": "ring linework dimmer on black/checker",
+   "Y": "ring linework dimmer on black/checker"
+  },
+  "note": "Z keeps the rings brighter white; X/Y render them dim beige-gray."
+ },
+ {
+  "file": "J016.png",
+  "ranking": "X = Y = Z",
+  "severity": {
+   "X": 0,
+   "Y": 0,
+   "Z": 0
+  },
+  "where": {},
+  "note": "All lose teal shore and orange accents to dark green/beige equally (palette limit)."
+ },
+ {
+  "file": "J017.png",
+  "ranking": "X = Y = Z",
+  "severity": {
+   "X": 0,
+   "Y": 0,
+   "Z": 0
+  },
+  "where": {},
+  "note": "Indistinguishable."
+ },
+ {
+  "file": "J018.png",
+  "ranking": "X = Y > Z",
+  "severity": {
+   "X": 0,
+   "Y": 0,
+   "Z": 2
+  },
+  "where": {
+   "Z": "opaque core and inner soft ring, all bgs; most visible on white"
+  },
+  "note": "Z flattens the core into one big cream plateau and loses the saturated yellow ring; X/Y keep graded yellow rings."
+ },
+ {
+  "file": "J019.png",
+  "ranking": "Y > X > Z",
+  "severity": {
+   "X": 1,
+   "Y": 0,
+   "Z": 2
+  },
+  "where": {
+   "X": "fewer orange accents",
+   "Z": "rim accents and gray smoke, all bgs"
+  },
+  "note": "Z turns orange spark accents gray-brown and the rim lime-yellow; Y keeps orange accents best."
+ },
+ {
+  "file": "J020.png",
+  "ranking": "Y = Z > X",
+  "severity": {
+   "X": 1,
+   "Y": 0,
+   "Z": 0
+  },
+  "where": {
+   "X": "mid/lower particles (soft/faint alpha), all bgs"
+  },
+  "note": "X adds oversaturated cyan particles where the source fades blue to pale cyan; Y/Z closer."
+ },
+ {
+  "file": "J021.png",
+  "ranking": "X = Y = Z",
+  "severity": {
+   "X": 0,
+   "Y": 0,
+   "Z": 0
+  },
+  "where": {
+   "Y": "extra mauve wedge at top"
+  },
+  "note": "Synthetic ramp: all add khaki and saturated lavender regions; different band layouts, no clear winner."
+ },
+ {
+  "file": "J022.png",
+  "ranking": "Y = Z > X",
+  "severity": {
+   "X": 1,
+   "Y": 0,
+   "Z": 0
+  },
+  "where": {
+   "X": "rim and core hue",
+   "Y": "core/rim hue",
+   "Z": "core/rim hue"
+  },
+  "note": "PICO-8 tradeoff, all meaningfully off vs source: X reads magenta-pink rim with plum core; Y/Z read warmer orange/brown/plum with an orange outer glow; Y and Z nearly identical."
+ },
+ {
+  "file": "J023.png",
+  "ranking": "X = Y = Z",
+  "severity": {
+   "X": 1,
+   "Y": 1,
+   "Z": 1
+  },
+  "where": {},
+  "note": "Synthetic high-entropy: X/Y use green/maroon/lavender/beige, Z uses lime/pink/blue/slate; no clear winner."
+ },
+ {
+  "file": "J024.png",
+  "ranking": "Y > X = Z",
+  "severity": {
+   "X": 1,
+   "Y": 0,
+   "Z": 1
+  },
+  "where": {
+   "X": "darker core",
+   "Z": "rim highlights desaturated salmon"
+  },
+  "note": "Y keeps vivid orange rim strokes; X has a darker core; Z has a nicer core gradient but pale salmon rim."
+ },
+ {
+  "file": "J025.png",
+  "ranking": "Y > X > Z",
+  "severity": {
+   "X": 1,
+   "Y": 0,
+   "Z": 2
+  },
+  "where": {
+   "X": "frame 2 cyan slightly duller",
+   "Z": "frame 2 cyan burst grayed; frame 4 yellow specks lost; all bgs"
+  },
+  "note": "Z loses the cyan hue of frame 2 and the yellow specks of frame 4; Y keeps both best."
+ },
+ {
+  "file": "J026.png",
+  "ranking": "Z > X = Y",
+  "severity": {
+   "X": 1,
+   "Y": 1,
+   "Z": 0
+  },
+  "where": {
+   "X": "bright upper puffs",
+   "Y": "bright upper puffs"
+  },
+  "note": "Z keeps the bright highlight puffs at top (mint-tinted); X/Y flatten them to mid teal-gray. All add a mauve tint."
+ },
+ {
+  "file": "J027.png",
+  "ranking": "X = Y = Z",
+  "severity": {
+   "X": 0,
+   "Y": 0,
+   "Z": 0
+  },
+  "where": {},
+  "note": "Indistinguishable."
+ },
+ {
+  "file": "J028.png",
+  "ranking": "X = Z > Y",
+  "severity": {
+   "X": 0,
+   "Y": 1,
+   "Z": 0
+  },
+  "where": {
+   "Y": "lower particles gray-lavender on white"
+  },
+  "note": "All lose indigo (to gray) and cyan (to peach-white) under PICO-8; Y additionally grays some lower particles."
+ },
+ {
+  "file": "J029.png",
+  "ranking": "Y = Z > X",
+  "severity": {
+   "X": 2,
+   "Y": 0,
+   "Z": 0
+  },
+  "where": {
+   "X": "core and inner glow, all bgs"
+  },
+  "note": "X turns the white flare core yellow-olive with greenish rings; Y/Z keep a near-white (mint) core."
+ },
+ {
+  "file": "J030.png",
+  "ranking": "Y > X = Z",
+  "severity": {
+   "X": 1,
+   "Y": 0,
+   "Z": 1
+  },
+  "where": {
+   "X": "outer smoke fringe (soft/faint) plum-purple, all bgs",
+   "Z": "outer smoke fringe plum-purple, all bgs"
+  },
+  "note": "X/Z tint the outer smoke plum/purple; Y keeps it warmer brown/salmon, closer to source. Cores identical."
+ },
+ {
+  "file": "J031.png",
+  "ranking": "X = Y > Z",
+  "severity": {
+   "X": 0,
+   "Y": 0,
+   "Z": 1
+  },
+  "where": {
+   "Z": "core gradation, all frames"
+  },
+  "note": "Z collapses core gradation into a flat lemon plateau with a hard red ring; X/Y keep more steps."
+ },
+ {
+  "file": "J032.png",
+  "ranking": "X = Y > Z",
+  "severity": {
+   "X": 2,
+   "Y": 2,
+   "Z": 3
+  },
+  "where": {
+   "X": "opaque tan target rings turned cyan",
+   "Y": "opaque tan target rings turned cyan",
+   "Z": "entire low-alpha halo turned beige/cream, all bgs"
+  },
+  "note": "Explicit tradeoff: X/Y keep the intentional cyan halo but recolor the opaque tan rings cyan; Z repairs the opaque tan core but loses the cyan halo, which dominates the image."
+ },
+ {
+  "file": "J033.png",
+  "ranking": "X = Y = Z",
+  "severity": {
+   "X": 0,
+   "Y": 0,
+   "Z": 0
+  },
+  "where": {},
+  "note": "All lose some light-blue lens fill on white equally; otherwise the same."
+ },
+ {
+  "file": "J034.png",
+  "ranking": "Y > X > Z",
+  "severity": {
+   "X": 2,
+   "Y": 0,
+   "Z": 2
+  },
+  "where": {
+   "X": "hot core lost (gray)",
+   "Z": "hot core lost; core darker than surround on white, faded on checker"
+  },
+  "note": "Y keeps the white star core; X and Z flatten it, and Z even reads as a dark spot on white."
+ },
+ {
+  "file": "J035.png",
+  "ranking": "X = Y = Z",
+  "severity": {
+   "X": 0,
+   "Y": 0,
+   "Z": 0
+  },
+  "where": {},
+  "note": "Synthetic ramp: different band layouts, comparable faithfulness."
+ },
+ {
+  "file": "J036.png",
+  "ranking": "X = Y > Z",
+  "severity": {
+   "X": 0,
+   "Y": 0,
+   "Z": 2
+  },
+  "where": {
+   "Z": "frame 0 burst (soft/strong alpha), all bgs"
+  },
+  "note": "Z turns the yellow first-frame burst entirely peach; X/Y keep yellow. All lose frame-2 cyan."
+ },
+ {
+  "file": "J037.png",
+  "ranking": "X = Y > Z",
+  "severity": {
+   "X": 0,
+   "Y": 0,
+   "Z": 2
+  },
+  "where": {
+   "Z": "cyan core (strong alpha) and rays, all bgs"
+  },
+  "note": "Z grays the cyan core into a pale uniform blue blob (borderline major); X/Y keep a cyan core and ray structure."
+ },
+ {
+  "file": "J038.png",
+  "ranking": "X = Y = Z",
+  "severity": {
+   "X": 0,
+   "Y": 0,
+   "Z": 0
+  },
+  "where": {},
+  "note": "Near identical; tiny highlight-band differences."
+ },
+ {
+  "file": "J039.png",
+  "ranking": "Y = Z > X",
+  "severity": {
+   "X": 2,
+   "Y": 0,
+   "Z": 0
+  },
+  "where": {
+   "X": "opaque core and rim, all bgs"
+  },
+  "note": "X flattens the white core and yellow rim into one pale cream fill; Y/Z keep a white core with a yellow rim."
+ },
+ {
+  "file": "J040.png",
+  "ranking": "Y > X = Z",
+  "severity": {
+   "X": 2,
+   "Y": 1,
+   "Z": 2
+  },
+  "where": {
+   "X": "contact shadow pink, all bgs",
+   "Y": "orb body rust-brown band",
+   "Z": "contact shadow pink, all bgs"
+  },
+  "note": "X/Z tint the gray shadow pink; Y keeps the shadow gray but adds a rust-brown body band."
+ },
+ {
+  "file": "J041.png",
+  "ranking": "X = Y = Z",
+  "severity": {
+   "X": 1,
+   "Y": 1,
+   "Z": 1
+  },
+  "where": {
+   "X": "orange arc on ring",
+   "Y": "orange and purple arcs on ring",
+   "Z": "saturated teal arc on ring"
+  },
+  "note": "All add a false colored accent arc to the neutral bubble rim; different colors, similar severity."
+ },
+ {
+  "file": "J042.png",
+  "ranking": "X > Z > Y",
+  "severity": {
+   "X": 0,
+   "Y": 2,
+   "Z": 1
+  },
+  "where": {
+   "Y": "opaque face body dull tan, all bgs",
+   "Z": "body darker rust-orange"
+  },
+  "note": "X keeps a saturated orange face; Z is darker rust; Y has a dull tan/salmon body with an olive outline."
+ },
+ {
+  "file": "J043.png",
+  "ranking": "Z > Y > X",
+  "severity": {
+   "X": 1,
+   "Y": 1,
+   "Z": 0
+  },
+  "where": {
+   "X": "streak core flat and wide",
+   "Y": "core slightly flattened"
+  },
+  "note": "Z keeps a narrow bright core; X flattens it most."
+ },
+ {
+  "file": "J044.png",
+  "ranking": "Y = Z > X",
+  "severity": {
+   "X": 2,
+   "Y": 0,
+   "Z": 0
+  },
+  "where": {
+   "X": "contact shadow pink, all bgs"
+  },
+  "note": "X turns the gray contact shadow pink; Y/Z keep it gray."
+ },
+ {
+  "file": "J045.png",
+  "ranking": "Z > X > Y",
+  "severity": {
+   "X": 1,
+   "Y": 2,
+   "Z": 0
+  },
+  "where": {
+   "X": "rings slightly dimmer",
+   "Y": "ring linework dim on black plus visible dark dither speckle inside rings on white"
+  },
+  "note": "Dithered: Z has the cleanest/brightest lines; Y dims the rings and adds dark speckle."
+ },
+ {
+  "file": "J046.png",
+  "ranking": "X = Y = Z",
+  "severity": {
+   "X": 0,
+   "Y": 0,
+   "Z": 0
+  },
+  "where": {},
+  "note": "Near identical."
+ },
+ {
+  "file": "J047.png",
+  "ranking": "X = Z > Y",
+  "severity": {
+   "X": 0,
+   "Y": 1,
+   "Z": 0
+  },
+  "where": {
+   "Y": "contact shadow brown/pink, peach band at orb bottom"
+  },
+  "note": "All shadows slightly warm; Y's is noticeably browner/pinker."
+ },
+ {
+  "file": "J048.png",
+  "ranking": "X > Z = Y",
+  "severity": {
+   "X": 0,
+   "Y": 1,
+   "Z": 1
+  },
+  "where": {
+   "Y": "opaque core cream",
+   "Z": "opaque core faintly cream"
+  },
+  "note": "X keeps a white core; Y (and slightly Z) tint it cream."
+ },
+ {
+  "file": "J049.png",
+  "ranking": "X = Y = Z",
+  "severity": {
+   "X": 0,
+   "Y": 0,
+   "Z": 0
+  },
+  "where": {},
+  "note": "Near identical (X/Y have one extra light pixel)."
+ },
+ {
+  "file": "J050.png",
+  "ranking": "X = Y = Z",
+  "severity": {
+   "X": 0,
+   "Y": 0,
+   "Z": 0
+  },
+  "where": {},
+  "note": "Indistinguishable."
+ },
+ {
+  "file": "J051.png",
+  "ranking": "X = Y > Z",
+  "severity": {
+   "X": 0,
+   "Y": 0,
+   "Z": 2
+  },
+  "where": {
+   "Z": "opaque core and yellow rim, all bgs"
+  },
+  "note": "Shared wall palette: Z flattens the burst to a uniform cream fill; X/Y keep the white core and yellow rim."
+ },
+ {
+  "file": "J052.png",
+  "ranking": "X = Y > Z",
+  "severity": {
+   "X": 0,
+   "Y": 0,
+   "Z": 2
+  },
+  "where": {
+   "Z": "core and inner yellow ring, all bgs"
+  },
+  "note": "Shared wall palette: Z has a flat cream plateau and loses the saturated yellow ring; X/Y keep graded rings."
+ },
+ {
+  "file": "J053.png",
+  "ranking": "X = Y = Z",
+  "severity": {
+   "X": 0,
+   "Y": 0,
+   "Z": 0
+  },
+  "where": {},
+  "note": "Indistinguishable."
+ },
+ {
+  "file": "J054.png",
+  "ranking": "X > Y > Z",
+  "severity": {
+   "X": 0,
+   "Y": 2,
+   "Z": 2
+  },
+  "where": {
+   "Y": "gray handle and frame turned blue (dithered)",
+   "Z": "gray handle turned blue, heavy dark speckle"
+  },
+  "note": "Dithered: X keeps the handle/frame gray (lens less blue); Y has the best blue lens but a blue handle; Z has a blue handle plus noise."
+ },
+ {
+  "file": "J055.png",
+  "ranking": "X = Y > Z",
+  "severity": {
+   "X": 0,
+   "Y": 0,
+   "Z": 1
+  },
+  "where": {
+   "Z": "core flatter cream, paler bands"
+  },
+  "note": "Z has a flatter core and harsher bands; X/Y close to source."
+ },
+ {
+  "file": "J056.png",
+  "ranking": "X = Y = Z",
+  "severity": {
+   "X": 0,
+   "Y": 0,
+   "Z": 0
+  },
+  "where": {},
+  "note": "Indistinguishable; shadow gray in all."
+ },
+ {
+  "file": "J057.png",
+  "ranking": "X = Y > Z",
+  "severity": {
+   "X": 0,
+   "Y": 0,
+   "Z": 1
+  },
+  "where": {
+   "Z": "mid/lower particles oversaturated cyan, all bgs"
+  },
+  "note": "Z adds vivid cyan particles; X/Y are closer to the source blue-to-pale-cyan fade."
+ },
+ {
+  "file": "J058.png",
+  "ranking": "Y > Z > X",
+  "severity": {
+   "X": 2,
+   "Y": 0,
+   "Z": 1
+  },
+  "where": {
+   "X": "center darker than surround on white, warm tint on blue",
+   "Z": "irregular light blob, gray center on white"
+  },
+  "note": "Y keeps a bright central disk; X inverts the hot center into a gray dip."
+ },
+ {
+  "file": "J059.png",
+  "ranking": "X = Z > Y",
+  "severity": {
+   "X": 0,
+   "Y": 2,
+   "Z": 0
+  },
+  "where": {
+   "Y": "opaque core dull orange (yellow lost), pinkish smoke on white"
+  },
+  "note": "Y loses the yellow hot core in every frame; X/Z keep a yellow core with orange/red rings."
+ }
+]

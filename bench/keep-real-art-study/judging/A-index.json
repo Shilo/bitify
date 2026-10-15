@@ -1,0 +1,1355 @@
+[
+ {
+  "file": "J001.png",
+  "view": {
+   "file": "J001-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J001.png is full size (1676x1618)"
+  },
+  "sheet": "sheet-0132.png",
+  "unitId": "fade-trail-streak",
+  "category": "fade",
+  "animated": false,
+  "setting": "res64-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 82894,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 2.3,
+    "soft16_127": 17.1,
+    "faint1_15": 80.6
+   },
+   "visibleRgbColors": 216
+  },
+  "manifestNotes": "Thin motion trail whose tails fade to transparent; mostly alpha 1-15."
+ },
+ {
+  "file": "J002.png",
+  "view": {
+   "file": "J002-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J002.png is full size (1676x1618)"
+  },
+  "sheet": "sheet-0136.png",
+  "unitId": "fade-trail-streak",
+  "category": "fade",
+  "animated": false,
+  "setting": "pico8-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 82894,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 2.3,
+    "soft16_127": 17.1,
+    "faint1_15": 80.6
+   },
+   "visibleRgbColors": 216
+  },
+  "manifestNotes": "Thin motion trail whose tails fade to transparent; mostly alpha 1-15."
+ },
+ {
+  "file": "J003.png",
+  "view": null,
+  "sheet": "sheet-0260.png",
+  "unitId": "synthetic-all-soft-water-ramp",
+  "category": "synthetic-counterexample",
+  "animated": false,
+  "setting": "auto-c3-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 2048,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 36.9,
+    "soft16_127": 61.1,
+    "faint1_15": 2.1
+   },
+   "visibleRgbColors": 2048
+  },
+  "manifestNotes": "NOT real artwork. Artwork with no opaque core; do not equate low alpha with meaningless pixels."
+ },
+ {
+  "file": "J004.png",
+  "view": null,
+  "sheet": "sheet-0150.png",
+  "unitId": "fx-green-magic-32",
+  "category": "effect",
+  "animated": false,
+  "setting": "auto-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 510,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 34.1,
+    "soft16_127": 42.5,
+    "faint1_15": 23.3
+   },
+   "visibleRgbColors": 507
+  },
+  "manifestNotes": "32px green swirl effect, entirely translucent."
+ },
+ {
+  "file": "J005.png",
+  "view": {
+   "file": "J005-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J005.png is full size (1676x1618)"
+  },
+  "sheet": "sheet-0226.png",
+  "unitId": "soft-air-bubbles",
+  "category": "all-soft",
+  "animated": false,
+  "setting": "auto-c8-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 2455,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 0,
+    "soft16_127": 28.4,
+    "faint1_15": 71.6
+   },
+   "visibleRgbColors": 270
+  },
+  "manifestNotes": "Underwater air bubbles, cell 30; every visible pixel translucent."
+ },
+ {
+  "file": "J006.png",
+  "view": null,
+  "sheet": "sheet-0025.png",
+  "unitId": "glow-light-64",
+  "category": "glow",
+  "animated": false,
+  "setting": "pico8-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 3609,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 31.6,
+    "soft16_127": 50,
+    "faint1_15": 18.4
+   },
+   "visibleRgbColors": 2103
+  },
+  "manifestNotes": "Small 64px GIMP light glow with no opaque pixel; cyan core fading to soft halo."
+ },
+ {
+  "file": "J007.png",
+  "view": {
+   "file": "J007-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J007.png is full size (1676x1618)"
+  },
+  "sheet": "sheet-0211.png",
+  "unitId": "soft-magic-ring",
+  "category": "all-soft",
+  "animated": false,
+  "setting": "auto-c3-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 142563,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 1.3,
+    "soft16_127": 28.5,
+    "faint1_15": 70.2
+   },
+   "visibleRgbColors": 205
+  },
+  "manifestNotes": "Grayscale magic ring; 70% of visible pixels are alpha 1-15."
+ },
+ {
+  "file": "J008.png",
+  "view": {
+   "file": "J008-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J008.png is full size (1676x1618)"
+  },
+  "sheet": "sheet-0218.png",
+  "unitId": "soft-magic-ring",
+  "category": "all-soft",
+  "animated": false,
+  "setting": "res64-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 142563,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 1.3,
+    "soft16_127": 28.5,
+    "faint1_15": 70.2
+   },
+   "visibleRgbColors": 205
+  },
+  "manifestNotes": "Grayscale magic ring; 70% of visible pixels are alpha 1-15."
+ },
+ {
+  "file": "J009.png",
+  "view": null,
+  "sheet": "sheet-0080.png",
+  "unitId": "aa-tango-face-smile",
+  "category": "antialiased",
+  "animated": false,
+  "setting": "res64-c4-rgb",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 839,
+   "percentOfVisible": {
+    "opaque255": 67.3,
+    "strong128_254": 13.1,
+    "soft16_127": 10.7,
+    "faint1_15": 8.8
+   },
+   "visibleRgbColors": 667
+  },
+  "manifestNotes": "32px hand-tuned icon: gradient body, dark antialiased outline, faint soft shadow."
+ },
+ {
+  "file": "J010.png",
+  "view": null,
+  "sheet": "sheet-0152.png",
+  "unitId": "fx-green-magic-32",
+  "category": "effect",
+  "animated": false,
+  "setting": "auto-c8-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 510,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 34.1,
+    "soft16_127": 42.5,
+    "faint1_15": 23.3
+   },
+   "visibleRgbColors": 507
+  },
+  "manifestNotes": "32px green swirl effect, entirely translucent."
+ },
+ {
+  "file": "J011.png",
+  "view": {
+   "file": "J011-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J011.png is full size (1484x1618)"
+  },
+  "sheet": "sheet-0069.png",
+  "unitId": "shadow-glass-orb",
+  "category": "shadow",
+  "animated": false,
+  "setting": "pico8-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 668118,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 84.3,
+    "soft16_127": 15.6,
+    "faint1_15": 0.1
+   },
+   "visibleRgbColors": 4492
+  },
+  "manifestNotes": "Glossy red orb with a separate soft contact shadow; the artist exported every pixel below alpha 255."
+ },
+ {
+  "file": "J012.png",
+  "view": {
+   "file": "J012-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J012.png is full size (1676x1618)"
+  },
+  "sheet": "sheet-0196.png",
+  "unitId": "soft-cloud",
+  "category": "all-soft",
+  "animated": false,
+  "setting": "auto-c8-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 7658,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 74.2,
+    "soft16_127": 17.6,
+    "faint1_15": 8.2
+   },
+   "visibleRgbColors": 191
+  },
+  "manifestNotes": "Pale blue-white cloud with no opaque pixel; colour lives entirely in translucent pixels."
+ },
+ {
+  "file": "J013.png",
+  "view": null,
+  "sheet": "sheet-0081.png",
+  "unitId": "aa-tango-face-smile",
+  "category": "antialiased",
+  "animated": false,
+  "setting": "pico8-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 839,
+   "percentOfVisible": {
+    "opaque255": 67.3,
+    "strong128_254": 13.1,
+    "soft16_127": 10.7,
+    "faint1_15": 8.8
+   },
+   "visibleRgbColors": 667
+  },
+  "manifestNotes": "32px hand-tuned icon: gradient body, dark antialiased outline, faint soft shadow."
+ },
+ {
+  "file": "J014.png",
+  "view": {
+   "file": "J014-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J014.png is full size (1676x1618)"
+  },
+  "sheet": "sheet-0114.png",
+  "unitId": "fade-radial-light",
+  "category": "fade",
+  "animated": false,
+  "setting": "auto-c8-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 195359,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 20.3,
+    "soft16_127": 60,
+    "faint1_15": 19.7
+   },
+   "visibleRgbColors": 221
+  },
+  "manifestNotes": "Grayscale radial light cookie fading to nothing; no opaque pixels."
+ },
+ {
+  "file": "J015.png",
+  "view": {
+   "file": "J015-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J015.png is full size (1676x1618)"
+  },
+  "sheet": "sheet-0220.png",
+  "unitId": "soft-magic-ring",
+  "category": "all-soft",
+  "animated": false,
+  "setting": "pico8-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 142563,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 1.3,
+    "soft16_127": 28.5,
+    "faint1_15": 70.2
+   },
+   "visibleRgbColors": 205
+  },
+  "manifestNotes": "Grayscale magic ring; 70% of visible pixels are alpha 1-15."
+ },
+ {
+  "file": "J016.png",
+  "view": {
+   "file": "J016-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J016.png is full size (1676x1618)"
+  },
+  "sheet": "sheet-0103.png",
+  "unitId": "fade-island-shore",
+  "category": "fade",
+  "animated": false,
+  "setting": "auto-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 173546,
+   "percentOfVisible": {
+    "opaque255": 78.9,
+    "strong128_254": 9.6,
+    "soft16_127": 10,
+    "faint1_15": 1.6
+   },
+   "visibleRgbColors": 48886
+  },
+  "manifestNotes": "Illustrative 600px island whose shallow-water/shore ring fades to transparent."
+ },
+ {
+  "file": "J017.png",
+  "view": null,
+  "sheet": "sheet-0163.png",
+  "unitId": "fx-sparks-64",
+  "category": "effect",
+  "animated": false,
+  "setting": "auto-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 420,
+   "percentOfVisible": {
+    "opaque255": 8.1,
+    "strong128_254": 54.8,
+    "soft16_127": 32.6,
+    "faint1_15": 4.5
+   },
+   "visibleRgbColors": 291
+  },
+  "manifestNotes": "Sparse warm sparks with soft trails over mostly empty canvas."
+ },
+ {
+  "file": "J018.png",
+  "view": {
+   "file": "J018-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J018.png is full size (1676x1510)"
+  },
+  "sheet": "sheet-0029.png",
+  "unitId": "glow-flash-yellow",
+  "category": "glow",
+  "animated": false,
+  "setting": "auto-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 186630,
+   "percentOfVisible": {
+    "opaque255": 42.1,
+    "strong128_254": 17.6,
+    "soft16_127": 32.2,
+    "faint1_15": 8.1
+   },
+   "visibleRgbColors": 235
+  },
+  "manifestNotes": "Bright muzzle/explosion flash; opaque centre with warm soft halo."
+ },
+ {
+  "file": "J019.png",
+  "view": {
+   "file": "J019-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J019.png is full size (1676x1618)"
+  },
+  "sheet": "sheet-0178.png",
+  "unitId": "fx-energy-star",
+  "category": "effect",
+  "animated": false,
+  "setting": "res64-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 25430,
+   "percentOfVisible": {
+    "opaque255": 47.7,
+    "strong128_254": 5.4,
+    "soft16_127": 16.1,
+    "faint1_15": 30.8
+   },
+   "visibleRgbColors": 6598
+  },
+  "manifestNotes": "Yellow/white energy burst frame (cell 12 of 8x8, 400px cells); opaque core, broad soft rays."
+ },
+ {
+  "file": "J020.png",
+  "view": {
+   "file": "J020-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J020.png is full size (1676x1618)"
+  },
+  "sheet": "sheet-0142.png",
+  "unitId": "fx-teleporter-burst",
+  "category": "effect",
+  "animated": false,
+  "setting": "auto-c8-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 9287,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 7.9,
+    "soft16_127": 28.1,
+    "faint1_15": 64.1
+   },
+   "visibleRgbColors": 1161
+  },
+  "manifestNotes": "Cyan/blue teleport particles, cell 30 (peak); nearly no opaque pixels."
+ },
+ {
+  "file": "J021.png",
+  "view": null,
+  "sheet": "sheet-0267.png",
+  "unitId": "synthetic-all-soft-water-ramp",
+  "category": "synthetic-counterexample",
+  "animated": false,
+  "setting": "res64-c4-rgb",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 2048,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 36.9,
+    "soft16_127": 61.1,
+    "faint1_15": 2.1
+   },
+   "visibleRgbColors": 2048
+  },
+  "manifestNotes": "NOT real artwork. Artwork with no opaque core; do not equate low alpha with meaningless pixels."
+ },
+ {
+  "file": "J022.png",
+  "view": null,
+  "sheet": "sheet-0012.png",
+  "unitId": "glow-orb-red",
+  "category": "glow",
+  "animated": false,
+  "setting": "pico8-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 20348,
+   "percentOfVisible": {
+    "opaque255": 8,
+    "strong128_254": 53.3,
+    "soft16_127": 10.5,
+    "faint1_15": 28.1
+   },
+   "visibleRgbColors": 5869
+  },
+  "manifestNotes": "Opaque-ish orb core with a wide soft outer glow; glow colour must survive a small cap."
+ },
+ {
+  "file": "J023.png",
+  "view": null,
+  "sheet": "sheet-0255.png",
+  "unitId": "synthetic-many-soft-colors",
+  "category": "synthetic-counterexample",
+  "animated": false,
+  "setting": "res64-c4-rgb",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 5120,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 50.1,
+    "soft16_127": 44.1,
+    "faint1_15": 5.8
+   },
+   "visibleRgbColors": 5120
+  },
+  "manifestNotes": "NOT real artwork. High-entropy 80x64 all-translucent stress case."
+ },
+ {
+  "file": "J024.png",
+  "view": null,
+  "sheet": "sheet-0002.png",
+  "unitId": "glow-orb-red",
+  "category": "glow",
+  "animated": false,
+  "setting": "auto-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 20348,
+   "percentOfVisible": {
+    "opaque255": 8,
+    "strong128_254": 53.3,
+    "soft16_127": 10.5,
+    "faint1_15": 28.1
+   },
+   "visibleRgbColors": 5869
+  },
+  "manifestNotes": "Opaque-ish orb core with a wide soft outer glow; glow colour must survive a small cap."
+ },
+ {
+  "file": "J025.png",
+  "view": {
+   "file": "J025-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J025.png is full size (652x2202)"
+  },
+  "sheet": "sheet-0274.png",
+  "unitId": "anim-rubberduck-magic",
+  "category": "animation",
+  "animated": true,
+  "setting": "auto-c8-oklab",
+  "sourceAlphaProfile": {
+   "frames": 6,
+   "visiblePixels": 2008,
+   "percentOfVisible": {
+    "opaque255": 5.2,
+    "strong128_254": 37.1,
+    "soft16_127": 31.7,
+    "faint1_15": 26
+   },
+   "visibleRgbColors": "per frame 126-506"
+  },
+  "manifestNotes": "32px GIMP magic burst; colour and alpha change over the sequence."
+ },
+ {
+  "file": "J026.png",
+  "view": {
+   "file": "J026-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J026.png is full size (1676x1618)"
+  },
+  "sheet": "sheet-0206.png",
+  "unitId": "soft-smoke-puff",
+  "category": "all-soft",
+  "animated": false,
+  "setting": "res64-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 158106,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 13.7,
+    "soft16_127": 66.4,
+    "faint1_15": 19.9
+   },
+   "visibleRgbColors": 200
+  },
+  "manifestNotes": "Grayscale smoke texture, no opaque pixel."
+ },
+ {
+  "file": "J027.png",
+  "view": {
+   "file": "J027-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J027.png is full size (1676x1618)"
+  },
+  "sheet": "sheet-0230.png",
+  "unitId": "soft-air-bubbles",
+  "category": "all-soft",
+  "animated": false,
+  "setting": "res64-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 2455,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 0,
+    "soft16_127": 28.4,
+    "faint1_15": 71.6
+   },
+   "visibleRgbColors": 270
+  },
+  "manifestNotes": "Underwater air bubbles, cell 30; every visible pixel translucent."
+ },
+ {
+  "file": "J028.png",
+  "view": {
+   "file": "J028-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J028.png is full size (1676x1618)"
+  },
+  "sheet": "sheet-0147.png",
+  "unitId": "fx-teleporter-burst",
+  "category": "effect",
+  "animated": false,
+  "setting": "pico8-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 9287,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 7.9,
+    "soft16_127": 28.1,
+    "faint1_15": 64.1
+   },
+   "visibleRgbColors": 1161
+  },
+  "manifestNotes": "Cyan/blue teleport particles, cell 30 (peak); nearly no opaque pixels."
+ },
+ {
+  "file": "J029.png",
+  "view": {
+   "file": "J029-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J029.png is full size (1676x1618)"
+  },
+  "sheet": "sheet-0049.png",
+  "unitId": "glow-lens-flare",
+  "category": "glow",
+  "animated": false,
+  "setting": "res64-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 105072,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 1.8,
+    "soft16_127": 29.7,
+    "faint1_15": 68.5
+   },
+   "visibleRgbColors": 203
+  },
+  "manifestNotes": "Grayscale lens flare: tiny bright core, long faint streak; nearly all mass is faint alpha."
+ },
+ {
+  "file": "J030.png",
+  "view": {
+   "file": "J030-view.png",
+   "note": "nearest-neighbour downscale by 4 for viewing; J030.png is full size (1676x6282)"
+  },
+  "sheet": "sheet-0300.png",
+  "unitId": "anim-kenney-explosion",
+  "category": "animation",
+  "animated": true,
+  "setting": "pico8-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 5,
+   "visiblePixels": 1148426,
+   "percentOfVisible": {
+    "opaque255": 37.2,
+    "strong128_254": 18.2,
+    "soft16_127": 33.8,
+    "faint1_15": 10.8
+   },
+   "visibleRgbColors": "per frame 243-247"
+  },
+  "manifestNotes": "Orange explosion with large soft outer region; per-frame sizes vary as authored."
+ },
+ {
+  "file": "J031.png",
+  "view": {
+   "file": "J031-view.png",
+   "note": "nearest-neighbour downscale by 4 for viewing; J031.png is full size (1676x6282)"
+  },
+  "sheet": "sheet-0294.png",
+  "unitId": "anim-kenney-explosion",
+  "category": "animation",
+  "animated": true,
+  "setting": "auto-c8-oklab",
+  "sourceAlphaProfile": {
+   "frames": 5,
+   "visiblePixels": 1148426,
+   "percentOfVisible": {
+    "opaque255": 37.2,
+    "strong128_254": 18.2,
+    "soft16_127": 33.8,
+    "faint1_15": 10.8
+   },
+   "visibleRgbColors": "per frame 243-247"
+  },
+  "manifestNotes": "Orange explosion with large soft outer region; per-frame sizes vary as authored."
+ },
+ {
+  "file": "J032.png",
+  "view": null,
+  "sheet": "sheet-0259.png",
+  "unitId": "synthetic-intentional-cyan-halo",
+  "category": "synthetic-counterexample",
+  "animated": false,
+  "setting": "auto-c3-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 2644,
+   "percentOfVisible": {
+    "opaque255": 9.7,
+    "strong128_254": 0,
+    "soft16_127": 90.3,
+    "faint1_15": 0
+   },
+   "visibleRgbColors": 4
+  },
+  "manifestNotes": "NOT real artwork. A visible uniform low-opacity cyan halo must remain a useful color."
+ },
+ {
+  "file": "J033.png",
+  "view": null,
+  "sheet": "sheet-0086.png",
+  "unitId": "aa-tango-system-search",
+  "category": "antialiased",
+  "animated": false,
+  "setting": "auto-c8-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 653,
+   "percentOfVisible": {
+    "opaque255": 28.3,
+    "strong128_254": 35.5,
+    "soft16_127": 19.9,
+    "faint1_15": 16.2
+   },
+   "visibleRgbColors": 311
+  },
+  "manifestNotes": "32px magnifier with translucent glass lens and antialiased handle."
+ },
+ {
+  "file": "J034.png",
+  "view": {
+   "file": "J034-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J034.png is full size (1676x1618)"
+  },
+  "sheet": "sheet-0043.png",
+  "unitId": "glow-lens-flare",
+  "category": "glow",
+  "animated": false,
+  "setting": "auto-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 105072,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 1.8,
+    "soft16_127": 29.7,
+    "faint1_15": 68.5
+   },
+   "visibleRgbColors": 203
+  },
+  "manifestNotes": "Grayscale lens flare: tiny bright core, long faint streak; nearly all mass is faint alpha."
+ },
+ {
+  "file": "J035.png",
+  "view": null,
+  "sheet": "sheet-0261.png",
+  "unitId": "synthetic-all-soft-water-ramp",
+  "category": "synthetic-counterexample",
+  "animated": false,
+  "setting": "auto-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 2048,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 36.9,
+    "soft16_127": 61.1,
+    "faint1_15": 2.1
+   },
+   "visibleRgbColors": 2048
+  },
+  "manifestNotes": "NOT real artwork. Artwork with no opaque core; do not equate low alpha with meaningless pixels."
+ },
+ {
+  "file": "J036.png",
+  "view": {
+   "file": "J036-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J036.png is full size (652x2202)"
+  },
+  "sheet": "sheet-0282.png",
+  "unitId": "anim-rubberduck-magic",
+  "category": "animation",
+  "animated": true,
+  "setting": "pico8-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 6,
+   "visiblePixels": 2008,
+   "percentOfVisible": {
+    "opaque255": 5.2,
+    "strong128_254": 37.1,
+    "soft16_127": 31.7,
+    "faint1_15": 26
+   },
+   "visibleRgbColors": "per frame 126-506"
+  },
+  "manifestNotes": "32px GIMP magic burst; colour and alpha change over the sequence."
+ },
+ {
+  "file": "J037.png",
+  "view": null,
+  "sheet": "sheet-0015.png",
+  "unitId": "glow-light-64",
+  "category": "glow",
+  "animated": false,
+  "setting": "auto-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 3609,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 31.6,
+    "soft16_127": 50,
+    "faint1_15": 18.4
+   },
+   "visibleRgbColors": 2103
+  },
+  "manifestNotes": "Small 64px GIMP light glow with no opaque pixel; cyan core fading to soft halo."
+ },
+ {
+  "file": "J038.png",
+  "view": null,
+  "sheet": "sheet-0075.png",
+  "unitId": "aa-tango-face-smile",
+  "category": "antialiased",
+  "animated": false,
+  "setting": "auto-c8-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 839,
+   "percentOfVisible": {
+    "opaque255": 67.3,
+    "strong128_254": 13.1,
+    "soft16_127": 10.7,
+    "faint1_15": 8.8
+   },
+   "visibleRgbColors": 667
+  },
+  "manifestNotes": "32px hand-tuned icon: gradient body, dark antialiased outline, faint soft shadow."
+ },
+ {
+  "file": "J039.png",
+  "view": {
+   "file": "J039-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J039.png is full size (1676x1618)"
+  },
+  "sheet": "sheet-0172.png",
+  "unitId": "fx-energy-star",
+  "category": "effect",
+  "animated": false,
+  "setting": "auto-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 25430,
+   "percentOfVisible": {
+    "opaque255": 47.7,
+    "strong128_254": 5.4,
+    "soft16_127": 16.1,
+    "faint1_15": 30.8
+   },
+   "visibleRgbColors": 6598
+  },
+  "manifestNotes": "Yellow/white energy burst frame (cell 12 of 8x8, 400px cells); opaque core, broad soft rays."
+ },
+ {
+  "file": "J040.png",
+  "view": {
+   "file": "J040-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J040.png is full size (1484x1618)"
+  },
+  "sheet": "sheet-0067.png",
+  "unitId": "shadow-glass-orb",
+  "category": "shadow",
+  "animated": false,
+  "setting": "res64-c4-rgb",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 668118,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 84.3,
+    "soft16_127": 15.6,
+    "faint1_15": 0.1
+   },
+   "visibleRgbColors": 4492
+  },
+  "manifestNotes": "Glossy red orb with a separate soft contact shadow; the artist exported every pixel below alpha 255."
+ },
+ {
+  "file": "J041.png",
+  "view": {
+   "file": "J041-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J041.png is full size (1676x1618)"
+  },
+  "sheet": "sheet-0242.png",
+  "unitId": "soft-bubble",
+  "category": "all-soft",
+  "animated": false,
+  "setting": "res64-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 4689,
+   "percentOfVisible": {
+    "opaque255": 7.5,
+    "strong128_254": 20.4,
+    "soft16_127": 68.2,
+    "faint1_15": 3.9
+   },
+   "visibleRgbColors": 1075
+  },
+  "manifestNotes": "Soap bubble, sheet cell 0 of 4x4; faint film with a few brighter highlight pixels."
+ },
+ {
+  "file": "J042.png",
+  "view": null,
+  "sheet": "sheet-0079.png",
+  "unitId": "aa-tango-face-smile",
+  "category": "antialiased",
+  "animated": false,
+  "setting": "res64-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 839,
+   "percentOfVisible": {
+    "opaque255": 67.3,
+    "strong128_254": 13.1,
+    "soft16_127": 10.7,
+    "faint1_15": 8.8
+   },
+   "visibleRgbColors": 667
+  },
+  "manifestNotes": "32px hand-tuned icon: gradient body, dark antialiased outline, faint soft shadow."
+ },
+ {
+  "file": "J043.png",
+  "view": {
+   "file": "J043-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J043.png is full size (1676x1618)"
+  },
+  "sheet": "sheet-0128.png",
+  "unitId": "fade-trail-streak",
+  "category": "fade",
+  "animated": false,
+  "setting": "auto-c8-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 82894,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 2.3,
+    "soft16_127": 17.1,
+    "faint1_15": 80.6
+   },
+   "visibleRgbColors": 216
+  },
+  "manifestNotes": "Thin motion trail whose tails fade to transparent; mostly alpha 1-15."
+ },
+ {
+  "file": "J044.png",
+  "view": {
+   "file": "J044-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J044.png is full size (1484x1618)"
+  },
+  "sheet": "sheet-0060.png",
+  "unitId": "shadow-glass-orb",
+  "category": "shadow",
+  "animated": false,
+  "setting": "auto-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 668118,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 84.3,
+    "soft16_127": 15.6,
+    "faint1_15": 0.1
+   },
+   "visibleRgbColors": 4492
+  },
+  "manifestNotes": "Glossy red orb with a separate soft contact shadow; the artist exported every pixel below alpha 255."
+ },
+ {
+  "file": "J045.png",
+  "view": {
+   "file": "J045-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J045.png is full size (1676x1618)"
+  },
+  "sheet": "sheet-0222.png",
+  "unitId": "soft-magic-ring",
+  "category": "all-soft",
+  "animated": false,
+  "setting": "auto-c4-oklab-dither4x4",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 142563,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 1.3,
+    "soft16_127": 28.5,
+    "faint1_15": 70.2
+   },
+   "visibleRgbColors": 205
+  },
+  "manifestNotes": "Grayscale magic ring; 70% of visible pixels are alpha 1-15."
+ },
+ {
+  "file": "J046.png",
+  "view": null,
+  "sheet": "sheet-0004.png",
+  "unitId": "glow-orb-red",
+  "category": "glow",
+  "animated": false,
+  "setting": "auto-c8-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 20348,
+   "percentOfVisible": {
+    "opaque255": 8,
+    "strong128_254": 53.3,
+    "soft16_127": 10.5,
+    "faint1_15": 28.1
+   },
+   "visibleRgbColors": 5869
+  },
+  "manifestNotes": "Opaque-ish orb core with a wide soft outer glow; glow colour must survive a small cap."
+ },
+ {
+  "file": "J047.png",
+  "view": {
+   "file": "J047-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J047.png is full size (1484x1618)"
+  },
+  "sheet": "sheet-0066.png",
+  "unitId": "shadow-glass-orb",
+  "category": "shadow",
+  "animated": false,
+  "setting": "res64-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 668118,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 84.3,
+    "soft16_127": 15.6,
+    "faint1_15": 0.1
+   },
+   "visibleRgbColors": 4492
+  },
+  "manifestNotes": "Glossy red orb with a separate soft contact shadow; the artist exported every pixel below alpha 255."
+ },
+ {
+  "file": "J048.png",
+  "view": {
+   "file": "J048-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J048.png is full size (1676x1618)"
+  },
+  "sheet": "sheet-0174.png",
+  "unitId": "fx-energy-star",
+  "category": "effect",
+  "animated": false,
+  "setting": "auto-c8-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 25430,
+   "percentOfVisible": {
+    "opaque255": 47.7,
+    "strong128_254": 5.4,
+    "soft16_127": 16.1,
+    "faint1_15": 30.8
+   },
+   "visibleRgbColors": 6598
+  },
+  "manifestNotes": "Yellow/white energy burst frame (cell 12 of 8x8, 400px cells); opaque core, broad soft rays."
+ },
+ {
+  "file": "J049.png",
+  "view": null,
+  "sheet": "sheet-0159.png",
+  "unitId": "fx-green-magic-32",
+  "category": "effect",
+  "animated": false,
+  "setting": "pico8-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 510,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 34.1,
+    "soft16_127": 42.5,
+    "faint1_15": 23.3
+   },
+   "visibleRgbColors": 507
+  },
+  "manifestNotes": "32px green swirl effect, entirely translucent."
+ },
+ {
+  "file": "J050.png",
+  "view": {
+   "file": "J050-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J050.png is full size (1676x1618)"
+  },
+  "sheet": "sheet-0224.png",
+  "unitId": "soft-air-bubbles",
+  "category": "all-soft",
+  "animated": false,
+  "setting": "auto-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 2455,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 0,
+    "soft16_127": 28.4,
+    "faint1_15": 71.6
+   },
+   "visibleRgbColors": 270
+  },
+  "manifestNotes": "Underwater air bubbles, cell 30; every visible pixel translucent."
+ },
+ {
+  "file": "J051.png",
+  "view": {
+   "file": "J051-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J051.png is full size (1676x1618)"
+  },
+  "sheet": "sheet-0333.png",
+  "unitId": "fx-energy-star",
+  "category": "effect",
+  "animated": false,
+  "setting": "wall-auto-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 25430,
+   "percentOfVisible": {
+    "opaque255": 47.7,
+    "strong128_254": 5.4,
+    "soft16_127": 16.1,
+    "faint1_15": 30.8
+   },
+   "visibleRgbColors": 6598
+  },
+  "manifestNotes": "Yellow/white energy burst frame (cell 12 of 8x8, 400px cells); opaque core, broad soft rays."
+ },
+ {
+  "file": "J052.png",
+  "view": {
+   "file": "J052-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J052.png is full size (1676x1510)"
+  },
+  "sheet": "sheet-0305.png",
+  "unitId": "glow-flash-yellow",
+  "category": "glow",
+  "animated": false,
+  "setting": "wall-auto-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 186630,
+   "percentOfVisible": {
+    "opaque255": 42.1,
+    "strong128_254": 17.6,
+    "soft16_127": 32.2,
+    "faint1_15": 8.1
+   },
+   "visibleRgbColors": 235
+  },
+  "manifestNotes": "Bright muzzle/explosion flash; opaque centre with warm soft halo."
+ },
+ {
+  "file": "J053.png",
+  "view": null,
+  "sheet": "sheet-0165.png",
+  "unitId": "fx-sparks-64",
+  "category": "effect",
+  "animated": false,
+  "setting": "auto-c8-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 420,
+   "percentOfVisible": {
+    "opaque255": 8.1,
+    "strong128_254": 54.8,
+    "soft16_127": 32.6,
+    "faint1_15": 4.5
+   },
+   "visibleRgbColors": 291
+  },
+  "manifestNotes": "Sparse warm sparks with soft trails over mostly empty canvas."
+ },
+ {
+  "file": "J054.png",
+  "view": null,
+  "sheet": "sheet-0096.png",
+  "unitId": "aa-tango-system-search",
+  "category": "antialiased",
+  "animated": false,
+  "setting": "auto-c4-oklab-dither4x4",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 653,
+   "percentOfVisible": {
+    "opaque255": 28.3,
+    "strong128_254": 35.5,
+    "soft16_127": 19.9,
+    "faint1_15": 16.2
+   },
+   "visibleRgbColors": 311
+  },
+  "manifestNotes": "32px magnifier with translucent glass lens and antialiased handle."
+ },
+ {
+  "file": "J055.png",
+  "view": {
+   "file": "J055-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J055.png is full size (1676x1510)"
+  },
+  "sheet": "sheet-0031.png",
+  "unitId": "glow-flash-yellow",
+  "category": "glow",
+  "animated": false,
+  "setting": "auto-c8-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 186630,
+   "percentOfVisible": {
+    "opaque255": 42.1,
+    "strong128_254": 17.6,
+    "soft16_127": 32.2,
+    "faint1_15": 8.1
+   },
+   "visibleRgbColors": 235
+  },
+  "manifestNotes": "Bright muzzle/explosion flash; opaque centre with warm soft halo."
+ },
+ {
+  "file": "J056.png",
+  "view": {
+   "file": "J056-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J056.png is full size (1484x1618)"
+  },
+  "sheet": "sheet-0062.png",
+  "unitId": "shadow-glass-orb",
+  "category": "shadow",
+  "animated": false,
+  "setting": "auto-c8-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 668118,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 84.3,
+    "soft16_127": 15.6,
+    "faint1_15": 0.1
+   },
+   "visibleRgbColors": 4492
+  },
+  "manifestNotes": "Glossy red orb with a separate soft contact shadow; the artist exported every pixel below alpha 255."
+ },
+ {
+  "file": "J057.png",
+  "view": {
+   "file": "J057-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J057.png is full size (1676x1618)"
+  },
+  "sheet": "sheet-0140.png",
+  "unitId": "fx-teleporter-burst",
+  "category": "effect",
+  "animated": false,
+  "setting": "auto-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 9287,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 7.9,
+    "soft16_127": 28.1,
+    "faint1_15": 64.1
+   },
+   "visibleRgbColors": 1161
+  },
+  "manifestNotes": "Cyan/blue teleport particles, cell 30 (peak); nearly no opaque pixels."
+ },
+ {
+  "file": "J058.png",
+  "view": {
+   "file": "J058-view.png",
+   "note": "nearest-neighbour downscale by 2 for viewing; J058.png is full size (1676x1618)"
+  },
+  "sheet": "sheet-0112.png",
+  "unitId": "fade-radial-light",
+  "category": "fade",
+  "animated": false,
+  "setting": "auto-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 1,
+   "visiblePixels": 195359,
+   "percentOfVisible": {
+    "opaque255": 0,
+    "strong128_254": 20.3,
+    "soft16_127": 60,
+    "faint1_15": 19.7
+   },
+   "visibleRgbColors": 221
+  },
+  "manifestNotes": "Grayscale radial light cookie fading to nothing; no opaque pixels."
+ },
+ {
+  "file": "J059.png",
+  "view": {
+   "file": "J059-view.png",
+   "note": "nearest-neighbour downscale by 4 for viewing; J059.png is full size (1676x6282)"
+  },
+  "sheet": "sheet-0292.png",
+  "unitId": "anim-kenney-explosion",
+  "category": "animation",
+  "animated": true,
+  "setting": "auto-c4-oklab",
+  "sourceAlphaProfile": {
+   "frames": 5,
+   "visiblePixels": 1148426,
+   "percentOfVisible": {
+    "opaque255": 37.2,
+    "strong128_254": 18.2,
+    "soft16_127": 33.8,
+    "faint1_15": 10.8
+   },
+   "visibleRgbColors": "per frame 243-247"
+  },
+  "manifestNotes": "Orange explosion with large soft outer region; per-frame sizes vary as authored."
+ }
+]

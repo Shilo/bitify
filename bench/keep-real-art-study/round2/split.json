@@ -1,0 +1,94 @@
+{
+ "matte": [
+  "glow-lens-flare",
+  "fade-radial-light",
+  "fade-trail-streak",
+  "fx-energy-star",
+  "fx-black-smoke",
+  "soft-smoke-puff",
+  "soft-magic-ring",
+  "anim-kenney-explosion"
+ ],
+ "tally": {
+  "source: RGB~alpha (matte)": {
+   "n": 39,
+   "better": 27,
+   "worse": 1,
+   "tie": 11,
+   "meaningfulBetter": 19,
+   "meaningfulWorse": 0
+  },
+  "cap: c4": {
+   "n": 71,
+   "better": 35,
+   "worse": 4,
+   "tie": 32,
+   "meaningfulBetter": 23,
+   "meaningfulWorse": 1
+  },
+  "target: res64": {
+   "n": 26,
+   "better": 13,
+   "worse": 2,
+   "tie": 11,
+   "meaningfulBetter": 9,
+   "meaningfulWorse": 1
+  },
+  "target: pico8": {
+   "n": 17,
+   "better": 5,
+   "worse": 1,
+   "tie": 11,
+   "meaningfulBetter": 3,
+   "meaningfulWorse": 0
+  },
+  "source: other": {
+   "n": 69,
+   "better": 30,
+   "worse": 4,
+   "tie": 35,
+   "meaningfulBetter": 19,
+   "meaningfulWorse": 1
+  },
+  "target: auto": {
+   "n": 58,
+   "better": 32,
+   "worse": 2,
+   "tie": 24,
+   "meaningfulBetter": 20,
+   "meaningfulWorse": 0
+  },
+  "cap: c8": {
+   "n": 26,
+   "better": 11,
+   "worse": 1,
+   "tie": 14,
+   "meaningfulBetter": 5,
+   "meaningfulWorse": 0
+  },
+  "cap: c3": {
+   "n": 4,
+   "better": 4,
+   "worse": 0,
+   "tie": 0,
+   "meaningfulBetter": 4,
+   "meaningfulWorse": 0
+  },
+  "cap: wall-4": {
+   "n": 7,
+   "better": 7,
+   "worse": 0,
+   "tie": 0,
+   "meaningfulBetter": 6,
+   "meaningfulWorse": 0
+  },
+  "target: wall": {
+   "n": 7,
+   "better": 7,
+   "worse": 0,
+   "tie": 0,
+   "meaningfulBetter": 6,
+   "meaningfulWorse": 0
+  }
+ }
+}

@@ -1,0 +1,722 @@
+[
+ {
+  "id": "glow-orb-red",
+  "category": "glow",
+  "grayShare": 0.015,
+  "alphaVsMaxChannelCorr": -0.669,
+  "meanMaxChannelByAlpha": {
+   "1-15": 242.1,
+   "16-63": 239.2,
+   "64-127": 234.4,
+   "128-254": 130.4,
+   "255-255": 147.5
+  },
+  "nByAlpha": {
+   "1-15": 5719,
+   "16-63": 1608,
+   "64-127": 536,
+   "128-254": 10850,
+   "255-255": 1635
+  }
+ },
+ {
+  "id": "glow-light-64",
+  "category": "glow",
+  "grayShare": 0.011,
+  "alphaVsMaxChannelCorr": 0.64,
+  "meanMaxChannelByAlpha": {
+   "1-15": 183.9,
+   "16-63": 197.3,
+   "64-127": 210.7,
+   "128-254": 232.8,
+   "255-255": null
+  },
+  "nByAlpha": {
+   "1-15": 663,
+   "16-63": 1115,
+   "64-127": 689,
+   "128-254": 1142,
+   "255-255": 0
+  }
+ },
+ {
+  "id": "glow-flash-yellow",
+  "category": "glow",
+  "grayShare": 0.045,
+  "alphaVsMaxChannelCorr": 0.409,
+  "meanMaxChannelByAlpha": {
+   "1-15": 189.7,
+   "16-63": 246.9,
+   "64-127": 252,
+   "128-254": 253.1,
+   "255-255": 255
+  },
+  "nByAlpha": {
+   "1-15": 15038,
+   "16-63": 35232,
+   "64-127": 24854,
+   "128-254": 32879,
+   "255-255": 78627
+  }
+ },
+ {
+  "id": "glow-lens-flare",
+  "category": "glow",
+  "grayShare": 1,
+  "alphaVsMaxChannelCorr": 0.975,
+  "meanMaxChannelByAlpha": {
+   "1-15": 12.4,
+   "16-63": 54.2,
+   "64-127": 118.4,
+   "128-254": 193,
+   "255-255": 255
+  },
+  "nByAlpha": {
+   "1-15": 71984,
+   "16-63": 27403,
+   "64-127": 3824,
+   "128-254": 1849,
+   "255-255": 12
+  }
+ },
+ {
+  "id": "shadow-tree-topdown",
+  "category": "shadow",
+  "grayShare": 0.816,
+  "alphaVsMaxChannelCorr": 0.845,
+  "meanMaxChannelByAlpha": {
+   "1-15": 0,
+   "16-63": 0,
+   "64-127": 0,
+   "128-254": 0,
+   "255-255": 85.5
+  },
+  "nByAlpha": {
+   "1-15": 14598,
+   "16-63": 7379,
+   "64-127": 3964,
+   "128-254": 1198,
+   "255-255": 6125
+  }
+ },
+ {
+  "id": "shadow-glass-orb",
+  "category": "shadow",
+  "grayShare": 0,
+  "alphaVsMaxChannelCorr": 0.586,
+  "meanMaxChannelByAlpha": {
+   "1-15": 125.3,
+   "16-63": 126.3,
+   "64-127": 113.3,
+   "128-254": 165.6,
+   "255-255": null
+  },
+  "nByAlpha": {
+   "1-15": 409,
+   "16-63": 1388,
+   "64-127": 102878,
+   "128-254": 563443,
+   "255-255": 0
+  }
+ },
+ {
+  "id": "shadow-cloud-cast",
+  "category": "shadow",
+  "grayShare": 0,
+  "alphaVsMaxChannelCorr": 0,
+  "meanMaxChannelByAlpha": {
+   "1-15": 130,
+   "16-63": 130,
+   "64-127": 130,
+   "128-254": null,
+   "255-255": null
+  },
+  "nByAlpha": {
+   "1-15": 688,
+   "16-63": 767,
+   "64-127": 6163,
+   "128-254": 0,
+   "255-255": 0
+  }
+ },
+ {
+  "id": "shadow-lpc-character",
+  "category": "shadow",
+  "grayShare": 0,
+  "alphaVsMaxChannelCorr": 0,
+  "meanMaxChannelByAlpha": {
+   "1-15": null,
+   "16-63": null,
+   "64-127": null,
+   "128-254": 47,
+   "255-255": null
+  },
+  "nByAlpha": {
+   "1-15": 0,
+   "16-63": 0,
+   "64-127": 0,
+   "128-254": 368,
+   "255-255": 0
+  }
+ },
+ {
+  "id": "aa-twemoji-fire",
+  "category": "antialiased",
+  "grayShare": 0,
+  "alphaVsMaxChannelCorr": 0.112,
+  "meanMaxChannelByAlpha": {
+   "1-15": null,
+   "16-63": 245.6,
+   "64-127": 245.6,
+   "128-254": 245.9,
+   "255-255": 248
+  },
+  "nByAlpha": {
+   "1-15": 0,
+   "16-63": 61,
+   "64-127": 52,
+   "128-254": 165,
+   "255-255": 2767
+  }
+ },
+ {
+  "id": "aa-twemoji-ghost",
+  "category": "antialiased",
+  "grayShare": 0,
+  "alphaVsMaxChannelCorr": -0.105,
+  "meanMaxChannelByAlpha": {
+   "1-15": null,
+   "16-63": 237,
+   "64-127": 237,
+   "128-254": 237,
+   "255-255": 203.7
+  },
+  "nByAlpha": {
+   "1-15": 0,
+   "16-63": 50,
+   "64-127": 57,
+   "128-254": 125,
+   "255-255": 3211
+  }
+ },
+ {
+  "id": "aa-tango-face-smile",
+  "category": "antialiased",
+  "grayShare": 0.161,
+  "alphaVsMaxChannelCorr": 0.663,
+  "meanMaxChannelByAlpha": {
+   "1-15": 57.8,
+   "16-63": 53.4,
+   "64-127": 29.9,
+   "128-254": 128.9,
+   "255-255": 209.7
+  },
+  "nByAlpha": {
+   "1-15": 74,
+   "16-63": 64,
+   "64-127": 26,
+   "128-254": 110,
+   "255-255": 565
+  }
+ },
+ {
+  "id": "aa-tango-system-search",
+  "category": "antialiased",
+  "grayShare": 0.669,
+  "alphaVsMaxChannelCorr": 0.761,
+  "meanMaxChannelByAlpha": {
+   "1-15": 23.4,
+   "16-63": 35.3,
+   "64-127": 176.8,
+   "128-254": 189,
+   "255-255": 201.7
+  },
+  "nByAlpha": {
+   "1-15": 106,
+   "16-63": 63,
+   "64-127": 67,
+   "128-254": 232,
+   "255-255": 185
+  }
+ },
+ {
+  "id": "aa-magic-orbs-sheet",
+  "category": "antialiased",
+  "grayShare": 0.164,
+  "alphaVsMaxChannelCorr": 0.373,
+  "meanMaxChannelByAlpha": {
+   "1-15": 0,
+   "16-63": 0,
+   "64-127": 0,
+   "128-254": 0,
+   "255-255": 185.7
+  },
+  "nByAlpha": {
+   "1-15": 744,
+   "16-63": 1152,
+   "64-127": 1144,
+   "128-254": 4080,
+   "255-255": 99888
+  }
+ },
+ {
+  "id": "fade-island-shore",
+  "category": "fade",
+  "grayShare": 0,
+  "alphaVsMaxChannelCorr": 0.363,
+  "meanMaxChannelByAlpha": {
+   "1-15": 50.8,
+   "16-63": 48,
+   "64-127": 41.8,
+   "128-254": 44.2,
+   "255-255": 82.6
+  },
+  "nByAlpha": {
+   "1-15": 2795,
+   "16-63": 7766,
+   "64-127": 9504,
+   "128-254": 16583,
+   "255-255": 136898
+  }
+ },
+ {
+  "id": "fade-radial-light",
+  "category": "fade",
+  "grayShare": 1,
+  "alphaVsMaxChannelCorr": 0.988,
+  "meanMaxChannelByAlpha": {
+   "1-15": 12.4,
+   "16-63": 64.8,
+   "64-127": 130.4,
+   "128-254": 183.6,
+   "255-255": null
+  },
+  "nByAlpha": {
+   "1-15": 38516,
+   "16-63": 49820,
+   "64-127": 67352,
+   "128-254": 39671,
+   "255-255": 0
+  }
+ },
+ {
+  "id": "fade-trail-streak",
+  "category": "fade",
+  "grayShare": 1,
+  "alphaVsMaxChannelCorr": 0.978,
+  "meanMaxChannelByAlpha": {
+   "1-15": 8.7,
+   "16-63": 52.4,
+   "64-127": 124.8,
+   "128-254": 203.6,
+   "255-255": null
+  },
+  "nByAlpha": {
+   "1-15": 66841,
+   "16-63": 12193,
+   "64-127": 1974,
+   "128-254": 1886,
+   "255-255": 0
+  }
+ },
+ {
+  "id": "fx-teleporter-burst",
+  "category": "effect",
+  "grayShare": 0.005,
+  "alphaVsMaxChannelCorr": 0,
+  "meanMaxChannelByAlpha": {
+   "1-15": 255,
+   "16-63": 255,
+   "64-127": 255,
+   "128-254": 255,
+   "255-255": null
+  },
+  "nByAlpha": {
+   "1-15": 5949,
+   "16-63": 2188,
+   "64-127": 419,
+   "128-254": 731,
+   "255-255": 0
+  }
+ },
+ {
+  "id": "fx-green-magic-32",
+  "category": "effect",
+  "grayShare": 0,
+  "alphaVsMaxChannelCorr": -0.642,
+  "meanMaxChannelByAlpha": {
+   "1-15": 208.3,
+   "16-63": 185.1,
+   "64-127": 160.2,
+   "128-254": 125.2,
+   "255-255": null
+  },
+  "nByAlpha": {
+   "1-15": 119,
+   "16-63": 111,
+   "64-127": 106,
+   "128-254": 174,
+   "255-255": 0
+  }
+ },
+ {
+  "id": "fx-sparks-64",
+  "category": "effect",
+  "grayShare": 0,
+  "alphaVsMaxChannelCorr": -0.26,
+  "meanMaxChannelByAlpha": {
+   "1-15": 240.3,
+   "16-63": 232.8,
+   "64-127": 233.1,
+   "128-254": 230.8,
+   "255-255": 233.5
+  },
+  "nByAlpha": {
+   "1-15": 19,
+   "16-63": 69,
+   "64-127": 68,
+   "128-254": 230,
+   "255-255": 34
+  }
+ },
+ {
+  "id": "fx-energy-star",
+  "category": "effect",
+  "grayShare": 0.334,
+  "alphaVsMaxChannelCorr": 0.998,
+  "meanMaxChannelByAlpha": {
+   "1-15": 8.2,
+   "16-63": 49.9,
+   "64-127": 117.3,
+   "128-254": 198,
+   "255-255": 254.8
+  },
+  "nByAlpha": {
+   "1-15": 7829,
+   "16-63": 2861,
+   "64-127": 1239,
+   "128-254": 1383,
+   "255-255": 12118
+  }
+ },
+ {
+  "id": "fx-black-smoke",
+  "category": "effect",
+  "grayShare": 1,
+  "alphaVsMaxChannelCorr": 0.942,
+  "meanMaxChannelByAlpha": {
+   "1-15": 2.7,
+   "16-63": 18.8,
+   "64-127": 27.3,
+   "128-254": 36.9,
+   "255-255": 60.7
+  },
+  "nByAlpha": {
+   "1-15": 9765,
+   "16-63": 18845,
+   "64-127": 16567,
+   "128-254": 16368,
+   "255-255": 28378
+  }
+ },
+ {
+  "id": "soft-cloud",
+  "category": "all-soft",
+  "grayShare": 0,
+  "alphaVsMaxChannelCorr": -0.341,
+  "meanMaxChannelByAlpha": {
+   "1-15": 255,
+   "16-63": 255,
+   "64-127": 255,
+   "128-254": 252.9,
+   "255-255": null
+  },
+  "nByAlpha": {
+   "1-15": 625,
+   "16-63": 623,
+   "64-127": 724,
+   "128-254": 5686,
+   "255-255": 0
+  }
+ },
+ {
+  "id": "soft-smoke-puff",
+  "category": "all-soft",
+  "grayShare": 1,
+  "alphaVsMaxChannelCorr": 0.99,
+  "meanMaxChannelByAlpha": {
+   "1-15": 14.5,
+   "16-63": 63.1,
+   "64-127": 130.8,
+   "128-254": 178.3,
+   "255-255": null
+  },
+  "nByAlpha": {
+   "1-15": 31521,
+   "16-63": 50723,
+   "64-127": 54213,
+   "128-254": 21649,
+   "255-255": 0
+  }
+ },
+ {
+  "id": "soft-magic-ring",
+  "category": "all-soft",
+  "grayShare": 1,
+  "alphaVsMaxChannelCorr": 0.97,
+  "meanMaxChannelByAlpha": {
+   "1-15": 16.6,
+   "16-63": 50,
+   "64-127": 123.3,
+   "128-254": 205.4,
+   "255-255": null
+  },
+  "nByAlpha": {
+   "1-15": 100021,
+   "16-63": 38765,
+   "64-127": 1903,
+   "128-254": 1874,
+   "255-255": 0
+  }
+ },
+ {
+  "id": "soft-air-bubbles",
+  "category": "all-soft",
+  "grayShare": 0.003,
+  "alphaVsMaxChannelCorr": 0.628,
+  "meanMaxChannelByAlpha": {
+   "1-15": 157,
+   "16-63": 194.3,
+   "64-127": 247,
+   "128-254": null,
+   "255-255": null
+  },
+  "nByAlpha": {
+   "1-15": 1757,
+   "16-63": 697,
+   "64-127": 1,
+   "128-254": 0,
+   "255-255": 0
+  }
+ },
+ {
+  "id": "soft-bubble",
+  "category": "all-soft",
+  "grayShare": 0.33,
+  "alphaVsMaxChannelCorr": 0.377,
+  "meanMaxChannelByAlpha": {
+   "1-15": 146.9,
+   "16-63": 123.4,
+   "64-127": 150.3,
+   "128-254": 157.5,
+   "255-255": 169.2
+  },
+  "nByAlpha": {
+   "1-15": 183,
+   "16-63": 2959,
+   "64-127": 241,
+   "128-254": 955,
+   "255-255": 351
+  }
+ },
+ {
+  "id": "anim-rubberduck-magic",
+  "category": "animation",
+  "grayShare": 0,
+  "alphaVsMaxChannelCorr": 0.369,
+  "meanMaxChannelByAlpha": {
+   "1-15": 205.9,
+   "16-63": 215.4,
+   "64-127": 223.3,
+   "128-254": 228.9,
+   "255-255": 236.8
+  },
+  "nByAlpha": {
+   "1-15": 29,
+   "16-63": 28,
+   "64-127": 14,
+   "128-254": 51,
+   "255-255": 13
+  }
+ },
+ {
+  "id": "anim-para-fire",
+  "category": "animation",
+  "grayShare": 0,
+  "alphaVsMaxChannelCorr": 0,
+  "meanMaxChannelByAlpha": {
+   "1-15": 255,
+   "16-63": 255,
+   "64-127": 255,
+   "128-254": 255,
+   "255-255": 255
+  },
+  "nByAlpha": {
+   "1-15": 4520,
+   "16-63": 3191,
+   "64-127": 1407,
+   "128-254": 357,
+   "255-255": 2916
+  }
+ },
+ {
+  "id": "anim-kenney-explosion",
+  "category": "animation",
+  "grayShare": 0.09,
+  "alphaVsMaxChannelCorr": 0.991,
+  "meanMaxChannelByAlpha": {
+   "1-15": 6.4,
+   "16-63": 41.7,
+   "64-127": 83.6,
+   "128-254": 147.6,
+   "255-255": 225.4
+  },
+  "nByAlpha": {
+   "1-15": 22942,
+   "16-63": 36222,
+   "64-127": 30992,
+   "128-254": 46043,
+   "255-255": 85717
+  }
+ },
+ {
+  "id": "anim-tango-spinner",
+  "category": "animation",
+  "grayShare": 1,
+  "alphaVsMaxChannelCorr": 0,
+  "meanMaxChannelByAlpha": {
+   "1-15": 0,
+   "16-63": 0,
+   "64-127": 0,
+   "128-254": 0,
+   "255-255": null
+  },
+  "nByAlpha": {
+   "1-15": 73,
+   "16-63": 105,
+   "64-127": 26,
+   "128-254": 38,
+   "255-255": 0
+  }
+ },
+ {
+  "id": "synthetic-opaque-core-alpha1-spill",
+  "category": "synthetic-counterexample",
+  "grayShare": 0,
+  "alphaVsMaxChannelCorr": -0.968,
+  "meanMaxChannelByAlpha": {
+   "1-15": 255,
+   "16-63": null,
+   "64-127": null,
+   "128-254": null,
+   "255-255": 213.5
+  },
+  "nByAlpha": {
+   "1-15": 1200,
+   "16-63": 0,
+   "64-127": 0,
+   "128-254": 0,
+   "255-255": 400
+  }
+ },
+ {
+  "id": "synthetic-many-soft-colors",
+  "category": "synthetic-counterexample",
+  "grayShare": 0,
+  "alphaVsMaxChannelCorr": 0.011,
+  "meanMaxChannelByAlpha": {
+   "1-15": 190.5,
+   "16-63": 190.6,
+   "64-127": 191.7,
+   "128-254": 192,
+   "255-255": null
+  },
+  "nByAlpha": {
+   "1-15": 299,
+   "16-63": 964,
+   "64-127": 1293,
+   "128-254": 2564,
+   "255-255": 0
+  }
+ },
+ {
+  "id": "synthetic-all-faint-fade",
+  "category": "synthetic-counterexample",
+  "grayShare": 0,
+  "alphaVsMaxChannelCorr": 0,
+  "meanMaxChannelByAlpha": {
+   "1-15": 213.1,
+   "16-63": 213.1,
+   "64-127": null,
+   "128-254": null,
+   "255-255": null
+  },
+  "nByAlpha": {
+   "1-15": 1472,
+   "16-63": 576,
+   "64-127": 0,
+   "128-254": 0,
+   "255-255": 0
+  }
+ },
+ {
+  "id": "synthetic-faint-green-spill",
+  "category": "synthetic-counterexample",
+  "grayShare": 0,
+  "alphaVsMaxChannelCorr": -0.798,
+  "meanMaxChannelByAlpha": {
+   "1-15": 240,
+   "16-63": null,
+   "64-127": null,
+   "128-254": null,
+   "255-255": 128.7
+  },
+  "nByAlpha": {
+   "1-15": 3520,
+   "16-63": 0,
+   "64-127": 0,
+   "128-254": 0,
+   "255-255": 576
+  }
+ },
+ {
+  "id": "synthetic-intentional-cyan-halo",
+  "category": "synthetic-counterexample",
+  "grayShare": 0,
+  "alphaVsMaxChannelCorr": -0.785,
+  "meanMaxChannelByAlpha": {
+   "1-15": null,
+   "16-63": 244,
+   "64-127": null,
+   "128-254": null,
+   "255-255": 140.1
+  },
+  "nByAlpha": {
+   "1-15": 0,
+   "16-63": 2388,
+   "64-127": 0,
+   "128-254": 0,
+   "255-255": 256
+  }
+ },
+ {
+  "id": "synthetic-all-soft-water-ramp",
+  "category": "synthetic-counterexample",
+  "grayShare": 0,
+  "alphaVsMaxChannelCorr": 0.136,
+  "meanMaxChannelByAlpha": {
+   "1-15": 193.2,
+   "16-63": 185.8,
+   "64-127": 186.9,
+   "128-254": 194.6,
+   "255-255": null
+  },
+  "nByAlpha": {
+   "1-15": 42,
+   "16-63": 486,
+   "64-127": 765,
+   "128-254": 755,
+   "255-255": 0
+  }
+ }
+]

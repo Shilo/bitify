@@ -1,0 +1,1286 @@
+{
+ "all": {
+  "n": 106,
+  "linear": 64,
+  "none": 20,
+  "tie": 22,
+  "linearLosesMeaningful": 10,
+  "noneLosesMeaningful": 36,
+  "linearLosesMajor": 0,
+  "noneLosesMajor": 5
+ },
+ "rgbMatching": {
+  "n": 82,
+  "linear": 48,
+  "none": 14,
+  "tie": 20,
+  "linearLosesMeaningful": 6,
+  "noneLosesMeaningful": 26,
+  "linearLosesMajor": 0,
+  "noneLosesMajor": 4
+ },
+ "oklabOrWall": {
+  "n": 24,
+  "linear": 16,
+  "none": 6,
+  "tie": 2,
+  "linearLosesMeaningful": 4,
+  "noneLosesMeaningful": 10,
+  "linearLosesMajor": 0,
+  "noneLosesMajor": 1
+ },
+ "overlap": [
+  {
+   "file": "K045.png",
+   "cases": [
+    "soft-magic-ring|auto-c4-rgb"
+   ],
+   "C": "linear/2",
+   "D": "linear/1"
+  },
+  {
+   "file": "K046.png",
+   "cases": [
+    "fade-island-shore|auto-c8-rgb"
+   ],
+   "C": "none/1",
+   "D": "none/1"
+  },
+  {
+   "file": "K047.png",
+   "cases": [
+    "anim:anim-kenney-explosion|pico8-c4-oklab"
+   ],
+   "C": "none/2",
+   "D": "none/2"
+  },
+  {
+   "file": "K048.png",
+   "cases": [
+    "fx-green-magic-32|auto-c4-rgb"
+   ],
+   "C": "linear/1",
+   "D": "linear/2"
+  },
+  {
+   "file": "K049.png",
+   "cases": [
+    "aa-tango-system-search|res64-c4-rgb"
+   ],
+   "C": "linear/2",
+   "D": "linear/2"
+  },
+  {
+   "file": "K050.png",
+   "cases": [
+    "soft-magic-ring|auto-c8-oklab"
+   ],
+   "C": "linear/2",
+   "D": "linear/1"
+  },
+  {
+   "file": "K051.png",
+   "cases": [
+    "soft-smoke-puff|pico8-c4-rgb"
+   ],
+   "C": "tie/0",
+   "D": "none/1"
+  },
+  {
+   "file": "K052.png",
+   "cases": [
+    "anim:anim-para-fire|auto-c8-oklab"
+   ],
+   "C": "tie/0",
+   "D": "tie/0"
+  },
+  {
+   "file": "K053.png",
+   "cases": [
+    "fx-energy-star|pico8-c4-rgb"
+   ],
+   "C": "linear/3",
+   "D": "linear/3"
+  }
+ ],
+ "linearMeaningfulLosses": [
+  "C:K002.png anim:anim-rubberduck-magic|pico8-c4-rgb sev2 | Both flawed: Q turns the yellow f0 duck flat gray (yellow identity lost), P keeps yellow accents on a peach body; Q is better on f2 (blue accents echo cyan) and P adds orange flecks in f4/f5, but the f0 hue loss matters more.",
+  "C:K009.png glow-light-64|res64-c4-rgb sev2 | Q adds blotchy brownish-gray patches in the outer glow haze (dirty on white and black); P keeps a cohesive blue glow (also tinted, but clean).",
+  "C:K013.png glow-flash-yellow|res64-c4-rgb sev2 | P turns the flash into a banded target (peach interior, hard yellow and orange rings); Q is a cohesive yellow flash though lemon instead of golden and lacks the amber edge.",
+  "C:K021.png glow-orb-red|res64-c4-oklab sev2 | P's rim becomes a washed pale salmon; Q keeps a saturated orange glowing rim plus pale highlight (P only better on the core-to-dark gradient ring).",
+  "C:K024.png aa-tango-face-smile|auto-c8-rgb sev2 | Q's eyes turn brown and lose black contrast and its face is flatter amber; P keeps black eyes and red-orange lower shading.",
+  "C:K038.png shadow-glass-orb|res64-c4-rgb sev2 | Q tints the neutral gray drop shadow pink/purple; P's shadow stays near-neutral gray. Orb body is off-hue in both (P rust, Q plum/peach).",
+  "C:K047.png anim:anim-kenney-explosion|pico8-c4-oklab sev2 | P tints the smoke halo pink-magenta/maroon; Q's rust/salmon smoke tracks the source red-brown (outer haze slate in both).",
+  "D:K047.png anim:anim-kenney-explosion|pico8-c4-oklab sev2 | P renders the soft outer smoke purple-lavender (purple fringe on black, lilac haze on white) where Q keeps it warm peach-brown like the source; the opaque core is identical.",
+  "D:K078.png glow-orb-red|pico8-c4-oklab sev2 | Both are major failures with pico8 c4. P reads as an orange/navy orb with a rust-orange center; Q's hot-pink rim reads closer to the red orb.",
+  "D:K088.png aa-tango-face-smile|auto-c4-rgb sev2 | Q adds brown blotches across the lower face and makes the eyes brown, with a brown glow below on black; P keeps a clean orange face with black eyes."
+ ],
+ "rows": [
+  {
+   "judge": "C",
+   "file": "K001.png",
+   "cases": [
+    "glow-flash-yellow|pico8-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "glow / rim; all backgrounds",
+   "note": "P renders the yellow flash entirely peach/cream with no yellow; Q keeps a saturated yellow rim band, so it still reads as a yellow flash even though its interior is also peach and the band is hard."
+  },
+  {
+   "judge": "C",
+   "file": "K002.png",
+   "cases": [
+    "anim:anim-rubberduck-magic|pico8-c4-rgb"
+   ],
+   "winner": "none",
+   "loserSeverity": 2,
+   "where": "opaque core (f0) / rim accents (f2); all backgrounds",
+   "note": "Both flawed: Q turns the yellow f0 duck flat gray (yellow identity lost), P keeps yellow accents on a peach body; Q is better on f2 (blue accents echo cyan) and P adds orange flecks in f4/f5, but the f0 hue loss matters more."
+  },
+  {
+   "judge": "C",
+   "file": "K003.png",
+   "cases": [
+    "fx-sparks-64|auto-c4-rgb"
+   ],
+   "winner": "tie",
+   "loserSeverity": 0,
+   "where": "none",
+   "note": "Near-identical sparks; only sub-pixel tail-tone differences on black/blue."
+  },
+  {
+   "judge": "C",
+   "file": "K004.png",
+   "cases": [
+    "fx-sparks-64|auto-c8-rgb"
+   ],
+   "winner": "tie",
+   "loserSeverity": 0,
+   "where": "none",
+   "note": "Indistinguishable at 1x and enlarged."
+  },
+  {
+   "judge": "C",
+   "file": "K005.png",
+   "cases": [
+    "fade-radial-light|auto-c8-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 1,
+   "where": "glow hotspot; black, white, blue",
+   "note": "Both posterize the radial glow; Q keeps an extra brighter central level closer to the white hotspot while P's center is dimmer with a faint warm tint."
+  },
+  {
+   "judge": "C",
+   "file": "K006.png",
+   "cases": [
+    "glow-orb-red|res64-c8-rgb"
+   ],
+   "winner": "tie",
+   "loserSeverity": 0,
+   "where": "none",
+   "note": "Near-identical orb; differences limited to a handful of rim pixels."
+  },
+  {
+   "judge": "C",
+   "file": "K007.png",
+   "cases": [
+    "fx-energy-star|auto-c8-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 1,
+   "where": "flame tips / inner yellow fringe; white, checker",
+   "note": "Both lose the red-orange flame tips; P expands pure white into the yellow transition band while Q keeps more of the yellow gradient near the edge."
+  },
+  {
+   "judge": "C",
+   "file": "K008.png",
+   "cases": [
+    "glow-orb-red|auto-c4-oklab"
+   ],
+   "winner": "none",
+   "loserSeverity": 1,
+   "where": "rim / glow halo; all backgrounds",
+   "note": "Q's orange rim and halo match the source's orange-red glow; P's highlights and outer halo are salmon/pinkish pastel."
+  },
+  {
+   "judge": "C",
+   "file": "K009.png",
+   "cases": [
+    "glow-light-64|res64-c4-rgb"
+   ],
+   "winner": "none",
+   "loserSeverity": 2,
+   "where": "faint haze / outer glow; white, black, blue",
+   "note": "Q adds blotchy brownish-gray patches in the outer glow haze (dirty on white and black); P keeps a cohesive blue glow (also tinted, but clean)."
+  },
+  {
+   "judge": "C",
+   "file": "K010.png",
+   "cases": [
+    "glow-orb-red|res64-c4-rgb"
+   ],
+   "winner": "none",
+   "loserSeverity": 1,
+   "where": "rim highlight vs core gradient; all backgrounds",
+   "note": "Mixed: Q keeps pale specular rim highlights; P instead spends a color on a brown-red ring that approximates the core-to-dark gradient but loses the white highlight."
+  },
+  {
+   "judge": "C",
+   "file": "K011.png",
+   "cases": [
+    "fade-radial-light|auto-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "glow hotspot; white, blue, checker",
+   "note": "Q loses the central light: its center reads as a dim gray/beige blob (darker than surroundings on white); P keeps a lighter central pentagon."
+  },
+  {
+   "judge": "C",
+   "file": "K012.png",
+   "cases": [
+    "soft-bubble|auto-c8-rgb"
+   ],
+   "winner": "tie",
+   "loserSeverity": 0,
+   "where": "none",
+   "note": "Bubble outputs essentially identical on all backgrounds."
+  },
+  {
+   "judge": "C",
+   "file": "K013.png",
+   "cases": [
+    "glow-flash-yellow|res64-c4-rgb"
+   ],
+   "winner": "none",
+   "loserSeverity": 2,
+   "where": "opaque core + glow falloff; all backgrounds",
+   "note": "P turns the flash into a banded target (peach interior, hard yellow and orange rings); Q is a cohesive yellow flash though lemon instead of golden and lacks the amber edge."
+  },
+  {
+   "judge": "C",
+   "file": "K014.png",
+   "cases": [
+    "aa-tango-system-search|auto-c4-oklab-dither4x4"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "opaque core (handle) + frame; all backgrounds",
+   "note": "Q paints the silver handle with large blue patches and adds dark dither dots on the frame; P's handle stays gray/silver with sparse blue."
+  },
+  {
+   "judge": "C",
+   "file": "K015.png",
+   "cases": [
+    "anim:anim-kenney-explosion|pico8-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "opaque core + smoke haze; all frames, esp. white",
+   "note": "Q loses the yellow hot core (all orange) and tints the smoke purple/mauve; P keeps a yellow core (smoke tinted blue-gray, a smaller error)."
+  },
+  {
+   "judge": "C",
+   "file": "K016.png",
+   "cases": [
+    "fx-green-magic-32|res64-c4-rgb"
+   ],
+   "winner": "tie",
+   "loserSeverity": 0,
+   "where": "none",
+   "note": "Near-identical; both lose the blue-gray dark spots equally."
+  },
+  {
+   "judge": "C",
+   "file": "K017.png",
+   "cases": [
+    "glow-flash-yellow|res64-c8-rgb"
+   ],
+   "winner": "tie",
+   "loserSeverity": 0,
+   "where": "none",
+   "note": "Identical; both share greenish-yellow faint haze."
+  },
+  {
+   "judge": "C",
+   "file": "K018.png",
+   "cases": [
+    "soft-air-bubbles|auto-c4-rgb"
+   ],
+   "winner": "tie",
+   "loserSeverity": 0,
+   "where": "faint haze",
+   "note": "Even with 6x contrast boost the faint bubbles are indistinguishable."
+  },
+  {
+   "judge": "C",
+   "file": "K019.png",
+   "cases": [
+    "glow-orb-red|auto-c4-rgb"
+   ],
+   "winner": "tie",
+   "loserSeverity": 0,
+   "where": "core vs rim; all backgrounds",
+   "note": "Mixed: P's core red is brighter (closer), Q's rim is more saturated orange-red (closer); neither clearly better."
+  },
+  {
+   "judge": "C",
+   "file": "K020.png",
+   "cases": [
+    "anim:anim-rubberduck-magic|auto-c8-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "opaque core (f0 duck); all backgrounds",
+   "note": "Q scatters pink pixels across the yellow duck body and flattens it; P's yellow duck closely matches source. Later frames similar (P's pink f4 closer than Q's beige)."
+  },
+  {
+   "judge": "C",
+   "file": "K021.png",
+   "cases": [
+    "glow-orb-red|res64-c4-oklab"
+   ],
+   "winner": "none",
+   "loserSeverity": 2,
+   "where": "rim / glow; all backgrounds",
+   "note": "P's rim becomes a washed pale salmon; Q keeps a saturated orange glowing rim plus pale highlight (P only better on the core-to-dark gradient ring)."
+  },
+  {
+   "judge": "C",
+   "file": "K022.png",
+   "cases": [
+    "fx-black-smoke|auto-c8-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 1,
+   "where": "smoke body banding; all backgrounds",
+   "note": "Nearly identical banded gray smoke; P has slightly finer gradation in the core."
+  },
+  {
+   "judge": "C",
+   "file": "K023.png",
+   "cases": [
+    "glow-light-64|pico8-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 1,
+   "where": "specular sparkles; all backgrounds",
+   "note": "Q preserves the two bright white sparkle points at the core rim (positions match source); P drops them. Otherwise identical."
+  },
+  {
+   "judge": "C",
+   "file": "K024.png",
+   "cases": [
+    "aa-tango-face-smile|auto-c8-rgb"
+   ],
+   "winner": "none",
+   "loserSeverity": 2,
+   "where": "opaque core (eyes) + shading; all backgrounds",
+   "note": "Q's eyes turn brown and lose black contrast and its face is flatter amber; P keeps black eyes and red-orange lower shading."
+  },
+  {
+   "judge": "C",
+   "file": "K025.png",
+   "cases": [
+    "anim:anim-rubberduck-magic|res64-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "opaque core (f0 duck); all backgrounds",
+   "note": "P turns the yellow duck fully peach; Q keeps yellow-green on half the body. Later frames are similarly noisy (mint/peach) in both, P adding white specks."
+  },
+  {
+   "judge": "C",
+   "file": "K026.png",
+   "cases": [
+    "anim:anim-kenney-explosion|auto-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 1,
+   "where": "smoke / fringe; white, checker",
+   "note": "Close; P has a few stray orange/dark speckles in the smoke and boundaries that rise higher; Q's brown smoke extents track the source slightly better."
+  },
+  {
+   "judge": "C",
+   "file": "K027.png",
+   "cases": [
+    "aa-tango-system-search|auto-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 1,
+   "where": "handle outline / antialias; all backgrounds",
+   "note": "Nearly identical; P keeps the dark handle outline (two stray blue pixels), Q softens it to gray with black only at the tip."
+  },
+  {
+   "judge": "C",
+   "file": "K028.png",
+   "cases": [
+    "fx-energy-star|auto-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "flame tips / rim fringe; white, blue, black",
+   "note": "P has no orange: flame tips become yellow and gray-brown; Q keeps amber-orange tips that match the source's fiery fringe."
+  },
+  {
+   "judge": "C",
+   "file": "K029.png",
+   "cases": [
+    "fade-radial-light|res64-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "glow hotspot; white, blue, black",
+   "note": "Both tinted (P mint, Q slate-blue); Q loses the bright center (reads darker on white), P keeps the light center so the radial light still reads."
+  },
+  {
+   "judge": "C",
+   "file": "K030.png",
+   "cases": [
+    "aa-tango-system-search|auto-c8-rgb"
+   ],
+   "winner": "tie",
+   "loserSeverity": 0,
+   "where": "none",
+   "note": "Identical."
+  },
+  {
+   "judge": "C",
+   "file": "K031.png",
+   "cases": [
+    "fx-green-magic-32|auto-c8-rgb"
+   ],
+   "winner": "tie",
+   "loserSeverity": 0,
+   "where": "none",
+   "note": "Imperceptible differences in ring mottling."
+  },
+  {
+   "judge": "C",
+   "file": "K032.png",
+   "cases": [
+    "glow-light-64|auto-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 1,
+   "where": "glow rays; black, blue",
+   "note": "Q keeps distinct pale white rays around the core; P's halo is a uniform dull gray-blue blob."
+  },
+  {
+   "judge": "C",
+   "file": "K033.png",
+   "cases": [
+    "anim:anim-rubberduck-magic|res64-c8-rgb"
+   ],
+   "winner": "tie",
+   "loserSeverity": 0,
+   "where": "none",
+   "note": "Identical across frames."
+  },
+  {
+   "judge": "C",
+   "file": "K034.png",
+   "cases": [
+    "glow-lens-flare|auto-c8-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 3,
+   "where": "glow core / flare streak; all backgrounds",
+   "note": "P loses the white flare hotspot entirely: core becomes a dim gray disk (dark-centered on white); Q keeps a bright white star and streak, so P's flare reads wrong."
+  },
+  {
+   "judge": "C",
+   "file": "K035.png",
+   "cases": [
+    "anim:anim-para-fire|auto-c8-rgb"
+   ],
+   "winner": "tie",
+   "loserSeverity": 0,
+   "where": "none",
+   "note": "Identical across frames."
+  },
+  {
+   "judge": "C",
+   "file": "K036.png",
+   "cases": [
+    "soft-cloud|auto-c4-rgb"
+   ],
+   "winner": "tie",
+   "loserSeverity": 0,
+   "where": "none",
+   "note": "Identical."
+  },
+  {
+   "judge": "C",
+   "file": "K037.png",
+   "cases": [
+    "soft-smoke-puff|auto-c8-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 1,
+   "where": "smoke banding; white, blue",
+   "note": "Both posterized; P has more, smaller light-gray steps (smoother), Q broader flat bands."
+  },
+  {
+   "judge": "C",
+   "file": "K038.png",
+   "cases": [
+    "shadow-glass-orb|res64-c4-rgb"
+   ],
+   "winner": "none",
+   "loserSeverity": 2,
+   "where": "soft shadow; white, blue, checker",
+   "note": "Q tints the neutral gray drop shadow pink/purple; P's shadow stays near-neutral gray. Orb body is off-hue in both (P rust, Q plum/peach)."
+  },
+  {
+   "judge": "C",
+   "file": "K039.png",
+   "cases": [
+    "fx-teleporter-burst|auto-c8-rgb"
+   ],
+   "winner": "tie",
+   "loserSeverity": 0,
+   "where": "none",
+   "note": "Indistinguishable even zoomed."
+  },
+  {
+   "judge": "C",
+   "file": "K040.png",
+   "cases": [
+    "soft-magic-ring|auto-c4-oklab"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "thin glowing rings/lines; checker, blue, black",
+   "note": "Q's rings are dimmer gray (nearly vanish on checker) and speckled on white; P keeps bright white rings like the source."
+  },
+  {
+   "judge": "C",
+   "file": "K041.png",
+   "cases": [
+    "fx-green-magic-32|pico8-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "color accents (glow); all backgrounds",
+   "note": "Q has no green at all (gray/blue/lavender); P retains a few green accents, keeping some of the green-magic identity."
+  },
+  {
+   "judge": "C",
+   "file": "K042.png",
+   "cases": [
+    "aa-tango-face-smile|wall-auto-c4-oklab"
+   ],
+   "winner": "linear",
+   "loserSeverity": 1,
+   "where": "core shading vs feature hue; all backgrounds",
+   "note": "Mixed: Q keeps three orange shades (volume) but slate-gray eyes/mouth and slate edge pixels; P is flat orange with a big cream blotch but brown/black features. Q reads closer at 1x."
+  },
+  {
+   "judge": "C",
+   "file": "K043.png",
+   "cases": [
+    "fade-island-shore|auto-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 1,
+   "where": "opaque terrain core; all backgrounds",
+   "note": "P's mid tone is tan-brown like the source rocks; Q's is olive-green."
+  },
+  {
+   "judge": "C",
+   "file": "K044.png",
+   "cases": [
+    "glow-light-64|res64-c4-oklab"
+   ],
+   "winner": "none",
+   "loserSeverity": 1,
+   "where": "sparkle highlights; white, blue",
+   "note": "Q marks sparkles with yellowish/khaki blotches that read as dirt on the cyan glow; P omits them (cleaner)."
+  },
+  {
+   "judge": "C",
+   "file": "K045.png",
+   "cases": [
+    "soft-magic-ring|auto-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "thin glowing rings; checker, blue",
+   "note": "Same as K040: Q's rings dimmed, barely visible on checker; P matches source brightness."
+  },
+  {
+   "judge": "C",
+   "file": "K046.png",
+   "cases": [
+    "fade-island-shore|auto-c8-rgb"
+   ],
+   "winner": "none",
+   "loserSeverity": 1,
+   "where": "shoreline fade; all backgrounds",
+   "note": "P keeps a mid-green shore band in the fade; Q replaces it with olive-brown bands."
+  },
+  {
+   "judge": "C",
+   "file": "K047.png",
+   "cases": [
+    "anim:anim-kenney-explosion|pico8-c4-oklab"
+   ],
+   "winner": "none",
+   "loserSeverity": 2,
+   "where": "smoke / glow haze; white, checker, black",
+   "note": "P tints the smoke halo pink-magenta/maroon; Q's rust/salmon smoke tracks the source red-brown (outer haze slate in both)."
+  },
+  {
+   "judge": "C",
+   "file": "K048.png",
+   "cases": [
+    "fx-green-magic-32|auto-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 1,
+   "where": "ring body detail; blue, checker",
+   "note": "Q keeps the darker gray-blue spots in the ring; P's ring body goes a uniform olive."
+  },
+  {
+   "judge": "C",
+   "file": "K049.png",
+   "cases": [
+    "aa-tango-system-search|res64-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "opaque core (lens ring) + antialias fringe; all backgrounds",
+   "note": "Q turns the blue lens ring mauve/purple and adds mauve fringe; P keeps a navy-blue ring and the lens highlight."
+  },
+  {
+   "judge": "C",
+   "file": "K050.png",
+   "cases": [
+    "soft-magic-ring|auto-c8-oklab"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "thin glowing rings; checker, white",
+   "note": "Q's rings dimmer on checker and grainy/speckled on white; P closer to source."
+  },
+  {
+   "judge": "C",
+   "file": "K051.png",
+   "cases": [
+    "soft-smoke-puff|pico8-c4-rgb"
+   ],
+   "winner": "tie",
+   "loserSeverity": 0,
+   "where": "faint haze",
+   "note": "Both lavender-tinted; only marginal outer-haze tone differences."
+  },
+  {
+   "judge": "C",
+   "file": "K052.png",
+   "cases": [
+    "anim:anim-para-fire|auto-c8-oklab"
+   ],
+   "winner": "tie",
+   "loserSeverity": 0,
+   "where": "none",
+   "note": "Identical across frames."
+  },
+  {
+   "judge": "C",
+   "file": "K053.png",
+   "cases": [
+    "fx-energy-star|pico8-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 3,
+   "where": "glow / rim; all backgrounds",
+   "note": "P renders the energy star salmon/peach with brown edges and no yellow (reads as a pink blob); Q keeps a bright yellow fringe around the peach core."
+  },
+  {
+   "judge": "D",
+   "file": "K045.png",
+   "cases": [
+    "soft-magic-ring|auto-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 1,
+   "where": "rim / ring nodes; white, checker",
+   "note": "Near-identical; Q's ring nodes read slightly heavier gray on white and the strong-alpha ring is a touch dimmer, visible only on close inspection."
+  },
+  {
+   "judge": "D",
+   "file": "K046.png",
+   "cases": [
+    "fade-island-shore|auto-c8-rgb"
+   ],
+   "winner": "none",
+   "loserSeverity": 1,
+   "where": "opaque core (shore band); all backgrounds",
+   "note": "Opaque region only: P keeps the green shore band of the beach-to-sea transition while Q turns it olive-brown; invisible at 1x."
+  },
+  {
+   "judge": "D",
+   "file": "K047.png",
+   "cases": [
+    "anim:anim-kenney-explosion|pico8-c4-oklab"
+   ],
+   "winner": "none",
+   "loserSeverity": 2,
+   "where": "glow / soft smoke around fireball; white strongest, also black",
+   "note": "P renders the soft outer smoke purple-lavender (purple fringe on black, lilac haze on white) where Q keeps it warm peach-brown like the source; the opaque core is identical."
+  },
+  {
+   "judge": "D",
+   "file": "K048.png",
+   "cases": [
+    "fx-green-magic-32|auto-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "strong/soft glow ring; blue and black",
+   "note": "P loses the dark navy segments between the green gems, so the ring becomes a muddy uniform teal on blue; Q keeps the dark structure."
+  },
+  {
+   "judge": "D",
+   "file": "K049.png",
+   "cases": [
+    "aa-tango-system-search|res64-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "lens rim and antialiased outline; all backgrounds",
+   "note": "P keeps the lens's blue/navy rim and white glint; Q turns the rim mauve-purple and loses the glint, so the lens no longer reads as blue glass."
+  },
+  {
+   "judge": "D",
+   "file": "K050.png",
+   "cases": [
+    "soft-magic-ring|auto-c8-oklab"
+   ],
+   "winner": "linear",
+   "loserSeverity": 1,
+   "where": "rim (white ring line); white, checker",
+   "note": "Q's ring line is speckled dark on white and dimmer on checker; P has faint dark blotches inside the haze on black and blue. The rim flaw matters more, but it shows only in the crop."
+  },
+  {
+   "judge": "D",
+   "file": "K051.png",
+   "cases": [
+    "soft-smoke-puff|pico8-c4-rgb"
+   ],
+   "winner": "none",
+   "loserSeverity": 1,
+   "where": "faint outer haze; white, blue",
+   "note": "Both turn the core lavender, which is shared. P's outer faint haze picks up a blue-lavender tint while Q's stays near-neutral warm gray, closer to the gray smoke."
+  },
+  {
+   "judge": "D",
+   "file": "K052.png",
+   "cases": [
+    "anim:anim-para-fire|auto-c8-oklab"
+   ],
+   "winner": "tie",
+   "loserSeverity": 0,
+   "where": "none",
+   "note": "Fire frames are visually identical across all four frames and backgrounds."
+  },
+  {
+   "judge": "D",
+   "file": "K053.png",
+   "cases": [
+    "fx-energy-star|pico8-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 3,
+   "where": "rim/fringe and strong-alpha flame tongues; all backgrounds",
+   "note": "Q keeps a yellow fringe around the pale core so it still reads as a yellow energy star; P maps the entire fringe to peach/brown and the star reads as a salmon blob."
+  },
+  {
+   "judge": "D",
+   "file": "K054.png",
+   "cases": [
+    "soft-magic-ring|auto-c8-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 1,
+   "where": "rim (ring line); white, checker, blue",
+   "note": "As in K050, Q's ring is speckled on white, dimmer on checker and has a darker disk around it on blue; only visible in the crop."
+  },
+  {
+   "judge": "D",
+   "file": "K055.png",
+   "cases": [
+    "aa-tango-system-search|pico8-c4-rgb"
+   ],
+   "winner": "none",
+   "loserSeverity": 1,
+   "where": "faint shadow haze; black",
+   "note": "Nearly identical. P adds a navy tint to the faint shadow under the handle on black, but its navy handle outline is arguably closer. The net difference is marginal."
+  },
+  {
+   "judge": "D",
+   "file": "K056.png",
+   "cases": [
+    "aa-tango-system-search|auto-c3-oklab"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "antialiased handle outline; white, blue, checker",
+   "note": "P keeps the dark outline at the handle edge, as in the source; Q loses it, so the handle's blue edge melts into the blue background."
+  },
+  {
+   "judge": "D",
+   "file": "K057.png",
+   "cases": [
+    "soft-smoke-puff|auto-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 1,
+   "where": "soft highlights of the smoke; blue, black",
+   "note": "Both band the smoke. P dulls the bright cloud tops to flat mid-gray, while Q keeps lighter highlights and therefore more volume."
+  },
+  {
+   "judge": "D",
+   "file": "K058.png",
+   "cases": [
+    "soft-magic-ring|auto-c4-oklab-dither4x4"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "rim (ring line, dithered); checker, black, blue",
+   "note": "P renders the bright ring mid-gray, so it nearly disappears on checker; Q keeps the ring bright. Both show dither speckle."
+  },
+  {
+   "judge": "D",
+   "file": "K059.png",
+   "cases": [
+    "fx-energy-star|res64-c8-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 1,
+   "where": "strong-alpha flame streak; all backgrounds",
+   "note": "Near-identical. P puts a few green/olive pixels in the lower orange streak tip."
+  },
+  {
+   "judge": "D",
+   "file": "K060.png",
+   "cases": [
+    "shadow-glass-orb|auto-c8-rgb"
+   ],
+   "winner": "tie",
+   "loserSeverity": 0,
+   "where": "opaque core banding",
+   "note": "Same posterization with band boundaries in slightly different places; the shadow is identical."
+  },
+  {
+   "judge": "D",
+   "file": "K061.png",
+   "cases": [
+    "fade-radial-light|pico8-c4-rgb"
+   ],
+   "winner": "none",
+   "loserSeverity": 1,
+   "where": "faint outer haze; black, white, blue",
+   "note": "Both posterize into a lavender ring. Q adds a navy/blue cast to the faint outer haze, which P keeps closer to neutral."
+  },
+  {
+   "judge": "D",
+   "file": "K062.png",
+   "cases": [
+    "anim:anim-rubberduck-magic|auto-c4-oklab"
+   ],
+   "winner": "linear",
+   "loserSeverity": 3,
+   "where": "core color of sparkle frames; all backgrounds",
+   "note": "In frames 0 and 2, P turns the yellow and cyan sparkles peach/beige, adding stray green pixels; Q keeps them yellow and pale cyan. The later puff frames match."
+  },
+  {
+   "judge": "D",
+   "file": "K063.png",
+   "cases": [
+    "aa-tango-system-search|auto-c4-oklab"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "handle color and lens rim; all backgrounds",
+   "note": "Q makes the gray handle blue and adds dark dashed pixels around the lens rim; P keeps a gray handle with a dark outline."
+  },
+  {
+   "judge": "D",
+   "file": "K064.png",
+   "cases": [
+    "fx-teleporter-burst|auto-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "strong-alpha particles and glow; all backgrounds",
+   "note": "P shifts the mid light-blue particles to indigo, adds a heavier cyan halo and stray speckles; Q keeps the blue-to-cyan gradient."
+  },
+  {
+   "judge": "D",
+   "file": "K065.png",
+   "cases": [
+    "fx-black-smoke|auto-c3-oklab"
+   ],
+   "winner": "linear",
+   "loserSeverity": 1,
+   "where": "core value gradient; all backgrounds",
+   "note": "P flattens the smoke core to one dark gray; Q keeps a lighter center, though with a dark contour ring."
+  },
+  {
+   "judge": "D",
+   "file": "K066.png",
+   "cases": [
+    "glow-orb-red|auto-c8-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "opaque core transition (shadow); all backgrounds",
+   "note": "P inserts a stark near-black ring between the red center and the rim, visible at 1x; Q uses a dark-red step that is closer to the source gradient."
+  },
+  {
+   "judge": "D",
+   "file": "K067.png",
+   "cases": [
+    "soft-air-bubbles|res64-c4-rgb"
+   ],
+   "winner": "tie",
+   "loserSeverity": 0,
+   "where": "none",
+   "note": "Faint bubbles are visually identical."
+  },
+  {
+   "judge": "D",
+   "file": "K068.png",
+   "cases": [
+    "soft-smoke-puff|res64-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 1,
+   "where": "soft smoke highlights; all backgrounds",
+   "note": "Both tint the smoke slate/mauve. Q keeps brighter highlights, though slightly mint, while P's are flat and dull. Value structure outweighs the slight mint hue."
+  },
+  {
+   "judge": "D",
+   "file": "K069.png",
+   "cases": [
+    "aa-tango-face-smile|res64-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "antialiased rim, eyes and bottom shadow; all backgrounds",
+   "note": "Q gives the face a red-brown rim with purple eyes and purple-tinted bottom shadow pixels; P's olive-brown rim and dark eyes are closer to the golden source."
+  },
+  {
+   "judge": "D",
+   "file": "K070.png",
+   "cases": [
+    "fade-trail-streak|auto-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "glow core of streak; blue, checker, black",
+   "note": "P dims the white hot core of the streak to mid-gray, nearly lost on checker; Q keeps a bright core. Both add a faint dark halo band."
+  },
+  {
+   "judge": "D",
+   "file": "K071.png",
+   "cases": [
+    "fx-black-smoke|auto-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 1,
+   "where": "core edge; white, blue",
+   "note": "P has a flat core with a harsh near-black outline ring; Q's three-step core is softer."
+  },
+  {
+   "judge": "D",
+   "file": "K072.png",
+   "cases": [
+    "glow-lens-flare|auto-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "glow hot core; checker, blue, black",
+   "note": "Both lose the white starburst. Q's center is dimmer and nearly vanishes on checker, while P's is brighter; P's extra hard outer ring matters less."
+  },
+  {
+   "judge": "D",
+   "file": "K073.png",
+   "cases": [
+    "glow-flash-yellow|auto-c8-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "glow core; all backgrounds",
+   "note": "P puts dull khaki/olive blotches inside the bright core, visible at 1x; Q keeps cleaner yellow steps."
+  },
+  {
+   "judge": "D",
+   "file": "K074.png",
+   "cases": [
+    "fx-green-magic-32|res64-c8-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 1,
+   "where": "strong/soft ring structure; blue, checker",
+   "note": "P renders the ring as uniform muddy green, losing the dark segments; Q keeps darker segments but as blue-purple speckle pixels. Both are flawed, and P's loss of structure matters slightly more."
+  },
+  {
+   "judge": "D",
+   "file": "K075.png",
+   "cases": [
+    "fx-black-smoke|auto-c4-oklab"
+   ],
+   "winner": "linear",
+   "loserSeverity": 1,
+   "where": "core edge / shadow band; white, blue",
+   "note": "P's wider dark band reads as a softer gradient, though it has a faint light-blue rim on blue; Q has a thin harsh black outline."
+  },
+  {
+   "judge": "D",
+   "file": "K076.png",
+   "cases": [
+    "glow-lens-flare|res64-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "glow starburst; all backgrounds",
+   "note": "P keeps the flare's starburst/streak shape; Q turns it into a flat mint disc with a mauve outer halo."
+  },
+  {
+   "judge": "D",
+   "file": "K077.png",
+   "cases": [
+    "soft-bubble|auto-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 1,
+   "where": "antialiased rim; white, black",
+   "note": "P adds a thin cyan fringe on the inner lower-right rim; Q's rim is cleaner."
+  },
+  {
+   "judge": "D",
+   "file": "K078.png",
+   "cases": [
+    "glow-orb-red|pico8-c4-oklab"
+   ],
+   "winner": "none",
+   "loserSeverity": 2,
+   "where": "core and rim hue; all backgrounds",
+   "note": "Both are major failures with pico8 c4. P reads as an orange/navy orb with a rust-orange center; Q's hot-pink rim reads closer to the red orb."
+  },
+  {
+   "judge": "D",
+   "file": "K079.png",
+   "cases": [
+    "soft-air-bubbles|auto-c8-rgb"
+   ],
+   "winner": "tie",
+   "loserSeverity": 0,
+   "where": "none",
+   "note": "Faint bubbles are visually identical."
+  },
+  {
+   "judge": "D",
+   "file": "K080.png",
+   "cases": [
+    "anim:anim-rubberduck-magic|auto-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 3,
+   "where": "core color of sparkle frames; all backgrounds",
+   "note": "Mirror of K062: Q turns the cyan sparkle frame peach and the yellow one khaki; P keeps yellow and cyan."
+  },
+  {
+   "judge": "D",
+   "file": "K081.png",
+   "cases": [
+    "glow-flash-yellow|auto-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 1,
+   "where": "core banding values; all backgrounds",
+   "note": "Q's core bands are darker yellow with stark white blobs; P is closer to the pale-yellow gradient. Visible mainly in the crop."
+  },
+  {
+   "judge": "D",
+   "file": "K082.png",
+   "cases": [
+    "aa-magic-orbs-sheet|wall-auto-c4-oklab"
+   ],
+   "winner": "linear",
+   "loserSeverity": 1,
+   "where": "opaque orb cores (wall); all backgrounds",
+   "note": "Both are catastrophic, with shared-wall c4 hues wrong. Q collapses the red, pink and purple orbs to one magenta and the rest to gray; P (brown/violet/gray) keeps slightly more orb distinction but adds a brownish haze to the black rim antialiasing."
+  },
+  {
+   "judge": "D",
+   "file": "K083.png",
+   "cases": [
+    "shadow-tree-topdown|auto-c8-rgb"
+   ],
+   "winner": "none",
+   "loserSeverity": 1,
+   "where": "opaque canopy highlight; all backgrounds",
+   "note": "Shadow identical. Q's lit canopy patch is slightly duller; both lose the yellow-green highlight."
+  },
+  {
+   "judge": "D",
+   "file": "K084.png",
+   "cases": [
+    "soft-air-bubbles|pico8-c4-rgb"
+   ],
+   "winner": "tie",
+   "loserSeverity": 0,
+   "where": "none",
+   "note": "Faint bubbles are visually identical."
+  },
+  {
+   "judge": "D",
+   "file": "K085.png",
+   "cases": [
+    "fade-radial-light|auto-c4-oklab"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "glow hot core; all backgrounds, blue strongest",
+   "note": "Both lose the white center. P's center is darker and tan-tinted (beige on blue); Q's is lighter and closer to neutral."
+  },
+  {
+   "judge": "D",
+   "file": "K086.png",
+   "cases": [
+    "glow-light-64|auto-c8-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "glow / outer rays; white, blue",
+   "note": "P turns the outer glow into muddy gray-blue bands on white and loses the rays; Q keeps a soft cyan glow."
+  },
+  {
+   "judge": "D",
+   "file": "K087.png",
+   "cases": [
+    "fade-trail-streak|auto-c8-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 1,
+   "where": "glow core of streak; all backgrounds",
+   "note": "P's streak core is dimmer gray; Q's is brighter but has a slight dark contour."
+  },
+  {
+   "judge": "D",
+   "file": "K088.png",
+   "cases": [
+    "aa-tango-face-smile|auto-c4-rgb"
+   ],
+   "winner": "none",
+   "loserSeverity": 2,
+   "where": "opaque face and eyes; all backgrounds",
+   "note": "Q adds brown blotches across the lower face and makes the eyes brown, with a brown glow below on black; P keeps a clean orange face with black eyes."
+  },
+  {
+   "judge": "D",
+   "file": "K089.png",
+   "cases": [
+    "aa-tango-face-smile|res64-c4-oklab"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "face core color and antialiased rim; all backgrounds",
+   "note": "P turns the face salmon-pink with olive-green rim/mouth antialiasing; Q stays orange/yellow, despite a white glare blob."
+  },
+  {
+   "judge": "D",
+   "file": "K090.png",
+   "cases": [
+    "fade-trail-streak|res64-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 1,
+   "where": "soft streak tail; white, black",
+   "note": "P tints the lower tail olive-green, Q slate-blue; the olive reads dirtier against the neutral source."
+  },
+  {
+   "judge": "D",
+   "file": "K091.png",
+   "cases": [
+    "aa-tango-face-smile|auto-c3-oklab"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "face core color and smile; all backgrounds",
+   "note": "P turns the face dull brown/tan and flattens the smile to a single line; Q keeps an orange face, yellow highlight and smile ends."
+  },
+  {
+   "judge": "D",
+   "file": "K092.png",
+   "cases": [
+    "fx-energy-star|res64-c4-rgb"
+   ],
+   "winner": "tie",
+   "loserSeverity": 0,
+   "where": "faint smoke haze",
+   "note": "Nearly identical; the faint gray haze on white differs negligibly."
+  },
+  {
+   "judge": "D",
+   "file": "K093.png",
+   "cases": [
+    "fade-radial-light|res64-c8-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "glow hot core; all backgrounds",
+   "note": "P keeps the white hot center, though as a hard disc; Q loses it completely to mint."
+  },
+  {
+   "judge": "D",
+   "file": "K094.png",
+   "cases": [
+    "fx-teleporter-burst|res64-c4-rgb"
+   ],
+   "winner": "none",
+   "loserSeverity": 1,
+   "where": "strong particles hue; all backgrounds",
+   "note": "Both lose indigo. P keeps the cyan/aqua band at the bottom, Q turns it pale blue-white with white sparkles. The cyan identity matters slightly more."
+  },
+  {
+   "judge": "D",
+   "file": "K095.png",
+   "cases": [
+    "aa-tango-face-smile|auto-c8-oklab"
+   ],
+   "winner": "linear",
+   "loserSeverity": 1,
+   "where": "eyes and highlight; all backgrounds",
+   "note": "Near-identical; P's eyes are closer to black, Q's slightly brown."
+  },
+  {
+   "judge": "D",
+   "file": "K096.png",
+   "cases": [
+    "fade-trail-streak|pico8-c4-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 2,
+   "where": "glow hot core; all backgrounds",
+   "note": "P keeps a bright (slightly peach) core; Q dims it to gray and adds a navy tint to the faint haze on black."
+  },
+  {
+   "judge": "D",
+   "file": "K097.png",
+   "cases": [
+    "anim:anim-kenney-explosion|auto-c8-rgb"
+   ],
+   "winner": "linear",
+   "loserSeverity": 1,
+   "where": "core interior steps; all frames",
+   "note": "P keeps more interior highlight steps in the fireball core; Q's core is flatter. The smoke is the same."
+  }
+ ]
+}
