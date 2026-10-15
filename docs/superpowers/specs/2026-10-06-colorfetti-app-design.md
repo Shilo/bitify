@@ -1344,6 +1344,9 @@ in browsers.
   frame, and the message says so.
 - A short message confirms the copy ("name copied."), or says that it failed. It fails where
   the browser has no image clipboard or the page is refused the use of it.
+- A later PNG-production rejection stays handled even when the platform clipboard API or
+  item construction fails before consuming that PNG promise. The original copy failure is
+  preserved; the image promise is never replaced with a successful fallback.
 - The copy is made with the asynchronous Clipboard API (`navigator.clipboard.write`), which
   works in current desktop browsers, iOS Safari and Android Chrome on a secure page. It is
   started directly in the click or key press, with nothing awaited first, because Safari

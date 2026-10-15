@@ -1,8 +1,69 @@
-import { describe, it, expect } from 'vitest';
+import { afterEach, describe, it, expect, vi } from 'vitest';
+import { execFileSync } from 'node:child_process';
 import { inflateSync, crc32 } from 'node:zlib';
 import { unzipSync } from 'fflate';
-import { outNames, zipBytes, pngBytes, fileBytes } from './save.js';
+import { outNames, zipBytes, pngBytes, fileBytes, copyOne } from './save.js';
 import { decodeGif, encodeGif } from './gif.js';
+
+describe('clipboard promise ownership', () => {
+  afterEach(() => vi.unstubAllGlobals());
+
+  it('starts the native write synchronously with the same unresolved PNG promise', async () => {
+    let resolveImage, data;
+    const png = new Promise(resolve => { resolveImage = resolve; });
+    vi.stubGlobal('ClipboardItem', class { constructor(value) { data = value; } });
+    const written = Promise.resolve('native result'), write = vi.fn(() => written);
+    vi.stubGlobal('navigator', { clipboard: { write } });
+    const result = copyOne(png);
+    expect(write).toHaveBeenCalledOnce();
+    expect(data['image/png']).toBe(png);
+    expect(result).toBe(written);
+    resolveImage(new Blob(['owned PNG'], { type: 'image/png' }));
+    await expect(result).resolves.toBe('native result');
+  });
+
+  it('keeps producer rejection visible to the native writer rather than substituting a successful image', async () => {
+    let rejectImage;
+    const png = new Promise((_, reject) => { rejectImage = reject; });
+    vi.stubGlobal('ClipboardItem', class { constructor(value) { this.png = value['image/png']; } });
+    vi.stubGlobal('navigator', { clipboard: { write: items => items[0].png.then(() => undefined) } });
+    const error = new Error('Owned encoder failed'), failed = expect(copyOne(png)).rejects.toBe(error);
+    rejectImage(error);
+    await failed;
+  });
+
+  it('owns late producer rejection when platform setup/write fails without consuming the image', () => {
+    // Isolate process-level rejection reporting from Vitest's own rejection
+    // listener, while exercising the real module and the actual event loop.
+    const script = `
+      import { copyOne } from ${JSON.stringify(new URL('./save.js', import.meta.url).href)};
+      const outcomes = [];
+      for (const scenario of ['missing-clipboard', 'missing-item', 'item-constructor-throws', 'write-throws', 'write-rejects']) {
+        const unhandled = [], listener = error => unhandled.push(error.message);
+        process.on('unhandledRejection', listener);
+        let rejectImage;
+        const png = new Promise((_, reject) => { rejectImage = reject; });
+        Object.defineProperty(globalThis, 'navigator', { configurable: true, value: scenario === 'missing-clipboard' ? {} : { clipboard: { write() {
+          const error = new DOMException('Owned platform refusal.', 'NotAllowedError');
+          if (scenario === 'write-rejects') return Promise.reject(error);
+          throw error;
+        } } } });
+        if (scenario === 'missing-item') delete globalThis.ClipboardItem;
+        else globalThis.ClipboardItem = class { constructor() { if (scenario === 'item-constructor-throws') throw new TypeError('Owned constructor refusal.'); } };
+        let failure;
+        try { await copyOne(png); } catch (error) { failure = error.name; }
+        rejectImage(new Error('Owned late encoder failure.'));
+        await new Promise(resolve => setTimeout(resolve, 20));
+        process.removeListener('unhandledRejection', listener);
+        outcomes.push({ scenario, failure, unhandled });
+      }
+      console.log(JSON.stringify(outcomes));
+    `;
+    const outcomes = JSON.parse(execFileSync(process.execPath, ['--input-type=module', '-e', script], { encoding: 'utf8' }));
+    expect(outcomes.map(value => value.failure)).toEqual(['TypeError', 'ReferenceError', 'TypeError', 'NotAllowedError', 'NotAllowedError']);
+    for (const outcome of outcomes) expect(outcome.unhandled, outcome.scenario).toEqual([]);
+  });
+});
 
 describe('outNames', () => {
   it('replaces the extension with -1bit.png', () => {

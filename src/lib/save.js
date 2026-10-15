@@ -244,7 +244,14 @@ export const pngBlob = image => image.colors
 // The write starts at once, with nothing awaited first, as Safari only allows it during a click or a key press.
 // `png` may be a promise of the PNG, for a caller that needs a moment before making it: the
 // clipboard is promised it now and given it when it is ready.
-export const copyOne = png => navigator.clipboard.write([new ClipboardItem({ 'image/png': Promise.resolve(png) })]);
+export function copyOne(png) {
+  const image = Promise.resolve(png);
+  // Own a later encoder rejection even if platform lookup, item construction or
+  // write fails before the clipboard consumes it. Keep the original rejecting
+  // promise as the item value so conversion failure still fails the real copy.
+  image.catch(() => {});
+  return navigator.clipboard.write([new ClipboardItem({ 'image/png': image })]);
+}
 
 // One image saves as itself; a zip of one file would only be an extra step to open.
 // `image` turns an item into what `fileBytes` takes. It is called for one item at a time, so
