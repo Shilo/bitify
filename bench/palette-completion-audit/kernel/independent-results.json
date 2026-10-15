@@ -1,0 +1,19 @@
+{
+  "seed": "0x570a3e",
+  "baseRef": "f08d4d3f6e3df771d17524f00f1bba2e492c4ec0",
+  "baselineChecks": 120,
+  "cases": 80,
+  "pixels": 68080,
+  "oraclePixels": 9120,
+  "pngRoundTrips": 80,
+  "gifRejectionChecks": 2,
+  "sourceHashes": [
+    "4721ca02ff84c61d302dad9b09c0d2c3b52a433ba32eb4c492ab1b71ee042959",
+    "0187fa8cd5a20c8898dacbe354b10ae1d6d523a62b5dc03157fbdb8b6696aee7",
+    "6b6ee6758479e5145df8266b35be74521eb313f781fd7e69ae24a01c357534af",
+    "cacfb17342af598e81ea8e46e9294a88c3c548df899c459401d13da5836484d7",
+    "493c957def503898297b5805c075fa7779ca2cfdbe35e0c6170b4cb9a34f5eaa"
+  ],
+  "failures": [],
+  "elapsedMs": 1465
+}
