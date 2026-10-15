@@ -8,18 +8,20 @@ style's own settings change. The code is in [src/lib/recolor.js](../src/lib/reco
 tests beside it pin every rule described here. The settings are listed in
 [src/lib/settings.js](../src/lib/settings.js).
 
-The **Palette** family is separate from these structural and dithering styles. It matches
-each visible source RGB to the nearest selected color using Oklab (default) or RGB. With
-**Max colors: All** and **Cleanup: Off** (defaults), exact palette RGB matches are preserved and the existing
-matching path is unchanged. It accepts 1–256 unique opaque colors; using a palette does not
+The **Palette** family is separate from these structural and dithering styles. By default it matches
+each visible source RGB to the nearest selected color using Oklab or RGB. Optional ordered
+dithering can mix those allowed colors in a repeating pattern. With **Max colors: All**,
+**Cleanup: Off** and **Dithering: Off** (defaults), the nearest matching path is unchanged.
+Exact active-palette RGB matches stay exact with dithering enabled too. It accepts 1–256 unique opaque colors; using a palette does not
 guarantee every color appears in an image. Output alpha stays binary, with a separate
 Opacity cut of 1–255 (128 by default). Its settings control offers **Max colors**, **Matching:
-Oklab / RGB** and **Cleanup: Off / On**, in that order; Opacity cut follows for partially transparent sources or a changed cut.
+Oklab / RGB**, **Cleanup: Off / On** and **Dithering: Off / 2×2 / 4×4 / 8×8**, in that order.
+**Dither strength** appears only for an enabled pattern; Opacity cut follows for partially transparent sources or a changed cut.
 Oklab approximates perceived differences; RGB compares encoded sRGB channel values.
 The maximum is optional: drag its slider or enter a number from 2 up to the active palette's
 color count. The slider updates after a 200ms pause or release; number edits apply when
 finished. The previous preview stays visible while recalculating. Palette Reset is an
-icon-only button aligned beside the Nearest title. Style Reset shows text on wide screens
+icon-only button aligned beside the Recolor title. Style Reset shows text on wide screens
 and an icon on phones; both buttons have matching rounded corners.
 The controls show the effective limit; switching to a
 smaller palette retains the remembered limit, which returns with a larger palette.
@@ -42,23 +44,28 @@ noise untouched. Cleanup preserves binary alpha and the selected palette/subset.
 compatibility/error gates use Oklab even when Matching is RGB. See the
 [cleanup research and limitations](research/2026-10-12-one-pixel-cleanup.md).
 
-Reset restores Oklab, All, Cleanup Off and cut 128. There is no threshold, Swap, None or style chooser
+Reset restores Oklab, All, Cleanup Off, Dithering Off, strength 50% and cut 128. There is no brightness threshold, Swap, None or style chooser
 in this family. Switching back to 1-bit restores the retained colors, style and settings.
 See [palettes.md](palettes.md) for import and palette library behavior.
 
 Choose **1-bit** in the Palette panel to use these styles. Help follows the selected mode:
-Palette uses “Use Auto, pick a palette or import your own.” and **Nearest: “Tune color
-matching and limits.”** 1-bit uses “Pick a color pair or choose your own colors.” and
+Palette uses “Use Auto, pick a palette or import your own.” and **Recolor: “Tune matching,
+color limits and dithering.”** 1-bit uses “Pick a color pair or choose your own colors.” and
 **Style: “Pick an effect and tune its settings.”** Its controls table shows style stepping
-and Style settings in 1-bit; Palette settings in Palette. The full-palette popup is titled **Nearest**.
-Matching changes the nearest-color rule, without introducing a new effect.
+and Style settings in 1-bit; Palette settings in Palette. The full-palette popup is titled **Recolor**.
+Matching chooses the color-distance rule; Dithering independently controls the optional pattern.
 
-Glow and Paper in Palette mode provide two-color nearest conversion through the
-variable-color engine. A separate 1-bit Nearest style remains deferred; see the
+Glow and Paper in Palette mode each provide a two-color target through the
+variable-color engine, with optional ordered dithering. A custom black/white pair works too.
+The 1-bit mode instead uses its selected style to assign two inks by brightness, structure
+or pattern. Its existing Checker, Bayer, Hatch, Atkinson and Noise styles already provide
+patterned shading; they do not receive a second pass from Palette's Dithering control.
+A separate 1-bit Nearest style remains deferred; see the
 [workflow review and research spike](research/2026-10-11-one-bit-nearest.md) for
 the decision, Swap/None tradeoffs and triggers for reconsidering it.
 
-Palette-specific ordered and error-diffusion dithering remain research only. Tests with
+Full-palette ordered dithering is available; full-palette error diffusion remains deferred.
+Earlier tests with
 one shared 255-color palette and six buildings found lower locally averaged color error at the cost of
 texture and greater individual-pixel color error. Nearest retains clean flat fills and
 consistent source-color mapping when Max colors is All. See the [shared-palette research](research/2026-10-11-shared-palette.md)

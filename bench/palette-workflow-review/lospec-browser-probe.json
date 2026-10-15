@@ -1,0 +1,20 @@
+{
+  "origin": "http://127.0.0.1:5296",
+  "url": "https://lospec.com/palette-list/endesga-8.json",
+  "credentials": "omit",
+  "status": 200,
+  "name": "Endesga 8",
+  "author": "ENDESGA",
+  "count": 8,
+  "colors": [
+    "fdfdf8",
+    "d32734",
+    "da7d22",
+    "e6da29",
+    "28c641",
+    "2d93dd",
+    "7b53ad",
+    "1b1c33"
+  ],
+  "passed": true
+}

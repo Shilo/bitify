@@ -22,6 +22,14 @@ art can move through the pattern. Diffusion is not offered in this family.
 
 These rules supersede historical nearest-only method guidance below.
 
+“Target palette” means the colors the finished image is allowed to use. A two-color
+target is just a set of two colors: Glow, Paper, black/white or a custom pair.
+Palette mode can apply its optional Dithering control to that pair. This does not
+switch the app into the separate 1-bit mode. In 1-bit mode, the selected style
+assigns two inks using brightness, structure or patterns; Checker, Bayer, Hatch,
+Atkinson and Noise already provide patterned shading. The full-palette Dithering
+control does not apply an additional pass to those styles.
+
 Colorfetti starts in **Palette** mode: generate colors with Auto, choose from nine
 curated palettes, or import, edit and save your own. The optional **1-bit** mode offers
 twelve preset color pairs and two-color styles. Full palettes and their provenance are
