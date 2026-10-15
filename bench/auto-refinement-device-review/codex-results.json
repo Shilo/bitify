@@ -1,0 +1,1291 @@
+{
+  "device": "codex",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "started": "2026-10-15T07:51:46.388Z",
+  "checks": [
+    {
+      "id": "sprite-sprite-cut-oklab-k4",
+      "method": "centroid",
+      "changed": false,
+      "baselineColors": [
+        "#371c0b",
+        "#723f30",
+        "#9e744a",
+        "#e1c38b"
+      ],
+      "candidateColors": [
+        "#371c0b",
+        "#723f30",
+        "#9e744a",
+        "#e1c38b"
+      ],
+      "sharedMembership": true,
+      "baselineError": 0.007812122401335671,
+      "candidateError": 0.007812122401335671,
+      "worsenedSourceColors": 0,
+      "lostExactPixels": 0,
+      "elapsedMs": 3.400000002235174,
+      "baselineRgbaSha256": "b427b546576dce3ff8c16535e055f3d327e41ebad3c7543823f22925f7923d9f",
+      "candidateRgbaSha256": "b427b546576dce3ff8c16535e055f3d327e41ebad3c7543823f22925f7923d9f",
+      "downstream": [
+        {
+          "dither": "4x4",
+          "cleanup": false,
+          "baselineError": 0.009841499122197556,
+          "candidateError": 0.009841499122197556,
+          "worse": false
+        },
+        {
+          "dither": "8x8",
+          "cleanup": false,
+          "baselineError": 0.009486524439142954,
+          "candidateError": 0.009486524439142954,
+          "worse": false
+        },
+        {
+          "dither": "4x4",
+          "cleanup": true,
+          "baselineError": 0.00982693232539718,
+          "candidateError": 0.00982693232539718,
+          "worse": false
+        }
+      ]
+    },
+    {
+      "id": "sprite-sprite-cut-oklab-k4",
+      "method": "subset-swaps",
+      "changed": false,
+      "baselineColors": [
+        "#371c0b",
+        "#723f30",
+        "#9e744a",
+        "#e1c38b"
+      ],
+      "candidateColors": [
+        "#371c0b",
+        "#723f30",
+        "#9e744a",
+        "#e1c38b"
+      ],
+      "sharedMembership": true,
+      "baselineError": 0.007812122401335671,
+      "candidateError": 0.007812122401335671,
+      "worsenedSourceColors": 0,
+      "lostExactPixels": 0,
+      "elapsedMs": 20.699999999254942,
+      "baselineRgbaSha256": "b427b546576dce3ff8c16535e055f3d327e41ebad3c7543823f22925f7923d9f",
+      "candidateRgbaSha256": "b427b546576dce3ff8c16535e055f3d327e41ebad3c7543823f22925f7923d9f",
+      "downstream": [
+        {
+          "dither": "4x4",
+          "cleanup": false,
+          "baselineError": 0.009841499122197556,
+          "candidateError": 0.009841499122197556,
+          "worse": false
+        },
+        {
+          "dither": "8x8",
+          "cleanup": false,
+          "baselineError": 0.009486524439142954,
+          "candidateError": 0.009486524439142954,
+          "worse": false
+        },
+        {
+          "dither": "4x4",
+          "cleanup": true,
+          "baselineError": 0.00982693232539718,
+          "candidateError": 0.00982693232539718,
+          "worse": false
+        }
+      ]
+    },
+    {
+      "id": "sprite-sprite-cut-rgb-k8",
+      "method": "centroid",
+      "changed": false,
+      "baselineColors": [
+        "#371c0b",
+        "#495364",
+        "#764a24",
+        "#ab7e45",
+        "#b7212d",
+        "#bcced8",
+        "#e1c38b",
+        "#f8c32a"
+      ],
+      "candidateColors": [
+        "#371c0b",
+        "#495364",
+        "#764a24",
+        "#ab7e45",
+        "#b7212d",
+        "#bcced8",
+        "#e1c38b",
+        "#f8c32a"
+      ],
+      "sharedMembership": true,
+      "baselineError": 1374.774459974587,
+      "candidateError": 1374.774459974587,
+      "worsenedSourceColors": 0,
+      "lostExactPixels": 0,
+      "elapsedMs": 1.4000000022351742,
+      "baselineRgbaSha256": "64ce48a256934497c55fa498baddb9063436b1e53abe4b6566d8adfd993ee084",
+      "candidateRgbaSha256": "64ce48a256934497c55fa498baddb9063436b1e53abe4b6566d8adfd993ee084",
+      "downstream": [
+        {
+          "dither": "4x4",
+          "cleanup": false,
+          "baselineError": 1932.0813214739517,
+          "candidateError": 1932.0813214739517,
+          "worse": false
+        },
+        {
+          "dither": "8x8",
+          "cleanup": false,
+          "baselineError": 1890.987293519695,
+          "candidateError": 1890.987293519695,
+          "worse": false
+        },
+        {
+          "dither": "4x4",
+          "cleanup": true,
+          "baselineError": 1935.3303684879288,
+          "candidateError": 1935.3303684879288,
+          "worse": false
+        }
+      ]
+    },
+    {
+      "id": "sprite-sprite-cut-rgb-k8",
+      "method": "subset-swaps",
+      "changed": false,
+      "baselineColors": [
+        "#371c0b",
+        "#495364",
+        "#764a24",
+        "#ab7e45",
+        "#b7212d",
+        "#bcced8",
+        "#e1c38b",
+        "#f8c32a"
+      ],
+      "candidateColors": [
+        "#371c0b",
+        "#495364",
+        "#764a24",
+        "#ab7e45",
+        "#b7212d",
+        "#bcced8",
+        "#e1c38b",
+        "#f8c32a"
+      ],
+      "sharedMembership": true,
+      "baselineError": 1374.774459974587,
+      "candidateError": 1374.774459974587,
+      "worsenedSourceColors": 0,
+      "lostExactPixels": 0,
+      "elapsedMs": 4.099999997764826,
+      "baselineRgbaSha256": "64ce48a256934497c55fa498baddb9063436b1e53abe4b6566d8adfd993ee084",
+      "candidateRgbaSha256": "64ce48a256934497c55fa498baddb9063436b1e53abe4b6566d8adfd993ee084",
+      "downstream": [
+        {
+          "dither": "4x4",
+          "cleanup": false,
+          "baselineError": 1932.0813214739517,
+          "candidateError": 1932.0813214739517,
+          "worse": false
+        },
+        {
+          "dither": "8x8",
+          "cleanup": false,
+          "baselineError": 1890.987293519695,
+          "candidateError": 1890.987293519695,
+          "worse": false
+        },
+        {
+          "dither": "4x4",
+          "cleanup": true,
+          "baselineError": 1935.3303684879288,
+          "candidateError": 1935.3303684879288,
+          "worse": false
+        }
+      ]
+    },
+    {
+      "id": "armor-armor-cut-oklab-k4",
+      "method": "centroid",
+      "changed": false,
+      "baselineColors": [
+        "#020100",
+        "#3c3124",
+        "#515c66",
+        "#84949c"
+      ],
+      "candidateColors": [
+        "#020100",
+        "#3c3124",
+        "#515c66",
+        "#84949c"
+      ],
+      "sharedMembership": true,
+      "baselineError": 0.005467644864640162,
+      "candidateError": 0.005467644864640162,
+      "worsenedSourceColors": 0,
+      "lostExactPixels": 0,
+      "elapsedMs": 0.19999999925494194,
+      "baselineRgbaSha256": "fdd154ba305ffd01438a13c105561f6e47a4592a3ea4dce9a033ee52b99c49c4",
+      "candidateRgbaSha256": "fdd154ba305ffd01438a13c105561f6e47a4592a3ea4dce9a033ee52b99c49c4",
+      "downstream": [
+        {
+          "dither": "4x4",
+          "cleanup": false,
+          "baselineError": 0.006642033333654489,
+          "candidateError": 0.006642033333654489,
+          "worse": false
+        },
+        {
+          "dither": "8x8",
+          "cleanup": false,
+          "baselineError": 0.007060715923616524,
+          "candidateError": 0.007060715923616524,
+          "worse": false
+        },
+        {
+          "dither": "4x4",
+          "cleanup": true,
+          "baselineError": 0.006642033333654489,
+          "candidateError": 0.006642033333654489,
+          "worse": false
+        }
+      ]
+    },
+    {
+      "id": "armor-armor-cut-oklab-k4",
+      "method": "subset-swaps",
+      "changed": false,
+      "baselineColors": [
+        "#020100",
+        "#3c3124",
+        "#515c66",
+        "#84949c"
+      ],
+      "candidateColors": [
+        "#020100",
+        "#3c3124",
+        "#515c66",
+        "#84949c"
+      ],
+      "sharedMembership": true,
+      "baselineError": 0.005467644864640162,
+      "candidateError": 0.005467644864640162,
+      "worsenedSourceColors": 0,
+      "lostExactPixels": 0,
+      "elapsedMs": 0.7000000029802322,
+      "baselineRgbaSha256": "fdd154ba305ffd01438a13c105561f6e47a4592a3ea4dce9a033ee52b99c49c4",
+      "candidateRgbaSha256": "fdd154ba305ffd01438a13c105561f6e47a4592a3ea4dce9a033ee52b99c49c4",
+      "downstream": [
+        {
+          "dither": "4x4",
+          "cleanup": false,
+          "baselineError": 0.006642033333654489,
+          "candidateError": 0.006642033333654489,
+          "worse": false
+        },
+        {
+          "dither": "8x8",
+          "cleanup": false,
+          "baselineError": 0.007060715923616524,
+          "candidateError": 0.007060715923616524,
+          "worse": false
+        },
+        {
+          "dither": "4x4",
+          "cleanup": true,
+          "baselineError": 0.006642033333654489,
+          "candidateError": 0.006642033333654489,
+          "worse": false
+        }
+      ]
+    },
+    {
+      "id": "armor-armor-cut-rgb-k8",
+      "method": "centroid",
+      "changed": false,
+      "baselineColors": [
+        "#050403",
+        "#323941",
+        "#3b1400",
+        "#515c66",
+        "#747c82",
+        "#7f3000",
+        "#9aa4ab",
+        "#bfcad0"
+      ],
+      "candidateColors": [
+        "#050403",
+        "#323941",
+        "#3b1400",
+        "#515c66",
+        "#747c82",
+        "#7f3000",
+        "#9aa4ab",
+        "#bfcad0"
+      ],
+      "sharedMembership": true,
+      "baselineError": 253.6516129032258,
+      "candidateError": 253.6516129032258,
+      "worsenedSourceColors": 0,
+      "lostExactPixels": 0,
+      "elapsedMs": 0.19999999925494194,
+      "baselineRgbaSha256": "41a542e3fbcc7ad61b6a35493459b11fdf9239009907eed4aa5015dfdbc2d263",
+      "candidateRgbaSha256": "41a542e3fbcc7ad61b6a35493459b11fdf9239009907eed4aa5015dfdbc2d263",
+      "downstream": [
+        {
+          "dither": "4x4",
+          "cleanup": false,
+          "baselineError": 360.3806451612903,
+          "candidateError": 360.3806451612903,
+          "worse": false
+        },
+        {
+          "dither": "8x8",
+          "cleanup": false,
+          "baselineError": 354.541935483871,
+          "candidateError": 354.541935483871,
+          "worse": false
+        },
+        {
+          "dither": "4x4",
+          "cleanup": true,
+          "baselineError": 364.28387096774196,
+          "candidateError": 364.28387096774196,
+          "worse": false
+        }
+      ]
+    },
+    {
+      "id": "armor-armor-cut-rgb-k8",
+      "method": "subset-swaps",
+      "changed": false,
+      "baselineColors": [
+        "#050403",
+        "#323941",
+        "#3b1400",
+        "#515c66",
+        "#747c82",
+        "#7f3000",
+        "#9aa4ab",
+        "#bfcad0"
+      ],
+      "candidateColors": [
+        "#050403",
+        "#323941",
+        "#3b1400",
+        "#515c66",
+        "#747c82",
+        "#7f3000",
+        "#9aa4ab",
+        "#bfcad0"
+      ],
+      "sharedMembership": true,
+      "baselineError": 253.6516129032258,
+      "candidateError": 253.6516129032258,
+      "worsenedSourceColors": 0,
+      "lostExactPixels": 0,
+      "elapsedMs": 0.8999999985098839,
+      "baselineRgbaSha256": "41a542e3fbcc7ad61b6a35493459b11fdf9239009907eed4aa5015dfdbc2d263",
+      "candidateRgbaSha256": "41a542e3fbcc7ad61b6a35493459b11fdf9239009907eed4aa5015dfdbc2d263",
+      "downstream": [
+        {
+          "dither": "4x4",
+          "cleanup": false,
+          "baselineError": 360.3806451612903,
+          "candidateError": 360.3806451612903,
+          "worse": false
+        },
+        {
+          "dither": "8x8",
+          "cleanup": false,
+          "baselineError": 354.541935483871,
+          "candidateError": 354.541935483871,
+          "worse": false
+        },
+        {
+          "dither": "4x4",
+          "cleanup": true,
+          "baselineError": 364.28387096774196,
+          "candidateError": 364.28387096774196,
+          "worse": false
+        }
+      ]
+    },
+    {
+      "id": "rare-exact-red-eye-rare-exact-red-eye-cut-oklab-k4",
+      "method": "centroid",
+      "changed": false,
+      "baselineColors": [
+        "#3c3c6a",
+        "#3d43a3",
+        "#3f5688",
+        "#43555d"
+      ],
+      "candidateColors": [
+        "#3c3c6a",
+        "#3d43a3",
+        "#3f5688",
+        "#43555d"
+      ],
+      "sharedMembership": true,
+      "baselineError": 0.0016433790549244063,
+      "candidateError": 0.0016433790549244063,
+      "worsenedSourceColors": 0,
+      "lostExactPixels": 0,
+      "elapsedMs": 1.800000000745058,
+      "baselineRgbaSha256": "673fa43c19ec1972bd129706ed8e692203ee9fd9faea1f43b297bb653e68c464",
+      "candidateRgbaSha256": "673fa43c19ec1972bd129706ed8e692203ee9fd9faea1f43b297bb653e68c464",
+      "downstream": [
+        {
+          "dither": "4x4",
+          "cleanup": false,
+          "baselineError": 0.0018919333980822544,
+          "candidateError": 0.0018919333980822544,
+          "worse": false
+        },
+        {
+          "dither": "8x8",
+          "cleanup": false,
+          "baselineError": 0.0019137863327846056,
+          "candidateError": 0.0019137863327846056,
+          "worse": false
+        },
+        {
+          "dither": "4x4",
+          "cleanup": true,
+          "baselineError": 0.0018919333980822544,
+          "candidateError": 0.0018919333980822544,
+          "worse": false
+        }
+      ]
+    },
+    {
+      "id": "rare-exact-red-eye-rare-exact-red-eye-cut-oklab-k4",
+      "method": "subset-swaps",
+      "changed": false,
+      "baselineColors": [
+        "#3c3c6a",
+        "#3d43a3",
+        "#3f5688",
+        "#43555d"
+      ],
+      "candidateColors": [
+        "#3c3c6a",
+        "#3d43a3",
+        "#3f5688",
+        "#43555d"
+      ],
+      "sharedMembership": true,
+      "baselineError": 0.0016433790549244063,
+      "candidateError": 0.0016433790549244063,
+      "worsenedSourceColors": 0,
+      "lostExactPixels": 0,
+      "elapsedMs": 18.800000000745058,
+      "baselineRgbaSha256": "673fa43c19ec1972bd129706ed8e692203ee9fd9faea1f43b297bb653e68c464",
+      "candidateRgbaSha256": "673fa43c19ec1972bd129706ed8e692203ee9fd9faea1f43b297bb653e68c464",
+      "downstream": [
+        {
+          "dither": "4x4",
+          "cleanup": false,
+          "baselineError": 0.0018919333980822544,
+          "candidateError": 0.0018919333980822544,
+          "worse": false
+        },
+        {
+          "dither": "8x8",
+          "cleanup": false,
+          "baselineError": 0.0019137863327846056,
+          "candidateError": 0.0019137863327846056,
+          "worse": false
+        },
+        {
+          "dither": "4x4",
+          "cleanup": true,
+          "baselineError": 0.0018919333980822544,
+          "candidateError": 0.0018919333980822544,
+          "worse": false
+        }
+      ]
+    },
+    {
+      "id": "rare-exact-red-eye-rare-exact-red-eye-cut-rgb-k8",
+      "method": "centroid",
+      "changed": false,
+      "baselineColors": [
+        "#233970",
+        "#253ca8",
+        "#2b4b8f",
+        "#314462",
+        "#3d43a3",
+        "#483d7d",
+        "#484e5e",
+        "#485796"
+      ],
+      "candidateColors": [
+        "#233970",
+        "#253ca8",
+        "#2b4b8f",
+        "#314462",
+        "#3d43a3",
+        "#483d7d",
+        "#484e5e",
+        "#485796"
+      ],
+      "sharedMembership": true,
+      "baselineError": 307.78027777777777,
+      "candidateError": 307.78027777777777,
+      "worsenedSourceColors": 0,
+      "lostExactPixels": 0,
+      "elapsedMs": 2.599999997764826,
+      "baselineRgbaSha256": "a326d798d6466813d4736aea1d0c7b830b27d990d9e3f53141d8e9e33438a24b",
+      "candidateRgbaSha256": "a326d798d6466813d4736aea1d0c7b830b27d990d9e3f53141d8e9e33438a24b",
+      "downstream": [
+        {
+          "dither": "4x4",
+          "cleanup": false,
+          "baselineError": 400.6488888888889,
+          "candidateError": 400.6488888888889,
+          "worse": false
+        },
+        {
+          "dither": "8x8",
+          "cleanup": false,
+          "baselineError": 383.40972222222223,
+          "candidateError": 383.40972222222223,
+          "worse": false
+        },
+        {
+          "dither": "4x4",
+          "cleanup": true,
+          "baselineError": 400.6488888888889,
+          "candidateError": 400.6488888888889,
+          "worse": false
+        }
+      ]
+    },
+    {
+      "id": "rare-exact-red-eye-rare-exact-red-eye-cut-rgb-k8",
+      "method": "subset-swaps",
+      "changed": false,
+      "baselineColors": [
+        "#233970",
+        "#253ca8",
+        "#2b4b8f",
+        "#314462",
+        "#3d43a3",
+        "#483d7d",
+        "#484e5e",
+        "#485796"
+      ],
+      "candidateColors": [
+        "#233970",
+        "#253ca8",
+        "#2b4b8f",
+        "#314462",
+        "#3d43a3",
+        "#483d7d",
+        "#484e5e",
+        "#485796"
+      ],
+      "sharedMembership": true,
+      "baselineError": 307.78027777777777,
+      "candidateError": 307.78027777777777,
+      "worsenedSourceColors": 0,
+      "lostExactPixels": 0,
+      "elapsedMs": 21.5,
+      "baselineRgbaSha256": "a326d798d6466813d4736aea1d0c7b830b27d990d9e3f53141d8e9e33438a24b",
+      "candidateRgbaSha256": "a326d798d6466813d4736aea1d0c7b830b27d990d9e3f53141d8e9e33438a24b",
+      "downstream": [
+        {
+          "dither": "4x4",
+          "cleanup": false,
+          "baselineError": 400.6488888888889,
+          "candidateError": 400.6488888888889,
+          "worse": false
+        },
+        {
+          "dither": "8x8",
+          "cleanup": false,
+          "baselineError": 383.40972222222223,
+          "candidateError": 383.40972222222223,
+          "worse": false
+        },
+        {
+          "dither": "4x4",
+          "cleanup": true,
+          "baselineError": 400.6488888888889,
+          "candidateError": 400.6488888888889,
+          "worse": false
+        }
+      ]
+    },
+    {
+      "id": "alpha-boundaries-alpha-boundaries-cut-oklab-k4",
+      "method": "centroid",
+      "changed": false,
+      "baselineColors": [
+        "#21e3ba",
+        "#58b2a8",
+        "#8789c6",
+        "#ca4ea8"
+      ],
+      "candidateColors": [
+        "#21e3ba",
+        "#58b2a8",
+        "#8789c6",
+        "#ca4ea8"
+      ],
+      "sharedMembership": true,
+      "baselineError": 0.005073806477352208,
+      "candidateError": 0.005073806477352208,
+      "worsenedSourceColors": 0,
+      "lostExactPixels": 0,
+      "elapsedMs": 0.6999999992549419,
+      "baselineRgbaSha256": "149880cf9b5836640f09eb2517dfafbc0c638bbae76f56e81b163ce7f6adaa99",
+      "candidateRgbaSha256": "149880cf9b5836640f09eb2517dfafbc0c638bbae76f56e81b163ce7f6adaa99",
+      "downstream": [
+        {
+          "dither": "4x4",
+          "cleanup": false,
+          "baselineError": 0.00646658488967527,
+          "candidateError": 0.00646658488967527,
+          "worse": false
+        },
+        {
+          "dither": "8x8",
+          "cleanup": false,
+          "baselineError": 0.006631832112053912,
+          "candidateError": 0.006631832112053912,
+          "worse": false
+        },
+        {
+          "dither": "4x4",
+          "cleanup": true,
+          "baselineError": 0.00646658488967527,
+          "candidateError": 0.00646658488967527,
+          "worse": false
+        }
+      ]
+    },
+    {
+      "id": "alpha-boundaries-alpha-boundaries-cut-oklab-k4",
+      "method": "subset-swaps",
+      "changed": false,
+      "baselineColors": [
+        "#21e3ba",
+        "#58b2a8",
+        "#8789c6",
+        "#ca4ea8"
+      ],
+      "candidateColors": [
+        "#21e3ba",
+        "#58b2a8",
+        "#8789c6",
+        "#ca4ea8"
+      ],
+      "sharedMembership": true,
+      "baselineError": 0.005073806477352208,
+      "candidateError": 0.005073806477352208,
+      "worsenedSourceColors": 0,
+      "lostExactPixels": 0,
+      "elapsedMs": 9.800000000745058,
+      "baselineRgbaSha256": "149880cf9b5836640f09eb2517dfafbc0c638bbae76f56e81b163ce7f6adaa99",
+      "candidateRgbaSha256": "149880cf9b5836640f09eb2517dfafbc0c638bbae76f56e81b163ce7f6adaa99",
+      "downstream": [
+        {
+          "dither": "4x4",
+          "cleanup": false,
+          "baselineError": 0.00646658488967527,
+          "candidateError": 0.00646658488967527,
+          "worse": false
+        },
+        {
+          "dither": "8x8",
+          "cleanup": false,
+          "baselineError": 0.006631832112053912,
+          "candidateError": 0.006631832112053912,
+          "worse": false
+        },
+        {
+          "dither": "4x4",
+          "cleanup": true,
+          "baselineError": 0.00646658488967527,
+          "candidateError": 0.00646658488967527,
+          "worse": false
+        }
+      ]
+    },
+    {
+      "id": "alpha-boundaries-alpha-boundaries-keep-oklab-k4",
+      "method": "centroid",
+      "changed": false,
+      "baselineColors": [
+        "#2ed799",
+        "#7e9198",
+        "#bc5bc4",
+        "#d34761"
+      ],
+      "candidateColors": [
+        "#2ed799",
+        "#7e9198",
+        "#bc5bc4",
+        "#d34761"
+      ],
+      "sharedMembership": true,
+      "baselineError": 0.008023731788729963,
+      "candidateError": 0.008023731788729963,
+      "worsenedSourceColors": 0,
+      "lostExactPixels": 0,
+      "elapsedMs": 0.8999999985098839,
+      "baselineRgbaSha256": "563434c35bc6d34a403e9bb4152e9098ef3c50ef5c07a9168a0851876a6433c0",
+      "candidateRgbaSha256": "563434c35bc6d34a403e9bb4152e9098ef3c50ef5c07a9168a0851876a6433c0",
+      "downstream": [
+        {
+          "dither": "4x4",
+          "cleanup": false,
+          "baselineError": 0.009957583762523585,
+          "candidateError": 0.009957583762523585,
+          "worse": false
+        },
+        {
+          "dither": "8x8",
+          "cleanup": false,
+          "baselineError": 0.010024908868901573,
+          "candidateError": 0.010024908868901573,
+          "worse": false
+        },
+        {
+          "dither": "4x4",
+          "cleanup": true,
+          "baselineError": 0.009957583762523585,
+          "candidateError": 0.009957583762523585,
+          "worse": false
+        }
+      ]
+    },
+    {
+      "id": "alpha-boundaries-alpha-boundaries-keep-oklab-k4",
+      "method": "subset-swaps",
+      "changed": false,
+      "baselineColors": [
+        "#2ed799",
+        "#7e9198",
+        "#bc5bc4",
+        "#d34761"
+      ],
+      "candidateColors": [
+        "#2ed799",
+        "#7e9198",
+        "#bc5bc4",
+        "#d34761"
+      ],
+      "sharedMembership": true,
+      "baselineError": 0.008023731788729963,
+      "candidateError": 0.008023731788729963,
+      "worsenedSourceColors": 0,
+      "lostExactPixels": 0,
+      "elapsedMs": 5.900000002235174,
+      "baselineRgbaSha256": "563434c35bc6d34a403e9bb4152e9098ef3c50ef5c07a9168a0851876a6433c0",
+      "candidateRgbaSha256": "563434c35bc6d34a403e9bb4152e9098ef3c50ef5c07a9168a0851876a6433c0",
+      "downstream": [
+        {
+          "dither": "4x4",
+          "cleanup": false,
+          "baselineError": 0.009957583762523585,
+          "candidateError": 0.009957583762523585,
+          "worse": false
+        },
+        {
+          "dither": "8x8",
+          "cleanup": false,
+          "baselineError": 0.010024908868901573,
+          "candidateError": 0.010024908868901573,
+          "worse": false
+        },
+        {
+          "dither": "4x4",
+          "cleanup": true,
+          "baselineError": 0.009957583762523585,
+          "candidateError": 0.009957583762523585,
+          "worse": false
+        }
+      ]
+    },
+    {
+      "id": "high-unique-6144-high-unique-6144-cut-oklab-k4",
+      "method": "centroid",
+      "changed": false,
+      "baselineColors": [
+        "#397a74",
+        "#5bcc96",
+        "#612297",
+        "#e3688c"
+      ],
+      "candidateColors": [
+        "#397a74",
+        "#5bcc96",
+        "#612297",
+        "#e3688c"
+      ],
+      "sharedMembership": true,
+      "baselineError": 0.02027250064594908,
+      "candidateError": 0.02027250064594908,
+      "worsenedSourceColors": 0,
+      "lostExactPixels": 0,
+      "elapsedMs": 7.899999998509884,
+      "baselineRgbaSha256": "c75be076c666e7bf25b98bee53ebc44c075bf61806bc73c98d0b767f8a4e2c3b",
+      "candidateRgbaSha256": "c75be076c666e7bf25b98bee53ebc44c075bf61806bc73c98d0b767f8a4e2c3b",
+      "downstream": [
+        {
+          "dither": "4x4",
+          "cleanup": false,
+          "baselineError": 0.02440555004121832,
+          "candidateError": 0.02440555004121832,
+          "worse": false
+        },
+        {
+          "dither": "8x8",
+          "cleanup": false,
+          "baselineError": 0.0241544186315069,
+          "candidateError": 0.0241544186315069,
+          "worse": false
+        },
+        {
+          "dither": "4x4",
+          "cleanup": true,
+          "baselineError": 0.024407165517473673,
+          "candidateError": 0.024407165517473673,
+          "worse": false
+        }
+      ]
+    },
+    {
+      "id": "high-unique-6144-high-unique-6144-cut-oklab-k4",
+      "method": "subset-swaps",
+      "changed": false,
+      "baselineColors": [
+        "#397a74",
+        "#5bcc96",
+        "#612297",
+        "#e3688c"
+      ],
+      "candidateColors": [
+        "#397a74",
+        "#5bcc96",
+        "#612297",
+        "#e3688c"
+      ],
+      "sharedMembership": true,
+      "baselineError": 0.02027250064594908,
+      "candidateError": 0.02027250064594908,
+      "worsenedSourceColors": 0,
+      "lostExactPixels": 0,
+      "elapsedMs": 180.09999999776483,
+      "baselineRgbaSha256": "c75be076c666e7bf25b98bee53ebc44c075bf61806bc73c98d0b767f8a4e2c3b",
+      "candidateRgbaSha256": "c75be076c666e7bf25b98bee53ebc44c075bf61806bc73c98d0b767f8a4e2c3b",
+      "downstream": [
+        {
+          "dither": "4x4",
+          "cleanup": false,
+          "baselineError": 0.02440555004121832,
+          "candidateError": 0.02440555004121832,
+          "worse": false
+        },
+        {
+          "dither": "8x8",
+          "cleanup": false,
+          "baselineError": 0.0241544186315069,
+          "candidateError": 0.0241544186315069,
+          "worse": false
+        },
+        {
+          "dither": "4x4",
+          "cleanup": true,
+          "baselineError": 0.024407165517473673,
+          "candidateError": 0.024407165517473673,
+          "worse": false
+        }
+      ]
+    },
+    {
+      "id": "high-unique-6144-high-unique-6144-cut-rgb-k8",
+      "method": "centroid",
+      "changed": false,
+      "baselineColors": [
+        "#2b4827",
+        "#344eb2",
+        "#3faf3f",
+        "#54c3da",
+        "#be63d2",
+        "#c23035",
+        "#c4d34c",
+        "#d7c7ac"
+      ],
+      "candidateColors": [
+        "#2b4827",
+        "#344eb2",
+        "#3faf3f",
+        "#54c3da",
+        "#be63d2",
+        "#c23035",
+        "#c4d34c",
+        "#d7c7ac"
+      ],
+      "sharedMembership": true,
+      "baselineError": 4544.1279296875,
+      "candidateError": 4544.1279296875,
+      "worsenedSourceColors": 0,
+      "lostExactPixels": 0,
+      "elapsedMs": 95.10000000149012,
+      "baselineRgbaSha256": "1e7a00e3748cedb69e89df07ab05725d79aead01404a49718f35d37852725ddb",
+      "candidateRgbaSha256": "1e7a00e3748cedb69e89df07ab05725d79aead01404a49718f35d37852725ddb",
+      "downstream": [
+        {
+          "dither": "4x4",
+          "cleanup": false,
+          "baselineError": 5621.565266927083,
+          "candidateError": 5621.565266927083,
+          "worse": false
+        },
+        {
+          "dither": "8x8",
+          "cleanup": false,
+          "baselineError": 5516.99169921875,
+          "candidateError": 5516.99169921875,
+          "worse": false
+        },
+        {
+          "dither": "4x4",
+          "cleanup": true,
+          "baselineError": 5647.874837239583,
+          "candidateError": 5647.874837239583,
+          "worse": false
+        }
+      ]
+    },
+    {
+      "id": "high-unique-6144-high-unique-6144-cut-rgb-k8",
+      "method": "subset-swaps",
+      "changed": false,
+      "baselineColors": [
+        "#2b4827",
+        "#344eb2",
+        "#3faf3f",
+        "#54c3da",
+        "#be63d2",
+        "#c23035",
+        "#c4d34c",
+        "#d7c7ac"
+      ],
+      "candidateColors": [
+        "#2b4827",
+        "#344eb2",
+        "#3faf3f",
+        "#54c3da",
+        "#be63d2",
+        "#c23035",
+        "#c4d34c",
+        "#d7c7ac"
+      ],
+      "sharedMembership": true,
+      "baselineError": 4544.1279296875,
+      "candidateError": 4544.1279296875,
+      "worsenedSourceColors": 0,
+      "lostExactPixels": 0,
+      "elapsedMs": 143.19999999925494,
+      "baselineRgbaSha256": "1e7a00e3748cedb69e89df07ab05725d79aead01404a49718f35d37852725ddb",
+      "candidateRgbaSha256": "1e7a00e3748cedb69e89df07ab05725d79aead01404a49718f35d37852725ddb",
+      "downstream": [
+        {
+          "dither": "4x4",
+          "cleanup": false,
+          "baselineError": 5621.565266927083,
+          "candidateError": 5621.565266927083,
+          "worse": false
+        },
+        {
+          "dither": "8x8",
+          "cleanup": false,
+          "baselineError": 5516.99169921875,
+          "candidateError": 5516.99169921875,
+          "worse": false
+        },
+        {
+          "dither": "4x4",
+          "cleanup": true,
+          "baselineError": 5647.874837239583,
+          "candidateError": 5647.874837239583,
+          "worse": false
+        }
+      ]
+    },
+    {
+      "id": "duration-weighted-armor-gif-duration-weighted-armor-gif-cut-oklab-k4",
+      "method": "centroid",
+      "changed": false,
+      "baselineColors": [
+        "#010100",
+        "#412b2f",
+        "#6d6f77",
+        "#b6bec6"
+      ],
+      "candidateColors": [
+        "#010100",
+        "#412b2f",
+        "#6d6f77",
+        "#b6bec6"
+      ],
+      "sharedMembership": true,
+      "baselineError": 0.005257810123026913,
+      "candidateError": 0.005257810123026913,
+      "worsenedSourceColors": 0,
+      "lostExactPixels": 0,
+      "elapsedMs": 0.09999999776482582,
+      "baselineRgbaSha256": "f7b8e0f22a60a781aeb6c38c985839c22019ea424b611bfb6bcf9ceb740818ac",
+      "candidateRgbaSha256": "f7b8e0f22a60a781aeb6c38c985839c22019ea424b611bfb6bcf9ceb740818ac",
+      "downstream": [
+        {
+          "dither": "4x4",
+          "cleanup": false,
+          "baselineError": 0.006982905299735792,
+          "candidateError": 0.006982905299735792,
+          "worse": false
+        },
+        {
+          "dither": "8x8",
+          "cleanup": false,
+          "baselineError": 0.00678260697411884,
+          "candidateError": 0.00678260697411884,
+          "worse": false
+        },
+        {
+          "dither": "4x4",
+          "cleanup": true,
+          "baselineError": 0.006982905299735792,
+          "candidateError": 0.006982905299735792,
+          "worse": false
+        }
+      ]
+    },
+    {
+      "id": "duration-weighted-armor-gif-duration-weighted-armor-gif-cut-oklab-k4",
+      "method": "subset-swaps",
+      "changed": false,
+      "baselineColors": [
+        "#010100",
+        "#412b2f",
+        "#6d6f77",
+        "#b6bec6"
+      ],
+      "candidateColors": [
+        "#010100",
+        "#412b2f",
+        "#6d6f77",
+        "#b6bec6"
+      ],
+      "sharedMembership": true,
+      "baselineError": 0.005257810123026913,
+      "candidateError": 0.005257810123026913,
+      "worsenedSourceColors": 0,
+      "lostExactPixels": 0,
+      "elapsedMs": 0.8000000007450581,
+      "baselineRgbaSha256": "f7b8e0f22a60a781aeb6c38c985839c22019ea424b611bfb6bcf9ceb740818ac",
+      "candidateRgbaSha256": "f7b8e0f22a60a781aeb6c38c985839c22019ea424b611bfb6bcf9ceb740818ac",
+      "downstream": [
+        {
+          "dither": "4x4",
+          "cleanup": false,
+          "baselineError": 0.006982905299735792,
+          "candidateError": 0.006982905299735792,
+          "worse": false
+        },
+        {
+          "dither": "8x8",
+          "cleanup": false,
+          "baselineError": 0.00678260697411884,
+          "candidateError": 0.00678260697411884,
+          "worse": false
+        },
+        {
+          "dither": "4x4",
+          "cleanup": true,
+          "baselineError": 0.006982905299735792,
+          "candidateError": 0.006982905299735792,
+          "worse": false
+        }
+      ]
+    },
+    {
+      "id": "duration-weighted-armor-gif-duration-weighted-armor-gif-cut-rgb-k8",
+      "method": "centroid",
+      "changed": false,
+      "baselineColors": [
+        "#070301",
+        "#3b1400",
+        "#44333e",
+        "#4a4e55",
+        "#6a5d66",
+        "#8c7d82",
+        "#9aa4ab",
+        "#d8cad0"
+      ],
+      "candidateColors": [
+        "#070301",
+        "#3b1400",
+        "#44333e",
+        "#4a4e55",
+        "#6a5d66",
+        "#8c7d82",
+        "#9aa4ab",
+        "#d8cad0"
+      ],
+      "sharedMembership": true,
+      "baselineError": 349.63870967741934,
+      "candidateError": 349.63870967741934,
+      "worsenedSourceColors": 0,
+      "lostExactPixels": 0,
+      "elapsedMs": 0.09999999776482582,
+      "baselineRgbaSha256": "a17b4215b35724ba09f0f795f3f8cf413155c6d86d7a2a5d516d8c1bce186682",
+      "candidateRgbaSha256": "a17b4215b35724ba09f0f795f3f8cf413155c6d86d7a2a5d516d8c1bce186682",
+      "downstream": [
+        {
+          "dither": "4x4",
+          "cleanup": false,
+          "baselineError": 522.9336405529954,
+          "candidateError": 522.9336405529954,
+          "worse": false
+        },
+        {
+          "dither": "8x8",
+          "cleanup": false,
+          "baselineError": 573.9133640552996,
+          "candidateError": 573.9133640552996,
+          "worse": false
+        },
+        {
+          "dither": "4x4",
+          "cleanup": true,
+          "baselineError": 527.1271889400922,
+          "candidateError": 527.1271889400922,
+          "worse": false
+        }
+      ]
+    },
+    {
+      "id": "duration-weighted-armor-gif-duration-weighted-armor-gif-cut-rgb-k8",
+      "method": "subset-swaps",
+      "changed": false,
+      "baselineColors": [
+        "#070301",
+        "#3b1400",
+        "#44333e",
+        "#4a4e55",
+        "#6a5d66",
+        "#8c7d82",
+        "#9aa4ab",
+        "#d8cad0"
+      ],
+      "candidateColors": [
+        "#070301",
+        "#3b1400",
+        "#44333e",
+        "#4a4e55",
+        "#6a5d66",
+        "#8c7d82",
+        "#9aa4ab",
+        "#d8cad0"
+      ],
+      "sharedMembership": true,
+      "baselineError": 349.63870967741934,
+      "candidateError": 349.63870967741934,
+      "worsenedSourceColors": 0,
+      "lostExactPixels": 0,
+      "elapsedMs": 1,
+      "baselineRgbaSha256": "a17b4215b35724ba09f0f795f3f8cf413155c6d86d7a2a5d516d8c1bce186682",
+      "candidateRgbaSha256": "a17b4215b35724ba09f0f795f3f8cf413155c6d86d7a2a5d516d8c1bce186682",
+      "downstream": [
+        {
+          "dither": "4x4",
+          "cleanup": false,
+          "baselineError": 522.9336405529954,
+          "candidateError": 522.9336405529954,
+          "worse": false
+        },
+        {
+          "dither": "8x8",
+          "cleanup": false,
+          "baselineError": 573.9133640552996,
+          "candidateError": 573.9133640552996,
+          "worse": false
+        },
+        {
+          "dither": "4x4",
+          "cleanup": true,
+          "baselineError": 527.1271889400922,
+          "candidateError": 527.1271889400922,
+          "worse": false
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "productionChanged": false,
+  "longTasks": [
+    {
+      "start": 36623.699999999255,
+      "duration": 52
+    },
+    {
+      "start": 37011.599999997765,
+      "duration": 67
+    },
+    {
+      "start": 37509,
+      "duration": 69
+    }
+  ],
+  "scope": "Research source kernels and production conversion modules, not Auto UI/worker/cache or encoded downloads. PASS means completed invariants, not shipping approval. Independent floating-point oracle tolerance1e-12; candidate strict guard itself has no epsilon.",
+  "longTaskObserverSupported": true,
+  "sourceSha256": {
+    "bench/auto-refinement-spike/candidate.mjs": "2bf68423c4c4ece2d3ca38ad3ada00f32d8ec6491a1545c1dad99d4fa39e4e77",
+    "src/lib/quantize.js": "6dacaca42d615b72a4ee511bb7ed32344aa7118ae946769e290d7a9463f8d0a3",
+    "src/lib/palette-state.js": "2e7cd14844c1539cb321b27200be18955db70ec22ca6f06190d7a75007cac0ad",
+    "src/lib/palette-limit.js": "739a3fb97a80d1ecbfa23c5e33f72893b894adc4425ea89217a88d7264abae20",
+    "src/lib/palette-dither.js": "5452f7b1af4d5f656d8733635856eab5ba565e8d7ee81cced4d77041a9638152",
+    "src/lib/palette-cleanup.js": "8dba109b8da1a85e1361ce5307167c8814cdbd75dd96569f0145662897dce46d",
+    "src/lib/palette-alpha.js": "92fc032f80728ef7027569b91be8cb91aa9486f203bbff9646ed89d674ab6b92"
+  },
+  "fixturesSha256": "d52caec517fcc81bdc36aadd3d0d8f2fb1278b9f5bb5b14220c9f993afa1e32f",
+  "performance": {
+    "scope": "Source-kernel subset selection versus same selection plus research refinement; excludes decode, workers and production UI. Alternating order, one warmup and three samples.",
+    "pixels": 32768,
+    "samplesMs": {
+      "baseline": [
+        24.900000002235174,
+        21.599999997764826,
+        97.90000000223517
+      ],
+      "withRefinement": [
+        91,
+        64.10000000149012,
+        141.39999999850988
+      ]
+    },
+    "medianMs": {
+      "baseline": 24.900000002235174,
+      "withRefinement": 91
+    }
+  },
+  "preCanceledCheck": true,
+  "inFlightAbortMs": 9.099999997764826,
+  "completed": true,
+  "finished": "2026-10-15T07:51:49.999Z"
+}

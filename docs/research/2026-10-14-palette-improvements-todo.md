@@ -37,9 +37,11 @@ The successful [website output verification](pixellab-review-2026-10-14/web-outp
 
 ## Recommended next work
 
-The user has authorized the next guarded-refinement investigation. Its active
-[follow-up checklist](2026-10-15-auto-refinement-todo.md) tracks the research,
-service comparison, device tests and conditional shipping decision separately.
+The authorized guarded-refinement investigation is now complete. Its
+[follow-up checklist](2026-10-15-auto-refinement-todo.md) records the research,
+service comparison and device tests. The tested candidates did not justify a
+production change; the [decision](2026-10-15-auto-refinement-decision.md) supersedes
+the research proposal below rather than leaving it as unperformed work.
 
 The implementation batch is complete. Keep this checklist until its conclusions
 are incorporated into the next project plan. The next useful research task is a

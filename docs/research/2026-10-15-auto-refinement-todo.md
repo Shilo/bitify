@@ -9,13 +9,13 @@ can prove universal artistic superiority. Keep Colorfetti intuitive and local.
 
 | Work | Owner | Status / gate |
 |---|---|---|
-| Seed a candidate from the current selected Auto subset | Kernel sub-agent | Research only; compare mean-only, per-source-color and rare/exact-detail guards. No production edits. |
-| Investigate a target-preserving alternative | Kernel sub-agent | Preserve published shared Auto RGB entries and current per-asset budgets; reject complexity without material benefit. |
-| Direct current / candidate / service comparison | Integration sub-agent | Reuse attributable native PixelLab outputs at matching source/count/settings first; separate API, MCP and website evidence. |
-| Independent challenge before implementation | Review sub-agent | Gates established before results: shared target identity, tiny features, alpha, GIF timing/palette stability, dither/Cleanup, cancellation and bounded cost. |
-| Codex Browser and USB Android | Root | Test research outputs and retained production workflow on both; any accepted production change must repeat app acceptance and independent codecs. |
-| Other recommendations | Root + review | Review unresolved needs; do not add palette/menu controls without demonstrated value. |
-| Separate commits | Root | Commit plan, reproducible experiment, any accepted production change and final validation separately. No push/deploy. |
+| Seed a candidate from the current selected Auto subset | Kernel sub-agent | Complete: 176 observations. Mean fitting changes 175 and violates shared target identity; strict/rare guards accept none. |
+| Investigate a target-preserving alternative | Kernel sub-agent | Complete: six permissive swap improvements worsen individual RGB groups; strict/rare swaps accept none. No production adoption. |
+| Direct current / candidate / service comparison | Integration sub-agent | Complete: fifteen cases; matched real-art K2/4/8/16. Exactly five gap-fill REST jobs report 0.5 generations. API/website attribution remains distinct. |
+| Independent challenge before implementation | Review sub-agent | Complete: pre-result gates, adverse/positive guard controls, source/hash checks, actual downstream outputs and no-ship recommendation. |
+| Codex Browser and USB Android | Root | Complete: 24 research checks each, identical strict output RGBA to baseline, alpha/frame metadata/dither/Cleanup, repeat determinism and cancellation; extra cost without observed gain. |
+| Other recommendations | Root + review | Complete: native Android New/Edit picker suggestions and Set verified; stale website-output limitation corrected. No additional controls justified. |
+| Separate commits | Root | Plan, experiment, service comparison and final device/review evidence separated. Production unchanged; no push/deploy. |
 
 ## Acceptance contract
 
@@ -35,7 +35,14 @@ can prove universal artistic superiority. Keep Colorfetti intuitive and local.
 
 ## Progress
 
-Initial independent review identifies an important rejection risk: moving each
-asset's selected RGB centers creates colors outside the shared Auto palette.
-An error guard alone cannot make that a drop-in refinement. Research will measure
-this candidate and a target-preserving alternative before any shipping decision.
+The initial shared-target risk was confirmed, and strict variants delivered no
+adopted improvement. **Decision: do not ship the tested refinement.** See the
+[decision and device evidence](2026-10-15-auto-refinement-decision.md),
+[expanded experiment](2026-10-15-auto-refinement-spike.md),
+[paired service comparison](2026-10-15-auto-refinement-service-comparison.md) and
+[independent review](2026-10-15-auto-refinement-independent-review.md).
+
+Commit record: `48d0b8a` establishes gates, `866df2d` retains the expanded experiment
+and `1c1bf14` retains the native service comparison. Final validation is committed
+separately with this completed checklist. Production behavior remains at `c7ad228`;
+all follow-up changes are research, testing and documentation.

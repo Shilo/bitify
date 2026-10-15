@@ -1,0 +1,42 @@
+[
+  {
+    "path": "/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/src/lib/palette-state.js",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/bench/auto-refinement-spike/candidate.mjs",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/bench/auto-refinement-spike/fixtures.json",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/bench/auto-refinement-comparison/index.html?case=armor-generated4",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/bench/palette-paired-comparison/input-armor.png",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/src/lib/..%2f..%2fpackage.json",
+    "status": 400,
+    "expected": 400
+  },
+  {
+    "path": "/bench/auto-refinement-spike/..%2f..%2fpackage.json",
+    "status": 400,
+    "expected": 400
+  }
+]

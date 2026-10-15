@@ -122,6 +122,11 @@ OS color-picker interaction itself was not opened by these checks. Safari/iOS re
 untested; existing Google sign-in/browser limitations are unrelated to these local
 features. Vendor source code or extension files are not referenced in the research spikes.
 
+Follow-up, October 15: the separate [physical native-picker test](../../bench/auto-refinement-device-review/android-native-picker-results.json)
+now verifies New/Edit suggestion selection and native Set on the Pixel 8 Pro.
+This closes that narrow interaction gap; custom HSV entry, Cancel and Safari are
+not established by it. The earlier acceptance suites above retain their original scope.
+
 ![Physical Android output-color action](../../bench/palette-improvements-review/android-image-actions.png)
 
 ## Reproduction
