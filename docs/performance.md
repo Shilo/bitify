@@ -127,6 +127,19 @@ See [the import review](research/2026-10-12-import-worker.md).
 
 ## Generated preview and PNG source decoding (October 12, 2026)
 
+October 15 refinement: a PNG frame already proven full-range sRGB RGBA/BGRA copies
+native packed bytes, avoiding an observed extra conversion that rounded translucent
+RGB on desktop. Unknown or non-sRGB metadata retains managed RGBA/sRGB conversion. BGRA
+swaps red/blue in the same output buffer, checking cancellation between 128 KiB
+blocks and yielding through the existing posted-task scheduler at an 8 ms target.
+RGBA adds no pixel loop; neither route adds a second output-sized pixel buffer.
+An isolated Node test with a mocked native copy measured the 16 MP reorder plus
+scheduling at 12.2–13.8 ms over three runs, with one posted yield each and maximum
+observed synchronous span 8.2 ms. These are desktop loop costs, not browser/phone
+import timings or a hard deadline. Float16 canvas was rejected after actual Android
+changed opaque as well as translucent RGB. See the
+[native-copy record](research/2026-10-15-png-native-copy-implementation.md).
+
 Generated 32 uses the animated demo only for an empty wall, including a persisted
 Generated selection and clearing the last real image. A wholly invisible real wall
 remains authoritative and yields zero colors. The initial request and conversion

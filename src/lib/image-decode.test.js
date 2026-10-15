@@ -7,6 +7,7 @@ import { captureGeneratedSources } from './palette-generated-sources.js';
 afterEach(() => vi.unstubAllGlobals());
 const file = (name = 'sprite.png') => ({ name, type: name.endsWith('png') ? 'image/png' : 'image/jpeg', size: 10, stream: vi.fn(() => new ReadableStream()) });
 const pixels = Uint8ClampedArray.of(34, 35, 35, 255, 240, 246, 240, 255, 34, 35, 35, 128, 0, 0, 0, 0);
+const srgb = { fullRange: true, matrix: 'rgb', primaries: 'bt709', transfer: 'iec61966-2-1' };
 function setupNative({ supported = true, copy, decode, construct } = {}) {
   const frame = { displayWidth: 4, displayHeight: 1, visibleRect: { width: 4, height: 1 }, close: vi.fn(),
     copyTo: vi.fn(copy ?? (async data => data.set(pixels))) };
@@ -27,6 +28,67 @@ function setupCanvas() {
 }
 
 describe('shared PNG source decoding', () => {
+  it.each(['RGBA', 'BGRA'])('preserves native %s sRGB bytes without requesting another color conversion', async format => {
+    const exact = Uint8ClampedArray.of(29, 43, 83, 1, 240, 246, 240, 127, 34, 35, 35, 128, 9, 8, 7, 0);
+    const native = setupNative({ copy: async (data, options) => {
+      data.set(exact);
+      if (format === 'BGRA') for (let p = 0; p < data.length; p += 4) {
+        const red = data[p]; data[p] = data[p + 2]; data[p + 2] = red;
+      }
+      return options.layout;
+    } });
+    Object.assign(native.frame, { format, colorSpace: srgb }); setupCanvas();
+    const image = await decodeImageFile(file());
+    expect(image.data).toEqual(exact);
+    expect(native.frame.copyTo).toHaveBeenCalledWith(image.data, { layout: [{ offset: 0, stride: 16 }] });
+    expect(createImageBitmap).not.toHaveBeenCalled();
+    expect(native.decoder.close).toHaveBeenCalledOnce(); expect(native.frame.close).toHaveBeenCalledOnce();
+  });
+  it.each([
+    ['unknown space', 'BGRA', undefined], ['unknown format', null, srgb], ['opaque BGRX', 'BGRX', srgb],
+    ['limited range', 'BGRA', { ...srgb, fullRange: false }], ['P3', 'RGBA', { ...srgb, primaries: 'smpte432' }],
+    ['linear transfer', 'BGRA', { ...srgb, transfer: 'linear' }], ['non-RGB matrix', 'BGRA', { ...srgb, matrix: 'bt709' }],
+    ['incomplete metadata', 'BGRA', { primaries: 'bt709', transfer: 'iec61966-2-1', matrix: 'rgb' }],
+  ])('retains explicit managed RGBA conversion for %s', async (_, format, colorSpace) => {
+    const native = setupNative(); Object.assign(native.frame, { format, colorSpace }); setupCanvas();
+    const image = await decodeImageFile(file());
+    expect(image.data).toEqual(pixels);
+    expect(native.frame.copyTo).toHaveBeenCalledWith(image.data,
+      { format: 'RGBA', colorSpace: 'srgb', layout: [{ offset: 0, stride: 16 }] });
+    expect(createImageBitmap).not.toHaveBeenCalled();
+  });
+  it.each(['RGBA', 'BGRA', 'unknown'])('retains native visible-rectangle copying for a cropped %s frame', async format => {
+    const native = setupNative({ copy: async (data, options) => { data.set(pixels); return options.layout; } });
+    Object.assign(native.frame, { format, colorSpace: format === 'unknown' ? undefined : srgb,
+      visibleRect: { x: 3, y: 7, width: 4, height: 1 } }); setupCanvas();
+    await decodeImageFile(file());
+    expect(native.frame.copyTo.mock.calls[0][1]).toEqual(format === 'unknown'
+      ? { format: 'RGBA', colorSpace: 'srgb', layout: [{ offset: 0, stride: 16 }] }
+      : { layout: [{ offset: 0, stride: 16 }] });
+    expect(createImageBitmap).not.toHaveBeenCalled();
+    expect(native.frame.close).toHaveBeenCalledOnce(); expect(native.decoder.close).toHaveBeenCalledOnce();
+  });
+  it.each([{ offset: 4, stride: 16 }, { offset: 0, stride: 20 }])('never interprets an unexpected native plane layout as tightly packed (%j)', async plane => {
+    const native = setupNative({ copy: async data => { data.set(pixels); return [plane]; } });
+    Object.assign(native.frame, { format: 'BGRA', colorSpace: srgb }); const canvas = setupCanvas();
+    expect(await decodeImageFile(file())).toBe(canvas.image);
+    expect(native.frame.close).toHaveBeenCalledOnce(); expect(native.decoder.close).toHaveBeenCalledOnce();
+  });
+  it('rejects canceled BGRA reorder at its posted boundary without publishing pixels or starting fallback', async () => {
+    const native = setupNative({ copy: async (_, options) => options.layout });
+    Object.assign(native.frame, { format: 'BGRA', colorSpace: srgb, displayWidth: 65536, visibleRect: { width: 65536, height: 1 } });
+    setupCanvas(); const controller = new AbortController(); let clock = 0;
+    vi.stubGlobal('performance', { now: () => (clock += 9) });
+    const postMessage = vi.fn(() => controller.abort());
+    vi.stubGlobal('MessageChannel', class { constructor() {
+      this.port1 = { close: vi.fn() }; this.port2 = { close: vi.fn(), postMessage: () => {
+        postMessage(); queueMicrotask(() => this.port1.onmessage());
+      } };
+    } });
+    await expect(decodeImageFile(file(), { signal: controller.signal })).rejects.toMatchObject({ name: 'AbortError' });
+    expect(postMessage).toHaveBeenCalledOnce(); expect(createImageBitmap).not.toHaveBeenCalled();
+    expect(native.frame.close).toHaveBeenCalledOnce(); expect(native.decoder.close).toHaveBeenCalledOnce();
+  });
   it('copies straight native sRGB RGBA without canvas, retaining close shades and partial alpha', async () => {
     const native = setupNative(), canvas = setupCanvas(), input = file();
     const image = await decodeImageFile(input);
@@ -76,6 +138,7 @@ describe('shared PNG source decoding', () => {
   });
   it('rejects native oversized images before copying without falling back', async () => {
     const native = setupNative(); setupCanvas();
+    Object.assign(native.frame, { format: 'BGRA', colorSpace: srgb });
     await expect(decodeImageFile(file(), { maxPixels: 3, limitMessage: 'Image limit' })).rejects.toThrow('Image limit');
     expect(native.frame.copyTo).not.toHaveBeenCalled(); expect(createImageBitmap).not.toHaveBeenCalled();
     expect(native.frame.close).toHaveBeenCalledOnce(); expect(native.decoder.close).toHaveBeenCalledOnce();
@@ -105,6 +168,7 @@ describe('shared PNG source decoding', () => {
     let started, release;
     const ready = new Promise(resolve => started = resolve);
     const native = setupNative({ copy: () => { started(); return new Promise(resolve => release = resolve); } });
+    Object.assign(native.frame, { format: 'BGRA', colorSpace: srgb });
     setupCanvas(); const controller = new AbortController();
     const job = decodeImageFile(file(), { signal: controller.signal });
     const rejected = expect(job).rejects.toMatchObject({ name: 'AbortError' });

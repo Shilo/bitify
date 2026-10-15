@@ -106,8 +106,12 @@ Max colors controls run from 2 to the active palette's color count, displaying t
 ## Things that bite
 
 Artwork and palette-image import share `image-decode.js`. PNG prefers native
-ImageDecoder and straight RGBA/sRGB copyTo, avoiding canvas readback noise without
-merging colors. Capability/errors/transforms fall back to the existing bitmap/canvas
+ImageDecoder with its existing default color management. Proven full-range sRGB
+RGBA/BGRA frames copy native packed bytes without requesting another conversion;
+BGRA swaps red/blue in place in 128 KiB blocks with an 8 ms posted-task target.
+All other formats/metadata retain explicit managed RGBA/sRGB copyTo. This avoids
+observed low-alpha rounding from an unnecessary conversion without merging colors
+or bypassing profiles. Capability/errors/transforms fall back to the existing bitmap/canvas
 decoder; other formats and the independent GIF decoder keep their paths. Release all
 decoder/frame/bitmap/canvas resources, preserve cancellation and palette pixel limits.
 User artwork import lazily loads `image-import-client.js` and one serial worker.

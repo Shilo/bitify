@@ -1,6 +1,28 @@
-import { checkCanceled } from './quantize.js';
+import { checkCanceled, yieldTask } from './quantize.js';
 
 class PixelLimitError extends Error {}
+
+function nativeSrgb(frame) {
+  const space = frame.colorSpace;
+  return (frame.format === 'RGBA' || frame.format === 'BGRA') && space?.fullRange === true &&
+    space.matrix === 'rgb' && space.primaries === 'bt709' && space.transfer === 'iec61966-2-1';
+}
+
+async function swapRedBlue(pixels, signal) {
+  for (let start = 0; start < pixels.length;) {
+    const deadline = performance.now() + 8;
+    do {
+      checkCanceled(signal);
+      const end = Math.min(start + 131072, pixels.length);
+      for (let p = start; p < end; p += 4) {
+        const red = pixels[p]; pixels[p] = pixels[p + 2]; pixels[p + 2] = red;
+      }
+      start = end;
+    } while (start < pixels.length && performance.now() < deadline);
+    if (start < pixels.length) await yieldTask();
+  }
+  checkCanceled(signal);
+}
 
 // PNG pixels can be copied directly from the browser decoder without canvas
 // readback noise or a premultiply/unpremultiply round trip. Other formats keep
@@ -31,7 +53,18 @@ export async function decodeImageFile(file, { signal, maxPixels = Infinity,
         // Let drawImage handle any decoder that exposes a transformed PNG frame.
         if (!frame.rotation && !frame.flip && frame.visibleRect.width === width && frame.visibleRect.height === height) {
           const pixels = new Uint8ClampedArray(width * height * 4);
-          await frame.copyTo(pixels, { format: 'RGBA', colorSpace: 'srgb', layout: [{ offset: 0, stride: width * 4 }] });
+          const layout = [{ offset: 0, stride: width * 4 }];
+          if (nativeSrgb(frame)) {
+            // Already-managed packed sRGB needs only channel ordering. Asking for
+            // RGBA/sRGB again can round low-alpha RGB on some native decoders.
+            const planes = await frame.copyTo(pixels, { layout });
+            checkCanceled(signal);
+            if (planes?.length !== 1 || planes[0].offset !== 0 || planes[0].stride !== width * 4)
+              throw new Error('Unsupported native image layout.');
+            if (frame.format === 'BGRA') await swapRedBlue(pixels, signal);
+          } else {
+            await frame.copyTo(pixels, { format: 'RGBA', colorSpace: 'srgb', layout });
+          }
           checkCanceled(signal);
           return new ImageData(pixels, width, height);
         }

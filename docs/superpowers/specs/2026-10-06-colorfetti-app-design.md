@@ -2425,9 +2425,16 @@ Local supported images are
 up to 32 MiB and 16 × 1024 × 1024 decoded pixels. GIF uses the first frame with a notice.
 Browser decoding yields color-managed sRGB values; exactness concerns those decoded
 values, not arbitrary original color-profile bytes. Artwork and palette-image import
-share `image-decode.js`: PNG uses native ImageDecoder when supported and copies its
-frame directly to straight RGBA/sRGB, avoiding canvas readback noise and alpha round-trip
-rounding. Native capability, decoding/copy errors or presentation transforms fall back
+share `image-decode.js`: PNG uses native ImageDecoder with default color management
+when supported. Only packed RGBA/BGRA frames whose metadata proves fullRange true,
+matrix rgb, primaries bt709 and transfer iec61966-2-1 copy native bytes without another
+format/color-space conversion. Requested packed layout is verified. BGRA swaps only
+red/blue in place, yielding through the shared posted-task scheduler after an 8 ms
+target checked between 128 KiB blocks; no second pixel buffer is added. Unknown or
+other formats/spaces retain explicit managed RGBA/sRGB copyTo, preserving profile
+conversion. Default visible-rectangle copying remains intact. No float16 readback
+replacement or colorSpaceConversion none is introduced. Native capability,
+decoding/copy errors or presentation transforms fall back
 to the existing color-managed bitmap/canvas path. Other image formats retain that path;
 the existing multi-frame GIF decoder is unchanged. Both paths honor cancellation,
 palette pixel limits and resource cleanup. No colors are heuristically rounded or merged.
