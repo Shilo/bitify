@@ -1,0 +1,542 @@
+{
+  "at": "2026-10-15T15:36:05.223Z",
+  "scope": "Actual built application; isolated Chromium with sandbox enabled, touch-emulated layouts only. No physical Android, OS clipboard or sustained thermal test.",
+  "indexSha256": "67b5a088de09d901f63badcb14a4f7ba41e4e8c4b78ddc8b9b8767d8128dd82f",
+  "cases": [
+    {
+      "name": "touch-portrait",
+      "width": 320,
+      "height": 568,
+      "errors": [],
+      "steps": [
+        {
+          "label": "Dismiss welcome",
+          "box": {
+            "x": 197,
+            "y": 484.5,
+            "width": 86,
+            "height": 46
+          }
+        },
+        {
+          "label": "Open Add images picker",
+          "box": {
+            "x": 12,
+            "y": 342,
+            "width": 296,
+            "height": 52
+          }
+        },
+        {
+          "label": "Open palette rail",
+          "box": {
+            "x": 67,
+            "y": 442,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "label": "Choose PICO-8",
+          "box": {
+            "x": 118,
+            "y": 349,
+            "width": 84,
+            "height": 66
+          }
+        },
+        {
+          "label": "Close palette rail",
+          "box": {
+            "x": 26,
+            "y": 287,
+            "width": 62.53125,
+            "height": 44
+          }
+        },
+        {
+          "label": "Open Recolor",
+          "box": {
+            "x": 226.53125,
+            "y": 442,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "label": "Set Max colors to 8",
+          "value": "8"
+        },
+        {
+          "label": "Enable 4×4 dithering",
+          "box": {
+            "x": 202.671875,
+            "y": 366,
+            "width": 41.578125,
+            "height": 44
+          }
+        },
+        {
+          "label": "Adjust Dither strength by touch",
+          "value": "51",
+          "spoken": "51%"
+        },
+        {
+          "label": "Close Recolor",
+          "box": {
+            "x": 226.53125,
+            "y": 442,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "label": "Open image actions",
+          "box": {
+            "x": 257,
+            "y": 346,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "label": "Count actual output colors",
+          "box": {
+            "x": 32,
+            "y": 371,
+            "width": 256,
+            "height": 46
+          }
+        },
+        {
+          "label": "Reuse used colors",
+          "box": {
+            "x": 32,
+            "y": 371,
+            "width": 256,
+            "height": 46
+          }
+        },
+        {
+          "label": "Reach Image or file",
+          "box": {
+            "x": 36,
+            "y": 357.796875,
+            "width": 80,
+            "height": 44
+          }
+        },
+        {
+          "label": "Reach Paste colors",
+          "box": {
+            "x": 120,
+            "y": 342.046875,
+            "width": 80,
+            "height": 44
+          }
+        },
+        {
+          "label": "Reach Add colors",
+          "box": {
+            "x": 204,
+            "y": 332.59375,
+            "width": 80,
+            "height": 44
+          }
+        },
+        {
+          "label": "Open palette text input",
+          "box": {
+            "x": 120,
+            "y": 357.796875,
+            "width": 80,
+            "height": 44
+          }
+        },
+        {
+          "label": "Import local HEX text into draft",
+          "box": {
+            "x": 33,
+            "y": 442.09375,
+            "width": 254,
+            "height": 44
+          }
+        },
+        {
+          "label": "Close unsaved palette draft",
+          "box": {
+            "x": 243,
+            "y": 29,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "label": "Reopen image actions",
+          "box": {
+            "x": 257,
+            "y": 346,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "label": "Save native PNG",
+          "box": {
+            "x": 32,
+            "y": 209,
+            "width": 256,
+            "height": 46
+          }
+        },
+        {
+          "label": "Open actual image preview",
+          "box": {
+            "x": 19,
+            "y": 346,
+            "width": 212,
+            "height": 44
+          }
+        },
+        {
+          "label": "Reuse colors from Preview",
+          "box": {
+            "x": 18,
+            "y": 506,
+            "width": 146.5625,
+            "height": 44
+          }
+        },
+        {
+          "label": "Close Preview reuse draft",
+          "box": {
+            "x": 243,
+            "y": 54.203125,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "label": "Save from Preview",
+          "box": {
+            "x": 18,
+            "y": 442,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "label": "Close Preview",
+          "box": {
+            "x": 252,
+            "y": 500,
+            "width": 56,
+            "height": 56
+          }
+        }
+      ],
+      "count": 8,
+      "draftColors": [
+        "#1d2b53",
+        "#5f574f",
+        "#7e2553",
+        "#83769c",
+        "#ab5236",
+        "#c2c3c7",
+        "#ffa300",
+        "#fff1e8"
+      ],
+      "localImportCount": 3,
+      "native": {
+        "sha256": "661017650cae13ddd2ff64e96b7d94359a65028bd7b5b40629b12a403e145975",
+        "width": 24,
+        "height": 24,
+        "colors": [
+          "#1d2b53",
+          "#5f574f",
+          "#7e2553",
+          "#83769c",
+          "#ab5236",
+          "#c2c3c7",
+          "#ffa300",
+          "#fff1e8"
+        ],
+        "alphaMismatch": 0,
+        "targetMismatch": 0,
+        "bytes": 263
+      },
+      "viewerSurvivesDraftClose": true,
+      "previewSaveIdentical": true,
+      "documentWidth": 320,
+      "pass": true
+    },
+    {
+      "name": "touch-landscape",
+      "width": 568,
+      "height": 320,
+      "errors": [],
+      "steps": [
+        {
+          "label": "Dismiss welcome",
+          "box": {
+            "x": 383,
+            "y": 233.140625,
+            "width": 86,
+            "height": 46
+          }
+        },
+        {
+          "label": "Open Add images picker",
+          "box": {
+            "x": 197,
+            "y": 191,
+            "width": 174,
+            "height": 52
+          }
+        },
+        {
+          "label": "Open palette rail",
+          "box": {
+            "x": 68,
+            "y": 262,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "label": "Choose PICO-8",
+          "box": {
+            "x": 315,
+            "y": 169,
+            "width": 84,
+            "height": 66
+          }
+        },
+        {
+          "label": "Close palette rail",
+          "box": {
+            "x": 26,
+            "y": 107,
+            "width": 62.53125,
+            "height": 44
+          }
+        },
+        {
+          "label": "Open Recolor",
+          "box": {
+            "x": 228.53125,
+            "y": 262,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "label": "Set Max colors to 8",
+          "value": "8"
+        },
+        {
+          "label": "Enable 4×4 dithering",
+          "box": {
+            "x": 326.671875,
+            "y": 190,
+            "width": 103.578125,
+            "height": 44
+          }
+        },
+        {
+          "label": "Adjust Dither strength by touch",
+          "value": "50",
+          "spoken": "50%"
+        },
+        {
+          "label": "Close Recolor",
+          "box": {
+            "x": 228.53125,
+            "y": 262,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "label": "Open image actions",
+          "box": {
+            "x": 320,
+            "y": 195,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "label": "Count actual output colors",
+          "box": {
+            "x": 149,
+            "y": 225.59375,
+            "width": 270,
+            "height": 46
+          }
+        },
+        {
+          "label": "Reuse used colors",
+          "box": {
+            "x": 149,
+            "y": 225.59375,
+            "width": 270,
+            "height": 46
+          }
+        },
+        {
+          "label": "Reach Image or file",
+          "box": {
+            "x": 44,
+            "y": 205.59375,
+            "width": 157.328125,
+            "height": 44
+          }
+        },
+        {
+          "label": "Reach Paste colors",
+          "box": {
+            "x": 205.328125,
+            "y": 205.59375,
+            "width": 157.34375,
+            "height": 44
+          }
+        },
+        {
+          "label": "Reach Add colors",
+          "box": {
+            "x": 366.671875,
+            "y": 205.59375,
+            "width": 157.328125,
+            "height": 44
+          }
+        },
+        {
+          "label": "Open palette text input",
+          "box": {
+            "x": 205.328125,
+            "y": 205.59375,
+            "width": 157.34375,
+            "height": 44
+          }
+        },
+        {
+          "label": "Import local HEX text into draft",
+          "box": {
+            "x": 41,
+            "y": 199.59375,
+            "width": 486,
+            "height": 44
+          }
+        },
+        {
+          "label": "Close unsaved palette draft",
+          "box": {
+            "x": 483,
+            "y": 25,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "label": "Reopen image actions",
+          "box": {
+            "x": 320,
+            "y": 195,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "label": "Save native PNG",
+          "box": {
+            "x": 149,
+            "y": 63.59375,
+            "width": 270,
+            "height": 46
+          }
+        },
+        {
+          "label": "Open actual image preview",
+          "box": {
+            "x": 204,
+            "y": 195,
+            "width": 90,
+            "height": 44
+          }
+        },
+        {
+          "label": "Reuse colors from Preview",
+          "box": {
+            "x": 174,
+            "y": 258,
+            "width": 146.5625,
+            "height": 44
+          }
+        },
+        {
+          "label": "Close Preview reuse draft",
+          "box": {
+            "x": 483,
+            "y": 25,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "label": "Save from Preview",
+          "box": {
+            "x": 18,
+            "y": 258,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "label": "Close Preview",
+          "box": {
+            "x": 500,
+            "y": 252,
+            "width": 56,
+            "height": 56
+          }
+        }
+      ],
+      "count": 8,
+      "draftColors": [
+        "#1d2b53",
+        "#5f574f",
+        "#7e2553",
+        "#83769c",
+        "#ab5236",
+        "#c2c3c7",
+        "#ffa300",
+        "#fff1e8"
+      ],
+      "localImportCount": 3,
+      "native": {
+        "sha256": "661017650cae13ddd2ff64e96b7d94359a65028bd7b5b40629b12a403e145975",
+        "width": 24,
+        "height": 24,
+        "colors": [
+          "#1d2b53",
+          "#5f574f",
+          "#7e2553",
+          "#83769c",
+          "#ab5236",
+          "#c2c3c7",
+          "#ffa300",
+          "#fff1e8"
+        ],
+        "alphaMismatch": 0,
+        "targetMismatch": 0,
+        "bytes": 263
+      },
+      "viewerSurvivesDraftClose": true,
+      "previewSaveIdentical": true,
+      "documentWidth": 568,
+      "pass": true
+    }
+  ],
+  "pass": true
+}
