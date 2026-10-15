@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-15T15:36:12.962Z",
+  "surface": "Codex Browser native UI Save; source picker, Max8,4x4, strength49, Count8, Use8 draft",
+  "width": 96,
+  "height": 48,
+  "used": [
+    "#346547",
+    "#3f2631",
+    "#5ad28c",
+    "#6f3e43",
+    "#8b9bb4",
+    "#be6c49",
+    "#bedef1",
+    "#f4ac66"
+  ],
+  "matchesCapturedReference": true,
+  "sha256": "c671178757fc6f61dbe21e08fb4417632e732a8ce21dd5975f56b7ada0e62f6c",
+  "limits": "Reference conversion uses production modules; Sharp decoder and UI draft comparison are independent. Not an OS clipboard or physical Android test."
+}

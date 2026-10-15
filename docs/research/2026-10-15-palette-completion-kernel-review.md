@@ -51,7 +51,8 @@ Retained [results](../../bench/palette-completion-audit/kernel/independent-resul
 
 - 80 deterministic randomized cases: target sizes 1/2/8/64/256, both metrics,
   Cut/Keep, and Off/2×2/4×4/8×8 at strength73.
-- 68,080 converted pixels; 9,120 independently calculated labels agree exactly.
+- 68,080 converted pixels; 9,120 independently calculated labels across nearest
+  and dither cases agree exactly (including transparency and exact-hit guards).
 - All 80 sync/async conversions agree; reduced previews equal the same coordinates
   in full-size output, including original alpha and Bayer phase.
 - All 80 synchronous/asynchronous PNG byte streams agree; independent decoding
@@ -108,5 +109,72 @@ from histograms alone; translucent native clipboard/canvas paths can round RGB;
 very large frames/import analysis and final encoding copies retain synchronous
 work. These are not resolved by pretending service output is a correctness oracle.
 
-Cross-challenge with service/design reviewers and the coordinating browser review
-will be recorded below before the final audit closes.
+## Second bounded round: cross-challenge and desktop performance
+
+The reviewer independently inspected all four new native/enlarged service sheets
+under `bench/palette-completion-service/sheets/`. The paired outputs support a
+bounded tradeoff rather than a universal ranking: local conversion retains the
+glow's pale hot center; the website fixed-target result keeps the face more
+coherent; the website shared eight-color result retains blue eyes and red cloth
+where local output favors armor/wood shades. The knight is an owned synthetic
+fixture, so it cannot establish broad skin/material quality. The service reviewer
+accepted this qualification and confirmed zero alpha changes in these metric
+rows. Composite RGB error must not rank any future alpha-changing output without
+accounting for its actual output alpha. Native sheet crops are derived frames,
+not independently generated downloads.
+
+The deferred protection design was challenged on four points:
+
+- Target availability is different from guaranteed mapped use.
+- Already mapped pixels must not spend residual fitting slots approximating an
+  output that is already forced; the proposal now says this explicitly.
+- A maximum is not an exact used-color count; mockup wording was corrected.
+- Ineligible mappings hidden by Cut can create invisible capacity pressure. That
+  policy remains unresolved and explicitly blocks implementation, alongside the
+  substantial fixed-palette-only limitation for users starting with Auto.
+
+The design reviewer and this reviewer agree the concept is appropriate **for
+user review only**. It is not an accepted implementation contract. Responsive
+built-app receipts correctly distinguish simulated touch viewports from a real
+phone or observed human usability; they exercise existing Count/Use, native PNG
+Save, Preview reuse and membership/alpha checks. No runtime defect was inferred
+from a design-only limitation.
+
+Reproduce the new performance diagnostic:
+
+```
+node bench/palette-completion-audit/kernel/desktop-performance.mjs
+```
+
+This uses an isolated sandbox-enabled headless desktop Chromium, the actual subset
+worker and cooperative source quantizer. Three alternating-order samples start
+from Resurrect64 and request cap8, under Oklab, with Off or 4×4/50%. Every run
+checks cap membership and exact alpha. Median milliseconds:
+
+| Source | Policy | Subset, Off / 4×4 | Conversion, Off / 4×4 |
+|---|---|---:|---:|
+| 256×256 repeated colors | Cut | 0.8 / 0.7 | 0.9 / 1.0 |
+| 256×256 repeated colors | Keep | 0.9 / 1.6 | 1.1 / 1.4 |
+| 512×512 high entropy | Cut | 53.5 / 50.6 | 9.7 / 74.1 |
+| 512×512 high entropy | Keep | 90.8 / 119.4 | 17.0 / 139.7 |
+
+Keep includes about twice as many alpha-eligible pixels in these inputs, so these
+rows do not isolate alpha-buffer overhead. Dithering does not affect subset
+selection; the differing selection medians expose three-sample timing noise,
+not a selection speed claim. No >50ms main-thread task was observed during the
+measured cohort; maximum conversion progress interval was 8.3ms. The 83.3ms
+maximum rAF gap includes cold setup and headless scheduling and is **not** smooth
+animation evidence. This is not import/export, real-app FPS, sustained thermal,
+total-memory, Codex Browser or physical-device benchmarking.
+
+The OS-restricted environment initially prevented native browser startup; the
+owned command succeeded through process escalation with Chromium's own sandbox
+still enabled. No `--no-sandbox` workaround was used. See the retained
+[timings](../../bench/palette-completion-audit/kernel/desktop-performance.json).
+
+**Final reviewer disposition:** after two bounded rounds, no concrete production
+fix remains from this review. Service/design reviewers accepted the challenged
+qualifications above. Preserve current algorithms and defaults, keep protection
+implementation deferred, and retain the known precision/performance limits. The
+coordinator's separate current build/full-suite/Codex receipts complete the
+delivery review; earlier phone evidence remains historical, not a new test.

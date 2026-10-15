@@ -1,0 +1,357 @@
+{
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36",
+  "headless": true,
+  "sandbox": true,
+  "description": "Desktop source-module worker selection and cooperative quantizer; excludes app import/export/layout. Three alternating samples; no phone/FPS/thermal claim.",
+  "elapsedMs": 2019,
+  "rafMaxMs": 83.3,
+  "longTasks": [],
+  "rows": [
+    {
+      "kind": "repeated",
+      "pixels": 65536,
+      "alphaMode": "cut",
+      "dither": "none",
+      "cap": 8,
+      "sample": 0,
+      "selectionMs": 3,
+      "conversionMs": 1.5,
+      "maxProgressGapMs": 1.3999999985098839
+    },
+    {
+      "kind": "repeated",
+      "pixels": 65536,
+      "alphaMode": "cut",
+      "dither": "4x4",
+      "cap": 8,
+      "sample": 0,
+      "selectionMs": 3,
+      "conversionMs": 1.3000000044703484,
+      "maxProgressGapMs": 1.3000000044703484
+    },
+    {
+      "kind": "repeated",
+      "pixels": 65536,
+      "alphaMode": "keep",
+      "dither": "none",
+      "cap": 8,
+      "sample": 0,
+      "selectionMs": 1.3999999985098839,
+      "conversionMs": 1.8000000044703484,
+      "maxProgressGapMs": 1.8000000044703484
+    },
+    {
+      "kind": "repeated",
+      "pixels": 65536,
+      "alphaMode": "keep",
+      "dither": "4x4",
+      "cap": 8,
+      "sample": 0,
+      "selectionMs": 1.6000000014901161,
+      "conversionMs": 3.5999999940395355,
+      "maxProgressGapMs": 3.5999999940395355
+    },
+    {
+      "kind": "entropy",
+      "pixels": 262144,
+      "alphaMode": "cut",
+      "dither": "none",
+      "cap": 8,
+      "sample": 0,
+      "selectionMs": 139.30000000447035,
+      "conversionMs": 11.100000001490116,
+      "maxProgressGapMs": 8
+    },
+    {
+      "kind": "entropy",
+      "pixels": 262144,
+      "alphaMode": "cut",
+      "dither": "4x4",
+      "cap": 8,
+      "sample": 0,
+      "selectionMs": 135.19999999552965,
+      "conversionMs": 74.30000000447035,
+      "maxProgressGapMs": 8.100000001490116
+    },
+    {
+      "kind": "entropy",
+      "pixels": 262144,
+      "alphaMode": "keep",
+      "dither": "none",
+      "cap": 8,
+      "sample": 0,
+      "selectionMs": 143.29999999701977,
+      "conversionMs": 17,
+      "maxProgressGapMs": 8
+    },
+    {
+      "kind": "entropy",
+      "pixels": 262144,
+      "alphaMode": "keep",
+      "dither": "4x4",
+      "cap": 8,
+      "sample": 0,
+      "selectionMs": 126,
+      "conversionMs": 137.70000000298023,
+      "maxProgressGapMs": 8.100000001490116
+    },
+    {
+      "kind": "entropy",
+      "pixels": 262144,
+      "alphaMode": "keep",
+      "dither": "4x4",
+      "cap": 8,
+      "sample": 1,
+      "selectionMs": 119.39999999850988,
+      "conversionMs": 139.70000000298023,
+      "maxProgressGapMs": 8.200000002980232
+    },
+    {
+      "kind": "entropy",
+      "pixels": 262144,
+      "alphaMode": "keep",
+      "dither": "none",
+      "cap": 8,
+      "sample": 1,
+      "selectionMs": 87.89999999850988,
+      "conversionMs": 16.899999998509884,
+      "maxProgressGapMs": 8.200000002980232
+    },
+    {
+      "kind": "entropy",
+      "pixels": 262144,
+      "alphaMode": "cut",
+      "dither": "4x4",
+      "cap": 8,
+      "sample": 1,
+      "selectionMs": 50.600000001490116,
+      "conversionMs": 74.10000000149012,
+      "maxProgressGapMs": 8.200000002980232
+    },
+    {
+      "kind": "entropy",
+      "pixels": 262144,
+      "alphaMode": "cut",
+      "dither": "none",
+      "cap": 8,
+      "sample": 1,
+      "selectionMs": 53.5,
+      "conversionMs": 9.700000002980232,
+      "maxProgressGapMs": 8.100000001490116
+    },
+    {
+      "kind": "repeated",
+      "pixels": 65536,
+      "alphaMode": "keep",
+      "dither": "4x4",
+      "cap": 8,
+      "sample": 1,
+      "selectionMs": 1.7999999970197678,
+      "conversionMs": 1.3000000044703484,
+      "maxProgressGapMs": 1.3000000044703484
+    },
+    {
+      "kind": "repeated",
+      "pixels": 65536,
+      "alphaMode": "keep",
+      "dither": "none",
+      "cap": 8,
+      "sample": 1,
+      "selectionMs": 0.8999999985098839,
+      "conversionMs": 1.1000000014901161,
+      "maxProgressGapMs": 1.1000000014901161
+    },
+    {
+      "kind": "repeated",
+      "pixels": 65536,
+      "alphaMode": "cut",
+      "dither": "4x4",
+      "cap": 8,
+      "sample": 1,
+      "selectionMs": 0.6999999955296516,
+      "conversionMs": 1,
+      "maxProgressGapMs": 1
+    },
+    {
+      "kind": "repeated",
+      "pixels": 65536,
+      "alphaMode": "cut",
+      "dither": "none",
+      "cap": 8,
+      "sample": 1,
+      "selectionMs": 0.8000000044703484,
+      "conversionMs": 0.7999999970197678,
+      "maxProgressGapMs": 0.7999999970197678
+    },
+    {
+      "kind": "repeated",
+      "pixels": 65536,
+      "alphaMode": "cut",
+      "dither": "none",
+      "cap": 8,
+      "sample": 2,
+      "selectionMs": 0.7000000029802322,
+      "conversionMs": 0.8999999985098839,
+      "maxProgressGapMs": 0.7999999970197678
+    },
+    {
+      "kind": "repeated",
+      "pixels": 65536,
+      "alphaMode": "cut",
+      "dither": "4x4",
+      "cap": 8,
+      "sample": 2,
+      "selectionMs": 0.6999999955296516,
+      "conversionMs": 0.9000000059604645,
+      "maxProgressGapMs": 0.9000000059604645
+    },
+    {
+      "kind": "repeated",
+      "pixels": 65536,
+      "alphaMode": "keep",
+      "dither": "none",
+      "cap": 8,
+      "sample": 2,
+      "selectionMs": 0.8999999985098839,
+      "conversionMs": 1,
+      "maxProgressGapMs": 1
+    },
+    {
+      "kind": "repeated",
+      "pixels": 65536,
+      "alphaMode": "keep",
+      "dither": "4x4",
+      "cap": 8,
+      "sample": 2,
+      "selectionMs": 1.0999999940395355,
+      "conversionMs": 1.4000000059604645,
+      "maxProgressGapMs": 1.4000000059604645
+    },
+    {
+      "kind": "entropy",
+      "pixels": 262144,
+      "alphaMode": "cut",
+      "dither": "none",
+      "cap": 8,
+      "sample": 2,
+      "selectionMs": 50.400000005960464,
+      "conversionMs": 9.099999994039536,
+      "maxProgressGapMs": 8.099999994039536
+    },
+    {
+      "kind": "entropy",
+      "pixels": 262144,
+      "alphaMode": "cut",
+      "dither": "4x4",
+      "cap": 8,
+      "sample": 2,
+      "selectionMs": 49.20000000298023,
+      "conversionMs": 70.5,
+      "maxProgressGapMs": 8.100000001490116
+    },
+    {
+      "kind": "entropy",
+      "pixels": 262144,
+      "alphaMode": "keep",
+      "dither": "none",
+      "cap": 8,
+      "sample": 2,
+      "selectionMs": 90.79999999701977,
+      "conversionMs": 17.900000005960464,
+      "maxProgressGapMs": 8.100000001490116
+    },
+    {
+      "kind": "entropy",
+      "pixels": 262144,
+      "alphaMode": "keep",
+      "dither": "4x4",
+      "cap": 8,
+      "sample": 2,
+      "selectionMs": 91.5,
+      "conversionMs": 144.30000000447035,
+      "maxProgressGapMs": 8.300000004470348
+    }
+  ],
+  "medians": [
+    {
+      "kind": "repeated",
+      "pixels": 65536,
+      "alphaMode": "cut",
+      "dither": "none",
+      "cap": 8,
+      "selectionMs": 0.8000000044703484,
+      "conversionMs": 0.8999999985098839,
+      "maxProgressGapMs": 1.3999999985098839
+    },
+    {
+      "kind": "repeated",
+      "pixels": 65536,
+      "alphaMode": "cut",
+      "dither": "4x4",
+      "cap": 8,
+      "selectionMs": 0.6999999955296516,
+      "conversionMs": 1,
+      "maxProgressGapMs": 1.3000000044703484
+    },
+    {
+      "kind": "repeated",
+      "pixels": 65536,
+      "alphaMode": "keep",
+      "dither": "none",
+      "cap": 8,
+      "selectionMs": 0.8999999985098839,
+      "conversionMs": 1.1000000014901161,
+      "maxProgressGapMs": 1.8000000044703484
+    },
+    {
+      "kind": "repeated",
+      "pixels": 65536,
+      "alphaMode": "keep",
+      "dither": "4x4",
+      "cap": 8,
+      "selectionMs": 1.6000000014901161,
+      "conversionMs": 1.4000000059604645,
+      "maxProgressGapMs": 3.5999999940395355
+    },
+    {
+      "kind": "entropy",
+      "pixels": 262144,
+      "alphaMode": "cut",
+      "dither": "none",
+      "cap": 8,
+      "selectionMs": 53.5,
+      "conversionMs": 9.700000002980232,
+      "maxProgressGapMs": 8.100000001490116
+    },
+    {
+      "kind": "entropy",
+      "pixels": 262144,
+      "alphaMode": "cut",
+      "dither": "4x4",
+      "cap": 8,
+      "selectionMs": 50.600000001490116,
+      "conversionMs": 74.10000000149012,
+      "maxProgressGapMs": 8.200000002980232
+    },
+    {
+      "kind": "entropy",
+      "pixels": 262144,
+      "alphaMode": "keep",
+      "dither": "none",
+      "cap": 8,
+      "selectionMs": 90.79999999701977,
+      "conversionMs": 17,
+      "maxProgressGapMs": 8.200000002980232
+    },
+    {
+      "kind": "entropy",
+      "pixels": 262144,
+      "alphaMode": "keep",
+      "dither": "4x4",
+      "cap": 8,
+      "selectionMs": 119.39999999850988,
+      "conversionMs": 139.70000000298023,
+      "maxProgressGapMs": 8.300000004470348
+    }
+  ]
+}

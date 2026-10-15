@@ -1,0 +1,30 @@
+
+> colorfetti@0.0.0 build
+> vite build
+
+8:32:50 AM [vite-plugin-svelte] no Svelte config found at C:/Programming_Files/Shilocity/colorfetti - using default configuration.
+vite v8.3.3 building client environment for production...
+transforming...
+✓ 178 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                     4.46 kB │ gzip:  1.60 kB
+dist/assets/palette-limit-worker-Mz19uy7P.js        9.43 kB
+dist/assets/palette-generated-worker-CSBuxSCv.js    9.47 kB
+dist/assets/palette-gif-worker-BKtCg7rw.js         10.90 kB
+dist/assets/palette-cleanup-worker-CaqaOtpO.js     14.75 kB
+dist/assets/image-import-worker-C56sLlyw.js        24.51 kB
+dist/assets/index-FVm9n676.css                    163.93 kB │ gzip: 25.90 kB
+dist/assets/palette-usage-BYDUy8-A.js               0.56 kB │ gzip:  0.38 kB
+dist/assets/palette-lospec-CX_AxttG.js              2.32 kB │ gzip:  1.24 kB
+dist/assets/palette-ase-0_53u3WS.js                 2.49 kB │ gzip:  1.32 kB
+dist/assets/palette-generated-client-DXxe_HY5.js    3.75 kB │ gzip:  1.63 kB
+dist/assets/palette-cleanup-C95XLjn7.js             4.23 kB │ gzip:  2.21 kB
+dist/assets/palette-limit-CHzBmENV.js               4.46 kB │ gzip:  2.22 kB
+dist/assets/image-import-client-CBpse5s2.js         5.53 kB │ gzip:  2.10 kB
+dist/assets/palette-generated-DFe-TPWZ.js           5.83 kB │ gzip:  2.67 kB
+dist/assets/palette-cleanup-client-BumLU55D.js      7.34 kB │ gzip:  2.88 kB
+dist/assets/gif-BQI7V1vL.js                        12.79 kB │ gzip:  5.11 kB
+dist/assets/index-BGOH0uUe.js                     260.06 kB │ gzip: 94.64 kB
+
+✓ built in 414ms

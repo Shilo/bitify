@@ -1,0 +1,125 @@
+{
+  "at": "2026-10-15T15:38:39.970Z",
+  "engine": "153.0",
+  "passCount": 12,
+  "total": 18,
+  "failed": [
+    "ENDESGA 8 nearest Cut128: native Save vs oracle + preview",
+    "ENDESGA 8 nearest Keep: native Save vs oracle + preview",
+    "Dither 4x4 50% keep: contract + preview",
+    "Dither 8x8 100% keep: contract + preview",
+    "Download all ZIP: entries, order, oracle/contract",
+    "Keep ZIP with partial-alpha PNG + binary GIF"
+  ],
+  "phases": [
+    {
+      "name": "Fresh visit defaults",
+      "pass": true,
+      "comparedObservations": 1,
+      "unchanged": true
+    },
+    {
+      "name": "ENDESGA 8 nearest Cut128: native Save vs oracle + preview",
+      "pass": false,
+      "comparedObservations": 13,
+      "unchanged": true
+    },
+    {
+      "name": "ENDESGA 8 nearest Keep: native Save vs oracle + preview",
+      "pass": false,
+      "comparedObservations": 13,
+      "unchanged": true
+    },
+    {
+      "name": "Dither 4x4 strength 0 equals nearest (Keep)",
+      "pass": true,
+      "comparedObservations": 3,
+      "unchanged": true
+    },
+    {
+      "name": "Dither 4x4 50% keep: contract + preview",
+      "pass": false,
+      "comparedObservations": 19,
+      "unchanged": true
+    },
+    {
+      "name": "Dither 8x8 100% keep: contract + preview",
+      "pass": false,
+      "comparedObservations": 19,
+      "unchanged": true
+    },
+    {
+      "name": "Dither 2x2 50% cut: contract + preview",
+      "pass": true,
+      "comparedObservations": 19,
+      "unchanged": true
+    },
+    {
+      "name": "Dither 8x8 100% cut: contract + preview",
+      "pass": true,
+      "comparedObservations": 19,
+      "unchanged": true
+    },
+    {
+      "name": "Count output colors on GIF equals independent all-frame union; Use opens exact draft",
+      "pass": true,
+      "comparedObservations": 1,
+      "unchanged": true
+    },
+    {
+      "name": "Max colors 3 + RGB + Cleanup On (dither Off, Cut): membership/cap/alpha",
+      "pass": true,
+      "comparedObservations": 7,
+      "unchanged": true
+    },
+    {
+      "name": "RGB matching All, Cleanup Off: exact RGB-nearest oracle",
+      "pass": true,
+      "comparedObservations": 5,
+      "unchanged": true
+    },
+    {
+      "name": "Download all ZIP: entries, order, oracle/contract",
+      "pass": false,
+      "comparedObservations": 7,
+      "unchanged": true
+    },
+    {
+      "name": "Keep ZIP with partial-alpha PNG + binary GIF",
+      "pass": false,
+      "comparedObservations": 7,
+      "unchanged": true
+    },
+    {
+      "name": "Auto: contract (alpha, <=64 colors) and Count",
+      "pass": true,
+      "comparedObservations": 2,
+      "unchanged": true
+    },
+    {
+      "name": "Persistence across reload then Reset",
+      "pass": true,
+      "comparedObservations": 1,
+      "unchanged": true
+    },
+    {
+      "name": "Layout 320x568 touch",
+      "pass": true,
+      "comparedObservations": 1,
+      "unchanged": true
+    },
+    {
+      "name": "Layout 568x320 touch",
+      "pass": true,
+      "comparedObservations": 1,
+      "unchanged": true
+    },
+    {
+      "name": "Layout 1280x900",
+      "pass": true,
+      "comparedObservations": 1,
+      "unchanged": true
+    }
+  ],
+  "disposition": "All retained correctness outcomes, visible RGB/alpha mismatch counts and exported SHA hashes are unchanged. Six source-file RGB checks still fail because Firefox canvas fallback rounds translucent RGB; they are known precision limits, not new passes. This comparison does not prove exact source-file RGB."
+}

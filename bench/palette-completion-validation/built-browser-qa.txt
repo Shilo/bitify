@@ -1,0 +1,15 @@
+Legacy Glow: all11 styles passed.
+Legacy Mono: all11 styles passed.
+Legacy Paper: all11 styles passed.
+Legacy Torch: all11 styles passed.
+Legacy Rose: all11 styles passed.
+Legacy Game Boy: all11 styles passed.
+Legacy Pocket: all11 styles passed.
+Legacy Nokia: all11 styles passed.
+Legacy Playdate: all11 styles passed.
+Legacy Phosphor: all11 styles passed.
+Legacy Amber: all11 styles passed.
+Legacy Commodore: all11 styles passed.
+Legacy matrix: 132 independently decoded exports passed.
+Full matrix: 11 independently decoded exports and clipboard PNGs passed.
+{"passed":true,"legacy":132,"full":11,"rgb":11,"extra":["Legacy custom colors/None/Swap/settings memory/Original/copy/single-save","Eleven full presets RGB preview/PNG/Copy match independent reference; ordered copy swatches/HEX backups preserve every entry; family retains metric and Reset restores Oklab/cut128","Max colors minimum-two/invalid/empty inputs, unchanged two-color preview/PNG/Copy, and All/remembered16 reset","Palette-sized slider/number, untouched blur, small-palette reload and invalid edit retain64; explicit3 and All remember3 across palette switches","Full GIF exact frames/delays/loop/first-frame copy and mixed ZIP","Family round-trip preserves legacy custom colors/None/style settings, legacy GIF and mixed ZIP","2MP save preserves click palette; ZIP preserves palette and removed-image snapshots","256 colors+empty GIF blocks ZIP without download or active palette mutation","6MP async GIF failure preserves named import and 256-color saved drafts/notice/focus/source/revision; retry uses current palette and 255-color copy limit","Native two-document localStorage clear/update/remove: saved fallback, active session/open draft identity and matching/legacy settings retained; native iframe sessionStorage library-key update/remove/clear ignored","Built wall/viewer GIF Original advances while conversion yields are held; switching back waits and resumes the exact current frame without stale completion","ASE parser stays unloaded for startup/editor/PNG/text; first import loads once, repeat reuses cache and exact255 ordered raw entries persist with aseprite metadata","Palette URL PNG→ASE imports exact entries without replacing the dialog, chosen Paste tool, name or text history; saved ASE source persists"],"errors":[]}

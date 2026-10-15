@@ -1,0 +1,36 @@
+// Native Codex UI download, independently decoded; Node pipeline is the captured-settings reference.
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
+import { createRequire } from 'node:module';
+import { generatePaletteAsync } from '../../src/lib/palette-generated.js';
+import { captureGeneratedSources } from '../../src/lib/palette-generated-sources.js';
+import { selectPaletteSubset } from '../../src/lib/palette-limit.js';
+import { quantizeAsync } from '../../src/lib/quantize.js';
+import { palettePngBytesAsync } from '../../src/lib/save.js';
+const require = createRequire(import.meta.url);
+const sharp = require('C:/Users/shilo/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/sharp');
+const dir = import.meta.dirname;
+const decode = async file => {
+  const {data,info} = await sharp(file).ensureAlpha().raw().toBuffer({resolveWithObject:true});
+  return {width:info.width,height:info.height,data:new Uint8Array(data)};
+};
+const original = await decode('bench/important-colors-review/fixtures/real-inventory.png');
+let colors = (await generatePaletteAsync(captureGeneratedSources([{original}],128))).colors;
+assert.equal(colors.length,37);
+const fit = await selectPaletteSubset(colors,8,async function*(){yield {data:original.data,weight:1};},{alphaCut:128,metric:'oklab'});
+colors = fit.indices.map(i=>colors[i]);
+const expected = await palettePngBytesAsync({...await quantizeAsync(original,colors,128,undefined,undefined,{metric:'oklab',alphaMode:'cut',dither:'4x4',ditherStrength:49}),colors});
+const nativeFile = dir+'/codex-inventory-auto8-dither49.png';
+const actual = await decode(nativeFile);
+const reference = await decode(expected);
+assert.equal(actual.width,96); assert.equal(actual.height,48);
+assert.deepEqual(actual.data,reference.data);
+const used = new Set();
+for(let p=0;p<actual.data.length;p+=4) if(actual.data[p+3]) used.add('#'+Buffer.from(actual.data.subarray(p,p+3)).toString('hex'));
+assert.equal(used.size,8);
+const draft = ['#346547','#3f2631','#5ad28c','#6f3e43','#8b9bb4','#be6c49','#bedef1','#f4ac66'];
+assert.deepEqual([...used].sort(),draft);
+const result = {at:new Date().toISOString(),surface:'Codex Browser native UI Save; source picker, Max8,4x4, strength49, Count8, Use8 draft',width:actual.width,height:actual.height,used:[...used].sort(),matchesCapturedReference:true,sha256:crypto.createHash('sha256').update(fs.readFileSync(nativeFile)).digest('hex'),limits:'Reference conversion uses production modules; Sharp decoder and UI draft comparison are independent. Not an OS clipboard or physical Android test.'};
+fs.writeFileSync(dir+'/codex-save-verification.json',JSON.stringify(result,null,2)+'\n');
+console.log(JSON.stringify(result));
