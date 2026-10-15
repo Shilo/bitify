@@ -2,6 +2,20 @@
 
 Date: October 14, 2026. Scope: service research, current Colorfetti audit and independent executable spikes. The initial research changed no production behavior. The subsequent reviewed implementation is recorded below.
 
+**Historical synthesis; status reconciled October 15.** Baseline descriptions and
+next-step recommendations below describe successive stages of the original
+review, rather than the current backlog. Full-palette dithering, used-color
+Count/Use, the two compact presets, Lospec URL import and optional Keep opacity
+are now implemented and verified in the [dithering implementation record](2026-10-14-full-palette-dithering-implementation.md)
+and [palette improvements checklist](2026-10-14-palette-improvements-todo.md).
+[Four native website downloads](pixellab-review-2026-10-14/web-output-verification.md)
+supersede the original blanket website-output uncertainty for their tested
+settings. [Auto refinement](2026-10-15-auto-refinement-decision.md) and the
+[WebKit fallback candidate](2026-10-15-webkit-fallback-decision.md) were evaluated
+and rejected for shipping. The [remaining-work audit](2026-10-15-palette-remaining-audit.md)
+separates completed features, rejected experiments, optional proposals and known
+precision limits; preserve the historical measurements below when reviewing it.
+
 Colorfetti already covers much of the core recoloring workflow. The strongest improvements to investigate are optional multicolor dithering, clearer count and scope controls, artist-directed protection of small details, and easier palette reuse. Keep Oklab nearest matching as the default. Neither a new distance formula nor more presets alone solves low-color readability.
 
 The current full-palette controls were also inspected live in the local app: Nearest exposes Max colors, Oklab/RGB Matching and Cleanup, with no multicolor dither control. The [captured baseline controls](../../bench/palette-collection-spike/colorfetti-controls.jpg) complement the code and behavior audit; they are not a participant usability study.

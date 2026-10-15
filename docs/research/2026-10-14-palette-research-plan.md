@@ -2,6 +2,15 @@
 
 Date: October 14, 2026
 
+**Historical plan; status reconciled October 15.** The sequence and access notes
+below preserve the original research session. Later [website verification](pixellab-review-2026-10-14/web-output-verification.md)
+obtained four independently decoded native PNG downloads, superseding the blanket
+website-output uncertainty below for those tested settings. Current implemented
+features and their checks are recorded in the [palette improvements checklist](2026-10-14-palette-improvements-todo.md)
+and [remaining-work audit](2026-10-15-palette-remaining-audit.md). Read those current
+decisions before treating this plan's original gaps or proposals as pending work;
+unverified website combinations remain explicit research limits.
+
 Improve Colorfetti's palette recoloring and reduction through live service evaluation and independent experiments. This is research only; production behavior is unchanged.
 
 ## Workstreams
