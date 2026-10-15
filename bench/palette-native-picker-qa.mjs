@@ -5,7 +5,7 @@ import {createRequire} from 'node:module';
 import {execFileSync} from 'node:child_process';
 import {mkdirSync,writeFileSync} from 'node:fs';
 const require=createRequire(import.meta.url),{chromium}=require(process.env.PLAYWRIGHT_MODULE??'C:/Users/shilo/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
-const adb=process.env.ADB??'C:/Users/shilo/AppData/Local/Android/Sdk/platform-tools/adb.exe',out='bench/auto-refinement-device-review';
+const adb=process.env.ADB??'C:/Users/shilo/AppData/Local/Android/Sdk/platform-tools/adb.exe',out=process.env.PALETTE_QA_OUTPUT??'bench/auto-refinement-device-review';
 mkdirSync(out,{recursive:true});
 const native=(...args)=>execFileSync(adb,args,{encoding:'utf8',timeout:15000});
 function nodes(){native('shell','uiautomator','dump','/data/local/tmp/colorfetti-native-picker.xml');const xml=native('shell','cat','/data/local/tmp/colorfetti-native-picker.xml');return[...xml.matchAll(/<node\s+([^>]+)>?/g)].map(match=>Object.fromEntries([...match[1].matchAll(/([\w-]+)="([^"]*)"/g)].map(m=>[m[1],m[2]])));}
