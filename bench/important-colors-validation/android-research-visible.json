@@ -1,0 +1,3087 @@
+{
+  "at": "2026-10-15T15:00:31.127Z",
+  "device": "android",
+  "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+  "scope": "Research modules only; not built app import/export.",
+  "checks": [
+    {
+      "id": "dungeon-wizard-auto-oklab-k4-baseline",
+      "hash": "12ce3c0cc415cd80d42585304293a13dbf88d48baba7389a4085e41f1f2e4bc3",
+      "colors": [
+        "#3f2631",
+        "#9b4ca3",
+        "#c0cbdc",
+        "#f7c282"
+      ],
+      "selectMs": 1.5999999642372131,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-wizard-auto-oklab-k4-concave",
+      "hash": "9d660a4324cc43fe7161cd5d8dd9c79927e58980309bd6ed6e129be412f8b9e9",
+      "colors": [
+        "#3f2631",
+        "#9b4ca3",
+        "#aab7cc",
+        "#f7c282"
+      ],
+      "selectMs": 2.600000023841858,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-wizard-auto-oklab-k4-hue",
+      "hash": "9d660a4324cc43fe7161cd5d8dd9c79927e58980309bd6ed6e129be412f8b9e9",
+      "colors": [
+        "#3f2631",
+        "#9b4ca3",
+        "#aab7cc",
+        "#f7c282"
+      ],
+      "selectMs": 0.699999988079071,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-wizard-auto-oklab-k8-baseline",
+      "hash": "f9de54f6632103798f4c4a1c5a420d884612c0fd61e83b7b5af6da0fd6487d45",
+      "colors": [
+        "#262b44",
+        "#3f2631",
+        "#8b9bb4",
+        "#9b4ca3",
+        "#bd6c4a",
+        "#c0cbdc",
+        "#d176d0",
+        "#f7c282"
+      ],
+      "selectMs": 0.5,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 8,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-wizard-auto-oklab-k8-concave",
+      "hash": "f9de54f6632103798f4c4a1c5a420d884612c0fd61e83b7b5af6da0fd6487d45",
+      "colors": [
+        "#262b44",
+        "#3f2631",
+        "#8b9bb4",
+        "#9b4ca3",
+        "#bd6c4a",
+        "#c0cbdc",
+        "#d176d0",
+        "#f7c282"
+      ],
+      "selectMs": 0.2999999523162842,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 8,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-wizard-auto-oklab-k8-hue",
+      "hash": "f9de54f6632103798f4c4a1c5a420d884612c0fd61e83b7b5af6da0fd6487d45",
+      "colors": [
+        "#262b44",
+        "#3f2631",
+        "#8b9bb4",
+        "#9b4ca3",
+        "#bd6c4a",
+        "#c0cbdc",
+        "#d176d0",
+        "#f7c282"
+      ],
+      "selectMs": 0.5,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 8,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-wizard-auto-rgb-k4-baseline",
+      "hash": "1942818888c489a8eb1c679115094b685db34acc0b2b6105280f503fcbda9bc2",
+      "colors": [
+        "#3f2631",
+        "#9b4ca3",
+        "#aab7cc",
+        "#f7c282"
+      ],
+      "selectMs": 0.30000001192092896,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-wizard-auto-rgb-k4-concave",
+      "hash": "1942818888c489a8eb1c679115094b685db34acc0b2b6105280f503fcbda9bc2",
+      "colors": [
+        "#3f2631",
+        "#9b4ca3",
+        "#aab7cc",
+        "#f7c282"
+      ],
+      "selectMs": 0.30000001192092896,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-wizard-auto-rgb-k4-hue",
+      "hash": "1942818888c489a8eb1c679115094b685db34acc0b2b6105280f503fcbda9bc2",
+      "colors": [
+        "#3f2631",
+        "#9b4ca3",
+        "#aab7cc",
+        "#f7c282"
+      ],
+      "selectMs": 0.19999998807907104,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-wizard-auto-rgb-k8-baseline",
+      "hash": "f9de54f6632103798f4c4a1c5a420d884612c0fd61e83b7b5af6da0fd6487d45",
+      "colors": [
+        "#262b44",
+        "#3f2631",
+        "#8b9bb4",
+        "#9b4ca3",
+        "#bd6c4a",
+        "#c0cbdc",
+        "#d176d0",
+        "#f7c282"
+      ],
+      "selectMs": 0.5,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 8,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-wizard-auto-rgb-k8-concave",
+      "hash": "f9de54f6632103798f4c4a1c5a420d884612c0fd61e83b7b5af6da0fd6487d45",
+      "colors": [
+        "#262b44",
+        "#3f2631",
+        "#8b9bb4",
+        "#9b4ca3",
+        "#bd6c4a",
+        "#c0cbdc",
+        "#d176d0",
+        "#f7c282"
+      ],
+      "selectMs": 0.19999998807907104,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 8,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-wizard-auto-rgb-k8-hue",
+      "hash": "f9de54f6632103798f4c4a1c5a420d884612c0fd61e83b7b5af6da0fd6487d45",
+      "colors": [
+        "#262b44",
+        "#3f2631",
+        "#8b9bb4",
+        "#9b4ca3",
+        "#bd6c4a",
+        "#c0cbdc",
+        "#d176d0",
+        "#f7c282"
+      ],
+      "selectMs": 0.6000000238418579,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 8,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-wizard-res64-oklab-k4-baseline",
+      "hash": "56a54de1237e84c0d4c96ae2c793f7931b89b5ebba375acc0209615a06f229fb",
+      "colors": [
+        "#c7dcd0",
+        "#fbb954",
+        "#45293f",
+        "#905ea9"
+      ],
+      "selectMs": 0.8999999761581421,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-wizard-res64-oklab-k4-concave",
+      "hash": "56a54de1237e84c0d4c96ae2c793f7931b89b5ebba375acc0209615a06f229fb",
+      "colors": [
+        "#c7dcd0",
+        "#fbb954",
+        "#45293f",
+        "#905ea9"
+      ],
+      "selectMs": 0.8999999761581421,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-wizard-res64-oklab-k4-hue",
+      "hash": "56a54de1237e84c0d4c96ae2c793f7931b89b5ebba375acc0209615a06f229fb",
+      "colors": [
+        "#c7dcd0",
+        "#fbb954",
+        "#45293f",
+        "#905ea9"
+      ],
+      "selectMs": 0.8999999761581421,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-wizard-res64-rgb-k4-baseline",
+      "hash": "f3299dd63d04d8f50e9c7cbbd0a427d867e7ea38f675c19afebf9dcadc73c548",
+      "colors": [
+        "#c7dcd0",
+        "#45293f",
+        "#905ea9",
+        "#fca790"
+      ],
+      "selectMs": 0.5,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-wizard-res64-rgb-k4-concave",
+      "hash": "f3299dd63d04d8f50e9c7cbbd0a427d867e7ea38f675c19afebf9dcadc73c548",
+      "colors": [
+        "#c7dcd0",
+        "#45293f",
+        "#905ea9",
+        "#fca790"
+      ],
+      "selectMs": 1.199999988079071,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-wizard-res64-rgb-k4-hue",
+      "hash": "f3299dd63d04d8f50e9c7cbbd0a427d867e7ea38f675c19afebf9dcadc73c548",
+      "colors": [
+        "#c7dcd0",
+        "#45293f",
+        "#905ea9",
+        "#fca790"
+      ],
+      "selectMs": 0.699999988079071,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-archer-auto-oklab-k4-baseline",
+      "hash": "def7dff3af9abe47252b2c849fb69d4e289f976454ac7cf2730defcdf1441ee4",
+      "colors": [
+        "#25956a",
+        "#3f2631",
+        "#bd6c4a",
+        "#f7c282"
+      ],
+      "selectMs": 0.30000001192092896,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-archer-auto-oklab-k4-concave",
+      "hash": "def7dff3af9abe47252b2c849fb69d4e289f976454ac7cf2730defcdf1441ee4",
+      "colors": [
+        "#25956a",
+        "#3f2631",
+        "#bd6c4a",
+        "#f7c282"
+      ],
+      "selectMs": 0.19999998807907104,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-archer-auto-oklab-k4-hue",
+      "hash": "def7dff3af9abe47252b2c849fb69d4e289f976454ac7cf2730defcdf1441ee4",
+      "colors": [
+        "#25956a",
+        "#3f2631",
+        "#bd6c4a",
+        "#f7c282"
+      ],
+      "selectMs": 0.19999998807907104,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-archer-auto-oklab-k8-baseline",
+      "hash": "98198ed98f11e6d56079242da987c6b27a94cf9c9fe5931eeecd704f3676a8c8",
+      "colors": [
+        "#25956a",
+        "#262b44",
+        "#3f2631",
+        "#43e1b3",
+        "#763b36",
+        "#bd6c4a",
+        "#e19a65",
+        "#f7c282"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 8,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-archer-auto-oklab-k8-concave",
+      "hash": "98198ed98f11e6d56079242da987c6b27a94cf9c9fe5931eeecd704f3676a8c8",
+      "colors": [
+        "#25956a",
+        "#262b44",
+        "#3f2631",
+        "#43e1b3",
+        "#763b36",
+        "#bd6c4a",
+        "#e19a65",
+        "#f7c282"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 8,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-archer-auto-oklab-k8-hue",
+      "hash": "98198ed98f11e6d56079242da987c6b27a94cf9c9fe5931eeecd704f3676a8c8",
+      "colors": [
+        "#25956a",
+        "#262b44",
+        "#3f2631",
+        "#43e1b3",
+        "#763b36",
+        "#bd6c4a",
+        "#e19a65",
+        "#f7c282"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 8,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-archer-auto-rgb-k4-baseline",
+      "hash": "34e2a5998f424d00ea1297a0ed6eac45173807344d0249052465d8edd9b4bfea",
+      "colors": [
+        "#25956a",
+        "#3f2631",
+        "#bd6c4a",
+        "#f7c282"
+      ],
+      "selectMs": 0.19999998807907104,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-archer-auto-rgb-k4-concave",
+      "hash": "34e2a5998f424d00ea1297a0ed6eac45173807344d0249052465d8edd9b4bfea",
+      "colors": [
+        "#25956a",
+        "#3f2631",
+        "#bd6c4a",
+        "#f7c282"
+      ],
+      "selectMs": 0.19999998807907104,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-archer-auto-rgb-k4-hue",
+      "hash": "34e2a5998f424d00ea1297a0ed6eac45173807344d0249052465d8edd9b4bfea",
+      "colors": [
+        "#25956a",
+        "#3f2631",
+        "#bd6c4a",
+        "#f7c282"
+      ],
+      "selectMs": 0.30000001192092896,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-archer-auto-rgb-k8-baseline",
+      "hash": "98198ed98f11e6d56079242da987c6b27a94cf9c9fe5931eeecd704f3676a8c8",
+      "colors": [
+        "#25956a",
+        "#262b44",
+        "#3f2631",
+        "#43e1b3",
+        "#763b36",
+        "#bd6c4a",
+        "#e19a65",
+        "#f7c282"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 8,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-archer-auto-rgb-k8-concave",
+      "hash": "98198ed98f11e6d56079242da987c6b27a94cf9c9fe5931eeecd704f3676a8c8",
+      "colors": [
+        "#25956a",
+        "#262b44",
+        "#3f2631",
+        "#43e1b3",
+        "#763b36",
+        "#bd6c4a",
+        "#e19a65",
+        "#f7c282"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 8,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-archer-auto-rgb-k8-hue",
+      "hash": "98198ed98f11e6d56079242da987c6b27a94cf9c9fe5931eeecd704f3676a8c8",
+      "colors": [
+        "#25956a",
+        "#262b44",
+        "#3f2631",
+        "#43e1b3",
+        "#763b36",
+        "#bd6c4a",
+        "#e19a65",
+        "#f7c282"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 8,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-archer-res64-oklab-k4-baseline",
+      "hash": "dd67eae062ae1477318cddee88cb6160ca9db9a98d50c31ee07c4a37260e8275",
+      "colors": [
+        "#cd683d",
+        "#fbb954",
+        "#239063",
+        "#45293f"
+      ],
+      "selectMs": 0.800000011920929,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-archer-res64-oklab-k4-concave",
+      "hash": "dd67eae062ae1477318cddee88cb6160ca9db9a98d50c31ee07c4a37260e8275",
+      "colors": [
+        "#cd683d",
+        "#fbb954",
+        "#239063",
+        "#45293f"
+      ],
+      "selectMs": 0.699999988079071,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-archer-res64-oklab-k4-hue",
+      "hash": "dd67eae062ae1477318cddee88cb6160ca9db9a98d50c31ee07c4a37260e8275",
+      "colors": [
+        "#cd683d",
+        "#fbb954",
+        "#239063",
+        "#45293f"
+      ],
+      "selectMs": 0.800000011920929,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-archer-res64-rgb-k4-baseline",
+      "hash": "3f412ec1f9d7b163dea8713726c6a6806d9ae7a60b17153e1004786209b217f9",
+      "colors": [
+        "#cd683d",
+        "#239063",
+        "#45293f",
+        "#fca790"
+      ],
+      "selectMs": 1.4000000357627869,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-archer-res64-rgb-k4-concave",
+      "hash": "a45540cade63c89dd17675f287603619902255fe8d63a9e371506e3de361596d",
+      "colors": [
+        "#cd683d",
+        "#1ebc73",
+        "#45293f",
+        "#fca790"
+      ],
+      "selectMs": 0.6000000238418579,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "dungeon-archer-res64-rgb-k4-hue",
+      "hash": "3f412ec1f9d7b163dea8713726c6a6806d9ae7a60b17153e1004786209b217f9",
+      "colors": [
+        "#cd683d",
+        "#239063",
+        "#45293f",
+        "#fca790"
+      ],
+      "selectMs": 0.5999999642372131,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "town-water-bucket-auto-oklab-k4-baseline",
+      "hash": "9f4618f571af11c755d81a0df12521ed09c59f4ca91415d1a2c42f3039c4f971",
+      "colors": [
+        "#3d212d",
+        "#763b36",
+        "#8c9cb5",
+        "#eaa56c"
+      ],
+      "selectMs": 0.20000004768371582,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "town-water-bucket-auto-oklab-k4-concave",
+      "hash": "15c9d091079768b4ff265618a0b3cfbb4679d2b141bdddbb474922e107f0e742",
+      "colors": [
+        "#3d212d",
+        "#763b36",
+        "#8c9cb5",
+        "#c1ccdd"
+      ],
+      "selectMs": 0.19999998807907104,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "town-water-bucket-auto-oklab-k4-hue",
+      "hash": "9f4618f571af11c755d81a0df12521ed09c59f4ca91415d1a2c42f3039c4f971",
+      "colors": [
+        "#3d212d",
+        "#763b36",
+        "#8c9cb5",
+        "#eaa56c"
+      ],
+      "selectMs": 0.19999998807907104,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "town-water-bucket-auto-oklab-k8-baseline",
+      "hash": "ad7c5875faf46a9e6ff57654de2ee93b9bba4fcf0cbf77046f385eb924de22ee",
+      "colors": [
+        "#009adc",
+        "#3d212d",
+        "#51607d",
+        "#763b36",
+        "#8c9cb5",
+        "#bd6c4a",
+        "#c1ccdd",
+        "#eaa56c"
+      ],
+      "selectMs": 0.30000001192092896,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 8,
+      "stableChurn": 0
+    },
+    {
+      "id": "town-water-bucket-auto-oklab-k8-concave",
+      "hash": "ad7c5875faf46a9e6ff57654de2ee93b9bba4fcf0cbf77046f385eb924de22ee",
+      "colors": [
+        "#009adc",
+        "#3d212d",
+        "#51607d",
+        "#763b36",
+        "#8c9cb5",
+        "#bd6c4a",
+        "#c1ccdd",
+        "#eaa56c"
+      ],
+      "selectMs": 0.19999998807907104,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 8,
+      "stableChurn": 0
+    },
+    {
+      "id": "town-water-bucket-auto-oklab-k8-hue",
+      "hash": "ad7c5875faf46a9e6ff57654de2ee93b9bba4fcf0cbf77046f385eb924de22ee",
+      "colors": [
+        "#009adc",
+        "#3d212d",
+        "#51607d",
+        "#763b36",
+        "#8c9cb5",
+        "#bd6c4a",
+        "#c1ccdd",
+        "#eaa56c"
+      ],
+      "selectMs": 0.10000002384185791,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 8,
+      "stableChurn": 0
+    },
+    {
+      "id": "town-water-bucket-auto-rgb-k4-baseline",
+      "hash": "88ba55e4530a1f3f70e62f0c002b50638ab5a4208b0ab8f8927c869341cc4ab4",
+      "colors": [
+        "#009adc",
+        "#3d212d",
+        "#8c9cb5",
+        "#eaa56c"
+      ],
+      "selectMs": 0.19999998807907104,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "town-water-bucket-auto-rgb-k4-concave",
+      "hash": "88ba55e4530a1f3f70e62f0c002b50638ab5a4208b0ab8f8927c869341cc4ab4",
+      "colors": [
+        "#009adc",
+        "#3d212d",
+        "#8c9cb5",
+        "#eaa56c"
+      ],
+      "selectMs": 0.19999998807907104,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "town-water-bucket-auto-rgb-k4-hue",
+      "hash": "88ba55e4530a1f3f70e62f0c002b50638ab5a4208b0ab8f8927c869341cc4ab4",
+      "colors": [
+        "#009adc",
+        "#3d212d",
+        "#8c9cb5",
+        "#eaa56c"
+      ],
+      "selectMs": 0.19999998807907104,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "town-water-bucket-auto-rgb-k8-baseline",
+      "hash": "ad7c5875faf46a9e6ff57654de2ee93b9bba4fcf0cbf77046f385eb924de22ee",
+      "colors": [
+        "#009adc",
+        "#3d212d",
+        "#51607d",
+        "#763b36",
+        "#8c9cb5",
+        "#bd6c4a",
+        "#c1ccdd",
+        "#eaa56c"
+      ],
+      "selectMs": 0.30000001192092896,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 8,
+      "stableChurn": 0
+    },
+    {
+      "id": "town-water-bucket-auto-rgb-k8-concave",
+      "hash": "ad7c5875faf46a9e6ff57654de2ee93b9bba4fcf0cbf77046f385eb924de22ee",
+      "colors": [
+        "#009adc",
+        "#3d212d",
+        "#51607d",
+        "#763b36",
+        "#8c9cb5",
+        "#bd6c4a",
+        "#c1ccdd",
+        "#eaa56c"
+      ],
+      "selectMs": 0.40000003576278687,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 8,
+      "stableChurn": 0
+    },
+    {
+      "id": "town-water-bucket-auto-rgb-k8-hue",
+      "hash": "ad7c5875faf46a9e6ff57654de2ee93b9bba4fcf0cbf77046f385eb924de22ee",
+      "colors": [
+        "#009adc",
+        "#3d212d",
+        "#51607d",
+        "#763b36",
+        "#8c9cb5",
+        "#bd6c4a",
+        "#c1ccdd",
+        "#eaa56c"
+      ],
+      "selectMs": 0.800000011920929,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 8,
+      "stableChurn": 0
+    },
+    {
+      "id": "town-water-bucket-res64-oklab-k4-baseline",
+      "hash": "d9f83061478b37fc8c23d275082f7b1ef0483ce63efd67e0c4a942f1b8154c96",
+      "colors": [
+        "#2e222f",
+        "#9babb2",
+        "#e6904e",
+        "#753c54"
+      ],
+      "selectMs": 0.9000000357627869,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "town-water-bucket-res64-oklab-k4-concave",
+      "hash": "d9f83061478b37fc8c23d275082f7b1ef0483ce63efd67e0c4a942f1b8154c96",
+      "colors": [
+        "#2e222f",
+        "#9babb2",
+        "#e6904e",
+        "#753c54"
+      ],
+      "selectMs": 1.100000023841858,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "town-water-bucket-res64-oklab-k4-hue",
+      "hash": "d9f83061478b37fc8c23d275082f7b1ef0483ce63efd67e0c4a942f1b8154c96",
+      "colors": [
+        "#2e222f",
+        "#9babb2",
+        "#e6904e",
+        "#753c54"
+      ],
+      "selectMs": 0.699999988079071,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "town-water-bucket-res64-rgb-k4-baseline",
+      "hash": "bd8bd37b545287ea7d31e9033b21dc7afcc87913ba4f9fc99a1fc419d5c4ccd5",
+      "colors": [
+        "#9babb2",
+        "#e6904e",
+        "#0eaf9b",
+        "#45293f"
+      ],
+      "selectMs": 2.100000023841858,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "town-water-bucket-res64-rgb-k4-concave",
+      "hash": "2b78e2d40185667fec1686a990e09485809c06f836ebc7f345edc857f920167c",
+      "colors": [
+        "#9babb2",
+        "#e6904e",
+        "#4d9be6",
+        "#45293f"
+      ],
+      "selectMs": 0.6000000238418579,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "town-water-bucket-res64-rgb-k4-hue",
+      "hash": "bd8bd37b545287ea7d31e9033b21dc7afcc87913ba4f9fc99a1fc419d5c4ccd5",
+      "colors": [
+        "#9babb2",
+        "#e6904e",
+        "#0eaf9b",
+        "#45293f"
+      ],
+      "selectMs": 0.2999999523162842,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "platformer-pilot-auto-oklab-k4-baseline",
+      "hash": "b99a9b273d0d2979b000c6fdffeef0955eae774c7ae880a113563a2ab3ebeb35",
+      "colors": [
+        "#346547",
+        "#5ad28c",
+        "#bedef1",
+        "#ffffff"
+      ],
+      "selectMs": 0.19999998807907104,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "platformer-pilot-auto-oklab-k4-concave",
+      "hash": "b99a9b273d0d2979b000c6fdffeef0955eae774c7ae880a113563a2ab3ebeb35",
+      "colors": [
+        "#346547",
+        "#5ad28c",
+        "#bedef1",
+        "#ffffff"
+      ],
+      "selectMs": 0.800000011920929,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "platformer-pilot-auto-oklab-k4-hue",
+      "hash": "b99a9b273d0d2979b000c6fdffeef0955eae774c7ae880a113563a2ab3ebeb35",
+      "colors": [
+        "#346547",
+        "#5ad28c",
+        "#bedef1",
+        "#ffffff"
+      ],
+      "selectMs": 0.19999998807907104,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "platformer-pilot-auto-oklab-k8-baseline",
+      "hash": "ac33445beb9267df4584b36f56f9aae11be807a5f91f2d826a3a698e23368047",
+      "colors": [
+        "#346547",
+        "#34995e",
+        "#434a5f",
+        "#5ad28c",
+        "#86f6bb",
+        "#bedef1",
+        "#ffffff"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 7,
+      "stableChurn": 0
+    },
+    {
+      "id": "platformer-pilot-auto-oklab-k8-concave",
+      "hash": "ac33445beb9267df4584b36f56f9aae11be807a5f91f2d826a3a698e23368047",
+      "colors": [
+        "#346547",
+        "#34995e",
+        "#434a5f",
+        "#5ad28c",
+        "#86f6bb",
+        "#bedef1",
+        "#ffffff"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 7,
+      "stableChurn": 0
+    },
+    {
+      "id": "platformer-pilot-auto-oklab-k8-hue",
+      "hash": "ac33445beb9267df4584b36f56f9aae11be807a5f91f2d826a3a698e23368047",
+      "colors": [
+        "#346547",
+        "#34995e",
+        "#434a5f",
+        "#5ad28c",
+        "#86f6bb",
+        "#bedef1",
+        "#ffffff"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 7,
+      "stableChurn": 0
+    },
+    {
+      "id": "platformer-pilot-auto-rgb-k4-baseline",
+      "hash": "b99a9b273d0d2979b000c6fdffeef0955eae774c7ae880a113563a2ab3ebeb35",
+      "colors": [
+        "#346547",
+        "#5ad28c",
+        "#bedef1",
+        "#ffffff"
+      ],
+      "selectMs": 0.19999998807907104,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "platformer-pilot-auto-rgb-k4-concave",
+      "hash": "b99a9b273d0d2979b000c6fdffeef0955eae774c7ae880a113563a2ab3ebeb35",
+      "colors": [
+        "#346547",
+        "#5ad28c",
+        "#bedef1",
+        "#ffffff"
+      ],
+      "selectMs": 0.19999998807907104,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "platformer-pilot-auto-rgb-k4-hue",
+      "hash": "b99a9b273d0d2979b000c6fdffeef0955eae774c7ae880a113563a2ab3ebeb35",
+      "colors": [
+        "#346547",
+        "#5ad28c",
+        "#bedef1",
+        "#ffffff"
+      ],
+      "selectMs": 0.40000003576278687,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "platformer-pilot-auto-rgb-k8-baseline",
+      "hash": "ac33445beb9267df4584b36f56f9aae11be807a5f91f2d826a3a698e23368047",
+      "colors": [
+        "#346547",
+        "#34995e",
+        "#434a5f",
+        "#5ad28c",
+        "#86f6bb",
+        "#bedef1",
+        "#ffffff"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 7,
+      "stableChurn": 0
+    },
+    {
+      "id": "platformer-pilot-auto-rgb-k8-concave",
+      "hash": "ac33445beb9267df4584b36f56f9aae11be807a5f91f2d826a3a698e23368047",
+      "colors": [
+        "#346547",
+        "#34995e",
+        "#434a5f",
+        "#5ad28c",
+        "#86f6bb",
+        "#bedef1",
+        "#ffffff"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 7,
+      "stableChurn": 0
+    },
+    {
+      "id": "platformer-pilot-auto-rgb-k8-hue",
+      "hash": "ac33445beb9267df4584b36f56f9aae11be807a5f91f2d826a3a698e23368047",
+      "colors": [
+        "#346547",
+        "#34995e",
+        "#434a5f",
+        "#5ad28c",
+        "#86f6bb",
+        "#bedef1",
+        "#ffffff"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 7,
+      "stableChurn": 0
+    },
+    {
+      "id": "platformer-pilot-res64-oklab-k4-baseline",
+      "hash": "9b4ddb0218e487567ebf8be9e351eb47cb64b0919359472e7d0f804f752eef7b",
+      "colors": [
+        "#c7dcd0",
+        "#ffffff",
+        "#165a4c",
+        "#30e1b9"
+      ],
+      "selectMs": 0.5,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "platformer-pilot-res64-oklab-k4-concave",
+      "hash": "06a73ccc4a56c74d7763965bdbb2700ced7e4c1942cdd4c2ed6fcf736819079e",
+      "colors": [
+        "#c7dcd0",
+        "#ffffff",
+        "#165a4c",
+        "#1ebc73"
+      ],
+      "selectMs": 0.7000000476837158,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "platformer-pilot-res64-oklab-k4-hue",
+      "hash": "9b4ddb0218e487567ebf8be9e351eb47cb64b0919359472e7d0f804f752eef7b",
+      "colors": [
+        "#c7dcd0",
+        "#ffffff",
+        "#165a4c",
+        "#30e1b9"
+      ],
+      "selectMs": 0.5,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "platformer-pilot-res64-rgb-k4-baseline",
+      "hash": "88c4b2e76460ec6060094c0a2c1f91883aab0e23038bc2c14bf41ba455bb7a1d",
+      "colors": [
+        "#c7dcd0",
+        "#ffffff",
+        "#374e4a",
+        "#30e1b9"
+      ],
+      "selectMs": 0.20000004768371582,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "platformer-pilot-res64-rgb-k4-concave",
+      "hash": "88c4b2e76460ec6060094c0a2c1f91883aab0e23038bc2c14bf41ba455bb7a1d",
+      "colors": [
+        "#c7dcd0",
+        "#ffffff",
+        "#374e4a",
+        "#30e1b9"
+      ],
+      "selectMs": 0.800000011920929,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "platformer-pilot-res64-rgb-k4-hue",
+      "hash": "88c4b2e76460ec6060094c0a2c1f91883aab0e23038bc2c14bf41ba455bb7a1d",
+      "colors": [
+        "#c7dcd0",
+        "#ffffff",
+        "#374e4a",
+        "#30e1b9"
+      ],
+      "selectMs": 0.3999999761581421,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "real-inventory-auto-oklab-k4-baseline",
+      "hash": "2bd11282f817044f656079c75d89cb4bfceec2e01c7d16939e1dfc1506311874",
+      "colors": [
+        "#3f2631",
+        "#6f3e43",
+        "#c1ccdd",
+        "#cb815e"
+      ],
+      "selectMs": 0.3999999761581421,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "real-inventory-auto-oklab-k4-concave",
+      "hash": "5b53cfd8fa5e5c7a6d3231242ddd60600dc4f83ca101c317cd66d4dff1413241",
+      "colors": [
+        "#3f2631",
+        "#51607d",
+        "#bedef1",
+        "#cb815e"
+      ],
+      "selectMs": 2.599999964237213,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "real-inventory-auto-oklab-k4-hue",
+      "hash": "5b53cfd8fa5e5c7a6d3231242ddd60600dc4f83ca101c317cd66d4dff1413241",
+      "colors": [
+        "#3f2631",
+        "#51607d",
+        "#bedef1",
+        "#cb815e"
+      ],
+      "selectMs": 1.899999976158142,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "real-inventory-auto-oklab-k8-baseline",
+      "hash": "49a5b6c325f5ca8673ff6e5d3acd43bacef416b9ebd87579e8dcbe683ef66ebb",
+      "colors": [
+        "#346547",
+        "#3f2631",
+        "#5ad28c",
+        "#6f3e43",
+        "#8b9bb4",
+        "#be6c49",
+        "#bedef1",
+        "#f4ac66"
+      ],
+      "selectMs": 0.5,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 8,
+      "stableChurn": 0
+    },
+    {
+      "id": "real-inventory-auto-oklab-k8-concave",
+      "hash": "49a5b6c325f5ca8673ff6e5d3acd43bacef416b9ebd87579e8dcbe683ef66ebb",
+      "colors": [
+        "#346547",
+        "#3f2631",
+        "#5ad28c",
+        "#6f3e43",
+        "#8b9bb4",
+        "#be6c49",
+        "#bedef1",
+        "#f4ac66"
+      ],
+      "selectMs": 2.600000023841858,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 8,
+      "stableChurn": 0
+    },
+    {
+      "id": "real-inventory-auto-oklab-k8-hue",
+      "hash": "d4c04d560cf22eeea5b14098b75068956170e68c551a8275eb388bacd80819aa",
+      "colors": [
+        "#3f2631",
+        "#434a5f",
+        "#5ad28c",
+        "#8b9bb4",
+        "#9b4ca3",
+        "#be6c49",
+        "#bedef1",
+        "#f4ac66"
+      ],
+      "selectMs": 2.900000035762787,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 8,
+      "stableChurn": 0
+    },
+    {
+      "id": "real-inventory-auto-rgb-k4-baseline",
+      "hash": "8820ce8d861101cfc49ef065f7ee0544063fcf1c8b6f660a5d27d3a167670ec4",
+      "colors": [
+        "#3f2631",
+        "#8b9bb4",
+        "#bedef1",
+        "#e19a65"
+      ],
+      "selectMs": 0.800000011920929,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "real-inventory-auto-rgb-k4-concave",
+      "hash": "8820ce8d861101cfc49ef065f7ee0544063fcf1c8b6f660a5d27d3a167670ec4",
+      "colors": [
+        "#3f2631",
+        "#8b9bb4",
+        "#bedef1",
+        "#e19a65"
+      ],
+      "selectMs": 0.5999999642372131,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "real-inventory-auto-rgb-k4-hue",
+      "hash": "8820ce8d861101cfc49ef065f7ee0544063fcf1c8b6f660a5d27d3a167670ec4",
+      "colors": [
+        "#3f2631",
+        "#8b9bb4",
+        "#bedef1",
+        "#e19a65"
+      ],
+      "selectMs": 0.40000003576278687,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "real-inventory-auto-rgb-k8-baseline",
+      "hash": "e485a429f9e587bcb2fc5305f8aeb542d184c6131a791378cd73ab9eca610ff2",
+      "colors": [
+        "#009adc",
+        "#346547",
+        "#3f2631",
+        "#5ad28c",
+        "#959ab1",
+        "#be6c49",
+        "#bedef1",
+        "#eba66c"
+      ],
+      "selectMs": 0.8999999761581421,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 8,
+      "stableChurn": 0
+    },
+    {
+      "id": "real-inventory-auto-rgb-k8-concave",
+      "hash": "e485a429f9e587bcb2fc5305f8aeb542d184c6131a791378cd73ab9eca610ff2",
+      "colors": [
+        "#009adc",
+        "#346547",
+        "#3f2631",
+        "#5ad28c",
+        "#959ab1",
+        "#be6c49",
+        "#bedef1",
+        "#eba66c"
+      ],
+      "selectMs": 0.3999999761581421,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 8,
+      "stableChurn": 0
+    },
+    {
+      "id": "real-inventory-auto-rgb-k8-hue",
+      "hash": "e485a429f9e587bcb2fc5305f8aeb542d184c6131a791378cd73ab9eca610ff2",
+      "colors": [
+        "#009adc",
+        "#346547",
+        "#3f2631",
+        "#5ad28c",
+        "#959ab1",
+        "#be6c49",
+        "#bedef1",
+        "#eba66c"
+      ],
+      "selectMs": 0.699999988079071,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 8,
+      "stableChurn": 0
+    },
+    {
+      "id": "real-inventory-res64-oklab-k4-baseline",
+      "hash": "9ca8d5e8249c4ff01c2c15b96f8cdd5b24c7b066fd7faec7326c5a1e0ea30d16",
+      "colors": [
+        "#ab947a",
+        "#694f62",
+        "#c7dcd0",
+        "#45293f"
+      ],
+      "selectMs": 0.800000011920929,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "real-inventory-res64-oklab-k4-concave",
+      "hash": "13ade59356bceacbe622ce34f9d8573503e47f5dfc0983269fa3256926347918",
+      "colors": [
+        "#3e3546",
+        "#c7dcd0",
+        "#92a984",
+        "#cf657f"
+      ],
+      "selectMs": 0.699999988079071,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "real-inventory-res64-oklab-k4-hue",
+      "hash": "9ca8d5e8249c4ff01c2c15b96f8cdd5b24c7b066fd7faec7326c5a1e0ea30d16",
+      "colors": [
+        "#ab947a",
+        "#694f62",
+        "#c7dcd0",
+        "#45293f"
+      ],
+      "selectMs": 0.7000000476837158,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "real-inventory-res64-rgb-k4-baseline",
+      "hash": "b4c72dea2093f8ac9af95ddbbea539d4c7f8c69cb04efae9b0bafb057aaeb899",
+      "colors": [
+        "#3e3546",
+        "#9babb2",
+        "#c7dcd0",
+        "#e6904e"
+      ],
+      "selectMs": 0.5,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "real-inventory-res64-rgb-k4-concave",
+      "hash": "b4c72dea2093f8ac9af95ddbbea539d4c7f8c69cb04efae9b0bafb057aaeb899",
+      "colors": [
+        "#3e3546",
+        "#9babb2",
+        "#c7dcd0",
+        "#e6904e"
+      ],
+      "selectMs": 0.6000000238418579,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "real-inventory-res64-rgb-k4-hue",
+      "hash": "b4c72dea2093f8ac9af95ddbbea539d4c7f8c69cb04efae9b0bafb057aaeb899",
+      "colors": [
+        "#3e3546",
+        "#9babb2",
+        "#c7dcd0",
+        "#e6904e"
+      ],
+      "selectMs": 0.6000000238418579,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "intentional-eye-auto-oklab-k4-baseline",
+      "hash": "62adececb431535fdbe1abe6bb034579b4e67b05a592428c7aa054c95cc9430e",
+      "colors": [
+        "#191c23",
+        "#6b798c",
+        "#a9b5c4",
+        "#e6edf3"
+      ],
+      "selectMs": 0.20000004768371582,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "intentional-eye-auto-oklab-k4-concave",
+      "hash": "62adececb431535fdbe1abe6bb034579b4e67b05a592428c7aa054c95cc9430e",
+      "colors": [
+        "#191c23",
+        "#6b798c",
+        "#a9b5c4",
+        "#e6edf3"
+      ],
+      "selectMs": 0.19999998807907104,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "intentional-eye-auto-oklab-k4-hue",
+      "hash": "62adececb431535fdbe1abe6bb034579b4e67b05a592428c7aa054c95cc9430e",
+      "colors": [
+        "#191c23",
+        "#6b798c",
+        "#a9b5c4",
+        "#e6edf3"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "intentional-eye-auto-oklab-k8-baseline",
+      "hash": "c3ebd7edfddb91249366950aa2d9bc1e6cca45e5d3eab711161f814feb6cb260",
+      "colors": [
+        "#191c23",
+        "#3e4756",
+        "#6b798c",
+        "#a9b5c4",
+        "#e6edf3",
+        "#f51e2c"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 6,
+      "stableChurn": 0
+    },
+    {
+      "id": "intentional-eye-auto-oklab-k8-concave",
+      "hash": "c3ebd7edfddb91249366950aa2d9bc1e6cca45e5d3eab711161f814feb6cb260",
+      "colors": [
+        "#191c23",
+        "#3e4756",
+        "#6b798c",
+        "#a9b5c4",
+        "#e6edf3",
+        "#f51e2c"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 6,
+      "stableChurn": 0
+    },
+    {
+      "id": "intentional-eye-auto-oklab-k8-hue",
+      "hash": "c3ebd7edfddb91249366950aa2d9bc1e6cca45e5d3eab711161f814feb6cb260",
+      "colors": [
+        "#191c23",
+        "#3e4756",
+        "#6b798c",
+        "#a9b5c4",
+        "#e6edf3",
+        "#f51e2c"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 6,
+      "stableChurn": 0
+    },
+    {
+      "id": "intentional-eye-auto-rgb-k4-baseline",
+      "hash": "62adececb431535fdbe1abe6bb034579b4e67b05a592428c7aa054c95cc9430e",
+      "colors": [
+        "#191c23",
+        "#6b798c",
+        "#a9b5c4",
+        "#e6edf3"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "intentional-eye-auto-rgb-k4-concave",
+      "hash": "62adececb431535fdbe1abe6bb034579b4e67b05a592428c7aa054c95cc9430e",
+      "colors": [
+        "#191c23",
+        "#6b798c",
+        "#a9b5c4",
+        "#e6edf3"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "intentional-eye-auto-rgb-k4-hue",
+      "hash": "d4ab7904e6aab9cb600fe98eb37454d8003d3f951f44fd41fd4c4c0da46c2204",
+      "colors": [
+        "#191c23",
+        "#6b798c",
+        "#a9b5c4",
+        "#f51e2c"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "intentional-eye-auto-rgb-k8-baseline",
+      "hash": "c3ebd7edfddb91249366950aa2d9bc1e6cca45e5d3eab711161f814feb6cb260",
+      "colors": [
+        "#191c23",
+        "#3e4756",
+        "#6b798c",
+        "#a9b5c4",
+        "#e6edf3",
+        "#f51e2c"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 6,
+      "stableChurn": 0
+    },
+    {
+      "id": "intentional-eye-auto-rgb-k8-concave",
+      "hash": "c3ebd7edfddb91249366950aa2d9bc1e6cca45e5d3eab711161f814feb6cb260",
+      "colors": [
+        "#191c23",
+        "#3e4756",
+        "#6b798c",
+        "#a9b5c4",
+        "#e6edf3",
+        "#f51e2c"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 6,
+      "stableChurn": 0
+    },
+    {
+      "id": "intentional-eye-auto-rgb-k8-hue",
+      "hash": "c3ebd7edfddb91249366950aa2d9bc1e6cca45e5d3eab711161f814feb6cb260",
+      "colors": [
+        "#191c23",
+        "#3e4756",
+        "#6b798c",
+        "#a9b5c4",
+        "#e6edf3",
+        "#f51e2c"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 6,
+      "stableChurn": 0
+    },
+    {
+      "id": "intentional-eye-res64-oklab-k4-baseline",
+      "hash": "a404d9268f96464c2e1cac76337d29dfae09ce78e3b6f93d2ccfcc92e6095a8d",
+      "colors": [
+        "#7f708a",
+        "#9babb2",
+        "#ffffff",
+        "#313638"
+      ],
+      "selectMs": 0.30000001192092896,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "intentional-eye-res64-oklab-k4-concave",
+      "hash": "a404d9268f96464c2e1cac76337d29dfae09ce78e3b6f93d2ccfcc92e6095a8d",
+      "colors": [
+        "#7f708a",
+        "#9babb2",
+        "#ffffff",
+        "#313638"
+      ],
+      "selectMs": 0.19999998807907104,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "intentional-eye-res64-oklab-k4-hue",
+      "hash": "23bfdf61c84a0505adb9ccf01e7c6a84b3143d250c9e314ce8ef5faae655f532",
+      "colors": [
+        "#7f708a",
+        "#c7dcd0",
+        "#e83b3b",
+        "#313638"
+      ],
+      "selectMs": 0.19999998807907104,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "intentional-eye-res64-rgb-k4-baseline",
+      "hash": "a404d9268f96464c2e1cac76337d29dfae09ce78e3b6f93d2ccfcc92e6095a8d",
+      "colors": [
+        "#7f708a",
+        "#9babb2",
+        "#ffffff",
+        "#313638"
+      ],
+      "selectMs": 0.3999999761581421,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "intentional-eye-res64-rgb-k4-concave",
+      "hash": "a404d9268f96464c2e1cac76337d29dfae09ce78e3b6f93d2ccfcc92e6095a8d",
+      "colors": [
+        "#7f708a",
+        "#9babb2",
+        "#ffffff",
+        "#313638"
+      ],
+      "selectMs": 0.40000003576278687,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "intentional-eye-res64-rgb-k4-hue",
+      "hash": "23bfdf61c84a0505adb9ccf01e7c6a84b3143d250c9e314ce8ef5faae655f532",
+      "colors": [
+        "#7f708a",
+        "#c7dcd0",
+        "#e83b3b",
+        "#313638"
+      ],
+      "selectMs": 0.30000001192092896,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "ramp-control-auto-oklab-k4-baseline",
+      "hash": "62adececb431535fdbe1abe6bb034579b4e67b05a592428c7aa054c95cc9430e",
+      "colors": [
+        "#191c23",
+        "#6b798c",
+        "#a9b5c4",
+        "#e6edf3"
+      ],
+      "selectMs": 0.09999996423721313,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "ramp-control-auto-oklab-k4-concave",
+      "hash": "62adececb431535fdbe1abe6bb034579b4e67b05a592428c7aa054c95cc9430e",
+      "colors": [
+        "#191c23",
+        "#6b798c",
+        "#a9b5c4",
+        "#e6edf3"
+      ],
+      "selectMs": 0.09999996423721313,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "ramp-control-auto-oklab-k4-hue",
+      "hash": "62adececb431535fdbe1abe6bb034579b4e67b05a592428c7aa054c95cc9430e",
+      "colors": [
+        "#191c23",
+        "#6b798c",
+        "#a9b5c4",
+        "#e6edf3"
+      ],
+      "selectMs": 0.10000002384185791,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "ramp-control-auto-oklab-k8-baseline",
+      "hash": "b0931ab669743c937b84af80ea69cdaf6580b0b0cc0ba76918195b874c86ae8c",
+      "colors": [
+        "#191c23",
+        "#3e4756",
+        "#6b798c",
+        "#a9b5c4",
+        "#e6edf3"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 5,
+      "stableChurn": 0
+    },
+    {
+      "id": "ramp-control-auto-oklab-k8-concave",
+      "hash": "b0931ab669743c937b84af80ea69cdaf6580b0b0cc0ba76918195b874c86ae8c",
+      "colors": [
+        "#191c23",
+        "#3e4756",
+        "#6b798c",
+        "#a9b5c4",
+        "#e6edf3"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 5,
+      "stableChurn": 0
+    },
+    {
+      "id": "ramp-control-auto-oklab-k8-hue",
+      "hash": "b0931ab669743c937b84af80ea69cdaf6580b0b0cc0ba76918195b874c86ae8c",
+      "colors": [
+        "#191c23",
+        "#3e4756",
+        "#6b798c",
+        "#a9b5c4",
+        "#e6edf3"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 5,
+      "stableChurn": 0
+    },
+    {
+      "id": "ramp-control-auto-rgb-k4-baseline",
+      "hash": "62adececb431535fdbe1abe6bb034579b4e67b05a592428c7aa054c95cc9430e",
+      "colors": [
+        "#191c23",
+        "#6b798c",
+        "#a9b5c4",
+        "#e6edf3"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "ramp-control-auto-rgb-k4-concave",
+      "hash": "62adececb431535fdbe1abe6bb034579b4e67b05a592428c7aa054c95cc9430e",
+      "colors": [
+        "#191c23",
+        "#6b798c",
+        "#a9b5c4",
+        "#e6edf3"
+      ],
+      "selectMs": 0.5,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "ramp-control-auto-rgb-k4-hue",
+      "hash": "62adececb431535fdbe1abe6bb034579b4e67b05a592428c7aa054c95cc9430e",
+      "colors": [
+        "#191c23",
+        "#6b798c",
+        "#a9b5c4",
+        "#e6edf3"
+      ],
+      "selectMs": 0.09999996423721313,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "ramp-control-auto-rgb-k8-baseline",
+      "hash": "b0931ab669743c937b84af80ea69cdaf6580b0b0cc0ba76918195b874c86ae8c",
+      "colors": [
+        "#191c23",
+        "#3e4756",
+        "#6b798c",
+        "#a9b5c4",
+        "#e6edf3"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 5,
+      "stableChurn": 0
+    },
+    {
+      "id": "ramp-control-auto-rgb-k8-concave",
+      "hash": "b0931ab669743c937b84af80ea69cdaf6580b0b0cc0ba76918195b874c86ae8c",
+      "colors": [
+        "#191c23",
+        "#3e4756",
+        "#6b798c",
+        "#a9b5c4",
+        "#e6edf3"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 5,
+      "stableChurn": 0
+    },
+    {
+      "id": "ramp-control-auto-rgb-k8-hue",
+      "hash": "b0931ab669743c937b84af80ea69cdaf6580b0b0cc0ba76918195b874c86ae8c",
+      "colors": [
+        "#191c23",
+        "#3e4756",
+        "#6b798c",
+        "#a9b5c4",
+        "#e6edf3"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 5,
+      "stableChurn": 0
+    },
+    {
+      "id": "ramp-control-res64-oklab-k4-baseline",
+      "hash": "a404d9268f96464c2e1cac76337d29dfae09ce78e3b6f93d2ccfcc92e6095a8d",
+      "colors": [
+        "#7f708a",
+        "#9babb2",
+        "#ffffff",
+        "#313638"
+      ],
+      "selectMs": 0.5,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "ramp-control-res64-oklab-k4-concave",
+      "hash": "a404d9268f96464c2e1cac76337d29dfae09ce78e3b6f93d2ccfcc92e6095a8d",
+      "colors": [
+        "#7f708a",
+        "#9babb2",
+        "#ffffff",
+        "#313638"
+      ],
+      "selectMs": 0.30000001192092896,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "ramp-control-res64-oklab-k4-hue",
+      "hash": "a404d9268f96464c2e1cac76337d29dfae09ce78e3b6f93d2ccfcc92e6095a8d",
+      "colors": [
+        "#7f708a",
+        "#9babb2",
+        "#ffffff",
+        "#313638"
+      ],
+      "selectMs": 0.30000001192092896,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "ramp-control-res64-rgb-k4-baseline",
+      "hash": "a404d9268f96464c2e1cac76337d29dfae09ce78e3b6f93d2ccfcc92e6095a8d",
+      "colors": [
+        "#7f708a",
+        "#9babb2",
+        "#ffffff",
+        "#313638"
+      ],
+      "selectMs": 1.4000000357627869,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "ramp-control-res64-rgb-k4-concave",
+      "hash": "a404d9268f96464c2e1cac76337d29dfae09ce78e3b6f93d2ccfcc92e6095a8d",
+      "colors": [
+        "#7f708a",
+        "#9babb2",
+        "#ffffff",
+        "#313638"
+      ],
+      "selectMs": 0.19999998807907104,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "ramp-control-res64-rgb-k4-hue",
+      "hash": "a404d9268f96464c2e1cac76337d29dfae09ce78e3b6f93d2ccfcc92e6095a8d",
+      "colors": [
+        "#7f708a",
+        "#9babb2",
+        "#ffffff",
+        "#313638"
+      ],
+      "selectMs": 0.30000001192092896,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "owned-knight-walk-auto-oklab-k4-baseline",
+      "hash": "f0050a69f717f0e4700c8d8aad6199e9abacd66bca665cba4cfa3fd5eee6a221",
+      "colors": [
+        "#1a1420",
+        "#4a2f1c",
+        "#a8603f",
+        "#e8eef2"
+      ],
+      "selectMs": 0.3999999761581421,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "owned-knight-walk-auto-oklab-k4-concave",
+      "hash": "f0050a69f717f0e4700c8d8aad6199e9abacd66bca665cba4cfa3fd5eee6a221",
+      "colors": [
+        "#1a1420",
+        "#4a2f1c",
+        "#a8603f",
+        "#e8eef2"
+      ],
+      "selectMs": 0.19999998807907104,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "owned-knight-walk-auto-oklab-k4-hue",
+      "hash": "f0050a69f717f0e4700c8d8aad6199e9abacd66bca665cba4cfa3fd5eee6a221",
+      "colors": [
+        "#1a1420",
+        "#4a2f1c",
+        "#a8603f",
+        "#e8eef2"
+      ],
+      "selectMs": 0.19999998807907104,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "owned-knight-walk-auto-oklab-k8-baseline",
+      "hash": "2f311cf3cdf7479c487d7203bb79059f8770602ccab8372d799f205ade049122",
+      "colors": [
+        "#1a1420",
+        "#3d4655",
+        "#4a2f1c",
+        "#6c7a8c",
+        "#7a4f2c",
+        "#a9b4c2",
+        "#b07a46",
+        "#e8eef2"
+      ],
+      "selectMs": 0.40000003576278687,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 8,
+      "stableChurn": 0
+    },
+    {
+      "id": "owned-knight-walk-auto-oklab-k8-concave",
+      "hash": "2f311cf3cdf7479c487d7203bb79059f8770602ccab8372d799f205ade049122",
+      "colors": [
+        "#1a1420",
+        "#3d4655",
+        "#4a2f1c",
+        "#6c7a8c",
+        "#7a4f2c",
+        "#a9b4c2",
+        "#b07a46",
+        "#e8eef2"
+      ],
+      "selectMs": 0.40000003576278687,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 8,
+      "stableChurn": 0
+    },
+    {
+      "id": "owned-knight-walk-auto-oklab-k8-hue",
+      "hash": "f98e64018a40b927595f4957c8bc29e955241d25d0432d1c97c439dd4b0db8b2",
+      "colors": [
+        "#1a1420",
+        "#2a7fff",
+        "#3d4655",
+        "#4a2f1c",
+        "#7a4f2c",
+        "#a9b4c2",
+        "#b07a46",
+        "#e8eef2"
+      ],
+      "selectMs": 0.19999998807907104,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 8,
+      "stableChurn": 0
+    },
+    {
+      "id": "owned-knight-walk-auto-rgb-k4-baseline",
+      "hash": "2f91bf4e736cf21df36c668732e2454425181a2791c147cc4bb4f585ac989980",
+      "colors": [
+        "#1a1420",
+        "#3d4655",
+        "#a8603f",
+        "#e8eef2"
+      ],
+      "selectMs": 1.100000023841858,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "owned-knight-walk-auto-rgb-k4-concave",
+      "hash": "2f91bf4e736cf21df36c668732e2454425181a2791c147cc4bb4f585ac989980",
+      "colors": [
+        "#1a1420",
+        "#3d4655",
+        "#a8603f",
+        "#e8eef2"
+      ],
+      "selectMs": 0.800000011920929,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "owned-knight-walk-auto-rgb-k4-hue",
+      "hash": "cc17b00df10874d88fc77b84926735303ef8da559111b87bb8e8af8c6296cf9a",
+      "colors": [
+        "#1a1420",
+        "#6c7a8c",
+        "#a8603f",
+        "#e8eef2"
+      ],
+      "selectMs": 0.10000002384185791,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "owned-knight-walk-auto-rgb-k8-baseline",
+      "hash": "fee17017c4ad0724ddafca12f8e8f99527dcb05b11bb4f1a8a5ba157d52bc151",
+      "colors": [
+        "#1a1420",
+        "#3d4655",
+        "#4a2f1c",
+        "#6c7a8c",
+        "#7a4f2c",
+        "#a9b4c2",
+        "#b07a46",
+        "#e8eef2"
+      ],
+      "selectMs": 0.40000003576278687,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 8,
+      "stableChurn": 0
+    },
+    {
+      "id": "owned-knight-walk-auto-rgb-k8-concave",
+      "hash": "fee17017c4ad0724ddafca12f8e8f99527dcb05b11bb4f1a8a5ba157d52bc151",
+      "colors": [
+        "#1a1420",
+        "#3d4655",
+        "#4a2f1c",
+        "#6c7a8c",
+        "#7a4f2c",
+        "#a9b4c2",
+        "#b07a46",
+        "#e8eef2"
+      ],
+      "selectMs": 0.30000001192092896,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 8,
+      "stableChurn": 0
+    },
+    {
+      "id": "owned-knight-walk-auto-rgb-k8-hue",
+      "hash": "862876b2953bfc8e6244563ba76f2d043358003e0b6dc960bb9120b2f379f763",
+      "colors": [
+        "#1a1420",
+        "#2a7fff",
+        "#3d4655",
+        "#3ee07a",
+        "#4a2f1c",
+        "#a8603f",
+        "#e8eef2",
+        "#f2c79b"
+      ],
+      "selectMs": 0.19999998807907104,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 8,
+      "stableChurn": 0
+    },
+    {
+      "id": "owned-knight-walk-res64-oklab-k4-baseline",
+      "hash": "c4cfe86f405e3f0cc044a1c78cf70e5c880f9f5bb76cded8ca22b940f35f9ea1",
+      "colors": [
+        "#2e222f",
+        "#625565",
+        "#c7dcd0",
+        "#cd683d"
+      ],
+      "selectMs": 0.699999988079071,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "owned-knight-walk-res64-oklab-k4-concave",
+      "hash": "c4cfe86f405e3f0cc044a1c78cf70e5c880f9f5bb76cded8ca22b940f35f9ea1",
+      "colors": [
+        "#2e222f",
+        "#625565",
+        "#c7dcd0",
+        "#cd683d"
+      ],
+      "selectMs": 0.20000004768371582,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "owned-knight-walk-res64-oklab-k4-hue",
+      "hash": "c4cfe86f405e3f0cc044a1c78cf70e5c880f9f5bb76cded8ca22b940f35f9ea1",
+      "colors": [
+        "#2e222f",
+        "#625565",
+        "#c7dcd0",
+        "#cd683d"
+      ],
+      "selectMs": 0.30000001192092896,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "owned-knight-walk-res64-rgb-k4-baseline",
+      "hash": "f006ef39ab9dcd9734f65f35db46e78514e805212b445c73f3bb4e238ce566c6",
+      "colors": [
+        "#2e222f",
+        "#625565",
+        "#c7dcd0",
+        "#cd683d"
+      ],
+      "selectMs": 1.399999976158142,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "owned-knight-walk-res64-rgb-k4-concave",
+      "hash": "f006ef39ab9dcd9734f65f35db46e78514e805212b445c73f3bb4e238ce566c6",
+      "colors": [
+        "#2e222f",
+        "#625565",
+        "#c7dcd0",
+        "#cd683d"
+      ],
+      "selectMs": 0.40000003576278687,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "owned-knight-walk-res64-rgb-k4-hue",
+      "hash": "302eaca18d814e69d83d9573f501439860a89bf63bb1a3191cfc50a57c348d33",
+      "colors": [
+        "#2e222f",
+        "#c7dcd0",
+        "#9e4539",
+        "#4d65b4"
+      ],
+      "selectMs": 0.3999999761581421,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-binned-cut-none-baseline",
+      "hash": "244cea673ab3f5d6b379a6a5ed8dca7459f9212e1215ae6511a4ea1f03c1ede2",
+      "colors": [
+        "#91db69",
+        "#92a984",
+        "#484a77",
+        "#cf657f"
+      ],
+      "selectMs": 61.700000047683716,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-binned-cut-none-concave",
+      "hash": "244cea673ab3f5d6b379a6a5ed8dca7459f9212e1215ae6511a4ea1f03c1ede2",
+      "colors": [
+        "#91db69",
+        "#92a984",
+        "#484a77",
+        "#cf657f"
+      ],
+      "selectMs": 55,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-binned-cut-none-hue",
+      "hash": "244cea673ab3f5d6b379a6a5ed8dca7459f9212e1215ae6511a4ea1f03c1ede2",
+      "colors": [
+        "#91db69",
+        "#92a984",
+        "#484a77",
+        "#cf657f"
+      ],
+      "selectMs": 45.60000002384186,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-binned-cut-4x4-baseline",
+      "hash": "2a5a4da6fd68819ae8ace003a3ee4a5c8c37f305ddf57bf1e064b217e7f2bc6b",
+      "colors": [
+        "#91db69",
+        "#92a984",
+        "#484a77",
+        "#cf657f"
+      ],
+      "selectMs": 56.69999998807907,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-binned-cut-4x4-concave",
+      "hash": "2a5a4da6fd68819ae8ace003a3ee4a5c8c37f305ddf57bf1e064b217e7f2bc6b",
+      "colors": [
+        "#91db69",
+        "#92a984",
+        "#484a77",
+        "#cf657f"
+      ],
+      "selectMs": 33.19999998807907,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-binned-cut-4x4-hue",
+      "hash": "2a5a4da6fd68819ae8ace003a3ee4a5c8c37f305ddf57bf1e064b217e7f2bc6b",
+      "colors": [
+        "#91db69",
+        "#92a984",
+        "#484a77",
+        "#cf657f"
+      ],
+      "selectMs": 37.19999998807907,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-binned-keep-none-baseline",
+      "hash": "244cea673ab3f5d6b379a6a5ed8dca7459f9212e1215ae6511a4ea1f03c1ede2",
+      "colors": [
+        "#91db69",
+        "#92a984",
+        "#484a77",
+        "#cf657f"
+      ],
+      "selectMs": 35.5,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-binned-keep-none-concave",
+      "hash": "244cea673ab3f5d6b379a6a5ed8dca7459f9212e1215ae6511a4ea1f03c1ede2",
+      "colors": [
+        "#91db69",
+        "#92a984",
+        "#484a77",
+        "#cf657f"
+      ],
+      "selectMs": 29.899999976158142,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-binned-keep-none-hue",
+      "hash": "244cea673ab3f5d6b379a6a5ed8dca7459f9212e1215ae6511a4ea1f03c1ede2",
+      "colors": [
+        "#91db69",
+        "#92a984",
+        "#484a77",
+        "#cf657f"
+      ],
+      "selectMs": 46.60000002384186,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-binned-keep-4x4-baseline",
+      "hash": "2a5a4da6fd68819ae8ace003a3ee4a5c8c37f305ddf57bf1e064b217e7f2bc6b",
+      "colors": [
+        "#91db69",
+        "#92a984",
+        "#484a77",
+        "#cf657f"
+      ],
+      "selectMs": 40.5,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-binned-keep-4x4-concave",
+      "hash": "2a5a4da6fd68819ae8ace003a3ee4a5c8c37f305ddf57bf1e064b217e7f2bc6b",
+      "colors": [
+        "#91db69",
+        "#92a984",
+        "#484a77",
+        "#cf657f"
+      ],
+      "selectMs": 21,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-binned-keep-4x4-hue",
+      "hash": "2a5a4da6fd68819ae8ace003a3ee4a5c8c37f305ddf57bf1e064b217e7f2bc6b",
+      "colors": [
+        "#91db69",
+        "#92a984",
+        "#484a77",
+        "#cf657f"
+      ],
+      "selectMs": 27.899999976158142,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-exact-cut-none-baseline",
+      "hash": "5524443ec295f93878a2a52ebbd15a3886e38fac5638dbee938bcd0d634b22f0",
+      "colors": [
+        "#0c182d",
+        "#14b4b4",
+        "#dc1432",
+        "#dce6f5"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-exact-cut-none-concave",
+      "hash": "5524443ec295f93878a2a52ebbd15a3886e38fac5638dbee938bcd0d634b22f0",
+      "colors": [
+        "#0c182d",
+        "#14b4b4",
+        "#dc1432",
+        "#dce6f5"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-exact-cut-none-hue",
+      "hash": "5524443ec295f93878a2a52ebbd15a3886e38fac5638dbee938bcd0d634b22f0",
+      "colors": [
+        "#0c182d",
+        "#14b4b4",
+        "#dc1432",
+        "#dce6f5"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-exact-cut-4x4-baseline",
+      "hash": "5524443ec295f93878a2a52ebbd15a3886e38fac5638dbee938bcd0d634b22f0",
+      "colors": [
+        "#0c182d",
+        "#14b4b4",
+        "#dc1432",
+        "#dce6f5"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-exact-cut-4x4-concave",
+      "hash": "5524443ec295f93878a2a52ebbd15a3886e38fac5638dbee938bcd0d634b22f0",
+      "colors": [
+        "#0c182d",
+        "#14b4b4",
+        "#dc1432",
+        "#dce6f5"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-exact-cut-4x4-hue",
+      "hash": "5524443ec295f93878a2a52ebbd15a3886e38fac5638dbee938bcd0d634b22f0",
+      "colors": [
+        "#0c182d",
+        "#14b4b4",
+        "#dc1432",
+        "#dce6f5"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-exact-keep-none-baseline",
+      "hash": "6ba85aa67c734337be1cba34aab90118f16b3f8027505290bd8079a67111c15f",
+      "colors": [
+        "#0c182d",
+        "#14b4b4",
+        "#dc1432",
+        "#dce6f5"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-exact-keep-none-concave",
+      "hash": "6ba85aa67c734337be1cba34aab90118f16b3f8027505290bd8079a67111c15f",
+      "colors": [
+        "#0c182d",
+        "#14b4b4",
+        "#dc1432",
+        "#dce6f5"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-exact-keep-none-hue",
+      "hash": "6ba85aa67c734337be1cba34aab90118f16b3f8027505290bd8079a67111c15f",
+      "colors": [
+        "#0c182d",
+        "#14b4b4",
+        "#dc1432",
+        "#dce6f5"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-exact-keep-4x4-baseline",
+      "hash": "6ba85aa67c734337be1cba34aab90118f16b3f8027505290bd8079a67111c15f",
+      "colors": [
+        "#0c182d",
+        "#14b4b4",
+        "#dc1432",
+        "#dce6f5"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-exact-keep-4x4-concave",
+      "hash": "6ba85aa67c734337be1cba34aab90118f16b3f8027505290bd8079a67111c15f",
+      "colors": [
+        "#0c182d",
+        "#14b4b4",
+        "#dc1432",
+        "#dce6f5"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-exact-keep-4x4-hue",
+      "hash": "6ba85aa67c734337be1cba34aab90118f16b3f8027505290bd8079a67111c15f",
+      "colors": [
+        "#0c182d",
+        "#14b4b4",
+        "#dc1432",
+        "#dce6f5"
+      ],
+      "selectMs": 0,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 4,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-hue-boundary-cut-none-baseline",
+      "hash": "5cd4a854c5636ebe3675c6af8063222104672a7672e1986ec60f74623ed2aee4",
+      "colors": [
+        "#966c6c",
+        "#7f708a",
+        "#323353"
+      ],
+      "selectMs": 0.19999998807907104,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 3,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-hue-boundary-cut-none-concave",
+      "hash": "5cd4a854c5636ebe3675c6af8063222104672a7672e1986ec60f74623ed2aee4",
+      "colors": [
+        "#966c6c",
+        "#7f708a",
+        "#323353"
+      ],
+      "selectMs": 0.10000002384185791,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 3,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-hue-boundary-cut-none-hue",
+      "hash": "5cd4a854c5636ebe3675c6af8063222104672a7672e1986ec60f74623ed2aee4",
+      "colors": [
+        "#966c6c",
+        "#7f708a",
+        "#323353"
+      ],
+      "selectMs": 0.19999998807907104,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 3,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-hue-boundary-cut-4x4-baseline",
+      "hash": "2d5248fd50c3ffd89e0ce77509f98e8589aea61007a6c42ebed74d0900bef272",
+      "colors": [
+        "#966c6c",
+        "#7f708a",
+        "#323353"
+      ],
+      "selectMs": 0.19999998807907104,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 3,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-hue-boundary-cut-4x4-concave",
+      "hash": "2d5248fd50c3ffd89e0ce77509f98e8589aea61007a6c42ebed74d0900bef272",
+      "colors": [
+        "#966c6c",
+        "#7f708a",
+        "#323353"
+      ],
+      "selectMs": 0.30000001192092896,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 3,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-hue-boundary-cut-4x4-hue",
+      "hash": "2d5248fd50c3ffd89e0ce77509f98e8589aea61007a6c42ebed74d0900bef272",
+      "colors": [
+        "#966c6c",
+        "#7f708a",
+        "#323353"
+      ],
+      "selectMs": 0.30000001192092896,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 3,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-hue-boundary-keep-none-baseline",
+      "hash": "5cd4a854c5636ebe3675c6af8063222104672a7672e1986ec60f74623ed2aee4",
+      "colors": [
+        "#966c6c",
+        "#7f708a",
+        "#323353"
+      ],
+      "selectMs": 0.20000004768371582,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 3,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-hue-boundary-keep-none-concave",
+      "hash": "5cd4a854c5636ebe3675c6af8063222104672a7672e1986ec60f74623ed2aee4",
+      "colors": [
+        "#966c6c",
+        "#7f708a",
+        "#323353"
+      ],
+      "selectMs": 0.30000001192092896,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 3,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-hue-boundary-keep-none-hue",
+      "hash": "5cd4a854c5636ebe3675c6af8063222104672a7672e1986ec60f74623ed2aee4",
+      "colors": [
+        "#966c6c",
+        "#7f708a",
+        "#323353"
+      ],
+      "selectMs": 0.19999998807907104,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 3,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-hue-boundary-keep-4x4-baseline",
+      "hash": "2d5248fd50c3ffd89e0ce77509f98e8589aea61007a6c42ebed74d0900bef272",
+      "colors": [
+        "#966c6c",
+        "#7f708a",
+        "#323353"
+      ],
+      "selectMs": 0.2999999523162842,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 3,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-hue-boundary-keep-4x4-concave",
+      "hash": "2d5248fd50c3ffd89e0ce77509f98e8589aea61007a6c42ebed74d0900bef272",
+      "colors": [
+        "#966c6c",
+        "#7f708a",
+        "#323353"
+      ],
+      "selectMs": 0.19999998807907104,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 3,
+      "stableChurn": 0
+    },
+    {
+      "id": "technical-hue-boundary-keep-4x4-hue",
+      "hash": "2d5248fd50c3ffd89e0ce77509f98e8589aea61007a6c42ebed74d0900bef272",
+      "colors": [
+        "#966c6c",
+        "#7f708a",
+        "#323353"
+      ],
+      "selectMs": 0.19999998807907104,
+      "alphaWrong": 0,
+      "membershipWrong": 0,
+      "usedCount": 3,
+      "stableChurn": 0
+    },
+    {
+      "id": "owned-knight-walk-baseline-chunk-duration",
+      "hash": "f0050a69f717f0e4700c8d8aad6199e9abacd66bca665cba4cfa3fd5eee6a221",
+      "chunkDurationInvariant": true
+    },
+    {
+      "id": "owned-knight-walk-concave-chunk-duration",
+      "hash": "f0050a69f717f0e4700c8d8aad6199e9abacd66bca665cba4cfa3fd5eee6a221",
+      "chunkDurationInvariant": true
+    },
+    {
+      "id": "owned-knight-walk-hue-chunk-duration",
+      "hash": "f0050a69f717f0e4700c8d8aad6199e9abacd66bca665cba4cfa3fd5eee6a221",
+      "chunkDurationInvariant": true
+    },
+    {
+      "id": "dungeon-archer-baseline-chunk-duration",
+      "hash": "def7dff3af9abe47252b2c849fb69d4e289f976454ac7cf2730defcdf1441ee4",
+      "chunkDurationInvariant": true
+    },
+    {
+      "id": "dungeon-archer-concave-chunk-duration",
+      "hash": "def7dff3af9abe47252b2c849fb69d4e289f976454ac7cf2730defcdf1441ee4",
+      "chunkDurationInvariant": true
+    },
+    {
+      "id": "dungeon-archer-hue-chunk-duration",
+      "hash": "def7dff3af9abe47252b2c849fb69d4e289f976454ac7cf2730defcdf1441ee4",
+      "chunkDurationInvariant": true
+    },
+    {
+      "id": "intentional-eye-baseline-chunk-duration",
+      "hash": "62adececb431535fdbe1abe6bb034579b4e67b05a592428c7aa054c95cc9430e",
+      "chunkDurationInvariant": true
+    },
+    {
+      "id": "intentional-eye-concave-chunk-duration",
+      "hash": "62adececb431535fdbe1abe6bb034579b4e67b05a592428c7aa054c95cc9430e",
+      "chunkDurationInvariant": true
+    },
+    {
+      "id": "intentional-eye-hue-chunk-duration",
+      "hash": "62adececb431535fdbe1abe6bb034579b4e67b05a592428c7aa054c95cc9430e",
+      "chunkDurationInvariant": true
+    }
+  ],
+  "errors": [],
+  "timings": [
+    {
+      "id": "owned-knight-walk-selection",
+      "method": "baseline",
+      "repeat": 0,
+      "selectMs": 0.3999999761581421
+    },
+    {
+      "id": "owned-knight-walk-selection",
+      "method": "concave",
+      "repeat": 0,
+      "selectMs": 0.40000003576278687
+    },
+    {
+      "id": "owned-knight-walk-selection",
+      "method": "hue",
+      "repeat": 0,
+      "selectMs": 0.40000003576278687
+    },
+    {
+      "id": "owned-knight-walk-selection",
+      "method": "hue",
+      "repeat": 1,
+      "selectMs": 0.3999999761581421
+    },
+    {
+      "id": "owned-knight-walk-selection",
+      "method": "concave",
+      "repeat": 1,
+      "selectMs": 0.5
+    },
+    {
+      "id": "owned-knight-walk-selection",
+      "method": "baseline",
+      "repeat": 1,
+      "selectMs": 0.3999999761581421
+    },
+    {
+      "id": "owned-knight-walk-selection",
+      "method": "baseline",
+      "repeat": 2,
+      "selectMs": 0.30000001192092896
+    },
+    {
+      "id": "owned-knight-walk-selection",
+      "method": "concave",
+      "repeat": 2,
+      "selectMs": 0.40000003576278687
+    },
+    {
+      "id": "owned-knight-walk-selection",
+      "method": "hue",
+      "repeat": 2,
+      "selectMs": 0.30000001192092896
+    },
+    {
+      "id": "dungeon-wizard-selection",
+      "method": "baseline",
+      "repeat": 0,
+      "selectMs": 0.19999998807907104
+    },
+    {
+      "id": "dungeon-wizard-selection",
+      "method": "concave",
+      "repeat": 0,
+      "selectMs": 0.10000002384185791
+    },
+    {
+      "id": "dungeon-wizard-selection",
+      "method": "hue",
+      "repeat": 0,
+      "selectMs": 0.19999998807907104
+    },
+    {
+      "id": "dungeon-wizard-selection",
+      "method": "hue",
+      "repeat": 1,
+      "selectMs": 0.10000002384185791
+    },
+    {
+      "id": "dungeon-wizard-selection",
+      "method": "concave",
+      "repeat": 1,
+      "selectMs": 0.19999998807907104
+    },
+    {
+      "id": "dungeon-wizard-selection",
+      "method": "baseline",
+      "repeat": 1,
+      "selectMs": 0.10000002384185791
+    },
+    {
+      "id": "dungeon-wizard-selection",
+      "method": "baseline",
+      "repeat": 2,
+      "selectMs": 0.10000002384185791
+    },
+    {
+      "id": "dungeon-wizard-selection",
+      "method": "concave",
+      "repeat": 2,
+      "selectMs": 0.19999998807907104
+    },
+    {
+      "id": "dungeon-wizard-selection",
+      "method": "hue",
+      "repeat": 2,
+      "selectMs": 0
+    },
+    {
+      "id": "technical-stress4096-selection",
+      "method": "baseline",
+      "repeat": 0,
+      "selectMs": 19.30000001192093
+    },
+    {
+      "id": "technical-stress4096-selection",
+      "method": "concave",
+      "repeat": 0,
+      "selectMs": 56.09999996423721
+    },
+    {
+      "id": "technical-stress4096-selection",
+      "method": "hue",
+      "repeat": 0,
+      "selectMs": 61.19999998807907
+    },
+    {
+      "id": "technical-stress4096-selection",
+      "method": "hue",
+      "repeat": 1,
+      "selectMs": 36.19999998807907
+    },
+    {
+      "id": "technical-stress4096-selection",
+      "method": "concave",
+      "repeat": 1,
+      "selectMs": 21.19999998807907
+    },
+    {
+      "id": "technical-stress4096-selection",
+      "method": "baseline",
+      "repeat": 1,
+      "selectMs": 59.5
+    },
+    {
+      "id": "technical-stress4096-selection",
+      "method": "baseline",
+      "repeat": 2,
+      "selectMs": 47.69999998807907
+    },
+    {
+      "id": "technical-stress4096-selection",
+      "method": "concave",
+      "repeat": 2,
+      "selectMs": 28.599999964237213
+    },
+    {
+      "id": "technical-stress4096-selection",
+      "method": "hue",
+      "repeat": 2,
+      "selectMs": 77.40000003576279
+    }
+  ],
+  "freeze": {
+    "productionSha256": "739a3fb97a80d1ecbfa23c5e33f72893b894adc4425ea89217a88d7264abae20",
+    "freeze": "Before cohort outputs; no tuning after results.",
+    "candidates": {
+      "concave": {
+        "objective": "Source exact RGB mass to power .75, normalized to original mass",
+        "exponent": 0.75
+      },
+      "hue": {
+        "objective": "90% original mass +10% equally weighted occupied Oklab hue groups; 12 sectors + neutral group",
+        "originalShare": 0.9,
+        "balancedShare": 0.1,
+        "sectors": 12,
+        "neutralChromaBelow": 0.04
+      }
+    },
+    "invariant": "Auto generation, nearest mapping, alpha and target colors unchanged; full-nearest and empty fast paths unchanged; binned high-entropy path unchanged."
+  },
+  "inputHashes": {
+    "cohortManifestSha256": "4fcf989dfc4466a0fbd8a21a2ed87766807fc07544aad45c134a774288e78c83",
+    "candidateSha256": "751843fe25922cd969456112a4ce761f1aef8c3355f2283a0845260554802dff",
+    "harnessCoreSha256": "95ba7582a4d08881e6e4f740c0fb745f4719d3e0be9094d5fc5d2651b611c223"
+  },
+  "passed": 189,
+  "elapsedMs": 1724.9000000357628
+}

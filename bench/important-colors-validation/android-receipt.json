@@ -1,0 +1,72 @@
+{
+  "at": "2026-10-15T14:59:45.480Z",
+  "surface": "USB Pixel 8 Pro, Brave, actual unmodified built app",
+  "tag": "cfaccent-mv9o0cso",
+  "indexSha256": "67b5a088de09d901f63badcb14a4f7ba41e4e8c4b78ddc8b9b8767d8128dd82f",
+  "errors": [],
+  "wakefulness": "Awake",
+  "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+  "settings": {
+    "matching": "true",
+    "cleanupOff": "true",
+    "ditherOff": "true",
+    "maxColors": "8"
+  },
+  "download": {
+    "remote": "/sdcard/Download/cfaccent-mv9o0cso-knight-palette.png",
+    "local": "bench/important-colors-validation/android-knight-k8.png"
+  },
+  "count": 8,
+  "draftColors": [
+    "#1a1420",
+    "#3d4655",
+    "#4a2f1c",
+    "#6c7a8c",
+    "#7a4f2c",
+    "#a9b4c2",
+    "#b07a46",
+    "#e8eef2"
+  ],
+  "native": {
+    "at": "2026-10-15T14:59:49.831Z",
+    "method": "Actual built-app Save on desktop and Android, independently decoded with Sharp. Native equality is cross-device evidence, not an independent algorithm oracle.",
+    "phone": {
+      "file": "bench/important-colors-validation/android-knight-k8.png",
+      "pngSha256": "dd8e418b0fdaa93f88ed12f6ca769cebe5305aae094185f5c21600326911f642",
+      "width": 24,
+      "height": 24,
+      "bytes": 233
+    },
+    "desktop": {
+      "file": "bench/important-colors-validation/codex-knight-k8.png",
+      "pngSha256": "dd8e418b0fdaa93f88ed12f6ca769cebe5305aae094185f5c21600326911f642",
+      "bytes": 233
+    },
+    "alphaWrong": 0,
+    "visibleMismatch": 0,
+    "usedColors": [
+      "#1a1420",
+      "#3d4655",
+      "#4a2f1c",
+      "#6c7a8c",
+      "#7a4f2c",
+      "#a9b4c2",
+      "#b07a46",
+      "#e8eef2"
+    ],
+    "count": 8,
+    "draftColors": [
+      "#1a1420",
+      "#3d4655",
+      "#4a2f1c",
+      "#6c7a8c",
+      "#7a4f2c",
+      "#a9b4c2",
+      "#b07a46",
+      "#e8eef2"
+    ],
+    "pngBytesEqual": true,
+    "pass": true
+  },
+  "pass": true
+}

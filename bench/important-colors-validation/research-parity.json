@@ -1,0 +1,10 @@
+{
+  "at": "2026-10-15T15:00:31.952Z",
+  "scope": "Research modules only; not built app import/export.",
+  "desktopChecks": 189,
+  "phoneChecks": 189,
+  "inputHashesMatch": true,
+  "hashMismatches": [],
+  "errors": [],
+  "passed": true
+}

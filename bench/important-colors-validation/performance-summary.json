@@ -1,0 +1,32 @@
+{
+  "codex": {
+    "checks": 189,
+    "elapsedMs": 1430.8999999985099,
+    "selectionMedianMs": {
+      "owned-knight-walk-selection / baseline": 0.20000000298023224,
+      "owned-knight-walk-selection / concave": 0.29999999701976776,
+      "owned-knight-walk-selection / hue": 0.5,
+      "dungeon-wizard-selection / baseline": 0,
+      "dungeon-wizard-selection / concave": 0,
+      "dungeon-wizard-selection / hue": 0,
+      "technical-stress4096-selection / baseline": 25.399999998509884,
+      "technical-stress4096-selection / concave": 25.299999997019768,
+      "technical-stress4096-selection / hue": 55.600000001490116
+    }
+  },
+  "android": {
+    "checks": 189,
+    "elapsedMs": 1725.300000011921,
+    "selectionMedianMs": {
+      "owned-knight-walk-selection / baseline": 0.3999999761581421,
+      "owned-knight-walk-selection / concave": 0.40000003576278687,
+      "owned-knight-walk-selection / hue": 0.3999999761581421,
+      "dungeon-wizard-selection / baseline": 0.10000002384185791,
+      "dungeon-wizard-selection / concave": 0.19999998807907104,
+      "dungeon-wizard-selection / hue": 0.10000002384185791,
+      "technical-stress4096-selection / baseline": 47.69999998807907,
+      "technical-stress4096-selection / concave": 28.599999964237213,
+      "technical-stress4096-selection / hue": 61.19999998807907
+    }
+  }
+}

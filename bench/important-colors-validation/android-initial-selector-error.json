@@ -1,0 +1,11 @@
+{
+  "at": "2026-10-15T14:58:42.622Z",
+  "surface": "USB Pixel 8 Pro, Brave, actual unmodified built app",
+  "tag": "cfaccent-mv9nz0am",
+  "indexSha256": "67b5a088de09d901f63badcb14a4f7ba41e4e8c4b78ddc8b9b8767d8128dd82f",
+  "errors": [],
+  "wakefulness": "Awake",
+  "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+  "pass": false,
+  "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Oklab', exact: true })\u001b[22m\n"
+}

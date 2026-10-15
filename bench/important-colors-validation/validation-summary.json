@@ -1,0 +1,39 @@
+{
+  "at": "2026-10-15T15:06:18.400Z",
+  "passed": true,
+  "scope": "Retained evidence integrity, not another independent algorithm oracle.",
+  "researchChecksPerDevice": 189,
+  "researchOutputChecks": 180,
+  "chunkDurationChecks": 9,
+  "fixtureFiles": 18,
+  "inputHashes": {
+    "cohortManifestSha256": "4fcf989dfc4466a0fbd8a21a2ed87766807fc07544aad45c134a774288e78c83",
+    "candidateSha256": "751843fe25922cd969456112a4ce761f1aef8c3355f2283a0845260554802dff",
+    "harnessCoreSha256": "95ba7582a4d08881e6e4f740c0fb745f4719d3e0be9094d5fc5d2651b611c223"
+  },
+  "nativePngSha256": "dd8e418b0fdaa93f88ed12f6ca769cebe5305aae094185f5c21600326911f642",
+  "nativeBytes": 233,
+  "indexSha256": "67b5a088de09d901f63badcb14a4f7ba41e4e8c4b78ddc8b9b8767d8128dd82f",
+  "productionDiffFrom310df63": [],
+  "observedCommands": {
+    "units": {
+      "command": "npm test",
+      "passed": 930,
+      "skipped": 2,
+      "files": 59
+    },
+    "build": {
+      "command": "npm run build",
+      "passed": true
+    },
+    "exportRegression": {
+      "command": "BASE_REF=1e4e8fd node bench/palette-qa.mjs dist",
+      "passed": true,
+      "legacy": 132,
+      "full": 11,
+      "rgb": 11,
+      "integrationGroups": 13,
+      "errors": []
+    }
+  }
+}

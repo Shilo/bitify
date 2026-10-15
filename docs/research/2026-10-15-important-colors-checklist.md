@@ -22,13 +22,13 @@ control or semantic/AI integration is authorized by this experiment alone.
 
 | Work | Owner | Status / gate |
 |---|---|---|
-| Freeze cohort and meaningful-detail gates | accent_challenge | Pending: licensed real pixel sprites/animation plus retained tabard/eye failure, neutral/shading and accidental-noise controls, before candidate outputs. |
-| At most two distinct candidate hypotheses | accent_candidates | Research only: bounded subset fitting, consistent histogram/bin/verification objective. Retain baseline controls and all negative outputs. |
-| Paired service evidence | accent_service | Public schema refresh, reuse compatible retained outputs, up to eight materially useful fresh reductions. Same source bytes/settings; record surface, cost, alpha, palette and actual important-region outputs. No vendor source/extension references in spikes. |
-| Independent quality decision | Root + challenge | Require demonstrated detail benefit with no meaningful held-out visual regression. Aggregate point-error wins cannot conceal lost details, and small numerical error increases alone do not prove visible loss. Two review rounds maximum. |
-| Conditional production change | Unassigned until accepted | Only after gate. Update spec/tests; verify All/exact membership/alpha/cap/duration/bin/order/cancellation and worker/fallback/cache/preview/export paths; no new unbounded buffers. Otherwise close with no ship. |
-| Native-browser and physical phone | Root | Codex Browser and USB Android research output parity and bounded timing; built-app/native PNG checks if integrating. Separate module evidence from app delivery evidence. Keep Chromium sandbox enabled. |
-| Separate commits and final ledger | Root | Planning, frozen evidence, any accepted source fix, and final validation separately. No push. Record known limits and the next useful action without another unbounded review loop. |
+| Freeze cohort and meaningful-detail gates | accent_challenge | Complete: 12 real licensed source views, one montage, five owned synthetic files and two two-frame sequences; original region definitions and byte hashes retained. |
+| At most two distinct candidate hypotheses | accent_candidates | Complete: concave frequency and balanced hue, 640 rows. Unweighted control equals current throughout; 101 rows change under at least one rule. Nine chunk/duration and 39 additional technical checks pass. |
+| Paired service evidence | accent_service | Complete: public REST/MCP contracts refreshed, five compatible retained configurations plus eight fresh REST reductions (0.8 generations). Native PNGs, source hashes, target/alpha/count verification and actual region colors retained. |
+| Independent quality decision | Root + challenge | Complete in two rounds: reject both. Six native-image/region confirmations show material, skin or important-detail losses. All reviewers agree. Discarded random-label judgments are not acceptance evidence; a checker-phase misreading was corrected. |
+| Conditional production change | Unassigned until accepted | Not applicable: gate failed. No candidate reaches production, so candidate worker/cache/UI/export integration is deliberately unperformed. Source/spec/defaults remain unchanged. No new UI setting. |
+| Native-browser and physical phone | Root | Complete within recorded scope: each passes 189 research checks with identical Node/device hashes. Actual app native 8-color PNGs are byte-identical; Count and Use match independently decoded colors. Chromium sandbox retained. Bounded timing includes a 4096-color stress input, without app-FPS/whole-memory claims. |
+| Separate commits and final ledger | Root | Complete: separate planning, licensed cohort, candidate/challenge evidence, service evidence and final validation/decision commits. No source fix, push or deployment. |
 
 ## Acceptance interpretation
 
@@ -38,3 +38,31 @@ because it is saturated. Freeze candidate rules and the acceptance cohort before
 seeing outputs. Examine native size plus nearest enlargement. Include 2/4/8/16,
 Auto and fixed targets, Oklab/RGB, animations and unchanged-coordinate stability.
 Any claim applies to the tested cohort, not universal superiority over a service.
+
+## Final decision and remaining gaps
+
+[Decision and validation](2026-10-15-important-colors-decision.md),
+[independent challenge](2026-10-15-important-colors-review.md) and
+[paired service results](2026-10-15-important-colors-service.md) record the useful
+gains and failures. The service retains bucket blue/cyan and a purple hood in
+some cases where local output loses them; local output retains exact colors and
+details in other cases. Neither candidate closes those gaps without new losses.
+
+Current units: 930 pass / two existing gc-gated skips. Build succeeds.
+`BASE_REF=1e4e8fd node bench/palette-qa.mjs dist` passes 132 legacy, 11 Palette,
+11 RGB export cases and 13 integration groups, with no page errors. Edge ran
+outside the command sandbox for launch compatibility; Chromium's own sandbox
+remained enabled. App source, CLAUDE.md, spec and performance docs have an empty
+diff from 310df63. Known translucent decode/clipboard limits remain separate.
+
+Device evidence is in `bench/important-colors-validation/`; the source-module
+receipts are in `bench/important-colors-spike/`. No new website outputs, stock
+Firefox, Mac/iOS, sustained thermal or whole-memory coverage is claimed.
+The real cohort is limited to one author and the animation coverage to two short
+sequences. The attempted random-label preference study is explicitly invalidated;
+the decision uses independent decoded region RGBs and verified uniform figures.
+
+Next useful design: artist-controlled protection with clear source-versus-target
+meaning, budget-conflict handling and animation/mobile behavior. Do not add that
+control without designing it, and do not restart another automatic weighting loop
+from these same examples. The Keep weighting study remains closed.
