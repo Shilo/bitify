@@ -820,7 +820,7 @@
         "local": true
       }
     ],
-    "sessionId": "session-f0711974-5329-41dd-ad96-c61cabcd1309",
+    "sessionId": "session-4a9bea14-75ae-4006-bd93-1c38b8c36475",
     "settingsBeforeClear": {
       "first": "#123456",
       "second": "#abcdef",
@@ -1033,7 +1033,7 @@
     "fixtureSha256": "f7a97806651302378fb9f4866ba11562d3f7a2f97a6fa825d1f389eed98d8532",
     "colors": 255,
     "requests": [
-      "http://127.0.0.1:63411/colorfetti/assets/palette-ase-DJ4eyWtZ.js"
+      "http://127.0.0.1:50254/colorfetti/assets/palette-ase-RXEDm3fq.js"
     ]
   },
   "passed": true

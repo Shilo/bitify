@@ -1,0 +1,218 @@
+{
+  "r": {
+    "x": 39.88888931274414,
+    "y": 715.1111450195312,
+    "w": 32,
+    "cssWidth": 448,
+    "opacity": "1"
+  },
+  "result": [
+    {
+      "radius": 0.24,
+      "points": [
+        {
+          "expected": "#000000",
+          "actual": "#000000"
+        },
+        {
+          "expected": "#1d2b53",
+          "actual": "#1d2b53"
+        },
+        {
+          "expected": "#7e2553",
+          "actual": "#7e2553"
+        },
+        {
+          "expected": "#008751",
+          "actual": "#008751"
+        },
+        {
+          "expected": "#ab5236",
+          "actual": "#ab5236"
+        },
+        {
+          "expected": "#5f574f",
+          "actual": "#5f574f"
+        },
+        {
+          "expected": "#c2c3c7",
+          "actual": "#c2c3c7"
+        },
+        {
+          "expected": "#fff1e8",
+          "actual": "#fff1e8"
+        },
+        {
+          "expected": "#ff004d",
+          "actual": "#ff004d"
+        },
+        {
+          "expected": "#ffa300",
+          "actual": "#ffa300"
+        },
+        {
+          "expected": "#ffec27",
+          "actual": "#ffec27"
+        },
+        {
+          "expected": "#00e436",
+          "actual": "#00e436"
+        },
+        {
+          "expected": "#29adff",
+          "actual": "#29adff"
+        },
+        {
+          "expected": "#83769c",
+          "actual": "#83769c"
+        },
+        {
+          "expected": "#ff77a8",
+          "actual": "#ff77a8"
+        },
+        {
+          "expected": "#ffccaa",
+          "actual": "#ffccaa"
+        }
+      ]
+    },
+    {
+      "radius": 0.34,
+      "points": [
+        {
+          "expected": "#000000",
+          "actual": "#000000"
+        },
+        {
+          "expected": "#1d2b53",
+          "actual": "#1d2b53"
+        },
+        {
+          "expected": "#7e2553",
+          "actual": "#7e2553"
+        },
+        {
+          "expected": "#008751",
+          "actual": "#008751"
+        },
+        {
+          "expected": "#ab5236",
+          "actual": "#ab5236"
+        },
+        {
+          "expected": "#5f574f",
+          "actual": "#5f574f"
+        },
+        {
+          "expected": "#c2c3c7",
+          "actual": "#c1c2c6"
+        },
+        {
+          "expected": "#fff1e8",
+          "actual": "#fef0e7"
+        },
+        {
+          "expected": "#ff004d",
+          "actual": "#fe004d"
+        },
+        {
+          "expected": "#ffa300",
+          "actual": "#ffa300"
+        },
+        {
+          "expected": "#ffec27",
+          "actual": "#ffec27"
+        },
+        {
+          "expected": "#00e436",
+          "actual": "#00e436"
+        },
+        {
+          "expected": "#29adff",
+          "actual": "#29adff"
+        },
+        {
+          "expected": "#83769c",
+          "actual": "#83769c"
+        },
+        {
+          "expected": "#ff77a8",
+          "actual": "#ff77a8"
+        },
+        {
+          "expected": "#ffccaa",
+          "actual": "#ffccaa"
+        }
+      ]
+    },
+    {
+      "radius": 0.42,
+      "points": [
+        {
+          "expected": "#000000",
+          "actual": "#000000"
+        },
+        {
+          "expected": "#1d2b53",
+          "actual": "#1d2b53"
+        },
+        {
+          "expected": "#7e2553",
+          "actual": "#7e2553"
+        },
+        {
+          "expected": "#008751",
+          "actual": "#008751"
+        },
+        {
+          "expected": "#ab5236",
+          "actual": "#ab5236"
+        },
+        {
+          "expected": "#5f574f",
+          "actual": "#5f574f"
+        },
+        {
+          "expected": "#c2c3c7",
+          "actual": "#c1c2c6"
+        },
+        {
+          "expected": "#fff1e8",
+          "actual": "#fef0e7"
+        },
+        {
+          "expected": "#ff004d",
+          "actual": "#fe004d"
+        },
+        {
+          "expected": "#ffa300",
+          "actual": "#fea200"
+        },
+        {
+          "expected": "#ffec27",
+          "actual": "#ffec27"
+        },
+        {
+          "expected": "#00e436",
+          "actual": "#00e436"
+        },
+        {
+          "expected": "#29adff",
+          "actual": "#29adff"
+        },
+        {
+          "expected": "#83769c",
+          "actual": "#83769c"
+        },
+        {
+          "expected": "#ff77a8",
+          "actual": "#ff77a8"
+        },
+        {
+          "expected": "#ffccaa",
+          "actual": "#ffccaa"
+        }
+      ]
+    }
+  ]
+}

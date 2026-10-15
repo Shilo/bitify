@@ -1,0 +1,144 @@
+{
+  "before": [
+    {
+      "label": "Select color 1 #000000",
+      "css": "rgb(0, 0, 0)",
+      "scheme": "light only",
+      "rect": {
+        "x": 45.33333206176758,
+        "y": 314.0208435058594,
+        "w": 44,
+        "h": 44
+      }
+    },
+    {
+      "label": "Select color 2 #1d2b53",
+      "css": "rgb(29, 43, 83)",
+      "scheme": "light only",
+      "rect": {
+        "x": 97.33333587646484,
+        "y": 314.0208435058594,
+        "w": 44,
+        "h": 44
+      }
+    },
+    {
+      "label": "Select color 3 #5f574f",
+      "css": "rgb(95, 87, 79)",
+      "scheme": "light only",
+      "rect": {
+        "x": 149.3333282470703,
+        "y": 314.0208435058594,
+        "w": 44,
+        "h": 44
+      }
+    },
+    {
+      "label": "Select color 4 #c2c3c7",
+      "css": "rgb(194, 195, 199)",
+      "scheme": "light only",
+      "rect": {
+        "x": 201.3333282470703,
+        "y": 314.0208435058594,
+        "w": 44,
+        "h": 44
+      }
+    },
+    {
+      "label": "Select color 5 #fff1e8",
+      "css": "rgb(255, 241, 232)",
+      "scheme": "light only",
+      "rect": {
+        "x": 253.3333282470703,
+        "y": 314.0208435058594,
+        "w": 44,
+        "h": 44
+      }
+    },
+    {
+      "label": "Select color 6 #83769c",
+      "css": "rgb(131, 118, 156)",
+      "scheme": "light only",
+      "rect": {
+        "x": 305.3333435058594,
+        "y": 314.0208435058594,
+        "w": 44,
+        "h": 44
+      }
+    }
+  ],
+  "after": [
+    {
+      "label": "Select color 1 #000000",
+      "css": "rgb(0, 0, 0)",
+      "scheme": "light only",
+      "rect": {
+        "x": 45.33333206176758,
+        "y": 314.0208435058594,
+        "w": 44,
+        "h": 44
+      }
+    },
+    {
+      "label": "Select color 2 #1d2b53",
+      "css": "rgb(29, 43, 83)",
+      "scheme": "light only",
+      "rect": {
+        "x": 97.33333587646484,
+        "y": 314.0208435058594,
+        "w": 44,
+        "h": 44
+      }
+    },
+    {
+      "label": "Select color 3 #5f574f",
+      "css": "rgb(95, 87, 79)",
+      "scheme": "light only",
+      "rect": {
+        "x": 149.3333282470703,
+        "y": 314.0208435058594,
+        "w": 44,
+        "h": 44
+      }
+    },
+    {
+      "label": "Select color 4 #c2c3c7",
+      "css": "rgb(194, 195, 199)",
+      "scheme": "light only",
+      "rect": {
+        "x": 201.3333282470703,
+        "y": 314.0208435058594,
+        "w": 44,
+        "h": 44
+      }
+    },
+    {
+      "label": "Select color 5 #fff1e8",
+      "css": "rgb(255, 241, 232)",
+      "scheme": "light only",
+      "rect": {
+        "x": 253.3333282470703,
+        "y": 314.0208435058594,
+        "w": 44,
+        "h": 44
+      }
+    },
+    {
+      "label": "Select color 6 #83769c",
+      "css": "rgb(131, 118, 156)",
+      "scheme": "light only",
+      "rect": {
+        "x": 305.3333435058594,
+        "y": 314.0208435058594,
+        "w": 44,
+        "h": 44
+      }
+    }
+  ],
+  "root": {
+    "theme": "light",
+    "scheme": "light only",
+    "dark": false,
+    "forced": false
+  }
+}

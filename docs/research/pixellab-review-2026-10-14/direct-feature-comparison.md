@@ -2,6 +2,8 @@
 
 Date: October 14, 2026. This is a service-specific comparison, separate from the four neutral improvement spikes. Public documentation was refreshed for this follow-up. It combines measured outputs, observed website controls, public schemas and the already inspected installed editor extension; it makes no claim about service implementation internals.
 
+**Implementation update, October 15:** the Colorfetti matrix and recommendations below record the baseline before the follow-on improvement batch. That batch added Black & white and ENDESGA 8 (eleven full presets total), Lospec URL import, explicit full-source/all-frame used-color counts, reuse through a palette draft and HEX backup, and optional Keep opacity with Cut at 128 still the default. The [current validation](../2026-10-14-palette-improvements-validation.md) and [independent review](../2026-10-14-palette-improvements-adversarial-review.md) record what shipped and its bounded tests. [Direct-K fitting and color locks were investigated and deferred](../2026-10-14-auto-fitting-and-color-locks.md) after mixed results; the original suggestions here are not a current instruction to implement them. Clean palette-strip/GPL export, automatic ramp grouping and an explicit shared collection budget remain separate possible work.
+
 Colorfetti should keep its local, immediate fixed-palette workflow. The most useful next additions after ordered dithering are precise used-color feedback, explicit low-count Auto fitting, palette reuse/export, artist-directed color protection and an optional shared subset across related assets. More presets and more pattern sizes should earn their place through distinct useful results. Image generation, cloud asset management and semantic recoloring are different product scopes, rather than a checklist Colorfetti must duplicate.
 
 ## Evidence key and sources
@@ -10,7 +12,7 @@ Colorfetti should keep its local, immediate fixed-palette workflow. The most use
 
 The official [reducer guide](https://www.pixellab.ai/docs/tools/reduce-colors), [color options](https://www.pixellab.ai/docs/options/color), [dither options](https://www.pixellab.ai/docs/options/dithering), [REST schema](https://api.pixellab.ai/v2/openapi.json), [REST endpoint index](https://api.pixellab.ai/v2/llms.txt) and [MCP guide](https://api.pixellab.ai/mcp/docs) were refreshed. Runtime records are the [API/MCP report](api-mcp-evidence.md), [website closure](coverage-closure.md) and new workbench evidence linked below. The [extension inventory](extension-palette-evidence.md) records local-copy/version limitations; it is not proof of an unmodified vendor release or working editor runtime.
 
-## Cross-surface matrix
+## Cross-surface matrix: Colorfetti before the follow-on batch
 
 The website column incorporates the later four successful still-image downloads, superseding the earlier blanket output-unknown status only where indicated. The original access reports preserve the earlier history. Multi-source/GIF behavior, partial alpha, Auto detect output and every preset/import combination remain outside those four tests. See the [final website verification](web-output-verification.md) and [independent decoded-output analysis](../../../bench/palette-service-research/web-output-independent-analysis.json).
 

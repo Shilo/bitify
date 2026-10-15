@@ -1,0 +1,125 @@
+{
+  "device": "USB Pixel 8 Pro / Brave155",
+  "browserAutoDarkOverride": "none; native forced-dark setting remains",
+  "cssWidth": 448,
+  "scale": 2.25,
+  "solid": [
+    {
+      "expected": "#000000",
+      "actual": "#000000"
+    },
+    {
+      "expected": "#ffffff",
+      "actual": "#ffffff"
+    },
+    {
+      "expected": "#fff1e8",
+      "actual": "#fff1e8"
+    },
+    {
+      "expected": "#ff0000",
+      "actual": "#ff0000"
+    },
+    {
+      "expected": "#00ff00",
+      "actual": "#00ff00"
+    },
+    {
+      "expected": "#0000ff",
+      "actual": "#0000ff"
+    },
+    {
+      "expected": "#808080",
+      "actual": "#808080"
+    },
+    {
+      "expected": "#c2c3c7",
+      "actual": "#c2c3c7"
+    },
+    {
+      "expected": "#ffeeaa",
+      "actual": "#ffeeaa"
+    },
+    {
+      "expected": "#f04010",
+      "actual": "#f04010"
+    },
+    {
+      "expected": "#3050a0",
+      "actual": "#3050a0"
+    },
+    {
+      "expected": "#010101",
+      "actual": "#010101"
+    }
+  ],
+  "pie": [
+    {
+      "expected": "#000000",
+      "actual": "#000000"
+    },
+    {
+      "expected": "#1d2b53",
+      "actual": "#1d2b53"
+    },
+    {
+      "expected": "#7e2553",
+      "actual": "#7e2553"
+    },
+    {
+      "expected": "#008751",
+      "actual": "#008751"
+    },
+    {
+      "expected": "#ab5236",
+      "actual": "#ab5236"
+    },
+    {
+      "expected": "#5f574f",
+      "actual": "#5f574f"
+    },
+    {
+      "expected": "#c2c3c7",
+      "actual": "#c2c3c7"
+    },
+    {
+      "expected": "#fff1e8",
+      "actual": "#fff1e8"
+    },
+    {
+      "expected": "#ff004d",
+      "actual": "#ff004d"
+    },
+    {
+      "expected": "#ffa300",
+      "actual": "#ffa300"
+    },
+    {
+      "expected": "#ffec27",
+      "actual": "#ffec27"
+    },
+    {
+      "expected": "#00e436",
+      "actual": "#00e436"
+    },
+    {
+      "expected": "#29adff",
+      "actual": "#29adff"
+    },
+    {
+      "expected": "#83769c",
+      "actual": "#83769c"
+    },
+    {
+      "expected": "#ff77a8",
+      "actual": "#ff77a8"
+    },
+    {
+      "expected": "#ffccaa",
+      "actual": "#ffccaa"
+    }
+  ],
+  "pieProbeRadiusFraction": 0.24,
+  "outerProbeNote": "Additional outer-radius screenshot probes differ by at most one channel value; retained separately.",
+  "allExact": true
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "expected": "#000000",
+    "actual": "#000000"
+  },
+  {
+    "expected": "#ffffff",
+    "actual": "#ffffff"
+  },
+  {
+    "expected": "#fff1e8",
+    "actual": "#fff1e8"
+  },
+  {
+    "expected": "#ff0000",
+    "actual": "#ff0000"
+  },
+  {
+    "expected": "#00ff00",
+    "actual": "#00ff00"
+  },
+  {
+    "expected": "#0000ff",
+    "actual": "#0000ff"
+  },
+  {
+    "expected": "#808080",
+    "actual": "#808080"
+  },
+  {
+    "expected": "#c2c3c7",
+    "actual": "#c2c3c7"
+  },
+  {
+    "expected": "#ffeeaa",
+    "actual": "#ffeeaa"
+  },
+  {
+    "expected": "#f04010",
+    "actual": "#f04010"
+  },
+  {
+    "expected": "#3050a0",
+    "actual": "#3050a0"
+  },
+  {
+    "expected": "#010101",
+    "actual": "#010101"
+  }
+]

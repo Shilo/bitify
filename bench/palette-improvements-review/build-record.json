@@ -1,0 +1,24 @@
+{
+  "finalSourceCommit": "e3710e4288297b12e7e1ed02834f2730798aec79",
+  "finalIndexSha256": "0b61657e4bf8e35317a45bd2973d02cc94282855b1f9d14b5b8435eb94822d20",
+  "finalBuildChange": "Count-first captions and paint-only full-palette UI canvases; conversion and encoders unchanged since native download",
+  "unit": { "files": 59, "passed": 910, "existingSkips": 2 },
+  "finalAcceptance": [
+    "Codex Browser 15 phases, including actual live Lospec import",
+    "USB Pixel 8 Pro 15 phases, including actual live Lospec import",
+    "Sandboxed Edge 9 phases including 320x568, 568x320 and active forced darkening",
+    "Physical phone exact RGB: 12 solids and 16 inner pie probes; outer probes can differ by one channel byte"
+  ],
+  "finalBaseline": {
+    "baseRef": "5aa6418",
+    "indexSha256": "0b61657e4bf8e35317a45bd2973d02cc94282855b1f9d14b5b8435eb94822d20",
+    "legacyCases": 132,
+    "fullPaletteCases": 11,
+    "rgbCases": 11,
+    "integrationGroups": 13,
+    "passed": true
+  },
+  "nativeDownloadIndexSha256": "261b51520cba30c9df23a9dce313f4767d9943269a3b32980268b051c484645a",
+  "unverified": ["Safari/iOS", "OS clipboard readback", "Native OS color-picker interaction"],
+  "pushed": false
+}
