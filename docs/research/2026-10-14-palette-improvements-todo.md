@@ -5,7 +5,7 @@ This temporary checklist tracks the requested improvements, their evidence and r
 | Work | Status | Acceptance or decision gate |
 |---|---|---|
 | Compare public PixelLab palette catalog with ours | In progress: preset researcher | Explain each distinct role and overlap; use canonical published RGB sets, not vendor implementation details. Compare real sprites and synthetic ramps with nearest and dithering. |
-| Black & white and ENDESGA 8 | In progress: preset researcher | Exact published colors, stable existing IDs/defaults, distinct useful roles; record counterexamples rather than claiming universal improvement. |
+| Black & white and ENDESGA 8 | Implemented; independent code review passed; device checks queued | Exact published colors and preserved defaults. [64-conversion study](2026-10-14-curated-palette-selection.md) records benefits and neutral-armor counterexample; no algorithm/default changes. |
 | Lospec link import | In progress: import worker | Extend existing Paste workflow, preview before saving, retain manual/file import; bounded credentialless requests, cancellation, clear errors and safe attribution. |
 | Used-color feedback | Design review in progress | Count actual full-resolution output RGB colors, ignoring transparent pixels; union all animation frames. Never label sampled preview counts as exact. Avoid automatic expensive wall-wide conversions. |
 | Reuse/export used palette | Queued after counts | Reuse the same captured output colors; review and name in the existing editor, with its HEX backup for other tools. Preserve the image/export itself. |

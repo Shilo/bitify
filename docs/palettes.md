@@ -30,7 +30,7 @@ assigns two inks using brightness, structure or patterns; Checker, Bayer, Hatch,
 Atkinson and Noise already provide patterned shading. The full-palette Dithering
 control does not apply an additional pass to those styles.
 
-Colorfetti starts in **Palette** mode: generate colors with Auto, choose from nine
+Colorfetti starts in **Palette** mode: generate colors with Auto, choose from eleven
 curated palettes, or import, edit and save your own. The optional **1-bit** mode offers
 twelve preset color pairs and two-color styles. Full palettes and their provenance are
 in [src/lib/palette-library.js](../src/lib/palette-library.js); 1-bit pairs are defined in
@@ -76,9 +76,11 @@ not a promise that every selected color will be used.
 | ENDESGA 32 | 32 | [ENDESGA](https://lospec.com/palette-list/endesga-32), originally for NYKRA |
 | PICO-8 | 16 | [Lexaloffle Games](https://www.lexaloffle.com/pico-8.php) |
 | DawnBringer 16 | 16 | [DawnBringer](https://lospec.com/palette-list/dawnbringer-16) |
+| ENDESGA 8 | 8 | [ENDESGA](https://lospec.com/palette-list/endesga-8); fixed broad-hue target |
 | Grayscale 8 | 8 | Colorfetti: eight evenly spaced sRGB grays |
 | Ice Cream GB | 4 | [Kerrie Lake](https://lospec.com/palette-list/ice-cream-gb) |
 | Game Boy green | 4 | Common Game Boy LCD-inspired RGB interpretation; hardware does not define one canonical RGB set |
+| Black & white | 2 | Exact opaque sRGB black and white |
 | Glow | 2 | [Polyducks, 1bit Monitor Glow](https://lospec.com/palette-list/1bit-monitor-glow) |
 | Paper | 2 | [Doph, Paperback-2](https://lospec.com/palette-list/paperback-2) |
 

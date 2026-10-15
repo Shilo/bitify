@@ -1,5 +1,16 @@
 # Colorfetti design
 
+## Curated palette additions — October 14, 2026
+
+The Palette rail has eleven curated presets, adding ENDESGA 8 (`preset-edg8`)
+before Grayscale 8 and Black & white (`preset-mono`) before Glow. ENDESGA 8 uses
+the published eight RGB entries in published order and retains attribution;
+Black & white is exactly #000000/#ffffff. Existing preset colors, IDs and relative
+order, Auto's fresh default and ENDESGA 32's fallback are unchanged. Size-group
+dividers remain 64/32/16/8/4/2. These are optional authored targets, not an automatic
+quality correction. The [selection study](../../research/2026-10-14-curated-palette-selection.md)
+records four-source comparisons and adverse outcomes. It supersedes older nine-preset lists.
+
 ## Full palette ordered dithering — October 14, 2026
 
 Full palettes offer Dithering Off, 2×2, 4×4 and 8×8. Off is the fresh and Reset
