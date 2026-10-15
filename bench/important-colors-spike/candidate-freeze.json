@@ -1,0 +1,18 @@
+{
+  "productionSha256": "739a3fb97a80d1ecbfa23c5e33f72893b894adc4425ea89217a88d7264abae20",
+  "freeze": "Before cohort outputs; no tuning after results.",
+  "candidates": {
+    "concave": {
+      "objective": "Source exact RGB mass to power .75, normalized to original mass",
+      "exponent": 0.75
+    },
+    "hue": {
+      "objective": "90% original mass +10% equally weighted occupied Oklab hue groups; 12 sectors + neutral group",
+      "originalShare": 0.9,
+      "balancedShare": 0.1,
+      "sectors": 12,
+      "neutralChromaBelow": 0.04
+    }
+  },
+  "invariant": "Auto generation, nearest mapping, alpha and target colors unchanged; full-nearest and empty fast paths unchanged; binned high-entropy path unchanged."
+}

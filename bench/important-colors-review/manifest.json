@@ -1,0 +1,788 @@
+{
+  "frozen": "2026-10-15 before any candidate output",
+  "baseline": "4566494",
+  "settings": {
+    "caps": [
+      2,
+      4,
+      8,
+      16
+    ],
+    "palettes": [
+      "auto",
+      "preset-res64",
+      "preset-pico8",
+      "preset-edg8"
+    ],
+    "metrics": [
+      "oklab",
+      "rgb"
+    ],
+    "alphaMode": "cut",
+    "alphaCut": 128,
+    "dithering": "off",
+    "cleanup": false
+  },
+  "files": [
+    {
+      "id": "dungeon-wizard",
+      "file": "fixtures/dungeon-wizard.png",
+      "kind": "real",
+      "intent": "Purple hood, face, outline; do not let bright face displace all hood definition.",
+      "width": 16,
+      "height": 16,
+      "sha256": "b3909f80a29a0f18729f96a90ebe446ecaf26a195da633f2a6c3dd31f660821e",
+      "rgbaSha256": "47f26e6e733f9a09bb636677306fb7f35bd6a5307b7160d999c2234aaf0b0c7b",
+      "visibleColors": {
+        "3f2631": 102,
+        "9b4ca3": 45,
+        "d176d0": 10,
+        "8b9bb4": 5,
+        "f7c282": 24,
+        "262b44": 4,
+        "c0cbdc": 23,
+        "bd6c4a": 1,
+        "aab7cc": 1
+      },
+      "source": {
+        "page": "https://kenney.nl/assets/tiny-dungeon",
+        "url": "https://kenney.nl/media/pages/assets/tiny-dungeon/f8422efb44-1674742415/kenney_tiny-dungeon.zip",
+        "sha256": "c109438ab06f65fd80f9b2686a4cf9c7c11dc64444b47333ec71d602f8bb5fc7",
+        "bytes": 98530,
+        "retrieved": "2026-10-15",
+        "archivePath": "Tiles/tile_0084.png",
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "regions": [
+        {
+          "id": "purple-hood",
+          "sourceColors": [
+            "9b4ca3",
+            "d176d0"
+          ]
+        },
+        {
+          "id": "face",
+          "sourceColors": [
+            "f7c282",
+            "bd6c4a"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dungeon-archer",
+      "file": "fixtures/dungeon-archer.png",
+      "kind": "real",
+      "intent": "Green headband and eye highlights distinguish the archer.",
+      "width": 16,
+      "height": 16,
+      "sha256": "1e82481db9d95d0cec64ba0ea95b8fadf1e3675936e93731d0ff0e3bc72470b0",
+      "rgbaSha256": "98198ed98f11e6d56079242da987c6b27a94cf9c9fe5931eeecd704f3676a8c8",
+      "visibleColors": {
+        "3f2631": 99,
+        "bd6c4a": 34,
+        "763b36": 16,
+        "25956a": 19,
+        "43e1b3": 3,
+        "f7c282": 15,
+        "e19a65": 9,
+        "262b44": 4
+      },
+      "source": {
+        "page": "https://kenney.nl/assets/tiny-dungeon",
+        "url": "https://kenney.nl/media/pages/assets/tiny-dungeon/f8422efb44-1674742415/kenney_tiny-dungeon.zip",
+        "sha256": "c109438ab06f65fd80f9b2686a4cf9c7c11dc64444b47333ec71d602f8bb5fc7",
+        "bytes": 98530,
+        "retrieved": "2026-10-15",
+        "archivePath": "Tiles/tile_0112.png",
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "regions": [
+        {
+          "id": "green-headband",
+          "sourceColors": [
+            "25956a",
+            "43e1b3"
+          ]
+        },
+        {
+          "id": "face",
+          "sourceColors": [
+            "f7c282",
+            "e19a65"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dungeon-knight",
+      "file": "fixtures/dungeon-knight.png",
+      "kind": "real",
+      "intent": "Warm face versus cool helmet, with dark eyes as intentional tiny detail.",
+      "width": 16,
+      "height": 16,
+      "sha256": "e139ab1d56c599af1cea5a955b705ead18a92d41e8e635b550729383cad9de3c",
+      "rgbaSha256": "2246a9523e180717d8d3824c1272e900bcf12154249887f4a413b4612a84991f",
+      "visibleColors": {
+        "3f2631": 84,
+        "8b9bb4": 35,
+        "c0cbdc": 14,
+        "e19a65": 9,
+        "f7c282": 28,
+        "262b44": 4,
+        "763b36": 19,
+        "bd6c4a": 10
+      },
+      "source": {
+        "page": "https://kenney.nl/assets/tiny-dungeon",
+        "url": "https://kenney.nl/media/pages/assets/tiny-dungeon/f8422efb44-1674742415/kenney_tiny-dungeon.zip",
+        "sha256": "c109438ab06f65fd80f9b2686a4cf9c7c11dc64444b47333ec71d602f8bb5fc7",
+        "bytes": 98530,
+        "retrieved": "2026-10-15",
+        "archivePath": "Tiles/tile_0100.png",
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "regions": [
+        {
+          "id": "face",
+          "sourceColors": [
+            "f7c282",
+            "e19a65"
+          ]
+        },
+        {
+          "id": "metal",
+          "sourceColors": [
+            "8b9bb4",
+            "c0cbdc"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dungeon-potion",
+      "file": "fixtures/dungeon-potion.png",
+      "kind": "real",
+      "intent": "Red potion liquid versus pale stopper and bottle shadow.",
+      "width": 16,
+      "height": 16,
+      "sha256": "ad27340925ae7e936788c22cbd0f7d1922ef5bdd21377f916f1be9af6be4312d",
+      "rgbaSha256": "d16c02b070422010931c5112739b8ec655944ac7d764b2687d12a4f8104b1567",
+      "visibleColors": {
+        "3f2631": 72,
+        "bd6c4a": 4,
+        "eaa56c": 4,
+        "8b9bb4": 2,
+        "c0cbdc": 2,
+        "ff706d": 8,
+        "e84537": 18
+      },
+      "source": {
+        "page": "https://kenney.nl/assets/tiny-dungeon",
+        "url": "https://kenney.nl/media/pages/assets/tiny-dungeon/f8422efb44-1674742415/kenney_tiny-dungeon.zip",
+        "sha256": "c109438ab06f65fd80f9b2686a4cf9c7c11dc64444b47333ec71d602f8bb5fc7",
+        "bytes": 98530,
+        "retrieved": "2026-10-15",
+        "archivePath": "Tiles/tile_0115.png",
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "regions": [
+        {
+          "id": "red-liquid",
+          "sourceColors": [
+            "ff706d",
+            "e84537"
+          ]
+        },
+        {
+          "id": "stopper",
+          "sourceColors": [
+            "bd6c4a",
+            "eaa56c"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dungeon-neutral-shield",
+      "file": "fixtures/dungeon-neutral-shield.png",
+      "kind": "real",
+      "intent": "Neutral metal ramp and dark outline; intentional negative against saturated-noise priority.",
+      "width": 16,
+      "height": 16,
+      "sha256": "35af44a6fc76a09e7fe625c0becfeac809360774c6a845ec8024dd8db6f5fc3f",
+      "rgbaSha256": "beca89b697f640c4d3195270de09c221dcb70dd61e935702c9a01014e3862390",
+      "visibleColors": {
+        "3f2631": 60,
+        "8b9bb4": 10,
+        "c0cbdc": 24
+      },
+      "source": {
+        "page": "https://kenney.nl/assets/tiny-dungeon",
+        "url": "https://kenney.nl/media/pages/assets/tiny-dungeon/f8422efb44-1674742415/kenney_tiny-dungeon.zip",
+        "sha256": "c109438ab06f65fd80f9b2686a4cf9c7c11dc64444b47333ec71d602f8bb5fc7",
+        "bytes": 98530,
+        "retrieved": "2026-10-15",
+        "archivePath": "Tiles/tile_0102.png",
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "regions": [
+        {
+          "id": "metal",
+          "sourceColors": [
+            "8b9bb4",
+            "c0cbdc"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "town-water-bucket",
+      "file": "fixtures/town-water-bucket.png",
+      "kind": "real",
+      "intent": "Cyan water inside warm bucket is a distinct material.",
+      "width": 16,
+      "height": 16,
+      "sha256": "3befce5d6373d4315f35eeed22752bb1cf7a2ab5d008ce26dd6b4aebbb278978",
+      "rgbaSha256": "da25bcc3803c7c7fc9cb57a557c93023441c173b683fba3cd9afba49732a264d",
+      "visibleColors": {
+        "3d212d": 70,
+        "bd6c4a": 15,
+        "763b36": 35,
+        "eaa56c": 16,
+        "c1ccdd": 18,
+        "8c9cb5": 46,
+        "be6c49": 4,
+        "76e4ff": 8,
+        "eba66c": 12,
+        "009adc": 22,
+        "51607d": 8
+      },
+      "source": {
+        "page": "https://kenney.nl/assets/tiny-town",
+        "url": "https://kenney.nl/media/pages/assets/tiny-town/a415fbeb49-1735736916/kenney_tiny-town.zip",
+        "sha256": "9768692dccff1d706408a5aedd6ca4f6cd1409506cbc84cb2f862919764be977",
+        "bytes": 182243,
+        "retrieved": "2026-10-15",
+        "archivePath": "Tiles/tile_0104.png",
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "regions": [
+        {
+          "id": "water",
+          "sourceColors": [
+            "76e4ff",
+            "009adc"
+          ]
+        },
+        {
+          "id": "bucket",
+          "sourceColors": [
+            "763b36",
+            "bd6c4a",
+            "be6c49",
+            "eaa56c",
+            "eba66c"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "platformer-pilot",
+      "file": "fixtures/platformer-pilot.png",
+      "kind": "real",
+      "intent": "Dark face inside green visor with pale helmet.",
+      "width": 24,
+      "height": 24,
+      "sha256": "15df14143949310c001b09b2a00ed2278a5a9b4a10edd276af306b77b8c9d658",
+      "rgbaSha256": "ac33445beb9267df4584b36f56f9aae11be807a5f91f2d826a3a698e23368047",
+      "visibleColors": {
+        "346547": 77,
+        "bedef1": 156,
+        "ffffff": 54,
+        "86f6bb": 20,
+        "5ad28c": 76,
+        "434a5f": 10,
+        "34995e": 6
+      },
+      "source": {
+        "page": "https://kenney.nl/assets/pixel-platformer",
+        "url": "https://kenney.nl/media/pages/assets/pixel-platformer/33bb4921eb-1696667883/kenney_pixel-platformer.zip",
+        "sha256": "d01a196dbe3cc964e00d83ba3b987df62f332dc9260c9f941b4fbcc9047130f4",
+        "bytes": 260312,
+        "retrieved": "2026-10-15",
+        "archivePath": "Tiles/Characters/tile_0000.png",
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "regions": [
+        {
+          "id": "green-visor",
+          "sourceColors": [
+            "86f6bb",
+            "5ad28c",
+            "34995e"
+          ]
+        },
+        {
+          "id": "eyes",
+          "sourceColors": [
+            "434a5f"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "platformer-pilot-blink",
+      "file": "fixtures/platformer-pilot-blink.png",
+      "kind": "real",
+      "intent": "Alternate green pilot pose: real frame supplied by creator.",
+      "width": 24,
+      "height": 24,
+      "sha256": "b929b7d7d1c3175a018ff61c1240ceb6250a29ad9388ee4b03d84eedcfdb0a27",
+      "rgbaSha256": "9a7d67855e3360676f68f62f7a06359f207e93449d54db11d1d5065216ce4155",
+      "visibleColors": {
+        "346547": 84,
+        "bedef1": 156,
+        "ffffff": 54,
+        "86f6bb": 20,
+        "5ad28c": 72,
+        "434a5f": 10,
+        "34995e": 4
+      },
+      "source": {
+        "page": "https://kenney.nl/assets/pixel-platformer",
+        "url": "https://kenney.nl/media/pages/assets/pixel-platformer/33bb4921eb-1696667883/kenney_pixel-platformer.zip",
+        "sha256": "d01a196dbe3cc964e00d83ba3b987df62f332dc9260c9f941b4fbcc9047130f4",
+        "bytes": 260312,
+        "retrieved": "2026-10-15",
+        "archivePath": "Tiles/Characters/tile_0001.png",
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "regions": [
+        {
+          "id": "green-visor",
+          "sourceColors": [
+            "86f6bb",
+            "5ad28c",
+            "34995e"
+          ]
+        },
+        {
+          "id": "eyes",
+          "sourceColors": [
+            "434a5f"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "platformer-neutral-pilot",
+      "file": "fixtures/platformer-neutral-pilot.png",
+      "kind": "real",
+      "intent": "Neutral grey helmet/face preserves neutral control.",
+      "width": 24,
+      "height": 24,
+      "sha256": "e719c763aa0a34a5d7a2a2633ddd1c6222ce329ab57cf20c7d379d0b8f2ccc6f",
+      "rgbaSha256": "8ce55b67204769e4d911099c84f2bf4c843c60a0424c6fef5c207f45085dd607",
+      "visibleColors": {
+        "434a5f": 164,
+        "959ab1": 112,
+        "747a90": 22,
+        "dce1e7": 48,
+        "ffffff": 10
+      },
+      "source": {
+        "page": "https://kenney.nl/assets/pixel-platformer",
+        "url": "https://kenney.nl/media/pages/assets/pixel-platformer/33bb4921eb-1696667883/kenney_pixel-platformer.zip",
+        "sha256": "d01a196dbe3cc964e00d83ba3b987df62f332dc9260c9f941b4fbcc9047130f4",
+        "bytes": 260312,
+        "retrieved": "2026-10-15",
+        "archivePath": "Tiles/Characters/tile_0008.png",
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "regions": [
+        {
+          "id": "neutral-face",
+          "sourceColors": [
+            "747a90",
+            "959ab1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "platformer-rocket",
+      "file": "fixtures/platformer-rocket.png",
+      "kind": "real",
+      "intent": "Warm rocket body versus dark nozzle and pale tip.",
+      "width": 24,
+      "height": 24,
+      "sha256": "aca58ddc36d4e8d506111b1e580fc79b17383337b3cec27c28b0e6090435224a",
+      "rgbaSha256": "452675e60f535141096562f0fc10d6ac14dc62798dd79f2c677cada2ae669535",
+      "visibleColors": {
+        "434a5f": 80,
+        "dce1e7": 24,
+        "959ab1": 24,
+        "7e3125": 28,
+        "747a90": 3,
+        "fc683b": 28,
+        "dd442c": 14
+      },
+      "source": {
+        "page": "https://kenney.nl/assets/pixel-platformer",
+        "url": "https://kenney.nl/media/pages/assets/pixel-platformer/33bb4921eb-1696667883/kenney_pixel-platformer.zip",
+        "sha256": "d01a196dbe3cc964e00d83ba3b987df62f332dc9260c9f941b4fbcc9047130f4",
+        "bytes": 260312,
+        "retrieved": "2026-10-15",
+        "archivePath": "Tiles/Characters/tile_0015.png",
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "regions": [
+        {
+          "id": "red-body",
+          "sourceColors": [
+            "fc683b",
+            "dd442c",
+            "7e3125"
+          ]
+        },
+        {
+          "id": "neutral-metal",
+          "sourceColors": [
+            "dce1e7",
+            "959ab1",
+            "747a90"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "platformer-heart",
+      "file": "fixtures/platformer-heart.png",
+      "kind": "real",
+      "intent": "Small warm heart highlight and dark outline.",
+      "width": 18,
+      "height": 18,
+      "sha256": "6b547ef267ee13918a4e45ac8a2a3d0de4fbaef8267459045cf9f8c5e283770e",
+      "rgbaSha256": "f9d7e7d7d59faf1bf8d5e33e166ab504dbb8d921e8d54e722aa82f58d19fe444",
+      "visibleColors": {
+        "7e3125": 78,
+        "fc683b": 34,
+        "dd442c": 18
+      },
+      "source": {
+        "page": "https://kenney.nl/assets/pixel-platformer",
+        "url": "https://kenney.nl/media/pages/assets/pixel-platformer/33bb4921eb-1696667883/kenney_pixel-platformer.zip",
+        "sha256": "d01a196dbe3cc964e00d83ba3b987df62f332dc9260c9f941b4fbcc9047130f4",
+        "bytes": 260312,
+        "retrieved": "2026-10-15",
+        "archivePath": "Tiles/tile_0044.png",
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "regions": [
+        {
+          "id": "heart-highlight",
+          "sourceColors": [
+            "fc683b"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "platformer-axe",
+      "file": "fixtures/platformer-axe.png",
+      "kind": "real",
+      "intent": "Warm wood handle versus neutral metal blade and small red fastening.",
+      "width": 18,
+      "height": 18,
+      "sha256": "590a1609364b960b979f780d207ea8f1f951620fa229c3c8a9d63fd85d099336",
+      "rgbaSha256": "344d89be4a08d099b93c190d717290663e8025733c136faba4faef87bf2582a5",
+      "visibleColors": {
+        "434a5f": 46,
+        "dce1e7": 16,
+        "fb6338": 6,
+        "959ab1": 8,
+        "6f3e43": 37,
+        "f4ac66": 16,
+        "cb815e": 24
+      },
+      "source": {
+        "page": "https://kenney.nl/assets/pixel-platformer",
+        "url": "https://kenney.nl/media/pages/assets/pixel-platformer/33bb4921eb-1696667883/kenney_pixel-platformer.zip",
+        "sha256": "d01a196dbe3cc964e00d83ba3b987df62f332dc9260c9f941b4fbcc9047130f4",
+        "bytes": 260312,
+        "retrieved": "2026-10-15",
+        "archivePath": "Tiles/tile_0066.png",
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "regions": [
+        {
+          "id": "red-fastening",
+          "sourceColors": [
+            "fb6338"
+          ]
+        },
+        {
+          "id": "blade",
+          "sourceColors": [
+            "dce1e7",
+            "959ab1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "real-inventory",
+      "file": "fixtures/real-inventory.png",
+      "kind": "real-montage",
+      "width": 96,
+      "height": 48,
+      "sha256": "1cb29a0f28d91b8de247fe21eecfb545f512b6cd00cac33d53b4fdbca4571086",
+      "rgbaSha256": "362ad811dff608d8bc0def0e6bae2f8fc0e77d9f330cbaf66ea8418ef31bfcbc",
+      "intent": "One shared budget across heterogeneous material sprites: rare water, potion, headband must compete with skin and neutral ramps.",
+      "assembly": [
+        {
+          "id": "dungeon-wizard",
+          "x": 0,
+          "y": 0
+        },
+        {
+          "id": "dungeon-archer",
+          "x": 24,
+          "y": 0
+        },
+        {
+          "id": "dungeon-knight",
+          "x": 48,
+          "y": 0
+        },
+        {
+          "id": "dungeon-potion",
+          "x": 72,
+          "y": 0
+        },
+        {
+          "id": "dungeon-neutral-shield",
+          "x": 0,
+          "y": 24
+        },
+        {
+          "id": "town-water-bucket",
+          "x": 24,
+          "y": 24
+        },
+        {
+          "id": "platformer-pilot",
+          "x": 48,
+          "y": 24
+        },
+        {
+          "id": "platformer-axe",
+          "x": 72,
+          "y": 24
+        }
+      ],
+      "license": "CC0-1.0, derivatives of licensed sources above"
+    },
+    {
+      "id": "owned-knight-a",
+      "file": "fixtures/owned-knight-a.png",
+      "kind": "owned-synthetic",
+      "width": 24,
+      "height": 24,
+      "sha256": "fbe0f27539ac667c61977282e5b481027dbe54cabbd2e3a4eac80d7818c725ea",
+      "intent": "Known red tabard/blue eyes/green gem counterexample. Never replace with only favorable cases.",
+      "license": "Owned research fixture, CC0-1.0",
+      "regions": [
+        {
+          "id": "eyes",
+          "pixels": [
+            [
+              10,
+              7
+            ],
+            [
+              13,
+              7
+            ]
+          ]
+        },
+        {
+          "id": "gem",
+          "pixels": [
+            [
+              4,
+              13
+            ]
+          ]
+        },
+        {
+          "id": "cloth",
+          "rect": [
+            10,
+            11,
+            4,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "id": "owned-knight-b",
+      "file": "fixtures/owned-knight-b.png",
+      "kind": "owned-synthetic",
+      "width": 24,
+      "height": 24,
+      "sha256": "84e4a32b885f9487531af0a80085865f2f294aa278951fcc5f582ab00900ad90",
+      "intent": "Known red tabard/blue eyes/green gem counterexample. Never replace with only favorable cases.",
+      "license": "Owned research fixture, CC0-1.0",
+      "regions": [
+        {
+          "id": "eyes",
+          "pixels": [
+            [
+              10,
+              7
+            ],
+            [
+              13,
+              7
+            ]
+          ]
+        },
+        {
+          "id": "gem",
+          "pixels": [
+            [
+              4,
+              13
+            ]
+          ]
+        },
+        {
+          "id": "cloth",
+          "rect": [
+            10,
+            11,
+            4,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "id": "intentional-eye",
+      "file": "fixtures/intentional-eye.png",
+      "kind": "owned-synthetic",
+      "width": 24,
+      "height": 24,
+      "sha256": "41ba4a98440947290489b62e0d4515d52d4109b9b9dbadf41185a883787e945f",
+      "intent": "The red pixel is a deliberately important indicator.",
+      "license": "Owned research fixture, CC0-1.0",
+      "regions": [
+        {
+          "id": "intentional-eye",
+          "pixels": [
+            [
+              11,
+              9
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "accidental-noise",
+      "file": "fixtures/accidental-noise.png",
+      "kind": "owned-synthetic",
+      "width": 24,
+      "height": 24,
+      "sha256": "41ba4a98440947290489b62e0d4515d52d4109b9b9dbadf41185a883787e945f",
+      "intent": "Exactly identical pixels to intentional-eye, but red is accidental corruption. A histogram algorithm cannot know this difference.",
+      "license": "Owned research fixture, CC0-1.0",
+      "regions": [
+        {
+          "id": "accidental-noise",
+          "pixels": [
+            [
+              11,
+              9
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ramp-control",
+      "file": "fixtures/ramp-control.png",
+      "kind": "owned-synthetic",
+      "width": 24,
+      "height": 24,
+      "sha256": "43f5b731a56ca75e35883c9428653d0a2267c203c59c8c1b8f66db8c5a69d00a",
+      "intent": "Smooth metal ramp without accents: do not spend a budget on rare neutral variation unnecessarily.",
+      "license": "Owned research fixture, CC0-1.0",
+      "regions": [
+        {
+          "id": "ramp-control",
+          "pixels": [
+            [
+              11,
+              9
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "animations": [
+    {
+      "id": "owned-knight-walk",
+      "frames": [
+        "owned-knight-a",
+        "owned-knight-b"
+      ],
+      "delays": [
+        40,
+        160
+      ],
+      "intent": "Unchanged eyes/tabard/body must not flicker between frames."
+    },
+    {
+      "id": "real-pilot-idle",
+      "frames": [
+        "platformer-pilot",
+        "platformer-pilot-blink"
+      ],
+      "delays": [
+        60,
+        140
+      ],
+      "intent": "Creator supplied alternate poses, not generated edits; stable remaining source coordinates must not flicker."
+    }
+  ]
+}
