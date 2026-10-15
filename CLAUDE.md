@@ -109,6 +109,7 @@ Artwork and palette-image import share `image-decode.js`. PNG prefers native
 ImageDecoder with its existing default color management. Proven full-range sRGB
 RGBA/BGRA frames copy native packed bytes without requesting another conversion;
 BGRA swaps red/blue in place in 128 KiB blocks with an 8 ms posted-task target.
+An all-null color space (Firefox: premultiplied BGRA) takes the canvas path.
 All other formats/metadata retain explicit managed RGBA/sRGB copyTo. This avoids
 observed low-alpha rounding from an unnecessary conversion without merging colors
 or bypassing profiles. Capability/errors/transforms fall back to the existing bitmap/canvas

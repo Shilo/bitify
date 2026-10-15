@@ -8,8 +8,9 @@ afterEach(() => vi.unstubAllGlobals());
 const file = (name = 'sprite.png') => ({ name, type: name.endsWith('png') ? 'image/png' : 'image/jpeg', size: 10, stream: vi.fn(() => new ReadableStream()) });
 const pixels = Uint8ClampedArray.of(34, 35, 35, 255, 240, 246, 240, 255, 34, 35, 35, 128, 0, 0, 0, 0);
 const srgb = { fullRange: true, matrix: 'rgb', primaries: 'bt709', transfer: 'iec61966-2-1' };
+const incomplete = { primaries: 'bt709', transfer: 'iec61966-2-1', matrix: 'rgb' };
 function setupNative({ supported = true, copy, decode, construct } = {}) {
-  const frame = { displayWidth: 4, displayHeight: 1, visibleRect: { width: 4, height: 1 }, close: vi.fn(),
+  const frame = { displayWidth: 4, displayHeight: 1, visibleRect: { width: 4, height: 1 }, colorSpace: incomplete, close: vi.fn(),
     copyTo: vi.fn(copy ?? (async data => data.set(pixels))) };
   const decoder = { decode: vi.fn(decode ?? (async () => ({ image: frame }))), close: vi.fn() };
   const Native = vi.fn(function (options) { if (construct) return construct(options); return decoder; });
@@ -45,10 +46,10 @@ describe('shared PNG source decoding', () => {
     expect(native.decoder.close).toHaveBeenCalledOnce(); expect(native.frame.close).toHaveBeenCalledOnce();
   });
   it.each([
-    ['unknown space', 'BGRA', undefined], ['unknown format', null, srgb], ['opaque BGRX', 'BGRX', srgb],
+    ['unknown format', null, srgb], ['opaque BGRX', 'BGRX', srgb],
     ['limited range', 'BGRA', { ...srgb, fullRange: false }], ['P3', 'RGBA', { ...srgb, primaries: 'smpte432' }],
     ['linear transfer', 'BGRA', { ...srgb, transfer: 'linear' }], ['non-RGB matrix', 'BGRA', { ...srgb, matrix: 'bt709' }],
-    ['incomplete metadata', 'BGRA', { primaries: 'bt709', transfer: 'iec61966-2-1', matrix: 'rgb' }],
+    ['incomplete metadata', 'BGRA', incomplete],
   ])('retains explicit managed RGBA conversion for %s', async (_, format, colorSpace) => {
     const native = setupNative(); Object.assign(native.frame, { format, colorSpace }); setupCanvas();
     const image = await decodeImageFile(file());
@@ -57,9 +58,16 @@ describe('shared PNG source decoding', () => {
       { format: 'RGBA', colorSpace: 'srgb', layout: [{ offset: 0, stride: 16 }] });
     expect(createImageBitmap).not.toHaveBeenCalled();
   });
+  it.each([undefined, { primaries: null, transfer: null, matrix: null, fullRange: null }])(
+    'decodes a frame with unknown color space %j through canvas, since its copy may stay premultiplied', async colorSpace => {
+    const native = setupNative(); Object.assign(native.frame, { format: 'BGRA', colorSpace }); const canvas = setupCanvas();
+    expect(await decodeImageFile(file())).toBe(canvas.image);
+    expect(native.frame.copyTo).not.toHaveBeenCalled();
+    expect(native.frame.close).toHaveBeenCalledOnce(); expect(native.decoder.close).toHaveBeenCalledOnce();
+  });
   it.each(['RGBA', 'BGRA', 'unknown'])('retains native visible-rectangle copying for a cropped %s frame', async format => {
     const native = setupNative({ copy: async (data, options) => { data.set(pixels); return options.layout; } });
-    Object.assign(native.frame, { format, colorSpace: format === 'unknown' ? undefined : srgb,
+    Object.assign(native.frame, { format, colorSpace: format === 'unknown' ? incomplete : srgb,
       visibleRect: { x: 3, y: 7, width: 4, height: 1 } }); setupCanvas();
     await decodeImageFile(file());
     expect(native.frame.copyTo.mock.calls[0][1]).toEqual(format === 'unknown'

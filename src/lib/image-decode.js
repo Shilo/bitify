@@ -8,6 +8,10 @@ function nativeSrgb(frame) {
     space.matrix === 'rgb' && space.primaries === 'bt709' && space.transfer === 'iec61966-2-1';
 }
 
+// Firefox reports an all-null color space for premultiplied BGRA frames, and
+// neither copy path unpremultiplies them; drawImage/getImageData does.
+const unknownSpace = frame => ['primaries', 'transfer', 'matrix', 'fullRange'].every(key => frame.colorSpace?.[key] == null);
+
 async function swapRedBlue(pixels, signal) {
   for (let start = 0; start < pixels.length;) {
     const deadline = performance.now() + 8;
@@ -51,7 +55,8 @@ export async function decodeImageFile(file, { signal, maxPixels = Infinity,
         dimensions(width, height);
         // copyTo copies visible pixels, rather than applying presentation transforms.
         // Let drawImage handle any decoder that exposes a transformed PNG frame.
-        if (!frame.rotation && !frame.flip && frame.visibleRect.width === width && frame.visibleRect.height === height) {
+        if (!unknownSpace(frame) && !frame.rotation && !frame.flip &&
+          frame.visibleRect.width === width && frame.visibleRect.height === height) {
           const pixels = new Uint8ClampedArray(width * height * 4);
           const layout = [{ offset: 0, stride: width * 4 }];
           if (nativeSrgb(frame)) {

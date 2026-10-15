@@ -32,7 +32,7 @@ beforeEach(async () => {
   vi.stubGlobal('ImageData', class { constructor(data, width, height) { Object.assign(this, { data, width, height }); } });
   native = vi.fn(function () {
     return { close() {}, async decode() { return { image: { displayWidth: width, displayHeight: height,
-      visibleRect: { width, height }, close() {}, async copyTo(data) { data.set(rgba); } } }; } };
+      visibleRect: { width, height }, colorSpace: { primaries: 'bt709' }, close() {}, async copyTo(data) { data.set(rgba); } } }; } };
   });
   native.isTypeSupported = async () => true;
   vi.stubGlobal('ImageDecoder', native);
@@ -164,7 +164,7 @@ describe('lazy serial image imports', () => {
     const small = rgba.slice(0, 4096 * 4);
     native.mockImplementation(function () {
       return { close() {}, async decode() { return { image: { displayWidth: 64, displayHeight: 64,
-        visibleRect: { width: 64, height: 64 }, close() {}, async copyTo(data) { data.set(small); } } }; } };
+        visibleRect: { width: 64, height: 64 }, colorSpace: { primaries: 'bt709' }, close() {}, async copyTo(data) { data.set(small); } } }; } };
     });
     const expected = await analyzeImportFrames({ frames: [{ original: { width: 64, height: 64, data: small } }] }, 'blue', 200, { cooperative: false });
     const decoded = await api.decodeImportedFile(png(), { source: 'blue', alphaCut: 200 });

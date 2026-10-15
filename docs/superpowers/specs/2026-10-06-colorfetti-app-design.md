@@ -2430,9 +2430,11 @@ when supported. Only packed RGBA/BGRA frames whose metadata proves fullRange tru
 matrix rgb, primaries bt709 and transfer iec61966-2-1 copy native bytes without another
 format/color-space conversion. Requested packed layout is verified. BGRA swaps only
 red/blue in place, yielding through the shared posted-task scheduler after an 8 ms
-target checked between 128 KiB blocks; no second pixel buffer is added. Unknown or
-other formats/spaces retain explicit managed RGBA/sRGB copyTo, preserving profile
-conversion. Default visible-rectangle copying remains intact. No float16 readback
+target checked between 128 KiB blocks; no second pixel buffer is added. A frame whose
+color space reports none of the four fields (Firefox gives premultiplied BGRA there,
+which neither copy unpremultiplies) uses the bitmap/canvas path. Other formats/spaces
+with partial or non-sRGB metadata retain explicit managed RGBA/sRGB copyTo, preserving
+profile conversion. Default visible-rectangle copying remains intact. No float16 readback
 replacement or colorSpaceConversion none is introduced. Native capability,
 decoding/copy errors or presentation transforms fall back
 to the existing color-managed bitmap/canvas path. Other image formats retain that path;
