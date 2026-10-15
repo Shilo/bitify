@@ -29,7 +29,7 @@ All app outputs use actual full-source production quantization: Oklab matching, 
 
 ## Native art results
 
-Smaller point error is better for this metric. Strict/rare centroids and every shared-target swap policy retained the current result in all eight rows, so their error is the Current column. The mean-centroid column is included to show both the apparent numerical gain and its costs.
+Smaller point error is better for this metric. (Status/supersession (Oct 15): Colorfetti's nearest mapping minimizes this Oklab point objective for its palette, so the metric is not neutral between the products.) Strict/rare centroids and every shared-target swap policy retained the current result in all eight rows, so their error is the Current column. The mean-centroid column is included to show both the apparent numerical gain and its costs.
 
 | Source | K | Current | Mean centroid | PixelLab native | Mean centroid previous exact pixels lost |
 |---|---:|---:|---:|---:|---:|

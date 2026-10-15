@@ -59,7 +59,7 @@ Frame/decoder closure and cancellation remain authoritative; a canceled job
 cannot publish pixels or restart through canvas.
 
 `bench/png-import-precision-swap-perf.mjs` measures the actual production reorder
-with a mocked native decoder/copy, independent pixel assertions and three runs
+with a mocked native decoder/copy (and a Node `setImmediate` mock of MessageChannel), independent pixel assertions and three runs
 at 1/4/16 MP. Reorder plus scheduling took 0.9–3.6 / 3.1–5.3 / 12.2–13.8 ms. Each
 16 MP run posted once; the maximum observed synchronous span was 8.2 ms. This is
 an isolated Node desktop cost, not total browser/phone decoding time, a hard task

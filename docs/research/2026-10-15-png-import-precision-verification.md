@@ -90,3 +90,5 @@ Auto fitting was rejected by its prior regression gate; extra presets, locks,
 new dither controls and permanent mobile shortcut rows remain unjustified or
 deliberately deferred. Next useful work is actual Safari/iOS verification and
 evaluated fallback precision, rather than more palette UI.
+
+Status/supersession (Oct 15): the [WebKit fallback decision](2026-10-15-webkit-fallback-decision.md) later evaluated and rejected a WebGL fallback; the precision limit remains. Mac/iOS is outside the current requested scope.

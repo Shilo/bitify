@@ -2,6 +2,8 @@
 
 Date: October 14, 2026. Status: research proposal supported by one original executable experiment; no app changes.
 
+Status/supersession (Oct 15): historical proposal. Current behavior is documented in [palettes](../../palettes.md) and the [design specification](../../superpowers/specs/2026-10-06-colorfetti-app-design.md); its next-step language is not an open task list. Explicit used-color Count and Use N output colors shipped; quick-budget rows and a whole-wall cap were not adopted.
+
 ## Decision to make
 
 Evaluate whether optional quick color budgets, used-color inspection and a whole-wall cap help users finish sprite collections with predictable colors. Keep the existing simple default: Auto, All colors, Oklab and Cleanup Off. Add no permanent scope control unless usability evidence shows a need.

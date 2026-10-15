@@ -205,14 +205,16 @@ approximate a missing shade; it can improve averaged shading while increasing in
 pixel error and changing crisp pixel-art textures. Ordered 2×2, 4×4 and 8×8 patterns are available as optional full-palette controls.
 Error diffusion remains deferred because it can propagate changes through animation frames.
 
-Output pixels are fully opaque or fully transparent. Opacity cut defaults to 128:
+With Opacity **Cut** (default), output pixels are fully opaque or fully transparent; **Keep**
+preserves partial source opacity in PNGs (GIF cannot, so it fails explicitly). Opacity cut defaults to 128:
 source alpha below the cut becomes empty. The range is 1–255, so alpha zero always stays
-empty. Palette settings always offers the compact Oklab / RGB control. Opacity cut appears
+empty. Palette settings always offers the compact Oklab / RGB control. The Cut/Keep row appears
+for partially transparent sources (or while Keep is selected); Opacity cut appears with Cut
 only when an image has partial alpha or the cut has changed. The popup's 16px semibold **Recolor**
 title identifies the settings, with an icon-only Reset button aligned at its right.
-Rows are Max colors, Matching, Cleanup, Dithering, conditional Amount, then
-Opacity cut when applicable. Reset restores Oklab, All, Cleanup Off, Dithering Off,
-Amount 50% and cut
+Rows are Max colors, Matching, Cleanup, Dithering, conditional Dither strength, conditional
+Opacity Cut/Keep, then Opacity cut when applicable. Reset restores Oklab, All, Cleanup Off,
+Dithering Off, Dither strength 50%, Opacity Cut and cut
 128 without changing the selected palette. Neither rule is universally visually best;
 compare with the original, especially when a palette lacks the source's hue. Other color
 spaces remain outside the current controls; see the

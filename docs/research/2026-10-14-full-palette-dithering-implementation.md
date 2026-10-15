@@ -2,7 +2,7 @@
 
 Date: October 14, 2026 (runs continued into October 15 UTC). Research baseline: `061c880`. Production build: `index-BLKNhLPI.js`. Changes remain local until a separate push; pushing main deploys the app.
 
-Optional ordered dithering is implemented for arbitrary full palettes, including two-color and eight-color targets. Off remains the default and preserves nearest output; the existing one-bit styles retain their separate controls. Recolor now offers Off, 2×2, 4×4 and 8×8, with Amount 0–100%, initially 50%. Zero preserves nearest conversion. Settings persist and reset correctly.
+Optional ordered dithering is implemented for arbitrary full palettes, including two-color and eight-color targets. Off remains the default and preserves nearest output; the existing one-bit styles retain their separate controls. Recolor now offers Off, 2×2, 4×4 and 8×8, with Amount 0–100%, initially 50% (relabeled **Dither strength** in e146f83; 50% is a midpoint default, not a calibrated optimum). Zero preserves nearest conversion. Settings persist and reset correctly.
 
 ## Decisions and behavior
 
@@ -51,6 +51,8 @@ Three agents divided kernel implementation, integration and adversarial validati
 Two test issues were corrected without changing production behavior: invisible RGB in transparent PNG entries, and an older browser harness starting a second asynchronous import before the first appeared. The latter now waits for publication and checks ZIP order against the wall captured at the gesture; independent pixel, metadata and baseline byte checks remain. A family-switch harness wait was also added for the Svelte DOM update. Browser benchmark routing initially omitted a transitive import; that harness route was fixed before collecting the completed timing reports.
 
 ## Next useful work
+
+Status/supersession (Oct 15): historical list. Count and ENDESGA 8 shipped; direct-K fitting was rejected; locks and quick budgets were deferred. See the [remaining-work audit](2026-10-15-palette-remaining-audit.md).
 
 1. Add actual used-color counts and quick 2/4/8/16 budgets with clear per-image versus collection wording. Avoid scans on hover.
 2. Improve reuse: save the used palette, export palette strips/GPL, and compare one chromatic eight-color preset on real art before adding it. Keep the palette rail focused.

@@ -2,6 +2,8 @@
 
 Date: October 14, 2026. Status: current-code audit, independent sources, original synthetic measurements and implementation proposals. No production changes.
 
+Status/supersession (Oct 15): historical proposal. Current behavior is documented in [palettes](../../palettes.md) and the [design specification](../../superpowers/specs/2026-10-06-colorfetti-app-design.md); its next-step language is not an open task list. Used-color Count shipped; locks remain deferred and direct generation at K was not adopted.
+
 ## Decision
 
 Retain Oklab nearest matching as the default. The most useful next improvements are explicit target-color locks, optional direct generation at a requested low color count, a visible actual used-color count, and a clear conversion-scope choice for related assets. A replacement distance formula alone cannot preserve semantic details or compensate for a target palette that lacks useful hues.

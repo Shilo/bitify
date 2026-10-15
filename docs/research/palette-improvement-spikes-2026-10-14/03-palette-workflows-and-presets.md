@@ -2,6 +2,8 @@
 
 Date: October 14, 2026. Status: one completed original synthetic preset comparison plus research proposals; no app behavior changed.
 
+Status/supersession (Oct 15): historical proposal. Current behavior is documented in [palettes](../../palettes.md) and the [design specification](../../superpowers/specs/2026-10-06-colorfetti-app-design.md); its next-step language is not an open task list. The rail now has eleven curated presets including ENDESGA 8, and Lospec import accepts full palette URLs (not bare slugs).
+
 ## Decision to make
 
 Find the smallest improvement to palette discovery, reference matching and exchange that makes an eight-color sprite workflow easier without overloading the dock. Prefer evaluating one chromatic eight-color preset and a direct “Use colors from this image” flow before expanding the rail into a large catalog.

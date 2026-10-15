@@ -13,10 +13,10 @@ each visible source RGB to the nearest selected color using Oklab or RGB. Option
 dithering can mix those allowed colors in a repeating pattern. With **Max colors: All**,
 **Cleanup: Off** and **Dithering: Off** (defaults), the nearest matching path is unchanged.
 Exact active-palette RGB matches stay exact with dithering enabled too. It accepts 1–256 unique opaque colors; using a palette does not
-guarantee every color appears in an image. Output alpha stays binary, with a separate
-Opacity cut of 1–255 (128 by default). Its settings control offers **Max colors**, **Matching:
+guarantee every color appears in an image. With Opacity Cut (default), output alpha is binary, using a separate
+Opacity cut of 1–255 (128 by default); Keep preserves partial alpha in PNGs. Its settings control offers **Max colors**, **Matching:
 Oklab / RGB**, **Cleanup: Off / On** and **Dithering: Off / 2×2 / 4×4 / 8×8**, in that order.
-**Dither strength** appears only for an enabled pattern; Opacity cut follows for partially transparent sources or a changed cut.
+**Dither strength** appears only for an enabled pattern; Opacity Cut/Keep follows for partially transparent sources, then Opacity cut (Cut only) for partial sources or a changed cut.
 Oklab approximates perceived differences; RGB compares encoded sRGB channel values.
 The maximum is optional: drag its slider or enter a number from 2 up to the active palette's
 color count. The slider updates after a 200ms pause or release; number edits apply when
@@ -40,7 +40,7 @@ each replacement's added color error. Decisions use the full source;
 previews sample those decisions and exports use them at original size. Animations keep a
 replacement only where every frame has the same nearest color and proposes the same
 replacement. This prevents added fixed-coordinate color-label changes, but leaves moving
-noise untouched. Cleanup preserves binary alpha and the selected palette/subset. Its
+noise untouched. Cleanup leaves alpha unchanged and preserves the selected palette/subset. Its
 compatibility/error gates use Oklab even when Matching is RGB. See the
 [cleanup research and limitations](research/2026-10-12-one-pixel-cleanup.md).
 

@@ -2,6 +2,8 @@
 
 Date: October 14, 2026. Status: original executable experiments and proposed product contract; no production changes.
 
+Status/supersession (Oct 15): historical proposal. Current behavior is documented in [palettes](../../palettes.md) and the [design specification](../../superpowers/specs/2026-10-06-colorfetti-app-design.md); its next-step language is not an open task list. Shipped dithering is ordered only (Off / 2×2 / 4×4 / 8×8 with Dither strength); diffusion stayed deferred.
+
 ## Decision
 
 Add an optional full-palette dithering workflow only after a bounded implementation and sprite/animation evaluation. Keep **None** as the default. A fixed ordered pattern is the best first candidate for animation predictability; serpentine error diffusion is a useful still-image alternative. Neither is uniformly better than nearest matching, even at eight colors.
@@ -70,7 +72,7 @@ Visual inspection of the contact sheet confirms that dithering fills the flat sp
 
 The first ordered prototype projects a source onto every target-color pair and picks a continuous mixture with a contrast penalty. A 4×4 rank matrix can only realize multiples of 1/16. For dark colors it selected very small fractions of a distant bright endpoint, which the matrix then rendered as entirely dark. The revised prototype rounds mixture fractions to the actual grid and scores expected point distortion as a secondary penalty. It fixes this specific grayscale failure, but is still a pair-mixture heuristic with conspicuous colored patterns.
 
-For the 128×64 16-color ramp, the recorded medians were approximately 0.87 ms nearest, 233 ms naive pair, **946 ms grid-aware pair**, 14.2 ms linear diffusion and 13.5 ms Oklab diffusion. The grid-aware exhaustive implementation is rejected for production. Repeated-color sprites are much cheaper than ramps because pair lookup is memoized, but a fast sprite case does not make the method safe for arbitrary imported artwork. A future ordered kernel needs a bounded candidate set, cached source decisions and measured error against the exhaustive reference.
+For the 128×64 16-color ramp, the recorded medians were approximately 0.87 ms nearest, 233 ms naive pair, **946 ms grid-aware pair** (an October 15 rerun on the same machine measured about 240–290 ms for both exhaustive variants; these timings are load-sensitive), 14.2 ms linear diffusion and 13.5 ms Oklab diffusion. The grid-aware exhaustive implementation is rejected for production. Repeated-color sprites are much cheaper than ramps because pair lookup is memoized, but a fast sprite case does not make the method safe for arbitrary imported artwork. A future ordered kernel needs a bounded candidate set, cached source decisions and measured error against the exhaustive reference.
 
 The flat sprite’s research PNG grew from 210 bytes nearest to 290 bytes ordered and 1,057 bytes linear diffusion. The gray ramp grew from 275 to 384 and 1,558 bytes respectively. This supports measuring export size alongside visual quality rather than promising that reduced colors always mean a smaller file.
 

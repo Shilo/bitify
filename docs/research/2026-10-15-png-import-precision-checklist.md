@@ -25,4 +25,4 @@ the exact final build, native output hashes and remaining platform limits.
 The tested float16 alternative is rejected: it is exact for the desktop fixtures
 but introduces Android RGB errors, including opaque pixels. Windows WebKit's
 canvas fallback precision remains a separate open limitation; the native-only
-repair intentionally does not claim to fix browsers lacking ImageDecoder.
+repair intentionally does not claim to fix browsers lacking ImageDecoder. Investigated and left unchanged in the [WebKit fallback decision](2026-10-15-webkit-fallback-decision.md).

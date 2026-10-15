@@ -8,16 +8,16 @@ Copy writes one full-resolution converted PNG, regardless of Original comparison
 
 The current source implements that contract as follows:
 
-- [App Copy](../../src/App.svelte:818) captures the immutable conversion request before work begins. It passes `during(...)` directly into `copyOne`; there is no awaited decode/conversion before requesting the native clipboard write. Large images can show the busy message while the supplied promise resolves.
-- [The PNG/clipboard boundary](../../src/lib/save.js:239) uses the production direct PNG encoder, wraps the result as `image/png` and writes one `ClipboardItem` whose value is the promised Blob. It does not use canvas encoding or replace native clipboard methods.
-- [Full-palette still conversion](../../src/lib/palette-state.js:42) retains source/frame references and resolves the captured Auto palette, cap and Cleanup using the whole source asset. For a GIF, `still:true` emits frame0 only after preparing the whole-animation subset and Cleanup. Fitting frame0 independently is an incorrect oracle for GIF Copy.
-- Palette Keep/Cut, cutoff, matching, cap, Cleanup, dither pattern and strength participate in [the captured settings](../../src/lib/palette-state.js:31). The legacy 1-bit path captures its colors/style/settings independently. Copy is blocked while its palette preparation is unavailable or failed.
+- [App Copy](../../src/App.svelte#L818) captures the immutable conversion request before work begins. It passes `during(...)` directly into `copyOne`; there is no awaited decode/conversion before requesting the native clipboard write. Large images can show the busy message while the supplied promise resolves.
+- [The PNG/clipboard boundary](../../src/lib/save.js#L247) uses the production direct PNG encoder, wraps the result as `image/png` and writes one `ClipboardItem` whose value is the promised Blob. It does not use canvas encoding or replace native clipboard methods.
+- [Full-palette still conversion](../../src/lib/palette-state.js#L42) retains source/frame references and resolves the captured Auto palette, cap and Cleanup using the whole source asset. For a GIF, `still:true` emits frame0 only after preparing the whole-animation subset and Cleanup. Fitting frame0 independently is an incorrect oracle for GIF Copy.
+- Palette Keep/Cut, cutoff, matching, cap, Cleanup, dither pattern and strength participate in [the captured settings](../../src/lib/palette-state.js#L36). The legacy 1-bit path captures its colors/style/settings independently. Copy is blocked while its palette preparation is unavailable or failed.
 - A tile's desktop Copy, Preview's Copy and the touch Image actions Copy reach the same `copy(item)` operation. The touch sheet closes synchronously before calling it; no asynchronous wait is inserted ahead of clipboard write.
-- [Ctrl/Cmd+C](../../src/App.svelte:937) copies the first wall item only when there is no selected text, no focused text/number input and no open dialog. Repeat, Shift and Alt variants do not invoke this shortcut. A Preview or palette editor is a dialog, so its explicit Copy/text controls own interaction there.
+- [Ctrl/Cmd+C](../../src/App.svelte#L937) copies the first wall item only when there is no selected text, no focused text/number input and no open dialog. Repeat, Shift and Alt variants do not invoke this shortcut. A Preview or palette editor is a dialog, so its explicit Copy/text controls own interaction there.
 
-The wall [paste handler](../../src/App.svelte:923) adds actual `clipboardData.files` through normal image import; it does not poll or programmatically read the clipboard. Other open dialogs block wall paste. Plain text/HTML/URLs without clipboard files are not a wall image import, and no extra URL fetch is introduced by Paste.
+The wall [paste handler](../../src/App.svelte#L923) adds actual `clipboardData.files` through normal image import; it does not poll or programmatically read the clipboard. Other open dialogs block wall paste. Plain text/HTML/URLs without clipboard files are not a wall image import, and no extra URL fetch is introduced by Paste.
 
-The [palette editor handler](../../src/PaletteImport.svelte:199) stops propagation. If a clipboard file exists, it prevents default and imports the first file into the shared palette draft. An entered name and chosen Image/Paste/Add method remain intact; the draft's colors are replaced after successful extraction. Image alpha becomes opaque palette RGB according to palette-import rules, so palette extraction is a different alpha contract from importing artwork. Plain text has no file, so ordinary Name/HEX textarea paste remains native text insertion. It does not submit or Save the palette automatically.
+The [palette editor handler](../../src/PaletteImport.svelte#L199) stops propagation. If a clipboard file exists, it prevents default and imports the first file into the shared palette draft. An entered name and chosen Image/Paste/Add method remain intact; the draft's colors are replaced after successful extraction. Image alpha becomes opaque palette RGB according to palette-import rules, so palette extraction is a different alpha contract from importing artwork. Plain text has no file, so ordinary Name/HEX textarea paste remains native text insertion. It does not submit or Save the palette automatically.
 
 ## Browser and OS requirements
 
@@ -46,7 +46,7 @@ Use only the synthetic/owned fixtures already used for export verification. Copy
 | Palette image paste | With an entered name and selected Paste method, paste the owned copied image into the palette editor | First file replaces draft colors, name/method stay, wall item count does not change; palette entries are opaque RGB |
 | Dialog isolation | Paste image while Help/Reset/Preview dialog owns focus | No wall import; closing the dialog restores normal wall paste |
 
-If initial copy/paste succeeds, add one bounded asynchronous ownership case using an owned ≥2MP source: initiate Copy, immediately change settings, then decode the actual pasted image against the original captured request. The 50ms busy defer is inside the promised image, not ahead of the clipboard write. Existing payload/snapshot tests already cover the computation; this case tests whether the native promise route survives that delay.
+If initial copy/paste succeeds, add one bounded asynchronous ownership case using an owned ≥2MP source: initiate Copy, immediately change settings, then decode the actual pasted image against the original captured request. The 50ms busy defer is inside the promised image, not ahead of the clipboard write. Existing payload/snapshot tests already cover the computation; this case tests whether the native promise route survives that delay. (Not performed; the final verification records large delayed native snapshots as outside scope.)
 
 Before pointer Copy, close Recolor or another floating panel explicitly. The existing outside-press rule consumes the press that dismisses it; that is not a clipboard failure. The same distinction was verified for native Save in the preceding acceptance pass.
 
@@ -110,6 +110,8 @@ The justified product change is smaller: when Palette mode uses Keep and the exi
 ## Remaining work after the checklist audit
 
 The earlier [palette follow-up checklist](2026-10-15-palette-follow-up-checklist.md) correctly describes its frozen-build acceptance and explicitly leaves native clipboard readback open. The [clipboard checklist](2026-10-15-clipboard-checklist.md) owns that continuation. Keep those scopes distinct rather than relabeling previous intercepted clipboard payload tests as OS delivery.
+
+Status/supersession (Oct 15): historical. The steps below were completed later; see the [final verification](2026-10-15-clipboard-verification.md).
 
 The remaining actionable steps are narrow: finish native Copy/Paste on Codex Browser with the correct currently copied fixture, retain the completed Android transfers and failed carrier gate, and verify the `256ad1e` build's affected success/failure paths plus the minimal conditional Help guidance. Automation's virtual clipboard and a manual OS paste must not be treated as the same channel without matching source/dimensions/native payload evidence. A stale128×64 paste is not proof of a current 32×24 GIF-frame copy.
 

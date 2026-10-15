@@ -2301,8 +2301,8 @@ colors removes the masks/chevrons and exposes a normal scrollbar.
 The 1-bit header keeps its three-way Both/None switch. The Palette header instead has
 Import and Edit icon buttons with accessible labels and shared tooltips. Its rail starts
 with Auto directly followed by Resurrect 64 without a divider, then ENDESGA 32,
-PICO-8 (16), DawnBringer 16, Grayscale 8,
-Ice Cream GB (4), Game Boy green (4), Glow (2) and Paper (2), then a
+PICO-8 (16), DawnBringer 16, ENDESGA 8, Grayscale 8,
+Ice Cream GB (4), Game Boy green (4), Black & white (2), Glow (2) and Paper (2), then a
 divider and saved/session palettes. Preset attribution lives with each immutable record
 and in [palettes.md](../../palettes.md). Game Boy green is explicitly an LCD-inspired RGB
 interpretation. Editing a preset or session palette creates a named copy.

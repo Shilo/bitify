@@ -1,7 +1,7 @@
 # Native PNG fallback candidate
 
 **Do not ship this candidate.** Three fresh Windows WebKit browsers reproduced
-133/135/147 ms synchronous context creation calls, even for a tiny sprite.
+133/135/147 ms synchronous context creation calls with the earlier helper revision (139/140/141 ms with the final streamed helper, below), even for a tiny sprite.
 Posted boundaries give input a turn before those calls; they cannot remove the
 native stall. This fails the user's conditional no-regression gate. No production
 parser or decoder integration has been added. The
@@ -105,7 +105,7 @@ solve all bounds: its documented output buffer truncates excess output, and its
 synchronous operation still consumes CPU on an inflation bomb. Native deflate
 streams validate checksum/trailing input, but browser internal memory is not an
 application-level hard bound. No inflater or custom PNG pixel decoder is proposed
-for shipping while this native alternative is under evaluation.
+for shipping; the native alternative was also rejected (see the [decision](../docs/research/2026-10-15-webkit-fallback-decision.md)).
 
 Primary references: [PNG Third Edition](https://www.w3.org/TR/png-3/),
 [Compression Standard](https://compression.spec.whatwg.org/),

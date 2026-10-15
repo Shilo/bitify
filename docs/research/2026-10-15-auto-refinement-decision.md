@@ -32,6 +32,8 @@ safeguard is not simply disabled.
 | Actual dithering/Cleanup interactions | 140 setting cases; 26 mean-candidate comparisons worsen eligible 4×4 block tone; permissive refinement can also change Cleanup decisions | A nearest-point guard alone does not validate downstream behavior |
 | Current versus PixelLab native item sheet and armor, K2/4/8/16 | Current has lower Oklab point error in 7/8 cases; PixelLab wins armor K4 by approximately 0.27% | Preserve both favorable and adverse examples; no universal quality claim |
 
+Status/supersession (Oct 15): the strict guard requires no error increase for any visible source RGB, a Pareto condition almost any palette change fails by construction; its zero acceptances reflect the gate, not proof that no better palette exists. The no-ship decision rests on shared-target identity, exact-pixel losses and the requested no-regression condition. The point-error comparison against the service uses the Oklab objective that Colorfetti's nearest mapping minimizes, so it is not neutral between the products.
+
 The [refinement study](2026-10-15-auto-refinement-spike.md) contains the expanded
 corpus, methods, exact fixtures and limitations. It covers thirteen source items,
 including real art, alpha boundaries, rare details, gamut/gradient inputs,

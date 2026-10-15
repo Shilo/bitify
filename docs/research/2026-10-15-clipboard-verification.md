@@ -5,7 +5,7 @@ fixtures/Android, and independent adversarial review. No push or deployment.
 
 ## Outcome and changes
 
-Native image delivery is verified on Codex Browser and the USB Pixel 8 Pro.
+Native image delivery is verified for one human-assisted Palette Keep transfer on Codex Browser and four cases on the USB Pixel 8 Pro.
 Delivery does **not** guarantee exact RGB values in translucent pixels. The
 application's direct PNG encoder preserves its converted pixels; the native
 clipboard can change them. Save remains the exact converted-PNG route.
