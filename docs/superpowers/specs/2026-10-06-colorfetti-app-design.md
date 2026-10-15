@@ -1,5 +1,21 @@
 # Colorfetti design
 
+## Output color inspection — October 14, 2026
+
+Palette mode offers Count output colors in image Preview and touch Image actions.
+This explicit operation uses full-source export conversion, counting unique RGB
+colors after limiting, Cleanup and dithering. Fully transparent pixels are excluded;
+animations count the union of every frame. Results appear beside the dimensions,
+with a tooltip identifying converted output, including while Original is shown.
+Small captions truncate rather than widen the wall. Counting is not started by
+hovering, playback or displaying tiles. One tiny result per item is retained;
+source/settings changes and removal cancel pending work and clear the result.
+Auto identity uses its captured whole-wall request, not retained preview swatches.
+Pending and retry states never report a partial count or block independent Save.
+All-transparent fixed targets report zero. Empty Auto still uses its existing
+no-visible-colors state. Count may repeat conversion before a later Save; it retains
+no converted frames and does not change file outputs.
+
 ## Curated palette additions — October 14, 2026
 
 The Palette rail has eleven curated presets, adding ENDESGA 8 (`preset-edg8`)

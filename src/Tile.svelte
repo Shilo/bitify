@@ -19,7 +19,7 @@
   // Without `onremove` the tile is a preview only and has no buttons.
   // `set` is the style's settings. `budget` is set while one of their sliders is being dragged:
   // the milliseconds this tile may take to convert its image after each move.
-  let { item, first, second, style, set, family = 'two-color', palette, palettePending = false, analysisPending = false, alphaCut = 128, metric = 'oklab', maxColors = 0, cleanup = false, dither = 'none', ditherStrength = 50, active = true, exportDisabled = false, onpalettestatus, paletteRetry = 0, flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false, exportDrag } = $props();
+  let { item, first, second, style, set, family = 'two-color', palette, palettePending = false, analysisPending = false, alphaCut = 128, metric = 'oklab', maxColors = 0, cleanup = false, dither = 'none', ditherStrength = 50, colorUsageLabel = '', active = true, exportDisabled = false, onpalettestatus, paletteRetry = 0, flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false, exportDrag } = $props();
   const failureOwner = Symbol('palette preview surface');
   const reportStage = (type, stage, inputs, attempt, error) => untrack(() => onpalettestatus?.({ type, owner: failureOwner, stage, inputs, attempt, error }));
   $effect(() => () => onpalettestatus?.({ type: 'remove', owner: failureOwner }));
@@ -353,13 +353,13 @@
         <button type="button" class="caption-preview" onclick={e => activate(e.currentTarget)} aria-label="Preview {item.name}" aria-haspopup="dialog">
           <span class="caption-details">
             <span class="name" use:tooltip={item.name}>{item.name}</span>
-            <span class="dim">{item.img.w}<span class="by">×</span>{item.img.h}{#if failureDescription}<span class="palette-failure-mark" use:tooltip={failureDescription}> · Retry needed</span>{/if}</span>
+            <span class="dim">{item.img.w}<span class="by">×</span>{item.img.h}{#if colorUsageLabel}<span use:tooltip={colorUsageLabel + (item.frames ? '. Converted output across all animation frames.' : '. Converted full-resolution output.')}> · {colorUsageLabel}</span>{/if}{#if failureDescription}<span class="palette-failure-mark" use:tooltip={failureDescription}> · Retry needed</span>{/if}</span>
           </span>
         </button>
       {:else}
         <span class="caption-details">
           <span class="name" use:tooltip={item.name}>{item.name}</span>
-          <span class="dim">{item.img.w}<span class="by">×</span>{item.img.h}{#if failureDescription}<span class="palette-failure-mark" use:tooltip={failureDescription}> · Retry needed</span>{/if}</span>
+          <span class="dim">{item.img.w}<span class="by">×</span>{item.img.h}{#if colorUsageLabel}<span use:tooltip={colorUsageLabel + (item.frames ? '. Converted output across all animation frames.' : '. Converted full-resolution output.')}> · {colorUsageLabel}</span>{/if}{#if failureDescription}<span class="palette-failure-mark" use:tooltip={failureDescription}> · Retry needed</span>{/if}</span>
         </span>
       {/if}
       {#if onremove}

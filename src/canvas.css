@@ -19,6 +19,7 @@
 :root .image-viewer[open] { display: flex; flex-direction: column; }
 :root .image-viewer::backdrop { background: var(--gl-surface-overlay); }
 :root .viewer-workspace { position: absolute; z-index: 2; inset: auto calc(env(safe-area-inset-right,0px) + 24px) calc(env(safe-area-inset-bottom,0px) + 20px) calc(env(safe-area-inset-left,0px) + 24px); display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 8px; pointer-events: none; }
+:root .tile .cap .dim { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 :root .viewer-workspace > * { pointer-events: auto; }
 :root .viewer-tools { box-sizing: border-box; height: var(--control-shell); display: flex; align-items: center; gap: 2px; padding: 5px; margin: 0; border-radius: 999px; background: var(--surface); color: var(--fg); border: 1px solid var(--canvas-border); box-shadow: var(--canvas-shadow); -webkit-backdrop-filter: none; backdrop-filter: none; }
 :root .viewer-tools .btn { box-sizing: border-box; height: var(--control-size); min-height: var(--control-size); padding: 0 12px; background: transparent; border-color: transparent; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; transform: none; }

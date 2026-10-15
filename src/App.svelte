@@ -688,6 +688,50 @@
   // after it is asked for, and what it saves is what was on screen then, whatever is changed since.
   const asking = () => conversionSnapshot({ family, palette: fullPalette, alphaCut, metric, maxColors, cleanup, dither, ditherStrength,
     generated: family === 'full-palette' && generatedActive ? generatedRequest : null, first: ink[0], second: ink[1], style, set });
+  const usageKey = $derived.by(() => {
+    const snapshot = asking();
+    // Auto resolves colors from this captured wall; retained preview swatches
+    // and its display name are not conversion inputs during generation.
+    return JSON.stringify({ ...snapshot, name: undefined, colors: snapshot.generated ? undefined : snapshot.colors, generated: snapshot.generated?.key });
+  });
+  let colorUsage = $state.raw(new Map());
+  const usageFor = item => {
+    const record = colorUsage.get(item.id);
+    return family === 'full-palette' && record?.item === item && record.key === usageKey ? record : null;
+  };
+  const usageLabel = item => {
+    const record = usageFor(item);
+    return record?.status === 'pending' ? 'Counting colors…' : record?.status === 'error' ? 'Count unavailable · Retry'
+      : record?.result ? `${record.result.count} ${record.result.count === 1 ? 'color' : 'colors'} used` : '';
+  };
+  $effect(() => {
+    const key = usageKey, live = items, records = colorUsage;
+    const stale = [...records].filter(([, record]) => record.key !== key || !live.includes(record.item));
+    if (!stale.length) return;
+    const next = new Map(records);
+    for (const [id, record] of stale) { record.controller?.abort(); next.delete(id); }
+    colorUsage = next;
+  });
+  $effect(() => () => { for (const record of colorUsage.values()) record.controller?.abort(); });
+  async function countColors(item) {
+    if (family !== 'full-palette' || generatedUnavailable || itemPaletteFailed(item) || !items.includes(item)) return;
+    const previous = usageFor(item);
+    if (previous?.status === 'pending' || previous?.result) return;
+    const snapshot = asking(), key = usageKey, controller = new AbortController();
+    const record = { item, key, controller, status: 'pending' };
+    colorUsage = new Map(colorUsage).set(item.id, record);
+    const publish = value => {
+      if (!controller.signal.aborted && key === usageKey && items.includes(item) && colorUsage.get(item.id) === record)
+        colorUsage = new Map(colorUsage).set(item.id, { item, key, ...value });
+    };
+    try {
+      const { collectPaletteUsage } = await import('./lib/palette-usage.js');
+      const result = await collectPaletteUsage(item, snapshot, { signal: controller.signal });
+      publish({ result, status: 'ready' });
+    } catch (error) {
+      if (error.name !== 'AbortError') publish({ status: 'error' });
+    }
+  }
   const about = (item, asked) => ({ name: item.name, w: item.img.w, h: item.img.h, first: asked.first, second: asked.second });
   const still = (item, asked) => asked.family === 'full-palette' ? fullPaletteImage(item, asked, { still: true }) : ({ ...about(item, asked), mask: mask(item.img, asked.style, asked.set) });
   const converted = (item, asked, options) =>
@@ -920,7 +964,7 @@
          the demo when its source changes; real images retain their ID and caches. -->
     {#each canvasItems as item (item.id === 0 ? item.original : item.id)}
       <Tile {item} inset={IMAGE_INSET} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} palettePending={generatedPending} {alphaCut} {metric} {maxColors} {cleanup} {dither} {ditherStrength} onpalettestatus={reportPaletteStage} {paletteRetry}
-        analysisPending={needsAnalysis(item)} flipped={effectiveOriginal} comparing={previewing} active={!viewed} exportDisabled={generatedUnavailable || itemPaletteFailed(item)} budget={dragging ? DRAG_MS / canvasItems.length : 0}
+        colorUsageLabel={usageLabel(item)} analysisPending={needsAnalysis(item)} flipped={effectiveOriginal} comparing={previewing} active={!viewed} exportDisabled={generatedUnavailable || itemPaletteFailed(item)} budget={dragging ? DRAG_MS / canvasItems.length : 0}
         oncompare={compareHold} onopen={items.length ? openImage : undefined}
         exportDrag={items.length ? dragExports : undefined}
         onactivate={items.length ? undefined : () => picker.click()}
@@ -935,6 +979,7 @@
 
 {#if viewed}
   <ImageViewer item={viewed} analysisPending={needsAnalysis(viewed)} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} palettePending={generatedPending} {alphaCut} {metric} {maxColors} {cleanup} {dither} {ditherStrength} onpalettestatus={reportPaletteStage} {paletteRetry} {busy} {message} flipped={viewInitialOriginal}
+    colorUsageLabel={usageLabel(viewed)} oncountcolors={family === 'full-palette' && viewed.id !== 0 ? () => countColors(viewed) : undefined} countingColors={usageFor(viewed)?.status === 'pending'}
     paletteFailureNotice={failureNotice(currentPaletteFailures.filter(f => f.inputs.item === viewed))} onpaletteretry={retryPaletteFailures} exportDisabled={generatedUnavailable || itemPaletteFailed(viewed)} exportDrag={viewed.id === 0 ? undefined : dragExports}
     onsave={viewed.id === 0 ? undefined : () => save(viewed)}
     oncopy={viewed.id === 0 ? undefined : () => copy(viewed)}
@@ -973,6 +1018,9 @@
     <button class="btn glass-btn glass-btn--primary" disabled={generatedUnavailable || itemPaletteFailed(shared)} onclick={() => { const item = shared; sheet.close(); save(item); }}><PixelIcon name="save" />Save</button>
     <button class="btn glass-btn" disabled={generatedUnavailable || itemPaletteFailed(shared)} onclick={() => { const item = shared; sheet.close(); copy(item); }}><PixelIcon name="copy" />Copy</button>
     <button class="btn glass-btn" onclick={previewShared}><PixelIcon name="expand" />Preview</button>
+    {#if family === 'full-palette'}
+      <button class="btn glass-btn" disabled={generatedUnavailable || itemPaletteFailed(shared) || usageFor(shared)?.status === 'pending'} onclick={e => { e.stopPropagation(); countColors(shared); }}>{usageLabel(shared) || 'Count output colors'}</button>
+    {/if}
     <button class="btn glass-btn danger" onclick={async () => {
       const item = shared;
       sheet.close();
