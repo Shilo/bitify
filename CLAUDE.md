@@ -28,6 +28,12 @@ it never silently thresholds Keep. All snapshot/cache/drag identities include mo
 The cutoff slider is Cut-only and guards detached native gestures. See the working
 checklist docs/research/2026-10-14-palette-improvements-todo.md for evidence and limits.
 
+Full-palette thumbnails/editor swatches and New/Edit color previews paint directly
+to tiny canvases (1×1 solids; 100×100 at-most-16-color overview). This prevents
+observed Brave forced-dark CSS/SVG color substitutions. No UI-canvas readback or
+encoding enters import/export; palette values and 1-bit gradients/glyphs stay intact.
+Native inputs retain their hit targets beneath pointer-inert decorative canvases.
+
 Optional full-palette ordered dithering offers Off/2×2/4×4/8×8 and Dither strength 0–100%
 (remembered 50%); fresh and Reset default to Off. The settings heading and Help
 step are Recolor. Source-coordinate Bayer patterns preserve alpha and exact active

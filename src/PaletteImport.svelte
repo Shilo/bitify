@@ -9,6 +9,7 @@
   import { extractPalette, parsePaletteText } from './lib/palette-import.js';
   import { normalizeColors, validateName } from './lib/palette-library.js';
   import { canonicalLospecUrl, looksLikeLospecReference } from './lib/palette-lospec-url.js';
+  import { paintPaletteSwatch } from './lib/palette-preview.js';
 
   let { request = {}, onsave, ondelete, onreload, onuse, onclose } = $props();
   const initial = untrack(() => request);
@@ -211,12 +212,12 @@
     {@const index = page * pageSize + offset}
     <button class="palette-review-swatch" class:is-selected={selected.includes(index)} style:background-color={color}
       aria-label={'Select color ' + (index + 1) + ' ' + color} aria-pressed={selected.includes(index)} disabled={!!busy} onclick={() => toggle(index)}
-      use:tooltip={color + '. Select to edit or remove.'}></button>
+      use:tooltip={color + '. Select to edit or remove.'}><canvas aria-hidden="true" use:paintPaletteSwatch={color}></canvas></button>
   {/each}
   </div>
   {#if pages > 1}<nav class="palette-review-pages" aria-label="Color pages"><button class="btn glass-btn" disabled={page === 0} onclick={() => page--}>Previous</button><span>{page + 1} / {pages}</span><button class="btn glass-btn" disabled={page >= pages - 1} onclick={() => page++}>Next</button></nav>{/if}
   {#if selected.length}<div class="palette-editor-tools">
-  {#if selected.length === 1}<label class="palette-color-label">Edit color<input type="color" value={colors[selected[0]]} onchange={event => editColor(event.currentTarget.value, event.currentTarget)} disabled={!!busy} /></label>{/if}
+  {#if selected.length === 1}<label class="palette-color-label">Edit color<span class="palette-color-input" class:is-disabled={!!busy}><input type="color" value={colors[selected[0]]} onchange={event => editColor(event.currentTarget.value, event.currentTarget)} disabled={!!busy} /><canvas aria-hidden="true" use:paintPaletteSwatch={colors[selected[0]]}></canvas></span></label>{/if}
     <button class="btn glass-btn danger" onclick={removeSelected} disabled={!!busy}>Remove selected ({selected.length})</button><button class="btn glass-btn" onclick={() => selected = []} disabled={!!busy}>Clear selection</button>
   </div>{/if}
 {/snippet}
@@ -277,7 +278,7 @@
       </div>
       <div class="palette-method-panel" id="palette-method-add" data-method="add" hidden={inputKind !== 'add'}>
         <div class="palette-editor-tools">
-          <label class="palette-color-label">New color<input type="color" bind:value={addColor} disabled={!!busy} /></label>
+          <label class="palette-color-label">New color<span class="palette-color-input" class:is-disabled={!!busy}><input type="color" bind:value={addColor} disabled={!!busy} /><canvas aria-hidden="true" use:paintPaletteSwatch={addColor}></canvas></span></label>
           <button class="btn glass-btn" onclick={add} disabled={!!busy || truncated || colors.length >= 4096}><PixelIcon name="plus" />Add color</button>
         </div>
       </div>

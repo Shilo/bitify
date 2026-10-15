@@ -17,8 +17,8 @@
   --dock-space: calc(var(--dock-base) + var(--panel-space));
   --display: "Pixelify Sans", ui-monospace, "Courier New", monospace;
   --body: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
-  /* We provide both themes. Prevent Android auto-darkening from repainting the
-     selected light theme (including palette swatches) behind our CSS tokens. */
+  /* Declare the author theme. Color-critical full-palette canvases also protect
+     RGB values when a browser forces darkening despite this preference. */
   color-scheme: only light;
   box-sizing: border-box;
   height: 100vh;

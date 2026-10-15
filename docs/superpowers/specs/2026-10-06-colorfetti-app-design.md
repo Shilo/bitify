@@ -1,5 +1,22 @@
 # Colorfetti design
 
+## Color-critical palette display — October 15, 2026
+
+Full-palette thumbnails and editor swatches use paint-only canvases so forced
+browser darkening does not reinterpret their RGB values. Editor solids use 1×1
+backing pixels; palette overviews use 100×100 and retain the existing at-most-16
+entry coverage selection, order and clockwise sectors starting at twelve o'clock.
+They never read pixels back, encode output, fetch images or change palette data.
+Only strict opaque #RRGGBB values reach painting. Existing dimensions, labels,
+selection/edit actions, focus treatment and empty overview remain intact.
+
+New/Edit color inputs retain their native 44px controls and values; an inset
+decorative canvas paints the chosen color with pointer events disabled, preserving
+native hit targets. The optional 1-bit gradient/glyph branch is unchanged. Browser
+themes may still restyle surrounding chrome; these canvases protect the actual
+full-palette colors. SVG image painting was rejected after the phone transformed
+dark colors as icons; the final renderer is verified across bright and dark colors.
+
 ## Optional original opacity — October 14, 2026
 
 Palette mode offers Opacity Cut / Keep when partial source opacity exists or Keep

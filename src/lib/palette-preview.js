@@ -27,3 +27,59 @@ export function palettePreviewColors(colors) {
   // the thumbnail by the coverage algorithm's choice of endpoints.
   return colors.filter((_, i) => selected.has(i));
 }
+
+// Paint-only canvas keeps color-critical UI out of browser forced-dark CSS/SVG
+// heuristics. These Svelte actions never read pixels back, encode an image or hold
+// an external resource. Strict opaque HEX validation prevents canvas interpreting
+// other CSS color syntaxes. Validate before changing the previous canvas contents.
+function paintColor(color) {
+  if (typeof color !== 'string' || !/^#[\da-f]{6}$/i.test(color)) throw new TypeError('Palette paint colors must be opaque #RRGGBB.');
+  return color;
+}
+
+function paintAction(canvas, value, draw) {
+  const update = next => draw(canvas, next);
+  update(value);
+  return { update };
+}
+
+function drawSwatch(canvas, color) {
+  paintColor(color);
+  canvas.width = 1; canvas.height = 1;
+  const context = canvas.getContext('2d');
+  if (!context) return;
+  context.fillStyle = color;
+  context.fillRect(0, 0, 1, 1);
+}
+
+export function paintPaletteSwatch(canvas, color) {
+  return paintAction(canvas, color, drawSwatch);
+}
+
+function drawPreview(canvas, colors) {
+  if (!Array.isArray(colors) || colors.length > 256) throw new TypeError('Palette paintings support zero to 256 colors.');
+  // Validate all entries, including entries the sixteen-color overview omits.
+  for (const color of colors) paintColor(color);
+  const overview = palettePreviewColors(colors);
+  // Resetting dimensions also clears an empty overview and resets drawing state.
+  canvas.width = 100; canvas.height = 100;
+  const context = canvas.getContext('2d');
+  if (!context || !overview.length) return;
+  context.fillStyle = overview[0];
+  context.fillRect(0, 0, 100, 100);
+  // First-color underpaint prevents transparent antialiasing seams. The remaining
+  // sectors start at twelve o'clock and run clockwise like the former conic fill.
+  const step = Math.PI * 2 / overview.length;
+  for (let i = 1; i < overview.length; i++) {
+    context.beginPath();
+    context.moveTo(50, 50);
+    context.arc(50, 50, 50, i * step - Math.PI / 2, (i + 1) * step - Math.PI / 2, false);
+    context.closePath();
+    context.fillStyle = overview[i];
+    context.fill();
+  }
+}
+
+export function paintPalettePreview(canvas, colors) {
+  return paintAction(canvas, colors, drawPreview);
+}

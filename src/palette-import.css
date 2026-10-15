@@ -32,11 +32,15 @@
 :root .palette-review-heading span { color: var(--muted); font-size: 13px; }
 :root .palette-review-grid { display: grid; grid-template-columns: repeat(auto-fill,44px); align-content: start; gap: 8px; padding: 4px; scroll-padding: 4px; box-sizing: border-box; max-height: 156px; overflow: auto; overscroll-behavior: contain; }
 :root .palette-review-swatch { width: 44px; height: 44px; box-sizing: border-box; padding: 0; border: 1px solid color-mix(in srgb,var(--text) 25%,transparent); border-radius: 50%; cursor: pointer; }
+:root .palette-review-swatch > canvas { display: block; width: 100%; height: 100%; border-radius: inherit; pointer-events: none; }
 :root .palette-review-swatch.is-selected { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--gl-border-focus); }
 :root .palette-review-swatch:focus-visible { outline: 2px solid var(--gl-border-focus); outline-offset: 2px; }
 :root .palette-review-pages { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 0; }
 :root .palette-color-label { display: flex; align-items: center; gap: 8px; font-size: 13px; }
 :root .palette-color-label input { box-sizing: border-box; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 8px; padding: 3px; background: var(--surface); cursor: pointer; }
+:root .palette-color-input { position: relative; display: inline-block; flex: none; width: 44px; height: 44px; }
+:root .palette-color-input > canvas { position: absolute; inset: 4px; width: 36px; height: 36px; border-radius: 3px; pointer-events: none; }
+:root .palette-color-input.is-disabled > canvas { opacity: .5; }
 :root .palette-import-progress { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0; }
 :root .palette-import-progress progress { flex: 1; min-width: 80px; }
 :root .palette-delete-confirm { border-top: 1px solid var(--line); margin-top: 16px; padding-top: 8px; }
