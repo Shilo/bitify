@@ -1,0 +1,1040 @@
+{
+  "legacy": [
+    {
+      "palette": "Glow",
+      "style": "Cutout",
+      "hash": 3238133656
+    },
+    {
+      "palette": "Glow",
+      "style": "Solid",
+      "hash": 606412620
+    },
+    {
+      "palette": "Glow",
+      "style": "Lines",
+      "hash": 4052081830
+    },
+    {
+      "palette": "Glow",
+      "style": "Stencil",
+      "hash": 1163323742
+    },
+    {
+      "palette": "Glow",
+      "style": "Icon",
+      "hash": 581065534
+    },
+    {
+      "palette": "Glow",
+      "style": "Checker",
+      "hash": 2719599688
+    },
+    {
+      "palette": "Glow",
+      "style": "Bayer",
+      "hash": 360026298
+    },
+    {
+      "palette": "Glow",
+      "style": "Hatch",
+      "hash": 1421545248
+    },
+    {
+      "palette": "Glow",
+      "style": "Atkinson",
+      "hash": 2199795630
+    },
+    {
+      "palette": "Glow",
+      "style": "Noise",
+      "hash": 3442331842
+    },
+    {
+      "palette": "Glow",
+      "style": "Shape",
+      "hash": 664559948
+    },
+    {
+      "palette": "Mono",
+      "style": "Cutout",
+      "hash": 1386873192
+    },
+    {
+      "palette": "Mono",
+      "style": "Solid",
+      "hash": 254621848
+    },
+    {
+      "palette": "Mono",
+      "style": "Lines",
+      "hash": 4179393713
+    },
+    {
+      "palette": "Mono",
+      "style": "Stencil",
+      "hash": 3757781113
+    },
+    {
+      "palette": "Mono",
+      "style": "Icon",
+      "hash": 3433685953
+    },
+    {
+      "palette": "Mono",
+      "style": "Checker",
+      "hash": 442008352
+    },
+    {
+      "palette": "Mono",
+      "style": "Bayer",
+      "hash": 1617058049
+    },
+    {
+      "palette": "Mono",
+      "style": "Hatch",
+      "hash": 3043651696
+    },
+    {
+      "palette": "Mono",
+      "style": "Atkinson",
+      "hash": 416581097
+    },
+    {
+      "palette": "Mono",
+      "style": "Noise",
+      "hash": 2800454753
+    },
+    {
+      "palette": "Mono",
+      "style": "Shape",
+      "hash": 493184344
+    },
+    {
+      "palette": "Paper",
+      "style": "Cutout",
+      "hash": 290261371
+    },
+    {
+      "palette": "Paper",
+      "style": "Solid",
+      "hash": 2316279275
+    },
+    {
+      "palette": "Paper",
+      "style": "Lines",
+      "hash": 3383686855
+    },
+    {
+      "palette": "Paper",
+      "style": "Stencil",
+      "hash": 4133298595
+    },
+    {
+      "palette": "Paper",
+      "style": "Icon",
+      "hash": 3412596711
+    },
+    {
+      "palette": "Paper",
+      "style": "Checker",
+      "hash": 1352887183
+    },
+    {
+      "palette": "Paper",
+      "style": "Bayer",
+      "hash": 2182000175
+    },
+    {
+      "palette": "Paper",
+      "style": "Hatch",
+      "hash": 3337998367
+    },
+    {
+      "palette": "Paper",
+      "style": "Atkinson",
+      "hash": 3638208555
+    },
+    {
+      "palette": "Paper",
+      "style": "Noise",
+      "hash": 4167111135
+    },
+    {
+      "palette": "Paper",
+      "style": "Shape",
+      "hash": 627992899
+    },
+    {
+      "palette": "Torch",
+      "style": "Cutout",
+      "hash": 2517616629
+    },
+    {
+      "palette": "Torch",
+      "style": "Solid",
+      "hash": 729811993
+    },
+    {
+      "palette": "Torch",
+      "style": "Lines",
+      "hash": 3292997003
+    },
+    {
+      "palette": "Torch",
+      "style": "Stencil",
+      "hash": 1643761323
+    },
+    {
+      "palette": "Torch",
+      "style": "Icon",
+      "hash": 1497458323
+    },
+    {
+      "palette": "Torch",
+      "style": "Checker",
+      "hash": 1355336877
+    },
+    {
+      "palette": "Torch",
+      "style": "Bayer",
+      "hash": 3253078935
+    },
+    {
+      "palette": "Torch",
+      "style": "Hatch",
+      "hash": 2424677781
+    },
+    {
+      "palette": "Torch",
+      "style": "Atkinson",
+      "hash": 58638795
+    },
+    {
+      "palette": "Torch",
+      "style": "Noise",
+      "hash": 1686237823
+    },
+    {
+      "palette": "Torch",
+      "style": "Shape",
+      "hash": 978667961
+    },
+    {
+      "palette": "Rose",
+      "style": "Cutout",
+      "hash": 3150048374
+    },
+    {
+      "palette": "Rose",
+      "style": "Solid",
+      "hash": 234296054
+    },
+    {
+      "palette": "Rose",
+      "style": "Lines",
+      "hash": 3019930744
+    },
+    {
+      "palette": "Rose",
+      "style": "Stencil",
+      "hash": 2105366272
+    },
+    {
+      "palette": "Rose",
+      "style": "Icon",
+      "hash": 2355362272
+    },
+    {
+      "palette": "Rose",
+      "style": "Checker",
+      "hash": 3842992918
+    },
+    {
+      "palette": "Rose",
+      "style": "Bayer",
+      "hash": 3386019736
+    },
+    {
+      "palette": "Rose",
+      "style": "Hatch",
+      "hash": 1814643950
+    },
+    {
+      "palette": "Rose",
+      "style": "Atkinson",
+      "hash": 2156913320
+    },
+    {
+      "palette": "Rose",
+      "style": "Noise",
+      "hash": 617364496
+    },
+    {
+      "palette": "Rose",
+      "style": "Shape",
+      "hash": 2864539334
+    },
+    {
+      "palette": "Game Boy",
+      "style": "Cutout",
+      "hash": 4241668904
+    },
+    {
+      "palette": "Game Boy",
+      "style": "Solid",
+      "hash": 1678172904
+    },
+    {
+      "palette": "Game Boy",
+      "style": "Lines",
+      "hash": 4256671976
+    },
+    {
+      "palette": "Game Boy",
+      "style": "Stencil",
+      "hash": 998561552
+    },
+    {
+      "palette": "Game Boy",
+      "style": "Icon",
+      "hash": 3331946168
+    },
+    {
+      "palette": "Game Boy",
+      "style": "Checker",
+      "hash": 3922593184
+    },
+    {
+      "palette": "Game Boy",
+      "style": "Bayer",
+      "hash": 1411015736
+    },
+    {
+      "palette": "Game Boy",
+      "style": "Hatch",
+      "hash": 3704894064
+    },
+    {
+      "palette": "Game Boy",
+      "style": "Atkinson",
+      "hash": 1271324208
+    },
+    {
+      "palette": "Game Boy",
+      "style": "Noise",
+      "hash": 268583208
+    },
+    {
+      "palette": "Game Boy",
+      "style": "Shape",
+      "hash": 3938992216
+    },
+    {
+      "palette": "Pocket",
+      "style": "Cutout",
+      "hash": 3158852393
+    },
+    {
+      "palette": "Pocket",
+      "style": "Solid",
+      "hash": 3230738185
+    },
+    {
+      "palette": "Pocket",
+      "style": "Lines",
+      "hash": 1321955256
+    },
+    {
+      "palette": "Pocket",
+      "style": "Stencil",
+      "hash": 826197360
+    },
+    {
+      "palette": "Pocket",
+      "style": "Icon",
+      "hash": 1908679512
+    },
+    {
+      "palette": "Pocket",
+      "style": "Checker",
+      "hash": 1626262417
+    },
+    {
+      "palette": "Pocket",
+      "style": "Bayer",
+      "hash": 3570191224
+    },
+    {
+      "palette": "Pocket",
+      "style": "Hatch",
+      "hash": 3213463921
+    },
+    {
+      "palette": "Pocket",
+      "style": "Atkinson",
+      "hash": 2552419184
+    },
+    {
+      "palette": "Pocket",
+      "style": "Noise",
+      "hash": 1060003464
+    },
+    {
+      "palette": "Pocket",
+      "style": "Shape",
+      "hash": 3583605289
+    },
+    {
+      "palette": "Nokia",
+      "style": "Cutout",
+      "hash": 1113507520
+    },
+    {
+      "palette": "Nokia",
+      "style": "Solid",
+      "hash": 2171374868
+    },
+    {
+      "palette": "Nokia",
+      "style": "Lines",
+      "hash": 544692987
+    },
+    {
+      "palette": "Nokia",
+      "style": "Stencil",
+      "hash": 2744734139
+    },
+    {
+      "palette": "Nokia",
+      "style": "Icon",
+      "hash": 912090995
+    },
+    {
+      "palette": "Nokia",
+      "style": "Checker",
+      "hash": 1427773856
+    },
+    {
+      "palette": "Nokia",
+      "style": "Bayer",
+      "hash": 1081844599
+    },
+    {
+      "palette": "Nokia",
+      "style": "Hatch",
+      "hash": 261665176
+    },
+    {
+      "palette": "Nokia",
+      "style": "Atkinson",
+      "hash": 2071239539
+    },
+    {
+      "palette": "Nokia",
+      "style": "Noise",
+      "hash": 2119681447
+    },
+    {
+      "palette": "Nokia",
+      "style": "Shape",
+      "hash": 488906044
+    },
+    {
+      "palette": "Playdate",
+      "style": "Cutout",
+      "hash": 2603225606
+    },
+    {
+      "palette": "Playdate",
+      "style": "Solid",
+      "hash": 3004602934
+    },
+    {
+      "palette": "Playdate",
+      "style": "Lines",
+      "hash": 1232242843
+    },
+    {
+      "palette": "Playdate",
+      "style": "Stencil",
+      "hash": 3030525991
+    },
+    {
+      "palette": "Playdate",
+      "style": "Icon",
+      "hash": 3463342795
+    },
+    {
+      "palette": "Playdate",
+      "style": "Checker",
+      "hash": 3606425442
+    },
+    {
+      "palette": "Playdate",
+      "style": "Bayer",
+      "hash": 2347626115
+    },
+    {
+      "palette": "Playdate",
+      "style": "Hatch",
+      "hash": 3019662530
+    },
+    {
+      "palette": "Playdate",
+      "style": "Atkinson",
+      "hash": 2957352127
+    },
+    {
+      "palette": "Playdate",
+      "style": "Noise",
+      "hash": 4191713363
+    },
+    {
+      "palette": "Playdate",
+      "style": "Shape",
+      "hash": 2877873630
+    },
+    {
+      "palette": "Phosphor",
+      "style": "Cutout",
+      "hash": 2356494270
+    },
+    {
+      "palette": "Phosphor",
+      "style": "Solid",
+      "hash": 3892038398
+    },
+    {
+      "palette": "Phosphor",
+      "style": "Lines",
+      "hash": 669468975
+    },
+    {
+      "palette": "Phosphor",
+      "style": "Stencil",
+      "hash": 3186487971
+    },
+    {
+      "palette": "Phosphor",
+      "style": "Icon",
+      "hash": 3479133231
+    },
+    {
+      "palette": "Phosphor",
+      "style": "Checker",
+      "hash": 4100098186
+    },
+    {
+      "palette": "Phosphor",
+      "style": "Bayer",
+      "hash": 1184021767
+    },
+    {
+      "palette": "Phosphor",
+      "style": "Hatch",
+      "hash": 2658717818
+    },
+    {
+      "palette": "Phosphor",
+      "style": "Atkinson",
+      "hash": 652640451
+    },
+    {
+      "palette": "Phosphor",
+      "style": "Noise",
+      "hash": 1865735871
+    },
+    {
+      "palette": "Phosphor",
+      "style": "Shape",
+      "hash": 49456222
+    },
+    {
+      "palette": "Amber",
+      "style": "Cutout",
+      "hash": 3679003430
+    },
+    {
+      "palette": "Amber",
+      "style": "Solid",
+      "hash": 900804646
+    },
+    {
+      "palette": "Amber",
+      "style": "Lines",
+      "hash": 3115474974
+    },
+    {
+      "palette": "Amber",
+      "style": "Stencil",
+      "hash": 85949842
+    },
+    {
+      "palette": "Amber",
+      "style": "Icon",
+      "hash": 3736426294
+    },
+    {
+      "palette": "Amber",
+      "style": "Checker",
+      "hash": 2208870610
+    },
+    {
+      "palette": "Amber",
+      "style": "Bayer",
+      "hash": 4123725558
+    },
+    {
+      "palette": "Amber",
+      "style": "Hatch",
+      "hash": 3298014730
+    },
+    {
+      "palette": "Amber",
+      "style": "Atkinson",
+      "hash": 3993785778
+    },
+    {
+      "palette": "Amber",
+      "style": "Noise",
+      "hash": 3745234462
+    },
+    {
+      "palette": "Amber",
+      "style": "Shape",
+      "hash": 1053263326
+    },
+    {
+      "palette": "Commodore",
+      "style": "Cutout",
+      "hash": 2762610257
+    },
+    {
+      "palette": "Commodore",
+      "style": "Solid",
+      "hash": 3492523345
+    },
+    {
+      "palette": "Commodore",
+      "style": "Lines",
+      "hash": 3903184439
+    },
+    {
+      "palette": "Commodore",
+      "style": "Stencil",
+      "hash": 4158984927
+    },
+    {
+      "palette": "Commodore",
+      "style": "Icon",
+      "hash": 3526514631
+    },
+    {
+      "palette": "Commodore",
+      "style": "Checker",
+      "hash": 2169110889
+    },
+    {
+      "palette": "Commodore",
+      "style": "Bayer",
+      "hash": 2310433543
+    },
+    {
+      "palette": "Commodore",
+      "style": "Hatch",
+      "hash": 3043430969
+    },
+    {
+      "palette": "Commodore",
+      "style": "Atkinson",
+      "hash": 1885859023
+    },
+    {
+      "palette": "Commodore",
+      "style": "Noise",
+      "hash": 2125176839
+    },
+    {
+      "palette": "Commodore",
+      "style": "Shape",
+      "hash": 3910353521
+    }
+  ],
+  "full": [
+    {
+      "palette": "Resurrect 64",
+      "colors": 64,
+      "hash": 3354164690
+    },
+    {
+      "palette": "ENDESGA 32",
+      "colors": 32,
+      "hash": 575591370
+    },
+    {
+      "palette": "PICO-8",
+      "colors": 16,
+      "hash": 385809712
+    },
+    {
+      "palette": "DawnBringer 16",
+      "colors": 16,
+      "hash": 1759603640
+    },
+    {
+      "palette": "ENDESGA 8",
+      "colors": 8,
+      "hash": 1176735226
+    },
+    {
+      "palette": "Grayscale 8",
+      "colors": 8,
+      "hash": 2683679176
+    },
+    {
+      "palette": "Ice Cream GB",
+      "colors": 4,
+      "hash": 348183857
+    },
+    {
+      "palette": "Game Boy green",
+      "colors": 4,
+      "hash": 1562578448
+    },
+    {
+      "palette": "Black & white",
+      "colors": 2,
+      "hash": 4028777969
+    },
+    {
+      "palette": "Glow",
+      "colors": 2,
+      "hash": 975622734
+    },
+    {
+      "palette": "Paper",
+      "colors": 2,
+      "hash": 3398463803
+    }
+  ],
+  "extra": [
+    "Legacy custom colors/None/Swap/settings memory/Original/copy/single-save",
+    "Eleven full presets RGB preview/PNG/Copy match independent reference; ordered copy swatches/HEX backups preserve every entry; family retains metric and Reset restores Oklab/cut128",
+    "Max colors minimum-two/invalid/empty inputs, unchanged two-color preview/PNG/Copy, and All/remembered16 reset",
+    "Palette-sized slider/number, untouched blur, small-palette reload and invalid edit retain64; explicit3 and All remember3 across palette switches",
+    "Full GIF exact frames/delays/loop/first-frame copy and mixed ZIP",
+    "Family round-trip preserves legacy custom colors/None/style settings, legacy GIF and mixed ZIP",
+    "2MP save preserves click palette; ZIP preserves palette and removed-image snapshots",
+    "256 colors+empty GIF blocks ZIP without download or active palette mutation",
+    "6MP async GIF failure preserves named import and 256-color saved drafts/notice/focus/source/revision; retry uses current palette and 255-color copy limit",
+    "Native two-document localStorage clear/update/remove: saved fallback, active session/open draft identity and matching/legacy settings retained; native iframe sessionStorage library-key update/remove/clear ignored",
+    "Built wall/viewer GIF Original advances while conversion yields are held; switching back waits and resumes the exact current frame without stale completion",
+    "ASE parser stays unloaded for startup/editor/PNG/text; first import loads once, repeat reuses cache and exact255 ordered raw entries persist with aseprite metadata",
+    "Palette URL PNG→ASE imports exact entries without replacing the dialog, chosen Paste tool, name or text history; saved ASE source persists"
+  ],
+  "consoleErrors": [],
+  "baseline": "5aa6418",
+  "rgb": [
+    {
+      "palette": "Resurrect 64",
+      "hash": 1648612838
+    },
+    {
+      "palette": "ENDESGA 32",
+      "hash": 2951512055
+    },
+    {
+      "palette": "PICO-8",
+      "hash": 1878171124
+    },
+    {
+      "palette": "DawnBringer 16",
+      "hash": 987422083
+    },
+    {
+      "palette": "ENDESGA 8",
+      "hash": 30207909
+    },
+    {
+      "palette": "Grayscale 8",
+      "hash": 2932526215
+    },
+    {
+      "palette": "Ice Cream GB",
+      "hash": 2620457665
+    },
+    {
+      "palette": "Game Boy green",
+      "hash": 1432356240
+    },
+    {
+      "palette": "Black & white",
+      "hash": 3933650800
+    },
+    {
+      "palette": "Glow",
+      "hash": 1345113814
+    },
+    {
+      "palette": "Paper",
+      "hash": 155421059
+    }
+  ],
+  "nativeStorage": {
+    "events": [
+      {
+        "key": null,
+        "local": true
+      },
+      {
+        "key": null,
+        "local": true
+      },
+      {
+        "key": "colorfetti-palettes-v1",
+        "local": true
+      },
+      {
+        "key": "colorfetti-palettes-v1",
+        "local": true
+      },
+      {
+        "key": "colorfetti-palettes-v1",
+        "local": false
+      },
+      {
+        "key": "colorfetti-palettes-v1",
+        "local": false
+      },
+      {
+        "key": "colorfetti-palettes-v1",
+        "local": false
+      },
+      {
+        "key": null,
+        "local": false
+      },
+      {
+        "key": "colorfetti-palettes-v1",
+        "local": true
+      }
+    ],
+    "sessionId": "session-f0711974-5329-41dd-ad96-c61cabcd1309",
+    "settingsBeforeClear": {
+      "first": "#123456",
+      "second": "#abcdef",
+      "none": 1,
+      "style": "bayer",
+      "settings": {
+        "cutout": {
+          "threshold": null,
+          "seams": null,
+          "rim": true,
+          "source": "luma",
+          "alpha": 128
+        },
+        "solid": {
+          "threshold": null,
+          "source": "luma",
+          "alpha": 128
+        },
+        "lines": {
+          "threshold": null,
+          "thickness": 1,
+          "darks": 0,
+          "alpha": 128
+        },
+        "stencil": {
+          "cuts": null,
+          "outline": "keep",
+          "edges": 0,
+          "source": "luma",
+          "alpha": 128
+        },
+        "icon": {
+          "detail": 50,
+          "border": "auto",
+          "source": "luma",
+          "alpha": 128
+        },
+        "checker": {
+          "threshold": null,
+          "shading": 100,
+          "scale": 1,
+          "source": "luma",
+          "alpha": 128
+        },
+        "bayer": {
+          "threshold": 77,
+          "shading": 100,
+          "scale": 1,
+          "matrix": 8,
+          "source": "luma",
+          "alpha": 128
+        },
+        "hatch": {
+          "threshold": null,
+          "shading": 100,
+          "scale": 1,
+          "direction": "/",
+          "spacing": 3,
+          "source": "luma",
+          "alpha": 128
+        },
+        "atkinson": {
+          "threshold": null,
+          "shading": 100,
+          "diffusion": "atkinson",
+          "source": "luma",
+          "alpha": 128
+        },
+        "noise": {
+          "threshold": null,
+          "shading": 100,
+          "scale": 1,
+          "source": "luma",
+          "alpha": 128
+        },
+        "silhouette": {
+          "alpha": 128
+        }
+      },
+      "family": "full-palette",
+      "paletteId": "user-storage-witness",
+      "alphaCut": 200,
+      "alphaMode": "cut",
+      "metric": "rgb",
+      "maxColors": 0,
+      "lastMaxColors": 16,
+      "cleanup": false,
+      "dither": "none",
+      "ditherStrength": 50
+    },
+    "settingsAfterClear": {
+      "first": "#123456",
+      "second": "#abcdef",
+      "none": 1,
+      "style": "bayer",
+      "settings": {
+        "cutout": {
+          "threshold": null,
+          "seams": null,
+          "rim": true,
+          "source": "luma",
+          "alpha": 128
+        },
+        "solid": {
+          "threshold": null,
+          "source": "luma",
+          "alpha": 128
+        },
+        "lines": {
+          "threshold": null,
+          "thickness": 1,
+          "darks": 0,
+          "alpha": 128
+        },
+        "stencil": {
+          "cuts": null,
+          "outline": "keep",
+          "edges": 0,
+          "source": "luma",
+          "alpha": 128
+        },
+        "icon": {
+          "detail": 50,
+          "border": "auto",
+          "source": "luma",
+          "alpha": 128
+        },
+        "checker": {
+          "threshold": null,
+          "shading": 100,
+          "scale": 1,
+          "source": "luma",
+          "alpha": 128
+        },
+        "bayer": {
+          "threshold": 77,
+          "shading": 100,
+          "scale": 1,
+          "matrix": 8,
+          "source": "luma",
+          "alpha": 128
+        },
+        "hatch": {
+          "threshold": null,
+          "shading": 100,
+          "scale": 1,
+          "direction": "/",
+          "spacing": 3,
+          "source": "luma",
+          "alpha": 128
+        },
+        "atkinson": {
+          "threshold": null,
+          "shading": 100,
+          "diffusion": "atkinson",
+          "source": "luma",
+          "alpha": 128
+        },
+        "noise": {
+          "threshold": null,
+          "shading": 100,
+          "scale": 1,
+          "source": "luma",
+          "alpha": 128
+        },
+        "silhouette": {
+          "alpha": 128
+        }
+      },
+      "family": "two-color",
+      "paletteId": "user-storage-witness",
+      "alphaCut": 200,
+      "alphaMode": "cut",
+      "metric": "rgb",
+      "maxColors": 0,
+      "lastMaxColors": 16,
+      "cleanup": false,
+      "dither": "none",
+      "ditherStrength": 50
+    },
+    "openDraftPreserved": true
+  },
+  "pendingAnimation": [
+    {
+      "mode": "wall",
+      "originalReds": [
+        10,
+        40,
+        70,
+        100
+      ],
+      "activeRed": 100,
+      "releasedRed": 100,
+      "nextRed": 130
+    },
+    {
+      "mode": "viewer",
+      "originalReds": [
+        10,
+        40,
+        70,
+        100
+      ],
+      "activeRed": 100,
+      "releasedRed": 100,
+      "nextRed": 130
+    }
+  ],
+  "aseLazy": {
+    "fixtureSha256": "f7a97806651302378fb9f4866ba11562d3f7a2f97a6fa825d1f389eed98d8532",
+    "colors": 255,
+    "requests": [
+      "http://127.0.0.1:63411/colorfetti/assets/palette-ase-DJ4eyWtZ.js"
+    ]
+  },
+  "passed": true
+}

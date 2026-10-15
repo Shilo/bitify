@@ -243,7 +243,7 @@ try {
 
   await openPalette(); await page.getByRole('group',{name:'Color system',exact:true}).getByRole('button',{name:'Palette',exact:true}).click();
   assert.equal(FULL_PRESETS.length,11,'Expected all eleven published full presets');
-  assert.deepEqual(FULL_PRESETS.map(palette=>palette.colors.length),[64,32,16,16,8,4,4,2,2],'Preset order/counts changed');
+  assert.deepEqual(FULL_PRESETS.map(palette=>palette.colors.length),[64,32,16,16,8,8,4,4,2,2,2],'Preset order/counts changed');
   assert.equal(DEFAULT_FULL_PALETTE.name,'ENDESGA 32','Unexpected default full palette');
   assert.equal((await stored()).paletteId,DEFAULT_FULL_PALETTE.id,'First family switch lost the ENDESGA 32 default');
   assert.deepEqual(await page.getByRole('group',{name:'Full palettes',exact:true}).locator('button').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('aria-label'))),['Auto', ...FULL_PRESETS.map(palette=>palette.name)],'Full preset rail order differs from published order');
@@ -467,7 +467,7 @@ try {
   });
   const raceEditor = page.locator('dialog.palette-import-modal'); await raceEditor.waitFor();
   await raceEditor.getByRole('button',{name:'Paste colors',exact:true}).click();
-  await raceEditor.getByRole('textbox',{name:'Hex colors',exact:true}).fill('#000000 #ffffff');
+  await raceEditor.getByRole('textbox',{name:'Colors or Lospec link',exact:true}).fill('#000000 #ffffff');
   await raceEditor.getByRole('button',{name:'Review colors',exact:true}).click();
   await raceEditor.getByLabel('Name',{exact:true}).fill('Draft while exporting');
   await raceEditor.getByRole('alert').waitFor({timeout:30000});
@@ -579,7 +579,7 @@ try {
   const sessionDraft=storagePage.getByRole('dialog',{name:'Make a palette copy',exact:true});
   await sessionDraft.getByLabel('Name',{exact:true}).fill('Uncommitted session draft');
   await sessionDraft.getByRole('button',{name:'Paste colors',exact:true}).click();
-  await sessionDraft.getByLabel('Hex colors',{exact:true}).fill('#112233 #445566');
+  await sessionDraft.getByLabel('Colors or Lospec link',{exact:true}).fill('#112233 #445566');
   await sessionDraft.evaluate(dialog=>window.__draftBeforeClear=dialog);
   await storageDriver.evaluate(()=>localStorage.clear());
   await storagePage.waitForFunction(()=>window.__storageEvents.filter(event=>event.key===null&&event.local).length===2);
@@ -587,7 +587,7 @@ try {
   assert.equal(await sessionDraft.evaluate(dialog=>dialog===window.__draftBeforeClear&&dialog.open),true,'Clear replaced or closed an open draft');
   assert.equal(await sessionDraft.getByLabel('Name',{exact:true}).inputValue(),'Uncommitted session draft');
   assert.equal(await sessionDraft.getByRole('button',{name:'Paste colors',exact:true}).getAttribute('aria-pressed'),'true');
-  assert.equal(await sessionDraft.getByLabel('Hex colors',{exact:true}).inputValue(),'#112233 #445566');
+  assert.equal(await sessionDraft.getByLabel('Colors or Lospec link',{exact:true}).inputValue(),'#112233 #445566');
   assert.deepEqual(await sessionDraft.locator('.palette-review-swatch').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('aria-label'))),['Select color 1 #654321']);
   await sessionDraft.getByRole('button',{name:'Cancel',exact:true}).click(); await sessionDraft.waitFor({state:'detached'});
   await openStoragePicker();
@@ -688,7 +688,7 @@ try {
   await asePage.goto(page.url());const aseArtworkCount=await asePage.locator('.tiles .tile').count();await asePage.locator('.dock button[aria-label="Palette"]').click();await asePage.getByRole('button',{name:'Import palette',exact:true}).click();
   const aseEditor=asePage.getByRole('dialog',{name:'Import palette',exact:true}),aseInput=aseEditor.locator('input[type=file]');
   await aseInput.setInputFiles(fixturePath);await aseEditor.locator('summary').filter({hasText:'Image options'}).waitFor();
-  await aseEditor.getByRole('button',{name:'Paste colors',exact:true}).click();await aseEditor.getByLabel('Hex colors',{exact:true}).fill('#112233 #445566');await aseEditor.getByRole('button',{name:'Replace colors',exact:true}).click();
+  await aseEditor.getByRole('button',{name:'Paste colors',exact:true}).click();await aseEditor.getByLabel('Colors or Lospec link',{exact:true}).fill('#112233 #445566');await aseEditor.getByRole('button',{name:'Replace colors',exact:true}).click();
   assert.equal(aseRequests.length,0,'Startup/editor/PNG/text loaded the ASE parser');
   await aseEditor.getByLabel('Name',{exact:true}).fill('Lazy ASE palette');
   for(let attempt=0;attempt<2;attempt++){
@@ -698,7 +698,7 @@ try {
     assert.deepEqual(actual,aseExpected,'ASE review changed raw entry order');assert.equal(aseRequests.length,1,'First ASE must load once and subsequent imports reuse the module');
     if(!attempt){await aseEditor.getByRole('button',{name:'Paste colors',exact:true}).click();await aseEditor.getByRole('button',{name:'Replace colors',exact:true}).click();}
   }
-  await aseEditor.getByRole('button',{name:'Paste colors',exact:true}).click();await aseEditor.getByLabel('Hex colors',{exact:true}).fill('#fedcba #010203');
+  await aseEditor.getByRole('button',{name:'Paste colors',exact:true}).click();await aseEditor.getByLabel('Colors or Lospec link',{exact:true}).fill('#fedcba #010203');
   await aseEditor.evaluate(dialog=>window.__qaUrlDialog=dialog);
   for(const [extension,count]of [['png',2],['ase',255]]){
     const droppedUrl=new URL(`/colorfetti/palette-drop.${extension}?signature=retained`,asePage.url()).href;
@@ -706,7 +706,7 @@ try {
     await aseEditor.getByText(`${count} colors`,{exact:true}).waitFor();await aseEditor.locator('.palette-import-progress').waitFor({state:'detached'});
     const actual=[];for(;;){actual.push(...await aseEditor.locator('.palette-review-swatch').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('aria-label').split(' ').at(-1))));const next=aseEditor.getByRole('button',{name:'Next',exact:true});if(!await next.count()||!await next.isEnabled())break;await next.click();}
     assert.deepEqual(actual,extension==='ase'?aseExpected:['#112233','#445566'],'URL drop changed exact palette entries');
-    assert.equal(await aseEditor.getByRole('button',{name:'Paste colors',exact:true}).getAttribute('aria-pressed'),'true');assert.equal(await aseEditor.getByLabel('Hex colors',{exact:true}).inputValue(),'#fedcba #010203');assert.equal(await aseEditor.getByLabel('Name',{exact:true}).inputValue(),'Lazy ASE palette');assert.equal(await aseEditor.evaluate(dialog=>dialog===window.__qaUrlDialog&&dialog.open),true);
+    assert.equal(await aseEditor.getByRole('button',{name:'Paste colors',exact:true}).getAttribute('aria-pressed'),'true');assert.equal(await aseEditor.getByLabel('Colors or Lospec link',{exact:true}).inputValue(),'#fedcba #010203');assert.equal(await aseEditor.getByLabel('Name',{exact:true}).inputValue(),'Lazy ASE palette');assert.equal(await aseEditor.evaluate(dialog=>dialog===window.__qaUrlDialog&&dialog.open),true);
   }
   assert.equal(aseRequests.length,1,'URL ASE did not reuse the parser');assert.equal(await asePage.locator('.tiles .tile').count(),aseArtworkCount,'Palette URL drop added artwork');
   await aseEditor.getByRole('button',{name:'Save palette',exact:true}).click();await aseEditor.waitFor({state:'detached'});

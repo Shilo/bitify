@@ -291,4 +291,13 @@ describe('palette save names and batch atomicity', () => {
     expect(result.captured).toEqual([]);
     expect(result.clicked).toEqual([]);
   });
+  it('downloads nothing when a later injected GIF contains partial opacity', async () => {
+    const result = downloads(), palette = colors(2);
+    await expect(saveAll([{ name: 'first.png' }, { name: 'partial.gif' }], item => item.name.endsWith('.png')
+      ? { ...still(palette, [0]), alpha: Uint8Array.of(127) }
+      : { name: item.name, colors: palette, family: 'full-palette', w: 1, h: 1,
+        frames: [{ indices: Uint16Array.of(0), alpha: Uint8Array.of(127), delay: 100 }] }
+    )).rejects.toMatchObject({ code: 'PALETTE_GIF_ALPHA' });
+    expect(result.captured).toEqual([]); expect(result.clicked).toEqual([]);
+  });
 });

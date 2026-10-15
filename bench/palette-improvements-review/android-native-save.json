@@ -1,0 +1,27 @@
+{
+  "device": "USB Pixel 8 Pro",
+  "verification": {
+    "name": "ramp-palette.png",
+    "pixels": true,
+    "width": 128,
+    "height": 64,
+    "usedColors": 6,
+    "colors": [
+      "#000000",
+      "#1d2b53",
+      "#5f574f",
+      "#83769c",
+      "#c2c3c7",
+      "#fff1e8"
+    ],
+    "alphaValues": [
+      0,
+      127,
+      128,
+      255
+    ]
+  },
+  "actualDownloadName": "colorfetti-keep-qa-20261014-palette.png",
+  "sha256": "af55fff6eab37b18e9020222f792ed60bc87010a2665daeb063811b236409388",
+  "bytes": 1912
+}
