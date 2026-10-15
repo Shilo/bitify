@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-15T13:27:56.478Z",
+  "scope": "Research modules in native browser; not built-app native decode or export.",
+  "pass": true,
+  "cases": 28,
+  "assertions": 288,
+  "failures": [],
+  "desktopOutputMismatches": [],
+  "serverReceipt": {
+    "saved": "browser-android.json"
+  },
+  "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36"
+}

@@ -1,0 +1,1344 @@
+[
+  {
+    "fixture": "many-soft-colors",
+    "kind": "auto",
+    "metric": "oklab",
+    "variants": [
+      {
+        "weighting": "none",
+        "colors": [
+          [
+            "#334070",
+            "#a6bc48",
+            "#b362ae"
+          ]
+        ],
+        "metrics": {
+          "alphaMismatch": 0,
+          "visibleRgbMismatch": 5120,
+          "opaqueRgbMismatch": 0,
+          "sets": {
+            "all": {
+              "black": {
+                "samples": 5120,
+                "squaredRgb": 20369946.361122623,
+                "squaredLab": 46.481815494951206,
+                "rgbRmse": 36.416594883179116,
+                "labRmse": 0.09528105577111148
+              },
+              "white": {
+                "samples": 5120,
+                "squaredRgb": 20369946.361122623,
+                "squaredLab": 43.38560974412961,
+                "rgbRmse": 36.416594883179116,
+                "labRmse": 0.09205298421643002
+              },
+              "checker": {
+                "samples": 5120,
+                "squaredRgb": 20369946.361122623,
+                "squaredLab": 44.71640343725888,
+                "rgbRmse": 36.416594883179116,
+                "labRmse": 0.09345412000730426
+              }
+            },
+            "soft": {
+              "black": {
+                "samples": 2556,
+                "squaredRgb": 2588932.392079964,
+                "squaredLab": 7.924070105455899,
+                "rgbRmse": 18.374659610898238,
+                "labRmse": 0.05567929527501528
+              },
+              "white": {
+                "samples": 2556,
+                "squaredRgb": 2588932.392079964,
+                "squaredLab": 5.807523963034942,
+                "rgbRmse": 18.374659610898238,
+                "labRmse": 0.04766669934597415
+              },
+              "checker": {
+                "samples": 2556,
+                "squaredRgb": 2588932.392079964,
+                "squaredLab": 6.520473280556719,
+                "rgbRmse": 18.374659610898238,
+                "labRmse": 0.05050787942897486
+              }
+            },
+            "alpha128": {
+              "black": {
+                "samples": 2564,
+                "squaredRgb": 17781013.969042696,
+                "squaredLab": 38.55774538949541,
+                "rgbRmse": 48.07935399885057,
+                "labRmse": 0.12263002171895869
+              },
+              "white": {
+                "samples": 2564,
+                "squaredRgb": 17781013.9690427,
+                "squaredLab": 37.57808578109461,
+                "rgbRmse": 48.07935399885058,
+                "labRmse": 0.12106213155324312
+              },
+              "checker": {
+                "samples": 2564,
+                "squaredRgb": 17781013.969042696,
+                "squaredLab": 38.19593015670205,
+                "rgbRmse": 48.07935399885057,
+                "labRmse": 0.12205330246027535
+              }
+            },
+            "opaque": {
+              "black": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              },
+              "white": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              },
+              "checker": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              }
+            }
+          }
+        }
+      },
+      {
+        "weighting": "linear",
+        "colors": [
+          [
+            "#2f4070",
+            "#b0597a",
+            "#b1c59d"
+          ]
+        ],
+        "metrics": {
+          "alphaMismatch": 0,
+          "visibleRgbMismatch": 5120,
+          "opaqueRgbMismatch": 0,
+          "sets": {
+            "all": {
+              "black": {
+                "samples": 5120,
+                "squaredRgb": 20860416.20911954,
+                "squaredLab": 47.654835933939864,
+                "rgbRmse": 36.852408518501925,
+                "labRmse": 0.09647582673057344
+              },
+              "white": {
+                "samples": 5120,
+                "squaredRgb": 20860416.209119536,
+                "squaredLab": 45.22452425603555,
+                "rgbRmse": 36.852408518501925,
+                "labRmse": 0.09398358842775129
+              },
+              "checker": {
+                "samples": 5120,
+                "squaredRgb": 20860416.209119536,
+                "squaredLab": 46.40504073862229,
+                "rgbRmse": 36.852408518501925,
+                "labRmse": 0.09520233463136378
+              }
+            },
+            "soft": {
+              "black": {
+                "samples": 2556,
+                "squaredRgb": 2637963.5989850075,
+                "squaredLab": 8.176965155974308,
+                "rgbRmse": 18.54784026738363,
+                "labRmse": 0.056560813713005156
+              },
+              "white": {
+                "samples": 2556,
+                "squaredRgb": 2637963.598985007,
+                "squaredLab": 6.153729681091328,
+                "rgbRmse": 18.547840267383627,
+                "labRmse": 0.049066918316116266
+              },
+              "checker": {
+                "samples": 2556,
+                "squaredRgb": 2637963.5989850075,
+                "squaredLab": 6.8755554333946645,
+                "rgbRmse": 18.54784026738363,
+                "labRmse": 0.05186489096174459
+              }
+            },
+            "alpha128": {
+              "black": {
+                "samples": 2564,
+                "squaredRgb": 18222452.610134564,
+                "squaredLab": 39.47787077796547,
+                "rgbRmse": 48.67251380257124,
+                "labRmse": 0.12408459002964811
+              },
+              "white": {
+                "samples": 2564,
+                "squaredRgb": 18222452.610134564,
+                "squaredLab": 39.070794574944216,
+                "rgbRmse": 48.67251380257124,
+                "labRmse": 0.12344318293451755
+              },
+              "checker": {
+                "samples": 2564,
+                "squaredRgb": 18222452.610134564,
+                "squaredLab": 39.52948530522761,
+                "rgbRmse": 48.67251380257124,
+                "labRmse": 0.12416567945159772
+              }
+            },
+            "opaque": {
+              "black": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              },
+              "white": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              },
+              "checker": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              }
+            }
+          }
+        }
+      },
+      {
+        "weighting": "squared",
+        "colors": [
+          [
+            "#5d3757",
+            "#9c7e9f",
+            "#b1d14a"
+          ]
+        ],
+        "metrics": {
+          "alphaMismatch": 0,
+          "visibleRgbMismatch": 5120,
+          "opaqueRgbMismatch": 0,
+          "sets": {
+            "all": {
+              "black": {
+                "samples": 5120,
+                "squaredRgb": 21525444.36425982,
+                "squaredLab": 48.225160382841004,
+                "rgbRmse": 37.435225623266014,
+                "labRmse": 0.09705141234043756
+              },
+              "white": {
+                "samples": 5120,
+                "squaredRgb": 21525444.364259817,
+                "squaredLab": 45.69833249924125,
+                "rgbRmse": 37.43522562326601,
+                "labRmse": 0.09447462922000835
+              },
+              "checker": {
+                "samples": 5120,
+                "squaredRgb": 21525444.36425982,
+                "squaredLab": 46.92125894294515,
+                "rgbRmse": 37.435225623266014,
+                "labRmse": 0.09573039427106719
+              }
+            },
+            "soft": {
+              "black": {
+                "samples": 2556,
+                "squaredRgb": 2744926.7939561764,
+                "squaredLab": 8.316751187195491,
+                "rgbRmse": 18.92013936796463,
+                "labRmse": 0.05704222136684887
+              },
+              "white": {
+                "samples": 2556,
+                "squaredRgb": 2744926.793956177,
+                "squaredLab": 6.24655600632988,
+                "rgbRmse": 18.920139367964634,
+                "labRmse": 0.049435609652294224
+              },
+              "checker": {
+                "samples": 2556,
+                "squaredRgb": 2744926.793956177,
+                "squaredLab": 6.973125405281051,
+                "rgbRmse": 18.920139367964634,
+                "labRmse": 0.052231598002762315
+              }
+            },
+            "alpha128": {
+              "black": {
+                "samples": 2564,
+                "squaredRgb": 18780517.570303697,
+                "squaredLab": 39.90840919564543,
+                "rgbRmse": 49.4121943121063,
+                "labRmse": 0.12475937713209782
+              },
+              "white": {
+                "samples": 2564,
+                "squaredRgb": 18780517.570303693,
+                "squaredLab": 39.451776492911385,
+                "rgbRmse": 49.412194312106294,
+                "labRmse": 0.12404357421715816
+              },
+              "checker": {
+                "samples": 2564,
+                "squaredRgb": 18780517.570303697,
+                "squaredLab": 39.94813353766412,
+                "rgbRmse": 49.4121943121063,
+                "labRmse": 0.12482145366683095
+              }
+            },
+            "opaque": {
+              "black": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              },
+              "white": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              },
+              "checker": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  {
+    "fixture": "many-soft-colors",
+    "kind": "auto",
+    "metric": "rgb",
+    "variants": [
+      {
+        "weighting": "none",
+        "colors": [
+          [
+            "#334070",
+            "#46b18b",
+            "#e7667b"
+          ]
+        ],
+        "metrics": {
+          "alphaMismatch": 0,
+          "visibleRgbMismatch": 5120,
+          "opaqueRgbMismatch": 0,
+          "sets": {
+            "all": {
+              "black": {
+                "samples": 5120,
+                "squaredRgb": 17894218.78485203,
+                "squaredLab": 62.28325105247533,
+                "rgbRmse": 34.13192350481883,
+                "labRmse": 0.11029368735873595
+              },
+              "white": {
+                "samples": 5120,
+                "squaredRgb": 17894218.78485203,
+                "squaredLab": 57.57606582006814,
+                "rgbRmse": 34.13192350481883,
+                "labRmse": 0.10604397840274599
+              },
+              "checker": {
+                "samples": 5120,
+                "squaredRgb": 17894218.784852024,
+                "squaredLab": 59.610121683205925,
+                "rgbRmse": 34.13192350481882,
+                "labRmse": 0.10790088920509949
+              }
+            },
+            "soft": {
+              "black": {
+                "samples": 2556,
+                "squaredRgb": 2240486.004013845,
+                "squaredLab": 10.360059298821943,
+                "rgbRmse": 17.093463365557657,
+                "labRmse": 0.06366499303045019
+              },
+              "white": {
+                "samples": 2556,
+                "squaredRgb": 2240486.0040138448,
+                "squaredLab": 7.400169320293193,
+                "rgbRmse": 17.093463365557653,
+                "labRmse": 0.05380720132140976
+              },
+              "checker": {
+                "samples": 2556,
+                "squaredRgb": 2240486.0040138457,
+                "squaredLab": 8.409468209268086,
+                "rgbRmse": 17.093463365557657,
+                "labRmse": 0.05735929988895617
+              }
+            },
+            "alpha128": {
+              "black": {
+                "samples": 2564,
+                "squaredRgb": 15653732.780838149,
+                "squaredLab": 51.9231917536533,
+                "rgbRmse": 45.11171315939494,
+                "labRmse": 0.14230549820058785
+              },
+              "white": {
+                "samples": 2564,
+                "squaredRgb": 15653732.78083815,
+                "squaredLab": 50.175896499774986,
+                "rgbRmse": 45.11171315939494,
+                "labRmse": 0.13989060872770784
+              },
+              "checker": {
+                "samples": 2564,
+                "squaredRgb": 15653732.780838149,
+                "squaredLab": 51.2006534739379,
+                "rgbRmse": 45.11171315939494,
+                "labRmse": 0.14131190189428652
+              }
+            },
+            "opaque": {
+              "black": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              },
+              "white": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              },
+              "checker": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              }
+            }
+          }
+        }
+      },
+      {
+        "weighting": "linear",
+        "colors": [
+          [
+            "#674a57",
+            "#72be48",
+            "#a083d9"
+          ]
+        ],
+        "metrics": {
+          "alphaMismatch": 0,
+          "visibleRgbMismatch": 5120,
+          "opaqueRgbMismatch": 0,
+          "sets": {
+            "all": {
+              "black": {
+                "samples": 5120,
+                "squaredRgb": 17120616.82755861,
+                "squaredLab": 56.87318680639349,
+                "rgbRmse": 33.3859774662584,
+                "labRmse": 0.10539470716370784
+              },
+              "white": {
+                "samples": 5120,
+                "squaredRgb": 17120616.827558607,
+                "squaredLab": 51.49615892737427,
+                "rgbRmse": 33.385977466258396,
+                "labRmse": 0.10028880067336925
+              },
+              "checker": {
+                "samples": 5120,
+                "squaredRgb": 17120616.827558607,
+                "squaredLab": 53.54838993913073,
+                "rgbRmse": 33.385977466258396,
+                "labRmse": 0.10226763862525853
+              }
+            },
+            "soft": {
+              "black": {
+                "samples": 2556,
+                "squaredRgb": 2165994.5454517542,
+                "squaredLab": 9.599705308922584,
+                "rgbRmse": 16.806900431650845,
+                "labRmse": 0.06128420066177077
+              },
+              "white": {
+                "samples": 2556,
+                "squaredRgb": 2165994.545451754,
+                "squaredLab": 6.582291758710481,
+                "rgbRmse": 16.806900431650845,
+                "labRmse": 0.05074673898382401
+              },
+              "checker": {
+                "samples": 2556,
+                "squaredRgb": 2165994.545451754,
+                "squaredLab": 7.489181220320378,
+                "rgbRmse": 16.806900431650845,
+                "labRmse": 0.05412984020911489
+              }
+            },
+            "alpha128": {
+              "black": {
+                "samples": 2564,
+                "squaredRgb": 14954622.282106867,
+                "squaredLab": 47.27348149747105,
+                "rgbRmse": 44.09284141241575,
+                "labRmse": 0.13578437052851444
+              },
+              "white": {
+                "samples": 2564,
+                "squaredRgb": 14954622.282106869,
+                "squaredLab": 44.91386716866374,
+                "rgbRmse": 44.09284141241575,
+                "labRmse": 0.13235221524452875
+              },
+              "checker": {
+                "samples": 2564,
+                "squaredRgb": 14954622.282106867,
+                "squaredLab": 46.0592087188103,
+                "rgbRmse": 44.09284141241575,
+                "labRmse": 0.13402913844658604
+              }
+            },
+            "opaque": {
+              "black": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              },
+              "white": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              },
+              "checker": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              }
+            }
+          }
+        }
+      },
+      {
+        "weighting": "squared",
+        "colors": [
+          [
+            "#509cb9",
+            "#848c3b",
+            "#d6609c"
+          ]
+        ],
+        "metrics": {
+          "alphaMismatch": 0,
+          "visibleRgbMismatch": 5120,
+          "opaqueRgbMismatch": 0,
+          "sets": {
+            "all": {
+              "black": {
+                "samples": 5120,
+                "squaredRgb": 17108679.74980388,
+                "squaredLab": 84.06179841602692,
+                "rgbRmse": 33.37433651591979,
+                "labRmse": 0.12813399237957995
+              },
+              "white": {
+                "samples": 5120,
+                "squaredRgb": 17108679.749803875,
+                "squaredLab": 75.88068413349882,
+                "rgbRmse": 33.37433651591978,
+                "labRmse": 0.12173925463803362
+              },
+              "checker": {
+                "samples": 5120,
+                "squaredRgb": 17108679.74980388,
+                "squaredLab": 79.16957831425013,
+                "rgbRmse": 33.37433651591979,
+                "labRmse": 0.1243495406686409
+              }
+            },
+            "soft": {
+              "black": {
+                "samples": 2556,
+                "squaredRgb": 2139240.0578085366,
+                "squaredLab": 14.053224457663894,
+                "rgbRmse": 16.70277800671004,
+                "labRmse": 0.07414938728306386
+              },
+              "white": {
+                "samples": 2556,
+                "squaredRgb": 2139240.0578085366,
+                "squaredLab": 9.498889989090909,
+                "rgbRmse": 16.70277800671004,
+                "labRmse": 0.06096155048355899
+              },
+              "checker": {
+                "samples": 2556,
+                "squaredRgb": 2139240.0578085366,
+                "squaredLab": 10.906851094231845,
+                "rgbRmse": 16.70277800671004,
+                "labRmse": 0.06532347311765736
+              }
+            },
+            "alpha128": {
+              "black": {
+                "samples": 2564,
+                "squaredRgb": 14969439.691995393,
+                "squaredLab": 70.00857395836306,
+                "rgbRmse": 44.11468014345755,
+                "labRmse": 0.16524053988414114
+              },
+              "white": {
+                "samples": 2564,
+                "squaredRgb": 14969439.691995392,
+                "squaredLab": 66.38179414440783,
+                "rgbRmse": 44.11468014345754,
+                "labRmse": 0.1609034968971514
+              },
+              "checker": {
+                "samples": 2564,
+                "squaredRgb": 14969439.691995395,
+                "squaredLab": 68.26272722001823,
+                "rgbRmse": 44.11468014345755,
+                "labRmse": 0.1631671797787453
+              }
+            },
+            "opaque": {
+              "black": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              },
+              "white": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              },
+              "checker": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  {
+    "fixture": "many-soft-colors",
+    "kind": "fixed",
+    "metric": "oklab",
+    "variants": [
+      {
+        "weighting": "none",
+        "colors": [
+          [
+            "#91db69",
+            "#92a984",
+            "#484a77",
+            "#cf657f"
+          ]
+        ],
+        "metrics": {
+          "alphaMismatch": 0,
+          "visibleRgbMismatch": 5120,
+          "opaqueRgbMismatch": 0,
+          "sets": {
+            "all": {
+              "black": {
+                "samples": 5120,
+                "squaredRgb": 17297808.380222965,
+                "squaredLab": 38.18603075657299,
+                "rgbRmse": 33.5582985229302,
+                "labRmse": 0.0863609236410957
+              },
+              "white": {
+                "samples": 5120,
+                "squaredRgb": 17297808.38022297,
+                "squaredLab": 36.542882486118344,
+                "rgbRmse": 33.5582985229302,
+                "labRmse": 0.08448243447942294
+              },
+              "checker": {
+                "samples": 5120,
+                "squaredRgb": 17297808.380222965,
+                "squaredLab": 37.44832065037425,
+                "rgbRmse": 33.5582985229302,
+                "labRmse": 0.08552265855915742
+              }
+            },
+            "soft": {
+              "black": {
+                "samples": 2556,
+                "squaredRgb": 2181488.0243291045,
+                "squaredLab": 6.629499745108102,
+                "rgbRmse": 16.86690366578524,
+                "labRmse": 0.05092839086147032
+              },
+              "white": {
+                "samples": 2556,
+                "squaredRgb": 2181488.0243291045,
+                "squaredLab": 5.010851004263486,
+                "rgbRmse": 16.86690366578524,
+                "labRmse": 0.044276707651751526
+              },
+              "checker": {
+                "samples": 2556,
+                "squaredRgb": 2181488.0243291045,
+                "squaredLab": 5.598207144451637,
+                "rgbRmse": 16.86690366578524,
+                "labRmse": 0.04679980648999139
+              }
+            },
+            "alpha128": {
+              "black": {
+                "samples": 2564,
+                "squaredRgb": 15116320.355893878,
+                "squaredLab": 31.556531011464926,
+                "rgbRmse": 44.33057922333494,
+                "labRmse": 0.11093935007943377
+              },
+              "white": {
+                "samples": 2564,
+                "squaredRgb": 15116320.35589388,
+                "squaredLab": 31.532031481854847,
+                "rgbRmse": 44.330579223334944,
+                "labRmse": 0.11089627675125655
+              },
+              "checker": {
+                "samples": 2564,
+                "squaredRgb": 15116320.35589388,
+                "squaredLab": 31.850113505922643,
+                "rgbRmse": 44.330579223334944,
+                "labRmse": 0.11145421099696408
+              }
+            },
+            "opaque": {
+              "black": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              },
+              "white": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              },
+              "checker": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              }
+            }
+          }
+        }
+      },
+      {
+        "weighting": "linear",
+        "colors": [
+          [
+            "#91db69",
+            "#92a984",
+            "#484a77",
+            "#cf657f"
+          ]
+        ],
+        "metrics": {
+          "alphaMismatch": 0,
+          "visibleRgbMismatch": 5120,
+          "opaqueRgbMismatch": 0,
+          "sets": {
+            "all": {
+              "black": {
+                "samples": 5120,
+                "squaredRgb": 17297808.380222965,
+                "squaredLab": 38.18603075657299,
+                "rgbRmse": 33.5582985229302,
+                "labRmse": 0.0863609236410957
+              },
+              "white": {
+                "samples": 5120,
+                "squaredRgb": 17297808.38022297,
+                "squaredLab": 36.542882486118344,
+                "rgbRmse": 33.5582985229302,
+                "labRmse": 0.08448243447942294
+              },
+              "checker": {
+                "samples": 5120,
+                "squaredRgb": 17297808.380222965,
+                "squaredLab": 37.44832065037425,
+                "rgbRmse": 33.5582985229302,
+                "labRmse": 0.08552265855915742
+              }
+            },
+            "soft": {
+              "black": {
+                "samples": 2556,
+                "squaredRgb": 2181488.0243291045,
+                "squaredLab": 6.629499745108102,
+                "rgbRmse": 16.86690366578524,
+                "labRmse": 0.05092839086147032
+              },
+              "white": {
+                "samples": 2556,
+                "squaredRgb": 2181488.0243291045,
+                "squaredLab": 5.010851004263486,
+                "rgbRmse": 16.86690366578524,
+                "labRmse": 0.044276707651751526
+              },
+              "checker": {
+                "samples": 2556,
+                "squaredRgb": 2181488.0243291045,
+                "squaredLab": 5.598207144451637,
+                "rgbRmse": 16.86690366578524,
+                "labRmse": 0.04679980648999139
+              }
+            },
+            "alpha128": {
+              "black": {
+                "samples": 2564,
+                "squaredRgb": 15116320.355893878,
+                "squaredLab": 31.556531011464926,
+                "rgbRmse": 44.33057922333494,
+                "labRmse": 0.11093935007943377
+              },
+              "white": {
+                "samples": 2564,
+                "squaredRgb": 15116320.35589388,
+                "squaredLab": 31.532031481854847,
+                "rgbRmse": 44.330579223334944,
+                "labRmse": 0.11089627675125655
+              },
+              "checker": {
+                "samples": 2564,
+                "squaredRgb": 15116320.35589388,
+                "squaredLab": 31.850113505922643,
+                "rgbRmse": 44.330579223334944,
+                "labRmse": 0.11145421099696408
+              }
+            },
+            "opaque": {
+              "black": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              },
+              "white": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              },
+              "checker": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              }
+            }
+          }
+        }
+      },
+      {
+        "weighting": "squared",
+        "colors": [
+          [
+            "#91db69",
+            "#92a984",
+            "#484a77",
+            "#cf657f"
+          ]
+        ],
+        "metrics": {
+          "alphaMismatch": 0,
+          "visibleRgbMismatch": 5120,
+          "opaqueRgbMismatch": 0,
+          "sets": {
+            "all": {
+              "black": {
+                "samples": 5120,
+                "squaredRgb": 17297808.380222965,
+                "squaredLab": 38.18603075657299,
+                "rgbRmse": 33.5582985229302,
+                "labRmse": 0.0863609236410957
+              },
+              "white": {
+                "samples": 5120,
+                "squaredRgb": 17297808.38022297,
+                "squaredLab": 36.542882486118344,
+                "rgbRmse": 33.5582985229302,
+                "labRmse": 0.08448243447942294
+              },
+              "checker": {
+                "samples": 5120,
+                "squaredRgb": 17297808.380222965,
+                "squaredLab": 37.44832065037425,
+                "rgbRmse": 33.5582985229302,
+                "labRmse": 0.08552265855915742
+              }
+            },
+            "soft": {
+              "black": {
+                "samples": 2556,
+                "squaredRgb": 2181488.0243291045,
+                "squaredLab": 6.629499745108102,
+                "rgbRmse": 16.86690366578524,
+                "labRmse": 0.05092839086147032
+              },
+              "white": {
+                "samples": 2556,
+                "squaredRgb": 2181488.0243291045,
+                "squaredLab": 5.010851004263486,
+                "rgbRmse": 16.86690366578524,
+                "labRmse": 0.044276707651751526
+              },
+              "checker": {
+                "samples": 2556,
+                "squaredRgb": 2181488.0243291045,
+                "squaredLab": 5.598207144451637,
+                "rgbRmse": 16.86690366578524,
+                "labRmse": 0.04679980648999139
+              }
+            },
+            "alpha128": {
+              "black": {
+                "samples": 2564,
+                "squaredRgb": 15116320.355893878,
+                "squaredLab": 31.556531011464926,
+                "rgbRmse": 44.33057922333494,
+                "labRmse": 0.11093935007943377
+              },
+              "white": {
+                "samples": 2564,
+                "squaredRgb": 15116320.35589388,
+                "squaredLab": 31.532031481854847,
+                "rgbRmse": 44.330579223334944,
+                "labRmse": 0.11089627675125655
+              },
+              "checker": {
+                "samples": 2564,
+                "squaredRgb": 15116320.35589388,
+                "squaredLab": 31.850113505922643,
+                "rgbRmse": 44.330579223334944,
+                "labRmse": 0.11145421099696408
+              }
+            },
+            "opaque": {
+              "black": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              },
+              "white": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              },
+              "checker": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  {
+    "fixture": "many-soft-colors",
+    "kind": "fixed",
+    "metric": "rgb",
+    "variants": [
+      {
+        "weighting": "none",
+        "colors": [
+          [
+            "#91db69",
+            "#374e4a",
+            "#4d65b4",
+            "#cf657f"
+          ]
+        ],
+        "metrics": {
+          "alphaMismatch": 0,
+          "visibleRgbMismatch": 5120,
+          "opaqueRgbMismatch": 0,
+          "sets": {
+            "all": {
+              "black": {
+                "samples": 5120,
+                "squaredRgb": 14174626.758354466,
+                "squaredLab": 49.298468220713026,
+                "rgbRmse": 30.37807207368009,
+                "labRmse": 0.09812546598288344
+              },
+              "white": {
+                "samples": 5120,
+                "squaredRgb": 14174626.758354468,
+                "squaredLab": 45.743771326302856,
+                "rgbRmse": 30.378072073680094,
+                "labRmse": 0.09452158662003367
+              },
+              "checker": {
+                "samples": 5120,
+                "squaredRgb": 14174626.758354466,
+                "squaredLab": 47.382714282201086,
+                "rgbRmse": 30.37807207368009,
+                "labRmse": 0.09619998120188174
+              }
+            },
+            "soft": {
+              "black": {
+                "samples": 2556,
+                "squaredRgb": 1788981.0987158788,
+                "squaredLab": 8.470255886296458,
+                "rgbRmse": 15.274317855691212,
+                "labRmse": 0.05756623689287358
+              },
+              "white": {
+                "samples": 2556,
+                "squaredRgb": 1788981.098715879,
+                "squaredLab": 6.016799891152556,
+                "rgbRmse": 15.274317855691212,
+                "labRmse": 0.04851794067912989
+              },
+              "checker": {
+                "samples": 2556,
+                "squaredRgb": 1788981.0987158793,
+                "squaredLab": 6.8242509219600525,
+                "rgbRmse": 15.274317855691214,
+                "labRmse": 0.05167102405508748
+              }
+            },
+            "alpha128": {
+              "black": {
+                "samples": 2564,
+                "squaredRgb": 12385645.659638623,
+                "squaredLab": 40.8282123344166,
+                "rgbRmse": 40.12727680377486,
+                "labRmse": 0.12618890504324345
+              },
+              "white": {
+                "samples": 2564,
+                "squaredRgb": 12385645.659638625,
+                "squaredLab": 39.726971435150396,
+                "rgbRmse": 40.12727680377487,
+                "labRmse": 0.12447545390659824
+              },
+              "checker": {
+                "samples": 2564,
+                "squaredRgb": 12385645.659638623,
+                "squaredLab": 40.558463360240935,
+                "rgbRmse": 40.12727680377486,
+                "labRmse": 0.12577135384431495
+              }
+            },
+            "opaque": {
+              "black": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              },
+              "white": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              },
+              "checker": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              }
+            }
+          }
+        }
+      },
+      {
+        "weighting": "linear",
+        "colors": [
+          [
+            "#9e4539",
+            "#239063",
+            "#b2ba90",
+            "#905ea9"
+          ]
+        ],
+        "metrics": {
+          "alphaMismatch": 0,
+          "visibleRgbMismatch": 5120,
+          "opaqueRgbMismatch": 0,
+          "sets": {
+            "all": {
+              "black": {
+                "samples": 5120,
+                "squaredRgb": 14307101.134855883,
+                "squaredLab": 57.5246293781706,
+                "rgbRmse": 30.519696866130786,
+                "labRmse": 0.10599659982954145
+              },
+              "white": {
+                "samples": 5120,
+                "squaredRgb": 14307101.134855881,
+                "squaredLab": 51.300677179335324,
+                "rgbRmse": 30.519696866130783,
+                "labRmse": 0.10009826927369389
+              },
+              "checker": {
+                "samples": 5120,
+                "squaredRgb": 14307101.134855881,
+                "squaredLab": 53.67663157138752,
+                "rgbRmse": 30.519696866130783,
+                "labRmse": 0.1023900244349352
+              }
+            },
+            "soft": {
+              "black": {
+                "samples": 2556,
+                "squaredRgb": 1814834.318369858,
+                "squaredLab": 9.685076648302779,
+                "rgbRmse": 15.384289346002145,
+                "labRmse": 0.061556101389479034
+              },
+              "white": {
+                "samples": 2556,
+                "squaredRgb": 1814834.3183698577,
+                "squaredLab": 6.406681282714083,
+                "rgbRmse": 15.384289346002145,
+                "labRmse": 0.050065220697012455
+              },
+              "checker": {
+                "samples": 2556,
+                "squaredRgb": 1814834.3183698575,
+                "squaredLab": 7.371247368831859,
+                "rgbRmse": 15.384289346002143,
+                "labRmse": 0.05370195151546715
+              }
+            },
+            "alpha128": {
+              "black": {
+                "samples": 2564,
+                "squaredRgb": 12492266.816485997,
+                "squaredLab": 47.83955272986781,
+                "rgbRmse": 40.29962342912302,
+                "labRmse": 0.13659491898135928
+              },
+              "white": {
+                "samples": 2564,
+                "squaredRgb": 12492266.816485995,
+                "squaredLab": 44.89399589662122,
+                "rgbRmse": 40.29962342912302,
+                "labRmse": 0.13232293366621387
+              },
+              "checker": {
+                "samples": 2564,
+                "squaredRgb": 12492266.816485995,
+                "squaredLab": 46.30538420255569,
+                "rgbRmse": 40.29962342912302,
+                "labRmse": 0.1343868380158042
+              }
+            },
+            "opaque": {
+              "black": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              },
+              "white": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              },
+              "checker": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              }
+            }
+          }
+        }
+      },
+      {
+        "weighting": "squared",
+        "colors": [
+          [
+            "#9e4539",
+            "#239063",
+            "#b2ba90",
+            "#905ea9"
+          ]
+        ],
+        "metrics": {
+          "alphaMismatch": 0,
+          "visibleRgbMismatch": 5120,
+          "opaqueRgbMismatch": 0,
+          "sets": {
+            "all": {
+              "black": {
+                "samples": 5120,
+                "squaredRgb": 14307101.134855883,
+                "squaredLab": 57.5246293781706,
+                "rgbRmse": 30.519696866130786,
+                "labRmse": 0.10599659982954145
+              },
+              "white": {
+                "samples": 5120,
+                "squaredRgb": 14307101.134855881,
+                "squaredLab": 51.300677179335324,
+                "rgbRmse": 30.519696866130783,
+                "labRmse": 0.10009826927369389
+              },
+              "checker": {
+                "samples": 5120,
+                "squaredRgb": 14307101.134855881,
+                "squaredLab": 53.67663157138752,
+                "rgbRmse": 30.519696866130783,
+                "labRmse": 0.1023900244349352
+              }
+            },
+            "soft": {
+              "black": {
+                "samples": 2556,
+                "squaredRgb": 1814834.318369858,
+                "squaredLab": 9.685076648302779,
+                "rgbRmse": 15.384289346002145,
+                "labRmse": 0.061556101389479034
+              },
+              "white": {
+                "samples": 2556,
+                "squaredRgb": 1814834.3183698577,
+                "squaredLab": 6.406681282714083,
+                "rgbRmse": 15.384289346002145,
+                "labRmse": 0.050065220697012455
+              },
+              "checker": {
+                "samples": 2556,
+                "squaredRgb": 1814834.3183698575,
+                "squaredLab": 7.371247368831859,
+                "rgbRmse": 15.384289346002143,
+                "labRmse": 0.05370195151546715
+              }
+            },
+            "alpha128": {
+              "black": {
+                "samples": 2564,
+                "squaredRgb": 12492266.816485997,
+                "squaredLab": 47.83955272986781,
+                "rgbRmse": 40.29962342912302,
+                "labRmse": 0.13659491898135928
+              },
+              "white": {
+                "samples": 2564,
+                "squaredRgb": 12492266.816485995,
+                "squaredLab": 44.89399589662122,
+                "rgbRmse": 40.29962342912302,
+                "labRmse": 0.13232293366621387
+              },
+              "checker": {
+                "samples": 2564,
+                "squaredRgb": 12492266.816485995,
+                "squaredLab": 46.30538420255569,
+                "rgbRmse": 40.29962342912302,
+                "labRmse": 0.1343868380158042
+              }
+            },
+            "opaque": {
+              "black": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              },
+              "white": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              },
+              "checker": {
+                "samples": 0,
+                "squaredRgb": 0,
+                "squaredLab": 0,
+                "rgbRmse": 0,
+                "labRmse": 0
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+]

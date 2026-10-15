@@ -1,0 +1,2847 @@
+{
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "at": "2026-10-15T13:25:52.808Z",
+  "cases": [
+    {
+      "name": "alpha1-spill",
+      "kind": "auto",
+      "metric": "oklab",
+      "variants": [
+        {
+          "weighting": "baseline",
+          "ms": 4,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#ff00ff"
+          ],
+          "hash": "0a9eed19dc22633842f163b92dca9e64b45402c21492f67a41167d4de477fb10",
+          "alphaChanges": 0,
+          "opaqueChanges": 140,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "none",
+          "ms": 3.5,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#ff00ff"
+          ],
+          "hash": "0a9eed19dc22633842f163b92dca9e64b45402c21492f67a41167d4de477fb10",
+          "alphaChanges": 0,
+          "opaqueChanges": 140,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "linear",
+          "ms": 1,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "fdbf6fe8aaf7658ef105b38a2bb4798370d460f0ad45046b97bffb7daf3216c8",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "squared",
+          "ms": 1,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "fdbf6fe8aaf7658ef105b38a2bb4798370d460f0ad45046b97bffb7daf3216c8",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        }
+      ]
+    },
+    {
+      "name": "alpha1-spill",
+      "kind": "auto",
+      "metric": "rgb",
+      "variants": [
+        {
+          "weighting": "baseline",
+          "ms": 1.7999999970197678,
+          "colors": [
+            "#1ec828",
+            "#dc1e1e",
+            "#ff00ff"
+          ],
+          "hash": "38d8b964f06aa0d08dd9905458ee3cef5f76bf4fb0f94dd102765df151d8b0e0",
+          "alphaChanges": 0,
+          "opaqueChanges": 130,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "none",
+          "ms": 0.7999999970197678,
+          "colors": [
+            "#1ec828",
+            "#dc1e1e",
+            "#ff00ff"
+          ],
+          "hash": "38d8b964f06aa0d08dd9905458ee3cef5f76bf4fb0f94dd102765df151d8b0e0",
+          "alphaChanges": 0,
+          "opaqueChanges": 130,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "linear",
+          "ms": 0.7000000029802322,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "2225eda2efc23e4317ee5be1d524de94c571db63a2c0aa1eefeae2f38119c614",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "squared",
+          "ms": 0.6000000014901161,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "2225eda2efc23e4317ee5be1d524de94c571db63a2c0aa1eefeae2f38119c614",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        }
+      ]
+    },
+    {
+      "name": "alpha1-spill",
+      "kind": "fixed",
+      "metric": "oklab",
+      "variants": [
+        {
+          "weighting": "baseline",
+          "ms": 0.5,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4",
+            "#a884f3"
+          ],
+          "hash": "63b516c6a787a281fd2b95f6c8b77644cac0b2efb5e8a8584a5d8d60eba97031",
+          "alphaChanges": 0,
+          "opaqueChanges": 400,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "none",
+          "ms": 0.6999999955296516,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4",
+            "#a884f3"
+          ],
+          "hash": "63b516c6a787a281fd2b95f6c8b77644cac0b2efb5e8a8584a5d8d60eba97031",
+          "alphaChanges": 0,
+          "opaqueChanges": 400,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "linear",
+          "ms": 0.7000000029802322,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4",
+            "#a884f3"
+          ],
+          "hash": "63b516c6a787a281fd2b95f6c8b77644cac0b2efb5e8a8584a5d8d60eba97031",
+          "alphaChanges": 0,
+          "opaqueChanges": 400,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "squared",
+          "ms": 0.6000000014901161,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4",
+            "#a884f3"
+          ],
+          "hash": "63b516c6a787a281fd2b95f6c8b77644cac0b2efb5e8a8584a5d8d60eba97031",
+          "alphaChanges": 0,
+          "opaqueChanges": 400,
+          "membershipViolations": 0
+        }
+      ]
+    },
+    {
+      "name": "alpha1-spill",
+      "kind": "fixed",
+      "metric": "rgb",
+      "variants": [
+        {
+          "weighting": "baseline",
+          "ms": 0.5999999940395355,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4",
+            "#f04f78"
+          ],
+          "hash": "b398ef5d09ff0b97ccea9d8e4a2ffd3dae8467d59ed4ee95896382250e30ac9e",
+          "alphaChanges": 0,
+          "opaqueChanges": 400,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "none",
+          "ms": 0.5,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4",
+            "#f04f78"
+          ],
+          "hash": "b398ef5d09ff0b97ccea9d8e4a2ffd3dae8467d59ed4ee95896382250e30ac9e",
+          "alphaChanges": 0,
+          "opaqueChanges": 400,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "linear",
+          "ms": 0.5,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4",
+            "#f04f78"
+          ],
+          "hash": "b398ef5d09ff0b97ccea9d8e4a2ffd3dae8467d59ed4ee95896382250e30ac9e",
+          "alphaChanges": 0,
+          "opaqueChanges": 400,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "squared",
+          "ms": 0.5,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4",
+            "#f04f78"
+          ],
+          "hash": "b398ef5d09ff0b97ccea9d8e4a2ffd3dae8467d59ed4ee95896382250e30ac9e",
+          "alphaChanges": 0,
+          "opaqueChanges": 400,
+          "membershipViolations": 0
+        }
+      ]
+    },
+    {
+      "name": "alpha6-halo",
+      "kind": "auto",
+      "metric": "oklab",
+      "variants": [
+        {
+          "weighting": "baseline",
+          "ms": 0.7000000029802322,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#ff00ff"
+          ],
+          "hash": "7c2e43c38046ac6c05ec8d45870a6d407a50abb4f1e67c193f918ceacfd32fb4",
+          "alphaChanges": 0,
+          "opaqueChanges": 140,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "none",
+          "ms": 0.6000000014901161,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#ff00ff"
+          ],
+          "hash": "7c2e43c38046ac6c05ec8d45870a6d407a50abb4f1e67c193f918ceacfd32fb4",
+          "alphaChanges": 0,
+          "opaqueChanges": 140,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "linear",
+          "ms": 0.7999999970197678,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "2bf38f314545d94506187e4baac0d2d3ed5ed02b04e3bc07234e4caad832791f",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "squared",
+          "ms": 0.7000000029802322,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "2bf38f314545d94506187e4baac0d2d3ed5ed02b04e3bc07234e4caad832791f",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        }
+      ]
+    },
+    {
+      "name": "alpha6-halo",
+      "kind": "auto",
+      "metric": "rgb",
+      "variants": [
+        {
+          "weighting": "baseline",
+          "ms": 0.5,
+          "colors": [
+            "#1ec828",
+            "#dc1e1e",
+            "#ff00ff"
+          ],
+          "hash": "68d43c36567c54b4e2de76c94c92a4976108680789b8ae388e8a16474ded7ce4",
+          "alphaChanges": 0,
+          "opaqueChanges": 130,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "none",
+          "ms": 0.6000000014901161,
+          "colors": [
+            "#1ec828",
+            "#dc1e1e",
+            "#ff00ff"
+          ],
+          "hash": "68d43c36567c54b4e2de76c94c92a4976108680789b8ae388e8a16474ded7ce4",
+          "alphaChanges": 0,
+          "opaqueChanges": 130,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "linear",
+          "ms": 0.6999999955296516,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "2d222cbe6b39ad839ff17f504d8f22745352152a63711af1822fc1836a9092ee",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "squared",
+          "ms": 0.5,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "2d222cbe6b39ad839ff17f504d8f22745352152a63711af1822fc1836a9092ee",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        }
+      ]
+    },
+    {
+      "name": "alpha6-halo",
+      "kind": "fixed",
+      "metric": "oklab",
+      "variants": [
+        {
+          "weighting": "baseline",
+          "ms": 0.7000000029802322,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4",
+            "#a884f3"
+          ],
+          "hash": "a36b652b6b62f68e8129264064012a841fc38226f74bd96be6cd8045576dd6ab",
+          "alphaChanges": 0,
+          "opaqueChanges": 400,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "none",
+          "ms": 0.7999999970197678,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4",
+            "#a884f3"
+          ],
+          "hash": "a36b652b6b62f68e8129264064012a841fc38226f74bd96be6cd8045576dd6ab",
+          "alphaChanges": 0,
+          "opaqueChanges": 400,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "linear",
+          "ms": 1.2000000029802322,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4",
+            "#a884f3"
+          ],
+          "hash": "a36b652b6b62f68e8129264064012a841fc38226f74bd96be6cd8045576dd6ab",
+          "alphaChanges": 0,
+          "opaqueChanges": 400,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "squared",
+          "ms": 0.29999999701976776,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4",
+            "#a884f3"
+          ],
+          "hash": "a36b652b6b62f68e8129264064012a841fc38226f74bd96be6cd8045576dd6ab",
+          "alphaChanges": 0,
+          "opaqueChanges": 400,
+          "membershipViolations": 0
+        }
+      ]
+    },
+    {
+      "name": "alpha6-halo",
+      "kind": "fixed",
+      "metric": "rgb",
+      "variants": [
+        {
+          "weighting": "baseline",
+          "ms": 0.6000000014901161,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4",
+            "#f04f78"
+          ],
+          "hash": "5dd0f692a146e3f7adec24412af51dda6653a09a1742c6a53459007f03f05fd9",
+          "alphaChanges": 0,
+          "opaqueChanges": 400,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "none",
+          "ms": 0.29999999701976776,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4",
+            "#f04f78"
+          ],
+          "hash": "5dd0f692a146e3f7adec24412af51dda6653a09a1742c6a53459007f03f05fd9",
+          "alphaChanges": 0,
+          "opaqueChanges": 400,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "linear",
+          "ms": 0.30000000447034836,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4",
+            "#f04f78"
+          ],
+          "hash": "5dd0f692a146e3f7adec24412af51dda6653a09a1742c6a53459007f03f05fd9",
+          "alphaChanges": 0,
+          "opaqueChanges": 400,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "squared",
+          "ms": 0.29999999701976776,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4",
+            "#f04f78"
+          ],
+          "hash": "5dd0f692a146e3f7adec24412af51dda6653a09a1742c6a53459007f03f05fd9",
+          "alphaChanges": 0,
+          "opaqueChanges": 400,
+          "membershipViolations": 0
+        }
+      ]
+    },
+    {
+      "name": "all-faint",
+      "kind": "auto",
+      "metric": "oklab",
+      "variants": [
+        {
+          "weighting": "baseline",
+          "ms": 0.8000000044703484,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "656cde2bdcb933bf947474e5b0c28f360f42eaab509a6c7fe2af135798982b05",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "none",
+          "ms": 0.5,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "656cde2bdcb933bf947474e5b0c28f360f42eaab509a6c7fe2af135798982b05",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "linear",
+          "ms": 0.29999999701976776,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "656cde2bdcb933bf947474e5b0c28f360f42eaab509a6c7fe2af135798982b05",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "squared",
+          "ms": 0.29999999701976776,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "656cde2bdcb933bf947474e5b0c28f360f42eaab509a6c7fe2af135798982b05",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        }
+      ]
+    },
+    {
+      "name": "all-faint",
+      "kind": "auto",
+      "metric": "rgb",
+      "variants": [
+        {
+          "weighting": "baseline",
+          "ms": 0.30000000447034836,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "656cde2bdcb933bf947474e5b0c28f360f42eaab509a6c7fe2af135798982b05",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "none",
+          "ms": 0.19999999552965164,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "656cde2bdcb933bf947474e5b0c28f360f42eaab509a6c7fe2af135798982b05",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "linear",
+          "ms": 0.30000000447034836,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "656cde2bdcb933bf947474e5b0c28f360f42eaab509a6c7fe2af135798982b05",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "squared",
+          "ms": 0.29999999701976776,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "656cde2bdcb933bf947474e5b0c28f360f42eaab509a6c7fe2af135798982b05",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        }
+      ]
+    },
+    {
+      "name": "all-faint",
+      "kind": "fixed",
+      "metric": "oklab",
+      "variants": [
+        {
+          "weighting": "baseline",
+          "ms": 0.5,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4"
+          ],
+          "hash": "b774264eaed25d69e7fa91ab6a5272e67569751e840ad92ae48e483c96f6d6ad",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "none",
+          "ms": 0.3999999985098839,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4"
+          ],
+          "hash": "b774264eaed25d69e7fa91ab6a5272e67569751e840ad92ae48e483c96f6d6ad",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "linear",
+          "ms": 0.6000000014901161,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4"
+          ],
+          "hash": "b774264eaed25d69e7fa91ab6a5272e67569751e840ad92ae48e483c96f6d6ad",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "squared",
+          "ms": 0.3999999985098839,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4"
+          ],
+          "hash": "b774264eaed25d69e7fa91ab6a5272e67569751e840ad92ae48e483c96f6d6ad",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        }
+      ]
+    },
+    {
+      "name": "all-faint",
+      "kind": "fixed",
+      "metric": "rgb",
+      "variants": [
+        {
+          "weighting": "baseline",
+          "ms": 0.5,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4"
+          ],
+          "hash": "b774264eaed25d69e7fa91ab6a5272e67569751e840ad92ae48e483c96f6d6ad",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "none",
+          "ms": 0.20000000298023224,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4"
+          ],
+          "hash": "b774264eaed25d69e7fa91ab6a5272e67569751e840ad92ae48e483c96f6d6ad",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "linear",
+          "ms": 0.3999999985098839,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4"
+          ],
+          "hash": "b774264eaed25d69e7fa91ab6a5272e67569751e840ad92ae48e483c96f6d6ad",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "squared",
+          "ms": 0.30000000447034836,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4"
+          ],
+          "hash": "b774264eaed25d69e7fa91ab6a5272e67569751e840ad92ae48e483c96f6d6ad",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        }
+      ]
+    },
+    {
+      "name": "many-soft-colors",
+      "kind": "auto",
+      "metric": "oklab",
+      "variants": [
+        {
+          "weighting": "baseline",
+          "ms": 134.19999999552965,
+          "colors": [
+            "#334070",
+            "#a6bc48",
+            "#b362ae"
+          ],
+          "hash": "57d45cd9caf035a06c4713e2d64cb05c23e231f4bd5da30737d3db4dceba4252",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "none",
+          "ms": 121.10000000149012,
+          "colors": [
+            "#334070",
+            "#a6bc48",
+            "#b362ae"
+          ],
+          "hash": "57d45cd9caf035a06c4713e2d64cb05c23e231f4bd5da30737d3db4dceba4252",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "linear",
+          "ms": 96.20000000298023,
+          "colors": [
+            "#2f4070",
+            "#b0597a",
+            "#b1c59d"
+          ],
+          "hash": "5dff389b049c91c7e46329f2007c22d2a2f0e1d1a1efc1ddb2cac3eafc0abaf1",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "squared",
+          "ms": 58.29999999701977,
+          "colors": [
+            "#5d3757",
+            "#9c7e9f",
+            "#b1d14a"
+          ],
+          "hash": "e03d4d2e7bdc136d199d95ae5b5d2c49a7c2fa83a3af5aeeff6f6ba8be5e3c5e",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        }
+      ]
+    },
+    {
+      "name": "many-soft-colors",
+      "kind": "auto",
+      "metric": "rgb",
+      "variants": [
+        {
+          "weighting": "baseline",
+          "ms": 90.69999999552965,
+          "colors": [
+            "#334070",
+            "#46b18b",
+            "#e7667b"
+          ],
+          "hash": "dac95b69d1f9e28cecb6117711b11809ef48215b918049378f466056422dc561",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "none",
+          "ms": 66.80000000447035,
+          "colors": [
+            "#334070",
+            "#46b18b",
+            "#e7667b"
+          ],
+          "hash": "dac95b69d1f9e28cecb6117711b11809ef48215b918049378f466056422dc561",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "linear",
+          "ms": 67.60000000149012,
+          "colors": [
+            "#674a57",
+            "#72be48",
+            "#a083d9"
+          ],
+          "hash": "1b4e6c7233248a81e7c9f6350465b85b6fedd2b0a11b4aa89b4b9f579c44e479",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "squared",
+          "ms": 55.099999994039536,
+          "colors": [
+            "#509cb9",
+            "#848c3b",
+            "#d6609c"
+          ],
+          "hash": "39b33ff3e6bad6babc02b0e6098e81fbecce7116c0c927daec9ae33492eb8c32",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        }
+      ]
+    },
+    {
+      "name": "many-soft-colors",
+      "kind": "fixed",
+      "metric": "oklab",
+      "variants": [
+        {
+          "weighting": "baseline",
+          "ms": 46.399999998509884,
+          "colors": [
+            "#91db69",
+            "#92a984",
+            "#484a77",
+            "#cf657f"
+          ],
+          "hash": "af104785ea22ac696431c471b7c518f03fe700ea70d23948797ecbbccc760067",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "none",
+          "ms": 22.600000001490116,
+          "colors": [
+            "#91db69",
+            "#92a984",
+            "#484a77",
+            "#cf657f"
+          ],
+          "hash": "af104785ea22ac696431c471b7c518f03fe700ea70d23948797ecbbccc760067",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "linear",
+          "ms": 42.80000000447035,
+          "colors": [
+            "#91db69",
+            "#92a984",
+            "#484a77",
+            "#cf657f"
+          ],
+          "hash": "af104785ea22ac696431c471b7c518f03fe700ea70d23948797ecbbccc760067",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "squared",
+          "ms": 35.5,
+          "colors": [
+            "#91db69",
+            "#92a984",
+            "#484a77",
+            "#cf657f"
+          ],
+          "hash": "af104785ea22ac696431c471b7c518f03fe700ea70d23948797ecbbccc760067",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        }
+      ]
+    },
+    {
+      "name": "many-soft-colors",
+      "kind": "fixed",
+      "metric": "rgb",
+      "variants": [
+        {
+          "weighting": "baseline",
+          "ms": 48.100000001490116,
+          "colors": [
+            "#91db69",
+            "#374e4a",
+            "#4d65b4",
+            "#cf657f"
+          ],
+          "hash": "04f088c3bac2b4214be5016c243a54aa9369d478f22881067992298c9b5182d4",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "none",
+          "ms": 21.80000000447035,
+          "colors": [
+            "#91db69",
+            "#374e4a",
+            "#4d65b4",
+            "#cf657f"
+          ],
+          "hash": "04f088c3bac2b4214be5016c243a54aa9369d478f22881067992298c9b5182d4",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "linear",
+          "ms": 19.299999997019768,
+          "colors": [
+            "#9e4539",
+            "#239063",
+            "#b2ba90",
+            "#905ea9"
+          ],
+          "hash": "1898c1b21a7f8ab1158166ed4e32ae31f927905b0fe60c18f52b2c54906e1aa7",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "squared",
+          "ms": 28.5,
+          "colors": [
+            "#9e4539",
+            "#239063",
+            "#b2ba90",
+            "#905ea9"
+          ],
+          "hash": "1898c1b21a7f8ab1158166ed4e32ae31f927905b0fe60c18f52b2c54906e1aa7",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        }
+      ]
+    },
+    {
+      "name": "intentional-cyan-halo",
+      "kind": "auto",
+      "metric": "oklab",
+      "variants": [
+        {
+          "weighting": "baseline",
+          "ms": 1.6000000014901161,
+          "colors": [
+            "#1c202c",
+            "#26cef4",
+            "#6e6458"
+          ],
+          "hash": "be3832c67c1a8e53f4cc0b1d2f365e5eb52b8e66bb2fa504ba578dda2f547ebd",
+          "alphaChanges": 0,
+          "opaqueChanges": 100,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "none",
+          "ms": 2.399999998509884,
+          "colors": [
+            "#1c202c",
+            "#26cef4",
+            "#6e6458"
+          ],
+          "hash": "be3832c67c1a8e53f4cc0b1d2f365e5eb52b8e66bb2fa504ba578dda2f547ebd",
+          "alphaChanges": 0,
+          "opaqueChanges": 100,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "linear",
+          "ms": 0.8999999985098839,
+          "colors": [
+            "#1c202c",
+            "#26cef4",
+            "#6e6458"
+          ],
+          "hash": "be3832c67c1a8e53f4cc0b1d2f365e5eb52b8e66bb2fa504ba578dda2f547ebd",
+          "alphaChanges": 0,
+          "opaqueChanges": 100,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "squared",
+          "ms": 2.399999998509884,
+          "colors": [
+            "#1c202c",
+            "#6e6458",
+            "#e8d2a6"
+          ],
+          "hash": "1558724b267c0aa59ada771e808d04238ea807ef12332e33d9a9cc6876dc4fe9",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        }
+      ]
+    },
+    {
+      "name": "intentional-cyan-halo",
+      "kind": "auto",
+      "metric": "rgb",
+      "variants": [
+        {
+          "weighting": "baseline",
+          "ms": 2,
+          "colors": [
+            "#26cef4",
+            "#6e6458",
+            "#e8d2a6"
+          ],
+          "hash": "08ab200051f94b0691d8d10fa379e5183cd02b39f5a917641466f74ca67669a4",
+          "alphaChanges": 0,
+          "opaqueChanges": 68,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "none",
+          "ms": 0.7000000029802322,
+          "colors": [
+            "#26cef4",
+            "#6e6458",
+            "#e8d2a6"
+          ],
+          "hash": "08ab200051f94b0691d8d10fa379e5183cd02b39f5a917641466f74ca67669a4",
+          "alphaChanges": 0,
+          "opaqueChanges": 68,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "linear",
+          "ms": 0.6999999955296516,
+          "colors": [
+            "#26cef4",
+            "#6e6458",
+            "#e8d2a6"
+          ],
+          "hash": "08ab200051f94b0691d8d10fa379e5183cd02b39f5a917641466f74ca67669a4",
+          "alphaChanges": 0,
+          "opaqueChanges": 68,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "squared",
+          "ms": 0.6000000014901161,
+          "colors": [
+            "#26cef4",
+            "#6e6458",
+            "#e8d2a6"
+          ],
+          "hash": "08ab200051f94b0691d8d10fa379e5183cd02b39f5a917641466f74ca67669a4",
+          "alphaChanges": 0,
+          "opaqueChanges": 68,
+          "membershipViolations": 0
+        }
+      ]
+    },
+    {
+      "name": "intentional-cyan-halo",
+      "kind": "fixed",
+      "metric": "oklab",
+      "variants": [
+        {
+          "weighting": "baseline",
+          "ms": 0.5,
+          "colors": [
+            "#2e222f",
+            "#676633",
+            "#8fd3ff",
+            "#fdcbb0"
+          ],
+          "hash": "466af0bb323fa14f51bef38df1efd2195f952259014de002b47548fd6f803d3a",
+          "alphaChanges": 0,
+          "opaqueChanges": 256,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "none",
+          "ms": 0.5,
+          "colors": [
+            "#2e222f",
+            "#676633",
+            "#8fd3ff",
+            "#fdcbb0"
+          ],
+          "hash": "466af0bb323fa14f51bef38df1efd2195f952259014de002b47548fd6f803d3a",
+          "alphaChanges": 0,
+          "opaqueChanges": 256,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "linear",
+          "ms": 0.5,
+          "colors": [
+            "#2e222f",
+            "#676633",
+            "#8fd3ff",
+            "#fdcbb0"
+          ],
+          "hash": "466af0bb323fa14f51bef38df1efd2195f952259014de002b47548fd6f803d3a",
+          "alphaChanges": 0,
+          "opaqueChanges": 256,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "squared",
+          "ms": 0.5,
+          "colors": [
+            "#2e222f",
+            "#676633",
+            "#8fd3ff",
+            "#fdcbb0"
+          ],
+          "hash": "466af0bb323fa14f51bef38df1efd2195f952259014de002b47548fd6f803d3a",
+          "alphaChanges": 0,
+          "opaqueChanges": 256,
+          "membershipViolations": 0
+        }
+      ]
+    },
+    {
+      "name": "intentional-cyan-halo",
+      "kind": "fixed",
+      "metric": "rgb",
+      "variants": [
+        {
+          "weighting": "baseline",
+          "ms": 0.30000000447034836,
+          "colors": [
+            "#2e222f",
+            "#625565",
+            "#30e1b9",
+            "#fdcbb0"
+          ],
+          "hash": "2d92f2e370238d49201125cc3cb12041e9ba245c3095b94a753564e9e74a0caf",
+          "alphaChanges": 0,
+          "opaqueChanges": 256,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "none",
+          "ms": 0.5999999940395355,
+          "colors": [
+            "#2e222f",
+            "#625565",
+            "#30e1b9",
+            "#fdcbb0"
+          ],
+          "hash": "2d92f2e370238d49201125cc3cb12041e9ba245c3095b94a753564e9e74a0caf",
+          "alphaChanges": 0,
+          "opaqueChanges": 256,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "linear",
+          "ms": 0.5,
+          "colors": [
+            "#2e222f",
+            "#625565",
+            "#30e1b9",
+            "#fdcbb0"
+          ],
+          "hash": "2d92f2e370238d49201125cc3cb12041e9ba245c3095b94a753564e9e74a0caf",
+          "alphaChanges": 0,
+          "opaqueChanges": 256,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "squared",
+          "ms": 0.4000000059604645,
+          "colors": [
+            "#2e222f",
+            "#625565",
+            "#30e1b9",
+            "#fdcbb0"
+          ],
+          "hash": "2d92f2e370238d49201125cc3cb12041e9ba245c3095b94a753564e9e74a0caf",
+          "alphaChanges": 0,
+          "opaqueChanges": 256,
+          "membershipViolations": 0
+        }
+      ]
+    },
+    {
+      "name": "opaque",
+      "kind": "auto",
+      "metric": "oklab",
+      "variants": [
+        {
+          "weighting": "baseline",
+          "ms": 0.10000000149011612,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "c47d919df8478d9740390b4ef969c25f7ed34a626eeeebe30144fc6cbf80dad8",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "none",
+          "ms": 0.30000000447034836,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "c47d919df8478d9740390b4ef969c25f7ed34a626eeeebe30144fc6cbf80dad8",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "linear",
+          "ms": 0,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "c47d919df8478d9740390b4ef969c25f7ed34a626eeeebe30144fc6cbf80dad8",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "squared",
+          "ms": 0.29999999701976776,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "c47d919df8478d9740390b4ef969c25f7ed34a626eeeebe30144fc6cbf80dad8",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        }
+      ]
+    },
+    {
+      "name": "opaque",
+      "kind": "auto",
+      "metric": "rgb",
+      "variants": [
+        {
+          "weighting": "baseline",
+          "ms": 0.20000000298023224,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "c47d919df8478d9740390b4ef969c25f7ed34a626eeeebe30144fc6cbf80dad8",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "none",
+          "ms": 0.19999999552965164,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "c47d919df8478d9740390b4ef969c25f7ed34a626eeeebe30144fc6cbf80dad8",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "linear",
+          "ms": 0.7000000029802322,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "c47d919df8478d9740390b4ef969c25f7ed34a626eeeebe30144fc6cbf80dad8",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "squared",
+          "ms": 0.10000000149011612,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "c47d919df8478d9740390b4ef969c25f7ed34a626eeeebe30144fc6cbf80dad8",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        }
+      ]
+    },
+    {
+      "name": "opaque",
+      "kind": "fixed",
+      "metric": "oklab",
+      "variants": [
+        {
+          "weighting": "baseline",
+          "ms": 0.20000000298023224,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4"
+          ],
+          "hash": "eef11d44097265d16440f7b92886dc5a0c850587c52365726a775c85a3b92feb",
+          "alphaChanges": 0,
+          "opaqueChanges": 1024,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "none",
+          "ms": 0.29999999701976776,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4"
+          ],
+          "hash": "eef11d44097265d16440f7b92886dc5a0c850587c52365726a775c85a3b92feb",
+          "alphaChanges": 0,
+          "opaqueChanges": 1024,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "linear",
+          "ms": 0.20000000298023224,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4"
+          ],
+          "hash": "eef11d44097265d16440f7b92886dc5a0c850587c52365726a775c85a3b92feb",
+          "alphaChanges": 0,
+          "opaqueChanges": 1024,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "squared",
+          "ms": 0.10000000149011612,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4"
+          ],
+          "hash": "eef11d44097265d16440f7b92886dc5a0c850587c52365726a775c85a3b92feb",
+          "alphaChanges": 0,
+          "opaqueChanges": 1024,
+          "membershipViolations": 0
+        }
+      ]
+    },
+    {
+      "name": "opaque",
+      "kind": "fixed",
+      "metric": "rgb",
+      "variants": [
+        {
+          "weighting": "baseline",
+          "ms": 0.19999999552965164,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4"
+          ],
+          "hash": "eef11d44097265d16440f7b92886dc5a0c850587c52365726a775c85a3b92feb",
+          "alphaChanges": 0,
+          "opaqueChanges": 1024,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "none",
+          "ms": 0.20000000298023224,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4"
+          ],
+          "hash": "eef11d44097265d16440f7b92886dc5a0c850587c52365726a775c85a3b92feb",
+          "alphaChanges": 0,
+          "opaqueChanges": 1024,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "linear",
+          "ms": 0.29999999701976776,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4"
+          ],
+          "hash": "eef11d44097265d16440f7b92886dc5a0c850587c52365726a775c85a3b92feb",
+          "alphaChanges": 0,
+          "opaqueChanges": 1024,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "squared",
+          "ms": 0.20000000298023224,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4"
+          ],
+          "hash": "eef11d44097265d16440f7b92886dc5a0c850587c52365726a775c85a3b92feb",
+          "alphaChanges": 0,
+          "opaqueChanges": 1024,
+          "membershipViolations": 0
+        }
+      ]
+    },
+    {
+      "name": "binary",
+      "kind": "auto",
+      "metric": "oklab",
+      "variants": [
+        {
+          "weighting": "baseline",
+          "ms": 0.19999999552965164,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "3c0ccc204f77141f51c33a435ef4f979f061c435d1f52faf0f16844f9516b021",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "none",
+          "ms": 0.20000000298023224,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "3c0ccc204f77141f51c33a435ef4f979f061c435d1f52faf0f16844f9516b021",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "linear",
+          "ms": 0.10000000149011612,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "3c0ccc204f77141f51c33a435ef4f979f061c435d1f52faf0f16844f9516b021",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "squared",
+          "ms": 0.19999999552965164,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "3c0ccc204f77141f51c33a435ef4f979f061c435d1f52faf0f16844f9516b021",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        }
+      ]
+    },
+    {
+      "name": "binary",
+      "kind": "auto",
+      "metric": "rgb",
+      "variants": [
+        {
+          "weighting": "baseline",
+          "ms": 0.20000000298023224,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "3c0ccc204f77141f51c33a435ef4f979f061c435d1f52faf0f16844f9516b021",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "none",
+          "ms": 0.20000000298023224,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "3c0ccc204f77141f51c33a435ef4f979f061c435d1f52faf0f16844f9516b021",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "linear",
+          "ms": 0.09999999403953552,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "3c0ccc204f77141f51c33a435ef4f979f061c435d1f52faf0f16844f9516b021",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "squared",
+          "ms": 0.20000000298023224,
+          "colors": [
+            "#1ec828",
+            "#283cdc",
+            "#dc1e1e"
+          ],
+          "hash": "3c0ccc204f77141f51c33a435ef4f979f061c435d1f52faf0f16844f9516b021",
+          "alphaChanges": 0,
+          "opaqueChanges": 0,
+          "membershipViolations": 0
+        }
+      ]
+    },
+    {
+      "name": "binary",
+      "kind": "fixed",
+      "metric": "oklab",
+      "variants": [
+        {
+          "weighting": "baseline",
+          "ms": 0.20000000298023224,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4"
+          ],
+          "hash": "685ba0f727d75a07732eeac41861643b3a2a85b0553baeb5a32f11513d282f21",
+          "alphaChanges": 0,
+          "opaqueChanges": 672,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "none",
+          "ms": 0.19999999552965164,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4"
+          ],
+          "hash": "685ba0f727d75a07732eeac41861643b3a2a85b0553baeb5a32f11513d282f21",
+          "alphaChanges": 0,
+          "opaqueChanges": 672,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "linear",
+          "ms": 0.20000000298023224,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4"
+          ],
+          "hash": "685ba0f727d75a07732eeac41861643b3a2a85b0553baeb5a32f11513d282f21",
+          "alphaChanges": 0,
+          "opaqueChanges": 672,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "squared",
+          "ms": 0.19999999552965164,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4"
+          ],
+          "hash": "685ba0f727d75a07732eeac41861643b3a2a85b0553baeb5a32f11513d282f21",
+          "alphaChanges": 0,
+          "opaqueChanges": 672,
+          "membershipViolations": 0
+        }
+      ]
+    },
+    {
+      "name": "binary",
+      "kind": "fixed",
+      "metric": "rgb",
+      "variants": [
+        {
+          "weighting": "baseline",
+          "ms": 0.20000000298023224,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4"
+          ],
+          "hash": "685ba0f727d75a07732eeac41861643b3a2a85b0553baeb5a32f11513d282f21",
+          "alphaChanges": 0,
+          "opaqueChanges": 672,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "none",
+          "ms": 0.20000000298023224,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4"
+          ],
+          "hash": "685ba0f727d75a07732eeac41861643b3a2a85b0553baeb5a32f11513d282f21",
+          "alphaChanges": 0,
+          "opaqueChanges": 672,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "linear",
+          "ms": 1.0999999940395355,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4"
+          ],
+          "hash": "685ba0f727d75a07732eeac41861643b3a2a85b0553baeb5a32f11513d282f21",
+          "alphaChanges": 0,
+          "opaqueChanges": 672,
+          "membershipViolations": 0
+        },
+        {
+          "weighting": "squared",
+          "ms": 0.20000000298023224,
+          "colors": [
+            "#e83b3b",
+            "#1ebc73",
+            "#4d65b4"
+          ],
+          "hash": "685ba0f727d75a07732eeac41861643b3a2a85b0553baeb5a32f11513d282f21",
+          "alphaChanges": 0,
+          "opaqueChanges": 672,
+          "membershipViolations": 0
+        }
+      ]
+    }
+  ],
+  "assertions": [
+    {
+      "name": "alpha:alpha1-spill:auto:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha1-spill:auto:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha1-spill:auto:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha1-spill:auto:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha1-spill:auto:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha1-spill:auto:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha1-spill:auto:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha1-spill:auto:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "research-control:alpha1-spill:auto:oklab",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha1-spill:auto:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha1-spill:auto:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha1-spill:auto:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha1-spill:auto:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha1-spill:auto:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha1-spill:auto:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha1-spill:auto:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha1-spill:auto:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "research-control:alpha1-spill:auto:rgb",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha1-spill:fixed:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha1-spill:fixed:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha1-spill:fixed:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha1-spill:fixed:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha1-spill:fixed:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha1-spill:fixed:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha1-spill:fixed:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha1-spill:fixed:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "research-control:alpha1-spill:fixed:oklab",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha1-spill:fixed:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha1-spill:fixed:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha1-spill:fixed:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha1-spill:fixed:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha1-spill:fixed:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha1-spill:fixed:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha1-spill:fixed:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha1-spill:fixed:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "research-control:alpha1-spill:fixed:rgb",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha6-halo:auto:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha6-halo:auto:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha6-halo:auto:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha6-halo:auto:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha6-halo:auto:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha6-halo:auto:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha6-halo:auto:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha6-halo:auto:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "research-control:alpha6-halo:auto:oklab",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha6-halo:auto:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha6-halo:auto:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha6-halo:auto:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha6-halo:auto:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha6-halo:auto:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha6-halo:auto:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha6-halo:auto:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha6-halo:auto:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "research-control:alpha6-halo:auto:rgb",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha6-halo:fixed:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha6-halo:fixed:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha6-halo:fixed:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha6-halo:fixed:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha6-halo:fixed:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha6-halo:fixed:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha6-halo:fixed:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha6-halo:fixed:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "research-control:alpha6-halo:fixed:oklab",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha6-halo:fixed:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha6-halo:fixed:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha6-halo:fixed:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha6-halo:fixed:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha6-halo:fixed:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha6-halo:fixed:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "alpha:alpha6-halo:fixed:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "membership:alpha6-halo:fixed:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "research-control:alpha6-halo:fixed:rgb",
+      "pass": true
+    },
+    {
+      "name": "alpha:all-faint:auto:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "membership:all-faint:auto:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "alpha:all-faint:auto:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "membership:all-faint:auto:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "alpha:all-faint:auto:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "membership:all-faint:auto:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "alpha:all-faint:auto:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "membership:all-faint:auto:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "research-control:all-faint:auto:oklab",
+      "pass": true
+    },
+    {
+      "name": "alpha:all-faint:auto:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "membership:all-faint:auto:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "alpha:all-faint:auto:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "membership:all-faint:auto:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "alpha:all-faint:auto:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "membership:all-faint:auto:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "alpha:all-faint:auto:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "membership:all-faint:auto:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "research-control:all-faint:auto:rgb",
+      "pass": true
+    },
+    {
+      "name": "alpha:all-faint:fixed:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "membership:all-faint:fixed:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "alpha:all-faint:fixed:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "membership:all-faint:fixed:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "alpha:all-faint:fixed:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "membership:all-faint:fixed:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "alpha:all-faint:fixed:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "membership:all-faint:fixed:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "research-control:all-faint:fixed:oklab",
+      "pass": true
+    },
+    {
+      "name": "alpha:all-faint:fixed:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "membership:all-faint:fixed:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "alpha:all-faint:fixed:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "membership:all-faint:fixed:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "alpha:all-faint:fixed:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "membership:all-faint:fixed:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "alpha:all-faint:fixed:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "membership:all-faint:fixed:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "research-control:all-faint:fixed:rgb",
+      "pass": true
+    },
+    {
+      "name": "alpha:many-soft-colors:auto:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "membership:many-soft-colors:auto:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "alpha:many-soft-colors:auto:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "membership:many-soft-colors:auto:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "alpha:many-soft-colors:auto:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "membership:many-soft-colors:auto:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "alpha:many-soft-colors:auto:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "membership:many-soft-colors:auto:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "research-control:many-soft-colors:auto:oklab",
+      "pass": true
+    },
+    {
+      "name": "alpha:many-soft-colors:auto:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "membership:many-soft-colors:auto:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "alpha:many-soft-colors:auto:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "membership:many-soft-colors:auto:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "alpha:many-soft-colors:auto:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "membership:many-soft-colors:auto:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "alpha:many-soft-colors:auto:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "membership:many-soft-colors:auto:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "research-control:many-soft-colors:auto:rgb",
+      "pass": true
+    },
+    {
+      "name": "alpha:many-soft-colors:fixed:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "membership:many-soft-colors:fixed:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "alpha:many-soft-colors:fixed:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "membership:many-soft-colors:fixed:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "alpha:many-soft-colors:fixed:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "membership:many-soft-colors:fixed:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "alpha:many-soft-colors:fixed:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "membership:many-soft-colors:fixed:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "research-control:many-soft-colors:fixed:oklab",
+      "pass": true
+    },
+    {
+      "name": "alpha:many-soft-colors:fixed:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "membership:many-soft-colors:fixed:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "alpha:many-soft-colors:fixed:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "membership:many-soft-colors:fixed:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "alpha:many-soft-colors:fixed:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "membership:many-soft-colors:fixed:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "alpha:many-soft-colors:fixed:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "membership:many-soft-colors:fixed:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "research-control:many-soft-colors:fixed:rgb",
+      "pass": true
+    },
+    {
+      "name": "alpha:intentional-cyan-halo:auto:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "membership:intentional-cyan-halo:auto:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "alpha:intentional-cyan-halo:auto:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "membership:intentional-cyan-halo:auto:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "alpha:intentional-cyan-halo:auto:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "membership:intentional-cyan-halo:auto:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "alpha:intentional-cyan-halo:auto:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "membership:intentional-cyan-halo:auto:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "research-control:intentional-cyan-halo:auto:oklab",
+      "pass": true
+    },
+    {
+      "name": "alpha:intentional-cyan-halo:auto:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "membership:intentional-cyan-halo:auto:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "alpha:intentional-cyan-halo:auto:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "membership:intentional-cyan-halo:auto:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "alpha:intentional-cyan-halo:auto:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "membership:intentional-cyan-halo:auto:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "alpha:intentional-cyan-halo:auto:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "membership:intentional-cyan-halo:auto:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "research-control:intentional-cyan-halo:auto:rgb",
+      "pass": true
+    },
+    {
+      "name": "alpha:intentional-cyan-halo:fixed:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "membership:intentional-cyan-halo:fixed:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "alpha:intentional-cyan-halo:fixed:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "membership:intentional-cyan-halo:fixed:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "alpha:intentional-cyan-halo:fixed:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "membership:intentional-cyan-halo:fixed:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "alpha:intentional-cyan-halo:fixed:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "membership:intentional-cyan-halo:fixed:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "research-control:intentional-cyan-halo:fixed:oklab",
+      "pass": true
+    },
+    {
+      "name": "alpha:intentional-cyan-halo:fixed:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "membership:intentional-cyan-halo:fixed:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "alpha:intentional-cyan-halo:fixed:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "membership:intentional-cyan-halo:fixed:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "alpha:intentional-cyan-halo:fixed:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "membership:intentional-cyan-halo:fixed:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "alpha:intentional-cyan-halo:fixed:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "membership:intentional-cyan-halo:fixed:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "research-control:intentional-cyan-halo:fixed:rgb",
+      "pass": true
+    },
+    {
+      "name": "alpha:opaque:auto:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "membership:opaque:auto:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "alpha:opaque:auto:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "membership:opaque:auto:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "alpha:opaque:auto:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "membership:opaque:auto:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "alpha:opaque:auto:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "membership:opaque:auto:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "research-control:opaque:auto:oklab",
+      "pass": true
+    },
+    {
+      "name": "unchanged:opaque:auto:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "unchanged:opaque:auto:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "unchanged:opaque:auto:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "unchanged:opaque:auto:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "alpha:opaque:auto:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "membership:opaque:auto:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "alpha:opaque:auto:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "membership:opaque:auto:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "alpha:opaque:auto:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "membership:opaque:auto:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "alpha:opaque:auto:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "membership:opaque:auto:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "research-control:opaque:auto:rgb",
+      "pass": true
+    },
+    {
+      "name": "unchanged:opaque:auto:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "unchanged:opaque:auto:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "unchanged:opaque:auto:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "unchanged:opaque:auto:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "alpha:opaque:fixed:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "membership:opaque:fixed:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "alpha:opaque:fixed:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "membership:opaque:fixed:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "alpha:opaque:fixed:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "membership:opaque:fixed:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "alpha:opaque:fixed:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "membership:opaque:fixed:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "research-control:opaque:fixed:oklab",
+      "pass": true
+    },
+    {
+      "name": "unchanged:opaque:fixed:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "unchanged:opaque:fixed:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "unchanged:opaque:fixed:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "unchanged:opaque:fixed:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "alpha:opaque:fixed:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "membership:opaque:fixed:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "alpha:opaque:fixed:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "membership:opaque:fixed:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "alpha:opaque:fixed:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "membership:opaque:fixed:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "alpha:opaque:fixed:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "membership:opaque:fixed:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "research-control:opaque:fixed:rgb",
+      "pass": true
+    },
+    {
+      "name": "unchanged:opaque:fixed:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "unchanged:opaque:fixed:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "unchanged:opaque:fixed:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "unchanged:opaque:fixed:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "alpha:binary:auto:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "membership:binary:auto:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "alpha:binary:auto:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "membership:binary:auto:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "alpha:binary:auto:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "membership:binary:auto:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "alpha:binary:auto:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "membership:binary:auto:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "research-control:binary:auto:oklab",
+      "pass": true
+    },
+    {
+      "name": "unchanged:binary:auto:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "unchanged:binary:auto:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "unchanged:binary:auto:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "unchanged:binary:auto:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "alpha:binary:auto:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "membership:binary:auto:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "alpha:binary:auto:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "membership:binary:auto:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "alpha:binary:auto:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "membership:binary:auto:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "alpha:binary:auto:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "membership:binary:auto:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "research-control:binary:auto:rgb",
+      "pass": true
+    },
+    {
+      "name": "unchanged:binary:auto:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "unchanged:binary:auto:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "unchanged:binary:auto:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "unchanged:binary:auto:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "alpha:binary:fixed:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "membership:binary:fixed:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "alpha:binary:fixed:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "membership:binary:fixed:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "alpha:binary:fixed:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "membership:binary:fixed:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "alpha:binary:fixed:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "membership:binary:fixed:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "research-control:binary:fixed:oklab",
+      "pass": true
+    },
+    {
+      "name": "unchanged:binary:fixed:oklab:baseline",
+      "pass": true
+    },
+    {
+      "name": "unchanged:binary:fixed:oklab:none",
+      "pass": true
+    },
+    {
+      "name": "unchanged:binary:fixed:oklab:linear",
+      "pass": true
+    },
+    {
+      "name": "unchanged:binary:fixed:oklab:squared",
+      "pass": true
+    },
+    {
+      "name": "alpha:binary:fixed:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "membership:binary:fixed:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "alpha:binary:fixed:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "membership:binary:fixed:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "alpha:binary:fixed:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "membership:binary:fixed:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "alpha:binary:fixed:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "membership:binary:fixed:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "research-control:binary:fixed:rgb",
+      "pass": true
+    },
+    {
+      "name": "unchanged:binary:fixed:rgb:baseline",
+      "pass": true
+    },
+    {
+      "name": "unchanged:binary:fixed:rgb:none",
+      "pass": true
+    },
+    {
+      "name": "unchanged:binary:fixed:rgb:linear",
+      "pass": true
+    },
+    {
+      "name": "unchanged:binary:fixed:rgb:squared",
+      "pass": true
+    },
+    {
+      "name": "dither-alpha:linear",
+      "pass": true
+    },
+    {
+      "name": "dither-membership:linear",
+      "pass": true
+    },
+    {
+      "name": "dither-alpha:squared",
+      "pass": true
+    },
+    {
+      "name": "dither-membership:squared",
+      "pass": true
+    }
+  ],
+  "scope": "Research modules in native browser; not built-app native decode or export.",
+  "failures": [],
+  "pass": true
+}

@@ -1,0 +1,149 @@
+[
+  {
+    "policy": "none",
+    "check": "asset-order",
+    "pass": true
+  },
+  {
+    "policy": "none",
+    "check": "equal-asset-weight-resize",
+    "pass": true
+  },
+  {
+    "policy": "none",
+    "check": "duration-scale",
+    "pass": true
+  },
+  {
+    "policy": "none",
+    "check": "duration-split",
+    "pass": true
+  },
+  {
+    "policy": "none",
+    "metric": "rgb",
+    "check": "subset-duration-scale",
+    "pass": true
+  },
+  {
+    "policy": "none",
+    "metric": "rgb",
+    "check": "subset-duration-split",
+    "pass": true
+  },
+  {
+    "policy": "none",
+    "metric": "oklab",
+    "check": "subset-duration-scale",
+    "pass": true
+  },
+  {
+    "policy": "none",
+    "metric": "oklab",
+    "check": "subset-duration-split",
+    "pass": true
+  },
+  {
+    "policy": "none",
+    "check": "abort-before",
+    "pass": true
+  },
+  {
+    "policy": "linear",
+    "check": "asset-order",
+    "pass": true
+  },
+  {
+    "policy": "linear",
+    "check": "equal-asset-weight-resize",
+    "pass": true
+  },
+  {
+    "policy": "linear",
+    "check": "duration-scale",
+    "pass": true
+  },
+  {
+    "policy": "linear",
+    "check": "duration-split",
+    "pass": true
+  },
+  {
+    "policy": "linear",
+    "metric": "rgb",
+    "check": "subset-duration-scale",
+    "pass": true
+  },
+  {
+    "policy": "linear",
+    "metric": "rgb",
+    "check": "subset-duration-split",
+    "pass": true
+  },
+  {
+    "policy": "linear",
+    "metric": "oklab",
+    "check": "subset-duration-scale",
+    "pass": true
+  },
+  {
+    "policy": "linear",
+    "metric": "oklab",
+    "check": "subset-duration-split",
+    "pass": true
+  },
+  {
+    "policy": "linear",
+    "check": "abort-before",
+    "pass": true
+  },
+  {
+    "policy": "squared",
+    "check": "asset-order",
+    "pass": true
+  },
+  {
+    "policy": "squared",
+    "check": "equal-asset-weight-resize",
+    "pass": true
+  },
+  {
+    "policy": "squared",
+    "check": "duration-scale",
+    "pass": true
+  },
+  {
+    "policy": "squared",
+    "check": "duration-split",
+    "pass": true
+  },
+  {
+    "policy": "squared",
+    "metric": "rgb",
+    "check": "subset-duration-scale",
+    "pass": true
+  },
+  {
+    "policy": "squared",
+    "metric": "rgb",
+    "check": "subset-duration-split",
+    "pass": true
+  },
+  {
+    "policy": "squared",
+    "metric": "oklab",
+    "check": "subset-duration-scale",
+    "pass": true
+  },
+  {
+    "policy": "squared",
+    "metric": "oklab",
+    "check": "subset-duration-split",
+    "pass": true
+  },
+  {
+    "policy": "squared",
+    "check": "abort-before",
+    "pass": true
+  }
+]

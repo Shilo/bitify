@@ -1,0 +1,277 @@
+{
+  "scope": "Node25 selector only, interleaved serial runs. Source immutable1Mi-pixel mixedalpha. No decoding/worker/UI/export. Environment may have parallel browser activity.",
+  "runs": [
+    {
+      "round": 0,
+      "weighting": "baseline",
+      "ms": 389.8098,
+      "binned": true,
+      "swaps": 2,
+      "indices": [
+        4,
+        30,
+        32,
+        44,
+        46,
+        48,
+        55,
+        60
+      ]
+    },
+    {
+      "round": 0,
+      "weighting": "none",
+      "ms": 381.90259999999995,
+      "binned": true,
+      "swaps": 2,
+      "indices": [
+        4,
+        30,
+        32,
+        44,
+        46,
+        48,
+        55,
+        60
+      ]
+    },
+    {
+      "round": 0,
+      "weighting": "linear",
+      "ms": 530.1804999999999,
+      "binned": true,
+      "swaps": 2,
+      "indices": [
+        4,
+        30,
+        32,
+        44,
+        46,
+        48,
+        55,
+        60
+      ]
+    },
+    {
+      "round": 0,
+      "weighting": "squared",
+      "ms": 454.1455000000001,
+      "binned": true,
+      "swaps": 2,
+      "indices": [
+        4,
+        30,
+        32,
+        44,
+        46,
+        48,
+        55,
+        60
+      ]
+    },
+    {
+      "round": 1,
+      "weighting": "squared",
+      "ms": 427.5454000000002,
+      "binned": true,
+      "swaps": 2,
+      "indices": [
+        4,
+        30,
+        32,
+        44,
+        46,
+        48,
+        55,
+        60
+      ]
+    },
+    {
+      "round": 1,
+      "weighting": "linear",
+      "ms": 441.27469999999994,
+      "binned": true,
+      "swaps": 2,
+      "indices": [
+        4,
+        30,
+        32,
+        44,
+        46,
+        48,
+        55,
+        60
+      ]
+    },
+    {
+      "round": 1,
+      "weighting": "none",
+      "ms": 587.0799999999999,
+      "binned": true,
+      "swaps": 2,
+      "indices": [
+        4,
+        30,
+        32,
+        44,
+        46,
+        48,
+        55,
+        60
+      ]
+    },
+    {
+      "round": 1,
+      "weighting": "baseline",
+      "ms": 1826.8459000000003,
+      "binned": true,
+      "swaps": 2,
+      "indices": [
+        4,
+        30,
+        32,
+        44,
+        46,
+        48,
+        55,
+        60
+      ]
+    },
+    {
+      "round": 2,
+      "weighting": "baseline",
+      "ms": 1871.2654999999995,
+      "binned": true,
+      "swaps": 2,
+      "indices": [
+        4,
+        30,
+        32,
+        44,
+        46,
+        48,
+        55,
+        60
+      ]
+    },
+    {
+      "round": 2,
+      "weighting": "none",
+      "ms": 1095.0694000000003,
+      "binned": true,
+      "swaps": 2,
+      "indices": [
+        4,
+        30,
+        32,
+        44,
+        46,
+        48,
+        55,
+        60
+      ]
+    },
+    {
+      "round": 2,
+      "weighting": "linear",
+      "ms": 1171.3547999999992,
+      "binned": true,
+      "swaps": 2,
+      "indices": [
+        4,
+        30,
+        32,
+        44,
+        46,
+        48,
+        55,
+        60
+      ]
+    },
+    {
+      "round": 2,
+      "weighting": "squared",
+      "ms": 1848.0657999999985,
+      "binned": true,
+      "swaps": 2,
+      "indices": [
+        4,
+        30,
+        32,
+        44,
+        46,
+        48,
+        55,
+        60
+      ]
+    },
+    {
+      "round": 3,
+      "weighting": "squared",
+      "ms": 1140.0751,
+      "binned": true,
+      "swaps": 2,
+      "indices": [
+        4,
+        30,
+        32,
+        44,
+        46,
+        48,
+        55,
+        60
+      ]
+    },
+    {
+      "round": 3,
+      "weighting": "linear",
+      "ms": 1049.2560999999987,
+      "binned": true,
+      "swaps": 2,
+      "indices": [
+        4,
+        30,
+        32,
+        44,
+        46,
+        48,
+        55,
+        60
+      ]
+    },
+    {
+      "round": 3,
+      "weighting": "none",
+      "ms": 2182.793099999999,
+      "binned": true,
+      "swaps": 2,
+      "indices": [
+        4,
+        30,
+        32,
+        44,
+        46,
+        48,
+        55,
+        60
+      ]
+    },
+    {
+      "round": 3,
+      "weighting": "baseline",
+      "ms": 1871.0014999999985,
+      "binned": true,
+      "swaps": 2,
+      "indices": [
+        4,
+        30,
+        32,
+        44,
+        46,
+        48,
+        55,
+        60
+      ]
+    }
+  ]
+}

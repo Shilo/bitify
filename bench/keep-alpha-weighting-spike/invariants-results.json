@@ -1,0 +1,584 @@
+{
+  "checks": [
+    {
+      "name": "chunk-boundary:opaque-core-alpha1-spill:linear",
+      "pass": true
+    },
+    {
+      "name": "asset-order:opaque-core-alpha1-spill:linear",
+      "pass": true
+    },
+    {
+      "name": "source-immutable:opaque-core-alpha1-spill:linear",
+      "pass": true
+    },
+    {
+      "name": "dither-alpha-membership:opaque-core-alpha1-spill:linear",
+      "pass": true
+    },
+    {
+      "name": "chunk-boundary:opaque-core-alpha1-spill:squared",
+      "pass": true
+    },
+    {
+      "name": "asset-order:opaque-core-alpha1-spill:squared",
+      "pass": true
+    },
+    {
+      "name": "source-immutable:opaque-core-alpha1-spill:squared",
+      "pass": true
+    },
+    {
+      "name": "dither-alpha-membership:opaque-core-alpha1-spill:squared",
+      "pass": true
+    },
+    {
+      "name": "chunk-boundary:opaque-core-alpha6-halo:linear",
+      "pass": true
+    },
+    {
+      "name": "asset-order:opaque-core-alpha6-halo:linear",
+      "pass": true
+    },
+    {
+      "name": "source-immutable:opaque-core-alpha6-halo:linear",
+      "pass": true
+    },
+    {
+      "name": "dither-alpha-membership:opaque-core-alpha6-halo:linear",
+      "pass": true
+    },
+    {
+      "name": "chunk-boundary:opaque-core-alpha6-halo:squared",
+      "pass": true
+    },
+    {
+      "name": "asset-order:opaque-core-alpha6-halo:squared",
+      "pass": true
+    },
+    {
+      "name": "source-immutable:opaque-core-alpha6-halo:squared",
+      "pass": true
+    },
+    {
+      "name": "dither-alpha-membership:opaque-core-alpha6-halo:squared",
+      "pass": true
+    },
+    {
+      "name": "chunk-boundary:warm-glow:linear",
+      "pass": true
+    },
+    {
+      "name": "asset-order:warm-glow:linear",
+      "pass": true
+    },
+    {
+      "name": "source-immutable:warm-glow:linear",
+      "pass": true
+    },
+    {
+      "name": "dither-alpha-membership:warm-glow:linear",
+      "pass": true
+    },
+    {
+      "name": "chunk-boundary:warm-glow:squared",
+      "pass": true
+    },
+    {
+      "name": "asset-order:warm-glow:squared",
+      "pass": true
+    },
+    {
+      "name": "source-immutable:warm-glow:squared",
+      "pass": true
+    },
+    {
+      "name": "dither-alpha-membership:warm-glow:squared",
+      "pass": true
+    },
+    {
+      "name": "chunk-boundary:soft-shadow-aa:linear",
+      "pass": true
+    },
+    {
+      "name": "asset-order:soft-shadow-aa:linear",
+      "pass": true
+    },
+    {
+      "name": "source-immutable:soft-shadow-aa:linear",
+      "pass": true
+    },
+    {
+      "name": "dither-alpha-membership:soft-shadow-aa:linear",
+      "pass": true
+    },
+    {
+      "name": "chunk-boundary:soft-shadow-aa:squared",
+      "pass": true
+    },
+    {
+      "name": "asset-order:soft-shadow-aa:squared",
+      "pass": true
+    },
+    {
+      "name": "source-immutable:soft-shadow-aa:squared",
+      "pass": true
+    },
+    {
+      "name": "dither-alpha-membership:soft-shadow-aa:squared",
+      "pass": true
+    },
+    {
+      "name": "chunk-boundary:rare-translucent-accent:linear",
+      "pass": true
+    },
+    {
+      "name": "asset-order:rare-translucent-accent:linear",
+      "pass": true
+    },
+    {
+      "name": "source-immutable:rare-translucent-accent:linear",
+      "pass": true
+    },
+    {
+      "name": "dither-alpha-membership:rare-translucent-accent:linear",
+      "pass": true
+    },
+    {
+      "name": "chunk-boundary:rare-translucent-accent:squared",
+      "pass": true
+    },
+    {
+      "name": "asset-order:rare-translucent-accent:squared",
+      "pass": true
+    },
+    {
+      "name": "source-immutable:rare-translucent-accent:squared",
+      "pass": true
+    },
+    {
+      "name": "dither-alpha-membership:rare-translucent-accent:squared",
+      "pass": true
+    },
+    {
+      "name": "chunk-boundary:all-faint-fade:linear",
+      "pass": true
+    },
+    {
+      "name": "asset-order:all-faint-fade:linear",
+      "pass": true
+    },
+    {
+      "name": "source-immutable:all-faint-fade:linear",
+      "pass": true
+    },
+    {
+      "name": "dither-alpha-membership:all-faint-fade:linear",
+      "pass": true
+    },
+    {
+      "name": "chunk-boundary:all-faint-fade:squared",
+      "pass": true
+    },
+    {
+      "name": "asset-order:all-faint-fade:squared",
+      "pass": true
+    },
+    {
+      "name": "source-immutable:all-faint-fade:squared",
+      "pass": true
+    },
+    {
+      "name": "dither-alpha-membership:all-faint-fade:squared",
+      "pass": true
+    },
+    {
+      "name": "chunk-boundary:many-soft-colors:linear",
+      "pass": true
+    },
+    {
+      "name": "asset-order:many-soft-colors:linear",
+      "pass": true
+    },
+    {
+      "name": "source-immutable:many-soft-colors:linear",
+      "pass": true
+    },
+    {
+      "name": "dither-alpha-membership:many-soft-colors:linear",
+      "pass": true
+    },
+    {
+      "name": "chunk-boundary:many-soft-colors:squared",
+      "pass": true
+    },
+    {
+      "name": "asset-order:many-soft-colors:squared",
+      "pass": true
+    },
+    {
+      "name": "source-immutable:many-soft-colors:squared",
+      "pass": true
+    },
+    {
+      "name": "dither-alpha-membership:many-soft-colors:squared",
+      "pass": true
+    },
+    {
+      "name": "chunk-boundary:highentropy-faint-border:linear",
+      "pass": true
+    },
+    {
+      "name": "asset-order:highentropy-faint-border:linear",
+      "pass": true
+    },
+    {
+      "name": "source-immutable:highentropy-faint-border:linear",
+      "pass": true
+    },
+    {
+      "name": "dither-alpha-membership:highentropy-faint-border:linear",
+      "pass": true
+    },
+    {
+      "name": "chunk-boundary:highentropy-faint-border:squared",
+      "pass": true
+    },
+    {
+      "name": "asset-order:highentropy-faint-border:squared",
+      "pass": true
+    },
+    {
+      "name": "source-immutable:highentropy-faint-border:squared",
+      "pass": true
+    },
+    {
+      "name": "dither-alpha-membership:highentropy-faint-border:squared",
+      "pass": true
+    },
+    {
+      "name": "chunk-boundary:retained-knight-a.png:linear",
+      "pass": true
+    },
+    {
+      "name": "asset-order:retained-knight-a.png:linear",
+      "pass": true
+    },
+    {
+      "name": "source-immutable:retained-knight-a.png:linear",
+      "pass": true
+    },
+    {
+      "name": "dither-alpha-membership:retained-knight-a.png:linear",
+      "pass": true
+    },
+    {
+      "name": "chunk-boundary:retained-knight-a.png:squared",
+      "pass": true
+    },
+    {
+      "name": "asset-order:retained-knight-a.png:squared",
+      "pass": true
+    },
+    {
+      "name": "source-immutable:retained-knight-a.png:squared",
+      "pass": true
+    },
+    {
+      "name": "dither-alpha-membership:retained-knight-a.png:squared",
+      "pass": true
+    },
+    {
+      "name": "chunk-boundary:retained-glow-alpha.png:linear",
+      "pass": true
+    },
+    {
+      "name": "asset-order:retained-glow-alpha.png:linear",
+      "pass": true
+    },
+    {
+      "name": "source-immutable:retained-glow-alpha.png:linear",
+      "pass": true
+    },
+    {
+      "name": "dither-alpha-membership:retained-glow-alpha.png:linear",
+      "pass": true
+    },
+    {
+      "name": "chunk-boundary:retained-glow-alpha.png:squared",
+      "pass": true
+    },
+    {
+      "name": "asset-order:retained-glow-alpha.png:squared",
+      "pass": true
+    },
+    {
+      "name": "source-immutable:retained-glow-alpha.png:squared",
+      "pass": true
+    },
+    {
+      "name": "dither-alpha-membership:retained-glow-alpha.png:squared",
+      "pass": true
+    },
+    {
+      "name": "chunk-boundary:retained-spill-alpha1.png:linear",
+      "pass": true
+    },
+    {
+      "name": "asset-order:retained-spill-alpha1.png:linear",
+      "pass": true
+    },
+    {
+      "name": "source-immutable:retained-spill-alpha1.png:linear",
+      "pass": true
+    },
+    {
+      "name": "dither-alpha-membership:retained-spill-alpha1.png:linear",
+      "pass": true
+    },
+    {
+      "name": "chunk-boundary:retained-spill-alpha1.png:squared",
+      "pass": true
+    },
+    {
+      "name": "asset-order:retained-spill-alpha1.png:squared",
+      "pass": true
+    },
+    {
+      "name": "source-immutable:retained-spill-alpha1.png:squared",
+      "pass": true
+    },
+    {
+      "name": "dither-alpha-membership:retained-spill-alpha1.png:squared",
+      "pass": true
+    },
+    {
+      "name": "chunk-boundary:fade-animation-duration:linear",
+      "pass": true
+    },
+    {
+      "name": "asset-order:fade-animation-duration:linear",
+      "pass": true
+    },
+    {
+      "name": "source-immutable:fade-animation-duration:linear",
+      "pass": true
+    },
+    {
+      "name": "dither-alpha-membership:fade-animation-duration:linear",
+      "pass": true
+    },
+    {
+      "name": "chunk-boundary:fade-animation-duration:squared",
+      "pass": true
+    },
+    {
+      "name": "asset-order:fade-animation-duration:squared",
+      "pass": true
+    },
+    {
+      "name": "source-immutable:fade-animation-duration:squared",
+      "pass": true
+    },
+    {
+      "name": "dither-alpha-membership:fade-animation-duration:squared",
+      "pass": true
+    },
+    {
+      "name": "chunk-boundary:shared-wall-equal-assets:linear",
+      "pass": true
+    },
+    {
+      "name": "asset-order:shared-wall-equal-assets:linear",
+      "pass": true
+    },
+    {
+      "name": "source-immutable:shared-wall-equal-assets:linear",
+      "pass": true
+    },
+    {
+      "name": "dither-alpha-membership:shared-wall-equal-assets:linear",
+      "pass": true
+    },
+    {
+      "name": "chunk-boundary:shared-wall-equal-assets:squared",
+      "pass": true
+    },
+    {
+      "name": "asset-order:shared-wall-equal-assets:squared",
+      "pass": true
+    },
+    {
+      "name": "source-immutable:shared-wall-equal-assets:squared",
+      "pass": true
+    },
+    {
+      "name": "dither-alpha-membership:shared-wall-equal-assets:squared",
+      "pass": true
+    },
+    {
+      "name": "equal-asset-even-faint:linear",
+      "pass": true,
+      "colors": [
+        "#1428e6",
+        "#e61428"
+      ],
+      "binned": false,
+      "assets": 2
+    },
+    {
+      "name": "frame-order:linear",
+      "pass": true
+    },
+    {
+      "name": "duration-and-opacity-mass:linear",
+      "pass": true,
+      "indices": [
+        1
+      ],
+      "binned": false,
+      "histogramColors": 2,
+      "cost": 0.06546291465893839,
+      "popularCost": 0.06546291465893839,
+      "fullCost": 0,
+      "initialCost": 0.06546291465893839,
+      "trainingCost": 0.06546291465893839,
+      "verifiedFallback": false,
+      "swaps": 0,
+      "swapTrace": []
+    },
+    {
+      "name": "equal-asset-even-faint:squared",
+      "pass": true,
+      "colors": [
+        "#1428e6",
+        "#e61428"
+      ],
+      "binned": false,
+      "assets": 2
+    },
+    {
+      "name": "frame-order:squared",
+      "pass": true
+    },
+    {
+      "name": "duration-and-opacity-mass:squared",
+      "pass": true,
+      "indices": [
+        1
+      ],
+      "binned": false,
+      "histogramColors": 2,
+      "cost": 0.0002567173123879937,
+      "popularCost": 0.0002567173123879937,
+      "fullCost": 0,
+      "initialCost": 0.0002567173123879937,
+      "trainingCost": 0.0002567173123879937,
+      "verifiedFallback": false,
+      "swaps": 0,
+      "swapTrace": []
+    },
+    {
+      "name": "pixel-order-binned:linear",
+      "pass": true,
+      "binned": true
+    },
+    {
+      "name": "pixel-order-binned:squared",
+      "pass": true,
+      "binned": true
+    }
+  ],
+  "timings": [
+    {
+      "name": "1MP-four",
+      "weighting": "baseline",
+      "median": 46.60609999999997,
+      "samples": [
+        49.870900000000006,
+        48.750999999999976,
+        47.661899999999946,
+        46.1499,
+        47.614999999999895,
+        46.60609999999997,
+        42.37959999999998
+      ],
+      "scope": "Node warm source/cap/quantization; no native decode, UI, worker, PNG or phone"
+    },
+    {
+      "name": "1MP-four",
+      "weighting": "linear",
+      "median": 39.53879999999981,
+      "samples": [
+        59.411800000000085,
+        45.145500000000084,
+        39.48039999999992,
+        40.0472000000002,
+        40.40480000000002,
+        39.53879999999981,
+        39.50500000000011
+      ],
+      "scope": "Node warm source/cap/quantization; no native decode, UI, worker, PNG or phone"
+    },
+    {
+      "name": "1MP-four",
+      "weighting": "squared",
+      "median": 40.83230000000003,
+      "samples": [
+        39.12310000000002,
+        40.003999999999905,
+        41.20530000000008,
+        40.83230000000003,
+        40.86069999999995,
+        39.737300000000005,
+        39.039800000000014
+      ],
+      "scope": "Node warm source/cap/quantization; no native decode, UI, worker, PNG or phone"
+    },
+    {
+      "name": "1MP-many",
+      "weighting": "baseline",
+      "median": 1523.2642999999998,
+      "samples": [
+        512.3435000000002,
+        544.3240000000001,
+        1523.2642999999998,
+        1611.3230000000003,
+        1291.2488999999996,
+        1653.696,
+        1028.8001999999997
+      ],
+      "scope": "Node warm source/cap/quantization; no native decode, UI, worker, PNG or phone"
+    },
+    {
+      "name": "1MP-many",
+      "weighting": "linear",
+      "median": 3583.124300000003,
+      "samples": [
+        2516.6442000000006,
+        3624.006299999999,
+        4948.1607,
+        7560.732,
+        3583.124300000003,
+        2858.835899999998,
+        2907.350099999996
+      ],
+      "scope": "Node warm source/cap/quantization; no native decode, UI, worker, PNG or phone"
+    },
+    {
+      "name": "1MP-many",
+      "weighting": "squared",
+      "median": 2986.4244000000035,
+      "samples": [
+        5471.460800000001,
+        2135.5026,
+        1917.4974000000002,
+        2212.3271000000022,
+        3651.106599999999,
+        3875.9445999999953,
+        2986.4244000000035
+      ],
+      "scope": "Node warm source/cap/quantization; no native decode, UI, worker, PNG or phone"
+    }
+  ]
+}

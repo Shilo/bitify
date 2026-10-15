@@ -1,0 +1,1 @@
+Auto cap3/Oklab on spill and cyan halo. Resurrect64 cap4/RGB on many-soft-colors. Source RGBA independently composited with encoded-sRGB alpha on black and white. Native 1x values are in fixture generators; display enlarged with nearest sampling.

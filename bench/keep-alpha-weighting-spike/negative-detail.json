@@ -1,0 +1,689 @@
+{
+  "cases": [
+    {
+      "name": "many-soft-colors",
+      "kind": "auto",
+      "metric": "oklab",
+      "cap": 3,
+      "variants": [
+        {
+          "weighting": "baseline",
+          "regions": {
+            "opaque": {
+              "pixels": 0,
+              "changed": 0,
+              "straightRgbRmse": null
+            },
+            "high-alpha": {
+              "pixels": 2564,
+              "changed": 2564,
+              "straightRgbRmse": 63.026613459396394
+            },
+            "soft-alpha": {
+              "pixels": 2556,
+              "changed": 2556,
+              "straightRgbRmse": 63.176647049320096
+            },
+            "visible": {
+              "pixels": 5120,
+              "changed": 5120,
+              "straightRgbRmse": 63.10155763149459
+            }
+          },
+          "backgrounds": {
+            "black": {
+              "visiblePixels": 5120,
+              "srgbChannelRmse": 36.41659488317912
+            },
+            "white": {
+              "visiblePixels": 5120,
+              "srgbChannelRmse": 36.41659488317912
+            },
+            "warm": {
+              "visiblePixels": 5120,
+              "srgbChannelRmse": 36.416594883179116
+            },
+            "cool": {
+              "visiblePixels": 5120,
+              "srgbChannelRmse": 36.41659488317912
+            }
+          }
+        },
+        {
+          "weighting": "linear",
+          "regions": {
+            "opaque": {
+              "pixels": 0,
+              "changed": 0,
+              "straightRgbRmse": null
+            },
+            "high-alpha": {
+              "pixels": 2564,
+              "changed": 2564,
+              "straightRgbRmse": 63.798835974168576
+            },
+            "soft-alpha": {
+              "pixels": 2556,
+              "changed": 2556,
+              "straightRgbRmse": 63.659464233855054
+            },
+            "visible": {
+              "pixels": 5120,
+              "changed": 5120,
+              "straightRgbRmse": 63.72929708769482
+            }
+          },
+          "backgrounds": {
+            "black": {
+              "visiblePixels": 5120,
+              "srgbChannelRmse": 36.85240851850185
+            },
+            "white": {
+              "visiblePixels": 5120,
+              "srgbChannelRmse": 36.85240851850185
+            },
+            "warm": {
+              "visiblePixels": 5120,
+              "srgbChannelRmse": 36.85240851850186
+            },
+            "cool": {
+              "visiblePixels": 5120,
+              "srgbChannelRmse": 36.85240851850185
+            }
+          }
+        },
+        {
+          "weighting": "squared",
+          "regions": {
+            "opaque": {
+              "pixels": 0,
+              "changed": 0,
+              "straightRgbRmse": null
+            },
+            "high-alpha": {
+              "pixels": 2564,
+              "changed": 2564,
+              "straightRgbRmse": 64.66528785970229
+            },
+            "soft-alpha": {
+              "pixels": 2556,
+              "changed": 2556,
+              "straightRgbRmse": 64.86182999336883
+            },
+            "visible": {
+              "pixels": 5120,
+              "changed": 5120,
+              "straightRgbRmse": 64.76347993532569
+            }
+          },
+          "backgrounds": {
+            "black": {
+              "visiblePixels": 5120,
+              "srgbChannelRmse": 37.43522562326606
+            },
+            "white": {
+              "visiblePixels": 5120,
+              "srgbChannelRmse": 37.43522562326606
+            },
+            "warm": {
+              "visiblePixels": 5120,
+              "srgbChannelRmse": 37.43522562326606
+            },
+            "cool": {
+              "visiblePixels": 5120,
+              "srgbChannelRmse": 37.43522562326606
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "many-soft-colors",
+      "kind": "fixed",
+      "metric": "rgb",
+      "cap": 4,
+      "variants": [
+        {
+          "weighting": "baseline",
+          "regions": {
+            "opaque": {
+              "pixels": 0,
+              "changed": 0,
+              "straightRgbRmse": null
+            },
+            "high-alpha": {
+              "pixels": 2564,
+              "changed": 2564,
+              "straightRgbRmse": 52.61359821974453
+            },
+            "soft-alpha": {
+              "pixels": 2556,
+              "changed": 2556,
+              "straightRgbRmse": 52.661570443397764
+            },
+            "visible": {
+              "pixels": 5120,
+              "changed": 5120,
+              "straightRgbRmse": 52.63755231830694
+            }
+          },
+          "backgrounds": {
+            "black": {
+              "visiblePixels": 5120,
+              "srgbChannelRmse": 30.378072073680237
+            },
+            "white": {
+              "visiblePixels": 5120,
+              "srgbChannelRmse": 30.378072073680237
+            },
+            "warm": {
+              "visiblePixels": 5120,
+              "srgbChannelRmse": 30.378072073680237
+            },
+            "cool": {
+              "visiblePixels": 5120,
+              "srgbChannelRmse": 30.378072073680237
+            }
+          }
+        },
+        {
+          "weighting": "linear",
+          "regions": {
+            "opaque": {
+              "pixels": 0,
+              "changed": 0,
+              "straightRgbRmse": null
+            },
+            "high-alpha": {
+              "pixels": 2564,
+              "changed": 2564,
+              "straightRgbRmse": 52.86115040413784
+            },
+            "soft-alpha": {
+              "pixels": 2556,
+              "changed": 2556,
+              "straightRgbRmse": 53.10012098103274
+            },
+            "visible": {
+              "pixels": 5120,
+              "changed": 5120,
+              "straightRgbRmse": 52.98058373219539
+            }
+          },
+          "backgrounds": {
+            "black": {
+              "visiblePixels": 5120,
+              "srgbChannelRmse": 30.51969686613066
+            },
+            "white": {
+              "visiblePixels": 5120,
+              "srgbChannelRmse": 30.51969686613066
+            },
+            "warm": {
+              "visiblePixels": 5120,
+              "srgbChannelRmse": 30.51969686613066
+            },
+            "cool": {
+              "visiblePixels": 5120,
+              "srgbChannelRmse": 30.51969686613066
+            }
+          }
+        },
+        {
+          "weighting": "squared",
+          "regions": {
+            "opaque": {
+              "pixels": 0,
+              "changed": 0,
+              "straightRgbRmse": null
+            },
+            "high-alpha": {
+              "pixels": 2564,
+              "changed": 2564,
+              "straightRgbRmse": 52.86115040413784
+            },
+            "soft-alpha": {
+              "pixels": 2556,
+              "changed": 2556,
+              "straightRgbRmse": 53.10012098103274
+            },
+            "visible": {
+              "pixels": 5120,
+              "changed": 5120,
+              "straightRgbRmse": 52.98058373219539
+            }
+          },
+          "backgrounds": {
+            "black": {
+              "visiblePixels": 5120,
+              "srgbChannelRmse": 30.51969686613066
+            },
+            "white": {
+              "visiblePixels": 5120,
+              "srgbChannelRmse": 30.51969686613066
+            },
+            "warm": {
+              "visiblePixels": 5120,
+              "srgbChannelRmse": 30.51969686613066
+            },
+            "cool": {
+              "visiblePixels": 5120,
+              "srgbChannelRmse": 30.51969686613066
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "opaque-core-alpha6-halo",
+      "kind": "auto",
+      "metric": "oklab",
+      "cap": 3,
+      "variants": [
+        {
+          "weighting": "baseline",
+          "regions": {
+            "opaque": {
+              "pixels": 400,
+              "changed": 140,
+              "straightRgbRmse": 78.44849690508204
+            },
+            "high-alpha": {
+              "pixels": 400,
+              "changed": 140,
+              "straightRgbRmse": 78.44849690508204
+            },
+            "soft-alpha": {
+              "pixels": 1200,
+              "changed": 0,
+              "straightRgbRmse": 0
+            },
+            "visible": {
+              "pixels": 1600,
+              "changed": 140,
+              "straightRgbRmse": 39.22424845254102
+            }
+          },
+          "backgrounds": {
+            "black": {
+              "visiblePixels": 1600,
+              "srgbChannelRmse": 39.22424845254102
+            },
+            "white": {
+              "visiblePixels": 1600,
+              "srgbChannelRmse": 39.22424845254102
+            },
+            "warm": {
+              "visiblePixels": 1600,
+              "srgbChannelRmse": 39.22424845254102
+            },
+            "cool": {
+              "visiblePixels": 1600,
+              "srgbChannelRmse": 39.22424845254102
+            }
+          }
+        },
+        {
+          "weighting": "linear",
+          "regions": {
+            "opaque": {
+              "pixels": 400,
+              "changed": 0,
+              "straightRgbRmse": 0
+            },
+            "high-alpha": {
+              "pixels": 400,
+              "changed": 0,
+              "straightRgbRmse": 0
+            },
+            "soft-alpha": {
+              "pixels": 1200,
+              "changed": 1200,
+              "straightRgbRmse": 132.6021618727739
+            },
+            "visible": {
+              "pixels": 1600,
+              "changed": 1200,
+              "straightRgbRmse": 114.83684077855851
+            }
+          },
+          "backgrounds": {
+            "black": {
+              "visiblePixels": 1600,
+              "srgbChannelRmse": 2.702043312436652
+            },
+            "white": {
+              "visiblePixels": 1600,
+              "srgbChannelRmse": 2.7020433124366496
+            },
+            "warm": {
+              "visiblePixels": 1600,
+              "srgbChannelRmse": 2.7020433124366514
+            },
+            "cool": {
+              "visiblePixels": 1600,
+              "srgbChannelRmse": 2.70204331243665
+            }
+          }
+        },
+        {
+          "weighting": "squared",
+          "regions": {
+            "opaque": {
+              "pixels": 400,
+              "changed": 0,
+              "straightRgbRmse": 0
+            },
+            "high-alpha": {
+              "pixels": 400,
+              "changed": 0,
+              "straightRgbRmse": 0
+            },
+            "soft-alpha": {
+              "pixels": 1200,
+              "changed": 1200,
+              "straightRgbRmse": 132.6021618727739
+            },
+            "visible": {
+              "pixels": 1600,
+              "changed": 1200,
+              "straightRgbRmse": 114.83684077855851
+            }
+          },
+          "backgrounds": {
+            "black": {
+              "visiblePixels": 1600,
+              "srgbChannelRmse": 2.702043312436652
+            },
+            "white": {
+              "visiblePixels": 1600,
+              "srgbChannelRmse": 2.7020433124366496
+            },
+            "warm": {
+              "visiblePixels": 1600,
+              "srgbChannelRmse": 2.7020433124366514
+            },
+            "cool": {
+              "visiblePixels": 1600,
+              "srgbChannelRmse": 2.70204331243665
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "warm-glow",
+      "kind": "auto",
+      "metric": "oklab",
+      "cap": 3,
+      "variants": [
+        {
+          "weighting": "baseline",
+          "regions": {
+            "opaque": {
+              "pixels": 208,
+              "changed": 0,
+              "straightRgbRmse": 0
+            },
+            "high-alpha": {
+              "pixels": 812,
+              "changed": 0,
+              "straightRgbRmse": 0
+            },
+            "soft-alpha": {
+              "pixels": 2016,
+              "changed": 0,
+              "straightRgbRmse": 0
+            },
+            "visible": {
+              "pixels": 2828,
+              "changed": 0,
+              "straightRgbRmse": 0
+            }
+          },
+          "backgrounds": {
+            "black": {
+              "visiblePixels": 2828,
+              "srgbChannelRmse": 0
+            },
+            "white": {
+              "visiblePixels": 2828,
+              "srgbChannelRmse": 0
+            },
+            "warm": {
+              "visiblePixels": 2828,
+              "srgbChannelRmse": 0
+            },
+            "cool": {
+              "visiblePixels": 2828,
+              "srgbChannelRmse": 0
+            }
+          }
+        },
+        {
+          "weighting": "linear",
+          "regions": {
+            "opaque": {
+              "pixels": 208,
+              "changed": 0,
+              "straightRgbRmse": 0
+            },
+            "high-alpha": {
+              "pixels": 812,
+              "changed": 0,
+              "straightRgbRmse": 0
+            },
+            "soft-alpha": {
+              "pixels": 2016,
+              "changed": 0,
+              "straightRgbRmse": 0
+            },
+            "visible": {
+              "pixels": 2828,
+              "changed": 0,
+              "straightRgbRmse": 0
+            }
+          },
+          "backgrounds": {
+            "black": {
+              "visiblePixels": 2828,
+              "srgbChannelRmse": 0
+            },
+            "white": {
+              "visiblePixels": 2828,
+              "srgbChannelRmse": 0
+            },
+            "warm": {
+              "visiblePixels": 2828,
+              "srgbChannelRmse": 0
+            },
+            "cool": {
+              "visiblePixels": 2828,
+              "srgbChannelRmse": 0
+            }
+          }
+        },
+        {
+          "weighting": "squared",
+          "regions": {
+            "opaque": {
+              "pixels": 208,
+              "changed": 0,
+              "straightRgbRmse": 0
+            },
+            "high-alpha": {
+              "pixels": 812,
+              "changed": 0,
+              "straightRgbRmse": 0
+            },
+            "soft-alpha": {
+              "pixels": 2016,
+              "changed": 0,
+              "straightRgbRmse": 0
+            },
+            "visible": {
+              "pixels": 2828,
+              "changed": 0,
+              "straightRgbRmse": 0
+            }
+          },
+          "backgrounds": {
+            "black": {
+              "visiblePixels": 2828,
+              "srgbChannelRmse": 0
+            },
+            "white": {
+              "visiblePixels": 2828,
+              "srgbChannelRmse": 0
+            },
+            "warm": {
+              "visiblePixels": 2828,
+              "srgbChannelRmse": 0
+            },
+            "cool": {
+              "visiblePixels": 2828,
+              "srgbChannelRmse": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "retained-glow-alpha.png",
+      "kind": "auto",
+      "metric": "oklab",
+      "cap": 3,
+      "variants": [
+        {
+          "weighting": "baseline",
+          "regions": {
+            "opaque": {
+              "pixels": 112,
+              "changed": 112,
+              "straightRgbRmse": 63.23915303188742
+            },
+            "high-alpha": {
+              "pixels": 256,
+              "changed": 212,
+              "straightRgbRmse": 43.44129180092753
+            },
+            "soft-alpha": {
+              "pixels": 360,
+              "changed": 210,
+              "straightRgbRmse": 12.691714999543192
+            },
+            "visible": {
+              "pixels": 616,
+              "changed": 422,
+              "straightRgbRmse": 29.637912277281682
+            }
+          },
+          "backgrounds": {
+            "black": {
+              "visiblePixels": 616,
+              "srgbChannelRmse": 27.494125893160597
+            },
+            "white": {
+              "visiblePixels": 616,
+              "srgbChannelRmse": 27.494125893160597
+            },
+            "warm": {
+              "visiblePixels": 616,
+              "srgbChannelRmse": 27.494125893160597
+            },
+            "cool": {
+              "visiblePixels": 616,
+              "srgbChannelRmse": 27.494125893160597
+            }
+          }
+        },
+        {
+          "weighting": "linear",
+          "regions": {
+            "opaque": {
+              "pixels": 112,
+              "changed": 0,
+              "straightRgbRmse": 0
+            },
+            "high-alpha": {
+              "pixels": 256,
+              "changed": 96,
+              "straightRgbRmse": 10.72938915626918
+            },
+            "soft-alpha": {
+              "pixels": 360,
+              "changed": 360,
+              "straightRgbRmse": 102.71065075140834
+            },
+            "visible": {
+              "pixels": 616,
+              "changed": 456,
+              "straightRgbRmse": 78.82335448406907
+            }
+          },
+          "backgrounds": {
+            "black": {
+              "visiblePixels": 616,
+              "srgbChannelRmse": 11.818948245383506
+            },
+            "white": {
+              "visiblePixels": 616,
+              "srgbChannelRmse": 11.81894824538351
+            },
+            "warm": {
+              "visiblePixels": 616,
+              "srgbChannelRmse": 11.818948245383506
+            },
+            "cool": {
+              "visiblePixels": 616,
+              "srgbChannelRmse": 11.81894824538351
+            }
+          }
+        },
+        {
+          "weighting": "squared",
+          "regions": {
+            "opaque": {
+              "pixels": 112,
+              "changed": 0,
+              "straightRgbRmse": 0
+            },
+            "high-alpha": {
+              "pixels": 256,
+              "changed": 96,
+              "straightRgbRmse": 10.72938915626918
+            },
+            "soft-alpha": {
+              "pixels": 360,
+              "changed": 360,
+              "straightRgbRmse": 102.71065075140834
+            },
+            "visible": {
+              "pixels": 616,
+              "changed": 456,
+              "straightRgbRmse": 78.82335448406907
+            }
+          },
+          "backgrounds": {
+            "black": {
+              "visiblePixels": 616,
+              "srgbChannelRmse": 11.818948245383506
+            },
+            "white": {
+              "visiblePixels": 616,
+              "srgbChannelRmse": 11.81894824538351
+            },
+            "warm": {
+              "visiblePixels": 616,
+              "srgbChannelRmse": 11.818948245383506
+            },
+            "cool": {
+              "visiblePixels": 616,
+              "srgbChannelRmse": 11.81894824538351
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
