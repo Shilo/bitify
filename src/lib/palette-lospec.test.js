@@ -20,8 +20,9 @@ describe('Lospec references and palette data', () => {
   });
 
   it('keeps ordinary HEX and malformed plain text on the existing local path', () => {
-    for (const text of ['abcdef', '#fff', '#000000, #ffffff', 'slso8', 'not colors', 'GIMP Palette\n0 0 0']) expect(looksLikeLospecReference(text)).toBe(false);
+    for (const text of ['abcdef', '#fff', '#000000, #ffffff', 'slso8', 'not colors', 'GIMP Palette\n0 0 0', 'GIMP Palette\n# https://lospec.com/palette-list/slso8\n0 0 0', '#000000 https://lospec.com/palette-list/slso8']) expect(looksLikeLospecReference(text)).toBe(false);
     for (const text of ['https://lospec.com/palette-list/slso8', 'https://evil.test/x', 'ftp://lospec.com/a', 'lospec.com/palette-list/slso8']) expect(looksLikeLospecReference(text)).toBe(true);
+    for (const text of ['lospec.com/palette-list/slso8', 'www.lospec.com/palette-list/SLSO8/']) expect(lospecReference(text).jsonUrl).toBe('https://lospec.com/palette-list/slso8.json');
   });
 
   it('owns normalized ordered opaque colors, with bounded optional plain-text metadata', () => {

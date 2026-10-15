@@ -1,6 +1,6 @@
 // Only public Lospec palette pages/JSON endpoints become network destinations or links.
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/i;
-const LINK = /^https?:\/\/(?:www\.)?lospec\.com\/palette-list\/([a-z0-9]+(?:-[a-z0-9]+)*)(?:\.json)?\/?(?:[?#][^\s]*)?$/i;
+const LINK = /^(?:https?:\/\/)?(?:www\.)?lospec\.com\/palette-list\/([a-z0-9]+(?:-[a-z0-9]+)*)(?:\.json)?\/?(?:[?#][^\s]*)?$/i;
 const INVALID = 'Use a Lospec palette link such as https://lospec.com/palette-list/slso8, or a palette slug.';
 
 export function lospecReference(value, { urlOnly = false } = {}) {
@@ -21,6 +21,7 @@ export function looksLikeLospecReference(value) {
   if (typeof value !== 'string') return false;
   const text = value.trim();
   // A plain typo or hex-like slug must not unexpectedly become a network request.
-  // The UI requires a link; the lower-level reference parser also accepts slugs.
-  return /:\/\/|^(?:www\.)?lospec\.com\//i.test(text);
+  // The UI requires one link; multi-line palette text with URL comments stays local.
+  // The lower-level reference parser also accepts slugs.
+  return /^(?:[a-z][\w+.-]*:\/\/|(?:www\.)?lospec\.com\/)\S*$/i.test(text);
 }

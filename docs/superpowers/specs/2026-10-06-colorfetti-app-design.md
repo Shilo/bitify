@@ -44,6 +44,8 @@ transparency and settings are independent.
 ## Lospec palette links — October 14, 2026
 
 The existing Paste colors method accepts HEX text or a full Lospec palette URL.
+The scheme is optional (`lospec.com/palette-list/slso8`). Only a single link-like
+token is treated as a link, so palette text with URL comments stays local.
 For a link its action reads Import from Lospec. It fetches the canonical HTTPS
 palette JSON with credentials omitted, no referrer and redirects refused, bounded
 to 64 KiB and 15 seconds. JSON and the service's octet-stream MIME are accepted;
