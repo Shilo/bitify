@@ -1,5 +1,13 @@
 # Remaining palette work: independent audit
 
+Status reconciliation, October 15: the newer Claude audit fixed Firefox PNG
+decoding and Lospec routing (`376a55c`, `7fad4e7`). Canonical Lospec links now also
+accept a scheme-less host/path; a bare palette slug remains unsupported. Keep
+opacity weighting and automatic important-color selection were subsequently
+investigated and rejected for shipping. Read the current
+[session checklist](2026-10-14-palette-improvements-todo.md) before treating any
+historical future-tense item below as required unfinished work.
+
 Latest bounded full-range review: the [handoff audit ledger](2026-10-15-palette-handoff-audit-ledger.md)
 reconciles all 43 commits after f08d4d3 through 543474d with three sub-agents,
 fresh REST/MCP output comparisons, desktop/USB Android checks and two review

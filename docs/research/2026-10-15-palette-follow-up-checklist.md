@@ -44,6 +44,12 @@ above remain historical evidence rather than claims about the later source revis
 Subsequent Keep selection research after Claude's independent fixes is recorded in
 the [opacity-weighting checklist](2026-10-15-keep-alpha-weighting-checklist.md).
 Neither linear nor squared weighting met the no-regression quality gate; production
-remains unchanged. Codex Browser and physical Android research outputs agree, with
-the real-art acceptance question deliberately deferred. The prior audit ledger's
+remains unchanged. Codex Browser and physical Android research outputs agree. The
+later [real-art study](2026-10-15-keep-real-art-decision.md) is complete and closed:
+the owner retained current Keep, without weighting or another setting. The prior audit ledger's
 S1/D1 is now investigated with a no-ship result, rather than an untested proposal.
+
+The subsequent [small important-color investigation](2026-10-15-important-colors-decision.md)
+is also complete with no ship for its two automatic rules. Current whole-session
+remaining items are consolidated at the top of the
+[original palette checklist](2026-10-14-palette-improvements-todo.md).

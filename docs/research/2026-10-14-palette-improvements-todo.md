@@ -1,5 +1,37 @@
 # Palette improvements — working checklist
 
+## Current session status — October 15, 2026
+
+All accepted implementation items are complete within their recorded test scope.
+Later fixes include native clipboard promise ownership, PNG import precision,
+Firefox partial-alpha decoding and Lospec paste routing. No newly reproduced
+unfixed release-blocking defect remains in the reviewed scope. This is not a
+claim of exhaustive coverage or universal output superiority over PixelLab.
+
+The [Keep real-art study](2026-10-15-keep-real-art-decision.md) and
+[important-color study](2026-10-15-important-colors-decision.md) are complete
+no-ship decisions. Direct-K/guarded Auto fitting is also closed. These are not
+unfinished implementation tasks, and Keep weighting must not be restarted.
+
+| Remaining item | Meaning / next action |
+|---|---|
+| Existing-image Smart colors | Human Aseprite comparison remains untested. Follow the retained [procedure](2026-10-15-claude-audit-service.md#7-smart-colors-beta-research-decision) before deciding whether integration is useful. No integration is approved. |
+| Focused website comparison | Four native website outputs were verified, not every combination. Partial alpha, shared/multi-frame output and imported targets remain useful unverified cases. API/MCP evidence cannot stand in for website output. |
+| Practical task usability | Test import → palette → color limit/dither → Save and Count/Use on desktop and phone with minimal instruction. Automated correctness/layout checks do not prove that users understand the controls. |
+| Optional capability design | One shared small palette for an entire batch, artist-selected color protection, and additional palette exchange formats are opportunities. They need demonstrated user value and clear mobile behavior, not automatic implementation. |
+| Known precision/performance limits | Canvas-fallback and native clipboard transport can round translucent RGB. Sustained thermal/whole-process memory and stock Firefox Android coverage remain limited. Mac/iOS is unavailable and outside the current pass. |
+| Release | Changes remain local and unpushed by this session. A release/deployment is a separate action. |
+
+Evaluate features against Colorfetti's own goals: useful output control, accurate
+palette/alpha behavior, animation consistency, performance and an intuitive local
+workflow. The service is comparison evidence, not a perfect reference. In tested
+cases it loses useful colors and changes exact source RGBs too; adding its whole
+catalog or every control is not a requirement. Local shared-target membership,
+exact-color behavior and cap-plus-dithering are strengths to preserve.
+
+The original batch record follows; its historical test totals and then-pending
+items must be read with the completed follow-ups above.
+
 This temporary checklist tracks the requested improvements, their evidence and release checks. Preserve Colorfetti’s direct, local workflow and existing defaults. A completed experiment can reject a feature; a larger menu is not the goal. Each accepted feature receives its own commit and independent review before this batch is complete.
 
 | Work | Status | Acceptance or decision gate |

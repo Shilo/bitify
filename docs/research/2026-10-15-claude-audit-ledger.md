@@ -1,5 +1,12 @@
 # Claude independent palette audit: two-round ledger
 
+Status reconciliation, October 15: this ledger preserves the audit's findings at
+the time. Its S1 Keep follow-up is now [complete and closed](2026-10-15-keep-real-art-decision.md).
+Its S2 automatic important-color investigation is also [complete, no ship](2026-10-15-important-colors-decision.md).
+Neither is an unperformed future study. Artist-controlled protection remains a
+separate optional design question. See the [session checklist](2026-10-14-palette-improvements-todo.md)
+for current remaining comparison, usability and coverage work.
+
 October 15, 2026. Range f08d4d3f6e3df771d17524f00f1bba2e492c4ec0..e87a853 (13
 source-touching commits, 36 source/test files), plus fixes landed in this audit.
 This is a separate audit from the [previous agents' ledger](2026-10-15-palette-handoff-audit-ledger.md),
