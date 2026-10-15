@@ -218,7 +218,14 @@ async function loadUnits(manifestPath) {
   for (const [group, frames] of groups) {
     frames.sort((a, b) => a.index - b.index);
     if (new Set(frames.map(f => f.category)).size > 1) throw new Error(`Animation ${group} spans categories`);
-    if (frames.some(f => f.width !== frames[0].width || f.height !== frames[0].height)) throw new Error(`Animation ${group} frame sizes differ`);
+    // Separately exported frames may differ in size. Center them on a shared canvas;
+    // alpha-0 padding is empty in Keep and excluded from every region metric.
+    const W = Math.max(...frames.map(f => f.width)), H = Math.max(...frames.map(f => f.height));
+    for (const f of frames) if (f.width !== W || f.height !== H) {
+      const data = new Uint8ClampedArray(W * H * 4), x0 = (W - f.width) >> 1, y0 = (H - f.height) >> 1;
+      for (let y = 0; y < f.height; y++) data.set(f.data.subarray(y * f.width * 4, (y + 1) * f.width * 4), ((y + y0) * W + x0) * 4);
+      Object.assign(f, { width: W, height: H, data, padded: true });
+    }
     units.push({ key: 'anim:' + group, id: String(group), category: frames[0].category, animated: true, files: frames.map(f => f.file), fileSha256: frames.map(f => f.sha256), frames: frames.map(f => ({ width: f.width, height: f.height, data: f.data, delay: f.delay })) });
   }
   return { units, manifestSha256: crypto.createHash('sha256').update(await fs.readFile(manifestPath)).digest('hex') };
