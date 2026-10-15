@@ -44,7 +44,8 @@ This explicit operation uses full-source export conversion, counting unique RGB
 colors after limiting, Cleanup and dithering. Fully transparent pixels are excluded;
 animations count the union of every frame. Results appear beside the dimensions,
 with a tooltip identifying converted output, including while Original is shown.
-Small captions truncate rather than widen the wall. Counting is not started by
+After inspection, the count precedes dimensions so dense phone captions retain
+the useful number. Small captions truncate rather than widen the wall. Counting is not started by
 hovering, playback or displaying tiles. One tiny result per item is retained;
 source/settings changes and removal cancel pending work and clear the result.
 Auto identity uses its captured whole-wall request, not retained preview swatches.

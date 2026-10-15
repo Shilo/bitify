@@ -355,13 +355,13 @@
         <button type="button" class="caption-preview" onclick={e => activate(e.currentTarget)} aria-label="Preview {item.name}" aria-haspopup="dialog">
           <span class="caption-details">
             <span class="name" use:tooltip={item.name}>{item.name}</span>
-            <span class="dim">{item.img.w}<span class="by">×</span>{item.img.h}{#if colorUsageLabel}<span use:tooltip={colorUsageLabel + (item.frames ? '. Converted output across all animation frames.' : '. Converted full-resolution output.')}> · {colorUsageLabel}</span>{/if}{#if failureDescription}<span class="palette-failure-mark" use:tooltip={failureDescription}> · Retry needed</span>{/if}</span>
+            <span class="dim">{#if colorUsageLabel}<span use:tooltip={colorUsageLabel + (item.frames ? '. Converted output across all animation frames.' : '. Converted full-resolution output.')}>{colorUsageLabel}</span> · {/if}{item.img.w}<span class="by">×</span>{item.img.h}{#if failureDescription}<span class="palette-failure-mark" use:tooltip={failureDescription}> · Retry needed</span>{/if}</span>
           </span>
         </button>
       {:else}
         <span class="caption-details">
           <span class="name" use:tooltip={item.name}>{item.name}</span>
-          <span class="dim">{item.img.w}<span class="by">×</span>{item.img.h}{#if colorUsageLabel}<span use:tooltip={colorUsageLabel + (item.frames ? '. Converted output across all animation frames.' : '. Converted full-resolution output.')}> · {colorUsageLabel}</span>{/if}{#if failureDescription}<span class="palette-failure-mark" use:tooltip={failureDescription}> · Retry needed</span>{/if}</span>
+          <span class="dim">{#if colorUsageLabel}<span use:tooltip={colorUsageLabel + (item.frames ? '. Converted output across all animation frames.' : '. Converted full-resolution output.')}>{colorUsageLabel}</span> · {/if}{item.img.w}<span class="by">×</span>{item.img.h}{#if failureDescription}<span class="palette-failure-mark" use:tooltip={failureDescription}> · Retry needed</span>{/if}</span>
         </span>
       {/if}
       {#if onremove}
