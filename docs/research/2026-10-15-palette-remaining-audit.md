@@ -1,5 +1,12 @@
 # Remaining palette work: independent audit
 
+Latest bounded full-range review: the [handoff audit ledger](2026-10-15-palette-handoff-audit-ledger.md)
+reconciles all 43 commits after f08d4d3 through 543474d with three sub-agents,
+fresh REST/MCP output comparisons, desktop/USB Android checks and two review
+rounds. No new runtime fix was justified. Existing-source Smart recoloring remains
+research-only and human-deferred; new authenticated website combinations and
+credential rotation are explicitly recorded rather than treated as completed.
+
 Follow-up, October 15: the [WebKit fallback investigation](2026-10-15-webkit-fallback-decision.md)
 tested a native HTML-image/WebGL alternative with three sub-agents. It improves
 research-source precision but fails repeated cold-start latency gates, so no

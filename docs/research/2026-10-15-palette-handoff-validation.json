@@ -1,0 +1,10 @@
+{
+  "handoff": ".claude/handoffs/2026-10-15-palette-pixellab-adversarial-review.md",
+  "completenessValidatorScore": 100,
+  "relativeFileReferencesChecked": 72,
+  "missingReferences": [],
+  "exactCredentialFilesScanned": 58,
+  "credentialMatches": 0,
+  "runtimeFilesChanged": false,
+  "scope": "Exact-value scan only; no credential value/fingerprint stored. Embedded credential was exposed in tool output and human rotation is still required."
+}
