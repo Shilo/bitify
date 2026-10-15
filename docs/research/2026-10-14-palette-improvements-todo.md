@@ -37,6 +37,10 @@ The successful [website output verification](pixellab-review-2026-10-14/web-outp
 
 ## Recommended next work
 
+The user has authorized the next guarded-refinement investigation. Its active
+[follow-up checklist](2026-10-15-auto-refinement-todo.md) tracks the research,
+service comparison, device tests and conditional shipping decision separately.
+
 The implementation batch is complete. Keep this checklist until its conclusions
 are incorporated into the next project plan. The next useful research task is a
 guarded compact Auto fit initialized from the current result, retaining the old
