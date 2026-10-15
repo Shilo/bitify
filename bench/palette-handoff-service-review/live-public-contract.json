@@ -1,0 +1,201 @@
+{
+  "at": "2026-10-15T10:12:29.845Z",
+  "path": {
+    "post": {
+      "tags": [
+        "Cleanup"
+      ],
+      "summary": "Reduce colors",
+      "description": "Quantize images onto a smaller, shared palette.\n\nPixel art reads as pixel art partly because of its restricted palette. AI output\nand converted artwork often carry hundreds of near-identical colors; this snaps\nthem onto a tight palette, optionally with ordered dithering.\n\nPassing several frames in one call is the point of the endpoint: they are\nquantized together, so an animation or a character's eight directions come back\nsharing ONE palette instead of drifting apart frame by frame.\n\nThree ways to choose the palette:\n- omit `num_colors` and `palette_image` — the palette size is auto-detected\n- `num_colors` — quantize to exactly this many colors\n- `palette_image` — reuse the colors of an existing image (your game's palette)\n\nTotal size limit across all frames is 512x512 worth of pixels (e.g. sixteen\n64x64 frames, or four 128x128).\n\n```bash\ncurl -X POST https://api.pixellab.ai/v2/reduce-colors \\\n    -H \"Authorization: Bearer YOUR_API_TOKEN\" \\\n    -H \"Content-Type: application/json\" \\\n    -d '{\"images\": [{\"base64\": \"...\"}, {\"base64\": \"...\"}], \"num_colors\": 16}'\n```",
+      "operationId": "reduce_colors_endpoint_reduce_colors_post",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ReduceColorsRequest"
+            }
+          }
+        },
+        "required": true
+      },
+      "responses": {
+        "200": {
+          "description": "Successfully quantized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReduceColorsResponse"
+              },
+              "example": {
+                "images": [
+                  {
+                    "type": "base64",
+                    "base64": "data:image/png;base64,..."
+                  }
+                ],
+                "palette": {
+                  "type": "base64",
+                  "base64": "data:image/png;base64,..."
+                },
+                "n_colors": 16,
+                "usage": {
+                  "type": "usd",
+                  "usd": 0.005
+                }
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Invalid API token"
+        },
+        "402": {
+          "description": "Insufficient credits"
+        },
+        "422": {
+          "description": "Validation error"
+        },
+        "429": {
+          "description": "Too many requests"
+        }
+      },
+      "security": [
+        {
+          "HTTPBearer": []
+        }
+      ]
+    }
+  },
+  "models": {
+    "ReduceColorsRequest": {
+      "properties": {
+        "images": {
+          "items": {
+            "$ref": "#/components/schemas/Base64Image"
+          },
+          "type": "array",
+          "minItems": 1,
+          "title": "Images",
+          "description": "Image(s) to quantize (PNG base64). Several frames are quantized together onto ONE shared palette and must all be the same size — pass an animation's frames or a character's directions in one call so their colors stay consistent."
+        },
+        "num_colors": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "maximum": 256,
+              "minimum": 2
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Num Colors",
+          "description": "Target number of colors. Omit to auto-detect a good palette size from the image itself. Mutually exclusive with palette_image."
+        },
+        "palette_image": {
+          "anyOf": [
+            {
+              "$ref": "#/components/schemas/Base64Image"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "An image whose colors become the palette (max 256 colors). Use it to force frames onto an existing game palette. Mutually exclusive with num_colors."
+        },
+        "dithering": {
+          "type": "string",
+          "enum": [
+            "none",
+            "2x2",
+            "4x4",
+            "8x8"
+          ],
+          "title": "Dithering",
+          "description": "Ordered dithering matrix size. Larger matrices give smoother gradients at the cost of a busier look.",
+          "default": "none"
+        },
+        "dithering_strength": {
+          "type": "number",
+          "maximum": 10,
+          "minimum": 0,
+          "title": "Dithering Strength",
+          "description": "How strongly to dither. Ignored when dithering is 'none'.",
+          "default": 5
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "images"
+      ],
+      "title": "ReduceColorsRequest",
+      "description": "Request model for the reduce-colors endpoint",
+      "example": {
+        "dithering": "none",
+        "images": [
+          {
+            "base64": "iVBORw0KGgoAAAANS..."
+          }
+        ],
+        "num_colors": 16
+      }
+    },
+    "TargetPalette": {
+      "properties": {
+        "colors": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Colors",
+          "description": "2 to 256 hex colours like '#1a2b3c'."
+        },
+        "name": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 100
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Name",
+          "description": "The palette's name ('Game Boy', 'PICO-8'); helps the look."
+        },
+        "max_colors": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "maximum": 64,
+              "minimum": 2
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Max Colors",
+          "description": "At most this many colours in each image (from colors if given)."
+        },
+        "smart": {
+          "type": "boolean",
+          "title": "Smart",
+          "description": "Beta, single images only: put each object on the palette as a whole (a face stays skin-coloured, wood stays brown) instead of giving every pixel its nearest colour. Needs colors; adds about 15-60 s.",
+          "default": false
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "TargetPalette",
+      "description": "Colours the result must use (colors) and/or at most max_colors per image."
+    }
+  }
+}

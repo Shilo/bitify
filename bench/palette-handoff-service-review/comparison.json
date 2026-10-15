@@ -1,0 +1,278 @@
+{
+  "at": "2026-10-15T10:13:37.776Z",
+  "method": "Independent Sharp PNG decoding; current production generator/subset/matcher/save. Tiny Node timing is not browser/mobile/network performance parity. Native dither strengths are not calibrated equivalence.",
+  "sourceSha256": {
+    "quantize.js": "6dacaca42d615b72a4ee511bb7ed32344aa7118ae946769e290d7a9463f8d0a3",
+    "palette-generated.js": "ff11e62b92853b12c99946f60e9635de734b903702bcbd2b39834b84087e8c58",
+    "palette-limit.js": "739a3fb97a80d1ecbfa23c5e33f72893b894adc4425ea89217a88d7264abae20",
+    "palette-dither.js": "5452f7b1af4d5f656d8733635856eab5ba565e8d7ee81cced4d77041a9638152",
+    "save.js": "c44966acd7925ab6895199736c55d0cc6e8311e6af1b116d3c72a2e3451075c4"
+  },
+  "results": [
+    {
+      "id": "gradient-count8",
+      "inputSha256": "6d0a9315b0c6bc0c4e86e05c2b21af7dbde71df8a23d48900e16455d2bbffe6f",
+      "settings": {
+        "count": 8,
+        "target": null,
+        "dither": "none",
+        "nativeStrength": null,
+        "oursAlpha": "cut"
+      },
+      "status": 200,
+      "service": {
+        "ms": 1023,
+        "usage": {
+          "type": "generations",
+          "generations": 0.1
+        },
+        "reportedNColors": 8,
+        "metrics": {
+          "width": 64,
+          "height": 32,
+          "visibleRgbCount": 8,
+          "alphaChanges": 0,
+          "alphaHistogram": {
+            "255": 2048
+          },
+          "outsideTarget": null,
+          "exactTargetPixels": 0,
+          "exactTargetLoss": 0,
+          "pointOklabMse": 0.0014941276385512,
+          "rgbaSha256": "652d654973e2767cfc54e6684b8a9ea6ab02c09c82670ad75530cf5541f7aec7"
+        }
+      },
+      "ours": {
+        "nodeColdMs": 26.56009999999992,
+        "colors": [
+          "#040404",
+          "#1c1c1c",
+          "#393939",
+          "#555555",
+          "#797979",
+          "#9e9e9e",
+          "#c2c2c2",
+          "#ebebeb"
+        ],
+        "metrics": {
+          "width": 64,
+          "height": 32,
+          "visibleRgbCount": 8,
+          "alphaChanges": 0,
+          "alphaHistogram": {
+            "255": 2048
+          },
+          "outsideTarget": 0,
+          "exactTargetPixels": 256,
+          "exactTargetLoss": 0,
+          "pointOklabMse": 0.0013503118455262,
+          "rgbaSha256": "5ae4ae10a1a7012229690e506d072770462b4c2ecebc6450d318757b0295623b"
+        }
+      },
+      "equalDimensions": true
+    },
+    {
+      "id": "two-color-count8",
+      "inputSha256": "9992c1614f56b1b911ef3c025bfebaaf74d495248643be11a920476404c61e4f",
+      "settings": {
+        "count": 8,
+        "target": null,
+        "dither": "none",
+        "nativeStrength": null,
+        "oursAlpha": "cut"
+      },
+      "status": 200,
+      "service": {
+        "ms": 1119,
+        "usage": {
+          "type": "generations",
+          "generations": 0.1
+        },
+        "reportedNColors": 2,
+        "metrics": {
+          "width": 16,
+          "height": 16,
+          "visibleRgbCount": 2,
+          "alphaChanges": 0,
+          "alphaHistogram": {
+            "255": 256
+          },
+          "outsideTarget": null,
+          "exactTargetPixels": 0,
+          "exactTargetLoss": 0,
+          "pointOklabMse": 0,
+          "rgbaSha256": "0866ae962103f672b02c8078eddac6f89fefb885bce577d5eaefb0d105cb6e30"
+        }
+      },
+      "ours": {
+        "nodeColdMs": 16.848299999999654,
+        "colors": [
+          "#1ea03c",
+          "#c8283c"
+        ],
+        "metrics": {
+          "width": 16,
+          "height": 16,
+          "visibleRgbCount": 2,
+          "alphaChanges": 0,
+          "alphaHistogram": {
+            "255": 256
+          },
+          "outsideTarget": 0,
+          "exactTargetPixels": 256,
+          "exactTargetLoss": 0,
+          "pointOklabMse": 0,
+          "rgbaSha256": "0866ae962103f672b02c8078eddac6f89fefb885bce577d5eaefb0d105cb6e30"
+        }
+      },
+      "equalDimensions": true
+    },
+    {
+      "id": "alpha-target4",
+      "inputSha256": "23a845d78546b7246bf558e585472a631510c250d295c028e66c49e5092fc4e3",
+      "settings": {
+        "count": null,
+        "target": [
+          "#081820",
+          "#346856",
+          "#88c070",
+          "#e0f8d0"
+        ],
+        "dither": "none",
+        "nativeStrength": null,
+        "oursAlpha": "keep"
+      },
+      "status": 200,
+      "service": {
+        "ms": 595,
+        "usage": {
+          "type": "generations",
+          "generations": 0.1
+        },
+        "reportedNColors": 14,
+        "metrics": {
+          "width": 32,
+          "height": 16,
+          "visibleRgbCount": 2,
+          "alphaChanges": 0,
+          "alphaHistogram": {
+            "0": 64,
+            "1": 64,
+            "64": 64,
+            "127": 64,
+            "128": 64,
+            "192": 64,
+            "254": 64,
+            "255": 64
+          },
+          "outsideTarget": 0,
+          "exactTargetPixels": 0,
+          "exactTargetLoss": 0,
+          "pointOklabMse": 0.04405095653025909,
+          "rgbaSha256": "bd1743fc91f220055f18dcff3df50af60af31b4d412aad19c1761471a9f3a776"
+        }
+      },
+      "ours": {
+        "nodeColdMs": 15.996200000000044,
+        "colors": [
+          "#081820",
+          "#346856",
+          "#88c070",
+          "#e0f8d0"
+        ],
+        "metrics": {
+          "width": 32,
+          "height": 16,
+          "visibleRgbCount": 2,
+          "alphaChanges": 0,
+          "alphaHistogram": {
+            "0": 64,
+            "1": 64,
+            "64": 64,
+            "127": 64,
+            "128": 64,
+            "192": 64,
+            "254": 64,
+            "255": 64
+          },
+          "outsideTarget": 0,
+          "exactTargetPixels": 0,
+          "exactTargetLoss": 0,
+          "pointOklabMse": 0.04405095653025909,
+          "rgbaSha256": "0d275ea4bce7ecaedb413ad708f5f0998c8c879e2d291f77d16726e5f8962ee0"
+        }
+      },
+      "equalDimensions": true
+    },
+    {
+      "id": "armor-target4-dither",
+      "inputSha256": "4253720e7166feebf0292cbcdf8c6b46c5516f784ffa4c1dca45ef73652b349d",
+      "settings": {
+        "count": null,
+        "target": [
+          "#081820",
+          "#346856",
+          "#88c070",
+          "#e0f8d0"
+        ],
+        "dither": "4x4",
+        "nativeStrength": {
+          "service": 5,
+          "ours": 50
+        },
+        "oursAlpha": "cut"
+      },
+      "status": 200,
+      "service": {
+        "ms": 673,
+        "usage": {
+          "type": "generations",
+          "generations": 0.1
+        },
+        "reportedNColors": 4,
+        "metrics": {
+          "width": 16,
+          "height": 16,
+          "visibleRgbCount": 4,
+          "alphaChanges": 0,
+          "alphaHistogram": {
+            "0": 101,
+            "255": 155
+          },
+          "outsideTarget": 0,
+          "exactTargetPixels": 0,
+          "exactTargetLoss": 0,
+          "pointOklabMse": 0.020856015315387454,
+          "rgbaSha256": "ad85e14b1573b1896ee57d21491933473fb78b5d52d7ffa22cecc36a0d379a4d"
+        }
+      },
+      "ours": {
+        "nodeColdMs": 36.20550000000003,
+        "colors": [
+          "#081820",
+          "#346856",
+          "#88c070",
+          "#e0f8d0"
+        ],
+        "metrics": {
+          "width": 16,
+          "height": 16,
+          "visibleRgbCount": 3,
+          "alphaChanges": 0,
+          "alphaHistogram": {
+            "0": 101,
+            "255": 155
+          },
+          "outsideTarget": 0,
+          "exactTargetPixels": 0,
+          "exactTargetLoss": 0,
+          "pointOklabMse": 0.02474923052481043,
+          "rgbaSha256": "6278fcbaa5500b6efe123a96e071a89e9d4e25b6d2f8d4e5ca3a621f89e1eb01"
+        }
+      },
+      "equalDimensions": true
+    }
+  ],
+  "newReportedGenerations": 0.4,
+  "smartValidationStatus": 422
+}

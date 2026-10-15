@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-15T10:17:23.912Z",
+  "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+  "hardwareConcurrency": 4,
+  "cases": [
+    {
+      "pixels": 65536,
+      "targetColors": 8,
+      "nearestMs": 19.100000023841858,
+      "ms": 75.39999997615814,
+      "maxProgressGap": 8.800000011920929,
+      "wrongAlpha": 0,
+      "wrongMembership": 0,
+      "start": 132.69999998807907,
+      "end": 208.0999999642372
+    },
+    {
+      "pixels": 1048576,
+      "targetColors": 8,
+      "nearestMs": 118.39999997615814,
+      "ms": 1039.300000011921,
+      "maxProgressGap": 14.299999952316284,
+      "wrongAlpha": 0,
+      "wrongMembership": 0,
+      "start": 363.89999997615814,
+      "end": 1403.199999988079
+    },
+    {
+      "pixels": 1048576,
+      "targetColors": 256,
+      "nearestMs": 560.5,
+      "ms": 2061.5,
+      "maxProgressGap": 8.5,
+      "wrongAlpha": 0,
+      "wrongMembership": 0,
+      "start": 2016.0999999642372,
+      "end": 4077.599999964237
+    }
+  ],
+  "cancellation": {
+    "error": "AbortError",
+    "ms": 12.399999976158142
+  },
+  "maxRafGapWholeProbe": 50,
+  "longTasksDuringQuantize": [],
+  "scope": "Foreground current shipping kernel. Source preparation and oracle checking are excluded from quantize intervals. Not whole-app FPS or memory.",
+  "dependencies": {
+    "dist/index.html": "16d2776e085ab2d3907d055ccf5bd52e2fb20bdd089a7c0a87b2fc19cdb92837",
+    "src/lib/quantize.js": "6dacaca42d615b72a4ee511bb7ed32344aa7118ae946769e290d7a9463f8d0a3",
+    "src/lib/palette-dither.js": "5452f7b1af4d5f656d8733635856eab5ba565e8d7ee81cced4d77041a9638152",
+    "src/lib/image-decode.js": "e1207e72ec51656ee6a0b516632599b60de0e510110fd319036203c9cefe15a9"
+  }
+}

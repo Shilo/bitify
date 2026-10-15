@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "method": "Fresh independent Sharp decode; raw hashes, dimensions, alpha, count, fixed target membership; no perceptual winner inferred.",
+  "checked": [
+    {
+      "id": "gradient-count8",
+      "pixels": 2048,
+      "alphaDifferencesBetweenOutputs": 0,
+      "visibleRgbDifferencesBetweenOutputs": 2048,
+      "sourcePngSha256": "6d0a9315b0c6bc0c4e86e05c2b21af7dbde71df8a23d48900e16455d2bbffe6f",
+      "servicePngSha256": "b31e703d092e254a703d4d1dbdb3b34a64015b5b16dc2a51983ebc4b8a464a67",
+      "oursPngSha256": "664e5e877a1e38af6b5861619b8692d9a3c826a0d45dc407e8fa7dbb4fa31162"
+    },
+    {
+      "id": "two-color-count8",
+      "pixels": 256,
+      "alphaDifferencesBetweenOutputs": 0,
+      "visibleRgbDifferencesBetweenOutputs": 0,
+      "sourcePngSha256": "9992c1614f56b1b911ef3c025bfebaaf74d495248643be11a920476404c61e4f",
+      "servicePngSha256": "2808592b2b7236ff133c0c571f0a6dfdb832898f83a558eb562452f3c6d8f58c",
+      "oursPngSha256": "1239fbcd627cc217140b1a3f73681d05bee98d23820e5673a3a4a1d179b9b6d5"
+    },
+    {
+      "id": "alpha-target4",
+      "pixels": 512,
+      "alphaDifferencesBetweenOutputs": 0,
+      "visibleRgbDifferencesBetweenOutputs": 0,
+      "sourcePngSha256": "23a845d78546b7246bf558e585472a631510c250d295c028e66c49e5092fc4e3",
+      "servicePngSha256": "e8916fd66febf3ecabea129432d1bcb2ce84a55b45422e53ef997f4dceaff64d",
+      "oursPngSha256": "097bd6c2860fc6883ba6e155ec90aa2da95ead8c25037ebb8df1fd10d509a2a6"
+    },
+    {
+      "id": "armor-target4-dither",
+      "pixels": 256,
+      "alphaDifferencesBetweenOutputs": 0,
+      "visibleRgbDifferencesBetweenOutputs": 48,
+      "sourcePngSha256": "4253720e7166feebf0292cbcdf8c6b46c5516f784ffa4c1dca45ef73652b349d",
+      "servicePngSha256": "0b6e1690f905cd5ba0991260b48a7682a762070ae875b5464bdc2c22efb63d1a",
+      "oursPngSha256": "8b523ff6553b3cc48552995a0ffcc9392306b86868bfc046ad5656c69b1b22a4"
+    }
+  ]
+}

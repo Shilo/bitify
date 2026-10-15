@@ -1,0 +1,361 @@
+{
+  "at": "2026-10-15T10:12:30.984Z",
+  "status": 200,
+  "total_tools": 117,
+  "tools": [
+    {
+      "name": "create_image_pro_flash",
+      "description": "Create one Pro Flash pixel-art image with an optional left-box style image.\n\nCustom sizes (Beta) accept width and height from 16 to 256 in multiples of 4 pixels.\nQuery get_pro_flash_capabilities for native presets and provisional cost.\nThe style image accepts {url}, {base64}, or {source_image_id}; prefer URLs\nfor uploaded images. Style art must fit the native canvas without resizing.\nstyle_options selects color_palette, outline, detail and shading independently.\nDefault style uses existing PixelLab art. Returns one image; the provisional\ngeneration charge varies with the canvas. Failed pixel grids use image-to-\npixel-art with fixer on the generated box. Poll get_image(job_id); use\nsource_image_id after completion.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "description": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "type": "string"
+          },
+          "width": {
+            "default": 64,
+            "description": "Native sizes: 16x16 (experimental), 24x24, 32x32, 32x48, 48x48, 64x64, 96x64, 96x96, 128x128. Custom size (Beta): integer width 16–256 and height 16–256. Both dimensions must be multiples of 4 pixels. Pixel-grid recovery uses image-to-pixel-art with fixer when needed. No native image resizing.",
+            "maximum": 256,
+            "minimum": 16,
+            "multipleOf": 4,
+            "type": "integer"
+          },
+          "height": {
+            "default": 64,
+            "maximum": 256,
+            "minimum": 16,
+            "multipleOf": 4,
+            "type": "integer"
+          },
+          "no_background": {
+            "default": true,
+            "type": "boolean"
+          },
+          "style_image": {
+            "default": null,
+            "additionalProperties": false,
+            "description": "One URL, encoded image, or owned image ID plus its reference instructions.",
+            "properties": {
+              "base64": {
+                "default": null,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "url": {
+                "default": null,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "source_image_id": {
+                "default": null,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "usage_description": {
+                "default": null,
+                "description": "How this reference should guide appearance.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "style_options": {
+            "default": null,
+            "additionalProperties": false,
+            "description": "Choose which visual traits to copy from the style image.",
+            "properties": {
+              "color_palette": {
+                "default": true,
+                "type": "boolean"
+              },
+              "outline": {
+                "default": true,
+                "type": "boolean"
+              },
+              "detail": {
+                "default": true,
+                "type": "boolean"
+              },
+              "shading": {
+                "default": true,
+                "type": "boolean"
+              }
+            },
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "seed": {
+            "default": 0,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "project_id": {
+            "default": null,
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "description"
+        ],
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "fastmcp": {
+          "tags": []
+        }
+      }
+    },
+    {
+      "name": "create_image_pro",
+      "description": "Generate pixel art with the Pro model — best quality, several candidates.\n\nThis is \"Create Image (Pro)\". It returns a SET of options in one call rather\nthan a single image, by the larger side: 64 candidates up to 32px, 49 at\n33-35px, 36 at 36-41px, 25 at 42-50px, 16 at 51-64px, 9 at 65-84px, 16 at\n85px, 4 at 86-170px, 1 above that. Cost is per call, not per candidate, so a\nsmall canvas is where it pays off.\n\nUnlike the other two text-to-image tools it accepts labelled references:\n  create_image_pro(\n      description=\"knight in the same armour\",\n      reference_images='[{\"base64\": \"<hero png>\", \"usage\": \"character base\"},\n                         {\"base64\": \"<armour png>\", \"usage\": \"outfit\"}]')\n\nNo facing control: nothing here sets which way the subject looks, and a\nreference does not either. To turn a picture you already have into 8\nfacings, use create_object_pro_flash(first_frame_base64=..., n_directions=8).\n\nFor a console or palette look (1-bit, Game Boy, PICO-8, NES, any palette from\nLospec) pass `palette` as its hex colours, e.g. [\"#081820\", \"#346856\",\n\"#88c070\", \"#e0f8d0\"], plus `palette_name`: the image is drawn for the\npalette and comes back using only those colours. A palette name alone is not\nenough - the colours are what the result is put on. `max_colors` caps the\ncolours in each image (e.g. 6 for an NES-style sprite).\n\nPick between the three: create_image_pixflux for img2img or isometric;\ncreate_image_pixen for clean small sprites at 1 generation; this one when\nquality matters more than cost, or for a palette given as hex colours.\n\nCost: 10-25 generations. Generation time: ~1-10 minutes (async).\nPoll with get_image(job_id).",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "description": {
+            "description": "What to draw (e.g. 'ornate iron key with a ruby inlay').",
+            "maxLength": 2000,
+            "type": "string"
+          },
+          "width": {
+            "default": 128,
+            "description": "Canvas width. Max depends on aspect ratio (512x512 square, 688x384 for 16:9).",
+            "minimum": 16,
+            "type": "integer"
+          },
+          "height": {
+            "default": 128,
+            "description": "Canvas height. Max depends on aspect ratio.",
+            "minimum": 16,
+            "type": "integer"
+          },
+          "no_background": {
+            "default": true,
+            "description": "Return subjects on a transparent background. Defaults True — pro is normally used for assets. Set False for scenes and backdrops.",
+            "type": "boolean"
+          },
+          "reference_images": {
+            "default": null,
+            "description": "Up to 4 LABELLED reference images, as a JSON array. Each entry takes a \"url\" (preferred) OR a \"base64\": [{\"url\": \"https://...\", \"usage\": \"character base\"}, {\"url\": \"https://...\", \"usage\": \"outfit and armour\"}]. The \"usage\" note tells the model what to take from each image, which is what makes combining several references work. Prefer urls here especially — four inline images in one argument is four times the payload, and MCP clients truncate large arguments. Sizes are read from the images.",
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": [
+              "array",
+              "null"
+            ]
+          },
+          "style_image_base64": {
+            "default": null,
+            "description": "One image whose art style (palette, outline, detail, shading) the result should match. Use style_copy to narrow which of those apply.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "style_image_url": {
+            "default": null,
+            "description": "Alternative to style_image_base64: an https (or data:) URL to the style PNG. PREFER THIS for anything but a tiny sprite. Give one, not both.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "style_copy": {
+            "default": null,
+            "description": "Which aspects to take from style_image_base64: any of color_palette, outline, detail, shading. Defaults to all four, or all but color_palette when a palette is given.",
+            "items": {
+              "type": "string"
+            },
+            "type": [
+              "array",
+              "null"
+            ]
+          },
+          "palette": {
+            "default": null,
+            "description": "Target palette, 2 to 256 hex colours as a JSON array, e.g. [\"#081820\", \"#346856\", \"#88c070\", \"#e0f8d0\"] for Game Boy or [\"#000000\", \"#ffffff\"] for 1-bit. The image is drawn for these colours and every pixel of the result is one of them.",
+            "items": {
+              "type": "string"
+            },
+            "type": [
+              "array",
+              "null"
+            ]
+          },
+          "palette_name": {
+            "default": null,
+            "description": "Optional name of the palette (e.g. 'Game Boy', 'PICO-8', 'NES'); naming it helps the look.",
+            "maxLength": 100,
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "max_colors": {
+            "default": null,
+            "description": "At most this many colours in each image (2-64), e.g. 6 for an NES-style sprite. With a palette, they are picked from it.",
+            "maximum": 64,
+            "minimum": 2,
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "seed": {
+            "default": null,
+            "description": "Seed for reproducible generation.",
+            "minimum": 0,
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "project_id": {
+            "default": null,
+            "description": "Internal Game Builder project context; the finished image is linked after generation.",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "description"
+        ],
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "fastmcp": {
+          "tags": []
+        }
+      }
+    },
+    {
+      "name": "reduce_colors",
+      "description": "Quantize images onto a smaller, shared palette.\n\nPixel art reads as pixel art partly because of its restricted palette. AI\noutput and converted artwork often carry hundreds of near-identical colors;\nthis snaps them onto a tight palette, optionally with ordered dithering.\n\nPassing several frames in one call is the point: they are quantized TOGETHER,\nso an animation or a character's eight directions come back sharing ONE\npalette instead of drifting apart frame by frame. Quantizing them one at a\ntime is the mistake this tool exists to prevent.\n\nThree ways to choose the palette:\n- omit num_colors and the palette image — the size is auto-detected\n- num_colors — quantize to exactly this many colors\n- palette_image — reuse the colors of an existing image (the game's palette)\n\nThe result carries a `palette` strip you can feed back as palette_image_base64\nto lock later frames onto the same colors.\n\nTotal size limit across all frames is 512x512 worth of pixels (sixteen 64x64\nframes, or four 128x128).\n\nCost: 0.1 generations. Runs locally in about a second — poll once with\nget_image(job_id).",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "images_base64": {
+            "default": null,
+            "description": "Base64 PNG(s) to quantize — pass a one-element list for a single image. All frames must be the same size. PREFER image_urls; MCP clients routinely truncate large inline base64.",
+            "items": {
+              "type": "string"
+            },
+            "type": [
+              "array",
+              "null"
+            ]
+          },
+          "image_urls": {
+            "default": null,
+            "description": "Alternative to images_base64: https, data: or `upload:<id>` (POST /v2/uploads with this same bearer token) URLs to the PNG(s), one per frame. PREFER THIS. Give urls OR base64, not both.",
+            "items": {
+              "type": "string"
+            },
+            "type": [
+              "array",
+              "null"
+            ]
+          },
+          "num_colors": {
+            "default": null,
+            "description": "Target number of colors. Omit to auto-detect a good palette size from the images. Cannot be combined with a palette image.",
+            "maximum": 256,
+            "minimum": 2,
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "palette_image_base64": {
+            "default": null,
+            "description": "Base64 PNG whose colors become the palette (max 256 colors) — use it to force frames onto an existing game palette. Cannot be combined with num_colors.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "palette_image_url": {
+            "default": null,
+            "description": "Alternative to palette_image_base64: an https (or data:) URL to the palette image. Give one, not both.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "dithering": {
+            "default": "none",
+            "description": "Ordered dithering matrix size. Larger matrices give smoother gradients at the cost of a busier look.",
+            "enum": [
+              "none",
+              "2x2",
+              "4x4",
+              "8x8"
+            ],
+            "type": "string"
+          },
+          "dithering_strength": {
+            "default": 5,
+            "description": "How strongly to dither. Ignored when dithering is 'none'.",
+            "maximum": 10,
+            "minimum": 0,
+            "type": "number"
+          },
+          "project_id": {
+            "default": null,
+            "description": "Internal Game Builder project context; the finished image is linked after generation.",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "fastmcp": {
+          "tags": []
+        }
+      }
+    }
+  ]
+}

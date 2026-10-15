@@ -1,0 +1,16 @@
+{
+  "status": 200,
+  "data": {
+    "jsonrpc": "2.0",
+    "id": 3,
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "id: 2d5a39a1-3091-43d3-9f78-a4eaab4e9e9f\njob_id: 2d5a39a1-3091-43d3-9f78-a4eaab4e9e9f\nasset_id: 008e6b5b-e5bf-5225-a69f-db43faa24174\nasset_status: pending (saved when generation completes)\nframes: 1\nsize: 16x16px (unchanged)\npalette: 8 colors\ndithering: none\ncost: 0.1 generations\nstatus: processing (~1s)\n\nhint: get_image(job_id=\"2d5a39a1-3091-43d3-9f78-a4eaab4e9e9f\")"
+        }
+      ],
+      "isError": false
+    }
+  }
+}

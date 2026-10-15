@@ -1,0 +1,23 @@
+{
+  "status": 200,
+  "ms": 673,
+  "result": {
+    "usage": {
+      "type": "generations",
+      "generations": 0.1
+    },
+    "images": [
+      {
+        "type": "base64",
+        "base64": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA7ElEQVR4nKWTsRWDIBCGP/JSZIQ8qwxg7XMMCwvKzJHKETKCJYWFY/isncE1SCEQODBN/kp/ju/u4FC3+4N/dC14NvpWPzwALnJz3TUSZmVM7MWAsFlAEk+u+RbsYDoABj2HwF5XAExmZ5tXAOc1bPNqAZWcwWT2A+Jg/t8DPaRUQchSdw26fTp3zOAxNAGkJZ5LVuEBCneyR4Y8s68uAihIbyHcr26fURuHSpslIMgsY+b5CqSKczCZHbOM2YFFkOIgBfW6Snr3LZSuMp4D5RYtNEzvl2vlW7ZbT96COnmNcv5DvDRKr7EYeKYPGfdpUe/fNH8AAAAASUVORK5CYII=",
+        "format": "png"
+      }
+    ],
+    "palette": {
+      "type": "base64",
+      "base64": "iVBORw0KGgoAAAANSUhEUgAAAAQAAAABCAYAAAD5PA/NAAAAGUlEQVR4nGPkkFD4rxNgxhASIcUQYZHAAAAgxQOpDQ72IwAAAABJRU5ErkJggg==",
+      "format": "png"
+    },
+    "n_colors": 4
+  }
+}

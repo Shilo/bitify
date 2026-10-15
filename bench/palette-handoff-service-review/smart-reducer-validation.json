@@ -1,0 +1,14 @@
+{
+  "status": 422,
+  "ms": 937,
+  "errors": [
+    {
+      "type": "extra_forbidden",
+      "loc": [
+        "body",
+        "target_palette"
+      ],
+      "msg": "Extra inputs are not permitted"
+    }
+  ]
+}

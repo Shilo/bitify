@@ -1,0 +1,23 @@
+{
+  "status": 200,
+  "ms": 1119,
+  "result": {
+    "usage": {
+      "type": "generations",
+      "generations": 0.1
+    },
+    "images": [
+      {
+        "type": "base64",
+        "base64": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAJElEQVR4nGM8oWHznwEPCKvAJ8vAwIRfmjAYNWDUgFEDBosBADiGAxmpnhkEAAAAAElFTkSuQmCC",
+        "format": "png"
+      }
+    ],
+    "palette": {
+      "type": "base64",
+      "base64": "iVBORw0KGgoAAAANSUhEUgAAAAIAAAABCAYAAAD0In+KAAAAEUlEQVR4nGOQW2Dz/4SGzX8AEMsEJXTFMhcAAAAASUVORK5CYII=",
+      "format": "png"
+    },
+    "n_colors": 2
+  }
+}

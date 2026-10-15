@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-15T10:15:15.200Z",
+  "inputPngSha256": "9992c1614f56b1b911ef3c025bfebaaf74d495248643be11a920476404c61e4f",
+  "settings": {
+    "num_colors": 8,
+    "dithering": "none"
+  },
+  "status": "completed",
+  "frames": 1,
+  "chargedGenerations": 0.1,
+  "gallerySaved": true,
+  "elapsedMs": 8379.6091,
+  "width": 16,
+  "height": 16,
+  "visibleRgbDifferencesFromSource": 0,
+  "alphaDifferencesFromSource": 0,
+  "outputPngSha256": "2808592b2b7236ff133c0c571f0a6dfdb832898f83a558eb562452f3c6d8f58c",
+  "rgbaSha256": "0866ae962103f672b02c8078eddac6f89fefb885bce577d5eaefb0d105cb6e30",
+  "matchesFreshRestRgba": true
+}
