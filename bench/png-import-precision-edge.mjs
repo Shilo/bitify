@@ -1,0 +1,5 @@
+import {createRequire} from 'node:module';
+import assert from 'node:assert/strict';
+const require=createRequire(import.meta.url),{chromium}=require('C:/Users/shilo/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const browser=await chromium.launch({executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true,chromiumSandbox:true});
+try{const page=await browser.newPage();await page.goto('http://127.0.0.1:5298/?device=edge');await page.getByRole('button',{name:'Run PNG precision checks',exact:true}).click();await page.waitForFunction(()=>window.pngPrecisionReport?.finished,{},{timeout:60000});const report=await page.evaluate(()=>window.pngPrecisionReport);assert(report.completed,report.error?.message);console.log(JSON.stringify({capabilities:report.capabilities,fixtures:report.fixtures.map(f=>({id:f.id,methods:f.methods.map(m=>({name:m.name,ok:m.ok,rgb:m.visibleRgbMismatches,alpha:m.alphaMismatches,error:m.error?.message}))}))},null,2));}finally{await browser.close();}

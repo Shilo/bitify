@@ -1,0 +1,6 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PNG import precision diagnostic</title>
+<style>body{font:15px system-ui;margin:20px;background:#fffdf9;color:#241d2d}button,select{font:inherit;min-height:44px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style>
+<h1>PNG import precision</h1><p>Owned fixed PNGs only. Compares the unchanged production decoder, direct native decoder and canvas controls. No clipboard access or production changes.</p>
+<label>Device <select id="device"><option value="codex">Codex Browser</option><option value="android">USB Android</option><option value="edge">Independent Edge</option></select></label>
+<button id="run">Run PNG precision checks</button><p id="status">Ready</p><pre id="out"></pre>
+<script type="module" src="/assets/probe.js"></script>
