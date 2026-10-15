@@ -74,6 +74,17 @@ run.onclick=async()=>{if(run.disabled)return;run.disabled=true;report={kind:'pal
  });
  await check('Optional real public Lospec URL import',async()=>{if(!document.querySelector('#online').checked)return{optional:true,outcome:'not requested'};click(label('Import palette'));const editor=await until(()=>d.querySelector('.palette-import-modal[open]'),'Import editor missing');click(textButton('Paste colors',editor));input(label('Colors or Lospec link',editor),'https://lospec.com/palette-list/slso8');await until(()=>textButton('Import from Lospec',editor),'Lospec mode not recognized');click(textButton('Import from Lospec',editor));try{await until(()=>all('.palette-review-swatch',editor).length===8||editor.querySelector('.palette-editor-error'),'Public import timed out',35000);const error=editor.querySelector('.palette-editor-error');if(error)return{optional:true,outcome:'network unavailable',message:error.textContent};assert(editor.querySelector('.palette-source-credit a')?.href==='https://lospec.com/palette-list/slso8','Lospec source link missing');return{optional:true,outcome:'success',swatches:8,paletteName:label('Name',editor).value};}finally{click(label('Close palette editor',editor));}});
  await check('Reset returns opacity Cut and dithering Off',async()=>{await settings();click(label('Reset palette settings'));await until(()=>stored().alphaMode==='cut'&&stored().dither==='none','Reset policy failed');assert(stored().alphaCut===128,'Reset cut not128');return fits();});
+ await check('Remove only the saved palette created by this QA run',async()=>{
+  const id=report.savedPaletteId;assert(id,'Owned saved palette identity missing');
+  const before=JSON.parse(w.localStorage.getItem('colorfetti-palettes-v1')),owned=before.palettes.find(p=>p.id===id);assert(owned&&owned.name===report.paletteName,'Owned saved palette changed before cleanup');
+  const unrelated=JSON.stringify(before.palettes.filter(p=>p.id!==id));
+  await palette(id,report.paletteName);click(label('Edit palette'));
+  const editor=await until(()=>d.querySelector('.palette-import-modal[open]'),'Cleanup editor missing');assert(stored().paletteId===id&&label('Name',editor).value===report.paletteName,'Cleanup editor ownership mismatch');
+  const more=all('.palette-editor-details summary',editor).find(n=>n.textContent.trim()==='More options');click(more);click(textButton('Delete saved palette',editor));click(await until(()=>textButton('Delete palette',editor),'Delete confirmation missing'));
+  await until(()=>!d.querySelector('.palette-import-modal[open]'),'Owned palette cleanup did not close');
+  const after=JSON.parse(w.localStorage.getItem('colorfetti-palettes-v1'));assert(!after.palettes.some(p=>p.id===id),'Owned palette was retained');assert(JSON.stringify(after.palettes)===unrelated,'Cleanup changed an unrelated palette');assert(stored().paletteId!==id,'Deleted palette remains selected');
+  return{deletedPaletteId:id,unrelatedPalettesPreserved:after.palettes.length};
+ });
  assert(!report.errors.length,'Runtime errors: '+JSON.stringify(report.errors));report.completed=true;status.textContent='PASS';
  }catch(error){report.completed=false;report.error={message:error.message,stack:error.stack};status.textContent='FAIL: '+error.message;}finally{observer?.disconnect();report.finished=new Date().toISOString();await publish();run.disabled=false;}
 };
