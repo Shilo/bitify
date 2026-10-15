@@ -1,5 +1,14 @@
 # Remaining palette work: independent audit
 
+Follow-up, October 15: the [WebKit fallback investigation](2026-10-15-webkit-fallback-decision.md)
+tested a native HTML-image/WebGL alternative with three sub-agents. It improves
+research-source precision but fails repeated cold-start latency gates, so no
+production integration was made. Codex Browser and USB Android app/export checks
+remain exact in their native paths. The investigation is complete; the fallback
+precision limitation remains. Mac/iOS is explicitly unavailable and outside the
+user's current scope, rather than a required next action. Historical platform
+feasibility and earlier acceptance results below remain unchanged evidence.
+
 October 15, 2026. Read-only production audit of the October14/15 palette research,
 implementation and session checklists. This excludes the separate bead/outline
 project and deferred branding effects. No user browser/profile, clipboard,
@@ -17,8 +26,8 @@ accepted app feature.
 | Rank | Work | Current classification | Gate and practical next action |
 |---|---|---|---|
 | 1 | PNG input precision | Guarded native-byte correction complete in d37d8b7; final device/export gates passed | The [final verification](2026-10-15-png-import-precision-verification.md) closes the tested Windows native-copy discrepancy. Exact native PNGs and eight-color palette-image import pass in Codex Browser and Android. Native Android RGBA was already exact. Retain regressions and explicit profile/fallback limits; no further native-copy implementation is pending. |
-| 2 | WebKit engine coverage | Six bounded binary-alpha smoke checks pass; full partial-alpha suites fail their original-source oracle | Retain both results below. No install was needed. Do not weaken the full-source assertion, relabel partial-alpha input as exact, or claim actual Safari/iOS from these runs. |
-| 3 | Actual Safari/iOS | Genuine unclosed platform acceptance | Requires accessible Safari on a Mac and/or an actual iOS device with a supported testing connection. Use the existing owned fixtures and retain native file/clipboard/picker results. Neither Windows WebKit nor an iPhone viewport closes this gap. |
+| 2 | WebKit engine coverage | Follow-up investigation complete, with a no-ship decision; six binary-alpha smoke checks still pass and full partial-alpha suites still fail their original-source oracle | The native alternative preserves tested colors but adds repeated cold stalls. Retain both successful and failed current-app receipts in the [follow-up decision](2026-10-15-webkit-fallback-decision.md). Do not relabel research-only precision as a shipping fix. |
+| 3 | Actual Safari/iOS | Outside the current requested scope; historical untested platform | The user explicitly says Mac/iOS is unavailable. No setup or testing action is pending for this pass. Only if separately prioritised later, use an actual supported Apple connection and retained fixtures; Windows WebKit/emulation does not establish Apple-platform acceptance. |
 | 4 | Sustained/large native integrations | Narrow unexercised scenarios, not known app defects | If prioritised, test one bounded delayed native Copy snapshot and a long GIF/source-switch workload. Retain actual output, source/settings identity, cancellation and responsiveness observations. Existing payload interception must not be relabeled as OS delivery. |
 | 5 | Task usability and collection scope | Optional research with a demonstrated semantic distinction | Test real tasks before adding rows: explain target size versus maximum versus used count, reuse the counted palette, and establish whether users need one shared cap across assets. A shared target is not a shared capped subset. |
 
