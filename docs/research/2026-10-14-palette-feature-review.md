@@ -6,6 +6,12 @@ Colorfetti already covers much of the core recoloring workflow. The strongest im
 
 The current full-palette controls were also inspected live in the local app: Nearest exposes Max colors, Oklab/RGB Matching and Cleanup, with no multicolor dither control. The [captured baseline controls](../../bench/palette-collection-spike/colorfetti-controls.jpg) complement the code and behavior audit; they are not a participant usability study.
 
+## Direct comparison follow-up
+
+The [paired output review](pixellab-review-2026-10-14/paired-output-comparison.md) now compares 37 same-input reducer cases: 25 retained and 12 newly measured, including native-size item art and tiny armor. It retains the original, service and current app outputs, both matching choices, native strength controls, real Auto64 defaults and capacity-matched limits. Independent review rejected treating one error metric, native strength ratio or PNG byte count as a universal quality ranking.
+
+The [29-task cross-surface matrix](pixellab-review-2026-10-14/direct-feature-comparison.md) covers website, REST, MCP, installed editor extension and current Colorfetti. Five free workbench follow-up commands add real extraction, ramps, snap and stray-removal observations. Website generated output remains unverified unless the later focused diagnostic establishes otherwise. The actionable output gaps are tiny-sprite texture protection, optional PNG alpha preservation, and evaluated compact-palette fitting. Used-color feedback and palette reuse remain useful usability priorities. Preserve the negative armor example and the capacity-matched grayscale loss alongside cases favoring Colorfetti.
+
 ## Implemented follow-up
 
 Optional full-palette ordered 2×2/4×4/8×8 dithering is now implemented, Off by default, with a remembered amount. Existing one-bit effects remain separate. The [implementation and validation record](2026-10-14-full-palette-dithering-implementation.md) covers desktop, USB Android, independent review and performance. The experimental spike kernels were not shipped unchanged. Next, prioritize used-color counts and quick budgets, then palette reuse/export and a reviewed chromatic eight-color preset; evaluate locks and direct-capacity generation afterward.

@@ -1,0 +1,55 @@
+[
+  {
+    "request": [
+      "repair",
+      "-h"
+    ],
+    "status": 200,
+    "isError": false,
+    "content": [
+      {
+        "type": "text",
+        "text": "repair: deterministic cleanup: regrid,defringe,snap,stray,holes,deflicker\nsubject: any image id or reference\n  --ops <value>\n  --full: do not truncate detail lines\nresult: a new image id\nids or image references, never paths; every output comes back with the reply. `describe cli` lists every command."
+      }
+    ]
+  },
+  {
+    "request": [
+      "repair",
+      "[owned fixture 71d1b7a960f40ccb28c70fd30ab19be6af076e5d3c273a88b13bd5b9f604283d]",
+      "--ops",
+      "snap"
+    ],
+    "status": 200,
+    "isError": false,
+    "content": [
+      {
+        "type": "text",
+        "text": "🩹 repair snap -> (returned with this reply)\n   score 71.9 -> 71.9\n   snap 0\nimage_id: d47100be-019d-4d8b-9171-3d11cc2b5d05\nnext: lint d47100be-019d-4d8b-9171-3d11cc2b5d05"
+      },
+      {
+        "type": "image",
+        "mimeType": "image/png",
+        "file": "api-workbench-followup-1-1.png",
+        "metrics": {
+          "width": 16,
+          "height": 16,
+          "visible_colors": 4,
+          "transparent_pixels": 22,
+          "alpha_histogram": {
+            "0": 22,
+            "127": 36,
+            "255": 198
+          },
+          "color_histogram": {
+            "#262626": 111,
+            "#bcbcbc": 109,
+            "#282626": 7,
+            "#bebcbc": 7
+          },
+          "rgba_sha256": "29a036efbc0229c490512a1240e0fe29227e5a78a280fd37490e709b8ccbc172"
+        }
+      }
+    ]
+  }
+]

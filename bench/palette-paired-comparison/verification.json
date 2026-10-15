@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "cases": 37,
+  "serviceFiles": 41,
+  "applicationFiles": 115,
+  "applicationPixels": 1327616,
+  "engineHashes": 6,
+  "checks": [
+    "source PNG hashes",
+    "native decoded output hashes and byte counts",
+    "production engine hashes",
+    "output dimensions",
+    "binary source-alpha classification",
+    "active target RGB membership",
+    "exact active RGB preservation",
+    "response billing totals"
+  ]
+}

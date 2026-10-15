@@ -37,6 +37,8 @@ Retained follow-up evidence:
 | Workbench extraction and ramps | Help, extraction and hue-shifted ramp calls exercised | Not required for reducer UI | Artistic preference and detailed ramp editing |
 | Smart target mapping | One successful Pro generated result inside supplied palette/cap | No inspected reducer smart toggle | No same-input before/after superiority claim; no animation smart claim |
 | Aseprite integration | Installed extension inspected statically | Not applicable | Extension runtime untested; local installation may contain edits |
-| Palette snapping / repair / deflicker names | Workbench advertised surfaces inventoried | Not established | Runtime repair operations untested; names do not prove semantics |
+| Palette snapping / repair / deflicker names | Later follow-up exercised snap (zero changes) and stray (one alpha deletion); extraction/ramp output tested | Not established | Other repair operations remain untested; no arbitrary target-snap superiority established |
 
 The coverage supports shipping a bounded local ordered-dither option with explicit contracts. It does not justify copying an inferred internal algorithm, promising semantic mapping, or labeling the incomplete website export path verified. The [initial API/MCP report](api-mcp-evidence.md) and [website report](website-evidence.md) retain their original test-specific details.
+
+The subsequent [direct cross-surface comparison](direct-feature-comparison.md) adds the free workbench pixel measurements and a separate 37-case paired cohort (25 replayed + 12 new reductions). Those 12 reductions add 1.2 reported generations to the earlier 12.6, for 13.8 confirmed reported generations overall; website billing remains unverified. It also records negative visual cases, so the coverage should not be read as a universal quality claim.

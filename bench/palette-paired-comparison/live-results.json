@@ -1,0 +1,301 @@
+[
+  {
+    "id": "sprite-target2-none",
+    "origin": "live",
+    "status": 200,
+    "ms": 2441,
+    "request": {},
+    "inputs": [
+      "input-sprite.png"
+    ],
+    "target": "target-2.png",
+    "inputPngSha256": [
+      "af9f42ef98a83e4702662c57776dabf58e1c1af615e211da2da6a2fd69c8b676"
+    ],
+    "targetPngSha256": "76dc205a650dd55a8531b1c05477c6a4952a51c822f2f01c1cb596dd2c07231f",
+    "usage": {
+      "type": "generations",
+      "generations": 0.1
+    },
+    "reportedColors": 2,
+    "outputs": [
+      "service-sprite-target2-none-0.png"
+    ]
+  },
+  {
+    "id": "sprite-target4-none",
+    "origin": "live",
+    "status": 200,
+    "ms": 829,
+    "request": {},
+    "inputs": [
+      "input-sprite.png"
+    ],
+    "target": "target-4.png",
+    "inputPngSha256": [
+      "af9f42ef98a83e4702662c57776dabf58e1c1af615e211da2da6a2fd69c8b676"
+    ],
+    "targetPngSha256": "990e6a8f40a3b6ae15bdfa3ab76c89c6741051a023072e5cba4572e30845333f",
+    "usage": {
+      "type": "generations",
+      "generations": 0.1
+    },
+    "reportedColors": 4,
+    "outputs": [
+      "service-sprite-target4-none-0.png"
+    ]
+  },
+  {
+    "id": "sprite-target8-none",
+    "origin": "live",
+    "status": 200,
+    "ms": 677,
+    "request": {},
+    "inputs": [
+      "input-sprite.png"
+    ],
+    "target": "target-8.png",
+    "inputPngSha256": [
+      "af9f42ef98a83e4702662c57776dabf58e1c1af615e211da2da6a2fd69c8b676"
+    ],
+    "targetPngSha256": "4195b5c6a2c93eacb6115941602b22281eae84e8a390823021f6710bc3343066",
+    "usage": {
+      "type": "generations",
+      "generations": 0.1
+    },
+    "reportedColors": 8,
+    "outputs": [
+      "service-sprite-target8-none-0.png"
+    ]
+  },
+  {
+    "id": "sprite-target8-4x4-default",
+    "origin": "live",
+    "status": 200,
+    "ms": 1067,
+    "request": {
+      "dithering": "4x4"
+    },
+    "inputs": [
+      "input-sprite.png"
+    ],
+    "target": "target-8.png",
+    "inputPngSha256": [
+      "af9f42ef98a83e4702662c57776dabf58e1c1af615e211da2da6a2fd69c8b676"
+    ],
+    "targetPngSha256": "4195b5c6a2c93eacb6115941602b22281eae84e8a390823021f6710bc3343066",
+    "usage": {
+      "type": "generations",
+      "generations": 0.1
+    },
+    "reportedColors": 8,
+    "outputs": [
+      "service-sprite-target8-4x4-default-0.png"
+    ]
+  },
+  {
+    "id": "sprite-target8-4x4-max",
+    "origin": "live",
+    "status": 200,
+    "ms": 579,
+    "request": {
+      "dithering": "4x4",
+      "dithering_strength": 10
+    },
+    "inputs": [
+      "input-sprite.png"
+    ],
+    "target": "target-8.png",
+    "inputPngSha256": [
+      "af9f42ef98a83e4702662c57776dabf58e1c1af615e211da2da6a2fd69c8b676"
+    ],
+    "targetPngSha256": "4195b5c6a2c93eacb6115941602b22281eae84e8a390823021f6710bc3343066",
+    "usage": {
+      "type": "generations",
+      "generations": 0.1
+    },
+    "reportedColors": 8,
+    "outputs": [
+      "service-sprite-target8-4x4-max-0.png"
+    ]
+  },
+  {
+    "id": "armor-target4-none",
+    "origin": "live",
+    "status": 200,
+    "ms": 2319,
+    "request": {},
+    "inputs": [
+      "input-armor.png"
+    ],
+    "target": "target-4.png",
+    "inputPngSha256": [
+      "4253720e7166feebf0292cbcdf8c6b46c5516f784ffa4c1dca45ef73652b349d"
+    ],
+    "targetPngSha256": "990e6a8f40a3b6ae15bdfa3ab76c89c6741051a023072e5cba4572e30845333f",
+    "usage": {
+      "type": "generations",
+      "generations": 0.1
+    },
+    "reportedColors": 4,
+    "outputs": [
+      "service-armor-target4-none-0.png"
+    ]
+  },
+  {
+    "id": "armor-target4-4x4-max",
+    "origin": "live",
+    "status": 200,
+    "ms": 1173,
+    "request": {
+      "dithering": "4x4",
+      "dithering_strength": 10
+    },
+    "inputs": [
+      "input-armor.png"
+    ],
+    "target": "target-4.png",
+    "inputPngSha256": [
+      "4253720e7166feebf0292cbcdf8c6b46c5516f784ffa4c1dca45ef73652b349d"
+    ],
+    "targetPngSha256": "990e6a8f40a3b6ae15bdfa3ab76c89c6741051a023072e5cba4572e30845333f",
+    "usage": {
+      "type": "generations",
+      "generations": 0.1
+    },
+    "reportedColors": 4,
+    "outputs": [
+      "service-armor-target4-4x4-max-0.png"
+    ]
+  },
+  {
+    "id": "sprite-generated2",
+    "origin": "live",
+    "status": 200,
+    "ms": 309,
+    "request": {
+      "num_colors": 2
+    },
+    "inputs": [
+      "input-sprite.png"
+    ],
+    "target": null,
+    "inputPngSha256": [
+      "af9f42ef98a83e4702662c57776dabf58e1c1af615e211da2da6a2fd69c8b676"
+    ],
+    "targetPngSha256": null,
+    "usage": {
+      "type": "generations",
+      "generations": 0.1
+    },
+    "reportedColors": 2,
+    "outputs": [
+      "service-sprite-generated2-0.png"
+    ]
+  },
+  {
+    "id": "sprite-generated4",
+    "origin": "live",
+    "status": 200,
+    "ms": 290,
+    "request": {
+      "num_colors": 4
+    },
+    "inputs": [
+      "input-sprite.png"
+    ],
+    "target": null,
+    "inputPngSha256": [
+      "af9f42ef98a83e4702662c57776dabf58e1c1af615e211da2da6a2fd69c8b676"
+    ],
+    "targetPngSha256": null,
+    "usage": {
+      "type": "generations",
+      "generations": 0.1
+    },
+    "reportedColors": 4,
+    "outputs": [
+      "service-sprite-generated4-0.png"
+    ]
+  },
+  {
+    "id": "sprite-generated8",
+    "origin": "live",
+    "status": 200,
+    "ms": 282,
+    "request": {
+      "num_colors": 8
+    },
+    "inputs": [
+      "input-sprite.png"
+    ],
+    "target": null,
+    "inputPngSha256": [
+      "af9f42ef98a83e4702662c57776dabf58e1c1af615e211da2da6a2fd69c8b676"
+    ],
+    "targetPngSha256": null,
+    "usage": {
+      "type": "generations",
+      "generations": 0.1
+    },
+    "reportedColors": 8,
+    "outputs": [
+      "service-sprite-generated8-0.png"
+    ]
+  },
+  {
+    "id": "sprite-temporal-target8-4x4-max",
+    "origin": "live",
+    "status": 200,
+    "ms": 626,
+    "request": {
+      "dithering": "4x4",
+      "dithering_strength": 10
+    },
+    "inputs": [
+      "input-sprite.png",
+      "input-sprite-changed.png"
+    ],
+    "target": "target-8.png",
+    "inputPngSha256": [
+      "af9f42ef98a83e4702662c57776dabf58e1c1af615e211da2da6a2fd69c8b676",
+      "1fc42607aa637d1a67e869a5de272ff7d221300e3a64fdf17916ab39fce02f17"
+    ],
+    "targetPngSha256": "4195b5c6a2c93eacb6115941602b22281eae84e8a390823021f6710bc3343066",
+    "usage": {
+      "type": "generations",
+      "generations": 0.1
+    },
+    "reportedColors": 8,
+    "outputs": [
+      "service-sprite-temporal-target8-4x4-max-0.png",
+      "service-sprite-temporal-target8-4x4-max-1.png"
+    ]
+  },
+  {
+    "id": "colorcube-target8-8x8-max",
+    "origin": "live",
+    "status": 200,
+    "ms": 609,
+    "request": {
+      "dithering": "8x8",
+      "dithering_strength": 10
+    },
+    "inputs": [
+      "..\\palette-service-research\\api-input-colorcube.png"
+    ],
+    "target": "target-8.png",
+    "inputPngSha256": [
+      "21ff842db10f0423b2dc79233a2984e4e1528276f5cf1d6811729887db548946"
+    ],
+    "targetPngSha256": "4195b5c6a2c93eacb6115941602b22281eae84e8a390823021f6710bc3343066",
+    "usage": {
+      "type": "generations",
+      "generations": 0.1
+    },
+    "reportedColors": 8,
+    "outputs": [
+      "service-colorcube-target8-8x8-max-0.png"
+    ]
+  }
+]

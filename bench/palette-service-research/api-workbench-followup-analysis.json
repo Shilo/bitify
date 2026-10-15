@@ -1,0 +1,103 @@
+{
+  "source": {
+    "width": 16,
+    "height": 16,
+    "visible_colors": 4,
+    "transparent_pixels": 22,
+    "alpha_histogram": {
+      "0": 22,
+      "127": 36,
+      "255": 198
+    },
+    "color_histogram": {
+      "#262626": 111,
+      "#bcbcbc": 109,
+      "#282626": 7,
+      "#bebcbc": 7
+    },
+    "rgba_sha256": "29a036efbc0229c490512a1240e0fe29227e5a78a280fd37490e709b8ccbc172"
+  },
+  "exactTarget": [
+    "#262626",
+    "#bcbcbc",
+    "#282626",
+    "#bebcbc"
+  ],
+  "localCleanupOnBinaryAlpha": {
+    "width": 16,
+    "height": 16,
+    "visible_colors": 4,
+    "transparent_pixels": 58,
+    "alpha_histogram": {
+      "0": 58,
+      "255": 198
+    },
+    "color_histogram": {
+      "#262626": 94,
+      "#bcbcbc": 92,
+      "#282626": 6,
+      "#bebcbc": 6
+    },
+    "rgba_sha256": "d72f8c9149446946cb5b433de1d961012f5d8d11d5fa4159d918bea89f848048"
+  },
+  "cases": [
+    {
+      "file": "api-workbench-followup-1-1.png",
+      "width": 16,
+      "height": 16,
+      "visible_colors": 4,
+      "transparent_pixels": 22,
+      "alpha_histogram": {
+        "0": 22,
+        "127": 36,
+        "255": 198
+      },
+      "color_histogram": {
+        "#262626": 111,
+        "#bcbcbc": 109,
+        "#282626": 7,
+        "#bebcbc": 7
+      },
+      "rgba_sha256": "29a036efbc0229c490512a1240e0fe29227e5a78a280fd37490e709b8ccbc172",
+      "rawRgbaChanges": 0,
+      "visibleRgbDifferences": 0,
+      "alphaChanges": [],
+      "commonOpaqueRgbDifferencesVsLocalExactTarget": 0
+    },
+    {
+      "file": "api-workbench-followup-more-2-1.png",
+      "width": 16,
+      "height": 16,
+      "visible_colors": 4,
+      "transparent_pixels": 23,
+      "alpha_histogram": {
+        "0": 23,
+        "127": 36,
+        "255": 197
+      },
+      "color_histogram": {
+        "#262626": 111,
+        "#bcbcbc": 109,
+        "#282626": 7,
+        "#bebcbc": 6
+      },
+      "rgba_sha256": "05375d8fa5439dc4ea3bbc70a49c9917fabacbfe9d7f0ec1454687008bf1c0cf",
+      "rawRgbaChanges": 1,
+      "visibleRgbDifferences": 0,
+      "alphaChanges": [
+        {
+          "x": 15,
+          "y": 8,
+          "sourceAlpha": 255,
+          "outputAlpha": 0
+        }
+      ],
+      "commonOpaqueRgbDifferencesVsLocalExactTarget": 0
+    }
+  ],
+  "limits": [
+    "Workbench snap had no supplied target palette and reported snap0; this tests execution and a no-op, not arbitrary fixed-target snapping.",
+    "Compare RGB only on common opaque coordinates; service preserves partial source alpha while local app applies cut128.",
+    "Annotated palette/ramp PNGs contain label/background colors and are not clean raw palette strips."
+  ]
+}
