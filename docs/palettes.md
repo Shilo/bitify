@@ -64,6 +64,19 @@ combined. The visible name is Auto; its stable saved identity remains `generated
 
 ## Full palettes
 
+To import from Lospec, open Import palette → Paste colors and paste the palette's
+full Lospec link. Choose Import from Lospec, review its colors/name and Save palette.
+Its author and source link stay with the local palette. Requests fetch only public
+palette data; artwork and credentials are not sent. If Lospec is unavailable, import
+a downloaded HEX file or paste its colors. Other websites and arbitrary links are
+not supported by this action.
+
+To reuse only an image's actual output colors, open Preview (or Image actions on
+touch), choose Count output colors, then Use N output colors. The count covers the
+full image or every animation frame. The existing editor provides Save palette and
+HEX backup. Counts clear when conversion settings change; transparent pixels do not
+count as an extra RGB color.
+
 Choose **Palette** in the panel to convert source RGB directly into a selected set of
 **1–256 unique opaque sRGB colors**. Exact selected RGB values map to themselves; other
 pixels choose the nearest color using Oklab (default) or RGB, with the first palette entry winning equal-distance

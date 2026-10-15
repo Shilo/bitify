@@ -8,6 +8,7 @@
   import { checkCanceled } from './lib/quantize.js';
   import { extractPalette, parsePaletteText } from './lib/palette-import.js';
   import { normalizeColors, validateName } from './lib/palette-library.js';
+  import { canonicalLospecUrl, looksLikeLospecReference } from './lib/palette-lospec-url.js';
 
   let { request = {}, onsave, ondelete, onreload, onuse, onclose } = $props();
   const initial = untrack(() => request);
@@ -33,6 +34,8 @@
   const visible = $derived(colors.slice(page * pageSize, (page + 1) * pageSize));
   const eligible = $derived(!busy && !truncated && colors.length >= 1 && colors.length <= maxColors);
   const edited = $derived(colors.length !== baseline.length || colors.some((color, i) => color !== baseline[i]));
+  const lospecInput = $derived(looksLikeLospecReference(text));
+  const sourceUrl = $derived(source?.kind === 'lospec' ? canonicalLospecUrl(source.url) : null);
 
   $effect(() => {
     dialog.showModal();
@@ -43,7 +46,12 @@
     if (busy === 'Saving' || busy === 'Deleting') return;
     controller?.abort(); dialog.close();
   }
-  function cancelJob() { controller?.abort(); }
+  function cancelJob() {
+    controller?.abort();
+    // Optional module downloads cannot be aborted. Retire their ownership now
+    // so Cancel immediately restores editing and a newer request can proceed.
+    if (busy === 'Importing from Lospec') { controller = undefined; busy = ''; }
+  }
   function resetFailure(location = 'shared') { failedSave = false; conflict = false; error = ''; errorLocation = location; }
   function applyImport(result) {
     colors = result.colors; baseline = [...result.colors]; total = result.total;
@@ -77,8 +85,29 @@
     }
     finally { busy = ''; }
   }
+  async function importLospec() {
+    if (busy) return;
+    resetFailure('input'); controller?.abort();
+    const job = new AbortController(), askedText = text;
+    controller = job; busy = 'Importing from Lospec'; progress = 0;
+    const current = () => controller === job && !job.signal.aborted && dialog.open && text === askedText;
+    try {
+      const { fetchLospecPalette } = await import('./lib/palette-lospec.js');
+      if (!current()) return;
+      const result = await fetchLospecPalette(askedText, { signal: job.signal });
+      if (!current()) return;
+      applyImport({ colors: result.colors, total: result.colors.length, partialAlpha: false, truncated: false });
+      source = result.source; image = null; solid = false; firstFrame = false; imageOptionsOpen = false;
+      if (!nameEdited) name = result.name;
+    } catch (problem) {
+      if (current()) error = problem.message || 'This Lospec palette could not be imported. Your current colors were kept.';
+    } finally {
+      if (controller === job) { busy = ''; controller = undefined; }
+    }
+  }
   function importText() {
     if (busy) return;
+    if (lospecInput) { void importLospec(); return; }
     resetFailure('input');
     try {
       const next = parsePaletteText(text);
@@ -207,6 +236,7 @@
     <div class="glass-modal__body palette-editor-body">
       <div class="palette-draft-review">
         {@render colorReview()}
+        {#if sourceUrl}<p class="palette-editor-hint palette-source-credit">From <a href={sourceUrl} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">Lospec</a>{source.credit ? ' · ' + source.credit : ''}</p>{/if}
         {#if edited}<div class="palette-editor-tools"><button class="btn glass-btn" disabled={!!busy} onclick={() => { colors = [...baseline]; selected = []; page = 0; resetFailure(); }}>Undo edits</button></div>{/if}
         {#if editingId && ondelete}
           <details class="palette-editor-details"><summary>More options</summary>
@@ -241,8 +271,9 @@
         {#if truncated && image}<p class="palette-editor-hint">Try Find solid colors or a smaller prepared palette image.</p>{/if}
       </div>
       <div class="palette-method-panel" id="palette-method-text" data-method="text" hidden={inputKind !== 'text'}>
-        <textarea class="glass-input palette-text-input" bind:value={text} aria-label="Hex colors" placeholder="#000000, #ffffff, #ff004d" disabled={!!busy}></textarea>
-        <button class="btn glass-btn" onclick={importText} disabled={!!busy || !text.trim()}>{colors.length ? 'Replace colors' : 'Review colors'}</button>
+        <textarea class="glass-input palette-text-input" bind:value={text} aria-label="Colors or Lospec link" placeholder="#000000, #ffffff, #ff004d&#10;or https://lospec.com/palette-list/slso8" disabled={!!busy}></textarea>
+        <p class="palette-editor-hint palette-link-hint">Paste HEX colors or a Lospec palette link, such as https://lospec.com/palette-list/slso8.</p>
+        <button class="btn glass-btn" onclick={importText} disabled={!!busy || !text.trim()}>{lospecInput ? 'Import from Lospec' : colors.length ? 'Replace colors' : 'Review colors'}</button>
       </div>
       <div class="palette-method-panel" id="palette-method-add" data-method="add" hidden={inputKind !== 'add'}>
         <div class="palette-editor-tools">

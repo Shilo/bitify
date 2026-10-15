@@ -1,5 +1,18 @@
 # Colorfetti design
 
+## Lospec palette links — October 14, 2026
+
+The existing Paste colors method accepts HEX text or a full Lospec palette URL.
+For a link its action reads Import from Lospec. It fetches the canonical HTTPS
+palette JSON with credentials omitted, no referrer and redirects refused, bounded
+to 64 KiB and 15 seconds. JSON and the service's octet-stream MIME are accepted;
+UTF-8 JSON schema and 1–256 unique opaque HEX validation remain mandatory.
+Swatches and name are reviewed before saving; an entered name is preserved, while
+an untouched suggestion adopts the published name. Author credit and a validated
+canonical Lospec page survive library restoration. Arbitrary imported links never
+become hrefs. Cancel/close/input ownership rejects late responses and retains the
+prior draft on failure. File/text imports remain available when the service fails.
+
 ## Output color inspection — October 14, 2026
 
 Palette mode offers Count output colors in image Preview and touch Image actions.

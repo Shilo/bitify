@@ -1,5 +1,6 @@
 // User palettes are stored separately from settings. Nothing here stores source images.
 import { readStoredValue } from './storage-migration.js';
+import { canonicalLospecUrl } from './palette-lospec-url.js';
 export const LIBRARY_KEY = 'colorfetti-palettes-v1';
 export const LIBRARY_LIMIT = 100;
 export const LIBRARY_BYTES = 256 * 1024;
@@ -69,10 +70,12 @@ export const GENERATED_PALETTE = Object.freeze({ id: GENERATED_PALETTE_ID, name:
     credit: 'Shared colors from all images; updates when images change.' }) });
 
 function sourceOf(source) {
-  const kinds = ['image', 'hex', 'gpl', 'pal', 'aseprite', 'custom', 'copy'];
+  const kinds = ['image', 'hex', 'gpl', 'pal', 'aseprite', 'custom', 'copy', 'lospec'];
   const kind = kinds.includes(source?.kind) ? source.kind : 'custom';
-  // Imported text is never accepted as a link. Attribution is plain text only.
-  return { kind, ...(typeof source?.credit === 'string' ? { credit: source.credit.slice(0, 160) } : {}) };
+  // Only a validated Lospec palette page is retained as an imported source link.
+  const url = kind === 'lospec' ? canonicalLospecUrl(source?.url) : null;
+  return { kind: kind === 'lospec' && !url ? 'custom' : kind,
+    ...(url ? { url } : {}), ...(typeof source?.credit === 'string' ? { credit: source.credit.slice(0, 160) } : {}) };
 }
 
 function recordOf(value) {
