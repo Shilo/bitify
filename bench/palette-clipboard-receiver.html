@@ -1,0 +1,20 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Owned image clipboard receiver</title>
+<style>body{font:16px system-ui;margin:20px;background:#fffdf9;color:#241d2d}label{display:block;margin:12px 0}select{font:inherit;min-height:44px}#target{border:2px solid #888;border-radius:8px;min-height:100px;padding:16px;outline-offset:4px}pre{white-space:pre-wrap;overflow-wrap:anywhere}img{image-rendering:pixelated;max-width:100%;width:256px}</style>
+<h1>Actual image paste</h1><p>First copy our owned test image in Colorfetti. Then focus this box and paste using the browser keyboard or Android native Paste action. This page never calls clipboard.read/write or manufactures paste events.</p>
+<label>Device <select id="device"><option value="codex">Codex Browser</option><option value="android">USB Android</option></select></label>
+<label>Copied case <select id="case"><option value="palette-keep">Palette Keep</option><option value="palette-cut">Palette Cut</option><option value="onebit">1-bit</option><option value="gif-frame0">GIF first frame</option></select></label>
+<div id="target" contenteditable="true" role="textbox" aria-label="Paste copied image here" spellcheck="false"></div><p id="status">Waiting for an owned image paste</p><img id="image" alt="Pasted owned image" hidden><pre id="receipt"></pre>
+<script type="module">
+const target=document.querySelector('#target'),status=document.querySelector('#status'),receipt=document.querySelector('#receipt'),image=document.querySelector('#image');let currentUrl,currentAttempt=0;
+target.addEventListener('paste',async event=>{event.preventDefault();const attempt=++currentAttempt;status.textContent='Inspecting native paste';try{
+  if(!event.isTrusted)throw Error('Untrusted paste event rejected');
+  // DataTransfer is protected after the paste dispatch. Capture its metadata,
+  // file references and the selected destination before the first await.
+  const captured={device:document.querySelector('#device').value,key:document.querySelector('#case').value,trusted:event.isTrusted,types:[...event.clipboardData.types],pasteStartedAt:new Date().toISOString()};
+  const file=[...event.clipboardData.files].find(f=>f.type==='image/png');if(!file)throw Error('Native paste has no PNG file; no text or HTML content read.');
+  if(file.size>1024*1024)throw Error('Owned fixture PNG exceeds the receiver byte budget.');
+  const bytes=new Uint8Array(await file.arrayBuffer());let binary='';for(let at=0;at<bytes.length;at+=4096)binary+=String.fromCharCode(...bytes.subarray(at,at+4096));
+  const response=await fetch('/paste',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({...captured,mime:file.type,base64:btoa(binary)})});
+  const result=await response.json();if(!response.ok)throw Error(result.error);if(attempt!==currentAttempt)return;receipt.textContent=JSON.stringify(result,null,2);if(currentUrl)URL.revokeObjectURL(currentUrl);currentUrl=URL.createObjectURL(file);image.src=currentUrl;image.hidden=false;status.textContent=result.verification.pass?'PASS: trusted PNG paste and decoded pixels agree':'PIXEL DIFFERENCE: trusted paste received; inspect receipt';
+}catch(error){if(attempt===currentAttempt)status.textContent='FAIL: '+error.message;}});
+</script>

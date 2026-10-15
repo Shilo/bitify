@@ -1,0 +1,87 @@
+{
+  "completed": true,
+  "clipboardAccessed": false,
+  "verification": [
+    {
+      "key": "palette-keep",
+      "width": 32,
+      "height": 24,
+      "pixels": 768,
+      "visiblePixels": 672,
+      "alphaMismatches": 0,
+      "visibleRgbMismatches": 0,
+      "alphaValues": [
+        0,
+        1,
+        64,
+        127,
+        128,
+        192,
+        254,
+        255
+      ],
+      "usedColors": 8,
+      "encodedBytes": 422,
+      "encodedSha256": "14d0012def2b51dbf17ce7e0022fb43d7cc2911209be1ed2b43bfe995c427691",
+      "exactVisibleRgba": true
+    },
+    {
+      "key": "palette-cut",
+      "width": 32,
+      "height": 24,
+      "pixels": 768,
+      "visiblePixels": 384,
+      "alphaMismatches": 0,
+      "visibleRgbMismatches": 0,
+      "alphaValues": [
+        0,
+        255
+      ],
+      "usedColors": 8,
+      "encodedBytes": 213,
+      "encodedSha256": "90f8ad8434df0f4bbde30276102f63cfd25858b0655e377c7fe9744a97ef0e90",
+      "exactVisibleRgba": true
+    },
+    {
+      "key": "onebit",
+      "width": 32,
+      "height": 24,
+      "pixels": 768,
+      "visiblePixels": 384,
+      "alphaMismatches": 0,
+      "visibleRgbMismatches": 0,
+      "alphaValues": [
+        0,
+        255
+      ],
+      "usedColors": 2,
+      "encodedBytes": 139,
+      "encodedSha256": "695986ac931cb433b58d4527d1f16a2ca05d1b06f67ca067adb5ebadac99392e",
+      "exactVisibleRgba": true
+    },
+    {
+      "key": "gif-frame0",
+      "width": 32,
+      "height": 24,
+      "pixels": 768,
+      "visiblePixels": 660,
+      "alphaMismatches": 0,
+      "visibleRgbMismatches": 0,
+      "alphaValues": [
+        0,
+        255
+      ],
+      "usedColors": 8,
+      "encodedBytes": 231,
+      "encodedSha256": "93301911db3985f98791d5bdde9a2de9a1a1cc93227475e0b476c6ce730d74d9",
+      "exactVisibleRgba": true
+    }
+  ],
+  "verifierChecks": {
+    "nonPngRejected": true,
+    "wrongAlphaModeRejected": true,
+    "visibleRgbCorruptionRejected": true,
+    "alphaCorruptionRejected": true,
+    "hiddenRgbNormalizationAccepted": true
+  }
+}

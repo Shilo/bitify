@@ -1,0 +1,291 @@
+{
+  "version": 1,
+  "scope": "Owned synthetic sources; conversion oracle is the current production pipeline, not an independent palette algorithm. Independent Sharp decoding verifies encoded PNG alpha/visibleRGB. Real browser clipboard transport and external paste must be tested separately.",
+  "runtime": {
+    "node": "v25.0.0",
+    "sharp": "0.35.5"
+  },
+  "sourceDependencies": {
+    "palette-state.js": "2e7cd14844c1539cb321b27200be18955db70ec22ca6f06190d7a75007cac0ad",
+    "quantize.js": "6dacaca42d615b72a4ee511bb7ed32344aa7118ae946769e290d7a9463f8d0a3",
+    "palette-dither.js": "5452f7b1af4d5f656d8733635856eab5ba565e8d7ee81cced4d77041a9638152",
+    "palette-alpha.js": "92fc032f80728ef7027569b91be8cb91aa9486f203bbff9646ed89d674ab6b92",
+    "palette-limit.js": "739a3fb97a80d1ecbfa23c5e33f72893b894adc4425ea89217a88d7264abae20",
+    "palette-cleanup.js": "8dba109b8da1a85e1361ce5307167c8814cdbd75dd96569f0145662897dce46d",
+    "palette-cleanup-apply.js": "178b4e225afaecca657df5ab843cb48e1aaca6112517fa372a40f2e06d4ca6a3",
+    "save.js": "373b1d312b56474c572817b29fcbab67dea9fdf1a634c787e7ed2a73fd59c4cf",
+    "recolor.js": "c458986116a379f69d34f38efc4b16d2d0cff85b1f6526f53e50efffd1d0e562",
+    "palette-export.js": "fe8f942e584abeca5353b844f133ae053ced48b682ef0b6dd4ff78ec496a6ae0",
+    "palette-library.js": "9fdd23d6239d25de7bce7e2d1e6a3563f9f15061f01e1404195dbfe8cd2f2d6e"
+  },
+  "fixtures": [
+    {
+      "key": "palette-keep",
+      "sourceFile": "palette-source.png",
+      "sourcePngSha256": "7f37bd9f7f235d65265bbe2e922adfd35d74cb4f07c73e52366251701bf57bb9",
+      "sourceRgbaSha256": "74550bbbf6f6667b56ab35dbffdbc0ac85ca64efaa4bfc31663d1c7fe454cd32",
+      "sourceAlphaValues": [
+        0,
+        1,
+        64,
+        127,
+        128,
+        192,
+        254,
+        255
+      ],
+      "family": "full-palette",
+      "settings": {
+        "family": "full-palette",
+        "colors": [
+          "#000000",
+          "#1d2b53",
+          "#7e2553",
+          "#008751",
+          "#ab5236",
+          "#5f574f",
+          "#c2c3c7",
+          "#fff1e8",
+          "#ff004d",
+          "#ffa300",
+          "#ffec27",
+          "#00e436",
+          "#29adff",
+          "#83769c",
+          "#ff77a8",
+          "#ffccaa"
+        ],
+        "paletteId": "preset-pico8",
+        "metric": "oklab",
+        "alphaCut": 128,
+        "maxColors": 8,
+        "cleanup": true,
+        "dither": "4x4",
+        "ditherStrength": 50,
+        "alphaMode": "keep"
+      },
+      "exactActiveSourcePixelsVerified": 513,
+      "cleanupSites": 2,
+      "opacityContract": "Every original alpha byte retained; hidden RGB excluded from comparison",
+      "expectedFile": "palette-keep-expected.png",
+      "width": 32,
+      "height": 24,
+      "outputColors": [
+        "#000000",
+        "#1d2b53",
+        "#c2c3c7",
+        "#ff004d",
+        "#ffec27",
+        "#00e436",
+        "#29adff",
+        "#83769c"
+      ],
+      "expectedPngSha256": "14d0012def2b51dbf17ce7e0022fb43d7cc2911209be1ed2b43bfe995c427691",
+      "expectedRgbaSha256": "1023ed1b1862f83de49c8c85ce30d1e821fd3e5a0b57a1447abd98a598b972d4",
+      "expectedAlphaValues": [
+        0,
+        1,
+        64,
+        127,
+        128,
+        192,
+        254,
+        255
+      ],
+      "usedColors": 8
+    },
+    {
+      "key": "palette-cut",
+      "sourceFile": "palette-source.png",
+      "sourcePngSha256": "7f37bd9f7f235d65265bbe2e922adfd35d74cb4f07c73e52366251701bf57bb9",
+      "sourceRgbaSha256": "74550bbbf6f6667b56ab35dbffdbc0ac85ca64efaa4bfc31663d1c7fe454cd32",
+      "sourceAlphaValues": [
+        0,
+        1,
+        64,
+        127,
+        128,
+        192,
+        254,
+        255
+      ],
+      "family": "full-palette",
+      "settings": {
+        "family": "full-palette",
+        "colors": [
+          "#000000",
+          "#1d2b53",
+          "#7e2553",
+          "#008751",
+          "#ab5236",
+          "#5f574f",
+          "#c2c3c7",
+          "#fff1e8",
+          "#ff004d",
+          "#ffa300",
+          "#ffec27",
+          "#00e436",
+          "#29adff",
+          "#83769c",
+          "#ff77a8",
+          "#ffccaa"
+        ],
+        "paletteId": "preset-pico8",
+        "metric": "oklab",
+        "alphaCut": 128,
+        "maxColors": 8,
+        "cleanup": true,
+        "dither": "4x4",
+        "ditherStrength": 50,
+        "alphaMode": "cut"
+      },
+      "exactActiveSourcePixelsVerified": 295,
+      "cleanupSites": 1,
+      "opacityContract": "Alpha below128 empty,128andabove opaque",
+      "expectedFile": "palette-cut-expected.png",
+      "width": 32,
+      "height": 24,
+      "outputColors": [
+        "#000000",
+        "#1d2b53",
+        "#c2c3c7",
+        "#ff004d",
+        "#ffec27",
+        "#00e436",
+        "#29adff",
+        "#83769c"
+      ],
+      "expectedPngSha256": "90f8ad8434df0f4bbde30276102f63cfd25858b0655e377c7fe9744a97ef0e90",
+      "expectedRgbaSha256": "04fe38f2988f007e66e9e07f58195a0eeddba86331f8e4916d0e7a95e9c44803",
+      "expectedAlphaValues": [
+        0,
+        255
+      ],
+      "usedColors": 8
+    },
+    {
+      "key": "onebit",
+      "sourceFile": "palette-source.png",
+      "sourcePngSha256": "7f37bd9f7f235d65265bbe2e922adfd35d74cb4f07c73e52366251701bf57bb9",
+      "sourceRgbaSha256": "74550bbbf6f6667b56ab35dbffdbc0ac85ca64efaa4bfc31663d1c7fe454cd32",
+      "sourceAlphaValues": [
+        0,
+        1,
+        64,
+        127,
+        128,
+        192,
+        254,
+        255
+      ],
+      "family": "two-color",
+      "settings": {
+        "family": "two-color",
+        "first": "#000000",
+        "second": "#ffffff",
+        "none": 0,
+        "style": "solid",
+        "set": {
+          "threshold": 128,
+          "source": "luma",
+          "alpha": 128
+        }
+      },
+      "opacityContract": "Legacy thresholded alpha, Solid manualthreshold128, Mono pair",
+      "expectedFile": "onebit-expected.png",
+      "width": 32,
+      "height": 24,
+      "outputColors": [
+        "#000000",
+        "#ffffff"
+      ],
+      "expectedPngSha256": "695986ac931cb433b58d4527d1f16a2ca05d1b06f67ca067adb5ebadac99392e",
+      "expectedRgbaSha256": "5d05117270586c2da0e44dff4866791758ae17740a22d3871384010e51d5e180",
+      "expectedAlphaValues": [
+        0,
+        255
+      ],
+      "usedColors": 2
+    },
+    {
+      "key": "gif-frame0",
+      "sourceFile": "clip-source.gif",
+      "sourcePngSha256": null,
+      "sourceGifSha256": "449ec883b07d434597c4920cbb76bebeadb23605d8b498f15df94f1489804d4c",
+      "sourceAlphaValues": [
+        0,
+        255
+      ],
+      "family": "full-palette",
+      "settings": {
+        "family": "full-palette",
+        "colors": [
+          "#000000",
+          "#1d2b53",
+          "#7e2553",
+          "#008751",
+          "#ab5236",
+          "#5f574f",
+          "#c2c3c7",
+          "#fff1e8",
+          "#ff004d",
+          "#ffa300",
+          "#ffec27",
+          "#00e436",
+          "#29adff",
+          "#83769c",
+          "#ff77a8",
+          "#ffccaa"
+        ],
+        "paletteId": "preset-pico8",
+        "metric": "oklab",
+        "alphaCut": 128,
+        "maxColors": 8,
+        "cleanup": true,
+        "dither": "4x4",
+        "ditherStrength": 50,
+        "alphaMode": "keep"
+      },
+      "copiedFrame": 0,
+      "sourceFrames": 3,
+      "delays": [
+        40,
+        240,
+        80
+      ],
+      "loop": 0,
+      "fullAnimationSubsetVerified": true,
+      "incorrectFrameOnlySubset": [
+        "#1d2b53",
+        "#008751",
+        "#ab5236",
+        "#5f574f",
+        "#c2c3c7",
+        "#fff1e8",
+        "#ff004d",
+        "#ffa300"
+      ],
+      "opacityContract": "Binary sourcealpha, frame0PNG copy usingduration-weighted fullGIFsubset",
+      "expectedFile": "gif-frame0-expected.png",
+      "width": 32,
+      "height": 24,
+      "outputColors": [
+        "#000000",
+        "#1d2b53",
+        "#ffec27",
+        "#00e436",
+        "#29adff",
+        "#83769c",
+        "#ff77a8",
+        "#ffccaa"
+      ],
+      "expectedPngSha256": "93301911db3985f98791d5bdde9a2de9a1a1cc93227475e0b476c6ce730d74d9",
+      "expectedRgbaSha256": "4f487fc68f24106dd05559f082bca535674fc97e46e9d042843a21bc4c76e007",
+      "expectedAlphaValues": [
+        0,
+        255
+      ],
+      "usedColors": 8
+    }
+  ]
+}

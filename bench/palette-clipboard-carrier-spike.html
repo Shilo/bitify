@@ -1,0 +1,56 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Owned PNG clipboard carrier spike</title>
+<style>body{font:16px system-ui;margin:20px;background:#fffdf9;color:#241d2d}button{font:inherit;min-height:44px;padding:8px 16px;margin:8px 8px 8px 0}#target{border:2px solid #888;border-radius:8px;min-height:100px;padding:16px;margin:12px 0;outline-offset:4px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style>
+<h1>PNG + HTML carrier research</h1>
+<p>Writes only our fixed owned Keep PNG. Copy here, then use a real keyboard or native Paste action in the box. No clipboard polling, synthetic paste, remote image import or production app changes.</p>
+<button id="copy-both" disabled>Copy owned PNG + HTML</button><button id="copy-png" disabled>Copy owned PNG only (control)</button>
+<p id="status">Loading owned fixture</p><div id="target" contenteditable="true" role="textbox" aria-label="Paste owned carrier here" spellcheck="false"></div><pre id="receipt"></pre>
+<script type="module">
+const status=document.querySelector('#status'),receipt=document.querySelector('#receipt'),target=document.querySelector('#target'),both=document.querySelector('#copy-both'),pngOnly=document.querySelector('#copy-png');
+const MAX_BYTES=1024*1024,MAX_HTML=2*MAX_BYTES;let expectedBlob,expectedBytes,armed=false,lastWrite;
+const digest=async bytes=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(v=>v.toString(16).padStart(2,'0')).join('');
+const equal=(a,b)=>a.length===b.length&&a.every((v,i)=>v===b[i]);
+function base64(bytes){let text='';for(let at=0;at<bytes.length;at+=4096)text+=String.fromCharCode(...bytes.subarray(at,at+4096));return btoa(text);}
+function embeddedPng(html){
+ if(!html||html.length>MAX_HTML)return{recovered:false,reason:'Missing or oversized HTML'};
+ const template=document.createElement('template');template.innerHTML=html;
+ const images=template.content.querySelectorAll('img[src]');if(images.length!==1)return{recovered:false,reason:'Expected exactly one embedded image'};
+ const src=images[0].getAttribute('src');if(!/^data:image\/png;base64,[a-z\d+/]+={0,2}$/i.test(src))return{recovered:false,reason:'Not a strict embedded PNG data URL'};
+ const encoded=src.slice(src.indexOf(',')+1);if(encoded.length>Math.ceil(MAX_BYTES/3)*4)return{recovered:false,reason:'PNG carrier exceeds byte budget'};
+ let bytes;try{bytes=Uint8Array.from(atob(encoded),c=>c.charCodeAt(0));}catch{return{recovered:false,reason:'Invalid PNG base64'};}
+ if(bytes.length<24||bytes.length>MAX_BYTES||![137,80,78,71,13,10,26,10].every((v,i)=>bytes[i]===v))return{recovered:false,reason:'Invalid PNG signature/length'};
+ const view=new DataView(bytes.buffer),width=view.getUint32(16),height=view.getUint32(20);if(!width||!height||width*height>16777216)return{recovered:false,reason:'Invalid or oversized PNG dimensions'};
+ return{recovered:true,bytes,width,height};
+}
+async function copy(event,withHtml){
+ if(!event.isTrusted){status.textContent='Rejected non-native Copy gesture';return;}
+ armed=false;lastWrite={mode:withHtml?'image/png + text/html':'image/png',trustedClick:event.isTrusted,activation:navigator.userActivation?.isActive,focused:document.hasFocus(),started:new Date().toISOString()};
+ try{
+  const pngPromise=Promise.resolve(expectedBlob),representations={'image/png':pngPromise};
+  if(withHtml)representations['text/html']=pngPromise.then(async blob=>new Blob(['<img data-colorfetti-clipboard="1" src="data:image/png;base64,'+base64(new Uint8Array(await blob.arrayBuffer()))+'">'],{type:'text/html'}));
+  // The real write is invoked in this native event, before any await.
+  await navigator.clipboard.write([new ClipboardItem(representations)]);
+  lastWrite.completed=true;lastWrite.expectedPngSha256=await digest(expectedBytes);armed=true;status.textContent='Owned Copy completed. Focus the box and paste natively.';receipt.textContent=JSON.stringify({write:lastWrite},null,2);
+ }catch(error){lastWrite.error={name:error.name,message:error.message};status.textContent='Copy failed: '+error.name;receipt.textContent=JSON.stringify({write:lastWrite},null,2);}
+}
+both.addEventListener('click',event=>copy(event,true));pngOnly.addEventListener('click',event=>copy(event,false));
+target.addEventListener('paste',async event=>{
+ event.preventDefault();if(!armed||!event.isTrusted){status.textContent='Copy the owned fixture here first; trusted Paste required';return;}
+ // Copy the protected strings/file references before the first asynchronous step.
+ const types=[...event.clipboardData.types],html=event.clipboardData.getData('text/html'),files=[...event.clipboardData.files].filter(f=>f.type==='image/png');
+ const report={userAgent:navigator.userAgent,write:lastWrite,paste:{trusted:event.isTrusted,focused:document.hasFocus(),types,pngFiles:files.length,htmlCharacters:html.length},source:{bytes:expectedBytes.length,sha256:await digest(expectedBytes)},nativePng:[]};
+ try{
+  for(const file of files){if(file.size>MAX_BYTES)throw Error('Native PNG exceeds spike byte budget');const bytes=new Uint8Array(await file.arrayBuffer());report.nativePng.push({bytes:bytes.length,sha256:await digest(bytes),exactEncodedBytes:equal(bytes,expectedBytes)});}
+  const embedded=embeddedPng(html);report.htmlPng=embedded.recovered?{recovered:true,bytes:embedded.bytes.length,width:embedded.width,height:embedded.height,sha256:await digest(embedded.bytes),exactEncodedBytes:equal(embedded.bytes,expectedBytes)}:embedded;
+  // Root can retain only this owned recovered file for independent decoding.
+  window.ownedCarrierPngBase64=embedded.recovered?base64(embedded.bytes):null;
+  report.completed=true;status.textContent=report.htmlPng.exactEncodedBytes?'Exact owned PNG recovered from native HTML paste':'Native paste observed; inspect carrier result';
+ }catch(error){report.completed=false;report.error={name:error.name,message:error.message};status.textContent='Spike failed: '+error.message;}
+ window.carrierReport=report;receipt.textContent=JSON.stringify(report,null,2);
+});
+try{
+ const response=await fetch('/fixtures/palette-keep-expected.png',{credentials:'omit',signal:AbortSignal.timeout(10000)});if(!response.ok)throw Error('Owned fixture unavailable');
+ expectedBlob=new Blob([await response.arrayBuffer()],{type:'image/png'});if(expectedBlob.size>MAX_BYTES)throw Error('Fixture exceeds spike budget');expectedBytes=new Uint8Array(await expectedBlob.arrayBuffer());
+ status.textContent='Owned fixture ready: '+expectedBytes.length+' bytes';both.disabled=pngOnly.disabled=false;
+}catch(error){status.textContent='Fixture failed: '+error.message;}
+</script>
