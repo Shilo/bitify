@@ -70,6 +70,11 @@ animations. A focused Claude handoff in
 new acceptance study explicitly. It must preserve these counterexamples and make
 a product decision, not repeat the same synthetic-only review or force a fix.
 
+**Status (October 15):** that study is complete; see the
+[real-art decision](2026-10-15-keep-real-art-decision.md). Blind judges strongly prefer
+linear over current Keep on real art, but linear keeps about ten meaningful judged
+losses, so it does not meet the no-regression gate. Shipping it is an owner tradeoff.
+
 Other separate concerns remain: low-cap preservation of small important hues,
 known fallback/clipboard translucent RGB rounding, and human-only existing-image
 Smart evaluation. Prior evidence does not establish a universal winner against
