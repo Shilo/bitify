@@ -1,0 +1,4789 @@
+{
+  "method": {
+    "offline": true,
+    "productionEdited": false,
+    "sourceCoreSha256": "ff11e62b92853b12c99946f60e9635de734b903702bcbd2b39834b84087e8c58",
+    "directExperiment": "In-memory module changes only COLORS = GENERATED_MAX_COLORS to requested K; uses the original exported accumulator/generator with original source validation, equal nonempty asset mass, source alpha128 and frame-delay weighting.",
+    "samples": "Three sequential core runs per phase; median includes cooperative scheduler turns, excludes worker transfer, source decode and UI rendering. Cold totals are sums of separately measured fit and selection medians, not an end-to-end wall timing.",
+    "matching": "Oklab, dithering Off, Cleanup Off",
+    "error": "Mean squared Oklab point error over visible source pixels, duration-weighted within each asset; equal-weight asset mean across wall.",
+    "semanticCaution": "Current Auto64 fits one shared wall palette, then cap selects separate per-asset subsets. DirectK fits one shared K-color wall palette. A separate shared-subset control makes equal-scope shared-K comparisons."
+  },
+  "sources": [
+    {
+      "name": "sprite",
+      "width": 64,
+      "height": 64,
+      "file": "bench\\icon-research\\general-source.png",
+      "pngSha256": "af9f42ef98a83e4702662c57776dabf58e1c1af615e211da2da6a2fd69c8b676",
+      "rgbaSha256": "96dd5eed411929de1b7bab0603472b52fda94ee50234ee0df25459a29bcd36d5"
+    },
+    {
+      "name": "armor",
+      "width": 16,
+      "height": 16,
+      "file": "bench\\icon-research\\breastplate-source.png",
+      "pngSha256": "4253720e7166feebf0292cbcdf8c6b46c5516f784ffa4c1dca45ef73652b349d",
+      "rgbaSha256": "cd02bf17c144402c23029c043f2bfd9bbdf330e099b8368d2d1997a05efa5834"
+    },
+    {
+      "name": "ramp",
+      "width": 64,
+      "height": 32
+    },
+    {
+      "name": "cube",
+      "width": 64,
+      "height": 64
+    }
+  ],
+  "clip": {
+    "file": "duration-weighted-source.gif",
+    "pngFrameSource": "armor-source.png plus one channel-adjusted frame",
+    "sha256": "128f47559f383425f103ae348d6130b37a0e00d7c6bffcc38baa9f653615c1fe",
+    "frames": 3,
+    "delays": [
+      40,
+      160,
+      80
+    ],
+    "weights": "red-channel adjustment on blue-dominant body pixels; changed frame held160ms versus40ms and80ms original frames",
+    "independentGifRoundtrip": true
+  },
+  "scopes": [
+    {
+      "name": "sprite",
+      "auto64Colors": [
+        "#0b0c14",
+        "#0c2308",
+        "#0d3010",
+        "#0e2774",
+        "#144315",
+        "#161925",
+        "#1c1008",
+        "#2194ff",
+        "#282e3d",
+        "#2d0908",
+        "#2f150a",
+        "#307d2f",
+        "#364555",
+        "#37080a",
+        "#371c0b",
+        "#382514",
+        "#400d0c",
+        "#426ca3",
+        "#463326",
+        "#495364",
+        "#4c0e0b",
+        "#54a32f",
+        "#55290f",
+        "#56626e",
+        "#573a29",
+        "#59070b",
+        "#656f78",
+        "#68360c",
+        "#690c0f",
+        "#723f30",
+        "#764a24",
+        "#778393",
+        "#80151c",
+        "#8e5c33",
+        "#902025",
+        "#90a3b1",
+        "#966a42",
+        "#9e744a",
+        "#a1b6c1",
+        "#a71824",
+        "#ab7e45",
+        "#b18d67",
+        "#b56224",
+        "#b7212d",
+        "#bcced8",
+        "#c09d71",
+        "#c71a24",
+        "#c87c2e",
+        "#c9ac7e",
+        "#ce3536",
+        "#d38c31",
+        "#d9b681",
+        "#e1c38b",
+        "#e39f28",
+        "#e5cea4",
+        "#eae0c4",
+        "#f07671",
+        "#f08e03",
+        "#f1ae29",
+        "#f3313e",
+        "#f8c32a",
+        "#fcf057",
+        "#fde02d",
+        "#fffce0"
+      ],
+      "auto64FitSamplesMs": [
+        4.541000000000011,
+        2.179299999999998,
+        2.063599999999994
+      ],
+      "auto64FitMedianMs": 2.179299999999998,
+      "rows": [
+        {
+          "k": 2,
+          "methods": [
+            {
+              "name": "auto64-then-per-asset-cap",
+              "pointOklabMSE": 0.018483035409311482,
+              "globalUsedColorUnion": 2,
+              "fitMedianMs": 2.179299999999998,
+              "selectMedianMs": 6.733499999999992,
+              "coldTotalMedianSumMs": 8.91279999999999,
+              "assets": [
+                {
+                  "name": "sprite",
+                  "palette": [
+                    "#573a29",
+                    "#c9ac7e"
+                  ],
+                  "pointOklabMSE": 0.018483035409311482,
+                  "usedColors": [
+                    "#573a29",
+                    "#c9ac7e"
+                  ],
+                  "usedCount": 2,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "sprite-k2-auto64-then-per-asset-cap-sprite-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "direct-shared-k-fit",
+              "pointOklabMSE": 0.017979020062950695,
+              "globalUsedColorUnion": 2,
+              "fitMedianMs": 0.7536000000000058,
+              "selectMedianMs": 0,
+              "coldTotalMedianSumMs": 0.7536000000000058,
+              "assets": [
+                {
+                  "name": "sprite",
+                  "palette": [
+                    "#572f23",
+                    "#cea46c"
+                  ],
+                  "pointOklabMSE": 0.017979020062950695,
+                  "usedColors": [
+                    "#572f23",
+                    "#cea46c"
+                  ],
+                  "usedCount": 2,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "sprite-k2-direct-shared-k-fit-sprite-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "auto64-then-shared-subset-control",
+              "pointOklabMSE": 0.018483035409311482,
+              "globalUsedColorUnion": 2,
+              "fitMedianMs": 2.179299999999998,
+              "selectMedianMs": 5.663600000000002,
+              "coldTotalMedianSumMs": 7.8429,
+              "assets": [
+                {
+                  "name": "sprite",
+                  "palette": [
+                    "#573a29",
+                    "#c9ac7e"
+                  ],
+                  "pointOklabMSE": 0.018483035409311482,
+                  "usedColors": [
+                    "#573a29",
+                    "#c9ac7e"
+                  ],
+                  "usedCount": 2,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "sprite-k2-auto64-then-shared-subset-control-sprite-0.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "directFitSamplesMs": [
+            1.648300000000006,
+            0.7536000000000058,
+            0.570999999999998
+          ],
+          "capSamplesMs": [
+            8.712500000000006,
+            6.733499999999992,
+            5.973500000000001
+          ],
+          "sharedSubsetSamplesMs": [
+            5.663600000000002,
+            5.752499999999998,
+            5.649799999999999
+          ]
+        },
+        {
+          "k": 4,
+          "methods": [
+            {
+              "name": "auto64-then-per-asset-cap",
+              "pointOklabMSE": 0.007812122401335675,
+              "globalUsedColorUnion": 4,
+              "fitMedianMs": 2.179299999999998,
+              "selectMedianMs": 3.0734999999999957,
+              "coldTotalMedianSumMs": 5.2527999999999935,
+              "assets": [
+                {
+                  "name": "sprite",
+                  "palette": [
+                    "#371c0b",
+                    "#723f30",
+                    "#9e744a",
+                    "#e1c38b"
+                  ],
+                  "pointOklabMSE": 0.007812122401335675,
+                  "usedColors": [
+                    "#723f30",
+                    "#371c0b",
+                    "#9e744a",
+                    "#e1c38b"
+                  ],
+                  "usedCount": 4,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "sprite-k4-auto64-then-per-asset-cap-sprite-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "direct-shared-k-fit",
+              "pointOklabMSE": 0.007628248033942666,
+              "globalUsedColorUnion": 4,
+              "fitMedianMs": 0.680199999999985,
+              "selectMedianMs": 0,
+              "coldTotalMedianSumMs": 0.680199999999985,
+              "assets": [
+                {
+                  "name": "sprite",
+                  "palette": [
+                    "#371f16",
+                    "#874233",
+                    "#ac8250",
+                    "#e4c988"
+                  ],
+                  "pointOklabMSE": 0.007628248033942666,
+                  "usedColors": [
+                    "#874233",
+                    "#371f16",
+                    "#ac8250",
+                    "#e4c988"
+                  ],
+                  "usedCount": 4,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "sprite-k4-direct-shared-k-fit-sprite-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "auto64-then-shared-subset-control",
+              "pointOklabMSE": 0.007812122401335675,
+              "globalUsedColorUnion": 4,
+              "fitMedianMs": 2.179299999999998,
+              "selectMedianMs": 2.5012999999999863,
+              "coldTotalMedianSumMs": 4.680599999999984,
+              "assets": [
+                {
+                  "name": "sprite",
+                  "palette": [
+                    "#371c0b",
+                    "#723f30",
+                    "#9e744a",
+                    "#e1c38b"
+                  ],
+                  "pointOklabMSE": 0.007812122401335675,
+                  "usedColors": [
+                    "#723f30",
+                    "#371c0b",
+                    "#9e744a",
+                    "#e1c38b"
+                  ],
+                  "usedCount": 4,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "sprite-k4-auto64-then-shared-subset-control-sprite-0.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "directFitSamplesMs": [
+            1.6875,
+            0.680199999999985,
+            0.47759999999999536
+          ],
+          "capSamplesMs": [
+            5.799199999999985,
+            3.0734999999999957,
+            2.4235999999999933
+          ],
+          "sharedSubsetSamplesMs": [
+            2.6321000000000083,
+            2.448999999999984,
+            2.5012999999999863
+          ]
+        },
+        {
+          "k": 8,
+          "methods": [
+            {
+              "name": "auto64-then-per-asset-cap",
+              "pointOklabMSE": 0.004403499281565303,
+              "globalUsedColorUnion": 8,
+              "fitMedianMs": 2.179299999999998,
+              "selectMedianMs": 2.4475999999999942,
+              "coldTotalMedianSumMs": 4.626899999999992,
+              "assets": [
+                {
+                  "name": "sprite",
+                  "palette": [
+                    "#2f150a",
+                    "#495364",
+                    "#68360c",
+                    "#8e5c33",
+                    "#b18d67",
+                    "#b7212d",
+                    "#e1c38b",
+                    "#fcf057"
+                  ],
+                  "pointOklabMSE": 0.004403499281565303,
+                  "usedColors": [
+                    "#68360c",
+                    "#2f150a",
+                    "#b18d67",
+                    "#8e5c33",
+                    "#fcf057",
+                    "#e1c38b",
+                    "#495364",
+                    "#b7212d"
+                  ],
+                  "usedCount": 8,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "sprite-k8-auto64-then-per-asset-cap-sprite-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "direct-shared-k-fit",
+              "pointOklabMSE": 0.0043729888717784085,
+              "globalUsedColorUnion": 8,
+              "fitMedianMs": 0.6539999999999964,
+              "selectMedianMs": 0,
+              "coldTotalMedianSumMs": 0.6539999999999964,
+              "assets": [
+                {
+                  "name": "sprite",
+                  "palette": [
+                    "#311913",
+                    "#429030",
+                    "#5d3b2b",
+                    "#7b98b6",
+                    "#886142",
+                    "#b8222b",
+                    "#c78b47",
+                    "#e6ce8c"
+                  ],
+                  "pointOklabMSE": 0.0043729888717784085,
+                  "usedColors": [
+                    "#5d3b2b",
+                    "#311913",
+                    "#c78b47",
+                    "#886142",
+                    "#e6ce8c",
+                    "#429030",
+                    "#7b98b6",
+                    "#b8222b"
+                  ],
+                  "usedCount": 8,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "sprite-k8-direct-shared-k-fit-sprite-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "auto64-then-shared-subset-control",
+              "pointOklabMSE": 0.004403499281565303,
+              "globalUsedColorUnion": 8,
+              "fitMedianMs": 2.179299999999998,
+              "selectMedianMs": 2.379799999999989,
+              "coldTotalMedianSumMs": 4.559099999999987,
+              "assets": [
+                {
+                  "name": "sprite",
+                  "palette": [
+                    "#2f150a",
+                    "#495364",
+                    "#68360c",
+                    "#8e5c33",
+                    "#b18d67",
+                    "#b7212d",
+                    "#e1c38b",
+                    "#fcf057"
+                  ],
+                  "pointOklabMSE": 0.004403499281565303,
+                  "usedColors": [
+                    "#68360c",
+                    "#2f150a",
+                    "#b18d67",
+                    "#8e5c33",
+                    "#fcf057",
+                    "#e1c38b",
+                    "#495364",
+                    "#b7212d"
+                  ],
+                  "usedCount": 8,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "sprite-k8-auto64-then-shared-subset-control-sprite-0.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "directFitSamplesMs": [
+            2.1281999999999925,
+            0.6539999999999964,
+            0.4963999999999942
+          ],
+          "capSamplesMs": [
+            2.547600000000017,
+            2.1966999999999928,
+            2.4475999999999942
+          ],
+          "sharedSubsetSamplesMs": [
+            2.333500000000015,
+            2.379799999999989,
+            2.4586999999999932
+          ]
+        },
+        {
+          "k": 16,
+          "methods": [
+            {
+              "name": "auto64-then-per-asset-cap",
+              "pointOklabMSE": 0.0023046578623172344,
+              "globalUsedColorUnion": 16,
+              "fitMedianMs": 2.179299999999998,
+              "selectMedianMs": 7.185699999999997,
+              "coldTotalMedianSumMs": 9.364999999999995,
+              "assets": [
+                {
+                  "name": "sprite",
+                  "palette": [
+                    "#0d3010",
+                    "#161925",
+                    "#2f150a",
+                    "#495364",
+                    "#4c0e0b",
+                    "#54a32f",
+                    "#573a29",
+                    "#723f30",
+                    "#8e5c33",
+                    "#90a3b1",
+                    "#ab7e45",
+                    "#b7212d",
+                    "#e1c38b",
+                    "#e39f28",
+                    "#eae0c4",
+                    "#fde02d"
+                  ],
+                  "pointOklabMSE": 0.0023046578623172344,
+                  "usedColors": [
+                    "#573a29",
+                    "#4c0e0b",
+                    "#ab7e45",
+                    "#fde02d",
+                    "#723f30",
+                    "#0d3010",
+                    "#8e5c33",
+                    "#54a32f",
+                    "#2f150a",
+                    "#eae0c4",
+                    "#e1c38b",
+                    "#90a3b1",
+                    "#e39f28",
+                    "#161925",
+                    "#495364",
+                    "#b7212d"
+                  ],
+                  "usedCount": 16,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "sprite-k16-auto64-then-per-asset-cap-sprite-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "direct-shared-k-fit",
+              "pointOklabMSE": 0.002146259979961598,
+              "globalUsedColorUnion": 16,
+              "fitMedianMs": 0.9662999999999897,
+              "selectMedianMs": 0,
+              "coldTotalMedianSumMs": 0.9662999999999897,
+              "assets": [
+                {
+                  "name": "sprite",
+                  "palette": [
+                    "#181b16",
+                    "#203a43",
+                    "#2194ff",
+                    "#3c130b",
+                    "#449130",
+                    "#4c5a69",
+                    "#64351f",
+                    "#8999a8",
+                    "#905f36",
+                    "#aa1a25",
+                    "#bacdd6",
+                    "#c48744",
+                    "#d83237",
+                    "#e2bd7b",
+                    "#efe5c7",
+                    "#fde43e"
+                  ],
+                  "pointOklabMSE": 0.002146259979961598,
+                  "usedColors": [
+                    "#64351f",
+                    "#3c130b",
+                    "#c48744",
+                    "#905f36",
+                    "#fde43e",
+                    "#181b16",
+                    "#e2bd7b",
+                    "#449130",
+                    "#203a43",
+                    "#bacdd6",
+                    "#8999a8",
+                    "#efe5c7",
+                    "#4c5a69",
+                    "#d83237",
+                    "#aa1a25",
+                    "#2194ff"
+                  ],
+                  "usedCount": 16,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "sprite-k16-direct-shared-k-fit-sprite-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "auto64-then-shared-subset-control",
+              "pointOklabMSE": 0.0023046578623172344,
+              "globalUsedColorUnion": 16,
+              "fitMedianMs": 2.179299999999998,
+              "selectMedianMs": 3.8082999999999743,
+              "coldTotalMedianSumMs": 5.987599999999972,
+              "assets": [
+                {
+                  "name": "sprite",
+                  "palette": [
+                    "#0d3010",
+                    "#161925",
+                    "#2f150a",
+                    "#495364",
+                    "#4c0e0b",
+                    "#54a32f",
+                    "#573a29",
+                    "#723f30",
+                    "#8e5c33",
+                    "#90a3b1",
+                    "#ab7e45",
+                    "#b7212d",
+                    "#e1c38b",
+                    "#e39f28",
+                    "#eae0c4",
+                    "#fde02d"
+                  ],
+                  "pointOklabMSE": 0.0023046578623172344,
+                  "usedColors": [
+                    "#573a29",
+                    "#4c0e0b",
+                    "#ab7e45",
+                    "#fde02d",
+                    "#723f30",
+                    "#0d3010",
+                    "#8e5c33",
+                    "#54a32f",
+                    "#2f150a",
+                    "#eae0c4",
+                    "#e1c38b",
+                    "#90a3b1",
+                    "#e39f28",
+                    "#161925",
+                    "#495364",
+                    "#b7212d"
+                  ],
+                  "usedCount": 16,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "sprite-k16-auto64-then-shared-subset-control-sprite-0.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "directFitSamplesMs": [
+            2.6807000000000016,
+            0.9662999999999897,
+            0.9089999999999918
+          ],
+          "capSamplesMs": [
+            7.203100000000006,
+            7.185699999999997,
+            3.5246999999999957
+          ],
+          "sharedSubsetSamplesMs": [
+            3.8082999999999743,
+            3.8389999999999986,
+            3.6639999999999873
+          ]
+        }
+      ]
+    },
+    {
+      "name": "armor",
+      "auto64Colors": [
+        "#000000",
+        "#000001",
+        "#000100",
+        "#000408",
+        "#010000",
+        "#020100",
+        "#050403",
+        "#070301",
+        "#070408",
+        "#080909",
+        "#0e1013",
+        "#191103",
+        "#1a1e21",
+        "#211300",
+        "#282b2f",
+        "#2b333e",
+        "#322112",
+        "#323941",
+        "#340b00",
+        "#355056",
+        "#36413e",
+        "#3a474c",
+        "#3b1400",
+        "#3b414e",
+        "#3c3124",
+        "#3f2117",
+        "#474d54",
+        "#482300",
+        "#4b4431",
+        "#4c4349",
+        "#511b00",
+        "#515859",
+        "#515c66",
+        "#543b25",
+        "#55637f",
+        "#5d636b",
+        "#617b86",
+        "#696267",
+        "#6d6f77",
+        "#718181",
+        "#747c82",
+        "#7d7475",
+        "#7d858e",
+        "#7f3000",
+        "#8297aa",
+        "#84949c",
+        "#9aa4ab",
+        "#a3afb1",
+        "#b6bec6",
+        "#bfcad0",
+        "#cbd9df",
+        "#e7edf0"
+      ],
+      "auto64FitSamplesMs": [
+        0.20549999999997226,
+        0.060000000000002274,
+        0.04480000000000928
+      ],
+      "auto64FitMedianMs": 0.060000000000002274,
+      "rows": [
+        {
+          "k": 2,
+          "methods": [
+            {
+              "name": "auto64-then-per-asset-cap",
+              "pointOklabMSE": 0.017627010164262897,
+              "globalUsedColorUnion": 2,
+              "fitMedianMs": 0.060000000000002274,
+              "selectMedianMs": 1.6970000000000027,
+              "coldTotalMedianSumMs": 1.757000000000005,
+              "assets": [
+                {
+                  "name": "armor",
+                  "palette": [
+                    "#050403",
+                    "#6d6f77"
+                  ],
+                  "pointOklabMSE": 0.017627010164262897,
+                  "usedColors": [
+                    "#050403",
+                    "#6d6f77"
+                  ],
+                  "usedCount": 2,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "armor-k2-auto64-then-per-asset-cap-armor-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "direct-shared-k-fit",
+              "pointOklabMSE": 0.017522831122757494,
+              "globalUsedColorUnion": 2,
+              "fitMedianMs": 0.10210000000000719,
+              "selectMedianMs": 0,
+              "coldTotalMedianSumMs": 0.10210000000000719,
+              "assets": [
+                {
+                  "name": "armor",
+                  "palette": [
+                    "#050302",
+                    "#636a71"
+                  ],
+                  "pointOklabMSE": 0.017522831122757494,
+                  "usedColors": [
+                    "#050302",
+                    "#636a71"
+                  ],
+                  "usedCount": 2,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "armor-k2-direct-shared-k-fit-armor-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "auto64-then-shared-subset-control",
+              "pointOklabMSE": 0.017627010164262897,
+              "globalUsedColorUnion": 2,
+              "fitMedianMs": 0.060000000000002274,
+              "selectMedianMs": 0.6040999999999599,
+              "coldTotalMedianSumMs": 0.6640999999999622,
+              "assets": [
+                {
+                  "name": "armor",
+                  "palette": [
+                    "#050403",
+                    "#6d6f77"
+                  ],
+                  "pointOklabMSE": 0.017627010164262897,
+                  "usedColors": [
+                    "#050403",
+                    "#6d6f77"
+                  ],
+                  "usedCount": 2,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "armor-k2-auto64-then-shared-subset-control-armor-0.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "directFitSamplesMs": [
+            0.10910000000001219,
+            0.10210000000000719,
+            0.08190000000001874
+          ],
+          "capSamplesMs": [
+            1.814300000000003,
+            1.6970000000000027,
+            1.644900000000007
+          ],
+          "sharedSubsetSamplesMs": [
+            1.8069000000000415,
+            0.6040999999999599,
+            0.483099999999979
+          ]
+        },
+        {
+          "k": 4,
+          "methods": [
+            {
+              "name": "auto64-then-per-asset-cap",
+              "pointOklabMSE": 0.005467644864640163,
+              "globalUsedColorUnion": 4,
+              "fitMedianMs": 0.060000000000002274,
+              "selectMedianMs": 0.3546999999999798,
+              "coldTotalMedianSumMs": 0.4146999999999821,
+              "assets": [
+                {
+                  "name": "armor",
+                  "palette": [
+                    "#020100",
+                    "#3c3124",
+                    "#515c66",
+                    "#84949c"
+                  ],
+                  "pointOklabMSE": 0.005467644864640163,
+                  "usedColors": [
+                    "#020100",
+                    "#3c3124",
+                    "#515c66",
+                    "#84949c"
+                  ],
+                  "usedCount": 4,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "armor-k4-auto64-then-per-asset-cap-armor-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "direct-shared-k-fit",
+              "pointOklabMSE": 0.00574193609008281,
+              "globalUsedColorUnion": 4,
+              "fitMedianMs": 0.10419999999999163,
+              "selectMedianMs": 0,
+              "coldTotalMedianSumMs": 0.10419999999999163,
+              "assets": [
+                {
+                  "name": "armor",
+                  "palette": [
+                    "#000000",
+                    "#2b2422",
+                    "#505459",
+                    "#8b969d"
+                  ],
+                  "pointOklabMSE": 0.00574193609008281,
+                  "usedColors": [
+                    "#000000",
+                    "#505459",
+                    "#2b2422",
+                    "#8b969d"
+                  ],
+                  "usedCount": 4,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "armor-k4-direct-shared-k-fit-armor-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "auto64-then-shared-subset-control",
+              "pointOklabMSE": 0.005467644864640163,
+              "globalUsedColorUnion": 4,
+              "fitMedianMs": 0.060000000000002274,
+              "selectMedianMs": 0.31179999999994834,
+              "coldTotalMedianSumMs": 0.3717999999999506,
+              "assets": [
+                {
+                  "name": "armor",
+                  "palette": [
+                    "#020100",
+                    "#3c3124",
+                    "#515c66",
+                    "#84949c"
+                  ],
+                  "pointOklabMSE": 0.005467644864640163,
+                  "usedColors": [
+                    "#020100",
+                    "#3c3124",
+                    "#515c66",
+                    "#84949c"
+                  ],
+                  "usedCount": 4,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "armor-k4-auto64-then-shared-subset-control-armor-0.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "directFitSamplesMs": [
+            0.14870000000001937,
+            0.10419999999999163,
+            0.09149999999999636
+          ],
+          "capSamplesMs": [
+            0.3546999999999798,
+            0.5548000000000002,
+            0.3118000000000052
+          ],
+          "sharedSubsetSamplesMs": [
+            0.3066000000000031,
+            0.31179999999994834,
+            0.4146000000000072
+          ]
+        },
+        {
+          "k": 8,
+          "methods": [
+            {
+              "name": "auto64-then-per-asset-cap",
+              "pointOklabMSE": 0.0012866278168651834,
+              "globalUsedColorUnion": 8,
+              "fitMedianMs": 0.060000000000002274,
+              "selectMedianMs": 0.7776999999999816,
+              "coldTotalMedianSumMs": 0.8376999999999839,
+              "assets": [
+                {
+                  "name": "armor",
+                  "palette": [
+                    "#000000",
+                    "#080909",
+                    "#323941",
+                    "#3b1400",
+                    "#515859",
+                    "#747c82",
+                    "#9aa4ab",
+                    "#bfcad0"
+                  ],
+                  "pointOklabMSE": 0.0012866278168651834,
+                  "usedColors": [
+                    "#080909",
+                    "#000000",
+                    "#323941",
+                    "#3b1400",
+                    "#515859",
+                    "#9aa4ab",
+                    "#747c82",
+                    "#bfcad0"
+                  ],
+                  "usedCount": 8,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "armor-k8-auto64-then-per-asset-cap-armor-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "direct-shared-k-fit",
+              "pointOklabMSE": 0.0012316477741942235,
+              "globalUsedColorUnion": 8,
+              "fitMedianMs": 0.102800000000002,
+              "selectMedianMs": 0,
+              "coldTotalMedianSumMs": 0.102800000000002,
+              "assets": [
+                {
+                  "name": "armor",
+                  "palette": [
+                    "#000000",
+                    "#080606",
+                    "#35393e",
+                    "#371807",
+                    "#53595f",
+                    "#788289",
+                    "#a7b0b7",
+                    "#cfdadf"
+                  ],
+                  "pointOklabMSE": 0.0012316477741942235,
+                  "usedColors": [
+                    "#080606",
+                    "#000000",
+                    "#35393e",
+                    "#371807",
+                    "#53595f",
+                    "#a7b0b7",
+                    "#788289",
+                    "#cfdadf"
+                  ],
+                  "usedCount": 8,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "armor-k8-direct-shared-k-fit-armor-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "auto64-then-shared-subset-control",
+              "pointOklabMSE": 0.0012866278168651834,
+              "globalUsedColorUnion": 8,
+              "fitMedianMs": 0.060000000000002274,
+              "selectMedianMs": 0.6333999999999946,
+              "coldTotalMedianSumMs": 0.6933999999999969,
+              "assets": [
+                {
+                  "name": "armor",
+                  "palette": [
+                    "#000000",
+                    "#080909",
+                    "#323941",
+                    "#3b1400",
+                    "#515859",
+                    "#747c82",
+                    "#9aa4ab",
+                    "#bfcad0"
+                  ],
+                  "pointOklabMSE": 0.0012866278168651834,
+                  "usedColors": [
+                    "#080909",
+                    "#000000",
+                    "#323941",
+                    "#3b1400",
+                    "#515859",
+                    "#9aa4ab",
+                    "#747c82",
+                    "#bfcad0"
+                  ],
+                  "usedCount": 8,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "armor-k8-auto64-then-shared-subset-control-armor-0.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "directFitSamplesMs": [
+            0.1500000000000341,
+            0.102800000000002,
+            0.08839999999997872
+          ],
+          "capSamplesMs": [
+            0.7547999999999888,
+            0.7839999999999918,
+            0.7776999999999816
+          ],
+          "sharedSubsetSamplesMs": [
+            0.6333999999999946,
+            0.712099999999964,
+            0.6272999999999911
+          ]
+        },
+        {
+          "k": 16,
+          "methods": [
+            {
+              "name": "auto64-then-per-asset-cap",
+              "pointOklabMSE": 0.00047901684886134127,
+              "globalUsedColorUnion": 16,
+              "fitMedianMs": 0.060000000000002274,
+              "selectMedianMs": 0.8306999999999789,
+              "coldTotalMedianSumMs": 0.8906999999999812,
+              "assets": [
+                {
+                  "name": "armor",
+                  "palette": [
+                    "#000000",
+                    "#010000",
+                    "#050403",
+                    "#0e1013",
+                    "#282b2f",
+                    "#323941",
+                    "#3a474c",
+                    "#3b1400",
+                    "#515c66",
+                    "#747c82",
+                    "#7d858e",
+                    "#7f3000",
+                    "#84949c",
+                    "#9aa4ab",
+                    "#bfcad0",
+                    "#e7edf0"
+                  ],
+                  "pointOklabMSE": 0.00047901684886134127,
+                  "usedColors": [
+                    "#050403",
+                    "#000000",
+                    "#010000",
+                    "#3a474c",
+                    "#0e1013",
+                    "#3b1400",
+                    "#515c66",
+                    "#7f3000",
+                    "#323941",
+                    "#9aa4ab",
+                    "#747c82",
+                    "#84949c",
+                    "#7d858e",
+                    "#e7edf0",
+                    "#bfcad0",
+                    "#282b2f"
+                  ],
+                  "usedCount": 16,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "armor-k16-auto64-then-per-asset-cap-armor-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "direct-shared-k-fit",
+              "pointOklabMSE": 0.0004132429292706217,
+              "globalUsedColorUnion": 16,
+              "fitMedianMs": 0.152499999999975,
+              "selectMedianMs": 0,
+              "coldTotalMedianSumMs": 0.152499999999975,
+              "assets": [
+                {
+                  "name": "armor",
+                  "palette": [
+                    "#000000",
+                    "#010000",
+                    "#050404",
+                    "#14110c",
+                    "#24282b",
+                    "#31383e",
+                    "#3d1804",
+                    "#42484b",
+                    "#545d66",
+                    "#6c6b72",
+                    "#737c81",
+                    "#7f3000",
+                    "#7f8a95",
+                    "#9ea8ad",
+                    "#b8c1c8",
+                    "#d4e0e5"
+                  ],
+                  "pointOklabMSE": 0.0004132429292706217,
+                  "usedColors": [
+                    "#050404",
+                    "#000000",
+                    "#010000",
+                    "#42484b",
+                    "#14110c",
+                    "#3d1804",
+                    "#545d66",
+                    "#7f3000",
+                    "#31383e",
+                    "#9ea8ad",
+                    "#737c81",
+                    "#7f8a95",
+                    "#d4e0e5",
+                    "#b8c1c8",
+                    "#6c6b72",
+                    "#24282b"
+                  ],
+                  "usedCount": 16,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "armor-k16-direct-shared-k-fit-armor-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "auto64-then-shared-subset-control",
+              "pointOklabMSE": 0.00047901684886134127,
+              "globalUsedColorUnion": 16,
+              "fitMedianMs": 0.060000000000002274,
+              "selectMedianMs": 2.726100000000031,
+              "coldTotalMedianSumMs": 2.786100000000033,
+              "assets": [
+                {
+                  "name": "armor",
+                  "palette": [
+                    "#000000",
+                    "#010000",
+                    "#050403",
+                    "#0e1013",
+                    "#282b2f",
+                    "#323941",
+                    "#3a474c",
+                    "#3b1400",
+                    "#515c66",
+                    "#747c82",
+                    "#7d858e",
+                    "#7f3000",
+                    "#84949c",
+                    "#9aa4ab",
+                    "#bfcad0",
+                    "#e7edf0"
+                  ],
+                  "pointOklabMSE": 0.00047901684886134127,
+                  "usedColors": [
+                    "#050403",
+                    "#000000",
+                    "#010000",
+                    "#3a474c",
+                    "#0e1013",
+                    "#3b1400",
+                    "#515c66",
+                    "#7f3000",
+                    "#323941",
+                    "#9aa4ab",
+                    "#747c82",
+                    "#84949c",
+                    "#7d858e",
+                    "#e7edf0",
+                    "#bfcad0",
+                    "#282b2f"
+                  ],
+                  "usedCount": 16,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "armor-k16-auto64-then-shared-subset-control-armor-0.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "directFitSamplesMs": [
+            0.2185999999999808,
+            0.152499999999975,
+            0.14670000000000982
+          ],
+          "capSamplesMs": [
+            0.7874999999999659,
+            0.8499999999999659,
+            0.8306999999999789
+          ],
+          "sharedSubsetSamplesMs": [
+            0.8648000000000025,
+            3.0510999999999626,
+            2.726100000000031
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ramp",
+      "auto64Colors": [
+        "#000000",
+        "#040404",
+        "#080808",
+        "#0c0c0c",
+        "#101010",
+        "#141414",
+        "#181818",
+        "#1c1c1c",
+        "#202020",
+        "#242424",
+        "#282828",
+        "#2d2d2d",
+        "#313131",
+        "#353535",
+        "#393939",
+        "#3d3d3d",
+        "#414141",
+        "#454545",
+        "#494949",
+        "#4d4d4d",
+        "#515151",
+        "#555555",
+        "#595959",
+        "#5d5d5d",
+        "#616161",
+        "#656565",
+        "#696969",
+        "#6d6d6d",
+        "#717171",
+        "#757575",
+        "#797979",
+        "#7d7d7d",
+        "#828282",
+        "#868686",
+        "#8a8a8a",
+        "#8e8e8e",
+        "#929292",
+        "#969696",
+        "#9a9a9a",
+        "#9e9e9e",
+        "#a2a2a2",
+        "#a6a6a6",
+        "#aaaaaa",
+        "#aeaeae",
+        "#b2b2b2",
+        "#b6b6b6",
+        "#bababa",
+        "#bebebe",
+        "#c2c2c2",
+        "#c6c6c6",
+        "#cacaca",
+        "#cecece",
+        "#d2d2d2",
+        "#d7d7d7",
+        "#dbdbdb",
+        "#dfdfdf",
+        "#e3e3e3",
+        "#e7e7e7",
+        "#ebebeb",
+        "#efefef",
+        "#f3f3f3",
+        "#f7f7f7",
+        "#fbfbfb",
+        "#ffffff"
+      ],
+      "auto64FitSamplesMs": [
+        0.16500000000002046,
+        0.1449999999999818,
+        0.14599999999995816
+      ],
+      "auto64FitMedianMs": 0.14599999999995816,
+      "rows": [
+        {
+          "k": 2,
+          "methods": [
+            {
+              "name": "auto64-then-per-asset-cap",
+              "pointOklabMSE": 0.018286689419701012,
+              "globalUsedColorUnion": 2,
+              "fitMedianMs": 0.14599999999995816,
+              "selectMedianMs": 0.4819999999999709,
+              "coldTotalMedianSumMs": 0.6279999999999291,
+              "assets": [
+                {
+                  "name": "ramp",
+                  "palette": [
+                    "#353535",
+                    "#bababa"
+                  ],
+                  "pointOklabMSE": 0.018286689419701012,
+                  "usedColors": [
+                    "#353535",
+                    "#bababa"
+                  ],
+                  "usedCount": 2,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "ramp-k2-auto64-then-per-asset-cap-ramp-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "direct-shared-k-fit",
+              "pointOklabMSE": 0.018279904051406365,
+              "globalUsedColorUnion": 2,
+              "fitMedianMs": 0.23759999999998627,
+              "selectMedianMs": 0,
+              "coldTotalMedianSumMs": 0.23759999999998627,
+              "assets": [
+                {
+                  "name": "ramp",
+                  "palette": [
+                    "#363636",
+                    "#b9b9b9"
+                  ],
+                  "pointOklabMSE": 0.018279904051406365,
+                  "usedColors": [
+                    "#363636",
+                    "#b9b9b9"
+                  ],
+                  "usedCount": 2,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "ramp-k2-direct-shared-k-fit-ramp-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "auto64-then-shared-subset-control",
+              "pointOklabMSE": 0.018286689419701012,
+              "globalUsedColorUnion": 2,
+              "fitMedianMs": 0.14599999999995816,
+              "selectMedianMs": 0.5960999999999785,
+              "coldTotalMedianSumMs": 0.7420999999999367,
+              "assets": [
+                {
+                  "name": "ramp",
+                  "palette": [
+                    "#353535",
+                    "#bababa"
+                  ],
+                  "pointOklabMSE": 0.018286689419701012,
+                  "usedColors": [
+                    "#353535",
+                    "#bababa"
+                  ],
+                  "usedCount": 2,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "ramp-k2-auto64-then-shared-subset-control-ramp-0.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "directFitSamplesMs": [
+            0.32749999999998636,
+            0.23310000000003583,
+            0.23759999999998627
+          ],
+          "capSamplesMs": [
+            0.6184999999999832,
+            0.4819999999999709,
+            0.467899999999986
+          ],
+          "sharedSubsetSamplesMs": [
+            0.633199999999988,
+            0.530399999999986,
+            0.5960999999999785
+          ]
+        },
+        {
+          "k": 4,
+          "methods": [
+            {
+              "name": "auto64-then-per-asset-cap",
+              "pointOklabMSE": 0.004899359820257886,
+              "globalUsedColorUnion": 4,
+              "fitMedianMs": 0.14599999999995816,
+              "selectMedianMs": 0.6757999999999811,
+              "coldTotalMedianSumMs": 0.8217999999999392,
+              "assets": [
+                {
+                  "name": "ramp",
+                  "palette": [
+                    "#141414",
+                    "#4d4d4d",
+                    "#929292",
+                    "#dbdbdb"
+                  ],
+                  "pointOklabMSE": 0.004899359820257886,
+                  "usedColors": [
+                    "#141414",
+                    "#4d4d4d",
+                    "#929292",
+                    "#dbdbdb"
+                  ],
+                  "usedCount": 4,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "ramp-k4-auto64-then-per-asset-cap-ramp-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "direct-shared-k-fit",
+              "pointOklabMSE": 0.0053422527349821156,
+              "globalUsedColorUnion": 4,
+              "fitMedianMs": 0.11750000000000682,
+              "selectMedianMs": 0,
+              "coldTotalMedianSumMs": 0.11750000000000682,
+              "assets": [
+                {
+                  "name": "ramp",
+                  "palette": [
+                    "#0d0d0d",
+                    "#3f3f3f",
+                    "#818181",
+                    "#d4d4d4"
+                  ],
+                  "pointOklabMSE": 0.0053422527349821156,
+                  "usedColors": [
+                    "#0d0d0d",
+                    "#3f3f3f",
+                    "#818181",
+                    "#d4d4d4"
+                  ],
+                  "usedCount": 4,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "ramp-k4-direct-shared-k-fit-ramp-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "auto64-then-shared-subset-control",
+              "pointOklabMSE": 0.004899359820257886,
+              "globalUsedColorUnion": 4,
+              "fitMedianMs": 0.14599999999995816,
+              "selectMedianMs": 0.7746999999999957,
+              "coldTotalMedianSumMs": 0.9206999999999539,
+              "assets": [
+                {
+                  "name": "ramp",
+                  "palette": [
+                    "#141414",
+                    "#4d4d4d",
+                    "#929292",
+                    "#dbdbdb"
+                  ],
+                  "pointOklabMSE": 0.004899359820257886,
+                  "usedColors": [
+                    "#141414",
+                    "#4d4d4d",
+                    "#929292",
+                    "#dbdbdb"
+                  ],
+                  "usedCount": 4,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "ramp-k4-auto64-then-shared-subset-control-ramp-0.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "directFitSamplesMs": [
+            0.15179999999998017,
+            0.11750000000000682,
+            0.11429999999995744
+          ],
+          "capSamplesMs": [
+            0.6724999999999568,
+            0.7434000000000083,
+            0.6757999999999811
+          ],
+          "sharedSubsetSamplesMs": [
+            1.0310999999999808,
+            0.7746999999999957,
+            0.6893000000000029
+          ]
+        },
+        {
+          "k": 8,
+          "methods": [
+            {
+              "name": "auto64-then-per-asset-cap",
+              "pointOklabMSE": 0.0013503118455262,
+              "globalUsedColorUnion": 8,
+              "fitMedianMs": 0.14599999999995816,
+              "selectMedianMs": 1.1725000000000136,
+              "coldTotalMedianSumMs": 1.3184999999999718,
+              "assets": [
+                {
+                  "name": "ramp",
+                  "palette": [
+                    "#040404",
+                    "#1c1c1c",
+                    "#393939",
+                    "#555555",
+                    "#797979",
+                    "#9e9e9e",
+                    "#c2c2c2",
+                    "#ebebeb"
+                  ],
+                  "pointOklabMSE": 0.0013503118455262,
+                  "usedColors": [
+                    "#040404",
+                    "#1c1c1c",
+                    "#393939",
+                    "#555555",
+                    "#797979",
+                    "#9e9e9e",
+                    "#c2c2c2",
+                    "#ebebeb"
+                  ],
+                  "usedCount": 8,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "ramp-k8-auto64-then-per-asset-cap-ramp-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "direct-shared-k-fit",
+              "pointOklabMSE": 0.0014911437972035854,
+              "globalUsedColorUnion": 8,
+              "fitMedianMs": 0.1605000000000132,
+              "selectMedianMs": 0,
+              "coldTotalMedianSumMs": 0.1605000000000132,
+              "assets": [
+                {
+                  "name": "ramp",
+                  "palette": [
+                    "#000000",
+                    "#101010",
+                    "#303030",
+                    "#5b5b5b",
+                    "#888888",
+                    "#aeaeae",
+                    "#d0d0d0",
+                    "#f1f1f1"
+                  ],
+                  "pointOklabMSE": 0.0014911437972035854,
+                  "usedColors": [
+                    "#000000",
+                    "#101010",
+                    "#303030",
+                    "#5b5b5b",
+                    "#888888",
+                    "#aeaeae",
+                    "#d0d0d0",
+                    "#f1f1f1"
+                  ],
+                  "usedCount": 8,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "ramp-k8-direct-shared-k-fit-ramp-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "auto64-then-shared-subset-control",
+              "pointOklabMSE": 0.0013503118455262,
+              "globalUsedColorUnion": 8,
+              "fitMedianMs": 0.14599999999995816,
+              "selectMedianMs": 1.1838999999999942,
+              "coldTotalMedianSumMs": 1.3298999999999523,
+              "assets": [
+                {
+                  "name": "ramp",
+                  "palette": [
+                    "#040404",
+                    "#1c1c1c",
+                    "#393939",
+                    "#555555",
+                    "#797979",
+                    "#9e9e9e",
+                    "#c2c2c2",
+                    "#ebebeb"
+                  ],
+                  "pointOklabMSE": 0.0013503118455262,
+                  "usedColors": [
+                    "#040404",
+                    "#1c1c1c",
+                    "#393939",
+                    "#555555",
+                    "#797979",
+                    "#9e9e9e",
+                    "#c2c2c2",
+                    "#ebebeb"
+                  ],
+                  "usedCount": 8,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "ramp-k8-auto64-then-shared-subset-control-ramp-0.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "directFitSamplesMs": [
+            0.17549999999999955,
+            0.137299999999982,
+            0.1605000000000132
+          ],
+          "capSamplesMs": [
+            1.1234999999999786,
+            1.1725000000000136,
+            1.195600000000013
+          ],
+          "sharedSubsetSamplesMs": [
+            1.1838999999999942,
+            1.0760000000000218,
+            1.20089999999999
+          ]
+        },
+        {
+          "k": 16,
+          "methods": [
+            {
+              "name": "auto64-then-per-asset-cap",
+              "pointOklabMSE": 0.00033447750147205086,
+              "globalUsedColorUnion": 16,
+              "fitMedianMs": 0.14599999999995816,
+              "selectMedianMs": 1.4232999999999834,
+              "coldTotalMedianSumMs": 1.5692999999999415,
+              "assets": [
+                {
+                  "name": "ramp",
+                  "palette": [
+                    "#000000",
+                    "#040404",
+                    "#101010",
+                    "#202020",
+                    "#313131",
+                    "#454545",
+                    "#595959",
+                    "#696969",
+                    "#7d7d7d",
+                    "#929292",
+                    "#a6a6a6",
+                    "#bababa",
+                    "#cacaca",
+                    "#dfdfdf",
+                    "#efefef",
+                    "#fbfbfb"
+                  ],
+                  "pointOklabMSE": 0.00033447750147205086,
+                  "usedColors": [
+                    "#000000",
+                    "#040404",
+                    "#101010",
+                    "#202020",
+                    "#313131",
+                    "#454545",
+                    "#595959",
+                    "#696969",
+                    "#7d7d7d",
+                    "#929292",
+                    "#a6a6a6",
+                    "#bababa",
+                    "#cacaca",
+                    "#dfdfdf",
+                    "#efefef",
+                    "#fbfbfb"
+                  ],
+                  "usedCount": 16,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "ramp-k16-auto64-then-per-asset-cap-ramp-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "direct-shared-k-fit",
+              "pointOklabMSE": 0.00029084872457406624,
+              "globalUsedColorUnion": 16,
+              "fitMedianMs": 0.1934999999999718,
+              "selectMedianMs": 0,
+              "coldTotalMedianSumMs": 0.1934999999999718,
+              "assets": [
+                {
+                  "name": "ramp",
+                  "palette": [
+                    "#000000",
+                    "#080808",
+                    "#141414",
+                    "#222222",
+                    "#333333",
+                    "#434343",
+                    "#535353",
+                    "#656565",
+                    "#777777",
+                    "#888888",
+                    "#9a9a9a",
+                    "#aeaeae",
+                    "#c2c2c2",
+                    "#d7d7d7",
+                    "#e9e9e9",
+                    "#f9f9f9"
+                  ],
+                  "pointOklabMSE": 0.00029084872457406624,
+                  "usedColors": [
+                    "#000000",
+                    "#080808",
+                    "#141414",
+                    "#222222",
+                    "#333333",
+                    "#434343",
+                    "#535353",
+                    "#656565",
+                    "#777777",
+                    "#888888",
+                    "#9a9a9a",
+                    "#aeaeae",
+                    "#c2c2c2",
+                    "#d7d7d7",
+                    "#e9e9e9",
+                    "#f9f9f9"
+                  ],
+                  "usedCount": 16,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "ramp-k16-direct-shared-k-fit-ramp-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "auto64-then-shared-subset-control",
+              "pointOklabMSE": 0.00033447750147205086,
+              "globalUsedColorUnion": 16,
+              "fitMedianMs": 0.14599999999995816,
+              "selectMedianMs": 1.6587000000000103,
+              "coldTotalMedianSumMs": 1.8046999999999684,
+              "assets": [
+                {
+                  "name": "ramp",
+                  "palette": [
+                    "#000000",
+                    "#040404",
+                    "#101010",
+                    "#202020",
+                    "#313131",
+                    "#454545",
+                    "#595959",
+                    "#696969",
+                    "#7d7d7d",
+                    "#929292",
+                    "#a6a6a6",
+                    "#bababa",
+                    "#cacaca",
+                    "#dfdfdf",
+                    "#efefef",
+                    "#fbfbfb"
+                  ],
+                  "pointOklabMSE": 0.00033447750147205086,
+                  "usedColors": [
+                    "#000000",
+                    "#040404",
+                    "#101010",
+                    "#202020",
+                    "#313131",
+                    "#454545",
+                    "#595959",
+                    "#696969",
+                    "#7d7d7d",
+                    "#929292",
+                    "#a6a6a6",
+                    "#bababa",
+                    "#cacaca",
+                    "#dfdfdf",
+                    "#efefef",
+                    "#fbfbfb"
+                  ],
+                  "usedCount": 16,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "ramp-k16-auto64-then-shared-subset-control-ramp-0.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "directFitSamplesMs": [
+            0.210899999999981,
+            0.1934999999999718,
+            0.18969999999995935
+          ],
+          "capSamplesMs": [
+            1.4852999999999952,
+            1.4232999999999834,
+            1.407000000000039
+          ],
+          "sharedSubsetSamplesMs": [
+            1.8899999999999864,
+            1.4524000000000115,
+            1.6587000000000103
+          ]
+        }
+      ]
+    },
+    {
+      "name": "cube",
+      "auto64Colors": [
+        "#000002",
+        "#0a0b38",
+        "#101d13",
+        "#18146b",
+        "#231dc3",
+        "#253b51",
+        "#26061b",
+        "#2737f0",
+        "#273d19",
+        "#2b682d",
+        "#2f2391",
+        "#315a7e",
+        "#3475e1",
+        "#3c922f",
+        "#3d1918",
+        "#3d848c",
+        "#4449b5",
+        "#45a5de",
+        "#48ecce",
+        "#49a37b",
+        "#49e260",
+        "#4c154f",
+        "#4ebd3d",
+        "#58c2a5",
+        "#61f845",
+        "#631e1c",
+        "#672083",
+        "#6a2eeb",
+        "#6acaec",
+        "#6b5431",
+        "#717cba",
+        "#797b36",
+        "#815780",
+        "#842637",
+        "#8a26bd",
+        "#8c6bee",
+        "#92f9a4",
+        "#9af0ef",
+        "#9b1f77",
+        "#a99be8",
+        "#aa8f98",
+        "#aa9c41",
+        "#ac2b2d",
+        "#acd048",
+        "#b06537",
+        "#b15cbb",
+        "#b52de9",
+        "#bacda7",
+        "#c4239a",
+        "#c44871",
+        "#dcf84e",
+        "#e02e26",
+        "#e272e6",
+        "#e2c8e4",
+        "#e6af3c",
+        "#e9a687",
+        "#eaf2d2",
+        "#eb6f9a",
+        "#eb753e",
+        "#eb9dd5",
+        "#ec31eb",
+        "#edd85d",
+        "#f131ac",
+        "#f42f5c"
+      ],
+      "auto64FitSamplesMs": [
+        41.33590000000004,
+        24.786,
+        25.88689999999997
+      ],
+      "auto64FitMedianMs": 25.88689999999997,
+      "rows": [
+        {
+          "k": 2,
+          "methods": [
+            {
+              "name": "auto64-then-per-asset-cap",
+              "pointOklabMSE": 0.03266311316872988,
+              "globalUsedColorUnion": 2,
+              "fitMedianMs": 25.88689999999997,
+              "selectMedianMs": 24.280599999999993,
+              "coldTotalMedianSumMs": 50.16749999999996,
+              "assets": [
+                {
+                  "name": "cube",
+                  "palette": [
+                    "#815780",
+                    "#bacda7"
+                  ],
+                  "pointOklabMSE": 0.03266311316872988,
+                  "usedColors": [
+                    "#815780",
+                    "#bacda7"
+                  ],
+                  "usedCount": 2,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "cube-k2-auto64-then-per-asset-cap-cube-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "direct-shared-k-fit",
+              "pointOklabMSE": 0.030948455798554732,
+              "globalUsedColorUnion": 2,
+              "fitMedianMs": 2.7697000000000003,
+              "selectMedianMs": 0,
+              "coldTotalMedianSumMs": 2.7697000000000003,
+              "assets": [
+                {
+                  "name": "cube",
+                  "palette": [
+                    "#80538c",
+                    "#99c887"
+                  ],
+                  "pointOklabMSE": 0.030948455798554732,
+                  "usedColors": [
+                    "#80538c",
+                    "#99c887"
+                  ],
+                  "usedCount": 2,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "cube-k2-direct-shared-k-fit-cube-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "auto64-then-shared-subset-control",
+              "pointOklabMSE": 0.03266311316872988,
+              "globalUsedColorUnion": 2,
+              "fitMedianMs": 25.88689999999997,
+              "selectMedianMs": 9.289700000000039,
+              "coldTotalMedianSumMs": 35.17660000000001,
+              "assets": [
+                {
+                  "name": "cube",
+                  "palette": [
+                    "#815780",
+                    "#bacda7"
+                  ],
+                  "pointOklabMSE": 0.03266311316872988,
+                  "usedColors": [
+                    "#815780",
+                    "#bacda7"
+                  ],
+                  "usedCount": 2,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "cube-k2-auto64-then-shared-subset-control-cube-0.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "directFitSamplesMs": [
+            5.552399999999977,
+            2.52800000000002,
+            2.7697000000000003
+          ],
+          "capSamplesMs": [
+            24.313600000000008,
+            24.280599999999993,
+            10.075999999999908
+          ],
+          "sharedSubsetSamplesMs": [
+            8.833200000000033,
+            14.585700000000088,
+            9.289700000000039
+          ]
+        },
+        {
+          "k": 4,
+          "methods": [
+            {
+              "name": "auto64-then-per-asset-cap",
+              "pointOklabMSE": 0.021978521453059376,
+              "globalUsedColorUnion": 4,
+              "fitMedianMs": 25.88689999999997,
+              "selectMedianMs": 10.525100000000066,
+              "coldTotalMedianSumMs": 36.412000000000035,
+              "assets": [
+                {
+                  "name": "cube",
+                  "palette": [
+                    "#2f2391",
+                    "#3d848c",
+                    "#acd048",
+                    "#c44871"
+                  ],
+                  "pointOklabMSE": 0.021978521453059376,
+                  "usedColors": [
+                    "#2f2391",
+                    "#c44871",
+                    "#3d848c",
+                    "#acd048"
+                  ],
+                  "usedCount": 4,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "cube-k4-auto64-then-per-asset-cap-cube-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "direct-shared-k-fit",
+              "pointOklabMSE": 0.02034346344077257,
+              "globalUsedColorUnion": 4,
+              "fitMedianMs": 3.289099999999962,
+              "selectMedianMs": 0,
+              "coldTotalMedianSumMs": 3.289099999999962,
+              "assets": [
+                {
+                  "name": "cube",
+                  "palette": [
+                    "#433961",
+                    "#95dc8d",
+                    "#9a5bce",
+                    "#a57f5f"
+                  ],
+                  "pointOklabMSE": 0.02034346344077257,
+                  "usedColors": [
+                    "#433961",
+                    "#a57f5f",
+                    "#95dc8d",
+                    "#9a5bce"
+                  ],
+                  "usedCount": 4,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "cube-k4-direct-shared-k-fit-cube-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "auto64-then-shared-subset-control",
+              "pointOklabMSE": 0.021978521453059376,
+              "globalUsedColorUnion": 4,
+              "fitMedianMs": 25.88689999999997,
+              "selectMedianMs": 10.481800000000021,
+              "coldTotalMedianSumMs": 36.36869999999999,
+              "assets": [
+                {
+                  "name": "cube",
+                  "palette": [
+                    "#2f2391",
+                    "#3d848c",
+                    "#acd048",
+                    "#c44871"
+                  ],
+                  "pointOklabMSE": 0.021978521453059376,
+                  "usedColors": [
+                    "#2f2391",
+                    "#c44871",
+                    "#3d848c",
+                    "#acd048"
+                  ],
+                  "usedCount": 4,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "cube-k4-auto64-then-shared-subset-control-cube-0.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "directFitSamplesMs": [
+            6.140099999999961,
+            3.289099999999962,
+            3.1467999999999847
+          ],
+          "capSamplesMs": [
+            10.534799999999905,
+            10.350000000000023,
+            10.525100000000066
+          ],
+          "sharedSubsetSamplesMs": [
+            10.540200000000027,
+            10.481800000000021,
+            10.451000000000022
+          ]
+        },
+        {
+          "k": 8,
+          "methods": [
+            {
+              "name": "auto64-then-per-asset-cap",
+              "pointOklabMSE": 0.013266395002665667,
+              "globalUsedColorUnion": 8,
+              "fitMedianMs": 25.88689999999997,
+              "selectMedianMs": 14.716799999999921,
+              "coldTotalMedianSumMs": 40.60369999999989,
+              "assets": [
+                {
+                  "name": "cube",
+                  "palette": [
+                    "#4449b5",
+                    "#49a37b",
+                    "#4c154f",
+                    "#6b5431",
+                    "#9af0ef",
+                    "#acd048",
+                    "#c44871",
+                    "#e272e6"
+                  ],
+                  "pointOklabMSE": 0.013266395002665667,
+                  "usedColors": [
+                    "#4c154f",
+                    "#6b5431",
+                    "#c44871",
+                    "#49a37b",
+                    "#acd048",
+                    "#4449b5",
+                    "#e272e6",
+                    "#9af0ef"
+                  ],
+                  "usedCount": 8,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "cube-k8-auto64-then-per-asset-cap-cube-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "direct-shared-k-fit",
+              "pointOklabMSE": 0.012075549430023784,
+              "globalUsedColorUnion": 8,
+              "fitMedianMs": 4.171900000000051,
+              "selectMedianMs": 0,
+              "coldTotalMedianSumMs": 4.171900000000051,
+              "assets": [
+                {
+                  "name": "cube",
+                  "palette": [
+                    "#292351",
+                    "#5c45cf",
+                    "#69904e",
+                    "#704444",
+                    "#71e361",
+                    "#7da6d4",
+                    "#cfd6a4",
+                    "#da518b"
+                  ],
+                  "pointOklabMSE": 0.012075549430023784,
+                  "usedColors": [
+                    "#292351",
+                    "#704444",
+                    "#da518b",
+                    "#69904e",
+                    "#cfd6a4",
+                    "#71e361",
+                    "#5c45cf",
+                    "#7da6d4"
+                  ],
+                  "usedCount": 8,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "cube-k8-direct-shared-k-fit-cube-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "auto64-then-shared-subset-control",
+              "pointOklabMSE": 0.013266395002665667,
+              "globalUsedColorUnion": 8,
+              "fitMedianMs": 25.88689999999997,
+              "selectMedianMs": 13.41879999999992,
+              "coldTotalMedianSumMs": 39.30569999999989,
+              "assets": [
+                {
+                  "name": "cube",
+                  "palette": [
+                    "#4449b5",
+                    "#49a37b",
+                    "#4c154f",
+                    "#6b5431",
+                    "#9af0ef",
+                    "#acd048",
+                    "#c44871",
+                    "#e272e6"
+                  ],
+                  "pointOklabMSE": 0.013266395002665667,
+                  "usedColors": [
+                    "#4c154f",
+                    "#6b5431",
+                    "#c44871",
+                    "#49a37b",
+                    "#acd048",
+                    "#4449b5",
+                    "#e272e6",
+                    "#9af0ef"
+                  ],
+                  "usedCount": 8,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "cube-k8-auto64-then-shared-subset-control-cube-0.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "directFitSamplesMs": [
+            7.4483000000000175,
+            4.171900000000051,
+            4.076799999999821
+          ],
+          "capSamplesMs": [
+            13.234899999999925,
+            14.769399999999905,
+            14.716799999999921
+          ],
+          "sharedSubsetSamplesMs": [
+            13.934799999999996,
+            13.258800000000065,
+            13.41879999999992
+          ]
+        },
+        {
+          "k": 16,
+          "methods": [
+            {
+              "name": "auto64-then-per-asset-cap",
+              "pointOklabMSE": 0.007904590640320983,
+              "globalUsedColorUnion": 16,
+              "fitMedianMs": 25.88689999999997,
+              "selectMedianMs": 16.85089999999991,
+              "coldTotalMedianSumMs": 42.73779999999988,
+              "assets": [
+                {
+                  "name": "cube",
+                  "palette": [
+                    "#2b682d",
+                    "#2f2391",
+                    "#3475e1",
+                    "#3d1918",
+                    "#49a37b",
+                    "#4ebd3d",
+                    "#61f845",
+                    "#6a2eeb",
+                    "#6acaec",
+                    "#815780",
+                    "#9af0ef",
+                    "#ac2b2d",
+                    "#c4239a",
+                    "#e272e6",
+                    "#eb753e",
+                    "#edd85d"
+                  ],
+                  "pointOklabMSE": 0.007904590640320983,
+                  "usedColors": [
+                    "#3d1918",
+                    "#ac2b2d",
+                    "#eb753e",
+                    "#2b682d",
+                    "#815780",
+                    "#49a37b",
+                    "#4ebd3d",
+                    "#edd85d",
+                    "#61f845",
+                    "#2f2391",
+                    "#c4239a",
+                    "#6a2eeb",
+                    "#e272e6",
+                    "#3475e1",
+                    "#6acaec",
+                    "#9af0ef"
+                  ],
+                  "usedCount": 16,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "cube-k16-auto64-then-per-asset-cap-cube-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "direct-shared-k-fit",
+              "pointOklabMSE": 0.006704161621182928,
+              "globalUsedColorUnion": 16,
+              "fitMedianMs": 6.425799999999981,
+              "selectMedianMs": 0,
+              "coldTotalMedianSumMs": 6.425799999999981,
+              "assets": [
+                {
+                  "name": "cube",
+                  "palette": [
+                    "#271d2b",
+                    "#322a8c",
+                    "#416143",
+                    "#4a41de",
+                    "#5794ce",
+                    "#579e4d",
+                    "#5cdbc9",
+                    "#5ee552",
+                    "#822836",
+                    "#8e4490",
+                    "#cf40d3",
+                    "#d2a151",
+                    "#d3eb5f",
+                    "#d697cc",
+                    "#d6e3d4",
+                    "#d9484c"
+                  ],
+                  "pointOklabMSE": 0.006704161621182928,
+                  "usedColors": [
+                    "#271d2b",
+                    "#822836",
+                    "#d9484c",
+                    "#416143",
+                    "#579e4d",
+                    "#d2a151",
+                    "#5ee552",
+                    "#d3eb5f",
+                    "#322a8c",
+                    "#8e4490",
+                    "#5794ce",
+                    "#cf40d3",
+                    "#4a41de",
+                    "#d697cc",
+                    "#5cdbc9",
+                    "#d6e3d4"
+                  ],
+                  "usedCount": 16,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "cube-k16-direct-shared-k-fit-cube-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "auto64-then-shared-subset-control",
+              "pointOklabMSE": 0.007904590640320983,
+              "globalUsedColorUnion": 16,
+              "fitMedianMs": 25.88689999999997,
+              "selectMedianMs": 17.414999999999964,
+              "coldTotalMedianSumMs": 43.30189999999993,
+              "assets": [
+                {
+                  "name": "cube",
+                  "palette": [
+                    "#2b682d",
+                    "#2f2391",
+                    "#3475e1",
+                    "#3d1918",
+                    "#49a37b",
+                    "#4ebd3d",
+                    "#61f845",
+                    "#6a2eeb",
+                    "#6acaec",
+                    "#815780",
+                    "#9af0ef",
+                    "#ac2b2d",
+                    "#c4239a",
+                    "#e272e6",
+                    "#eb753e",
+                    "#edd85d"
+                  ],
+                  "pointOklabMSE": 0.007904590640320983,
+                  "usedColors": [
+                    "#3d1918",
+                    "#ac2b2d",
+                    "#eb753e",
+                    "#2b682d",
+                    "#815780",
+                    "#49a37b",
+                    "#4ebd3d",
+                    "#edd85d",
+                    "#61f845",
+                    "#2f2391",
+                    "#c4239a",
+                    "#6a2eeb",
+                    "#e272e6",
+                    "#3475e1",
+                    "#6acaec",
+                    "#9af0ef"
+                  ],
+                  "usedCount": 16,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "cube-k16-auto64-then-shared-subset-control-cube-0.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "directFitSamplesMs": [
+            8.761400000000094,
+            6.425799999999981,
+            6.376800000000003
+          ],
+          "capSamplesMs": [
+            17.731199999999944,
+            16.833700000000135,
+            16.85089999999991
+          ],
+          "sharedSubsetSamplesMs": [
+            17.60030000000006,
+            17.414999999999964,
+            17.058899999999994
+          ]
+        }
+      ]
+    },
+    {
+      "name": "whole-wall",
+      "auto64Colors": [
+        "#010101",
+        "#040409",
+        "#090a0a",
+        "#0d290c",
+        "#15110e",
+        "#171a21",
+        "#1e501c",
+        "#25201f",
+        "#272392",
+        "#292b2c",
+        "#2b3042",
+        "#353a40",
+        "#370b09",
+        "#38332e",
+        "#3a1b09",
+        "#3aa6b7",
+        "#3c8538",
+        "#404345",
+        "#434d54",
+        "#4a3fdf",
+        "#515c66",
+        "#51c5d0",
+        "#51e3cc",
+        "#52160b",
+        "#525554",
+        "#57b646",
+        "#5b85e5",
+        "#5c361d",
+        "#5de849",
+        "#60636a",
+        "#656e76",
+        "#727d81",
+        "#764526",
+        "#777274",
+        "#7e1722",
+        "#7ffad8",
+        "#80848c",
+        "#832a8c",
+        "#8b8c8a",
+        "#8c959d",
+        "#915d33",
+        "#98f76e",
+        "#9ea5a9",
+        "#a31b26",
+        "#a399a1",
+        "#a6753f",
+        "#a98e5b",
+        "#adb0b1",
+        "#bc263f",
+        "#c29d62",
+        "#c3b7c9",
+        "#c3c9cb",
+        "#cb45da",
+        "#d2b77e",
+        "#d57d33",
+        "#d5d8dc",
+        "#df3535",
+        "#e4c998",
+        "#e7e4d9",
+        "#eca82b",
+        "#ecedee",
+        "#ed5491",
+        "#f3e548",
+        "#f9faf5"
+      ],
+      "auto64FitSamplesMs": [
+        34.04139999999984,
+        28.660000000000082,
+        23.695799999999963
+      ],
+      "auto64FitMedianMs": 28.660000000000082,
+      "rows": [
+        {
+          "k": 2,
+          "methods": [
+            {
+              "name": "auto64-then-per-asset-cap",
+              "pointOklabMSE": 0.023431568147990543,
+              "globalUsedColorUnion": 8,
+              "fitMedianMs": 28.660000000000082,
+              "selectMedianMs": 9.337299999999914,
+              "coldTotalMedianSumMs": 37.997299999999996,
+              "assets": [
+                {
+                  "name": "sprite",
+                  "palette": [
+                    "#5c361d",
+                    "#d2b77e"
+                  ],
+                  "pointOklabMSE": 0.018491615767807015,
+                  "usedColors": [
+                    "#5c361d",
+                    "#d2b77e"
+                  ],
+                  "usedCount": 2,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k2-auto64-then-per-asset-cap-sprite-0.png"
+                  ]
+                },
+                {
+                  "name": "armor",
+                  "palette": [
+                    "#010101",
+                    "#60636a"
+                  ],
+                  "pointOklabMSE": 0.018063113242409362,
+                  "usedColors": [
+                    "#010101",
+                    "#60636a"
+                  ],
+                  "usedCount": 2,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k2-auto64-then-per-asset-cap-armor-0.png"
+                  ]
+                },
+                {
+                  "name": "ramp",
+                  "palette": [
+                    "#38332e",
+                    "#adb0b1"
+                  ],
+                  "pointOklabMSE": 0.01880718539572997,
+                  "usedColors": [
+                    "#38332e",
+                    "#adb0b1"
+                  ],
+                  "usedCount": 2,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k2-auto64-then-per-asset-cap-ramp-0.png"
+                  ]
+                },
+                {
+                  "name": "cube",
+                  "palette": [
+                    "#51e3cc",
+                    "#777274"
+                  ],
+                  "pointOklabMSE": 0.03836435818601583,
+                  "usedColors": [
+                    "#777274",
+                    "#51e3cc"
+                  ],
+                  "usedCount": 2,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k2-auto64-then-per-asset-cap-cube-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "direct-shared-k-fit",
+              "pointOklabMSE": 0.029649124988162145,
+              "globalUsedColorUnion": 2,
+              "fitMedianMs": 3.8793000000000575,
+              "selectMedianMs": 0,
+              "coldTotalMedianSumMs": 3.8793000000000575,
+              "assets": [
+                {
+                  "name": "sprite",
+                  "palette": [
+                    "#382b2e",
+                    "#aea695"
+                  ],
+                  "pointOklabMSE": 0.0220196459540765,
+                  "usedColors": [
+                    "#382b2e",
+                    "#aea695"
+                  ],
+                  "usedCount": 2,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k2-direct-shared-k-fit-sprite-0.png"
+                  ]
+                },
+                {
+                  "name": "armor",
+                  "palette": [
+                    "#382b2e",
+                    "#aea695"
+                  ],
+                  "pointOklabMSE": 0.032427111528629586,
+                  "usedColors": [
+                    "#382b2e",
+                    "#aea695"
+                  ],
+                  "usedCount": 2,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k2-direct-shared-k-fit-armor-0.png"
+                  ]
+                },
+                {
+                  "name": "ramp",
+                  "palette": [
+                    "#382b2e",
+                    "#aea695"
+                  ],
+                  "pointOklabMSE": 0.02039061342134861,
+                  "usedColors": [
+                    "#382b2e",
+                    "#aea695"
+                  ],
+                  "usedCount": 2,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k2-direct-shared-k-fit-ramp-0.png"
+                  ]
+                },
+                {
+                  "name": "cube",
+                  "palette": [
+                    "#382b2e",
+                    "#aea695"
+                  ],
+                  "pointOklabMSE": 0.04375912904859389,
+                  "usedColors": [
+                    "#382b2e",
+                    "#aea695"
+                  ],
+                  "usedCount": 2,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k2-direct-shared-k-fit-cube-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "auto64-then-shared-subset-control",
+              "pointOklabMSE": 0.03048655184327828,
+              "globalUsedColorUnion": 2,
+              "fitMedianMs": 28.660000000000082,
+              "selectMedianMs": 36.52819999999997,
+              "coldTotalMedianSumMs": 65.18820000000005,
+              "assets": [
+                {
+                  "name": "sprite",
+                  "palette": [
+                    "#292b2c",
+                    "#9ea5a9"
+                  ],
+                  "pointOklabMSE": 0.026333418385958512,
+                  "usedColors": [
+                    "#292b2c",
+                    "#9ea5a9"
+                  ],
+                  "usedCount": 2,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k2-auto64-then-shared-subset-control-sprite-0.png"
+                  ]
+                },
+                {
+                  "name": "armor",
+                  "palette": [
+                    "#292b2c",
+                    "#9ea5a9"
+                  ],
+                  "pointOklabMSE": 0.029645339535094586,
+                  "usedColors": [
+                    "#292b2c",
+                    "#9ea5a9"
+                  ],
+                  "usedCount": 2,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k2-auto64-then-shared-subset-control-armor-0.png"
+                  ]
+                },
+                {
+                  "name": "ramp",
+                  "palette": [
+                    "#292b2c",
+                    "#9ea5a9"
+                  ],
+                  "pointOklabMSE": 0.020540335147825352,
+                  "usedColors": [
+                    "#292b2c",
+                    "#9ea5a9"
+                  ],
+                  "usedCount": 2,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k2-auto64-then-shared-subset-control-ramp-0.png"
+                  ]
+                },
+                {
+                  "name": "cube",
+                  "palette": [
+                    "#292b2c",
+                    "#9ea5a9"
+                  ],
+                  "pointOklabMSE": 0.04542711430423466,
+                  "usedColors": [
+                    "#292b2c",
+                    "#9ea5a9"
+                  ],
+                  "usedCount": 2,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k2-auto64-then-shared-subset-control-cube-0.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "directFitSamplesMs": [
+            6.781200000000126,
+            3.8793000000000575,
+            3.5728999999998905
+          ],
+          "capSamplesMs": [
+            9.337299999999914,
+            9.223599999999806,
+            9.713500000000067
+          ],
+          "sharedSubsetSamplesMs": [
+            36.52819999999997,
+            29.809999999999945,
+            46.98049999999989
+          ]
+        },
+        {
+          "k": 4,
+          "methods": [
+            {
+              "name": "auto64-then-per-asset-cap",
+              "pointOklabMSE": 0.010444279564164,
+              "globalUsedColorUnion": 15,
+              "fitMedianMs": 28.660000000000082,
+              "selectMedianMs": 9.825600000000122,
+              "coldTotalMedianSumMs": 38.485600000000204,
+              "assets": [
+                {
+                  "name": "sprite",
+                  "palette": [
+                    "#3a1b09",
+                    "#5c361d",
+                    "#915d33",
+                    "#d2b77e"
+                  ],
+                  "pointOklabMSE": 0.008837877102083893,
+                  "usedColors": [
+                    "#5c361d",
+                    "#3a1b09",
+                    "#915d33",
+                    "#d2b77e"
+                  ],
+                  "usedCount": 4,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k4-auto64-then-per-asset-cap-sprite-0.png"
+                  ]
+                },
+                {
+                  "name": "armor",
+                  "palette": [
+                    "#010101",
+                    "#38332e",
+                    "#656e76",
+                    "#adb0b1"
+                  ],
+                  "pointOklabMSE": 0.004640985105411376,
+                  "usedColors": [
+                    "#010101",
+                    "#38332e",
+                    "#656e76",
+                    "#adb0b1"
+                  ],
+                  "usedCount": 4,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k4-auto64-then-per-asset-cap-armor-0.png"
+                  ]
+                },
+                {
+                  "name": "ramp",
+                  "palette": [
+                    "#15110e",
+                    "#434d54",
+                    "#8b8c8a",
+                    "#d5d8dc"
+                  ],
+                  "pointOklabMSE": 0.005075741265303623,
+                  "usedColors": [
+                    "#15110e",
+                    "#434d54",
+                    "#8b8c8a",
+                    "#d5d8dc"
+                  ],
+                  "usedCount": 4,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k4-auto64-then-per-asset-cap-ramp-0.png"
+                  ]
+                },
+                {
+                  "name": "cube",
+                  "palette": [
+                    "#272392",
+                    "#8b8c8a",
+                    "#98f76e",
+                    "#ed5491"
+                  ],
+                  "pointOklabMSE": 0.023222514783857104,
+                  "usedColors": [
+                    "#272392",
+                    "#ed5491",
+                    "#8b8c8a",
+                    "#98f76e"
+                  ],
+                  "usedCount": 4,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k4-auto64-then-per-asset-cap-cube-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "direct-shared-k-fit",
+              "pointOklabMSE": 0.014413512010228462,
+              "globalUsedColorUnion": 4,
+              "fitMedianMs": 5.633399999999938,
+              "selectMedianMs": 0,
+              "coldTotalMedianSumMs": 5.633399999999938,
+              "assets": [
+                {
+                  "name": "sprite",
+                  "palette": [
+                    "#170d0b",
+                    "#5a4952",
+                    "#9d8486",
+                    "#c6d7ac"
+                  ],
+                  "pointOklabMSE": 0.012381412067467455,
+                  "usedColors": [
+                    "#5a4952",
+                    "#170d0b",
+                    "#9d8486",
+                    "#c6d7ac"
+                  ],
+                  "usedCount": 4,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k4-direct-shared-k-fit-sprite-0.png"
+                  ]
+                },
+                {
+                  "name": "armor",
+                  "palette": [
+                    "#170d0b",
+                    "#5a4952",
+                    "#9d8486",
+                    "#c6d7ac"
+                  ],
+                  "pointOklabMSE": 0.010205499801735282,
+                  "usedColors": [
+                    "#170d0b",
+                    "#5a4952",
+                    "#9d8486",
+                    "#c6d7ac"
+                  ],
+                  "usedCount": 4,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k4-direct-shared-k-fit-armor-0.png"
+                  ]
+                },
+                {
+                  "name": "ramp",
+                  "palette": [
+                    "#170d0b",
+                    "#5a4952",
+                    "#9d8486",
+                    "#c6d7ac"
+                  ],
+                  "pointOklabMSE": 0.006901035489031343,
+                  "usedColors": [
+                    "#170d0b",
+                    "#5a4952",
+                    "#9d8486",
+                    "#c6d7ac"
+                  ],
+                  "usedCount": 4,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k4-direct-shared-k-fit-ramp-0.png"
+                  ]
+                },
+                {
+                  "name": "cube",
+                  "palette": [
+                    "#170d0b",
+                    "#5a4952",
+                    "#9d8486",
+                    "#c6d7ac"
+                  ],
+                  "pointOklabMSE": 0.028166100682679766,
+                  "usedColors": [
+                    "#170d0b",
+                    "#5a4952",
+                    "#9d8486",
+                    "#c6d7ac"
+                  ],
+                  "usedCount": 4,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k4-direct-shared-k-fit-cube-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "auto64-then-shared-subset-control",
+              "pointOklabMSE": 0.01541542273599772,
+              "globalUsedColorUnion": 4,
+              "fitMedianMs": 28.660000000000082,
+              "selectMedianMs": 20.961299999999937,
+              "coldTotalMedianSumMs": 49.62130000000002,
+              "assets": [
+                {
+                  "name": "sprite",
+                  "palette": [
+                    "#090a0a",
+                    "#404345",
+                    "#80848c",
+                    "#e4c998"
+                  ],
+                  "pointOklabMSE": 0.014893270409243375,
+                  "usedColors": [
+                    "#404345",
+                    "#80848c",
+                    "#e4c998",
+                    "#090a0a"
+                  ],
+                  "usedCount": 4,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k4-auto64-then-shared-subset-control-sprite-0.png"
+                  ]
+                },
+                {
+                  "name": "armor",
+                  "palette": [
+                    "#090a0a",
+                    "#404345",
+                    "#80848c",
+                    "#e4c998"
+                  ],
+                  "pointOklabMSE": 0.007675400351022318,
+                  "usedColors": [
+                    "#090a0a",
+                    "#404345",
+                    "#e4c998",
+                    "#80848c"
+                  ],
+                  "usedCount": 4,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k4-auto64-then-shared-subset-control-armor-0.png"
+                  ]
+                },
+                {
+                  "name": "ramp",
+                  "palette": [
+                    "#090a0a",
+                    "#404345",
+                    "#80848c",
+                    "#e4c998"
+                  ],
+                  "pointOklabMSE": 0.007304945720007874,
+                  "usedColors": [
+                    "#090a0a",
+                    "#404345",
+                    "#80848c",
+                    "#e4c998"
+                  ],
+                  "usedCount": 4,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k4-auto64-then-shared-subset-control-ramp-0.png"
+                  ]
+                },
+                {
+                  "name": "cube",
+                  "palette": [
+                    "#090a0a",
+                    "#404345",
+                    "#80848c",
+                    "#e4c998"
+                  ],
+                  "pointOklabMSE": 0.03178807446371731,
+                  "usedColors": [
+                    "#090a0a",
+                    "#404345",
+                    "#80848c",
+                    "#e4c998"
+                  ],
+                  "usedCount": 4,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k4-auto64-then-shared-subset-control-cube-0.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "directFitSamplesMs": [
+            8.120800000000145,
+            5.633399999999938,
+            4.768699999999853
+          ],
+          "capSamplesMs": [
+            9.930599999999913,
+            9.728599999999915,
+            9.825600000000122
+          ],
+          "sharedSubsetSamplesMs": [
+            17.28520000000003,
+            53.05479999999989,
+            20.961299999999937
+          ]
+        },
+        {
+          "k": 8,
+          "methods": [
+            {
+              "name": "auto64-then-per-asset-cap",
+              "pointOklabMSE": 0.005083848957536728,
+              "globalUsedColorUnion": 27,
+              "fitMedianMs": 28.660000000000082,
+              "selectMedianMs": 21.21439999999984,
+              "coldTotalMedianSumMs": 49.87439999999992,
+              "assets": [
+                {
+                  "name": "sprite",
+                  "palette": [
+                    "#3a1b09",
+                    "#515c66",
+                    "#5c361d",
+                    "#915d33",
+                    "#a98e5b",
+                    "#bc263f",
+                    "#e4c998",
+                    "#f3e548"
+                  ],
+                  "pointOklabMSE": 0.00458046039516985,
+                  "usedColors": [
+                    "#5c361d",
+                    "#3a1b09",
+                    "#a98e5b",
+                    "#915d33",
+                    "#f3e548",
+                    "#e4c998",
+                    "#515c66",
+                    "#bc263f"
+                  ],
+                  "usedCount": 8,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k8-auto64-then-per-asset-cap-sprite-0.png"
+                  ]
+                },
+                {
+                  "name": "armor",
+                  "palette": [
+                    "#010101",
+                    "#15110e",
+                    "#353a40",
+                    "#3a1b09",
+                    "#515c66",
+                    "#727d81",
+                    "#9ea5a9",
+                    "#c3c9cb"
+                  ],
+                  "pointOklabMSE": 0.001911843542986634,
+                  "usedColors": [
+                    "#010101",
+                    "#353a40",
+                    "#15110e",
+                    "#3a1b09",
+                    "#515c66",
+                    "#9ea5a9",
+                    "#727d81",
+                    "#c3c9cb"
+                  ],
+                  "usedCount": 8,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k8-auto64-then-per-asset-cap-armor-0.png"
+                  ]
+                },
+                {
+                  "name": "ramp",
+                  "palette": [
+                    "#040409",
+                    "#25201f",
+                    "#404345",
+                    "#60636a",
+                    "#8b8c8a",
+                    "#adb0b1",
+                    "#d5d8dc",
+                    "#f9faf5"
+                  ],
+                  "pointOklabMSE": 0.0015004465665959014,
+                  "usedColors": [
+                    "#040409",
+                    "#25201f",
+                    "#404345",
+                    "#60636a",
+                    "#8b8c8a",
+                    "#adb0b1",
+                    "#d5d8dc",
+                    "#f9faf5"
+                  ],
+                  "usedCount": 8,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k8-auto64-then-per-asset-cap-ramp-0.png"
+                  ]
+                },
+                {
+                  "name": "cube",
+                  "palette": [
+                    "#353a40",
+                    "#4a3fdf",
+                    "#57b646",
+                    "#727d81",
+                    "#98f76e",
+                    "#c3c9cb",
+                    "#cb45da",
+                    "#df3535"
+                  ],
+                  "pointOklabMSE": 0.012342645325394527,
+                  "usedColors": [
+                    "#353a40",
+                    "#df3535",
+                    "#727d81",
+                    "#57b646",
+                    "#c3c9cb",
+                    "#98f76e",
+                    "#cb45da",
+                    "#4a3fdf"
+                  ],
+                  "usedCount": 8,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k8-auto64-then-per-asset-cap-cube-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "direct-shared-k-fit",
+              "pointOklabMSE": 0.008493662371255529,
+              "globalUsedColorUnion": 8,
+              "fitMedianMs": 6.438100000000077,
+              "selectMedianMs": 0,
+              "coldTotalMedianSumMs": 6.438100000000077,
+              "assets": [
+                {
+                  "name": "sprite",
+                  "palette": [
+                    "#040303",
+                    "#352522",
+                    "#544f5e",
+                    "#787f76",
+                    "#a6dc58",
+                    "#b1a49c",
+                    "#c33a6f",
+                    "#d9ddd3"
+                  ],
+                  "pointOklabMSE": 0.008804716086563668,
+                  "usedColors": [
+                    "#352522",
+                    "#544f5e",
+                    "#b1a49c",
+                    "#787f76",
+                    "#a6dc58",
+                    "#d9ddd3",
+                    "#040303",
+                    "#c33a6f"
+                  ],
+                  "usedCount": 8,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k8-direct-shared-k-fit-sprite-0.png"
+                  ]
+                },
+                {
+                  "name": "armor",
+                  "palette": [
+                    "#040303",
+                    "#352522",
+                    "#544f5e",
+                    "#787f76",
+                    "#a6dc58",
+                    "#b1a49c",
+                    "#c33a6f",
+                    "#d9ddd3"
+                  ],
+                  "pointOklabMSE": 0.0039208601163357205,
+                  "usedColors": [
+                    "#040303",
+                    "#544f5e",
+                    "#352522",
+                    "#b1a49c",
+                    "#787f76",
+                    "#d9ddd3"
+                  ],
+                  "usedCount": 6,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k8-direct-shared-k-fit-armor-0.png"
+                  ]
+                },
+                {
+                  "name": "ramp",
+                  "palette": [
+                    "#040303",
+                    "#352522",
+                    "#544f5e",
+                    "#787f76",
+                    "#a6dc58",
+                    "#b1a49c",
+                    "#c33a6f",
+                    "#d9ddd3"
+                  ],
+                  "pointOklabMSE": 0.0029636163522116362,
+                  "usedColors": [
+                    "#040303",
+                    "#352522",
+                    "#544f5e",
+                    "#787f76",
+                    "#b1a49c",
+                    "#d9ddd3"
+                  ],
+                  "usedCount": 6,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k8-direct-shared-k-fit-ramp-0.png"
+                  ]
+                },
+                {
+                  "name": "cube",
+                  "palette": [
+                    "#040303",
+                    "#352522",
+                    "#544f5e",
+                    "#787f76",
+                    "#a6dc58",
+                    "#b1a49c",
+                    "#c33a6f",
+                    "#d9ddd3"
+                  ],
+                  "pointOklabMSE": 0.018285456929911088,
+                  "usedColors": [
+                    "#040303",
+                    "#352522",
+                    "#544f5e",
+                    "#c33a6f",
+                    "#787f76",
+                    "#b1a49c",
+                    "#a6dc58",
+                    "#d9ddd3"
+                  ],
+                  "usedCount": 8,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k8-direct-shared-k-fit-cube-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "auto64-then-shared-subset-control",
+              "pointOklabMSE": 0.008603044863765896,
+              "globalUsedColorUnion": 8,
+              "fitMedianMs": 28.660000000000082,
+              "selectMedianMs": 15.27579999999989,
+              "coldTotalMedianSumMs": 43.93579999999997,
+              "assets": [
+                {
+                  "name": "sprite",
+                  "palette": [
+                    "#010101",
+                    "#25201f",
+                    "#4a3fdf",
+                    "#525554",
+                    "#8b8c8a",
+                    "#98f76e",
+                    "#bc263f",
+                    "#d5d8dc"
+                  ],
+                  "pointOklabMSE": 0.009436814462584524,
+                  "usedColors": [
+                    "#525554",
+                    "#25201f",
+                    "#8b8c8a",
+                    "#bc263f",
+                    "#98f76e",
+                    "#d5d8dc",
+                    "#010101"
+                  ],
+                  "usedCount": 7,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k8-auto64-then-shared-subset-control-sprite-0.png"
+                  ]
+                },
+                {
+                  "name": "armor",
+                  "palette": [
+                    "#010101",
+                    "#25201f",
+                    "#4a3fdf",
+                    "#525554",
+                    "#8b8c8a",
+                    "#98f76e",
+                    "#bc263f",
+                    "#d5d8dc"
+                  ],
+                  "pointOklabMSE": 0.003828722160463834,
+                  "usedColors": [
+                    "#010101",
+                    "#525554",
+                    "#25201f",
+                    "#8b8c8a",
+                    "#d5d8dc"
+                  ],
+                  "usedCount": 5,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k8-auto64-then-shared-subset-control-armor-0.png"
+                  ]
+                },
+                {
+                  "name": "ramp",
+                  "palette": [
+                    "#010101",
+                    "#25201f",
+                    "#4a3fdf",
+                    "#525554",
+                    "#8b8c8a",
+                    "#98f76e",
+                    "#bc263f",
+                    "#d5d8dc"
+                  ],
+                  "pointOklabMSE": 0.004087303244982558,
+                  "usedColors": [
+                    "#010101",
+                    "#25201f",
+                    "#525554",
+                    "#8b8c8a",
+                    "#d5d8dc"
+                  ],
+                  "usedCount": 5,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k8-auto64-then-shared-subset-control-ramp-0.png"
+                  ]
+                },
+                {
+                  "name": "cube",
+                  "palette": [
+                    "#010101",
+                    "#25201f",
+                    "#4a3fdf",
+                    "#525554",
+                    "#8b8c8a",
+                    "#98f76e",
+                    "#bc263f",
+                    "#d5d8dc"
+                  ],
+                  "pointOklabMSE": 0.017059339587032665,
+                  "usedColors": [
+                    "#010101",
+                    "#25201f",
+                    "#bc263f",
+                    "#525554",
+                    "#8b8c8a",
+                    "#d5d8dc",
+                    "#98f76e",
+                    "#4a3fdf"
+                  ],
+                  "usedCount": 8,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k8-auto64-then-shared-subset-control-cube-0.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "directFitSamplesMs": [
+            9.45010000000002,
+            6.438100000000077,
+            4.560699999999997
+          ],
+          "capSamplesMs": [
+            45.59480000000008,
+            21.21439999999984,
+            14.810600000000022
+          ],
+          "sharedSubsetSamplesMs": [
+            15.27579999999989,
+            17.235599999999977,
+            15.170999999999822
+          ]
+        },
+        {
+          "k": 16,
+          "methods": [
+            {
+              "name": "auto64-then-per-asset-cap",
+              "pointOklabMSE": 0.002816394788453544,
+              "globalUsedColorUnion": 50,
+              "fitMedianMs": 28.660000000000082,
+              "selectMedianMs": 19.437799999999925,
+              "coldTotalMedianSumMs": 48.09780000000001,
+              "assets": [
+                {
+                  "name": "sprite",
+                  "palette": [
+                    "#171a21",
+                    "#353a40",
+                    "#3a1b09",
+                    "#3c8538",
+                    "#515c66",
+                    "#5c361d",
+                    "#764526",
+                    "#8c959d",
+                    "#915d33",
+                    "#a31b26",
+                    "#a98e5b",
+                    "#d5d8dc",
+                    "#df3535",
+                    "#e4c998",
+                    "#eca82b",
+                    "#f3e548"
+                  ],
+                  "pointOklabMSE": 0.0023298172993909405,
+                  "usedColors": [
+                    "#5c361d",
+                    "#3a1b09",
+                    "#a98e5b",
+                    "#915d33",
+                    "#f3e548",
+                    "#171a21",
+                    "#eca82b",
+                    "#3c8538",
+                    "#353a40",
+                    "#d5d8dc",
+                    "#8c959d",
+                    "#764526",
+                    "#e4c998",
+                    "#515c66",
+                    "#df3535",
+                    "#a31b26"
+                  ],
+                  "usedCount": 16,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k16-auto64-then-per-asset-cap-sprite-0.png"
+                  ]
+                },
+                {
+                  "name": "armor",
+                  "palette": [
+                    "#010101",
+                    "#040409",
+                    "#15110e",
+                    "#292b2c",
+                    "#353a40",
+                    "#3a1b09",
+                    "#434d54",
+                    "#515c66",
+                    "#5c361d",
+                    "#60636a",
+                    "#727d81",
+                    "#80848c",
+                    "#8c959d",
+                    "#9ea5a9",
+                    "#c3c9cb",
+                    "#d5d8dc"
+                  ],
+                  "pointOklabMSE": 0.001186459957680713,
+                  "usedColors": [
+                    "#040409",
+                    "#010101",
+                    "#5c361d",
+                    "#15110e",
+                    "#3a1b09",
+                    "#515c66",
+                    "#353a40",
+                    "#292b2c",
+                    "#434d54",
+                    "#9ea5a9",
+                    "#727d81",
+                    "#8c959d",
+                    "#80848c",
+                    "#60636a",
+                    "#d5d8dc",
+                    "#c3c9cb"
+                  ],
+                  "usedCount": 16,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k16-auto64-then-per-asset-cap-armor-0.png"
+                  ]
+                },
+                {
+                  "name": "ramp",
+                  "palette": [
+                    "#010101",
+                    "#090a0a",
+                    "#15110e",
+                    "#25201f",
+                    "#38332e",
+                    "#404345",
+                    "#525554",
+                    "#60636a",
+                    "#777274",
+                    "#8b8c8a",
+                    "#a399a1",
+                    "#adb0b1",
+                    "#c3c9cb",
+                    "#d5d8dc",
+                    "#ecedee",
+                    "#f9faf5"
+                  ],
+                  "pointOklabMSE": 0.0004537397857089466,
+                  "usedColors": [
+                    "#010101",
+                    "#090a0a",
+                    "#15110e",
+                    "#25201f",
+                    "#38332e",
+                    "#404345",
+                    "#525554",
+                    "#60636a",
+                    "#777274",
+                    "#8b8c8a",
+                    "#a399a1",
+                    "#adb0b1",
+                    "#c3c9cb",
+                    "#d5d8dc",
+                    "#ecedee",
+                    "#f9faf5"
+                  ],
+                  "usedCount": 16,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k16-auto64-then-per-asset-cap-ramp-0.png"
+                  ]
+                },
+                {
+                  "name": "cube",
+                  "palette": [
+                    "#272392",
+                    "#38332e",
+                    "#3c8538",
+                    "#4a3fdf",
+                    "#51e3cc",
+                    "#57b646",
+                    "#5b85e5",
+                    "#5de849",
+                    "#656e76",
+                    "#832a8c",
+                    "#bc263f",
+                    "#c3b7c9",
+                    "#cb45da",
+                    "#d57d33",
+                    "#ed5491",
+                    "#f3e548"
+                  ],
+                  "pointOklabMSE": 0.007295562111033576,
+                  "usedColors": [
+                    "#38332e",
+                    "#bc263f",
+                    "#ed5491",
+                    "#d57d33",
+                    "#656e76",
+                    "#3c8538",
+                    "#57b646",
+                    "#f3e548",
+                    "#5de849",
+                    "#272392",
+                    "#832a8c",
+                    "#c3b7c9",
+                    "#51e3cc",
+                    "#cb45da",
+                    "#4a3fdf",
+                    "#5b85e5"
+                  ],
+                  "usedCount": 16,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k16-auto64-then-per-asset-cap-cube-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "direct-shared-k-fit",
+              "pointOklabMSE": 0.004783560981238806,
+              "globalUsedColorUnion": 16,
+              "fitMedianMs": 8.57120000000009,
+              "selectMedianMs": 0,
+              "coldTotalMedianSumMs": 8.57120000000009,
+              "assets": [
+                {
+                  "name": "sprite",
+                  "palette": [
+                    "#020101",
+                    "#1b1211",
+                    "#372521",
+                    "#4d3f3c",
+                    "#53ac4b",
+                    "#583fc9",
+                    "#645e55",
+                    "#777f84",
+                    "#989fb3",
+                    "#a5ed62",
+                    "#b6c2c7",
+                    "#c47f45",
+                    "#c63260",
+                    "#d3dfd9",
+                    "#e2ba70",
+                    "#f4f5f1"
+                  ],
+                  "pointOklabMSE": 0.004750771146975848,
+                  "usedColors": [
+                    "#4d3f3c",
+                    "#372521",
+                    "#c47f45",
+                    "#a5ed62",
+                    "#645e55",
+                    "#e2ba70",
+                    "#1b1211",
+                    "#53ac4b",
+                    "#d3dfd9",
+                    "#b6c2c7",
+                    "#989fb3",
+                    "#777f84",
+                    "#c63260",
+                    "#f4f5f1",
+                    "#583fc9"
+                  ],
+                  "usedCount": 15,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k16-direct-shared-k-fit-sprite-0.png"
+                  ]
+                },
+                {
+                  "name": "armor",
+                  "palette": [
+                    "#020101",
+                    "#1b1211",
+                    "#372521",
+                    "#4d3f3c",
+                    "#53ac4b",
+                    "#583fc9",
+                    "#645e55",
+                    "#777f84",
+                    "#989fb3",
+                    "#a5ed62",
+                    "#b6c2c7",
+                    "#c47f45",
+                    "#c63260",
+                    "#d3dfd9",
+                    "#e2ba70",
+                    "#f4f5f1"
+                  ],
+                  "pointOklabMSE": 0.0021867292916526357,
+                  "usedColors": [
+                    "#020101",
+                    "#4d3f3c",
+                    "#1b1211",
+                    "#372521",
+                    "#645e55",
+                    "#989fb3",
+                    "#777f84",
+                    "#f4f5f1",
+                    "#b6c2c7",
+                    "#d3dfd9"
+                  ],
+                  "usedCount": 10,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k16-direct-shared-k-fit-armor-0.png"
+                  ]
+                },
+                {
+                  "name": "ramp",
+                  "palette": [
+                    "#020101",
+                    "#1b1211",
+                    "#372521",
+                    "#4d3f3c",
+                    "#53ac4b",
+                    "#583fc9",
+                    "#645e55",
+                    "#777f84",
+                    "#989fb3",
+                    "#a5ed62",
+                    "#b6c2c7",
+                    "#c47f45",
+                    "#c63260",
+                    "#d3dfd9",
+                    "#e2ba70",
+                    "#f4f5f1"
+                  ],
+                  "pointOklabMSE": 0.0012731847118782214,
+                  "usedColors": [
+                    "#020101",
+                    "#1b1211",
+                    "#372521",
+                    "#4d3f3c",
+                    "#645e55",
+                    "#777f84",
+                    "#989fb3",
+                    "#b6c2c7",
+                    "#d3dfd9",
+                    "#f4f5f1"
+                  ],
+                  "usedCount": 10,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k16-direct-shared-k-fit-ramp-0.png"
+                  ]
+                },
+                {
+                  "name": "cube",
+                  "palette": [
+                    "#020101",
+                    "#1b1211",
+                    "#372521",
+                    "#4d3f3c",
+                    "#53ac4b",
+                    "#583fc9",
+                    "#645e55",
+                    "#777f84",
+                    "#989fb3",
+                    "#a5ed62",
+                    "#b6c2c7",
+                    "#c47f45",
+                    "#c63260",
+                    "#d3dfd9",
+                    "#e2ba70",
+                    "#f4f5f1"
+                  ],
+                  "pointOklabMSE": 0.010923558774448519,
+                  "usedColors": [
+                    "#020101",
+                    "#1b1211",
+                    "#372521",
+                    "#4d3f3c",
+                    "#c63260",
+                    "#645e55",
+                    "#c47f45",
+                    "#777f84",
+                    "#53ac4b",
+                    "#e2ba70",
+                    "#a5ed62",
+                    "#583fc9",
+                    "#989fb3",
+                    "#b6c2c7",
+                    "#d3dfd9",
+                    "#f4f5f1"
+                  ],
+                  "usedCount": 16,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k16-direct-shared-k-fit-cube-0.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "auto64-then-shared-subset-control",
+              "pointOklabMSE": 0.004429839821589392,
+              "globalUsedColorUnion": 16,
+              "fitMedianMs": 28.660000000000082,
+              "selectMedianMs": 19.999700000000075,
+              "coldTotalMedianSumMs": 48.65970000000016,
+              "assets": [
+                {
+                  "name": "sprite",
+                  "palette": [
+                    "#010101",
+                    "#15110e",
+                    "#353a40",
+                    "#3a1b09",
+                    "#4a3fdf",
+                    "#515c66",
+                    "#57b646",
+                    "#764526",
+                    "#80848c",
+                    "#98f76e",
+                    "#adb0b1",
+                    "#bc263f",
+                    "#cb45da",
+                    "#d57d33",
+                    "#e4c998",
+                    "#e7e4d9"
+                  ],
+                  "pointOklabMSE": 0.004175736882385619,
+                  "usedColors": [
+                    "#764526",
+                    "#353a40",
+                    "#3a1b09",
+                    "#d57d33",
+                    "#98f76e",
+                    "#e4c998",
+                    "#15110e",
+                    "#57b646",
+                    "#e7e4d9",
+                    "#adb0b1",
+                    "#80848c",
+                    "#515c66",
+                    "#bc263f"
+                  ],
+                  "usedCount": 13,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k16-auto64-then-shared-subset-control-sprite-0.png"
+                  ]
+                },
+                {
+                  "name": "armor",
+                  "palette": [
+                    "#010101",
+                    "#15110e",
+                    "#353a40",
+                    "#3a1b09",
+                    "#4a3fdf",
+                    "#515c66",
+                    "#57b646",
+                    "#764526",
+                    "#80848c",
+                    "#98f76e",
+                    "#adb0b1",
+                    "#bc263f",
+                    "#cb45da",
+                    "#d57d33",
+                    "#e4c998",
+                    "#e7e4d9"
+                  ],
+                  "pointOklabMSE": 0.0018540674464956072,
+                  "usedColors": [
+                    "#010101",
+                    "#353a40",
+                    "#15110e",
+                    "#3a1b09",
+                    "#515c66",
+                    "#764526",
+                    "#adb0b1",
+                    "#80848c",
+                    "#e7e4d9"
+                  ],
+                  "usedCount": 9,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k16-auto64-then-shared-subset-control-armor-0.png"
+                  ]
+                },
+                {
+                  "name": "ramp",
+                  "palette": [
+                    "#010101",
+                    "#15110e",
+                    "#353a40",
+                    "#3a1b09",
+                    "#4a3fdf",
+                    "#515c66",
+                    "#57b646",
+                    "#764526",
+                    "#80848c",
+                    "#98f76e",
+                    "#adb0b1",
+                    "#bc263f",
+                    "#cb45da",
+                    "#d57d33",
+                    "#e4c998",
+                    "#e7e4d9"
+                  ],
+                  "pointOklabMSE": 0.0020178591309115545,
+                  "usedColors": [
+                    "#010101",
+                    "#15110e",
+                    "#3a1b09",
+                    "#353a40",
+                    "#515c66",
+                    "#80848c",
+                    "#adb0b1",
+                    "#e4c998",
+                    "#e7e4d9"
+                  ],
+                  "usedCount": 9,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k16-auto64-then-shared-subset-control-ramp-0.png"
+                  ]
+                },
+                {
+                  "name": "cube",
+                  "palette": [
+                    "#010101",
+                    "#15110e",
+                    "#353a40",
+                    "#3a1b09",
+                    "#4a3fdf",
+                    "#515c66",
+                    "#57b646",
+                    "#764526",
+                    "#80848c",
+                    "#98f76e",
+                    "#adb0b1",
+                    "#bc263f",
+                    "#cb45da",
+                    "#d57d33",
+                    "#e4c998",
+                    "#e7e4d9"
+                  ],
+                  "pointOklabMSE": 0.009671695826564786,
+                  "usedColors": [
+                    "#010101",
+                    "#15110e",
+                    "#3a1b09",
+                    "#764526",
+                    "#bc263f",
+                    "#353a40",
+                    "#d57d33",
+                    "#515c66",
+                    "#80848c",
+                    "#57b646",
+                    "#e4c998",
+                    "#98f76e",
+                    "#adb0b1",
+                    "#4a3fdf",
+                    "#cb45da",
+                    "#e7e4d9"
+                  ],
+                  "usedCount": 16,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "whole-wall-k16-auto64-then-shared-subset-control-cube-0.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "directFitSamplesMs": [
+            11.85290000000009,
+            8.57120000000009,
+            6.826500000000124
+          ],
+          "capSamplesMs": [
+            19.41579999999999,
+            19.437799999999925,
+            19.455099999999902
+          ],
+          "sharedSubsetSamplesMs": [
+            20.33030000000008,
+            19.999700000000075,
+            19.80880000000002
+          ]
+        }
+      ]
+    },
+    {
+      "name": "duration-weighted-clip",
+      "auto64Colors": [
+        "#000000",
+        "#000001",
+        "#000408",
+        "#010000",
+        "#010100",
+        "#050404",
+        "#070301",
+        "#080909",
+        "#0e1013",
+        "#190001",
+        "#1a1e21",
+        "#1c1202",
+        "#1e0508",
+        "#271013",
+        "#282b2f",
+        "#2b333e",
+        "#322112",
+        "#323941",
+        "#331e21",
+        "#340b00",
+        "#355056",
+        "#36413e",
+        "#3b1400",
+        "#3b444d",
+        "#3c3124",
+        "#3f2117",
+        "#412b2f",
+        "#44333e",
+        "#482300",
+        "#4a4e55",
+        "#4b3941",
+        "#4b4431",
+        "#4e4243",
+        "#511b00",
+        "#515859",
+        "#515c66",
+        "#543b25",
+        "#54444d",
+        "#5b636f",
+        "#604d54",
+        "#6a5859",
+        "#6a5d66",
+        "#6d6f77",
+        "#6e637f",
+        "#737d82",
+        "#76636b",
+        "#7d858e",
+        "#7f3000",
+        "#827176",
+        "#8396a3",
+        "#8c7d82",
+        "#96858e",
+        "#9aa4ab",
+        "#9c96a3",
+        "#a3afb1",
+        "#b3a4ab",
+        "#b6bec6",
+        "#bcafb1",
+        "#bfcad0",
+        "#cbd9df",
+        "#cfbec6",
+        "#d8cad0",
+        "#e4d9df",
+        "#f5edf0"
+      ],
+      "auto64FitSamplesMs": [
+        1.027900000000045,
+        0.982300000000123,
+        0.9716000000003078
+      ],
+      "auto64FitMedianMs": 0.982300000000123,
+      "rows": [
+        {
+          "k": 2,
+          "methods": [
+            {
+              "name": "auto64-then-per-asset-cap",
+              "pointOklabMSE": 0.01802074085831562,
+              "globalUsedColorUnion": 2,
+              "fitMedianMs": 0.982300000000123,
+              "selectMedianMs": 2.115900000000238,
+              "coldTotalMedianSumMs": 3.098200000000361,
+              "assets": [
+                {
+                  "name": "held-armor-clip",
+                  "palette": [
+                    "#070301",
+                    "#6d6f77"
+                  ],
+                  "pointOklabMSE": 0.01802074085831562,
+                  "usedColors": [
+                    "#070301",
+                    "#6d6f77"
+                  ],
+                  "usedCount": 2,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "duration-weighted-clip-k2-auto64-then-per-asset-cap-held-armor-clip-0.png",
+                    "duration-weighted-clip-k2-auto64-then-per-asset-cap-held-armor-clip-1.png",
+                    "duration-weighted-clip-k2-auto64-then-per-asset-cap-held-armor-clip-2.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "direct-shared-k-fit",
+              "pointOklabMSE": 0.017980781805351915,
+              "globalUsedColorUnion": 2,
+              "fitMedianMs": 0.15419999999994616,
+              "selectMedianMs": 0,
+              "coldTotalMedianSumMs": 0.15419999999994616,
+              "assets": [
+                {
+                  "name": "held-armor-clip",
+                  "palette": [
+                    "#070201",
+                    "#70696f"
+                  ],
+                  "pointOklabMSE": 0.017980781805351915,
+                  "usedColors": [
+                    "#070201",
+                    "#70696f"
+                  ],
+                  "usedCount": 2,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "duration-weighted-clip-k2-direct-shared-k-fit-held-armor-clip-0.png",
+                    "duration-weighted-clip-k2-direct-shared-k-fit-held-armor-clip-1.png",
+                    "duration-weighted-clip-k2-direct-shared-k-fit-held-armor-clip-2.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "auto64-then-shared-subset-control",
+              "pointOklabMSE": 0.01802074085831562,
+              "globalUsedColorUnion": 2,
+              "fitMedianMs": 0.982300000000123,
+              "selectMedianMs": 0.6432999999997264,
+              "coldTotalMedianSumMs": 1.6255999999998494,
+              "assets": [
+                {
+                  "name": "held-armor-clip",
+                  "palette": [
+                    "#070301",
+                    "#6d6f77"
+                  ],
+                  "pointOklabMSE": 0.01802074085831562,
+                  "usedColors": [
+                    "#070301",
+                    "#6d6f77"
+                  ],
+                  "usedCount": 2,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "duration-weighted-clip-k2-auto64-then-shared-subset-control-held-armor-clip-0.png",
+                    "duration-weighted-clip-k2-auto64-then-shared-subset-control-held-armor-clip-1.png",
+                    "duration-weighted-clip-k2-auto64-then-shared-subset-control-held-armor-clip-2.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "directFitSamplesMs": [
+            0.1956000000000131,
+            0.15419999999994616,
+            0.13779999999997017
+          ],
+          "capSamplesMs": [
+            2.5023999999998523,
+            2.115900000000238,
+            1.8865000000000691
+          ],
+          "sharedSubsetSamplesMs": [
+            0.7026000000000749,
+            0.6365999999998166,
+            0.6432999999997264
+          ]
+        },
+        {
+          "k": 4,
+          "methods": [
+            {
+              "name": "auto64-then-per-asset-cap",
+              "pointOklabMSE": 0.005257810123026913,
+              "globalUsedColorUnion": 4,
+              "fitMedianMs": 0.982300000000123,
+              "selectMedianMs": 0.8607999999999265,
+              "coldTotalMedianSumMs": 1.8431000000000495,
+              "assets": [
+                {
+                  "name": "held-armor-clip",
+                  "palette": [
+                    "#010100",
+                    "#412b2f",
+                    "#6d6f77",
+                    "#b6bec6"
+                  ],
+                  "pointOklabMSE": 0.005257810123026913,
+                  "usedColors": [
+                    "#010100",
+                    "#412b2f",
+                    "#6d6f77",
+                    "#b6bec6"
+                  ],
+                  "usedCount": 4,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "duration-weighted-clip-k4-auto64-then-per-asset-cap-held-armor-clip-0.png",
+                    "duration-weighted-clip-k4-auto64-then-per-asset-cap-held-armor-clip-1.png",
+                    "duration-weighted-clip-k4-auto64-then-per-asset-cap-held-armor-clip-2.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "direct-shared-k-fit",
+              "pointOklabMSE": 0.005590690056672399,
+              "globalUsedColorUnion": 4,
+              "fitMedianMs": 0.3095000000002983,
+              "selectMedianMs": 0,
+              "coldTotalMedianSumMs": 0.3095000000002983,
+              "assets": [
+                {
+                  "name": "held-armor-clip",
+                  "palette": [
+                    "#010100",
+                    "#3f2d2b",
+                    "#646269",
+                    "#a29ca3"
+                  ],
+                  "pointOklabMSE": 0.005590690056672399,
+                  "usedColors": [
+                    "#010100",
+                    "#3f2d2b",
+                    "#646269",
+                    "#a29ca3"
+                  ],
+                  "usedCount": 4,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "duration-weighted-clip-k4-direct-shared-k-fit-held-armor-clip-0.png",
+                    "duration-weighted-clip-k4-direct-shared-k-fit-held-armor-clip-1.png",
+                    "duration-weighted-clip-k4-direct-shared-k-fit-held-armor-clip-2.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "auto64-then-shared-subset-control",
+              "pointOklabMSE": 0.005257810123026913,
+              "globalUsedColorUnion": 4,
+              "fitMedianMs": 0.982300000000123,
+              "selectMedianMs": 0.8611000000000786,
+              "coldTotalMedianSumMs": 1.8434000000002015,
+              "assets": [
+                {
+                  "name": "held-armor-clip",
+                  "palette": [
+                    "#010100",
+                    "#412b2f",
+                    "#6d6f77",
+                    "#b6bec6"
+                  ],
+                  "pointOklabMSE": 0.005257810123026913,
+                  "usedColors": [
+                    "#010100",
+                    "#412b2f",
+                    "#6d6f77",
+                    "#b6bec6"
+                  ],
+                  "usedCount": 4,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "duration-weighted-clip-k4-auto64-then-shared-subset-control-held-armor-clip-0.png",
+                    "duration-weighted-clip-k4-auto64-then-shared-subset-control-held-armor-clip-1.png",
+                    "duration-weighted-clip-k4-auto64-then-shared-subset-control-held-armor-clip-2.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "directFitSamplesMs": [
+            0.3095000000002983,
+            0.36679999999978463,
+            0.239100000000235
+          ],
+          "capSamplesMs": [
+            0.8936000000003332,
+            0.8607999999999265,
+            0.8318999999996777
+          ],
+          "sharedSubsetSamplesMs": [
+            1.065900000000056,
+            0.8611000000000786,
+            0.8461999999999534
+          ]
+        },
+        {
+          "k": 8,
+          "methods": [
+            {
+              "name": "auto64-then-per-asset-cap",
+              "pointOklabMSE": 0.0016231748108689159,
+              "globalUsedColorUnion": 8,
+              "fitMedianMs": 0.982300000000123,
+              "selectMedianMs": 1.0491000000001804,
+              "coldTotalMedianSumMs": 2.0314000000003034,
+              "assets": [
+                {
+                  "name": "held-armor-clip",
+                  "palette": [
+                    "#000000",
+                    "#050404",
+                    "#271013",
+                    "#412b2f",
+                    "#4e4243",
+                    "#6a5d66",
+                    "#7d858e",
+                    "#cfbec6"
+                  ],
+                  "pointOklabMSE": 0.0016231748108689159,
+                  "usedColors": [
+                    "#050404",
+                    "#000000",
+                    "#4e4243",
+                    "#271013",
+                    "#412b2f",
+                    "#6a5d66",
+                    "#cfbec6",
+                    "#7d858e"
+                  ],
+                  "usedCount": 8,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "duration-weighted-clip-k8-auto64-then-per-asset-cap-held-armor-clip-0.png",
+                    "duration-weighted-clip-k8-auto64-then-per-asset-cap-held-armor-clip-1.png",
+                    "duration-weighted-clip-k8-auto64-then-per-asset-cap-held-armor-clip-2.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "direct-shared-k-fit",
+              "pointOklabMSE": 0.0014824608501786928,
+              "globalUsedColorUnion": 8,
+              "fitMedianMs": 0.3056000000001404,
+              "selectMedianMs": 0,
+              "coldTotalMedianSumMs": 0.3056000000001404,
+              "assets": [
+                {
+                  "name": "held-armor-clip",
+                  "palette": [
+                    "#000000",
+                    "#060302",
+                    "#1d0e0b",
+                    "#3a1b0d",
+                    "#453c3f",
+                    "#625c65",
+                    "#87848b",
+                    "#c7c1c7"
+                  ],
+                  "pointOklabMSE": 0.0014824608501786928,
+                  "usedColors": [
+                    "#060302",
+                    "#000000",
+                    "#453c3f",
+                    "#1d0e0b",
+                    "#3a1b0d",
+                    "#625c65",
+                    "#c7c1c7",
+                    "#87848b"
+                  ],
+                  "usedCount": 8,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "duration-weighted-clip-k8-direct-shared-k-fit-held-armor-clip-0.png",
+                    "duration-weighted-clip-k8-direct-shared-k-fit-held-armor-clip-1.png",
+                    "duration-weighted-clip-k8-direct-shared-k-fit-held-armor-clip-2.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "auto64-then-shared-subset-control",
+              "pointOklabMSE": 0.0016231748108689159,
+              "globalUsedColorUnion": 8,
+              "fitMedianMs": 0.982300000000123,
+              "selectMedianMs": 1.0604000000002998,
+              "coldTotalMedianSumMs": 2.0427000000004227,
+              "assets": [
+                {
+                  "name": "held-armor-clip",
+                  "palette": [
+                    "#000000",
+                    "#050404",
+                    "#271013",
+                    "#412b2f",
+                    "#4e4243",
+                    "#6a5d66",
+                    "#7d858e",
+                    "#cfbec6"
+                  ],
+                  "pointOklabMSE": 0.0016231748108689159,
+                  "usedColors": [
+                    "#050404",
+                    "#000000",
+                    "#4e4243",
+                    "#271013",
+                    "#412b2f",
+                    "#6a5d66",
+                    "#cfbec6",
+                    "#7d858e"
+                  ],
+                  "usedCount": 8,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "duration-weighted-clip-k8-auto64-then-shared-subset-control-held-armor-clip-0.png",
+                    "duration-weighted-clip-k8-auto64-then-shared-subset-control-held-armor-clip-1.png",
+                    "duration-weighted-clip-k8-auto64-then-shared-subset-control-held-armor-clip-2.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "directFitSamplesMs": [
+            0.3645000000001346,
+            0.2905000000000655,
+            0.3056000000001404
+          ],
+          "capSamplesMs": [
+            1.064600000000155,
+            1.0491000000001804,
+            1.014299999999821
+          ],
+          "sharedSubsetSamplesMs": [
+            1.0604000000002998,
+            1.0349999999998545,
+            1.2234000000003107
+          ]
+        },
+        {
+          "k": 16,
+          "methods": [
+            {
+              "name": "auto64-then-per-asset-cap",
+              "pointOklabMSE": 0.000687327579544034,
+              "globalUsedColorUnion": 16,
+              "fitMedianMs": 0.982300000000123,
+              "selectMedianMs": 1.3800000000001091,
+              "coldTotalMedianSumMs": 2.362300000000232,
+              "assets": [
+                {
+                  "name": "held-armor-clip",
+                  "palette": [
+                    "#000000",
+                    "#010000",
+                    "#050404",
+                    "#1e0508",
+                    "#271013",
+                    "#323941",
+                    "#3f2117",
+                    "#4e4243",
+                    "#515859",
+                    "#6a5d66",
+                    "#737d82",
+                    "#7f3000",
+                    "#96858e",
+                    "#b3a4ab",
+                    "#cfbec6",
+                    "#e4d9df"
+                  ],
+                  "pointOklabMSE": 0.000687327579544034,
+                  "usedColors": [
+                    "#050404",
+                    "#000000",
+                    "#010000",
+                    "#4e4243",
+                    "#1e0508",
+                    "#3f2117",
+                    "#515859",
+                    "#7f3000",
+                    "#323941",
+                    "#b3a4ab",
+                    "#737d82",
+                    "#96858e",
+                    "#271013",
+                    "#6a5d66",
+                    "#e4d9df",
+                    "#cfbec6"
+                  ],
+                  "usedCount": 16,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "duration-weighted-clip-k16-auto64-then-per-asset-cap-held-armor-clip-0.png",
+                    "duration-weighted-clip-k16-auto64-then-per-asset-cap-held-armor-clip-1.png",
+                    "duration-weighted-clip-k16-auto64-then-per-asset-cap-held-armor-clip-2.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "direct-shared-k-fit",
+              "pointOklabMSE": 0.0006335600506493693,
+              "globalUsedColorUnion": 16,
+              "fitMedianMs": 0.2068000000003849,
+              "selectMedianMs": 0,
+              "coldTotalMedianSumMs": 0.2068000000003849,
+              "assets": [
+                {
+                  "name": "held-armor-clip",
+                  "palette": [
+                    "#000000",
+                    "#010000",
+                    "#060403",
+                    "#17120a",
+                    "#20070a",
+                    "#372b2b",
+                    "#37373f",
+                    "#3d1804",
+                    "#4c3f42",
+                    "#50555c",
+                    "#6a5f68",
+                    "#787c83",
+                    "#7f3000",
+                    "#91868e",
+                    "#b5b1b7",
+                    "#dddadf"
+                  ],
+                  "pointOklabMSE": 0.0006335600506493693,
+                  "usedColors": [
+                    "#060403",
+                    "#000000",
+                    "#010000",
+                    "#4c3f42",
+                    "#17120a",
+                    "#3d1804",
+                    "#50555c",
+                    "#7f3000",
+                    "#37373f",
+                    "#372b2b",
+                    "#b5b1b7",
+                    "#787c83",
+                    "#91868e",
+                    "#6a5f68",
+                    "#dddadf",
+                    "#20070a"
+                  ],
+                  "usedCount": 16,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "duration-weighted-clip-k16-direct-shared-k-fit-held-armor-clip-0.png",
+                    "duration-weighted-clip-k16-direct-shared-k-fit-held-armor-clip-1.png",
+                    "duration-weighted-clip-k16-direct-shared-k-fit-held-armor-clip-2.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "auto64-then-shared-subset-control",
+              "pointOklabMSE": 0.000687327579544034,
+              "globalUsedColorUnion": 16,
+              "fitMedianMs": 0.982300000000123,
+              "selectMedianMs": 1.4367999999999483,
+              "coldTotalMedianSumMs": 2.4191000000000713,
+              "assets": [
+                {
+                  "name": "held-armor-clip",
+                  "palette": [
+                    "#000000",
+                    "#010000",
+                    "#050404",
+                    "#1e0508",
+                    "#271013",
+                    "#323941",
+                    "#3f2117",
+                    "#4e4243",
+                    "#515859",
+                    "#6a5d66",
+                    "#737d82",
+                    "#7f3000",
+                    "#96858e",
+                    "#b3a4ab",
+                    "#cfbec6",
+                    "#e4d9df"
+                  ],
+                  "pointOklabMSE": 0.000687327579544034,
+                  "usedColors": [
+                    "#050404",
+                    "#000000",
+                    "#010000",
+                    "#4e4243",
+                    "#1e0508",
+                    "#3f2117",
+                    "#515859",
+                    "#7f3000",
+                    "#323941",
+                    "#b3a4ab",
+                    "#737d82",
+                    "#96858e",
+                    "#271013",
+                    "#6a5d66",
+                    "#e4d9df",
+                    "#cfbec6"
+                  ],
+                  "usedCount": 16,
+                  "alphaMismatches": 0,
+                  "files": [
+                    "duration-weighted-clip-k16-auto64-then-shared-subset-control-held-armor-clip-0.png",
+                    "duration-weighted-clip-k16-auto64-then-shared-subset-control-held-armor-clip-1.png",
+                    "duration-weighted-clip-k16-auto64-then-shared-subset-control-held-armor-clip-2.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "directFitSamplesMs": [
+            0.3106999999999971,
+            0.1991000000002714,
+            0.2068000000003849
+          ],
+          "capSamplesMs": [
+            1.4200000000000728,
+            1.3762000000001535,
+            1.3800000000001091
+          ],
+          "sharedSubsetSamplesMs": [
+            1.4309000000002925,
+            1.779700000000048,
+            1.4367999999999483
+          ]
+        }
+      ]
+    }
+  ],
+  "locks": {
+    "exact-red-eye": {
+      "palette": [
+        "#203050",
+        "#406080",
+        "#547090",
+        "#ff0000"
+      ],
+      "unlockedSubset": [
+        "#203050",
+        "#406080"
+      ],
+      "unlocked": {
+        "pointOklabMSE": 0.0019507210276322492,
+        "usedColors": [
+          "#406080",
+          "#203050"
+        ],
+        "usedCount": 2,
+        "alphaMismatches": 0
+      },
+      "unlockedRedPixels": 0,
+      "lockedSubset": [
+        "#ff0000",
+        "#406080"
+      ],
+      "locked": {
+        "pointOklabMSE": 0.008083127654165433,
+        "usedColors": [
+          "#406080",
+          "#ff0000"
+        ],
+        "usedCount": 2,
+        "alphaMismatches": 0
+      },
+      "lockedRedPixels": 1,
+      "eyeOutputUnlocked": "#406080",
+      "eyeOutputLocked": "#ff0000"
+    },
+    "muted-eye": {
+      "palette": [
+        "#203050",
+        "#406080",
+        "#547090",
+        "#ff0000"
+      ],
+      "unlockedSubset": [
+        "#203050",
+        "#406080"
+      ],
+      "unlocked": {
+        "pointOklabMSE": 0.0012599951373489914,
+        "usedColors": [
+          "#406080",
+          "#203050"
+        ],
+        "usedCount": 2,
+        "alphaMismatches": 0
+      },
+      "unlockedRedPixels": 0,
+      "lockedSubset": [
+        "#ff0000",
+        "#406080"
+      ],
+      "locked": {
+        "pointOklabMSE": 0.008213554976988328,
+        "usedColors": [
+          "#406080"
+        ],
+        "usedCount": 1,
+        "alphaMismatches": 0
+      },
+      "lockedRedPixels": 0,
+      "eyeOutputUnlocked": "#406080",
+      "eyeOutputLocked": "#406080"
+    }
+  }
+}
