@@ -1,0 +1,16 @@
+{
+  "status": 200,
+  "data": {
+    "jsonrpc": "2.0",
+    "id": 3,
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "extract-palette: extract a palette and ramp proposals from reference art\nsubject: any image id or reference\n  --max-colors <value>\n  --full: do not truncate detail lines\nids or image references, never paths; every output comes back with the reply. `describe cli` lists every command."
+        }
+      ],
+      "isError": false
+    }
+  }
+}

@@ -1,0 +1,471 @@
+[
+  {
+    "route": "/generate-image-v2",
+    "verb": "post",
+    "fields": {
+      "target_palette": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/TargetPalette"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Colours the result must use and/or a colour cap: {\"colors\": [\"#081820\", \"#346856\", \"#88c070\", \"#e0f8d0\"], \"name\": \"Game Boy\", \"max_colors\": 4}. With colors the image is drawn for them and every pixel is one of them; max_colors (2-64) caps each image. With a style_image, set style_options.color_palette to false."
+      }
+    }
+  },
+  {
+    "route": "/create-image-pixflux",
+    "verb": "post",
+    "fields": {
+      "color_image": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/Base64Image"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Forced color palette, image containing colors used for palette"
+      }
+    }
+  },
+  {
+    "route": "/create-image-pixflux-background",
+    "verb": "post",
+    "fields": {
+      "color_image": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/Base64Image"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Forced color palette, image containing colors used for palette"
+      }
+    }
+  },
+  {
+    "route": "/create-image-bitforge",
+    "verb": "post",
+    "fields": {
+      "color_image": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/Base64Image"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Forced color palette, image containing colors used for palette"
+      }
+    }
+  },
+  {
+    "route": "/characters/animations",
+    "verb": "post",
+    "fields": {
+      "color_image": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/Base64Image"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Color palette reference image"
+      }
+    }
+  },
+  {
+    "route": "/animate-character",
+    "verb": "post",
+    "fields": {
+      "color_image": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/Base64Image"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Color palette reference image"
+      }
+    }
+  },
+  {
+    "route": "/create-character-state",
+    "verb": "post",
+    "fields": {
+      "use_color_palette_from_reference": {
+        "type": "boolean",
+        "title": "Use Color Palette From Reference",
+        "description": "Snap the edited rotations to the source character's existing color palette so the new state stays color-consistent with the original.",
+        "default": false
+      }
+    }
+  },
+  {
+    "route": "/create-character-with-4-directions",
+    "verb": "post",
+    "fields": {
+      "color_image": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/Base64Image"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Color palette reference image"
+      }
+    }
+  },
+  {
+    "route": "/create-character-with-8-directions",
+    "verb": "post",
+    "fields": {
+      "color_image": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/Base64Image"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Color palette reference image"
+      }
+    }
+  },
+  {
+    "route": "/animate-with-text-v2",
+    "verb": "post",
+    "fields": {
+      "target_palette": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/TargetPalette"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Colours the frames must use and/or a colour cap, shared by all frames: {\"colors\": [\"#081820\", \"#346856\", \"#88c070\", \"#e0f8d0\"], \"name\": \"Game Boy\", \"max_colors\": 4}. The reference image is put on the palette first. `smart` is for single images and is refused here."
+      }
+    }
+  },
+  {
+    "route": "/animate-with-text",
+    "verb": "post",
+    "fields": {
+      "color_image": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/Base64Image"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Forced color palette, image containing colors used for palette"
+      }
+    }
+  },
+  {
+    "route": "/animate-with-skeleton",
+    "verb": "post",
+    "fields": {
+      "color_image": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/Base64Image"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Forced color palette, image containing colors used for palette"
+      }
+    }
+  },
+  {
+    "route": "/rotate",
+    "verb": "post",
+    "fields": {
+      "color_image": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/Base64Image"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Forced color palette, image containing colors used for palette"
+      }
+    }
+  },
+  {
+    "route": "/edit-image",
+    "verb": "post",
+    "fields": {
+      "color_image": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/Base64Image"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Color reference image for style guidance"
+      }
+    }
+  },
+  {
+    "route": "/inpaint",
+    "verb": "post",
+    "fields": {
+      "color_image": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/Base64Image"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Forced color palette, image containing colors used for palette"
+      }
+    }
+  },
+  {
+    "route": "/tilesets",
+    "verb": "post",
+    "fields": {
+      "color_image": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/Base64Image"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Reference image for color palette"
+      }
+    }
+  },
+  {
+    "route": "/create-tileset",
+    "verb": "post",
+    "fields": {
+      "color_image": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/Base64Image"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Reference image for color palette"
+      }
+    }
+  },
+  {
+    "route": "/tilesets-sidescroller",
+    "verb": "post",
+    "fields": {
+      "color_image": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/Base64Image"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Reference image for color palette"
+      }
+    }
+  },
+  {
+    "route": "/create-tileset-sidescroller",
+    "verb": "post",
+    "fields": {
+      "color_image": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/Base64Image"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Reference image for color palette"
+      }
+    }
+  },
+  {
+    "route": "/create-isometric-tile",
+    "verb": "post",
+    "fields": {
+      "color_image": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/Base64Image"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Forced color palette, image containing colors used for palette"
+      }
+    }
+  },
+  {
+    "route": "/map-objects",
+    "verb": "post",
+    "fields": {
+      "color_image": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/Base64Image"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Image containing colors for forced palette"
+      }
+    }
+  },
+  {
+    "route": "/create-ui-asset",
+    "verb": "post",
+    "fields": {
+      "color_palette": {
+        "anyOf": [
+          {
+            "type": "string",
+            "maxLength": 200
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Color Palette",
+        "description": "Optional palette specification (e.g. 'brown and gold')"
+      }
+    }
+  },
+  {
+    "route": "/generate-ui-v2",
+    "verb": "post",
+    "fields": {
+      "color_palette": {
+        "anyOf": [
+          {
+            "type": "string",
+            "maxLength": 200
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Color Palette",
+        "description": "Optional color palette specification (e.g., 'brown and gold', 'blue and silver')"
+      }
+    }
+  },
+  {
+    "route": "/unzoom",
+    "verb": "post",
+    "fields": {
+      "quantize": {
+        "type": "integer",
+        "maximum": 256,
+        "minimum": -1,
+        "title": "Quantize",
+        "description": "Palette handling for the result. 0 auto-detects a palette, -1 keeps every color the downsample produces, and 2-256 quantizes to exactly that many colors.",
+        "default": 0
+      }
+    }
+  },
+  {
+    "route": "/reduce-colors",
+    "verb": "post",
+    "fields": {
+      "palette_image": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/Base64Image"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "An image whose colors become the palette (max 256 colors). Use it to force frames onto an existing game palette. Mutually exclusive with num_colors."
+      },
+      "dithering": {
+        "type": "string",
+        "enum": [
+          "none",
+          "2x2",
+          "4x4",
+          "8x8"
+        ],
+        "title": "Dithering",
+        "description": "Ordered dithering matrix size. Larger matrices give smoother gradients at the cost of a busier look.",
+        "default": "none"
+      },
+      "dithering_strength": {
+        "type": "number",
+        "maximum": 10,
+        "minimum": 0,
+        "title": "Dithering Strength",
+        "description": "How strongly to dither. Ignored when dithering is 'none'.",
+        "default": 5
+      }
+    }
+  },
+  {
+    "route": "/resize",
+    "verb": "post",
+    "fields": {
+      "color_image": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/Base64Image"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Forced color palette, image containing colors used for palette"
+      }
+    }
+  },
+  {
+    "route": "/edit-image-pro-flash",
+    "verb": "post",
+    "fields": {
+      "use_color_palette_correction": {
+        "type": "boolean",
+        "title": "Use Color Palette Correction",
+        "default": false
+      }
+    }
+  }
+]

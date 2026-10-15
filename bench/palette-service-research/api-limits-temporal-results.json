@@ -1,0 +1,167 @@
+[
+  {
+    "name": "limit-512x512",
+    "request": {
+      "images": [
+        {
+          "base64": {
+            "sha256": "1c4cd1fa9c22a267d876b91e0a9512aecba313957f090d1363216aea21b679f6"
+          }
+        }
+      ],
+      "num_colors": 8
+    },
+    "status": 200,
+    "ms": 4157,
+    "usage": {
+      "type": "generations",
+      "generations": 0.1
+    },
+    "n_colors": 2,
+    "images": [
+      {
+        "width": 512,
+        "height": 512,
+        "visible_colors": 2,
+        "transparent_pixels": 0,
+        "alpha_histogram": {
+          "255": 262144
+        },
+        "color_histogram": {
+          "#1e325a": 131072,
+          "#e6b446": 131072
+        },
+        "rgba_sha256": "463df90d29cb2868b97046d9ba253bec0090d0e2322fa35c655eb4382ad4f697"
+      }
+    ]
+  },
+  {
+    "name": "limit-513x513",
+    "request": {
+      "images": [
+        {
+          "base64": {
+            "sha256": "f2da67429ff0bf510cd72c598130b89e79c171d4e44f156da80fe5a15e4b7dc4"
+          }
+        }
+      ],
+      "num_colors": 8
+    },
+    "status": 422,
+    "ms": 223,
+    "error": {
+      "detail": "1 frames of 513x513 total 263169 pixels. The maximum is 262144 (512x512) across all frames — send fewer frames per call or smaller images."
+    }
+  },
+  {
+    "name": "limit-1024x256",
+    "request": {
+      "images": [
+        {
+          "base64": {
+            "sha256": "8fe74b68d08d5cbe6a36c4957de8973b7ec76ae998f1970a71705937b087c26b"
+          }
+        }
+      ],
+      "num_colors": 8
+    },
+    "status": 200,
+    "ms": 3427,
+    "usage": {
+      "type": "generations",
+      "generations": 0.1
+    },
+    "n_colors": 2,
+    "images": [
+      {
+        "width": 1024,
+        "height": 256,
+        "visible_colors": 2,
+        "transparent_pixels": 0,
+        "alpha_histogram": {
+          "255": 262144
+        },
+        "color_histogram": {
+          "#1e325a": 131072,
+          "#e6b446": 131072
+        },
+        "rgba_sha256": "463df90d29cb2868b97046d9ba253bec0090d0e2322fa35c655eb4382ad4f697"
+      }
+    ]
+  },
+  {
+    "name": "temporal-one-pixel",
+    "request": {
+      "images": [
+        {
+          "base64": {
+            "sha256": "6d0a9315b0c6bc0c4e86e05c2b21af7dbde71df8a23d48900e16455d2bbffe6f"
+          }
+        },
+        {
+          "base64": {
+            "sha256": "69a23fff7d1f6bea215cf94c7608a2a904dfd8b72ccb59a611d44cc29db918a8"
+          }
+        }
+      ],
+      "palette_image": {
+        "base64": {
+          "sha256": "990e6a8f40a3b6ae15bdfa3ab76c89c6741051a023072e5cba4572e30845333f"
+        }
+      },
+      "dithering": "4x4",
+      "dithering_strength": 5
+    },
+    "status": 200,
+    "ms": 1531,
+    "usage": {
+      "type": "generations",
+      "generations": 0.1
+    },
+    "n_colors": 4,
+    "images": [
+      {
+        "width": 64,
+        "height": 32,
+        "visible_colors": 4,
+        "transparent_pixels": 0,
+        "alpha_histogram": {
+          "255": 2048
+        },
+        "color_histogram": {
+          "#e0f8d0": 616,
+          "#346856": 528,
+          "#88c070": 472,
+          "#081820": 432
+        },
+        "rgba_sha256": "2d2d51c359e3707741fa5e56efb163acd526637835ee5f0df7957f3d16d0bddc"
+      },
+      {
+        "width": 64,
+        "height": 32,
+        "visible_colors": 4,
+        "transparent_pixels": 0,
+        "alpha_histogram": {
+          "255": 2048
+        },
+        "color_histogram": {
+          "#e0f8d0": 616,
+          "#346856": 527,
+          "#88c070": 473,
+          "#081820": 432
+        },
+        "rgba_sha256": "d234b48f128a74c07f53b677a81fb2ef5a8aa8c990c92185a359c479df950ad1"
+      }
+    ],
+    "temporal": {
+      "input_changed_pixels": 1,
+      "output_changed_pixels": 1,
+      "unchanged_coordinate_churn": 0,
+      "comparison_pixels": 2048,
+      "changed_coordinate": {
+        "x": 15,
+        "y": 15
+      }
+    }
+  }
+]

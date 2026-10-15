@@ -1,0 +1,11 @@
+{
+  "dialogs": [],
+  "after_paste": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\"\n      - option \"Palette\" [selected]\n  - group:\n    - text: Color palette (Beta)\n    - button \"Paste hex colours\":\n      - paragraph: Paste hex colours\n    - 'textbox \"#081820 #346856 #88c070 #e0f8d0\"'\n    - paragraph: Needs at least 2 colours\n    - paragraph: Max colours\n    - spinbutton \"No limit\": \"8\"\n    - paragraph: Every pixel goes onto these colours. Max colours limits the image.\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\"\n      - option \"2x2\"\n      - option \"4x4\" [selected]\n      - option \"8x8\"\n  - group:\n    - text: Dithering strength\n    - paragraph: \"5.0\"\n    - slider\n    - paragraph: Subtle\n    - paragraph: Strong\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+  "dialog_count": 0,
+  "textareas": [
+    {
+      "placeholder": "#081820 #346856 #88c070 #e0f8d0",
+      "aria": null
+    }
+  ]
+}

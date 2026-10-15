@@ -1,0 +1,31 @@
+{
+  "width": 192,
+  "height": 192,
+  "visible_colors": 8,
+  "transparent_pixels": 28202,
+  "alpha_histogram": {
+    "0": 28202,
+    "255": 8662
+  },
+  "color_histogram": {
+    "#29adff": 3277,
+    "#000000": 2023,
+    "#ab5236": 1005,
+    "#5f574f": 908,
+    "#ffccaa": 540,
+    "#83769c": 411,
+    "#1d2b53": 410,
+    "#00e436": 88
+  },
+  "rgba_sha256": "d158e30aa4f0e48a0998fda5c8c494b5d60f0b462b41e56781306e720dfa3c52",
+  "all_visible_rgb_in_target": true,
+  "usage": {
+    "type": "generations",
+    "generations": 10
+  },
+  "reported_usd_cost": 0.08,
+  "original_image_n_colors": 117,
+  "quantized_image_n_colors": 8,
+  "observed_completion_upper_bound_seconds": 203,
+  "previous_processing_poll_seconds": 114
+}

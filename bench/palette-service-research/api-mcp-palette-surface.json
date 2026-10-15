@@ -1,0 +1,1539 @@
+[
+  {
+    "name": "create_image_pro_flash",
+    "description": "Create one Pro Flash pixel-art image with an optional left-box style image.\n\nCustom sizes (Beta) accept width and height from 16 to 256 in multiples of 4 pixels.\nQuery get_pro_flash_capabilities for native presets and provisional cost.\nThe style image accepts {url}, {base64}, or {source_image_id}; prefer URLs\nfor uploaded images. Style art must fit the native canvas without resizing.\nstyle_options selects color_palette, outline, detail and shading independently.\nDefault style uses existing PixelLab art. Returns one image; the provisional\ngeneration charge varies with the canvas. Failed pixel grids use image-to-\npixel-art with fixer on the generated box. Poll get_image(job_id); use\nsource_image_id after completion.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "type": "string"
+        },
+        "width": {
+          "default": 64,
+          "description": "Native sizes: 16x16 (experimental), 24x24, 32x32, 32x48, 48x48, 64x64, 96x64, 96x96, 128x128. Custom size (Beta): integer width 16–256 and height 16–256. Both dimensions must be multiples of 4 pixels. Pixel-grid recovery uses image-to-pixel-art with fixer when needed. No native image resizing.",
+          "maximum": 256,
+          "minimum": 16,
+          "multipleOf": 4,
+          "type": "integer"
+        },
+        "height": {
+          "default": 64,
+          "maximum": 256,
+          "minimum": 16,
+          "multipleOf": 4,
+          "type": "integer"
+        },
+        "no_background": {
+          "default": true,
+          "type": "boolean"
+        },
+        "style_image": {
+          "default": null,
+          "additionalProperties": false,
+          "description": "One URL, encoded image, or owned image ID plus its reference instructions.",
+          "properties": {
+            "base64": {
+              "default": null,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "url": {
+              "default": null,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "source_image_id": {
+              "default": null,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "usage_description": {
+              "default": null,
+              "description": "How this reference should guide appearance.",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "style_options": {
+          "default": null,
+          "additionalProperties": false,
+          "description": "Choose which visual traits to copy from the style image.",
+          "properties": {
+            "color_palette": {
+              "default": true,
+              "type": "boolean"
+            },
+            "outline": {
+              "default": true,
+              "type": "boolean"
+            },
+            "detail": {
+              "default": true,
+              "type": "boolean"
+            },
+            "shading": {
+              "default": true,
+              "type": "boolean"
+            }
+          },
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "seed": {
+          "default": 0,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "project_id": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "description"
+      ],
+      "type": "object"
+    },
+    "annotations": {
+      "readOnlyHint": false,
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false
+    },
+    "_meta": {
+      "fastmcp": {
+        "tags": []
+      }
+    }
+  },
+  {
+    "name": "edit_image_pro_flash",
+    "description": "Edit one Pro Flash image at its unchanged native canvas size.\n\nSupply image_url (preferred), image_base64, or an owned source_image_id.\nmethod=text requires description; method=reference requires reference_image\n({url}, {base64}, or {source_image_id}). References must fit the source canvas.\nNo-background defaults to the source's transparency. Optional palette\ncorrection matches source colors. Query get_pro_flash_capabilities for exact\nshapes. Returns one queued image; poll get_image(job_id), then download.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "image_base64": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "image_url": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_image_id": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "method": {
+          "default": "text",
+          "enum": [
+            "text",
+            "reference"
+          ],
+          "type": "string"
+        },
+        "reference_image": {
+          "default": null,
+          "additionalProperties": false,
+          "description": "One URL, encoded image, or owned image ID plus its reference instructions.",
+          "properties": {
+            "base64": {
+              "default": null,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "url": {
+              "default": null,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "source_image_id": {
+              "default": null,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "usage_description": {
+              "default": null,
+              "description": "How this reference should guide appearance.",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "no_background": {
+          "default": null,
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "use_color_palette_correction": {
+          "default": false,
+          "type": "boolean"
+        },
+        "seed": {
+          "default": 0,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "project_id": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "annotations": {
+      "readOnlyHint": false,
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false
+    },
+    "_meta": {
+      "fastmcp": {
+        "tags": []
+      }
+    }
+  },
+  {
+    "name": "create_character_pro_flash",
+    "description": "Create a Pro Flash character from text, including its first image and eight V3 views.\n\nSupply description, optional width/height (default 64x64), and style_image.\nCustom sizes (Beta) accept width and height from 16 to 256 in multiples of 4 pixels.\nFirst-direction generation is built in; no separate preview tool is needed.\nAlternatively reuse source_image_id or first_frame_url/base64 and omit size\nand style settings. A chosen image is preserved with transparent V3 padding,\nand only rotations are charged. Never provide both image sources.\nPoll get_character(character_id) or the returned outer background job until\ncompleted, including skeleton preparation, before downloading or animating.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "type": "string"
+        },
+        "source_image_id": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "first_frame_base64": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "first_frame_url": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name": {
+          "default": "",
+          "type": "string"
+        },
+        "view": {
+          "default": "low top-down",
+          "enum": [
+            "low top-down",
+            "high top-down",
+            "side"
+          ],
+          "type": "string"
+        },
+        "first_frame_direction": {
+          "const": "south",
+          "default": "south",
+          "type": "string"
+        },
+        "n_directions": {
+          "const": 8,
+          "default": 8,
+          "type": "integer"
+        },
+        "template_id": {
+          "default": "mannequin",
+          "enum": [
+            "mannequin",
+            "bear",
+            "cat",
+            "dog",
+            "horse",
+            "lion",
+            "custom"
+          ],
+          "type": "string"
+        },
+        "seed": {
+          "default": 0,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "width": {
+          "default": null,
+          "description": "Defaults to 64 for text creation. Native sizes: 16x16 (experimental), 24x24, 32x32, 32x48, 48x48, 64x64, 96x64, 96x96, 128x128. Custom size (Beta): integer width 16–256 and height 16–256. Both dimensions must be multiples of 4 pixels. Pixel-grid recovery uses image-to-pixel-art with fixer when needed. No native image resizing.",
+          "maximum": 256,
+          "minimum": 16,
+          "multipleOf": 4,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "height": {
+          "default": null,
+          "maximum": 256,
+          "minimum": 16,
+          "multipleOf": 4,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "style_image": {
+          "default": null,
+          "additionalProperties": false,
+          "description": "One URL, encoded image, or owned image ID plus its reference instructions.",
+          "properties": {
+            "base64": {
+              "default": null,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "url": {
+              "default": null,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "source_image_id": {
+              "default": null,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "usage_description": {
+              "default": null,
+              "description": "How this reference should guide appearance.",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "style_options": {
+          "default": null,
+          "additionalProperties": false,
+          "description": "Choose which visual traits to copy from the style image.",
+          "properties": {
+            "color_palette": {
+              "default": true,
+              "type": "boolean"
+            },
+            "outline": {
+              "default": true,
+              "type": "boolean"
+            },
+            "detail": {
+              "default": true,
+              "type": "boolean"
+            },
+            "shading": {
+              "default": true,
+              "type": "boolean"
+            }
+          },
+          "type": [
+            "object",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "description"
+      ],
+      "type": "object"
+    },
+    "annotations": {
+      "readOnlyHint": false,
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false
+    },
+    "_meta": {
+      "fastmcp": {
+        "tags": []
+      }
+    }
+  },
+  {
+    "name": "create_object_pro_flash",
+    "description": "Create a Pro Flash object from text, with one direction or eight V3 views.\n\nSupply description, optional width/height (default 64x64), and style_image.\nCustom sizes (Beta) accept width and height from 16 to 256 in multiples of 4 pixels.\nFirst-direction generation is built into this call. n_directions=1 charges\nfor one new image; n_directions=8 also charges for rotations. Alternatively\nreuse source_image_id or first_frame_url/base64 and omit size/style settings:\nsaving one direction is then free, and eight views charge only rotations.\nObjects remain objects without skeletons. Poll get_object(object_id), then\ndownload its PNG (one direction) or ZIP (eight). No preview is regenerated.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "type": "string"
+        },
+        "source_image_id": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "first_frame_base64": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "first_frame_url": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name": {
+          "default": "",
+          "type": "string"
+        },
+        "view": {
+          "default": "low top-down",
+          "enum": [
+            "low top-down",
+            "high top-down",
+            "side"
+          ],
+          "type": "string"
+        },
+        "first_frame_direction": {
+          "const": "south",
+          "default": "south",
+          "type": "string"
+        },
+        "n_directions": {
+          "default": 8,
+          "enum": [
+            1,
+            8
+          ],
+          "type": "integer"
+        },
+        "seed": {
+          "default": 0,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "width": {
+          "default": null,
+          "description": "Defaults to 64 for text creation. Native sizes: 16x16 (experimental), 24x24, 32x32, 32x48, 48x48, 64x64, 96x64, 96x96, 128x128. Custom size (Beta): integer width 16–256 and height 16–256. Both dimensions must be multiples of 4 pixels. Pixel-grid recovery uses image-to-pixel-art with fixer when needed. No native image resizing.",
+          "maximum": 256,
+          "minimum": 16,
+          "multipleOf": 4,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "height": {
+          "default": null,
+          "maximum": 256,
+          "minimum": 16,
+          "multipleOf": 4,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "style_image": {
+          "default": null,
+          "additionalProperties": false,
+          "description": "One URL, encoded image, or owned image ID plus its reference instructions.",
+          "properties": {
+            "base64": {
+              "default": null,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "url": {
+              "default": null,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "source_image_id": {
+              "default": null,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "usage_description": {
+              "default": null,
+              "description": "How this reference should guide appearance.",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "style_options": {
+          "default": null,
+          "additionalProperties": false,
+          "description": "Choose which visual traits to copy from the style image.",
+          "properties": {
+            "color_palette": {
+              "default": true,
+              "type": "boolean"
+            },
+            "outline": {
+              "default": true,
+              "type": "boolean"
+            },
+            "detail": {
+              "default": true,
+              "type": "boolean"
+            },
+            "shading": {
+              "default": true,
+              "type": "boolean"
+            }
+          },
+          "type": [
+            "object",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "description"
+      ],
+      "type": "object"
+    },
+    "annotations": {
+      "readOnlyHint": false,
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false
+    },
+    "_meta": {
+      "fastmcp": {
+        "tags": []
+      }
+    }
+  },
+  {
+    "name": "create_character_state",
+    "description": "Queue a state (variant) of an existing character. The new character keeps\nthe source's identity, body type, and proportions, with the edit applied\nconsistently across all 4 or 8 rotations. Auto-waits up to 30s for the\nsource to complete.\n\nA character is a group of states: `name` is the character's name (shared by\nall states), and each state has its own `state_name` — defaulting to the\nedit description truncated to 20 characters (a new character's first state\nis named \"Idle\"). Pass `state_name` to name the new state explicitly.\n\nIMPORTANT — this ALWAYS preserves the SAME individual's face and identity,\neven for edits like \"elderly\", \"wounded\", or a different class/role. It makes\na variant OF this character (different outfit/pose/state), NOT a new character.\nTo make a DIFFERENT character in the same art style, use create_character with\nmatching size/view/outline/shading/detail params (and a v3 reference image if\nyou want to match the look) — not create_character_state.\n\nReturns a new character_id grouped with the source via group_id. Inspect\nsibling states with `get_character` on either id.\n\nCost: 10-25 generations — the tier is resolved from the canvas at generation\ntime, so the exact charge is not known when the call is made. The balance\ncheck runs against the 10 floor, which means a call CAN charge more than it\nreserved. Leave 25 generations of headroom, or check get_balance first, if\nyou are near the end of a plan.\n\nGeneration time: ~1-5 minutes (async). Poll with get_character(character_id).",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "character_id": {
+          "description": "Source character UUID to create a state of",
+          "type": "string"
+        },
+        "edit_description": {
+          "description": "Edit instructions describing the new state (e.g. 'sitting down', 'wearing red armor', 'fighting pose').",
+          "maxLength": 1000,
+          "minLength": 1,
+          "type": "string"
+        },
+        "seed": {
+          "default": null,
+          "minimum": 0,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "state_name": {
+          "default": null,
+          "description": "Name for the new state (e.g. 'Sitting', 'Red Armor'). Defaults to the edit description truncated to 20 characters.",
+          "maxLength": 100,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "use_color_palette_from_reference": {
+          "default": false,
+          "description": "Snap the edited rotations to the source character's existing color palette so the new state stays color-consistent with the original. Do not enable when the edit is meant to introduce new colors.",
+          "type": "boolean"
+        },
+        "override_width": {
+          "default": null,
+          "description": "Optional larger canvas WIDTH for the state — reach for it when the edit adds something big (a weapon, wings) needing room beyond the character's tight canvas. Multiple of 4, no smaller than the source width. Pair with override_height; omit both to keep the source size.",
+          "maximum": 256,
+          "minimum": 32,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "override_height": {
+          "default": null,
+          "description": "Optional larger canvas HEIGHT for the state (see override_width). Multiple of 4, no smaller than the source height.",
+          "maximum": 256,
+          "minimum": 32,
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "character_id",
+        "edit_description"
+      ],
+      "type": "object"
+    },
+    "annotations": {
+      "readOnlyHint": false,
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false
+    },
+    "_meta": {
+      "fastmcp": {
+        "tags": []
+      }
+    }
+  },
+  {
+    "name": "create_ui_asset",
+    "description": "Queue a pixel-art UI panel (10-25 generations, ~30-90s). Returns ui_asset_id immediately.\nOmit `pieces` for a default rounded-rect panel. Use get_ui_asset to check status.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "description": "Style of the UI panel (e.g. 'wooden RPG panel with gold trim')",
+          "type": "string"
+        },
+        "width": {
+          "default": 256,
+          "description": "Output width in px (192–688). Max is aspect-gated, NOT freely combinable: square ≤512×512, 16:9 ≤688×384, 9:16 ≤384×688, 4:3 ≤600×448, 3:4 ≤448×600. E.g. 688×512 is rejected (resolves to 4:3, max 600×448) — use 688×384 or 512×512.",
+          "maximum": 688,
+          "minimum": 192,
+          "type": "integer"
+        },
+        "height": {
+          "default": 256,
+          "description": "Output height in px (192–688). Max is aspect-gated (see width): the two axis maxes cannot be combined — 688 only with a 16:9/9:16 partner (688×384 or 384×688), 512 only as a square (512×512).",
+          "maximum": 688,
+          "minimum": 192,
+          "type": "integer"
+        },
+        "color_palette": {
+          "default": null,
+          "description": "Optional palette hint (e.g. 'brown and gold')",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "style_image_base64": {
+          "default": null,
+          "description": "Optional style reference image (base64 PNG/JPEG, ideally <=1024px per side). The panel matches its palette, pixel scale, outlines and shading — the strongest way to make UI fit an existing game. Only the art style is copied, never its content or layout.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "no_background": {
+          "default": true,
+          "description": "Remove background after generation",
+          "type": "boolean"
+        },
+        "seed": {
+          "default": null,
+          "description": "Seed for reproducible output",
+          "minimum": 0,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "name": {
+          "default": null,
+          "description": "Friendly name for the saved asset",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "project_id": {
+          "default": null,
+          "description": "Optional PixelLab project ID to assign the finished UI asset to",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "elements": {
+          "default": null,
+          "description": "Named UI element types to scaffold the panel from (auto-positioned, no coords needed). Available: button, icon_button, toolbar, tab, panel, window, health_bar, avatar, triangle, pentagon, hexagon, octagon. Combine with `pieces` for custom shapes; omit both for a default panel.",
+          "items": {
+            "type": "string"
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "pieces": {
+          "default": null,
+          "description": "Advanced shape template (validated). Each piece needs a unique `id`, a `kind`, and an optional `label`. Allowed kinds: rounded_rect {x,y,w,h,radius}, circle {x,y,r}, polygon {x,y,r,sides,phase}. Coords are on a virtual editor canvas — longer side 0–512, shorter side scaled to the output aspect (a 16:9 panel uses a 512×288 coordinate grid, not the output size). Omit for a default full-canvas panel.",
+          "items": {
+            "anyOf": [
+              {
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "kind": {
+                    "const": "rounded_rect",
+                    "type": "string"
+                  },
+                  "label": {
+                    "default": "",
+                    "type": "string"
+                  },
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "w": {
+                    "type": "number"
+                  },
+                  "h": {
+                    "type": "number"
+                  },
+                  "radius": {
+                    "default": 0,
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "id",
+                  "kind",
+                  "x",
+                  "y",
+                  "w",
+                  "h"
+                ],
+                "type": "object"
+              },
+              {
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "kind": {
+                    "const": "circle",
+                    "type": "string"
+                  },
+                  "label": {
+                    "default": "",
+                    "type": "string"
+                  },
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "r": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "id",
+                  "kind",
+                  "x",
+                  "y",
+                  "r"
+                ],
+                "type": "object"
+              },
+              {
+                "description": "Regular polygon — `sides` vertices at distance `r` from (x, y),\nstarting from angle `phase` (radians).",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "kind": {
+                    "const": "polygon",
+                    "type": "string"
+                  },
+                  "label": {
+                    "default": "",
+                    "type": "string"
+                  },
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "r": {
+                    "type": "number"
+                  },
+                  "sides": {
+                    "type": "integer"
+                  },
+                  "phase": {
+                    "default": 0,
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "id",
+                  "kind",
+                  "x",
+                  "y",
+                  "r",
+                  "sides"
+                ],
+                "type": "object"
+              }
+            ]
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "description"
+      ],
+      "type": "object"
+    },
+    "annotations": {
+      "readOnlyHint": false,
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false
+    },
+    "_meta": {
+      "fastmcp": {
+        "tags": []
+      }
+    }
+  },
+  {
+    "name": "create_tiles_pro",
+    "description": "Create pixel art tiles (pro).\n\nGenerates multiple tile variations by drawing tile shape outlines and having\nAI fill them with pixel art. Supports hexagonal, isometric, and square\ntop-down tile types.\n\nThis tool starts asynchronous generation that returns immediately with a tile ID.\nUse get_tiles_pro to check status and retrieve completed tiles.\n\n**Two modes:**\n\n1. **Shape mode** (default): Specify tile_type, tile_size, tile_view to control tile shape.\n2. **Style mode**: Provide style_images to match existing tiles' style and dimensions.\n\n**Prompting tip:** Number each tile for best control:\n\"1). grass tile 2). dirt tile 3). stone tile 4). water tile\"\nThe number of tiles is auto-computed based on tile size.\n\nExamples:\n- \"1). grass tile 2). dirt tile 3). stone tile 4). water tile 5). sand tile 6). lava tile\"\n- \"1). ocean water 2). shallow water 3). wet sand 4). dry sand\"\n\nGeneration time: ~15-30 seconds (async processing)",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "description": "Text description of the tiles. For best control, number each tile: '1). grass tile 2). stone tile 3). lava tile'.",
+          "type": "string"
+        },
+        "tile_type": {
+          "default": "isometric",
+          "description": "Shape of the tiles. hex: flat-top hexagonal, hex_pointy: pointy-top hexagonal, isometric: diamond/rhombus, oblique: true square top with the depth extruded diagonally down-right at 45 degrees (tile_feature='tileset' or 'building' only), octagon: 8-sided polygon, square_topdown: square at angle.",
+          "enum": [
+            "hex",
+            "hex_pointy",
+            "isometric",
+            "oblique",
+            "octagon",
+            "square_topdown"
+          ],
+          "type": "string"
+        },
+        "tile_size": {
+          "default": 32,
+          "description": "Tile size in pixels (16-128). 32px is recommended for most use cases.",
+          "maximum": 128,
+          "minimum": 16,
+          "type": "integer"
+        },
+        "tile_height": {
+          "default": null,
+          "description": "Tile height in pixels for non-square tiles (e.g., 128 for 64x128). Omit to compute from tile_type geometry and view angle.",
+          "maximum": 256,
+          "minimum": 16,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "tile_view": {
+          "default": "low top-down",
+          "description": "View angle controlling tile depth. top-down: no depth, high top-down: ~15%, low top-down: ~30%, side: ~50%.",
+          "enum": [
+            "top-down",
+            "high top-down",
+            "low top-down",
+            "side"
+          ],
+          "type": "string"
+        },
+        "tile_view_angle": {
+          "default": null,
+          "description": "Continuous view angle in degrees (0-90). Overrides tile_view when provided. 0=side, 90=top-down.",
+          "maximum": 90,
+          "minimum": 0,
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "tile_depth_ratio": {
+          "default": null,
+          "description": "Tile depth/thickness ratio (0.0-1.0). Controls vertical depth. Overrides default from tile_view.",
+          "maximum": 1,
+          "minimum": 0,
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "tile_flat_top_px": {
+          "default": null,
+          "description": "Isometric top/bottom cap width: 2px classic or 4px modern. Only used when tile_type='isometric'.",
+          "maximum": 8,
+          "minimum": 2,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "seed": {
+          "default": null,
+          "description": "Seed for reproducible generation",
+          "minimum": 0,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "style_images": {
+          "default": null,
+          "description": "Style reference tiles as JSON array. When provided, tiles match the style and dimensions of these references. Shape controls (tile_type, tile_size, tile_view, etc.) are ignored. Format: [{\"base64\": \"...\", \"width\": 64, \"height\": 80}, ...]",
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "style_options": {
+          "default": null,
+          "description": "Options for what to copy from style images, as JSON. Format: {\"color_palette\": true, \"outline\": true, \"detail\": true, \"shading\": true}",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "outline_mode": {
+          "default": "outline",
+          "description": "Tile outline mode. \"outline\" = gray shading with outlines (default). \"segmentation\" = RED/BLUE color zones without outlines — produces cleaner tiles with no outline artifacts.",
+          "enum": [
+            "outline",
+            "segmentation"
+          ],
+          "type": "string"
+        },
+        "tile_feature": {
+          "anyOf": [
+            {
+              "const": "tileset",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Set to \"tileset\" to generate a connectable TERRAIN TRANSITION instead of independent tiles: a 16-tile corner set for isometric/square_topdown/oblique, or a 32-tile coastline for hex/hex_pointy. Describe it as a transition (\"grass to water\") — the first terrain is the main one. Returns per-tile placement rules (see get_tiles_pro). Cannot be combined with style_images. For square top-down transitions, create_topdown_tileset is the dedicated tileset model and adds transition width, per-terrain reference images and style matching. For paths use create_path_tiles; for walls/floors use create_building_kit."
+        },
+        "oblique_lean": {
+          "default": null,
+          "description": "Oblique tilesets only: horizontal shear per pixel of depth. 0.5 = classic cabinet (~27 degrees), 1.0 = a full 45 degree diagonal (default).",
+          "maximum": 1,
+          "minimum": 0,
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "description"
+      ],
+      "type": "object"
+    },
+    "annotations": {
+      "readOnlyHint": false,
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false
+    },
+    "_meta": {
+      "fastmcp": {
+        "tags": []
+      }
+    }
+  },
+  {
+    "name": "create_image_pixflux",
+    "description": "Generate a freeform pixel-art image from text (no character/object rig).\n\nUse this for anything that is just an image: item icons, backgrounds, card\nart, props, concept frames. For a rotatable character use create_character;\nfor an asset-pack prop use create_1_direction_object; for a map prop that\nmatches an existing map's style use create_map_object.\n\nCanvas is 16-400px per side, total area 32x32 to 400x400.\n\nExamples:\n- create_image_pixflux(description=\"health potion bottle\", width=64, height=64, no_background=True)\n- create_image_pixflux(description=\"forest background\", width=320, height=180)\n- img2img over your own sprite:\n  create_image_pixflux(description=\"same knight but in gold armor\", init_image_base64=<png>, init_image_strength=150)\n\ninit_image_strength is how much of the input is KEPT (inverted vs most\nimg2img APIs): 500 barely moves it, 300 is subtle, ~150 is a visible edit,\n~50 keeps only the rough composition. For editing an image use edit_image;\nfor fixing one region use inpaint_image.\n\nCost: 1 generation. Generation time: ~10-40 seconds (async).\nPoll with get_image(job_id).",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "description": "What to draw (e.g. 'cute dragon', 'health potion bottle').",
+          "type": "string"
+        },
+        "width": {
+          "default": null,
+          "description": "Canvas width in pixels. Defaults to the init_image width, or 128 when there is no init_image. The 16px floor is per-axis: the TOTAL area must still be at least 32x32=1024px, so 16x16 is rejected while 16x64 is fine.",
+          "maximum": 400,
+          "minimum": 16,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "height": {
+          "default": null,
+          "description": "Canvas height in pixels. Defaults to the init_image height, or 128 when there is no init_image. See width for the area rule.",
+          "maximum": 400,
+          "minimum": 16,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "no_background": {
+          "default": null,
+          "description": "Return the subject on a transparent background. Use True for sprites/items, False for scenes and backgrounds. Unset with an init_image follows that image; unset without one means False.",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "view": {
+          "default": null,
+          "description": "Camera angle (weakly guiding).",
+          "enum": [
+            "side",
+            "low top-down",
+            "high top-down",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "direction": {
+          "default": null,
+          "description": "Which way the subject faces (weakly guiding).",
+          "enum": [
+            "north",
+            "north-east",
+            "east",
+            "south-east",
+            "south",
+            "south-west",
+            "west",
+            "north-west",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "isometric": {
+          "default": false,
+          "description": "Draw in isometric projection (weakly guiding).",
+          "type": "boolean"
+        },
+        "outline": {
+          "default": null,
+          "description": "Outline style (weakly guiding).",
+          "enum": [
+            "single color black outline",
+            "single color outline",
+            "selective outline",
+            "lineless",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "shading": {
+          "default": null,
+          "description": "Shading style (weakly guiding).",
+          "enum": [
+            "flat shading",
+            "basic shading",
+            "medium shading",
+            "detailed shading",
+            "highly detailed shading",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "detail": {
+          "default": null,
+          "description": "Detail level (weakly guiding).",
+          "enum": [
+            "low detail",
+            "medium detail",
+            "highly detailed",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "text_guidance_scale": {
+          "default": 8,
+          "description": "How literally to follow the description. Higher = more literal.",
+          "maximum": 20,
+          "minimum": 1,
+          "type": "number"
+        },
+        "init_image_base64": {
+          "default": null,
+          "description": "Base64 PNG to start from (img2img). Must be exactly width x height — omit width/height to adopt its size.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "init_image_url": {
+          "default": null,
+          "description": "Alternative to init_image_base64: an https (or data:) URL to the init PNG. PREFER THIS for anything but a tiny sprite. Give one, not both.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "init_image_strength": {
+          "default": 150,
+          "description": "How much of init_image is PRESERVED — the opposite of the usual img2img 'strength'. Higher = closer to the input: 500 barely changes it, 300 is subtle, 150 (default) is a real edit, ~50 keeps only the composition.",
+          "maximum": 999,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "color_image_base64": {
+          "default": null,
+          "description": "Base64 PNG whose colors become a forced palette. Any size — only its colors are read.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "color_image_url": {
+          "default": null,
+          "description": "Alternative to color_image_base64: an https (or data:) URL to the palette PNG. Give one, not both.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "seed": {
+          "default": null,
+          "description": "Seed for reproducible generation.",
+          "minimum": 0,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "project_id": {
+          "default": null,
+          "description": "Internal Game Builder project context; the finished image is linked after generation.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "description"
+      ],
+      "type": "object"
+    },
+    "annotations": {
+      "readOnlyHint": false,
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false
+    },
+    "_meta": {
+      "fastmcp": {
+        "tags": []
+      }
+    }
+  },
+  {
+    "name": "create_image_pro",
+    "description": "Generate pixel art with the Pro model — best quality, several candidates.\n\nThis is \"Create Image (Pro)\". It returns a SET of options in one call rather\nthan a single image, by the larger side: 64 candidates up to 32px, 49 at\n33-35px, 36 at 36-41px, 25 at 42-50px, 16 at 51-64px, 9 at 65-84px, 16 at\n85px, 4 at 86-170px, 1 above that. Cost is per call, not per candidate, so a\nsmall canvas is where it pays off.\n\nUnlike the other two text-to-image tools it accepts labelled references:\n  create_image_pro(\n      description=\"knight in the same armour\",\n      reference_images='[{\"base64\": \"<hero png>\", \"usage\": \"character base\"},\n                         {\"base64\": \"<armour png>\", \"usage\": \"outfit\"}]')\n\nNo facing control: nothing here sets which way the subject looks, and a\nreference does not either. To turn a picture you already have into 8\nfacings, use create_object_pro_flash(first_frame_base64=..., n_directions=8).\n\nFor a console or palette look (1-bit, Game Boy, PICO-8, NES, any palette from\nLospec) pass `palette` as its hex colours, e.g. [\"#081820\", \"#346856\",\n\"#88c070\", \"#e0f8d0\"], plus `palette_name`: the image is drawn for the\npalette and comes back using only those colours. A palette name alone is not\nenough - the colours are what the result is put on. `max_colors` caps the\ncolours in each image (e.g. 6 for an NES-style sprite).\n\nPick between the three: create_image_pixflux for img2img or isometric;\ncreate_image_pixen for clean small sprites at 1 generation; this one when\nquality matters more than cost, or for a palette given as hex colours.\n\nCost: 10-25 generations. Generation time: ~1-10 minutes (async).\nPoll with get_image(job_id).",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "description": "What to draw (e.g. 'ornate iron key with a ruby inlay').",
+          "maxLength": 2000,
+          "type": "string"
+        },
+        "width": {
+          "default": 128,
+          "description": "Canvas width. Max depends on aspect ratio (512x512 square, 688x384 for 16:9).",
+          "minimum": 16,
+          "type": "integer"
+        },
+        "height": {
+          "default": 128,
+          "description": "Canvas height. Max depends on aspect ratio.",
+          "minimum": 16,
+          "type": "integer"
+        },
+        "no_background": {
+          "default": true,
+          "description": "Return subjects on a transparent background. Defaults True — pro is normally used for assets. Set False for scenes and backdrops.",
+          "type": "boolean"
+        },
+        "reference_images": {
+          "default": null,
+          "description": "Up to 4 LABELLED reference images, as a JSON array. Each entry takes a \"url\" (preferred) OR a \"base64\": [{\"url\": \"https://...\", \"usage\": \"character base\"}, {\"url\": \"https://...\", \"usage\": \"outfit and armour\"}]. The \"usage\" note tells the model what to take from each image, which is what makes combining several references work. Prefer urls here especially — four inline images in one argument is four times the payload, and MCP clients truncate large arguments. Sizes are read from the images.",
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "style_image_base64": {
+          "default": null,
+          "description": "One image whose art style (palette, outline, detail, shading) the result should match. Use style_copy to narrow which of those apply.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "style_image_url": {
+          "default": null,
+          "description": "Alternative to style_image_base64: an https (or data:) URL to the style PNG. PREFER THIS for anything but a tiny sprite. Give one, not both.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "style_copy": {
+          "default": null,
+          "description": "Which aspects to take from style_image_base64: any of color_palette, outline, detail, shading. Defaults to all four, or all but color_palette when a palette is given.",
+          "items": {
+            "type": "string"
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "palette": {
+          "default": null,
+          "description": "Target palette, 2 to 256 hex colours as a JSON array, e.g. [\"#081820\", \"#346856\", \"#88c070\", \"#e0f8d0\"] for Game Boy or [\"#000000\", \"#ffffff\"] for 1-bit. The image is drawn for these colours and every pixel of the result is one of them.",
+          "items": {
+            "type": "string"
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "palette_name": {
+          "default": null,
+          "description": "Optional name of the palette (e.g. 'Game Boy', 'PICO-8', 'NES'); naming it helps the look.",
+          "maxLength": 100,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "max_colors": {
+          "default": null,
+          "description": "At most this many colours in each image (2-64), e.g. 6 for an NES-style sprite. With a palette, they are picked from it.",
+          "maximum": 64,
+          "minimum": 2,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "seed": {
+          "default": null,
+          "description": "Seed for reproducible generation.",
+          "minimum": 0,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "project_id": {
+          "default": null,
+          "description": "Internal Game Builder project context; the finished image is linked after generation.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "description"
+      ],
+      "type": "object"
+    },
+    "annotations": {
+      "readOnlyHint": false,
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false
+    },
+    "_meta": {
+      "fastmcp": {
+        "tags": []
+      }
+    }
+  },
+  {
+    "name": "unzoom_image",
+    "description": "Downscale upscaled pixel art back onto its true pixel grid.\n\nPixel art found online is almost always scaled up — a 32x32 sprite saved at\n512x512, where every art pixel is a 16x16 block. Every tool that takes a\nreference or style image works far better on the real 32x32 sprite, and this\nrecovers it: the pixel grid is detected and the image is downsampled onto it.\n\nRun this FIRST whenever a user supplies pixel art from outside PixelLab and\nyou are about to pass it to create_image_pixflux(init_image), a style image,\nedit_image, or create_character. If the art was never upscaled it is already\nat native size and this is unnecessary.\n\nDo not confuse it with image_to_pixelart: that CONVERTS a non-pixel-art\npicture, redrawing it. This one only downscales art that is already pixel art.\n\nInput must be at least 256x256 (grid detection needs the pixels) and at most\n2048x2048 in area.\n\nThe result is OPAQUE: grid detection works in RGB, so transparency in the\ninput is composited onto white first. If the user needs a cut-out sprite\nback, tell them so rather than handing back a white-boxed result.\n\nCost: 0.1 generations. Runs locally in under a second — poll once with\nget_image(job_id).",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "image_base64": {
+          "default": null,
+          "description": "Base64 PNG/JPEG of the upscaled pixel art. PREFER image_url — MCP clients routinely truncate large inline base64, and unzoom inputs are big by definition.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "image_url": {
+          "default": null,
+          "description": "Alternative to image_base64: an https (or data:) URL to the upscaled image. PREFER THIS. Give one, not both.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "quantize": {
+          "default": 0,
+          "description": "Palette handling for the result. 0 auto-detects a palette, -1 keeps every color the downsample produces, 2-256 quantizes to exactly that many colors.",
+          "maximum": 256,
+          "minimum": -1,
+          "type": "integer"
+        },
+        "project_id": {
+          "default": null,
+          "description": "Internal Game Builder project context; the finished image is linked after generation.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "annotations": {
+      "readOnlyHint": false,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    },
+    "_meta": {
+      "fastmcp": {
+        "tags": []
+      }
+    }
+  },
+  {
+    "name": "reduce_colors",
+    "description": "Quantize images onto a smaller, shared palette.\n\nPixel art reads as pixel art partly because of its restricted palette. AI\noutput and converted artwork often carry hundreds of near-identical colors;\nthis snaps them onto a tight palette, optionally with ordered dithering.\n\nPassing several frames in one call is the point: they are quantized TOGETHER,\nso an animation or a character's eight directions come back sharing ONE\npalette instead of drifting apart frame by frame. Quantizing them one at a\ntime is the mistake this tool exists to prevent.\n\nThree ways to choose the palette:\n- omit num_colors and the palette image — the size is auto-detected\n- num_colors — quantize to exactly this many colors\n- palette_image — reuse the colors of an existing image (the game's palette)\n\nThe result carries a `palette` strip you can feed back as palette_image_base64\nto lock later frames onto the same colors.\n\nTotal size limit across all frames is 512x512 worth of pixels (sixteen 64x64\nframes, or four 128x128).\n\nCost: 0.1 generations. Runs locally in about a second — poll once with\nget_image(job_id).",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "images_base64": {
+          "default": null,
+          "description": "Base64 PNG(s) to quantize — pass a one-element list for a single image. All frames must be the same size. PREFER image_urls; MCP clients routinely truncate large inline base64.",
+          "items": {
+            "type": "string"
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "image_urls": {
+          "default": null,
+          "description": "Alternative to images_base64: https, data: or `upload:<id>` (POST /v2/uploads with this same bearer token) URLs to the PNG(s), one per frame. PREFER THIS. Give urls OR base64, not both.",
+          "items": {
+            "type": "string"
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "num_colors": {
+          "default": null,
+          "description": "Target number of colors. Omit to auto-detect a good palette size from the images. Cannot be combined with a palette image.",
+          "maximum": 256,
+          "minimum": 2,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "palette_image_base64": {
+          "default": null,
+          "description": "Base64 PNG whose colors become the palette (max 256 colors) — use it to force frames onto an existing game palette. Cannot be combined with num_colors.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "palette_image_url": {
+          "default": null,
+          "description": "Alternative to palette_image_base64: an https (or data:) URL to the palette image. Give one, not both.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "dithering": {
+          "default": "none",
+          "description": "Ordered dithering matrix size. Larger matrices give smoother gradients at the cost of a busier look.",
+          "enum": [
+            "none",
+            "2x2",
+            "4x4",
+            "8x8"
+          ],
+          "type": "string"
+        },
+        "dithering_strength": {
+          "default": 5,
+          "description": "How strongly to dither. Ignored when dithering is 'none'.",
+          "maximum": 10,
+          "minimum": 0,
+          "type": "number"
+        },
+        "project_id": {
+          "default": null,
+          "description": "Internal Game Builder project context; the finished image is linked after generation.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "annotations": {
+      "readOnlyHint": false,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    },
+    "_meta": {
+      "fastmcp": {
+        "tags": []
+      }
+    }
+  }
+]

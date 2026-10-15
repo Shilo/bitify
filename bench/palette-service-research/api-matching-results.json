@@ -1,0 +1,50 @@
+{
+  "status": 200,
+  "ms": 1769,
+  "usage": {
+    "type": "generations",
+    "generations": 0.1
+  },
+  "output": {
+    "width": 64,
+    "height": 64,
+    "visible_colors": 8,
+    "transparent_pixels": 0,
+    "alpha_histogram": {
+      "255": 4096
+    },
+    "color_histogram": {
+      "#88c070": 997,
+      "#7e2553": 807,
+      "#29adff": 661,
+      "#ff004d": 440,
+      "#346856": 419,
+      "#e0f8d0": 332,
+      "#ffec27": 257,
+      "#081820": 183
+    },
+    "rgba_sha256": "66fd71db8e54c4820cfd241b5139162152683843bbed6efb7ecc887620968e7f"
+  },
+  "candidate_metrics": {
+    "encodedRGB": {
+      "mismatch_pixels": 1272,
+      "total_pixels": 4096,
+      "agreement": 0.689453125
+    },
+    "linearRGB": {
+      "mismatch_pixels": 1188,
+      "total_pixels": 4096,
+      "agreement": 0.7099609375
+    },
+    "Oklab": {
+      "mismatch_pixels": 927,
+      "total_pixels": 4096,
+      "agreement": 0.773681640625
+    },
+    "CIELabD65": {
+      "mismatch_pixels": 833,
+      "total_pixels": 4096,
+      "agreement": 0.796630859375
+    }
+  }
+}

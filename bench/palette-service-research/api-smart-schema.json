@@ -1,0 +1,215 @@
+{
+  "path": {
+    "post": {
+      "tags": [
+        "Create Image"
+      ],
+      "summary": "Generate image (Pro)",
+      "description": "Generate pixel art images from text description.\n\nThis endpoint creates multiple pixel art images based on a text description,\nwith optional reference images for style and subject guidance.\nReturns immediately with a background job ID. Poll `GET /v2/background-jobs/{job_id}`\nto check status and retrieve results.\n\n**Key Features:**\n- Text-to-image pixel art generation\n- Optional reference images for subject guidance (up to 4)\n- Optional style image for consistent pixel art style\n- Optional colour palette (`target_palette`, beta): 2-256 hex colours the image is\n  drawn for and every result pixel is put on (1-bit, Game Boy, PICO-8, NES, any\n  Lospec palette as hex), plus an optional `max_colors` cap per image. With a\n  palette, set `style_options.color_palette` to false - the palette sets the colours\n- Automatic background removal\n- Non-blocking: returns job ID immediately\n\n**Output Counts by Size (by max dimension):**\n- Up to 32px: 64 images (8x8 grid)\n- 33-35px: 49 images (7x7 grid)\n- 36-41px: 36 images (6x6 grid)\n- 42-50px: 25 images (5x5 grid)\n- 51-64px: 16 images (4x4 grid)\n- 65-84px: 9 images (3x3 grid)\n- 85px: 16 images (4x4 grid)\n- 86-170px: 4 images (2x2 grid)\n- Above 170px: 1 image\n\n**Supported Sizes:**\n- Minimum 16x16. Maximum depends on aspect ratio (e.g. 512x512 for square, 688x384 for 16:9).\n\n**Usage Pattern:**\n1. POST to this endpoint (returns `background_job_id`)\n2. Poll `GET /v2/background-jobs/{background_job_id}` every 5-10 seconds\n3. When `status` is `completed`, images are in `last_response`\n\nUsing the Python client:\n```python\nimport pixellab\n\nclient = pixellab.Client(secret=\"YOUR_API_TOKEN\")\n\nresponse = client.generate_image_v2(\n    description=\"cute wizard character\",\n    image_size=dict(width=64, height=64)\n)\n\n# Access generated images\nfor i, image in enumerate(response.images):\n    image.pil_image().save(f\"image_{i}.png\")\n```",
+      "operationId": "generate_image_v2_generate_image_v2_post",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/GenerateImageV2Request"
+            }
+          }
+        },
+        "required": true
+      },
+      "responses": {
+        "202": {
+          "description": "Image generation job accepted and processing",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateImageV2Response"
+              },
+              "example": {
+                "background_job_id": "123e4567-e89b-12d3-a456-426614174000",
+                "status": "processing",
+                "usage": {
+                  "type": "usd",
+                  "usd": 0
+                }
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Invalid API token"
+        },
+        "402": {
+          "description": "Insufficient credits"
+        },
+        "422": {
+          "description": "Validation error"
+        },
+        "429": {
+          "description": "Too many concurrent jobs"
+        }
+      },
+      "security": [
+        {
+          "HTTPBearer": []
+        }
+      ]
+    }
+  },
+  "GenerateImageV2Request": {
+    "properties": {
+      "description": {
+        "type": "string",
+        "maxLength": 2000,
+        "minLength": 1,
+        "title": "Description",
+        "description": "Description of the image to generate"
+      },
+      "image_size": {
+        "$ref": "#/components/schemas/app__endpoints__external__v2__generate_image_v2__ImageSize",
+        "description": "Size of the output image"
+      },
+      "seed": {
+        "anyOf": [
+          {
+            "type": "integer",
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Seed",
+        "description": "Seed for reproducible generation"
+      },
+      "no_background": {
+        "anyOf": [
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "No Background",
+        "description": "Remove background from generated images",
+        "default": true
+      },
+      "reference_images": {
+        "anyOf": [
+          {
+            "items": {
+              "$ref": "#/components/schemas/app__endpoints__external__v2__generate_image_v2__ReferenceImage"
+            },
+            "type": "array",
+            "maxItems": 4
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Reference Images",
+        "description": "Optional reference images for subject guidance (up to 4)"
+      },
+      "style_image": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/app__endpoints__external__v2__generate_image_v2__ReferenceImage"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Optional style image for pixel size and style reference"
+      },
+      "style_options": {
+        "$ref": "#/components/schemas/StyleOptions",
+        "description": "Options for what to copy from the style image"
+      },
+      "target_palette": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/TargetPalette"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Colours the result must use and/or a colour cap: {\"colors\": [\"#081820\", \"#346856\", \"#88c070\", \"#e0f8d0\"], \"name\": \"Game Boy\", \"max_colors\": 4}. With colors the image is drawn for them and every pixel is one of them; max_colors (2-64) caps each image. With a style_image, set style_options.color_palette to false."
+      }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+      "description",
+      "image_size"
+    ],
+    "title": "GenerateImageV2Request",
+    "description": "Request model for generate-image-v2 endpoint",
+    "example": {
+      "description": "a cute wizard character",
+      "image_size": {
+        "height": 64,
+        "width": 64
+      },
+      "no_background": true,
+      "seed": 42
+    }
+  },
+  "TargetPalette": {
+    "properties": {
+      "colors": {
+        "anyOf": [
+          {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Colors",
+        "description": "2 to 256 hex colours like '#1a2b3c'."
+      },
+      "name": {
+        "anyOf": [
+          {
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Name",
+        "description": "The palette's name ('Game Boy', 'PICO-8'); helps the look."
+      },
+      "max_colors": {
+        "anyOf": [
+          {
+            "type": "integer",
+            "maximum": 64,
+            "minimum": 2
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Max Colors",
+        "description": "At most this many colours in each image (from colors if given)."
+      },
+      "smart": {
+        "type": "boolean",
+        "title": "Smart",
+        "description": "Beta, single images only: put each object on the palette as a whole (a face stays skin-coloured, wood stays brown) instead of giving every pixel its nearest colour. Needs colors; adds about 15-60 s.",
+        "default": false
+      }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "title": "TargetPalette",
+    "description": "Colours the result must use (colors) and/or at most max_colors per image."
+  }
+}

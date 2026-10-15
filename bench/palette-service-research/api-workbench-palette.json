@@ -1,0 +1,16 @@
+{
+  "status": 200,
+  "data": {
+    "jsonrpc": "2.0",
+    "id": 3,
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "palette: generate hue-shifted ramps from base colours\nno subject\n  --base <value>: name=#rrggbb (repeatable)\n  --steps <value> (1-7)\n  --hue-shift <value>\n  --full: do not truncate detail lines\nids or image references, never paths; every output comes back with the reply. `describe cli` lists every command."
+        }
+      ],
+      "isError": false
+    }
+  }
+}

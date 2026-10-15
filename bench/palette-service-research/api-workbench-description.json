@@ -1,0 +1,16 @@
+{
+  "status": 200,
+  "data": {
+    "jsonrpc": "2.0",
+    "id": 2,
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "pixelart_workbench — one command per call; `<command> -h` lists its arguments.\n\nauthor, edit and look:\n  inspect  frame sheets of an image, or a zoomed crop with its exact colours\n  edit  guarded pixel operations on an image or animation; returns a new image id\n  draw  render a layered drawing or animation from a recipe; revise or inspect one by id\n  describe  a contract, or the command list\n\ncheck and explain a drawing:\n  lint  pixel-art findings with owners and overlays\n  measure  bbox, centroid, widths, colors, owners\n  explain  resolved geometry per node/command without building\n  clusters  same-colour cluster map\n  parts  visualize a job's source partition (each part coloured, unassigned and double-claimed pixels flagged)\n  silhouette  readability packet: silhouette, inverse, grey, mirrored, 1x/2x on light/mid/dark backgrounds\n  motion  temporal report: deltas, seam, holds, flashes, speed, arc, area drift per node\n  storyboard  render the frames a reviewer should look at, with reasons\n  reveal  pixels of the rest silhouette that articulation leaves uncovered (needs underpaint)\n  crop  export a small region as text rows + legend for hand editing (with a fingerprint for guarded paste)\n  sweep  render variants of one craft op (e.g. shade band=1,2,3) as candidates plus one comparison sheet\n\nany image:\n  score  0-100 pixel-art discipline score with a breakdown\n  extract-palette  extract a palette and ramp proposals from reference art\n  repair  deterministic cleanup: regrid,defringe,snap,stray,holes,deflicker\n\nimprove a drawing (each returns a new drawing id):\n  shade  ramp shading toward/away from a light, emitted as a guarded patch decision\n  selout  selective outlining, emitted as a guarded patch decision\n  reoutline  move a node's outline outside (or inside) its fill; needs --bake\n  clean-lines  erase doubled corner pixels on 1px outlines; needs --bake\n  aa  interior anti-aliasing at outline staircase corners\n  mirror  make one node the exact pixel mirror of another; needs --bake\n  cluster  identify the same-colour cluster under a pixel; recolor/delete/nudge it with a fingerprint guard\n  paste  guarded replacement of a cropped region from edited rows (node-local, baked)\n\ntwo drawings:\n  compare  changed pixels between two runs\n\nno subject:\n  palette  generate hue-shifted ramps from base colours\n\ncontracts: `describe start | draw | animation | motion | scenes | edits | paint | outline | review`; engine details: `describe change_operations | coordinates | decisions | draw_commands | job_conveniences | lint_rules | ramps`."
+        }
+      ],
+      "isError": false
+    }
+  }
+}

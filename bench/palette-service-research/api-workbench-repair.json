@@ -1,0 +1,16 @@
+{
+  "status": 200,
+  "data": {
+    "jsonrpc": "2.0",
+    "id": 3,
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "repair: deterministic cleanup: regrid,defringe,snap,stray,holes,deflicker\nsubject: any image id or reference\n  --ops <value>\n  --full: do not truncate detail lines\nresult: a new image id\nids or image references, never paths; every output comes back with the reply. `describe cli` lists every command."
+        }
+      ],
+      "isError": false
+    }
+  }
+}

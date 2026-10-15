@@ -1,0 +1,16 @@
+{
+  "status": 200,
+  "data": {
+    "jsonrpc": "2.0",
+    "id": 3,
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "id: 4f4250f3-b0e9-4b01-8bf7-5064368b8fdc\njob_id: 4f4250f3-b0e9-4b01-8bf7-5064368b8fdc\nasset_id: 3d4fb64f-dbd7-5f06-abac-4e01433a1658\nasset_status: pending (saved when generation completes)\nframes: 1\nsize: 64x32px (unchanged)\npalette: 8 colors\ndithering: 4x4 @ 5.0\ncost: 0.1 generations\nstatus: processing (~1s)\n\nhint: get_image(job_id=\"4f4250f3-b0e9-4b01-8bf7-5064368b8fdc\")"
+        }
+      ],
+      "isError": false
+    }
+  }
+}

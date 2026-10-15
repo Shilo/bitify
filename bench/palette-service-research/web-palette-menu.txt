@@ -1,0 +1,46 @@
+- menu:
+  - menuitem "None"
+  - menuitem "1-bit (black and white) (2) 2 colours":
+    - paragraph: 1-bit (black and white) (2)
+  - menuitem "Game Boy (4) 4 colours":
+    - paragraph: Game Boy (4)
+  - menuitem "PICO-8 (16) 16 colours":
+    - paragraph: PICO-8 (16)
+  - menuitem "NES (55) 55 colours":
+    - paragraph: NES (55)
+  - menuitem "Commodore 64 (16) 16 colours":
+    - paragraph: Commodore 64 (16)
+  - menuitem "CGA (4) 4 colours":
+    - paragraph: CGA (4)
+  - menuitem "ZX Spectrum (15) 15 colours":
+    - paragraph: ZX Spectrum (15)
+  - menuitem "Sweetie 16 (16) 16 colours":
+    - paragraph: Sweetie 16 (16)
+  - menuitem "DawnBringer 16 (16) 16 colours":
+    - paragraph: DawnBringer 16 (16)
+  - menuitem "DawnBringer 32 (32) 32 colours":
+    - paragraph: DawnBringer 32 (32)
+  - menuitem "Endesga 32 (32) 32 colours":
+    - paragraph: Endesga 32 (32)
+  - menuitem "SLSO8 (8) 8 colours":
+    - paragraph: SLSO8 (8)
+  - menuitem "Hollow (4) 4 colours":
+    - paragraph: Hollow (4)
+  - menuitem "Oil 6 (6) 6 colours":
+    - paragraph: Oil 6 (6)
+  - menuitem "Twilight 5 (5) 5 colours":
+    - paragraph: Twilight 5 (5)
+  - menuitem "AAP-64 (64) 64 colours":
+    - paragraph: AAP-64 (64)
+  - menuitem "Resurrect 64 (64) 64 colours":
+    - paragraph: Resurrect 64 (64)
+  - separator
+  - menuitem "From Lospec Import any palette by its link":
+    - paragraph: From Lospec
+    - paragraph: Import any palette by its link
+  - menuitem "From a palette image Its colours become the palette":
+    - paragraph: From a palette image
+    - paragraph: Its colours become the palette
+  - 'menuitem "Paste hex colours #081820 #346856 #88c070 ..."':
+    - paragraph: Paste hex colours
+    - paragraph: "#081820 #346856 #88c070 ..."

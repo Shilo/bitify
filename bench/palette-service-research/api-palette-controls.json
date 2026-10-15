@@ -1,0 +1,370 @@
+{
+  "AnimateWithSkeletonRequest": {
+    "color_image": {
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/Base64Image"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Forced color palette, image containing colors used for palette"
+    }
+  },
+  "AnimateWithTextRequest": {
+    "color_image": {
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/Base64Image"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Forced color palette, image containing colors used for palette"
+    }
+  },
+  "AnimateWithTextV2Request": {
+    "target_palette": {
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/TargetPalette"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Colours the frames must use and/or a colour cap, shared by all frames: {\"colors\": [\"#081820\", \"#346856\", \"#88c070\", \"#e0f8d0\"], \"name\": \"Game Boy\", \"max_colors\": 4}. The reference image is put on the palette first. `smart` is for single images and is refused here."
+    }
+  },
+  "CreateCharacterAnimationRequest": {
+    "color_image": {
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/Base64Image"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Color palette reference image"
+    }
+  },
+  "CreateCharacterStateRequest": {
+    "use_color_palette_from_reference": {
+      "type": "boolean",
+      "title": "Use Color Palette From Reference",
+      "description": "Snap the edited rotations to the source character's existing color palette so the new state stays color-consistent with the original.",
+      "default": false
+    }
+  },
+  "CreateCharacterWith4DirectionsRequest": {
+    "color_image": {
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/Base64Image"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Color palette reference image"
+    }
+  },
+  "CreateCharacterWith8DirectionsRequest": {
+    "color_image": {
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/Base64Image"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Color palette reference image"
+    }
+  },
+  "CreateImageBitforgeRequest": {
+    "color_image": {
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/Base64Image"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Forced color palette, image containing colors used for palette"
+    }
+  },
+  "CreateImagePixfluxRequest": {
+    "color_image": {
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/Base64Image"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Forced color palette, image containing colors used for palette"
+    }
+  },
+  "CreateIsometricTileRequest": {
+    "color_image": {
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/Base64Image"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Forced color palette, image containing colors used for palette"
+    }
+  },
+  "CreateMapObjectRequest": {
+    "color_image": {
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/Base64Image"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Image containing colors for forced palette"
+    }
+  },
+  "CreateTilesetRequest": {
+    "color_image": {
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/Base64Image"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Reference image for color palette"
+    }
+  },
+  "CreateTilesetSidescrollerRequest": {
+    "color_image": {
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/Base64Image"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Reference image for color palette"
+    }
+  },
+  "CreateUIAssetRequest": {
+    "color_palette": {
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 200
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Color Palette",
+      "description": "Optional palette specification (e.g. 'brown and gold')"
+    }
+  },
+  "EditImageProFlashRequest": {
+    "use_color_palette_correction": {
+      "type": "boolean",
+      "title": "Use Color Palette Correction",
+      "default": false
+    }
+  },
+  "EditImageRequest": {
+    "color_image": {
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/Base64Image"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Color reference image for style guidance"
+    }
+  },
+  "GenerateImageV2Request": {
+    "target_palette": {
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/TargetPalette"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Colours the result must use and/or a colour cap: {\"colors\": [\"#081820\", \"#346856\", \"#88c070\", \"#e0f8d0\"], \"name\": \"Game Boy\", \"max_colors\": 4}. With colors the image is drawn for them and every pixel is one of them; max_colors (2-64) caps each image. With a style_image, set style_options.color_palette to false."
+    }
+  },
+  "GenerateUIV2Request": {
+    "color_palette": {
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 200
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Color Palette",
+      "description": "Optional color palette specification (e.g., 'brown and gold', 'blue and silver')"
+    }
+  },
+  "InpaintRequest": {
+    "color_image": {
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/Base64Image"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Forced color palette, image containing colors used for palette"
+    }
+  },
+  "ProFlashStyleOptions": {
+    "color_palette": {
+      "type": "boolean",
+      "title": "Color Palette",
+      "default": true
+    }
+  },
+  "ReduceColorsRequest": {
+    "num_colors": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "maximum": 256,
+          "minimum": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Num Colors",
+      "description": "Target number of colors. Omit to auto-detect a good palette size from the image itself. Mutually exclusive with palette_image."
+    },
+    "palette_image": {
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/Base64Image"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "An image whose colors become the palette (max 256 colors). Use it to force frames onto an existing game palette. Mutually exclusive with num_colors."
+    },
+    "dithering": {
+      "type": "string",
+      "enum": [
+        "none",
+        "2x2",
+        "4x4",
+        "8x8"
+      ],
+      "title": "Dithering",
+      "description": "Ordered dithering matrix size. Larger matrices give smoother gradients at the cost of a busier look.",
+      "default": "none"
+    },
+    "dithering_strength": {
+      "type": "number",
+      "maximum": 10,
+      "minimum": 0,
+      "title": "Dithering Strength",
+      "description": "How strongly to dither. Ignored when dithering is 'none'.",
+      "default": 5
+    }
+  },
+  "ReduceColorsResponse": {
+    "palette": {
+      "$ref": "#/components/schemas/Base64Image",
+      "description": "A 1px-tall strip of the resulting palette, most frequent color first. Feed it back as palette_image to lock later frames to it."
+    }
+  },
+  "ResizeRequest": {
+    "color_image": {
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/Base64Image"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Forced color palette, image containing colors used for palette"
+    }
+  },
+  "RotateRequest": {
+    "color_image": {
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/Base64Image"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Forced color palette, image containing colors used for palette"
+    }
+  },
+  "StyleOptions": {
+    "color_palette": {
+      "type": "boolean",
+      "title": "Color Palette",
+      "description": "Copy color palette from style image",
+      "default": true
+    }
+  },
+  "TargetPalette": {
+    "max_colors": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "maximum": 64,
+          "minimum": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Max Colors",
+      "description": "At most this many colours in each image (from colors if given)."
+    }
+  },
+  "TilesProStyleOptions": {
+    "color_palette": {
+      "type": "boolean",
+      "title": "Color Palette",
+      "description": "Match color palette from style tiles",
+      "default": true
+    }
+  },
+  "UnzoomRequest": {
+    "quantize": {
+      "type": "integer",
+      "maximum": 256,
+      "minimum": -1,
+      "title": "Quantize",
+      "description": "Palette handling for the result. 0 auto-detects a palette, -1 keeps every color the downsample produces, and 2-256 quantizes to exactly that many colors.",
+      "default": 0
+    }
+  }
+}

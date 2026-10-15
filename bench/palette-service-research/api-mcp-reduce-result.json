@@ -1,0 +1,36 @@
+{
+  "status": 200,
+  "data": {
+    "jsonrpc": "2.0",
+    "id": 2,
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "status: completed\nid: 4f4250f3-b0e9-4b01-8bf7-5064368b8fdc\njob_id: 4f4250f3-b0e9-4b01-8bf7-5064368b8fdc\nframes: 1\ntransparent: no — every pixel is opaque. If you asked for no_background, background removal did not find one; retry or describe the subject on a plain background.\nasset_id: 3d4fb64f-dbd7-5f06-abac-4e01433a1658\nasset_type: image\nasset_status: saved\ngallery: saved to your PixelLab gallery (pixellab.ai/create)\ncharged: 0.1 generations\ndownload: https://api.pixellab.ai/mcp/images/4f4250f3-b0e9-4b01-8bf7-5064368b8fdc/download"
+        },
+        {
+          "type": "image",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAA8klEQVR4nO3UMQrEIBAF0J89wdxAizQK3v8ggjYp9AbeIFsJ2TDRFMuygf+bgWQC+SJvAbCLCFprEBFosdailAJrrfq+xzmHnDOcc8O9EAJijAghDPe890gpwXs/3FvXVX1ujEGtFcaYy28XEdm18sfSd8vfyT+VB4AFX74Bd/LLQ5jl1UuPyh/nOb30P5avtU7/59VaAwD0eU4p5WOek3NW51V6+RjjcK+XTykN97ZtU5/36z87BBoAGiAAaAANoAE0QNQFGkADnnv9aQANoAE0gAZMQgNoAA2gAQBoAA2gATRA1AUaQAOee/1pAA2YG/AGWTevRQUhC1gAAAAASUVORK5CYII=",
+          "mimeType": "image/png"
+        }
+      ],
+      "structuredContent": {
+        "job_id": "4f4250f3-b0e9-4b01-8bf7-5064368b8fdc",
+        "status": "completed",
+        "frames": 1,
+        "download_url": "https://api.pixellab.ai/mcp/images/4f4250f3-b0e9-4b01-8bf7-5064368b8fdc/download",
+        "download_urls": [
+          "https://api.pixellab.ai/mcp/images/4f4250f3-b0e9-4b01-8bf7-5064368b8fdc/download"
+        ],
+        "asset": {
+          "id": "3d4fb64f-dbd7-5f06-abac-4e01433a1658",
+          "type": "image",
+          "status": "saved"
+        },
+        "charged_generations": 0.1
+      },
+      "isError": false
+    }
+  }
+}
