@@ -1,0 +1,202 @@
+{
+  "scope": "Windows Playwright WebKit native controls; three repetitions each1/4MP; source transfer and independent hash scoring outside import timing; not app FPS, phone or total heap",
+  "platform": "win32",
+  "started": "2026-10-15T09:53:47.128Z",
+  "fixtures": [
+    {
+      "side": 1024,
+      "pixels": 1048576,
+      "pngBytes": 956142,
+      "sourcePngSha256": "a5ab4d336ac9a354661eb719c7e63c93849a9d859bea33f4fc232f2ba56becd2",
+      "expectedNormalizedRgbaSha256": "2822f9d73b1c9f6756803c3172f825ee1f703ec78f3dd360cbb43f272d65ce3f",
+      "rows": [
+        {
+          "repetition": 0,
+          "method": "bitmap-canvas8",
+          "importMs": 21,
+          "stages": {
+            "decodeMs": 14,
+            "drawMs": 0,
+            "readPixelsMs": 6
+          },
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 752192,
+          "normalizedRgbaSha256": "b430372bbcd28952e8060dcd549b204f5ee1dab724c6b515825aa61ab6cd22a2",
+          "exact": false
+        },
+        {
+          "repetition": 0,
+          "method": "html-webgl",
+          "importMs": 176,
+          "stages": {
+            "decodeMs": 16,
+            "contextMs": 145,
+            "uploadMs": 4,
+            "readPixelsMs": 8
+          },
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "normalizedRgbaSha256": "2822f9d73b1c9f6756803c3172f825ee1f703ec78f3dd360cbb43f272d65ce3f",
+          "exact": true
+        },
+        {
+          "repetition": 1,
+          "method": "html-webgl",
+          "importMs": 29,
+          "stages": {
+            "decodeMs": 14,
+            "contextMs": 3,
+            "uploadMs": 6,
+            "readPixelsMs": 3
+          },
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "normalizedRgbaSha256": "2822f9d73b1c9f6756803c3172f825ee1f703ec78f3dd360cbb43f272d65ce3f",
+          "exact": true
+        },
+        {
+          "repetition": 1,
+          "method": "bitmap-canvas8",
+          "importMs": 31,
+          "stages": {
+            "decodeMs": 25,
+            "drawMs": 0,
+            "readPixelsMs": 6
+          },
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 752192,
+          "normalizedRgbaSha256": "b430372bbcd28952e8060dcd549b204f5ee1dab724c6b515825aa61ab6cd22a2",
+          "exact": false
+        },
+        {
+          "repetition": 2,
+          "method": "bitmap-canvas8",
+          "importMs": 32,
+          "stages": {
+            "decodeMs": 27,
+            "drawMs": 0,
+            "readPixelsMs": 5
+          },
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 752192,
+          "normalizedRgbaSha256": "b430372bbcd28952e8060dcd549b204f5ee1dab724c6b515825aa61ab6cd22a2",
+          "exact": false
+        },
+        {
+          "repetition": 2,
+          "method": "html-webgl",
+          "importMs": 27,
+          "stages": {
+            "decodeMs": 15,
+            "contextMs": 1,
+            "uploadMs": 4,
+            "readPixelsMs": 4
+          },
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "normalizedRgbaSha256": "2822f9d73b1c9f6756803c3172f825ee1f703ec78f3dd360cbb43f272d65ce3f",
+          "exact": true
+        }
+      ]
+    },
+    {
+      "side": 2048,
+      "pixels": 4194304,
+      "pngBytes": 1991641,
+      "sourcePngSha256": "fed75cfefeb8d1464aac421bb1500aab333b1a7ad9e5042dce565c6cad7bb08e",
+      "expectedNormalizedRgbaSha256": "e42721dc3a7e0a20c98739fb26d774493a21149af2fcd5c598dbf073be9b5b9a",
+      "rows": [
+        {
+          "repetition": 0,
+          "method": "bitmap-canvas8",
+          "importMs": 363,
+          "stages": {
+            "decodeMs": 231,
+            "drawMs": 2,
+            "readPixelsMs": 130
+          },
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 3008768,
+          "normalizedRgbaSha256": "4134500eefcc0523281e89d6154d56126ebf69e4d299d636dca37f601c2f4090",
+          "exact": false
+        },
+        {
+          "repetition": 0,
+          "method": "html-webgl",
+          "importMs": 201,
+          "stages": {
+            "decodeMs": 15,
+            "contextMs": 10,
+            "uploadMs": 64,
+            "readPixelsMs": 61
+          },
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "normalizedRgbaSha256": "e42721dc3a7e0a20c98739fb26d774493a21149af2fcd5c598dbf073be9b5b9a",
+          "exact": true
+        },
+        {
+          "repetition": 1,
+          "method": "html-webgl",
+          "importMs": 136,
+          "stages": {
+            "decodeMs": 18,
+            "contextMs": 12,
+            "uploadMs": 32,
+            "readPixelsMs": 57
+          },
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "normalizedRgbaSha256": "e42721dc3a7e0a20c98739fb26d774493a21149af2fcd5c598dbf073be9b5b9a",
+          "exact": true
+        },
+        {
+          "repetition": 1,
+          "method": "bitmap-canvas8",
+          "importMs": 397,
+          "stages": {
+            "decodeMs": 269,
+            "drawMs": 0,
+            "readPixelsMs": 127
+          },
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 3008768,
+          "normalizedRgbaSha256": "4134500eefcc0523281e89d6154d56126ebf69e4d299d636dca37f601c2f4090",
+          "exact": false
+        },
+        {
+          "repetition": 2,
+          "method": "bitmap-canvas8",
+          "importMs": 225,
+          "stages": {
+            "decodeMs": 183,
+            "drawMs": 0,
+            "readPixelsMs": 42
+          },
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 3008768,
+          "normalizedRgbaSha256": "4134500eefcc0523281e89d6154d56126ebf69e4d299d636dca37f601c2f4090",
+          "exact": false
+        },
+        {
+          "repetition": 2,
+          "method": "html-webgl",
+          "importMs": 108,
+          "stages": {
+            "decodeMs": 15,
+            "contextMs": 3,
+            "uploadMs": 25,
+            "readPixelsMs": 52
+          },
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "normalizedRgbaSha256": "e42721dc3a7e0a20c98739fb26d774493a21149af2fcd5c598dbf073be9b5b9a",
+          "exact": true
+        }
+      ]
+    }
+  ],
+  "browserVersion": "26.5",
+  "completed": true,
+  "finished": "2026-10-15T09:54:10.240Z"
+}

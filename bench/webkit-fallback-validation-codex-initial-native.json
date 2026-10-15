@@ -1,0 +1,678 @@
+{
+  "device": "codex",
+  "started": "2026-10-15T09:56:07.500Z",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "scope": "Unmodified production native decoder; direct native GL helper; instrumented ImageDecoder-absent fallback control. Owned PNGs; no clipboard. Unsupported helper inputs decline rather than promise exactness. Metadata-only huge header never decoded.",
+  "cases": [
+    {
+      "id": "rgba8-srgb-low-alpha",
+      "oraclePolicy": "exact-srgb8",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 1.2999999970197678,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "a2f9f6ff72cf18b7a6f55458144edca38167045ed300170606057e73f0e65347",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "exactVisibleRgba": true
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "ms": 13.399999998509884,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "a2f9f6ff72cf18b7a6f55458144edca38167045ed300170606057e73f0e65347",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "exactVisibleRgba": true
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 1.4000000059604645,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "055b4b171e56d673fc918c9f47fea758f5eb3378b250f37d81bd3eaea871a76a",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 85,
+          "maxChannelDelta": 87,
+          "exactVisibleRgba": false
+        }
+      ]
+    },
+    {
+      "id": "indexed1-trns",
+      "oraclePolicy": "exact-srgb8",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 0.7000000029802322,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "a0b9f72be836a3c61bf789971bbad146ab3abc142bcef965e359b47f562b7ab7",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "exactVisibleRgba": true
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "declined": true,
+          "ms": 0.5
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 0.6000000014901161,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "bc68a356639cdfd5ec36a49731db00c85dd368c9a71bc835d4a5065a96c0adb0",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 71,
+          "maxChannelDelta": 84,
+          "exactVisibleRgba": false
+        }
+      ]
+    },
+    {
+      "id": "indexed4-trns",
+      "oraclePolicy": "exact-srgb8",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 0.5,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "c3015247d470fd9894ef2c40cc2d5b8ceed62f8d4452404173e03f5885ffd69a",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "exactVisibleRgba": true
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "declined": true,
+          "ms": 0.5
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 0.5,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "ccf197bdf9c2a7ba26e6d5f9ac7f2b48c29acf8bdb2bdc2123cb32dbf834bb6a",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 72,
+          "maxChannelDelta": 85,
+          "exactVisibleRgba": false
+        }
+      ]
+    },
+    {
+      "id": "gray16",
+      "oraclePolicy": "exact-srgb8",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 0.8000000044703484,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "775e7b670323fb1779e867716c8d1d7bcda36bea1ee9dbf20c48c1e4b4d66893",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "exactVisibleRgba": true
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "declined": true,
+          "ms": 0.4000000059604645
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 0.5,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "775e7b670323fb1779e867716c8d1d7bcda36bea1ee9dbf20c48c1e4b4d66893",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "exactVisibleRgba": true
+        }
+      ]
+    },
+    {
+      "id": "gray-alpha16",
+      "oraclePolicy": "exact-srgb8",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 0.4000000059604645,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "dba48e8098cdf018e271283e5b2ccedd2299b9c1c3921c4b6bc62b4d661cc45f",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "exactVisibleRgba": true
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "declined": true,
+          "ms": 0.5
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 0.5,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "fc02ca92f23931f7a40185854e5b37401e53f56988f56b70a8b2ad9868e7b6e3",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 59,
+          "maxChannelDelta": 33,
+          "exactVisibleRgba": false
+        }
+      ]
+    },
+    {
+      "id": "rgba16",
+      "oraclePolicy": "exact-srgb8",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 0.29999999701976776,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "a2f9f6ff72cf18b7a6f55458144edca38167045ed300170606057e73f0e65347",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "exactVisibleRgba": true
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "declined": true,
+          "ms": 0.5
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 0.3999999985098839,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "055b4b171e56d673fc918c9f47fea758f5eb3378b250f37d81bd3eaea871a76a",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 85,
+          "maxChannelDelta": 87,
+          "exactVisibleRgba": false
+        }
+      ]
+    },
+    {
+      "id": "rgb8-trns-key",
+      "oraclePolicy": "exact-srgb8",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 0.5999999940395355,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "8309530a8851f9c6854d1444fb6f1aec8acadcf2a2bf9e8280c69cbdc81bf3e2",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "exactVisibleRgba": true
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "declined": true,
+          "ms": 0.5
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 0.3999999985098839,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "c9c7cfa3d609e9433540022cf9a45aa162fc7e17a95aef2e1e7b35c9515010b5",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "exactVisibleRgba": true
+        }
+      ]
+    },
+    {
+      "id": "rgba8-adam7",
+      "oraclePolicy": "exact-srgb8",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 0.7000000029802322,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "a2f9f6ff72cf18b7a6f55458144edca38167045ed300170606057e73f0e65347",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "exactVisibleRgba": true
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "declined": true,
+          "ms": 0.3999999985098839
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 0.3999999985098839,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "055b4b171e56d673fc918c9f47fea758f5eb3378b250f37d81bd3eaea871a76a",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 85,
+          "maxChannelDelta": 87,
+          "exactVisibleRgba": false
+        }
+      ]
+    },
+    {
+      "id": "rgba8-linear-gamma",
+      "oraclePolicy": "browser-color-managed",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 0.3999999985098839,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "0e1738c9b1bf2fbd0aad2f3c079120acaa743b8ddc57ccbfa5a69d2d002713b4"
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "declined": true,
+          "ms": 0.5
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 3.2000000029802322,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "2bd744d5c6dabc152cf3127770d73bd57b83e7a8f23decd90251a9bf8a7a3c98"
+        }
+      ]
+    },
+    {
+      "id": "rgba8-p3-icc",
+      "oraclePolicy": "browser-color-managed",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 0.6000000014901161,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "4041bba16c1fdbd0954bca96a5083a7e2f947d9011edc04be6f9f06a3bac9ff0"
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "declined": true,
+          "ms": 0.7999999970197678
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 0.5,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "ca4d286b1e5f7efd85d62c8516ef8068c2dc3cf288dae19ad1bd6352d267e560"
+        }
+      ]
+    },
+    {
+      "id": "rgba8-exif-rotate90",
+      "oraclePolicy": "browser-transform",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 0.7999999970197678,
+          "width": 11,
+          "height": 13,
+          "rgbaSha256": "282841d83c5a3dec9213d6a3a4435c6297c597501954c6cdd7fdc9606f064b84"
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "declined": true,
+          "ms": 1.7000000029802322
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 0.29999999701976776,
+          "width": 11,
+          "height": 13,
+          "rgbaSha256": "282841d83c5a3dec9213d6a3a4435c6297c597501954c6cdd7fdc9606f064b84"
+        }
+      ]
+    },
+    {
+      "id": "apng-default-is-frame0",
+      "oraclePolicy": "browser-animation",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 5.5999999940395355,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "a2f9f6ff72cf18b7a6f55458144edca38167045ed300170606057e73f0e65347"
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "declined": true,
+          "ms": 1.9000000059604645
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 0.5,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "055b4b171e56d673fc918c9f47fea758f5eb3378b250f37d81bd3eaea871a76a"
+        }
+      ]
+    },
+    {
+      "id": "apng-default-excluded",
+      "oraclePolicy": "browser-animation",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 0.30000000447034836,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "8fa40ceae7a643d5249695ec6f58927ec3de1626681af23d90bca46fc0aa9bdf"
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "declined": true,
+          "ms": 1.6999999955296516
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 0.5,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "8fa40ceae7a643d5249695ec6f58927ec3de1626681af23d90bca46fc0aa9bdf"
+        }
+      ]
+    },
+    {
+      "id": "invalid-crc",
+      "oraclePolicy": "invalid",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 0.4000000059604645,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "a2f9f6ff72cf18b7a6f55458144edca38167045ed300170606057e73f0e65347"
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "ms": 8.800000004470348,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "a2f9f6ff72cf18b7a6f55458144edca38167045ed300170606057e73f0e65347"
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 0.5,
+          "width": 13,
+          "height": 11,
+          "rgbaSha256": "055b4b171e56d673fc918c9f47fea758f5eb3378b250f37d81bd3eaea871a76a"
+        }
+      ]
+    },
+    {
+      "id": "invalid-truncated",
+      "oraclePolicy": "invalid",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": false,
+          "ms": 1,
+          "error": {
+            "name": "InvalidStateError",
+            "message": "The source image could not be decoded."
+          }
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "declined": true,
+          "ms": 1.8000000044703484
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": false,
+          "ms": 0.3999999985098839,
+          "error": {
+            "name": "InvalidStateError",
+            "message": "The source image could not be decoded."
+          }
+        }
+      ]
+    },
+    {
+      "id": "unknown-critical",
+      "oraclePolicy": "invalid",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": false,
+          "ms": 0.6000000014901161,
+          "error": {
+            "name": "InvalidStateError",
+            "message": "The source image could not be decoded."
+          }
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "declined": true,
+          "ms": 0.6999999955296516
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": false,
+          "ms": 0.20000000298023224,
+          "error": {
+            "name": "InvalidStateError",
+            "message": "The source image could not be decoded."
+          }
+        }
+      ]
+    },
+    {
+      "id": "declared-oversize-header",
+      "oraclePolicy": "metadata-only",
+      "methods": [],
+      "skipped": "Huge header is metadata-only"
+    },
+    {
+      "id": "source",
+      "oraclePolicy": "frozen-app-srgb8",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 0.5,
+          "width": 32,
+          "height": 24,
+          "rgbaSha256": "74550bbbf6f6667b56ab35dbffdbc0ac85ca64efaa4bfc31663d1c7fe454cd32",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "exactVisibleRgba": true
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "ms": 8.799999997019768,
+          "width": 32,
+          "height": 24,
+          "rgbaSha256": "74550bbbf6f6667b56ab35dbffdbc0ac85ca64efaa4bfc31663d1c7fe454cd32",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "exactVisibleRgba": true
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 0.6000000014901161,
+          "width": 32,
+          "height": 24,
+          "rgbaSha256": "10672d156cd2e412931a59fd4a91aab1e77dae429195fb159f96d92b68f0a939",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 207,
+          "maxChannelDelta": 109,
+          "exactVisibleRgba": false
+        }
+      ]
+    },
+    {
+      "id": "converted",
+      "oraclePolicy": "frozen-app-srgb8",
+      "methods": [
+        {
+          "name": "production-native",
+          "ok": true,
+          "ms": 0.30000000447034836,
+          "width": 32,
+          "height": 24,
+          "rgbaSha256": "1023ed1b1862f83de49c8c85ce30d1e821fd3e5a0b57a1447abd98a598b972d4",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "exactVisibleRgba": true
+        },
+        {
+          "name": "direct-gl-helper",
+          "ok": true,
+          "ms": 6.699999995529652,
+          "width": 32,
+          "height": 24,
+          "rgbaSha256": "1023ed1b1862f83de49c8c85ce30d1e821fd3e5a0b57a1447abd98a598b972d4",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "exactVisibleRgba": true
+        },
+        {
+          "name": "forced-no-ImageDecoder",
+          "ok": true,
+          "ms": 0.3999999985098839,
+          "width": 32,
+          "height": 24,
+          "rgbaSha256": "e8cd9cb1b137bb39801abfea753e691433661c0e1c30c02228c864105092d0fe",
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 246,
+          "maxChannelDelta": 124,
+          "exactVisibleRgba": false
+        }
+      ]
+    }
+  ],
+  "performance": [
+    {
+      "name": "1MP directGLhelper",
+      "run": 0,
+      "ms": 91,
+      "width": 1024,
+      "height": 1024,
+      "declined": true,
+      "scope": "One native decode/upload/readback operation; excludes fixture fetch and independent comparison. No FPS or totalmemory claim."
+    },
+    {
+      "name": "1MP directGLhelper",
+      "run": 1,
+      "ms": 88.5,
+      "width": 1024,
+      "height": 1024,
+      "declined": true,
+      "scope": "One native decode/upload/readback operation; excludes fixture fetch and independent comparison. No FPS or totalmemory claim."
+    },
+    {
+      "name": "1MP directGLhelper",
+      "run": 2,
+      "ms": 101.19999999552965,
+      "width": 1024,
+      "height": 1024,
+      "declined": true,
+      "scope": "One native decode/upload/readback operation; excludes fixture fetch and independent comparison. No FPS or totalmemory claim."
+    }
+  ],
+  "dependencies": {
+    "helperPath": "bench/webkit-fallback-candidate-gl.mjs",
+    "hashes": {
+      "bench/webkit-fallback-candidate-gl.mjs": "f22137782727c1b309ae1969b23460a34100a2b57be8ac331a6f6f28353f6d80",
+      "src/lib/image-decode.js": "e1207e72ec51656ee6a0b516632599b60de0e510110fd319036203c9cefe15a9",
+      "src/lib/quantize.js": "6dacaca42d615b72a4ee511bb7ed32344aa7118ae946769e290d7a9463f8d0a3",
+      "bench/webkit-fallback-validation-probe.mjs": "4b7c140ba58e4165bd1d65df91ac014f53cd3398e60efec3c2945bace0efe808",
+      "bench/png-precision-validation-fixtures/manifest.json": "2a4d7b973efbf211d8a0d086a2537388d57b161f0f1c70bb55caee840c592e19",
+      "bench/png-import-precision-review/fixtures/manifest.json": "11cec4224e868e83f44f7619b29225372ee18c4da99f98ab832b350ac9a3d41b",
+      "bench/webkit-fallback-validation-stress/manifest.json": "83bcb80b1839a30cd430c3311a9c0b44594301b1db52ac57b09d7a44fce7977d"
+    }
+  },
+  "dependenciesAfter": {
+    "helperPath": "bench/webkit-fallback-candidate-gl.mjs",
+    "hashes": {
+      "bench/webkit-fallback-candidate-gl.mjs": "f22137782727c1b309ae1969b23460a34100a2b57be8ac331a6f6f28353f6d80",
+      "src/lib/image-decode.js": "e1207e72ec51656ee6a0b516632599b60de0e510110fd319036203c9cefe15a9",
+      "src/lib/quantize.js": "6dacaca42d615b72a4ee511bb7ed32344aa7118ae946769e290d7a9463f8d0a3",
+      "bench/webkit-fallback-validation-probe.mjs": "4b7c140ba58e4165bd1d65df91ac014f53cd3398e60efec3c2945bace0efe808",
+      "bench/png-precision-validation-fixtures/manifest.json": "2a4d7b973efbf211d8a0d086a2537388d57b161f0f1c70bb55caee840c592e19",
+      "bench/png-import-precision-review/fixtures/manifest.json": "11cec4224e868e83f44f7619b29225372ee18c4da99f98ab832b350ac9a3d41b",
+      "bench/webkit-fallback-validation-stress/manifest.json": "83bcb80b1839a30cd430c3311a9c0b44594301b1db52ac57b09d7a44fce7977d"
+    }
+  },
+  "dependenciesStable": true,
+  "completed": true,
+  "finished": "2026-10-15T09:56:08.043Z"
+}

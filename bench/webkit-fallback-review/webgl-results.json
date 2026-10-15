@@ -1,0 +1,2112 @@
+{
+  "scope": "Windows Playwright WebKit native WebGL alternatives; owned low-alpha fixtures; not Safari/iOS, production implementation or clipboard",
+  "platform": "win32",
+  "started": "2026-10-15T09:45:56.642Z",
+  "sourceDecoderSha256": "e1207e72ec51656ee6a0b516632599b60de0e510110fd319036203c9cefe15a9",
+  "fixtures": [
+    {
+      "id": "source",
+      "width": 32,
+      "height": 24,
+      "sourcePngSha256": "7f37bd9f7f235d65265bbe2e922adfd35d74cb4f07c73e52366251701bf57bb9",
+      "methods": [
+        {
+          "kind": "bitmap-default",
+          "engine": "webgl",
+          "ok": true,
+          "ms": 0,
+          "pixels": {
+            "alpha": 0,
+            "rgb": 341,
+            "opaque": 0,
+            "max": 254,
+            "examples": [
+              {
+                "pixel": 42,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  1,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 43,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  1,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 44,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  1,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 45,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  1,
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "exact": false
+          },
+          "verticalFlipDiagnostic": {
+            "alpha": 768,
+            "rgb": 433,
+            "opaque": 54,
+            "max": 255,
+            "examples": [
+              {
+                "pixel": 42,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  0,
+                  227,
+                  53,
+                  254
+                ]
+              },
+              {
+                "pixel": 43,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  0,
+                  227,
+                  53,
+                  254
+                ]
+              },
+              {
+                "pixel": 44,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  40,
+                  172,
+                  254,
+                  254
+                ]
+              },
+              {
+                "pixel": 45,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  40,
+                  172,
+                  254,
+                  254
+                ]
+              }
+            ],
+            "exact": false
+          },
+          "context": {
+            "alpha": true,
+            "antialias": false,
+            "depth": false,
+            "failIfMajorPerformanceCaveat": false,
+            "powerPreference": "default",
+            "premultipliedAlpha": false,
+            "preserveDrawingBuffer": false,
+            "stencil": false
+          },
+          "maxTextureSize": 16384,
+          "width": 32,
+          "height": 24
+        },
+        {
+          "kind": "bitmap-default",
+          "engine": "webgl2",
+          "ok": true,
+          "ms": 0,
+          "pixels": {
+            "alpha": 0,
+            "rgb": 341,
+            "opaque": 0,
+            "max": 254,
+            "examples": [
+              {
+                "pixel": 42,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  1,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 43,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  1,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 44,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  1,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 45,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  1,
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "exact": false
+          },
+          "verticalFlipDiagnostic": {
+            "alpha": 768,
+            "rgb": 433,
+            "opaque": 54,
+            "max": 255,
+            "examples": [
+              {
+                "pixel": 42,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  0,
+                  227,
+                  53,
+                  254
+                ]
+              },
+              {
+                "pixel": 43,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  0,
+                  227,
+                  53,
+                  254
+                ]
+              },
+              {
+                "pixel": 44,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  40,
+                  172,
+                  254,
+                  254
+                ]
+              },
+              {
+                "pixel": 45,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  40,
+                  172,
+                  254,
+                  254
+                ]
+              }
+            ],
+            "exact": false
+          },
+          "context": {
+            "alpha": true,
+            "antialias": false,
+            "depth": false,
+            "failIfMajorPerformanceCaveat": false,
+            "powerPreference": "default",
+            "premultipliedAlpha": false,
+            "preserveDrawingBuffer": false,
+            "stencil": false
+          },
+          "maxTextureSize": 16384,
+          "width": 32,
+          "height": 24
+        },
+        {
+          "kind": "bitmap-default",
+          "engine": "canvas8-control",
+          "ok": true,
+          "pixels": {
+            "alpha": 0,
+            "rgb": 292,
+            "opaque": 0,
+            "max": 241,
+            "examples": [
+              {
+                "pixel": 42,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 43,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 44,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 45,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "exact": false
+          }
+        },
+        {
+          "kind": "bitmap-none",
+          "engine": "webgl",
+          "ok": true,
+          "ms": 0,
+          "pixels": {
+            "alpha": 0,
+            "rgb": 323,
+            "opaque": 0,
+            "max": 241,
+            "examples": [
+              {
+                "pixel": 42,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 43,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 44,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 45,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "exact": false
+          },
+          "verticalFlipDiagnostic": {
+            "alpha": 768,
+            "rgb": 415,
+            "opaque": 54,
+            "max": 255,
+            "examples": [
+              {
+                "pixel": 42,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  0,
+                  227,
+                  53,
+                  254
+                ]
+              },
+              {
+                "pixel": 43,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  0,
+                  227,
+                  53,
+                  254
+                ]
+              },
+              {
+                "pixel": 44,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  40,
+                  172,
+                  255,
+                  254
+                ]
+              },
+              {
+                "pixel": 45,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  40,
+                  172,
+                  255,
+                  254
+                ]
+              }
+            ],
+            "exact": false
+          },
+          "context": {
+            "alpha": true,
+            "antialias": false,
+            "depth": false,
+            "failIfMajorPerformanceCaveat": false,
+            "powerPreference": "default",
+            "premultipliedAlpha": false,
+            "preserveDrawingBuffer": false,
+            "stencil": false
+          },
+          "maxTextureSize": 16384,
+          "width": 32,
+          "height": 24
+        },
+        {
+          "kind": "bitmap-none",
+          "engine": "webgl2",
+          "ok": true,
+          "ms": 0,
+          "pixels": {
+            "alpha": 0,
+            "rgb": 323,
+            "opaque": 0,
+            "max": 241,
+            "examples": [
+              {
+                "pixel": 42,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 43,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 44,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 45,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "exact": false
+          },
+          "verticalFlipDiagnostic": {
+            "alpha": 768,
+            "rgb": 415,
+            "opaque": 54,
+            "max": 255,
+            "examples": [
+              {
+                "pixel": 42,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  0,
+                  227,
+                  53,
+                  254
+                ]
+              },
+              {
+                "pixel": 43,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  0,
+                  227,
+                  53,
+                  254
+                ]
+              },
+              {
+                "pixel": 44,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  40,
+                  172,
+                  255,
+                  254
+                ]
+              },
+              {
+                "pixel": 45,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  40,
+                  172,
+                  255,
+                  254
+                ]
+              }
+            ],
+            "exact": false
+          },
+          "context": {
+            "alpha": true,
+            "antialias": false,
+            "depth": false,
+            "failIfMajorPerformanceCaveat": false,
+            "powerPreference": "default",
+            "premultipliedAlpha": false,
+            "preserveDrawingBuffer": false,
+            "stencil": false
+          },
+          "maxTextureSize": 16384,
+          "width": 32,
+          "height": 24
+        },
+        {
+          "kind": "bitmap-none",
+          "engine": "canvas8-control",
+          "ok": true,
+          "pixels": {
+            "alpha": 0,
+            "rgb": 292,
+            "opaque": 0,
+            "max": 241,
+            "examples": [
+              {
+                "pixel": 42,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 43,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 44,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 45,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "exact": false
+          }
+        },
+        {
+          "kind": "html-image",
+          "engine": "webgl",
+          "ok": true,
+          "ms": 0,
+          "pixels": {
+            "alpha": 0,
+            "rgb": 0,
+            "opaque": 0,
+            "max": 0,
+            "examples": [],
+            "exact": true
+          },
+          "verticalFlipDiagnostic": {
+            "alpha": 768,
+            "rgb": 298,
+            "opaque": 42,
+            "max": 255,
+            "examples": [
+              {
+                "pixel": 42,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  0,
+                  228,
+                  54,
+                  254
+                ]
+              },
+              {
+                "pixel": 43,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  0,
+                  228,
+                  54,
+                  254
+                ]
+              },
+              {
+                "pixel": 44,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  41,
+                  173,
+                  255,
+                  254
+                ]
+              },
+              {
+                "pixel": 45,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  41,
+                  173,
+                  255,
+                  254
+                ]
+              }
+            ],
+            "exact": false
+          },
+          "context": {
+            "alpha": true,
+            "antialias": false,
+            "depth": false,
+            "failIfMajorPerformanceCaveat": false,
+            "powerPreference": "default",
+            "premultipliedAlpha": false,
+            "preserveDrawingBuffer": false,
+            "stencil": false
+          },
+          "maxTextureSize": 16384,
+          "width": 32,
+          "height": 24
+        },
+        {
+          "kind": "html-image",
+          "engine": "webgl2",
+          "ok": true,
+          "ms": 0,
+          "pixels": {
+            "alpha": 0,
+            "rgb": 0,
+            "opaque": 0,
+            "max": 0,
+            "examples": [],
+            "exact": true
+          },
+          "verticalFlipDiagnostic": {
+            "alpha": 768,
+            "rgb": 298,
+            "opaque": 42,
+            "max": 255,
+            "examples": [
+              {
+                "pixel": 42,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  0,
+                  228,
+                  54,
+                  254
+                ]
+              },
+              {
+                "pixel": 43,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  0,
+                  228,
+                  54,
+                  254
+                ]
+              },
+              {
+                "pixel": 44,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  41,
+                  173,
+                  255,
+                  254
+                ]
+              },
+              {
+                "pixel": 45,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  41,
+                  173,
+                  255,
+                  254
+                ]
+              }
+            ],
+            "exact": false
+          },
+          "context": {
+            "alpha": true,
+            "antialias": false,
+            "depth": false,
+            "failIfMajorPerformanceCaveat": false,
+            "powerPreference": "default",
+            "premultipliedAlpha": false,
+            "preserveDrawingBuffer": false,
+            "stencil": false
+          },
+          "maxTextureSize": 16384,
+          "width": 32,
+          "height": 24
+        },
+        {
+          "kind": "html-image",
+          "engine": "canvas8-control",
+          "ok": true,
+          "pixels": {
+            "alpha": 0,
+            "rgb": 292,
+            "opaque": 0,
+            "max": 241,
+            "examples": [
+              {
+                "pixel": 42,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 43,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 44,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 45,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "exact": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "converted",
+      "width": 32,
+      "height": 24,
+      "sourcePngSha256": "14d0012def2b51dbf17ce7e0022fb43d7cc2911209be1ed2b43bfe995c427691",
+      "methods": [
+        {
+          "kind": "bitmap-default",
+          "engine": "webgl",
+          "ok": true,
+          "ms": 0,
+          "pixels": {
+            "alpha": 0,
+            "rgb": 339,
+            "opaque": 0,
+            "max": 254,
+            "examples": [
+              {
+                "pixel": 42,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 43,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 44,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  1,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 45,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  1,
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "exact": false
+          },
+          "verticalFlipDiagnostic": {
+            "alpha": 768,
+            "rgb": 429,
+            "opaque": 54,
+            "max": 255,
+            "examples": [
+              {
+                "pixel": 42,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  227,
+                  53,
+                  254
+                ]
+              },
+              {
+                "pixel": 43,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  227,
+                  53,
+                  254
+                ]
+              },
+              {
+                "pixel": 44,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  40,
+                  172,
+                  254,
+                  254
+                ]
+              },
+              {
+                "pixel": 45,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  40,
+                  172,
+                  254,
+                  254
+                ]
+              }
+            ],
+            "exact": false
+          },
+          "context": {
+            "alpha": true,
+            "antialias": false,
+            "depth": false,
+            "failIfMajorPerformanceCaveat": false,
+            "powerPreference": "default",
+            "premultipliedAlpha": false,
+            "preserveDrawingBuffer": false,
+            "stencil": false
+          },
+          "maxTextureSize": 16384,
+          "width": 32,
+          "height": 24
+        },
+        {
+          "kind": "bitmap-default",
+          "engine": "webgl2",
+          "ok": true,
+          "ms": 0,
+          "pixels": {
+            "alpha": 0,
+            "rgb": 339,
+            "opaque": 0,
+            "max": 254,
+            "examples": [
+              {
+                "pixel": 42,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 43,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 44,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  1,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 45,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  1,
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "exact": false
+          },
+          "verticalFlipDiagnostic": {
+            "alpha": 768,
+            "rgb": 429,
+            "opaque": 54,
+            "max": 255,
+            "examples": [
+              {
+                "pixel": 42,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  227,
+                  53,
+                  254
+                ]
+              },
+              {
+                "pixel": 43,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  227,
+                  53,
+                  254
+                ]
+              },
+              {
+                "pixel": 44,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  40,
+                  172,
+                  254,
+                  254
+                ]
+              },
+              {
+                "pixel": 45,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  40,
+                  172,
+                  254,
+                  254
+                ]
+              }
+            ],
+            "exact": false
+          },
+          "context": {
+            "alpha": true,
+            "antialias": false,
+            "depth": false,
+            "failIfMajorPerformanceCaveat": false,
+            "powerPreference": "default",
+            "premultipliedAlpha": false,
+            "preserveDrawingBuffer": false,
+            "stencil": false
+          },
+          "maxTextureSize": 16384,
+          "width": 32,
+          "height": 24
+        },
+        {
+          "kind": "bitmap-default",
+          "engine": "canvas8-control",
+          "ok": true,
+          "pixels": {
+            "alpha": 0,
+            "rgb": 330,
+            "opaque": 0,
+            "max": 236,
+            "examples": [
+              {
+                "pixel": 42,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 43,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 44,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 45,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "exact": false
+          }
+        },
+        {
+          "kind": "bitmap-none",
+          "engine": "webgl",
+          "ok": true,
+          "ms": 0,
+          "pixels": {
+            "alpha": 0,
+            "rgb": 339,
+            "opaque": 0,
+            "max": 236,
+            "examples": [
+              {
+                "pixel": 42,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 43,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 44,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 45,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "exact": false
+          },
+          "verticalFlipDiagnostic": {
+            "alpha": 768,
+            "rgb": 429,
+            "opaque": 54,
+            "max": 255,
+            "examples": [
+              {
+                "pixel": 42,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  227,
+                  53,
+                  254
+                ]
+              },
+              {
+                "pixel": 43,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  227,
+                  53,
+                  254
+                ]
+              },
+              {
+                "pixel": 44,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  40,
+                  172,
+                  255,
+                  254
+                ]
+              },
+              {
+                "pixel": 45,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  40,
+                  172,
+                  255,
+                  254
+                ]
+              }
+            ],
+            "exact": false
+          },
+          "context": {
+            "alpha": true,
+            "antialias": false,
+            "depth": false,
+            "failIfMajorPerformanceCaveat": false,
+            "powerPreference": "default",
+            "premultipliedAlpha": false,
+            "preserveDrawingBuffer": false,
+            "stencil": false
+          },
+          "maxTextureSize": 16384,
+          "width": 32,
+          "height": 24
+        },
+        {
+          "kind": "bitmap-none",
+          "engine": "webgl2",
+          "ok": true,
+          "ms": 0,
+          "pixels": {
+            "alpha": 0,
+            "rgb": 339,
+            "opaque": 0,
+            "max": 236,
+            "examples": [
+              {
+                "pixel": 42,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 43,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 44,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 45,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "exact": false
+          },
+          "verticalFlipDiagnostic": {
+            "alpha": 768,
+            "rgb": 429,
+            "opaque": 54,
+            "max": 255,
+            "examples": [
+              {
+                "pixel": 42,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  227,
+                  53,
+                  254
+                ]
+              },
+              {
+                "pixel": 43,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  227,
+                  53,
+                  254
+                ]
+              },
+              {
+                "pixel": 44,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  40,
+                  172,
+                  255,
+                  254
+                ]
+              },
+              {
+                "pixel": 45,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  40,
+                  172,
+                  255,
+                  254
+                ]
+              }
+            ],
+            "exact": false
+          },
+          "context": {
+            "alpha": true,
+            "antialias": false,
+            "depth": false,
+            "failIfMajorPerformanceCaveat": false,
+            "powerPreference": "default",
+            "premultipliedAlpha": false,
+            "preserveDrawingBuffer": false,
+            "stencil": false
+          },
+          "maxTextureSize": 16384,
+          "width": 32,
+          "height": 24
+        },
+        {
+          "kind": "bitmap-none",
+          "engine": "canvas8-control",
+          "ok": true,
+          "pixels": {
+            "alpha": 0,
+            "rgb": 330,
+            "opaque": 0,
+            "max": 236,
+            "examples": [
+              {
+                "pixel": 42,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 43,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 44,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 45,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "exact": false
+          }
+        },
+        {
+          "kind": "html-image",
+          "engine": "webgl",
+          "ok": true,
+          "ms": 0,
+          "pixels": {
+            "alpha": 0,
+            "rgb": 0,
+            "opaque": 0,
+            "max": 0,
+            "examples": [],
+            "exact": true
+          },
+          "verticalFlipDiagnostic": {
+            "alpha": 768,
+            "rgb": 336,
+            "opaque": 54,
+            "max": 255,
+            "examples": [
+              {
+                "pixel": 42,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  228,
+                  54,
+                  254
+                ]
+              },
+              {
+                "pixel": 43,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  228,
+                  54,
+                  254
+                ]
+              },
+              {
+                "pixel": 44,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  41,
+                  173,
+                  255,
+                  254
+                ]
+              },
+              {
+                "pixel": 45,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  41,
+                  173,
+                  255,
+                  254
+                ]
+              }
+            ],
+            "exact": false
+          },
+          "context": {
+            "alpha": true,
+            "antialias": false,
+            "depth": false,
+            "failIfMajorPerformanceCaveat": false,
+            "powerPreference": "default",
+            "premultipliedAlpha": false,
+            "preserveDrawingBuffer": false,
+            "stencil": false
+          },
+          "maxTextureSize": 16384,
+          "width": 32,
+          "height": 24
+        },
+        {
+          "kind": "html-image",
+          "engine": "webgl2",
+          "ok": true,
+          "ms": 0,
+          "pixels": {
+            "alpha": 0,
+            "rgb": 0,
+            "opaque": 0,
+            "max": 0,
+            "examples": [],
+            "exact": true
+          },
+          "verticalFlipDiagnostic": {
+            "alpha": 768,
+            "rgb": 336,
+            "opaque": 54,
+            "max": 255,
+            "examples": [
+              {
+                "pixel": 42,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  228,
+                  54,
+                  254
+                ]
+              },
+              {
+                "pixel": 43,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  228,
+                  54,
+                  254
+                ]
+              },
+              {
+                "pixel": 44,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  41,
+                  173,
+                  255,
+                  254
+                ]
+              },
+              {
+                "pixel": 45,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  41,
+                  173,
+                  255,
+                  254
+                ]
+              }
+            ],
+            "exact": false
+          },
+          "context": {
+            "alpha": true,
+            "antialias": false,
+            "depth": false,
+            "failIfMajorPerformanceCaveat": false,
+            "powerPreference": "default",
+            "premultipliedAlpha": false,
+            "preserveDrawingBuffer": false,
+            "stencil": false
+          },
+          "maxTextureSize": 16384,
+          "width": 32,
+          "height": 24
+        },
+        {
+          "kind": "html-image",
+          "engine": "canvas8-control",
+          "ok": true,
+          "pixels": {
+            "alpha": 0,
+            "rgb": 330,
+            "opaque": 0,
+            "max": 236,
+            "examples": [
+              {
+                "pixel": 42,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 43,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 44,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "pixel": 45,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "exact": false
+          }
+        }
+      ]
+    }
+  ],
+  "browserVersion": "26.5",
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Safari/605.1.15",
+  "completed": true,
+  "finished": "2026-10-15T09:45:57.129Z"
+}

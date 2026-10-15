@@ -1,0 +1,62 @@
+{
+  "scope": "Independent fixture validation only; these are not nativeGLdecline assertions.",
+  "checks": [
+    {
+      "id": "filter-0",
+      "pass": true,
+      "width": 13,
+      "height": 11,
+      "allAuthoredBytesExact": true
+    },
+    {
+      "id": "filter-1",
+      "pass": true,
+      "width": 13,
+      "height": 11,
+      "allAuthoredBytesExact": true
+    },
+    {
+      "id": "filter-2",
+      "pass": true,
+      "width": 13,
+      "height": 11,
+      "allAuthoredBytesExact": true
+    },
+    {
+      "id": "filter-3",
+      "pass": true,
+      "width": 13,
+      "height": 11,
+      "allAuthoredBytesExact": true
+    },
+    {
+      "id": "filter-4",
+      "pass": true,
+      "width": 13,
+      "height": 11,
+      "allAuthoredBytesExact": true
+    },
+    {
+      "id": "untagged-rgba8",
+      "pass": true,
+      "width": 13,
+      "height": 11,
+      "allAuthoredBytesExact": true
+    },
+    {
+      "id": "consecutive-idat-split",
+      "pass": true,
+      "width": 13,
+      "height": 11,
+      "allAuthoredBytesExact": true
+    },
+    {
+      "id": "physical-density",
+      "pass": true,
+      "width": 13,
+      "height": 11,
+      "allAuthoredBytesExact": true
+    }
+  ],
+  "completed": true
+}
