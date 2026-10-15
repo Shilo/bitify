@@ -1,0 +1,75 @@
+{
+  "scope": "Independent synthetic guard contracts, not a claim that this hand-selected seed is current Auto output.",
+  "candidateSha256": "2bf68423c4c4ece2d3ca38ad3ada00f32d8ec6491a1545c1dad99d4fa39e4e77",
+  "checks": [
+    {
+      "metric": "oklab",
+      "baseline": {
+        "pointError": 0.15994701915628873,
+        "highlightRGB": [
+          255,
+          255,
+          255
+        ],
+        "exactHighlightLost": 0
+      },
+      "mean": {
+        "pointError": 0.0001563509473668511,
+        "highlightRGB": [
+          128,
+          128,
+          128
+        ],
+        "exactHighlightLost": 1
+      },
+      "strictRetainedBaseline": true,
+      "rareRetainedBaseline": true,
+      "targetPreservingPositive": [
+        "#ffffff",
+        "#808080"
+      ],
+      "hiddenRgbInvariant": true,
+      "keepProtectsAlphaOneHighlight": true,
+      "boundedOverflowRetainsBaseline": true,
+      "frameDurationSplitInvariant": true,
+      "zeroPassRetainsBaseline": true
+    },
+    {
+      "metric": "rgb",
+      "baseline": {
+        "pointError": 48339.7470703125,
+        "highlightRGB": [
+          255,
+          255,
+          255
+        ],
+        "exactHighlightLost": 0
+      },
+      "mean": {
+        "pointError": 47.2529296875,
+        "highlightRGB": [
+          128,
+          128,
+          128
+        ],
+        "exactHighlightLost": 1
+      },
+      "strictRetainedBaseline": true,
+      "rareRetainedBaseline": true,
+      "targetPreservingPositive": [
+        "#ffffff",
+        "#808080"
+      ],
+      "hiddenRgbInvariant": true,
+      "keepProtectsAlphaOneHighlight": true,
+      "boundedOverflowRetainsBaseline": true,
+      "frameDurationSplitInvariant": true,
+      "zeroPassRetainsBaseline": true
+    }
+  ],
+  "preCanceledCheck": true,
+  "inFlightCanceledCheck": true,
+  "inFlightAbortElapsedMs": 19.333199999999998,
+  "sourceUnchanged": true,
+  "completedAt": "2026-10-15T07:49:17.569Z"
+}
