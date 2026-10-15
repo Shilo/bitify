@@ -732,6 +732,21 @@
       if (error.name !== 'AbortError') publish({ status: 'error' });
     }
   }
+  const usageActionLabel = item => {
+    const usage = usageFor(item);
+    return usage?.result?.count ? `Use ${usage.result.count} output ${usage.result.count === 1 ? 'color' : 'colors'}`
+      : usageLabel(item) || 'Count output colors';
+  };
+  async function outputColors(item) {
+    const record = usageFor(item);
+    if (!record?.result) { await countColors(item); return; }
+    if (!record.result.count || paletteRequest) return;
+    sheet.close();
+    await tick();
+    if (usageFor(item) !== record || paletteRequest) return;
+    editPalette({ id: 'output-colors', name: [...item.name.replace(/\.[^.]+$/, '')].slice(0, 55).join('') + ' colors', colors: record.result.colors, source: { kind: 'copy' } });
+    paletteRequest = { ...paletteRequest, notice: `${record.result.count} ${record.result.count === 1 ? 'color' : 'colors'} used in the converted ${item.frames ? 'animation, across all frames' : 'image'}. Save this palette to reuse it, or export a HEX backup.` };
+  }
   const about = (item, asked) => ({ name: item.name, w: item.img.w, h: item.img.h, first: asked.first, second: asked.second });
   const still = (item, asked) => asked.family === 'full-palette' ? fullPaletteImage(item, asked, { still: true }) : ({ ...about(item, asked), mask: mask(item.img, asked.style, asked.set) });
   const converted = (item, asked, options) =>
@@ -979,7 +994,7 @@
 
 {#if viewed}
   <ImageViewer item={viewed} analysisPending={needsAnalysis(viewed)} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} palettePending={generatedPending} {alphaCut} {metric} {maxColors} {cleanup} {dither} {ditherStrength} onpalettestatus={reportPaletteStage} {paletteRetry} {busy} {message} flipped={viewInitialOriginal}
-    colorUsageLabel={usageLabel(viewed)} oncountcolors={family === 'full-palette' && viewed.id !== 0 ? () => countColors(viewed) : undefined} countingColors={usageFor(viewed)?.status === 'pending'}
+    colorUsageLabel={usageLabel(viewed)} colorUsageActionLabel={usageActionLabel(viewed)} oncountcolors={family === 'full-palette' && viewed.id !== 0 ? () => outputColors(viewed) : undefined} countingColors={usageFor(viewed)?.status === 'pending' || usageFor(viewed)?.result?.count === 0}
     paletteFailureNotice={failureNotice(currentPaletteFailures.filter(f => f.inputs.item === viewed))} onpaletteretry={retryPaletteFailures} exportDisabled={generatedUnavailable || itemPaletteFailed(viewed)} exportDrag={viewed.id === 0 ? undefined : dragExports}
     onsave={viewed.id === 0 ? undefined : () => save(viewed)}
     oncopy={viewed.id === 0 ? undefined : () => copy(viewed)}
@@ -1019,7 +1034,7 @@
     <button class="btn glass-btn" disabled={generatedUnavailable || itemPaletteFailed(shared)} onclick={() => { const item = shared; sheet.close(); copy(item); }}><PixelIcon name="copy" />Copy</button>
     <button class="btn glass-btn" onclick={previewShared}><PixelIcon name="expand" />Preview</button>
     {#if family === 'full-palette'}
-      <button class="btn glass-btn" disabled={generatedUnavailable || itemPaletteFailed(shared) || usageFor(shared)?.status === 'pending'} onclick={e => { e.stopPropagation(); countColors(shared); }}>{usageLabel(shared) || 'Count output colors'}</button>
+      <button class="btn glass-btn" disabled={generatedUnavailable || itemPaletteFailed(shared) || usageFor(shared)?.status === 'pending' || usageFor(shared)?.result?.count === 0} onclick={e => { e.stopPropagation(); outputColors(shared); }}>{usageActionLabel(shared)}</button>
     {/if}
     <button class="btn glass-btn danger" onclick={async () => {
       const item = shared;
