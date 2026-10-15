@@ -16,9 +16,9 @@ unfinished implementation tasks, and Keep weighting must not be restarted.
 | Remaining item | Meaning / next action |
 |---|---|
 | Existing-image Smart colors | Human Aseprite comparison remains untested. Follow the retained [procedure](2026-10-15-claude-audit-service.md#7-smart-colors-beta-research-decision) before deciding whether integration is useful. No integration is approved. |
-| Focused website comparison | Four native website outputs were verified, not every combination. Partial alpha, shared/multi-frame output and imported targets remain useful unverified cases. API/MCP evidence cannot stand in for website output. |
-| Practical task usability | Test import → palette → color limit/dither → Save and Count/Use on desktop and phone with minimal instruction. Automated correctness/layout checks do not prove that users understand the controls. |
-| Optional capability design | One shared small palette for an entire batch, artist-selected color protection, and additional palette exchange formats are opportunities. They need demonstrated user value and clear mobile behavior, not automatic implementation. |
+| Focused website comparison | Complete for the targeted gaps: fresh native partial-alpha reduction, imported target and two-image shared sheet. The [completion report](2026-10-15-palette-completion-service.md) distinguishes website/REST results and remaining untested combinations. |
+| Practical task usability | Agent walkthroughs passed in Codex Browser and touch-emulated portrait/landscape, including native Save and Count/Use. No physical phone was used in the latest pass, per the user. Human task observation remains useful; automated checks cannot prove intuitiveness. |
+| Optional capability design | [Color-protection mockups](2026-10-15-color-protection-design.md) are ready for user review, implementation deferred. Auto support and inactive mappings remain unresolved. A shared batch subset and additional exchange formats remain optional opportunities. |
 | Known precision/performance limits | Canvas-fallback and native clipboard transport can round translucent RGB. Sustained thermal/whole-process memory and stock Firefox Android coverage remain limited. Mac/iOS is unavailable and outside the current pass. |
 | Release | Changes remain local and unpushed by this session. A release/deployment is a separate action. |
 
@@ -31,6 +31,11 @@ exact-color behavior and cap-plus-dithering are strengths to preserve.
 
 The original batch record follows; its historical test totals and then-pending
 items must be read with the completed follow-ups above.
+
+The [latest completion ledger](2026-10-15-palette-completion-ledger.md) records the
+two-round independent full-range audit, fresh native website comparisons,
+930 passing units, built regressions, desktop timing and unchanged known Firefox
+precision failures. Production source remains unchanged since `310df63`.
 
 This temporary checklist tracks the requested improvements, their evidence and release checks. Preserve Colorfetti’s direct, local workflow and existing defaults. A completed experiment can reject a feature; a larger menu is not the goal. Each accepted feature receives its own commit and independent review before this batch is complete.
 
