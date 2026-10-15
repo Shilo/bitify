@@ -1,0 +1,33 @@
+{
+  "builtAt": "2026-10-15T09:40:29.278Z",
+  "productionSourceStatus": "Metadata-guarded native-copy validation candidate; source hashes identify this research bundle.",
+  "distRebuilt": false,
+  "dependencies": {
+    "src/lib/image-decode.js": "e1207e72ec51656ee6a0b516632599b60de0e510110fd319036203c9cefe15a9",
+    "src/lib/quantize.js": "6dacaca42d615b72a4ee511bb7ed32344aa7118ae946769e290d7a9463f8d0a3",
+    "bench/png-import-precision-probe.mjs": "4dbc6fd86a97231bcb3bfe482016b1e9999f32e5c87be60d7081e52c65361ef2",
+    "bench/png-import-precision-probe.html": "3e86b0d9fe0207142e61f51ac98220936f35ec0a91ca2f3daab9c893c7785b24"
+  },
+  "fixtures": [
+    {
+      "id": "source",
+      "file": "source.png",
+      "sourceFile": "bench/palette-clipboard-review/fixtures/palette-source.png",
+      "pngSha256": "7f37bd9f7f235d65265bbe2e922adfd35d74cb4f07c73e52366251701bf57bb9",
+      "width": 32,
+      "height": 24,
+      "expectedRgbaSha256": "74550bbbf6f6667b56ab35dbffdbc0ac85ca64efaa4bfc31663d1c7fe454cd32",
+      "oracle": "Independent Sharp sRGB RGBA for these authored sRGB8 PNGs. Hidden alpha0 RGB excluded from visible comparison."
+    },
+    {
+      "id": "converted",
+      "file": "converted.png",
+      "sourceFile": "bench/palette-clipboard-review/fixtures/palette-keep-expected.png",
+      "pngSha256": "14d0012def2b51dbf17ce7e0022fb43d7cc2911209be1ed2b43bfe995c427691",
+      "width": 32,
+      "height": 24,
+      "expectedRgbaSha256": "1023ed1b1862f83de49c8c85ce30d1e821fd3e5a0b57a1447abd98a598b972d4",
+      "oracle": "Independent Sharp sRGB RGBA for these authored sRGB8 PNGs. Hidden alpha0 RGB excluded from visible comparison."
+    }
+  ]
+}

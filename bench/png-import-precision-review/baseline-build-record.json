@@ -1,0 +1,33 @@
+{
+  "builtAt": "2026-10-15T09:20:28.921Z",
+  "productionEdited": false,
+  "distRebuilt": false,
+  "dependencies": {
+    "src/lib/image-decode.js": "8541f55c2c76992a4e43258d2e988489275b3d5e57795d8607d620d3382f33ce",
+    "src/lib/quantize.js": "6dacaca42d615b72a4ee511bb7ed32344aa7118ae946769e290d7a9463f8d0a3",
+    "bench/png-import-precision-probe.mjs": "3a836902835e7ef77b3d42ec74e55703e37b56704396af30f31b5811357a8032",
+    "bench/png-import-precision-probe.html": "3e86b0d9fe0207142e61f51ac98220936f35ec0a91ca2f3daab9c893c7785b24"
+  },
+  "fixtures": [
+    {
+      "id": "source",
+      "file": "source.png",
+      "sourceFile": "bench/palette-clipboard-review/fixtures/palette-source.png",
+      "pngSha256": "7f37bd9f7f235d65265bbe2e922adfd35d74cb4f07c73e52366251701bf57bb9",
+      "width": 32,
+      "height": 24,
+      "expectedRgbaSha256": "74550bbbf6f6667b56ab35dbffdbc0ac85ca64efaa4bfc31663d1c7fe454cd32",
+      "oracle": "Independent Sharp sRGB RGBA for these authored sRGB8 PNGs. Hidden alpha0 RGB excluded from visible comparison."
+    },
+    {
+      "id": "converted",
+      "file": "converted.png",
+      "sourceFile": "bench/palette-clipboard-review/fixtures/palette-keep-expected.png",
+      "pngSha256": "14d0012def2b51dbf17ce7e0022fb43d7cc2911209be1ed2b43bfe995c427691",
+      "width": 32,
+      "height": 24,
+      "expectedRgbaSha256": "1023ed1b1862f83de49c8c85ce30d1e821fd3e5a0b57a1447abd98a598b972d4",
+      "oracle": "Independent Sharp sRGB RGBA for these authored sRGB8 PNGs. Hidden alpha0 RGB excluded from visible comparison."
+    }
+  ]
+}

@@ -1,0 +1,3472 @@
+{
+  "device": "codex",
+  "started": "2026-10-15T09:29:18.959Z",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "scope": "Independent authored PNG samples versus production and native controls. Browser-managed cases compare raw with explicit conversion without asserting authored bytes are sRGB. Invalid cases record tolerance. Huge metadata-only fixture never decoded.",
+  "cases": [
+    {
+      "id": "rgba8-srgb-low-alpha",
+      "oraclePolicy": "exact-srgb8",
+      "methods": [
+        {
+          "name": "production",
+          "ok": true,
+          "ms": 0.5,
+          "width": 13,
+          "height": 11,
+          "hash": "a2f9f6ff72cf18b7a6f55458144edca38167045ed300170606057e73f0e65347",
+          "authored": {
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0,
+            "opaque": 0,
+            "byAlpha": {
+              "0": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "1": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "64": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "127": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "128": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "192": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "254": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "255": {
+                "pixels": 17,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              }
+            }
+          }
+        },
+        {
+          "name": "native-explicit",
+          "ok": true,
+          "ms": 0.3999999985098839,
+          "width": 13,
+          "height": 11,
+          "hash": "055b4b171e56d673fc918c9f47fea758f5eb3378b250f37d81bd3eaea871a76a",
+          "metadata": {
+            "format": "BGRA",
+            "width": 13,
+            "height": 11,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 13,
+              "height": 11,
+              "top": 0,
+              "right": 13,
+              "bottom": 11,
+              "left": 0
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            },
+            "rawEligible": true,
+            "layout": [
+              {
+                "offset": 0,
+                "stride": 52
+              }
+            ]
+          },
+          "authored": {
+            "alpha": 0,
+            "rgb": 85,
+            "max": 87,
+            "opaque": 0,
+            "byAlpha": {
+              "0": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "1": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 18,
+                "max": 87
+              },
+              "64": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 18,
+                "max": 2
+              },
+              "127": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 17,
+                "max": 1
+              },
+              "128": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 18,
+                "max": 1
+              },
+              "192": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 14,
+                "max": 1
+              },
+              "254": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "255": {
+                "pixels": 17,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              }
+            }
+          }
+        },
+        {
+          "name": "native-raw",
+          "ok": true,
+          "ms": 0.29999999701976776,
+          "width": 13,
+          "height": 11,
+          "hash": "a2f9f6ff72cf18b7a6f55458144edca38167045ed300170606057e73f0e65347",
+          "metadata": {
+            "format": "BGRA",
+            "width": 13,
+            "height": 11,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 13,
+              "height": 11,
+              "top": 0,
+              "right": 13,
+              "bottom": 11,
+              "left": 0
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            },
+            "rawEligible": true,
+            "layout": [
+              {
+                "offset": 0,
+                "stride": 52
+              }
+            ]
+          },
+          "authored": {
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0,
+            "opaque": 0,
+            "byAlpha": {
+              "0": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "1": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "64": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "127": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "128": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "192": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "254": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "255": {
+                "pixels": 17,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              }
+            }
+          }
+        }
+      ],
+      "rawVersusExplicit": {
+        "alpha": 0,
+        "rgb": 85,
+        "max": 87,
+        "opaque": 0,
+        "byAlpha": {
+          "0": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "1": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 87
+          },
+          "64": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 2
+          },
+          "127": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 17,
+            "max": 1
+          },
+          "128": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 1
+          },
+          "192": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 14,
+            "max": 1
+          },
+          "254": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "255": {
+            "pixels": 17,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          }
+        }
+      },
+      "productionVersusExplicit": {
+        "alpha": 0,
+        "rgb": 85,
+        "max": 87,
+        "opaque": 0,
+        "byAlpha": {
+          "0": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "1": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 87
+          },
+          "64": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 2
+          },
+          "127": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 17,
+            "max": 1
+          },
+          "128": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 1
+          },
+          "192": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 14,
+            "max": 1
+          },
+          "254": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "255": {
+            "pixels": 17,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "indexed1-trns",
+      "oraclePolicy": "exact-srgb8",
+      "methods": [
+        {
+          "name": "production",
+          "ok": true,
+          "ms": 0.3999999985098839,
+          "width": 13,
+          "height": 11,
+          "hash": "a0b9f72be836a3c61bf789971bbad146ab3abc142bcef965e359b47f562b7ab7",
+          "authored": {
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0,
+            "opaque": 0,
+            "byAlpha": {
+              "0": {
+                "pixels": 72,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "1": {
+                "pixels": 71,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              }
+            }
+          }
+        },
+        {
+          "name": "native-explicit",
+          "ok": true,
+          "ms": 0.29999999701976776,
+          "width": 13,
+          "height": 11,
+          "hash": "bc68a356639cdfd5ec36a49731db00c85dd368c9a71bc835d4a5065a96c0adb0",
+          "metadata": {
+            "format": "BGRA",
+            "width": 13,
+            "height": 11,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 13,
+              "height": 11,
+              "top": 0,
+              "right": 13,
+              "bottom": 11,
+              "left": 0
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            },
+            "rawEligible": true,
+            "layout": [
+              {
+                "offset": 0,
+                "stride": 52
+              }
+            ]
+          },
+          "authored": {
+            "alpha": 0,
+            "rgb": 71,
+            "max": 84,
+            "opaque": 0,
+            "byAlpha": {
+              "0": {
+                "pixels": 72,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "1": {
+                "pixels": 71,
+                "alpha": 0,
+                "rgb": 71,
+                "max": 84
+              }
+            }
+          }
+        },
+        {
+          "name": "native-raw",
+          "ok": true,
+          "ms": 0.3999999985098839,
+          "width": 13,
+          "height": 11,
+          "hash": "a0b9f72be836a3c61bf789971bbad146ab3abc142bcef965e359b47f562b7ab7",
+          "metadata": {
+            "format": "BGRA",
+            "width": 13,
+            "height": 11,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 13,
+              "height": 11,
+              "top": 0,
+              "right": 13,
+              "bottom": 11,
+              "left": 0
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            },
+            "rawEligible": true,
+            "layout": [
+              {
+                "offset": 0,
+                "stride": 52
+              }
+            ]
+          },
+          "authored": {
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0,
+            "opaque": 0,
+            "byAlpha": {
+              "0": {
+                "pixels": 72,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "1": {
+                "pixels": 71,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              }
+            }
+          }
+        }
+      ],
+      "rawVersusExplicit": {
+        "alpha": 0,
+        "rgb": 71,
+        "max": 84,
+        "opaque": 0,
+        "byAlpha": {
+          "0": {
+            "pixels": 72,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "1": {
+            "pixels": 71,
+            "alpha": 0,
+            "rgb": 71,
+            "max": 84
+          }
+        }
+      },
+      "productionVersusExplicit": {
+        "alpha": 0,
+        "rgb": 71,
+        "max": 84,
+        "opaque": 0,
+        "byAlpha": {
+          "0": {
+            "pixels": 72,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "1": {
+            "pixels": 71,
+            "alpha": 0,
+            "rgb": 71,
+            "max": 84
+          }
+        }
+      }
+    },
+    {
+      "id": "indexed4-trns",
+      "oraclePolicy": "exact-srgb8",
+      "methods": [
+        {
+          "name": "production",
+          "ok": true,
+          "ms": 0.4000000059604645,
+          "width": 13,
+          "height": 11,
+          "hash": "c3015247d470fd9894ef2c40cc2d5b8ceed62f8d4452404173e03f5885ffd69a",
+          "authored": {
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0,
+            "opaque": 0,
+            "byAlpha": {
+              "0": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "1": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "64": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "127": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "128": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "192": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "254": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "255": {
+                "pixels": 17,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              }
+            }
+          }
+        },
+        {
+          "name": "native-explicit",
+          "ok": true,
+          "ms": 0.5,
+          "width": 13,
+          "height": 11,
+          "hash": "ccf197bdf9c2a7ba26e6d5f9ac7f2b48c29acf8bdb2bdc2123cb32dbf834bb6a",
+          "metadata": {
+            "format": "BGRA",
+            "width": 13,
+            "height": 11,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 13,
+              "height": 11,
+              "top": 0,
+              "right": 13,
+              "bottom": 11,
+              "left": 0
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            },
+            "rawEligible": true,
+            "layout": [
+              {
+                "offset": 0,
+                "stride": 52
+              }
+            ]
+          },
+          "authored": {
+            "alpha": 0,
+            "rgb": 72,
+            "max": 85,
+            "opaque": 0,
+            "byAlpha": {
+              "0": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "1": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 18,
+                "max": 85
+              },
+              "64": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 18,
+                "max": 2
+              },
+              "127": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 9,
+                "max": 1
+              },
+              "128": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 18,
+                "max": 1
+              },
+              "192": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 9,
+                "max": 1
+              },
+              "254": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "255": {
+                "pixels": 17,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              }
+            }
+          }
+        },
+        {
+          "name": "native-raw",
+          "ok": true,
+          "ms": 0.5,
+          "width": 13,
+          "height": 11,
+          "hash": "c3015247d470fd9894ef2c40cc2d5b8ceed62f8d4452404173e03f5885ffd69a",
+          "metadata": {
+            "format": "BGRA",
+            "width": 13,
+            "height": 11,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 13,
+              "height": 11,
+              "top": 0,
+              "right": 13,
+              "bottom": 11,
+              "left": 0
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            },
+            "rawEligible": true,
+            "layout": [
+              {
+                "offset": 0,
+                "stride": 52
+              }
+            ]
+          },
+          "authored": {
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0,
+            "opaque": 0,
+            "byAlpha": {
+              "0": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "1": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "64": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "127": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "128": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "192": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "254": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "255": {
+                "pixels": 17,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              }
+            }
+          }
+        }
+      ],
+      "rawVersusExplicit": {
+        "alpha": 0,
+        "rgb": 72,
+        "max": 85,
+        "opaque": 0,
+        "byAlpha": {
+          "0": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "1": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 85
+          },
+          "64": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 2
+          },
+          "127": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 9,
+            "max": 1
+          },
+          "128": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 1
+          },
+          "192": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 9,
+            "max": 1
+          },
+          "254": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "255": {
+            "pixels": 17,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          }
+        }
+      },
+      "productionVersusExplicit": {
+        "alpha": 0,
+        "rgb": 72,
+        "max": 85,
+        "opaque": 0,
+        "byAlpha": {
+          "0": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "1": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 85
+          },
+          "64": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 2
+          },
+          "127": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 9,
+            "max": 1
+          },
+          "128": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 1
+          },
+          "192": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 9,
+            "max": 1
+          },
+          "254": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "255": {
+            "pixels": 17,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "gray16",
+      "oraclePolicy": "exact-srgb8",
+      "methods": [
+        {
+          "name": "production",
+          "ok": true,
+          "ms": 0.5,
+          "width": 13,
+          "height": 11,
+          "hash": "775e7b670323fb1779e867716c8d1d7bcda36bea1ee9dbf20c48c1e4b4d66893",
+          "authored": {
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0,
+            "opaque": 0,
+            "byAlpha": {
+              "255": {
+                "pixels": 143,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              }
+            }
+          }
+        },
+        {
+          "name": "native-explicit",
+          "ok": true,
+          "ms": 0.3999999985098839,
+          "width": 13,
+          "height": 11,
+          "hash": "775e7b670323fb1779e867716c8d1d7bcda36bea1ee9dbf20c48c1e4b4d66893",
+          "metadata": {
+            "format": "BGRX",
+            "width": 13,
+            "height": 11,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 13,
+              "height": 11,
+              "top": 0,
+              "right": 13,
+              "bottom": 11,
+              "left": 0
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            },
+            "rawEligible": false,
+            "layout": [
+              {
+                "offset": 0,
+                "stride": 52
+              }
+            ]
+          },
+          "authored": {
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0,
+            "opaque": 0,
+            "byAlpha": {
+              "255": {
+                "pixels": 143,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              }
+            }
+          }
+        },
+        {
+          "name": "native-raw",
+          "ok": true,
+          "ms": 0.29999999701976776,
+          "width": 13,
+          "height": 11,
+          "hash": "775e7b670323fb1779e867716c8d1d7bcda36bea1ee9dbf20c48c1e4b4d66893",
+          "metadata": {
+            "format": "BGRX",
+            "width": 13,
+            "height": 11,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 13,
+              "height": 11,
+              "top": 0,
+              "right": 13,
+              "bottom": 11,
+              "left": 0
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            },
+            "rawEligible": false,
+            "layout": [
+              {
+                "offset": 0,
+                "stride": 52
+              }
+            ]
+          },
+          "authored": {
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0,
+            "opaque": 0,
+            "byAlpha": {
+              "255": {
+                "pixels": 143,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              }
+            }
+          }
+        }
+      ],
+      "rawVersusExplicit": {
+        "alpha": 0,
+        "rgb": 0,
+        "max": 0,
+        "opaque": 0,
+        "byAlpha": {
+          "255": {
+            "pixels": 143,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          }
+        }
+      },
+      "productionVersusExplicit": {
+        "alpha": 0,
+        "rgb": 0,
+        "max": 0,
+        "opaque": 0,
+        "byAlpha": {
+          "255": {
+            "pixels": 143,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "gray-alpha16",
+      "oraclePolicy": "exact-srgb8",
+      "methods": [
+        {
+          "name": "production",
+          "ok": true,
+          "ms": 0.4000000059604645,
+          "width": 13,
+          "height": 11,
+          "hash": "dba48e8098cdf018e271283e5b2ccedd2299b9c1c3921c4b6bc62b4d661cc45f",
+          "authored": {
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0,
+            "opaque": 0,
+            "byAlpha": {
+              "0": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "1": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "64": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "127": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "128": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "192": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "254": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "255": {
+                "pixels": 17,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              }
+            }
+          }
+        },
+        {
+          "name": "native-explicit",
+          "ok": true,
+          "ms": 0.30000000447034836,
+          "width": 13,
+          "height": 11,
+          "hash": "fc02ca92f23931f7a40185854e5b37401e53f56988f56b70a8b2ad9868e7b6e3",
+          "metadata": {
+            "format": "BGRA",
+            "width": 13,
+            "height": 11,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 13,
+              "height": 11,
+              "top": 0,
+              "right": 13,
+              "bottom": 11,
+              "left": 0
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            },
+            "rawEligible": true,
+            "layout": [
+              {
+                "offset": 0,
+                "stride": 52
+              }
+            ]
+          },
+          "authored": {
+            "alpha": 0,
+            "rgb": 59,
+            "max": 33,
+            "opaque": 0,
+            "byAlpha": {
+              "0": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "1": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 18,
+                "max": 33
+              },
+              "64": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 15,
+                "max": 2
+              },
+              "127": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 9,
+                "max": 1
+              },
+              "128": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 13,
+                "max": 1
+              },
+              "192": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 4,
+                "max": 1
+              },
+              "254": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "255": {
+                "pixels": 17,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              }
+            }
+          }
+        },
+        {
+          "name": "native-raw",
+          "ok": true,
+          "ms": 0.5,
+          "width": 13,
+          "height": 11,
+          "hash": "dba48e8098cdf018e271283e5b2ccedd2299b9c1c3921c4b6bc62b4d661cc45f",
+          "metadata": {
+            "format": "BGRA",
+            "width": 13,
+            "height": 11,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 13,
+              "height": 11,
+              "top": 0,
+              "right": 13,
+              "bottom": 11,
+              "left": 0
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            },
+            "rawEligible": true,
+            "layout": [
+              {
+                "offset": 0,
+                "stride": 52
+              }
+            ]
+          },
+          "authored": {
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0,
+            "opaque": 0,
+            "byAlpha": {
+              "0": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "1": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "64": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "127": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "128": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "192": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "254": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "255": {
+                "pixels": 17,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              }
+            }
+          }
+        }
+      ],
+      "rawVersusExplicit": {
+        "alpha": 0,
+        "rgb": 59,
+        "max": 33,
+        "opaque": 0,
+        "byAlpha": {
+          "0": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "1": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 33
+          },
+          "64": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 15,
+            "max": 2
+          },
+          "127": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 9,
+            "max": 1
+          },
+          "128": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 13,
+            "max": 1
+          },
+          "192": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 4,
+            "max": 1
+          },
+          "254": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "255": {
+            "pixels": 17,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          }
+        }
+      },
+      "productionVersusExplicit": {
+        "alpha": 0,
+        "rgb": 59,
+        "max": 33,
+        "opaque": 0,
+        "byAlpha": {
+          "0": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "1": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 33
+          },
+          "64": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 15,
+            "max": 2
+          },
+          "127": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 9,
+            "max": 1
+          },
+          "128": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 13,
+            "max": 1
+          },
+          "192": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 4,
+            "max": 1
+          },
+          "254": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "255": {
+            "pixels": 17,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "rgba16",
+      "oraclePolicy": "exact-srgb8",
+      "methods": [
+        {
+          "name": "production",
+          "ok": true,
+          "ms": 0.3999999985098839,
+          "width": 13,
+          "height": 11,
+          "hash": "a2f9f6ff72cf18b7a6f55458144edca38167045ed300170606057e73f0e65347",
+          "authored": {
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0,
+            "opaque": 0,
+            "byAlpha": {
+              "0": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "1": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "64": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "127": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "128": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "192": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "254": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "255": {
+                "pixels": 17,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              }
+            }
+          }
+        },
+        {
+          "name": "native-explicit",
+          "ok": true,
+          "ms": 0.5,
+          "width": 13,
+          "height": 11,
+          "hash": "055b4b171e56d673fc918c9f47fea758f5eb3378b250f37d81bd3eaea871a76a",
+          "metadata": {
+            "format": "BGRA",
+            "width": 13,
+            "height": 11,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 13,
+              "height": 11,
+              "top": 0,
+              "right": 13,
+              "bottom": 11,
+              "left": 0
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            },
+            "rawEligible": true,
+            "layout": [
+              {
+                "offset": 0,
+                "stride": 52
+              }
+            ]
+          },
+          "authored": {
+            "alpha": 0,
+            "rgb": 85,
+            "max": 87,
+            "opaque": 0,
+            "byAlpha": {
+              "0": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "1": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 18,
+                "max": 87
+              },
+              "64": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 18,
+                "max": 2
+              },
+              "127": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 17,
+                "max": 1
+              },
+              "128": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 18,
+                "max": 1
+              },
+              "192": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 14,
+                "max": 1
+              },
+              "254": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "255": {
+                "pixels": 17,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              }
+            }
+          }
+        },
+        {
+          "name": "native-raw",
+          "ok": true,
+          "ms": 0.5,
+          "width": 13,
+          "height": 11,
+          "hash": "a2f9f6ff72cf18b7a6f55458144edca38167045ed300170606057e73f0e65347",
+          "metadata": {
+            "format": "BGRA",
+            "width": 13,
+            "height": 11,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 13,
+              "height": 11,
+              "top": 0,
+              "right": 13,
+              "bottom": 11,
+              "left": 0
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            },
+            "rawEligible": true,
+            "layout": [
+              {
+                "offset": 0,
+                "stride": 52
+              }
+            ]
+          },
+          "authored": {
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0,
+            "opaque": 0,
+            "byAlpha": {
+              "0": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "1": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "64": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "127": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "128": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "192": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "254": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "255": {
+                "pixels": 17,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              }
+            }
+          }
+        }
+      ],
+      "rawVersusExplicit": {
+        "alpha": 0,
+        "rgb": 85,
+        "max": 87,
+        "opaque": 0,
+        "byAlpha": {
+          "0": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "1": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 87
+          },
+          "64": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 2
+          },
+          "127": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 17,
+            "max": 1
+          },
+          "128": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 1
+          },
+          "192": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 14,
+            "max": 1
+          },
+          "254": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "255": {
+            "pixels": 17,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          }
+        }
+      },
+      "productionVersusExplicit": {
+        "alpha": 0,
+        "rgb": 85,
+        "max": 87,
+        "opaque": 0,
+        "byAlpha": {
+          "0": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "1": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 87
+          },
+          "64": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 2
+          },
+          "127": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 17,
+            "max": 1
+          },
+          "128": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 1
+          },
+          "192": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 14,
+            "max": 1
+          },
+          "254": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "255": {
+            "pixels": 17,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "rgb8-trns-key",
+      "oraclePolicy": "exact-srgb8",
+      "methods": [
+        {
+          "name": "production",
+          "ok": true,
+          "ms": 0.6000000014901161,
+          "width": 13,
+          "height": 11,
+          "hash": "8309530a8851f9c6854d1444fb6f1aec8acadcf2a2bf9e8280c69cbdc81bf3e2",
+          "authored": {
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0,
+            "opaque": 0,
+            "byAlpha": {
+              "0": {
+                "pixels": 36,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "255": {
+                "pixels": 107,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              }
+            }
+          }
+        },
+        {
+          "name": "native-explicit",
+          "ok": true,
+          "ms": 0.3999999985098839,
+          "width": 13,
+          "height": 11,
+          "hash": "c9c7cfa3d609e9433540022cf9a45aa162fc7e17a95aef2e1e7b35c9515010b5",
+          "metadata": {
+            "format": "BGRA",
+            "width": 13,
+            "height": 11,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 13,
+              "height": 11,
+              "top": 0,
+              "right": 13,
+              "bottom": 11,
+              "left": 0
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            },
+            "rawEligible": true,
+            "layout": [
+              {
+                "offset": 0,
+                "stride": 52
+              }
+            ]
+          },
+          "authored": {
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0,
+            "opaque": 0,
+            "byAlpha": {
+              "0": {
+                "pixels": 36,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "255": {
+                "pixels": 107,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              }
+            }
+          }
+        },
+        {
+          "name": "native-raw",
+          "ok": true,
+          "ms": 0.5,
+          "width": 13,
+          "height": 11,
+          "hash": "8309530a8851f9c6854d1444fb6f1aec8acadcf2a2bf9e8280c69cbdc81bf3e2",
+          "metadata": {
+            "format": "BGRA",
+            "width": 13,
+            "height": 11,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 13,
+              "height": 11,
+              "top": 0,
+              "right": 13,
+              "bottom": 11,
+              "left": 0
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            },
+            "rawEligible": true,
+            "layout": [
+              {
+                "offset": 0,
+                "stride": 52
+              }
+            ]
+          },
+          "authored": {
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0,
+            "opaque": 0,
+            "byAlpha": {
+              "0": {
+                "pixels": 36,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "255": {
+                "pixels": 107,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              }
+            }
+          }
+        }
+      ],
+      "rawVersusExplicit": {
+        "alpha": 0,
+        "rgb": 0,
+        "max": 0,
+        "opaque": 0,
+        "byAlpha": {
+          "0": {
+            "pixels": 36,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "255": {
+            "pixels": 107,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          }
+        }
+      },
+      "productionVersusExplicit": {
+        "alpha": 0,
+        "rgb": 0,
+        "max": 0,
+        "opaque": 0,
+        "byAlpha": {
+          "0": {
+            "pixels": 36,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "255": {
+            "pixels": 107,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "rgba8-adam7",
+      "oraclePolicy": "exact-srgb8",
+      "methods": [
+        {
+          "name": "production",
+          "ok": true,
+          "ms": 3.6999999955296516,
+          "width": 13,
+          "height": 11,
+          "hash": "a2f9f6ff72cf18b7a6f55458144edca38167045ed300170606057e73f0e65347",
+          "authored": {
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0,
+            "opaque": 0,
+            "byAlpha": {
+              "0": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "1": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "64": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "127": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "128": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "192": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "254": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "255": {
+                "pixels": 17,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              }
+            }
+          }
+        },
+        {
+          "name": "native-explicit",
+          "ok": true,
+          "ms": 0.5,
+          "width": 13,
+          "height": 11,
+          "hash": "055b4b171e56d673fc918c9f47fea758f5eb3378b250f37d81bd3eaea871a76a",
+          "metadata": {
+            "format": "BGRA",
+            "width": 13,
+            "height": 11,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 13,
+              "height": 11,
+              "top": 0,
+              "right": 13,
+              "bottom": 11,
+              "left": 0
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            },
+            "rawEligible": true,
+            "layout": [
+              {
+                "offset": 0,
+                "stride": 52
+              }
+            ]
+          },
+          "authored": {
+            "alpha": 0,
+            "rgb": 85,
+            "max": 87,
+            "opaque": 0,
+            "byAlpha": {
+              "0": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "1": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 18,
+                "max": 87
+              },
+              "64": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 18,
+                "max": 2
+              },
+              "127": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 17,
+                "max": 1
+              },
+              "128": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 18,
+                "max": 1
+              },
+              "192": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 14,
+                "max": 1
+              },
+              "254": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "255": {
+                "pixels": 17,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              }
+            }
+          }
+        },
+        {
+          "name": "native-raw",
+          "ok": true,
+          "ms": 0.3999999985098839,
+          "width": 13,
+          "height": 11,
+          "hash": "a2f9f6ff72cf18b7a6f55458144edca38167045ed300170606057e73f0e65347",
+          "metadata": {
+            "format": "BGRA",
+            "width": 13,
+            "height": 11,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 13,
+              "height": 11,
+              "top": 0,
+              "right": 13,
+              "bottom": 11,
+              "left": 0
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            },
+            "rawEligible": true,
+            "layout": [
+              {
+                "offset": 0,
+                "stride": 52
+              }
+            ]
+          },
+          "authored": {
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0,
+            "opaque": 0,
+            "byAlpha": {
+              "0": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "1": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "64": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "127": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "128": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "192": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "254": {
+                "pixels": 18,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              },
+              "255": {
+                "pixels": 17,
+                "alpha": 0,
+                "rgb": 0,
+                "max": 0
+              }
+            }
+          }
+        }
+      ],
+      "rawVersusExplicit": {
+        "alpha": 0,
+        "rgb": 85,
+        "max": 87,
+        "opaque": 0,
+        "byAlpha": {
+          "0": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "1": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 87
+          },
+          "64": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 2
+          },
+          "127": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 17,
+            "max": 1
+          },
+          "128": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 1
+          },
+          "192": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 14,
+            "max": 1
+          },
+          "254": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "255": {
+            "pixels": 17,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          }
+        }
+      },
+      "productionVersusExplicit": {
+        "alpha": 0,
+        "rgb": 85,
+        "max": 87,
+        "opaque": 0,
+        "byAlpha": {
+          "0": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "1": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 87
+          },
+          "64": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 2
+          },
+          "127": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 17,
+            "max": 1
+          },
+          "128": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 1
+          },
+          "192": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 14,
+            "max": 1
+          },
+          "254": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "255": {
+            "pixels": 17,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "rgba8-linear-gamma",
+      "oraclePolicy": "browser-color-managed",
+      "methods": [
+        {
+          "name": "production",
+          "ok": true,
+          "ms": 0.5,
+          "width": 13,
+          "height": 11,
+          "hash": "0e1738c9b1bf2fbd0aad2f3c079120acaa743b8ddc57ccbfa5a69d2d002713b4"
+        },
+        {
+          "name": "native-explicit",
+          "ok": true,
+          "ms": 0.3999999985098839,
+          "width": 13,
+          "height": 11,
+          "hash": "0e1738c9b1bf2fbd0aad2f3c079120acaa743b8ddc57ccbfa5a69d2d002713b4",
+          "metadata": {
+            "format": "BGRA",
+            "width": 13,
+            "height": 11,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 13,
+              "height": 11,
+              "top": 0,
+              "right": 13,
+              "bottom": 11,
+              "left": 0
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "linear"
+            },
+            "rawEligible": false,
+            "layout": [
+              {
+                "offset": 0,
+                "stride": 52
+              }
+            ]
+          }
+        },
+        {
+          "name": "native-raw",
+          "ok": true,
+          "ms": 0.4000000059604645,
+          "width": 13,
+          "height": 11,
+          "hash": "a2f9f6ff72cf18b7a6f55458144edca38167045ed300170606057e73f0e65347",
+          "metadata": {
+            "format": "BGRA",
+            "width": 13,
+            "height": 11,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 13,
+              "height": 11,
+              "top": 0,
+              "right": 13,
+              "bottom": 11,
+              "left": 0
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "linear"
+            },
+            "rawEligible": false,
+            "layout": [
+              {
+                "offset": 0,
+                "stride": 52
+              }
+            ]
+          }
+        }
+      ],
+      "rawVersusExplicit": {
+        "alpha": 0,
+        "rgb": 125,
+        "max": 87,
+        "opaque": 17,
+        "byAlpha": {
+          "0": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "1": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 87
+          },
+          "64": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 74
+          },
+          "127": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 72
+          },
+          "128": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 73
+          },
+          "192": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 72
+          },
+          "254": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 72
+          },
+          "255": {
+            "pixels": 17,
+            "alpha": 0,
+            "rgb": 17,
+            "max": 72
+          }
+        }
+      },
+      "productionVersusExplicit": {
+        "alpha": 0,
+        "rgb": 0,
+        "max": 0,
+        "opaque": 0,
+        "byAlpha": {
+          "0": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "1": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "64": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "127": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "128": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "192": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "254": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "255": {
+            "pixels": 17,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "rgba8-p3-icc",
+      "oraclePolicy": "browser-color-managed",
+      "methods": [
+        {
+          "name": "production",
+          "ok": true,
+          "ms": 0.29999999701976776,
+          "width": 13,
+          "height": 11,
+          "hash": "4041bba16c1fdbd0954bca96a5083a7e2f947d9011edc04be6f9f06a3bac9ff0"
+        },
+        {
+          "name": "native-explicit",
+          "ok": true,
+          "ms": 0.3999999985098839,
+          "width": 13,
+          "height": 11,
+          "hash": "4041bba16c1fdbd0954bca96a5083a7e2f947d9011edc04be6f9f06a3bac9ff0",
+          "metadata": {
+            "format": "BGRA",
+            "width": 13,
+            "height": 11,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 13,
+              "height": 11,
+              "top": 0,
+              "right": 13,
+              "bottom": 11,
+              "left": 0
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": null,
+              "transfer": "iec61966-2-1"
+            },
+            "rawEligible": false,
+            "layout": [
+              {
+                "offset": 0,
+                "stride": 52
+              }
+            ]
+          }
+        },
+        {
+          "name": "native-raw",
+          "ok": true,
+          "ms": 0.5,
+          "width": 13,
+          "height": 11,
+          "hash": "a47052ea9a3b3c1c93e7eba69d7d19e1b6e1fcbf09a20f251c8c90b927751d92",
+          "metadata": {
+            "format": "BGRA",
+            "width": 13,
+            "height": 11,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 13,
+              "height": 11,
+              "top": 0,
+              "right": 13,
+              "bottom": 11,
+              "left": 0
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": null,
+              "transfer": "iec61966-2-1"
+            },
+            "rawEligible": false,
+            "layout": [
+              {
+                "offset": 0,
+                "stride": 52
+              }
+            ]
+          }
+        }
+      ],
+      "rawVersusExplicit": {
+        "alpha": 0,
+        "rgb": 125,
+        "max": 84,
+        "opaque": 17,
+        "byAlpha": {
+          "0": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "1": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 84
+          },
+          "64": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 6
+          },
+          "127": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 5
+          },
+          "128": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 4
+          },
+          "192": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 4
+          },
+          "254": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 4
+          },
+          "255": {
+            "pixels": 17,
+            "alpha": 0,
+            "rgb": 17,
+            "max": 4
+          }
+        }
+      },
+      "productionVersusExplicit": {
+        "alpha": 0,
+        "rgb": 0,
+        "max": 0,
+        "opaque": 0,
+        "byAlpha": {
+          "0": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "1": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "64": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "127": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "128": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "192": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "254": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "255": {
+            "pixels": 17,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "rgba8-exif-rotate90",
+      "oraclePolicy": "browser-transform",
+      "methods": [
+        {
+          "name": "production",
+          "ok": true,
+          "ms": 2,
+          "width": 11,
+          "height": 13,
+          "hash": "282841d83c5a3dec9213d6a3a4435c6297c597501954c6cdd7fdc9606f064b84"
+        },
+        {
+          "name": "native-explicit",
+          "ok": false,
+          "ms": 0.3999999985098839,
+          "error": {
+            "name": "TypeError",
+            "message": "Failed to execute 'allocationSize' on 'VideoFrame': Invalid layout. Expected plane 0 to have stride at least 52, found 44."
+          }
+        },
+        {
+          "name": "native-raw",
+          "ok": true,
+          "ms": 0.3999999985098839,
+          "width": 11,
+          "height": 13,
+          "hash": "9ce608f84a96371900bc3970966a2ce18e74c435b7262befd32be85acce0dbcb",
+          "metadata": {
+            "format": "BGRA",
+            "width": 11,
+            "height": 13,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 13,
+              "height": 11,
+              "top": 0,
+              "right": 13,
+              "bottom": 11,
+              "left": 0
+            },
+            "rotation": 90,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            },
+            "rawEligible": false,
+            "layout": [
+              {
+                "offset": 0,
+                "stride": 52
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "apng-default-is-frame0",
+      "oraclePolicy": "browser-animation",
+      "methods": [
+        {
+          "name": "production",
+          "ok": true,
+          "ms": 0.29999999701976776,
+          "width": 13,
+          "height": 11,
+          "hash": "a2f9f6ff72cf18b7a6f55458144edca38167045ed300170606057e73f0e65347"
+        },
+        {
+          "name": "native-explicit",
+          "ok": true,
+          "ms": 0.5,
+          "width": 13,
+          "height": 11,
+          "hash": "055b4b171e56d673fc918c9f47fea758f5eb3378b250f37d81bd3eaea871a76a",
+          "metadata": {
+            "format": "BGRA",
+            "width": 13,
+            "height": 11,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 13,
+              "height": 11,
+              "top": 0,
+              "right": 13,
+              "bottom": 11,
+              "left": 0
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            },
+            "rawEligible": true,
+            "layout": [
+              {
+                "offset": 0,
+                "stride": 52
+              }
+            ]
+          }
+        },
+        {
+          "name": "native-raw",
+          "ok": true,
+          "ms": 0.4000000059604645,
+          "width": 13,
+          "height": 11,
+          "hash": "a2f9f6ff72cf18b7a6f55458144edca38167045ed300170606057e73f0e65347",
+          "metadata": {
+            "format": "BGRA",
+            "width": 13,
+            "height": 11,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 13,
+              "height": 11,
+              "top": 0,
+              "right": 13,
+              "bottom": 11,
+              "left": 0
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            },
+            "rawEligible": true,
+            "layout": [
+              {
+                "offset": 0,
+                "stride": 52
+              }
+            ]
+          }
+        }
+      ],
+      "rawVersusExplicit": {
+        "alpha": 0,
+        "rgb": 85,
+        "max": 87,
+        "opaque": 0,
+        "byAlpha": {
+          "0": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "1": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 87
+          },
+          "64": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 2
+          },
+          "127": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 17,
+            "max": 1
+          },
+          "128": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 1
+          },
+          "192": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 14,
+            "max": 1
+          },
+          "254": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "255": {
+            "pixels": 17,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          }
+        }
+      },
+      "productionVersusExplicit": {
+        "alpha": 0,
+        "rgb": 85,
+        "max": 87,
+        "opaque": 0,
+        "byAlpha": {
+          "0": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "1": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 87
+          },
+          "64": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 2
+          },
+          "127": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 17,
+            "max": 1
+          },
+          "128": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 1
+          },
+          "192": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 14,
+            "max": 1
+          },
+          "254": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "255": {
+            "pixels": 17,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "apng-default-excluded",
+      "oraclePolicy": "browser-animation",
+      "methods": [
+        {
+          "name": "production",
+          "ok": true,
+          "ms": 0.3999999985098839,
+          "width": 13,
+          "height": 11,
+          "hash": "8fa40ceae7a643d5249695ec6f58927ec3de1626681af23d90bca46fc0aa9bdf"
+        },
+        {
+          "name": "native-explicit",
+          "ok": true,
+          "ms": 0.29999999701976776,
+          "width": 13,
+          "height": 11,
+          "hash": "8fa40ceae7a643d5249695ec6f58927ec3de1626681af23d90bca46fc0aa9bdf",
+          "metadata": {
+            "format": "BGRA",
+            "width": 13,
+            "height": 11,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 13,
+              "height": 11,
+              "top": 0,
+              "right": 13,
+              "bottom": 11,
+              "left": 0
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            },
+            "rawEligible": true,
+            "layout": [
+              {
+                "offset": 0,
+                "stride": 52
+              }
+            ]
+          }
+        },
+        {
+          "name": "native-raw",
+          "ok": true,
+          "ms": 0.3999999985098839,
+          "width": 13,
+          "height": 11,
+          "hash": "8fa40ceae7a643d5249695ec6f58927ec3de1626681af23d90bca46fc0aa9bdf",
+          "metadata": {
+            "format": "BGRA",
+            "width": 13,
+            "height": 11,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 13,
+              "height": 11,
+              "top": 0,
+              "right": 13,
+              "bottom": 11,
+              "left": 0
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            },
+            "rawEligible": true,
+            "layout": [
+              {
+                "offset": 0,
+                "stride": 52
+              }
+            ]
+          }
+        }
+      ],
+      "rawVersusExplicit": {
+        "alpha": 0,
+        "rgb": 0,
+        "max": 0,
+        "opaque": 0,
+        "byAlpha": {
+          "255": {
+            "pixels": 143,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          }
+        }
+      },
+      "productionVersusExplicit": {
+        "alpha": 0,
+        "rgb": 0,
+        "max": 0,
+        "opaque": 0,
+        "byAlpha": {
+          "255": {
+            "pixels": 143,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "invalid-crc",
+      "oraclePolicy": "invalid",
+      "methods": [
+        {
+          "name": "production",
+          "ok": true,
+          "ms": 1.6000000014901161,
+          "width": 13,
+          "height": 11,
+          "hash": "a2f9f6ff72cf18b7a6f55458144edca38167045ed300170606057e73f0e65347"
+        },
+        {
+          "name": "native-explicit",
+          "ok": true,
+          "ms": 0.5,
+          "width": 13,
+          "height": 11,
+          "hash": "055b4b171e56d673fc918c9f47fea758f5eb3378b250f37d81bd3eaea871a76a",
+          "metadata": {
+            "format": "BGRA",
+            "width": 13,
+            "height": 11,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 13,
+              "height": 11,
+              "top": 0,
+              "right": 13,
+              "bottom": 11,
+              "left": 0
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            },
+            "rawEligible": true,
+            "layout": [
+              {
+                "offset": 0,
+                "stride": 52
+              }
+            ]
+          }
+        },
+        {
+          "name": "native-raw",
+          "ok": true,
+          "ms": 0.3999999985098839,
+          "width": 13,
+          "height": 11,
+          "hash": "a2f9f6ff72cf18b7a6f55458144edca38167045ed300170606057e73f0e65347",
+          "metadata": {
+            "format": "BGRA",
+            "width": 13,
+            "height": 11,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 13,
+              "height": 11,
+              "top": 0,
+              "right": 13,
+              "bottom": 11,
+              "left": 0
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            },
+            "rawEligible": true,
+            "layout": [
+              {
+                "offset": 0,
+                "stride": 52
+              }
+            ]
+          }
+        }
+      ],
+      "rawVersusExplicit": {
+        "alpha": 0,
+        "rgb": 85,
+        "max": 87,
+        "opaque": 0,
+        "byAlpha": {
+          "0": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "1": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 87
+          },
+          "64": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 2
+          },
+          "127": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 17,
+            "max": 1
+          },
+          "128": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 1
+          },
+          "192": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 14,
+            "max": 1
+          },
+          "254": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "255": {
+            "pixels": 17,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          }
+        }
+      },
+      "productionVersusExplicit": {
+        "alpha": 0,
+        "rgb": 85,
+        "max": 87,
+        "opaque": 0,
+        "byAlpha": {
+          "0": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "1": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 87
+          },
+          "64": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 2
+          },
+          "127": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 17,
+            "max": 1
+          },
+          "128": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 18,
+            "max": 1
+          },
+          "192": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 14,
+            "max": 1
+          },
+          "254": {
+            "pixels": 18,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          },
+          "255": {
+            "pixels": 17,
+            "alpha": 0,
+            "rgb": 0,
+            "max": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "invalid-truncated",
+      "oraclePolicy": "invalid",
+      "methods": [
+        {
+          "name": "production",
+          "ok": false,
+          "ms": 0.7000000029802322,
+          "error": {
+            "name": "InvalidStateError",
+            "message": "The source image could not be decoded."
+          }
+        },
+        {
+          "name": "native-explicit",
+          "ok": false,
+          "ms": 0.3999999985098839,
+          "error": {
+            "name": "EncodingError",
+            "message": "Failed to decode frame at index 0"
+          }
+        },
+        {
+          "name": "native-raw",
+          "ok": false,
+          "ms": 0.29999999701976776,
+          "error": {
+            "name": "EncodingError",
+            "message": "Failed to decode frame at index 0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "unknown-critical",
+      "oraclePolicy": "invalid",
+      "methods": [
+        {
+          "name": "production",
+          "ok": false,
+          "ms": 0.6999999955296516,
+          "error": {
+            "name": "InvalidStateError",
+            "message": "The source image could not be decoded."
+          }
+        },
+        {
+          "name": "native-explicit",
+          "ok": false,
+          "ms": 0.4000000059604645,
+          "error": {
+            "name": "EncodingError",
+            "message": "Failed to decode frame at index 0"
+          }
+        },
+        {
+          "name": "native-raw",
+          "ok": false,
+          "ms": 0.29999999701976776,
+          "error": {
+            "name": "EncodingError",
+            "message": "Failed to decode frame at index 0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "declared-oversize-header",
+      "oraclePolicy": "metadata-only",
+      "methods": [],
+      "skipped": "Declared huge geometry; never passed to native decoder"
+    }
+  ],
+  "dependencies": {
+    "src/lib/image-decode.js": "e1207e72ec51656ee6a0b516632599b60de0e510110fd319036203c9cefe15a9",
+    "src/lib/quantize.js": "6dacaca42d615b72a4ee511bb7ed32344aa7118ae946769e290d7a9463f8d0a3",
+    "bench/png-precision-validation-probe.mjs": "0fcc2408440e2ee9ec1a0efd888f5948a9fb5470d3fb191c5168065fa3c79a3b",
+    "bench/png-precision-validation-fixtures/manifest.json": "2a4d7b973efbf211d8a0d086a2537388d57b161f0f1c70bb55caee840c592e19"
+  },
+  "dependenciesAfter": {
+    "src/lib/image-decode.js": "e1207e72ec51656ee6a0b516632599b60de0e510110fd319036203c9cefe15a9",
+    "src/lib/quantize.js": "6dacaca42d615b72a4ee511bb7ed32344aa7118ae946769e290d7a9463f8d0a3",
+    "bench/png-precision-validation-probe.mjs": "0fcc2408440e2ee9ec1a0efd888f5948a9fb5470d3fb191c5168065fa3c79a3b",
+    "bench/png-precision-validation-fixtures/manifest.json": "2a4d7b973efbf211d8a0d086a2537388d57b161f0f1c70bb55caee840c592e19"
+  },
+  "dependenciesStable": true,
+  "completed": true,
+  "finished": "2026-10-15T09:29:19.196Z"
+}

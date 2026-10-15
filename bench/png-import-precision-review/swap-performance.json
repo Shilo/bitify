@@ -1,0 +1,101 @@
+{
+  "at": "2026-10-15T09:28:28.093Z",
+  "sourceHash": "e1207e72ec51656ee6a0b516632599b60de0e510110fd319036203c9cefe15a9",
+  "runtime": "v25.0.0",
+  "scope": "Isolated production reorder, mocked native decoder/copy; Node posted turns via setImmediate. CPU spans include scheduler call boundaries. Not a hard deadline, browser/phone import benchmark or total heap bound.",
+  "rows": [
+    {
+      "pixels": 1048576,
+      "width": 1024,
+      "height": 1024,
+      "sourceBytes": 4194304,
+      "additionalOutputBytes": 4194304,
+      "reorderScratchPixelBytes": 0,
+      "runs": [
+        {
+          "totalMs": 4.2610999999999954,
+          "reorderAndSchedulingMs": 2.814,
+          "maxSynchronousSpanMs": 2.814,
+          "postedYields": 0,
+          "exactVisibleRgbAndAlpha": true
+        },
+        {
+          "totalMs": 4.174900000000001,
+          "reorderAndSchedulingMs": 3.6030999999999977,
+          "maxSynchronousSpanMs": 3.6030999999999977,
+          "postedYields": 0,
+          "exactVisibleRgbAndAlpha": true
+        },
+        {
+          "totalMs": 1.4992000000000019,
+          "reorderAndSchedulingMs": 0.8947000000000003,
+          "maxSynchronousSpanMs": 0.8947000000000003,
+          "postedYields": 0,
+          "exactVisibleRgbAndAlpha": true
+        }
+      ]
+    },
+    {
+      "pixels": 4194304,
+      "width": 2048,
+      "height": 2048,
+      "sourceBytes": 16777216,
+      "additionalOutputBytes": 16777216,
+      "reorderScratchPixelBytes": 0,
+      "runs": [
+        {
+          "totalMs": 7.6037000000000035,
+          "reorderAndSchedulingMs": 5.303100000000001,
+          "maxSynchronousSpanMs": 5.303100000000001,
+          "postedYields": 0,
+          "exactVisibleRgbAndAlpha": true
+        },
+        {
+          "totalMs": 7.513600000000025,
+          "reorderAndSchedulingMs": 5.025400000000019,
+          "maxSynchronousSpanMs": 5.025400000000019,
+          "postedYields": 0,
+          "exactVisibleRgbAndAlpha": true
+        },
+        {
+          "totalMs": 5.370599999999996,
+          "reorderAndSchedulingMs": 3.121399999999994,
+          "maxSynchronousSpanMs": 3.121399999999994,
+          "postedYields": 0,
+          "exactVisibleRgbAndAlpha": true
+        }
+      ]
+    },
+    {
+      "pixels": 16777216,
+      "width": 4096,
+      "height": 4096,
+      "sourceBytes": 67108864,
+      "additionalOutputBytes": 67108864,
+      "reorderScratchPixelBytes": 0,
+      "runs": [
+        {
+          "totalMs": 22.252700000000004,
+          "reorderAndSchedulingMs": 12.247299999999996,
+          "maxSynchronousSpanMs": 8.160599999999988,
+          "postedYields": 1,
+          "exactVisibleRgbAndAlpha": true
+        },
+        {
+          "totalMs": 21.95830000000001,
+          "reorderAndSchedulingMs": 12.230999999999995,
+          "maxSynchronousSpanMs": 8.045499999999947,
+          "postedYields": 1,
+          "exactVisibleRgbAndAlpha": true
+        },
+        {
+          "totalMs": 24.201900000000023,
+          "reorderAndSchedulingMs": 13.825399999999945,
+          "maxSynchronousSpanMs": 8.054199999999923,
+          "postedYields": 1,
+          "exactVisibleRgbAndAlpha": true
+        }
+      ]
+    }
+  ]
+}

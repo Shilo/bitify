@@ -12,7 +12,7 @@ for(const [id,input]of[['source','bench/palette-clipboard-review/fixtures/palett
  const file=id+'.png';fs.writeFileSync(path.join(fixtures,file),bytes);rows.push({id,file,sourceFile:input,pngSha256:hash(bytes),width:raw.info.width,height:raw.info.height,expectedRgbaSha256:hash(raw.data),expectedRgba:[...raw.data],oracle:'Independent Sharp sRGB RGBA for these authored sRGB8 PNGs. Hidden alpha0 RGB excluded from visible comparison.'});
 }
 fs.writeFileSync(path.join(fixtures,'manifest.json'),JSON.stringify(rows,null,2)+'\n');
-await build({configFile:false,build:{outDir:path.join(out,'assets'),emptyOutDir:false,minify:false,lib:{entry:path.resolve('bench/png-import-precision-probe.mjs'),formats:['es'],fileName:()=> 'probe.js'}}});
+await build({configFile:false,publicDir:false,build:{outDir:path.join(out,'assets'),emptyOutDir:false,minify:false,lib:{entry:path.resolve('bench/png-import-precision-probe.mjs'),formats:['es'],fileName:()=> 'probe.js'}}});
 const dependencies=['src/lib/image-decode.js','src/lib/quantize.js','bench/png-import-precision-probe.mjs','bench/png-import-precision-probe.html'];
 fs.writeFileSync(path.join(out,'build-record.json'),JSON.stringify({builtAt:new Date().toISOString(),productionSourceStatus:'Metadata-guarded native-copy validation candidate; source hashes identify this research bundle.',distRebuilt:false,dependencies:Object.fromEntries(dependencies.map(file=>[file,hash(fs.readFileSync(file))])),fixtures:rows.map(({expectedRgba,...r})=>r)},null,2)+'\n');
 console.log('Decoder research assets ready; production dist untouched');

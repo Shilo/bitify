@@ -1,0 +1,83 @@
+{
+  "scope": "Windows WebKit on owned endpoint RGB/binary alpha fixtures only; not Safari/iOS or partial-alpha precision acceptance",
+  "label": "baseline",
+  "indexSha256": "a4b434562abb9dd2fe7c52957318499de02f0f1244e4cb786379f7256b28834f",
+  "browser": "WebKit",
+  "platform": "win32",
+  "clipboardAccessed": false,
+  "sourcePngSha256": "3cfb70dedec4752dd5594dfb7598a40ce9c1ad0e0c622f6789264e9c7f936695",
+  "sourceGifSha256": "ce5df4943e3c03ffed7f0fa821b64fe3d3547e22ed7a7ca201d562d80e085a56",
+  "checks": [
+    {
+      "name": "Independent bitmap control decodes binary endpoint PNG exactly",
+      "pass": true
+    },
+    {
+      "name": "PICO8 cap4 Cleanup ordered4x4 Keep native PNG",
+      "pass": true
+    },
+    {
+      "name": "Preview Count and Use returns exact output RGBs to an unsaved draft",
+      "pass": true
+    },
+    {
+      "name": "Two-frame GIF keeps exact converted frames timing and loop",
+      "pass": true
+    },
+    {
+      "name": "Separate1bit Solid blackwhite native PNG remains exact",
+      "pass": true
+    },
+    {
+      "name": "320portrait and568landscape Recolor controls fit",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "resizeObserverNotices": [
+    "ResizeObserver loop completed with undelivered notifications.",
+    "ResizeObserver loop completed with undelivered notifications."
+  ],
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Safari/605.1.15",
+  "png": {
+    "width": 16,
+    "height": 16,
+    "visiblePixels": 240,
+    "alphaValues": [
+      0,
+      255
+    ],
+    "pixelsExact": true
+  },
+  "countAndReuse": {
+    "used": 4,
+    "colors": [
+      "#000000",
+      "#1d2b53",
+      "#ff004d",
+      "#ffec27"
+    ],
+    "notSaved": true
+  },
+  "gif": {
+    "frames": 2,
+    "delays": [
+      80,
+      160
+    ],
+    "loop": 0,
+    "pixelsExact": true
+  },
+  "onebit": {
+    "width": 16,
+    "height": 16,
+    "visiblePixels": 240,
+    "alphaValues": [
+      0,
+      255
+    ],
+    "pixelsExact": true
+  },
+  "completed": true,
+  "finished": "2026-10-15T09:27:21.599Z"
+}

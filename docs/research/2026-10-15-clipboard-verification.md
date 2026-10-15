@@ -100,3 +100,10 @@ RGB precision is a documented platform limitation, not a passing exactness test.
 Separate commits: `c63d04c` plan, `256ad1e` production failure fix, `69715e1`
 owned test harness/fixtures, `55c32cc` conditional Help and source documentation.
 Final device evidence/review is committed separately.
+
+Subsequent PNG follow-up: [direct decoder verification](2026-10-15-png-import-precision-verification.md)
+confirms and repairs the native desktop input conversion in `d37d8b7`. The
+corrected desktop Save now matches the frozen golden exactly. The independent
+clipboard-transport differences above remain valid historical observations;
+the native input repair does not claim an exact clipboard fix. Windows WebKit
+fallback precision and actual Safari/iOS remain separate work.

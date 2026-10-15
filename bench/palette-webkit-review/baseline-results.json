@@ -1,0 +1,89 @@
+{
+  "scope": "Windows Playwright WebKit engine; fresh isolated contexts; not actual Safari/iOS or OS clipboard",
+  "label": "baseline",
+  "started": "2026-10-15T09:19:53.965Z",
+  "platform": "win32",
+  "executable": "C:\\Users\\shilo\\AppData\\Local\\ms-playwright\\webkit-2336\\Playwright.exe",
+  "distIndexSha256": "a4b434562abb9dd2fe7c52957318499de02f0f1244e4cb786379f7256b28834f",
+  "sourceHashes": {
+    "src/lib/image-decode.js": "8541f55c2c76992a4e43258d2e988489275b3d5e57795d8607d620d3382f33ce",
+    "src/lib/quantize.js": "6dacaca42d615b72a4ee511bb7ed32344aa7118ae946769e290d7a9463f8d0a3",
+    "src/lib/palette-state.js": "2e7cd14844c1539cb321b27200be18955db70ec22ca6f06190d7a75007cac0ad"
+  },
+  "clipboardMethods": "Existing QA page intercepts write only to inspect encoded app PNG; no real native clipboard read/write",
+  "reportSink": "POST /report intercepted locally to avoid overwriting Chromium/device evidence",
+  "suites": [
+    {
+      "route": "qa",
+      "status": "FAIL: Preview/full-source sample mismatch ramp",
+      "receipt": {
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Safari/605.1.15",
+        "checks": [
+          {
+            "name": "Fresh full-palette defaults are off",
+            "pass": true,
+            "ms": 40,
+            "width": 1280
+          },
+          {
+            "name": "Import original stills and animation",
+            "pass": true,
+            "ms": 279,
+            "tiles": 3
+          }
+        ],
+        "errors": [],
+        "longTasks": [],
+        "started": "2026-10-15T09:19:55.014Z",
+        "completed": false,
+        "error": {
+          "message": "Preview/full-source sample mismatch ramp",
+          "stack": "post@http://127.0.0.1:5294/qa:12:184\nasync verifyPaints@http://127.0.0.1:5294/qa:18:438\n@http://127.0.0.1:5294/qa:35:139\nasync check@http://127.0.0.1:5294/qa:14:114\n@http://127.0.0.1:5294/qa:35:35"
+        },
+        "finished": "2026-10-15T09:20:16.151Z"
+      },
+      "errors": []
+    },
+    {
+      "route": "improvements",
+      "status": "FAIL: Preview/full-source sample mismatch ramp",
+      "receipt": {
+        "kind": "palette-improvements",
+        "paletteName": "QA clip output colors mv9bvs2p",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Safari/605.1.15",
+        "checks": [
+          {
+            "width": 1280,
+            "name": "Fresh defaults and two exact new presets",
+            "pass": true,
+            "elapsedMs": 141
+          },
+          {
+            "assets": 3,
+            "name": "Import partial-alpha ramp, sprite and three-frame clip",
+            "pass": true,
+            "elapsedMs": 293
+          }
+        ],
+        "errors": [],
+        "longTasks": [],
+        "longTaskObserverSupported": true,
+        "longTaskObservationScope": "Initial application load through persistence reload; kernel phase has a separate observer",
+        "started": "2026-10-15T09:20:16.609Z",
+        "completed": false,
+        "error": {
+          "message": "Preview/full-source sample mismatch ramp",
+          "stack": "post@http://127.0.0.1:5294/improvements:15:203\nasync paints@http://127.0.0.1:5294/improvements:28:457"
+        },
+        "finished": "2026-10-15T09:20:47.556Z"
+      },
+      "errors": []
+    }
+  ],
+  "browserVersion": "26.5",
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Safari/605.1.15",
+  "sourceChangedDuringRun": false,
+  "distChangedDuringRun": false,
+  "completed": false,
+  "finished": "2026-10-15T09:20:47.812Z"
+}

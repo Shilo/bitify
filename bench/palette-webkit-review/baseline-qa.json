@@ -1,0 +1,31 @@
+{
+  "route": "qa",
+  "status": "FAIL: Preview/full-source sample mismatch ramp",
+  "receipt": {
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Safari/605.1.15",
+    "checks": [
+      {
+        "name": "Fresh full-palette defaults are off",
+        "pass": true,
+        "ms": 40,
+        "width": 1280
+      },
+      {
+        "name": "Import original stills and animation",
+        "pass": true,
+        "ms": 279,
+        "tiles": 3
+      }
+    ],
+    "errors": [],
+    "longTasks": [],
+    "started": "2026-10-15T09:19:55.014Z",
+    "completed": false,
+    "error": {
+      "message": "Preview/full-source sample mismatch ramp",
+      "stack": "post@http://127.0.0.1:5294/qa:12:184\nasync verifyPaints@http://127.0.0.1:5294/qa:18:438\n@http://127.0.0.1:5294/qa:35:139\nasync check@http://127.0.0.1:5294/qa:14:114\n@http://127.0.0.1:5294/qa:35:35"
+    },
+    "finished": "2026-10-15T09:20:16.151Z"
+  },
+  "errors": []
+}

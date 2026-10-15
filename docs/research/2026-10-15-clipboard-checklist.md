@@ -39,3 +39,7 @@ they must not count as this case passing.
 The [final verification](2026-10-15-clipboard-verification.md) retains precise
 source/transport boundaries and remaining work: Safari/iOS, a direct PNG-import
 precision probe, and external destinations beyond the exercised receivers.
+
+The subsequent [PNG precision checklist](2026-10-15-png-import-precision-checklist.md)
+completes that direct probe and repairs the native desktop conversion in
+`d37d8b7`. Its separate WebKit fallback and Safari/iOS limits remain explicit.

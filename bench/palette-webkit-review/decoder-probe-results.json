@@ -1,0 +1,1345 @@
+{
+  "scope": "Windows Playwright WebKit; direct owned decoder diagnostics, not Safari/iOS",
+  "platform": "win32",
+  "browserVersion": "26.5",
+  "bundleHashBefore": "92c58261e7953fbd16232ee713774cae04ec206f39db27b2ccb0ce8bec9060fc",
+  "bundleHashAfter": "92c58261e7953fbd16232ee713774cae04ec206f39db27b2ccb0ce8bec9060fc",
+  "adapterNote": "Existing device selector set to edge only because page has no WebKit label; original report retained, runner identifies actual Windows WebKit engine",
+  "errors": [],
+  "receipt": {
+    "device": "edge",
+    "started": "2026-10-15T09:21:43.169Z",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Safari/605.1.15",
+    "scope": "Read-only owned PNG decode controls. Production path runs uninstrumented. Direct controls report their actual native errors. Matching outputs do not alone prove which hidden production fallback ran.",
+    "capabilities": {
+      "secureContext": true,
+      "ImageDecoder": "undefined",
+      "VideoFrame": "undefined",
+      "createImageBitmap": "function",
+      "Float16Array": "function",
+      "DecompressionStream": "function"
+    },
+    "fixtures": [
+      {
+        "id": "source",
+        "width": 32,
+        "height": 24,
+        "sourcePngSha256": "7f37bd9f7f235d65265bbe2e922adfd35d74cb4f07c73e52366251701bf57bb9",
+        "oracle": "Independent Sharp sRGB RGBA for these authored sRGB8 PNGs. Hidden alpha0 RGB excluded from visible comparison.",
+        "methods": [
+          {
+            "name": "production",
+            "ok": true,
+            "ms": 15,
+            "width": 32,
+            "height": 24,
+            "alphaMismatches": 0,
+            "visibleRgbMismatches": 292,
+            "maxChannelDelta": 241,
+            "hiddenRgbChanges": 57,
+            "exactVisibleRgba": false,
+            "byAlpha": {
+              "0": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 0,
+                "maxChannelDelta": 0
+              },
+              "1": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 54,
+                "maxChannelDelta": 241
+              },
+              "64": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 52,
+                "maxChannelDelta": 4
+              },
+              "127": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 51,
+                "maxChannelDelta": 2
+              },
+              "128": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 51,
+                "maxChannelDelta": 2
+              },
+              "192": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 45,
+                "maxChannelDelta": 1
+              },
+              "254": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 39,
+                "maxChannelDelta": 1
+              },
+              "255": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 0,
+                "maxChannelDelta": 0
+              }
+            },
+            "examples": [
+              {
+                "x": 10,
+                "y": 1,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 11,
+                "y": 1,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 12,
+                "y": 1,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 13,
+                "y": 1,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 14,
+                "y": 1,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 15,
+                "y": 1,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 16,
+                "y": 1,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 17,
+                "y": 1,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "rgbaSha256": "57ef543d868bc6c00036d8f855ff988edf8462d795d16dbb30b4cfb88a7ccd8e",
+            "actualRgbaBase64": "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"
+          },
+          {
+            "name": "native-stream-rgba",
+            "ok": false,
+            "ms": 0,
+            "error": {
+              "name": "Error",
+              "message": "ImageDecoder absent"
+            }
+          },
+          {
+            "name": "native-buffer-rgba",
+            "ok": false,
+            "ms": 0,
+            "error": {
+              "name": "Error",
+              "message": "ImageDecoder absent"
+            }
+          },
+          {
+            "name": "native-buffer-nativeformat",
+            "ok": false,
+            "ms": 1,
+            "error": {
+              "name": "Error",
+              "message": "ImageDecoder absent"
+            }
+          },
+          {
+            "name": "native-noneconversion",
+            "ok": false,
+            "ms": 0,
+            "error": {
+              "name": "Error",
+              "message": "ImageDecoder absent"
+            }
+          },
+          {
+            "name": "bitmap-default-canvas8",
+            "ok": true,
+            "ms": 18,
+            "metadata": {
+              "attributes": {
+                "desynchronized": false,
+                "willReadFrequently": true
+              },
+              "readbackArray": "Uint8ClampedArray"
+            },
+            "width": 32,
+            "height": 24,
+            "alphaMismatches": 0,
+            "visibleRgbMismatches": 292,
+            "maxChannelDelta": 241,
+            "hiddenRgbChanges": 57,
+            "exactVisibleRgba": false,
+            "byAlpha": {
+              "0": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 0,
+                "maxChannelDelta": 0
+              },
+              "1": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 54,
+                "maxChannelDelta": 241
+              },
+              "64": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 52,
+                "maxChannelDelta": 4
+              },
+              "127": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 51,
+                "maxChannelDelta": 2
+              },
+              "128": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 51,
+                "maxChannelDelta": 2
+              },
+              "192": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 45,
+                "maxChannelDelta": 1
+              },
+              "254": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 39,
+                "maxChannelDelta": 1
+              },
+              "255": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 0,
+                "maxChannelDelta": 0
+              }
+            },
+            "examples": [
+              {
+                "x": 10,
+                "y": 1,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 11,
+                "y": 1,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 12,
+                "y": 1,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 13,
+                "y": 1,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 14,
+                "y": 1,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 15,
+                "y": 1,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 16,
+                "y": 1,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 17,
+                "y": 1,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "rgbaSha256": "57ef543d868bc6c00036d8f855ff988edf8462d795d16dbb30b4cfb88a7ccd8e",
+            "actualRgbaBase64": "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"
+          },
+          {
+            "name": "bitmap-none-canvas8",
+            "ok": true,
+            "ms": 16,
+            "metadata": {
+              "attributes": {
+                "desynchronized": false,
+                "willReadFrequently": true
+              },
+              "readbackArray": "Uint8ClampedArray"
+            },
+            "width": 32,
+            "height": 24,
+            "alphaMismatches": 0,
+            "visibleRgbMismatches": 292,
+            "maxChannelDelta": 241,
+            "hiddenRgbChanges": 57,
+            "exactVisibleRgba": false,
+            "byAlpha": {
+              "0": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 0,
+                "maxChannelDelta": 0
+              },
+              "1": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 54,
+                "maxChannelDelta": 241
+              },
+              "64": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 52,
+                "maxChannelDelta": 4
+              },
+              "127": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 51,
+                "maxChannelDelta": 2
+              },
+              "128": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 51,
+                "maxChannelDelta": 2
+              },
+              "192": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 45,
+                "maxChannelDelta": 1
+              },
+              "254": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 39,
+                "maxChannelDelta": 1
+              },
+              "255": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 0,
+                "maxChannelDelta": 0
+              }
+            },
+            "examples": [
+              {
+                "x": 10,
+                "y": 1,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 11,
+                "y": 1,
+                "expected": [
+                  255,
+                  241,
+                  232,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 12,
+                "y": 1,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 13,
+                "y": 1,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 14,
+                "y": 1,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 15,
+                "y": 1,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 16,
+                "y": 1,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 17,
+                "y": 1,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "rgbaSha256": "57ef543d868bc6c00036d8f855ff988edf8462d795d16dbb30b4cfb88a7ccd8e",
+            "actualRgbaBase64": "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"
+          },
+          {
+            "name": "bitmap-none-videoframe",
+            "ok": false,
+            "ms": 0,
+            "error": {
+              "name": "Error",
+              "message": "VideoFrame absent"
+            }
+          },
+          {
+            "name": "bitmap-none-canvas16",
+            "ok": false,
+            "ms": 16,
+            "error": {
+              "name": "Error",
+              "message": "Canvas float16 backing unsupported: {\"desynchronized\":false,\"willReadFrequently\":true}"
+            }
+          }
+        ]
+      },
+      {
+        "id": "converted",
+        "width": 32,
+        "height": 24,
+        "sourcePngSha256": "14d0012def2b51dbf17ce7e0022fb43d7cc2911209be1ed2b43bfe995c427691",
+        "oracle": "Independent Sharp sRGB RGBA for these authored sRGB8 PNGs. Hidden alpha0 RGB excluded from visible comparison.",
+        "methods": [
+          {
+            "name": "production",
+            "ok": true,
+            "ms": 16,
+            "width": 32,
+            "height": 24,
+            "alphaMismatches": 0,
+            "visibleRgbMismatches": 330,
+            "maxChannelDelta": 236,
+            "hiddenRgbChanges": 0,
+            "exactVisibleRgba": false,
+            "byAlpha": {
+              "0": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 0,
+                "maxChannelDelta": 0
+              },
+              "1": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 57,
+                "maxChannelDelta": 236
+              },
+              "64": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 57,
+                "maxChannelDelta": 4
+              },
+              "127": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 57,
+                "maxChannelDelta": 2
+              },
+              "128": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 57,
+                "maxChannelDelta": 2
+              },
+              "192": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 57,
+                "maxChannelDelta": 1
+              },
+              "254": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 45,
+                "maxChannelDelta": 1
+              },
+              "255": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 0,
+                "maxChannelDelta": 0
+              }
+            },
+            "examples": [
+              {
+                "x": 10,
+                "y": 1,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 11,
+                "y": 1,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 12,
+                "y": 1,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 13,
+                "y": 1,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 14,
+                "y": 1,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 15,
+                "y": 1,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 16,
+                "y": 1,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 17,
+                "y": 1,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "rgbaSha256": "81e0d5eb53ade6f91a3af8e13d528ae4a279dbf4d1f364317050a77c40f8288b",
+            "actualRgbaBase64": "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"
+          },
+          {
+            "name": "native-stream-rgba",
+            "ok": false,
+            "ms": 0,
+            "error": {
+              "name": "Error",
+              "message": "ImageDecoder absent"
+            }
+          },
+          {
+            "name": "native-buffer-rgba",
+            "ok": false,
+            "ms": 0,
+            "error": {
+              "name": "Error",
+              "message": "ImageDecoder absent"
+            }
+          },
+          {
+            "name": "native-buffer-nativeformat",
+            "ok": false,
+            "ms": 0,
+            "error": {
+              "name": "Error",
+              "message": "ImageDecoder absent"
+            }
+          },
+          {
+            "name": "native-noneconversion",
+            "ok": false,
+            "ms": 0,
+            "error": {
+              "name": "Error",
+              "message": "ImageDecoder absent"
+            }
+          },
+          {
+            "name": "bitmap-default-canvas8",
+            "ok": true,
+            "ms": 17,
+            "metadata": {
+              "attributes": {
+                "desynchronized": false,
+                "willReadFrequently": true
+              },
+              "readbackArray": "Uint8ClampedArray"
+            },
+            "width": 32,
+            "height": 24,
+            "alphaMismatches": 0,
+            "visibleRgbMismatches": 330,
+            "maxChannelDelta": 236,
+            "hiddenRgbChanges": 0,
+            "exactVisibleRgba": false,
+            "byAlpha": {
+              "0": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 0,
+                "maxChannelDelta": 0
+              },
+              "1": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 57,
+                "maxChannelDelta": 236
+              },
+              "64": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 57,
+                "maxChannelDelta": 4
+              },
+              "127": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 57,
+                "maxChannelDelta": 2
+              },
+              "128": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 57,
+                "maxChannelDelta": 2
+              },
+              "192": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 57,
+                "maxChannelDelta": 1
+              },
+              "254": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 45,
+                "maxChannelDelta": 1
+              },
+              "255": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 0,
+                "maxChannelDelta": 0
+              }
+            },
+            "examples": [
+              {
+                "x": 10,
+                "y": 1,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 11,
+                "y": 1,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 12,
+                "y": 1,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 13,
+                "y": 1,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 14,
+                "y": 1,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 15,
+                "y": 1,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 16,
+                "y": 1,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 17,
+                "y": 1,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "rgbaSha256": "81e0d5eb53ade6f91a3af8e13d528ae4a279dbf4d1f364317050a77c40f8288b",
+            "actualRgbaBase64": "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"
+          },
+          {
+            "name": "bitmap-none-canvas8",
+            "ok": true,
+            "ms": 15,
+            "metadata": {
+              "attributes": {
+                "desynchronized": false,
+                "willReadFrequently": true
+              },
+              "readbackArray": "Uint8ClampedArray"
+            },
+            "width": 32,
+            "height": 24,
+            "alphaMismatches": 0,
+            "visibleRgbMismatches": 330,
+            "maxChannelDelta": 236,
+            "hiddenRgbChanges": 0,
+            "exactVisibleRgba": false,
+            "byAlpha": {
+              "0": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 0,
+                "maxChannelDelta": 0
+              },
+              "1": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 57,
+                "maxChannelDelta": 236
+              },
+              "64": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 57,
+                "maxChannelDelta": 4
+              },
+              "127": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 57,
+                "maxChannelDelta": 2
+              },
+              "128": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 57,
+                "maxChannelDelta": 2
+              },
+              "192": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 57,
+                "maxChannelDelta": 1
+              },
+              "254": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 45,
+                "maxChannelDelta": 1
+              },
+              "255": {
+                "pixels": 96,
+                "alphaMismatches": 0,
+                "visibleRgbMismatches": 0,
+                "maxChannelDelta": 0
+              }
+            },
+            "examples": [
+              {
+                "x": 10,
+                "y": 1,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 11,
+                "y": 1,
+                "expected": [
+                  194,
+                  195,
+                  199,
+                  1
+                ],
+                "actual": [
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 12,
+                "y": 1,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 13,
+                "y": 1,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 14,
+                "y": 1,
+                "expected": [
+                  255,
+                  0,
+                  77,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 15,
+                "y": 1,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 16,
+                "y": 1,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "x": 17,
+                "y": 1,
+                "expected": [
+                  255,
+                  236,
+                  39,
+                  1
+                ],
+                "actual": [
+                  255,
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "rgbaSha256": "81e0d5eb53ade6f91a3af8e13d528ae4a279dbf4d1f364317050a77c40f8288b",
+            "actualRgbaBase64": "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"
+          },
+          {
+            "name": "bitmap-none-videoframe",
+            "ok": false,
+            "ms": 0,
+            "error": {
+              "name": "Error",
+              "message": "VideoFrame absent"
+            }
+          },
+          {
+            "name": "bitmap-none-canvas16",
+            "ok": false,
+            "ms": 16,
+            "error": {
+              "name": "Error",
+              "message": "Canvas float16 backing unsupported: {\"desynchronized\":false,\"willReadFrequently\":true}"
+            }
+          }
+        ]
+      }
+    ],
+    "completed": true,
+    "finished": "2026-10-15T09:21:43.738Z"
+  }
+}

@@ -1,0 +1,2267 @@
+{
+  "device": "android",
+  "started": "2026-10-15T09:20:52.839Z",
+  "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+  "scope": "Read-only owned PNG decode controls. Production path runs uninstrumented. Direct controls report their actual native errors. Matching outputs do not alone prove which hidden production fallback ran.",
+  "capabilities": {
+    "secureContext": true,
+    "ImageDecoder": "function",
+    "VideoFrame": "function",
+    "createImageBitmap": "function",
+    "Float16Array": "function",
+    "DecompressionStream": "function",
+    "pngSupported": true
+  },
+  "fixtures": [
+    {
+      "id": "source",
+      "width": 32,
+      "height": 24,
+      "sourcePngSha256": "7f37bd9f7f235d65265bbe2e922adfd35d74cb4f07c73e52366251701bf57bb9",
+      "oracle": "Independent Sharp sRGB RGBA for these authored sRGB8 PNGs. Hidden alpha0 RGB excluded from visible comparison.",
+      "methods": [
+        {
+          "name": "production",
+          "ok": true,
+          "ms": 3.700000047683716,
+          "width": 32,
+          "height": 24,
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "hiddenRgbChanges": 0,
+          "exactVisibleRgba": true,
+          "byAlpha": {
+            "0": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "1": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "64": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "127": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "128": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "192": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "254": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "255": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            }
+          },
+          "examples": [],
+          "rgbaSha256": "74550bbbf6f6667b56ab35dbffdbc0ac85ca64efaa4bfc31663d1c7fe454cd32"
+        },
+        {
+          "name": "native-stream-rgba",
+          "ok": true,
+          "ms": 11.699999988079071,
+          "metadata": {
+            "format": "RGBA",
+            "width": 32,
+            "height": 24,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 32,
+              "height": 24
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            },
+            "copyLayout": [
+              {
+                "offset": 0,
+                "stride": 128
+              }
+            ]
+          },
+          "width": 32,
+          "height": 24,
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "hiddenRgbChanges": 0,
+          "exactVisibleRgba": true,
+          "byAlpha": {
+            "0": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "1": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "64": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "127": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "128": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "192": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "254": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "255": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            }
+          },
+          "examples": [],
+          "rgbaSha256": "74550bbbf6f6667b56ab35dbffdbc0ac85ca64efaa4bfc31663d1c7fe454cd32"
+        },
+        {
+          "name": "native-buffer-rgba",
+          "ok": true,
+          "ms": 2.900000035762787,
+          "metadata": {
+            "format": "RGBA",
+            "width": 32,
+            "height": 24,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 32,
+              "height": 24
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            },
+            "copyLayout": [
+              {
+                "offset": 0,
+                "stride": 128
+              }
+            ]
+          },
+          "width": 32,
+          "height": 24,
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "hiddenRgbChanges": 0,
+          "exactVisibleRgba": true,
+          "byAlpha": {
+            "0": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "1": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "64": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "127": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "128": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "192": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "254": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "255": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            }
+          },
+          "examples": [],
+          "rgbaSha256": "74550bbbf6f6667b56ab35dbffdbc0ac85ca64efaa4bfc31663d1c7fe454cd32"
+        },
+        {
+          "name": "native-buffer-nativeformat",
+          "ok": true,
+          "ms": 2.800000011920929,
+          "metadata": {
+            "format": "RGBA",
+            "width": 32,
+            "height": 24,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 32,
+              "height": 24
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            },
+            "copyLayout": [
+              {
+                "offset": 0,
+                "stride": 128
+              }
+            ],
+            "channelNormalization": "Packed native RGBA → RGBA channel order only; no RGB arithmetic or color-space conversion"
+          },
+          "width": 32,
+          "height": 24,
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "hiddenRgbChanges": 0,
+          "exactVisibleRgba": true,
+          "byAlpha": {
+            "0": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "1": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "64": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "127": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "128": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "192": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "254": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "255": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            }
+          },
+          "examples": [],
+          "rgbaSha256": "74550bbbf6f6667b56ab35dbffdbc0ac85ca64efaa4bfc31663d1c7fe454cd32"
+        },
+        {
+          "name": "native-noneconversion",
+          "ok": true,
+          "ms": 1.300000011920929,
+          "metadata": {
+            "format": "RGBA",
+            "width": 32,
+            "height": 24,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 32,
+              "height": 24
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": null,
+              "matrix": null,
+              "primaries": null,
+              "transfer": null
+            },
+            "copyLayout": [
+              {
+                "offset": 0,
+                "stride": 128
+              }
+            ]
+          },
+          "width": 32,
+          "height": 24,
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "hiddenRgbChanges": 0,
+          "exactVisibleRgba": true,
+          "byAlpha": {
+            "0": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "1": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "64": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "127": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "128": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "192": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "254": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "255": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            }
+          },
+          "examples": [],
+          "rgbaSha256": "74550bbbf6f6667b56ab35dbffdbc0ac85ca64efaa4bfc31663d1c7fe454cd32"
+        },
+        {
+          "name": "bitmap-default-canvas8",
+          "ok": true,
+          "ms": 6.5,
+          "metadata": {
+            "attributes": {
+              "alpha": true,
+              "colorSpace": "srgb",
+              "colorType": "unorm8",
+              "desynchronized": false,
+              "toneMapping": {
+                "mode": "standard"
+              },
+              "willReadFrequently": true
+            },
+            "readbackArray": "Uint8ClampedArray",
+            "imageColorSpace": "srgb"
+          },
+          "width": 32,
+          "height": 24,
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 300,
+          "maxChannelDelta": 109,
+          "hiddenRgbChanges": 73,
+          "exactVisibleRgba": false,
+          "byAlpha": {
+            "0": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "1": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 64,
+              "maxChannelDelta": 109
+            },
+            "64": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 59,
+              "maxChannelDelta": 3
+            },
+            "127": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 54,
+              "maxChannelDelta": 1
+            },
+            "128": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 59,
+              "maxChannelDelta": 2
+            },
+            "192": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 30,
+              "maxChannelDelta": 1
+            },
+            "254": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 20,
+              "maxChannelDelta": 1
+            },
+            "255": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 14,
+              "maxChannelDelta": 1
+            }
+          },
+          "examples": [
+            {
+              "x": 1,
+              "y": 1,
+              "expected": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "actual": [
+                1,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "x": 5,
+              "y": 1,
+              "expected": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "actual": [
+                0,
+                1,
+                0,
+                1
+              ]
+            },
+            {
+              "x": 9,
+              "y": 1,
+              "expected": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "actual": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "x": 10,
+              "y": 1,
+              "expected": [
+                255,
+                241,
+                232,
+                1
+              ],
+              "actual": [
+                255,
+                255,
+                255,
+                1
+              ]
+            },
+            {
+              "x": 11,
+              "y": 1,
+              "expected": [
+                255,
+                241,
+                232,
+                1
+              ],
+              "actual": [
+                255,
+                255,
+                255,
+                1
+              ]
+            },
+            {
+              "x": 12,
+              "y": 1,
+              "expected": [
+                255,
+                0,
+                77,
+                1
+              ],
+              "actual": [
+                255,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "x": 13,
+              "y": 1,
+              "expected": [
+                255,
+                0,
+                77,
+                1
+              ],
+              "actual": [
+                255,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "x": 14,
+              "y": 1,
+              "expected": [
+                255,
+                0,
+                77,
+                1
+              ],
+              "actual": [
+                255,
+                1,
+                0,
+                1
+              ]
+            }
+          ],
+          "rgbaSha256": "f2db96484457a5c571943b808b51062fcff0dbed321af309a7d137132021c734"
+        },
+        {
+          "name": "bitmap-none-canvas8",
+          "ok": true,
+          "ms": 1.5,
+          "metadata": {
+            "attributes": {
+              "alpha": true,
+              "colorSpace": "srgb",
+              "colorType": "unorm8",
+              "desynchronized": false,
+              "toneMapping": {
+                "mode": "standard"
+              },
+              "willReadFrequently": true
+            },
+            "readbackArray": "Uint8ClampedArray",
+            "imageColorSpace": "srgb"
+          },
+          "width": 32,
+          "height": 24,
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 300,
+          "maxChannelDelta": 109,
+          "hiddenRgbChanges": 73,
+          "exactVisibleRgba": false,
+          "byAlpha": {
+            "0": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "1": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 64,
+              "maxChannelDelta": 109
+            },
+            "64": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 59,
+              "maxChannelDelta": 3
+            },
+            "127": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 54,
+              "maxChannelDelta": 1
+            },
+            "128": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 59,
+              "maxChannelDelta": 2
+            },
+            "192": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 30,
+              "maxChannelDelta": 1
+            },
+            "254": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 20,
+              "maxChannelDelta": 1
+            },
+            "255": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 14,
+              "maxChannelDelta": 1
+            }
+          },
+          "examples": [
+            {
+              "x": 1,
+              "y": 1,
+              "expected": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "actual": [
+                1,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "x": 5,
+              "y": 1,
+              "expected": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "actual": [
+                0,
+                1,
+                0,
+                1
+              ]
+            },
+            {
+              "x": 9,
+              "y": 1,
+              "expected": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "actual": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "x": 10,
+              "y": 1,
+              "expected": [
+                255,
+                241,
+                232,
+                1
+              ],
+              "actual": [
+                255,
+                255,
+                255,
+                1
+              ]
+            },
+            {
+              "x": 11,
+              "y": 1,
+              "expected": [
+                255,
+                241,
+                232,
+                1
+              ],
+              "actual": [
+                255,
+                255,
+                255,
+                1
+              ]
+            },
+            {
+              "x": 12,
+              "y": 1,
+              "expected": [
+                255,
+                0,
+                77,
+                1
+              ],
+              "actual": [
+                255,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "x": 13,
+              "y": 1,
+              "expected": [
+                255,
+                0,
+                77,
+                1
+              ],
+              "actual": [
+                255,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "x": 14,
+              "y": 1,
+              "expected": [
+                255,
+                0,
+                77,
+                1
+              ],
+              "actual": [
+                255,
+                1,
+                0,
+                1
+              ]
+            }
+          ],
+          "rgbaSha256": "f2db96484457a5c571943b808b51062fcff0dbed321af309a7d137132021c734"
+        },
+        {
+          "name": "bitmap-none-videoframe",
+          "ok": true,
+          "ms": 1.2000000476837158,
+          "metadata": {
+            "format": "RGBA",
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            }
+          },
+          "width": 32,
+          "height": 24,
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "hiddenRgbChanges": 0,
+          "exactVisibleRgba": true,
+          "byAlpha": {
+            "0": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "1": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "64": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "127": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "128": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "192": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "254": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "255": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            }
+          },
+          "examples": [],
+          "rgbaSha256": "74550bbbf6f6667b56ab35dbffdbc0ac85ca64efaa4bfc31663d1c7fe454cd32"
+        },
+        {
+          "name": "bitmap-none-canvas16",
+          "ok": true,
+          "ms": 7.5,
+          "metadata": {
+            "attributes": {
+              "alpha": true,
+              "colorSpace": "srgb",
+              "colorType": "float16",
+              "desynchronized": false,
+              "toneMapping": {
+                "mode": "standard"
+              },
+              "willReadFrequently": true
+            },
+            "readbackArray": "Float16Array",
+            "imageColorSpace": "srgb"
+          },
+          "width": 32,
+          "height": 24,
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 29,
+          "maxChannelDelta": 32,
+          "hiddenRgbChanges": 57,
+          "exactVisibleRgba": false,
+          "byAlpha": {
+            "0": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "1": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 6,
+              "maxChannelDelta": 32
+            },
+            "64": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 3,
+              "maxChannelDelta": 16
+            },
+            "127": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 4,
+              "maxChannelDelta": 32
+            },
+            "128": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 5,
+              "maxChannelDelta": 32
+            },
+            "192": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 2,
+              "maxChannelDelta": 32
+            },
+            "254": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 3,
+              "maxChannelDelta": 32
+            },
+            "255": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 6,
+              "maxChannelDelta": 32
+            }
+          },
+          "examples": [
+            {
+              "x": 19,
+              "y": 1,
+              "expected": [
+                0,
+                228,
+                54,
+                1
+              ],
+              "actual": [
+                0,
+                228,
+                62,
+                1
+              ]
+            },
+            {
+              "x": 21,
+              "y": 1,
+              "expected": [
+                41,
+                173,
+                255,
+                1
+              ],
+              "actual": [
+                33,
+                173,
+                255,
+                1
+              ]
+            },
+            {
+              "x": 15,
+              "y": 3,
+              "expected": [
+                255,
+                236,
+                39,
+                127
+              ],
+              "actual": [
+                255,
+                236,
+                47,
+                127
+              ]
+            },
+            {
+              "x": 18,
+              "y": 3,
+              "expected": [
+                0,
+                228,
+                54,
+                127
+              ],
+              "actual": [
+                0,
+                228,
+                62,
+                127
+              ]
+            },
+            {
+              "x": 26,
+              "y": 3,
+              "expected": [
+                73,
+                73,
+                73,
+                127
+              ],
+              "actual": [
+                89,
+                73,
+                73,
+                127
+              ]
+            },
+            {
+              "x": 10,
+              "y": 4,
+              "expected": [
+                255,
+                241,
+                232,
+                128
+              ],
+              "actual": [
+                255,
+                241,
+                200,
+                128
+              ]
+            },
+            {
+              "x": 13,
+              "y": 4,
+              "expected": [
+                255,
+                0,
+                77,
+                128
+              ],
+              "actual": [
+                255,
+                0,
+                93,
+                128
+              ]
+            },
+            {
+              "x": 22,
+              "y": 5,
+              "expected": [
+                41,
+                173,
+                255,
+                192
+              ],
+              "actual": [
+                33,
+                173,
+                255,
+                192
+              ]
+            }
+          ],
+          "rgbaSha256": "74d16cbf105fdb7cbb40379ef72f37ae74d54855289962c7bddcc6c650d548f7"
+        }
+      ]
+    },
+    {
+      "id": "converted",
+      "width": 32,
+      "height": 24,
+      "sourcePngSha256": "14d0012def2b51dbf17ce7e0022fb43d7cc2911209be1ed2b43bfe995c427691",
+      "oracle": "Independent Sharp sRGB RGBA for these authored sRGB8 PNGs. Hidden alpha0 RGB excluded from visible comparison.",
+      "methods": [
+        {
+          "name": "production",
+          "ok": true,
+          "ms": 1.600000023841858,
+          "width": 32,
+          "height": 24,
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "hiddenRgbChanges": 0,
+          "exactVisibleRgba": true,
+          "byAlpha": {
+            "0": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "1": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "64": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "127": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "128": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "192": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "254": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "255": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            }
+          },
+          "examples": [],
+          "rgbaSha256": "1023ed1b1862f83de49c8c85ce30d1e821fd3e5a0b57a1447abd98a598b972d4"
+        },
+        {
+          "name": "native-stream-rgba",
+          "ok": true,
+          "ms": 1.7000000476837158,
+          "metadata": {
+            "format": "RGBA",
+            "width": 32,
+            "height": 24,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 32,
+              "height": 24
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            },
+            "copyLayout": [
+              {
+                "offset": 0,
+                "stride": 128
+              }
+            ]
+          },
+          "width": 32,
+          "height": 24,
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "hiddenRgbChanges": 0,
+          "exactVisibleRgba": true,
+          "byAlpha": {
+            "0": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "1": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "64": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "127": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "128": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "192": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "254": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "255": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            }
+          },
+          "examples": [],
+          "rgbaSha256": "1023ed1b1862f83de49c8c85ce30d1e821fd3e5a0b57a1447abd98a598b972d4"
+        },
+        {
+          "name": "native-buffer-rgba",
+          "ok": true,
+          "ms": 1.100000023841858,
+          "metadata": {
+            "format": "RGBA",
+            "width": 32,
+            "height": 24,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 32,
+              "height": 24
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            },
+            "copyLayout": [
+              {
+                "offset": 0,
+                "stride": 128
+              }
+            ]
+          },
+          "width": 32,
+          "height": 24,
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "hiddenRgbChanges": 0,
+          "exactVisibleRgba": true,
+          "byAlpha": {
+            "0": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "1": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "64": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "127": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "128": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "192": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "254": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "255": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            }
+          },
+          "examples": [],
+          "rgbaSha256": "1023ed1b1862f83de49c8c85ce30d1e821fd3e5a0b57a1447abd98a598b972d4"
+        },
+        {
+          "name": "native-buffer-nativeformat",
+          "ok": true,
+          "ms": 1.399999976158142,
+          "metadata": {
+            "format": "RGBA",
+            "width": 32,
+            "height": 24,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 32,
+              "height": 24
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            },
+            "copyLayout": [
+              {
+                "offset": 0,
+                "stride": 128
+              }
+            ],
+            "channelNormalization": "Packed native RGBA → RGBA channel order only; no RGB arithmetic or color-space conversion"
+          },
+          "width": 32,
+          "height": 24,
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "hiddenRgbChanges": 0,
+          "exactVisibleRgba": true,
+          "byAlpha": {
+            "0": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "1": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "64": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "127": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "128": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "192": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "254": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "255": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            }
+          },
+          "examples": [],
+          "rgbaSha256": "1023ed1b1862f83de49c8c85ce30d1e821fd3e5a0b57a1447abd98a598b972d4"
+        },
+        {
+          "name": "native-noneconversion",
+          "ok": true,
+          "ms": 0.9000000357627869,
+          "metadata": {
+            "format": "RGBA",
+            "width": 32,
+            "height": 24,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 32,
+              "height": 24
+            },
+            "rotation": 0,
+            "flip": false,
+            "colorSpace": {
+              "fullRange": null,
+              "matrix": null,
+              "primaries": null,
+              "transfer": null
+            },
+            "copyLayout": [
+              {
+                "offset": 0,
+                "stride": 128
+              }
+            ]
+          },
+          "width": 32,
+          "height": 24,
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "hiddenRgbChanges": 0,
+          "exactVisibleRgba": true,
+          "byAlpha": {
+            "0": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "1": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "64": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "127": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "128": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "192": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "254": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "255": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            }
+          },
+          "examples": [],
+          "rgbaSha256": "1023ed1b1862f83de49c8c85ce30d1e821fd3e5a0b57a1447abd98a598b972d4"
+        },
+        {
+          "name": "bitmap-default-canvas8",
+          "ok": true,
+          "ms": 1.5,
+          "metadata": {
+            "attributes": {
+              "alpha": true,
+              "colorSpace": "srgb",
+              "colorType": "unorm8",
+              "desynchronized": false,
+              "toneMapping": {
+                "mode": "standard"
+              },
+              "willReadFrequently": true
+            },
+            "readbackArray": "Uint8ClampedArray",
+            "imageColorSpace": "srgb"
+          },
+          "width": 32,
+          "height": 24,
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 343,
+          "maxChannelDelta": 124,
+          "hiddenRgbChanges": 17,
+          "exactVisibleRgba": false,
+          "byAlpha": {
+            "0": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "1": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 68,
+              "maxChannelDelta": 124
+            },
+            "64": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 59,
+              "maxChannelDelta": 3
+            },
+            "127": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 67,
+              "maxChannelDelta": 1
+            },
+            "128": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 69,
+              "maxChannelDelta": 2
+            },
+            "192": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 33,
+              "maxChannelDelta": 1
+            },
+            "254": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 29,
+              "maxChannelDelta": 1
+            },
+            "255": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 18,
+              "maxChannelDelta": 1
+            }
+          },
+          "examples": [
+            {
+              "x": 10,
+              "y": 1,
+              "expected": [
+                194,
+                195,
+                199,
+                1
+              ],
+              "actual": [
+                255,
+                255,
+                255,
+                1
+              ]
+            },
+            {
+              "x": 11,
+              "y": 1,
+              "expected": [
+                194,
+                195,
+                199,
+                1
+              ],
+              "actual": [
+                255,
+                255,
+                255,
+                1
+              ]
+            },
+            {
+              "x": 12,
+              "y": 1,
+              "expected": [
+                255,
+                0,
+                77,
+                1
+              ],
+              "actual": [
+                255,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "x": 13,
+              "y": 1,
+              "expected": [
+                255,
+                0,
+                77,
+                1
+              ],
+              "actual": [
+                254,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "x": 14,
+              "y": 1,
+              "expected": [
+                255,
+                0,
+                77,
+                1
+              ],
+              "actual": [
+                255,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "x": 15,
+              "y": 1,
+              "expected": [
+                255,
+                236,
+                39,
+                1
+              ],
+              "actual": [
+                255,
+                255,
+                0,
+                1
+              ]
+            },
+            {
+              "x": 16,
+              "y": 1,
+              "expected": [
+                255,
+                236,
+                39,
+                1
+              ],
+              "actual": [
+                255,
+                255,
+                0,
+                1
+              ]
+            },
+            {
+              "x": 17,
+              "y": 1,
+              "expected": [
+                255,
+                236,
+                39,
+                1
+              ],
+              "actual": [
+                255,
+                255,
+                0,
+                1
+              ]
+            }
+          ],
+          "rgbaSha256": "36f070c13cb47208bc2bee1acb3fd8dd80798f7f887972a0afaf4400d82af4c6"
+        },
+        {
+          "name": "bitmap-none-canvas8",
+          "ok": true,
+          "ms": 2,
+          "metadata": {
+            "attributes": {
+              "alpha": true,
+              "colorSpace": "srgb",
+              "colorType": "unorm8",
+              "desynchronized": false,
+              "toneMapping": {
+                "mode": "standard"
+              },
+              "willReadFrequently": true
+            },
+            "readbackArray": "Uint8ClampedArray",
+            "imageColorSpace": "srgb"
+          },
+          "width": 32,
+          "height": 24,
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 343,
+          "maxChannelDelta": 124,
+          "hiddenRgbChanges": 17,
+          "exactVisibleRgba": false,
+          "byAlpha": {
+            "0": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "1": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 68,
+              "maxChannelDelta": 124
+            },
+            "64": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 59,
+              "maxChannelDelta": 3
+            },
+            "127": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 67,
+              "maxChannelDelta": 1
+            },
+            "128": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 69,
+              "maxChannelDelta": 2
+            },
+            "192": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 33,
+              "maxChannelDelta": 1
+            },
+            "254": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 29,
+              "maxChannelDelta": 1
+            },
+            "255": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 18,
+              "maxChannelDelta": 1
+            }
+          },
+          "examples": [
+            {
+              "x": 10,
+              "y": 1,
+              "expected": [
+                194,
+                195,
+                199,
+                1
+              ],
+              "actual": [
+                255,
+                255,
+                255,
+                1
+              ]
+            },
+            {
+              "x": 11,
+              "y": 1,
+              "expected": [
+                194,
+                195,
+                199,
+                1
+              ],
+              "actual": [
+                255,
+                255,
+                255,
+                1
+              ]
+            },
+            {
+              "x": 12,
+              "y": 1,
+              "expected": [
+                255,
+                0,
+                77,
+                1
+              ],
+              "actual": [
+                255,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "x": 13,
+              "y": 1,
+              "expected": [
+                255,
+                0,
+                77,
+                1
+              ],
+              "actual": [
+                254,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "x": 14,
+              "y": 1,
+              "expected": [
+                255,
+                0,
+                77,
+                1
+              ],
+              "actual": [
+                255,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "x": 15,
+              "y": 1,
+              "expected": [
+                255,
+                236,
+                39,
+                1
+              ],
+              "actual": [
+                255,
+                255,
+                0,
+                1
+              ]
+            },
+            {
+              "x": 16,
+              "y": 1,
+              "expected": [
+                255,
+                236,
+                39,
+                1
+              ],
+              "actual": [
+                255,
+                255,
+                0,
+                1
+              ]
+            },
+            {
+              "x": 17,
+              "y": 1,
+              "expected": [
+                255,
+                236,
+                39,
+                1
+              ],
+              "actual": [
+                255,
+                255,
+                0,
+                1
+              ]
+            }
+          ],
+          "rgbaSha256": "36f070c13cb47208bc2bee1acb3fd8dd80798f7f887972a0afaf4400d82af4c6"
+        },
+        {
+          "name": "bitmap-none-videoframe",
+          "ok": true,
+          "ms": 0.9000000357627869,
+          "metadata": {
+            "format": "RGBA",
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "rgb",
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1"
+            }
+          },
+          "width": 32,
+          "height": 24,
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 0,
+          "maxChannelDelta": 0,
+          "hiddenRgbChanges": 0,
+          "exactVisibleRgba": true,
+          "byAlpha": {
+            "0": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "1": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "64": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "127": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "128": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "192": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "254": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "255": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            }
+          },
+          "examples": [],
+          "rgbaSha256": "1023ed1b1862f83de49c8c85ce30d1e821fd3e5a0b57a1447abd98a598b972d4"
+        },
+        {
+          "name": "bitmap-none-canvas16",
+          "ok": true,
+          "ms": 1.5,
+          "metadata": {
+            "attributes": {
+              "alpha": true,
+              "colorSpace": "srgb",
+              "colorType": "float16",
+              "desynchronized": false,
+              "toneMapping": {
+                "mode": "standard"
+              },
+              "willReadFrequently": true
+            },
+            "readbackArray": "Float16Array",
+            "imageColorSpace": "srgb"
+          },
+          "width": 32,
+          "height": 24,
+          "alphaMismatches": 0,
+          "visibleRgbMismatches": 28,
+          "maxChannelDelta": 32,
+          "hiddenRgbChanges": 0,
+          "exactVisibleRgba": false,
+          "byAlpha": {
+            "0": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 0,
+              "maxChannelDelta": 0
+            },
+            "1": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 5,
+              "maxChannelDelta": 32
+            },
+            "64": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 3,
+              "maxChannelDelta": 32
+            },
+            "127": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 4,
+              "maxChannelDelta": 32
+            },
+            "128": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 4,
+              "maxChannelDelta": 32
+            },
+            "192": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 3,
+              "maxChannelDelta": 32
+            },
+            "254": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 5,
+              "maxChannelDelta": 32
+            },
+            "255": {
+              "pixels": 96,
+              "alphaMismatches": 0,
+              "visibleRgbMismatches": 4,
+              "maxChannelDelta": 32
+            }
+          },
+          "examples": [
+            {
+              "x": 13,
+              "y": 1,
+              "expected": [
+                255,
+                0,
+                77,
+                1
+              ],
+              "actual": [
+                255,
+                0,
+                93,
+                1
+              ]
+            },
+            {
+              "x": 31,
+              "y": 1,
+              "expected": [
+                194,
+                195,
+                199,
+                1
+              ],
+              "actual": [
+                194,
+                195,
+                231,
+                1
+              ]
+            },
+            {
+              "x": 26,
+              "y": 2,
+              "expected": [
+                131,
+                118,
+                156,
+                64
+              ],
+              "actual": [
+                131,
+                118,
+                188,
+                64
+              ]
+            },
+            {
+              "x": 25,
+              "y": 4,
+              "expected": [
+                29,
+                43,
+                83,
+                128
+              ],
+              "actual": [
+                29,
+                43,
+                67,
+                128
+              ]
+            },
+            {
+              "x": 31,
+              "y": 4,
+              "expected": [
+                194,
+                195,
+                199,
+                128
+              ],
+              "actual": [
+                194,
+                195,
+                231,
+                128
+              ]
+            },
+            {
+              "x": 31,
+              "y": 7,
+              "expected": [
+                194,
+                195,
+                199,
+                255
+              ],
+              "actual": [
+                194,
+                195,
+                231,
+                255
+              ]
+            },
+            {
+              "x": 15,
+              "y": 9,
+              "expected": [
+                0,
+                228,
+                54,
+                1
+              ],
+              "actual": [
+                0,
+                228,
+                62,
+                1
+              ]
+            },
+            {
+              "x": 18,
+              "y": 10,
+              "expected": [
+                41,
+                173,
+                255,
+                64
+              ],
+              "actual": [
+                33,
+                173,
+                255,
+                64
+              ]
+            }
+          ],
+          "rgbaSha256": "1c69453ca0d0ed0f9763684f10bb66def8612ebe7266521e6b7f88201ab7ba49"
+        }
+      ]
+    }
+  ],
+  "completed": true,
+  "finished": "2026-10-15T09:20:53.016Z"
+}

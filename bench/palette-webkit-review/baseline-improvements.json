@@ -1,0 +1,35 @@
+{
+  "route": "improvements",
+  "status": "FAIL: Preview/full-source sample mismatch ramp",
+  "receipt": {
+    "kind": "palette-improvements",
+    "paletteName": "QA clip output colors mv9bvs2p",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Safari/605.1.15",
+    "checks": [
+      {
+        "width": 1280,
+        "name": "Fresh defaults and two exact new presets",
+        "pass": true,
+        "elapsedMs": 141
+      },
+      {
+        "assets": 3,
+        "name": "Import partial-alpha ramp, sprite and three-frame clip",
+        "pass": true,
+        "elapsedMs": 293
+      }
+    ],
+    "errors": [],
+    "longTasks": [],
+    "longTaskObserverSupported": true,
+    "longTaskObservationScope": "Initial application load through persistence reload; kernel phase has a separate observer",
+    "started": "2026-10-15T09:20:16.609Z",
+    "completed": false,
+    "error": {
+      "message": "Preview/full-source sample mismatch ramp",
+      "stack": "post@http://127.0.0.1:5294/improvements:15:203\nasync paints@http://127.0.0.1:5294/improvements:28:457"
+    },
+    "finished": "2026-10-15T09:20:47.556Z"
+  },
+  "errors": []
+}

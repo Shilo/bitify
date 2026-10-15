@@ -1,0 +1,17 @@
+{
+  "scope": "Actual final built app palette image import via file chooser; unsaved owned draft; DOM values only.",
+  "source": "palette-keep-expected.png",
+  "colors": [
+    "Select color 1 #000000",
+    "Select color 2 #c2c3c7",
+    "Select color 3 #ff004d",
+    "Select color 4 #ffec27",
+    "Select color 5 #00e436",
+    "Select color 6 #29adff",
+    "Select color 7 #1d2b53",
+    "Select color 8 #83769c"
+  ],
+  "namePreserved": true,
+  "wallImages": 1,
+  "savedAutomatically": false
+}
