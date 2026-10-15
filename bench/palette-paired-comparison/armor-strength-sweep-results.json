@@ -1,0 +1,625 @@
+{
+  "methodology": {
+    "source": "input-armor.png",
+    "sourcePngSha256": "4253720e7166feebf0292cbcdf8c6b46c5516f784ffa4c1dca45ef73652b349d",
+    "target": "target-4.png",
+    "targetPngSha256": "990e6a8f40a3b6ae15bdfa3ab76c89c6741051a023072e5cba4572e30845333f",
+    "colors": [
+      "#081820",
+      "#346856",
+      "#88c070",
+      "#e0f8d0"
+    ],
+    "alphaCut": 128,
+    "metric": "oklab",
+    "matrix": "4x4",
+    "cleanup": false,
+    "pointMetric": "mean per-visible-pixel sum of squared Oklab-axis differences",
+    "toneMetric": "mean squared Oklab difference after4x4 linear-light averaging, fully opaque blocks only",
+    "connectivity": "descriptive4-neighbor components of brightest target color; NOT a visual-quality score",
+    "serviceComparison": "Service Off/max are uncalibrated references, not equivalent strength levels",
+    "billing": "offline; no service requests",
+    "checksPassed": [
+      "source and target hashes match retained live request",
+      "retained service output hashes match paired evidence",
+      "all8 application PNGs retain binary alpha and target membership"
+    ]
+  },
+  "rows": [
+    {
+      "name": "Original",
+      "file": "input-armor.png",
+      "kind": "source"
+    },
+    {
+      "name": "PixelLab Off (strength inactive)",
+      "file": "service-armor-target4-none-0.png",
+      "kind": "service",
+      "metrics": {
+        "pointOklabMSE": 0.018318947436789607,
+        "block4ToneOklabMSE": 0.003911244532605325,
+        "visiblePixels": 155,
+        "opaqueBlocks": 4,
+        "excludedBlocks": 12,
+        "usedColors": 4,
+        "alphaClassificationChanges": 0,
+        "brightestTarget": {
+          "rgb": "#e0f8d0",
+          "pixels": 9,
+          "coordinates": [
+            [
+              2,
+              4
+            ],
+            [
+              5,
+              6
+            ],
+            [
+              6,
+              6
+            ],
+            [
+              5,
+              7
+            ],
+            [
+              6,
+              7
+            ],
+            [
+              5,
+              9
+            ],
+            [
+              6,
+              9
+            ],
+            [
+              6,
+              10
+            ],
+            [
+              6,
+              13
+            ]
+          ],
+          "fourConnectedComponentSizes": [
+            4,
+            3,
+            1,
+            1
+          ],
+          "singlePixelComponents": 2
+        },
+        "rgbaSha256": "7424a65f92498713212396fff9985cbb2820de8fd92d37164ce34e23414a78ec"
+      }
+    },
+    {
+      "name": "PixelLab 4×4 / native maximum10",
+      "file": "service-armor-target4-4x4-max-0.png",
+      "kind": "service",
+      "metrics": {
+        "pointOklabMSE": 0.021063158580231688,
+        "block4ToneOklabMSE": 0.011388473614188195,
+        "visiblePixels": 155,
+        "opaqueBlocks": 4,
+        "excludedBlocks": 12,
+        "usedColors": 4,
+        "alphaClassificationChanges": 0,
+        "brightestTarget": {
+          "rgb": "#e0f8d0",
+          "pixels": 9,
+          "coordinates": [
+            [
+              6,
+              5
+            ],
+            [
+              5,
+              6
+            ],
+            [
+              6,
+              6
+            ],
+            [
+              5,
+              7
+            ],
+            [
+              6,
+              7
+            ],
+            [
+              5,
+              9
+            ],
+            [
+              6,
+              9
+            ],
+            [
+              6,
+              10
+            ],
+            [
+              6,
+              13
+            ]
+          ],
+          "fourConnectedComponentSizes": [
+            5,
+            3,
+            1
+          ],
+          "singlePixelComponents": 1
+        },
+        "rgbaSha256": "71ba021e9c5afd70e26a41171e33500d0d5856c0ef4973ca16ddb7b142c1e9e2"
+      }
+    },
+    {
+      "name": "Colorfetti 4×4 / strength 0",
+      "file": "armor-sweep-strength-0.png",
+      "kind": "application",
+      "strength": 0,
+      "metrics": {
+        "pointOklabMSE": 0.01742178343509428,
+        "block4ToneOklabMSE": 0.005922949214940902,
+        "visiblePixels": 155,
+        "opaqueBlocks": 4,
+        "excludedBlocks": 12,
+        "usedColors": 4,
+        "alphaClassificationChanges": 0,
+        "brightestTarget": {
+          "rgb": "#e0f8d0",
+          "pixels": 4,
+          "coordinates": [
+            [
+              5,
+              6
+            ],
+            [
+              6,
+              6
+            ],
+            [
+              5,
+              7
+            ],
+            [
+              6,
+              7
+            ]
+          ],
+          "fourConnectedComponentSizes": [
+            4
+          ],
+          "singlePixelComponents": 0
+        },
+        "rgbaSha256": "77f2ef440b15ddffd815e062d5b39f150e7098eb2433087204587d7a36fafbe1"
+      }
+    },
+    {
+      "name": "Colorfetti 4×4 / strength 10",
+      "file": "armor-sweep-strength-10.png",
+      "kind": "application",
+      "strength": 10,
+      "metrics": {
+        "pointOklabMSE": 0.01742178343509428,
+        "block4ToneOklabMSE": 0.005922949214940902,
+        "visiblePixels": 155,
+        "opaqueBlocks": 4,
+        "excludedBlocks": 12,
+        "usedColors": 4,
+        "alphaClassificationChanges": 0,
+        "brightestTarget": {
+          "rgb": "#e0f8d0",
+          "pixels": 4,
+          "coordinates": [
+            [
+              5,
+              6
+            ],
+            [
+              6,
+              6
+            ],
+            [
+              5,
+              7
+            ],
+            [
+              6,
+              7
+            ]
+          ],
+          "fourConnectedComponentSizes": [
+            4
+          ],
+          "singlePixelComponents": 0
+        },
+        "rgbaSha256": "77f2ef440b15ddffd815e062d5b39f150e7098eb2433087204587d7a36fafbe1"
+      }
+    },
+    {
+      "name": "Colorfetti 4×4 / strength 20",
+      "file": "armor-sweep-strength-20.png",
+      "kind": "application",
+      "strength": 20,
+      "metrics": {
+        "pointOklabMSE": 0.017811661299661167,
+        "block4ToneOklabMSE": 0.005568453831663729,
+        "visiblePixels": 155,
+        "opaqueBlocks": 4,
+        "excludedBlocks": 12,
+        "usedColors": 4,
+        "alphaClassificationChanges": 0,
+        "brightestTarget": {
+          "rgb": "#e0f8d0",
+          "pixels": 3,
+          "coordinates": [
+            [
+              5,
+              6
+            ],
+            [
+              5,
+              7
+            ],
+            [
+              6,
+              7
+            ]
+          ],
+          "fourConnectedComponentSizes": [
+            3
+          ],
+          "singlePixelComponents": 0
+        },
+        "rgbaSha256": "39d65a77839e22a94b03628918873854b5b8329497637b2f4404077f9e626437"
+      }
+    },
+    {
+      "name": "Colorfetti 4×4 / strength 30",
+      "file": "armor-sweep-strength-30.png",
+      "kind": "application",
+      "strength": 30,
+      "metrics": {
+        "pointOklabMSE": 0.019210739897543364,
+        "block4ToneOklabMSE": 0.004496072281331011,
+        "visiblePixels": 155,
+        "opaqueBlocks": 4,
+        "excludedBlocks": 12,
+        "usedColors": 4,
+        "alphaClassificationChanges": 0,
+        "brightestTarget": {
+          "rgb": "#e0f8d0",
+          "pixels": 6,
+          "coordinates": [
+            [
+              8,
+              4
+            ],
+            [
+              12,
+              4
+            ],
+            [
+              5,
+              6
+            ],
+            [
+              5,
+              7
+            ],
+            [
+              6,
+              7
+            ],
+            [
+              6,
+              10
+            ]
+          ],
+          "fourConnectedComponentSizes": [
+            3,
+            1,
+            1,
+            1
+          ],
+          "singlePixelComponents": 3
+        },
+        "rgbaSha256": "8843bcdfecc943dda362e06039e17783217f1888231fb54542bb819d9dbdb4fe"
+      }
+    },
+    {
+      "name": "Colorfetti 4×4 / strength 40",
+      "file": "armor-sweep-strength-40.png",
+      "kind": "application",
+      "strength": 40,
+      "metrics": {
+        "pointOklabMSE": 0.02363730569433458,
+        "block4ToneOklabMSE": 0.004426985154987909,
+        "visiblePixels": 155,
+        "opaqueBlocks": 4,
+        "excludedBlocks": 12,
+        "usedColors": 4,
+        "alphaClassificationChanges": 0,
+        "brightestTarget": {
+          "rgb": "#e0f8d0",
+          "pixels": 9,
+          "coordinates": [
+            [
+              8,
+              4
+            ],
+            [
+              12,
+              4
+            ],
+            [
+              5,
+              6
+            ],
+            [
+              5,
+              7
+            ],
+            [
+              6,
+              7
+            ],
+            [
+              7,
+              7
+            ],
+            [
+              6,
+              9
+            ],
+            [
+              4,
+              12
+            ],
+            [
+              6,
+              13
+            ]
+          ],
+          "fourConnectedComponentSizes": [
+            4,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "singlePixelComponents": 5
+        },
+        "rgbaSha256": "6ffcf13d2b35cd3457c792c143b182f78e4fc2c108a6fa94ea376970f8b468d9"
+      }
+    },
+    {
+      "name": "Colorfetti 4×4 / strength 50",
+      "file": "armor-sweep-strength-50.png",
+      "kind": "application",
+      "strength": 50,
+      "metrics": {
+        "pointOklabMSE": 0.02474923052481043,
+        "block4ToneOklabMSE": 0.0033027566763873975,
+        "visiblePixels": 155,
+        "opaqueBlocks": 4,
+        "excludedBlocks": 12,
+        "usedColors": 3,
+        "alphaClassificationChanges": 0,
+        "brightestTarget": {
+          "rgb": "#e0f8d0",
+          "pixels": 10,
+          "coordinates": [
+            [
+              8,
+              4
+            ],
+            [
+              12,
+              4
+            ],
+            [
+              5,
+              6
+            ],
+            [
+              5,
+              7
+            ],
+            [
+              6,
+              7
+            ],
+            [
+              7,
+              7
+            ],
+            [
+              6,
+              8
+            ],
+            [
+              6,
+              9
+            ],
+            [
+              4,
+              12
+            ],
+            [
+              6,
+              13
+            ]
+          ],
+          "fourConnectedComponentSizes": [
+            6,
+            1,
+            1,
+            1,
+            1
+          ],
+          "singlePixelComponents": 4
+        },
+        "rgbaSha256": "6278fcbaa5500b6efe123a96e071a89e9d4e25b6d2f8d4e5ca3a621f89e1eb01"
+      }
+    },
+    {
+      "name": "Colorfetti 4×4 / strength 75",
+      "file": "armor-sweep-strength-75.png",
+      "kind": "application",
+      "strength": 75,
+      "metrics": {
+        "pointOklabMSE": 0.026913244481753307,
+        "block4ToneOklabMSE": 0.0028417976771418526,
+        "visiblePixels": 155,
+        "opaqueBlocks": 4,
+        "excludedBlocks": 12,
+        "usedColors": 3,
+        "alphaClassificationChanges": 0,
+        "brightestTarget": {
+          "rgb": "#e0f8d0",
+          "pixels": 11,
+          "coordinates": [
+            [
+              8,
+              4
+            ],
+            [
+              12,
+              4
+            ],
+            [
+              5,
+              6
+            ],
+            [
+              5,
+              7
+            ],
+            [
+              6,
+              7
+            ],
+            [
+              7,
+              7
+            ],
+            [
+              4,
+              8
+            ],
+            [
+              6,
+              8
+            ],
+            [
+              6,
+              9
+            ],
+            [
+              4,
+              12
+            ],
+            [
+              6,
+              13
+            ]
+          ],
+          "fourConnectedComponentSizes": [
+            6,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "singlePixelComponents": 5
+        },
+        "rgbaSha256": "9486bab5a8055786f15e2a5e8202cc2da82ac6a9069e00c757a2a15817f9f9c0"
+      }
+    },
+    {
+      "name": "Colorfetti 4×4 / strength 100",
+      "file": "armor-sweep-strength-100.png",
+      "kind": "application",
+      "strength": 100,
+      "metrics": {
+        "pointOklabMSE": 0.031055986220870094,
+        "block4ToneOklabMSE": 0.0046833323339997845,
+        "visiblePixels": 155,
+        "opaqueBlocks": 4,
+        "excludedBlocks": 12,
+        "usedColors": 3,
+        "alphaClassificationChanges": 0,
+        "brightestTarget": {
+          "rgb": "#e0f8d0",
+          "pixels": 11,
+          "coordinates": [
+            [
+              8,
+              4
+            ],
+            [
+              12,
+              4
+            ],
+            [
+              2,
+              6
+            ],
+            [
+              5,
+              6
+            ],
+            [
+              5,
+              7
+            ],
+            [
+              6,
+              7
+            ],
+            [
+              4,
+              8
+            ],
+            [
+              6,
+              8
+            ],
+            [
+              6,
+              9
+            ],
+            [
+              4,
+              12
+            ],
+            [
+              6,
+              13
+            ]
+          ],
+          "fourConnectedComponentSizes": [
+            5,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "singlePixelComponents": 6
+        },
+        "rgbaSha256": "1491eb3ee61bdabea7fdae645b8ab9f85707d7506acfecf89f576304650a622a"
+      }
+    }
+  ]
+}

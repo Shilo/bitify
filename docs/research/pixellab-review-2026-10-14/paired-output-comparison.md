@@ -80,3 +80,26 @@ Then run `node bench/palette-paired-comparison/verify.mjs`. The separate [offlin
 The new source art is the repository's existing unresized `general-source.png` item sheet and `breastplate-source.png` armor, with provenance recorded in the script; remaining sources are retained synthetic API fixtures. The one-pixel animation changes an originally visible source pixel. It is an unchanged-coordinate stability test, not a complete motion test.
 
 Independent adversarial review challenged strength calibration, matching-objective bias, partial-alpha masking, block coverage, file-size confounds, source provenance and preserving the negative armor example. The final offline run incorporates those qualifications. This corpus is small and selected; no pooled score or universal visual-quality claim is justified.
+
+## Follow-up: the existing strength control addresses the armor example
+
+The maximum-setting comparison above does **not** establish that Colorfetti's best available configuration is worse, because native maxima 10 and 100 are uncalibrated. An additional **offline** [strength sweep](../../../bench/palette-paired-comparison/armor-strength-sweep.html), [native 16px plus 12× visual sheet](../../../bench/palette-paired-comparison/armor-strength-sweep.png), and [complete measurements](../../../bench/palette-paired-comparison/armor-strength-sweep-results.json) retain every requested strength with the same source, four RGB targets, cut 128, Oklab matching and 4×4 matrix.
+
+| Colorfetti strength | Point Oklab error | 4×4 tone error | Used colors | Brightest-target component sizes |
+|---:|---:|---:|---:|---|
+| 0 | .0174218 | .00592295 | 4 | [4] |
+| 10 | .0174218 | .00592295 | 4 | [4] |
+| 20 | .0178117 | .00556845 | 4 | [3] |
+| 30 | .0192107 | .00449607 | 4 | [3,1,1,1] |
+| 40 | .0236373 | .00442699 | 4 | [4,1,1,1,1,1] |
+| 50 | .0247492 | .00330276 | 3 | [6,1,1,1,1] |
+| 75 | .0269132 | .00284180 | 3 | [6,1,1,1,1,1] |
+| 100 | .0310560 | .00468333 | 3 | [5,1,1,1,1,1,1] |
+
+At **strength 20**, the central brightest highlight stays connected, all four target colors remain in use, and there are no isolated brightest-color pixels. Tone error is 6.0% lower than our Off result, with 2.2% higher point error. Against the uncalibrated service maximum reference, both errors are lower. Against PixelLab Off, point error is 2.8% lower but the limited tone score is 42.4% higher. Neither comparison establishes a universal winner.
+
+The native-size and enlarged visuals show that our strength 20 retains a coherent central highlight, whereas strength 30 starts adding isolated bright pixels; strength 50 and above drop the intermediate green. Component counts describe only the brightest target color, not outline quality or overall readability. Tone still covers just four fully opaque blocks out of sixteen.
+
+This narrows recommendation 2 above: **use the existing strength control first. A new texture guard is optional research, not a demonstrated requirement to fix this fixture.** Keep the maximum-strength counterexample as an honest explanation of the control's tradeoff. Do not infer that our best configuration is inferior from comparing two unrelated native maxima, or change the global default strength from one small sprite.
+
+Reproduce with `node bench/palette-paired-comparison/armor-strength-sweep.mjs`. It performs no service calls, checks source/target hashes against the retained request, verifies service output hashes, and checks binary alpha and target membership in all eight application exports. The original 37-case/115-file audit remains separate.
