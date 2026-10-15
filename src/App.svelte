@@ -1112,7 +1112,7 @@
       <li><PixelIcon name="import" /><b>Add</b>{touch ? 'Choose images.' : 'Choose, drop or paste images.'}</li>
       <li><PixelIcon name="grid" /><b>Palette</b>{family === 'full-palette' ? 'Use Auto, pick a palette or import your own.' : 'Pick a color pair or choose your own colors.'}</li>
       <li><PixelIcon name="sliders" /><b>{family === 'full-palette' ? 'Recolor' : 'Style'}</b>{family === 'full-palette' ? 'Tune matching, color limits and dithering.' : 'Pick an effect and tune its settings.'}</li>
-      <li><PixelIcon name="save" /><b>Save</b>Save or copy images.</li>
+      <li><PixelIcon name="save" /><b>Save</b>{family === 'full-palette' && alphaMode === 'keep' && soft ? 'Save or copy images. Save a PNG for exact translucent colors.' : 'Save or copy images.'}</li>
     </ol>
     <table>
       <thead>

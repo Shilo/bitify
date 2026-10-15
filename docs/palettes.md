@@ -68,7 +68,9 @@ combined. The visible name is Auto; its stable saved identity remains `generated
 existing hard cutoff: each pixel becomes fully visible or empty. Keep retains its
 original opacity, including soft edges, translucent shadows and effects. Keep hides
 the cutoff slider; switching back to Cut restores its value. Cut remains the default.
-Keep saves partial opacity exactly in PNGs and PNG clipboard copies. GIF supports
+Save preserves partial opacity exactly in PNGs. Copy starts with the same PNG,
+but the browser or OS may change translucent colors during clipboard transfer.
+Save a PNG for exact translucent colors. GIF supports
 only visible/empty pixels; an unexpected partial-opacity animation cannot be saved
 as GIF in Keep mode. Existing GIF sources already have binary transparency.
 
@@ -318,6 +320,8 @@ and alpha cut, including the optional maximum. Preview, Save and Copy select fro
 same full-resolution source; animation Copy uses its shared all-frame subset. PNG packs only used colors at the smallest 1/2/4/8-bit depth; all 256 used
 opaque colors plus empty use directly encoded RGBA PNG instead. No canvas encoding or
 implicit color reduction is used. Copy supplies a PNG of the first animation frame.
+This describes the PNG prepared by the app; native clipboard transfer can round
+translucent RGB values after encoding. Save retains the exact converted PNG.
 
 GIF uses a stable global table of the used colors across all frames, including an empty
 entry when needed. It permits 256 opaque used colors, or 255 opaque colors plus empty.

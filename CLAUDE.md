@@ -27,6 +27,9 @@ and GIF stay unchanged. Partial-alpha GIF fails explicitly, including atomic ZIP
 it never silently thresholds Keep. All snapshot/cache/drag identities include mode.
 The cutoff slider is Cut-only and guards detached native gestures. See the working
 checklist docs/research/2026-10-14-palette-improvements-todo.md for evidence and limits.
+Copy prepares the same exact PNG as Save; native clipboard transport can round
+translucent RGB. Help adds Save guidance only in Palette/Keep with the existing
+partial-opacity `soft` state, without another scan or control.
 
 Full-palette thumbnails/editor swatches and New/Edit color previews paint directly
 to tiny canvases (1×1 solids; 100×100 at-most-16-color overview). This prevents

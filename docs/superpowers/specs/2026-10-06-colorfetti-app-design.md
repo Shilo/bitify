@@ -34,7 +34,7 @@ source coordinates for RGB and alpha. Cleanup changes only RGB labels. The share
 8 MiB animation index cache charges three bytes per Keep sample, two per Cut sample,
 plus existing per-frame metadata. No extra converted clip is retained.
 
-PNG Save, Copy, ZIP and drag use exact RGBA8 when any output alpha is partial;
+PNG payloads for Save, Copy, ZIP and drag use exact RGBA8 when any output alpha is partial;
 binary PNGs retain indexed packing. Keep on binary GIF input preserves the prior
 GIF output. Unexpected partial-alpha GIF frames fail explicitly before compression
 and are checked again on replay: users may choose Cut or copy a frame as PNG.
@@ -1340,6 +1340,10 @@ in browsers.
   does the same for the first image.
 - Like saving, copying always uses the converted version, whatever the wall is showing, and
   the PNG is encoded directly from the conversion, in the same form as a saved one.
+- The browser or OS may round translucent RGB values during native clipboard transfer.
+  Saving a PNG retains exact converted colors. Help appends "Save a PNG for exact
+  translucent colors." to its existing Save step only in Palette mode with Keep and
+  partial source opacity, using the existing `soft` state without another pixel scan.
 - Browsers accept PNG on the clipboard but not GIF, so an animation is copied as its first
   frame, and the message says so.
 - A short message confirms the copy ("name copied."), or says that it failed. It fails where
