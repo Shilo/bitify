@@ -1,5 +1,7 @@
 # Focused website preview diagnostic
 
+**Updated status:** [Four later native website downloads are verified](web-output-verification.md). This document preserves the earlier access/source-preview investigation; its unresolved status is historical. The generated result appears separately from the uploaded source preview.
+
 On October 14, 2026, the existing authenticated Edge profile reached the reducer.
 Chromium's sandbox was enabled. This bounded follow-up tested a different
 explanation for the earlier unverified submissions: the tool might modify its

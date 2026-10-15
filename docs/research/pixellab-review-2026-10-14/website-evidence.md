@@ -1,5 +1,7 @@
 # PixelLab website review
 
+**Updated status:** [Four later native website downloads are verified](web-output-verification.md). This document preserves the earlier access/source-preview investigation; its unresolved status is historical. The generated result appears separately from the uploaded source preview.
+
 Date: October 14, 2026. Live observations and public documentation are identified separately below. No credential values or authentication-storage contents are included in research evidence. The temporary browser profile stays under the ignored `.tmp` directory.
 
 ## Access and session diagnosis

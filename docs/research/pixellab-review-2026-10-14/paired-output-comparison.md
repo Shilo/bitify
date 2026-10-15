@@ -104,4 +104,4 @@ The final recommendation is: **use the existing strength control first. A new te
 
 Reproduce with `node bench/palette-paired-comparison/armor-strength-sweep.mjs`. It performs no service calls, checks source/target hashes against the retained request, verifies service output hashes, and checks binary alpha and target membership in all eight application exports. The original 37-case/115-file audit remains separate.
 
-The final [website preview diagnostic](web-paired-diagnostic.md) did not change the uploaded preview in place within 15 seconds of the one allowed Generate. Website output/export remains an explicit unresolved surface; successful API output comparison must not be attributed to the website.
+The earlier [website preview diagnostic](web-paired-diagnostic.md) watched the unchanged source preview. A [subsequent broader verification](web-output-verification.md) has now independently checked four actual website PNG downloads, including a binding cap and ordered 4×4 output. These separate results supersede the blanket unresolved website status; they do not prove all website/API routes equivalent.

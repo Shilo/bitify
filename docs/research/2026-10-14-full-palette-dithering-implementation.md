@@ -57,7 +57,7 @@ Two test issues were corrected without changing production behavior: invisible R
 3. Evaluate target-color locks/source overrides and fitting Auto directly at the requested count. Require corpus comparisons, bounded work, shared-animation weighting and export snapshot tests.
 4. Add an explicitly selected collection-wide subset budget only when scope and weighting are clear. Keep error diffusion deferred pending an animation-safe design.
 
-The four independent spikes remain free of service source details and service reference files. Service-specific research is separate. REST/MCP output tests and website import controls are verified; website Generate/export output could not be attributed after bounded attempts and is not called passed. See [coverage closure](pixellab-review-2026-10-14/coverage-closure.md). This limitation does not block the locally specified and tested ordered-dither feature.
+The four independent spikes remain free of service source details and service reference files. Service-specific research is separate. REST/MCP output tests and website import controls are verified; website Generate/export output was unresolved at implementation time. A [later broader check](pixellab-review-2026-10-14/web-output-verification.md) has since verified four native website PNGs and an explicit incompatible-settings rejection; animation and partial-alpha website output remain untested. See [coverage closure](pixellab-review-2026-10-14/coverage-closure.md). This limitation does not block the locally specified and tested ordered-dither feature.
 
 ![Full-palette controls in Codex Browser](../../bench/palette-dither-review/desktop-controls.jpg)
 

@@ -1,0 +1,126 @@
+{
+  "input": "bench/palette-service-research/api-input-gradient.png",
+  "png_sha256": "6d0a9315b0c6bc0c4e86e05c2b21af7dbde71df8a23d48900e16455d2bbffe6f",
+  "rgba_sha256": "04be2749b7b9b4cc96c8132d41606f4982e638698d2f7fea914c641a8bcf1e4c",
+  "outputs": [
+    {
+      "file": "bench/palette-service-research/web-output-verification-download-0.png",
+      "attempt": 1,
+      "settings": {
+        "colors": "Number of colors",
+        "numberOfColors": 2,
+        "dithering": "None"
+      },
+      "png_sha256": "d4bf0eed35e7703a684e41bdddea11612b04feb552ece1b5beb87ecec3837cee",
+      "width": 64,
+      "height": 32,
+      "visible_colors": 2,
+      "transparent_pixels": 0,
+      "alpha_histogram": {
+        "255": 2048
+      },
+      "color_histogram": {
+        "#bbbbbb": 1088,
+        "#383838": 960
+      },
+      "rgba_sha256": "0dab48e207c2bafbe164ab996eb67bf4eedee2fc8cb271d56a7a7ccdb29ec648",
+      "dimensionsMatch": true,
+      "alphaMismatches": 0
+    },
+    {
+      "file": "bench/palette-service-research/web-output-verification-download-1.png",
+      "attempt": 3,
+      "settings": {
+        "colors": "Palette",
+        "palette": "PICO-8",
+        "maxColors": 8,
+        "dithering": "None"
+      },
+      "png_sha256": "9b7dc04cc283a574df51b026977321b0bfe9176ca273415eee6a1b3c5887339e",
+      "width": 64,
+      "height": 32,
+      "visible_colors": 6,
+      "transparent_pixels": 0,
+      "alpha_histogram": {
+        "255": 2048
+      },
+      "color_histogram": {
+        "#c2c3c7": 576,
+        "#5f574f": 352,
+        "#83769c": 352,
+        "#1d2b53": 288,
+        "#000000": 256,
+        "#fff1e8": 224
+      },
+      "rgba_sha256": "cddfdd9648526c4ffb8c9ba963cf96dc581758a1c896304a572879aa58ad1ce8",
+      "dimensionsMatch": true,
+      "alphaMismatches": 0,
+      "allVisibleColorsInPico8": true,
+      "withinRequestedCap": true
+    },
+    {
+      "file": "bench/palette-service-research/web-output-verification-download-2.png",
+      "attempt": 4,
+      "settings": {
+        "colors": "Palette",
+        "palette": "PICO-8",
+        "maxColors": null,
+        "dithering": "4x4",
+        "ditheringStrength": 5
+      },
+      "png_sha256": "5d8bf3a97ed21f82470dc30b97456dec1ad5253c9f035c5c279fd6266ea79b14",
+      "width": 64,
+      "height": 32,
+      "visible_colors": 6,
+      "transparent_pixels": 0,
+      "alpha_histogram": {
+        "255": 2048
+      },
+      "color_histogram": {
+        "#5f574f": 424,
+        "#c2c3c7": 416,
+        "#83769c": 368,
+        "#fff1e8": 344,
+        "#1d2b53": 256,
+        "#000000": 240
+      },
+      "rgba_sha256": "9180b3a6258f1f273ae684a9e49fbe1108728620b4747481e665bf485335cdc4",
+      "dimensionsMatch": true,
+      "alphaMismatches": 0,
+      "allVisibleColorsInPico8": true
+    },
+    {
+      "file": "bench/palette-service-research/web-output-verification-download-3.png",
+      "attempt": 5,
+      "settings": {
+        "colors": "Palette",
+        "palette": "PICO-8",
+        "maxColors": 2,
+        "dithering": "None"
+      },
+      "png_sha256": "a42e11a7932fefdd0be462eb91f6c3c51eca130ff91aaa8cf4a9787da14f45e8",
+      "width": 64,
+      "height": 32,
+      "visible_colors": 2,
+      "transparent_pixels": 0,
+      "alpha_histogram": {
+        "255": 2048
+      },
+      "color_histogram": {
+        "#c2c3c7": 1088,
+        "#5f574f": 960
+      },
+      "rgba_sha256": "3e118f4a244e54f6eb4b05df10a34e9c65e9ebd009b82c619a17c5dae495470f",
+      "dimensionsMatch": true,
+      "alphaMismatches": 0,
+      "allVisibleColorsInPico8": true,
+      "withinRequestedCap": true
+    }
+  ],
+  "bindingCapObserved": {
+    "withoutBindingCapColors": 6,
+    "requestedCap": 2,
+    "resultColors": 2,
+    "sameSourceAndPalette": true
+  }
+}

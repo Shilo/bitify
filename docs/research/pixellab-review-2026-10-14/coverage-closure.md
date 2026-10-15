@@ -2,6 +2,9 @@
 
 Date: October 14, 2026. Follow-up to the initial review. This document records evidence boundaries; it does not claim every service behavior is verified.
 
+
+**Later verification:** The website now has four independently decoded native PNG results: numeric reduction, PICO-8 targeting, a binding two-color maximum and 4×4 dithering without a maximum. It explicitly rejects the tested target-plus-maximum-plus-dithering combination. See [verified website outputs](web-output-verification.md). Earlier unresolved observations below are historical, not the current status.
+
 ## Follow-up website results
 
 The previously authenticated isolated Edge profile remained usable. Both launches explicitly used `chromiumSandbox: true`. No authentication data, cookies, bearer headers or Google sign-in automation were used. Evidence retained from the reducer consists of sidebar state, scoped sidebar screenshots and sanitized service request metadata.
@@ -9,7 +12,7 @@ The previously authenticated isolated Edge profile remained usable. Both launche
 1. **Palette-image extraction works in the website.** Uploading the original synthetic four-pixel alpha target changed the selection to “Your image (3 colours).” Independent PNG decoding confirms three nonzero-alpha RGB entries and one fully transparent pixel: alpha values 0, 1, 128 and 255. The website therefore skips fully transparent palette pixels and accepts partial-alpha palette entries in this fixture. This differs from the independently tested REST target-image contract, where hidden RGB was an eligible candidate. The sidebar explicitly describes skipping transparent pixels and reducing inputs over 256 colors to 32 main colors; that latter threshold behavior is documented UI, not runtime-tested here.
 2. **Lospec acquisition works in the website.** Entering `https://lospec.com/palette-list/slso8` and choosing Import produced “SLSO8 (8) 8 colours.” This verifies acquisition and parsed count, not exact exported hex contents or downstream mapping.
 3. **Multiple owned source images import successfully.** Two original 64×32 ramps appeared as separate previews. With both present, the cap explanation changes to “one choice for all frames” and “Max colours limits them together.” This is observed scope wording; successful shared website output remains unverified.
-4. **Two additional bounded Generate attempts did not yield attributable processing/output.** The first used the three-color image target and one 64×32 ramp, maximum eight, 4×4, strength five. The second used Lospec SLSO8, two 64×32 ramps, maximum two, 4×4, strength five. Each recorded 15 seconds after a ready-state click. Authenticated account/project/gallery metadata requests returned 200, but no reducer-processing request was captured. No generated output was downloaded or compared. This does not identify the failure cause or prove a server defect. No further Generate attempts were made.
+4. **Two additional bounded Generate attempts did not yield attributable processing/output.** The first used the three-color image target and one 64×32 ramp, maximum eight, 4×4, strength five. The second used Lospec SLSO8, two 64×32 ramps, maximum two, 4×4, strength five. Each recorded 15 seconds after a ready-state click. Authenticated account/project/gallery metadata requests returned 200, but no reducer-processing request was captured. At that stage, no generated output was downloaded or compared. This does not identify the failure cause or prove a server defect. No further Generate attempts were made.
 
 No new paid API/MCP request or Pro generation was needed. The original confirmed usage remains 12.6 subscription generations, with the separate Pro response cost field of $0.08. Website billing remains unverified: five total normal Generate clicks across the initial and follow-up reviews advertised 0.1 each, but no charge is inferred from clicks.
 
@@ -25,10 +28,10 @@ Retained follow-up evidence:
 
 | Palette-related feature | REST / MCP | Website | Remaining boundary |
 | --- | --- | --- | --- |
-| Auto and numeric reduction | Verified outputs; repeated auto fixture identical | Three modes observed | Website output/export |
-| Target palette membership | Verified visible-RGB membership, one-color target, multiple frames | Presets, hex and image targets acquired | Website output/export |
-| Target plus maximum | REST reducer rejects count plus target; Pro target cap verified | Target plus cap controls and shared-frame wording verified | Website cap enforcement |
-| Ordered 2×2/4×4/8×8 + strength | All matrix outputs differ from None; zero equals None; exact entries unchanged | All choices and strength controls observed | Website output comparisons |
+| Auto and numeric reduction | Verified outputs; repeated auto fixture identical | Numeric two-color native PNG verified; Auto mode controls observed | Website Auto-detect output |
+| Target palette membership | Verified visible-RGB membership, one-color target, multiple frames | PICO-8 native PNG membership verified; hex/image acquisition tested | Other target output contracts |
+| Target plus maximum | REST reducer rejects count plus target; Pro target cap verified | Single-source PICO-8 cap 2 binds; cap 8 plus 4×4 rejected | Shared-source cap output and other combinations |
+| Ordered 2×2/4×4/8×8 + strength | All matrix outputs differ from None; zero equals None; exact entries unchanged | Native 4×4/5 PNG spatial pattern verified without cap | Website 2×2/8×8, calibrated strengths and alpha cases |
 | Source alpha and palette-image alpha | Source partial alpha preserved; hidden RGB in transparent REST target is eligible | Image extraction skips fully transparent entry in tested fixture | Website output alpha; >256 image extraction |
 | Color counts | Requested vs actual, distinct RGB vs RGBA count traps verified | Imported image/Lospec counts verified | Website generated used counts |
 | Shared frames / unchanged coordinates | Shared target/generated palette verified; fixed-target ordered one-pixel change has zero unchanged-coordinate churn | Two-frame upload and shared-cap wording verified | Website shared output; motion-relative phase; duration weighting |

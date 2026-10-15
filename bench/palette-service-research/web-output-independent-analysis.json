@@ -1,0 +1,345 @@
+{
+  "source": {
+    "file": "api-input-gradient.png",
+    "pngSha256": "6d0a9315b0c6bc0c4e86e05c2b21af7dbde71df8a23d48900e16455d2bbffe6f",
+    "rgbaSha256": "04be2749b7b9b4cc96c8132d41606f4982e638698d2f7fea914c641a8bcf1e4c",
+    "width": 64,
+    "height": 32
+  },
+  "cases": [
+    {
+      "name": "website-count2-none",
+      "file": "web-output-verification-download-0.png",
+      "website": {
+        "width": 64,
+        "height": 32,
+        "visible_colors": 2,
+        "transparent_pixels": 0,
+        "alpha_histogram": {
+          "255": 2048
+        },
+        "color_histogram": {
+          "#bbbbbb": 1088,
+          "#383838": 960
+        },
+        "rgba_sha256": "0dab48e207c2bafbe164ab996eb67bf4eedee2fc8cb271d56a7a7ccdb29ec648"
+      },
+      "sameOwnedSourceAsRetainedRest": true,
+      "pixelIdenticalToRetainedRestCount2": true,
+      "pngByteIdenticalToRetainedRestCount2": true,
+      "localActualAuto64ThenCap2": {
+        "file": "web-independent-ours-auto64-2-none.png",
+        "settings": {
+          "metric": "oklab",
+          "maxColors": 2,
+          "cleanup": false,
+          "dither": "none",
+          "ditherStrength": 50,
+          "alphaCut": 128
+        },
+        "eligibleColors": [
+          "#353535",
+          "#bababa"
+        ],
+        "width": 64,
+        "height": 32,
+        "visible_colors": 2,
+        "transparent_pixels": 0,
+        "alpha_histogram": {
+          "255": 2048
+        },
+        "color_histogram": {
+          "#bababa": 1120,
+          "#353535": 928
+        },
+        "rgba_sha256": "a9d33856b044aef5185ee00e44e28f85525001fae8e552d5cf4566b33458e9f2"
+      },
+      "scope": "One exact fixture agrees across website and retained REST; this does not identify or equate endpoint algorithms."
+    },
+    {
+      "name": "website-pico8-cap8-none",
+      "file": "web-output-verification-download-1.png",
+      "website": {
+        "width": 64,
+        "height": 32,
+        "visible_colors": 6,
+        "transparent_pixels": 0,
+        "alpha_histogram": {
+          "255": 2048
+        },
+        "color_histogram": {
+          "#c2c3c7": 576,
+          "#5f574f": 352,
+          "#83769c": 352,
+          "#1d2b53": 288,
+          "#000000": 256,
+          "#fff1e8": 224
+        },
+        "rgba_sha256": "cddfdd9648526c4ffb8c9ba963cf96dc581758a1c896304a572879aa58ad1ce8"
+      },
+      "outputRgbBelongsToCanonicalPico8": true,
+      "localMatchedPaletteCapOff": {
+        "file": "web-independent-ours-8-none.png",
+        "settings": {
+          "metric": "oklab",
+          "maxColors": 8,
+          "cleanup": false,
+          "dither": "none",
+          "ditherStrength": 50,
+          "alphaCut": 128
+        },
+        "eligibleColors": [
+          "#000000",
+          "#1d2b53",
+          "#5f574f",
+          "#c2c3c7",
+          "#fff1e8",
+          "#83769c"
+        ],
+        "width": 64,
+        "height": 32,
+        "visible_colors": 6,
+        "transparent_pixels": 0,
+        "alpha_histogram": {
+          "255": 2048
+        },
+        "color_histogram": {
+          "#c2c3c7": 512,
+          "#1d2b53": 384,
+          "#5f574f": 384,
+          "#83769c": 352,
+          "#fff1e8": 288,
+          "#000000": 128
+        },
+        "rgba_sha256": "08e4b98b9d9e70eff3b3509fbc450d2edd2f8f5f4d797fdf3e5cbf07ffc04230",
+        "differentRgbPixelsVsWebsite": 224
+      },
+      "localAdditionalCapAndDitherOption": {
+        "file": "web-independent-ours-8-4x4.png",
+        "settings": {
+          "metric": "oklab",
+          "maxColors": 8,
+          "cleanup": false,
+          "dither": "4x4",
+          "ditherStrength": 50,
+          "alphaCut": 128
+        },
+        "eligibleColors": [
+          "#000000",
+          "#1d2b53",
+          "#5f574f",
+          "#c2c3c7",
+          "#fff1e8",
+          "#83769c"
+        ],
+        "width": 64,
+        "height": 32,
+        "visible_colors": 6,
+        "transparent_pixels": 0,
+        "alpha_histogram": {
+          "255": 2048
+        },
+        "color_histogram": {
+          "#c2c3c7": 496,
+          "#5f574f": 376,
+          "#1d2b53": 344,
+          "#83769c": 344,
+          "#fff1e8": 296,
+          "#000000": 192
+        },
+        "rgba_sha256": "d05272c86dee779d62341d1742339e93d6aaf75b9f0712e12777c2a53e756860",
+        "differentRgbPixelsVsWebsite": 360
+      },
+      "scope": "Website target plus cap with dithering None; six used colors do not establish a binding eight-color cap. Local cap plus4x4 strength50 is an additional option, not a calibrated paired method because website rejected target+cap+dither."
+    },
+    {
+      "name": "website-pico8-all-4x4-strength5",
+      "file": "web-output-verification-download-2.png",
+      "website": {
+        "width": 64,
+        "height": 32,
+        "visible_colors": 6,
+        "transparent_pixels": 0,
+        "alpha_histogram": {
+          "255": 2048
+        },
+        "color_histogram": {
+          "#5f574f": 424,
+          "#c2c3c7": 416,
+          "#83769c": 368,
+          "#fff1e8": 344,
+          "#1d2b53": 256,
+          "#000000": 240
+        },
+        "rgba_sha256": "9180b3a6258f1f273ae684a9e49fbe1108728620b4747481e665bf485335cdc4"
+      },
+      "observedSpatialPattern": {
+        "varyingColumns": 13,
+        "verticalPeriodMismatches": {
+          "1": 358,
+          "2": 45,
+          "4": 0,
+          "8": 0
+        }
+      },
+      "outputRgbBelongsToCanonicalPico8": true,
+      "localPaletteAllOff": {
+        "file": "web-independent-ours-0-none.png",
+        "settings": {
+          "metric": "oklab",
+          "maxColors": 0,
+          "cleanup": false,
+          "dither": "none",
+          "ditherStrength": 50,
+          "alphaCut": 128
+        },
+        "eligibleColors": [
+          "#000000",
+          "#1d2b53",
+          "#7e2553",
+          "#008751",
+          "#ab5236",
+          "#5f574f",
+          "#c2c3c7",
+          "#fff1e8",
+          "#ff004d",
+          "#ffa300",
+          "#ffec27",
+          "#00e436",
+          "#29adff",
+          "#83769c",
+          "#ff77a8",
+          "#ffccaa"
+        ],
+        "width": 64,
+        "height": 32,
+        "visible_colors": 6,
+        "transparent_pixels": 0,
+        "alpha_histogram": {
+          "255": 2048
+        },
+        "color_histogram": {
+          "#c2c3c7": 512,
+          "#1d2b53": 384,
+          "#5f574f": 384,
+          "#83769c": 352,
+          "#fff1e8": 288,
+          "#000000": 128
+        },
+        "rgba_sha256": "08e4b98b9d9e70eff3b3509fbc450d2edd2f8f5f4d797fdf3e5cbf07ffc04230",
+        "differentRgbPixelsVsWebsite": 296
+      },
+      "localNativeDither50": {
+        "file": "web-independent-ours-0-4x4.png",
+        "settings": {
+          "metric": "oklab",
+          "maxColors": 0,
+          "cleanup": false,
+          "dither": "4x4",
+          "ditherStrength": 50,
+          "alphaCut": 128
+        },
+        "eligibleColors": [
+          "#000000",
+          "#1d2b53",
+          "#7e2553",
+          "#008751",
+          "#ab5236",
+          "#5f574f",
+          "#c2c3c7",
+          "#fff1e8",
+          "#ff004d",
+          "#ffa300",
+          "#ffec27",
+          "#00e436",
+          "#29adff",
+          "#83769c",
+          "#ff77a8",
+          "#ffccaa"
+        ],
+        "width": 64,
+        "height": 32,
+        "visible_colors": 8,
+        "transparent_pixels": 0,
+        "alpha_histogram": {
+          "255": 2048
+        },
+        "color_histogram": {
+          "#c2c3c7": 488,
+          "#5f574f": 360,
+          "#1d2b53": 344,
+          "#83769c": 328,
+          "#fff1e8": 296,
+          "#000000": 192,
+          "#008751": 32,
+          "#29adff": 8
+        },
+        "rgba_sha256": "8862b14223b63f886400b329e2582366fee9b8617b08fcee26179cd7c69fca44",
+        "differentRgbPixelsVsWebsite": 360
+      },
+      "scope": "Same owned source and named PICO8 target, no maximum. Used RGB membership matches canonical PICO8; unused website preset entries were not exported. Website4x4 strength5 versus local4x4 native50 is an uncalibrated native-default comparison, with localOff retained as a control. The website earlier None output also had cap8, so its pixel differences do not isolate dithering alone."
+    },
+    {
+      "name": "website-pico8-cap2-none",
+      "file": "web-output-verification-download-3.png",
+      "website": {
+        "width": 64,
+        "height": 32,
+        "visible_colors": 2,
+        "transparent_pixels": 0,
+        "alpha_histogram": {
+          "255": 2048
+        },
+        "color_histogram": {
+          "#c2c3c7": 1088,
+          "#5f574f": 960
+        },
+        "rgba_sha256": "3e118f4a244e54f6eb4b05df10a34e9c65e9ebd009b82c619a17c5dae495470f"
+      },
+      "outputRgbBelongsToCanonicalPico8": true,
+      "bindingCapComparison": {
+        "sameOwnedInput": true,
+        "sameNamedPalette": true,
+        "sameDitherNone": true,
+        "cap8UsedColors": 6,
+        "cap2UsedColors": 2,
+        "capChangedOutput": true
+      },
+      "localMatchedPaletteCapOff": {
+        "file": "web-independent-ours-2-none.png",
+        "settings": {
+          "metric": "oklab",
+          "maxColors": 2,
+          "cleanup": false,
+          "dither": "none",
+          "ditherStrength": 50,
+          "alphaCut": 128
+        },
+        "eligibleColors": [
+          "#1d2b53",
+          "#c2c3c7"
+        ],
+        "width": 64,
+        "height": 32,
+        "visible_colors": 2,
+        "transparent_pixels": 0,
+        "alpha_histogram": {
+          "255": 2048
+        },
+        "color_histogram": {
+          "#c2c3c7": 1120,
+          "#1d2b53": 928
+        },
+        "rgba_sha256": "37f295e4246e3c09e6ac2d9afc6410e21fefcdc3bb5bdff600a025ff4e4b4139",
+        "differentRgbPixelsVsWebsite": 960
+      },
+      "scope": "Only requested target maximum changed from8 to2 versus the retained website PICO8 None output;6 becomes2 colors, verifying a binding cap for this fixture."
+    }
+  ],
+  "limits": [
+    "Website request attribution and selected controls are recorded by the separate browser driver.",
+    "The website rejected target+cap+4x4 in client validation; no output is fabricated from that rejected attempt.",
+    "This opaque still fixture cannot establish partial-alpha, multi-source, animation or GIF export behavior.",
+    "Local50 and service5 are native settings, not mathematically calibrated equivalent strengths."
+  ]
+}

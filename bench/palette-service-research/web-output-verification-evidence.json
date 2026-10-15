@@ -1,0 +1,1199 @@
+{
+  "date": "2026-10-15T06:06:18.498Z",
+  "browserSandbox": true,
+  "submissions": 5,
+  "observations": [
+    {
+      "label": "before-submit-1",
+      "sidebar": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 64x32px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\" [selected]\n      - option \"Palette\"\n  - group:\n    - text: Number of colors\n    - spinbutton \"Number of colors\": \"2\"\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\" [selected]\n      - option \"2x2\"\n      - option \"4x4\"\n      - option \"8x8\"\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "stage": [
+        "Generate · 0.1 generations",
+        "Gallery",
+        "Download image"
+      ],
+      "notices": [],
+      "hit": {
+        "enabled": true,
+        "rect": {
+          "x": 93,
+          "y": 885.40625,
+          "w": 326,
+          "h": 52
+        },
+        "inViewport": true,
+        "centerHitsSelf": true,
+        "hitTag": "BUTTON",
+        "pointerEvents": "auto"
+      },
+      "events": [],
+      "imageMutationCounts": {
+        "matchingOwnedDimensions": 2,
+        "otherDetailsOmitted": true
+      }
+    },
+    {
+      "label": "after-submit-1-5s",
+      "sidebar": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 64x32px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\" [selected]\n      - option \"Palette\"\n  - group:\n    - text: Number of colors\n    - spinbutton \"Number of colors\": \"2\"\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\" [selected]\n      - option \"2x2\"\n      - option \"4x4\"\n      - option \"8x8\"\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "stage": [
+        "Generate · 0.1 generations",
+        "Download image",
+        "Download 3x upscaled",
+        "Gallery view"
+      ],
+      "notices": [],
+      "hit": {
+        "enabled": true,
+        "rect": {
+          "x": 93,
+          "y": 885.40625,
+          "w": 326,
+          "h": 52
+        },
+        "inViewport": true,
+        "centerHitsSelf": true,
+        "hitTag": "BUTTON",
+        "pointerEvents": "auto"
+      },
+      "events": [
+        {
+          "type": "pointerdown",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "pointerup",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "click",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        }
+      ],
+      "imageMutationCounts": {
+        "matchingOwnedDimensions": 8,
+        "otherDetailsOmitted": true
+      }
+    },
+    {
+      "label": "after-submit-1-20s",
+      "sidebar": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 64x32px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\" [selected]\n      - option \"Palette\"\n  - group:\n    - text: Number of colors\n    - spinbutton \"Number of colors\": \"2\"\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\" [selected]\n      - option \"2x2\"\n      - option \"4x4\"\n      - option \"8x8\"\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "stage": [
+        "Generate · 0.1 generations",
+        "Download image",
+        "Download 3x upscaled",
+        "Gallery view"
+      ],
+      "notices": [],
+      "hit": {
+        "enabled": true,
+        "rect": {
+          "x": 93,
+          "y": 885.40625,
+          "w": 326,
+          "h": 52
+        },
+        "inViewport": true,
+        "centerHitsSelf": true,
+        "hitTag": "BUTTON",
+        "pointerEvents": "auto"
+      },
+      "events": [
+        {
+          "type": "pointerdown",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "pointerup",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "click",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        }
+      ],
+      "imageMutationCounts": {
+        "matchingOwnedDimensions": 8,
+        "otherDetailsOmitted": true
+      }
+    },
+    {
+      "label": "before-submit-2",
+      "sidebar": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 64x32px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\"\n      - option \"Palette\" [selected]\n  - group:\n    - text: Color palette (Beta)\n    - button \"PICO-8 (16) 16 colours\":\n      - paragraph: PICO-8 (16)\n    - paragraph: Max colours\n    - spinbutton \"No limit\": \"8\"\n    - paragraph: Every pixel goes onto these colours. Max colours limits the image.\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\"\n      - option \"2x2\"\n      - option \"4x4\" [selected]\n      - option \"8x8\"\n  - group:\n    - text: Dithering strength\n    - paragraph: \"5.0\"\n    - slider\n    - paragraph: Subtle\n    - paragraph: Strong\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "stage": [
+        "Generate · 0.1 generations",
+        "Download image",
+        "Download 3x upscaled",
+        "Gallery view"
+      ],
+      "notices": [],
+      "hit": {
+        "enabled": true,
+        "rect": {
+          "x": 93,
+          "y": 885.40625,
+          "w": 326,
+          "h": 52
+        },
+        "inViewport": true,
+        "centerHitsSelf": true,
+        "hitTag": "BUTTON",
+        "pointerEvents": "auto"
+      },
+      "events": [
+        {
+          "type": "pointerdown",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "pointerup",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "click",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        }
+      ],
+      "imageMutationCounts": {
+        "matchingOwnedDimensions": 8,
+        "otherDetailsOmitted": true
+      }
+    },
+    {
+      "label": "after-submit-2-5s",
+      "sidebar": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 64x32px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\"\n      - option \"Palette\" [selected]\n  - group:\n    - text: Color palette (Beta)\n    - button \"PICO-8 (16) 16 colours\":\n      - paragraph: PICO-8 (16)\n    - paragraph: Max colours\n    - spinbutton \"No limit\": \"8\"\n    - paragraph: Every pixel goes onto these colours. Max colours limits the image.\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\"\n      - option \"2x2\"\n      - option \"4x4\" [selected]\n      - option \"8x8\"\n  - group:\n    - text: Dithering strength\n    - paragraph: \"5.0\"\n    - slider\n    - paragraph: Subtle\n    - paragraph: Strong\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "stage": [
+        "Generate · 0.1 generations",
+        "Download image",
+        "Download 3x upscaled",
+        "Gallery view"
+      ],
+      "notices": [
+        {
+          "role": "status",
+          "text": "Error\nDithering works with the palette's colours alone: turn off dithering, or Smart colours and Max colours"
+        }
+      ],
+      "hit": {
+        "enabled": true,
+        "rect": {
+          "x": 93,
+          "y": 885.40625,
+          "w": 326,
+          "h": 52
+        },
+        "inViewport": true,
+        "centerHitsSelf": true,
+        "hitTag": "BUTTON",
+        "pointerEvents": "auto"
+      },
+      "events": [
+        {
+          "type": "pointerdown",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "pointerup",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "click",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "pointerdown",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "pointerup",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "click",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        }
+      ],
+      "imageMutationCounts": {
+        "matchingOwnedDimensions": 8,
+        "otherDetailsOmitted": true
+      }
+    },
+    {
+      "label": "after-submit-2-20s",
+      "sidebar": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 64x32px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\"\n      - option \"Palette\" [selected]\n  - group:\n    - text: Color palette (Beta)\n    - button \"PICO-8 (16) 16 colours\":\n      - paragraph: PICO-8 (16)\n    - paragraph: Max colours\n    - spinbutton \"No limit\": \"8\"\n    - paragraph: Every pixel goes onto these colours. Max colours limits the image.\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\"\n      - option \"2x2\"\n      - option \"4x4\" [selected]\n      - option \"8x8\"\n  - group:\n    - text: Dithering strength\n    - paragraph: \"5.0\"\n    - slider\n    - paragraph: Subtle\n    - paragraph: Strong\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "stage": [
+        "Generate · 0.1 generations",
+        "Download image",
+        "Download 3x upscaled",
+        "Gallery view"
+      ],
+      "notices": [],
+      "hit": {
+        "enabled": true,
+        "rect": {
+          "x": 93,
+          "y": 885.40625,
+          "w": 326,
+          "h": 52
+        },
+        "inViewport": true,
+        "centerHitsSelf": true,
+        "hitTag": "BUTTON",
+        "pointerEvents": "auto"
+      },
+      "events": [
+        {
+          "type": "pointerdown",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "pointerup",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "click",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "pointerdown",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "pointerup",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "click",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        }
+      ],
+      "imageMutationCounts": {
+        "matchingOwnedDimensions": 8,
+        "otherDetailsOmitted": true
+      }
+    },
+    {
+      "label": "before-submit-3",
+      "sidebar": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 64x32px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\"\n      - option \"Palette\" [selected]\n  - group:\n    - text: Color palette (Beta)\n    - button \"PICO-8 (16) 16 colours\":\n      - paragraph: PICO-8 (16)\n    - paragraph: Max colours\n    - spinbutton \"No limit\": \"8\"\n    - paragraph: Every pixel goes onto these colours. Max colours limits the image.\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\" [selected]\n      - option \"2x2\"\n      - option \"4x4\"\n      - option \"8x8\"\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "stage": [
+        "Generate · 0.1 generations",
+        "Gallery",
+        "Download image"
+      ],
+      "notices": [],
+      "hit": {
+        "enabled": true,
+        "rect": {
+          "x": 93,
+          "y": 885.40625,
+          "w": 326,
+          "h": 52
+        },
+        "inViewport": true,
+        "centerHitsSelf": true,
+        "hitTag": "BUTTON",
+        "pointerEvents": "auto"
+      },
+      "events": [],
+      "imageMutationCounts": {
+        "matchingOwnedDimensions": 2,
+        "otherDetailsOmitted": true
+      }
+    },
+    {
+      "label": "after-submit-3-5s",
+      "sidebar": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 64x32px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\"\n      - option \"Palette\" [selected]\n  - group:\n    - text: Color palette (Beta)\n    - button \"PICO-8 (16) 16 colours\":\n      - paragraph: PICO-8 (16)\n    - paragraph: Max colours\n    - spinbutton \"No limit\": \"8\"\n    - paragraph: Every pixel goes onto these colours. Max colours limits the image.\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\" [selected]\n      - option \"2x2\"\n      - option \"4x4\"\n      - option \"8x8\"\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "stage": [
+        "Generate · 0.1 generations",
+        "Download image",
+        "Download 3x upscaled",
+        "Gallery view"
+      ],
+      "notices": [],
+      "hit": {
+        "enabled": true,
+        "rect": {
+          "x": 93,
+          "y": 885.40625,
+          "w": 326,
+          "h": 52
+        },
+        "inViewport": true,
+        "centerHitsSelf": true,
+        "hitTag": "BUTTON",
+        "pointerEvents": "auto"
+      },
+      "events": [
+        {
+          "type": "pointerdown",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "pointerup",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "click",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        }
+      ],
+      "imageMutationCounts": {
+        "matchingOwnedDimensions": 8,
+        "otherDetailsOmitted": true
+      }
+    },
+    {
+      "label": "after-submit-3-20s",
+      "sidebar": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 64x32px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\"\n      - option \"Palette\" [selected]\n  - group:\n    - text: Color palette (Beta)\n    - button \"PICO-8 (16) 16 colours\":\n      - paragraph: PICO-8 (16)\n    - paragraph: Max colours\n    - spinbutton \"No limit\": \"8\"\n    - paragraph: Every pixel goes onto these colours. Max colours limits the image.\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\" [selected]\n      - option \"2x2\"\n      - option \"4x4\"\n      - option \"8x8\"\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "stage": [
+        "Generate · 0.1 generations",
+        "Download image",
+        "Download 3x upscaled",
+        "Gallery view"
+      ],
+      "notices": [],
+      "hit": {
+        "enabled": true,
+        "rect": {
+          "x": 93,
+          "y": 885.40625,
+          "w": 326,
+          "h": 52
+        },
+        "inViewport": true,
+        "centerHitsSelf": true,
+        "hitTag": "BUTTON",
+        "pointerEvents": "auto"
+      },
+      "events": [
+        {
+          "type": "pointerdown",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "pointerup",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "click",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        }
+      ],
+      "imageMutationCounts": {
+        "matchingOwnedDimensions": 8,
+        "otherDetailsOmitted": true
+      }
+    },
+    {
+      "label": "before-submit-4",
+      "sidebar": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 64x32px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\"\n      - option \"Palette\" [selected]\n  - group:\n    - text: Color palette (Beta)\n    - button \"PICO-8 (16) 16 colours\":\n      - paragraph: PICO-8 (16)\n    - paragraph: Max colours\n    - spinbutton \"No limit\"\n    - paragraph: Every pixel goes onto these colours. Max colours limits the image.\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\"\n      - option \"2x2\"\n      - option \"4x4\" [selected]\n      - option \"8x8\"\n  - group:\n    - text: Dithering strength\n    - paragraph: \"5.0\"\n    - slider\n    - paragraph: Subtle\n    - paragraph: Strong\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "stage": [
+        "Generate · 0.1 generations",
+        "Download image",
+        "Download 3x upscaled",
+        "Gallery view"
+      ],
+      "notices": [],
+      "hit": {
+        "enabled": true,
+        "rect": {
+          "x": 93,
+          "y": 885.40625,
+          "w": 326,
+          "h": 52
+        },
+        "inViewport": true,
+        "centerHitsSelf": true,
+        "hitTag": "BUTTON",
+        "pointerEvents": "auto"
+      },
+      "events": [
+        {
+          "type": "pointerdown",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "pointerup",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "click",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        }
+      ],
+      "imageMutationCounts": {
+        "matchingOwnedDimensions": 8,
+        "otherDetailsOmitted": true
+      }
+    },
+    {
+      "label": "after-submit-4-5s",
+      "sidebar": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 64x32px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\"\n      - option \"Palette\" [selected]\n  - group:\n    - text: Color palette (Beta)\n    - button \"PICO-8 (16) 16 colours\":\n      - paragraph: PICO-8 (16)\n    - paragraph: Max colours\n    - spinbutton \"No limit\"\n    - paragraph: Every pixel goes onto these colours. Max colours limits the image.\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\"\n      - option \"2x2\"\n      - option \"4x4\" [selected]\n      - option \"8x8\"\n  - group:\n    - text: Dithering strength\n    - paragraph: \"5.0\"\n    - slider\n    - paragraph: Subtle\n    - paragraph: Strong\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "stage": [
+        "Generate · 0.1 generations",
+        "Download image",
+        "Download 3x upscaled",
+        "Gallery view"
+      ],
+      "notices": [],
+      "hit": {
+        "enabled": true,
+        "rect": {
+          "x": 93,
+          "y": 885.40625,
+          "w": 326,
+          "h": 52
+        },
+        "inViewport": true,
+        "centerHitsSelf": true,
+        "hitTag": "BUTTON",
+        "pointerEvents": "auto"
+      },
+      "events": [
+        {
+          "type": "pointerdown",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "pointerup",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "click",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "pointerdown",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "pointerup",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "click",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        }
+      ],
+      "imageMutationCounts": {
+        "matchingOwnedDimensions": 10,
+        "otherDetailsOmitted": true
+      }
+    },
+    {
+      "label": "after-submit-4-20s",
+      "sidebar": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 64x32px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\"\n      - option \"Palette\" [selected]\n  - group:\n    - text: Color palette (Beta)\n    - button \"PICO-8 (16) 16 colours\":\n      - paragraph: PICO-8 (16)\n    - paragraph: Max colours\n    - spinbutton \"No limit\"\n    - paragraph: Every pixel goes onto these colours. Max colours limits the image.\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\"\n      - option \"2x2\"\n      - option \"4x4\" [selected]\n      - option \"8x8\"\n  - group:\n    - text: Dithering strength\n    - paragraph: \"5.0\"\n    - slider\n    - paragraph: Subtle\n    - paragraph: Strong\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "stage": [
+        "Generate · 0.1 generations",
+        "Download image",
+        "Download 3x upscaled",
+        "Gallery view"
+      ],
+      "notices": [],
+      "hit": {
+        "enabled": true,
+        "rect": {
+          "x": 93,
+          "y": 885.40625,
+          "w": 326,
+          "h": 52
+        },
+        "inViewport": true,
+        "centerHitsSelf": true,
+        "hitTag": "BUTTON",
+        "pointerEvents": "auto"
+      },
+      "events": [
+        {
+          "type": "pointerdown",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "pointerup",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "click",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "pointerdown",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "pointerup",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "click",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        }
+      ],
+      "imageMutationCounts": {
+        "matchingOwnedDimensions": 10,
+        "otherDetailsOmitted": true
+      }
+    },
+    {
+      "label": "before-submit-5",
+      "sidebar": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 64x32px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\"\n      - option \"Palette\" [selected]\n  - group:\n    - text: Color palette (Beta)\n    - button \"PICO-8 (16) 16 colours\":\n      - paragraph: PICO-8 (16)\n    - paragraph: Max colours\n    - spinbutton \"No limit\": \"2\"\n    - paragraph: Every pixel goes onto these colours. Max colours limits the image.\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\" [selected]\n      - option \"2x2\"\n      - option \"4x4\"\n      - option \"8x8\"\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "stage": [
+        "Generate · 0.1 generations",
+        "Gallery",
+        "Download image"
+      ],
+      "notices": [],
+      "hit": {
+        "enabled": true,
+        "rect": {
+          "x": 93,
+          "y": 885.40625,
+          "w": 326,
+          "h": 52
+        },
+        "inViewport": true,
+        "centerHitsSelf": true,
+        "hitTag": "BUTTON",
+        "pointerEvents": "auto"
+      },
+      "events": [],
+      "imageMutationCounts": {
+        "matchingOwnedDimensions": 2,
+        "otherDetailsOmitted": true
+      }
+    },
+    {
+      "label": "after-submit-5-5s",
+      "sidebar": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 64x32px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\"\n      - option \"Palette\" [selected]\n  - group:\n    - text: Color palette (Beta)\n    - button \"PICO-8 (16) 16 colours\":\n      - paragraph: PICO-8 (16)\n    - paragraph: Max colours\n    - spinbutton \"No limit\": \"2\"\n    - paragraph: Every pixel goes onto these colours. Max colours limits the image.\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\" [selected]\n      - option \"2x2\"\n      - option \"4x4\"\n      - option \"8x8\"\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "stage": [
+        "Generate · 0.1 generations",
+        "Download image",
+        "Download 3x upscaled",
+        "Gallery view"
+      ],
+      "notices": [],
+      "hit": {
+        "enabled": true,
+        "rect": {
+          "x": 93,
+          "y": 885.40625,
+          "w": 326,
+          "h": 52
+        },
+        "inViewport": true,
+        "centerHitsSelf": true,
+        "hitTag": "BUTTON",
+        "pointerEvents": "auto"
+      },
+      "events": [
+        {
+          "type": "pointerdown",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "pointerup",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "click",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        }
+      ],
+      "imageMutationCounts": {
+        "matchingOwnedDimensions": 12,
+        "otherDetailsOmitted": true
+      }
+    },
+    {
+      "label": "after-submit-5-20s",
+      "sidebar": "- complementary:\n  - button \"Cleanup\"\n  - button \"Collapse tool panel\"\n  - paragraph: Reduce colors\n  - paragraph: Tighten the palette and optionally add controlled dithering.\n  - group:\n    - text: Images\n    - button \"Pick from gallery\"\n    - button \"Paste from clipboard\"\n    - img\n    - paragraph: Click to upload or drag and drop\n    - paragraph: PNG, JPG, GIF up to 10MB\n    - img \"Preview\"\n    - paragraph: 64x32px\n    - button \"Remove\"\n    - paragraph: Upload multiple frames to quantize them to one shared palette\n  - group:\n    - text: Colors\n    - combobox \"Colors\":\n      - option \"Auto detect\"\n      - option \"Number of colors\"\n      - option \"Palette\" [selected]\n  - group:\n    - text: Color palette (Beta)\n    - button \"PICO-8 (16) 16 colours\":\n      - paragraph: PICO-8 (16)\n    - paragraph: Max colours\n    - spinbutton \"No limit\": \"2\"\n    - paragraph: Every pixel goes onto these colours. Max colours limits the image.\n  - group:\n    - text: Dithering\n    - combobox \"Dithering\":\n      - option \"None\" [selected]\n      - option \"2x2\"\n      - option \"4x4\"\n      - option \"8x8\"\n  - button \"Generate · 0.1 generations\"\n  - text: Auto-add to\n  - button \"Off\"",
+      "stage": [
+        "Generate · 0.1 generations",
+        "Download image",
+        "Download 3x upscaled",
+        "Gallery view"
+      ],
+      "notices": [],
+      "hit": {
+        "enabled": true,
+        "rect": {
+          "x": 93,
+          "y": 885.40625,
+          "w": 326,
+          "h": 52
+        },
+        "inViewport": true,
+        "centerHitsSelf": true,
+        "hitTag": "BUTTON",
+        "pointerEvents": "auto"
+      },
+      "events": [
+        {
+          "type": "pointerdown",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "pointerup",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        },
+        {
+          "type": "click",
+          "trusted": true,
+          "prevented": false,
+          "target": "Generate"
+        }
+      ],
+      "imageMutationCounts": {
+        "matchingOwnedDimensions": 12,
+        "otherDetailsOmitted": true
+      }
+    }
+  ],
+  "network": [
+    {
+      "event": "request",
+      "method": "GET",
+      "host": "api.pixellab.ai",
+      "path": "/background-jobs/active"
+    },
+    {
+      "event": "request",
+      "method": "GET",
+      "host": "api.pixellab.ai",
+      "path": "/creator/images"
+    },
+    {
+      "event": "response",
+      "status": 200,
+      "host": "api.pixellab.ai",
+      "path": "/background-jobs/active"
+    },
+    {
+      "event": "response",
+      "status": 200,
+      "host": "api.pixellab.ai",
+      "path": "/creator/images"
+    },
+    {
+      "event": "request",
+      "method": "GET",
+      "host": "api.pixellab.ai",
+      "path": "/creator/images"
+    },
+    {
+      "event": "response",
+      "status": 200,
+      "host": "api.pixellab.ai",
+      "path": "/creator/images"
+    },
+    {
+      "event": "request",
+      "method": "POST",
+      "host": "api.pixellab.ai",
+      "path": "/quantize-image/background"
+    },
+    {
+      "event": "response",
+      "status": 200,
+      "host": "api.pixellab.ai",
+      "path": "/quantize-image/background"
+    },
+    {
+      "event": "request",
+      "method": "GET",
+      "host": "api.pixellab.ai",
+      "path": "/background-jobs/[id]"
+    },
+    {
+      "event": "response",
+      "status": 200,
+      "host": "api.pixellab.ai",
+      "path": "/background-jobs/[id]"
+    },
+    {
+      "event": "request",
+      "method": "GET",
+      "host": "api.pixellab.ai",
+      "path": "/background-jobs/[id]"
+    },
+    {
+      "event": "response",
+      "status": 200,
+      "host": "api.pixellab.ai",
+      "path": "/background-jobs/[id]"
+    },
+    {
+      "event": "request",
+      "method": "POST",
+      "host": "api.pixellab.ai",
+      "path": "/creator/images"
+    },
+    {
+      "event": "response",
+      "status": 200,
+      "host": "api.pixellab.ai",
+      "path": "/creator/images"
+    },
+    {
+      "event": "request",
+      "method": "GET",
+      "host": "api.pixellab.ai",
+      "path": "/creator/images/[id]"
+    },
+    {
+      "event": "response",
+      "status": 200,
+      "host": "api.pixellab.ai",
+      "path": "/creator/images/[id]"
+    },
+    {
+      "event": "request",
+      "method": "GET",
+      "host": "api.pixellab.ai",
+      "path": "/background-jobs/active"
+    },
+    {
+      "event": "request",
+      "method": "GET",
+      "host": "api.pixellab.ai",
+      "path": "/creator/images"
+    },
+    {
+      "event": "response",
+      "status": 200,
+      "host": "api.pixellab.ai",
+      "path": "/creator/images"
+    },
+    {
+      "event": "request",
+      "method": "GET",
+      "host": "api.pixellab.ai",
+      "path": "/creator/images"
+    },
+    {
+      "event": "response",
+      "status": 200,
+      "host": "api.pixellab.ai",
+      "path": "/background-jobs/active",
+      "responseKeys": [
+        "jobs"
+      ],
+      "metadata": {}
+    },
+    {
+      "event": "response",
+      "status": 200,
+      "host": "api.pixellab.ai",
+      "path": "/creator/images"
+    },
+    {
+      "event": "request",
+      "method": "POST",
+      "host": "api.pixellab.ai",
+      "path": "/quantize-image/background"
+    },
+    {
+      "event": "response",
+      "status": 200,
+      "host": "api.pixellab.ai",
+      "path": "/quantize-image/background",
+      "responseKeys": [
+        "background_job_id",
+        "image_id",
+        "status"
+      ],
+      "metadata": {
+        "status": "processing"
+      }
+    },
+    {
+      "event": "request",
+      "method": "GET",
+      "host": "api.pixellab.ai",
+      "path": "/background-jobs/[id]"
+    },
+    {
+      "event": "response",
+      "status": 200,
+      "host": "api.pixellab.ai",
+      "path": "/background-jobs/[id]",
+      "responseKeys": [
+        "id",
+        "status",
+        "created_at",
+        "last_response"
+      ],
+      "metadata": {
+        "status": "processing"
+      }
+    },
+    {
+      "event": "request",
+      "method": "GET",
+      "host": "api.pixellab.ai",
+      "path": "/background-jobs/[id]"
+    },
+    {
+      "event": "response",
+      "status": 200,
+      "host": "api.pixellab.ai",
+      "path": "/background-jobs/[id]",
+      "responseKeys": [
+        "id",
+        "status",
+        "created_at",
+        "last_response"
+      ],
+      "metadata": {
+        "status": "completed"
+      }
+    },
+    {
+      "event": "request",
+      "method": "POST",
+      "host": "api.pixellab.ai",
+      "path": "/creator/images"
+    },
+    {
+      "event": "response",
+      "status": 200,
+      "host": "api.pixellab.ai",
+      "path": "/creator/images"
+    },
+    {
+      "event": "request",
+      "method": "GET",
+      "host": "api.pixellab.ai",
+      "path": "/creator/images/[id]"
+    },
+    {
+      "event": "response",
+      "status": 200,
+      "host": "api.pixellab.ai",
+      "path": "/creator/images/[id]"
+    },
+    {
+      "event": "request",
+      "method": "POST",
+      "host": "api.pixellab.ai",
+      "path": "/quantize-image/background"
+    },
+    {
+      "event": "response",
+      "status": 200,
+      "host": "api.pixellab.ai",
+      "path": "/quantize-image/background",
+      "responseKeys": [
+        "background_job_id",
+        "image_id",
+        "status"
+      ],
+      "metadata": {
+        "status": "processing"
+      }
+    },
+    {
+      "event": "request",
+      "method": "GET",
+      "host": "api.pixellab.ai",
+      "path": "/background-jobs/[id]"
+    },
+    {
+      "event": "response",
+      "status": 200,
+      "host": "api.pixellab.ai",
+      "path": "/background-jobs/[id]",
+      "responseKeys": [
+        "id",
+        "status",
+        "created_at",
+        "last_response"
+      ],
+      "metadata": {
+        "status": "processing"
+      }
+    },
+    {
+      "event": "request",
+      "method": "GET",
+      "host": "api.pixellab.ai",
+      "path": "/background-jobs/[id]"
+    },
+    {
+      "event": "response",
+      "status": 200,
+      "host": "api.pixellab.ai",
+      "path": "/background-jobs/[id]",
+      "responseKeys": [
+        "id",
+        "status",
+        "created_at",
+        "last_response"
+      ],
+      "metadata": {
+        "status": "completed"
+      }
+    },
+    {
+      "event": "request",
+      "method": "POST",
+      "host": "api.pixellab.ai",
+      "path": "/creator/images"
+    },
+    {
+      "event": "response",
+      "status": 200,
+      "host": "api.pixellab.ai",
+      "path": "/creator/images"
+    },
+    {
+      "event": "request",
+      "method": "GET",
+      "host": "api.pixellab.ai",
+      "path": "/creator/images/[id]"
+    },
+    {
+      "event": "response",
+      "status": 200,
+      "host": "api.pixellab.ai",
+      "path": "/creator/images/[id]"
+    },
+    {
+      "event": "request",
+      "method": "GET",
+      "host": "api.pixellab.ai",
+      "path": "/background-jobs/active"
+    },
+    {
+      "event": "request",
+      "method": "GET",
+      "host": "api.pixellab.ai",
+      "path": "/creator/images"
+    },
+    {
+      "event": "response",
+      "status": 200,
+      "host": "api.pixellab.ai",
+      "path": "/background-jobs/active",
+      "responseKeys": [
+        "jobs"
+      ],
+      "metadata": {}
+    },
+    {
+      "event": "response",
+      "status": 200,
+      "host": "api.pixellab.ai",
+      "path": "/creator/images"
+    },
+    {
+      "event": "request",
+      "method": "GET",
+      "host": "api.pixellab.ai",
+      "path": "/creator/images"
+    },
+    {
+      "event": "response",
+      "status": 200,
+      "host": "api.pixellab.ai",
+      "path": "/creator/images"
+    },
+    {
+      "event": "request",
+      "method": "POST",
+      "host": "api.pixellab.ai",
+      "path": "/quantize-image/background"
+    },
+    {
+      "event": "response",
+      "status": 200,
+      "host": "api.pixellab.ai",
+      "path": "/quantize-image/background",
+      "responseKeys": [
+        "background_job_id",
+        "image_id",
+        "status"
+      ],
+      "metadata": {
+        "status": "processing"
+      }
+    },
+    {
+      "event": "request",
+      "method": "GET",
+      "host": "api.pixellab.ai",
+      "path": "/background-jobs/[id]"
+    },
+    {
+      "event": "response",
+      "status": 200,
+      "host": "api.pixellab.ai",
+      "path": "/background-jobs/[id]",
+      "responseKeys": [
+        "id",
+        "status",
+        "created_at",
+        "last_response"
+      ],
+      "metadata": {
+        "status": "processing"
+      }
+    },
+    {
+      "event": "request",
+      "method": "GET",
+      "host": "api.pixellab.ai",
+      "path": "/background-jobs/[id]"
+    },
+    {
+      "event": "response",
+      "status": 200,
+      "host": "api.pixellab.ai",
+      "path": "/background-jobs/[id]",
+      "responseKeys": [
+        "id",
+        "status",
+        "created_at",
+        "last_response"
+      ],
+      "metadata": {
+        "status": "completed"
+      }
+    },
+    {
+      "event": "request",
+      "method": "POST",
+      "host": "api.pixellab.ai",
+      "path": "/creator/images"
+    },
+    {
+      "event": "response",
+      "status": 200,
+      "host": "api.pixellab.ai",
+      "path": "/creator/images"
+    },
+    {
+      "event": "request",
+      "method": "GET",
+      "host": "api.pixellab.ai",
+      "path": "/creator/images/[id]"
+    },
+    {
+      "event": "response",
+      "status": 200,
+      "host": "api.pixellab.ai",
+      "path": "/creator/images/[id]"
+    }
+  ],
+  "downloads": [
+    {
+      "file": "bench/palette-service-research/web-output-verification-download-0.png",
+      "suggested": "pixellab--1792044405730.png"
+    },
+    {
+      "file": "bench/palette-service-research/web-output-verification-download-1.png",
+      "suggested": "pixellab--1792044612565.png"
+    },
+    {
+      "file": "bench/palette-service-research/web-output-verification-download-2.png",
+      "suggested": "pixellab--1792044656083.png"
+    },
+    {
+      "file": "bench/palette-service-research/web-output-verification-download-3.png",
+      "suggested": "pixellab--1792044821082.png"
+    }
+  ],
+  "attemptBound": 5
+}
