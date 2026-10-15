@@ -23,15 +23,54 @@ mass; weighting within an asset is a different policy from weighting assets.
 
 | Work | Owner | Gate / status |
 |---|---|---|
-| Research candidates and original comparisons | keep_weighting_spike | Research copies only initially. Compare none/linear/squared, histograms and >4096-color bins; retain source hashes, exact bytes and negative examples. |
-| Independent held-out challenge | keep_weighting_challenge | Predeclare black/white/checker composite and opaque/detail gates. Challenge glows, shadows, fades, antialiasing, rare accents, all-faint assets and frame/wall/chunk order before seeing results. |
+| Research candidates and original comparisons | keep_weighting_spike | Complete: 52 configurations; unweighted control equals baseline. Linear improves 18, ties 32, worsens 2. Squared also removes a useful cyan halo. 72 compatibility and 112 additional invariants pass; negatives retained. |
+| Independent held-out challenge | keep_weighting_challenge | Complete: 162 output cases and 348 invariance checks. Independently reproduces both linear negatives; region inspection rejects squared despite aggregate improvement. Two review rounds complete. |
 | Minimal integration map | keep_weighting_integration | Complete read-only proposal. Keep must be distinguished from Cut1 in generated/limiter worker messages, cache/snapshot/request identity and failure ownership. Effective cutoff alone is insufficient. |
-| Shipping decision | Root + independent reviewer | Only integrate a candidate with a demonstrated spill/core improvement and no meaningful held-out visual/detail regression. Otherwise record a no-ship decision. Do not weaken gates to force a fix. |
-| Production implementation, if accepted | Assigned after gate | Preserve every Cut output (including Cut1), opaque/binary Keep bytes, source alpha, target membership, exact matches and fixed-target All. No new output-sized buffers or background policy. |
-| Built desktop and physical Android | Root + delegated reviewer | Actual app imports, Auto/cap/Keep/Cut1 switching, native PNGs, Count/Use, worker/fallback equality, snapshot/cancellation and preview/export consistency. Compare bounded costs; do not label throughput as FPS or JS heap as whole memory. |
-| Final challenge and separate commits | All | At most two research/fix review rounds. Correct reproducible findings, retain no-ship/defer outcomes, update checklist and hand off to Claude only when useful. |
+| Shipping decision | Root + independent reviewer | Complete: no ship for either candidate. Spill/core benefit is real, but blanket weighting trades away other soft colors. No synthetic-tuned threshold guard or new control. |
+| Production implementation, if accepted | Assigned after gate | Not applicable: rejected by gate. Production source/spec/defaults remain identical to 310df63. Keep/Cut1 integration proposal is retained only as future guidance. |
+| Built desktop and physical Android | Root | Complete within scope below. Current build/unit/regression checks pass. Codex Browser and USB Pixel 8 Pro each pass 288 research assertions across 28 rows, with all 112 cross-device rendered hashes/palettes identical. No candidate was integrated, so worker/cache/UI/native-import/export candidate integration is deliberately unperformed, not claimed verified. |
+| Final challenge and separate commits | All | Complete: two bounded reviews agree on no ship. Research/evidence and final handoff committed separately from planning; no deployment. |
 
 No paid service request is needed: the retained independent service cohort and
 its opaque-core failure already supply adversarial evidence. Neutral research
 stays free of competitor source/reference details. The Firefox/browser low-alpha
 decode limitation remains separate; weighting does not recover lost RGB bytes.
+
+## Final evidence and scope
+
+- [Research and decision](2026-10-15-keep-alpha-weighting-spike.md) and
+  [independent challenge](2026-10-15-keep-alpha-weighting-review.md) retain both
+  favorable and negative outputs. Independent native/enlarged black/white montage:
+  `bench/keep-alpha-weighting-review/montage.png`.
+- Research-module native-browser receipts:
+  `bench/keep-alpha-weighting-spike/browser-codex.json`,
+  `bench/keep-alpha-weighting-spike/browser-android.json` and
+  `bench/keep-alpha-weighting-spike/android-summary.json`. Both use supplied RGBA
+  arrays and actual selection/quantization modules; they do not exercise native
+  file decoding, clipboard, app UI state or the PNG encoder.
+- `npm test`: 59 files, 930 passed / 2 existing gc-gated skips. `npm run build`
+  succeeds. Index SHA256:
+  `67b5a088de09d901f63badcb14a4f7ba41e4e8c4b78ddc8b9b8767d8128dd82f`.
+- `BASE_REF=310df63 node bench/palette-qa.mjs dist` passes 132 legacy, 11 Palette,
+  11 RGB exports and 13 integration groups, with no reported page errors. Edge
+  needed execution outside the command sandbox after launch failures; Chromium's
+  own sandbox remained enabled. These are existing unchanged-app regressions,
+  separate from Codex Browser/phone research-module checks.
+- Production source, CLAUDE.md, specification and performance contract have an
+  empty diff from 310df63. No code fix is needed to close this experiment.
+- Research timings are noisy and inconclusive. They establish neither a candidate
+  speed win nor a mobile/thermal/whole-memory bound. No Mac/iOS tests were run.
+
+## What remains useful
+
+The missing input is genuinely authored Keep artwork whose intended soft colors
+can be judged: glows, shadows, antialiased outlines, fades, translucent accents and
+animations. A focused Claude handoff in
+`.claude/handoffs/2026-10-15-062048-keep-opacity-real-art-acceptance.md` assigns that
+new acceptance study explicitly. It must preserve these counterexamples and make
+a product decision, not repeat the same synthetic-only review or force a fix.
+
+Other separate concerns remain: low-cap preservation of small important hues,
+known fallback/clipboard translucent RGB rounding, and human-only existing-image
+Smart evaluation. Prior evidence does not establish a universal winner against
+the service. Smart integration remains research only; current controls stay intact.

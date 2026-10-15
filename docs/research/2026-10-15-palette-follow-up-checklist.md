@@ -40,3 +40,10 @@ fixes one later-PNG-rejection ownership defect and adds conditional Save guidanc
 Native partial-alpha RGB changes and the distinct PNG-import precision observation
 remain explicit; Safari/iOS still needs testing. The earlier frozen-build results
 above remain historical evidence rather than claims about the later source revision.
+
+Subsequent Keep selection research after Claude's independent fixes is recorded in
+the [opacity-weighting checklist](2026-10-15-keep-alpha-weighting-checklist.md).
+Neither linear nor squared weighting met the no-regression quality gate; production
+remains unchanged. Codex Browser and physical Android research outputs agree, with
+the real-art acceptance question deliberately deferred. The prior audit ledger's
+S1/D1 is now investigated with a no-ship result, rather than an untested proposal.
