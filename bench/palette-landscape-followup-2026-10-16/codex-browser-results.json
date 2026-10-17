@@ -1,0 +1,23 @@
+{
+  "target": "staged-tree:31052b673a190f64039399ad450234011f4d1128",
+  "url": "http://127.0.0.1:5335/",
+  "checks": [
+    "owned fixture upload",
+    "Auto then fixed PICO-8 count:13",
+    "single wall Reuse:13-color unsaved draft",
+    "947x364 landscape controls",
+    "dither 4x4 updates count15 and adds conditional strength chip",
+    "390x844 portrait reflow",
+    "Reset restores count13 and DitherOff",
+    "viewport restored"
+  ],
+  "portrait": {
+    "caption": "24×24· 15 colors",
+    "viewport": {
+      "height": 844,
+      "width": 390
+    }
+  },
+  "consoleErrors": [],
+  "finalDom": "- figure \"Preview alpha-sprite.png\":\n  - button \"Preview alpha-sprite.png\"\n  - button \"Save alpha-sprite.png\":\n  - button \"Copy alpha-sprite.png\":\n  - button \"Reuse colors from alpha-sprite.png\":\n  - button \"Preview alpha-sprite.png\":\n  - button \"Remove alpha-sprite.png\":\n  - button \"Preview alpha-sprite.png\":\n    - generic: alpha-sprite.png\n    - generic: 24×24· 13 colors\n- group \"Colors and palette\":\n  - 'button \"Selected palette: PICO-8, 16 colors\"'\n  - button \"Palette\":\n- group \"Conversion and style\":\n  - button \"PICO-8 conversion\" [pressed]:\n    - generic: PICO-8\n  - button \"Palette settings\":\n  - generic: Showing images converted with PICO-8.\n- navigation \"File and app actions\":\n  - group \"Add and save images\":\n    - button \"Save image\":\n    - button \"Add images\":\n    - button \"Remove all images\":\n  - button \"More\":"
+}
