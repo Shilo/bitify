@@ -9,6 +9,7 @@
 :root .grid { scroll-padding-bottom: var(--dock-space); }
 
 :root .image-viewer {
+  --viewer-edge: 24px; --viewer-zoom-height: 48px;
   box-sizing: border-box; position: fixed; inset: 0; margin: 0; border: 0;
   width: 100%; max-width: none; height: 100dvh; max-height: none; padding: 0;
   color: var(--gl-color-text); font-family: var(--body);
@@ -18,7 +19,7 @@
 }
 :root .image-viewer[open] { display: flex; flex-direction: column; }
 :root .image-viewer::backdrop { background: var(--gl-surface-overlay); }
-:root .viewer-workspace { position: absolute; z-index: 2; inset: auto calc(env(safe-area-inset-right,0px) + 24px) calc(env(safe-area-inset-bottom,0px) + 20px) calc(env(safe-area-inset-left,0px) + 24px); display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 8px; pointer-events: none; }
+:root .viewer-workspace { position: absolute; z-index: 2; inset: auto calc(env(safe-area-inset-right,0px) + var(--viewer-edge)) calc(env(safe-area-inset-bottom,0px) + var(--viewer-edge)) calc(env(safe-area-inset-left,0px) + var(--viewer-edge)); display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 8px; pointer-events: none; }
 :root .tile .cap .dim { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 :root .viewer-workspace > * { pointer-events: auto; }
 :root .viewer-tools { box-sizing: border-box; height: var(--control-shell); display: flex; align-items: center; gap: 2px; padding: 5px; margin: 0; border-radius: 999px; background: var(--surface); color: var(--fg); border: 1px solid var(--canvas-border); box-shadow: var(--canvas-shadow); -webkit-backdrop-filter: none; backdrop-filter: none; }
@@ -27,9 +28,14 @@
 :root .viewer-tools .btn:is(:hover,:focus-visible) { background: var(--gl-surface-4); }
 :root .viewer-tools .viewer-compare[aria-pressed="true"] { background: var(--gl-surface-4); box-shadow: var(--gl-inset-medium); }
 :root .viewer-close { box-sizing: border-box; margin-left: auto; width: var(--control-shell); height: var(--control-shell); min-width: var(--control-shell); min-height: var(--control-shell); padding: 0; border-radius: 50%; background: var(--surface); color: var(--fg); transform: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
-:root .viewer-toast { --gl-toast-top: calc(env(safe-area-inset-top,0px) + 16px); }
+:root .viewer-toast {
+  --gl-toast-top: calc(env(safe-area-inset-top,0px) + var(--viewer-edge));
+  --viewer-notice-width: calc(100% - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px) - var(--viewer-edge) - var(--viewer-edge));
+  left: calc((100% + env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px)) / 2);
+  min-width: min(280px,var(--viewer-notice-width)); max-width: min(340px,var(--viewer-notice-width));
+}
 :root .viewer-tile { --image-inset: 0px; max-width: 100%; }
-@media (max-width: 800px) { :root .viewer-workspace { left: calc(env(safe-area-inset-left,0px) + 12px); right: calc(env(safe-area-inset-right,0px) + 12px); bottom: calc(env(safe-area-inset-bottom,0px) + 12px); } }
+@media (max-width: 800px) { :root .image-viewer { --viewer-edge: 12px; } }
 @media (forced-colors: active) { :root .image-viewer, :root :is(.viewer-tools,.viewer-close,.viewer-toast) { background: Canvas; color: CanvasText; box-shadow: none; } :root .viewer-compare[aria-pressed="true"] { outline: 2px solid Highlight; } }
 
 /* Tasks 29–30: touch exposes one circular Share target, without a surrounding

@@ -7,7 +7,7 @@ import assert from 'node:assert/strict';
 const require=createRequire(import.meta.url);
 const {chromium}=require(process.env.PLAYWRIGHT_PATH || 'C:/Users/shilo/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
 const serial=process.env.ANDROID_SERIAL || '37211FDJG00267', origin=process.env.QA_ORIGIN || 'http://localhost:5302/';
-const out=new URL('./viewer-device-evidence/',import.meta.url);await mkdir(out,{recursive:true});
+const out=new URL(process.env.QA_OUTPUT || './viewer-device-evidence/',import.meta.url);await mkdir(out,{recursive:true});
 const adb=(...args)=>execFileSync('adb',['-s',serial,...args],{encoding:'utf8'});
 const original={policy:adb('shell','wm','user-rotation').trim(),user:adb('shell','settings','get','system','user_rotation').trim(),accelerometer:adb('shell','settings','get','system','accelerometer_rotation').trim()};
 const reversePort='tcp:'+new URL(origin).port;
@@ -39,9 +39,17 @@ try{
   for(const rotation of [0,1]){
     const label=rotation?'landscape':'portrait';adb('shell','wm','user-rotation','lock',String(rotation));await page.waitForFunction(r=>r?innerWidth>innerHeight:innerHeight>innerWidth,rotation);await sleep(250);
     report[label]=await page.evaluate(()=>({width:innerWidth,height:innerHeight,dpr:devicePixelRatio,orientation:screen.orientation.type}));
-    await check(label+' icon, touch targets, zoom and Fit',async()=>{
+    await check(label+' icon, edges, touch targets, zoom and Fit',async()=>{
       await open();const fit=button('Fit image');assert.equal(await fit.innerText(),'');assert.equal(await fit.locator('svg').count(),1);const r=await fit.boundingBox();assert(r.width>=44&&r.height>=44);
-      await tap(button('Zoom in'));assert((await view()).scale>1);await tap(fit);assert.deepEqual(await view(),{scale:1,x:0,y:0});assert.equal(await shown(),1);return{target:r};
+      await tap(button('Zoom in'));assert((await view()).scale>1);await tap(fit);assert.deepEqual(await view(),{scale:1,x:0,y:0});assert.equal(await shown(),1);
+      const edges=await page.evaluate(()=>{
+        const probe=document.createElement('div');probe.style.cssText='position:fixed;visibility:hidden;pointer-events:none;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)';document.body.append(probe);
+        const css=getComputedStyle(probe),safe={top:parseFloat(css.paddingTop),right:parseFloat(css.paddingRight),bottom:parseFloat(css.paddingBottom),left:parseFloat(css.paddingLeft)};probe.remove();
+        const rect=s=>{const r=document.querySelector(s).getBoundingClientRect();return{left:r.left,top:r.top,right:innerWidth-r.right,bottom:innerHeight-r.bottom}};
+        return{viewport:[innerWidth,innerHeight],edge:innerWidth<=800?12:24,safe,dialog:rect('.image-viewer'),zoom:rect('.viewer-zoom'),actions:rect('.viewer-workspace .viewer-tools'),close:rect('.viewer-close')};
+      });
+      await writeFile(new URL(label+'-controls.png',out),execFileSync('adb',['-s',serial,'exec-out','screencap','-p'],{maxBuffer:16*1024*1024}));
+      for(const [n,side] of [[edges.zoom.left,'left'],[edges.zoom.top,'top'],[edges.actions.left,'left'],[edges.actions.bottom,'bottom'],[edges.close.right,'right'],[edges.close.bottom,'bottom']])assert(Math.abs(n-edges.safe[side]-edges.edge)<1,'native control edge misaligned: '+JSON.stringify(edges));return{target:r,edges};
     });
     for(const lift of [1,2])await check(label+` pinch, lift finger ${lift}, remaining-finger pan`,async()=>{
       await open();await tap(button('Zoom in'));await tap(button('Zoom in'));const initial=await view(),c=await center();

@@ -45,6 +45,37 @@ async function checkToastTargets(leftInset=0){
     }finally{notice.remove();}
   }}finally{zoom.style.left=oldLeft;}
 }
+async function checkEdges(safe={top:0,right:0,bottom:0,left:0}){
+  // Replay the shipped CSS with only env(safe-area-inset-*) substituted. This
+  // exercises asymmetric cutouts without pretending Chromium has a real notch.
+  const sheet=doc.createElement('style');
+  const styles=await Promise.all([...doc.querySelectorAll('link[rel="stylesheet"]')].filter(link=>new URL(link.href).origin===win.location.origin).map(link=>fetch(link.href).then(r=>r.text())));
+  assert(styles.length>0,'missing shipped stylesheet');
+  sheet.textContent=styles.join('\n').replace(/env\(safe-area-inset-(top|right|bottom|left),\s*[^)]+\)/g,(_,side)=>`${safe[side]}px`);
+  doc.head.append(sheet);
+  try{
+    await tick();const edge=frame.width<=800?12:24;
+    const near=(a,b,label)=>assert(Math.abs(a-b)<1,`${label}: expected ${b}, got ${a}`);
+    const zoom=doc.querySelector('.viewer-zoom'),actions=doc.querySelector('.viewer-workspace .viewer-tools'),close=button('Close preview');
+    const z=zoom.getBoundingClientRect(),a=actions.getBoundingClientRect(),c=close.getBoundingClientRect();
+    near(z.left,safe.left+edge,'zoom left');near(z.top,safe.top+edge,'zoom top');near(a.left,z.left,'action left');
+    near(frame.width-c.right,safe.right+edge,'close right');near(frame.height-c.bottom,safe.bottom+edge,'close bottom');
+    if(frame.width-safe.left-safe.right-edge*2>=a.width+c.width+8)near(a.bottom,c.bottom,'bottom baseline');
+    else assert(a.bottom<=c.top-7,'wrapped bottom controls overlap');
+    for(const node of [...zoom.children,...actions.children,close]){
+      const r=node.getBoundingClientRect();assert(r.width>=43.9&&r.height>=43.9,'touch target shrank');
+      assert(r.left>=safe.left+edge-1&&r.right<=frame.width-safe.right-edge+1&&r.top>=safe.top+edge-1&&r.bottom<=frame.height-safe.bottom-edge+1,'control outside safe inset');
+    }
+    for(const kind of ['message','failure']){
+      const notice=doc.querySelector('.viewer-toast').cloneNode(true);notice.hidden=false;notice.classList.add('is-visible');
+      notice.innerHTML=kind==='failure'?'<span class="glass-toast__text">Preview could not finish. Retry or change settings.</span><button class="btn glass-btn">Retry</button>':'<span class="glass-toast__text">Copied image.</span>';
+      dialog().append(notice);
+      try{await pause(220);const r=notice.getBoundingClientRect();assert(r.left>=safe.left+edge-1&&r.right<=frame.width-safe.right-edge+1,'feedback outside safe sides');near(r.left+r.width/2,(Number(frame.width)+safe.left-safe.right)/2,'feedback center');near(r.top,safe.top+edge+(frame.width<=800?60:0),'feedback top');
+        for(const node of [...zoom.children,...actions.children,close,notice.querySelector('button')].filter(Boolean)){const b=node.getBoundingClientRect();assert(doc.elementFromPoint(b.x+b.width/2,b.y+b.height/2)?.closest('button')===node,'feedback/control hit target obscured');}
+      }finally{notice.remove();}
+    }
+  }finally{sheet.remove();}
+}
 document.querySelector('#run').onclick=async()=>{
   document.querySelector('#run').disabled=true;status.textContent='Running';rows.length=0;
   try{
@@ -69,6 +100,12 @@ document.querySelector('#run').onclick=async()=>{
       await check(prefix+'Space comparison gates artwork Enter and ignores held Enter repeats',async()=>{await open();art().focus();art().dispatchEvent(new win.KeyboardEvent('keydown',{bubbles:true,cancelable:true,key:' ',code:'Space'}));await tick();assert(button('Show converted image'),'Space did not compare');art().dispatchEvent(new win.KeyboardEvent('keydown',{bubbles:true,cancelable:true,key:'Enter'}));await tick();assert(dialog(),'Enter closed while Space held');art().dispatchEvent(new win.KeyboardEvent('keyup',{bubbles:true,cancelable:true,key:' ',code:'Space'}));await tick();assert(button('Show original image'),'Space release did not restore');art().dispatchEvent(new win.KeyboardEvent('keydown',{bubbles:true,cancelable:true,key:'Enter',repeat:true}));await tick();assert(dialog(),'repeated Enter closed');art().dispatchEvent(new win.KeyboardEvent('keydown',{bubbles:true,cancelable:true,key:'Enter'}));await tick();assert(!dialog(),'fresh Enter did not close');});
       await check(prefix+'detail sampling refines after zoom and pan retains buffer size',async()=>{await open();const canvas=doc.querySelector('.viewer-tile canvas');const initial=canvas.width;await zoom();await pause(500);assert(canvas.width>initial,'zoom has no added detail');const w=canvas.width;pointer('pointerdown',1,width/2,height/2);pointer('pointermove',1,width/2+20,height/2+20);pointer('pointerup',1,width/2+20,height/2+20);await tick();assert(canvas.width===w,'pan reallocates raster');});
     }
+    for(const [width,height] of [[1280,720],[844,390],[801,600],[800,600],[390,844],[320,568]]){
+      frame.width=width;frame.height=height;await pause(80);
+      await check(`${width}×${height} all four edges, hit targets and feedback align`,async()=>{await open();await checkEdges();});
+      await check(`${width}×${height} asymmetric four safe-area insets`,async()=>{await open();await checkEdges({top:31,right:17,bottom:23,left:44});});
+    }
+    await check('320px asymmetric safe areas wrap bottom controls without clipping',async()=>{await open();await checkEdges({top:31,right:20,bottom:23,left:90});});
     for(const width of [700,800,801])await check(`${width}px toast layout with 44px left safe-area offset`,async()=>{frame.width=width;frame.height=390;await pause(80);await open();await checkToastTargets(44);});
     await check('resize while pinching retires gesture and retains constrained zoom',async()=>{await open();await zoom();pointer('pointerdown',1,300,200);pointer('pointerdown',2,400,200);frame.width=390;frame.height=844;await pause(100);pointer('pointerup',1,300,200);pointer('pointerup',2,400,200);click();await tick();assert(dialog(),'resize armed close');});
     await check('animation preview stays playable while zoomed and returns to wall',async()=>{button('Close preview').click();await tick();await importFile('/bench/claude-audit-2026-10-15/device/fixtures/walk.gif','walk.gif');const tile=[...doc.querySelectorAll('.tile')].find(e=>e.textContent.includes('walk.gif'));tile.querySelector('.art').click();await until(dialog);await zoom();assert(doc.querySelector('.viewer-tile canvas').width>0,'no animation canvas');await pause(250);assert(dialog(),'animation closed');button('Close preview').click();await tick();assert(doc.querySelectorAll('.grid .tile').length===2,'wall damaged');});

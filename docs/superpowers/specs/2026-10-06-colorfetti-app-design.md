@@ -21,6 +21,12 @@ zoom controls occupy the top left; existing image actions and Close remain below
 Zoom buttons retain 44×44 CSS-pixel touch targets inside a compact 48px-high
 capsule for all pointer types. Preview Save reuses the shared primary gradient
 and theme tokens used by the wall Save and touch action sheet.
+Preview control shells share the same outer inset on every edge: 24px above
+800px viewport width, 12px at 800px and below, plus each edge's safe-area inset.
+The zoom capsule aligns with the left image-action capsule; bottom controls share
+a baseline when they fit and wrap with an 8px gap otherwise. Feedback uses the same top inset, moving 12px below the zoom
+capsule on smaller screens. Feedback is centered and width-bounded within the
+left/right safe areas and the same edge inset.
 Fit uses Lucide's four-corner Maximize icon with the accessible name "Fit image".
 Zoom tooltips put the shortcut after the sentence: "Zoom in. (+)",
 "Zoom out. (−)" and "Fit the whole image. (0)".
