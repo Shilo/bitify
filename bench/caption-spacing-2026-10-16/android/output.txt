@@ -1,0 +1,647 @@
+PASS portrait-1
+PASS landscape-1
+PASS portrait-12
+PASS landscape-12
+{
+  "date": "2026-10-17T02:36:50.912Z",
+  "target": "staged Tile.svelte caption text fix based on730fbb0",
+  "origin": "http://localhost:5340/",
+  "original": {
+    "policy": "free",
+    "accelerometer": "1",
+    "user": "0"
+  },
+  "checks": [
+    {
+      "name": "portrait-1",
+      "pass": true,
+      "width": 448,
+      "height": 819,
+      "angle": 0,
+      "type": "portrait-primary",
+      "dpr": 2.25,
+      "documentWidth": 448,
+      "captions": [
+        {
+          "text": "64×64 · 2 colors",
+          "gapBeforeDot": 2.9027786254882812,
+          "gapAfterDot": 2.9097213745117188,
+          "byMarginLeft": 1,
+          "byMarginRight": 1,
+          "nowrap": "nowrap",
+          "overflowX": "hidden",
+          "textOverflow": "ellipsis",
+          "clientWidth": 95,
+          "scrollWidth": 95,
+          "captionRect": {
+            "x": 12,
+            "y": 531.5555419921875,
+            "width": 424,
+            "height": 52,
+            "top": 531.5555419921875,
+            "right": 436,
+            "bottom": 583.5555419921875,
+            "left": 12
+          }
+        }
+      ]
+    },
+    {
+      "name": "landscape-1",
+      "pass": true,
+      "width": 947,
+      "height": 364,
+      "angle": 90,
+      "type": "landscape-primary",
+      "dpr": 2.25,
+      "documentWidth": 947,
+      "captions": [
+        {
+          "text": "64×64 · 2 colors",
+          "gapBeforeDot": 2.90277099609375,
+          "gapAfterDot": 2.909698486328125,
+          "byMarginLeft": 1,
+          "byMarginRight": 1,
+          "nowrap": "nowrap",
+          "overflowX": "hidden",
+          "textOverflow": "ellipsis",
+          "clientWidth": 95,
+          "scrollWidth": 95,
+          "captionRect": {
+            "x": 376.5555725097656,
+            "y": 211,
+            "width": 194,
+            "height": 52,
+            "top": 211,
+            "right": 570.5555725097656,
+            "bottom": 263,
+            "left": 376.5555725097656
+          }
+        }
+      ]
+    },
+    {
+      "name": "portrait-12",
+      "pass": true,
+      "width": 448,
+      "height": 819,
+      "angle": 0,
+      "type": "portrait-primary",
+      "dpr": 2.25,
+      "documentWidth": 448,
+      "captions": [
+        {
+          "text": "64×64 · 2 colors",
+          "gapBeforeDot": 2.9027786254882812,
+          "gapAfterDot": 2.9097213745117188,
+          "byMarginLeft": 1,
+          "byMarginRight": 1,
+          "nowrap": "nowrap",
+          "overflowX": "hidden",
+          "textOverflow": "ellipsis",
+          "clientWidth": 95,
+          "scrollWidth": 95,
+          "captionRect": {
+            "x": 12,
+            "y": 222,
+            "width": 206,
+            "height": 52,
+            "top": 222,
+            "right": 218,
+            "bottom": 274,
+            "left": 12
+          }
+        },
+        {
+          "text": "64×64 · 2 colors",
+          "gapBeforeDot": 2.902801513671875,
+          "gapAfterDot": 2.90972900390625,
+          "byMarginLeft": 1,
+          "byMarginRight": 1,
+          "nowrap": "nowrap",
+          "overflowX": "hidden",
+          "textOverflow": "ellipsis",
+          "clientWidth": 95,
+          "scrollWidth": 95,
+          "captionRect": {
+            "x": 230,
+            "y": 222,
+            "width": 206,
+            "height": 52,
+            "top": 222,
+            "right": 436,
+            "bottom": 274,
+            "left": 230
+          }
+        },
+        {
+          "text": "64×64 · 2 colors",
+          "gapBeforeDot": 2.9027786254882812,
+          "gapAfterDot": 2.9097213745117188,
+          "byMarginLeft": 1,
+          "byMarginRight": 1,
+          "nowrap": "nowrap",
+          "overflowX": "hidden",
+          "textOverflow": "ellipsis",
+          "clientWidth": 95,
+          "scrollWidth": 95,
+          "captionRect": {
+            "x": 12,
+            "y": 500,
+            "width": 206,
+            "height": 52,
+            "top": 500,
+            "right": 218,
+            "bottom": 552,
+            "left": 12
+          }
+        },
+        {
+          "text": "64×64 · 2 colors",
+          "gapBeforeDot": 2.902801513671875,
+          "gapAfterDot": 2.90972900390625,
+          "byMarginLeft": 1,
+          "byMarginRight": 1,
+          "nowrap": "nowrap",
+          "overflowX": "hidden",
+          "textOverflow": "ellipsis",
+          "clientWidth": 95,
+          "scrollWidth": 95,
+          "captionRect": {
+            "x": 230,
+            "y": 500,
+            "width": 206,
+            "height": 52,
+            "top": 500,
+            "right": 436,
+            "bottom": 552,
+            "left": 230
+          }
+        },
+        {
+          "text": "64×64 · 2 colors",
+          "gapBeforeDot": 2.9027786254882812,
+          "gapAfterDot": 2.9097213745117188,
+          "byMarginLeft": 1,
+          "byMarginRight": 1,
+          "nowrap": "nowrap",
+          "overflowX": "hidden",
+          "textOverflow": "ellipsis",
+          "clientWidth": 95,
+          "scrollWidth": 95,
+          "captionRect": {
+            "x": 12,
+            "y": 778,
+            "width": 206,
+            "height": 52,
+            "top": 778,
+            "right": 218,
+            "bottom": 830,
+            "left": 12
+          }
+        },
+        {
+          "text": "64×64 · 2 colors",
+          "gapBeforeDot": 2.902801513671875,
+          "gapAfterDot": 2.90972900390625,
+          "byMarginLeft": 1,
+          "byMarginRight": 1,
+          "nowrap": "nowrap",
+          "overflowX": "hidden",
+          "textOverflow": "ellipsis",
+          "clientWidth": 95,
+          "scrollWidth": 95,
+          "captionRect": {
+            "x": 230,
+            "y": 778,
+            "width": 206,
+            "height": 52,
+            "top": 778,
+            "right": 436,
+            "bottom": 830,
+            "left": 230
+          }
+        },
+        {
+          "text": "64×64 · 2 colors",
+          "gapBeforeDot": 2.9027786254882812,
+          "gapAfterDot": 2.9097213745117188,
+          "byMarginLeft": 1,
+          "byMarginRight": 1,
+          "nowrap": "nowrap",
+          "overflowX": "hidden",
+          "textOverflow": "ellipsis",
+          "clientWidth": 95,
+          "scrollWidth": 95,
+          "captionRect": {
+            "x": 12,
+            "y": 1056,
+            "width": 206,
+            "height": 52,
+            "top": 1056,
+            "right": 218,
+            "bottom": 1108,
+            "left": 12
+          }
+        },
+        {
+          "text": "64×64 · 2 colors",
+          "gapBeforeDot": 2.902801513671875,
+          "gapAfterDot": 2.90972900390625,
+          "byMarginLeft": 1,
+          "byMarginRight": 1,
+          "nowrap": "nowrap",
+          "overflowX": "hidden",
+          "textOverflow": "ellipsis",
+          "clientWidth": 95,
+          "scrollWidth": 95,
+          "captionRect": {
+            "x": 230,
+            "y": 1056,
+            "width": 206,
+            "height": 52,
+            "top": 1056,
+            "right": 436,
+            "bottom": 1108,
+            "left": 230
+          }
+        },
+        {
+          "text": "64×64 · 2 colors",
+          "gapBeforeDot": 2.9027786254882812,
+          "gapAfterDot": 2.9097213745117188,
+          "byMarginLeft": 1,
+          "byMarginRight": 1,
+          "nowrap": "nowrap",
+          "overflowX": "hidden",
+          "textOverflow": "ellipsis",
+          "clientWidth": 95,
+          "scrollWidth": 95,
+          "captionRect": {
+            "x": 12,
+            "y": 1334,
+            "width": 206,
+            "height": 52,
+            "top": 1334,
+            "right": 218,
+            "bottom": 1386,
+            "left": 12
+          }
+        },
+        {
+          "text": "64×64 · 2 colors",
+          "gapBeforeDot": 2.902801513671875,
+          "gapAfterDot": 2.90972900390625,
+          "byMarginLeft": 1,
+          "byMarginRight": 1,
+          "nowrap": "nowrap",
+          "overflowX": "hidden",
+          "textOverflow": "ellipsis",
+          "clientWidth": 95,
+          "scrollWidth": 95,
+          "captionRect": {
+            "x": 230,
+            "y": 1334,
+            "width": 206,
+            "height": 52,
+            "top": 1334,
+            "right": 436,
+            "bottom": 1386,
+            "left": 230
+          }
+        },
+        {
+          "text": "64×64 · 2 colors",
+          "gapBeforeDot": 2.9027786254882812,
+          "gapAfterDot": 2.9097213745117188,
+          "byMarginLeft": 1,
+          "byMarginRight": 1,
+          "nowrap": "nowrap",
+          "overflowX": "hidden",
+          "textOverflow": "ellipsis",
+          "clientWidth": 95,
+          "scrollWidth": 95,
+          "captionRect": {
+            "x": 12,
+            "y": 1612,
+            "width": 206,
+            "height": 52,
+            "top": 1612,
+            "right": 218,
+            "bottom": 1664,
+            "left": 12
+          }
+        },
+        {
+          "text": "64×64 · 2 colors",
+          "gapBeforeDot": 2.902801513671875,
+          "gapAfterDot": 2.90972900390625,
+          "byMarginLeft": 1,
+          "byMarginRight": 1,
+          "nowrap": "nowrap",
+          "overflowX": "hidden",
+          "textOverflow": "ellipsis",
+          "clientWidth": 95,
+          "scrollWidth": 95,
+          "captionRect": {
+            "x": 230,
+            "y": 1612,
+            "width": 206,
+            "height": 52,
+            "top": 1612,
+            "right": 436,
+            "bottom": 1664,
+            "left": 230
+          }
+        }
+      ]
+    },
+    {
+      "name": "landscape-12",
+      "pass": true,
+      "width": 947,
+      "height": 364,
+      "angle": 90,
+      "type": "landscape-primary",
+      "dpr": 2.25,
+      "documentWidth": 947,
+      "captions": [
+        {
+          "text": "64×64 · 2 colors",
+          "gapBeforeDot": 2.9027786254882812,
+          "gapAfterDot": 2.9097213745117188,
+          "byMarginLeft": 1,
+          "byMarginRight": 1,
+          "nowrap": "nowrap",
+          "overflowX": "hidden",
+          "textOverflow": "ellipsis",
+          "clientWidth": 86,
+          "scrollWidth": 95,
+          "captionRect": {
+            "x": 24.55555534362793,
+            "y": 186,
+            "width": 170,
+            "height": 52,
+            "top": 186,
+            "right": 194.55555534362793,
+            "bottom": 238,
+            "left": 24.55555534362793
+          }
+        },
+        {
+          "text": "64×64 · 2 colors",
+          "gapBeforeDot": 2.90277099609375,
+          "gapAfterDot": 2.909698486328125,
+          "byMarginLeft": 1,
+          "byMarginRight": 1,
+          "nowrap": "nowrap",
+          "overflowX": "hidden",
+          "textOverflow": "ellipsis",
+          "clientWidth": 86,
+          "scrollWidth": 95,
+          "captionRect": {
+            "x": 206.55555725097656,
+            "y": 186,
+            "width": 170,
+            "height": 52,
+            "top": 186,
+            "right": 376.55555725097656,
+            "bottom": 238,
+            "left": 206.55555725097656
+          }
+        },
+        {
+          "text": "64×64 · 2 colors",
+          "gapBeforeDot": 2.90277099609375,
+          "gapAfterDot": 2.909698486328125,
+          "byMarginLeft": 1,
+          "byMarginRight": 1,
+          "nowrap": "nowrap",
+          "overflowX": "hidden",
+          "textOverflow": "ellipsis",
+          "clientWidth": 86,
+          "scrollWidth": 95,
+          "captionRect": {
+            "x": 388.5555725097656,
+            "y": 186,
+            "width": 170,
+            "height": 52,
+            "top": 186,
+            "right": 558.5555725097656,
+            "bottom": 238,
+            "left": 388.5555725097656
+          }
+        },
+        {
+          "text": "64×64 · 2 colors",
+          "gapBeforeDot": 2.90277099609375,
+          "gapAfterDot": 2.90972900390625,
+          "byMarginLeft": 1,
+          "byMarginRight": 1,
+          "nowrap": "nowrap",
+          "overflowX": "hidden",
+          "textOverflow": "ellipsis",
+          "clientWidth": 86,
+          "scrollWidth": 95,
+          "captionRect": {
+            "x": 570.5555419921875,
+            "y": 186,
+            "width": 170,
+            "height": 52,
+            "top": 186,
+            "right": 740.5555419921875,
+            "bottom": 238,
+            "left": 570.5555419921875
+          }
+        },
+        {
+          "text": "64×64 · 2 colors",
+          "gapBeforeDot": 2.90277099609375,
+          "gapAfterDot": 2.90972900390625,
+          "byMarginLeft": 1,
+          "byMarginRight": 1,
+          "nowrap": "nowrap",
+          "overflowX": "hidden",
+          "textOverflow": "ellipsis",
+          "clientWidth": 86,
+          "scrollWidth": 95,
+          "captionRect": {
+            "x": 752.5555419921875,
+            "y": 186,
+            "width": 170,
+            "height": 52,
+            "top": 186,
+            "right": 922.5555419921875,
+            "bottom": 238,
+            "left": 752.5555419921875
+          }
+        },
+        {
+          "text": "64×64 · 2 colors",
+          "gapBeforeDot": 2.9027786254882812,
+          "gapAfterDot": 2.9097213745117188,
+          "byMarginLeft": 1,
+          "byMarginRight": 1,
+          "nowrap": "nowrap",
+          "overflowX": "hidden",
+          "textOverflow": "ellipsis",
+          "clientWidth": 86,
+          "scrollWidth": 95,
+          "captionRect": {
+            "x": 24.55555534362793,
+            "y": 428,
+            "width": 170,
+            "height": 52,
+            "top": 428,
+            "right": 194.55555534362793,
+            "bottom": 480,
+            "left": 24.55555534362793
+          }
+        },
+        {
+          "text": "64×64 · 2 colors",
+          "gapBeforeDot": 2.90277099609375,
+          "gapAfterDot": 2.909698486328125,
+          "byMarginLeft": 1,
+          "byMarginRight": 1,
+          "nowrap": "nowrap",
+          "overflowX": "hidden",
+          "textOverflow": "ellipsis",
+          "clientWidth": 86,
+          "scrollWidth": 95,
+          "captionRect": {
+            "x": 206.55555725097656,
+            "y": 428,
+            "width": 170,
+            "height": 52,
+            "top": 428,
+            "right": 376.55555725097656,
+            "bottom": 480,
+            "left": 206.55555725097656
+          }
+        },
+        {
+          "text": "64×64 · 2 colors",
+          "gapBeforeDot": 2.90277099609375,
+          "gapAfterDot": 2.909698486328125,
+          "byMarginLeft": 1,
+          "byMarginRight": 1,
+          "nowrap": "nowrap",
+          "overflowX": "hidden",
+          "textOverflow": "ellipsis",
+          "clientWidth": 86,
+          "scrollWidth": 95,
+          "captionRect": {
+            "x": 388.5555725097656,
+            "y": 428,
+            "width": 170,
+            "height": 52,
+            "top": 428,
+            "right": 558.5555725097656,
+            "bottom": 480,
+            "left": 388.5555725097656
+          }
+        },
+        {
+          "text": "64×64 · 2 colors",
+          "gapBeforeDot": 2.90277099609375,
+          "gapAfterDot": 2.90972900390625,
+          "byMarginLeft": 1,
+          "byMarginRight": 1,
+          "nowrap": "nowrap",
+          "overflowX": "hidden",
+          "textOverflow": "ellipsis",
+          "clientWidth": 86,
+          "scrollWidth": 95,
+          "captionRect": {
+            "x": 570.5555419921875,
+            "y": 428,
+            "width": 170,
+            "height": 52,
+            "top": 428,
+            "right": 740.5555419921875,
+            "bottom": 480,
+            "left": 570.5555419921875
+          }
+        },
+        {
+          "text": "64×64 · 2 colors",
+          "gapBeforeDot": 2.90277099609375,
+          "gapAfterDot": 2.90972900390625,
+          "byMarginLeft": 1,
+          "byMarginRight": 1,
+          "nowrap": "nowrap",
+          "overflowX": "hidden",
+          "textOverflow": "ellipsis",
+          "clientWidth": 86,
+          "scrollWidth": 95,
+          "captionRect": {
+            "x": 752.5555419921875,
+            "y": 428,
+            "width": 170,
+            "height": 52,
+            "top": 428,
+            "right": 922.5555419921875,
+            "bottom": 480,
+            "left": 752.5555419921875
+          }
+        },
+        {
+          "text": "64×64 · 2 colors",
+          "gapBeforeDot": 2.90277099609375,
+          "gapAfterDot": 2.909698486328125,
+          "byMarginLeft": 1,
+          "byMarginRight": 1,
+          "nowrap": "nowrap",
+          "overflowX": "hidden",
+          "textOverflow": "ellipsis",
+          "clientWidth": 86,
+          "scrollWidth": 95,
+          "captionRect": {
+            "x": 297.5555725097656,
+            "y": 670,
+            "width": 170,
+            "height": 52,
+            "top": 670,
+            "right": 467.5555725097656,
+            "bottom": 722,
+            "left": 297.5555725097656
+          }
+        },
+        {
+          "text": "64×64 · 2 colors",
+          "gapBeforeDot": 2.90277099609375,
+          "gapAfterDot": 2.90972900390625,
+          "byMarginLeft": 1,
+          "byMarginRight": 1,
+          "nowrap": "nowrap",
+          "overflowX": "hidden",
+          "textOverflow": "ellipsis",
+          "clientWidth": 86,
+          "scrollWidth": 95,
+          "captionRect": {
+            "x": 479.5555725097656,
+            "y": 670,
+            "width": 170,
+            "height": 52,
+            "top": 670,
+            "right": 649.5555725097656,
+            "bottom": 722,
+            "left": 479.5555725097656
+          }
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "notes": [
+    "Actual USB Pixel 8 Pro native OS rotation; no CDP metrics/orientation emulation.",
+    "Small tiles may intentionally ellipsize metadata. This checks spacing and containment, not universal full-text visibility."
+  ],
+  "restored": {
+    "policy": "free",
+    "accelerometer": "1",
+    "user": "0"
+  },
+  "pass": true
+}

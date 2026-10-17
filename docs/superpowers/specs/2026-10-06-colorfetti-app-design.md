@@ -134,6 +134,8 @@ metadata. Creator attribution remains stored, as does the validated source URL.
 ## Output colors and reuse — October 16, 2026
 
 Count is noninteractive caption metadata, following dimensions: 24×24 · 8 colors.
+Separators retain explicit text spaces on both sides of the middle dot, including
+before Retry needed; template whitespace trimming must not join metadata fields.
 It always describes full-resolution converted output, including while Original
 is shown; animations report the RGB union of all frames, excluding fully empty
 pixels. Wall tiles reuse post-Cleanup used flags already produced by full-size

@@ -1,0 +1,28 @@
+// Native USB Android caption whitespace, geometry and responsive overflow acceptance.
+import {createRequire} from 'node:module';
+import {execFileSync} from 'node:child_process';
+import {mkdir,readFile,writeFile} from 'node:fs/promises';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+const {chromium}=createRequire(import.meta.url)('C:/Users/shilo/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const ADB='C:/Users/shilo/AppData/Local/Android/Sdk/platform-tools/adb.exe',serial='37211FDJG00267',adb=(...args)=>execFileSync(ADB,['-s',serial,...args],{encoding:'utf8'}),out=import.meta.dirname,origin='http://localhost:5340/';await mkdir(out,{recursive:true});
+const original={policy:adb('shell','wm','user-rotation').trim(),accelerometer:adb('shell','settings','get','system','accelerometer_rotation').trim(),user:adb('shell','settings','get','system','user_rotation').trim()};
+const report={date:new Date().toISOString(),target:'staged Tile.svelte caption text fix based on730fbb0',origin,original,checks:[],errors:[],notes:['Actual USB Pixel 8 Pro native OS rotation; no CDP metrics/orientation emulation.','Small tiles may intentionally ellipsize metadata. This checks spacing and containment, not universal full-text visibility.']};
+const browser=await chromium.connectOverCDP('http://127.0.0.1:9333'),context=browser.contexts()[0],page=await context.newPage(),cdp=await context.newCDPSession(page);let storage;page.on('pageerror',e=>report.errors.push(e.stack));page.setDefaultTimeout(30000);
+try{
+ adb('reverse','tcp:5340','tcp:5340');await cdp.send('Emulation.clearDeviceMetricsOverride');await page.goto(origin);await page.bringToFront();storage=await page.evaluate(()=>Object.fromEntries(Object.entries(localStorage)));
+ const fixture=await readFile(new URL('../spacing-source.png',import.meta.url));
+ for(const count of[1,12])for(const rotation of[0,1]){
+  adb('shell','wm','user-rotation','lock',String(rotation));await page.evaluate(()=>{localStorage.setItem('colorfetti',JSON.stringify({family:'full-palette',paletteId:'preset-mono',alphaCut:128,alphaMode:'cut',metric:'oklab',maxColors:0,cleanup:false,dither:'none',ditherStrength:50,theme:'dark'}));localStorage.setItem('colorfetti-help-seen','1');localStorage.setItem('colorfetti-welcomed','1')});await page.reload();await page.waitForFunction(n=>n?innerWidth>innerHeight:innerHeight>innerWidth,rotation);
+  await page.locator('input[type=file]').first().setInputFiles(Array.from({length:count},(_,i)=>({name:'spacing-'+(i+1)+'.png',mimeType:'image/png',buffer:fixture})));await page.waitForFunction(n=>document.querySelectorAll('.grid figure .dim').length===n&&[...document.querySelectorAll('.grid figure .dim')].every(e=>e.textContent==='64×64 · 2 colors'),count);
+  const geometry=await page.evaluate(()=>{
+   function glyph(el,offset){const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);let at=0,node;while(node=walker.nextNode()){if(offset<at+node.textContent.length){const r=document.createRange();r.setStart(node,offset-at);r.setEnd(node,offset-at+1);return r.getBoundingClientRect().toJSON()}at+=node.textContent.length;}return null;}
+   const captions=[...document.querySelectorAll('.grid figure .dim')].map(el=>{const text=el.textContent,dot=text.indexOf('·'),before=glyph(el,dot-2),mark=glyph(el,dot),after=glyph(el,dot+2),by=el.querySelector('.by'),style=getComputedStyle(el),byStyle=getComputedStyle(by);return{text,gapBeforeDot:mark.left-before.right,gapAfterDot:after.left-mark.right,byMarginLeft:parseFloat(byStyle.marginLeft),byMarginRight:parseFloat(byStyle.marginRight),nowrap:style.whiteSpace,overflowX:style.overflowX,textOverflow:style.textOverflow,clientWidth:el.clientWidth,scrollWidth:el.scrollWidth,captionRect:el.closest('.cap').getBoundingClientRect().toJSON()}});
+   return{width:innerWidth,height:innerHeight,angle:screen.orientation.angle,type:screen.orientation.type,dpr:devicePixelRatio,documentWidth:document.documentElement.scrollWidth,captions};
+  });
+  assert(geometry.documentWidth<=geometry.width+1,'Document horizontally overflows');for(const c of geometry.captions){assert.equal(c.text,'64×64 · 2 colors');assert(c.gapBeforeDot>0&&c.gapAfterDot>0,'Both dot spaces must have positive visual width');assert(c.byMarginLeft>0&&c.byMarginRight>0,'Dimension separator must retain CSS spacing');assert.equal(c.nowrap,'nowrap');assert(c.captionRect.left>=-1&&c.captionRect.right<=geometry.width+1,'Caption escapes screen');if(c.scrollWidth>c.clientWidth+1){assert.equal(c.overflowX,'hidden');assert.equal(c.textOverflow,'ellipsis');}}
+  const name=(rotation?'landscape':'portrait')+'-'+count;await writeFile(path.join(out,name+'.png'),execFileSync(ADB,['-s',serial,'exec-out','screencap','-p'],{maxBuffer:16777216}));report.checks.push({name,pass:true,...geometry});console.log('PASS',name);
+ }
+}catch(e){report.errors.push(e.stack);}finally{
+ if(storage)await page.evaluate(v=>{localStorage.clear();for(const[k,x]of Object.entries(v))localStorage.setItem(k,x)},storage).catch(()=>{});await page.close();if(original.policy==='free')adb('shell','wm','user-rotation','free');else adb('shell','wm','user-rotation','lock',original.user);adb('shell','settings','put','system','user_rotation',original.user);report.restored={policy:adb('shell','wm','user-rotation').trim(),accelerometer:adb('shell','settings','get','system','accelerometer_rotation').trim(),user:adb('shell','settings','get','system','user_rotation').trim()};report.pass=report.checks.length===4&&!report.errors.length;await writeFile(path.join(out,'results.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));
+}process.exit(report.pass?0:1);

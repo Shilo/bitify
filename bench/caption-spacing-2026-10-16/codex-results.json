@@ -1,0 +1,122 @@
+{
+  "before": {
+    "text": "64×64· 2 colors"
+  },
+  "viewports": [
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "byMargins": [
+        "3.6px",
+        "3.6px"
+      ],
+      "clipped": false,
+      "documentOverflow": false,
+      "nowrap": "nowrap",
+      "text": "64×64 · 2 colors"
+    },
+    {
+      "viewport": {
+        "width": 800,
+        "height": 600
+      },
+      "byMargins": [
+        "3.6px",
+        "3.6px"
+      ],
+      "clipped": false,
+      "documentOverflow": false,
+      "nowrap": "nowrap",
+      "text": "64×64 · 2 colors"
+    },
+    {
+      "viewport": {
+        "width": 521,
+        "height": 800
+      },
+      "byMargins": [
+        "3.6px",
+        "3.6px"
+      ],
+      "clipped": false,
+      "documentOverflow": false,
+      "nowrap": "nowrap",
+      "text": "64×64 · 2 colors"
+    },
+    {
+      "viewport": {
+        "width": 520,
+        "height": 800
+      },
+      "byMargins": [
+        "3.6px",
+        "3.6px"
+      ],
+      "clipped": false,
+      "documentOverflow": false,
+      "nowrap": "nowrap",
+      "text": "64×64 · 2 colors"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "byMargins": [
+        "3.6px",
+        "3.6px"
+      ],
+      "clipped": false,
+      "documentOverflow": false,
+      "nowrap": "nowrap",
+      "text": "64×64 · 2 colors"
+    },
+    {
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "byMargins": [
+        "3.6px",
+        "3.6px"
+      ],
+      "clipped": false,
+      "documentOverflow": false,
+      "nowrap": "nowrap",
+      "text": "64×64 · 2 colors"
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "byMargins": [
+        "3.6px",
+        "3.6px"
+      ],
+      "clipped": false,
+      "documentOverflow": false,
+      "nowrap": "nowrap",
+      "text": "64×64 · 2 colors"
+    },
+    {
+      "viewport": {
+        "width": 947,
+        "height": 364
+      },
+      "byMargins": [
+        "3.6px",
+        "3.6px"
+      ],
+      "clipped": false,
+      "documentOverflow": false,
+      "nowrap": "nowrap",
+      "text": "64×64 · 2 colors"
+    }
+  ],
+  "previewBranchText": "64×64 · 2 colors",
+  "consoleErrors": [],
+  "viewportRestored": true
+}
