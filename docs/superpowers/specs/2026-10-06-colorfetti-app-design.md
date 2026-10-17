@@ -130,7 +130,11 @@ is shown; animations report the RGB union of all frames, excluding fully empty
 pixels. Wall tiles reuse post-Cleanup used flags already produced by full-size
 previews, translating actual subset indices back to RGB. Sampled/draft previews
 never publish estimated counts. An incomplete animation union stays unreported.
-Repeated frames publish nothing new; only small RGB/seen-frame metadata remains.
+Repeated frames publish nothing new. Incomplete clips retain small RGB/seen-frame
+metadata; completed results discard frame tracking. A keyed reactive map retains
+empty slots for live images, so each completed count updates its own subscribers
+without copying the whole map. Source/settings changes prune or invalidate entries
+in one untracked pass; ordinary metadata publication never triggers that pass.
 
 Opening Preview automatically starts missing full-source inspection through the
 export pipeline, with no Count button. Closing Preview cancels automatic work

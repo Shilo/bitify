@@ -1,4 +1,5 @@
 <script>
+  import { SvelteMap } from 'svelte/reactivity';
   import { analyze, mask, hexToRgb, autoThreshold, spritesOf } from './lib/recolor.js';
   import { unify } from './lib/recolor.js';
   import { saveOne, saveAll, copyOne, pngBlob, downloadName, fileBytes } from './lib/save.js';
@@ -701,7 +702,8 @@
     // and its display name are not conversion inputs during generation.
     return JSON.stringify({ ...snapshot, name: undefined, colors: snapshot.generated ? undefined : snapshot.colors, generated: snapshot.generated?.key });
   });
-  let colorUsage = $state.raw(new Map());
+  // Per-item subscriptions avoid invalidating every caption on each publication.
+  const colorUsage = new SvelteMap();
   function previewUsage({ item, key, colors, used, frame, frames }) {
     if (key !== usageKey || family !== 'full-palette' || generatedPending || generatedUnavailable || !items.includes(item)) return;
     const previous = usageFor(item);
@@ -709,7 +711,7 @@
     const progress = addUsageFrame(previous?.progress, colors, used, frame, frames);
     if (!progress) return;
     const result = completedUsage(progress, fullPalette.colors);
-    colorUsage = new Map(colorUsage).set(item.id, { item, key, ...(result ? { result, status: 'ready' } : { progress, status: 'partial' }) });
+    colorUsage.set(item.id, { item, key, ...(result ? { result, status: 'ready' } : { progress, status: 'partial' }) });
   }
   const usageFor = item => {
     const record = colorUsage.get(item.id);
@@ -720,14 +722,21 @@
     return record?.result ? `${record.result.count} ${record.result.count === 1 ? 'color' : 'colors'}` : '';
   };
   $effect(() => {
-    const key = usageKey, live = items, records = colorUsage;
-    const stale = [...records].filter(([, record]) => record.key !== key || !live.includes(record.item));
-    if (!stale.length) return;
-    const next = new Map(records);
-    for (const [id, record] of stale) { record.controller?.abort(); next.delete(id); }
-    colorUsage = next;
+    const key = usageKey, live = items;
+    // Observe source/settings changes, never metadata publications themselves.
+    untrack(() => {
+      const current = new Map(live.map(item => [item.id, item]));
+      for (const [id, record] of colorUsage) {
+        if (!current.has(id)) { record?.controller?.abort(); colorUsage.delete(id); }
+        else if (record && (record.key !== key || current.get(id) !== record.item)) {
+          record.controller?.abort(); colorUsage.set(id, null);
+        }
+      }
+      // Retain empty live slots: missing-key reads subscribe to the map as a whole.
+      for (const id of current.keys()) if (!colorUsage.has(id)) colorUsage.set(id, null);
+    });
   });
-  $effect(() => () => { for (const record of colorUsage.values()) record.controller?.abort(); });
+  $effect(() => () => { for (const record of colorUsage.values()) record?.controller?.abort(); });
   function countColors(item, explicit = false) {
     if (family !== 'full-palette' || generatedUnavailable || itemPaletteFailed(item) || !items.includes(item)) return Promise.resolve(null);
     const previous = usageFor(item);
@@ -737,7 +746,7 @@
     const record = { item, key, controller, status: 'pending', explicit };
     const publish = value => {
       if (!controller.signal.aborted && key === usageKey && items.includes(item) && colorUsage.get(item.id) === record)
-        colorUsage = new Map(colorUsage).set(item.id, { item, key, ...value });
+        colorUsage.set(item.id, { item, key, ...value });
     };
     record.promise = (async () => {
       try {
@@ -750,7 +759,7 @@
         return null;
       }
     })();
-    colorUsage = new Map(colorUsage).set(item.id, record);
+    colorUsage.set(item.id, record);
     return record.promise;
   }
   // Preview metadata is automatic and noninteractive. Reuse is always one action;
@@ -764,7 +773,7 @@
       record.controller.abort();
       untrack(() => {
         if (colorUsage.get(item.id) === record) {
-          const next = new Map(colorUsage); next.delete(item.id); colorUsage = next;
+          colorUsage.set(item.id, null);
         }
       });
     };

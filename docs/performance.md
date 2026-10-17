@@ -1325,3 +1325,30 @@ explicit lifetime rather than the reactive effect's rerun lifetime. A settled
 failure is retained until its inputs change, preventing drag events from retrying it.
 Desktop and native Pixel touch checks close the reported drag freeze in
 `docs/research/2026-10-13-slider-reanalysis-resolution.md`.
+
+### October 16: wall color-count publication
+
+Wall counts consume used-color flags from existing exact-size conversions; sampled
+walls start no additional full-source inspection. Completed results are retained
+for the current image/settings, and GIF frame-tracking flags are discarded once
+the union completes. Idle, Original return and cached repeated playback perform
+no new counting in the measured fixtures. Preview/Reuse can inspect missing
+full-source results; automatic Preview work remains cancelable.
+
+A 100-still A/B exposed nonzero metadata/reactivity costs. Replacing whole-map
+copies with per-key SvelteMap entries and retaining null slots for live images
+avoids repeated map copying and global missing-key caption subscriptions. Pruning
+tracks only actual source/settings changes and runs untracked. Removed items are
+deleted; invalidated live records abort and become null. Existing identity guards
+still prevent stale results and dialogs. This changes no pixel conversion.
+
+On the USB Pixel 8 Pro, three alternating 100-image pairs measured median import
+TaskDuration 528.78→480.56 ms; matching 506.31→502.03 ms was essentially tied.
+ScriptDuration improved 137.73→120.71 ms and 81.00→61.25 ms respectively, in every
+pair. Desktop five-pair script medians improved 43.91→36.50 and 20.62→15.09 ms.
+Quantization counts remained 201; first/last canvas output hashes matched each
+pair. These measure a bounded fixture, not all workloads or battery use. Large
+walls still have import/recolor long tasks and layout costs. Earlier pruning-only
+and missing-slot candidates did not establish a phone benefit and were rejected.
+See docs/research/2026-10-16-landscape-and-count-review.md for final integration,
+independent cancellation/output checks and retained failed test-only transforms.
