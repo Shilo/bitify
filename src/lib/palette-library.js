@@ -75,8 +75,11 @@ function sourceOf(source) {
   const kind = kinds.includes(source?.kind) ? source.kind : 'custom';
   // Only a validated Lospec palette page is retained as an imported source link.
   const url = kind === 'lospec' ? canonicalLospecUrl(source?.url) : null;
+  const name = typeof source?.name === 'string'
+    ? [...source.name.replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim()].slice(0, 64).join('') : '';
   return { kind: kind === 'lospec' && !url ? 'custom' : kind,
-    ...(url ? { url } : {}), ...(typeof source?.credit === 'string' ? { credit: source.credit.slice(0, 160) } : {}) };
+    ...(url ? { url, ...(name ? { name } : {}) } : {}),
+    ...(typeof source?.credit === 'string' ? { credit: source.credit.slice(0, 160) } : {}) };
 }
 
 function recordOf(value) {

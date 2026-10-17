@@ -105,6 +105,10 @@ Max colors controls run from 2 to the active palette's color count, displaying t
 
 ## Things that bite
 
+Lospec source display is one published-palette-name link beside the count;
+`source.name` is bounded and persisted separately from the local editable name.
+Creator credit stays in metadata. The Paste colors hint is deliberately concise.
+
 Native dialogs use `backdropDismiss` for complete outside pointer gestures.
 Dragging a selection from an input onto the backdrop must not close its dialog.
 Escape and explicit actions remain native; the image viewer retains its own

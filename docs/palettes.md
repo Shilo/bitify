@@ -76,7 +76,8 @@ as GIF in Keep mode. Existing GIF sources already have binary transparency.
 
 To import from Lospec, open Import palette → Paste colors and paste the palette's
 full Lospec link. Choose Import from Lospec, review its colors/name and Save palette.
-Its author and source link stay with the local palette. Requests fetch only public
+Its published palette name appears as one link beside the color count, even if
+you rename your local copy. Its author and source link stay in palette metadata. Requests fetch only public
 palette data; artwork and credentials are not sent. If Lospec is unavailable, import
 a downloaded HEX file or paste its colors. Other websites and arbitrary links are
 not supported by this action.

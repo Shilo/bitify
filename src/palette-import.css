@@ -28,7 +28,9 @@
 :root .palette-editor-details > .palette-editor-tools { margin-block: var(--palette-editor-gap); }
 :root .palette-editor-details > summary { min-height: 44px; box-sizing: border-box; padding-block: 12px; line-height: 20px; list-style-position: inside; cursor: pointer; font-size: 14px; color: var(--text); }
 :root .palette-editor-details > summary:focus-visible { outline: 2px solid var(--gl-border-focus); outline-offset: 2px; border-radius: 6px; }
-:root .palette-review-heading { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; margin: 0; }
+:root .palette-review-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 12px; margin: 0; }
+:root .palette-review-heading strong { flex-shrink: 0; }
+:root .palette-review-heading .palette-source-credit { min-width: 0; max-width: 100%; min-height: 44px; display: inline-flex; align-items: center; font-size: 13px; }
 :root .palette-review-heading span { color: var(--muted); font-size: 13px; }
 :root .palette-review-grid { display: grid; grid-template-columns: repeat(auto-fill,44px); align-content: start; gap: 8px; padding: 4px; scroll-padding: 4px; box-sizing: border-box; max-height: 156px; overflow: auto; overscroll-behavior: contain; }
 :root .palette-review-swatch { width: 44px; height: 44px; box-sizing: border-box; padding: 0; border: 1px solid color-mix(in srgb,var(--text) 25%,transparent); border-radius: 50%; cursor: pointer; }

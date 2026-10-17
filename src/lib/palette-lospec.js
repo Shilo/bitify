@@ -17,8 +17,9 @@ export function parseLospecPalette(value, reference) {
   let colors;
   try { colors = normalizeColors(value.colors); } catch { throw new Error(INVALID); }
   const credit = plain(value.author, 160);
-  return { name: plain(value.name, 64) || slug.slice(0, 64), colors,
-    source: { kind: 'lospec', url, ...(credit ? { credit } : {}) } };
+  const name = plain(value.name, 64) || slug.slice(0, 64);
+  return { name, colors,
+    source: { kind: 'lospec', url, name, ...(credit ? { credit } : {}) } };
 }
 
 // No artwork, cookies, credentials or referrer are sent to the public palette endpoint.

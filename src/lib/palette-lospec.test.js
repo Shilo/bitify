@@ -28,9 +28,9 @@ describe('Lospec references and palette data', () => {
   it('owns normalized ordered opaque colors, with bounded optional plain-text metadata', () => {
     const input = { name: 'A\nPalette', author: '<Author>\u0000', colors: [' FFFFFF ', '#fff', '#000', '#ABCDEF'] };
     const result = parseLospecPalette(input, 'slso8');
-    expect(result).toEqual({ name: 'A Palette', colors: ['#ffffff', '#000000', '#abcdef'], source: { kind: 'lospec', url: 'https://lospec.com/palette-list/slso8', credit: '<Author>' } });
+    expect(result).toEqual({ name: 'A Palette', colors: ['#ffffff', '#000000', '#abcdef'], source: { kind: 'lospec', url: 'https://lospec.com/palette-list/slso8', name: 'A Palette', credit: '<Author>' } });
     input.colors.reverse(); expect(result.colors[0]).toBe('#ffffff');
-    for (const author of [null, 42, {}, []]) expect(parseLospecPalette({ colors: ['123456'], author }, 'slso8')).toEqual({ name: 'slso8', colors: ['#123456'], source: { kind: 'lospec', url: 'https://lospec.com/palette-list/slso8' } });
+    for (const author of [null, 42, {}, []]) expect(parseLospecPalette({ colors: ['123456'], author }, 'slso8')).toEqual({ name: 'slso8', colors: ['#123456'], source: { kind: 'lospec', url: 'https://lospec.com/palette-list/slso8', name: 'slso8' } });
     expect([...parseLospecPalette({ name: '😀'.repeat(80), colors: ['000000'], author: 'a'.repeat(200) }, 'slso8').name]).toHaveLength(64);
     expect(parseLospecPalette({ colors: ['000000'], author: 'a'.repeat(200) }, 'slso8').source.credit).toHaveLength(160);
     for (const value of [null, [], {}, { colors: [] }, { colors: ['#12345678'] }, { colors: ['rgba(0,0,0,1)'] }, { colors: [1] }, { colors: Array.from({ length: 257 }, (_, i) => i.toString(16).padStart(6, '0')) }]) expect(() => parseLospecPalette(value, 'slso8')).toThrow('1–256');
@@ -43,6 +43,11 @@ describe('Lospec references and palette data', () => {
     const saved = savePalette(storage, [], imported).record;
     expect(storage.setItem.mock.calls[0][0]).toBe(LIBRARY_KEY);
     expect(restoreLibrary(serializeLibrary([saved]))[0].source).toEqual(imported.source);
+    const renamed = { ...saved, name: 'My renamed palette' };
+    expect(restoreLibrary(serializeLibrary([renamed]))[0].source.name).toBe('SLSO8');
+    const bounded = restoreLibrary(serializeLibrary([{ ...saved, source: { ...saved.source, name: 'A\n\u0000 ' + '😀'.repeat(80) } }]))[0].source.name;
+    expect(bounded.startsWith('A ')).toBe(true); expect([...bounded]).toHaveLength(64);
+    expect(restoreLibrary(serializeLibrary([{ ...saved, source: { ...saved.source, name: '\u0000' } }]))[0].source.name).toBeUndefined();
     for (const url of ['javascript:alert(1)', 'https://evil.test/palette-list/slso8', 'slso8', 'https://user@lospec.com/palette-list/slso8']) {
       const restored = restoreLibrary(serializeLibrary([{ ...saved, source: { kind: 'lospec', credit: 'Plain text', url } }]))[0];
       expect(restored.source).toEqual({ kind: 'custom', credit: 'Plain text' });

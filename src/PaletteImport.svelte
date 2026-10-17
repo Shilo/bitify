@@ -10,8 +10,8 @@
   import { normalizeColors, validateName } from './lib/palette-library.js';
   import { canonicalLospecUrl, looksLikeLospecReference } from './lib/palette-lospec-url.js';
   import { paintPaletteSwatch } from './lib/palette-preview.js';
-  import { isInternalDrag } from './lib/internal-drag.js';
   import { backdropDismiss } from './lib/dialog-dismiss.js';
+  import { isInternalDrag } from './lib/internal-drag.js';
 
   let { request = {}, onsave, ondelete, onreload, onuse, onclose } = $props();
   const initial = untrack(() => request);
@@ -39,6 +39,7 @@
   const edited = $derived(colors.length !== baseline.length || colors.some((color, i) => color !== baseline[i]));
   const lospecInput = $derived(looksLikeLospecReference(text));
   const sourceUrl = $derived(source?.kind === 'lospec' ? canonicalLospecUrl(source.url) : null);
+  const sourceName = $derived(source.name || initial.name || sourceUrl?.split('/').pop().replaceAll('-', ' ') || 'Lospec');
 
   $effect(() => {
     dialog.showModal();
@@ -207,7 +208,9 @@
 </script>
 
 {#snippet colorReview()}
-  <div class="palette-review-heading"><strong>{truncated ? total.toLocaleString() + ' colors found' : colors.length.toLocaleString() + (colors.length === 1 ? ' color' : ' colors')}</strong></div>
+  <div class="palette-review-heading"><strong>{truncated ? total.toLocaleString() + ' colors found' : colors.length.toLocaleString() + (colors.length === 1 ? ' color' : ' colors')}</strong>
+    {#if sourceUrl}<a class="palette-source-credit" href={sourceUrl} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">{sourceName}</a>{/if}
+  </div>
   {#if truncated}<p class="palette-editor-notice">This image has more than 4096 colors. Only the first 4096 are shown, and this draft cannot be saved.</p>
   {:else if colors.length > maxColors}<p class="palette-editor-notice">Remove {colors.length - maxColors} or more colors before saving.</p>{/if}
   <div class="palette-review-grid" aria-label="Palette colors">
@@ -240,7 +243,6 @@
     <div class="glass-modal__body palette-editor-body">
       <div class="palette-draft-review">
         {@render colorReview()}
-        {#if sourceUrl}<p class="palette-editor-hint palette-source-credit">From <a href={sourceUrl} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">Lospec</a>{source.credit ? ' · ' + source.credit : ''}</p>{/if}
         {#if edited}<div class="palette-editor-tools"><button class="btn glass-btn" disabled={!!busy} onclick={() => { colors = [...baseline]; selected = []; page = 0; resetFailure(); }}>Undo edits</button></div>{/if}
         {#if editingId && ondelete}
           <details class="palette-editor-details"><summary>More options</summary>

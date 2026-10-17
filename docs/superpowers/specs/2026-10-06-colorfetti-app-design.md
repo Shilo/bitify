@@ -76,6 +76,12 @@ canonical Lospec page survive library restoration. Arbitrary imported links neve
 become hrefs. Cancel/close/input ownership rejects late responses and retains the
 prior draft on failure. File/text imports remain available when the service fails.
 
+October 16 source display: one link, named for the published palette, sits to the
+right of the color count and wraps on narrow screens. No “From” or author label
+is shown. Bounded `source.name` preserves the published name independently of
+editing the local draft name. Old saved palettes fall back to available name/slug
+metadata. Creator attribution remains stored, as does the validated source URL.
+
 ## Output color inspection — October 14, 2026
 
 Palette mode offers Count output colors in image Preview and touch Image actions.
