@@ -1,8 +1,9 @@
 {
-  "surface": "Committed source versus independently built staged snapshot",
-  "head": "4983212633706b88145a59081657b920632cd514",
+  "surface": "Committed palette source versus tested archived snapshot",
+  "sourceRef": "4983212633706b88145a59081657b920632cd514",
   "checked": 152,
-  "differences": [
+  "textComparison": "CRLF/LF normalized; binary files compared byte for byte",
+  "lineEndingsOnly": [
     "src/App.svelte",
     "src/CanvasGrid.svelte",
     "src/Dock.svelte",
@@ -149,6 +150,8 @@
     "src/palette-settings-compact.css",
     "src/ui-consistency.css"
   ],
+  "differences": [],
+  "pass": true,
   "buildIndexSha256": "329d22dff9e720980049d9d736805f727308bd7bbe87523e856ca38478273d5f",
   "unitTests": {
     "passed": 949,

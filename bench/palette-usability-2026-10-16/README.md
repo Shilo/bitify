@@ -10,6 +10,9 @@ Authoritative final receipts:
 - `android-wall-reuse-results.json`: three final phone checks, same built index
   SHA256 `329d22dff9e72098…` as the final desktop receipt.
 - `codex-final-*.png`: actual final Codex Browser wall, draft and Preview captures.
+- `committed-source-receipt.json`: all 152 committed source files match the tested
+  archive after normalizing Windows text line endings; binary files match exactly.
+  Reproduce with `node bench/palette-usability-2026-10-16/verify-committed-source.mjs`.
 - `android/final-*.png`: final phone sheet, draft and Preview captures. Landscape
   screenshots have the compositor limitation described below.
 

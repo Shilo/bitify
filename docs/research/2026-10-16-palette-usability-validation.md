@@ -97,6 +97,11 @@ from this batch's commits and final build: the final tests use an archived stage
 palette snapshot at `.tmp/palette-usability-final/`. Receipts include build hashes.
 This validation does not approve the other task's unfinished behavior.
 
+All 152 source files in the feature commit match that tested snapshot. The first
+raw-byte audit reported Windows archive CRLF versus Git LF differences; the
+corrected reproducible check normalizes only text line endings and still requires
+byte-identical binary assets. It reports no source-content differences.
+
 Artist-controlled protection and all original mockups/research remain versioned
 and explicitly deferred. Auto Max colors is research-only by the user's decision;
 the public service contract does not establish a safely transferable selection
