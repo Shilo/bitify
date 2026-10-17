@@ -1,0 +1,105 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Auto palette continuity</title>
+<style>body{font:14px system-ui;background:#20262b;color:#fff;margin:12px}button{padding:8px}pre{white-space:pre-wrap;max-height:200px;overflow:auto}iframe{width:100%;height:720px;border:1px solid #666}</style>
+<h1>Auto palette continuity — actual built app</h1><button id="run">Run checks</button><pre id="report" role="status">Ready</pre>
+<iframe id="app" title="Colorfetti"></iframe>
+<script type="module">
+const app=document.querySelector('#app'), report=document.querySelector('#report');
+const params=new URLSearchParams(location.search),mode=params.get('mode')||'default';
+app.src='/app/?mode='+encodeURIComponent(mode);
+if(params.has('phone')){app.style.width='390px';app.style.height='650px';}
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const results=[];
+const checks=[], outputs={};
+let doc,win,phase='startup';
+function assert(ok,message){if(!ok)throw Error(message);}
+async function until(test,label){const end=performance.now()+20000;while(performance.now()<end){if(test())return;await sleep(20);}throw Error('Timeout '+label);}
+const art=()=>[...doc.querySelectorAll('.tile .art')];
+function select(name){const b=[...doc.querySelectorAll('.palette-choice')].find(b=>b.getAttribute('aria-label')===name);assert(b,'Missing palette '+name);b.click();}
+async function settle(){await sleep(500);let paints=win.__continuity.paints,since=performance.now();await until(()=>{if(paints!==win.__continuity.paints){paints=win.__continuity.paints;since=performance.now();}return performance.now()-since>400;},'settle');}
+async function rail(){if(!doc.querySelector('.palette-choice'))doc.querySelector('button[aria-label="Palette"]').click();await until(()=>doc.querySelector('.palette-choice'),'rail');}
+function hashes(){return art().map(a=>{const c=a.querySelector('canvas');if(!c)return null;let h=2166136261;for(const v of c.getContext('2d').getImageData(0,0,c.width,c.height).data)h=Math.imul(h^v,16777619);return h>>>0;});}
+async function watch(label,action,ms=700){
+  phase=label;const nodes=art(), old=nodes.map(a=>a.querySelector('canvas'));const initial=old.map(c=>c?.getBoundingClientRect());const summary={label,frames:0,missing:0,hidden:0,blank:0,replaced:0,removed:0,resized:0,pendingFrames:0,paints:0};
+  const observer=new win.MutationObserver(records=>{for(const r of records)for(const n of r.removedNodes)if(old.includes(n))summary.removed++;});
+  for(const a of nodes)observer.observe(a,{childList:true});
+  let active=true;const before=win.__continuity.paints;
+  function sample(){if(!active)return;summary.frames++;if(doc.querySelector('.palette-source-status')?.textContent.includes('Updating'))summary.pendingFrames++;nodes.forEach((a,i)=>{const c=a.querySelector('canvas');if(!c){summary.missing++;return;}if(c!==old[i])summary.replaced++;
+    const rect=c.getBoundingClientRect(),style=win.getComputedStyle(c);if(!rect.width||!rect.height||style.visibility==='hidden'||Number(style.opacity)===0)summary.hidden++;
+    if(initial[i]&&(Math.abs(rect.width-initial[i].width)>1||Math.abs(rect.height-initial[i].height)>1))summary.resized++;
+    const bytes=c.getContext('2d').getImageData(0,0,c.width,c.height).data;let visible=false;for(let p=3;p<bytes.length;p+=4)if(bytes[p]){visible=true;break;}if(!visible)summary.blank++;
+  });win.requestAnimationFrame(sample);}
+  win.requestAnimationFrame(sample);await action();await sleep(ms);active=false;observer.disconnect();summary.paints=win.__continuity.paints-before;results.push(summary);report.textContent=JSON.stringify(results,null,2);
+}
+async function load(files,animated=false){const count=doc.querySelectorAll('.caption-preview').length,input=doc.querySelector('input[type=file][multiple]'),dt=new win.DataTransfer();for(const f of files)dt.items.add(f);input.files=dt.files;input.dispatchEvent(new win.Event('change',{bubbles:true}));await until(()=>doc.querySelectorAll('.caption-preview').length===count+files.length,'import');if(animated)await sleep(1800);else await settle();}
+async function fixture(name='continuity.png',alpha=255,width=64,height=64){const c=document.createElement('canvas');c.width=width;c.height=height;const ctx=c.getContext('2d'),im=ctx.createImageData(width,height);for(let p=0;p<width*height;p++)im.data.set([p%256,(p>>4)%256,(p*13)%256,alpha],p*4);ctx.putImageData(im,0,0);return new File([await new Promise(r=>c.toBlob(r))],name,{type:'image/png'});}
+async function clearWall(){for(const b of doc.querySelectorAll('.tile .acts button[aria-label^="Remove "]'))b.click();await until(()=>!doc.querySelector('.caption-preview'),'clear wall');await settle();await rail();}
+async function setting(key){if(!doc.querySelector('.palette-settings-panel'))doc.querySelector('button[aria-label="Palette settings"]').click();await sleep(30);doc.querySelector(`.palette-setting-chip[aria-label^="${key}:"]`)?.click();await sleep(30);}
+async function cut(value){await setting('Opacity cut');const slider=doc.querySelector('[aria-label="Palette opacity cut"]');assert(slider,'Missing cutoff slider');slider.value=value;slider.dispatchEvent(new win.Event('input',{bubbles:true}));await rail();}
+function empty(){return art().every(a=>{const c=a.querySelector('canvas');if(!c)return true;const data=c.getContext('2d').getImageData(0,0,c.width,c.height).data;return !data.some((v,i)=>i%4===3&&v);});}
+async function identityTransitions(){
+  phase='source and opacity transitions';
+  await clearWall();const generation=win.__continuity.generations;
+  await load([await fixture('partial.png',128)]);await rail();
+  assert(win.__continuity.generations>generation,'New wall did not generate');assert(!empty(),'Partial-alpha source not visible');
+  await setting('Opacity');const cutButton=doc.querySelector('[data-setting="opacity"] button');cutButton.click();await sleep(50);await rail();await settle();
+  const partial=hashes();
+  await cut(200);await until(()=>doc.querySelector('[aria-label="Selected palette: Auto, 0 colors"]'),'resolved empty Auto');await until(empty,'empty preview clears');
+  select('PICO-8');await sleep(100);select('Auto');await sleep(200);assert(empty(),'Same empty request resurrected old artwork');
+  await cut(32);await until(()=>!empty(),'lower cut restores preview');await settle();assert(JSON.stringify(hashes())===JSON.stringify(partial),'Restored opacity cut changed eligible output');checks.push('source replacement, empty result, same empty return and cutoff recovery');
+  await setting('Opacity');doc.querySelector('[data-setting="opacity"] button:last-child').click();await rail();await settle();
+  const canvas=art()[0].querySelector('canvas'),bytes=canvas.getContext('2d').getImageData(0,0,canvas.width,canvas.height).data;
+  assert(bytes.every((v,i)=>i%4!==3||v===128),'Keep did not preserve alpha128');checks.push('Cut/Keep preserves original partial alpha');
+  await setting('Opacity');doc.querySelector('[data-setting="opacity"] button:first-child').click();await rail();await settle();
+  win.__continuity.failNextGeneration=true;await cut(33);
+  await until(()=>doc.querySelector('.palette-source-status')?.textContent.includes('Could not generate'),'injected generation failure');
+  const starts=win.__continuity.generations;select('Auto');
+  await until(()=>win.__continuity.generations>starts,'explicit same-source retry');await until(()=>!doc.querySelector('.palette-source-status'),'retry succeeds');await settle();assert(!empty(),'Retry lost completed artwork');checks.push('failed generation retries for the incomplete source key');
+  win.__continuity.failNextGeneration=true;await cut(34);await until(()=>doc.querySelector('.palette-source-status')?.textContent.includes('Could not generate'),'second injected failure');
+  const failedStarts=win.__continuity.generations;await cut(33);await until(()=>!doc.querySelector('.palette-source-status'),'return to previous successful request');assert(win.__continuity.generations===failedStarts,'Restoring a successful key regenerated');checks.push('restoring a successful request retires a different generation failure');
+  await clearWall();await load([await fixture('sampled.png',255,512,384)]);await rail();await settle();
+  const sampled=art()[0].querySelector('canvas');outputs.sampledDimensions=[sampled.width,sampled.height];
+  assert(sampled.width<512||sampled.height<384,'Large fixture did not exercise sampling at this viewport');
+  await watch('large sampled preset',async()=>select('PICO-8'),1200);await watch('large sampled Auto',async()=>select('Auto'),1800);
+  doc.querySelector('button[aria-label="Palette"]').click();await settle();
+  const dimensions=()=>art().map(a=>{const c=a.querySelector('canvas');return [c.width,c.height];});
+  outputs.viewerBefore={dimensions:dimensions(),hashes:hashes()};
+  doc.querySelector('.caption-preview').click();await until(()=>doc.querySelector('.image-viewer[open] .art canvas'),'viewer');await sleep(700);
+  doc.querySelector('[aria-label="Close preview"]').click();await until(()=>!doc.querySelector('.image-viewer[open]'),'viewer closed');await settle();
+  outputs.viewerAfter={dimensions:dimensions(),hashes:hashes()};
+  assert(JSON.stringify(outputs.viewerAfter.dimensions)===JSON.stringify(outputs.viewerBefore.dimensions),'Unchanged viewer return changed wall sampling dimensions');
+  assert(JSON.stringify(outputs.viewerAfter.hashes)===JSON.stringify(outputs.viewerBefore.hashes),'Unchanged viewer return changed wall output');checks.push('large sampled source and viewer return');
+}
+document.querySelector('#run').onclick=async e=>{e.target.disabled=true;try{
+  await until(()=>app.contentDocument?.querySelector('.art'),'app');doc=app.contentDocument;win=app.contentWindow;
+  doc.querySelector('.help[open] button[aria-label="Close"]')?.click();await settle();await rail();
+  await watch('demo first Auto',async()=>select('Auto'));
+  await settle();const demo=hashes();outputs.demo=demo;
+  for(let i=0;i<4;i++){await watch('demo PICO '+i,async()=>select('PICO-8'));await watch('demo Auto '+i,async()=>select('Auto'));assert(JSON.stringify(hashes())===JSON.stringify(demo),'Auto demo bytes changed');}
+  await load([await fixture()]);await rail();await settle();
+  await watch('still first Auto',async()=>select('Auto'));await settle();const expected=hashes();outputs.still=expected;
+  const presets=[...doc.querySelectorAll('.palette-choice')].map(b=>b.getAttribute('aria-label')).filter(n=>n!=='Auto');
+  for(const name of presets){await watch('still '+name,async()=>select(name),450);await watch('still Auto after '+name,async()=>select('Auto'),700);assert(JSON.stringify(hashes())===JSON.stringify(expected),'Auto still bytes changed after '+name);}
+  await watch('rapid switches',async()=>{for(let i=0;i<12;i++){select(i%2?'Auto':'PICO-8');await sleep(12);}},1200);assert(JSON.stringify(hashes())===JSON.stringify(expected),'Rapid final Auto output changed');
+  await rail();
+  doc.querySelector('.palette-family-tabs button:last-child').click();await until(()=>doc.querySelector('.palette-choice[aria-label="Glow"]'),'1-bit choices');
+  const pairs=[...doc.querySelectorAll('.palette-choice')].map(b=>b.getAttribute('aria-label'));
+  doc.querySelector('.palette-family-tabs button:first-child').click();await until(()=>doc.querySelector('.palette-choice[aria-label="Auto"]'),'Palette family');await settle();
+  for(const name of pairs){
+    await watch('1-bit '+name,async()=>{doc.querySelector('.palette-family-tabs button:last-child').click();await until(()=>doc.querySelector('.palette-choice[aria-label="'+name+'"]'),'1-bit family');select(name);},450);
+    await watch('Auto from 1-bit '+name,async()=>{doc.querySelector('.palette-family-tabs button:first-child').click();await until(()=>doc.querySelector('.palette-choice[aria-label="Auto"]'),'Palette family');select('Auto');});
+    assert(JSON.stringify(hashes())===JSON.stringify(expected),'Auto output changed after 1-bit '+name);
+  }
+  doc.querySelector('button[aria-label="Palette"]').click();await sleep(150);
+  await watch('Original on',async()=>doc.querySelector('button.view-toggle').click());
+  await watch('Original off',async()=>doc.querySelector('button.view-toggle').click());await rail();
+  const clip=await(await fetch('/clip.gif')).blob();await load([new File([clip],'walk.gif',{type:'image/gif'})],true);await rail();await sleep(1800);
+  for(let i=0;i<3;i++){await watch('mixed GIF preset '+i,async()=>select('PICO-8'));await watch('mixed GIF Auto '+i,async()=>select('Auto'));}
+  if(win.__continuity.generations!==undefined)await identityTransitions();
+  assert(win.__continuity.errors.filter(e=>!e.startsWith('ResizeObserver loop')).length===0,'App errors: '+win.__continuity.errors.join('; '));
+  const failures=results.filter(r=>r.missing||r.hidden||r.blank||r.removed||r.replaced);assert(!failures.length,'Continuity failures: '+failures.map(r=>r.label).join(', '));
+  const restarts=results.filter(r=>(r.label.startsWith('demo Auto')||r.label.startsWith('still Auto after')||r.label==='large sampled Auto')&&(r.paints!==1||r.pendingFrames||r.resized));
+  assert(!restarts.length,'Unchanged Auto restarts: '+restarts.map(r=>r.label).join(', '));
+  report.textContent='PASS\n'+JSON.stringify(results,null,2);
+}catch(error){report.textContent='FAIL '+phase+': '+error.message+'\n'+JSON.stringify(results,null,2);}finally{await fetch('/report',{method:'POST',body:JSON.stringify({status:report.textContent.split('\n')[0],mode,phone:params.has('phone'),outputs,checks,results,errors:win?.__continuity.errors})});}};
+</script></html>

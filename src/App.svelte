@@ -238,6 +238,12 @@
     const request = generatedRequest;
     generationRetry;
     if (family !== 'full-palette' || !request?.assets.length) { generatedBusy = false; return; }
+    // Re-entering Auto with the same immutable sources already has its result.
+    // Republishing a cached result would replace the palette identity and restart
+    // every tile's conversion (and optional subset/Cleanup preparation) twice.
+    if (untrack(() => generatedResult?.key) === request.key) {
+      generatedBusy = false; generatedError = false; return;
+    }
     const sourceLabel = items.length ? 'Your images' : 'Example image';
     const controller = new AbortController();
     generatedBusy = true; generatedError = false;
