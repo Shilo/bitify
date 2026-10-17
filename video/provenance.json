@@ -31,6 +31,56 @@
       "file": "assets/platformer.png",
       "license": "CC0",
       "changes": "Crop removes promotional footer; screenshots show actual Colorfetti conversions."
+    },
+    {
+      "pack": "Tiny Town 1.1",
+      "creator": "Kenney",
+      "page": "https://kenney.nl/assets/tiny-town",
+      "source": "Sample.png",
+      "crop": {
+        "left": 0,
+        "top": 0,
+        "width": 400,
+        "height": 400
+      },
+      "file": "assets/village.png",
+      "license": "CC0",
+      "changes": "Distinct, non-overlapping crop for mobile; no promotional footer."
+    },
+    {
+      "pack": "Pixel Platformer 1.2",
+      "creator": "Kenney",
+      "page": "https://kenney.nl/assets/pixel-platformer",
+      "source": "SampleB.png",
+      "crop": {
+        "left": 400,
+        "top": 0,
+        "width": 440,
+        "height": 440
+      },
+      "file": "assets/adventure.png",
+      "license": "CC0",
+      "changes": "Second sample scene for mobile; promotional footer excluded."
+    },
+    {
+      "pack": "Smoke Particles",
+      "creator": "Kenney",
+      "page": "https://kenney.nl/assets/smoke-particles",
+      "download": "https://kenney.nl/media/pages/assets/smoke-particles/23249a0d35-1677695171/kenney_smoke-particles.zip",
+      "source": "PNG/Flash/flash02.png",
+      "file": "assets/spark.png",
+      "license": "CC0",
+      "changes": "Exact original PNG bytes; source opacity retained."
+    },
+    {
+      "pack": "Smoke Particles",
+      "creator": "Kenney",
+      "page": "https://kenney.nl/assets/smoke-particles",
+      "download": "https://kenney.nl/media/pages/assets/smoke-particles/23249a0d35-1677695171/kenney_smoke-particles.zip",
+      "source": "PNG/White puff/whitePuff00.png",
+      "file": "assets/puff.png",
+      "license": "CC0",
+      "changes": "Exact original PNG bytes; source opacity retained."
     }
   ],
   "font": {
@@ -54,8 +104,8 @@
     "ignored": true,
     "restoreFrom": "../rg-backpack-planner/showcase-video/public/music.mp3 (sibling repository, if available)",
     "excerptStartSeconds": 0,
-    "durationSeconds": 30,
-    "edits": "First 30 seconds of supplied 30.589-second file; normalized to subtle background level, 0.8-second fade in and 2.5-second fade out."
+    "durationSeconds": 53,
+    "edits": "Two excerpts of the supplied 30.589-second file with a two-second triangular crossfade, trimmed to 53 seconds, normalized to subtle background level, faded in 0.8 seconds and out 2.5 seconds."
   },
   "comparison": {
     "original": "assets/town.png",
@@ -69,15 +119,58 @@
     "phoneCSS": "390x844, touch and mobile emulated",
     "devicePixelRatio": 2,
     "theme": "dark",
-    "desktopFeatureImages": ["assets/town.png", "assets/platformer.png"],
-    "desktopFeatureImageCount": 2,
-    "mobileImageCount": 1,
-    "comparisonImageCount": 1
+    "desktopFeatureImages": [
+      "assets/town.png",
+      "assets/platformer.png",
+      "assets/spark.png"
+    ],
+    "comparisonImageCount": 1,
+    "mobileFeatureImages": [
+      "assets/village.png",
+      "assets/adventure.png",
+      "assets/puff.png"
+    ],
+    "wallImageCounts": [
+      1,
+      2
+    ],
+    "wallSequence": [
+      1,
+      2,
+      1,
+      2,
+      1,
+      2,
+      1,
+      2,
+      1,
+      2
+    ],
+    "devicesUseDifferentArtwork": true
   },
   "archivedMusic": {
     "file": "assets/audio/wholesome-source.mp3",
     "metadata": "assets/audio/archive-wholesome.json",
     "ignored": true,
     "usedInCurrentExport": false
+  },
+  "paletteImport": {
+    "name": "SLSO8",
+    "source": "https://lospec.com/palette-list/slso8.json",
+    "file": "assets/slso8.json",
+    "retrieved": "2026-10-16",
+    "notes": "Archived public endpoint response for repeatable capture; the real app import validates and uses these colors."
+  },
+  "musicArrangement": {
+    "durationSeconds": 53,
+    "edits": "Two copies of the original 30.589-second supplied file, overlapped with a two-second triangular crossfade, trimmed to 53 seconds, normalized to -23 LUFS / -3 dBTP, faded in 0.8 seconds and out 2.5 seconds."
+  },
+  "approvedExport": {
+    "approved": "2026-10-16",
+    "durationSeconds": 53,
+    "bytes": 8912471,
+    "sha256": "f2e982f062f9e34ef04e43ca7f2e8a8e1cc82701499b2987cec2cb79c785da19",
+    "promotion": "Approved review MP4 and poster copied byte-for-byte to public assets.",
+    "frameTransport": "JPEG quality 98 (accepted review render)"
   }
 }

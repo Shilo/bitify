@@ -7,11 +7,27 @@ are kept locally and gitignored; their source metadata and restoration steps are
 It has no dependency on `.tmp/`, a Codex conversation, a remote design mockup, or
 the original creator's machine. The app and trailer have separate npm dependencies.
 
-## Current deliverables
+## Current approved cut (October 16)
+
+The editable source contains the user-approved **53-second, eleven-scene trailer**.
+Run `npm run review` inside `video/` to create the local review MP4, master and poster
+under `output/colorfetti-trailer/` without replacing the public files. The approved
+review MP4 and poster were promoted byte-for-byte to the tracked public assets.
+The trailer uses current app captures, a step-by-step narrative, a dedicated optional
+palette-import scene, alternating one/two-image walls, and different artwork on
+desktop and mobile. The final comparison deliberately uses the same Town crop.
+
+Review files: `colorfetti-trailer-review.mp4`, `colorfetti-trailer-review-master.mp4`,
+`colorfetti-trailer-review-poster.png`, plus a twelve-frame review storyboard JPG.
+They are local, ignored deliverables.
+`npm run export` intentionally writes the public assets from the current source;
+use it only when promoting a reviewed composition. No push is needed to review.
+
+## Public deliverables
 
 | File, relative to repository root | Purpose | Git |
 |---|---|---|
-| `public/colorfetti-trailer.mp4` | Website, GitHub and Discord; 1920×1080, 30 fps, 30 seconds, H.264/AAC; below **10,000,000 bytes** | Tracked |
+| `public/colorfetti-trailer.mp4` | Website, GitHub and Discord; 1920×1080, 30 fps, 53 seconds, H.264/AAC; below **10,000,000 bytes** | Tracked |
 | `public/colorfetti-trailer-poster.png` | Intro still linked near the top of the root README | Tracked |
 | `output/colorfetti-trailer/colorfetti-trailer-1080.mp4` | 1080 master, CRF 17 video / 192 kbps audio | Ignored; regenerate locally |
 | `video/.work/` | Generated HTML, enlarged control crops, mixed audio, QA stills, logs and reports | Ignored |
@@ -75,7 +91,10 @@ its CC BY 4.0 attribution; never silently use it as a fallback for missing new m
 The preview server prints a local URL and provides play/pause, audio, and a scrubber.
 Stop it with Ctrl+C. After editing source, rebuild (`npm run build`) and refresh.
 The composition is fixed at 1920×1080; the preview scales it to your window.
-The export renders each frame from time, rather than recording playback in real
+The accepted export uses JPEG quality 98 frame transport and was promoted
+without re-rendering so it matches the reviewed cut exactly. Future production
+re-renders use lossless PNG frame transport. Both output 1080p
+at 30 fps. The export renders each frame from time, rather than recording playback in real
 time, so preview speed cannot cause dropped export frames.
 
 To regenerate both variants and the poster, from `video/`:
@@ -84,21 +103,22 @@ To regenerate both variants and the poster, from `video/`:
 npm run export
 ```
 
-That runs `render` → `share` → `verify`. Rendering 900 PNG frames takes a few minutes.
+That runs `render` → `share` → `verify`. Rendering all 30 fps PNG frames takes a few minutes.
 It overwrites the ignored master, tracked compact MP4 and tracked poster. Review
 the changes before committing. Run individual steps when appropriate:
 
 | Command, inside `video/` | Action |
 |---|---|
 | `npm run build` | Generate `.work/film.html` and focus crops from source |
-| `npm run audio` | Prepare the 30-second normalized music bed |
-| `npm run qa` | Build and render ten stills without encoding video |
+| `npm run audio` | Prepare the timeline-length normalized music bed |
+| `npm run qa` | Build and render stills for every captured state without encoding video |
 | `npm run preview` | Build, prepare music and serve the interactive preview |
 | `npm run render` | Build, prepare music, render master and update poster |
 | `npm run share` | Two-pass compact encode from the existing master |
 | `npm run verify` | Probe both files, decode/compare and test native playback |
 | `npm run capture` | Replace saved app captures and comparison results; see below |
-| `npm run capture -- --desktop-only` | Refresh only the seven two-image desktop palette/settings captures |
+| `npm run review` | Build and export/verify local review variants without replacing public assets |
+| `npm run capture:legacy -- --desktop-only` | Archived partial refresh for the previous cut |
 
 Optional environment overrides: `BROWSER_EXECUTABLE` for an existing compatible
 Chromium binary, `FFMPEG_PATH`, `FFPROBE_PATH`, and `PORT` for the preview server.
@@ -112,8 +132,8 @@ Linux hosts may also need `npx playwright install-deps chromium`.
 
 | Source | Responsibility |
 |---|---|
-| `composition.html` | All headlines, bookend branding, device frames, layout and CSS |
-| `timeline.json` | Scene boundaries, capture order and per-control captions |
+| `composition.html` | Bookend/feature layout and CSS; build fills the scene placeholder |
+| `timeline.json` | Scene boundaries, headlines, descriptions, paired desktop/mobile captures, wall counts and control captions |
 | `runtime.js` | Time-based crossfades, drift and comparison reveals |
 | `assets/captures/*.png` | Frozen real app screenshots, desktop and touch mobile |
 | `assets/captures/metadata.json` | CSS panel bounds, viewport, DPR and captured image names for focus crops/QA |
@@ -127,7 +147,11 @@ Linux hosts may also need `npx playwright install-deps chromium`.
 | `scripts/audio.mjs` | Excerpt, level and fades |
 | `scripts/render.mjs` | 1080 render, QA frame times, master quality and poster selection |
 | `scripts/encode.mjs` | Compact bitrate, two-pass settings and strict size gate |
-| `scripts/capture.mjs` | Browser actions that recreate the real UI and result captures |
+| `scripts/capture-story.mjs` | Current storyboard capture actions and image-count assertions |
+| `scripts/capture.mjs` | Archived capture workflow for the previous 30-second cut |
+| `scripts/review.mjs` | Local-only full build/audio/layout/render/storyboard/encode/verify orchestration |
+| `scripts/check-layout.mjs` | Safe text bounds, caption clearance and reverse scrubbing checks |
+| `scripts/storyboard.mjs` | Twelve-frame review contact sheet |
 | `scripts/verify.mjs` | Technical validation and generated production report |
 | `scripts/project.mjs` | Portable paths, tool overrides, export names and MP4 metadata |
 | `editorial-review.json` | Copy/image decisions and rejected ambiguous claims |
@@ -135,17 +159,16 @@ Linux hosts may also need `npx playwright install-deps chromium`.
 | `baseline-manifest.json` | Historical technical evidence for the approved export, using its original filenames |
 | `CREDITS.txt`, `licenses/`, `provenance.json` | Attribution, redistribution terms, source URLs and edits |
 
-In the composition, `data-scene` is a zero-based scene index. `data-screen`,
-`data-focus` and `data-caption` use that same index. `data-asset` resolves through
-the map in `build.mjs`. The runtime and verifier currently assume **seven scenes,
-30 seconds, 30 fps**. Changing duration/scene count requires updating the runtime,
-build validation, renderer frame loop/audio duration/QA times, encoder bitrate and
-verifier expectations together. Boundaries can move within the existing 30 seconds.
-All sample captures in a scene receive equal time; the runtime eases between them
-over 260 ms. Scene transitions take 500 ms. Do not add CSS animations whose state
-depends on elapsed wall-clock time; `renderFrame(t)` must remain deterministic.
+Scene count and duration come from `timeline.json`; `project.mjs` shares duration,
+frame rate and frame count with audio/render/encode/verify. Build checks continuous
+scenes (up to one minute), paired frame/caption lengths, alternating wall counts and
+disjoint desktop/mobile artwork names. Captures verify actual wall image names.
+`data-scene` is a zero-based index. Build generates sections from the timeline into
+the composition placeholder. Runtime crossfades captures over 240 ms and scenes
+over 420 ms. `renderFrame(t)` is deterministic, including when scrubbing backward.
+Do not add animations driven by elapsed wall-clock time.
 
-## Approved editorial direction
+## Current editorial direction
 
 Professional, concise, dark neutral surfaces with Colorfetti's five confetti colors
 and actual SVG brand mark (`src/assets/logo-dark.svg`). Screens are real app captures;
@@ -158,18 +181,28 @@ screen rectangle. Do not round or crop the screenshot, use `object-fit: cover`,
 or force the outer frame to the screenshot's aspect ratio: the border and padding
 would change the available screen proportions and cut off the app UI.
 
-Intro and conclusion use empty app states, title, approved slogan, website and repository,
+Intro and conclusion use populated app walls, title, approved slogan, website and repository,
 with a mirrored closing composition that uses the surrounding background space.
 
-| Time | Headline / focus | Visible material |
+| Time | Headline / focus | Images per device |
 |---|---|---|
-| 0–3 s | Colorfetti + slogan + website + repository | Empty desktop and phone app |
-| 3–7 s | Choose a palette. | Desktop wall with Tiny Town and Pixel Platformer together: Auto → ENDESGA 32 → PICO-8 |
-| 7–12 s | Fine-tune your palette. | Same two-image desktop wall: Max colors All → 16 → 8, then Cleanup On; phone inset stays single-image |
-| 12–16 s | Explore two-color looks. | Phone/platform scene: Mono → Game Boy → Rose |
-| 16–21 s | Tune the 1-bit effect. | Phone: threshold Auto → 140, pattern matrix 4 → 8 |
-| 21–26 s | Compare the results. | Same town source: original / PICO-8 with 8 colors and Cleanup On / Mono + Solid |
-| 26–30 s | Colorfetti + slogan + website + repository | Empty desktop and phone; no music-credit footer |
+| 0–3 s | Colorfetti and slogan; loaded artwork on both devices | 1 |
+| 3–8 s | Choose a palette: Auto, Mulfok 32, ENDESGA 8, Black & White | 2 |
+| 8–14 s | Or import your own: Lospec link, review, save/apply | 1 |
+| 14–20 s | Fine-tune the colors: Max colors All → 8, Cleanup On | 2 |
+| 20–25 s | Blend colors with dithering: Off → 4×4 → strength 80% | 1 |
+| 25–30 s | Keep soft transparency: Cut → Keep, actual partial-alpha PNGs | 2 |
+| 30–35 s | Make a palette from results: count → Reuse → saved palette | 1 |
+| 35–40 s | Explore two-color looks: Mono → Game Boy → Rose | 2 |
+| 40–45 s | Tune the 1-bit effect: threshold and matrix | 1 |
+| 45–50 s | Preview zoom/pan/compare, then identical-source result triptych | Preview / comparison |
+| 50–53 s | Colorfetti, slogan and both URLs | 2 |
+
+Desktop uses Town/Platformer; mobile uses Village/Adventure, two distinct crops.
+Opacity uses Spark + Town on desktop and Puff + Village on mobile. Intro and
+conclusion are populated. The two-device wall counts alternate together; different
+artwork on each device is asserted in build. Final result cards intentionally
+compare the same source and are not a wall or a device pair.
 
 Use the exact slogan: “Throw your pixels a palette party. Recolor images and
 animations.” Website: `shilo.github.io/colorfetti`.
@@ -177,18 +210,14 @@ Place `github.com/Shilo/colorfetti` below it on both bookends, in smaller muted
 type. The website remains the primary yellow call to action; both URLs omit the
 scheme for readability and map to their HTTPS addresses.
 
-Keep the user-approved constraints: show desktop **and** mobile; focus on palettes,
-1-bit palettes, max colors, cleanup, and 1-bit settings. Do not add dedicated
-importing, dropping artwork, saving, or privacy slides. “A new character” was
-rejected because the image is a scene. Do not use “Torch / Bayer” as the final
-comparison: it must be the actual Mono + Solid black-and-white result, labeled
-“Black & white”. Bayer is appropriate in the settings demonstration only.
-Cleanup can remove details; avoid claims that it always improves the image.
-Compare identical crops, with identical scaling and no misleading retouching.
-The desktop palette and palette-settings examples must show exactly two wall images
-at once: `town.png` and `platformer.png`. Mobile examples and phone insets must
-show one image only. Empty bookends remain empty, and the result comparison keeps
-one identical Town crop across its three treatments.
+Keep desktop **and** mobile, with complete rectangular screenshots in the phone
+frames. The October 16 request supersedes the previous empty-bookend and
+two-desktop/one-phone rules: both devices now alternate one and two loaded images.
+The user also authorized a dedicated palette-import scene. Import is optional;
+start with Auto/presets to avoid suggesting it is required. Retain the final
+Mono + Solid black-and-white comparison, not Torch/Bayer. Cleanup can remove
+intentional details; Keep preserves PNG partial opacity, not GIF partial opacity.
+No dedicated artwork-import, saving or privacy slide is needed.
 
 ## Refreshing app screens
 
@@ -202,27 +231,21 @@ npm --prefix video run capture
 npm --prefix video run qa
 ```
 
-The capture script starts a temporary static server, uses desktop 1280×720 and
-touch phone 390×844 at DPR 2, closes first-visit Help, imports the tracked artwork,
-and drives the real palette/style controls. It replaces the PNGs, metadata, and
-comparison outputs under `assets/`. It serves the local Schibsted font instead of
-relying on Google Fonts, and uses Node fetch to fulfill local browser requests.
-Selectors may need updating after app UI changes; read the script before a refresh.
+The current capture script starts a temporary static server, uses desktop
+1280×720 and touch phone 390×844 at DPR 2, supplies the local font, imports tracked
+artwork, and drives the real controls. The archived SLSO8 endpoint response in
+`assets/slso8.json` makes the real Lospec import repeatable offline; it does not
+replace the app parser or invent colors. Every capture verifies wall filenames
+and records a CSS focus rectangle. `STORY_SCENES` can select comma-separated
+scene prefixes for a partial recapture (intro, choose, import, recolor, dither,
+opacity, reuse, onebit, style, inspect, outro). Comparison outputs refresh in
+every capture run. Metadata checkpoints retain other captures.
 
-Desktop feature captures import Town and Platformer together. The comparison uses
-a separate single-Town context; mobile contexts import just one source. The capture
-script checks each wall's image count before saving it and records image names in
-metadata. To preserve frozen mobile/bookend/comparison assets while refreshing only
-the desktop feature shots, use `npm --prefix video run capture -- --desktop-only`
-from the root after building the capture app. This partial mode merges updated
-desktop metadata with the existing tracked metadata.
-
-Capture pitfalls: blur controls and move the pointer away before screenshots to
-hide tooltips. Panel rectangles are CSS pixels; multiply by recorded DPR when
-cropping. The full-resolution comparison result is read from the **visible enlarged
-viewer canvas**, not the smaller wall preview; closing that viewer closes the Dock
-panel too. Reopen panels before subsequent actions. Avoid the Vite dev server for
-capture: a built static app avoids optimizer stalls and stale CSS.
+Blur controls and move the pointer away before screenshots to hide tooltips.
+Focus rectangles use CSS pixels; build multiplies by DPR. Full-resolution
+comparison results come from the visible enlarged viewer canvas. A built static
+app avoids optimizer stalls/stale CSS. The archived seven-scene capture helper
+is available as `npm run capture:legacy`; it is not the current storyboard.
 
 After intentionally changing assets, regenerate `source-manifest.json` using
 `node scripts/source-manifest.mjs`, then rebuild, visually inspect and export. The
@@ -237,20 +260,23 @@ type, overlapping device frames, readable settings, clean transitions, music fad
 and both bookend URLs. There must be no music-credit overlay. Listen with headphones
 as well as speakers.
 
-`verify` checks 1920×1080 H.264/yuv420p, 900 frames at 30 fps, AAC stereo at 48 kHz,
+`verify` checks 1920×1080 H.264/yuv420p, the timeline frame count at 30 fps, AAC stereo at 48 kHz,
 duration within 0.1 seconds, MP4 fast-start (`moov` before `mdat`), **strictly less
 than 10,000,000 bytes**, full decoded SSIM ≥ 0.99 against master, and advancing native
 Chromium playback. It extracts encoded QA frames and writes
 `.work/qa/production-manifest.json`. It needs the locally generated master and
 `.work/qa/render.json`; use `export` on a fresh checkout first.
 
-The compact uses two-pass 2200 kbps H.264 and 128 kbps AAC. If duration/content changes
+The compact uses two-pass H.264 and 128 kbps AAC, budgeting video bitrate from
+the timeline duration for approximately 8.8 MB (maximum 2200 kbps). If duration/content changes
 push it over the limit, lower video bitrate and run `share` and `verify` again.
 Keep headroom under the cap. The master uses CRF 17 and is not size-constrained.
-Audio takes the first 30 seconds of the supplied 30.589-second file, fades in over 0.8 seconds
-and out over the last 2.5 seconds, and applies loudness normalization targeting
-−23 LUFS / −3 dBTP. The current prepared WAV measures −23.41 LUFS integrated and
-−4.93 dBTP. Do not reuse the old track's measured loudness values for this track.
+The prior public cut used the first 30 seconds of the supplied 30.589-second file.
+The current approved 53-second trailer repeats that same source with a two-second triangular
+crossfade, trims to the timeline duration, fades in 0.8 seconds/out 2.5 seconds and
+normalizes to −23 LUFS / −3 dBTP. The prepared 53-second bed measures −23.49 LUFS integrated and −4.93 dBTP;
+its measurement is in `.work/qa/audio-measurement.json`. Do not reuse measurements
+from a different arrangement.
 
 For app integration changes, run `npm test` and `npm run build` from the root.
 Check Help on desktop and touch mobile, in light and dark themes. Verify the link
@@ -279,4 +305,4 @@ its license when redistributing the font. Full source URLs, crop coordinates and
 edits are in `provenance.json`. These third-party licenses apply independently of
 the application's license.
 
-Trailer video music from **[Cinematic Trailer Music - Collection](https://gregor-quendel.itch.io/cinematic-trailer-music-collection)** by [Gregor Quendel](https://gregor-quendel.itch.io/) (CC BY-NC 4.0). Edited excerpt, with volume adjustment and fades.
+Trailer video music from **[Cinematic Trailer Music - Collection](https://gregor-quendel.itch.io/cinematic-trailer-music-collection)** by [Gregor Quendel](https://gregor-quendel.itch.io/) (CC BY-NC 4.0). Repeated excerpts, with volume adjustment, crossfade and fades.

@@ -10,8 +10,10 @@
     "render": "npm run build && npm run audio && node scripts/render.mjs",
     "share": "node scripts/encode.mjs",
     "verify": "node scripts/verify.mjs",
-    "capture": "node scripts/capture.mjs",
-    "export": "npm run render && npm run share && npm run verify"
+    "capture": "node scripts/capture-story.mjs",
+    "export": "npm run render && npm run share && npm run verify",
+    "capture:legacy": "node scripts/capture.mjs",
+    "review": "node scripts/review.mjs"
   },
   "devDependencies": {
     "playwright": "1.62.1",

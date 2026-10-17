@@ -12,6 +12,6 @@
   "ignored": true,
   "restoreFrom": "../rg-backpack-planner/showcase-video/public/music.mp3 (sibling repository, if available)",
   "excerptStartSeconds": 0,
-  "durationSeconds": 30,
-  "edits": "First 30 seconds of supplied 30.589-second file; normalized to subtle background level, 0.8-second fade in and 2.5-second fade out."
+  "durationSeconds": 53,
+  "edits": "Two excerpts of the supplied 30.589-second file with a two-second triangular crossfade, trimmed to 53 seconds, normalized to subtle background level, faded in 0.8 seconds and out 2.5 seconds."
 }

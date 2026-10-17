@@ -1,5 +1,10 @@
 [
   {
+    "path": "assets/adventure.png",
+    "bytes": 8683,
+    "sha256": "98cee0ca69835b97e7603142863f857822e778c76de54add2d07aaa98787d5b6"
+  },
+  {
     "path": "assets/audio/archive-wholesome.json",
     "encoding": "UTF-8, LF canonical line endings",
     "bytes": 655,
@@ -8,8 +13,48 @@
   {
     "path": "assets/audio/source.json",
     "encoding": "UTF-8, LF canonical line endings",
-    "bytes": 937,
-    "sha256": "c69ea5cc61e0b6bee5702e3017116cc6c271c6cc84f8208467380b03d97cc127"
+    "bytes": 997,
+    "sha256": "63396f849235918b48738fd8f98a3bcb66d90fe87bc482fd774552caf89ed350"
+  },
+  {
+    "path": "assets/captures/choose-desktop-auto.png",
+    "bytes": 356492,
+    "sha256": "f57158e63e68efc267038ce8a37e6f507f5fae6ddc0e1848db53d5d8da4f0823"
+  },
+  {
+    "path": "assets/captures/choose-desktop-edg8.png",
+    "bytes": 299916,
+    "sha256": "489cf9e51e76fcfb5548a41927e275c189e47142b1d7d73f347772974f5ae9fb"
+  },
+  {
+    "path": "assets/captures/choose-desktop-mono.png",
+    "bytes": 254529,
+    "sha256": "7cd5fe812bb78fae3be5d8b04262c949ed844edc0dfe7bfe2d39d7902f1419fd"
+  },
+  {
+    "path": "assets/captures/choose-desktop-mulfok.png",
+    "bytes": 322210,
+    "sha256": "797d93a7252a330970328259c37f293b58b3f743fd373cd30a0ffc98f404c12c"
+  },
+  {
+    "path": "assets/captures/choose-phone-auto.png",
+    "bytes": 286900,
+    "sha256": "a9f5ab247bd6a39b8bb00e00fe604ce31c1fc7b17bb507ca633a68f13a46267c"
+  },
+  {
+    "path": "assets/captures/choose-phone-edg8.png",
+    "bytes": 244665,
+    "sha256": "44e08889286527e76f078639a2bcc4007183a1dd02af21b909f40a785f92b4fe"
+  },
+  {
+    "path": "assets/captures/choose-phone-mono.png",
+    "bytes": 219968,
+    "sha256": "6163bd18d873253fcceed79813d17eb92be8b4e8e5d5485dc262c5f032a45d7d"
+  },
+  {
+    "path": "assets/captures/choose-phone-mulfok.png",
+    "bytes": 264001,
+    "sha256": "c86a11c68caf8e48b307f61e9d10d193e1f07353f96d35fa0dc423dbbc73993a"
   },
   {
     "path": "assets/captures/comparison-solid.png",
@@ -57,10 +102,170 @@
     "sha256": "746b894fc17a7cb43080574ad13bf7f38b2ec5f6dd02d213a632aacbbc7d52e9"
   },
   {
+    "path": "assets/captures/dither-desktop-off.png",
+    "bytes": 271410,
+    "sha256": "f335262f252631648922a31d2857be2459e7fdfe1505e8a5902aa0f0e6cc5e91"
+  },
+  {
+    "path": "assets/captures/dither-desktop-on.png",
+    "bytes": 307847,
+    "sha256": "033456a3f163e322bf288c6ef20147173ce03786faafac66524051a8a7471362"
+  },
+  {
+    "path": "assets/captures/dither-desktop-strength.png",
+    "bytes": 317690,
+    "sha256": "b79c8b017f9cebc114bebd098a9bec47b793c70760f3a42b16820aa330deb26a"
+  },
+  {
+    "path": "assets/captures/dither-phone-off.png",
+    "bytes": 173733,
+    "sha256": "5c641df50ace748a2a6a9bf4df39f52958417b6c5167f619392fcfc69ccedded"
+  },
+  {
+    "path": "assets/captures/dither-phone-on.png",
+    "bytes": 192597,
+    "sha256": "04fed09402a2e6b69d27e11d8d362e34c82d7cc3e46d584ed3b9370b40ad7110"
+  },
+  {
+    "path": "assets/captures/dither-phone-strength.png",
+    "bytes": 194542,
+    "sha256": "30a5cc507781894d0bd55b74be416c7fe37389abd077d04da81c1f84e8318e5c"
+  },
+  {
+    "path": "assets/captures/import-desktop-applied.png",
+    "bytes": 290060,
+    "sha256": "e8a5d6998081dcf03422361a4335f5a8e0735d15919a094b404e0d7b93be76aa"
+  },
+  {
+    "path": "assets/captures/import-desktop-link.png",
+    "bytes": 343113,
+    "sha256": "b507c0b57f47e8e9af120ef2594ab4481e737b1802c605c2559a85e953910e27"
+  },
+  {
+    "path": "assets/captures/import-desktop-review.png",
+    "bytes": 316173,
+    "sha256": "dcf0d806bad189c74f8303d724c089375baee713a7979bf27b4047812f05e372"
+  },
+  {
+    "path": "assets/captures/import-phone-applied.png",
+    "bytes": 183575,
+    "sha256": "a4e53a4c0b5534a239085c23ef40ee3384b201fe9aa26b92475c6bb0dd2968a6"
+  },
+  {
+    "path": "assets/captures/import-phone-link.png",
+    "bytes": 203522,
+    "sha256": "16b9b7e3a74aeb2df045b8290ca13e7925a8e0ce69b8318c847174a4c7d090af"
+  },
+  {
+    "path": "assets/captures/import-phone-review.png",
+    "bytes": 185041,
+    "sha256": "cb58a083528b15ee1df919252f3a862bdf6120549e5a52bf5a0928803c731bcd"
+  },
+  {
+    "path": "assets/captures/inspect-desktop-fit.png",
+    "bytes": 177974,
+    "sha256": "98a5aefd838ac751b3a991da145a1fb6a1a6cc07cbbc951847d0025579f371af"
+  },
+  {
+    "path": "assets/captures/inspect-desktop-original.png",
+    "bytes": 119467,
+    "sha256": "1e06e7a5c96149ee14639eed33610a640c3a214a2ab06f6d931b0c4b5cb71fe0"
+  },
+  {
+    "path": "assets/captures/inspect-desktop-zoom.png",
+    "bytes": 78529,
+    "sha256": "8b4a0ec35f16989023dab1163077aff3007acd27a747b94b18a1383b6c7c59e1"
+  },
+  {
+    "path": "assets/captures/inspect-phone-fit.png",
+    "bytes": 103589,
+    "sha256": "8c11388b1e2343a555cdda16256434fc0748dfec1006481c22a32dcb5fcce049"
+  },
+  {
+    "path": "assets/captures/inspect-phone-original.png",
+    "bytes": 50285,
+    "sha256": "f233bf886e68c28621c7caf44b15aa34c188b4227dc14dd4b90ae99c08dcbc6b"
+  },
+  {
+    "path": "assets/captures/inspect-phone-zoom.png",
+    "bytes": 51573,
+    "sha256": "a2c241069a7bd311a40ab2db15da8febc4b37c10ad7f5f6848f5d2c764d4bf81"
+  },
+  {
+    "path": "assets/captures/intro-desktop.png",
+    "bytes": 265973,
+    "sha256": "db5433baff919119d83724661e3da6654b11e2edcfc7e9aba1f707ec9ed39416"
+  },
+  {
+    "path": "assets/captures/intro-phone.png",
+    "bytes": 152127,
+    "sha256": "6ddd5e551769bd73175dad92f68303ff5f8d58cb4abfc02348f3321299b96f87"
+  },
+  {
     "path": "assets/captures/metadata.json",
     "encoding": "UTF-8, LF canonical line endings",
-    "bytes": 4420,
-    "sha256": "9b7e03dca2315459716d6cf69374919c6607650ea2175a0358d7cf89b55b2798"
+    "bytes": 25039,
+    "sha256": "35e8b17f1ba4b1196a590b84c18c7b9a786dbef7150ac808ca5406ddc4fca9f5"
+  },
+  {
+    "path": "assets/captures/onebit-desktop-gameboy.png",
+    "bytes": 261261,
+    "sha256": "911c3c7369f613c9ea7dbc53ad987019796da1916a1f98f09e45427f56fe7a01"
+  },
+  {
+    "path": "assets/captures/onebit-desktop-mono.png",
+    "bytes": 258355,
+    "sha256": "0825216d9b8c381e787826c55822ec7a22644d8a083decc0c83aad2846642dc9"
+  },
+  {
+    "path": "assets/captures/onebit-desktop-rose.png",
+    "bytes": 259168,
+    "sha256": "ecd35c96e3bacbb7891350e1c0ff6e39d944b2dedc04551a215261780acc167b"
+  },
+  {
+    "path": "assets/captures/onebit-phone-gameboy.png",
+    "bytes": 236412,
+    "sha256": "05063b43545c87144cf8eff9f3f835dc3119dc9422fe9a40ad5ddeec109f15c8"
+  },
+  {
+    "path": "assets/captures/onebit-phone-mono.png",
+    "bytes": 234122,
+    "sha256": "0442072414a092bba57117287969ac4f0664c6a9ea855b82a37b9a13a173cf3f"
+  },
+  {
+    "path": "assets/captures/onebit-phone-rose.png",
+    "bytes": 234151,
+    "sha256": "50f77b2c6330f8254fd4881a0368e1eeff22c14f39b6f428763da3b3fbc0d80c"
+  },
+  {
+    "path": "assets/captures/opacity-desktop-cut.png",
+    "bytes": 324803,
+    "sha256": "9e52ad3513cf4ba5f5851d9217cf4d23eccc8b7ad54fc2a3e543f5974dc10e96"
+  },
+  {
+    "path": "assets/captures/opacity-desktop-keep.png",
+    "bytes": 419796,
+    "sha256": "42c1b9b58c58853d2c4f09962aebb24809b76a025c499a1b8283cfc0e631669a"
+  },
+  {
+    "path": "assets/captures/opacity-phone-cut.png",
+    "bytes": 224873,
+    "sha256": "5aa742ab6e6521ba0d1ae136aad7ce2886d0e651f231a1b2d6fd4641f8cd7064"
+  },
+  {
+    "path": "assets/captures/opacity-phone-keep.png",
+    "bytes": 293674,
+    "sha256": "b7ede1f992a1b077cfa39d7ce92263e3548bcecf72f89f636a1f4deded756de9"
+  },
+  {
+    "path": "assets/captures/outro-desktop.png",
+    "bytes": 219276,
+    "sha256": "e67778f293e7d5b720da0b195f2779ef9ddc8814b4aad0919dee8f27f437edb8"
+  },
+  {
+    "path": "assets/captures/outro-phone.png",
+    "bytes": 207387,
+    "sha256": "f137ee6ace18d701f975ae2cde95e39d3d012f9d2b0617c49c1dea98a09272bf"
   },
   {
     "path": "assets/captures/phone-bayer-matrix-eight.png",
@@ -108,6 +313,96 @@
     "sha256": "ddd3c21d49cd4e782158372c08bbae015389a56927383c42adcf27d5125c6870"
   },
   {
+    "path": "assets/captures/recolor-desktop-all.png",
+    "bytes": 301920,
+    "sha256": "38bb982174540c56e38661e148faeb33289e7a4be99609d29ac7f1ddda3db75a"
+  },
+  {
+    "path": "assets/captures/recolor-desktop-cleanup.png",
+    "bytes": 281872,
+    "sha256": "7f7c1ee08ce84e352097eae2e3fe966580ff25758c3941f20afa403aab626684"
+  },
+  {
+    "path": "assets/captures/recolor-desktop-eight.png",
+    "bytes": 282068,
+    "sha256": "157dbbb81c1bdbff741b8781bf02216440c3418a21c9e52e8925725f2b06f779"
+  },
+  {
+    "path": "assets/captures/recolor-phone-all.png",
+    "bytes": 247139,
+    "sha256": "d3eda60c54b2d4d45e0ab2a4e3e450fe6d2d61f0fa17efbe77dc633637315c5c"
+  },
+  {
+    "path": "assets/captures/recolor-phone-cleanup.png",
+    "bytes": 229376,
+    "sha256": "2c0c466537ec1861f2fdae1b31745a6b70d3ed0b326bc5bf35201380f90aea9b"
+  },
+  {
+    "path": "assets/captures/recolor-phone-eight.png",
+    "bytes": 232253,
+    "sha256": "89a2687e013d2b60e2621c8bc220f475203574cbdf9e063df6c1f30f294b9d06"
+  },
+  {
+    "path": "assets/captures/reuse-desktop-count.png",
+    "bytes": 203970,
+    "sha256": "fb7d625bfd8c9637476d72829bd8217d47989719d463df1b2647e0c87fb30c70"
+  },
+  {
+    "path": "assets/captures/reuse-desktop-editor.png",
+    "bytes": 271329,
+    "sha256": "8643471f7e2a41628b37d106d97413f9dacb0793231e93b4c60f25f380db346a"
+  },
+  {
+    "path": "assets/captures/reuse-desktop-saved.png",
+    "bytes": 276501,
+    "sha256": "161d6c27d9dd15e292953277487f757f62e5676a8cd370d15e095efadf9f0f69"
+  },
+  {
+    "path": "assets/captures/reuse-phone-count.png",
+    "bytes": 151759,
+    "sha256": "73b0e96809c50a4bd880783e48ed788020d2a3caf238e9088c8314b64010a806"
+  },
+  {
+    "path": "assets/captures/reuse-phone-editor.png",
+    "bytes": 190131,
+    "sha256": "bc5adcda4e0a9c41c137473b69bfd0eb296cf131bc9a6417b518bb0d3995c991"
+  },
+  {
+    "path": "assets/captures/reuse-phone-saved.png",
+    "bytes": 182978,
+    "sha256": "eccf0ed406a8b322d5d426864cbe7f5d921a481f9e4435ddb9b6e1576841f9b9"
+  },
+  {
+    "path": "assets/captures/style-desktop-auto.png",
+    "bytes": 296906,
+    "sha256": "ba861f92c830dd0a90f40110d2b839ec1b107937709df83bf206a44098173626"
+  },
+  {
+    "path": "assets/captures/style-desktop-matrix.png",
+    "bytes": 302458,
+    "sha256": "4cdeea06853ee33562c5dca66372942355b048f600635cfc07e3c2643a65800f"
+  },
+  {
+    "path": "assets/captures/style-desktop-threshold.png",
+    "bytes": 296261,
+    "sha256": "06ac9737a7b0a9c2bd72f81c5f47d1e95d23092f7c2c36c13c22b8d181e9662d"
+  },
+  {
+    "path": "assets/captures/style-phone-auto.png",
+    "bytes": 188623,
+    "sha256": "91fed9103266c874fa80ec8e95b3fae5f1fdbda6565485acdb9e0ebf07b88da1"
+  },
+  {
+    "path": "assets/captures/style-phone-matrix.png",
+    "bytes": 185144,
+    "sha256": "4d7afbd9f25ea91fe7f96edeb34441fdf08ffce3825f4d6a16cc9cdecfe563b1"
+  },
+  {
+    "path": "assets/captures/style-phone-threshold.png",
+    "bytes": 188582,
+    "sha256": "1a4b0733bfc2e316318db4fff057ae73bb2f96f877d775fef4cde24c941433b1"
+  },
+  {
     "path": "assets/onebit-solid.png",
     "bytes": 18338,
     "sha256": "37a6c54d0f7f98d8be6cbbbf244ce3d8131d452c26bd3b9dbde03023c3e84f98"
@@ -123,14 +418,35 @@
     "sha256": "27324a94a14a4350ac86cf43b16fde96465d7f0c8a3d957d98c2b53b19b488ab"
   },
   {
+    "path": "assets/puff.png",
+    "bytes": 57599,
+    "sha256": "33f894c2279bee9f77874dbfa3c0e9f071a0ee5e1a7065dcc40196029d699f58"
+  },
+  {
     "path": "assets/schibsted-grotesk.ttf",
     "bytes": 176068,
     "sha256": "6ceeadf6be8e1fd7687011c7fa38ed0edd1abe967a0b73d97caec183552e823d"
   },
   {
+    "path": "assets/slso8.json",
+    "encoding": "UTF-8, LF canonical line endings",
+    "bytes": 189,
+    "sha256": "e953aae4ab2c0c152c680fcdbeaeae8ecdb32494e928b90663e59e85997994f9"
+  },
+  {
+    "path": "assets/spark.png",
+    "bytes": 100473,
+    "sha256": "8b739296535cd1607e2363cb9320b649d48659c0b4b701e00372a1626ad51edf"
+  },
+  {
     "path": "assets/town.png",
     "bytes": 72661,
     "sha256": "298ee1746842852110d6f21326cfcaf50d69d5101e03917259cff8fc4e293ea3"
+  },
+  {
+    "path": "assets/village.png",
+    "bytes": 61077,
+    "sha256": "ddbee5c5ef34e3157524b2399e9036a654681f9a7a70908d71ae9a4447f7c489"
   },
   {
     "path": "licenses/font-license.txt",
@@ -143,6 +459,12 @@
     "encoding": "UTF-8, LF canonical line endings",
     "bytes": 681,
     "sha256": "1686159ac69cbd0d344a497670346bb1c763770a1bda72aa52f32bd282da71f0"
+  },
+  {
+    "path": "licenses/kenney-smoke-particles-license.txt",
+    "encoding": "UTF-8, LF canonical line endings",
+    "bytes": 473,
+    "sha256": "2070f53570f285a213f6ca5e75c1ef75c7104e5530cb533b795a42597b29b055"
   },
   {
     "path": "licenses/kenney-tiny-town-license.txt",

@@ -282,5 +282,1217 @@
         "height": 126
       }
     ]
+  },
+  "intro-desktop": {
+    "imageNames": [
+      "town.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [],
+    "focusSelector": null
+  },
+  "intro-phone": {
+    "imageNames": [
+      "adventure.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [],
+    "focusSelector": null
+  },
+  "choose-desktop-auto": {
+    "imageNames": [
+      "town.png",
+      "platformer.png"
+    ],
+    "wallCount": 2,
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 260,
+        "y": 489,
+        "width": 760,
+        "height": 145
+      }
+    ],
+    "focusSelector": ".panel"
+  },
+  "choose-desktop-mulfok": {
+    "imageNames": [
+      "town.png",
+      "platformer.png"
+    ],
+    "wallCount": 2,
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 260,
+        "y": 489,
+        "width": 760,
+        "height": 145
+      }
+    ],
+    "focusSelector": ".panel"
+  },
+  "choose-desktop-edg8": {
+    "imageNames": [
+      "town.png",
+      "platformer.png"
+    ],
+    "wallCount": 2,
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 260,
+        "y": 489,
+        "width": 760,
+        "height": 145
+      }
+    ],
+    "focusSelector": ".panel"
+  },
+  "choose-desktop-mono": {
+    "imageNames": [
+      "town.png",
+      "platformer.png"
+    ],
+    "wallCount": 2,
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 260,
+        "y": 489,
+        "width": 760,
+        "height": 145
+      }
+    ],
+    "focusSelector": ".panel"
+  },
+  "choose-phone-auto": {
+    "imageNames": [
+      "village.png",
+      "adventure.png"
+    ],
+    "wallCount": 2,
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 12,
+        "y": 549,
+        "width": 366,
+        "height": 153
+      }
+    ],
+    "focusSelector": ".panel"
+  },
+  "choose-phone-mulfok": {
+    "imageNames": [
+      "village.png",
+      "adventure.png"
+    ],
+    "wallCount": 2,
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 12,
+        "y": 549,
+        "width": 366,
+        "height": 153
+      }
+    ],
+    "focusSelector": ".panel"
+  },
+  "choose-phone-edg8": {
+    "imageNames": [
+      "village.png",
+      "adventure.png"
+    ],
+    "wallCount": 2,
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 12,
+        "y": 549,
+        "width": 366,
+        "height": 153
+      }
+    ],
+    "focusSelector": ".panel"
+  },
+  "choose-phone-mono": {
+    "imageNames": [
+      "village.png",
+      "adventure.png"
+    ],
+    "wallCount": 2,
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 12,
+        "y": 549,
+        "width": 366,
+        "height": 153
+      }
+    ],
+    "focusSelector": ".panel"
+  },
+  "import-desktop-link": {
+    "imageNames": [
+      "town.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 385,
+        "y": 322.546875,
+        "width": 510,
+        "height": 183.5
+      }
+    ],
+    "focusSelector": ".palette-method-panel:not([hidden])"
+  },
+  "import-desktop-review": {
+    "imageNames": [
+      "town.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 385,
+        "y": 184.75,
+        "width": 510,
+        "height": 108
+      }
+    ],
+    "focusSelector": ".palette-draft-review"
+  },
+  "import-desktop-applied": {
+    "imageNames": [
+      "town.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 260,
+        "y": 489,
+        "width": 760,
+        "height": 145
+      }
+    ],
+    "focusSelector": ".panel"
+  },
+  "import-phone-link": {
+    "imageNames": [
+      "adventure.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 33,
+        "y": 368.796875,
+        "width": 324,
+        "height": 203
+      }
+    ],
+    "focusSelector": ".palette-method-panel:not([hidden])"
+  },
+  "import-phone-review": {
+    "imageNames": [
+      "adventure.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 33,
+        "y": 205,
+        "width": 324,
+        "height": 160
+      }
+    ],
+    "focusSelector": ".palette-draft-review"
+  },
+  "import-phone-applied": {
+    "imageNames": [
+      "adventure.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 12,
+        "y": 549,
+        "width": 366,
+        "height": 153
+      }
+    ],
+    "focusSelector": ".panel"
+  },
+  "recolor-desktop-all": {
+    "imageNames": [
+      "town.png",
+      "platformer.png"
+    ],
+    "wallCount": 2,
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 290,
+        "y": 419,
+        "width": 700,
+        "height": 150
+      }
+    ],
+    "focusSelector": "[data-setting=\"limit\"], [data-setting=\"matching\"], [data-setting=\"cleanup\"]"
+  },
+  "recolor-desktop-eight": {
+    "imageNames": [
+      "town.png",
+      "platformer.png"
+    ],
+    "wallCount": 2,
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 290,
+        "y": 419,
+        "width": 700,
+        "height": 46
+      }
+    ],
+    "focusSelector": "[data-setting=\"limit\"]"
+  },
+  "recolor-desktop-cleanup": {
+    "imageNames": [
+      "town.png",
+      "platformer.png"
+    ],
+    "wallCount": 2,
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 290,
+        "y": 525,
+        "width": 700,
+        "height": 44
+      }
+    ],
+    "focusSelector": "[data-setting=\"cleanup\"]"
+  },
+  "recolor-phone-all": {
+    "imageNames": [
+      "village.png",
+      "adventure.png"
+    ],
+    "wallCount": 2,
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 25,
+        "y": 639,
+        "width": 340,
+        "height": 50
+      }
+    ],
+    "focusSelector": "[data-setting=\"limit\"], [data-setting=\"matching\"], [data-setting=\"cleanup\"]"
+  },
+  "recolor-phone-eight": {
+    "imageNames": [
+      "village.png",
+      "adventure.png"
+    ],
+    "wallCount": 2,
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 25,
+        "y": 639,
+        "width": 340,
+        "height": 50
+      }
+    ],
+    "focusSelector": "[data-setting=\"limit\"]"
+  },
+  "recolor-phone-cleanup": {
+    "imageNames": [
+      "village.png",
+      "adventure.png"
+    ],
+    "wallCount": 2,
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 25,
+        "y": 639,
+        "width": 340,
+        "height": 50
+      }
+    ],
+    "focusSelector": "[data-setting=\"cleanup\"]"
+  },
+  "dither-desktop-off": {
+    "imageNames": [
+      "town.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 290,
+        "y": 577,
+        "width": 700,
+        "height": 44
+      }
+    ],
+    "detail": {
+      "x": 495.5,
+      "y": 8,
+      "width": 289,
+      "height": 289
+    },
+    "focusSelector": "[data-setting=\"dither\"]"
+  },
+  "dither-desktop-on": {
+    "imageNames": [
+      "town.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 290,
+        "y": 525,
+        "width": 700,
+        "height": 96
+      }
+    ],
+    "detail": {
+      "x": 521.5,
+      "y": 8,
+      "width": 237,
+      "height": 237
+    },
+    "focusSelector": "[data-setting=\"dither\"], [data-setting=\"strength\"]"
+  },
+  "dither-desktop-strength": {
+    "imageNames": [
+      "town.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 290,
+        "y": 577,
+        "width": 700,
+        "height": 44
+      }
+    ],
+    "detail": {
+      "x": 521.5,
+      "y": 8,
+      "width": 237,
+      "height": 237
+    },
+    "focusSelector": "[data-setting=\"strength\"]"
+  },
+  "dither-phone-off": {
+    "imageNames": [
+      "adventure.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 25,
+        "y": 639,
+        "width": 340,
+        "height": 50
+      }
+    ],
+    "detail": {
+      "x": 12,
+      "y": 66,
+      "width": 366,
+      "height": 366
+    },
+    "focusSelector": "[data-setting=\"dither\"]"
+  },
+  "dither-phone-on": {
+    "imageNames": [
+      "adventure.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 25,
+        "y": 639,
+        "width": 340,
+        "height": 50
+      }
+    ],
+    "detail": {
+      "x": 12,
+      "y": 66,
+      "width": 366,
+      "height": 366
+    },
+    "focusSelector": "[data-setting=\"dither\"], [data-setting=\"strength\"]"
+  },
+  "dither-phone-strength": {
+    "imageNames": [
+      "adventure.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 25,
+        "y": 639,
+        "width": 340,
+        "height": 50
+      }
+    ],
+    "detail": {
+      "x": 12,
+      "y": 66,
+      "width": 366,
+      "height": 366
+    },
+    "focusSelector": "[data-setting=\"strength\"]"
+  },
+  "opacity-desktop-cut": {
+    "imageNames": [
+      "spark.png",
+      "town.png"
+    ],
+    "wallCount": 2,
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 290,
+        "y": 525,
+        "width": 700,
+        "height": 44
+      }
+    ],
+    "detail": {
+      "x": 449,
+      "y": 8,
+      "width": 185,
+      "height": 185
+    },
+    "focusSelector": "[data-setting=\"opacity\"]"
+  },
+  "opacity-desktop-keep": {
+    "imageNames": [
+      "spark.png",
+      "town.png"
+    ],
+    "wallCount": 2,
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 290,
+        "y": 577,
+        "width": 700,
+        "height": 44
+      }
+    ],
+    "detail": {
+      "x": 397,
+      "y": 8,
+      "width": 237,
+      "height": 237
+    },
+    "focusSelector": "[data-setting=\"opacity\"]"
+  },
+  "opacity-phone-cut": {
+    "imageNames": [
+      "puff.png",
+      "village.png"
+    ],
+    "wallCount": 2,
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 25,
+        "y": 639,
+        "width": 340,
+        "height": 50
+      }
+    ],
+    "detail": {
+      "x": 93.5,
+      "y": 10,
+      "width": 203,
+      "height": 203
+    },
+    "focusSelector": "[data-setting=\"opacity\"]"
+  },
+  "opacity-phone-keep": {
+    "imageNames": [
+      "puff.png",
+      "village.png"
+    ],
+    "wallCount": 2,
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 25,
+        "y": 639,
+        "width": 340,
+        "height": 50
+      }
+    ],
+    "detail": {
+      "x": 93.5,
+      "y": 10,
+      "width": 203,
+      "height": 203
+    },
+    "focusSelector": "[data-setting=\"opacity\"]"
+  },
+  "reuse-desktop-count": {
+    "imageNames": [
+      "town.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 345.5,
+        "y": 605,
+        "width": 589,
+        "height": 27
+      }
+    ],
+    "focusSelector": ".tiles .tile .cap"
+  },
+  "reuse-desktop-editor": {
+    "imageNames": [
+      "town.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 385,
+        "y": 228.703125,
+        "width": 510,
+        "height": 83.59375
+      }
+    ],
+    "focusSelector": ".palette-draft-review"
+  },
+  "reuse-desktop-saved": {
+    "imageNames": [
+      "town.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 260,
+        "y": 489,
+        "width": 760,
+        "height": 145
+      }
+    ],
+    "focusSelector": ".panel"
+  },
+  "reuse-phone-count": {
+    "imageNames": [
+      "adventure.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 12,
+        "y": 515,
+        "width": 366,
+        "height": 52
+      }
+    ],
+    "focusSelector": ".tiles .tile .cap"
+  },
+  "reuse-phone-editor": {
+    "imageNames": [
+      "adventure.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 33,
+        "y": 248.203125,
+        "width": 324,
+        "height": 135.59375
+      }
+    ],
+    "focusSelector": ".palette-draft-review"
+  },
+  "reuse-phone-saved": {
+    "imageNames": [
+      "adventure.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 12,
+        "y": 549,
+        "width": 366,
+        "height": 153
+      }
+    ],
+    "focusSelector": ".panel"
+  },
+  "onebit-desktop-mono": {
+    "imageNames": [
+      "town.png",
+      "platformer.png"
+    ],
+    "wallCount": 2,
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 260,
+        "y": 489,
+        "width": 760,
+        "height": 145
+      }
+    ],
+    "focusSelector": ".panel"
+  },
+  "onebit-desktop-gameboy": {
+    "imageNames": [
+      "town.png",
+      "platformer.png"
+    ],
+    "wallCount": 2,
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 260,
+        "y": 489,
+        "width": 760,
+        "height": 145
+      }
+    ],
+    "focusSelector": ".panel"
+  },
+  "onebit-desktop-rose": {
+    "imageNames": [
+      "town.png",
+      "platformer.png"
+    ],
+    "wallCount": 2,
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 260,
+        "y": 489,
+        "width": 760,
+        "height": 145
+      }
+    ],
+    "focusSelector": ".panel"
+  },
+  "onebit-phone-mono": {
+    "imageNames": [
+      "village.png",
+      "adventure.png"
+    ],
+    "wallCount": 2,
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 12,
+        "y": 549,
+        "width": 366,
+        "height": 153
+      }
+    ],
+    "focusSelector": ".panel"
+  },
+  "onebit-phone-gameboy": {
+    "imageNames": [
+      "village.png",
+      "adventure.png"
+    ],
+    "wallCount": 2,
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 12,
+        "y": 549,
+        "width": 366,
+        "height": 153
+      }
+    ],
+    "focusSelector": ".panel"
+  },
+  "onebit-phone-rose": {
+    "imageNames": [
+      "village.png",
+      "adventure.png"
+    ],
+    "wallCount": 2,
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 12,
+        "y": 549,
+        "width": 366,
+        "height": 153
+      }
+    ],
+    "focusSelector": ".panel"
+  },
+  "style-desktop-auto": {
+    "imageNames": [
+      "town.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 275,
+        "y": 395,
+        "width": 730,
+        "height": 239
+      }
+    ],
+    "detail": {
+      "x": 475,
+      "y": 8,
+      "width": 330,
+      "height": 330
+    },
+    "focusSelector": ".style-panel"
+  },
+  "style-desktop-threshold": {
+    "imageNames": [
+      "town.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 275,
+        "y": 395,
+        "width": 730,
+        "height": 239
+      }
+    ],
+    "detail": {
+      "x": 475,
+      "y": 8,
+      "width": 330,
+      "height": 330
+    },
+    "focusSelector": ".style-panel"
+  },
+  "style-desktop-matrix": {
+    "imageNames": [
+      "town.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [
+      {
+        "x": 275,
+        "y": 395,
+        "width": 730,
+        "height": 239
+      }
+    ],
+    "detail": {
+      "x": 475,
+      "y": 8,
+      "width": 330,
+      "height": 330
+    },
+    "focusSelector": ".style-panel"
+  },
+  "style-phone-auto": {
+    "imageNames": [
+      "adventure.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 12,
+        "y": 576,
+        "width": 366,
+        "height": 126
+      }
+    ],
+    "detail": {
+      "x": 12,
+      "y": 68,
+      "width": 366,
+      "height": 366
+    },
+    "focusSelector": ".style-panel"
+  },
+  "style-phone-threshold": {
+    "imageNames": [
+      "adventure.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 12,
+        "y": 576,
+        "width": 366,
+        "height": 126
+      }
+    ],
+    "detail": {
+      "x": 12,
+      "y": 68,
+      "width": 366,
+      "height": 366
+    },
+    "focusSelector": ".style-panel"
+  },
+  "style-phone-matrix": {
+    "imageNames": [
+      "adventure.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [
+      {
+        "x": 12,
+        "y": 576,
+        "width": 366,
+        "height": 126
+      }
+    ],
+    "detail": {
+      "x": 12,
+      "y": 68,
+      "width": 366,
+      "height": 366
+    },
+    "focusSelector": ".style-panel"
+  },
+  "inspect-desktop-fit": {
+    "imageNames": [
+      "town.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [],
+    "focusSelector": null
+  },
+  "inspect-desktop-zoom": {
+    "imageNames": [
+      "town.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [],
+    "focusSelector": null
+  },
+  "inspect-desktop-original": {
+    "imageNames": [
+      "town.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [],
+    "focusSelector": null
+  },
+  "inspect-phone-fit": {
+    "imageNames": [
+      "adventure.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [],
+    "focusSelector": null
+  },
+  "inspect-phone-zoom": {
+    "imageNames": [
+      "adventure.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [],
+    "focusSelector": null
+  },
+  "inspect-phone-original": {
+    "imageNames": [
+      "adventure.png"
+    ],
+    "wallCount": 1,
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [],
+    "focusSelector": null
+  },
+  "outro-desktop": {
+    "imageNames": [
+      "town.png",
+      "platformer.png"
+    ],
+    "wallCount": 2,
+    "dpr": 2,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "panels": [],
+    "focusSelector": null
+  },
+  "outro-phone": {
+    "imageNames": [
+      "village.png",
+      "adventure.png"
+    ],
+    "wallCount": 2,
+    "dpr": 2,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "panels": [],
+    "focusSelector": null
   }
 }

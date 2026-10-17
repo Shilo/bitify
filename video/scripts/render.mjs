@@ -10,6 +10,7 @@ import {
   title,
   credit,
   launchBrowser,
+  shots, duration, fps, frameCount, review,
 } from "./project.mjs";
 
 const browser = await launchBrowser();
@@ -23,7 +24,7 @@ try {
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto(pathToFileURL(work + "/film.html").href);
   await page.evaluate(() => window.filmReady);
-  for (const t of [1.5, 4.8, 9.8, 11.3, 13, 15, 17, 20, 24, 28.5]) {
+  for (const t of [1.5, ...shots.flatMap(s => s.frames ? s.frames.map((_, i) => s.start + (i + 0.6) * (s.kind === "results" ? s.comparisonAfter : s.end - s.start) / s.frames.length) : [(s.start + s.end) / 2]), 49]) {
     await page.evaluate((t) => window.renderFrame(t), t);
     await page.screenshot({
       path: work + "/qa/frame-" + String(t).replace(".", "-") + ".png",
@@ -40,9 +41,9 @@ try {
       "-f",
       "image2pipe",
       "-vcodec",
-      "png",
+      review ? "mjpeg" : "png",
       "-framerate",
-      "30",
+      String(fps),
       "-i",
       "pipe:0",
       "-i",
@@ -62,7 +63,7 @@ try {
       "-threads",
       "4",
       "-r",
-      "30",
+      String(fps),
       "-c:a",
       "aac",
       "-b:a",
@@ -70,7 +71,7 @@ try {
       "-ar",
       "48000",
       "-t",
-      "30",
+      String(duration),
       "-movflags",
       "+faststart",
       "-color_range",
@@ -103,13 +104,14 @@ try {
     });
     const start = Date.now();
     try {
-      for (let frame = 0; frame < 900; frame++) {
+      for (let frame = 0; frame < frameCount; frame++) {
         const state = await page.evaluate(
           (t) => window.renderFrame(t),
-          frame / 30,
+          frame / fps,
         );
         const png = await page.screenshot({
-          type: "png",
+          type: review ? "jpeg" : "png",
+          ...(review ? { quality: 98 } : {}),
           animations: "disabled",
         });
         if (failed) throw Error("Encoder stopped: " + log.slice(-4000));
@@ -125,7 +127,7 @@ try {
           console.log(
             "Rendered " +
               frame +
-              "/900 · " +
+              "/" + frameCount + " · " +
               state.scene +
               " · " +
               Math.round((Date.now() - start) / 1000) +
@@ -146,9 +148,10 @@ try {
       work + "/qa/render.json",
       JSON.stringify(
         {
-          frames: 900,
-          fps: 30,
-          duration: 30,
+          frames: frameCount,
+          fps,
+          duration,
+          captureFormat: review ? "JPEG quality 98 (review)" : "PNG (production)",
           width: 1920,
           height: 1080,
           pageErrors: errors,

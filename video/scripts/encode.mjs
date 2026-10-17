@@ -1,5 +1,5 @@
 import { statSync } from "node:fs";
-import { master, share, work, encode, credit, title } from "./project.mjs";
+import { master, share, work, encode, credit, title, duration } from "./project.mjs";
 
 const base = [
   "-hide_banner",
@@ -15,7 +15,7 @@ const base = [
   "-threads",
   "4",
   "-b:v",
-  "2200k",
+  Math.min(2200, Math.floor((8_800_000 * 8 / duration - 128000) / 1000)) + "k",
   "-pix_fmt",
   "yuv420p",
   "-passlogfile",

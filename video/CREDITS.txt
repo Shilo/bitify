@@ -5,12 +5,14 @@ https://gregor-quendel.itch.io/cinematic-trailer-music-collection
 https://gregor-quendel.itch.io/
 Licensed under Creative Commons Attribution-NonCommercial 4.0
 https://creativecommons.org/licenses/by-nc/4.0/
-Changes: first 30 seconds of supplied music.mp3, normalized, fade in and fade out.
+Current approved 53-second cut: repeated source excerpts with a two-second crossfade, normalized, fade in/out.
+Previous 30-second cut: first 30 seconds of supplied music.mp3, normalized, fade in/out.
 Attribution: bottom of repository README; no on-screen music credit or music attribution in MP4 metadata.
 
-Artwork: Kenney — Tiny Town 1.1 and Pixel Platformer 1.2
+Artwork: Kenney — Tiny Town 1.1, Pixel Platformer 1.2 and Smoke Particles
 https://kenney.nl/assets/tiny-town
 https://kenney.nl/assets/pixel-platformer
+https://kenney.nl/assets/smoke-particles
 Creative Commons Zero (CC0): https://creativecommons.org/publicdomain/zero/1.0/
 Changes: cropped sample scenes to remove promotional footers; recolored using Colorfetti.
 
@@ -26,3 +28,5 @@ Music from Cinematic Trailer Music - Collection by Gregor Quendel, CC BY-NC 4.0 
 
 Previous soundtrack is retained locally only: assets/audio/wholesome-source.mp3.
 Its source and CC BY 4.0 attribution are preserved in assets/audio/archive-wholesome.json.
+
+Palette import demonstration: SLSO8 by Luis Miguel Maldonado — https://lospec.com/palette-list/slso8 . Public palette data archived for reproducible captures.

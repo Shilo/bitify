@@ -1,37 +1,11 @@
-import { existsSync } from "node:fs";
-import { assets, work, encode } from "./project.mjs";
-
-const source = assets + "/audio/music.mp3";
-if (!existsSync(source)) {
-  throw Error(
-    "Missing ignored local music source: " +
-      source +
-      ". See video/README.md for restoration instructions.",
-  );
-}
-
-await encode(
-  [
-    "-hide_banner",
-    "-loglevel",
-    "warning",
-    "-y",
-    "-ss",
-    "0",
-    "-i",
-    source,
-    "-t",
-    "30",
-    "-af",
-    "afade=t=in:d=0.8,afade=t=out:st=27.5:d=2.5,loudnorm=I=-23:TP=-3:LRA=7",
-    "-ar",
-    "48000",
-    "-ac",
-    "2",
-    "-c:a",
-    "pcm_s24le",
-    work + "/audio/music.wav",
-  ],
-  work + "/qa/audio.log",
-);
-console.log("Prepared 30-second music bed.");
+import { existsSync } from 'node:fs';
+import { assets, work, encode, duration, run, ffprobe } from './project.mjs';
+const source=assets+'/audio/music.mp3';
+if(!existsSync(source))throw Error('Missing local soundtrack; see video/README.md.');
+const {stdout}=await run(ffprobe,['-v','error','-show_entries','format=duration','-of','json',source],{windowsHide:true});
+const length=Number(JSON.parse(stdout).format.duration), overlap=2;
+if(duration>length*2-overlap)throw Error('Storyboard exceeds the two-excerpt music arrangement.');
+const bed=duration<=length?`[0:a]atrim=0:${duration},asetpts=PTS-STARTPTS[bed]`:`[0:a]atrim=0:${length},asetpts=PTS-STARTPTS[a];[1:a]atrim=0:${length},asetpts=PTS-STARTPTS[b];[a][b]acrossfade=d=${overlap}:c1=tri:c2=tri,atrim=0:${duration}[bed]`;
+const filter=bed+`;[bed]afade=t=in:d=0.8,afade=t=out:st=${duration-2.5}:d=2.5,loudnorm=I=-23:TP=-3:LRA=7[out]`;
+await encode(['-hide_banner','-loglevel','warning','-y','-i',source,...(duration>length?['-i',source]:[]),'-filter_complex',filter,'-map','[out]','-t',String(duration),'-ar','48000','-ac','2','-c:a','pcm_s24le',work+'/audio/music.wav'],work+'/qa/audio.log');
+console.log(`Prepared ${duration}-second music bed${duration>length?' with a two-second crossfade between repeated excerpts':''}.`);

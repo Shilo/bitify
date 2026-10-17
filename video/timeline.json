@@ -2,80 +2,242 @@
   {
     "start": 0,
     "end": 3,
-    "name": "Introduction"
+    "name": "Introduction",
+    "kind": "intro",
+    "wallCount": 1,
+    "desktop": "intro-desktop",
+    "phone": "intro-phone"
   },
   {
     "start": 3,
-    "end": 7,
-    "name": "Palettes",
+    "end": 8,
+    "name": "Choose a palette",
+    "kind": "feature",
+    "step": 1,
+    "wallCount": 2,
+    "headline": "Choose\na palette.",
+    "description": "Start with Auto or a built-in palette.",
     "frames": [
-      "desktop-palettes-auto",
-      "desktop-palettes-endesga",
-      "desktop-palettes-pico"
+      "choose-desktop-auto",
+      "choose-desktop-mulfok",
+      "choose-desktop-edg8",
+      "choose-desktop-mono"
+    ],
+    "phoneFrames": [
+      "choose-phone-auto",
+      "choose-phone-mulfok",
+      "choose-phone-edg8",
+      "choose-phone-mono"
     ],
     "captions": [
       "Auto · Colors from your artwork",
-      "ENDESGA 32 · Preset palette",
-      "PICO-8 · Preset palette"
+      "Mulfok 32 · 32-color preset",
+      "ENDESGA 8 · 8-color preset",
+      "Black & White · Two-color palette"
     ]
   },
   {
-    "start": 7,
-    "end": 12,
-    "name": "Palette settings",
+    "start": 8,
+    "end": 14,
+    "name": "Import your own",
+    "kind": "feature",
+    "step": 2,
+    "wallCount": 1,
+    "headline": "Or import\nyour own.",
+    "description": "Use an image, palette file, HEX colors or a Lospec link.",
     "frames": [
-      "desktop-settings-all",
-      "desktop-settings-sixteen",
-      "desktop-settings-eight",
-      "desktop-settings-cleanup"
+      "import-desktop-link",
+      "import-desktop-review",
+      "import-desktop-applied"
+    ],
+    "phoneFrames": [
+      "import-phone-link",
+      "import-phone-review",
+      "import-phone-applied"
+    ],
+    "captions": [
+      "Paste a Lospec link",
+      "Review the imported colors",
+      "Save the palette · Apply it to your artwork"
+    ]
+  },
+  {
+    "start": 14,
+    "end": 20,
+    "name": "Fine-tune the colors",
+    "kind": "feature",
+    "step": 3,
+    "wallCount": 2,
+    "headline": "Fine-tune\nthe colors.",
+    "description": "Set a color limit. Try Cleanup for isolated pixels.",
+    "frames": [
+      "recolor-desktop-all",
+      "recolor-desktop-eight",
+      "recolor-desktop-cleanup"
+    ],
+    "phoneFrames": [
+      "recolor-phone-all",
+      "recolor-phone-eight",
+      "recolor-phone-cleanup"
     ],
     "captions": [
       "Max colors · All",
-      "Max colors · 16",
-      "Max colors · 8",
+      "Max colors · 8 per image",
       "Cleanup · On"
     ]
   },
   {
-    "start": 12,
-    "end": 16,
-    "name": "1-bit palettes",
+    "start": 20,
+    "end": 25,
+    "name": "Blend palette colors",
+    "kind": "feature",
+    "step": 4,
+    "wallCount": 1,
+    "headline": "Blend colors\nwith dithering.",
+    "description": "Add a repeating pattern and adjust its strength.",
     "frames": [
-      "phone-pairs-mono",
-      "phone-pairs-gameboy",
-      "phone-pairs-rose"
+      "dither-desktop-off",
+      "dither-desktop-on",
+      "dither-desktop-strength"
+    ],
+    "phoneFrames": [
+      "dither-phone-off",
+      "dither-phone-on",
+      "dither-phone-strength"
     ],
     "captions": [
-      "Mono · Black & white",
+      "Dithering · Off",
+      "Dithering · 4 × 4 source pixels",
+      "Dither strength · 80%"
+    ]
+  },
+  {
+    "start": 25,
+    "end": 30,
+    "name": "Preserve transparency",
+    "kind": "feature",
+    "step": 5,
+    "wallCount": 2,
+    "headline": "Keep soft\ntransparency.",
+    "description": "Choose Keep to preserve the source opacity in PNGs.",
+    "frames": [
+      "opacity-desktop-cut",
+      "opacity-desktop-keep"
+    ],
+    "phoneFrames": [
+      "opacity-phone-cut",
+      "opacity-phone-keep"
+    ],
+    "captions": [
+      "Opacity · Cut",
+      "Opacity · Keep · Preserves partial transparency in PNGs"
+    ]
+  },
+  {
+    "start": 30,
+    "end": 35,
+    "name": "Reuse your colors",
+    "kind": "feature",
+    "step": 6,
+    "wallCount": 1,
+    "headline": "Make a palette\nfrom results.",
+    "description": "Reuse the colors in any converted image.",
+    "frames": [
+      "reuse-desktop-count",
+      "reuse-desktop-editor",
+      "reuse-desktop-saved"
+    ],
+    "phoneFrames": [
+      "reuse-phone-count",
+      "reuse-phone-editor",
+      "reuse-phone-saved"
+    ],
+    "captions": [
+      "See the output color count",
+      "Reuse colors · Open an editable palette",
+      "Save your colors as a new palette"
+    ]
+  },
+  {
+    "start": 35,
+    "end": 40,
+    "name": "Explore 1-bit",
+    "kind": "feature",
+    "step": 7,
+    "wallCount": 2,
+    "headline": "Explore\ntwo-color looks.",
+    "description": "Switch to 1-bit for a different kind of recolor.",
+    "frames": [
+      "onebit-desktop-mono",
+      "onebit-desktop-gameboy",
+      "onebit-desktop-rose"
+    ],
+    "phoneFrames": [
+      "onebit-phone-mono",
+      "onebit-phone-gameboy",
+      "onebit-phone-rose"
+    ],
+    "captions": [
+      "Switch to 1-bit · Mono",
       "Game Boy · Classic green",
       "Rose · Pink & burgundy"
     ]
   },
   {
-    "start": 16,
-    "end": 21,
-    "name": "1-bit style settings",
+    "start": 40,
+    "end": 45,
+    "name": "Tune the 1-bit effect",
+    "kind": "feature",
+    "step": 8,
+    "wallCount": 1,
+    "headline": "Tune the\n1-bit effect.",
+    "description": "Adjust the style, threshold and pattern.",
     "frames": [
-      "phone-bayer-threshold",
-      "phone-bayer-threshold-tuned",
-      "phone-bayer-matrix-four",
-      "phone-bayer-matrix-eight"
+      "style-desktop-auto",
+      "style-desktop-threshold",
+      "style-desktop-matrix"
+    ],
+    "phoneFrames": [
+      "style-phone-auto",
+      "style-phone-threshold",
+      "style-phone-matrix"
     ],
     "captions": [
-      "Threshold · Auto",
+      "Bayer · Threshold Auto",
       "Threshold · 140",
-      "Pattern matrix · 4",
-      "Pattern matrix · 8"
+      "Pattern matrix · 8 × 8"
     ]
   },
   {
-    "start": 21,
-    "end": 26,
-    "name": "Comparison"
+    "start": 45,
+    "end": 50,
+    "name": "Inspect and compare",
+    "kind": "results",
+    "frames": [
+      "inspect-desktop-fit",
+      "inspect-desktop-zoom",
+      "inspect-desktop-original"
+    ],
+    "phoneFrames": [
+      "inspect-phone-fit",
+      "inspect-phone-zoom",
+      "inspect-phone-original"
+    ],
+    "captions": [
+      "Preview · Fit the image",
+      "Zoom in · Pan to inspect details",
+      "Compare with the original"
+    ],
+    "headline": "See the results.",
+    "comparisonAfter": 2.3
   },
   {
-    "start": 26,
-    "end": 30,
-    "name": "Conclusion"
+    "start": 50,
+    "end": 53,
+    "name": "Try Colorfetti",
+    "kind": "outro",
+    "wallCount": 2,
+    "desktop": "outro-desktop",
+    "phone": "outro-phone"
   }
 ]

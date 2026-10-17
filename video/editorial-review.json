@@ -1,43 +1,29 @@
 [
   {
-    "slide": "Introduction / conclusion",
-    "copy": "Approved Colorfetti name, slogan, purpose, website and GitHub repository URL.",
-    "image": "Actual empty app states on desktop and touch mobile. Phone screenshots retain their complete rectangular bounds inside a lightly rounded, padded frame.",
-    "decision": "Retain matching bookends with a mirrored closing composition. Show github.com/Shilo/colorfetti below the primary yellow website URL, in smaller muted type. No music-credit footer."
+    "decision": "User-approved 53-second trailer, October 16. The accepted review MP4 and poster were promoted byte-for-byte to the tracked public assets."
   },
   {
-    "slide": "Palettes",
-    "before": "A different palette. A different feel.",
-    "after": "Choose a palette.",
-    "image": "Tiny Town and Pixel Platformer together in the desktop wall with Auto, ENDESGA 32 and PICO-8. Mobile remains single-image.",
-    "decision": "Describe the visible action without promising a subjective feeling."
+    "decision": "Use step-by-step order. Start with Auto/presets; introduce custom import as optional next step. Full-palette controls precede 1-bit controls. Inspect and compare results at the end."
   },
   {
-    "slide": "Palette settings",
-    "before": "Fewer colors. More control.",
-    "after": "Fine-tune your palette.",
-    "image": "Real All → 16 → 8 limit edits, then Cleanup On, applied to the two-image desktop wall. The phone inset retains one image.",
-    "decision": "Name the actual controls; do not imply Cleanup always improves or preserves intentional details."
+    "decision": "Alternate wall counts 1,2,1,2,1,2,1,2,1; closing wall has 2. Both devices use the same count, with disjoint artwork on every paired screen. Comparison is an intentional matched-source exception, not an app wall."
   },
   {
-    "slide": "1-bit palettes",
-    "before": "Two colors. A new character.",
-    "after": "Explore two-color looks.",
-    "image": "Kenney Pixel Platformer scene in Mono, Game Boy and Rose.",
-    "decision": "Character was ambiguous for a scene; the new wording accurately describes palette changes."
+    "decision": "Actual app captures only, including current compact phone settings. Screenshots retain full rectangular bounds. Focus crops show actual controls, never reconstructed UI."
   },
   {
-    "slide": "1-bit style settings",
-    "before": "Shape the final look.",
-    "after": "Tune the 1-bit effect.",
-    "image": "Mono black-and-white Bayer controls, Threshold Auto → 140, Matrix 4 → 8.",
-    "decision": "Keep algorithm names in the real UI; use plain captions for what changes."
+    "decision": "Dedicated palette import scene is now authorized. Show a real Lospec import using archived endpoint data, review, save and applied palette. Do not imply import is required."
   },
   {
-    "slide": "Comparison",
-    "before": "Torch · Bayer",
-    "after": "Black & white",
-    "image": "Actual Mono + Solid conversion of the same full-resolution Tiny Town source.",
-    "decision": "Change the actual conversion as well as its label. Compare one identical source in Original / PICO-8 / black-and-white 1-bit."
+    "decision": "Show Max colors, Cleanup, full-palette dithering/strength, PNG Keep opacity, output count, Reuse colors and preview zoom/compare. Do not imply Cleanup always improves details or Keep works in GIF."
+  },
+  {
+    "decision": "Keep 1-bit palette and threshold/pattern demonstrations. Black & White preset in Palette mode is distinct from structural 1-bit styles."
+  },
+  {
+    "decision": "Final comparison retains identical Town crop/scaling and actual PICO-8 max 8 Cleanup On / Mono Solid outputs. No retouching or invented algorithm claims."
+  },
+  {
+    "decision": "Preserve exact brand slogan, website and repository URLs. No voiceover or on-screen music credit. Review arrangement repeats the supplied soundtrack with a crossfade; provenance/credits retain required attribution."
   }
 ]

@@ -16,8 +16,8 @@
 <div id="stage"><iframe title="Trailer composition" src=".work/film.html"></iframe></div>
 <footer>
   <button type="button" id="play">Play</button>
-  <input aria-label="Time in seconds" type="range" min="0" max="30" step="0.01" value="0">
-  <output>0.00 / 30s</output>
+  <input aria-label="Time in seconds" type="range" min="0" max="53" step="0.01" value="0">
+  <output>0.00 / 53s</output>
   <small>Refresh after editing and rebuilding. Preview controls are excluded from exports.</small>
 </footer>
 <audio src=".work/audio/music.wav" preload="metadata"></audio>
@@ -25,7 +25,7 @@
   const frame = document.querySelector('iframe'), stage = document.querySelector('#stage');
   const slider = document.querySelector('input'), output = document.querySelector('output');
   const button = document.querySelector('button'), audio = document.querySelector('audio');
-  let ready = false, playing = false;
+  let ready = false, playing = false, duration = 53;
   function fit() {
     const width = Math.min(innerWidth, (innerHeight - 100) * 16 / 9);
     stage.style.width = Math.max(1, width) + 'px';
@@ -34,19 +34,19 @@
   function draw(t) {
     if (ready) frame.contentWindow.renderFrame(t);
     slider.value = t;
-    output.value = t.toFixed(2) + ' / 30s';
+    output.value = t.toFixed(2) + ' / ' + duration + 's';
   }
   function pause() { playing = false; audio.pause(); button.textContent = 'Play'; }
   function tick() {
     if (!playing) return;
-    draw(Math.min(30, audio.currentTime));
-    if (audio.ended || audio.currentTime >= 30) pause();
+    draw(Math.min(duration, audio.currentTime));
+    if (audio.ended || audio.currentTime >= duration) pause();
     else requestAnimationFrame(tick);
   }
-  frame.addEventListener('load', async () => { await frame.contentWindow.filmReady; ready = true; draw(Number(slider.value)); });
+  frame.addEventListener('load', async () => { await frame.contentWindow.filmReady; duration = frame.contentWindow.filmShots.at(-1).end; slider.max = duration; ready = true; draw(Number(slider.value)); });
   button.onclick = async () => {
     if (playing) return pause();
-    if (Number(slider.value) >= 30) draw(0);
+    if (Number(slider.value) >= duration) draw(0);
     audio.currentTime = Number(slider.value);
     await audio.play(); playing = true; button.textContent = 'Pause'; tick();
   };

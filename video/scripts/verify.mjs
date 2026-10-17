@@ -10,6 +10,7 @@ import {
   ffmpeg,
   ffprobe,
   launchBrowser,
+  duration, frameCount, review,
 } from "./project.mjs";
 
 const records = [];
@@ -35,13 +36,13 @@ for (const path of [master, share]) {
     v.height !== 1080 ||
     v.codec_name !== "h264" ||
     v.pix_fmt !== "yuv420p" ||
-    v.nb_frames !== "900" ||
+    v.nb_frames !== String(frameCount) ||
     v.r_frame_rate !== "30/1"
   )
     throw Error("Unexpected video format: " + path);
   if (a.codec_name !== "aac" || a.channels !== 2 || a.sample_rate !== "48000")
     throw Error("Unexpected audio: " + path);
-  if (Math.abs(Number(info.format.duration) - 30) > 0.1)
+  if (Math.abs(Number(info.format.duration) - duration) > 0.1)
     throw Error("Wrong duration: " + path);
   const size = statSync(path).size;
   if (path === share && size >= 10_000_000)
@@ -65,8 +66,8 @@ for (const path of [master, share]) {
   records.push({
     path:
       path === share
-        ? "public/colorfetti-trailer.mp4"
-        : "output/colorfetti-trailer/colorfetti-trailer-1080.mp4",
+        ? review ? "output/colorfetti-trailer/colorfetti-trailer-review.mp4" : "public/colorfetti-trailer.mp4"
+        : review ? "output/colorfetti-trailer/colorfetti-trailer-review-master.mp4" : "output/colorfetti-trailer/colorfetti-trailer-1080.mp4",
     bytes: size,
     sha256: createHash("sha256").update(bytes).digest("hex"),
     ...info,
@@ -104,7 +105,7 @@ await run(
     "-i",
     share,
     "-vf",
-    "select=eq(n\\,294)+eq(n\\,600)+eq(n\\,855)",
+    `select=eq(n\\,${Math.round(frameCount*.2)})+eq(n\\,${Math.round(frameCount*.6)})+eq(n\\,${frameCount-45})`,
     "-fps_mode",
     "vfr",
     work + "/qa/encoded-%02d.png",
@@ -148,6 +149,8 @@ const report = {
   nativePlayback: playback,
   render: JSON.parse(readFileSync(work + "/qa/render.json")),
   music: JSON.parse(readFileSync(project + "/assets/audio/source.json")),
+  musicArrangement: JSON.parse(readFileSync(project + "/provenance.json")).musicArrangement,
+  storyboard: JSON.parse(readFileSync(work + "/qa/storyboard-validation.json")),
   editorial: JSON.parse(readFileSync(project + "/editorial-review.json")),
 };
 writeFileSync(
