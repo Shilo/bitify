@@ -18,6 +18,9 @@ pinch can continue panning without a jump or becoming a new dismissal tap.
 Pointer capture keeps drags outside the image tracked. Long hold and Space still
 compare locally; manipulation immediately releases pointer comparison. Separate
 zoom controls occupy the top left; existing image actions and Close remain below.
+Fit uses Lucide's four-corner Maximize icon with the accessible name "Fit image".
+Zoom tooltips put the shortcut after the sentence: "Zoom in. (+)",
+"Zoom out. (−)" and "Fit the whole image. (0)".
 Native Escape and modality-aware focus return remain. Enter on focused artwork
 closes through the same Space-comparison guard, without using Tile's Add action;
 repeated Enter keydowns are ignored. Other buttons retain native Enter behavior.

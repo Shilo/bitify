@@ -1,0 +1,1398 @@
+{
+  "date": "2026-10-17T02:51:15.999Z",
+  "model": "Pixel 8 Pro",
+  "original": {
+    "policy": "free",
+    "user": "0",
+    "accelerometer": "1"
+  },
+  "priorReverse": null,
+  "checks": [
+    {
+      "name": "portrait icon, touch targets, zoom and Fit",
+      "pass": true,
+      "target": {
+        "x": 63.88888931274414,
+        "y": 18,
+        "width": 44.000003814697266,
+        "height": 44
+      }
+    },
+    {
+      "name": "portrait pinch, lift finger 1, remaining-finger pan",
+      "pass": true,
+      "initial": {
+        "scale": 1.5625,
+        "x": 0,
+        "y": 0
+      },
+      "pinched": {
+        "scale": 4.374320030212402,
+        "x": 0,
+        "y": -1.5440200567245483
+      },
+      "lifted": {
+        "scale": 4.374320030212402,
+        "x": 0,
+        "y": -1.5440200567245483
+      },
+      "panned": {
+        "scale": 4.374320030212402,
+        "x": -36,
+        "y": 28.45599937438965
+      },
+      "contacts": [
+        9,
+        10
+      ],
+      "liftedPointer": 9
+    },
+    {
+      "name": "portrait pinch, lift finger 2, remaining-finger pan",
+      "pass": true,
+      "initial": {
+        "scale": 1.5625,
+        "x": 0,
+        "y": 0
+      },
+      "pinched": {
+        "scale": 4.374320030212402,
+        "x": 0,
+        "y": -1.5440200567245483
+      },
+      "lifted": {
+        "scale": 4.374320030212402,
+        "x": 0,
+        "y": -1.5440200567245483
+      },
+      "panned": {
+        "scale": 4.374320030212402,
+        "x": -36,
+        "y": 28.45599937438965
+      },
+      "contacts": [
+        15,
+        16
+      ],
+      "liftedPointer": 16
+    },
+    {
+      "name": "portrait pinch inward, release and tap closes",
+      "pass": true
+    },
+    {
+      "name": "portrait stationary two-finger sequence never closes",
+      "pass": true
+    },
+    {
+      "name": "portrait drag out and back, cancellation and fresh tap",
+      "pass": true
+    },
+    {
+      "name": "landscape icon, touch targets, zoom and Fit",
+      "pass": true,
+      "target": {
+        "x": 63.88888931274414,
+        "y": 18,
+        "width": 44.000003814697266,
+        "height": 44
+      }
+    },
+    {
+      "name": "landscape pinch, lift finger 1, remaining-finger pan",
+      "pass": true,
+      "initial": {
+        "scale": 1.5625,
+        "x": 0,
+        "y": 0
+      },
+      "pinched": {
+        "scale": 4.374320030212402,
+        "x": 0,
+        "y": 0
+      },
+      "lifted": {
+        "scale": 4.374320030212402,
+        "x": 0,
+        "y": 0
+      },
+      "panned": {
+        "scale": 4.374320030212402,
+        "x": -36,
+        "y": -30
+      },
+      "contacts": [
+        37,
+        38
+      ],
+      "liftedPointer": 37
+    },
+    {
+      "name": "landscape pinch, lift finger 2, remaining-finger pan",
+      "pass": true,
+      "initial": {
+        "scale": 1.5625,
+        "x": 0,
+        "y": 0
+      },
+      "pinched": {
+        "scale": 4.374320030212402,
+        "x": 0,
+        "y": 0
+      },
+      "lifted": {
+        "scale": 4.374320030212402,
+        "x": 0,
+        "y": 0
+      },
+      "panned": {
+        "scale": 4.374320030212402,
+        "x": -36,
+        "y": -30
+      },
+      "contacts": [
+        43,
+        44
+      ],
+      "liftedPointer": 44
+    },
+    {
+      "name": "landscape pinch inward, release and tap closes",
+      "pass": true
+    },
+    {
+      "name": "landscape stationary two-finger sequence never closes",
+      "pass": true
+    },
+    {
+      "name": "landscape drag out and back, cancellation and fresh tap",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "notes": [
+    "Physical USB Android device; no browser viewport, touch-action or pointer-capture override.",
+    "Touch input enters Chrome through CDP and produces trusted native PointerEvents, capture and compatibility clicks. This is not a human finger/digitizer test.",
+    "Only the owned tab, test-origin localStorage and temporary reverse mapping/rotation are changed and restored."
+  ],
+  "portrait": {
+    "width": 448,
+    "height": 819,
+    "dpr": 2.25,
+    "orientation": "portrait-primary"
+  },
+  "landscape": {
+    "width": 947,
+    "height": 364,
+    "dpr": 2.25,
+    "orientation": "landscape-primary"
+  },
+  "events": [
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 3
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 3
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 3
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 3
+    },
+    {
+      "type": "click",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 3
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 4
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 4
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 4
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 4
+    },
+    {
+      "type": "click",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 4
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 5
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 5
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 5
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 5
+    },
+    {
+      "type": "click",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 5
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 7
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 7
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 7
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 7
+    },
+    {
+      "type": "click",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 7
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 8
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 8
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 8
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 8
+    },
+    {
+      "type": "click",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 8
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 9
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 10
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 10
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 9
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 9
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 9
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 10
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 10
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 11
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 11
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 11
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 11
+    },
+    {
+      "type": "click",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 11
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 13
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 13
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 13
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 13
+    },
+    {
+      "type": "click",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 13
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 14
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 14
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 14
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 14
+    },
+    {
+      "type": "click",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 14
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 15
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 16
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 16
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 15
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 16
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 16
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 15
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 15
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 17
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 17
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 17
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 17
+    },
+    {
+      "type": "click",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 17
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 19
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 20
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 20
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 19
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 19
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 19
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 20
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 20
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 21
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 21
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 21
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 21
+    },
+    {
+      "type": "click",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 21
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 23
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 24
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 24
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 24
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 24
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 23
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 23
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 23
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 25
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 25
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 25
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 25
+    },
+    {
+      "type": "click",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 25
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 27
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 27
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 27
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 27
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 28
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 28
+    },
+    {
+      "type": "pointercancel",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 28
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 28
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 29
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 29
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 29
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 29
+    },
+    {
+      "type": "click",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 29
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 31
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 31
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 31
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 31
+    },
+    {
+      "type": "click",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 31
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 32
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 32
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 32
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 32
+    },
+    {
+      "type": "click",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 32
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 33
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 33
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 33
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 33
+    },
+    {
+      "type": "click",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 33
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 35
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 35
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 35
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 35
+    },
+    {
+      "type": "click",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 35
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 36
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 36
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 36
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 36
+    },
+    {
+      "type": "click",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 36
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 37
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 38
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 38
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 37
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 37
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 37
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 38
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 38
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 39
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 39
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 39
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 39
+    },
+    {
+      "type": "click",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 39
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 41
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 41
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 41
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 41
+    },
+    {
+      "type": "click",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 41
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 42
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 42
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 42
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 42
+    },
+    {
+      "type": "click",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 42
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 43
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 44
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 44
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 43
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 44
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 44
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 43
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 43
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 45
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 45
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 45
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 45
+    },
+    {
+      "type": "click",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 45
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 47
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 48
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 48
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 47
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 47
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 47
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 48
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 48
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 49
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 49
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 49
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 49
+    },
+    {
+      "type": "click",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 49
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 51
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 52
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 52
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 52
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 52
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 51
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 51
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 51
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 53
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 53
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 53
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 53
+    },
+    {
+      "type": "click",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 53
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 55
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 55
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 55
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 55
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 56
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 56
+    },
+    {
+      "type": "pointercancel",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 56
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 56
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 57
+    },
+    {
+      "type": "gotpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 57
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 57
+    },
+    {
+      "type": "lostpointercapture",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 57
+    },
+    {
+      "type": "click",
+      "trusted": true,
+      "pointerType": "touch",
+      "id": 57
+    }
+  ],
+  "restored": {
+    "policy": "free",
+    "user": "0",
+    "accelerometer": "1"
+  },
+  "pass": true
+}

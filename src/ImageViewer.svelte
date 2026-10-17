@@ -60,9 +60,9 @@
   use:navigation.attach={{ width, height, imageWidth: fit.width, imageHeight: fit.height }}
   onclose={() => { spaceHeld = false; imageHeld = false; navigation.cancel(); onclose?.(); }}>
   <div class="viewer-zoom viewer-tools glass-card" role="group" aria-label="Preview zoom">
-    <button class="btn glass-btn icon-only" onclick={() => navigation.zoomBy(1 / 1.25)} disabled={view.scale <= MIN_VIEWER_ZOOM} aria-label="Zoom out" use:tooltip={'Zoom out (−).'}>−</button>
-    <button class="btn glass-btn" onclick={() => navigation.reset()} aria-label="Fit image" use:tooltip={'Fit the whole image (0).'}>Fit</button>
-    <button class="btn glass-btn icon-only" onclick={() => navigation.zoomBy(1.25)} disabled={view.scale >= MAX_VIEWER_ZOOM} aria-label="Zoom in" use:tooltip={'Zoom in (+).'}>+</button>
+    <button class="btn glass-btn icon-only" onclick={() => navigation.zoomBy(1 / 1.25)} disabled={view.scale <= MIN_VIEWER_ZOOM} aria-label="Zoom out" use:tooltip={'Zoom out. (−)'}>−</button>
+    <button class="btn glass-btn icon-only" onclick={() => navigation.reset()} aria-label="Fit image" use:tooltip={'Fit the whole image. (0)'}><PixelIcon name="fit" /></button>
+    <button class="btn glass-btn icon-only" onclick={() => navigation.zoomBy(1.25)} disabled={view.scale >= MAX_VIEWER_ZOOM} aria-label="Zoom in" use:tooltip={'Zoom in. (+)'}>+</button>
   </div>
   <nav class="viewer-workspace" aria-label="Preview controls">
     <div class="viewer-tools glass-card" role="group" aria-label="Image actions">
