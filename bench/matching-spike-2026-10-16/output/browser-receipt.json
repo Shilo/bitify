@@ -1,0 +1,303 @@
+{
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "date": "2026-10-17T01:28:44.628Z",
+  "decoder": "function",
+  "parity": 696,
+  "candidateParity": 348,
+  "alpha": 348,
+  "animationSameRgb": 12,
+  "performance": [
+    {
+      "source": "general",
+      "mode": "oklab",
+      "medianMs": 0.10000000894069672,
+      "pixels": 4096
+    },
+    {
+      "source": "general",
+      "mode": "rgb",
+      "medianMs": 0.09999999403953552,
+      "pixels": 4096
+    },
+    {
+      "source": "general",
+      "mode": "lightness",
+      "medianMs": 0.09999999403953552,
+      "pixels": 4096
+    },
+    {
+      "source": "general",
+      "mode": "luminance",
+      "medianMs": 0.10000000894069672,
+      "pixels": 4096
+    },
+    {
+      "source": "general",
+      "mode": "cie-lightness",
+      "medianMs": 0.09999999403953552,
+      "pixels": 4096
+    },
+    {
+      "source": "general",
+      "mode": "hsv-value",
+      "medianMs": 0.10000000894069672,
+      "pixels": 4096
+    },
+    {
+      "source": "general",
+      "mode": "hsl-lightness",
+      "medianMs": 0.10000000894069672,
+      "pixels": 4096
+    },
+    {
+      "source": "general",
+      "mode": "luma",
+      "medianMs": 0.10000000894069672,
+      "pixels": 4096
+    },
+    {
+      "source": "general",
+      "mode": "gray-first",
+      "medianMs": 0.09999999403953552,
+      "pixels": 4096
+    },
+    {
+      "source": "general",
+      "mode": "lightness-4",
+      "medianMs": 0.10000000894069672,
+      "pixels": 4096
+    },
+    {
+      "source": "general",
+      "mode": "lightness-16",
+      "medianMs": 0.10000000894069672,
+      "pixels": 4096
+    },
+    {
+      "source": "general",
+      "mode": "tone-rank",
+      "medianMs": 0.09999999403953552,
+      "pixels": 4096
+    },
+    {
+      "source": "town",
+      "mode": "oklab",
+      "medianMs": 4.5,
+      "pixels": 193600
+    },
+    {
+      "source": "town",
+      "mode": "rgb",
+      "medianMs": 4.5999999940395355,
+      "pixels": 193600
+    },
+    {
+      "source": "town",
+      "mode": "lightness",
+      "medianMs": 4.5999999940395355,
+      "pixels": 193600
+    },
+    {
+      "source": "town",
+      "mode": "luminance",
+      "medianMs": 4.5999999940395355,
+      "pixels": 193600
+    },
+    {
+      "source": "town",
+      "mode": "cie-lightness",
+      "medianMs": 4.5,
+      "pixels": 193600
+    },
+    {
+      "source": "town",
+      "mode": "hsv-value",
+      "medianMs": 4.5,
+      "pixels": 193600
+    },
+    {
+      "source": "town",
+      "mode": "hsl-lightness",
+      "medianMs": 4.5,
+      "pixels": 193600
+    },
+    {
+      "source": "town",
+      "mode": "luma",
+      "medianMs": 4.5,
+      "pixels": 193600
+    },
+    {
+      "source": "town",
+      "mode": "gray-first",
+      "medianMs": 4.5999999940395355,
+      "pixels": 193600
+    },
+    {
+      "source": "town",
+      "mode": "lightness-4",
+      "medianMs": 4.600000008940697,
+      "pixels": 193600
+    },
+    {
+      "source": "town",
+      "mode": "lightness-16",
+      "medianMs": 4.600000008940697,
+      "pixels": 193600
+    },
+    {
+      "source": "town",
+      "mode": "tone-rank",
+      "medianMs": 4.5999999940395355,
+      "pixels": 193600
+    }
+  ],
+  "decodeDiagnostics": [
+    {
+      "source": "breastplate",
+      "nativeDifferent": 0,
+      "canvasDifferent": 0
+    },
+    {
+      "source": "general",
+      "nativeDifferent": 0,
+      "canvasDifferent": 0
+    },
+    {
+      "source": "weapons",
+      "nativeDifferent": 0,
+      "canvasDifferent": 0
+    },
+    {
+      "source": "accessories",
+      "nativeDifferent": 0,
+      "canvasDifferent": 0
+    },
+    {
+      "source": "armor",
+      "nativeDifferent": 0,
+      "canvasDifferent": 0
+    },
+    {
+      "source": "town",
+      "nativeDifferent": 0,
+      "canvasDifferent": 0
+    },
+    {
+      "source": "platformer",
+      "nativeDifferent": 0,
+      "canvasDifferent": 0
+    },
+    {
+      "source": "glow-orb-red",
+      "nativeDifferent": 0,
+      "canvasDifferent": 25043
+    },
+    {
+      "source": "glow-light-64",
+      "nativeDifferent": 0,
+      "canvasDifferent": 6595
+    },
+    {
+      "source": "shadow-lpc-character",
+      "nativeDifferent": 0,
+      "canvasDifferent": 0
+    },
+    {
+      "source": "aa-twemoji-fire",
+      "nativeDifferent": 0,
+      "canvasDifferent": 363
+    },
+    {
+      "source": "aa-twemoji-ghost",
+      "nativeDifferent": 0,
+      "canvasDifferent": 339
+    },
+    {
+      "source": "fx-green-magic-32",
+      "nativeDifferent": 0,
+      "canvasDifferent": 986
+    },
+    {
+      "source": "fx-black-smoke",
+      "nativeDifferent": 0,
+      "canvasDifferent": 31537
+    },
+    {
+      "source": "soft-magic-ring",
+      "nativeDifferent": 0,
+      "canvasDifferent": 396426
+    },
+    {
+      "source": "anim-rubberduck-magic-f0",
+      "nativeDifferent": 0,
+      "canvasDifferent": 204
+    },
+    {
+      "source": "anim-rubberduck-magic-f1",
+      "nativeDifferent": 0,
+      "canvasDifferent": 353
+    },
+    {
+      "source": "anim-rubberduck-magic-f2",
+      "nativeDifferent": 0,
+      "canvasDifferent": 440
+    },
+    {
+      "source": "anim-rubberduck-magic-f3",
+      "nativeDifferent": 0,
+      "canvasDifferent": 488
+    },
+    {
+      "source": "anim-rubberduck-magic-f4",
+      "nativeDifferent": 0,
+      "canvasDifferent": 826
+    },
+    {
+      "source": "anim-rubberduck-magic-f5",
+      "nativeDifferent": 0,
+      "canvasDifferent": 1082
+    },
+    {
+      "source": "walk-0",
+      "nativeDifferent": 0,
+      "canvasDifferent": 0
+    },
+    {
+      "source": "walk-1",
+      "nativeDifferent": 0,
+      "canvasDifferent": 0
+    },
+    {
+      "source": "walk-2",
+      "nativeDifferent": 0,
+      "canvasDifferent": 0
+    },
+    {
+      "source": "walk-3",
+      "nativeDifferent": 0,
+      "canvasDifferent": 0
+    },
+    {
+      "source": "saturated-stripes",
+      "nativeDifferent": 0,
+      "canvasDifferent": 0
+    },
+    {
+      "source": "neutral-ramp",
+      "nativeDifferent": 0,
+      "canvasDifferent": 0
+    },
+    {
+      "source": "near-equal-lightness-detail",
+      "nativeDifferent": 0,
+      "canvasDifferent": 0
+    },
+    {
+      "source": "source-color-alpha-ramp",
+      "nativeDifferent": 0,
+      "canvasDifferent": 3072
+    }
+  ],
+  "failures": []
+}

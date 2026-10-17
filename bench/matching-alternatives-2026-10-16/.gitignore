@@ -1,0 +1,5 @@
+output/*.rgba
+output/*.png
+!output/browser-*.png
+# Regenerated guarded limiter copy; the probe script and result JSON are retained.
+output/palette-limit.candidate.js

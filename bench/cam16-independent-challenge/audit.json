@@ -1,0 +1,516 @@
+{
+  "reproducedCases": 816,
+  "all": {
+    "cam16ucs": {
+      "cases": 204,
+      "identical": 65,
+      "de00Better": 134,
+      "hueWorse": 3,
+      "hueBetter": 85,
+      "edgeWorse": 81,
+      "edgeBetter": 32,
+      "neutralWorse": 3,
+      "regionsWorse": 3,
+      "regionsBetter": 5
+    },
+    "ok2": {
+      "cases": 204,
+      "identical": 85,
+      "de00Better": 99,
+      "hueWorse": 15,
+      "hueBetter": 82,
+      "edgeWorse": 80,
+      "edgeBetter": 19,
+      "neutralWorse": 0,
+      "regionsWorse": 1,
+      "regionsBetter": 3
+    }
+  },
+  "multicolor": {
+    "cam16ucs": {
+      "cases": 102,
+      "identical": 22,
+      "de00Better": 77,
+      "hueWorse": 0,
+      "hueBetter": 64,
+      "edgeWorse": 48,
+      "edgeBetter": 13,
+      "neutralWorse": 2,
+      "regionsWorse": 0,
+      "regionsBetter": 0
+    },
+    "ok2": {
+      "cases": 102,
+      "identical": 23,
+      "de00Better": 69,
+      "hueWorse": 6,
+      "hueBetter": 64,
+      "edgeWorse": 52,
+      "edgeBetter": 8,
+      "neutralWorse": 0,
+      "regionsWorse": 0,
+      "regionsBetter": 0
+    }
+  },
+  "perPalette": [
+    {
+      "palette": "preset-res64",
+      "cam16ucs": {
+        "cases": 17,
+        "identical": 0,
+        "de00Better": 17,
+        "hueWorse": 0,
+        "hueBetter": 12,
+        "edgeWorse": 8,
+        "edgeBetter": 2,
+        "neutralWorse": 0,
+        "regionsWorse": 0,
+        "regionsBetter": 0
+      },
+      "ok2": {
+        "cases": 17,
+        "identical": 3,
+        "de00Better": 14,
+        "hueWorse": 0,
+        "hueBetter": 13,
+        "edgeWorse": 3,
+        "edgeBetter": 2,
+        "neutralWorse": 0,
+        "regionsWorse": 0,
+        "regionsBetter": 0
+      }
+    },
+    {
+      "palette": "preset-edg32",
+      "cam16ucs": {
+        "cases": 17,
+        "identical": 10,
+        "de00Better": 7,
+        "hueWorse": 0,
+        "hueBetter": 7,
+        "edgeWorse": 7,
+        "edgeBetter": 0,
+        "neutralWorse": 1,
+        "regionsWorse": 0,
+        "regionsBetter": 0
+      },
+      "ok2": {
+        "cases": 17,
+        "identical": 12,
+        "de00Better": 5,
+        "hueWorse": 0,
+        "hueBetter": 5,
+        "edgeWorse": 4,
+        "edgeBetter": 1,
+        "neutralWorse": 0,
+        "regionsWorse": 0,
+        "regionsBetter": 0
+      }
+    },
+    {
+      "palette": "preset-mulfok32",
+      "cam16ucs": {
+        "cases": 17,
+        "identical": 0,
+        "de00Better": 17,
+        "hueWorse": 0,
+        "hueBetter": 13,
+        "edgeWorse": 10,
+        "edgeBetter": 2,
+        "neutralWorse": 1,
+        "regionsWorse": 0,
+        "regionsBetter": 0
+      },
+      "ok2": {
+        "cases": 17,
+        "identical": 1,
+        "de00Better": 16,
+        "hueWorse": 0,
+        "hueBetter": 13,
+        "edgeWorse": 11,
+        "edgeBetter": 0,
+        "neutralWorse": 0,
+        "regionsWorse": 0,
+        "regionsBetter": 0
+      }
+    },
+    {
+      "palette": "preset-pico8",
+      "cam16ucs": {
+        "cases": 17,
+        "identical": 5,
+        "de00Better": 12,
+        "hueWorse": 0,
+        "hueBetter": 11,
+        "edgeWorse": 5,
+        "edgeBetter": 3,
+        "neutralWorse": 0,
+        "regionsWorse": 0,
+        "regionsBetter": 0
+      },
+      "ok2": {
+        "cases": 17,
+        "identical": 3,
+        "de00Better": 10,
+        "hueWorse": 4,
+        "hueBetter": 10,
+        "edgeWorse": 10,
+        "edgeBetter": 2,
+        "neutralWorse": 0,
+        "regionsWorse": 0,
+        "regionsBetter": 0
+      }
+    },
+    {
+      "palette": "preset-db16",
+      "cam16ucs": {
+        "cases": 17,
+        "identical": 1,
+        "de00Better": 14,
+        "hueWorse": 0,
+        "hueBetter": 14,
+        "edgeWorse": 11,
+        "edgeBetter": 4,
+        "neutralWorse": 0,
+        "regionsWorse": 0,
+        "regionsBetter": 0
+      },
+      "ok2": {
+        "cases": 17,
+        "identical": 1,
+        "de00Better": 14,
+        "hueWorse": 0,
+        "hueBetter": 14,
+        "edgeWorse": 13,
+        "edgeBetter": 1,
+        "neutralWorse": 0,
+        "regionsWorse": 0,
+        "regionsBetter": 0
+      }
+    },
+    {
+      "palette": "preset-edg8",
+      "cam16ucs": {
+        "cases": 17,
+        "identical": 6,
+        "de00Better": 10,
+        "hueWorse": 0,
+        "hueBetter": 7,
+        "edgeWorse": 7,
+        "edgeBetter": 2,
+        "neutralWorse": 0,
+        "regionsWorse": 0,
+        "regionsBetter": 0
+      },
+      "ok2": {
+        "cases": 17,
+        "identical": 3,
+        "de00Better": 10,
+        "hueWorse": 2,
+        "hueBetter": 9,
+        "edgeWorse": 11,
+        "edgeBetter": 2,
+        "neutralWorse": 0,
+        "regionsWorse": 0,
+        "regionsBetter": 0
+      }
+    },
+    {
+      "palette": "preset-gray8",
+      "cam16ucs": {
+        "cases": 17,
+        "identical": 9,
+        "de00Better": 8,
+        "hueWorse": 0,
+        "hueBetter": 0,
+        "edgeWorse": 1,
+        "edgeBetter": 6,
+        "neutralWorse": 0,
+        "regionsWorse": 0,
+        "regionsBetter": 1
+      },
+      "ok2": {
+        "cases": 17,
+        "identical": 17,
+        "de00Better": 0,
+        "hueWorse": 0,
+        "hueBetter": 0,
+        "edgeWorse": 0,
+        "edgeBetter": 0,
+        "neutralWorse": 0,
+        "regionsWorse": 0,
+        "regionsBetter": 0
+      }
+    },
+    {
+      "palette": "preset-icecreamgb",
+      "cam16ucs": {
+        "cases": 17,
+        "identical": 1,
+        "de00Better": 14,
+        "hueWorse": 0,
+        "hueBetter": 8,
+        "edgeWorse": 10,
+        "edgeBetter": 3,
+        "neutralWorse": 0,
+        "regionsWorse": 1,
+        "regionsBetter": 1
+      },
+      "ok2": {
+        "cases": 17,
+        "identical": 1,
+        "de00Better": 12,
+        "hueWorse": 0,
+        "hueBetter": 8,
+        "edgeWorse": 13,
+        "edgeBetter": 3,
+        "neutralWorse": 0,
+        "regionsWorse": 0,
+        "regionsBetter": 1
+      }
+    },
+    {
+      "palette": "preset-gameboy",
+      "cam16ucs": {
+        "cases": 17,
+        "identical": 1,
+        "de00Better": 16,
+        "hueWorse": 3,
+        "hueBetter": 7,
+        "edgeWorse": 10,
+        "edgeBetter": 4,
+        "neutralWorse": 0,
+        "regionsWorse": 1,
+        "regionsBetter": 1
+      },
+      "ok2": {
+        "cases": 17,
+        "identical": 0,
+        "de00Better": 11,
+        "hueWorse": 9,
+        "hueBetter": 6,
+        "edgeWorse": 10,
+        "edgeBetter": 6,
+        "neutralWorse": 0,
+        "regionsWorse": 1,
+        "regionsBetter": 2
+      }
+    },
+    {
+      "palette": "preset-mono",
+      "cam16ucs": {
+        "cases": 17,
+        "identical": 11,
+        "de00Better": 6,
+        "hueWorse": 0,
+        "hueBetter": 0,
+        "edgeWorse": 4,
+        "edgeBetter": 1,
+        "neutralWorse": 0,
+        "regionsWorse": 0,
+        "regionsBetter": 1
+      },
+      "ok2": {
+        "cases": 17,
+        "identical": 17,
+        "de00Better": 0,
+        "hueWorse": 0,
+        "hueBetter": 0,
+        "edgeWorse": 0,
+        "edgeBetter": 0,
+        "neutralWorse": 0,
+        "regionsWorse": 0,
+        "regionsBetter": 0
+      }
+    },
+    {
+      "palette": "preset-glow",
+      "cam16ucs": {
+        "cases": 17,
+        "identical": 10,
+        "de00Better": 7,
+        "hueWorse": 0,
+        "hueBetter": 0,
+        "edgeWorse": 4,
+        "edgeBetter": 3,
+        "neutralWorse": 1,
+        "regionsWorse": 1,
+        "regionsBetter": 0
+      },
+      "ok2": {
+        "cases": 17,
+        "identical": 14,
+        "de00Better": 3,
+        "hueWorse": 0,
+        "hueBetter": 0,
+        "edgeWorse": 2,
+        "edgeBetter": 1,
+        "neutralWorse": 0,
+        "regionsWorse": 0,
+        "regionsBetter": 0
+      }
+    },
+    {
+      "palette": "preset-paper",
+      "cam16ucs": {
+        "cases": 17,
+        "identical": 11,
+        "de00Better": 6,
+        "hueWorse": 0,
+        "hueBetter": 6,
+        "edgeWorse": 4,
+        "edgeBetter": 2,
+        "neutralWorse": 0,
+        "regionsWorse": 0,
+        "regionsBetter": 1
+      },
+      "ok2": {
+        "cases": 17,
+        "identical": 13,
+        "de00Better": 4,
+        "hueWorse": 0,
+        "hueBetter": 4,
+        "edgeWorse": 3,
+        "edgeBetter": 1,
+        "neutralWorse": 0,
+        "regionsWorse": 0,
+        "regionsBetter": 0
+      }
+    }
+  ],
+  "worstEdges": [
+    {
+      "source": "dungeon-neutral-shield",
+      "palette": "preset-res64",
+      "camEdge": 0.45454545454545453,
+      "okEdge": 0,
+      "delta": 0.45454545454545453,
+      "camDE00": 6.610362824276927,
+      "okDE00": 7.623612317269439,
+      "camUsed": 2,
+      "okUsed": 3
+    },
+    {
+      "source": "platformer-pilot-blink",
+      "palette": "preset-edg8",
+      "camEdge": 0.7013888888888888,
+      "okEdge": 0.4861111111111111,
+      "delta": 0.21527777777777773,
+      "camDE00": 17.173698118994324,
+      "okDE00": 18.681502839180382,
+      "camUsed": 3,
+      "okUsed": 4
+    },
+    {
+      "source": "platformer-pilot",
+      "palette": "preset-edg8",
+      "camEdge": 0.7013888888888888,
+      "okEdge": 0.5,
+      "delta": 0.20138888888888884,
+      "camDE00": 16.791805513393072,
+      "okDE00": 18.232106214284588,
+      "camUsed": 3,
+      "okUsed": 4
+    },
+    {
+      "source": "platformer-heart",
+      "palette": "preset-mulfok32",
+      "camEdge": 0.16666666666666666,
+      "okEdge": 0,
+      "delta": 0.16666666666666666,
+      "camDE00": 14.646803619515476,
+      "okDE00": 15.273868181176633,
+      "camUsed": 2,
+      "okUsed": 3
+    },
+    {
+      "source": "platformer-heart",
+      "palette": "preset-db16",
+      "camEdge": 0.16666666666666666,
+      "okEdge": 0,
+      "delta": 0.16666666666666666,
+      "camDE00": 10.675921669099923,
+      "okDE00": 10.107655625295036,
+      "camUsed": 2,
+      "okUsed": 3
+    },
+    {
+      "source": "breastplate",
+      "palette": "preset-db16",
+      "camEdge": 0.3283582089552239,
+      "okEdge": 0.1791044776119403,
+      "delta": 0.1492537313432836,
+      "camDE00": 10.063047974566812,
+      "okDE00": 12.038814784322398,
+      "camUsed": 7,
+      "okUsed": 8
+    },
+    {
+      "source": "town-water-bucket",
+      "palette": "preset-pico8",
+      "camEdge": 0.14035087719298245,
+      "okEdge": 0,
+      "delta": 0.14035087719298245,
+      "camDE00": 13.56344117718507,
+      "okDE00": 15.098248643602869,
+      "camUsed": 6,
+      "okUsed": 8
+    },
+    {
+      "source": "dungeon-knight",
+      "palette": "preset-res64",
+      "camEdge": 0.12738853503184713,
+      "okEdge": 0,
+      "delta": 0.12738853503184713,
+      "camDE00": 5.9962942868340665,
+      "okDE00": 6.645702550268231,
+      "camUsed": 7,
+      "okUsed": 8
+    },
+    {
+      "source": "dungeon-potion",
+      "palette": "preset-edg8",
+      "camEdge": 0.2,
+      "okEdge": 0.08,
+      "delta": 0.12000000000000001,
+      "camDE00": 13.646938674355596,
+      "okDE00": 14.04100258153826,
+      "camUsed": 5,
+      "okUsed": 5
+    },
+    {
+      "source": "dungeon-potion",
+      "palette": "preset-db16",
+      "camEdge": 0.12,
+      "okEdge": 0,
+      "delta": 0.12,
+      "camDE00": 5.360921410255671,
+      "okDE00": 6.10297791826426,
+      "camUsed": 6,
+      "okUsed": 5
+    },
+    {
+      "source": "platformer-neutral-pilot",
+      "palette": "preset-db16",
+      "camEdge": 0.10679611650485436,
+      "okEdge": 0,
+      "delta": 0.10679611650485436,
+      "camDE00": 9.85260867907339,
+      "okDE00": 10.3201099416535,
+      "camUsed": 3,
+      "okUsed": 4
+    },
+    {
+      "source": "dungeon-wizard",
+      "palette": "preset-db16",
+      "camEdge": 0.09815950920245399,
+      "okEdge": 0,
+      "delta": 0.09815950920245399,
+      "camDE00": 12.96444098965239,
+      "okDE00": 13.476874610906076,
+      "camUsed": 7,
+      "okUsed": 7
+    }
+  ],
+  "note": "Counts are correlated source/palette combinations. Hue and edge diagnostics are not independent human preference judgments. Hash reproduction uses shared engine, not an independently implemented color model."
+}

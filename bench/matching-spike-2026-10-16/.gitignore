@@ -1,0 +1,4 @@
+# Reproducible render matrix and raw decoder references. Keep JSON and browser evidence.
+output/*.rgba
+output/*.png
+!output/browser-*.png

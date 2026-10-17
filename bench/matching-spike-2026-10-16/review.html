@@ -1,0 +1,57 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Palette matching research</title>
+<style>
+body{font:16px/1.5 system-ui,sans-serif;margin:24px;background:#faf8f5;color:#25242a}h1{font-size:26px;margin:0}p{max-width:1000px}header{position:sticky;top:0;background:#faf8f5ed;padding:12px 0;z-index:2}label{display:inline-block;margin-right:20px}select,button{font:inherit;padding:8px;max-width:320px}#swatches{display:flex;margin:12px 0;gap:2px}#swatches span{width:22px;height:22px;border:1px solid #777}#grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:12px}figure{margin:0;padding:12px;background:white;border:1px solid #ddd;border-radius:8px}figcaption{font-weight:650}img{width:100%;height:200px;object-fit:contain;image-rendering:pixelated;background:conic-gradient(#eee 25%,#ccc 0 50%,#eee 0 75%,#ccc 0) 0 0/16px 16px}small{display:block;color:#555}#status{white-space:pre-wrap} .gray img{filter:grayscale(1)}
+</style>
+<h1>Palette matching research</h1><p>Review only · native source pixels · Cut128 · All colors · Cleanup Off · Dithering Off. Lightness modes sacrifice hue. Compare source details and tone order before judging novelty. The diagnostic grayscale switch uses browser grayscale only for visual inspection; it does not enter conversion or metrics.</p>
+<header><label>Image <select id="source" aria-label="Image"></select></label><label>Palette <select id="palette" aria-label="Palette"></select></label><label><input type="checkbox" id="gray"> Diagnostic grayscale</label><label><input type="checkbox" id="blind"> Hide mode names</label><button id="verify">Verify in this browser</button><div id="swatches"></div></header>
+<div id="status" role="status">Loading research…</div><main id="grid"></main>
+<script type="module">
+import {MODES,LABELS,render} from './engine.js';
+import {quantize} from '/src/lib/quantize.js';
+import {decodeImageFile} from '/src/lib/image-decode.js';
+const data=await (await fetch('./output/results.json')).json(),source=document.querySelector('#source'),palette=document.querySelector('#palette'),grid=document.querySelector('#grid'),status=document.querySelector('#status');
+for(const s of data.sources)source.add(new Option(`${s.id} · ${s.width}×${s.height}`,s.id));
+for(const p of data.palettes)palette.add(new Option(p.name,p.id));
+const params=new URLSearchParams(location.search);source.value=params.get('source')||'general';palette.value=params.get('palette')||'preset-edg32';
+function paint(){
+ const s=data.sources.find(x=>x.id===source.value),p=data.palettes.find(x=>x.id===palette.value),blind=document.querySelector('#blind').checked;
+ document.querySelector('#swatches').replaceChildren(...p.colors.map(c=>{const e=document.createElement('span');e.style.background=c;return e;}));
+ grid.innerHTML='';
+ for(const [i,mode]of ['source',...MODES].entries()){
+  const fig=document.createElement('figure'),cap=document.createElement('figcaption'),img=document.createElement('img'),small=document.createElement('small');
+  cap.textContent=mode==='source'?'Original':blind?`Candidate ${i}`:LABELS[mode];img.alt=`${s.id}, ${mode}`;img.src=`./output/${mode==='source'?s.sourceFile:`${s.id}-${p.id}-${mode}.png`}`;
+  const r=data.rows.find(r=>r.source===s.id&&r.palette===p.id&&r.mode===mode);
+  small.textContent=r?`${r.used} colors · ${(r.changed*100).toFixed(1)}% changed · L error ${r.meanAbsL.toFixed(3)} · edges merged ${(r.edgeCollapse*100).toFixed(1)}%`:'Full-size decoded source';fig.append(cap,img,small);grid.append(fig);
+ }
+ status.textContent=`${s.id} / ${p.name} · ${data.rows.length} measured cases. Metrics are diagnostics, not aesthetic scores.`;
+}
+source.onchange=palette.onchange=()=>{paint();history.replaceState(null,'',`?source=${source.value}&palette=${palette.value}`);};
+document.querySelector('#gray').onchange=e=>grid.classList.toggle('gray',e.target.checked);document.querySelector('#blind').onchange=paint;paint();
+async function verify(){
+ const receipt={userAgent:navigator.userAgent,date:new Date().toISOString(),decoder:typeof ImageDecoder,parity:0,candidateParity:0,alpha:0,animationSameRgb:0,performance:[],decodeDiagnostics:[],failures:[]};
+ // Native browser decoder independent of the Node sharp decoder used in the matrix.
+ for(const s of data.sources){
+  const blob=await(await fetch('./output/'+s.sourceFile)).blob(),image=await decodeImageFile(new File([blob],s.sourceFile,{type:'image/png'}));
+  const raw=new Uint8Array(await(await fetch(`./output/${s.id}.rgba`)).arrayBuffer());
+  const img=new Image();img.src='./output/'+s.sourceFile;await img.decode();const c=document.createElement('canvas');c.width=s.width;c.height=s.height;const ctx=c.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0);const canvas=ctx.getImageData(0,0,s.width,s.height).data;
+  let nativeDifferent=0,canvasDifferent=0;for(let i=0;i<raw.length;i++)if(raw[(i>>2)*4+3]>0){if(image.data[i]!==raw[i])nativeDifferent++;if(canvas[i]!==raw[i])canvasDifferent++;}
+  receipt.decodeDiagnostics.push({source:s.id,nativeDifferent,canvasDifferent});if(nativeDifferent)receipt.failures.push('native-decode/'+s.id);
+  for(const p of data.palettes)for(const mode of ['oklab','rgb']){
+   const a=render(image,p.colors,mode),b=quantize(image,p.colors,128,undefined,undefined,{metric:mode});
+   if(a.indices.some((x,i)=>x!==b.indices[i]))receipt.failures.push(`${s.id}/${p.id}/${mode}`);else receipt.parity++;
+  }
+  // Browser re-renders every research mode and checks its bytes against saved Node output.
+  const p=data.palettes.find(x=>x.id==='preset-edg32');
+  for(const mode of MODES){const a=render(image,p.colors,mode),refBlob=await(await fetch(`./output/${s.id}-${p.id}-${mode}.png`)).blob();const expected=(await decodeImageFile(new File([refBlob],'reference.png',{type:'image/png'}))).data;
+   if(a.data.some((x,i)=>x!==expected[i]))receipt.failures.push(`candidate/${s.id}/${mode}`);else receipt.candidateParity++;
+   const kept=render(image,p.colors,mode,{keep:true});if(kept.data.some((x,i)=>i%4===3&&x!==image.data[i]))receipt.failures.push(`alpha/${s.id}/${mode}`);else receipt.alpha++;
+  }
+  if(['general','town'].includes(s.id))for(const mode of MODES){const times=[];for(let i=0;i<7;i++){const t=performance.now();render(image,p.colors,mode);times.push(performance.now()-t);}times.sort((a,b)=>a-b);receipt.performance.push({source:s.id,mode,medianMs:times[3],pixels:s.width*s.height});}
+  await new Promise(r=>setTimeout(r,0));status.textContent=`Verifying ${s.id}…`;
+ }
+ // Fixed pointwise matching cannot invent label churn for an unchanged RGB.
+ for(const mode of MODES){const p=data.palettes[1],d=new Uint8ClampedArray([101,75,201,255,101,75,201,255]),a=render({width:2,height:1,data:d},p.colors,mode);if(a.indices[0]===a.indices[1])receipt.animationSameRgb++;else receipt.failures.push('temporal/'+mode);}
+ const saved=await fetch('/receipt',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(receipt,null,2)});status.textContent=`Browser verification ${receipt.failures.length?'FAILED':'PASSED'} · baseline parity ${receipt.parity} · candidate PNG parity ${receipt.candidateParity} · alpha ${receipt.alpha} · fixed RGB ${receipt.animationSameRgb}\n${await saved.text()}`;
+}
+document.querySelector('#verify').onclick=verify;
+</script></html>

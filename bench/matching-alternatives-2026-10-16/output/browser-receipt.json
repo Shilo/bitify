@@ -1,0 +1,321 @@
+{
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "date": "2026-10-17T01:52:01.256Z",
+  "baselineParity": 1128,
+  "candidateHashes": 940,
+  "alpha": 940,
+  "decode": 47,
+  "ciedeReference": 34,
+  "failures": [],
+  "performance": [
+    {
+      "source": "general",
+      "mode": "oklab",
+      "medianMs": 0.09999999403953552,
+      "unique": 211
+    },
+    {
+      "source": "general",
+      "mode": "rgb",
+      "medianMs": 0.09999999403953552,
+      "unique": 211
+    },
+    {
+      "source": "general",
+      "mode": "ok2",
+      "medianMs": 0.09999999403953552,
+      "unique": 211
+    },
+    {
+      "source": "general",
+      "mode": "ciede2000",
+      "medianMs": 5,
+      "unique": 211
+    },
+    {
+      "source": "general",
+      "mode": "cam16ucs",
+      "medianMs": 0.10000000894069672,
+      "unique": 211
+    },
+    {
+      "source": "general",
+      "mode": "hct",
+      "medianMs": 0.09999999403953552,
+      "unique": 211
+    },
+    {
+      "source": "general",
+      "mode": "lab76",
+      "medianMs": 0.10000000894069672,
+      "unique": 211
+    },
+    {
+      "source": "general",
+      "mode": "luv76",
+      "medianMs": 0.10000000894069672,
+      "unique": 211
+    },
+    {
+      "source": "general",
+      "mode": "ipt",
+      "medianMs": 0.19999998807907104,
+      "unique": 211
+    },
+    {
+      "source": "general",
+      "mode": "jz",
+      "medianMs": 0.10000000894069672,
+      "unique": 211
+    },
+    {
+      "source": "general",
+      "mode": "itp",
+      "medianMs": 0.20000000298023224,
+      "unique": 211
+    },
+    {
+      "source": "general",
+      "mode": "redmean",
+      "medianMs": 0.09999999403953552,
+      "unique": 211
+    },
+    {
+      "source": "general",
+      "mode": "linear-rgb",
+      "medianMs": 0.10000000894069672,
+      "unique": 211
+    },
+    {
+      "source": "general",
+      "mode": "hue4",
+      "medianMs": 0.09999999403953552,
+      "unique": 211
+    },
+    {
+      "source": "general",
+      "mode": "chroma4",
+      "medianMs": 0.09999999403953552,
+      "unique": 211
+    },
+    {
+      "source": "general",
+      "mode": "lightness4",
+      "medianMs": 0.09999999403953552,
+      "unique": 211
+    },
+    {
+      "source": "general",
+      "mode": "oklrab",
+      "medianMs": 0.09999999403953552,
+      "unique": 211
+    },
+    {
+      "source": "general",
+      "mode": "helmlab",
+      "medianMs": 2.4000000059604645,
+      "unique": 211
+    },
+    {
+      "source": "general",
+      "mode": "edge-aware",
+      "medianMs": 3.7000000029802322,
+      "unique": 211
+    },
+    {
+      "source": "town",
+      "mode": "oklab",
+      "medianMs": 2.8999999910593033,
+      "unique": 247
+    },
+    {
+      "source": "town",
+      "mode": "rgb",
+      "medianMs": 2.7999999970197678,
+      "unique": 247
+    },
+    {
+      "source": "town",
+      "mode": "ok2",
+      "medianMs": 2.7999999970197678,
+      "unique": 247
+    },
+    {
+      "source": "town",
+      "mode": "ciede2000",
+      "medianMs": 8.299999997019768,
+      "unique": 247
+    },
+    {
+      "source": "town",
+      "mode": "cam16ucs",
+      "medianMs": 2.8999999910593033,
+      "unique": 247
+    },
+    {
+      "source": "town",
+      "mode": "hct",
+      "medianMs": 2.9000000059604645,
+      "unique": 247
+    },
+    {
+      "source": "town",
+      "mode": "lab76",
+      "medianMs": 2.8999999910593033,
+      "unique": 247
+    },
+    {
+      "source": "town",
+      "mode": "luv76",
+      "medianMs": 3,
+      "unique": 247
+    },
+    {
+      "source": "town",
+      "mode": "ipt",
+      "medianMs": 3,
+      "unique": 247
+    },
+    {
+      "source": "town",
+      "mode": "jz",
+      "medianMs": 2.9000000059604645,
+      "unique": 247
+    },
+    {
+      "source": "town",
+      "mode": "itp",
+      "medianMs": 2.9000000059604645,
+      "unique": 247
+    },
+    {
+      "source": "town",
+      "mode": "redmean",
+      "medianMs": 2.800000011920929,
+      "unique": 247
+    },
+    {
+      "source": "town",
+      "mode": "linear-rgb",
+      "medianMs": 2.9000000059604645,
+      "unique": 247
+    },
+    {
+      "source": "town",
+      "mode": "hue4",
+      "medianMs": 2.7999999970197678,
+      "unique": 247
+    },
+    {
+      "source": "town",
+      "mode": "chroma4",
+      "medianMs": 2.800000011920929,
+      "unique": 247
+    },
+    {
+      "source": "town",
+      "mode": "lightness4",
+      "medianMs": 2.7999999970197678,
+      "unique": 247
+    },
+    {
+      "source": "town",
+      "mode": "oklrab",
+      "medianMs": 2.9000000059604645,
+      "unique": 247
+    },
+    {
+      "source": "town",
+      "mode": "helmlab",
+      "medianMs": 5.299999997019768,
+      "unique": 247
+    },
+    {
+      "source": "town",
+      "mode": "edge-aware",
+      "medianMs": 17.299999997019768,
+      "unique": 247
+    }
+  ],
+  "kernels": [
+    {
+      "mode": "oklab",
+      "medianMs": 0.4000000059604645,
+      "sources": 512,
+      "palette": 64,
+      "checksum": 134344
+    },
+    {
+      "mode": "rgb",
+      "medianMs": 0.29999999701976776,
+      "sources": 512,
+      "palette": 64,
+      "checksum": 133189
+    },
+    {
+      "mode": "ok2",
+      "medianMs": 0.30000001192092896,
+      "sources": 512,
+      "palette": 64,
+      "checksum": 138103
+    },
+    {
+      "mode": "ciede2000",
+      "medianMs": 22.30000001192093,
+      "sources": 512,
+      "palette": 64,
+      "checksum": 139489
+    },
+    {
+      "mode": "cam16ucs",
+      "medianMs": 0.5,
+      "sources": 512,
+      "palette": 64,
+      "checksum": 140287
+    },
+    {
+      "mode": "hue4",
+      "medianMs": 0.20000000298023224,
+      "sources": 512,
+      "palette": 64,
+      "checksum": 132566
+    },
+    {
+      "mode": "helmlab",
+      "medianMs": 10.299999997019768,
+      "sources": 512,
+      "palette": 64,
+      "checksum": 139629
+    },
+    {
+      "mode": "ciede-direct",
+      "medianMs": 6.0999999940395355,
+      "sources": 512,
+      "palette": 64,
+      "checksum": 139489
+    }
+  ],
+  "fastWinnerParity": true,
+  "transforms": [
+    {
+      "mode": "oklab",
+      "colors": 4096,
+      "medianMs": 0.699999988079071
+    },
+    {
+      "mode": "ok2",
+      "colors": 4096,
+      "medianMs": 0.699999988079071
+    },
+    {
+      "mode": "cam16ucs",
+      "colors": 4096,
+      "medianMs": 1.2000000029802322
+    },
+    {
+      "mode": "ciede2000",
+      "colors": 4096,
+      "medianMs": 10.700000002980232
+    }
+  ]
+}

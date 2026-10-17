@@ -1,0 +1,256 @@
+{
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "date": "2026-10-17T01:27:03.458Z",
+  "parity": 696,
+  "candidateParity": 248,
+  "alpha": 348,
+  "animationSameRgb": 12,
+  "performance": [
+    {
+      "source": "general",
+      "mode": "oklab",
+      "medianMs": 0.10000000894069672,
+      "pixels": 4096
+    },
+    {
+      "source": "general",
+      "mode": "rgb",
+      "medianMs": 0.10000000894069672,
+      "pixels": 4096
+    },
+    {
+      "source": "general",
+      "mode": "lightness",
+      "medianMs": 0.10000000894069672,
+      "pixels": 4096
+    },
+    {
+      "source": "general",
+      "mode": "luminance",
+      "medianMs": 0.09999999403953552,
+      "pixels": 4096
+    },
+    {
+      "source": "general",
+      "mode": "cie-lightness",
+      "medianMs": 0.09999999403953552,
+      "pixels": 4096
+    },
+    {
+      "source": "general",
+      "mode": "hsv-value",
+      "medianMs": 0.10000000894069672,
+      "pixels": 4096
+    },
+    {
+      "source": "general",
+      "mode": "hsl-lightness",
+      "medianMs": 0.09999999403953552,
+      "pixels": 4096
+    },
+    {
+      "source": "general",
+      "mode": "luma",
+      "medianMs": 0.09999999403953552,
+      "pixels": 4096
+    },
+    {
+      "source": "general",
+      "mode": "gray-first",
+      "medianMs": 0.10000000894069672,
+      "pixels": 4096
+    },
+    {
+      "source": "general",
+      "mode": "lightness-4",
+      "medianMs": 0.10000000894069672,
+      "pixels": 4096
+    },
+    {
+      "source": "general",
+      "mode": "lightness-16",
+      "medianMs": 0.09999999403953552,
+      "pixels": 4096
+    },
+    {
+      "source": "general",
+      "mode": "tone-rank",
+      "medianMs": 0.09999999403953552,
+      "pixels": 4096
+    },
+    {
+      "source": "town",
+      "mode": "oklab",
+      "medianMs": 4.700000002980232,
+      "pixels": 193600
+    },
+    {
+      "source": "town",
+      "mode": "rgb",
+      "medianMs": 4.5,
+      "pixels": 193600
+    },
+    {
+      "source": "town",
+      "mode": "lightness",
+      "medianMs": 4.4000000059604645,
+      "pixels": 193600
+    },
+    {
+      "source": "town",
+      "mode": "luminance",
+      "medianMs": 4.5999999940395355,
+      "pixels": 193600
+    },
+    {
+      "source": "town",
+      "mode": "cie-lightness",
+      "medianMs": 4.799999997019768,
+      "pixels": 193600
+    },
+    {
+      "source": "town",
+      "mode": "hsv-value",
+      "medianMs": 4.5,
+      "pixels": 193600
+    },
+    {
+      "source": "town",
+      "mode": "hsl-lightness",
+      "medianMs": 4.300000011920929,
+      "pixels": 193600
+    },
+    {
+      "source": "town",
+      "mode": "luma",
+      "medianMs": 4.300000011920929,
+      "pixels": 193600
+    },
+    {
+      "source": "town",
+      "mode": "gray-first",
+      "medianMs": 4.600000008940697,
+      "pixels": 193600
+    },
+    {
+      "source": "town",
+      "mode": "lightness-4",
+      "medianMs": 4.4000000059604645,
+      "pixels": 193600
+    },
+    {
+      "source": "town",
+      "mode": "lightness-16",
+      "medianMs": 4.399999991059303,
+      "pixels": 193600
+    },
+    {
+      "source": "town",
+      "mode": "tone-rank",
+      "medianMs": 4.4000000059604645,
+      "pixels": 193600
+    }
+  ],
+  "failures": [
+    "candidate/glow-orb-red/oklab",
+    "candidate/glow-orb-red/rgb",
+    "candidate/glow-orb-red/lightness",
+    "candidate/glow-orb-red/luminance",
+    "candidate/glow-orb-red/cie-lightness",
+    "candidate/glow-orb-red/hsv-value",
+    "candidate/glow-orb-red/hsl-lightness",
+    "candidate/glow-orb-red/luma",
+    "candidate/glow-orb-red/gray-first",
+    "candidate/glow-orb-red/lightness-4",
+    "candidate/glow-orb-red/lightness-16",
+    "candidate/glow-orb-red/tone-rank",
+    "candidate/glow-light-64/oklab",
+    "candidate/glow-light-64/rgb",
+    "candidate/glow-light-64/lightness",
+    "candidate/glow-light-64/luminance",
+    "candidate/glow-light-64/cie-lightness",
+    "candidate/glow-light-64/hsv-value",
+    "candidate/glow-light-64/hsl-lightness",
+    "candidate/glow-light-64/luma",
+    "candidate/glow-light-64/gray-first",
+    "candidate/glow-light-64/lightness-4",
+    "candidate/glow-light-64/lightness-16",
+    "candidate/glow-light-64/tone-rank",
+    "candidate/aa-twemoji-fire/luminance",
+    "candidate/aa-twemoji-fire/lightness-16",
+    "candidate/fx-green-magic-32/oklab",
+    "candidate/fx-green-magic-32/rgb",
+    "candidate/fx-green-magic-32/lightness",
+    "candidate/fx-green-magic-32/luminance",
+    "candidate/fx-green-magic-32/cie-lightness",
+    "candidate/fx-green-magic-32/hsv-value",
+    "candidate/fx-green-magic-32/hsl-lightness",
+    "candidate/fx-green-magic-32/luma",
+    "candidate/fx-green-magic-32/lightness-16",
+    "candidate/fx-green-magic-32/tone-rank",
+    "candidate/fx-black-smoke/oklab",
+    "candidate/fx-black-smoke/rgb",
+    "candidate/fx-black-smoke/luminance",
+    "candidate/fx-black-smoke/hsl-lightness",
+    "candidate/fx-black-smoke/luma",
+    "candidate/fx-black-smoke/gray-first",
+    "candidate/fx-black-smoke/lightness-4",
+    "candidate/soft-magic-ring/lightness",
+    "candidate/soft-magic-ring/luminance",
+    "candidate/soft-magic-ring/cie-lightness",
+    "candidate/soft-magic-ring/hsv-value",
+    "candidate/soft-magic-ring/hsl-lightness",
+    "candidate/soft-magic-ring/luma",
+    "candidate/soft-magic-ring/lightness-4",
+    "candidate/soft-magic-ring/lightness-16",
+    "candidate/soft-magic-ring/tone-rank",
+    "candidate/anim-rubberduck-magic-f0/luminance",
+    "candidate/anim-rubberduck-magic-f0/cie-lightness",
+    "candidate/anim-rubberduck-magic-f0/hsv-value",
+    "candidate/anim-rubberduck-magic-f0/hsl-lightness",
+    "candidate/anim-rubberduck-magic-f0/gray-first",
+    "candidate/anim-rubberduck-magic-f0/lightness-4",
+    "candidate/anim-rubberduck-magic-f0/lightness-16",
+    "candidate/anim-rubberduck-magic-f1/oklab",
+    "candidate/anim-rubberduck-magic-f1/rgb",
+    "candidate/anim-rubberduck-magic-f1/hsv-value",
+    "candidate/anim-rubberduck-magic-f1/lightness-4",
+    "candidate/anim-rubberduck-magic-f2/hsv-value",
+    "candidate/anim-rubberduck-magic-f2/hsl-lightness",
+    "candidate/anim-rubberduck-magic-f2/luma",
+    "candidate/anim-rubberduck-magic-f2/lightness-4",
+    "candidate/anim-rubberduck-magic-f3/rgb",
+    "candidate/anim-rubberduck-magic-f3/lightness",
+    "candidate/anim-rubberduck-magic-f3/luminance",
+    "candidate/anim-rubberduck-magic-f3/cie-lightness",
+    "candidate/anim-rubberduck-magic-f3/hsv-value",
+    "candidate/anim-rubberduck-magic-f3/luma",
+    "candidate/anim-rubberduck-magic-f3/tone-rank",
+    "candidate/anim-rubberduck-magic-f4/oklab",
+    "candidate/anim-rubberduck-magic-f4/rgb",
+    "candidate/anim-rubberduck-magic-f4/luminance",
+    "candidate/anim-rubberduck-magic-f4/cie-lightness",
+    "candidate/anim-rubberduck-magic-f4/hsv-value",
+    "candidate/anim-rubberduck-magic-f4/luma",
+    "candidate/anim-rubberduck-magic-f4/gray-first",
+    "candidate/anim-rubberduck-magic-f4/lightness-4",
+    "candidate/anim-rubberduck-magic-f4/lightness-16",
+    "candidate/anim-rubberduck-magic-f4/tone-rank",
+    "candidate/anim-rubberduck-magic-f5/oklab",
+    "candidate/anim-rubberduck-magic-f5/rgb",
+    "candidate/anim-rubberduck-magic-f5/lightness",
+    "candidate/anim-rubberduck-magic-f5/luminance",
+    "candidate/anim-rubberduck-magic-f5/cie-lightness",
+    "candidate/anim-rubberduck-magic-f5/hsv-value",
+    "candidate/anim-rubberduck-magic-f5/hsl-lightness",
+    "candidate/anim-rubberduck-magic-f5/luma",
+    "candidate/anim-rubberduck-magic-f5/gray-first",
+    "candidate/anim-rubberduck-magic-f5/lightness-16",
+    "candidate/anim-rubberduck-magic-f5/tone-rank",
+    "candidate/source-color-alpha-ramp/lightness",
+    "candidate/source-color-alpha-ramp/hsl-lightness",
+    "candidate/source-color-alpha-ramp/luma",
+    "candidate/source-color-alpha-ramp/gray-first",
+    "candidate/source-color-alpha-ramp/tone-rank"
+  ]
+}

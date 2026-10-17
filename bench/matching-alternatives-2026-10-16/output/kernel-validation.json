@@ -1,0 +1,91 @@
+{
+  "references": 34,
+  "independentPairs": 4096,
+  "maxError": 9.592326932761353e-14,
+  "context": {
+    "palette": "preset-res64",
+    "source": "#020010",
+    "examples": [
+      {
+        "bg": "#2e222f",
+        "source": 131088,
+        "target": "#4c3e24"
+      },
+      {
+        "bg": "#3e3546",
+        "source": 131088,
+        "target": "#2e222f"
+      },
+      {
+        "bg": "#625565",
+        "source": 131088,
+        "target": "#2e222f"
+      },
+      {
+        "bg": "#966c6c",
+        "source": 131088,
+        "target": "#2e222f"
+      },
+      {
+        "bg": "#ab947a",
+        "source": 131088,
+        "target": "#2e222f"
+      },
+      {
+        "bg": "#694f62",
+        "source": 131088,
+        "target": "#2e222f"
+      },
+      {
+        "bg": "#7f708a",
+        "source": 131088,
+        "target": "#2e222f"
+      },
+      {
+        "bg": "#9babb2",
+        "source": 131088,
+        "target": "#2e222f"
+      },
+      {
+        "bg": "#c7dcd0",
+        "source": 131088,
+        "target": "#2e222f"
+      },
+      {
+        "bg": "#ffffff",
+        "source": 131088,
+        "target": "#2e222f"
+      },
+      {
+        "bg": "#6e2727",
+        "source": 131088,
+        "target": "#2e222f"
+      },
+      {
+        "bg": "#b33831",
+        "source": 131088,
+        "target": "#2e222f"
+      },
+      {
+        "bg": "#ea4f36",
+        "source": 131088,
+        "target": "#2e222f"
+      },
+      {
+        "bg": "#f57d4a",
+        "source": 131088,
+        "target": "#2e222f"
+      },
+      {
+        "bg": "#ae2334",
+        "source": 131088,
+        "target": "#2e222f"
+      },
+      {
+        "bg": "#e83b3b",
+        "source": 131088,
+        "target": "#2e222f"
+      }
+    ]
+  }
+}
