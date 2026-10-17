@@ -878,6 +878,11 @@ scaffolding and are not part of the app.
 
 ### Tooltips
 
+Tooltip backgrounds are fully opaque in both themes, using `background: var(--surface)`
+with backdrop filters disabled, matching the solid-menu/dialog GlassKit adapter.
+GlassKit foreground, border and shadow tokens remain; forced colors use Canvas,
+CanvasText and ButtonText. Artwork and checker colors cannot show through the tooltip.
+
 Every tooltip uses the shared action in `src/lib/tooltip.js`, including the dock, palette
 chips, style list and dropdown, tile actions, full file names, top bar and help dialog.
 There are no native `title` tooltips. Button tooltips explain the action rather than

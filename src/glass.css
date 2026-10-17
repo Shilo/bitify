@@ -156,9 +156,9 @@
 :root .help-in { padding: 24px; gap: 18px; }
 :root .help footer .btn { border-radius: 999px; }
 :root .more[open] { opacity: 1; visibility: visible; pointer-events: auto; transform: none; }
-/* GlassKit has no tooltip class; this adapter uses its default popover material. */
-:root .tooltip { color: var(--fg); background: var(--canvas-popover); border-color: var(--canvas-border); box-shadow: var(--canvas-shadow); border-radius: 12px;
-  -webkit-backdrop-filter: blur(var(--gl-blur)); backdrop-filter: blur(var(--gl-blur)); }
+/* GlassKit has no tooltip class; match the opaque theme surface used by menus/dialogs. */
+:root .tooltip { color: var(--fg); background: var(--surface); border-color: var(--canvas-border); box-shadow: var(--canvas-shadow); border-radius: 12px;
+  -webkit-backdrop-filter: none; backdrop-filter: none; }
 :root .help kbd { background: var(--gl-surface-1); }
 :root .help li .ico { background: var(--gl-surface-3); color: var(--fg); }
 :root .fit::before, :root .fit::after { content: none; }
@@ -283,7 +283,7 @@
 @media (forced-colors: active) {
   :root :is(.help,.sheet)::backdrop { -webkit-backdrop-filter: none; backdrop-filter: none; }
   :root, :root[data-theme] { background: Canvas; --bg: Canvas; --surface: Canvas; --fg: CanvasText; --muted: CanvasText; --line: ButtonText; }
-  :root :is(.dock,.tool-group,.panel,.menu,.more,.help,.sheet,.btn,.ib,.cap,.acts,.brand,.empty-text) {
+  :root :is(.dock,.tool-group,.panel,.menu,.more,.help,.sheet,.btn,.ib,.cap,.acts,.brand,.empty-text,.tooltip) {
     background: Canvas; color: CanvasText; border: 1px solid ButtonText; box-shadow: none;
     -webkit-backdrop-filter: none; backdrop-filter: none;
   }
