@@ -20,8 +20,8 @@ Color-critical palette UI uses synchronous paint-only canvases, without readback
 encoding, object URLs or frame timers. Each full-palette overview has a 100×100
 RGBA backing store (40,000 pixel bytes before browser overhead); solids have one
 pixel. Only the selected overview remains when the palette rail is closed. With
-100 saved palettes and no session-only entries, the open rail has 112 choices
-including Auto and eleven presets, plus the selected overview: about 4.52 MB of
+100 saved palettes and no session-only entries, the open rail has 113 choices
+including Auto and twelve presets, plus the selected overview: about 4.56 MB of
 nominal pixel storage, excluding browser/GPU overhead. Session-only choices add
 another overview each and are not bounded by the saved-library limit. This is
 separate from the animation index-cache budget and does not bound total app memory.

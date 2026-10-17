@@ -1,0 +1,201 @@
+{
+  "settings": {
+    "metric": "oklab",
+    "maxColors": "All",
+    "alphaCut": 128,
+    "dither": "none",
+    "cleanup": false
+  },
+  "overlap": [
+    {
+      "name": "mulfok32",
+      "exactOverlapWithEndesga32": 1
+    },
+    {
+      "name": "Zughy 32",
+      "exactOverlapWithEndesga32": 0
+    },
+    {
+      "name": "DawnBringer 32",
+      "exactOverlapWithEndesga32": 1
+    }
+  ],
+  "results": [
+    {
+      "fixture": "../palette-fitting-spike/sprite-source.png",
+      "sourceSha256": "c7d8e98a0ba062f560b6425e744ee5a9b7ea88be067ced2f18db1a44a2eee783",
+      "palette": "preset-edg32",
+      "paletteCount": 32,
+      "used": 27,
+      "changed": 1574,
+      "visible": 1574,
+      "output": "0-preset-edg32.png",
+      "sha256": "e7ee407f170417d8dfc34a90dcc5bdbc27029c8d7e98f179ead03bbe12698549"
+    },
+    {
+      "fixture": "../palette-fitting-spike/sprite-source.png",
+      "sourceSha256": "c7d8e98a0ba062f560b6425e744ee5a9b7ea88be067ced2f18db1a44a2eee783",
+      "palette": "mulfok32",
+      "paletteCount": 32,
+      "used": 23,
+      "changed": 1574,
+      "visible": 1574,
+      "output": "0-mulfok32.png",
+      "sha256": "68cc0ac2b632c600e5323b8b2882230cd3ac2bdc86d6f8f9bc06830c10c32b26"
+    },
+    {
+      "fixture": "../palette-fitting-spike/sprite-source.png",
+      "sourceSha256": "c7d8e98a0ba062f560b6425e744ee5a9b7ea88be067ced2f18db1a44a2eee783",
+      "palette": "zughy-32",
+      "paletteCount": 32,
+      "used": 26,
+      "changed": 1574,
+      "visible": 1574,
+      "output": "0-zughy-32.png",
+      "sha256": "dfd35fae37bc09018751d2e697e7ef3e3ca3e236422c0ab69a23734ef9c1852a"
+    },
+    {
+      "fixture": "../palette-fitting-spike/sprite-source.png",
+      "sourceSha256": "c7d8e98a0ba062f560b6425e744ee5a9b7ea88be067ced2f18db1a44a2eee783",
+      "palette": "dawnbringer-32",
+      "paletteCount": 32,
+      "used": 26,
+      "changed": 1574,
+      "visible": 1574,
+      "output": "0-dawnbringer-32.png",
+      "sha256": "edc63b735f1709a7c6a70c625d1136b920c40801c9c1128602eb0d203c95888d"
+    },
+    {
+      "fixture": "../palette-fitting-spike/armor-source.png",
+      "sourceSha256": "c8b1115d5e53d9633fc3026e1f529a23505ab76080508cdea4fbcd23a04ab83d",
+      "palette": "preset-edg32",
+      "paletteCount": 32,
+      "used": 11,
+      "changed": 155,
+      "visible": 155,
+      "output": "1-preset-edg32.png",
+      "sha256": "1ad9b0744e0c53a4ea3787cff32be6b53780e77ce8e0b29ecb6245b2814f4ee1"
+    },
+    {
+      "fixture": "../palette-fitting-spike/armor-source.png",
+      "sourceSha256": "c8b1115d5e53d9633fc3026e1f529a23505ab76080508cdea4fbcd23a04ab83d",
+      "palette": "mulfok32",
+      "paletteCount": 32,
+      "used": 9,
+      "changed": 155,
+      "visible": 155,
+      "output": "1-mulfok32.png",
+      "sha256": "482649fa1fa8258e723f93df01fbb48ca8c4de5eafd9b9c6929380cb3c8c5846"
+    },
+    {
+      "fixture": "../palette-fitting-spike/armor-source.png",
+      "sourceSha256": "c8b1115d5e53d9633fc3026e1f529a23505ab76080508cdea4fbcd23a04ab83d",
+      "palette": "zughy-32",
+      "paletteCount": 32,
+      "used": 12,
+      "changed": 155,
+      "visible": 155,
+      "output": "1-zughy-32.png",
+      "sha256": "6276680d108433aa563487d74c04559ae283d980efa7e985b2f239c87e7d20a0"
+    },
+    {
+      "fixture": "../palette-fitting-spike/armor-source.png",
+      "sourceSha256": "c8b1115d5e53d9633fc3026e1f529a23505ab76080508cdea4fbcd23a04ab83d",
+      "palette": "dawnbringer-32",
+      "paletteCount": 32,
+      "used": 13,
+      "changed": 131,
+      "visible": 155,
+      "output": "1-dawnbringer-32.png",
+      "sha256": "3904b2079315461ae5ea0bdb2ff2f6fada90be24ab47dd1a302ab3da8851557c"
+    },
+    {
+      "fixture": "../palette-fitting-spike/ramp-source.png",
+      "sourceSha256": "0b8e4e544fd7b4afcaf14bbb4d8cd7312ddfeabeb3eb8d28d5164586baf49ba9",
+      "palette": "preset-edg32",
+      "paletteCount": 32,
+      "used": 10,
+      "changed": 2016,
+      "visible": 2048,
+      "output": "2-preset-edg32.png",
+      "sha256": "4f0abcd37c1802f16effa45b2c09035f381d37f572e4f69b99eff5133c7e7a2f"
+    },
+    {
+      "fixture": "../palette-fitting-spike/ramp-source.png",
+      "sourceSha256": "0b8e4e544fd7b4afcaf14bbb4d8cd7312ddfeabeb3eb8d28d5164586baf49ba9",
+      "palette": "mulfok32",
+      "paletteCount": 32,
+      "used": 7,
+      "changed": 2016,
+      "visible": 2048,
+      "output": "2-mulfok32.png",
+      "sha256": "386b5b8ab255541682d1fb84b7f3f74b8e51ba49001580bbccdf894400ae29b4"
+    },
+    {
+      "fixture": "../palette-fitting-spike/ramp-source.png",
+      "sourceSha256": "0b8e4e544fd7b4afcaf14bbb4d8cd7312ddfeabeb3eb8d28d5164586baf49ba9",
+      "palette": "zughy-32",
+      "paletteCount": 32,
+      "used": 8,
+      "changed": 2048,
+      "visible": 2048,
+      "output": "2-zughy-32.png",
+      "sha256": "c4a355b5814831a0b0ceb7a78bc5c179ab23c3ca613e4864cd07c0dda8a2282d"
+    },
+    {
+      "fixture": "../palette-fitting-spike/ramp-source.png",
+      "sourceSha256": "0b8e4e544fd7b4afcaf14bbb4d8cd7312ddfeabeb3eb8d28d5164586baf49ba9",
+      "palette": "dawnbringer-32",
+      "paletteCount": 32,
+      "used": 10,
+      "changed": 1984,
+      "visible": 2048,
+      "output": "2-dawnbringer-32.png",
+      "sha256": "6fb818f9de46c7c3ee43c595a744dd396fb49af445dfbd99c27451a75c0aad33"
+    },
+    {
+      "fixture": "../claude-audit-2026-10-15/service/fixtures/knight-a.png",
+      "sourceSha256": "fbe0f27539ac667c61977282e5b481027dbe54cabbd2e3a4eac80d7818c725ea",
+      "palette": "preset-edg32",
+      "paletteCount": 32,
+      "used": 14,
+      "changed": 303,
+      "visible": 304,
+      "output": "3-preset-edg32.png",
+      "sha256": "11550bd8369cf3048ed099372a8aa021f9974f47123c54d5604c696167475284"
+    },
+    {
+      "fixture": "../claude-audit-2026-10-15/service/fixtures/knight-a.png",
+      "sourceSha256": "fbe0f27539ac667c61977282e5b481027dbe54cabbd2e3a4eac80d7818c725ea",
+      "palette": "mulfok32",
+      "paletteCount": 32,
+      "used": 14,
+      "changed": 303,
+      "visible": 304,
+      "output": "3-mulfok32.png",
+      "sha256": "edb2dfd0ec81a508c5e383d13f5e7bfbbb03083f5fb53996f9afe955c83fec73"
+    },
+    {
+      "fixture": "../claude-audit-2026-10-15/service/fixtures/knight-a.png",
+      "sourceSha256": "fbe0f27539ac667c61977282e5b481027dbe54cabbd2e3a4eac80d7818c725ea",
+      "palette": "zughy-32",
+      "paletteCount": 32,
+      "used": 15,
+      "changed": 304,
+      "visible": 304,
+      "output": "3-zughy-32.png",
+      "sha256": "8d9d625eab459a2daf0b0538b722d886f6286874498d213111f9f1bcc7bec756"
+    },
+    {
+      "fixture": "../claude-audit-2026-10-15/service/fixtures/knight-a.png",
+      "sourceSha256": "fbe0f27539ac667c61977282e5b481027dbe54cabbd2e3a4eac80d7818c725ea",
+      "palette": "dawnbringer-32",
+      "paletteCount": 32,
+      "used": 14,
+      "changed": 303,
+      "visible": 304,
+      "output": "3-dawnbringer-32.png",
+      "sha256": "ea6544292c8206c72310b02a4820072a2e37283c45aef39a3cd6c849e8fa785f"
+    }
+  ]
+}

@@ -82,7 +82,18 @@ colors disable reuse. Settings changes between invocation and opening reject the
 obsolete draft; an already-open editor is never replaced. Reusing colors does not
 promise identical pixels under different limits, Cleanup or other images.
 
-## Curated palette additions — October 14, 2026
+## Curated palette additions — October 16, 2026
+
+There are now twelve curated presets. The additional `preset-mulfok32` follows
+ENDESGA 32 in the 32-color group, retaining its published 32 RGB entries, order,
+creator and source link. It is an optional pastel/purple artistic target; Auto's
+default, existing preset colors/IDs and ENDESGA 32's fallback remain unchanged.
+Artist sets within a size group use dated Lospec-download evidence where
+comparable; exact Black & white and other generic references retain useful
+placement without invented popularity scores. One-bit Mono stays in its separate
+family. See the October 16 palette-selection study for evidence and limits.
+
+Historical October 14 additions:
 
 The Palette rail has eleven curated presets, adding ENDESGA 8 (`preset-edg8`)
 before Grayscale 8 and Black & white (`preset-mono`) before Glow. ENDESGA 8 uses

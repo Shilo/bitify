@@ -44,8 +44,8 @@ describe('palette library', () => {
   });
 
   it('provides immutable presets with vetted counts, provenance and distinct normalized colors', () => {
-    expect(FULL_PRESETS.map(p => p.colors.length)).toEqual([64, 32, 16, 16, 8, 8, 4, 4, 2, 2, 2]);
-    expect(FULL_PRESETS.map(p => p.id)).toEqual(['preset-res64', 'preset-edg32', 'preset-pico8', 'preset-db16', 'preset-edg8', 'preset-gray8', 'preset-icecreamgb', 'preset-gameboy', 'preset-mono', 'preset-glow', 'preset-paper']);
+    expect(FULL_PRESETS.map(p => p.colors.length)).toEqual([64, 32, 32, 16, 16, 8, 8, 4, 4, 2, 2, 2]);
+    expect(FULL_PRESETS.map(p => p.id)).toEqual(['preset-res64', 'preset-edg32', 'preset-mulfok32', 'preset-pico8', 'preset-db16', 'preset-edg8', 'preset-gray8', 'preset-icecreamgb', 'preset-gameboy', 'preset-mono', 'preset-glow', 'preset-paper']);
     expect(DEFAULT_FULL_PALETTE.id).toBe('preset-edg32');
     expect(FULL_PRESETS[1].colors[0]).toBe('#be4a2f');
     expect(FULL_PRESETS[0].colors.at(-1)).toBe('#fdcbb0');
@@ -62,6 +62,13 @@ describe('palette library', () => {
       expect(Object.isFrozen(preset.colors)).toBe(true);
     }
     expect(() => { FULL_PRESETS[0].colors.push('#123456'); }).toThrow();
+  });
+
+  it('preserves mulfok32 canonical RGB order and creator attribution', () => {
+    const pastel = FULL_PRESETS.find(p => p.id === 'preset-mulfok32');
+    expect(pastel.name).toBe('mulfok32');
+    expect(pastel.colors).toEqual('5ba675 6bc96c abdd64 fcef8d ffb879 ea6262 cc425e a32858 751756 390947 611851 873555 a6555f c97373 f2ae99 ffc3f2 ee8fcb d46eb3 873e84 1f102a 4a3052 7b5480 a6859f d9bdc8 ffffff aee2ff 8db7ff 6d80fa 8465ec 834dc4 7d2da0 4e187c'.split(' ').map(c => '#' + c));
+    expect(pastel.source).toEqual({ kind: 'preset', credit: 'mulfok', url: 'https://lospec.com/palette-list/mulfok32' });
   });
 
   it('restores valid records independently of damaged or duplicate records', () => {
