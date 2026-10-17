@@ -1,5 +1,13 @@
 # Colorfetti design
 
+## Modal gesture dismissal — October 16, 2026
+
+Backdrop dismissal requires a primary pointer gesture that both starts and ends
+on the backdrop, within tap slop. Starting inside an input/control and releasing
+outside must retain the draft/dialog. Pointer capture, cancellation, window blur
+and reopening cannot leave an armed dismissal. Native Escape, explicit buttons,
+focus restoration and the image viewer's separate comparison gesture remain.
+
 ## Color-critical palette display — October 15, 2026
 
 Full-palette thumbnails and editor swatches use paint-only canvases so forced

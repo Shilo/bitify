@@ -10,6 +10,7 @@
   import { normalizeColors, validateName } from './lib/palette-library.js';
   import { canonicalLospecUrl, looksLikeLospecReference } from './lib/palette-lospec-url.js';
   import { paintPaletteSwatch } from './lib/palette-preview.js';
+  import { backdropDismiss } from './lib/dialog-dismiss.js';
 
   let { request = {}, onsave, ondelete, onreload, onuse, onclose } = $props();
   const initial = untrack(() => request);
@@ -226,7 +227,7 @@
   aria-label={editingId ? 'Edit palette' : initial.forceCopy ? 'Make a palette copy' : 'Import palette'} onclose={() => { controller?.abort(); onclose(); }}
   oncancel={event => { if (busy === 'Saving' || busy === 'Deleting') event.preventDefault(); else controller?.abort(); }}
   ondragover={event => { event.preventDefault(); event.stopPropagation(); }} ondrop={drop} onpaste={paste}
-  onclick={event => { if (event.target === dialog) close(); }}>
+  use:backdropDismiss={close}>
   <div class="glass-modal palette-editor">
     <div class="glass-modal__header palette-editor-header">
       <input id="palette-name" class="glass-input palette-editor-title-input" aria-label="Name" placeholder="Palette name" bind:value={name} oninput={() => nameEdited = true} maxlength="128" disabled={!!busy} autocomplete="off" />

@@ -13,6 +13,7 @@
   import { tick, untrack } from 'svelte';
   import { createExportDrag, isMobileExportDevice } from './lib/export-drag.js';
   import { imageGesture } from './lib/image-gesture.js';
+  import { backdropDismiss } from './lib/dialog-dismiss.js';
   import { hasImageDrop, droppedImages, fetchDroppedImage } from './lib/image-drop.js';
   import { decodeImageFile } from './lib/image-decode.js';
   import CanvasGrid from './CanvasGrid.svelte';
@@ -1031,7 +1032,7 @@
   <div class="drop" style:background={second} style:color={overlayInk}>Drop to Colorfetti</div>
 {/if}
 <!-- Any click closes the sheet: one of its buttons, or the dimmed screen around it, which counts as the dialog. -->
-<dialog class="sheet glass-sheet" bind:this={sheet} aria-label="Image actions" onclick={() => sheet.close()}>
+<dialog class="sheet glass-sheet" bind:this={sheet} aria-label="Image actions" use:backdropDismiss onclick={e => { if (e.target !== sheet) sheet.close(); }}>
   {#if shared}
     <p class="name" use:tooltip={shared.name}>{shared.name}</p>
     <button class="btn glass-btn glass-btn--primary" disabled={generatedUnavailable || itemPaletteFailed(shared)} onclick={() => { const item = shared; sheet.close(); save(item); }}><PixelIcon name="save" />Save</button>
@@ -1052,7 +1053,7 @@
 </dialog>
 <!-- The More menu drops down from the More button. Any click closes it too. Its rows are in three
      groups with a line between: what the app is set to, what tells about it, and what throws things away. -->
-<dialog class="more glass-popover" bind:this={more} aria-label="More" onclick={() => more.close()}>
+<dialog class="more glass-popover" bind:this={more} aria-label="More" use:backdropDismiss onclick={e => { if (e.target !== more) more.close(); }}>
   {#if items.length}<button class="btn glass-btn danger menu-clear" onclick={() => { more.close(); clearConfirm.showModal(); }}><PixelIcon name="trash" />Remove all images</button>{/if}
   <button class="btn glass-btn" onclick={() => (themePick = otherTheme === systemTheme ? undefined : otherTheme)}>
     <PixelIcon name={otherTheme === 'dark' ? 'moon' : 'sun'} />{otherTheme === 'dark' ? 'Dark' : 'Light'} mode
@@ -1071,7 +1072,7 @@
 <!-- Native dialog handles focus/inertness; GlassKit provides the centered modal anatomy. -->
 <dialog class="glass-modal-overlay is-active reset-modal" bind:this={confirm}
   aria-labelledby="confirm-title" aria-describedby="confirm-description"
-  onclick={e => e.target === confirm && confirm.close()} onclose={() => moreTrigger?.focus()}>
+  use:backdropDismiss onclose={() => moreTrigger?.focus()}>
   <div class="glass-modal">
     <div class="glass-modal__header"><h2 class="glass-modal__title" id="confirm-title">Reset all settings?</h2></div>
     <div class="glass-modal__body"><p id="confirm-description">Colors, styles and theme return to their defaults.<br /><br />{deleteImports ? 'Saved palettes will be deleted. Your images stay.' : 'Your images and saved palettes stay.'}</p>{#if savedPalettes.length}<label class="reset-palette-option"><input type="checkbox" bind:checked={deleteImports}/>Delete saved palettes ({savedPalettes.length})</label>{/if}</div>
@@ -1084,7 +1085,7 @@
 <!-- Removing imports never deletes the original files. Confirm the whole-canvas action. -->
 <dialog class="glass-modal-overlay is-active reset-modal" bind:this={clearConfirm}
   aria-labelledby="clear-title" aria-describedby="clear-description"
-  onclick={e => e.target === clearConfirm && clearConfirm.close()}
+  use:backdropDismiss
   onclose={async () => { await tick(); (clearTrigger?.isConnected ? clearTrigger : moreTrigger)?.focus(); }}>
   <div class="glass-modal">
     <div class="glass-modal__header"><h2 class="glass-modal__title" id="clear-title">Remove all images?</h2></div>
@@ -1097,7 +1098,7 @@
 </dialog>
 <!-- The help, which is also the welcome on a first visit: what Colorfetti is, four steps, and the
      controls of the device in use. A click on the dimmed screen around it counts as the dialog itself. -->
-<dialog class="help glass-modal" bind:this={help} aria-labelledby="help-title" onclose={() => moreTrigger?.focus({ preventScroll: true })} onclick={e => e.target === help && help.close()}>
+<dialog class="help glass-modal" bind:this={help} aria-labelledby="help-title" onclose={() => moreTrigger?.focus({ preventScroll: true })} use:backdropDismiss>
   <div class="help-in">
     <!-- svelte-ignore a11y_autofocus -->
     <button class="ib" autofocus onclick={() => help.close()} aria-label="Close"><PixelIcon name="x" /></button>
