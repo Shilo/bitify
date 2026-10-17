@@ -1,0 +1,182 @@
+{
+  "before": "f08d4d3f6e3df771d17524f00f1bba2e492c4ec0",
+  "after": "d91d9d1",
+  "browser": "155.0.4283.45",
+  "chromiumSandbox": true,
+  "viewport": {
+    "width": 1280,
+    "height": 900
+  },
+  "captures": [
+    {
+      "id": "01-recolor-controls",
+      "version": "before",
+      "file": "01-recolor-controls-before.png",
+      "note": "Fresh Auto palette, all colors, Oklab, Cleanup off; new dithering defaults off.",
+      "url": "http://127.0.0.1:5332/colorfetti/"
+    },
+    {
+      "id": "02-dithering-strength",
+      "version": "before",
+      "file": "02-dithering-strength-before.png",
+      "note": "Auto palette, max 8 colors, Oklab. Before: no full-palette dithering; after: 4×4, 50% strength.",
+      "url": "http://127.0.0.1:5332/colorfetti/"
+    },
+    {
+      "id": "03-dither-output",
+      "version": "before",
+      "file": "03-dither-output-before.png",
+      "note": "Same owned knight-a.png, Auto, 8-color limit. After uses optional 4×4 dithering at 50%; this is an example, not a claim dithering is always better.",
+      "url": "http://127.0.0.1:5332/colorfetti/"
+    },
+    {
+      "id": "04-output-count",
+      "version": "before",
+      "file": "04-output-count-before.png",
+      "note": "Same 8-color Auto result in the image viewer. Before has no count action; after counts full-resolution output.",
+      "url": "http://127.0.0.1:5332/colorfetti/"
+    },
+    {
+      "id": "05-reuse-output-palette",
+      "version": "before",
+      "file": "05-reuse-output-palette-before.png",
+      "note": "Before: existing empty import dialog. After: Use output colors opens a draft containing exactly the used colors, ready to name, save or HEX backup; not auto-saved.",
+      "url": "http://127.0.0.1:5332/colorfetti/"
+    },
+    {
+      "id": "06-palettes-start",
+      "version": "before",
+      "file": "06-palettes-start-before.png",
+      "note": "Preset rail beginning; Auto is not counted as a fixed preset. Nine fixed presets before, eleven after.",
+      "url": "http://127.0.0.1:5332/colorfetti/"
+    },
+    {
+      "id": "07-palettes-end",
+      "version": "before",
+      "file": "07-palettes-end-before.png",
+      "note": "Preset rail end; Black & white is new, ENDESGA 8 appears earlier in the rail.",
+      "url": "http://127.0.0.1:5332/colorfetti/"
+    },
+    {
+      "id": "08-lospec-import",
+      "version": "before",
+      "file": "08-lospec-import-before.png",
+      "note": "Same public ENDESGA 8 Lospec URL pasted into the existing import dialog. Actual live browser fetch; receipt records any error.",
+      "url": "http://127.0.0.1:5332/colorfetti/"
+    },
+    {
+      "id": "09-opacity-controls",
+      "version": "before",
+      "file": "09-opacity-controls-before.png",
+      "note": "Owned glow-alpha.png, PICO-8, all colors, Oklab, Cleanup/dither off. Before Cut128; after optional Keep retains source opacity.",
+      "url": "http://127.0.0.1:5332/colorfetti/"
+    },
+    {
+      "id": "10-opacity-output",
+      "version": "before",
+      "file": "10-opacity-output-before.png",
+      "note": "Same owned soft-alpha image and PICO-8 palette. After Keep preserves soft transparency; Cut remains default.",
+      "url": "http://127.0.0.1:5332/colorfetti/"
+    },
+    {
+      "id": "11-help",
+      "version": "before",
+      "file": "11-help-before.png",
+      "note": "Help Recolor wording now covers dithering. In Keep with soft-alpha input, Save recommends PNG for exact translucent colors.",
+      "url": "http://127.0.0.1:5332/colorfetti/"
+    },
+    {
+      "id": "12-mobile-recolor",
+      "version": "before",
+      "file": "12-mobile-recolor-before.png",
+      "note": "Responsive desktop-browser viewport 390×844; not a phone or physical-device test. Before has no dither row; after strength is named explicitly and shown only when enabled.",
+      "url": "http://127.0.0.1:5332/colorfetti/"
+    },
+    {
+      "id": "01-recolor-controls",
+      "version": "after",
+      "file": "01-recolor-controls-after.png",
+      "note": "Fresh Auto palette, all colors, Oklab, Cleanup off; new dithering defaults off.",
+      "url": "http://127.0.0.1:5333/colorfetti/"
+    },
+    {
+      "id": "02-dithering-strength",
+      "version": "after",
+      "file": "02-dithering-strength-after.png",
+      "note": "Auto palette, max 8 colors, Oklab. Before: no full-palette dithering; after: 4×4, 50% strength.",
+      "url": "http://127.0.0.1:5333/colorfetti/"
+    },
+    {
+      "id": "03-dither-output",
+      "version": "after",
+      "file": "03-dither-output-after.png",
+      "note": "Same owned knight-a.png, Auto, 8-color limit. After uses optional 4×4 dithering at 50%; this is an example, not a claim dithering is always better.",
+      "url": "http://127.0.0.1:5333/colorfetti/"
+    },
+    {
+      "id": "04-output-count",
+      "version": "after",
+      "file": "04-output-count-after.png",
+      "note": "Same 8-color Auto result in the image viewer. Before has no count action; after counts full-resolution output.",
+      "url": "http://127.0.0.1:5333/colorfetti/"
+    },
+    {
+      "id": "05-reuse-output-palette",
+      "version": "after",
+      "file": "05-reuse-output-palette-after.png",
+      "note": "Before: existing empty import dialog. After: Use output colors opens a draft containing exactly the used colors, ready to name, save or HEX backup; not auto-saved.",
+      "url": "http://127.0.0.1:5333/colorfetti/"
+    },
+    {
+      "id": "06-palettes-start",
+      "version": "after",
+      "file": "06-palettes-start-after.png",
+      "note": "Preset rail beginning; Auto is not counted as a fixed preset. Nine fixed presets before, eleven after.",
+      "url": "http://127.0.0.1:5333/colorfetti/"
+    },
+    {
+      "id": "07-palettes-end",
+      "version": "after",
+      "file": "07-palettes-end-after.png",
+      "note": "Preset rail end; Black & white is new, ENDESGA 8 appears earlier in the rail.",
+      "url": "http://127.0.0.1:5333/colorfetti/"
+    },
+    {
+      "id": "08-lospec-import",
+      "version": "after",
+      "file": "08-lospec-import-after.png",
+      "note": "Same public ENDESGA 8 Lospec URL pasted into the existing import dialog. Actual live browser fetch; receipt records any error.",
+      "url": "http://127.0.0.1:5333/colorfetti/"
+    },
+    {
+      "id": "09-opacity-controls",
+      "version": "after",
+      "file": "09-opacity-controls-after.png",
+      "note": "Owned glow-alpha.png, PICO-8, all colors, Oklab, Cleanup/dither off. Before Cut128; after optional Keep retains source opacity.",
+      "url": "http://127.0.0.1:5333/colorfetti/"
+    },
+    {
+      "id": "10-opacity-output",
+      "version": "after",
+      "file": "10-opacity-output-after.png",
+      "note": "Same owned soft-alpha image and PICO-8 palette. After Keep preserves soft transparency; Cut remains default.",
+      "url": "http://127.0.0.1:5333/colorfetti/"
+    },
+    {
+      "id": "11-help",
+      "version": "after",
+      "file": "11-help-after.png",
+      "note": "Help Recolor wording now covers dithering. In Keep with soft-alpha input, Save recommends PNG for exact translucent colors.",
+      "url": "http://127.0.0.1:5333/colorfetti/"
+    },
+    {
+      "id": "12-mobile-recolor",
+      "version": "after",
+      "file": "12-mobile-recolor-after.png",
+      "note": "Responsive desktop-browser viewport 390×844; not a phone or physical-device test. Before has no dither row; after strength is named explicitly and shown only when enabled.",
+      "url": "http://127.0.0.1:5333/colorfetti/"
+    }
+  ],
+  "beforeLospecDialog": "0 colors\nImage or file\nPaste colors\nAdd colors\nReview colors\n\nPaste #RGB, #RRGGBB, or six-digit hex colors separated by spaces or commas.\n\nCancel\nSave palette",
+  "afterLospecDialog": "8 colors\n\nFrom Lospec · ENDESGA\n\nImage or file\nPaste colors\nAdd colors\n\nPaste HEX colors or a Lospec palette link, such as https://lospec.com/palette-list/slso8.\n\nImport from Lospec\nCancel\nSave palette"
+}

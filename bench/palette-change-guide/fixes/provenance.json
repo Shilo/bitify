@@ -1,0 +1,251 @@
+{
+  "capturedAt": "2026-10-15T15:48:39.450Z",
+  "browser": "155.0.4283.45",
+  "chromiumSandbox": true,
+  "viewport": {
+    "width": 1280,
+    "height": 900
+  },
+  "forcedDark": {
+    "scope": "Isolated desktop browser emulation, not Android. Same test-only HTML color-scheme/meta light override on both builds removes global opt-out so CDP Auto Dark visibly exercises the original CSS and replacement canvas renderers. No production files, browser preferences or conversion algorithms changed.",
+    "captures": [
+      {
+        "version": "before",
+        "revision": "f08d4d3f6e3df771d17524f00f1bba2e492c4ec0",
+        "url": "http://127.0.0.1:5332/colorfetti/",
+        "file": "forced-dark-before.png",
+        "palette": "PICO-8, existing Edit palette dialog",
+        "samples": [
+          {
+            "expected": "#000000",
+            "actual": "#000000"
+          },
+          {
+            "expected": "#1d2b53",
+            "actual": "#1d2b53"
+          },
+          {
+            "expected": "#7e2553",
+            "actual": "#7e2553"
+          },
+          {
+            "expected": "#008751",
+            "actual": "#008751"
+          },
+          {
+            "expected": "#ab5236",
+            "actual": "#ab5236"
+          },
+          {
+            "expected": "#5f574f",
+            "actual": "#5f574f"
+          },
+          {
+            "expected": "#c2c3c7",
+            "actual": "#c2c3c7"
+          },
+          {
+            "expected": "#fff1e8",
+            "actual": "#2b211b"
+          },
+          {
+            "expected": "#ff004d",
+            "actual": "#ff004d"
+          },
+          {
+            "expected": "#ffa300",
+            "actual": "#ffa300"
+          },
+          {
+            "expected": "#ffec27",
+            "actual": "#382c00"
+          },
+          {
+            "expected": "#00e436",
+            "actual": "#00e436"
+          },
+          {
+            "expected": "#29adff",
+            "actual": "#29adff"
+          },
+          {
+            "expected": "#83769c",
+            "actual": "#83769c"
+          },
+          {
+            "expected": "#ff77a8",
+            "actual": "#ff77a8"
+          },
+          {
+            "expected": "#ffccaa",
+            "actual": "#543015"
+          }
+        ],
+        "mismatches": 3,
+        "sha256": "709434e0cc7bd9c2beb30242a518c3ebd225a9fbb035823eafdf73326087e603"
+      },
+      {
+        "version": "after",
+        "revision": "d91d9d1",
+        "url": "http://127.0.0.1:5333/colorfetti/",
+        "file": "forced-dark-after.png",
+        "palette": "PICO-8, existing Edit palette dialog",
+        "samples": [
+          {
+            "expected": "#000000",
+            "actual": "#000000"
+          },
+          {
+            "expected": "#1d2b53",
+            "actual": "#1d2b53"
+          },
+          {
+            "expected": "#7e2553",
+            "actual": "#7e2553"
+          },
+          {
+            "expected": "#008751",
+            "actual": "#008751"
+          },
+          {
+            "expected": "#ab5236",
+            "actual": "#ab5236"
+          },
+          {
+            "expected": "#5f574f",
+            "actual": "#5f574f"
+          },
+          {
+            "expected": "#c2c3c7",
+            "actual": "#c2c3c7"
+          },
+          {
+            "expected": "#fff1e8",
+            "actual": "#fff1e8"
+          },
+          {
+            "expected": "#ff004d",
+            "actual": "#ff004d"
+          },
+          {
+            "expected": "#ffa300",
+            "actual": "#ffa300"
+          },
+          {
+            "expected": "#ffec27",
+            "actual": "#ffec27"
+          },
+          {
+            "expected": "#00e436",
+            "actual": "#00e436"
+          },
+          {
+            "expected": "#29adff",
+            "actual": "#29adff"
+          },
+          {
+            "expected": "#83769c",
+            "actual": "#83769c"
+          },
+          {
+            "expected": "#ff77a8",
+            "actual": "#ff77a8"
+          },
+          {
+            "expected": "#ffccaa",
+            "actual": "#ffccaa"
+          }
+        ],
+        "mismatches": 0,
+        "sha256": "15e814b5b48f6ddb3d9335834bc94c398bc8aea2d7d5008a37822e74623e3309"
+      }
+    ]
+  },
+  "firefox": {
+    "scope": "Retained historical matched Firefox 153 before/after 376a55c, not f08..HEAD screenshots.",
+    "before": {
+      "file": "firefox-before.png",
+      "source": "bench/claude-audit-2026-10-15/device/firefox-pre/layout-1280x900-wall.png",
+      "receipt": "bench/claude-audit-2026-10-15/device/firefox-pre/results.json",
+      "engine": "firefox",
+      "date": "2026-10-15T12:47:40.685Z",
+      "indexSha256": "a9c33d240c472e3f6b1db90699ed49a6530dbeb748158b2f1180915b3d12398d",
+      "decodePaths": {
+        "imageDecoder": true,
+        "calls": [
+          {
+            "path": "managed-copyTo",
+            "format": "BGRA",
+            "colorSpace": {
+              "primaries": null,
+              "transfer": null,
+              "matrix": null,
+              "fullRange": null
+            }
+          },
+          {
+            "path": "managed-copyTo",
+            "format": "BGRA",
+            "colorSpace": {
+              "primaries": null,
+              "transfer": null,
+              "matrix": null,
+              "fullRange": null
+            }
+          },
+          {
+            "path": "managed-copyTo",
+            "format": "BGRA",
+            "colorSpace": {
+              "primaries": null,
+              "transfer": null,
+              "matrix": null,
+              "fullRange": null
+            }
+          },
+          {
+            "path": "managed-copyTo",
+            "format": "BGRA",
+            "colorSpace": {
+              "primaries": null,
+              "transfer": null,
+              "matrix": null,
+              "fullRange": null
+            }
+          }
+        ]
+      },
+      "sha256": "d602c04662b131d3e25a1010a52237e4fcdae346d5bb7277b7865536b78a487c"
+    },
+    "after": {
+      "file": "firefox-after.png",
+      "source": "bench/claude-audit-2026-10-15/device/firefox/layout-1280x900-wall.png",
+      "receipt": "bench/claude-audit-2026-10-15/device/firefox/results.json",
+      "engine": "firefox",
+      "date": "2026-10-15T12:46:09.257Z",
+      "indexSha256": "67b5a088de09d901f63badcb14a4f7ba41e4e8c4b78ddc8b9b8767d8128dd82f",
+      "decodePaths": {
+        "imageDecoder": true,
+        "calls": [
+          {
+            "path": "bitmap-canvas",
+            "type": "image/png"
+          },
+          {
+            "path": "bitmap-canvas",
+            "type": "image/png"
+          },
+          {
+            "path": "bitmap-canvas",
+            "type": "image/png"
+          },
+          {
+            "path": "bitmap-canvas",
+            "type": "image/png"
+          }
+        ]
+      },
+      "sha256": "56610403e64fd8f0fa30efbc4b3a69a4f94724065dfe6cd8ca0675121dd0b093"
+    }
+  }
+}
