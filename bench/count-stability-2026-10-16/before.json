@@ -1,0 +1,131 @@
+{
+  "url": "http://127.0.0.1:5343/",
+  "label": "before",
+  "errors": [],
+  "edits": [
+    {
+      "control": "Max colors",
+      "value": "4",
+      "samples": [
+        {
+          "t": 115.8999999910593,
+          "text": "32×24"
+        },
+        {
+          "t": 128.29999999701977,
+          "text": "32×24 · 2 colors"
+        }
+      ]
+    },
+    {
+      "control": "Max colors",
+      "value": "8",
+      "samples": [
+        {
+          "t": 387.29999999701977,
+          "text": "32×24"
+        },
+        {
+          "t": 393.5,
+          "text": "32×24 · 2 colors"
+        }
+      ]
+    },
+    {
+      "control": "Max colors",
+      "value": "16",
+      "samples": [
+        {
+          "t": 655.2999999970198,
+          "text": "32×24"
+        },
+        {
+          "t": 660.5,
+          "text": "32×24 · 2 colors"
+        }
+      ]
+    },
+    {
+      "control": "Max colors",
+      "value": "32",
+      "samples": [
+        {
+          "t": 931.1999999880791,
+          "text": "32×24"
+        },
+        {
+          "t": 944.5,
+          "text": "32×24 · 2 colors"
+        }
+      ]
+    },
+    {
+      "control": "RGB matching",
+      "samples": [
+        {
+          "t": 1195.199999988079,
+          "text": "32×24"
+        },
+        {
+          "t": 1210.0999999940395,
+          "text": "32×24 · 2 colors"
+        }
+      ]
+    },
+    {
+      "control": "Cleanup on",
+      "samples": [
+        {
+          "t": 1514,
+          "text": "32×24"
+        },
+        {
+          "t": 1538.699999988079,
+          "text": "32×24 · 2 colors"
+        }
+      ]
+    },
+    {
+      "control": "Dithering 4x4",
+      "samples": [
+        {
+          "t": 1851.0999999940395,
+          "text": "32×24"
+        },
+        {
+          "t": 1862,
+          "text": "32×24 · 2 colors"
+        }
+      ]
+    },
+    {
+      "control": "range sweep 64 down to 44",
+      "samples": [
+        {
+          "t": 2170.0999999940395,
+          "text": "32×24"
+        },
+        {
+          "t": 2178.7999999970198,
+          "text": "32×24 · 2 colors"
+        },
+        {
+          "t": 2179.3999999910593,
+          "text": "32×24"
+        },
+        {
+          "t": 2278.0999999940395,
+          "text": "32×24 · 2 colors"
+        }
+      ]
+    }
+  ],
+  "blankTransitions": 9,
+  "viewport": {
+    "width": 1280,
+    "height": 900,
+    "dpr": 1
+  },
+  "finalCaption": "32×24 · 2 colors",
+  "finalPending": 0
+}

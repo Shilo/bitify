@@ -1,0 +1,26 @@
+[
+  {
+    "port": 5343,
+    "firstDownloadCount": 0,
+    "settingsAfterFirst": 0,
+    "secondClickDownload": true,
+    "sha256": "0f36d252f86a5119a373f364235771e8c428bf917948f4ed58740f469803cee8",
+    "equality": {
+      "alphaMismatch": 0,
+      "rgbMismatch": 0,
+      "first": null
+    }
+  },
+  {
+    "port": 5344,
+    "firstDownloadCount": 0,
+    "settingsAfterFirst": 0,
+    "secondClickDownload": true,
+    "sha256": "0f36d252f86a5119a373f364235771e8c428bf917948f4ed58740f469803cee8",
+    "equality": {
+      "alphaMismatch": 0,
+      "rgbMismatch": 0,
+      "first": null
+    }
+  }
+]

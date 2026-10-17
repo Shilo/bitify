@@ -1,0 +1,51 @@
+{
+  "url": "http://localhost:5344/",
+  "label": "android",
+  "errors": [],
+  "edits": [
+    {
+      "control": "Max colors",
+      "value": "4",
+      "samples": []
+    },
+    {
+      "control": "Max colors",
+      "value": "8",
+      "samples": []
+    },
+    {
+      "control": "Max colors",
+      "value": "16",
+      "samples": []
+    },
+    {
+      "control": "Max colors",
+      "value": "32",
+      "samples": []
+    },
+    {
+      "control": "RGB matching",
+      "samples": []
+    },
+    {
+      "control": "Cleanup on",
+      "samples": []
+    },
+    {
+      "control": "Dithering 4x4",
+      "samples": []
+    },
+    {
+      "control": "range sweep 64 down to 44",
+      "samples": []
+    }
+  ],
+  "blankTransitions": 0,
+  "viewport": {
+    "width": 448,
+    "height": 819,
+    "dpr": 2.25
+  },
+  "finalCaption": "32×24 · 2 colors",
+  "finalPending": 0
+}

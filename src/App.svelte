@@ -710,32 +710,51 @@
   });
   // Per-item subscriptions avoid invalidating every caption on each publication.
   const colorUsage = new SvelteMap();
-  function previewUsage({ item, key, colors, used, frame, frames }) {
+  function previewUsage({ item, key, colors, used, frame, frames, exact = true }) {
     if (key !== usageKey || family !== 'full-palette' || generatedPending || generatedUnavailable || !items.includes(item)) return;
     const previous = usageFor(item);
+    // Pending inspections own their record identity and explicit-join flag.
+    // Their full-source result will replace the retained presentation atomically.
     if (previous?.result || previous?.status === 'pending') return;
+    if (!exact) {
+      // Without a full-source inspection, a new sampled rendering cannot supply
+      // an exact replacement. Stop displaying its previous-settings count.
+      if (previous?.previousResult) colorUsage.set(item.id, { ...previous, previousResult: undefined });
+      return;
+    }
     const progress = addUsageFrame(previous?.progress, colors, used, frame, frames);
     if (!progress) return;
     const result = completedUsage(progress, fullPalette.colors);
-    colorUsage.set(item.id, { item, key, ...(result ? { result, status: 'ready' } : { progress, status: 'partial' }) });
+    colorUsage.set(item.id, { item, key, ...(result ? { result, status: 'ready' }
+      : { progress, status: 'partial', previousResult: lastUsageResult(item) }) });
   }
   const usageFor = item => {
     const record = colorUsage.get(item.id);
     return family === 'full-palette' && record?.item === item && record.key === usageKey ? record : null;
   };
-  const usageLabel = item => {
-    const record = usageFor(item);
-    return record?.result ? `${record.result.count} ${record.result.count === 1 ? 'color' : 'colors'}` : '';
+  // Presentation may retain one completed count while current metadata is
+  // pending. Reuse and inspection still use only the strict current-key record.
+  const lastUsageResult = item => {
+    const record = colorUsage.get(item.id);
+    return family === 'full-palette' && record?.item === item && record.status !== 'error'
+      ? record.result ?? record.previousResult : null;
   };
+  const usageLabel = item => {
+    const result = !generatedUnavailable && !itemPaletteFailed(item) && lastUsageResult(item);
+    return result ? `${result.count} ${result.count === 1 ? 'color' : 'colors'}` : '';
+  };
+  const usagePending = item => !!lastUsageResult(item) && !usageFor(item)?.result;
   $effect(() => {
-    const key = usageKey, live = items;
+    const key = usageKey, live = items, retain = family === 'full-palette';
     // Observe source/settings changes, never metadata publications themselves.
     untrack(() => {
       const current = new Map(live.map(item => [item.id, item]));
       for (const [id, record] of colorUsage) {
         if (!current.has(id)) { record?.controller?.abort(); colorUsage.delete(id); }
         else if (record && (record.key !== key || current.get(id) !== record.item)) {
-          record.controller?.abort(); colorUsage.set(id, null);
+          record.controller?.abort();
+          colorUsage.set(id, retain && current.get(id) === record.item
+            ? { item: record.item, key, previousResult: record.result ?? record.previousResult } : null);
         }
       }
       // Retain empty live slots: missing-key reads subscribe to the map as a whole.
@@ -749,7 +768,7 @@
     if (previous?.status === 'pending') { previous.explicit ||= explicit; return previous.promise; }
     if (previous?.result) return Promise.resolve(previous.result);
     const snapshot = asking(), key = usageKey, controller = new AbortController();
-    const record = { item, key, controller, status: 'pending', explicit };
+    const record = { item, key, controller, status: 'pending', explicit, previousResult: lastUsageResult(item) };
     const publish = value => {
       if (!controller.signal.aborted && key === usageKey && items.includes(item) && colorUsage.get(item.id) === record)
         colorUsage.set(item.id, { item, key, ...value });
@@ -779,7 +798,7 @@
       record.controller.abort();
       untrack(() => {
         if (colorUsage.get(item.id) === record) {
-          colorUsage.set(item.id, null);
+          colorUsage.set(item.id, { item, key, previousResult: record.previousResult });
         }
       });
     };
@@ -1036,7 +1055,7 @@
          the demo when its source changes; real images retain their ID and caches. -->
     {#each canvasItems as item (item.id === 0 ? item.original : item.id)}
       <Tile {item} inset={IMAGE_INSET} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} palettePending={generatedPending} {alphaCut} {alphaMode} {metric} {maxColors} {cleanup} {dither} {ditherStrength} onpalettestatus={reportPaletteStage} {paletteRetry}
-        colorUsageLabel={usageLabel(item)} usageIdentity={usageKey} onusageframe={previewUsage} analysisPending={needsAnalysis(item)} flipped={effectiveOriginal} comparing={previewing} active={!viewed} exportDisabled={generatedUnavailable || itemPaletteFailed(item)} budget={dragging ? DRAG_MS / canvasItems.length : 0}
+        colorUsageLabel={usageLabel(item)} colorUsagePending={usagePending(item)} usageIdentity={usageKey} onusageframe={previewUsage} analysisPending={needsAnalysis(item)} flipped={effectiveOriginal} comparing={previewing} active={!viewed} exportDisabled={generatedUnavailable || itemPaletteFailed(item)} budget={dragging ? DRAG_MS / canvasItems.length : 0}
         oncompare={compareHold} onopen={items.length ? openImage : undefined}
         exportDrag={items.length ? dragExports : undefined}
         onactivate={items.length ? undefined : () => picker.click()}
@@ -1052,7 +1071,7 @@
 
 {#if viewed}
   <ImageViewer item={viewed} analysisPending={needsAnalysis(viewed)} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} palettePending={generatedPending} {alphaCut} {alphaMode} {metric} {maxColors} {cleanup} {dither} {ditherStrength} onpalettestatus={reportPaletteStage} {paletteRetry} {busy} {message} flipped={viewInitialOriginal}
-    colorUsageLabel={usageLabel(viewed)}
+    colorUsageLabel={usageLabel(viewed)} colorUsagePending={usagePending(viewed)}
     paletteFailureNotice={failureNotice(currentPaletteFailures.filter(f => f.inputs.item === viewed))} onpaletteretry={retryPaletteFailures} exportDisabled={generatedUnavailable || itemPaletteFailed(viewed)} exportDrag={viewed.id === 0 ? undefined : dragExports}
     onsave={viewed.id === 0 ? undefined : () => save(viewed)}
     oncopy={viewed.id === 0 ? undefined : () => copy(viewed)}

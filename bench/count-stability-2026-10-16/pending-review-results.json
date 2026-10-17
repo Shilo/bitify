@@ -1,0 +1,20 @@
+[
+  {
+    "port": 5343,
+    "before": "2048×2048 · 26 colors",
+    "after": "2048×2048 · 25 colors",
+    "draftOpen": 1,
+    "status": [
+      "Finding output colors…"
+    ]
+  },
+  {
+    "port": 5344,
+    "before": "2048×2048 · 26 colors",
+    "after": "2048×2048",
+    "draftOpen": 0,
+    "status": [
+      "Finding output colors…"
+    ]
+  }
+]

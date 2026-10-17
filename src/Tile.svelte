@@ -20,7 +20,7 @@
   // Without `onremove` the tile is a preview only and has no buttons.
   // `set` is the style's settings. `budget` is set while one of their sliders is being dragged:
   // the milliseconds this tile may take to convert its image after each move.
-  let { item, first, second, style, set, family = 'two-color', palette, palettePending = false, analysisPending = false, alphaCut = 128, alphaMode = 'cut', metric = 'oklab', maxColors = 0, cleanup = false, dither = 'none', ditherStrength = 50, colorUsageLabel = '', usageIdentity, onusageframe, active = true, exportDisabled = false, onpalettestatus, paletteRetry = 0, flipped, budget = 0, inset = 8, aspect = 1, inspectionScale = 1, onshare, oncopy, onreusecolors, reuseDisabled = false, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false, exportDrag } = $props();
+  let { item, first, second, style, set, family = 'two-color', palette, palettePending = false, analysisPending = false, alphaCut = 128, alphaMode = 'cut', metric = 'oklab', maxColors = 0, cleanup = false, dither = 'none', ditherStrength = 50, colorUsageLabel = '', colorUsagePending = false, usageIdentity, onusageframe, active = true, exportDisabled = false, onpalettestatus, paletteRetry = 0, flipped, budget = 0, inset = 8, aspect = 1, inspectionScale = 1, onshare, oncopy, onreusecolors, reuseDisabled = false, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false, exportDrag } = $props();
   const paletteCut = $derived(effectiveAlphaCut(alphaMode, alphaCut));
   const failureOwner = Symbol('palette preview surface');
   const reportStage = (type, stage, inputs, attempt, error) => untrack(() => onpalettestatus?.({ type, owner: failureOwner, stage, inputs, attempt, error }));
@@ -218,8 +218,11 @@
     const colors = conversionPalette, width = mw, height = mh, cut = alphaCut, opacity = alphaMode, matching = metric, clean = conversionCleanup, cleaning = cleanup, dithering = dither, amount = ditherStrength;
     const key = usageIdentity, pendingPalette = palettePending, currentItem = item;
     const reportUsage = used => {
-      if (!pendingPalette && width === sourceWidth && height === sourceHeight)
-        untrack(() => onusageframe?.({ item: currentItem, key, colors: colors.colors, used, frame: frameAt, frames: frames.length }));
+      const exact = width === sourceWidth && height === sourceHeight;
+      // Only notify sampled completions when retiring a retained caption. Read
+      // its presentation state untracked, so captions never restart conversion.
+      if (!pendingPalette && (exact || untrack(() => colorUsagePending)))
+        untrack(() => onusageframe?.({ item: currentItem, key, colors: colors.colors, used, frame: frameAt, frames: frames.length, exact }));
     };
     fullReady = false;
     // Keep the last completed frame while the next frame or settings convert.
@@ -306,6 +309,9 @@
     const timer = setTimeout(() => (at = (at + 1) % frames.length), frames[at].delay);
     return () => clearTimeout(timer);
   });
+  const usageDescription = $derived(colorUsagePending
+    ? `${colorUsageLabel}. Previous output; updating color count.`
+    : colorUsageLabel + (item.frames ? '. Converted output across all animation frames.' : '. Converted full-resolution output.'));
 </script>
 
 <figure class="tile">
@@ -363,13 +369,13 @@
         <button type="button" class="caption-preview" onclick={e => activate(e.currentTarget)} aria-label="Preview {item.name}" aria-haspopup="dialog">
           <span class="caption-details">
             <span class="name" use:tooltip={item.name}>{item.name}</span>
-            <span class="dim">{item.img.w}<span class="by">×</span>{item.img.h}{#if colorUsageLabel}{' · '}<span use:tooltip={colorUsageLabel + (item.frames ? '. Converted output across all animation frames.' : '. Converted full-resolution output.')}>{colorUsageLabel}</span>{/if}{#if failureDescription}<span class="palette-failure-mark" use:tooltip={failureDescription}>{' · Retry needed'}</span>{/if}</span>
+            <span class="dim">{item.img.w}<span class="by">×</span>{item.img.h}{#if colorUsageLabel}{' · '}<span aria-busy={colorUsagePending} use:tooltip={usageDescription}>{colorUsageLabel}</span>{/if}{#if failureDescription}<span class="palette-failure-mark" use:tooltip={failureDescription}>{' · Retry needed'}</span>{/if}</span>
           </span>
         </button>
       {:else}
         <span class="caption-details">
           <span class="name" use:tooltip={item.name}>{item.name}</span>
-          <span class="dim">{item.img.w}<span class="by">×</span>{item.img.h}{#if colorUsageLabel}{' · '}<span use:tooltip={colorUsageLabel + (item.frames ? '. Converted output across all animation frames.' : '. Converted full-resolution output.')}>{colorUsageLabel}</span>{/if}{#if failureDescription}<span class="palette-failure-mark" use:tooltip={failureDescription}>{' · Retry needed'}</span>{/if}</span>
+          <span class="dim">{item.img.w}<span class="by">×</span>{item.img.h}{#if colorUsageLabel}{' · '}<span aria-busy={colorUsagePending} use:tooltip={usageDescription}>{colorUsageLabel}</span>{/if}{#if failureDescription}<span class="palette-failure-mark" use:tooltip={failureDescription}>{' · Retry needed'}</span>{/if}</span>
         </span>
       {/if}
       {#if onremove}

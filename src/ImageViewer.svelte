@@ -6,7 +6,7 @@
   import { fitViewerImage, viewerInspectionScale } from './lib/viewer-layout.js';
   import { canvasGridSpacing } from './lib/canvas-grid.js';
   import { viewerNavigation, MIN_VIEWER_ZOOM, MAX_VIEWER_ZOOM } from './lib/viewer-navigation.js';
-  let { item, first, second, style, set, family = 'two-color', palette, palettePending = false, analysisPending = false, alphaCut = 128, alphaMode = 'cut', metric = 'oklab', maxColors = 0, cleanup = false, dither = 'none', ditherStrength = 50, onpalettestatus, paletteRetry = 0, paletteFailureNotice = '', onpaletteretry, exportDisabled = false, flipped = false, onsave, oncopy, onclose, busy = '', message = '', colorUsageLabel = '', exportDrag } = $props();
+  let { item, first, second, style, set, family = 'two-color', palette, palettePending = false, analysisPending = false, alphaCut = 128, alphaMode = 'cut', metric = 'oklab', maxColors = 0, cleanup = false, dither = 'none', ditherStrength = 50, onpalettestatus, paletteRetry = 0, paletteFailureNotice = '', onpaletteretry, exportDisabled = false, flipped = false, onsave, oncopy, onclose, busy = '', message = '', colorUsageLabel = '', colorUsagePending = false, exportDrag } = $props();
   let dialog;
   let width = $state(0), height = $state(0);
   const view = $state({ scale: 1, x: 0, y: 0, dragging: false });
@@ -78,7 +78,7 @@
   </nav>
   <div class="viewer-art" class:is-zoomed={view.scale > 1} class:is-dragging={view.dragging} bind:clientWidth={width} bind:clientHeight={height}>
     <div class="viewer-tile" style:width="{fit.width}px" style:transform={`translate(${view.x}px, ${view.y}px) scale(${view.scale})`}>
-      <Tile {item} {first} {second} {style} {set} {family} {palette} {palettePending} {analysisPending} {alphaCut} {alphaMode} {metric} {maxColors} {cleanup} {dither} {ditherStrength} {onpalettestatus} {paletteRetry} {colorUsageLabel} {inspectionScale} flipped={originalVisible} activationLabel={`Close preview of ${item.name}`} inset={0} aspect={fit.width / fit.height} />
+      <Tile {item} {first} {second} {style} {set} {family} {palette} {palettePending} {analysisPending} {alphaCut} {alphaMode} {metric} {maxColors} {cleanup} {dither} {ditherStrength} {onpalettestatus} {paletteRetry} {colorUsageLabel} {colorUsagePending} {inspectionScale} flipped={originalVisible} activationLabel={`Close preview of ${item.name}`} inset={0} aspect={fit.width / fit.height} />
     </div>
   </div>
   <!-- Keep feedback in the top-layer dialog; the page-level toast is inert while this viewer is open. -->

@@ -24,7 +24,11 @@ publish only after every frame was observed at full resolution. Sampled walls
 start no extra inspection. Preview starts missing full-source inspection and
 cancels it on close unless explicit Reuse joined it. Keep tiny color/frame
 metadata only, never converted frame caches. Source/settings changes cancel and
-clear counts; Auto keys use the captured wall request. Known zero-color outputs
+invalidate exact counts; a settings change retains one last completed caption
+while its replacement is pending, with aria-busy and a previous-output tooltip.
+Reuse never consumes that retained count. A completed sampled preview retires it
+unless a full-source inspection is already pending. Source/family changes and
+failures clear it. Auto keys use the captured wall request. Known zero-color outputs
 disable reuse; newly inspected empty outputs explain why no palette can be made.
 
 Optional Palette Opacity Cut/Keep defaults to Cut128. Keep uses eligibility cut1

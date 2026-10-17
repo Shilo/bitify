@@ -43,6 +43,15 @@ pending work; results retain RGB/count/frame metadata only. A later Save can
 repeat conversion. There is no new converted-frame cache or automatic wall scan.
 Auto identity uses its captured wall request, excluding retained preview colors.
 
+During settings changes, retain one previous completed caption result as
+presentation only; current-key inspection and Reuse remain strict. A completed
+sampled wall notifies retirement only while such a caption is pending, unless a
+full-source inspection is already computing its exact replacement. This adds no
+pixel scan, conversion, timer or frame cache. The retained object contains at most
+256 RGB strings and a count/frame total; repeated settings changes flatten to the
+same one previous result. Read presentation state untracked in Tile so changing a
+caption cannot restart its conversion.
+
 Opacity Keep adds one byte per sampled/full converted pixel for original alpha;
 Cut allocates no alpha buffer. The existing 8 MiB animation cache reserves three
 bytes/sample in Keep versus two in Cut, retaining existing per-frame overhead.

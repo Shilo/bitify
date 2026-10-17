@@ -1,0 +1,12 @@
+[
+  {
+    "port": 5344,
+    "before": "2048×2048 · 26 colors",
+    "after": "2048×2048 · 25 colors",
+    "draftOpen": 1,
+    "status": [
+      "Finding output colors…"
+    ],
+    "sampledAfterChangeWithoutInspection": "2048×2048"
+  }
+]

@@ -153,7 +153,7 @@ metadata. Creator attribution remains stored, as does the validated source URL.
 Count is noninteractive caption metadata, following dimensions: 24×24 · 8 colors.
 Separators retain explicit text spaces on both sides of the middle dot, including
 before Retry needed; template whitespace trimming must not join metadata fields.
-It always describes full-resolution converted output, including while Original
+It describes full-resolution converted output, including while Original
 is shown; animations report the RGB union of all frames, excluding fully empty
 pixels. Wall tiles reuse post-Cleanup used flags already produced by full-size
 previews, translating actual subset indices back to RGB. Sampled/draft previews
@@ -163,6 +163,18 @@ metadata; completed results discard frame tracking. A keyed reactive map retains
 empty slots for live images, so each completed count updates its own subscribers
 without copying the whole map. Source/settings changes prune or invalidate entries
 in one untracked pass; ordinary metadata publication never triggers that pass.
+
+Settings changes retain one previous completed caption until an exact replacement
+is ready, so an unchanged count never flashes empty. The retained span has
+`aria-busy="true"` and its tooltip identifies the previous output while updating;
+fresh metadata replaces it atomically, including zero colors and full-clip unions.
+Strict current-key metadata remains separate: Reuse must never use a previous
+result. When a new sampled preview completes without an active full-source
+inspection, retire its previous-settings count rather than present it indefinitely.
+An active inspection retains its record identity and explicit Reuse subscription
+until completion or cancellation. Source replacement/removal, 1-bit mode and
+failures hide or discard the old label. Retain only one small RGB/count result per
+item, never a chain, extra pixel scans, timers or converted images.
 
 Opening Preview automatically starts missing full-source inspection through the
 export pipeline, with no Count button. Closing Preview cancels automatic work

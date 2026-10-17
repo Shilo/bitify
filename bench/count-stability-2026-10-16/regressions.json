@@ -1,0 +1,22 @@
+{
+  "cases": [
+    {
+      "case": "four-color count changes and family switches",
+      "gaps": [],
+      "nativeExportChecked": true
+    },
+    {
+      "case": "zero-color Cut to Keep to Cut",
+      "gaps": []
+    },
+    {
+      "case": "whole-animation count",
+      "gaps": [],
+      "count": 2,
+      "frames": 6,
+      "nativeExportChecked": true
+    }
+  ],
+  "errors": [],
+  "android": false
+}
