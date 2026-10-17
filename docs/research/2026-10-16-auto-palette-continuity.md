@@ -84,3 +84,64 @@ DOM observations cannot certify every GPU/compositor presentation, device, image
 or timing. First generation and genuine source/cutoff changes can still show the
 existing updating notice and its layout consequences. This fix removes that
 transition for already completed, unchanged Auto requests.
+
+## Functional regression audit
+
+A second independent adversarial review checked source identity, stale results,
+cancellation, failure/retry, settings invalidation, exports and cache eviction.
+No production correction was recommended. The client already cached results by
+the same request key; this guard only avoids republishing its completed result.
+Import/removal/replacement, duplicate assets, original/data identity, dimensions,
+frame order/durations/revisions and effective cutoff invalidate that key. Matching,
+caps, Cleanup and dithering instead invalidate the independent conversion paths.
+Keep and Cut1 intentionally share fitting eligibility while preserving separate
+output-alpha identities. The reviewer ran 15 key assertions successfully.
+
+We challenged the two-entry client LRU case: independent exports for other captured
+walls can evict App's current publication from that cache. Returning to unchanged
+Auto can now defer its deterministic refit until Save rather than prewarming it
+during the switch. This changes where that work happens, not its output or request
+ownership. The reviewer forced eviction and verified identical colors, 257 output
+indices/alpha values and a 251-byte PNG after regeneration.
+
+The differential browser harness uses two frozen copies of the same source tree,
+differing only by the six-line guard. Build each copy, then run:
+
+```powershell
+node bench/auto-palette-regression-server.mjs <before-dist> <after-dist> 5383
+```
+
+Open `/qa` and click Run functional checks. The server isolates each app's storage,
+records actual production download Blobs and injects test-only worker hold/failure
+controls. Production modules are unchanged. It compares settled canvas pixels,
+editor swatches, selected palettes, error guidance and PNG/GIF bytes. ZIP comparison
+checks every filename and encoded file byte, excluding archive timestamp metadata.
+Reports are saved to `.tmp/auto-functional/results.json`.
+
+Coverage includes cold Auto and saved-preset loading; active/inactive imports and
+deletions; last-image removal; new and previously used walls; custom palette import;
+matching, cap, Cleanup, all dither sizes/strength endpoints and Cut/Keep changes;
+nondefault settings across a preset/Auto roundtrip; palette and global Reset;
+canceled generation; failure/retry; a captured export surviving source deletion;
+GIF fitting/export/removal; and no-Worker generation/import/removal. Review requested
+explicit saved-preset and committed combined-settings assertions; both were added.
+
+The broad fallback run also exposed an existing limitation: disabling Worker
+entirely permits Auto generation/import/rendering, but palette PNG saving uses
+fflate's Worker-based asynchronous encoder and fails. The harness explicitly
+requires the same save failure in both builds and records it separately; it does
+not count fallback exports as passing. No encoder change is included in this fix.
+
+The complete corrected post-review run passed all 44 before/after checkpoints and
+36 production export comparisons, including animated GIF bytes and ZIP contents.
+Both versions reproduced the explicitly checked Worker-disabled save limitation.
+The latest unit run again passed 969 tests (two optional skips), and an isolated
+production build passed. No further production edits were needed after review.
+
+The physical Android follow-up also passed 21 phases over 856 observed frames on
+a connected Pixel 8 Pro running Brave. Combined cap/Cleanup/dither/Keep settings,
+actual advancing GIF playback and source lifecycle checks passed. The four measured
+warm Auto returns painted once without pending status, a refit or a missing canvas.
+Fifteen 250ms warm-switch windows contained no 50ms-or-longer task; their maximum
+rAF interval was 33.4ms. Startup/other phases still had 56–65ms tasks, so this is not
+a claim that the whole application is free of long tasks.

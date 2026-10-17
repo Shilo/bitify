@@ -1,0 +1,152 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Auto palette functional equivalence</title>
+<style>body{font:14px system-ui;background:#1c242c;color:#eff5fa;margin:12px}button{padding:8px}pre{white-space:pre-wrap;max-height:180px;overflow:auto}.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}iframe{width:100%;height:720px;border:1px solid #657481}h2{font-size:15px}</style>
+<h1>Auto palette: before/after functional regression</h1>
+<button id="run">Run functional checks</button><pre id="report" role="status">Ready</pre>
+<div class="pair"><div><h2>Before guard</h2><iframe id="before" title="Before fix" src="/before/"></iframe></div><div><h2>After guard</h2><iframe id="after" title="After fix" src="/after/"></iframe></div></div>
+<script type="module">
+const report=document.querySelector('#report'),frames=['before','after'].map(id=>document.querySelector('#'+id));
+let surfaces=[],phase='startup';
+const checks=[],exports=[],knownLimitations=[];
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+function assert(ok,message){if(!ok)throw Error(message);}
+async function until(test,label,timeout=20000){const end=performance.now()+timeout;while(performance.now()<end){if(test())return;await sleep(20);}throw Error('Timeout: '+label);}
+function button(s,label){const b=s.doc.querySelector(`button[aria-label="${label}"]`);assert(b,'Missing '+label);return b;}
+function textButton(root,text){const b=[...root.querySelectorAll('button')].find(b=>b.textContent.trim()===text);assert(b,'Missing button '+text);return b;}
+async function boot(query=''){
+  surfaces=[];
+  for(let i=0;i<frames.length;i++){
+    await new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(Error('Frame load timeout')),20000);frames[i].onload=()=>{clearTimeout(timer);resolve();};frames[i].src='/'+(i?'after':'before')+'/'+query;});
+    await until(()=>frames[i].contentDocument?.querySelector('.art'),'app boot');
+    const doc=frames[i].contentDocument,win=frames[i].contentWindow;
+    doc.querySelector('.help[open] button[aria-label="Close"]')?.click();
+    surfaces.push({doc,win,qa:win.__functional});
+  }
+  for(const s of surfaces)await rail(s);
+}
+async function rail(s){if(!s.doc.querySelector('.palette-choice'))button(s,'Palette').click();await until(()=>s.doc.querySelector('.palette-choice'),'palette rail');}
+async function select(s,name){await rail(s);button(s,name).click();await sleep(0);}
+async function settled(s,animated=false){
+  await until(()=>s.qa.jobs===0&&!s.doc.querySelector('.palette-source-status')?.textContent.includes('Updating'),'workers/generation settled');
+  if(animated){await sleep(1200);return;}
+  await sleep(100);let last=s.qa.paints,since=performance.now();
+  await until(()=>{if(s.qa.paints!==last){last=s.qa.paints;since=performance.now();}return s.qa.jobs===0&&performance.now()-since>250;},'preview settled');
+}
+async function both(action){for(const s of surfaces)await action(s);}
+function setValue(s,node,value,event='input'){node.value=String(value);node.dispatchEvent(new s.win.Event(event,{bubbles:true}));}
+async function setting(s,key){if(!s.doc.querySelector('.palette-settings-panel'))button(s,'Palette settings').click();await sleep(0);const chip=s.doc.querySelector(`.palette-setting-chip[aria-label^="${key}:"]`);chip?.click();await sleep(0);}
+async function namedSetting(s,key,label){await setting(s,key);button(s,label).click();await rail(s);}
+async function cut(s,value){await setting(s,'Opacity cut');setValue(s,buttonInput(s,'Palette opacity cut'),value);await rail(s);}
+function buttonInput(s,label){const n=s.doc.querySelector(`input[aria-label="${label}"]`);assert(n,'Missing input '+label);return n;}
+async function opacity(s,keep){await setting(s,'Opacity');s.doc.querySelector(`[data-setting="opacity"] button:${keep?'last':'first'}-child`).click();await rail(s);}
+async function add(s,files){const count=s.doc.querySelectorAll('.caption-preview').length,dt=new s.win.DataTransfer();for(const file of files)dt.items.add(file);const input=s.doc.querySelector('input[type=file][multiple]');input.files=dt.files;input.dispatchEvent(new s.win.Event('change',{bubbles:true}));await until(()=>s.doc.querySelectorAll('.caption-preview').length===count+files.length,'imported artwork');}
+async function remove(s,name){button(s,'Remove '+name).click();await until(()=>!s.doc.querySelector(`.caption-preview[aria-label="Preview ${name}"]`),'removed artwork');}
+async function clear(s){for(const b of s.doc.querySelectorAll('.tile .acts button[aria-label^="Remove "]'))b.click();await until(()=>!s.doc.querySelector('.caption-preview'),'cleared wall');}
+async function palette(s){
+  const edit=button(s,'Edit palette');if(edit.disabled)return [];
+  edit.click();await until(()=>s.doc.querySelector('dialog.palette-import-modal[open]'),'palette editor');
+  const colors=[...s.doc.querySelectorAll('.palette-review-grid button')].map(b=>b.getAttribute('aria-label').match(/#[\da-f]{6}/i)?.[0]);
+  button(s,'Close palette editor').click();await until(()=>!s.doc.querySelector('dialog.palette-import-modal[open]'),'editor closed');return colors;
+}
+function painted(s){return [...s.doc.querySelectorAll('.tile .art canvas')].map(c=>{const p=c.getContext('2d').getImageData(0,0,c.width,c.height).data;let h=2166136261;for(const b of p)h=Math.imul(h^b,16777619);return [c.width,c.height,h>>>0];});}
+function zipEntries(bytes){
+  const view=new DataView(bytes.buffer,bytes.byteOffset,bytes.byteLength),entries=[];let at=0;
+  while(at+30<=bytes.length&&view.getUint32(at,true)===0x04034b50){
+    assert(view.getUint16(at+8,true)===0,'Expected stored ZIP entry');
+    const size=view.getUint32(at+18,true),names=view.getUint16(at+26,true),extra=view.getUint16(at+28,true),start=at+30+names+extra;
+    entries.push({name:new TextDecoder().decode(bytes.subarray(at+30,at+30+names)),bytes:bytes.slice(start,start+size)});at=start+size;
+  }
+  assert(entries.length,'No ZIP entries');return entries;
+}
+function equalBytes(a,b){return a.length===b.length&&a.every((v,i)=>v===b[i]);}
+async function download(s,name){
+  const count=s.qa.downloads.length;
+  if(name)button(s,'Save '+name).click();else s.doc.querySelector('.export-action').click();
+  await until(()=>s.qa.downloads.length>count&&s.qa.downloads[count].bytes,'encoded download');return s.qa.downloads[count];
+}
+function compareDownloads(a,b,label){
+  assert(a.name===b.name&&a.type===b.type,'Download metadata differs: '+label);
+  const aa=a.type==='application/zip'?zipEntries(a.bytes):[{name:a.name,bytes:a.bytes}],bb=b.type==='application/zip'?zipEntries(b.bytes):[{name:b.name,bytes:b.bytes}];
+  assert(aa.length===bb.length,'Archive count differs: '+label);
+  aa.forEach((e,i)=>assert(e.name===bb[i].name&&equalBytes(e.bytes,bb[i].bytes),'Export bytes differ: '+label+' '+e.name));
+  exports.push({label,file:a.name,entries:aa.map(e=>({name:e.name,bytes:e.bytes.length}))});
+}
+async function compare(label,{animated=false,save=true,expectColors}={}){
+  phase=label;const states=[];
+  for(const s of surfaces){
+    await rail(s);await settled(s,animated);
+    const state={selected:s.doc.querySelector('button.view-toggle')?.getAttribute('aria-label'),notice:s.doc.querySelector('.palette-source-status')?.textContent||'',names:[...s.doc.querySelectorAll('.caption-preview')].map(b=>b.getAttribute('aria-label')),colors:await palette(s)};
+    if(!animated)state.pixels=painted(s);states.push(state);
+    assert(s.qa.errors.filter(e=>!e.startsWith('ResizeObserver loop')).length===0,'App error: '+s.qa.errors.join('; '));
+  }
+  assert(JSON.stringify(states[0])===JSON.stringify(states[1]),'Before/after UI or palette mismatch: '+label);
+  if(expectColors)assert(JSON.stringify(states[1].colors)===JSON.stringify(expectColors),'Unexpected generated colors: '+label);
+  if(save&&states[0].names.length){const files=[];for(const s of surfaces)files.push(await download(s));compareDownloads(...files,label);}
+  checks.push({label,paletteColors:states[1].colors.length,images:states[1].names.length,exported:save&&states[1].names.length>0});
+  report.textContent=`Running: ${checks.length} functional checkpoints matched\n`+JSON.stringify(checks,null,2);
+  return states[1];
+}
+async function png(name,pixel,width=16,height=16){const c=document.createElement('canvas');c.width=width;c.height=height;const ctx=c.getContext('2d'),p=ctx.createImageData(width,height);for(let i=0;i<width*height;i++)p.data.set(pixel(i),i*4);ctx.putImageData(p,0,0);return new File([await new Promise(r=>c.toBlob(r,'image/png'))],name,{type:'image/png'});}
+async function reset(s){button(s,'More').click();await sleep(0);textButton(s.doc.querySelector('dialog.more'),'Reset settings').click();await sleep(0);textButton(s.doc.querySelector('dialog[aria-labelledby="confirm-title"]'),'Reset').click();await rail(s);}
+document.querySelector('#run').onclick=async event=>{
+  event.target.disabled=true;let status='FAIL';
+  try{
+    await boot();await compare('cold Auto loads the example',{save:false});
+    const red=await png('red.png',()=>[255,0,0,255]),blue=await png('blue.png',()=>[0,0,255,255]),green=await png('green.png',()=>[0,255,0,255]);
+    await both(s=>add(s,[red]));await compare('import into active Auto',{expectColors:['#ff0000']});
+    await both(s=>add(s,[blue]));await compare('adding a second image changes shared colors',{expectColors:['#0000ff','#ff0000']});
+    await both(s=>remove(s,'red.png'));await compare('individual deletion regenerates shared colors',{expectColors:['#0000ff']});
+    await both(s=>select(s,'PICO-8'));await both(s=>add(s,[green]));await compare('import while Auto is inactive');
+    await both(s=>select(s,'Auto'));await compare('return to Auto after inactive import',{expectColors:['#0000ff','#00ff00']});
+    await both(s=>select(s,'ENDESGA 32'));await both(s=>remove(s,'blue.png'));await compare('delete while Auto is inactive');
+    await both(s=>select(s,'Auto'));await compare('return to Auto after inactive deletion',{expectColors:['#00ff00']});
+    await both(clear);await compare('removing the last image restores example Auto',{save:false});
+    const gradient=await png('gradient.png',i=>[i*17%256,i*31%256,(i>>2)*13%256,[32,128,255][i%3]],48,32);
+    await both(s=>add(s,[gradient]));await compare('new high-color source replaces old publication');
+    await both(s=>namedSetting(s,'Matching','RGB matching'));await compare('RGB matching updates conversion');
+    await both(async s=>{await setting(s,'Max colors');const n=buttonInput(s,'Max colors value');setValue(s,n,4);n.dispatchEvent(new s.win.Event('change',{bubbles:true}));await rail(s);});await compare('Max colors cap updates conversion');
+    await both(s=>namedSetting(s,'Cleanup','Cleanup on'));await compare('Cleanup updates conversion');
+    for(const mode of ['2x2','4x4','8x8']){await both(s=>namedSetting(s,'Dithering','Dithering '+mode));await compare('Dithering '+mode+' updates conversion');}
+    for(const amount of [0,100]){await both(async s=>{await setting(s,'Dither strength');const n=buttonInput(s,'Dither strength');setValue(s,n,amount);n.dispatchEvent(new s.win.Event('change',{bubbles:true}));await rail(s);});await compare('Dither strength '+amount+' updates conversion');}
+    await both(s=>cut(s,200));await compare('opacity cutoff changes Auto eligibility');
+    await both(s=>cut(s,1));await compare('Cut1 includes all alpha-positive pixels');
+    const starts=surfaces.map(s=>s.qa.starts);
+    await both(s=>opacity(s,true));await compare('Keep reuses Cut1 colors and preserves output alpha');
+    assert(surfaces.every((s,i)=>s.qa.starts===starts[i]),'Keep/Cut1 unexpectedly refit colors');
+    const committed=surfaces.map(s=>s.win.localStorage.getItem('colorfetti'));
+    for(const value of committed){const p=JSON.parse(value);assert(p.metric==='rgb'&&p.maxColors===4&&p.cleanup===true&&p.dither==='8x8'&&p.ditherStrength===100&&p.alphaMode==='keep','Combined settings were not committed');}
+    await both(s=>select(s,'PICO-8'));await both(s=>select(s,'Auto'));await compare('warm Auto preserves combined nondefault settings');
+    assert(surfaces.every((s,i)=>s.win.localStorage.getItem('colorfetti')===committed[i]),'Warm Auto altered committed settings');
+    await both(s=>opacity(s,false));await compare('Cut1 return changes alpha without stale conversion');
+    await both(async s=>{await setting(s,'Max colors');button(s,'Use all palette colors').click();await rail(s);});await compare('All bypasses limiting');
+    await both(async s=>{await setting(s,'Matching');button(s,'Reset palette settings').click();await rail(s);});await compare('palette settings Reset restores defaults');
+    await both(s=>select(s,'PICO-8'));await both(s=>select(s,'Auto'));await compare('warm Auto retains current committed settings');
+    await both(async s=>{await rail(s);button(s,'Import palette').click();await until(()=>s.doc.querySelector('dialog.palette-import-modal[open]'),'import editor');textButton(s.doc.querySelector('.palette-editor'),'Paste colors').click();await sleep(0);setValue(s,s.doc.querySelector('textarea[aria-label="Colors or Lospec link"]'),'#112233 #abcdef #ff8800');await sleep(0);textButton(s.doc.querySelector('.palette-editor'),'Review colors').click();await until(()=>s.doc.querySelectorAll('.palette-review-grid button').length===3,'parsed palette');setValue(s,s.doc.querySelector('input[aria-label="Name"]'),'Regression custom');await sleep(0);textButton(s.doc.querySelector('.palette-editor'),'Save palette').click();await until(()=>!s.doc.querySelector('dialog.palette-import-modal[open]'),'saved imported palette');});
+    await compare('loading a saved custom palette works');await both(s=>select(s,'Auto'));await compare('custom palette to Auto restores fitted colors');
+    await both(clear);await both(s=>add(s,[red]));await compare('return to an earlier RGB wall after source replacement',{expectColors:['#ff0000']});
+    await both(async s=>{s.qa.hold=true;await add(s,[blue]);await until(()=>s.qa.held.length,'held generation');await select(s,'PICO-8');await remove(s,'blue.png');s.qa.release();await select(s,'Auto');});
+    await compare('canceled generation cannot overwrite restored Auto',{expectColors:['#ff0000']});
+    await both(async s=>{s.qa.failNext=true;await add(s,[green]);await until(()=>s.doc.querySelector('.palette-source-status')?.textContent.includes('Could not generate'),'injected failure');});
+    await compare('failed changed wall keeps retry guidance',{save:false});await both(s=>select(s,'Auto'));await compare('explicit failed-key retry succeeds',{expectColors:['#00ff00','#ff0000']});
+    await both(async s=>{s.qa.hold=true;await add(s,[blue]);await until(()=>s.qa.held.length,'held before Reset');await reset(s);s.qa.release();});await compare('global Reset while generation is in flight');
+    await both(clear);await both(s=>add(s,[red]));await compare('prepare captured export race',{expectColors:['#ff0000']});
+    const pending=[];
+    for(const s of surfaces){s.qa.hold=true;await add(s,[blue]);await until(()=>s.qa.held.length,'held export generation');const index=s.qa.downloads.length;s.doc.querySelector('.export-action').click();await sleep(50);await remove(s,'blue.png');s.qa.release();pending.push({s,index});}
+    for(const {s,index}of pending)await until(()=>s.qa.downloads[index]?.bytes,'captured export completion');
+    const saved=pending.map(({s,index})=>s.qa.downloads[index]);compareDownloads(...saved,'captured export survives removing a source');assert(zipEntries(saved[1].bytes).length===2,'Captured export lost removed source');
+    await compare('current Auto after concurrent captured export and deletion',{expectColors:['#ff0000']});
+    const gif=new File([await(await fetch('/clip.gif')).blob()],'walk.gif',{type:'image/gif'});await both(s=>add(s,[gif]));await compare('shared Auto includes every GIF frame',{animated:true});
+    const gifFiles=[];for(const s of surfaces)gifFiles.push(await download(s,'walk.gif'));compareDownloads(...gifFiles,'full animated GIF export');
+    await both(s=>remove(s,'walk.gif'));await compare('GIF deletion retires its source',{expectColors:['#ff0000']});
+    await boot('?preset=1');await compare('persisted preset loading remains selected',{save:false});assert(surfaces.every(s=>JSON.parse(s.win.localStorage.getItem('colorfetti')).paletteId==='preset-pico8'),'Persisted PICO-8 selection was lost');await both(s=>select(s,'Auto'));await compare('first Auto load from preset has no completed publication',{save:false});
+    await boot('?fail=1');await both(async s=>until(()=>s.doc.querySelector('.palette-source-status')?.textContent.includes('Could not generate'),'cold generation failure'));await compare('cold load failure does not claim a ready palette',{save:false});await both(s=>select(s,'Auto'));await compare('cold failure retry loads successfully',{save:false});
+    await boot('?fallback=1');await compare('no-Worker fallback loads Auto',{save:false});await both(s=>add(s,[red,blue]));await compare('no-Worker import uses current wall',{save:false,expectColors:['#0000ff','#ff0000']});
+    phase='baseline no-Worker export limitation';
+    await both(async s=>{const count=s.qa.downloads.length;s.doc.querySelector('.export-action').click();await until(()=>s.doc.querySelector('.glass-toast__text')?.textContent==='The images could not be saved.','existing no-Worker export error');assert(s.qa.downloads.length===count,'Unexpected fallback export result');});
+    knownLimitations.push('Both builds cannot encode palette PNG downloads when Worker is entirely unavailable; the unchanged fflate async encoder requires Worker.');
+    await both(s=>remove(s,'blue.png'));await compare('no-Worker deletion invalidates Auto',{save:false,expectColors:['#ff0000']});
+    status='PASS';report.textContent=`PASS: ${checks.length} before/after checkpoints; ${exports.length} byte-identical exports\nKnown baseline limitation: palette PNG saving requires Worker.\n`+JSON.stringify(checks,null,2);
+  }catch(error){report.textContent='FAIL '+phase+': '+error.stack+'\n'+JSON.stringify(checks,null,2);}
+  finally{await fetch('/report',{method:'POST',body:JSON.stringify({status,detail:report.textContent.split('\n')[0],checks,exports,knownLimitations})});}
+};
+</script></html>
