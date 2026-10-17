@@ -61,7 +61,7 @@
   onclose={() => { spaceHeld = false; imageHeld = false; navigation.cancel(); onclose?.(); }}>
   <div class="viewer-zoom viewer-tools glass-card" role="group" aria-label="Preview zoom">
     <button class="btn glass-btn icon-only" onclick={() => navigation.zoomBy(1 / 1.25)} disabled={view.scale <= MIN_VIEWER_ZOOM} aria-label="Zoom out" use:tooltip={'Zoom out. (−)'}>−</button>
-    <button class="btn glass-btn icon-only" onclick={() => navigation.reset()} aria-label="Fit image" use:tooltip={'Fit the whole image. (0)'}><PixelIcon name="fit" /></button>
+    <button class="btn glass-btn icon-only" onclick={() => navigation.reset()} disabled={view.scale === 1 && view.x === 0 && view.y === 0} aria-label="Fit image" use:tooltip={'Fit the whole image. (0)'}><PixelIcon name="fit" /></button>
     <button class="btn glass-btn icon-only" onclick={() => navigation.zoomBy(1.25)} disabled={view.scale >= MAX_VIEWER_ZOOM} aria-label="Zoom in" use:tooltip={'Zoom in. (+)'}>+</button>
   </div>
   <nav class="viewer-workspace" aria-label="Preview controls">

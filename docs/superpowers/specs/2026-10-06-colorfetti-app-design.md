@@ -28,6 +28,7 @@ a baseline when they fit and wrap with an 8px gap otherwise. Feedback uses the s
 capsule on smaller screens. Feedback is centered and width-bounded within the
 left/right safe areas and the same edge inset.
 Fit uses Lucide's four-corner Maximize icon with the accessible name "Fit image".
+Fit is disabled when the view is already at scale 1 with zero pan offsets.
 Zoom tooltips put the shortcut after the sentence: "Zoom in. (+)",
 "Zoom out. (−)" and "Fit the whole image. (0)".
 Native Escape and modality-aware focus return remain. Enter on focused artwork

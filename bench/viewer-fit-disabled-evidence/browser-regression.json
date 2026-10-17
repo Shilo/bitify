@@ -1,0 +1,338 @@
+[
+  {
+    "name": "1100×760 open fits without crop; tap closes; reopening resets",
+    "pass": true
+  },
+  {
+    "name": "1100×760 Fit disables only at the fitted view",
+    "pass": true
+  },
+  {
+    "name": "1100×760 all controls visible and no viewport overflow",
+    "pass": true
+  },
+  {
+    "name": "1100×760 visible message, busy and persistent Retry leave zoom hit targets clear",
+    "pass": true
+  },
+  {
+    "name": "1100×760 wheel zoom, trackpad ctrl-wheel, line/page units, limits",
+    "pass": true
+  },
+  {
+    "name": "1100×760 mouse drag pans both axes and cannot dismiss",
+    "pass": true
+  },
+  {
+    "name": "1100×760 touch drag out and back never becomes tap",
+    "pass": true
+  },
+  {
+    "name": "1100×760 pinch in/out, lift 1 then pan remaining finger",
+    "pass": true
+  },
+  {
+    "name": "1100×760 pinch in/out, lift 2 then pan remaining finger",
+    "pass": true
+  },
+  {
+    "name": "1100×760 stationary multitouch and cancelled pointers never dismiss",
+    "pass": true
+  },
+  {
+    "name": "1100×760 hold comparison restores when dragging; quick tap still closes after hold",
+    "pass": true
+  },
+  {
+    "name": "1100×760 release over toolbar is safe; Fit/compare/Close remain independent",
+    "pass": true
+  },
+  {
+    "name": "1100×760 keyboard zoom, pan and reset",
+    "pass": true
+  },
+  {
+    "name": "1100×760 focused artwork Enter closes without adding an Add caption",
+    "pass": true
+  },
+  {
+    "name": "1100×760 Space comparison gates artwork Enter and ignores held Enter repeats",
+    "pass": true
+  },
+  {
+    "name": "1100×760 detail sampling refines after zoom and pan retains buffer size",
+    "pass": true
+  },
+  {
+    "name": "390×844 open fits without crop; tap closes; reopening resets",
+    "pass": true
+  },
+  {
+    "name": "390×844 Fit disables only at the fitted view",
+    "pass": true
+  },
+  {
+    "name": "390×844 all controls visible and no viewport overflow",
+    "pass": true
+  },
+  {
+    "name": "390×844 visible message, busy and persistent Retry leave zoom hit targets clear",
+    "pass": true
+  },
+  {
+    "name": "390×844 wheel zoom, trackpad ctrl-wheel, line/page units, limits",
+    "pass": true
+  },
+  {
+    "name": "390×844 mouse drag pans both axes and cannot dismiss",
+    "pass": true
+  },
+  {
+    "name": "390×844 touch drag out and back never becomes tap",
+    "pass": true
+  },
+  {
+    "name": "390×844 pinch in/out, lift 1 then pan remaining finger",
+    "pass": true
+  },
+  {
+    "name": "390×844 pinch in/out, lift 2 then pan remaining finger",
+    "pass": true
+  },
+  {
+    "name": "390×844 stationary multitouch and cancelled pointers never dismiss",
+    "pass": true
+  },
+  {
+    "name": "390×844 hold comparison restores when dragging; quick tap still closes after hold",
+    "pass": true
+  },
+  {
+    "name": "390×844 release over toolbar is safe; Fit/compare/Close remain independent",
+    "pass": true
+  },
+  {
+    "name": "390×844 keyboard zoom, pan and reset",
+    "pass": true
+  },
+  {
+    "name": "390×844 focused artwork Enter closes without adding an Add caption",
+    "pass": true
+  },
+  {
+    "name": "390×844 Space comparison gates artwork Enter and ignores held Enter repeats",
+    "pass": true
+  },
+  {
+    "name": "390×844 detail sampling refines after zoom and pan retains buffer size",
+    "pass": true
+  },
+  {
+    "name": "320×568 open fits without crop; tap closes; reopening resets",
+    "pass": true
+  },
+  {
+    "name": "320×568 Fit disables only at the fitted view",
+    "pass": true
+  },
+  {
+    "name": "320×568 all controls visible and no viewport overflow",
+    "pass": true
+  },
+  {
+    "name": "320×568 visible message, busy and persistent Retry leave zoom hit targets clear",
+    "pass": true
+  },
+  {
+    "name": "320×568 wheel zoom, trackpad ctrl-wheel, line/page units, limits",
+    "pass": true
+  },
+  {
+    "name": "320×568 mouse drag pans both axes and cannot dismiss",
+    "pass": true
+  },
+  {
+    "name": "320×568 touch drag out and back never becomes tap",
+    "pass": true
+  },
+  {
+    "name": "320×568 pinch in/out, lift 1 then pan remaining finger",
+    "pass": true
+  },
+  {
+    "name": "320×568 pinch in/out, lift 2 then pan remaining finger",
+    "pass": true
+  },
+  {
+    "name": "320×568 stationary multitouch and cancelled pointers never dismiss",
+    "pass": true
+  },
+  {
+    "name": "320×568 hold comparison restores when dragging; quick tap still closes after hold",
+    "pass": true
+  },
+  {
+    "name": "320×568 release over toolbar is safe; Fit/compare/Close remain independent",
+    "pass": true
+  },
+  {
+    "name": "320×568 keyboard zoom, pan and reset",
+    "pass": true
+  },
+  {
+    "name": "320×568 focused artwork Enter closes without adding an Add caption",
+    "pass": true
+  },
+  {
+    "name": "320×568 Space comparison gates artwork Enter and ignores held Enter repeats",
+    "pass": true
+  },
+  {
+    "name": "320×568 detail sampling refines after zoom and pan retains buffer size",
+    "pass": true
+  },
+  {
+    "name": "844×390 open fits without crop; tap closes; reopening resets",
+    "pass": true
+  },
+  {
+    "name": "844×390 Fit disables only at the fitted view",
+    "pass": true
+  },
+  {
+    "name": "844×390 all controls visible and no viewport overflow",
+    "pass": true
+  },
+  {
+    "name": "844×390 visible message, busy and persistent Retry leave zoom hit targets clear",
+    "pass": true
+  },
+  {
+    "name": "844×390 wheel zoom, trackpad ctrl-wheel, line/page units, limits",
+    "pass": true
+  },
+  {
+    "name": "844×390 mouse drag pans both axes and cannot dismiss",
+    "pass": true
+  },
+  {
+    "name": "844×390 touch drag out and back never becomes tap",
+    "pass": true
+  },
+  {
+    "name": "844×390 pinch in/out, lift 1 then pan remaining finger",
+    "pass": true
+  },
+  {
+    "name": "844×390 pinch in/out, lift 2 then pan remaining finger",
+    "pass": true
+  },
+  {
+    "name": "844×390 stationary multitouch and cancelled pointers never dismiss",
+    "pass": true
+  },
+  {
+    "name": "844×390 hold comparison restores when dragging; quick tap still closes after hold",
+    "pass": true
+  },
+  {
+    "name": "844×390 release over toolbar is safe; Fit/compare/Close remain independent",
+    "pass": true
+  },
+  {
+    "name": "844×390 keyboard zoom, pan and reset",
+    "pass": true
+  },
+  {
+    "name": "844×390 focused artwork Enter closes without adding an Add caption",
+    "pass": true
+  },
+  {
+    "name": "844×390 Space comparison gates artwork Enter and ignores held Enter repeats",
+    "pass": true
+  },
+  {
+    "name": "844×390 detail sampling refines after zoom and pan retains buffer size",
+    "pass": true
+  },
+  {
+    "name": "1280×720 all four edges, hit targets and feedback align",
+    "pass": true
+  },
+  {
+    "name": "1280×720 asymmetric four safe-area insets",
+    "pass": true
+  },
+  {
+    "name": "844×390 all four edges, hit targets and feedback align",
+    "pass": true
+  },
+  {
+    "name": "844×390 asymmetric four safe-area insets",
+    "pass": true
+  },
+  {
+    "name": "801×600 all four edges, hit targets and feedback align",
+    "pass": true
+  },
+  {
+    "name": "801×600 asymmetric four safe-area insets",
+    "pass": true
+  },
+  {
+    "name": "800×600 all four edges, hit targets and feedback align",
+    "pass": true
+  },
+  {
+    "name": "800×600 asymmetric four safe-area insets",
+    "pass": true
+  },
+  {
+    "name": "390×844 all four edges, hit targets and feedback align",
+    "pass": true
+  },
+  {
+    "name": "390×844 asymmetric four safe-area insets",
+    "pass": true
+  },
+  {
+    "name": "320×568 all four edges, hit targets and feedback align",
+    "pass": true
+  },
+  {
+    "name": "320×568 asymmetric four safe-area insets",
+    "pass": true
+  },
+  {
+    "name": "320px asymmetric safe areas wrap bottom controls without clipping",
+    "pass": true
+  },
+  {
+    "name": "700px toast layout with 44px left safe-area offset",
+    "pass": true
+  },
+  {
+    "name": "800px toast layout with 44px left safe-area offset",
+    "pass": true
+  },
+  {
+    "name": "801px toast layout with 44px left safe-area offset",
+    "pass": true
+  },
+  {
+    "name": "resize while pinching retires gesture and retains constrained zoom",
+    "pass": true
+  },
+  {
+    "name": "animation preview stays playable while zoomed and returns to wall",
+    "pass": true
+  },
+  {
+    "name": "Palette large animation refinement respects clip budget in converted and Original playback",
+    "pass": true
+  },
+  {
+    "name": "1-bit large animation refinement respects clip budget in converted and Original playback",
+    "pass": true
+  }
+]
