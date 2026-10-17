@@ -1,0 +1,1251 @@
+{
+  "method": "Oklab All Cut128; no dithering or cleanup; point error is fidelity only, not artistic quality",
+  "settings": {
+    "metric": "oklab",
+    "maxColors": "All",
+    "alphaCut": 128,
+    "dither": "none",
+    "cleanup": false
+  },
+  "retrieved": "2026-10-17T02:17:40.974Z",
+  "canonicalBuiltinMatch": true,
+  "fixtures": [
+    {
+      "id": "dungeon-wizard",
+      "sha256": "b3909f80a29a0f18729f96a90ebe446ecaf26a195da633f2a6c3dd31f660821e",
+      "width": 16,
+      "height": 16,
+      "source": {
+        "page": "https://kenney.nl/assets/tiny-dungeon",
+        "url": "https://kenney.nl/media/pages/assets/tiny-dungeon/f8422efb44-1674742415/kenney_tiny-dungeon.zip",
+        "sha256": "c109438ab06f65fd80f9b2686a4cf9c7c11dc64444b47333ec71d602f8bb5fc7",
+        "bytes": 98530,
+        "retrieved": "2026-10-15",
+        "archivePath": "Tiles/tile_0084.png",
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+      }
+    },
+    {
+      "id": "dungeon-knight",
+      "sha256": "e139ab1d56c599af1cea5a955b705ead18a92d41e8e635b550729383cad9de3c",
+      "width": 16,
+      "height": 16,
+      "source": {
+        "page": "https://kenney.nl/assets/tiny-dungeon",
+        "url": "https://kenney.nl/media/pages/assets/tiny-dungeon/f8422efb44-1674742415/kenney_tiny-dungeon.zip",
+        "sha256": "c109438ab06f65fd80f9b2686a4cf9c7c11dc64444b47333ec71d602f8bb5fc7",
+        "bytes": 98530,
+        "retrieved": "2026-10-15",
+        "archivePath": "Tiles/tile_0100.png",
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+      }
+    },
+    {
+      "id": "dungeon-potion",
+      "sha256": "ad27340925ae7e936788c22cbd0f7d1922ef5bdd21377f916f1be9af6be4312d",
+      "width": 16,
+      "height": 16,
+      "source": {
+        "page": "https://kenney.nl/assets/tiny-dungeon",
+        "url": "https://kenney.nl/media/pages/assets/tiny-dungeon/f8422efb44-1674742415/kenney_tiny-dungeon.zip",
+        "sha256": "c109438ab06f65fd80f9b2686a4cf9c7c11dc64444b47333ec71d602f8bb5fc7",
+        "bytes": 98530,
+        "retrieved": "2026-10-15",
+        "archivePath": "Tiles/tile_0115.png",
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+      }
+    },
+    {
+      "id": "dungeon-neutral-shield",
+      "sha256": "35af44a6fc76a09e7fe625c0becfeac809360774c6a845ec8024dd8db6f5fc3f",
+      "width": 16,
+      "height": 16,
+      "source": {
+        "page": "https://kenney.nl/assets/tiny-dungeon",
+        "url": "https://kenney.nl/media/pages/assets/tiny-dungeon/f8422efb44-1674742415/kenney_tiny-dungeon.zip",
+        "sha256": "c109438ab06f65fd80f9b2686a4cf9c7c11dc64444b47333ec71d602f8bb5fc7",
+        "bytes": 98530,
+        "retrieved": "2026-10-15",
+        "archivePath": "Tiles/tile_0102.png",
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+      }
+    },
+    {
+      "id": "town-water-bucket",
+      "sha256": "3befce5d6373d4315f35eeed22752bb1cf7a2ab5d008ce26dd6b4aebbb278978",
+      "width": 16,
+      "height": 16,
+      "source": {
+        "page": "https://kenney.nl/assets/tiny-town",
+        "url": "https://kenney.nl/media/pages/assets/tiny-town/a415fbeb49-1735736916/kenney_tiny-town.zip",
+        "sha256": "9768692dccff1d706408a5aedd6ca4f6cd1409506cbc84cb2f862919764be977",
+        "bytes": 182243,
+        "retrieved": "2026-10-15",
+        "archivePath": "Tiles/tile_0104.png",
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+      }
+    },
+    {
+      "id": "platformer-pilot",
+      "sha256": "15df14143949310c001b09b2a00ed2278a5a9b4a10edd276af306b77b8c9d658",
+      "width": 24,
+      "height": 24,
+      "source": {
+        "page": "https://kenney.nl/assets/pixel-platformer",
+        "url": "https://kenney.nl/media/pages/assets/pixel-platformer/33bb4921eb-1696667883/kenney_pixel-platformer.zip",
+        "sha256": "d01a196dbe3cc964e00d83ba3b987df62f332dc9260c9f941b4fbcc9047130f4",
+        "bytes": 260312,
+        "retrieved": "2026-10-15",
+        "archivePath": "Tiles/Characters/tile_0000.png",
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+      }
+    },
+    {
+      "id": "platformer-rocket",
+      "sha256": "aca58ddc36d4e8d506111b1e580fc79b17383337b3cec27c28b0e6090435224a",
+      "width": 24,
+      "height": 24,
+      "source": {
+        "page": "https://kenney.nl/assets/pixel-platformer",
+        "url": "https://kenney.nl/media/pages/assets/pixel-platformer/33bb4921eb-1696667883/kenney_pixel-platformer.zip",
+        "sha256": "d01a196dbe3cc964e00d83ba3b987df62f332dc9260c9f941b4fbcc9047130f4",
+        "bytes": 260312,
+        "retrieved": "2026-10-15",
+        "archivePath": "Tiles/Characters/tile_0015.png",
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+      }
+    },
+    {
+      "id": "platformer-heart",
+      "sha256": "6b547ef267ee13918a4e45ac8a2a3d0de4fbaef8267459045cf9f8c5e283770e",
+      "width": 18,
+      "height": 18,
+      "source": {
+        "page": "https://kenney.nl/assets/pixel-platformer",
+        "url": "https://kenney.nl/media/pages/assets/pixel-platformer/33bb4921eb-1696667883/kenney_pixel-platformer.zip",
+        "sha256": "d01a196dbe3cc964e00d83ba3b987df62f332dc9260c9f941b4fbcc9047130f4",
+        "bytes": 260312,
+        "retrieved": "2026-10-15",
+        "archivePath": "Tiles/tile_0044.png",
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+      }
+    },
+    {
+      "id": "owned-knight",
+      "sha256": "fbe0f27539ac667c61977282e5b481027dbe54cabbd2e3a4eac80d7818c725ea",
+      "width": 24,
+      "height": 24,
+      "source": {
+        "note": "Owned synthetic sprite; original fixture manifest retained."
+      }
+    },
+    {
+      "id": "owned-hue-ramp",
+      "sha256": "3da43196ff9bb99588fa726dae1aa6e57e44bd6f2167eea29e37fcc9052461bc",
+      "width": 64,
+      "height": 16,
+      "source": {
+        "note": "Owned synthetic hue ramp; original fixture manifest retained."
+      }
+    }
+  ],
+  "stats": [
+    {
+      "id": "endesga-32",
+      "name": "Endesga 32",
+      "meanChroma": 0.10684957000170006,
+      "lightnessRange": [
+        0.20503136561343496,
+        0.9999999934735462
+      ],
+      "neutralColors": 2
+    },
+    {
+      "id": "mulfok32",
+      "name": "mulfok32",
+      "meanChroma": 0.11996121811805288,
+      "lightnessRange": [
+        0.20827579015976466,
+        0.9999999934735462
+      ],
+      "neutralColors": 1
+    },
+    {
+      "id": "zughy-32",
+      "name": "Zughy 32",
+      "meanChroma": 0.08761633181302465,
+      "lightnessRange": [
+        0.2981277576015884,
+        0.9560823740145336
+      ],
+      "neutralColors": 6
+    },
+    {
+      "id": "dawnbringer-32",
+      "name": "DawnBringer 32",
+      "meanChroma": 0.09045490254529877,
+      "lightnessRange": [
+        0,
+        0.9999999934735462
+      ],
+      "neutralColors": 7
+    },
+    {
+      "id": "nanner-pancakes",
+      "name": "Nanner Pancakes",
+      "meanChroma": 0.07189282090531206,
+      "lightnessRange": [
+        0.26107358909297945,
+        0.9488258113486427
+      ],
+      "neutralColors": 0
+    },
+    {
+      "id": "aerugo",
+      "name": "Aerugo",
+      "meanChroma": 0.05462712238766486,
+      "lightnessRange": [
+        0.2411047632560662,
+        0.9999999934735462
+      ],
+      "neutralColors": 11
+    },
+    {
+      "id": "sheltzy32",
+      "name": "Sheltzy32",
+      "meanChroma": 0.10863448345139488,
+      "lightnessRange": [
+        0,
+        0.9999999934735462
+      ],
+      "neutralColors": 3
+    },
+    {
+      "id": "downgraded-32",
+      "name": "downgraded 32",
+      "meanChroma": 0.09021993710035327,
+      "lightnessRange": [
+        0.2526189853134077,
+        0.9920074276316365
+      ],
+      "neutralColors": 3
+    }
+  ],
+  "pairs": [
+    {
+      "a": "endesga-32",
+      "b": "mulfok32",
+      "symmetricNearestOklabRMS": 0.07737642624994956
+    },
+    {
+      "a": "endesga-32",
+      "b": "zughy-32",
+      "symmetricNearestOklabRMS": 0.055624643733153546
+    },
+    {
+      "a": "endesga-32",
+      "b": "dawnbringer-32",
+      "symmetricNearestOklabRMS": 0.06581704366168603
+    },
+    {
+      "a": "endesga-32",
+      "b": "nanner-pancakes",
+      "symmetricNearestOklabRMS": 0.0625462994176287
+    },
+    {
+      "a": "endesga-32",
+      "b": "aerugo",
+      "symmetricNearestOklabRMS": 0.06442370708282383
+    },
+    {
+      "a": "endesga-32",
+      "b": "sheltzy32",
+      "symmetricNearestOklabRMS": 0.06756141548497996
+    },
+    {
+      "a": "endesga-32",
+      "b": "downgraded-32",
+      "symmetricNearestOklabRMS": 0.0618888115223859
+    },
+    {
+      "a": "mulfok32",
+      "b": "zughy-32",
+      "symmetricNearestOklabRMS": 0.07570881044800447
+    },
+    {
+      "a": "mulfok32",
+      "b": "dawnbringer-32",
+      "symmetricNearestOklabRMS": 0.07635753032919754
+    },
+    {
+      "a": "mulfok32",
+      "b": "nanner-pancakes",
+      "symmetricNearestOklabRMS": 0.07266079788790104
+    },
+    {
+      "a": "mulfok32",
+      "b": "aerugo",
+      "symmetricNearestOklabRMS": 0.09171170245355635
+    },
+    {
+      "a": "mulfok32",
+      "b": "sheltzy32",
+      "symmetricNearestOklabRMS": 0.07405693061810116
+    },
+    {
+      "a": "mulfok32",
+      "b": "downgraded-32",
+      "symmetricNearestOklabRMS": 0.061964646322213005
+    },
+    {
+      "a": "zughy-32",
+      "b": "dawnbringer-32",
+      "symmetricNearestOklabRMS": 0.06969506486215483
+    },
+    {
+      "a": "zughy-32",
+      "b": "nanner-pancakes",
+      "symmetricNearestOklabRMS": 0.05290460315483797
+    },
+    {
+      "a": "zughy-32",
+      "b": "aerugo",
+      "symmetricNearestOklabRMS": 0.06236750559881833
+    },
+    {
+      "a": "zughy-32",
+      "b": "sheltzy32",
+      "symmetricNearestOklabRMS": 0.07708032915457581
+    },
+    {
+      "a": "zughy-32",
+      "b": "downgraded-32",
+      "symmetricNearestOklabRMS": 0.05870378214624718
+    },
+    {
+      "a": "dawnbringer-32",
+      "b": "nanner-pancakes",
+      "symmetricNearestOklabRMS": 0.07297557978460253
+    },
+    {
+      "a": "dawnbringer-32",
+      "b": "aerugo",
+      "symmetricNearestOklabRMS": 0.07305605114218633
+    },
+    {
+      "a": "dawnbringer-32",
+      "b": "sheltzy32",
+      "symmetricNearestOklabRMS": 0.06572024608314288
+    },
+    {
+      "a": "dawnbringer-32",
+      "b": "downgraded-32",
+      "symmetricNearestOklabRMS": 0.07461624059039564
+    },
+    {
+      "a": "nanner-pancakes",
+      "b": "aerugo",
+      "symmetricNearestOklabRMS": 0.054194104427968084
+    },
+    {
+      "a": "nanner-pancakes",
+      "b": "sheltzy32",
+      "symmetricNearestOklabRMS": 0.07546205989308263
+    },
+    {
+      "a": "nanner-pancakes",
+      "b": "downgraded-32",
+      "symmetricNearestOklabRMS": 0.04152831108869411
+    },
+    {
+      "a": "aerugo",
+      "b": "sheltzy32",
+      "symmetricNearestOklabRMS": 0.08537008087484106
+    },
+    {
+      "a": "aerugo",
+      "b": "downgraded-32",
+      "symmetricNearestOklabRMS": 0.06928460151183234
+    },
+    {
+      "a": "sheltzy32",
+      "b": "downgraded-32",
+      "symmetricNearestOklabRMS": 0.0722064939481321
+    }
+  ],
+  "versusBuiltins": [
+    {
+      "id": "preset-res64",
+      "exactShared": 1,
+      "symmetricNearestOklabRMS": 0.06961347301980964
+    },
+    {
+      "id": "preset-edg32",
+      "exactShared": 1,
+      "symmetricNearestOklabRMS": 0.07737642624994956
+    },
+    {
+      "id": "preset-pico8",
+      "exactShared": 0,
+      "symmetricNearestOklabRMS": 0.09188916471768797
+    },
+    {
+      "id": "preset-db16",
+      "exactShared": 0,
+      "symmetricNearestOklabRMS": 0.09208849231373127
+    },
+    {
+      "id": "preset-edg8",
+      "exactShared": 0,
+      "symmetricNearestOklabRMS": 0.09659882161906683
+    },
+    {
+      "id": "preset-gray8",
+      "exactShared": 1,
+      "symmetricNearestOklabRMS": 0.11742585664271211
+    },
+    {
+      "id": "preset-icecreamgb",
+      "exactShared": 0,
+      "symmetricNearestOklabRMS": 0.10514897682246718
+    },
+    {
+      "id": "preset-gameboy",
+      "exactShared": 0,
+      "symmetricNearestOklabRMS": 0.19168330415736567
+    },
+    {
+      "id": "preset-mono",
+      "exactShared": 1,
+      "symmetricNearestOklabRMS": 0.2738849951784629
+    },
+    {
+      "id": "preset-glow",
+      "exactShared": 0,
+      "symmetricNearestOklabRMS": 0.18210491455300745
+    },
+    {
+      "id": "preset-paper",
+      "exactShared": 0,
+      "symmetricNearestOklabRMS": 0.14249943792304604
+    }
+  ],
+  "rows": [
+    {
+      "fixture": "dungeon-wizard",
+      "palette": "endesga-32",
+      "used": 7,
+      "visible": 215,
+      "pointOklabMSE": 0.0021436122792641604,
+      "output": "dungeon-wizard-endesga-32.png",
+      "sha256": "7d61ee86279d046c8041b86eb4554bd9321329f84768bf2dfcf3d6602b3a872a",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-wizard",
+      "palette": "mulfok32",
+      "used": 7,
+      "visible": 215,
+      "pointOklabMSE": 0.0034967731183175336,
+      "output": "dungeon-wizard-mulfok32.png",
+      "sha256": "d035a2712ed4c71347b3ad1e6738db2f1eea345e80f09581af5c7a35449044c7",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-wizard",
+      "palette": "zughy-32",
+      "used": 8,
+      "visible": 215,
+      "pointOklabMSE": 0.0017890811833808293,
+      "output": "dungeon-wizard-zughy-32.png",
+      "sha256": "201b9f88935be4fbc7a9fc697ee275c2054b5c97c0fdcaad2e62e0d521feb0a1",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-wizard",
+      "palette": "dawnbringer-32",
+      "used": 8,
+      "visible": 215,
+      "pointOklabMSE": 0.002355386229905682,
+      "output": "dungeon-wizard-dawnbringer-32.png",
+      "sha256": "d8811950f35f20936995dd2760d5e0aaf2586917c21d7c3c8598d08a837f143f",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-wizard",
+      "palette": "nanner-pancakes",
+      "used": 9,
+      "visible": 215,
+      "pointOklabMSE": 0.0034990146339507013,
+      "output": "dungeon-wizard-nanner-pancakes.png",
+      "sha256": "71fd313cb63f6342e1cfc2abae22a26184d6afdf332f7345e22bf7295ae30ad4",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-wizard",
+      "palette": "aerugo",
+      "used": 9,
+      "visible": 215,
+      "pointOklabMSE": 0.008297504717995292,
+      "output": "dungeon-wizard-aerugo.png",
+      "sha256": "b0a4a6482f8177ccdc07100e1236583d452ed630749a656d8453c46cc7a05c6d",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-wizard",
+      "palette": "sheltzy32",
+      "used": 6,
+      "visible": 215,
+      "pointOklabMSE": 0.00693515834682929,
+      "output": "dungeon-wizard-sheltzy32.png",
+      "sha256": "fc5db1c47a26fb0db74363a8580671a4ad8cdcd12bc9c130e84d7b6cc3fdceb4",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-wizard",
+      "palette": "downgraded-32",
+      "used": 8,
+      "visible": 215,
+      "pointOklabMSE": 0.004535927769286839,
+      "output": "dungeon-wizard-downgraded-32.png",
+      "sha256": "249faf26a8c596b6f26b97e03a9f9541bc71e99caf901ee00b32b63138f6e6df",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-knight",
+      "palette": "endesga-32",
+      "used": 8,
+      "visible": 203,
+      "pointOklabMSE": 0.00038916552337346573,
+      "output": "dungeon-knight-endesga-32.png",
+      "sha256": "43df7daccb26a4a4aa7e62df2eb8f41ea1812f86ea38b014d0a93469110cfdeb",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-knight",
+      "palette": "mulfok32",
+      "used": 7,
+      "visible": 203,
+      "pointOklabMSE": 0.003568127303409389,
+      "output": "dungeon-knight-mulfok32.png",
+      "sha256": "1abb2a84989b6da5e245f8584acac36e0cf738e5b30d9d26f6d22991dd452a50",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-knight",
+      "palette": "zughy-32",
+      "used": 8,
+      "visible": 203,
+      "pointOklabMSE": 0.0015362238904682024,
+      "output": "dungeon-knight-zughy-32.png",
+      "sha256": "42aaaed25698a15d9d68820daa54a8b714faca539c3534ba954281ac3f61986a",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-knight",
+      "palette": "dawnbringer-32",
+      "used": 8,
+      "visible": 203,
+      "pointOklabMSE": 0.0015046308940141516,
+      "output": "dungeon-knight-dawnbringer-32.png",
+      "sha256": "8a2465888f54b33fd8b64001f01f025a7e5738dd210bc42adbbca65ad6db1e90",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-knight",
+      "palette": "nanner-pancakes",
+      "used": 8,
+      "visible": 203,
+      "pointOklabMSE": 0.0018637998992678433,
+      "output": "dungeon-knight-nanner-pancakes.png",
+      "sha256": "45c88ad4b4886490daa7e2a2178592aff3953b5939978549fb5fa2dfbbb03963",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-knight",
+      "palette": "aerugo",
+      "used": 7,
+      "visible": 203,
+      "pointOklabMSE": 0.002086514550213551,
+      "output": "dungeon-knight-aerugo.png",
+      "sha256": "8a6b74b9cf9cef95d5cad7e1f3aa9f90580967be6c6787fcefdfac3d866a5bf4",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-knight",
+      "palette": "sheltzy32",
+      "used": 7,
+      "visible": 203,
+      "pointOklabMSE": 0.004917871842312879,
+      "output": "dungeon-knight-sheltzy32.png",
+      "sha256": "a4d3c83d55f952abf16dbe570a8e60edbb5b5fc44fb0095d4ff77af3a80d5315",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-knight",
+      "palette": "downgraded-32",
+      "used": 7,
+      "visible": 203,
+      "pointOklabMSE": 0.0035589782190587143,
+      "output": "dungeon-knight-downgraded-32.png",
+      "sha256": "4a35989cc719c31f167f35a68ca4b5bccfd90131b945aa60f56f6a2965784847",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-potion",
+      "palette": "endesga-32",
+      "used": 7,
+      "visible": 110,
+      "pointOklabMSE": 0.00015584693394705667,
+      "output": "dungeon-potion-endesga-32.png",
+      "sha256": "d5f4e6b7fde7c3abc81e5aee928d51970a055ddc3e758f5b8bf092e66fcc8729",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-potion",
+      "palette": "mulfok32",
+      "used": 6,
+      "visible": 110,
+      "pointOklabMSE": 0.003755804918556146,
+      "output": "dungeon-potion-mulfok32.png",
+      "sha256": "407ceea06ae58dcc6d2b24075f10166039329df7ea16eaff794fb06d38bd4f19",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-potion",
+      "palette": "zughy-32",
+      "used": 7,
+      "visible": 110,
+      "pointOklabMSE": 0.0013513599492164,
+      "output": "dungeon-potion-zughy-32.png",
+      "sha256": "2aeb60d05c663726538b133865287da4a128f00554114ae5fe415457e9bc1990",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-potion",
+      "palette": "dawnbringer-32",
+      "used": 6,
+      "visible": 110,
+      "pointOklabMSE": 0.0017765834815719407,
+      "output": "dungeon-potion-dawnbringer-32.png",
+      "sha256": "faba407763fca9f5b48132c49dc47568b810d4e74ccdfaf8fc96e5cad46e623d",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-potion",
+      "palette": "nanner-pancakes",
+      "used": 6,
+      "visible": 110,
+      "pointOklabMSE": 0.002417474426352077,
+      "output": "dungeon-potion-nanner-pancakes.png",
+      "sha256": "069d84c286ed6544d05a42fe54eb34a0cdcda7de8fe48f6ae62c04a32e6ab04d",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-potion",
+      "palette": "aerugo",
+      "used": 6,
+      "visible": 110,
+      "pointOklabMSE": 0.002351830296275445,
+      "output": "dungeon-potion-aerugo.png",
+      "sha256": "7e2ec40d7df4a94f5b74b4635b64c563a7e6405501145d34bf7b25ef734f4fec",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-potion",
+      "palette": "sheltzy32",
+      "used": 6,
+      "visible": 110,
+      "pointOklabMSE": 0.006254538032124998,
+      "output": "dungeon-potion-sheltzy32.png",
+      "sha256": "6369c547683c9a16c6b21fb97c079160ec88b8ca1d5c51176a077e973f019d0c",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-potion",
+      "palette": "downgraded-32",
+      "used": 6,
+      "visible": 110,
+      "pointOklabMSE": 0.004025687686489668,
+      "output": "dungeon-potion-downgraded-32.png",
+      "sha256": "1df5193d6ff162768f60cabc94b8951ca660c330d3fad249766bd2ce1c802deb",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-neutral-shield",
+      "palette": "endesga-32",
+      "used": 3,
+      "visible": 94,
+      "pointOklabMSE": 0.000007779436930786493,
+      "output": "dungeon-neutral-shield-endesga-32.png",
+      "sha256": "e0b6eb73f5d45657653a8dde23d91827518e54e166c44345b89d3d407d478b8a",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-neutral-shield",
+      "palette": "mulfok32",
+      "used": 3,
+      "visible": 94,
+      "pointOklabMSE": 0.0036323108909806774,
+      "output": "dungeon-neutral-shield-mulfok32.png",
+      "sha256": "b6a3997eafb70cf556a15c2d79bb7f3e196e43e9646771bc87c549c969c352ea",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-neutral-shield",
+      "palette": "zughy-32",
+      "used": 3,
+      "visible": 94,
+      "pointOklabMSE": 0.001572465256420192,
+      "output": "dungeon-neutral-shield-zughy-32.png",
+      "sha256": "6574a8771e22ea9d5cf060c4db19eea4a458cdbddf096a304a2713cdfb522f14",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-neutral-shield",
+      "palette": "dawnbringer-32",
+      "used": 3,
+      "visible": 94,
+      "pointOklabMSE": 0.0014734774027456374,
+      "output": "dungeon-neutral-shield-dawnbringer-32.png",
+      "sha256": "7ad3a67db70f5ee6c011ba744f4fcc26e994cb3dc49bb317938a70c216b61945",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-neutral-shield",
+      "palette": "nanner-pancakes",
+      "used": 3,
+      "visible": 94,
+      "pointOklabMSE": 0.0020886931500239325,
+      "output": "dungeon-neutral-shield-nanner-pancakes.png",
+      "sha256": "eea0dc4cf56dd0c3af56d494875a5b5190eda36651345e0fa4143e2d8f2d4ec3",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-neutral-shield",
+      "palette": "aerugo",
+      "used": 3,
+      "visible": 94,
+      "pointOklabMSE": 0.0017265204567688604,
+      "output": "dungeon-neutral-shield-aerugo.png",
+      "sha256": "8b54f3f7120a6f7f6b636622783c9d935d2efd67f9605b228d5ebbe4723a3897",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-neutral-shield",
+      "palette": "sheltzy32",
+      "used": 3,
+      "visible": 94,
+      "pointOklabMSE": 0.006308643532611016,
+      "output": "dungeon-neutral-shield-sheltzy32.png",
+      "sha256": "2fea5bcc0d4c1fcc699cf760eb50b53414a35bedb430987bd37bee4fcec40251",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "dungeon-neutral-shield",
+      "palette": "downgraded-32",
+      "used": 3,
+      "visible": 94,
+      "pointOklabMSE": 0.004429989677740537,
+      "output": "dungeon-neutral-shield-downgraded-32.png",
+      "sha256": "94dfa71d90f642ca5a834297e24453299ad0d769b79c13b0b55ddc6a2e5f24a4",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "town-water-bucket",
+      "palette": "endesga-32",
+      "used": 9,
+      "visible": 254,
+      "pointOklabMSE": 0.0002205905062221257,
+      "output": "town-water-bucket-endesga-32.png",
+      "sha256": "ec0b117dd5581469baae5df63fb6cff8c680ed986bd4811dc67ff512d74ce101",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "town-water-bucket",
+      "palette": "mulfok32",
+      "used": 9,
+      "visible": 254,
+      "pointOklabMSE": 0.004931971952691328,
+      "output": "town-water-bucket-mulfok32.png",
+      "sha256": "69aa05d2c6edf3b1425e53b7e99c818a5c254bb6c06fd246d4bcf475f5456275",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "town-water-bucket",
+      "palette": "zughy-32",
+      "used": 9,
+      "visible": 254,
+      "pointOklabMSE": 0.002614645601968076,
+      "output": "town-water-bucket-zughy-32.png",
+      "sha256": "b6bd15b6014864bace14a5fcb7f4b981def425c4a50d38be1c0215151aaa2bde",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "town-water-bucket",
+      "palette": "dawnbringer-32",
+      "used": 9,
+      "visible": 254,
+      "pointOklabMSE": 0.0024217073734046023,
+      "output": "town-water-bucket-dawnbringer-32.png",
+      "sha256": "354740fffbf2e051ace1283f0926eabe8bb0257370fff5ee5e6a968783cd847e",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "town-water-bucket",
+      "palette": "nanner-pancakes",
+      "used": 9,
+      "visible": 254,
+      "pointOklabMSE": 0.0029358723749739898,
+      "output": "town-water-bucket-nanner-pancakes.png",
+      "sha256": "8297b1676eb4b332af886aa58bd267fd95c4c482f119a6dee9fd45f03320bf69",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "town-water-bucket",
+      "palette": "aerugo",
+      "used": 8,
+      "visible": 254,
+      "pointOklabMSE": 0.0019208004478477663,
+      "output": "town-water-bucket-aerugo.png",
+      "sha256": "f16ddb617e0e1c5753f4f3d6746d8006b3ae4ab85c41d0b99dfac104f72fda73",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "town-water-bucket",
+      "palette": "sheltzy32",
+      "used": 8,
+      "visible": 254,
+      "pointOklabMSE": 0.003051709120221767,
+      "output": "town-water-bucket-sheltzy32.png",
+      "sha256": "ab9af689d87096415a0bbfbd4447800e7795873f1ddb3e3530575e3af09cb0bc",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "town-water-bucket",
+      "palette": "downgraded-32",
+      "used": 9,
+      "visible": 254,
+      "pointOklabMSE": 0.0036674220674482376,
+      "output": "town-water-bucket-downgraded-32.png",
+      "sha256": "09369911acee83419a9e9adb047ba0549e11282df8c3665a011775d14af7fd83",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "platformer-pilot",
+      "palette": "endesga-32",
+      "used": 7,
+      "visible": 399,
+      "pointOklabMSE": 0.002655910471130892,
+      "output": "platformer-pilot-endesga-32.png",
+      "sha256": "a4356bf5485f26dada0bc27e8866aa30e8b10b14d06d02445107c4ec1e497898",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "platformer-pilot",
+      "palette": "mulfok32",
+      "used": 7,
+      "visible": 399,
+      "pointOklabMSE": 0.006100072690959378,
+      "output": "platformer-pilot-mulfok32.png",
+      "sha256": "079f754c50e70737987335e652481ef7a44243348bce73fa8ed7447daf8e1236",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "platformer-pilot",
+      "palette": "zughy-32",
+      "used": 6,
+      "visible": 399,
+      "pointOklabMSE": 0.005164010375844408,
+      "output": "platformer-pilot-zughy-32.png",
+      "sha256": "8e1b881d2735166a2ed2123c43f2e9f1554e8357072edf7d5abd800e93357b48",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "platformer-pilot",
+      "palette": "dawnbringer-32",
+      "used": 7,
+      "visible": 399,
+      "pointOklabMSE": 0.002860936866374705,
+      "output": "platformer-pilot-dawnbringer-32.png",
+      "sha256": "5e2dbaf542e66bbafbbd0157f15298e9f2a5bea129f5c9d103eb8587e89e4ac9",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "platformer-pilot",
+      "palette": "nanner-pancakes",
+      "used": 6,
+      "visible": 399,
+      "pointOklabMSE": 0.005254284174824966,
+      "output": "platformer-pilot-nanner-pancakes.png",
+      "sha256": "8eca5767d6538f1c7cf42e02bc18109d30c517b03f3eaa9b21b531d73a06d3c3",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "platformer-pilot",
+      "palette": "aerugo",
+      "used": 6,
+      "visible": 399,
+      "pointOklabMSE": 0.005302505287338477,
+      "output": "platformer-pilot-aerugo.png",
+      "sha256": "395b8c4d1dc06e93698420afe76229087eff7fe8c941b3b3b98b9af61735f693",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "platformer-pilot",
+      "palette": "sheltzy32",
+      "used": 6,
+      "visible": 399,
+      "pointOklabMSE": 0.0026837872699253303,
+      "output": "platformer-pilot-sheltzy32.png",
+      "sha256": "f1c520182a21d07c10fbdd6a0cc16ff9aa342d05b02b45471f9332f10282e31f",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "platformer-pilot",
+      "palette": "downgraded-32",
+      "used": 7,
+      "visible": 399,
+      "pointOklabMSE": 0.004514460329496927,
+      "output": "platformer-pilot-downgraded-32.png",
+      "sha256": "394e12e9308648e4f8b9504fefddb782a4ba11a0762611480a26fcdf5c7159b6",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "platformer-rocket",
+      "palette": "endesga-32",
+      "used": 7,
+      "visible": 201,
+      "pointOklabMSE": 0.0014728507839166488,
+      "output": "platformer-rocket-endesga-32.png",
+      "sha256": "e5ca4a6db2c1aceaf0cad479bde9da4ea9849fbcc7bfb4f30438e4fd1fedf608",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "platformer-rocket",
+      "palette": "mulfok32",
+      "used": 6,
+      "visible": 201,
+      "pointOklabMSE": 0.0047205367924227195,
+      "output": "platformer-rocket-mulfok32.png",
+      "sha256": "e4782b126fbbf128a4cd22005e9a67686b999038fa720ffcd616186e5615f3eb",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "platformer-rocket",
+      "palette": "zughy-32",
+      "used": 7,
+      "visible": 201,
+      "pointOklabMSE": 0.0021493942257334734,
+      "output": "platformer-rocket-zughy-32.png",
+      "sha256": "1747eff73b72245a5adf1c262e72a7ec7d887f2b45238f8f5ddadbbe0bf3b97f",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "platformer-rocket",
+      "palette": "dawnbringer-32",
+      "used": 7,
+      "visible": 201,
+      "pointOklabMSE": 0.0028396836465900827,
+      "output": "platformer-rocket-dawnbringer-32.png",
+      "sha256": "8347a5d1f5a3d2f6968efad2cd93b0a2862efe774794d8af540534a1c71c3f3c",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "platformer-rocket",
+      "palette": "nanner-pancakes",
+      "used": 6,
+      "visible": 201,
+      "pointOklabMSE": 0.003635143016269463,
+      "output": "platformer-rocket-nanner-pancakes.png",
+      "sha256": "cea7cb53d84b78d8f506223b7a3a410b4332785c5c5ea66984b8facd168f187c",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "platformer-rocket",
+      "palette": "aerugo",
+      "used": 7,
+      "visible": 201,
+      "pointOklabMSE": 0.0015708933047057863,
+      "output": "platformer-rocket-aerugo.png",
+      "sha256": "f48096e6edfb7d7dca9d15b77a546e048d6022455968017fdd01b65703679d9b",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "platformer-rocket",
+      "palette": "sheltzy32",
+      "used": 6,
+      "visible": 201,
+      "pointOklabMSE": 0.002353544279476274,
+      "output": "platformer-rocket-sheltzy32.png",
+      "sha256": "f8d503d6f71989d609167d1b383fc8343be10455f6aeecdcd4713119416ab56c",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "platformer-rocket",
+      "palette": "downgraded-32",
+      "used": 7,
+      "visible": 201,
+      "pointOklabMSE": 0.002189425861834734,
+      "output": "platformer-rocket-downgraded-32.png",
+      "sha256": "5218a0f6423189c284a7b31eb917a8d24b718cae863c2f4ba6e637abd2ba5c8f",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "platformer-heart",
+      "palette": "endesga-32",
+      "used": 3,
+      "visible": 130,
+      "pointOklabMSE": 0.0013062472533749074,
+      "output": "platformer-heart-endesga-32.png",
+      "sha256": "ee53a910bde67467cf652cc989236f98aa074d218d0fa2afc57fda10a61dfdbe",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "platformer-heart",
+      "palette": "mulfok32",
+      "used": 3,
+      "visible": 130,
+      "pointOklabMSE": 0.0046077322335652555,
+      "output": "platformer-heart-mulfok32.png",
+      "sha256": "618acf7d0cdada78a0514e2124fe63fcbf7e47577412e48d18052311cf0344b2",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "platformer-heart",
+      "palette": "zughy-32",
+      "used": 3,
+      "visible": 130,
+      "pointOklabMSE": 0.0027397788961502157,
+      "output": "platformer-heart-zughy-32.png",
+      "sha256": "b68e2ab5474c51c7f58caeb0d53a1235da10450d84fa429231c13b6aeddefd0b",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "platformer-heart",
+      "palette": "dawnbringer-32",
+      "used": 3,
+      "visible": 130,
+      "pointOklabMSE": 0.0028015975961813034,
+      "output": "platformer-heart-dawnbringer-32.png",
+      "sha256": "d1b8505605dcc769146e6007572c272ff854e95845604a33669d904f632fe979",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "platformer-heart",
+      "palette": "nanner-pancakes",
+      "used": 2,
+      "visible": 130,
+      "pointOklabMSE": 0.004270170300837202,
+      "output": "platformer-heart-nanner-pancakes.png",
+      "sha256": "5695f169d00129b285689acd4672c07b8c0ce1c974c75093d25862c607fa646f",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "platformer-heart",
+      "palette": "aerugo",
+      "used": 3,
+      "visible": 130,
+      "pointOklabMSE": 0.0010215949641182982,
+      "output": "platformer-heart-aerugo.png",
+      "sha256": "ac4eee64d867300754c762fc8041bd4b94debcfb6e3d828473e3a788f5dc2a7f",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "platformer-heart",
+      "palette": "sheltzy32",
+      "used": 2,
+      "visible": 130,
+      "pointOklabMSE": 0.0022999809481551595,
+      "output": "platformer-heart-sheltzy32.png",
+      "sha256": "9ac833c04e126c0f053414059d90ec528be383ff51c7195022150fc5cd4bdce4",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "platformer-heart",
+      "palette": "downgraded-32",
+      "used": 3,
+      "visible": 130,
+      "pointOklabMSE": 0.00313055253617464,
+      "output": "platformer-heart-downgraded-32.png",
+      "sha256": "96192dbdb8abcd33d32a8460723ff2a7595d85e59755408ef9cfc0e410b62299",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "owned-knight",
+      "palette": "endesga-32",
+      "used": 14,
+      "visible": 304,
+      "pointOklabMSE": 0.0017946027955124334,
+      "output": "owned-knight-endesga-32.png",
+      "sha256": "96e78b2ee4045c0112ba5186c6be0618270cfb9ac5ec1e0d39b404cefb817ac9",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "owned-knight",
+      "palette": "mulfok32",
+      "used": 14,
+      "visible": 304,
+      "pointOklabMSE": 0.004103359597594788,
+      "output": "owned-knight-mulfok32.png",
+      "sha256": "d8fa6efa3851b401e34b107226c074997842cc035fd1b67dfc6e5000d879bc5e",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "owned-knight",
+      "palette": "zughy-32",
+      "used": 15,
+      "visible": 304,
+      "pointOklabMSE": 0.004649977612405511,
+      "output": "owned-knight-zughy-32.png",
+      "sha256": "bf46476743a14f9f50260b1f806eabbbe07119f897afec872ede76856079ff82",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "owned-knight",
+      "palette": "dawnbringer-32",
+      "used": 14,
+      "visible": 304,
+      "pointOklabMSE": 0.002988366274943386,
+      "output": "owned-knight-dawnbringer-32.png",
+      "sha256": "89232f55cf9ad9b31fa95e802c094e4a124786e721b7abfa9da58932805b04c4",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "owned-knight",
+      "palette": "nanner-pancakes",
+      "used": 14,
+      "visible": 304,
+      "pointOklabMSE": 0.0032103593740701944,
+      "output": "owned-knight-nanner-pancakes.png",
+      "sha256": "285c1edbc659a5cc9e319fd3d77e2e9f0832e521e5d3686b3b0a700b64104dba",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "owned-knight",
+      "palette": "aerugo",
+      "used": 15,
+      "visible": 304,
+      "pointOklabMSE": 0.0021507708956267505,
+      "output": "owned-knight-aerugo.png",
+      "sha256": "6f112f2a712c60c8173beee8cd653d17512a0ef299ddda023eefb8dea7a19b67",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "owned-knight",
+      "palette": "sheltzy32",
+      "used": 13,
+      "visible": 304,
+      "pointOklabMSE": 0.005075022494902444,
+      "output": "owned-knight-sheltzy32.png",
+      "sha256": "c4c651e890ed3444ca5a9888540e512bddb7e779c412844d28e8591107481418",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "owned-knight",
+      "palette": "downgraded-32",
+      "used": 15,
+      "visible": 304,
+      "pointOklabMSE": 0.006525842321011985,
+      "output": "owned-knight-downgraded-32.png",
+      "sha256": "ea8bec3a72954b6fbd30d0c354fc4fa998eb931cf46c8e4ad5376f1e5a11df0f",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "owned-hue-ramp",
+      "palette": "endesga-32",
+      "used": 30,
+      "visible": 1024,
+      "pointOklabMSE": 0.012690599984967792,
+      "output": "owned-hue-ramp-endesga-32.png",
+      "sha256": "54dd57e70fbe977197e5edd358d04a2b668c892369da1cc34b95681a40b19268",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "owned-hue-ramp",
+      "palette": "mulfok32",
+      "used": 29,
+      "visible": 1024,
+      "pointOklabMSE": 0.010858122799867522,
+      "output": "owned-hue-ramp-mulfok32.png",
+      "sha256": "786c9415c9bc2fdcecbe0cf022fbff2d72fe2ada73b9146eff902a770b47e3a2",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "owned-hue-ramp",
+      "palette": "zughy-32",
+      "used": 29,
+      "visible": 1024,
+      "pointOklabMSE": 0.013033818782581495,
+      "output": "owned-hue-ramp-zughy-32.png",
+      "sha256": "e98a3e313e97d0459c5a3721b308cd7b13e2e72e21ccdfa2539e336abee922a2",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "owned-hue-ramp",
+      "palette": "dawnbringer-32",
+      "used": 27,
+      "visible": 1024,
+      "pointOklabMSE": 0.009743972585203094,
+      "output": "owned-hue-ramp-dawnbringer-32.png",
+      "sha256": "d4e226e0901003b3f93a155cf897ecdf23b0b976ac593bc9b9b78dc5a646f28d",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "owned-hue-ramp",
+      "palette": "nanner-pancakes",
+      "used": 30,
+      "visible": 1024,
+      "pointOklabMSE": 0.01841281584936096,
+      "output": "owned-hue-ramp-nanner-pancakes.png",
+      "sha256": "187377fd3d054456fa6d3c4a0265586bc64fed39167b76d9186004878ff894ec",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "owned-hue-ramp",
+      "palette": "aerugo",
+      "used": 29,
+      "visible": 1024,
+      "pointOklabMSE": 0.02517650008790966,
+      "output": "owned-hue-ramp-aerugo.png",
+      "sha256": "a7a6bcacdcd47ff56a2bc4bb43a20b766b8f5eb5a039b6a87ce5f3c00b18439e",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "owned-hue-ramp",
+      "palette": "sheltzy32",
+      "used": 29,
+      "visible": 1024,
+      "pointOklabMSE": 0.008571910107813219,
+      "output": "owned-hue-ramp-sheltzy32.png",
+      "sha256": "0d07ca6f638b9b4b367f03060303e6b32c239e503c1a3df51fab3c0d5d845f93",
+      "oracleMismatches": 0
+    },
+    {
+      "fixture": "owned-hue-ramp",
+      "palette": "downgraded-32",
+      "used": 28,
+      "visible": 1024,
+      "pointOklabMSE": 0.015451820269843194,
+      "output": "owned-hue-ramp-downgraded-32.png",
+      "sha256": "e8bd6b9ff7d7c4714fc26693093c86a4259730aff1245a8a0137c9da57cfdaea",
+      "oracleMismatches": 0
+    }
+  ]
+}

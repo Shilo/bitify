@@ -1,0 +1,194 @@
+{
+  "cases": 80,
+  "stats": [
+    {
+      "id": "endesga-32",
+      "name": "Endesga 32",
+      "meanChroma": 0.10684957000170006,
+      "lightnessRange": [
+        0.20503136561343496,
+        0.9999999934735462
+      ],
+      "neutralColors": 2
+    },
+    {
+      "id": "mulfok32",
+      "name": "mulfok32",
+      "meanChroma": 0.11996121811805288,
+      "lightnessRange": [
+        0.20827579015976466,
+        0.9999999934735462
+      ],
+      "neutralColors": 1
+    },
+    {
+      "id": "zughy-32",
+      "name": "Zughy 32",
+      "meanChroma": 0.08761633181302465,
+      "lightnessRange": [
+        0.2981277576015884,
+        0.9560823740145336
+      ],
+      "neutralColors": 6
+    },
+    {
+      "id": "dawnbringer-32",
+      "name": "DawnBringer 32",
+      "meanChroma": 0.09045490254529877,
+      "lightnessRange": [
+        0,
+        0.9999999934735462
+      ],
+      "neutralColors": 7
+    },
+    {
+      "id": "nanner-pancakes",
+      "name": "Nanner Pancakes",
+      "meanChroma": 0.07189282090531206,
+      "lightnessRange": [
+        0.26107358909297945,
+        0.9488258113486427
+      ],
+      "neutralColors": 0
+    },
+    {
+      "id": "aerugo",
+      "name": "Aerugo",
+      "meanChroma": 0.05462712238766486,
+      "lightnessRange": [
+        0.2411047632560662,
+        0.9999999934735462
+      ],
+      "neutralColors": 11
+    },
+    {
+      "id": "sheltzy32",
+      "name": "Sheltzy32",
+      "meanChroma": 0.10863448345139488,
+      "lightnessRange": [
+        0,
+        0.9999999934735462
+      ],
+      "neutralColors": 3
+    },
+    {
+      "id": "downgraded-32",
+      "name": "downgraded 32",
+      "meanChroma": 0.09021993710035327,
+      "lightnessRange": [
+        0.2526189853134077,
+        0.9920074276316365
+      ],
+      "neutralColors": 3
+    }
+  ],
+  "rank": [
+    {
+      "name": "Endesga 32",
+      "likes": 2284,
+      "downloads": "205,939"
+    },
+    {
+      "name": "mulfok32",
+      "likes": 1659,
+      "downloads": "43,360"
+    },
+    {
+      "name": "Zughy 32",
+      "likes": 739,
+      "downloads": "42,152"
+    },
+    {
+      "name": "DawnBringer 32",
+      "likes": 463,
+      "downloads": "22,450"
+    },
+    {
+      "name": "Resurrect 32",
+      "likes": 863,
+      "downloads": "20,632"
+    },
+    {
+      "name": "Nanner Pancakes",
+      "likes": 816,
+      "downloads": "17,475"
+    },
+    {
+      "name": "PICO-8 Secret Palette",
+      "likes": 335,
+      "downloads": "14,810"
+    },
+    {
+      "name": "Aerugo",
+      "likes": 810,
+      "downloads": "14,442"
+    },
+    {
+      "name": "Sheltzy32",
+      "likes": 639,
+      "downloads": "14,408"
+    },
+    {
+      "name": "downgraded 32",
+      "likes": 751,
+      "downloads": "13,241"
+    }
+  ],
+  "versusBuiltins": [
+    {
+      "id": "preset-res64",
+      "exactShared": 1,
+      "symmetricNearestOklabRMS": 0.06961347301980964
+    },
+    {
+      "id": "preset-edg32",
+      "exactShared": 1,
+      "symmetricNearestOklabRMS": 0.07737642624994956
+    },
+    {
+      "id": "preset-pico8",
+      "exactShared": 0,
+      "symmetricNearestOklabRMS": 0.09188916471768797
+    },
+    {
+      "id": "preset-db16",
+      "exactShared": 0,
+      "symmetricNearestOklabRMS": 0.09208849231373127
+    },
+    {
+      "id": "preset-edg8",
+      "exactShared": 0,
+      "symmetricNearestOklabRMS": 0.09659882161906683
+    },
+    {
+      "id": "preset-gray8",
+      "exactShared": 1,
+      "symmetricNearestOklabRMS": 0.11742585664271211
+    },
+    {
+      "id": "preset-icecreamgb",
+      "exactShared": 0,
+      "symmetricNearestOklabRMS": 0.10514897682246718
+    },
+    {
+      "id": "preset-gameboy",
+      "exactShared": 0,
+      "symmetricNearestOklabRMS": 0.19168330415736567
+    },
+    {
+      "id": "preset-mono",
+      "exactShared": 1,
+      "symmetricNearestOklabRMS": 0.2738849951784629
+    },
+    {
+      "id": "preset-glow",
+      "exactShared": 0,
+      "symmetricNearestOklabRMS": 0.18210491455300745
+    },
+    {
+      "id": "preset-paper",
+      "exactShared": 0,
+      "symmetricNearestOklabRMS": 0.14249943792304604
+    }
+  ]
+}

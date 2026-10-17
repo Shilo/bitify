@@ -105,7 +105,7 @@ not a promise that every selected color will be used.
 |---|---:|---|
 | Resurrect 64 | 64 | [Kerrie Lake](https://lospec.com/palette-list/resurrect-64) |
 | ENDESGA 32 | 32 | [ENDESGA](https://lospec.com/palette-list/endesga-32), originally for NYKRA |
-| mulfok32 | 32 | [mulfok](https://lospec.com/palette-list/mulfok32); soft pastel and purple-tinted ramps |
+| Mulfok 32 | 32 | [mulfok](https://lospec.com/palette-list/mulfok32); pink highlights and purple-tinted ramps |
 | PICO-8 | 16 | [Lexaloffle Games](https://www.lexaloffle.com/pico-8.php) |
 | DawnBringer 16 | 16 | [DawnBringer](https://lospec.com/palette-list/dawnbringer-16) |
 | ENDESGA 8 | 8 | [ENDESGA](https://lospec.com/palette-list/endesga-8); fixed broad-hue target |
@@ -119,12 +119,12 @@ not a promise that every selected color will be used.
 The rail groups presets by descending color count: 64, 32, 16, 8, 4, 2, with vertical
 dividers between counts. Black & white, Glow and Paper form the final group. These
 use the same pairs as 1-bit Mono, Glow and Paper, but apply palette recoloring.
-ENDESGA 32 precedes mulfok32 and PICO-8 precedes DawnBringer 16, using dated Lospec
+ENDESGA 32 precedes Mulfok 32 and PICO-8 precedes DawnBringer 16, using dated Lospec
 download counts as a popularity signal. The four-color pair puts the warm artist
 palette before the familiar handheld palette. Plain Black & white and Grayscale 8
 are utility references without comparable download figures; Black & white leads its
 group for recognition, then the artist tints follow their measured popularity.
-This curated order does not claim a universal popularity ranking. mulfok32 is an
+This curated order does not claim a universal popularity ranking. Mulfok 32 is an
 intentional soft/purple alternative, not a neutral-fidelity replacement. See the
 [curation research](research/2026-10-16-palette-selection-and-auto-budget.md).
 Auto is the fresh default; ENDESGA 32 is the curated fallback for

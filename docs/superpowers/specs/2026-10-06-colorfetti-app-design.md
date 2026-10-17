@@ -170,7 +170,8 @@ limits, Cleanup or source art.
 ## Curated palette additions — October 16, 2026
 
 There are now twelve curated presets. The additional `preset-mulfok32` follows
-ENDESGA 32 in the 32-color group, retaining its published 32 RGB entries, order,
+ENDESGA 32 in the 32-color group. Its display label is Mulfok 32 (published as
+`mulfok32`); it retains the published 32 RGB entries, order,
 creator and source link. It is an optional pastel/purple artistic target; Auto's
 default, existing preset colors/IDs and ENDESGA 32's fallback remain unchanged.
 Artist sets within a size group use dated Lospec-download evidence where

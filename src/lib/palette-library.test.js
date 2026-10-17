@@ -66,7 +66,7 @@ describe('palette library', () => {
 
   it('preserves mulfok32 canonical RGB order and creator attribution', () => {
     const pastel = FULL_PRESETS.find(p => p.id === 'preset-mulfok32');
-    expect(pastel.name).toBe('mulfok32');
+    expect(pastel.name).toBe('Mulfok 32');
     expect(pastel.colors).toEqual('5ba675 6bc96c abdd64 fcef8d ffb879 ea6262 cc425e a32858 751756 390947 611851 873555 a6555f c97373 f2ae99 ffc3f2 ee8fcb d46eb3 873e84 1f102a 4a3052 7b5480 a6859f d9bdc8 ffffff aee2ff 8db7ff 6d80fa 8465ec 834dc4 7d2da0 4e187c'.split(' ').map(c => '#' + c));
     expect(pastel.source).toEqual({ kind: 'preset', credit: 'mulfok', url: 'https://lospec.com/palette-list/mulfok32' });
   });
