@@ -1,6 +1,11 @@
 # Artist-controlled color protection — design review only
 
-October 15, 2026. **Implementation deferred until the user reviews the mockups.**
+October 16, 2026 status: **The user explicitly deferred this feature and its
+mockups. Do not implement it in the palette usability batch.** Research and
+mockups remain versioned for possible future discussion; their existence is not
+implementation approval.
+
+Original design: October 15, 2026. **Implementation deferred.**
 No production algorithm, component, setting, specification or export behavior is
 changed. This is a proposed interaction, not an accepted feature contract.
 
