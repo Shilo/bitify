@@ -55,4 +55,6 @@ landscape, as they did before this batch; closing settings restores the tested c
 Counts can remain absent on sampled walls until full-source inspection completes.
 The original palette-only build excluded concurrent zoom/navigation edits. The
 follow-up integrated their committed version while preserving/excluding later
-uncommitted changes. Large walls still have import/layout stalls. No changes were pushed.
+uncommitted changes. The user clarified that 100-image walls are outside practical
+product scope; their import/layout stalls remain diagnostic stress evidence,
+not pending required fixes. No hard image-count limit was added. No changes were pushed.

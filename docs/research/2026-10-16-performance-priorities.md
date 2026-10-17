@@ -154,7 +154,15 @@ architecture or benchmark-subset search is pursued in this review.
 
 ## Ranked remaining concerns
 
-1. **Very large walls on phones:** importing/recoloring 100 tiles still incurs
+**Later user scope clarification:** practical support for 100 simultaneous images
+is not a product goal. Keep that workload as diagnostic stress evidence, not a
+release blocker or a planned optimization task. This does not introduce a hard
+image-count limit. Prioritize ordinary sprites, realistic small batches,
+individual sprite sheets and animations; investigate their costs only when a
+representative workflow demonstrates a problem. The numbered findings below
+retain the original review order rather than the revised product priority.
+
+1. **Stress-only: very large walls on phones:** importing/recoloring 100 tiles still incurs
    browser layout/style/conversion costs and occasional long tasks. Per-key count
    caching fixed avoidable caption fanout, not the entire wall's cost. Any future
    incremental publication or visibility optimization must preserve Auto's
