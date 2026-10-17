@@ -1,0 +1,9 @@
+7:07:18 PM [vite-plugin-svelte] no Svelte config found at C:/Programming_Files/Shilocity/colorfetti/.tmp/palette-landscape-final - using default configuration.
+
+ RUN  v4.1.11 C:/Programming_Files/Shilocity/colorfetti/.tmp/palette-landscape-final
+
+
+ Test Files  63 passed (63)
+      Tests  969 passed | 2 skipped (971)
+   Start at  19:07:18
+   Duration  4.06s (transform 3.79s, setup 0ms, import 6.62s, tests 19.23s, environment 6ms)

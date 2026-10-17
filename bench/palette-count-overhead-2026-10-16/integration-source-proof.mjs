@@ -1,0 +1,14 @@
+import { readFile,writeFile } from 'node:fs/promises';
+import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
+import assert from 'node:assert/strict';
+import path from 'node:path';
+import { candidate } from './candidate-transform.mjs';
+const sourceRef=process.argv[2]||'31052b673a190f64039399ad450234011f4d1128';
+const actual=execFileSync('git',['show',sourceRef+':src/App.svelte'],{encoding:'utf8'}).replaceAll('\r\n','\n');
+const expected=candidate(await readFile('.tmp/palette-usability-final/src/App.svelte','utf8'),'slots');
+const block=text=>text.slice(text.indexOf('  const colorUsage = new SvelteMap();'),text.indexOf('  async function outputColors('));
+const normalize=text=>text.replace(/\/\/[^\n]*/g,'').replace(/\s+/g,' ').trim();
+assert.equal(normalize(block(actual)),normalize(block(expected)),'Integrated metadata ownership differs from accepted candidate');
+const report={sourceRef,metadataBlockMatchesAcceptedCandidateIgnoringCommentsAndWhitespace:true,metadataBlockSha256:createHash('sha256').update(normalize(block(actual))).digest('hex'),unrelatedDirtyAutoGuardIncluded:actual.includes('Re-entering Auto with the same immutable sources'),note:'Only the independently accepted metadata ownership block is compared; other tasks may have committed unrelated source changes.'};
+await writeFile(path.join(import.meta.dirname,'integration-source-proof.json'),JSON.stringify(report,null,2));console.log(JSON.stringify(report,null,2));

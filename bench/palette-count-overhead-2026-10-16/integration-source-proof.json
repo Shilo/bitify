@@ -1,0 +1,7 @@
+{
+  "sourceRef": "31052b673a190f64039399ad450234011f4d1128",
+  "metadataBlockMatchesAcceptedCandidateIgnoringCommentsAndWhitespace": true,
+  "metadataBlockSha256": "cf9ae0329ff3a6f5f73f2ffbb3c3bccc90a55f2318744cebb4613379953caa79",
+  "unrelatedDirtyAutoGuardIncluded": false,
+  "note": "Only the independently accepted metadata ownership block is compared; other tasks may have committed unrelated source changes."
+}

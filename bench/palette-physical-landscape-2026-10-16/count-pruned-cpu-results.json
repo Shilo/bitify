@@ -1,0 +1,1653 @@
+{
+  "date": "2026-10-17T01:58:23.798Z",
+  "original": {
+    "policy": "free",
+    "user": "0",
+    "accelerometer": "1"
+  },
+  "notes": [
+    "Actual Android OS landscape, no CDP metrics/orientation emulation.",
+    "Instrumented callback-only enabled/disabled A/B; source quantization unchanged.",
+    "Fixed settling waits are not conversion CPU measurements."
+  ],
+  "runs": [
+    {
+      "trial": 0,
+      "variant": "enabled",
+      "viewport": {
+        "width": 947,
+        "height": 364,
+        "angle": 90,
+        "type": "landscape-primary"
+      },
+      "enabled": true,
+      "count": 100,
+      "gif": false,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 100,
+            "publications": 100,
+            "mapEntriesCopied": 4950,
+            "cleanupRuns": 102,
+            "cleanupEntries": 5051,
+            "callbackMs": 3.6999998688697815,
+            "conversions": 100
+          },
+          "cpuMs": {
+            "TaskDuration": 469.59499999999997,
+            "ScriptDuration": 134.981,
+            "LayoutDuration": 23.515,
+            "RecalcStyleDuration": 37.68
+          },
+          "heapDelta": 10120196,
+          "health": {
+            "duration": 715.6999999880791,
+            "longtasks": 1,
+            "maxTask": 99,
+            "rafMax": 100.10000000000002,
+            "rafP95": 83.39999999999998
+          }
+        },
+        {
+          "name": "original return (Space)",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0.10000002384185791,
+            "conversions": 0
+          },
+          "cpuMs": {
+            "TaskDuration": 82.21699999999998,
+            "ScriptDuration": 28.59400000000001,
+            "LayoutDuration": 0.5409999999999998,
+            "RecalcStyleDuration": 3.0460000000000003
+          },
+          "heapDelta": 745096,
+          "health": {
+            "duration": 340.5,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.799999999999955,
+            "rafP95": 16.799999999999955
+          }
+        },
+        {
+          "name": "matching change",
+          "stats": {
+            "keys": 1,
+            "calls": 100,
+            "aggregateCalls": 100,
+            "publications": 100,
+            "mapEntriesCopied": 4950,
+            "cleanupRuns": 102,
+            "cleanupEntries": 5150,
+            "callbackMs": 3.6000000834465027,
+            "conversions": 100
+          },
+          "cpuMs": {
+            "TaskDuration": 481.37300000000005,
+            "ScriptDuration": 75.69099999999997,
+            "LayoutDuration": 52.433,
+            "RecalcStyleDuration": 76.94599999999998
+          },
+          "heapDelta": -5527008,
+          "health": {
+            "duration": 842.8999999761581,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 75,
+            "rafP95": 33.40000000000009
+          }
+        },
+        {
+          "name": "idle",
+          "stats": {
+            "keys": 0,
+            "calls": 0,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "cpuMs": {
+            "TaskDuration": 15.573000000000059,
+            "ScriptDuration": 1.3110000000000066,
+            "LayoutDuration": 0,
+            "RecalcStyleDuration": 0
+          },
+          "heapDelta": 11244,
+          "health": {
+            "duration": 318.19999998807907,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000182,
+            "rafP95": 16.800000000000182
+          }
+        }
+      ],
+      "outputDigests": [
+        {
+          "name": "import",
+          "digests": [
+            {
+              "width": 16,
+              "height": 16,
+              "sha256": "c063c41d7b75b419e668508287c4db80e30fc0dbb51eb485f066ca879da804f3"
+            },
+            {
+              "width": 16,
+              "height": 16,
+              "sha256": "c063c41d7b75b419e668508287c4db80e30fc0dbb51eb485f066ca879da804f3"
+            }
+          ]
+        },
+        {
+          "name": "matching",
+          "digests": [
+            {
+              "width": 16,
+              "height": 16,
+              "sha256": "89871ba418befedbd53fd947d12d6caed84f487d644af796df01c43021fe6f6b"
+            },
+            {
+              "width": 16,
+              "height": 16,
+              "sha256": "89871ba418befedbd53fd947d12d6caed84f487d644af796df01c43021fe6f6b"
+            }
+          ]
+        }
+      ],
+      "final": {
+        "keys": 2,
+        "calls": 301,
+        "aggregateCalls": 200,
+        "publications": 200,
+        "mapEntriesCopied": 9900,
+        "cleanupRuns": 205,
+        "cleanupEntries": 10201,
+        "callbackMs": 7.399999976158142,
+        "conversions": 201
+      },
+      "labels": [
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors"
+      ]
+    },
+    {
+      "trial": 0,
+      "variant": "pruned",
+      "viewport": {
+        "width": 947,
+        "height": 364,
+        "angle": 90,
+        "type": "landscape-primary"
+      },
+      "enabled": true,
+      "count": 100,
+      "gif": false,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 100,
+            "publications": 100,
+            "mapEntriesCopied": 4950,
+            "cleanupRuns": 2,
+            "cleanupEntries": 1,
+            "callbackMs": 3.900000035762787,
+            "conversions": 100
+          },
+          "cpuMs": {
+            "TaskDuration": 487.34299999999996,
+            "ScriptDuration": 131.573,
+            "LayoutDuration": 23.996,
+            "RecalcStyleDuration": 37.257000000000005
+          },
+          "heapDelta": 10116204,
+          "health": {
+            "duration": 744.6999999880791,
+            "longtasks": 2,
+            "maxTask": 97,
+            "rafMax": 91.60000000000002,
+            "rafP95": 83.60000000000002
+          }
+        },
+        {
+          "name": "original return (Space)",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0.10000002384185791,
+            "conversions": 0
+          },
+          "cpuMs": {
+            "TaskDuration": 88.66299999999994,
+            "ScriptDuration": 32.53600000000001,
+            "LayoutDuration": 0.6589999999999998,
+            "RecalcStyleDuration": 3.386
+          },
+          "heapDelta": 744124,
+          "health": {
+            "duration": 343.5,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 25,
+            "rafP95": 25
+          }
+        },
+        {
+          "name": "matching change",
+          "stats": {
+            "keys": 1,
+            "calls": 100,
+            "aggregateCalls": 100,
+            "publications": 100,
+            "mapEntriesCopied": 4950,
+            "cleanupRuns": 1,
+            "cleanupEntries": 100,
+            "callbackMs": 2.7000001668930054,
+            "conversions": 100
+          },
+          "cpuMs": {
+            "TaskDuration": 532.899,
+            "ScriptDuration": 80.52699999999999,
+            "LayoutDuration": 53.432,
+            "RecalcStyleDuration": 94.533
+          },
+          "heapDelta": -5537352,
+          "health": {
+            "duration": 888.4000000357628,
+            "longtasks": 1,
+            "maxTask": 116,
+            "rafMax": 108.29999999999995,
+            "rafP95": 33.40000000000009
+          }
+        },
+        {
+          "name": "idle",
+          "stats": {
+            "keys": 0,
+            "calls": 0,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "cpuMs": {
+            "TaskDuration": 26.939999999999962,
+            "ScriptDuration": 2.6189999999999825,
+            "LayoutDuration": 0,
+            "RecalcStyleDuration": 0
+          },
+          "heapDelta": 11256,
+          "health": {
+            "duration": 320.30000001192093,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000182,
+            "rafP95": 16.800000000000182
+          }
+        }
+      ],
+      "outputDigests": [
+        {
+          "name": "import",
+          "digests": [
+            {
+              "width": 16,
+              "height": 16,
+              "sha256": "c063c41d7b75b419e668508287c4db80e30fc0dbb51eb485f066ca879da804f3"
+            },
+            {
+              "width": 16,
+              "height": 16,
+              "sha256": "c063c41d7b75b419e668508287c4db80e30fc0dbb51eb485f066ca879da804f3"
+            }
+          ]
+        },
+        {
+          "name": "matching",
+          "digests": [
+            {
+              "width": 16,
+              "height": 16,
+              "sha256": "89871ba418befedbd53fd947d12d6caed84f487d644af796df01c43021fe6f6b"
+            },
+            {
+              "width": 16,
+              "height": 16,
+              "sha256": "89871ba418befedbd53fd947d12d6caed84f487d644af796df01c43021fe6f6b"
+            }
+          ]
+        }
+      ],
+      "final": {
+        "keys": 2,
+        "calls": 301,
+        "aggregateCalls": 200,
+        "publications": 200,
+        "mapEntriesCopied": 9900,
+        "cleanupRuns": 4,
+        "cleanupEntries": 101,
+        "callbackMs": 6.70000022649765,
+        "conversions": 201
+      },
+      "labels": [
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors"
+      ]
+    },
+    {
+      "trial": 1,
+      "variant": "pruned",
+      "viewport": {
+        "width": 947,
+        "height": 364,
+        "angle": 90,
+        "type": "landscape-primary"
+      },
+      "enabled": true,
+      "count": 100,
+      "gif": false,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 100,
+            "publications": 100,
+            "mapEntriesCopied": 4950,
+            "cleanupRuns": 2,
+            "cleanupEntries": 1,
+            "callbackMs": 5.200000047683716,
+            "conversions": 100
+          },
+          "cpuMs": {
+            "TaskDuration": 417.077,
+            "ScriptDuration": 137.276,
+            "LayoutDuration": 24.555,
+            "RecalcStyleDuration": 37.317
+          },
+          "heapDelta": 10289300,
+          "health": {
+            "duration": 696.6999999880791,
+            "longtasks": 2,
+            "maxTask": 97,
+            "rafMax": 91.70000000000005,
+            "rafP95": 91.60000000000002
+          }
+        },
+        {
+          "name": "original return (Space)",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "cpuMs": {
+            "TaskDuration": 86.35999999999999,
+            "ScriptDuration": 30.954999999999984,
+            "LayoutDuration": 0.5800000000000006,
+            "RecalcStyleDuration": 3.143999999999994
+          },
+          "heapDelta": 740132,
+          "health": {
+            "duration": 341.9000000357628,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 33.200000000000045,
+            "rafP95": 33.200000000000045
+          }
+        },
+        {
+          "name": "matching change",
+          "stats": {
+            "keys": 1,
+            "calls": 100,
+            "aggregateCalls": 100,
+            "publications": 100,
+            "mapEntriesCopied": 4950,
+            "cleanupRuns": 1,
+            "cleanupEntries": 100,
+            "callbackMs": 3.5000000596046448,
+            "conversions": 100
+          },
+          "cpuMs": {
+            "TaskDuration": 509.73900000000003,
+            "ScriptDuration": 74.97899999999998,
+            "LayoutDuration": 51.31100000000001,
+            "RecalcStyleDuration": 89.68900000000002
+          },
+          "heapDelta": -5698652,
+          "health": {
+            "duration": 866.7999999523163,
+            "longtasks": 1,
+            "maxTask": 60,
+            "rafMax": 100.10000000000014,
+            "rafP95": 25.09999999999991
+          }
+        },
+        {
+          "name": "idle",
+          "stats": {
+            "keys": 0,
+            "calls": 0,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "cpuMs": {
+            "TaskDuration": 28.714000000000127,
+            "ScriptDuration": 2.800999999999998,
+            "LayoutDuration": 0,
+            "RecalcStyleDuration": 0
+          },
+          "heapDelta": 11280,
+          "health": {
+            "duration": 308.80000001192093,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000182,
+            "rafP95": 16.800000000000182
+          }
+        }
+      ],
+      "outputDigests": [
+        {
+          "name": "import",
+          "digests": [
+            {
+              "width": 16,
+              "height": 16,
+              "sha256": "c063c41d7b75b419e668508287c4db80e30fc0dbb51eb485f066ca879da804f3"
+            },
+            {
+              "width": 16,
+              "height": 16,
+              "sha256": "c063c41d7b75b419e668508287c4db80e30fc0dbb51eb485f066ca879da804f3"
+            }
+          ]
+        },
+        {
+          "name": "matching",
+          "digests": [
+            {
+              "width": 16,
+              "height": 16,
+              "sha256": "89871ba418befedbd53fd947d12d6caed84f487d644af796df01c43021fe6f6b"
+            },
+            {
+              "width": 16,
+              "height": 16,
+              "sha256": "89871ba418befedbd53fd947d12d6caed84f487d644af796df01c43021fe6f6b"
+            }
+          ]
+        }
+      ],
+      "final": {
+        "keys": 2,
+        "calls": 301,
+        "aggregateCalls": 200,
+        "publications": 200,
+        "mapEntriesCopied": 9900,
+        "cleanupRuns": 4,
+        "cleanupEntries": 101,
+        "callbackMs": 8.70000010728836,
+        "conversions": 201
+      },
+      "labels": [
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors"
+      ]
+    },
+    {
+      "trial": 1,
+      "variant": "enabled",
+      "viewport": {
+        "width": 947,
+        "height": 364,
+        "angle": 90,
+        "type": "landscape-primary"
+      },
+      "enabled": true,
+      "count": 100,
+      "gif": false,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 100,
+            "publications": 100,
+            "mapEntriesCopied": 4950,
+            "cleanupRuns": 102,
+            "cleanupEntries": 5051,
+            "callbackMs": 4.099999725818634,
+            "conversions": 100
+          },
+          "cpuMs": {
+            "TaskDuration": 522.702,
+            "ScriptDuration": 142.308,
+            "LayoutDuration": 26.237,
+            "RecalcStyleDuration": 41.213
+          },
+          "heapDelta": 10756056,
+          "health": {
+            "duration": 754.9000000357628,
+            "longtasks": 2,
+            "maxTask": 103,
+            "rafMax": 91.79999999999995,
+            "rafP95": 91.70000000000005
+          }
+        },
+        {
+          "name": "original return (Space)",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0.30000007152557373,
+            "conversions": 0
+          },
+          "cpuMs": {
+            "TaskDuration": 89.45700000000001,
+            "ScriptDuration": 31.068000000000012,
+            "LayoutDuration": 0.615000000000001,
+            "RecalcStyleDuration": 3.248000000000001
+          },
+          "heapDelta": 740844,
+          "health": {
+            "duration": 340.89999997615814,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 25.09999999999991,
+            "rafP95": 25.09999999999991
+          }
+        },
+        {
+          "name": "matching change",
+          "stats": {
+            "keys": 1,
+            "calls": 100,
+            "aggregateCalls": 100,
+            "publications": 100,
+            "mapEntriesCopied": 4950,
+            "cleanupRuns": 102,
+            "cleanupEntries": 5150,
+            "callbackMs": 2.7000001668930054,
+            "conversions": 100
+          },
+          "cpuMs": {
+            "TaskDuration": 503.3749999999999,
+            "ScriptDuration": 74.39100000000002,
+            "LayoutDuration": 50.013,
+            "RecalcStyleDuration": 77.99400000000001
+          },
+          "heapDelta": -6171072,
+          "health": {
+            "duration": 856.6999999880791,
+            "longtasks": 1,
+            "maxTask": 50,
+            "rafMax": 75.09999999999991,
+            "rafP95": 33.299999999999955
+          }
+        },
+        {
+          "name": "idle",
+          "stats": {
+            "keys": 0,
+            "calls": 0,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "cpuMs": {
+            "TaskDuration": 27.365000000000084,
+            "ScriptDuration": 2.682999999999991,
+            "LayoutDuration": 0,
+            "RecalcStyleDuration": 0
+          },
+          "heapDelta": 11268,
+          "health": {
+            "duration": 309.80000001192093,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.700000000000273,
+            "rafP95": 16.700000000000273
+          }
+        }
+      ],
+      "outputDigests": [
+        {
+          "name": "import",
+          "digests": [
+            {
+              "width": 16,
+              "height": 16,
+              "sha256": "c063c41d7b75b419e668508287c4db80e30fc0dbb51eb485f066ca879da804f3"
+            },
+            {
+              "width": 16,
+              "height": 16,
+              "sha256": "c063c41d7b75b419e668508287c4db80e30fc0dbb51eb485f066ca879da804f3"
+            }
+          ]
+        },
+        {
+          "name": "matching",
+          "digests": [
+            {
+              "width": 16,
+              "height": 16,
+              "sha256": "89871ba418befedbd53fd947d12d6caed84f487d644af796df01c43021fe6f6b"
+            },
+            {
+              "width": 16,
+              "height": 16,
+              "sha256": "89871ba418befedbd53fd947d12d6caed84f487d644af796df01c43021fe6f6b"
+            }
+          ]
+        }
+      ],
+      "final": {
+        "keys": 2,
+        "calls": 301,
+        "aggregateCalls": 200,
+        "publications": 200,
+        "mapEntriesCopied": 9900,
+        "cleanupRuns": 205,
+        "cleanupEntries": 10201,
+        "callbackMs": 7.099999964237213,
+        "conversions": 201
+      },
+      "labels": [
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors"
+      ]
+    },
+    {
+      "trial": 2,
+      "variant": "enabled",
+      "viewport": {
+        "width": 947,
+        "height": 364,
+        "angle": 90,
+        "type": "landscape-primary"
+      },
+      "enabled": true,
+      "count": 100,
+      "gif": false,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 100,
+            "publications": 100,
+            "mapEntriesCopied": 4950,
+            "cleanupRuns": 102,
+            "cleanupEntries": 5051,
+            "callbackMs": 4.099999785423279,
+            "conversions": 100
+          },
+          "cpuMs": {
+            "TaskDuration": 430.358,
+            "ScriptDuration": 131.75400000000002,
+            "LayoutDuration": 25.319000000000003,
+            "RecalcStyleDuration": 37.838
+          },
+          "heapDelta": 11135088,
+          "health": {
+            "duration": 701.5,
+            "longtasks": 2,
+            "maxTask": 98,
+            "rafMax": 99.89999999999998,
+            "rafP95": 83.5
+          }
+        },
+        {
+          "name": "original return (Space)",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0.10000002384185791,
+            "conversions": 0
+          },
+          "cpuMs": {
+            "TaskDuration": 88.14199999999994,
+            "ScriptDuration": 31.32399999999999,
+            "LayoutDuration": 0.5509999999999994,
+            "RecalcStyleDuration": 2.929000000000001
+          },
+          "heapDelta": 739472,
+          "health": {
+            "duration": 338.19999998807907,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 33.40000000000009,
+            "rafP95": 33.40000000000009
+          }
+        },
+        {
+          "name": "matching change",
+          "stats": {
+            "keys": 1,
+            "calls": 100,
+            "aggregateCalls": 100,
+            "publications": 100,
+            "mapEntriesCopied": 4950,
+            "cleanupRuns": 102,
+            "cleanupEntries": 5150,
+            "callbackMs": 3.7000001072883606,
+            "conversions": 100
+          },
+          "cpuMs": {
+            "TaskDuration": 515.6169999999998,
+            "ScriptDuration": 72.493,
+            "LayoutDuration": 52.479,
+            "RecalcStyleDuration": 78.51799999999999
+          },
+          "heapDelta": -6541680,
+          "health": {
+            "duration": 880.1999999880791,
+            "longtasks": 1,
+            "maxTask": 52,
+            "rafMax": 83.40000000000009,
+            "rafP95": 33.30000000000018
+          }
+        },
+        {
+          "name": "idle",
+          "stats": {
+            "keys": 0,
+            "calls": 0,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "cpuMs": {
+            "TaskDuration": 24.453999999999976,
+            "ScriptDuration": 2.273000000000025,
+            "LayoutDuration": 0,
+            "RecalcStyleDuration": 0
+          },
+          "heapDelta": 11244,
+          "health": {
+            "duration": 309.39999997615814,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 17,
+            "rafP95": 17
+          }
+        }
+      ],
+      "outputDigests": [
+        {
+          "name": "import",
+          "digests": [
+            {
+              "width": 16,
+              "height": 16,
+              "sha256": "c063c41d7b75b419e668508287c4db80e30fc0dbb51eb485f066ca879da804f3"
+            },
+            {
+              "width": 16,
+              "height": 16,
+              "sha256": "c063c41d7b75b419e668508287c4db80e30fc0dbb51eb485f066ca879da804f3"
+            }
+          ]
+        },
+        {
+          "name": "matching",
+          "digests": [
+            {
+              "width": 16,
+              "height": 16,
+              "sha256": "89871ba418befedbd53fd947d12d6caed84f487d644af796df01c43021fe6f6b"
+            },
+            {
+              "width": 16,
+              "height": 16,
+              "sha256": "89871ba418befedbd53fd947d12d6caed84f487d644af796df01c43021fe6f6b"
+            }
+          ]
+        }
+      ],
+      "final": {
+        "keys": 2,
+        "calls": 301,
+        "aggregateCalls": 200,
+        "publications": 200,
+        "mapEntriesCopied": 9900,
+        "cleanupRuns": 205,
+        "cleanupEntries": 10201,
+        "callbackMs": 7.899999916553497,
+        "conversions": 201
+      },
+      "labels": [
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors"
+      ]
+    },
+    {
+      "trial": 2,
+      "variant": "pruned",
+      "viewport": {
+        "width": 947,
+        "height": 364,
+        "angle": 90,
+        "type": "landscape-primary"
+      },
+      "enabled": true,
+      "count": 100,
+      "gif": false,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 100,
+            "publications": 100,
+            "mapEntriesCopied": 4950,
+            "cleanupRuns": 2,
+            "cleanupEntries": 1,
+            "callbackMs": 7.599999964237213,
+            "conversions": 100
+          },
+          "cpuMs": {
+            "TaskDuration": 554.203,
+            "ScriptDuration": 148.854,
+            "LayoutDuration": 25.895,
+            "RecalcStyleDuration": 39.82899999999999
+          },
+          "heapDelta": 10797768,
+          "health": {
+            "duration": 794.6999999880791,
+            "longtasks": 2,
+            "maxTask": 100,
+            "rafMax": 91.80000000000007,
+            "rafP95": 91.59999999999991
+          }
+        },
+        {
+          "name": "original return (Space)",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0.30000007152557373,
+            "conversions": 0
+          },
+          "cpuMs": {
+            "TaskDuration": 92.8509999999999,
+            "ScriptDuration": 32.028999999999975,
+            "LayoutDuration": 0.7209999999999994,
+            "RecalcStyleDuration": 3.7190000000000003
+          },
+          "heapDelta": 751944,
+          "health": {
+            "duration": 352.19999998807907,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000182,
+            "rafP95": 16.799999999999955
+          }
+        },
+        {
+          "name": "matching change",
+          "stats": {
+            "keys": 1,
+            "calls": 100,
+            "aggregateCalls": 100,
+            "publications": 100,
+            "mapEntriesCopied": 4950,
+            "cleanupRuns": 1,
+            "cleanupEntries": 100,
+            "callbackMs": 2.6999999284744263,
+            "conversions": 100
+          },
+          "cpuMs": {
+            "TaskDuration": 553.034,
+            "ScriptDuration": 79.182,
+            "LayoutDuration": 54.318999999999996,
+            "RecalcStyleDuration": 92.66499999999999
+          },
+          "heapDelta": -6218652,
+          "health": {
+            "duration": 980.6999999880791,
+            "longtasks": 2,
+            "maxTask": 65,
+            "rafMax": 108.29999999999995,
+            "rafP95": 41.59999999999991
+          }
+        },
+        {
+          "name": "idle",
+          "stats": {
+            "keys": 0,
+            "calls": 0,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "cpuMs": {
+            "TaskDuration": 29.175999999999867,
+            "ScriptDuration": 2.92199999999998,
+            "LayoutDuration": 0,
+            "RecalcStyleDuration": 0
+          },
+          "heapDelta": 11256,
+          "health": {
+            "duration": 316.19999998807907,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000182,
+            "rafP95": 16.800000000000182
+          }
+        }
+      ],
+      "outputDigests": [
+        {
+          "name": "import",
+          "digests": [
+            {
+              "width": 16,
+              "height": 16,
+              "sha256": "c063c41d7b75b419e668508287c4db80e30fc0dbb51eb485f066ca879da804f3"
+            },
+            {
+              "width": 16,
+              "height": 16,
+              "sha256": "c063c41d7b75b419e668508287c4db80e30fc0dbb51eb485f066ca879da804f3"
+            }
+          ]
+        },
+        {
+          "name": "matching",
+          "digests": [
+            {
+              "width": 16,
+              "height": 16,
+              "sha256": "89871ba418befedbd53fd947d12d6caed84f487d644af796df01c43021fe6f6b"
+            },
+            {
+              "width": 16,
+              "height": 16,
+              "sha256": "89871ba418befedbd53fd947d12d6caed84f487d644af796df01c43021fe6f6b"
+            }
+          ]
+        }
+      ],
+      "final": {
+        "keys": 2,
+        "calls": 301,
+        "aggregateCalls": 200,
+        "publications": 200,
+        "mapEntriesCopied": 9900,
+        "cleanupRuns": 4,
+        "cleanupEntries": 101,
+        "callbackMs": 10.599999964237213,
+        "conversions": 201
+      },
+      "labels": [
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors"
+      ]
+    }
+  ],
+  "errors": [],
+  "restored": {
+    "policy": "free",
+    "user": "0",
+    "accelerometer": "1"
+  }
+}

@@ -1,0 +1,1753 @@
+{
+  "date": "2026-10-17T01:55:19.262Z",
+  "original": {
+    "policy": "free",
+    "user": "0",
+    "accelerometer": "1"
+  },
+  "notes": [
+    "Actual Android OS landscape, no CDP metrics/orientation emulation.",
+    "Instrumented callback-only enabled/disabled A/B; source quantization unchanged.",
+    "Fixed settling waits are not conversion CPU measurements."
+  ],
+  "runs": [
+    {
+      "trial": 0,
+      "viewport": {
+        "width": 947,
+        "height": 364,
+        "angle": 90,
+        "type": "landscape-primary"
+      },
+      "enabled": true,
+      "count": 12,
+      "gif": false,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 12,
+            "aggregateCalls": 12,
+            "publications": 12,
+            "mapEntriesCopied": 66,
+            "cleanupRuns": 14,
+            "cleanupEntries": 79,
+            "callbackMs": 0.8999999761581421,
+            "conversions": 12
+          },
+          "health": {
+            "duration": 441.19999998807907,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000068,
+            "rafP95": 16.799999999999955
+          }
+        },
+        {
+          "name": "original return (Space)",
+          "stats": {
+            "keys": 0,
+            "calls": 12,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 315.5,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000068,
+            "rafP95": 16.800000000000068
+          }
+        },
+        {
+          "name": "matching change",
+          "stats": {
+            "keys": 1,
+            "calls": 12,
+            "aggregateCalls": 12,
+            "publications": 12,
+            "mapEntriesCopied": 66,
+            "cleanupRuns": 14,
+            "cleanupEntries": 90,
+            "callbackMs": 0.40000009536743164,
+            "conversions": 12
+          },
+          "health": {
+            "duration": 581.5,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 33.40000000000009,
+            "rafP95": 24.90000000000009
+          }
+        },
+        {
+          "name": "idle",
+          "stats": {
+            "keys": 0,
+            "calls": 0,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 318.69999998807907,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.799999999999955,
+            "rafP95": 16.799999999999955
+          }
+        }
+      ],
+      "outputDigests": [
+        {
+          "name": "import",
+          "digests": [
+            "c063c41d7b75b419e668508287c4db80e30fc0dbb51eb485f066ca879da804f3"
+          ]
+        },
+        {
+          "name": "matching",
+          "digests": [
+            "89871ba418befedbd53fd947d12d6caed84f487d644af796df01c43021fe6f6b"
+          ]
+        }
+      ],
+      "final": {
+        "keys": 2,
+        "calls": 37,
+        "aggregateCalls": 24,
+        "publications": 24,
+        "mapEntriesCopied": 132,
+        "cleanupRuns": 29,
+        "cleanupEntries": 169,
+        "callbackMs": 1.4000000953674316,
+        "conversions": 25
+      },
+      "labels": [
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors"
+      ]
+    },
+    {
+      "trial": 0,
+      "viewport": {
+        "width": 947,
+        "height": 364,
+        "angle": 90,
+        "type": "landscape-primary"
+      },
+      "enabled": false,
+      "count": 12,
+      "gif": false,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 12,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 2,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 12
+          },
+          "health": {
+            "duration": 397.80000001192093,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.80000000000001,
+            "rafP95": 16.799999999999955
+          }
+        },
+        {
+          "name": "original return (Space)",
+          "stats": {
+            "keys": 0,
+            "calls": 12,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0.09999996423721313,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 326.0999999642372,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000068,
+            "rafP95": 16.800000000000068
+          }
+        },
+        {
+          "name": "matching change",
+          "stats": {
+            "keys": 1,
+            "calls": 12,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 1,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 12
+          },
+          "health": {
+            "duration": 570.3000000119209,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 33.299999999999955,
+            "rafP95": 25
+          }
+        },
+        {
+          "name": "idle",
+          "stats": {
+            "keys": 0,
+            "calls": 0,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 326.10000002384186,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000182,
+            "rafP95": 16.800000000000182
+          }
+        }
+      ],
+      "outputDigests": [
+        {
+          "name": "import",
+          "digests": [
+            "c063c41d7b75b419e668508287c4db80e30fc0dbb51eb485f066ca879da804f3"
+          ]
+        },
+        {
+          "name": "matching",
+          "digests": [
+            "89871ba418befedbd53fd947d12d6caed84f487d644af796df01c43021fe6f6b"
+          ]
+        }
+      ],
+      "final": {
+        "keys": 2,
+        "calls": 37,
+        "aggregateCalls": 0,
+        "publications": 0,
+        "mapEntriesCopied": 0,
+        "cleanupRuns": 4,
+        "cleanupEntries": 0,
+        "callbackMs": 0.09999996423721313,
+        "conversions": 25
+      },
+      "labels": [
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16"
+      ]
+    },
+    {
+      "trial": 0,
+      "viewport": {
+        "width": 947,
+        "height": 364,
+        "angle": 90,
+        "type": "landscape-primary"
+      },
+      "enabled": true,
+      "count": 100,
+      "gif": false,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 100,
+            "publications": 100,
+            "mapEntriesCopied": 4950,
+            "cleanupRuns": 102,
+            "cleanupEntries": 5051,
+            "callbackMs": 3.599999964237213,
+            "conversions": 100
+          },
+          "health": {
+            "duration": 740.6999999880791,
+            "longtasks": 2,
+            "maxTask": 97,
+            "rafMax": 91.70000000000005,
+            "rafP95": 83.39999999999998
+          }
+        },
+        {
+          "name": "original return (Space)",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0.2999999523162842,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 344.69999998807907,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 25,
+            "rafP95": 25
+          }
+        },
+        {
+          "name": "matching change",
+          "stats": {
+            "keys": 1,
+            "calls": 100,
+            "aggregateCalls": 100,
+            "publications": 100,
+            "mapEntriesCopied": 4950,
+            "cleanupRuns": 102,
+            "cleanupEntries": 5150,
+            "callbackMs": 1.7999998927116394,
+            "conversions": 100
+          },
+          "health": {
+            "duration": 888.3000000119209,
+            "longtasks": 1,
+            "maxTask": 52,
+            "rafMax": 91.79999999999995,
+            "rafP95": 33.399999999999864
+          }
+        },
+        {
+          "name": "idle",
+          "stats": {
+            "keys": 0,
+            "calls": 0,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 329.19999998807907,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.799999999999727,
+            "rafP95": 16.799999999999727
+          }
+        }
+      ],
+      "outputDigests": [
+        {
+          "name": "import",
+          "digests": [
+            "c063c41d7b75b419e668508287c4db80e30fc0dbb51eb485f066ca879da804f3"
+          ]
+        },
+        {
+          "name": "matching",
+          "digests": [
+            "89871ba418befedbd53fd947d12d6caed84f487d644af796df01c43021fe6f6b"
+          ]
+        }
+      ],
+      "final": {
+        "keys": 2,
+        "calls": 301,
+        "aggregateCalls": 200,
+        "publications": 200,
+        "mapEntriesCopied": 9900,
+        "cleanupRuns": 205,
+        "cleanupEntries": 10201,
+        "callbackMs": 5.699999809265137,
+        "conversions": 201
+      },
+      "labels": [
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors"
+      ]
+    },
+    {
+      "trial": 0,
+      "viewport": {
+        "width": 947,
+        "height": 364,
+        "angle": 90,
+        "type": "landscape-primary"
+      },
+      "enabled": false,
+      "count": 100,
+      "gif": false,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 2,
+            "cleanupEntries": 0,
+            "callbackMs": 0.30000001192092896,
+            "conversions": 100
+          },
+          "health": {
+            "duration": 747.2000000476837,
+            "longtasks": 2,
+            "maxTask": 101,
+            "rafMax": 99.80000000000007,
+            "rafP95": 50
+          }
+        },
+        {
+          "name": "original return (Space)",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0.30000001192092896,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 348.5,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 24,
+            "rafP95": 16.90000000000009
+          }
+        },
+        {
+          "name": "matching change",
+          "stats": {
+            "keys": 1,
+            "calls": 100,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 1,
+            "cleanupEntries": 0,
+            "callbackMs": 0.10000002384185791,
+            "conversions": 100
+          },
+          "health": {
+            "duration": 913,
+            "longtasks": 1,
+            "maxTask": 64,
+            "rafMax": 100.09999999999991,
+            "rafP95": 41.600000000000136
+          }
+        },
+        {
+          "name": "idle",
+          "stats": {
+            "keys": 0,
+            "calls": 0,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 323,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000182,
+            "rafP95": 16.800000000000182
+          }
+        }
+      ],
+      "outputDigests": [
+        {
+          "name": "import",
+          "digests": [
+            "c063c41d7b75b419e668508287c4db80e30fc0dbb51eb485f066ca879da804f3"
+          ]
+        },
+        {
+          "name": "matching",
+          "digests": [
+            "89871ba418befedbd53fd947d12d6caed84f487d644af796df01c43021fe6f6b"
+          ]
+        }
+      ],
+      "final": {
+        "keys": 2,
+        "calls": 301,
+        "aggregateCalls": 0,
+        "publications": 0,
+        "mapEntriesCopied": 0,
+        "cleanupRuns": 4,
+        "cleanupEntries": 0,
+        "callbackMs": 0.7000000476837158,
+        "conversions": 201
+      },
+      "labels": [
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16"
+      ]
+    },
+    {
+      "trial": 0,
+      "viewport": {
+        "width": 947,
+        "height": 364,
+        "angle": 90,
+        "type": "landscape-primary"
+      },
+      "enabled": true,
+      "count": 1,
+      "gif": true,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 160,
+            "aggregateCalls": 128,
+            "publications": 128,
+            "mapEntriesCopied": 127,
+            "cleanupRuns": 129,
+            "cleanupEntries": 128,
+            "callbackMs": 5.799999892711639,
+            "conversions": 128
+          },
+          "health": {
+            "duration": 3722.199999988079,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.899999999999977,
+            "rafP95": 16.799999999999955
+          }
+        },
+        {
+          "name": "repeat animation playback",
+          "stats": {
+            "keys": 0,
+            "calls": 165,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 1.7000001072883606,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 3511.100000023842,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000182,
+            "rafP95": 16.800000000000182
+          }
+        }
+      ],
+      "outputDigests": [],
+      "final": {
+        "keys": 1,
+        "calls": 327,
+        "aggregateCalls": 128,
+        "publications": 128,
+        "mapEntriesCopied": 127,
+        "cleanupRuns": 130,
+        "cleanupEntries": 128,
+        "callbackMs": 7.5,
+        "conversions": 129
+      },
+      "labels": [
+        "16×16· 4 colors"
+      ]
+    },
+    {
+      "trial": 0,
+      "viewport": {
+        "width": 947,
+        "height": 364,
+        "angle": 90,
+        "type": "landscape-primary"
+      },
+      "enabled": false,
+      "count": 1,
+      "gif": true,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 160,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 1,
+            "cleanupEntries": 0,
+            "callbackMs": 0.9000000357627869,
+            "conversions": 128
+          },
+          "health": {
+            "duration": 3688.900000035763,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000182,
+            "rafP95": 16.800000000000068
+          }
+        },
+        {
+          "name": "repeat animation playback",
+          "stats": {
+            "keys": 0,
+            "calls": 164,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0.30000001192092896,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 3520.100000023842,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000182,
+            "rafP95": 16.800000000000182
+          }
+        }
+      ],
+      "outputDigests": [],
+      "final": {
+        "keys": 1,
+        "calls": 326,
+        "aggregateCalls": 0,
+        "publications": 0,
+        "mapEntriesCopied": 0,
+        "cleanupRuns": 2,
+        "cleanupEntries": 0,
+        "callbackMs": 1.2000000476837158,
+        "conversions": 129
+      },
+      "labels": [
+        "16×16"
+      ]
+    },
+    {
+      "trial": 1,
+      "viewport": {
+        "width": 947,
+        "height": 364,
+        "angle": 90,
+        "type": "landscape-primary"
+      },
+      "enabled": false,
+      "count": 12,
+      "gif": false,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 12,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 2,
+            "cleanupEntries": 0,
+            "callbackMs": 0.09999996423721313,
+            "conversions": 12
+          },
+          "health": {
+            "duration": 483.0999999642372,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.899999999999977,
+            "rafP95": 16.800000000000068
+          }
+        },
+        {
+          "name": "original return (Space)",
+          "stats": {
+            "keys": 0,
+            "calls": 12,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 321.5,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.799999999999955,
+            "rafP95": 16.799999999999955
+          }
+        },
+        {
+          "name": "matching change",
+          "stats": {
+            "keys": 1,
+            "calls": 12,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 1,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 12
+          },
+          "health": {
+            "duration": 689.5,
+            "longtasks": 1,
+            "maxTask": 59,
+            "rafMax": 58.399999999999864,
+            "rafP95": 33.399999999999864
+          }
+        },
+        {
+          "name": "idle",
+          "stats": {
+            "keys": 0,
+            "calls": 0,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 322.5,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000182,
+            "rafP95": 16.800000000000182
+          }
+        }
+      ],
+      "outputDigests": [
+        {
+          "name": "import",
+          "digests": [
+            "c063c41d7b75b419e668508287c4db80e30fc0dbb51eb485f066ca879da804f3"
+          ]
+        },
+        {
+          "name": "matching",
+          "digests": [
+            "89871ba418befedbd53fd947d12d6caed84f487d644af796df01c43021fe6f6b"
+          ]
+        }
+      ],
+      "final": {
+        "keys": 2,
+        "calls": 37,
+        "aggregateCalls": 0,
+        "publications": 0,
+        "mapEntriesCopied": 0,
+        "cleanupRuns": 4,
+        "cleanupEntries": 0,
+        "callbackMs": 0.09999996423721313,
+        "conversions": 25
+      },
+      "labels": [
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16"
+      ]
+    },
+    {
+      "trial": 1,
+      "viewport": {
+        "width": 947,
+        "height": 364,
+        "angle": 90,
+        "type": "landscape-primary"
+      },
+      "enabled": true,
+      "count": 12,
+      "gif": false,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 12,
+            "aggregateCalls": 12,
+            "publications": 12,
+            "mapEntriesCopied": 66,
+            "cleanupRuns": 14,
+            "cleanupEntries": 79,
+            "callbackMs": 0.5,
+            "conversions": 12
+          },
+          "health": {
+            "duration": 430.7999999523163,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.799999999999955,
+            "rafP95": 16.799999999999955
+          }
+        },
+        {
+          "name": "original return (Space)",
+          "stats": {
+            "keys": 0,
+            "calls": 12,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0.10000002384185791,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 328.5,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 24.600000000000023,
+            "rafP95": 24.600000000000023
+          }
+        },
+        {
+          "name": "matching change",
+          "stats": {
+            "keys": 1,
+            "calls": 12,
+            "aggregateCalls": 12,
+            "publications": 12,
+            "mapEntriesCopied": 66,
+            "cleanupRuns": 14,
+            "cleanupEntries": 90,
+            "callbackMs": 0.19999998807907104,
+            "conversions": 12
+          },
+          "health": {
+            "duration": 704.3000000119209,
+            "longtasks": 1,
+            "maxTask": 61,
+            "rafMax": 66.70000000000005,
+            "rafP95": 16.799999999999955
+          }
+        },
+        {
+          "name": "idle",
+          "stats": {
+            "keys": 0,
+            "calls": 0,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 317.60000002384186,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000182,
+            "rafP95": 16.800000000000182
+          }
+        }
+      ],
+      "outputDigests": [
+        {
+          "name": "import",
+          "digests": [
+            "c063c41d7b75b419e668508287c4db80e30fc0dbb51eb485f066ca879da804f3"
+          ]
+        },
+        {
+          "name": "matching",
+          "digests": [
+            "89871ba418befedbd53fd947d12d6caed84f487d644af796df01c43021fe6f6b"
+          ]
+        }
+      ],
+      "final": {
+        "keys": 2,
+        "calls": 37,
+        "aggregateCalls": 24,
+        "publications": 24,
+        "mapEntriesCopied": 132,
+        "cleanupRuns": 29,
+        "cleanupEntries": 169,
+        "callbackMs": 0.800000011920929,
+        "conversions": 25
+      },
+      "labels": [
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors"
+      ]
+    },
+    {
+      "trial": 1,
+      "viewport": {
+        "width": 947,
+        "height": 364,
+        "angle": 90,
+        "type": "landscape-primary"
+      },
+      "enabled": false,
+      "count": 100,
+      "gif": false,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 2,
+            "cleanupEntries": 0,
+            "callbackMs": 0.10000002384185791,
+            "conversions": 100
+          },
+          "health": {
+            "duration": 736.1999999880791,
+            "longtasks": 2,
+            "maxTask": 97,
+            "rafMax": 91.70000000000005,
+            "rafP95": 50
+          }
+        },
+        {
+          "name": "original return (Space)",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0.09999996423721313,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 344.80000001192093,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 24.299999999999955,
+            "rafP95": 24.299999999999955
+          }
+        },
+        {
+          "name": "matching change",
+          "stats": {
+            "keys": 1,
+            "calls": 100,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 1,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 100
+          },
+          "health": {
+            "duration": 957.3999999761581,
+            "longtasks": 1,
+            "maxTask": 54,
+            "rafMax": 100,
+            "rafP95": 25.000000000000227
+          }
+        },
+        {
+          "name": "idle",
+          "stats": {
+            "keys": 0,
+            "calls": 0,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 314.30000001192093,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000182,
+            "rafP95": 16.800000000000182
+          }
+        }
+      ],
+      "outputDigests": [
+        {
+          "name": "import",
+          "digests": [
+            "c063c41d7b75b419e668508287c4db80e30fc0dbb51eb485f066ca879da804f3"
+          ]
+        },
+        {
+          "name": "matching",
+          "digests": [
+            "89871ba418befedbd53fd947d12d6caed84f487d644af796df01c43021fe6f6b"
+          ]
+        }
+      ],
+      "final": {
+        "keys": 2,
+        "calls": 301,
+        "aggregateCalls": 0,
+        "publications": 0,
+        "mapEntriesCopied": 0,
+        "cleanupRuns": 4,
+        "cleanupEntries": 0,
+        "callbackMs": 0.19999998807907104,
+        "conversions": 201
+      },
+      "labels": [
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16"
+      ]
+    },
+    {
+      "trial": 1,
+      "viewport": {
+        "width": 947,
+        "height": 364,
+        "angle": 90,
+        "type": "landscape-primary"
+      },
+      "enabled": true,
+      "count": 100,
+      "gif": false,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 100,
+            "publications": 100,
+            "mapEntriesCopied": 4950,
+            "cleanupRuns": 102,
+            "cleanupEntries": 5051,
+            "callbackMs": 3.8999997973442078,
+            "conversions": 100
+          },
+          "health": {
+            "duration": 756.1999999880791,
+            "longtasks": 2,
+            "maxTask": 97,
+            "rafMax": 100.09999999999991,
+            "rafP95": 91.30000000000007
+          }
+        },
+        {
+          "name": "original return (Space)",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0.20000004768371582,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 361.39999997615814,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 33.299999999999955,
+            "rafP95": 33.299999999999955
+          }
+        },
+        {
+          "name": "matching change",
+          "stats": {
+            "keys": 1,
+            "calls": 100,
+            "aggregateCalls": 100,
+            "publications": 100,
+            "mapEntriesCopied": 4950,
+            "cleanupRuns": 102,
+            "cleanupEntries": 5150,
+            "callbackMs": 2.5000000596046448,
+            "conversions": 100
+          },
+          "health": {
+            "duration": 1436.199999988079,
+            "longtasks": 3,
+            "maxTask": 69,
+            "rafMax": 116.69999999999982,
+            "rafP95": 41.600000000000136
+          }
+        },
+        {
+          "name": "idle",
+          "stats": {
+            "keys": 0,
+            "calls": 0,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 323.30000001192093,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 25.09999999999991,
+            "rafP95": 25.09999999999991
+          }
+        }
+      ],
+      "outputDigests": [
+        {
+          "name": "import",
+          "digests": [
+            "c063c41d7b75b419e668508287c4db80e30fc0dbb51eb485f066ca879da804f3"
+          ]
+        },
+        {
+          "name": "matching",
+          "digests": [
+            "89871ba418befedbd53fd947d12d6caed84f487d644af796df01c43021fe6f6b"
+          ]
+        }
+      ],
+      "final": {
+        "keys": 2,
+        "calls": 301,
+        "aggregateCalls": 200,
+        "publications": 200,
+        "mapEntriesCopied": 9900,
+        "cleanupRuns": 205,
+        "cleanupEntries": 10201,
+        "callbackMs": 6.599999904632568,
+        "conversions": 201
+      },
+      "labels": [
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors"
+      ]
+    },
+    {
+      "trial": 1,
+      "viewport": {
+        "width": 947,
+        "height": 364,
+        "angle": 90,
+        "type": "landscape-primary"
+      },
+      "enabled": false,
+      "count": 1,
+      "gif": true,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 160,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 1,
+            "cleanupEntries": 0,
+            "callbackMs": 1.0000000596046448,
+            "conversions": 128
+          },
+          "health": {
+            "duration": 3686.699999988079,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000182,
+            "rafP95": 16.799999999999955
+          }
+        },
+        {
+          "name": "repeat animation playback",
+          "stats": {
+            "keys": 0,
+            "calls": 164,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0.6000000238418579,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 3515.699999988079,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.900000000000546,
+            "rafP95": 16.800000000000182
+          }
+        }
+      ],
+      "outputDigests": [],
+      "final": {
+        "keys": 1,
+        "calls": 327,
+        "aggregateCalls": 0,
+        "publications": 0,
+        "mapEntriesCopied": 0,
+        "cleanupRuns": 2,
+        "cleanupEntries": 0,
+        "callbackMs": 1.6000000834465027,
+        "conversions": 129
+      },
+      "labels": [
+        "16×16"
+      ]
+    },
+    {
+      "trial": 1,
+      "viewport": {
+        "width": 947,
+        "height": 364,
+        "angle": 90,
+        "type": "landscape-primary"
+      },
+      "enabled": true,
+      "count": 1,
+      "gif": true,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 158,
+            "aggregateCalls": 128,
+            "publications": 128,
+            "mapEntriesCopied": 127,
+            "cleanupRuns": 129,
+            "cleanupEntries": 128,
+            "callbackMs": 5.300000190734863,
+            "conversions": 128
+          },
+          "health": {
+            "duration": 3660.600000023842,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000182,
+            "rafP95": 16.800000000000068
+          }
+        },
+        {
+          "name": "repeat animation playback",
+          "stats": {
+            "keys": 0,
+            "calls": 164,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 2.099999964237213,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 3515.5,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000182,
+            "rafP95": 16.800000000000182
+          }
+        }
+      ],
+      "outputDigests": [],
+      "final": {
+        "keys": 1,
+        "calls": 325,
+        "aggregateCalls": 128,
+        "publications": 128,
+        "mapEntriesCopied": 127,
+        "cleanupRuns": 130,
+        "cleanupEntries": 128,
+        "callbackMs": 7.400000154972076,
+        "conversions": 129
+      },
+      "labels": [
+        "16×16· 4 colors"
+      ]
+    }
+  ],
+  "errors": [],
+  "restored": {
+    "policy": "free",
+    "user": "0",
+    "accelerometer": "1"
+  }
+}

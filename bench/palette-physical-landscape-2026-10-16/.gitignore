@@ -1,0 +1,3 @@
+# Owned native captures and independently checked test export are audit evidence.
+!*.png
+!integration/*.png

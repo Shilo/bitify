@@ -1,0 +1,2328 @@
+{
+  "browser": "155.0.4283.60",
+  "sandbox": true,
+  "source": ".tmp/palette-usability-final",
+  "notes": [
+    "Test-only enabled/disabled metadata callback variant; quantization unchanged. Each phase includes fixed settling waits, so wall-clock duration is not conversion CPU.",
+    "Headless foreground renderer, no Android attached."
+  ],
+  "runs": [
+    {
+      "trial": 0,
+      "enabled": true,
+      "count": 12,
+      "gif": false,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 12,
+            "aggregateCalls": 12,
+            "publications": 12,
+            "mapEntriesCopied": 66,
+            "cleanupRuns": 13,
+            "cleanupEntries": 78,
+            "callbackMs": 0.29999999701976776,
+            "conversions": 12
+          },
+          "health": {
+            "duration": 251.79999999701977,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.799999999999955,
+            "rafP95": 16.799999999999955
+          }
+        },
+        {
+          "name": "original return (Space)",
+          "stats": {
+            "keys": 0,
+            "calls": 12,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 304.59999999403954,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.700000000000045,
+            "rafP95": 16.700000000000045
+          }
+        },
+        {
+          "name": "matching change",
+          "stats": {
+            "keys": 1,
+            "calls": 12,
+            "aggregateCalls": 12,
+            "publications": 12,
+            "mapEntriesCopied": 66,
+            "cleanupRuns": 14,
+            "cleanupEntries": 90,
+            "callbackMs": 0.19999998807907104,
+            "conversions": 12
+          },
+          "health": {
+            "duration": 333.8999999910593,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000068,
+            "rafP95": 16.800000000000068
+          }
+        },
+        {
+          "name": "idle",
+          "stats": {
+            "keys": 0,
+            "calls": 0,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 314,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.90000000000009,
+            "rafP95": 16.90000000000009
+          }
+        }
+      ],
+      "final": {
+        "keys": 2,
+        "calls": 37,
+        "aggregateCalls": 24,
+        "publications": 24,
+        "mapEntriesCopied": 132,
+        "cleanupRuns": 28,
+        "cleanupEntries": 168,
+        "callbackMs": 0.4999999850988388,
+        "conversions": 25
+      },
+      "labels": [
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors"
+      ]
+    },
+    {
+      "trial": 0,
+      "enabled": false,
+      "count": 12,
+      "gif": false,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 12,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 1,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 12
+          },
+          "health": {
+            "duration": 267.1000000089407,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.80000000000001,
+            "rafP95": 16.80000000000001
+          }
+        },
+        {
+          "name": "original return (Space)",
+          "stats": {
+            "keys": 0,
+            "calls": 12,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 296.90000000596046,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000068,
+            "rafP95": 16.800000000000068
+          }
+        },
+        {
+          "name": "matching change",
+          "stats": {
+            "keys": 1,
+            "calls": 12,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 1,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 12
+          },
+          "health": {
+            "duration": 313.09999999403954,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.799999999999955,
+            "rafP95": 16.799999999999955
+          }
+        },
+        {
+          "name": "idle",
+          "stats": {
+            "keys": 0,
+            "calls": 0,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 306.59999999403954,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.899999999999864,
+            "rafP95": 16.899999999999864
+          }
+        }
+      ],
+      "final": {
+        "keys": 2,
+        "calls": 37,
+        "aggregateCalls": 0,
+        "publications": 0,
+        "mapEntriesCopied": 0,
+        "cleanupRuns": 3,
+        "cleanupEntries": 0,
+        "callbackMs": 0,
+        "conversions": 25
+      },
+      "labels": [
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16"
+      ]
+    },
+    {
+      "trial": 0,
+      "enabled": true,
+      "count": 100,
+      "gif": false,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 100,
+            "publications": 100,
+            "mapEntriesCopied": 4950,
+            "cleanupRuns": 102,
+            "cleanupEntries": 5121,
+            "callbackMs": 1.6999999582767487,
+            "conversions": 100
+          },
+          "health": {
+            "duration": 372.30000001192093,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 33.30000000000001,
+            "rafP95": 33.30000000000001
+          }
+        },
+        {
+          "name": "original return (Space)",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 297.1000000089407,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000068,
+            "rafP95": 16.800000000000068
+          }
+        },
+        {
+          "name": "matching change",
+          "stats": {
+            "keys": 1,
+            "calls": 100,
+            "aggregateCalls": 100,
+            "publications": 100,
+            "mapEntriesCopied": 4950,
+            "cleanupRuns": 102,
+            "cleanupEntries": 5150,
+            "callbackMs": 1.1000000089406967,
+            "conversions": 100
+          },
+          "health": {
+            "duration": 388.79999999701977,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.799999999999955,
+            "rafP95": 16.700000000000045
+          }
+        },
+        {
+          "name": "idle",
+          "stats": {
+            "keys": 0,
+            "calls": 0,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 312.1000000089407,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.799999999999955,
+            "rafP95": 16.799999999999955
+          }
+        }
+      ],
+      "final": {
+        "keys": 2,
+        "calls": 301,
+        "aggregateCalls": 200,
+        "publications": 200,
+        "mapEntriesCopied": 9900,
+        "cleanupRuns": 205,
+        "cleanupEntries": 10271,
+        "callbackMs": 2.7999999672174454,
+        "conversions": 201
+      },
+      "labels": [
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors"
+      ]
+    },
+    {
+      "trial": 0,
+      "enabled": false,
+      "count": 100,
+      "gif": false,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 2,
+            "cleanupEntries": 0,
+            "callbackMs": 0.19999998807907104,
+            "conversions": 100
+          },
+          "health": {
+            "duration": 349.6000000089407,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.80000000000001,
+            "rafP95": 16.80000000000001
+          }
+        },
+        {
+          "name": "original return (Space)",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 311.79999999701977,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000068,
+            "rafP95": 16.800000000000068
+          }
+        },
+        {
+          "name": "matching change",
+          "stats": {
+            "keys": 1,
+            "calls": 100,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 1,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 100
+          },
+          "health": {
+            "duration": 384.69999998807907,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.799999999999955,
+            "rafP95": 16.799999999999955
+          }
+        },
+        {
+          "name": "idle",
+          "stats": {
+            "keys": 0,
+            "calls": 0,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 302.70000000298023,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.799999999999955,
+            "rafP95": 16.799999999999955
+          }
+        }
+      ],
+      "final": {
+        "keys": 2,
+        "calls": 301,
+        "aggregateCalls": 0,
+        "publications": 0,
+        "mapEntriesCopied": 0,
+        "cleanupRuns": 4,
+        "cleanupEntries": 0,
+        "callbackMs": 0.19999998807907104,
+        "conversions": 201
+      },
+      "labels": [
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16"
+      ]
+    },
+    {
+      "trial": 0,
+      "enabled": true,
+      "count": 1,
+      "gif": true,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 165,
+            "aggregateCalls": 128,
+            "publications": 128,
+            "mapEntriesCopied": 127,
+            "cleanupRuns": 129,
+            "cleanupEntries": 128,
+            "callbackMs": 2.3000000417232513,
+            "conversions": 128
+          },
+          "health": {
+            "duration": 3527.300000011921,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.90000000000009,
+            "rafP95": 16.799999999999955
+          }
+        },
+        {
+          "name": "repeat animation playback",
+          "stats": {
+            "keys": 0,
+            "calls": 167,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0.5,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 3515.7000000029802,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 17.000000000000455,
+            "rafP95": 16.700000000000728
+          }
+        }
+      ],
+      "final": {
+        "keys": 1,
+        "calls": 333,
+        "aggregateCalls": 128,
+        "publications": 128,
+        "mapEntriesCopied": 127,
+        "cleanupRuns": 130,
+        "cleanupEntries": 128,
+        "callbackMs": 2.8000000417232513,
+        "conversions": 129
+      },
+      "labels": [
+        "16×16· 4 colors"
+      ]
+    },
+    {
+      "trial": 0,
+      "enabled": false,
+      "count": 1,
+      "gif": true,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 164,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 1,
+            "cleanupEntries": 0,
+            "callbackMs": 0.09999999403953552,
+            "conversions": 128
+          },
+          "health": {
+            "duration": 3531.9000000059605,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000182,
+            "rafP95": 16.80000000000001
+          }
+        },
+        {
+          "name": "repeat animation playback",
+          "stats": {
+            "keys": 0,
+            "calls": 165,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 3513.2999999970198,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.900000000000546,
+            "rafP95": 16.800000000000182
+          }
+        }
+      ],
+      "final": {
+        "keys": 1,
+        "calls": 331,
+        "aggregateCalls": 0,
+        "publications": 0,
+        "mapEntriesCopied": 0,
+        "cleanupRuns": 2,
+        "cleanupEntries": 0,
+        "callbackMs": 0.09999999403953552,
+        "conversions": 129
+      },
+      "labels": [
+        "16×16"
+      ]
+    },
+    {
+      "trial": 1,
+      "enabled": false,
+      "count": 12,
+      "gif": false,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 12,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 1,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 12
+          },
+          "health": {
+            "duration": 251,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.700000000000045,
+            "rafP95": 16.700000000000045
+          }
+        },
+        {
+          "name": "original return (Space)",
+          "stats": {
+            "keys": 0,
+            "calls": 12,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 291.5,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.700000000000045,
+            "rafP95": 16.700000000000045
+          }
+        },
+        {
+          "name": "matching change",
+          "stats": {
+            "keys": 1,
+            "calls": 12,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 1,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 12
+          },
+          "health": {
+            "duration": 312.69999998807907,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.700000000000045,
+            "rafP95": 16.700000000000045
+          }
+        },
+        {
+          "name": "idle",
+          "stats": {
+            "keys": 0,
+            "calls": 0,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 311.59999999403954,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.799999999999955,
+            "rafP95": 16.799999999999955
+          }
+        }
+      ],
+      "final": {
+        "keys": 2,
+        "calls": 37,
+        "aggregateCalls": 0,
+        "publications": 0,
+        "mapEntriesCopied": 0,
+        "cleanupRuns": 3,
+        "cleanupEntries": 0,
+        "callbackMs": 0,
+        "conversions": 25
+      },
+      "labels": [
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16"
+      ]
+    },
+    {
+      "trial": 1,
+      "enabled": true,
+      "count": 12,
+      "gif": false,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 12,
+            "aggregateCalls": 12,
+            "publications": 12,
+            "mapEntriesCopied": 66,
+            "cleanupRuns": 13,
+            "cleanupEntries": 78,
+            "callbackMs": 0.10000000894069672,
+            "conversions": 12
+          },
+          "health": {
+            "duration": 250.19999998807907,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.700000000000045,
+            "rafP95": 16.700000000000045
+          }
+        },
+        {
+          "name": "original return (Space)",
+          "stats": {
+            "keys": 0,
+            "calls": 12,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 296.70000000298023,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.700000000000045,
+            "rafP95": 16.700000000000045
+          }
+        },
+        {
+          "name": "matching change",
+          "stats": {
+            "keys": 1,
+            "calls": 12,
+            "aggregateCalls": 12,
+            "publications": 12,
+            "mapEntriesCopied": 66,
+            "cleanupRuns": 14,
+            "cleanupEntries": 90,
+            "callbackMs": 0,
+            "conversions": 12
+          },
+          "health": {
+            "duration": 327.5,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.799999999999955,
+            "rafP95": 16.799999999999955
+          }
+        },
+        {
+          "name": "idle",
+          "stats": {
+            "keys": 0,
+            "calls": 0,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 313,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.799999999999955,
+            "rafP95": 16.799999999999955
+          }
+        }
+      ],
+      "final": {
+        "keys": 2,
+        "calls": 37,
+        "aggregateCalls": 24,
+        "publications": 24,
+        "mapEntriesCopied": 132,
+        "cleanupRuns": 28,
+        "cleanupEntries": 168,
+        "callbackMs": 0.10000000894069672,
+        "conversions": 25
+      },
+      "labels": [
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors"
+      ]
+    },
+    {
+      "trial": 1,
+      "enabled": false,
+      "count": 100,
+      "gif": false,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 2,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 100
+          },
+          "health": {
+            "duration": 352.20000000298023,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.80000000000001,
+            "rafP95": 16.80000000000001
+          }
+        },
+        {
+          "name": "original return (Space)",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 297.59999999403954,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000068,
+            "rafP95": 16.800000000000068
+          }
+        },
+        {
+          "name": "matching change",
+          "stats": {
+            "keys": 1,
+            "calls": 100,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 1,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 100
+          },
+          "health": {
+            "duration": 343.5,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.700000000000045,
+            "rafP95": 16.700000000000045
+          }
+        },
+        {
+          "name": "idle",
+          "stats": {
+            "keys": 0,
+            "calls": 0,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 314.5,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.700000000000045,
+            "rafP95": 16.700000000000045
+          }
+        }
+      ],
+      "final": {
+        "keys": 2,
+        "calls": 301,
+        "aggregateCalls": 0,
+        "publications": 0,
+        "mapEntriesCopied": 0,
+        "cleanupRuns": 4,
+        "cleanupEntries": 0,
+        "callbackMs": 0,
+        "conversions": 201
+      },
+      "labels": [
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16"
+      ]
+    },
+    {
+      "trial": 1,
+      "enabled": true,
+      "count": 100,
+      "gif": false,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 100,
+            "publications": 100,
+            "mapEntriesCopied": 4950,
+            "cleanupRuns": 102,
+            "cleanupEntries": 5115,
+            "callbackMs": 2.8999999910593033,
+            "conversions": 100
+          },
+          "health": {
+            "duration": 379,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 33.39999999999998,
+            "rafP95": 16.700000000000045
+          }
+        },
+        {
+          "name": "original return (Space)",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0.20000000298023224,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 299.79999999701977,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.799999999999955,
+            "rafP95": 16.799999999999955
+          }
+        },
+        {
+          "name": "matching change",
+          "stats": {
+            "keys": 1,
+            "calls": 100,
+            "aggregateCalls": 100,
+            "publications": 100,
+            "mapEntriesCopied": 4950,
+            "cleanupRuns": 102,
+            "cleanupEntries": 5150,
+            "callbackMs": 1.5,
+            "conversions": 100
+          },
+          "health": {
+            "duration": 414.20000000298023,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000068,
+            "rafP95": 16.799999999999955
+          }
+        },
+        {
+          "name": "idle",
+          "stats": {
+            "keys": 0,
+            "calls": 0,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 310.59999999403954,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000182,
+            "rafP95": 16.800000000000182
+          }
+        }
+      ],
+      "final": {
+        "keys": 2,
+        "calls": 301,
+        "aggregateCalls": 200,
+        "publications": 200,
+        "mapEntriesCopied": 9900,
+        "cleanupRuns": 205,
+        "cleanupEntries": 10265,
+        "callbackMs": 4.5999999940395355,
+        "conversions": 201
+      },
+      "labels": [
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors"
+      ]
+    },
+    {
+      "trial": 1,
+      "enabled": false,
+      "count": 1,
+      "gif": true,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 165,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 1,
+            "cleanupEntries": 0,
+            "callbackMs": 0.29999999701976776,
+            "conversions": 128
+          },
+          "health": {
+            "duration": 3540.2000000029802,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.90000000000009,
+            "rafP95": 16.799999999999955
+          }
+        },
+        {
+          "name": "repeat animation playback",
+          "stats": {
+            "keys": 0,
+            "calls": 165,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0.29999998211860657,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 3513.1000000089407,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.900000000000546,
+            "rafP95": 16.800000000000182
+          }
+        }
+      ],
+      "final": {
+        "keys": 1,
+        "calls": 331,
+        "aggregateCalls": 0,
+        "publications": 0,
+        "mapEntriesCopied": 0,
+        "cleanupRuns": 2,
+        "cleanupEntries": 0,
+        "callbackMs": 0.5999999791383743,
+        "conversions": 129
+      },
+      "labels": [
+        "16×16"
+      ]
+    },
+    {
+      "trial": 1,
+      "enabled": true,
+      "count": 1,
+      "gif": true,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 165,
+            "aggregateCalls": 128,
+            "publications": 128,
+            "mapEntriesCopied": 127,
+            "cleanupRuns": 129,
+            "cleanupEntries": 128,
+            "callbackMs": 1.5,
+            "conversions": 128
+          },
+          "health": {
+            "duration": 3525.199999988079,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000182,
+            "rafP95": 16.799999999999727
+          }
+        },
+        {
+          "name": "repeat animation playback",
+          "stats": {
+            "keys": 0,
+            "calls": 166,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0.7000000327825546,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 3505,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000182,
+            "rafP95": 16.800000000000182
+          }
+        }
+      ],
+      "final": {
+        "keys": 1,
+        "calls": 332,
+        "aggregateCalls": 128,
+        "publications": 128,
+        "mapEntriesCopied": 127,
+        "cleanupRuns": 130,
+        "cleanupEntries": 128,
+        "callbackMs": 2.2000000327825546,
+        "conversions": 129
+      },
+      "labels": [
+        "16×16· 4 colors"
+      ]
+    },
+    {
+      "trial": 2,
+      "enabled": true,
+      "count": 12,
+      "gif": false,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 12,
+            "aggregateCalls": 12,
+            "publications": 12,
+            "mapEntriesCopied": 66,
+            "cleanupRuns": 13,
+            "cleanupEntries": 78,
+            "callbackMs": 0.4999999850988388,
+            "conversions": 12
+          },
+          "health": {
+            "duration": 264,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.700000000000045,
+            "rafP95": 16.700000000000045
+          }
+        },
+        {
+          "name": "original return (Space)",
+          "stats": {
+            "keys": 0,
+            "calls": 12,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 309.20000000298023,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.799999999999955,
+            "rafP95": 16.799999999999955
+          }
+        },
+        {
+          "name": "matching change",
+          "stats": {
+            "keys": 1,
+            "calls": 12,
+            "aggregateCalls": 12,
+            "publications": 12,
+            "mapEntriesCopied": 66,
+            "cleanupRuns": 14,
+            "cleanupEntries": 90,
+            "callbackMs": 0.19999998807907104,
+            "conversions": 12
+          },
+          "health": {
+            "duration": 308.59999999403954,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000068,
+            "rafP95": 16.800000000000068
+          }
+        },
+        {
+          "name": "idle",
+          "stats": {
+            "keys": 0,
+            "calls": 0,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 313.79999999701977,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.799999999999955,
+            "rafP95": 16.799999999999955
+          }
+        }
+      ],
+      "final": {
+        "keys": 2,
+        "calls": 37,
+        "aggregateCalls": 24,
+        "publications": 24,
+        "mapEntriesCopied": 132,
+        "cleanupRuns": 28,
+        "cleanupEntries": 168,
+        "callbackMs": 0.6999999731779099,
+        "conversions": 25
+      },
+      "labels": [
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors"
+      ]
+    },
+    {
+      "trial": 2,
+      "enabled": false,
+      "count": 12,
+      "gif": false,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 12,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 1,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 12
+          },
+          "health": {
+            "duration": 263.80000001192093,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.799999999999983,
+            "rafP95": 16.799999999999983
+          }
+        },
+        {
+          "name": "original return (Space)",
+          "stats": {
+            "keys": 0,
+            "calls": 12,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0.10000000894069672,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 296.5,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000068,
+            "rafP95": 16.800000000000068
+          }
+        },
+        {
+          "name": "matching change",
+          "stats": {
+            "keys": 1,
+            "calls": 12,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 1,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 12
+          },
+          "health": {
+            "duration": 313.1000000089407,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.799999999999955,
+            "rafP95": 16.799999999999955
+          }
+        },
+        {
+          "name": "idle",
+          "stats": {
+            "keys": 0,
+            "calls": 0,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 311,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000182,
+            "rafP95": 16.800000000000182
+          }
+        }
+      ],
+      "final": {
+        "keys": 2,
+        "calls": 37,
+        "aggregateCalls": 0,
+        "publications": 0,
+        "mapEntriesCopied": 0,
+        "cleanupRuns": 3,
+        "cleanupEntries": 0,
+        "callbackMs": 0.20000001788139343,
+        "conversions": 25
+      },
+      "labels": [
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16"
+      ]
+    },
+    {
+      "trial": 2,
+      "enabled": true,
+      "count": 100,
+      "gif": false,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 100,
+            "publications": 100,
+            "mapEntriesCopied": 4950,
+            "cleanupRuns": 102,
+            "cleanupEntries": 5051,
+            "callbackMs": 3.100000098347664,
+            "conversions": 100
+          },
+          "health": {
+            "duration": 706.7000000029802,
+            "longtasks": 1,
+            "maxTask": 78,
+            "rafMax": 83.30000000000001,
+            "rafP95": 66.69999999999993
+          }
+        },
+        {
+          "name": "original return (Space)",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0.10000000894069672,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 326.70000000298023,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.799999999999955,
+            "rafP95": 16.799999999999955
+          }
+        },
+        {
+          "name": "matching change",
+          "stats": {
+            "keys": 1,
+            "calls": 100,
+            "aggregateCalls": 100,
+            "publications": 100,
+            "mapEntriesCopied": 4950,
+            "cleanupRuns": 102,
+            "cleanupEntries": 5150,
+            "callbackMs": 0.699999988079071,
+            "conversions": 100
+          },
+          "health": {
+            "duration": 418.29999999701977,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.799999999999955,
+            "rafP95": 16.799999999999955
+          }
+        },
+        {
+          "name": "idle",
+          "stats": {
+            "keys": 0,
+            "calls": 0,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 311.5,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.700000000000045,
+            "rafP95": 16.700000000000045
+          }
+        }
+      ],
+      "final": {
+        "keys": 2,
+        "calls": 301,
+        "aggregateCalls": 200,
+        "publications": 200,
+        "mapEntriesCopied": 9900,
+        "cleanupRuns": 205,
+        "cleanupEntries": 10201,
+        "callbackMs": 3.9000000953674316,
+        "conversions": 201
+      },
+      "labels": [
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors",
+        "16×16· 8 colors"
+      ]
+    },
+    {
+      "trial": 2,
+      "enabled": false,
+      "count": 100,
+      "gif": false,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 2,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 100
+          },
+          "health": {
+            "duration": 373.29999999701977,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.799999999999955,
+            "rafP95": 16.69999999999999
+          }
+        },
+        {
+          "name": "original return (Space)",
+          "stats": {
+            "keys": 0,
+            "calls": 100,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 292.09999999403954,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.799999999999955,
+            "rafP95": 16.799999999999955
+          }
+        },
+        {
+          "name": "matching change",
+          "stats": {
+            "keys": 1,
+            "calls": 100,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 1,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 100
+          },
+          "health": {
+            "duration": 358.5,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.799999999999955,
+            "rafP95": 16.700000000000045
+          }
+        },
+        {
+          "name": "idle",
+          "stats": {
+            "keys": 0,
+            "calls": 0,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 311.5,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000182,
+            "rafP95": 16.800000000000182
+          }
+        }
+      ],
+      "final": {
+        "keys": 2,
+        "calls": 301,
+        "aggregateCalls": 0,
+        "publications": 0,
+        "mapEntriesCopied": 0,
+        "cleanupRuns": 4,
+        "cleanupEntries": 0,
+        "callbackMs": 0,
+        "conversions": 201
+      },
+      "labels": [
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16",
+        "16×16"
+      ]
+    },
+    {
+      "trial": 2,
+      "enabled": true,
+      "count": 1,
+      "gif": true,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 165,
+            "aggregateCalls": 128,
+            "publications": 128,
+            "mapEntriesCopied": 127,
+            "cleanupRuns": 129,
+            "cleanupEntries": 128,
+            "callbackMs": 2.0999999940395355,
+            "conversions": 128
+          },
+          "health": {
+            "duration": 3546,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.899999999999977,
+            "rafP95": 16.800000000000068
+          }
+        },
+        {
+          "name": "repeat animation playback",
+          "stats": {
+            "keys": 0,
+            "calls": 166,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0.30000002682209015,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 3510.2999999970198,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.800000000000182,
+            "rafP95": 16.800000000000182
+          }
+        }
+      ],
+      "final": {
+        "keys": 1,
+        "calls": 332,
+        "aggregateCalls": 128,
+        "publications": 128,
+        "mapEntriesCopied": 127,
+        "cleanupRuns": 130,
+        "cleanupEntries": 128,
+        "callbackMs": 2.500000014901161,
+        "conversions": 129
+      },
+      "labels": [
+        "16×16· 4 colors"
+      ]
+    },
+    {
+      "trial": 2,
+      "enabled": false,
+      "count": 1,
+      "gif": true,
+      "phases": [
+        {
+          "name": "import",
+          "stats": {
+            "keys": 0,
+            "calls": 165,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 1,
+            "cleanupEntries": 0,
+            "callbackMs": 0.09999999403953552,
+            "conversions": 128
+          },
+          "health": {
+            "duration": 3531.8999999910593,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.90000000000009,
+            "rafP95": 16.799999999999955
+          }
+        },
+        {
+          "name": "repeat animation playback",
+          "stats": {
+            "keys": 0,
+            "calls": 166,
+            "aggregateCalls": 0,
+            "publications": 0,
+            "mapEntriesCopied": 0,
+            "cleanupRuns": 0,
+            "cleanupEntries": 0,
+            "callbackMs": 0.20000000298023224,
+            "conversions": 0
+          },
+          "health": {
+            "duration": 3518.5,
+            "longtasks": 0,
+            "maxTask": 0,
+            "rafMax": 16.899999999999636,
+            "rafP95": 16.800000000000182
+          }
+        }
+      ],
+      "final": {
+        "keys": 1,
+        "calls": 332,
+        "aggregateCalls": 0,
+        "publications": 0,
+        "mapEntriesCopied": 0,
+        "cleanupRuns": 2,
+        "cleanupEntries": 0,
+        "callbackMs": 0.29999999701976776,
+        "conversions": 129
+      },
+      "labels": [
+        "16×16"
+      ]
+    }
+  ],
+  "errors": []
+}

@@ -75,6 +75,11 @@ Palette popularity, canonical RGBs and sixteen output comparisons are retained i
 
 ## Device and evidence qualifications
 
+**Later October 16 follow-up:** genuine Android OS landscape in both directions
+and native screenshots now pass, including the final optimized count cache.
+See [the follow-up report](2026-10-16-landscape-and-count-review.md). The paragraph
+below describes the original receipt's narrower coverage, not the current status.
+
 Android portrait visuals were inspected. Landscape used the actual Android
 renderer with per-tab CDP viewport/orientation overrides, and geometry/touch checks
 passed. Its screenshot compositor crops/repeats the physical portrait surface;

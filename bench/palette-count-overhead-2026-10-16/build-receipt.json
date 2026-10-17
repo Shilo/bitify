@@ -1,0 +1,51 @@
+[
+  {
+    "label": "enabled",
+    "source": "C:\\Programming_Files\\Shilocity\\colorfetti\\.tmp\\palette-usability-final",
+    "sourceAppSha256": "82960d1a84b89091780bbef02b4b786dc2b7f8b1f26c56ef7e937c03d2b457b3",
+    "change": "Unchanged metadata, counters only",
+    "instrumented": true
+  },
+  {
+    "label": "disabled",
+    "source": "C:\\Programming_Files\\Shilocity\\colorfetti\\.tmp\\palette-usability-final",
+    "sourceAppSha256": "82960d1a84b89091780bbef02b4b786dc2b7f8b1f26c56ef7e937c03d2b457b3",
+    "change": "previewUsageMeasured returns before metadata aggregation; quantization unchanged",
+    "instrumented": true
+  },
+  {
+    "label": "pruned",
+    "source": "C:\\Programming_Files\\Shilocity\\colorfetti\\.tmp\\palette-usability-final",
+    "sourceAppSha256": "82960d1a84b89091780bbef02b4b786dc2b7f8b1f26c56ef7e937c03d2b457b3",
+    "change": "Pruning reacts only to key/items",
+    "instrumented": true
+  },
+  {
+    "label": "granular",
+    "source": "C:\\Programming_Files\\Shilocity\\colorfetti\\.tmp\\palette-usability-final",
+    "sourceAppSha256": "82960d1a84b89091780bbef02b4b786dc2b7f8b1f26c56ef7e937c03d2b457b3",
+    "change": "Per-item SvelteMap records and untracked stale-record pruning",
+    "instrumented": true
+  },
+  {
+    "label": "granular-qa",
+    "source": "C:\\Programming_Files\\Shilocity\\colorfetti\\.tmp\\palette-usability-final",
+    "sourceAppSha256": "82960d1a84b89091780bbef02b4b786dc2b7f8b1f26c56ef7e937c03d2b457b3",
+    "change": "Per-item SvelteMap records and untracked stale-record pruning",
+    "instrumented": false
+  },
+  {
+    "label": "slots",
+    "source": "C:\\Programming_Files\\Shilocity\\colorfetti\\.tmp\\palette-usability-final",
+    "sourceAppSha256": "82960d1a84b89091780bbef02b4b786dc2b7f8b1f26c56ef7e937c03d2b457b3",
+    "change": "Per-item SvelteMap with stable null slots for live IDs; only removed IDs deleted",
+    "instrumented": true
+  },
+  {
+    "label": "slots-qa",
+    "source": "C:\\Programming_Files\\Shilocity\\colorfetti\\.tmp\\palette-usability-final",
+    "sourceAppSha256": "82960d1a84b89091780bbef02b4b786dc2b7f8b1f26c56ef7e937c03d2b457b3",
+    "change": "Per-item SvelteMap with stable null slots for live IDs; only removed IDs deleted",
+    "instrumented": false
+  }
+]

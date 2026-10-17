@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-17T02:07:55.072Z",
+  "dist": "C:\\Programming_Files\\Shilocity\\colorfetti\\.tmp\\palette-landscape-final\\dist",
+  "indexSha256": "fa48d37c48f411413c17aee896b74874db48200154f5a37d5625a71bf55877b1",
+  "sandbox": true,
+  "checks": [
+    {
+      "name": "remove completed record, readd same filename with different pixels, reuse only replacement colors",
+      "pass": true,
+      "oldCount": 13,
+      "newCount": 1,
+      "reused": "#ff004d"
+    },
+    {
+      "name": "remove an item during explicit pending reuse; no late draft or stale count after readd",
+      "pass": true,
+      "lateDraft": false,
+      "replacementCount": 13
+    },
+    {
+      "name": "explicit reuse survives joining and closing automatic Preview inspection",
+      "pass": true,
+      "explicitJobRetained": true,
+      "reused": "#ff004d"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-17T02:04:50.786Z",
+  "dist": "C:\\Programming_Files\\Shilocity\\colorfetti\\bench\\palette-count-overhead-2026-10-16\\dist-slots-qa",
+  "indexSha256": "86a198cecfd4f7f8c2a73b135b3bd6bebaf46aadff5b9fdb5d6353b4af10fbc0",
+  "sandbox": true,
+  "checks": [
+    {
+      "name": "remove completed record, readd same filename with different pixels, reuse only replacement colors",
+      "pass": true,
+      "oldCount": 13,
+      "newCount": 1,
+      "reused": "#ff004d"
+    },
+    {
+      "name": "remove an item during explicit pending reuse; no late draft or stale count after readd",
+      "pass": true,
+      "lateDraft": false,
+      "replacementCount": 13
+    },
+    {
+      "name": "explicit reuse survives joining and closing automatic Preview inspection",
+      "pass": true,
+      "explicitJobRetained": true,
+      "reused": "#ff004d"
+    }
+  ],
+  "errors": []
+}

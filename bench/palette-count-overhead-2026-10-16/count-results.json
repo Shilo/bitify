@@ -1,0 +1,128 @@
+{
+  "date": "2026-10-17T02:04:13.341Z",
+  "browser": "155.0.4283.60",
+  "sandbox": true,
+  "dist": "bench/palette-count-overhead-2026-10-16/dist-slots-qa",
+  "distIndexSha256": "86a198cecfd4f7f8c2a73b135b3bd6bebaf46aadff5b9fdb5d6353b4af10fbc0",
+  "checks": [
+    {
+      "name": "exact wall PNG count and single-action wall reuse match native Save; Preview stays unchanged",
+      "pass": true,
+      "count": 13,
+      "expected": 13,
+      "buttons": [
+        "Save image",
+        "Copy image",
+        "Show original image"
+      ],
+      "wallButtons": [
+        "Save alpha-sprite.png",
+        "Copy alpha-sprite.png",
+        "Reuse colors from alpha-sprite.png",
+        "Preview alpha-sprite.png",
+        "Remove alpha-sprite.png"
+      ]
+    },
+    {
+      "name": "whole-animation wall count equals independently decoded GIF union",
+      "pass": true,
+      "frames": 4,
+      "count": 10,
+      "expected": 10
+    },
+    {
+      "name": "mulfok32 real app Save stays on canonical target and preserves preset selection",
+      "pass": true,
+      "count": 20,
+      "canonicalMembership": true
+    },
+    {
+      "name": "sampled large wall does not load full-source usage chunk; closing Preview cancels delayed automatic inspection",
+      "pass": true,
+      "usageRequests": 1,
+      "backgroundResultPublished": false,
+      "lateDraft": false
+    },
+    {
+      "name": "mode changes cannot retain old palette counts",
+      "pass": true,
+      "staleCountHidden": true,
+      "reuseHidden": true
+    },
+    {
+      "name": "cap, matching, Cleanup, dithering and palette edits publish current exact counts",
+      "pass": true,
+      "before": 13,
+      "after": 2,
+      "expected": 2,
+      "mono": 2,
+      "monoExpected": 2
+    },
+    {
+      "name": "Keep, Cleanup and dithering retain source alpha and exact reused export colors",
+      "pass": true,
+      "count": 8,
+      "partialAlphaPixelsPreserved": 504,
+      "reuseMatchesSave": true
+    },
+    {
+      "name": "zero-color output has zero metadata and disabled wall reuse; no Preview reuse",
+      "pass": true,
+      "count": 0,
+      "wallDisabled": true,
+      "previewReuseButtons": 0
+    },
+    {
+      "name": "closing Preview cancels actual running full-source GIF inspection",
+      "pass": true,
+      "frames": 12,
+      "sourcePixels": 12582912,
+      "uncancelledCompletionMs": 350,
+      "closeActionMs": 91,
+      "lateCount": false,
+      "lateDraft": false
+    },
+    {
+      "name": "five desktop tile actions remain within dense wall tiles",
+      "pass": true,
+      "layouts": [
+        {
+          "width": 1280,
+          "height": 900,
+          "tileWidth": 236,
+          "actionsWidth": 186,
+          "overflow": 0
+        },
+        {
+          "width": 800,
+          "height": 600,
+          "tileWidth": 144,
+          "actionsWidth": 81,
+          "overflow": 0
+        },
+        {
+          "width": 640,
+          "height": 360,
+          "tileWidth": 143,
+          "actionsWidth": 81,
+          "overflow": 0
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "tileWidth": 177,
+          "actionsWidth": 81,
+          "overflow": 0
+        },
+        {
+          "width": 844,
+          "height": 390,
+          "tileWidth": 149,
+          "actionsWidth": 81,
+          "overflow": 0
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

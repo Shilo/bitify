@@ -80,6 +80,27 @@ The earlier invalid test transform raised `next is not defined`; its failed
 receipt is retained in `count-granular-cpu-results-with-test-transform-errors.json`.
 The transform was corrected and independently checked before the fresh receipt.
 
+The final test-only `slots` candidate pre-creates a null slot for each live item,
+avoiding reactive whole-map missing-key subscriptions on first publication.
+`count-slots-cpu-results.json` has three alternating pairs with zero page errors
+and identical sampled output hashes. Median 100-tile import task CPU is
+528.8→480.6ms (each pair improved), Matching 506.3→502.0ms (essentially tied).
+The measured improvement concerns this bounded import workload, not universal
+frame rate, memory or battery behavior. Root decides production adoption after
+the independent correctness/lifetime review and latest-build integration checks.
+
 Only owned tabs/native download files are removed; original origin localStorage
 is restored and no security preferences change. The shared user's browser stays
 open. Harnesses never call `browser.close()` on the attached phone.
+
+## Final integrated build
+
+`integration/results.json` repeats all seven functional groups against staged
+tree `31052b673a190f64039399ad450234011f4d1128` atop `5184a45`, including the final
+slot metadata optimization and the separately committed Preview zoom changes.
+The unrelated uncommitted App continuity edits are excluded. All seven groups
+pass, zero page errors; native PNG has zero independent RGB/alpha mismatches,
+Reuse has the same 13 colors, and trusted landscape Zoom in/Fit works. Real OS
+orientation/screenshot evidence and restored policy are retained again in the
+integration subfolder. This is the final integrated phone receipt rather than
+merely the earlier palette-only build.

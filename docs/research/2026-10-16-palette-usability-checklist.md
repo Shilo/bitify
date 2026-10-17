@@ -17,7 +17,7 @@ updated as evidence arrives; unchecked items are not claims of completion.
 | 6. Palette-name link beside the color count | Dialog/drag agent | Complete: one published-palette-name link beside count, preserved through local rename; creator metadata retained. |
 | 7. Suppress internal drags as incoming drops | Dialog/drag agent | Complete: internal ownership suppresses overlay/import; external files and trusted desktop exported-file drag checked. Phone URL-drag payload is synthetic. |
 | 8. Automatic maximum-color choice | Research agent | **Research only, explicitly confirmed by user.** No setting or algorithm ships. Distinguish automatic palette generation from automatic budget selection. |
-| 9. Compact responsive Recolor controls | Compact settings agent | Complete: compact portrait/short-landscape chips, desktop rows; 10 viewports, seven interaction flows and Android checks. Physical OS-rotated landscape visual acceptance remains unverified; see limits. |
+| 9. Compact responsive Recolor controls | Compact settings agent | Complete: compact portrait/short-landscape chips, desktop rows; 10 viewports, seven interaction flows and Android checks. Follow-up closes genuine OS landscape coverage in both directions; see linked report. |
 
 ## Review and validation gates
 
@@ -26,7 +26,8 @@ updated as evidence arrives; unchecked items are not claims of completion.
   with concrete defects fixed and rechecked rather than unsupported consensus.
 - [x] Full unit suite and production build after integration.
 - [x] Actual Codex Browser interaction at desktop and narrow viewport.
-- [x] USB Pixel 8 Pro interaction, portrait and CDP landscape geometry/touch, bounded performance evidence. Actual OS rotation visual acceptance remains unverified.
+- [x] USB Pixel 8 Pro interaction, portrait and genuine Android OS landscape in both directions, native screenshots and bounded performance evidence.
+- [x] Follow-up metadata overhead A/B; independently reviewed stable-slot cache improvement, current-build desktop/Codex Browser/Android revalidation.
 - [x] Output reuse compared with independently decoded native PNGs and all-frame
   GIF union; transparency, settings invalidation and cancellation covered.
 - [x] External drops, internal text/sliders and export-out drag regressions covered.
@@ -47,7 +48,11 @@ Chromium sandbox enabled. No Mac/iOS validation is available.
 See [the validation report](2026-10-16-palette-usability-validation.md) for separate
 commits, review findings, build isolation and retained test receipts. This checklist
 is complete for the authorized batch; it does not claim universal absence of bugs.
-Physical Android OS-rotated landscape visual acceptance and Mac/iOS remain untested.
+The [native-landscape and count follow-up](2026-10-16-landscape-and-count-review.md)
+closes Android OS-rotation acceptance and records the cache improvement. Mac/iOS
+remain untested. Tiny captions can truncate with settings open in very short
+landscape, as they did before this batch; closing settings restores the tested count.
 Counts can remain absent on sampled walls until full-source inspection completes.
-The separate task's zoom/navigation edits were preserved and excluded from the
-final palette-only build and commits. No changes were pushed.
+The original palette-only build excluded concurrent zoom/navigation edits. The
+follow-up integrated their committed version while preserving/excluding later
+uncommitted changes. Large walls still have import/layout stalls. No changes were pushed.
