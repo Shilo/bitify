@@ -1,0 +1,71 @@
+<!doctype html>
+<meta charset="utf-8"><title>Preview idle performance QA</title>
+<style>body{font:15px system-ui;background:#17202c;color:#eee}button{padding:12px;margin:8px}iframe{display:block;border:1px solid #777}pre{white-space:pre-wrap;max-height:360px;overflow:auto}</style>
+<h1>Preview idle performance QA</h1>
+<p>Production before/after builds with identical sources except the two navigation optimizations. Test-only instrumentation counts work; it does not measure whole-app CPU or heap.</p>
+<button id="run">Measure before and after</button><output id="status">Ready</output>
+<iframe id="app" width="800" height="600"></iframe><pre id="results"></pre>
+<script type="module">
+const frame=document.querySelector('iframe'),status=document.querySelector('#status'),output=document.querySelector('#results');
+const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+const until=async fn=>{for(let i=0;i<300;i++){if(fn())return;await pause(20);}throw Error('App did not become ready');};
+const assert=(condition,message)=>{if(!condition)throw Error(message);};
+const delta=(a,b)=>Object.fromEntries(Object.keys(b).map(key=>[key,b[key]-a[key]]));
+let win,doc,probe;
+const dialog=()=>doc.querySelector('.image-viewer[open]');
+const art=()=>doc.querySelector('.viewer-art .art');
+const button=name=>dialog().querySelector(`button[aria-label="${name}"]`);
+const snap=()=>probe.snapshot();
+const phase=async(name,fn)=>{const before=snap();probe.stage=name;await fn();return {...delta(before,snap()),remaining:snap()};};
+function pointer(type,x,y){(type==='pointerdown'?art():dialog()).dispatchEvent(new win.PointerEvent(type,{bubbles:true,cancelable:true,pointerId:1,pointerType:'mouse',isPrimary:true,button:0,buttons:type==='pointerup'?0:1,clientX:x,clientY:y}));}
+async function open(){probe.stage='opening';doc.querySelector('.grid .tile .art').click();await until(dialog);dialog().setPointerCapture=()=>{};dialog().hasPointerCapture=()=>false;await pause(40);}
+async function close(){probe.stage='closing';button('Close preview').click();await until(()=>!dialog());await pause(40);}
+async function runVariant(name){
+  status.textContent=`Measuring ${name}`;
+  frame.src=`/${name}/?probe=1`;await new Promise(resolve=>frame.onload=resolve);win=frame.contentWindow;doc=frame.contentDocument;probe=win.__viewerPerf;frame.scrollIntoView({block:'start'});
+  await until(()=>doc.querySelector('.art'));
+  const blob=await(await fetch('/fixtures/landmarks.png')).blob(),transfer=new win.DataTransfer();transfer.items.add(new win.File([blob],'landmarks.png',{type:'image/png'}));doc.body.dispatchEvent(new win.DragEvent('drop',{bubbles:true,cancelable:true,dataTransfer:transfer}));
+  await until(()=>doc.querySelector('.grid .tile .art[aria-haspopup="dialog"]'));await pause(1500);
+  const result={name};
+  result.closedIdle=await phase('closed-idle',()=>pause(500));
+  result.open=await phase('opening',async()=>{await open();await pause(1500);});
+  result.openIdle=await phase('open-idle',()=>pause(500));
+  result.hover=await phase('hover',async()=>{for(let i=0;i<10000;i++)art().dispatchEvent(new win.PointerEvent('pointermove',{bubbles:true,pointerId:1,pointerType:'mouse',clientX:300,clientY:200}));await pause(240);});
+  result.zoom=await phase('zoom',async()=>{for(let i=0;i<4;i++)button('Zoom in').click();await pause(600);});
+  result.zoomedIdle=await phase('zoomed-idle',()=>pause(500));
+  result.pan=await phase('pan',async()=>{
+    pointer('pointerdown',300,220);
+    for(let i=0;i<40;i++){await new Promise(requestAnimationFrame);pointer('pointermove',310+i*2,230+i);}
+    pointer('pointerup',388,269);await pause(250);
+  });
+  result.pannedIdle=await phase('panned-idle',()=>pause(500));
+  result.pendingClose=await phase('pending-close',async()=>{button('Zoom out').click();await pause(10);await close();await pause(250);});
+  result.closedAgain=await phase('closed-again',()=>pause(500));
+  result.repeatClose=await phase('repeat-close',async()=>{
+    for(let i=0;i<12;i++){await open();pointer('pointerdown',300,220);await close();assert(snap().liveViewerListeners===0,'live viewer listeners retained after close');assert(snap().pendingHolds===0,'hold timer retained after close');assert(snap().pendingRefinement===0,'refinement timer retained after close');}
+    await pause(250);
+  });
+  result.finalClosedIdle=await phase('final-closed-idle',()=>pause(500));
+  for(const key of ['closedIdle','openIdle','zoomedIdle','pannedIdle','closedAgain','finalClosedIdle']){
+    assert(result[key].refinementTimers===0,`${name}: refinement work during ${key}`);
+    assert(result[key].viewerPaints===0,`${name}: viewer repainted during ${key}`);
+  }
+  assert(result.hover.viewerRects===0,`${name}: hover reads viewer layout`);
+  assert(result.hover.refinementTimers===0,`${name}: hover arms refinement`);
+  assert(result.hover.viewerPaints===0,`${name}: hover repaints`);
+  assert(result.finalClosedIdle.remaining.liveViewerListeners===0,`${name}: closed listeners`);
+  if(name==='after'){
+    assert(result.open.refinementTimers===0,'opening schedules unnecessary refinement');
+    assert(result.pan.refinementTimers===0,'panning schedules refinement');
+    assert(result.pan.viewerPaints===0,'panning reconverts/repaints raster');
+    assert(result.pendingClose.remaining.pendingRefinement===0,'close leaves refinement pending');
+  }
+  return result;
+}
+document.querySelector('#run').onclick=async()=>{
+  document.querySelector('#run').disabled=true;const results=[];
+  try{for(const name of ['before','after']){results.push(await runVariant(name));output.textContent=JSON.stringify(results,null,2);}status.textContent='Passed before/after performance checks';}
+  catch(error){results.push({error:error.stack,remaining:probe?.snapshot(),listeners:probe?.activeListeners()});status.textContent='Failed performance checks';}
+  output.textContent=JSON.stringify(results,null,2);document.querySelector('#run').disabled=false;
+};
+</script>

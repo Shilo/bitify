@@ -29,7 +29,8 @@ Preview art owns touch pan/pinch with `touch-action: none`; controls and the mai
 page keep their native interaction rules. Preview dragging pans instead of native
 file export; wall export dragging is unchanged. Save/Copy use full original source
 dimensions regardless of the view. The checker follows transformed image origin
-and scale. Zoom transforms immediately; sampling refines after a 180ms pause,
+and scale. Zoom transforms immediately; sampling refines after its required
+sampling target remains stable for 180ms,
 targeting 4,194,304 sampled pixels across an entire animation or the existing Fit
 sampling, whichever is larger. Long animations may retain Fit sampling at every
 zoom level to avoid multiplying their existing per-frame caches. Existing
@@ -38,6 +39,14 @@ this is not a whole-app memory bound. Panning retains raster size. No full-sourc
 conversion is requested for every pointer move. Very large sources can remain
 sampled at maximum zoom. Browser evidence and test limits are recorded in
 `docs/research/2026-10-16-preview-navigation.md`.
+
+Navigation publishes only changed transform/drag state through a stable reactive
+object. Panning leaves sampling/checker spacing dependencies untouched; Fit and
+unchanged sampling targets schedule no refinement. There is no navigation polling
+or animation-frame loop. Instance listeners and pending hold/refinement timers
+are removed on closing. This does not suppress normal GIF playback or existing
+image conversion/color inspection. Measurement scope is documented in
+`docs/research/2026-10-16-preview-navigation-performance.md`.
 
 ## Modal gesture dismissal — October 16, 2026
 

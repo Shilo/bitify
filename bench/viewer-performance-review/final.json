@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-16",
+  "scope": "Independent deterministic source lifecycle probe after performance changes; callback counts, not browser CPU or heap measurements.",
+  "command": "node bench/viewer-performance-review/navigation-lifecycle.mjs --expect-deduped",
+  "assertions": 427,
+  "pass": true,
+  "hoverEvents": 10000,
+  "hoverPublications": 0,
+  "hoverLayoutReads": 0,
+  "hoverTimers": 0,
+  "closedEvents": 20000,
+  "closedPublications": 0,
+  "closedLayoutReads": 0,
+  "repeatedMounts": 100,
+  "stationaryPublications": 0,
+  "clampedDragPublications": 2,
+  "noOpPublications": 0,
+  "scheduledHoldTimers": 104,
+  "canceledHoldTimers": 104,
+  "timersRemaining": 0,
+  "listenersRemaining": 0,
+  "additionalBehaviorProbe": { "command": "node bench/viewer-review/adversarial.mjs", "assertions": 94, "pass": true },
+  "focusedUnitRun": { "files": 2, "tests": 23, "passed": 23 },
+  "reviewDisposition": [
+    "Publishing only changed scale/x/y/dragging avoids redundant reactive work without losing second-finger, final-lift, cancellation or capped-zoom dragging transitions.",
+    "Stable Svelte view proxy keeps pan-only x/y changes from invalidating scale-dependent sampling/checker calculations.",
+    "Primitive sampling target plus untracked equality guard skips mount and unchanged-target refinement timers while preserving cleanup for obsolete targets.",
+    "No recurring navigation polling, animation frame loop or idle timer was found in the source. Repeated lifecycle probes found no retained navigation listeners or hold timers."
+  ],
+  "limits": [
+    "Fake event surfaces prove deterministic source lifecycle behavior; native browser capture and Svelte reactive scheduling require separate integration checks.",
+    "A mounted idle viewer still owns event listeners; unowned pointer moves perform a Map lookup. Static navigation JS/CSS bytes remain loaded after closing.",
+    "Existing GIF playback, tooltip feedback, comparison and automatic output-color inspection can perform work independently of navigation; these checks do not claim the whole viewer or application has zero idle CPU or memory.",
+    "No browser CPU speedup, battery improvement, process-memory bound or physical-device frame rate is inferred from callback reductions."
+  ]
+}

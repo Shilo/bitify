@@ -3,7 +3,7 @@
 ## Preview zoom and pan (October 16, 2026)
 
 Preview keeps the Tile's layout at Fit and transforms its presentation immediately.
-After zoom settles for 180ms, an optional `inspectionScale` increases sampling,
+After the sampling target settles for 180ms, `inspectionScale` increases sampling,
 targeting 4,194,304 pixels across a complete clip or the existing Fit raster,
 whichever is larger. Dividing the refinement allowance by frame count avoids
 multiplying Tile's per-frame legacy mask/color and Original caches on long GIFs.
@@ -15,6 +15,17 @@ conversion dimensions; exports continue reading the complete source independentl
 This adds no source-resolution animation cache and does not promise a whole-app
 memory bound or physical-device frame rate. See
 [the design and test record](research/2026-10-16-preview-navigation.md).
+
+Navigation keeps one stable reactive view object and publishes only changed
+scale/offset/drag state. Pure panning does not invalidate scale-dependent checker
+spacing or sampling. A primitive sampling target schedules refinement only when
+it differs from the completed sampling scale; opening at Fit and capped/no-op
+updates create no refinement timer. Closing removes the instance listeners and
+cancels pending refinement/hold timers; navigation has no polling or frame loop.
+Controlled production-browser checks observed zero timer/rAF, canvas-put or
+viewer-geometry calls in settled still-image idle windows, open or closed. Normal GIF playback and
+existing color inspection remain separate work. Counts and limits are in the
+[performance follow-up](research/2026-10-16-preview-navigation-performance.md).
 
 ## Output color metadata and optional opacity preservation
 

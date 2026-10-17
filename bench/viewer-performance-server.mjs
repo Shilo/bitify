@@ -1,0 +1,10 @@
+import http from 'node:http';
+import { readFileSync,readdirSync } from 'node:fs';
+import { join,extname,resolve } from 'node:path';
+const root=resolve('.tmp/viewer-performance'),files=new Map();
+function collect(dir,prefix){for(const e of readdirSync(dir,{withFileTypes:true})){const path=join(dir,e.name),url=prefix+'/'+e.name;if(e.isDirectory())collect(path,url);else if(!url.endsWith('.mp4'))files.set(url,readFileSync(path));}}
+for(const name of ['before','after'])collect(join(root,name,'dist'),'/'+name);
+for(const [url,path] of [['/qa','bench/viewer-performance-qa.html'],['/probe.js','bench/viewer-performance-probe.js'],['/fixtures/landmarks.png','bench/viewer-navigation-evidence/landmarks.png'],['/bench/viewer-navigation-evidence/landmarks.png','bench/viewer-navigation-evidence/landmarks.png'],['/bench/viewer-navigation-evidence/large-clip.gif','bench/viewer-navigation-evidence/large-clip.gif'],['/bench/claude-audit-2026-10-15/device/fixtures/walk.gif','bench/claude-audit-2026-10-15/device/fixtures/walk.gif']])files.set(url,readFileSync(path));
+files.set('/regression',Buffer.from(readFileSync('bench/viewer-navigation-qa.html','utf8').replace('src="/"','src="/after/"')));
+const types={'.html':'text/html','.js':'text/javascript','.css':'text/css','.png':'image/png','.gif':'image/gif','.svg':'image/svg+xml','.json':'application/json'};
+http.createServer((req,res)=>{const url=new URL(req.url,'http://localhost');let key=url.pathname;if(key.endsWith('/'))key+='index.html';let file=files.get(key);if(!file){res.writeHead(404);res.end('Not found');return;}if(key.endsWith('/index.html')&&url.searchParams.has('probe'))file=Buffer.from(file.toString().replace('<head>','<head><script src="/probe.js"></script>'));res.writeHead(200,{'Content-Type':key==='/qa'||key==='/regression'?'text/html':types[extname(key)]||'application/octet-stream','Cache-Control':'no-store'});res.end(file);}).listen(5301,'127.0.0.1',()=>console.log('Viewer performance: http://127.0.0.1:5301/qa; uninstrumented regression: /regression'));

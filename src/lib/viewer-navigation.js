@@ -25,7 +25,13 @@ export function viewerNavigation({ onchange = () => {}, onhold = () => {}, onclo
   let view = { scale: 1, x: 0, y: 0 };
   const pointers = new Map();
   let tap, previous, ready = false, holdTimer, node;
-  const publish = () => onchange({ ...view, dragging: pointers.size > 0 && !tap });
+  let publishedScale, publishedX, publishedY, publishedDragging;
+  const publish = () => {
+    const dragging = pointers.size > 0 && !tap;
+    if (view.scale === publishedScale && view.x === publishedX && view.y === publishedY && dragging === publishedDragging) return;
+    publishedScale = view.scale; publishedX = view.x; publishedY = view.y; publishedDragging = dragging;
+    onchange({ ...view, dragging });
+  };
   const stopHold = () => { clearTimeout(holdTimer); onhold(false); };
   const sample = () => {
     const [a, b] = [...pointers.values()];

@@ -9,19 +9,21 @@
   let { item, first, second, style, set, family = 'two-color', palette, palettePending = false, analysisPending = false, alphaCut = 128, alphaMode = 'cut', metric = 'oklab', maxColors = 0, cleanup = false, dither = 'none', ditherStrength = 50, onpalettestatus, paletteRetry = 0, paletteFailureNotice = '', onpaletteretry, exportDisabled = false, flipped = false, onsave, oncopy, onclose, busy = '', message = '', colorUsageLabel = '', exportDrag } = $props();
   let dialog;
   let width = $state(0), height = $state(0);
-  let view = $state({ scale: 1, x: 0, y: 0, dragging: false });
+  const view = $state({ scale: 1, x: 0, y: 0, dragging: false });
   let inspectionScale = $state(1);
   // Snapshot the visible main-canvas state; all Preview changes remain local.
   let converted = $state(untrack(() => !flipped));
   let spaceHeld = $state(false), imageHeld = $state(false);
   const originalVisible = $derived(!converted !== (spaceHeld || imageHeld));
   const fit = $derived(fitViewerImage(item.img.w, item.img.h, width, height, 0));
-  const navigation = viewerNavigation({ onchange: next => (view = next), onhold: active => (imageHeld = active), onclose: () => dialog.close(), canClose: () => !spaceHeld });
+  const navigation = viewerNavigation({ onchange: next => Object.assign(view, next), onhold: active => (imageHeld = active), onclose: () => dialog.close(), canClose: () => !spaceHeld });
   const grid = $derived(canvasGridSpacing([item.img], Math.max(fit.width, fit.height) * view.scale));
-  // Transform immediately; refine sampling only after zoom settles. Large photos
+  const samplingTarget = $derived(viewerInspectionScale(fit.width, fit.height, view.scale, devicePixelRatio, item.frames?.length ?? 1));
+  // Transform immediately; refine only after the sampling target settles. Large photos
   // keep a bounded preview rather than allocating full sources for every pinch.
   $effect(() => {
-    const scale = viewerInspectionScale(fit.width, fit.height, view.scale, devicePixelRatio, item.frames?.length ?? 1);
+    const scale = samplingTarget;
+    if (scale === untrack(() => inspectionScale)) return;
     const timer = setTimeout(() => (inspectionScale = scale), 180);
     return () => clearTimeout(timer);
   });

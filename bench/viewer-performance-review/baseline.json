@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-16",
+  "scope": "Independent deterministic source lifecycle probe before performance changes; callback counts, not browser CPU or heap measurements.",
+  "command": "node bench/viewer-performance-review/navigation-lifecycle.mjs",
+  "assertions": 411,
+  "pass": true,
+  "hoverEvents": 10000,
+  "hoverPublications": 0,
+  "hoverLayoutReads": 0,
+  "hoverTimers": 0,
+  "closedEvents": 20000,
+  "closedPublications": 0,
+  "closedLayoutReads": 0,
+  "repeatedMounts": 100,
+  "stationaryPublications": 103,
+  "clampedDragPublications": 103,
+  "noOpPublications": 200,
+  "scheduledHoldTimers": 102,
+  "canceledHoldTimers": 102,
+  "timersRemaining": 0,
+  "listenersRemaining": 0
+}
