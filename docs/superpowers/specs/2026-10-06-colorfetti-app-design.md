@@ -8,6 +8,15 @@ outside must retain the draft/dialog. Pointer capture, cancellation, window blur
 and reopening cannot leave an armed dismissal. Native Escape, explicit buttons,
 focus restoration and the image viewer's separate comparison gesture remain.
 
+## Incoming drag ownership — October 16, 2026
+
+A drag starting anywhere inside this document is not an incoming artwork or
+palette import. Capture tracks ownership through internal text/link/control and
+native exported-file drags, without canceling native dragstart or export-out.
+Internal reentry/drop cannot show the import overlay or replace a palette draft.
+Drop/end retires the identity; a canceled start cannot poison later external
+imports. External file, image URL and palette drops retain their existing paths.
+
 ## Color-critical palette display — October 15, 2026
 
 Full-palette thumbnails and editor swatches use paint-only canvases so forced

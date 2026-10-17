@@ -10,6 +10,7 @@
   import { normalizeColors, validateName } from './lib/palette-library.js';
   import { canonicalLospecUrl, looksLikeLospecReference } from './lib/palette-lospec-url.js';
   import { paintPaletteSwatch } from './lib/palette-preview.js';
+  import { isInternalDrag } from './lib/internal-drag.js';
   import { backdropDismiss } from './lib/dialog-dismiss.js';
 
   let { request = {}, onsave, ondelete, onreload, onuse, onclose } = $props();
@@ -192,6 +193,7 @@
   }
   function drop(event) {
     event.preventDefault(); event.stopPropagation();
+    if (isInternalDrag(event)) return;
     // Drag data is readable only during this event. A source replaces one draft.
     const { files, urls } = droppedImages(event.dataTransfer);
     if (files.length) importFile(files[0]);

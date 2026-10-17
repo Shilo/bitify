@@ -13,6 +13,7 @@
   import { tick, untrack } from 'svelte';
   import { createExportDrag, isMobileExportDevice } from './lib/export-drag.js';
   import { imageGesture } from './lib/image-gesture.js';
+  import { isInternalDrag, trackInternalDrag } from './lib/internal-drag.js';
   import { backdropDismiss } from './lib/dialog-dismiss.js';
   import { hasImageDrop, droppedImages, fetchDroppedImage } from './lib/image-drop.js';
   import { decodeImageFile } from './lib/image-decode.js';
@@ -899,12 +900,12 @@
   }
 
   function dragenter(e) {
-    if (dragExports?.isOwn(e.dataTransfer)) return;
+    if (isInternalDrag(e) || dragExports?.isOwn(e.dataTransfer)) return;
     if (document.querySelector('dialog[open]')) return;
     if (hasImageDrop(e.dataTransfer)) { e.preventDefault(); dragDepth++; }
   }
   function dragover(e) {
-    if (dragExports?.isOwn(e.dataTransfer)) { e.preventDefault(); e.dataTransfer.dropEffect = 'none'; return; }
+    if (isInternalDrag(e) || dragExports?.isOwn(e.dataTransfer)) { e.preventDefault(); e.dataTransfer.dropEffect = 'none'; return; }
     if (hasImageDrop(e.dataTransfer)) {
       e.preventDefault();
       e.dataTransfer.dropEffect = 'copy';
@@ -914,6 +915,7 @@
     dragDepth = Math.max(0, dragDepth - 1);
   }
   function drop(e) {
+    if (isInternalDrag(e) || dragExports?.isOwn(e.dataTransfer)) { e.preventDefault(); dragDepth = 0; return; }
     if (document.querySelector('dialog[open]')) { e.preventDefault(); dragDepth = 0; return; }
     e.preventDefault();
     dragDepth = 0;
@@ -925,6 +927,7 @@
     if (document.querySelector('dialog[open]')) return;
     if (e.clipboardData?.files.length) addFiles([...e.clipboardData.files]);
   }
+  $effect(() => trackInternalDrag(document, () => { dragDepth = 0; }));
 
   // Holding Space flips the whole wall, except while a control that uses Space has focus.
   const onControl = e => e.target.matches?.('button, select, textarea, input:not([type=range])');

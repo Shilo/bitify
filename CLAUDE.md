@@ -110,6 +110,10 @@ Dragging a selection from an input onto the backdrop must not close its dialog.
 Escape and explicit actions remain native; the image viewer retains its own
 comparison/dismissal gesture. Test both mouse retargeting and touch capture.
 
+`trackInternalDrag` owns same-document drag identity through native export-out
+and reentry. App and PaletteImport ignore those as inbound imports; native
+dragstart remains uncanceled. External file/URL drops still import normally.
+
 Artwork and palette-image import share `image-decode.js`. PNG prefers native
 ImageDecoder with its existing default color management. Proven full-range sRGB
 RGBA/BGRA frames copy native packed bytes without requesting another conversion;
