@@ -1,0 +1,41 @@
+{
+  "commit": "62dc29c",
+  "started": "2026-10-17T03:15:59.902Z",
+  "arguments": [
+    "animation256"
+  ],
+  "nativeDownloads": [
+    {
+      "kind": "animation256",
+      "label": "nearest",
+      "name": "kenney-motion-256-palette.gif",
+      "bytes": 29510
+    },
+    {
+      "kind": "animation256",
+      "label": "enhanced",
+      "name": "kenney-motion-256-palette.gif",
+      "bytes": 30860
+    }
+  ],
+  "errors": [],
+  "original": {
+    "rotation": "free",
+    "night": "Night mode: yes"
+  },
+  "originalPlayback": {
+    "before": 5,
+    "after": 55,
+    "delta": 50,
+    "sourceFrames": 48,
+    "observationMs": 4570
+  },
+  "restored": {
+    "rotation": "free",
+    "night": "Night mode: yes"
+  },
+  "kinds": [
+    "animation256"
+  ],
+  "finished": "2026-10-17T03:16:23.394Z"
+}

@@ -1,0 +1,72 @@
+{
+  "commit": "62dc29c",
+  "baseURL": "http://127.0.0.1:5342/",
+  "sourceSha256": "2d2f25c21f9496816d4f21b303d6f86a288ef324263f7f998eae84f4db7d223f",
+  "palette": [
+    "#009adc",
+    "#25956a",
+    "#262b44",
+    "#346547",
+    "#34995e",
+    "#3d212d",
+    "#3f2631",
+    "#434a5f",
+    "#43e1b3",
+    "#51607d",
+    "#5ad28c",
+    "#747a90",
+    "#763b36",
+    "#76e4ff",
+    "#7e3125",
+    "#86f6bb",
+    "#8b9bb4",
+    "#8c9cb5",
+    "#959ab1",
+    "#9b4ca3",
+    "#aab7cc",
+    "#bd6c4a",
+    "#be6c49",
+    "#bedef1",
+    "#c0cbdc",
+    "#c1ccdd",
+    "#d176d0",
+    "#dce1e7",
+    "#dd442c",
+    "#e19a65",
+    "#e84537",
+    "#eaa56c",
+    "#eba66c",
+    "#f7c282",
+    "#fc683b",
+    "#ff706d",
+    "#ffffff"
+  ],
+  "sampledDimensionsChanged": true,
+  "freshPostPublicationPaintRequired": true,
+  "importAndAutoCPUms": 122.87599999999999,
+  "exports": [
+    {
+      "label": "auto",
+      "width": 2048,
+      "height": 2048,
+      "rgbMismatch": 0,
+      "alphaMismatch": 0,
+      "sha256": "45b6644252ec62864b938647e4c362bdef80b0b56571f60e95811f31610ecae9"
+    },
+    {
+      "label": "res64",
+      "width": 2048,
+      "height": 2048,
+      "rgbMismatch": 0,
+      "alphaMismatch": 0,
+      "sha256": "ea42619273149ba3d1f58958706aaf40b50edbe51983f80998c4a42c3a60e720"
+    }
+  ],
+  "errors": [],
+  "notes": [
+    "One bounded 2048px sparse CC0 sheet, Auto then Resurrect64; source file transfer excluded from timing.",
+    "Auto palette extracted from editable draft in original order; Save verified by independent scalar nearest+Sharp decode, not an independent generation-quality oracle.",
+    "Auto stage ends after editor publication and rail-close layout; a new paint is required only if sampling dimensions changed. Without that change, timing does not prove a new post-publication wall paint.",
+    "One timing, not a speedup comparison or memory bound."
+  ]
+}

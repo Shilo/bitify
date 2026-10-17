@@ -1,0 +1,21 @@
+{
+  "baseline": "7ed49fd",
+  "integration": "62dc29c",
+  "candidate": "62dc29c plus four color-display runtime files",
+  "surface": "actual Codex Browser via cua_repl; native file chooser and downloads",
+  "checks": [
+    "Auto renders the nine-asset small batch; exact counts publish for full-size frames",
+    "Resurrect 64 native small-batch ZIP independently decoded with zero visible RGB/alpha mismatches",
+    "2048 sheet sampled wall renders without demanding an exact count; native Save checks every source pixel",
+    "48-frame animation native Save preserves every frame, delay and loop",
+    "Final integration Auto renders a combined 2048 sheet and 48-frame animation; subsequent Resurrect 64 ZIP checks exactly",
+    "Final integration Preview Fit disabled initially, enabled after Zoom in and disabled again after Fit",
+    "Original/converted comparison and closing Preview return to the wall",
+    "Light theme root data, scheme metadata and screenshot are consistent in Codex Browser",
+    "Candidate None removes only that color overlay and retains input value and accessible None label",
+    "Candidate Swap exchanges color values and moves the transparent role"
+  ],
+  "regressionSuite": { "passed": 982, "skipped": 2, "filesPassed": 63 },
+  "build": "isolated 62dc29c plus exact candidate runtime files passed",
+  "limits": "No Codex renderer CPU or Android screen-pixel claims inferred from this receipt. Independent agents own those measurements. Hidden alpha-zero RGB is ignored by native color comparisons."
+}

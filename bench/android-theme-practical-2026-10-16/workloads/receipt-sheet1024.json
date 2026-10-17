@@ -1,0 +1,34 @@
+{
+  "commit": "62dc29c",
+  "started": "2026-10-17T03:14:08.539Z",
+  "arguments": [
+    "sheet1024"
+  ],
+  "nativeDownloads": [
+    {
+      "kind": "sheet1024",
+      "label": "nearest",
+      "name": "kenney-sheet-1024-palette.png",
+      "bytes": 28973
+    },
+    {
+      "kind": "sheet1024",
+      "label": "enhanced",
+      "name": "kenney-sheet-1024-palette.png",
+      "bytes": 18193
+    }
+  ],
+  "errors": [],
+  "original": {
+    "rotation": "free",
+    "night": "Night mode: yes"
+  },
+  "restored": {
+    "rotation": "free",
+    "night": "Night mode: yes"
+  },
+  "kinds": [
+    "sheet1024"
+  ],
+  "finished": "2026-10-17T03:14:17.590Z"
+}

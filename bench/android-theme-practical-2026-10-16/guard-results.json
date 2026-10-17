@@ -1,0 +1,786 @@
+{
+  "started": "2026-10-17T03:09:37.810Z",
+  "origin": "http://localhost:5341/",
+  "targetCommit": "7ed49fd",
+  "original": {
+    "rotation": "free",
+    "accel": "1",
+    "userRotation": "0",
+    "night": "Night mode: yes"
+  },
+  "errors": [],
+  "scenes": [
+    {
+      "name": "guard-baseline",
+      "theme": "light",
+      "system": "light",
+      "scheme": "light only",
+      "meta": "only light",
+      "themeColor": [
+        "#f1f2f3",
+        "#f1f2f3"
+      ],
+      "width": 448,
+      "height": 819,
+      "dpr": 2.25,
+      "root": {
+        "bg": "#f1f2f3",
+        "a": "#c5cbd1",
+        "b": "#d2d6da",
+        "fg": "rgb(26, 42, 54)"
+      },
+      "stored": {
+        "first": "#222323",
+        "second": "#f0f6f0",
+        "none": 0,
+        "style": "cutout",
+        "settings": {
+          "cutout": {
+            "threshold": null,
+            "seams": null,
+            "rim": true,
+            "source": "luma",
+            "alpha": 128
+          },
+          "solid": {
+            "threshold": null,
+            "source": "luma",
+            "alpha": 128
+          },
+          "lines": {
+            "threshold": null,
+            "thickness": 1,
+            "darks": 0,
+            "alpha": 128
+          },
+          "stencil": {
+            "cuts": null,
+            "outline": "keep",
+            "edges": 0,
+            "source": "luma",
+            "alpha": 128
+          },
+          "icon": {
+            "detail": 50,
+            "border": "auto",
+            "source": "luma",
+            "alpha": 128
+          },
+          "checker": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "bayer": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "matrix": 4,
+            "source": "luma",
+            "alpha": 128
+          },
+          "hatch": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "direction": "/",
+            "spacing": 3,
+            "source": "luma",
+            "alpha": 128
+          },
+          "atkinson": {
+            "threshold": null,
+            "shading": 100,
+            "diffusion": "atkinson",
+            "source": "luma",
+            "alpha": 128
+          },
+          "noise": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "silhouette": {
+            "alpha": 128
+          }
+        },
+        "theme": "light",
+        "family": "full-palette",
+        "paletteId": "preset-pico8",
+        "alphaCut": 128,
+        "alphaMode": "cut",
+        "metric": "oklab",
+        "maxColors": 0,
+        "lastMaxColors": 16,
+        "cleanup": false,
+        "dither": "none",
+        "ditherStrength": 50
+      },
+      "probes": {
+        "nativeContentOffset": 239,
+        "values": [
+          {
+            "expected": "#000000",
+            "css": "#000000",
+            "canvas": "#000000"
+          },
+          {
+            "expected": "#ffffff",
+            "css": "#121212",
+            "canvas": "#ffffff"
+          },
+          {
+            "expected": "#fff1e8",
+            "css": "#2b211b",
+            "canvas": "#fff1e8"
+          },
+          {
+            "expected": "#ff0000",
+            "css": "#ff0000",
+            "canvas": "#ff0000"
+          },
+          {
+            "expected": "#00ff00",
+            "css": "#00ff00",
+            "canvas": "#00ff00"
+          },
+          {
+            "expected": "#0000ff",
+            "css": "#0000ff",
+            "canvas": "#0000ff"
+          },
+          {
+            "expected": "#808080",
+            "css": "#808080",
+            "canvas": "#808080"
+          },
+          {
+            "expected": "#c2c3c7",
+            "css": "#c2c3c7",
+            "canvas": "#c2c3c7"
+          },
+          {
+            "expected": "#ffeeaa",
+            "css": "#302700",
+            "canvas": "#ffeeaa"
+          },
+          {
+            "expected": "#f04010",
+            "css": "#f04010",
+            "canvas": "#f04010"
+          },
+          {
+            "expected": "#3050a0",
+            "css": "#3050a0",
+            "canvas": "#3050a0"
+          },
+          {
+            "expected": "#010101",
+            "css": "#010101",
+            "canvas": "#010101"
+          },
+          {
+            "expected": "#f1f2f3",
+            "css": "#242526",
+            "canvas": "#f1f2f3"
+          },
+          {
+            "expected": "#c5cbd1",
+            "css": "#c5cbd1",
+            "canvas": "#c5cbd1"
+          },
+          {
+            "expected": "#d2d6da",
+            "css": "#383b3e",
+            "canvas": "#d2d6da"
+          }
+        ]
+      }
+    },
+    {
+      "name": "guard-only-dark",
+      "theme": "light",
+      "system": "light",
+      "scheme": "dark only",
+      "meta": "only dark",
+      "themeColor": [
+        "#f1f2f3",
+        "#f1f2f3"
+      ],
+      "width": 448,
+      "height": 819,
+      "dpr": 2.25,
+      "root": {
+        "bg": "#f1f2f3",
+        "a": "#c5cbd1",
+        "b": "#d2d6da",
+        "fg": "rgb(26, 42, 54)"
+      },
+      "stored": {
+        "first": "#222323",
+        "second": "#f0f6f0",
+        "none": 0,
+        "style": "cutout",
+        "settings": {
+          "cutout": {
+            "threshold": null,
+            "seams": null,
+            "rim": true,
+            "source": "luma",
+            "alpha": 128
+          },
+          "solid": {
+            "threshold": null,
+            "source": "luma",
+            "alpha": 128
+          },
+          "lines": {
+            "threshold": null,
+            "thickness": 1,
+            "darks": 0,
+            "alpha": 128
+          },
+          "stencil": {
+            "cuts": null,
+            "outline": "keep",
+            "edges": 0,
+            "source": "luma",
+            "alpha": 128
+          },
+          "icon": {
+            "detail": 50,
+            "border": "auto",
+            "source": "luma",
+            "alpha": 128
+          },
+          "checker": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "bayer": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "matrix": 4,
+            "source": "luma",
+            "alpha": 128
+          },
+          "hatch": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "direction": "/",
+            "spacing": 3,
+            "source": "luma",
+            "alpha": 128
+          },
+          "atkinson": {
+            "threshold": null,
+            "shading": 100,
+            "diffusion": "atkinson",
+            "source": "luma",
+            "alpha": 128
+          },
+          "noise": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "silhouette": {
+            "alpha": 128
+          }
+        },
+        "theme": "light",
+        "family": "full-palette",
+        "paletteId": "preset-pico8",
+        "alphaCut": 128,
+        "alphaMode": "cut",
+        "metric": "oklab",
+        "maxColors": 0,
+        "lastMaxColors": 16,
+        "cleanup": false,
+        "dither": "none",
+        "ditherStrength": 50
+      },
+      "probes": {
+        "nativeContentOffset": 239,
+        "values": [
+          {
+            "expected": "#000000",
+            "css": "#000000",
+            "canvas": "#000000"
+          },
+          {
+            "expected": "#ffffff",
+            "css": "#121212",
+            "canvas": "#ffffff"
+          },
+          {
+            "expected": "#fff1e8",
+            "css": "#2b211b",
+            "canvas": "#fff1e8"
+          },
+          {
+            "expected": "#ff0000",
+            "css": "#ff0000",
+            "canvas": "#ff0000"
+          },
+          {
+            "expected": "#00ff00",
+            "css": "#00ff00",
+            "canvas": "#00ff00"
+          },
+          {
+            "expected": "#0000ff",
+            "css": "#0000ff",
+            "canvas": "#0000ff"
+          },
+          {
+            "expected": "#808080",
+            "css": "#808080",
+            "canvas": "#808080"
+          },
+          {
+            "expected": "#c2c3c7",
+            "css": "#c2c3c7",
+            "canvas": "#c2c3c7"
+          },
+          {
+            "expected": "#ffeeaa",
+            "css": "#302700",
+            "canvas": "#ffeeaa"
+          },
+          {
+            "expected": "#f04010",
+            "css": "#f04010",
+            "canvas": "#f04010"
+          },
+          {
+            "expected": "#3050a0",
+            "css": "#3050a0",
+            "canvas": "#3050a0"
+          },
+          {
+            "expected": "#010101",
+            "css": "#010101",
+            "canvas": "#010101"
+          },
+          {
+            "expected": "#f1f2f3",
+            "css": "#242526",
+            "canvas": "#f1f2f3"
+          },
+          {
+            "expected": "#c5cbd1",
+            "css": "#c5cbd1",
+            "canvas": "#c5cbd1"
+          },
+          {
+            "expected": "#d2d6da",
+            "css": "#383b3e",
+            "canvas": "#d2d6da"
+          }
+        ]
+      }
+    },
+    {
+      "name": "guard-dark",
+      "theme": "light",
+      "system": "light",
+      "scheme": "dark",
+      "meta": "dark",
+      "themeColor": [
+        "#f1f2f3",
+        "#f1f2f3"
+      ],
+      "width": 448,
+      "height": 819,
+      "dpr": 2.25,
+      "root": {
+        "bg": "#f1f2f3",
+        "a": "#c5cbd1",
+        "b": "#d2d6da",
+        "fg": "rgb(26, 42, 54)"
+      },
+      "stored": {
+        "first": "#222323",
+        "second": "#f0f6f0",
+        "none": 0,
+        "style": "cutout",
+        "settings": {
+          "cutout": {
+            "threshold": null,
+            "seams": null,
+            "rim": true,
+            "source": "luma",
+            "alpha": 128
+          },
+          "solid": {
+            "threshold": null,
+            "source": "luma",
+            "alpha": 128
+          },
+          "lines": {
+            "threshold": null,
+            "thickness": 1,
+            "darks": 0,
+            "alpha": 128
+          },
+          "stencil": {
+            "cuts": null,
+            "outline": "keep",
+            "edges": 0,
+            "source": "luma",
+            "alpha": 128
+          },
+          "icon": {
+            "detail": 50,
+            "border": "auto",
+            "source": "luma",
+            "alpha": 128
+          },
+          "checker": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "bayer": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "matrix": 4,
+            "source": "luma",
+            "alpha": 128
+          },
+          "hatch": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "direction": "/",
+            "spacing": 3,
+            "source": "luma",
+            "alpha": 128
+          },
+          "atkinson": {
+            "threshold": null,
+            "shading": 100,
+            "diffusion": "atkinson",
+            "source": "luma",
+            "alpha": 128
+          },
+          "noise": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "silhouette": {
+            "alpha": 128
+          }
+        },
+        "theme": "light",
+        "family": "full-palette",
+        "paletteId": "preset-pico8",
+        "alphaCut": 128,
+        "alphaMode": "cut",
+        "metric": "oklab",
+        "maxColors": 0,
+        "lastMaxColors": 16,
+        "cleanup": false,
+        "dither": "none",
+        "ditherStrength": 50
+      },
+      "probes": {
+        "nativeContentOffset": 239,
+        "values": [
+          {
+            "expected": "#000000",
+            "css": "#000000",
+            "canvas": "#000000"
+          },
+          {
+            "expected": "#ffffff",
+            "css": "#121212",
+            "canvas": "#ffffff"
+          },
+          {
+            "expected": "#fff1e8",
+            "css": "#2b211b",
+            "canvas": "#fff1e8"
+          },
+          {
+            "expected": "#ff0000",
+            "css": "#ff0000",
+            "canvas": "#ff0000"
+          },
+          {
+            "expected": "#00ff00",
+            "css": "#00ff00",
+            "canvas": "#00ff00"
+          },
+          {
+            "expected": "#0000ff",
+            "css": "#0000ff",
+            "canvas": "#0000ff"
+          },
+          {
+            "expected": "#808080",
+            "css": "#808080",
+            "canvas": "#808080"
+          },
+          {
+            "expected": "#c2c3c7",
+            "css": "#c2c3c7",
+            "canvas": "#c2c3c7"
+          },
+          {
+            "expected": "#ffeeaa",
+            "css": "#302700",
+            "canvas": "#ffeeaa"
+          },
+          {
+            "expected": "#f04010",
+            "css": "#f04010",
+            "canvas": "#f04010"
+          },
+          {
+            "expected": "#3050a0",
+            "css": "#3050a0",
+            "canvas": "#3050a0"
+          },
+          {
+            "expected": "#010101",
+            "css": "#010101",
+            "canvas": "#010101"
+          },
+          {
+            "expected": "#f1f2f3",
+            "css": "#242526",
+            "canvas": "#f1f2f3"
+          },
+          {
+            "expected": "#c5cbd1",
+            "css": "#c5cbd1",
+            "canvas": "#c5cbd1"
+          },
+          {
+            "expected": "#d2d6da",
+            "css": "#383b3e",
+            "canvas": "#d2d6da"
+          }
+        ]
+      }
+    },
+    {
+      "name": "guard-only-light",
+      "theme": "light",
+      "system": "light",
+      "scheme": "light only",
+      "meta": "only light",
+      "themeColor": [
+        "#f1f2f3",
+        "#f1f2f3"
+      ],
+      "width": 448,
+      "height": 819,
+      "dpr": 2.25,
+      "root": {
+        "bg": "#f1f2f3",
+        "a": "#c5cbd1",
+        "b": "#d2d6da",
+        "fg": "rgb(26, 42, 54)"
+      },
+      "stored": {
+        "first": "#222323",
+        "second": "#f0f6f0",
+        "none": 0,
+        "style": "cutout",
+        "settings": {
+          "cutout": {
+            "threshold": null,
+            "seams": null,
+            "rim": true,
+            "source": "luma",
+            "alpha": 128
+          },
+          "solid": {
+            "threshold": null,
+            "source": "luma",
+            "alpha": 128
+          },
+          "lines": {
+            "threshold": null,
+            "thickness": 1,
+            "darks": 0,
+            "alpha": 128
+          },
+          "stencil": {
+            "cuts": null,
+            "outline": "keep",
+            "edges": 0,
+            "source": "luma",
+            "alpha": 128
+          },
+          "icon": {
+            "detail": 50,
+            "border": "auto",
+            "source": "luma",
+            "alpha": 128
+          },
+          "checker": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "bayer": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "matrix": 4,
+            "source": "luma",
+            "alpha": 128
+          },
+          "hatch": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "direction": "/",
+            "spacing": 3,
+            "source": "luma",
+            "alpha": 128
+          },
+          "atkinson": {
+            "threshold": null,
+            "shading": 100,
+            "diffusion": "atkinson",
+            "source": "luma",
+            "alpha": 128
+          },
+          "noise": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "silhouette": {
+            "alpha": 128
+          }
+        },
+        "theme": "light",
+        "family": "full-palette",
+        "paletteId": "preset-pico8",
+        "alphaCut": 128,
+        "alphaMode": "cut",
+        "metric": "oklab",
+        "maxColors": 0,
+        "lastMaxColors": 16,
+        "cleanup": false,
+        "dither": "none",
+        "ditherStrength": 50
+      },
+      "probes": {
+        "nativeContentOffset": 239,
+        "values": [
+          {
+            "expected": "#000000",
+            "css": "#000000",
+            "canvas": "#000000"
+          },
+          {
+            "expected": "#ffffff",
+            "css": "#121212",
+            "canvas": "#ffffff"
+          },
+          {
+            "expected": "#fff1e8",
+            "css": "#2b211b",
+            "canvas": "#fff1e8"
+          },
+          {
+            "expected": "#ff0000",
+            "css": "#ff0000",
+            "canvas": "#ff0000"
+          },
+          {
+            "expected": "#00ff00",
+            "css": "#00ff00",
+            "canvas": "#00ff00"
+          },
+          {
+            "expected": "#0000ff",
+            "css": "#0000ff",
+            "canvas": "#0000ff"
+          },
+          {
+            "expected": "#808080",
+            "css": "#808080",
+            "canvas": "#808080"
+          },
+          {
+            "expected": "#c2c3c7",
+            "css": "#c2c3c7",
+            "canvas": "#c2c3c7"
+          },
+          {
+            "expected": "#ffeeaa",
+            "css": "#302700",
+            "canvas": "#ffeeaa"
+          },
+          {
+            "expected": "#f04010",
+            "css": "#f04010",
+            "canvas": "#f04010"
+          },
+          {
+            "expected": "#3050a0",
+            "css": "#3050a0",
+            "canvas": "#3050a0"
+          },
+          {
+            "expected": "#010101",
+            "css": "#010101",
+            "canvas": "#010101"
+          },
+          {
+            "expected": "#f1f2f3",
+            "css": "#242526",
+            "canvas": "#f1f2f3"
+          },
+          {
+            "expected": "#c5cbd1",
+            "css": "#c5cbd1",
+            "canvas": "#c5cbd1"
+          },
+          {
+            "expected": "#d2d6da",
+            "css": "#383b3e",
+            "canvas": "#d2d6da"
+          }
+        ]
+      }
+    }
+  ],
+  "checks": [],
+  "restored": {
+    "rotation": "free",
+    "accel": "1",
+    "userRotation": "0",
+    "night": "Night mode: yes"
+  },
+  "finished": "2026-10-17T03:09:49.033Z"
+}

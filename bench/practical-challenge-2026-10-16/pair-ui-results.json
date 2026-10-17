@@ -1,0 +1,176 @@
+{
+  "scope": "Independent Edge compositing, native-input DOM hit targets, reactive idle and baseline export comparison; OS color-picker UI is not claimed.",
+  "checks": [
+    {
+      "palette": "Glow",
+      "pairAndCurrentExact": true,
+      "nativeInputsRetainHitTargets": true
+    },
+    {
+      "palette": "Mono",
+      "pairAndCurrentExact": true,
+      "nativeInputsRetainHitTargets": true
+    },
+    {
+      "palette": "Paper",
+      "pairAndCurrentExact": true,
+      "nativeInputsRetainHitTargets": true
+    },
+    {
+      "palette": "Torch",
+      "pairAndCurrentExact": true,
+      "nativeInputsRetainHitTargets": true
+    },
+    {
+      "palette": "Rose",
+      "pairAndCurrentExact": true,
+      "nativeInputsRetainHitTargets": true
+    },
+    {
+      "palette": "Game Boy",
+      "pairAndCurrentExact": true,
+      "nativeInputsRetainHitTargets": true
+    },
+    {
+      "palette": "Pocket",
+      "pairAndCurrentExact": true,
+      "nativeInputsRetainHitTargets": true
+    },
+    {
+      "palette": "Nokia",
+      "pairAndCurrentExact": true,
+      "nativeInputsRetainHitTargets": true
+    },
+    {
+      "palette": "Playdate",
+      "pairAndCurrentExact": true,
+      "nativeInputsRetainHitTargets": true
+    },
+    {
+      "palette": "Phosphor",
+      "pairAndCurrentExact": true,
+      "nativeInputsRetainHitTargets": true
+    },
+    {
+      "palette": "Amber",
+      "pairAndCurrentExact": true,
+      "nativeInputsRetainHitTargets": true
+    },
+    {
+      "palette": "Commodore",
+      "pairAndCurrentExact": true,
+      "nativeInputsRetainHitTargets": true
+    }
+  ],
+  "errors": [],
+  "forcedDarkSentinel": "#121212",
+  "idlePalettePaints": 0,
+  "baselineCandidatePng": [
+    {
+      "url": "http://127.0.0.1:5342/",
+      "sha256": "5e9a9af7e65d4eb6de00879162efbf68728953b07120c9c5571249836b5d0e29"
+    },
+    {
+      "url": "http://127.0.0.1:5343/",
+      "sha256": "5e9a9af7e65d4eb6de00879162efbf68728953b07120c9c5571249836b5d0e29"
+    }
+  ],
+  "ordinaryLightDarkGeometry": [
+    {
+      "version": "baseline",
+      "theme": "light",
+      "geometry": [
+        {
+          "x": 463.5,
+          "y": 830,
+          "width": 44,
+          "height": 44,
+          "inputWidth": 42,
+          "inputHeight": 42,
+          "shadow": "rgba(255, 255, 255, 0.7) 0px 0px 0px 3px inset"
+        },
+        {
+          "x": 561.5,
+          "y": 830,
+          "width": 44,
+          "height": 44,
+          "inputWidth": 42,
+          "inputHeight": 42,
+          "shadow": "rgba(255, 255, 255, 0.7) 0px 0px 0px 3px inset"
+        }
+      ]
+    },
+    {
+      "version": "baseline",
+      "theme": "dark",
+      "geometry": [
+        {
+          "x": 463.5,
+          "y": 830,
+          "width": 44,
+          "height": 44,
+          "inputWidth": 42,
+          "inputHeight": 42,
+          "shadow": "rgba(255, 255, 255, 0.14) 0px 0px 0px 3px inset"
+        },
+        {
+          "x": 561.5,
+          "y": 830,
+          "width": 44,
+          "height": 44,
+          "inputWidth": 42,
+          "inputHeight": 42,
+          "shadow": "rgba(255, 255, 255, 0.14) 0px 0px 0px 3px inset"
+        }
+      ]
+    },
+    {
+      "version": "candidate",
+      "theme": "light",
+      "geometry": [
+        {
+          "x": 463.5,
+          "y": 830,
+          "width": 44,
+          "height": 44,
+          "inputWidth": 42,
+          "inputHeight": 42,
+          "shadow": "rgba(255, 255, 255, 0.7) 0px 0px 0px 3px inset"
+        },
+        {
+          "x": 561.5,
+          "y": 830,
+          "width": 44,
+          "height": 44,
+          "inputWidth": 42,
+          "inputHeight": 42,
+          "shadow": "rgba(255, 255, 255, 0.7) 0px 0px 0px 3px inset"
+        }
+      ]
+    },
+    {
+      "version": "candidate",
+      "theme": "dark",
+      "geometry": [
+        {
+          "x": 463.5,
+          "y": 830,
+          "width": 44,
+          "height": 44,
+          "inputWidth": 42,
+          "inputHeight": 42,
+          "shadow": "rgba(255, 255, 255, 0.14) 0px 0px 0px 3px inset"
+        },
+        {
+          "x": 561.5,
+          "y": 830,
+          "width": 44,
+          "height": 44,
+          "inputWidth": 42,
+          "inputHeight": 42,
+          "shadow": "rgba(255, 255, 255, 0.14) 0px 0px 0px 3px inset"
+        }
+      ]
+    }
+  ]
+}

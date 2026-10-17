@@ -1,0 +1,52 @@
+8:06:37 PM [vite-plugin-svelte] no Svelte config found at C:/Programming_Files/Shilocity/colorfetti - using default configuration.
+
+ RUN  v4.1.11 C:/Programming_Files/Shilocity/colorfetti
+
+ ❯ src/lib/gif.test.js (0 test)
+ ❯ src/lib/palette-export.test.js (0 test)
+ ❯ src/lib/palette-usage.test.js (0 test)
+ ❯ src/lib/save.test.js (0 test)
+ ❯ src/lib/theme-startup.test.js (0 test)
+ ❯ src/lib/palette-usage-progress.test.js (0 test)
+ ❯ src/lib/save-batch.test.js (0 test)
+ ❯ src/lib/palette-animation-cache.test.js (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 8 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/lib/gif.test.js [ src/lib/gif.test.js ]
+Error: EPERM: operation not permitted, rename 'C:\Users\shilo\AppData\Local\Packages\sandbox.{da5c9226-d935-460f-a0fe-1cacf66cc402}\AC\Temp\algplyrq3-14pbLysjiaY\ssr\.tmp-1792206398189-u862faul95' -> 'C:\Users\shilo\AppData\Local\Packages\sandbox.{da5c9226-d935-460f-a0fe-1cacf66cc402}\AC\Temp\algplyrq3-14pbLysjiaY\ssr\9688f2d6e7197c93c737e2c6ae0ec2b2a12047e8'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/8]⎯
+
+ FAIL  src/lib/palette-animation-cache.test.js [ src/lib/palette-animation-cache.test.js ]
+Error: EPERM: operation not permitted, rename 'C:\Users\shilo\AppData\Local\Packages\sandbox.{da5c9226-d935-460f-a0fe-1cacf66cc402}\AC\Temp\algplyrq3-14pbLysjiaY\ssr\.tmp-1792206398231-bk4l31k0b6i' -> 'C:\Users\shilo\AppData\Local\Packages\sandbox.{da5c9226-d935-460f-a0fe-1cacf66cc402}\AC\Temp\algplyrq3-14pbLysjiaY\ssr\a3b5dea1d5bb4f8da013071791f95a2845dc98ed'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/8]⎯
+
+ FAIL  src/lib/palette-export.test.js [ src/lib/palette-export.test.js ]
+Error: EPERM: operation not permitted, rename 'C:\Users\shilo\AppData\Local\Packages\sandbox.{da5c9226-d935-460f-a0fe-1cacf66cc402}\AC\Temp\algplyrq3-14pbLysjiaY\ssr\.tmp-1792206398193-gvk7pe675zh' -> 'C:\Users\shilo\AppData\Local\Packages\sandbox.{da5c9226-d935-460f-a0fe-1cacf66cc402}\AC\Temp\algplyrq3-14pbLysjiaY\ssr\af2e84801953b43ab892fa2b03a55d648fe34c1d'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/8]⎯
+
+ FAIL  src/lib/palette-usage-progress.test.js [ src/lib/palette-usage-progress.test.js ]
+Error: EPERM: operation not permitted, rename 'C:\Users\shilo\AppData\Local\Packages\sandbox.{da5c9226-d935-460f-a0fe-1cacf66cc402}\AC\Temp\algplyrq3-14pbLysjiaY\ssr\.tmp-1792206398228-51ttp76epma' -> 'C:\Users\shilo\AppData\Local\Packages\sandbox.{da5c9226-d935-460f-a0fe-1cacf66cc402}\AC\Temp\algplyrq3-14pbLysjiaY\ssr\8158f408390b27b15e42159d8606c828ffbfb536'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/8]⎯
+
+ FAIL  src/lib/palette-usage.test.js [ src/lib/palette-usage.test.js ]
+Error: EPERM: operation not permitted, rename 'C:\Users\shilo\AppData\Local\Packages\sandbox.{da5c9226-d935-460f-a0fe-1cacf66cc402}\AC\Temp\algplyrq3-14pbLysjiaY\ssr\.tmp-1792206398198-6azkwai63p' -> 'C:\Users\shilo\AppData\Local\Packages\sandbox.{da5c9226-d935-460f-a0fe-1cacf66cc402}\AC\Temp\algplyrq3-14pbLysjiaY\ssr\a4e7eef8adf49d2a7f27050c3a587a23303eea04'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/8]⎯
+
+ FAIL  src/lib/save-batch.test.js [ src/lib/save-batch.test.js ]
+Error: EPERM: operation not permitted, rename 'C:\Users\shilo\AppData\Local\Packages\sandbox.{da5c9226-d935-460f-a0fe-1cacf66cc402}\AC\Temp\algplyrq3-14pbLysjiaY\ssr\.tmp-1792206398235-tt71avfpej' -> 'C:\Users\shilo\AppData\Local\Packages\sandbox.{da5c9226-d935-460f-a0fe-1cacf66cc402}\AC\Temp\algplyrq3-14pbLysjiaY\ssr\668c2bbfcb1bee2cf1608db37b656b406b7b3b8e'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/8]⎯
+
+ FAIL  src/lib/save.test.js [ src/lib/save.test.js ]
+Error: EPERM: operation not permitted, rename 'C:\Users\shilo\AppData\Local\Packages\sandbox.{da5c9226-d935-460f-a0fe-1cacf66cc402}\AC\Temp\algplyrq3-14pbLysjiaY\ssr\.tmp-1792206398218-lvng3e2vn0e' -> 'C:\Users\shilo\AppData\Local\Packages\sandbox.{da5c9226-d935-460f-a0fe-1cacf66cc402}\AC\Temp\algplyrq3-14pbLysjiaY\ssr\3083af60cda921b0d64ba37cfcc34581e09f410c'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/8]⎯
+
+ FAIL  src/lib/theme-startup.test.js [ src/lib/theme-startup.test.js ]
+Error: EPERM: operation not permitted, rename 'C:\Users\shilo\AppData\Local\Packages\sandbox.{da5c9226-d935-460f-a0fe-1cacf66cc402}\AC\Temp\algplyrq3-14pbLysjiaY\ssr\.tmp-1792206398229-etk1vmwwbrm' -> 'C:\Users\shilo\AppData\Local\Packages\sandbox.{da5c9226-d935-460f-a0fe-1cacf66cc402}\AC\Temp\algplyrq3-14pbLysjiaY\ssr\341ec8dc96b018b94197c7721f7b043061996c02'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/8]⎯
+
+
+ Test Files  8 failed (8)
+      Tests  no tests
+   Start at  20:06:37
+   Duration  311ms (transform 0ms, setup 0ms, import 0ms, tests 0ms, environment 0ms)

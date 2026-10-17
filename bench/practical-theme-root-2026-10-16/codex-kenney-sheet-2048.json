@@ -1,0 +1,15 @@
+{
+  "source": "7ed49fd isolated build; actual Codex Browser file chooser and native Save",
+  "receipts": [
+    {
+      "fixture": "kenney-sheet-2048",
+      "width": 2048,
+      "height": 2048,
+      "frames": 1,
+      "rgbMismatch": 0,
+      "alphaMismatch": 0,
+      "sha256": "ea42619273149ba3d1f58958706aaf40b50edbe51983f80998c4a42c3a60e720",
+      "oracle": "independent scalar Oklab nearest, Sharp PNG/GIF decode, native bytes; hidden alpha0 RGB ignored"
+    }
+  ]
+}

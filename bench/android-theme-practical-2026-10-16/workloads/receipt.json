@@ -1,0 +1,45 @@
+{
+  "commit": "7ed49fd",
+  "started": "2026-10-17T03:12:03.496Z",
+  "nativeDownloads": [
+    {
+      "kind": "sheet2048",
+      "label": "nearest",
+      "name": "kenney-sheet-2048-palette.png",
+      "bytes": 75846
+    },
+    {
+      "kind": "sheet2048",
+      "label": "enhanced",
+      "name": "kenney-sheet-2048-palette.png",
+      "bytes": 80729
+    },
+    {
+      "kind": "animation256",
+      "label": "nearest",
+      "name": "kenney-motion-256-palette.gif",
+      "bytes": 29510
+    },
+    {
+      "kind": "animation256",
+      "label": "enhanced",
+      "name": "kenney-motion-256-palette.gif",
+      "bytes": 30860
+    }
+  ],
+  "errors": [],
+  "original": {
+    "rotation": "free",
+    "night": "Night mode: yes"
+  },
+  "restored": {
+    "rotation": "free",
+    "night": "Night mode: yes"
+  },
+  "kinds": [
+    "sheet2048",
+    "animation256"
+  ],
+  "finished": "2026-10-17T03:12:30.639Z",
+  "status": "Superseded preliminary multi-case timing/playback: repeated addInitScript duplicated instrumentation; native decoded output bytes remain valid. Final per-case receipt-KIND.json is authoritative."
+}

@@ -1,0 +1,50 @@
+{
+  "target": "62dc29c baseline versus four-file canvas candidate",
+  "checks": [
+    {
+      "port": 5342,
+      "fixture": "owned.png",
+      "width": 2,
+      "height": 2,
+      "frames": 1,
+      "rgbMismatch": 0,
+      "alphaMismatch": 0,
+      "sha": "54220db754c84814b19149f4e48d0b6b91d344c9815075b6caf56d3512f0fed2",
+      "byteIdenticalToBaseline": false
+    },
+    {
+      "port": 5342,
+      "fixture": "motion.gif",
+      "width": 128,
+      "height": 128,
+      "frames": 32,
+      "rgbMismatch": 0,
+      "alphaMismatch": 0,
+      "sha": "be9883bed4891e2288396fd65139e17bf778a365b1536e544e0a4c582d6bea95",
+      "byteIdenticalToBaseline": false
+    },
+    {
+      "port": 5343,
+      "fixture": "owned.png",
+      "width": 2,
+      "height": 2,
+      "frames": 1,
+      "rgbMismatch": 0,
+      "alphaMismatch": 0,
+      "sha": "54220db754c84814b19149f4e48d0b6b91d344c9815075b6caf56d3512f0fed2",
+      "byteIdenticalToBaseline": true
+    },
+    {
+      "port": 5343,
+      "fixture": "motion.gif",
+      "width": 128,
+      "height": 128,
+      "frames": 32,
+      "rgbMismatch": 0,
+      "alphaMismatch": 0,
+      "sha": "be9883bed4891e2288396fd65139e17bf778a365b1536e544e0a4c582d6bea95",
+      "byteIdenticalToBaseline": true
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,104 @@
+{
+  "source": "7ed49fd isolated build; actual Codex Browser file chooser and native Save",
+  "receipts": [
+    {
+      "fixture": "dungeon-wizard",
+      "width": 16,
+      "height": 16,
+      "frames": 1,
+      "rgbMismatch": 0,
+      "alphaMismatch": 0,
+      "sha256": "a314c3d4b0a6f9312e4ffcd1a1c6245dd9c99741f70a2205a87434e4369ed091",
+      "oracle": "independent scalar Oklab nearest, Sharp PNG/GIF decode, native bytes; hidden alpha0 RGB ignored"
+    },
+    {
+      "fixture": "dungeon-archer",
+      "width": 16,
+      "height": 16,
+      "frames": 1,
+      "rgbMismatch": 0,
+      "alphaMismatch": 0,
+      "sha256": "a56159ea06e62d50706469eef9b2bbbddf8b47ee2009cc22cca45736bd2a709d",
+      "oracle": "independent scalar Oklab nearest, Sharp PNG/GIF decode, native bytes; hidden alpha0 RGB ignored"
+    },
+    {
+      "fixture": "dungeon-knight",
+      "width": 16,
+      "height": 16,
+      "frames": 1,
+      "rgbMismatch": 0,
+      "alphaMismatch": 0,
+      "sha256": "6fa3c62997e3a355a351b4b37651972cb4f3c9fd50be93aefc71294d520d151b",
+      "oracle": "independent scalar Oklab nearest, Sharp PNG/GIF decode, native bytes; hidden alpha0 RGB ignored"
+    },
+    {
+      "fixture": "dungeon-potion",
+      "width": 16,
+      "height": 16,
+      "frames": 1,
+      "rgbMismatch": 0,
+      "alphaMismatch": 0,
+      "sha256": "f3c2b7a469f903800f86ecb16d64c4f4fd396a1228cbf8ffc1a34a3da5b03a67",
+      "oracle": "independent scalar Oklab nearest, Sharp PNG/GIF decode, native bytes; hidden alpha0 RGB ignored"
+    },
+    {
+      "fixture": "town-water-bucket",
+      "width": 16,
+      "height": 16,
+      "frames": 1,
+      "rgbMismatch": 0,
+      "alphaMismatch": 0,
+      "sha256": "e8e779b7403f999ded4f100d488cf8c46120f7b1d6d980c0ef3552b27fac8d17",
+      "oracle": "independent scalar Oklab nearest, Sharp PNG/GIF decode, native bytes; hidden alpha0 RGB ignored"
+    },
+    {
+      "fixture": "platformer-pilot",
+      "width": 24,
+      "height": 24,
+      "frames": 1,
+      "rgbMismatch": 0,
+      "alphaMismatch": 0,
+      "sha256": "9ea39a85466873fd2bd9ceac8db4f91596e9fefd29636d5905a2ddd357b9af3f",
+      "oracle": "independent scalar Oklab nearest, Sharp PNG/GIF decode, native bytes; hidden alpha0 RGB ignored"
+    },
+    {
+      "fixture": "platformer-heart",
+      "width": 18,
+      "height": 18,
+      "frames": 1,
+      "rgbMismatch": 0,
+      "alphaMismatch": 0,
+      "sha256": "81312d652c8516eddc4e69ffd597055705238ba29aad790e4faaeb72d7eef3d8",
+      "oracle": "independent scalar Oklab nearest, Sharp PNG/GIF decode, native bytes; hidden alpha0 RGB ignored"
+    },
+    {
+      "fixture": "platformer-rocket",
+      "width": 24,
+      "height": 24,
+      "frames": 1,
+      "rgbMismatch": 0,
+      "alphaMismatch": 0,
+      "sha256": "f060fe3f3935c2af3e31a1e8ee6c0d2e96be42c547c06e3d3e50e5b38afe9b75",
+      "oracle": "independent scalar Oklab nearest, Sharp PNG/GIF decode, native bytes; hidden alpha0 RGB ignored"
+    },
+    {
+      "fixture": "real-magic",
+      "width": 32,
+      "height": 32,
+      "frames": 6,
+      "delay": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "loop": 0,
+      "rgbMismatch": 0,
+      "alphaMismatch": 0,
+      "sha256": "1916b8093c0d7216c63d8bdb92a2f947b51001f8d42344d05e28b59f09a54a19",
+      "oracle": "independent scalar Oklab nearest, Sharp PNG/GIF decode, native bytes; hidden alpha0 RGB ignored"
+    }
+  ]
+}

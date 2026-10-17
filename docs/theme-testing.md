@@ -1,5 +1,14 @@
 # Mobile theme rendering investigation — October 10, 2026
 
+**October 16 status:** the connected phone has Brave's **Auto Dark Mode for Web
+Contents** flag explicitly Enabled. Native screenshots reproduce its light-preference
+forced-dark exception, which bypasses the existing author opt-out. The October 10
+normal auto-dark results below remain valid for their recorded configurations;
+they do not establish faithful Light painting under this stronger override.
+See the [current native diagnosis](research/2026-10-16-android-theme-diagnosis.md)
+for the read-only flag evidence, rejected workaround and separately tested
+protection of color-critical palette choices. Browser preferences were left intact.
+
 The reported mixed light/dark rendering was reproduced on the USB-connected Pixel 8 Pro in Brave. The document had `data-theme="light"`; computed foreground was `rgb(26, 42, 54)`, the editing surfaces were `rgba(255, 255, 255, 0.6)`, and the checker gradient used the intended light colors. The screenshot nevertheless contained dark editing islands, inverted ink and one dark checker color. GlassKit's theme tokens had already updated correctly.
 
 A hidden `background-color: Canvas; color-scheme: light` probe computed to `rgb(18, 18, 18)` rather than white. Temporarily setting the root to `color-scheme: only light` immediately corrected the real device's painting. The override was then removed. This establishes browser automatic color overriding as the cause, independent of the browser's visible Night Mode setting (the owner reported it disabled).

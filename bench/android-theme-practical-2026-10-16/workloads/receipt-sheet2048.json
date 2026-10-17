@@ -1,0 +1,34 @@
+{
+  "commit": "62dc29c",
+  "started": "2026-10-17T03:15:07.170Z",
+  "arguments": [
+    "sheet2048"
+  ],
+  "nativeDownloads": [
+    {
+      "kind": "sheet2048",
+      "label": "nearest",
+      "name": "kenney-sheet-2048-palette.png",
+      "bytes": 75846
+    },
+    {
+      "kind": "sheet2048",
+      "label": "enhanced",
+      "name": "kenney-sheet-2048-palette.png",
+      "bytes": 80729
+    }
+  ],
+  "errors": [],
+  "original": {
+    "rotation": "free",
+    "night": "Night mode: yes"
+  },
+  "restored": {
+    "rotation": "free",
+    "night": "Night mode: yes"
+  },
+  "kinds": [
+    "sheet2048"
+  ],
+  "finished": "2026-10-17T03:15:20.626Z"
+}

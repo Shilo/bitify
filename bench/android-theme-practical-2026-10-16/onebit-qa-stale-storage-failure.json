@@ -1,0 +1,40 @@
+{
+  "started": "2026-10-17T03:19:43.760Z",
+  "origin": "http://localhost:5343/",
+  "targetCommit": "7ed49fd",
+  "original": {
+    "rotation": "free",
+    "accel": "1",
+    "userRotation": "0",
+    "night": "Night mode: yes"
+  },
+  "errors": [
+    "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ '#000000'\n- '#222323'\n\n    at pairProof (file:///C:/Programming_Files/Shilocity/colorfetti/bench/android-theme-practical-2026-10-16/onebit-fixed.mjs:27:805)\n    at async file:///C:/Programming_Files/Shilocity/colorfetti/bench/android-theme-practical-2026-10-16/onebit-fixed.mjs:33:88"
+  ],
+  "scenes": [],
+  "checks": [
+    {
+      "label": "fixed-light-Glow",
+      "preset": "Glow",
+      "first": "#222323",
+      "second": "#f0f6f0",
+      "solid": [
+        {
+          "expected": "#222323",
+          "actual": "#222323"
+        },
+        {
+          "expected": "#f0f6f0",
+          "actual": "#f0f6f0"
+        }
+      ]
+    }
+  ],
+  "restored": {
+    "rotation": "free",
+    "accel": "1",
+    "userRotation": "0",
+    "night": "Night mode: yes"
+  },
+  "finished": "2026-10-17T03:19:49.102Z"
+}

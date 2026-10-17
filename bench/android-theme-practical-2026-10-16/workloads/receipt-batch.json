@@ -1,0 +1,34 @@
+{
+  "commit": "62dc29c",
+  "started": "2026-10-17T03:13:41.705Z",
+  "arguments": [
+    "batch"
+  ],
+  "nativeDownloads": [
+    {
+      "kind": "batch",
+      "label": "nearest",
+      "name": "colorfetti.zip",
+      "bytes": 3672
+    },
+    {
+      "kind": "batch",
+      "label": "enhanced",
+      "name": "colorfetti.zip",
+      "bytes": 3842
+    }
+  ],
+  "errors": [],
+  "original": {
+    "rotation": "free",
+    "night": "Night mode: yes"
+  },
+  "restored": {
+    "rotation": "free",
+    "night": "Night mode: yes"
+  },
+  "kinds": [
+    "batch"
+  ],
+  "finished": "2026-10-17T03:13:51.719Z"
+}

@@ -1,0 +1,714 @@
+{
+  "started": "2026-10-17T03:11:39.989Z",
+  "origin": "http://localhost:5341/",
+  "targetCommit": "7ed49fd",
+  "original": {
+    "rotation": "free",
+    "accel": "1",
+    "userRotation": "0",
+    "night": "Night mode: yes"
+  },
+  "errors": [],
+  "scenes": [
+    {
+      "name": "native-onebit-light",
+      "theme": "light",
+      "system": "light",
+      "scheme": "light only",
+      "meta": "only light",
+      "themeColor": [
+        "#f1f2f3",
+        "#f1f2f3"
+      ],
+      "width": 448,
+      "height": 819,
+      "dpr": 2.25,
+      "root": {
+        "bg": "#f1f2f3",
+        "a": "#c5cbd1",
+        "b": "#d2d6da",
+        "fg": "rgb(26, 42, 54)"
+      },
+      "stored": {
+        "first": "#222323",
+        "second": "#f0f6f0",
+        "none": 0,
+        "style": "cutout",
+        "settings": {
+          "cutout": {
+            "threshold": null,
+            "seams": null,
+            "rim": true,
+            "source": "luma",
+            "alpha": 128
+          },
+          "solid": {
+            "threshold": null,
+            "source": "luma",
+            "alpha": 128
+          },
+          "lines": {
+            "threshold": null,
+            "thickness": 1,
+            "darks": 0,
+            "alpha": 128
+          },
+          "stencil": {
+            "cuts": null,
+            "outline": "keep",
+            "edges": 0,
+            "source": "luma",
+            "alpha": 128
+          },
+          "icon": {
+            "detail": 50,
+            "border": "auto",
+            "source": "luma",
+            "alpha": 128
+          },
+          "checker": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "bayer": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "matrix": 4,
+            "source": "luma",
+            "alpha": 128
+          },
+          "hatch": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "direction": "/",
+            "spacing": 3,
+            "source": "luma",
+            "alpha": 128
+          },
+          "atkinson": {
+            "threshold": null,
+            "shading": 100,
+            "diffusion": "atkinson",
+            "source": "luma",
+            "alpha": 128
+          },
+          "noise": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "silhouette": {
+            "alpha": 128
+          }
+        },
+        "theme": "light",
+        "family": "two-color",
+        "paletteId": "preset-edg32",
+        "alphaCut": 128,
+        "alphaMode": "cut",
+        "metric": "oklab",
+        "maxColors": 0,
+        "lastMaxColors": 16,
+        "cleanup": false,
+        "dither": "none",
+        "ditherStrength": 50
+      }
+    },
+    {
+      "name": "native-onebit-light-palettes",
+      "theme": "light",
+      "system": "light",
+      "scheme": "light only",
+      "meta": "only light",
+      "themeColor": [
+        "#f1f2f3",
+        "#f1f2f3"
+      ],
+      "width": 448,
+      "height": 819,
+      "dpr": 2.25,
+      "root": {
+        "bg": "#f1f2f3",
+        "a": "#c5cbd1",
+        "b": "#d2d6da",
+        "fg": "rgb(26, 42, 54)"
+      },
+      "stored": {
+        "first": "#222323",
+        "second": "#f0f6f0",
+        "none": 0,
+        "style": "cutout",
+        "settings": {
+          "cutout": {
+            "threshold": null,
+            "seams": null,
+            "rim": true,
+            "source": "luma",
+            "alpha": 128
+          },
+          "solid": {
+            "threshold": null,
+            "source": "luma",
+            "alpha": 128
+          },
+          "lines": {
+            "threshold": null,
+            "thickness": 1,
+            "darks": 0,
+            "alpha": 128
+          },
+          "stencil": {
+            "cuts": null,
+            "outline": "keep",
+            "edges": 0,
+            "source": "luma",
+            "alpha": 128
+          },
+          "icon": {
+            "detail": 50,
+            "border": "auto",
+            "source": "luma",
+            "alpha": 128
+          },
+          "checker": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "bayer": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "matrix": 4,
+            "source": "luma",
+            "alpha": 128
+          },
+          "hatch": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "direction": "/",
+            "spacing": 3,
+            "source": "luma",
+            "alpha": 128
+          },
+          "atkinson": {
+            "threshold": null,
+            "shading": 100,
+            "diffusion": "atkinson",
+            "source": "luma",
+            "alpha": 128
+          },
+          "noise": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "silhouette": {
+            "alpha": 128
+          }
+        },
+        "theme": "light",
+        "family": "two-color",
+        "paletteId": "preset-edg32",
+        "alphaCut": 128,
+        "alphaMode": "cut",
+        "metric": "oklab",
+        "maxColors": 0,
+        "lastMaxColors": 16,
+        "cleanup": false,
+        "dither": "none",
+        "ditherStrength": 50
+      }
+    },
+    {
+      "name": "native-onebit-light-styles",
+      "theme": "light",
+      "system": "light",
+      "scheme": "light only",
+      "meta": "only light",
+      "themeColor": [
+        "#f1f2f3",
+        "#f1f2f3"
+      ],
+      "width": 448,
+      "height": 819,
+      "dpr": 2.25,
+      "root": {
+        "bg": "#f1f2f3",
+        "a": "#c5cbd1",
+        "b": "#d2d6da",
+        "fg": "rgb(26, 42, 54)"
+      },
+      "stored": {
+        "first": "#222323",
+        "second": "#f0f6f0",
+        "none": 0,
+        "style": "cutout",
+        "settings": {
+          "cutout": {
+            "threshold": null,
+            "seams": null,
+            "rim": true,
+            "source": "luma",
+            "alpha": 128
+          },
+          "solid": {
+            "threshold": null,
+            "source": "luma",
+            "alpha": 128
+          },
+          "lines": {
+            "threshold": null,
+            "thickness": 1,
+            "darks": 0,
+            "alpha": 128
+          },
+          "stencil": {
+            "cuts": null,
+            "outline": "keep",
+            "edges": 0,
+            "source": "luma",
+            "alpha": 128
+          },
+          "icon": {
+            "detail": 50,
+            "border": "auto",
+            "source": "luma",
+            "alpha": 128
+          },
+          "checker": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "bayer": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "matrix": 4,
+            "source": "luma",
+            "alpha": 128
+          },
+          "hatch": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "direction": "/",
+            "spacing": 3,
+            "source": "luma",
+            "alpha": 128
+          },
+          "atkinson": {
+            "threshold": null,
+            "shading": 100,
+            "diffusion": "atkinson",
+            "source": "luma",
+            "alpha": 128
+          },
+          "noise": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "silhouette": {
+            "alpha": 128
+          }
+        },
+        "theme": "light",
+        "family": "two-color",
+        "paletteId": "preset-edg32",
+        "alphaCut": 128,
+        "alphaMode": "cut",
+        "metric": "oklab",
+        "maxColors": 0,
+        "lastMaxColors": 16,
+        "cleanup": false,
+        "dither": "none",
+        "ditherStrength": 50
+      }
+    },
+    {
+      "name": "native-onebit-dark",
+      "theme": "dark",
+      "system": "light",
+      "scheme": "dark only",
+      "meta": "only dark",
+      "themeColor": [
+        "#191c20",
+        "#191c20"
+      ],
+      "width": 448,
+      "height": 819,
+      "dpr": 2.25,
+      "root": {
+        "bg": "#191c20",
+        "a": "#272e35",
+        "b": "#323941",
+        "fg": "rgb(255, 255, 255)"
+      },
+      "stored": {
+        "first": "#222323",
+        "second": "#f0f6f0",
+        "none": 0,
+        "style": "cutout",
+        "settings": {
+          "cutout": {
+            "threshold": null,
+            "seams": null,
+            "rim": true,
+            "source": "luma",
+            "alpha": 128
+          },
+          "solid": {
+            "threshold": null,
+            "source": "luma",
+            "alpha": 128
+          },
+          "lines": {
+            "threshold": null,
+            "thickness": 1,
+            "darks": 0,
+            "alpha": 128
+          },
+          "stencil": {
+            "cuts": null,
+            "outline": "keep",
+            "edges": 0,
+            "source": "luma",
+            "alpha": 128
+          },
+          "icon": {
+            "detail": 50,
+            "border": "auto",
+            "source": "luma",
+            "alpha": 128
+          },
+          "checker": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "bayer": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "matrix": 4,
+            "source": "luma",
+            "alpha": 128
+          },
+          "hatch": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "direction": "/",
+            "spacing": 3,
+            "source": "luma",
+            "alpha": 128
+          },
+          "atkinson": {
+            "threshold": null,
+            "shading": 100,
+            "diffusion": "atkinson",
+            "source": "luma",
+            "alpha": 128
+          },
+          "noise": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "silhouette": {
+            "alpha": 128
+          }
+        },
+        "theme": "dark",
+        "family": "two-color",
+        "paletteId": "preset-edg32",
+        "alphaCut": 128,
+        "alphaMode": "cut",
+        "metric": "oklab",
+        "maxColors": 0,
+        "lastMaxColors": 16,
+        "cleanup": false,
+        "dither": "none",
+        "ditherStrength": 50
+      }
+    },
+    {
+      "name": "native-onebit-dark-palettes",
+      "theme": "dark",
+      "system": "light",
+      "scheme": "dark only",
+      "meta": "only dark",
+      "themeColor": [
+        "#191c20",
+        "#191c20"
+      ],
+      "width": 448,
+      "height": 819,
+      "dpr": 2.25,
+      "root": {
+        "bg": "#191c20",
+        "a": "#272e35",
+        "b": "#323941",
+        "fg": "rgb(255, 255, 255)"
+      },
+      "stored": {
+        "first": "#222323",
+        "second": "#f0f6f0",
+        "none": 0,
+        "style": "cutout",
+        "settings": {
+          "cutout": {
+            "threshold": null,
+            "seams": null,
+            "rim": true,
+            "source": "luma",
+            "alpha": 128
+          },
+          "solid": {
+            "threshold": null,
+            "source": "luma",
+            "alpha": 128
+          },
+          "lines": {
+            "threshold": null,
+            "thickness": 1,
+            "darks": 0,
+            "alpha": 128
+          },
+          "stencil": {
+            "cuts": null,
+            "outline": "keep",
+            "edges": 0,
+            "source": "luma",
+            "alpha": 128
+          },
+          "icon": {
+            "detail": 50,
+            "border": "auto",
+            "source": "luma",
+            "alpha": 128
+          },
+          "checker": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "bayer": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "matrix": 4,
+            "source": "luma",
+            "alpha": 128
+          },
+          "hatch": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "direction": "/",
+            "spacing": 3,
+            "source": "luma",
+            "alpha": 128
+          },
+          "atkinson": {
+            "threshold": null,
+            "shading": 100,
+            "diffusion": "atkinson",
+            "source": "luma",
+            "alpha": 128
+          },
+          "noise": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "silhouette": {
+            "alpha": 128
+          }
+        },
+        "theme": "dark",
+        "family": "two-color",
+        "paletteId": "preset-edg32",
+        "alphaCut": 128,
+        "alphaMode": "cut",
+        "metric": "oklab",
+        "maxColors": 0,
+        "lastMaxColors": 16,
+        "cleanup": false,
+        "dither": "none",
+        "ditherStrength": 50
+      }
+    },
+    {
+      "name": "native-onebit-dark-styles",
+      "theme": "dark",
+      "system": "light",
+      "scheme": "dark only",
+      "meta": "only dark",
+      "themeColor": [
+        "#191c20",
+        "#191c20"
+      ],
+      "width": 448,
+      "height": 819,
+      "dpr": 2.25,
+      "root": {
+        "bg": "#191c20",
+        "a": "#272e35",
+        "b": "#323941",
+        "fg": "rgb(255, 255, 255)"
+      },
+      "stored": {
+        "first": "#222323",
+        "second": "#f0f6f0",
+        "none": 0,
+        "style": "cutout",
+        "settings": {
+          "cutout": {
+            "threshold": null,
+            "seams": null,
+            "rim": true,
+            "source": "luma",
+            "alpha": 128
+          },
+          "solid": {
+            "threshold": null,
+            "source": "luma",
+            "alpha": 128
+          },
+          "lines": {
+            "threshold": null,
+            "thickness": 1,
+            "darks": 0,
+            "alpha": 128
+          },
+          "stencil": {
+            "cuts": null,
+            "outline": "keep",
+            "edges": 0,
+            "source": "luma",
+            "alpha": 128
+          },
+          "icon": {
+            "detail": 50,
+            "border": "auto",
+            "source": "luma",
+            "alpha": 128
+          },
+          "checker": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "bayer": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "matrix": 4,
+            "source": "luma",
+            "alpha": 128
+          },
+          "hatch": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "direction": "/",
+            "spacing": 3,
+            "source": "luma",
+            "alpha": 128
+          },
+          "atkinson": {
+            "threshold": null,
+            "shading": 100,
+            "diffusion": "atkinson",
+            "source": "luma",
+            "alpha": 128
+          },
+          "noise": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "silhouette": {
+            "alpha": 128
+          }
+        },
+        "theme": "dark",
+        "family": "two-color",
+        "paletteId": "preset-edg32",
+        "alphaCut": 128,
+        "alphaMode": "cut",
+        "metric": "oklab",
+        "maxColors": 0,
+        "lastMaxColors": 16,
+        "cleanup": false,
+        "dither": "none",
+        "ditherStrength": 50
+      }
+    }
+  ],
+  "checks": [],
+  "flags": {
+    "title": "Experiments",
+    "text": " Reset all Import Export Experiments 155.1.97.57 Warning: Experimental features ahead! By enabling these features, you could lose browser data or compromise your security or privacy. Enabled features apply to all users of this browser. If you are an enterprise admin you should not be using these flags in production. * Overridden by active variations or a command line. Interested in cool new Brave features? Try our beta channel. Interested in cool new Brave features? Try our nightly channel. No matching experiments No matching experiments Your changes will take effect the next time you relaunch Brave. Relaunch ",
+    "experiments": [
+      {
+        "id": "enable-force-dark",
+        "text": " Auto Dark Mode for Web Contents Automatically render all web contents using a dark theme. – Mac, Windows, Linux, ChromeOS, Android #enable-force-dark Default Enabled Disabled ",
+        "selects": [
+          {
+            "value": "Enabled",
+            "selected": "\n              Enabled\n            "
+          }
+        ]
+      },
+      {
+        "id": "darken-websites-checkbox-in-themes-setting",
+        "text": " Darken websites checkbox in themes setting Show a darken websites checkbox in themes settings when system default or dark is selected. The checkbox can toggle the auto-darkening web contents feature – Android #darken-websites-checkbox-in-themes-setting Default (Disabled) Enabled Disabled ",
+        "selects": [
+          {
+            "value": "Default (Disabled)",
+            "selected": "\n              Default (Disabled)\n            "
+          }
+        ]
+      }
+    ]
+  },
+  "restored": {
+    "rotation": "free",
+    "accel": "1",
+    "userRotation": "0",
+    "night": "Night mode: yes"
+  },
+  "finished": "2026-10-17T03:11:55.206Z"
+}

@@ -1,0 +1,441 @@
+{
+  "started": "2026-10-17T03:24:13.418Z",
+  "origin": "http://localhost:5343/",
+  "targetCommit": "db39123 (runtime-identical candidate on 5343)",
+  "original": {
+    "rotation": "free",
+    "accel": "1",
+    "userRotation": "0",
+    "night": "Night mode: yes"
+  },
+  "errors": [],
+  "scenes": [
+    {
+      "name": "fixed-light-none",
+      "theme": "light",
+      "system": "light",
+      "scheme": "light only",
+      "meta": "only light",
+      "themeColor": [
+        "#f1f2f3",
+        "#f1f2f3"
+      ],
+      "width": 448,
+      "height": 819,
+      "dpr": 2.25,
+      "root": {
+        "bg": "#f1f2f3",
+        "a": "#c5cbd1",
+        "b": "#d2d6da",
+        "fg": "rgb(26, 42, 54)"
+      },
+      "stored": {
+        "first": "#222323",
+        "second": "#f0f6f0",
+        "none": 2,
+        "style": "solid",
+        "settings": {
+          "cutout": {
+            "threshold": null,
+            "seams": null,
+            "rim": true,
+            "source": "luma",
+            "alpha": 128
+          },
+          "solid": {
+            "threshold": 127,
+            "source": "luma",
+            "alpha": 128
+          },
+          "lines": {
+            "threshold": null,
+            "thickness": 1,
+            "darks": 0,
+            "alpha": 128
+          },
+          "stencil": {
+            "cuts": null,
+            "outline": "keep",
+            "edges": 0,
+            "source": "luma",
+            "alpha": 128
+          },
+          "icon": {
+            "detail": 50,
+            "border": "auto",
+            "source": "luma",
+            "alpha": 128
+          },
+          "checker": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "bayer": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "matrix": 4,
+            "source": "luma",
+            "alpha": 128
+          },
+          "hatch": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "direction": "/",
+            "spacing": 3,
+            "source": "luma",
+            "alpha": 128
+          },
+          "atkinson": {
+            "threshold": null,
+            "shading": 100,
+            "diffusion": "atkinson",
+            "source": "luma",
+            "alpha": 128
+          },
+          "noise": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "silhouette": {
+            "alpha": 128
+          }
+        },
+        "theme": "light",
+        "family": "two-color",
+        "paletteId": "preset-edg32",
+        "alphaCut": 128,
+        "alphaMode": "cut",
+        "metric": "oklab",
+        "maxColors": 0,
+        "lastMaxColors": 16,
+        "cleanup": false,
+        "dither": "none",
+        "ditherStrength": 50
+      }
+    },
+    {
+      "name": "fixed-light-native-restore-swap",
+      "theme": "light",
+      "system": "light",
+      "scheme": "light only",
+      "meta": "only light",
+      "themeColor": [
+        "#f1f2f3",
+        "#f1f2f3"
+      ],
+      "width": 448,
+      "height": 819,
+      "dpr": 2.25,
+      "root": {
+        "bg": "#f1f2f3",
+        "a": "#c5cbd1",
+        "b": "#d2d6da",
+        "fg": "rgb(26, 42, 54)"
+      },
+      "stored": {
+        "first": "#0000ff",
+        "second": "#222323",
+        "none": 0,
+        "style": "solid",
+        "settings": {
+          "cutout": {
+            "threshold": null,
+            "seams": null,
+            "rim": true,
+            "source": "luma",
+            "alpha": 128
+          },
+          "solid": {
+            "threshold": 127,
+            "source": "luma",
+            "alpha": 128
+          },
+          "lines": {
+            "threshold": null,
+            "thickness": 1,
+            "darks": 0,
+            "alpha": 128
+          },
+          "stencil": {
+            "cuts": null,
+            "outline": "keep",
+            "edges": 0,
+            "source": "luma",
+            "alpha": 128
+          },
+          "icon": {
+            "detail": 50,
+            "border": "auto",
+            "source": "luma",
+            "alpha": 128
+          },
+          "checker": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "bayer": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "matrix": 4,
+            "source": "luma",
+            "alpha": 128
+          },
+          "hatch": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "direction": "/",
+            "spacing": 3,
+            "source": "luma",
+            "alpha": 128
+          },
+          "atkinson": {
+            "threshold": null,
+            "shading": 100,
+            "diffusion": "atkinson",
+            "source": "luma",
+            "alpha": 128
+          },
+          "noise": {
+            "threshold": null,
+            "shading": 100,
+            "scale": 1,
+            "source": "luma",
+            "alpha": 128
+          },
+          "silhouette": {
+            "alpha": 128
+          }
+        },
+        "theme": "light",
+        "family": "two-color",
+        "paletteId": "preset-edg32",
+        "alphaCut": 128,
+        "alphaMode": "cut",
+        "metric": "oklab",
+        "maxColors": 0,
+        "lastMaxColors": 16,
+        "cleanup": false,
+        "dither": "none",
+        "ditherStrength": 50
+      }
+    }
+  ],
+  "checks": [
+    {
+      "label": "fixed-light-Glow",
+      "preset": "Glow",
+      "first": "#222323",
+      "second": "#f0f6f0",
+      "solid": [
+        {
+          "expected": "#222323",
+          "actual": "#222323"
+        },
+        {
+          "expected": "#f0f6f0",
+          "actual": "#f0f6f0"
+        }
+      ]
+    },
+    {
+      "label": "fixed-light-Mono",
+      "preset": "Mono",
+      "first": "#000000",
+      "second": "#ffffff",
+      "solid": [
+        {
+          "expected": "#000000",
+          "actual": "#000000"
+        },
+        {
+          "expected": "#ffffff",
+          "actual": "#ffffff"
+        }
+      ]
+    },
+    {
+      "label": "fixed-light-Paper",
+      "preset": "Paper",
+      "first": "#382b26",
+      "second": "#b8c2b9",
+      "solid": [
+        {
+          "expected": "#382b26",
+          "actual": "#382b26"
+        },
+        {
+          "expected": "#b8c2b9",
+          "actual": "#b8c2b9"
+        }
+      ]
+    },
+    {
+      "label": "fixed-light-Torch",
+      "preset": "Torch",
+      "first": "#0b0a0c",
+      "second": "#f6dfa4",
+      "solid": [
+        {
+          "expected": "#0b0a0c",
+          "actual": "#0b0a0c"
+        },
+        {
+          "expected": "#f6dfa4",
+          "actual": "#f6dfa4"
+        }
+      ]
+    },
+    {
+      "label": "fixed-light-Rose",
+      "preset": "Rose",
+      "first": "#4a0d2b",
+      "second": "#ffd1dc",
+      "solid": [
+        {
+          "expected": "#4a0d2b",
+          "actual": "#4a0d2b"
+        },
+        {
+          "expected": "#ffd1dc",
+          "actual": "#ffd1dc"
+        }
+      ]
+    },
+    {
+      "label": "fixed-light-Game-Boy",
+      "preset": "Game Boy",
+      "first": "#0f380f",
+      "second": "#9bbc0f",
+      "solid": [
+        {
+          "expected": "#0f380f",
+          "actual": "#0f380f"
+        },
+        {
+          "expected": "#9bbc0f",
+          "actual": "#9bbc0f"
+        }
+      ]
+    },
+    {
+      "label": "fixed-light-Pocket",
+      "preset": "Pocket",
+      "first": "#1f1f1f",
+      "second": "#c4cfa1",
+      "solid": [
+        {
+          "expected": "#1f1f1f",
+          "actual": "#1f1f1f"
+        },
+        {
+          "expected": "#c4cfa1",
+          "actual": "#c4cfa1"
+        }
+      ]
+    },
+    {
+      "label": "fixed-light-Nokia",
+      "preset": "Nokia",
+      "first": "#43523d",
+      "second": "#c7f0d8",
+      "solid": [
+        {
+          "expected": "#43523d",
+          "actual": "#43523d"
+        },
+        {
+          "expected": "#c7f0d8",
+          "actual": "#c7f0d8"
+        }
+      ]
+    },
+    {
+      "label": "fixed-light-Playdate",
+      "preset": "Playdate",
+      "first": "#322f29",
+      "second": "#d7d4cc",
+      "solid": [
+        {
+          "expected": "#322f29",
+          "actual": "#322f29"
+        },
+        {
+          "expected": "#d7d4cc",
+          "actual": "#d7d4cc"
+        }
+      ]
+    },
+    {
+      "label": "fixed-light-Phosphor",
+      "preset": "Phosphor",
+      "first": "#25342f",
+      "second": "#01eb5f",
+      "solid": [
+        {
+          "expected": "#25342f",
+          "actual": "#25342f"
+        },
+        {
+          "expected": "#01eb5f",
+          "actual": "#01eb5f"
+        }
+      ]
+    },
+    {
+      "label": "fixed-light-Amber",
+      "preset": "Amber",
+      "first": "#3f291e",
+      "second": "#fdca55",
+      "solid": [
+        {
+          "expected": "#3f291e",
+          "actual": "#3f291e"
+        },
+        {
+          "expected": "#fdca55",
+          "actual": "#fdca55"
+        }
+      ]
+    },
+    {
+      "label": "fixed-light-Commodore",
+      "preset": "Commodore",
+      "first": "#40318e",
+      "second": "#88d7de",
+      "solid": [
+        {
+          "expected": "#40318e",
+          "actual": "#40318e"
+        },
+        {
+          "expected": "#88d7de",
+          "actual": "#88d7de"
+        }
+      ]
+    },
+    {
+      "label": "light native picker restores None, blue input value and Swap",
+      "pass": true
+    }
+  ],
+  "restored": {
+    "rotation": "free",
+    "accel": "1",
+    "userRotation": "0",
+    "night": "Night mode: yes"
+  },
+  "finished": "2026-10-17T03:24:47.384Z"
+}

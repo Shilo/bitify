@@ -1,0 +1,13 @@
+{
+  "scope": "Mocked harness-installation check; no app or device timing claim",
+  "prior": {
+    "rafLoops": 2,
+    "observers": 2,
+    "writesPerNativePaint": 2
+  },
+  "fixed": {
+    "rafLoops": 1,
+    "observers": 1,
+    "writesPerNativePaint": 1
+  }
+}

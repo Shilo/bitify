@@ -1,0 +1,3 @@
+# Native compositor screenshots and actual output files are acceptance evidence.
+!*.png
+!**/*.png
