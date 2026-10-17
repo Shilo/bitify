@@ -1,0 +1,23 @@
+Recorded tool stdout extract, first regression phase, October 16, 2026.
+Command: BASE_REF=d91d9d10a0ac4494c54340ac688243368b8b28f4 node bench/palette-qa.mjs dist
+
+Legacy Glow: all11 styles passed.
+Legacy Mono: all11 styles passed.
+Legacy Paper: all11 styles passed.
+Legacy Torch: all11 styles passed.
+Legacy Rose: all11 styles passed.
+Legacy Game Boy: all11 styles passed.
+Legacy Pocket: all11 styles passed.
+Legacy Nokia: all11 styles passed.
+Legacy Playdate: all11 styles passed.
+Legacy Phosphor: all11 styles passed.
+Legacy Amber: all11 styles passed.
+Legacy Commodore: all11 styles passed.
+Legacy matrix: 132 independently decoded exports passed.
+
+The next assertion stopped this run: Expected all eleven published full presets,
+12 !== 11. The test harness had a stale preset count, not a pixel mismatch.
+After updating count/order expectations, the resumed SKIP_LEGACY_MATRIX=1 run
+passed all twelve full targets and its additional checks. Its original JSON is
+core-regression-resumed-results.json; an old human-readable 'Eleven' label remains
+in that receipt, while the full/rgb result arrays correctly contain twelve.

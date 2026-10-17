@@ -1,0 +1,419 @@
+{
+  "date": "2026-10-17T01:29:36.618Z",
+  "tag": "cfusabilitymvbpy7ah",
+  "device": "USB Pixel 8 Pro / Brave155",
+  "serial": "37211FDJG00267",
+  "distSha": "7544353bafa90be9ea96edbcaaf4d68e62f95b7b8eb520c91eba792e0b918b87",
+  "notes": [
+    "Physical Android renderer with per-tab CDP viewport/orientation overrides; OS rotation preferences unchanged.",
+    "Native downloads decoded with independent Sharp; test-only origin storage restored.",
+    "Landscape DOM geometry and trusted touch were checked, but CDP virtual-landscape screenshots crop/repeat the physical portrait compositor surface. They do not establish visual landscape or actual OS rotation acceptance. Bounded probe: android/landscape-probe.json; desktop landscape captures remain valid."
+  ],
+  "checks": [
+    {
+      "name": "compact portrait and landscape keep all controls accessible with44px targets",
+      "pass": true,
+      "states": [
+        {
+          "w": 448,
+          "h": 819,
+          "name": "Max colors",
+          "compact": true,
+          "height": 129.7777862548828,
+          "rows": 1,
+          "overflow": false,
+          "targets": true
+        },
+        {
+          "w": 448,
+          "h": 819,
+          "name": "Matching",
+          "compact": true,
+          "height": 129.7777862548828,
+          "rows": 1,
+          "overflow": false,
+          "targets": true
+        },
+        {
+          "w": 448,
+          "h": 819,
+          "name": "Cleanup",
+          "compact": true,
+          "height": 129.7777862548828,
+          "rows": 1,
+          "overflow": false,
+          "targets": true
+        },
+        {
+          "w": 448,
+          "h": 819,
+          "name": "Dithering",
+          "compact": true,
+          "height": 129.7777862548828,
+          "rows": 1,
+          "overflow": false,
+          "targets": true
+        },
+        {
+          "w": 448,
+          "h": 819,
+          "name": "Opacity",
+          "compact": true,
+          "height": 129.7777862548828,
+          "rows": 1,
+          "overflow": false,
+          "targets": true
+        },
+        {
+          "w": 448,
+          "h": 819,
+          "name": "Opacity cut",
+          "compact": true,
+          "height": 129.7777862548828,
+          "rows": 1,
+          "overflow": false,
+          "targets": true
+        },
+        {
+          "w": 947,
+          "h": 364,
+          "name": "Max colors",
+          "compact": true,
+          "height": 75.77777862548828,
+          "rows": 1,
+          "overflow": false,
+          "targets": true
+        },
+        {
+          "w": 947,
+          "h": 364,
+          "name": "Matching",
+          "compact": true,
+          "height": 75.77777862548828,
+          "rows": 1,
+          "overflow": false,
+          "targets": true
+        },
+        {
+          "w": 947,
+          "h": 364,
+          "name": "Cleanup",
+          "compact": true,
+          "height": 75.77777862548828,
+          "rows": 1,
+          "overflow": false,
+          "targets": true
+        },
+        {
+          "w": 947,
+          "h": 364,
+          "name": "Dithering",
+          "compact": true,
+          "height": 75.77777862548828,
+          "rows": 1,
+          "overflow": false,
+          "targets": true
+        },
+        {
+          "w": 947,
+          "h": 364,
+          "name": "Opacity",
+          "compact": true,
+          "height": 75.77777862548828,
+          "rows": 1,
+          "overflow": false,
+          "targets": true
+        },
+        {
+          "w": 947,
+          "h": 364,
+          "name": "Opacity cut",
+          "compact": true,
+          "height": 75.77777862548828,
+          "rows": 1,
+          "overflow": false,
+          "targets": true
+        },
+        {
+          "w": 390,
+          "h": 844,
+          "name": "Max colors",
+          "compact": true,
+          "height": 129.7777862548828,
+          "rows": 1,
+          "overflow": false,
+          "targets": true
+        },
+        {
+          "w": 390,
+          "h": 844,
+          "name": "Matching",
+          "compact": true,
+          "height": 129.7777862548828,
+          "rows": 1,
+          "overflow": false,
+          "targets": true
+        },
+        {
+          "w": 390,
+          "h": 844,
+          "name": "Cleanup",
+          "compact": true,
+          "height": 129.7777862548828,
+          "rows": 1,
+          "overflow": false,
+          "targets": true
+        },
+        {
+          "w": 390,
+          "h": 844,
+          "name": "Dithering",
+          "compact": true,
+          "height": 129.7777862548828,
+          "rows": 1,
+          "overflow": false,
+          "targets": true
+        },
+        {
+          "w": 390,
+          "h": 844,
+          "name": "Opacity",
+          "compact": true,
+          "height": 129.7777862548828,
+          "rows": 1,
+          "overflow": false,
+          "targets": true
+        },
+        {
+          "w": 390,
+          "h": 844,
+          "name": "Opacity cut",
+          "compact": true,
+          "height": 129.7777862548828,
+          "rows": 1,
+          "overflow": false,
+          "targets": true
+        },
+        {
+          "w": 844,
+          "h": 390,
+          "name": "Max colors",
+          "compact": true,
+          "height": 75.77777862548828,
+          "rows": 1,
+          "overflow": false,
+          "targets": true
+        },
+        {
+          "w": 844,
+          "h": 390,
+          "name": "Matching",
+          "compact": true,
+          "height": 75.77777862548828,
+          "rows": 1,
+          "overflow": false,
+          "targets": true
+        },
+        {
+          "w": 844,
+          "h": 390,
+          "name": "Cleanup",
+          "compact": true,
+          "height": 75.77777862548828,
+          "rows": 1,
+          "overflow": false,
+          "targets": true
+        },
+        {
+          "w": 844,
+          "h": 390,
+          "name": "Dithering",
+          "compact": true,
+          "height": 75.77777862548828,
+          "rows": 1,
+          "overflow": false,
+          "targets": true
+        },
+        {
+          "w": 844,
+          "h": 390,
+          "name": "Opacity",
+          "compact": true,
+          "height": 75.77777862548828,
+          "rows": 1,
+          "overflow": false,
+          "targets": true
+        },
+        {
+          "w": 844,
+          "h": 390,
+          "name": "Opacity cut",
+          "compact": true,
+          "height": 75.77777862548828,
+          "rows": 1,
+          "overflow": false,
+          "targets": true
+        }
+      ]
+    },
+    {
+      "name": "native touch range commits, conditional strength and Keep/Cut work, Reset focuses safe chip",
+      "pass": true,
+      "nativeTouchCap": 6,
+      "canceledStrength": 50,
+      "conditionalResetFocus": "Max colors: All"
+    },
+    {
+      "name": "single-action phone reuse equals native PNG Save and opens unsaved draft",
+      "pass": true,
+      "count": 13,
+      "bytes": 260,
+      "sha": "88efe15f29f5f6517136767a9e9654cdd7f514511e9c09fd34470cf3efbc9bc6"
+    },
+    {
+      "name": "whole-animation reuse equals native GIF Save union",
+      "pass": true,
+      "frames": 4,
+      "count": 10,
+      "bytes": 1641,
+      "sha": "58aef13838ec1ff997f2ddee590260fdf405367d289cbe8753bc634513fa6a22"
+    },
+    {
+      "name": "touch selection dragged outside keeps palette draft; actual backdrop tap closes",
+      "pass": true,
+      "selectionPreserved": true,
+      "backdropDismissed": true
+    },
+    {
+      "name": "internal URL drag does not activate artwork drop overlay",
+      "pass": true,
+      "overlay": false,
+      "syntheticPayload": true
+    },
+    {
+      "name": "large sampled wall starts no full-source usage import; opening Preview does",
+      "pass": true,
+      "wallUsageImports": 0,
+      "previewUsageImports": 1
+    }
+  ],
+  "performance": [
+    {
+      "version": "before",
+      "trial": 0,
+      "wallImages": 12,
+      "import": {
+        "duration": 1086,
+        "longtasks": 0,
+        "maxTask": 0,
+        "rafMax": 16.800000000000182,
+        "rafP95": 16.700000000000045
+      },
+      "control": {
+        "duration": 1089.699999988079,
+        "longtasks": 0,
+        "maxTask": 0,
+        "rafMax": 25.000000000000227,
+        "rafP95": 16.799999999999727
+      }
+    },
+    {
+      "version": "before",
+      "trial": 1,
+      "wallImages": 12,
+      "import": {
+        "duration": 1058.199999988079,
+        "longtasks": 0,
+        "maxTask": 0,
+        "rafMax": 16.800000000000182,
+        "rafP95": 16.799999999999955
+      },
+      "control": {
+        "duration": 1085.6000000238419,
+        "longtasks": 0,
+        "maxTask": 0,
+        "rafMax": 25.200000000000045,
+        "rafP95": 16.799999999999727
+      }
+    },
+    {
+      "version": "before",
+      "trial": 2,
+      "wallImages": 12,
+      "import": {
+        "duration": 1083.0999999642372,
+        "longtasks": 0,
+        "maxTask": 0,
+        "rafMax": 16.800000000000182,
+        "rafP95": 16.799999999999955
+      },
+      "control": {
+        "duration": 1078.800000011921,
+        "longtasks": 0,
+        "maxTask": 0,
+        "rafMax": 25.09999999999991,
+        "rafP95": 16.799999999999727
+      }
+    },
+    {
+      "version": "after",
+      "trial": 0,
+      "wallImages": 12,
+      "import": {
+        "duration": 1086.199999988079,
+        "longtasks": 0,
+        "maxTask": 0,
+        "rafMax": 16.800000000000182,
+        "rafP95": 16.799999999999955
+      },
+      "control": {
+        "duration": 1085.5,
+        "longtasks": 0,
+        "maxTask": 0,
+        "rafMax": 16.800000000000182,
+        "rafP95": 16.799999999999727
+      }
+    },
+    {
+      "version": "after",
+      "trial": 1,
+      "wallImages": 12,
+      "import": {
+        "duration": 1085.6000000238419,
+        "longtasks": 0,
+        "maxTask": 0,
+        "rafMax": 16.799999999999955,
+        "rafP95": 16.799999999999955
+      },
+      "control": {
+        "duration": 1044.5,
+        "longtasks": 0,
+        "maxTask": 0,
+        "rafMax": 16.800000000000182,
+        "rafP95": 16.700000000000273
+      }
+    },
+    {
+      "version": "after",
+      "trial": 2,
+      "wallImages": 12,
+      "import": {
+        "duration": 1110.5,
+        "longtasks": 0,
+        "maxTask": 0,
+        "rafMax": 16.800000000000182,
+        "rafP95": 16.799999999999955
+      },
+      "control": {
+        "duration": 1060.5999999642372,
+        "longtasks": 0,
+        "maxTask": 0,
+        "rafMax": 16.700000000000273,
+        "rafP95": 16.700000000000273
+      }
+    }
+  ],
+  "errors": [],
+  "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+  "pass": true
+}

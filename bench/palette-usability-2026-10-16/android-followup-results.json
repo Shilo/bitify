@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-17T01:31:35.330Z",
+  "tag": "cfusabilitymvbq0qw1",
+  "device": "USB Pixel 8 Pro / Brave155",
+  "serial": "37211FDJG00267",
+  "distSha": "7544353bafa90be9ea96edbcaaf4d68e62f95b7b8eb520c91eba792e0b918b87",
+  "notes": [
+    "Physical Android renderer with per-tab CDP viewport/orientation overrides; OS rotation preferences unchanged.",
+    "Native downloads decoded with independent Sharp; test-only origin storage restored.",
+    "Landscape DOM geometry and trusted touch were checked, but CDP virtual-landscape screenshots crop/repeat the physical portrait compositor surface. They do not establish visual landscape or actual OS rotation acceptance. Bounded probe: android/landscape-probe.json; desktop landscape captures remain valid."
+  ],
+  "checks": [
+    {
+      "name": "new mulfok32 preset native Save uses only canonical target colors",
+      "pass": true,
+      "used": 20,
+      "canonicalMembership": true,
+      "bytes": 286,
+      "sha": "f4751215ce0f8c7ad1ba48589576d70e2c72ad647e377d5fff3c487a195d3b13"
+    },
+    {
+      "name": "live scheme-less Lospec link imports with concise hint and linked palette name only",
+      "pass": true,
+      "colors": 32,
+      "sourceLabel": "mulfok32",
+      "schemeLess": true,
+      "livePublicRequest": true
+    }
+  ],
+  "performance": [],
+  "errors": [],
+  "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+  "pass": true
+}

@@ -242,8 +242,8 @@ try {
   results.extra.push('Legacy custom colors/None/Swap/settings memory/Original/copy/single-save');
 
   await openPalette(); await page.getByRole('group',{name:'Color system',exact:true}).getByRole('button',{name:'Palette',exact:true}).click();
-  assert.equal(FULL_PRESETS.length,11,'Expected all eleven published full presets');
-  assert.deepEqual(FULL_PRESETS.map(palette=>palette.colors.length),[64,32,16,16,8,8,4,4,2,2,2],'Preset order/counts changed');
+  assert.equal(FULL_PRESETS.length,12,'Expected all twelve published full presets');
+  assert.deepEqual(FULL_PRESETS.map(palette=>palette.colors.length),[64,32,32,16,16,8,8,4,4,2,2,2],'Preset order/counts changed');
   assert.equal(DEFAULT_FULL_PALETTE.name,'ENDESGA 32','Unexpected default full palette');
   assert.equal((await stored()).paletteId,DEFAULT_FULL_PALETTE.id,'First family switch lost the ENDESGA 32 default');
   assert.deepEqual(await page.getByRole('group',{name:'Full palettes',exact:true}).locator('button').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('aria-label'))),['Auto', ...FULL_PRESETS.map(palette=>palette.name)],'Full preset rail order differs from published order');
@@ -284,7 +284,7 @@ try {
   await page.getByRole('group',{name:'Color system',exact:true}).getByRole('button',{name:'Palette',exact:true}).click();await closePanel();assert.equal((await stored()).metric,'rgb');
   await page.getByRole('button',{name:'Palette settings',exact:true}).click();await page.getByRole('button',{name:'Reset palette settings',exact:true}).click();
   assert.equal((await stored()).metric,'oklab');assert.equal((await stored()).alphaCut,128);await page.getByRole('button',{name:'Palette settings',exact:true}).click();
-  results.extra.push('Eleven full presets RGB preview/PNG/Copy match independent reference; ordered copy swatches/HEX backups preserve every entry; family retains metric and Reset restores Oklab/cut128');
+  results.extra.push('Twelve full presets RGB preview/PNG/Copy match independent reference; ordered copy swatches/HEX backups preserve every entry; family retains metric and Reset restores Oklab/cut128');
 
   // Minimum two on the two-color preset uses its complete unchanged palette.
   const twoPixels = nearestReference(fixture, FULL_PRESETS.at(-1).colors, 128, 'rgb');

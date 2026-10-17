@@ -1,0 +1,148 @@
+{
+  "phase": "after",
+  "browser": "155.0.4283.60",
+  "chromiumSandbox": true,
+  "checks": [
+    {
+      "name": "name select drag outside keeps draft open",
+      "result": {
+        "open": true,
+        "name": "Draft not lost"
+      }
+    },
+    {
+      "name": "outside press then release inside keeps open",
+      "result": {
+        "open": true
+      }
+    },
+    {
+      "name": "actual backdrop click closes",
+      "result": {
+        "open": false
+      }
+    },
+    {
+      "name": "Escape closes",
+      "result": {
+        "open": false
+      }
+    },
+    {
+      "name": "internal text drag does not show artwork drop overlay",
+      "result": {
+        "overlay": false
+      }
+    },
+    {
+      "name": "external file drop imports after internal drag ends",
+      "result": {
+        "imported": true
+      }
+    },
+    {
+      "name": "native image export drag remains enabled and does not reimport",
+      "result": {
+        "native": [
+          {
+            "trusted": true,
+            "prevented": false,
+            "types": [
+              "downloadurl",
+              "application/x-colorfetti-export",
+              "Files"
+            ],
+            "files": 1
+          }
+        ],
+        "overlay": 0,
+        "attempts": 2
+      }
+    },
+    {
+      "name": "touch inside-to-backdrop selection keeps draft open",
+      "result": {
+        "open": true
+      }
+    },
+    {
+      "name": "touch backdrop-to-content keeps draft open",
+      "result": {
+        "open": true
+      }
+    },
+    {
+      "name": "touch cancellation keeps draft then genuine backdrop tap closes",
+      "result": {
+        "afterCancel": true,
+        "afterTap": false,
+        "events": [
+          {
+            "type": "pointerdown",
+            "id": 7,
+            "primary": true,
+            "button": 0,
+            "target": "DIALOG",
+            "classes": "glass-modal-overlay is-active palette-import-modal",
+            "hit": "glass-modal-overlay is-active palette-import-modal",
+            "x": 4,
+            "y": 4
+          },
+          {
+            "type": "pointercancel",
+            "id": 7,
+            "primary": true,
+            "button": -1,
+            "target": "DIALOG",
+            "classes": "glass-modal-overlay is-active palette-import-modal",
+            "hit": "glass-modal-overlay is-active palette-import-modal",
+            "x": 4,
+            "y": 4
+          },
+          {
+            "type": "pointerdown",
+            "id": 8,
+            "primary": true,
+            "button": 0,
+            "target": "DIALOG",
+            "classes": "glass-modal-overlay is-active palette-import-modal",
+            "hit": "glass-modal-overlay is-active palette-import-modal",
+            "x": 4,
+            "y": 4
+          },
+          {
+            "type": "pointerup",
+            "id": 8,
+            "primary": true,
+            "button": 0,
+            "target": "DIALOG",
+            "classes": "glass-modal-overlay is-active palette-import-modal",
+            "hit": "glass-modal-overlay is-active palette-import-modal",
+            "x": 4,
+            "y": 4
+          },
+          {
+            "type": "click",
+            "id": 8,
+            "primary": false,
+            "button": 0,
+            "target": "DIALOG",
+            "classes": "glass-modal-overlay is-active palette-import-modal",
+            "hit": "glass-modal-overlay is-active palette-import-modal",
+            "x": 4,
+            "y": 4
+          }
+        ]
+      }
+    },
+    {
+      "name": "palette source link preserves published name after editing draft",
+      "result": {
+        "text": "SLSO8",
+        "href": "https://lospec.com/palette-list/slso8",
+        "hint": "Paste HEX colors or a Lospec palette link.",
+        "overflow": false
+      }
+    }
+  ]
+}

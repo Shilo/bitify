@@ -1,0 +1,78 @@
+{
+  "metrics": {
+    "layoutViewport": {
+      "pageX": 0,
+      "pageY": 0,
+      "clientWidth": 2131,
+      "clientHeight": 819
+    },
+    "visualViewport": {
+      "offsetX": 0,
+      "offsetY": 0,
+      "pageX": 0,
+      "pageY": 0,
+      "clientWidth": 2131,
+      "clientHeight": 819,
+      "scale": 1,
+      "zoom": 1
+    },
+    "contentSize": {
+      "x": 0,
+      "y": 0,
+      "width": 2131,
+      "height": 819
+    },
+    "cssLayoutViewport": {
+      "pageX": 0,
+      "pageY": 0,
+      "clientWidth": 947,
+      "clientHeight": 364
+    },
+    "cssVisualViewport": {
+      "offsetX": 0,
+      "offsetY": 0,
+      "pageX": 0,
+      "pageY": 0,
+      "clientWidth": 947.1111450195312,
+      "clientHeight": 364,
+      "scale": 1,
+      "zoom": 1
+    },
+    "cssContentSize": {
+      "x": 0,
+      "y": 0,
+      "width": 947,
+      "height": 364
+    }
+  },
+  "state": {
+    "width": 947,
+    "height": 364,
+    "outer": [
+      947,
+      364
+    ],
+    "visual": {
+      "width": 947.111083984375,
+      "height": 364,
+      "scale": 1,
+      "x": 0,
+      "y": 0
+    },
+    "screen": [
+      947,
+      364,
+      90
+    ],
+    "scroll": [
+      0,
+      0
+    ],
+    "panel": {
+      "x": 108.55555725097656,
+      "y": 214.22222900390625,
+      "w": 730,
+      "h": 75.77777862548828
+    }
+  }
+}

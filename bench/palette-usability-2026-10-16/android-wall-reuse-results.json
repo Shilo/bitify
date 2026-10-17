@@ -1,0 +1,85 @@
+{
+  "date": "2026-10-17T01:40:14.921Z",
+  "origin": "http://localhost:5335/",
+  "browser": "155.0.8059.80",
+  "physicalDevice": "USB Pixel 8 Pro",
+  "checks": [
+    {
+      "name": "phone wall sheet places Reuse after Copy and before existing Preview; one tap opens exact unsaved colors",
+      "pass": true,
+      "order": [
+        "Save",
+        "Copy",
+        "Reuse colors",
+        "Preview",
+        "Remove",
+        "Cancel"
+      ],
+      "count": 13,
+      "exactColors": true,
+      "autoSaved": false
+    },
+    {
+      "name": "Preview retains Save Copy Compare only, with no Reuse or Count action",
+      "pass": true,
+      "actions": [
+        "Save image",
+        "Copy image",
+        "Show original image"
+      ],
+      "tileMetadataCount": 13,
+      "tileMetadataVisible": false
+    },
+    {
+      "name": "portrait and landscape compact DOM retains one fitting control and exact wall metadata",
+      "pass": true,
+      "states": [
+        {
+          "width": 448,
+          "height": 819,
+          "panelHeight": 129.7777862548828,
+          "compact": true,
+          "controlRows": 1,
+          "overflow": false,
+          "count": "24×24· 13 colors"
+        },
+        {
+          "width": 947,
+          "height": 364,
+          "panelHeight": 75.77777862548828,
+          "compact": true,
+          "controlRows": 1,
+          "overflow": false,
+          "count": "24×24· 13 colors"
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "panelHeight": 129.7777862548828,
+          "compact": true,
+          "controlRows": 1,
+          "overflow": false,
+          "count": "24×24· 13 colors"
+        },
+        {
+          "width": 844,
+          "height": 390,
+          "panelHeight": 75.77777862548828,
+          "compact": true,
+          "controlRows": 1,
+          "overflow": false,
+          "count": "24×24· 13 colors"
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "notes": [
+    "Portrait uses the real Android renderer. Landscape uses per-tab CDP metrics and trusted touch; OS orientation preferences stay unchanged.",
+    "Landscape DOM geometry is acceptance evidence; Android virtual-landscape screenshots crop/repeat and are not visual OS-rotation evidence.",
+    "Expected colors come from an independently decoded retained native phone Save of the same fixture/settings.",
+    "Visual review found Preview tile metadata is hidden by existing .viewer-tile .cap display:none; the13-color DOM text is not a visible Preview counter. Wall count is visible."
+  ],
+  "indexSha256": "329d22dff9e720980049d9d736805f727308bd7bbe87523e856ca38478273d5f",
+  "pass": true
+}
