@@ -132,6 +132,20 @@ records four-source comparisons and adverse outcomes. It supersedes older nine-p
 
 ## Full palette ordered dithering — October 14, 2026
 
+October 16 responsive layout: Recolor follows the 1-bit setting-chip pattern at
+widths up to 520px, or landscape heights up to 520px. A horizontally scrollable
+name/value chip row exposes every eligible setting and Reset; only the selected
+control is rendered. Portrait uses two rows, short wide landscape one row; wide
+desktop retains all rows. Controls and chips retain 44px-high targets and full
+accessible names. Conditional strength, opacity and cutoff obey existing rules;
+if the selected setting disappears, Max colors becomes selected. Reset returns
+keyboard focus after DOM updates to the remaining selected chip.
+
+Changing selected setting, compact breakpoint, palette, family or panel cancels
+uncommitted limit/strength drafts. Detached native inputs cannot publish old
+events, including after a conditional control disappears. This changes layout,
+not algorithms, stored defaults or export behavior.
+
 Full palettes offer Dithering Off, 2×2, 4×4 and 8×8. Off is the fresh and Reset
 default, preserving previous nearest output exactly. The optional Dither strength control
 runs from 0 to 100%, defaults to 50%, commits after a 200 ms pause or release/change,

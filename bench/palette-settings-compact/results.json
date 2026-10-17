@@ -1,0 +1,512 @@
+{
+  "browser": "149.0.7827.55",
+  "sandbox": true,
+  "algorithmChanges": false,
+  "layouts": [
+    {
+      "width": 280,
+      "height": 653,
+      "panelHeight": 130,
+      "panelTop": 317,
+      "panelBottom": 447,
+      "compact": true,
+      "overflow": [],
+      "documentOverflow": false,
+      "oneRow": false,
+      "rows": 1,
+      "targets": [
+        {
+          "name": "Max colors: 8",
+          "h": 44,
+          "w": 78.3125
+        },
+        {
+          "name": "Matching: Oklab",
+          "h": 44,
+          "w": 68.703125
+        },
+        {
+          "name": "Cleanup: Off",
+          "h": 44,
+          "w": 64.234375
+        },
+        {
+          "name": "Dithering: 4×4",
+          "h": 44,
+          "w": 68.390625
+        },
+        {
+          "name": "Dither strength: 50%",
+          "h": 44,
+          "w": 98.25
+        },
+        {
+          "name": "Opacity: Cut",
+          "h": 44,
+          "w": 64
+        },
+        {
+          "name": "Opacity cut: 128",
+          "h": 44,
+          "w": 80.734375
+        },
+        {
+          "name": "Max colors",
+          "h": 44,
+          "w": 132
+        },
+        {
+          "name": "Use all palette colors",
+          "h": 44,
+          "w": 44
+        }
+      ]
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "panelHeight": 130,
+      "panelTop": 296,
+      "panelBottom": 426,
+      "compact": true,
+      "overflow": [],
+      "documentOverflow": false,
+      "oneRow": false,
+      "rows": 1,
+      "targets": [
+        {
+          "name": "Max colors: 8",
+          "h": 44,
+          "w": 78.3125
+        },
+        {
+          "name": "Matching: Oklab",
+          "h": 44,
+          "w": 68.703125
+        },
+        {
+          "name": "Cleanup: Off",
+          "h": 44,
+          "w": 64.234375
+        },
+        {
+          "name": "Dithering: 4×4",
+          "h": 44,
+          "w": 68.390625
+        },
+        {
+          "name": "Dither strength: 50%",
+          "h": 44,
+          "w": 98.25
+        },
+        {
+          "name": "Opacity: Cut",
+          "h": 44,
+          "w": 64
+        },
+        {
+          "name": "Opacity cut: 128",
+          "h": 44,
+          "w": 80.734375
+        },
+        {
+          "name": "Max colors",
+          "h": 44,
+          "w": 172
+        },
+        {
+          "name": "Use all palette colors",
+          "h": 44,
+          "w": 44
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "panelHeight": 130,
+      "panelTop": 572,
+      "panelBottom": 702,
+      "compact": true,
+      "overflow": [],
+      "documentOverflow": false,
+      "oneRow": false,
+      "rows": 1,
+      "targets": [
+        {
+          "name": "Max colors: 8",
+          "h": 44,
+          "w": 78.3125
+        },
+        {
+          "name": "Matching: Oklab",
+          "h": 44,
+          "w": 68.703125
+        },
+        {
+          "name": "Cleanup: Off",
+          "h": 44,
+          "w": 64.234375
+        },
+        {
+          "name": "Dithering: 4×4",
+          "h": 44,
+          "w": 68.390625
+        },
+        {
+          "name": "Dither strength: 50%",
+          "h": 44,
+          "w": 98.25
+        },
+        {
+          "name": "Opacity: Cut",
+          "h": 44,
+          "w": 64
+        },
+        {
+          "name": "Opacity cut: 128",
+          "h": 44,
+          "w": 80.734375
+        },
+        {
+          "name": "Max colors",
+          "h": 44,
+          "w": 242
+        },
+        {
+          "name": "Use all palette colors",
+          "h": 44,
+          "w": 44
+        }
+      ]
+    },
+    {
+      "width": 520,
+      "height": 800,
+      "panelHeight": 130,
+      "panelTop": 592,
+      "panelBottom": 722,
+      "compact": true,
+      "overflow": [],
+      "documentOverflow": false,
+      "oneRow": false,
+      "rows": 1,
+      "targets": [
+        {
+          "name": "Max colors: 8",
+          "h": 44,
+          "w": 78.3125
+        },
+        {
+          "name": "Matching: Oklab",
+          "h": 44,
+          "w": 68.703125
+        },
+        {
+          "name": "Cleanup: Off",
+          "h": 44,
+          "w": 64.234375
+        },
+        {
+          "name": "Dithering: 4×4",
+          "h": 44,
+          "w": 68.390625
+        },
+        {
+          "name": "Dither strength: 50%",
+          "h": 44,
+          "w": 98.25
+        },
+        {
+          "name": "Opacity: Cut",
+          "h": 44,
+          "w": 64
+        },
+        {
+          "name": "Opacity cut: 128",
+          "h": 44,
+          "w": 80.734375
+        },
+        {
+          "name": "Max colors",
+          "h": 44,
+          "w": 372
+        },
+        {
+          "name": "Use all palette colors",
+          "h": 44,
+          "w": 44
+        }
+      ]
+    },
+    {
+      "width": 521,
+      "height": 800,
+      "panelHeight": 460,
+      "panelTop": 262,
+      "panelBottom": 722,
+      "compact": false,
+      "overflow": [],
+      "documentOverflow": false,
+      "oneRow": false,
+      "rows": 7,
+      "targets": []
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "panelHeight": 76,
+      "panelTop": 240,
+      "panelBottom": 316,
+      "compact": true,
+      "overflow": [],
+      "documentOverflow": false,
+      "oneRow": true,
+      "rows": 1,
+      "targets": [
+        {
+          "name": "Max colors: 8",
+          "h": 44,
+          "w": 78.3125
+        },
+        {
+          "name": "Matching: Oklab",
+          "h": 44,
+          "w": 68.703125
+        },
+        {
+          "name": "Cleanup: Off",
+          "h": 44,
+          "w": 64.234375
+        },
+        {
+          "name": "Dithering: 4×4",
+          "h": 44,
+          "w": 68.390625
+        },
+        {
+          "name": "Dither strength: 50%",
+          "h": 44,
+          "w": 98.25
+        },
+        {
+          "name": "Opacity: Cut",
+          "h": 44,
+          "w": 64
+        },
+        {
+          "name": "Opacity cut: 128",
+          "h": 44,
+          "w": 80.734375
+        },
+        {
+          "name": "Max colors",
+          "h": 44,
+          "w": 305.65625
+        },
+        {
+          "name": "Use all palette colors",
+          "h": 44,
+          "w": 44
+        }
+      ]
+    },
+    {
+      "width": 568,
+      "height": 320,
+      "panelHeight": 76,
+      "panelTop": 170,
+      "panelBottom": 246,
+      "compact": true,
+      "overflow": [],
+      "documentOverflow": false,
+      "oneRow": true,
+      "rows": 1,
+      "targets": [
+        {
+          "name": "Max colors: 8",
+          "h": 44,
+          "w": 78.3125
+        },
+        {
+          "name": "Matching: Oklab",
+          "h": 44,
+          "w": 68.703125
+        },
+        {
+          "name": "Cleanup: Off",
+          "h": 44,
+          "w": 64.234375
+        },
+        {
+          "name": "Dithering: 4×4",
+          "h": 44,
+          "w": 68.390625
+        },
+        {
+          "name": "Dither strength: 50%",
+          "h": 44,
+          "w": 98.25
+        },
+        {
+          "name": "Opacity: Cut",
+          "h": 44,
+          "w": 64
+        },
+        {
+          "name": "Opacity cut: 128",
+          "h": 44,
+          "w": 80.734375
+        },
+        {
+          "name": "Max colors",
+          "h": 44,
+          "w": 197.171875
+        },
+        {
+          "name": "Use all palette colors",
+          "h": 44,
+          "w": 44
+        }
+      ]
+    },
+    {
+      "width": 1024,
+      "height": 520,
+      "panelHeight": 76,
+      "panelTop": 370,
+      "panelBottom": 446,
+      "compact": true,
+      "overflow": [],
+      "documentOverflow": false,
+      "oneRow": true,
+      "rows": 1,
+      "targets": [
+        {
+          "name": "Max colors: 8",
+          "h": 44,
+          "w": 78.3125
+        },
+        {
+          "name": "Matching: Oklab",
+          "h": 44,
+          "w": 68.703125
+        },
+        {
+          "name": "Cleanup: Off",
+          "h": 44,
+          "w": 64.234375
+        },
+        {
+          "name": "Dithering: 4×4",
+          "h": 44,
+          "w": 68.390625
+        },
+        {
+          "name": "Dither strength: 50%",
+          "h": 44,
+          "w": 98.25
+        },
+        {
+          "name": "Opacity: Cut",
+          "h": 44,
+          "w": 64
+        },
+        {
+          "name": "Opacity cut: 128",
+          "h": 44,
+          "w": 80.734375
+        },
+        {
+          "name": "Max colors",
+          "h": 44,
+          "w": 305.65625
+        },
+        {
+          "name": "Use all palette colors",
+          "h": 44,
+          "w": 44
+        }
+      ]
+    },
+    {
+      "width": 1024,
+      "height": 521,
+      "panelHeight": 423,
+      "panelTop": 12,
+      "panelBottom": 435,
+      "compact": false,
+      "overflow": [],
+      "documentOverflow": false,
+      "oneRow": false,
+      "rows": 7,
+      "targets": []
+    },
+    {
+      "width": 1280,
+      "height": 900,
+      "panelHeight": 460,
+      "panelTop": 354,
+      "panelBottom": 814,
+      "compact": false,
+      "overflow": [],
+      "documentOverflow": false,
+      "oneRow": false,
+      "rows": 7,
+      "targets": []
+    },
+    {
+      "before": true,
+      "width": 390,
+      "height": 844,
+      "panelHeight": 460,
+      "panelTop": 242,
+      "panelBottom": 702,
+      "compact": false,
+      "overflow": [],
+      "documentOverflow": false,
+      "oneRow": false,
+      "rows": 7,
+      "targets": []
+    },
+    {
+      "before": true,
+      "width": 844,
+      "height": 390,
+      "panelHeight": 304,
+      "panelTop": 12,
+      "panelBottom": 316,
+      "compact": false,
+      "overflow": [],
+      "documentOverflow": false,
+      "oneRow": false,
+      "rows": 7,
+      "targets": []
+    },
+    {
+      "before": true,
+      "width": 1280,
+      "height": 900,
+      "panelHeight": 460,
+      "panelTop": 354,
+      "panelBottom": 814,
+      "compact": false,
+      "overflow": [],
+      "documentOverflow": false,
+      "oneRow": false,
+      "rows": 7,
+      "targets": []
+    }
+  ],
+  "flows": [
+    "Live portrait/landscape/520px breakpoints retain Matching and RGB",
+    "Switching settings cancels Max colors drafts and rejects stale range events",
+    "Switching settings cancels Dither strength drafts and rejects stale events",
+    "Keep removes only cutoff; dithering Off removes only strength; detached cutoff ignored",
+    "Keyboard Reset restores defaults and moves focus to enabled selected chip",
+    "Keyboard Reset from disappearing Dither strength focuses replacement Max colors chip",
+    "Repeated panel close/reopen leaves one active control"
+  ],
+  "errors": [],
+  "pass": true
+}

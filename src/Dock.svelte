@@ -7,6 +7,7 @@
 </script>
 
 <script>
+  import './palette-settings-compact.css';
   import Pixels from './Pixels.svelte';
   import PalettePreview from './PalettePreview.svelte';
   import PixelIcon from './PixelIcon.svelte';
@@ -204,11 +205,17 @@
     settings[style] = defaults(style);
     if (!e.detail) (dock.querySelector('.extra') ?? dock.querySelector('.chip[aria-pressed="true"]'))?.focus();
   }
-  function resetPaletteSettings(e) {
+  async function resetPaletteSettings(e) {
     metric = 'oklab'; alphaCut = 128; alphaMode = 'cut'; maxColors = 0; lastMaxColors = 16; cleanup = false; dither = 'none'; ditherStrength = 50;
     restoreDitherDraft();
     restoreLimitDrafts(); // Clear pending edits before keyboard focus can blur them.
-    if (!e.detail) dock.querySelector('[aria-label="Oklab matching"]')?.focus();
+    if (!e.detail) {
+      // Reset can remove the selected conditional chip. Focus its replacement
+      // after Svelte has removed those controls, never the departing old chip.
+      await tick();
+      if (family === 'full-palette' && panel === 'style')
+        (chips ? dock.querySelector('.palette-setting-chip[aria-pressed="true"]') : dock.querySelector('[aria-label="Oklab matching"]'))?.focus();
+    }
   }
 
   // Source-wide preparation is expensive: update after a pause or release.
@@ -231,6 +238,25 @@
     numberDirty = false;
     numberPalette = null;
   }
+  function limitGesture(node) {
+    const palette = fullPalette;
+    const current = () => node.isConnected && palette === fullPalette && family === 'full-palette' && panel === 'style';
+    const input = () => {
+      if (!current()) return;
+      limitRange = +node.value; limitNumber = node.value;
+      limitPause.schedule(limitRange, palette);
+    };
+    const finish = () => { if (current()) limitPause.flush(); };
+    const cancel = () => { if (current()) restoreLimitDrafts(); };
+    node.addEventListener('input', input);
+    node.addEventListener('change', finish);
+    node.addEventListener('pointerup', finish);
+    node.addEventListener('pointercancel', cancel);
+    return { destroy() {
+      node.removeEventListener('input', input); node.removeEventListener('change', finish);
+      node.removeEventListener('pointerup', finish); node.removeEventListener('pointercancel', cancel);
+    } };
+  }
   $effect(() => {
     fullPalette, family, panel; // Palette switches and closing discard unfinished edits.
     restoreLimitDrafts();
@@ -246,6 +272,7 @@
   }
   function finishLimitNumber(e) {
     const box = e.currentTarget;
+    if (!box.isConnected) return;
     if (numberDirty && numberPalette === fullPalette && box.validity.valid && (box.value === '' || Number.isInteger(box.valueAsNumber)))
       applyLimit(box.value === '' ? 0 : box.valueAsNumber);
     // Untouched displayed values must not overwrite a larger remembered limit.
@@ -301,6 +328,42 @@
     node.addEventListener('input', input);
     node.addEventListener('change', input);
     return { destroy() { node.removeEventListener('input', input); node.removeEventListener('change', input); } };
+  }
+
+  // Match the 1-bit compact panel: all setting names stay discoverable, one control
+  // takes the available width. The same CSS media query handles Android rotation.
+  const paletteLabels = { limit: 'Max colors', matching: 'Matching', cleanup: 'Cleanup', dither: 'Dithering', strength: 'Dither strength', opacity: 'Opacity', cut: 'Opacity cut' };
+  const paletteKeys = $derived(['limit', 'matching', 'cleanup', 'dither', ...(dither !== 'none' ? ['strength'] : []), ...(soft || alphaMode === 'keep' ? ['opacity'] : []), ...(alphaMode !== 'keep' && (soft || alphaCut !== 128) ? ['cut'] : [])]);
+  let palettePressed = $state('limit');
+  const paletteActive = $derived(paletteKeys.includes(palettePressed) ? palettePressed : 'limit');
+  const paletteValue = key => ({ limit: maxColors ? String(visibleLimit) : 'All', matching: metric === 'oklab' ? 'Oklab' : 'RGB', cleanup: cleanup ? 'On' : 'Off', dither: dither === 'none' ? 'Off' : dither.replace('x', '×'), strength: ditherStrength + '%', opacity: alphaMode === 'keep' ? 'Keep' : 'Cut', cut: String(alphaCut) })[key];
+  const paletteChanged = key => ({ limit: maxColors !== 0, matching: metric !== 'oklab', cleanup, dither: dither !== 'none', strength: ditherStrength !== 50, opacity: alphaMode !== 'cut', cut: alphaCut !== 128 })[key];
+  const paletteDefault = $derived(metric === 'oklab' && alphaCut === 128 && alphaMode === 'cut' && maxColors === 0 && lastMaxColors === 16 && !cleanup && dither === 'none' && ditherStrength === 50);
+  function cancelPaletteDrafts() { restoreLimitDrafts(); restoreDitherDraft(); }
+  function selectPaletteSetting(key) { cancelPaletteDrafts(); palettePressed = key; }
+  $effect(() => { chips, paletteActive; cancelPaletteDrafts(); });
+  function paletteChips(node) {
+    let disposed = false;
+    const mark = () => {
+      node.parentNode.classList.toggle('more-left', node.scrollLeft > 1);
+      node.parentNode.classList.toggle('more-right', node.scrollLeft + node.clientWidth < node.scrollWidth - 1);
+    };
+    const refresh = () => {
+      if (disposed) return;
+      const selected = node.querySelector('[aria-pressed="true"]');
+      if (selected) {
+        const row = node.getBoundingClientRect(), chip = selected.getBoundingClientRect();
+        if (selected === node.firstElementChild) node.scrollLeft = 0;
+        else if (chip.left < row.left + 30) node.scrollLeft += chip.left - row.left - 30;
+        else if (chip.right > row.right - 30) node.scrollLeft += chip.right - row.right + 30;
+      }
+      mark();
+    };
+    const observer = new ResizeObserver(refresh); observer.observe(node);
+    node.addEventListener('scroll', mark, { passive: true });
+    const wheel = e => { node.scrollLeft += e.deltaY; }; node.addEventListener('wheel', wheel, { passive: true });
+    tick().then(refresh);
+    return { update: () => tick().then(refresh), destroy() { disposed = true; observer.disconnect(); node.removeEventListener('scroll', mark); node.removeEventListener('wheel', wheel); } };
   }
 
   // A number box is empty while its setting is on Auto or off, and then shows this instead: what
@@ -367,6 +430,96 @@
     else panel = null;
   }}
 />
+
+{#snippet paletteReset(compact)}
+  <button class:btn={!compact} class:glass-btn={!compact} class:chip={compact} class:reset={compact} class="settings-reset"
+    disabled={paletteDefault} aria-label="Reset palette settings" use:tooltip={'Restore Oklab, all colors, Cleanup off, dithering off and the default opacity cut.'}
+    onpointerdown={e => e.preventDefault()} onclick={resetPaletteSettings}><PixelIcon name="reset"/>{#if compact}<span class="reset-label">Reset</span>{/if}</button>
+{/snippet}
+
+{#snippet paletteControl(key)}
+  {#if key === 'limit'}
+      {#key fullPalette}
+      <div class="palette-setting-row palette-limit-row" data-setting="limit">
+        {#if limitDescription}<span id="full-limit-description" hidden>{limitDescription}</span>{/if}
+        <label class="key" for="full-max-colors">Max colors</label>
+        <input id="full-max-colors" class="glass-range" type="range" min={limitMin} max={limitMax} step="1" disabled={limitMax <= 2}
+          value={limitRange} aria-label="Max colors" aria-describedby={limitDescription ? 'full-limit-description' : undefined}
+          aria-valuetext={maxColors === 0 && limitNumber === '' ? (limitMax <= 2 ? 'All colors' : 'All colors; move to set a limit') : `${limitRange} colors per image`}
+          use:limitGesture />
+        <div class="field palette-limit-field">
+          <input class="tnum" type="number" min={limitMin} max={limitMax} step="1" disabled={limitMax <= 1} inputmode="numeric" aria-label="Max colors value" aria-describedby={limitDescription ? 'full-limit-description' : undefined}
+            value={limitNumber} placeholder={String(limitMax)} oninput={e => { numberDirty = true; numberPalette = fullPalette; limitNumber = e.currentTarget.value; }}
+            onchange={finishLimitNumber} onblur={finishLimitNumber}
+            onkeydown={e => { if (e.key === 'Enter') { e.preventDefault(); const edited = numberDirty; finishLimitNumber(e); if (!edited) onpaletteretry?.(); } }} />
+          <button aria-label="Use all palette colors" aria-pressed={maxColors === 0}
+            use:tooltip={'Use all colors. A limit uses fewer colors per image from the selected palette.'} onpointerdown={e => e.preventDefault()} onclick={() => applyLimit(0)}>All</button>
+        </div>
+      </div>
+      {/key}
+  {:else if key === 'matching'}
+      <div class="palette-setting-row" data-setting="matching">
+        <span class="key" id="palette-matching-label" use:tooltip={matchingDescription}>Matching</span>
+        <span id="palette-matching-description" hidden>{matchingDescription}</span>
+        <div class="seg glass-segmented" role="group" aria-labelledby="palette-matching-label" aria-describedby="palette-matching-description">
+          <button class="glass-segmented__item" aria-label="Oklab matching" aria-pressed={metric === 'oklab'} use:tooltip={'Compare perceived color differences. Default.'} onclick={() => { if (metric === 'oklab') onpaletteretry?.(); metric = 'oklab'; }}>Oklab</button>
+          <button class="glass-segmented__item" aria-label="RGB matching" aria-pressed={metric === 'rgb'} use:tooltip={'Compare RGB channel differences.'} onclick={() => { if (metric === 'rgb') onpaletteretry?.(); metric = 'rgb'; }}>RGB</button>
+        </div>
+      </div>
+  {:else if key === 'cleanup'}
+      <div class="palette-setting-row" data-setting="cleanup">
+        <span class="key" id="palette-cleanup-label" use:tooltip={cleanupDescription}>Cleanup</span>
+        <span id="palette-cleanup-description" hidden>{cleanupDescription}</span>
+        <div class="seg glass-segmented" role="group" aria-labelledby="palette-cleanup-label" aria-describedby="palette-cleanup-description">
+          <button class="glass-segmented__item" aria-label="Cleanup off" aria-pressed={!cleanup} onclick={() => { if (!cleanup) onpaletteretry?.(); cleanup = false; }}>Off</button>
+          <button class="glass-segmented__item" aria-label="Cleanup on" aria-pressed={cleanup} use:tooltip={'Merge isolated pixels. Can remove intentional details.'} onclick={() => { if (cleanup) onpaletteretry?.(); cleanup = true; }}>On</button>
+        </div>
+      </div>
+  {:else if key === 'dither'}
+      <div class="palette-setting-row" data-setting="dither">
+        <span class="key" id="palette-dither-label" use:tooltip={ditherDescription}>Dithering</span>
+        <span id="palette-dither-description" hidden>{ditherDescription}</span>
+        <div class="seg glass-segmented" role="group" aria-labelledby="palette-dither-label" aria-describedby="palette-dither-description">
+          {#each [['none', 'Off'], ['2x2', '2×2'], ['4x4', '4×4'], ['8x8', '8×8']] as [mode, label]}
+            <button class="glass-segmented__item" aria-label={mode === 'none' ? 'Dithering off' : 'Dithering ' + mode} aria-pressed={dither === mode}
+              onclick={() => { restoreDitherDraft(); dither = mode; }}>{label}</button>
+          {/each}
+        </div>
+      </div>
+  {:else if key === 'strength'}
+      {#if dither !== 'none'}
+        {#key fullPalette}
+        {#key dither}
+        <div class="palette-setting-row palette-dither-strength-row" data-setting="strength">
+          <label class="key" for="full-dither-amount" use:tooltip={'How strongly dithering blends palette colors. Zero keeps nearest colors.'}>Dither strength</label>
+          <input id="full-dither-amount" class="glass-range" type="range" min="0" max="100" step="1" value={ditherDraft} aria-label="Dither strength" aria-valuetext={ditherDraft + '%'} use:ditherAmountGesture/>
+          <output for="full-dither-amount">{ditherDraft}%</output>
+        </div>
+        {/key}
+        {/key}
+      {/if}
+  {:else if key === 'opacity'}
+      {#if soft || alphaMode === 'keep'}
+        <div class="palette-setting-row" data-setting="opacity">
+          <span class="key" id="palette-opacity-label" use:tooltip={'Cut makes pixels fully visible or empty. Keep preserves each source opacity in PNGs. GIF cannot keep partial opacity.'}>Opacity</span>
+          <div class="seg glass-segmented" role="group" aria-labelledby="palette-opacity-label">
+            <button class="glass-segmented__item" aria-pressed={alphaMode === 'cut'} onclick={() => { alphaMode = 'cut'; }}>Cut</button>
+            <button class="glass-segmented__item" aria-pressed={alphaMode === 'keep'} onclick={() => { alphaMode = 'keep'; }}>Keep</button>
+          </div>
+        </div>
+      {/if}
+  {:else if key === 'cut'}
+      {#if alphaMode !== 'keep' && (soft || alphaCut !== 128)}
+        {#key fullPalette}
+        <div class="palette-setting-row" data-setting="cut">
+          <label class="key" for="full-alpha-cut">Opacity cut</label>
+          <input id="full-alpha-cut" class="glass-range" type="range" min="1" max="255" value={alphaCut} aria-label="Palette opacity cut" use:alphaCutGesture/>
+          <output for="full-alpha-cut">{alphaCut}</output>
+        </div>
+        {/key}
+      {/if}
+  {/if}
+{/snippet}
 
 <!-- One setting's control: a few buttons to choose between, or a slider with a number box, joined
      to an Auto button where the setting has an Auto. -->
@@ -463,85 +616,28 @@
       {#if generatedNotice}<p class="palette-source-status" role="status">{generatedNotice}</p>{/if}
     </div>
   {:else if panel === 'style' && family === 'full-palette'}
-    <div class="panel palette-settings-panel glass-card" bind:offsetHeight={panelHeight}>
+    <div class="panel palette-settings-panel glass-card" class:compact={chips} bind:offsetHeight={panelHeight}>
       <div class="palette-settings-header">
         <h2 class="palette-method-name">Recolor</h2>
-        <button class="btn glass-btn settings-reset" disabled={metric === 'oklab' && alphaCut === 128 && alphaMode === 'cut' && maxColors === 0 && lastMaxColors === 16 && !cleanup && dither === 'none' && ditherStrength === 50} aria-label="Reset palette settings" use:tooltip={'Restore Oklab, all colors, Cleanup off, dithering off and the default opacity cut.'} onpointerdown={e => e.preventDefault()} onclick={resetPaletteSettings}><PixelIcon name="reset"/></button>
+        {#if !chips}{@render paletteReset(false)}{/if}
       </div>
-      {#key fullPalette}
-      <div class="palette-setting-row palette-limit-row">
-        {#if limitDescription}<span id="full-limit-description" hidden>{limitDescription}</span>{/if}
-        <label class="key" for="full-max-colors">Max colors</label>
-        <input id="full-max-colors" class="glass-range" type="range" min={limitMin} max={limitMax} step="1" disabled={limitMax <= 2}
-          value={limitRange} aria-label="Max colors" aria-describedby={limitDescription ? 'full-limit-description' : undefined}
-          aria-valuetext={maxColors === 0 && limitNumber === '' ? (limitMax <= 2 ? 'All colors' : 'All colors; move to set a limit') : `${limitRange} colors per image`}
-          oninput={e => { limitRange = +e.currentTarget.value; limitNumber = e.currentTarget.value; limitPause.schedule(limitRange, fullPalette); }}
-          onchange={limitPause.flush} onpointerup={limitPause.flush}
-          onpointercancel={restoreLimitDrafts} />
-        <div class="field palette-limit-field">
-          <input class="tnum" type="number" min={limitMin} max={limitMax} step="1" disabled={limitMax <= 1} inputmode="numeric" aria-label="Max colors value" aria-describedby={limitDescription ? 'full-limit-description' : undefined}
-            value={limitNumber} placeholder={String(limitMax)} oninput={e => { numberDirty = true; numberPalette = fullPalette; limitNumber = e.currentTarget.value; }}
-            onchange={finishLimitNumber} onblur={finishLimitNumber}
-            onkeydown={e => { if (e.key === 'Enter') { e.preventDefault(); const edited = numberDirty; finishLimitNumber(e); if (!edited) onpaletteretry?.(); } }} />
-          <button aria-label="Use all palette colors" aria-pressed={maxColors === 0}
-            use:tooltip={'Use all colors. A limit uses fewer colors per image from the selected palette.'} onpointerdown={e => e.preventDefault()} onclick={() => applyLimit(0)}>All</button>
-        </div>
-      </div>
-      {/key}
-      <div class="palette-setting-row">
-        <span class="key" id="palette-matching-label" use:tooltip={matchingDescription}>Matching</span>
-        <span id="palette-matching-description" hidden>{matchingDescription}</span>
-        <div class="seg glass-segmented" role="group" aria-labelledby="palette-matching-label" aria-describedby="palette-matching-description">
-          <button class="glass-segmented__item" aria-label="Oklab matching" aria-pressed={metric === 'oklab'} use:tooltip={'Compare perceived color differences. Default.'} onclick={() => { if (metric === 'oklab') onpaletteretry?.(); metric = 'oklab'; }}>Oklab</button>
-          <button class="glass-segmented__item" aria-label="RGB matching" aria-pressed={metric === 'rgb'} use:tooltip={'Compare RGB channel differences.'} onclick={() => { if (metric === 'rgb') onpaletteretry?.(); metric = 'rgb'; }}>RGB</button>
-        </div>
-      </div>
-      <div class="palette-setting-row">
-        <span class="key" id="palette-cleanup-label" use:tooltip={cleanupDescription}>Cleanup</span>
-        <span id="palette-cleanup-description" hidden>{cleanupDescription}</span>
-        <div class="seg glass-segmented" role="group" aria-labelledby="palette-cleanup-label" aria-describedby="palette-cleanup-description">
-          <button class="glass-segmented__item" aria-label="Cleanup off" aria-pressed={!cleanup} onclick={() => { if (!cleanup) onpaletteretry?.(); cleanup = false; }}>Off</button>
-          <button class="glass-segmented__item" aria-label="Cleanup on" aria-pressed={cleanup} use:tooltip={'Merge isolated pixels. Can remove intentional details.'} onclick={() => { if (cleanup) onpaletteretry?.(); cleanup = true; }}>On</button>
-        </div>
-      </div>
-      <div class="palette-setting-row">
-        <span class="key" id="palette-dither-label" use:tooltip={ditherDescription}>Dithering</span>
-        <span id="palette-dither-description" hidden>{ditherDescription}</span>
-        <div class="seg glass-segmented" role="group" aria-labelledby="palette-dither-label" aria-describedby="palette-dither-description">
-          {#each [['none', 'Off'], ['2x2', '2×2'], ['4x4', '4×4'], ['8x8', '8×8']] as [mode, label]}
-            <button class="glass-segmented__item" aria-label={mode === 'none' ? 'Dithering off' : 'Dithering ' + mode} aria-pressed={dither === mode}
-              onclick={() => { restoreDitherDraft(); dither = mode; }}>{label}</button>
-          {/each}
-        </div>
-      </div>
-      {#if dither !== 'none'}
-        {#key fullPalette}
-        {#key dither}
-        <div class="palette-setting-row palette-dither-strength-row">
-          <label class="key" for="full-dither-amount" use:tooltip={'How strongly dithering blends palette colors. Zero keeps nearest colors.'}>Dither strength</label>
-          <input id="full-dither-amount" class="glass-range" type="range" min="0" max="100" step="1" value={ditherDraft} aria-label="Dither strength" aria-valuetext={ditherDraft + '%'} use:ditherAmountGesture/>
-          <output for="full-dither-amount">{ditherDraft}%</output>
-        </div>
-        {/key}
-        {/key}
-      {/if}
-      {#if soft || alphaMode === 'keep'}
-        <div class="palette-setting-row">
-          <span class="key" id="palette-opacity-label" use:tooltip={'Cut makes pixels fully visible or empty. Keep preserves each source opacity in PNGs. GIF cannot keep partial opacity.'}>Opacity</span>
-          <div class="seg glass-segmented" role="group" aria-labelledby="palette-opacity-label">
-            <button class="glass-segmented__item" aria-pressed={alphaMode === 'cut'} onclick={() => { alphaMode = 'cut'; }}>Cut</button>
-            <button class="glass-segmented__item" aria-pressed={alphaMode === 'keep'} onclick={() => { alphaMode = 'keep'; }}>Keep</button>
+      {#if chips}
+        <div class="setbox palette-setbox">
+          <div class="sets palette-setting-chips" role="group" aria-label="Recolor settings" use:paletteChips={paletteActive}>
+            {#each paletteKeys as key}
+              <button class="chip palette-setting-chip" class:changed={paletteChanged(key)} aria-pressed={key === paletteActive}
+                aria-label={paletteLabels[key] + ': ' + paletteValue(key)} onpointerdown={cancelPaletteDrafts} onclick={() => selectPaletteSetting(key)}>
+                <span>{paletteLabels[key]}</span><b>{paletteValue(key)}</b>
+              </button>
+            {/each}
+            {@render paletteReset(true)}
           </div>
         </div>
-      {/if}
-      {#if alphaMode !== 'keep' && (soft || alphaCut !== 128)}
-        {#key fullPalette}
-        <div class="palette-setting-row">
-          <label class="key" for="full-alpha-cut">Opacity cut</label>
-          <input id="full-alpha-cut" class="glass-range" type="range" min="1" max="255" value={alphaCut} aria-label="Palette opacity cut" use:alphaCutGesture/>
-          <output for="full-alpha-cut">{alphaCut}</output>
+        <div class="palette-active-control">
+          {#key fullPalette}{#key paletteActive}{@render paletteControl(paletteActive)}{/key}{/key}
         </div>
-        {/key}
+      {:else}
+        {#each paletteKeys as key}{@render paletteControl(key)}{/each}
       {/if}
     </div>
   {:else if panel === 'style'}

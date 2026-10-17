@@ -1,0 +1,27 @@
+/* Palette controls share the 1-bit name/value chip pattern on compact screens.
+   Wide screens keep their complete rows; mobile keeps the artwork visible. */
+:root .workspace-tools .dock .palette-settings-panel.compact {
+  display: grid; grid-template-columns: minmax(0,1fr); gap: 10px;
+  padding: 12px; overflow: visible;
+}
+:root .palette-settings-panel.compact .palette-settings-header { display: none; }
+:root .palette-settings-panel.compact .palette-setbox,
+:root .palette-settings-panel.compact .palette-active-control { min-width: 0; width: 100%; }
+:root .palette-settings-panel.compact .palette-setting-chip { min-width: 64px; min-height: 44px; height: 44px; }
+:root .palette-settings-panel.compact .palette-setting-row { min-height: 50px; }
+/* Keep programmatic names and associations while the pressed chip labels the control. */
+:root .palette-settings-panel.compact .palette-setting-row > .key {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}
+:root .palette-settings-panel.compact .palette-setting-row > .seg { flex: 1; min-width: 0; }
+:root .palette-settings-panel.compact .palette-setting-row > .seg button { flex: 1; min-width: 44px; padding: 0 6px; }
+:root .palette-settings-panel.compact .palette-setting-row input[type=range] { height: 44px; }
+:root .palette-settings-panel.compact .palette-setting-chips .settings-reset { flex: none; min-width: 44px; width: 44px; height: 44px; padding: 0; justify-content: center; }
+:root .palette-settings-panel.compact .palette-setting-chips .reset-label { display: none; }
+@media (min-width: 521px) and (max-height: 520px) and (orientation: landscape) {
+  :root .workspace-tools .dock .palette-settings-panel.compact {
+    grid-template-columns: minmax(140px,1fr) minmax(240px,1.4fr);
+    align-items: center; gap: 12px;
+  }
+}
