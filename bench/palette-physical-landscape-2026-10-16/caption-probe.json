@@ -1,0 +1,1210 @@
+{
+  "original": {
+    "policy": "free",
+    "user": "0"
+  },
+  "states": [
+    {
+      "version": "baseline",
+      "name": "sprite.png",
+      "panel": "closed",
+      "file": "caption-baseline-short-closed.png",
+      "viewport": {
+        "width": 947,
+        "height": 364,
+        "scrollX": 0,
+        "scrollY": 0,
+        "visualViewport": {
+          "width": 947.111083984375,
+          "height": 364,
+          "scale": 1,
+          "offsetLeft": 0,
+          "offsetTop": 0
+        }
+      },
+      "rects": {
+        ".grid": {
+          "x": 0,
+          "y": 0,
+          "width": 947.1111450195312,
+          "height": 340,
+          "fontSize": "14px",
+          "display": "flex",
+          "padding": "8px 24px 76px",
+          "overflow": "auto",
+          "scrollWidth": 947,
+          "clientWidth": 947
+        },
+        ".grid figure": {
+          "x": 376.5555725097656,
+          "y": 9,
+          "width": 194,
+          "height": 254,
+          "fontSize": "14px",
+          "display": "grid",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 194,
+          "clientWidth": 194
+        },
+        ".grid figure .art": {
+          "x": 376.5555725097656,
+          "y": 9,
+          "width": 194,
+          "height": 194,
+          "fontSize": "14px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "hidden",
+          "scrollWidth": 194,
+          "clientWidth": 194
+        },
+        ".grid figure .art canvas": {
+          "x": 380.5555725097656,
+          "y": 13,
+          "width": 186,
+          "height": 186,
+          "fontSize": "14px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "clip",
+          "scrollWidth": 186,
+          "clientWidth": 186
+        },
+        ".grid figure .cap": {
+          "x": 376.5555725097656,
+          "y": 211,
+          "width": 194,
+          "height": 52,
+          "fontSize": "13px",
+          "display": "grid",
+          "padding": "3px 6px",
+          "overflow": "visible",
+          "scrollWidth": 192,
+          "clientWidth": 192
+        },
+        ".grid figure .caption-preview": {
+          "x": 383.4444580078125,
+          "y": 214.88888549804688,
+          "width": 110.22222137451172,
+          "height": 44.22222137451172,
+          "fontSize": "13px",
+          "display": "flex",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 110,
+          "clientWidth": 110
+        },
+        ".grid figure .caption-details": {
+          "x": 383.4444580078125,
+          "y": 214.88888549804688,
+          "width": 63.07638931274414,
+          "height": 44.22222137451172,
+          "fontSize": "13px",
+          "display": "flex",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 63,
+          "clientWidth": 63
+        },
+        ".grid figure .dim": {
+          "text": "24×24",
+          "x": 383.4444580078125,
+          "y": 243.11111450195312,
+          "width": 63.07638931274414,
+          "height": 16,
+          "fontSize": "12px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "hidden",
+          "scrollWidth": 63,
+          "clientWidth": 63
+        },
+        ".grid figure .name": {
+          "text": "sprite.png",
+          "x": 383.4444580078125,
+          "y": 214.88888549804688,
+          "width": 63.07638931274414,
+          "height": 28.22222328186035,
+          "fontSize": "13px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "hidden",
+          "scrollWidth": 63,
+          "clientWidth": 63
+        },
+        ".grid figure .tile-share": {
+          "x": 519.6666870117188,
+          "y": 215,
+          "width": 44,
+          "height": 44,
+          "fontSize": "16px",
+          "display": "grid",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 42,
+          "clientWidth": 42
+        },
+        ".palette-settings-panel": null
+      }
+    },
+    {
+      "version": "baseline",
+      "name": "sprite.png",
+      "panel": "open",
+      "file": "caption-baseline-short-open.png",
+      "viewport": {
+        "width": 947,
+        "height": 364,
+        "scrollX": 0,
+        "scrollY": 0,
+        "visualViewport": {
+          "width": 947.111083984375,
+          "height": 364,
+          "scale": 1,
+          "offsetLeft": 0,
+          "offsetTop": 0
+        }
+      },
+      "rects": {
+        ".grid": {
+          "x": 0,
+          "y": 0,
+          "width": 947.1111450195312,
+          "height": 358,
+          "fontSize": "14px",
+          "display": "flex",
+          "padding": "8px 24px 350px",
+          "overflow": "auto",
+          "scrollWidth": 947,
+          "clientWidth": 947
+        },
+        ".grid figure": {
+          "x": 425.5555725097656,
+          "y": 8,
+          "width": 96,
+          "height": 156,
+          "fontSize": "14px",
+          "display": "grid",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 96,
+          "clientWidth": 96
+        },
+        ".grid figure .art": {
+          "x": 425.5555725097656,
+          "y": 8,
+          "width": 96,
+          "height": 96,
+          "fontSize": "14px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "hidden",
+          "scrollWidth": 96,
+          "clientWidth": 96
+        },
+        ".grid figure .art canvas": {
+          "x": 429.5555725097656,
+          "y": 12,
+          "width": 88,
+          "height": 88,
+          "fontSize": "14px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "clip",
+          "scrollWidth": 88,
+          "clientWidth": 88
+        },
+        ".grid figure .cap": {
+          "x": 425.5555725097656,
+          "y": 112,
+          "width": 96,
+          "height": 52,
+          "fontSize": "13px",
+          "display": "grid",
+          "padding": "3px 6px",
+          "overflow": "visible",
+          "scrollWidth": 94,
+          "clientWidth": 94
+        },
+        ".grid figure .caption-preview": {
+          "x": 432.4444580078125,
+          "y": 115.8888931274414,
+          "width": 12.222222328186035,
+          "height": 44.22222137451172,
+          "fontSize": "13px",
+          "display": "flex",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 12,
+          "clientWidth": 12
+        },
+        ".grid figure .caption-details": {
+          "x": 432.4444580078125,
+          "y": 115.8888931274414,
+          "width": 12.222222328186035,
+          "height": 44.22222137451172,
+          "fontSize": "13px",
+          "display": "flex",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 12,
+          "clientWidth": 12
+        },
+        ".grid figure .dim": {
+          "text": "24×24",
+          "x": 432.4444580078125,
+          "y": 144.11111450195312,
+          "width": 12.222222328186035,
+          "height": 16,
+          "fontSize": "12px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "hidden",
+          "scrollWidth": 40,
+          "clientWidth": 12
+        },
+        ".grid figure .name": {
+          "text": "sprite.png",
+          "x": 432.4444580078125,
+          "y": 115.8888931274414,
+          "width": 12.222222328186035,
+          "height": 28.22222328186035,
+          "fontSize": "13px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "hidden",
+          "scrollWidth": 63,
+          "clientWidth": 12
+        },
+        ".grid figure .tile-share": {
+          "x": 470.6666564941406,
+          "y": 116,
+          "width": 44,
+          "height": 44,
+          "fontSize": "16px",
+          "display": "grid",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 42,
+          "clientWidth": 42
+        },
+        ".palette-settings-panel": {
+          "x": 108.55555725097656,
+          "y": 12,
+          "width": 730,
+          "height": 254,
+          "fontSize": "14px",
+          "display": "flex",
+          "padding": "8px 14px",
+          "overflow": "auto",
+          "scrollWidth": 728,
+          "clientWidth": 728
+        }
+      }
+    },
+    {
+      "version": "baseline",
+      "name": "cflandscape-long-sprite-name.png",
+      "panel": "closed",
+      "file": "caption-baseline-long-closed.png",
+      "viewport": {
+        "width": 947,
+        "height": 364,
+        "scrollX": 0,
+        "scrollY": 0,
+        "visualViewport": {
+          "width": 947.111083984375,
+          "height": 364,
+          "scale": 1,
+          "offsetLeft": 0,
+          "offsetTop": 0
+        }
+      },
+      "rects": {
+        ".grid": {
+          "x": 0,
+          "y": 0,
+          "width": 947.1111450195312,
+          "height": 340,
+          "fontSize": "14px",
+          "display": "flex",
+          "padding": "8px 24px 76px",
+          "overflow": "auto",
+          "scrollWidth": 947,
+          "clientWidth": 947
+        },
+        ".grid figure": {
+          "x": 376.5555725097656,
+          "y": 9,
+          "width": 194,
+          "height": 254,
+          "fontSize": "14px",
+          "display": "grid",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 194,
+          "clientWidth": 194
+        },
+        ".grid figure .art": {
+          "x": 376.5555725097656,
+          "y": 9,
+          "width": 194,
+          "height": 194,
+          "fontSize": "14px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "hidden",
+          "scrollWidth": 194,
+          "clientWidth": 194
+        },
+        ".grid figure .art canvas": {
+          "x": 380.5555725097656,
+          "y": 13,
+          "width": 186,
+          "height": 186,
+          "fontSize": "14px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "clip",
+          "scrollWidth": 186,
+          "clientWidth": 186
+        },
+        ".grid figure .cap": {
+          "x": 376.5555725097656,
+          "y": 211,
+          "width": 194,
+          "height": 52,
+          "fontSize": "13px",
+          "display": "grid",
+          "padding": "3px 6px",
+          "overflow": "visible",
+          "scrollWidth": 192,
+          "clientWidth": 192
+        },
+        ".grid figure .caption-preview": {
+          "x": 383.4444580078125,
+          "y": 214.88888549804688,
+          "width": 110.22222137451172,
+          "height": 44.22222137451172,
+          "fontSize": "13px",
+          "display": "flex",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 110,
+          "clientWidth": 110
+        },
+        ".grid figure .caption-details": {
+          "x": 383.4444580078125,
+          "y": 214.88888549804688,
+          "width": 110.22222137451172,
+          "height": 44.22222137451172,
+          "fontSize": "13px",
+          "display": "flex",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 110,
+          "clientWidth": 110
+        },
+        ".grid figure .dim": {
+          "text": "24×24",
+          "x": 383.4444580078125,
+          "y": 243.11111450195312,
+          "width": 110.22222137451172,
+          "height": 16,
+          "fontSize": "12px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "hidden",
+          "scrollWidth": 110,
+          "clientWidth": 110
+        },
+        ".grid figure .name": {
+          "text": "cflandscape-long-sprite-name.png",
+          "x": 383.4444580078125,
+          "y": 214.88888549804688,
+          "width": 110.22222137451172,
+          "height": 28.22222328186035,
+          "fontSize": "13px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "hidden",
+          "scrollWidth": 218,
+          "clientWidth": 110
+        },
+        ".grid figure .tile-share": {
+          "x": 519.6666870117188,
+          "y": 215,
+          "width": 44,
+          "height": 44,
+          "fontSize": "16px",
+          "display": "grid",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 42,
+          "clientWidth": 42
+        },
+        ".palette-settings-panel": null
+      }
+    },
+    {
+      "version": "baseline",
+      "name": "cflandscape-long-sprite-name.png",
+      "panel": "open",
+      "file": "caption-baseline-long-open.png",
+      "viewport": {
+        "width": 947,
+        "height": 364,
+        "scrollX": 0,
+        "scrollY": 0,
+        "visualViewport": {
+          "width": 947.111083984375,
+          "height": 364,
+          "scale": 1,
+          "offsetLeft": 0,
+          "offsetTop": 0
+        }
+      },
+      "rects": {
+        ".grid": {
+          "x": 0,
+          "y": 0,
+          "width": 947.1111450195312,
+          "height": 358,
+          "fontSize": "14px",
+          "display": "flex",
+          "padding": "8px 24px 350px",
+          "overflow": "auto",
+          "scrollWidth": 947,
+          "clientWidth": 947
+        },
+        ".grid figure": {
+          "x": 425.5555725097656,
+          "y": 8,
+          "width": 96,
+          "height": 156,
+          "fontSize": "14px",
+          "display": "grid",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 96,
+          "clientWidth": 96
+        },
+        ".grid figure .art": {
+          "x": 425.5555725097656,
+          "y": 8,
+          "width": 96,
+          "height": 96,
+          "fontSize": "14px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "hidden",
+          "scrollWidth": 96,
+          "clientWidth": 96
+        },
+        ".grid figure .art canvas": {
+          "x": 429.5555725097656,
+          "y": 12,
+          "width": 88,
+          "height": 88,
+          "fontSize": "14px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "clip",
+          "scrollWidth": 88,
+          "clientWidth": 88
+        },
+        ".grid figure .cap": {
+          "x": 425.5555725097656,
+          "y": 112,
+          "width": 96,
+          "height": 52,
+          "fontSize": "13px",
+          "display": "grid",
+          "padding": "3px 6px",
+          "overflow": "visible",
+          "scrollWidth": 94,
+          "clientWidth": 94
+        },
+        ".grid figure .caption-preview": {
+          "x": 432.4444580078125,
+          "y": 115.8888931274414,
+          "width": 12.222222328186035,
+          "height": 44.22222137451172,
+          "fontSize": "13px",
+          "display": "flex",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 12,
+          "clientWidth": 12
+        },
+        ".grid figure .caption-details": {
+          "x": 432.4444580078125,
+          "y": 115.8888931274414,
+          "width": 12.222222328186035,
+          "height": 44.22222137451172,
+          "fontSize": "13px",
+          "display": "flex",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 12,
+          "clientWidth": 12
+        },
+        ".grid figure .dim": {
+          "text": "24×24",
+          "x": 432.4444580078125,
+          "y": 144.11111450195312,
+          "width": 12.222222328186035,
+          "height": 16,
+          "fontSize": "12px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "hidden",
+          "scrollWidth": 40,
+          "clientWidth": 12
+        },
+        ".grid figure .name": {
+          "text": "cflandscape-long-sprite-name.png",
+          "x": 432.4444580078125,
+          "y": 115.8888931274414,
+          "width": 12.222222328186035,
+          "height": 28.22222328186035,
+          "fontSize": "13px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "hidden",
+          "scrollWidth": 218,
+          "clientWidth": 12
+        },
+        ".grid figure .tile-share": {
+          "x": 470.6666564941406,
+          "y": 116,
+          "width": 44,
+          "height": 44,
+          "fontSize": "16px",
+          "display": "grid",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 42,
+          "clientWidth": 42
+        },
+        ".palette-settings-panel": {
+          "x": 108.55555725097656,
+          "y": 12,
+          "width": 730,
+          "height": 254,
+          "fontSize": "14px",
+          "display": "flex",
+          "padding": "8px 14px",
+          "overflow": "auto",
+          "scrollWidth": 728,
+          "clientWidth": 728
+        }
+      }
+    },
+    {
+      "version": "current",
+      "name": "sprite.png",
+      "panel": "closed",
+      "file": "caption-current-short-closed.png",
+      "viewport": {
+        "width": 947,
+        "height": 364,
+        "scrollX": 0,
+        "scrollY": 0,
+        "visualViewport": {
+          "width": 947.111083984375,
+          "height": 364,
+          "scale": 1,
+          "offsetLeft": 0,
+          "offsetTop": 0
+        }
+      },
+      "rects": {
+        ".grid": {
+          "x": 0,
+          "y": 0,
+          "width": 947.1111450195312,
+          "height": 340,
+          "fontSize": "14px",
+          "display": "flex",
+          "padding": "8px 24px 76px",
+          "overflow": "auto",
+          "scrollWidth": 947,
+          "clientWidth": 947
+        },
+        ".grid figure": {
+          "x": 376.5555725097656,
+          "y": 9,
+          "width": 194,
+          "height": 254,
+          "fontSize": "14px",
+          "display": "grid",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 194,
+          "clientWidth": 194
+        },
+        ".grid figure .art": {
+          "x": 376.5555725097656,
+          "y": 9,
+          "width": 194,
+          "height": 194,
+          "fontSize": "14px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "hidden",
+          "scrollWidth": 194,
+          "clientWidth": 194
+        },
+        ".grid figure .art canvas": {
+          "x": 380.5555725097656,
+          "y": 13,
+          "width": 186,
+          "height": 186,
+          "fontSize": "14px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "clip",
+          "scrollWidth": 186,
+          "clientWidth": 186
+        },
+        ".grid figure .cap": {
+          "x": 376.5555725097656,
+          "y": 211,
+          "width": 194,
+          "height": 52,
+          "fontSize": "13px",
+          "display": "grid",
+          "padding": "3px 6px",
+          "overflow": "visible",
+          "scrollWidth": 192,
+          "clientWidth": 192
+        },
+        ".grid figure .caption-preview": {
+          "x": 383.4444580078125,
+          "y": 214.88888549804688,
+          "width": 110.22222137451172,
+          "height": 44.22222137451172,
+          "fontSize": "13px",
+          "display": "flex",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 110,
+          "clientWidth": 110
+        },
+        ".grid figure .caption-details": {
+          "x": 383.4444580078125,
+          "y": 214.88888549804688,
+          "width": 99.79166412353516,
+          "height": 44.22222137451172,
+          "fontSize": "13px",
+          "display": "flex",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 100,
+          "clientWidth": 100
+        },
+        ".grid figure .dim": {
+          "text": "24×24· 13 colors",
+          "x": 383.4444580078125,
+          "y": 243.11111450195312,
+          "width": 99.79166412353516,
+          "height": 16,
+          "fontSize": "12px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "hidden",
+          "scrollWidth": 100,
+          "clientWidth": 100
+        },
+        ".grid figure .name": {
+          "text": "sprite.png",
+          "x": 383.4444580078125,
+          "y": 214.88888549804688,
+          "width": 99.79166412353516,
+          "height": 28.22222328186035,
+          "fontSize": "13px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "hidden",
+          "scrollWidth": 100,
+          "clientWidth": 100
+        },
+        ".grid figure .tile-share": {
+          "x": 519.6666870117188,
+          "y": 215,
+          "width": 44,
+          "height": 44,
+          "fontSize": "16px",
+          "display": "grid",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 42,
+          "clientWidth": 42
+        },
+        ".palette-settings-panel": null
+      }
+    },
+    {
+      "version": "current",
+      "name": "sprite.png",
+      "panel": "open",
+      "file": "caption-current-short-open.png",
+      "viewport": {
+        "width": 947,
+        "height": 364,
+        "scrollX": 0,
+        "scrollY": 0,
+        "visualViewport": {
+          "width": 947.111083984375,
+          "height": 364,
+          "scale": 1,
+          "offsetLeft": 0,
+          "offsetTop": 0
+        }
+      },
+      "rects": {
+        ".grid": {
+          "x": 0,
+          "y": 0,
+          "width": 947.1111450195312,
+          "height": 340,
+          "fontSize": "14px",
+          "display": "flex",
+          "padding": "8px 24px 171.778px",
+          "overflow": "auto",
+          "scrollWidth": 947,
+          "clientWidth": 947
+        },
+        ".grid figure": {
+          "x": 424.5555725097656,
+          "y": 9.111111640930176,
+          "width": 98,
+          "height": 158,
+          "fontSize": "14px",
+          "display": "grid",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 98,
+          "clientWidth": 98
+        },
+        ".grid figure .art": {
+          "x": 424.5555725097656,
+          "y": 9.111111640930176,
+          "width": 98,
+          "height": 98,
+          "fontSize": "14px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "hidden",
+          "scrollWidth": 98,
+          "clientWidth": 98
+        },
+        ".grid figure .art canvas": {
+          "x": 428.5555725097656,
+          "y": 13.111111640930176,
+          "width": 90,
+          "height": 90,
+          "fontSize": "14px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "clip",
+          "scrollWidth": 90,
+          "clientWidth": 90
+        },
+        ".grid figure .cap": {
+          "x": 424.5555725097656,
+          "y": 115.11111450195312,
+          "width": 98,
+          "height": 52,
+          "fontSize": "13px",
+          "display": "grid",
+          "padding": "3px 6px",
+          "overflow": "visible",
+          "scrollWidth": 96,
+          "clientWidth": 96
+        },
+        ".grid figure .caption-preview": {
+          "x": 431.4444580078125,
+          "y": 119,
+          "width": 14.222222328186035,
+          "height": 44.22222137451172,
+          "fontSize": "13px",
+          "display": "flex",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 14,
+          "clientWidth": 14
+        },
+        ".grid figure .caption-details": {
+          "x": 431.4444580078125,
+          "y": 119,
+          "width": 14.222222328186035,
+          "height": 44.22222137451172,
+          "fontSize": "13px",
+          "display": "flex",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 14,
+          "clientWidth": 14
+        },
+        ".grid figure .dim": {
+          "text": "24×24· 13 colors",
+          "x": 431.4444580078125,
+          "y": 147.22222900390625,
+          "width": 14.222222328186035,
+          "height": 16,
+          "fontSize": "12px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "hidden",
+          "scrollWidth": 100,
+          "clientWidth": 14
+        },
+        ".grid figure .name": {
+          "text": "sprite.png",
+          "x": 431.4444580078125,
+          "y": 119,
+          "width": 14.222222328186035,
+          "height": 28.22222328186035,
+          "fontSize": "13px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "hidden",
+          "scrollWidth": 63,
+          "clientWidth": 14
+        },
+        ".grid figure .tile-share": {
+          "x": 471.6666564941406,
+          "y": 119.11111450195312,
+          "width": 44,
+          "height": 44,
+          "fontSize": "16px",
+          "display": "grid",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 42,
+          "clientWidth": 42
+        },
+        ".palette-settings-panel": {
+          "x": 108.55555725097656,
+          "y": 190.22222900390625,
+          "width": 730,
+          "height": 75.77777862548828,
+          "fontSize": "14px",
+          "display": "grid",
+          "padding": "12px",
+          "overflow": "visible",
+          "scrollWidth": 728,
+          "clientWidth": 728
+        }
+      }
+    },
+    {
+      "version": "current",
+      "name": "cflandscape-long-sprite-name.png",
+      "panel": "closed",
+      "file": "caption-current-long-closed.png",
+      "viewport": {
+        "width": 947,
+        "height": 364,
+        "scrollX": 0,
+        "scrollY": 0,
+        "visualViewport": {
+          "width": 947.111083984375,
+          "height": 364,
+          "scale": 1,
+          "offsetLeft": 0,
+          "offsetTop": 0
+        }
+      },
+      "rects": {
+        ".grid": {
+          "x": 0,
+          "y": 0,
+          "width": 947.1111450195312,
+          "height": 340,
+          "fontSize": "14px",
+          "display": "flex",
+          "padding": "8px 24px 76px",
+          "overflow": "auto",
+          "scrollWidth": 947,
+          "clientWidth": 947
+        },
+        ".grid figure": {
+          "x": 376.5555725097656,
+          "y": 9,
+          "width": 194,
+          "height": 254,
+          "fontSize": "14px",
+          "display": "grid",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 194,
+          "clientWidth": 194
+        },
+        ".grid figure .art": {
+          "x": 376.5555725097656,
+          "y": 9,
+          "width": 194,
+          "height": 194,
+          "fontSize": "14px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "hidden",
+          "scrollWidth": 194,
+          "clientWidth": 194
+        },
+        ".grid figure .art canvas": {
+          "x": 380.5555725097656,
+          "y": 13,
+          "width": 186,
+          "height": 186,
+          "fontSize": "14px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "clip",
+          "scrollWidth": 186,
+          "clientWidth": 186
+        },
+        ".grid figure .cap": {
+          "x": 376.5555725097656,
+          "y": 211,
+          "width": 194,
+          "height": 52,
+          "fontSize": "13px",
+          "display": "grid",
+          "padding": "3px 6px",
+          "overflow": "visible",
+          "scrollWidth": 192,
+          "clientWidth": 192
+        },
+        ".grid figure .caption-preview": {
+          "x": 383.4444580078125,
+          "y": 214.88888549804688,
+          "width": 110.22222137451172,
+          "height": 44.22222137451172,
+          "fontSize": "13px",
+          "display": "flex",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 110,
+          "clientWidth": 110
+        },
+        ".grid figure .caption-details": {
+          "x": 383.4444580078125,
+          "y": 214.88888549804688,
+          "width": 110.22222137451172,
+          "height": 44.22222137451172,
+          "fontSize": "13px",
+          "display": "flex",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 110,
+          "clientWidth": 110
+        },
+        ".grid figure .dim": {
+          "text": "24×24· 13 colors",
+          "x": 383.4444580078125,
+          "y": 243.11111450195312,
+          "width": 110.22222137451172,
+          "height": 16,
+          "fontSize": "12px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "hidden",
+          "scrollWidth": 110,
+          "clientWidth": 110
+        },
+        ".grid figure .name": {
+          "text": "cflandscape-long-sprite-name.png",
+          "x": 383.4444580078125,
+          "y": 214.88888549804688,
+          "width": 110.22222137451172,
+          "height": 28.22222328186035,
+          "fontSize": "13px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "hidden",
+          "scrollWidth": 218,
+          "clientWidth": 110
+        },
+        ".grid figure .tile-share": {
+          "x": 519.6666870117188,
+          "y": 215,
+          "width": 44,
+          "height": 44,
+          "fontSize": "16px",
+          "display": "grid",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 42,
+          "clientWidth": 42
+        },
+        ".palette-settings-panel": null
+      }
+    },
+    {
+      "version": "current",
+      "name": "cflandscape-long-sprite-name.png",
+      "panel": "open",
+      "file": "caption-current-long-open.png",
+      "viewport": {
+        "width": 947,
+        "height": 364,
+        "scrollX": 0,
+        "scrollY": 0,
+        "visualViewport": {
+          "width": 947.111083984375,
+          "height": 364,
+          "scale": 1,
+          "offsetLeft": 0,
+          "offsetTop": 0
+        }
+      },
+      "rects": {
+        ".grid": {
+          "x": 0,
+          "y": 0,
+          "width": 947.1111450195312,
+          "height": 340,
+          "fontSize": "14px",
+          "display": "flex",
+          "padding": "8px 24px 171.778px",
+          "overflow": "auto",
+          "scrollWidth": 947,
+          "clientWidth": 947
+        },
+        ".grid figure": {
+          "x": 424.5555725097656,
+          "y": 9.111111640930176,
+          "width": 98,
+          "height": 158,
+          "fontSize": "14px",
+          "display": "grid",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 98,
+          "clientWidth": 98
+        },
+        ".grid figure .art": {
+          "x": 424.5555725097656,
+          "y": 9.111111640930176,
+          "width": 98,
+          "height": 98,
+          "fontSize": "14px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "hidden",
+          "scrollWidth": 98,
+          "clientWidth": 98
+        },
+        ".grid figure .art canvas": {
+          "x": 428.5555725097656,
+          "y": 13.111111640930176,
+          "width": 90,
+          "height": 90,
+          "fontSize": "14px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "clip",
+          "scrollWidth": 90,
+          "clientWidth": 90
+        },
+        ".grid figure .cap": {
+          "x": 424.5555725097656,
+          "y": 115.11111450195312,
+          "width": 98,
+          "height": 52,
+          "fontSize": "13px",
+          "display": "grid",
+          "padding": "3px 6px",
+          "overflow": "visible",
+          "scrollWidth": 96,
+          "clientWidth": 96
+        },
+        ".grid figure .caption-preview": {
+          "x": 431.4444580078125,
+          "y": 119,
+          "width": 14.222222328186035,
+          "height": 44.22222137451172,
+          "fontSize": "13px",
+          "display": "flex",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 14,
+          "clientWidth": 14
+        },
+        ".grid figure .caption-details": {
+          "x": 431.4444580078125,
+          "y": 119,
+          "width": 14.222222328186035,
+          "height": 44.22222137451172,
+          "fontSize": "13px",
+          "display": "flex",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 14,
+          "clientWidth": 14
+        },
+        ".grid figure .dim": {
+          "text": "24×24· 13 colors",
+          "x": 431.4444580078125,
+          "y": 147.22222900390625,
+          "width": 14.222222328186035,
+          "height": 16,
+          "fontSize": "12px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "hidden",
+          "scrollWidth": 100,
+          "clientWidth": 14
+        },
+        ".grid figure .name": {
+          "text": "cflandscape-long-sprite-name.png",
+          "x": 431.4444580078125,
+          "y": 119,
+          "width": 14.222222328186035,
+          "height": 28.22222328186035,
+          "fontSize": "13px",
+          "display": "block",
+          "padding": "0px",
+          "overflow": "hidden",
+          "scrollWidth": 218,
+          "clientWidth": 14
+        },
+        ".grid figure .tile-share": {
+          "x": 471.6666564941406,
+          "y": 119.11111450195312,
+          "width": 44,
+          "height": 44,
+          "fontSize": "16px",
+          "display": "grid",
+          "padding": "0px",
+          "overflow": "visible",
+          "scrollWidth": 42,
+          "clientWidth": 42
+        },
+        ".palette-settings-panel": {
+          "x": 108.55555725097656,
+          "y": 190.22222900390625,
+          "width": 730,
+          "height": 75.77777862548828,
+          "fontSize": "14px",
+          "display": "grid",
+          "padding": "12px",
+          "overflow": "visible",
+          "scrollWidth": 728,
+          "clientWidth": 728
+        }
+      }
+    }
+  ],
+  "errors": [],
+  "restored": {
+    "policy": "free",
+    "user": "0",
+    "accelerometer": "1"
+  }
+}
