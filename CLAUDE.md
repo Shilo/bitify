@@ -41,7 +41,9 @@ partial-opacity `soft` state, without another scan or control.
 Full-palette thumbnails/editor swatches and New/Edit color previews paint directly
 to tiny canvases (1×1 solids; 100×100 at-most-16-color overview). This prevents
 observed Brave forced-dark CSS/SVG color substitutions. No UI-canvas readback or
-encoding enters import/export; palette values and 1-bit gradients/glyphs stay intact.
+encoding enters import/export; palette values stay intact. The 1-bit rail also uses
+100×100 paint-only diagonal pairs, and its two active opaque color inputs have
+pointer-inert 1×1 overlays. None hides its overlay; transparency glyphs remain CSS.
 Native inputs retain their hit targets beneath pointer-inert decorative canvases.
 
 Optional full-palette ordered dithering offers Off/2×2/4×4/8×8 and Dither strength 0–100%

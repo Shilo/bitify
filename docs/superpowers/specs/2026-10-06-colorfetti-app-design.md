@@ -90,9 +90,13 @@ selection/edit actions, focus treatment and empty overview remain intact.
 
 New/Edit color inputs retain their native 44px controls and values; an inset
 decorative canvas paints the chosen color with pointer events disabled, preserving
-native hit targets. The optional 1-bit gradient/glyph branch is unchanged. Browser
-themes may still restyle surrounding chrome; these canvases protect the actual
-full-palette colors. SVG image painting was rejected after the phone transformed
+native hit targets. As of October 16, the 1-bit rail also paints its unchanged
+135-degree two-color split into 100×100 canvases, first ink upper left. Its active
+opaque color inputs use pointer-inert 1×1 overlays inset inside the existing border;
+None removes that overlay and retains its checker/slash. Swap, native color picking
+and compact transparency glyphs retain their existing behavior. Browser themes may
+still restyle surrounding chrome; these canvases protect the actual palette colors.
+SVG image painting was rejected after the phone transformed
 dark colors as icons; the final renderer is verified across bright and dark colors.
 
 ## Optional original opacity — October 14, 2026

@@ -61,6 +61,11 @@ nominal pixel storage, excluding browser/GPU overhead. Session-only choices add
 another overview each and are not bounded by the saved-library limit. This is
 separate from the animation index-cache budget and does not bound total app memory.
 
+The 1-bit rail uses twelve 100×100 diagonal pair canvases (480,000 nominal pixel
+bytes while open), with two 1×1 active-color overlays while opaque. Closing the
+rail removes its canvases; None removes the corresponding active overlay. Painting
+has no timer, readback, conversion or export work, and does not depend on artwork size.
+
 ## Optional ordered dithering (October 14, 2026)
 
 Off and Amount zero retain the existing nearest path without dither scratch.

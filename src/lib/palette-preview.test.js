@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { palettePreviewColors, paintPalettePreview, paintPaletteSwatch } from './palette-preview.js';
+import { palettePreviewColors, paintPalettePreview, paintPaletteSwatch, paintPalettePair } from './palette-preview.js';
+import { PRESETS } from './presets.js';
 import { FULL_PRESETS } from './palette-library.js';
 
 const gray = n => '#' + n.toString(16).padStart(2, '0').repeat(3);
@@ -56,6 +57,7 @@ function mockCanvas(hasContext = true) {
     fillRect(...args) { commands.push(['rect', fillStyle, ...args]); },
     beginPath() { commands.push(['begin']); },
     moveTo(...args) { commands.push(['move', ...args]); },
+    lineTo(...args) { commands.push(['line', ...args]); },
     arc(...args) { commands.push(['arc', ...args]); },
     closePath() { commands.push(['close']); },
     fill() { commands.push(['fill', fillStyle]); },
@@ -70,6 +72,28 @@ function mockCanvas(hasContext = true) {
 const fillsOf = commands => commands.filter(command => command[0] === 'color').map(command => command[1]);
 
 describe('color-critical palette canvas painting', () => {
+  it.each(PRESETS)('keeps the $name two-ink colors and diagonal orientation without readback', preset => {
+    const { canvas, commands } = mockCanvas();
+    paintPalettePair(canvas, [preset.dark, preset.light]);
+    expect(commands).toEqual([
+      ['width', 100], ['height', 100], ['context', '2d'], ['color', preset.light], ['rect', preset.light, 0, 0, 100, 100],
+      ['begin'], ['move', 0, 0], ['line', 100, 0], ['line', 0, 100], ['close'], ['color', preset.dark], ['fill', preset.dark],
+    ]);
+  });
+
+  it('updates two inks atomically and tolerates an unavailable context', () => {
+    const { canvas, commands } = mockCanvas();
+    const action = paintPalettePair(canvas, ['#000000', '#ffffff']);
+    action.update(['#abcdef', '#123456']);
+    expect(fillsOf(commands)).toEqual(['#ffffff', '#000000', '#123456', '#abcdef']);
+    const before = [...commands];
+    for (const value of [null, [], ['#000000'], ['#000000', 'transparent'], ['#000000', '#ffffff', '#123456']]) {
+      expect(() => action.update(value)).toThrow(TypeError);
+      expect(commands).toEqual(before);
+    }
+    expect(() => paintPalettePair(mockCanvas(false).canvas, ['#000000', '#ffffff'])).not.toThrow();
+  });
+
   it.each(['#000000', '#ffffff', '#FFF1e8', '#ff0000', '#00ff00', '#0000ff', '#00ffff', '#ffff00', '#ff00ff', '#808080', '#123456', '#abcdef'])('paints exact opaque %s into a single source pixel without interpreting the color', color => {
     const { canvas, commands } = mockCanvas();
     paintPaletteSwatch(canvas, color);

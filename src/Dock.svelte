@@ -16,6 +16,7 @@
   import { sliderDrag, pausedCommit } from './lib/gesture.js';
   import { tooltip } from './lib/tooltip.js';
   import { compactPaletteName } from './lib/palette-label.js';
+  import { paintPaletteSwatch } from './lib/palette-preview.js';
   import { GENERATED_PALETTE_ID, GENERATED_MAX_COLORS } from './lib/palette-library.js';
 
   const matchingDescription = 'Compare colors by appearance (Oklab) or red, green and blue values (RGB).';
@@ -707,10 +708,12 @@
            color it had, and choosing one there brings the color back. -->
       <label class="sw" class:none={none === 1} style:background={none === 1 ? null : first} use:tooltip={none === 1 ? 'Choose a color to restore outlines and dark areas.' : 'Choose the color for outlines and dark areas.'}>
         <input type="color" bind:value={first} oninput={() => { if (none === 1) none = 0; showOriginal = false; }} aria-label="Color for lines and dark pixels{none === 1 ? ': None' : ''}" />
+        {#if none !== 1}<canvas aria-hidden="true" use:paintPaletteSwatch={first}></canvas>{/if}
       </label>
       <button class="ib glass-btn" onclick={swap} aria-label="Swap colors" use:tooltip={'Exchange the two colors, including transparency.'}><PixelIcon name="swap" /></button>
       <label class="sw" class:none={none === 2} style:background={none === 2 ? null : second} use:tooltip={none === 2 ? 'Choose a color to restore fills and highlights.' : 'Choose the color for fills and highlights.'}>
         <input type="color" bind:value={second} oninput={() => { if (none === 2) none = 0; showOriginal = false; }} aria-label="Color for fill and light pixels{none === 2 ? ': None' : ''}" />
+        {#if none !== 2}<canvas aria-hidden="true" use:paintPaletteSwatch={second}></canvas>{/if}
       </label>
     </div>
   {/snippet}

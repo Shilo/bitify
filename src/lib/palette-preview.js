@@ -56,6 +56,29 @@ export function paintPaletteSwatch(canvas, color) {
   return paintAction(canvas, color, drawSwatch);
 }
 
+// The two-ink rail retains its 135-degree split: first in the upper left,
+// second in the lower right. Underpaint keeps the diagonal fully opaque.
+function drawPair(canvas, colors) {
+  if (!Array.isArray(colors) || colors.length !== 2) throw new TypeError('Two ink colors are required.');
+  for (const color of colors) paintColor(color);
+  canvas.width = 100; canvas.height = 100;
+  const context = canvas.getContext('2d');
+  if (!context) return;
+  context.fillStyle = colors[1];
+  context.fillRect(0, 0, 100, 100);
+  context.beginPath();
+  context.moveTo(0, 0);
+  context.lineTo(100, 0);
+  context.lineTo(0, 100);
+  context.closePath();
+  context.fillStyle = colors[0];
+  context.fill();
+}
+
+export function paintPalettePair(canvas, colors) {
+  return paintAction(canvas, colors, drawPair);
+}
+
 function drawPreview(canvas, colors) {
   if (!Array.isArray(colors) || colors.length > 256) throw new TypeError('Palette paintings support zero to 256 colors.');
   // Validate all entries, including entries the sixteen-color overview omits.
