@@ -1,5 +1,44 @@
 # Colorfetti design
 
+## Preview navigation — October 16, 2026
+
+Preview opens at Fit. Wheel (including trackpad Ctrl-wheel), +/− controls and
+two-finger pinch zoom the image from 0.25× to 16× relative to Fit. Wheel/pinch
+anchors the image under the cursor/finger midpoint until an image edge constrains
+it. One finger or a primary mouse drag pans; each undersized axis stays centered,
+and oversized axes stop at the image edges. Fit and keyboard 0 restore the whole
+image. Unmodified +/=/− zoom; arrow keys move the view. Browser Ctrl/Cmd keyboard
+zoom remains available. View state is local and resets on reopening.
+
+A quick stationary click/tap on image or letterbox closes at every zoom level.
+Movement beyond 8 CSS pixels permanently disqualifies that sequence, even if it
+returns to its origin. Multiple pointers, a long hold, cancellation, lost capture,
+blur, resize and release over controls cannot dismiss. The final finger after a
+pinch can continue panning without a jump or becoming a new dismissal tap.
+Pointer capture keeps drags outside the image tracked. Long hold and Space still
+compare locally; manipulation immediately releases pointer comparison. Separate
+zoom controls occupy the top left; existing image actions and Close remain below.
+Native Escape and modality-aware focus return remain. Enter on focused artwork
+closes through the same Space-comparison guard, without using Tile's Add action;
+repeated Enter keydowns are ignored. Other buttons retain native Enter behavior.
+At widths up to 800px, viewer feedback sits below the zoom capsule so visible
+messages, busy feedback and persistent Retry cannot cover its hit targets.
+Double-click/tap zoom is intentionally omitted because the first click/tap closes.
+
+Preview art owns touch pan/pinch with `touch-action: none`; controls and the main
+page keep their native interaction rules. Preview dragging pans instead of native
+file export; wall export dragging is unchanged. Save/Copy use full original source
+dimensions regardless of the view. The checker follows transformed image origin
+and scale. Zoom transforms immediately; sampling refines after a 180ms pause,
+targeting 4,194,304 sampled pixels across an entire animation or the existing Fit
+sampling, whichever is larger. Long animations may retain Fit sampling at every
+zoom level to avoid multiplying their existing per-frame caches. Existing
+source-size/short-axis sampling rules still apply;
+this is not a whole-app memory bound. Panning retains raster size. No full-source
+conversion is requested for every pointer move. Very large sources can remain
+sampled at maximum zoom. Browser evidence and test limits are recorded in
+`docs/research/2026-10-16-preview-navigation.md`.
+
 ## Modal gesture dismissal — October 16, 2026
 
 Backdrop dismissal requires a primary pointer gesture that both starts and ends

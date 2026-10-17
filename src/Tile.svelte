@@ -20,7 +20,7 @@
   // Without `onremove` the tile is a preview only and has no buttons.
   // `set` is the style's settings. `budget` is set while one of their sliders is being dragged:
   // the milliseconds this tile may take to convert its image after each move.
-  let { item, first, second, style, set, family = 'two-color', palette, palettePending = false, analysisPending = false, alphaCut = 128, alphaMode = 'cut', metric = 'oklab', maxColors = 0, cleanup = false, dither = 'none', ditherStrength = 50, colorUsageLabel = '', usageIdentity, onusageframe, active = true, exportDisabled = false, onpalettestatus, paletteRetry = 0, flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onreusecolors, reuseDisabled = false, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false, exportDrag } = $props();
+  let { item, first, second, style, set, family = 'two-color', palette, palettePending = false, analysisPending = false, alphaCut = 128, alphaMode = 'cut', metric = 'oklab', maxColors = 0, cleanup = false, dither = 'none', ditherStrength = 50, colorUsageLabel = '', usageIdentity, onusageframe, active = true, exportDisabled = false, onpalettestatus, paletteRetry = 0, flipped, budget = 0, inset = 8, aspect = 1, inspectionScale = 1, onshare, oncopy, onreusecolors, reuseDisabled = false, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false, exportDrag } = $props();
   const paletteCut = $derived(effectiveAlphaCut(alphaMode, alphaCut));
   const failureOwner = Symbol('palette preview surface');
   const reportStage = (type, stage, inputs, attempt, error) => untrack(() => onpalettestatus?.({ type, owner: failureOwner, stage, inputs, attempt, error }));
@@ -104,7 +104,7 @@
   // rests or is let go. `shown` in layout.js has the rules. The image sits 8px in from each side
   // of the square, and a square with no room for it has not been laid out yet.
   const across = $derived(Math.min((box - inset * 2) / item.img.w, (boxHeight - inset * 2) / item.img.h) * Math.max(item.img.w, item.img.h));
-  const size = $derived(across > 0 ? shown(item.img.w, item.img.h, across * devicePixelRatio, budget, pace) : null);
+  const size = $derived(across > 0 ? shown(item.img.w, item.img.h, across * devicePixelRatio * inspectionScale, budget, pace) : null);
   // the picture's width and height, each on its own so that nothing is redrawn when `size` is worked out again to the same numbers
   const mw = $derived(size ? size[0] : 0);
   const mh = $derived(size ? size[1] : 0);

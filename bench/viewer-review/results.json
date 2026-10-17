@@ -1,0 +1,42 @@
+{
+  "reviewDate": "2026-10-16",
+  "reviewer": "independent adversarial sub-agent",
+  "finalAgreement": "No further implementation fixes warranted by the evidence collected.",
+  "finalBrowserRun": {
+    "url": "http://127.0.0.1:5299/bench/viewer-navigation-qa.html",
+    "cases": 67,
+    "passed": 67,
+    "failures": [],
+    "iframeAtCompletion": { "x": 8, "y": 0.1875, "width": 322, "height": 570 },
+    "largeAnimationCases": [
+      "Palette converted and Original playback respects clip refinement budget",
+      "1-bit converted and Original playback respects clip refinement budget"
+    ]
+  },
+  "independentSourceChecks": {
+    "command": "node bench/viewer-review/adversarial.mjs",
+    "assertions": 94,
+    "pass": true,
+    "coverage": "All six three-pointer lift orders, cancel/resize/no cancellation, exact rebase invariance, final pointer/hold retirement, and out-and-return drag dismissal rejection at four zoom levels."
+  },
+  "focusedUnitRun": { "files": 2, "tests": 23, "passed": 23 },
+  "nativeBrowserChecks": [
+    { "check": "Fresh production pointer capture tracks drag beyond iframe boundary, constrains pan, preserves preview; subsequent click dismisses.", "pass": true },
+    { "check": "Corrected focused artwork Enter closes preview.", "pass": true },
+    { "check": "Toolbar Zoom in Enter retains native button behavior and changes scale from 1 to 1.25.", "pass": true },
+    { "check": "Actual Copy at 320px width displays toast at y=80, leaves Zoom in hit target exposed, and native Zoom in click changes scale from 1.25 to 1.5625 while feedback remains visible.", "pass": true }
+  ],
+  "findingsAndDisposition": [
+    { "severity": "P2", "finding": "Focused artwork advertised Close but Enter did nothing.", "resolution": "Scoped Enter capture closes through navigation; rejected Tile onactivate fix because it would add an Add images caption." },
+    { "severity": "P2", "finding": "Zoom refinement could amplify per-frame legacy and Original animation buffers.", "resolution": "4MP refinement target now applies across the clip with multiplier floor 1, retaining prior Fit sampling. Source retention arithmetic established growth; no crash or heap measurement was claimed." },
+    { "severity": "P2", "finding": "Mobile Copy/failure toast obscured and intercepted Fit and Zoom in.", "resolution": "Toast sits below zoom through the existing 800px breakpoint. Rejected narrower 680px proposal after safe-area-left 44px counterexample." },
+    { "severity": "P2", "finding": "Old harness still required a removed Preview Reuse action.", "resolution": "Checks now scope actual Preview Save, Copy, Compare and Close controls." },
+    { "severity": "test fixture", "finding": "First expanded run passed 65/67 because growing output pushed animated iframe offscreen and correctly paused it.", "resolution": "Verified native onscreen playback resumes; bounded results below iframe and explicit scroll keep animation visible. Final independent run passes 67/67 without production playback changes." }
+  ],
+  "limits": [
+    "Touch PointerEvent sequences remain synthetic and bypass capture only in the test harness; native mouse checks exercise production capture.",
+    "Native multi-finger touchscreen arbitration, physical Android/iOS, and Safari were not validated.",
+    "Cloned busy/failure/Retry notices validate layout and hit targets, not native palette failure recovery; real Copy validates the actual transient feedback path.",
+    "Clip-wide refinement can retain Fit-level detail for long animations; existing Fit/source/short-axis allocations are not a whole-app memory bound."
+  ]
+}

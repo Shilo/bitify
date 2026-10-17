@@ -1,0 +1,17 @@
+/* Only the inspection surface owns touch gestures. Toolbar targets retain their
+   native behavior; page zoom elsewhere is unchanged. */
+:root .image-viewer { overflow: hidden; overscroll-behavior: contain; }
+:root .viewer-art, :root .viewer-art .art { touch-action: none; cursor: zoom-out; }
+:root .viewer-art.is-zoomed, :root .viewer-art.is-zoomed .art { cursor: grab; }
+:root .viewer-art.is-dragging, :root .viewer-art.is-dragging .art { cursor: grabbing; }
+:root .viewer-tile { transform-origin: center; }
+:root .viewer-zoom { position: absolute; z-index: 2; top: calc(env(safe-area-inset-top,0px) + 12px); left: calc(env(safe-area-inset-left,0px) + 12px); }
+:root .viewer-zoom .icon-only { font-size: 24px; line-height: 1; }
+@media (max-width: 800px) {
+  :root .viewer-toast { --gl-toast-top: calc(env(safe-area-inset-top,0px) + var(--control-shell) + 24px); }
+}
+@media (pointer: coarse) {
+  :root .viewer-zoom .btn { min-height: 44px; height: 44px; }
+  :root .viewer-zoom .btn.icon-only { min-width: 44px; width: 44px; }
+  :root .viewer-zoom { height: 56px; }
+}

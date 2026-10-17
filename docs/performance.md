@@ -1,5 +1,21 @@
 # Performance
 
+## Preview zoom and pan (October 16, 2026)
+
+Preview keeps the Tile's layout at Fit and transforms its presentation immediately.
+After zoom settles for 180ms, an optional `inspectionScale` increases sampling,
+targeting 4,194,304 pixels across a complete clip or the existing Fit raster,
+whichever is larger. Dividing the refinement allowance by frame count avoids
+multiplying Tile's per-frame legacy mask/color and Original caches on long GIFs.
+Those clips may keep Fit sampling even at maximum zoom; tiny sprites already
+rendered at source resolution remain exact.
+The shared `shown` source cap and minimum short-axis rules still apply. Wall tiles
+default to scale 1. Panning changes only presentation/checker position, retaining
+conversion dimensions; exports continue reading the complete source independently.
+This adds no source-resolution animation cache and does not promise a whole-app
+memory bound or physical-device frame rate. See
+[the design and test record](research/2026-10-16-preview-navigation.md).
+
 ## Output color metadata and optional opacity preservation
 
 Wall color counts do not schedule full-resolution conversions. When an existing

@@ -1,0 +1,91 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Preview navigation QA</title>
+<style>body{font:15px system-ui;background:#17202c;color:#eee}button{padding:12px;margin:8px}iframe{display:block;border:1px solid #777;max-width:none}pre{white-space:pre-wrap;max-height:240px;overflow:auto}</style>
+<h1>Preview navigation QA</h1>
+<p>Runs the actual app in an iframe. Mouse/touch pointer sequences here are synthetic. Native mouse capture/wheel and responsive screenshots are checked separately in Codex Browser.</p>
+<button id="run">Run integration checks</button><output id="status">Ready</output>
+<iframe id="app" width="1100" height="760" src="/"></iframe>
+<pre id="results"></pre>
+<script type="module">
+const frame=document.querySelector('iframe'), output=document.querySelector('#results'), status=document.querySelector('#status');
+const pause=ms=>new Promise(r=>setTimeout(r,ms));
+const until=async(fn)=>{for(let i=0;i<200;i++){if(fn())return;await pause(30);}throw Error('Timed out waiting for app');};
+const rows=[];
+let win,doc;
+const assert=(value,message)=>{if(!value)throw Error(message);};
+const dialog=()=>doc.querySelector('.image-viewer[open]');
+const view=()=>{const m=new win.DOMMatrix(doc.querySelector('.viewer-tile').style.transform);return {scale:m.a,x:m.e,y:m.f};};
+const button=name=>[...(dialog()??doc).querySelectorAll('button')].find(b=>b.getAttribute('aria-label')===name);
+const tick=()=>pause(40);
+async function check(name,run){try{await run();rows.push({name,pass:true});}catch(e){rows.push({name,pass:false,error:e.message});}output.textContent=JSON.stringify(rows,null,2);}
+async function open(){if(dialog())button('Close preview').click();await tick();doc.querySelector('.tile .art').click();await until(dialog);await tick();
+  // Synthetic pointers have no browser input stream to capture. The production
+  // capture path is exercised separately using actual Codex mouse input.
+  dialog().setPointerCapture=()=>{};dialog().hasPointerCapture=()=>false;
+}
+const art=()=>doc.querySelector('.viewer-art .art');
+function pointer(type,id,x,y,extra={}){const target=dialog();target && (type==='pointerdown'?art():target).dispatchEvent(new win.PointerEvent(type,{bubbles:true,cancelable:true,pointerId:id,pointerType:'touch',isPrimary:id===1,button:0,buttons:type==='pointerup'?0:1,clientX:x,clientY:y,...extra}));}
+function click(){dialog()?.dispatchEvent(new win.MouseEvent('click',{bubbles:true,detail:1}));}
+function wheel(deltaY,extra={}){art().dispatchEvent(new win.WheelEvent('wheel',{bubbles:true,cancelable:true,deltaY,clientX:frame.width/2,clientY:frame.height/2,...extra}));}
+async function zoom(){for(let i=0;i<8;i++)button('Zoom in').click();await tick();}
+async function importFile(path,name){const blob=await(await fetch(path)).blob();const dt=new win.DataTransfer();dt.items.add(new win.File([blob],name,{type:blob.type}));doc.body.dispatchEvent(new win.DragEvent('drop',{bubbles:true,cancelable:true,dataTransfer:dt}));await until(()=>[...doc.querySelectorAll('.tile .cap')].some(e=>e.textContent.includes(name)));}
+async function checkToastTargets(leftInset=0){
+  // Layout fixtures clone the actual viewer toast, without inventing production
+  // failure hooks or replacing its live Svelte-owned children. Native Copy is
+  // also tested separately to verify the real transient message path.
+  const zoom=doc.querySelector('.viewer-zoom'),oldLeft=zoom.style.left;
+  if(leftInset)zoom.style.left=`${12+leftInset}px`;
+  try{for(const kind of ['message','busy','failure']){
+    const notice=doc.querySelector('.viewer-toast').cloneNode(true);notice.hidden=false;notice.classList.add('is-visible');notice.setAttribute('data-qa-toast',kind);
+    notice.innerHTML=kind==='failure'?'<span class="glass-toast__text">Preview could not finish. Retry or change settings.</span><button class="btn glass-btn" aria-label="Retry preview">Retry</button>':kind==='busy'?'<span class="spin" aria-hidden="true"></span><span class="glass-toast__text">Preparing converted image…</span>':'<span class="glass-toast__text">Copied image.</span>';
+    dialog().append(notice);
+    try{await pause(220);for(const name of ['Zoom out','Fit image','Zoom in']){const b=button(name),r=b.getBoundingClientRect();assert(doc.elementFromPoint(r.x+r.width/2,r.y+r.height/2)?.closest('button')===b,`${kind} obscures ${name}`);}
+      if(kind==='failure'){const retry=notice.querySelector('button'),r=retry.getBoundingClientRect();assert(doc.elementFromPoint(r.x+r.width/2,r.y+r.height/2)?.closest('button')===retry,'Retry is covered');let retried=0;retry.onclick=()=>retried++;retry.click();assert(retried===1&&dialog(),'Retry failed or dismissed');}
+    }finally{notice.remove();}
+  }}finally{zoom.style.left=oldLeft;}
+}
+document.querySelector('#run').onclick=async()=>{
+  document.querySelector('#run').disabled=true;status.textContent='Running';rows.length=0;
+  try{
+    win=frame.contentWindow;doc=frame.contentDocument;await until(()=>doc.querySelector('.art'));
+    [...doc.querySelectorAll('button')].find(b=>b.textContent.trim()==='Got it')?.click();
+    await importFile('/bench/viewer-navigation-evidence/landmarks.png','landmarks.png');
+    for(const [width,height] of [[1100,760],[390,844],[320,568],[844,390]]){
+      frame.width=width;frame.height=height;frame.scrollIntoView({block:'start',inline:'start'});await pause(100);
+      const prefix=`${width}×${height} `;
+      await check(prefix+'open fits without crop; tap closes; reopening resets',async()=>{await open();assert(view().scale===1,'initial fit');pointer('pointerdown',1,width/2,height/2);pointer('pointerup',1,width/2,height/2);click();await tick();assert(!dialog(),'tap should close');await open();assert(view().scale===1&&view().x===0,'reopen fit');});
+      await check(prefix+'all controls visible and no viewport overflow',async()=>{await open();for(const name of ['Zoom in','Zoom out','Fit image','Save image','Copy image','Show original image','Close preview']){const r=button(name).getBoundingClientRect();assert(r.left>=0&&r.top>=0&&r.right<=width+1&&r.bottom<=height+1,name+' clipped');}assert(dialog().scrollWidth===dialog().clientWidth,'horizontal overflow');});
+      await check(prefix+'visible message, busy and persistent Retry leave zoom hit targets clear',async()=>{await open();await checkToastTargets();});
+      await check(prefix+'wheel zoom, trackpad ctrl-wheel, line/page units, limits',async()=>{await open();wheel(-200);await tick();assert(view().scale>1,'wheel in');wheel(-100,{ctrlKey:true});await tick();assert(view().scale>2,'trackpad pinch');wheel(1,{deltaMode:1});wheel(1,{deltaMode:2});for(let i=0;i<12;i++)wheel(240);await tick();assert(Math.abs(view().scale-.25)<.0001,'minimum');for(let i=0;i<20;i++)wheel(-240);await tick();assert(Math.abs(view().scale-16)<.0001,'maximum');assert(button('Zoom in').disabled,'max button');button('Fit image').click();await tick();assert(view().scale===1&&view().x===0&&view().y===0,'fit');});
+      await check(prefix+'mouse drag pans both axes and cannot dismiss',async()=>{await open();await zoom();pointer('pointerdown',1,width/2,height/2,{pointerType:'mouse'});pointer('pointermove',1,width/2+60,height/2+60,{pointerType:'mouse'});pointer('pointerup',1,width/2+60,height/2+60,{pointerType:'mouse'});click();await tick();assert(dialog(),'drag closed');assert(view().x>0&&view().y>0,'both axes');});
+      await check(prefix+'touch drag out and back never becomes tap',async()=>{await open();await zoom();pointer('pointerdown',1,width/2,height/2);pointer('pointermove',1,width/2+60,height/2+60);pointer('pointermove',1,width/2,height/2);pointer('pointerup',1,width/2,height/2);click();await tick();assert(dialog(),'return drag closed');});
+      for(const first of [1,2])await check(prefix+`pinch in/out, lift ${first} then pan remaining finger`,async()=>{await open();const x=width/2,y=height/2;pointer('pointerdown',1,x-30,y);pointer('pointerdown',2,x+30,y);pointer('pointermove',1,x-65,y);pointer('pointermove',2,x+65,y);await tick();assert(view().scale>2,'pinch out');pointer('pointermove',1,x-50,y);pointer('pointermove',2,x+50,y);await tick();assert(view().scale<2,'pinch in');pointer('pointerup',first,x+(first===1?-50:50),y);pointer('pointermove',3-first,x+(first===1?70:-30),y+20);pointer('pointerup',3-first,x+(first===1?70:-30),y+20);click();await tick();assert(dialog(),'pinch dismissed');assert(view().x>0,'remaining finger did not pan');});
+      await check(prefix+'stationary multitouch and cancelled pointers never dismiss',async()=>{await open();pointer('pointerdown',1,100,200);pointer('pointerdown',2,150,200);pointer('pointerup',2,150,200);pointer('pointerup',1,100,200);click();await tick();assert(dialog(),'multitouch closed');pointer('pointerdown',1,100,200);pointer('pointercancel',1,100,200);click();await tick();assert(dialog(),'cancel closed');});
+      await check(prefix+'hold comparison restores when dragging; quick tap still closes after hold',async()=>{await open();const before=button('Show original image');assert(before,'expected converted');pointer('pointerdown',1,width/2,height/2);await pause(470);assert(button('Show converted image'),'hold compare');pointer('pointermove',1,width/2+25,height/2+25);await tick();assert(button('Show original image'),'move must restore compare');pointer('pointerup',1,width/2+25,height/2+25);click();await tick();assert(dialog(),'hold closed');pointer('pointerdown',1,width/2,height/2);pointer('pointerup',1,width/2,height/2);click();await tick();assert(!dialog(),'subsequent tap failed');});
+      await check(prefix+'release over toolbar is safe; Fit/compare/Close remain independent',async()=>{await open();await zoom();const r=button('Close preview').getBoundingClientRect();pointer('pointerdown',1,width/2,height/2);pointer('pointermove',1,r.x+10,r.y+10);pointer('pointerup',1,r.x+10,r.y+10);click();await tick();assert(dialog(),'release on close activated it');const before=view();button('Show original image').click();await tick();assert(view().scale===before.scale&&view().x===before.x,'compare reset view');button('Fit image').click();await tick();assert(view().scale===1,'fit failed');button('Close preview').click();await tick();assert(!dialog(),'close button failed');});
+      await check(prefix+'keyboard zoom, pan and reset',async()=>{await open();for(const key of [...Array(8).fill('+'),'ArrowLeft','ArrowUp'])doc.activeElement.dispatchEvent(new win.KeyboardEvent('keydown',{bubbles:true,cancelable:true,key}));await tick();assert(view().scale>1&&view().x>0&&view().y>0,'keys');doc.activeElement.dispatchEvent(new win.KeyboardEvent('keydown',{bubbles:true,cancelable:true,key:'0'}));await tick();assert(view().scale===1&&view().x===0,'keyboard fit');});
+      await check(prefix+'focused artwork Enter closes without adding an Add caption',async()=>{await open();assert(!doc.querySelector('.viewer-tile .example-caption'),'unexpected Add caption');art().focus();art().dispatchEvent(new win.KeyboardEvent('keydown',{bubbles:true,cancelable:true,key:'Enter'}));await tick();assert(!dialog(),'artwork Enter failed to close');});
+      await check(prefix+'Space comparison gates artwork Enter and ignores held Enter repeats',async()=>{await open();art().focus();art().dispatchEvent(new win.KeyboardEvent('keydown',{bubbles:true,cancelable:true,key:' ',code:'Space'}));await tick();assert(button('Show converted image'),'Space did not compare');art().dispatchEvent(new win.KeyboardEvent('keydown',{bubbles:true,cancelable:true,key:'Enter'}));await tick();assert(dialog(),'Enter closed while Space held');art().dispatchEvent(new win.KeyboardEvent('keyup',{bubbles:true,cancelable:true,key:' ',code:'Space'}));await tick();assert(button('Show original image'),'Space release did not restore');art().dispatchEvent(new win.KeyboardEvent('keydown',{bubbles:true,cancelable:true,key:'Enter',repeat:true}));await tick();assert(dialog(),'repeated Enter closed');art().dispatchEvent(new win.KeyboardEvent('keydown',{bubbles:true,cancelable:true,key:'Enter'}));await tick();assert(!dialog(),'fresh Enter did not close');});
+      await check(prefix+'detail sampling refines after zoom and pan retains buffer size',async()=>{await open();const canvas=doc.querySelector('.viewer-tile canvas');const initial=canvas.width;await zoom();await pause(500);assert(canvas.width>initial,'zoom has no added detail');const w=canvas.width;pointer('pointerdown',1,width/2,height/2);pointer('pointermove',1,width/2+20,height/2+20);pointer('pointerup',1,width/2+20,height/2+20);await tick();assert(canvas.width===w,'pan reallocates raster');});
+    }
+    for(const width of [700,800,801])await check(`${width}px toast layout with 44px left safe-area offset`,async()=>{frame.width=width;frame.height=390;await pause(80);await open();await checkToastTargets(44);});
+    await check('resize while pinching retires gesture and retains constrained zoom',async()=>{await open();await zoom();pointer('pointerdown',1,300,200);pointer('pointerdown',2,400,200);frame.width=390;frame.height=844;await pause(100);pointer('pointerup',1,300,200);pointer('pointerup',2,400,200);click();await tick();assert(dialog(),'resize armed close');});
+    await check('animation preview stays playable while zoomed and returns to wall',async()=>{button('Close preview').click();await tick();await importFile('/bench/claude-audit-2026-10-15/device/fixtures/walk.gif','walk.gif');const tile=[...doc.querySelectorAll('.tile')].find(e=>e.textContent.includes('walk.gif'));tile.querySelector('.art').click();await until(dialog);await zoom();assert(doc.querySelector('.viewer-tile canvas').width>0,'no animation canvas');await pause(250);assert(dialog(),'animation closed');button('Close preview').click();await tick();assert(doc.querySelectorAll('.grid .tile').length===2,'wall damaged');});
+    await importFile('/bench/viewer-navigation-evidence/large-clip.gif','large-clip.gif');frame.width=320;frame.height=568;frame.scrollIntoView({block:'start',inline:'start'});await pause(100);
+    for(const family of ['Palette','1-bit'])await check(`${family} large animation refinement respects clip budget in converted and Original playback`,async()=>{
+      if(dialog())button('Close preview').click();await tick();
+      doc.querySelector('button[aria-label="Palette"]').click();await tick();
+      [...doc.querySelectorAll('.palette-family-tabs button')].find(b=>b.textContent.trim()===family).click();await tick();
+      doc.querySelector('button[aria-label="Palette"]').click();await tick();
+      const tile=[...doc.querySelectorAll('.grid .tile')].find(e=>e.textContent.includes('large-clip.gif'));tile.querySelector('.art').click();await until(dialog);await until(()=>doc.querySelector('.viewer-tile canvas'));
+      const initial=doc.querySelector('.viewer-tile canvas').width;await zoom();await until(()=>doc.querySelector('.viewer-tile canvas').width>initial);await pause(300);
+      const canvas=doc.querySelector('.viewer-tile canvas');assert(canvas.width<800,'whole clip expanded to full source');assert(canvas.width*canvas.height*12<=4194304*1.005,'clip raster refinement budget exceeded');
+      button('Show original image').click();await tick();const original=doc.querySelector('.viewer-tile canvas');assert(original.width*original.height*12<=4194304*1.005,'Original clip exceeds refinement budget');
+      const pixel=()=>[...doc.querySelector('.viewer-tile canvas').getContext('2d').getImageData(0,0,1,1).data].join(',');const first=pixel();await until(()=>pixel()!==first);assert(dialog(),'playback closed viewer');
+      button('Close preview').click();await tick();assert(doc.querySelectorAll('.grid .tile').length===3,'large clip damaged wall');
+    });
+  }catch(e){rows.push({name:'suite setup',pass:false,error:e.stack});}
+  status.textContent=`${rows.filter(r=>r.pass).length}/${rows.length} passed`;output.textContent=JSON.stringify(rows,null,2);document.querySelector('#run').disabled=false;
+};
+</script>

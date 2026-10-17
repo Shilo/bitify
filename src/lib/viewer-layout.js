@@ -6,3 +6,10 @@ export function fitViewerImage(w, h, width, height, inset = 0) {
   const scale = Math.min(availableWidth / w, availableHeight / h);
   return { width: w * scale + inset * 2, height: h * scale + inset * 2 };
 }
+
+// Tile retains sampled Original/legacy buffers across animation frames. Budget
+// zoom refinement across the clip, while preserving its existing Fit sampling.
+export function viewerInspectionScale(width, height, zoom, dpr = 1, frames = 1) {
+  const pixels = width * height * dpr ** 2 * Math.max(1, frames);
+  return Math.min(Math.max(1, zoom), Math.max(1, Math.sqrt(4194304 / Math.max(1, pixels))));
+}

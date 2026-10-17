@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { fitViewerImage } from './viewer-layout.js';
+import { fitViewerImage, viewerInspectionScale } from './viewer-layout.js';
+import { shown } from './layout.js';
 describe('fullscreen image fit', () => {
   it('uses landscape viewport width for a wide image rather than a square', () => {
     const fit = fitViewerImage(1600, 900, 1280, 680);
@@ -21,5 +22,30 @@ describe('fullscreen image fit', () => {
         expect(Math.min(viewport[0] - fit.width,viewport[1] - fit.height)).toBeCloseTo(0);
       }
     }
+  });
+});
+
+describe('viewer zoom refinement across animation frames', () => {
+  it('refines stills and small clips without exceeding the requested zoom', () => {
+    expect(viewerInspectionScale(320, 200, 2, 1)).toBe(2);
+    expect(viewerInspectionScale(320, 200, 2, 1, 4)).toBe(2);
+    expect(viewerInspectionScale(320, 200, .25, 1, 4)).toBe(1);
+  });
+  it('accounts for DPR and clip length before allocating larger legacy/Original buffers', () => {
+    const scale = viewerInspectionScale(320, 320, 16, 1, 12);
+    const [w, h] = shown(800, 800, 320 * scale);
+    expect(w).toBeLessThan(800);
+    expect(w * h * 12).toBeLessThanOrEqual(4194304 * 1.005); // integer raster rounding
+    expect(viewerInspectionScale(320, 320, 16, 2, 12)).toBe(1);
+  });
+  it('does not multiply a long clip cache or shrink its existing Fit raster', () => {
+    const scale = viewerInspectionScale(390, 390, 16, 1, 60);
+    expect(scale).toBe(1);
+    expect(shown(800, 800, 390 * scale)).toEqual(shown(800, 800, 390));
+    expect(viewerInspectionScale(3000, 2000, 16, 2, 60)).toBe(1);
+  });
+  it('keeps tiny sprites at their source size even when their clip has many frames', () => {
+    const scale = viewerInspectionScale(390, 390, 16, 1, 60);
+    expect(shown(48, 48, 390 * scale)).toEqual([48, 48]);
   });
 });

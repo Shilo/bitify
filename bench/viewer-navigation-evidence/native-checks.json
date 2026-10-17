@@ -1,0 +1,46 @@
+{
+  "browser": "Codex in-app browser",
+  "desktop": {
+    "width": 1280,
+    "height": 720
+  },
+  "phone": {
+    "width": 390,
+    "height": 844
+  },
+  "openCloseCycles": [
+    {
+      "i": 0,
+      "opened": true,
+      "closed": true
+    },
+    {
+      "i": 1,
+      "opened": true,
+      "closed": true
+    },
+    {
+      "i": 2,
+      "opened": true,
+      "closed": true
+    },
+    {
+      "i": 3,
+      "opened": true,
+      "closed": true
+    }
+  ],
+  "verified": [
+    "mouse wheel zoom",
+    "mouse pan on both axes",
+    "image click closes while zoomed",
+    "undersized axes stay centered",
+    "zoom buttons",
+    "native keyboard zoom and arrows",
+    "Escape dismissal",
+    "Enter opening",
+    "keyboard focus returns to opening caption",
+    "secondary mouse button does not dismiss"
+  ],
+  "nativeMultiTouch": false
+}
