@@ -1,0 +1,97 @@
+{
+  "date": "2026-10-17T02:30:58.274Z",
+  "commit": "5a77313",
+  "origin": "http://localhost:5338/",
+  "palette": "Mulfok 32",
+  "original": {
+    "policy": "free",
+    "accelerometer": "1",
+    "user": "0"
+  },
+  "checks": [
+    {
+      "name": "keep-nearest",
+      "rotation": 0,
+      "dither": "none",
+      "maxColors": 0,
+      "cleanup": false,
+      "pass": true,
+      "caption": "24×24· 25 colors",
+      "sha": "6cf901a23dc4b471a4adcddfc660bb0e89572dcb87eb44e91926a055e6624f42",
+      "bytes": 531,
+      "contract": {
+        "offPalette": 0,
+        "alphaWrong": 0,
+        "exactChanged": 0,
+        "used": [
+          "#1f102a",
+          "#390947",
+          "#4a3052",
+          "#4e187c",
+          "#5ba675",
+          "#6bc96c",
+          "#6d80fa",
+          "#7b5480",
+          "#7d2da0",
+          "#834dc4",
+          "#873e84",
+          "#8db7ff",
+          "#a32858",
+          "#a6555f",
+          "#a6859f",
+          "#abdd64",
+          "#aee2ff",
+          "#c97373",
+          "#cc425e",
+          "#d46eb3",
+          "#ea6262",
+          "#f2ae99",
+          "#fcef8d",
+          "#ffb879",
+          "#ffffff"
+        ]
+      },
+      "scalarOracle": {
+        "alphaMismatch": 0,
+        "rgbMismatch": 0,
+        "first": null
+      },
+      "reuseMatchesNativeSave": true
+    },
+    {
+      "name": "keep-dither-cap-cleanup",
+      "rotation": 1,
+      "dither": "4x4",
+      "maxColors": 8,
+      "cleanup": true,
+      "pass": true,
+      "caption": "24×24· 8 colors",
+      "sha": "4c382d95eb2a777fdbef5f934a9eaa7ca3366ce285e926c7c35b2f06440c3747",
+      "bytes": 470,
+      "contract": {
+        "offPalette": 0,
+        "alphaWrong": 0,
+        "exactChanged": 0,
+        "used": [
+          "#4a3052",
+          "#5ba675",
+          "#6d80fa",
+          "#834dc4",
+          "#abdd64",
+          "#c97373",
+          "#cc425e",
+          "#ffffff"
+        ]
+      },
+      "scalarOracle": null,
+      "reuseMatchesNativeSave": true
+    }
+  ],
+  "errors": [],
+  "restored": {
+    "policy": "free",
+    "accelerometer": "1",
+    "user": "0"
+  },
+  "pass": true
+}

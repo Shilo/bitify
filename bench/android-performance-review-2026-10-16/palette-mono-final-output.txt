@@ -1,0 +1,68 @@
+{
+  "date": "2026-10-17T02:30:44.540Z",
+  "commit": "5a77313",
+  "origin": "http://localhost:5338/",
+  "palette": "Black & White",
+  "original": {
+    "policy": "free",
+    "accelerometer": "1",
+    "user": "0"
+  },
+  "checks": [
+    {
+      "name": "keep-nearest",
+      "rotation": 0,
+      "dither": "none",
+      "maxColors": 0,
+      "cleanup": false,
+      "pass": true,
+      "caption": "24×24· 2 colors",
+      "sha": "79718534fe4626e2581a86d4e4d0665acb3118593cb14c6da1bbe54ccf3975ae",
+      "bytes": 243,
+      "contract": {
+        "offPalette": 0,
+        "alphaWrong": 0,
+        "exactChanged": 0,
+        "used": [
+          "#000000",
+          "#ffffff"
+        ]
+      },
+      "scalarOracle": {
+        "alphaMismatch": 0,
+        "rgbMismatch": 0,
+        "first": null
+      },
+      "reuseMatchesNativeSave": true
+    },
+    {
+      "name": "keep-dither-cap-cleanup",
+      "rotation": 1,
+      "dither": "4x4",
+      "maxColors": 8,
+      "cleanup": true,
+      "pass": true,
+      "caption": "24×24· 2 colors",
+      "sha": "97acb2d51792c100d2b53841809f821e1e18d3d1d8e8bfe1748f19c8a0c4dcdd",
+      "bytes": 283,
+      "contract": {
+        "offPalette": 0,
+        "alphaWrong": 0,
+        "exactChanged": 0,
+        "used": [
+          "#000000",
+          "#ffffff"
+        ]
+      },
+      "scalarOracle": null,
+      "reuseMatchesNativeSave": true
+    }
+  ],
+  "errors": [],
+  "restored": {
+    "policy": "free",
+    "accelerometer": "1",
+    "user": "0"
+  },
+  "pass": true
+}

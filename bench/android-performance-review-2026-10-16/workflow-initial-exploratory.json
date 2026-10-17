@@ -1,0 +1,533 @@
+{
+  "date": "2026-10-17T02:18:42.935Z",
+  "commit": "071ebd9",
+  "origin": "http://localhost:5336/",
+  "original": {
+    "policy": "free",
+    "accelerometer": "1",
+    "user": "0"
+  },
+  "runs": [
+    {
+      "rotation": 0,
+      "viewport": null,
+      "kind": "small",
+      "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+      "errors": [],
+      "rows": [
+        {
+          "name": "import small",
+          "cpuMs": {
+            "TaskDuration": 392.171,
+            "ScriptDuration": 70.926,
+            "LayoutDuration": 6.457,
+            "RecalcStyleDuration": 24.829
+          },
+          "heapDelta": 4800188,
+          "health": {
+            "ms": 2633.699999988079,
+            "longtasks": [],
+            "maxTaskMs": 0,
+            "rafMaxMs": 25,
+            "rafP95Ms": 16.800000000000068,
+            "paints": 13,
+            "maxCanvasWriteMs": 0.19999998807907104
+          },
+          "top": []
+        },
+        {
+          "name": "matching RGB",
+          "cpuMs": {
+            "TaskDuration": 270.3740000000001,
+            "ScriptDuration": 60.461,
+            "LayoutDuration": 9.802999999999999,
+            "RecalcStyleDuration": 27.173
+          },
+          "heapDelta": 2320792,
+          "health": {
+            "ms": 2248.600000023842,
+            "longtasks": [],
+            "maxTaskMs": 0,
+            "rafMaxMs": 33.40000000000009,
+            "rafP95Ms": 17,
+            "paints": 24,
+            "maxCanvasWriteMs": 0.699999988079071
+          },
+          "top": []
+        },
+        {
+          "name": "Original return",
+          "cpuMs": {
+            "TaskDuration": 107.42400000000008,
+            "ScriptDuration": 26.34699999999998,
+            "LayoutDuration": 0.844000000000001,
+            "RecalcStyleDuration": 4.263999999999997
+          },
+          "heapDelta": 238384,
+          "health": {
+            "ms": 1755.300000011921,
+            "longtasks": [],
+            "maxTaskMs": 0,
+            "rafMaxMs": 17.100000000000364,
+            "rafP95Ms": 16.700000000000728,
+            "paints": 34,
+            "maxCanvasWriteMs": 0.19999998807907104
+          },
+          "top": []
+        },
+        {
+          "name": "settled idle",
+          "cpuMs": {
+            "TaskDuration": 99.69000000000005,
+            "ScriptDuration": 26.046000000000014,
+            "LayoutDuration": 0,
+            "RecalcStyleDuration": 0
+          },
+          "heapDelta": -2033656,
+          "health": {
+            "ms": 1625.7999999523163,
+            "longtasks": [],
+            "maxTaskMs": 0,
+            "rafMaxMs": 16.800000000000182,
+            "rafP95Ms": 16.800000000000182,
+            "paints": 10,
+            "maxCanvasWriteMs": 0.30000001192092896
+          },
+          "top": []
+        }
+      ],
+      "hashes": [
+        {
+          "label": "initial",
+          "width": 24,
+          "height": 24,
+          "sha": "51bff8a30c316804a4e6f9c8bdd7365e30ff0e13f49f5878db2f6390ffbcd8a4"
+        },
+        {
+          "label": "RGB",
+          "width": 24,
+          "height": 24,
+          "sha": "a464e7aee6ee2b98510c46e74dc5fb2c30a095ad8e239ae22314dad70c9332f4"
+        }
+      ],
+      "labels": [
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "48×48· 23 colors"
+      ],
+      "notes": [
+        "Fixed waits are excluded from interpretation as conversion latency; CDP CPU and Long Tasks report main-thread work. CPU profiler may itself add overhead. Canvas hashes test deterministic rendered output, not full-source exports. No whole-process memory bound follows from JS heap deltas."
+      ]
+    },
+    {
+      "rotation": 1,
+      "viewport": null,
+      "kind": "wall",
+      "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+      "errors": [],
+      "rows": [
+        {
+          "name": "import wall",
+          "cpuMs": {
+            "TaskDuration": 583.31,
+            "ScriptDuration": 132.982,
+            "LayoutDuration": 24.92,
+            "RecalcStyleDuration": 41.026
+          },
+          "heapDelta": 9235648,
+          "health": {
+            "ms": 1117.199999988079,
+            "longtasks": [
+              {
+                "start": 509.30000001192093,
+                "duration": 64
+              },
+              {
+                "start": 776.1999999880791,
+                "duration": 97
+              }
+            ],
+            "maxTaskMs": 97,
+            "rafMaxMs": 125,
+            "rafP95Ms": 83.20000000000005,
+            "paints": 100,
+            "maxCanvasWriteMs": 0.40000003576278687
+          },
+          "top": []
+        },
+        {
+          "name": "matching RGB",
+          "cpuMs": {
+            "TaskDuration": 504.127,
+            "ScriptDuration": 62.837,
+            "LayoutDuration": 46.32600000000001,
+            "RecalcStyleDuration": 85.725
+          },
+          "heapDelta": -3325460,
+          "health": {
+            "ms": 1089.199999988079,
+            "longtasks": [
+              {
+                "start": 1777.300000011921,
+                "duration": 50
+              }
+            ],
+            "maxTaskMs": 50,
+            "rafMaxMs": 75.19999999999982,
+            "rafP95Ms": 41.70000000000027,
+            "paints": 100,
+            "maxCanvasWriteMs": 0.19999998807907104
+          },
+          "top": []
+        },
+        {
+          "name": "Original return",
+          "cpuMs": {
+            "TaskDuration": 102.01900000000008,
+            "ScriptDuration": 25.698999999999998,
+            "LayoutDuration": 0.5589999999999901,
+            "RecalcStyleDuration": 3.1589999999999954
+          },
+          "heapDelta": 806604,
+          "health": {
+            "ms": 871.3000000119209,
+            "longtasks": [],
+            "maxTaskMs": 0,
+            "rafMaxMs": 24.799999999999727,
+            "rafP95Ms": 16.800000000000182,
+            "paints": 200,
+            "maxCanvasWriteMs": 0.20000004768371582
+          },
+          "top": []
+        },
+        {
+          "name": "settled idle",
+          "cpuMs": {
+            "TaskDuration": 61.137,
+            "ScriptDuration": 5.18200000000002,
+            "LayoutDuration": 0,
+            "RecalcStyleDuration": 0
+          },
+          "heapDelta": 7792,
+          "health": {
+            "ms": 815.3999999761581,
+            "longtasks": [],
+            "maxTaskMs": 0,
+            "rafMaxMs": 16.800000000000182,
+            "rafP95Ms": 16.700000000000728,
+            "paints": 0,
+            "maxCanvasWriteMs": 0
+          },
+          "top": []
+        }
+      ],
+      "hashes": [
+        {
+          "label": "initial",
+          "width": 24,
+          "height": 24,
+          "sha": "51bff8a30c316804a4e6f9c8bdd7365e30ff0e13f49f5878db2f6390ffbcd8a4"
+        },
+        {
+          "label": "RGB",
+          "width": 24,
+          "height": 24,
+          "sha": "a464e7aee6ee2b98510c46e74dc5fb2c30a095ad8e239ae22314dad70c9332f4"
+        }
+      ],
+      "labels": [
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors"
+      ],
+      "notes": [
+        "Fixed waits are excluded from interpretation as conversion latency; CDP CPU and Long Tasks report main-thread work. CPU profiler may itself add overhead. Canvas hashes test deterministic rendered output, not full-source exports. No whole-process memory bound follows from JS heap deltas."
+      ]
+    },
+    {
+      "rotation": 1,
+      "viewport": null,
+      "kind": "large",
+      "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+      "errors": [],
+      "rows": [
+        {
+          "name": "import large",
+          "cpuMs": {
+            "TaskDuration": 645.892,
+            "ScriptDuration": 38.969,
+            "LayoutDuration": 2.776,
+            "RecalcStyleDuration": 9.126000000000001
+          },
+          "heapDelta": 65034976,
+          "health": {
+            "ms": 1923.300000011921,
+            "longtasks": [
+              {
+                "start": 1096.2000000476837,
+                "duration": 383
+              }
+            ],
+            "maxTaskMs": 383,
+            "rafMaxMs": 375,
+            "rafP95Ms": 16.799999999999955,
+            "paints": 1,
+            "maxCanvasWriteMs": 0.5999999642372131
+          },
+          "top": []
+        },
+        {
+          "name": "matching RGB",
+          "cpuMs": {
+            "TaskDuration": 219.41699999999997,
+            "ScriptDuration": 25.370000000000005,
+            "LayoutDuration": 5.25,
+            "RecalcStyleDuration": 16.016000000000002
+          },
+          "heapDelta": 1371676,
+          "health": {
+            "ms": 1014.9000000357628,
+            "longtasks": [],
+            "maxTaskMs": 0,
+            "rafMaxMs": 41.600000000000364,
+            "rafP95Ms": 16.800000000000182,
+            "paints": 3,
+            "maxCanvasWriteMs": 0.30000001192092896
+          },
+          "top": []
+        },
+        {
+          "name": "dither 4x4",
+          "cpuMs": {
+            "TaskDuration": 545.3869999999998,
+            "ScriptDuration": 30.895999999999994,
+            "LayoutDuration": 3.8740000000000006,
+            "RecalcStyleDuration": 21.512
+          },
+          "heapDelta": 26633308,
+          "health": {
+            "ms": 1333.1000000238419,
+            "longtasks": [],
+            "maxTaskMs": 0,
+            "rafMaxMs": 33.400000000000546,
+            "rafP95Ms": 16.800000000000182,
+            "paints": 3,
+            "maxCanvasWriteMs": 0.30000001192092896
+          },
+          "top": []
+        },
+        {
+          "name": "cap8 and Cleanup",
+          "cpuMs": {
+            "TaskDuration": 269.047,
+            "ScriptDuration": 34.92199999999998,
+            "LayoutDuration": 5.771999999999999,
+            "RecalcStyleDuration": 22.529999999999994
+          },
+          "heapDelta": 1295480,
+          "health": {
+            "ms": 797.4000000357628,
+            "longtasks": [],
+            "maxTaskMs": 0,
+            "rafMaxMs": 33.399999999999636,
+            "rafP95Ms": 24.200000000000728,
+            "paints": 1,
+            "maxCanvasWriteMs": 0.09999996423721313
+          },
+          "top": []
+        },
+        {
+          "name": "Original return",
+          "cpuMs": {
+            "TaskDuration": 271.665,
+            "ScriptDuration": 26.424000000000003,
+            "LayoutDuration": 0.5049999999999986,
+            "RecalcStyleDuration": 2.337000000000006
+          },
+          "heapDelta": 665604,
+          "health": {
+            "ms": 835.9000000357628,
+            "longtasks": [],
+            "maxTaskMs": 0,
+            "rafMaxMs": 16.899999999999636,
+            "rafP95Ms": 16.799999999999272,
+            "paints": 2,
+            "maxCanvasWriteMs": 0.19999998807907104
+          },
+          "top": []
+        },
+        {
+          "name": "settled idle",
+          "cpuMs": {
+            "TaskDuration": 95.72599999999997,
+            "ScriptDuration": 7.307999999999981,
+            "LayoutDuration": 0.11400000000000299,
+            "RecalcStyleDuration": 0.1290000000000041
+          },
+          "heapDelta": 1954336,
+          "health": {
+            "ms": 823.9000000357628,
+            "longtasks": [],
+            "maxTaskMs": 0,
+            "rafMaxMs": 16.80000000000109,
+            "rafP95Ms": 16.799999999999272,
+            "paints": 1,
+            "maxCanvasWriteMs": 0.09999996423721313
+          },
+          "top": []
+        }
+      ],
+      "hashes": [
+        {
+          "label": "initial",
+          "width": 419,
+          "height": 419,
+          "sha": "1d9eb6dd7b2bc22d92422af470ecd54eaecc2167d0169c8475abaca45c320b00"
+        },
+        {
+          "label": "RGB",
+          "width": 419,
+          "height": 419,
+          "sha": "550c5f4af6d62f2f9c545bebedb3136932804ef878aebae818a447278816e5a8"
+        },
+        {
+          "label": "dither",
+          "width": 419,
+          "height": 419,
+          "sha": "23a1341b9d99cf59db885da36b2c912c31407f71a11bfa17ccdb45f41d092f82"
+        },
+        {
+          "label": "cap8Cleanup",
+          "width": 203,
+          "height": 203,
+          "sha": "ebd5b9893e504f23eb000798750d3d66476dd3b85273bfc7321eb2819bc385f6"
+        }
+      ],
+      "labels": [
+        "1024×1024"
+      ],
+      "notes": [
+        "Fixed waits are excluded from interpretation as conversion latency; CDP CPU and Long Tasks report main-thread work. CPU profiler may itself add overhead. Canvas hashes test deterministic rendered output, not full-source exports. No whole-process memory bound follows from JS heap deltas."
+      ]
+    }
+  ],
+  "errors": [],
+  "notes": [
+    "Physical USB Pixel 8 Pro. Android OS rotations only, no CDP device metrics.",
+    "CDP Task/Script/LayoutDuration are renderer main-thread metrics, not worker CPU or whole-process memory.",
+    "rAF instrumentation itself runs during idle; idle is not a zero-work app assertion."
+  ],
+  "restored": {
+    "policy": "free",
+    "accelerometer": "1",
+    "user": "0"
+  },
+  "pass": true
+}

@@ -1,0 +1,3 @@
+# Owned synthetic fixture, native screenshot and output evidence.
+!*.png
+!*.gif

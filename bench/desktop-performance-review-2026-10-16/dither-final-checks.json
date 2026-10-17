@@ -1,0 +1,638 @@
+{
+  "date": "2026-10-17T02:25:40.930Z",
+  "checks": [
+    {
+      "size": 2,
+      "dither": "2x2",
+      "strength": 1,
+      "alphaMode": "keep",
+      "metric": "rgb",
+      "sample": false,
+      "mismatch": 0,
+      "pixels": 65536
+    },
+    {
+      "size": 4,
+      "dither": "4x4",
+      "strength": 50,
+      "alphaMode": "cut",
+      "metric": "oklab",
+      "sample": false,
+      "mismatch": 0,
+      "pixels": 65536
+    },
+    {
+      "size": 8,
+      "dither": "8x8",
+      "strength": 100,
+      "alphaMode": "keep",
+      "metric": "rgb",
+      "sample": false,
+      "mismatch": 0,
+      "pixels": 65536
+    },
+    {
+      "size": 16,
+      "dither": "4x4",
+      "strength": 20,
+      "alphaMode": "keep",
+      "metric": "oklab",
+      "sample": false,
+      "mismatch": 0,
+      "pixels": 65536
+    },
+    {
+      "size": 32,
+      "dither": "none",
+      "strength": 100,
+      "alphaMode": "cut",
+      "metric": "rgb",
+      "sample": false,
+      "mismatch": 0,
+      "pixels": 65536
+    },
+    {
+      "size": 64,
+      "dither": "8x8",
+      "strength": 0,
+      "alphaMode": "keep",
+      "metric": "oklab",
+      "sample": false,
+      "mismatch": 0,
+      "pixels": 65536
+    },
+    {
+      "size": 256,
+      "dither": "8x8",
+      "strength": 50,
+      "alphaMode": "keep",
+      "metric": "oklab",
+      "sample": false,
+      "mismatch": 0,
+      "pixels": 65536
+    },
+    {
+      "size": 256,
+      "dither": "4x4",
+      "strength": 50,
+      "alphaMode": "cut",
+      "metric": "rgb",
+      "sample": false,
+      "mismatch": 0,
+      "pixels": 65536
+    },
+    {
+      "size": 64,
+      "dither": "4x4",
+      "strength": 100,
+      "alphaMode": "keep",
+      "metric": "oklab",
+      "sample": true,
+      "mismatch": 0,
+      "pixels": 65536
+    }
+  ],
+  "rows": [
+    {
+      "metric": "rgb",
+      "dither": "none",
+      "trial": 0,
+      "version": "baseline",
+      "ms": 8.899999991059303,
+      "last": 256,
+      "taskCPU": 9.90000000000002
+    },
+    {
+      "metric": "rgb",
+      "dither": "none",
+      "trial": 0,
+      "version": "candidate",
+      "ms": 8.5,
+      "last": 256,
+      "taskCPU": 8.840999999999877
+    },
+    {
+      "metric": "rgb",
+      "dither": "none",
+      "trial": 1,
+      "version": "candidate",
+      "ms": 8.5,
+      "last": 256,
+      "taskCPU": 8.89799999999985
+    },
+    {
+      "metric": "rgb",
+      "dither": "none",
+      "trial": 1,
+      "version": "baseline",
+      "ms": 8.799999997019768,
+      "last": 256,
+      "taskCPU": 8.992999999999807
+    },
+    {
+      "metric": "rgb",
+      "dither": "none",
+      "trial": 2,
+      "version": "baseline",
+      "ms": 8.5,
+      "last": 256,
+      "taskCPU": 8.684999999999832
+    },
+    {
+      "metric": "rgb",
+      "dither": "none",
+      "trial": 2,
+      "version": "candidate",
+      "ms": 8.599999994039536,
+      "last": 256,
+      "taskCPU": 8.803000000000338
+    },
+    {
+      "metric": "rgb",
+      "dither": "none",
+      "trial": 3,
+      "version": "candidate",
+      "ms": 8.5,
+      "last": 256,
+      "taskCPU": 8.699000000000012
+    },
+    {
+      "metric": "rgb",
+      "dither": "none",
+      "trial": 3,
+      "version": "baseline",
+      "ms": 8.5,
+      "last": 256,
+      "taskCPU": 8.718000000000004
+    },
+    {
+      "metric": "rgb",
+      "dither": "none",
+      "trial": 4,
+      "version": "baseline",
+      "ms": 8.5,
+      "last": 256,
+      "taskCPU": 8.868000000000098
+    },
+    {
+      "metric": "rgb",
+      "dither": "none",
+      "trial": 4,
+      "version": "candidate",
+      "ms": 8.600000008940697,
+      "last": 256,
+      "taskCPU": 8.79899999999978
+    },
+    {
+      "metric": "rgb",
+      "dither": "4x4",
+      "trial": 0,
+      "version": "baseline",
+      "ms": 85.79999999701977,
+      "last": 256,
+      "taskCPU": 86.11600000000008
+    },
+    {
+      "metric": "rgb",
+      "dither": "4x4",
+      "trial": 0,
+      "version": "candidate",
+      "ms": 76.30000001192093,
+      "last": 256,
+      "taskCPU": 76.57200000000009
+    },
+    {
+      "metric": "rgb",
+      "dither": "4x4",
+      "trial": 1,
+      "version": "candidate",
+      "ms": 80.20000000298023,
+      "last": 256,
+      "taskCPU": 80.457
+    },
+    {
+      "metric": "rgb",
+      "dither": "4x4",
+      "trial": 1,
+      "version": "baseline",
+      "ms": 82.59999999403954,
+      "last": 256,
+      "taskCPU": 82.9629999999999
+    },
+    {
+      "metric": "rgb",
+      "dither": "4x4",
+      "trial": 2,
+      "version": "baseline",
+      "ms": 83,
+      "last": 256,
+      "taskCPU": 83.36199999999971
+    },
+    {
+      "metric": "rgb",
+      "dither": "4x4",
+      "trial": 2,
+      "version": "candidate",
+      "ms": 77.70000000298023,
+      "last": 256,
+      "taskCPU": 78.01100000000005
+    },
+    {
+      "metric": "rgb",
+      "dither": "4x4",
+      "trial": 3,
+      "version": "candidate",
+      "ms": 78.6000000089407,
+      "last": 256,
+      "taskCPU": 78.93300000000013
+    },
+    {
+      "metric": "rgb",
+      "dither": "4x4",
+      "trial": 3,
+      "version": "baseline",
+      "ms": 83.70000000298023,
+      "last": 256,
+      "taskCPU": 83.99899999999994
+    },
+    {
+      "metric": "rgb",
+      "dither": "4x4",
+      "trial": 4,
+      "version": "baseline",
+      "ms": 84.3999999910593,
+      "last": 256,
+      "taskCPU": 84.81499999999986
+    },
+    {
+      "metric": "rgb",
+      "dither": "4x4",
+      "trial": 4,
+      "version": "candidate",
+      "ms": 77.8999999910593,
+      "last": 256,
+      "taskCPU": 78.20000000000027
+    },
+    {
+      "metric": "rgb",
+      "dither": "8x8",
+      "trial": 0,
+      "version": "baseline",
+      "ms": 84,
+      "last": 256,
+      "taskCPU": 84.44800000000008
+    },
+    {
+      "metric": "rgb",
+      "dither": "8x8",
+      "trial": 0,
+      "version": "candidate",
+      "ms": 82.09999999403954,
+      "last": 256,
+      "taskCPU": 82.44200000000035
+    },
+    {
+      "metric": "rgb",
+      "dither": "8x8",
+      "trial": 1,
+      "version": "candidate",
+      "ms": 76.59999999403954,
+      "last": 256,
+      "taskCPU": 76.98199999999966
+    },
+    {
+      "metric": "rgb",
+      "dither": "8x8",
+      "trial": 1,
+      "version": "baseline",
+      "ms": 83.1000000089407,
+      "last": 256,
+      "taskCPU": 83.4109999999999
+    },
+    {
+      "metric": "rgb",
+      "dither": "8x8",
+      "trial": 2,
+      "version": "baseline",
+      "ms": 83.40000000596046,
+      "last": 256,
+      "taskCPU": 83.72099999999972
+    },
+    {
+      "metric": "rgb",
+      "dither": "8x8",
+      "trial": 2,
+      "version": "candidate",
+      "ms": 77.59999999403954,
+      "last": 256,
+      "taskCPU": 77.99699999999987
+    },
+    {
+      "metric": "rgb",
+      "dither": "8x8",
+      "trial": 3,
+      "version": "candidate",
+      "ms": 78.70000000298023,
+      "last": 256,
+      "taskCPU": 79.07399999999987
+    },
+    {
+      "metric": "rgb",
+      "dither": "8x8",
+      "trial": 3,
+      "version": "baseline",
+      "ms": 83.30000001192093,
+      "last": 256,
+      "taskCPU": 83.51700000000007
+    },
+    {
+      "metric": "rgb",
+      "dither": "8x8",
+      "trial": 4,
+      "version": "baseline",
+      "ms": 83.30000001192093,
+      "last": 256,
+      "taskCPU": 83.68400000000031
+    },
+    {
+      "metric": "rgb",
+      "dither": "8x8",
+      "trial": 4,
+      "version": "candidate",
+      "ms": 78,
+      "last": 256,
+      "taskCPU": 78.24900000000001
+    },
+    {
+      "metric": "oklab",
+      "dither": "none",
+      "trial": 0,
+      "version": "baseline",
+      "ms": 10.600000008940697,
+      "last": 256,
+      "taskCPU": 10.888000000000009
+    },
+    {
+      "metric": "oklab",
+      "dither": "none",
+      "trial": 0,
+      "version": "candidate",
+      "ms": 10.5,
+      "last": 256,
+      "taskCPU": 10.894000000000403
+    },
+    {
+      "metric": "oklab",
+      "dither": "none",
+      "trial": 1,
+      "version": "candidate",
+      "ms": 10.600000008940697,
+      "last": 256,
+      "taskCPU": 10.857999999999812
+    },
+    {
+      "metric": "oklab",
+      "dither": "none",
+      "trial": 1,
+      "version": "baseline",
+      "ms": 10.700000002980232,
+      "last": 256,
+      "taskCPU": 11.013000000000162
+    },
+    {
+      "metric": "oklab",
+      "dither": "none",
+      "trial": 2,
+      "version": "baseline",
+      "ms": 10.700000002980232,
+      "last": 256,
+      "taskCPU": 10.917000000000066
+    },
+    {
+      "metric": "oklab",
+      "dither": "none",
+      "trial": 2,
+      "version": "candidate",
+      "ms": 10.600000008940697,
+      "last": 256,
+      "taskCPU": 10.966999999999949
+    },
+    {
+      "metric": "oklab",
+      "dither": "none",
+      "trial": 3,
+      "version": "candidate",
+      "ms": 10.599999994039536,
+      "last": 256,
+      "taskCPU": 10.97199999999976
+    },
+    {
+      "metric": "oklab",
+      "dither": "none",
+      "trial": 3,
+      "version": "baseline",
+      "ms": 11.5,
+      "last": 256,
+      "taskCPU": 11.800000000000033
+    },
+    {
+      "metric": "oklab",
+      "dither": "none",
+      "trial": 4,
+      "version": "baseline",
+      "ms": 10.799999997019768,
+      "last": 256,
+      "taskCPU": 11.174999999999713
+    },
+    {
+      "metric": "oklab",
+      "dither": "none",
+      "trial": 4,
+      "version": "candidate",
+      "ms": 11.099999994039536,
+      "last": 256,
+      "taskCPU": 11.44099999999959
+    },
+    {
+      "metric": "oklab",
+      "dither": "4x4",
+      "trial": 0,
+      "version": "baseline",
+      "ms": 80.8999999910593,
+      "last": 256,
+      "taskCPU": 81.27900000000032
+    },
+    {
+      "metric": "oklab",
+      "dither": "4x4",
+      "trial": 0,
+      "version": "candidate",
+      "ms": 73.5,
+      "last": 256,
+      "taskCPU": 73.7640000000006
+    },
+    {
+      "metric": "oklab",
+      "dither": "4x4",
+      "trial": 1,
+      "version": "candidate",
+      "ms": 76.20000000298023,
+      "last": 256,
+      "taskCPU": 76.50700000000032
+    },
+    {
+      "metric": "oklab",
+      "dither": "4x4",
+      "trial": 1,
+      "version": "baseline",
+      "ms": 79.79999999701977,
+      "last": 256,
+      "taskCPU": 80.06399999999925
+    },
+    {
+      "metric": "oklab",
+      "dither": "4x4",
+      "trial": 2,
+      "version": "baseline",
+      "ms": 79.59999999403954,
+      "last": 256,
+      "taskCPU": 80.03299999999936
+    },
+    {
+      "metric": "oklab",
+      "dither": "4x4",
+      "trial": 2,
+      "version": "candidate",
+      "ms": 73.5,
+      "last": 256,
+      "taskCPU": 73.84500000000038
+    },
+    {
+      "metric": "oklab",
+      "dither": "4x4",
+      "trial": 3,
+      "version": "candidate",
+      "ms": 74.1000000089407,
+      "last": 256,
+      "taskCPU": 74.40400000000037
+    },
+    {
+      "metric": "oklab",
+      "dither": "4x4",
+      "trial": 3,
+      "version": "baseline",
+      "ms": 79.8999999910593,
+      "last": 256,
+      "taskCPU": 80.21200000000039
+    },
+    {
+      "metric": "oklab",
+      "dither": "4x4",
+      "trial": 4,
+      "version": "baseline",
+      "ms": 80.20000000298023,
+      "last": 256,
+      "taskCPU": 80.49000000000018
+    },
+    {
+      "metric": "oklab",
+      "dither": "4x4",
+      "trial": 4,
+      "version": "candidate",
+      "ms": 71.5,
+      "last": 256,
+      "taskCPU": 71.77900000000025
+    },
+    {
+      "metric": "oklab",
+      "dither": "8x8",
+      "trial": 0,
+      "version": "baseline",
+      "ms": 81.59999999403954,
+      "last": 256,
+      "taskCPU": 81.99500000000003
+    },
+    {
+      "metric": "oklab",
+      "dither": "8x8",
+      "trial": 0,
+      "version": "candidate",
+      "ms": 72.70000000298023,
+      "last": 256,
+      "taskCPU": 73.24999999999982
+    },
+    {
+      "metric": "oklab",
+      "dither": "8x8",
+      "trial": 1,
+      "version": "candidate",
+      "ms": 74.09999999403954,
+      "last": 256,
+      "taskCPU": 74.2780000000005
+    },
+    {
+      "metric": "oklab",
+      "dither": "8x8",
+      "trial": 1,
+      "version": "baseline",
+      "ms": 82,
+      "last": 256,
+      "taskCPU": 82.45699999999978
+    },
+    {
+      "metric": "oklab",
+      "dither": "8x8",
+      "trial": 2,
+      "version": "baseline",
+      "ms": 82.59999999403954,
+      "last": 256,
+      "taskCPU": 83.2859999999993
+    },
+    {
+      "metric": "oklab",
+      "dither": "8x8",
+      "trial": 2,
+      "version": "candidate",
+      "ms": 76,
+      "last": 256,
+      "taskCPU": 76.22799999999953
+    },
+    {
+      "metric": "oklab",
+      "dither": "8x8",
+      "trial": 3,
+      "version": "candidate",
+      "ms": 73.5,
+      "last": 256,
+      "taskCPU": 73.77199999999995
+    },
+    {
+      "metric": "oklab",
+      "dither": "8x8",
+      "trial": 3,
+      "version": "baseline",
+      "ms": 80.3999999910593,
+      "last": 256,
+      "taskCPU": 80.71599999999978
+    },
+    {
+      "metric": "oklab",
+      "dither": "8x8",
+      "trial": 4,
+      "version": "baseline",
+      "ms": 82.30000001192093,
+      "last": 256,
+      "taskCPU": 82.57799999999982
+    },
+    {
+      "metric": "oklab",
+      "dither": "8x8",
+      "trial": 4,
+      "version": "candidate",
+      "ms": 75,
+      "last": 256,
+      "taskCPU": 75.40499999999994
+    }
+  ],
+  "description": "Same test-only128paircachecandidate; prewarmed synchronous kernel calls measure CPU without posted-task wait noise. These intentionally block and do not represent production async responsiveness. 5alternatingpairs; immutable071ebd9source; noAndroidcandidateacceptance."
+}

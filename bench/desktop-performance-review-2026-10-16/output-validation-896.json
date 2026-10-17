@@ -1,0 +1,76 @@
+{
+  "source": "Node committed production-core references outside browser, exact896source; covers final render selection and catches stale/draft sampling, not independent algorithm accuracy",
+  "expected": [
+    {
+      "label": "initial",
+      "width": 896,
+      "height": 896,
+      "sha": "4af1a8fa33109c4f09eda83364c104c7e25f570705f8f79198b200f768d23fe3"
+    },
+    {
+      "label": "RGB",
+      "width": 896,
+      "height": 896,
+      "sha": "80f00c0e7e4fd92cfb9ea73f8d48e58f49f4f16b364ef093a067dd4402ba0b9d"
+    },
+    {
+      "label": "dither",
+      "width": 896,
+      "height": 896,
+      "sha": "970c87a1090251d8f8062c954d3b7b58519a7cb2d84f38bcf19f1e0bd0af78a7"
+    },
+    {
+      "label": "cap8Cleanup",
+      "width": 896,
+      "height": 896,
+      "sha": "e6438ce114ee304401bf6d88160df92ed90a9a581107ad9565e38b867936c45a"
+    }
+  ],
+  "checks": [
+    {
+      "file": "bench/android-performance-review-2026-10-16/workflow-final-screenshot-buffer-failure.json",
+      "label": "initial",
+      "pass": false,
+      "got": {
+        "label": "initial",
+        "width": 896,
+        "height": 896,
+        "sha": "a3bc1553ead60a347010b26c4b9da39a11cebb05e9a34470ceb90fb887cc7e36"
+      }
+    },
+    {
+      "file": "bench/android-performance-review-2026-10-16/workflow-final-screenshot-buffer-failure.json",
+      "label": "RGB",
+      "pass": false,
+      "got": {
+        "label": "RGB",
+        "width": 896,
+        "height": 896,
+        "sha": "18d701009c23afcef3b4944c2a01e769ad73ed236d5e6a772c0752d16bb63970"
+      }
+    },
+    {
+      "file": "bench/android-performance-review-2026-10-16/workflow-final-screenshot-buffer-failure.json",
+      "label": "dither",
+      "pass": false,
+      "got": {
+        "label": "dither",
+        "width": 896,
+        "height": 896,
+        "sha": "7ba7bfdb5d0e2b069829d9c8754dab9ec2f0d71da7cdc99771d5d982c5e13662"
+      }
+    },
+    {
+      "file": "bench/android-performance-review-2026-10-16/workflow-final-screenshot-buffer-failure.json",
+      "label": "cap8Cleanup",
+      "pass": false,
+      "got": {
+        "label": "cap8Cleanup",
+        "width": 896,
+        "height": 896,
+        "sha": "f80def45f2580364ea7e43e75e76c7295b7af58dab049324a9e3ef6e2290ed9f"
+      }
+    }
+  ],
+  "validity": "Invalid as an Android output oracle: Brave changed 228 readback bytes by plus or minus one in a controlled solid 896-square canvas. Native PNG Save comparison is required; failed canvas SHA checks are not app regressions."
+}

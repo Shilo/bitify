@@ -1,0 +1,1298 @@
+{
+  "date": "2026-10-17T02:26:42.562Z",
+  "checks": [
+    {
+      "size": 2,
+      "dither": "2x2",
+      "strength": 1,
+      "alphaMode": "keep",
+      "metric": "rgb",
+      "sample": false,
+      "mismatch": 0,
+      "pixels": 65536
+    },
+    {
+      "size": 4,
+      "dither": "4x4",
+      "strength": 50,
+      "alphaMode": "cut",
+      "metric": "oklab",
+      "sample": false,
+      "mismatch": 0,
+      "pixels": 65536
+    },
+    {
+      "size": 8,
+      "dither": "8x8",
+      "strength": 100,
+      "alphaMode": "keep",
+      "metric": "rgb",
+      "sample": false,
+      "mismatch": 0,
+      "pixels": 65536
+    },
+    {
+      "size": 16,
+      "dither": "4x4",
+      "strength": 20,
+      "alphaMode": "keep",
+      "metric": "oklab",
+      "sample": false,
+      "mismatch": 0,
+      "pixels": 65536
+    },
+    {
+      "size": 32,
+      "dither": "none",
+      "strength": 100,
+      "alphaMode": "cut",
+      "metric": "rgb",
+      "sample": false,
+      "mismatch": 0,
+      "pixels": 65536
+    },
+    {
+      "size": 64,
+      "dither": "8x8",
+      "strength": 0,
+      "alphaMode": "keep",
+      "metric": "oklab",
+      "sample": false,
+      "mismatch": 0,
+      "pixels": 65536
+    },
+    {
+      "size": 256,
+      "dither": "8x8",
+      "strength": 50,
+      "alphaMode": "keep",
+      "metric": "oklab",
+      "sample": false,
+      "mismatch": 0,
+      "pixels": 65536
+    },
+    {
+      "size": 256,
+      "dither": "4x4",
+      "strength": 50,
+      "alphaMode": "cut",
+      "metric": "rgb",
+      "sample": false,
+      "mismatch": 0,
+      "pixels": 65536
+    },
+    {
+      "size": 64,
+      "dither": "4x4",
+      "strength": 100,
+      "alphaMode": "keep",
+      "metric": "oklab",
+      "sample": true,
+      "mismatch": 0,
+      "pixels": 65536
+    }
+  ],
+  "rows": [
+    {
+      "size": 64,
+      "metric": "rgb",
+      "dither": "none",
+      "trial": 0,
+      "version": "baseline",
+      "ms": 18.900000005960464,
+      "last": 256,
+      "taskCPU": 19.747000000000625
+    },
+    {
+      "size": 64,
+      "metric": "rgb",
+      "dither": "none",
+      "trial": 0,
+      "version": "candidate",
+      "ms": 15.900000005960464,
+      "last": 256,
+      "taskCPU": 16.374000000000777
+    },
+    {
+      "size": 64,
+      "metric": "rgb",
+      "dither": "none",
+      "trial": 1,
+      "version": "candidate",
+      "ms": 15.200000002980232,
+      "last": 256,
+      "taskCPU": 15.660999999999703
+    },
+    {
+      "size": 64,
+      "metric": "rgb",
+      "dither": "none",
+      "trial": 1,
+      "version": "baseline",
+      "ms": 15.400000005960464,
+      "last": 256,
+      "taskCPU": 15.670000000000073
+    },
+    {
+      "size": 64,
+      "metric": "rgb",
+      "dither": "none",
+      "trial": 2,
+      "version": "baseline",
+      "ms": 16.599999994039536,
+      "last": 256,
+      "taskCPU": 16.947999999999297
+    },
+    {
+      "size": 64,
+      "metric": "rgb",
+      "dither": "none",
+      "trial": 2,
+      "version": "candidate",
+      "ms": 15.599999994039536,
+      "last": 256,
+      "taskCPU": 16.040999999999528
+    },
+    {
+      "size": 64,
+      "metric": "rgb",
+      "dither": "none",
+      "trial": 3,
+      "version": "candidate",
+      "ms": 17.599999994039536,
+      "last": 256,
+      "taskCPU": 17.991999999999564
+    },
+    {
+      "size": 64,
+      "metric": "rgb",
+      "dither": "none",
+      "trial": 3,
+      "version": "baseline",
+      "ms": 15.5,
+      "last": 256,
+      "taskCPU": 15.96600000000059
+    },
+    {
+      "size": 64,
+      "metric": "rgb",
+      "dither": "none",
+      "trial": 4,
+      "version": "baseline",
+      "ms": 16,
+      "last": 256,
+      "taskCPU": 16.453000000000273
+    },
+    {
+      "size": 64,
+      "metric": "rgb",
+      "dither": "none",
+      "trial": 4,
+      "version": "candidate",
+      "ms": 27.700000002980232,
+      "last": 256,
+      "taskCPU": 28.31199999999967
+    },
+    {
+      "size": 64,
+      "metric": "rgb",
+      "dither": "4x4",
+      "trial": 0,
+      "version": "baseline",
+      "ms": 374.5,
+      "last": 256,
+      "taskCPU": 375.07399999999967
+    },
+    {
+      "size": 64,
+      "metric": "rgb",
+      "dither": "4x4",
+      "trial": 0,
+      "version": "candidate",
+      "ms": 262.3999999910593,
+      "last": 256,
+      "taskCPU": 263.22299999999996
+    },
+    {
+      "size": 64,
+      "metric": "rgb",
+      "dither": "4x4",
+      "trial": 1,
+      "version": "candidate",
+      "ms": 135.5,
+      "last": 256,
+      "taskCPU": 135.95699999999943
+    },
+    {
+      "size": 64,
+      "metric": "rgb",
+      "dither": "4x4",
+      "trial": 1,
+      "version": "baseline",
+      "ms": 189.90000000596046,
+      "last": 256,
+      "taskCPU": 190.34000000000083
+    },
+    {
+      "size": 64,
+      "metric": "rgb",
+      "dither": "4x4",
+      "trial": 2,
+      "version": "baseline",
+      "ms": 151.70000000298023,
+      "last": 256,
+      "taskCPU": 152.00600000000009
+    },
+    {
+      "size": 64,
+      "metric": "rgb",
+      "dither": "4x4",
+      "trial": 2,
+      "version": "candidate",
+      "ms": 138,
+      "last": 256,
+      "taskCPU": 138.52999999999938
+    },
+    {
+      "size": 64,
+      "metric": "rgb",
+      "dither": "4x4",
+      "trial": 3,
+      "version": "candidate",
+      "ms": 157.29999999701977,
+      "last": 256,
+      "taskCPU": 157.7029999999997
+    },
+    {
+      "size": 64,
+      "metric": "rgb",
+      "dither": "4x4",
+      "trial": 3,
+      "version": "baseline",
+      "ms": 154.5,
+      "last": 256,
+      "taskCPU": 155.01900000000114
+    },
+    {
+      "size": 64,
+      "metric": "rgb",
+      "dither": "4x4",
+      "trial": 4,
+      "version": "baseline",
+      "ms": 284.1000000089407,
+      "last": 256,
+      "taskCPU": 284.68400000000037
+    },
+    {
+      "size": 64,
+      "metric": "rgb",
+      "dither": "4x4",
+      "trial": 4,
+      "version": "candidate",
+      "ms": 128.1000000089407,
+      "last": 256,
+      "taskCPU": 128.6240000000003
+    },
+    {
+      "size": 64,
+      "metric": "rgb",
+      "dither": "8x8",
+      "trial": 0,
+      "version": "baseline",
+      "ms": 149.70000000298023,
+      "last": 256,
+      "taskCPU": 150.23199999999903
+    },
+    {
+      "size": 64,
+      "metric": "rgb",
+      "dither": "8x8",
+      "trial": 0,
+      "version": "candidate",
+      "ms": 135.20000000298023,
+      "last": 256,
+      "taskCPU": 135.98099999999926
+    },
+    {
+      "size": 64,
+      "metric": "rgb",
+      "dither": "8x8",
+      "trial": 1,
+      "version": "candidate",
+      "ms": 138,
+      "last": 256,
+      "taskCPU": 138.84099999999933
+    },
+    {
+      "size": 64,
+      "metric": "rgb",
+      "dither": "8x8",
+      "trial": 1,
+      "version": "baseline",
+      "ms": 173.09999999403954,
+      "last": 256,
+      "taskCPU": 173.82899999999955
+    },
+    {
+      "size": 64,
+      "metric": "rgb",
+      "dither": "8x8",
+      "trial": 2,
+      "version": "baseline",
+      "ms": 222.79999999701977,
+      "last": 256,
+      "taskCPU": 224.37599999999946
+    },
+    {
+      "size": 64,
+      "metric": "rgb",
+      "dither": "8x8",
+      "trial": 2,
+      "version": "candidate",
+      "ms": 146,
+      "last": 256,
+      "taskCPU": 146.8360000000004
+    },
+    {
+      "size": 64,
+      "metric": "rgb",
+      "dither": "8x8",
+      "trial": 3,
+      "version": "candidate",
+      "ms": 143.79999999701977,
+      "last": 256,
+      "taskCPU": 144.44100000000049
+    },
+    {
+      "size": 64,
+      "metric": "rgb",
+      "dither": "8x8",
+      "trial": 3,
+      "version": "baseline",
+      "ms": 214.6000000089407,
+      "last": 256,
+      "taskCPU": 215.3040000000015
+    },
+    {
+      "size": 64,
+      "metric": "rgb",
+      "dither": "8x8",
+      "trial": 4,
+      "version": "baseline",
+      "ms": 276.30000001192093,
+      "last": 256,
+      "taskCPU": 276.8759999999997
+    },
+    {
+      "size": 64,
+      "metric": "rgb",
+      "dither": "8x8",
+      "trial": 4,
+      "version": "candidate",
+      "ms": 343.6000000089407,
+      "last": 256,
+      "taskCPU": 344.91799999999984
+    },
+    {
+      "size": 64,
+      "metric": "oklab",
+      "dither": "none",
+      "trial": 0,
+      "version": "baseline",
+      "ms": 16.399999991059303,
+      "last": 256,
+      "taskCPU": 16.933999999999116
+    },
+    {
+      "size": 64,
+      "metric": "oklab",
+      "dither": "none",
+      "trial": 0,
+      "version": "candidate",
+      "ms": 18.700000002980232,
+      "last": 256,
+      "taskCPU": 19.098999999998867
+    },
+    {
+      "size": 64,
+      "metric": "oklab",
+      "dither": "none",
+      "trial": 1,
+      "version": "candidate",
+      "ms": 16.799999997019768,
+      "last": 256,
+      "taskCPU": 17.312000000000438
+    },
+    {
+      "size": 64,
+      "metric": "oklab",
+      "dither": "none",
+      "trial": 1,
+      "version": "baseline",
+      "ms": 20.099999994039536,
+      "last": 256,
+      "taskCPU": 20.974000000000714
+    },
+    {
+      "size": 64,
+      "metric": "oklab",
+      "dither": "none",
+      "trial": 2,
+      "version": "baseline",
+      "ms": 49,
+      "last": 256,
+      "taskCPU": 50.98799999999848
+    },
+    {
+      "size": 64,
+      "metric": "oklab",
+      "dither": "none",
+      "trial": 2,
+      "version": "candidate",
+      "ms": 58.5,
+      "last": 256,
+      "taskCPU": 60.32199999999932
+    },
+    {
+      "size": 64,
+      "metric": "oklab",
+      "dither": "none",
+      "trial": 3,
+      "version": "candidate",
+      "ms": 64.1000000089407,
+      "last": 256,
+      "taskCPU": 65.34900000000121
+    },
+    {
+      "size": 64,
+      "metric": "oklab",
+      "dither": "none",
+      "trial": 3,
+      "version": "baseline",
+      "ms": 20,
+      "last": 256,
+      "taskCPU": 20.558000000001186
+    },
+    {
+      "size": 64,
+      "metric": "oklab",
+      "dither": "none",
+      "trial": 4,
+      "version": "baseline",
+      "ms": 17.100000008940697,
+      "last": 256,
+      "taskCPU": 17.564999999999387
+    },
+    {
+      "size": 64,
+      "metric": "oklab",
+      "dither": "none",
+      "trial": 4,
+      "version": "candidate",
+      "ms": 16.30000001192093,
+      "last": 256,
+      "taskCPU": 16.71499999999959
+    },
+    {
+      "size": 64,
+      "metric": "oklab",
+      "dither": "4x4",
+      "trial": 0,
+      "version": "baseline",
+      "ms": 503,
+      "last": 256,
+      "taskCPU": 503.6190000000005
+    },
+    {
+      "size": 64,
+      "metric": "oklab",
+      "dither": "4x4",
+      "trial": 0,
+      "version": "candidate",
+      "ms": 344.5,
+      "last": 256,
+      "taskCPU": 345.61700000000076
+    },
+    {
+      "size": 64,
+      "metric": "oklab",
+      "dither": "4x4",
+      "trial": 1,
+      "version": "candidate",
+      "ms": 497.5,
+      "last": 256,
+      "taskCPU": 498.21000000000026
+    },
+    {
+      "size": 64,
+      "metric": "oklab",
+      "dither": "4x4",
+      "trial": 1,
+      "version": "baseline",
+      "ms": 276.70000000298023,
+      "last": 256,
+      "taskCPU": 277.54799999999943
+    },
+    {
+      "size": 64,
+      "metric": "oklab",
+      "dither": "4x4",
+      "trial": 2,
+      "version": "baseline",
+      "ms": 351.70000000298023,
+      "last": 256,
+      "taskCPU": 353.2889999999984
+    },
+    {
+      "size": 64,
+      "metric": "oklab",
+      "dither": "4x4",
+      "trial": 2,
+      "version": "candidate",
+      "ms": 335.40000000596046,
+      "last": 256,
+      "taskCPU": 337.00699999999983
+    },
+    {
+      "size": 64,
+      "metric": "oklab",
+      "dither": "4x4",
+      "trial": 3,
+      "version": "candidate",
+      "ms": 303.5,
+      "last": 256,
+      "taskCPU": 304.88599999999974
+    },
+    {
+      "size": 64,
+      "metric": "oklab",
+      "dither": "4x4",
+      "trial": 3,
+      "version": "baseline",
+      "ms": 272.79999999701977,
+      "last": 256,
+      "taskCPU": 273.7690000000015
+    },
+    {
+      "size": 64,
+      "metric": "oklab",
+      "dither": "4x4",
+      "trial": 4,
+      "version": "baseline",
+      "ms": 114.59999999403954,
+      "last": 256,
+      "taskCPU": 114.87800000000092
+    },
+    {
+      "size": 64,
+      "metric": "oklab",
+      "dither": "4x4",
+      "trial": 4,
+      "version": "candidate",
+      "ms": 73.1000000089407,
+      "last": 256,
+      "taskCPU": 73.40900000000161
+    },
+    {
+      "size": 64,
+      "metric": "oklab",
+      "dither": "8x8",
+      "trial": 0,
+      "version": "baseline",
+      "ms": 80.40000000596046,
+      "last": 256,
+      "taskCPU": 80.79899999999895
+    },
+    {
+      "size": 64,
+      "metric": "oklab",
+      "dither": "8x8",
+      "trial": 0,
+      "version": "candidate",
+      "ms": 73.20000000298023,
+      "last": 256,
+      "taskCPU": 73.45600000000019
+    },
+    {
+      "size": 64,
+      "metric": "oklab",
+      "dither": "8x8",
+      "trial": 1,
+      "version": "candidate",
+      "ms": 76.29999999701977,
+      "last": 256,
+      "taskCPU": 76.70200000000094
+    },
+    {
+      "size": 64,
+      "metric": "oklab",
+      "dither": "8x8",
+      "trial": 1,
+      "version": "baseline",
+      "ms": 81.79999999701977,
+      "last": 256,
+      "taskCPU": 82.22899999999811
+    },
+    {
+      "size": 64,
+      "metric": "oklab",
+      "dither": "8x8",
+      "trial": 2,
+      "version": "baseline",
+      "ms": 80.79999999701977,
+      "last": 256,
+      "taskCPU": 81.06500000000239
+    },
+    {
+      "size": 64,
+      "metric": "oklab",
+      "dither": "8x8",
+      "trial": 2,
+      "version": "candidate",
+      "ms": 73.5,
+      "last": 256,
+      "taskCPU": 73.85599999999926
+    },
+    {
+      "size": 64,
+      "metric": "oklab",
+      "dither": "8x8",
+      "trial": 3,
+      "version": "candidate",
+      "ms": 73,
+      "last": 256,
+      "taskCPU": 73.2980000000012
+    },
+    {
+      "size": 64,
+      "metric": "oklab",
+      "dither": "8x8",
+      "trial": 3,
+      "version": "baseline",
+      "ms": 80.6000000089407,
+      "last": 256,
+      "taskCPU": 80.7879999999983
+    },
+    {
+      "size": 64,
+      "metric": "oklab",
+      "dither": "8x8",
+      "trial": 4,
+      "version": "baseline",
+      "ms": 80.3999999910593,
+      "last": 256,
+      "taskCPU": 80.67499999999939
+    },
+    {
+      "size": 64,
+      "metric": "oklab",
+      "dither": "8x8",
+      "trial": 4,
+      "version": "candidate",
+      "ms": 73,
+      "last": 256,
+      "taskCPU": 73.21299999999908
+    },
+    {
+      "size": 256,
+      "metric": "rgb",
+      "dither": "none",
+      "trial": 0,
+      "version": "baseline",
+      "ms": 23.900000005960464,
+      "last": 256,
+      "taskCPU": 24.128000000001038
+    },
+    {
+      "size": 256,
+      "metric": "rgb",
+      "dither": "none",
+      "trial": 0,
+      "version": "candidate",
+      "ms": 23.899999991059303,
+      "last": 256,
+      "taskCPU": 24.17599999999709
+    },
+    {
+      "size": 256,
+      "metric": "rgb",
+      "dither": "none",
+      "trial": 1,
+      "version": "candidate",
+      "ms": 23.599999994039536,
+      "last": 256,
+      "taskCPU": 23.979999999998114
+    },
+    {
+      "size": 256,
+      "metric": "rgb",
+      "dither": "none",
+      "trial": 1,
+      "version": "baseline",
+      "ms": 23.799999997019768,
+      "last": 256,
+      "taskCPU": 24.04600000000201
+    },
+    {
+      "size": 256,
+      "metric": "rgb",
+      "dither": "none",
+      "trial": 2,
+      "version": "baseline",
+      "ms": 23.900000005960464,
+      "last": 256,
+      "taskCPU": 24.160000000001958
+    },
+    {
+      "size": 256,
+      "metric": "rgb",
+      "dither": "none",
+      "trial": 2,
+      "version": "candidate",
+      "ms": 23.799999997019768,
+      "last": 256,
+      "taskCPU": 24.06999999999826
+    },
+    {
+      "size": 256,
+      "metric": "rgb",
+      "dither": "none",
+      "trial": 3,
+      "version": "candidate",
+      "ms": 23.69999998807907,
+      "last": 256,
+      "taskCPU": 24.056999999999107
+    },
+    {
+      "size": 256,
+      "metric": "rgb",
+      "dither": "none",
+      "trial": 3,
+      "version": "baseline",
+      "ms": 23.799999997019768,
+      "last": 256,
+      "taskCPU": 24.091999999999558
+    },
+    {
+      "size": 256,
+      "metric": "rgb",
+      "dither": "none",
+      "trial": 4,
+      "version": "baseline",
+      "ms": 23.900000005960464,
+      "last": 256,
+      "taskCPU": 24.13800000000066
+    },
+    {
+      "size": 256,
+      "metric": "rgb",
+      "dither": "none",
+      "trial": 4,
+      "version": "candidate",
+      "ms": 23.799999997019768,
+      "last": 256,
+      "taskCPU": 24.081999999999937
+    },
+    {
+      "size": 256,
+      "metric": "rgb",
+      "dither": "4x4",
+      "trial": 0,
+      "version": "baseline",
+      "ms": 133,
+      "last": 256,
+      "taskCPU": 133.37900000000147
+    },
+    {
+      "size": 256,
+      "metric": "rgb",
+      "dither": "4x4",
+      "trial": 0,
+      "version": "candidate",
+      "ms": 135.90000000596046,
+      "last": 256,
+      "taskCPU": 136.10300000000208
+    },
+    {
+      "size": 256,
+      "metric": "rgb",
+      "dither": "4x4",
+      "trial": 1,
+      "version": "candidate",
+      "ms": 138.20000000298023,
+      "last": 256,
+      "taskCPU": 138.57100000000244
+    },
+    {
+      "size": 256,
+      "metric": "rgb",
+      "dither": "4x4",
+      "trial": 1,
+      "version": "baseline",
+      "ms": 132.30000001192093,
+      "last": 256,
+      "taskCPU": 132.6059999999991
+    },
+    {
+      "size": 256,
+      "metric": "rgb",
+      "dither": "4x4",
+      "trial": 2,
+      "version": "baseline",
+      "ms": 136,
+      "last": 256,
+      "taskCPU": 136.34599999999963
+    },
+    {
+      "size": 256,
+      "metric": "rgb",
+      "dither": "4x4",
+      "trial": 2,
+      "version": "candidate",
+      "ms": 135.09999999403954,
+      "last": 256,
+      "taskCPU": 135.43300000000258
+    },
+    {
+      "size": 256,
+      "metric": "rgb",
+      "dither": "4x4",
+      "trial": 3,
+      "version": "candidate",
+      "ms": 136,
+      "last": 256,
+      "taskCPU": 136.33399999999796
+    },
+    {
+      "size": 256,
+      "metric": "rgb",
+      "dither": "4x4",
+      "trial": 3,
+      "version": "baseline",
+      "ms": 133.8999999910593,
+      "last": 256,
+      "taskCPU": 134.26100000000218
+    },
+    {
+      "size": 256,
+      "metric": "rgb",
+      "dither": "4x4",
+      "trial": 4,
+      "version": "baseline",
+      "ms": 145,
+      "last": 256,
+      "taskCPU": 145.19599999999855
+    },
+    {
+      "size": 256,
+      "metric": "rgb",
+      "dither": "4x4",
+      "trial": 4,
+      "version": "candidate",
+      "ms": 136.90000000596046,
+      "last": 256,
+      "taskCPU": 137.21900000000176
+    },
+    {
+      "size": 256,
+      "metric": "rgb",
+      "dither": "8x8",
+      "trial": 0,
+      "version": "baseline",
+      "ms": 135.70000000298023,
+      "last": 256,
+      "taskCPU": 136.03299999999763
+    },
+    {
+      "size": 256,
+      "metric": "rgb",
+      "dither": "8x8",
+      "trial": 0,
+      "version": "candidate",
+      "ms": 140.29999999701977,
+      "last": 256,
+      "taskCPU": 140.70800000000006
+    },
+    {
+      "size": 256,
+      "metric": "rgb",
+      "dither": "8x8",
+      "trial": 1,
+      "version": "candidate",
+      "ms": 137.40000000596046,
+      "last": 256,
+      "taskCPU": 137.6679999999979
+    },
+    {
+      "size": 256,
+      "metric": "rgb",
+      "dither": "8x8",
+      "trial": 1,
+      "version": "baseline",
+      "ms": 144.1000000089407,
+      "last": 256,
+      "taskCPU": 144.49000000000112
+    },
+    {
+      "size": 256,
+      "metric": "rgb",
+      "dither": "8x8",
+      "trial": 2,
+      "version": "baseline",
+      "ms": 136.69999998807907,
+      "last": 256,
+      "taskCPU": 136.98600000000027
+    },
+    {
+      "size": 256,
+      "metric": "rgb",
+      "dither": "8x8",
+      "trial": 2,
+      "version": "candidate",
+      "ms": 137.79999999701977,
+      "last": 256,
+      "taskCPU": 138.1680000000003
+    },
+    {
+      "size": 256,
+      "metric": "rgb",
+      "dither": "8x8",
+      "trial": 3,
+      "version": "candidate",
+      "ms": 138.90000000596046,
+      "last": 256,
+      "taskCPU": 139.26600000000278
+    },
+    {
+      "size": 256,
+      "metric": "rgb",
+      "dither": "8x8",
+      "trial": 3,
+      "version": "baseline",
+      "ms": 135.70000000298023,
+      "last": 256,
+      "taskCPU": 136.04199999999977
+    },
+    {
+      "size": 256,
+      "metric": "rgb",
+      "dither": "8x8",
+      "trial": 4,
+      "version": "baseline",
+      "ms": 139.5,
+      "last": 256,
+      "taskCPU": 139.8430000000026
+    },
+    {
+      "size": 256,
+      "metric": "rgb",
+      "dither": "8x8",
+      "trial": 4,
+      "version": "candidate",
+      "ms": 139.09999999403954,
+      "last": 256,
+      "taskCPU": 139.32700000000153
+    },
+    {
+      "size": 256,
+      "metric": "oklab",
+      "dither": "none",
+      "trial": 0,
+      "version": "baseline",
+      "ms": 25.399999991059303,
+      "last": 256,
+      "taskCPU": 25.82400000000007
+    },
+    {
+      "size": 256,
+      "metric": "oklab",
+      "dither": "none",
+      "trial": 0,
+      "version": "candidate",
+      "ms": 24.900000005960464,
+      "last": 256,
+      "taskCPU": 25.24699999999669
+    },
+    {
+      "size": 256,
+      "metric": "oklab",
+      "dither": "none",
+      "trial": 1,
+      "version": "candidate",
+      "ms": 25,
+      "last": 256,
+      "taskCPU": 25.414999999998855
+    },
+    {
+      "size": 256,
+      "metric": "oklab",
+      "dither": "none",
+      "trial": 1,
+      "version": "baseline",
+      "ms": 24.799999997019768,
+      "last": 256,
+      "taskCPU": 25.140000000000384
+    },
+    {
+      "size": 256,
+      "metric": "oklab",
+      "dither": "none",
+      "trial": 2,
+      "version": "baseline",
+      "ms": 24.900000005960464,
+      "last": 256,
+      "taskCPU": 25.26900000000154
+    },
+    {
+      "size": 256,
+      "metric": "oklab",
+      "dither": "none",
+      "trial": 2,
+      "version": "candidate",
+      "ms": 25.200000002980232,
+      "last": 256,
+      "taskCPU": 25.64599999999828
+    },
+    {
+      "size": 256,
+      "metric": "oklab",
+      "dither": "none",
+      "trial": 3,
+      "version": "candidate",
+      "ms": 24.900000005960464,
+      "last": 256,
+      "taskCPU": 25.12700000000123
+    },
+    {
+      "size": 256,
+      "metric": "oklab",
+      "dither": "none",
+      "trial": 3,
+      "version": "baseline",
+      "ms": 24.799999997019768,
+      "last": 256,
+      "taskCPU": 25.11300000000105
+    },
+    {
+      "size": 256,
+      "metric": "oklab",
+      "dither": "none",
+      "trial": 4,
+      "version": "baseline",
+      "ms": 25,
+      "last": 256,
+      "taskCPU": 25.332000000002353
+    },
+    {
+      "size": 256,
+      "metric": "oklab",
+      "dither": "none",
+      "trial": 4,
+      "version": "candidate",
+      "ms": 25,
+      "last": 256,
+      "taskCPU": 25.369000000001307
+    },
+    {
+      "size": 256,
+      "metric": "oklab",
+      "dither": "4x4",
+      "trial": 0,
+      "version": "baseline",
+      "ms": 130,
+      "last": 256,
+      "taskCPU": 130.274
+    },
+    {
+      "size": 256,
+      "metric": "oklab",
+      "dither": "4x4",
+      "trial": 0,
+      "version": "candidate",
+      "ms": 130.90000000596046,
+      "last": 256,
+      "taskCPU": 131.28299999999982
+    },
+    {
+      "size": 256,
+      "metric": "oklab",
+      "dither": "4x4",
+      "trial": 1,
+      "version": "candidate",
+      "ms": 131.1000000089407,
+      "last": 256,
+      "taskCPU": 131.48200000000188
+    },
+    {
+      "size": 256,
+      "metric": "oklab",
+      "dither": "4x4",
+      "trial": 1,
+      "version": "baseline",
+      "ms": 125.5,
+      "last": 256,
+      "taskCPU": 125.70900000000051
+    },
+    {
+      "size": 256,
+      "metric": "oklab",
+      "dither": "4x4",
+      "trial": 2,
+      "version": "baseline",
+      "ms": 127.3999999910593,
+      "last": 256,
+      "taskCPU": 127.82599999999888
+    },
+    {
+      "size": 256,
+      "metric": "oklab",
+      "dither": "4x4",
+      "trial": 2,
+      "version": "candidate",
+      "ms": 130.29999999701977,
+      "last": 256,
+      "taskCPU": 130.68699999999822
+    },
+    {
+      "size": 256,
+      "metric": "oklab",
+      "dither": "4x4",
+      "trial": 3,
+      "version": "candidate",
+      "ms": 129.20000000298023,
+      "last": 256,
+      "taskCPU": 129.56000000000145
+    },
+    {
+      "size": 256,
+      "metric": "oklab",
+      "dither": "4x4",
+      "trial": 3,
+      "version": "baseline",
+      "ms": 126.09999999403954,
+      "last": 256,
+      "taskCPU": 126.35799999999975
+    },
+    {
+      "size": 256,
+      "metric": "oklab",
+      "dither": "4x4",
+      "trial": 4,
+      "version": "baseline",
+      "ms": 126.59999999403954,
+      "last": 256,
+      "taskCPU": 126.9709999999975
+    },
+    {
+      "size": 256,
+      "metric": "oklab",
+      "dither": "4x4",
+      "trial": 4,
+      "version": "candidate",
+      "ms": 128.20000000298023,
+      "last": 256,
+      "taskCPU": 128.59100000000012
+    },
+    {
+      "size": 256,
+      "metric": "oklab",
+      "dither": "8x8",
+      "trial": 0,
+      "version": "baseline",
+      "ms": 127.09999999403954,
+      "last": 256,
+      "taskCPU": 127.75299999999845
+    },
+    {
+      "size": 256,
+      "metric": "oklab",
+      "dither": "8x8",
+      "trial": 0,
+      "version": "candidate",
+      "ms": 130,
+      "last": 256,
+      "taskCPU": 130.2209999999988
+    },
+    {
+      "size": 256,
+      "metric": "oklab",
+      "dither": "8x8",
+      "trial": 1,
+      "version": "candidate",
+      "ms": 129,
+      "last": 256,
+      "taskCPU": 129.44399999999945
+    },
+    {
+      "size": 256,
+      "metric": "oklab",
+      "dither": "8x8",
+      "trial": 1,
+      "version": "baseline",
+      "ms": 125,
+      "last": 256,
+      "taskCPU": 125.24800000000269
+    },
+    {
+      "size": 256,
+      "metric": "oklab",
+      "dither": "8x8",
+      "trial": 2,
+      "version": "baseline",
+      "ms": 124.79999999701977,
+      "last": 256,
+      "taskCPU": 125.15600000000049
+    },
+    {
+      "size": 256,
+      "metric": "oklab",
+      "dither": "8x8",
+      "trial": 2,
+      "version": "candidate",
+      "ms": 127.79999999701977,
+      "last": 256,
+      "taskCPU": 127.98799999999844
+    },
+    {
+      "size": 256,
+      "metric": "oklab",
+      "dither": "8x8",
+      "trial": 3,
+      "version": "candidate",
+      "ms": 127.59999999403954,
+      "last": 256,
+      "taskCPU": 127.88200000000316
+    },
+    {
+      "size": 256,
+      "metric": "oklab",
+      "dither": "8x8",
+      "trial": 3,
+      "version": "baseline",
+      "ms": 124.79999999701977,
+      "last": 256,
+      "taskCPU": 125.1359999999977
+    },
+    {
+      "size": 256,
+      "metric": "oklab",
+      "dither": "8x8",
+      "trial": 4,
+      "version": "baseline",
+      "ms": 124.3999999910593,
+      "last": 256,
+      "taskCPU": 124.5970000000014
+    },
+    {
+      "size": 256,
+      "metric": "oklab",
+      "dither": "8x8",
+      "trial": 4,
+      "version": "candidate",
+      "ms": 132.40000000596046,
+      "last": 256,
+      "taskCPU": 132.7379999999998
+    }
+  ],
+  "description": "Same test-only128paircachecandidate; prewarmed synchronous kernel calls measure CPU without posted-task wait noise. These intentionally block and do not represent production async responsiveness. 5alternatingpairs; immutable071ebd9source; noAndroidcandidateacceptance."
+}

@@ -1,0 +1,581 @@
+PASS real Android portrait through both landscapes retains compact accessible palette controls
+PASS landscape trusted touch ranges, conditional controls, cancellation and Reset work
+PASS landscape native Save matches independent scalar nearest and one-tap Reuse exact RGB draft
+PASS landscape modal inside drag retains editor; genuine backdrop tap dismisses
+PASS landscape Preview only Save Copy Compare; closing retains wall count
+PASS 1-bit Cutout and Bayer compact controls survive actual landscape and portrait rotation
+PASS 12 sprites plus GIF actual-landscape bounded main-thread frame timing
+{
+  "date": "2026-10-17T02:17:27.857Z",
+  "targetCommit": "071ebd9",
+  "origin": "http://localhost:5336/",
+  "original": {
+    "policy": "free",
+    "accelerometer": "1",
+    "user": "0"
+  },
+  "checks": [
+    {
+      "name": "real Android portrait through both landscapes retains compact accessible palette controls",
+      "pass": true,
+      "states": [
+        {
+          "rotation": 0,
+          "key": "Max colors",
+          "width": 448,
+          "height": 819,
+          "panelHeight": 129.7777862548828,
+          "compact": true,
+          "rows": 1,
+          "overflow": false,
+          "targets": true,
+          "wallSpace": 547.3333129882812
+        },
+        {
+          "rotation": 0,
+          "key": "Matching",
+          "width": 448,
+          "height": 819,
+          "panelHeight": 129.7777862548828,
+          "compact": true,
+          "rows": 1,
+          "overflow": false,
+          "targets": true,
+          "wallSpace": 547.3333129882812
+        },
+        {
+          "rotation": 0,
+          "key": "Cleanup",
+          "width": 448,
+          "height": 819,
+          "panelHeight": 129.7777862548828,
+          "compact": true,
+          "rows": 1,
+          "overflow": false,
+          "targets": true,
+          "wallSpace": 547.3333129882812
+        },
+        {
+          "rotation": 0,
+          "key": "Dithering",
+          "width": 448,
+          "height": 819,
+          "panelHeight": 129.7777862548828,
+          "compact": true,
+          "rows": 1,
+          "overflow": false,
+          "targets": true,
+          "wallSpace": 547.3333129882812
+        },
+        {
+          "rotation": 0,
+          "key": "Opacity",
+          "width": 448,
+          "height": 819,
+          "panelHeight": 129.7777862548828,
+          "compact": true,
+          "rows": 1,
+          "overflow": false,
+          "targets": true,
+          "wallSpace": 547.3333129882812
+        },
+        {
+          "rotation": 0,
+          "key": "Opacity cut",
+          "width": 448,
+          "height": 819,
+          "panelHeight": 129.7777862548828,
+          "compact": true,
+          "rows": 1,
+          "overflow": false,
+          "targets": true,
+          "wallSpace": 547.3333129882812
+        },
+        {
+          "rotation": 1,
+          "key": "Max colors",
+          "width": 947,
+          "height": 364,
+          "panelHeight": 75.77777862548828,
+          "compact": true,
+          "rows": 1,
+          "overflow": false,
+          "targets": true,
+          "wallSpace": 190.22222900390625
+        },
+        {
+          "rotation": 1,
+          "key": "Matching",
+          "width": 947,
+          "height": 364,
+          "panelHeight": 75.77777862548828,
+          "compact": true,
+          "rows": 1,
+          "overflow": false,
+          "targets": true,
+          "wallSpace": 190.22222900390625
+        },
+        {
+          "rotation": 1,
+          "key": "Cleanup",
+          "width": 947,
+          "height": 364,
+          "panelHeight": 75.77777862548828,
+          "compact": true,
+          "rows": 1,
+          "overflow": false,
+          "targets": true,
+          "wallSpace": 190.22222900390625
+        },
+        {
+          "rotation": 1,
+          "key": "Dithering",
+          "width": 947,
+          "height": 364,
+          "panelHeight": 75.77777862548828,
+          "compact": true,
+          "rows": 1,
+          "overflow": false,
+          "targets": true,
+          "wallSpace": 190.22222900390625
+        },
+        {
+          "rotation": 1,
+          "key": "Opacity",
+          "width": 947,
+          "height": 364,
+          "panelHeight": 75.77777862548828,
+          "compact": true,
+          "rows": 1,
+          "overflow": false,
+          "targets": true,
+          "wallSpace": 190.22222900390625
+        },
+        {
+          "rotation": 1,
+          "key": "Opacity cut",
+          "width": 947,
+          "height": 364,
+          "panelHeight": 75.77777862548828,
+          "compact": true,
+          "rows": 1,
+          "overflow": false,
+          "targets": true,
+          "wallSpace": 190.22222900390625
+        },
+        {
+          "rotation": 3,
+          "key": "Max colors",
+          "width": 947,
+          "height": 364,
+          "panelHeight": 75.77777862548828,
+          "compact": true,
+          "rows": 1,
+          "overflow": false,
+          "targets": true,
+          "wallSpace": 190.22222900390625
+        },
+        {
+          "rotation": 3,
+          "key": "Matching",
+          "width": 947,
+          "height": 364,
+          "panelHeight": 75.77777862548828,
+          "compact": true,
+          "rows": 1,
+          "overflow": false,
+          "targets": true,
+          "wallSpace": 190.22222900390625
+        },
+        {
+          "rotation": 3,
+          "key": "Cleanup",
+          "width": 947,
+          "height": 364,
+          "panelHeight": 75.77777862548828,
+          "compact": true,
+          "rows": 1,
+          "overflow": false,
+          "targets": true,
+          "wallSpace": 190.22222900390625
+        },
+        {
+          "rotation": 3,
+          "key": "Dithering",
+          "width": 947,
+          "height": 364,
+          "panelHeight": 75.77777862548828,
+          "compact": true,
+          "rows": 1,
+          "overflow": false,
+          "targets": true,
+          "wallSpace": 190.22222900390625
+        },
+        {
+          "rotation": 3,
+          "key": "Opacity",
+          "width": 947,
+          "height": 364,
+          "panelHeight": 75.77777862548828,
+          "compact": true,
+          "rows": 1,
+          "overflow": false,
+          "targets": true,
+          "wallSpace": 190.22222900390625
+        },
+        {
+          "rotation": 3,
+          "key": "Opacity cut",
+          "width": 947,
+          "height": 364,
+          "panelHeight": 75.77777862548828,
+          "compact": true,
+          "rows": 1,
+          "overflow": false,
+          "targets": true,
+          "wallSpace": 190.22222900390625
+        },
+        {
+          "rotation": 0,
+          "key": "Max colors",
+          "width": 448,
+          "height": 819,
+          "panelHeight": 129.7777862548828,
+          "compact": true,
+          "rows": 1,
+          "overflow": false,
+          "targets": true,
+          "wallSpace": 547.3333129882812
+        },
+        {
+          "rotation": 0,
+          "key": "Matching",
+          "width": 448,
+          "height": 819,
+          "panelHeight": 129.7777862548828,
+          "compact": true,
+          "rows": 1,
+          "overflow": false,
+          "targets": true,
+          "wallSpace": 547.3333129882812
+        },
+        {
+          "rotation": 0,
+          "key": "Cleanup",
+          "width": 448,
+          "height": 819,
+          "panelHeight": 129.7777862548828,
+          "compact": true,
+          "rows": 1,
+          "overflow": false,
+          "targets": true,
+          "wallSpace": 547.3333129882812
+        },
+        {
+          "rotation": 0,
+          "key": "Dithering",
+          "width": 448,
+          "height": 819,
+          "panelHeight": 129.7777862548828,
+          "compact": true,
+          "rows": 1,
+          "overflow": false,
+          "targets": true,
+          "wallSpace": 547.3333129882812
+        },
+        {
+          "rotation": 0,
+          "key": "Opacity",
+          "width": 448,
+          "height": 819,
+          "panelHeight": 129.7777862548828,
+          "compact": true,
+          "rows": 1,
+          "overflow": false,
+          "targets": true,
+          "wallSpace": 547.3333129882812
+        },
+        {
+          "rotation": 0,
+          "key": "Opacity cut",
+          "width": 448,
+          "height": 819,
+          "panelHeight": 129.7777862548828,
+          "compact": true,
+          "rows": 1,
+          "overflow": false,
+          "targets": true,
+          "wallSpace": 547.3333129882812
+        }
+      ]
+    },
+    {
+      "name": "landscape trusted touch ranges, conditional controls, cancellation and Reset work",
+      "pass": true,
+      "strength": 72,
+      "canceledDetachedDraft": true
+    },
+    {
+      "name": "landscape native Save matches independent scalar nearest and one-tap Reuse exact RGB draft",
+      "pass": true,
+      "order": [
+        "Save",
+        "Copy",
+        "Reuse colors",
+        "Preview",
+        "Remove",
+        "Cancel"
+      ],
+      "count": 13,
+      "independentPixelComparison": {
+        "alphaMismatch": 0,
+        "rgbMismatch": 0,
+        "first": null
+      },
+      "saveSha": "88efe15f29f5f6517136767a9e9654cdd7f514511e9c09fd34470cf3efbc9bc6"
+    },
+    {
+      "name": "landscape modal inside drag retains editor; genuine backdrop tap dismisses",
+      "pass": true,
+      "retained": true,
+      "dismissed": true
+    },
+    {
+      "name": "landscape Preview only Save Copy Compare; closing retains wall count",
+      "pass": true,
+      "actions": [
+        "Save image",
+        "Copy image",
+        "Show original image"
+      ]
+    },
+    {
+      "name": "1-bit Cutout and Bayer compact controls survive actual landscape and portrait rotation",
+      "pass": true,
+      "states": [
+        {
+          "rotation": 1,
+          "compact": true,
+          "height": 63.55555725097656,
+          "visible": true
+        },
+        {
+          "rotation": 3,
+          "compact": true,
+          "height": 63.55555725097656,
+          "visible": true
+        },
+        {
+          "rotation": 0,
+          "compact": true,
+          "height": 125.55555725097656,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "name": "12 sprites plus GIF actual-landscape bounded main-thread frame timing",
+      "pass": true,
+      "longtasks": [],
+      "maxGap": 25.09999999999991,
+      "p95Gap": 16.800000000000182,
+      "frameCount": 179,
+      "captionCounts": [
+        "24×24· 13 colors",
+        "24×24· 13 colors",
+        "24×24· 13 colors",
+        "24×24· 13 colors",
+        "24×24· 13 colors",
+        "24×24· 13 colors",
+        "24×24· 13 colors",
+        "24×24· 13 colors",
+        "24×24· 13 colors",
+        "24×24· 13 colors",
+        "24×24· 13 colors",
+        "24×24· 13 colors",
+        "48×48· 10 colors"
+      ]
+    }
+  ],
+  "orientations": [
+    {
+      "width": 448,
+      "height": 819,
+      "screenWidth": 448,
+      "screenHeight": 998,
+      "dpr": 2.25,
+      "orientation": "portrait-primary",
+      "angle": 0,
+      "policy": "lock 0",
+      "actualDisplay": "cur=1008x2244",
+      "rotation": "mDisplayRotation=ROTATION_0",
+      "screenshot": {
+        "file": "portrait-controls.png",
+        "width": 1008,
+        "height": 2244,
+        "sha": "dc202a5a7ddb7cf108ab12c615e234833b77d2ee89d9ae26913aab18c489c176"
+      }
+    },
+    {
+      "width": 947,
+      "height": 364,
+      "screenWidth": 998,
+      "screenHeight": 448,
+      "dpr": 2.25,
+      "orientation": "landscape-primary",
+      "angle": 90,
+      "policy": "lock 1",
+      "actualDisplay": "cur=2244x1008",
+      "rotation": "mDisplayRotation=ROTATION_90",
+      "screenshot": {
+        "file": "landscape-primary-controls.png",
+        "width": 2244,
+        "height": 1008,
+        "sha": "bc5d63843a052210a6013939fcc3a9e8684a26b06caadd17e9f675d77f300cc8"
+      }
+    },
+    {
+      "width": 947,
+      "height": 364,
+      "screenWidth": 998,
+      "screenHeight": 448,
+      "dpr": 2.25,
+      "orientation": "landscape-secondary",
+      "angle": 270,
+      "policy": "lock 3",
+      "actualDisplay": "cur=2244x1008",
+      "rotation": "mDisplayRotation=ROTATION_270",
+      "screenshot": {
+        "file": "landscape-secondary-controls.png",
+        "width": 2244,
+        "height": 1008,
+        "sha": "4f306ed41e7f82f9481c9028685f1fcc38036ec87db95bee32efd346407d9193"
+      }
+    },
+    {
+      "width": 448,
+      "height": 819,
+      "screenWidth": 448,
+      "screenHeight": 998,
+      "dpr": 2.25,
+      "orientation": "portrait-primary",
+      "angle": 0,
+      "policy": "lock 0",
+      "actualDisplay": "cur=1008x2244",
+      "rotation": "mDisplayRotation=ROTATION_0",
+      "screenshot": {
+        "file": "portrait-return-controls.png",
+        "width": 1008,
+        "height": 2244,
+        "sha": "7d86cfea3bc11802b3a24829d0af227437ce00f32933bf8826ec0deb5202a4c5"
+      }
+    },
+    {
+      "width": 947,
+      "height": 364,
+      "screenWidth": 998,
+      "screenHeight": 448,
+      "dpr": 2.25,
+      "orientation": "landscape-primary",
+      "angle": 90,
+      "policy": "lock 1",
+      "actualDisplay": "cur=2244x1008",
+      "rotation": "mDisplayRotation=ROTATION_90",
+      "screenshot": {
+        "file": "landscape-interactions.png",
+        "width": 2244,
+        "height": 1008,
+        "sha": "bd7cbf6f2664ee440284b07b4181e6434f29b76d6eeac0908cfbf9eced778990"
+      }
+    },
+    {
+      "width": 947,
+      "height": 364,
+      "screenWidth": 998,
+      "screenHeight": 448,
+      "dpr": 2.25,
+      "orientation": "landscape-primary",
+      "angle": 90,
+      "policy": "lock 1",
+      "actualDisplay": "cur=2244x1008",
+      "rotation": "mDisplayRotation=ROTATION_90",
+      "screenshot": {
+        "file": "onebit-1.png",
+        "width": 2244,
+        "height": 1008,
+        "sha": "f42bfd489c79f9794249c3eba7cbe78fc671cc299432b6bc7575785fb138d79b"
+      }
+    },
+    {
+      "width": 947,
+      "height": 364,
+      "screenWidth": 998,
+      "screenHeight": 448,
+      "dpr": 2.25,
+      "orientation": "landscape-secondary",
+      "angle": 270,
+      "policy": "lock 3",
+      "actualDisplay": "cur=2244x1008",
+      "rotation": "mDisplayRotation=ROTATION_270",
+      "screenshot": {
+        "file": "onebit-3.png",
+        "width": 2244,
+        "height": 1008,
+        "sha": "2787caba676f5bd10dfa2cb78084e525058bead1738f49d4ddf1a19f318ae2fa"
+      }
+    },
+    {
+      "width": 448,
+      "height": 819,
+      "screenWidth": 448,
+      "screenHeight": 998,
+      "dpr": 2.25,
+      "orientation": "portrait-primary",
+      "angle": 0,
+      "policy": "lock 0",
+      "actualDisplay": "cur=1008x2244",
+      "rotation": "mDisplayRotation=ROTATION_0",
+      "screenshot": {
+        "file": "onebit-0.png",
+        "width": 1008,
+        "height": 2244,
+        "sha": "39d35d46f2e654c6f017ae8a929fa7e1301cb30c056799eb31531d4c0df8242c"
+      }
+    },
+    {
+      "width": 947,
+      "height": 364,
+      "screenWidth": 998,
+      "screenHeight": 448,
+      "dpr": 2.25,
+      "orientation": "landscape-primary",
+      "angle": 90,
+      "policy": "lock 1",
+      "actualDisplay": "cur=2244x1008",
+      "rotation": "mDisplayRotation=ROTATION_90",
+      "screenshot": {
+        "file": "onebit-landscape-final.png",
+        "width": 2244,
+        "height": 1008,
+        "sha": "75fe2a6163860152d0c1a58c3a26db3a25e9608ec562e7a652b3b87abe54804f"
+      }
+    }
+  ],
+  "errors": [],
+  "notes": [
+    "Genuine Android OS display rotation and native ADB screenshots; no CDP metrics/orientation overrides.",
+    "Remote automation cannot establish that a human physically turned the phone body.",
+    "Only the owned tab and uniquely named native downloads are removed; prior origin storage and rotation policy are restored."
+  ],
+  "indexSha": "e408765efbbc3cb5152a0a141405f924c27113f23ecfc927ea8e300c8f68744b",
+  "integrationZoom": {
+    "trustedTouchZoom": true,
+    "fitRestored": true
+  },
+  "restored": {
+    "policy": "free",
+    "accelerometer": "1",
+    "user": "0"
+  },
+  "pass": true
+}

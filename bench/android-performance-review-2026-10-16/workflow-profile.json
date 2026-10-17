@@ -1,0 +1,508 @@
+{
+  "date": "2026-10-17T02:19:27.356Z",
+  "commit": "071ebd9",
+  "origin": "http://localhost:5336/",
+  "original": {
+    "policy": "free",
+    "accelerometer": "1",
+    "user": "0"
+  },
+  "runs": [
+    {
+      "rotation": 1,
+      "viewport": null,
+      "kind": "large",
+      "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+      "errors": [],
+      "rows": [
+        {
+          "name": "import large",
+          "cpuMs": {
+            "TaskDuration": 631.758,
+            "ScriptDuration": 26.613999999999997,
+            "LayoutDuration": 2.263,
+            "RecalcStyleDuration": 9.543
+          },
+          "heapDelta": 70583304,
+          "health": {
+            "ms": 1909.5999999642372,
+            "longtasks": [
+              {
+                "start": 1140.300000011921,
+                "duration": 365
+              }
+            ],
+            "maxTaskMs": 365,
+            "rafMaxMs": 358.3000000000002,
+            "rafP95Ms": 16.800000000000182,
+            "paints": 1,
+            "maxCanvasWriteMs": 0.5999999642372131
+          },
+          "top": [
+            {
+              "frame": "(idle) :-1",
+              "ms": 1228.527
+            },
+            {
+              "frame": "(program) :-1",
+              "ms": 246.875
+            },
+            {
+              "frame": " :7475",
+              "ms": 204.306
+            },
+            {
+              "frame": "Fa index-Dm_8y41z.js:2",
+              "ms": 58.838
+            },
+            {
+              "frame": "(garbage collector) :-1",
+              "ms": 26.175
+            },
+            {
+              "frame": "La index-Dm_8y41z.js:2",
+              "ms": 13.217
+            },
+            {
+              "frame": " :7476",
+              "ms": 11.915
+            },
+            {
+              "frame": "requestAnimationFrame :-1",
+              "ms": 11.399
+            },
+            {
+              "frame": " index-Dm_8y41z.js:2",
+              "ms": 11.357
+            },
+            {
+              "frame": "Aa index-Dm_8y41z.js:2",
+              "ms": 6.963
+            },
+            {
+              "frame": "atob :-1",
+              "ms": 5.708
+            },
+            {
+              "frame": " :-1",
+              "ms": 5.498
+            },
+            {
+              "frame": " index-Dm_8y41z.js:5",
+              "ms": 2.328
+            },
+            {
+              "frame": "getBoundingClientRect :-1",
+              "ms": 2.296
+            },
+            {
+              "frame": " :0",
+              "ms": 2.276
+            }
+          ]
+        },
+        {
+          "name": "matching RGB",
+          "cpuMs": {
+            "TaskDuration": 260.235,
+            "ScriptDuration": 23.784,
+            "LayoutDuration": 4.654,
+            "RecalcStyleDuration": 14.404
+          },
+          "heapDelta": 1426112,
+          "health": {
+            "ms": 1058.2999999523163,
+            "longtasks": [],
+            "maxTaskMs": 0,
+            "rafMaxMs": 58.5,
+            "rafP95Ms": 16.799999999999272,
+            "paints": 3,
+            "maxCanvasWriteMs": 0.19999998807907104
+          },
+          "top": [
+            {
+              "frame": "(idle) :-1",
+              "ms": 753.489
+            },
+            {
+              "frame": "(program) :-1",
+              "ms": 129.398
+            },
+            {
+              "frame": "Fa index-Dm_8y41z.js:2",
+              "ms": 59.735
+            },
+            {
+              "frame": "getBoundingClientRect :-1",
+              "ms": 7.125
+            },
+            {
+              "frame": "blur :-1",
+              "ms": 6.672
+            },
+            {
+              "frame": "get offsetHeight :-1",
+              "ms": 4.533
+            },
+            {
+              "frame": "isElementHiddenForAria :3367",
+              "ms": 4.337
+            },
+            {
+              "frame": " :-1",
+              "ms": 3.839
+            },
+            {
+              "frame": " index-Dm_8y41z.js:2",
+              "ms": 3.52
+            },
+            {
+              "frame": "Aa index-Dm_8y41z.js:2",
+              "ms": 2.358
+            },
+            {
+              "frame": "elementsFromPoint :-1",
+              "ms": 2.357
+            },
+            {
+              "frame": "n index-Dm_8y41z.js:5",
+              "ms": 2.277
+            },
+            {
+              "frame": "La index-Dm_8y41z.js:2",
+              "ms": 2.186
+            },
+            {
+              "frame": "Cn index-Dm_8y41z.js:1",
+              "ms": 2.084
+            },
+            {
+              "frame": "o index-Dm_8y41z.js:2",
+              "ms": 2.035
+            }
+          ]
+        },
+        {
+          "name": "dither 4x4",
+          "cpuMs": {
+            "TaskDuration": 651.8080000000002,
+            "ScriptDuration": 33.019999999999996,
+            "LayoutDuration": 4.471,
+            "RecalcStyleDuration": 22.963
+          },
+          "heapDelta": -53524388,
+          "health": {
+            "ms": 1473.800000011921,
+            "longtasks": [],
+            "maxTaskMs": 0,
+            "rafMaxMs": 50,
+            "rafP95Ms": 16.800000000000182,
+            "paints": 3,
+            "maxCanvasWriteMs": 0.2999999523162842
+          },
+          "top": [
+            {
+              "frame": "(idle) :-1",
+              "ms": 754.429
+            },
+            {
+              "frame": "Sa index-Dm_8y41z.js:2",
+              "ms": 185.497
+            },
+            {
+              "frame": "(program) :-1",
+              "ms": 167.626
+            },
+            {
+              "frame": "Aa index-Dm_8y41z.js:2",
+              "ms": 158.886
+            },
+            {
+              "frame": "Ca index-Dm_8y41z.js:2",
+              "ms": 16.851
+            },
+            {
+              "frame": " :-1",
+              "ms": 15.655
+            },
+            {
+              "frame": "Fa index-Dm_8y41z.js:2",
+              "ms": 15.347
+            },
+            {
+              "frame": "(garbage collector) :-1",
+              "ms": 11.382
+            },
+            {
+              "frame": "getBoundingClientRect :-1",
+              "ms": 9.72
+            },
+            {
+              "frame": "elementsFromPoint :-1",
+              "ms": 5.36
+            },
+            {
+              "frame": "requestAnimationFrame :-1",
+              "ms": 4.96
+            },
+            {
+              "frame": "get offsetHeight :-1",
+              "ms": 4.737
+            },
+            {
+              "frame": "blur :-1",
+              "ms": 3.613
+            },
+            {
+              "frame": "#v index-Dm_8y41z.js:1",
+              "ms": 2.905
+            },
+            {
+              "frame": "callMatchedElements :0",
+              "ms": 2.86
+            }
+          ]
+        },
+        {
+          "name": "cap8 and Cleanup",
+          "cpuMs": {
+            "TaskDuration": 343.78100000000035,
+            "ScriptDuration": 37.17499999999998,
+            "LayoutDuration": 4.832999999999998,
+            "RecalcStyleDuration": 22.233999999999998
+          },
+          "heapDelta": 1291316,
+          "health": {
+            "ms": 886.6000000238419,
+            "longtasks": [],
+            "maxTaskMs": 0,
+            "rafMaxMs": 83.5,
+            "rafP95Ms": 25.899999999999636,
+            "paints": 1,
+            "maxCanvasWriteMs": 0.19999998807907104
+          },
+          "top": [
+            {
+              "frame": "(idle) :-1",
+              "ms": 515.939
+            },
+            {
+              "frame": "(program) :-1",
+              "ms": 172.547
+            },
+            {
+              "frame": "Sa index-Dm_8y41z.js:2",
+              "ms": 38.786
+            },
+            {
+              "frame": "Aa index-Dm_8y41z.js:2",
+              "ms": 34.912
+            },
+            {
+              "frame": " :-1",
+              "ms": 10.196
+            },
+            {
+              "frame": "getBoundingClientRect :-1",
+              "ms": 7.113
+            },
+            {
+              "frame": "Ca index-Dm_8y41z.js:2",
+              "ms": 5.232
+            },
+            {
+              "frame": "elementsFromPoint :-1",
+              "ms": 5.203
+            },
+            {
+              "frame": "get offsetHeight :-1",
+              "ms": 4.708
+            },
+            {
+              "frame": "isElementHiddenForAria :3367",
+              "ms": 4.647
+            },
+            {
+              "frame": " index-Dm_8y41z.js:2",
+              "ms": 3.952
+            },
+            {
+              "frame": "t.onmessage index-Dm_8y41z.js:2",
+              "ms": 3.906
+            },
+            {
+              "frame": "select :-1",
+              "ms": 2.648
+            },
+            {
+              "frame": "Cr index-Dm_8y41z.js:1",
+              "ms": 2.642
+            },
+            {
+              "frame": "tr index-Dm_8y41z.js:1",
+              "ms": 2.456
+            }
+          ]
+        },
+        {
+          "name": "Original return",
+          "cpuMs": {
+            "TaskDuration": 398.57900000000024,
+            "ScriptDuration": 25.51400000000001,
+            "LayoutDuration": 0.8909999999999995,
+            "RecalcStyleDuration": 4.052
+          },
+          "heapDelta": 2468916,
+          "health": {
+            "ms": 920.5999999642372,
+            "longtasks": [],
+            "maxTaskMs": 0,
+            "rafMaxMs": 41.69999999999891,
+            "rafP95Ms": 16.80000000000109,
+            "paints": 3,
+            "maxCanvasWriteMs": 0.30000001192092896
+          },
+          "top": [
+            {
+              "frame": "(idle) :-1",
+              "ms": 501.565
+            },
+            {
+              "frame": "Aa index-Dm_8y41z.js:2",
+              "ms": 151.98
+            },
+            {
+              "frame": "(program) :-1",
+              "ms": 104.615
+            },
+            {
+              "frame": "Sa index-Dm_8y41z.js:2",
+              "ms": 67.752
+            },
+            {
+              "frame": "s palette-cleanup-client-DBCmZik3.js:1",
+              "ms": 23.844
+            },
+            {
+              "frame": "f palette-cleanup-client-DBCmZik3.js:1",
+              "ms": 7.099
+            },
+            {
+              "frame": "Ca index-Dm_8y41z.js:2",
+              "ms": 7.089
+            },
+            {
+              "frame": "t.onmessage palette-cleanup-client-DBCmZik3.js:1",
+              "ms": 5.097
+            },
+            {
+              "frame": "t.onmessage index-Dm_8y41z.js:2",
+              "ms": 4.484
+            },
+            {
+              "frame": "go index-Dm_8y41z.js:2",
+              "ms": 3.042
+            },
+            {
+              "frame": "za index-Dm_8y41z.js:2",
+              "ms": 2.81
+            },
+            {
+              "frame": "requestAnimationFrame :-1",
+              "ms": 2.431
+            },
+            {
+              "frame": " index-Dm_8y41z.js:2",
+              "ms": 2.372
+            },
+            {
+              "frame": "postMessage :-1",
+              "ms": 2.269
+            },
+            {
+              "frame": "p palette-cleanup-client-DBCmZik3.js:1",
+              "ms": 1.325
+            }
+          ]
+        },
+        {
+          "name": "settled idle",
+          "cpuMs": {
+            "TaskDuration": 107.17899999999992,
+            "ScriptDuration": 7.774999999999976,
+            "LayoutDuration": 0,
+            "RecalcStyleDuration": 0
+          },
+          "heapDelta": 3744,
+          "health": {
+            "ms": 922,
+            "longtasks": [],
+            "maxTaskMs": 0,
+            "rafMaxMs": 50,
+            "rafP95Ms": 16.80000000000109,
+            "paints": 0,
+            "maxCanvasWriteMs": 0
+          },
+          "top": [
+            {
+              "frame": "(idle) :-1",
+              "ms": 779.811
+            },
+            {
+              "frame": "(program) :-1",
+              "ms": 97.391
+            },
+            {
+              "frame": "requestAnimationFrame :-1",
+              "ms": 0.898
+            }
+          ]
+        }
+      ],
+      "hashes": [
+        {
+          "label": "initial",
+          "width": 419,
+          "height": 419,
+          "sha": "1d9eb6dd7b2bc22d92422af470ecd54eaecc2167d0169c8475abaca45c320b00"
+        },
+        {
+          "label": "RGB",
+          "width": 419,
+          "height": 419,
+          "sha": "550c5f4af6d62f2f9c545bebedb3136932804ef878aebae818a447278816e5a8"
+        },
+        {
+          "label": "dither",
+          "width": 419,
+          "height": 419,
+          "sha": "23a1341b9d99cf59db885da36b2c912c31407f71a11bfa17ccdb45f41d092f82"
+        },
+        {
+          "label": "cap8Cleanup",
+          "width": 203,
+          "height": 203,
+          "sha": "ebd5b9893e504f23eb000798750d3d66476dd3b85273bfc7321eb2819bc385f6"
+        }
+      ],
+      "labels": [
+        "1024×1024"
+      ],
+      "notes": [
+        "Fixed waits are excluded from interpretation as conversion latency; CDP CPU and Long Tasks report main-thread work. CPU profiler may itself add overhead. Canvas hashes test deterministic rendered output, not full-source exports. No whole-process memory bound follows from JS heap deltas."
+      ]
+    }
+  ],
+  "errors": [],
+  "notes": [
+    "Physical USB Pixel 8 Pro. Android OS rotations only, no CDP device metrics.",
+    "CDP Task/Script/LayoutDuration are renderer main-thread metrics, not worker CPU or whole-process memory.",
+    "rAF instrumentation itself runs during idle; idle is not a zero-work app assertion."
+  ],
+  "restored": {
+    "policy": "free",
+    "accelerometer": "1",
+    "user": "0"
+  },
+  "pass": true
+}

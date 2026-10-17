@@ -1,0 +1,11 @@
+{
+  "commit": "5a77313",
+  "checks": [
+    "all12presetnamesaudited",
+    "Game Boy Green selection,count4",
+    "Black & White selection,count2",
+    "Mulfok 32 selection,count7"
+  ],
+  "errors": [],
+  "finalDom": "- figure \"Preview dungeon-knight-source.png\":\n  - button \"Preview dungeon-knight-source.png\"\n  - button \"Save dungeon-knight-source.png\":\n  - button \"Copy dungeon-knight-source.png\":\n  - button \"Reuse colors from dungeon-knight-source.png\":\n  - button \"Preview dungeon-knight-source.png\":\n  - button \"Remove dungeon-knight-source.png\":\n  - button \"Preview dungeon-knight-source.png\":\n    - generic: dungeon-knight-source.png\n    - generic: 16×16· 7 colors\n- group \"Color system\":\n  - button \"Palette\" [pressed]\n  - button \"1-bit\"\n- generic: Mulfok 32\n- button \"Import palette\":\n- button \"Edit palette\":\n- text: ‹\n- group \"Full palettes\":\n  - button \"Auto\":\n    - generic: Auto\n  - button \"Resurrect 64\":\n    - generic: Resurrect 64\n  - button \"ENDESGA 32\":\n    - generic: ENDESGA 32\n  - button \"Mulfok 32\" [pressed]:\n    - generic: Mulfok 32\n  - button \"PICO-8\":\n    - generic: PICO-8\n  - button \"DawnBringer 16\":\n    - generic: DawnBringer 16\n  - button \"ENDESGA 8\":\n    - generic: ENDESGA 8\n  - button \"Grayscale 8\":\n    - generic: Grayscale 8\n  - button \"Ice Cream GB\":\n    - generic: Ice Cream GB\n  - button \"Game Boy Green\":\n    - generic: Game Boy Green\n  - button \"Black & White\":\n    - generic: Black & White\n  - button \"Glow\":\n    - generic: Glow\n  - button \"Paper\":\n    - generic: Paper\n- text: ›\n- group \"Colors and palette\":\n  - 'button \"Selected palette: Mulfok 32, 32 colors\"'\n  - button \"Palette\" [expanded]:\n- group \"Conversion and style\":\n  - button \"Mulfok 32 conversion\" [pressed]:\n    - generic: Mulfok 32\n  - button \"Palette settings\":\n  - generic: Showing images converted with Mulfok 32.\n- navigation \"File and app actions\":\n  - group \"Add and save images\":\n    - button \"Save image\":\n      - generic: Save\n    - button \"Add images\":\n    - button \"Remove all images\":\n  - button \"More\":"
+}

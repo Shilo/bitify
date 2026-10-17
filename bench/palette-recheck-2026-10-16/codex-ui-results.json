@@ -1,0 +1,25 @@
+{
+  "commit": "140a26c",
+  "url": "http://127.0.0.1:5337/",
+  "checks": [
+    "Mulfok 32 follows ENDESGA 32",
+    "selected tooltip32 colors",
+    "wall7colors",
+    "Reuse7exactswatches",
+    "nativeSave independentlyverified",
+    "portrait390x844",
+    "landscape947x364",
+    "viewportreset"
+  ],
+  "reusedColors": [
+    "#ffb879",
+    "#873555",
+    "#c97373",
+    "#f2ae99",
+    "#4a3052",
+    "#a6859f",
+    "#d9bdc8"
+  ],
+  "errors": [],
+  "finalDom": "- figure \"Preview dungeon-knight-source.png\":\n  - button \"Preview dungeon-knight-source.png\"\n  - button \"Save dungeon-knight-source.png\":\n  - button \"Copy dungeon-knight-source.png\":\n  - button \"Reuse colors from dungeon-knight-source.png\":\n  - button \"Preview dungeon-knight-source.png\":\n  - button \"Remove dungeon-knight-source.png\":\n  - button \"Preview dungeon-knight-source.png\":\n    - generic: dungeon-knight-source.png\n    - generic: 16×16· 7 colors\n- group \"Colors and palette\":\n  - 'button \"Selected palette: Mulfok 32, 32 colors\"'\n  - button \"Palette\":\n- group \"Conversion and style\":\n  - button \"Mulfok 32 conversion\" [pressed]:\n    - generic: Mulfok 32\n  - button \"Palette settings\":\n  - generic: Showing images converted with Mulfok 32.\n- navigation \"File and app actions\":\n  - group \"Add and save images\":\n    - button \"Save image\":\n      - generic: Save\n    - button \"Add images\":\n    - button \"Remove all images\":\n  - button \"More\":"
+}

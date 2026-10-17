@@ -1,0 +1,840 @@
+{
+  "compared": 4718592,
+  "checks": [
+    {
+      "name": "ENDESGA 32",
+      "metric": "oklab",
+      "dither": "2x2",
+      "ditherStrength": 20,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "oklab",
+      "dither": "2x2",
+      "ditherStrength": 20,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "oklab",
+      "dither": "2x2",
+      "ditherStrength": 50,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "oklab",
+      "dither": "2x2",
+      "ditherStrength": 50,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "oklab",
+      "dither": "2x2",
+      "ditherStrength": 100,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "oklab",
+      "dither": "2x2",
+      "ditherStrength": 100,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "oklab",
+      "dither": "4x4",
+      "ditherStrength": 20,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "oklab",
+      "dither": "4x4",
+      "ditherStrength": 20,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "oklab",
+      "dither": "4x4",
+      "ditherStrength": 50,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "oklab",
+      "dither": "4x4",
+      "ditherStrength": 50,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "oklab",
+      "dither": "4x4",
+      "ditherStrength": 100,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "oklab",
+      "dither": "4x4",
+      "ditherStrength": 100,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "oklab",
+      "dither": "8x8",
+      "ditherStrength": 20,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "oklab",
+      "dither": "8x8",
+      "ditherStrength": 20,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "oklab",
+      "dither": "8x8",
+      "ditherStrength": 50,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "oklab",
+      "dither": "8x8",
+      "ditherStrength": 50,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "oklab",
+      "dither": "8x8",
+      "ditherStrength": 100,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "oklab",
+      "dither": "8x8",
+      "ditherStrength": 100,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "rgb",
+      "dither": "2x2",
+      "ditherStrength": 20,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "rgb",
+      "dither": "2x2",
+      "ditherStrength": 20,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "rgb",
+      "dither": "2x2",
+      "ditherStrength": 50,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "rgb",
+      "dither": "2x2",
+      "ditherStrength": 50,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "rgb",
+      "dither": "2x2",
+      "ditherStrength": 100,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "rgb",
+      "dither": "2x2",
+      "ditherStrength": 100,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "rgb",
+      "dither": "4x4",
+      "ditherStrength": 20,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "rgb",
+      "dither": "4x4",
+      "ditherStrength": 20,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "rgb",
+      "dither": "4x4",
+      "ditherStrength": 50,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "rgb",
+      "dither": "4x4",
+      "ditherStrength": 50,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "rgb",
+      "dither": "4x4",
+      "ditherStrength": 100,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "rgb",
+      "dither": "4x4",
+      "ditherStrength": 100,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "rgb",
+      "dither": "8x8",
+      "ditherStrength": 20,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "rgb",
+      "dither": "8x8",
+      "ditherStrength": 20,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "rgb",
+      "dither": "8x8",
+      "ditherStrength": 50,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "rgb",
+      "dither": "8x8",
+      "ditherStrength": 50,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "rgb",
+      "dither": "8x8",
+      "ditherStrength": 100,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "ENDESGA 32",
+      "metric": "rgb",
+      "dither": "8x8",
+      "ditherStrength": 100,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "oklab",
+      "dither": "2x2",
+      "ditherStrength": 20,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "oklab",
+      "dither": "2x2",
+      "ditherStrength": 20,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "oklab",
+      "dither": "2x2",
+      "ditherStrength": 50,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "oklab",
+      "dither": "2x2",
+      "ditherStrength": 50,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "oklab",
+      "dither": "2x2",
+      "ditherStrength": 100,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "oklab",
+      "dither": "2x2",
+      "ditherStrength": 100,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "oklab",
+      "dither": "4x4",
+      "ditherStrength": 20,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "oklab",
+      "dither": "4x4",
+      "ditherStrength": 20,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "oklab",
+      "dither": "4x4",
+      "ditherStrength": 50,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "oklab",
+      "dither": "4x4",
+      "ditherStrength": 50,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "oklab",
+      "dither": "4x4",
+      "ditherStrength": 100,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "oklab",
+      "dither": "4x4",
+      "ditherStrength": 100,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "oklab",
+      "dither": "8x8",
+      "ditherStrength": 20,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "oklab",
+      "dither": "8x8",
+      "ditherStrength": 20,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "oklab",
+      "dither": "8x8",
+      "ditherStrength": 50,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "oklab",
+      "dither": "8x8",
+      "ditherStrength": 50,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "oklab",
+      "dither": "8x8",
+      "ditherStrength": 100,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "oklab",
+      "dither": "8x8",
+      "ditherStrength": 100,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "rgb",
+      "dither": "2x2",
+      "ditherStrength": 20,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "rgb",
+      "dither": "2x2",
+      "ditherStrength": 20,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "rgb",
+      "dither": "2x2",
+      "ditherStrength": 50,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "rgb",
+      "dither": "2x2",
+      "ditherStrength": 50,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "rgb",
+      "dither": "2x2",
+      "ditherStrength": 100,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "rgb",
+      "dither": "2x2",
+      "ditherStrength": 100,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "rgb",
+      "dither": "4x4",
+      "ditherStrength": 20,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "rgb",
+      "dither": "4x4",
+      "ditherStrength": 20,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "rgb",
+      "dither": "4x4",
+      "ditherStrength": 50,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "rgb",
+      "dither": "4x4",
+      "ditherStrength": 50,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "rgb",
+      "dither": "4x4",
+      "ditherStrength": 100,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "rgb",
+      "dither": "4x4",
+      "ditherStrength": 100,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "rgb",
+      "dither": "8x8",
+      "ditherStrength": 20,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "rgb",
+      "dither": "8x8",
+      "ditherStrength": 20,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "rgb",
+      "dither": "8x8",
+      "ditherStrength": 50,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "rgb",
+      "dither": "8x8",
+      "ditherStrength": 50,
+      "alphaMode": "keep",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "rgb",
+      "dither": "8x8",
+      "ditherStrength": 100,
+      "alphaMode": "cut",
+      "mismatch": 0
+    },
+    {
+      "name": "Resurrect 64",
+      "metric": "rgb",
+      "dither": "8x8",
+      "ditherStrength": 100,
+      "alphaMode": "keep",
+      "mismatch": 0
+    }
+  ],
+  "rows": [
+    {
+      "kind": "repeated",
+      "dither": "none",
+      "trial": 0,
+      "version": "baseline",
+      "ms": 3.2000000029802322
+    },
+    {
+      "kind": "repeated",
+      "dither": "none",
+      "trial": 0,
+      "version": "candidate",
+      "ms": 6.899999991059303
+    },
+    {
+      "kind": "repeated",
+      "dither": "none",
+      "trial": 1,
+      "version": "candidate",
+      "ms": 7.100000008940697
+    },
+    {
+      "kind": "repeated",
+      "dither": "none",
+      "trial": 1,
+      "version": "baseline",
+      "ms": 5.5999999940395355
+    },
+    {
+      "kind": "repeated",
+      "dither": "none",
+      "trial": 2,
+      "version": "baseline",
+      "ms": 6.5
+    },
+    {
+      "kind": "repeated",
+      "dither": "none",
+      "trial": 2,
+      "version": "candidate",
+      "ms": 5.5
+    },
+    {
+      "kind": "repeated",
+      "dither": "4x4",
+      "trial": 0,
+      "version": "baseline",
+      "ms": 10.300000011920929
+    },
+    {
+      "kind": "repeated",
+      "dither": "4x4",
+      "trial": 0,
+      "version": "candidate",
+      "ms": 17.200000002980232
+    },
+    {
+      "kind": "repeated",
+      "dither": "4x4",
+      "trial": 1,
+      "version": "candidate",
+      "ms": 6.9000000059604645
+    },
+    {
+      "kind": "repeated",
+      "dither": "4x4",
+      "trial": 1,
+      "version": "baseline",
+      "ms": 10.799999997019768
+    },
+    {
+      "kind": "repeated",
+      "dither": "4x4",
+      "trial": 2,
+      "version": "baseline",
+      "ms": 10.899999991059303
+    },
+    {
+      "kind": "repeated",
+      "dither": "4x4",
+      "trial": 2,
+      "version": "candidate",
+      "ms": 8.700000002980232
+    },
+    {
+      "kind": "repeated",
+      "dither": "8x8",
+      "trial": 0,
+      "version": "baseline",
+      "ms": 6.5999999940395355
+    },
+    {
+      "kind": "repeated",
+      "dither": "8x8",
+      "trial": 0,
+      "version": "candidate",
+      "ms": 11.200000002980232
+    },
+    {
+      "kind": "repeated",
+      "dither": "8x8",
+      "trial": 1,
+      "version": "candidate",
+      "ms": 11.300000011920929
+    },
+    {
+      "kind": "repeated",
+      "dither": "8x8",
+      "trial": 1,
+      "version": "baseline",
+      "ms": 7.399999991059303
+    },
+    {
+      "kind": "repeated",
+      "dither": "8x8",
+      "trial": 2,
+      "version": "baseline",
+      "ms": 7.200000002980232
+    },
+    {
+      "kind": "repeated",
+      "dither": "8x8",
+      "trial": 2,
+      "version": "candidate",
+      "ms": 6.5999999940395355
+    },
+    {
+      "kind": "entropy",
+      "dither": "none",
+      "trial": 0,
+      "version": "baseline",
+      "ms": 129.09999999403954
+    },
+    {
+      "kind": "entropy",
+      "dither": "none",
+      "trial": 0,
+      "version": "candidate",
+      "ms": 96
+    },
+    {
+      "kind": "entropy",
+      "dither": "none",
+      "trial": 1,
+      "version": "candidate",
+      "ms": 111.3999999910593
+    },
+    {
+      "kind": "entropy",
+      "dither": "none",
+      "trial": 1,
+      "version": "baseline",
+      "ms": 105.19999998807907
+    },
+    {
+      "kind": "entropy",
+      "dither": "none",
+      "trial": 2,
+      "version": "baseline",
+      "ms": 79.70000000298023
+    },
+    {
+      "kind": "entropy",
+      "dither": "none",
+      "trial": 2,
+      "version": "candidate",
+      "ms": 55.1000000089407
+    },
+    {
+      "kind": "entropy",
+      "dither": "4x4",
+      "trial": 0,
+      "version": "baseline",
+      "ms": 595.2999999970198
+    },
+    {
+      "kind": "entropy",
+      "dither": "4x4",
+      "trial": 0,
+      "version": "candidate",
+      "ms": 772.5999999940395
+    },
+    {
+      "kind": "entropy",
+      "dither": "4x4",
+      "trial": 1,
+      "version": "candidate",
+      "ms": 371.29999999701977
+    },
+    {
+      "kind": "entropy",
+      "dither": "4x4",
+      "trial": 1,
+      "version": "baseline",
+      "ms": 672.4000000059605
+    },
+    {
+      "kind": "entropy",
+      "dither": "4x4",
+      "trial": 2,
+      "version": "baseline",
+      "ms": 141.20000000298023
+    },
+    {
+      "kind": "entropy",
+      "dither": "4x4",
+      "trial": 2,
+      "version": "candidate",
+      "ms": 213.90000000596046
+    },
+    {
+      "kind": "entropy",
+      "dither": "8x8",
+      "trial": 0,
+      "version": "baseline",
+      "ms": 835.5
+    },
+    {
+      "kind": "entropy",
+      "dither": "8x8",
+      "trial": 0,
+      "version": "candidate",
+      "ms": 626.2999999970198
+    },
+    {
+      "kind": "entropy",
+      "dither": "8x8",
+      "trial": 1,
+      "version": "candidate",
+      "ms": 564.5
+    },
+    {
+      "kind": "entropy",
+      "dither": "8x8",
+      "trial": 1,
+      "version": "baseline",
+      "ms": 544.7000000029802
+    },
+    {
+      "kind": "entropy",
+      "dither": "8x8",
+      "trial": 2,
+      "version": "baseline",
+      "ms": 608.7000000029802
+    },
+    {
+      "kind": "entropy",
+      "dither": "8x8",
+      "trial": 2,
+      "version": "candidate",
+      "ms": 322.6000000089407
+    }
+  ],
+  "canceled": true,
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+  "notes": [
+    "Source-module browser comparison against immutable isolated071ebd9; only palette-dither.js test-transformed. Not app/import/export timing. Cold lazy allocation included. Original RGBplan memo bypass policy retained; pair cache gates large>=65536sample jobs aftermemo disabled. Numericmaximum204800bytes/job,excludesMaps/browseroverhead; no globalmemorybound."
+  ]
+}

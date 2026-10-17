@@ -1,0 +1,11 @@
+import {readFile,writeFile,copyFile} from 'node:fs/promises';
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {decode,usedColors} from '../claude-audit-2026-10-15/device/audit-lib.mjs';
+const folder='bench/palette-recheck-2026-10-16',source=await readFile(folder+'/dungeon-knight-source.png'),actual=await readFile((process.env.CODEX_SAVED_PNG || folder+'/codex-native-save.png')),reference=await readFile(folder+'/dungeon-knight-mulfok32.png');
+const out=await decode(actual),expected=await decode(reference),original=await decode(source);let transparentRgbDifferences=0;
+assert.equal(out.frames[0].length,expected.frames[0].length);
+for(let i=0;i<original.frames[0].length;i+=4){assert.equal(out.frames[0][i+3],original.frames[0][i+3]);assert.equal(out.frames[0][i+3],expected.frames[0][i+3]);if(out.frames[0][i+3]){for(let c=0;c<3;c++)assert.equal(out.frames[0][i+c],expected.frames[0][i+c]);}else if(out.frames[0].subarray(i,i+3).some((v,c)=>v!==expected.frames[0][i+c]))transparentRgbDifferences++;}
+const target=JSON.parse(await readFile(folder+'/public-evidence.json','utf8')).palettes.find(p=>p.slug==='mulfok32').data.colors.map(c=>'#'+c);const used=usedColors(out.frames);assert.equal(used.length,7);assert(used.every(c=>target.includes(c)));
+const ui=JSON.parse(await readFile(folder+'/codex-ui-results.json','utf8'));assert.deepEqual([...ui.reusedColors].sort(),[...used].sort());assert.deepEqual(ui.errors,[]);
+if(process.env.CODEX_SAVED_PNG) await copyFile(process.env.CODEX_SAVED_PNG,folder+'/codex-native-save.png');await writeFile(folder+'/codex-save-results.json',JSON.stringify({commit:'140a26c',source:'dungeon-knight-source.png',used:used.length,reuseMatchesNativeSave:true,canonicalMembership:true,visibleRgbMatchesIndependentValidatedReference:true,allAlphaPreserved:true,transparentRgbDifferences,note:'Initial whole-buffer equality was overstrict: indexed PNG transparent slot carries palette RGB, while Sharp reference has zero RGB. Only alpha-zero hidden RGB is ignored; all visible RGB and every alpha byte must match.',sha256:createHash('sha256').update(actual).digest('hex')},null,2)+'\n');console.log('Actual Codex Save:7 colors,canonical membership,exact visible RGB and all alpha;ignored hiddenRGB pixels',transparentRgbDifferences);

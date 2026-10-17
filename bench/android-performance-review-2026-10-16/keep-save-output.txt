@@ -1,0 +1,85 @@
+{
+  "date": "2026-10-17T02:20:54.822Z",
+  "commit": "071ebd9",
+  "original": {
+    "policy": "free",
+    "accelerometer": "1",
+    "user": "0"
+  },
+  "checks": [
+    {
+      "name": "keep-nearest",
+      "rotation": 0,
+      "dither": "none",
+      "maxColors": 0,
+      "cleanup": false,
+      "pass": true,
+      "caption": "24×24· 15 colors",
+      "sha": "38e14ee759a214cea31f5bb76a6f70dc744bec98d5f8ee77f84b9aee7e669d61",
+      "bytes": 461,
+      "contract": {
+        "offPalette": 0,
+        "alphaWrong": 0,
+        "exactChanged": 0,
+        "used": [
+          "#008751",
+          "#00e436",
+          "#1d2b53",
+          "#29adff",
+          "#5f574f",
+          "#7e2553",
+          "#83769c",
+          "#ab5236",
+          "#c2c3c7",
+          "#ff004d",
+          "#ff77a8",
+          "#ffa300",
+          "#ffccaa",
+          "#ffec27",
+          "#fff1e8"
+        ]
+      },
+      "scalarOracle": {
+        "alphaMismatch": 0,
+        "rgbMismatch": 0,
+        "first": null
+      },
+      "reuseMatchesNativeSave": true
+    },
+    {
+      "name": "keep-dither-cap-cleanup",
+      "rotation": 1,
+      "dither": "4x4",
+      "maxColors": 8,
+      "cleanup": true,
+      "pass": true,
+      "caption": "24×24· 8 colors",
+      "sha": "f37292f88efb3a422934c05e2517c09d0267f2fdb39b72b3c64716bf37f32535",
+      "bytes": 495,
+      "contract": {
+        "offPalette": 0,
+        "alphaWrong": 0,
+        "exactChanged": 0,
+        "used": [
+          "#008751",
+          "#00e436",
+          "#1d2b53",
+          "#83769c",
+          "#c2c3c7",
+          "#ff004d",
+          "#ffa300",
+          "#ffec27"
+        ]
+      },
+      "scalarOracle": null,
+      "reuseMatchesNativeSave": true
+    }
+  ],
+  "errors": [],
+  "restored": {
+    "policy": "free",
+    "accelerometer": "1",
+    "user": "0"
+  },
+  "pass": true
+}

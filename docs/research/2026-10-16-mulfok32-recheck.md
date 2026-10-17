@@ -107,3 +107,13 @@ qualified above. Root independently accepted keeping the palette with the local
 display label **Mulfok 32**. Runtime label implementation and app/device acceptance
 are recorded separately by the orchestrator; this research is not a claim that
 those UI checks have already passed.
+
+### Later implementation and app acceptance
+
+Commit `140a26c` applies only the local label correction, preserving every color,
+stable ID, source link, creator credit, preset order and default. Focused tests
+passed 101/101. Actual Codex Browser and USB Android checks subsequently passed;
+native saves, wall counts and reused palettes agree with independent references.
+Codex Browser covered desktop, portrait and short landscape. Android covered
+canonical nearest plus Keep/dither/cap/Cleanup. See the study README and retained
+device/browser receipts for exact conditions and the independent PNG check.

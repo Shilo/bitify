@@ -1,0 +1,125 @@
+{
+  "date": "2026-10-17T02:31:22.595Z",
+  "commit": "071ebd9",
+  "origin": "http://localhost:5336/",
+  "original": {
+    "policy": "free",
+    "accelerometer": "1",
+    "user": "0"
+  },
+  "checks": [
+    {
+      "label": "initial",
+      "metric": "oklab",
+      "dither": "none",
+      "cap": 0,
+      "cleanup": false,
+      "pass": true,
+      "bytes": 598365,
+      "fileHash": "4da25bfa8a6ab66e421bfec9ab973002b221273ca0a8417ce61706515e7904d0",
+      "pixelHash": "4af1a8fa33109c4f09eda83364c104c7e25f570705f8f79198b200f768d23fe3",
+      "nodeHash": "4af1a8fa33109c4f09eda83364c104c7e25f570705f8f79198b200f768d23fe3"
+    },
+    {
+      "label": "RGB",
+      "metric": "rgb",
+      "dither": "none",
+      "cap": 0,
+      "cleanup": false,
+      "pass": true,
+      "bytes": 600443,
+      "fileHash": "24e447c7cadf5847278b76965be20f1e5bdf8ba6775d3129a320ba9aa7908aaa",
+      "pixelHash": "80f00c0e7e4fd92cfb9ea73f8d48e58f49f4f16b364ef093a067dd4402ba0b9d",
+      "nodeHash": "80f00c0e7e4fd92cfb9ea73f8d48e58f49f4f16b364ef093a067dd4402ba0b9d"
+    },
+    {
+      "label": "dither",
+      "metric": "rgb",
+      "dither": "4x4",
+      "cap": 0,
+      "cleanup": false,
+      "pass": true,
+      "bytes": 598496,
+      "fileHash": "82c32ec30053a0e26bcff328badebe78a4bd31f505c7fb1049f329359ec88480",
+      "pixelHash": "970c87a1090251d8f8062c954d3b7b58519a7cb2d84f38bcf19f1e0bd0af78a7",
+      "nodeHash": "970c87a1090251d8f8062c954d3b7b58519a7cb2d84f38bcf19f1e0bd0af78a7"
+    },
+    {
+      "label": "cap8Cleanup",
+      "metric": "rgb",
+      "dither": "4x4",
+      "cap": 8,
+      "cleanup": true,
+      "pass": true,
+      "bytes": 309463,
+      "fileHash": "fdbf4ed28122af237c9c8d69980cc6e4b0a8b2944b8643fa3efda9beac798470",
+      "pixelHash": "e6438ce114ee304401bf6d88160df92ed90a9a581107ad9565e38b867936c45a",
+      "nodeHash": "e6438ce114ee304401bf6d88160df92ed90a9a581107ad9565e38b867936c45a"
+    }
+  ],
+  "errors": [],
+  "notes": [
+    "Expected hashes come from the separately run Node production-core pipeline on Sharp-decoded source; this verifies browser import/export selection, not an independent algorithm oracle.",
+    "Native PNG files bypass Brave canvas readback noise. No performance timings include these test driver operations."
+  ],
+  "readbackControl": {
+    "width": 896,
+    "height": 896,
+    "solid": [
+      25,
+      80,
+      145,
+      255
+    ],
+    "wrongBytes": 228,
+    "maxDelta": 1,
+    "examples": [
+      {
+        "i": 8477,
+        "want": 80,
+        "got": 81
+      },
+      {
+        "i": 16954,
+        "want": 145,
+        "got": 144
+      },
+      {
+        "i": 28690,
+        "want": 145,
+        "got": 144
+      },
+      {
+        "i": 35205,
+        "want": 80,
+        "got": 81
+      },
+      {
+        "i": 53652,
+        "want": 25,
+        "got": 24
+      },
+      {
+        "i": 63042,
+        "want": 145,
+        "got": 144
+      },
+      {
+        "i": 63198,
+        "want": 145,
+        "got": 144
+      },
+      {
+        "i": 74720,
+        "want": 25,
+        "got": 24
+      }
+    ]
+  },
+  "restored": {
+    "policy": "free",
+    "accelerometer": "1",
+    "user": "0"
+  },
+  "pass": true
+}

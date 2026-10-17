@@ -1,0 +1,1090 @@
+{
+  "date": "2026-10-17T02:17:59.129Z",
+  "commit": "071ebd9",
+  "sandbox": true,
+  "profile": true,
+  "runs": [
+    {
+      "kind": "small",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "errors": [],
+      "rows": [
+        {
+          "name": "import small",
+          "cpuMs": {
+            "TaskDuration": 87.542,
+            "ScriptDuration": 16.168,
+            "LayoutDuration": 2.0820000000000003,
+            "RecalcStyleDuration": 6.133
+          },
+          "heapDelta": 3266084,
+          "health": {
+            "ms": 2300.4000000059605,
+            "longtasks": [],
+            "maxTaskMs": 0,
+            "rafMaxMs": 16.800000000000182,
+            "rafP95Ms": 16.799999999999955,
+            "paints": 26,
+            "maxCanvasWriteMs": 0.20000000298023224
+          },
+          "top": [
+            {
+              "frame": "(idle) :-1",
+              "ms": 2207.364
+            },
+            {
+              "frame": "(program) :-1",
+              "ms": 56.79
+            },
+            {
+              "frame": "lc index-Dm_8y41z.js:2",
+              "ms": 7.291
+            },
+            {
+              "frame": "Fa index-Dm_8y41z.js:2",
+              "ms": 5.057
+            },
+            {
+              "frame": "get clientWidth :-1",
+              "ms": 4.609
+            },
+            {
+              "frame": " index-Dm_8y41z.js:1",
+              "ms": 1.633
+            },
+            {
+              "frame": "ar index-Dm_8y41z.js:1",
+              "ms": 1.611
+            },
+            {
+              "frame": "cloneNode :-1",
+              "ms": 1.604
+            },
+            {
+              "frame": "query :5606",
+              "ms": 1.564
+            },
+            {
+              "frame": " :1",
+              "ms": 1.549
+            },
+            {
+              "frame": "c index-Dm_8y41z.js:5",
+              "ms": 1.546
+            },
+            {
+              "frame": "K index-Dm_8y41z.js:1",
+              "ms": 1.501
+            },
+            {
+              "frame": "removeEventListener :-1",
+              "ms": 1.338
+            },
+            {
+              "frame": "v image-import-client-B4lm3caT.js:1",
+              "ms": 1.166
+            },
+            {
+              "frame": "io index-Dm_8y41z.js:2",
+              "ms": 0.767
+            }
+          ]
+        },
+        {
+          "name": "matching RGB",
+          "cpuMs": {
+            "TaskDuration": 75.433,
+            "ScriptDuration": 10.627,
+            "LayoutDuration": 3.3719999999999994,
+            "RecalcStyleDuration": 10.845
+          },
+          "heapDelta": 2338492,
+          "health": {
+            "ms": 1955.300000011921,
+            "longtasks": [],
+            "maxTaskMs": 0,
+            "rafMaxMs": 16.800000000000182,
+            "rafP95Ms": 16.800000000000182,
+            "paints": 23,
+            "maxCanvasWriteMs": 0.10000000894069672
+          },
+          "top": [
+            {
+              "frame": "(idle) :-1",
+              "ms": 1863.002
+            },
+            {
+              "frame": "(program) :-1",
+              "ms": 52.085
+            },
+            {
+              "frame": "blur :-1",
+              "ms": 4.731
+            },
+            {
+              "frame": "n index-Dm_8y41z.js:5",
+              "ms": 4.622
+            },
+            {
+              "frame": " index-Dm_8y41z.js:2",
+              "ms": 3.119
+            },
+            {
+              "frame": "getBoundingClientRect :-1",
+              "ms": 3.061
+            },
+            {
+              "frame": "Fa index-Dm_8y41z.js:2",
+              "ms": 2.855
+            },
+            {
+              "frame": "get offsetHeight :-1",
+              "ms": 2.052
+            },
+            {
+              "frame": " :3428",
+              "ms": 1.678
+            },
+            {
+              "frame": "getAriaRole :3342",
+              "ms": 1.591
+            },
+            {
+              "frame": "e index-Dm_8y41z.js:1",
+              "ms": 1.568
+            },
+            {
+              "frame": "enclosingShadowHost :2939",
+              "ms": 1.566
+            },
+            {
+              "frame": "evaluate :304",
+              "ms": 1.562
+            },
+            {
+              "frame": "querySelectorAll :-1",
+              "ms": 1.544
+            },
+            {
+              "frame": "i index-Dm_8y41z.js:1",
+              "ms": 1.541
+            }
+          ]
+        },
+        {
+          "name": "Original return",
+          "cpuMs": {
+            "TaskDuration": 32.26800000000002,
+            "ScriptDuration": 3.9910000000000014,
+            "LayoutDuration": 0.13000000000000078,
+            "RecalcStyleDuration": 0.8680000000000008
+          },
+          "heapDelta": 232988,
+          "health": {
+            "ms": 1746,
+            "longtasks": [],
+            "maxTaskMs": 0,
+            "rafMaxMs": 16.800000000000182,
+            "rafP95Ms": 16.800000000000182,
+            "paints": 34,
+            "maxCanvasWriteMs": 0.09999999403953552
+          },
+          "top": [
+            {
+              "frame": "(idle) :-1",
+              "ms": 1705.035
+            },
+            {
+              "frame": "(program) :-1",
+              "ms": 29.552
+            },
+            {
+              "frame": "requestAnimationFrame :-1",
+              "ms": 1.623
+            },
+            {
+              "frame": "Ve index-Dm_8y41z.js:1",
+              "ms": 1.579
+            },
+            {
+              "frame": "rr index-Dm_8y41z.js:1",
+              "ms": 0.704
+            }
+          ]
+        },
+        {
+          "name": "settled idle",
+          "cpuMs": {
+            "TaskDuration": 30.385999999999996,
+            "ScriptDuration": 3.8689999999999976,
+            "LayoutDuration": 0,
+            "RecalcStyleDuration": 0
+          },
+          "heapDelta": 131808,
+          "health": {
+            "ms": 1617.5,
+            "longtasks": [],
+            "maxTaskMs": 0,
+            "rafMaxMs": 16.900000000000546,
+            "rafP95Ms": 16.800000000000182,
+            "paints": 10,
+            "maxCanvasWriteMs": 0.09999999403953552
+          },
+          "top": [
+            {
+              "frame": "(idle) :-1",
+              "ms": 1582.222
+            },
+            {
+              "frame": "(program) :-1",
+              "ms": 27.977
+            },
+            {
+              "frame": "#v index-Dm_8y41z.js:1",
+              "ms": 1.599
+            },
+            {
+              "frame": "CanvasRenderingContext2D.putImageData :6",
+              "ms": 1.508
+            }
+          ]
+        }
+      ],
+      "hashes": [
+        {
+          "label": "initial",
+          "width": 24,
+          "height": 24,
+          "sha": "bc000490d5ba89a982d59f0189c0105cacb9436d057fd4d0b9164facbebf6d91"
+        },
+        {
+          "label": "RGB",
+          "width": 24,
+          "height": 24,
+          "sha": "b6e6f4ddf97efe959163a3b4fee040dfe10e7b3bb2a0c3dacebe956bf3ff32c1"
+        }
+      ],
+      "labels": [
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "48×48· 23 colors"
+      ],
+      "notes": [
+        "Fixed waits are excluded from interpretation as conversion latency; CDP CPU and Long Tasks report main-thread work. CPU profiler may itself add overhead. Canvas hashes test deterministic rendered output, not full-source exports. No whole-process memory bound follows from JS heap deltas."
+      ]
+    },
+    {
+      "kind": "wall",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "errors": [],
+      "rows": [
+        {
+          "name": "import wall",
+          "cpuMs": {
+            "TaskDuration": 208.89,
+            "ScriptDuration": 40.07,
+            "LayoutDuration": 7.3740000000000006,
+            "RecalcStyleDuration": 22.270000000000003
+          },
+          "heapDelta": 11301320,
+          "health": {
+            "ms": 747.2000000029802,
+            "longtasks": [],
+            "maxTaskMs": 0,
+            "rafMaxMs": 66.69999999999999,
+            "rafP95Ms": 33.400000000000034,
+            "paints": 100,
+            "maxCanvasWriteMs": 0.20000000298023224
+          },
+          "top": [
+            {
+              "frame": "(idle) :-1",
+              "ms": 530.629
+            },
+            {
+              "frame": "(program) :-1",
+              "ms": 126.771
+            },
+            {
+              "frame": "get clientWidth :-1",
+              "ms": 15.829
+            },
+            {
+              "frame": "Fa index-Dm_8y41z.js:2",
+              "ms": 9.215
+            },
+            {
+              "frame": " :-1",
+              "ms": 7.735
+            },
+            {
+              "frame": "(garbage collector) :-1",
+              "ms": 4.222
+            },
+            {
+              "frame": "tr index-Dm_8y41z.js:1",
+              "ms": 3.203
+            },
+            {
+              "frame": "putImageData :-1",
+              "ms": 3.194
+            },
+            {
+              "frame": "before :-1",
+              "ms": 3.121
+            },
+            {
+              "frame": "InjectedScript :6722",
+              "ms": 3.066
+            },
+            {
+              "frame": "addEventListener :-1",
+              "ms": 3.045
+            },
+            {
+              "frame": "kt index-Dm_8y41z.js:1",
+              "ms": 2.501
+            },
+            {
+              "frame": "lc index-Dm_8y41z.js:2",
+              "ms": 1.821
+            },
+            {
+              "frame": " index-Dm_8y41z.js:2",
+              "ms": 1.584
+            },
+            {
+              "frame": "io index-Dm_8y41z.js:2",
+              "ms": 1.578
+            }
+          ]
+        },
+        {
+          "name": "matching RGB",
+          "cpuMs": {
+            "TaskDuration": 168.96299999999997,
+            "ScriptDuration": 23.952999999999996,
+            "LayoutDuration": 6.867999999999999,
+            "RecalcStyleDuration": 31.062999999999995
+          },
+          "heapDelta": 97684,
+          "health": {
+            "ms": 747.4000000059605,
+            "longtasks": [],
+            "maxTaskMs": 0,
+            "rafMaxMs": 16.799999999999955,
+            "rafP95Ms": 16.799999999999955,
+            "paints": 100,
+            "maxCanvasWriteMs": 0.10000000894069672
+          },
+          "top": [
+            {
+              "frame": "(idle) :-1",
+              "ms": 576.084
+            },
+            {
+              "frame": "(program) :-1",
+              "ms": 62.887
+            },
+            {
+              "frame": "blur :-1",
+              "ms": 29.428
+            },
+            {
+              "frame": "Fa index-Dm_8y41z.js:2",
+              "ms": 5.603
+            },
+            {
+              "frame": "isElementHiddenForAria :3367",
+              "ms": 4.793
+            },
+            {
+              "frame": " index-Dm_8y41z.js:2",
+              "ms": 4.743
+            },
+            {
+              "frame": "query :5300",
+              "ms": 3.576
+            },
+            {
+              "frame": "computeAriaRole :3350",
+              "ms": 3.293
+            },
+            {
+              "frame": "querySelector :-1",
+              "ms": 3.14
+            },
+            {
+              "frame": "setAttribute :-1",
+              "ms": 3.134
+            },
+            {
+              "frame": "getExplicitAriaRole :3335",
+              "ms": 3.124
+            },
+            {
+              "frame": "before :-1",
+              "ms": 2.288
+            },
+            {
+              "frame": "get offsetHeight :-1",
+              "ms": 2.087
+            },
+            {
+              "frame": "match :5260",
+              "ms": 1.716
+            },
+            {
+              "frame": "checkElementStates :7197",
+              "ms": 1.669
+            }
+          ]
+        },
+        {
+          "name": "Original return",
+          "cpuMs": {
+            "TaskDuration": 40.81299999999999,
+            "ScriptDuration": 4.329,
+            "LayoutDuration": 0.171000000000001,
+            "RecalcStyleDuration": 0.7390000000000035
+          },
+          "heapDelta": 803788,
+          "health": {
+            "ms": 856.5,
+            "longtasks": [],
+            "maxTaskMs": 0,
+            "rafMaxMs": 16.700000000000273,
+            "rafP95Ms": 16.700000000000273,
+            "paints": 200,
+            "maxCanvasWriteMs": 0.10000000894069672
+          },
+          "top": [
+            {
+              "frame": "(idle) :-1",
+              "ms": 808.388
+            },
+            {
+              "frame": "(program) :-1",
+              "ms": 41.174
+            },
+            {
+              "frame": "#a index-Dm_8y41z.js:1",
+              "ms": 1.569
+            },
+            {
+              "frame": "putImageData :-1",
+              "ms": 0.876
+            },
+            {
+              "frame": "nr index-Dm_8y41z.js:1",
+              "ms": 0.619
+            },
+            {
+              "frame": "rr index-Dm_8y41z.js:1",
+              "ms": 0.039
+            }
+          ]
+        },
+        {
+          "name": "settled idle",
+          "cpuMs": {
+            "TaskDuration": 29.299999999999994,
+            "ScriptDuration": 0.6999999999999923,
+            "LayoutDuration": 0,
+            "RecalcStyleDuration": 0
+          },
+          "heapDelta": 5028,
+          "health": {
+            "ms": 836.1000000089407,
+            "longtasks": [],
+            "maxTaskMs": 0,
+            "rafMaxMs": 16.800000000000182,
+            "rafP95Ms": 16.799999999999727,
+            "paints": 0,
+            "maxCanvasWriteMs": 0
+          },
+          "top": [
+            {
+              "frame": "(idle) :-1",
+              "ms": 803.998
+            },
+            {
+              "frame": "(program) :-1",
+              "ms": 28.358
+            }
+          ]
+        }
+      ],
+      "hashes": [
+        {
+          "label": "initial",
+          "width": 24,
+          "height": 24,
+          "sha": "bc000490d5ba89a982d59f0189c0105cacb9436d057fd4d0b9164facbebf6d91"
+        },
+        {
+          "label": "RGB",
+          "width": 24,
+          "height": 24,
+          "sha": "b6e6f4ddf97efe959163a3b4fee040dfe10e7b3bb2a0c3dacebe956bf3ff32c1"
+        }
+      ],
+      "labels": [
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors",
+        "24×24· 33 colors"
+      ],
+      "notes": [
+        "Fixed waits are excluded from interpretation as conversion latency; CDP CPU and Long Tasks report main-thread work. CPU profiler may itself add overhead. Canvas hashes test deterministic rendered output, not full-source exports. No whole-process memory bound follows from JS heap deltas."
+      ]
+    },
+    {
+      "kind": "large",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "errors": [],
+      "rows": [
+        {
+          "name": "import large",
+          "cpuMs": {
+            "TaskDuration": 180.102,
+            "ScriptDuration": 5.403,
+            "LayoutDuration": 0.506,
+            "RecalcStyleDuration": 2.1350000000000002
+          },
+          "heapDelta": 1465396,
+          "health": {
+            "ms": 796.8999999910593,
+            "longtasks": [],
+            "maxTaskMs": 0,
+            "rafMaxMs": 16.800000000000068,
+            "rafP95Ms": 16.80000000000001,
+            "paints": 1,
+            "maxCanvasWriteMs": 0.6000000089406967
+          },
+          "top": [
+            {
+              "frame": "(idle) :-1",
+              "ms": 606.463
+            },
+            {
+              "frame": "Fa index-Dm_8y41z.js:2",
+              "ms": 93.802
+            },
+            {
+              "frame": "(program) :-1",
+              "ms": 39.729
+            },
+            {
+              "frame": "Aa index-Dm_8y41z.js:2",
+              "ms": 27.889
+            },
+            {
+              "frame": "za index-Dm_8y41z.js:2",
+              "ms": 3.3
+            },
+            {
+              "frame": " :0",
+              "ms": 2.575
+            },
+            {
+              "frame": "ul index-Dm_8y41z.js:2",
+              "ms": 2.343
+            },
+            {
+              "frame": "dl index-Dm_8y41z.js:2",
+              "ms": 2.261
+            },
+            {
+              "frame": "get clientWidth :-1",
+              "ms": 1.603
+            },
+            {
+              "frame": "previewNode :7702",
+              "ms": 1.578
+            },
+            {
+              "frame": "copyTo :-1",
+              "ms": 1.54
+            },
+            {
+              "frame": " :-1",
+              "ms": 1.538
+            },
+            {
+              "frame": " index-Dm_8y41z.js:1",
+              "ms": 1.532
+            },
+            {
+              "frame": "requestAnimationFrame :-1",
+              "ms": 1.531
+            },
+            {
+              "frame": " :1",
+              "ms": 1.504
+            }
+          ]
+        },
+        {
+          "name": "matching RGB",
+          "cpuMs": {
+            "TaskDuration": 223.89199999999997,
+            "ScriptDuration": 6.852,
+            "LayoutDuration": 1.914,
+            "RecalcStyleDuration": 4.668
+          },
+          "heapDelta": 1276364,
+          "health": {
+            "ms": 850.7999999970198,
+            "longtasks": [],
+            "maxTaskMs": 0,
+            "rafMaxMs": 16.800000000000182,
+            "rafP95Ms": 16.800000000000182,
+            "paints": 3,
+            "maxCanvasWriteMs": 0.29999999701976776
+          },
+          "top": [
+            {
+              "frame": "(idle) :-1",
+              "ms": 618.272
+            },
+            {
+              "frame": "Fa index-Dm_8y41z.js:2",
+              "ms": 167.167
+            },
+            {
+              "frame": "(program) :-1",
+              "ms": 30.346
+            },
+            {
+              "frame": "Aa index-Dm_8y41z.js:2",
+              "ms": 11.196
+            },
+            {
+              "frame": "za index-Dm_8y41z.js:2",
+              "ms": 4.535
+            },
+            {
+              "frame": "blur :-1",
+              "ms": 3.083
+            },
+            {
+              "frame": " index-Dm_8y41z.js:2",
+              "ms": 3.049
+            },
+            {
+              "frame": "queryAll :5316",
+              "ms": 1.67
+            },
+            {
+              "frame": "c index-Dm_8y41z.js:5",
+              "ms": 1.612
+            },
+            {
+              "frame": "get offsetHeight :-1",
+              "ms": 1.596
+            },
+            {
+              "frame": "setupHitTargetInterceptor :7573",
+              "ms": 1.549
+            },
+            {
+              "frame": " index-Dm_8y41z.js:1",
+              "ms": 1.539
+            },
+            {
+              "frame": "HEADER :3131",
+              "ms": 1.472
+            }
+          ]
+        },
+        {
+          "name": "dither 4x4",
+          "cpuMs": {
+            "TaskDuration": 606.7449999999999,
+            "ScriptDuration": 5.430999999999998,
+            "LayoutDuration": 0.9340000000000004,
+            "RecalcStyleDuration": 6.498
+          },
+          "heapDelta": 12486664,
+          "health": {
+            "ms": 665.5,
+            "longtasks": [],
+            "maxTaskMs": 0,
+            "rafMaxMs": 16.799999999999272,
+            "rafP95Ms": 16.799999999999272,
+            "paints": 1,
+            "maxCanvasWriteMs": 0
+          },
+          "top": [
+            {
+              "frame": "Aa index-Dm_8y41z.js:2",
+              "ms": 306.734
+            },
+            {
+              "frame": "Sa index-Dm_8y41z.js:2",
+              "ms": 194.696
+            },
+            {
+              "frame": "(idle) :-1",
+              "ms": 43.493
+            },
+            {
+              "frame": "Fa index-Dm_8y41z.js:2",
+              "ms": 37.678
+            },
+            {
+              "frame": "(program) :-1",
+              "ms": 24.64
+            },
+            {
+              "frame": "Ca index-Dm_8y41z.js:2",
+              "ms": 23.138
+            },
+            {
+              "frame": "blur :-1",
+              "ms": 4.697
+            },
+            {
+              "frame": "checkVisibility :-1",
+              "ms": 1.924
+            },
+            {
+              "frame": "postMessage :-1",
+              "ms": 1.598
+            },
+            {
+              "frame": "xa index-Dm_8y41z.js:2",
+              "ms": 1.586
+            },
+            {
+              "frame": "n index-Dm_8y41z.js:5",
+              "ms": 1.576
+            },
+            {
+              "frame": "now :-1",
+              "ms": 1.567
+            },
+            {
+              "frame": "isError :56",
+              "ms": 1.55
+            },
+            {
+              "frame": "getAttribute :-1",
+              "ms": 1.546
+            },
+            {
+              "frame": "get offsetHeight :-1",
+              "ms": 1.541
+            }
+          ]
+        },
+        {
+          "name": "cap8 and Cleanup",
+          "cpuMs": {
+            "TaskDuration": 769.733,
+            "ScriptDuration": 13.582999999999998,
+            "LayoutDuration": 0.6709999999999997,
+            "RecalcStyleDuration": 3.389999999999999
+          },
+          "heapDelta": 1798280,
+          "health": {
+            "ms": 2048.699999988079,
+            "longtasks": [],
+            "maxTaskMs": 0,
+            "rafMaxMs": 17.30000000000109,
+            "rafP95Ms": 16.80000000000109,
+            "paints": 1,
+            "maxCanvasWriteMs": 0.29999999701976776
+          },
+          "top": [
+            {
+              "frame": "(idle) :-1",
+              "ms": 1272.833
+            },
+            {
+              "frame": "Aa index-Dm_8y41z.js:2",
+              "ms": 512.187
+            },
+            {
+              "frame": "Sa index-Dm_8y41z.js:2",
+              "ms": 171.894
+            },
+            {
+              "frame": "(program) :-1",
+              "ms": 39.015
+            },
+            {
+              "frame": "Ca index-Dm_8y41z.js:2",
+              "ms": 10.734
+            },
+            {
+              "frame": "f palette-cleanup-client-DBCmZik3.js:1",
+              "ms": 3.52
+            },
+            {
+              "frame": "blur :-1",
+              "ms": 3.126
+            },
+            {
+              "frame": "MessageChannel :-1",
+              "ms": 3.083
+            },
+            {
+              "frame": "za index-Dm_8y41z.js:2",
+              "ms": 3.046
+            },
+            {
+              "frame": "elementsFromPoint :-1",
+              "ms": 2.582
+            },
+            {
+              "frame": "s palette-cleanup-client-DBCmZik3.js:1",
+              "ms": 2.472
+            },
+            {
+              "frame": "isNonEmptyDataCell :3214",
+              "ms": 2.131
+            },
+            {
+              "frame": "f :4",
+              "ms": 1.621
+            },
+            {
+              "frame": "close :-1",
+              "ms": 1.563
+            },
+            {
+              "frame": "postMessage :-1",
+              "ms": 1.557
+            }
+          ]
+        },
+        {
+          "name": "Original return",
+          "cpuMs": {
+            "TaskDuration": 28.719999999999857,
+            "ScriptDuration": 5.992000000000004,
+            "LayoutDuration": 0.23399999999999982,
+            "RecalcStyleDuration": 1.2260000000000013
+          },
+          "heapDelta": 288252,
+          "health": {
+            "ms": 839.5,
+            "longtasks": [],
+            "maxTaskMs": 0,
+            "rafMaxMs": 16.80000000000291,
+            "rafP95Ms": 16.80000000000291,
+            "paints": 2,
+            "maxCanvasWriteMs": 2.0999999940395355
+          },
+          "top": [
+            {
+              "frame": "(idle) :-1",
+              "ms": 797.495
+            },
+            {
+              "frame": "(program) :-1",
+              "ms": 27.748
+            },
+            {
+              "frame": "go index-Dm_8y41z.js:2",
+              "ms": 2.818
+            },
+            {
+              "frame": "CanvasRenderingContext2D.putImageData :6",
+              "ms": 1.684
+            },
+            {
+              "frame": "putImageData :-1",
+              "ms": 1.638
+            }
+          ]
+        },
+        {
+          "name": "settled idle",
+          "cpuMs": {
+            "TaskDuration": 21.53600000000022,
+            "ScriptDuration": 1.231999999999997,
+            "LayoutDuration": 0,
+            "RecalcStyleDuration": 0
+          },
+          "heapDelta": 3672,
+          "health": {
+            "ms": 824.1000000089407,
+            "longtasks": [],
+            "maxTaskMs": 0,
+            "rafMaxMs": 16.900000000001455,
+            "rafP95Ms": 16.799999999999272,
+            "paints": 0,
+            "maxCanvasWriteMs": 0
+          },
+          "top": [
+            {
+              "frame": "(idle) :-1",
+              "ms": 796.422
+            },
+            {
+              "frame": "(program) :-1",
+              "ms": 20.39
+            },
+            {
+              "frame": "requestAnimationFrame :-1",
+              "ms": 3.087
+            }
+          ]
+        }
+      ],
+      "hashes": [
+        {
+          "label": "initial",
+          "width": 761,
+          "height": 761,
+          "sha": "9564c7333b400ba6d15bc471060542e15be33ec8d1985638fc8027331a0d021c"
+        },
+        {
+          "label": "RGB",
+          "width": 761,
+          "height": 761,
+          "sha": "f001a5b872cc221096e4f29b43743e6a534225b4683ef708b2375bb613910941"
+        },
+        {
+          "label": "dither",
+          "width": 461,
+          "height": 461,
+          "sha": "0e8cb735e702e7127ac9a0bb00e77259193b52e099f6447e09b04c7c1c15d4cd"
+        },
+        {
+          "label": "cap8Cleanup",
+          "width": 761,
+          "height": 761,
+          "sha": "87b4f639f961d42980f9982c7c5bbf919261f7fad31b97346cc4c1a4d8546944"
+        }
+      ],
+      "labels": [
+        "1024×1024"
+      ],
+      "notes": [
+        "Fixed waits are excluded from interpretation as conversion latency; CDP CPU and Long Tasks report main-thread work. CPU profiler may itself add overhead. Canvas hashes test deterministic rendered output, not full-source exports. No whole-process memory bound follows from JS heap deltas."
+      ]
+    }
+  ]
+}

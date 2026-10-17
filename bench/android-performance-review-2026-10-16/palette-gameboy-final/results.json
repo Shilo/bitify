@@ -1,0 +1,72 @@
+{
+  "date": "2026-10-17T02:30:37.420Z",
+  "commit": "5a77313",
+  "origin": "http://localhost:5338/",
+  "palette": "Game Boy Green",
+  "original": {
+    "policy": "free",
+    "accelerometer": "1",
+    "user": "0"
+  },
+  "checks": [
+    {
+      "name": "keep-nearest",
+      "rotation": 0,
+      "dither": "none",
+      "maxColors": 0,
+      "cleanup": false,
+      "pass": true,
+      "caption": "24×24· 4 colors",
+      "sha": "2f9fde26417f3e0cdf54f7ac7247e6bb1340e868ec47c001294df768948976bd",
+      "bytes": 337,
+      "contract": {
+        "offPalette": 0,
+        "alphaWrong": 0,
+        "exactChanged": 0,
+        "used": [
+          "#0f380f",
+          "#306230",
+          "#8bac0f",
+          "#9bbc0f"
+        ]
+      },
+      "scalarOracle": {
+        "alphaMismatch": 0,
+        "rgbMismatch": 0,
+        "first": null
+      },
+      "reuseMatchesNativeSave": true
+    },
+    {
+      "name": "keep-dither-cap-cleanup",
+      "rotation": 1,
+      "dither": "4x4",
+      "maxColors": 8,
+      "cleanup": true,
+      "pass": true,
+      "caption": "24×24· 4 colors",
+      "sha": "6216522e3012c694e7ceb6efea7178e25b5dd22c489d73604185860280cefd53",
+      "bytes": 372,
+      "contract": {
+        "offPalette": 0,
+        "alphaWrong": 0,
+        "exactChanged": 0,
+        "used": [
+          "#0f380f",
+          "#306230",
+          "#8bac0f",
+          "#9bbc0f"
+        ]
+      },
+      "scalarOracle": null,
+      "reuseMatchesNativeSave": true
+    }
+  ],
+  "errors": [],
+  "restored": {
+    "policy": "free",
+    "accelerometer": "1",
+    "user": "0"
+  },
+  "pass": true
+}

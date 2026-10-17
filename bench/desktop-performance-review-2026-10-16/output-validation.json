@@ -1,0 +1,75 @@
+{
+  "source": "Node committed production-core references outside browser, exact1024source; covers final render selection and catches stale/draft sampling, not independent algorithm accuracy",
+  "expected": [
+    {
+      "label": "initial",
+      "width": 1024,
+      "height": 1024,
+      "sha": "0798bee6e466a50eefa0f8f6b357dbd596c4ba9666ac482050aebe82e7988f9a"
+    },
+    {
+      "label": "RGB",
+      "width": 1024,
+      "height": 1024,
+      "sha": "6f973dddba4e52339a71519f09f3f70a3ea3b451531405246d6ad077e328523e"
+    },
+    {
+      "label": "dither",
+      "width": 1024,
+      "height": 1024,
+      "sha": "b19632e244d2b049943b0effd100d21f10c0ebe33fbe3d660546267ec3af4a7d"
+    },
+    {
+      "label": "cap8Cleanup",
+      "width": 1024,
+      "height": 1024,
+      "sha": "fa5a8726a2456eaa3f6bf2a9d3e035f8a4d18e600ae7c1355abb17fa9ffc6e50"
+    }
+  ],
+  "checks": [
+    {
+      "file": "bench/desktop-performance-review-2026-10-16/desktop-results-v3.json",
+      "label": "initial",
+      "pass": true,
+      "got": {
+        "label": "initial",
+        "width": 1024,
+        "height": 1024,
+        "sha": "0798bee6e466a50eefa0f8f6b357dbd596c4ba9666ac482050aebe82e7988f9a"
+      }
+    },
+    {
+      "file": "bench/desktop-performance-review-2026-10-16/desktop-results-v3.json",
+      "label": "RGB",
+      "pass": true,
+      "got": {
+        "label": "RGB",
+        "width": 1024,
+        "height": 1024,
+        "sha": "6f973dddba4e52339a71519f09f3f70a3ea3b451531405246d6ad077e328523e"
+      }
+    },
+    {
+      "file": "bench/desktop-performance-review-2026-10-16/desktop-results-v3.json",
+      "label": "dither",
+      "pass": true,
+      "got": {
+        "label": "dither",
+        "width": 1024,
+        "height": 1024,
+        "sha": "b19632e244d2b049943b0effd100d21f10c0ebe33fbe3d660546267ec3af4a7d"
+      }
+    },
+    {
+      "file": "bench/desktop-performance-review-2026-10-16/desktop-results-v3.json",
+      "label": "cap8Cleanup",
+      "pass": true,
+      "got": {
+        "label": "cap8Cleanup",
+        "width": 1024,
+        "height": 1024,
+        "sha": "fa5a8726a2456eaa3f6bf2a9d3e035f8a4d18e600ae7c1355abb17fa9ffc6e50"
+      }
+    }
+  ]
+}

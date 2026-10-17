@@ -1,0 +1,12 @@
+{
+  "commit": "140a26c",
+  "source": "dungeon-knight-source.png",
+  "used": 7,
+  "reuseMatchesNativeSave": true,
+  "canonicalMembership": true,
+  "visibleRgbMatchesIndependentValidatedReference": true,
+  "allAlphaPreserved": true,
+  "transparentRgbDifferences": 53,
+  "note": "Initial whole-buffer equality was overstrict: indexed PNG transparent slot carries palette RGB, while Sharp reference has zero RGB. Only alpha-zero hidden RGB is ignored; all visible RGB and every alpha byte must match.",
+  "sha256": "a44035d86a75b09d9a77f93894498a1a293fb50431bbfd6a08be27dd451a73b5"
+}
