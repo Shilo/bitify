@@ -95,8 +95,8 @@
   }
 }
 
-/* Four image actions stay inside small desktop tiles without shrinking targets. */
-@container (max-width: 160px) {
+/* Five image actions stay inside small desktop tiles without shrinking targets. */
+@container (max-width: 204px) {
   @media (hover: hover) {
     :root .tile .acts { display: grid; grid-template-columns: repeat(2, auto); }
   }

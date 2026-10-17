@@ -13,8 +13,8 @@
   import { tick, untrack } from 'svelte';
   import { createExportDrag, isMobileExportDevice } from './lib/export-drag.js';
   import { imageGesture } from './lib/image-gesture.js';
-  import { isInternalDrag, trackInternalDrag } from './lib/internal-drag.js';
   import { backdropDismiss } from './lib/dialog-dismiss.js';
+  import { isInternalDrag, trackInternalDrag } from './lib/internal-drag.js';
   import { hasImageDrop, droppedImages, fetchDroppedImage } from './lib/image-drop.js';
   import { decodeImageFile } from './lib/image-decode.js';
   import CanvasGrid from './CanvasGrid.svelte';
@@ -30,6 +30,7 @@
   import { restorePaletteState, conversionSnapshot, fullPaletteImage } from './lib/palette-state.js';
   import { tooltip } from './lib/tooltip.js';
   import { paletteFailureRegistry } from './lib/palette-failure.js';
+  import { addUsageFrame, completedUsage } from './lib/palette-usage-progress.js';
   import { packWorkspaceControls } from './lib/workspace-controls.js';
   import logoUrl from './assets/logo.png';
   import darkLogoUrl from './assets/logo-dark.png';
@@ -298,7 +299,7 @@
     if (generatedError) generationRetry++;
     say('Settings reset.');
   }
-  let shared = $state.raw(null), sharedTrigger; // the image the sheet is for; it stays set after the sheet closes, until the next one
+  let shared = $state.raw(null), sharedTrigger, shareSession = 0; // the image the sheet is for; it stays set after the sheet closes, until the next one
   // But not once that image is removed, or the sheet would go on holding all of a photo's pixels.
   $effect(() => {
     if (shared && !items.includes(shared)) shared = null;
@@ -318,6 +319,7 @@
     }
   }
   function share(item, trigger) {
+    shareSession++;
     shared = item; sharedTrigger = trigger;
     clearComparison(); sheet.showModal();
   }
@@ -700,14 +702,22 @@
     return JSON.stringify({ ...snapshot, name: undefined, colors: snapshot.generated ? undefined : snapshot.colors, generated: snapshot.generated?.key });
   });
   let colorUsage = $state.raw(new Map());
+  function previewUsage({ item, key, colors, used, frame, frames }) {
+    if (key !== usageKey || family !== 'full-palette' || generatedPending || generatedUnavailable || !items.includes(item)) return;
+    const previous = usageFor(item);
+    if (previous?.result || previous?.status === 'pending') return;
+    const progress = addUsageFrame(previous?.progress, colors, used, frame, frames);
+    if (!progress) return;
+    const result = completedUsage(progress, fullPalette.colors);
+    colorUsage = new Map(colorUsage).set(item.id, { item, key, ...(result ? { result, status: 'ready' } : { progress, status: 'partial' }) });
+  }
   const usageFor = item => {
     const record = colorUsage.get(item.id);
     return family === 'full-palette' && record?.item === item && record.key === usageKey ? record : null;
   };
   const usageLabel = item => {
     const record = usageFor(item);
-    return record?.status === 'pending' ? 'Counting colors…' : record?.status === 'error' ? 'Count unavailable · Retry'
-      : record?.result ? `${record.result.count} ${record.result.count === 1 ? 'color' : 'colors'} used` : '';
+    return record?.result ? `${record.result.count} ${record.result.count === 1 ? 'color' : 'colors'}` : '';
   };
   $effect(() => {
     const key = usageKey, live = items, records = colorUsage;
@@ -718,34 +728,58 @@
     colorUsage = next;
   });
   $effect(() => () => { for (const record of colorUsage.values()) record.controller?.abort(); });
-  async function countColors(item) {
-    if (family !== 'full-palette' || generatedUnavailable || itemPaletteFailed(item) || !items.includes(item)) return;
+  function countColors(item, explicit = false) {
+    if (family !== 'full-palette' || generatedUnavailable || itemPaletteFailed(item) || !items.includes(item)) return Promise.resolve(null);
     const previous = usageFor(item);
-    if (previous?.status === 'pending' || previous?.result) return;
+    if (previous?.status === 'pending') { previous.explicit ||= explicit; return previous.promise; }
+    if (previous?.result) return Promise.resolve(previous.result);
     const snapshot = asking(), key = usageKey, controller = new AbortController();
-    const record = { item, key, controller, status: 'pending' };
-    colorUsage = new Map(colorUsage).set(item.id, record);
+    const record = { item, key, controller, status: 'pending', explicit };
     const publish = value => {
       if (!controller.signal.aborted && key === usageKey && items.includes(item) && colorUsage.get(item.id) === record)
         colorUsage = new Map(colorUsage).set(item.id, { item, key, ...value });
     };
-    try {
-      const { collectPaletteUsage } = await import('./lib/palette-usage.js');
-      const result = await collectPaletteUsage(item, snapshot, { signal: controller.signal });
-      publish({ result, status: 'ready' });
-    } catch (error) {
-      if (error.name !== 'AbortError') publish({ status: 'error' });
-    }
+    record.promise = (async () => {
+      try {
+        const { collectPaletteUsage } = await import('./lib/palette-usage.js');
+        const result = await collectPaletteUsage(item, snapshot, { signal: controller.signal });
+        publish({ result, status: 'ready' });
+        return result;
+      } catch (error) {
+        if (error.name !== 'AbortError') publish({ status: 'error' });
+        return null;
+      }
+    })();
+    colorUsage = new Map(colorUsage).set(item.id, record);
+    return record.promise;
   }
-  const usageActionLabel = item => {
-    const usage = usageFor(item);
-    return usage?.result?.count ? `Use ${usage.result.count} output ${usage.result.count === 1 ? 'color' : 'colors'}`
-      : usageLabel(item) || 'Count output colors';
-  };
-  async function outputColors(item) {
+  // Preview metadata is automatic and noninteractive. Reuse is always one action;
+  // it joins an in-flight inspection rather than requiring a separate Count click.
+  $effect(() => {
+    const item = viewed, key = usageKey;
+    if (!item || family !== 'full-palette' || generatedUnavailable || itemPaletteFailed(item)) return;
+    const record = untrack(() => { void countColors(item); return usageFor(item); });
+    return () => {
+      if (record?.status !== 'pending' || record.explicit) return;
+      record.controller.abort();
+      untrack(() => {
+        if (colorUsage.get(item.id) === record) {
+          const next = new Map(colorUsage); next.delete(item.id); colorUsage = next;
+        }
+      });
+    };
+  });
+  async function outputColors(item, trigger) {
+    const key = usageKey, session = shareSession, fromSheet = trigger?.closest('dialog.sheet');
+    if (paletteRequest) return;
+    if (!usageFor(item)?.result) say('Finding output colors…');
+    const result = await countColors(item, true);
+    if (key !== usageKey || !items.includes(item) || trigger && !trigger.isConnected
+      || fromSheet && (!fromSheet.open || shared !== item || shareSession !== session)) return;
+    if (!result) { say('Could not read output colors. Try Reuse colors again.', 5000); return; }
+    if (!result.count) { say('This output has no visible colors to reuse.', 5000); return; }
     const record = usageFor(item);
-    if (!record?.result) { await countColors(item); return; }
-    if (!record.result.count || paletteRequest) return;
+    if (!record?.result?.count || paletteRequest) return;
     sheet.close();
     await tick();
     if (usageFor(item) !== record || paletteRequest) return;
@@ -987,13 +1021,14 @@
          the demo when its source changes; real images retain their ID and caches. -->
     {#each canvasItems as item (item.id === 0 ? item.original : item.id)}
       <Tile {item} inset={IMAGE_INSET} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} palettePending={generatedPending} {alphaCut} {alphaMode} {metric} {maxColors} {cleanup} {dither} {ditherStrength} onpalettestatus={reportPaletteStage} {paletteRetry}
-        colorUsageLabel={usageLabel(item)} analysisPending={needsAnalysis(item)} flipped={effectiveOriginal} comparing={previewing} active={!viewed} exportDisabled={generatedUnavailable || itemPaletteFailed(item)} budget={dragging ? DRAG_MS / canvasItems.length : 0}
+        colorUsageLabel={usageLabel(item)} usageIdentity={usageKey} onusageframe={previewUsage} analysisPending={needsAnalysis(item)} flipped={effectiveOriginal} comparing={previewing} active={!viewed} exportDisabled={generatedUnavailable || itemPaletteFailed(item)} budget={dragging ? DRAG_MS / canvasItems.length : 0}
         oncompare={compareHold} onopen={items.length ? openImage : undefined}
         exportDrag={items.length ? dragExports : undefined}
         onactivate={items.length ? undefined : () => picker.click()}
         activationLabel={items.length ? undefined : 'Add images'}
         onshare={items.length ? e => share(item, e.currentTarget) : undefined}
         oncopy={items.length ? () => copy(item) : undefined}
+        onreusecolors={items.length && family === 'full-palette' ? e => outputColors(item, e.currentTarget) : undefined} reuseDisabled={usageFor(item)?.result?.count === 0}
         onsave={items.length ? () => save(item) : undefined}
         onremove={items.length ? () => (items = items.filter(i => i !== item)) : undefined} />
     {/each}
@@ -1002,7 +1037,7 @@
 
 {#if viewed}
   <ImageViewer item={viewed} analysisPending={needsAnalysis(viewed)} first={ink[0]} second={ink[1]} {style} {set} {family} palette={prepared} palettePending={generatedPending} {alphaCut} {alphaMode} {metric} {maxColors} {cleanup} {dither} {ditherStrength} onpalettestatus={reportPaletteStage} {paletteRetry} {busy} {message} flipped={viewInitialOriginal}
-    colorUsageLabel={usageLabel(viewed)} colorUsageActionLabel={usageActionLabel(viewed)} oncountcolors={family === 'full-palette' && viewed.id !== 0 ? () => outputColors(viewed) : undefined} countingColors={usageFor(viewed)?.status === 'pending' || usageFor(viewed)?.result?.count === 0}
+    colorUsageLabel={usageLabel(viewed)}
     paletteFailureNotice={failureNotice(currentPaletteFailures.filter(f => f.inputs.item === viewed))} onpaletteretry={retryPaletteFailures} exportDisabled={generatedUnavailable || itemPaletteFailed(viewed)} exportDrag={viewed.id === 0 ? undefined : dragExports}
     onsave={viewed.id === 0 ? undefined : () => save(viewed)}
     oncopy={viewed.id === 0 ? undefined : () => copy(viewed)}
@@ -1040,10 +1075,10 @@
     <p class="name" use:tooltip={shared.name}>{shared.name}</p>
     <button class="btn glass-btn glass-btn--primary" disabled={generatedUnavailable || itemPaletteFailed(shared)} onclick={() => { const item = shared; sheet.close(); save(item); }}><PixelIcon name="save" />Save</button>
     <button class="btn glass-btn" disabled={generatedUnavailable || itemPaletteFailed(shared)} onclick={() => { const item = shared; sheet.close(); copy(item); }}><PixelIcon name="copy" />Copy</button>
-    <button class="btn glass-btn" onclick={previewShared}><PixelIcon name="expand" />Preview</button>
     {#if family === 'full-palette'}
-      <button class="btn glass-btn" disabled={generatedUnavailable || itemPaletteFailed(shared) || usageFor(shared)?.status === 'pending' || usageFor(shared)?.result?.count === 0} onclick={e => { e.stopPropagation(); outputColors(shared); }}>{usageActionLabel(shared)}</button>
+      <button class="btn glass-btn" disabled={generatedUnavailable || itemPaletteFailed(shared) || usageFor(shared)?.result?.count === 0} onclick={e => { e.stopPropagation(); outputColors(shared, e.currentTarget); }}><PixelIcon name="import" />Reuse colors</button>
     {/if}
+    <button class="btn glass-btn" onclick={previewShared}><PixelIcon name="expand" />Preview</button>
     <button class="btn glass-btn danger" onclick={async () => {
       const item = shared;
       sheet.close();

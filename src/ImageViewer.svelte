@@ -6,7 +6,7 @@
   import { fitViewerImage } from './lib/viewer-layout.js';
   import { canvasGridSpacing } from './lib/canvas-grid.js';
   import { imageGesture } from './lib/image-gesture.js';
-  let { item, first, second, style, set, family = 'two-color', palette, palettePending = false, analysisPending = false, alphaCut = 128, alphaMode = 'cut', metric = 'oklab', maxColors = 0, cleanup = false, dither = 'none', ditherStrength = 50, onpalettestatus, paletteRetry = 0, paletteFailureNotice = '', onpaletteretry, exportDisabled = false, flipped = false, onsave, oncopy, onclose, busy = '', message = '', colorUsageLabel = '', colorUsageActionLabel = '', oncountcolors, countingColors = false, exportDrag } = $props();
+  let { item, first, second, style, set, family = 'two-color', palette, palettePending = false, analysisPending = false, alphaCut = 128, alphaMode = 'cut', metric = 'oklab', maxColors = 0, cleanup = false, dither = 'none', ditherStrength = 50, onpalettestatus, paletteRetry = 0, paletteFailureNotice = '', onpaletteretry, exportDisabled = false, flipped = false, onsave, oncopy, onclose, busy = '', message = '', colorUsageLabel = '', exportDrag } = $props();
   let dialog;
   const dismissal = imageGesture();
   let dismissReady = false;
@@ -78,7 +78,6 @@
         <PixelIcon name="swap" />
       </button>
     </div>
-    {#if oncountcolors}<div class="viewer-tools glass-card"><button class="btn glass-btn" onclick={oncountcolors} disabled={exportDisabled || countingColors}>{colorUsageActionLabel || 'Count output colors'}</button></div>{/if}
     <button class="btn glass-btn icon-only viewer-close" onclick={() => dialog.close()} aria-label="Close preview" use:tooltip={'Close preview.'}><PixelIcon name="x" /></button>
   </nav>
   <div class="viewer-art" bind:clientWidth={width} bind:clientHeight={height}>

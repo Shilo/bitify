@@ -13,12 +13,19 @@ intentional compatibility references.
 
 ## What it does
 
-Palette improvements offer twelve curated presets (including mulfok32, exact Black & white
-and ENDESGA 8), full Lospec URL import through Paste colors, and explicit Count
-output colors in Preview/touch Image actions. Counts use full export conversion,
-union all GIF frames, exclude empty pixels and retain tiny metadata only. Use N
-output colors opens a new editor draft for local Save/HEX backup. Settings/source
-changes cancel counts; Auto uses captured wall identity rather than old swatches.
+Palette improvements offer twelve curated presets (including mulfok32, exact
+Black & white and ENDESGA 8), Lospec links through Paste colors, and one Reuse
+colors action beside Copy in wall actions (also in touch Image actions, before
+Preview). Preview retains Save/Copy/Compare and no Count/Reuse button. Reuse opens the existing
+editable palette draft with full-resolution output colors, unioning all GIF
+frames. Counts are plain caption metadata after dimensions. Wall counts reuse
+post-Cleanup used flags only from already-rendered exact-size previews; GIFs
+publish only after every frame was observed at full resolution. Sampled walls
+start no extra inspection. Preview starts missing full-source inspection and
+cancels it on close unless explicit Reuse joined it. Keep tiny color/frame
+metadata only, never converted frame caches. Source/settings changes cancel and
+clear counts; Auto keys use the captured wall request. Known zero-color outputs
+disable reuse; newly inspected empty outputs explain why no palette can be made.
 
 Optional Palette Opacity Cut/Keep defaults to Cut128. Keep uses eligibility cut1
 for Auto/subset/Cleanup, preserves source alpha in sampled previews/exports and

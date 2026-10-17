@@ -82,11 +82,18 @@ palette data; artwork and credentials are not sent. If Lospec is unavailable, im
 a downloaded HEX file or paste its colors. Other websites and arbitrary links are
 not supported by this action.
 
-To reuse only an image's actual output colors, open Preview (or Image actions on
-touch), choose Count output colors, then Use N output colors. The count covers the
-full image or every animation frame. The existing editor provides Save palette and
-HEX backup. Counts clear when conversion settings change; transparent pixels do not
-count as an extra RGB color.
+To reuse an image's actual output colors, choose **Reuse colors** beside Copy in
+the wall’s desktop image actions, or in touch Image actions. One click opens
+an editable palette draft; Save palette keeps it locally and HEX backup exports
+it. It includes the full image or every animation frame, excluding transparent
+pixels. An entirely invisible output has no colors to reuse.
+
+The caption can show **24×24 · 8 colors** without a Count button. Small images
+rendered at their original resolution provide that count as part of normal work;
+animations need every frame. Large sampled tiles leave it out until Preview or
+Reuse obtains an exact full-resolution count. Counts clear when settings change;
+no estimate is presented as an exact output count. Preview has no Count or Reuse
+button; any completed inspection appears in the wall caption when you return.
 
 Choose **Palette** in the panel to convert source RGB directly into a selected set of
 **1–256 unique opaque sRGB colors**. Exact selected RGB values map to themselves; other

@@ -20,7 +20,7 @@
   // Without `onremove` the tile is a preview only and has no buttons.
   // `set` is the style's settings. `budget` is set while one of their sliders is being dragged:
   // the milliseconds this tile may take to convert its image after each move.
-  let { item, first, second, style, set, family = 'two-color', palette, palettePending = false, analysisPending = false, alphaCut = 128, alphaMode = 'cut', metric = 'oklab', maxColors = 0, cleanup = false, dither = 'none', ditherStrength = 50, colorUsageLabel = '', active = true, exportDisabled = false, onpalettestatus, paletteRetry = 0, flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false, exportDrag } = $props();
+  let { item, first, second, style, set, family = 'two-color', palette, palettePending = false, analysisPending = false, alphaCut = 128, alphaMode = 'cut', metric = 'oklab', maxColors = 0, cleanup = false, dither = 'none', ditherStrength = 50, colorUsageLabel = '', usageIdentity, onusageframe, active = true, exportDisabled = false, onpalettestatus, paletteRetry = 0, flipped, budget = 0, inset = 8, aspect = 1, onshare, oncopy, onreusecolors, reuseDisabled = false, onsave, onremove, onopen, onactivate, activationLabel, oncompare, comparing = false, exportDrag } = $props();
   const paletteCut = $derived(effectiveAlphaCut(alphaMode, alphaCut));
   const failureOwner = Symbol('palette preview surface');
   const reportStage = (type, stage, inputs, attempt, error) => untrack(() => onpalettestatus?.({ type, owner: failureOwner, stage, inputs, attempt, error }));
@@ -216,6 +216,11 @@
   $effect(() => {
     const frame = frames[at], frameAt = at, source = frame.original, data = source.data, sourceWidth = source.width, sourceHeight = source.height;
     const colors = conversionPalette, width = mw, height = mh, cut = alphaCut, opacity = alphaMode, matching = metric, clean = conversionCleanup, cleaning = cleanup, dithering = dither, amount = ditherStrength;
+    const key = usageIdentity, pendingPalette = palettePending, currentItem = item;
+    const reportUsage = used => {
+      if (!pendingPalette && width === sourceWidth && height === sourceHeight)
+        untrack(() => onusageframe?.({ item: currentItem, key, colors: colors.colors, used, frame: frameAt, frames: frames.length }));
+    };
     fullReady = false;
     // Keep the last completed frame while the next frame or settings convert.
     // Clearing it on every async frame removes the canvas and exposes the grid.
@@ -238,6 +243,7 @@
       && completed.dithering === dithering && completed.amount === amount
       && completed.cleaned === clean?.result && completed.apply === clean?.apply) {
       fullReady = true;
+      reportUsage(completed.used);
       return;
     }
     const controller = new AbortController();
@@ -252,8 +258,9 @@
       if (!controller.signal.aborted) {
         fullPixels = new ImageData(palettePixels(result, colors).data, width, height);
         fullCompleted = { frame, frameAt, source, data, sourceWidth, sourceHeight, colors, width, height, cut, opacity, matching,
-          cleaning, dithering, amount, cleaned: clean?.result, apply: clean?.apply };
+          cleaning, dithering, amount, cleaned: clean?.result, apply: clean?.apply, used: result.used };
         fullReady = true;
+        reportUsage(result.used);
       }
     }).catch(error => { if (error.name !== 'AbortError') console.error('Palette preview failed', error); });
     return () => controller.abort();
@@ -331,6 +338,7 @@
       <!-- Desktop actions retain their readable capsule; touch actions live in the caption. -->
       <button class="ib mouse glass-btn--primary" onclick={onsave} disabled={exportDisabled} aria-label="Save {item.name}" use:tooltip={'Save this image at its original size.'}><PixelIcon name="save" /></button>
       <button class="ib mouse" onclick={oncopy} disabled={exportDisabled} aria-label="Copy {item.name}" use:tooltip={'Copy this image to the clipboard as a PNG.'}><PixelIcon name="copy" /></button>
+      {#if onreusecolors}<button class="ib mouse" onclick={onreusecolors} disabled={exportDisabled || reuseDisabled} aria-label="Reuse colors from {item.name}" use:tooltip={'Open the output colors as a palette to edit and save.'}><PixelIcon name="import" /></button>{/if}
       <button class="ib mouse" onclick={e => activate(e.currentTarget)} aria-label="Preview {item.name}" aria-haspopup="dialog" use:tooltip={'Preview this image.'}><PixelIcon name="expand" /></button>
       <button class="ib danger" onclick={onremove} aria-label="Remove {item.name}" use:tooltip={'Remove this image from the canvas.'}><PixelIcon name="trash" /></button>
     </div>
@@ -355,13 +363,13 @@
         <button type="button" class="caption-preview" onclick={e => activate(e.currentTarget)} aria-label="Preview {item.name}" aria-haspopup="dialog">
           <span class="caption-details">
             <span class="name" use:tooltip={item.name}>{item.name}</span>
-            <span class="dim">{#if colorUsageLabel}<span use:tooltip={colorUsageLabel + (item.frames ? '. Converted output across all animation frames.' : '. Converted full-resolution output.')}>{colorUsageLabel}</span> · {/if}{item.img.w}<span class="by">×</span>{item.img.h}{#if failureDescription}<span class="palette-failure-mark" use:tooltip={failureDescription}> · Retry needed</span>{/if}</span>
+            <span class="dim">{item.img.w}<span class="by">×</span>{item.img.h}{#if colorUsageLabel} · <span use:tooltip={colorUsageLabel + (item.frames ? '. Converted output across all animation frames.' : '. Converted full-resolution output.')}>{colorUsageLabel}</span>{/if}{#if failureDescription}<span class="palette-failure-mark" use:tooltip={failureDescription}> · Retry needed</span>{/if}</span>
           </span>
         </button>
       {:else}
         <span class="caption-details">
           <span class="name" use:tooltip={item.name}>{item.name}</span>
-          <span class="dim">{#if colorUsageLabel}<span use:tooltip={colorUsageLabel + (item.frames ? '. Converted output across all animation frames.' : '. Converted full-resolution output.')}>{colorUsageLabel}</span> · {/if}{item.img.w}<span class="by">×</span>{item.img.h}{#if failureDescription}<span class="palette-failure-mark" use:tooltip={failureDescription}> · Retry needed</span>{/if}</span>
+          <span class="dim">{item.img.w}<span class="by">×</span>{item.img.h}{#if colorUsageLabel} · <span use:tooltip={colorUsageLabel + (item.frames ? '. Converted output across all animation frames.' : '. Converted full-resolution output.')}>{colorUsageLabel}</span>{/if}{#if failureDescription}<span class="palette-failure-mark" use:tooltip={failureDescription}> · Retry needed</span>{/if}</span>
         </span>
       {/if}
       {#if onremove}

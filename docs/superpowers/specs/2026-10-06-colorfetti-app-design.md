@@ -82,31 +82,37 @@ is shown. Bounded `source.name` preserves the published name independently of
 editing the local draft name. Old saved palettes fall back to available name/slug
 metadata. Creator attribution remains stored, as does the validated source URL.
 
-## Output color inspection — October 14, 2026
+## Output colors and reuse — October 16, 2026
 
-Palette mode offers Count output colors in image Preview and touch Image actions.
-This explicit operation uses full-source export conversion, counting unique RGB
-colors after limiting, Cleanup and dithering. Fully transparent pixels are excluded;
-animations count the union of every frame. Results appear beside the dimensions,
-with a tooltip identifying converted output, including while Original is shown.
-After inspection, the count precedes dimensions so dense phone captions retain
-the useful number. Small captions truncate rather than widen the wall. Counting is not started by
-hovering, playback or displaying tiles. One tiny result per item is retained;
-source/settings changes and removal cancel pending work and clear the result.
-Auto identity uses its captured whole-wall request, not retained preview swatches.
-Pending and retry states never report a partial count or block independent Save.
-All-transparent fixed targets report zero. Empty Auto still uses its existing
-no-visible-colors state. Count may repeat conversion before a later Save; it retains
-no converted frames and does not change file outputs.
+Count is noninteractive caption metadata, following dimensions: 24×24 · 8 colors.
+It always describes full-resolution converted output, including while Original
+is shown; animations report the RGB union of all frames, excluding fully empty
+pixels. Wall tiles reuse post-Cleanup used flags already produced by full-size
+previews, translating actual subset indices back to RGB. Sampled/draft previews
+never publish estimated counts. An incomplete animation union stays unreported.
+Repeated frames publish nothing new; only small RGB/seen-frame metadata remains.
 
-After a successful nonempty count, the action becomes Use N output colors. It
-opens the existing palette editor with exactly those colors in active target order,
-a suggested image-derived name and a notice identifying whole-animation scope.
-It creates a new draft without changing the selected palette or artwork. Existing
-Save palette and HEX backup provide local reuse and external export. Zero used
-colors disable reuse. Settings changes between invocation and opening reject the
-obsolete draft; an already-open editor is never replaced. Reusing colors does not
-promise identical pixels under different limits, Cleanup or other images.
+Opening Preview automatically starts missing full-source inspection through the
+export pipeline, with no Count button. Closing Preview cancels automatic work
+unless explicit Reuse is awaiting it. Wall display alone starts no additional
+full-source conversion. Source/settings/removal retire stale work/results; Auto
+uses the captured wall key rather than retained swatches. Errors do not block
+independent Save; Reuse can retry inspection. No converted clips are retained.
+
+One icon button named Reuse colors sits immediately right of Copy in the wall’s
+desktop image actions; touch Image actions offers the same action immediately
+after Copy and before Preview. Preview retains Save, Copy and Compare with no
+Count or Reuse button. Counts are visible wall metadata, not a new Preview bar.
+Five desktop actions use the existing two-column fallback for tiles up to 204px,
+without removing Preview or shrinking hit targets.
+It joins pending inspection and opens the existing unsaved editor draft with
+exact output colors in target order, image-derived name and whole-animation
+notice. Save palette and HEX backup provide reuse/export. Current palette and
+artwork stay unchanged until the draft is saved/used. Zero-color outputs disable
+reuse; newly discovered zero explains no visible colors. Closing a pending
+Preview/sheet, switching images/settings or opening another editor cannot reveal
+a stale draft. Reusing colors does not promise identical results under different
+limits, Cleanup or source art.
 
 ## Curated palette additions — October 16, 2026
 

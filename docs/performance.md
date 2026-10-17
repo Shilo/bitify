@@ -1,12 +1,20 @@
 # Performance
 
-## Explicit color inspection and optional opacity preservation
+## Output color metadata and optional opacity preservation
 
-Count output colors runs only when requested. It uses full export conversion and
-serial animation frames, retaining only up to 256 used RGB strings and a count per
-item. Settings/source changes abort pending subscribers. A later Save can repeat
-conversion; no full-resolution frame cache is added for this convenience. Auto
-identity uses its captured wall request, excluding ignored retained preview colors.
+Wall color counts do not schedule full-resolution conversions. When an existing
+preview already matches the source dimensions, its post-Cleanup used[256] flags
+are translated through the actual subset palette. Tiny per-item metadata tracks
+seen animation frames and at most 256 RGBs; no exact animation count is published
+until every frame was observed at full resolution. Sampled/draft previews never
+stand in for full-source counts. Playback revisits do not republish seen frames.
+
+Opening Preview starts one missing full-source inspection through the export
+pipeline; Reuse colors joins that operation in one action. Closing Preview aborts
+automatic work unless explicit Reuse joined it. Stale sources/settings cancel
+pending work; results retain RGB/count/frame metadata only. A later Save can
+repeat conversion. There is no new converted-frame cache or automatic wall scan.
+Auto identity uses its captured wall request, excluding retained preview colors.
 
 Opacity Keep adds one byte per sampled/full converted pixel for original alpha;
 Cut allocates no alpha buffer. The existing 8 MiB animation cache reserves three

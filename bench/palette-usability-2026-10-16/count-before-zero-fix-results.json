@@ -1,0 +1,78 @@
+{
+  "date": "2026-10-17T01:28:56.110Z",
+  "browser": "155.0.4283.60",
+  "sandbox": true,
+  "distIndexSha256": "1bc0aca5b8dc102477e078fc47ed5bb3189c282f0eb4f66f50f76a4ad73b9e03",
+  "checks": [
+    {
+      "name": "exact wall PNG count and single-action Preview reuse match native Save",
+      "pass": true,
+      "count": 13,
+      "expected": 13,
+      "buttons": [
+        "Save image",
+        "Copy image",
+        "Reuse colors",
+        "Show original image"
+      ]
+    },
+    {
+      "name": "whole-animation wall count equals independently decoded GIF union",
+      "pass": true,
+      "frames": 4,
+      "count": 10,
+      "expected": 10
+    },
+    {
+      "name": "mulfok32 real app Save stays on canonical target and preserves preset selection",
+      "pass": true,
+      "count": 20,
+      "canonicalMembership": true
+    },
+    {
+      "name": "sampled large wall does not load full-source usage chunk; closing Preview cancels delayed automatic inspection",
+      "pass": true,
+      "usageRequests": 1,
+      "backgroundResultPublished": false,
+      "lateDraft": false
+    },
+    {
+      "name": "mode changes cannot retain old palette counts",
+      "pass": true,
+      "staleCountHidden": true,
+      "reuseHidden": true
+    },
+    {
+      "name": "cap, matching, Cleanup, dithering and palette edits publish current exact counts",
+      "pass": true,
+      "before": 13,
+      "after": 2,
+      "expected": 2,
+      "mono": 2,
+      "monoExpected": 2
+    },
+    {
+      "name": "Keep, Cleanup and dithering retain source alpha and exact reused export colors",
+      "pass": true,
+      "count": 8,
+      "partialAlphaPixelsPreserved": 504,
+      "reuseMatchesSave": true
+    },
+    {
+      "name": "zero-color output has zero metadata and disabled reuse actions",
+      "pass": false,
+      "error": "Known zero-color wall Reuse remains enabled"
+    },
+    {
+      "name": "closing Preview cancels actual running full-source GIF inspection",
+      "pass": true,
+      "frames": 12,
+      "sourcePixels": 12582912,
+      "uncancelledCompletionMs": 346,
+      "closeActionMs": 117,
+      "lateCount": false,
+      "lateDraft": false
+    }
+  ],
+  "errors": []
+}

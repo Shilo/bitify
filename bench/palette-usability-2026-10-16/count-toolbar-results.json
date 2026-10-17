@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-17T01:31:21.000Z",
+  "browser": "155.0.4283.60",
+  "sandbox": true,
+  "distIndexSha256": "7544353bafa90be9ea96edbcaaf4d68e62f95b7b8eb520c91eba792e0b918b87",
+  "checks": [
+    {
+      "name": "five desktop tile actions remain within dense wall tiles",
+      "pass": false,
+      "error": "[{\"width\":1280,\"height\":900,\"tileWidth\":236,\"actionsWidth\":186,\"overflow\":0},{\"width\":800,\"height\":600,\"tileWidth\":144,\"actionsWidth\":81,\"overflow\":0},{\"width\":640,\"height\":360,\"tileWidth\":143,\"actionsWidth\":81,\"overflow\":0},{\"width\":390,\"height\":844,\"tileWidth\":177,\"actionsWidth\":186,\"overflow\":16},{\"width\":844,\"height\":390,\"tileWidth\":149,\"actionsWidth\":81,\"overflow\":0}]"
+    }
+  ],
+  "errors": []
+}
