@@ -1,0 +1,27 @@
+[
+  {
+    "stage": "startup",
+    "path": "/",
+    "time": "2026-10-17T01:58:13.551Z"
+  },
+  {
+    "stage": "startup",
+    "path": "/assets/index-ywfUrdE2.js",
+    "time": "2026-10-17T01:58:13.593Z"
+  },
+  {
+    "stage": "startup",
+    "path": "/assets/index-4Vo-4cMQ.css",
+    "time": "2026-10-17T01:58:13.596Z"
+  },
+  {
+    "stage": "startup",
+    "path": "/favicon-dark.svg",
+    "time": "2026-10-17T01:58:13.700Z"
+  },
+  {
+    "stage": "first-native-import",
+    "path": "/assets/palette-ase-DQOTKRGY.js",
+    "time": "2026-10-17T01:58:59.553Z"
+  }
+]

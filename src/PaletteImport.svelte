@@ -263,8 +263,7 @@
       </div>
       <div class="palette-method-panel" id="palette-method-file" data-method="file" hidden={inputKind !== 'file'}>
         <button class="btn glass-btn palette-file-button" onclick={() => fileInput.click()} disabled={!!busy}><PixelIcon name="import" />{colors.length ? 'Replace from image or file' : 'Choose palette image or file'}</button>
-        <p class="palette-editor-hint">Or drop a palette image or file here, or paste an image.</p>
-        <p class="palette-editor-hint">Aseprite: choose or drop a saved .aseprite or .ase file to import its palette.</p>
+        <p class="palette-editor-hint">Drop a palette image or file (including Aseprite), or paste an image.</p>
         {#if image}
           <details class="palette-editor-details" bind:open={imageOptionsOpen}>
             <summary>Image options</summary>
@@ -279,8 +278,7 @@
       </div>
       <div class="palette-method-panel" id="palette-method-text" data-method="text" hidden={inputKind !== 'text'}>
         <textarea class="glass-input palette-text-input" bind:value={text} aria-label="Colors or Lospec link" placeholder="#000000, #ffffff, #ff004d&#10;or https://lospec.com/palette-list/slso8" disabled={!!busy}></textarea>
-        <p class="palette-editor-hint palette-link-hint">Paste HEX colors or a Lospec palette link.</p>
-        <p class="palette-editor-hint">Aseprite: select palette swatches, choose Edit → Copy, then paste above.</p>
+        <p class="palette-editor-hint palette-link-hint">Paste HEX or a Lospec link; in Aseprite, select swatches → Edit → Copy.</p>
         <button class="btn glass-btn" onclick={importText} disabled={!!busy || !text.trim()}>{lospecInput ? 'Import from Lospec' : colors.length ? 'Replace colors' : 'Review colors'}</button>
       </div>
       <div class="palette-method-panel" id="palette-method-add" data-method="add" hidden={inputKind !== 'add'}>

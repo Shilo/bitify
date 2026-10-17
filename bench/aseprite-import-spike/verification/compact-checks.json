@@ -1,0 +1,44 @@
+{
+  "layouts": [
+    {
+      "footerBottom": 476.796875,
+      "height": 387.59375,
+      "hintCount": 1,
+      "method": "file",
+      "overflow": false,
+      "viewport": [
+        320,
+        568
+      ]
+    },
+    {
+      "footerBottom": 530.796875,
+      "height": 495.59375,
+      "hintCount": 1,
+      "method": "text",
+      "overflow": false,
+      "viewport": [
+        320,
+        568
+      ]
+    },
+    {
+      "footerBottom": 373,
+      "height": 358,
+      "hintCount": 1,
+      "method": "text",
+      "overflow": false,
+      "viewport": [
+        844,
+        390
+      ]
+    }
+  ],
+  "nativeColors": [
+    "Select color 1 #123456",
+    "Select color 2 #ff0000",
+    "Select color 3 #0000ff",
+    "Select color 4 #000000"
+  ],
+  "logs": []
+}

@@ -112,3 +112,16 @@ Evidence is in `bench/aseprite-import-spike/verification/`: browser checks,
 network logs, graph-check result and corrected screenshots. The prior
 [research spike](2026-10-16-aseprite-palette-import-spike.md) records format
 coverage and the intentionally deferred integrations.
+
+## Compact hint followup
+
+The Aseprite guidance now shares each method's existing hint paragraph, removing
+the extra paragraph and gap. At 320×568 with the same three-color draft, Image or
+file shrank from 438.59 to 387.59px (51px saved), and Paste colors from 527.09 to
+495.59px (31.5px saved). Both retain one hint, no horizontal overflow and a visible
+Save footer. At 844×390 the text method remains bounded with body scrolling.
+Codex clipboard HEX review and native-generated document import passed again;
+the native parser still made no request before import and one on first import.
+The new graph check, production build and full suite (969 passed, 2 skipped)
+passed. Compact screenshots, checks and network evidence use the `compact-`
+prefix in the verification directory. Import handlers, parser and CSS are unchanged.

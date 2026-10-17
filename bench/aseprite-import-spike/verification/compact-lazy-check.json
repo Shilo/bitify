@@ -1,0 +1,17 @@
+{
+  "parser": "palette-ase-DQOTKRGY.js",
+  "bytes": 2497,
+  "gzipBytes": 1327,
+  "htmlPreloads": [],
+  "staticStartupModules": [
+    "assets\\index-ywfUrdE2.js"
+  ],
+  "parserRequests": [
+    {
+      "stage": "first-native-import",
+      "path": "/assets/palette-ase-DQOTKRGY.js",
+      "time": "2026-10-17T01:58:59.553Z"
+    }
+  ],
+  "passed": true
+}
