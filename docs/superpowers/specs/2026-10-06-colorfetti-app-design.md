@@ -60,6 +60,9 @@ transparency and settings are independent.
 
 ## Lospec palette links — October 14, 2026
 
+October 16 copy: the Paste colors hint reads exactly “Paste HEX colors or a
+Lospec palette link.” The field retains its existing example and accessible name.
+
 The existing Paste colors method accepts HEX text or a full Lospec palette URL.
 The scheme is optional (`lospec.com/palette-list/slso8`). Only a single link-like
 token is treated as a link, so palette text with URL comments stays local.

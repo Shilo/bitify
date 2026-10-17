@@ -276,7 +276,7 @@
       </div>
       <div class="palette-method-panel" id="palette-method-text" data-method="text" hidden={inputKind !== 'text'}>
         <textarea class="glass-input palette-text-input" bind:value={text} aria-label="Colors or Lospec link" placeholder="#000000, #ffffff, #ff004d&#10;or https://lospec.com/palette-list/slso8" disabled={!!busy}></textarea>
-        <p class="palette-editor-hint palette-link-hint">Paste HEX colors or a Lospec palette link, such as https://lospec.com/palette-list/slso8.</p>
+        <p class="palette-editor-hint palette-link-hint">Paste HEX colors or a Lospec palette link.</p>
         <button class="btn glass-btn" onclick={importText} disabled={!!busy || !text.trim()}>{lospecInput ? 'Import from Lospec' : colors.length ? 'Replace colors' : 'Review colors'}</button>
       </div>
       <div class="palette-method-panel" id="palette-method-add" data-method="add" hidden={inputKind !== 'add'}>
