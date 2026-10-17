@@ -6,12 +6,9 @@
 :root .viewer-art.is-dragging, :root .viewer-art.is-dragging .art { cursor: grabbing; }
 :root .viewer-tile { transform-origin: center; }
 :root .viewer-zoom { position: absolute; z-index: 2; top: calc(env(safe-area-inset-top,0px) + 12px); left: calc(env(safe-area-inset-left,0px) + 12px); }
+/* Trim the capsule while preserving 44px mobile targets for every pointer type. */
+:root .viewer-zoom { --control-size: 44px; --control-shell: 48px; padding: 1px; }
 :root .viewer-zoom .icon-only { font-size: 24px; line-height: 1; }
 @media (max-width: 800px) {
   :root .viewer-toast { --gl-toast-top: calc(env(safe-area-inset-top,0px) + var(--control-shell) + 24px); }
-}
-@media (pointer: coarse) {
-  :root .viewer-zoom .btn { min-height: 44px; height: 44px; }
-  :root .viewer-zoom .btn.icon-only { min-width: 44px; width: 44px; }
-  :root .viewer-zoom { height: 56px; }
 }

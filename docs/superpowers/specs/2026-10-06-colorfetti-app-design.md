@@ -18,6 +18,9 @@ pinch can continue panning without a jump or becoming a new dismissal tap.
 Pointer capture keeps drags outside the image tracked. Long hold and Space still
 compare locally; manipulation immediately releases pointer comparison. Separate
 zoom controls occupy the top left; existing image actions and Close remain below.
+Zoom buttons retain 44×44 CSS-pixel touch targets inside a compact 48px-high
+capsule for all pointer types. Preview Save reuses the shared primary gradient
+and theme tokens used by the wall Save and touch action sheet.
 Fit uses Lucide's four-corner Maximize icon with the accessible name "Fit image".
 Zoom tooltips put the shortcut after the sentence: "Zoom in. (+)",
 "Zoom out. (−)" and "Fit the whole image. (0)".
