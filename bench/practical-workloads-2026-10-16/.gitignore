@@ -1,0 +1,6 @@
+# Retain this frozen cohort and its small native output/screenshot evidence.
+!fixtures/*.png
+!fixtures/*.gif
+!desktop/**/*.png
+!desktop/**/*.gif
+!desktop/**/*.zip

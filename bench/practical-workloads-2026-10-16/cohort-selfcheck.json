@@ -1,0 +1,109 @@
+{
+  "pass": true,
+  "records": [
+    {
+      "id": "dungeon-wizard",
+      "sha256": "b3909f80a29a0f18729f96a90ebe446ecaf26a195da633f2a6c3dd31f660821e",
+      "width": 16,
+      "height": 16,
+      "frames": 1,
+      "pass": true
+    },
+    {
+      "id": "dungeon-archer",
+      "sha256": "1e82481db9d95d0cec64ba0ea95b8fadf1e3675936e93731d0ff0e3bc72470b0",
+      "width": 16,
+      "height": 16,
+      "frames": 1,
+      "pass": true
+    },
+    {
+      "id": "dungeon-knight",
+      "sha256": "e139ab1d56c599af1cea5a955b705ead18a92d41e8e635b550729383cad9de3c",
+      "width": 16,
+      "height": 16,
+      "frames": 1,
+      "pass": true
+    },
+    {
+      "id": "dungeon-potion",
+      "sha256": "ad27340925ae7e936788c22cbd0f7d1922ef5bdd21377f916f1be9af6be4312d",
+      "width": 16,
+      "height": 16,
+      "frames": 1,
+      "pass": true
+    },
+    {
+      "id": "town-water-bucket",
+      "sha256": "3befce5d6373d4315f35eeed22752bb1cf7a2ab5d008ce26dd6b4aebbb278978",
+      "width": 16,
+      "height": 16,
+      "frames": 1,
+      "pass": true
+    },
+    {
+      "id": "platformer-pilot",
+      "sha256": "15df14143949310c001b09b2a00ed2278a5a9b4a10edd276af306b77b8c9d658",
+      "width": 24,
+      "height": 24,
+      "frames": 1,
+      "pass": true
+    },
+    {
+      "id": "platformer-rocket",
+      "sha256": "aca58ddc36d4e8d506111b1e580fc79b17383337b3cec27c28b0e6090435224a",
+      "width": 24,
+      "height": 24,
+      "frames": 1,
+      "pass": true
+    },
+    {
+      "id": "platformer-heart",
+      "sha256": "6b547ef267ee13918a4e45ac8a2a3d0de4fbaef8267459045cf9f8c5e283770e",
+      "width": 18,
+      "height": 18,
+      "frames": 1,
+      "pass": true
+    },
+    {
+      "id": "kenney-sheet-1024",
+      "sha256": "7c227c452abdc0daedd089b88c3d95120e52c81d57edd2bbfa5f1f6bc5d1f853",
+      "width": 1024,
+      "height": 1024,
+      "frames": 1,
+      "pass": true
+    },
+    {
+      "id": "kenney-sheet-2048",
+      "sha256": "2d2f25c21f9496816d4f21b303d6f86a288ef324263f7f998eae84f4db7d223f",
+      "width": 2048,
+      "height": 2048,
+      "frames": 1,
+      "pass": true
+    },
+    {
+      "id": "kenney-motion-128",
+      "sha256": "d666cb4969de8641a05236427390b4521f7eb04693cd1a32c6b685af77fce3cc",
+      "width": 128,
+      "height": 128,
+      "frames": 32,
+      "pass": true
+    },
+    {
+      "id": "kenney-motion-256",
+      "sha256": "c3d75b88563016e674567003bbecb4128a4a8e20710e349f7b0278837069390f",
+      "width": 256,
+      "height": 256,
+      "frames": 48,
+      "pass": true
+    },
+    {
+      "id": "real-magic",
+      "sha256": "4611a7fe466b618b42f8082c2ed7573504aba308b6ba0a21e4dd235baa0d9094",
+      "width": 32,
+      "height": 32,
+      "frames": 6,
+      "pass": true
+    }
+  ]
+}

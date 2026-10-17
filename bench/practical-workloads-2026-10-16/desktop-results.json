@@ -1,0 +1,1301 @@
+{
+  "date": "2026-10-17T03:09:22.610Z",
+  "commit": "7ed49fd",
+  "sandbox": true,
+  "runs": [
+    {
+      "kind": "batch",
+      "records": [
+        "dungeon-wizard",
+        "dungeon-archer",
+        "dungeon-knight",
+        "dungeon-potion",
+        "town-water-bucket",
+        "platformer-pilot",
+        "platformer-rocket",
+        "platformer-heart",
+        "real-magic"
+      ],
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+      "viewport": {
+        "width": 1280,
+        "height": 900,
+        "dpr": 1
+      },
+      "wall": [
+        {
+          "caption": "16×16 · 8 colors",
+          "width": 16,
+          "height": 16,
+          "paints": 1
+        },
+        {
+          "caption": "16×16 · 8 colors",
+          "width": 16,
+          "height": 16,
+          "paints": 1
+        },
+        {
+          "caption": "16×16 · 8 colors",
+          "width": 16,
+          "height": 16,
+          "paints": 1
+        },
+        {
+          "caption": "16×16 · 7 colors",
+          "width": 16,
+          "height": 16,
+          "paints": 1
+        },
+        {
+          "caption": "16×16 · 10 colors",
+          "width": 16,
+          "height": 16,
+          "paints": 1
+        },
+        {
+          "caption": "24×24 · 7 colors",
+          "width": 24,
+          "height": 24,
+          "paints": 1
+        },
+        {
+          "caption": "24×24 · 7 colors",
+          "width": 24,
+          "height": 24,
+          "paints": 1
+        },
+        {
+          "caption": "18×18 · 3 colors",
+          "width": 18,
+          "height": 18,
+          "paints": 1
+        },
+        {
+          "caption": "32×32",
+          "width": 32,
+          "height": 32,
+          "paints": 1
+        }
+      ],
+      "rows": [
+        {
+          "name": "import to sampled wall first complete paint",
+          "cpuMs": {
+            "TaskDuration": 28.012,
+            "ScriptDuration": 7.172,
+            "LayoutDuration": 1.5010000000000001,
+            "RecalcStyleDuration": 4.676
+          },
+          "heapDelta": 1193264,
+          "elapsedMs": 80.79999999701977,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.700000000000003,
+          "rafMaxMs": 16.700000000000003,
+          "writes": 10
+        },
+        {
+          "name": "full source nearest export",
+          "cpuMs": {
+            "TaskDuration": 44.39800000000001,
+            "ScriptDuration": 2.483000000000001,
+            "LayoutDuration": 1.12,
+            "RecalcStyleDuration": 0.40999999999999975
+          },
+          "heapDelta": 2938476,
+          "elapsedMs": 244.09999999403954,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.80000000000001,
+          "rafMaxMs": 16.80000000000001,
+          "writes": 12
+        },
+        {
+          "name": "rapid settings cancellation through final RGB cap8 Cleanup dither4 paint",
+          "cpuMs": {
+            "TaskDuration": 88.595,
+            "ScriptDuration": 16.917,
+            "LayoutDuration": 5.845,
+            "RecalcStyleDuration": 12.720000000000002
+          },
+          "heapDelta": 181324,
+          "elapsedMs": 294.09999999403954,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.799999999999955,
+          "rafMaxMs": 16.799999999999955,
+          "writes": 58
+        },
+        {
+          "name": "full source enhanced export",
+          "cpuMs": {
+            "TaskDuration": 25.039999999999978,
+            "ScriptDuration": 1.2770000000000004,
+            "LayoutDuration": 0,
+            "RecalcStyleDuration": 0.49699999999999744
+          },
+          "heapDelta": 1760464,
+          "elapsedMs": 165.5,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.700000000000045,
+          "rafMaxMs": 16.700000000000045,
+          "writes": 60
+        },
+        {
+          "name": "Preview zoom Original fit close and wall return",
+          "cpuMs": {
+            "TaskDuration": 82.77400000000002,
+            "ScriptDuration": 11.601999999999999,
+            "LayoutDuration": 0.910000000000001,
+            "RecalcStyleDuration": 14.676000000000002
+          },
+          "heapDelta": -463868,
+          "elapsedMs": 1063.7999999970198,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.799999999999955,
+          "rafMaxMs": 16.800000000000182,
+          "writes": 66
+        },
+        {
+          "name": "converted playback over two source-loop durations",
+          "cpuMs": {
+            "TaskDuration": 42.39500000000002,
+            "ScriptDuration": 8.179000000000006,
+            "LayoutDuration": 0.01600000000000039,
+            "RecalcStyleDuration": 0.0920000000000018
+          },
+          "heapDelta": 189516,
+          "elapsedMs": 1486.9000000059605,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 17,
+          "rafMaxMs": 17.09999999999991,
+          "writes": 80
+        },
+        {
+          "name": "settled wall idle",
+          "cpuMs": {
+            "TaskDuration": 17.427999999999997,
+            "ScriptDuration": 3.277000000000002,
+            "LayoutDuration": 0.05400000000000023,
+            "RecalcStyleDuration": 0.23699999999999416
+          },
+          "heapDelta": 89312,
+          "elapsedMs": 648.2999999970198,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.800000000000182,
+          "rafMaxMs": 16.800000000000182,
+          "writes": 86
+        }
+      ],
+      "exports": [
+        {
+          "label": "nearest",
+          "id": "dungeon-wizard",
+          "width": 16,
+          "height": 16,
+          "frames": 1,
+          "used": 8,
+          "rgbMismatch": 0,
+          "alphaMismatch": 0,
+          "oracle": "independent scalar Oklab nearest plus Sharp decode",
+          "sha256": "a314c3d4b0a6f9312e4ffcd1a1c6245dd9c99741f70a2205a87434e4369ed091"
+        },
+        {
+          "label": "nearest",
+          "id": "dungeon-archer",
+          "width": 16,
+          "height": 16,
+          "frames": 1,
+          "used": 8,
+          "rgbMismatch": 0,
+          "alphaMismatch": 0,
+          "oracle": "independent scalar Oklab nearest plus Sharp decode",
+          "sha256": "a56159ea06e62d50706469eef9b2bbbddf8b47ee2009cc22cca45736bd2a709d"
+        },
+        {
+          "label": "nearest",
+          "id": "dungeon-knight",
+          "width": 16,
+          "height": 16,
+          "frames": 1,
+          "used": 8,
+          "rgbMismatch": 0,
+          "alphaMismatch": 0,
+          "oracle": "independent scalar Oklab nearest plus Sharp decode",
+          "sha256": "6fa3c62997e3a355a351b4b37651972cb4f3c9fd50be93aefc71294d520d151b"
+        },
+        {
+          "label": "nearest",
+          "id": "dungeon-potion",
+          "width": 16,
+          "height": 16,
+          "frames": 1,
+          "used": 7,
+          "rgbMismatch": 0,
+          "alphaMismatch": 0,
+          "oracle": "independent scalar Oklab nearest plus Sharp decode",
+          "sha256": "f3c2b7a469f903800f86ecb16d64c4f4fd396a1228cbf8ffc1a34a3da5b03a67"
+        },
+        {
+          "label": "nearest",
+          "id": "town-water-bucket",
+          "width": 16,
+          "height": 16,
+          "frames": 1,
+          "used": 10,
+          "rgbMismatch": 0,
+          "alphaMismatch": 0,
+          "oracle": "independent scalar Oklab nearest plus Sharp decode",
+          "sha256": "e8e779b7403f999ded4f100d488cf8c46120f7b1d6d980c0ef3552b27fac8d17"
+        },
+        {
+          "label": "nearest",
+          "id": "platformer-pilot",
+          "width": 24,
+          "height": 24,
+          "frames": 1,
+          "used": 7,
+          "rgbMismatch": 0,
+          "alphaMismatch": 0,
+          "oracle": "independent scalar Oklab nearest plus Sharp decode",
+          "sha256": "9ea39a85466873fd2bd9ceac8db4f91596e9fefd29636d5905a2ddd357b9af3f"
+        },
+        {
+          "label": "nearest",
+          "id": "platformer-rocket",
+          "width": 24,
+          "height": 24,
+          "frames": 1,
+          "used": 7,
+          "rgbMismatch": 0,
+          "alphaMismatch": 0,
+          "oracle": "independent scalar Oklab nearest plus Sharp decode",
+          "sha256": "f060fe3f3935c2af3e31a1e8ee6c0d2e96be42c547c06e3d3e50e5b38afe9b75"
+        },
+        {
+          "label": "nearest",
+          "id": "platformer-heart",
+          "width": 18,
+          "height": 18,
+          "frames": 1,
+          "used": 3,
+          "rgbMismatch": 0,
+          "alphaMismatch": 0,
+          "oracle": "independent scalar Oklab nearest plus Sharp decode",
+          "sha256": "81312d652c8516eddc4e69ffd597055705238ba29aad790e4faaeb72d7eef3d8"
+        },
+        {
+          "label": "nearest",
+          "id": "real-magic",
+          "width": 32,
+          "height": 32,
+          "frames": 6,
+          "delay": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+          ],
+          "loop": 0,
+          "used": 12,
+          "rgbMismatch": 0,
+          "alphaMismatch": 0,
+          "oracle": "independent scalar Oklab nearest plus Sharp decode",
+          "sha256": "1916b8093c0d7216c63d8bdb92a2f947b51001f8d42344d05e28b59f09a54a19"
+        },
+        {
+          "label": "enhanced",
+          "id": "dungeon-wizard",
+          "width": 16,
+          "height": 16,
+          "frames": 1,
+          "used": 8,
+          "rgbMismatch": 0,
+          "alphaMismatch": 0,
+          "oracle": "committed production-core quantize/subset/Cleanup outside browser plus independent membership/alpha decode",
+          "sha256": "ce8519d4b03c801273a3e169336188dfe12598c43b9a93524f23ce4b520d2d2d"
+        },
+        {
+          "label": "enhanced",
+          "id": "dungeon-archer",
+          "width": 16,
+          "height": 16,
+          "frames": 1,
+          "used": 8,
+          "rgbMismatch": 0,
+          "alphaMismatch": 0,
+          "oracle": "committed production-core quantize/subset/Cleanup outside browser plus independent membership/alpha decode",
+          "sha256": "6cef851be96fad3a586ef0fffc5051f1ab72d575717ed98846fa1c7b7148f050"
+        },
+        {
+          "label": "enhanced",
+          "id": "dungeon-knight",
+          "width": 16,
+          "height": 16,
+          "frames": 1,
+          "used": 8,
+          "rgbMismatch": 0,
+          "alphaMismatch": 0,
+          "oracle": "committed production-core quantize/subset/Cleanup outside browser plus independent membership/alpha decode",
+          "sha256": "7803af09dbc4a4b75b42682e4dcdee9c11986229286bc94dc77b0214520c05be"
+        },
+        {
+          "label": "enhanced",
+          "id": "dungeon-potion",
+          "width": 16,
+          "height": 16,
+          "frames": 1,
+          "used": 7,
+          "rgbMismatch": 0,
+          "alphaMismatch": 0,
+          "oracle": "committed production-core quantize/subset/Cleanup outside browser plus independent membership/alpha decode",
+          "sha256": "811daf0aa5f081a96b432052b4bbdc8816628213f37b6fd32bf2be9c452f2493"
+        },
+        {
+          "label": "enhanced",
+          "id": "town-water-bucket",
+          "width": 16,
+          "height": 16,
+          "frames": 1,
+          "used": 8,
+          "rgbMismatch": 0,
+          "alphaMismatch": 0,
+          "oracle": "committed production-core quantize/subset/Cleanup outside browser plus independent membership/alpha decode",
+          "sha256": "b2b3539502517420701bd61342775b821429b1dac0b9221caa5e2bdb928035bf"
+        },
+        {
+          "label": "enhanced",
+          "id": "platformer-pilot",
+          "width": 24,
+          "height": 24,
+          "frames": 1,
+          "used": 6,
+          "rgbMismatch": 0,
+          "alphaMismatch": 0,
+          "oracle": "committed production-core quantize/subset/Cleanup outside browser plus independent membership/alpha decode",
+          "sha256": "eaacf8f15bea9efaa162e726f3f65c70ab2918d47ab697e12e4af730b2a04882"
+        },
+        {
+          "label": "enhanced",
+          "id": "platformer-rocket",
+          "width": 24,
+          "height": 24,
+          "frames": 1,
+          "used": 7,
+          "rgbMismatch": 0,
+          "alphaMismatch": 0,
+          "oracle": "committed production-core quantize/subset/Cleanup outside browser plus independent membership/alpha decode",
+          "sha256": "c4036e717e72289e78bb61b27fea300a5973df2fcc0cf44e704f7ea46fe40046"
+        },
+        {
+          "label": "enhanced",
+          "id": "platformer-heart",
+          "width": 18,
+          "height": 18,
+          "frames": 1,
+          "used": 3,
+          "rgbMismatch": 0,
+          "alphaMismatch": 0,
+          "oracle": "committed production-core quantize/subset/Cleanup outside browser plus independent membership/alpha decode",
+          "sha256": "17a779b6992e1bfc30a73250ab1d1ed709369dae2bd21ae121b75d9eac7582bd"
+        },
+        {
+          "label": "enhanced",
+          "id": "real-magic",
+          "width": 32,
+          "height": 32,
+          "frames": 6,
+          "delay": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+          ],
+          "loop": 0,
+          "used": 8,
+          "rgbMismatch": 0,
+          "alphaMismatch": 0,
+          "oracle": "committed production-core quantize/subset/Cleanup outside browser plus independent membership/alpha decode",
+          "sha256": "5e13fad248369d5e4585d7c9be2ea545c900187517bdfd99fedd430f8e9fc0bf"
+        }
+      ],
+      "playback": [
+        {
+          "name": "dungeon-wizard.png 16×16 · 8 colors",
+          "paints": 6
+        },
+        {
+          "name": "dungeon-archer.png 16×16 · 8 colors",
+          "paints": 6
+        },
+        {
+          "name": "dungeon-knight.png 16×16 · 8 colors",
+          "paints": 6
+        },
+        {
+          "name": "dungeon-potion.png 16×16 · 7 colors",
+          "paints": 6
+        },
+        {
+          "name": "town-water-bucket.png 16×16 · 8 colors",
+          "paints": 6
+        },
+        {
+          "name": "platformer-pilot.png 24×24 · 6 colors",
+          "paints": 6
+        },
+        {
+          "name": "platformer-rocket.png 24×24 · 7 colors",
+          "paints": 6
+        },
+        {
+          "name": "platformer-heart.png 18×18 · 3 colors",
+          "paints": 6
+        },
+        {
+          "name": "real-magic.gif 32×32 · 8 colors",
+          "paints": 28,
+          "observedPaintDelta": 14
+        }
+      ],
+      "errors": [],
+      "notes": [
+        "Wall readiness observes putImageData on every displayed canvas, not full-source color-count publication. Sampled sheets correctly need not show a count.",
+        "CDP CPU is renderer main thread; workers excluded. Elapsed includes awaited UI and observation windows, not pure conversion latency. Source transport is prestaged.",
+        "Native/download PNG/GIF/ZIP bytes are decoded independently; alpha-zero hidden RGB ignored. Animation source decoded GIF, including fixture palette encoding, defines the expected input.",
+        "Enhanced pipeline uses committed production modules, so independent algorithm proof is limited to nearest; enhanced equality catches integration, stale settings, sampling and export discrepancies."
+      ]
+    },
+    {
+      "kind": "sheet1024",
+      "records": [
+        "kenney-sheet-1024"
+      ],
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+      "viewport": {
+        "width": 1280,
+        "height": 900,
+        "dpr": 1
+      },
+      "wall": [
+        {
+          "caption": "1024×1024",
+          "width": 761,
+          "height": 761,
+          "paints": 1
+        }
+      ],
+      "rows": [
+        {
+          "name": "import to sampled wall first complete paint",
+          "cpuMs": {
+            "TaskDuration": 35.205,
+            "ScriptDuration": 3.5410000000000004,
+            "LayoutDuration": 0.5630000000000001,
+            "RecalcStyleDuration": 2.846
+          },
+          "heapDelta": 1246060,
+          "elapsedMs": 88,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.799999999999997,
+          "rafMaxMs": 16.799999999999997,
+          "writes": 2
+        },
+        {
+          "name": "full source nearest export",
+          "cpuMs": {
+            "TaskDuration": 58.193999999999996,
+            "ScriptDuration": 11.432,
+            "LayoutDuration": 1.0240000000000002,
+            "RecalcStyleDuration": 0.7699999999999998
+          },
+          "heapDelta": 1581528,
+          "elapsedMs": 314.5,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.80000000000001,
+          "rafMaxMs": 16.80000000000001,
+          "writes": 2
+        },
+        {
+          "name": "rapid settings cancellation through final RGB cap8 Cleanup dither4 paint",
+          "cpuMs": {
+            "TaskDuration": 98.321,
+            "ScriptDuration": 14.660999999999998,
+            "LayoutDuration": 2.9059999999999997,
+            "RecalcStyleDuration": 9.281
+          },
+          "heapDelta": -745788,
+          "elapsedMs": 325.09999999403954,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.799999999999955,
+          "rafMaxMs": 16.799999999999955,
+          "writes": 8
+        },
+        {
+          "name": "full source enhanced export",
+          "cpuMs": {
+            "TaskDuration": 32.10400000000002,
+            "ScriptDuration": 1.2519999999999996,
+            "LayoutDuration": 0,
+            "RecalcStyleDuration": 0.8009999999999996
+          },
+          "heapDelta": 329700,
+          "elapsedMs": 182.20000000298023,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.899999999999864,
+          "rafMaxMs": 16.899999999999864,
+          "writes": 8
+        },
+        {
+          "name": "Preview zoom Original fit close and wall return",
+          "cpuMs": {
+            "TaskDuration": 130.188,
+            "ScriptDuration": 14.872999999999998,
+            "LayoutDuration": 1.3170000000000004,
+            "RecalcStyleDuration": 11.129
+          },
+          "heapDelta": 273868,
+          "elapsedMs": 1091.2000000029802,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.799999999999727,
+          "rafMaxMs": 16.90000000000009,
+          "writes": 12
+        },
+        {
+          "name": "settled wall idle",
+          "cpuMs": {
+            "TaskDuration": 15.023999999999981,
+            "ScriptDuration": 1.669999999999998,
+            "LayoutDuration": 0.9909999999999997,
+            "RecalcStyleDuration": 0.4380000000000009
+          },
+          "heapDelta": 5104,
+          "elapsedMs": 633.8999999910593,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.90000000000009,
+          "rafMaxMs": 17,
+          "writes": 12
+        }
+      ],
+      "exports": [
+        {
+          "label": "nearest",
+          "id": "kenney-sheet-1024",
+          "width": 1024,
+          "height": 1024,
+          "frames": 1,
+          "used": 26,
+          "rgbMismatch": 0,
+          "alphaMismatch": 0,
+          "oracle": "independent scalar Oklab nearest plus Sharp decode",
+          "sha256": "6acc247466f62315082aff04df362c112d05d213c563c90c23cdfdbdb74c820a"
+        },
+        {
+          "label": "enhanced",
+          "id": "kenney-sheet-1024",
+          "width": 1024,
+          "height": 1024,
+          "frames": 1,
+          "used": 8,
+          "rgbMismatch": 0,
+          "alphaMismatch": 0,
+          "oracle": "committed production-core quantize/subset/Cleanup outside browser plus independent membership/alpha decode",
+          "sha256": "ec7c7c8779f50cef9f61fb640581eaa6e6b9ce73873a6e4b051c67ca3f0488cb"
+        }
+      ],
+      "errors": [],
+      "notes": [
+        "Wall readiness observes putImageData on every displayed canvas, not full-source color-count publication. Sampled sheets correctly need not show a count.",
+        "CDP CPU is renderer main thread; workers excluded. Elapsed includes awaited UI and observation windows, not pure conversion latency. Source transport is prestaged.",
+        "Native/download PNG/GIF/ZIP bytes are decoded independently; alpha-zero hidden RGB ignored. Animation source decoded GIF, including fixture palette encoding, defines the expected input.",
+        "Enhanced pipeline uses committed production modules, so independent algorithm proof is limited to nearest; enhanced equality catches integration, stale settings, sampling and export discrepancies."
+      ]
+    },
+    {
+      "kind": "animation128",
+      "records": [
+        "kenney-motion-128"
+      ],
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+      "viewport": {
+        "width": 1280,
+        "height": 900,
+        "dpr": 1
+      },
+      "wall": [
+        {
+          "caption": "128×128",
+          "width": 128,
+          "height": 128,
+          "paints": 1
+        }
+      ],
+      "rows": [
+        {
+          "name": "import to sampled wall first complete paint",
+          "cpuMs": {
+            "TaskDuration": 17.932,
+            "ScriptDuration": 3.6839999999999997,
+            "LayoutDuration": 0.6489999999999999,
+            "RecalcStyleDuration": 2.184
+          },
+          "heapDelta": -100216,
+          "elapsedMs": 75.29999999701977,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.700000000000003,
+          "rafMaxMs": 16.700000000000003,
+          "writes": 2
+        },
+        {
+          "name": "full source nearest export",
+          "cpuMs": {
+            "TaskDuration": 34.383,
+            "ScriptDuration": 2.6180000000000003,
+            "LayoutDuration": 0.9460000000000001,
+            "RecalcStyleDuration": 0.379
+          },
+          "heapDelta": 1508724,
+          "elapsedMs": 182.1000000089407,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.700000000000017,
+          "rafMaxMs": 16.700000000000017,
+          "writes": 4
+        },
+        {
+          "name": "rapid settings cancellation through final RGB cap8 Cleanup dither4 paint",
+          "cpuMs": {
+            "TaskDuration": 63.80799999999999,
+            "ScriptDuration": 11.596,
+            "LayoutDuration": 3.7239999999999998,
+            "RecalcStyleDuration": 9.745000000000001
+          },
+          "heapDelta": 1748640,
+          "elapsedMs": 302.40000000596046,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.799999999999955,
+          "rafMaxMs": 16.799999999999955,
+          "writes": 13
+        },
+        {
+          "name": "full source enhanced export",
+          "cpuMs": {
+            "TaskDuration": 24.229,
+            "ScriptDuration": 1.6310000000000004,
+            "LayoutDuration": 0,
+            "RecalcStyleDuration": 0.5540000000000007
+          },
+          "heapDelta": 281104,
+          "elapsedMs": 165.3999999910593,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.700000000000045,
+          "rafMaxMs": 16.700000000000045,
+          "writes": 14
+        },
+        {
+          "name": "Preview zoom Original fit close and wall return",
+          "cpuMs": {
+            "TaskDuration": 69.024,
+            "ScriptDuration": 9.779,
+            "LayoutDuration": 0.9160000000000001,
+            "RecalcStyleDuration": 7.351999999999999
+          },
+          "heapDelta": 111780,
+          "elapsedMs": 1041.300000011921,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.899999999999864,
+          "rafMaxMs": 16.899999999999864,
+          "writes": 28
+        },
+        {
+          "name": "converted playback over two source-loop durations",
+          "cpuMs": {
+            "TaskDuration": 209.12800000000001,
+            "ScriptDuration": 46.517999999999994,
+            "LayoutDuration": 2.587999999999999,
+            "RecalcStyleDuration": 1.2230000000000019
+          },
+          "heapDelta": 1074944,
+          "elapsedMs": 6054,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.899999999999636,
+          "rafMaxMs": 17.100000000000364,
+          "writes": 92
+        },
+        {
+          "name": "settled wall idle",
+          "cpuMs": {
+            "TaskDuration": 19.12999999999998,
+            "ScriptDuration": 5.251999999999993,
+            "LayoutDuration": 0,
+            "RecalcStyleDuration": 0
+          },
+          "heapDelta": 92976,
+          "elapsedMs": 644.9000000059605,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.899999999999636,
+          "rafMaxMs": 17,
+          "writes": 99
+        }
+      ],
+      "exports": [
+        {
+          "label": "nearest",
+          "id": "kenney-motion-128",
+          "width": 128,
+          "height": 128,
+          "frames": 32,
+          "delay": [
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120
+          ],
+          "loop": 0,
+          "used": 14,
+          "rgbMismatch": 0,
+          "alphaMismatch": 0,
+          "oracle": "independent scalar Oklab nearest plus Sharp decode",
+          "sha256": "270f4db2f8da8e0f2c7da29fb6a526046a20c602a7df5268bb6e33b211ddcb0f"
+        },
+        {
+          "label": "enhanced",
+          "id": "kenney-motion-128",
+          "width": 128,
+          "height": 128,
+          "frames": 32,
+          "delay": [
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120
+          ],
+          "loop": 0,
+          "used": 8,
+          "rgbMismatch": 0,
+          "alphaMismatch": 0,
+          "oracle": "committed production-core quantize/subset/Cleanup outside browser plus independent membership/alpha decode",
+          "sha256": "cc6ecac2090634877c7054161a9287cfa944e587692cbfd624e4df57d6c497a2"
+        }
+      ],
+      "playback": [
+        {
+          "name": "kenney-motion-128.gif 128×128 · 8 colors",
+          "paints": 82,
+          "observedPaintDelta": 64
+        }
+      ],
+      "errors": [],
+      "notes": [
+        "Wall readiness observes putImageData on every displayed canvas, not full-source color-count publication. Sampled sheets correctly need not show a count.",
+        "CDP CPU is renderer main thread; workers excluded. Elapsed includes awaited UI and observation windows, not pure conversion latency. Source transport is prestaged.",
+        "Native/download PNG/GIF/ZIP bytes are decoded independently; alpha-zero hidden RGB ignored. Animation source decoded GIF, including fixture palette encoding, defines the expected input.",
+        "Enhanced pipeline uses committed production modules, so independent algorithm proof is limited to nearest; enhanced equality catches integration, stale settings, sampling and export discrepancies."
+      ]
+    },
+    {
+      "kind": "sheet2048",
+      "records": [
+        "kenney-sheet-2048"
+      ],
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+      "viewport": {
+        "width": 1280,
+        "height": 900,
+        "dpr": 1
+      },
+      "wall": [
+        {
+          "caption": "2048×2048",
+          "width": 761,
+          "height": 761,
+          "paints": 1
+        }
+      ],
+      "rows": [
+        {
+          "name": "import to sampled wall first complete paint",
+          "cpuMs": {
+            "TaskDuration": 41.701,
+            "ScriptDuration": 4.327,
+            "LayoutDuration": 1.498,
+            "RecalcStyleDuration": 3.176
+          },
+          "heapDelta": 1437656,
+          "elapsedMs": 189.5,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.80000000000001,
+          "rafMaxMs": 16.80000000000001,
+          "writes": 2
+        },
+        {
+          "name": "full source nearest export",
+          "cpuMs": {
+            "TaskDuration": 96.67600000000002,
+            "ScriptDuration": 2.157,
+            "LayoutDuration": 0.3370000000000001,
+            "RecalcStyleDuration": 0.7719999999999997
+          },
+          "heapDelta": 1623460,
+          "elapsedMs": 315.70000000298023,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.80000000000001,
+          "rafMaxMs": 16.80000000000001,
+          "writes": 2
+        },
+        {
+          "name": "rapid settings cancellation through final RGB cap8 Cleanup dither4 paint",
+          "cpuMs": {
+            "TaskDuration": 124.38099999999999,
+            "ScriptDuration": 23.62,
+            "LayoutDuration": 2.9890000000000003,
+            "RecalcStyleDuration": 8.826
+          },
+          "heapDelta": -3689548,
+          "elapsedMs": 474.59999999403954,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.800000000000182,
+          "rafMaxMs": 16.800000000000182,
+          "writes": 6
+        },
+        {
+          "name": "full source enhanced export",
+          "cpuMs": {
+            "TaskDuration": 113.05999999999999,
+            "ScriptDuration": 2.5050000000000003,
+            "LayoutDuration": 0.18599999999999953,
+            "RecalcStyleDuration": 1.3959999999999997
+          },
+          "heapDelta": 1225236,
+          "elapsedMs": 332.09999999403954,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.800000000000182,
+          "rafMaxMs": 16.800000000000182,
+          "writes": 6
+        },
+        {
+          "name": "Preview zoom Original fit close and wall return",
+          "cpuMs": {
+            "TaskDuration": 222.80099999999996,
+            "ScriptDuration": 23.008,
+            "LayoutDuration": 2.1060000000000003,
+            "RecalcStyleDuration": 14.315
+          },
+          "heapDelta": -765444,
+          "elapsedMs": 1114.7999999970198,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.800000000000182,
+          "rafMaxMs": 16.900000000000546,
+          "writes": 10
+        },
+        {
+          "name": "settled wall idle",
+          "cpuMs": {
+            "TaskDuration": 11.935000000000029,
+            "ScriptDuration": 1.5090000000000034,
+            "LayoutDuration": 1.0539999999999994,
+            "RecalcStyleDuration": 0.5600000000000015
+          },
+          "heapDelta": 16380,
+          "elapsedMs": 638.8999999910593,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.800000000000182,
+          "rafMaxMs": 17,
+          "writes": 10
+        }
+      ],
+      "exports": [
+        {
+          "label": "nearest",
+          "id": "kenney-sheet-2048",
+          "width": 2048,
+          "height": 2048,
+          "frames": 1,
+          "used": 26,
+          "rgbMismatch": 0,
+          "alphaMismatch": 0,
+          "oracle": "independent scalar Oklab nearest plus Sharp decode",
+          "sha256": "ea42619273149ba3d1f58958706aaf40b50edbe51983f80998c4a42c3a60e720"
+        },
+        {
+          "label": "enhanced",
+          "id": "kenney-sheet-2048",
+          "width": 2048,
+          "height": 2048,
+          "frames": 1,
+          "used": 8,
+          "rgbMismatch": 0,
+          "alphaMismatch": 0,
+          "oracle": "committed production-core quantize/subset/Cleanup outside browser plus independent membership/alpha decode",
+          "sha256": "e9d6e2f1ddc0e591ef5cb38310fef1a2b125c460ad511e3024a9aa04ec3bcbec"
+        }
+      ],
+      "errors": [],
+      "notes": [
+        "Wall readiness observes putImageData on every displayed canvas, not full-source color-count publication. Sampled sheets correctly need not show a count.",
+        "CDP CPU is renderer main thread; workers excluded. Elapsed includes awaited UI and observation windows, not pure conversion latency. Source transport is prestaged.",
+        "Native/download PNG/GIF/ZIP bytes are decoded independently; alpha-zero hidden RGB ignored. Animation source decoded GIF, including fixture palette encoding, defines the expected input.",
+        "Enhanced pipeline uses committed production modules, so independent algorithm proof is limited to nearest; enhanced equality catches integration, stale settings, sampling and export discrepancies."
+      ]
+    },
+    {
+      "kind": "animation256",
+      "records": [
+        "kenney-motion-256"
+      ],
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+      "viewport": {
+        "width": 1280,
+        "height": 900,
+        "dpr": 1
+      },
+      "wall": [
+        {
+          "caption": "256×256",
+          "width": 256,
+          "height": 256,
+          "paints": 1
+        }
+      ],
+      "rows": [
+        {
+          "name": "import to sampled wall first complete paint",
+          "cpuMs": {
+            "TaskDuration": 34.48800000000001,
+            "ScriptDuration": 8.659,
+            "LayoutDuration": 1.709,
+            "RecalcStyleDuration": 4.29
+          },
+          "heapDelta": -370696,
+          "elapsedMs": 203.09999999403954,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.80000000000001,
+          "rafMaxMs": 16.80000000000001,
+          "writes": 2
+        },
+        {
+          "name": "full source nearest export",
+          "cpuMs": {
+            "TaskDuration": 92.47500000000001,
+            "ScriptDuration": 4.977,
+            "LayoutDuration": 0.6689999999999999,
+            "RecalcStyleDuration": 1.4609999999999996
+          },
+          "heapDelta": 2194244,
+          "elapsedMs": 297.29999999701977,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.80000000000001,
+          "rafMaxMs": 16.80000000000001,
+          "writes": 5
+        },
+        {
+          "name": "rapid settings cancellation through final RGB cap8 Cleanup dither4 paint",
+          "cpuMs": {
+            "TaskDuration": 74.88900000000001,
+            "ScriptDuration": 15.379,
+            "LayoutDuration": 2.7210000000000005,
+            "RecalcStyleDuration": 9.149999999999999
+          },
+          "heapDelta": 524656,
+          "elapsedMs": 300.29999999701977,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.799999999999955,
+          "rafMaxMs": 16.799999999999955,
+          "writes": 12
+        },
+        {
+          "name": "full source enhanced export",
+          "cpuMs": {
+            "TaskDuration": 79.90899999999998,
+            "ScriptDuration": 3.040000000000001,
+            "LayoutDuration": 0.11399999999999952,
+            "RecalcStyleDuration": 0.8540000000000023
+          },
+          "heapDelta": 801912,
+          "elapsedMs": 280.70000000298023,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.800000000000182,
+          "rafMaxMs": 16.800000000000182,
+          "writes": 15
+        },
+        {
+          "name": "Preview zoom Original fit close and wall return",
+          "cpuMs": {
+            "TaskDuration": 104.728,
+            "ScriptDuration": 13.194999999999999,
+            "LayoutDuration": 1.5999999999999999,
+            "RecalcStyleDuration": 9.751999999999997
+          },
+          "heapDelta": -557748,
+          "elapsedMs": 1057,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.800000000000182,
+          "rafMaxMs": 17,
+          "writes": 31
+        },
+        {
+          "name": "converted playback over two source-loop durations",
+          "cpuMs": {
+            "TaskDuration": 357.384,
+            "ScriptDuration": 75.846,
+            "LayoutDuration": 4.199,
+            "RecalcStyleDuration": 1.694000000000001
+          },
+          "heapDelta": -1490608,
+          "elapsedMs": 8947.40000000596,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.899999999999636,
+          "rafMaxMs": 17.600000000000364,
+          "writes": 125
+        },
+        {
+          "name": "settled wall idle",
+          "cpuMs": {
+            "TaskDuration": 21.700999999999972,
+            "ScriptDuration": 5.3880000000000035,
+            "LayoutDuration": 0,
+            "RecalcStyleDuration": 0
+          },
+          "heapDelta": 80916,
+          "elapsedMs": 637.2000000029802,
+          "longtasks": [],
+          "maxTaskMs": 0,
+          "rafP95Ms": 16.900000000001455,
+          "rafMaxMs": 17,
+          "writes": 131
+        }
+      ],
+      "exports": [
+        {
+          "label": "nearest",
+          "id": "kenney-motion-256",
+          "width": 256,
+          "height": 256,
+          "frames": 48,
+          "delay": [
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120
+          ],
+          "loop": 0,
+          "used": 14,
+          "rgbMismatch": 0,
+          "alphaMismatch": 0,
+          "oracle": "independent scalar Oklab nearest plus Sharp decode",
+          "sha256": "1689433d660b81dbd1c1ae90ebb37c23a0649131cabfc4023c95cbfb8dfc65e0"
+        },
+        {
+          "label": "enhanced",
+          "id": "kenney-motion-256",
+          "width": 256,
+          "height": 256,
+          "frames": 48,
+          "delay": [
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120,
+            60,
+            80,
+            100,
+            120
+          ],
+          "loop": 0,
+          "used": 8,
+          "rgbMismatch": 0,
+          "alphaMismatch": 0,
+          "oracle": "committed production-core quantize/subset/Cleanup outside browser plus independent membership/alpha decode",
+          "sha256": "ddc90fcca280c984e09c59ba5b1046fc489f0cd1391dcd58e901f4ac79e949a8"
+        }
+      ],
+      "playback": [
+        {
+          "name": "kenney-motion-256.gif 256×256 · 8 colors",
+          "paints": 115,
+          "observedPaintDelta": 94
+        }
+      ],
+      "errors": [],
+      "notes": [
+        "Wall readiness observes putImageData on every displayed canvas, not full-source color-count publication. Sampled sheets correctly need not show a count.",
+        "CDP CPU is renderer main thread; workers excluded. Elapsed includes awaited UI and observation windows, not pure conversion latency. Source transport is prestaged.",
+        "Native/download PNG/GIF/ZIP bytes are decoded independently; alpha-zero hidden RGB ignored. Animation source decoded GIF, including fixture palette encoding, defines the expected input.",
+        "Enhanced pipeline uses committed production modules, so independent algorithm proof is limited to nearest; enhanced equality catches integration, stale settings, sampling and export discrepancies."
+      ]
+    }
+  ]
+}

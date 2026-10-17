@@ -1,0 +1,151 @@
+{
+  "kind": "sheet1024",
+  "records": [
+    "kenney-sheet-1024"
+  ],
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+  "viewport": {
+    "width": 1280,
+    "height": 900,
+    "dpr": 1
+  },
+  "wall": [
+    {
+      "caption": "1024×1024",
+      "width": 761,
+      "height": 761,
+      "paints": 1
+    }
+  ],
+  "rows": [
+    {
+      "name": "import to sampled wall first complete paint",
+      "cpuMs": {
+        "TaskDuration": 35.205,
+        "ScriptDuration": 3.5410000000000004,
+        "LayoutDuration": 0.5630000000000001,
+        "RecalcStyleDuration": 2.846
+      },
+      "heapDelta": 1246060,
+      "elapsedMs": 88,
+      "longtasks": [],
+      "maxTaskMs": 0,
+      "rafP95Ms": 16.799999999999997,
+      "rafMaxMs": 16.799999999999997,
+      "writes": 2
+    },
+    {
+      "name": "full source nearest export",
+      "cpuMs": {
+        "TaskDuration": 58.193999999999996,
+        "ScriptDuration": 11.432,
+        "LayoutDuration": 1.0240000000000002,
+        "RecalcStyleDuration": 0.7699999999999998
+      },
+      "heapDelta": 1581528,
+      "elapsedMs": 314.5,
+      "longtasks": [],
+      "maxTaskMs": 0,
+      "rafP95Ms": 16.80000000000001,
+      "rafMaxMs": 16.80000000000001,
+      "writes": 2
+    },
+    {
+      "name": "rapid settings cancellation through final RGB cap8 Cleanup dither4 paint",
+      "cpuMs": {
+        "TaskDuration": 98.321,
+        "ScriptDuration": 14.660999999999998,
+        "LayoutDuration": 2.9059999999999997,
+        "RecalcStyleDuration": 9.281
+      },
+      "heapDelta": -745788,
+      "elapsedMs": 325.09999999403954,
+      "longtasks": [],
+      "maxTaskMs": 0,
+      "rafP95Ms": 16.799999999999955,
+      "rafMaxMs": 16.799999999999955,
+      "writes": 8
+    },
+    {
+      "name": "full source enhanced export",
+      "cpuMs": {
+        "TaskDuration": 32.10400000000002,
+        "ScriptDuration": 1.2519999999999996,
+        "LayoutDuration": 0,
+        "RecalcStyleDuration": 0.8009999999999996
+      },
+      "heapDelta": 329700,
+      "elapsedMs": 182.20000000298023,
+      "longtasks": [],
+      "maxTaskMs": 0,
+      "rafP95Ms": 16.899999999999864,
+      "rafMaxMs": 16.899999999999864,
+      "writes": 8
+    },
+    {
+      "name": "Preview zoom Original fit close and wall return",
+      "cpuMs": {
+        "TaskDuration": 130.188,
+        "ScriptDuration": 14.872999999999998,
+        "LayoutDuration": 1.3170000000000004,
+        "RecalcStyleDuration": 11.129
+      },
+      "heapDelta": 273868,
+      "elapsedMs": 1091.2000000029802,
+      "longtasks": [],
+      "maxTaskMs": 0,
+      "rafP95Ms": 16.799999999999727,
+      "rafMaxMs": 16.90000000000009,
+      "writes": 12
+    },
+    {
+      "name": "settled wall idle",
+      "cpuMs": {
+        "TaskDuration": 15.023999999999981,
+        "ScriptDuration": 1.669999999999998,
+        "LayoutDuration": 0.9909999999999997,
+        "RecalcStyleDuration": 0.4380000000000009
+      },
+      "heapDelta": 5104,
+      "elapsedMs": 633.8999999910593,
+      "longtasks": [],
+      "maxTaskMs": 0,
+      "rafP95Ms": 16.90000000000009,
+      "rafMaxMs": 17,
+      "writes": 12
+    }
+  ],
+  "exports": [
+    {
+      "label": "nearest",
+      "id": "kenney-sheet-1024",
+      "width": 1024,
+      "height": 1024,
+      "frames": 1,
+      "used": 26,
+      "rgbMismatch": 0,
+      "alphaMismatch": 0,
+      "oracle": "independent scalar Oklab nearest plus Sharp decode",
+      "sha256": "6acc247466f62315082aff04df362c112d05d213c563c90c23cdfdbdb74c820a"
+    },
+    {
+      "label": "enhanced",
+      "id": "kenney-sheet-1024",
+      "width": 1024,
+      "height": 1024,
+      "frames": 1,
+      "used": 8,
+      "rgbMismatch": 0,
+      "alphaMismatch": 0,
+      "oracle": "committed production-core quantize/subset/Cleanup outside browser plus independent membership/alpha decode",
+      "sha256": "ec7c7c8779f50cef9f61fb640581eaa6e6b9ce73873a6e4b051c67ca3f0488cb"
+    }
+  ],
+  "errors": [],
+  "notes": [
+    "Wall readiness observes putImageData on every displayed canvas, not full-source color-count publication. Sampled sheets correctly need not show a count.",
+    "CDP CPU is renderer main thread; workers excluded. Elapsed includes awaited UI and observation windows, not pure conversion latency. Source transport is prestaged.",
+    "Native/download PNG/GIF/ZIP bytes are decoded independently; alpha-zero hidden RGB ignored. Animation source decoded GIF, including fixture palette encoding, defines the expected input.",
+    "Enhanced pipeline uses committed production modules, so independent algorithm proof is limited to nearest; enhanced equality catches integration, stale settings, sampling and export discrepancies."
+  ]
+}

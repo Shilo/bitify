@@ -1,0 +1,9 @@
+{
+  "pass": true,
+  "duplicateInitScripts": 2,
+  "observers": 1,
+  "rafLoops": 1,
+  "nativeWrites": 1,
+  "recordedWrites": 1,
+  "recordedPaints": 1
+}
