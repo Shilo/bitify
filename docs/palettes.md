@@ -247,6 +247,15 @@ and acquisition errors. Switch methods without losing the draft or pasted text.
 Large swatch lists scroll within a bounded grid; the save footer stays visible.
 Editing and copying start with Add colors.
 
+**From Aseprite:** under Image or file, choose or drop a saved `.aseprite` or
+`.ase` file to import its embedded palette. To copy swatches instead, select
+them in Aseprite's palette, choose **Edit > Copy**, then paste into **Paste
+colors** and choose **Review colors** (or **Replace colors**). Native HEX
+swatch copying requires Aseprite 1.3.3 or later with its native clipboard enabled.
+Review the colors, then Save palette. File import reads the saved first-frame
+palette, including unused swatches; export a PNG to extract artwork colors instead.
+The Aseprite parser downloads only when an Aseprite file is imported.
+
 While this dialog is open, drop a local palette file or an HTTP(S) image/Aseprite URL
 from Discord or a web page anywhere on it. Files take precedence over URLs; only the
 first source replaces the draft, with the chosen method and entered name retained.

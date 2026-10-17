@@ -1,0 +1,26 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Aseprite file-drop QA</title>
+<p>Test-only synthetic file drops into the production app iframe. These do not simulate an OS drag.</p>
+<button data-file="opaque-artwork.aseprite">Drop saved document</button>
+<button data-file="opaque-palette.ase">Drop native palette</button>
+<button data-file="alpha-palette.aseprite">Drop alpha palette</button>
+<button id="invalid">Drop malformed file</button>
+<output aria-live="polite"></output>
+<iframe title="Colorfetti production build" src="/" style="width:100%;height:720px;border:0"></iframe>
+<script type="module">
+  const frame=document.querySelector('iframe'),output=document.querySelector('output');
+  async function drop(name,bytes){
+    const doc=frame.contentDocument,dialog=doc.querySelector('dialog.palette-import-modal[open]');
+    if(!dialog)throw new Error('Open Import palette in the app first.');
+    const data=new frame.contentWindow.DataTransfer();
+    data.items.add(new frame.contentWindow.File([bytes],name,{type:'application/octet-stream'}));
+    dialog.dispatchEvent(new frame.contentWindow.DragEvent('drop',{bubbles:true,cancelable:true,dataTransfer:data}));
+    output.textContent='Dispatched '+name;
+  }
+  for(const button of document.querySelectorAll('[data-file]'))button.onclick=async()=>{
+    try{const name=button.dataset.file;await drop(name,await(await fetch('/__fixture/'+name)).arrayBuffer());}
+    catch(error){output.textContent=error.message;}
+  };
+  document.querySelector('#invalid').onclick=()=>drop('invalid.aseprite',new TextEncoder().encode('invalid fixture')).catch(error=>output.textContent=error.message);
+</script>

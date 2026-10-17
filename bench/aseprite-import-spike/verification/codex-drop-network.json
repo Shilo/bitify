@@ -1,0 +1,47 @@
+[
+  {
+    "stage": "startup",
+    "path": "/",
+    "time": "2026-10-17T01:46:20.532Z"
+  },
+  {
+    "stage": "startup",
+    "path": "/assets/index-ClPgHJMD.js",
+    "time": "2026-10-17T01:46:20.559Z"
+  },
+  {
+    "stage": "startup",
+    "path": "/assets/index-CwjbDz_e.css",
+    "time": "2026-10-17T01:46:20.561Z"
+  },
+  {
+    "stage": "startup",
+    "path": "/assets/palette-generated-client-B6fcOfEq.js",
+    "time": "2026-10-17T01:46:20.651Z"
+  },
+  {
+    "stage": "startup",
+    "path": "/favicon.ico",
+    "time": "2026-10-17T01:46:20.664Z"
+  },
+  {
+    "stage": "startup",
+    "path": "/assets/palette-generated-worker-DtZRGI4b.js",
+    "time": "2026-10-17T01:46:20.666Z"
+  },
+  {
+    "stage": "startup",
+    "path": "/sw.js",
+    "time": "2026-10-17T01:46:22.399Z"
+  },
+  {
+    "stage": "first-native-drop",
+    "path": "/assets/palette-ase-CkPXNbLd.js",
+    "time": "2026-10-17T01:46:36.070Z"
+  },
+  {
+    "stage": "first-native-drop",
+    "path": "/sw.js",
+    "time": "2026-10-17T01:46:51.576Z"
+  }
+]

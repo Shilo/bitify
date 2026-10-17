@@ -1,0 +1,17 @@
+{
+  "parser": "palette-ase-CkPXNbLd.js",
+  "bytes": 2497,
+  "gzipBytes": 1329,
+  "htmlPreloads": [],
+  "staticStartupModules": [
+    "assets\\index-ClPgHJMD.js"
+  ],
+  "parserRequests": [
+    {
+      "stage": "first-native-import",
+      "path": "/assets/palette-ase-CkPXNbLd.js",
+      "time": "2026-10-17T01:44:26.470Z"
+    }
+  ],
+  "passed": true
+}

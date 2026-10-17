@@ -1,0 +1,57 @@
+[
+  {
+    "stage": "startup",
+    "path": "/",
+    "time": "2026-10-17T01:43:16.579Z"
+  },
+  {
+    "stage": "startup",
+    "path": "/assets/index-ClPgHJMD.js",
+    "time": "2026-10-17T01:43:16.594Z"
+  },
+  {
+    "stage": "startup",
+    "path": "/assets/index-CwjbDz_e.css",
+    "time": "2026-10-17T01:43:16.595Z"
+  },
+  {
+    "stage": "startup",
+    "path": "/favicon-dark.svg",
+    "time": "2026-10-17T01:43:16.631Z"
+  },
+  {
+    "stage": "startup",
+    "path": "/favicon-dark.ico",
+    "time": "2026-10-17T01:43:16.641Z"
+  },
+  {
+    "stage": "first-native-import",
+    "path": "/assets/palette-ase-CkPXNbLd.js",
+    "time": "2026-10-17T01:44:26.470Z"
+  },
+  {
+    "stage": "repeat-native-imports",
+    "path": "/",
+    "time": "2026-10-17T01:49:01.105Z"
+  },
+  {
+    "stage": "repeat-native-imports",
+    "path": "/assets/index-ClPgHJMD.js",
+    "time": "2026-10-17T01:49:01.120Z"
+  },
+  {
+    "stage": "repeat-native-imports",
+    "path": "/assets/index-CwjbDz_e.css",
+    "time": "2026-10-17T01:49:01.121Z"
+  },
+  {
+    "stage": "repeat-native-imports",
+    "path": "/favicon-dark.svg",
+    "time": "2026-10-17T01:49:01.169Z"
+  },
+  {
+    "stage": "repeat-native-imports",
+    "path": "/favicon-dark.ico",
+    "time": "2026-10-17T01:49:01.180Z"
+  }
+]

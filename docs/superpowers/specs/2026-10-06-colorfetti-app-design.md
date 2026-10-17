@@ -2508,7 +2508,13 @@ Alpha hex, malformed rows/counts, binary PAL, Adobe ASE and ACO are rejected. Do
 arbitrary documents for hex-looking substrings. TXT means this hex grammar.
 
 Aseprite `.ase` / `.aseprite` files, up to 32 MiB, use a dynamically imported palette
-parser only when that file type is selected. Read the first frame's embedded palette,
+parser only when that file type is selected. Image or file guidance names saved
+`.aseprite`/`.ase` palette import and distinguishes dropping files from pasting
+images. Paste colors guidance explains selecting palette swatches in Aseprite,
+choosing Edit > Copy, and pasting into the textarea. Keep these as brief hints,
+with no new controls, clipboard reads or import behavior. Startup, opening the
+editor, choosing methods, and ordinary image/text imports must neither download
+nor preload the native parser. Read the first frame's embedded palette,
 prefer modern records over legacy records, and require complete known entries rather
 than fabricating defaults or sampling artwork. Keep palette-index order, remove RGB
 duplicates, skip alpha-zero entries and normalize positive alpha to opaque with the

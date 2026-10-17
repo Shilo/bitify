@@ -1,0 +1,696 @@
+{
+  "checks": [
+    {
+      "file": "opaque-palette.hex",
+      "colors": [
+        "Select color 1 #123456",
+        "Select color 2 #ff0000",
+        "Select color 3 #0000ff",
+        "Select color 4 #000000"
+      ]
+    },
+    {
+      "file": "opaque-palette.gpl",
+      "colors": [
+        "Select color 1 #123456",
+        "Select color 2 #ff0000",
+        "Select color 3 #0000ff",
+        "Select color 4 #000000"
+      ]
+    },
+    {
+      "file": "opaque-palette.pal",
+      "colors": [
+        "Select color 1 #123456",
+        "Select color 2 #ff0000",
+        "Select color 3 #0000ff",
+        "Select color 4 #000000"
+      ]
+    },
+    {
+      "file": "opaque-palette.ase",
+      "colors": [
+        "Select color 1 #123456",
+        "Select color 2 #ff0000",
+        "Select color 3 #0000ff",
+        "Select color 4 #000000"
+      ],
+      "alphaNotice": false
+    },
+    {
+      "file": "alpha-palette.aseprite",
+      "colors": [
+        "Select color 1 #123456",
+        "Select color 2 #ff0000",
+        "Select color 3 #0000ff",
+        "Select color 4 #04c850"
+      ],
+      "alphaNotice": true
+    },
+    {
+      "file": "alpha-artwork.aseprite",
+      "colors": [
+        "Select color 1 #123456",
+        "Select color 2 #ff0000",
+        "Select color 3 #0000ff",
+        "Select color 4 #04c850"
+      ],
+      "alphaNotice": true
+    }
+  ],
+  "firstNative": [
+    "Select color 1 #123456",
+    "Select color 2 #ff0000",
+    "Select color 3 #0000ff",
+    "Select color 4 #000000"
+  ],
+  "invalidNative": {
+    "name": "Invalid file retention QA",
+    "colors": [
+      "Select color 1 #123456",
+      "Select color 2 #ff0000",
+      "Select color 3 #0000ff",
+      "Select color 4 #04c850"
+    ],
+    "error": "Invalid or incomplete Aseprite palette file."
+  },
+  "layouts": [
+    {
+      "size": {
+        "width": 320,
+        "height": 568
+      },
+      "method": "Image or file",
+      "bodyScrollable": false,
+      "editor": {
+        "height": 438.59375,
+        "width": 288,
+        "x": 16,
+        "y": 64.703125
+      },
+      "footer": {
+        "height": 53,
+        "width": 286,
+        "x": 17,
+        "y": 449.296875
+      },
+      "hints": [
+        "Or drop a palette image or file here, or paste an image.",
+        "Aseprite: choose or drop a saved .aseprite or .ase file to import its palette."
+      ],
+      "overflow": false
+    },
+    {
+      "size": {
+        "width": 320,
+        "height": 568
+      },
+      "method": "Paste colors",
+      "bodyScrollable": false,
+      "editor": {
+        "height": 527.09375,
+        "width": 288,
+        "x": 16,
+        "y": 20.453125
+      },
+      "footer": {
+        "height": 53,
+        "width": 286,
+        "x": 17,
+        "y": 493.546875
+      },
+      "hints": [
+        "Paste HEX colors or a Lospec palette link.",
+        "Aseprite: select palette swatches, choose Edit → Copy, then paste above."
+      ],
+      "overflow": false
+    },
+    {
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "method": "Image or file",
+      "bodyScrollable": false,
+      "editor": {
+        "height": 419.09375,
+        "width": 358,
+        "x": 16,
+        "y": 212.453125
+      },
+      "footer": {
+        "height": 53,
+        "width": 356,
+        "x": 17,
+        "y": 577.546875
+      },
+      "hints": [
+        "Or drop a palette image or file here, or paste an image.",
+        "Aseprite: choose or drop a saved .aseprite or .ase file to import its palette."
+      ],
+      "overflow": false
+    },
+    {
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "method": "Paste colors",
+      "bodyScrollable": false,
+      "editor": {
+        "height": 527.09375,
+        "width": 358,
+        "x": 16,
+        "y": 158.453125
+      },
+      "footer": {
+        "height": 53,
+        "width": 356,
+        "x": 17,
+        "y": 631.546875
+      },
+      "hints": [
+        "Paste HEX colors or a Lospec palette link.",
+        "Aseprite: select palette swatches, choose Edit → Copy, then paste above."
+      ],
+      "overflow": false
+    },
+    {
+      "size": {
+        "width": 520,
+        "height": 320
+      },
+      "method": "Image or file",
+      "bodyScrollable": true,
+      "editor": {
+        "height": 288,
+        "width": 488,
+        "x": 16,
+        "y": 16
+      },
+      "footer": {
+        "height": 53,
+        "width": 486,
+        "x": 17,
+        "y": 250
+      },
+      "hints": [
+        "Or drop a palette image or file here, or paste an image.",
+        "Aseprite: choose or drop a saved .aseprite or .ase file to import its palette."
+      ],
+      "overflow": false
+    },
+    {
+      "size": {
+        "width": 520,
+        "height": 320
+      },
+      "method": "Paste colors",
+      "bodyScrollable": true,
+      "editor": {
+        "height": 288,
+        "width": 488,
+        "x": 16,
+        "y": 16
+      },
+      "footer": {
+        "height": 53,
+        "width": 486,
+        "x": 17,
+        "y": 250
+      },
+      "hints": [
+        "Paste HEX colors or a Lospec palette link.",
+        "Aseprite: select palette swatches, choose Edit → Copy, then paste above."
+      ],
+      "overflow": false
+    },
+    {
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "method": "Image or file",
+      "bodyScrollable": false,
+      "editor": {
+        "height": 353.59375,
+        "width": 560,
+        "x": 142,
+        "y": 18.203125
+      },
+      "footer": {
+        "height": 53,
+        "width": 558,
+        "x": 143,
+        "y": 317.796875
+      },
+      "hints": [
+        "Or drop a palette image or file here, or paste an image.",
+        "Aseprite: choose or drop a saved .aseprite or .ase file to import its palette."
+      ],
+      "overflow": false
+    },
+    {
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "method": "Paste colors",
+      "bodyScrollable": true,
+      "editor": {
+        "height": 358,
+        "width": 560,
+        "x": 142,
+        "y": 16
+      },
+      "footer": {
+        "height": 53,
+        "width": 558,
+        "x": 143,
+        "y": 320
+      },
+      "hints": [
+        "Paste HEX colors or a Lospec palette link.",
+        "Aseprite: select palette swatches, choose Edit → Copy, then paste above."
+      ],
+      "overflow": false
+    },
+    {
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "method": "Image or file",
+      "bodyScrollable": false,
+      "editor": {
+        "height": 411.59375,
+        "width": 560,
+        "x": 360,
+        "y": 154.203125
+      },
+      "footer": {
+        "height": 53,
+        "width": 558,
+        "x": 361,
+        "y": 511.796875
+      },
+      "hints": [
+        "Or drop a palette image or file here, or paste an image.",
+        "Aseprite: choose or drop a saved .aseprite or .ase file to import its palette."
+      ],
+      "overflow": false
+    },
+    {
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "method": "Paste colors",
+      "bodyScrollable": false,
+      "editor": {
+        "height": 519.59375,
+        "width": 560,
+        "x": 360,
+        "y": 100.203125
+      },
+      "footer": {
+        "height": 53,
+        "width": 558,
+        "x": 361,
+        "y": 565.796875
+      },
+      "hints": [
+        "Paste HEX colors or a Lospec palette link.",
+        "Aseprite: select palette swatches, choose Edit → Copy, then paste above."
+      ],
+      "overflow": false
+    }
+  ],
+  "drop": {
+    "name": "Drop draft",
+    "method": "true",
+    "text": "#fedcba",
+    "swatches": [
+      "Select color 1 #123456",
+      "Select color 2 #ff0000",
+      "Select color 3 #0000ff",
+      "Select color 4 #04c850"
+    ],
+    "syntheticFileDrop": true
+  },
+  "largeNative": {
+    "count": 255,
+    "pages": [
+      [
+        "Select color 1 #ff494b",
+        "Select color 2 #f80016",
+        "Select color 3 #e11c2e",
+        "Select color 4 #f72a3b",
+        "Select color 5 #c47178",
+        "Select color 6 #be0016",
+        "Select color 7 #be1b2f",
+        "Select color 8 #af1a2e",
+        "Select color 9 #77454d",
+        "Select color 10 #b58990",
+        "Select color 11 #4c141e",
+        "Select color 12 #740016",
+        "Select color 13 #721526",
+        "Select color 14 #682935",
+        "Select color 15 #ff012f",
+        "Select color 16 #8e414f",
+        "Select color 17 #af606f",
+        "Select color 18 #6b0015",
+        "Select color 19 #9f0020",
+        "Select color 20 #b55568",
+        "Select color 21 #ffb2c1",
+        "Select color 22 #be012f",
+        "Select color 23 #3d0718",
+        "Select color 24 #e53e75",
+        "Select color 25 #5d0020",
+        "Select color 26 #8f1b4a",
+        "Select color 27 #ff99c1",
+        "Select color 28 #6d012f",
+        "Select color 29 #ff7db5",
+        "Select color 30 #c61463",
+        "Select color 31 #9b5b7a",
+        "Select color 32 #490024",
+        "Select color 33 #820041",
+        "Select color 34 #9a9698",
+        "Select color 35 #ff5baf",
+        "Select color 36 #ff3daa",
+        "Select color 37 #ff6dc1",
+        "Select color 38 #ac006d",
+        "Select color 39 #ff52c1",
+        "Select color 40 #e30b99",
+        "Select color 41 #8b005d",
+        "Select color 42 #ff37c1",
+        "Select color 43 #ff1fc1",
+        "Select color 44 #270020",
+        "Select color 45 #36032e",
+        "Select color 46 #b2a9b1",
+        "Select color 47 #4f0d48",
+        "Select color 48 #711c69",
+        "Select color 49 #85367e",
+        "Select color 50 #9b4e94",
+        "Select color 51 #30152f",
+        "Select color 52 #482a47",
+        "Select color 53 #573b57",
+        "Select color 54 #7a5b7a",
+        "Select color 55 #170919",
+        "Select color 56 #190621",
+        "Select color 57 #4b3355",
+        "Select color 58 #551b6d",
+        "Select color 59 #684577",
+        "Select color 60 #7b5f87",
+        "Select color 61 #b200ff",
+        "Select color 62 #2a1a34",
+        "Select color 63 #6c6472",
+        "Select color 64 #494051"
+      ],
+      [
+        "Select color 65 #56426b",
+        "Select color 66 #887899",
+        "Select color 67 #412b68",
+        "Select color 68 #918eab",
+        "Select color 69 #1b1b51",
+        "Select color 70 #313170",
+        "Select color 71 #5757af",
+        "Select color 72 #030623",
+        "Select color 73 #13194a",
+        "Select color 74 #354084",
+        "Select color 75 #080f39",
+        "Select color 76 #242f6b",
+        "Select color 77 #5c67a5",
+        "Select color 78 #2e3035",
+        "Select color 79 #171a20",
+        "Select color 80 #7585a0",
+        "Select color 81 #b1bbcc",
+        "Select color 82 #dadee5",
+        "Select color 83 #142b4e",
+        "Select color 84 #001f4b",
+        "Select color 85 #003879",
+        "Select color 86 #0d1115",
+        "Select color 87 #474849",
+        "Select color 88 #004a95",
+        "Select color 89 #46617a",
+        "Select color 90 #2e84d2",
+        "Select color 91 #0862b1",
+        "Select color 92 #002f56",
+        "Select color 93 #4cadff",
+        "Select color 94 #70beff",
+        "Select color 95 #96cfff",
+        "Select color 96 #cce8ff",
+        "Select color 97 #0b3a5e",
+        "Select color 98 #051724",
+        "Select color 99 #27455a",
+        "Select color 100 #435e71",
+        "Select color 101 #0094ff",
+        "Select color 102 #262c30",
+        "Select color 103 #5e6163",
+        "Select color 104 #637e8f",
+        "Select color 105 #020709",
+        "Select color 106 #072835",
+        "Select color 107 #126481",
+        "Select color 108 #141819",
+        "Select color 109 #000e11",
+        "Select color 110 #003844",
+        "Select color 111 #004656",
+        "Select color 112 #005b70",
+        "Select color 113 #006177",
+        "Select color 114 #0086a2",
+        "Select color 115 #2c92a6",
+        "Select color 116 #08a8c9",
+        "Select color 117 #4ae4ff",
+        "Select color 118 #43b3be",
+        "Select color 119 #2a2c2c",
+        "Select color 120 #393d3d",
+        "Select color 121 #144e4e",
+        "Select color 122 #004c48",
+        "Select color 123 #00726d",
+        "Select color 124 #00a29b",
+        "Select color 125 #6df2eb",
+        "Select color 126 #0dc6ba",
+        "Select color 127 #adfcf6",
+        "Select color 128 #2feed5"
+      ],
+      [
+        "Select color 129 #106556",
+        "Select color 130 #03211b",
+        "Select color 131 #05352b",
+        "Select color 132 #20564b",
+        "Select color 133 #00604d",
+        "Select color 134 #009e7e",
+        "Select color 135 #387064",
+        "Select color 136 #04110d",
+        "Select color 137 #25342e",
+        "Select color 138 #27694e",
+        "Select color 139 #188856",
+        "Select color 140 #4a5951",
+        "Select color 141 #727f77",
+        "Select color 142 #27aa54",
+        "Select color 143 #92ac99",
+        "Select color 144 #bad8c2",
+        "Select color 145 #dae5dd",
+        "Select color 146 #75a080",
+        "Select color 147 #497754",
+        "Select color 148 #4d8e4e",
+        "Select color 149 #55ba56",
+        "Select color 150 #65ff54",
+        "Select color 151 #4cff00",
+        "Select color 152 #74ba4e",
+        "Select color 153 #1c2d00",
+        "Select color 154 #37510d",
+        "Select color 155 #5d8223",
+        "Select color 156 #b2ee4d",
+        "Select color 157 #4e7200",
+        "Select color 158 #6c9e00",
+        "Select color 159 #91ce0e",
+        "Select color 160 #d1ff70",
+        "Select color 161 #a3c134",
+        "Select color 162 #f5fb51",
+        "Select color 163 #ffff30",
+        "Select color 164 #939056",
+        "Select color 165 #e5e3bc",
+        "Select color 166 #c6c393",
+        "Select color 167 #dbd8af",
+        "Select color 168 #6b652b",
+        "Select color 169 #efd132",
+        "Select color 170 #b0a56e",
+        "Select color 171 #ffcd06",
+        "Select color 172 #ffda4f",
+        "Select color 173 #ffbb00",
+        "Select color 174 #cdbe95",
+        "Select color 175 #faeece",
+        "Select color 176 #72550c",
+        "Select color 177 #7f6d3f",
+        "Select color 178 #91742d",
+        "Select color 179 #493403",
+        "Select color 180 #653f00",
+        "Select color 181 #956821",
+        "Select color 182 #ffba4e",
+        "Select color 183 #a89374",
+        "Select color 184 #ffaa30",
+        "Select color 185 #ff8d06",
+        "Select color 186 #d06e00",
+        "Select color 187 #fdc78a",
+        "Select color 188 #fad4aa",
+        "Select color 189 #3f2b16",
+        "Select color 190 #7a634a",
+        "Select color 191 #964e00",
+        "Select color 192 #ada296"
+      ],
+      [
+        "Select color 193 #472505",
+        "Select color 194 #5b4836",
+        "Select color 195 #552600",
+        "Select color 196 #998676",
+        "Select color 197 #291404",
+        "Select color 198 #7a451d",
+        "Select color 199 #d8a67f",
+        "Select color 200 #f2a972",
+        "Select color 201 #7b6454",
+        "Select color 202 #ff6a00",
+        "Select color 203 #e89c66",
+        "Select color 204 #b74c05",
+        "Select color 205 #634431",
+        "Select color 206 #893400",
+        "Select color 207 #d36d2e",
+        "Select color 208 #d6804a",
+        "Select color 209 #eb8f56",
+        "Select color 210 #2d1c12",
+        "Select color 211 #683010",
+        "Select color 212 #743b1b",
+        "Select color 213 #833d14",
+        "Select color 214 #a04a18",
+        "Select color 215 #bc6938",
+        "Select color 216 #cdb7aa",
+        "Select color 217 #492c1c",
+        "Select color 218 #725647",
+        "Select color 219 #a66b4c",
+        "Select color 220 #686665",
+        "Select color 221 #af562a",
+        "Select color 222 #856657",
+        "Select color 223 #d17547",
+        "Select color 224 #f0d8cc",
+        "Select color 225 #563a2d",
+        "Select color 226 #ff712f",
+        "Select color 227 #e0612a",
+        "Select color 228 #461605",
+        "Select color 229 #7b4231",
+        "Select color 230 #5b2617",
+        "Select color 231 #432d27",
+        "Select color 232 #ff5220",
+        "Select color 233 #e4afa0",
+        "Select color 234 #822008",
+        "Select color 235 #c2300b",
+        "Select color 236 #e44b25",
+        "Select color 237 #90746e",
+        "Select color 238 #d29689",
+        "Select color 239 #ff3e19",
+        "Select color 240 #270703",
+        "Select color 241 #9e2a1e",
+        "Select color 242 #150504",
+        "Select color 243 #634a48",
+        "Select color 244 #cd2b20",
+        "Select color 245 #bb1c14",
+        "Select color 246 #eb2c22",
+        "Select color 247 #750603",
+        "Select color 248 #580100",
+        "Select color 249 #e11b18",
+        "Select color 250 #4c0000",
+        "Select color 251 #a50000",
+        "Select color 252 #e20000",
+        "Select color 253 #ff0000",
+        "Select color 254 #cecccc",
+        "Select color 255 #f6f4f4"
+      ]
+    ]
+  },
+  "correctedLandscape": {
+    "editor": {
+      "bottom": 374,
+      "height": 358,
+      "left": 142,
+      "right": 702,
+      "top": 16,
+      "width": 560,
+      "x": 142,
+      "y": 16
+    },
+    "footer": {
+      "bottom": 373,
+      "height": 53,
+      "left": 143,
+      "right": 701,
+      "top": 320,
+      "width": 558,
+      "x": 143,
+      "y": 320
+    },
+    "viewport": [
+      844,
+      390
+    ]
+  },
+  "correctedPortraitFile": {
+    "editor": {
+      "bottom": 503.296875,
+      "height": 438.59375,
+      "left": 16,
+      "right": 304,
+      "top": 64.703125,
+      "width": 288,
+      "x": 16,
+      "y": 64.703125
+    },
+    "footer": {
+      "bottom": 502.296875,
+      "height": 53,
+      "left": 17,
+      "right": 303,
+      "top": 449.296875,
+      "width": 286,
+      "x": 17,
+      "y": 449.296875
+    },
+    "overflow": false,
+    "viewport": [
+      320,
+      568
+    ]
+  },
+  "correctedPortraitText": {
+    "editor": {
+      "bottom": 547.546875,
+      "height": 527.09375,
+      "left": 16,
+      "right": 304,
+      "top": 20.453125,
+      "width": 288,
+      "x": 16,
+      "y": 20.453125
+    },
+    "footer": {
+      "bottom": 546.546875,
+      "height": 53,
+      "left": 17,
+      "right": 303,
+      "top": 493.546875,
+      "width": 286,
+      "x": 17,
+      "y": 493.546875
+    },
+    "overflow": false,
+    "viewport": [
+      320,
+      568
+    ]
+  },
+  "persistence": true,
+  "directTabLogs": [],
+  "notes": [
+    "Browser clipboard used documented Aseprite HEX text; native Aseprite UI copying was source-verified, not physically automated.",
+    "File picker used actual Aseprite-generated files. File drops used a test-only synthetic File/DragEvent harness, not an OS file drag.",
+    "Original short-landscape screenshot targeted the wrong selected tab; corrected 844x390 and320x568 screenshots supersede it."
+  ]
+}

@@ -1,0 +1,219 @@
+{
+  "researchDate": "2026-10-16",
+  "nativeLog": "version=1.3.18.6\r\napiVersion=41\r\nopaque.hex=true nil\r\nopaque.gpl=true nil\r\nopaque.pal=true nil\r\nopaque.ase=true nil\r\nopaque.aseprite=true nil\r\nopaque.png=true nil\r\nopaque.act=true nil\r\nopaque.col=true nil\r\nalpha.hex=true nil\r\nalpha.gpl=true nil\r\nalpha.pal=true nil\r\nalpha.ase=true nil\r\nalpha.aseprite=true nil\r\nalpha.png=true nil\r\nalpha.act=true nil\r\nalpha.col=true nil\r\n",
+  "files": [
+    {
+      "name": "alpha-artwork.aseprite",
+      "bytes": 300,
+      "status": "accepted",
+      "colors": [
+        "#123456",
+        "#ff0000",
+        "#0000ff",
+        "#04c850"
+      ],
+      "partialAlpha": true
+    },
+    {
+      "name": "alpha-artwork.png",
+      "bytes": 87,
+      "dimensions": [
+        2,
+        1
+      ],
+      "status": "accepted",
+      "colors": [
+        "#ff00ff"
+      ],
+      "partialAlpha": false
+    },
+    {
+      "name": "alpha-palette.act",
+      "bytes": 772,
+      "status": "unsupported by current file router"
+    },
+    {
+      "name": "alpha-palette.ase",
+      "bytes": 302,
+      "status": "accepted",
+      "colors": [
+        "#123456",
+        "#ff0000",
+        "#0000ff",
+        "#04c850"
+      ],
+      "partialAlpha": true
+    },
+    {
+      "name": "alpha-palette.aseprite",
+      "bytes": 302,
+      "status": "accepted",
+      "colors": [
+        "#123456",
+        "#ff0000",
+        "#0000ff",
+        "#04c850"
+      ],
+      "partialAlpha": true
+    },
+    {
+      "name": "alpha-palette.col",
+      "bytes": 776,
+      "status": "unsupported by current file router"
+    },
+    {
+      "name": "alpha-palette.gpl",
+      "bytes": 189,
+      "status": "rejected",
+      "error": "Palette RGB rows must contain three integers between 0 and 255."
+    },
+    {
+      "name": "alpha-palette.hex",
+      "bytes": 48,
+      "status": "accepted",
+      "colors": [
+        "#123456",
+        "#ff0000",
+        "#0000ff",
+        "#090807",
+        "#04c850"
+      ]
+    },
+    {
+      "name": "alpha-palette.pal",
+      "bytes": 95,
+      "status": "rejected",
+      "error": "Palette RGB rows must contain three integers between 0 and 255."
+    },
+    {
+      "name": "alpha-palette.png",
+      "bytes": 134,
+      "dimensions": [
+        3,
+        2
+      ],
+      "status": "accepted",
+      "colors": [
+        "#123456",
+        "#ff0000",
+        "#0000ff",
+        "#04c850"
+      ],
+      "partialAlpha": true
+    },
+    {
+      "name": "opaque-artwork.aseprite",
+      "bytes": 263,
+      "status": "accepted",
+      "colors": [
+        "#123456",
+        "#ff0000",
+        "#0000ff",
+        "#000000"
+      ],
+      "partialAlpha": false
+    },
+    {
+      "name": "opaque-artwork.png",
+      "bytes": 87,
+      "dimensions": [
+        2,
+        1
+      ],
+      "status": "accepted",
+      "colors": [
+        "#ff00ff"
+      ],
+      "partialAlpha": false
+    },
+    {
+      "name": "opaque-palette.act",
+      "bytes": 772,
+      "status": "unsupported by current file router"
+    },
+    {
+      "name": "opaque-palette.ase",
+      "bytes": 265,
+      "status": "accepted",
+      "colors": [
+        "#123456",
+        "#ff0000",
+        "#0000ff",
+        "#000000"
+      ],
+      "partialAlpha": false
+    },
+    {
+      "name": "opaque-palette.aseprite",
+      "bytes": 265,
+      "status": "accepted",
+      "colors": [
+        "#123456",
+        "#ff0000",
+        "#0000ff",
+        "#000000"
+      ],
+      "partialAlpha": false
+    },
+    {
+      "name": "opaque-palette.col",
+      "bytes": 776,
+      "status": "unsupported by current file router"
+    },
+    {
+      "name": "opaque-palette.gpl",
+      "bytes": 127,
+      "status": "accepted",
+      "colors": [
+        "#123456",
+        "#ff0000",
+        "#0000ff",
+        "#000000"
+      ]
+    },
+    {
+      "name": "opaque-palette.hex",
+      "bytes": 40,
+      "status": "accepted",
+      "colors": [
+        "#123456",
+        "#ff0000",
+        "#0000ff",
+        "#000000"
+      ]
+    },
+    {
+      "name": "opaque-palette.pal",
+      "bytes": 63,
+      "status": "accepted",
+      "colors": [
+        "#123456",
+        "#ff0000",
+        "#0000ff",
+        "#000000"
+      ]
+    },
+    {
+      "name": "opaque-palette.png",
+      "bytes": 113,
+      "dimensions": [
+        3,
+        2
+      ],
+      "status": "accepted",
+      "colors": [
+        "#123456",
+        "#ff0000",
+        "#0000ff",
+        "#000000"
+      ],
+      "partialAlpha": false
+    }
+  ],
+  "clipboardGrammar": [
+    "#123456",
+    "#ff0000",
+    "#0000ff"
+  ],
+  "assertions": "passed"
+}
