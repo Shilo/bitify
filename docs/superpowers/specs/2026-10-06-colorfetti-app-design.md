@@ -175,16 +175,16 @@ ENDESGA 32 in the 32-color group. Its display label is Mulfok 32 (published as
 creator and source link. It is an optional pastel/purple artistic target; Auto's
 default, existing preset colors/IDs and ENDESGA 32's fallback remain unchanged.
 Artist sets within a size group use dated Lospec-download evidence where
-comparable; exact Black & white and other generic references retain useful
+comparable; exact Black & White and other generic references retain useful
 placement without invented popularity scores. One-bit Mono stays in its separate
 family. See the October 16 palette-selection study for evidence and limits.
 
 Historical October 14 additions:
 
 The Palette rail has eleven curated presets, adding ENDESGA 8 (`preset-edg8`)
-before Grayscale 8 and Black & white (`preset-mono`) before Glow. ENDESGA 8 uses
+before Grayscale 8 and Black & White (`preset-mono`) before Glow. ENDESGA 8 uses
 the published eight RGB entries in published order and retains attribution;
-Black & white is exactly #000000/#ffffff. Existing preset colors, IDs and relative
+Black & White is exactly #000000/#ffffff. Existing preset colors, IDs and relative
 order, Auto's fresh default and ENDESGA 32's fallback are unchanged. Size-group
 dividers remain 64/32/16/8/4/2. These are optional authored targets, not an automatic
 quality correction. The [selection study](../../research/2026-10-14-curated-palette-selection.md)
@@ -2416,11 +2416,11 @@ colors removes the masks/chevrons and exposes a normal scrollbar.
 
 The 1-bit header keeps its three-way Both/None switch. The Palette header instead has
 Import and Edit icon buttons with accessible labels and shared tooltips. Its rail starts
-with Auto directly followed by Resurrect 64 without a divider, then ENDESGA 32,
+with Auto directly followed by Resurrect 64 without a divider, then ENDESGA 32, Mulfok 32,
 PICO-8 (16), DawnBringer 16, ENDESGA 8, Grayscale 8,
-Ice Cream GB (4), Game Boy green (4), Black & white (2), Glow (2) and Paper (2), then a
+Ice Cream GB (4), Game Boy Green (4), Black & White (2), Glow (2) and Paper (2), then a
 divider and saved/session palettes. Preset attribution lives with each immutable record
-and in [palettes.md](../../palettes.md). Game Boy green is explicitly an LCD-inspired RGB
+and in [palettes.md](../../palettes.md). Game Boy Green is explicitly an LCD-inspired RGB
 interpretation. Editing a preset or session palette creates a named copy.
 
 Full presets are grouped by descending color count: 64, 32, 16, 8, 4, 2. Vertical
